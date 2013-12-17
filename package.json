@@ -1,0 +1,12 @@
+{
+  "name": "absch.cbd.int",
+  "description": "Access and Benefit Sharing Clearing-House",
+  "dependencies": {
+    "express": "3.4.x",
+    "http-proxy": "0.10.x"
+  },
+  "devDependencies": {
+    "awsbox": "0.6.x"
+  },
+  "engine": "node >= 0.10.18"
+}
