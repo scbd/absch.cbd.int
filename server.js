@@ -32,7 +32,7 @@ app.delete('/api/*', function(req, res) { proxy.proxyRequest(req, res, { changeO
 // Configure index.html
 
 app.get('/*', function(req, res) {
-	fs.readFile(__dirname + '/app/index.html', 'utf8', function (error, text) { 
+	fs.readFile(__dirname + '/app/template.html', 'utf8', function (error, text) { 
 		res.send(text); 
 	});
 });
