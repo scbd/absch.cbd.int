@@ -10,7 +10,7 @@ var app = express();
 var server = http.createServer(app);
 
 app.configure(function() {
-    app.set('port', process.env.PORT || 2000, '127.0.0.1');
+    app.set('port', process.env.PORT || 2010, '127.0.0.1');
 
     app.use(express.logger('dev'));
     app.use(express.compress());

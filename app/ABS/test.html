@@ -1,22 +1,24 @@
-
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" ng-app>
+  <head>
     <meta charset="utf-8">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>ABS-CH</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
     <link rel="shortcut icon" href="ico/favicon.png">
 
+    <title>ABS-CH</title>
+
      <!-- Bootstrap core CSS -->
-    <link href="/app/ABS/css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="/app/ABS/css/abs.css" rel="stylesheet">
-    <link href="/app/ABS/css/carousel.css" rel="stylesheet">
+    <link href="css/abs.css" rel="stylesheet">
+     <link href="css/carousel.css" rel="stylesheet">
     <link href="https://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
+
+    <script type="text/javascript" src="js/angular.min.js"></script>
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -28,7 +30,7 @@
     <![endif]-->
   </head>
 
-  <body ng-controller="TemplateController">
+  <body>
 
       <div class="disclaimer visible-md visible-lg" >
       <a class="promo" href="/disclaimer/" style="color:white;">
@@ -147,229 +149,86 @@
 
     </div> <!-- end container -->
 </div>
-
-<!-- 
-
-    <div class="navbar navbar-abs navbar-static-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-
-          <a class="navbar-brand" href="home1.html">
-
-            <div class="hidden-sm hidden-xs">
-              <div class="brand-title"><img src="img/cbd-spine.png" style="height: 54px; position: relative; top: -10px;"> ABS-CH</div>
-              <span class="brand-slogan">Access and Benefit-Sharing <br> Clearing-House</span>      
-            </div>
-
-            <div class="visible-sm" style="border-bottom:1px solid #999;">
-              <div class="brand-title"><img src="img/cbd-spine.png" style="height: 54px; position: relative; top: -10px;"> ABS-CH 
-              <span class="brand-slogan-small">Access and Benefit-Sharing Clearing-House</span></div>
-            </div>
-            <div class="visible-xs">
-              <div class="brand-title"><img src="img/cbd-spine.png" style="height: 54px; position: relative; top: -10px;"> ABS-CH 
-              </div>
-            </div>
-
-
-          </a>
-
-        </div>
-        <div class="navbar-collapse collapse">
-
-        <div class="visible-md visible-lg">
-          <ul class="nav navbar-nav abs-navbar-nav center-block">
-            <li class="active"><a href="find.html"> Find <br> Information <br><span class="glyphicon glyphicon-search"></span> </a></li>
-            <li><a href="register.html"> Register <br> Information <br><span class="glyphicon glyphicon-edit"></span> </a></li>
-            <li><a href="#contact"> View<br>Country Profiles <br><span class="glyphicon glyphicon-globe"></span> </a></li>
-          </ul>
-           <div class="navbar-right ">
-            <ul class="nav-account ">
-              <li><a href="#">sign in</a></li>
-              <li><a href="#">register</a></li>
-              <li><a data-toggle="dropdown" href="#">language: <span style="font-weight:bold;">EN</span></a>
-
-                          <ul class="dropdown-menu" role="menu">
-                                <li class="disabled"><a>لعربية</a></li>
-                                <li class="disabled"><a>中文</a></li>
-                                <li><a href="#"><strong>English</strong></a></li>
-                                <li class="disabled"><a>Español</a></li>
-                                <li class="disabled"><a>Français</a></li>
-                                <li class="disabled"><a>Русский</a></li>
-                            </ul>
-              </li>
-          </ul>
-
-          <ul class="nav-secondary">
-              <li><a href="#">About the ABS-CH</a></li>
-              <li><a href="#">Additional Resources</a></li>
-              <li><a href="#">Nagoya Protocol</a></li>
-              <li><a href="#">CBD</a></li>
-          </ul>
-          </div>
-          </div>
-
-          <div class="center-block hidden-md hidden-lg">
-          <div class="row">
-            <div class="col-md-3 main-link"><a href="find.html"> Find <br> Information <br><span class="glyphicon glyphicon-search"></span> </a></div>
-            <div class="col-md-3 main-link"><a href="register.html"> Register <br> Information <br><span class="glyphicon glyphicon-edit"></span> </a></div>
-            <div class="col-md-3 main-link"><a href="#contact"> View<br>Country Profiles <br><span class="glyphicon glyphicon-globe"></span> </a></div>
-             <div class="col-md-3 main-link"><a href="#contact"> sign in</div>
-          </div>
-          </div>
-    
-
-
-        
-
-
-        </div>
-      </div>
-    </div>
- -->
-<!--     <div class="category-container" >
-    </div> -->
-
-  <!--    <div style="background-color:#EEE;border-bottom:1px solid #999;">
-   <div class="container" style="padding:0;">
-        <div class="jumbotron"  style="width:100%;margin:0;padding:30px 15px;">
-        <h1>example </h1>
-        <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-        <p>To see the difference between static and fixed top navbars, just scroll.</p>
-        <p>
-          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
-        </p>
-        </div>
-      </div> 
-      </div>
-      -->
-
-      <!-- Carousel
-    ================================================== -->
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-      </ol>
-      <div class="carousel-inner">
-        <div class="item active">
-          <img data-src="holder.js/900x500/auto/#777:#7a7a7a/text:First slide" alt="First slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>Example headline.</h1>
-              <p>Note: If you're viewing this page via a <code>file://</code> URL, the "next" and "previous" Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <img data-src="holder.js/900x500/auto/#666:#6a6a6a/text:Second slide" alt="Second slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>Another example headline.</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <img data-src="holder.js/900x500/auto/#555:#5a5a5a/text:Third slide" alt="Third slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>One more for good measure.</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-      <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-    </div><!-- /.carousel -->
-
-
-
-
-
-<div class="container">
-  <div class="row" style="min-height:300px;">
-      
-    <div class="col-md-4">
-        <div class="home-col"><h3>Find Information</h3></div>
-    </div>
-  
-    <div class="col-md-4">
-        <div class="home-col"><h3>Register Information</h3>
-        <p> login form here</p></div>
-    </div>
-
-     <div class="col-md-4">
-        <div class="home-col"><h3>Country Profiles</h3></div>
-    </div>
-    
-  </div>
-</div>
-
-
-
-
-<div class="container">
-  <h3 style="border-bottom:1px solid #999;"> Information about the ABS-CH</h3>
-  <div class="row" style="min-height:300px;">
  
 
-    <div class="col-md-3">
-    <div class="home-col"><h3>Online Dicussion Forum</h3></div>
-        
-    </div>
-  
-     <div class="col-md-3">
-         <div class="home-col"><h3>Help and Resources</h3></div>
-    </div>
+    <div class="container" style="min-height:600px;">
 
-    <div class="col-md-3">
-         <div class="home-col"><h3>About the Nagoya Protocol</h3></div>
-    </div>
-    <div class="col-md-3">
-         <div class="home-col"><h3>About the CBD</h3></div>
-    </div>
+    <h1>Common formats</h1>
 
+<div class="well" style="background-color:#d9edf7">
+<h3 style="border-bottom:10px solid #428bca"> National Record Types</h3>
+
+
+<br/>
+<h5> <span style="font-weight:bold;color:#428bca"> ABSCH-NFP</span> and <span style="font-weight:bold;color:#428bca">ABSCH-PA</span> Designation of ABS national focal point and ABS Clearing-House publishing authority <a href="http://www.cbd.int/doc/abs/commonformats/NFP.doc" class="pull-right"><span class="glyphicon glyphicon-download"></span> download file (doc)</a></h5>
+<p>
+This common format has been prepared for both the designation of the National Focal Point (NFP) of the Protocol and the identification the person responsible for publishing all national records in the Access and Benefit-sharing Clearing-House. The duties of the ABS NFP could be expanded to incorporate the role of publishing national records in the Access and Benefit-sharing Clearing-House.</p>
+<p>
+This common format will only be available offline and their registration can only be done by the Secretariat upon receipt of written communication from:
+<ul><li>The NFP of the CBD or direct expression of the government for the ABS NFP
+<li> And if the clearing authority is different from the ABS NFP, its identification has to be endorsed by the NFP.
+</ul>
+</p>
+
+
+<br/>
+<h5><span style="font-weight:bold;color:#428bca">ABSCH-CNA</span> Competent national authority <a href="http://www.cbd.int/doc/abs/commonformats/CNA.doc" class="pull-right"><span class="glyphicon glyphicon-download"></span> download file (doc)</a></h5>
+<p>
+This common format has been prepared for facilitating the submission of information on competent national authorities by Parties in order to comply with Article 14 (2) paragraph (b).
+Where a Party designates more than one competent national authority, the information submitted through this formant needs to include the respective responsibilities of those authorities and specify which competent authority is responsible for the genetic resource sought.
+</p>
+
+
+<br/>
+<h5><span style="font-weight:bold;color:#428bca">ABSCH-MEA</span> Law, regulations, guidelines, administrative and policy measures <a href="http://www.cbd.int/doc/abs/commonformats/MEA.doc" class="pull-right"><span class="glyphicon glyphicon-download"></span> download file (doc)</a></h5>
+<p>
+This common format has been prepared for facilitating the submission of information on ABS legislative administrative and policy measures by Parties in order to comply with Article 14 (2) paragraph (a) of the Protocol. The format includes a list of ABS elements and the possibility of pointing out to the specific articles and section where the specific element is addressed.</p>
+
+<br/>
+<h5><span style="font-weight:bold;color:#428bca">ABSCH-IRCC</span> Permit or its equivalent constituting and internationally recognized certificate of compliance <a href="http://www.cbd.int/doc/abs/commonformats/IRCC.doc" class="pull-right"><span class="glyphicon glyphicon-download"></span> download file (doc)</a></h5>
+<p>
+This common format is to be used for registering permits or their equivalent issued at the time of access as evidence of the decision to grant prior informed consent and of the establishment of mutually agreed terms. This information is to be made available to the ABS Clearing-House in accordance with paragraph 2 (c) of Article 14.</p>
+<p>
+A permit or its equivalent made available to the ABS Clearing-House shall constitute an internationally recognized certificate of compliance.
+</p>
+
+<br/>
+<h5><span style="font-weight:bold;color:#428bca">ABSCH-CP</span> Checkpoint <a href="http://www.cbd.int/doc/abs/commonformats/CP.doc" class="pull-right"><span class="glyphicon glyphicon-download"></span> download file (doc)</a></h5>
+<p>
+This common format is to be used for registering information on checkpoints that collect or receive relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources. 
+</p>
+
+<br/>
+<h5><span style="font-weight:bold;color:#428bca;text-transform:uppercase;">ABSCH-CPC</span> Checkpoint Communiqué <a href="http://www.cbd.int/doc/abs/commonformats/CPC.doc" class="pull-right"><span class="glyphicon glyphicon-download"></span> download file (doc)</a></h5>
+<p>
+This common format is to be used to facilitate the provision of relevant information collected by the checkpoint related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources, including from the internationally recognized certificate of compliance, when such a certificate is available. Such information needs to be provided to relevant national authorities, to the Party providing prior informed consent and to the ABS Clearing-House, as appropriate.
+</p>
 </div>
 
-<div class="row">
-
-    <div class="col-md-6">
-         <div class="home-col"><h3>News</h3></div>
-    </div>
-  
-    <div class="col-md-6">
-        <div class="home-col"> <h3>Meetings</h3></div>
-    </div>
-
-  </div>
+<div class="well" style="background-color:#FCF8E3">
+<h3 style="border-bottom:10px solid #F0AD4E">Reference Record Types</h3>
+<br/>
+<h5> <span style="font-weight:bold;color:#F0AD4E"> ABSCH-CON</span> Contact details</h5>
+<br/>
+<h5> <span style="font-weight:bold;color:#F0AD4E"> ABSCH-ORG</span> ABS related organization</h5>
+<br/>
+<h5> <span style="font-weight:bold;color:#F0AD4E"> ABSCH-VLR</span> ABS virtual library resource</h5>
 </div>
-<br/><br/>
- 
+
+    </div> <!-- /container -->
 
  <!--FOOTER *************************** -->
  <footer class="footer">
         <div class="container" id="footer">
-        <div class="row" style="padding-bottom:20px;">
+        <div class="row hidden-xs">
         <div class="col-md-3">
-         <h5 class-"footer-title">ABS Clearing-House</h5>
+         <h5>ABS Clearing-House</h5>
                 <h4><a href="#"><span class="glyphicon glyphicon-search"></span> Find Information</a></h4>
                 <h4><a href="#"><span class="glyphicon glyphicon-edit"></span> Register Information</a></h4>
                 <h4><a href="#"><span class="glyphicon glyphicon-globe"></span> View Country Profiles </a></h4>
             </div>
             <div class="col-md-3">
-                <h5 class-"footer-title">About the ABS-CH</h5>
+                <h5>About the ABS-CH</h5>
                 <ul class="footer-links">
                     <li><a href="/database">Overview</a></li>
                     <li><a href="/database">List of Parties</a></li>
@@ -382,7 +241,7 @@
                 </ul>
             </div>
              <div class="col-md-3">
-                <h5 class-"footer-title">Additional Resources</h5>
+                <h5>Additional Resources</h5>
                 <ul class="footer-links">
                     <li><a href="/database">Bonn guidelines</a></li>
                     <li><a href="/database">Awareness-raising materials</a></li>
@@ -394,7 +253,7 @@
             </div>
 
             <div class="col-md-3">
-                <h5 class-"footer-title">Nagoya Protocol</h5>
+                <h5>Nagoya Protocol</h5>
                 <ul class="footer-links">
                     <li><a href="/database">Documents and meetings</a></li>
                     <li><a href="/database">Notifications</a></li>
@@ -403,6 +262,7 @@
                 </ul>
             </div>
 
+            
             </div>
             <div class="row copyright">
                 <div class="col-lg-6 col-md-6 col-sm-6 logorow">
@@ -421,6 +281,7 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/app/libs/requirejs/require.js" data-main="/app/js/boot.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
   </body>
 </html>

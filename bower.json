@@ -1,0 +1,19 @@
+{
+  "name": "accounts-cbd-int",
+  "dependencies": {
+    "angular": "~1.2.5",
+    "angular-animate": "~1.2.5",
+    "angular-cookies": "~1.2.5",
+    "angular-route": "~1.2.5",
+    "angular-sanitize": "~1.2.5",
+    "bootstrap": "~3.0.3",
+    "font-awesome": "~4.0.3",
+    "jquery": "~2.0.3",
+    "requirejs": "latest",
+    "requirejs-domready": "latest",
+    "requirejs-text": "latest",
+    "requirejs-plugins": "latest",
+    "underscore": "latest",
+    "bootstrap-duallistbox": "https://github.com/istvan-ujjmeszaros/bootstrap-duallistbox.git"
+  }
+}
