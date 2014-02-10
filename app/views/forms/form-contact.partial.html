@@ -1,0 +1,236 @@
+﻿<div>
+	<h1>Contact Details</h1>
+
+	<div ng-show="isLoading()">
+		<div class="loadProgress" progress="1" timeout="1500"></div>
+	</div>
+
+	<div class="alert alert-error" ng-cloak ng-show="hasError()">
+		<strong>Error as occured...</strong>
+		<div>{{error}}</div>
+	</div>
+
+	<div class="row-fluid" ng-show="!isLoading()&&status!='hidden'">
+
+		<div class="span12" style="position:relative">
+			
+			<div style="position:absolute;top:0px;right:0px">
+				<div km-form-std-buttons ng-model="document" on-post-close="onPostClose()" on-error="onError(error, errorCode)" on-post-workflow="onPostWorkflow(data)" on-post-publish="onPostPublish(data)" on-post-save-draft="onPostSaveDraft(data)" on-pre-save-draft="onPreSaveDraft()" on-pre-publish="onPrePublish()"></div>
+			</div>
+
+			<div>
+				<div id="editFormPager" class="btn-group">
+					<a class="btn" data-toggle="tab" ng-href="#{{tab('-').name}}" ng-disabled="!tab('-')">&laquo;</a>
+					<a class="btn" data-toggle="tab" ng-href="#edit" ng-class="{ active : tab('edit'  ).active, 'btn-info': tab('edit'  ).active }">General</a>
+					<a class="btn" data-toggle="tab" ng-href="#review" ng-class="{ active : tab('review').active, 'btn-info': tab('review').active }">Review</a>
+					<a class="btn" data-toggle="tab" ng-href="#{{tab('+').name}}" ng-disabled="!tab('+')">&raquo;</a>
+				</div>
+
+				<div class="tab-content" style="overflow:visible;margin-top:10px">
+					<div class="tab-pane active" id="edit">
+						<form name="editForm">
+							<fieldset>
+
+								<legend>Personal Information</legend>
+
+								<div  class="row-fluid">
+
+									<div class="span1">
+										<div class="km-control-group" name="prefix" caption="Title">
+											<div km-textbox-ml name="prefix" ng-model="document.prefix" locales="document.header.languages"></div>
+										</div>
+									</div>
+
+									<div class="span4" ng-class="{'offset1' : document.header.languages.length>1 }">
+										<div class="km-control-group" name="firstName" required caption="First name">
+											<input type="text" class="input-block-level" name="firstName" ng-model="document.firstName" required/>
+										</div>
+									</div>
+
+									<div class="span2">
+										<div class="km-control-group" name="middleName" caption="Middle Name">
+											<input type="text" class="input-block-level" name="middleName" ng-model="document.middleName"/>
+										</div>
+									</div>
+
+									<div class="span4">
+										<div class="km-control-group" name="lastName" required caption="Last name">
+											<input type="text" class="input-block-level" name="lastName" ng-model="document.lastName" required/>
+										</div>
+									</div>
+
+								</div>
+
+								<div class="row-fluid">
+									<div class="span11">
+										<div class="km-control-group" name="designation" caption="Job Title">
+											<div km-textbox-ml name="designation" ng-model="document.designation" locales="document.header.languages"></div>
+										</div>
+									</div>
+								</div>
+
+								<div class="row-fluid">
+
+									<div class="span11">
+										<div class="km-control-group" name="organization" required caption="Employer / Organization">
+											<div km-textbox-ml name="organization" ng-model="document.organization" required locales="document.header.languages"></div>
+										</div>
+									</div>
+								</div>
+
+								<div class="row-fluid">
+									<div class="span6">
+										<div class="km-control-group" name="organizationAcronym" caption="Acronym">
+											<div class="help-block">Abbreviation of the long name of an organization</div>
+											<div km-textbox-ml name="organizationAcronym" ng-model="document.organizationAcronym" placeholder="example: SCBD" locales="document.header.languages"></div>
+										</div>
+									</div>
+								</div>
+
+								<div class="row-fluid">
+									<div class="span11">
+										<div class="km-control-group" name="department" caption="Department / Division / Unit">
+											<div km-textbox-ml name="department" ng-model="document.department" locales="document.header.languages"></div>
+										</div>
+									</div>
+								</div>
+
+								<div class="row-fluid">
+									<div class="span11">
+										<div class="km-control-group" name="organizationType" caption="Type of organization">
+											<div km-select name="organizationType" ng-model="document.organizationType" items="options.organizationTypes()" ></div>
+										</div>
+									</div>
+								</div>
+
+								<div class="row-fluid">
+									<div class="span11">
+										<div class="km-control-group" name="address" caption="Address">
+											<div km-textbox-ml ng-model="document.address" rows="2" placeholder="example: 413 St-Jacques Ouest, Suite 800" locales="document.header.languages"></div>
+										</div>
+									</div>
+								</div>
+
+								<div class="row-fluid">
+									<div class="span5">
+										<div class="km-control-group" name="city" required caption="City">
+											<div km-textbox-ml name="city" ng-model="document.city" required locales="document.header.languages" placeholder="example: Montreal"></div>
+										</div>
+									</div>
+
+									<div class="span5 offset1">
+										<div class="km-control-group" name="state" caption="State or Province">
+											<div km-textbox-ml name="state" ng-model="document.state" locales="document.header.languages" placeholder="example: Quebec"></div>
+										</div>
+									</div>
+								</div>
+
+								<div class="row-fluid">
+
+									<div class="span5">
+										<div class="km-control-group" name="postalCode" caption="Postal Code or Zip">
+											<div km-textbox-ml name="postalCode" ng-model="document.postalCode" locales="document.header.languages" placeholder="example: Quebec"></div>
+										</div>
+									</div>
+
+									<div class="span5 offset1">
+										<div class="km-control-group" name="country" required caption="Country address">
+											<div km-select name="country" ng-model="document.country" items="options.countries()" required></div>
+										</div>
+									</div>
+								</div>
+
+								<legend>Contact Information</legend>
+
+								<div class="row-fluid">
+									<div class="span5">
+										<div class="km-control-group" name="phones" required caption="Phone numbers">
+											<div class="help-block">Please use the following format: +[country code] [city code] [telephone number] [extension, if necessary].</div>
+											<div km-inputtext-list name="phones" ng-model="document.phones" required placeholder="example: +1 514.288.2220"></div>
+										</div>
+									</div>
+
+									<div class="span5 offset1">
+										<div class="km-control-group" name="faxes" caption="Fax Numbers">
+											<div class="help-block">Please use the following format: +[country code] [city code] [telephone number] [extension, if necessary].</div>
+											<div km-inputtext-list name="faxes" ng-model="document.faxes" placeholder="example: +1 514.288.6588"></div>
+										</div>
+									</div>
+								</div>
+
+								<div class="row-fluid">
+									<div class="span5">
+										<div class="km-control-group" name="emails" caption="Emails">
+											<div km-inputtext-list name="emails" type="email" ng-model="document.emails" pattern="email" placeholder="example: secretariat@cbd.int"></div>
+										</div>
+									</div>
+
+									<div class="span5 offset1">
+										<div class="km-control-group" name="websites" caption="Web Sites">
+											<div km-link name="websites" ng-model="document.websites" allow-file="false"></div>
+										</div>
+									</div>
+								</div>
+
+								<legend>Additional Information</legend>
+
+								<div class="row-fluid">
+									<div class="span11">
+										<div class="km-control-group" name="relevantInformation" caption="Additional Information">
+											<span class="help-block">
+												Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.
+											</span>
+											<div km-textbox-ml name="relevantInformation" rows="6" ng-model="document.relevantInformation"  locales="document.header.languages"></div>
+										</div>
+									</div>
+								</div>
+
+								<div class="row-fluid">
+									<div class="span11">
+										<div class="km-control-group" name="relevantDocuments" caption="Other relevant website address or attached documents">
+											<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" identifier="document.header.identifier"></div>
+										</div>
+									</div>
+								</div>
+
+
+								<div class="row-fluid">
+									<div class="span11">
+										<div class="km-control-group" name="notes" caption="Notes">
+											<span class="help-block">
+												The field “Notes” is for personal reference and can be seen only when the record is being edited.
+											</span>
+											<textarea class="input-block-level" rows="4" name="notes" ng-model="document.notes" ></textarea>
+										</div>
+									</div>
+								</div>
+
+							</fieldset>
+						</form>
+					</div>
+
+					<div class="tab-pane" id="review">
+
+						<div km-document-validation ng-model="validationReport"></div>
+
+						<div class="btn-group" ng-show="document.header.languages.length>1">
+						  <input type="button" class="btn" ng-class="{'active' : review.locale==locale, 'btn-info' : review.locale==locale}" ng-repeat="locale in document.header.languages" ng-click="$parent.review.locale = locale" value="{{locale | uppercase}}"/>
+						</div>
+
+						<div class="cbd-view-contact" ng-model="document" locale="review.locale" link-target="_blank"></div>
+
+					</div>
+
+				</div>
+
+				<div class="btn-group">
+					<a class="btn" data-toggle="tab" ng-href="#{{tab('-').name}}" ng-disabled="!tab('-')">&laquo;</a>
+					<a class="btn" data-toggle="tab" ng-href="#edit" ng-class="{ active : tab('edit'  ).active, 'btn-info': tab('edit'  ).active }">General</a>
+					<a class="btn" data-toggle="tab" ng-href="#review" ng-class="{ active : tab('review').active, 'btn-info': tab('review').active }">Review</a>
+					<a class="btn" data-toggle="tab" ng-href="#{{tab('+').name}}" ng-disabled="!tab('+')">&raquo;</a>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>

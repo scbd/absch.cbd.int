@@ -1,0 +1,271 @@
+﻿<div>
+	<h1>Checkpoint Communiqué</h1>
+
+	<div ng-show="isLoading()">
+		<div class="loadProgress" progress="1" timeout="1500"></div>
+	</div>
+
+	<div class="alert alert-error" ng-show="hasError()">
+		<strong>Error as occured...</strong>
+		<div>{{error}}</div>
+	</div>
+
+	<div class="row-fluid" ng-show="!isLoading()&&status!='hidden'">
+
+		<div class="span12" style="position: relative">
+
+			<div style="position: absolute; top: 0px; right: 0px">
+				<div km-form-std-buttons ng-model="document" on-post-close="onPostClose()" on-error="onError(error, errorCode)" on-post-workflow="onPostWorkflow(data)" on-post-publish="onPostPublish(data)" on-post-save-draft="onPostSaveDraft(data)" on-pre-save-draft="onPreSaveDraft()" on-pre-publish="onPrePublish()"></div>
+			</div>
+			<div>
+
+				<div id="editFormPager" class="btn-group">
+					<a class="btn" data-toggle="tab" ng-href="#{{tab('-').name}}" ng-disabled="!tab('-')">&laquo;</a>
+					<a class="btn" data-toggle="tab" ng-href="#edit"   ng-class="{ active : tab('edit'  ).active, 'btn-info': tab('edit'  ).active }" >General</a>
+					<a class="btn" data-toggle="tab" ng-href="#review" ng-class="{ active : tab('review').active, 'btn-info': tab('review').active }" >Review</a>
+					<a class="btn" data-toggle="tab" ng-href="#{{tab('+').name}}" ng-disabled="!tab('+')" >&raquo;</a>
+				</div>
+
+				<form name="editForm" style="margin-top:10px">
+				<fieldset>
+
+					<div class="tab-content" style="overflow: visible">
+						<div class="tab-pane active" id="edit">
+							<span class="help-block"><i>Introduction</i><br /><br />This common format is to be used to provide relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources (Article 17, paragraph 1 (a) (i)), including from the internationally recognized certificate of compliance, when such a certificate is available. In accordance with paragraph 1 (a) (iii) of Article 17 of the Nagoya Protocol, such information collected by the checkpoint needs to be provided to relevant national authorities, to the Party providing prior informed consent and to the ABS Clearing-House, as appropriate. <br /><br />On the basis of the information collected or received by the checkpoint and provided by the national publishing authority to the ABS Clearing-House, a courtesy copy of the record will be automatically sent by electronic means to the following entities, as appropriate: 
+<br /><br />
+							<ul><li>The designated national authority/ies as determined in the common format on checkpoints; and</li>
+							<li>The national focal point of the country and the competent national authority/ies of the country which is the provider of the genetic resource.</li></ul><br /></span>
+						
+							<legend>General information</legend>
+
+							<div class="row-fluid">
+								<div class="span11">
+									<div class="control-group">
+										<div class="km-control-group" name="government" required caption="Country">
+											<div class="alert alert-info" ng-show="userGovernment()"><i class="icon-hand-right"></i> You cannot change this value.</div>
+											<div km-select required name="government" ng-disabled="userGovernment()" ng-model="document.government" items="options.countries()" placeholder="Please select a country..."></div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<legend>Details of the internationally recognized certificate of compliance</legend>
+							<div class="row-fluid">
+								<div class="span11">
+									<div class="control-group">
+										<div class="km-control-group" name="permit" required caption="Reference number(s) of the internationally recognized certificate(s) of compliance that relate(s) to this communiqué">
+											<div ng-disabled="isPermitNotAvailable()" km-select required multiple name="permit" ng-model="document.permit" watch-items items="options.permits" placeholder="Please select ..."></div>
+											<br />
+											<input type="checkbox" name="permitNotAvailable" ng-model="document.permitNotAvailable" watch-items ></input>
+											<span>The internationally recognized certificate of compliance is not available</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div ng-show="isPermitNotAvailable()">
+								<div class="row-fluid">
+									<div class="span11">
+										<div class="control-group">
+											<div class="km-control-group" name="originCountries" required caption="Source of the genetic resource">
+												<div km-select required name="originCountries" ng-model="document.originCountries" multiple items="options.countries()" placeholder="Please select a country..."></div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row-fluid">
+									<div class="span11">
+										<div class="km-control-group" required name="responsibleAuthority" caption="Authority who granted prior informed consent">
+											<div km-reference name="responsibleAuthority" ng-model="document.responsibleAuthority" loader="loadRecords(identifier, 'authority')">
+												<div>
+													<div><strong>{{reference.title | lstring}}</strong></div>
+													<div>{{reference.summary | lstring}}</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row-fluid">
+									<div class="span11">
+										<div class="km-control-group" name="subjectMatter" required caption="Subject-matter or genetic resources relevant to the information collected or received">
+											<div class="help-block">Please provide details  on the subject-matter or genetic resources relevant to the information collected or received by the checkpoint. This could include biota at any taxonomic rank, which may carry a taxonomic name. It may also include a locality of collection of the material. It may also be possible to identify the genetic resource through reference to a voucher specimen or field notes held in an identified archive or collection. Providing details about the subject matter or genetic resource covered by the permit or its equivalent can provide additional legal certainty.</div>
+											<div km-textbox-ml name="subjectMatter" rows="6" ng-model="document.subjectMatter" locales="document.header.languages"></div>
+										</div>
+									</div>
+								</div>
+								<div>Optional additional subject matter details</div>
+								<span class="help-block">Providing details about the subject matter or genetic resource covered by the permit or its equivalent can
+									provide additional legal certainty</span>
+								<div class="row-fluid">
+									<div class="span11">
+										<div class="km-control-group" name="specimen" caption="Specimen data">
+											<span class="help-block">Link to a voucher specimen held in an appropriate facility</span>
+											<div km-link name="specimen" ng-model="document.specimen" allow-link="true" allow-file="false" identifier="document.header.identifier"></div>
+										</div>
+									</div>
+								</div>
+								<div class="row-fluid">
+									<div class="span11">
+										<div class="km-control-group" name="taxonomy" caption="Taxonomy">
+											<span class="help-block">Link to record in external taxonomy database, e.g. GBIF, Catalogue of Life</span>
+											<div km-link name="taxonomy" ng-model="document.taxonomy" allow-link="true" allow-file="false" identifier="document.header.identifier"></div>
+										</div>
+									</div>
+								</div>
+								<div class="row-fluid">
+									<div class="span10">
+										<div class="control-group" ng-class="{warning:isInvalid('gisFiles')}">
+											<label class="control-label" for="gisFiles">Geographic coordinates</label>
+											<span class="help-block">Limited to .geojson files (<a href="http://www.geojson.org/">http://www.geojson.org/</a>)	</span>
+											<div km-link required name="gisFiles" ng-model="document.gisFiles" allow-link="false" identifier="document.header.identifier" mime-types="application/json"></div>
+										</div>
+									</div>
+								</div>
+
+                               
+								<div ng-show="document.gisFiles">
+									<div class="input-prepend input-append">
+									  <input class="input-small" type="text" readonly value="{{document.gisMapCenter.lat | number:6}}">
+									  <span class="add-on">lat</span>
+									</div>
+									<div class="input-prepend input-append">
+									  <input class="input-small" type="text" readonly value="{{document.gisMapCenter.lng | number:6}}">
+									  <span class="add-on">long</span>
+									</div>
+									<div class="input-prepend input-append">
+									  <input class="input-small" type="text" readonly value="{{document.gisMapCenter.zoom | number:0}}">
+									  <span class="add-on">zoom</span>
+									</div>
+								</div>
+								<div  ng-show="document.gisFiles" class="leaflet" center="document.gisMapCenter" layers="gisLayer"></div>
+
+								<div class="row-fluid">
+									<div class="span11">
+										<div class="km-control-group" name="referenceOfInformedConsent" caption="Reference or evidence of prior informed consent">
+											<div km-textbox-ml name="referenceOfInformedConsent" rows="4" ng-model="document.referenceOfInformedConsent" locales="document.header.languages"></div>
+										</div>
+									</div>
+								</div>
+
+								<div class="row-fluid">
+									<div class="span11">
+										<div class="km-control-group" name="referenceOfAgreedTerms" caption="Reference or evidence of establishment of mutually agreed terms">
+											<div km-textbox-ml name="referenceOfAgreedTerms" rows="4" ng-model="document.referenceOfAgreedTerms" locales="document.header.languages"></div>
+										</div>
+									</div>
+								</div>
+
+								<div class="row-fluid">
+									<div class="span11">
+										<div class="km-control-group" required name="personeToWhomGranted" caption="Person or entity to whom prior informed consent was granted">
+											<span class="help-block">Please provide the contact details of the person or entity to whom prior informed consent was granted.</span>
+											<div km-reference name="personeToWhomGranted" ng-model="document.personeToWhomGranted" loader="loadRecords(identifier, 'contact')">
+												<div>
+													<div><strong>{{reference.title | lstring}}</strong></div>
+													<div>{{reference.summary | lstring}}</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+							<legend>Information on the utilization of the genetic resource(s)</legend>
+							<div class="row-fluid">
+								<div class="span11">
+									<div class="km-control-group" required name="description" caption="Short description of the information collected or received relevant to the utilization of genetic resources, including  the type of use">
+									<span class="help-block">This could include information on utilization of genetic resources at, inter alia, any stage of research, development, innovation, pre-commercialization or commercialization.</span>
+										<div km-textbox-ml name="description" rows="4" ng-model="document.description" locales="document.header.languages"></div>
+									</div>
+								</div>
+							</div>
+							<div class="row-fluid">
+								<div class="span11">
+									<div class="km-control-group" required name="geneticRessourceUsers" caption="Person or entity utilizing the genetic resource">
+										<div km-reference multiple name="geneticRessourceUsers" ng-model="document.geneticRessourceUsers" loader="loadRecords(identifier, 'contact')">
+											<div>
+												<div><strong>{{reference.title | lstring}}</strong></div>
+												<div>{{reference.summary | lstring}}</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row-fluid">
+								<div class="span5">
+									<div class="km-control-group" name="dateFrom" caption="Date on which the information started being collected">
+										<div km-date required name="dateFrom" ng-model="document.dateFrom"></div>
+									</div>
+								</div>
+								<div class="span5">
+									<div class="km-control-group" name="dateTo" caption="Date on which the information was received">
+										<div km-date required name="dateTo" ng-model="document.dateTo"></div>
+									</div>
+								</div>
+							</div>
+							<div class="row-fluid">
+								<div class="span11">
+									<div class="km-control-group" name="informationDocuments" caption="Upload a copy of relevant document">
+										<div km-link name="informationDocuments" ng-model="document.informationDocuments" identifier="document.header.identifier"></div>
+									</div>
+								</div>
+							</div>
+							<div class="row-fluid">
+								<div class="span11">
+									<div class="km-control-group" name="information" caption="Copy of relevant information">
+										<div km-textbox-ml name="information" rows="6" ng-model="document.information" locales="document.header.languages"></div>
+									</div>
+								</div>
+							</div>
+
+							<legend>Additional Information</legend>
+							<div class="row-fluid">
+								<div class="span11">
+									<div class="km-control-group" name="relevantInformation" caption="Additional Information">
+										<div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
+										<div km-textbox-ml name="relevantInformation" rows="6" ng-model="document.relevantInformation" locales="document.header.languages"></div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row-fluid">
+								<div class="span11">
+									<div class="km-control-group" name="relevantDocuments" caption="Other relevant website address or attached documents">
+										<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" identifier="document.header.identifier"></div>
+									</div>
+								</div>
+							</div>
+
+
+							<div class="row-fluid">
+								<div class="span11">
+									<div class="km-control-group" name="notes" caption="Notes">
+										<div class="help-block">The field “Notes” is for personal reference and can be seen only when the record is being edited.</div>
+										<textarea class="input-block-level" rows="4" name="notes" ng-model="document.notes"></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="tab-pane" id="review">
+
+							<div km-document-validation ng-model="validationReport"></div>
+
+							<div class="btn-group" ng-show="document.header.languages.length>1">
+								<input type="button" class="btn" ng-class="{'active' : review.locale==locale, 'btn-info' : review.locale==locale}" ng-repeat="locale in document.header.languages" ng-click="$parent.review.locale = locale" value="{{locale | uppercase}}" />
+							</div>
+							<div class="abs-view-abs-checkpoint-communique" show-pdf="false" ng-model="reviewedDocument" locale="review.locale" allow-drafts="true"></div>
+						</div>
+				</fieldset>
+				</form>
+
+				<div class="btn-group">
+					<a class="btn" data-toggle="tab" ng-href="#{{tab('-').name}}" ng-disabled="!tab('-')">&laquo;</a>
+					<a class="btn" data-toggle="tab" ng-href="#edit"   ng-class="{ active : tab('edit'  ).active, 'btn-info': tab('edit'  ).active }" >General</a>
+					<a class="btn" data-toggle="tab" ng-href="#review" ng-class="{ active : tab('review').active, 'btn-info': tab('review').active }" >Review</a>
+					<a class="btn" data-toggle="tab" ng-href="#{{tab('+').name}}" ng-disabled="!tab('+')" >&raquo;</a>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>

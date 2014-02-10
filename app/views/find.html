@@ -1,0 +1,49 @@
+<script src="/app/views/find.html.js"></script>
+
+<div ng-controller="FindController">
+    <div class="category-container" >
+        <div class="container">
+            <span class="category"><span class="glyphicon glyphicon-search"></span>&nbsp;Find Information</span>
+
+            <div class="navbar navbar-default" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand navbar-brand-filter" href="#"><span class="label label-primary">Filters</span></a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav filters">
+                        <li><a href="#">Information Type  <b class="caret"></b></a></li>
+                        <li><a href="#">Countries  <b class="caret"></b></a></li>
+                        <li><a href="#">Thematic Areas  <b class="caret"></b></a></li>
+                        <li><a href="#">Date Range <b class="caret"></b></a></li>
+                        <li>
+                            <input type="text" placeholder=" Keyword " class="form-control keyword" style="height: 26px; margin-top: 12px; margin-right: 5px; width: 160px;"></li>
+                    </ul>
+                </div>
+                <div style="background-color: #dedede; padding: 20px;">national records options</div>
+            </div>
+
+            <!-- 
+              <div class="row well well-filter">
+                  <div class="col-md-1"><span class="label label-primary" style="font-size:18px">Filters</span></div>
+                  <div class="col-md-2 filters"><a href="#">Information Type  <b class="caret"></b></a></div>
+                  <div class="col-md-2 filters"><a href="#">Countries  <b class="caret"></b></a></div>
+                  <div class="col-md-2 filters"><a href="#">Thematic Areas  <b class="caret"></b></a></div>
+                  <div class="col-md-2 filters"><a href="#">Date Range <b class="caret"></b></a></div>
+                  <div class="col-md-3 filters"><input type="text" placeholder=" Keyword " class="form-control keyword" style="height:26px;margin-top:12px;margin-right:5px;width:160px;" ></div>
+              </div> -->
+        </div>
+    </div>
+
+    <div class="container">    
+      {{controller}}
+    <div class="search2"></div>
+        <!-- more content here -->
+    </div>
+
+</div>

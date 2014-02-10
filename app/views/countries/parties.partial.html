@@ -1,0 +1,18 @@
+﻿<table class="table table-striped">
+	<tr>
+		<th>#</th>
+		<th>Country</th>
+		<th>Signature</th>
+		<th>Instrument</th>
+		<th>Deposit</th>
+		<th>Entry into force</th>
+	</tr>
+	<tr ng-repeat="country in countries | orderBy:'!treaties.XXVII8b.deposit + name'">
+		<td><span ng-show="!!country.treaties.XXVII8b.deposit">{{$index + 1}}</span></td>
+		<td><a ng-href="countries/#/{{country.code}}">{{country.name}}</a></td>
+		<td>{{country.treaties.XXVII8b.signature}}</td>
+		<td>{{country.treaties.XXVII8b.instrument}}</td>
+		<td>{{country.treaties.XXVII8b.deposit}}</td>
+		<td>{{country.treaties.XXVII8b.party}}</td>
+	</tr>
+</table>

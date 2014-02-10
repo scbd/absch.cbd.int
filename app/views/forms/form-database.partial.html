@@ -1,0 +1,122 @@
+﻿<div>
+	<h1>National ABS Website or Database</h1>
+
+	<div ng-show="isLoading()">
+		<div class="loadProgress" progress="1" timeout="1500"></div>
+	</div>
+
+	<div class="alert alert-error" ng-show="hasError()">
+		<strong>Error as occured...</strong>
+		<div>{{error}}</div>
+	</div>
+
+	<div class="row-fluid" ng-show="!isLoading()&&status!='hidden'">
+
+		<div class="span12" style="position: relative">
+
+			<div style="position: absolute; top: 0px; right: 0px">
+				<div km-form-std-buttons ng-model="document" on-post-close="onPostClose()" on-error="onError(error, errorCode)" on-post-workflow="onPostWorkflow(data)" on-post-publish="onPostPublish(data)" on-post-save-draft="onPostSaveDraft(data)" on-pre-save-draft="onPreSaveDraft()" on-pre-publish="onPrePublish()"></div>
+			</div>
+
+			<div>
+				<div id="editFormPager" class="btn-group">
+					<a class="btn" data-toggle="tab" ng-href="#{{tab('-').name}}" ng-disabled="!tab('-')">&laquo;</a>
+					<a class="btn" data-toggle="tab" ng-href="#edit" ng-class="{ active : tab('edit'  ).active, 'btn-info': tab('edit'  ).active }">General</a>
+					<a class="btn" data-toggle="tab" ng-href="#review" ng-class="{ active : tab('review').active, 'btn-info': tab('review').active }">Review</a>
+					<a class="btn" data-toggle="tab" ng-href="#{{tab('+').name}}" ng-disabled="!tab('+')">&raquo;</a>
+				</div>
+
+				<div class="tab-content" style="overflow:visible;margin-top:10px">
+					<div class="tab-pane active" id="edit">
+						<form name="editForm">
+						<fieldset>
+
+							<legend>Website or Database details </legend>
+							<div class="row-fluid">
+								<div class="span10">
+									<div class="km-control-group" name="government" required caption="Country">
+										<div class="alert alert-info" ng-show="userGovernment()"><i class="icon-hand-right"></i>You cannot change this value.</div>
+										<div km-select required name="government" ng-disabled="userGovernment()" ng-model="document.government" items="options.countries()" placeholder="Please select a country..."></div>
+									</div>
+								</div>
+							</div>
+							<div class="row-fluid">
+								<div class="span10">
+									<div class="km-control-group" name="title" required caption="Website or database name">
+										<div class="help-block">Please enter the name of the website or database as you would like it to appear in the title of the record.</div>
+										<div km-textbox-ml required name="title" ng-model="document.title" locales="document.header.languages" placeholder="example: The title"></div>
+									</div>
+								</div>
+							</div>
+							<div class="row-fluid">
+								<div class="span10">
+									<div class="km-control-group" name="description" required caption="Description">
+										<div class="help-block">Please enter a short description of the national website or database, such as its function or information it makes available.</div>
+										<div km-textbox-ml required name="description" ng-model="document.description" rows="4" locales="document.header.languages" placeholder="example: The description"></div>
+									</div>
+								</div>
+							</div>
+							<div class="row-fluid">
+								<div class="span10">
+									<div class="km-control-group" name="website" required caption="Website address">
+										<div class="help-block">Please provide the full URL of the website (e.g. http://www.cbd.int).</div>
+										<input type="url" ng-model="document.website.url" required class="input-block-level" placeholder="example: http://www.cbd.int" />
+									</div>
+								</div>
+							</div>
+
+							<legend>Additional information</legend>
+
+							<div class="row-fluid">
+								<div class="span10">
+									<div class="km-control-group" name="address" caption="Any other relevant information">
+										<div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
+										<div km-textbox-ml ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row-fluid">
+								<div class="span10">
+									<div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
+										<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row-fluid">
+								<div class="span10">
+									<div class="km-control-group" name="notes" caption="Notes">
+										<div class="help-block">The field “Notes” is for personal reference and can be seen only when the record is being edited</div>
+										<textarea class="input-block-level" name="notes" ng-model="document.notes" rows="4"></textarea>
+									</div>
+								</div>
+							</div>
+
+						</fieldset>
+						</form>
+					</div>
+
+					<div class="tab-pane" id="review">
+
+						<div km-document-validation ng-model="validationReport"></div>
+
+						<div class="btn-group" ng-show="document.header.languages.length>1">
+							<input type="button" class="btn" ng-class="{'active' : review.locale==locale, 'btn-info' : review.locale==locale}" ng-repeat="locale in document.header.languages" ng-click="$parent.review.locale = locale" value="{{locale | uppercase}}" />
+						</div>
+
+						<div class="cbd-view-database" ng-model="document" locale="review.locale" link-target="_blank"></div>
+
+					</div>
+				</div>
+
+				<div class="btn-group">
+					<a class="btn" data-toggle="tab" ng-href="#{{tab('-').name}}" ng-disabled="!tab('-')">&laquo;</a>
+					<a class="btn" data-toggle="tab" ng-href="#edit" ng-class="{ active : tab('edit'  ).active, 'btn-info': tab('edit'  ).active }">General</a>
+					<a class="btn" data-toggle="tab" ng-href="#review" ng-class="{ active : tab('review').active, 'btn-info': tab('review').active }">Review</a>
+					<a class="btn" data-toggle="tab" ng-href="#{{tab('+').name}}" ng-disabled="!tab('+')">&raquo;</a>
+				</div>
+
+			</div>
+		</div>
+	</div>

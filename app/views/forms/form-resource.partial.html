@@ -1,0 +1,400 @@
+﻿<div>
+	<h1>Virtual Library - Resources</h1>
+
+	<div ng-show="isLoading()">
+		<div class="loadProgress" progress="1" timeout="1500"></div>
+	</div>
+
+	<div class="alert alert-error" ng-show="hasError()">
+		<strong>Error as occured...</strong>
+		<div>{{error}}</div>
+	</div>
+
+	<div class="row-fluid" ng-show="!isLoading()&&status!='hidden'">
+
+		<div class="span12" style="position: relative">
+
+			<div style="position: absolute; top: 0px; right: 0px">
+				<div km-form-std-buttons ng-model="document" on-post-close="onPostClose()" on-error="onError(error, errorCode)" on-post-workflow="onPostWorkflow(data)" on-post-publish="onPostPublish(data)" on-post-save-draft="onPostSaveDraft(data)" on-pre-save-draft="onPreSaveDraft()" on-pre-publish="onPrePublish()"></div>
+			</div>
+			<div>
+
+				<div id="editFormPager" class="btn-group">
+					<a class="btn" data-toggle="tab" ng-href="#{{tab('-').name}}" ng-disabled="!tab('-')">&laquo;</a>
+					<a class="btn" data-toggle="tab" ng-href="#edit"  ng-class="{ active : tab('edit' ).active, 'btn-info': tab('edit' ).active }">General</a>
+					<a class="btn" data-toggle="tab" ng-href="#chm"   ng-class="{ active : tab('chm'  ).active, 'btn-info': tab('chm'  ).active }" ng-show="isInLibrary('chm')"          >CHM</a>
+					<a class="btn" data-toggle="tab" ng-href="#absch" ng-class="{ active : tab('absch').active, 'btn-info': tab('absch').active }" ng-show="isInLibrary('absch')"        >ABS-CH</a>
+					<a class="btn" data-toggle="tab" ng-href="#bch"   ng-class="{ active : tab('bch'  ).active, 'btn-info': tab('bch'  ).active }" ng-show="isInLibrary('bch-disabled')" >BCH</a>
+					<a class="btn" data-toggle="tab" ng-href="#ebsa"  ng-class="{ active : tab('ebsa' ).active, 'btn-info': tab('ebsa' ).active }" ng-show="isInLibrary('ebsa-disabled')">EBSA</a>
+					<a class="btn" data-toggle="tab" ng-href="#review" ng-class="{ active : tab('review').active, 'btn-info': tab('review').active }">Review</a>
+					<a class="btn" data-toggle="tab" ng-href="#{{tab('+').name}}" ng-disabled="!tab('+')">&raquo;</a>
+				</div>
+
+				<form name="editForm" style="margin-top:10px">
+				<fieldset>
+
+					<div class="tab-content" style="overflow: visible">
+						<div class="tab-pane active" id="edit">
+
+							<legend>Clearing-Houses</legend>
+
+							<div class="row-fluid">
+								<div class="span10">
+									<div class="km-control-group" required name="libraries" caption="Relevant CBD libraries">
+										<div km-select required name="libraries" ng-model="document.libraries" items="options.libraries()" multiple></div>
+									</div>
+								</div>
+							</div>
+
+							<legend>General information</legend>
+
+							<div class="row-fluid">
+								<div class="span10">
+									<div class="km-control-group" required name="title" caption="Title">
+										<div km-textbox-ml required ng-model="document.title" locales="document.header.languages"></div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row-fluid">
+								<div class="span10">
+									<div class="km-control-group" required name="authors" caption="Author(s)">
+										<div class="help-block">Name of the person who has authored the publication or information resource.</div>
+										<div km-textbox-ml required ng-model="document.authors" rows="2" locales="document.header.languages"></div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row-fluid">
+								<div class="span10">
+									<div class="km-control-group" name="authorsInfo" caption="Author’s contact information">
+										<div km-textbox-ml ng-model="document.authorsInfo" rows="4" locales="document.header.languages"></div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row-fluid">
+								<div class="span10">
+									<div class="km-control-group" required name="languages" caption="Language(s)">
+										<div km-select name="languages" required ng-model="document.languages" items="options.languages()" multiple></div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row-fluid">
+								<div class="span10">
+									<div class="km-control-group" required name="publicationYear" caption="Publication year">
+										<input type="number" required name="publicationYear" ng-model="document.publicationYear" />
+									</div>
+								</div>
+							</div>
+
+							<div class="row-fluid">
+								<div class="span10">
+									<div class="km-control-group" name="organizations" caption="Organization(s) involved in the publication of this resource">
+										<div km-reference multiple name="organizations" ng-model="document.organizations" loader="loadRecords(identifier, 'organization')" order-by="sortContacts(reference)">
+												<div>
+													<div><strong>{{reference.title | lstring}}</strong></div>
+													<div>{{reference.summary | lstring}}</div>
+												</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row-fluid">
+								<div class="span10">
+									<div class="km-control-group" name="cover" caption="Cover image(s)">
+										<div class="help-block">Only JPEG and PNG formats are supported.</div>
+										<div km-link name="cover" ng-model="document.covers" allow-link="false" allow-file="true" mimeTypes="image/jpeg;image/png" identifier="document.header.identifier"></div>
+									</div>
+								</div>
+							</div>
+
+							<legend>Resource information</legend>
+
+							<div class="row-fluid">
+								<div class="span10">
+									<div class="km-control-group" required name="summary" caption="Summary, abstract or table of contents">
+										<div km-textbox-ml ng-model="document.summary" required rows="4" locales="document.header.languages"></div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row-fluid">
+								<div class="span10">
+									<div class="km-control-group" required name="resourceTypes" caption="Type of resource">
+										<div km-select multiple name="resourceTypes" required ng-model="document.resourceTypes" items="options.resourceTypes()"></div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row-fluid">
+								<div class="span10">
+									<div class="km-control-group" name="publisher" caption="Publisher and its location">
+										<div km-textbox-ml name="publisher" ng-model="document.publisher" rows="4" locales="document.header.languages"></div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row-fluid">
+								<div class="span10">
+									<div class="km-control-group" name="rights" caption="Rights">
+										<div class="help-block">Information about rights held in and over the resource, such as copyright holder, and availability for reproduction for educational or non-profit purposes.</div>
+										<div km-textbox-ml name="rights" ng-model="document.rights" locales="document.header.languages"></div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row-fluid">
+								<div class="span10">
+									<div class="km-control-group" name="format" caption="Format">
+										<div class="help-block">Format may be used to identify the resource dimensions (e.g. size, number of pages or duration) or the software, hardware, or other equipment needed to display or operate it (e.g. “Requires Acrobat Reader for viewing”).</div>
+										<div km-textbox-ml name="format" ng-model="document.format" locales="document.header.languages"></div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row-fluid">
+								<div class="span10">
+									<div class="km-control-group" name="source" caption="Source">
+										<div class="help-block">A reference to a resource from which the present resource is derived (e.g. an article from a journal). For original documents you may wish to specify "original document".</div>
+										<div km-textbox-ml name="source" ng-model="document.source" locales="document.header.languages"></div>
+									</div>
+								</div>
+							</div>
+
+
+							<legend>Resource references</legend>
+
+							<div class="row-fluid">
+								<div class="span10">
+									<div class="km-control-group" required name="regions" caption="Country(ies), Regional or Economic group(s) related to the resource">
+										<div km-select style="display: inline-block" name="regions" ng-model="document.regions" items="options.regions()" multiple placeholder="Select a country(ies) and/or region(s)..."></div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row-fluid">
+								<div class="span10">
+									<div class="km-control-group" name="keywords" caption="Keywords and any other relevant information">
+										<div class="help-block">Please use this field to provide additional keywords or any other relevant information not contained elsewhere in the record.</div>
+										<div km-textbox-ml name="keywords" ng-model="document.keywords" rows="4" locales="document.header.languages"></div>
+									</div>
+								</div>
+							</div>
+
+							<legend>Access to the resource</legend>
+
+							<div class="row-fluid">
+								<div class="span10">
+									<div class="km-control-group" required name="resourceLinks" caption="Link to the resource(s)">
+										<div class="help-block">Please always attach the relevant document(s) that will be stored in the database for users to download. When resources are available on the Internet, please also provide a link to them.</div>
+										<div km-link name="resourceLinks" required ng-model="document.resourceLinks" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+									</div>
+								</div>
+							</div>
+
+							<div>
+								<div class="row-fluid">
+									<div class="span10">
+										<div class="km-control-group" name="resourceAccess" caption="How to obtain the resource">
+											<div class="help-block">Please provide details on how hard copies of the resource(s) can be ordered or otherwise obtained.</div>
+											<div km-textbox-ml name="resourceAccess" ng-model="document.resourceAccess" rows="4" locales="document.header.languages"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+							<a name="#AdditionalInformation"></a>
+							<legend>Additional information</legend>
+
+							<div class="row-fluid">
+								<div class="span10">
+									<div class="km-control-group" name="address" caption="Any other relavent information">
+										<div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
+										<div km-textbox-ml ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row-fluid">
+								<div class="span10">
+									<div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
+										<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier" ></div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row-fluid">
+								<div class="span10">
+									<div class="km-control-group" name="notes" caption="Notes">
+										<div class="help-block">The field “Notes” is for personal reference and can be seen only when the record is being edited</div>
+										<textarea class="input-block-level" name="notes" ng-model="document.notes" rows="4"></textarea>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="tab-pane" id="chm">
+
+
+							<legend>Clearing-House Mechanism (CHM)</legend>
+
+							<div class="row-fluid">
+								<div class="span10">
+									<div class="km-control-group" required name="cbdSubjects" caption="Related CBD Subject area(s)">
+										<div km-term-check name="cbdSubjects" required ng-model="document.cbdSubjects" terms="options.cbdSubjects()" binding-type="term[]"></div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row-fluid">
+								<div class="span10">
+									<div class="km-control-group" required name="aichiTargets" caption="Related Aichi target(s)">
+										<div km-term-check name="aichiTargets" required ng-model="document.aichiTargets" terms="options.aichiTargets()" binding-type="term[]"></div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="tab-pane" id="absch">
+
+							<legend>Subjects</legend>
+
+							<div class="row-fluid">
+								<div class="span10">
+									<div class="km-control-group" required name="absSubjects" caption="Thematic areas(s)">
+										<div km-term-check name="absSubjects" required ng-model="document.absSubjects" terms="options.absSubjects()" binding-type="term[]"></div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="tab-pane" id="bch">
+
+							<legend>Subjects</legend>
+
+							<div class="row-fluid">
+								<div class="span10">
+									<div class="km-control-group" required name="bchSubjects" caption="Thematic areas(s)">
+										<div km-term-check name="bchSubjects" required ng-model="document.bchSubjects" terms="options.bchSubjects()" binding-type="term[]"></div>
+									</div>
+								</div>
+							</div>
+
+							<div ng-show="IsBchRa() && disabled">
+								<legend>Background material to the “Guidance on risk assessment of living modified organisms” </legend>
+
+								<div class="row-fluid">
+									<div class="span10">
+										<div class="km-control-group" name="bchRaRecommend" caption="Would you like to recommend this document as background material for  the “Guidance on Risk Assessment of Living Modified Organisms”">
+											<div class="help-block">see <a target="_blank" href="http://bch.cbd.int/onlineconferences/guidance_ra">http://bch.cbd.int/onlineconferences/guidance_ra</a></div>
+											<div class="btn-group">
+												<input type="button" class="btn" ng-class="{ active : document.bchRaRecommend===true , 'btn-info' : document.bchRaRecommend===true  }" ng-click="document.bchRaRecommend=true" value="Yes" />
+												<input type="button" class="btn" ng-class="{ active : document.bchRaRecommend===false, 'btn-info' : document.bchRaRecommend===false }" ng-click="document.bchRaRecommend=false" value="No" />
+											</div>
+										</div>
+									</div>
+
+									<div ng-show="document.bchRaRecommend">
+
+										<div class="row-fluid">
+											<div class="span10">
+												<div class="km-control-group" required name="bchRaSubjects" caption="Please indicate to which section(s) of the 'Guidance this background material' is relevant:">
+													<div km-term-check name="bchRaSubjects" required ng-model="document.bchRaSubjects" terms="options.bchRaSubjects()" binding-type="term[]"></div>
+												</div>
+											</div>
+										</div>
+
+										<legend>Information on Organisms or LMOs</legend>
+
+										<div class="row-fluid">
+											<div class="span10">
+												<div class="km-control-group" name="bchRaForLmo" caption="Does this resource address one or more specific categories of organisms or genes or LMOs?">
+													<div class="btn-group">
+														<input type="button" class="btn" ng-class="{ active : document.bchRaForLmo===true , 'btn-info' : document.bchRaForLmo===true  }" ng-click="document.bchRaForLmo=true" value="Yes" />
+														<input type="button" class="btn" ng-class="{ active : document.bchRaForLmo===false, 'btn-info' : document.bchRaForLmo===false }" ng-click="document.bchRaForLmo=false" value="No" />
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="row-fluid">
+											<div class="span10">
+												<div class="km-control-group" name="organisms" caption="Organism(s) identification">
+													<div km-reference multiple name="organisms" ng-model="document.organisms" loader="loadRecords(identifier, 'organism')" order-by="sortContacts(reference)">
+														<div>
+															<div>
+																<strong>{{reference.type}}</strong>
+																<div>{{reference.identifier}}</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<div class="row-fluid">
+												<div class="span10">
+													<div class="km-control-group" name="genes" caption="Gene(s) identification">
+														<div km-reference multiple name="genes" ng-model="document.bchRaGenes" loader="loadRecords(identifier, 'dnaSequence')" order-by="sortContacts(reference)">
+															<div>
+																<div><strong>{{reference.type}}</strong></div>
+																<div>{{reference.identifier}}</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<div class="row-fluid">
+												<div class="span10">
+													<div class="km-control-group" name="modifiedOrganisms" caption="LMO(s) identification">
+														<div km-reference multiple name="modifiedOrganisms" ng-model="document.bchRaLmos" loader="loadRecords(identifier, 'modifiedOrganism')" order-by="sortContacts(reference)">
+															<div>
+																<div><strong>{{reference.type}}</strong></div>
+																<div>{{reference.identifier}}</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="tab-pane" id="review">
+
+							<div km-document-validation ng-model="validationReport"></div>
+
+							<div class="btn-group" ng-show="document.header.languages.length>1">
+								<input type="button" class="btn" ng-class="{'active' : review.locale==locale, 'btn-info' : review.locale==locale}" ng-repeat="locale in document.header.languages" ng-click="$parent.review.locale = locale" value="{{locale | uppercase}}" />
+							</div>
+							<div class="cbd-view-resource" ng-model="document" locale="review.locale" link-target="_blank"></div>
+						</div>
+					</div>
+				</fieldset>
+				</form>
+
+				<div class="btn-group">
+					<a class="btn" data-toggle="tab" ng-href="#{{tab('-').name}}" ng-disabled="!tab('-')">&laquo;</a>
+					<a class="btn" data-toggle="tab" ng-href="#edit"  ng-class="{ active : tab('edit' ).active, 'btn-info': tab('edit' ).active }">General</a>
+					<a class="btn" data-toggle="tab" ng-href="#chm"   ng-class="{ active : tab('chm'  ).active, 'btn-info': tab('chm'  ).active }" ng-show="isInLibrary('chm')"          >CHM</a>
+					<a class="btn" data-toggle="tab" ng-href="#absch" ng-class="{ active : tab('absch').active, 'btn-info': tab('absch').active }" ng-show="isInLibrary('absch')"        >ABS-CH</a>
+					<a class="btn" data-toggle="tab" ng-href="#bch"   ng-class="{ active : tab('bch'  ).active, 'btn-info': tab('bch'  ).active }" ng-show="isInLibrary('bch-disabled')" >BCH</a>
+					<a class="btn" data-toggle="tab" ng-href="#ebsa"  ng-class="{ active : tab('ebsa' ).active, 'btn-info': tab('ebsa' ).active }" ng-show="isInLibrary('ebsa-disabled')">EBSA</a>
+					<a class="btn" data-toggle="tab" ng-href="#review" ng-class="{ active : tab('review').active, 'btn-info': tab('review').active }">Review</a>
+					<a class="btn" data-toggle="tab" ng-href="#{{tab('+').name}}" ng-disabled="!tab('+')">&raquo;</a>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>

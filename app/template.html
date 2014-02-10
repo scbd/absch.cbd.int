@@ -1,21 +1,19 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>ABS-CH</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Access and Benefit-Sharing Clearing-House</title>
+    <meta name="description" content="Access and Benefit-Sharing Clearing-House">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="shortcut icon" href="ico/favicon.png">
-
-     <!-- Bootstrap core CSS -->
-    <link href="/app/ABS/css/bootstrap.css" rel="stylesheet">
+    
+    <!-- Bootstrap core CSS -->
+    <link href="/app/css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="/app/ABS/css/abs.css" rel="stylesheet">
-    <link href="/app/ABS/css/carousel.css" rel="stylesheet">
+    <link href="/app/css/abs.css" rel="stylesheet">
+    <link href="/app/css/carousel.css" rel="stylesheet">
     <link href="https://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
@@ -26,58 +24,72 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
-  </head>
+</head>
 
-  <body ng-controller="TemplateController">
+<body ng-controller="TemplateController">
 
-      <div class="disclaimer visible-md visible-lg" >
-      <a class="promo" href="/disclaimer/" style="color:white;">
-          <div class="container" >
-              <div class="title"> ABS-CH Pilot Phase </div>
-              <div class="content" >
-                  <span style="margin-left:5px;"> All information displayed is for demonstration and testing purposes only and does not reflect actual ABS-CH records.</span>
-                 
-              </div>
-          </div>
-      </a>
-    </div>
-    
-    <div class="disclaimer-sm visible-sm visible-xs text-center" >
-      <a class="promo" href="/disclaimer/" style="color:white;">
-          <div class="container" >
-              <span class="label label-disclaimer"> ABS-CH PILOT PHASE </span>
-                  <span style="margin-left:5px;" class="visible-sm"> For demonstration and testing purposes only </span>
-          </div>
-      </a>
+    <div class="disclaimer visible-md visible-lg">
+        <a class="promo" href="/disclaimer/" style="color: white;">
+            <div class="container">
+                <div class="title">ABS-CH Pilot Phase </div>
+                <div class="content">
+                    <span style="margin-left: 5px;">All information displayed is for demonstration and testing purposes only and does not reflect actual ABS-CH records.</span>
+                </div>
+            </div>
+        </a>
     </div>
 
-
-
+    <div class="disclaimer-sm visible-sm visible-xs text-center">
+        <a class="promo" href="/disclaimer/" style="color: white;">
+            <div class="container">
+                <span class="label label-disclaimer">ABS-CH PILOT PHASE </span>
+                <span style="margin-left: 5px;" class="visible-sm">For demonstration and testing purposes only </span>
+            </div>
+        </a>
+    </div>
 
     <!-- Static MAIN NAV BAR -->
     <div class="main-nav">
-    <div class="container" >
-      <div class="row visible-md visible-lg" style="padding:5px 0; 10px 0">
-        <div class="col-md-3 brand" >
-                  <a href="#" >
-                    <h1>
-                    <img src="img/cbd-spine.png" > 
-                    ABS-CH
-                  </h1>
-                <span >
-                  Access and Benefit-Sharing <br> Clearing-House
-                </span>      
-                </a>
-        </div>
-        <div class="col-md-2 main-link text-center"><a href="find.html"> Find <br> Information <br><span class="glyphicon glyphicon-search"></span> </a></div>
-        <div class="col-md-2 main-link text-center"><a href="register.html"> Register <br> Information <br><span class="glyphicon glyphicon-edit"></span> </a></div>
-        <div class="col-md-2 main-link text-center"><a href="#contact"> View<br>Country&nbsp;Profiles <br><span class="glyphicon glyphicon-globe"></span> </a></div>
-        <div class="col-md-3  main-side-link">
-            <ul class="account">
-              <li><a href="#"><strong><span class="glyphicon glyphicon-off"></span> sign in</strong></a> | </li>
-              <li><a data-toggle="dropdown" href="#">language: <span style="font-weight:bold;">EN</span></a>
+        <div class="container">
+            <div class="row visible-md visible-lg" style="padding: 5px 0; 10px 0">
+                <div class="col-md-3 brand">
+                    <a href="/">
+                        <h1>
+                            <img src="app/img/cbd-spine.png">
+                            ABS-CH
+                        </h1>
+                        <span>Access and Benefit-Sharing
+                            <br>
+                            Clearing-House
+                        </span>
+                    </a>
+                </div>
+                <div class="col-md-2 main-link text-center">
+                    <a href="/find">Find
+                    <br>
+                        Information
+                    <br>
+                        <span class="glyphicon glyphicon-search"></span></a>
+                </div>
+                <div class="col-md-2 main-link text-center">
+                    <a href="/register">Register
+                    <br>
+                        Information
+                    <br>
+                        <span class="glyphicon glyphicon-edit"></span></a>
+                </div>
+                <div class="col-md-2 main-link text-center">
+                    <a href="/contact">View<br>
+                        Country&nbsp;Profiles
+                    <br>
+                        <span class="glyphicon glyphicon-globe"></span></a>
+                </div>
+                <div class="col-md-3  main-side-link">
+                    <ul class="account">
+                        <li><a href="/management/signin"><strong><span class="glyphicon glyphicon-off"></span>&nbsp;sign in</strong></a> | </li>
+                        <li><a data-toggle="dropdown" href="#">language: <span style="font-weight: bold;">EN</span></a>
 
-                          <ul class="dropdown-menu" role="menu">
+                            <ul class="dropdown-menu" role="menu">
                                 <li class="disabled"><a>لعربية</a></li>
                                 <li class="disabled"><a>中文</a></li>
                                 <li><a href="#"><strong>English</strong></a></li>
@@ -85,342 +97,141 @@
                                 <li class="disabled"><a>Français</a></li>
                                 <li class="disabled"><a>Русский</a></li>
                             </ul>
-              </li>
-          </ul>
+                        </li>
+                    </ul>
 
-          <ul class="secondary">
-              <li><a href="#">About the ABS-CH</a></li>
-              <li><a href="#">Additional Resources</a></li>
-              <li><a href="#">Nagoya Protocol</a></li>
-              <li><a href="#">CBD</a></li>
-          </ul>
-          </div>
+                    <ul class="secondary">
+                        <li><a href="#">About the ABS-CH</a></li>
+                        <li><a href="#">Additional Resources</a></li>
+                        <li><a href="#">Nagoya Protocol</a></li>
+                        <li><a href="#">CBD</a></li>
+                    </ul>
+                </div>
 
-      </div> <!-- end row -->
-     
-      <div class="row visible-sm small">
-          <div class="col-sm-12 brand text-center">
-                <a href="home1.html" >
-                    <h1><img src="img/cbd-spine.png" > 
-                    ABS-CH <span> Access and Benefit-Sharing Clearing-House</span>
-                    </h1>     
-                </a>         
-          </div>
-        </div>
-        <div class="row visible-sm small">
-        <div class="col-sm-3 main-link text-center"><a href="find.html"> <span class="glyphicon glyphicon-search"></span> Find </a></div>
-        <div class="col-sm-3 main-link text-center"><a href="register.html"> <span class="glyphicon glyphicon-edit"></span> Register </a></div>
-        <div class="col-sm-3 main-link text-center"><a href="#contact"> <span class="glyphicon glyphicon-globe"></span> View&nbsp;Profiles  </a></div>
-        <div class="col-sm-3 main-side-link ">
-                        <a href="#contact"> <span class="glyphicon glyphicon-off"></span> <strong>Sign in</strong> </a> <br>
-                        <a data-toggle="dropdown" href="#">language: <span style="font-weight:bold;">EN</span></a>
-                          <ul class="dropdown-menu" role="menu">
-                                <li class="disabled"><a>لعربية</a></li>
-                                <li class="disabled"><a>中文</a></li>
-                                <li><a href="#"><strong>English</strong></a></li>
-                                <li class="disabled"><a>Español</a></li>
-                                <li class="disabled"><a>Français</a></li>
-                                <li class="disabled"><a>Русский</a></li>
-                            </ul></div>
-
-      </div> <!-- end row -->
-
-
-        <div class="row visible-xs small-xs ">
-          <div class="col-xs-3 main-link text-center"><a href="find.html">ABSCH</a></div>
-          <div class="col-xs-2 main-link text-center"><a href="find.html"> <span class="glyphicon glyphicon-search"></span>  </a></div>
-          <div class="col-xs-2 main-link text-center"><a href="register.html"> <span class="glyphicon glyphicon-edit"></span>  </a></div>
-          <div class="col-xs-2 main-link text-center"><a href="#contact"> <span class="glyphicon glyphicon-globe"></span>   </a></div>
-          <div class="col-xs-3 main-side-link">
-                        <a href="#contact"> <span class="glyphicon glyphicon-off"></span></a>
-                        <a data-toggle="dropdown" href="#"><span style="font-weight:bold;">EN</span></a>
-                          <ul class="dropdown-menu" role="menu">
-                                <li class="disabled"><a>لعربية</a></li>
-                                <li class="disabled"><a>中文</a></li>
-                                <li><a href="#"><strong>English</strong></a></li>
-                                <li class="disabled"><a>Español</a></li>
-                                <li class="disabled"><a>Français</a></li>
-                                <li class="disabled"><a>Русский</a></li>
-                            </ul></div>
-
-      </div> <!-- end row -->
-
-    </div> <!-- end container -->
-</div>
-
-<!-- 
-
-    <div class="navbar navbar-abs navbar-static-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-
-          <a class="navbar-brand" href="home1.html">
-
-            <div class="hidden-sm hidden-xs">
-              <div class="brand-title"><img src="img/cbd-spine.png" style="height: 54px; position: relative; top: -10px;"> ABS-CH</div>
-              <span class="brand-slogan">Access and Benefit-Sharing <br> Clearing-House</span>      
             </div>
+            <!-- end row -->
 
-            <div class="visible-sm" style="border-bottom:1px solid #999;">
-              <div class="brand-title"><img src="img/cbd-spine.png" style="height: 54px; position: relative; top: -10px;"> ABS-CH 
-              <span class="brand-slogan-small">Access and Benefit-Sharing Clearing-House</span></div>
+            <div class="row visible-sm small">
+                <div class="col-sm-12 brand text-center">
+                    <a href="/">
+                        <h1>
+                            <img src="/app/img/cbd-spine.png">
+                            ABS-CH <span>Access and Benefit-Sharing Clearing-House</span>
+                        </h1>
+                    </a>
+                </div>
             </div>
-            <div class="visible-xs">
-              <div class="brand-title"><img src="img/cbd-spine.png" style="height: 54px; position: relative; top: -10px;"> ABS-CH 
-              </div>
+            <div class="row visible-sm small">
+                <div class="col-sm-3 main-link text-center"><a href="/find"><span class="glyphicon glyphicon-search"></span>Find </a></div>
+                <div class="col-sm-3 main-link text-center"><a href="/register"><span class="glyphicon glyphicon-edit"></span>Register </a></div>
+                <div class="col-sm-3 main-link text-center"><a href="/contact"><span class="glyphicon glyphicon-globe"></span>View&nbsp;Profiles  </a></div>
+                <div class="col-sm-3 main-side-link ">
+                    <a href="/contact"><span class="glyphicon glyphicon-off"></span><strong>Sign in</strong> </a>
+                    <br>
+                    <a data-toggle="dropdown" href="#">language: <span style="font-weight: bold;">EN</span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li class="disabled"><a>لعربية</a></li>
+                        <li class="disabled"><a>中文</a></li>
+                        <li><a href="#"><strong>English</strong></a></li>
+                        <li class="disabled"><a>Español</a></li>
+                        <li class="disabled"><a>Français</a></li>
+                        <li class="disabled"><a>Русский</a></li>
+                    </ul>
+                </div>
+
             </div>
+            <!-- end row -->
 
 
-          </a>
+            <div class="row visible-xs small-xs ">
+                <div class="col-xs-3 main-link text-center"><a href="/find">ABSCH</a></div>
+                <div class="col-xs-2 main-link text-center"><a href="/find"><span class="glyphicon glyphicon-search"></span></a></div>
+                <div class="col-xs-2 main-link text-center"><a href="/register"><span class="glyphicon glyphicon-edit"></span></a></div>
+                <div class="col-xs-2 main-link text-center"><a href="/contact"><span class="glyphicon glyphicon-globe"></span></a></div>
+                <div class="col-xs-3 main-side-link">
+                    <a href="#contact"><span class="glyphicon glyphicon-off"></span></a>
+                    <a data-toggle="dropdown" href="#"><span style="font-weight: bold;">EN</span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li class="disabled"><a>لعربية</a></li>
+                        <li class="disabled"><a>中文</a></li>
+                        <li><a href="#"><strong>English</strong></a></li>
+                        <li class="disabled"><a>Español</a></li>
+                        <li class="disabled"><a>Français</a></li>
+                        <li class="disabled"><a>Русский</a></li>
+                    </ul>
+                </div>
 
-        </div>
-        <div class="navbar-collapse collapse">
-
-        <div class="visible-md visible-lg">
-          <ul class="nav navbar-nav abs-navbar-nav center-block">
-            <li class="active"><a href="find.html"> Find <br> Information <br><span class="glyphicon glyphicon-search"></span> </a></li>
-            <li><a href="register.html"> Register <br> Information <br><span class="glyphicon glyphicon-edit"></span> </a></li>
-            <li><a href="#contact"> View<br>Country Profiles <br><span class="glyphicon glyphicon-globe"></span> </a></li>
-          </ul>
-           <div class="navbar-right ">
-            <ul class="nav-account ">
-              <li><a href="#">sign in</a></li>
-              <li><a href="#">register</a></li>
-              <li><a data-toggle="dropdown" href="#">language: <span style="font-weight:bold;">EN</span></a>
-
-                          <ul class="dropdown-menu" role="menu">
-                                <li class="disabled"><a>لعربية</a></li>
-                                <li class="disabled"><a>中文</a></li>
-                                <li><a href="#"><strong>English</strong></a></li>
-                                <li class="disabled"><a>Español</a></li>
-                                <li class="disabled"><a>Français</a></li>
-                                <li class="disabled"><a>Русский</a></li>
-                            </ul>
-              </li>
-          </ul>
-
-          <ul class="nav-secondary">
-              <li><a href="#">About the ABS-CH</a></li>
-              <li><a href="#">Additional Resources</a></li>
-              <li><a href="#">Nagoya Protocol</a></li>
-              <li><a href="#">CBD</a></li>
-          </ul>
-          </div>
-          </div>
-
-          <div class="center-block hidden-md hidden-lg">
-          <div class="row">
-            <div class="col-md-3 main-link"><a href="find.html"> Find <br> Information <br><span class="glyphicon glyphicon-search"></span> </a></div>
-            <div class="col-md-3 main-link"><a href="register.html"> Register <br> Information <br><span class="glyphicon glyphicon-edit"></span> </a></div>
-            <div class="col-md-3 main-link"><a href="#contact"> View<br>Country Profiles <br><span class="glyphicon glyphicon-globe"></span> </a></div>
-             <div class="col-md-3 main-link"><a href="#contact"> sign in</div>
-          </div>
-          </div>
-    
-
-
-        
-
-
-        </div>
-      </div>
-    </div>
- -->
-<!--     <div class="category-container" >
-    </div> -->
-
-  <!--    <div style="background-color:#EEE;border-bottom:1px solid #999;">
-   <div class="container" style="padding:0;">
-        <div class="jumbotron"  style="width:100%;margin:0;padding:30px 15px;">
-        <h1>example </h1>
-        <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-        <p>To see the difference between static and fixed top navbars, just scroll.</p>
-        <p>
-          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
-        </p>
-        </div>
-      </div> 
-      </div>
-      -->
-
-      <!-- Carousel
-    ================================================== -->
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-      </ol>
-      <div class="carousel-inner">
-        <div class="item active">
-          <img data-src="holder.js/900x500/auto/#777:#7a7a7a/text:First slide" alt="First slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>Example headline.</h1>
-              <p>Note: If you're viewing this page via a <code>file://</code> URL, the "next" and "previous" Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
             </div>
-          </div>
+            <!-- end row -->
+
         </div>
-        <div class="item">
-          <img data-src="holder.js/900x500/auto/#666:#6a6a6a/text:Second slide" alt="Second slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>Another example headline.</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <img data-src="holder.js/900x500/auto/#555:#5a5a5a/text:Third slide" alt="Third slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>One more for good measure.</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-      <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-    </div><!-- /.carousel -->
-
-
-
-
-
-<div class="container">
-  <div class="row" style="min-height:300px;">
-      
-    <div class="col-md-4">
-        <div class="home-col"><h3>Find Information</h3></div>
-    </div>
-  
-    <div class="col-md-4">
-        <div class="home-col"><h3>Register Information</h3>
-        <p> login form here</p></div>
+        <!-- end container -->
     </div>
 
-     <div class="col-md-4">
-        <div class="home-col"><h3>Country Profiles</h3></div>
-    </div>
-    
-  </div>
-</div>
-
-
-
-
-<div class="container">
-  <h3 style="border-bottom:1px solid #999;"> Information about the ABS-CH</h3>
-  <div class="row" style="min-height:300px;">
- 
-
-    <div class="col-md-3">
-    <div class="home-col"><h3>Online Dicussion Forum</h3></div>
-        
-    </div>
-  
-     <div class="col-md-3">
-         <div class="home-col"><h3>Help and Resources</h3></div>
+    <div class="container-full page-content">
+        <ng-view></ng-view>
     </div>
 
-    <div class="col-md-3">
-         <div class="home-col"><h3>About the Nagoya Protocol</h3></div>
-    </div>
-    <div class="col-md-3">
-         <div class="home-col"><h3>About the CBD</h3></div>
-    </div>
-
-</div>
-
-<div class="row">
-
-    <div class="col-md-6">
-         <div class="home-col"><h3>News</h3></div>
-    </div>
-  
-    <div class="col-md-6">
-        <div class="home-col"> <h3>Meetings</h3></div>
-    </div>
-
-  </div>
-</div>
-<br/><br/>
- 
-
- <!--FOOTER *************************** -->
- <footer class="footer">
+    <!--FOOTER *************************** -->
+    <footer class="footer">
         <div class="container" id="footer">
-        <div class="row" style="padding-bottom:20px;">
-        <div class="col-md-3">
-         <h5 class-"footer-title">ABS Clearing-House</h5>
-                <h4><a href="#"><span class="glyphicon glyphicon-search"></span> Find Information</a></h4>
-                <h4><a href="#"><span class="glyphicon glyphicon-edit"></span> Register Information</a></h4>
-                <h4><a href="#"><span class="glyphicon glyphicon-globe"></span> View Country Profiles </a></h4>
-            </div>
-            <div class="col-md-3">
-                <h5 class-"footer-title">About the ABS-CH</h5>
-                <ul class="footer-links">
-                    <li><a href="/database">Overview</a></li>
-                    <li><a href="/database">List of Parties</a></li>
-                    <li><a href="/database">Policies</a></li>
-                    <li><a href="/database">Modalities of operation</a></li>
-                    <li><a href="/database">Development</a></li>
-                    <li><a href="/database">Information-sharing obligations</a></li>
-                    <li><a href="/database">Pilot phase</a></li>
-                    <li><a href="/database">Status of Protocol</a></li>
-                </ul>
-            </div>
-             <div class="col-md-3">
-                <h5 class-"footer-title">Additional Resources</h5>
-                <ul class="footer-links">
-                    <li><a href="/database">Bonn guidelines</a></li>
-                    <li><a href="/database">Awareness-raising materials</a></li>
-                    <li><a href="/database">Portal on Article 10</a></li>
-                    <li><a href="/database">ABS-CH IAC Portal</a></li>
-                    <li><a href="/database">Glossary</a></li>
-                    <li><a href="/database">FAQs</a></li>
-                </ul>
-            </div>
+            <div class="row" style="padding-bottom: 20px;">
+                <div class="col-md-3">
+                    <h5 class="footer-title">ABS Clearing-House</h5>
+                    <h4><a href="#"><span class="glyphicon glyphicon-search"></span>Find Information</a></h4>
+                    <h4><a href="#"><span class="glyphicon glyphicon-edit"></span>Register Information</a></h4>
+                    <h4><a href="#"><span class="glyphicon glyphicon-globe"></span>View Country Profiles </a></h4>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="footer-title">About the ABS-CH</h5>
+                    <ul class="footer-links">
+                        <li><a href="/database">Overview</a></li>
+                        <li><a href="/database">List of Parties</a></li>
+                        <li><a href="/database">Policies</a></li>
+                        <li><a href="/database">Modalities of operation</a></li>
+                        <li><a href="/database">Development</a></li>
+                        <li><a href="/database">Information-sharing obligations</a></li>
+                        <li><a href="/database">Pilot phase</a></li>
+                        <li><a href="/database">Status of Protocol</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5 clas="footer-title">Additional Resources</h5>
+                    <ul class="footer-links">
+                        <li><a href="/database">Bonn guidelines</a></li>
+                        <li><a href="/database">Awareness-raising materials</a></li>
+                        <li><a href="/database">Portal on Article 10</a></li>
+                        <li><a href="/database">ABS-CH IAC Portal</a></li>
+                        <li><a href="/database">Glossary</a></li>
+                        <li><a href="/database">FAQs</a></li>
+                    </ul>
+                </div>
 
-            <div class="col-md-3">
-                <h5 class-"footer-title">Nagoya Protocol</h5>
-                <ul class="footer-links">
-                    <li><a href="/database">Documents and meetings</a></li>
-                    <li><a href="/database">Notifications</a></li>
-                    <li><a href="/database">News headlines</a></li>
-                    <li><a href="/database">About the Nagoya Protocol</a></li>
-                </ul>
-            </div>
+                <div class="col-md-3">
+                    <h5 class="footer-title">Nagoya Protocol</h5>
+                    <ul class="footer-links">
+                        <li><a href="/database">Documents and meetings</a></li>
+                        <li><a href="/database">Notifications</a></li>
+                        <li><a href="/database">News headlines</a></li>
+                        <li><a href="/database">About the Nagoya Protocol</a></li>
+                    </ul>
+                </div>
 
             </div>
             <div class="row copyright">
                 <div class="col-lg-6 col-md-6 col-sm-6 logorow">
-                    <p style="margin-top:-8px">© 2013 SCBD | <a href="http://www.cbd.int/privacy">Privacy Policy</a> | <a href="http://www.cbd.int/terms">Terms of Use</a></p>
+                    <p style="margin-top: -8px">© 2013 SCBD | <a href="http://www.cbd.int/privacy">Privacy Policy</a> | <a href="http://www.cbd.int/terms">Terms of Use</a></p>
 
                 </div>
-                <div class="col-md-6"><img src="img/cbd-logo-print-black-en.png" class="pull-right" style="padding:0;margin:0;" /></div>
+                <div class="col-md-6">
+                    <img src="/app/img/cbd-logo-print-black-en.png" class="pull-right" style="padding: 0; margin: 0;" /></div>
+            </div>
         </div>
-    </div>
     </footer>
 
-       
-  
-
-
-    <!-- Bootstrap core JavaScript
+    <!-- Bootstrap core JavaScript 
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="/app/libs/requirejs/require.js" data-main="/app/js/boot.js"></script>
-  </body>
+</body>
 </html>

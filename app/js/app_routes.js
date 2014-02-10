@@ -11,7 +11,10 @@ define(['app', 'authentication'], function (app) {
         $locationProvider.hashPrefix('!');
     
         $routeProvider.
-            when('/',                     { templateUrl: '/app/views/index.html'                , resolve: { user: resolveUser }}).
+            when('/',                           { templateUrl: '/app/views/index.html'               , resolve: { user: resolveUser }}).
+            when('/find',                       { templateUrl: '/app/views/find.html'                , resolve: { user: resolveUser }}).
+            when('/register',                   { templateUrl: '/app/views/register.html'            , resolve: { user: resolveUser }}).
+            when('/profiles',                   { templateUrl: '/app/views/profiles.html'            , resolve: { user: resolveUser }}).
             otherwise({redirectTo:'/help/404'});
     }]);
 });

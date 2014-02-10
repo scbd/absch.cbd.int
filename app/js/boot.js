@@ -9,12 +9,14 @@ require.config({
         'async'           : '../libs/requirejs-plugins/src/async',
         'domReady'        : '../libs/requirejs-domready/domReady',
         'jquery'          : '../libs/jquery/jquery',
-        'bootstrap'       : '../libs/bootstrap/dist/js/bootstrap'
+        'bootstrap'       : '../libs/bootstrap/dist/js/bootstrap',
+        'underscore'      : '../libs/underscore/underscore'
     },
     'shim': { 
         'angular'       : { 'deps': ['jquery'], 'exports': 'angular' },
         'angular-route' : { 'deps': ['angular'] },
-        'bootstrap'     : { 'deps': ['jquery'] }
+        'bootstrap'     : { 'deps': ['jquery'] },
+        'underscore'    : { 'exports' : '_'}
     }
 });
 

@@ -1,0 +1,30 @@
+<li class="list-group-item">
+	<select class="input-block-level" ng-model="selectedDate" ng-change-"onSelectedDate()" ng-options="date.text for date in dates"></select>
+	<div style="display:inline-block;width:116px">
+		<div style="font-size:10px;font-weight:bold">SINCE</div>
+		<div class="control-group input-append">
+			<div class="km-date" ng-model="since"></div>
+		</div>
+	</div>
+	<div style="display:inline-block;width:115px;margin-top:4px">
+		<div style="font-size:10px;font-weight:bold">UNTIL</div>
+		<div class="control-group input-append">
+			<div class="km-date" ng-model="until"></div>
+		</div>
+	</div>
+	<style>
+		.km-date .input-small {
+			font-size:11px;
+		}
+		.km-date .input-small {
+			width: 72px;
+		}
+		.km-date button {
+			width: 28px;
+			padding-left:7px;
+		}
+		.km-date button {
+			font-size:11px;
+		}
+	</style>
+</li>
