@@ -12,6 +12,7 @@ require('app').directive('editAuthority', [ "authHttp", "guid", "$filter", "Thes
 			$scope.status   = "";
 			$scope.error    = null;
 			$scope.document = null;
+			$scope.tab      = "help";
 			$scope.review   = { locale : "en" };
 			$scope.options  = {
 				countries					: function () { return $http.get("/api/v2013/thesaurus/domains/countries/terms",            { cache: true }).then(function(o){ return $filter('orderBy')(o.data, 'name'); }); },
@@ -25,14 +26,6 @@ require('app').directive('editAuthority', [ "authHttp", "guid", "$filter", "Thes
 				cpbOrganismTypes			: function () { return $http.get("/api/v2013/thesaurus/domains/TypeOfOrganisms/terms",      { cache: true }).then(function (o) { return o.data; }); },
 				absFunctions				: function () { return $http.get("/api/v2013/thesaurus/domains/8102E184-E282-47F7-A49F-4C219B0EE235/terms", { cache: true }).then(function (o) { return o.data; }); },
 			};
-
-			$element.find('a[data-toggle="tab"]').on('shown', function(e) {
-				var onTabFn = function() { $scope.onTab($(e.target).attr('href').replace("#", "")); };
-				if ($scope.$root.$$phase == '$apply' || $scope.$root.$$phase == '$digest')
-					onTabFn()
-				else
-					$scope.$apply(onTabFn);
-			});
 
 			$scope.init();
 		},
@@ -153,6 +146,24 @@ require('app').directive('editAuthority', [ "authHttp", "guid", "$filter", "Thes
 			//==================================
 			//
 			//==================================
+			$scope.$watch('tab', function(tab) {
+
+				if(!tab)
+					return;
+
+				if(tab == "help")           { $scope.prevTab = "help";           $scope.nextTab = "edit" };
+				if(tab == "edit")           { $scope.prevTab = "help";           $scope.nextTab = "absch" };
+				if(tab == "absch")          { $scope.prevTab = "edit";           $scope.nextTab = "additionalInfo" };
+				if(tab == "additionalInfo") { $scope.prevTab = "absch";          $scope.nextTab = "review" };
+				if(tab == "review")         { $scope.prevTab = "additionalInfo"; $scope.nextTab = "review" };
+
+				if (tab == 'review')
+					$scope.validate();
+			});			
+
+			//==================================
+			//
+			//==================================
 			$scope.isInLibrary = function(name, document) {
 				document = document || $scope.document;
 
@@ -215,12 +226,6 @@ require('app').directive('editAuthority', [ "authHttp", "guid", "$filter", "Thes
 				if (!$scope.allowJurisdictionName(document))
 					document.absJurisdictionName = undefined;
 
-				if (!$scope.isInLibrary("bch", document)){
-					document.cpbFunctions        = undefined;
-					document.cpbOrganismTypes    = undefined;
-					document.responsibilities    = undefined;
-				}
-
 				if (/^\s*$/g.test(document.notes))
 					document.notes = undefined;
 
@@ -275,24 +280,6 @@ require('app').directive('editAuthority', [ "authHttp", "guid", "$filter", "Thes
 					'name' : tab,
 					'active': sActiveTab == tab
 				}
-			}
-
-			//==================================
-			//
-			//==================================
-			$scope.onTab  = function(tab) {
-				var fn = function() {
-					if (tab == 'review')
-						$scope.validate();
-
-					if (!$('body').is(":animated"))
-						$('body').stop().animate({ scrollTop: 0 }, 600);
-				};
-
-				if ($scope.$root.$$phase == '$apply' || $scope.$root.$$phase == '$digest')
-					fn();
-				else
-					$scope.$apply(fn);
 			}
 
 			//==================================
