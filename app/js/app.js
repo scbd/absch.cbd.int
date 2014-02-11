@@ -9,8 +9,8 @@ define([/*'angular'*/], function () {
 	//	app.controllerProvider = $controllerProvider;
 	//	app.routeProvider      = $routeProvider;
 	//	app.compileProvider    = $compileProvider;
-	    app.filterProvider     = $filterProvider;
-	//	app.provide            = $provide;
+	    app.filter             = $filterProvider.register;
+		app.factory            = $provide.factory;
 		app.directive          = $compileProvider.directive;
 		app.controller         = $controllerProvider.register;
 	}]);

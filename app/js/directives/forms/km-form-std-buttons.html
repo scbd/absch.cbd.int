@@ -1,0 +1,56 @@
+<span style="text-align:left">
+
+	<span ng-hide="errors">
+
+		<input type="button" class="btn btn-warning" ng-click="showCancelDialog(true)" value="Cancel"/>
+		<input type="button" class="btn btn-primary" ng-click="showSaveDialog(true)" value="Save"/>
+
+	</span>
+
+    <!--Save Dialog-->
+	<div id="dialogSave" class="modal fade" data-backdrop="static">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" ng-click="closeDialog()" aria-hidden="true">×</button>
+					<h4>Save record</h4>
+				</div>
+				<div class="modal-body">
+
+					<p>If you have finished entering all the information, you can submit the record for publishing.</p>
+
+					<p>If you are unable to complete entry of this record, you can save it as a draft, which will then be available in your list of drafts on the Management Centre. You or your colleagues can then continue editing the record in the current, or a later, session.</p>
+
+				</div>
+				<div class="modal-footer" style="margin-top:0">
+					<button type="button" ng-click="closeDialog()" class="btn btn-default" >Cancel</button>
+					<button type="button" ng-click="saveDraft()"      ng-disabled="!security.canSaveDraft" class="btn btn-info"    >Save as draft</button>
+					<button type="button" ng-click="publish()"        ng-show="security.canSave" ng-disabled="!security.canSave" class="btn btn-primary" >Save and publish</button>
+					<button type="button" ng-click="publishRequest()" ng-hide="security.canSave" ng-disabled="security.canSave"  class="btn btn-primary" >Save and request publication</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <!--Cancel Dialog-->
+	<div id="dialogCancel" class="modal fade" data-backdrop="static">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" ng-click="closeDialog()" aria-hidden="true">×</button>
+					<h4>Canceling changes</h4>
+				</div>
+				<div class="modal-body">
+
+					<p>If you want to cancel the changes you just made to this draft, you can keep the previous version of the draft, which will then be available in the list of drafts on the Management Centre. You or your colleagues can then continue editing the record in the current, or a later, session.</p>
+
+				</div>
+				<div class="modal-footer" style="margin-top:0">
+					<button type="button" ng-click="closeDialog()" class="btn btn-default" >Cancel</button>
+					<button type="button" ng-click="close()"       class="btn btn-primary" >Close without saving</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</span>

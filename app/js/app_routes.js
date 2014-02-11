@@ -1,6 +1,6 @@
 'use strict';
 
-define(['app', 'authentication'], function (app) {
+define(['app', 'authentication', 'services', 'filters', 'storage', 'workflows'], function (app) {
 
 	var resolveUser = ['$rootScope', 'authentication', function($rootScope, authentication) {
 		return authentication.getUser().then(function (user) { $rootScope.user = user; return user; });
@@ -14,6 +14,7 @@ define(['app', 'authentication'], function (app) {
             when('/',                           { templateUrl: '/app/views/index.html'               , resolve: { user: resolveUser }}).
             when('/find',                       { templateUrl: '/app/views/find.html'                , resolve: { user: resolveUser }}).
             when('/register',                   { templateUrl: '/app/views/register.html'            , resolve: { user: resolveUser }}).
+            when('/register/authority',   { templateUrl: '/app/views/forms/authority.html'     , resolve: { user: resolveUser }}).
             when('/profiles',                   { templateUrl: '/app/views/profiles.html'            , resolve: { user: resolveUser }}).
             otherwise({redirectTo:'/help/404'});
     }]);

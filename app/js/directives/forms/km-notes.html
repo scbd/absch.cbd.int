@@ -1,0 +1,16 @@
+﻿<div>
+
+    <textarea class="form-control" ng-required="isRequired()" ng-model="newtext" ng-change="save()" placeholder="{{placeholder}}" rows="{{rows}}" style="display:inline-block"></textarea>
+
+    <table class="table table-striped">
+        <tr ng-repeat="text in texts">
+            <td>{{text.value}} <input type="hidden" ng-model="text.value"></td>
+            <td style="width:10px;"><span class="btn" ng-click="remove($index)"><i class="icon-trash icon"></i></span></td>
+        </tr>
+    </table>
+
+</div>
+
+
+
+

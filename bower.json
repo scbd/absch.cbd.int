@@ -14,6 +14,7 @@
     "requirejs-text": "latest",
     "requirejs-plugins": "latest",
     "underscore": "latest",
-    "bootstrap-duallistbox": "https://github.com/istvan-ujjmeszaros/bootstrap-duallistbox.git"
+    "bootstrap-duallistbox": "https://github.com/istvan-ujjmeszaros/bootstrap-duallistbox.git",
+    "linqjs": "*"
   }
 }

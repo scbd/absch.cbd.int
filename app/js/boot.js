@@ -10,7 +10,8 @@ require.config({
         'domReady'        : '../libs/requirejs-domready/domReady',
         'jquery'          : '../libs/jquery/jquery',
         'bootstrap'       : '../libs/bootstrap/dist/js/bootstrap',
-        'underscore'      : '../libs/underscore/underscore'
+        'underscore'      : '../libs/underscore/underscore',
+        'linqjs'          : '../libs/linqjs/linq'
     },
     'shim': { 
         'angular'       : { 'deps': ['jquery'], 'exports': 'angular' },

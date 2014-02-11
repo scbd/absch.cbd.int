@@ -1,0 +1,41 @@
+<span>
+
+	<script type="text/ng-template"  id="select-tree-renderer.html">
+		<a ng-click="clicked(item)" href="">{{item.title||item.name | lstring:locale | truncate:120:'...'}}</a>
+		<i class="icon-ok" ng-show="item.selected" style="position:absolute;top:5px;left:3px;"></i>
+		<ul class="dropdown-inline-submenu">
+			<li ng:repeat="item in item.children" ng-include="'select-tree-renderer.html'" style="position:relative">
+		</ul>
+	</script>
+
+
+	<div ng-show="error">
+		<div class="alert alert-warning">
+			{{error}}
+		</div>
+	</div>
+
+	<span>
+		<div class="btn-group" >
+			<button tyle="button" class="btn btn-default dropdown-toggle" ng-click="autoInit()" ng-class="{disabled:ngDisabledFn(), 'btn-info' : hasSelectedItems() }" data-toggle="dropdown">
+				{{getTitle(displayCount, true)}}
+				<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" style="max-height:400px;overflow-y:auto;text-align:left">
+				<li ng-hide="!!rootItems">
+					<a href><em>Loading...</em></a>
+				</li>
+				<li ng-show="rootItems.length==0">
+					<a href><em>Nothing to select...</em></a>
+				</li>
+				<li ng-show="!!rootItems && (getMinimum()==0 || allowOther == 'true')" style="padding:2px 20px">
+					<button class="btn btn-xs btn-default" ng-show="getMinimum()==0 && (hasSelectedItems() || rootItems.length!=0)"      type ="button" ng-click="clearSelection()" ng-disabled="!hasSelectedItems()">Clear selection</button>
+					<button class="btn btn-xs btn-default" ng-show="allowOther == 'true'" type="button" ng-click="chooseOther()"    ng-show="allowOther">Specify another value</button>
+				</li>
+				<li ng:repeat="item in rootItems" ng-class="{disabled:!itemEnabled(item)}" ng-include="'select-tree-renderer.html'" style="position:relative">
+				</li>
+			</ul>
+		</div>
+
+	</span>
+</span>

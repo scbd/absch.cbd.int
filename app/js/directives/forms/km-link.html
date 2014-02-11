@@ -1,0 +1,82 @@
+<div style="margin-bottom:20px">
+	<div>
+		<table class="table table-hover" ng-show="links||links.length">
+			<tr ng-repeat="link in links" >
+				<td>
+					<a target="_blank" ng-href="{{link.url}}">{{link.name||link.url}}</a>
+				</td>
+				<td style="text-align:end;white-space:nowrap">
+					<a title="Remove" class="btn btn-default" ng-click="remove(link)"><i class="icon-trash"></i></a>
+				</td>
+			</tr>
+		</table>
+
+		<button type="button" class="btn btn-default" ng-click="addLink()" ng-show="isAllowLink()"><i class="icon-globe"></i> Add link</button>
+		<button type="button" class="btn btn-default" ng-click="addFile()" ng-show="isAllowFile()" ng-disabled="!identifier"><i class="icon-file"></i> Add file</button>
+	</div>
+
+    <!--Link Editor-->
+	<div id="editLink" class="modal fade" data-backdrop="static">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3>Editing link</h3>
+				</div>
+				<div class="modal-body"  style="max-height:400px;overflow-y:auto">
+					<div class="alert alert-info">Please provide the URL of the website (e.g. <a target="_blank" href="http://www.cbd.int">http://www.cbd.int</a>) and the name of the website (e.g. "The Convention on Biological Diversity").</div>
+					<form name="linkForm">
+						<fieldset>
+							<div class="alert alert-warning" ng-show="linkForm.$error.url">
+								<strong>Warning!</strong>
+								Specified value is not a valid URL
+							</div>
+
+							<div class="control-group" ng-class="{error: linkForm.editor.url.$invalid}">
+								<label class="control-label" ng-required="editor.visible" for="url">Url</label>
+								<input class="form-control" type="url" style="width:98%" ng-model="editor.url" ng-required="editor.visible" placeholder="example: http://www.cbd.int">
+							</div>
+
+							<div class="control-group" ng-class="{error: linkForm.name.$invalid}">
+								<label>Name</label>
+								<input class="form-control" type="text" style="width:98%" ng-model="editor.name"  placeholder="example: SCBD website">
+							</div>
+						</fieldset>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" ng-click="editor.close()">Cancel</button>
+					<button type="button" class="btn btn-primary" ng-click="linkForm.$invalid || editor.save()" ng-disabled="linkForm.$invalid" >Save</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <!--File Upload Editor-->
+	<div id="editFile" class="modal fade" data-backdrop="static">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3>Uploading file</h3>
+				</div>
+				<div class="modal-body">
+					<div class="alert alert-danger" ng-show="editor.error!=null">
+						<h4>Error occured</h4>
+						{{editor.error}}
+					</div>
+					
+					<div ng-show="editor.progress">
+						<label>{{editor.name}} ({{editor.progress.size/1024 | number:1}} kB)</label>
+						<div class="progress progress-striped {{editor.progress.style}}">
+							<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"  style="width:{{editor.progress.percent}}%;"></div>
+						</div>
+					</div>
+					
+					<div id="uploadPlaceholder" style="display:none"></div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" ng-click="editor.close()">Cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,24 @@
+<ul>
+	<script type="text/ng-template"  id="term-radio-tree-renderer.html">
+		<label>
+			<input type="radio" ng-model="selection.identifier" ng-click="save()" ng-required="IsRequired()" value="{{term.identifier}}" name="bindingName"/>
+				- {{term.title||term.name | lstring:locale}}
+		</label>
+
+		<ul style="list-style:none">
+			<li ng:repeat="term in term.narrowerTerms" ng-include="'term-radio-tree-renderer.html'">
+		</ul>
+	</script>
+
+	<li ng:repeat="term in rootTerms" ng-include="'term-radio-tree-renderer.html'"></li>
+
+	<li ng-show="error">
+		<div class="alert">
+			{{error}}
+		</div>
+	</li>
+
+	<li ng-show="__loading">
+		Loading...	
+	</li>
+</ul>
