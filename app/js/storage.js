@@ -333,8 +333,8 @@ define(['app', 'authentication'], function (app) {
 			var canDo = function(operation, identifier, schema, metadata) {
 				metadata = angular.extend(metadata || {}, { 'schema': schema });
 
-				if (!metadata.government && authentication.user().government)
-					metadata = angular.extend(metadata, { 'government': authentication.user().government });
+				if (!metadata.government && authentication.getUser().government)
+					metadata = angular.extend(metadata, { 'government': authentication.getUser().government });
 
 				var params = {
 					"identifier" : identifier,

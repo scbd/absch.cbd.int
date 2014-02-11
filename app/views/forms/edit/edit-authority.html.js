@@ -3,7 +3,7 @@ require('app').directive('editAuthority', [ "authHttp", "guid", "$filter", "Thes
 
 	return {
 		restrict   : 'EAC',
-		templateUrl: '/app/views/forms/authority.partial.html',
+		templateUrl: '/app/views/forms/edit/edit-authority.partial.html',
 		replace    : true,
 		transclude : false,
 		scope      : {},
@@ -158,7 +158,7 @@ require('app').directive('editAuthority', [ "authHttp", "guid", "$filter", "Thes
 				if(tab == "review")         { $scope.prevTab = "additionalInfo"; $scope.nextTab = "review" };
 
 				if (tab == 'review')
-					$scope.validate();
+					validate();
 			});			
 
 			//==================================
@@ -208,11 +208,13 @@ require('app').directive('editAuthority', [ "authHttp", "guid", "$filter", "Thes
 			//==================================
 			//
 			//==================================
-			$scope.cleanUp = function(document) {
+			$scope.getCleanDocument = function(document) {
 				document = document || $scope.document;
 
 				if (!document)
-					return $q.when(true);
+					return undefined
+
+				document = angular.fromJson(angular.toJson(document));
 
 				if (!$scope.isInLibrary("absch", document)){
 				    document.responsibilities        = undefined;
@@ -229,73 +231,44 @@ require('app').directive('editAuthority', [ "authHttp", "guid", "$filter", "Thes
 				if (/^\s*$/g.test(document.notes))
 					document.notes = undefined;
 
-				return $q.when(false);
+				return document;
 			};
 
 			//==================================
 			//
 			//==================================
-			$scope.validate = function(clone) {
+			function validate() {
 
 				$scope.validationReport = null;
 
-				var oDocument = $scope.document;
+				var oDocument = $scope.reviewDocument = $scope.getCleanDocument();
 
-				if (clone !== false)
-					oDocument = angular.fromJson(angular.toJson(oDocument));
+				return storage.documents.validate(oDocument).then(function(success) {
+				
+					$scope.validationReport = success.data;
+					return !!(success.data && success.data.errors && success.data.errors.length);
 
-				return $scope.cleanUp(oDocument).then(function(cleanUpError) {
-					return storage.documents.validate(oDocument).then(
-						function(success) {
-							$scope.validationReport = success.data;
-							return cleanUpError || !!(success.data && success.data.errors && success.data.errors.length);
-						},
-						function(error) {
-							$scope.onError(error.data);
-							return true;
-						}
-					);
+				}).catch(function(error) {
+					
+					$scope.onError(error.data);
+					return true;
+
 				});
-			}
-
-			//==================================
-			//
-			//==================================
-			$scope.tab = function(tab, show) {
-
-				var oTabNames    = [];
-				var sActiveTab   = $('.tab-content:first > .tab-pane.active').attr("id");
-				var qActiveTab   = $('#editFormPager a[data-toggle="tab"]:not(:first):not(:last)').filter('[href="#'+sActiveTab+'"]');
-
-				if (tab == "-") tab = (qActiveTab.prevAll(":not(:hidden):not(:last)").attr("href")||"").replace("#", "");
-				if (tab == "+") tab = (qActiveTab.nextAll(":not(:hidden):not(:last)").attr("href")||"").replace("#", "");
-
-				if(!tab)
-					return undefined;
-
-				if (show)
-					$('#editFormPager a[data-toggle="tab"][href="#review"]:first').tab('show');
-
-				return {
-					'name' : tab,
-					'active': sActiveTab == tab
-				}
-			}
+			};
 
 			//==================================
 			//
 			//==================================
 			$scope.onPreSaveDraft = function() {
-				return $scope.cleanUp();
 			}
 
 			//==================================
 			//
 			//==================================
 			$scope.onPrePublish = function() {
-				return $scope.validate(false).then(function(hasError) {
+				return validate().then(function(hasError) {
 					if (hasError)
-						$scope.tab("review", true)
+						$scope.tab = "review";
 					return hasError;
 				});
 			}
