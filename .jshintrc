@@ -1,0 +1,12 @@
+{
+	"browser": true,
+	"smarttabs" : true,
+	"strict" : false,
+	"devel" : true,
+	"quotmark" : true,
+	"globals" : {
+		"angular" : true,
+		"require" : true,
+		"define" : true
+	}
+}
