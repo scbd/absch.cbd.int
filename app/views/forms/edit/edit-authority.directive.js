@@ -3,7 +3,7 @@ require('app').directive('editAuthority', [ "authHttp", "guid", "$filter", "Thes
 
 	return {
 		restrict   : 'EAC',
-		templateUrl: '/app/views/forms/edit/edit-authority.partial.html',
+		templateUrl: '/app/views/forms/edit/edit-authority.directive.html',
 		replace    : true,
 		transclude : false,
 		scope      : {},

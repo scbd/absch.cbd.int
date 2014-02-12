@@ -1,0 +1,41 @@
+﻿<div ng-cloak>
+
+	<style>legend {width: 98%;}</style>
+
+	<div class="alert alert-error" ng-show="error">
+		<strong>Error as occured...</strong>
+		<div>{{error}}</div>
+	</div>
+
+	<div ng-show="!error && internalDocument">
+		<div style="float:right">
+			<button  type="button" class="btn" ng-click="edit()" ng-show="user().isAuthenticated" ng-disabled="!canEdit()">Edit</button>
+		</div>
+
+		<div ng-switch on="internalDocument.header.schema">
+			<h1 ng-switch-when="focalPoint"				>National Focal Point</h1>
+			<h1 ng-switch-when="authority"				>Competent National Authority</h1>
+			<h1 ng-switch-when="contact"				>Contact</h1>
+			<h1 ng-switch-when="database"				>National Database</h1>
+			<h1 ng-switch-when="resource"				>Virtual Library Resource</h1>
+			<h1 ng-switch-when="organization"			>Organization</h1>
+			<h1 ng-switch-when="measure"				>National Regulation</h1>
+			<h1 ng-switch-when="absCheckpoint"      	>Checkpoint</h1>
+			<h1 ng-switch-when="absCheckpointCommunique">Checkpoint Communiqué</h1>
+			<h1 ng-switch-when="absPermit"				>Permit</h1>
+		</div>
+
+		<div ng-switch on="internalDocument.header.schema">
+			<div view-authority						ng-switch-when="authority"					ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
+			<div view-contact						ng-switch-when="contact"					ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
+			<div view-database						ng-switch-when="database"					ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
+			<div view-resource						ng-switch-when="resource"					ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
+			<div view-organization					ng-switch-when="organization"				ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
+			<div view-measure						ng-switch-when="measure"					ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
+			<div view-checkpoint					ng-switch-when="absCheckpoint"				ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
+			<div view-checkpoint-communique			ng-switch-when="absCheckpointCommunique"	ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
+			<div view-permit						ng-switch-when="absPermit"					ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
+			<div ng-switch-default>Unsupported internalSchema: '{{internalDocument.header.schema}}'</div>
+		</div>
+	</div>
+</div>

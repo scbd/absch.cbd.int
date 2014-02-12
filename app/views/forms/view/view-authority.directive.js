@@ -1,7 +1,7 @@
 require("app").directive('viewAuthority', [function () {
 	return {
 		restrict   : 'EAC',
-		templateUrl: '/app/views/forms/view/view-authority.partial.html',
+		templateUrl: '/app/views/forms/view/view-authority.directive.html',
 		replace    : true,
 		transclude : false,
 		scope: {
@@ -59,22 +59,6 @@ require("app").directive('viewAuthority', [function () {
 						});
 				});
 			}
-		}]
-	}
-}])
-
-require("app").directive('viewAuthorityReference', [function() {
-	return {
-		restrict: 'EAC',
-		templateUrl: '/app/views/forms/view/view-authority-reference.parital.html',
-		replace: true,
-		transclude: false,
-		scope: {
-			document: "=ngModel",
-			locale: "=",
-			target: "@linkTarget"
-		},
-		controller: ['$scope', function ($scope) {
 		}]
 	}
 }]);
