@@ -1,6 +1,4 @@
-<script src="/app/views/register.html.js"></script>
-
-<div ng-controller="FindController">
+<div ng-controller="RegisterController">
     
   <div class="category-container">
       <div class="container">
@@ -12,11 +10,12 @@
       <div class="row">
           <div class="col-md-3">
               <br />
+
               <a class="btn btn-lg btn-default btn-abs btn-all btn-commonformat" href="#" role="button">ALL RECORDS » </a>
-              <a class="btn btn-lg btn-primary btn-commonformat" href="#" role="button" style="z-index: 10; width: 120%;">ABS-CH MSR » <span class=" badge badge-attention">3</span> <span class="badge badge-published">3</span> <span class="badge badge-draft">3</span>
+              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="leftTab='measure'" ng-style="{ 'z-index' : (leftTab=='measure' ? '10' : undefined), 'width': (leftTab=='measure' ? '120%' : undefined) }" href="#" role="button">ABS-CH MSR » <span class=" badge badge-attention">3</span> <span class="badge badge-published">3</span> <span class="badge badge-draft">3</span>
                   <br>
                   <span class="btn-text">Law, regulations, guidelines, administrative and  policy measures</span> </a>
-              <a class="btn btn-lg btn-primary btn-commonformat" href="#" role="button">ABS-CH CNA »
+              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="leftTab='authority'" ng-style="{ 'z-index' : (leftTab=='authority' ? '10' : undefined), 'width': (leftTab=='authority' ? '120%' : undefined) }" href="#" role="button">ABS-CH CNA »
                   <br>
                   <span class="btn-text">Competent national authority</span> </a>
               <a class="btn btn-lg btn-primary btn-commonformat" href="#" role="button">ABS-CH IRCC »
@@ -41,7 +40,8 @@
                   <br>
                   <span class="btn-text">ABS National Website or Database</span> </a>
           </div>
-          <div class="col-md-9 well well-registerpage">
+
+          <div ng-show="leftTab=='measure'" class="col-md-9 well well-registerpage">
 
               <h2><span style="color: #428BCA; font-weight: bold;">ABS-CH MSR</span> Law, regulations, guidelines, administrative and policy measures</h2>
               This common format has been prepared for facilitating the submission of information on ABS legislative administrative and policy measures by Parties in order to comply with Article 14 (2) paragraph (a) of the Protocol. The format includes a list of ABS elements and the possibility of pointing out to the specific articles and section where the specific element is addressed.
@@ -51,7 +51,7 @@
                   <ul>
                       <li>Be sure you have first entered in all your contacts before starting this form</li>
                   </ul>
-                  <p><span class="btn btn-primary">Add New ABS-CH MSR</span> <span class="btn btn-default">Download offline ABS-CH MSR form</span></p>
+                  <p><a class="btn btn-primary">Add New ABS-CH MSR</a> <span class="btn btn-default">Download offline ABS-CH MSR form</span></p>
               </p>
               <br>
               <p>
@@ -69,6 +69,56 @@
                   </div>
               </p>
           </div>
+
+
+          <div ng-show="leftTab=='authority'" class="col-md-9 well well-registerpage">
+
+              <h2><span style="color: #428BCA; font-weight: bold;">ABS-CH CNA</span> TODO 1</h2> 
+
+              <p ng-hide="editing">
+                TODO 2
+              </p>
+
+              <div ng-hide="editing">
+
+                  <h3 style="border-bottom: 1px solid #333;">Add new record</h3>
+
+                  <h4 style="color: #D8534F; font-weight: bold;">Prerequisites:</h4>
+
+                  <ul>
+                      <li>Be sure you have first entered in all your contacts before starting this form</li>
+                  </ul>
+
+                  <p><a ng-click="edit('authority', null)" class="btn btn-primary">Add New ABS-CH CNA</a> <span class="btn btn-default">Download offline ABS-CH MSR form</span></p>
+
+              </div>
+
+              <div ng-show="editing" edit-authority></div>
+
+              <div ng-hide="editing">
+
+                  <h3 style="border-bottom: 1px solid #333;">Existing records</h3>
+                  <div class="copntainer">
+                      <div class="row" style="background-color: #333; padding: 5px; margin-left: 0px;">
+                          <div class="col-md-1 text-center"><span style="font-size: 16px; color: white;">FILTERS</span></div>
+                          <div class="col-md-2 text-center"><span class="btn btn-info">All <span class="badge badge-default">14</span></span></div>
+                          <div class="col-md-2 text-center"><span class="btn btn-danger">Requests <span class="badge badge-default">3</span></span></div>
+                          <div class="col-md-2 text-center"><span class="btn btn-success">Published  <span class="badge badge-default">3</span></span></div>
+                          <div class="col-md-2 text-center"><span class="btn btn-warning">Draft  <span class="badge badge-default">3</span></span></div>
+                          <div class="col-md-3 text-center">
+                              <input type="text" placeholder=" Keyword " class="form-control keyword" style="height: 34px; margin-top: 5px; width: 160px;"></div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
       </div>
   </div>
 </div>
+
+<script src="/app/views/register.html.js"></script>
+<script src="/app/js/directives/forms/form-controls.js"></script>
+<script src="/app/views/forms/edit/editFormUtility.js"></script>
+
+<script src="/app/views/forms/view/view-authority.directive.js"></script>
+<script src="/app/views/forms/edit/edit-authority.directive.js"></script>

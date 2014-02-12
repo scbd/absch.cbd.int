@@ -14,7 +14,6 @@ define(['app', 'authentication', 'services', 'filters', 'storage', 'workflows'],
             when('/',                           { templateUrl: '/app/views/index.html'                      , resolve: { user: resolveUser }}).
             when('/find',                       { templateUrl: '/app/views/find.html'                       , resolve: { user: resolveUser }}).
             when('/register',                   { templateUrl: '/app/views/register.html'                   , resolve: { user: resolveUser }}).
-            when('/register/authority/:uid?',   { templateUrl: '/app/views/forms/edit/edit-authority.html'  , resolve: { user: resolveUser }}).
             when('/profiles',                   { templateUrl: '/app/views/profiles.html'                   , resolve: { user: resolveUser }}).
             when('/database/records/:id',        { templateUrl: '/app/views/forms/view/records-id.html'     , resolve: { user: resolveUser }}).
             otherwise({redirectTo:'/help/404'});

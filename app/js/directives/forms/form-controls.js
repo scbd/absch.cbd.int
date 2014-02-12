@@ -1750,7 +1750,7 @@ require('app').directive('kmDate', [function ()
 //
 //
 //============================================================
-require('app').directive('kmFormStdButtons', ["$q", function ($q)
+require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $timeout)
 {
 	return {
 		restrict: 'EAC',
@@ -1758,17 +1758,7 @@ require('app').directive('kmFormStdButtons', ["$q", function ($q)
 		replace: true,
 		transclude: true,
 		scope: {
-			getDocumentFn     : '&document',
-			onPreCloseFn      : "&onPreClose",
-			onPostCloseFn     : "&onPostClose",
-			onPreRevertFn     : "&onPreRevert",
-			onPostRevertFn    : "&onPostRevert",
-			onPreSaveDraftFn  : "&onPreSaveDraft",
-			onPostSaveDraftFn : "&onPostSaveDraft",
-			onPrePublishFn    : "&onPrePublish",
-			onPostPublishFn   : "&onPostPublish",
-			onPostWorkflowFn  : "&onPostWorkflow",
-			onErrorFn: "&onError"
+			getDocumentFn : '&document'
 		},
 		link: function ($scope, $element) 
 		{
@@ -1819,7 +1809,7 @@ require('app').directive('kmFormStdButtons', ["$q", function ($q)
 
 			qSaveDialog.on('shown.bs.modal' ,function() {
 
-				$scope.safeApply(function(){
+				$timeout(function(){
 
 					var promise = null;
 					while((promise=$scope.saveDialogDefered.pop()))
@@ -1829,7 +1819,7 @@ require('app').directive('kmFormStdButtons', ["$q", function ($q)
 
 			qSaveDialog.on('hidden.bs.modal' ,function() {
 				
-				$scope.safeApply(function(){
+				$timeout(function(){
 
 					var promise = null;
 					while((promise=$scope.saveDialogDefered.pop()))
@@ -1839,7 +1829,7 @@ require('app').directive('kmFormStdButtons', ["$q", function ($q)
 
 			qCancelDialog.on('shown.bs.modal' ,function() {
 				
-				$scope.safeApply(function(){
+				$timeout(function(){
 
 					var promise = null;
 					while((promise=$scope.cancelDialogDefered.pop()))
@@ -1849,7 +1839,7 @@ require('app').directive('kmFormStdButtons', ["$q", function ($q)
 
 			qCancelDialog.on('hidden.bs.modal' ,function() {
 
-				$scope.safeApply(function(){
+				$timeout(function(){
 
 					var promise = null;
 					while((promise=$scope.cancelDialogDefered.pop()))
@@ -1859,22 +1849,6 @@ require('app').directive('kmFormStdButtons', ["$q", function ($q)
 		},
 		controller: ["$scope", "IStorage", "editFormUtility", function ($scope, storage, editFormUtility) 
 		{
-			//====================
-			//
-			//====================
-			$scope.safeApply = function(fn)
-			{
-				var phase = this.$root.$$phase;
-
-				if (phase == '$apply' || phase == '$digest') {
-					if (fn && (typeof (fn) === 'function')) {
-						fn();
-					}
-				} else {
-					this.$apply(fn);
-				}
-			};
-
 			//====================
 			//
 			//====================
@@ -1919,33 +1893,36 @@ require('app').directive('kmFormStdButtons', ["$q", function ($q)
 			//====================
 			$scope.publish = function()
 			{
-				$q.when($scope.onPrePublishFn()).then(function(result) {
-				
-					return $scope.closeDialog().then(function() { 
-						return result;
-					});
+				var qDocument = $scope.getDocumentFn();
+				var qReport   = validate(qDocument);
 
-				}).then(function(canceled) {
+				return $q.all([qDocument, qReport]).then(function(results) {
 
-					if(canceled)
-						return;
-
-					var document = $scope.getDocumentFn();
+					var document         = results[0];
+					var validationReport = results[1];
 
 					if(!document)
 						throw "Invalid document";
 
-					return editFormUtility.publish(document).then(function(documentInfo) {
+					//Has validation errors ?
+					if(validationReport && validationReport.errors && validationReport.errors.length>0) { 
+						
+						$scope.$emit("documentInvalid", validationReport);
+					}
+					else return $q.when(editFormUtility.publish(document)).then(function(documentInfo) {
 
-						$scope.onPostPublishFn({ data: documentInfo });
+						$scope.$emit("documentPublished", documentInfo, document)
 
 						return documentInfo;
-					});
 
+					});						
 				}).catch(function(error){
-					
-					$scope.onErrorFn({ action: "publish", error: error });
-					$scope.closeDialog();
+
+					$scope.$emit("documentError", { action: "publish", error: error })
+
+				}).finally(function(){
+
+					return $scope.closeDialog();
 
 				});
 			};
@@ -1955,33 +1932,36 @@ require('app').directive('kmFormStdButtons', ["$q", function ($q)
 			//====================
 			$scope.publishRequest = function()
 			{
-				$q.when($scope.onPrePublishFn()).then(function(result) {
-				
-					return $scope.closeDialog().then(function() { 
-						return result;
-					});
+				var qDocument = $scope.getDocumentFn();
+				var qReport   = validate(qDocument);
 
-				}).then(function(canceled) {
+				return $q.all([qDocument, qReport]).then(function(results) {
 
-					if(canceled)
-						return;
-
-					var document = $scope.getDocumentFn();
+					var document         = results[0];
+					var validationReport = results[1];
 
 					if(!document)
 						throw "Invalid document";
 
-					return editFormUtility.publishRequest(document).then(function(workflowInfo) {
+					//Has validation errors ?
+					if(validationReport && validationReport.errors && validationReport.errors.length>0) { 
+						
+						$scope.$emit("documentInvalid", validationReport);
+					}
+					else return $q.when(editFormUtility.publishRequest(document)).then(function(workflowInfo) {
 
-						$scope.onPostWorkflowFn({ data: workflowInfo });
+						$scope.$emit("documentPublishRequested", workflowInfo, document)
 
 						return workflowInfo;
-					});
-
+						
+					});						
 				}).catch(function(error){
-					
-					$scope.onErrorFn({ action: "publishRequest", error: error });
-					$scope.closeDialog();
+
+					$scope.$emit("documentError", { action: "publishRequest", error: error })
+
+				}).finally(function(){
+
+					return $scope.closeDialog();
 
 				});
 			};
@@ -1991,26 +1971,27 @@ require('app').directive('kmFormStdButtons', ["$q", function ($q)
 			//====================
 			$scope.saveDraft = function()
 			{
-				$q.when($scope.onPreSaveDraftFn()).then(function(result) {
-				
-					return $scope.closeDialog().then(function() { 
-						return result;
-					});
-				}).then(function(cancel) {
-					if(cancel)
-						return;
-
-					var document = $scope.getDocumentFn();
-
+				return $q.when($scope.getDocumentFn()).then(function(document)
+				{
 					if(!document)
 						throw "Invalid document";
 
-					return editFormUtility.saveDraft(document).then(function(draftInfo) {
-						$scope.onPostSaveDraftFn({ data: draftInfo });
-					});
+					return editFormUtility.saveDraft(document);
+
+				}).then(function(draftInfo) {
+
+					$scope.$emit("documentDraftSaved", draftInfo)
+
+					return draftInfo;
+
 				}).catch(function(error){
-					$scope.onErrorFn({ action: "saveDraft", error: error });
-					$scope.closeDialog();
+					
+					$scope.$emit("documentError", { action: "saveDraft", error: error })
+
+				}).finally(function(){
+
+					return $scope.closeDialog();
+
 				});
 			};
 
@@ -2019,22 +2000,38 @@ require('app').directive('kmFormStdButtons', ["$q", function ($q)
 			//====================
 			$scope.close = function()
 			{
-				$q.when($scope.onPreCloseFn()).then(function(result) {
-				
-					return $scope.closeDialog().then(function() { 
-						return result;
-					});
-				}).then(function(result) {
-						if(result)
-							return;
+				return $scope.closeDialog().then(function() {
 
-						$scope.onPostCloseFn();
+					$scope.$emit("documentClosed")
 
-				}).then(null, function(error){
-					$scope.onErrorFn({ action: "close", error: error });
-					$scope.closeDialog();
+				}).catch(function(error){
+					
+					$scope.$emit("documentError", { action: "close", error: error })
+
+				}).finally(function(){
+
+					return $scope.closeDialog();
+
 				});
 			};
+
+			//====================
+			//
+			//====================
+			function validate(document) {
+
+				return $q.when(document).then(function(document){
+
+					if(!document)
+						throw "Invalid document";
+
+					return storage.documents.validate(document);
+
+				}).then(function(result) {
+				
+					return result.data || result;
+				});
+			}
 
 			//====================
 			//
@@ -2053,15 +2050,6 @@ require('app').directive('kmFormStdButtons', ["$q", function ($q)
 			$scope.closeDialog = function() 
 			{
 				return $q.all([$scope.showSaveDialog(false), $scope.showCancelDialog(false)]);
-			};
-
-			//====================
-			//
-			//====================
-			$scope.clone = function(data)
-			{
-				if(data)
-					return angular.fromJson(angular.toJson(data));
 			};
 		}]
 	};
