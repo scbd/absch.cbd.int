@@ -220,6 +220,18 @@ border-radius: 3px;
 	display:inline;
 	color:#ddd;
 }
+
+.main-side-link > .account > li > a{
+	color:#287FCB;
+	font-size: 120%;
+}
+.main-side-link > .account > li > a:hover, a:focus{
+	color:black;
+	text-decoration: none;
+}
+
+
+
 .main-side-link > .secondary {
 	margin:0;
 	padding: 5px 0 0 15px;
@@ -337,17 +349,16 @@ padding-bottom: 3px;
 
 .dropdown-menu {
 	position: absolute;
-	top: 26px;
-	right: 120px!important;
+	top: 37px;
+	left: 125px!important;
 	z-index: 1000;
 	display: none;
-	float: left;
 	min-width: 160px;
 	padding: 3px 0;
 	margin: 2px 0 0;
 	font-size: 11px;
 	list-style: none;
-	background-color: #ffffff;
+	background-color: #dfdfdf;
 	border: 1px solid #cccccc;
 	border: 1px solid rgba(0, 0, 0, 0.15);
 	border-radius: 4px;
@@ -394,14 +405,11 @@ padding-bottom: 3px;
 	color:#FFF;
 }
 
-.footer-title{
-	padding-bottom: 20px;
-}
 
 footer .copyright {
   margin-top: 10px;
   padding-top: 15px;
-  border-top: 1px solid #949ca1;
+  border-top: 3px solid #ddd;
 }
 footer .copyright .logorow {
   margin: 0;
@@ -410,7 +418,7 @@ footer .copyright .logorow {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   font-size: 12px;
-  color: #949ca1;
+  color: #FFF;
 }
 footer .logo {
   margin-bottom: 10px;
