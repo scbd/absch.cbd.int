@@ -44,17 +44,23 @@
           <div ng-show="leftTab=='measure'" class="col-md-9 well well-registerpage">
 
               <h2><span style="color: #428BCA; font-weight: bold;">ABS-CH MSR</span> Law, regulations, guidelines, administrative and policy measures</h2>
-              This common format has been prepared for facilitating the submission of information on ABS legislative administrative and policy measures by Parties in order to comply with Article 14 (2) paragraph (a) of the Protocol. The format includes a list of ABS elements and the possibility of pointing out to the specific articles and section where the specific element is addressed.
-              <p>
+  
+              <p ng-hide="editing">
+                This common format has been prepared for facilitating the submission of information on ABS legislative administrative and policy measures by Parties in order to comply with Article 14 (2) paragraph (a) of the Protocol. The format includes a list of ABS elements and the possibility of pointing out to the specific articles and section where the specific element is addressed.
+              </p>
+
+              <div ng-hide="editing">
                   <h3 style="border-bottom: 1px solid #333;">Add new record</h3>
                   <h4 style="color: #D8534F; font-weight: bold;">Prerequisites:</h4>
                   <ul>
                       <li>Be sure you have first entered in all your contacts before starting this form</li>
                   </ul>
-                  <p><a class="btn btn-primary">Add New ABS-CH MSR</a> <span class="btn btn-default">Download offline ABS-CH MSR form</span></p>
-              </p>
-              <br>
-              <p>
+                  <p><a ng-click="edit('measure', null)" class="btn btn-primary">Add New ABS-CH MSR</a> <span class="btn btn-default">Download offline ABS-CH MSR form</span></p>
+              </div>
+
+              <div ng-show="editing" edit-measure></div>
+
+              <div ng-hide="editing">
                   <h3 style="border-bottom: 1px solid #333;">Existing records</h3>
                   <div class="copntainer">
                       <div class="row" style="background-color: #333; padding: 5px; margin-left: 0px;">
@@ -67,7 +73,7 @@
                               <input type="text" placeholder=" Keyword " class="form-control keyword" style="height: 34px; margin-top: 5px; width: 160px;"></div>
                       </div>
                   </div>
-              </p>
+              </div>
           </div>
 
 
@@ -122,3 +128,5 @@
 
 <script src="/app/views/forms/view/view-authority.directive.js"></script>
 <script src="/app/views/forms/edit/edit-authority.directive.js"></script>
+<script src="/app/views/forms/view/view-measure.directive.js"></script>
+<script src="/app/views/forms/edit/edit-measure.directive.js"></script>
