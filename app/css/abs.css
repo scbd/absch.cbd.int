@@ -454,7 +454,7 @@ padding: 10px 10px 10px 10px;
 	padding-top:0px;
 	padding-left:60px;
 	margin-right:10px;
-	z-index: 5;
+/*	z-index: 5;   */ /* FIX boostrap backdrop*/
 	position: relative;
 	margin: 0;
 	background-color:#ddd;
