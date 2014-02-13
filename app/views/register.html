@@ -12,10 +12,10 @@
               <br />
 
               <a class="btn btn-lg btn-default btn-abs btn-all btn-commonformat" href="#" role="button">ALL RECORDS » </a>
-              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="leftTab='measure'" ng-style="{ 'z-index' : (leftTab=='measure' ? '10' : undefined), 'width': (leftTab=='measure' ? '120%' : undefined) }" href="#" role="button">ABS-CH MSR » <span class=" badge badge-attention">3</span> <span class="badge badge-published">3</span> <span class="badge badge-draft">3</span>
+              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('measure')" ng-style="{ 'z-index' : (tab()=='measure' ? '10' : undefined), 'width': (tab()=='measure' ? '120%' : undefined) }" href="#" role="button">ABS-CH MSR » <span class=" badge badge-attention">3</span> <span class="badge badge-published">3</span> <span class="badge badge-draft">3</span>
                   <br>
                   <span class="btn-text">Law, regulations, guidelines, administrative and  policy measures</span> </a>
-              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="leftTab='authority'" ng-style="{ 'z-index' : (leftTab=='authority' ? '10' : undefined), 'width': (leftTab=='authority' ? '120%' : undefined) }" href="#" role="button">ABS-CH CNA »
+              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('authority')" ng-style="{ 'z-index' : (tab()=='authority' ? '10' : undefined), 'width': (tab()=='authority' ? '120%' : undefined) }" href="#" role="button">ABS-CH CNA »
                   <br>
                   <span class="btn-text">Competent national authority</span> </a>
               <a class="btn btn-lg btn-primary btn-commonformat" href="#" role="button">ABS-CH IRCC »
@@ -41,7 +41,7 @@
                   <span class="btn-text">ABS National Website or Database</span> </a>
           </div>
 
-          <div ng-show="leftTab=='measure'" class="col-md-9 well well-registerpage">
+          <div ng-show="tab()=='measure'" class="col-md-9 well well-registerpage">
 
               <h2><span style="color: #428BCA; font-weight: bold;">ABS-CH MSR</span> Law, regulations, guidelines, administrative and policy measures</h2>
   
@@ -77,7 +77,7 @@
           </div>
 
 
-          <div ng-show="leftTab=='authority'" class="col-md-9 well well-registerpage">
+          <div ng-show="tab()=='authority'" class="col-md-9 well well-registerpage">
 
               <h2><span style="color: #428BCA; font-weight: bold;">ABS-CH CNA</span> TODO 1</h2> 
 

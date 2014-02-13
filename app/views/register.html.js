@@ -1,8 +1,24 @@
 "use strict";
-require("app").controller("RegisterController", ["$scope", function ($scope) {
+require("app").controller("RegisterController", ["$scope", "$window", function ($scope, $window) {
 
-	$scope.leftTab = "authority";
+	var leftTab = "measure";
 	$scope.editing = false;
+
+	//============================================================
+	//
+	// 
+	//
+	//============================================================
+	$scope.tab = function(newTab) {
+
+		if(!newTab)
+			return leftTab;
+
+		if(canSwitch())
+			leftTab = newTab;
+
+		return leftTab;
+	};
 
 	//============================================================
 	//
@@ -11,12 +27,15 @@ require("app").controller("RegisterController", ["$scope", function ($scope) {
 	//============================================================
 	$scope.edit = function(schema, identifier) {
 
+		if(!canSwitch())
+			return;
+
 		$scope.$broadcast("loadDocument", {
 			schema : schema,
 			identifier : identifier
 		});
 
-		$scope.leftTab = schema;
+		leftTab = schema;
 		$scope.editing = true;
 	};
 
@@ -69,4 +88,32 @@ require("app").controller("RegisterController", ["$scope", function ($scope) {
 		$scope.editing = false;
 
 	});
+
+	//============================================================
+	//
+	//
+	//
+	//============================================================
+	$scope.$on('$locationChangeStart', function(evt, next, current) {
+
+		console.log("locationChangeStart", $scope.editing, evt)
+
+		if(canSwitch()) {
+			evt.preventDefault();
+		}
+	});
+
+	//============================================================
+	//
+	//
+	//
+	//============================================================
+	function canSwitch() {
+
+		if(!$scope.editing || $window.confirm("Are you sure you want to leave this form and lost your changes?")) {
+			$scope.editing = false;
+		}
+
+		return !$scope.editing;
+	}
 }]);
