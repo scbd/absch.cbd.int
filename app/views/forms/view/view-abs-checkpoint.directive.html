@@ -1,0 +1,69 @@
+﻿<div>
+	<h2>{{document.name | lstring:locale}}</h2>
+
+	<div ng-show="document.government">
+		<label>Country</label>
+		<div class="km-value">
+			<span km-terms ng-model="document.government">
+				<span ng-repeat="term in terms">{{term.name}} </span>
+			</span>
+		</div>
+	</div>
+
+	<div ng-show="document.responsibilities || document.jurisdiction ||
+		document.jurisdictionName">
+		<legend>Responsibilities</legend>
+		<div ng-show="document.responsibilities">
+			<label>Short description of responsibilities</label>
+			<div class="km-value km-pre">{{document.responsibilities | lstring:locale}}</div>
+		</div>
+		<div ng-show="document.jurisdiction">
+			<label>Area of Jurisdiction</label>
+			<ul class="km-value" km-terms ng-model="document.jurisdiction">
+				<li ng-repeat="term in terms">{{term.name}} </li>
+			</ul>
+		</div>
+		<div ng-show="document.jurisdictionName">
+			<label>Name of the sub-national jurisdiction</label>
+			<div class="km-value">{{document.jurisdictionName | lstring:locale}}</div>
+		</div>
+	</div>
+
+	<div ng-show="document.authoritiesToInform || document.informAllAuthorities">
+		<legend>National authority/ies</legend>
+		<label>National authority/ies to be informed through e-mail</label>
+		<div class="km-value" ng-show="document.informAllAuthorities">
+			<span >Inform all national CNAs</span>
+		</div>
+
+		<div ng-show="document.authoritiesToInform">
+			<div class="km-value" ng-repeat="authority in authoritiesToInform">
+				<div class="cbdViewAuthorityReference" ng-model="authority.document" locale="locale"></div>
+			</div>
+		</div>
+	</div>
+
+	<div ng-show="contactsToInform">
+		<label>Additional National Authorities</label>
+		<div class="km-value" ng-repeat="contact in contactsToInform">
+			<div class="cbdViewContactReference" ng-model="contact.document" locale="locale"></div>
+		</div>
+	</div>
+
+	<div ng-show="document.relevantInformation||document.relevantDocuments">
+		<legend>Additional Information</legend>
+
+		<div ng-show="document.relevantInformation">
+			<div class="km-value" ng-bind-html-unsafe="document.relevantInformation | lstring:locale | markdown"></div>
+		</div>
+
+		<div ng-show="document.relevantDocuments">
+			<label>Other relevant website address or attached documents</label>
+			<div class="km-value" ng-repeat="item in document.relevantDocuments">
+				<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+				<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+			</div>
+		</div>`
+	</div>
+
+</div>
