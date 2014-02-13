@@ -1,7 +1,7 @@
-require("app").directive('viewAuthority', [function () {
+require("app").directive("viewAuthority", [function () {
 	return {
-		restrict   : 'EAC',
-		templateUrl: '/app/views/forms/view/view-authority.directive.html',
+		restrict   : "EAC",
+		templateUrl: "/app/views/forms/view/view-authority.directive.html",
 		replace    : true,
 		transclude : false,
 		scope: {
@@ -14,14 +14,14 @@ require("app").directive('viewAuthority', [function () {
 		{
 			$scope.contacts = undefined;
 		},
-		controller : ['$scope', "IStorage", function ($scope, storage) 
+		controller : ["$scope", "IStorage", function ($scope, storage)
 		{
 			//====================
 			//
 			//====================
 			$scope.$watch("document.contacts", function(_new)
 			{
-				$scope.contacts = angular.fromJson(angular.toJson(_new||[]))
+				$scope.contacts = angular.fromJson(angular.toJson(_new||[]));
 
 				if($scope.contacts)
 					$scope.loadReferences($scope.contacts);
@@ -45,7 +45,7 @@ require("app").directive('viewAuthority', [function () {
 									.success(function(data){
 										ref.document = data;
 									})
-									.error(function(draftError, draftCode){
+									.error(function(){
 										ref.document  = undefined;
 										ref.error     = error;
 										ref.errorCode = code;
@@ -58,7 +58,7 @@ require("app").directive('viewAuthority', [function () {
 
 						});
 				});
-			}
+			};
 		}]
-	}
+	};
 }]);

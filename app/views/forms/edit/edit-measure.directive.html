@@ -318,11 +318,11 @@
 
             <div km-document-validation ng-model="validationReport"></div>
 
-            <div class="btn-group" ng-show="document.header.languages.length>1">
+            <div class="btn-group" ng-show="reviewDocument.header.languages.length>1">
                 <input type="button" class="btn" ng-class="{'active' : review.locale==locale, 'btn-info' : review.locale==locale}" ng-repeat="locale in document.header.languages" ng-click="$parent.review.locale = locale" value="{{locale | uppercase}}" />
             </div>
 
-            <div view-measure ng-model="document" locale="review.locale" allow-drafts="true"></div>
+            <div view-measure ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></div>
 
 		</div>
 
