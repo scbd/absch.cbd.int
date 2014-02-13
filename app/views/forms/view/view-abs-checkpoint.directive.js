@@ -15,12 +15,12 @@ require("app").directive("viewAbsCheckpoint", [function () {
 		{
 			$scope.contacts = undefined;
 		},
-		controller : ["$scope", "IStorage", function ($scope, storage) 
+		controller : ["$scope", "IStorage", function ($scope, storage)
 		{
 			//====================
 			//
 			//====================
-			$scope.$watch("document.contacts", function(_new)
+			$scope.$watch("document.contacts", function()
 			{
 				if ($scope.document) {
 					$scope.contacts = angular.fromJson(angular.toJson($scope.document.contacts));
@@ -33,7 +33,7 @@ require("app").directive("viewAbsCheckpoint", [function () {
 			//====================
 			//
 			//====================
-			$scope.$watch("document.authoritiesToInform", function (_new) {
+			$scope.$watch("document.authoritiesToInform", function () {
 				if ($scope.document) {
 					$scope.authoritiesToInform = angular.fromJson(angular.toJson($scope.document.authoritiesToInform));
 
@@ -45,7 +45,7 @@ require("app").directive("viewAbsCheckpoint", [function () {
 			//====================
 			//
 			//====================
-			$scope.$watch("document.contactsToInform", function (_new) {
+			$scope.$watch("document.contactsToInform", function () {
 				if ($scope.document) {
 					$scope.contactsToInform = angular.fromJson(angular.toJson($scope.document.contactsToInform));
 
@@ -72,7 +72,7 @@ require("app").directive("viewAbsCheckpoint", [function () {
 									.success(function(data){
 										ref.document = data;
 									})
-									.error(function(draftError, draftCode){
+									.error(function(){
 										ref.document  = undefined;
 										ref.error     = error;
 										ref.errorCode = code;

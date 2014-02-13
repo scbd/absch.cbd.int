@@ -1,8 +1,8 @@
-require("app").directive("editAbsCheckpoint", [ function () {
+require("app").directive("editAbsCheckpointCommunique", [ function () {
 
 	return {
 		restrict   : "EAC",
-		templateUrl: "/app/views/forms/edit/edit-abs-checkpoint.directive.html",
+		templateUrl: "/app/views/forms/edit/edit-abs-checkpoint-communique.directive.html",
 		replace    : true,
 		transclude : false,
 		scope      : {},
@@ -13,9 +13,22 @@ require("app").directive("editAbsCheckpoint", [ function () {
 			$scope.document = null;
 			$scope.review   = { locale : "en" };
 			$scope.options  = {
-				countries		: function () { return $http.get("/api/v2013/thesaurus/domains/countries/terms",							{ cache: true }).then(function(o){ return $filter("orderBy")(o.data, "name"); }); },
-				jurisdictions	: function () { return $http.get("/api/v2013/thesaurus/domains/D7BD5BDE-A6B9-4261-B788-16839CCC4F7E/terms",	{ cache: true }).then(function(o){ return o.data; }); }
+				countries		: function () { return $http.get("/api/v2013/thesaurus/domains/countries/terms", { cache: true }).then(function (o) { return $filter("orderBy")(o.data, "name"); }); },
+				permits			: [
+					{
+						identifier: "ABSCH-BA-156951-X",
+						title : { en:"ABSCH-BA-156951-X" }
+					},
+					{
+						identifier: "ABSCH-BA-155971-X",
+						title : { en:"ABSCH-BA-155971-X" }
+					},
+					{
+						identifier: "ABSCH-BA-997431-X",
+						title : { en:"ABSCH-BA-997431-X" }
+					}]
 			};
+
 
 			//==================================
 			//
@@ -27,13 +40,13 @@ require("app").directive("editAbsCheckpoint", [ function () {
 				var qDocument = null;
 
 				if(identifier) {
-					qDocument = editFormUtility.load(identifier, "absCheckpoint");
+					qDocument = editFormUtility.load(identifier, "absCheckpointCommunique");
 				}
 				else {
 					qDocument = {
 						header: {
 							identifier: guid(),
-							schema   : "absCheckpoint",
+							schema   : "absCheckpointCommunique",
 							languages: ["en"]
 						},
 						government: $scope.userGovernment() ? { identifier: $scope.userGovernment() } : undefined
@@ -60,7 +73,7 @@ require("app").directive("editAbsCheckpoint", [ function () {
 			//==================================
 			$scope.$on("loadDocument", function(evt, info) {
 
-				if(info.schema!="absCheckpoint")
+				if(info.schema!="absCheckpointCommunique")
 					return;
 
 				load(info.identifier);
@@ -84,6 +97,28 @@ require("app").directive("editAbsCheckpoint", [ function () {
 			//==================================
 			//
 			//==================================
+			$scope.$watch("document.gisFiles", function () {
+
+				var qLinks = [];
+				var qGis = [];
+
+				if ($scope.document)
+					qLinks = $scope.document.gisFiles || [];
+
+				/* global L: true */ // JSHint for leaflet
+
+				angular.forEach(qLinks, function (link) {
+					qGis.push($http.get(link.url).then(function (res) { return L.geoJson(res.data); }));
+				});
+
+				$q.all(qGis).then(function (layers) {
+					$scope.gisLayer = layers;
+				});
+			});
+
+			//==================================
+			//
+			//==================================
 			$scope.getCleanDocument = function(document) {
 
 				document = document || $scope.document;
@@ -93,11 +128,21 @@ require("app").directive("editAbsCheckpoint", [ function () {
 
 				document = angular.fromJson(angular.toJson(document));
 
-				if (!$scope.isSubNational(document) || !$scope.isCommunity(document)) {
-					document.jurisdictionName = undefined;
+				if (document.permitNotAvailable===true) {
+					document.permit = undefined;
 				}
-				if (document.informAllAuthorities !== false) {
-					document.authoritiesToInform = undefined;
+				else {
+					document.originCountries			= undefined;
+					document.responsibleAuthority		= undefined;
+					document.subjectMatter				= undefined;
+					document.specimen					= undefined;
+					document.taxonomy					= undefined;
+					document.gisFiles					= undefined;
+					document.gisMapCenter				= undefined;
+					document.geneticRessourceUsers		= undefined;
+					document.referenceOfInformedConsent = undefined;
+					document.referenceOfAgreedTerms		= undefined;
+					document.personeToWhomGranted		= undefined;
 				}
 
 				if (/^\s*$/g.test(document.notes))
@@ -153,34 +198,11 @@ require("app").directive("editAbsCheckpoint", [ function () {
 			//
 			//==================================
 			$scope.isFieldValid = function (field) {
+
 				if (field && $scope.validationReport && $scope.validationReport.errors)
 					return !Enumerable.from($scope.validationReport.errors).any(function (x) { return x.property == field; });
 
 				return true;
-			};
-
-			//==================================
-			//
-			//==================================
-			$scope.isSubNational = function(document) {
-
-				document = document || $scope.document;
-
-				return document &&
-					   document.jurisdiction &&
-					   document.jurisdiction.identifier == "DEBB019D-8647-40EC-8AE5-10CA88572F6E";
-			};
-
-			//==================================
-			//
-			//==================================
-			$scope.isCommunity = function (document) {
-
-				document = document || $scope.document;
-
-				return document &&
-					   document.jurisdiction &&
-					   document.jurisdiction.identifier == "DEEEDB35-A34B-4755-BF77-D713017195E3";
 			};
 
 			//==================================
@@ -226,7 +248,7 @@ require("app").directive("editAbsCheckpoint", [ function () {
 										  function(e) { deferred.reject (e);});
 							}
 							else {
-								deferred.reject(e);
+								deferred.reject (e);
 							}
 						});
 					return deferred.promise;
@@ -243,6 +265,16 @@ require("app").directive("editAbsCheckpoint", [ function () {
 												.union(results[1].data.Items, "$.identifier");
 						return qResult.toArray();
 					});
+			};
+
+			//==================================
+			//
+			//==================================
+			$scope.isPermitNotAvailable = function (document) {
+				document = document || $scope.document;
+
+				return document &&
+					   document.permitNotAvailable;
 			};
 		}]
 	};
