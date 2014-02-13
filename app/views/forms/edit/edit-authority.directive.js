@@ -1,5 +1,5 @@
 
-require("app").directive("editAuthority", [ "authHttp", "guid", "$filter", "Thesaurus", function ($http, guid, $filter, thesaurus) {
+require("app").directive("editAuthority", [function () {
 
 	return {
 		restrict   : "EAC",
@@ -7,8 +7,9 @@ require("app").directive("editAuthority", [ "authHttp", "guid", "$filter", "Thes
 		replace    : true,
 		transclude : false,
 		scope      : {},
-		link : function($scope)
+		controller : ["$scope", "authHttp", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage", "authentication", "Enumerable", "editFormUtility", function ($scope, $http, guid, $filter, thesaurus, $q, $location, storage, authentication, Enumerable, editFormUtility)
 		{
+
 			$scope.status   = "";
 			$scope.error    = null;
 			$scope.document = null;
@@ -26,9 +27,7 @@ require("app").directive("editAuthority", [ "authHttp", "guid", "$filter", "Thes
 				cpbOrganismTypes			: function () { return $http.get("/api/v2013/thesaurus/domains/TypeOfOrganisms/terms",      { cache: true }).then(function (o) { return o.data; }); },
 				absFunctions				: function () { return $http.get("/api/v2013/thesaurus/domains/8102E184-E282-47F7-A49F-4C219B0EE235/terms", { cache: true }).then(function (o) { return o.data; }); },
 			};
-		},
-		controller : ["$scope", "$q", "$location", "$route", "IStorage", "authentication", "Enumerable", "editFormUtility", function ($scope, $q, $location, $route, storage, authentication, Enumerable, editFormUtility)
-		{
+
 			//==================================
 			//
 			//==================================
@@ -162,16 +161,13 @@ require("app").directive("editAuthority", [ "authHttp", "guid", "$filter", "Thes
 			//==================================
 			$scope.$watch("tab", function(tab) {
 
-				if(!tab)
-					return;
-
 				if(tab == "help")           { $scope.prevTab = "help";           $scope.nextTab = "edit"; }
 				if(tab == "edit")           { $scope.prevTab = "help";           $scope.nextTab = "absch"; }
 				if(tab == "absch")          { $scope.prevTab = "edit";           $scope.nextTab = "additionalInfo"; }
 				if(tab == "additionalInfo") { $scope.prevTab = "absch";          $scope.nextTab = "review"; }
 				if(tab == "review")         { $scope.prevTab = "additionalInfo"; $scope.nextTab = "review"; }
-
-				if (tab == "review")
+				
+				if(tab == "review")
 					validate();
 			});
 
