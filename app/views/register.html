@@ -1,4 +1,11 @@
 <div ng-controller="RegisterController">
+
+<style type="text/css">
+  a.tab-selected {
+    z-index :10;
+    width:120%;
+  }
+</style>
     
   <div class="category-container">
       <div class="container">
@@ -12,13 +19,13 @@
               <br />
 
               <a class="btn btn-lg btn-default btn-abs btn-all btn-commonformat" href="#" role="button">ALL RECORDS » </a>
-              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('measure')" ng-style="{ 'z-index' : (tab()=='measure' ? '10' : undefined), 'width': (tab()=='measure' ? '120%' : undefined) }" href="#" role="button">ABS-CH MSR » <span class=" badge badge-attention">3</span> <span class="badge badge-published">3</span> <span class="badge badge-draft">3</span>
+              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('measure')" ng-class="{ 'tab-selected' : tab()=='measure'}" href="#" role="button">ABS-CH MSR » <span class=" badge badge-attention">3</span> <span class="badge badge-published">3</span> <span class="badge badge-draft">3</span>
                   <br>
                   <span class="btn-text">Law, regulations, guidelines, administrative and  policy measures</span> </a>
-              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('authority')" ng-style="{ 'z-index' : (tab()=='authority' ? '10' : undefined), 'width': (tab()=='authority' ? '120%' : undefined) }" href="#" role="button">ABS-CH CNA »
+              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('authority')" ng-class="{ 'tab-selected' : tab()=='authority'}" href="#" role="button">ABS-CH CNA »
                   <br>
                   <span class="btn-text">Competent national authority</span> </a>
-              <a class="btn btn-lg btn-primary btn-commonformat" href="#" role="button">ABS-CH IRCC »
+              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('absPermit')" ng-class="{ 'tab-selected' : tab()=='absPermit'}"href="#" role="button">ABS-CH IRCC »
                   <br>
                   <span class="btn-text">Permit or its equivalent constituting and internationally recognized certificate of compliance</span> </a>
               <a class="btn btn-lg btn-primary btn-commonformat" href="#" role="button">ABS-CH CP »
@@ -79,7 +86,7 @@
 
           <div ng-show="tab()=='authority'" class="col-md-9 well well-registerpage">
 
-              <h2><span style="color: #428BCA; font-weight: bold;">ABS-CH CNA</span> TODO 1</h2> 
+              <h2><span style="color: #428BCA; font-weight: bold;">ABS-CH CNA</span> Competent national authority</h2> 
 
               <p ng-hide="editing">
                 TODO 2
@@ -95,11 +102,52 @@
                       <li>Be sure you have first entered in all your contacts before starting this form</li>
                   </ul>
 
-                  <p><a ng-click="edit('authority', null)" class="btn btn-primary">Add New ABS-CH CNA</a> <span class="btn btn-default">Download offline ABS-CH MSR form</span></p>
+                  <p><a ng-click="edit('authority', null)" class="btn btn-primary">Add New ABS-CH CNA</a> <span class="btn btn-default">Download offline ABS-CH CNA form</span></p>
 
               </div>
 
               <div ng-show="editing" edit-authority></div>
+
+              <div ng-hide="editing">
+
+                  <h3 style="border-bottom: 1px solid #333;">Existing records</h3>
+                  <div class="copntainer">
+                      <div class="row" style="background-color: #333; padding: 5px; margin-left: 0px;">
+                          <div class="col-md-1 text-center"><span style="font-size: 16px; color: white;">FILTERS</span></div>
+                          <div class="col-md-2 text-center"><span class="btn btn-info">All <span class="badge badge-default">14</span></span></div>
+                          <div class="col-md-2 text-center"><span class="btn btn-danger">Requests <span class="badge badge-default">3</span></span></div>
+                          <div class="col-md-2 text-center"><span class="btn btn-success">Published  <span class="badge badge-default">3</span></span></div>
+                          <div class="col-md-2 text-center"><span class="btn btn-warning">Draft  <span class="badge badge-default">3</span></span></div>
+                          <div class="col-md-3 text-center">
+                              <input type="text" placeholder=" Keyword " class="form-control keyword" style="height: 34px; margin-top: 5px; width: 160px;"></div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <div ng-show="tab()=='absPermit'" class="col-md-9 well well-registerpage">
+
+              <h2><span style="color: #428BCA; font-weight: bold;">ABS-CH IRCC</span> Permit or its equivalent constituting and internationally recognized certificate of compliance</h2> 
+
+              <p ng-hide="editing">
+                TODO 3
+              </p>
+
+              <div ng-hide="editing">
+
+                  <h3 style="border-bottom: 1px solid #333;">Add new record</h3>
+
+                  <h4 style="color: #D8534F; font-weight: bold;">Prerequisites:</h4>
+
+                  <ul>
+                      <li>Be sure you have first entered in all your contacts before starting this form</li>
+                  </ul>
+
+                  <p><a ng-click="edit('absPermit', null)" class="btn btn-primary">Add New ABS-CH IRCC</a> <span class="btn btn-default">Download offline ABS-CH IRCC form</span></p>
+
+              </div>
+
+              <div ng-show="editing" edit-abs-permit></div>
 
               <div ng-hide="editing">
 
