@@ -12,14 +12,14 @@
     <div ng-show="!isLoading() && status!='hidden'">
 
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-xs-12 visible-xs">
                 <div>
                     <span km-form-std-buttons document="getCleanDocument()"></span>
                     <span km-form-languages ng-model="document.header.languages"></span>
                 </div>
             </div>
 
-            <div class="col-sm-12" id="helpTip2">
+            <div class="col-lg-8 col-sm-7 col-xs-12" id="helpTip2">
                 <ul class="pagination">
                     <li ng-class="{ disabled: tab=='edit'   }"><a href="" ng-click="tab=prevTab">&laquo;</a></li>
                     <li ng-class="{ active  : tab=='edit'   }"><a href="" ng-click="tab='edit'" >General</a></li>
@@ -27,6 +27,13 @@
                     <li ng-class="{ active  : tab=='review' }"><a href="" ng-click="tab='review'">Review</a></li>
                     <li ng-class="{ disabled: tab=='review' }"><a href="" ng-click="tab=nextTab">&raquo;</a></li>
                 </ul>   
+            </div>
+
+            <div class="col-lg-4 col-sm-5 hidden-xs text-right">
+                <div class="pagination">
+                    <span km-form-languages ng-model="document.header.languages"></span>
+                    <span km-form-std-buttons document="getCleanDocument()"></span>
+                </div>
             </div>
 
         </div>
@@ -321,7 +328,7 @@
 
         <div class="row">
 
-            <div class="col-sm-12" id="helpTip2">
+            <div class="col-lg-9 col-sm-8 col-xs-12" id="helpTip2">
                 <ul class="pagination">
                     <li ng-class="{ disabled: tab=='edit'   }"><a href="" ng-click="tab=prevTab">&laquo;</a></li>
                     <li ng-class="{ active  : tab=='edit'   }"><a href="" ng-click="tab='edit'" >General</a></li>
@@ -331,7 +338,13 @@
                 </ul>   
             </div>
 
-            <div class="col-sm-12">
+            <div class="col-lg-3 col-sm-4 hidden-xs text-right">
+                <div class="pagination">
+                    <span km-form-std-buttons document="getCleanDocument()"></span>
+                </div>
+            </div>
+
+            <div class="col-xs-12 visible-xs">
                 <div>
                     <span km-form-std-buttons document="getCleanDocument()"></span>
                 </div>
