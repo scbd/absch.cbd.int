@@ -94,11 +94,11 @@ require("app").controller("RegisterController", ["$scope", "$window", function (
 	//
 	//
 	//============================================================
-	$scope.$on('$locationChangeStart', function(evt, next, current) {
+	var unreg_locationChangeStart = $scope.$on('$locationChangeStart', function(evt, next, current) {
 
 		console.log("locationChangeStart", $scope.editing, evt)
 
-		if(canSwitch()) {
+		if(!canSwitch()) {
 			evt.preventDefault();
 		}
 	});
@@ -116,4 +116,18 @@ require("app").controller("RegisterController", ["$scope", "$window", function (
 
 		return !$scope.editing;
 	}
+
+	//============================================================
+	//
+	// ROUTE CHANGE CLEAN-UP
+	//
+	//============================================================
+	var unreg_routeChangeStart = $scope.$on('$routeChangeStart', function() {
+
+		console.log("routeChangeStart")
+
+		unreg_routeChangeStart();
+		unreg_locationChangeStart();
+	});
+
 }]);

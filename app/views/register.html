@@ -43,7 +43,7 @@
               <a class="btn btn-lg btn-warning btn-commonformat" href="#" role="button">ABS-CH ORG »
                   <br>
                   <span class="btn-text">ABS Related Organization</span> </a>
-              <a class="btn btn-lg btn-warning btn-commonformat" href="#" role="button">ABS-CH NBD »
+              <a class="btn btn-lg btn-warning btn-commonformat" ng-click="tab('database')" ng-class="{ 'tab-selected' : tab()=='database'}" href="#" role="button">ABS-CH NBD »
                   <br>
                   <span class="btn-text">ABS National Website or Database</span> </a>
           </div>
@@ -130,7 +130,7 @@
               <h2><span style="color: #428BCA; font-weight: bold;">ABS-CH IRCC</span> Permit or its equivalent constituting and internationally recognized certificate of compliance</h2> 
 
               <p ng-hide="editing">
-                TODO 3
+                TODO
               </p>
 
               <div ng-hide="editing">
@@ -171,7 +171,7 @@
               <h2><span style="color: #428BCA; font-weight: bold;">ABS-CH CP</span> Checkpoint</h2> 
 
               <p ng-hide="editing">
-                TODO 3
+                TODO
               </p>
 
               <div ng-hide="editing">
@@ -200,7 +200,7 @@
               <h2><span style="color: #428BCA; font-weight: bold;">ABS-CH CPC</span> Checkpoint Communiqué</h2> 
 
               <p ng-hide="editing">
-                TODO 3
+                TODO
               </p>
 
               <div ng-hide="editing">
@@ -229,7 +229,7 @@
               <h2><span style="color: #428BCA; font-weight: bold;">ABS-CH VLR</span> Virtual Library Record</h2> 
 
               <p ng-hide="editing">
-                TODO 3
+                TODO
               </p>
 
               <div ng-hide="editing">
@@ -247,6 +247,35 @@
               </div>
 
               <div ng-show="editing" edit-resource></div>
+
+              <div ng-hide="editing">
+                  <h3 style="border-bottom: 1px solid #333;">Existing records - TODO</h3>
+              </div>
+          </div>
+
+          <div ng-show="tab()=='database'" class="col-md-9 well well-registerpage">
+
+              <h2><span style="color: #428BCA; font-weight: bold;">ABS-CH NDB</span> ABS National Website or Database</h2> 
+
+              <p ng-hide="editing">
+                TODO
+              </p>
+
+              <div ng-hide="editing">
+
+                  <h3 style="border-bottom: 1px solid #333;">Add new record</h3>
+
+                  <h4 style="color: #D8534F; font-weight: bold;">Prerequisites:</h4>
+
+                  <ul>
+                      <li>TODO</li>
+                  </ul>
+
+                  <p><a ng-click="edit('database', null)" class="btn btn-primary">Add New ABS-CH NDB</a> <span class="btn btn-default">Download offline ABS-CH NDB form</span></p>
+
+              </div>
+
+              <div ng-show="editing" edit-database></div>
 
               <div ng-hide="editing">
                   <h3 style="border-bottom: 1px solid #333;">Existing records - TODO</h3>
@@ -275,6 +304,9 @@
 
 <script src="/app/views/forms/view/view-measure.directive.js"></script>
 <script src="/app/views/forms/edit/edit-measure.directive.js"></script>
+
+<script src="/app/views/forms/view/view-database.directive.js"></script>
+<script src="/app/views/forms/edit/edit-database.directive.js"></script>
 
 <script src="/app/views/forms/view/view-resource.directive.js"></script>
 <script src="/app/views/forms/edit/edit-resource.directive.js"></script>
