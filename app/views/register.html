@@ -34,7 +34,7 @@
               <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('absCheckpointCommunique')" ng-class="{ 'tab-selected' : tab()=='absCheckpointCommunique'}" href="#" role="button">ABS-CH CPC »
                   <br>
                   <span class="btn-text">Checkpoint Communiqué</span> </a>
-              <a class="btn btn-lg btn-warning btn-commonformat" href="#" role="button">ABS-CH VLR »
+              <a class="btn btn-lg btn-warning btn-commonformat" ng-click="tab('resource')" ng-class="{ 'tab-selected' : tab()=='resource'}" href="#" role="button">ABS-CH VLR »
                   <br>
                   <span class="btn-text">Virtual Library Record</span> </a>
               <a class="btn btn-lg btn-warning btn-commonformat" href="#" role="button">ABS-CH CON »
@@ -218,6 +218,35 @@
               </div>
 
               <div ng-show="editing" edit-abs-checkpoint-communique></div>
+
+              <div ng-hide="editing">
+                  <h3 style="border-bottom: 1px solid #333;">Existing records - TODO</h3>
+              </div>
+          </div>
+
+          <div ng-show="tab()=='resource'" class="col-md-9 well well-registerpage">
+
+              <h2><span style="color: #428BCA; font-weight: bold;">ABS-CH VLR</span> Virtual Library Record</h2> 
+
+              <p ng-hide="editing">
+                TODO 3
+              </p>
+
+              <div ng-hide="editing">
+
+                  <h3 style="border-bottom: 1px solid #333;">Add new record</h3>
+
+                  <h4 style="color: #D8534F; font-weight: bold;">Prerequisites:</h4>
+
+                  <ul>
+                      <li>TODO</li>
+                  </ul>
+
+                  <p><a ng-click="edit('resource', null)" class="btn btn-primary">Add New ABS-CH VLR</a> <span class="btn btn-default">Download offline ABS-CH VLR form</span></p>
+
+              </div>
+
+              <div ng-show="editing" edit-resource></div>
 
               <div ng-hide="editing">
                   <h3 style="border-bottom: 1px solid #333;">Existing records - TODO</h3>
