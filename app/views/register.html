@@ -40,7 +40,7 @@
               <a class="btn btn-lg btn-warning btn-commonformat" ng-click="tab('contact')" ng-class="{ 'tab-selected' : tab()=='contact'}" href="#" role="button">ABS-CH CON »
                   <br>
                   <span class="btn-text">Contact Person</span> </a>
-              <a class="btn btn-lg btn-warning btn-commonformat" href="#" role="button">ABS-CH ORG »
+              <a class="btn btn-lg btn-warning btn-commonformat" ng-click="tab('organization')" ng-class="{ 'tab-selected' : tab()=='organization'}" href="#" role="button">ABS-CH ORG »
                   <br>
                   <span class="btn-text">ABS Related Organization</span> </a>
               <a class="btn btn-lg btn-warning btn-commonformat" ng-click="tab('database')" ng-class="{ 'tab-selected' : tab()=='database'}" href="#" role="button">ABS-CH NBD »
@@ -282,6 +282,35 @@
               </div>
           </div>
 
+          <div ng-show="tab()=='organization'" class="col-md-9 well well-registerpage">
+
+              <h2><span style="color: #428BCA; font-weight: bold;">ABS-CH ORG</span> ABS Related Organization</h2> 
+
+              <p ng-hide="editing">
+                TODO
+              </p>
+
+              <div ng-hide="editing">
+
+                  <h3 style="border-bottom: 1px solid #333;">Add new record</h3>
+
+                  <h4 style="color: #D8534F; font-weight: bold;">Prerequisites:</h4>
+
+                  <ul>
+                      <li>TODO</li>
+                  </ul>
+
+                  <p><a ng-click="edit('organization', null)" class="btn btn-primary">Add New ABS-CH ORG</a> <span class="btn btn-default">Download offline ABS-CH ORG form</span></p>
+
+              </div>
+
+              <div ng-show="editing" edit-organization></div>
+
+              <div ng-hide="editing">
+                  <h3 style="border-bottom: 1px solid #333;">Existing records - TODO</h3>
+              </div>
+          </div>
+
           <div ng-show="tab()=='database'" class="col-md-9 well well-registerpage">
 
               <h2><span style="color: #428BCA; font-weight: bold;">ABS-CH NDB</span> ABS National Website or Database</h2> 
@@ -341,6 +370,10 @@
 
 <script src="/app/views/forms/view/view-database.directive.js"></script>
 <script src="/app/views/forms/edit/edit-database.directive.js"></script>
+
+<script src="/app/views/forms/view/view-organization-reference.directive.js"></script>
+<script src="/app/views/forms/view/view-organization.directive.js"></script>
+<script src="/app/views/forms/edit/edit-organization.directive.js"></script>
 
 <script src="/app/views/forms/view/view-resource.directive.js"></script>
 <script src="/app/views/forms/edit/edit-resource.directive.js"></script>

@@ -1,0 +1,28 @@
+﻿<div>
+	<b>{{document.name | lstring:locale}} <i ng-show="document.acronym">({{document.acronym | lstring:locale}})</i></b>
+	<div km-terms ng-model="document.organizationType">
+		<span ng-repeat="term in terms">{{term.name}}</span>
+	</div>
+	<address style="margin-top: 5px; margin-bottom: 5px">
+		<div class="km-pre">{{document.address | lstring:locale}}</div>
+		{{document.city | lstring:locale}}<span ng-show="document.city">, </span>
+		{{document.state | lstring:locale}}<br ng-show="document.city || document.state" />
+		{{document.postalCode | lstring:locale}}<span ng-show="document.postalCode">, </span>
+		<b km-terms ng-model="document.country">
+			<span ng-repeat="term in terms">{{term.name}}</span>
+		</b>
+	</address>
+
+	<div ng-show="document.phones">
+		Phone: <span ng-repeat="item in document.phones">{{item}}<span ng-show="!$last">, </span></span>
+	</div>
+	<div ng-show="document.faxes">
+		Fax: <span ng-repeat="item in document.faxes">{{item}}<span ng-show="!$last">, </span></span>
+	</div>
+	<div ng-show="document.emails">
+		Emails: <span ng-repeat="item in document.emails"><a ng-href="mailto:{{item}}">{{item}}</a><span ng-show="!$last">, </span></span>
+	</div>
+	<div ng-show="document.websites">
+		Websites: <span ng-repeat="item in document.websites"><a ng-href="{{item.url}}">{{item.name||item.url}}</a><span ng-show="!$last">, </span></span>
+	</div>
+</div>
