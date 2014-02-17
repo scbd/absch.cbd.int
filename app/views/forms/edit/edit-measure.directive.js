@@ -393,7 +393,7 @@ require("app").directive("editMeasure", [ "authHttp", "Enumerable", "$filter", "
 				$scope.init();
 	
 				if(!$attr["class"])
-					$element.addClass("unstyled");
+					$element.addClass("list-unstyled");
 
 			},
 			controller: ["$scope", "$q", "Thesaurus", "Enumerable", function ($scope, $q, thesaurus, Enumerable) 
