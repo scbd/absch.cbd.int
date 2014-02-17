@@ -336,7 +336,7 @@ padding-bottom: 3px;
 
 .category-container_filters{
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: 18px;
+	font-size: 14px;
 	color: #666;
 	margin-bottom:10px;
 	padding-top:5px;
@@ -442,7 +442,7 @@ padding: 10px 10px 10px 10px;
 }
 
 .filters li a{
-	width:180px;
+	width:140px;
 	text-align: center;
 	margin:5px 5px 5px 5px;
 	padding:5px;
