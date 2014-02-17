@@ -409,6 +409,17 @@ padding-bottom: 3px;
 }
 /* ^^^ km-select ^^^ */
 
+form label.required:after,
+form label[required]:after
+{
+	color: #d9534f;
+	content: 'Mandatory information';
+	font-variant: small-caps;
+	border: dotted 1px #d9534f;
+	font-size: 7pt;
+	margin: 3px;
+	padding: 2px;
+}
 
 .footer{
 	background: #1FA65D url('../img/feature-bkg.png');
