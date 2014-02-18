@@ -1,7 +1,29 @@
 define(['app'], function (app) {
     'use strict';
 
-    app.controller('TemplateController', ['$scope', '$window', 'authentication', function ($scope, $window, authentication) {
+    app.controller('TemplateController', ['$scope', '$window', '$location', 'authentication', '$browser', function ($scope, $window, $location, authentication, $browser) {
+
+       function setCookie (name, value, days, path) {
+
+            var cookieString = escape(name) + "=";
+
+            if(value) cookieString += escape(value);
+            else      days = -1;
+
+            if(path)
+                cookieString += "; path=" + path;
+
+            if(days || days == 0) {
+
+                var expirationDate = new Date();
+
+                expirationDate.setDate(expirationDate.getDate() + days);
+
+                cookieString += "; expires=" + expirationDate.toUTCString();
+            }
+
+            document.cookie = cookieString
+        };
 
         $scope.controller = "TemplateController";
 
@@ -12,12 +34,10 @@ define(['app'], function (app) {
         //
         //
         //============================================================
-        $scope.actionSignin = function actionSignin () {
+        $scope.actionSignin = function () {
 
             var client_id    = encodeURIComponent('0000000000000000000000000000000000000000000000000000000000000000');
-            var redirect_uri = encodeURIComponent('http://localhost:2010/oauth2/callback');
-
-            //$window.location.href = 'https://accounts.cbd.int/oauth2/authorize/?client_id='+client_id+'&redirect_uri='+redirect_uri+'&scope=all';
+            var redirect_uri = encodeURIComponent($location.protocol()+'://'+$location.host()+':'+$location.port()+'/oauth2/callback');
             $window.location.href = 'https://accounts.cbd.int/oauth2/authorize?client_id='+client_id+'&redirect_uri='+redirect_uri+'&scope=all';
         }
 
@@ -25,10 +45,69 @@ define(['app'], function (app) {
         //
         //
         //============================================================
-        $scope.actionSignOut = function actionSignOut () { 
-            authentication.signOut();
-            $window.location.href = $window.location.href; // force page reload to clear everyting from memory 
+        $scope.actionSignOut = function () { 
+            document.cookie = "authenticationToken=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT";
+            var redirect_uri = encodeURIComponent($location.protocol()+'://'+$location.host()+':'+$location.port()+'/');
+            $window.location.href = 'https://accounts.cbd.int/signout?redirect_uri='+redirect_uri;
         };
+
+        //============================================================
+        //
+        //
+        //============================================================
+        $scope.actionSignup = function () { 
+            var redirect_uri = encodeURIComponent($location.protocol()+'://'+$location.host()+':'+$location.port()+'/');
+            $window.location.href = 'https://accounts.cbd.int/signup?redirect_uri='+redirect_uri;
+        };
+
+        //============================================================
+        //
+        //
+        //============================================================
+        $scope.actionPassword = function () { 
+            var redirect_uri = encodeURIComponent($location.protocol()+'://'+$location.host()+':'+$location.port()+'/');
+            $window.location.href = 'https://accounts.cbd.int/password?redirect_uri='+redirect_uri;
+        };
+
+        //============================================================
+        //
+        //
+        //============================================================
+        $scope.actionProfile = function () { 
+            var redirect_uri = encodeURIComponent($location.protocol()+'://'+$location.host()+':'+$location.port()+'/');
+            $window.location.href = 'https://accounts.cbd.int/profile?redirect_uri='+redirect_uri;
+        };
+
+        //============================================================
+        //
+        //
+        //============================================================
+        function receiveMessage(event)
+        {
+            if(event.origin!='https://accounts.cbd.int')
+                return;
+
+            var message = JSON.parse(event.data);
+
+            if(message.type=='ready')
+                event.source.postMessage('token', event.origin);
+
+            if(message.type=='authenticationToken') {
+                if(message.authenticationToken && !$browser.cookies().authenticationToken) {
+                    setCookie('authenticationToken', message.authenticationToken, 7, '/');
+                    $window.location.href = window.location.href;
+                }
+                if(!message.authenticationToken && $browser.cookies().authenticationToken) {
+                    authentication.signOut();
+                    $window.location.href = $window.location.href;
+                }
+            }
+        }
+
+        window.addEventListener('message', receiveMessage, false);
+
+        var iframe = angular.element(document.querySelector('#authenticationFrame'))[0];
+        iframe.contentWindow.postMessage('token', 'https://accounts.cbd.int');
     }]);
 
     function _loadCss(url) {
