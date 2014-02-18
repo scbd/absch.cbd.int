@@ -288,6 +288,33 @@ require("app").directive("editAbsPermit", [ function () {
 				return authentication.getUser().government;
 			};
 
+			//==================================
+			//
+			//==================================
+			$scope.editContact = function(property) {
+
+				$scope.editedProperty = property;
+				$scope.editedContact  = clone($scope.document[property] || { source : guid(),  type: "organization" });
+			};
+
+			//==================================
+			//
+			//==================================
+			$scope.saveContact = function() {
+
+				if(!$scope.editedProperty)
+					return;
+
+				$scope.document[$scope.editedProperty] = clone($scope.editedContact);
+			};
+
+			//==================================
+			//
+			//==================================
+			function clone(entity)
+			{
+				return angular.fromJson(angular.toJson(entity));
+			}
 		}]
 	};
 }]);
