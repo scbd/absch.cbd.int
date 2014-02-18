@@ -36,7 +36,7 @@ define(['app'], function (app) {
         //============================================================
         $scope.actionSignin = function () {
 
-            var client_id    = encodeURIComponent('0000000000000000000000000000000000000000000000000000000000000000');
+            var client_id    = encodeURIComponent('fbbb279e53ff814f4c23878e712dfe23ee66bd73a1cfc42b1842e2ab58c440fe');
             var redirect_uri = encodeURIComponent($location.protocol()+'://'+$location.host()+':'+$location.port()+'/oauth2/callback');
             $window.location.href = 'https://accounts.cbd.int/oauth2/authorize?client_id='+client_id+'&redirect_uri='+redirect_uri+'&scope=all';
         }
