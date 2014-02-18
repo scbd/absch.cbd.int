@@ -9,7 +9,28 @@ require("app").directive("viewContactReference", [function () {
 			locale: "=",
 			target: "@linkTarget"
 		},
-		controller: [function () {
+		controller: ["$scope", function ($scope) {
+
+			$scope.isPerson = function() {
+
+				var doc = $scope.document;
+	
+				if(!doc)
+					return false;
+
+				if(doc.type=="person")
+					return true;
+
+				if(!doc.type && (document.firstName || document.lastName))
+					return true; //default behaviour
+
+				return false;
+			};
+
+			$scope.isOrganization = function() {
+
+				return !$scope.isPerson();
+			};
 		}]
 	};
 }]);
