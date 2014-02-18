@@ -2,6 +2,9 @@
 
 
 <div ng-controller="ProfileController">
+
+
+<div>
     <div class="category-container" >
         <div class="container">
             <span class="category"><span class="glyphicon glyphicon-globe"></span> &nbsp;Country Profile: {{country.name.en}}</span>
@@ -15,6 +18,8 @@
 
 
       		<div class="container ng-scope">
+
+    <link href="/app/libs/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
 	<style>
 	.ellipsis {
 		text-overflow: ellipsis;
@@ -44,30 +49,83 @@
 		margin-top:6px;
 		text-transform: uppercase;
 	}
+
+	.flag-wrapper {
+    width: 200px;
+    height:200px;
+    display: inline-block;
+    position: relative;
+    box-shadow: 0px 0px 2px #000;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
 	</style>
-  	<div class="row top">
-  		<div class="col-sm-offset-3 col-sm-9 text-right" style="position:absolute">
-			<img src="/app/images/maps/ch.svg" style="opacity:0.06">
+
+  	<div class="row top" >
+  		<div style="position:absolute; top:100px; margin:auto; width:100%">
+			<img src="/app/libs/mapsicon/all/{{code}}/1024.png" style="opacity:0.2">
 		</div>
+
   		<div class="col-lg-7 col-md-6 col-sm-5">
-			<h1>Country Profile</h1>
-			<lead style="font-size:180%">Switzerland</lead>
+			<h2><span style="color: #111; font-weight: bold;font-size:200%;">{{country.name.en}}</span>
+			
 		</div>
 		<div class="col-lg-3 col-md-4 col-sm-5">
 			<dl class="dl-horizontal">
 				<dt><abbr title="Convention on Biological Diversity">CBD</abbr></dt><dd><span>party</span></dd>
 				<dt><abbr title="Cartagena Protocol on Biosafety">CPB</abbr></dt><dd><a href="http://treaties.un.org/doc/Treaties/2004/03/20040322%2009-00%20PM/Related%20Documents/CN.278.2002-Eng.pdf" style="color:#6495ED;text-decoration:underline" title="Depositary Notification">party</a></dd>
-				<dt><abbr title="Nagoya Protocol on ABS">NPABS</abbr></dt><dd>non-party</dd>
+				<dt>Nagoya Protocol on ABS</dt> <dd>non-party</dd>
 				<dt><abbr title="Nagoya – Kuala Lumpur Supplementary Protocol on Biosafety">NKLSPB</abbr></dt><dd>non-party</dd>
 			</dl>
 		</div>
-		<div class="col-lg-2 col-md-2 col-sm-2 text-right">
-			<img src="/app/images/flags/ch.svg" style="max-height:100px">
-		</div>
+
+		<div class="col-lg-2 col-md-2 col-sm-2 text-right ">
+           <div style="height:100px;" class="flag-icon-background flag-icon-{{code.toLowerCase()}}"></div>
+		</div> 
 
 		<div class="clearfix"></div>
+		<hr/>
+	<div class="row" style="margin-top:12px; ">
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="row text-center">
+						<div class="col-sm-2"><div class="numberCircle">8</div><div class="name">ABSCH-NFP</div></div>
+						<div class="col-sm-2"><div class="numberCircle">4</div><div class="name">ABSCH-MSR</div></div>
+						<div class="col-sm-2"><div class="numberCircle">2</div><div class="name">ABSCH-IRCC</div></div>
+						<div class="col-sm-2"><div class="numberCircle">1</div><div class="name">ABSCH-CP</div></div>
+						<div class="col-sm-2"><div class="numberCircle">1</div><div class="name">ABSCH-CPC</div></div>
+						<div class="col-sm-2"><div class="numberCircle">1</div><div class="name">ABSCH-CP</div></div>
+					</div>
+				</div>
+				
+			</div>
+<hr/>
+<div class="clearfix"></div>
 
-  		<div class="col-sm-6">
+
+
+  		<div class="col-sm-12" >
+
+			<h2><span style="color: #428BCA; font-weight: bold;font-size:140%;">ABSCH-NFP</span> ABS National Focal Points</h2>
+
+			<h2><span style="color: #428BCA; font-weight: bold;font-size:140%;">ABSCH-MSR</span> Legislative, administrative or policy measures on access and benefit-sharing</h2>
+
+			<h2><span style="color: #428BCA; font-weight: bold;font-size:140%;">ABSCH-IRCC</span> Permit or its equivalent constituting and internationally recognized certificate of compliance</h2> 
+
+			<h2><span style="color: #428BCA; font-weight: bold;font-size:140%;">ABSCH-CNA</span> Competent National Authority</h2> 
+
+			<h2><span style="color: #428BCA; font-weight: bold;font-size:140%;">ABSCH-CP</span> Checkpoint</h2> 
+			
+			<h2><span style="color: #428BCA; font-weight: bold;font-size:140%;">ABSCH-CPC</span> Checkpoint Communiqué</h2> 
+			
+			<h2><span style="color: #428BCA; font-weight: bold;font-size:140%;">ABSCH-VLR</span> Virtual Library Record</h2> 
+
+		</div>
+
+
+
+
+  		<div class="col-sm-12">
 			<h2><a>Biodiversity Facts</a></h2>
   			<div style="height:394px;overflow-y:scroll">
 	        	<strong>Status and trends of biodiversity, including benefits from biodiversity and ecosystem services</strong>
@@ -87,7 +145,7 @@
 				<p>The 12 specific objectives of the strategy and action plan include: mobilization of financial resources; development of a human resource base and strengthening of institutional capacity; conducting research to develop sustainable use management techniques and mechanisms; revision and formulation of policy and legislation; and promoting biodiversity conservation through incentives. Each objective is associated with a strategy and specific actions for implementation. Most of these actions are not time-bound or quantitative. The strategy is preceded by a thorough description of the status of biodiversity in Barbados.</p>
 			</div>
 			<div class="row" style="margin-top:12px">
-				<div class="col-lg-7 col-md-7 col-sm-12">
+				<div class="col-lg-12 col-md-12 col-sm-12">
 					<div class="row text-center">
 						<div class="col-sm-3"><div class="numberCircle">8</div><div class="name">Targets</div></div>
 						<div class="col-sm-3"><div class="numberCircle">4</div><div class="name">Indicators</div></div>
@@ -95,9 +153,7 @@
 						<div class="col-sm-3"><div class="numberCircle">1</div><div class="name">Activity</div></div>
 					</div>
 				</div>
-				<div class="col-lg-5 col-md-5 col-sm-12" style="padding-top:14px">
-				      Jump to &nbsp;<a href="/management/register" class="getstarted">Reporting</a>
-      			</div>
+				
 			</div>
 			<h2><a>Implementation of the Convention</a></h2>
 			<div style="height:120px;overflow-y:scroll">
@@ -236,3 +292,4 @@
       </div>
     </div> <!-- end row -->
 </div> <!-- end container -->
+</div> <!-- end controller -->

@@ -15,6 +15,8 @@
     "requirejs-plugins": "latest",
     "underscore": "latest",
     "bootstrap-duallistbox": "https://github.com/istvan-ujjmeszaros/bootstrap-duallistbox.git",
-    "linqjs": "*"
+    "linqjs": "*",
+    "mapsicon": "https://github.com/djaiss/mapsicon.git",
+    "flag-icon-css": "https://github.com/lipis/flag-icon-css.git#~0.6.0"
   }
 }
