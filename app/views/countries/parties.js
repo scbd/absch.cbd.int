@@ -1,8 +1,8 @@
-﻿$compile.directive('parties', ['$http', function ($http) {
+﻿require("app").directive('parties', ['$http', function ($http) {
     return {
         priority: 0,
         restrict: 'EC',
-        templateUrl: '/app/abs/directives/countries/parties.partial.html',
+        templateUrl: '/app/views/countries/parties.partial.html',
         controller: ['$scope', function ($scope) {
 
             $scope.countries = $http.get('/api/v2013/countries/').then(function (response) {

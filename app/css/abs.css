@@ -583,3 +583,45 @@ padding: 10px 10px 10px 10px;
 .home-col > p{
 	margin-top:10px;
 }
+
+.table-countries >tbody > tr > th {
+ 	font-size:140%;
+ 	color: #333;
+}
+
+
+.up-caret {
+    border-bottom: 5px solid #000000;
+    border-top: 5px solid transparent;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    display: inline-block;
+    height: 0;
+    opacity: 0.5;
+    vertical-align: top;
+    width: 0;
+    top: -3px;
+    position: relative;
+}
+
+.down-caret {
+    border-bottom: 5px solid transparent;
+    border-top: 5px solid #000000;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    display: inline-block;
+    height: 0;
+    opacity: 0.5;
+    vertical-align: top;
+    width: 0;
+}
+.country-list-name{
+
+	font-size: 110%;
+	font-weight: bold;
+}
+.country-list-name:hover, .country-list-name:focus{
+	color:#111;
+}
+
+

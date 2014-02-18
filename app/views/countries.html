@@ -1,22 +1,89 @@
 <script src="/app/views/countries.html.js"></script>
 
+
 <div ng-controller="CountriesController">
     <div class="category-container" >
         <div class="container">
             <span class="category"><span class="glyphicon glyphicon-globe"></span>&nbsp;Country Profiles</span>
+
+              <div class="row"  >
+                  <div class="span12">
+
+                    <table align="center" style="width: 90%;text-align:center;" cellspacing="10" cellpadding="10">
+                       
+                        <tr>
+                            <td style="text-align: center; width: 200px;">
+                                <div style="background-color: white; width: 180px; height: 100px; border:10px solid #1FA65D;border-radius:4px;">
+                                    <div style="color: #666; font-size: 10px; text-transform: uppercase;">Parties to the CBD</div>
+                                    <div style="color: #444; font-size: 28px; padding-top: 10px;font-weight:bold;"> 197
+                                    </div>
+                                </div>
+                            </td>
+                             <td style="text-align:center;width:200px;">
+                                <div style="background-color: white; width: 180px; height: 100px; border:10px solid #1FA65D;border-radius:4px;">
+                                    <div style="color: #666; font-size: 10px; text-transform: uppercase;">Signatures</div>
+                                    <div style="color: #444; font-size: 28px; padding-top: 10px;font-weight:bold;"> {{signatures}}
+                                    </div>
+                                </div>
+                                 </td>
+                            <td style="text-align: center; width: 200px;">
+                              <div style="background-color: white; width: 180px; height: 100px; border:10px solid #1FA65D;border-radius:4px;">
+                                    <div style="color: #666; font-size: 10px; text-transform: uppercase;">Ratifications or Assessions</div>
+                                    <div style="color: #444; font-size: 28px; padding-top: 10px;font-weight:bold;">{{ratifications}}
+                                    </div>
+                                  
+                                </div>
+                            </td>
+                            <td style="text-align:center;width:200px;">
+                                <div style="background-color: white; width: 180px; height: 100px; border:10px solid #D9534F;border-radius:4px;">
+                                    <div style="color: #666; font-size: 10px; text-transform: uppercase;line-height:12px;padding-top:5px;">Countdown to entry into force</div>
+                                    <div style="color: #444; font-size: 28px; padding-top: 10px;font-weight:bold;"> {{50-ratifications}}
+                                    </div>
+                                </div>
+                                
+                                
+                               </td>
+                           
+                           
+                        </tr>
+                    </table>
+
+           
+
+                  </div>
+               </div>
         </div>
    </div>
 
-   <div class="container">   
+   <div class="container"> 
 
 
-   <table class="table table-hover">
-    <td>#</td>
-    <th>country</th>
-    <th>status</th>
-  </table>
+    <div class="row"  >
+      <div class="span12"  style="padding-top:20px;">
 
-{{countries}}
+        <table class="table table-countries">
+          <tr>
+            <th>#</th>
+            <th style="white-space:nowrap;"><span style="cursor:pointer;" ng-click="sortTable('name.en')">Country 
+             <i ng-show="sortTerm=='name.en'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span></th>
+             <th style="white-space:nowrap;"><span style="cursor:pointer;" ng-click="sortTable('treaties.XXVII8b.signature')">Signature 
+             <i ng-show="sortTerm=='treaties.XXVII8b.signature'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span></th>
+             <th style="white-space:nowrap;"><span style="cursor:pointer;" ng-click="sortTable('treaties.XXVII8b.instrument')">Instrument 
+             <i ng-show="sortTerm=='treaties.XXVII8b.instrument'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span></th>
+            <th style="white-space:nowrap;"><span style="cursor:pointer;" ng-click="sortTable('treaties.XXVII8b.deposit')">Deposit 
+             <i ng-show="sortTerm=='treaties.XXVII8b.deposit'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span></th>
+            <th>Entry into force</th>
+          </tr>
+          <tr ng-repeat="country in countries | orderBy:sortTerm:orderList" ng-class="{'success' : (country.treaties.XXVII8b.instrument=='ratification' ||  country.treaties.XXVII8b.instrument=='accession')}">
+            <td>{{$index + 1}}</td>
+            <td><a ng-href="countries/#/{{country.code}}" class="country-list-name">{{country.name.en}}</a></td>
+            <td>{{country.treaties.XXVII8b.signature}}</td>
+            <td>{{country.treaties.XXVII8b.instrument}}</td>
+            <td>{{country.treaties.XXVII8b.deposit}}</td>
+            <td>{{country.treaties.XXVII8b.party}}</td>
+          </tr>
+        </table>
+
 
    </div>
 </div>
