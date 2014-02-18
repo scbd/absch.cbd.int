@@ -302,9 +302,8 @@ require('app').directive('kmTerms', function ($http)
 {
 	return {
 		restrict: 'EAC',
-//			templateUrl: '/app/js/directives/forms/km-terms.html',
-		replace: false,
-//			transclude: true,
+		templateUrl: '/app/js/directives/forms/km-terms.html',
+		replace: true,
 		scope: {
 			binding : '=ngModel',
 		},
@@ -946,7 +945,7 @@ require('app').directive('kmLink', function ($http)
 							$scope.editor.name = file.name;
 
 						if ($scope.editor.mimeTypes.indexOf(type) < 0) {
-							$scope.editor.onUploadError(link, "File type not supported: " + type);
+							$scope.editor.onUploadError(link, 400, "File type not supported: " + type);
 							return;
 						};
 
@@ -964,7 +963,7 @@ require('app').directive('kmLink', function ($http)
 							},
 							function(result) { //error
 								link.url = result.data.url;
-								$scope.editor.onUploadError(link, result.data);
+								$scope.editor.onUploadError(link, result.status, result.data);
 							},
 							function(progress) { //progress
 								$scope.editor.onUploadProgress(link, progress);
@@ -1012,10 +1011,16 @@ require('app').directive('kmLink', function ($http)
 			//==============================
 			//
 			//==============================
-			$scope.editor.onUploadError = function(link, message)
+			$scope.editor.onUploadError = function(link, httpStatus, error)
 			{
 				if($scope.editor.link!=link)
 					return;
+
+				var message = "Unknown error";
+
+				if(httpStatus==401) message = "Please sing-in";
+				else                message = error.message || error;
+
 
 				console.log('xhr.upload error: ' + message)
 

@@ -2,7 +2,7 @@
 
 	<script type="text/ng-template"  id="select-tree-renderer.html">
 		<a ng-click="clicked(item)" href="">{{item.title||item.name | lstring:locale | truncate:120:'...'}}</a>
-		<i class="icon-ok" ng-show="item.selected" style="position:absolute;top:5px;left:3px;"></i>
+		<i class="glyphicon glyphicon-ok" ng-show="item.selected" style="position:absolute;top:5px;left:3px;"></i>
 		<ul class="dropdown-inline-submenu">
 			<li ng:repeat="item in item.children" ng-include="'select-tree-renderer.html'" style="position:relative">
 		</ul>
