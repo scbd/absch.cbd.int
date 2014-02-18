@@ -76,7 +76,7 @@
           </tr>
           <tr ng-repeat="country in countries | orderBy:sortTerm:orderList" ng-class="{'success' : (country.treaties.XXVII8b.instrument=='ratification' ||  country.treaties.XXVII8b.instrument=='accession')}">
             <td>{{$index + 1}}</td>
-            <td><a ng-href="countries/#/{{country.code}}" class="country-list-name">{{country.name.en}}</a></td>
+            <td><a ng-href="countries/{{country.code}}" class="country-list-name">{{country.name.en}}</a></td>
             <td>{{country.treaties.XXVII8b.signature}}</td>
             <td>{{country.treaties.XXVII8b.instrument}}</td>
             <td>{{country.treaties.XXVII8b.deposit}}</td>
