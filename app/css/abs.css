@@ -478,7 +478,7 @@ padding: 10px 10px 10px 10px;
     line-height: 12px;
     white-space: normal;
     margin-bottom: 5px;
-    height: 32px;
+    height: 48px;
     z-index: 1;
     position: relative;
     padding:5px 5px 5px 5px;
@@ -517,4 +517,14 @@ padding: 10px 10px 10px 10px;
 .home-col > h3{
 	padding:0;
 	margin:0;
+}
+.home-col > .headline1 > a{
+	color:black;
+	text-decoration: None;
+}
+.home-col > .headline1{
+	border-bottom: 5px solid #999;
+}
+.home-col > p{
+	margin-top:10px;
 }
