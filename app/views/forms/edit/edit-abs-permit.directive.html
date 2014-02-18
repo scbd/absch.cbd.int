@@ -118,13 +118,23 @@
 							<span class="help-block">Please provide the name and contact details of the person or entity that holds the right to grant access to the genetic resources in accordance with domestic legislation.</span>
 							<input type="checkbox" name="providerConfidential" ng-model="document.providerConfidential" watch-items >  Confidential information</input><br /><br />
 							<div ng-show="!document.providerConfidential">
-							<div km-reference name="provider" ng-model="document.provider" loader="loadRecords(identifier, 'contact')">
-								<div>
-									<div><strong>{{reference.title | lstring}}</strong></div>
-									<div>{{reference.summary | lstring}}</div>
-								</div>
+							
+								<div class="row" ng-show="document.provider">	
+								  <div class="col-md-10">
+									<div class="well" >
+										<view-contact-reference ng-model='document.provider' locale="en"></view-contact-reference>
+									</div>
+								  </div>
+								  <div class="col-md-2">
+									<button class="btn btn-default" ng-click="editContact('provider')" data-toggle="modal" data-target="#editContact">
+									  Edit »
+									</button>
+								  </div>
+								</div>							
+								<button class="btn btn-default" ng-click="editContact('provider')" data-toggle="modal" data-target="#editContact">
+								  Add Organization or Contact »
+								</button>
 							</div>
-								</div>
 						</div>
 					</div>
 				</div>
@@ -434,4 +444,25 @@
 
         </div>
 	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="editContact" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" style="width:800px">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+	      </div>
+	      <div class="modal-body">
+	      	<form>
+	      		<div edit-contact-base ng-model="editedContact" locales="document.header.languages"></div>	
+	      	</form>
+	      </div>
+	      <div class="modal-footer">
+	        <a type="button" class="btn btn-default" data-dismiss="modal">Close</a>
+	        <a type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveContact()">Save changes</a>
+	      </div>
+	    </div>
+	  </div>
+	</div>	
 </div>

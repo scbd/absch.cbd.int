@@ -1,11 +1,33 @@
 ﻿<div>
-	<b>{{document.prefix | lstring:locale}} {{document.firstName}} {{document.middleName}} {{document.lastName}}</b>
-	<div>
-		{{document.designation | lstring:locale}}<span ng-show="document.designation && document.department">, </span>
-		{{document.department | lstring:locale}}
+	
+	<div ng-show="isOrganization()">
+		<div>
+			<b>{{document.organization | lstring:locale}}</b> <i ng-show="document.organizationAcronym">({{document.organizationAcronym | lstring:locale}})</i>
+		</div>
+
+		<div>{{document.prefix | lstring:locale}} {{document.firstName}} {{document.middleName}} {{document.lastName}}</div>
+
+		<div>
+			{{document.designation | lstring:locale}}<span ng-show="document.designation && document.department">, </span>
+			{{document.department | lstring:locale}}
+		</div>
+
 	</div>
-	<div>
-		{{document.organization | lstring:locale}} <i ng-show="document.organizationAcronym">({{document.organizationAcronym | lstring:locale}})</i>
+
+	<div ng-show="isPerson()">
+		<div>
+			<b>{{document.prefix | lstring:locale}} {{document.firstName}} {{document.middleName}} {{document.lastName}}</b>
+		</div>
+
+		<div>
+			{{document.designation | lstring:locale}}<span ng-show="document.designation && document.department">, </span>
+			{{document.department | lstring:locale}}
+		</div>
+		
+		<div>
+			{{document.organization | lstring:locale}} <i ng-show="document.organizationAcronym">({{document.organizationAcronym | lstring:locale}})</i>
+		</div>
+
 	</div>
 
 	<address style="margin-top: 5px; margin-bottom: 5px">
