@@ -319,11 +319,11 @@ padding-bottom: 3px;
 }
 
 .category-container {
-	/*background: #1FA65D url('../img/feature-bkg.png');*/
-	background: #1FA65D;
+	background: #1FA65D url('../img/feature-bkg.png');
+	/*background: #1FA65D;*/
 	padding:0;margin: 0;
 	padding-top:5px;
-	border-bottom:3px solid #333;
+	border-bottom:1px solid #333;
 }
 
 .category{

@@ -51,13 +51,13 @@
               <span class="pull-right label label-danger">1</span> 
               <span class="btn-text" ><br>ABS National Website or Database</span> </a>
 
-              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('contact')" ng-class="{ 'tab-selected' : tab()=='contact'}" href="#" role="button">ABSCH-CON »
+             <!--  <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('contact')" ng-class="{ 'tab-selected' : tab()=='contact'}" href="#" role="button">ABSCH-CON »
               <span class="pull-right label label-danger">1</span> 
               <span class="btn-text" ><br>Contact Person</span> </a>
 
               <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('organization')" ng-class="{ 'tab-selected' : tab()=='organization'}" href="#" role="button">ABSCH-ORG »
               <span class="pull-right label label-danger">1</span> 
-              <span class="btn-text" ><br>Contact Organization</span> </a>
+              <span class="btn-text" ><br>Contact Organization</span> </a> -->
 
 <h3>Reference Records</h3>
 
@@ -276,23 +276,32 @@
 
           <div ng-show="tab()=='absCheckpointCommunique'" class="col-md-9 well well-registerpage">
 
-              <h2><span style="color: #428BCA; font-weight: bold;font-size:180%;">ABS-CH CPC</span> Checkpoint Communiqué</h2> 
+              <h2><span style="color: #428BCA; font-weight: bold;font-size:180%;">ABSCH-CPC</span> Checkpoint Communiqué</h2> 
 
               <p ng-hide="editing">
-                TODO
+                Checkpoint communiqué contains information collected by checkpoint and the ABS Clearing-House will send automatically by email a courtesy copy of the record  to the relevant national authorities of the country where the checkpoint is located as designated in the common format on the checkpoint and the national focal point of the country and the competent national authority/ies of the country which is the provider of the genetic resource.  . Therefore, this common format is to be used to facilitate the provision of relevant information collected by the checkpoint related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources, including from the internationally recognized certificate of compliance, when such a certificate is available. 
               </p>
 
               <div ng-hide="editing">
 
                   <h3 style="border-bottom: 1px solid #333;">Add new record</h3>
 
-                  <h4 style="color: #D8534F; font-weight: bold;">Prerequisites:</h4>
+                     <div class="panel panel-info">
+                      <div class="panel-heading">
+                          <h4 class="panel-title">Tips for publishing an ABSCH-CP common format:</h4>
+                      </div>
+                      <div class="panel-body">
+                          <ol>
+                           <li><strong>If the ABSCH-IRCC is not available:</strong> Please ensure the person or entity to whom PIC was granted has been already entered in the system.</li>
+                          </ol>
 
-                  <ul>
-                      <li>TODO</li>
-                  </ul>
+                            <p><a ng-click="edit('absCheckpointCommunique', null)" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-plus-sign"></span> Add New ABSCH-CPC</a> 
+                            <a href="http://www.cbd.int/doc/abs/commonformats/CPC.doc"><span class="btn btn-default"> <span class="glyphicon glyphicon-download"></span> Download offline ABSCH-CPC form</span></a></p>
+                      </div>
+                    </div> 
 
-                  <p><a ng-click="edit('absCheckpointCommunique', null)" class="btn btn-primary">Add New ABS-CH CPC</a> <span class="btn btn-default">Download offline ABS-CH IRCC form</span></p>
+            
 
               </div>
 
