@@ -3,7 +3,7 @@
   "description": "Access and Benefit Sharing Clearing-House",
   "dependencies": {
     "express": "3.4.x",
-    "http-proxy": "0.10.x",
+    "http-proxy": "~1.0.2",
     "grunt": "~0.4.2",
     "grunt-bower-task": "~0.3.4",
     "grunt-cli": "~0.1.13"
