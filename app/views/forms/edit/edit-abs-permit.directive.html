@@ -118,22 +118,7 @@
 							<span class="help-block">Please provide the name and contact details of the person or entity that holds the right to grant access to the genetic resources in accordance with domestic legislation.</span>
 							<input type="checkbox" name="providerConfidential" ng-model="document.providerConfidential" watch-items >  Confidential information</input><br /><br />
 							<div ng-show="!document.providerConfidential">
-							
-								<div class="row" ng-show="document.provider">	
-								  <div class="col-md-10">
-									<div class="well" >
-										<view-contact-reference ng-model='document.provider' locale="en"></view-contact-reference>
-									</div>
-								  </div>
-								  <div class="col-md-2">
-									<button class="btn btn-default" ng-click="editContact('provider')" data-toggle="modal" data-target="#editContact">
-									  Edit »
-									</button>
-								  </div>
-								</div>							
-								<button class="btn btn-default" ng-click="editContact('provider')" data-toggle="modal" data-target="#editContact">
-								  Add Organization or Contact »
-								</button>
+								<field-embed-contact ng-model="$parent.document.provider" locales="$parent.document.header.languages" caption="{{$parent.document.provider ? 'Replace organisation or a contact »' : 'Add an organisation or a contact »'}}"></field-embed-contact>
 							</div>
 						</div>
 					</div>
@@ -168,12 +153,7 @@
 						<div class="km-control-group" name="informedConsent" required caption="Person or entity to whom prior informed consent was granted">
 							<input type="checkbox" name="informedConsentConfidential" ng-model="document.informedConsentConfidential" watch-items >  Confidential information</input><br /><br />
 							<div ng-show="!document.informedConsentConfidential">
-								<div km-reference name="informedConsent" ng-model="document.informedConsent" loader="loadRecords(identifier, 'contact')">
-									<div>
-										<div><strong>{{reference.title | lstring}}</strong></div>
-										<div>{{reference.summary | lstring}}</div>
-									</div>
-								</div>
+								<field-embed-contact ng-model="$parent.document.informedConsent" locales="$parent.document.header.languages" caption="{{$parent.document.informedConsent ? 'Replace organisation or a contact »' : 'Add an organisation or a contact »'}}"></field-embed-contact>
 							</div>
 						</div>
 					</div>
@@ -444,25 +424,4 @@
 
         </div>
 	</div>
-
-	<!-- Modal -->
-	<div class="modal fade" id="editContact" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	  <div class="modal-dialog" style="width:800px">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-	      </div>
-	      <div class="modal-body">
-	      	<form>
-	      		<div edit-contact-base ng-model="editedContact" locales="document.header.languages"></div>	
-	      	</form>
-	      </div>
-	      <div class="modal-footer">
-	        <a type="button" class="btn btn-default" data-dismiss="modal">Close</a>
-	        <a type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveContact()">Save changes</a>
-	      </div>
-	    </div>
-	  </div>
-	</div>	
 </div>
