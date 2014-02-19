@@ -1,33 +1,70 @@
 ﻿
 define(['app'], function (app) {
 
-	app.filter("lstring", function() {
-		return function(ltext, locale) {
 
-			if(!ltext)
+	function lstring(ltext, locale)
+	{
+		if(!ltext)
+			return "";
+
+		if(angular.isString(ltext))
+			return ltext;
+
+		var sText = undefined;
+
+		if(!sText && locale)
+			sText = ltext[locale];
+
+		if(!sText)
+			sText = ltext["en"];
+
+		if(!sText) {
+			for(key in ltext) {
+				sText = ltext[key]
+				if(sText)
+					break;
+			}
+		}
+
+		return sText||"";
+
+	}
+
+
+	app.filter("term", ["$http", function($http) {
+		var cacheMap = {};
+
+		return function(term, locale) {
+
+			if(!term)
 				return "";
 
-			if(angular.isString(ltext))
-				return ltext;
+			locale = locale||"en";
 
-			var sText = undefined;
+			if(term.customValue)
+				return lstring(term.customValue, locale);
 
-			if(!sText && locale)
-				sText = ltext[locale];
+			if(cacheMap[term.identifier])
+				return lstring(cacheMap[term.identifier].title, locale) ;
 
-			if(!sText)
-				sText = ltext["en"];
+			cacheMap[term.identifier] = $http.get("/api/v2013/thesaurus/terms/"+encodeURI(term.identifier),  {cache:true}).then(function(result) {
 
-			if(!sText) {
-				for(key in ltext) {
-					sText = ltext[key]
-					if(sText)
-						break;
-				}
-			}
+				cacheMap[term.identifier] = result.data;
 
-			return sText||"";
+				return lstring(cacheMap[term.identifier].title, locale);
+
+			}).catch(function(error){
+
+				cacheMap[term.identifier] = term.identifier;
+
+				return term.identifier;
+
+			});
 		}
+	}]);
+
+	app.filter("lstring", function() {
+		return lstring;
 	});
 
 	app.filter("orderPromiseBy", ["$q", "$filter", function($q, $filter) {
