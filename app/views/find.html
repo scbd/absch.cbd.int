@@ -46,8 +46,29 @@
                       | <a>animals</a>
                       | <a>microorganisms</a></p>
                     </div>
-
-</div>
+                    </div>
+                    <div ng-repeat="document in documents">
+                        <div style="font-size:10px;color:#777">{{document.schema}} <span ng-show="document.source">|</span> 
+                            <strong ng-if="!document.sourceTooltip" style="color:#222">{{document.source}}</strong>
+                            <a ng-if="document.sourceTooltip" href="#" tooltip data-toggle="document.tooltip" title data-original-title="{{document.sourceTooltip}}" style="color:#428bca"><strong>{{document.source}}</strong></a>
+                        </div>
+                        <div style="font-size:13px;font-weight:bold" ng-show="document.type">{{document.type}}</div>
+                            <div class="truncatex">
+                            <a style="font-size:14px;font-weight:bold;color:#79B82B;text-decoration:underline" ng-href="{{fixUrl(document.url_ss[0])}}">{{document.title}}</a>
+                        </div>
+                        <div style="font-size:13px;margin:2px 0">{{document.description}}</div>
+                        <div style="font-size:13px;font-weight:bold;margin:2px 0" ng-show="description2">{{document.description2}}</div>
+                        <div ng-if="dates">
+                            <i style="color:#ccc" class="icon-calendar-empty"></i> <span style="font-size:12px;color:#444">{{document.dates}}</span>
+                            &nbsp; &nbsp; 
+                            <i style="color:#ccc" class="icon-map-marker"></i> <span style="font-size:12px;color:#444">{{document.venue}}</span>
+                        </div>
+                        <div ng-if="{'meetingDocument':true}[document.schema_s]">
+                            <i class="icon-tag"></i>
+                            <span ng-repeat="meeting in document.meeting_ss" class="label label-info" style="margin-right:4px">{{document.meeting}}</span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
                 </div>
             </div>
 
@@ -63,10 +84,6 @@
         </div>
     </div>
 
-    <div class="container">    
-      {{controller}}
-    <div class="search2"></div>
-        <!-- more content here -->
-    </div>
+    
 
 </div>
