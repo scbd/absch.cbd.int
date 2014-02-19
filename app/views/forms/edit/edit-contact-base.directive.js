@@ -7,7 +7,8 @@ require("app").directive("editContactBase", [ function () {
 		transclude : false,
 		scope      : {
 			document  : "=ngModel",
-			locales : "=locales"
+			locales : "=locales",
+			form : "=form"
 		},
 		controller : ["$scope", "authHttp", "$filter", "underscore", function ($scope, $http, $filter, _)
 		{
