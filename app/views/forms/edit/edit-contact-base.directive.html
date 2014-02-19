@@ -1,4 +1,10 @@
 ﻿<div>
+<style>
+input.ng-invalid-url,
+input.ng-invalid-email {
+ background-color:#f0ad4e;
+}
+</style>
 	<div  ng-hide="document.type=='organization'">
 
 		<legend>Personal Information</legend>
@@ -182,7 +188,7 @@
 
 		<div class="col-md-6 col-xs-12">
 			<div class="km-control-group" name="websites" caption="Website addresses">
-				<div km-link name="websites" ng-model="document.websites" allow-file="false"></div>
+				<div km-inputtext-list name="websites" type="url" ng-model="$parent._urls" pattern="url" placeholder="example: http://www.cbd.int"></div>
 			</div>
 		</div>
 	</div>

@@ -203,6 +203,7 @@ require('app').directive('kmInputtextList', function ($http)
 		scope: {
 			placeholder : "@",
 			binding     : "=ngModel",
+			type        : "@type",
 			required    : "@"
 		},
 		link: function ($scope, $element, attrs, ngModelController) 
