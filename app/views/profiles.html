@@ -26,22 +26,7 @@
 		white-space: nowrap;
 		overflow: hidden;
 	}
-	.numberCircle {
-	    -webkit-border-radius: 999px;
-	    -moz-border-radius: 999px;
-	    border-radius: 999px;
-	    behavior: url(PIE.htc);
-
-	    width: 48px;
-	    height: 48px;
-	    padding: 4px;
-
-	    background: #6495ED;
-	    color: #fff;
-	    display:inline-block;
-
-    	font: 32px "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeueW01-45Ligh", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-	}
+	
 	.name {
 		color:#222;
 		font-size: 10px;
@@ -49,22 +34,19 @@
 		margin-top:6px;
 		text-transform: uppercase;
 	}
+	.panel, .panel > .panel-heading, .panel-default{
+		background-color: transparent;
+	}
+	.panel > a {
+		text-decoration: none;
+	}
 
-	.flag-wrapper {
-    width: 200px;
-    height:200px;
-    display: inline-block;
-    position: relative;
-    box-shadow: 0px 0px 2px #000;
-    overflow: hidden;
-    margin-bottom: 20px;
-}
 
 	</style>
 
-  	<div class="row top" >
+  	<div class="row top" style="padding-bottom:30px;">
   		<div style="position:absolute; top:100px; margin:auto; width:100%">
-			<img src="/app/libs/mapsicon/all/{{code}}/1024.png" style="opacity:0.2">
+			<img src="/app/libs/mapsicon/all/{{code}}/1024.png" style="opacity:0.15">
 		</div>
 
   		<div class="col-lg-7 col-md-6 col-sm-5">
@@ -85,20 +67,24 @@
 		</div> 
 
 		<div class="clearfix"></div>
-		<hr/>
-	<div class="row" style="margin-top:12px; ">
+<hr/>
+ 	<div class="row" style="margin-top:12px; ">
 				<div class="col-lg-12 col-md-12 col-sm-12">
 					<div class="row text-center">
-						<div class="col-sm-2"><div class="numberCircle">8</div><div class="name">ABSCH-NFP</div></div>
-						<div class="col-sm-2"><div class="numberCircle">4</div><div class="name">ABSCH-MSR</div></div>
-						<div class="col-sm-2"><div class="numberCircle">2</div><div class="name">ABSCH-IRCC</div></div>
-						<div class="col-sm-2"><div class="numberCircle">1</div><div class="name">ABSCH-CP</div></div>
-						<div class="col-sm-2"><div class="numberCircle">1</div><div class="name">ABSCH-CPC</div></div>
-						<div class="col-sm-2"><div class="numberCircle">1</div><div class="name">ABSCH-CP</div></div>
+						<div class="col-sm-2" ></div>
+						<div class="col-sm-1"><div class="numberCircle">8</div><div class="name">ABSCH-NFP</div></div>
+						<div class="col-sm-1"><div class="numberCircle">4</div><div class="name">ABSCH-CNA</div></div>
+						<div class="col-sm-1"><div class="numberCircle">2</div><div class="name">ABSCH-MSR</div></div>
+						<div class="col-sm-1"><div class="numberCircle">1</div><div class="name">ABSCH-IRCC</div></div>
+						<div class="col-sm-1"><div class="numberCircle">1</div><div class="name">ABSCH-CPC</div></div>
+						<div class="col-sm-1"><div class="numberCircle">1</div><div class="name">ABSCH-CP</div></div>
+						<div class="col-sm-1"><div class="numberCircle">1</div><div class="name">ABSCH-NDB</div></div>
+						<div class="col-sm-1"><div class="numberCircle">1</div><div class="name">ABSCH-VLR</div></div>
+						<div class="col-sm-2" ></div>
 					</div>
 				</div>
 				
-			</div>
+			</div> 
 <hr/>
 <div class="clearfix"></div>
 
@@ -106,190 +92,141 @@
 
   		<div class="col-sm-12" >
 
-			<h2><span style="color: #428BCA; font-weight: bold;font-size:140%;">ABSCH-NFP</span> ABS National Focal Points</h2>
 
-			<h2><span style="color: #428BCA; font-weight: bold;font-size:140%;">ABSCH-MSR</span> Legislative, administrative or policy measures on access and benefit-sharing</h2>
+  			<div class="panel-group" id="accordion">
+			  
+			  <div class="panel">
+			        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+			         <h2> 
+			         <div class="numberCircle" style="padding-left:15px;">8</div>
+			        <!--   <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span> -->
+			          <span style="color: #428BCA; font-weight: bold;font-size:120%;">ABSCH-NFP</span> 
+			         <span style="color:#111;">National Focal Points</span>
+			         </h2> 
+			        </a>
+			    </div>
+			    <div id="collapseOne" class="panel-collapse collapse in">
+			      <div class="panel-body">
+			        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+			      </div>
+			    </div>
+			  
 
-			<h2><span style="color: #428BCA; font-weight: bold;font-size:140%;">ABSCH-IRCC</span> Permit or its equivalent constituting and internationally recognized certificate of compliance</h2> 
-
-			<h2><span style="color: #428BCA; font-weight: bold;font-size:140%;">ABSCH-CNA</span> Competent National Authority</h2> 
-
-			<h2><span style="color: #428BCA; font-weight: bold;font-size:140%;">ABSCH-CP</span> Checkpoint</h2> 
+				<div class="panel">
+			        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+			         <h2> 
+			          <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span>
+			          <span style="color: #428BCA; font-weight: bold;font-size:120%;">ABSCH-CNA</span> 
+			         <span style="color:#111;">Competent National Authority</span>
+			         </h2> 
+			        </a>
+			    </div>
+			    <div id="collapseTwo" class="panel-collapse collapse">
+			      <div class="panel-body">
+			        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+			      </div>
+			    </div>
 			
-			<h2><span style="color: #428BCA; font-weight: bold;font-size:140%;">ABSCH-CPC</span> Checkpoint Communiqué</h2> 
-			
-			<h2><span style="color: #428BCA; font-weight: bold;font-size:140%;">ABSCH-VLR</span> Virtual Library Record</h2> 
+			  <div class="panel">
+			        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+			         <h2> 
+			          <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span>
+			          <span style="color: #428BCA; font-weight: bold;font-size:120%;">ABSCH-MSR</span> 
+			         <span style="color:#111;">Legislative, administrative or policy measures on access and benefit-sharing</span>
+			         </h2>  
+			        </a>
+			    </div>
+			    <div id="collapseThree" class="panel-collapse collapse">
+			      <div class="panel-body">
+			        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+			      </div>
+			    </div>
+
+
+			  <div class="panel">
+			        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+			         <h2> 
+			          <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span>
+			          <span style="color: #428BCA; font-weight: bold;font-size:120%;">ABSCH-IRCC</span> 
+			         <span style="color:#111;">Permit or its equivalent constituting and internationally recognized certificate of compliance</span>
+			         </h2>  
+			        </a>
+			    </div>
+			    <div id="collapseFour" class="panel-collapse collapse">
+			      <div class="panel-body">
+			        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+			      </div>
+			    </div>
+
+
+			  <div class="panel">
+			        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+			         <h2> 
+			          <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span>
+			          <span style="color: #428BCA; font-weight: bold;font-size:120%;">ABSCH-CP</span> 
+			         <span style="color:#111;">Checkpoint</span>
+			         </h2>  
+			        </a>
+			    </div>
+			    <div id="collapseFive" class="panel-collapse collapse">
+			      <div class="panel-body">
+			        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+			      </div>
+			    </div>
+
+
+			  <div class="panel">
+			        <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
+			         <h2> 
+			          <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span>
+			          <span style="color: #428BCA; font-weight: bold;font-size:120%;">ABSCH-CPC</span> 
+			         <span style="color:#111;">Checkpoint Communiqué</span>
+			         </h2>  
+			        </a>
+			    </div>
+			    <div id="collapseSix" class="panel-collapse collapse">
+			      <div class="panel-body">
+			        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+			      </div>
+			    </div>
+
+
+			  <div class="panel">
+			        <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">
+			         <h2> 
+			          <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span>
+			          <span style="color: #428BCA; font-weight: bold;font-size:120%;">ABSCH-NDB</span> 
+			         <span style="color:#111;">ABS National Databases and Websites</span>
+			         </h2>  
+			        </a>
+			    </div>
+			    <div id="collapseSeven" class="panel-collapse collapse">
+			      <div class="panel-body">
+			        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+			      </div>
+			    </div>
+
+
+			  <div class="panel">
+			        <a data-toggle="collapse" data-parent="#accordion" href="#collapseEight">
+			         <h2> 
+			          <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span>
+			          <span style="color: #428BCA; font-weight: bold;font-size:120%;">ABSCH-VLR</span> 
+			         <span style="color:#111;">Virtual Library Record</span>
+			         </h2>  
+			        </a>
+			    </div>
+			    <div id="collapseEight" class="panel-collapse collapse">
+			      <div class="panel-body">
+			        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+			      </div>
+			    </div>
+
+			  </div>
+			</div> 
 
 		</div>
 
-
-
-
-  		<div class="col-sm-12">
-			<h2><a>Biodiversity Facts</a></h2>
-  			<div style="height:394px;overflow-y:scroll">
-	        	<strong>Status and trends of biodiversity, including benefits from biodiversity and ecosystem services</strong>
-	        	<p>Over the last 150 years, 224 animal and plant species have become or are presumed to have become extinct. Today, 40% of the evaluated animal species are included on the Red Lists; 34% of flowering plants and ferns have disappeared or are threatened; for fungi, bryophytes and lichens, the proportion is 32%, 42% and 41%, respectively. If species of flora and fauna that are near threatened are also considered, the proportion requiring support rises to 50%. The greatest increase in species numbers was observed between 1970 and 1990 however rates remained constant between 1997 and 2007, with new arrivals being offset by disappearances and marked changes occurring at the regional level. Switzerland has a rather low degree of endemism. Species diversity is particularly high on the northern and southern limits of the Alps due to altitudinal differences providing numerous habitats for plants and animals. Low diversity resulting from habitat destruction from large-scale intensive cultivation is observed in the Central Plateau.</p>
-	        	<p>Since the 20th century, genetic diversity in agriculture has declined due to intensified agricultural practices causing numerous traditional breeds and varieties to be threatened with extinction today. Since 1996, organic farming has steadily increased, being equivalent to 11% of the utilized agriculture area (UAA), however the surface of organically-managed land is shrinking slightly due to a slight decrease in agricultural areas. Forest area has grown by about 45% since the late 19th century and continues to expand. Between 1985 and 2006, forested area increased by 5% however only 3.2% of forest areas is protected which is much lower than the goal of 10% by 2030 as stated in the forest policy. In spite of increased values of wood stock in under-exploited forests, these areas are less biodiverse than intensively cultivated forests, illustrating the significance of sustainable local exploitation of forests to conserving biodiversity. Likewise, in spite of the mean number of vascular plants having increased slightly in the Northern Alps and the Jura due to nutrient-rich soils, homogenized plant communities have developed. Economic conditions continue to fundamentally shape the type of intensity of land use, explaining the differences in the state of biodiversity with respect to farmland and forests.</p>
-	        	<p>Slightly over half (54%) of Swiss watercourses are in an eco-morphologically natural/near-natural state, while the proportion of rivers with insufficient status varies regionally (15% in the Alps, 36% in the Jura, 38% in the Central Plateau) with the rate being highest (46%) in densely populated alpine valleys below 600 m asl. High-altitude zones of the Alps have maintained their biodiversity. A study focused on the genetic data of fish populations (salmonids) revealed that, despite intensive fish stocking programmes, indigenous biogeographic populations with genetic peculiarities continue to exist. Areas of raised bog and fen of national importance have been roughly maintained however the quality of the mires has clearly declined. Species diversity is generally higher in landscapes with dry meadows and pastures, particularly in terms of vascular plants and butterflies, than in normal landscapes. This feature is particularly distinct for the Southern Alps. Since 1945, it is estimated that dry meadows have declined by 90%.</p>
-	        	<p>Mountain ecosystems have been affected by human settlements for centuries. The breeding of domestic animals and the cultivation of crop plants, as well as various uses of forests and grasslands, have influenced the genetic diversity of the alpine region. Landscape elements like single tress, hedges and orchards have been systematically removed and important habitats for animals and plants have disappeared. Notably, the Eastern Central Alps have gained four breeding bird species. Changes in precipitation patterns and rising temperatures have resulted in the shrinking of glaciers and snow-covered areas, reducing the water holding capacity of mountain ranges. Nine glaciers lost on average 17.2 m of their ice thickness between 1967 and 2004. The flora on 37 mountain summits of altitudes between 2800 m and 3400 m were recorded at the beginning and end of the 20th century, demonstrating a strong increase in the number of plant species. On average, the number of species was about 62% higher but on some summits (Piz Mutèr, Beaufort) the plant diversity tripled. Also, today, subalpine and alpine plant species grow at an altitude 13 m higher than in 2001, on average. Species that are endemic to these areas or species that are bound to cold living conditions may be displaced upwards, can become “trapped” on the summits and will disappear as their habitat is reduced.</p>
-	        	<p>In 2007, the total production value (goods and services) of Swiss agriculture amounted to about CHF 10 913 million to which agricultural goods contributed CHF 9 982 million. Honeybees contribute importantly to the national economy by pollinating cultural and wild plants as well as producing honey, pollen and wax. The honeybee is threatened today which has reinforced research on apiculture. Forests are natural suppliers of water with 46% of Swiss groundwater zones existing in forests. Moreover, about 40% of Swiss forest area protects infrastructure against natural hazards such as avalanches, rockfalls, landslides, debris flow. In 2007, 60% of Swiss forests were certified according to the Forest Stewardship Council (FSC) standard. Inland water resources provide many services: glaciers, surface water and groundwater store and provide water for drinking and irrigation; surface waters allow a catch of 1600 tonnes of fish a year; alluvial zones retain water and weaken flood events; waterside areas provide recreational venues; hydropower covers about 56% of the country’s electricity demand. Also, as much humid air is transported to the Alps due to its proximity to the Atlantic, Mediterranean and North Sea, precipitation in the winter is stored as ice and snow, and runs off in the spring and summer. This seasonal discharge from the Alps serves as a water tower for Europe as most water flows down when precipitation is lowest in the neighbouring countries. For more than a century, mountainous landscapes have also been of high value for the tourism industry.</p>
-	        	<strong>Main pressures on and drivers of change to biodiversity (direct and indirect)</strong>
-	        	<p>Since 1960, the rate of human-induced extinction has clearly exceeded the natural rate. Pressures on biodiversity are due to intensive agriculture, increased urbanization, land abandonment, housing construction (e.g. in dry grassland areas), increased forest coverage, etc. It is also feared that impacts of climate change on forests might occur at a rate rendering natural adaptation through genetic processes or species migration difficult. Human populations have over centuries affected mountain ecosystems through activities linked to intensive agriculture, mechanization, landscape clearing and the uncontrolled spread of settlements. Nitrogen pollution is affecting more than 90% of forests, while high ozone concentrations close to the ground are worrisome because of their effects on plant cells. Inland water ecosystems are threatened by factors such as river control, dams and hydropower plants, water pollution, nutrient deposition, invasive alien species, land use changes resulting from agriculture, forestry and tourism. Although significant progress has been made to limit the input of nutrients into Swiss lakes, especially phosphorous, these benefits may however be at risk due to increased pollution from pesticides, pharmaceutical residues and other micropollutants, but also due to the warming of watercourses and the heavy invasion of alien species, as observed in the Rhine River. The effects of air pollutants resulting from high precipitation and atmospheric heavy metal deposition on bryophytes are most apparent in the southern Alps, sometimes with values as high as those found in highly industrial areas in Eastern Europe and the Ruhr basin.</p>
-			</div>
-		</div>
-		<div class="col-sm-6">
-			<h2><a>National Biodiversity Strategy Action Plan</a></h2>
-			<div style="height:120px;overflow-y:scroll">
-				<strong>Major features of National Biodiversity Strategy and Action Plan</strong>
-				<p>The 12 specific objectives of the strategy and action plan include: mobilization of financial resources; development of a human resource base and strengthening of institutional capacity; conducting research to develop sustainable use management techniques and mechanisms; revision and formulation of policy and legislation; and promoting biodiversity conservation through incentives. Each objective is associated with a strategy and specific actions for implementation. Most of these actions are not time-bound or quantitative. The strategy is preceded by a thorough description of the status of biodiversity in Barbados.</p>
-			</div>
-			<div class="row" style="margin-top:12px">
-				<div class="col-lg-12 col-md-12 col-sm-12">
-					<div class="row text-center">
-						<div class="col-sm-3"><div class="numberCircle">8</div><div class="name">Targets</div></div>
-						<div class="col-sm-3"><div class="numberCircle">4</div><div class="name">Indicators</div></div>
-						<div class="col-sm-3"><div class="numberCircle">2</div><div class="name">Assessments</div></div>
-						<div class="col-sm-3"><div class="numberCircle">1</div><div class="name">Activity</div></div>
-					</div>
-				</div>
-				
-			</div>
-			<h2><a>Implementation of the Convention</a></h2>
-			<div style="height:120px;overflow-y:scroll">
-				<strong>Measures Taken to Achieve the 2010 Target</strong>
-				<p>There are several strategies in place to ensure conservation of biodiversity, including the Fisheries Management Plan and the Integrated Coastal Management Plan. The Area Development Plan and the Physical Development Plan both recommend that agricultural practices take into consideration environmental protection and sustainable use. In addition, an Integrated Gully Ecosystem Management Plan was prepared to balance the need to protect biodiversity and the gullies’ drainage function with the development required for ecotourism and agriculture. The provisions of the NBSAP are being implemented through the annual Biodiversity Work Programme of the Ministry of Energy and Environment (MEE). Because tourism has such an important impact on the Barbados environment, a Sustainable Tourism Policy has been adopted. The Barbados Policy on Sustainable Development has adopted a list of 170 core indicators for sustainable development. Five indicators have been identified for measuring biodiversity in the context of sustainable development, which are (i) local species populations (ii) threatened species as a percentage of total native species (iii) percentage change in key ecosystems (iv) decline of indicator species as a measure of habitat stability and health (v) quantity of introduced/exotic species. Measures taken to reduce the threat of invasive species include draft Guidelines for the Management of Alien/Exotic Species, the Quarantine Act and the Health Services Act.</p>
-				<strong>Initiatives in Protected Areas</strong>
-				<p>To further protect its ecosystems, Barbados is currently preparing for accession to the Ramsar Convention, with the Graeme Hall Swamp slated to be the first designated site.</p>
-				<strong>Initiatives for Article 8(j)</strong>
-				<p>The Government provides financial and technical support for the strengthening and development of local fisherfolk organizations. It is the Government’s policy to consult Fishers in the decision making process.</p>
-			</div>
-        </div>
-
-		<div class="clearfix"></div>
-
-		<div class="col-sm-12">
-            <h2><a>National Focal Points</a></h2>
-        </div>
-		<div class="col-sm-4">
-			<h4>CBD Primary NFP, SBSTTA NFP</h4>
-	        <address>
-  				<strong>Mr. Andreas Obrecht</strong>
-				Senior Policy Advisor for Biodiversity<br>
-				International Affairs Division<br>
-				Federal Office for the Environment (FOEN)<br>
-				CH-3003<br>
-				Bern <br>
-				Switzerland<br>
-				<abbr title="Phone">P:</abbr> +41 31 322 11 63<br>
-				<abbr title="Fax">F:</abbr>+41 31 323 03 49<br>
-				<a>andreas.obrecht@bafu.admin.ch</a>
-			</address>
-        </div>
-		<div class="col-sm-4">
-			<h4>CHM NFP</h4>
-	        <address>
-  				<strong>Mrs. Sarah Pearson Perret</strong>
-				Head, Species and Biotopes Section<br>
-				Species Management Division, Species and Biotopes Section<br>
-				Federal Office for the Environment (FOEN)<br>
-				(CHM correspondence to be sent to the Swiss CHM Secretariat)<br>
-				CH-3003 Bern<br>
-				Switzerland<br>
-				<abbr title="Phone">P:</abbr> +41 31 322 68 66<br>
-				<abbr title="Fax">F:</abbr>+41 31 323 89 74<br>
-				<a>sarah.pearson@bafu.admin.ch</a>
-			</address>
-        </div>
-		<div class="col-sm-4">
-			<h4>CHM NFP</h4>
-	        <address>
-  				<strong>Dr. Eric Wiedmer</strong><br>
-				Gruner AG Ingenieure &amp; Planer<br>
-				CHM Secretariat (for CHM correspondence)<br>
-				CH-4020 Basel<br>
-				Switzerland<br>
-				<abbr title="Phone">P:</abbr> +41 31 917 20 83<br>
-				<abbr title="Fax">F:</abbr>+41 31 917 20 21<br>
-				<a>Eric.Wiedmer@gruner.ch</a>
-			</address>
-        </div>
-		<div class="col-sm-4">
-			<h4>Resource Mobilization FP</h4>
-	        <address>
-  				<strong>Ms. Nathalie Rizzotti</strong><br>
-				International Affairs Division<br>
-				Federal Office for the Environment (FOEN)<br>
-				Bern <br>
-				Switzerland<br>
-				<a>nathalie.rizzotti@bafu.admin.ch</a>
-			</address>
-        </div>
-		<div class="col-sm-4">
-			<h4>GTI NFP</h4>
-	        <address>
-  				<strong>Dr. Olivier Biber</strong><br>
-				Scientific Officer<br>
-				Species Management Division, Species and Biotopes Section<br>
-				Federal Office for the Environment (FOEN)<br>
-				CH-3003 Bern<br>
-				<abbr title="Phone">P:</abbr> +41 31 323 06 63<br>
-				<abbr title="Fax">F:</abbr>+41 31 323 89 74<br>
-				<a>olivier.biber@bafu.admin.ch</a>
-			</address>
-        </div>
-		<div class="col-sm-4">
-			<h4>ICNP ABS NFP</h4>
-	        <address>
-  				<strong>Dr. Marco D'Alessandro</strong><br>
-				Waste Management, Chemicals, and Biotechnology Division<br>
-				Federal Office for the Environment (FOEN)<br>
-				CH-3003<br>
-				Bern <br>
-				Switzerland<br>
-				<abbr title="Phone">P:</abbr> +41 31 322 93 95<br>
-				<abbr title="Fax">F:</abbr>+41 31 324 79 78<br>
-				<a>marco.dalessandro@bafu.admin.ch</a>
-			</address>
-        </div>
-		<div class="col-sm-4">
-			<h4>Cartagena Protocol Primary NFP, BCH NFP</h4>
-	        <address>
-  				<strong>Dr. Albert Spielmann</strong><br>
-				Scientific Officer<br>
-				Biotechnology Section<br>
-				Federal Office for the Environment<br>
-				CH-3003 Bern<br>
-				Switzerland<br>
-				<abbr title="Phone">P:</abbr> +41 31 322 20 82<br>
-				<abbr title="Fax">F:</abbr>+41 31 324 79 78<br>
-				<a>Albert.Spielmann@bafu.admin.ch
-        </a></address></div><a>
-       
-        <div class="clearfix"></div>
-       
-        </a><div class="col-sm-12"><a>
-            </a><h2><a></a><a>National Websites</a></h2>
-        </div>
-		<div class="col-sm-4" style="padding-right:40px">
-            <div style="margin-bottom:4px"><strong>National ABSCH</strong></div>
-           <!--  <div style="border:1px solid #bbb;height:220px;overflow-y:hidden"><img src="http://localhost:3000/?url=www.environment.gov.au/biodiversity/international/clearing-house-mechanism"></div> -->
-			<a><div style="margin-top:4px;margin-bottom:10px" class="ellipsis">http://www.environment.gov.au/biodiversity/international/clearing-house-mechanism</div></a>
-		</div>
-		<div class="col-sm-4" style="padding-right:40px">
-			<div style="margin-bottom:4px"><strong>World Agroforestry Centre</strong></div>
-          <!--   <div style="border:1px solid #bbb;height:220px;overflow-y:hidden"><img src="http://localhost:3000/?url=www.worldagroforestrycentre.org"></div> -->
-			<a><div style="margin-top:4px;margin-bottom:10px" class="ellipsis">http://www.worldagroforestrycentre.org/</div></a>
-		</div>
-		<!-- <div class="col-sm-4" style="padding-right:40px">
-			<div class="ellipsis" style="margin-bottom:4px"><strong>The Australian Development Gateway - Water and Sanitation</strong></div>
-            <div style="border:1px solid #bbb;height:220px;overflow-y:hidden"><img src="http://localhost:3000/?url=www.developmentgateway.com.au/jahia/Jahia/lang/en/pid/9"></div>
-			<a><div style="margin-top:4px;margin-bottom:10px" class="ellipsis">http://www.developmentgateway.com.au/jahia/Jahia/lang/en/pid/9</div></a>
-        </div> -->
-  	</div>
-</div>
-
-      </div>
     </div> <!-- end row -->
 </div> <!-- end container -->
 </div> <!-- end controller -->
