@@ -12,18 +12,7 @@
 			<button  type="button" class="btn" ng-click="edit()" ng-show="user().isAuthenticated" ng-disabled="!canEdit()">Edit</button>
 		</div>
 
-		<div ng-switch on="internalDocument.header.schema">
-			<h1 ng-switch-when="focalPoint"				>National Focal Point</h1>
-			<h1 ng-switch-when="authority"				>Competent National Authority</h1>
-			<h1 ng-switch-when="contact"				>Contact</h1>
-			<h1 ng-switch-when="database"				>National Database</h1>
-			<h1 ng-switch-when="resource"				>Virtual Library Resource</h1>
-			<h1 ng-switch-when="organization"			>Organization</h1>
-			<h1 ng-switch-when="measure"				>National Regulation</h1>
-			<h1 ng-switch-when="absCheckpoint"      	>Checkpoint</h1>
-			<h1 ng-switch-when="absCheckpointCommunique">Checkpoint Communiqué</h1>
-			<h1 ng-switch-when="absPermit"				>Permit</h1>
-		</div>
+		<h1>{{internalDocument.header.schema|schemaName}}</h1>
 
 		<div ng-switch on="internalDocument.header.schema">
 			<div view-authority						ng-switch-when="authority"					ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>

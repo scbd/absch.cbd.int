@@ -1,5 +1,5 @@
 "use strict";
-require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "$window", "IStorage", function ($rootScope, $scope, $q, $window, storage) {
+require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "$window", "IStorage", "underscore", "schemaTypes", function ($rootScope, $scope, $q, $window, storage, _, schemaTypes) {
 
 	//============================================================
 	//============================================================
@@ -18,6 +18,41 @@ require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "
 	//============================================================
 
 	var leftTab = "measure";
+
+	$scope.records = null;
+
+	//============================================================
+	//
+	// 
+	//
+	//============================================================
+	function loadRecords()
+	{
+		if(!$rootScope.user.isAuthenticated)
+			return $scope.records = null;
+
+		var qAnd = [];
+
+		qAnd.push("(type eq '"+schemaTypes.join("' or type eq '") + "')");
+
+		var qDocuments = storage.documents.query(qAnd.join(" and ")||undefined);
+		var qDrafts    = storage.drafts   .query(qAnd.join(" and ")||undefined);
+
+		$q.all([qDocuments, qDrafts]).then(function(results) {
+
+			var documents = results[0].data.Items;
+			var drafts    = results[1].data.Items;
+
+			var map = {};
+
+			_.map(documents, function(o) { map[o.identifier] = o });
+			_.map(drafts,    function(o) { map[o.identifier] = o });
+
+			return $scope.records = _.values(map);
+		});
+	}
+
+	loadRecords();
 
 	//============================================================
 	//
@@ -84,7 +119,18 @@ require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "
 
 	//============================================================
 	//
-	// Start edition of a new or an existing document/draft
+	//
+	//
+	//============================================================
+	$scope.$on("editDocument", function(evt, schema, identifier){
+		debugger;
+		evt.stopPropagation();
+		$scope.edit(schema, identifier);
+	});
+
+	//============================================================
+	//
+	//
 	//
 	//============================================================
 	var canEdit_cache = {}

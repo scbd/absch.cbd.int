@@ -1,19 +1,19 @@
 ﻿
-define(['app', 'authentication'], function (app) {
+define(["app", "authentication"], function (app) {
 
-	app.factory('IStorage', ["authHttp", "$q", "authentication", function($http, $q, authentication) {
-
-		return new function() {
-
-			var self        = this;
+	app.factory("IStorage", ["authHttp", "$q", "authentication", "underscore", "realm", function($http, $q, authentication, _, defaultRealm) {
+		return new function()
+		{
 			var serviceUrls = { // Add Https if not .local
 				documentQueryUrl   : function() { return "/api/v2013/documents/"; },
 				documentUrl        : function() { return "/api/v2013/documents/:identifier"; },
 				validateUrl        : function() { return "/api/v2013/documents/x/validate"; },
 				draftUrl           : function() { return "/api/v2013/documents/:identifier/versions/draft"; },
 				attachmentUrl      : function() { return "/api/v2013/documents/:identifier/attachments/:filename"; },
-				securityUrl        : function() { return "/api/v2013/documents/:identifier/security/:operation"; }
-			}
+				securityUrl        : function() { return "/api/v2013/documents/:identifier/securities/:operation"; },
+				draftSecurityUrl   : function() { return "/api/v2013/documents/:identifier/versions/draft/securities/:operation"; },
+				draftLockUrl       : function() { return "/api/v2013/documents/:identifier/versions/draft/locks/:lockID"; }
+			};
 
 			//==================================================
 			//
@@ -27,9 +27,9 @@ define(['app', 'authentication'], function (app) {
 				//===========================
 				"query" : function(query, collection, params)
 				{
-					params            = clone(params||{});
+					params            = _.extend({}, params||{});
 					params.collection = collection;
-					params["$filter"] = query;
+					params.$filter    = query;
 
 					if (query && !collection)
 						params.collection = "my";
@@ -41,6 +41,8 @@ define(['app', 'authentication'], function (app) {
 					var oTrans = transformPath(serviceUrls.documentQueryUrl(), params);
 
 					return $http.get(oTrans.url, {  params : oTrans.params, cache:useCache });
+
+					//TODO: return result.data;
 				},
 
 				//===========================
@@ -58,6 +60,36 @@ define(['app', 'authentication'], function (app) {
 					var oTrans = transformPath(serviceUrls.documentUrl(), params);
 
 					return $http.get(oTrans.url, { params : oTrans.params, cache:useCache });
+
+					//TODO: return result.data;
+
+				},
+
+				//===========================
+				//
+				//===========================
+				"exists" : function(identifier, params)
+				{
+					params            = clone(params||{});
+					params.identifier = identifier;
+
+					var useCache = !!params.cache;
+
+					params.cache = undefined;
+
+					var oTrans = transformPath(serviceUrls.documentUrl(), params);
+
+					return $http.head(oTrans.url, { params : oTrans.params, cache:useCache }).then(function() {
+						
+						return true;
+						
+					}).catch(function(error) {
+						
+						if(error.status!="404")
+							throw "Error";
+
+						return false;
+					});
 				},
 
 				//===========================
@@ -73,7 +105,9 @@ define(['app', 'authentication'], function (app) {
 
 					var oTrans = transformPath(serviceUrls.documentUrl(), params);
 
-					return $http.put(oTrans.url, data, { "params" : oTrans.params });
+					return $http.put(oTrans.url, data, { "params" : oTrans.params }).then(function(result){
+						return result.data;
+					});
 				},
 
 				//===========================
@@ -102,6 +136,8 @@ define(['app', 'authentication'], function (app) {
 					var oTrans = transformPath(serviceUrls.validateUrl(), params);
 
 					return $http.put(oTrans.url, document, { "params" : oTrans.params });
+
+					//TODO: return result.data;
 				},
 
 				//===========================
@@ -109,18 +145,18 @@ define(['app', 'authentication'], function (app) {
 				//===========================
 				"security": {
 					canCreate: function(identifier, schema, metadata) {
-						return canDo("create", identifier, schema, metadata);
+						return canDo(serviceUrls.securityUrl(), "create", identifier, schema, metadata);
 					},
 
 					canUpdate: function(identifier, schema, metadata) {
-						return canDo("update", identifier, schema, metadata);
+						return canDo(serviceUrls.securityUrl(), "update", identifier, schema, metadata);
 					},
 
 					canDelete: function(identifier, schema, metadata) {
-						return canDo("delete", identifier, schema, metadata);
+						return canDo(serviceUrls.securityUrl(), "delete", identifier, schema, metadata);
 					}
 				}
-			}
+			};
 
 			//==================================================
 			//
@@ -136,7 +172,7 @@ define(['app', 'authentication'], function (app) {
 				{
 					params            = clone(params||{});
 					params.collection = "mydraft";
-					params["$filter"] = query;
+					params.$filter    = query;
 
 					var useCache = !!params.cache;
 
@@ -145,6 +181,8 @@ define(['app', 'authentication'], function (app) {
 					var oTrans = transformPath(serviceUrls.documentQueryUrl(), params);
 
 					return $http.get(oTrans.url, {  params : oTrans.params, cache:useCache });
+
+					//TODO: return result.data;
 				},
 
 
@@ -156,9 +194,42 @@ define(['app', 'authentication'], function (app) {
 					params            = clone(params||{});
 					params.identifier = identifier;
 
+					var useCache = !!params.cache;
+
+					params.cache = undefined;
+
 					var oTrans = transformPath(serviceUrls.draftUrl(), params);
 
-					return $http.get(oTrans.url, {  params : oTrans.params });
+					return $http.get(oTrans.url, {  params : oTrans.params, cache:useCache });
+
+					//TODO: return result.data;
+				},
+
+				//===========================
+				//
+				//===========================
+				"exists" : function(identifier, params)
+				{
+					params            = clone(params||{});
+					params.identifier = identifier;
+
+					var useCache = !!params.cache;
+
+					params.cache = undefined;
+
+					var oTrans = transformPath(serviceUrls.draftUrl(), params);
+
+					return $http.head(oTrans.url, {  params : oTrans.params, cache:useCache }).then(function() {
+						
+						return true;
+						
+					}).catch(function(error) {
+						
+						if(error.status!="404")
+							throw "Error";
+
+						return false;
+					});
 				},
 
 				//===========================
@@ -174,7 +245,9 @@ define(['app', 'authentication'], function (app) {
 
 					var oTrans = transformPath(serviceUrls.draftUrl(), params);
 
-					return $http.put(oTrans.url, data, { "params" : oTrans.params });
+					return $http.put(oTrans.url, data, { "params" : oTrans.params }).then(function(result){
+						return result.data;
+					});
 				},
 
 				//===========================
@@ -188,6 +261,8 @@ define(['app', 'authentication'], function (app) {
 					var oTrans = transformPath(serviceUrls.draftUrl(), params);
 
 					return $http.delete(oTrans.url, { "params" : oTrans.params });
+
+					//TODO: return result.data;
 				},
 
 				//===========================
@@ -195,18 +270,40 @@ define(['app', 'authentication'], function (app) {
 				//===========================
 				"security": {
 					canCreate: function(identifier, schema, metadata) {
-						return canDo("createDraft", identifier, schema, metadata);
+						return canDo(serviceUrls.draftSecurityUrl(), "create", identifier, schema, metadata);
 					},
 
 					canUpdate: function(identifier, schema, metadata) {
-						return canDo("updateDraft", identifier, schema, metadata);
+						return canDo(serviceUrls.draftSecurityUrl(), "update", identifier, schema, metadata);
 					},
 
 					canDelete: function(identifier, schema, metadata) {
-						return canDo("deleteDraft", identifier, schema, metadata);
+						return canDo(serviceUrls.draftSecurityUrl(), "delete", identifier, schema, metadata);
+					}
+				},
+
+				"locks" : {
+
+					//===========================
+					//
+					// Not tested
+					//
+					//===========================
+					"delete" : function(identifier, lockID)
+					{
+						var params = {
+							identifier : identifier,
+							lockID     : lockID
+						};
+
+						var oTrans = transformPath(serviceUrls.draftLockUrl(), params);
+
+						return $http.delete(oTrans.url).then(function(success) {
+							return success.data;
+						});
 					}
 				}
-			}
+			};
 
 			this.attachments = {
 
@@ -227,7 +324,7 @@ define(['app', 'authentication'], function (app) {
 
 					var oTrans = transformPath(serviceUrls.attachmentUrl(), params);
 
-					return $http.put(oTrans.url, file, { 
+					return $http.put(oTrans.url, file, {
 						"headers" : { "Content-Type": contentType },
 						"params"  : oTrans.params
 					}).then(
@@ -244,7 +341,7 @@ define(['app', 'authentication'], function (app) {
 				{
 					return getMimeTypes(file.name, file.type || "application/octet-stream");
 				}
-			}
+			};
 
 			//==================================================
 			//
@@ -267,7 +364,7 @@ define(['app', 'authentication'], function (app) {
 				}
 
 				return sMimeType;
-			}
+			};
 
 			//==================================================
 			//
@@ -282,7 +379,7 @@ define(['app', 'authentication'], function (app) {
 					return undefined;
 
 				return angular.fromJson(angular.toJson(obj));
-			}
+			};
 
 			//===========================
 			//
@@ -294,19 +391,19 @@ define(['app', 'authentication'], function (app) {
 			{
 				var oRegex     = /\:\w+/g;
 				var oMatch     = null;
-				var qMatches   = []
+				var qMatches   = [];
 				var oNewParams = {};
 
-				while ((oMatch = oRegex.exec(url)) != null) {
+				while ((oMatch = oRegex.exec(url)) !== null) {
 					oMatch.key   = oMatch[0].substring(1);
 					oMatch.value = oMatch[0];
 					qMatches.splice(0, 0, oMatch);
 				}
 
-				for(key in params||{}) {
+				for(var key in params||{}) {
 					var bExist = false;
 
-					for(i in qMatches) {
+					for(var i in qMatches) {
 						if (qMatches[i].key != key)
 							continue;
 
@@ -318,38 +415,41 @@ define(['app', 'authentication'], function (app) {
 						oNewParams[key] = params[key];
 				}
 
-				for (i in qMatches) {
-					url = replaceAt(url, qMatches[i].index, qMatches[i][0].length, encodeURIComponent(qMatches[i].value))
+				for (var j in qMatches) {
+					url = replaceAt(url, qMatches[j].index, qMatches[j][0].length, encodeURIComponent(qMatches[j].value));
 				}
 
-				return { "url" : url, "params" : oNewParams }
-			}
+				return { "url" : url, "params" : oNewParams };
+			};
 
 			//===========================
 			//
 			// Calls storage security
 			//
 			//===========================
-			var canDo = function(operation, identifier, schema, metadata) {
-				identifier = identifier || "x"
-				metadata = angular.extend(metadata || {}, { 'schema': schema });
+			var canDo = function(patternPath, operation, identifier, schema, metadata) {
+
+				metadata = angular.extend({}, { "schema": schema }, metadata || {});
 
 				if (!metadata.government && authentication.getUser().government)
-					metadata = angular.extend(metadata, { 'government': authentication.getUser().government });
+					metadata = angular.extend(metadata, { "government": authentication.getUser().government });
+
+				if (!metadata.realm && defaultRealm)
+					metadata = angular.extend(metadata, { "realm": defaultRealm });
 
 				var params = {
-					"identifier" : identifier,
+					"identifier" : identifier || "x",
 					"operation"  : operation,
 					"metadata"   : metadata
 				};
 
-				var oTrans = transformPath(serviceUrls.securityUrl(), params);
+				var oTrans = transformPath(patternPath, params);
 
-				return $http.get(oTrans.url, { "params": oTrans.params, cache: true }).then(
+				return $http.get(oTrans.url, { "params": oTrans.params }).then(
 					function(res) {
 						return res.data.isAllowed;
 					});
-			}
+			};
 
 			//===========================
 			//
@@ -359,9 +459,9 @@ define(['app', 'authentication'], function (app) {
 			//===========================
 			var replaceAt = function(str, index, len, newText) {
 				return str.substring(0, index) + newText + str.substring(index+len);
-			}
+			};
 
 			return this;
 		}();
-	}])
-})
+	}]);
+});

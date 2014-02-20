@@ -2,6 +2,9 @@
 
 define(['app', 'authentication', 'services', 'filters', 'storage', 'workflows'], function (app) {
 
+    app.value("realm", "ABS");
+    app.value("schemaTypes", [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "resource" ]);
+
 	var resolveUser = ['$rootScope', 'authentication', function($rootScope, authentication) {
 		return authentication.getUser().then(function (user) { $rootScope.user = user; return user; });
 	}];

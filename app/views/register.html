@@ -11,7 +11,7 @@
      /*background-color: #204C70; */
   }
 </style>
-    
+
   <div class="category-container">
       <div class="container">
           <span class="category"><span class="glyphicon glyphicon-edit"></span> Register Information</span>
@@ -136,19 +136,11 @@
 
               <div ng-show="editing" edit-measure></div>
 
-              <div ng-hide="editing">
+              <div ng-show="isAuthenticated && !editing">
+
                   <h2 style="border-bottom: 1px solid #333;">Existing records</h2>
-                  <div class="copntainer">
-                      <div class="row" style="background-color: #333; padding: 5px; margin-left: 0px;">
-                          <div class="col-md-1 text-center"><span style="font-size: 16px; color: white;">FILTERS</span></div>
-                          <div class="col-md-2 text-center"><span class="btn btn-info">All <span class="badge badge-default">14</span></span></div>
-                          <div class="col-md-2 text-center"><span class="btn btn-danger">Requests <span class="badge badge-default">3</span></span></div>
-                          <div class="col-md-2 text-center"><span class="btn btn-success">Published  <span class="badge badge-default">3</span></span></div>
-                          <div class="col-md-2 text-center"><span class="btn btn-default btn-draft">Draft  <span class="badge badge-default">3</span></span></div>
-                          <div class="col-md-3 text-center">
-                              <input type="text" placeholder=" Keyword " class="form-control keyword" style="height: 34px; margin-top: 5px; width: 160px;"></div>
-                      </div>
-                  </div>
+                  <register-record-list records="records" schema="measure"></register-record-list>
+                  
               </div>
           </div>
 
@@ -200,20 +192,11 @@
 
               <div ng-show="editing" edit-authority></div>
 
-              <div ng-hide="editing">
+              <div ng-show="isAuthenticated && !editing">
 
-                  <h3 style="border-bottom: 1px solid #333;">Existing records</h3>
-                  <div class="copntainer">
-                      <div class="row" style="background-color: #333; padding: 5px; margin-left: 0px;">
-                          <div class="col-md-1 text-center"><span style="font-size: 16px; color: white;">FILTERS</span></div>
-                          <div class="col-md-2 text-center"><span class="btn btn-info">All <span class="badge badge-default">14</span></span></div>
-                          <div class="col-md-2 text-center"><span class="btn btn-danger">Requests <span class="badge badge-default">3</span></span></div>
-                          <div class="col-md-2 text-center"><span class="btn btn-success">Published  <span class="badge badge-default">3</span></span></div>
-                          <div class="col-md-2 text-center"><span class="btn btn-warning">Draft  <span class="badge badge-default">3</span></span></div>
-                          <div class="col-md-3 text-center">
-                              <input type="text" placeholder=" Keyword " class="form-control keyword" style="height: 34px; margin-top: 5px; width: 160px;"></div>
-                      </div>
-                  </div>
+                  <h2 style="border-bottom: 1px solid #333;">Existing records</h2>
+                  <register-record-list records="records" schema="authority"></register-record-list>
+                  
               </div>
           </div>
 
@@ -269,20 +252,11 @@
 
               <div ng-show="editing" edit-abs-permit></div>
 
-              <div ng-hide="editing">
+              <div ng-show="isAuthenticated && !editing">
 
-                  <h3 style="border-bottom: 1px solid #333;">Existing records</h3>
-                  <div class="copntainer">
-                      <div class="row" style="background-color: #333; padding: 5px; margin-left: 0px;">
-                          <div class="col-md-1 text-center"><span style="font-size: 16px; color: white;">FILTERS</span></div>
-                          <div class="col-md-2 text-center"><span class="btn btn-info">All <span class="badge badge-default">14</span></span></div>
-                          <div class="col-md-2 text-center"><span class="btn btn-danger">Requests <span class="badge badge-default">3</span></span></div>
-                          <div class="col-md-2 text-center"><span class="btn btn-success">Published  <span class="badge badge-default">3</span></span></div>
-                          <div class="col-md-2 text-center"><span class="btn btn-warning">Draft  <span class="badge badge-default">3</span></span></div>
-                          <div class="col-md-3 text-center">
-                              <input type="text" placeholder=" Keyword " class="form-control keyword" style="height: 34px; margin-top: 5px; width: 160px;"></div>
-                      </div>
-                  </div>
+                  <h2 style="border-bottom: 1px solid #333;">Existing records</h2>
+                  <register-record-list records="records" schema="absPermit"></register-record-list>
+
               </div>
           </div>
 
@@ -331,8 +305,11 @@
 
               <div ng-show="editing" edit-abs-checkpoint></div>
 
-              <div ng-hide="editing">
-                  <h3 style="border-bottom: 1px solid #333;">Existing records - TODO</h3>
+              <div ng-show="isAuthenticated && !editing">
+
+                  <h2 style="border-bottom: 1px solid #333;">Existing records</h2>
+                  <register-record-list records="records" schema="absCheckpoint"></register-record-list>
+                  
               </div>
           </div>
 
@@ -383,9 +360,13 @@
 
               <div ng-show="editing" edit-abs-checkpoint-communique></div>
 
-              <div ng-hide="editing">
-                  <h3 style="border-bottom: 1px solid #333;">Existing records - TODO</h3>
+              <div ng-show="isAuthenticated && !editing">
+
+                  <h2 style="border-bottom: 1px solid #333;">Existing records</h2>
+                  <register-record-list records="records" schema="absCheckpointCommunique"></register-record-list>
+                  
               </div>
+
           </div>
 
           <div ng-show="tab()=='resource'" class="col-md-9 well well-registerpage">
@@ -428,9 +409,13 @@
 
               <div ng-show="editing" edit-resource></div>
 
-              <div ng-hide="editing">
-                  <h3 style="border-bottom: 1px solid #333;">Existing records - TODO</h3>
+              <div ng-show="isAuthenticated && !editing">
+
+                  <h2 style="border-bottom: 1px solid #333;">Existing records</h2>
+                  <register-record-list records="records" schema="resource"></register-record-list>
+                  
               </div>
+
           </div>
 
           <div ng-show="tab()=='database'" class="col-md-9 well well-registerpage">
@@ -472,8 +457,11 @@
 
               <div ng-show="editing" edit-database></div>
 
-              <div ng-hide="editing">
-                  <h3 style="border-bottom: 1px solid #333;">Existing records - TODO</h3>
+              <div ng-show="isAuthenticated && !editing">
+
+                  <h2 style="border-bottom: 1px solid #333;">Existing records</h2>
+                  <register-record-list records="records" schema="database"></register-record-list>
+                  
               </div>
           </div>
 
@@ -482,6 +470,8 @@
 </div>
 
 <script src="/app/views/register.html.js"></script>
+<script src="/app/views/register-record-list.directive.js"></script>
+
 <script src="/app/js/directives/forms/form-controls.js"></script>
 <script src="/app/views/forms/edit/editFormUtility.js"></script>
 <script src="/app/views/forms/edit/field-embed-contact.directive.js"></script>
