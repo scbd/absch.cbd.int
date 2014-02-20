@@ -1,0 +1,49 @@
+﻿<div>
+
+	<div class="row" ng-show="getContacts()">	
+	  <div class="col-sm-12" ng-class="{'col-md-6' : getContacts().length>1, 'col-md-12' : getContacts().length<=1}" ng-repeat="contact in getContacts()">
+		<div class="well" >
+			<div class="pull-right">
+				<button type="button" class="btn btn-default" ng-click="deleteContact($index)"><i class="fa fa-trash-o"></i></button>
+				<button type="button" class="btn btn-default" ng-click="editContact($index)"  ><i class="fa fa-edit"></i></button>
+			</div>
+			<view-contact-reference ng-model='contact' locale="en"></view-contact-reference>
+		</div>
+	  </div>
+	</div>							
+
+	<button class="btn btn-default" ng-click="editContact(-1)">
+	  {{caption||'ADD ORGANIZATION OR CONTACT »'}}
+	</button>
+
+	<!-- Modal -->
+	<div class="modal fade" id="editContact"  data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-lg">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" aria-hidden="true" ng-click="closeContact()">&times;</button>
+	        <h4 class="modal-title" id="myModalLabel">
+	        	<span ng-hide="edition.contact.type">Edit an organization or a contact person</span>
+	        	<span ng-show="edition.contact.type=='organization'">Edit an organization</span>
+	        	<span ng-show="edition.contact.type=='person'">Edit a contact person</span>
+	        </h4>
+
+   	        <label class="radio-inline"><input type="radio" ng-model="edition.contact.type" value="organization" name="editionContactType"/> Organization</label>
+	        <label class="radio-inline"><input type="radio" ng-model="edition.contact.type" value="person" name="editionContactType"/> Person</label>
+
+          </div>
+	      <div class="modal-body">
+
+	      	<form name="editContactForm">
+	      		<div edit-contact-base ng-model="edition.contact" locales="locales" form="editContactForm"></div>	
+	      	</form>
+	      </div>
+	      <div class="modal-footer">
+	      	<span ng-hide="editContactForm.$valid">You need to fill all mandatory fields before you can save.</span>
+	        <a type="button" class="btn btn-default" ng-click="closeContact()">Close</a>
+	        <a type="button" class="btn btn-primary" ng-disabled="!editContactForm.$valid" ng-click="saveContact()">Save changes</a>
+	      </div>
+	    </div>
+	  </div>
+	</div>	
+</div>

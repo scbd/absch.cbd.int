@@ -64,30 +64,6 @@ require("app").directive("viewAbsPermit", [function () {
 			//====================
 			//
 			//====================
-			$scope.$watch("document.provider", function(_new) {
-				$scope.provider = undefined;
-
-				if (_new) {
-					$scope.provider = angular.fromJson(angular.toJson(_new));
-					$scope.loadReferences($scope.provider);
-				}
-			});
-
-			//====================
-			//
-			//====================
-			$scope.$watch("document.informedConsent", function (_new) {
-				$scope.informedConsent = undefined;
-
-				if (_new) {
-					$scope.informedConsent = angular.fromJson(angular.toJson(_new));
-					$scope.loadReferences($scope.informedConsent);
-				}
-			});
-
-			//====================
-			//
-			//====================
 			$scope.$watch("document.amendedPermits", function (_new) {
 				$scope.amendedPermits = undefined;
 

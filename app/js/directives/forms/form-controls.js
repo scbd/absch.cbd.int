@@ -203,6 +203,7 @@ require('app').directive('kmInputtextList', function ($http)
 		scope: {
 			placeholder : "@",
 			binding     : "=ngModel",
+			type        : "@type",
 			required    : "@"
 		},
 		link: function ($scope, $element, attrs, ngModelController) 
@@ -2226,7 +2227,6 @@ require('app').directive('kmControlGroup', function ()
 		scope: {
 			name      : '@name',
 			caption   : '@caption',
-			required  : '@required',
 			isValidFn : "&isValid"
 		},
 		link: function ($scope, $element, $attr) 
@@ -2243,6 +2243,12 @@ require('app').directive('kmControlGroup', function ()
 					return !$scope.$parent.isFieldValid($scope.name);
 				}
 			}
+
+			$scope.isRequired = function() {
+				var val = $element.attr("required");
+				return val !== undefined && val!==false && val!=="false";
+			}
+
 		},
 		controller: ["$scope", "underscore", function ($scope, _) 
 		{
@@ -2264,10 +2270,6 @@ require('app').directive('kmControlGroup', function ()
 				}
 
 				return false;
-			}
-
-			$scope.isRequired = function() {
-				return $scope.required !== undefined && $scope.required!="false";
 			}
 		}]
 	};

@@ -1,31 +1,37 @@
 ﻿<div>
-	<div  ng-hide="document.type=='organization'">
+	<style>
+		input.ng-invalid-url, input.ng-invalid-email {
+		 background-color:#f0ad4e;
+		}
+	</style>
+
+	<div ng-hide="document.type=='organization'">
 
 		<legend>Personal Information</legend>
 
 		<div  class="row">
 
-			<div class="col-lg-2 col-md-4 col-sm-4 col-xs-12">
+			<div class="col-md-4 col-sm-4 col-xs-12">
 				<div class="km-control-group" name="prefix" caption="Title">
 					<div km-textbox-ml name="prefix" ng-model="document.prefix" locales="locales"></div>
 				</div>
 			</div>
 
-			<div class="col-lg-4 col-md-8 col-sm-8 col-xs-12">
-				<div class="km-control-group" name="firstName" required caption="First name">
-					<input type="text" class="form-control" name="firstName" ng-model="document.firstName" required/>
+			<div class="col-md-8 col-sm-8 col-xs-12">
+				<div class="km-control-group" name="firstName" ng-required="!form.firstNameX.$valid" caption="First name">
+					<input type="text" class="form-control" name="firstNameX" ng-model="document.firstName" ng-required="document.type=='person'"/>
 				</div>
 			</div>
 
-			<div class="col-lg-2 col-md-4 col-sm-4 col-xs-12">
+			<div class="col-md-4 col-sm-4 col-xs-12">
 				<div class="km-control-group" name="middleName" caption="Middle Name">
 					<input type="text" class="form-control" name="middleName" ng-model="document.middleName"/>
 				</div>
 			</div>
 
-			<div class="col-lg-4 col-md-8 col-sm-8 col-xs-12">
-				<div class="km-control-group" name="lastName" required caption="Last name">
-					<input type="text" class="form-control" name="lastName" ng-model="document.lastName" required/>
+			<div class="col-md-8 col-sm-8 col-xs-12">
+				<div class="km-control-group" name="lastName" ng-required="!form.lastNameX.$valid" caption="Last name">
+					<input type="text" class="form-control" name="lastNameX" ng-model="document.lastName" ng-required="document.type=='person'"/>
 				</div>
 			</div>
 
@@ -43,7 +49,7 @@
 	<div class="row">
 
 		<div class="col-md-7 col-xs-12">
-			<div class="km-control-group" name="organization" required caption="Organization">
+			<div class="km-control-group" name="organization" ng-required="!form.organization.$valid" caption="Organization">
 				<div class="help-block">Fullname without abbreviation</div>
 				<div km-textbox-ml name="organization" ng-model="document.organization" required locales="locales"></div>
 			</div>
@@ -73,25 +79,25 @@
 
 		<div  class="row">
 
-			<div class="col-lg-2 col-md-4 col-sm-4 col-xs-12">
+			<div class="col-md-4 col-sm-4 col-xs-12">
 				<div class="km-control-group" name="prefix" caption="Title">
 					<div km-textbox-ml name="prefix" ng-model="document.prefix" locales="locales"></div>
 				</div>
 			</div>
 
-			<div class="col-lg-4 col-md-8 col-sm-8 col-xs-12">
+			<div class="col-md-8 col-sm-8 col-xs-12">
 				<div class="km-control-group" name="firstName" caption="First name">
 					<input type="text" class="form-control" name="firstName" ng-model="document.firstName"/>
 				</div>
 			</div>
 
-			<div class="col-lg-2 col-md-4 col-sm-4 col-xs-12">
+			<div class="col-md-4 col-sm-4 col-xs-12">
 				<div class="km-control-group" name="middleName" caption="Middle Name">
 					<input type="text" class="form-control" name="middleName" ng-model="document.middleName"/>
 				</div>
 			</div>
 
-			<div class="col-lg-4 col-md-8 col-sm-8 col-xs-12">
+			<div class="col-md-8 col-sm-8 col-xs-12">
 				<div class="km-control-group" name="lastName" caption="Last name">
 					<input type="text" class="form-control" name="lastName" ng-model="document.lastName"/>
 				</div>
@@ -128,7 +134,7 @@
 
 	<div class="row">
 		<div class="col-md-6">
-			<div class="km-control-group" name="city" required caption="City">
+			<div class="km-control-group" name="city" ng-required="!form.city.$valid" caption="City">
 				<div km-textbox-ml name="city" ng-model="document.city" required locales="locales" placeholder="example: Montreal"></div>
 			</div>
 		</div>
@@ -149,7 +155,7 @@
 		</div>
 
 		<div class="col-md-6">
-			<div class="km-control-group" name="country" required caption="Country address">
+			<div class="km-control-group" name="country" ng-required="!form.country.$valid" caption="Country address">
 				<div km-select name="country" ng-model="document.country" watch-items items="options.countries" required></div>
 			</div>
 		</div>
@@ -159,7 +165,7 @@
 
 	<div class="row">
 		<div class="col-md-6 col-xs-12">
-			<div class="km-control-group" name="phones" required caption="Phone numbers">
+			<div class="km-control-group" name="phones" ng-required="!form.phones.$valid" caption="Phone numbers">
 				<div class="help-block">Please use the following format: +[country code] [city code] [telephone number] [extension, if necessary].</div>
 				<div km-inputtext-list name="phones" ng-model="document.phones" required placeholder="example: +1 514.288.2220"></div>
 			</div>
@@ -182,7 +188,7 @@
 
 		<div class="col-md-6 col-xs-12">
 			<div class="km-control-group" name="websites" caption="Website addresses">
-				<div km-link name="websites" ng-model="document.websites" allow-file="false"></div>
+				<div km-inputtext-list name="websites" type="url" ng-model="$parent._urls" pattern="url" placeholder="example: http://www.cbd.int"></div>
 			</div>
 		</div>
 	</div>
