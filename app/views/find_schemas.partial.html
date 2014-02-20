@@ -1,5 +1,5 @@
 <li>
-    <div data-toggle="modal" href="#dialogSelectSchemas" ng-class="{false:'not', true:'x'}[expanded]"><strong>{{title}}&nbsp;<b class="caret"></b></strong></div>
+    <a data-toggle="modal" href="#dialogSelectSchemas">{{title}}&nbsp;<b class="caret"></b></a>
     <div class="list-group-item-expand">
         <div ng-repeat="item in terms | orderBy:'title' | filter:{selected:true}" ng-class="ccc(item)" ng-click="onclick(this, $event)">
             <div class="label label-selected-facet">
@@ -15,39 +15,36 @@
         <div class="modal-dialog"><!--  ;margin-left:-380px"  -->
             <div class="modal-content" style="width:640px">
                 <div class="modal-body" style="padding-left:20px">
-                    <table class="options">
-                        <tr>
-                            <td style="width:360px" valign="top">
-                                <h4>News &amp; Announcements</h4>
-                                <div class="checkbox" ng-repeat="item in outreachRecords" ng-switch on="!!item.title">
-                                    <label ng-switch-when="true"><input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="refresh()">{{item.title}} ({{item.count}})</label>
-                                    <hr ng-switch-when="false" style="height:8px;margin:0;border:none">
-                                </div>
-                                <h4 style="margin-top:20px">CBD Records</h4>
-                                <div class="checkbox" ng-repeat="item in copRecords" ng-switch on="!!item.title">
-                                    <label ng-switch-when="true"><input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="refresh()">{{item.title}} ({{item.count}})</label>
-                                    <hr ng-switch-when="false" style="height:8px;margin:0;border:none">
-                                </div>
-                                <h4 style="margin-top:20px">Reference Records</h4>
-                                <div class="checkbox" ng-repeat="item in referenceRecords" ng-switch on="!!item.title">
-                                    <label ng-switch-when="true"><input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="refresh()">{{item.title}} ({{item.count}})</label>
-                                    <hr ng-switch-when="false" style="height:8px;margin:0;border:none">
-                                </div>
-                            </td>
-                            <td style="width:360px" valign="top">
-                                <h4>CBD Meetings &amp; Outcomes</h4>
-                                <div class="checkbox" ng-repeat="item in meetingRecords" ng-switch on="!!item.title">
-                                    <label ng-switch-when="true"><input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="refresh()">{{item.title}} ({{item.count}})</label>
-                                    <hr ng-switch-when="false" style="height:8px;margin:0;border:none">
-                                </div>
-                                <h4 style="margin-top:20px">National Records</h4>
-                                <div class="checkbox" ng-repeat="item in nationalRecords" ng-switch on="!!item.title">
-                                    <label ng-switch-when="true"><input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="refresh()">{{item.title}} ({{item.count}})</label>
-                                    <hr ng-switch-when="false" style="height:8px;margin:0;border:none">
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
+                    <h4>National Records</h4>
+                    <div class="checkbox"><label>
+                        <input type="checkbox" ng-model="measure.selected" bind-indeterminate="measure.indeterminate">
+                        Legislative, administrative or policy measures on access and benefit-sharing ({{measure.count}})
+                    </label></div>
+                    <div class="checkbox"><label>
+                        <input type="checkbox" ng-model="authority.selected" bind-indeterminate="authority.indeterminate">
+                        Competent National Authority ({{authority.count}})
+                    </label></div>
+                    <div class="checkbox"><label>
+                        <input type="checkbox" ng-model="absPermit.selected" bind-indeterminate="absPermit.indeterminate">
+                        Permit or its equivalent constituting and internationally recognized certificate of compliance ({{absPermit.count}})
+                    </label></div>
+                    <div class="checkbox"><label>
+                        <input type="checkbox" ng-model="absCheckpoint.selected" bind-indeterminate="absCheckpoint.indeterminate">
+                        Checkpoint ({{absCheckpoint.count}})
+                    </label></div>
+                    <div class="checkbox"><label>
+                        <input type="checkbox" ng-model="absCheckpointCommunique.selected" bind-indeterminate="absCheckpointCommunique.indeterminate">
+                        Checkpoint Communiqué ({{absCheckpointCommunique.count}})
+                    </label></div>
+                    <div class="checkbox"><label>
+                        <input type="checkbox" ng-model="database.selected" bind-indeterminate="database.indeterminate">
+                        ABS National Website or Database ({{database.count}})
+                    </label></div>
+                    <h4>Reference Records</h4>
+                    <div class="checkbox"><label>
+                        <input type="checkbox" ng-model="resource.selected" bind-indeterminate="resource.indeterminate">
+                        Virtual Library Record ({{resource.count}})
+                    </label></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

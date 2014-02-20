@@ -115,48 +115,15 @@ require('app').directive('searchFilterSchemas', function ($http) {
                 return dictionary;
             }
 
-            $scope.outreachRecords = [
-                { identifier: 'notification', title: 'Notifications'  },
-                { identifier: 'pressRelease', title: 'Press Releases' },
-                { identifier: 'statement'   , title: 'Statements'     },
-                { identifier: 'announcement', title: 'Announcements'  }
-            ];
+            $scope.measure                 = { identifier: 'measure' };
+            $scope.authority               = { identifier: 'authority' };
+            $scope.absPermit               = { identifier: 'absPermit' };
+            $scope.absCheckpoint           = { identifier: 'absCheckpoint' };
+            $scope.absCheckpointCommunique = { identifier: 'absCheckpointCommunique' };
+            $scope.database                = { identifier: 'database' };
+            $scope.resource                = { identifier: 'resource' };
 
-            $scope.referenceRecords = [
-                // { identifier: 'treaty'                , title: 'Treaties'                   , count: 0 },
-                // { identifier: 'article'               , title: 'Treaty Articles'            },
-                { identifier: 'event'                 , title: 'Related Events'             , count: 0 },
-                { identifier: 'organization'          , title: 'Related Organizations'      },
-                { identifier: 'resource'              , title: 'Virtual Library Resources'  }
-            ];
-
-             $scope.copRecords = [
-                { identifier: 'aichiTarget'           , title: 'Aichi Biodiversity Targets' },
-                { identifier: 'strategicPlanIndicator', title: 'Strategic Plan Indicators'  },
-                { identifier: 'marineEbsa'            , title: 'Marine EBSAs'               },
-                { identifier: 'caseStudy'             , title: 'Case Studies'               , count: 0 }
-            ];
-
-            $scope.meetingRecords = [
-                { identifier: 'meeting'        , title: 'Meetings'          },
-                { identifier: 'meetingDocument', title: 'Meeting Documents' },
-                { identifier: 'decision'       , title: 'Decisions'         },
-                { identifier: 'recommendation' , title: 'Recommendations'   }
-            ];
-
-            $scope.nationalRecords = [
-                { identifier: 'focalPoint'              , title: 'National Focal Points'      },
-                { identifier: 'nationalReport'          , title: 'National Reports'           },
-                { identifier: 'nationalTarget'          , title: 'National Targets'           },
-                { identifier: 'nationalIndicator'       , title: 'National Indicators'        },
-                { identifier: 'progressAssessment'      , title: 'Progress Assessments'       },
-                { identifier: 'implementationActivity'  , title: 'Implementation Activities'  },
-                { identifier: 'nationalSupportTool'     , title: 'Guidance and Support Tools' , count: 0 }, 
-                {},
-                { identifier: 'resourceMobilizationTool', title: 'Resource Mobilization Tools' , count: 0 }
-            ];
-
-            $scope.terms = _.union($scope.outreachRecords, $scope.referenceRecords, $scope.copRecords, $scope.meetingRecords, $scope.nationalRecords );
+            $scope.terms  = [ $scope.measure, $scope.authority, $scope.absPermit, $scope.absCheckpoint, $scope.absCheckpointCommunique, $scope.database, $scope.resource ];
             $scope.termsx = dictionarize($scope.terms);
 
             // Set intitial selection from QueryString parameters
