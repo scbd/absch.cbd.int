@@ -1,8 +1,8 @@
 'use strict';
 
-define([/*'angular'*/], function () {
+define([/*'angular', 'angular-route', 'angular-cookies'*/], function () {
 
-	var app = require('angular').module('app', ['ngRoute'])
+	var app = require('angular').module('app', ['ngRoute', 'ngCookies'])
 
 	app.config(['$controllerProvider', '$compileProvider', '$provide', '$filterProvider', function($controllerProvider, $compileProvider, $provide, $filterProvider) {
 		  
