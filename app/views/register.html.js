@@ -1,5 +1,5 @@
 "use strict";
-require("app").controller("RegisterController", ["$rootScope", "$scope", "$window", function ($rootScope, $scope, $window) {
+require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "$window", "IStorage", function ($rootScope, $scope, $q, $window, storage) {
 
 	//============================================================
 	//============================================================
@@ -7,12 +7,7 @@ require("app").controller("RegisterController", ["$rootScope", "$scope", "$windo
 	//============================================================
 	//============================================================
 
-	if(!$rootScope.user.isAuthenticated) {  //navigation.securize();
-        $scope.actionSignin();
-        return;
-    }
-
-    $scope.authorized           = $rootScope.user.isAuthenticated;
+    $scope.isAuthenticated      = $rootScope.user.isAuthenticated;
     $scope.canRegisterNational  = !!_.intersection($rootScope.user.roles, ["AbsAdministrator", "AbsNationalAuthorizedUser", "AbsNationalFocalPoint", "AbsPublishingAuthorities", "Administrator"]).length;
     $scope.canRegisterReference = $rootScope.user.isAuthenticated;
 
@@ -22,7 +17,7 @@ require("app").controller("RegisterController", ["$rootScope", "$scope", "$windo
 	//============================================================
 	//============================================================
 
-	var leftTab = $scope.canRegisterNational ? "measure" : "resource";
+	var leftTab = "measure";
 
 	//============================================================
 	//
@@ -45,19 +40,90 @@ require("app").controller("RegisterController", ["$rootScope", "$scope", "$windo
 	// Start edition of a new or an existing document/draft
 	//
 	//============================================================
+	$scope.signIn = function(callbackSchema) {
+
+		if(!$rootScope.user.isAuthenticated)
+			$scope.actionSignin();
+	}
+
+	//============================================================
+	//
+	// Start edition of a new or an existing document/draft
+	//
+	//============================================================
 	$scope.edit = function(schema, identifier) {
+
+		if(!$rootScope.user.isAuthenticated) {  //navigation.securize();
+	        $scope.actionSignin();
+	        return;
+	    }
 
 		if(!canSwitch())
 			return;
 
-		$scope.$broadcast("loadDocument", {
-			schema : schema,
-			identifier : identifier
-		});
+		$q.when($scope.canEdit(schema, identifier), function (allowed) {
 
-		leftTab = schema;
-		$scope.editing = true;
+			if(!allowed) {
+
+				if(identifier) alert("You are not authorized to edit this record");
+				else           alert("You are not authorized to create a new record");
+
+				return;
+			}
+
+			$scope.$broadcast("loadDocument", {
+				schema : schema,
+				identifier : identifier
+			});
+
+			leftTab = schema;
+			$scope.editing = true;
+
+		});
 	};
+
+	//============================================================
+	//
+	// Start edition of a new or an existing document/draft
+	//
+	//============================================================
+	var canEdit_cache = {}
+	$scope.canEdit = function (schema, identifier) {
+
+		if(!$rootScope.user.isAuthenticated)
+			return false;
+
+		var cacheKey = (schema||"") + "+" + (identifier||"");
+
+		if(canEdit_cache[cacheKey])
+			return canEdit_cache[cacheKey];
+
+		if(identifier) {
+
+			return storage.drafts.get(identifier, {info:""}).then(function (result) {
+
+				var info = result.data || result;
+
+				if(info.type!=schema)
+					throw "Schema type mismatch";
+
+				return storage.drafts.security.canUpdate(identifier, schema);
+
+			}).catch(function(error) {
+
+				if(error.status==404)
+					return storage.drafts.security.canCreate(identifier, schema);
+
+				throw error;
+			})
+		}
+		else {
+
+			return canEdit_cache[cacheKey] = storage.drafts.security.canCreate(identifier, schema).then(function(allowed){
+				return canEdit_cache[cacheKey] = allowed;
+			});
+		}
+	}
 
 	//============================================================
 	//
