@@ -42,12 +42,12 @@ require('app').controller('FindController', ['$scope', '$rootScope', '$http', '$
     $scope.itemsPerPage    = 25;
     $scope.pageCount       = 0;
     $scope.currentPage     = 0;
-    // $scope.querySchema     = '*:*';
+    $scope.querySchema     = '*:*';
     // $scope.queryGovernment = '*:*';
     // $scope.queryTargets    = '*:*';
     // $scope.queryTheme      = '*:*';
     // $scope.queryDate       = '*:*';
-    // $scope.queryKeywords   = '*:*';
+    $scope.queryKeywords   = '*:*';
 
     // if($location.search().q) {
     //     $scope.keywords = $location.search().q;
@@ -199,6 +199,9 @@ require('app').controller('FindController', ['$scope', '$rootScope', '$http', '$
 
         var q = 'realm_ss:chm AND schema_s:*';//' AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryTheme + ' AND ' + $scope.queryTargets +' AND ' + $scope.queryDate + ' AND ' + $scope.queryKeywords;
 
+        if($scope.keyword)     q += ' AND (title_t:' + $scope.keyword + '* OR description_t:' + $scope.keyword + '* OR text_EN_txt:' + $scope.keyword + '*)';
+        if($scope.querySchema) q += ' AND (' + $scope.querySchema + ')';
+
         var queryParameters = {
             'q': q,
             'sort': 'createdDate_dt desc, title_t asc',
@@ -234,7 +237,7 @@ require('app').controller('FindController', ['$scope', '$rootScope', '$http', '$
 
             if(!$scope.schemas) {
                 var queryFacetsParameters = {
-                    'q': 'realm_ss:chm',
+                    'q': 'realm_ss:absch',
                     'fl': '',
                     'wt': 'json',
                     'rows': 0,
@@ -274,6 +277,6 @@ require('app').controller('FindController', ['$scope', '$rootScope', '$http', '$
     $scope.$watch('queryTargets',    function() { $scope.currentPage=0; refresh(); });
     $scope.$watch('queryTheme',      function() { $scope.currentPage=0; refresh(); });
     $scope.$watch('queryDate',       function() { $scope.currentPage=0; refresh(); });
-    $scope.$watch('queryKeywords',   function() { $scope.currentPage=0; refresh(); });
+    $scope.$watch('keyword',         function() { $scope.currentPage=0; refresh(); });
 
 }]);

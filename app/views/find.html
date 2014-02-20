@@ -1,4 +1,8 @@
 <script src="/app/views/find.html.js"></script>
+<script src="/app/views/find_schemas.partial.html.js"></script>
+<script src="/app/views/find_countries.partial.html.js"></script>
+<script src="/app/views/find_facets.partial.html.js"></script>
+<script src="/app/views/find_themes.partial.html.js"></script>
 
 <div ng-controller="FindController">
     <div class="category-container" >
@@ -17,13 +21,17 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav filters">
-                        <li><a href="#">National Records <b class="caret"></b></a></li>
-                        <li><a href="#">Reference Records <b class="caret"></b></a></li>
-                        <li><a href="#">Countries  <b class="caret"></b></a></li>
-                        <li><a href="#">Thematic Areas  <b class="caret"></b></a></li>
+                        <search-filter-schemas title='Document Types' ng-model='schemas' field='schema_s' query='querySchema'></search-filter-schemas>
+                        <search-filter-countries title='Countries' ng-model='governments' field='government_s' query='queryGovernment'></search-filter-countries>
+                        <!-- <li><search-filter-facets title='Aichi Targets' ng-model='aichiTargets' field='aichiTarget_REL_ss' query='queryTargets'></search-filter-facets></li> -->
+                        <search-filter-themes title='Thematic Areas' ng-model='thematicAreas' field='thematicArea_REL_ss' query='queryTheme'></search-filter-themes>
+                        <!-- <li><a href="#">National Records <b class="caret"></b></a></li> -->
+                        <!-- <li><a href="#">Reference Records <b class="caret"></b></a></li> -->
+                        <!-- <li><a href="#">Countries  <b class="caret"></b></a></li> -->
+                        <!-- <li><a href="#">Thematic Areas  <b class="caret"></b></a></li> -->
                         <li><a href="#">Date Range <b class="caret"></b></a></li>
                         <li>
-                            <input type="text" placeholder=" Keyword " class="form-control keyword" style="height: 26px; margin-top: 12px; margin-right: 5px; width: 160px;"></li>
+                            <input type="text" ng-model="keyword" placeholder=" Keyword " class="form-control keyword" style="height: 26px; margin-top: 12px; margin-right: 5px; width: 160px;"></li>
                     </ul>
                 </div>
                 <div style="background-color: #dedede; padding: 5px 20px;margin:0;">

@@ -1,0 +1,63 @@
+<li>
+    <div data-toggle="modal" href="#dialogSelectSchemas" ng-class="{false:'not', true:'x'}[expanded]"><strong>{{title}}&nbsp;<b class="caret"></b></strong></div>
+    <div class="list-group-item-expand">
+        <div ng-repeat="item in terms | orderBy:'title' | filter:{selected:true}" ng-class="ccc(item)" ng-click="onclick(this, $event)">
+            <div class="label label-selected-facet">
+                <div style="position:absolute;right:6px;top:6px" class="icon-remove-sign"></div>
+                <div class="truncate">
+                    {{item.title}} ({{item.count}})
+                </div>
+            </div>
+        </div>
+    <div>
+    <!--Save Dialog-->
+    <div id="dialogSelectSchemas" class="modal fade">
+        <div class="modal-dialog"><!--  ;margin-left:-380px"  -->
+            <div class="modal-content" style="width:640px">
+                <div class="modal-body" style="padding-left:20px">
+                    <table class="options">
+                        <tr>
+                            <td style="width:360px" valign="top">
+                                <h4>News &amp; Announcements</h4>
+                                <div class="checkbox" ng-repeat="item in outreachRecords" ng-switch on="!!item.title">
+                                    <label ng-switch-when="true"><input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="refresh()">{{item.title}} ({{item.count}})</label>
+                                    <hr ng-switch-when="false" style="height:8px;margin:0;border:none">
+                                </div>
+                                <h4 style="margin-top:20px">CBD Records</h4>
+                                <div class="checkbox" ng-repeat="item in copRecords" ng-switch on="!!item.title">
+                                    <label ng-switch-when="true"><input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="refresh()">{{item.title}} ({{item.count}})</label>
+                                    <hr ng-switch-when="false" style="height:8px;margin:0;border:none">
+                                </div>
+                                <h4 style="margin-top:20px">Reference Records</h4>
+                                <div class="checkbox" ng-repeat="item in referenceRecords" ng-switch on="!!item.title">
+                                    <label ng-switch-when="true"><input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="refresh()">{{item.title}} ({{item.count}})</label>
+                                    <hr ng-switch-when="false" style="height:8px;margin:0;border:none">
+                                </div>
+                            </td>
+                            <td style="width:360px" valign="top">
+                                <h4>CBD Meetings &amp; Outcomes</h4>
+                                <div class="checkbox" ng-repeat="item in meetingRecords" ng-switch on="!!item.title">
+                                    <label ng-switch-when="true"><input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="refresh()">{{item.title}} ({{item.count}})</label>
+                                    <hr ng-switch-when="false" style="height:8px;margin:0;border:none">
+                                </div>
+                                <h4 style="margin-top:20px">National Records</h4>
+                                <div class="checkbox" ng-repeat="item in nationalRecords" ng-switch on="!!item.title">
+                                    <label ng-switch-when="true"><input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="refresh()">{{item.title}} ({{item.count}})</label>
+                                    <hr ng-switch-when="false" style="height:8px;margin:0;border:none">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .options .checkbox {
+            min-height: 0;
+        }
+    </style>
+</li>
