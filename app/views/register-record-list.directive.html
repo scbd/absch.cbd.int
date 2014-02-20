@@ -1,0 +1,39 @@
+<div class="copntainer">
+
+  <div class="row" style="background-color: #333; padding: 5px; margin-left: 0px;">
+      <div class="col-md-1 text-center"><span style="font-size: 16px; color: white;">
+      FILTERS {{filteredRecords.length}}
+      </span></div>
+      <div class="col-md-8 text-center">
+        <span ng-click="subFilter=null" class="btn btn-info"> <i ng-hide="subFilter" class="glyphicon glyphicon-ok"></i> All <span class="badge badge-default">{{(records | filter:baseFilter).length}}</span></span>
+        <span ng-click="subFilter=isRequest" class="btn btn-danger"> <i ng-show="subFilter==isRequest" class="glyphicon glyphicon-ok"></i> Requests <span class="badge badge-default">{{(records | filter:isRequest).length}}</span></span>
+        <span ng-click="subFilter=isPublished" class="btn btn-success"> <i ng-show="subFilter==isPublished" class="glyphicon glyphicon-ok"></i> Published  <span class="badge badge-default">{{(records | filter:isPublished).length}}</span></span>
+        <span ng-click="subFilter=isDraft" class="btn btn-default btn-draft" style="color:#fff"> <i ng-show="subFilter==isDraft" class="glyphicon glyphicon-ok"></i> Draft  <span class="badge badge-default" style="color:#999">{{(records | filter:isDraft).length}}</span></span>
+      </div>
+      <div class="col-md-3 text-center">
+          <input type="text" ng-model="keywords" placeholder=" Keyword " class="form-control keyword" style="height: 34px; margin-top: 5px; width: 160px;">
+      </div>
+  </div>
+
+  <p></p>
+
+  <table ng-show="records" class="table table-striped">
+    <tr>
+      <th>ID</th>
+      <th>Summary</th>
+      <th></th>
+    </tr>
+
+    <tr ng-repeat="record in (filteredRecords = (records | filter:baseFilter | filter:subFilter | filter:keywords))">
+      <td>{{record.documentID||'[new]'}}</td>
+      <td>
+        <b>{{record.type|schemaName}}</b><br/>
+        {{(record.title||record.workingDocumentTitle)|lstring}}
+      </td>
+      <td class="text-right" ><button class="btn btn-default" ng-click="edit(record)"><i class="fa fa-edit"></i></button></td>
+    </tr>
+
+  </table>
+
+
+</div>

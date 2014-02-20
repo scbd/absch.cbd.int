@@ -1,4 +1,4 @@
-<div ng-cloak ng-show="authorized" ng-controller="RegisterController">
+<div ng-cloak ng-controller="RegisterController">
 
 <style type="text/css">
   a.tab-selected {
@@ -11,7 +11,7 @@
      /*background-color: #204C70; */
   }
 </style>
-    
+
   <div class="category-container">
       <div class="container">
           <span class="category"><span class="glyphicon glyphicon-edit"></span> Register Information</span>
@@ -22,10 +22,10 @@
       <div class="row">
           <div class="col-md-3">
 
-  <div ng-show="canRegisterNational" >             
+  <div>             
     <h3>National Records</h3>
 
-              <a class="btn btn-lg btn-default btn-abs btn-all btn-commonformat" href="#" role="button">ALL RECORDS » </a>
+              <a ng-show="isAuthenticated" class="btn btn-lg btn-default btn-abs btn-all btn-commonformat" href="#" role="button">ALL RECORDS » </a>
 
               <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('measure')" ng-class="{ 'tab-selected' : tab()=='measure'}" href="#" role="button"> ABSCH-MSR »
               <span class="pull-right label label-danger">1</span>  
@@ -62,7 +62,7 @@
   </div>
 
 
-  <div ng-show="canRegisterReference" >             
+  <div>             
     <h3>Reference Records</h3>
 
                     <a class="btn btn-lg btn-warning btn-commonformat" ng-click="tab('resource')" ng-class="{ 'tab-selected' : tab()=='resource'}" href="#" role="button">ABSCH-VLR »
@@ -70,7 +70,7 @@
                     <span class="btn-text"  style="color:#666"><br> Virtual Library Record</span> </a>  
   </div>
 
-  <div ng-show="canRegisterNational" >             
+  <div>             
 
      <h3>National Users</h3>
 
@@ -110,9 +110,23 @@
                           <li>Please upload <strong>courtesy or official translations</strong> of the measure if available. </li>
                         </ol>
 
-                          <p><a ng-click="edit('measure', null)" class="btn btn-primary">
-                          <span class="glyphicon glyphicon-plus-sign"></span> Add New ABSCH-MSR</a> 
-                          <a href="http://www.cbd.int/doc/abs/commonformats/MSR.doc"><span class="btn btn-default"> <span class="glyphicon glyphicon-download"></span> Download offline ABSCH-MSR form</span></a></p>
+                          <p>
+                            <a ng-show="!isAuthenticated" ng-click="signIn('measure')" class="btn btn-info">
+                              <i class="glyphicon glyphicon-off"></i> Sign in to add or edit ABSCH-MSR record online
+                            </a>
+
+                            <a ng-show="isAuthenticated && !canEdit('measure')" class="btn btn-warning disabled">
+                              <i class="glyphicon glyphicon-ban-circle"></i> You cannot add a new ABSCH-MSR record online
+                            </a>
+
+                            <a ng-show="isAuthenticated && canEdit('measure')" ng-click="edit('measure', null)" class="btn btn-primary">
+                              <span class="glyphicon glyphicon-plus-sign"></span> Add New ABSCH-MSR
+                            </a> 
+
+                            <a href="http://www.cbd.int/doc/abs/commonformats/MSR.doc" class="btn btn-default">
+                              <span class="glyphicon glyphicon-download"></span> Download offline ABSCH-MSR form 
+                            </a>
+                          </p>
                     </div>
                 </div>
 
@@ -122,19 +136,11 @@
 
               <div ng-show="editing" edit-measure></div>
 
-              <div ng-hide="editing">
+              <div ng-show="isAuthenticated && !editing">
+
                   <h2 style="border-bottom: 1px solid #333;">Existing records</h2>
-                  <div class="copntainer">
-                      <div class="row" style="background-color: #333; padding: 5px; margin-left: 0px;">
-                          <div class="col-md-1 text-center"><span style="font-size: 16px; color: white;">FILTERS</span></div>
-                          <div class="col-md-2 text-center"><span class="btn btn-info">All <span class="badge badge-default">14</span></span></div>
-                          <div class="col-md-2 text-center"><span class="btn btn-danger">Requests <span class="badge badge-default">3</span></span></div>
-                          <div class="col-md-2 text-center"><span class="btn btn-success">Published  <span class="badge badge-default">3</span></span></div>
-                          <div class="col-md-2 text-center"><span class="btn btn-default btn-draft">Draft  <span class="badge badge-default">3</span></span></div>
-                          <div class="col-md-3 text-center">
-                              <input type="text" placeholder=" Keyword " class="form-control keyword" style="height: 34px; margin-top: 5px; width: 160px;"></div>
-                      </div>
-                  </div>
+                  <register-record-list records="records" schema="measure"></register-record-list>
+                  
               </div>
           </div>
 
@@ -163,29 +169,34 @@
                             
                           </ol>
 
-                            <p><a ng-click="edit('authority', null)" class="btn btn-primary">
-                            <span class="glyphicon glyphicon-plus-sign"></span> Add New ABSCH-CNA</a> 
-                            <a href="http://www.cbd.int/doc/abs/commonformats/CNA.doc"><span class="btn btn-default"> <span class="glyphicon glyphicon-download"></span> Download offline ABSCH-CNA form</span></a></p>
+                          <p>
+                            <a ng-show="!isAuthenticated" ng-click="signIn('authority')" class="btn btn-info">
+                              <i class="glyphicon glyphicon-off"></i> Sign in to add or edit ABSCH-CNA record online
+                            </a>
+
+                            <a ng-show="isAuthenticated && !canEdit('authority')" class="btn btn-warning disabled">
+                              <i class="glyphicon glyphicon-ban-circle"></i> You cannot add a new ABSCH-CNA record online
+                            </a>
+
+                            <a ng-show="isAuthenticated && canEdit('authority')" ng-click="edit('authority', null)" class="btn btn-primary">
+                              <span class="glyphicon glyphicon-plus-sign"></span> Add New ABSCH-CNA
+                            </a> 
+
+                            <a href="http://www.cbd.int/doc/abs/commonformats/CNA.doc" class="btn btn-default">
+                              <span class="glyphicon glyphicon-download"></span> Download offline ABSCH-CNA form
+                            </a>
+                          </p>
                       </div>
                     </div>          
               </div>
 
               <div ng-show="editing" edit-authority></div>
 
-              <div ng-hide="editing">
+              <div ng-show="isAuthenticated && !editing">
 
-                  <h3 style="border-bottom: 1px solid #333;">Existing records</h3>
-                  <div class="copntainer">
-                      <div class="row" style="background-color: #333; padding: 5px; margin-left: 0px;">
-                          <div class="col-md-1 text-center"><span style="font-size: 16px; color: white;">FILTERS</span></div>
-                          <div class="col-md-2 text-center"><span class="btn btn-info">All <span class="badge badge-default">14</span></span></div>
-                          <div class="col-md-2 text-center"><span class="btn btn-danger">Requests <span class="badge badge-default">3</span></span></div>
-                          <div class="col-md-2 text-center"><span class="btn btn-success">Published  <span class="badge badge-default">3</span></span></div>
-                          <div class="col-md-2 text-center"><span class="btn btn-warning">Draft  <span class="badge badge-default">3</span></span></div>
-                          <div class="col-md-3 text-center">
-                              <input type="text" placeholder=" Keyword " class="form-control keyword" style="height: 34px; margin-top: 5px; width: 160px;"></div>
-                      </div>
-                  </div>
+                  <h2 style="border-bottom: 1px solid #333;">Existing records</h2>
+                  <register-record-list records="records" schema="authority"></register-record-list>
+                  
               </div>
           </div>
 
@@ -217,9 +228,23 @@
 
                           </ol>
 
-                            <p><a ng-click="edit('absPermit', null)" class="btn btn-primary">
-                            <span class="glyphicon glyphicon-plus-sign"></span> Add New ABSCH-IRCC</a> 
-                            <a href="http://www.cbd.int/doc/abs/commonformats/IRCC.doc"><span class="btn btn-default"> <span class="glyphicon glyphicon-download"></span> Download offline ABSCH-IRCC form</span></a></p>
+                          <p>
+                            <a ng-show="!isAuthenticated" ng-click="signIn('absPermit')" class="btn btn-info">
+                              <i class="glyphicon glyphicon-off"></i> Sign in to add or edit ABSCH-IRCC record online
+                            </a>
+
+                            <a ng-show="isAuthenticated && !canEdit('absPermit')" class="btn btn-warning disabled">
+                              <i class="glyphicon glyphicon-ban-circle"></i> You cannot add a new ABSCH-IRCC record online
+                            </a>
+
+                            <a ng-show="isAuthenticated && canEdit('absPermit')" ng-click="edit('absPermit', null)" class="btn btn-primary">
+                              <span class="glyphicon glyphicon-plus-sign"></span> Add New ABSCH-IRCC
+                            </a> 
+
+                            <a href="http://www.cbd.int/doc/abs/commonformats/IRCC.doc" class="btn btn-default">
+                              <span class="glyphicon glyphicon-download"></span> Download offline ABSCH-IRCC form
+                            </a>
+                          </p>
                       </div>
                     </div>  
 
@@ -227,20 +252,11 @@
 
               <div ng-show="editing" edit-abs-permit></div>
 
-              <div ng-hide="editing">
+              <div ng-show="isAuthenticated && !editing">
 
-                  <h3 style="border-bottom: 1px solid #333;">Existing records</h3>
-                  <div class="copntainer">
-                      <div class="row" style="background-color: #333; padding: 5px; margin-left: 0px;">
-                          <div class="col-md-1 text-center"><span style="font-size: 16px; color: white;">FILTERS</span></div>
-                          <div class="col-md-2 text-center"><span class="btn btn-info">All <span class="badge badge-default">14</span></span></div>
-                          <div class="col-md-2 text-center"><span class="btn btn-danger">Requests <span class="badge badge-default">3</span></span></div>
-                          <div class="col-md-2 text-center"><span class="btn btn-success">Published  <span class="badge badge-default">3</span></span></div>
-                          <div class="col-md-2 text-center"><span class="btn btn-warning">Draft  <span class="badge badge-default">3</span></span></div>
-                          <div class="col-md-3 text-center">
-                              <input type="text" placeholder=" Keyword " class="form-control keyword" style="height: 34px; margin-top: 5px; width: 160px;"></div>
-                      </div>
-                  </div>
+                  <h2 style="border-bottom: 1px solid #333;">Existing records</h2>
+                  <register-record-list records="records" schema="absPermit"></register-record-list>
+
               </div>
           </div>
 
@@ -265,9 +281,23 @@
                             <li></li>
                           </ol>
 
-                            <p><a ng-click="edit('absCheckpoint', null)" class="btn btn-primary">
-                            <span class="glyphicon glyphicon-plus-sign"></span> Add New ABSCH-CP</a> 
-                            <a href="http://www.cbd.int/doc/abs/commonformats/CP.doc"><span class="btn btn-default"> <span class="glyphicon glyphicon-download"></span> Download offline ABSCH-CP form</span></a></p>
+                          <p>
+                            <a ng-show="!isAuthenticated" ng-click="signIn('absCheckpoint')" class="btn btn-info">
+                              <i class="glyphicon glyphicon-off"></i> Sign in to add or edit ABSCH-CP record online
+                            </a>
+
+                            <a ng-show="isAuthenticated && !canEdit('absCheckpoint')" class="btn btn-warning disabled">
+                              <i class="glyphicon glyphicon-ban-circle"></i> You cannot add a new ABSCH-CP record online
+                            </a>
+
+                            <a ng-show="isAuthenticated && canEdit('absCheckpoint')" ng-click="edit('absCheckpoint', null)" class="btn btn-primary">
+                              <span class="glyphicon glyphicon-plus-sign"></span> Add New ABSCH-CP
+                            </a> 
+
+                            <a href="http://www.cbd.int/doc/abs/commonformats/CP.doc" class="btn btn-default">
+                              <span class="glyphicon glyphicon-download"></span> Download offline ABSCH-CP form
+                            </a>
+                          </p>
                       </div>
                     </div> 
 
@@ -275,8 +305,11 @@
 
               <div ng-show="editing" edit-abs-checkpoint></div>
 
-              <div ng-hide="editing">
-                  <h3 style="border-bottom: 1px solid #333;">Existing records - TODO</h3>
+              <div ng-show="isAuthenticated && !editing">
+
+                  <h2 style="border-bottom: 1px solid #333;">Existing records</h2>
+                  <register-record-list records="records" schema="absCheckpoint"></register-record-list>
+                  
               </div>
           </div>
 
@@ -301,9 +334,23 @@
                            <li><strong>If the ABSCH-IRCC is not available:</strong> Please ensure the person or entity to whom PIC was granted has been already entered in the system.</li>
                           </ol>
 
-                            <p><a ng-click="edit('absCheckpointCommunique', null)" class="btn btn-primary">
-                            <span class="glyphicon glyphicon-plus-sign"></span> Add New ABSCH-CPC</a> 
-                            <a href="http://www.cbd.int/doc/abs/commonformats/CPC.doc"><span class="btn btn-default"> <span class="glyphicon glyphicon-download"></span> Download offline ABSCH-CPC form</span></a></p>
+                          <p>
+                            <a ng-show="!isAuthenticated" ng-click="signIn('absCheckpointCommunique')" class="btn btn-info">
+                              <i class="glyphicon glyphicon-off"></i> Sign in to add or edit ABSCH-CPC record online
+                            </a>
+
+                            <a ng-show="isAuthenticated && !canEdit('absCheckpointCommunique')" class="btn btn-warning disabled">
+                              <i class="glyphicon glyphicon-ban-circle"></i> You cannot add a new ABSCH-CPC record online
+                            </a>
+
+                            <a ng-show="isAuthenticated && canEdit('absCheckpointCommunique')" ng-click="edit('absCheckpointCommunique', null)" class="btn btn-primary">
+                              <span class="glyphicon glyphicon-plus-sign"></span> Add New ABSCH-CPC
+                            </a> 
+
+                            <a href="http://www.cbd.int/doc/abs/commonformats/CPC.doc" class="btn btn-default">
+                              <span class="glyphicon glyphicon-download"></span> Download offline ABSCH-CPC form
+                            </a>
+                          </p>
                       </div>
                     </div> 
 
@@ -313,9 +360,13 @@
 
               <div ng-show="editing" edit-abs-checkpoint-communique></div>
 
-              <div ng-hide="editing">
-                  <h3 style="border-bottom: 1px solid #333;">Existing records - TODO</h3>
+              <div ng-show="isAuthenticated && !editing">
+
+                  <h2 style="border-bottom: 1px solid #333;">Existing records</h2>
+                  <register-record-list records="records" schema="absCheckpointCommunique"></register-record-list>
+                  
               </div>
+
           </div>
 
           <div ng-show="tab()=='resource'" class="col-md-9 well well-registerpage">
@@ -336,73 +387,35 @@
                       <li>TODO</li>
                   </ul>
 
-                  <p><a ng-click="edit('resource', null)" class="btn btn-primary">Add New ABS-CH VLR</a> <span class="btn btn-default">Download offline ABS-CH VLR form</span></p>
+                  <p>
+                    <a ng-show="!isAuthenticated" ng-click="signIn('resource')" class="btn btn-info">
+                      <i class="glyphicon glyphicon-off"></i> Sign in to add or edit ABSCH-VLR record online
+                    </a>
+
+                    <a ng-show="isAuthenticated && !canEdit('resource')" class="btn btn-warning disabled">
+                      <i class="glyphicon glyphicon-ban-circle"></i> You cannot add a new ABSCH-VLR record online
+                    </a>
+
+                    <a ng-show="isAuthenticated && canEdit('resource')" ng-click="edit('resource', null)" class="btn btn-primary">
+                      <span class="glyphicon glyphicon-plus-sign"></span> Add New ABSCH-VLR
+                    </a> 
+                  
+                    <a class="btn btn-default">
+                      <span class="glyphicon glyphicon-download"></span> Download offline ABSCH-VLR form
+                    </a>
+                  </p>
 
               </div>
 
               <div ng-show="editing" edit-resource></div>
 
-              <div ng-hide="editing">
-                  <h3 style="border-bottom: 1px solid #333;">Existing records - TODO</h3>
-              </div>
-          </div>
+              <div ng-show="isAuthenticated && !editing">
 
-          <div ng-show="tab()=='contact'" class="col-md-9 well well-registerpage">
-
-              <h2><span style="color: #428BCA; font-weight: bold;">ABS-CH CON</span> Contact</h2> 
-
-              <p ng-hide="editing">
-                TODO
-              </p>
-
-              <div ng-hide="editing">
-
-                  <h3 style="border-bottom: 1px solid #333;">Add new record</h3>
-
-                  <h4 style="color: #D8534F; font-weight: bold;">Prerequisites:</h4>
-
-                  <ul>
-                      <li>TODO</li>
-                  </ul>
-
-                  <p><a ng-click="edit('contact', null)" class="btn btn-primary">Add New ABS-CH CON</a> <span class="btn btn-default">Download offline ABS-CH CON form</span></p>
-
+                  <h2 style="border-bottom: 1px solid #333;">Existing records</h2>
+                  <register-record-list records="records" schema="resource"></register-record-list>
+                  
               </div>
 
-              <div ng-show="editing" edit-contact></div>
-
-              <div ng-hide="editing">
-                  <h3 style="border-bottom: 1px solid #333;">Existing records - TODO</h3>
-              </div>
-          </div>
-
-          <div ng-show="tab()=='organization'" class="col-md-9 well well-registerpage">
-
-              <h2><span style="color: #428BCA; font-weight: bold;">ABS-CH ORG</span> ABS Related Organization</h2> 
-
-              <p ng-hide="editing">
-                TODO
-              </p>
-
-              <div ng-hide="editing">
-
-                  <h3 style="border-bottom: 1px solid #333;">Add new record</h3>
-
-                  <h4 style="color: #D8534F; font-weight: bold;">Prerequisites:</h4>
-
-                  <ul>
-                      <li>TODO</li>
-                  </ul>
-
-                  <p><a ng-click="edit('contact', null)" class="btn btn-primary">Add New ABS-CH ORG</a> <span class="btn btn-default">Download offline ABS-CH ORG form</span></p>
-
-              </div>
-
-              <div ng-show="editing" edit-organization></div>
-
-              <div ng-hide="editing">
-                  <h3 style="border-bottom: 1px solid #333;">Existing records - TODO</h3>
-              </div>
           </div>
 
           <div ng-show="tab()=='database'" class="col-md-9 well well-registerpage">
@@ -423,14 +436,32 @@
                       <li>TODO</li>
                   </ul>
 
-                  <p><a ng-click="edit('database', null)" class="btn btn-primary">Add New ABS-CH NDB</a> <span class="btn btn-default">Download offline ABS-CH NDB form</span></p>
+                  <p>
+                    <a ng-show="!isAuthenticated" ng-click="signIn('database')" class="btn btn-info">
+                      <i class="glyphicon glyphicon-off"></i> Sign in to add or edit ABSCH-NDB record online
+                    </a>
 
+                    <a ng-show="isAuthenticated && !canEdit('database')" class="btn btn-warning disabled">
+                      <i class="glyphicon glyphicon-ban-circle"></i> You cannot add a new ABSCH-NDB record online
+                    </a>
+
+                    <a ng-show="isAuthenticated && canEdit('database')" ng-click="edit('database', null)" class="btn btn-primary">
+                      <span class="glyphicon glyphicon-plus-sign"></span> Add New ABSCH-NDB
+                    </a> 
+                  
+                    <a class="btn btn-default">
+                      <span class="glyphicon glyphicon-download"></span> Download offline ABSCH-NDB form
+                    </a>
+                  </p>
               </div>
 
               <div ng-show="editing" edit-database></div>
 
-              <div ng-hide="editing">
-                  <h3 style="border-bottom: 1px solid #333;">Existing records - TODO</h3>
+              <div ng-show="isAuthenticated && !editing">
+
+                  <h2 style="border-bottom: 1px solid #333;">Existing records</h2>
+                  <register-record-list records="records" schema="database"></register-record-list>
+                  
               </div>
           </div>
 
@@ -439,6 +470,8 @@
 </div>
 
 <script src="/app/views/register.html.js"></script>
+<script src="/app/views/register-record-list.directive.js"></script>
+
 <script src="/app/js/directives/forms/form-controls.js"></script>
 <script src="/app/views/forms/edit/editFormUtility.js"></script>
 <script src="/app/views/forms/edit/field-embed-contact.directive.js"></script>

@@ -1,20 +1,23 @@
 ﻿
-define(['app', 'authentication'], function (app) {
+define(["app", "authentication"], function (app) {
 
-	app.factory('IWorkflows', ["authHttp", "$q", function($http, $q) {
+	app.factory("IWorkflows", ["authHttp", function($http) {
 		return new function()
 		{
-			var self        = this;
-
 			//===========================
 			//
 			//===========================
-			this.create = function(type, data) {
-				return $http.post("/api/v2013/workflows", { type : type, data : data }).then(
-					function(resp) {
-						return resp.data;
-					}
-				)
+			this.create = function(type, version, data) {
+
+				var body = {
+					type    : type,
+					version : version,
+					data    : data
+				};
+
+				return $http.post("/api/v2013/workflows", body).then(function(resp) {
+					return resp.data;
+				});
 			};
 
 			//===========================
@@ -30,7 +33,7 @@ define(['app', 'authentication'], function (app) {
 			//===========================
 			//
 			//===========================
-			this.activity = function(id, activityName, data) {
+			this.updateActivity = function(id, activityName, data) {
 				return $http.put("/api/v2013/workflows/"+id+"/activities/"+activityName, data).then(
 					function(resp){
 						return resp.data;
@@ -40,8 +43,8 @@ define(['app', 'authentication'], function (app) {
 			//===========================
 			//
 			//===========================
-			this.cancel = function(id) {
-				return $http.delete("/api/v2013/workflows/").then(
+			this.cancelActivity = function(id, activityName, data) {
+				return $http.delete("/api/v2013/workflows/"+id+"/activities/"+activityName, data).then(
 					function(resp){
 						return resp.data;
 					});
@@ -50,12 +53,11 @@ define(['app', 'authentication'], function (app) {
 			//===========================
 			//
 			//===========================
-			this.query  = function(q) {
-				return $http.get("/api/v2013/workflows/?q="+encodeURIComponent(JSON.stringify(q))).then(
-					function(resp){
-						return resp.data;
-					});
+			this.query  = function(query) {
+				return $http.get("/api/v2013/workflows/", { params : { q : JSON.stringify(query) } }).then(function(resp){
+					return resp.data;
+				});
 			};
-		}
-	}])
+		}();
+	}]);
 });

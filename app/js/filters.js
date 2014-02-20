@@ -1,7 +1,12 @@
 ﻿
-define(['app'], function (app) {
+define(["app"], function (app) {
 
 
+	//============================================================
+	//
+	// 
+	//
+	//============================================================
 	function lstring(ltext, locale)
 	{
 		if(!ltext)
@@ -10,17 +15,17 @@ define(['app'], function (app) {
 		if(angular.isString(ltext))
 			return ltext;
 
-		var sText = undefined;
+		var sText;
 
 		if(!sText && locale)
 			sText = ltext[locale];
 
 		if(!sText)
-			sText = ltext["en"];
+			sText = ltext.en;
 
 		if(!sText) {
-			for(key in ltext) {
-				sText = ltext[key]
+			for(var key in ltext) {
+				sText = ltext[key];
 				if(sText)
 					break;
 			}
@@ -30,7 +35,44 @@ define(['app'], function (app) {
 
 	}
 
+	//============================================================
+	//
+	// 
+	//
+	//============================================================
+	app.filter("lstring", function() {
+		return lstring;
+	});
 
+	//============================================================
+	//
+	// 
+	//
+	//============================================================
+	app.filter("schemaName", [function() {
+
+		return function(schame) {
+
+			if(schame=="focalPoint"				) return "National Focal Point";
+			if(schame=="authority"				) return "Competent National Authority";
+			if(schame=="contact"				) return "Contact";
+			if(schame=="database"				) return "National Database";
+			if(schame=="resource"				) return "Virtual Library Resource";
+			if(schame=="organization"			) return "Organization";
+			if(schame=="measure"				) return "National Regulation";
+			if(schame=="absCheckpoint"			) return "Checkpoint";
+			if(schame=="absCheckpointCommunique") return "Checkpoint Communiqué";
+			if(schame=="absPermit"				) return "Permit";
+
+			return schame;
+		};
+	}]);
+
+	//============================================================
+	//
+	// 
+	//
+	//============================================================
 	app.filter("term", ["$http", function($http) {
 		var cacheMap = {};
 
@@ -53,36 +95,47 @@ define(['app'], function (app) {
 
 				return lstring(cacheMap[term.identifier].title, locale);
 
-			}).catch(function(error){
+			}).catch(function(){
 
 				cacheMap[term.identifier] = term.identifier;
 
 				return term.identifier;
 
 			});
-		}
+		};
 	}]);
 
-	app.filter("lstring", function() {
-		return lstring;
-	});
-
+	//============================================================
+	//
+	//
+	//
+	//============================================================
 	app.filter("orderPromiseBy", ["$q", "$filter", function($q, $filter) {
 		return function(promise, expression, reverse) {
 			return $q.when(promise).then(function(collection){
 				return $filter("orderBy")(collection, expression, reverse);
 			});
-		}
+		};
 	}]);
 
+	//============================================================
+	//
+	//
+	//
+	//============================================================
 	app.filter("markdown", ["$window", "htmlUtility", function($window, html) {
 		return function(srcText) {
 			if (!$window.marked)//if markdown is not install then return escaped html! to be safe!
-				return '<div style="word-break: break-all; word-wrap: break-word; white-space: pre-wrap;">'+html.encode(srcText)+'</div>';
+				return "<div style='word-break: break-all; word-wrap: break-word; white-space: pre-wrap;'>"+html.encode(srcText)+"</div>";
 			return $window.marked(srcText, { sanitize: true });
-		}
+		};
 	}]);
 
+	//============================================================
+	//
+	//
+	//
+	//============================================================
 	app.filter("truncate", function() {
 		return function(text, maxSize, suffix) {
 
@@ -99,6 +152,6 @@ define(['app'], function (app) {
 				text = text.substr(0, maxSize) + suffix;
 
 			return text;
-		}
+		};
 	});
 });
