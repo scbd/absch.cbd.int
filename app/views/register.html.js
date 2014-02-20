@@ -1,8 +1,28 @@
 "use strict";
-require("app").controller("RegisterController", ["$scope", "$window", function ($scope, $window) {
+require("app").controller("RegisterController", ["$rootScope", "$scope", "$window", function ($rootScope, $scope, $window) {
 
-	var leftTab = "measure";
-	$scope.editing = false;
+	//============================================================
+	//============================================================
+	//====================== SECURIZE ============================
+	//============================================================
+	//============================================================
+
+	if(!$rootScope.user.isAuthenticated) {  //navigation.securize();
+        $scope.actionSignin();
+        return;
+    }
+
+    $scope.authorized           = $rootScope.user.isAuthenticated;
+    $scope.canRegisterNational  = !!_.intersection($rootScope.user.roles, ["AbsAdministrator", "AbsNationalAuthorizedUser", "AbsNationalFocalPoint", "AbsPublishingAuthorities", "Administrator"]).length;
+    $scope.canRegisterReference = $rootScope.user.isAuthenticated;
+
+	//============================================================
+	//============================================================
+	//============================================================
+	//============================================================
+	//============================================================
+
+	var leftTab = $scope.canRegisterNational ? "measure" : "resource";
 
 	//============================================================
 	//

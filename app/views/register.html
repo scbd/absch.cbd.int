@@ -1,4 +1,4 @@
-<div ng-controller="RegisterController">
+<div ng-cloak ng-show="authorized" ng-controller="RegisterController">
 
 <style type="text/css">
   a.tab-selected {
@@ -21,8 +21,9 @@
   <div class="container">
       <div class="row">
           <div class="col-md-3">
-             
- <h3>National Records</h3>
+
+  <div ng-show="canRegisterNational" >             
+    <h3>National Records</h3>
 
               <a class="btn btn-lg btn-default btn-abs btn-all btn-commonformat" href="#" role="button">ALL RECORDS » </a>
 
@@ -58,15 +59,20 @@
               <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('organization')" ng-class="{ 'tab-selected' : tab()=='organization'}" href="#" role="button">ABSCH-ORG »
               <span class="pull-right label label-danger">1</span> 
               <span class="btn-text" ><br>Contact Organization</span> </a> -->
+  </div>
 
-<h3>Reference Records</h3>
+
+  <div ng-show="canRegisterReference" >             
+    <h3>Reference Records</h3>
 
                     <a class="btn btn-lg btn-warning btn-commonformat" ng-click="tab('resource')" ng-class="{ 'tab-selected' : tab()=='resource'}" href="#" role="button">ABSCH-VLR »
                      <span class="pull-right label label-danger">1</span> 
                     <span class="btn-text"  style="color:#666"><br> Virtual Library Record</span> </a>  
+  </div>
 
+  <div ng-show="canRegisterNational" >             
 
-               <h3>National Users</h3>
+     <h3>National Users</h3>
 
               <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('abschFP')" ng-class="{ 'tab-selected' : tab()=='abschFP'}" href="#" role="button"> ABSCH-FP » 
               <span class="btn-text" ><br> National ABS Focal Points</span> </a> 
@@ -76,7 +82,7 @@
 
               <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('abschNAU')" ng-class="{ 'tab-selected' : tab()=='abschNAU'}" href="#" role="button"> ABSCH-NAU » 
               <span class="btn-text" ><br> National Authorized Users</span> </a> 
-
+  </div>
              
                     
           </div>
