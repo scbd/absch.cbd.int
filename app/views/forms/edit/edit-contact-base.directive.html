@@ -66,7 +66,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="km-control-group" name="organizationType" caption="Type of organization">
-				<div km-select name="organizationType" ng-model="document.organizationType" watch-items items="options.organizationTypes"></div>
+				<div km-select name="organizationType" ng-model="document.organizationType" items="options.organizationTypes()"></div>
 			</div>
 		</div>
 	</div>
@@ -156,7 +156,7 @@
 
 		<div class="col-md-6">
 			<div class="km-control-group" name="country" ng-required="!form.country.$valid" caption="Country address">
-				<div km-select name="country" ng-model="document.country" watch-items items="options.countries" required></div>
+				<div km-select name="country" ng-model="document.country" items="options.countries()" required></div>
 			</div>
 		</div>
 	</div>

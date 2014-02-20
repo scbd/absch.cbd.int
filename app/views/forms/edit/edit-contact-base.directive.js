@@ -15,8 +15,8 @@ require("app").directive("editContactBase", [ function () {
 			$scope._urls = [];
 
 			$scope.options  = {
-				countries         : $http.get("/api/v2013/thesaurus/domains/countries/terms",            { cache: true }).then(function(o){ return $filter("orderBy")(o.data, "name"); }),
-				organizationTypes : $http.get("/api/v2013/thesaurus/domains/Organization%20Types/terms", { cache: true }).then(function(o){ return o.data; })
+				countries         : function() { return $http.get("/api/v2013/thesaurus/domains/countries/terms",            { cache: true }).then(function(o){ return $filter("orderBy")(o.data, "name"); }); },
+				organizationTypes : function() { return $http.get("/api/v2013/thesaurus/domains/Organization%20Types/terms", { cache: true }).then(function(o){ return o.data; }); }
 			};
 
 			$scope.$watch("document.websites", function(){
