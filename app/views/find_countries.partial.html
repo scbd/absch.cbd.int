@@ -1,5 +1,6 @@
 <li>
-	<div data-toggle="modal" href="#dialogSelectCountries" ng-class="{false:'not', true:'x'}[expanded]"><strong>{{title}}&nbsp;<b class="caret"></b></strong></div>
+	<a data-toggle="modal" href="#dialogSelectCountries">{{title}}&nbsp;<b class="caret"></b></a>
+	<!-- ng-class="{false:'not', true:'x'}[expanded] -->
 	<div class="list-group-item-expand">
 		<div ng-animate="'animate'" ng-repeat="item in terms | orderBy:'title' | filter:{selected:true}" ng-class="ccc(item)" ng-click="onclick(this, $event)">
 			<div class="label label-selected-facet">

@@ -1,5 +1,5 @@
 <li>
-	<div data-toggle="modal" href="#dialogSelectThemes" ng-class="{false:'not', true:'x'}[expanded]"><strong>{{title}}&nbsp;<b class="caret"></b></strong> </div>
+    <a data-toggle="modal" href="#dialogSelectThemes">{{title}}&nbsp;<b class="caret"></b></a>
 	<div class="list-group-item-expand" style="position:relative">
 		<div ng-repeat="item in termsArray | filter:{selected:true}" ng-click="onclick(this, $event)">
 			<div class="label label-selected-facet">

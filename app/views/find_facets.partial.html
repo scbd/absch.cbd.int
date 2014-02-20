@@ -1,5 +1,5 @@
 <li>
-	<div data-toggle="modal" href="#dialogSelectFacets" ng-class="{false:'not', true:'x'}[expanded]"><strong>{{title}}&nbsp;<b class="caret"></b></strong> </div>
+	<a data-toggle="modal" href="#dialogSelectFacets">{{title}}&nbsp;<b class="caret"></b></a>
 	<div class="list-group-item-expand">
 		<div ng-repeat="item in termsxx | filter:{selected:true}" ng-class="ccc(item)" ng-click="onclick(this, $event)">
 			<div class="label label-selected-facet">
