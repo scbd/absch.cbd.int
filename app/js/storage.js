@@ -431,24 +431,28 @@ define(["app", "authentication"], function (app) {
 
 				metadata = angular.extend({}, { "schema": schema }, metadata || {});
 
-				if (!metadata.government && authentication.getUser().government)
-					metadata = angular.extend(metadata, { "government": authentication.getUser().government });
+				return $q.when(authentication.getUser()).then(function(user) {
 
-				if (!metadata.realm && defaultRealm)
-					metadata = angular.extend(metadata, { "realm": defaultRealm });
+					if (!metadata.government && user.government)
+						metadata = angular.extend(metadata, { "government": user.government });
 
-				var params = {
-					"identifier" : identifier || "x",
-					"operation"  : operation,
-					"metadata"   : metadata
-				};
+					if (!metadata.realm && defaultRealm)
+						metadata = angular.extend(metadata, { "realm": defaultRealm });
 
-				var oTrans = transformPath(patternPath, params);
+					var params = {
+						"identifier" : identifier || "x",
+						"operation"  : operation,
+						"metadata"   : metadata
+					};
 
-				return $http.get(oTrans.url, { "params": oTrans.params }).then(
-					function(res) {
-						return res.data.isAllowed;
-					});
+					var oTrans = transformPath(patternPath, params);
+
+					return $http.get(oTrans.url, { "params": oTrans.params })
+
+				}).then(function(res) {
+
+					return res.data.isAllowed;
+				});
 			};
 
 			//===========================

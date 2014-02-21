@@ -97,7 +97,7 @@ require("app").directive("editAuthority", [function () {
 			//
 			//==================================
 			$scope.userGovernment = function() {
-				return authentication.getUser().government;
+				return $scope.$root.user.government;
 			};
 
 			//==================================

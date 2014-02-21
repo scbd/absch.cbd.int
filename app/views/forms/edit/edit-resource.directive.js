@@ -44,7 +44,6 @@ require("app").directive("editResource", [ function () {
 							schema   : "resource",
 							languages: ["en"]
 						},
-						government: $scope.userGovernment() ? { identifier: $scope.userGovernment() } : undefined,
 						libraries: [{ identifier: "cbdLibrary:abs-ch" }]
 					};
 				}
@@ -146,13 +145,6 @@ require("app").directive("editResource", [ function () {
 			//==================================
 			$scope.hasError = function() {
 				return $scope.error!==null;
-			};
-
-			//==================================
-			//
-			//==================================
-			$scope.userGovernment = function() {
-				return authentication.getUser().government;
 			};
 
 			//==================================

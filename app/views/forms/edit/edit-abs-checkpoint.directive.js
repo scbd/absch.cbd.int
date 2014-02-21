@@ -146,7 +146,7 @@ require("app").directive("editAbsCheckpoint", [ function () {
 			//
 			//==================================
 			$scope.userGovernment = function() {
-				return authentication.getUser().government;
+				return $scope.$root.user.government;
 			};
 
 			//==================================
