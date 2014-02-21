@@ -90,7 +90,7 @@ define(['app'], function (app) {
             var message = JSON.parse(event.data);
 
             if(message.type=='ready')
-                event.source.postMessage('token', event.origin);
+                event.source.postMessage('{"type":"getAuthenticationToken"}', event.origin);
 
             if(message.type=='authenticationToken') {
                 if(message.authenticationToken && !$browser.cookies().authenticationToken) {
@@ -107,7 +107,7 @@ define(['app'], function (app) {
         window.addEventListener('message', receiveMessage, false);
 
         var iframe = angular.element(document.querySelector('#authenticationFrame'))[0];
-        iframe.contentWindow.postMessage('token', 'https://accounts.cbd.int');
+        iframe.contentWindow.postMessage('{"type":"getAuthenticationToken"}', 'https://accounts.cbd.int');
     }]);
 
     function _loadCss(url) {
