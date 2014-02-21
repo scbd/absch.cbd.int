@@ -58,7 +58,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">{{recordToDelete .type|schemaName}} deletion <i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
+          <h4 class="modal-title">What do you want to delete? <i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
         </div>
         <div class="modal-body">
 
@@ -70,7 +70,7 @@
           </div>
         
           <div ng-show="isPublished(recordToDelete)" class="well">
-            <button type="button" class="btn btn-danger pull-right" ng-disabled="loading" ng-click="deleteRecord(recordToDelete)" data-toggle="tooltip" data-placement="top" title="Note: Any pending draft is delete with the record">Delete record</button>
+            <button type="button" class="btn btn-danger pull-right" ng-disabled="loading" ng-click="deleteRecord(recordToDelete)" data-toggle="tooltip" data-placement="top" title="Note: Any pending draft will also be deleted">Unpublish the record</button>
             <em>Published record {{recordToDelete.documentID}}</em>
             <p><b>{{recordToDelete.title|lstring}}</b></p>
             <p>{{recordToDelete.summary|lstring}}</p>

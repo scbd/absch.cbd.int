@@ -231,6 +231,9 @@ require("app").directive("editMeasure", [ "authHttp", "Enumerable", "$filter", "
 
 				document = angular.fromJson(angular.toJson(document));
 
+				if(document.expires!==undefined)
+					delete document.expires;
+
 				if (!$scope.isInLibrary("absch", document))
 					document.absMeasures = undefined;
 
