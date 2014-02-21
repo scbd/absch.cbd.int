@@ -31,7 +31,7 @@
 				if ($scope.document || $scope.schema)
 					return;
 
-				var documentID = $route.current.params.id;
+				var documentID = $route.current.params.documentID  ;
 
 				if (documentID)
 					$scope.load(documentID);
