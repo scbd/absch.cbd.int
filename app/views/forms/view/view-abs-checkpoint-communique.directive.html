@@ -7,9 +7,7 @@
 		<div ng-show="document.government">
 			<label>Country</label>
 			<div class="km-value" >
-				<span km-terms ng-model="document.government">
-					<span ng-repeat="term in terms">{{term.name}} </span>
-				</span>
+				{{document.government|term:locale}}
 			</div>
 		</div>
 	</div>
@@ -18,7 +16,7 @@
 				document.originCountries || responsibleAuthority ||
 				document.specimen || document.taxonomy || document.gisFiles || document.subjectMatter ||
 				document.referenceOfInformedConsent || document.referenceOfAgreedTerms ||
-				document.personeToWhomGranted || geneticRessourceUsers">
+				document.personeToWhomGranted || document.geneticRessourceUsers">
 		<legend>Details of the internationally recognize certificate of compliance</legend>
 		<div ng-show="document.permit">
 			<label>Reference number(s) of the internationally recognized certificate(s) of compliance that relate(s) to this communiqué</label>
@@ -30,11 +28,11 @@
 		<div ng-show="document.originCountries || responsibleAuthority ||
 			document.specimen || document.taxonomy || document.gisFiles || document.subjectMatter ||
 			document.referenceOfInformedConsent || document.referenceOfAgreedTerms ||
-			document.personeToWhomGranted || geneticRessourceUsers">
+			document.personeToWhomGranted || document.geneticRessourceUsers">
 			<div ng-show="document.originCountries">
 				<label>Source of the genetic resource</label>
-				<ul class="km-value" km-terms ng-model="document.originCountries">
-					<li ng-repeat="term in terms">{{term.name}}</li>
+				<ul class="km-value">
+					<li ng-repeat="term in document.originCountries">{{term|term:locale}}</li>
 				</ul>
 			</div>
 			<div ng-show="responsibleAuthority">
@@ -82,9 +80,9 @@
 				<div class="km-value km-pre">{{document.referenceOfAgreedTerms | lstring:locale}}</div>
 			</div>
 
-			<div ng-show="personeToWhomGranted">
+			<div ng-show="document.personeToWhomGranted">
 				<label>Person or entity to whom prior informed consent was granted</label>
-				<div class="cbdViewContactReference" ng-model="personeToWhomGranted.document" locale="locale"></div>
+				<div view-contact-reference ng-model="document.personeToWhomGranted" locale="locale"></div>
 			</div>
 		</div>
 	</div>
@@ -95,10 +93,10 @@
 			<label>Short description of the information collected or received relevant to the utilization of genetic resources</label>
 			<div class="km-value km-pre">{{document.description | lstring:locale}}</div>
 		</div>
-		<div ng-show="geneticRessourceUsers">
+		<div ng-show="document.geneticRessourceUsers">
 			<label>Person or entity utilizing the genetic resource</label>
-			<div class="km-value" ng-repeat="user in geneticRessourceUsers">
-				<div class="cbdViewContactReference" ng-model="user.document" locale="locale"></div>
+			<div class="km-value" ng-repeat="user in document.geneticRessourceUsers">
+				<div view-contact-reference ng-model="user" locale="locale"></div>
 			</div>
 		</div>
 		<div ng-show="document.dateFrom">
@@ -125,7 +123,7 @@
 		<legend>Additional Information</legend>
 
 		<div ng-show="document.relevantInformation">
-			<div class="km-value" ng-bind-html-unsafe="document.relevantInformation | lstring:locale | markdown"></div>
+			<div class="km-value" ng-bind="document.relevantInformation | lstring:locale"></div>
 		</div>
 
 		<div ng-show="document.relevantDocuments">

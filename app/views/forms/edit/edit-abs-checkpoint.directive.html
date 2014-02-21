@@ -128,12 +128,9 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="km-control-group" name="contactsToInform" caption="Select other national authorities">
-							<div km-reference multiple name="contactsToInform" ng-model="document.contactsToInform" loader="loadRecords(identifier, 'contact')">
-								<div>
-									<div><strong>{{reference.title | lstring}}</strong></div>
-									<div>{{reference.summary | lstring}}</div>
-								</div>
-							</div>
+
+							<field-embed-contact multiple ng-model="$parent.document.contactsToInform" locales="$parent.document.header.languages" caption="Add an organisation or a contact »"></field-embed-contact>
+
 						</div>
 					</div>
 				</div>

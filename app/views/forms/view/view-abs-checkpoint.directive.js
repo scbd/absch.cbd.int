@@ -45,18 +45,6 @@ require("app").directive("viewAbsCheckpoint", [function () {
 			//====================
 			//
 			//====================
-			$scope.$watch("document.contactsToInform", function () {
-				if ($scope.document) {
-					$scope.contactsToInform = angular.fromJson(angular.toJson($scope.document.contactsToInform));
-
-					if ($scope.contactsToInform)
-						$scope.loadReferences($scope.contactsToInform);
-				}
-			});
-
-			//====================
-			//
-			//====================
 			$scope.loadReferences = function(targets) {
 
 				angular.forEach(targets, function(ref){

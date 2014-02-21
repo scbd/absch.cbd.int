@@ -99,13 +99,9 @@
                     <legend>Contact Person Information  <span class="pull-right" style="padding-right:10px;font-size:80%;"><a ng-click="CallMe(4);">help</a></span></legend>
                     <div class="row">
                         <div class="col-xs-12">
-                            <div class="km-control-group" name="contacts" required caption="Contact person"></div>
-                            <div km-reference multiple name="contacts" ng-model="document.contacts" loader="loadRecords(identifier, 'contact')">
-                                <div>
-                                    <div><strong>{{reference.title | lstring}}</strong></div>
-                                    <div>{{reference.summary | lstring}}</div>
-                                </div>
-                            </div>
+                            <div class="km-control-group" name="contacts" required caption="Contact person">
+                                <field-embed-contact multiple ng-model="$parent.document.contacts" locales="$parent.document.header.languages" caption="Add an organisation or a contact »"></field-embed-contact>
+                            </div>  
                         </div>
                     </div>
                 </div>

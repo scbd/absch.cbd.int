@@ -641,6 +641,26 @@ padding: 10px 10px 10px 10px;
     	font: 32px "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeueW01-45Ligh", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	}
 
+ul.km-value {
+  padding-left: 0;
+  list-style: none;
+}
+
+address.km-value,
+div.km-value,
+ul.km-value > li {
+background-color: #fff;
+border: 1px solid #c0c0c0;
+border-radius: 3px;
+padding: 5px 8px 5px 8px;
+margin-top: 1px;
+margin-bottom: 1px;
+display: block;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+-ms-border-radius: 5px;
+-o-border-radius: 5px;
+}
 
 @media (min-width: 768px) {
   .modal-lg {

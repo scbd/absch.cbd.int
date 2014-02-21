@@ -123,7 +123,7 @@ require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "
 	//
 	//============================================================
 	$scope.$on("editDocument", function(evt, schema, identifier){
-		debugger;
+
 		evt.stopPropagation();
 		$scope.edit(schema, identifier);
 	});

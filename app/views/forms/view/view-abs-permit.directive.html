@@ -14,9 +14,7 @@
 		<div ng-show="document.government">
 			<label>Country</label>
 			<div class="km-value" >
-				<span km-terms ng-model="document.government">
-					<span ng-repeat="term in terms">{{term.name}} </span>
-				</span>
+				{{document.government|term}}
 			</div>
 		</div>
 		<div ng-show="document.updateReasons">
@@ -29,7 +27,7 @@
 		<legend>Issuing Authority</legend>
 		<label>Competent national authority responsible for issuing the permit</label>
 		<div class="km-value">
-			<div class="cbdViewAuthorityReference" ng-model="authority.document" locale="locale"></div>
+			<div class="view-authority-reference" ng-model="authority.document" locale="locale"></div>
 		</div>
 	</div>
 	<div ng-show="document.nationalReferences ||
@@ -51,7 +49,7 @@
 
 		<div ng-show="document.provider || document.providerConfidential">
 			<label>The provider</label>
-			<div class="well">
+			<div class="km-value">
 				<div view-contact-reference ng-model="document.provider" locale="locale"></div>
 				<div ng-show="document.providerConfidential">
 					Confidential information
@@ -125,8 +123,8 @@
 	<br />
 	<div ng-show="document.keywords">
 		<label>Keywords to describe the subject-matter or genetic resource(s) covered by the permit or its equivalent</label>
-		<ul class="km-value" km-terms ng-model="document.keywords">
-			<li ng-repeat="term in terms">{{term.name}} </li>
+		<ul class="km-value">
+			<li ng-repeat="term in document.keywords">{{term|term}} </li>
 		</ul>
 	</div>
 
@@ -150,8 +148,8 @@
 
 	<div ng-show="document.usage">
 		<label>Indicate if the permit or its equivalent covers commercial and/or non-commercial use</label>
-		<ul class="km-value" km-terms ng-model="document.usage">
-			<li ng-repeat="term in terms">{{term.name}} </li>
+		<ul class="km-value">
+			<li ng-repeat="term in document.usage">{{term|term}}</li>
 		</ul>
 	</div>
 	<div ng-show="document.usageDescription">
@@ -208,7 +206,7 @@
 		<legend>Additional Information</legend>
 
 		<div ng-show="document.relevantInformation">
-			<div class="km-value" ng-bind-html-unsafe="document.relevantInformation | lstring:locale | markdown"></div>
+			<div class="km-value" ng-bind="document.relevantInformation | lstring:locale"></div>
 		</div>
 
 		<div ng-show="document.relevantDocuments">

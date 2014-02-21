@@ -5,9 +5,7 @@
 	<div ng-show="document.government">
 		<label>Country</label>
 		<div class="km-value">
-			<span km-terms ng-model="document.government">
-				<span ng-repeat="term in terms">{{term.name}} </span>
-			</span>
+			{{document.government|term}}
 		</div>
 	</div>
 
@@ -21,9 +19,7 @@
 			{{document.city | lstring:locale}}<span ng-show="document.city">, </span>
 			{{document.state | lstring:locale}}<br ng-show="document.city || document.state" />
 			{{document.postalCode | lstring:locale}}<span ng-show="document.postalCode">, </span>
-			<b km-terms ng-model="document.country">
-				<span ng-repeat="term in terms">{{term.name}}</span>
-			</b>
+			<b>{{document.country|term}}</b>
 		</address>
 	</div>
 
@@ -59,7 +55,7 @@
 	<div ng-show="contacts">
 		<label>Contact person in the organization</label>
 		<div class="km-value" ng-repeat="contact in contacts">
-			<div class="cbdViewContactReference" ng-model="contact.document" locale="locale"></div>
+			<div view-contact-reference ng-model="contact" locale="locale"></div>
 		</div>
 	</div>
 
@@ -74,8 +70,8 @@
 
 		<div ng-show="document.absJurisdiction">
 			<label>Jurisdiction</label>
-			<ul class="km-value" km-terms ng-model="document.absJurisdiction">
-				<li ng-repeat="term in terms">{{term.name}} </li>
+			<ul class="km-value">
+				<li>{{document.absJurisdiction|term}}</li>
 			</ul>
 		</div>
 
@@ -86,15 +82,15 @@
 
 		<div ng-show="document.absGeneticResourceTypes">
 			<label>According to the type of organism</label>
-			<ul class="km-value" km-terms ng-model="document.absGeneticResourceTypes">
-				<li ng-repeat="term in terms">{{term.name}} </li>
+			<ul class="km-value">
+				<li ng-repeat="term in document.absGeneticResourceTypes">{{term|term}} </li>
 			</ul>
 		</div>
 
 		<div ng-show="document.absGeneticResourceAreas">
 			<label>According to the area where the genetic resource is found</label>
-			<ul class="km-value" km-terms ng-model="document.absGeneticResourceAreas">
-				<li ng-repeat="term in terms">{{term.name}} </li>
+			<ul class="km-value">
+				<li ng-repeat="term in document.absGeneticResourceAreas">{{term|term}} </li>
 			</ul>
 		</div>
 
@@ -108,7 +104,7 @@
 		<legend>Additional Information</legend>
 
 		<div ng-show="document.relevantInformation">
-			<div class="km-value" ng-bind-html-unsafe="document.relevantInformation | lstring:locale | markdown"></div>
+			<div class="km-value" ng-bind="document.relevantInformation | lstring:locale"></div>
 		</div>
 
 		<div ng-show="document.relevantDocuments">

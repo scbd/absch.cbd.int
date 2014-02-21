@@ -15,20 +15,6 @@ require("app").directive("viewMeasure", [function () {
 			//====================
 			//
 			//====================
-			$scope.$watch("document.authorities", function(_new)
-			{
-				if ($scope.document && $scope.document.authorities) {
-					$scope.authorities = angular.fromJson(angular.toJson($scope.document.authorities));
-
-					if ($scope.authorities)
-						$scope.loadReferences($scope.authorities);
-				}
-			});
-
-
-			//====================
-			//
-			//====================
 			$scope.$watch("document.amendedMeasures", function(_new)
 			{
 				if ($scope.document && $scope.document.amendedMeasures) {

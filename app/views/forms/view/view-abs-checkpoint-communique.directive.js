@@ -76,30 +76,6 @@ require("app").directive("viewAbsCheckpointCommunique", [function () {
 			//====================
 			//
 			//====================
-			$scope.$watch("document.personeToWhomGranted", function () {
-				if ($scope.document) {
-					$scope.personeToWhomGranted = angular.fromJson(angular.toJson($scope.document.personeToWhomGranted));
-
-					if ($scope.personeToWhomGranted)
-						$scope.loadReference($scope.personeToWhomGranted);
-				}
-			});
-
-			//====================
-			//
-			//====================
-			$scope.$watch("document.geneticRessourceUsers", function () {
-				if ($scope.document) {
-					$scope.geneticRessourceUsers = angular.fromJson(angular.toJson($scope.document.geneticRessourceUsers));
-
-					if ($scope.geneticRessourceUsers)
-						$scope.loadReferences($scope.geneticRessourceUsers);
-				}
-			});
-
-			//====================
-			//
-			//====================
 			$scope.$watch("document.checkpointCommuniques", function () {
 				if ($scope.document) {
 					$scope.checkpointCommuniques = angular.fromJson(angular.toJson($scope.document.checkpointCommuniques));

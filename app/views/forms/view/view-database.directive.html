@@ -17,18 +17,7 @@
 	<div ng-show="document.government">
 		<label>Country</label>
 		<div class="km-value">
-			<span km-terms ng-model="document.government">
-				<span ng-repeat="term in terms">{{term.name}} </span>
-			</span>
-		</div>
-	</div>
-
-	<div ng-show="false">
-		<legend>Clearing-Houses</legend>
-		<div class="km-value">
-			<ul class="km-terms" ng-model="document.libraries">
-				<li ng-repeat="term in terms">{{term.name}}</li>
-			</ul>
+			{{document.government|term}}
 		</div>
 	</div>
 
@@ -36,7 +25,7 @@
 		<legend>Additional Information</legend>
 
 		<div ng-show="document.relevantInformation">
-			<div class="km-value" ng-bind-html-unsafe="document.relevantInformation | lstring:locale | markdown"></div>
+			<div class="km-value" ng-bind="document.relevantInformation | lstring:locale"></div>
 		</div>
 
 		<div ng-show="document.relevantDocuments">

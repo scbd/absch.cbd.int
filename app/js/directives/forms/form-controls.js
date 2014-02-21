@@ -310,6 +310,7 @@ require('app').directive('kmTerms', function ($http)
 		},
 		link: function ($scope, element, attrs, controller) 
 		{
+			$scope.termsX = [];
 			$scope.terms = [];
 			$scope.$watch('binding', $scope.load);
 		},
@@ -326,6 +327,9 @@ require('app').directive('kmTerms', function ($http)
 				     if($scope.binding && angular.isArray ($scope.binding)) oBinding =  $scope.binding;
 				else if($scope.binding && angular.isObject($scope.binding)) oBinding = [$scope.binding];
 				else if($scope.binding && angular.isString($scope.binding)) oBinding = [$scope.binding];
+
+				$scope.termsX = oBinding;
+				return;
 
 
 				if(oBinding) {

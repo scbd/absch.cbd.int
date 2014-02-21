@@ -25,7 +25,10 @@
     </tr>
 
     <tr ng-repeat="record in (filteredRecords = (records | filter:baseFilter | filter:subFilter | filter:keywords))">
-      <td>{{record.documentID||'[new]'}}</td>
+      <td>
+        <span ng-hide="record.documentID">[new]</span>
+        <a href="/records/{{record.documentID}}">{{record.documentID}}</a>
+      </td>
       <td>
         <b>{{record.type|schemaName}}</b><br/>
         {{(record.title||record.workingDocumentTitle)|lstring}}

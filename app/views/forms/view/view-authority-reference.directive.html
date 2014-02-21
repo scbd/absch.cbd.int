@@ -1,7 +1,7 @@
 ﻿<div>
 	<b>{{document.name | lstring:locale}} <i ng-show="document.acronym">({{document.acronym | lstring:locale}})</i></b>
-	<div class="value" km-terms ng-model="document.government">
-		<div ng-repeat="term in terms">{{term.name}}</div>
+	<div class="value">
+		{{document.government|term}}
 	</div>
 
 	<address style="margin-top: 5px; margin-bottom: 5px">
@@ -9,9 +9,7 @@
 		{{document.city | lstring:locale}}<span ng-show="document.city">, </span>
 		{{document.state | lstring:locale}}<br ng-show="document.city || document.state" />
 		{{document.postalCode | lstring:locale}}<span ng-show="document.postalCode">, </span>
-		<b km-terms ng-model="document.country">
-			<span ng-repeat="term in terms">{{term.name}}</span>
-		</b>
+		<b>{{document.country|term}}</b>
 	</address>
 
 	<div ng-show="document.phones">

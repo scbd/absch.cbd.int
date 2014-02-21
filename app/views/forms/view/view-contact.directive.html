@@ -16,9 +16,7 @@
 				{{document.city | lstring:locale}}<span ng-show="document.city">, </span>
 				{{document.state | lstring:locale}}<br ng-show="document.city || document.state" />
 				{{document.postalCode | lstring:locale}}<span ng-show="document.postalCode">, </span>
-				<b km-terms ng-model="document.country">
-					<span ng-repeat="term in terms">{{term.name}}</span>
-				</b>
+				<b>{{document.country|term}}</b>
 			</address>
 		<div>
 	
@@ -63,7 +61,7 @@
 		<legend>Additional Information</legend>
 
 		<div ng-show="document.relevantInformation">
-			<div class="km-value" ng-bind-html-unsafe="document.relevantInformation | lstring:locale | markdown"></div>
+			<div class="km-value" ng-bind="document.relevantInformation | lstring:locale"></div>
 		</div>
 
 		<div ng-show="document.relevantDocuments">
