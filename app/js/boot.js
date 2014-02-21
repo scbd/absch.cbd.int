@@ -15,18 +15,19 @@ require.config({
         'linqjs'          : '../libs/linqjs/linq'
     },
     'shim': { 
-        'angular'       : { 'deps': ['jquery'], 'exports': 'angular' },
-        'angular-route' : { 'deps': ['angular'] },
-        'bootstrap'     : { 'deps': ['jquery'] },
-        'underscore'    : { 'exports' : '_'}
+        'angular'        : { 'deps': ['jquery'], 'exports': 'angular' },
+        'angular-route'  : { 'deps': ['angular'] },
+        'angular-cookies': { 'deps': ['angular'] },
+        'bootstrap'      : { 'deps': ['jquery'] },
+        'underscore'     : { 'exports' : '_'}
     }
 });
 
-require(['angular', 'bootstrap', 'domReady'/*, 'main'*/], function (ng) {
+require(['angular', 'angular-route', 'angular-cookies', 'bootstrap', 'domReady'/*, 'main'*/], function (ng) {
 
     // NOTE: place operations that need to initialize prior to app start here using the `run` function on the top-level module
 
-    require(['domReady!', 'angular-route', 'angular-cookies', 'main'], function (document) {
+    require(['domReady!', 'main'], function (document) {
         ng.bootstrap(document, ['app']); 
         ng.resumeBootstrap();
     });
