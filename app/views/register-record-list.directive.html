@@ -5,10 +5,10 @@
       FILTERS {{filteredRecords.length}}
       </span></div>
       <div class="col-md-8 text-center">
-        <span ng-click="subFilter=null" class="btn btn-info"> <i ng-hide="subFilter" class="glyphicon glyphicon-ok"></i> All <span class="badge badge-default">{{(records | filter:baseFilter).length}}</span></span>
-        <span ng-click="subFilter=isRequest" class="btn btn-danger"> <i ng-show="subFilter==isRequest" class="glyphicon glyphicon-ok"></i> Requests <span class="badge badge-default">{{(records | filter:isRequest).length}}</span></span>
-        <span ng-click="subFilter=isPublished" class="btn btn-success"> <i ng-show="subFilter==isPublished" class="glyphicon glyphicon-ok"></i> Published  <span class="badge badge-default">{{(records | filter:isPublished).length}}</span></span>
-        <span ng-click="subFilter=isDraft" class="btn btn-default btn-draft" style="color:#fff"> <i ng-show="subFilter==isDraft" class="glyphicon glyphicon-ok"></i> Draft  <span class="badge badge-default" style="color:#999">{{(records | filter:isDraft).length}}</span></span>
+        <span ng-click="statusFilter=null" class="btn btn-info"> <i ng-hide="statusFilter" class="glyphicon glyphicon-ok"></i> All <span class="badge badge-default">{{(records | filter:schemaFilter).length}}</span></span>
+        <span ng-click="statusFilter=isRequest" class="btn btn-danger"> <i ng-show="statusFilter==isRequest" class="glyphicon glyphicon-ok"></i> Requests <span class="badge badge-default">{{(records | filter:schemaFilter | filter:isRequest).length}}</span></span>
+        <span ng-click="statusFilter=isPublished" class="btn btn-success"> <i ng-show="statusFilter==isPublished" class="glyphicon glyphicon-ok"></i> Published  <span class="badge badge-default">{{(records | filter:schemaFilter | filter:isPublished).length}}</span></span>
+        <span ng-click="statusFilter=isDraft" class="btn btn-default btn-draft" style="color:#fff"> <i ng-show="statusFilter==isDraft" class="glyphicon glyphicon-ok"></i> Draft  <span class="badge badge-default" style="color:#999">{{(records | filter:schemaFilter | filter:isDraft).length}}</span></span>
       </div>
       <div class="col-md-3 text-center">
           <input type="text" ng-model="keywords" placeholder=" Keyword " class="form-control keyword" style="height: 34px; margin-top: 5px; width: 160px;">
@@ -24,14 +24,23 @@
       <th></th>
     </tr>
 
-    <tr ng-repeat="record in (filteredRecords = (records | filter:baseFilter | filter:subFilter | filter:keywords))">
+    <tr ng-repeat="record in (filteredRecords = (records | filter:schemaFilter | filter:statusFilter | filter:keywords))">
       <td>
-        <span ng-hide="record.documentID">[new]</span>
-        <a href="/records/{{record.documentID}}">{{record.documentID}}</a>
+        <div>
+          <span ng-hide="record.documentID">[new]</span>
+          <a href="/records/{{record.documentID}}">{{record.documentID}}</a>
+        </div>
+
+
+        <span ng-show="isPublished(record)" class="btn btn-xs btn-success" title="Published"> P </span>
+        <span ng-show="isRequest(record)"   class="btn btn-xs btn-danger" title="Request"> R </span>
+        <span ng-show="isDraft(record)"     class="btn btn-xs btn-default btn-draft" title="Draft" style="color:#fff"> D </span>
+
+
       </td>
       <td>
         <b>{{record.type|schemaName}}</b><br/>
-        {{(record.title||record.workingDocumentTitle)|lstring}}
+        {{(record.workingDocumentTitle||record.title)|lstring}}
       </td>
       <td class="text-right" ><button class="btn btn-default" ng-click="edit(record)"><i class="fa fa-edit"></i></button></td>
     </tr>

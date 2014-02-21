@@ -190,6 +190,7 @@ require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "
 	//============================================================
 	$scope.$on("documentDraftSaved", function(evt, draftInfo) {
 		
+		loadRecords();
 		evt.stopPropagation();
 		$scope.editing = false;
 		
@@ -203,6 +204,7 @@ require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "
 	//============================================================
 	$scope.$on("documentPublishRequested", function(evt, workflowInfo){
 		
+		loadRecords();
 		evt.stopPropagation();
 		$scope.editing = false;
 		
@@ -216,6 +218,7 @@ require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "
 	//============================================================
 	$scope.$on("documentPublished", function(evt, documentInfo){
 		
+		loadRecords();
 		evt.stopPropagation();
 		$scope.editing = false;
 
@@ -227,8 +230,6 @@ require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "
 	//
 	//============================================================
 	var unreg_locationChangeStart = $scope.$on('$locationChangeStart', function(evt, next, current) {
-
-		console.log("locationChangeStart", $scope.editing, evt)
 
 		if(!canSwitch()) {
 			evt.preventDefault();
@@ -255,8 +256,6 @@ require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "
 	//
 	//============================================================
 	var unreg_routeChangeStart = $scope.$on('$routeChangeStart', function() {
-
-		console.log("routeChangeStart")
 
 		unreg_routeChangeStart();
 		unreg_locationChangeStart();

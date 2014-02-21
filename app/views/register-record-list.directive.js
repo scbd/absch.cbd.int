@@ -25,7 +25,7 @@ require("app").directive("registerRecordList", [ function () {
 			//
 			//
 			//============================================================
-			$scope.baseFilter = function(entity){
+			$scope.schemaFilter = function(entity){
 
 				var ok = !!entity;
 
@@ -40,7 +40,7 @@ require("app").directive("registerRecordList", [ function () {
 			//
 			//============================================================
 			$scope.isDraft = function(entity){
-				return $scope.baseFilter(entity) && entity.workingDocumentCreatedOn;
+				return entity && entity.workingDocumentCreatedOn;
 			};
 
 			//============================================================
@@ -48,7 +48,7 @@ require("app").directive("registerRecordList", [ function () {
 			//
 			//============================================================
 			$scope.isRequest = function(entity){
-				return $scope.baseFilter(entity) && entity.workingDocumentLock;
+				return entity && entity.workingDocumentLock;
 			};
 
 			//============================================================
@@ -56,7 +56,7 @@ require("app").directive("registerRecordList", [ function () {
 			//
 			//============================================================
 			$scope.isPublished = function(entity){
-				return $scope.baseFilter(entity) && entity.documentID;
+				return entity && entity.documentID;
 			};
 		}]
 	};
