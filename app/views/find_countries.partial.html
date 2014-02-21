@@ -3,9 +3,9 @@
 	<!-- ng-class="{false:'not', true:'x'}[expanded] -->
 	<div class="list-group-item-expand">
 		<div ng-animate="'animate'" ng-repeat="item in terms | orderBy:'title' | filter:{selected:true}" ng-class="ccc(item)" ng-click="onclick(this, $event)">
-			<div class="label label-selected-facet">
+			<div class="label label-default truncate">
 				<div style="position:absolute;right:6px;top:6px" class="icon-remove-sign"></div>
-				<div class="truncate">
+				<div class="">
 					{{item.title.en}} ({{item.count}})
 				</div>
 			</div>

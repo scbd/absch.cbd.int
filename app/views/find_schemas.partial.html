@@ -2,11 +2,9 @@
     <a data-toggle="modal" href="#dialogSelectSchemas">{{title}}&nbsp;<b class="caret"></b></a>
     <div class="list-group-item-expand">
         <div ng-repeat="item in terms | orderBy:'title' | filter:{selected:true}" ng-class="ccc(item)" ng-click="onclick(this, $event)">
-            <div class="label label-selected-facet">
-                <div style="position:absolute;right:6px;top:6px" class="icon-remove-sign"></div>
-                <div class="truncate">
+            <div class="label label-default truncate" style="cursor:pointer">
+               <!--  <div style="position:absolute;right:6px;top:6px" class="icon-remove-sign"></div> -->
                     {{item.title}} ({{item.count}})
-                </div>
             </div>
         </div>
     <div>
@@ -55,6 +53,18 @@
     <style>
         .options .checkbox {
             min-height: 0;
+        }
+
+        .truncate {
+            display:block;
+            width:150px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin: 2px 4px;
+            font-size: 10px;
+            font-weight: normal;
+            color: #000;
         }
     </style>
 </li>

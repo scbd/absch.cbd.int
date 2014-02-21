@@ -9,18 +9,19 @@
         <div class="container">
             <span class="category"><span class="glyphicon glyphicon-search"></span>&nbsp;Find Information</span>
 
-            <div class="navbar navbar-default" role="navigation">
+            <div class="navbar navbar-default" role="navigation" >
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
+                      <a class="navbar-brand navbar-brand-filter" href="#"><span class="label label-primary">Filters</span></a>
                     </button>
-                    <a class="navbar-brand navbar-brand-filter" href="#"><span class="label label-primary">Filters</span></a>
                 </div>
                 <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav filters">
+                    <ul class="nav navbar-nav filters" style="width:100%;white-space:nowrap">
+                      <a class="navbar-brand navbar-brand-filter" href="#"><span class="label label-primary">Filters</span></a>
                         <search-filter-schemas title='Document Types' ng-model='schemas' field='schema_s' query='querySchema'></search-filter-schemas>
                         <search-filter-countries title='Countries' ng-model='governments' field='government_s' query='queryGovernment'></search-filter-countries>
                         <!-- <li><search-filter-facets title='Aichi Targets' ng-model='aichiTargets' field='aichiTarget_REL_ss' query='queryTargets'></search-filter-facets></li> -->
@@ -29,14 +30,13 @@
                         <!-- <li><a href="#">Reference Records <b class="caret"></b></a></li> -->
                         <!-- <li><a href="#">Countries  <b class="caret"></b></a></li> -->
                         <!-- <li><a href="#">Thematic Areas  <b class="caret"></b></a></li> -->
-                        <li><a href="#">Date Range <b class="caret"></b></a></li>
+                        <!-- <li><a href="#">Date Range <b class="caret"></b></a></li> -->
                         <li>
                             <input type="text" ng-model="keyword" placeholder=" Keyword " class="form-control keyword" style="height: 26px; margin-top: 12px; margin-right: 5px; width: 160px;"></li>
                     </ul>
                 </div>
                 <div style="background-color: #dedede; padding: 5px 20px;margin:0;">
-
-                    <div class="row">
+                 <!--    <div class="row">
                     <div class="col-md-12" style="padding-top:0; margin-top:0;">
                       <h3>National Records</h3>
                       <p><a><strong>ABSCH-MSR</strong></a> 
@@ -54,7 +54,18 @@
                       | <a>animals</a>
                       | <a>microorganisms</a></p>
                     </div>
-                    </div>
+                    </div> -->
+                    <ul class="pagination pull-right">
+                        <li ng-class="{disabled: currentPage == 0}">
+                            <a href ng-click="actionSetPage(currentPage-1)">« Prev</a>
+                        </li>
+                        <li ng-repeat="n in range(pageCount)" ng-class="{active: n == currentPage}" ng-click="actionSetPage(n)">
+                            <a href>{{n+1}}</a>
+                        </li>
+                        <li ng-class="{disabled: currentPage >= pageCount - 1}">
+                            <a href ng-click="actionSetPage(currentPage+1)">Next »</a>
+                        </li>
+                    </ul>
                     <div ng-repeat="document in documents">
                         <div style="font-size:10px;color:#777">{{document.schema}} <span ng-show="document.source">|</span> 
                             <strong ng-if="!document.sourceTooltip" style="color:#222">{{document.source}}</strong>
@@ -91,7 +102,5 @@
               </div> -->
         </div>
     </div>
-
-    
 
 </div>

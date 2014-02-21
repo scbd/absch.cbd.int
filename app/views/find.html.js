@@ -43,9 +43,9 @@ require('app').controller('FindController', ['$scope', '$rootScope', '$http', '$
     $scope.pageCount       = 0;
     $scope.currentPage     = 0;
     $scope.querySchema     = '*:*';
-    // $scope.queryGovernment = '*:*';
+    $scope.queryGovernment = '*:*';
     // $scope.queryTargets    = '*:*';
-    // $scope.queryTheme      = '*:*';
+    $scope.queryTheme      = '*:*';
     // $scope.queryDate       = '*:*';
     $scope.queryKeywords   = '*:*';
 
@@ -197,10 +197,12 @@ require('app').controller('FindController', ['$scope', '$rootScope', '$http', '$
     //============================================================
 	function query () {
 
-        var q = 'realm_ss:chm AND schema_s:*';//' AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryTheme + ' AND ' + $scope.queryTargets +' AND ' + $scope.queryDate + ' AND ' + $scope.queryKeywords;
+        var q = 'realm_ss:absch AND schema_s:*';//' AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryTheme + ' AND ' + $scope.queryTargets +' AND ' + $scope.queryDate + ' AND ' + $scope.queryKeywords;
 
-        if($scope.keyword)     q += ' AND (title_t:' + $scope.keyword + '* OR description_t:' + $scope.keyword + '* OR text_EN_txt:' + $scope.keyword + '*)';
-        if($scope.querySchema) q += ' AND (' + $scope.querySchema + ')';
+        if($scope.keyword)         q += ' AND (title_t:' + $scope.keyword + '* OR description_t:' + $scope.keyword + '* OR text_EN_txt:' + $scope.keyword + '*)';
+        if($scope.querySchema)     q += ' AND (' + $scope.querySchema + ')';
+        if($scope.queryGovernment) q += ' AND (' + $scope.queryGovernment + ')';
+        if($scope.queryTheme)      q += ' AND (' + $scope.queryTheme + ')';
 
         var queryParameters = {
             'q': q,

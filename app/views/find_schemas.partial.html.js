@@ -115,13 +115,13 @@ require('app').directive('searchFilterSchemas', function ($http) {
                 return dictionary;
             }
 
-            $scope.measure                 = { identifier: 'measure' };
-            $scope.authority               = { identifier: 'authority' };
-            $scope.absPermit               = { identifier: 'absPermit' };
-            $scope.absCheckpoint           = { identifier: 'absCheckpoint' };
-            $scope.absCheckpointCommunique = { identifier: 'absCheckpointCommunique' };
-            $scope.database                = { identifier: 'database' };
-            $scope.resource                = { identifier: 'resource' };
+            $scope.absCheckpoint           = { identifier: 'absCheckpoint',            title: 'Checkpoint' };
+            $scope.absCheckpointCommunique = { identifier: 'absCheckpointCommunique',  title: 'Checkpoint Communiqué' };
+            $scope.absPermit               = { identifier: 'absPermit',                title: 'Permit or its equivalent constituting and internationally recognized certificate of compliance' };
+            $scope.authority               = { identifier: 'authority',                title: 'Competent National Authority' };
+            $scope.database                = { identifier: 'database',                 title: 'ABS National Website or Database' };
+            $scope.measure                 = { identifier: 'measure',                  title: 'Legislative, administrative or policy measures on access and benefit-sharing' };
+            $scope.resource                = { identifier: 'resource',                 title: 'Virtual Library Record' };
 
             $scope.terms  = [ $scope.measure, $scope.authority, $scope.absPermit, $scope.absCheckpoint, $scope.absCheckpointCommunique, $scope.database, $scope.resource ];
             $scope.termsx = dictionarize($scope.terms);
@@ -146,6 +146,14 @@ require('app').directive('searchFilterSchemas', function ($http) {
             $scope.refresh = buildQuery;
             
             buildQuery();
+
+            $scope.$watch('absCheckpoint.selected',           buildQuery);
+            $scope.$watch('absCheckpointCommunique.selected', buildQuery);
+            $scope.$watch('absPermit.selected',               buildQuery);
+            $scope.$watch('authority.selected',               buildQuery);
+            $scope.$watch('database.selected',                buildQuery);
+            $scope.$watch('measure.selected',                 buildQuery);
+            $scope.$watch('resource.selected',                buildQuery);
         }]
     }
 });

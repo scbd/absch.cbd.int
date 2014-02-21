@@ -4,7 +4,7 @@
 		<div ng-repeat="item in termsArray | filter:{selected:true}" ng-click="onclick(this, $event)">
 			<div class="label label-selected-facet">
 				<div style="position:absolute;right:6px;top:6px" class="icon-remove-sign"></div>
-				<div class="truncate">
+				<div class="truncate" style="cursor:pointer">
 					{{item.name}} ({{item.count}})
 				</div>
 			</div>
