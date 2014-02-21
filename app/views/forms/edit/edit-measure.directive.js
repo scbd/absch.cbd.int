@@ -216,7 +216,7 @@ require("app").directive("editMeasure", [ "authHttp", "Enumerable", "$filter", "
 			//
 			//==================================
 			$scope.userGovernment = function() {
-				return authentication.getUser().government;
+				return $scope.$root.user.government;
 			};
 		
 			//==================================
