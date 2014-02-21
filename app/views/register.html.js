@@ -141,7 +141,7 @@ require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "
 
 		var cacheKey = (schema||"") + "+" + (identifier||"");
 
-		if(canEdit_cache[cacheKey])
+		if(canEdit_cache[cacheKey]!==undefined)
 			return canEdit_cache[cacheKey];
 
 		if(identifier) {
@@ -166,7 +166,7 @@ require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "
 		else {
 
 			return canEdit_cache[cacheKey] = storage.drafts.security.canCreate(identifier, schema).then(function(allowed){
-				return canEdit_cache[cacheKey] = allowed;
+				return canEdit_cache[cacheKey] = allowed||false;
 			});
 		}
 	}
