@@ -247,7 +247,7 @@ border-radius: 3px;
 	line-height: 18px;
 }
 .main-side-link > .secondary > li > a{
-	color: #666;
+	color: #999;
 }
 .main-side-link > .secondary > li > a:hover, a:focus{
 	color: #000;
