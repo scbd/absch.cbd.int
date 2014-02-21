@@ -13,36 +13,68 @@
         <div class="modal-dialog"><!--  ;margin-left:-380px"  -->
             <div class="modal-content" style="width:640px">
                 <div class="modal-body" style="padding-left:20px">
-                    <h4>National Records</h4>
-                    <div class="checkbox"><label>
-                        <input type="checkbox" ng-model="measure.selected" bind-indeterminate="measure.indeterminate">
-                        Legislative, administrative or policy measures on access and benefit-sharing ({{measure.count}})
-                    </label></div>
-                    <div class="checkbox"><label>
-                        <input type="checkbox" ng-model="authority.selected" bind-indeterminate="authority.indeterminate">
-                        Competent National Authority ({{authority.count}})
-                    </label></div>
-                    <div class="checkbox"><label>
-                        <input type="checkbox" ng-model="absPermit.selected" bind-indeterminate="absPermit.indeterminate">
-                        Permit or its equivalent constituting and internationally recognized certificate of compliance ({{absPermit.count}})
-                    </label></div>
-                    <div class="checkbox"><label>
-                        <input type="checkbox" ng-model="absCheckpoint.selected" bind-indeterminate="absCheckpoint.indeterminate">
-                        Checkpoint ({{absCheckpoint.count}})
-                    </label></div>
-                    <div class="checkbox"><label>
-                        <input type="checkbox" ng-model="absCheckpointCommunique.selected" bind-indeterminate="absCheckpointCommunique.indeterminate">
-                        Checkpoint Communiqué ({{absCheckpointCommunique.count}})
-                    </label></div>
-                    <div class="checkbox"><label>
-                        <input type="checkbox" ng-model="database.selected" bind-indeterminate="database.indeterminate">
-                        ABS National Website or Database ({{database.count}})
-                    </label></div>
-                    <h4>Reference Records</h4>
-                    <div class="checkbox"><label>
-                        <input type="checkbox" ng-model="resource.selected" bind-indeterminate="resource.indeterminate">
-                        Virtual Library Record ({{resource.count}})
-                    </label></div>
+                    <table width="100%"><tr>
+                    <td width="50%">
+                        <h4>National Records</h4>
+                        <div class="checkbox"><label>
+                            <input type="checkbox" ng-model="focalpoint.selected" bind-indeterminate="focalpoint.indeterminate" ng-change="refresh()">
+                            National Focal Points ({{focalpoint.count}})
+                        </label></div>
+                        <div class="checkbox"><label>
+                            <input type="checkbox" ng-model="authority.selected" bind-indeterminate="authority.indeterminate" ng-change="refresh()">
+                            Competent National Authorities ({{authority.count}})
+                        </label></div>
+                        <div class="checkbox"><label>
+                            <input type="checkbox" ng-model="database.selected" bind-indeterminate="database.indeterminate" ng-change="refresh()">
+                            National Websites and Databases ({{database.count}})
+                        </label></div>
+                        <div class="checkbox"><label>
+                            <input type="checkbox" ng-model="measure.selected" bind-indeterminate="measure.indeterminate" ng-change="refresh()">
+                            Legislative, administrative or policy measures ({{measure.count}})
+                        </label></div>
+                        <div class="checkbox"><label>
+                            <input type="checkbox" ng-model="absPermit.selected" bind-indeterminate="absPermit.indeterminate" ng-change="refresh()">
+                            Permits and their equivalent ({{absPermit.count}})
+                        </label></div>
+                        <div class="checkbox"><label>
+                            <input type="checkbox" ng-model="absCheckpoint.selected" bind-indeterminate="absCheckpoint.indeterminate" ng-change="refresh()">
+                            Checkpoints ({{absCheckpoint.count}})
+                        </label></div>
+                        <div class="checkbox"><label>
+                            <input type="checkbox" ng-model="absCheckpointCommunique.selected" bind-indeterminate="absCheckpointCommunique.indeterminate" ng-change="refresh()">
+                            Checkpoint Communiqués ({{absCheckpointCommunique.count}})
+                        </label></div>
+                    </td>
+                    <td width="50%">
+                        <h4>Reference Records</h4>
+                        <div class="checkbox"><label>
+                            <input type="checkbox" ng-model="resource.selected" bind-indeterminate="resource.indeterminate" ng-change="refresh()">
+                            Virtual Library Records ({{resource.count}})
+                        </label></div>
+                        <div class="checkbox"><label>
+                            <input type="checkbox" ng-model="organization.selected" bind-indeterminate="organization.indeterminate" ng-change="refresh()">
+                            ABS Related Organizations ({{organization.count}})
+                        </label></div>
+                        <div class="checkbox"><label>
+                            <input type="checkbox" ng-model="meeting.selected" bind-indeterminate="meeting.indeterminate" ng-change="refresh()">
+                            Meetings &amp; Meeting Outcomes ({{meeting.count}})
+                        </label></div>
+
+                        <h4>Releases</h4>
+                        <div class="checkbox"><label>
+                            <input type="checkbox" ng-model="notification.selected" bind-indeterminate="notification.indeterminate" ng-change="refresh()">
+                            Notifications ({{notification.count}})
+                        </label></div>
+                        <div class="checkbox"><label>
+                            <input type="checkbox" ng-model="pressRelease.selected" bind-indeterminate="pressRelease.indeterminate" ng-change="refresh()">
+                            Press Releases ({{pressRelease.count}})
+                        </label></div>
+                        <div class="checkbox"><label>
+                            <input type="checkbox" ng-model="statement.selected" bind-indeterminate="statement.indeterminate" ng-change="refresh()">
+                            Statements ({{statement.count}})
+                        </label></div>
+                    </td>
+                    </tr></table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -50,6 +82,7 @@
             </div>
         </div>
     </div>
+
     <style>
         .options .checkbox {
             min-height: 0;

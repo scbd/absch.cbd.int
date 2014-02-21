@@ -115,15 +115,22 @@ require('app').directive('searchFilterSchemas', function ($http) {
                 return dictionary;
             }
 
-            $scope.absCheckpoint           = { identifier: 'absCheckpoint',            title: 'Checkpoint' };
-            $scope.absCheckpointCommunique = { identifier: 'absCheckpointCommunique',  title: 'Checkpoint Communiqué' };
-            $scope.absPermit               = { identifier: 'absPermit',                title: 'Permit or its equivalent constituting and internationally recognized certificate of compliance' };
-            $scope.authority               = { identifier: 'authority',                title: 'Competent National Authority' };
-            $scope.database                = { identifier: 'database',                 title: 'ABS National Website or Database' };
-            $scope.measure                 = { identifier: 'measure',                  title: 'Legislative, administrative or policy measures on access and benefit-sharing' };
-            $scope.resource                = { identifier: 'resource',                 title: 'Virtual Library Record' };
+            $scope.focalpoint              = { identifier: 'focalPoint',               title: 'National Focal Points' };
+            $scope.authority               = { identifier: 'authority',                title: 'Competent National Authorities' };
+            $scope.database                = { identifier: 'database',                 title: 'National Websites and Databases', count: 0 };
+            $scope.measure                 = { identifier: 'measure',                  title: 'Legislative, administrative and policy measures', count: 0  };
+            $scope.absPermit               = { identifier: 'absPermit',                title: 'Permits and their equivalent' };
+            $scope.absCheckpoint           = { identifier: 'absCheckpoint',            title: 'Checkpoints' };
+            $scope.absCheckpointCommunique = { identifier: 'absCheckpointCommunique',  title: 'Checkpoint Communiqués' };
 
-            $scope.terms  = [ $scope.measure, $scope.authority, $scope.absPermit, $scope.absCheckpoint, $scope.absCheckpointCommunique, $scope.database, $scope.resource ];
+            $scope.resource                = { identifier: 'resource',                 title: 'Virtual Library Record' };
+            $scope.organization            = { identifier: 'organization',             title: 'ABS Related Organizations' };
+            $scope.meeting                 = { identifier: 'meeting',                  title: 'Meetings &amp; Meeting Outcomes ({{meeting.count}})' };
+            $scope.notification            = { identifier: 'notification',             title: 'Notifications' };
+            $scope.pressRelease            = { identifier: 'pressRelease',             title: 'Press Releases' };
+            $scope.statement               = { identifier: 'statement',                title: 'Statements' };
+
+            $scope.terms  = [ $scope.focalpoint, $scope.authority, $scope.database, $scope.measure, $scope.absPermit, $scope.absCheckpoint, $scope.absCheckpointCommunique, $scope.resource, $scope.organization, $scope.meeting, $scope.notification, $scope.pressRelease, $scope.statement ];
             $scope.termsx = dictionarize($scope.terms);
 
             // Set intitial selection from QueryString parameters
@@ -146,14 +153,6 @@ require('app').directive('searchFilterSchemas', function ($http) {
             $scope.refresh = buildQuery;
             
             buildQuery();
-
-            $scope.$watch('absCheckpoint.selected',           buildQuery);
-            $scope.$watch('absCheckpointCommunique.selected', buildQuery);
-            $scope.$watch('absPermit.selected',               buildQuery);
-            $scope.$watch('authority.selected',               buildQuery);
-            $scope.$watch('database.selected',                buildQuery);
-            $scope.$watch('measure.selected',                 buildQuery);
-            $scope.$watch('resource.selected',                buildQuery);
         }]
     }
 });
