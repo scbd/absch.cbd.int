@@ -150,6 +150,7 @@ require('app').controller('FindController', ['$scope', '$rootScope', '$http', '$
         output.title       = document.title_t;
         output.description = document.description_t;
         output.source      = document.government_EN_t;
+        output.url_ss      = document.url_ss;
 
         if(document.schema_s=='focalPoint') {
             output.description  = document.function_t||'';
@@ -260,6 +261,27 @@ require('app').controller('FindController', ['$scope', '$rootScope', '$http', '$
             }
         }).error(function (error) { console.log('onerror'); console.log(error); });
     };
+
+    $scope.fixHtml = function (htmlText) {
+        htmlText = (htmlText || "").replace(/\r\n/g, '<br>')
+        htmlText = (htmlText || "").replace(/href="\//g, 'href="http://www.cbd.int/')
+        htmlText = (htmlText || "").replace(/href='\//g, "href='http://www.cbd.int/");
+
+        var qHtml = $('<div/>').html(htmlText);
+
+        qHtml.find("script,style").remove();
+
+        return qHtml.html();
+    };
+
+    $scope.fixUrl = function (url) {
+        if(url) {
+                 if(url.indexOf( "http://absch.cbd.int/")==0) url = url.substr("http://absch.cbd.int".length);
+            else if(url.indexOf("https://absch.cbd.int/")==0) url = url.substr("https://absch.cbd.int".length);
+        }
+
+        return url;
+    }
 
     //============================================================
     //
