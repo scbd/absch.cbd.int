@@ -237,6 +237,19 @@ require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "
 
 	//============================================================
 	//
+	// Occurs when record-list delete a record or a draft
+	//
+	//============================================================
+	$scope.$on("documentDeleted", function(evt){
+		
+		loadRecords();
+		evt.stopPropagation();
+		$scope.editing = false;
+
+	});
+
+	//============================================================
+	//
 	//
 	//
 	//============================================================

@@ -1,5 +1,5 @@
 "use strict";
-require("app").directive("registerRecordList", [ function () {
+require("app").directive("registerRecordList", ["$timeout", function ($timeout) {
 
 	return {
 		restrict   : "EA",
@@ -10,7 +10,27 @@ require("app").directive("registerRecordList", [ function () {
 			records : "=records",
 			schema : "@schema",
 		},
-		controller : ["$scope", function ($scope) {
+		link : function ($scope, $element) {
+
+			var deleteRecordModel = $element.find("#deleteRecordModel");
+
+			$element.find("[data-toggle='tooltip']").tooltip({trigger:'hover'});
+
+
+			$scope.$watch("recordToDelete", function(val){
+				console.log("recordToDelete", val);
+
+				if( val && !deleteRecordModel.is(":visible")) { console.log("show"); deleteRecordModel.modal("show"); }
+				if(!val &&  deleteRecordModel.is(":visible")) { console.log("hide"); deleteRecordModel.modal("hide"); }
+			});
+
+			deleteRecordModel.on("hidden.bs.modal", function(){
+				$timeout(function() {
+					$scope.recordToDelete = null; //clear on backdrop click
+				});
+			});
+		},
+		controller : ["$scope", "$q", "IStorage", function ($scope, $q, storage) {
 
 			//============================================================
 			//
@@ -19,6 +39,50 @@ require("app").directive("registerRecordList", [ function () {
 			$scope.edit = function(record) {
 
 				$scope.$emit("editDocument", record.type, record.identifier);
+			};
+
+			//============================================================
+			//
+			//
+			//============================================================
+			$scope.askDelete = function(record) {
+
+				$scope.recordToDelete = record;
+			};
+
+			//============================================================
+			//
+			//
+			//============================================================
+			$scope.deleteDraft = function(record) {
+
+				$scope.loading = true;
+
+				return $q.when(storage.drafts.delete(record.identifier)).then(function(){
+					
+					$scope.$emit("documentDeleted");
+					$scope.recordToDelete = null;
+
+				}).finally(function(){
+					delete $scope.loading
+				});
+			};
+
+			//============================================================
+			//
+			//
+			//============================================================
+			$scope.deleteRecord = function(record) {
+
+				$scope.loading = true;
+
+				return $q.when(storage.documents.delete(record.identifier)).then(function(){
+					$scope.$emit("documentDeleted");
+					$scope.recordToDelete = null;
+
+				}).finally(function(){
+					delete $scope.loading
+				});
 			};
 
 			//============================================================

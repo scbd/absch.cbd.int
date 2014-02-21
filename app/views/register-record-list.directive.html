@@ -2,7 +2,7 @@
 
   <div class="row" style="background-color: #333; padding: 5px; margin-left: 0px;">
       <div class="col-md-1 text-center"><span style="font-size: 16px; color: white;">
-      FILTERS {{filteredRecords.length}}
+      FILTERS
       </span></div>
       <div class="col-md-8 text-center">
         <span ng-click="statusFilter=null" class="btn btn-info"> <i ng-hide="statusFilter" class="glyphicon glyphicon-ok"></i> All <span class="badge badge-default">{{(records | filter:schemaFilter).length}}</span></span>
@@ -21,7 +21,7 @@
     <tr>
       <th>ID</th>
       <th>Summary</th>
-      <th></th>
+      <td colspan="2" class="text-right">{{filteredRecords.length}} record(s)</td>
     </tr>
 
     <tr ng-repeat="record in (filteredRecords = (records | filter:schemaFilter | filter:statusFilter | filter:keywords))">
@@ -31,21 +31,58 @@
           <a href="/records/{{record.documentID}}">{{record.documentID}}</a>
         </div>
 
-
-        <span ng-show="isPublished(record)" class="btn btn-xs btn-success" title="Published"> P </span>
-        <span ng-show="isRequest(record)"   class="btn btn-xs btn-danger" title="Request"> R </span>
-        <span ng-show="isDraft(record)"     class="btn btn-xs btn-default btn-draft" title="Draft" style="color:#fff"> D </span>
-
-
       </td>
       <td>
         <b>{{record.type|schemaName}}</b><br/>
         {{(record.workingDocumentTitle||record.title)|lstring}}
       </td>
-      <td class="text-right" ><button class="btn btn-default" ng-click="edit(record)"><i class="fa fa-edit"></i></button></td>
+      <td class="text-right" style="vertical-align:middle">
+        <span ng-show="isPublished(record)" class="btn btn-xs btn-success" title="Published">P</span>
+        <span ng-show="isRequest(record)"   class="btn btn-xs btn-danger" title="Request">R</span>
+        <span ng-show="isDraft(record)"     class="btn btn-xs btn-default btn-draft" title="Draft" style="color:#fff">D</span>
+      </td>
+      <td class="text-right" style="width:100px" >
+        <div class="btn-group">
+          <button type="button" class="btn btn-default" ng-click="edit(record)"><i class="fa fa-edit"></i></button>
+          <button type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
+        </div>
+      </td>
     </tr>
 
   </table>
+
+
+
+  <div id="deleteRecordModel" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">{{recordToDelete .type|schemaName}} deletion <i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
+        </div>
+        <div class="modal-body">
+
+          <div ng-show="isDraft(recordToDelete)" class="well">
+            <button type="button" class="btn btn-warning pull-right" ng-disabled="loading" ng-click="deleteDraft(recordToDelete)">Delete the draft</button>
+            <em>Draft {{recordToDelete.documentID||'[new]'}}</em>
+            <p><b>{{recordToDelete.workingDocumentTitle|lstring}}</b></p>
+            <p>{{recordToDelete.workingDocumentSummary|lstring}}</p>
+          </div>
+        
+          <div ng-show="isPublished(recordToDelete)" class="well">
+            <button type="button" class="btn btn-danger pull-right" ng-disabled="loading" ng-click="deleteRecord(recordToDelete)" data-toggle="tooltip" data-placement="top" title="Note: Any pending draft is delete with the record">Delete record</button>
+            <em>Published record {{recordToDelete.documentID}}</em>
+            <p><b>{{recordToDelete.title|lstring}}</b></p>
+            <p>{{recordToDelete.summary|lstring}}</p>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->  
 
 
 </div>
