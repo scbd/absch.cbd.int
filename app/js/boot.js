@@ -21,7 +21,8 @@ require.config({
         'angular-route'  : { 'deps': ['angular'] },
         'angular-cookies': { 'deps': ['angular'] },
         'bootstrap'      : { 'deps': ['jquery'] },
-        'bootstrap-datepicker' : { 'deps': ['jquery'] }
+        'bootstrap-datepicker' : { 'deps': ['jquery'] },
+        'underscore'     : { 'exports': '_' }
     }
 });
 
