@@ -1865,6 +1865,7 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 			$scope.updateSecurity = function()
 			{
 				$scope.security = {};
+				$scope.loading = true;
 
 				$q.when($scope.getDocumentFn()).then(function(document){
 
@@ -1874,27 +1875,33 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 					var identifier = document.header.identifier;
 					var schema     = document.header.schema;
 
-					storage.documents.exists(identifier).then(function(exist){
+					var a = storage.documents.exists(identifier).then(function(exist){
 
 						var q = exist 
 							  ? storage.documents.security.canUpdate(document.header.identifier, schema)
 							  : storage.documents.security.canCreate(document.header.identifier, schema);
 
-						q.then(function(allowed) { 
+						return q.then(function(allowed) { 
 							$scope.security.canSave = allowed 
 						});
 					})
 
-					storage.drafts.exists(identifier).then(function(exist){
+					var b = storage.drafts.exists(identifier).then(function(exist){
 
 						var q = exist 
 							  ? storage.drafts.security.canUpdate(document.header.identifier, schema)
 							  : storage.drafts.security.canCreate(document.header.identifier, schema);
 
-						q.then(function(allowed) { 
+						return q.then(function(allowed) { 
 							$scope.security.canSaveDraft = allowed 
 						});
 					})
+
+					return $q.all([a,b]);
+
+				}).finally(function(){
+					
+					$scope.loading = false;
 				});
 			}
 
@@ -1903,6 +1910,8 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 			//====================
 			$scope.publish = function()
 			{
+				$scope.loading = true;
+
 				var qDocument = $scope.getDocumentFn();
 				var qReport   = validate(qDocument);
 
@@ -1942,6 +1951,8 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 			//====================
 			$scope.publishRequest = function()
 			{
+				$scope.loading = true;
+
 				var qDocument = $scope.getDocumentFn();
 				var qReport   = validate(qDocument);
 
@@ -1981,6 +1992,8 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 			//====================
 			$scope.saveDraft = function()
 			{
+				$scope.loading = true;
+
 				return $q.when($scope.getDocumentFn()).then(function(document)
 				{
 					if(!document)
@@ -2059,7 +2072,9 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 			//====================
 			$scope.closeDialog = function() 
 			{
-				return $q.all([$scope.showSaveDialog(false), $scope.showCancelDialog(false)]);
+				return $q.all([$scope.showSaveDialog(false), $scope.showCancelDialog(false)]).finally(function(){
+					$scope.loading = false;
+				});
 			};
 		}]
 	};
