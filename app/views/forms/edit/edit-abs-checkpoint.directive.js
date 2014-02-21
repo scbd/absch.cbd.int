@@ -244,6 +244,8 @@ require("app").directive("editAbsCheckpoint", [ function () {
 						return qResult.toArray();
 					});
 			};
+			
+			$scope.$emit("getDocumentInfo", {});
 		}]
 	};
 }]);

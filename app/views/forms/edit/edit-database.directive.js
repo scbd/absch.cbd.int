@@ -226,6 +226,8 @@ require("app").directive("editDatabase", [ function () {
 						return qResult.toArray();
 					});
 			};
+
+			$scope.$emit("getDocumentInfo", {});
 		}]
 	};
 }]);

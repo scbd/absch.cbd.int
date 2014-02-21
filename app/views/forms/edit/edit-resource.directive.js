@@ -218,6 +218,8 @@ require("app").directive("editResource", [ function () {
 						return qResult.toArray();
 					});
 			};
+			
+			$scope.$emit("getDocumentInfo", {});
 		}]
 	};
 }]);

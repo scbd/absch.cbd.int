@@ -276,6 +276,8 @@ require("app").directive("editAbsCheckpointCommunique", [ function () {
 				return document &&
 					   document.permitNotAvailable;
 			};
+
+			$scope.$emit("getDocumentInfo", {});
 		}]
 	};
 }]);

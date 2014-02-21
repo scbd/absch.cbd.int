@@ -516,6 +516,8 @@ require("app").directive("editMeasure", [ "authHttp", "Enumerable", "$filter", "
 					if (error.status == 404) $scope.error = "Terms not found";
 					else                     $scope.error = error.data || "unkown error";
 				}
+
+				$scope.$emit("getDocumentInfo", {});
 			}]
 		}
 	})

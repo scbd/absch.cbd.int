@@ -315,6 +315,8 @@ require("app").directive("editAbsPermit", [ function () {
 			{
 				return angular.fromJson(angular.toJson(entity));
 			}
+			
+			$scope.$emit("getDocumentInfo", {});
 		}]
 	};
 }]);

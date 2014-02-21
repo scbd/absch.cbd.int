@@ -328,6 +328,8 @@ require("app").directive("editAuthority", [function () {
 						return qResult.toArray();
 					});
 			};
+
+			$scope.$emit("getDocumentInfo", {});
 		}]
 	};
 }]);
