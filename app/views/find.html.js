@@ -273,6 +273,44 @@ require('app').controller('FindController', ['$scope', '$rootScope', '$http', '$
         refreshTimeout = $timeout(function () { query(); }, 200);
     }
 
+    //============================================================
+    //
+    //
+    //============================================================
+    $scope.actionSetPage = function (pageNumber) {
+        $scope.currentPage = Math.min($scope.pageCount-1, Math.max(0, pageNumber));
+    };
+
+    //============================================================
+    //
+    // temp
+    //============================================================
+    $scope.range = function (start, end) {
+
+        var ret = [];
+        if (!end) {
+            end = start;
+            start = 0;
+        }
+
+        var maxCount = 10;
+        var middle = 5;
+        var count = end - start;
+        
+        if (count > maxCount) {
+            if ($scope.currentPage > middle)
+                start = $scope.currentPage - middle;
+
+            end = Math.min(count, start + maxCount);
+            start = Math.max(0, end - maxCount);
+        }
+        
+        for (var i = start; i < end; i++) {
+            ret.push(i);
+        }
+        return ret;
+    };
+
     $scope.$watch('currentPage',     refresh);
     $scope.$watch('querySchema',     function() { $scope.currentPage=0; refresh(); });
     $scope.$watch('queryGovernment', function() { $scope.currentPage=0; refresh(); });
