@@ -1,5 +1,5 @@
 "use strict";
-require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "$window", "IStorage", "underscore", "schemaTypes", function ($rootScope, $scope, $q, $window, storage, _, schemaTypes) {
+require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "$window", "IStorage", "underscore", "schemaTypes", "$compile", function ($rootScope, $scope, $q, $window, storage, _, schemaTypes, $compile) {
 
 	//============================================================
 	//============================================================
@@ -98,6 +98,9 @@ require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "
 
 		$q.when($scope.canEdit(schema, identifier), function (allowed) {
 
+			$scope.lastSchema = schema;
+			$scope.lastIdentifier = identifier; 
+
 			if(!allowed) {
 
 				if(identifier) alert("You are not authorized to edit this record");
@@ -116,6 +119,14 @@ require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "
 
 		});
 	};
+
+	$scope.$on("getDocumentInfo", function(evt, info) {
+		if($scope.lastSchema)
+		$scope.$broadcast("loadDocument", {
+			schema : $scope.lastSchema,
+			identifier : $scope.lastIdentifier
+		});
+	});
 
 	//============================================================
 	//
@@ -261,4 +272,33 @@ require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "
 		unreg_locationChangeStart();
 	});
 
+	$scope.$watch('tab()', function(value) {
+		if(value=='authority'              ) require(['../views/forms/view/view-authority.directive',                 '../views/forms/edit/edit-authority.directive'],                 function() { $scope.authorityReady = true; });
+		if(value=='absCheckpoint'          ) require(['../views/forms/view/view-abs-checkpoint.directive',            '../views/forms/edit/edit-abs-checkpoint.directive'],            function() { $scope.absCheckpointReady = true; });
+		if(value=='absCheckpointCommunique') require(['../views/forms/view/view-abs-checkpoint-communique.directive', '../views/forms/edit/edit-abs-checkpoint-communique.directive'], function() { $scope.absCheckpointCommuniqueReady = true; });
+		if(value=='absPermit'              ) require(['../views/forms/view/view-abs-permit.directive',                '../views/forms/edit/edit-abs-permit.directive'],                function() { $scope.absPermitReady = true; });
+		if(value=='database'               ) require(['../views/forms/view/view-database.directive',                  '../views/forms/edit/edit-database.directive'],                  function() { $scope.databaseReady = true; });
+		if(value=='measure'                ) require(['../views/forms/view/view-measure.directive',                   '../views/forms/edit/edit-measure.directive'],                   function() { $scope.measureReady = true; });
+		if(value=='resource'               ) require(['../views/forms/view/view-resource.directive',                  '../views/forms/edit/edit-resource.directive'],                  function() { $scope.resourceReady = true; });
+	})
 }]);
+
+//============================================================
+//
+//
+//============================================================
+require("app").directive('ngxLazy', function ($http, $compile, $timeout) {
+    return {
+        restrict: 'E',
+        scope: {
+            ready: '=ready'
+        },
+        link: function (scope, $element, attr, ctrl, $transclude) {
+        	scope.$watch('ready', function (value) { 
+        		if(value) {
+        			$compile($element.contents())(scope);
+        		}
+        	});
+    	}
+    }
+})

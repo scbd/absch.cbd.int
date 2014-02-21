@@ -124,11 +124,9 @@
                     </div>
                 </div>
 
-
-                
               </div>
 
-              <div ng-show="editing" edit-measure></div>
+              <ngx-lazy ng-show="editing" ready="measureReady"><div edit-measure></div><ngx-lazy>
 
               <div ng-show="isAuthenticated && !editing">
 
@@ -184,7 +182,7 @@
                     </div>          
               </div>
 
-              <div ng-show="editing" edit-authority></div>
+              <ngx-lazy ng-show="editing" ready="authorityReady"><div edit-authority></div><ngx-lazy>
 
               <div ng-show="isAuthenticated && !editing">
 
@@ -240,7 +238,7 @@
 
               </div>
 
-              <div ng-show="editing" edit-abs-permit></div>
+              <ngx-lazy ng-show="editing" ready="absPermitReady"><div edit-abs-permit></div><ngx-lazy>
 
               <div ng-show="isAuthenticated && !editing">
 
@@ -293,7 +291,7 @@
 
               </div>
 
-              <div ng-show="editing" edit-abs-checkpoint></div>
+              <ngx-lazy ng-show="editing" ready="absCheckpointReady"><div edit-abs-checkpoint></div><ngx-lazy>
 
               <div ng-show="isAuthenticated && !editing">
 
@@ -344,11 +342,9 @@
                       </div>
                     </div> 
 
-            
-
               </div>
 
-              <div ng-show="editing" edit-abs-checkpoint-communique></div>
+              <ngx-lazy ng-show="editing" ready="absCheckpointCommuniqueReady"><div edit-abs-checkpoint-communique></div><ngx-lazy>
 
               <div ng-show="isAuthenticated && !editing">
 
@@ -397,7 +393,7 @@
 
               </div>
 
-              <div ng-show="editing" edit-resource></div>
+              <ngx-lazy ng-show="editing" ready="resourceReady"><div edit-resource></div><ngx-lazy>
 
               <div ng-show="isAuthenticated && !editing">
 
@@ -445,7 +441,7 @@
                   </p>
               </div>
 
-              <div ng-show="editing" edit-database></div>
+              <ngx-lazy ng-show="editing" ready="databaseReady"><div edit-database></div><ngx-lazy>
 
               <div ng-show="isAuthenticated && !editing">
 
@@ -465,34 +461,7 @@
 <script src="/app/js/directives/forms/form-controls.js"></script>
 <script src="/app/views/forms/edit/editFormUtility.js"></script>
 <script src="/app/views/forms/edit/field-embed-contact.directive.js"></script>
-
-<script src="/app/views/forms/view/view-abs-checkpoint.directive.js"></script>
-<script src="/app/views/forms/edit/edit-abs-checkpoint.directive.js"></script>
-
-<script src="/app/views/forms/view/view-abs-checkpoint-communique.directive.js"></script>
-<script src="/app/views/forms/edit/edit-abs-checkpoint-communique.directive.js"></script>
-
-<script src="/app/views/forms/view/view-abs-permit.directive.js"></script>
-<script src="/app/views/forms/edit/edit-abs-permit.directive.js"></script>
-
-<script src="/app/views/forms/view/view-authority-reference.directive.js"></script>
-<script src="/app/views/forms/view/view-authority.directive.js"></script>
-<script src="/app/views/forms/edit/edit-authority.directive.js"></script>
-
-<script src="/app/views/forms/view/view-measure.directive.js"></script>
-<script src="/app/views/forms/edit/edit-measure.directive.js"></script>
-
-<script src="/app/views/forms/view/view-contact-reference.directive.js"></script>
-<script src="/app/views/forms/view/view-contact.directive.js"></script>
-<script src="/app/views/forms/edit/edit-contact.directive.js"></script>
 <script src="/app/views/forms/edit/edit-contact-base.directive.js"></script>
-
-<script src="/app/views/forms/view/view-database.directive.js"></script>
-<script src="/app/views/forms/edit/edit-database.directive.js"></script>
-
+<script src="/app/views/forms/view/view-contact-reference.directive.js"></script>
 <script src="/app/views/forms/view/view-organization-reference.directive.js"></script>
-<script src="/app/views/forms/view/view-organization.directive.js"></script>
-<script src="/app/views/forms/edit/edit-organization.directive.js"></script>
-
-<script src="/app/views/forms/view/view-resource.directive.js"></script>
-<script src="/app/views/forms/edit/edit-resource.directive.js"></script>
+<script src="/app/views/forms/view/view-authority-reference.directive.js"></script>
