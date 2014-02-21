@@ -66,6 +66,7 @@
                             <a href ng-click="actionSetPage(currentPage+1)">Next »</a>
                         </li>
                     </ul>
+                    <div class="clearfix"></div>
                     <div ng-repeat="document in documents">
                         <div style="font-size:10px;color:#777">{{document.schema}} <span ng-show="document.source">|</span> 
                             <strong ng-if="!document.sourceTooltip" style="color:#222">{{document.source}}</strong>
@@ -88,6 +89,18 @@
                         </div>
                         <div class="clearfix"></div>
                     </div>
+                    <div class="clearfix"></div>
+                    <ul class="pagination pull-right">
+                        <li ng-class="{disabled: currentPage == 0}">
+                            <a href ng-click="actionSetPage(currentPage-1)">« Prev</a>
+                        </li>
+                        <li ng-repeat="n in range(pageCount)" ng-class="{active: n == currentPage}" ng-click="actionSetPage(n)">
+                            <a href>{{n+1}}</a>
+                        </li>
+                        <li ng-class="{disabled: currentPage >= pageCount - 1}">
+                            <a href ng-click="actionSetPage(currentPage+1)">Next »</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
 

@@ -146,6 +146,7 @@ require('app').controller('FindController', ['$scope', '$rootScope', '$http', '$
             return date+'';//moment(date).format('MMMM Do YYYY');
         };
 
+        output.id          = document.id;
         output.schema      = document.schema_EN_t.toUpperCase();
         output.title       = document.title_t;
         output.description = document.description_t;
