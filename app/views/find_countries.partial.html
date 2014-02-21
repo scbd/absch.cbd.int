@@ -3,7 +3,7 @@
 	<!-- ng-class="{false:'not', true:'x'}[expanded] -->
 	<div class="list-group-item-expand">
 		<div ng-animate="'animate'" ng-repeat="item in terms | orderBy:'title' | filter:{selected:true}" ng-class="ccc(item)" ng-click="onclick(this, $event)">
-			<div class="label label-default truncate">
+			<div class="label label-default truncate" style="cursor:pointer">
 				<div style="position:absolute;right:6px;top:6px" class="icon-remove-sign"></div>
 				<div class="">
 					{{item.title.en}} ({{item.count}})
@@ -22,7 +22,7 @@
 					<div style="height:360px;overflow-y:auto">
 						<div class="col-lg-4 col-md-4 col-sm-4" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" ng-repeat="item in terms | orderBy:'title.en'">
 							<div class="checkbox" style="margin-top:2px;margin-bottom:2px">
-								<label><input type="checkbox" ng-model="item.selected" ng-click="refresh()"> {{item.title.en}} ({{item.count}})</label>
+								<label><input type="checkbox" ng-model="item.selected" ng-change="refresh()"> {{item.title.en}} ({{item.count}})</label>
 							</div>
 						</div>
 					</div>
