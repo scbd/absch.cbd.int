@@ -15,6 +15,7 @@ define(['app', 'authentication', 'services', 'filters', 'storage', 'workflows'],
     
         $routeProvider.
             when('/',                            { templateUrl: '/app/views/index.html'                      , resolve: { user: resolveUser }}).
+            when('/about',                       { templateUrl: '/app/views/about.html'                   , resolve: { user: resolveUser }}).
             when('/find',                        { templateUrl: '/app/views/find.html'                       , resolve: { user: resolveUser }}).
             when('/register',                    { templateUrl: '/app/views/register.html'                   , resolve: { user: resolveUser }}).
             when('/countries',                   { templateUrl: '/app/views/countries.html'                   , resolve: { user: resolveUser }}).

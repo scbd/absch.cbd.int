@@ -68,11 +68,11 @@
 
      <h3>National Users</h3>
 
-              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('abschFP')" ng-class="{ 'tab-selected' : tab()=='abschFP'}" href="#" role="button"> ABSCH-FP » 
+              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('abschNFP')" ng-class="{ 'tab-selected' : tab()=='abschNFP'}" href="#" role="button"> ABSCH-NFP » 
               <span class="btn-text" ><br> National ABS Focal Points</span> </a> 
 
               <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('abschPA')" ng-class="{ 'tab-selected' : tab()=='abschPA'}" href="#" role="button"> ABSCH-PA » 
-              <span class="btn-text" ><br> ublishing Authorities</span> </a> 
+              <span class="btn-text" ><br> Publishing Authorities</span> </a> 
 
               <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('abschNAU')" ng-class="{ 'tab-selected' : tab()=='abschNAU'}" href="#" role="button"> ABSCH-NAU » 
               <span class="btn-text" ><br> National Authorized Users</span> </a> 
@@ -265,10 +265,7 @@
                           <h4 class="panel-title">Tips for publishing an ABSCH-CP common format:</h4>
                       </div>
                       <div class="panel-body">
-                          <ol>
-                            <li></li>
-                          </ol>
-
+                         
                           <p>
                             <a ng-show="!isAuthenticated" ng-click="signIn('absCheckpoint')" class="btn btn-info">
                               <i class="glyphicon glyphicon-off"></i> Sign in to add or edit ABSCH-CP record online
@@ -357,39 +354,44 @@
 
           <div ng-show="tab()=='resource'" class="col-md-9 well well-registerpage">
 
-              <h2><span style="color: #428BCA; font-weight: bold;">ABS-CH VLR</span> Virtual Library Record</h2> 
+              <h2><span style="color: #ed9c28; font-weight: bold;font-size:180%;">ABSCH-VLR</span> Virtual Library Record</h2> 
 
               <p ng-hide="editing">
-                TODO
+                The forms under the “reference records” category will allow the submission of non-mandatory information relevant to the Protocol from any registered user (e.g. governments, representatives of indigenous and local communities, academia, NGOs, research institutions, business representatives, etc.) to the ABS Clearing-House .The Secretariat would be responsible for validating all reference records.
+                <br><br>
+                Through its virtual library, the ABS Clearing-House provides access to different categories of information and publications categorised in a list of thematic areas. The information provided through this common format will facilitate online searches of information on the ABS relevant resources made available through the ABS Clearing-House, such as books, articles, papers, videos, and others.  
               </p>
 
-              <div ng-hide="editing">
+
+               <div ng-hide="editing">
 
                   <h3 style="border-bottom: 1px solid #333;">Add new record</h3>
 
-                  <h4 style="color: #D8534F; font-weight: bold;">Prerequisites:</h4>
+                  <div class="panel panel-info">
+                      <div class="panel-heading">
+                          <h4 class="panel-title"></h4>
+                      </div>
+                      <div class="panel-body">
+                                                                  
+                           <p>
+                            <a ng-show="!isAuthenticated" ng-click="signIn('resource')" class="btn btn-info">
+                              <i class="glyphicon glyphicon-off"></i> Sign in to add or edit ABSCH-VLR record online
+                            </a>
 
-                  <ul>
-                      <li>TODO</li>
-                  </ul>
+                            <a ng-show="isAuthenticated && !canEdit('resource')" class="btn btn-warning disabled">
+                              <i class="glyphicon glyphicon-ban-circle"></i> You cannot add a new ABSCH-VLR record online
+                            </a>
 
-                  <p>
-                    <a ng-show="!isAuthenticated" ng-click="signIn('resource')" class="btn btn-info">
-                      <i class="glyphicon glyphicon-off"></i> Sign in to add or edit ABSCH-VLR record online
-                    </a>
-
-                    <a ng-show="isAuthenticated && !canEdit('resource')" class="btn btn-warning disabled">
-                      <i class="glyphicon glyphicon-ban-circle"></i> You cannot add a new ABSCH-VLR record online
-                    </a>
-
-                    <a ng-show="isAuthenticated && canEdit('resource')" ng-click="edit('resource', null)" class="btn btn-primary">
-                      <span class="glyphicon glyphicon-plus-sign"></span> Add New ABSCH-VLR
-                    </a> 
-                  
-                    <a class="btn btn-default">
-                      <span class="glyphicon glyphicon-download"></span> Download offline ABSCH-VLR form
-                    </a>
-                  </p>
+                            <a ng-show="isAuthenticated && canEdit('resource')" ng-click="edit('resource', null)" class="btn btn-primary">
+                              <span class="glyphicon glyphicon-plus-sign"></span> Add New ABSCH-VLR
+                            </a> 
+                          
+                            <a class="btn btn-default">
+                              <span class="glyphicon glyphicon-download"></span> Download offline ABSCH-VLR form
+                            </a>
+                          </p>        
+                      </div>
+                    </div>  
 
               </div>
 
@@ -406,39 +408,41 @@
 
           <div ng-show="tab()=='database'" class="col-md-9 well well-registerpage">
 
-              <h2><span style="color: #428BCA; font-weight: bold;">ABS-CH NDB</span> ABS National Website or Database</h2> 
+              <h2><span style="color: #428BCA; font-weight: bold;font-size:180%;">ABSCH-NDB</span> ABS National Website or Database</h2> 
 
               <p ng-hide="editing">
-                TODO
+                This common format is to be used for registering information on national website or databases relevant to access and benefit-sharing.
               </p>
 
               <div ng-hide="editing">
 
                   <h3 style="border-bottom: 1px solid #333;">Add new record</h3>
 
-                  <h4 style="color: #D8534F; font-weight: bold;">Prerequisites:</h4>
+                  <div class="panel panel-info">
+                      <div class="panel-heading">
+                          <h4 class="panel-title"></h4>
+                      </div>
+                      <div class="panel-body">
+                                                                  
+                           <p>
+                            <a ng-show="!isAuthenticated" ng-click="signIn('database')" class="btn btn-info">
+                              <i class="glyphicon glyphicon-off"></i> Sign in to add or edit ABSCH-NDB record online
+                            </a>
 
-                  <ul>
-                      <li>TODO</li>
-                  </ul>
+                            <a ng-show="isAuthenticated && !canEdit('database')" class="btn btn-warning disabled">
+                              <i class="glyphicon glyphicon-ban-circle"></i> You cannot add a new ABSCH-NDB record online
+                            </a>
 
-                  <p>
-                    <a ng-show="!isAuthenticated" ng-click="signIn('database')" class="btn btn-info">
-                      <i class="glyphicon glyphicon-off"></i> Sign in to add or edit ABSCH-NDB record online
-                    </a>
-
-                    <a ng-show="isAuthenticated && !canEdit('database')" class="btn btn-warning disabled">
-                      <i class="glyphicon glyphicon-ban-circle"></i> You cannot add a new ABSCH-NDB record online
-                    </a>
-
-                    <a ng-show="isAuthenticated && canEdit('database')" ng-click="edit('database', null)" class="btn btn-primary">
-                      <span class="glyphicon glyphicon-plus-sign"></span> Add New ABSCH-NDB
-                    </a> 
-                  
-                    <a class="btn btn-default">
-                      <span class="glyphicon glyphicon-download"></span> Download offline ABSCH-NDB form
-                    </a>
-                  </p>
+                            <a ng-show="isAuthenticated && canEdit('database')" ng-click="edit('database', null)" class="btn btn-primary">
+                              <span class="glyphicon glyphicon-plus-sign"></span> Add New ABSCH-NDB
+                            </a> 
+                          
+                            <a class="btn btn-default">
+                              <span class="glyphicon glyphicon-download"></span> Download offline ABSCH-NDB form
+                            </a>
+                         </p>
+                      </div>
+                    </div>  
               </div>
 
               <ngx-lazy ng-show="editing" ready="databaseReady"><div edit-database></div><ngx-lazy>
@@ -449,6 +453,47 @@
                   <register-record-list records="records" schema="database"></register-record-list>
                   
               </div>
+          </div>
+
+          <div ng-show="tab()=='abschNAU' || tab()=='abschPA' || tab()=='abschNFP'" class="col-md-9 well well-registerpage">
+
+              <h2><span style="color: #428BCA; font-weight: bold;font-size:180%;">ABSCH-NFP, ABSCH-PA, ABSCH-NAU</span> <br>
+              ABS National Focal Point, Publishing Authority, National Authorized User </h2> 
+
+              <p ng-hide="editing">
+                Designation of ABS National Focal Point (NFP) and ABS Clearing-House Publishing Authority (PA) and ABS National Authorized Users (NAU)
+                This common format has been prepared for both the designation of the National Focal Point (NFP) of the Protocol and the identification the person responsible for publishing all national records in the Access and Benefit-sharing Clearing-House. The duties of the ABS NFP could be expanded to incorporate the role of publishing national records in the Access and Benefit-sharing Clearing-House.
+
+              </p>
+
+
+               <div ng-hide="editing">
+
+                  <h3 style="border-bottom: 1px solid #333;">Add new record</h3>
+
+                  <div class="panel panel-info">
+                      <div class="panel-heading">
+                          <h4 class="panel-title">This common format will only be available offline and their registration can only be done by the Secretariat upon receipt of written communication from:</h4>
+                      </div>
+                      <div class="panel-body">
+                          <ol>
+                            <li>The NFP of the CBD or direct expression of the government for the ABS NFP</li>
+                            <li>And if the publishing authority is different from the ABS NFP, its identification has to be endorsed by the NFP.
+                            </li>
+                          </ol>
+
+                          <p>
+                           
+                            <a href="http://www.cbd.int/doc/abs/commonformats/NFP.doc" class="btn btn-default">
+                              <span class="glyphicon glyphicon-download"></span> Download offline ABSCH-NFP form
+                            </a>
+
+                          </p>
+                      </div>
+                    </div>  
+
+              </div>
+
           </div>
 
       </div>

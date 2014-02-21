@@ -1,6 +1,6 @@
 'use strict';
 
-define([/*'angular', 'angular-route', 'angular-cookies'*/], function () {
+define([/*'angular', 'angular-route', 'angular-cookies', */], function () {
 
 	var app = require('angular').module('app', ['ngRoute', 'ngCookies']);
 

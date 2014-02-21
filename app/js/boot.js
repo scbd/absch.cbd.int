@@ -1,6 +1,6 @@
 'use strict';
 
-window.name = "NG_DEFER_BOOTSTRAP!";
+window.name = 'NG_DEFER_BOOTSTRAP!';
 
 require.config({
     'paths': {
@@ -12,23 +12,25 @@ require.config({
         'jquery'          : '../libs/jquery/jquery',
         'bootstrap'       : '../libs/bootstrap/dist/js/bootstrap',
         'underscore'      : '../libs/underscore/underscore',
-        'linqjs'          : '../libs/linqjs/linq'
+        'linqjs'          : '../libs/linqjs/linq',
+        'moment'          : '../libs/moment/min/moment-with-langs.min',
+        'bootstrap-datepicker' : '../libs/bootstrap-datepicker/js/bootstrap-datepicker'
     },
-    'shim': { 
+    'shim': {
         'angular'        : { 'deps': ['jquery'], 'exports': 'angular' },
         'angular-route'  : { 'deps': ['angular'] },
         'angular-cookies': { 'deps': ['angular'] },
         'bootstrap'      : { 'deps': ['jquery'] },
-        'underscore'     : { 'exports' : '_'}
+        'bootstrap-datepicker' : { 'deps': ['jquery'] }
     }
 });
 
-require(['angular', 'angular-route', 'angular-cookies', 'bootstrap', 'domReady'/*, 'main'*/], function (ng) {
+require(['angular', 'angular-route', 'angular-cookies', 'bootstrap', 'domReady', 'bootstrap-datepicker'/*, 'main'*/], function (ng) {
 
     // NOTE: place operations that need to initialize prior to app start here using the `run` function on the top-level module
 
     require(['domReady!', 'main'], function (document) {
-        ng.bootstrap(document, ['app']); 
+        ng.bootstrap(document, ['app']);
         ng.resumeBootstrap();
     });
 });

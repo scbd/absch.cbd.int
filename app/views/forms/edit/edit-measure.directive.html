@@ -93,28 +93,28 @@
 				<div class="row" ng-show="isNotLegallyBinded()">
 					<div class="col-sm-12">
 						<div class="km-control-group" name="adoption" required caption="Please provide the date of adoption">
-							<div km-date name="adoption" required ng-model="document.adoption"></div>
+							<div km-date placeholder="YYYY-MM-DD" name="adoption" required ng-model="document.adoption"></div>
 						</div>
 					</div>
 				</div>
 				<div class="row" ng-show="isLegallyBinded()">
 					<div class="col-sm-12">
 						<div class="km-control-group" name="entryIntoForce" required caption="Please provide the date of entry into force">
-							<div km-date name="entryIntoForce" required ng-model="document.entryIntoForce"></div>
+							<div km-date placeholder="YYYY-MM-DD" name="entryIntoForce" required ng-model="document.entryIntoForce"></div>
 						</div>
 					</div>
 				</div>
 				<div class="row" ng-show="isRetired()">
 					<div class="col-sm-12">
 						<div class="km-control-group" name="retired" required caption="Please provide the date from which the measure was no longer applicable">
-							<div km-date name="retired" required ng-model="document.retired"></div>
+							<div km-date placeholder="YYYY-MM-DD" name="retired" required ng-model="document.retired"></div>
 						</div>
 					</div>
 				</div>
 				<div class="row" >
 					<div class="col-sm-12">
 						<div class="km-control-group" name="limitedApplication" caption="Indicate if the measure has a limited application in time">
-							<div km-date name="limitedApplication" ng-model="document.limitedApplication"></div>
+							<div km-date placeholder="YYYY-MM-DD" name="limitedApplication" ng-model="document.limitedApplication"></div>
 						</div>
 					</div>
 				</div>
