@@ -693,7 +693,8 @@ require('app').directive('kmLink', function ($http)
 			allowLink  : '@',
 			allowFile  : '@',
 			identifier : '=',
-			mimeTypes  : "@"
+			mimeTypes  : "@",
+			extensions : "="
 		},
 		link: function ($scope, $element, $attr, ngModelController) 
 		{
@@ -706,7 +707,6 @@ require('app').directive('kmLink', function ($http)
 				progress : null,
 				error    : null,
 				type     : null,
-				visible  : false,
 				uploadPlaceholder : $element.find("#uploadPlaceholder"),
 				mimeTypes : [//	"application/octet-stream",
 								"application/json",
@@ -753,13 +753,19 @@ require('app').directive('kmLink', function ($http)
 			});
 
 
-			$scope.$watch("editor.visible", function(_new, _old)
+			$scope.editor.show = function(visibility)
 			{
-				if(_new!=_old &&  _new) $element.find($scope.editor.type=="file" ? "#editFile" : "#editLink").modal("show");
-				if(_new!=_old && !_new) $element.find("#editFile,#editLink").modal("hide");
-			});
+				if (visibility) {
+					$element.find($scope.editor.type == "file" ? "#editLink" : "#editFile").modal("hide");
+					$element.find($scope.editor.type == "file" ? "#editFile" : "#editLink").modal("show");
+				}
+				else {
+					$element.find("#editFile,#editLink").modal("hide");
+				}
+
+			}
 		},
-		controller: ["$scope", "IStorage", function ($scope, storage) 
+		controller: ["$scope", "IStorage", "underscore", function ($scope, storage, _) 
 		{
 			$scope.editor = {};
 
@@ -776,12 +782,8 @@ require('app').directive('kmLink', function ($http)
 			{
 				var oNewLinks = [];
 
-				angular.forEach($scope.binding || [], function(link, i)
-				{
-					oNewLinks.push({ 
-						url  : link.url,
-						name : link.name
-					});
+				angular.forEach($scope.binding || [], function(link, i) {
+					oNewLinks.push(clone(link));
 				});
 
 				$scope.links = oNewLinks;
@@ -796,13 +798,24 @@ require('app').directive('kmLink', function ($http)
 
 				angular.forEach($scope.links, function(link, i)
 				{
-					var oNewLink = { url : $.trim(link.url) };
+					var oNewLink = clone(link);
+
+					oNewLink.url = $.trim(link.url);
 
 					if(link.name && $.trim(link.name)!="") 
 						oNewLink.name = $.trim(link.name);
 
+					//
+					_.each(oNewLink, function(val, key) {
+
+						if (!val)
+							oNewLink[key] = undefined;
+					});
+
 					oNewBinding.push(oNewLink);
 				});
+
+				oNewBinding = _.compact(oNewBinding);
 
 				$scope.binding = !$.isEmptyObject(oNewBinding) ? oNewBinding : undefined;
 			}
@@ -862,8 +875,9 @@ require('app').directive('kmLink', function ($http)
 				$scope.editor.link    = link;
 				$scope.editor.url     = link.url;
 				$scope.editor.name    = link.name;
+				$scope.editor.extensions = clone(_.omit(link, "url", "name"))||{}
 				$scope.editor.type    = "link";
-				$scope.editor.visible = true;
+				$scope.editor.show(true);
 			}
 			//==============================
 			//
@@ -880,10 +894,11 @@ require('app').directive('kmLink', function ($http)
 				$scope.editor.link = link;
 				$scope.editor.url  = link.url;
 				$scope.editor.name = link.name;
+				$scope.editor.extensions = clone(_.omit(link, "url", "name"))
 				$scope.editor.type = "file";
 
 				$scope.editor.startUploadProcess(function() {
-					$scope.editor.visible = true;
+					$scope.editor.show(true);
 				})
 			}
 
@@ -896,8 +911,9 @@ require('app').directive('kmLink', function ($http)
 				$scope.editor.url     = null;
 				$scope.editor.name    = null;
 				$scope.editor.error   = null;
+				$scope.editor.extensions = null;
 				$scope.editor.type    = null;
-				$scope.editor.visible = false;
+				$scope.editor.show(false);
 			}
 
 			//==============================
@@ -909,6 +925,8 @@ require('app').directive('kmLink', function ($http)
 
 				if($.trim($scope.editor.name||"")!="")
 					oLink.name = $scope.editor.name;
+
+				oLink = _.extend(oLink, clone($scope.editor.extensions));
 
 				var iIndex = $scope.links.indexOf($scope.editor.link);
 
@@ -950,7 +968,7 @@ require('app').directive('kmLink', function ($http)
 							$scope.editor.name = file.name;
 
 						if ($scope.editor.mimeTypes.indexOf(type) < 0) {
-							$scope.editor.onUploadError(link, 400, "File type not supported: " + type);
+							$scope.editor.onUploadError(link, "File type not supported: " + type);
 							return;
 						};
 
@@ -968,7 +986,7 @@ require('app').directive('kmLink', function ($http)
 							},
 							function(result) { //error
 								link.url = result.data.url;
-								$scope.editor.onUploadError(link, result.status, result.data);
+								$scope.editor.onUploadError(link, result.data);
 							},
 							function(progress) { //progress
 								$scope.editor.onUploadProgress(link, progress);
@@ -1010,22 +1028,17 @@ require('app').directive('kmLink', function ($http)
 				if(link.name && $scope.editor.name!="")
 					$scope.editor.name = link.name;
 
-				$scope.editor.save();
+				if (!$scope.extensions || !$scope.extensions.length)
+					$scope.editor.save();
 			}
 
 			//==============================
 			//
 			//==============================
-			$scope.editor.onUploadError = function(link, httpStatus, error)
+			$scope.editor.onUploadError = function(link, message)
 			{
 				if($scope.editor.link!=link)
 					return;
-
-				var message = "Unknown error";
-
-				if(httpStatus==401) message = "Please sing-in";
-				else                message = error.message || error;
-
 
 				console.log('xhr.upload error: ' + message)
 
@@ -1050,6 +1063,16 @@ require('app').directive('kmLink', function ($http)
 					this.$apply(fn);
 				}
 			};
+
+			//====================
+			//
+			//====================
+			function clone(obj) {
+				if (obj === undefined) return undefined;
+				if (obj === null) return null;
+
+				return _.clone(obj);
+			}	
 
 		}]
 	}

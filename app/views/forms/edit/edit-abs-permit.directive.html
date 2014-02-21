@@ -127,13 +127,8 @@
 					<div class="col-xs-12">
 						<div class="km-control-group" required name="consentGranted" caption="Confirmation that prior informed consent was obtained or granted">
 							<span class="help-block">Only one option may be selected. If the option NO is selected, the record cannot be posted in the ABS Clearing-House and, therefore, the internationally recognized certificate of compliance will not be constituted.</span>
-							<button
-								data-toggle="buttons-checkbox"
-								type="button"
-								class="btn btn-info"
-								ng-class="{active:document.consentGranted && !document.consentGranted}"
-								ng-click="document.consentGranted=!document.consentGranted"
-								>Yes</button>
+
+                            <div km-yes-no ng-model="document.consentGranted" locales="document.header.languages"></div>
 						</div>
 					</div>
 				</div>
@@ -229,13 +224,8 @@
 					<div class="col-xs-12">
 						<div class="km-control-group" required name="mutuallyAgreedTermsEstablished" caption="Confirmation that mutually agreed terms were established">
 							<span class="help-block">Only one option may be selected. If the option NO is selected, the record cannot be posted in the ABS Clearing-House and, therefore, the internationally recognized certificate of compliance</span>
-							<button
-								data-toggle="buttons-checkbox"
-								type="button"
-								class="btn btn-info"
-								ng-class="{active:document.mutuallyAgreedTermsEstablished && !document.mutuallyAgreedTermsEstablished}"
-								ng-click="document.mutuallyAgreedTermsEstablished=!document.mutuallyAgreedTermsEstablished"
-								>Yes</button>
+
+                            <div km-yes-no ng-model="document.mutuallyAgreedTermsEstablished" locales="document.header.languages"></div>
 						</div>
 					</div>
 				</div>

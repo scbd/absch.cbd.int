@@ -4,6 +4,11 @@
 			<tr ng-repeat="link in links" >
 				<td>
 					<a target="_blank" ng-href="{{link.url}}">{{link.name||link.url}}</a>
+					<span ng-repeat="ext in extensions">
+						<i ng-show="link[ext.model]">
+							({{( ext.options | filter: { identifier : link[ext.model] } )[0].title|lstring}})
+						</i>
+					</span>
 				</td>
 				<td style="text-align:end;white-space:nowrap">
 					<a title="Remove" class="btn btn-default" ng-click="remove(link)"><i class="glyphicon glyphicon-trash"></i></a>
@@ -11,70 +16,131 @@
 			</tr>
 		</table>
 
-		<button type="button" class="btn btn-default" ng-click="addLink()" ng-show="isAllowLink()"><i class="icon-globe"></i> Add link</button>
-		<button type="button" class="btn btn-default" ng-click="addFile()" ng-show="isAllowFile()" ng-disabled="!identifier"><i class="icon-file"></i> Add file</button>
+		<a class="btn btn-default" ng-click="addLink()" ng-show="isAllowLink()"><i class="glyphicon glyphicon-globe"></i> Add link</a>
+		<a class="btn btn-default" ng-click="addFile()" ng-show="isAllowFile()" ng-disabled="!identifier"><i class="glyphicon glyphicon-file"></i> Add file</a>
 	</div>
+
+
 
     <!--Link Editor-->
-	<div id="editLink" class="modal fade" data-backdrop="static">
+
+	<div id="editLink" class="modal fade" data-keyboard="false" data-backdrop="static">
 		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h3>Editing link</h3>
-				</div>
-				<div class="modal-body"  style="max-height:400px;overflow-y:auto">
-					<div class="alert alert-info">Please provide the URL of the website (e.g. <a target="_blank" href="http://www.cbd.int">http://www.cbd.int</a>) and the name of the website (e.g. "The Convention on Biological Diversity").</div>
-					<form name="linkForm">
-						<fieldset>
-							<div class="alert alert-warning" ng-show="linkForm.$error.url">
-								<strong>Warning!</strong>
-								Specified value is not a valid URL
-							</div>
+	    <div class="modal-content">
+	    	<div class="modal-header">
+	        	<h4 class="modal-title">Editing link</h4>
+	      	</div>
+			<div class="modal-body">
+				<div class="alert alert-info">Please provide the URL of the website (e.g. <a target="_blank" href="http://www.cbd.int">http://www.cbd.int</a>) and the name of the website (e.g. "The Convention on Biological Diversity").</div>
+				<form name="linkForm">
+					<fieldset>
+						<div class="alert alert-warning" ng-show="linkForm.$error.url">
+							<h4>Warning!</h4>
+							Specified value is not a valid URL
+						</div>
 
-							<div class="control-group" ng-class="{error: linkForm.editor.url.$invalid}">
-								<label class="control-label" ng-required="editor.visible" for="url">Url</label>
-								<input class="form-control" type="url" style="width:98%" ng-model="editor.url" ng-required="editor.visible" placeholder="example: http://www.cbd.int">
-							</div>
+						<div class="control-group" ng-class="{error: linkForm.editor.url.$invalid}">
+							<label class="control-label" required for="url">Url</label>
+							<input type="url" style="width:98%" ng-model="editor.url" required placeholder="example: http://www.cbd.int">
+						</div>
 
-							<div class="control-group" ng-class="{error: linkForm.name.$invalid}">
-								<label>Name</label>
-								<input class="form-control" type="text" style="width:98%" ng-model="editor.name"  placeholder="example: SCBD website">
+						<div class="control-group" ng-class="{error: linkForm.name.$invalid}">
+							<label class="control-label">Name</label>
+							<input type="text" style="width:98%" ng-model="editor.name"  placeholder="example: SCBD website">
+						</div>
+
+						<div ng-show="extensions">
+
+							<div ng-repeat="ext in extensions" ng-class="{error: linkForm[ext.model].$invalid}">
+								<label class="control-label" ng-required="ext.required">{{ext.title|lstring}}</label>
+								<select ng-model="$parent.editor.extensions[ext.model]" style="width:100%" ng-required="ext.required" ng-options="o.identifier as o.title|lstring for o in ext.options">
+									<option value="">{{o.placeholder}}</option>
+								</select>
 							</div>
-						</fieldset>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" ng-click="editor.close()">Cancel</button>
-					<button type="button" class="btn btn-primary" ng-click="linkForm.$invalid || editor.save()" ng-disabled="linkForm.$invalid" >Save</button>
-				</div>
+						</div>
+
+					</fieldset>
+				</form>	      
 			</div>
-		</div>
-	</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default"             ng-click="editor.close()">Cancel</button>
+				<button type="button" class="btn btn-primary" ng-click="linkForm.$invalid || editor.save()" ng-disabled="linkForm.$invalid" >Save</button>
+			</div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+	<div id="editFile" class="modal fade" data-keyboard="false" data-backdrop="static">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h4 class="modal-title">Uploading file</h4>
+	      </div>
+	      <div class="modal-body">
+			<div class="alert alert-error" ng-show="editor.error!=null">
+				<h4>Error occured</h4>
+					{{editor.error}}
+			</div>
+
+			<div ng-show="editor.progress">
+
+				<div ng-show="editor.progress.style=='active'">
+					<label>{{editor.name}} ({{editor.progress.size/1024 | number:1}} kB)</label>
+					<div class="progress progress-striped {{editor.progress.style}}">
+					  <div class="progress-bar"  role="progressbar" aria-valuenow="{{editor.progress.percent}}" aria-valuemin="0" aria-valuemax="100" style="width: {{editor.progress.percent}}%">
+					    <span class="sr-only">45% Complete</span>
+					  </div>
+					</div>					
+				</div>
+
+				<div ng-show="editor.progress.style=='complete'">
+					<label class="control-label" required>Filename</label>
+					<input type="text" readonly style="width:98%" value="{{editor.name}} ({{editor.progress.size/1024 | number:1}} kB)">
+				</div>
+
+			</div>
+
+
+			<div id="uploadPlaceholder" style="display:none"></div>
+
+			<form name="fileForm">
+			<fieldset>
+				<div ng-show="extensions">
+		
+					<div ng-repeat="ext in extensions"  ng-class="{error: fileForm[ext.model].$invalid}">
+						<label class="control-label" ng-required="ext.required">{{ext.title|lstring}}</label>
+						<select ng-model="$parent.editor.extensions[ext.model]" style="width:100%" ng-required="ext.required" ng-options="o.identifier as o.title|lstring for o in ext.options">
+							<option value="">{{o.placeholder}}</option>
+						</select>
+					</div>
+				</div>
+			</fieldset>
+			</form>
+
+
+	      </div>
+	      <div class="modal-footer">
+			<button type="button" class="btn btn-default" ng-click="editor.close()">Cancel</button>
+			<button type="button" class="btn btn-primary" ng-show="extensions" ng-click="fileForm.$invalid || editor.save()" ng-disabled="fileForm.$invalid" >Save</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->	
 
     <!--File Upload Editor-->
-	<div id="editFile" class="modal fade" data-backdrop="static">
+	<div  class="modal hide fade" >
 		<div class="modal-dialog">
-			<div class="modal-content">
+    		<div class="modal-content">
 				<div class="modal-header">
 					<h3>Uploading file</h3>
 				</div>
 				<div class="modal-body">
-					<div class="alert alert-danger" ng-show="editor.error!=null">
-						<h4>Error occured</h4>
-						{{editor.error}}
-					</div>
-					
-					<div ng-show="editor.progress">
-						<label>{{editor.name}} ({{editor.progress.size/1024 | number:1}} kB)</label>
-						<div class="progress progress-striped {{editor.progress.style}}">
-							<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"  style="width:{{editor.progress.percent}}%;"></div>
-						</div>
-					</div>
-					
-					<div id="uploadPlaceholder" style="display:none"></div>
+
+
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-default" ng-click="editor.close()">Cancel</button>
+					<button type="button" class="btn btn-default" ng-click="editor.close()">Cancel</button>
+					<button type="button" class="btn btn-primary" ng-show="extensions" ng-click="fileForm.$invalid || editor.save()" ng-disabled="fileForm.$invalid" >Save</button>
 				</div>
 			</div>
 		</div>
