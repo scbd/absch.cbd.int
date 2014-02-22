@@ -32,7 +32,8 @@ require("app").directive("myCompletedTasks", [function () {
 				});
 			}
 
-			load();
+			if($scope.$root.user.isAuthenticated)
+				load();
 
 			//==============================
 			//

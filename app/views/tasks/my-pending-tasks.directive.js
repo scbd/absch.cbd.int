@@ -37,7 +37,8 @@ require("app").directive("myPendingTasks", [function () {
 				})
 			}
 
-			load();
+			if($scope.$root.user.isAuthenticated)
+				load();
 
 			//==============================
 			//
