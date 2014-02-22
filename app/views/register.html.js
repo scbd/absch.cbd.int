@@ -11,10 +11,6 @@ require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "
     $scope.canRegisterNational  = !!_.intersection($rootScope.user.roles, ["AbsAdministrator", "AbsNationalAuthorizedUser", "AbsNationalFocalPoint", "AbsPublishingAuthorities", "Administrator"]).length;
     $scope.canRegisterReference = $rootScope.user.isAuthenticated;
 
-    $scope.isAuthenticated      = true;
-    $scope.canRegisterNational  = true;
-    $scope.canRegisterReference = true;
-
 	//============================================================
 	//============================================================
 	//============================================================
@@ -81,8 +77,8 @@ require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "
 	//============================================================
 	$scope.signIn = function(callbackSchema) {
 
-		// if(!$rootScope.user.isAuthenticated)
-		// 	$scope.actionSignin();
+		if(!$rootScope.user.isAuthenticated)
+			$scope.actionSignin();
 	}
 
 	//============================================================
@@ -92,10 +88,10 @@ require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "
 	//============================================================
 	$scope.edit = function(schema, identifier) {
 
-		// if(!$rootScope.user.isAuthenticated) {  //navigation.securize();
-	 //        $scope.actionSignin();
-	 //        return;
-	 //    }
+		if(!$rootScope.user.isAuthenticated) {  //navigation.securize();
+	        $scope.actionSignin();
+	        return;
+	    }
 
 		if(!canSwitch())
 			return;
@@ -151,7 +147,7 @@ require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "
 	var canEdit_cache = {}
 	$scope.canEdit = function (schema, identifier) {
 
-		if(!$rootScope.user.isAuthenticated) return true;
+		if(!$rootScope.user.isAuthenticated)
 			return false;
 
 		var cacheKey = (schema||"") + "+" + (identifier||"");
