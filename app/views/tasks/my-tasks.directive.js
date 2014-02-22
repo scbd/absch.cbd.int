@@ -46,7 +46,8 @@ require("app").directive("myTasks", ['authHttp', function ($http) {
 				});
 			}
 
-			load();
+			if($scope.$root.user.isAuthenticated)
+				load();
 			
 			//==============================
 			//
