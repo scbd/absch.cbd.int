@@ -672,3 +672,13 @@ display: block;
     width: 900px;
   }
 }
+.record-title-national{
+	color: #428BCA; 
+	font-weight: bold;
+	font-size:180%;
+}
+.record-title-reference{
+	color: #ed9c28; 
+	font-weight: bold;
+	font-size:180%;
+}

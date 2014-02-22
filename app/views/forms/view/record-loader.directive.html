@@ -7,12 +7,12 @@
 		<div>{{error}}</div>
 	</div>
 
-	<div ng-show="!error && internalDocument">
+	<div ng-show="!error && internalDocument" style="padding-bottom:50px;">
 		<div style="float:right">
 			<button  type="button" class="btn" ng-click="edit()" ng-show="user().isAuthenticated" ng-disabled="!canEdit()">Edit</button>
 		</div>
 
-		<h1>{{internalDocument.header.schema|schemaName}}</h1>
+		<!-- <h1>{{internalDocument.header.schema|schemaName}}</h1> -->
 
 		<div ng-switch on="internalDocument.header.schema">
 			<div view-authority						ng-switch-when="authority"					ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
