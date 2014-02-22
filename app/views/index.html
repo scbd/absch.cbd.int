@@ -13,7 +13,7 @@
         <li data-target="#myCarousel" data-slide-to="2"></li>
     </ol>
     <div class="carousel-inner" >
-        <div class="item active" ng-show="!user.isAuthenticated">
+        <div class="item active" >
             <div class="container" >
                 <div class="carousel-caption" style="text-align:left;">
                     <h1 >Participate in the testing of the <span style="color:#fa6938;">pilot phase</span> of the ABS-CH</h1>
@@ -28,9 +28,10 @@
                                             <a href="/password/reset" style="font-family:Tahoma, Trebuchet MS;color:white;text-decoration:none;">Forgot password?</a>
                                         </span>
                                     </h2>
-                                    <form name="form" ng-submit="doSignIn()" class="ng-pristine ng-invalid ng-invalid-required">
+                                    <form name="form" ng-submit="doSignIn()" class="ng-pristine ng-invalid ng-invalid-required" 
+                                    ng-show="!user.isAuthenticated">
                                         <div class="form-group">
-                                            <div class="input-group">
+                                            <div class="input-group" >
                                                 <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                                                 <input type="text" class="form-control ng-pristine ng-invalid ng-invalid-required" id="inputEmail" name="email" ng-model="email" placeholder="registered email address" required>
                                             </div>
