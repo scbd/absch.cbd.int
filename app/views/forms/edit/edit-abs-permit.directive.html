@@ -37,10 +37,10 @@
 
         </div>
 
-		<form name="editForm" style="margin-top:10px">
+		<form class="editForm" name="editForm" style="margin-top:10px">
 
 			<div ng-show="tab=='edit'" km-tab="edit">
-				<div class="help-block"><br /><i>Introduction</i><br /><br />This common format is to be used for registering permits or their equivalent issued at the time of access as evidence of the decision to grant prior informed consent (PIC) and of the establishment of mutually agreed terms (MAT) in accordance with Article 6, paragraph 3 (e) of the Nagoya Protocol on Access and Benefit-sharing. This information is to be made available to the ABS Clearing-House in accordance with Article 14, paragraph 2 (c).<br /><br />In accordance with Article 17, paragraph 2, a permit or its equivalent issued in accordance with Article 6, paragraph 3 (e) and made available to the ABS Clearing-House, shall constitute an internationally recognized certificate of compliance. <br /><br />Article 17, paragraph 3, further establishes that the internationally recognized certificate of compliance shall serve as evidence that the genetic resource which it covers has been accessed in accordance with PIC and that MAT have been established, as required by the domestic ABS legislation or regulatory requirements of the Party providing PIC.<br /><br /> Article 17, paragraph 4, sets out the minimum information required for the internationally recognized certificate of compliance when it is not confidential, which in turn provides the minimum information to be reported to the ABS Clearing-House in this regard. This information includes:<br /><br />
+				<!-- <div class="help-block"><br /><i>Introduction</i><br /><br />This common format is to be used for registering permits or their equivalent issued at the time of access as evidence of the decision to grant prior informed consent (PIC) and of the establishment of mutually agreed terms (MAT) in accordance with Article 6, paragraph 3 (e) of the Nagoya Protocol on Access and Benefit-sharing. This information is to be made available to the ABS Clearing-House in accordance with Article 14, paragraph 2 (c).<br /><br />In accordance with Article 17, paragraph 2, a permit or its equivalent issued in accordance with Article 6, paragraph 3 (e) and made available to the ABS Clearing-House, shall constitute an internationally recognized certificate of compliance. <br /><br />Article 17, paragraph 3, further establishes that the internationally recognized certificate of compliance shall serve as evidence that the genetic resource which it covers has been accessed in accordance with PIC and that MAT have been established, as required by the domestic ABS legislation or regulatory requirements of the Party providing PIC.<br /><br /> Article 17, paragraph 4, sets out the minimum information required for the internationally recognized certificate of compliance when it is not confidential, which in turn provides the minimum information to be reported to the ABS Clearing-House in this regard. This information includes:<br /><br />
 					<ol type="a"><li>Issuing authority;</li>
 					<li>Date of issuance;</li>
 					<li>The provider;</li>
@@ -54,7 +54,7 @@
 					<ol type="a"><li>The national focal point and the competent national authority or authorities of the country responsible for issuing the permits or its equivalent; and</li>
 					<li>The person or entity to whom prior informed consent was granted.</li></ol><br /><br />
 					Please note that all information submitted to the ABS Clearing-House will be made public and therefore, confidential information should not be submitted. Publishing authorities are reminded that it is their responsibility to ensure that any confidentiality clauses in mutually agreed terms are respected.
-				</div>
+				</div> -->
 				
 				<legend>General information</legend>
 
@@ -104,6 +104,7 @@
 						</div>
 					</div>
 				</div>
+				<hr>
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="km-control-group" name="date" required caption="Date of issuance of the permit or its equivalent">
@@ -111,18 +112,25 @@
 						</div>
 					</div>
 				</div>
-
+				<hr>
 				<div class="row">
 					<div class="col-xs-12">
+						<div ng-class="{ 'alert alert-danger':document.providerConfidential}">
+						
 						<div class="km-control-group" name="provider" required caption="The provider">
 							<span class="help-block">Please provide the name and contact details of the person or entity that holds the right to grant access to the genetic resources in accordance with domestic legislation.</span>
-							<input type="checkbox" name="providerConfidential" ng-model="document.providerConfidential" watch-items >  Confidential information</input><br /><br />
-							<div ng-show="!document.providerConfidential">
+							
+
+							<div ng-show="!document.providerConfidential" style="display:inline">
 								<field-embed-contact ng-model="$parent.document.provider" locales="$parent.document.header.languages" caption="{{$parent.document.provider ? 'Replace organisation or a contact »' : 'Add an organisation or a contact »'}}"></field-embed-contact>
 							</div>
+
+							<input type="checkbox" name="providerConfidential" ng-model="document.providerConfidential" watch-items > Confidential information</input>
+						</div>
 						</div>
 					</div>
 				</div>
+				<hr>
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="km-control-group" required name="consentGranted" caption="Confirmation that prior informed consent was obtained or granted">
@@ -132,24 +140,31 @@
 						</div>
 					</div>
 				</div>
-				<span class="help-block">
-					If applicable, please provide any additional information about the prior informed consent. Detailed information
-					may be provided in an attached document
-				</span>
+				<hr>
+				
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="km-control-group" name="consentInformation" caption="Additional information about the prior informed consent - Information">
+						<span class="help-block">
+					If applicable, please provide any additional information about the prior informed consent. Detailed information
+					may be provided in an attached document
+				</span>
 							<div km-textbox-ml name="consentInformation" rows="4" ng-model="document.consentInformation" locales="document.header.languages"></div>
 						</div>
 					</div>
 				</div>
+				<hr>
 				<div class="row">
 					<div class="col-xs-12">
+					<div ng-class="{ 'alert alert-danger':document.informedConsentConfidential}">
 						<div class="km-control-group" name="informedConsent" required caption="Person or entity to whom prior informed consent was granted">
-							<input type="checkbox" name="informedConsentConfidential" ng-model="document.informedConsentConfidential" watch-items >  Confidential information</input><br /><br />
-							<div ng-show="!document.informedConsentConfidential">
+							
+							<div ng-show="!document.informedConsentConfidential" style="display:inline;">
 								<field-embed-contact ng-model="$parent.document.informedConsent" locales="$parent.document.header.languages" caption="{{$parent.document.informedConsent ? 'Replace organisation or a contact »' : 'Add an organisation or a contact »'}}"></field-embed-contact>
+								
 							</div>
+							<input type="checkbox" name="informedConsentConfidential" ng-model="document.informedConsentConfidential" watch-items >  Confidential information</input>
+						</div>
 						</div>
 					</div>
 				</div>
