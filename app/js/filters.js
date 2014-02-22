@@ -59,7 +59,7 @@ define(["app"], function (app) {
 			if(schame=="database"				) return "National Database";
 			if(schame=="resource"				) return "Virtual Library Resource";
 			if(schame=="organization"			) return "Organization";
-			if(schame=="measure"				) return "National Regulation";
+			if(schame=="measure"				) return "ABS Measure";
 			if(schame=="absCheckpoint"			) return "Checkpoint";
 			if(schame=="absCheckpointCommunique") return "Checkpoint Communiqué";
 			if(schame=="absPermit"				) return "Permit";

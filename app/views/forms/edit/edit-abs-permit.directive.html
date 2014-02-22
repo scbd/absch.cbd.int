@@ -232,7 +232,7 @@
 								<button
 								data-toggle="buttons-checkbox"
 								type="button"
-								class="btn btn-info"
+								class="btn btn-info btn-"
 								ng-class="{active:document.mutuallyAgreedTermsEstablished && !document.mutuallyAgreedTermsEstablished}"
 								ng-click="document.mutuallyAgreedTermsEstablished=!document.mutuallyAgreedTermsEstablished"
 								>Yes</button>
@@ -248,7 +248,7 @@
 						</div>
 					</div>
 				</div>
-				<hr>
+				
 				<div ng-show="document.mutuallyAgreedTermsEstablished==true">
 					
 					<div class="row">
@@ -271,13 +271,15 @@
 				<hr>
 				<div class="row">
 					<div class="col-xs-12">
-						<div class="control-group">
+					<div ng-class="{'alert alert-danger':document.usageConfidential}">
+											<div class="control-group">
 							<div class="km-control-group" required name="usage" caption="Indicate if the permit or its equivalent covers commercial and/or non-commercial use">
-								<input type="checkbox" name="usageConfidential" ng-model="document.usageConfidential" watch-items >  Confidential information</input><br /><br />
+								<input type="checkbox" name="usageConfidential" ng-model="document.usageConfidential" watch-items >  Confidential information</input>
 								<div ng-show="!document.usageConfidential">
 									<div km-select multiple required name="usage" ng-model="document.usage" items="options.usage()"></div>
 								</div>
 							</div>
+						</div>
 						</div>
 					</div>
 				</div>
