@@ -40,21 +40,7 @@
 		<form class="editForm" name="editForm" style="margin-top:10px">
 
 			<div ng-show="tab=='edit'" km-tab="edit">
-				<!-- <div class="help-block"><br /><i>Introduction</i><br /><br />This common format is to be used for registering permits or their equivalent issued at the time of access as evidence of the decision to grant prior informed consent (PIC) and of the establishment of mutually agreed terms (MAT) in accordance with Article 6, paragraph 3 (e) of the Nagoya Protocol on Access and Benefit-sharing. This information is to be made available to the ABS Clearing-House in accordance with Article 14, paragraph 2 (c).<br /><br />In accordance with Article 17, paragraph 2, a permit or its equivalent issued in accordance with Article 6, paragraph 3 (e) and made available to the ABS Clearing-House, shall constitute an internationally recognized certificate of compliance. <br /><br />Article 17, paragraph 3, further establishes that the internationally recognized certificate of compliance shall serve as evidence that the genetic resource which it covers has been accessed in accordance with PIC and that MAT have been established, as required by the domestic ABS legislation or regulatory requirements of the Party providing PIC.<br /><br /> Article 17, paragraph 4, sets out the minimum information required for the internationally recognized certificate of compliance when it is not confidential, which in turn provides the minimum information to be reported to the ABS Clearing-House in this regard. This information includes:<br /><br />
-					<ol type="a"><li>Issuing authority;</li>
-					<li>Date of issuance;</li>
-					<li>The provider;</li>
-					<li>Unique identifier of the certificate;</li>
-					<li>The person or entity to whom prior informed consent was granted;</li>
-					<li>Subject-matter or genetic resources covered by the certificate;</li>
-					<li>Confirmation that mutually agreed terms were established;</li>
-					<li>Confirmation that prior informed consent was obtained; and</li>
-					<li>Commercial and/or non-commercial use.</li></ol><br />
-					On the basis of the information provided through this common format on the permit or its equivalent, the ABS Clearing-House will send a courtesy copy of the internationally recognized certificate of compliance constituted from information on the permit or its equivalent made available to the ABS Clearing-House by electronic means to:<br /><br />
-					<ol type="a"><li>The national focal point and the competent national authority or authorities of the country responsible for issuing the permits or its equivalent; and</li>
-					<li>The person or entity to whom prior informed consent was granted.</li></ol><br /><br />
-					Please note that all information submitted to the ABS Clearing-House will be made public and therefore, confidential information should not be submitted. Publishing authorities are reminded that it is their responsibility to ensure that any confidentiality clauses in mutually agreed terms are respected.
-				</div> -->
+				
 				
 				<legend>General information</legend>
 
@@ -104,7 +90,6 @@
 						</div>
 					</div>
 				</div>
-				<hr>
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="km-control-group" name="date" required caption="Date of issuance of the permit or its equivalent">
@@ -115,17 +100,13 @@
 				<hr>
 				<div class="row">
 					<div class="col-xs-12">
-						<div ng-class="{ 'alert alert-danger':document.providerConfidential}">
-						
-						<div class="km-control-group" name="provider" required caption="The provider">
+						<div ng-class="{'alert alert-danger':document.providerConfidential}">
+						<div class="km-control-group " name="provider" required caption="The provider" >
 							<span class="help-block">Please provide the name and contact details of the person or entity that holds the right to grant access to the genetic resources in accordance with domestic legislation.</span>
-							
-
-							<div ng-show="!document.providerConfidential" style="display:inline">
-								<field-embed-contact ng-model="$parent.document.provider" locales="$parent.document.header.languages" caption="{{$parent.document.provider ? 'Replace organisation or a contact »' : 'Add an organisation or a contact »'}}"></field-embed-contact>
+							<input type="checkbox" name="providerConfidential" ng-model="document.providerConfidential" watch-items >  Confidential information</input>
+							<div ng-show="!document.providerConfidential">
+								<field-embed-contact multiple ng-model="$parent.document.provider" locales="$parent.document.header.languages" caption="Add an organisation or a contact »"></field-embed-contact>
 							</div>
-
-							<input type="checkbox" name="providerConfidential" ng-model="document.providerConfidential" watch-items > Confidential information</input>
 						</div>
 						</div>
 					</div>
@@ -133,22 +114,28 @@
 				<hr>
 				<div class="row">
 					<div class="col-xs-12">
-						<div class="km-control-group" required name="consentGranted" caption="Confirmation that prior informed consent was obtained or granted">
+						<div class="km-control-group" required name="consentGranted" caption="Confirmation that prior informed consent (PIC) was obtained or granted">
 							<span class="help-block">Only one option may be selected. If the option NO is selected, the record cannot be posted in the ABS Clearing-House and, therefore, the internationally recognized certificate of compliance will not be constituted.</span>
+							<button
+								data-toggle="buttons-checkbox"
+								type="button"
+								class="btn btn-info"
+								ng-class="{active:document.consentGranted && !document.consentGranted}"
+								ng-click="document.consentGranted=!document.consentGranted"
+								>Yes</button>
 
-                            <div km-yes-no ng-model="document.consentGranted" locales="document.header.languages"></div>
+                           
 						</div>
 					</div>
 				</div>
 				<hr>
-				
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="km-control-group" name="consentInformation" caption="Additional information about the prior informed consent - Information">
 						<span class="help-block">
-					If applicable, please provide any additional information about the prior informed consent. Detailed information
-					may be provided in an attached document
-				</span>
+							If applicable, please provide any additional information about the prior informed consent. Detailed information
+							may be provided in an attached document
+						</span>
 							<div km-textbox-ml name="consentInformation" rows="4" ng-model="document.consentInformation" locales="document.header.languages"></div>
 						</div>
 					</div>
@@ -156,38 +143,41 @@
 				<hr>
 				<div class="row">
 					<div class="col-xs-12">
-					<div ng-class="{ 'alert alert-danger':document.informedConsentConfidential}">
-						<div class="km-control-group" name="informedConsent" required caption="Person or entity to whom prior informed consent was granted">
-							
-							<div ng-show="!document.informedConsentConfidential" style="display:inline;">
-								<field-embed-contact ng-model="$parent.document.informedConsent" locales="$parent.document.header.languages" caption="{{$parent.document.informedConsent ? 'Replace organisation or a contact »' : 'Add an organisation or a contact »'}}"></field-embed-contact>
-								
-							</div>
+						<div ng-class="{'alert alert-danger':document.informedConsentConfidential}">
+						<div class="km-control-group" name="informedConsent" required caption="Person or entity to whom prior informed consent (PIC) was granted">
 							<input type="checkbox" name="informedConsentConfidential" ng-model="document.informedConsentConfidential" watch-items >  Confidential information</input>
+							<div ng-show="!document.informedConsentConfidential">
+								<field-embed-contact multiple ng-model="$parent.document.informedConsent" locales="$parent.document.header.languages" caption="Add an organisation or a contact »}}"></field-embed-contact>
+							</div>
 						</div>
 						</div>
 					</div>
 				</div>
+				<hr>
 				<div class="row">
 					<div class="col-xs-12">
+						<div ng-class="{'alert alert-danger':document.geneticResourcesConfidential}">
 						<div class="km-control-group" required name="geneticResources" caption="Subject-matter or genetic resources covered by the permit or its equivalent">
 							<span class="help-block">Please provide information on the subject matter or genetic resources covered by the permit. This could include biota at any taxonomic rank, which may carry a taxonomic name. It may also include a locality of collection of the material. It may also be possible to identify the genetic resource through reference to a voucher specimen or field notes held in an identified archive or collection.</span>
-							<input type="checkbox" name="geneticResourcesConfidential" ng-model="document.geneticResourcesConfidential" watch-items >  Confidential information</input><br /><br />
+							<input type="checkbox" name="geneticResourcesConfidential" ng-model="document.geneticResourcesConfidential" watch-items >  Confidential information</input>
 							<div ng-show="!document.geneticResourcesConfidential" >
 								<div km-textbox-ml name="geneticResources" rows="6" ng-model="document.geneticResources" locales="document.header.languages"></div>
 							</div>
 						</div>
+						</div>
 					</div>
 				</div>
+				
 				<div class="row" ng-show="!document.geneticResourcesConfidential">
-					<span class="help-block">Providing details about the subject matter or genetic resource covered by the permit or its equivalent can provide additional legal certainty.</span>
 					<div class="col-xs-12">
+						<span class="help-block">Providing details about the subject matter or genetic resource covered by the permit or its equivalent can provide additional legal certainty.</span>
 						<div class="km-control-group" name="specimen" caption="Specimen data">
 							<span class="help-block">Link to a voucher specimen held in an appropriate facility</span>
 							<div km-link name="specimen" ng-model="document.specimen" allow-link="true" allow-file="false" identifier="document.header.identifier"></div>
 						</div>
 					</div>
 				</div>
+
 				<div class="row" ng-show="!document.geneticResourcesConfidential">
 					<div class="col-xs-12">
 						<div class="km-control-group" name="taxonomy" caption="Taxonomy">
@@ -225,7 +215,7 @@
 					<div class="leaflet" center="document.gisMapCenter" layers="gisLayer"></div>
 				</div>
 
-
+				<hr>
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="km-control-group" name="keywords" caption="Keywords to describe the subject-matter or genetic resource(s) covered by the permit or its equivalent">
@@ -234,17 +224,23 @@
 						</div>
 					</div>
 				</div>
-
+				<hr>
 				<div class="row">
 					<div class="col-xs-12">
-						<div class="km-control-group" required name="mutuallyAgreedTermsEstablished" caption="Confirmation that mutually agreed terms were established">
+						<div class="km-control-group" required name="mutuallyAgreedTermsEstablished" caption="Confirmation that mutually agreed terms (MAT) were established">
 							<span class="help-block">Only one option may be selected. If the option NO is selected, the record cannot be posted in the ABS Clearing-House and, therefore, the internationally recognized certificate of compliance</span>
-
-                            <div km-yes-no ng-model="document.mutuallyAgreedTermsEstablished" locales="document.header.languages"></div>
+								<button
+								data-toggle="buttons-checkbox"
+								type="button"
+								class="btn btn-info"
+								ng-class="{active:document.mutuallyAgreedTermsEstablished && !document.mutuallyAgreedTermsEstablished}"
+								ng-click="document.mutuallyAgreedTermsEstablished=!document.mutuallyAgreedTermsEstablished"
+								>Yes</button>
+                            
 						</div>
 					</div>
 				</div>
-
+				<hr>
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="km-control-group" name="consentDocuments" caption="Additional information about the prior informed consent - Documents">
@@ -252,16 +248,18 @@
 						</div>
 					</div>
 				</div>
-
+				<hr>
 				<div ng-show="document.mutuallyAgreedTermsEstablished==true">
-					<span class="help-block">If applicable, please provide any information about the MAT. For example, this may include information on conditions for access and for benefit-sharing and other relevant information included in the MAT. Detailed information may be provided in an attached document.</span>
+					
 					<div class="row">
 						<div class="col-xs-12">
+							<span class="help-block">If applicable, please provide any information about the MAT. For example, this may include information on conditions for access and for benefit-sharing and other relevant information included in the MAT. Detailed information may be provided in an attached document.</span>
 							<div class="km-control-group" name="mutuallyAgreedTermsInformation" caption="Additional information about the mutually agreed terms - Information">
 								<div km-textbox-ml name="mutuallyAgreedTermsInformation" rows="4" ng-model="document.mutuallyAgreedTermsInformation" locales="document.header.languages"></div>
 							</div>
 						</div>
 					</div>
+					<hr>
 					<div class="row">
 						<div class="col-xs-12">
 							<div class="km-control-group" name="mutuallyAgreedTermsDocuments" caption="Additional information about the mutually agreed terms - Documents">
@@ -270,7 +268,7 @@
 						</div>
 					</div>
 				</div>
-
+				<hr>
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="control-group">
@@ -312,7 +310,7 @@
 					</div>
 				</div>
 
-				<legend>Amendments</legend>
+				<!-- <legend>Amendments</legend>
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="km-control-group" name="amendedPermits" caption="List of amended permits">
@@ -325,7 +323,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 
 
 				<div ng-show="document.amendedPermits">
