@@ -17,7 +17,7 @@ require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "
 	//============================================================
 	//============================================================
 
-	var leftTab = "measure";
+	var leftTab = "dashboard";
 
 	$scope.records = null;
 

@@ -1,0 +1,57 @@
+﻿<div>
+	<div class="alert alert-danger" ng-show="__error">
+		<strong>Error: </strong>{{__error}}
+	</div>
+	
+	<table ng-show="tasks.length && !__error" class="table table-striped">
+
+		<tr>
+			<th>ID</th>
+			<th>Description</th>
+			<th>Status</th>
+			<th>Requested on</th>
+			<th>&nbsp;</th>
+		</tr>
+
+		<tr ng-repeat="task in tasks|orderBy:'activity.createdOn'">
+	
+			<td> <!-- ID -->
+				<a style="text-transform:uppercase;white-space:nowrap;" ng-href="/register/tasks/{{task.workflow._id}}/{{task.activity.name}}"  type="button">{{formatWID(task.workflow._id)}}</a>
+				<div ng-switch="task.workflow.type.name">
+					<em ng-switch-when="publishNationalRecord">Publishing request</em>
+					<em ng-switch-when="publishReferenceRecord">Publishing request</em>
+					<em ng-switch-default>*{{task.workflow.type.name|uppercase}}*</em>
+				</div>
+			</td>
+
+			<td> <!-- Description -->
+				<strong ng-show="task.workflow.result.documentID||task.workflow.data.documentID"><a ng-href="/database/record?documentID={{task.workflow.result.documentID||task.workflow.data.documentID}}">{{task.workflow.data.metadata.schema|schemaName}}</a></strong>
+				<strong ng-hide="task.workflow.result.documentID||task.workflow.data.documentID">{{task.workflow.data.metadata.schema|schemaName}}</strong>
+
+				<div>{{task.workflow.data.title | lstring}}</div>
+			</td>
+			
+			<td> <!-- Status -->
+				<div ng-switch="task.activity.name">
+					<span ng-switch-when="publishRecord">Waiting for validation</span>
+					<span ng-switch-default>{{activity.name}}*</span>
+				</div>
+			</td>
+
+			<td> <!-- Requested on -->
+				<div>{{task.workflow.createdOn|date:'short'}}</div>
+				<div><em> by {{task.workflow.createdBy_info.firstName}} {{task.workflow.createdBy_info.lastName}}</em></div>
+			</td>
+
+			<td style="text-align:end">
+				<a class="btn btn-info" ng-href="/register/tasks/{{task.workflow._id}}/{{task.activity.name}}"  type="button"><i class="glyphicon glyphicon-edit"></i></button>
+			</td>
+		</tr>
+
+
+	</table>
+
+	<div ng-show="tasks.length==0">
+		No Item is requiring your attention
+	</div>
+</div>

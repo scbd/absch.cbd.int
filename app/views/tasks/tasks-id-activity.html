@@ -79,7 +79,17 @@
 						</div>
 						<span ng-hide="isAssignedToMe(activity)">
 							<i class="glyphicon glyphicon-time"></i>
-							Waiting for <em>{{activity.assignedTo_info[0].firstName}} {{activity.assignedTo_info[0].lastName}}</em> to approve or reject this request.
+							Waiting for 
+							<em ng-switch="activity.assignedToRule|limitTo:7">
+								<span ng-switch-when="ABS-NFP">ABS-CH Focal Point or Publishing Authority</span>
+								<span ng-switch-when="BCH-NFP">BCH Focal Point</span>
+								<span ng-switch-when="CHM-NFP">CHM Focal Point</span>
+								<span ng-switch-when="BCH-Adm">SCBD</span>
+								<span ng-switch-when="ABS-Adm">SCBD</span>
+								<span ng-switch-when="CHM-Adm">SCBD</span>
+								<span ng-switch-default>*{{activity.assignedToRule}}*</span>
+							</em>
+							to approve or reject this request.
 						</span>
 					</span>
 					

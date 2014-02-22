@@ -90,7 +90,16 @@
 					 
 
 					<span ng-show="activity.assignedToRule">
-						by {{activity.assignedToRule}}
+						by 
+						<em ng-switch="activity.assignedToRule|limitTo:7">
+							<span ng-switch-when="ABS-NFP">ABS-CH Focal Point or Publishing Authority</span>
+							<span ng-switch-when="BCH-NFP">BCH Focal Point</span>
+							<span ng-switch-when="CHM-NFP">CHM Focal Point</span>
+							<span ng-switch-when="BCH-Adm">SCBD</span>
+							<span ng-switch-when="ABS-Adm">SCBD</span>
+							<span ng-switch-when="CHM-Adm">SCBD</span>
+							<span ng-switch-default>*{{activity.assignedToRule}}*</span>
+						</em>
 					</span>
 
 					<span ng-hide="activity.assignedToRule">
