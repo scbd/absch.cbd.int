@@ -122,6 +122,17 @@ require("app").directive("registerRecordList", ["$timeout", function ($timeout) 
 			$scope.isPublished = function(entity){
 				return entity && entity.documentID;
 			};
+
+			//============================================================
+			//
+			//
+			//============================================================
+			var workflowRE = /^workflow\-(.*)/g
+
+			$scope.getWorkflowID = function(entity){
+
+				return entity ? entity.workingDocumentLock.lockID.replace(workflowRE, "$1") : "";
+			};
 		}]
 	};
 }]);

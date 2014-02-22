@@ -1,0 +1,205 @@
+<div ng-cloak class="home-bottom" style="position:relative" ng-controller="TaskIdController">
+    <div class="container main" id="main" style="padding-top:6px">
+      	<div class="row top">
+	    	
+	    	<h1>Task</h1>  
+	        
+			<table class="table table-striped">
+			  <tr>
+				  <th colspan="2">
+				  	Request information and status
+				  </th>	
+			  </tr>	
+			  <tr>
+			  	<td style="width:40%">Request ID</td>
+			  	<td style="text-transform:uppercase;white-space:nowrap;">
+			  		{{formatWID(workflow._id)}}
+				</td>
+			  </tr>
+			  <tr>
+			  	<td>Request Type</td>
+			  	<td>
+			  		<div ng-switch="workflow.type.name">
+						<span ng-switch-when="publishNationalRecord">Publishing request</span>
+						<span ng-switch-when="publishReferenceRecord">Publishing request</span>
+						<span ng-switch-default>*{{workflow.type.name|uppercase}}</span>
+					</div>
+				</td>
+			  </tr>
+			  <tr>
+			  	<td>Record ID</td>
+			  	<td>
+			  		<a    ng-show="workflow.result.documentID||workflow.data.documentID" ng-href="/database/record?documentID={{workflow.result.documentID||workflow.data.documentID}}">{{workflow.result.documentID||workflow.data.documentID}}</a>
+			  		<span ng-hide="workflow.result.documentID||workflow.data.documentID">[new]</span>
+			  		<span ng-show="workflow.result.revision">(rev. {{workflow.result.revision}})</span>
+				</td>
+			  </tr>
+			  <tr>
+			  	<td>Description</td>
+			  	<td>
+					<strong>{{workflow.data.metadata.schema|schemaName}}</strong>
+					-
+					<span>{{workflow.data.title | lstring}}</span>
+
+				</td>
+			  </tr>
+			  <tr>
+			  	<td>Status</td>
+			  	<td>
+			  		<span ng-switch="workflow.state">
+			  			<span ng-switch-when="running"><i class="glyphicon glyphicon-cog"></i> Pending</span>	  				
+			  			<span ng-switch-when="completed">Completed on {{workflow.closedOn|date:'short'}}</span>
+			  			<span ng-switch-when="canceled"><i class="glyphicon glyphicon-remove-circle"></i> Canceled on {{workflow.closedOn|date:'short'}}</span>
+			  			<span ng-switch-when=""><i class="glyphicon glyphicon-exclamation-sign"></i> Failed on {{workflow.closedOn|date:'short'}}</span>
+			  			<span ng-switch-default>*{{workflow.state|uppercase}}</span>
+					</span>
+				</td>
+			  </tr>
+
+			  <tr ng-show="workflow.createdOn">
+			  	<td>Created on</td>
+			  	<td>{{workflow.createdOn|date:'short'}} by {{workflow.createdBy_info.firstName}} {{workflow.createdBy_info.lastName}}</td>
+			  </tr>
+
+			</table>
+
+
+			<!-- Pending activity(ies) -->
+
+			<table class="table table-striped" ng-show="(workflow.activities|filter:isOpen).length">
+			  <tr>
+			  	<th style="width:40%">Pending activity(ies)</th>
+			  	<th>Status</th>
+			  	<th>&nbsp;</th>
+			  </tr>
+
+			  <tr ng-repeat="activity in workflow.activities|filter:isOpen|orderBy:'createdOn'">
+			  	<td>
+					<div ng-show="activity" ng-switch="activity.name">
+						<span ng-switch-when="publishRecord">Approve or Reject record publication</span>
+						<span ng-switch-default>*{{activity.name|uppercase}}</span>
+					</div>
+			  	</td>
+			  	<td>
+
+					<span ng-switch="activity.name">
+						<span ng-switch-when="publishRecord">Waiting for validation</span>
+						<span ng-switch-default>{{activity.name}}*</span>
+					</span>
+
+					 
+
+					<span ng-show="activity.assignedToRule">
+						by {{activity.assignedToRule}}
+					</span>
+
+					<span ng-hide="activity.assignedToRule">
+
+						<span ng-show="activity.assignedTo">
+							by <span ng-repeat="user in activity.assignedTo_info">{{user.firstName}} {{user.lastName}}<span ng-hide="$last">, </span>
+						</span>
+
+						<span ng-hide="activity.assignedTo">
+							<em>Not assigned yet</em>
+						</span>
+					</span>
+
+					
+
+			  	</td>
+
+			  	<td class="text-right">
+					<a ng-show="isAssignedToMe(activity)" class="btn btn-info" ng-href="/register/tasks/{{workflow._id}}/{{activity.name}}"  type="button"><i class="glyphicon glyphicon-edit"></i></button>
+			  	</td>
+
+			  </tr>
+			</table>
+
+
+			<!-- Completed activity(ies) -->
+
+			<table class="table table-striped" ng-show="(workflow.activities|filter:isClose).length">
+			  <tr>
+			  	<th style="width:40%">Completed activity(ies)</th>
+			  	<th>Status</th>
+			  </tr>
+
+			  <tr ng-repeat="activity in workflow.activities|filter:isClose|orderBy:'createdOn'">
+			  	<td>
+					<div ng-show="activity" ng-switch="activity.name">
+						<span ng-switch-when="publishRecord">Approve or Reject record publication</span>
+						<span ng-switch-default>{{activity.name|uppercase}}*</span>
+					</div>
+			  	</td>
+			  	<td>
+					<div ng-show="activity.completedOn">
+
+						<span ng-switch="activity.name+'-'+activity.result.action">
+							<span ng-switch-when="publishRecord-approve"><i class="glyphicon glyphicon-ok"></i> Approved</span>
+							<span ng-switch-when="publishRecord-reject"><i class="glyphicon glyphicon-remove"></i> Rejected</span>
+							<span ng-switch-default>{{activity.name+'-'+activity.result.action}}*</span>
+						</span>
+
+						on {{activity.completedOn|date:'short'}} by {{activity.completedBy_info.firstName}} {{activity.completedBy_info.lastName}}
+					</div>
+
+					<div ng-show="activity.canceledOn">
+						Canceled on {{activity.canceledOn|date:'short'}} by {{activity.canceledBy_info.firstName}} {{activity.canceledBy_info.lastName}}
+					</div>
+
+					<div ng-show="activity.failedOn">
+						Failed on {{activity.failedOn|date:'short'}}
+					</div>
+
+			  	</td>
+			  </tr>
+			</table>			
+
+			<div ng-show="document" class="t-document">
+				<record-loader document="document" hide-buttons="true" link-target="_self"></record-loader>
+			</div>	
+
+  		</div>
+	</div>
+
+</div>
+
+<style>
+.t-document {
+  position: relative;
+  padding: 45px 15px 15px;
+  margin: 0 -15px 15px;
+  border-color: #e5e5e5 #eee #eee;
+  border-style: solid;
+  border-width: 1px 1px;
+}
+/* Echo out a label for the example */
+.t-document:after {
+  content: "Document to approve";
+  position: absolute;
+  top:  15px;
+  left: 15px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #bbb;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+</style>
+
+<script src="/app/views/tasks/tasks-id.html.js"></script>
+<script src="/app/views/forms/view/view-abs-checkpoint.directive.js"></script>
+<script src="/app/views/forms/view/view-abs-checkpoint-communique.directive.js"></script>
+<script src="/app/views/forms/view/view-abs-permit.directive.js"></script>
+<script src="/app/views/forms/view/view-authority.directive.js"></script>
+<script src="/app/views/forms/view/view-authority-reference.directive.js"></script>
+<script src="/app/views/forms/view/view-contact.directive.js"></script>
+<script src="/app/views/forms/view/view-contact-reference.directive.js"></script>
+<script src="/app/views/forms/view/view-database.directive.js"></script>
+<script src="/app/views/forms/view/view-measure.directive.js"></script>
+<script src="/app/views/forms/view/view-organization.directive.js"></script>
+<script src="/app/views/forms/view/view-organization-reference.directive.js"></script>
+<script src="/app/views/forms/view/view-resource.directive.js"></script>
+
+<script src="/app/views/forms/view/record-loader.directive.js"></script>
+<script src="/app/js/directives/forms/form-controls.js"></script>

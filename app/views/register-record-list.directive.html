@@ -38,7 +38,7 @@
       </td>
       <td class="text-right" style="vertical-align:middle">
         <a ng-show="isPublished(record)" href="/database/record?documentID={{record.documentID}}" class="btn btn-xs btn-success" title="Published">P</a>
-        <a ng-show="isRequest(record)"   class="btn btn-xs btn-danger" title="Request">R</a>
+        <a ng-show="isRequest(record)"   href="/register/tasks/{{getWorkflowID(record)}}" class="btn btn-xs btn-danger" title="Request">R</a>
         <a ng-show="isDraft(record)"     ng-click="edit(record)" class="btn btn-xs btn-default btn-draft" title="Draft" style="color:#fff">D</a>
       </td>
       <td class="text-right" style="width:100px" >

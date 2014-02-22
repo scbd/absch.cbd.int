@@ -23,6 +23,8 @@ define(['app', 'authentication', 'services', 'filters', 'storage', 'workflows'],
             when('/countries/:code',             { templateUrl: '/app/views/profiles.html'                  , resolve: { user: resolveUser }}).
             when('/database/record',             { templateUrl: '/app/views/forms/view/records-id.html'     , resolve: { user: resolveUser }}).
             when('/database/record/:documentID', { templateUrl: '/app/views/forms/view/records-id.html'     , resolve: { user: resolveUser }}).
+            when('/register/tasks/:id',          { templateUrl: '/app/views/tasks/tasks-id.html'            , resolve: { user: resolveUser }}).
+            when('/register/tasks/:id/:activity',{ templateUrl: '/app/views/tasks/tasks-id-activity.html'   , resolve: { user: resolveUser }}).
             when('/oauth2/callback',             { templateUrl: '/app/views/oauth2/callback.html'           , resolve: { user: resolveUser }}).
             otherwise({redirectTo:'/help/404'});
     }]);
