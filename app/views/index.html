@@ -18,14 +18,20 @@
                 <div class="carousel-caption" style="text-align:left;">
                     <h1 >Participate in the testing of the <span style="color:#fa6938;">pilot phase</span> of the ABS-CH</h1>
                     <p class="visible-lg" style="font-size:14px;">Login and start publishing records and providing feedback on how we can improve it.</p>
+                         <div class="row" ng-show="user.isAuthenticated">
 
+                                <div style="background-color:#1a9351; padding:50px; margin:0;">
+                                   <h1 style="font-size:260%;"> WELCOME {{user.name}} </h1>
+                                </div>
+
+                         </div>
                         <div class="row" ng-show="!user.isAuthenticated">
                             <div class="col-xs-7" >
                                 <div style="background-color:#1a9351; padding:1px 10px 10px 10px; margin:0;">
                                     <h2 style="text-align:left;">
                                         Sign in 
                                         <span  class="pull-right" style="position:relative;top:15px;font-size:14px;padding-left:10px;">
-                                            <a href="/password/reset" style="font-family:Tahoma, Trebuchet MS;color:white;text-decoration:none;">Forgot password?</a>
+                                            <a href="https://accounts.cbd.int/password/reset" style="font-family:Tahoma, Trebuchet MS;color:white;text-decoration:none;" target="_new">Forgot password?</a>
                                         </span>
                                     </h2>
                                     <form name="form" ng-submit="doSignIn()" class="ng-pristine ng-invalid ng-invalid-required" >
