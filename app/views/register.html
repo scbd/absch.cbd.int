@@ -17,28 +17,28 @@
               <h3>National Records</h3>
 
               <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('measure')" ng-class="{ 'btn-commonformat-selected' : tab()=='measure'}" href="#" role="button"> ABSCH-MSR »
-              <span class="pull-right label label-danger">{{(records | filter:{type:'measure'}).length}}</span>  
+              <span class="pull-right label label-info">{{(records | filter:{type:'measure'}).length}}</span>  
               <span class="btn-text"><br>Legislative, administrative or policy measures</span></a>
 
               <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('authority')" ng-class="{ 'btn-commonformat-selected' : tab()=='authority'}" href="#" role="button">ABSCH-CNA »
-              <span class="pull-right label label-danger">{{(records | filter:{type:'authority'}).length}}</span> 
+              <span class="pull-right label label-info">{{(records | filter:{type:'authority'}).length}}</span> 
               <span class="btn-text"> <br>Competent National Authority</span> </a>
 
               <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('absPermit')" ng-class="{ 'btn-commonformat-selected' : tab()=='absPermit'}" href="#" role="button">ABSCH-IRCC »
-              <span class="pull-right label label-danger">{{(records | filter:{type:'absPermit'}).length}}</span> 
+              <span class="pull-right label label-info">{{(records | filter:{type:'absPermit'}).length}}</span> 
               <span class="btn-text"> <br>Internationally recognized certificate of compliance</span> </a>
 
               <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('absCheckpoint')" ng-class="{ 'btn-commonformat-selected' : tab()=='absCheckpoint'}" href="#" role="button">ABSCH-CP »
-              <span class="pull-right label label-danger">{{(records | filter:{type:'absCheckpoint'}).length}}</span> 
+              <span class="pull-right label label-info">{{(records | filter:{type:'absCheckpoint'}).length}}</span> 
                <span class="btn-text"><br>Checkpoint</span> </a>
 
               <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('absCheckpointCommunique')" ng-class="{ 'btn-commonformat-selected' : tab()=='absCheckpointCommunique'}" href="#" role="button">ABSCH-CPC »
-              <span class="pull-right label label-danger">{{(records | filter:{type:'absCheckpointCommunique'}).length}}</span> 
+              <span class="pull-right label label-info">{{(records | filter:{type:'absCheckpointCommunique'}).length}}</span> 
               <span class="btn-text"><br>Checkpoint Communiqué</span> </a>
 
 
              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('database')" ng-class="{ 'btn-commonformat-selected' : tab()=='database'}" href="#" role="button">ABSCH-NDB »
-              <span class="pull-right label label-danger">{{(records | filter:{type:'database'}).length}}</span> 
+              <span class="pull-right label label-info">{{(records | filter:{type:'database'}).length}}</span> 
               <span class="btn-text" ><br>ABS National Website or Database</span> 
              </a>
 
