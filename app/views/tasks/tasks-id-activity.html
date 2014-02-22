@@ -1,0 +1,193 @@
+<div ng-cloak class="home-bottom" style="position:relative" ng-controller="TaskIdActivityController">
+    <div class="container main" id="main" style="padding-top:6px">
+      	<div class="row top">
+
+	    	<h1 ng-hide="activity">Action</h1>  
+			<h1 ng-show="activity" ng-switch="activity.name">
+				<span ng-switch-when="publishRecord">Approve or Reject record publication</span>
+				<span ng-switch-default>*{{activity.name|uppercase}}</span>
+			</h1>
+	        
+			<table class="table table-striped">
+			  <tr>
+				  <th colspan="2">
+				  	Request information and status
+				  </th>	
+			  </tr>	
+			  <tr>
+			  	<td style="width:40%">Request ID</td>
+			  	<td style="text-transform:uppercase;white-space:nowrap;">
+			  		{{formatWID(workflow._id)}}
+				</td>
+			  </tr>
+			  <tr>
+			  	<td>Request Type</td>
+			  	<td>
+			  		<div ng-switch="workflow.type.name">
+						<span ng-switch-when="publishNationalRecord">Publishing request</span>
+						<span ng-switch-when="publishReferenceRecord">Publishing request</span>
+						<span ng-switch-default>*{{workflow.type.name|uppercase}}</span>
+					</div>
+				</td>
+			  </tr>
+			  <tr>
+			  	<td>Record ID</td>
+			  	<td>
+			  		<a    ng-show="workflow.result.documentID||workflow.data.documentID" ng-href="/database/record?documentID={{workflow.result.documentID||workflow.data.documentID}}">{{workflow.result.documentID||workflow.data.documentID}}</a>
+			  		<span ng-hide="workflow.result.documentID||workflow.data.documentID">[new]</span>
+			  		<span ng-show="workflow.result.revision">(rev. {{workflow.result.revision}})</span>
+				</td>
+			  </tr>
+			  <tr>
+			  	<td>Description</td>
+			  	<td>
+					<strong>{{workflow.data.metadata.schema|schemaName}}</strong>
+					-
+					<span>{{workflow.data.title | lstring}}</span>
+
+				</td>
+			  </tr>
+			  <tr>
+			  	<td>Status</td>
+			  	<td>
+			  		<span ng-switch="workflow.state">
+			  			<span ng-switch-when="running"><i class="glyphicon glyphicon-cog"></i> Pending</span>	  				
+			  			<span ng-switch-when="completed">Completed on {{workflow.closedOn|date:'short'}}</span>
+			  			<span ng-switch-when="canceled"><i class="glyphicon glyphicon-remove-circle"></i> Canceled on {{workflow.closedOn|date:'short'}}</span>
+			  			<span ng-switch-when=""><i class="glyphicon glyphicon-exclamation-sign"></i> Failed on {{workflow.closedOn|date:'short'}}</span>
+			  			<span ng-switch-default>*{{workflow.state|uppercase}}</span>
+					</span>
+				</td>
+			  </tr>
+
+			  <tr ng-show="workflow.createdOn">
+			  	<td>Created on</td>
+			  	<td>{{workflow.createdOn|date:'short'}} by {{workflow.createdBy_info.firstName}} {{workflow.createdBy_info.lastName}}</td>
+			  </tr>
+
+			</table>
+
+
+			<div ng-hide="activity.closedOn" ng-switch="activity.name">
+				<div ng-switch-when="publishRecord">
+
+					<span ng-hide="activity.closedOn">
+
+						<div ng-show="isAssignedToMe(activity)">
+							<button type="button" class="btn btn-primary" ng-click="updateActivity({ action : 'approve' })"><i class="glyphicon glyphicon-ok"></i> Approve</button>
+							<button type="button" class="btn btn-warning"  data-toggle="modal" data-target="#rejectModal"><i class="glyphicon glyphicon-remove"></i> Request Changes / Reject </button>
+						</div>
+						<span ng-hide="isAssignedToMe(activity)">
+							<i class="glyphicon glyphicon-time"></i>
+							Waiting for 
+							<em ng-switch="activity.assignedToRule|limitTo:7">
+								<span ng-switch-when="ABS-NFP">ABS-CH Focal Point or Publishing Authority</span>
+								<span ng-switch-when="BCH-NFP">BCH Focal Point</span>
+								<span ng-switch-when="CHM-NFP">CHM Focal Point</span>
+								<span ng-switch-when="BCH-Adm">SCBD</span>
+								<span ng-switch-when="ABS-Adm">SCBD</span>
+								<span ng-switch-when="CHM-Adm">SCBD</span>
+								<span ng-switch-default>*{{activity.assignedToRule}}*</span>
+							</em>
+							to approve or reject this request.
+						</span>
+					</span>
+					
+				</div>
+			</div>
+
+			<div ng-show="activity.completedOn">
+
+				<span ng-show="activity" ng-switch="activity.result.action">
+					<span ng-switch-when="approve"><i class="glyphicon glyphicon-ok"></i> Approved</span>
+					<span ng-switch-when="reject"><i class="glyphicon glyphicon-remove"></i> Rejected</span>
+				</span>
+
+				<span ng-hide="activity"><i class="glyphicon glyphicon-ok"></i> Completed</span>
+
+				on {{activity.completedOn|date:'short'}} by {{activity.completedBy_info.firstName}} {{activity.completedBy_info.lastName}}
+			</div>
+
+			<div ng-show="activity.canceledOn">
+				Canceled on {{activity.canceledOn|date:'short'}} by {{activity.canceledBy_info.firstName}} {{activity.canceledBy_info.lastName}}
+			</div>
+
+			<div ng-show="activity.failedOn">
+				Failed on {{activity.failedOn|date:'short'}}
+			</div>
+
+			<p></p>
+
+			<div ng-show="document" class="t-document">
+				<record-loader document="document" hide-buttons="true" link-target="_self"></record-loader>
+			</div>	
+
+  		</div>
+
+	</div>
+
+
+	<form name="rejectForm" role="form">
+	<div class="modal fade" id="rejectModal">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title">Request Changes or Reject a record revision</h4>
+	      </div>
+	      <div class="modal-body">
+		    <p ng-class="{ 'has-warning':rejectForm.reason.$error.required, 'has-success':!rejectForm.reason.$invalid }">
+			    <textarea class="form-control" rows="5" name="reason" ng-model="rejectReason" required></textarea>
+			    <span class="help-block" ng-show="rejectForm.reason.$error.required">Please provide instructions on how you want the record to be modified or the reason why you rejected this record.</span>
+	        </p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+			<button type="button" class="btn btn-warning" data-dismiss="modal" ng-disabled="rejectForm.reason.$error.required" ng-click="updateActivity({ action : 'reject', reason: rejectReason })"><i class="glyphicon glyphicon-remove"></i> Request Changes / Reject </button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->	
+    </form>
+
+</div>
+
+<style>
+.t-document {
+  position: relative;
+  padding: 45px 15px 15px;
+  margin: 0 -15px 15px;
+  border-color: #e5e5e5 #eee #eee;
+  border-style: solid;
+  border-width: 1px 1px;
+}
+/* Echo out a label for the example */
+.t-document:after {
+  content: "Document to approve";
+  position: absolute;
+  top:  15px;
+  left: 15px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #bbb;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+</style>
+
+<script src="/app/views/tasks/tasks-id-activity.html.js"></script>
+<script src="/app/views/forms/view/view-abs-checkpoint.directive.js"></script>
+<script src="/app/views/forms/view/view-abs-checkpoint-communique.directive.js"></script>
+<script src="/app/views/forms/view/view-abs-permit.directive.js"></script>
+<script src="/app/views/forms/view/view-authority.directive.js"></script>
+<script src="/app/views/forms/view/view-authority-reference.directive.js"></script>
+<script src="/app/views/forms/view/view-contact.directive.js"></script>
+<script src="/app/views/forms/view/view-contact-reference.directive.js"></script>
+<script src="/app/views/forms/view/view-database.directive.js"></script>
+<script src="/app/views/forms/view/view-measure.directive.js"></script>
+<script src="/app/views/forms/view/view-organization.directive.js"></script>
+<script src="/app/views/forms/view/view-organization-reference.directive.js"></script>
+<script src="/app/views/forms/view/view-resource.directive.js"></script>
+
+<script src="/app/views/forms/view/record-loader.directive.js"></script>
+<script src="/app/js/directives/forms/form-controls.js"></script>

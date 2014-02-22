@@ -1,17 +1,5 @@
 <div ng-cloak ng-controller="RegisterController">
 
-<style type="text/css">
-  a.tab-selected {
-    z-index :10;
-    width:120%;
-    min-height: 45px;
-   /* background-color: #204C70;*/
-  }
-  a.tab-selected:hover, a.tab-selected:focus {
-     /*background-color: #204C70; */
-  }
-</style>
-
   <div class="category-container">
       <div class="container">
           <span class="category"><span class="glyphicon glyphicon-edit"></span> Register Information</span>
@@ -22,33 +10,34 @@
       <div class="row">
           <div class="col-md-3">
 
-  <div>             
-    <h3>National Records</h3>
+  <div>        
+              <p></p>     
+              <a ng-click="tab('dashboard')" class="btn btn-lg btn-default btn-abs btn-all btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='dashboard'}"  href="#" role="button">Dashboard » </a>
+          
+              <h3>National Records</h3>
 
-              <a ng-show="false" class="btn btn-lg btn-default btn-abs btn-all btn-commonformat" href="#" role="button">ALL RECORDS » </a>
-
-              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('measure')" ng-class="{ 'tab-selected' : tab()=='measure'}" href="#" role="button"> ABSCH-MSR »
+              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('measure')" ng-class="{ 'btn-commonformat-selected' : tab()=='measure'}" href="#" role="button"> ABSCH-MSR »
               <span class="pull-right label label-danger">{{(records | filter:{type:'measure'}).length}}</span>  
               <span class="btn-text"><br>Legislative, administrative or policy measures</span></a>
 
-              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('authority')" ng-class="{ 'tab-selected' : tab()=='authority'}" href="#" role="button">ABSCH-CNA »
+              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('authority')" ng-class="{ 'btn-commonformat-selected' : tab()=='authority'}" href="#" role="button">ABSCH-CNA »
               <span class="pull-right label label-danger">{{(records | filter:{type:'authority'}).length}}</span> 
               <span class="btn-text"> <br>Competent National Authority</span> </a>
 
-              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('absPermit')" ng-class="{ 'tab-selected' : tab()=='absPermit'}" href="#" role="button">ABSCH-IRCC »
+              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('absPermit')" ng-class="{ 'btn-commonformat-selected' : tab()=='absPermit'}" href="#" role="button">ABSCH-IRCC »
               <span class="pull-right label label-danger">{{(records | filter:{type:'absPermit'}).length}}</span> 
               <span class="btn-text"> <br>Internationally recognized certificate of compliance</span> </a>
 
-              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('absCheckpoint')" ng-class="{ 'tab-selected' : tab()=='absCheckpoint'}" href="#" role="button">ABSCH-CP »
+              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('absCheckpoint')" ng-class="{ 'btn-commonformat-selected' : tab()=='absCheckpoint'}" href="#" role="button">ABSCH-CP »
               <span class="pull-right label label-danger">{{(records | filter:{type:'absCheckpoint'}).length}}</span> 
                <span class="btn-text"><br>Checkpoint</span> </a>
 
-              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('absCheckpointCommunique')" ng-class="{ 'tab-selected' : tab()=='absCheckpointCommunique'}" href="#" role="button">ABSCH-CPC »
+              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('absCheckpointCommunique')" ng-class="{ 'btn-commonformat-selected' : tab()=='absCheckpointCommunique'}" href="#" role="button">ABSCH-CPC »
               <span class="pull-right label label-danger">{{(records | filter:{type:'absCheckpointCommunique'}).length}}</span> 
               <span class="btn-text"><br>Checkpoint Communiqué</span> </a>
 
 
-             <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('database')" ng-class="{ 'tab-selected' : tab()=='database'}" href="#" role="button">ABSCH-NDB »
+             <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('database')" ng-class="{ 'btn-commonformat-selected' : tab()=='database'}" href="#" role="button">ABSCH-NDB »
               <span class="pull-right label label-danger">{{(records | filter:{type:'database'}).length}}</span> 
               <span class="btn-text" ><br>ABS National Website or Database</span> 
              </a>
@@ -59,7 +48,7 @@
   <div>             
     <h3>Reference Records</h3>
 
-                    <a class="btn btn-lg btn-warning btn-commonformat" ng-click="tab('resource')" ng-class="{ 'tab-selected' : tab()=='resource'}" href="#" role="button">ABSCH-VLR »
+                    <a class="btn btn-lg btn-warning btn-commonformat" ng-click="tab('resource')" ng-class="{ 'btn-commonformat-selected' : tab()=='resource'}" href="#" role="button">ABSCH-VLR »
                      <span class="pull-right label label-danger">{{(records | filter:{type:'resource'}).length}}</span> 
                     <span class="btn-text"  style="color:#666"><br> Virtual Library Record</span> </a>  
   </div>
@@ -68,19 +57,46 @@
 
      <h3>National Users</h3>
 
-              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('abschNFP')" ng-class="{ 'tab-selected' : tab()=='abschNFP'}" href="#" role="button"> ABSCH-NFP » 
+              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('abschNFP')" ng-class="{ 'btn-commonformat-selected' : tab()=='abschNFP'}" href="#" role="button"> ABSCH-NFP » 
               <span class="btn-text" ><br> National ABS Focal Points</span> </a> 
 
-              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('abschPA')" ng-class="{ 'tab-selected' : tab()=='abschPA'}" href="#" role="button"> ABSCH-PA » 
+              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('abschPA')" ng-class="{ 'btn-commonformat-selected' : tab()=='abschPA'}" href="#" role="button"> ABSCH-PA » 
               <span class="btn-text" ><br> Publishing Authorities</span> </a> 
 
-              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('abschNAU')" ng-class="{ 'tab-selected' : tab()=='abschNAU'}" href="#" role="button"> ABSCH-NAU » 
+              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('abschNAU')" ng-class="{ 'btn-commonformat-selected' : tab()=='abschNAU'}" href="#" role="button"> ABSCH-NAU » 
               <span class="btn-text" ><br> National Authorized Users</span> </a> 
   </div>
              
                     
           </div>
-         
+   
+          <div ng-show="tab()=='dashboard'" class="col-md-9 well well-registerpage">
+
+            <h2><span style="color: #428BCA; font-weight: bold;font-size:180%;">ABSCH-DASHBOARD</span> Vestibulum rutrum lacus at metus auctor bibendum. </h2>
+
+            <p>
+              Ut interdum nec nisl at volutpat. In quis molestie lectus, non mattis eros. Cras eget urna nibh. Integer interdum arcu erat. Mauris pulvinar ullamcorper lorem. Curabitur tincidunt dictum urna, nec scelerisque massa posuere et. Ut ac lacus est. Donec congue lobortis congue. Nullam vitae tincidunt nisl. Cras nibh ligula, iaculis id condimentum ut, aliquet in arcu. Cras ut sollicitudin justo. Duis tristique lobortis sem at mollis. Maecenas ut mauris quis quam eleifend vehicula. Nam eget sem egestas, ultrices est et, consequat augue.              
+            </p>
+
+            <div ng-hide="isAuthenticated">
+              <a ng-show="!isAuthenticated" ng-click="signIn('dashboard')" class="btn btn-info">
+                <i class="glyphicon glyphicon-off"></i> Sign in to acces information of your ABSCH-DASHBOARD
+              </a>
+            </div>
+
+            <div ng-show="isAuthenticated">
+              <h2>Items requiring your attention</h2>  
+              <my-tasks></my-tasks>
+              
+              <h2>Pending requests</h2>  
+              <my-pending-tasks></my-pending-tasks>
+
+              <h2>Completed requests</h2>  
+              <my-completed-tasks></my-completed-tasks>
+            </div>
+
+          </div>
+
           <div ng-show="tab()=='measure'" class="col-md-9 well well-registerpage">
 
               <h2><span style="color: #428BCA; font-weight: bold;font-size:180%;">ABSCH-MSR</span> Legislative, administrative or policy measures on access and benefit-sharing</h2>
@@ -509,6 +525,10 @@
 
 <script src="/app/views/register.html.js"></script>
 <script src="/app/views/register-record-list.directive.js"></script>
+
+<script src="/app/views/tasks/my-completed-tasks.directive.js"></script>
+<script src="/app/views/tasks/my-pending-tasks.directive.js"></script>
+<script src="/app/views/tasks/my-tasks.directive.js"></script>
 
 <script src="/app/js/directives/forms/form-controls.js"></script>
 <script src="/app/views/forms/edit/editFormUtility.js"></script>

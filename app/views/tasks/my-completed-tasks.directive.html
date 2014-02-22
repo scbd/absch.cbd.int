@@ -1,0 +1,76 @@
+﻿<div>
+	<div class="alert alert-danger" ng-show="__error">
+		<strong>Error: </strong>{{__error}}
+	</div>
+
+	<table ng-show="workflows.length && !__error" class="table table-striped">
+		<tr>
+			<th>ID</th>
+			<th>Description</th>
+			<th>Result</th>
+		</tr>
+
+		<tr ng-repeat="workflow in workflows|orderBy:'-closedOn'">
+			
+			<td>
+				<a style="text-transform:uppercase;white-space:nowrap;" ng-href="/register/tasks/{{workflow._id}}"  type="button">{{formatWID(workflow._id)}}</a>
+				<div ng-switch="workflow.type.name">
+					<em ng-switch-when="publishNationalRecord">Publishing request</em>
+					<em ng-switch-when="publishReferenceRecord">Publishing request</em>
+					<em ng-switch-default>*{{workflow.type.name|uppercase}}*</em>
+				</div>
+			</td>
+
+			<td>
+				<strong ng-show="workflow.result.documentID||workflow.data.documentID"><a ng-href="/database/record?documentID={{workflow.result.documentID||workflow.data.documentID}}">{{workflow.data.metadata.schema|schemaName}}</a></strong>
+				<strong ng-hide="workflow.result.documentID||workflow.data.documentID">{{workflow.data.metadata.schema|schemaName}}</strong>
+
+				<div>{{workflow.data.title | lstring}}</div>
+			</td>
+
+			<td>
+				<div ng-repeat="activity in workflow.activities|orderBy:'createdOn'">
+
+					<div ng-show="activity.completedOn">
+
+						<span ng-show="activity" ng-switch="activity.result.action">
+							<span ng-switch-when="approve"><i class="glyphicon glyphicon-ok"></i> Approved</span>
+							<span ng-switch-when="reject"><i class="glyphicon glyphicon-remove"></i> Rejected</span>
+							<span ng-switch-default>*{{activity.result.action}}
+						</span>
+						<span> on {{activity.completedOn|date:'short'}} </span>
+					</div>
+					
+					<div ng-show="activity.canceledOn">
+						Canceled on {{activity.canceledOn|date:'short'}} 
+					</div>
+
+					<div ng-show="activity.failedOn">
+						Failed on {{activity.failedOn|date:'short'}}
+					</div>
+
+				</div>
+
+				<div ng-hide="workflow.activities">
+					
+					<div ng-show="workflow.completedOn">
+						Compledted on {{activity.completedOn|date:'short'}}
+					</div>
+					
+					<div ng-show="workflow.canceledOn">
+						Canceled on {{activity.canceledOn|date:'short'}} 
+					</div>
+
+					<div ng-show="workflow.failedOn">
+						Failed on {{activity.failedOn|date:'short'}}
+					</div>
+
+				</div>
+			</td>
+		</tr>
+	</table>
+
+	<div ng-show="workflows.length==0">
+		No Completed Request
+	</div>
+</div>
