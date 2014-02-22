@@ -163,7 +163,7 @@ border-radius: 3px;
 	padding:0;
 	white-space: nowrap;
 }
-.main-link{
+.main-link > div{
 	padding-top:20px;
 }
 .small > .main-link{
@@ -171,6 +171,14 @@ border-radius: 3px;
 	padding-bottom: 10px;
 }
 .main-link > a{
+	font-size: 26px;
+	font-family: 'alternategotno3dotregular';
+	color: #666;
+	line-height: 24px;
+	text-decoration: none;
+	padding-top:20px;
+}
+.main-link {
 	font-size: 26px;
 	font-family: 'alternategotno3dotregular';
 	color: #666;
@@ -186,8 +194,9 @@ border-radius: 3px;
 	text-decoration: none;
 }
 
-.main-link > a:hover, a:focus{color:black;}
+.main-link > a:hover, a:focus {color:black;}
 
+.main-link:hover, .main-link:focus {color:black;}
 .small > .main-side-link {
 	padding-top: 5px;
 	border-left:1px solid #DDD;
