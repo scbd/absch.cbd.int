@@ -12,7 +12,7 @@
 
   <div>        
               <p></p>     
-              <a ng-click="tab('dashboard')" class="btn btn-lg btn-default btn-abs btn-all btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='dashboard'}"  href="#" role="button">Dashboard » </a>
+              <a ng-click="tab('dashboard')" class="btn btn-lg btn-default btn-abs btn-all btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='dashboard'}"  href="#" role="button">DASHBOARD » </a>
           
               <h3>National Records</h3>
 
@@ -72,11 +72,13 @@
    
           <div ng-show="tab()=='dashboard'" class="col-md-9 well well-registerpage">
 
-            <h2><span style="color: #428BCA; font-weight: bold;font-size:180%;">ABSCH-DASHBOARD</span> Vestibulum rutrum lacus at metus auctor bibendum. </h2>
+            <h2><span style="color: #428BCA; font-weight: bold;font-size:180%;">ABSCH-DASHBOARD</span> Check the status of your work in the ABS-CH </h2>
 
             <p>
-              Ut interdum nec nisl at volutpat. In quis molestie lectus, non mattis eros. Cras eget urna nibh. Integer interdum arcu erat. Mauris pulvinar ullamcorper lorem. Curabitur tincidunt dictum urna, nec scelerisque massa posuere et. Ut ac lacus est. Donec congue lobortis congue. Nullam vitae tincidunt nisl. Cras nibh ligula, iaculis id condimentum ut, aliquet in arcu. Cras ut sollicitudin justo. Duis tristique lobortis sem at mollis. Maecenas ut mauris quis quam eleifend vehicula. Nam eget sem egestas, ultrices est et, consequat augue.              
-            </p>
+              
+              The dashboard is a personal working area where it will be possible to follow-up the status of records prepared for their publication in the ABS-CH. The content of the dashboard will differ depending on the role assigned in the ABS-CH (publishing authority or national authorized user). <br><br>
+              In this area you can check whether there are items that require your approval (in the case of the publishing authority) or what is the status of records sent for validation of the publishing authority (in the case of national authorized users).           
+               </p>
 
             <div ng-hide="isAuthenticated">
               <a ng-show="!isAuthenticated" ng-click="signIn('dashboard')" class="btn btn-info">
