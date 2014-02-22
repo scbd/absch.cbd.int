@@ -22,8 +22,7 @@
 
             <div class="col-lg-8 col-md-12" id="helpTip2">
                 <ul class="pagination">
-                    <li ng-class="{ disabled: tab=='help'           }"><a href="" ng-click="tab=prevTab">&laquo;</a></li>
-                    <li ng-class="{ active  : tab=='help'           }"><a href="" ng-click="tab='help'">Introduction</a></li>
+                    <li ng-class="{ disabled: tab=='edit'           }"><a href="" ng-click="tab=prevTab">&laquo;</a></li>
                     <li ng-class="{ active  : tab=='edit'           }"><a href="" ng-click="tab='edit'" >General</a></li>
                     <li ng-class="{ active  : tab=='absch'          }"><a href="" ng-click="tab='absch'">ABS</a></li>
                     <li ng-class="{ active  : tab=='additionalInfo' }"><a href="" ng-click="tab='additionalInfo'">Additional Information</a></li>
@@ -41,42 +40,14 @@
 
         </div>
 
-        <form name="editForm" style="margin-top: 10px">
+        <form class="editForm" name="editForm" style="margin-top: 10px">
 
-            <div ng-show="tab=='help'">
-
-                <span class="help-block">
-                    <h4><i>Introduction</i></h4>
-                    Article 13 of the Nagoya Protocol requires the designation of one or more competent national authorities on access and benefit-sharing. This information shall be made available to the Access and Benefit-Sharing Clearing-House (ABS-CH) in accordance with Article 14, paragraph 2(b), of the Nagoya Protocol on Access and Benefit-sharing.<br />
-                </span>
-
-
-                <span class="help-block">
-                    <h4><i style="color: #5cb85c;">Help using this online form</i></h4>
-                    <a ng-click="CallMe(1);"><span style="color: #5cb85c;"><i>1.</i> How to save this record</span></a><br />
-                    <a ng-click="CallMe(2);"><span style="color: #5cb85c;"><i>2.</i> How to add or remove offical languagues</span></a><br />
-                    <a ng-click="CallMe(3);" ><span style="color: #5cb85c;"><i>3.</i> How navigate pages of the form</span></a><br />
-                </span>
-
-            </div>
 
 
             <div ng-show="tab=='edit'" km-tab="edit">
 
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Take a tour of the "General" Information section</h3>
-                    </div>
-                    <div class="panel-body">
-                        <a ng-click="CallMe(4);"><span style="color: #5cb85c;"><i>1.</i> Before starting first ensre the relevant contact people for this CNA are already submitted.</span></a><br />
-                        <a ng-click="CallMe(5);"><span style="color: #5cb85c;"><i>2.</i> General information section</span></a><br />
-                        <a ng-click="CallMe(6);"><span style="color: #5cb85c;"><i>3.</i> Coordinates section</span></a><br />
-                    </div>
-                </div>
-
-
-                <div id="helpTip5">
-                    <legend>General information <span class="pull-right" style="padding-right:10px;font-size:80%;"><a ng-click="CallMe(5);">help</a></span></legend>
+                
+                    <legend>General information</legend>
 
                     <div class="row">
                         <div class="col-xs-12">
@@ -86,6 +57,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="km-control-group" name="name" required caption="Name of the Competent National Authority">
@@ -93,18 +65,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
+               
 
-                <div id="helpTip4">
-                    <legend>Contact Person Information  <span class="pull-right" style="padding-right:10px;font-size:80%;"><a ng-click="CallMe(4);">help</a></span></legend>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="km-control-group" name="contacts" required caption="Contact person">
-                                <field-embed-contact multiple ng-model="$parent.document.contacts" locales="$parent.document.header.languages" caption="Add an organisation or a contact »"></field-embed-contact>
-                            </div>  
-                        </div>
-                    </div>
-                </div>
 
                 <legend>Coordinates</legend>
                 <div class="row">
@@ -176,6 +138,15 @@
                         </div>
                     </div>
                 </div>
+
+                 <legend>Additional Contact Person Information </legend>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" name="contacts" required caption="Contact person">
+                                <field-embed-contact multiple ng-model="$parent.document.contacts" locales="$parent.document.header.languages" caption="Add an organisation or a contact »"></field-embed-contact>
+                            </div>  
+                        </div>
+                    </div>
 
 
             </div>
@@ -294,8 +265,7 @@
 
             <div class="col-lg-8 col-md-12" id="helpTip2">
                 <ul class="pagination">
-                    <li ng-class="{ disabled: tab=='help'           }"><a href="" ng-click="tab=prevTab">&laquo;</a></li>
-                    <li ng-class="{ active  : tab=='help'           }"><a href="" ng-click="tab='help'">Introduction</a></li>
+                    <li ng-class="{ disabled: tab=='edit'           }"><a href="" ng-click="tab=prevTab">&laquo;</a></li>
                     <li ng-class="{ active  : tab=='edit'           }"><a href="" ng-click="tab='edit'" >General</a></li>
                     <li ng-class="{ active  : tab=='absch'          }"><a href="" ng-click="tab='absch'">ABS</a></li>
                     <li ng-class="{ active  : tab=='additionalInfo' }"><a href="" ng-click="tab='additionalInfo'">Additional Information</a></li>

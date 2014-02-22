@@ -13,7 +13,7 @@ require("app").directive("editAuthority", [function () {
 			$scope.status   = "";
 			$scope.error    = null;
 			$scope.document = null;
-			$scope.tab      = "help";
+			$scope.tab      = "edit";
 			$scope.review   = { locale : "en" };
 			$scope.options  = {
 				countries					: function () { return $http.get("/api/v2013/thesaurus/domains/countries/terms",            { cache: true }).then(function(o){ return $filter("orderBy")(o.data, "name"); }); },
@@ -36,47 +36,7 @@ require("app").directive("editAuthority", [function () {
 		    $scope.ChangeEvent = function () { console.log("Change Event called"); };
 		    $scope.BeforeChangeEvent = function () { console.log("Before Change Event called"); };
 
-		    $scope.IntroOptions = {
-		        steps: [
-
-                    {
-                        element: "#helpTip1",
-                        intro: "save as draft or save for real",
-                        position: "right"
-                    },
-                    {
-		                element: "#helpTip1",
-		                intro: "official languages",
-		                position: "left"
-		            },
-                    
-                    {
-                        element: "#helpTip2",
-                        intro: "form page navigation",
-                        position: "bottom"
-                    },
-                    {
-                        element: "#helpTip4",
-                        intro: "Check to see if they have been added. If not, first <a target='_new_contact_' href='/managementcentre/edit/contact'>click here to add them.</a> (new window)",
-                        position: "left"
-                    },
-                    {
-                        element: "#helpTip5",
-                        intro: "general info section. Enter the name of the CNA here.",
-                        position: "left"
-                    }
-		        ],
-		        showStepNumbers: false,
-		        exitOnOverlayClick: true,
-		        exitOnEsc: true,
-		        nextLabel: "<strong>next</strong>",
-		        prevLabel: "<span style='color:green'>Previous</span>",
-		        skipLabel: "Exit",
-		        doneLabel: "Done",
-		        showButtons: false,
-		        showBullets:false
-
-		    };
+		    
 
 
 		    //==================================
@@ -126,7 +86,7 @@ require("app").directive("editAuthority", [function () {
 
 				$q.when(qDocument).then(function(doc) {
 
-					$scope.tab    = "help";
+					$scope.tab    = "edit";
 					$scope.status = "ready";
 					$scope.document = doc;
 

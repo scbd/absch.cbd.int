@@ -38,11 +38,11 @@
 
         </div>
 
-		<form name="editForm" style="margin-top:10px">
+		<form class="editForm" name="editForm" style="margin-top:10px">
 
 			<div ng-show="tab=='edit'" km-tab="edit">
 
-				<span class="help-block"><i>Introduction</i><br /><br />This common format is to be used for legislative, administrative and policy measures on access and benefit-sharing. This information shall be made available to the Access and Benefit-Sharing Clearing-House (ABS-CH) in accordance with Article 14, paragraph 2(a), of the Nagoya Protocol on Access and Benefit-sharing. <br /> <br /> Access and benefit-sharing measures may include national or regional strategies, policies, legislation or regulations. They may also include measures undertaken at the regional, national, sub-national or community level.</span>
+			<!-- 	<span class="help-block"><i>Introduction</i><br /><br />This common format is to be used for legislative, administrative and policy measures on access and benefit-sharing. This information shall be made available to the Access and Benefit-Sharing Clearing-House (ABS-CH) in accordance with Article 14, paragraph 2(a), of the Nagoya Protocol on Access and Benefit-sharing. <br /> <br /> Access and benefit-sharing measures may include national or regional strategies, policies, legislation or regulations. They may also include measures undertaken at the regional, national, sub-national or community level.</span> -->
 
 				<legend>General information</legend>
 				<div class="row">
@@ -53,21 +53,23 @@
 						</div>
 					</div>
 				</div>
+				
 				<div class="row">
 					<div class="col-sm-12">
-						<div class="km-control-group" required name="title" caption="Legislative administrative or policy measures on access and benefit-sharing">
+						<div class="km-control-group" required name="title" caption="Title of the legislative administrative or policy measures on access and benefit-sharing">
 							<div km-textbox-ml required ng-model="document.title" locales="document.header.languages"></div>
 						</div>
 					</div>
 				</div>
-
+				<hr>
 				<div class="row">
 					<div class="col-sm-12">
-						<div class="km-control-group" required name="jurisdiction" caption="Jurisdiction">
+						<div class="km-control-group" required name="jurisdiction" caption="Area of jurisdiction">
 							<div km-select required name="jurisdiction" ng-model="document.jurisdiction" items="options.jurisdiction()"></div>
 						</div>
 					</div>
 				</div>
+
 				<div class="row" ng-show="isJurisdictionRegional()">
 					<div class="col-sm-12">
 						<div class="km-control-group" required name="jurisdictionRegions" caption="Country name and/or Geographical or political/economic group(s)">
@@ -82,7 +84,7 @@
 						</div>
 					</div>
 				</div>
-				
+				<hr>
 				<div class="row">
 					<div class="col-sm-12">
 						<div required class="km-control-group" name="status" caption="Legal status of the measure">
@@ -90,6 +92,7 @@
 						</div>
 					</div>
 				</div>
+
 				<div class="row" ng-show="isNotLegallyBinded()">
 					<div class="col-sm-12">
 						<div class="km-control-group" name="adoption" required caption="Please provide the date of adoption">
@@ -97,6 +100,7 @@
 						</div>
 					</div>
 				</div>
+
 				<div class="row" ng-show="isLegallyBinded()">
 					<div class="col-sm-12">
 						<div class="km-control-group" name="entryIntoForce" required caption="Please provide the date of entry into force">
@@ -111,6 +115,7 @@
 						</div>
 					</div>
 				</div>
+				<hr>
 				<div class="row" >
 					<div class="col-sm-12">
 						<div class="km-control-group" name="limitedApplication" caption="Indicate if the measure has a limited application in time">
@@ -118,15 +123,25 @@
 						</div>
 					</div>
 				</div>
+				<hr>
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="km-control-group" required name="type" caption="Type of document/measure">
-						<span class="help-block">A law is usually legislation (a statute) enacted by state government; a regulatory or administrative measure is usually an act or process of controlling by rule or restriction, having legal force, issued by an administrative agency or a local government; guidelines are usually a document by which to determine a course of action, sometimes aims to streamline particular processes according to a set routine or sound practice; a strategy and/or action plan provides direction for future activities. Other types of policy measures might include a set of principles, research subsidies and incentives, voluntary agreements, etc. Explanatory information may include explanatory memoranda, flow charts that describe national ABS processes, or summary of the national framework in place or being developed in a country.</span>
+						<span class="help-block">
+							<ul>
+								<li><strong>Law:</strong> A law is usually legislation (a statute) enacted by state government;</li>
+								<li><strong>Regulatory or administrative measure:</strong> A regulatory or administrative measure is usually an act or process of controlling by rule or restriction, having legal force, issued by an administrative agency or a local government;</li>
+								<li><strong>Guidelines:</strong> Guidelines are usually a document by which to determine a course of action, sometimes aims to streamline particular processes according to a set routine or sound practice;</li>
+								<li><strong>Strategy and/or action plan:</strong> A strategy and/or action plan provides direction for future activities.</li>
+								<li><strong>Policy document</strong> Other types of policy measures might include a set of principles, research subsidies and incentives, voluntary agreements, etc. </li>
+								<li><strong>Explanatory information:</strong> Explanatory information may include explanatory memoranda, flow charts that describe national ABS processes, or summary of the national framework in place or being developed in a country.</li>
+						  	</ul>
+						  	</span>
 							<div km-select name="type" required ng-model="document.type" items="options.typeOfDocuments()"></div>
 						</div>
 					</div>
 				</div>
-
+				<hr>
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="km-control-group" name="description" caption="Brief description of the document including  objective and scope (max. 300 words)">
@@ -134,7 +149,7 @@
 						</div>
 					</div>
 				</div>
-
+				<hr>
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="km-control-group" name="amendedMeasures" caption="List of amended measures">
@@ -156,6 +171,7 @@
 						</div>
 					</div>
 				</div>
+				
 
 				<legend>Document details</legend>
 				<div class="row">
@@ -165,7 +181,7 @@
 						</div>
 					</div>
 				</div>
-
+				<hr>
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="km-control-group" name="documentTranslations" caption="Translation">
@@ -173,7 +189,7 @@
 						</div>
 					</div>
 				</div>
-
+				<hr>
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="km-control-group" name="linkedMeasures" caption="Relationship with other measures">
@@ -195,7 +211,7 @@
 						</div>
 					</div>
 				</div>
-
+				<!-- <hr>
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="km-control-group" name="otherDocuments" caption="Any other relevant information">
@@ -211,7 +227,7 @@
 						</div>
 					</div>
 				</div>
-
+ -->
 				<legend>Regulatory contact information</legend>
 				<div class="row">
 					<div class="col-sm-12">
@@ -241,7 +257,7 @@
 						</div>
 					</div>
 				</div>
-
+				<hr>
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="km-control-group" name="notes" caption="Notes">
