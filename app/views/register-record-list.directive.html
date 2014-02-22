@@ -37,9 +37,9 @@
         {{(record.workingDocumentTitle||record.title)|lstring}}
       </td>
       <td class="text-right" style="vertical-align:middle">
-        <span ng-show="isPublished(record)" class="btn btn-xs btn-success" title="Published">P</span>
-        <span ng-show="isRequest(record)"   class="btn btn-xs btn-danger" title="Request">R</span>
-        <span ng-show="isDraft(record)"     class="btn btn-xs btn-default btn-draft" title="Draft" style="color:#fff">D</span>
+        <a ng-show="isPublished(record)" href="/database/record?documentID={{record.documentID}}" class="btn btn-xs btn-success" title="Published">P</a>
+        <a ng-show="isRequest(record)"   class="btn btn-xs btn-danger" title="Request">R</a>
+        <a ng-show="isDraft(record)"     ng-click="edit(record)" class="btn btn-xs btn-default btn-draft" title="Draft" style="color:#fff">D</a>
       </td>
       <td class="text-right" style="width:100px" >
         <div class="btn-group">
