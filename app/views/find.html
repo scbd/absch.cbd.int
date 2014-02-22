@@ -35,7 +35,15 @@
                             <input type="text" ng-model="keyword" placeholder=" Keyword " class="form-control keyword" style="height: 26px; margin-top: 12px; margin-right: 5px; width: 160px;"></li>
                     </ul>
                 </div>
-                <div style="background-color: #dedede; padding: 5px 20px;margin:0;">
+
+            </div>
+      </div>
+    </div>
+
+    <div class="container">
+    <div class="row">
+    <div class="col-md-12">
+                <div style="padding: 5px 20px;margin:0;">
                  <!--    <div class="row">
                     <div class="col-md-12" style="padding-top:0; margin-top:0;">
                       <h3>National Records</h3>
@@ -67,7 +75,89 @@
                         </li>
                     </ul>
                     <div class="clearfix"></div>
+
+
+<style type="text/css">
+ .doc-title{
+    font-weight: bold;
+    font-size: 110%;
+
+  }
+  .doc-title:focus, .doc-title:hover{ 
+    color:#000;
+
+  }
+</style>
+               
+        <div><!-- Example National Records  -->   
+          <table style="width:100%;padding:0;margin:0;">
+            <tr style="padding:0;margin:0;line-height:13px;">
+              <td style="padding:0;margin:0;width:5px;background-color:#000;"></td>
+              <td colspan="2" style="padding:0;margin:0;background-color:#fff;">
+                <span style="display:inline;line-height:10px;color:#555;font-weight:bold;text-transform:uppercase;padding:0;margin:0;position:relative;left:10px;">ABSCH-MSR | 
+                <span style="color:#999;font-size:12px;font-weight:bold;" > Canada </span> |
+                <span style="color:#999;font-size:12px;font-weight:normal;"> legislation </span> |
+                <span style="color:#999;font-size:12px;font-weight:normal;"> sub-national </span> | 
+                <span style="color:#999;font-size:12px;font-weight:bold;" > Date </span> 
+                </span>
+                </td>
+            </tr>
+            <tr>
+              <td rowspan="4" style="width:10px;background-color:#428bca;"></td>
+              <td style="padding:0;margin:0;padding-left:10px;padding-top:7px;font-size:110%;">
+                <a href="" class="doc-title" style="font-weight:bold;">This is the title of the measure</a>
+              </td>
+             <!--  <td rowspan="4" style="width:5px;background-color:#999;padding:5px;margin:0;">V</td> -->
+            </tr>
+            <tr>
+              <td style="padding:0;margin:0;padding-left:10px; color:#999; line-height:12px;">
+              Turiasp ereicid ut volor aut que expercitia cus, omnis a si dolessu ntibus ut et ilis dolupti reroIta nusandit volut omniam, ommoditia di qui commoluptat offici consecum del in cuptati nvenda consequis accum erum et que voloreiciis vella aspe volo quatiae andi temporit.
+              </td>
+
+            </tr>
+          </table>
+        </div> <!-- end national record -->
+
+        <br>
+
+         <div><!-- Example reference Records  -->   
+          <table style="width:100%;padding:0;margin:0;">
+            <tr style="padding:0;margin:0;line-height:13px;">
+              <td style="padding:0;margin:0;width:5px;background-color:#000;"></td>
+              <td colspan="2" style="padding:0;margin:0;background-color:#fff;">
+                <span style="display:inline;line-height:10px;color:#555;font-weight:bold;text-transform:uppercase;padding:0;margin:0;position:relative;left:10px;">ABSCH-VLR | 
+                <span style="color:#999;font-size:12px;font-weight:bold;" > Canada </span> |
+                <span style="color:#999;font-size:12px;font-weight:normal;"> case study </span> |
+                <span style="color:#999;font-size:12px;font-weight:bold;" > Date </span> 
+                </span>
+                </td>
+            </tr>
+            <tr>
+              <td rowspan="4" style="width:10px;background-color:#ed9c28;"></td>
+              <td style="padding:0;margin:0;padding-left:10px;padding-top:7px;font-size:110%;">
+                <a href="" class="doc-title" style="font-weight:bold;">This is the title of the reference record</a>
+              </td>
+             <!--  <td rowspan="4" style="width:5px;background-color:#999;padding:5px;margin:0;">V</td> -->
+            </tr>
+            <tr>
+              <td style="padding:0;margin:0;padding-left:10px; color:#999; line-height:12px;">
+              Turiasp ereicid ut volor aut que expercitia cus, omnis a si dolessu ntibus ut et ilis dolupti reroIta nusandit volut omniam, ommoditia di qui commoluptat offici consecum del in cuptati nvenda consequis accum erum et que voloreiciis vella aspe volo quatiae andi temporit.
+              </td>
+
+            </tr>
+          </table>
+        </div> <!-- end reference record -->
+
+
+
+
                     <div ng-repeat="document in documents">
+
+
+
+
+
+
                         <div style="font-size:10px;color:#777">{{document.schema}} <span ng-show="document.source">|</span> 
                             <strong ng-if="!document.sourceTooltip" style="color:#222">{{document.source}}</strong>
                             <a ng-if="document.sourceTooltip" href="#" tooltip data-toggle="document.tooltip" title data-original-title="{{document.sourceTooltip}}" style="color:#428bca"><strong>{{document.source}}</strong></a>
@@ -113,7 +203,8 @@
                   <div class="col-md-2 filters"><a href="#">Date Range <b class="caret"></b></a></div>
                   <div class="col-md-3 filters"><input type="text" placeholder=" Keyword " class="form-control keyword" style="height:26px;margin-top:12px;margin-right:5px;width:160px;" ></div>
               </div> -->
-        </div>
-    </div>
 
+       </div> <!-- end col        -->
+   </div> <!-- end row -->
+</div> <!-- end container -->
 </div>
