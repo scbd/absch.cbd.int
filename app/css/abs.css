@@ -26,12 +26,6 @@ body{
   font-size:14px;
   line-height:26px;
 }
-
-.home-col > p > a:hover, a:focus{
-
-	color:black;
-}
-
 h4, h5, h6 {
       font-family:Tahoma, Trebuchet MS, "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-rendering: optimizeLegibility;
