@@ -17,7 +17,10 @@
     font-weight: normal;
     font-style: normal;
 }
-
+.home-col > p > a:hover, a:focus{
+ 
+	color:black;
+}
 
 body{
   min-height:800px;
