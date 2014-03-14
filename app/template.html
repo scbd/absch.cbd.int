@@ -44,11 +44,11 @@
                     <a href="mailto:absch@cbd.int" class="pull-right" style="padding-left:20px;">
                         <span class="glyphicon glyphicon-envelope"></span> 
                      </a>
-                            <div ng-cloak ng-show="user && user.isAuthenticated" class="account-signin pull-right">
+                            <div ng-cloak ng-show="user && !user.isAuthenticated" class="account-signin pull-right">
                                 <a class="signin" href="#" ng-click="actionSignin()" data-slug="signin">
                                 <i class="fa fa-power-off"></i> <strong>sign in</strong></a></div>
 
-                            <div ng-cloak class="dropdown" ng-show="user && !user.isAuthenticated">
+                            <div ng-cloak class="dropdown" ng-show="user && user.isAuthenticated">
                                 <a data-toggle="dropdown" href="#" class="account-name pull-right">
                                     <i class="fa fa-chevron-down" style="font-size:15px"></i> {{user.name}}</a>
                                 <ul class="dropdown-menu pull-right" role="menu" style="position:relative;top:3px;left:140px;">
