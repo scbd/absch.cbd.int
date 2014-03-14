@@ -15,7 +15,6 @@ require('app').directive('searchFilterCountries', function ($http) {
         controller : ['$scope', '$element', '$location', function ($scope, $element, $location)
         {
             $scope.alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
-
             $scope.expanded = false;
             $scope.selectedItems = [];
             $scope.facet = $scope.field.replace('_s', ''); // TODO: replace @field by @facet

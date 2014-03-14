@@ -1,0 +1,41 @@
+  .right-links{
+
+  }
+  .right-links > ul{
+    list-style: none;
+    padding: 5px;
+    margin: 0;
+
+    }
+    .right-links > ul > li{
+      white-space: nowrap;
+     }
+   .right-links > ul > li > a:hover, a:focus{
+      color:black;
+      text-decoration: none;
+    }
+    .right-links > ul > li > a.active{
+      border-left: #FA6938 solid 3px;
+      padding-left:5px;
+      color:#111;
+    }
+
+  .main-content{
+
+
+  }
+    .main-content > h1{
+     border-bottom: 1px solid #bbb;
+     margin-bottom: 0;
+     padding-bottom: 0;
+  }
+  .main-content > .content{
+    padding: 20px;
+    background-color: #ddd;
+  }
+  .main-content > p{
+
+  }
+  .backtotop{
+    padding-top:20px;
+  }

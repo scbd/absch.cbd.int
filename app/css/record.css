@@ -1,0 +1,41 @@
+label{
+	 display: inline;
+	 padding:10px 10px 10px 0;
+	 /*background-color: #fff;*/
+
+}
+
+.km-value{
+	color:#333;
+	display: inline;
+}
+
+.record-body{
+	background-color: #fff;
+	padding:0 20px 20px 20px;
+}
+
+.record div {
+	padding-top:10px;
+}
+.record ul{padding: 0;margin: 0;}
+.record ul > li {padding: 0;margin: 0; margin-left:20px;}
+
+.record h5{ font-weight: bold;}
+
+.record-metadata{
+	/*background-color:#ed9c28;*/
+	background-color:#efefef;
+/*	color:#fff;
+*/	padding:30px;
+}
+
+.record-metadata div{
+	padding:0;
+	margin:0;
+}
+.record-body legend{
+	font-size: 14px;
+	font-weight: bold;
+	padding-top: 20px;	
+}

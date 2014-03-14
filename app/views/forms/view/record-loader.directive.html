@@ -2,19 +2,21 @@
 
 	<style>legend {width: 98%;}</style>
 
-	<div class="alert alert-error" ng-show="error">
+	<div class="alert alert-error text-center" ng-show="error" >
 		<strong>Error as occured...</strong>
 		<div>{{error}}</div>
 	</div>
 
-	<div ng-show="!error && internalDocument" style="padding-bottom:50px;">
+	<div ng-show="!error && internalDocument">
 		<div style="float:right">
 			<button  type="button" class="btn" ng-click="edit()" ng-show="user().isAuthenticated" ng-disabled="!canEdit()">Edit</button>
 		</div>
 
-		<!-- <h1>{{internalDocument.header.schema|schemaName}}</h1> -->
+<!-- 	<h1>{{internalDocument.type}}</h1> -->
 
-		<div ng-switch on="internalDocument.header.schema">
+		 <!-- {{internalDocument}}   -->
+
+		<div ng-switch on="internalDocument.header.schema" >
 			<div view-authority						ng-switch-when="authority"					ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
 			<div view-contact						ng-switch-when="contact"					ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
 			<div view-database						ng-switch-when="database"					ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
@@ -24,7 +26,12 @@
 			<div view-abs-checkpoint				ng-switch-when="absCheckpoint"				ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
 			<div view-abs-checkpoint-communique		ng-switch-when="absCheckpointCommunique"	ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
 			<div view-abs-permit					ng-switch-when="absPermit"					ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
-			<div ng-switch-default>Unsupported internalSchema: '{{internalDocument.header.schema}}'</div>
+
+			<div ng-switch-default>
+				<div class="text-center"><h1 style="color:#fa6938"><i class="fa fa-spinner fa-spin"></i></h1></div>
+					
+			</div>
 		</div>
 	</div>
+	<!-- <div view-other	ng-model="internalDocument"  locale="getLocale()" link-target={{linkTarget}} ></div> -->
 </div>

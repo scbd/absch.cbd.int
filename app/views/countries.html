@@ -1,11 +1,11 @@
+<link href="/app/css/country.css" rel="stylesheet">
 <script src="/app/views/countries.html.js"></script>
 
 
 <div ng-controller="CountriesController">
     <div class="category-container" >
         <div class="container">
-            <span class="category"><span class="glyphicon glyphicon-globe"></span>&nbsp;Country Profiles</span>
-
+            <span class="category">
               <div class="row"  >
                   <div class="span12">
 
@@ -86,7 +86,7 @@
              <i ng-show="sortTerm=='treaties.XXVII8b.instrument'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span></th>
             <th style="white-space:nowrap;"><span style="cursor:pointer;" ng-click="sortTable('treaties.XXVII8b.deposit')">Deposit 
              <i ng-show="sortTerm=='treaties.XXVII8b.deposit'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span></th>
-            <th>Entry into force</th>
+            <!-- <th>Entry into force</th> -->
           </tr>
           <tr ng-repeat="country in countries | orderBy:sortTerm:orderList" ng-class="{'success' : (country.treaties.XXVII8b.instrument=='ratification' ||  country.treaties.XXVII8b.instrument=='accession' ||  country.treaties.XXVII8b.instrument=='acceptance')}">
             <td>{{$index + 1}}</td>
@@ -94,7 +94,7 @@
             <td>{{country.treaties.XXVII8b.signature}}</td>
             <td>{{country.treaties.XXVII8b.instrument}}</td>
             <td>{{country.treaties.XXVII8b.deposit}}</td>
-            <td>{{country.treaties.XXVII8b.party}}</td>
+            <!-- <td>{{country.treaties.XXVII8b.party}}</td> -->
           </tr>
         </table>
 

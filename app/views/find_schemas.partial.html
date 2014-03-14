@@ -1,20 +1,27 @@
-<li>
-    <a data-toggle="modal" href="#dialogSelectSchemas">{{title}}&nbsp;<b class="caret"></b></a>
+<div>
+    <a ng-click="showSelect=!showSelect" class="filter-title" style="text-decoration:none;color:#111;">{{title}}&nbsp; 
+        <i ng-class="{'fa fa-caret-down':!showSelect, 'fa fa-caret-up':showSelect}" ></i></a>
+    
     <div class="list-group-item-expand">
         <div ng-repeat="item in terms | orderBy:'title' | filter:{selected:true}" ng-class="ccc(item)" ng-click="onclick(this, $event)">
-            <div class="label label-default truncate" style="cursor:pointer">
-               <!--  <div style="position:absolute;right:6px;top:6px" class="icon-remove-sign"></div> -->
-                    {{item.title}} ({{item.count}})
+            <div class="filter-selected truncate" style="cursor:pointer">
+                <i class="glyphicon glyphicon-remove-circle"></i> {{item.title}} ({{item.count}})
             </div>
         </div>
     <div>
+
     <!--Save Dialog-->
-    <div id="dialogSelectSchemas" class="modal fade">
-        <div class="modal-dialog"><!--  ;margin-left:-380px"  -->
-            <div class="modal-content" style="width:640px">
-                <div class="modal-body" style="padding-left:20px">
-                    <table width="100%"><tr>
-                    <td width="50%">
+    <div ng-show="showSelect" >
+        <div class="filter-options well">
+            <div>
+                <div style="padding-left:20px">
+
+                 <div class="pull-right" >
+                     <a ng-click="showSelect=!showSelect" style="text-decoration:none;" ><i class="glyphicon glyphicon-remove-circle"></i> Close</a>
+                </div>
+
+                    <table width="100%" ><tr>
+                    <td width="50%" class="national-records">
                         <h4>National Records</h4>
                         <div class="checkbox"><label>
                             <input type="checkbox" ng-model="focalpoint.selected" bind-indeterminate="focalpoint.indeterminate" ng-change="refresh()">
@@ -45,22 +52,22 @@
                             Checkpoint Communiqués ({{absCheckpointCommunique.count}})
                         </label></div>
                     </td>
-                    <td width="50%">
+                    <td width="50%" class="reference-records">
                         <h4>Reference Records</h4>
                         <div class="checkbox"><label>
                             <input type="checkbox" ng-model="resource.selected" bind-indeterminate="resource.indeterminate" ng-change="refresh()">
                             Virtual Library Records ({{resource.count}})
                         </label></div>
-                        <div class="checkbox"><label>
+                      <!--   <div class="checkbox"><label>
                             <input type="checkbox" ng-model="organization.selected" bind-indeterminate="organization.indeterminate" ng-change="refresh()">
                             ABS Related Organizations ({{organization.count}})
-                        </label></div>
+                        </label></div> -->
                         <div class="checkbox"><label>
                             <input type="checkbox" ng-model="meeting.selected" bind-indeterminate="meeting.indeterminate" ng-change="refresh()">
                             Meetings &amp; Meeting Outcomes ({{meeting.count}})
                         </label></div>
 
-                        <h4>Releases</h4>
+                        <h4>&nbsp;</h4>
                         <div class="checkbox"><label>
                             <input type="checkbox" ng-model="notification.selected" bind-indeterminate="notification.indeterminate" ng-change="refresh()">
                             Notifications ({{notification.count}})
@@ -76,9 +83,7 @@
                     </td>
                     </tr></table>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+               
             </div>
         </div>
     </div>
@@ -100,4 +105,4 @@
             color: #000;
         }
     </style>
-</li>
+</div>

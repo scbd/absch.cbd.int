@@ -1,0 +1,9 @@
+.feeds * {
+	padding:0;
+	margin:0;
+}
+
+.feeds > ul > li{
+	
+	list-style: none;
+}

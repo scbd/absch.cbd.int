@@ -1,3 +1,5 @@
+<link href="/app/css/index.css" rel="stylesheet">
+<link href="/app/css/carousel.css" rel="stylesheet">
 <script src="/app/views/index.html.js"></script>
 <div ng-controller="IndexController">
                                        
@@ -104,10 +106,8 @@
 
 
 
-
-
 <div class="container">
-    <div class="row" style="min-height: 300px;">
+    <div class="row" >
 
         <div class="col-md-4">
             <div class="home-col">
@@ -116,21 +116,69 @@
             </div>
         </div>
 
-        <div class="col-md-4">
+          <div class="col-md-4">
             <div class="home-col">
-                <h3 class="headline1"><a href="">Development of the pilot phase</a></h3>
-                <p>The ABS-CH is currently in its pilot phase and needs your participation and feedback so that it can be fully operational by the time of entry into force of the Nagoya Protocol.
-               	 </p>		
-                <p>
-                	<a href="http://absch.tumblr.com/">Follow our development <strong>blog</strong> here</a>
-                </p>
+                <h3 class="headline1"><a href="">Participate.</a></h3>
+                <p>The value of the ABS-CH lays in the information published by Parties and others. For the ABS-CH to become an important tool for implementing the Protocol and enhancing transparency, certainty and clarity on access and benefit-sharing, information published by Parties and others needs to be comprehensive and reliable.</p>
             </div>
         </div>
 
         <div class="col-md-4">
             <div class="home-col">
-                <h3 class="headline1"><a href="">Participate.</a></h3>
-                <p>The value of the ABS-CH lays in the information published by Parties and others. For the ABS-CH to become an important tool for implementing the Protocol and enhancing transparency, certainty and clarity on access and benefit-sharing, information published by Parties and others needs to be comprehensive and reliable.</p>
+                <h3 class="headline1"><a href="">Development of the pilot phase</a></h3>
+                <p>The ABS-CH is currently in its pilot phase and needs your participation and feedback so that it can be fully operational by the time of entry into force of the Nagoya Protocol.
+                 </p>       
+                <p>
+                    <a href="http://absch.tumblr.com/">Follow our development <strong>blog</strong> here</a>
+                </p>
+            </div>
+        </div>
+
+      
+
+    </div>
+</div>
+
+
+<hr>
+
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="home-col">
+                <h3>News from the development blog</h3>
+                    <div class="feeds">
+                    <ul>
+                        
+                        <li ng-repeat="feed in feeds | filter:filterText" style="padding-top:10px;">                 
+                            <h4><a href="{{feed.link}}" target="_new" style="color:#287fcb;font-size:14px;font-weight:bold;">{{feed.title}}</a></h4>                                        
+                            <p class="text-left">{{feed.contentSnippet}}</p>                  
+                            <span class="small" >{{feed.publishedDate | date:'dd MMM yyyy'}}</span>
+                        </li>                
+                    </ul>            
+                    </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="home-col">
+                <h3>Meetings</h3>
+                <div class="feeds">
+                    <ul>
+                        
+                        <li ng-repeat="meeting in meetings.response.docs" style="padding-top:10px;">  
+                             <span class="small" >{{meeting.startDate_s | date:'dd MMM'}} - {{meeting.endDate_s | date:'dd MMM yyyy'}} 
+                            </span>               
+                            <h4><a href="{{meeting.url_ss[0]}}" target="_new" style="color:#287fcb;font-size:14px;font-weight:bold;">
+                            {{meeting.title_t}}</a></h4>                                                         
+                            <span>
+                            <strong>{{meeting.eventCountry_EN_t}}</strong></span>
+                        </li>                
+                    </ul>            
+                    </div>
             </div>
         </div>
 
@@ -138,13 +186,11 @@
 </div>
 
 
+<hr>
 
 
-<div class="container">
-    <h3 style="border-bottom: 1px solid #999;">Information about the ABS-CH</h3>
+<div class="container" >
     <div class="row" style="min-height: 300px;">
-
-
         <div class="col-md-3">
             <div class="home-col">
                 <h3>Online Dicussion Forum</h3>
@@ -170,22 +216,7 @@
         </div>
 
     </div>
-
-    <div class="row">
-
-        <div class="col-md-6">
-            <div class="home-col">
-                <h3>News</h3>
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <div class="home-col">
-                <h3>Meetings</h3>
-            </div>
-        </div>
-
-    </div>
 </div>
+
 
 <br /><br />

@@ -1,36 +1,38 @@
-<li>
-	<a data-toggle="modal" href="#dialogSelectCountries">{{title}}&nbsp;<b class="caret"></b></a>
-	<!-- ng-class="{false:'not', true:'x'}[expanded] -->
-	<div class="list-group-item-expand">
-		<div ng-animate="'animate'" ng-repeat="item in terms | orderBy:'title' | filter:{selected:true}" ng-class="ccc(item)" ng-click="onclick(this, $event)">
-			<div class="label label-default truncate" style="cursor:pointer">
-				<div style="position:absolute;right:6px;top:6px" class="icon-remove-sign"></div>
-				<div class="">
-					{{item.title.en}} ({{item.count}})
-				</div>
-			</div>
-		</div>
-	<div>
+<div>
+	 <a ng-click="showSelect=!showSelect" class="filter-title" style="text-decoration:none;color:#111;">{{title | lstring:locale}}&nbsp; 
+        <i ng-class="{'fa fa-caret-down':!showSelect, 'fa fa-caret-up':showSelect}" ></i></a>
+    
+    <div class="list-group-item-expand">
+        <div ng-repeat="item in terms | orderBy:'title' | filter:{selected:true}" ng-class="ccc(item)" ng-click="onclick(this, $event)">
+            <div class="filter-selected truncate" style="cursor:pointer">
+                <i class="glyphicon glyphicon-remove-circle"></i> {{item.title | lstring:locale}} ({{item.count}})
+            </div>
+        </div>
+    <div>
+
 	<!--Save Dialog-->
-	<div id="dialogSelectCountries" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content" style="width:760px">
-				<div class="modal-body" style="padding-left:20px">
+	 <div ng-show="showSelect" >
+        <div class="filter-options well" style="position:relative;left:-190px;">
+			<div>
+				<di style="padding-left:20px">
+
+					<div class="pull-right" >
+                     <a ng-click="showSelect=!showSelect" style="text-decoration:none;" ><i class="glyphicon glyphicon-remove-circle"></i> Close</a>
+                	</div>
+
 					<div style="padding-bottom:10px">
 						<a style="padding-right:10px" ng-repeat="letter in alphabet">{{letter}}</a>
 					</div>
-					<div style="height:360px;overflow-y:auto">
+					<div style="height:200px;overflow-y:auto">
 						<div class="col-lg-4 col-md-4 col-sm-4" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" ng-repeat="item in terms | orderBy:'title.en'">
 							<div class="checkbox" style="margin-top:2px;margin-bottom:2px">
-								<label><input type="checkbox" ng-model="item.selected" ng-change="refresh()"> {{item.title.en}} ({{item.count}})</label>
+								<label class="country-options-title"><input type="checkbox" ng-model="item.selected" ng-change="refresh()"> {{item.title.en}} ({{item.count}})</label>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
+				
 			</div>
 		</div>
 	</div>
-</li>
+</div>

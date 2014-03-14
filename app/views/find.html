@@ -1,49 +1,58 @@
+<link href="/app/css/find.css" rel="stylesheet">
+<link href="/app/css/record.css" rel="stylesheet">
 <script src="/app/views/find.html.js"></script>
 <script src="/app/views/find_schemas.partial.html.js"></script>
 <script src="/app/views/find_countries.partial.html.js"></script>
 <script src="/app/views/find_facets.partial.html.js"></script>
 <script src="/app/views/find_themes.partial.html.js"></script>
+<script src="/app/views/forms/view/record-loader.directive.js"></script>
+
+<script src="/app/views/forms/view/view-abs-checkpoint.directive.js"></script>
+<script src="/app/views/forms/view/view-abs-checkpoint-communique.directive.js"></script>
+<script src="/app/views/forms/view/view-abs-permit.directive.js"></script>
+<script src="/app/views/forms/view/view-authority.directive.js"></script>
+<script src="/app/views/forms/view/view-authority-reference.directive.js"></script>
+<script src="/app/views/forms/view/view-contact.directive.js"></script>
+<script src="/app/views/forms/view/view-contact-reference.directive.js"></script>
+<script src="/app/views/forms/view/view-database.directive.js"></script>
+<script src="/app/views/forms/view/view-measure.directive.js"></script>
+<script src="/app/views/forms/view/view-organization.directive.js"></script>
+<script src="/app/views/forms/view/view-organization-reference.directive.js"></script>
+<script src="/app/views/forms/view/view-resource.directive.js"></script>
+<script src="/app/views/forms/view/view-other.directive.js"></script>
+
 
 <div ng-controller="FindController">
-    <div class="category-container" >
-        <div class="container">
-            <span class="category"><span class="glyphicon glyphicon-search"></span>&nbsp;Find Information</span>
-
-            <div class="navbar navbar-default" role="navigation" >
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                      <a class="navbar-brand navbar-brand-filter" href="#"><span class="label label-primary">Filters</span></a>
-                    </button>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav filters" style="width:100%;white-space:nowrap">
-                      <a class="navbar-brand navbar-brand-filter" href="#"><span class="label label-primary">Filters</span></a>
-                        <search-filter-schemas title='Document Types' ng-model='schemas' field='schema_s' query='querySchema'></search-filter-schemas>
-                        <search-filter-countries title='Countries' ng-model='governments' field='government_s' query='queryGovernment'></search-filter-countries>
-                        <!-- <li><search-filter-facets title='Aichi Targets' ng-model='aichiTargets' field='aichiTarget_REL_ss' query='queryTargets'></search-filter-facets></li> -->
-                        <search-filter-themes title='Thematic Areas' ng-model='thematicAreas' field='thematicArea_REL_ss' query='queryTheme'></search-filter-themes>
-                        <!-- <li><a href="#">National Records <b class="caret"></b></a></li> -->
-                        <!-- <li><a href="#">Reference Records <b class="caret"></b></a></li> -->
-                        <!-- <li><a href="#">Countries  <b class="caret"></b></a></li> -->
-                        <!-- <li><a href="#">Thematic Areas  <b class="caret"></b></a></li> -->
-                        <!-- <li><a href="#">Date Range <b class="caret"></b></a></li> -->
-                        <li>
-                            <input type="text" ng-model="keyword" placeholder=" Keyword " class="form-control keyword" style="height: 26px; margin-top: 12px; margin-right: 5px; width: 160px;"></li>
-                    </ul>
-                </div>
-
-            </div>
+  <div class="container-top">
+    <div class="container" >
+      <div class="row filters">
+        <div class="col-xs-2"> 
+          <div class="pull-right filters text-center" style="background-color:#428BCA;">FILTERS</div>
       </div>
-    </div>
+      <div class="col-xs-2 text-center"> 
+          <search-filter-schemas title='Document Types' ng-model='schemas' field='schema_s' query='querySchema'></search-filter-schemas>
+      </div>
+      <div class="col-xs-2 text-center"> 
+         <search-filter-countries title='Countries' ng-model='governments' field='government_s' query='queryGovernment'></search-filter-countries>
+      </div>
+      <div class="col-xs-2 text-center"> 
+          <search-filter-themes title='Thematic Areas' ng-model='thematicAreas' field='thematicArea_REL_ss' query='queryTheme'></search-filter-themes>
+      </div>
+      <div class="col-xs-2 text-center"> 
+          
+      </div>
+      <div class="col-xs-2 text-center"> 
+          <div><input type="text" ng-model="keyword" placeholder=" Keyword " class="form-control keyword" style="height:24px;width:160px;"></div>
+      </div>
+    </div><!-- end row -->
+  </div>  <!-- end container -->
+</div> <!-- end container top -->
+
 
     <div class="container">
     <div class="row">
     <div class="col-md-12">
-                <div style="padding: 5px 20px;margin:0;">
+                <div style="padding:0px;margin:0;">
                  <!--    <div class="row">
                     <div class="col-md-12" style="padding-top:0; margin-top:0;">
                       <h3>National Records</h3>
@@ -76,78 +85,8 @@
                     </ul>
                     <div class="clearfix"></div>
 
-
-<style type="text/css">
- .doc-title{
-    font-weight: bold;
-    font-size: 110%;
-
-  }
-  .doc-title:focus, .doc-title:hover{ 
-    color:#000;
-
-  }
-</style>
-        <!-- Example National Records  -->  
-       <!--  <div> 
-          <table style="width:100%;padding:0;margin:0;">
-            <tr style="padding:0;margin:0;line-height:13px;">
-              <td style="padding:0;margin:0;width:5px;background-color:#000;"></td>
-              <td colspan="2" style="padding:0;margin:0;background-color:#fff;">
-                <span style="display:inline;line-height:10px;color:#555;font-weight:bold;text-transform:uppercase;padding:0;margin:0;position:relative;left:10px;">ABSCH-MSR | 
-                <span style="color:#999;font-size:12px;font-weight:bold;" > Canada </span> |
-                <span style="color:#999;font-size:12px;font-weight:normal;"> legislation </span> |
-                <span style="color:#999;font-size:12px;font-weight:normal;"> sub-national </span> | 
-                <span style="color:#999;font-size:12px;font-weight:bold;" > Date </span> 
-                </span>
-                </td>
-            </tr>
-            <tr>
-              <td rowspan="4" style="width:10px;background-color:#428bca;"></td>
-              <td style="padding:0;margin:0;padding-left:10px;padding-top:7px;font-size:110%;">
-                <a href="" class="doc-title" style="font-weight:bold;">This is the title of the measure</a>
-              </td>
-            </tr>
-            <tr>
-              <td style="padding:0;margin:0;padding-left:10px; color:#999; line-height:12px;">
-              Turiasp ereicid ut volor aut que expercitia cus, omnis a si dolessu ntibus ut et ilis dolupti reroIta nusandit volut omniam, ommoditia di qui commoluptat offici consecum del in cuptati nvenda consequis accum erum et que voloreiciis vella aspe volo quatiae andi temporit.
-              </td>
-
-            </tr>
-          </table>
-        </div> 
-
-        <br>
-
-         <div>
-          <table style="width:100%;padding:0;margin:0;">
-            <tr style="padding:0;margin:0;line-height:13px;">
-              <td style="padding:0;margin:0;width:5px;background-color:#000;"></td>
-              <td colspan="2" style="padding:0;margin:0;background-color:#fff;">
-                <span style="display:inline;line-height:10px;color:#555;font-weight:bold;text-transform:uppercase;padding:0;margin:0;position:relative;left:10px;">ABSCH-VLR | 
-                <span style="color:#999;font-size:12px;font-weight:bold;" > Canada </span> |
-                <span style="color:#999;font-size:12px;font-weight:normal;"> case study </span> |
-                <span style="color:#999;font-size:12px;font-weight:bold;" > Date </span> 
-                </span>
-                </td>
-            </tr>
-            <tr>
-              <td rowspan="4" style="width:10px;background-color:#ed9c28;"></td>
-              <td style="padding:0;margin:0;padding-left:10px;padding-top:7px;font-size:110%;">
-                <a href="" class="doc-title" style="font-weight:bold;">This is the title of the reference record</a>
-              </td>
-            </tr>
-            <tr>
-              <td style="padding:0;margin:0;padding-left:10px; color:#999; line-height:12px;">
-              Turiasp ereicid ut volor aut que expercitia cus, omnis a si dolessu ntibus ut et ilis dolupti reroIta nusandit volut omniam, ommoditia di qui commoluptat offici consecum del in cuptati nvenda consequis accum erum et que voloreiciis vella aspe volo quatiae andi temporit.
-              </td>
-
-            </tr>
-          </table>
-        </div> -->
-
-
-
+                      
+        
 
                     <div ng-repeat="document in documents">
 
@@ -155,26 +94,32 @@
 
                         <div ng-switch on="document.schema">
 
-                            <div ng-switch-when="BIOSAFETY INFORMATION RESOURCE"><!-- Example Reference Records  -->   
-                               <table style="width:100%;padding:0;margin:0;">
-                                <tr style="padding:0;margin:0;line-height:13px;">
-                                  <td style="padding:0;margin:0;width:5px;background-color:#000;"></td>
-                                  <td colspan="2" style="padding:0;margin:0;background-color:#fff;">
-                                    <span style="display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;position:relative;left:10px;">ABSCH-VLR | 
+                            <div ng-switch-when="BIOSAFETY INFORMATION RESOURCE" style="border-top:1px #ccc solid; 
+                               border-bottom:1px  #ccc solid;border-right:1px solid #ccc;"> 
+                               <table style="width:100%;padding:0px;margin:0;background-color:#FCF8F2; ">
+                                <tr>
+                                  <td rowspan="4" style="width:3px;background-color:#ed9c28;"></td>
+                                  <td colspan="2" style="padding:0 0 0 20px;margin:0;">
+                                    <span style="display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;">ABSCH-VLR | 
                                     <span style="color:#666;font-size:12px;font-weight:bold;" > {{document.source}} </span> 
                                     </span>
                                     </td>
                                 </tr>
                                 <tr>
-                                  <td rowspan="4" style="width:5px;background-color:#ed9c28;"></td>
-                                  <td style="padding:0;margin:0;padding-left:10px;padding-top:7px;font-size:105%;">
-                                    <a ng-href="{{fixUrl(document.url_ss[0])}}" class="doc-title" style="font-weight:bold;">{{document.title}}</a>
+                                  
+                                  <td style="padding:0;margin:0;padding-left:20px;">
+                                    <i ng-class="{'glyphicon glyphicon-minus-sign':displayDetails, 'glyphicon glyphicon-plus-sign':!displayDetails}" style="font-size:11px;position:relative;top:-1px;"></i>
+                                    <a ng-click="load(document); displayDetails = !displayDetails" class="title">
+                                      {{document.title}}</a> 
                                   </td>
                                  <!--  <td rowspan="4" style="width:5px;background-color:#999;padding:5px;margin:0;">V</td> -->
                                 </tr>
                                 <tr>
-                                  <td style="padding:0;margin:0;padding-left:10px; color:#999; line-height:12px;">
-                                  {{document.description}}
+                                  <td style="padding:20px; color:#999;">
+                                     {{document.description}}
+                                    <div ng-show="displayDetails" record-loader document="document.data"  ></div>
+                                 
+                                 
                                   </td>
 
                                 </tr>
@@ -183,27 +128,28 @@
                             </div> <!-- end reference record -->
 
 
-                            <div ng-switch-default><!-- Example National Record  -->   
-                              <table style="width:100%;padding:0;margin:0;">
-                                <tr style="padding:0;margin:0;line-height:13px;">
-                                  <td style="padding:0;margin:0;width:5px;background-color:#000;"></td>
-                                  <td colspan="2" style="padding:0;margin:0;background-color:#fff;">
-                                    <span style="display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;position:relative;left:10px;">{{document.schema}} | 
+                            <div ng-switch-default style="border-top:1px #ccc solid; 
+                               border-bottom:1px  #ccc solid;border-right:1px solid #ccc;"><!-- Example National Record  -->   
+                              <table style="width:100%;padding:0px;margin:0;background-color:#F4F8FA;">
+                                <tr>
+                                  <td rowspan="4" style="width:3px;background-color:#428bca;"></td>
+                                  <td colspan="2" style="padding:0 0 0 20px;margin:0;">
+                                    <span style="display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;">{{document.schema}} | 
                                     <span style="color:#666;font-size:12px;font-weight:bold;" > {{document.source}} </span> 
-                        
                                     </span>
                                     </td>
                                 </tr>
                                 <tr>
-                                  <td rowspan="4" style="width:5px;background-color:#428bca;"></td>
-                                  <td style="padding:0;margin:0;padding-left:10px;padding-top:7px;font-size:105%;">
-                                    <a ng-href="{{fixUrl(document.url_ss[0])}}" class="doc-title" style="font-weight:bold;">{{document.title}}</a>
+                                  <td style="margin:0;padding:0 0 0 20px;">
+                                    <i ng-class="{'glyphicon glyphicon-minus-sign':displayDetails, 'glyphicon glyphicon-plus-sign':!displayDetails}" style="font-size:11px;position:relative;top:-1px;"></i>
+                                     <a ng-click="load(document); displayDetails = !displayDetails" class="title">{{document.title}}</a> 
                                   </td>
                                  <!--  <td rowspan="4" style="width:5px;background-color:#999;padding:5px;margin:0;">V</td> -->
                                 </tr>
                                 <tr>
-                                  <td style="padding:0;margin:0;padding-left:10px; color:#999; line-height:12px;">
-                                  {{document.description}}
+                                  <td style="padding:20px; color:#999;">
+                                   {{document.description}}
+                                  <div ng-show="displayDetails" record-loader document="document.data"  ></div>
                                   </td>
 
                                 </tr>
@@ -213,25 +159,6 @@
                         </div> <!-- end switch -->
 
 
-                        <!-- <div style="font-size:10px;color:#777">{{document.schema}} <span ng-show="document.source">|</span> 
-                            <strong ng-if="!document.sourceTooltip" style="color:#222">{{document.source}}</strong>
-                            <a ng-if="document.sourceTooltip" href="#" tooltip data-toggle="document.tooltip" title data-original-title="{{document.sourceTooltip}}" style="color:#428bca"><strong>{{document.source}}</strong></a>
-                        </div>
-                        <div style="font-size:13px;font-weight:bold" ng-show="document.type">{{document.type}}</div>
-                            <div class="truncatex">
-                            <a style="font-size:14px;font-weight:bold;color:#79B82B;text-decoration:underline" ng-href="{{fixUrl(document.url_ss[0])}}">{{document.title}}</a>
-                        </div>
-                        <div style="font-size:13px;margin:2px 0">{{document.description}}</div>
-                        <div style="font-size:13px;font-weight:bold;margin:2px 0" ng-show="description2">{{document.description2}}</div>
-                        <div ng-if="dates">
-                            <i style="color:#ccc" class="icon-calendar-empty"></i> <span style="font-size:12px;color:#444">{{document.dates}}</span>
-                            &nbsp; &nbsp; 
-                            <i style="color:#ccc" class="icon-map-marker"></i> <span style="font-size:12px;color:#444">{{document.venue}}</span>
-                        </div>
-                        <div ng-if="{'meetingDocument':true}[document.schema_s]">
-                            <i class="icon-tag"></i>
-                            <span ng-repeat="meeting in document.meeting_ss" class="label label-info" style="margin-right:4px">{{document.meeting}}</span>
-                        </div> -->
                         <div class="clearfix"></div>
                     </div>
                     <div class="clearfix"></div>
@@ -249,15 +176,7 @@
                 </div>
             </div>
 
-            <!-- 
-              <div class="row well well-filter">
-                  <div class="col-md-1"><span class="label label-primary" style="font-size:18px">Filters</span></div>
-                  <div class="col-md-2 filters"><a href="#">Information Type  <b class="caret"></b></a></div>
-                  <div class="col-md-2 filters"><a href="#">Countries  <b class="caret"></b></a></div>
-                  <div class="col-md-2 filters"><a href="#">Thematic Areas  <b class="caret"></b></a></div>
-                  <div class="col-md-2 filters"><a href="#">Date Range <b class="caret"></b></a></div>
-                  <div class="col-md-3 filters"><input type="text" placeholder=" Keyword " class="form-control keyword" style="height:26px;margin-top:12px;margin-right:5px;width:160px;" ></div>
-              </div> -->
+
 
        </div> <!-- end col        -->
    </div> <!-- end row -->

@@ -1,15 +1,14 @@
-<li>
-    <a data-toggle="modal" href="#dialogSelectThemes">{{title}}&nbsp;<b class="caret"></b></a>
-	<div class="list-group-item-expand" style="position:relative">
-		<div ng-repeat="item in termsArray | filter:{selected:true}" ng-click="onclick(this, $event)">
-			<div class="label label-selected-facet">
-				<div style="position:absolute;right:6px;top:6px" class="icon-remove-sign"></div>
-				<div class="truncate" style="cursor:pointer">
-					{{item.name}} ({{item.count}})
-				</div>
-			</div>
-		</div>
-	<div>
+<div>
+    <a ng-click="showSelect=!showSelect" class="filter-title" style="text-decoration:none;color:#111;">{{title}}&nbsp; 
+        <i ng-class="{'fa fa-caret-down':!showSelect, 'fa fa-caret-up':showSelect}" ></i></a>
+    
+    <div class="list-group-item-expand">
+        <div ng-repeat="item in terms | orderBy:'title' | filter:{selected:true}" ng-class="ccc(item)" ng-click="onclick(this, $event)">
+            <div class="filter-selected truncate" style="cursor:pointer">
+                <i class="glyphicon glyphicon-remove-circle"></i> {{item.title}} ({{item.count}})
+            </div>
+        </div>
+    <div>
 
 	<style>
 	.list-group-item .not:before {
@@ -28,12 +27,19 @@
 	}
 	</style>
 
-	<div id="dialogSelectThemes" class="modal fade">
-		<div class="modal-dialog"><!--  style="width:760px;margin-left:-380px"  -->
-			<div class="modal-content" style="width:760px">
-				<div class="modal-body">
-					<div style="height:360px;overflow-y:auto">
+<!--Save Dialog-->
+    <div ng-show="showSelect" >
+        <div class="filter-options well" style="position:relative;left:-380px;">
+            <div>
+                <div style="padding-left:20px">
+
+                 <div class="pull-right" >
+                     <a ng-click="showSelect=!showSelect" style="text-decoration:none;" ><i class="glyphicon glyphicon-remove-circle"></i> Close</a>
+                </div>
+                <br>
+					<div style="height:200px;overflow-y:auto">
 						<div ng-repeat="item in terms" class="checkbox">
+						
 							<label><input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">{{item.name}} ({{item.count}})</label>
 							<div class="checkbox" ng-repeat="item in item.narrowerTerms" style="padding-left:20px">
 								<label><input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">{{item.name}} ({{item.count}})</label>
@@ -53,10 +59,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
+				
 			</div>
 		</div>
 	</div>
-</li>
+</div>

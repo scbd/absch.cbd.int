@@ -53,16 +53,16 @@ define(["app"], function (app) {
 
 		return function(schame) {
 
-			if(schame=="focalPoint"				) return "National Focal Point";
-			if(schame=="authority"				) return "Competent National Authority";
+			if(schame=="focalPoint"				) return "National Focal Point (FP)";
+			if(schame=="authority"				) return "Competent National Authority (CNA)";
 			if(schame=="contact"				) return "Contact";
-			if(schame=="database"				) return "National Database";
-			if(schame=="resource"				) return "Virtual Library Resource";
+			if(schame=="database"				) return "National Database (NDB)";
+			if(schame=="resource"				) return "Virtual Library Resource (VLR)";
 			if(schame=="organization"			) return "Organization";
-			if(schame=="measure"				) return "ABS Measure";
-			if(schame=="absCheckpoint"			) return "Checkpoint";
-			if(schame=="absCheckpointCommunique") return "Checkpoint Communiqué";
-			if(schame=="absPermit"				) return "Permit";
+			if(schame=="measure"				) return "ABS Measure (MSR)";
+			if(schame=="absCheckpoint"			) return "Checkpoint (CP)";
+			if(schame=="absCheckpointCommunique") return "Checkpoint Communiqué (CPC)";
+			if(schame=="absPermit"				) return "Permit (IRCC)";
 
 			return schame;
 		};

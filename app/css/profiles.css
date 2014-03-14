@@ -1,0 +1,46 @@
+	.ellipsis {
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+	}
+	
+	.name {
+		color:#222;
+		font-size: 10px;
+		font-weight: bold;
+		margin-top:6px;
+		text-transform: uppercase;
+	}
+	.panel, .panel > .panel-heading, .panel-default{
+		background-color: transparent;
+	}
+	.panel > a {
+		text-decoration: none;
+	}
+
+	.country-name{
+		color: #111; 
+		font-weight: bold;
+		font-size:48px;
+		font-family: 'alternategotno3dotregular';
+	     text-rendering: optimizeLegibility;
+	     padding: 0;
+	     margin: 0;
+	     line-height: 40px;
+	}
+	.numberCircle {
+	    -webkit-border-radius: 999px;
+	    -moz-border-radius: 999px;
+	    border-radius: 999px;
+	    behavior: url(PIE.htc);
+
+	    width: 48px;
+	    height: 48px;
+	    padding: 4px;
+
+	    background: #6495ED;
+	    color: #fff;
+	    display:inline-block;
+
+    	font: 32px "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeueW01-45Ligh", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	}

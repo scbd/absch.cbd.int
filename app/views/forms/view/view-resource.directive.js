@@ -11,6 +11,7 @@ require("app").directive("viewResource", [function () {
 		},
 		controller : ["$scope", "IStorage", function ($scope, storage)
 		{
+			
 			//====================
 			//
 			//====================

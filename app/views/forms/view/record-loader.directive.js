@@ -10,7 +10,7 @@
 			locale  : "="
 		},
 		link: function($scope) {
-
+			//debugger;
 			$scope.internalDocument     = undefined;
 			$scope.internalDocumentInfo = undefined;
 
@@ -18,11 +18,12 @@
 				$scope.error = null;
 				$scope.internalDocument = _new; 
 			});
-
-			$scope.init();
+			
+			if(!$scope.document)
+				$scope.init();
 		},
 		controller: ['$scope', "$route", 'IStorage', "authentication", "localization", "$q", "$location", function ($scope, $route, storage, authentication, localization, $q, $location) {
-
+			
 			//==================================
 			//
 			//==================================
@@ -34,12 +35,13 @@
 				if ($scope.document || $scope.schema)
 					return;
 
-				var documentID = $route.current.params.documentID  ;
+				var documentID = $route.current.params.documentID;
 
 				if (documentID)
 					$scope.load(documentID);
-				else
-					$scope.error = "documentID not specified";
+				// else
+				// 	$scope.error = "documentID not specified";
+				
 			}
 
 			//==================================
@@ -65,7 +67,7 @@
 					$scope.internalDocumentInfo = results[1];
 
 				}).then(null, function(error) {
-					$scope.error = error.Message || error || "Http Error: " + errorCode;
+					 $scope.error = error.Message || error || "Http Error: " + errorCode;
 				})
 			};
 

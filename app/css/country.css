@@ -1,0 +1,64 @@
+.category-container {
+	background: #1FA65D url('../img/feature-bkg.png');
+	/*background: #1FA65D;*/
+	padding:0;margin: 0;
+	padding-top:5px;
+	border-bottom:1px solid #333;
+	border-top:1px solid #333;
+}
+.numberCircle {
+	    -webkit-border-radius: 999px;
+	    -moz-border-radius: 999px;
+	    border-radius: 999px;
+	    behavior: url(PIE.htc);
+
+	    width: 48px;
+	    height: 48px;
+	    padding: 4px;
+
+	    background: #6495ED;
+	    color: #fff;
+	    display:inline-block;
+
+    	font: 32px "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeueW01-45Ligh", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	}
+
+.table-countries >tbody > tr > th {
+ 	font-size:140%;
+ 	color: #333;
+}
+
+
+.up-caret {
+    border-bottom: 5px solid #000000;
+    border-top: 5px solid transparent;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    display: inline-block;
+    height: 0;
+    opacity: 0.5;
+    vertical-align: top;
+    width: 0;
+    top: -3px;
+    position: relative;
+}
+
+.down-caret {
+    border-bottom: 5px solid transparent;
+    border-top: 5px solid #000000;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    display: inline-block;
+    height: 0;
+    opacity: 0.5;
+    vertical-align: top;
+    width: 0;
+}
+.country-list-name{
+
+	font-size: 110%;
+	font-weight: bold;
+}
+.country-list-name:hover, .country-list-name:focus{
+	color:#111;
+}

@@ -1,0 +1,16 @@
+<div class="record-metadata">
+
+		<div ng-show="document.createdBy">
+				<label>Published by:</label>
+				<div class="km-value km-pre">{{document.createdBy.firstName}} {{document.createdBy.lastName}} ({{document.createdBy.email}})</div>
+				<label style="padding-left:10px">Published on:</label>
+				<div class="km-value km-pre">{{document.createdOn}}</div>
+		</div>
+		<div ng-show="document.updatedBy && document.updatedOn != document.createdOn">
+				<label>Last udpated by:</label>
+				<div class="km-value km-pre">{{document.updatedBy.firstName}} {{document.updatedBy.lastName}} ({{document.updatedBy.email}})</div>
+				<label style="padding-left:10px">Last updated on:</label>
+				<div class="km-value km-pre">{{document.updatedOn}}</div>
+		</div>
+
+	</div>

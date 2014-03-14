@@ -1,0 +1,60 @@
+.container-top{
+	background-color: #dedede;
+	border-bottom: 1px solid #ddd;
+}
+.label-primary{
+	font-size:14px;
+}
+.filter > a{
+	color: #333;
+	font-size: 14px;
+}
+.filter > a:hover, a:focus{
+	color: black;
+}
+.filters{
+	width:100%;
+	color:white;
+	padding:2px;
+}
+
+.title{
+    text-rendering: optimizeLegibility;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.filter-selected{
+	white-space: nowrap;
+	font-size: 12px!important;
+	background-color:#999;
+	color:#fff!important;
+	margin: 3px;
+	padding:3px;
+	text-align: left;
+
+}
+.country-options-title{
+	color:#333;
+}
+.filter-title{
+	text-decoration: none;
+}
+
+.filter-options{
+	background-color:#fff;
+	width:800px;
+	text-align: left;
+	margin-top:20px;
+}
+.filter-options label{
+	color:#333;
+}
+
+.national-records{
+	color:#287fcb;
+}
+.reference-records{
+	color:#f0ad4e;
+}
+

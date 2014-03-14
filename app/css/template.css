@@ -1,0 +1,221 @@
+
+@font-face {
+    font-family: 'alternategotno3dotregular';
+    src: url('/app/fonts/alternategotno3dot-webfont.eot');
+    src: url('/app/fonts/alternategotno3dot-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/app/fonts/alternategotno3dot-webfont.woff') format('woff'),
+         url('/app/fonts/alternategotno3dot-webfont.ttf') format('truetype'),
+         url('/app/fonts/alternategotno3dot-webfont.svg#alternategotno3dotregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+.home-col > p > a:hover, a:focus{
+	color:black;
+}
+
+ body a:hover, body a:focus{
+	color:black;
+}
+
+body{
+  min-height:800px;
+  font-family: Trebuchet MS, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-rendering: optimizeLegibility;
+  font-size:14px;
+
+}
+
+h4, h5, h6 {
+      font-family:Tahoma, Trebuchet MS, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+h1, h2, h3 {
+     font-family: 'alternategotno3dotregular';
+     text-rendering: optimizeLegibility;
+}
+
+
+/*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*/
+
+.disclaimer{
+	margin:0;
+	margin-bottom:0px;
+	background-color:#fa6938;
+	color:white;
+	height:30px;
+	border-bottom: #999 solid 1px;
+}
+.promo .title {
+
+	margin:0;padding:3px;
+	float: left;
+	margin-right: 15px;
+	padding: 0 20px;
+	background: rgba(0,0,0,0.2);
+	font-size: 12px;
+	letter-spacing: 1px;
+	line-height: 24px;
+	text-rendering: optimizeLegibility;
+	text-transform: uppercase;
+/*	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;*/
+	color: white;
+}
+.promo .content{
+	padding-top: 5px;
+}
+.promo span{
+	color:white;
+	padding-top:3px;
+}
+
+.main-nav{
+	border-bottom:1px solid #dedede;
+	padding-bottom:20px;
+	padding-top: 20px;
+}
+.brand h1, img, span{
+	margin:0;
+	padding:0;
+}
+.brand > a{
+	text-decoration: none;
+}
+.brand > a > h1{
+	font-weight: normal;
+	color: #1FA65D;
+	font-size: 52px;
+	font-family: 'alternategotno3dotregular';
+	padding-bottom:0;
+	margin-bottom: 0;
+	white-space: nowrap;
+}
+.brand > a > h1 >img{
+	height: 40px; 
+	position: relative; 
+	top: -5px;
+	padding:0;
+	margin:0;
+}
+.brand > div{
+	text-transform: uppercase;
+	/*color: #333;*/
+	color:#333;
+	font-size: 16px;
+	font-family: 'alternategotno3dotregular';
+	line-height: 14px;
+	top:-3px;
+	position: relative;
+
+}
+.account-signin a{
+	/*color:#287FCB!important;*/
+	color:#000;
+	font-size: 20px;
+	text-transform: uppercase;
+	list-style: none;
+	list-style: none;
+	font-family: 'alternategotno3dotregular';	
+	padding-left:20px;	
+	top:-3px;
+	position: relative;
+}
+.account-signin a:hover, a:focus{
+	color:#fff;
+}
+.set-languages {
+	/*color:#287FCB!important;*/
+	color:#333;
+	font-size: 12px;
+	text-transform: uppercase;
+	list-style: none;
+    padding-top: 3px;
+	list-style: none;
+	font-family: 'alternategotno3dotregular';	
+}
+.account-name{
+
+}
+
+.main-link div a ul li {
+	margin:0;
+	padding:0;
+}
+.main-link > a{
+	font-size:24px;
+	font-family: 'alternategotno3dotregular';
+	color: #666;
+	line-height: 20px;
+	text-decoration: none;
+	letter-spacing: 1px;
+}
+.main-link {
+	padding-top:15px;
+}
+
+
+
+
+.footer{
+	background: #1FA65D url('../img/feature-bkg.png');
+	border-top:#333 solid 3px;
+	padding:0;
+	margin:0;
+  	height: 320px;
+    clear: both;
+    padding-top: 10px;
+    color:#333;
+}
+
+
+@media (max-width: 992px) {
+
+	.footer{
+		height: 600px;
+	}
+}
+
+.footer-links li{
+	font-size:12px;
+	list-style: none;
+	line-height: 12px;
+}
+.footer-links a, h4 > a {
+	color:#efefef;
+}
+.footer-links a:hover, a:focus, h4>a:hover, h4>a:focus{
+	color:#FFF;
+}
+.footer-links{
+	padding:0;
+	margin:0;
+}
+.copyright a, a:hover, a:focus{
+	color:#FFF;
+}
+
+
+footer .copyright {
+  margin-top: 10px;
+  padding-top: 15px;
+  border-top: 3px solid #ddd;
+}
+footer .copyright .logorow {
+  margin: 0;
+  padding-left: 15px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 12px;
+  color: #FFF;
+}
+footer .logo {
+  margin-bottom: 10px;
+  display: block;
+  width: 132px;
+  height: 39px;
+}
+
