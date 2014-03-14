@@ -137,6 +137,9 @@ h1, h2, h3 {
 	font-family: 'alternategotno3dotregular';	
 }
 .account-name{
+	position: relative;
+	top:-20px;
+	color:#fff;
 
 }
 
