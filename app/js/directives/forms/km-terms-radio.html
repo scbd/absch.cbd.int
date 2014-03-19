@@ -2,7 +2,8 @@
 	<script type="text/ng-template"  id="term-radio-tree-renderer.html">
 		<label>
 			<input type="radio" ng-model="selection.identifier" ng-click="save()" ng-required="IsRequired()" value="{{term.identifier}}" name="bindingName"/>
-				- {{term.title||term.name | lstring:locale}}
+				{{term.title||term.name | lstring:locale}}
+				<span ng-show="description" class="km-term-radio-description">{{term.description | lstring:locale}}</span>
 		</label>
 
 		<ul style="list-style:none">

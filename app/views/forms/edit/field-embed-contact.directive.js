@@ -11,6 +11,8 @@ require("app").directive("fieldEmbedContact", [ function () {
 			caption : "@caption"
 		},
 		link : function($scope, $element, $attrs) {
+			
+
 			$scope.multiple = $attrs.multiple!==undefined;
 
 			var modalEdit = $element.find("#editContact");
@@ -21,7 +23,10 @@ require("app").directive("fieldEmbedContact", [ function () {
 
 				if( show && !modalEdit.is(":visible")) { console.log("show"); modalEdit.modal("show"); }
 				if(!show &&  modalEdit.is(":visible")) { console.log("hide"); modalEdit.modal("hide"); }
+
 			});
+
+			
         },
 		controller : ["$scope", "authHttp", "$window", "$filter", "underscore", "guid", function ($scope, $http, $window, $filter, _, guid)
 		{

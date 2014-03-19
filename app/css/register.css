@@ -1,0 +1,167 @@
+
+
+.btn-commonformat-name{
+	color:#666;
+
+}
+
+.btn-commonformat-national {
+	font-weight: bold;
+	color:#418BCA;
+}
+.btn-commonformat-reference {
+	font-weight: bold;
+	color:#ed9c28;
+}
+
+.btn-commonformat {
+
+	text-align: left;
+    line-height: 14px;
+    white-space: normal;
+    padding:3px;
+    margin-bottom: 20px;
+    font-size:14px;
+    text-decoration: none;
+}
+
+ .btn-commonformat-selected {
+   border-left:#FA6938 solid 3px;
+   color:#111;
+   text-decoration: none;
+   padding-left:10px;
+  }
+  .btn-commonformat-selected:hover, a.btn-commonformat-selected:focus {
+     
+  }
+
+
+.btn-text{
+	font-size:11px;
+	padding: 0;
+	margin: 0;
+	color:#ccc;
+}
+.btn-abs{
+	background-color:#666;
+}
+.btn-all{
+    padding:5px 5px 5px 5px;
+	color: white;
+}
+
+.btn-draft{
+	background-color:#999;
+}
+
+.registerpage-header{
+	background-color:#333;
+	padding:3px 20px; 
+}
+.registerpage-header .abbreviation{
+	color: #428BCA; 
+	font-weight: bold;
+}
+.registerpage-header .title{
+	color: #fefefe; 
+	font-weight: normal;
+	font-family:Tahoma, Trebuchet MS, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 18px;
+}
+
+.registerpage-content{
+	min-height: 700px;
+	padding: 20px;
+	background-color:#ccc;
+	margin:0 0 50px 0;
+}
+.registerpage-content h2{
+	padding:0;
+	margin: 0;
+}
+legend{
+	padding-top:30px;
+	margin: 0;
+}
+
+.help_icon{
+	padding:5px;
+}
+.help-block{
+	font-size:12px;
+	color:#666;
+	padding: 0;
+	margin: 0;
+}
+.form-group{
+	margin:0;
+	padding: 0;
+	margin-top: 20px;
+}
+hr{
+	margin:10px 0 0 0;
+	padding:0;
+}
+table, td , tr{
+	padding: 0;
+	margin: 0;
+	vertical-align: top;
+}
+.km-term-radio-description{
+	color:#666;
+	font-weight: normal;
+	font-size: 13px;
+	display:block;
+	padding-left:16px;
+}
+/*.help-block{
+/*same as alert-info*/
+color: #31708f;
+background-color: #d9edf7;
+border-color: #bce8f1;
+padding: 5px;
+margin-bottom: 10px;
+border: 1px solid transparent;
+border-radius: 4px;
+}*/
+
+ul.km-value {
+  padding-left: 0;
+  list-style: none;
+}
+
+address.km-value,
+div.km-value,
+ul.km-value > li {
+background-color: #fff;
+border: 1px solid #c0c0c0;
+border-radius: 3px;
+padding: 5px 8px 5px 8px;
+margin-top: 1px;
+margin-bottom: 1px;
+display: block;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+-ms-border-radius: 5px;
+-o-border-radius: 5px;
+}
+
+@media (min-width: 768px) {
+  .modal-lg {
+    width: 100%;
+  }
+}
+@media (min-width: 992px) {
+  .modal-lg {
+    width: 900px;  }
+}
+/* ^^^ km-select ^^^ */
+
+form label.required:before,
+form label[required]:before
+{
+
+	content: '*';
+	
+
+}

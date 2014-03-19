@@ -17,7 +17,7 @@
 	</button>
 
 	<!-- Modal -->
-	<div class="modal fade" id="editContact"  data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade"  id="editContact"  data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	  <div class="modal-dialog modal-lg">
 	    <div class="modal-content">
 	      <div class="modal-header">
@@ -28,6 +28,7 @@
 	        	<span ng-show="edition.contact.type=='person'">Edit a contact person</span>
 	        </h4>
 
+	        	
    	        <label class="radio-inline"><input type="radio" ng-model="edition.contact.type" value="organization" name="editionContactType"/> Organization</label>
 	        <label class="radio-inline"><input type="radio" ng-model="edition.contact.type" value="person" name="editionContactType"/> Person</label>
 

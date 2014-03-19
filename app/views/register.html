@@ -1,180 +1,200 @@
-<link href="/app/css/abs.css" rel="stylesheet">
+
+<link href="/app/css/register.css" rel="stylesheet">
 <div ng-cloak ng-controller="RegisterController">
 
-  <div class="category-container">
-      <div class="container">
-          <span class="category"><span class="glyphicon glyphicon-edit"></span> Register Information</span>
-      </div>
-  </div>
-  <br>
   <div class="container">
-      <div class="row">
-          <div class="col-md-3">
 
-  <div>        
-              <p></p>     
-              <a ng-click="tab('dashboard')" class="btn btn-lg btn-default btn-abs btn-all btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='dashboard'}"  href="#" role="button">DASHBOARD » </a>
+        <div class="row">
+            <div class="col-xs-12">
+              <a class="pull-right" ng-show="!help" ng-click="help=!help;" style="cursor:pointer;"><i class="glyphicon glyphicon-question-sign" >
+              </i> show help</a>
+              <a class="pull-right" ng-show="help" ng-click="help=!help;" style="cursor:pointer;color:#666;"><i class="glyphicon glyphicon-question-sign" >
+              </i> hide help</a>
+            </div>
+        </div>
+
+      <div class="row">
+          <div class="col-xs-3">
+
+            <div>            
+ 
+              <a ng-click="tab('dashboard')" class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='dashboard'}"  href="#" role="button" style="color:#333;font-weight:bold;"> DASHBOARD » </a>
           
               <h3>National Records</h3>
 
-              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('measure')" ng-class="{ 'btn-commonformat-selected' : tab()=='measure'}" href="#" role="button"> ABSCH-MSR »
+              <a  ng-click="tab('measure')"  href="#" role="button">
+              <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='measure'}">
+              <span class="btn-commonformat-national">ABSCH-MSR </span>  
               <span class="pull-right label label-info">{{(records | filter:{type:'measure'}).length}}</span>  
-              <span class="btn-text"><br>Legislative, administrative or policy measures</span></a>
+              <br><span class="btn-commonformat-name">Legislative, administrative or policy measures </span>
+              </div></a>
 
-              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('authority')" ng-class="{ 'btn-commonformat-selected' : tab()=='authority'}" href="#" role="button">ABSCH-CNA »
-              <span class="pull-right label label-info">{{(records | filter:{type:'authority'}).length}}</span> 
-              <span class="btn-text"> <br>Competent National Authority</span> </a>
+              <a  ng-click="tab('authority')"  href="#" role="button">
+              <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='authority'}">
+              <span class="btn-commonformat-national">ABSCH-CNA </span>  
+              <span class="pull-right label label-info">{{(records | filter:{type:'authority'}).length}}</span>  
+              <br><span class="btn-commonformat-name">Competent National Authority </span>
+              </div></a>
 
-              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('absPermit')" ng-class="{ 'btn-commonformat-selected' : tab()=='absPermit'}" href="#" role="button">ABSCH-IRCC »
-              <span class="pull-right label label-info">{{(records | filter:{type:'absPermit'}).length}}</span> 
-              <span class="btn-text"> <br>Internationally recognized certificate of compliance</span> </a>
-
-              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('absCheckpoint')" ng-class="{ 'btn-commonformat-selected' : tab()=='absCheckpoint'}" href="#" role="button">ABSCH-CP »
-              <span class="pull-right label label-info">{{(records | filter:{type:'absCheckpoint'}).length}}</span> 
-               <span class="btn-text"><br>Checkpoint</span> </a>
-
-              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('absCheckpointCommunique')" ng-class="{ 'btn-commonformat-selected' : tab()=='absCheckpointCommunique'}" href="#" role="button">ABSCH-CPC »
-              <span class="pull-right label label-info">{{(records | filter:{type:'absCheckpointCommunique'}).length}}</span> 
-              <span class="btn-text"><br>Checkpoint Communiqué</span> </a>
+              <a  ng-click="tab('absPermit')"  href="#" role="button">
+              <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='absPermit'}">
+              <span class="btn-commonformat-national">ABSCH-IRCC </span>  
+              <span class="pull-right label label-info">{{(records | filter:{type:'absPermit'}).length}}</span>  
+              <br><span class="btn-commonformat-name">Internationally recognized certificate of compliance </span>
+              </div></a>
 
 
-             <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('database')" ng-class="{ 'btn-commonformat-selected' : tab()=='database'}" href="#" role="button">ABSCH-NDB »
-              <span class="pull-right label label-info">{{(records | filter:{type:'database'}).length}}</span> 
-              <span class="btn-text" ><br>ABS National Website or Database</span> 
-             </a>
+              <a  ng-click="tab('absCheckpoint')"  href="#" role="button">
+              <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='absCheckpoint'}">
+              <span class="btn-commonformat-national">ABSCH-CP </span>  
+              <span class="pull-right label label-info">{{(records | filter:{type:'absCheckpoint'}).length}}</span>  
+              <br><span class="btn-commonformat-name">Checkpoint </span>
+              </div></a>
 
+              <a  ng-click="tab('absCheckpointCommunique')"  href="#" role="button">
+              <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='absCheckpointCommunique'}">
+              <span class="btn-commonformat-national">ABSCH-CPC </span>  
+              <span class="pull-right label label-info">{{(records | filter:{type:'absCheckpointCommunique'}).length}}</span>  
+              <br><span class="btn-commonformat-name">Checkpoint Communiqué </span>
+              </div></a>
+
+              <a  ng-click="tab('database')"  href="#" role="button">
+              <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='database'}">
+              <span class="btn-commonformat-national">ABSCH-NDB </span>  
+              <span class="pull-right label label-info">{{(records | filter:{type:'database'}).length}}</span>  
+              <br><span class="btn-commonformat-name">ABS National Website or Database </span>
+              </div></a>
+
+        </div>
+
+
+  <div><h3>Reference Records</h3>
+
+              <a  ng-click="tab('resource')"  href="#" role="button">
+              <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='resource'}">
+              <span class="btn-commonformat-reference">ABSCH-VLR </span>  
+              <span class="pull-right label label-info">{{(records | filter:{type:'resource'}).length}}</span>  
+              <br><span class="btn-commonformat-name">Virtual Library Record</span>
+              </div></a>
   </div>
 
+  <div><h3>National Users</h3>
+              <a  ng-click="tab('abschNFP')"  href="#" role="button">
+              <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='abschNFP'}">
+              <span class="btn-commonformat-national">ABSCH-NFP </span>   
+              <br><span class="btn-commonformat-name">National ABS Focal Points</span>
+              </div></a>
 
-  <div>             
-    <h3>Reference Records</h3>
+              <a  ng-click="tab('abschPA')"  href="#" role="button">
+              <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='abschPA'}">
+              <span class="btn-commonformat-national">ABSCH-PA </span>   
+              <br><span class="btn-commonformat-name">National Authorized Users</span>
+              </div></a>
 
-                    <a class="btn btn-lg btn-warning btn-commonformat" ng-click="tab('resource')" ng-class="{ 'btn-commonformat-selected' : tab()=='resource'}" href="#" role="button">ABSCH-VLR »
-                     <span class="pull-right label label-info">{{(records | filter:{type:'resource'}).length}}</span> 
-                    <span class="btn-text"  style="color:#666"><br> Virtual Library Record</span> </a>  
-  </div>
-
-  <div>             
-
-     <h3>National Users</h3>
-
-              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('abschNFP')" ng-class="{ 'btn-commonformat-selected' : tab()=='abschNFP'}" href="#" role="button"> ABSCH-NFP » 
-              <span class="btn-text" ><br> National ABS Focal Points</span> </a> 
-
-              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('abschPA')" ng-class="{ 'btn-commonformat-selected' : tab()=='abschPA'}" href="#" role="button"> ABSCH-PA » 
-              <span class="btn-text" ><br> Publishing Authorities</span> </a> 
-
-              <a class="btn btn-lg btn-primary btn-commonformat" ng-click="tab('abschNAU')" ng-class="{ 'btn-commonformat-selected' : tab()=='abschNAU'}" href="#" role="button"> ABSCH-NAU » 
-              <span class="btn-text" ><br> National Authorized Users</span> </a> 
-  </div>
-             
-                    
+              <a  ng-click="tab('abschNAU')"  href="#" role="button">
+              <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='abschNAU'}">
+              <span class="btn-commonformat-national">ABSCH-NAU </span>   
+              <br><span class="btn-commonformat-name">National Authorized Users</span>
+              </div></a>
           </div>
-   
-          <div ng-show="tab()=='dashboard'" class="col-md-9 well well-registerpage">
+                       
+    </div>
+<!-- DASHBOARD ****************************************-->
+          <div ng-show="tab()=='dashboard'" class="col-xs-9">
 
-            <h2><span style="color: #428BCA; font-weight: bold;font-size:180%;">ABSCH-DASHBOARD</span> Check the status of your work in the ABS-CH </h2>
-
-            <p>
-              
-              The dashboard is a personal working area where it will be possible to follow-up the status of records prepared for their publication in the ABS-CH. The content of the dashboard will differ depending on the role assigned in the ABS-CH (publishing authority or national authorized user). <br><br>
-              In this area you can check whether there are items that require your approval (in the case of the publishing authority) or what is the status of records sent for validation of the publishing authority (in the case of national authorized users).           
-               </p>
-
-            <div ng-hide="isAuthenticated">
-              <a ng-show="!isAuthenticated" ng-click="signIn('dashboard')" class="btn btn-info">
-                <i class="glyphicon glyphicon-off"></i> Sign in to acces information of your ABSCH-DASHBOARD
-              </a>
+             <div class="registerpage-header" >
+              <h2>
+                <span class="abbreviation">DASHBOARD</span> 
+                <span class="title">Check the status of your work in the ABS-CH</span>
+              </h2>
             </div>
 
-            <div ng-show="isAuthenticated">
-              <h2>Items requiring your attention</h2>  
-              <my-tasks></my-tasks>
-              
-              <h2>Pending requests</h2>  
-              <my-pending-tasks></my-pending-tasks>
+            <div class="registerpage-content">
+              <p class="help1" ng-show="help && !editing" >
+                The dashboard is a personal working area where it will be possible to follow-up the status of records prepared for their publication in the ABS-CH. The content of the dashboard will differ depending on the role assigned in the ABS-CH (publishing authority or national authorized user). <br><br>
+                In this area you can check whether there are items that require your approval (in the case of the publishing authority) or what is the status of records sent for validation of the publishing authority (in the case of national authorized users).           
+              </p>
 
-              <h2>Completed requests</h2>  
-              <my-completed-tasks></my-completed-tasks>
+              <div ng-hide="isAuthenticated">
+                <a ng-show="!isAuthenticated" ng-click="signIn('dashboard')" class="btn btn-info">
+                  <i class="glyphicon glyphicon-off"></i> Sign in to acces information of your ABSCH-DASHBOARD
+                </a>
+              </div>
+
+              <div ng-show="isAuthenticated">
+                <h2>Items requiring your attention</h2>  
+                <my-tasks></my-tasks>
+                
+                <h2>Pending requests</h2>  
+                <my-pending-tasks></my-pending-tasks>
+
+                <h2>Completed requests</h2>  
+                <my-completed-tasks></my-completed-tasks>
+              </div>
             </div>
-
           </div>
+<!-- END DASHBOARD ****************************************-->
 
-          <div ng-show="tab()=='measure'" class="col-md-9 well well-registerpage">
-
-              <h2><span style="color: #428BCA; font-weight: bold;font-size:180%;">ABSCH-MSR</span> Legislative, administrative or policy measures on access and benefit-sharing</h2>
-  
-              <p>
+<!-- MSR ****************************************-->
+          <div ng-show="tab()=='measure'" class="col-xs-9">
+            
+            <div class="registerpage-header" >
+              <h2>
+                <span class="abbreviation">ABSCH-MSR</span> 
+                <span class="title">Legislative, administrative or policy measures on access and benefit-sharing</span>
+              </h2>
+            </div>
+            <div class="registerpage-content">
+            <p class="help1" ng-show="help && !editing" >
                 This common format is to be used for legislative, administrative and policy measures on access and benefit-sharing. This information shall be made available to the Access and Benefit-Sharing Clearing-House (ABS-CH) in accordance with Article 14, paragraph 2(a), of the Nagoya Protocol on Access and Benefit-sharing.<br><br>
 
                 Access and benefit-sharing measures may include strategies, policies, legislation or regulations. They may also include measures undertaken at the regional, national, sub-national or community level. For each ABS measure a new common format has to be filled.   The format includes a list of ABS elements and the possibility of pointing out to the specific articles and sections where the specific element is addressed in the measure. Having this information for all existing ABS measures of a country displayed in the ABS Clearing-House would help users to find the specific information they are looking for in order to access to genetic resources and traditional knowledge associated to genetic resources.
-              </p>
 
-              <div ng-hide="editing">
-                  <h2 style="border-bottom: 1px solid #333;">Add new record</h2>
-                  
-                  <div class="panel panel-info">
+                  <div class="panel panel-info" ng-show="help && !editing">
                     <div class="panel-heading">
                         <h4 class="panel-title">Tips for publishing an ABSCH-MSR common format:</h4>
                     </div>
                     <div class="panel-body">
                         <ol>
-                          <li>Remember to upload the document text in its <strong>original language</strong> </li>
+                          <li>Remember to upload the document text in its <strong>original language</strong>.</li>
                           <li>Please upload <strong>courtesy or official translations</strong> of the measure if available. </li>
                         </ol>
-
-                          <p>
-                            <a ng-show="!isAuthenticated" ng-click="signIn('measure')" class="btn btn-info">
-                              <i class="glyphicon glyphicon-off"></i> Sign in to add or edit ABSCH-MSR record online
-                            </a>
-
-                            <a ng-show="isAuthenticated && !canEdit('measure')" class="btn btn-warning disabled">
-                              <i class="glyphicon glyphicon-ban-circle"></i> You cannot add a new ABSCH-MSR record online
-                            </a>
-
-                            <a ng-show="isAuthenticated && canEdit('measure')" ng-click="edit('measure', null)" class="btn btn-primary">
-                              <span class="glyphicon glyphicon-plus-sign"></span> Add New ABSCH-MSR
-                            </a> 
-
-                            <!-- <a href="http://www.cbd.int/doc/abs/commonformats/MSR.doc" class="btn btn-default">
-                              <span class="glyphicon glyphicon-download"></span> Download offline ABSCH-MSR form 
-                            </a> -->
-                          </p>
                     </div>
                 </div>
-
-              </div>
+              </p>
 
               <ngx-lazy ng-show="editing" ready="measureReady"><div edit-measure></div></ngx-lazy>
-
-              <div ng-show="isAuthenticated && !editing">
-
-                  <h2 style="border-bottom: 1px solid #333;">Existing records</h2>
-                  <register-record-list records="records" schema="measure"></register-record-list>
-                  
+              <div ng-hide="editing">
+                  <h2 style="border-bottom: 1px solid #333;margin-bottom:5px;">Records</h2>
+                  <div ng-show="isAuthenticated">
+                    <register-record-list records="records" schema="measure"></register-record-list>
+                  </div>
               </div>
-          </div>
 
+          </div> <!-- end content -->
+      </div> <!-- end cols -->
+<!-- END ****************************************-->
 
-          <div ng-show="tab()=='authority'" class="col-md-9 well well-registerpage">
-
-              <h2><span style="color: #428BCA; font-weight: bold;font-size:180%;">ABSCH-CNA</span> Competent National Authority</h2> 
-
-              <p>
+<!-- CNA ****************************************-->
+          <div ng-show="tab()=='authority'" class="col-xs-9  well-registerpage">
+               <div class="registerpage-header" >
+              <h2>
+                <span class="abbreviation">ABSCH-CNA</span> 
+                <span class="title">Competent National Authority</span>
+              </h2>
+            </div>
+            <div class="registerpage-content">
+              <p class="help1" ng-show="help && !editing" >
                 Article 13 of the Nagoya Protocol requires the designation of one or more competent national authorities on access and benefit-sharing. This information shall be made available to the Access and Benefit-Sharing Clearing-House (ABS-CH) in accordance with Article 14, paragraph 2(b), of the Nagoya Protocol on Access and Benefit-sharing. 
                 <br><br>
                 CNAs are bodies established by governments and are responsible for granting access to users of their genetic resources. Parties can decide to establish one or more CNAs, however if more than one CNAs are established, their responsibilities need to be clearly identified. National implementation measures establish how CNAs work in a given country. Therefore, this common format has been prepared for facilitating the submission of information on competent national authorities by Parties.
 
-                <div  class="alert alert-warning">
+                <div  class="alert alert-warning" ng-show="help && !editing">
                 <strong>Timeframe for confirmation or updating of information</strong><br>
                 Please note that this category of information requires confirmation or updating after two years from the date of submission. After the deadline you will be asked to confirm or update the record within 3 months. After this period, if no confirmation has been received, the record will be marked as “Not confirmed”. 
                 </div>
-              </p>
-
-              <div ng-hide="editing">
-
-                  <h3 style="border-bottom: 1px solid #333;">Add new record</h3>
-
+              
+                <div ng-show="help && !editing">
                     <div class="panel panel-info">
                       <div class="panel-heading">
                           <h4 class="panel-title">Tips for publishing an ABSCH-CNA common format:</h4>
@@ -183,42 +203,24 @@
                           <ol>
                             <li><strong>Register the related ABSCH-MSR</strong>: To include the legal, administrative or policy basis for the competence of the CNA, please complete the ABSCH-MSR common format registering this information before starting the CNA form.</li>
 
-                            <li><strong>CNA Responsibilities</strong>: Please note that when adding a CNA that is not responsible for all functions or when adding multiple CNAs you will be required to describe the responsibilities for each CNA. When adding or updating a CNA, it can be helpful to review all responsibilities of all CNAs are correct.</li>
-                            
+                            <li><strong>CNA Responsibilities</strong>: Please note that when adding a CNA that is not responsible for all functions or when adding multiple CNAs you will be required to describe the responsibilities for each CNA. When adding or updating a CNA, it can be helpful to review all responsibilities of all CNAs are correct.</li>                      
                           </ol>
-
-                          <p>
-                            <a ng-show="!isAuthenticated" ng-click="signIn('authority')" class="btn btn-info">
-                              <i class="glyphicon glyphicon-off"></i> Sign in to add or edit ABSCH-CNA record online
-                            </a>
-
-                            <a ng-show="isAuthenticated && !canEdit('authority')" class="btn btn-warning disabled">
-                              <i class="glyphicon glyphicon-ban-circle"></i> You cannot add a new ABSCH-CNA record online
-                            </a>
-
-                            <a ng-show="isAuthenticated && canEdit('authority')" ng-click="edit('authority', null)" class="btn btn-primary">
-                              <span class="glyphicon glyphicon-plus-sign"></span> Add New ABSCH-CNA
-                            </a> 
-
-                            <!-- <a href="http://www.cbd.int/doc/abs/commonformats/CNA.doc" class="btn btn-default">
-                              <span class="glyphicon glyphicon-download"></span> Download offline ABSCH-CNA form
-                            </a> -->
-                          </p>
                       </div>
                     </div>          
-              </div>
+                </div>
+              </p>
 
               <ngx-lazy ng-show="editing" ready="authorityReady"><div edit-authority></div></ngx-lazy>
-
               <div ng-show="isAuthenticated && !editing">
-
-                  <h2 style="border-bottom: 1px solid #333;">Existing records</h2>
-                  <register-record-list records="records" schema="authority"></register-record-list>
-                  
+                  <h2 style="border-bottom: 1px solid #333;margin-bottom:5px;">Records</h2>
+                  <register-record-list records="records" schema="authority"></register-record-list>  
               </div>
+              
+            </div>
           </div>
+<!-- END CNA ****************************************-->
 
-          <div ng-show="tab()=='absPermit'" class="col-md-9 well well-registerpage">
+          <div ng-show="tab()=='absPermit'" class="col-xs-9  well-registerpage">
 
               <h2><span style="color: #428BCA; font-weight: bold;font-size:180%;">ABSCH-IRCC</span> Permit or its equivalent constituting an internationally recognized certificate of compliance</h2> 
 
@@ -288,7 +290,7 @@
               </div>
           </div>
 
-          <div ng-show="tab()=='absCheckpoint'" class="col-md-9 well well-registerpage">
+          <div ng-show="tab()=='absCheckpoint'" class="col-xs-9  well-registerpage">
 
               <h2><span style="color: #428BCA; font-weight: bold;font-size:180%;">ABSCH-CP</span> Checkpoint</h2> 
 
@@ -338,7 +340,7 @@
               </div>
           </div>
 
-          <div ng-show="tab()=='absCheckpointCommunique'" class="col-md-9 well well-registerpage">
+          <div ng-show="tab()=='absCheckpointCommunique'" class="col-xs-9  well-registerpage">
 
               <h2><span style="color: #428BCA; font-weight: bold;font-size:180%;">ABSCH-CPC</span> Information for the Checkpoint Communiqué</h2> 
 
@@ -389,7 +391,7 @@
 
           </div>
 
-          <div ng-show="tab()=='resource'" class="col-md-9 well well-registerpage">
+          <div ng-show="tab()=='resource'" class="col-xs-9  well-registerpage">
 
               <h2><span style="color: #ed9c28; font-weight: bold;font-size:180%;">ABSCH-VLR</span> Virtual Library Record</h2> 
 
@@ -443,7 +445,7 @@
 
           </div>
 
-          <div ng-show="tab()=='database'" class="col-md-9 well well-registerpage">
+          <div ng-show="tab()=='database'" class="col-xs-9  well-registerpage">
 
               <h2><span style="color: #428BCA; font-weight: bold;font-size:180%;">ABSCH-NDB</span> ABS National Website or Database</h2> 
 
@@ -485,14 +487,11 @@
               <ngx-lazy ng-show="editing" ready="databaseReady"><div edit-database></div></ngx-lazy>
 
               <div ng-show="isAuthenticated && !editing">
-
-                  <h2 style="border-bottom: 1px solid #333;">Existing records</h2>
-                  <register-record-list records="records" schema="database"></register-record-list>
-                  
+                  <register-record-list records="records" schema="database"></register-record-list>                
               </div>
           </div>
 
-          <div ng-show="tab()=='abschNAU' || tab()=='abschPA' || tab()=='abschNFP'" class="col-md-9 well well-registerpage">
+          <div ng-show="tab()=='abschNAU' || tab()=='abschPA' || tab()=='abschNFP'" class="col-md-9  well-registerpage">
 
               <h2><span style="color: #428BCA; font-weight: bold;font-size:180%;">ABSCH-NFP, ABSCH-PA, ABSCH-NAU</span> <br>
               ABS National Focal Point, Publishing Authority, National Authorized User </h2> 

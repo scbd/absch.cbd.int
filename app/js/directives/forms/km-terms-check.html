@@ -2,7 +2,7 @@
 	<script type="text/ng-template"  id="term-check-tree-renderer.html">
 		<label>
 			<input type="checkbox" ng-model="identifiers[term.identifier]" ng-click="save()" ng-required="IsRequired()" value="{{term.identifier}}" />
-				- {{term.title||term.name | lstring:locale}}
+				{{term.title||term.name | lstring:locale}}
 		</label>
 
 		<ul style="list-style:none">

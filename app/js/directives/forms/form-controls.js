@@ -541,11 +541,14 @@ require('app').directive('kmTermRadio', function ($http) {
 			bindingName : '@ngModel',
 			bindingType : '@',
 			termsFn     : '&terms',
+			description : '=',
 			layout      : "@",
 			required    : "@"
 		},
 		link: function ($scope, $element, $attr, ngModelController) 
 		{
+			$scope.description=false;
+
 			$scope.selection = null;
 			$scope.terms     = null;
 			$scope.rootTerms   = [];

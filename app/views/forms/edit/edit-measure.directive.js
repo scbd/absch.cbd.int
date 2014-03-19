@@ -22,8 +22,8 @@ require("app").directive("editMeasure", [ "authHttp", "Enumerable", "$filter", "
 				typeOfDocuments	: function() { return $http.get("/api/v2013/thesaurus/domains/144CF550-7629-43F3-817E-CACDED34837E/terms",	{ cache: true }).then(function(o){ return o.data; }); },
 				jurisdiction	: function() { return $http.get("/api/v2013/thesaurus/domains/7A56954F-7430-4B8B-B733-54B8A5E7FF40/terms",	{ cache: true }).then(function(o){ return o.data; }); },
 				status			: function() { return $http.get("/api/v2013/thesaurus/domains/ED7CDBD8-7762-4A84-82DD-30C01458A799/terms",	{ cache: true }).then(function(o){ return o.data; }); },
-				regions			: function() { return $q.all([$http.get("/api/v2013/thesaurus/domains/countries/terms", { cache: true }), 
-															  $http.get("/api/v2013/thesaurus/domains/regions/terms",   { cache: true })]).then(function(o) {
+				regions			: function() { return $q.all([$http.get("/api/v2013/thesaurus/domains/regions/terms", { cache: true }), 
+															  $http.get("/api/v2013/thesaurus/domains/countries/terms",   { cache: true })]).then(function(o) {
 																return Enumerable.from($filter("orderBy")(o[0].data, "name")).union(
 																	   Enumerable.from($filter("orderBy")(o[1].data, "name"))).toArray();
 															  })
@@ -33,6 +33,21 @@ require("app").directive("editMeasure", [ "authHttp", "Enumerable", "$filter", "
 										   { model:"translationType", title:"Translation Type", required:true, options: $http.get("/api/v2013/thesaurus/domains/19E3C535-2919-4804-966C-E62728507291/terms", { cache: true }).then(function(o){ return $scope.options.documentTranslationsExt[1].options = $filter("orderBy")(o.data, "name"); }) },]
 			};
 
+
+
+			//==================================
+			//
+			//==================================
+			$scope.scrollToTop = function() {
+        		$("body, html").animate({scrollTop: 0}, "slow");
+      		};
+
+      		//==================================
+			//
+			//==================================
+			$scope.isDefined = function(obj) {
+        		return angular.isDefined(obj);
+      		};
 
 
 			//==================================
@@ -262,6 +277,7 @@ require("app").directive("editMeasure", [ "authHttp", "Enumerable", "$filter", "
 
 				return document
 			};
+
 
 			//==================================
 			//

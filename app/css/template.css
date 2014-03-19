@@ -11,10 +11,12 @@
 }
 .home-col > p > a:hover, a:focus{
 	color:black;
+	text-decoration: none;
 }
 
  body a:hover, body a:focus{
 	color:black;
+	text-decoration: none;
 }
 
 body{

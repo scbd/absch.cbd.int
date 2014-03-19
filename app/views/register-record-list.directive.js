@@ -29,6 +29,7 @@ require("app").directive("registerRecordList", ["$timeout", function ($timeout) 
 					$scope.recordToDelete = null; //clear on backdrop click
 				});
 			});
+
 		},
 		controller : ["$scope", "$q", "IStorage", function ($scope, $q, storage) {
 
@@ -39,6 +40,15 @@ require("app").directive("registerRecordList", ["$timeout", function ($timeout) 
 			$scope.edit = function(record) {
 
 				$scope.$emit("editDocument", record.type, record.identifier);
+			};
+
+			//============================================================
+			//
+			//
+			//============================================================
+			$scope.newDoc = function() {
+
+				$scope.$emit("newDocument", $scope.schema);
 			};
 
 			//============================================================

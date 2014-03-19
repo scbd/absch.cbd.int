@@ -11,37 +11,68 @@
 
     <div ng-show="!isLoading() && status!='hidden'">
 
+    <div  class="alert alert-warning" ng-show="
+		editForm.government.$error.required 	|| 
+		editForm.title.$error.required			||
+		editForm.jurisdiction.$error.required	||
+		editForm.type.$error.required 			||
+		editForm.authorities.$error.required	||
+		( isLegallyBinded() && editForm.entryIntoForce.$error.required) ||
+		editForm.documents.$error.required">
+		<strong>Mandatory information:</strong>
+		<ul>
+			<li ng-show="editForm.government.$error.required" >Field is mandatory / 
+			<strong>country</strong></li>
+			<li ng-show="editForm.title.$error.required" >Field is mandatory / 
+			<strong>title</strong></li>
+			<li ng-show="editForm.jurisdiction.$error.required" >Field is mandatory / 
+			<strong>jurisdiction</strong></li>
+			<li ng-show="editForm.type.$error.required" >Field is mandatory / 
+			<strong>type of measure</strong></li>
+
+			<li ng-show="( isLegallyBinded() && editForm.entryIntoForce.$error.required)" >Field is mandatory / 
+			<strong>date of entry into force</strong></li>
+
+
+			<li ng-show="editForm.authorities.$error.required" >Field is mandatory / 
+			<strong>contact institution</strong></li>
+			<li ng-show="editForm.documents.$error.required" >Field is mandatory / 
+			<strong>document text (in its original language)</strong></li>
+		</ul>
+	</div>
+	<div  class="alert alert-success" ng-hide="
+		editForm.government.$error.required 	|| 
+		editForm.title.$error.required			||
+		editForm.jurisdiction.$error.required	||
+		editForm.type.$error.required 			||
+		editForm.authorities.$error.required	||
+		( isLegallyBinded() && editForm.entryIntoForce.$error.required) ||
+		editForm.documents.$error.required">
+		<i class="glyphicon glyphicon-ok-circle"></i> 
+		Your document is valid.
+	</div>
+
         <div class="row">
-            <div class="col-xs-12 visible-xs">
-                <div>
-                    <span km-form-std-buttons document="getCleanDocument()"></span>
-                    <span km-form-languages ng-model="document.header.languages"></span>
-                </div>
-            </div>
-
-            <div class="col-lg-8 col-sm-7 col-xs-12" id="helpTip2">
-                <ul class="pagination">
-                    <li ng-class="{ disabled: tab=='edit'   }"><a href="" ng-click="tab=prevTab">&laquo;</a></li>
-                    <li ng-class="{ active  : tab=='edit'   }"><a href="" ng-click="tab='edit'" >General</a></li>
-                    <li ng-class="{ active  : tab=='absch'  }"><a href="" ng-click="tab='absch'">ABS Measures</a></li>
-                    <li ng-class="{ active  : tab=='review' }"><a href="" ng-click="tab='review'">Review</a></li>
-                    <li ng-class="{ disabled: tab=='review' }"><a href="" ng-click="tab=nextTab">&raquo;</a></li>
-                </ul>   
-            </div>
-
-            <div class="col-lg-4 col-sm-5 hidden-xs text-right">
-                <div class="pagination">
+            <div class="col-xs-12">
+                <div class="pagination  pull-right">
                     <span km-form-languages ng-model="document.header.languages"></span>
                     <span km-form-std-buttons document="getCleanDocument()"></span>
                 </div>
             </div>
-
         </div>
-
+        
 		<form class="editForm" name="editForm" style="margin-top:10px">
+		
 
-			<div ng-show="tab=='edit'" km-tab="edit">
+			<!-- <div ng-show="tab=='review'" km-tab="review"> -->
+	           <!--  <div km-document-validation ng-model="validationReport" ></div>
 
+	            <div class="btn-group" ng-show="reviewDocument.header.languages.length>1">
+	                <input type="button" class="btn" ng-class="{'active' : review.locale==locale, 'btn-info' : review.locale==locale}" ng-repeat="locale in document.header.languages" ng-click="$parent.review.locale = locale" value="{{locale | uppercase}}" />
+	            </div>  -->
+<!-- 			</div> -->
+
+			<div>
 			<!-- 	<span class="help-block"><i>Introduction</i><br /><br />This common format is to be used for legislative, administrative and policy measures on access and benefit-sharing. This information shall be made available to the Access and Benefit-Sharing Clearing-House (ABS-CH) in accordance with Article 14, paragraph 2(a), of the Nagoya Protocol on Access and Benefit-sharing. <br /> <br /> Access and benefit-sharing measures may include national or regional strategies, policies, legislation or regulations. They may also include measures undertaken at the regional, national, sub-national or community level.</span> -->
 
 				<legend>General information</legend>
@@ -57,87 +88,85 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="km-control-group" required name="title" caption="Title of the legislative administrative or policy measures on access and benefit-sharing">
-							<div km-textbox-ml required ng-model="document.title" locales="document.header.languages"></div>
+							<div km-textbox-ml name="title" required ng-model="document.title" locales="document.header.languages"></div>
 						</div>
 					</div>
 				</div>
 				<hr>
 				<div class="row">
-					<div class="col-sm-12">
+					<div class="col-sm-4">
 						<div class="km-control-group" required name="jurisdiction" caption="Area of jurisdiction">
 							<div km-select required name="jurisdiction" ng-model="document.jurisdiction" items="options.jurisdiction()"></div>
 						</div>
 					</div>
+
+
+					<div class="col-sm-8">
+						<div ng-show="isJurisdictionRegional()">
+							<div class="km-control-group" required name="jurisdictionRegions" caption="Country name and/or Geographical or political/economic group(s)">
+							<div km-select required name="jurisdictionRegions" ng-model="document.jurisdictionRegions" items="options.regions()" multiple ></div>
+							</div>
+						</div>
+
+						<div ng-show="isJurisdictionSubNationalOrCommunity()">
+							<div class="km-control-group" required name="jurisdictionName" caption="Name of the sub-national jurisdiction / community">
+							<div km-textbox-ml required ng-model="document.jurisdictionName" locales="document.header.languages"></div>
+							</div>
+						</div>
+				
+					</div>
+
 				</div>
 
-				<div class="row" ng-show="isJurisdictionRegional()">
-					<div class="col-sm-12">
-						<div class="km-control-group" required name="jurisdictionRegions" caption="Country name and/or Geographical or political/economic group(s)">
-							<div km-select required name="jurisdictionRegions" ng-model="document.jurisdictionRegions" items="options.regions()" multiple ></div>
-						</div>
-					</div>
-				</div>
-				<div class="row" ng-show="isJurisdictionSubNationalOrCommunity()">
-					<div class="col-sm-12">
-						<div class="km-control-group" required name="jurisdictionName" caption="Name of the sub-national jurisdiction / community">
-							<div km-textbox-ml required ng-model="document.jurisdictionName" locales="document.header.languages"></div>
-						</div>
-					</div>
-				</div>
+				
+				
 				<hr>
 				<div class="row">
-					<div class="col-sm-12">
+					<div class="col-sm-4">
 						<div required class="km-control-group" name="status" caption="Legal status of the measure">
 							<div km-select name="status" ng-model="document.status" items="options.status()" layout="flat" ></div>
 						</div>
 					</div>
-				</div>
 
-				<div class="row" ng-show="isNotLegallyBinded()">
-					<div class="col-sm-12">
-						<div class="km-control-group" name="adoption" required caption="Please provide the date of adoption">
+					<div class="col-sm-8">
+						<div ng-show="isNotLegallyBinded()">
+							<div class="km-control-group" name="adoption" required caption="Please provide the date of adoption">
 							<div km-date placeholder="YYYY-MM-DD" name="adoption" required ng-model="document.adoption"></div>
+							</div>
 						</div>
-					</div>
-				</div>
+						<div ng-show="isLegallyBinded()">
+							<div class="km-control-group" name="entryIntoForce" required caption="Please provide the date of entry into force">
+								<div km-date placeholder="YYYY-MM-DD" name="entryIntoForce" required ng-model="document.entryIntoForce"></div>
+							</div>
+						</div>
+						<div ng-show="isRetired()">
+							<div class="km-control-group" name="retired" required caption="Please provide the date from which the measure was no longer applicable">
+								<div km-date placeholder="YYYY-MM-DD" name="retired" required ng-model="document.retired">
+								</div>
+							</div>
+						</div>
 
-				<div class="row" ng-show="isLegallyBinded()">
-					<div class="col-sm-12">
-						<div class="km-control-group" name="entryIntoForce" required caption="Please provide the date of entry into force">
-							<div km-date placeholder="YYYY-MM-DD" name="entryIntoForce" required ng-model="document.entryIntoForce"></div>
-						</div>
-					</div>
-				</div>
-				<div class="row" ng-show="isRetired()">
-					<div class="col-sm-12">
-						<div class="km-control-group" name="retired" required caption="Please provide the date from which the measure was no longer applicable">
-							<div km-date placeholder="YYYY-MM-DD" name="retired" required ng-model="document.retired"></div>
-						</div>
-					</div>
-				</div>
-				<hr>
-				<div class="row" >
-					<div class="col-sm-12">
-						<div class="km-control-group" name="limitedApplication" caption="Indicate if the measure has a limited application in time">
+						<div class="km-control-group" name="limitedApplication" caption="Indicate the date the measure is no longer in force if the measure has a limited application in time">
 							<div km-date placeholder="YYYY-MM-DD" name="limitedApplication" ng-model="document.limitedApplication"></div>
 						</div>
+
+
 					</div>
+
 				</div>
+
+				
+
+				
+				
+				
 				<hr>
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="km-control-group" required name="type" caption="Type of document/measure">
-						<span class="help-block">
-							<ul>
-								<li><strong>Law:</strong> A law is usually legislation (a statute) enacted by state government;</li>
-								<li><strong>Regulatory or administrative measure:</strong> A regulatory or administrative measure is usually an act or process of controlling by rule or restriction, having legal force, issued by an administrative agency or a local government;</li>
-								<li><strong>Guidelines:</strong> Guidelines are usually a document by which to determine a course of action, sometimes aims to streamline particular processes according to a set routine or sound practice;</li>
-								<li><strong>Strategy and/or action plan:</strong> A strategy and/or action plan provides direction for future activities.</li>
-								<li><strong>Policy document</strong> Other types of policy measures might include a set of principles, research subsidies and incentives, voluntary agreements, etc. </li>
-								<li><strong>Explanatory information:</strong> Explanatory information may include explanatory memoranda, flow charts that describe national ABS processes, or summary of the national framework in place or being developed in a country.</li>
-						  	</ul>
-						  	</span>
-							<div km-select name="type" required ng-model="document.type" items="options.typeOfDocuments()"></div>
+							<div km-term-radio name="type" description="true" required ng-model="document.type" 
+							terms="options.typeOfDocuments()" required></div>
+							
 						</div>
 					</div>
 				</div>
@@ -184,7 +213,7 @@
 				<hr>
 				<div class="row">
 					<div class="col-sm-12">
-						<div class="km-control-group" name="documentTranslations" caption="Translation">
+						<div class="km-control-group" name="documentTranslations" caption="Translation in one of the official UN languages">
 							<div km-link name="documentTranslations" ng-model="document.documentTranslations" extensions="options.documentTranslationsExt" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
 						</div>
 					</div>
@@ -267,13 +296,9 @@
 					</div>
 				</div>
 
-			</div>
-
-			<div ng-show="tab=='absch'" km-tab="absch">
 
 				<legend>Elements of the measure</legend>
-				<label class="control-label" style="display:none" for="absMeasures" >ABS Elements of the measure</label>
-
+	
 				<div class="help-block">Please select which elements are included in the measure being registered and identify which are the relevant articles of sections of the measure for each of the selected elements.</div>
 
 				<style>
@@ -297,7 +322,10 @@
 							<td style="text-align:left;vertical-align:middle">
 								<label>
 									<input type="checkbox" ng-model="identifiers[term.identifier]" ng-required="IsRequired()" value="{{term.identifier}}" />
-										- <span title="{{term.description|lstring:locale}}">{{term.title||term.name | lstring:locale}} <i ng-show="term.description" class="icon-question-sign"></i> </span>
+										 <span title="{{term.description|lstring:locale}}" style="font-weight:normal;">
+										 	<span >{{term.title||term.name | lstring:locale}} </span> 
+										 	<i ng-show="term.description" class="icon-question-sign"></i> 
+										 	</span>
 								</label>
 							</td>
 							<td ng-show="identifiers[term.identifier]" style="width:200px;text-align:right;vertical-align:middle">
@@ -327,42 +355,35 @@
 
 		</form>
 
-		<div ng-show="tab=='review'" km-tab="review">
+		<hr>
 
-            <div km-document-validation ng-model="validationReport"></div>
-
-            <div class="btn-group" ng-show="reviewDocument.header.languages.length>1">
-                <input type="button" class="btn" ng-class="{'active' : review.locale==locale, 'btn-info' : review.locale==locale}" ng-repeat="locale in document.header.languages" ng-click="$parent.review.locale = locale" value="{{locale | uppercase}}" />
-            </div>
-
-            <div view-measure ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></div>
-
+		<div class="row">
+			<div class="col-xs-12">
+				<a ng-click="scrollToTop()" style="padding-top:20px;" class="pull-right"><i class="glyphicon glyphicon-circle-arrow-up"></i> back to top</a>
+			</div>
 		</div>
 
-        <div class="row">
 
+       <!--  <div class="row">
             <div class="col-lg-9 col-sm-8 col-xs-12" id="helpTip2">
                 <ul class="pagination">
-                    <li ng-class="{ disabled: tab=='edit'   }"><a href="" ng-click="tab=prevTab">&laquo;</a></li>
+                  <li ng-class="{ disabled: tab=='edit'   }"><a href="" ng-click="tab=prevTab">&laquo;</a></li>
                     <li ng-class="{ active  : tab=='edit'   }"><a href="" ng-click="tab='edit'" >General</a></li>
-                    <li ng-class="{ active  : tab=='absch'  }"><a href="" ng-click="tab='absch'">ABS Measures</a></li>
+                    <li ng-class="{ active  : tab=='absch'  }"><a href="" ng-click="tab='absch'">ABS Measures</a></li> 
                     <li ng-class="{ active  : tab=='review' }"><a href="" ng-click="tab='review'">Review</a></li>
-                    <li ng-class="{ disabled: tab=='review' }"><a href="" ng-click="tab=nextTab">&raquo;</a></li>
+                    <li ng-class="{ disabled: tab=='review' }"><a href="" ng-click="tab=nextTab">&raquo;</a></li> 
                 </ul>   
             </div>
-
             <div class="col-lg-3 col-sm-4 hidden-xs text-right">
                 <div class="pagination">
                     <span km-form-std-buttons document="getCleanDocument()"></span>
                 </div>
             </div>
-
             <div class="col-xs-12 visible-xs">
                 <div>
                     <span km-form-std-buttons document="getCleanDocument()"></span>
                 </div>
             </div>
-
-        </div>
+        </div> -->
 	</div>
 </div>
