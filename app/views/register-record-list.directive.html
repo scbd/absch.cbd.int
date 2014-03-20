@@ -28,7 +28,7 @@
       <td colspan="2" class="text-right">{{filteredRecords.length}} record(s)</td>
     </tr>
 
-    <tr ng-repeat="record in (filteredRecords = (records | filter:schemaFilter | filter:statusFilter | filter:keywords))">
+    <tr ng-repeat="record in (filteredRecords = (records | filter:schemaFilter | filter:statusFilter | filter:keywords | orderBy:'-documentID'))">
       <td>
         <div>
           <span ng-hide="record.documentID">[new]</span>
