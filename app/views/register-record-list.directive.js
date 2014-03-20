@@ -141,7 +141,10 @@ require("app").directive("registerRecordList", ["$timeout", function ($timeout) 
 
 			$scope.getWorkflowID = function(entity){
 
-				return entity ? entity.workingDocumentLock.lockID.replace(workflowRE, "$1") : "";
+				if(entity && entity.workingDocumentLock && entity.workingDocumentLock.lockID)
+					return entity.workingDocumentLock.lockID.replace(workflowRE, "$1");
+
+				return "";
 			};
 		}]
 	};
