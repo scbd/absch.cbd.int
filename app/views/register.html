@@ -73,7 +73,8 @@
               <a  ng-click="tab('resource')"  href="#" role="button">
               <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='resource'}">
               <span class="btn-commonformat-reference">ABSCH-VLR </span>  
-              <span class="pull-right label label-info">{{(records | filter:{type:'resource'}).length}}</span>  
+              <span class="pull-right label label-info">{{(records | filter:{type:'resource'}).length}}</span>
+              <span class="pull-right label label-info">{{(records | filter:{type:'resource'}| filter:isRequest).length}}</span>  
               <br><span class="btn-commonformat-name">Virtual Library Record</span>
               </div></a>
   </div>
