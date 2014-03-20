@@ -79,7 +79,12 @@
   </div>
 
   <div><h3>National Users</h3>
-              <a  ng-click="tab('abschNFP')"  href="#" role="button">
+
+     <a href="http://www.cbd.int/doc/abs/commonformats/ABSCH-PA.doc">
+      <i class="glyphicon glyphicon-circle-arrow-down"></i> Download Publishing Authority(PA) and National Authorized User(NAU) nomination form
+     </a>
+
+              <!-- <a  ng-click="tab('abschNFP')"  href="#" role="button">
               <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='abschNFP'}">
               <span class="btn-commonformat-national">ABSCH-NFP </span>   
               <br><span class="btn-commonformat-name">National ABS Focal Points</span>
@@ -95,7 +100,7 @@
               <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='abschNAU'}">
               <span class="btn-commonformat-national">ABSCH-NAU </span>   
               <br><span class="btn-commonformat-name">National Authorized Users</span>
-              </div></a>
+              </div></a> -->
           </div>
                        
     </div>
@@ -176,7 +181,7 @@
 <!-- END ****************************************-->
 
 <!-- CNA ****************************************-->
-          <div ng-show="tab()=='authority'" class="col-xs-9  well-registerpage">
+          <div ng-show="tab()=='authority'" class="col-xs-9">
                <div class="registerpage-header" >
               <h2>
                 <span class="abbreviation">ABSCH-CNA</span> 
@@ -220,13 +225,20 @@
           </div>
 <!-- END CNA ****************************************-->
 
-          <div ng-show="tab()=='absPermit'" class="col-xs-9  well-registerpage">
+<!-- Start Permit ****************************************-->
+          <div ng-show="tab()=='absPermit'" class="col-xs-9">
+           <div class="registerpage-header" >
+              <h2>
+                <span class="abbreviation">ABSCH-IRCC</span> 
+                <span class="title">Permit or its equivalent constituting an internationally recognized certificate of compliance</span>
+              </h2>
+            </div>
 
-              <h2><span style="color: #428BCA; font-weight: bold;font-size:180%;">ABSCH-IRCC</span> Permit or its equivalent constituting an internationally recognized certificate of compliance</h2> 
-
+            <div class="registerpage-content">
+              <div class="help1" ng-show="help && !editing" >
               <p>
                 This common format is to be used for registering permits or their equivalent issued at the time of access as evidence of the decision to grant prior informed consent (PIC) and of the establishment of mutually agreed terms (MAT) in accordance with Article 6, paragraph 3 (e) of the Nagoya Protocol on Access and Benefit-sharing. This information is to be made available to the ABS Clearing-House in accordance with Article 14, paragraph 2 (c).<br /><br />In accordance with Article 17, paragraph 2, a permit or its equivalent issued in accordance with Article 6, paragraph 3 (e) and made available to the ABS Clearing-House, shall constitute an internationally recognized certificate of compliance. <br /><br />Article 17, paragraph 3, further establishes that the internationally recognized certificate of compliance shall serve as evidence that the genetic resource which it covers has been accessed in accordance with PIC and that MAT have been established, as required by the domestic ABS legislation or regulatory requirements of the Party providing PIC.<br /><br /> Article 17, paragraph 4, sets out the minimum information required for the internationally recognized certificate of compliance when it is not confidential, which in turn provides the minimum information to be reported to the ABS Clearing-House in this regard. This information includes:
-                <ol type="a"><li>Issuing authority;</li>
+                <ol type="a" ng-show="help && !editing" ><li>Issuing authority;</li>
                 <li>Date of issuance;</li>
                 <li>The provider;</li>
                 <li>Unique identifier of the certificate;</li>
@@ -235,263 +247,170 @@
                 <li>Confirmation that mutually agreed terms were established;</li>
                 <li>Confirmation that prior informed consent was obtained; and</li>
                 <li>Commercial and/or non-commercial use.</li></ol>
+
                 On the basis of the information provided through this common format on the permit or its equivalent, the ABS Clearing-House will send a courtesy copy of the internationally recognized certificate of compliance constituted from information on the permit or its equivalent made available to the ABS Clearing-House by electronic means to:
                 <ol type="a"><li>The national focal point and the competent national authority or authorities of the country responsible for issuing the permits or its equivalent; and</li>
                 <li>The person or entity to whom prior informed consent was granted.</li></ol>
                  <div  class="alert alert-warning"> Please note that all information submitted to the ABS Clearing-House will be made public and therefore, confidential information should not be submitted. Publishing authorities are reminded that it is their responsibility to ensure that any confidentiality clauses in mutually agreed terms are respected.
                  </div>
-              </p>
-
-              <div ng-hide="editing">
-
-                  <h3 style="border-bottom: 1px solid #333;">Add new record</h3>
-
-                  <div class="panel panel-info">
-                      <div class="panel-heading">
-                          <h4 class="panel-title">Tips for publishing an ABSCH-IRCC common format:</h4>
-                      </div>
-                      <div class="panel-body">
-                          <ol>
-                            <li><strong>Please Note:</strong> All information submitted to the ABS Clearing-House will be made public and therefore, confidential information should not be submitted. Publishing authorities are reminded that it is their responsibility to ensure that any confidentiality clauses in mutually agreed terms are respected.</li>
-
-                            <li><strong>Register the ABSCH-CNA:</strong> the appropriate CNA will need to have been previously registered in the system.</li>
-
-                          </ol>
-
-                          <p>
-                            <a ng-show="!isAuthenticated" ng-click="signIn('absPermit')" class="btn btn-info">
-                              <i class="glyphicon glyphicon-off"></i> Sign in to add or edit ABSCH-IRCC record online
-                            </a>
-
-                            <a ng-show="isAuthenticated && !canEdit('absPermit')" class="btn btn-warning disabled">
-                              <i class="glyphicon glyphicon-ban-circle"></i> You cannot add a new ABSCH-IRCC record online
-                            </a>
-
-                            <a ng-show="isAuthenticated && canEdit('absPermit')" ng-click="edit('absPermit', null)" class="btn btn-primary">
-                              <span class="glyphicon glyphicon-plus-sign"></span> Add New ABSCH-IRCC
-                            </a> 
-
-                           <!--  <a href="http://www.cbd.int/doc/abs/commonformats/IRCC.doc" class="btn btn-default">
-                              <span class="glyphicon glyphicon-download"></span> Download offline ABSCH-IRCC form
-                            </a> -->
-                          </p>
-                      </div>
-                    </div>  
-
+                 </p>
               </div>
 
-              <ngx-lazy ng-show="editing" ready="absPermitReady"><div edit-abs-permit></div></ngx-lazy>
+                <div ng-show="help && !editing" >
 
-              <div ng-show="isAuthenticated && !editing">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Tips for publishing an ABSCH-IRCC common format:</h4>
+                        </div>
+                        <div class="panel-body">
+                            <ol>
+                              <li><strong>Please Note:</strong> All information submitted to the ABS Clearing-House will be made public and therefore, confidential information should not be submitted. Publishing authorities are reminded that it is their responsibility to ensure that any confidentiality clauses in mutually agreed terms are respected.</li>
 
-                  <h2 style="border-bottom: 1px solid #333;">Existing records</h2>
-                  <register-record-list records="records" schema="absPermit"></register-record-list>
+                              <li><strong>Register the ABSCH-CNA:</strong> the appropriate CNA will need to have been previously registered in the system.</li>
 
+                            </ol>
+                        </div>
+                      </div>  
+
+                </div>
+             
+
+                <ngx-lazy ng-show="editing" ready="absPermitReady"><div edit-abs-permit></div></ngx-lazy>
+
+                <div ng-show="isAuthenticated && !editing">
+
+                    <h2 style="border-bottom: 1px solid #333;margin-bottom:5px;">Records</h2>
+                    <register-record-list records="records" schema="absPermit"></register-record-list>
+
+                </div>
+               </div>
+          </div>
+<!-- end permit -->
+
+
+
+<!-- start checkpoint -->
+          <div ng-show="tab()=='absCheckpoint'" class="col-xs-9">
+            
+            <div class="registerpage-header" >
+              <h2>
+                <span class="abbreviation">ABSCH-CP</span> 
+                <span class="title">Checkpoint</span>
+              </h2>
+            </div>
+
+            <div class="registerpage-content">
+              <div class="help1" ng-show="help && !editing" >
+                <p>
+                  Checkpoints are designated by each Party in order to collect and receive information from users of genetic resources. This common format is to be used for registering information on checkpoints that collect or receive relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources.
+                </p>
+              </div>
+
+                <ngx-lazy ng-show="editing" ready="absCheckpointReady"><div edit-abs-checkpoint></div></ngx-lazy>
+
+                <div ng-show="isAuthenticated && !editing">
+                    <h2 style="border-bottom: 1px solid #333;margin-bottom:5px;">Records</h2>
+                    <register-record-list records="records" schema="absCheckpoint"></register-record-list>                  
+                </div>
               </div>
           </div>
+<!-- end cp -->
 
-          <div ng-show="tab()=='absCheckpoint'" class="col-xs-9  well-registerpage">
 
-              <h2><span style="color: #428BCA; font-weight: bold;font-size:180%;">ABSCH-CP</span> Checkpoint</h2> 
+<!-- start CPC -->
+          <div ng-show="tab()=='absCheckpointCommunique'" class="col-xs-9">
 
-              <p>
-                Checkpoints are designated by each Party in order to collect and receive information from users of genetic resources. This common format is to be used for registering information on checkpoints that collect or receive relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources.
-              </p>
+            <div class="registerpage-header" >
+              <h2>
+                <span class="abbreviation">ABSCH-CPC</span> 
+                <span class="title">Information for the Checkpoint Communiqué</span>
+              </h2>
+            </div>
 
-              <div ng-hide="editing">
+            <div class="registerpage-content">
+                <div class="help1" ng-show="help && !editing" >
+                <p>
+                  The checkpoint communiqué contains information collected by the checkpoint. The ABS Clearing-House will send automatically by email a courtesy copy of the record  to the relevant national authorities of the country where the checkpoint is located as designated in the common format on the checkpoint and the national focal point of the country and the competent national authority/ies of the country which is the provider of the genetic resource. Therefore, this common format is to be used to facilitate the provision of relevant information collected by the checkpoint related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources, including from the internationally recognized certificate of compliance, when such a certificate is available. 
+                </p>
+                </div>
 
-                  <h3 style="border-bottom: 1px solid #333;">Add new record</h3>
+                <ngx-lazy ng-show="editing" ready="absCheckpointCommuniqueReady"><div edit-abs-checkpoint-communique></div></ngx-lazy>
 
-                  <div class="panel panel-info">
-                      <div class="panel-heading">
-                          <h4 class="panel-title">Tips for publishing an ABSCH-CP common format:</h4>
-                      </div>
-                      <div class="panel-body">
-                         
-                          <p>
-                            <a ng-show="!isAuthenticated" ng-click="signIn('absCheckpoint')" class="btn btn-info">
-                              <i class="glyphicon glyphicon-off"></i> Sign in to add or edit ABSCH-CP record online
-                            </a>
+                <div ng-show="isAuthenticated && !editing">
 
-                            <a ng-show="isAuthenticated && !canEdit('absCheckpoint')" class="btn btn-warning disabled">
-                              <i class="glyphicon glyphicon-ban-circle"></i> You cannot add a new ABSCH-CP record online
-                            </a>
-
-                            <a ng-show="isAuthenticated && canEdit('absCheckpoint')" ng-click="edit('absCheckpoint', null)" class="btn btn-primary">
-                              <span class="glyphicon glyphicon-plus-sign"></span> Add New ABSCH-CP
-                            </a> 
-
-                            <!-- <a href="http://www.cbd.int/doc/abs/commonformats/CP.doc" class="btn btn-default">
-                              <span class="glyphicon glyphicon-download"></span> Download offline ABSCH-CP form
-                            </a> -->
-                          </p>
-                      </div>
-                    </div> 
-
-              </div>
-
-              <ngx-lazy ng-show="editing" ready="absCheckpointReady"><div edit-abs-checkpoint></div></ngx-lazy>
-
-              <div ng-show="isAuthenticated && !editing">
-
-                  <h2 style="border-bottom: 1px solid #333;">Existing records</h2>
-                  <register-record-list records="records" schema="absCheckpoint"></register-record-list>
-                  
-              </div>
-          </div>
-
-          <div ng-show="tab()=='absCheckpointCommunique'" class="col-xs-9  well-registerpage">
-
-              <h2><span style="color: #428BCA; font-weight: bold;font-size:180%;">ABSCH-CPC</span> Information for the Checkpoint Communiqué</h2> 
-
-              <p>
-                The checkpoint communiqué contains information collected by the checkpoint. The ABS Clearing-House will send automatically by email a courtesy copy of the record  to the relevant national authorities of the country where the checkpoint is located as designated in the common format on the checkpoint and the national focal point of the country and the competent national authority/ies of the country which is the provider of the genetic resource. Therefore, this common format is to be used to facilitate the provision of relevant information collected by the checkpoint related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources, including from the internationally recognized certificate of compliance, when such a certificate is available. 
-              </p>
-
-              <div ng-hide="editing">
-
-                  <h3 style="border-bottom: 1px solid #333;">Add new record</h3>
-
-                     <div class="panel panel-info">
-                      <div class="panel-heading">
-                          <h4 class="panel-title">Tips for publishing an ABSCH-CP common format:</h4>
-                      </div>
-                      <div class="panel-body">
-
-                          <p>
-                            <a ng-show="!isAuthenticated" ng-click="signIn('absCheckpointCommunique')" class="btn btn-info">
-                              <i class="glyphicon glyphicon-off"></i> Sign in to add or edit ABSCH-CPC record online
-                            </a>
-
-                            <a ng-show="isAuthenticated && !canEdit('absCheckpointCommunique')" class="btn btn-warning disabled">
-                              <i class="glyphicon glyphicon-ban-circle"></i> You cannot add a new ABSCH-CPC record online
-                            </a>
-
-                            <a ng-show="isAuthenticated && canEdit('absCheckpointCommunique')" ng-click="edit('absCheckpointCommunique', null)" class="btn btn-primary">
-                              <span class="glyphicon glyphicon-plus-sign"></span> Add New ABSCH-CPC
-                            </a> 
-<!-- 
-                            <a href="http://www.cbd.int/doc/abs/commonformats/CPC.doc" class="btn btn-default">
-                              <span class="glyphicon glyphicon-download"></span> Download offline ABSCH-CPC form
-                            </a> -->
-                          </p>
-                      </div>
-                    </div> 
-
-              </div>
-
-              <ngx-lazy ng-show="editing" ready="absCheckpointCommuniqueReady"><div edit-abs-checkpoint-communique></div></ngx-lazy>
-
-              <div ng-show="isAuthenticated && !editing">
-
-                  <h2 style="border-bottom: 1px solid #333;">Existing records</h2>
-                  <register-record-list records="records" schema="absCheckpointCommunique"></register-record-list>
-                  
+                    <h2 style="border-bottom: 1px solid #333;margin-bottom:5px;">Records</h2>
+                    <register-record-list records="records" schema="absCheckpointCommunique"></register-record-list>
+                    
+                </div>
               </div>
 
           </div>
-
-          <div ng-show="tab()=='resource'" class="col-xs-9  well-registerpage">
-
-              <h2><span style="color: #ed9c28; font-weight: bold;font-size:180%;">ABSCH-VLR</span> Virtual Library Record</h2> 
-
-              <p ng-hide="editing">
-                The forms under the “reference records” category will allow the submission of non-mandatory information relevant to the Protocol from any registered user (e.g. governments, representatives of indigenous and local communities, academia, NGOs, research institutions, business representatives, etc.) to the ABS Clearing-House .The Secretariat would be responsible for validating all reference records.
-                <br><br>
-                Through its virtual library, the ABS Clearing-House provides access to different categories of information and publications categorised in a list of thematic areas. The information provided through this common format will facilitate online searches of information on the ABS relevant resources made available through the ABS Clearing-House, such as books, articles, papers, videos, and others.  
-              </p>
+<!-- end CPC -->
 
 
-               <div ng-hide="editing">
+<!-- start resource -->
+          <div ng-show="tab()=='resource'" class="col-xs-9">
 
-                  <h3 style="border-bottom: 1px solid #333;">Add new record</h3>
+            <div class="registerpage-header" >
+              <h2>
+                <span class="abbreviation" style="color: #ed9c28;">ABSCH-VLR</span> 
+                <span class="title"> Virtual Library Record</span>
+              </h2>
+            </div>
 
-                  <div class="panel panel-info">
-                      <div class="panel-heading">
-                          <h4 class="panel-title"></h4>
-                      </div>
-                      <div class="panel-body">
-                                                                  
-                           <p>
-                            <a ng-show="!isAuthenticated" ng-click="signIn('resource')" class="btn btn-info">
-                              <i class="glyphicon glyphicon-off"></i> Sign in to add or edit ABSCH-VLR record online
-                            </a>
+            <div class="registerpage-content">
+                <div class="help1" ng-show="help && !editing" >
+                    <p ng-hide="editing">
+                      The forms under the “reference records” category will allow the submission of non-mandatory information relevant to the Protocol from any registered user (e.g. governments, representatives of indigenous and local communities, academia, NGOs, research institutions, business representatives, etc.) to the ABS Clearing-House .The Secretariat would be responsible for validating all reference records.
+                      <br><br>
+                      Through its virtual library, the ABS Clearing-House provides access to different categories of information and publications categorised in a list of thematic areas. The information provided through this common format will facilitate online searches of information on the ABS relevant resources made available through the ABS Clearing-House, such as books, articles, papers, videos, and others.  
+                    </p>
+                  </div>
 
-                            <a ng-show="isAuthenticated && !canEdit('resource')" class="btn btn-warning disabled">
-                              <i class="glyphicon glyphicon-ban-circle"></i> You cannot add a new ABSCH-VLR record online
-                            </a>
+                <ngx-lazy ng-show="editing" ready="resourceReady"><div edit-resource></div></ngx-lazy>
 
-                            <a ng-show="isAuthenticated && canEdit('resource')" ng-click="edit('resource', null)" class="btn btn-primary">
-                              <span class="glyphicon glyphicon-plus-sign"></span> Add New ABSCH-VLR
-                            </a> 
-                          
-                            <!-- <a class="btn btn-default">
-                              <span class="glyphicon glyphicon-download"></span> Download offline ABSCH-VLR form
-                            </a> -->
-                          </p>        
-                      </div>
-                    </div>  
+                <div ng-show="isAuthenticated && !editing">
 
+                    <h2 style="border-bottom: 1px solid #333;margin-bottom:5px;">Records</h2>
+                    <register-record-list records="records" schema="resource"></register-record-list>
+                    
+                </div>
               </div>
-
-              <ngx-lazy ng-show="editing" ready="resourceReady"><div edit-resource></div></ngx-lazy>
-
-              <div ng-show="isAuthenticated && !editing">
-
-                  <h2 style="border-bottom: 1px solid #333;">Existing records</h2>
-                  <register-record-list records="records" schema="resource"></register-record-list>
-                  
-              </div>
-
           </div>
+<!-- end vlr -->
 
-          <div ng-show="tab()=='database'" class="col-xs-9  well-registerpage">
 
-              <h2><span style="color: #428BCA; font-weight: bold;font-size:180%;">ABSCH-NDB</span> ABS National Website or Database</h2> 
+<!-- start ndb -->
+          <div ng-show="tab()=='database'" class="col-xs-9">
 
-              <p ng-hide="editing">
-                This common format is to be used for registering information on national website or databases relevant to access and benefit-sharing.
-              </p>
+            <div class="registerpage-header" >
+              <h2>
+                <span class="abbreviation">ABSCH-NDB</span> 
+                <span class="title"> ABS National Website or Database</span>
+              </h2>
+            </div>
 
-              <div ng-hide="editing">
-
-                  <h3 style="border-bottom: 1px solid #333;">Add new record</h3>
-
-                  <div class="panel panel-info">
-                      <div class="panel-heading">
-                          <h4 class="panel-title"></h4>
-                      </div>
-                      <div class="panel-body">
-                                                                  
-                           <p>
-                            <a ng-show="!isAuthenticated" ng-click="signIn('database')" class="btn btn-info">
-                              <i class="glyphicon glyphicon-off"></i> Sign in to add or edit ABSCH-NDB record online
-                            </a>
-
-                            <a ng-show="isAuthenticated && !canEdit('database')" class="btn btn-warning disabled">
-                              <i class="glyphicon glyphicon-ban-circle"></i> You cannot add a new ABSCH-NDB record online
-                            </a>
-
-                            <a ng-show="isAuthenticated && canEdit('database')" ng-click="edit('database', null)" class="btn btn-primary">
-                              <span class="glyphicon glyphicon-plus-sign"></span> Add New ABSCH-NDB
-                            </a> 
-                          
-                           <!--  <a class="btn btn-default">
-                              <span class="glyphicon glyphicon-download"></span> Download offline ABSCH-NDB form
-                            </a> -->
-                         </p>
-                      </div>
-                    </div>  
-              </div>
+            <div class="registerpage-content">
+                <div class="help1" ng-show="help && !editing" >
+                  <p ng-hide="editing">
+                    This common format is to be used for registering information on national website or databases relevant to access and benefit-sharing.
+                  </p>
+                </div>
 
               <ngx-lazy ng-show="editing" ready="databaseReady"><div edit-database></div></ngx-lazy>
 
               <div ng-show="isAuthenticated && !editing">
+                  <h2 style="border-bottom: 1px solid #333;margin-bottom:5px;">Records</h2>
                   <register-record-list records="records" schema="database"></register-record-list>                
               </div>
-          </div>
+            </div>
+        </div>
+<!-- end ndb -->
 
-          <div ng-show="tab()=='abschNAU' || tab()=='abschPA' || tab()=='abschNFP'" class="col-md-9  well-registerpage">
+
+
+
+          <!-- <div ng-show="tab()=='abschNAU' || tab()=='abschPA' || tab()=='abschNFP'" class="col-md-9  well-registerpage">
 
               <h2><span style="color: #428BCA; font-weight: bold;font-size:180%;">ABSCH-NFP, ABSCH-PA, ABSCH-NAU</span> <br>
               ABS National Focal Point, Publishing Authority, National Authorized User </h2> 
@@ -530,7 +449,7 @@
 
               </div>
 
-          </div>
+          </div> -->
 
       </div>
   </div>

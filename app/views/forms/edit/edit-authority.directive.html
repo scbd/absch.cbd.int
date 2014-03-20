@@ -41,9 +41,9 @@
             <li ng-show="editForm.absResponsibleForAll.$error.required" >Field is mandatory / 
             <strong>is responsible for all functions?</strong></li>
             <li ng-show="(!document.absResponsibleForAll && editForm.responsibilities.$error.required)" >Field is mandatory / 
-            <strong>description of responsibilities </strong></li>
+            <strong>responsibilities: description  </strong></li>
             <li ng-show="(!document.absResponsibleForAll && editForm.absJurisdiction.$error.required)" >Field is mandatory / 
-            <strong>area of jurisdiction </strong></li>
+            <strong>responsibilities : area of jurisdiction </strong></li>
 
         </ul>
     </div>
@@ -213,7 +213,7 @@
 
                         <div ng-show="!document.absResponsibleForAll" >
                             
-                            <div class="km-control-group" name="responsibilities" caption="Short description of CNA responsibilities (maximum 500 words). This information is required when a CNA is not responsible for all functions under the Nagoya Protocol" >
+                            <div class="km-control-group" name="responsibilities" caption="Short description of CNA responsibilities (maximum 500 words). This information is required when a CNA is not responsible for all functions under the Nagoya Protocol" required>
                             <div class="help-block" >
                             Article 13, paragraph 2 provides that “Competent national authorities shall, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms.”</div>
                             
@@ -223,7 +223,7 @@
                 </div>
                 <div class="row"  ng-show="!document.absResponsibleForAll" >
                      <div class="col-xs-6">
-                            <div class="km-control-group" name="absJurisdiction" caption="Area of jurisdiction for granting access to genetic resources" style="color:#8a6d3b"></div>
+                            <div class="km-control-group" name="absJurisdiction" caption="Area of jurisdiction for granting access to genetic resources" required></div>
                             <div km-select name="absJurisdiction" ng-model="document.absJurisdiction" items="options.absJurisdictions()" required></div>
                     </div>
                     <div class="col-xs-6">
@@ -236,14 +236,14 @@
                  <div class="row"  ng-show="!document.absResponsibleForAll" >
                     <div class="col-xs-12">
 
-                             <div class="km-control-group" name="absGeneticResourceTypes" caption="Keywords to description scope of responsibilities"></div>
-                             TODO: add term list of scope 
+                             <div class="km-control-group" name="absGeneticResourceTypes" caption="Keywords to describe  scope of CNA responsibilities"></div>
+                             
                              <div km-term-check name="absGeneticResourceTypes" 
                              description="true" required ng-model="document.absGeneticResourceTypes" 
-                            terms="options.absGeneticResourceTypes()" required></div>
+                            terms="options.absGeneticResourceTypes()"  layout="tree" ></div>
                             <div km-term-check name="absGeneticResourceAreas" 
                              description="true" required ng-model="document.absGeneticResourceAreas" 
-                            terms="options.absGeneticResourceAreas()" required></div>
+                            terms="options.absGeneticResourceAreas()" layout="tree" ></div>
 
                          <!--    <div class="km-control-group" name="absGeneticResourceTypes" caption="Responsibilities according to the type of organism"></div>
                              <div km-select multiple name="absGeneticResourceTypes" ng-model="document.absGeneticResourceTypes" items="options.absGeneticResourceTypes()" binding-type="term[]"></div>
