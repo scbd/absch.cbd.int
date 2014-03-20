@@ -158,7 +158,7 @@ require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "
 	//
 	//
 	//============================================================
-	$scope.$on("newDocument", function(schema){
+	$scope.$on("newDocument", function(evt, schema){
 
 		evt.stopPropagation();
 		$scope.edit(schema);
