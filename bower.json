@@ -19,5 +19,8 @@
     "mapsicon": "https://github.com/djaiss/mapsicon.git",
     "flag-icon-css": "https://github.com/lipis/flag-icon-css.git#~0.6.0",
     "bootstrap-datepicker": "~1.3.0"
+  },
+  "resolutions": {
+    "bootstrap": "~3.0.3"
   }
 }
