@@ -1,8 +1,19 @@
+<style>
+.lighter{
+
+	color:#999;
+}
+</style>
+
+<script src="/app/views/workshops/lac.html.js"></script>
+
+<div ng-controller="LacController">
 
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<div class="text-center"><img src="/app/views/workshops/img/header.jpg"></div>
+
+			<div class="text-center"><img src="https://dl.dropboxusercontent.com/u/281146418/Regional%20Workshops/LAC%20Region/header.jpg"></div>
 			<h1>Regional Capacity-building Workshop for Latin America on Nagoya Protocol on Access and Benefit-sharing
 			<span style="color:#999">24 - 28 March 2014 - Montevideo, Uruguay</span>
 			</h1>
@@ -19,12 +30,6 @@
 			<a href="http://www.cbd.int/doc/notifications/2014/ntf-2014-045-abs-parties-en.docx">
 			<i class="glyphicon glyphicon-file"></i> Notification to nominate national users</a>
 
-<style>
-.lighter{
-
-	color:#999;
-}
-</style>
 
 			<hr>
 			<h2>Monday 24 March 2014</h2>
@@ -34,49 +39,26 @@
 				<h4>Presentations</h4>
 					<ul>
 						<li><a href="">Perspectivas para su implementación regional <i class="lighter">Braulio Ferreira de Souza Días, Secretario Ejecutivo del CDB</i></a></li>
-						<li><a href="/app/views/workshops/img/24March2014/presentations/romperhielos.pdf">Romperhielos <i  class="lighter">Matthew Dias, Secretario del CDB</i></a></li>
-						<li><a href="/app/views/workshops/img/24March2014/presentations/intro_bea.pdf">Introducción al Protocolo de Nagoya <i  class="lighter">Beatriz Gomes Castro, Secretario del CDB</i></a></li>
-						<li><a href="/app/views/workshops/img/24March2014/presentations/lily.pdf"> Entendiendo el proceso de investigación y los beneficios que se pueden 
+						<li><a href="https://dl.dropboxusercontent.com/u/281146418/Regional%20Workshops/LAC%20Region/Presentations/romperhielos.pdf">Romperhielos <i  class="lighter">Matthew Dias, Secretario del CDB</i></a></li>
+						<li><a href="https://dl.dropboxusercontent.com/u/281146418/Regional%20Workshops/LAC%20Region/Presentations/intro_bea.pdf">Introducción al Protocolo de Nagoya <i  class="lighter">Beatriz Gomes Castro, Secretario del CDB</i></a></li>
+						<li><a href="https://dl.dropboxusercontent.com/u/281146418/Regional%20Workshops/LAC%20Region/Presentations/lily.pdf"> Entendiendo el proceso de investigación y los beneficios que se pueden 
 derivar de la utilización de recursos genéticos y conocimiento tradicional <i  class="lighter">Lily Rodríguez, Universidad de Bonn</i></a></li>
 					</ul>
 
 				<h4>Photos</h4>
+
 					<div class="row">
+						<div class="col-md-3" ng-repeat="pic in photos24">
 
-						<div  class="col-md-3"><a href="/app/views/workshops/img/24March2014/Original_Files/IMG_8903.jpg">
-							<img class="thumbnail" src="/app/views/workshops/img/24March2014/IMG_8903.jpg"> </a></div>
-						<div  class="col-md-3"><a href="/app/views/workshops/img/24March2014/Original_Files/IMG_8924.jpg">
-							<img class="thumbnail" src="/app/views/workshops/img/24March2014/IMG_8924.jpg"> </a></div>
-						<div  class="col-md-3"><a href="/app/views/workshops/img/24March2014/Original_Files/IMG_8950.jpg">
-							<img class="thumbnail" src="/app/views/workshops/img/24March2014/IMG_8950.jpg"> </a></div>
-						<div  class="col-md-3"><a href="/app/views/workshops/img/24March2014/Original_Files/IMG_8952.jpg">
-							<img class="thumbnail" src="/app/views/workshops/img/24March2014/IMG_8952.jpg"> </a></div>
-						<div  class="col-md-3"><a href="/app/views/workshops/img/24March2014/Original_Files/IMG_8954.jpg">
-							<img class="thumbnail" src="/app/views/workshops/img/24March2014/IMG_8954.jpg"> </a></div>
-						<div  class="col-md-3"><a href="/app/views/workshops/img/24March2014/Original_Files/IMG_8961.jpg">
-							<img class="thumbnail" src="/app/views/workshops/img/24March2014/IMG_8961.jpg"> </a></div>
-						<div  class="col-md-3"><a href="/app/views/workshops/img/24March2014/Original_Files/IMG_8963.jpg">
-							<img class="thumbnail" src="/app/views/workshops/img/24March2014/IMG_8963.jpg"> </a></div>
-						<div  class="col-md-3"><a href="/app/views/workshops/img/24March2014/Original_Files/IMG_8968.jpg">
-							<img class="thumbnail" src="/app/views/workshops/img/24March2014/IMG_8968.jpg"> </a></div>
-						<div  class="col-md-3"><a href="/app/views/workshops/img/24March2014/Original_Files/IMG_8970.jpg">
-							<img class="thumbnail" src="/app/views/workshops/img/24March2014/IMG_8970.jpg"> </a></div>
-						<div  class="col-md-3"><a href="/app/views/workshops/img/24March2014/Original_Files/IMG_8971.jpg">
-							<img class="thumbnail" src="/app/views/workshops/img/24March2014/IMG_8971.jpg"> </a></div>
-					
-			
+							<a href="https://dl.dropboxusercontent.com/u/281146418/Regional%20Workshops/LAC%20Region/Photos/24%20March%202014/Original_Files/IMG_{{pic.id}}.jpg">
+							<img class="thumbnail" src="https://dl.dropboxusercontent.com/u/281146418/Regional%20Workshops/LAC%20Region/Photos/24%20March%202014/IMG_{{pic.id}}.jpg"> </a>
+
+						</div>
 					</div>
-
-
 
 			<hr>
 			<h2>Tuesday 25 March 2014</h2>
-			<p>
-				<label>Summary</label>
-
-				Implementación de los tres objetivos del CDB a través del Protocolo de 
-Nagoya: Experiencias tempranas en América Latina y diseño de 
-propuestas- 
+				<label>Summary</label> 
 
 				<h5>Presentations</h5>
 					<ul>
@@ -87,28 +69,9 @@ propuestas-
 
 				<h5>Photos</h5>
 
-			</p>
 
 
-
-		<!-- 	<hr>
-			<h2>Wednesday 26 March 2014</h2>
-			<p>
-				<label>Summary</label>
-
-				<h5>Presentations</h5>
-					<ul>
-						<li></li>
-					</ul>
-				<h5>Photos</h5>
-
-			</p> -->
-
-
-
-
-
-
-		</div>
-	</div>
-</div>
+		</div> <!-- end col -->
+	</div> <!-- end row -->
+</div> <!-- end container -->
+</div> <!-- end controller -->
