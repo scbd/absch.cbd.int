@@ -25,16 +25,16 @@
 
 <a  ng-click="tab('measure')"  href="#" role="button">
 <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='measure'}">
-<span class="btn-commonformat-national">ABSCH-MSR </span>  
+<div class="btn-commonformat-national">ABSCH-MSR 
 <span ng-show="(records | filter:{type:'measure'}| filter:isDraft).length > 0" class="pull-right label label-default">
-  {{(records | filter:{type:'measure'}| filter:isDraft).length}}</span>  
+  {{(records | filter:{type:'measure'}| filter:isDraft).length}}</span> 
 <span ng-show="(records | filter:{type:'measure'}| filter:isPublished).length > 0" class="pull-right label label-success">
   {{(records | filter:{type:'measure'}| filter:isPublished).length}}</span>
 <span ng-show="(records | filter:{type:'measure'}| filter:isRequest).length > 0" class="pull-right label label-danger">
   {{(records | filter:{type:'measure'}| filter:isRequest).length}}</span>
 <span ng-show="(records | filter:{type:'measure'}).length > 0" class="pull-right label label-info">
-  {{(records | filter:{type:'measure'}).length}}</span>  
-<br><span class="btn-commonformat-name">Legislative, administrative or policy measures </span>
+  {{(records | filter:{type:'measure'}).length}}</span> </div>   
+<span class="btn-commonformat-name">Legislative, administrative or policy measures </span>
 </div></a>
 
 <a  ng-click="tab('authority')"  href="#" role="button">

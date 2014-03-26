@@ -3,6 +3,12 @@ define(['app'], function (app) {
 
     app.controller('TemplateController', ['$scope', '$window', '$location', 'authentication', '$browser', function ($scope, $window, $location, authentication, $browser) {
 
+         $scope.controller = "TemplateController";
+
+        //============================================================
+        //
+        //
+        //============================================================
        function setCookie (name, value, days, path) {
 
             var cookieString = escape(name) + "=";
@@ -25,8 +31,7 @@ define(['app'], function (app) {
             document.cookie = cookieString
         };
 
-        $scope.controller = "TemplateController";
-
+       
         //_loadCss('/app/libs/font-awesome/css/font-awesome.css');
         //_loadCss('//fast.fonts.net/cssapi/ab363dc0-d9f9-4148-a52d-4dca15df47ba.css');
 
