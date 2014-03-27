@@ -16,9 +16,9 @@ require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "
 	//============================================================
 	//============================================================
 	//============================================================
-
+	
 	var leftTab = "dashboard";
-
+	$scope.msg="";
 	$scope.records = null;
 
 	//============================================================
@@ -226,6 +226,7 @@ require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "
 		
 		evt.stopPropagation();
 		$scope.editing = false;
+		$scope.msg = "Your record has been closed without saving.";
 		
 	});
 
@@ -239,7 +240,7 @@ require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "
 		loadRecords();
 		evt.stopPropagation();
 		$scope.editing = false;
-		
+		$scope.msg = "Your record has been saved as a draft.";
 	});
 
 	//============================================================
@@ -253,6 +254,7 @@ require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "
 		loadRecords();
 		evt.stopPropagation();
 		$scope.editing = false;
+		$scope.msg = "Record saved. A publishing request has been sent to your Publishing Authority.";
 		
 	});
 
@@ -267,6 +269,9 @@ require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "
 		loadRecords();
 		evt.stopPropagation();
 		$scope.editing = false;
+		$scope.msg = "Record published." + documentInfo;
+
+		
 
 	});
 
@@ -280,6 +285,7 @@ require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "
 		loadRecords();
 		evt.stopPropagation();
 		$scope.editing = false;
+		$scope.msg = "Record deleted.";
 
 	});
 
@@ -302,7 +308,7 @@ require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "
 	//============================================================
 	function canSwitch() {
 
-		if(!$scope.editing || $window.confirm("Are you sure you want to leave this form and lost your changes?")) {
+		if(!$scope.editing || $window.confirm("Are you sure you want to leave this form and lose your changes?")) {
 			$scope.editing = false;
 		}
 

@@ -191,7 +191,7 @@
                 </div>
                     <div class="row">
                         <div class="col-xs-12">
-                            <div class="km-control-group" name="contacts" required caption="Additional contacts">
+                            <div class="km-control-group" name="contacts"  caption="Additional contacts">
                                 <field-embed-contact multiple ng-model="$parent.document.contacts" locales="$parent.document.header.languages" name="contacts" caption="Add an additional contacts »"></field-embed-contact>
                             </div>  
                         </div>
@@ -238,12 +238,16 @@
 
                              <div class="km-control-group" name="absGeneticResourceTypes" caption="Keywords to describe  scope of CNA responsibilities"></div>
                              
-                             <div km-term-check name="absGeneticResourceTypes" 
+                             <!-- <div km-term-check name="absGeneticResourceTypes" 
                              description="true" required ng-model="document.absGeneticResourceTypes" 
                             terms="options.absGeneticResourceTypes()"  layout="tree" ></div>
                             <div km-term-check name="absGeneticResourceAreas" 
                              description="true" required ng-model="document.absGeneticResourceAreas" 
-                            terms="options.absGeneticResourceAreas()" layout="tree" ></div>
+                            terms="options.absGeneticResourceAreas()" layout="tree" ></div> -->
+
+
+                            <div km-select multiple required name="absGeneticResourceTypes" 
+                            ng-model="document.absGeneticResourceTypes" items="options.keywords()"></div>
 
                          <!--    <div class="km-control-group" name="absGeneticResourceTypes" caption="Responsibilities according to the type of organism"></div>
                              <div km-select multiple name="absGeneticResourceTypes" ng-model="document.absGeneticResourceTypes" items="options.absGeneticResourceTypes()" binding-type="term[]"></div>

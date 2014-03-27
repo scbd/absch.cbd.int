@@ -18,6 +18,26 @@ require("app").directive("editAbsPermit", [ function () {
 				keywords	: function () { return $http.get("/api/v2013/thesaurus/domains/1A22EAAB-9BBC-4543-890E-DEF913F59E98/terms", { cache: true }).then(function (o) { return Thesaurus.buildTree(o.data); }); },
 			};
 
+
+			//==================================
+			//
+			//==================================
+			$scope.scrollToTop = function() {
+        		$("body, html").animate({scrollTop: 0}, "slow");
+      		};
+
+      		//==================================
+			//
+			//==================================
+			$scope.toggleReview = function() {
+        		
+          		if($scope.tab=='review')
+        			$scope.tab='edit';
+        		
+        		if($scope.tab=='edit')
+        			$scope.tab='review';
+      		};
+
 			//==================================
 			//
 			//==================================
@@ -77,6 +97,7 @@ require("app").directive("editAbsPermit", [ function () {
 			//
 			//==================================
 			$scope.$watch("tab", function(tab) {
+
 				if(tab == "review")
 					validate();
 			});

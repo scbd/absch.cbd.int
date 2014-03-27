@@ -7,7 +7,7 @@ require("app").directive("editAuthority", [function () {
 		replace    : true,
 		transclude : false,
 		scope      : {},
-		controller : ["$scope", "authHttp", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage", "authentication", "Enumerable", "editFormUtility", function ($scope, $http, guid, $filter, thesaurus, $q, $location, storage, authentication, Enumerable, editFormUtility)
+		controller : ["$scope", "authHttp", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage", "authentication", "Enumerable", "editFormUtility", function ($scope, $http, guid, $filter, Thesaurus, $q, $location, storage, authentication, Enumerable, editFormUtility)
 		{
 
 			$scope.status   = "";
@@ -26,6 +26,7 @@ require("app").directive("editAuthority", [function () {
 				cpbFunctions				: function () { return $http.get("/api/v2013/thesaurus/domains/Subject Areas/terms",        { cache: true }).then(function (o) { return o.data; }); },
 				cpbOrganismTypes			: function () { return $http.get("/api/v2013/thesaurus/domains/TypeOfOrganisms/terms",      { cache: true }).then(function (o) { return o.data; }); },
 				absFunctions				: function () { return $http.get("/api/v2013/thesaurus/domains/8102E184-E282-47F7-A49F-4C219B0EE235/terms", { cache: true }).then(function (o) { return o.data; }); },
+				keywords					: function () { return $http.get("/api/v2013/thesaurus/domains/1A22EAAB-9BBC-4543-890E-DEF913F59E98/terms", { cache: true }).then(function (o) { return Thesaurus.buildTree(o.data); }); },
 			};
 
 			//==================================
@@ -37,7 +38,6 @@ require("app").directive("editAuthority", [function () {
 		    $scope.BeforeChangeEvent = function () { console.log("Before Change Event called"); };
 
 		   
-
 
 			//==================================
 			//
@@ -122,21 +122,22 @@ require("app").directive("editAuthority", [function () {
 			//==================================
 			$scope.$on("documentInvalid", function(){
 				$scope.tab = "review";
+				//$scope.check_valid = true;
 			});
 
 			//==================================
 			//
 			//==================================
-			$scope.$watch("tab", function(tab) {
+			$scope.$watch("check_valid", function(item) {
 
-				if(tab == "help")           { $scope.prevTab = "help";           $scope.nextTab = "edit"; }
-				if(tab == "edit")           { $scope.prevTab = "help";           $scope.nextTab = "absch"; }
-				if(tab == "absch")          { $scope.prevTab = "edit";           $scope.nextTab = "additionalInfo"; }
-				if(tab == "additionalInfo") { $scope.prevTab = "absch";          $scope.nextTab = "review"; }
-				if(tab == "review")         { $scope.prevTab = "additionalInfo"; $scope.nextTab = "review"; }
+				// if(tab == "help")           { $scope.prevTab = "help";           $scope.nextTab = "edit"; }
+				// if(tab == "edit")           { $scope.prevTab = "help";           $scope.nextTab = "absch"; }
+				// if(tab == "absch")          { $scope.prevTab = "edit";           $scope.nextTab = "additionalInfo"; }
+				// if(tab == "additionalInfo") { $scope.prevTab = "absch";          $scope.nextTab = "review"; }
+				// if(tab == "review")         { $scope.prevTab = "additionalInfo"; $scope.nextTab = "review"; }
 				
-				if(tab == "review")
-					validate();
+				if(tab=='review')
+				 	validate();
 			});
 
 			//==================================

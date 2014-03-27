@@ -13,6 +13,17 @@
             </div>
         </div>
 
+<!--         <div class="row">
+        <div class="col-xs-3"></div>
+         <div class="col-xs-9">
+                  <div ng-show="msg" class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <strong>{{msg}}</strong> 
+                </div>
+          </div>
+        </div> -->
+
+
       <div class="row">
           <div class="col-xs-3">
 
@@ -141,6 +152,19 @@
             </div>
 
             <div class="registerpage-content">
+
+               <div ng-show="msg" class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"  ng-click="msg=''">&times;</button>
+                  <strong>{{msg}}</strong> 
+                </div>
+            <div class="alert alert-info"><p>You are signed in as: <strong>{{user.name}}</strong> 
+            <span ng-show="user.roles.indexOf('AbsPublishingAuthorities') > 0"> (PA)</span> 
+            <span ng-show="user.roles.indexOf('abschiac') > 0"> (IAC)</span> 
+            <span ng-show="user.roles.indexOf('AbsNationalAuthorizedUser') > 0"> (NAU)</span> 
+            </p></div>
+            
+
+
               <p class="help1" ng-show="help && !editing" >
                 The dashboard is a personal working area where it will be possible to follow-up the status of records prepared for their publication in the ABS-CH. The content of the dashboard will differ depending on the role assigned in the ABS-CH (publishing authority or national authorized user). <br><br>
                 In this area you can check whether there are items that require your approval (in the case of the publishing authority) or what is the status of records sent for validation of the publishing authority (in the case of national authorized users).           
@@ -175,7 +199,14 @@
                 <span class="title">Legislative, administrative or policy measures on access and benefit-sharing</span>
               </h2>
             </div>
+
             <div class="registerpage-content">
+
+             <div ng-show="msg" class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"  ng-click="msg=''">&times;</button>
+                  <strong>{{msg}}</strong> 
+                </div>
+          
             <p class="help1" ng-show="help && !editing" >
                 This common format is to be used for legislative, administrative and policy measures on access and benefit-sharing. This information shall be made available to the Access and Benefit-Sharing Clearing-House (ABS-CH) in accordance with Article 14, paragraph 2(a), of the Nagoya Protocol on Access and Benefit-sharing.<br><br>
 
@@ -215,6 +246,12 @@
               </h2>
             </div>
             <div class="registerpage-content">
+               <div ng-show="msg" class="alert alert-success alert-dismissable">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="msg=''">
+                  &times;</button>
+                  <strong>{{msg}}</strong> 
+                </div>
+
               <p class="help1" ng-show="help && !editing" >
                 Article 13 of the Nagoya Protocol requires the designation of one or more competent national authorities on access and benefit-sharing. This information shall be made available to the Access and Benefit-Sharing Clearing-House (ABS-CH) in accordance with Article 14, paragraph 2(b), of the Nagoya Protocol on Access and Benefit-sharing. 
                 <br><br>
@@ -261,6 +298,12 @@
             </div>
 
             <div class="registerpage-content">
+
+             <div ng-show="msg" class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"  ng-click="msg=''">&times;</button>
+                  <strong>{{msg}}</strong> 
+                </div>
+
               <div class="help1" ng-show="help && !editing" >
               <p>
                 This common format is to be used for registering permits or their equivalent issued at the time of access as evidence of the decision to grant prior informed consent (PIC) and of the establishment of mutually agreed terms (MAT) in accordance with Article 6, paragraph 3 (e) of the Nagoya Protocol on Access and Benefit-sharing. This information is to be made available to the ABS Clearing-House in accordance with Article 14, paragraph 2 (c).<br /><br />In accordance with Article 17, paragraph 2, a permit or its equivalent issued in accordance with Article 6, paragraph 3 (e) and made available to the ABS Clearing-House, shall constitute an internationally recognized certificate of compliance. <br /><br />Article 17, paragraph 3, further establishes that the internationally recognized certificate of compliance shall serve as evidence that the genetic resource which it covers has been accessed in accordance with PIC and that MAT have been established, as required by the domestic ABS legislation or regulatory requirements of the Party providing PIC.<br /><br /> Article 17, paragraph 4, sets out the minimum information required for the internationally recognized certificate of compliance when it is not confidential, which in turn provides the minimum information to be reported to the ABS Clearing-House in this regard. This information includes:
@@ -326,6 +369,12 @@
             </div>
 
             <div class="registerpage-content">
+
+             <div ng-show="msg" class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"  ng-click="msg=''">&times;</button>
+                  <strong>{{msg}}</strong> 
+                </div>
+
               <div class="help1" ng-show="help && !editing" >
                 <p>
                   Checkpoints are designated by each Party in order to collect and receive information from users of genetic resources. This common format is to be used for registering information on checkpoints that collect or receive relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources.
@@ -354,6 +403,11 @@
             </div>
 
             <div class="registerpage-content">
+             <div ng-show="msg" class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"  ng-click="msg=''">&times;</button>
+                  <strong>{{msg}}</strong> 
+                </div>
+
                 <div class="help1" ng-show="help && !editing" >
                 <p>
                   The checkpoint communiqué contains information collected by the checkpoint. The ABS Clearing-House will send automatically by email a courtesy copy of the record  to the relevant national authorities of the country where the checkpoint is located as designated in the common format on the checkpoint and the national focal point of the country and the competent national authority/ies of the country which is the provider of the genetic resource. Therefore, this common format is to be used to facilitate the provision of relevant information collected by the checkpoint related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources, including from the internationally recognized certificate of compliance, when such a certificate is available. 
@@ -385,6 +439,11 @@
             </div>
 
             <div class="registerpage-content">
+             <div ng-show="msg" class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"  ng-click="msg=''">&times;</button>
+                  <strong>{{msg}}</strong> 
+                </div>
+
                 <div class="help1" ng-show="help && !editing" >
                     <p ng-hide="editing">
                       The forms under the “reference records” category will allow the submission of non-mandatory information relevant to the Protocol from any registered user (e.g. governments, representatives of indigenous and local communities, academia, NGOs, research institutions, business representatives, etc.) to the ABS Clearing-House .The Secretariat would be responsible for validating all reference records.
@@ -417,6 +476,11 @@
             </div>
 
             <div class="registerpage-content">
+             <div ng-show="msg" class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"  ng-click="msg=''">&times;</button>
+                  <strong>{{msg}}</strong> 
+                </div>
+
                 <div class="help1" ng-show="help && !editing" >
                   <p ng-hide="editing">
                     This common format is to be used for registering information on national website or databases relevant to access and benefit-sharing.
