@@ -64,10 +64,16 @@
 					<div class="col-xs-12">
 						<div class="control-group">
 							<div class="km-control-group" name="permit" required caption="Reference number(s) of the internationally recognized certificate(s) of compliance that relate(s) to this communiqué">
+								<div class="row">
+								<div class="col-xs-5" class="text-center" style="vertical-align:middle;">
 								<div ng-disabled="isPermitNotAvailable()" km-select required multiple name="permit" ng-model="document.permit" watch-items items="options.permits" placeholder="Please select ..."></div>
-								<br />
+								</div>
+								<div class="col-xs-2" class="text-center" style="vertical-align:middle;"><strong>OR</strong></div>
+								<div class="col-xs-5" style="background-color:#fff;">
 								<input type="checkbox" name="permitNotAvailable" ng-model="document.permitNotAvailable" watch-items ></input>
 								<span>The internationally recognized certificate of compliance is not available</span>
+								</div>
+								</div>
 							</div>
 						</div>
 					</div>

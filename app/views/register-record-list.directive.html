@@ -1,5 +1,11 @@
 <div>
 
+<style>
+  .red{background-color:#ccc!important;}
+</style>
+
+
+
   <div class="row">
       <div class="col-xs-10" >
         <span ng-click="statusFilter=null" class="btn btn-info"> 
@@ -21,34 +27,60 @@
 
   <p></p>
 
-  <table ng-show="records" class="table table-striped">
+  <table ng-show="records" class="table table-striped table-condensed">
     <tr>
-      <th>ID</th>
-      <th>Summary</th>
-      <td colspan="2" class="text-right">{{filteredRecords.length}} record(s)</td>
+      <!-- <th>ID</th> -->
+      <th style="border-bottom:5px #333 solid;">Title</th>
+      <th style="width:160px;border-bottom:5px #333 solid;">Created</th>
+      <th style="width:160px;border-bottom:5px #333 solid;">Last update</th>
+      <td colspan="2" class="text-right" style="width:160px;border-bottom:5px #333 solid;">{{filteredRecords.length}} record(s)</td>
     </tr>
 
-    <tr ng-repeat="record in (filteredRecords = (records | filter:schemaFilter | filter:statusFilter | filter:keywords | orderBy:'-documentID'))">
-      <td>
+    <tr ng-repeat="record in (filteredRecords = (records | filter:schemaFilter | filter:statusFilter | filter:keywords | orderBy:'-createdOn'))">
+      <!-- <td>
         <div>
           <span ng-hide="record.documentID">[new]</span>
           <a href="/database/record?documentID={{record.documentID}}">{{record.documentID}}</a>
         </div>
 
+      </td> -->
+      <td>
+        <!-- <b>{{record.type|schemaName}}</b><br/> -->
+          <a href="/database/record?documentID={{record.documentID}}" ng-show="record.documentID">
+          <h4>{{(record.workingDocumentTitle||record.title)|lstring}}</h4></a>
+
+          <span ng-hide="record.documentID">
+          <h4>
+          <span style="font-size:12px;font-weight:bold;color:#333;">[new]</span>
+            {{(record.workingDocumentTitle||record.title)|lstring}}
+          </h4>
+          </span> 
+       </td>
+
+       <td>
+          <div ng-show="record.createdBy">
+            <a style="color:#666" href="mailto:{{record.createdBy.email}}"><strong>{{record.createdBy.firstName}} {{record.createdBy.lastName}}</strong></a>
+            <span style="font-size:10px;white-space:nowrap;">{{record.createdOn | date:"dd MMM yyyy h:mm a (Z)" }}</span>
+          </div>
       </td>
       <td>
-        <b>{{record.type|schemaName}}</b><br/>
-        {{(record.workingDocumentTitle||record.title)|lstring}}
+        <div ng-show="record.updatedBy && record.updatedOn != record.createdOn">
+            <a style="color:#666" href="mailto:{{record.updatedBy.email}}"><strong>{{record.updatedBy.firstName}} {{record.updatedBy.lastName}}</strong> </a>
+            <span style="font-size:10px;white-space:nowrap;">{{record.updatedOn | date:"dd MMM yyyy h:mm a (Z)" }}</span>
+          </div>
       </td>
+     
       <td class="text-right" style="vertical-align:middle">
         <a ng-show="isPublished(record)" href="/database/record?documentID={{record.documentID}}" class="btn btn-xs btn-success" title="Published">P</a>
         <a ng-show="isRequest(record)"   href="/register/tasks/{{getWorkflowID(record)}}" class="btn btn-xs btn-danger" title="Request">R</a>
         <a ng-show="isDraft(record)"     ng-click="edit(record)" class="btn btn-xs btn-default btn-draft" title="Draft" style="color:#fff">D</a>
       </td>
-      <td class="text-right" style="width:100px" >
+      <td class="text-right" style="width:120px" >
         <div class="btn-group">
           <button type="button" class="btn btn-default" ng-click="edit(record)"><i class="fa fa-edit"></i></button>
-          <button type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
+          
+          <button ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
+
         </div>
       </td>
     </tr>
@@ -64,7 +96,7 @@
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h4 class="modal-title">What do you want to delete? <i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" ng-hide="cantDelete">
 
           <div ng-show="isDraft(recordToDelete)" class="well">
             <button type="button" class="btn btn-warning pull-right" ng-disabled="loading" ng-click="deleteDraft(recordToDelete)">Delete the draft</button>
@@ -79,6 +111,11 @@
             <p><b>{{recordToDelete.title|lstring}}</b></p>
             <p>{{recordToDelete.summary|lstring}}</p>
           </div>
+
+        </div>
+        <div class="modal-body" ng-show="cantDelete">
+
+          Not allow to delete published ABSCH-IRCC records. You can only modify them.
 
         </div>
         <div class="modal-footer">

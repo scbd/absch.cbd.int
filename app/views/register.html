@@ -43,8 +43,8 @@
   {{(records | filter:{type:'measure'}| filter:isPublished).length}}</span>
 <span ng-show="(records | filter:{type:'measure'}| filter:isRequest).length > 0" class="pull-right label label-danger">
   {{(records | filter:{type:'measure'}| filter:isRequest).length}}</span>
-<span ng-show="(records | filter:{type:'measure'}).length > 0" class="pull-right label label-info">
-  {{(records | filter:{type:'measure'}).length}}</span> </div>   
+<!-- <span ng-show="(records | filter:{type:'measure'}).length > 0" class="pull-right label label-info">
+  {{(records | filter:{type:'measure'}).length}}</span> --> </div>   
 <span class="btn-commonformat-name">Legislative, administrative or policy measures </span>
 </div></a>
 
@@ -54,8 +54,8 @@
 <span ng-show="(records | filter:{type:'authority'}| filter:isDraft).length > 0"  class="pull-right label label-default">{{(records | filter:{type:'authority'}| filter:isDraft).length}}</span>  
 <span ng-show="(records | filter:{type:'authority'}| filter:isPublished).length > 0"  class="pull-right label label-success">{{(records | filter:{type:'authority'}| filter:isPublished).length}}</span>
 <span ng-show="(records | filter:{type:'authority'}| filter:isRequest).length > 0"  class="pull-right label label-danger">{{(records | filter:{type:'authority'}| filter:isRequest).length}}</span> 
-<span ng-show="(records | filter:{type:'authority'}).length > 0"  class="pull-right label label-info">{{(records | filter:{type:'authority'}).length}}</span>  
-<br><span class="btn-commonformat-name">Competent National Authority </span>
+<!-- <span ng-show="(records | filter:{type:'authority'}).length > 0"  class="pull-right label label-info">{{(records | filter:{type:'authority'}).length}}</span>  
+ --><br><span class="btn-commonformat-name">Competent National Authority </span>
 </div></a>
 
 <a  ng-click="tab('absPermit')"  href="#" role="button">
@@ -64,7 +64,7 @@
 <span ng-show="(records | filter:{type:'absPermit'}| filter:isDraft).length > 0" class="pull-right label label-default">{{(records | filter:{type:'absPermit'}| filter:isDraft).length}}</span>  
 <span ng-show="(records | filter:{type:'absPermit'}| filter:isPublished).length > 0" class="pull-right label label-success">{{(records | filter:{type:'absPermit'}| filter:isPublished).length}}</span>
 <span ng-show="(records | filter:{type:'absPermit'}| filter:isRequest).length > 0" class="pull-right label label-danger">{{(records | filter:{type:'absPermit'}| filter:isRequest).length}}</span>
-<span ng-show="(records | filter:{type:'absPermit'}).length > 0" class="pull-right label label-info">{{(records | filter:{type:'absPermit'}).length}}</span>  
+<!-- <span ng-show="(records | filter:{type:'absPermit'}).length > 0" class="pull-right label label-info">{{(records | filter:{type:'absPermit'}).length}}</span>   -->
 <br><span class="btn-commonformat-name">Internationally recognized certificate of compliance </span>
 </div></a>
 
@@ -75,7 +75,7 @@
 <span ng-show="(records | filter:{type:'absCheckpoint'}| filter:isDraft).length > 0" class="pull-right label label-default">{{(records | filter:{type:'absCheckpoint'}| filter:isDraft).length}}</span>  
 <span ng-show="(records | filter:{type:'absCheckpoint'}| filter:isPublished).length > 0" class="pull-right label label-success">{{(records | filter:{type:'absCheckpoint'}| filter:isPublished).length}}</span>
 <span ng-show="(records | filter:{type:'absCheckpoint'}| filter:isRequest).length > 0" class="pull-right label label-danger">{{(records | filter:{type:'absCheckpoint'}| filter:isRequest).length}}</span> 
-<span ng-show="(records | filter:{type:'absCheckpoint'}.length > 0" class="pull-right label label-info">{{(records | filter:{type:'absCheckpoint'}).length}}</span>  
+<!-- <span ng-show="(records | filter:{type:'absCheckpoint'}.length > 0" class="pull-right label label-info">{{(records | filter:{type:'absCheckpoint'}).length}}</span>   -->
 <br><span class="btn-commonformat-name">Checkpoint </span>
 </div></a>
 
@@ -85,7 +85,7 @@
 <span ng-show="(records | filter:{type:'absCheckpointCommunique'}| filter:isDraft).length > 0" class="pull-right label label-default">{{(records | filter:{type:'absCheckpointCommunique'}| filter:isDraft).length}}</span>  
 <span ng-show="(records | filter:{type:'absCheckpointCommunique'}| filter:isPublished).length > 0" class="pull-right label label-success">{{(records | filter:{type:'absCheckpointCommunique'}| filter:isPublished).length}}</span>
 <span ng-show="(records | filter:{type:'absCheckpointCommunique'}| filter:isRequest).length > 0" class="pull-right label label-danger">{{(records | filter:{type:'absCheckpointCommunique'}| filter:isRequest).length}}</span> 
-<span ng-show="(records | filter:{type:'absCheckpointCommunique'}).length > 0" class="pull-right label label-info">{{(records | filter:{type:'absCheckpointCommunique'}).length}}</span>  
+<!-- <span ng-show="(records | filter:{type:'absCheckpointCommunique'}).length > 0" class="pull-right label label-info">{{(records | filter:{type:'absCheckpointCommunique'}).length}}</span> -->  
 <br><span class="btn-commonformat-name">Checkpoint Communiqué </span>
 </div></a>
 
@@ -95,7 +95,7 @@
 <span ng-show="(records | filter:{type:'database'}| filter:isDraft).length > 0" class="pull-right label label-default">{{(records | filter:{type:'database'}| filter:isDraft).length}}</span>  
 <span ng-show="(records | filter:{type:'database'}| filter:isPublished).length > 0" class="pull-right label label-success">{{(records | filter:{type:'database'}| filter:isPublished).length}}</span>
 <span ng-show="(records | filter:{type:'database'}| filter:isRequest).length > 0" class="pull-right label label-danger">{{(records | filter:{type:'database'}| filter:isRequest).length}}</span>  
-<span ng-show="(records | filter:{type:'database'}).length > 0" class="pull-right label label-info">{{(records | filter:{type:'database'}).length}}</span>  
+<!-- <span ng-show="(records | filter:{type:'database'}).length > 0" class="pull-right label label-info">{{(records | filter:{type:'database'}).length}}</span> -->  
 <br><span class="btn-commonformat-name">ABS National Website or Database </span>
 </div></a>
 
@@ -110,7 +110,7 @@
       <span  ng-show="(records | filter:{type:'resource'} | filter:isDraft).length > 0"  class="pull-right label label-default">{{(records | filter:{type:'resource'}| filter:isDraft).length}}</span>  
       <span  ng-show="(records | filter:{type:'resource'} | filter:isPublished).length > 0"  class="pull-right label label-success">{{(records | filter:{type:'resource'}| filter:isPublished).length}}</span>
       <span  ng-show="(records | filter:{type:'resource'} | filter:isRequest).length > 0"  class="pull-right label label-danger">{{(records | filter:{type:'resource'}| filter:isRequest).length}}</span>  
-      <span  ng-show="(records | filter:{type:'resource'}).length > 0"  class="pull-right label label-info">{{(records | filter:{type:'resource'}).length}}</span>
+     <!--  <span  ng-show="(records | filter:{type:'resource'}).length > 0"  class="pull-right label label-info">{{(records | filter:{type:'resource'}).length}}</span> -->
       <br><span class="btn-commonformat-name">Virtual Library Record</span>
       </div></a>
   </div>
@@ -152,7 +152,7 @@
             </div>
 
             <div class="registerpage-content">
-
+              
                <div ng-show="msg" class="alert alert-success alert-dismissable">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true"  ng-click="msg=''">&times;</button>
                   <strong>{{msg}}</strong> 

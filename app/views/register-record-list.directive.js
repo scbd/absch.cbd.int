@@ -29,7 +29,6 @@ require("app").directive("registerRecordList", ["$timeout", function ($timeout) 
 					$scope.recordToDelete = null; //clear on backdrop click
 				});
 			});
-
 		},
 		controller : ["$scope", "$q", "IStorage", function ($scope, $q, storage) {
 
@@ -57,7 +56,16 @@ require("app").directive("registerRecordList", ["$timeout", function ($timeout) 
 			//============================================================
 			$scope.askDelete = function(record) {
 
-				$scope.recordToDelete = record;
+				if(record.type == 'absPermit' && $scope.isPublished(record)){
+					//cant delete only modify
+					$scope.cantDelete = true;
+					$scope.recordToDelete = "0";
+				}
+				else{
+					$scope.recordToDelete = record;
+					$scope.cantDelete = false;
+				}
+
 			};
 
 			//============================================================

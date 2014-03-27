@@ -1,4 +1,6 @@
-
+.table-striped{
+	background-color:#efefef;
+}
 
 .btn-commonformat-name{
 	color:#666;
@@ -30,6 +32,7 @@
    color:#111;
    text-decoration: none;
    padding-left:10px;
+   background-color: #dedede;
   }
   .btn-commonformat-selected:hover, a.btn-commonformat-selected:focus {
      
@@ -72,7 +75,7 @@
 .registerpage-content{
 	min-height: 700px;
 	padding: 20px;
-	background-color:#ccc;
+	background-color:#dedede;
 	margin:0 0 50px 0;
 }
 
