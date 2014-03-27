@@ -269,7 +269,7 @@ require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "
 		loadRecords();
 		evt.stopPropagation();
 		$scope.editing = false;
-		$scope.msg = "Record published." + documentInfo;
+		$scope.msg = "Record published.";
 
 		
 
