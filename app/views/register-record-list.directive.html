@@ -50,10 +50,11 @@
           <h4>{{(record.workingDocumentTitle||record.title)|lstring}}</h4></a>
 
           <span ng-hide="record.documentID">
-          <h4>
-          <span style="font-size:12px;font-weight:bold;color:#333;">[new]</span>
-            {{(record.workingDocumentTitle||record.title)|lstring}}
-          </h4>
+          
+          
+            <a href="" ng-click="edit(record)"><h4><span style="font-size:12px;font-weight:bold;color:#333;"> [new] </span> 
+            {{(record.workingDocumentTitle||record.title)|lstring}}</h4></a>
+          
           </span> 
        </td>
 
