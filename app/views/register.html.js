@@ -1,5 +1,5 @@
 "use strict";
-require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "$window", "IStorage", "underscore", "schemaTypes", "$compile", function ($rootScope, $scope, $q, $window, storage, _, schemaTypes, $compile) {
+require("app").controller("RegisterController", ["$rootScope", "$location" , "$scope", "$q", "$window", "IStorage", "underscore", "schemaTypes", "$compile", function ($rootScope, $location, $scope, $q, $window, storage, _, schemaTypes, $compile) {
 
 	//============================================================
 	//============================================================
@@ -20,6 +20,7 @@ require("app").controller("RegisterController", ["$rootScope", "$scope", "$q", "
 	var leftTab = "dashboard";
 	$scope.msg="";
 	$scope.records = null;
+
 
 	//============================================================
 	//

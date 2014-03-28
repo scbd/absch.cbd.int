@@ -1,7 +1,7 @@
 define(['app'], function (app) {
     'use strict';
 
-    app.controller('TemplateController', ['$scope',  '$window', '$location', 'authentication', '$browser', function ($scope, $window, $location, authentication, $browser) {
+    app.controller('TemplateController', ['$scope', '$rootScope', '$window', '$location', 'authentication', '$browser', function ($scope, $rootScope, $window, $location, authentication, $browser) {
 
         $scope.controller = "TemplateController";
 

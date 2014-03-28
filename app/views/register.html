@@ -4,7 +4,7 @@
 
   <div class="container">
 
-        <div class="row">
+        <div class="row" ng-show="isAuthenticated">
             <div class="col-xs-12">
               <a class="pull-right" ng-show="!help" ng-click="help=!help;" style="cursor:pointer;"><i class="glyphicon glyphicon-question-sign" >
               </i> show help</a>
@@ -24,8 +24,8 @@
         </div> -->
 
 
-      <div class="row">
-          <div class="col-xs-3">
+      <div class="row" >
+          <div class="col-xs-3" ng-show="isAuthenticated">
 
             <div>            
  
@@ -141,14 +141,50 @@
           </div>
                        
     </div>
-<!-- DASHBOARD ****************************************-->
-          <div ng-show="tab()=='dashboard'" class="col-xs-9">
 
-             <div class="registerpage-header" >
-              <h2>
+    <div class="col-xs-12" ng-hide="isAuthenticated" style="padding-top:30px;">
+            <div class="alert" ng-hide="isAuthenticated">
+            
+
+            <div class="row well" ng-show="!user.isAuthenticated">
+                            <div class="col-xs-7" >
+                                <div>
+                                    
+                                    <h1> <strong> Please sign in to register information.</strong></h1>
+                                       
+                                    <button class="btn btn-primary" ng-click="signIn()">
+                                    <i class="glyphicon glyphicon-off"></i> Sign in</button>
+
+                                     <a href="https://accounts.cbd.int/password/reset">
+                                     <button class="btn btn-warning">Forgot password?</button></a>
+
+                                </div>
+                            </div>
+                            <div class="col-xs-5" style="border-left:5px solid #FFF;">
+                                <div style="padding:1px 10px 15px 10px; margin:0;">
+                                <h2 >No account?</h2>
+                                <p>
+                                    <strong>Get started.</strong><br>
+                                    <span>Create your ABS-CH account.</span>
+                                </p>
+                                <a href="#" ng-click="actionSignup()" style="margin-top:20px;" class="btn btn-info" ng-disabled="waiting" style="margin-bottom:24px">Sign up</a>
+                            </div>
+                        </div>
+                    </div> 
+            </div>  
+    </div>
+
+
+<!-- DASHBOARD ****************************************-->
+          <div ng-show="tab()=='dashboard' && isAuthenticated" class="col-xs-9" >
+
+             <div class="registerpage-header"  >
+              <h2 >
                 <span class="abbreviation">DASHBOARD</span> 
                 <span class="title">Check the status of your work in the ABS-CH</span>
               </h2>
+
+
             </div>
 
             <div class="registerpage-content">
@@ -157,11 +193,14 @@
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true"  ng-click="msg=''">&times;</button>
                   <strong>{{msg}}</strong> 
                 </div>
-            <div class="alert alert-info"><p>You are signed in as: <strong>{{user.name}}</strong> 
+
+            <div class="alert alert-info" ng-show="isAuthenticated"><p>You are signed in as: <strong>{{user.name}}</strong> 
             <span ng-show="user.roles.indexOf('AbsPublishingAuthorities') > 0"> (PA)</span> 
             <span ng-show="user.roles.indexOf('abschiac') > 0"> (IAC)</span> 
             <span ng-show="user.roles.indexOf('AbsNationalAuthorizedUser') > 0"> (NAU)</span> 
             </p></div>
+
+
             
 
 
@@ -172,7 +211,7 @@
 
               <div ng-hide="isAuthenticated">
                 <a ng-show="!isAuthenticated" ng-click="signIn('dashboard')" class="btn btn-info">
-                  <i class="glyphicon glyphicon-off"></i> Sign in to acces information of your ABSCH-DASHBOARD
+                  <i class="glyphicon glyphicon-off"></i> SIGN IN
                 </a>
               </div>
 
