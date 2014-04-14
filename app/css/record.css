@@ -14,7 +14,7 @@ label{
 
 .record-body{
 	/*background-color: #fff;*/
-	padding:0 20px 20px 20px;
+	padding:0 20px 10px 20px;
 }
 
 .record div {
@@ -27,7 +27,7 @@ label{
 
 .record-metadata{
 	/*background-color:#ed9c28;*/
-	background-color:#ddd;
+	background-color:#ccc;
 /*	color:#fff;
 	padding:30px;*/
 }
