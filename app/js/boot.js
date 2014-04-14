@@ -15,6 +15,8 @@ require.config({
         'linqjs'          : '../libs/linqjs/linq',
         'moment'          : '../libs/moment/min/moment-with-langs.min',
         'bootstrap-datepicker' : '../libs/bootstrap-datepicker/js/bootstrap-datepicker'
+         // ,'angular-loading-bar' : '../libs/angular-loading-bar/src/loading-bar',
+         // 'angular-annimate' : '../libs/angular-animate/anuglar-aninmate.min'
     },
     'shim': {
         'angular'        : { 'deps': ['jquery'], 'exports': 'angular' },
@@ -22,12 +24,13 @@ require.config({
         'angular-cookies': { 'deps': ['angular'] },
         'bootstrap'      : { 'deps': ['jquery'] },
         'bootstrap-datepicker' : { 'deps': ['jquery'] },
-        'underscore'     : { 'exports': '_' }
+        'underscore'     : { 'exports': '_' },
+        // 'angular-loading-bar' : {'deps': ['angular']}
     }
 });
 
 require(['angular', 'angular-route', 'angular-cookies', 'bootstrap', 'domReady', 'bootstrap-datepicker'/*, 'main'*/], function (ng) {
-
+//,'angular-loading-bar', 'ngAnimate'
     // NOTE: place operations that need to initialize prior to app start here using the `run` function on the top-level module
 
     require(['domReady!', 'main'], function (document) {

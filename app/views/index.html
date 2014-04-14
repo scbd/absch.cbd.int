@@ -1,6 +1,7 @@
 <link href="/app/css/index.css" rel="stylesheet">
 <link href="/app/css/carousel.css" rel="stylesheet">
 <script src="/app/views/index.html.js"></script>
+<script src="/app/views/directives/login.directive.html.js"></script>
 <div ng-controller="IndexController">
                                        
 
@@ -27,52 +28,8 @@
 
                          </div>
                         <div class="row" ng-show="!user.isAuthenticated">
-                            <div class="col-xs-7" >
-                                <div style="background-color:#1a9351; padding:1px 10px 10px 10px; margin:0;">
-                                    <h2 style="text-align:left;">
-                                        Sign in 
-                                        <span  class="pull-right" style="position:relative;top:15px;font-size:14px;padding-left:10px;">
-                                            <a href="https://accounts.cbd.int/password/reset" style="font-family:Tahoma, Trebuchet MS;color:white;text-decoration:none;" target="_new">Forgot password?</a>
-                                        </span>
-                                    </h2>
-                                    <form name="form" ng-submit="doSignIn()" class="ng-pristine ng-invalid ng-invalid-required" >
-                                        <div class="form-group">
-                                            <div class="input-group" >
-                                                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                                                <input type="text" class="form-control ng-pristine ng-invalid ng-invalid-required" id="inputEmail" name="email" ng-model="email" placeholder="registered email address" required>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><i class="fa fa-lock" style="width:14px"></i></span>
-                                                <input type="password" class="form-control ng-pristine ng-invalid ng-invalid-required" id="inputPassword" name="password" ng-model="password" placeholder="password" required>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="checkbox">
-                                                <label class="pull-right">
-                                                    <input type="checkbox" ng-model="rememberMe" class="ng-pristine ng-valid"> <a style="color:white;text-decoration:none;">Remember me</a>
-                                                </label> 
-                                            </div>
-                                            <button type="submit" class="btn btn-primary pull-left" ng-disabled="waiting" style="position:relative;top:-30px;width:100px;margin:0;">Sign in</button>
-                                            <div class="spinner ng-hide" ng-show="waiting">
-                                                <div class="bounce1"></div>
-                                                <div class="bounce2"></div>
-                                                <div class="bounce3"></div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="col-xs-5" style="border-left:5px solid #FFF;">
-                                <div style="background-color:#1a9351; padding:1px 10px 15px 10px; margin:0;">
-                                <h2 >No account?</h2>
-                                <p>
-                                    <strong>Get started.</strong><br>
-                                    <span>Create your ABS-CH account.</span>
-                                </p>
-                                <a href="#" ng-click="actionSignup()" style="margin-top:20px;" class="btn btn-info" ng-disabled="waiting" style="margin-bottom:24px">Sign up</a>
-                            </div>
+                            <div class="col-xs-12" >
+                               <div login></div>
                         </div>
                     </div>
                 </div>

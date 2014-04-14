@@ -41,6 +41,8 @@
 					$scope.load(documentID);
 				// else
 				// 	$scope.error = "documentID not specified";
+
+				console.log('init');
 				
 			}
 
@@ -69,6 +71,8 @@
 				}).then(null, function(error) {
 					 $scope.error = error.Message || error || "Http Error: " + errorCode;
 				})
+
+				console.log($scope.document);
 			};
 
 			//==================================
