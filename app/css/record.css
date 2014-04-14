@@ -2,7 +2,8 @@
 label{
 	 display: inline;
 	 padding:10px 10px 10px 0;
-	 /*background-color: #fff;*/
+	 font-size: 11px;
+	 text-transform: uppercase;
 
 }
 
@@ -12,12 +13,12 @@ label{
 }
 
 .record-body{
-	background-color: #fff;
+	/*background-color: #fff;*/
 	padding:0 20px 20px 20px;
 }
 
 .record div {
-	padding-top:10px;
+	padding-top:5px;
 }
 .record ul{padding: 0;margin: 0;}
 .record ul > li {padding: 0;margin: 0; margin-left:20px;}
@@ -26,9 +27,9 @@ label{
 
 .record-metadata{
 	/*background-color:#ed9c28;*/
-	background-color:#efefef;
+	background-color:#ddd;
 /*	color:#fff;
-*/	padding:30px;
+	padding:30px;*/
 }
 
 .record-metadata div{

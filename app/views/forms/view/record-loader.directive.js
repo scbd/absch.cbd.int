@@ -7,7 +7,8 @@
 		scope: {
 			linkTarget: "@",
 			document: "=",
-			locale  : "="
+			locale  : "=",
+			hide: "="
 		},
 		link: function($scope) {
 			//debugger;

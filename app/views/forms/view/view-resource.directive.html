@@ -1,8 +1,9 @@
 ﻿<div class="record">	 
 <div class="record-body">
-	 <h4><span style="color:#ed9c28">ABSCH-VLR</span> Virtual Library Record</h4> 
 
-	 <div>
+	 <h4  ng-show="display('header')"><span style="color:#ed9c28">ABSCH-VLR</span> Virtual Library Record</h4> 
+
+	 <div ng-show="display('title')">
 	 <label>Title</label>
 	 <h5 class="km-value">{{document.title | lstring:locale}}</h5>
 	 </div>
@@ -12,7 +13,7 @@
 		<div class="km-value km-pre">{{document.summary | lstring:locale}}</div>
 	</div>
 
-	<div ng-show="document.libraries">
+	<div ng-show="display('libraries')" ng-show="document.libraries">
 		<label>Relevant CBD libraries</label>
 		<ul class="km-value">
 			<li ng-repeat="term in document.libraries">{{term|term}}</li>
@@ -60,9 +61,12 @@
 
 	<div ng-show="document.resourceTypes">
 		<label>Type of resource</label>
-		<ul class="km-value">
-			<li ng-repeat="term in document.resourceTypes">{{term|term}}</li>
-		</ul>
+<!-- 		<ul class="km-value">
+			<li ng-repeat="term in document.resourceTypes"></li>
+		</ul> -->
+		<div class="km-value" ng-repeat="term in document.resourceTypes">
+			<div>{{term | term | lstring:locale}}</div>
+		</div>
 	</div>
 
 	<div ng-show="document.publisher">
@@ -89,9 +93,13 @@
 		<!-- <legend>Resource references</legend>
  -->
 		<label>Country(ies), Regional or Economic group(s) related to the resource</label>
+		<div class="km-value" ng-repeat="term in document.regions">
+			<div>{{term | term | lstring:locale}}</div>
+		</div>
+<!-- 
 		<ul class="km-value">
 			<li ng-repeat="term in document.regions">{{term|term}}</li>
-		</ul>
+		</ul> -->
 	</div>
 
 	<div ng-show="document.keywords">
