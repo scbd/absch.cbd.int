@@ -1,17 +1,31 @@
 ﻿<div class="record">	 
 <div class="record-body">
 
-	 <h4  ng-show="display('header')"><span style="color:#ed9c28">ABSCH-VLR</span> Virtual Library Record</h4> 
+	 <h4 ng-show="display('header')"><span style="color:#ed9c28">ABSCH-VLR</span> Virtual Library Record</h4> 
 
 	 <div ng-show="display('title')">
-	 <label>Title</label>
-	 <h5 class="km-value">{{document.title | lstring:locale}}</h5>
+	 	<label>Title</label>
+	 	<h5 class="km-value">{{document.title | lstring:locale}}</h5>
 	 </div>
 
 	<div ng-show="document.summary">
 		<label>Summary</label>
 		<div class="km-value km-pre">{{document.summary | lstring:locale}}</div>
 	</div>
+
+	<div ng-show="document.resourceLinks">
+		<label>Link to the resource(s)</label>
+		<span class="km-value" ng-repeat="item in document.resourceLinks">
+			<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+			<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+		</span>
+	</div>
+
+	<div ng-show="document.resourceAccess">
+		<label>How to obtain the resource</label>
+		<div class="km-value km-pre">{{document.resourceAccess | lstring:locale}}</div>
+	</div>
+
 
 	<div ng-show="display('libraries')" ng-show="document.libraries">
 		<label>Relevant CBD libraries</label>
@@ -107,19 +121,7 @@
 		<div class="km-value km-pre">{{document.keywords | lstring:locale}}</div>
 	</div>
 
-	<div ng-show="document.resourceLinks">
-		<label>Link to the resource(s)</label>
-		<span class="km-value" ng-repeat="item in document.resourceLinks">
-			<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-			<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-		</span>
-	</div>
-
-	<div ng-show="document.resourceAccess">
-		<label>How to obtain the resource</label>
-		<div class="km-value km-pre">{{document.resourceAccess | lstring:locale}}</div>
-	</div>
-
+	
 
 	<div ng-show="isInLibrary('chm')">
 
@@ -209,19 +211,28 @@
 	</div>
 
 </div>
-	<div class="record-metadata">
-		<div ng-show="document.info.createdBy">
-				<label>Published by:</label>
-				<div class="km-value km-pre">{{document.info.createdBy.firstName}} {{document.info.createdBy.lastName}} ({{document.info.createdBy.email}})</div>
-				<label style="padding-left:10px">Published on:</label>
-				<div class="km-value km-pre">{{document.info.createdOn}}</div>
-		</div>
-		<div ng-show="document.info.updatedBy && document.info.updatedOn != document.info.createdOn">
-				<label>Last udpated by:</label>
-				<div class="km-value km-pre">{{document.info.updatedBy.firstName}} {{document.info.updatedBy.lastName}} ({{document.info.updatedBy.email}})</div>
-				<label style="padding-left:10px">Last updated on:</label>
-				<div class="km-value km-pre">{{document.info.updatedOn}}</div>
-		</div>
+	<div class="container record-metadata" style="margin:0 20px;padding:10px;">
+		<div class="row">
 
+			<div ng-show="document.info.createdBy" class="col-xs-3">
+					<label>Published by:</label>
+					<div>
+					{{document.info.createdBy.firstName}} {{document.info.createdBy.lastName}} ({{document.info.createdBy.email}})</div>
+			</div>		
+			<div ng-show="document.info.createdBy" class="col-xs-3">
+					<label>Published on:</label>
+					<div>{{document.info.createdOn}}</div>
+			</div>
+			
+			<div ng-show="document.info.updatedBy && document.info.updatedOn != document.info.createdOn"  class="col-xs-3">
+					<label>Last udpated by:</label>
+					<div >{{document.info.updatedBy.firstName}} {{document.info.updatedBy.lastName}} ({{document.info.updatedBy.email}})</div>
+			</div>
+			<div ng-show="document.info.updatedBy && document.info.updatedOn != document.info.createdOn"  class="col-xs-3">
+					<label>Last updated on:</label>
+					<div>{{document.info.updatedOn}}</div>
+			</div>
+
+		</div>
 	</div>
 </div>

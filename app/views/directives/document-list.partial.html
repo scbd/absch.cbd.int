@@ -44,12 +44,14 @@
                                 <tr>
                                   <td rowspan="4" style="width:3px;background-color:#ed9c28;"></td>
                                   <td colspan="2" style="padding:10px 0 0 20px;margin:0;">
-                                      <span style="display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;"> reference record  
+                                      <span style="display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;"> reference record 
                                       <span style="color:#666;font-weight:bold;" > | type </span> 
                                       <span style="color:#666;font-weight:bold;" > | country </span>
                                       <span style="color:#666;font-weight:bold;" > | year </span>
                                       <span style="color:#666;font-weight:bold;" > | languages </span>  
-                                    </span>
+                                      <span style="color:#666;font-weight:bold;margin-right:10px;" class="pull-right" > 
+                                      <a href="{{document.url_ss[0]}}">#documentid</a> </span>  
+                                    </span> 
                                     </td>
                                 </tr>
                                 <tr>
@@ -63,7 +65,8 @@
                                 <tr>
                                   <td style="padding-bottom:15px;">
                                     <div style="padding:3px 0 0 20px;margin:0;" ng-hide="displayDetails" > SUMMARY GOES HERE (MAX 100 char)</div>
-                                    <div ng-show="displayDetails" record-loader document="document.data" hide="title;header;libraries" ></div>
+                                    <div ng-show="displayDetails" record-loader document="document.data" 
+                                    hide="title;headerlibraries" ></div>
                                   </td>
                                 </tr>
                               </table>
