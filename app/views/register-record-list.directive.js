@@ -30,7 +30,7 @@ require("app").directive("registerRecordList", ["$timeout", function ($timeout) 
 				});
 			});
 		},
-		controller : ["$scope", "$q", "IStorage", function ($scope, $q, storage) {
+		controller : ["$scope", "$q", "IStorage","$http", function ($scope, $q, storage, $http) {
 
 			//============================================================
 			//
@@ -154,6 +154,20 @@ require("app").directive("registerRecordList", ["$timeout", function ($timeout) 
 
 				return "";
 			};
+
+			$scope.loadDocument = function(item){
+				
+		        item.data = {'schema':item.type, 'url_ss': '', 'data': []};
+		        $http.get("/api/v2013/documents/"+item.identifier).then(function (result) {  
+		            item.data = result.data;
+		           
+		            $http.get("/api/v2013/documents/"+item.identifier + "?info").then(function (result) {  
+		                item.data.info = result.data;
+		            });
+
+		        });				
+				//href="/database/record?documentID={{record.documentID}}" 
+			}
 		}]
 	};
 }]);
