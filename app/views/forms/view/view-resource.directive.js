@@ -18,7 +18,7 @@ require("app").directive("viewResource", [function () {
 			//====================
 			$scope.display = function(field) {
 				
-				if(!$scope.hide) return false;
+				if(!$scope.hide) return true; //show all fields
 
 				return( $scope.hide.indexOf(field) >= 0 ? false : true);
 			}
