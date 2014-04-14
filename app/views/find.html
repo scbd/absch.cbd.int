@@ -6,6 +6,7 @@
 <script src="/app/views/find_facets.partial.html.js"></script>
 <script src="/app/views/find_themes.partial.html.js"></script>
 <script src="/app/views/forms/view/record-loader.directive.js"></script>
+<script src="/app/views/directives/document-list.partial.html.js"></script>
 
 <script src="/app/views/forms/view/view-abs-checkpoint.directive.js"></script>
 <script src="/app/views/forms/view/view-abs-checkpoint-communique.directive.js"></script>
@@ -59,131 +60,8 @@
     <strong>This page is currently under construction.</strong>
     <br>Please email questions to: absch@cbd.int
     </div>
-
-                <div style="padding:0px;margin:0;">
-                 <!--    <div class="row">
-                    <div class="col-md-12" style="padding-top:0; margin-top:0;">
-                      <h3>National Records</h3>
-                      <p><a><strong>ABSCH-MSR</strong></a> 
-                      | <a>law</a> 
-                      | <a>regulatory or adminsitrative measure</a> 
-                      | <a>guidelines</a>  
-                      | <a>strategy/action plans</a>  
-                      | <a>policy document</a>
-                      | <a>explanatory information</a></p>
-
-                       <p><a><strong>ABSCH-CNA</strong></a> 
-                      | <a>national/federal</a> 
-                      | <a>subnational</a>  
-                      | <a>plants</a>  
-                      | <a>animals</a>
-                      | <a>microorganisms</a></p>
-                    </div>
-                    </div> -->
-                    <ul class="pagination pull-right">
-                        <li ng-class="{disabled: currentPage == 0}">
-                            <a href ng-click="actionSetPage(currentPage-1)">« Prev</a>
-                        </li>
-                        <li ng-repeat="n in range(pageCount)" ng-class="{active: n == currentPage}" ng-click="actionSetPage(n)">
-                            <a href>{{n+1}}</a>
-                        </li>
-                        <li ng-class="{disabled: currentPage >= pageCount - 1}">
-                            <a href ng-click="actionSetPage(currentPage+1)">Next »</a>
-                        </li>
-                    </ul>
-                    <div class="clearfix"></div>
-
-                      
-        
-
-                    <div ng-repeat="document in documents">
-
-                   <!--  {{document}} -->
-
-                        <div ng-switch on="document.schema">
-
-                            <div ng-switch-when="BIOSAFETY INFORMATION RESOURCE" style="border-top:1px #ccc solid; 
-                               border-bottom:1px  #ccc solid;border-right:1px solid #ccc;"> 
-                               <table style="width:100%;padding:0px;margin:0;background-color:#FCF8F2; ">
-                                <tr>
-                                  <td rowspan="4" style="width:3px;background-color:#ed9c28;"></td>
-                                  <td colspan="2" style="padding:0 0 0 20px;margin:0;">
-                                    <span style="display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;">ABSCH-VLR | 
-                                    <span style="color:#666;font-size:12px;font-weight:bold;" > {{document.source}} </span> 
-                                    </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                  
-                                  <td style="padding:0;margin:0;padding-left:20px;">
-                                    <i ng-class="{'glyphicon glyphicon-minus-sign':displayDetails, 'glyphicon glyphicon-plus-sign':!displayDetails}" style="font-size:11px;position:relative;top:-1px;"></i>
-                                    <a ng-click="load(document); displayDetails = !displayDetails" class="title">
-                                      {{document.title}}</a> 
-                                  </td>
-                                 <!--  <td rowspan="4" style="width:5px;background-color:#999;padding:5px;margin:0;">V</td> -->
-                                </tr>
-                                <tr>
-                                  <td style="padding:20px; color:#999;">
-                                     {{document.description}}
-                                    <div ng-show="displayDetails" record-loader document="document.data"  ></div>
-                                 
-                                 
-                                  </td>
-
-                                </tr>
-                              </table>
-
-                            </div> <!-- end reference record -->
-
-
-                            <div ng-switch-default style="border-top:1px #ccc solid; 
-                               border-bottom:1px  #ccc solid;border-right:1px solid #ccc;"><!-- Example National Record  -->   
-                              <table style="width:100%;padding:0px;margin:0;background-color:#F4F8FA;">
-                                <tr>
-                                  <td rowspan="4" style="width:3px;background-color:#428bca;"></td>
-                                  <td colspan="2" style="padding:0 0 0 20px;margin:0;">
-                                    <span style="display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;">{{document.schema}} | 
-                                    <span style="color:#666;font-size:12px;font-weight:bold;" > {{document.source}} </span> 
-                                    </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                  <td style="margin:0;padding:0 0 0 20px;">
-                                    <i ng-class="{'glyphicon glyphicon-minus-sign':displayDetails, 'glyphicon glyphicon-plus-sign':!displayDetails}" style="font-size:11px;position:relative;top:-1px;"></i>
-                                     <a ng-click="load(document); displayDetails = !displayDetails" class="title">{{document.title}}</a> 
-                                  </td>
-                                 <!--  <td rowspan="4" style="width:5px;background-color:#999;padding:5px;margin:0;">V</td> -->
-                                </tr>
-                                <tr>
-                                  <td style="padding:20px; color:#999;">
-                                   {{document.description}}
-                                  <div ng-show="displayDetails" record-loader document="document.data"  ></div>
-                                  </td>
-
-                                </tr>
-                              </table>
-                            </div> <!-- end national record -->
-                          <br>
-                        </div> <!-- end switch -->
-
-
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="clearfix"></div>
-                    <ul class="pagination pull-right">
-                        <li ng-class="{disabled: currentPage == 0}">
-                            <a href ng-click="actionSetPage(currentPage-1)">« Prev</a>
-                        </li>
-                        <li ng-repeat="n in range(pageCount)" ng-class="{active: n == currentPage}" ng-click="actionSetPage(n)">
-                            <a href>{{n+1}}</a>
-                        </li>
-                        <li ng-class="{disabled: currentPage >= pageCount - 1}">
-                            <a href ng-click="actionSetPage(currentPage+1)">Next »</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
+          <div document-list  documents='rawDocs' filter='*' show-pagination='true' current-page='currentPage' document-Count='documentCount'>b</div>
+     </div>
 
 
        </div> <!-- end col        -->

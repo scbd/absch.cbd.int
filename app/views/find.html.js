@@ -41,8 +41,9 @@ require('app').controller('FindController', ['$scope', '$rootScope', '$http', '$
 
     // $scope.loaded          = false;
     $scope.itemsPerPage    = 25;
-    $scope.pageCount       = 0;
+    $scope.documentCount       = 0;
     $scope.currentPage     = 0;
+
     $scope.querySchema     = '*:*';
     $scope.queryGovernment = '*:*';
     // $scope.queryTargets    = '*:*';
@@ -50,6 +51,7 @@ require('app').controller('FindController', ['$scope', '$rootScope', '$http', '$
     // $scope.queryDate       = '*:*';
     $scope.queryKeywords   = '*:*';
     $scope.displayDetails = false;
+    $scope.rawDocs = [];
 
     $scope.load = function(item) {
       item.data = {'schema':item.schema, 'url_ss': item.url_ss, 'data': item};
@@ -154,62 +156,62 @@ require('app').controller('FindController', ['$scope', '$rootScope', '$http', '$
     //
     //
     //============================================================
-    function transformDocument (document) {
+    // function transformDocument (document) {
     	
-    	var output = {};
+    // 	var output = {};
 
-    	var formatDate = function formatDate (date) {
-            return date+'';//moment(date).format('MMMM Do YYYY');
-        };
+    // 	var formatDate = function formatDate (date) {
+    //         return date+'';//moment(date).format('MMMM Do YYYY');
+    //     };
 
-        output.id          = document.id;
-        output.schema      = document.schema_EN_t.toUpperCase();
-        output.title       = document.title_t;
-        output.description = document.description_t;
-        output.source      = document.government_EN_t;
-        output.url_ss      = document.url_ss;
-        output.identifier_s = document.identifier_s;
-        output.doc = document;
+    //     output.id          = document.id;
+    //     output.schema      = document.schema_EN_t.toUpperCase();
+    //     output.title       = document.title_t;
+    //     output.description = document.description_t;
+    //     output.source      = document.government_EN_t;
+    //     output.url_ss      = document.url_ss;
+    //     output.identifier_s = document.identifier_s;
+    //     output.doc = document;
 
-        if(document.schema_s=='focalPoint') {
-            output.description  = document.function_t||'';
-            output.description += (document.function_t && document.department_t) ? ', ' : '';
-            output.description += document.department_t||'';
-            output.description2 = document.organization_t||'';
-        }
+    //     if(document.schema_s=='focalPoint') {
+    //         output.description  = document.function_t||'';
+    //         output.description += (document.function_t && document.department_t) ? ', ' : '';
+    //         output.description += document.department_t||'';
+    //         output.description2 = document.organization_t||'';
+    //     }
 
-        if(document.schema_s=='decision' && document.body_s=='XXVII8-COP' ) output.source = 'COP TO THE CONVENTION';
-        if(document.schema_s=='decision' && document.body_s=='XXVII8b-MOP') output.source = 'COP-MOP TO THE CARTAGENA PROTOCOL ON BIOSAFETY';
-        if(document.schema_s=='decision') output.title       = 'Decision ' + document.code_s;
-        if(document.schema_s=='decision') output.description = document.title_t;
+    //     if(document.schema_s=='decision' && document.body_s=='XXVII8-COP' ) output.source = 'COP TO THE CONVENTION';
+    //     if(document.schema_s=='decision' && document.body_s=='XXVII8b-MOP') output.source = 'COP-MOP TO THE CARTAGENA PROTOCOL ON BIOSAFETY';
+    //     if(document.schema_s=='decision') output.title       = 'Decision ' + document.code_s;
+    //     if(document.schema_s=='decision') output.description = document.title_t;
 
-        if(document.schema_s=='recommendation' && document.body_s=='XXVII8-SBSTTA') { output.source = 'SBSTTA'; output.sourceTooltip = 'Subsidiary Body on Scientific, Technical and Technological Advice'; }
-        if(document.schema_s=='recommendation' && document.body_s=='XXVII8-WGRI'  ) { output.source = 'WGRI';   output.sourceTooltip = 'Working Group on the Review of Implementation'; }
-        if(document.schema_s=='recommendation' && document.body_s=='XXVII8b-ICCP' ) { output.source = 'ICCP';   output.sourceTooltip = 'Intergovernmental Committee for the Cartagena Protocol on Biosafety'; }
-        if(document.schema_s=='recommendation' && document.body_s=='XXVII8c-ICNP' ) { output.source = 'ICNP';   output.sourceTooltip = 'Intergovernmental Committee for the Nagoya Protocol on ABS'; }
-        if(document.schema_s=='recommendation') output.title       = 'Recommendation ' + document.code_s;
-        if(document.schema_s=='recommendation') output.description = document.title_t;
+    //     if(document.schema_s=='recommendation' && document.body_s=='XXVII8-SBSTTA') { output.source = 'SBSTTA'; output.sourceTooltip = 'Subsidiary Body on Scientific, Technical and Technological Advice'; }
+    //     if(document.schema_s=='recommendation' && document.body_s=='XXVII8-WGRI'  ) { output.source = 'WGRI';   output.sourceTooltip = 'Working Group on the Review of Implementation'; }
+    //     if(document.schema_s=='recommendation' && document.body_s=='XXVII8b-ICCP' ) { output.source = 'ICCP';   output.sourceTooltip = 'Intergovernmental Committee for the Cartagena Protocol on Biosafety'; }
+    //     if(document.schema_s=='recommendation' && document.body_s=='XXVII8c-ICNP' ) { output.source = 'ICNP';   output.sourceTooltip = 'Intergovernmental Committee for the Nagoya Protocol on ABS'; }
+    //     if(document.schema_s=='recommendation') output.title       = 'Recommendation ' + document.code_s;
+    //     if(document.schema_s=='recommendation') output.description = document.title_t;
 
-        if(document.schema_s=='meetingDocument') output.source      = document.meeting_s;
-        if(document.schema_s=='meetingDocument') output.title       = document.symbol_s;
-        if(document.schema_s=='meetingDocument') output.description = document.title_t;
-        if(document.schema_s=='meetingDocument' && document.group_s=='INF') output.source += ' - INFORMATION';
-        if(document.schema_s=='meetingDocument' && document.group_s=='OFC') output.source += ' - PRE-SESSION';
+    //     if(document.schema_s=='meetingDocument') output.source      = document.meeting_s;
+    //     if(document.schema_s=='meetingDocument') output.title       = document.symbol_s;
+    //     if(document.schema_s=='meetingDocument') output.description = document.title_t;
+    //     if(document.schema_s=='meetingDocument' && document.group_s=='INF') output.source += ' - INFORMATION';
+    //     if(document.schema_s=='meetingDocument' && document.group_s=='OFC') output.source += ' - PRE-SESSION';
 
-        if(document.schema_s=='nationalReport') output.description = document.summary_EN_t;
-        if(document.schema_s=='nationalReport') output.type        = document.reportType_EN_t;
+    //     if(document.schema_s=='nationalReport') output.description = document.summary_EN_t;
+    //     if(document.schema_s=='nationalReport') output.type        = document.reportType_EN_t;
 
-        if(document.schema_s=='implementationActivity') output.type = document.jurisdiction_EN_t + ' - ' + document.completion_EN_t;
+    //     if(document.schema_s=='implementationActivity') output.type = document.jurisdiction_EN_t + ' - ' + document.completion_EN_t;
         
-        if(document.schema_s=='marineEbsa') output.schema = 'ECOLOGICALLY OR BIOLOGICALLY SIGNIFICANT AREA';
+    //     if(document.schema_s=='marineEbsa') output.schema = 'ECOLOGICALLY OR BIOLOGICALLY SIGNIFICANT AREA';
 
-        if(document.schema_s=='event') {
-            output.dates = formatDate(document.startDate_s) + ' to ' + formatDate(document.endDate_s);
-            output.venue = document.eventCity_EN_t + ', ' + document.eventCountry_EN_t;
-        }
+    //     if(document.schema_s=='event') {
+    //         output.dates = formatDate(document.startDate_s) + ' to ' + formatDate(document.endDate_s);
+    //         output.venue = document.eventCity_EN_t + ', ' + document.eventCountry_EN_t;
+    //     }
 
-        return output;
-    }
+    //     return output;
+    // }
 
     //============================================================
     //
@@ -233,6 +235,12 @@ require('app').controller('FindController', ['$scope', '$rootScope', '$http', '$
             'rows': $scope.itemsPerPage,
             'cb': new Date().getTime()
         };
+        
+       // console.log ( $scope.paginatioQuery);
+       //  console.log ( queryParameters);
+       // $.merge(queryParameters, $scope.paginatioQuery);
+        
+
 
         if (queryCanceler) {
             console.log('trying to abort pending request...');
@@ -245,17 +253,20 @@ require('app').controller('FindController', ['$scope', '$rootScope', '$http', '$
            
             queryCanceler = null;
 
-            $scope.count     = data.response.numFound;
-            $scope.start     = data.response.start;
-            $scope.stop      = data.response.start+data.response.docs.length-1;
-            $scope.rows      = data.response.docs.length;
-            $scope.documents = [];
+            // $scope.count     = data.response.numFound;
+            // $scope.start     = data.response.start;
+            // $scope.stop      = data.response.start+data.response.docs.length-1;
+            // $scope.rows      = data.response.docs.length;
+            // $scope.documents = [];
             
-            data.response.docs.forEach(function (document) {
-            	$scope.documents.push(transformDocument(document));
-            });
+             $scope.rawDocs = [];
+             $scope.rawDocs = data.response.docs;
+             $scope.documentCount   = data.response.numFound;
+            // data.response.docs.forEach(function (document) {
+            // 	$scope.documents.push(transformDocument(document));
+            // });
 
-            $scope.pageCount = Math.ceil(data.response.numFound / $scope.itemsPerPage);
+            
 
             if(!$scope.schemas) {
                 var queryFacetsParameters = {
@@ -318,39 +329,39 @@ require('app').controller('FindController', ['$scope', '$rootScope', '$http', '$
     //
     //
     //============================================================
-    $scope.actionSetPage = function (pageNumber) {
-        $scope.currentPage = Math.min($scope.pageCount-1, Math.max(0, pageNumber));
-    };
+    // $scope.actionSetPage = function (pageNumber) {
+    //     $scope.currentPage = Math.min($scope.pageCount-1, Math.max(0, pageNumber));
+    // };
 
     //============================================================
     //
     // temp
     //============================================================
-    $scope.range = function (start, end) {
+    // $scope.range = function (start, end) {
 
-        var ret = [];
-        if (!end) {
-            end = start;
-            start = 0;
-        }
+    //     var ret = [];
+    //     if (!end) {
+    //         end = start;
+    //         start = 0;
+    //     }
 
-        var maxCount = 10;
-        var middle = 5;
-        var count = end - start;
+    //     var maxCount = 10;
+    //     var middle = 5;
+    //     var count = end - start;
         
-        if (count > maxCount) {
-            if ($scope.currentPage > middle)
-                start = $scope.currentPage - middle;
+    //     if (count > maxCount) {
+    //         if ($scope.currentPage > middle)
+    //             start = $scope.currentPage - middle;
 
-            end = Math.min(count, start + maxCount);
-            start = Math.max(0, end - maxCount);
-        }
+    //         end = Math.min(count, start + maxCount);
+    //         start = Math.max(0, end - maxCount);
+    //     }
         
-        for (var i = start; i < end; i++) {
-            ret.push(i);
-        }
-        return ret;
-    };
+    //     for (var i = start; i < end; i++) {
+    //         ret.push(i);
+    //     }
+    //     return ret;
+    // };
 
     $scope.$watch('currentPage',     refresh);
     $scope.$watch('querySchema',     function() { $scope.currentPage=0; refresh(); });
@@ -358,6 +369,6 @@ require('app').controller('FindController', ['$scope', '$rootScope', '$http', '$
     $scope.$watch('queryTargets',    function() { $scope.currentPage=0; refresh(); });
     $scope.$watch('queryTheme',      function() { $scope.currentPage=0; refresh(); });
     $scope.$watch('queryDate',       function() { $scope.currentPage=0; refresh(); });
-    $scope.$watch('keyword',         function() { $scope.currentPage=0; refresh(); });
+    $scope.$watch('keyword',         function() { $scope.currentPage=0; refresh(); });    
 
 }]);

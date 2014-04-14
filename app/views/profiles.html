@@ -1,8 +1,24 @@
 <link href="/app/css/profiles.css" rel="stylesheet">
 <link href="/app/css/find.css" rel="stylesheet">
+<link href="/app/css/record.css" rel="stylesheet">
 <link href="/app/libs/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
 <script src="/app/views/profiles.html.js"></script>
+<script src="/app/views/forms/view/record-loader.directive.js"></script>
+<script src="/app/views/directives/document-list.partial.html.js"></script>
 
+<script src="/app/views/forms/view/view-abs-checkpoint.directive.js"></script>
+<script src="/app/views/forms/view/view-abs-checkpoint-communique.directive.js"></script>
+<script src="/app/views/forms/view/view-abs-permit.directive.js"></script>
+<script src="/app/views/forms/view/view-authority.directive.js"></script>
+<script src="/app/views/forms/view/view-authority-reference.directive.js"></script>
+<script src="/app/views/forms/view/view-contact.directive.js"></script>
+<script src="/app/views/forms/view/view-contact-reference.directive.js"></script>
+<script src="/app/views/forms/view/view-database.directive.js"></script>
+<script src="/app/views/forms/view/view-measure.directive.js"></script>
+<script src="/app/views/forms/view/view-organization.directive.js"></script>
+<script src="/app/views/forms/view/view-organization-reference.directive.js"></script>
+<script src="/app/views/forms/view/view-resource.directive.js"></script>
+<script src="/app/views/forms/view/view-other.directive.js"></script>
 
 <div ng-controller="ProfileController">
 
@@ -85,39 +101,12 @@
 			    </div>
 			    <div id="collapseOne" class="panel-collapse collapse in">
 			      <div class="panel-body">
-			        {{absch_nfp.response.docs}}
-			      		<!-- <div ng-repeat="document in absch_nfp.response.docs">
-			      		{{document}}
-			      		 	<div  style="border-top:1px #ccc solid; 
-                               border-bottom:1px  #ccc solid;border-right:1px solid #ccc;"> 
-                              <table style="width:100%;padding:0px;margin:0;background-color:#F4F8FA;">
-                                <tr>
-                                  <td rowspan="4" style="width:3px;background-color:#428bca;"></td>
-                                  <td colspan="2" style="padding:0 0 0 20px;margin:0;">
-                                    <span style="display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;">{{document.schema}} | 
-                                    <span style="color:#666;font-size:12px;font-weight:bold;" > {{document.source}} </span> 
-                                    </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                  <td style="margin:0;padding:0 0 0 20px;">
-                                    <i ng-class="{'glyphicon glyphicon-minus-sign':displayDetails, 'glyphicon glyphicon-plus-sign':!displayDetails}" style="font-size:11px;position:relative;top:-1px;"></i>
-                                     <a ng-click="load(document); displayDetails = !displayDetails" class="title">{{document.title}}</a> 
-                                  </td>
-                               
-                                </tr>
-                                <tr>
-                                  <td style="padding:20px; color:#999;">
-                                   {{document.description}}
-                                  <div ng-show="displayDetails" record-loader document="document.data"  ></div>
-                                  </td>
-
-                                </tr>
-                              </table>
-                            </div>
-                            <br> 
-						</div> <!-- end repeater --> -->
-
+			       <!-- {{absch_nfp.response.docs}}-->			      		
+					<div>
+					<!-- <div document-list documents='absch_nfp.response.docs' filter='National Focal Point' show-pagination='false' ></div> -->
+					<div document-list  documents='absch_nfp.response.docs' filter='National Focal Point' show-pagination='false'
+						 current-page='currentPage' document-Count='documentCount' ></div>
+					</div>
 			      </div>
 			    </div>
 			  
@@ -132,8 +121,9 @@
 			        </a>
 			    </div>
 			    <div id="collapseTwo" class="panel-collapse collapse">
-			      <div class="panel-body">
-			        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+			      <div class="panel-body">			        
+			        <div document-list  documents='absch_nfp.response.docs' filter='Competent National Authority' show-pagination='false'
+						 current-page='currentPage' document-Count='documentCount' ></div>
 			      </div>
 			    </div>
 			
@@ -147,8 +137,9 @@
 			        </a>
 			    </div>
 			    <div id="collapseThree" class="panel-collapse collapse">
-			      <div class="panel-body">
-			        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+			      <div class="panel-body">			       
+			       <div document-list  documents='absch_nfp.response.docs' filter='National Measure' show-pagination='false'
+						 current-page='currentPage' document-Count='documentCount' ></div>
 			      </div>
 			    </div>
 
@@ -163,8 +154,9 @@
 			        </a>
 			    </div>
 			    <div id="collapseFour" class="panel-collapse collapse">
-			      <div class="panel-body">
-			        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+			      <div class="panel-body">			       
+			       <div document-list  documents='absch_nfp.response.docs' filter='Permit' show-pagination='false'
+						 current-page='currentPage' document-Count='documentCount' ></div>
 			      </div>
 			    </div>
 
@@ -179,8 +171,9 @@
 			        </a>
 			    </div>
 			    <div id="collapseFive" class="panel-collapse collapse">
-			      <div class="panel-body">
-			        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+			      <div class="panel-body">			       	
+			       	<div document-list  documents='absch_nfp.response.docs' filter='absCheckpoint' show-pagination='false'
+						 current-page='currentPage' document-Count='documentCount' ></div>
 			      </div>
 			    </div>
 
@@ -195,8 +188,9 @@
 			        </a>
 			    </div>
 			    <div id="collapseSix" class="panel-collapse collapse">
-			      <div class="panel-body">
-			        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+			      <div class="panel-body">			       	
+			       	<div document-list  documents='absch_nfp.response.docs' filter='absCheckpointCommunique' show-pagination='false'
+						 current-page='currentPage' document-Count='documentCount' ></div>
 			      </div>
 			    </div>
 
@@ -212,7 +206,8 @@
 			    </div>
 			    <div id="collapseSeven" class="panel-collapse collapse">
 			      <div class="panel-body">
-			        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+			       	<div document-list  documents='absch_nfp.response.docs' filter='Unknow' show-pagination='false'
+						 current-page='currentPage' document-Count='documentCount' ></div>
 			      </div>
 			    </div>
 
@@ -227,8 +222,9 @@
 			        </a>
 			    </div>
 			    <div id="collapseEight" class="panel-collapse collapse">
-			      <div class="panel-body">
-			        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+			      <div class="panel-body">			        	
+			        	<div document-list  documents='absch_nfp.response.docs' filter='resource' show-pagination='false'
+						 current-page='currentPage' document-Count='documentCount' ></div>
 			      </div>
 			    </div>
 
