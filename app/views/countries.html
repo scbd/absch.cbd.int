@@ -13,10 +13,10 @@
                        
                         <tr>
                             <td style="text-align: center; width: 200px;">
-                                <div style="width: 180px; height: 100px;">
+                                <div style="width: 180px; height: 100px;cursor:pointer;" ng-click="searchFilter=isPartyToCBD">
                                     
                                   <div class="numberCircle" style="width:80px;height:80px;padding-top:20px;background-color:#1FA65D;">
-                                  197</div>
+                                  {{parties}}</div>
                                   <div style="color: #fff; font-size: 10px; text-transform: uppercase;font-weight:bold;">
                                   PARTIES TO THE CBD</div>
 
@@ -26,7 +26,7 @@
                                 </div>
                             </td>
                              <td style="text-align:center;width:200px;">
-                                <div style="width: 180px; height: 100px;">
+                                <div style="width: 180px; height: 100px;cursor:pointer;" ng-click="searchFilter=isSignatory">
                                     
                                 <div class="numberCircle" style="width:80px;height:80px;padding-top:20px;background-color:#1FA65D;">
                                 {{signatures}}</div>
@@ -37,7 +37,7 @@
                                 </div>
                                  </td>
                             <td style="text-align: center; width: 200px;">
-                              <div style="width: 180px; height: 100px;">
+                              <div style="width: 180px; height: 100px;cursor:pointer;" ng-click="searchFilter=isRatified">
                                     
                                   <div class="numberCircle" style="width:80px;height:80px;padding-top:20px;background-color:#1FA65D;">
                                   {{ratifications}}</div>
@@ -88,7 +88,7 @@
              <i ng-show="sortTerm=='treaties.XXVII8b.deposit'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span></th>
             <!-- <th>Entry into force</th> -->
           </tr>
-          <tr ng-repeat="country in countries | orderBy:sortTerm:orderList" ng-class="{'success' : (country.treaties.XXVII8b.instrument=='ratification' ||  country.treaties.XXVII8b.instrument=='accession' ||  country.treaties.XXVII8b.instrument=='acceptance')}">
+          <tr ng-repeat="country in (countries | filter: searchFilter | orderBy:sortTerm:orderList)" ng-class="{'success' : (country.treaties.XXVII8b.instrument=='ratification' ||  country.treaties.XXVII8b.instrument=='accession' ||  country.treaties.XXVII8b.instrument=='acceptance')}">
             <td>{{$index + 1}}</td>
             <td><a ng-href="countries/{{country.code}}" class="country-list-name">{{country.name.en}}</a></td>
             <td>{{country.treaties.XXVII8b.signature}}</td>
