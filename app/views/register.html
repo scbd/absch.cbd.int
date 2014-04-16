@@ -151,18 +151,6 @@
                             <div class="col-xs-12" >
                                <div login></div>
                             </div>
-                            <!-- <div class="col-xs-4" >
-                                <div>
-                                <h2 >No account? <a href="#" ng-click="actionSignup()" style="font-family:Tahoma, Trebuchet MS" class="btn btn-info" ng-disabled="waiting" style="margin-bottom:24px">SIGN UP</a></h2>
-                                <p>
-                                    <strong>Get started.</strong>
-                                    <span>Create your ABS-CH account.</span>
-                                </p>
-                                
-                            </div>
-                        </div> -->
-                   
-
                       <div class="col-xs-12" style="padding-top:30px;">
                         <hr>
                         <h3>Designation of the ABS Clearing-House publishing authority and national authorised users</h3>
@@ -222,16 +210,44 @@
                 </a>
               </div>
 
-              <div ng-show="isAuthenticated">
-                <h2>Items requiring your attention</h2>  
-                <my-tasks></my-tasks>
-                
-                <h2>Pending requests</h2>  
-                <my-pending-tasks></my-pending-tasks>
+              <div ng-show="isAuthenticated" class="row">
+                        <div class="col-ld-12 col-md-12 col-sm-12" >
 
-                <h2>Completed requests</h2>  
-                <my-completed-tasks></my-completed-tasks>
+                            <span ng-click="setDashFilter('All')" class="btn btn-info"> 
+                                <i ng-show="isFilter('All')" class="glyphicon glyphicon-ok"></i> All 
+                                <span class="badge badge-default"></span>
+                            </span>
+                            <span ng-click="setDashFilter('Urgent')" class="btn btn-danger"> 
+                              <i ng-show="isFilter('Urgent')" class="glyphicon glyphicon-ok"></i> Urgent 
+                              <span class="badge badge-default"></span>
+                            </span>
+                            <span ng-click="setDashFilter('Pending')" class="btn btn-success"> 
+                              <i ng-show="isFilter('Pending')" class="glyphicon glyphicon-ok"></i> Pending  
+                              <span class="badge badge-default"></span>
+                            </span>
+                            <span ng-click="setDashFilter('Completed')" class="btn btn-default btn-draft" style="color:#fff">
+                              <i ng-show="isFilter('Completed')" class="glyphicon glyphicon-ok"></i> Completed  
+                              <span class="badge badge-default" style="color:#999"></span>
+                            </span>
+                        </div> 
               </div>
+              <div ng-show="isAuthenticated" class="row">
+                  <div class="col-ld-12 col-md-12 col-sm-12" >
+                      <div  ng-show="isFilter('Urgent')">
+                        <h2>Items requiring your attention</h2>  
+                        <my-tasks></my-tasks>
+                      </div>
+                      <div ng-show="isFilter('Pending')">
+                        <h2>Pending requests</h2>  
+                        <my-pending-tasks></my-pending-tasks>
+                      </div>
+                      <div ng-show="isFilter('Completed')">
+                        <h2>Completed requests</h2>  
+                        <my-completed-tasks></my-completed-tasks>
+                      </div>
+                  </div>
+              </div>
+
             </div>
           </div>
 <!-- END DASHBOARD ****************************************-->
@@ -621,3 +637,5 @@
 <script src="/app/views/forms/view/view-organization-reference.directive.js"></script>
 <script src="/app/views/forms/view/view-resource.directive.js"></script>
 <script src="/app/views/forms/view/view-other.directive.js"></script>
+
+<script src="/app/views/directives/task-id-directive.html.js"></script>

@@ -41,7 +41,7 @@
               <div class="row">
                           <div class="col-lg-3 col-md-3 col-sm-3">
                                <!-- <b>{{record.type|schemaName}}</b><br/> -->
-                                <a href="/database/record?documentID={{record.documentID}}" ng-show="record.documentID">
+                                <a ng-click="loadDocument(record); displayDetails = !displayDetails"  ng-show="record.documentID">
                                 <h4>{{(record.workingDocumentTitle||record.title)|lstring}}</h4></a>
 
                                 <span ng-hide="record.documentID">
@@ -59,8 +59,8 @@
                               </div>
                           </div>
                           <div class="col-lg-3 col-md-3 col-sm-3">
-                              <a ng-show="isPublished(record)" ng-click="loadDocument(record); displayDetails = !displayDetails" class="btn btn-xs btn-success" title="Published">P</a>
-                              <a ng-show="isRequest(record)"   href="/register/tasks/{{getWorkflowID(record)}}" class="btn btn-xs btn-danger" title="Request">R</a>
+                              <a ng-show="isPublished(record)" ng-click="loadDocument(record); displayDetails = !displayDetails;displayRequest =false" class="btn btn-xs btn-success" title="Published">P</a>
+                              <a ng-show="isRequest(record)"  ng-click="displayDetails =false; displayRequest = !displayRequest; formLoading=false"  class="btn btn-xs btn-danger" title="Request">R</a>
                               <a ng-show="isDraft(record)"     ng-click="edit(record)" class="btn btn-xs btn-default btn-draft" title="Draft" style="color:#fff">D</a>
                           </div>
                           <div class="col-lg-3 col-md-3 col-sm-3 pull-right">
@@ -76,6 +76,13 @@
                 <div class="col-lg-12 col-md-12 col-sm-12" style="background-color:#fff !important; padding-bottom:10px">
                    <a  class="title" >                    
                     <div  record-loader document="record.data" class="record-body" ></div>
+                  </a>
+                </div>
+            </div>
+             <div class="row" ng-show="displayRequest">
+                <div class="col-lg-12 col-md-12 col-sm-12" style="background-color:#fff !important; padding-bottom:10px">
+                   <a  class="title" >                    
+                    <div  task-id class="record-body" load-task-data='formLoading' workflow-task-id="{{getWorkflowID(record)}}" ></div><!-- href="/register/tasks/{{getWorkflowID(record)}}" -->
                   </a>
                 </div>
             </div>
