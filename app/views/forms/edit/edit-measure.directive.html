@@ -72,7 +72,6 @@
 	            </div>  -->
 <!-- 			</div> -->
 
-			<div>
 			<!-- 	<span class="help-block"><i>Introduction</i><br /><br />This common format is to be used for legislative, administrative and policy measures on access and benefit-sharing. This information shall be made available to the Access and Benefit-Sharing Clearing-House (ABS-CH) in accordance with Article 14, paragraph 2(a), of the Nagoya Protocol on Access and Benefit-sharing. <br /> <br /> Access and benefit-sharing measures may include national or regional strategies, policies, legislation or regulations. They may also include measures undertaken at the regional, national, sub-national or community level.</span> -->
 
 				<legend>General information</legend>
@@ -268,34 +267,6 @@
 					</div>
 				</div>
 
-				<legend>Additional information</legend>
-
-				<div class="row">
-					<div class="col-sm-12">
-						<div class="km-control-group" name="address" caption="Any other relevant information">
-							<div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
-							<div km-textbox-ml ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
-						</div>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-sm-12">
-						<div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
-							<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
-						</div>
-					</div>
-				</div>
-				<hr>
-				<div class="row">
-					<div class="col-sm-12">
-						<div class="km-control-group" name="notes" caption="Notes">
-							<div class="help-block">The field “Notes” is for personal reference and can be seen only when the record is being edited</div>
-							<textarea class="form-control" name="notes" ng-model="document.notes" rows="4"></textarea>
-						</div>
-					</div>
-				</div>
-
 
 				<legend>Elements of the measure</legend>
 	
@@ -351,7 +322,39 @@
 						<div edit-measure-abs name="absMeasures" required ng-model="document.absMeasures" locales="document.header.languages" terms="options.absMeasures()"></div>
 					</div>
 				</div>
-			</div>
+
+
+
+
+
+				<legend>Additional information</legend>
+
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="km-control-group" name="address" caption="Any other relevant information">
+							<div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
+							<div km-textbox-ml ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
+							<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="km-control-group" name="notes" caption="Notes">
+							<div class="help-block">The field “Notes” is for personal reference and can be seen only when the record is being edited</div>
+							<textarea class="form-control" name="notes" ng-model="document.notes" rows="4"></textarea>
+						</div>
+					</div>
+				</div>
+
 
 		</form>
 
