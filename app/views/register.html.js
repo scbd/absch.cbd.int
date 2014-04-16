@@ -20,8 +20,15 @@ require("app").controller("RegisterController", ["$rootScope", "$location" , "$s
 	var leftTab = "dashboard";
 	$scope.msg="";
 	$scope.records = null;
+	$scope.dashboardFilter = "All";
 
-
+	$scope.setDashFilter = function(filter){
+		console.log(filter);
+			$scope.dashboardFilter = filter;
+	}
+	$scope.isFilter = function(filter){
+			return	$scope.dashboardFilter == filter || $scope.dashboardFilter == "All";
+	}
 	//============================================================
 	//
 	//
