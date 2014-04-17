@@ -13,13 +13,13 @@ require("app").directive("editAuthority", [function () {
 			$scope.status   = "";
 			$scope.error    = null;
 			$scope.document = null;
-			$scope.tab      = "edit";
 			$scope.review   = { locale : "en" };
 			$scope.options  = {
 				countries					: function () { return $http.get("/api/v2013/thesaurus/domains/countries/terms",            { cache: true }).then(function(o){ return $filter("orderBy")(o.data, "name"); }); },
 				organizationTypes			: function () { return $http.get("/api/v2013/thesaurus/domains/Organization%20Types/terms", { cache: true }).then(function(o){ return o.data; }); },
 				cbdSubjects					: function () { return $http.get("/api/v2013/thesaurus/domains/CBD-SUBJECTS/terms",         { cache: true }).then(function(o){ return o.data; }); },
 				libraries					: function () { return $http.get("/api/v2013/thesaurus/domains/cbdLibraries/terms",         { cache: true }).then(function(o){ return o.data; }); },
+				jurisdictions				: function () { return $http.get("/api/v2013/thesaurus/domains/D7BD5BDE-A6B9-4261-B788-16839CCC4F7E/terms",	{ cache: true }).then(function(o){ return o.data; }); },
 				absJurisdictions			: function () { return $http.get("/api/v2013/thesaurus/domains/51A113E9-071F-440A-83DC-E3499B7C646D/terms", { cache: true }).then(function (o) { return o.data; }); },
 				absGeneticResourceTypes		: function () { return $http.get("/api/v2013/thesaurus/domains/20945FA8-C24C-4AF6-B3D9-367592AFDF48/terms", { cache: true }).then(function (o) { return o.data; }); },
 				absGeneticResourceAreas		: function () { return $http.get("/api/v2013/thesaurus/domains/545CD54C-CFF3-41E8-A003-FDD278426A3A/terms", { cache: true }).then(function (o) { return o.data; }); },
@@ -93,8 +93,6 @@ require("app").directive("editAuthority", [function () {
 				}
 
 				$q.when(qDocument).then(function(doc) {
-
-					$scope.tab    = "edit";
 					$scope.status = "ready";
 					$scope.document = doc;
 
@@ -118,27 +116,28 @@ require("app").directive("editAuthority", [function () {
 			});
 
 			//==================================
-			//
+			
 			//==================================
 			$scope.$on("documentInvalid", function(){
-				$scope.tab = "review";
-				//$scope.check_valid = true;
+				//$scope.tab = "review";
+				$scope.invalid = true;
+				validate();
 			});
 
-			//==================================
-			//
-			//==================================
-			$scope.$watch("check_valid", function(item) {
+			// //==================================
+			// //
+			// //==================================
+			// $scope.$watch("check_valid", function(item) {
 
-				// if(tab == "help")           { $scope.prevTab = "help";           $scope.nextTab = "edit"; }
-				// if(tab == "edit")           { $scope.prevTab = "help";           $scope.nextTab = "absch"; }
-				// if(tab == "absch")          { $scope.prevTab = "edit";           $scope.nextTab = "additionalInfo"; }
-				// if(tab == "additionalInfo") { $scope.prevTab = "absch";          $scope.nextTab = "review"; }
-				// if(tab == "review")         { $scope.prevTab = "additionalInfo"; $scope.nextTab = "review"; }
+			// 	// if(tab == "help")           { $scope.prevTab = "help";           $scope.nextTab = "edit"; }
+			// 	// if(tab == "edit")           { $scope.prevTab = "help";           $scope.nextTab = "absch"; }
+			// 	// if(tab == "absch")          { $scope.prevTab = "edit";           $scope.nextTab = "additionalInfo"; }
+			// 	// if(tab == "additionalInfo") { $scope.prevTab = "absch";          $scope.nextTab = "review"; }
+			// 	// if(tab == "review")         { $scope.prevTab = "additionalInfo"; $scope.nextTab = "review"; }
 				
-				if(tab=='review')
-				 	validate();
-			});
+			// 	// if(tab=='review')
+			// 	//  	validate();
+			// });
 
 			//==================================
 			//
