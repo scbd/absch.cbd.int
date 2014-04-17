@@ -7,11 +7,22 @@ require("app").directive("viewResource", [function () {
 		scope: {
 			document: "=ngModel",
 			locale  : "=",
-			target  : "@linkTarget"
+			target  : "@linkTarget",
+			hide : "@"
 		},
 		controller : ["$scope", "IStorage", function ($scope, storage)
 		{
 			
+			//====================
+			//
+			//====================
+			$scope.display = function(field) {
+				
+				if(!$scope.hide) return true; //show all fields
+
+				return( $scope.hide.indexOf(field) >= 0 ? false : true);
+			}
+
 			//====================
 			//
 			//====================

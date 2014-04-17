@@ -7,9 +7,11 @@
 		scope: {
 			linkTarget: "@",
 			document: "=",
-			locale  : "="
+			locale  : "=",
+			hide: "@"
 		},
 		link: function($scope) {
+
 			//debugger;
 			$scope.internalDocument     = undefined;
 			$scope.internalDocumentInfo = undefined;
