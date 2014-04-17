@@ -43,8 +43,6 @@
 					$scope.load(documentID);
 				// else
 				// 	$scope.error = "documentID not specified";
-
-				console.log('init');
 				
 			}
 

@@ -5,7 +5,7 @@ define(['app'], function (app) {
 	app.directive('search2', function ($http) {
 	    return {
 			restrict: 'EAC',
-	        templateUrl: '/app/views/search2/search2.partial.html?'+(new Date().getTime()),
+	        templateUrl: '/app/views/search2/search2.partial.html',
 	        replace: true,
 	        // require : "?ngModel",
 	        scope: {
@@ -514,7 +514,7 @@ require('app').directive('search2Facet', function ($http) {
 require('app').directive('search2Theme', function ($http) {
     return {
         restrict: 'EAC',
-        templateUrl: '/app/views/search2/search2-theme.partial.html?'+(new Date().getTime()),
+        templateUrl: '/app/views/search2/search2-theme.partial.html',
         replace: true,
         // require : "?ngModel",
         scope: {
@@ -801,7 +801,7 @@ require('app').directive('bindIndeterminate', [function () {
 require('app').directive('search2Date', function ($http) {
     return {
         restrict: 'EAC',
-        templateUrl: '/app/views/search2/search2-date.partial.html?'+(new Date().getTime()),
+        templateUrl: '/app/views/search2/search2-date.partial.html',
         replace: true,
         scope: {
               title: '@title',
@@ -864,7 +864,7 @@ require('app').directive('search2Date', function ($http) {
 require('app').directive('search2Keywords', function ($http) {
     return {
         restrict: 'EAC',
-        templateUrl: '/app/views/search2/search2-keywords.partial.html?'+(new Date().getTime()),
+        templateUrl: '/app/views/search2/search2-keywords.partial.html',
         // replace: true,
         // require : "?ngModel",
         scope: {

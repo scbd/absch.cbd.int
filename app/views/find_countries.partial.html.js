@@ -1,7 +1,7 @@
 require('app').directive('searchFilterCountries', function ($http) {
     return {
         restrict: 'EAC',
-        templateUrl: '/app/views/find_countries.partial.html?'+(new Date().getTime()),
+        templateUrl: '/app/views/find_countries.partial.html',
         replace: true,
         scope: {
               title: '@title',

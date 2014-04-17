@@ -1,7 +1,7 @@
 require('app').directive('login', function ($http) {
         return {
             restrict: 'EAC',
-            templateUrl: '/app/views/directives/login.directive.html?'+(new Date().getTime()),
+            templateUrl: '/app/views/directives/login.directive.html',
             replace: true,
             scope: {
                 

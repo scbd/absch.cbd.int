@@ -1,7 +1,7 @@
 $compile.directive('search2', function ($http) {
     return {
         restrict: 'EAC',
-        templateUrl: '/app/abs/directives/search2/search2.partial.html?'+(new Date().getTime()),
+        templateUrl: '/app/abs/directives/search2/search2.partial.html',
         replace: true,
         // require : "?ngModel",
         scope: {
@@ -499,7 +499,7 @@ $compile.directive('search2Facet', function ($http) {
 $compile.directive('search2Theme', function ($http) {
     return {
         restrict: 'EAC',
-        templateUrl: '/app/abs/directives/search2/search2-theme.partial.html?'+(new Date().getTime()),
+        templateUrl: '/app/abs/directives/search2/search2-theme.partial.html',
         replace: true,
         // require : "?ngModel",
         scope: {
@@ -786,7 +786,7 @@ $compile.directive('bindIndeterminate', [function () {
 $compile.directive('search2Date', function ($http) {
     return {
         restrict: 'EAC',
-        templateUrl: '/app/abs/directives/search2/search2-date.partial.html?'+(new Date().getTime()),
+        templateUrl: '/app/abs/directives/search2/search2-date.partial.html',
         replace: true,
         scope: {
               title: '@title',
@@ -849,7 +849,7 @@ $compile.directive('search2Date', function ($http) {
 $compile.directive('search2Keywords', function ($http) {
     return {
         restrict: 'EAC',
-        templateUrl: '/app/abs/directives/search2/search2-keywords.partial.html?'+(new Date().getTime()),
+        templateUrl: '/app/abs/directives/search2/search2-keywords.partial.html',
         // replace: true,
         // require : "?ngModel",
         scope: {
