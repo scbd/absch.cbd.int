@@ -22,8 +22,10 @@ require("app").directive("editResource", [ function () {
 																return Enumerable.from($filter("orderBy")(o[0].data, "name")).union(
 																	   Enumerable.from($filter("orderBy")(o[1].data, "name"))).toArray();
 											   });
-											}
-			};
+											},
+			
+				documentLinksExt :        [{ model:"language", title:"Language", required:true, options: $http.get("/api/v2013/thesaurus/domains/ISO639-2/terms", { cache: true }).then(function(o){ return $scope.options.documentLinksExt       [0].options = $filter("orderBy")(o.data, "name"); }) }],
+				};
 
 			//==================================
 			//

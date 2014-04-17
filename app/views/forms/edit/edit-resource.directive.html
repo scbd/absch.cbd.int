@@ -68,13 +68,13 @@
 					</div>
 				</div>
 
-				<div class="row">
+			 <div class="row">
 					<div class="col-xs-12">
 						<div class="km-control-group" required name="languages" caption="Language(s)">
 							<div km-select name="languages" required ng-model="document.languages" items="options.languages()" multiple></div>
 						</div>
 					</div>
-				</div>p55t2t5
+				</div> 
 				
 
 				<div class="row">
@@ -186,7 +186,7 @@
 					<div class="col-xs-12">
 						<div class="km-control-group" required name="resourceLinks" caption="Link to the resource(s)">
 							<div class="help-block">Please always attach the relevant document(s) that will be stored in the database for users to download. When resources are available on the Internet, please also provide a link to them.</div>
-							<div km-link name="resourceLinks" required ng-model="document.resourceLinks" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+							<div km-link name="resourceLinks" required ng-model="document.resourceLinks" allow-link="true" allow-file="true" extensions="options.documentLinksExt" identifier="document.header.identifier"></div>
 						</div>
 					</div>
 				</div>
