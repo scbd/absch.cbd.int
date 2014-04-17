@@ -1,7 +1,7 @@
 require('app').directive('documentList', function ($http) {
         return {
             restrict: 'EAC',
-            templateUrl: '/app/views/directives/document-list.partial.html?'+(new Date().getTime()),
+            templateUrl: '/app/views/directives/document-list.partial.html',
             replace: true,
             // require : "?ngModel",
             scope: {

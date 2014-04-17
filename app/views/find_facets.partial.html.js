@@ -1,7 +1,7 @@
 require('app').directive('searchFilterFacets', function ($http) {
     return {
         restrict: 'EAC',
-        templateUrl: '/app/views/find_facets.partial.html?'+(new Date().getTime()),
+        templateUrl: '/app/views/find_facets.partial.html',
         replace: true,
         scope: {
               title: '@title',

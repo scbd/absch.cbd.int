@@ -1,7 +1,7 @@
 require('app').directive('searchFilterSchemas', function ($http) {
     return {
         restrict: 'EAC',
-        templateUrl: '/app/views/find_schemas.partial.html?'+(new Date().getTime()),
+        templateUrl: '/app/views/find_schemas.partial.html',
         replace: true,
         scope: {
               title: '@title',

@@ -1,7 +1,7 @@
 require('app').directive('searchFilterThemes', function ($http) {
     return {
         restrict: 'EAC',
-        templateUrl: '/app/views/find_themes.partial.html?'+(new Date().getTime()),
+        templateUrl: '/app/views/find_themes.partial.html',
         replace: true,
         // require : "?ngModel",
         scope: {
