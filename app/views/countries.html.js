@@ -8,7 +8,8 @@ require("app").controller("CountriesController", ["$scope", "$http", function ($
         $scope.ratifications = 0;
         $scope.signatures = 0;
 
-
+        $scope.parties = $scope.countries.length;
+        
         for (var i = 0; i < $scope.countries.length; i++) {
             if ($scope.countries[i].treaties.XXVII8b.instrument == "ratification" 
             	|| $scope.countries[i].treaties.XXVII8b.instrument == "accession" 
@@ -37,6 +38,19 @@ require("app").controller("CountriesController", ["$scope", "$http", function ($
    	     }
    	 }
 
+     $scope.isPartyToCBD= function(entity){
+        return entity;
+     }
+
+     $scope.isSignatory = function(entity){
+        return entity && entity.treaties.XXVII8b.signature != null;
+     }
+
+     $scope.isRatified= function(entity){
+        return entity && (entity.treaties.XXVII8b.instrument == "ratification" ||
+                          entity.treaties.XXVII8b.instrument == "accession" ||
+                          entity.treaties.XXVII8b.instrument == "acceptance" );
+     }
 
 
 

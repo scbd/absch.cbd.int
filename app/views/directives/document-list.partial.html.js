@@ -45,6 +45,8 @@ require('app').directive('documentList', function ($http) {
                                 return true;
 
                             return false;
+
+                                
                   }
                 
                 $scope.actionSetPage = function (pageNumber) {
