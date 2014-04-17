@@ -18,6 +18,9 @@ require('app').directive('documentList', function ($http) {
             },
             controller: ['$scope', function ($scope){
 
+              $scope.formatDate = function formatDate (date) {
+                    return moment(date).format('MMMM Do YYYY');
+              }; 
 
               $scope.loaded = false;
               $scope.itemsPerPage = 25;
