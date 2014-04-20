@@ -14,10 +14,11 @@ require('app').directive('searchFilterCountries', function ($http) {
         },
         controller : ['$scope', '$element', '$location', function ($scope, $element, $location)
         {
-            $scope.alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+            $scope.alphabet = ['All','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
             $scope.expanded = false;
             $scope.selectedItems = [];
             $scope.facet = $scope.field.replace('_s', ''); // TODO: replace @field by @facet
+            $scope.countryFilter ='All';
 
             var parameters = $location.search();
 
@@ -99,6 +100,15 @@ require('app').directive('searchFilterCountries', function ($http) {
                 });
                 return dictionary;
             }
+             $scope.setCountryFilter = function(letter){
+
+                    $scope.countryFilter = letter;                   
+            };
+            $scope.filterCountries = function(entity){
+                    return $scope.countryFilter == 'All' || 
+                    (entity && entity.title.en.indexOf($scope.countryFilter) == 0);
+
+            };
 
             $scope.terms = [];
             $scope.termsx = [];

@@ -259,6 +259,7 @@ require('app').directive('searchFilterThemes', function ($http) {
                         if(_.has($scope.termsMap, item.symbol))
                             $scope.termsMap[item.symbol].count = item.count;
                     });
+               //console.log (data);
             });
 
             $scope.$watch('items', function (values) { if(!values) return;
