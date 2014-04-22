@@ -18,6 +18,13 @@ require('app').directive('searchFilterSchemas', function ($http) {
             $scope.selectedItems = [];
             $scope.facet = $scope.field.replace('_s', ''); // TODO: replace @field by @facet
 
+            $scope.options  = {
+               jurisdiction     : function() { return $http.get("/api/v2013/thesaurus/domains/7A56954F-7430-4B8B-B733-54B8A5E7FF40/terms",  { cache: true }).then(function(o){ return o.data; }); },
+               status           : function() { return $http.get("/api/v2013/thesaurus/domains/ED7CDBD8-7762-4A84-82DD-30C01458A799/terms",  { cache: true }).then(function(o){ return o.data; }); },
+               typeOfDocuments  : function() { return $http.get("/api/v2013/thesaurus/domains/144CF550-7629-43F3-817E-CACDED34837E/terms",  { cache: true }).then(function(o){ return o.data; }); },
+                 
+                            };
+
             $scope.isSelected = function(item) {
                 return $.inArray(item.symbol, $scope.selectedItems) >= 0;
             };
