@@ -101,8 +101,7 @@ require('app').directive('documentList', function ($http) {
                        $scope.documents.forEach(function (doc) {                       
                            $scope.transformedDocuments.push(transformDocument(doc));
                         });
-
-                       console.log( $scope.transformedDocuments);                      
+                                       
                     }
                 });
 

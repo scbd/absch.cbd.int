@@ -1,7 +1,7 @@
 <div>
 
 
-    <a ng-click="showSelect=!showSelect" class="filter-title" style="text-decoration:none;color:#111;">{{title}}&nbsp; 
+    <a ng-click="showSelect=!showSelect" href="#schemaPartial" data-toggle="modal" class="filter-title" style="text-decoration:none;color:#111;">{{title}}&nbsp; 
         <i ng-class="{'fa fa-caret-down':!showSelect, 'fa fa-caret-up':showSelect}" ></i></a>
     
     <div class="list-group-item-expand">
@@ -12,18 +12,14 @@
         </div>
     <div>
 
-    <!--Save Dialog-->
-    <div ng-show="showSelect" >
-        <div class="filter-options well">
-            <div>
-                <div style="padding-left:20px">
-
-                 <div class="pull-right" >
-                     <a ng-click="showSelect=!showSelect" style="text-decoration:none;" ><i class="glyphicon glyphicon-remove-circle"></i> Close</a>
+    <!--Save Dialog -->
+    <div id="schemaPartial" class="modal fade" ng-show="showSelect">
+        <div class="filter-options well modal-dialog">          
+            <div >
+                <div class="pull-right" >
+                     <a ng-click="showSelect=!showSelect" style="text-decoration:none;" data-dismiss="modal" ><i class="glyphicon glyphicon-remove-circle"></i> Close</a>
                 </div>
-
-                    <table width="100%" ><tr>
-                    <td width="50%" class="national-records">
+                    <div class="national-records">
                         <h4>National Records</h4>
                         <div class="checkbox">
                             <label>
@@ -35,45 +31,157 @@
                                 </a>
 
                             </label>
-                            <div style="padding-left:20px" ng-show="moreOptions">
-                              <div class="well">
-                                <span km-select multiple ng-model="fjurisdiction" binding-type="string" placeholder="Jurisdictions" items="options.jurisdiction()"></span>
-                               <span km-select multiple ng-model="fstatus" binding-type="string" placeholder="Status" items="options.status()"></span>
-                                <span km-select multiple ng-model="ftype" binding-type="string" placeholder="Types" items="options.typeOfDocuments()"></span>
-                              </div>
+                            <div ng-show="moreOptions">
+                                <div class="well" >
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-xs-12">
+                                            <span km-select multiple ng-model="jurisdiction" binding-type="string" placeholder="Jurisdictions" items="options.jurisdiction()"></span>
+                                            <span km-select multiple ng-model="status" binding-type="string" placeholder="Status" items="options.status()"></span>
+                                            <span km-select multiple ng-model="type" binding-type="string" placeholder="Types" items="options.typeOfDocuments()"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-xs-6">
+                                            <span search-filter-dates title='Date of Adoption' query='adoptionDate'></span>                                  
+                                            <span search-filter-dates title='Entry into Force' query='adoptionDate'></span>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-xs-6"> 
+                                            <span search-filter-dates title='Date of Retirement' query='adoptionDate'></span>                                  
+                                            <span search-filter-dates title='Date of application' query='adoptionDate'></span>
+                                        </div>
+                                    </div>
+                                    
+                                   
+                                </div>
                             </div>
                         </div>
-                        <div class="checkbox"><label>
-                            <input type="checkbox" ng-model="authority.selected" bind-indeterminate="authority.indeterminate" ng-change="refresh()">
-                            Competent National Authorities ({{authority.count}})
-                        </label></div>
-                        <div class="checkbox"><label>
-                            <input type="checkbox" ng-model="database.selected" bind-indeterminate="database.indeterminate" ng-change="refresh()">
-                            National Websites and Databases ({{database.count}})
-                        </label></div>
+                        <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="authority.selected" bind-indeterminate="authority.indeterminate" ng-change="refresh()">
+                                    Competent National Authorities ({{authority.count}})&nbsp; 
+                                    <a ng-click="cnaOptions=!cnaOptions" class="filter-title" >More Options&nbsp; 
+                                        <i ng-class="{'fa fa-caret-down':!cnaOptions, 'fa fa-caret-up':cnaOptions}" ></i>
+                                    </a>
+                                 </label>
+                                 <div ng-show="cnaOptions">
+                                    <div class="well" >
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-xs-12">
+                                                Responsibilities <span km-yes-no  ng-model="cnaResponsibleForAll" ></span>
+                                                <span km-select multiple ng-model="cnaJurisdiction" binding-type="string" placeholder="abs Jurisdictions" items="options.absJurisdictions()"></span>                                                
+                                                <span km-select multiple ng-model="cnaGeneticResourceTypes" binding-type="string" placeholder="Genetic Resource Types" items="options.absGeneticResourceTypes()"></span>
+
+                                            </div>
+                                        </div>    
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="database.selected" bind-indeterminate="database.indeterminate" ng-change="refresh()">
+                                National Websites and Databases ({{database.count}}) &nbsp; 
+                                <a ng-click="nwdOptions=!nwdOptions" class="filter-title" >More Options&nbsp; 
+                                    <i ng-class="{'fa fa-caret-down':!nwdOptions, 'fa fa-caret-up':nwdOptions}" ></i>
+                                </a>
+                             </label>
+                             <div ng-show="nwdOptions">
+                                <div class="well" >
+                                    <div class="row">
+                                        
+                                    </div>    
+                                </div>
+                            </div>
+                        </div>
                         <div class="checkbox"><label>
                             <input type="checkbox" ng-model="measure.selected" bind-indeterminate="measure.indeterminate" ng-change="refresh()">
                             Legislative, administrative or policy measures ({{measure.count}})
                         </label></div>
                         <div class="checkbox"><label>
                             <input type="checkbox" ng-model="absPermit.selected" bind-indeterminate="absPermit.indeterminate" ng-change="refresh()">
-                            Permits and their equivalent ({{absPermit.count}})
-                        </label></div>
+                            Permits and their equivalent ({{absPermit.count}}) &nbsp; 
+                                <a ng-click="permitOptions=!permitOptions" class="filter-title" >More Options&nbsp; 
+                                    <i ng-class="{'fa fa-caret-down':!permitOptions, 'fa fa-caret-up':permitOptions}" ></i>
+                                </a>
+                             </label>
+                             <div ng-show="permitOptions">
+                                <div class="well" >
+                                      <div km-reference multiple="false" binding="permitAuthority" ng-model="permitAuthority" loader="loadRecords('authority')">
+                                        <div>
+                                            <div><strong>{{reference.title | lstring}}</strong></div>
+                                            <div>{{reference.summary | lstring}}</div>
+                                        </div>
+                                     </div> </br>
+                                     <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-xs-6">
+                                            <span search-filter-dates title='Date of issuance of the permit or its equivalent' query='permitIssuanceDate'></span>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-xs-6"> 
+                                            <span search-filter-dates title='Date of expiry of the permit or its equivalent' query='permitExpiryDate'></span>
+                                        </div>
+                                    </div>
+                                    <div km-select multiple required name="permitusage" ng-model="permitusage" items="options.usage()" placeholder="Usage"></div>
+                                    <div km-select multiple required name="permitkeywords" ng-model="permitkeywords" items="options.keywords()" placeholder="Keywords"></div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="checkbox"><label>
                             <input type="checkbox" ng-model="absCheckpoint.selected" bind-indeterminate="absCheckpoint.indeterminate" ng-change="refresh()">
-                            Checkpoints ({{absCheckpoint.count}})
-                        </label></div>
+                            Checkpoints ({{absCheckpoint.count}})&nbsp; 
+                                <a ng-click="absCheckpointOptions=!absCheckpointOptions" class="filter-title" >More Options&nbsp; 
+                                    <i ng-class="{'fa fa-caret-down':!absCheckpointOptions, 'fa fa-caret-up':absCheckpointOptions}" ></i>
+                                </a>
+                             </label>
+                             <div ng-show="absCheckpointOptions">
+                                <div class="well" >                                                                 
+                                    <div km-select multiple required name="cpjurisdictions" ng-model="cpjurisdictions" items="options.cpjurisdictions()" placeholder="Jurisdiction"></div>
+                                    Inform All Authorities <span km-yes-no  ng-model="cpInformAllAuthorities" ></span>          
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="checkbox"><label>
                             <input type="checkbox" ng-model="absCheckpointCommunique.selected" bind-indeterminate="absCheckpointCommunique.indeterminate" ng-change="refresh()">
-                            Checkpoint Communiqués ({{absCheckpointCommunique.count}})
-                        </label></div>
-                    </td>
-                    <td width="50%" class="reference-records">
+                            Checkpoint Communiqués ({{absCheckpointCommunique.count}})&nbsp; 
+                                <a ng-click="absCheckpointCommuniqueOptions=!absCheckpointCommuniqueOptions" class="filter-title" >More Options&nbsp; 
+                                    <i ng-class="{'fa fa-caret-down':!absCheckpointCommuniqueOptions, 'fa fa-caret-up':absCheckpointCommuniqueOptions}" ></i>
+                                </a>
+                             </label>
+                             <div ng-show="absCheckpointCommuniqueOptions">
+                                <div class="well" >                                                                 
+                                    <div km-select multiple required name="cpcoriginCountries" ng-model="cpcoriginCountries" items="options.countries()" placeholder="Origin Countries"></div>                                             
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="reference-records">
                         <h4>Reference Records</h4>
                         <div class="checkbox"><label>
                             <input type="checkbox" ng-model="resource.selected" bind-indeterminate="resource.indeterminate" ng-change="refresh()">
-                            Virtual Library Records ({{resource.count}})
-                        </label></div>
+                            Virtual Library Records ({{resource.count}})&nbsp; 
+                                <a ng-click="vlrOptions=!vlrOptions" class="filter-title" >More Options&nbsp; 
+                                    <i ng-class="{'fa fa-caret-down':!vlrOptions, 'fa fa-caret-up':vlrOptions}" ></i>
+                                </a>
+                             </label>
+                             <div ng-show="vlrOptions">
+                                <div class="well" >
+                                    <!-- <div class="km-control-group" required name="vlrpublicationYear" caption="Publication year"> -->
+                                         <input type="number" required name="vlrpublicationYear" ng-model="vlrpublicationYear" placeholder="Publication year"/>
+                                    <!-- </div>      -->
+                                    <!-- <div class="km-control-group" name="vlrresourceTypes" caption="Type of resource"> -->
+                                        <div km-select multiple name="vlrresourceTypes" ng-model="vlrresourceTypes" items="options.resourceTypes()" placeholder="Type of resource"></div>
+                                    <!-- </div>                                                                                                 -->
+                                    <!-- <div class="km-control-group" required name="vlrRegions" caption="Country(ies), Regional or Economic group(s) related to the resource"> -->
+                                        <div km-select style="display: inline-block" name="vlrRegions" ng-model="vlrRegions" items="options.regions()" multiple placeholder="Select a country(ies) and/or region(s)..."></div>
+                                    <!-- </div>                                       -->
+                                    <div class="km-control-group" required name="vlrabsSubjects" caption="Thematic areas(s)">
+                                        <div km-term-check name="vlrabsSubjects" required ng-model="vlrabsSubjects" terms="options.absSubjects()" binding-type="term[]"></div>
+                                    </div>                                            
+                                </div>
+                            </div>
+                        </div>
+
+                        
                       <!--   <div class="checkbox"><label>
                             <input type="checkbox" ng-model="organization.selected" bind-indeterminate="organization.indeterminate" ng-change="refresh()">
                             ABS Related Organizations ({{organization.count}})
@@ -94,11 +202,8 @@
                             <input type="checkbox" ng-model="statement.selected" bind-indeterminate="statement.indeterminate" ng-change="refresh()">
                             Statements ({{statement.count}})
                         </label></div>
-                    </td>
-                    </tr></table>
-                </div>
-               
-            </div>
+                    </div>
+            </div>              
         </div>
     </div>
 

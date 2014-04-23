@@ -12,18 +12,35 @@ require('app').directive('searchFilterSchemas', function ($http) {
         link: function ($scope, element, attrs, ngModelController)
         {
         },
-        controller : ['$scope', '$element', '$location', function ($scope, $element, $location)
+        controller : ['$scope', '$element', '$location', 'Thesaurus', "IStorage", "guid", "$q", "Enumerable", "$filter",
+         function ($scope, $element, $location, Thesaurus, storage, guid, $q, Enumerable, $filter)
         {
             $scope.expanded = false;
             $scope.selectedItems = [];
             $scope.facet = $scope.field.replace('_s', ''); // TODO: replace @field by @facet
 
+            $scope.adoptionDate= '*:*'
+
             $scope.options  = {
-               jurisdiction     : function() { return $http.get("/api/v2013/thesaurus/domains/7A56954F-7430-4B8B-B733-54B8A5E7FF40/terms",  { cache: true }).then(function(o){ return o.data; }); },
-               status           : function() { return $http.get("/api/v2013/thesaurus/domains/ED7CDBD8-7762-4A84-82DD-30C01458A799/terms",  { cache: true }).then(function(o){ return o.data; }); },
-               typeOfDocuments  : function() { return $http.get("/api/v2013/thesaurus/domains/144CF550-7629-43F3-817E-CACDED34837E/terms",  { cache: true }).then(function(o){ return o.data; }); },
-                 
-                            };
+               jurisdiction             : function () { return $http.get("/api/v2013/thesaurus/domains/7A56954F-7430-4B8B-B733-54B8A5E7FF40/terms",  { cache: true }).then(function(o){ return o.data; }); },
+               status                   : function () { return $http.get("/api/v2013/thesaurus/domains/ED7CDBD8-7762-4A84-82DD-30C01458A799/terms",  { cache: true }).then(function(o){ return o.data; }); },
+               typeOfDocuments          : function () { return $http.get("/api/v2013/thesaurus/domains/144CF550-7629-43F3-817E-CACDED34837E/terms",  { cache: true }).then(function(o){ return o.data; }); },
+               absJurisdictions         : function () { return $http.get("/api/v2013/thesaurus/domains/51A113E9-071F-440A-83DC-E3499B7C646D/terms", { cache: true }).then(function (o) { return o.data; }); },
+               absGeneticResourceTypes  : function () { return $http.get("/api/v2013/thesaurus/domains/1A22EAAB-9BBC-4543-890E-DEF913F59E98/terms", { cache: true }).then(function (o) { return Thesaurus.buildTree(o.data); }); },
+               keywords                 : function () { return $http.get("/api/v2013/thesaurus/domains/1A22EAAB-9BBC-4543-890E-DEF913F59E98/terms", { cache: true }).then(function (o) { return Thesaurus.buildTree(o.data); }); },
+               usage                    : function () { return $http.get("/api/v2013/thesaurus/domains/A7B77788-8C90-4849-9327-E181E9522F3A/terms", { cache: true }).then(function (o) { return o.data; }); },
+               cpjurisdictions          : function () { return $http.get("/api/v2013/thesaurus/domains/D7BD5BDE-A6B9-4261-B788-16839CCC4F7E/terms", { cache: true }).then(function(o){ return o.data; }); },
+               countries                : function () { return $http.get("/api/v2013/thesaurus/domains/countries/terms", { cache: true }).then(function (o) { return $filter("orderBy")(o.data, "name"); }); },
+               resourceTypes            : function () { return $http.get("/api/v2013/thesaurus/domains/83BA4728-A843-442B-9664-705F55A8EC52/terms", { cache: true }).then(function(o){ return Thesaurus.buildTree(o.data); }); },
+               regions                  : function () { return $q.all([$http.get("/api/v2013/thesaurus/domains/countries/terms", { cache: true }),
+                                                            $http.get("/api/v2013/thesaurus/domains/regions/terms",   { cache: true })]).then(function(o) {
+                                                                            return Enumerable.from($filter("orderBy")(o[0].data, "name")).union(
+                                                                                   Enumerable.from($filter("orderBy")(o[1].data, "name"))).toArray();
+                                                           });
+                                                      },            
+                absSubjects             : function () { return $http.get("/api/v2013/thesaurus/domains/CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924/terms", { cache: true }).then(function(o){ return o.data; }); },
+                
+            };
 
             $scope.isSelected = function(item) {
                 return $.inArray(item.symbol, $scope.selectedItems) >= 0;
@@ -108,9 +125,27 @@ require('app').directive('searchFilterSchemas', function ($http) {
 
             function buildConditions (conditions, items) {
                 items.forEach(function (item) { 
-                    if(item.selected)
-                        conditions.push($scope.field+':'+item.identifier);
-                });
+
+                    if(item.selected){
+
+                        var subFilterQuery = '(' + $scope.field+':'+item.identifier;
+                        // if(item.subFilters){
+                        //     item.subFilters.forEach(function(filter){
+
+                        //         if(filter.type=='multiselect'){
+                        //             if( $scope[filter.name]){
+                        //                 subFilterQuery = subFilterQuery + ' AND ' + filter.name +':'+ $scope[filter.name];                                                                       
+                        //             }
+                        //         }
+                        //     });
+                        // }
+
+                      subFilterQuery = subFilterQuery + ')'
+                console.log(subFilterQuery);
+                        conditions.push(subFilterQuery);
+                    }
+                });                 
+ 
             }
 
             function dictionarize(items) {
@@ -122,13 +157,40 @@ require('app').directive('searchFilterSchemas', function ($http) {
                 return dictionary;
             }
 
-            $scope.focalpoint              = { identifier: 'focalPoint',               title: 'National Focal Points' };
-            $scope.authority               = { identifier: 'authority',                title: 'Competent National Authorities' };
+            $scope.focalpoint              = { identifier: 'focalPoint',               title: 'National Focal Points',
+                                               subFilters : [
+                                                                { name: 'jurisdiction', type: 'multiselect' },
+                                                                { name: 'status', type: 'multiselect' },
+                                                                { name: 'type', type: 'multiselect' }
+                                                            ]
+                                             };
+            $scope.authority               = { identifier: 'authority',                title: 'Competent National Authorities' ,
+                                               subFilters : [
+                                                                { name: 'cnaResponsibleForAll',     type: 'yesno' },
+                                                                { name: 'cnaJurisdiction',          type: 'multiselect' },
+                                                                { name: 'cnaGeneticResourceTypes',  type: 'multiselect' }
+                                                            ]
+                                             };
             $scope.database                = { identifier: 'database',                 title: 'National Websites and Databases', count: 0 };
             $scope.measure                 = { identifier: 'measure',                  title: 'Legislative, administrative and policy measures', count: 0  };
-            $scope.absPermit               = { identifier: 'absPermit',                title: 'Permits and their equivalent' };
-            $scope.absCheckpoint           = { identifier: 'absCheckpoint',            title: 'Checkpoints' };
-            $scope.absCheckpointCommunique = { identifier: 'absCheckpointCommunique',  title: 'Checkpoint Communiqués' };
+            $scope.absPermit               = { identifier: 'absPermit',                title: 'Permits and their equivalent' ,
+                                               subFilters : [
+                                                                { name: 'permitAuthority',  type: 'reference' },
+                                                                { name: 'permitusage',      type: 'multiselect' },
+                                                                { name: 'permitkeywords',   type: 'multiselect' }
+                                                            ]
+                                             };
+            $scope.absCheckpoint           = { identifier: 'absCheckpoint',            title: 'Checkpoints' ,
+                                               subFilters : [
+                                                                { name: 'cpInformAllAuthorities', type: 'yesno' },
+                                                                { name: 'cpjurisdictions',      type: 'multiselect' }
+                                                            ]
+                                              };
+            $scope.absCheckpointCommunique = { identifier: 'absCheckpointCommunique',  title: 'Checkpoint Communiqués' ,
+                                               subFilters : [
+                                                                { name: 'cpcoriginCountries',      type: 'multiselect' }
+                                                            ]
+                                               };
 
             $scope.resource                = { identifier: 'resource',                 title: 'Virtual Library Record' };
             $scope.organization            = { identifier: 'organization',             title: 'ABS Related Organizations' };
@@ -160,6 +222,9 @@ require('app').directive('searchFilterSchemas', function ($http) {
             $scope.refresh = buildQuery;
             
             buildQuery();
+
+            
+
         }]
     }
 });
