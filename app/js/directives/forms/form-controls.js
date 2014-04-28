@@ -1689,6 +1689,30 @@ require('app').directive('kmSelect', ["underscore", "htmlUtility", function (_, 
 	}
 }])
 
+//============================================================
+//
+//
+//============================================================
+require('app').directive('kmToggle', [function ()
+{
+	return {
+		restrict: 'EAC',
+		templateUrl: '/app/js/directives/forms/km-toggle.html',
+		replace: true,
+		transclude: false,
+		scope: {
+			binding      : '=ngModel',
+			ngDisabledFn : '&ngDisabled',
+			placeholder  : "@",
+		},
+		link: function ($scope, $element, $attrs, ngModelController) 
+		{
+			$scope.value = false;
+			
+		}
+	};
+}])
+
 
 //============================================================
 //

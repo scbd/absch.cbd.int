@@ -1,24 +1,65 @@
-<div>
 
-
-    <a ng-click="showSelect=!showSelect" href="#schemaPartial" data-toggle="modal" class="filter-title" style="text-decoration:none;color:#111;">{{title}}&nbsp; 
-        <i ng-class="{'fa fa-caret-down':!showSelect, 'fa fa-caret-up':showSelect}" ></i></a>
+<div class="well" style="margin: 5px -15px 0 -15px;padding:0 20px;">
+    <div class="row">
+        <div class="col-xs-2"> 
+            <a ng-click="showSelect=!showSelect" href="#schemaPartial"  class="filter-title" style="text-decoration:none;color:#111;"><i ng-class="{'fa fa-caret-down':!showSelect, 'fa fa-caret-up':showSelect}" ></i> &nbsp; {{title}}
+            </a>
+        </div>
+    </div>
     
-    <div class="list-group-item-expand">
-        <div ng-repeat="item in terms | orderBy:'title' | filter:{selected:true}" ng-class="ccc(item)" ng-click="onclick(this, $event)">
-            <div class="filter-selected truncate" style="cursor:pointer">
-                <i class="glyphicon glyphicon-remove-circle"></i> {{item.title}} ({{item.count}})
+    <div class="row" ng-show="terms | filter:{selected:true}" style="margin-top:10px;">
+        <div class="col-xs-12" style="background-color:white;margin-bottom:10px;"> 
+
+            <div class="list-group-item-expand">
+                <div ng-repeat="item in terms | orderBy:'title' | filter:{selected:true}" ng-class="ccc(item)" >
+                    <div class="filter-selected" style="cursor:pointer">
+                       <a ng-click="onclick(this, $event)" href="#"> 
+                            <i class="fa fa-times-circle "></i> 
+                            {{item.title}} ({{item.count}})
+                            
+                       </a>
+                        <ng-switch on="item.identifier" >
+                            
+                            <span ng-switch-when="focalPoint">
+                             <span class="divider">&nbsp; |&nbsp; </span>
+                                <span km-select multiple ng-model="jurisdiction" binding-type="string" placeholder="Type" items="options.jurisdiction()"></span>
+                            </span>
+
+                            <span ng-switch-when="authority">
+                                 <span class="divider">&nbsp; |&nbsp; </span>
+                                <span km-toggle  placeholder="Responsible for all"  ng-model="cnaResponsibleForAll" ></span> 
+                                 <span class="divider">&nbsp; |&nbsp; </span>
+                                <span km-select multiple ng-model="cnaJurisdiction" binding-type="string" placeholder="Jurisdictions" items="options.absJurisdictions()"></span>     
+                                 <span class="divider">&nbsp; |&nbsp; </span>                                           
+                                <span km-select multiple ng-model="cnaGeneticResourceTypes" binding-type="string" placeholder="Genetic Resource Types" items="options.absGeneticResourceTypes()"></span>
+                            </span>
+
+                            <span ng-switch-when="measure">
+                                 <span class="divider">&nbsp; |&nbsp; </span>
+                                <span km-select multiple ng-model="type" binding-type="string" placeholder="Type" items="options.typeOfDocuments()"></span>
+                                 <span class="divider">&nbsp; |&nbsp; </span> 
+                                <span km-select multiple ng-model="cnaJurisdiction" binding-type="string" placeholder="Jurisdictions" items="options.absJurisdictions()"></span>    
+                                 <span class="divider">&nbsp; |&nbsp; </span>                                             
+                                <span km-select multiple ng-model="cnaGeneticResourceTypes" binding-type="string" placeholder="Genetic Resource Types" items="options.absGeneticResourceTypes()"></span>
+                            </span>
+
+                            </ng-switch>
+                       
+                    </div>
+                   
+                </div>
             </div>
         </div>
-    <div>
+    </div>
 
+    <div class="row" style="padding:20px;" id="schemaPartial" ng-show="showSelect">
     <!--Save Dialog -->
-    <div id="schemaPartial" class="modal fade" ng-show="showSelect">
-        <div class="filter-options well modal-dialog">          
-            <div >
-                <div class="pull-right" >
-                     <a ng-click="showSelect=!showSelect" style="text-decoration:none;" data-dismiss="modal" ><i class="glyphicon glyphicon-remove-circle"></i> Close</a>
-                </div>
+    <div class="col-xs-12 " >
+        <div class="filter-options">          
+            <div>
+                <!-- <div class="pull-right" >
+                     <a ng-click="showSelect=!showSelect" style="text-decoration:none;" ><i class="glyphicon glyphicon-remove-circle"></i> Close</a>
+                </div> -->
                     <div class="national-records">
                         <h4>National Records</h4>
                         <div class="checkbox">
@@ -206,6 +247,7 @@
             </div>              
         </div>
     </div>
+    </div><!--  end row -->
 
     <style>
         .options .checkbox {
@@ -224,4 +266,5 @@
             color: #000;
         }
     </style>
+
 </div>

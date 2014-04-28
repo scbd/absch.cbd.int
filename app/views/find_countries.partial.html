@@ -1,6 +1,15 @@
-<div>
-	 <a ng-click="showSelect=!showSelect" class="filter-title" style="text-decoration:none;color:#111;">{{title | lstring:locale}}&nbsp; 
-        <i ng-class="{'fa fa-caret-down':!showSelect, 'fa fa-caret-up':showSelect}" ></i></a>
+<div class="well" style="margin: 5px -15px 0 -15px;padding:0 20px;">
+<div class="row">
+    <div class="col-xs-12"> 
+		 <a ng-click="showSelect=!showSelect" class="filter-title" style="text-decoration:none;color:#111;">
+			<i ng-class="{'fa fa-caret-down':!showSelect, 'fa fa-caret-up':showSelect}" ></i>
+		 	&nbsp; {{title | lstring:locale}}
+	     </a>
+	     <!-- <div class="pull-right" >
+	         <a ng-click="showSelect=!showSelect" ng-show="showSelect" style="text-decoration:none;" ><i class="glyphicon glyphicon-remove-circle"></i> Close</a>
+	    </div> -->
+     </div>
+
     
     <div class="list-group-item-expand">
         <div ng-repeat="item in terms | orderBy:'title' | filter:{selected:true}" ng-class="ccc(item)" ng-click="onclick(this, $event)">
@@ -12,21 +21,16 @@
 
 	<!--Save Dialog-->
 	 <div ng-show="showSelect" >
-        <div class="filter-options well" style="position:relative;left:-190px;">
+        <div class="filter-options" >
 			<div>
-				<di style="padding-left:20px">
-
-					<div class="pull-right" >
-                     <a ng-click="showSelect=!showSelect" style="text-decoration:none;" ><i class="glyphicon glyphicon-remove-circle"></i> Close</a>
-                	</div>
-
+				<div style="padding-left:20px">
 					<div style="padding-bottom:10px">					
 						<span  ng-repeat="letter in alphabet">
 							<a style="padding-right:10px" ng-href="#" ng-click="setCountryFilter(letter)">{{letter}}</a>
 						</span>
 					</div>
-					<div style="height:200px;overflow-y:auto">
-						<div class="col-lg-4 col-md-4 col-sm-4" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" ng-repeat="item in (terms | filter: filterCountries | orderBy:'title.en')">
+					<div style="height:200px;overflow-y:auto;width:100%;">
+						<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" ng-repeat="item in (terms | filter: filterCountries | orderBy:'title.en')">
 							<div class="checkbox" style="margin-top:2px;margin-bottom:2px">
 								<label class="country-options-title"><input type="checkbox" ng-model="item.selected" ng-change="refresh()"> {{item.title.en}} ({{item.count}})</label>
 							</div>
@@ -36,5 +40,6 @@
 				
 			</div>
 		</div>
-	</div>
+	</div> <!-- end dialog -->
+
 </div>

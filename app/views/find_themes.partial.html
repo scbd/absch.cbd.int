@@ -1,6 +1,11 @@
-<div>
-    <a ng-click="showSelect=!showSelect" class="filter-title" style="text-decoration:none;color:#111;">{{title}}&nbsp; 
-        <i ng-class="{'fa fa-caret-down':!showSelect, 'fa fa-caret-up':showSelect}" ></i></a>
+<div class="well" style="margin: 5px -15px 0 -15px;padding:0 20px;">
+    <div class="row">
+        <div class="col-xs-2"> 
+		    <a ng-click="showSelect=!showSelect" class="filter-title" style="text-decoration:none;color:#111;">
+		    <i ng-class="{'fa fa-caret-down':!showSelect, 'fa fa-caret-up':showSelect}" ></i> &nbsp; {{title}}
+		        </a>
+        </div>
+    </div>
     
     <div class="list-group-item-expand">
         <div ng-repeat="item in terms | orderBy:'title' | filter:{selected:true}" ng-class="ccc(item)" ng-click="onclick(this, $event)">
@@ -8,7 +13,7 @@
                 <i class="glyphicon glyphicon-remove-circle"></i> {{item.title}} ({{item.count}})
             </div>
         </div>
-    <div>
+    </div>
 
 	<style>
 	.list-group-item .not:before {
@@ -27,15 +32,9 @@
 	}
 	</style>
 
-<!--Save Dialog-->
-    <div ng-show="showSelect" >
-        <div class="filter-options well" style="position:relative;left:-380px;">
-            <div>
-                <div style="padding-left:20px">
-                 <div class="pull-right" >
-                     <a ng-click="showSelect=!showSelect" style="text-decoration:none;" ><i class="glyphicon glyphicon-remove-circle"></i> Close</a>
-                </div>
-                <br>
+<div class="row" ng-show="showSelect" >
+ 	<div class="col-md-12" >
+        <div class="filter-options">
 					<div style="height:200px;overflow-y:auto">
 						<div ng-repeat="item in terms" class="checkbox">
 						
@@ -57,9 +56,8 @@
 							</div>
 						</div>
 					</div>
-				</div>
 				
-			</div>
 		</div>
-	</div>
+	</div> <!-- end row -->
+
 </div>

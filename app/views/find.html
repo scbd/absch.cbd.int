@@ -27,31 +27,28 @@
 <script type="text/javascript" src="/app/js/directives/forms/form-controls.js"></script>
 
 <div ng-controller="FindController">
-  <div class="container-top">
+<br>
     <div class="container" >
 
-      <div class="row filters">
-        <div class="col-xs-2"> 
-          <div class="pull-right filters text-center" style="background-color:#428BCA;">FILTERS</div>
-      </div>
-      <div class="col-xs-2 text-center"> 
-          <search-filter-schemas title='Document Types' ng-model='schemas' field='schema_s' query='querySchema'></search-filter-schemas>
-      </div>
-      <div class="col-xs-2 text-center"> 
-         <search-filter-countries title='Countries' ng-model='governments' field='government_s' query='queryGovernment'></search-filter-countries>
-      </div>
-      <div class="col-xs-2 text-center"> 
-          <search-filter-themes title='Thematic Areas' ng-model='thematicAreas' field='thematicArea_REL_ss' query='queryTheme'></search-filter-themes>
-      </div>
-      <div class="col-xs-2 text-center"> 
-          
-      </div>
-      <div class="col-xs-2 text-center"> 
-          <div><input type="text" ng-model="keyword" placeholder=" Keyword " class="form-control keyword" style="height:24px;width:160px;"></div>
-      </div>
+      <div class="row">
+        <div class="col-xs-2" style="background-color:#428BCA;"> 
+          <div class="filters text-center" >FILTERS</div>
+        </div>
     </div><!-- end row -->
+
+    <!-- record types -->
+    <search-filter-schemas title='Record Types' ng-model='schemas' field='schema_s' query='querySchema'></search-filter-schemas>
+    <search-filter-countries title='Countries' ng-model='governments' field='government_s' query='queryGovernment'></search-filter-countries>
+    <search-filter-themes title='Thematic Areas' ng-model='thematicAreas' field='thematicArea_REL_ss' query='queryTheme'></search-filter-themes>
+
+     <div  style="margin:5px; 0 0 0; padding:0 0 0 0"">
+
+    <input type="text" ng-model="keyword" placeholder=" Keyword " class="form-control keyword" 
+     style="height:24px;width:160px;></div>
+
+
   </div>  <!-- end container -->
-</div> <!-- end container top -->
+
 
 
     <div class="container">

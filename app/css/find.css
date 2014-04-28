@@ -1,3 +1,21 @@
+.divider{
+	color:#999;
+}
+
+.btn{
+    border: 0;
+    font-size: 11px;
+    text-transform: uppercase;
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
+}
+.btn-info{
+    color:#428BCA;
+    background-color: transparent;
+}
+
+
 .container-top{
 	background-color: #dedede;
 	border-bottom: 1px solid #ddd;
@@ -27,13 +45,11 @@
 
 .filter-selected{
 	white-space: nowrap;
-	font-size: 12px!important;
-	background-color:#999;
-	color:#fff!important;
-	margin: 3px;
-	padding:3px;
-	text-align: left;
-
+	font-size: 14px!important;
+	color:#428BCA!important;
+	margin: 3px 0;
+	padding:3px 0;
+	font-weight: bold;
 }
 .country-options-title{
 	color:#333;
@@ -43,10 +59,6 @@
 }
 
 .filter-options{
-	background-color:#fff;
-	width:800px;
-	text-align: left;
-	margin-top:20px;
 }
 .filter-options label{
 	color:#333;

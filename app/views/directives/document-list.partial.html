@@ -62,7 +62,9 @@
                                 </tr>
                                 <tr>
                                   <td style="padding-bottom:15px;">
-                                    <div style="padding:3px 0 0 20px;margin:0;" ng-hide="displayDetails" > SUMMARY GOES HERE (MAX 100 char)</div>
+                                    <div style="padding:3px 0 0 20px;margin:0;" ng-hide="displayDetails" > 
+                                    {{document}}
+                                    SUMMARY GOES HERE (MAX 100 char)</div>
                                     <div ng-show="displayDetails" record-loader document="document.data" 
                                     hide="title;headerlibraries" ></div>
                                   </td>
@@ -214,7 +216,7 @@
                                 </tr>
                                 <tr>
                                   <td style="padding:20px; color:#999;">
-                                   {{document.description}}
+                                   {{document}}
                                   <div ng-show="displayDetails" record-loader document="document.data" class="record-body" ></div>
                                   </td>
 
