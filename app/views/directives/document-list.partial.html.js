@@ -18,6 +18,7 @@ require('app').directive('documentList', function ($http) {
             },
             controller: ['$scope', function ($scope){
 
+
               $scope.formatDate = function formatDate (date) {
                     return moment(date).format('MMMM Do YYYY');
               }; 
@@ -27,6 +28,7 @@ require('app').directive('documentList', function ($http) {
               $scope.pageCount = 0;
               $scope.currentPage = 0;
               $scope.transformedDocuments = [];
+              $scope.descriptionLimit = 50;
 
                 $scope.load = function(item) {
                  console.log(item);
@@ -44,7 +46,7 @@ require('app').directive('documentList', function ($http) {
 
                 $scope.filterCategory = function(item) {
                             //console.log($scope.filter);
-                            if($scope.filter == '*' || item.schema.toUpperCase() == $scope.filter.toUpperCase() )
+                            if($scope.filter && ($scope.filter == '*' || item.schema.toUpperCase() == $scope.filter.toUpperCase()))
                                 return true;
 
                             return false;
@@ -114,7 +116,7 @@ require('app').directive('documentList', function ($http) {
                     };
 
                     output.id          = document.id;
-                    output.schema      = document.schema_EN_t.toUpperCase();
+                    output.schema      = document.schema_s.toUpperCase();
                     output.title       = document.title_t;
                     output.description = document.description_t;
                     output.source      = document.government_EN_t;

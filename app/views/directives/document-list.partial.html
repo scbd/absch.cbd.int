@@ -37,7 +37,6 @@
     <div ng-repeat="document in transformedDocuments | filter:filterCategory">
         <!--  {{document}} -->
                         <div ng-switch on="document.schema">
-
                             <div ng-switch-when="BIOSAFETY INFORMATION RESOURCE" class="result reference-result"> 
                                <table>
                                 <tr>
@@ -63,8 +62,8 @@
                                 <tr>
                                   <td style="padding-bottom:15px;">
                                     <div style="padding:3px 0 0 20px;margin:0;" ng-hide="displayDetails" > 
-                                    {{document}}
-                                    SUMMARY GOES HERE (MAX 100 char)</div>
+                                    <!-- {{document.description}} -->
+                                    </div>
                                     <div ng-show="displayDetails" record-loader document="document.data" 
                                     hide="title;headerlibraries" ></div>
                                   </td>
@@ -128,7 +127,7 @@
                                 <tr>
                                   <td style="padding-bottom:15px;">
                                     <div style="padding:3px 0 0 20px;margin:0;" ng-hide="displayDetails" >
-                                      {{document.description}}
+                                      {{document.description | limitTo: descriptionLimit}}
 
                                     </div>
                                     
@@ -158,7 +157,7 @@
                                 <tr>
                                   <td style="padding-bottom:15px;">
                                    <div style="padding:3px 0 0 20px;margin:0;" ng-hide="displayDetails" >
-                                      {{document.description}}
+                                      {{document.description | limitTo: descriptionLimit}}
                                     </div>
                           
                                   </td>
@@ -192,10 +191,6 @@
                             </div> <!-- end reference record -->
 
 
-
-
-
-
                           <!-- National Record  -->   
                             <div ng-switch-default class="result national-result">
                               <table>
@@ -216,7 +211,7 @@
                                 </tr>
                                 <tr>
                                   <td style="padding:20px; color:#999;">
-                                   {{document}}
+                                   {{document.description | limitTo: descriptionLimit}}
                                   <div ng-show="displayDetails" record-loader document="document.data" class="record-body" ></div>
                                   </td>
 

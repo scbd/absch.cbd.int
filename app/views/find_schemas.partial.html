@@ -2,12 +2,12 @@
 <div class="well" style="margin: 5px -15px 0 -15px;padding:0 20px;">
     <div class="row">
         <div class="col-xs-2"> 
-            <a ng-click="showSelect=!showSelect" href="#schemaPartial"  class="filter-title" style="text-decoration:none;color:#111;"><i ng-class="{'fa fa-caret-down':!showSelect, 'fa fa-caret-up':showSelect}" ></i> &nbsp; {{title}}
+            <a ng-click="showSelect=!showSelect" href="#schemaPartial"  class="filter-title" style="text-decoration:none;color:#111;">
+                <i ng-class="{'fa fa-caret-down':!showSelect, 'fa fa-caret-up':showSelect}" ></i> &nbsp; {{title}}
             </a>
         </div>
     </div>
-    
-    <div class="row" ng-show="terms | filter:{selected:true}" style="margin-top:10px;">
+    <!-- <div class="row" ng-show="terms | filter:{selected:true}" style="margin-top:10px;">
         <div class="col-xs-12" style="background-color:white;margin-bottom:10px;"> 
 
             <div class="list-group-item-expand">
@@ -50,8 +50,113 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
+<style type="text/css">
+    .filter-selected div{
+        padding-top: 10px;
+    }
+</style>
+    <div class="row" ng-show="expandSearch > 0" style="margin-top:10px;">
+        <div class="col-xs-12"> 
+            <div class="list-group-item-expand">
+                <div style="background-color:white;margin-bottom:10px;"> 
+                     <div class="filter-selected">                        
+                        <div ng-show="focalpoint.selected">
+                            <i class="fa fa-times-circle" ng-click="onclick('focalpoint', $event)"></i>  National Focal Points ({{focalpoint.count}})
+                        </div>
 
+                        <div ng-show="authority.selected">
+                            <i class="fa fa-times-circle" ng-click="onclick('authority', $event)"></i>  Competent National Authorities ({{authority.count}}) 
+                             <span class="divider">&nbsp; |&nbsp; </span>
+                            <span km-toggle  placeholder="Responsible for all"  ng-model="cnaResponsibleForAll" ></span> 
+                             <span class="divider">&nbsp; |&nbsp; </span>
+                            <span km-select multiple ng-model="cnaJurisdiction" binding-type="string" placeholder="Jurisdictions" items="options.absJurisdictions()"></span>     
+                             <span class="divider">&nbsp; |&nbsp; </span>                                           
+                            <span km-select multiple ng-model="cnaGeneticResourceTypes" binding-type="string" placeholder="Genetic Resource Types" items="options.absGeneticResourceTypes()"></span>
+                        </div>
+
+                        <span ng-show="measure.selected">
+                            <i class="fa fa-times-circle" ng-click="onclick('measure', $event)"></i>  Legislative, administrative or policy measures ({{measure.count}}) 
+                            <span class="divider">&nbsp; |&nbsp; </span>
+                            <span km-select multiple ng-model="msrJurisdiction" binding-type="string" placeholder="Jurisdictions" items="options.jurisdiction()"></span><span class="divider">&nbsp; |&nbsp; </span>
+                            <span km-select multiple ng-model="msrStatus" binding-type="string" placeholder="Status" items="options.status()"></span>
+                            <span class="divider">&nbsp; |&nbsp; </span> 
+                            <span km-select multiple ng-model="msrType" binding-type="string" placeholder="Types" items="options.typeOfDocuments()"></span>
+                            <div class="row">
+                                <div class="col-lg-2"> 
+                                    <span search-filter-dates title='Date of Adoption' query='msrAdoptionDate' field="adoption_s"></span>  
+                                </div>
+                                <!-- <div class="col-lg-1"> <span class="divider">&nbsp; |&nbsp; </span></div> -->
+                                <div class="col-lg-2">                                               
+                                        <span search-filter-dates title='Date of Retirement' query='msrRetirementDate' field="retired_s"></span>
+                                </div>
+                                <!-- <div class="col-lg-1"> <span class="divider">&nbsp; |&nbsp; </span></div> -->
+                                <div class="col-lg-2">
+                                    <span search-filter-dates title='Entry into Force' query='msrEntryinForceDate' field="entryIntoForce_s"></span>                                            
+                                </div>
+                                <!-- <div class="col-lg-1"> <span class="divider">&nbsp; |&nbsp; </span></div> -->
+                                <div class="col-lg-2">
+                                  <span search-filter-dates title='Date of application' query='mssApplicationDate' field="limitedApplication_s"></span>
+                                </div>
+                            </div>
+                        </span>
+
+                        <div ng-show="absPermit.selected">
+                             <i class="fa fa-times-circle" ng-click="onclick('absPermit', $event)"></i>Permits and their equivalent ({{absPermit.count}})
+                            <div class="row">
+                                  
+                                <div class="col-lg-3"> 
+                                    <span search-filter-dates title='Date of issuance of the permit' query='permitIssuanceDate'></span>
+                                </div>
+                                <div class="col-lg-3">    
+                                    <span search-filter-dates title='Date of expiry of the permit' query='permitExpiryDate'></span>
+                                </div>
+                                <div class="col-lg-1"> 
+                                    <div km-select multiple required name="permitusage" ng-model="permitusage" items="options.usage()" placeholder="Usage"></div>                               
+                                </div>
+                                <div class="col-lg-1">    
+                                     <div km-select multiple required name="permitkeywords" ng-model="permitkeywords" items="options.keywords()" placeholder="Keywords"></div>
+                                </div>                                
+                            </div>
+                        </div>
+
+                         <div ng-show="absCheckpointCommunique.selected">
+                            <i class="fa fa-times-circle" ng-click="onclick('absCheckpointCommunique', $event)"></i>  Checkpoint Communiqués ({{absCheckpointCommunique.count}})
+                             <span class="divider">&nbsp; |&nbsp; </span>
+                                <div km-select multiple required name="cpcoriginCountries" binding-type="string"  ng-model="cpcoriginCountries" items="options.countries()" placeholder="Origin Countries"></div>                               
+                        </div>
+                       
+                         <div ng-show="absCheckpoint.selected">
+                            <i class="fa fa-times-circle" ng-click="onclick('absCheckpoint', $event)"></i> Checkpoints ({{absCheckpoint.count}})
+                                <span class="divider">&nbsp; |&nbsp; </span>
+                                <span km-toggle  placeholder="Inform all authorities"  ng-model="cpInformAllAuthorities" ></span> 
+                                <span class="divider">&nbsp; |&nbsp; </span>
+                                <span km-select multiple ng-model="cpJurisdiction" binding-type="string" placeholder="Jurisdictions" items="options.absJurisdictions()"></span>
+                        </div>
+                        <div ng-show="resource.selected">
+                            <i class="fa fa-times-circle" ng-click="onclick('resource', $event)"></i> Virtual Library Records ({{resource.count}})
+                                <span class="divider">&nbsp; |&nbsp; </span>
+                                <input type="number" required name="vlrpublicationYear" ng-model="vlrpublicationYear" placeholder="Publication year"/>
+                                <span class="divider">&nbsp; |&nbsp; </span>
+                                <div km-select multiple name="vlrresourceTypes" binding-type="string" ng-model="vlrresourceTypes" items="options.resourceTypes()" placeholder="Type of resource"></div>
+                                 <!-- <span km-select multiple ng-model="vlrRegions" binding-type="string" placeholder="Select a country(ies) and/or region(s)..." items="options.regions()"></span> -->
+                                <span class="divider">&nbsp; |&nbsp; </span>                              
+                                <span km-select multiple ng-model="vlrRegions" binding-type="string" placeholder="Select a country(ies) and/or region(s)..." items="options.regions()"></span>
+                                <span class="divider">&nbsp; |&nbsp; </span>
+                               
+                               <!--  <span >
+                                    <a ng-click="vlrOptions=!vlrOptions" class="filter-title" >THEMATIC AREAS(S)
+                                        <i ng-class="{'fa fa-caret-down':!vlrOptions, 'fa fa-caret-up':vlrOptions}" ></i>
+                                    </a>
+                                    <div style="background-color:white;height:200px;overflow:scroll" ng-show="vlrOptions" km-term-check name="vlrabsSubjects" ng-model="vlrabsSubjects" terms="options.absSubjects()" binding-type="term[]"></div>
+                                </span>      -->
+                                                        
+                        </div>                      
+                    </div>
+             </div>
+            </div>
+        </div>
+    </div>
     <div class="row" style="padding:20px;" id="schemaPartial" ng-show="showSelect">
     <!--Save Dialog -->
     <div class="col-xs-12 " >
@@ -64,85 +169,29 @@
                         <h4>National Records</h4>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" ng-model="focalpoint.selected" bind-indeterminate="focalpoint.indeterminate" ng-change="refresh()">
+                                <input type="checkbox" ng-model="focalpoint.selected" bind-indeterminate="focalpoint.indeterminate" ng-change="refresh(focalpoint.selected)">
                                 National Focal Points ({{focalpoint.count}})
-                                &nbsp; 
-                                <a ng-click="moreOptions=!moreOptions" class="filter-title" >More Options&nbsp; 
-                                    <i ng-class="{'fa fa-caret-down':!moreOptions, 'fa fa-caret-up':moreOptions}" ></i>
-                                </a>
-
                             </label>
-                            <div ng-show="moreOptions">
-                                <div class="well" >
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-xs-12">
-                                            <span km-select multiple ng-model="jurisdiction" binding-type="string" placeholder="Jurisdictions" items="options.jurisdiction()"></span>
-                                            <span km-select multiple ng-model="status" binding-type="string" placeholder="Status" items="options.status()"></span>
-                                            <span km-select multiple ng-model="type" binding-type="string" placeholder="Types" items="options.typeOfDocuments()"></span>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-xs-6">
-                                            <span search-filter-dates title='Date of Adoption' query='adoptionDate'></span>                                  
-                                            <span search-filter-dates title='Entry into Force' query='adoptionDate'></span>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-xs-6"> 
-                                            <span search-filter-dates title='Date of Retirement' query='adoptionDate'></span>                                  
-                                            <span search-filter-dates title='Date of application' query='adoptionDate'></span>
-                                        </div>
-                                    </div>
-                                    
-                                   
-                                </div>
-                            </div>
                         </div>
                         <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" ng-model="authority.selected" bind-indeterminate="authority.indeterminate" ng-change="refresh()">
-                                    Competent National Authorities ({{authority.count}})&nbsp; 
-                                    <a ng-click="cnaOptions=!cnaOptions" class="filter-title" >More Options&nbsp; 
-                                        <i ng-class="{'fa fa-caret-down':!cnaOptions, 'fa fa-caret-up':cnaOptions}" ></i>
-                                    </a>
+                                    <input type="checkbox" ng-model="authority.selected" bind-indeterminate="authority.indeterminate" ng-change="refresh(authority.selected)">
+                                    Competent National Authorities ({{authority.count}})
                                  </label>
-                                 <div ng-show="cnaOptions">
-                                    <div class="well" >
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12 col-xs-12">
-                                                Responsibilities <span km-yes-no  ng-model="cnaResponsibleForAll" ></span>
-                                                <span km-select multiple ng-model="cnaJurisdiction" binding-type="string" placeholder="abs Jurisdictions" items="options.absJurisdictions()"></span>                                                
-                                                <span km-select multiple ng-model="cnaGeneticResourceTypes" binding-type="string" placeholder="Genetic Resource Types" items="options.absGeneticResourceTypes()"></span>
-
-                                            </div>
-                                        </div>    
-                                    </div>
-                                </div>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" ng-model="database.selected" bind-indeterminate="database.indeterminate" ng-change="refresh()">
-                                National Websites and Databases ({{database.count}}) &nbsp; 
-                                <a ng-click="nwdOptions=!nwdOptions" class="filter-title" >More Options&nbsp; 
-                                    <i ng-class="{'fa fa-caret-down':!nwdOptions, 'fa fa-caret-up':nwdOptions}" ></i>
-                                </a>
+                                <input type="checkbox" ng-model="database.selected" bind-indeterminate="database.indeterminate" ng-change="refresh(database.selected)">
+                                National Websites and Databases ({{database.count}}) 
                              </label>
-                             <div ng-show="nwdOptions">
-                                <div class="well" >
-                                    <div class="row">
-                                        
-                                    </div>    
-                                </div>
-                            </div>
                         </div>
                         <div class="checkbox"><label>
-                            <input type="checkbox" ng-model="measure.selected" bind-indeterminate="measure.indeterminate" ng-change="refresh()">
+                            <input type="checkbox" ng-model="measure.selected" bind-indeterminate="measure.indeterminate" ng-change="refresh(measure.selected)">
                             Legislative, administrative or policy measures ({{measure.count}})
                         </label></div>
                         <div class="checkbox"><label>
-                            <input type="checkbox" ng-model="absPermit.selected" bind-indeterminate="absPermit.indeterminate" ng-change="refresh()">
-                            Permits and their equivalent ({{absPermit.count}}) &nbsp; 
-                                <a ng-click="permitOptions=!permitOptions" class="filter-title" >More Options&nbsp; 
-                                    <i ng-class="{'fa fa-caret-down':!permitOptions, 'fa fa-caret-up':permitOptions}" ></i>
-                                </a>
+                            <input type="checkbox" ng-model="absPermit.selected" bind-indeterminate="absPermit.indeterminate" ng-change="refresh(absPermit.selected)">
+                            Permits and their equivalent ({{absPermit.count}}) 
                              </label>
                              <div ng-show="permitOptions">
                                 <div class="well" >
@@ -151,75 +200,40 @@
                                             <div><strong>{{reference.title | lstring}}</strong></div>
                                             <div>{{reference.summary | lstring}}</div>
                                         </div>
-                                     </div> </br>
-                                     <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-xs-6">
-                                            <span search-filter-dates title='Date of issuance of the permit or its equivalent' query='permitIssuanceDate'></span>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-xs-6"> 
-                                            <span search-filter-dates title='Date of expiry of the permit or its equivalent' query='permitExpiryDate'></span>
-                                        </div>
-                                    </div>
-                                    <div km-select multiple required name="permitusage" ng-model="permitusage" items="options.usage()" placeholder="Usage"></div>
-                                    <div km-select multiple required name="permitkeywords" ng-model="permitkeywords" items="options.keywords()" placeholder="Keywords"></div>
+                                     </div>                                    
                                 </div>
                             </div>
                         </div>
                         <div class="checkbox"><label>
-                            <input type="checkbox" ng-model="absCheckpoint.selected" bind-indeterminate="absCheckpoint.indeterminate" ng-change="refresh()">
-                            Checkpoints ({{absCheckpoint.count}})&nbsp; 
-                                <a ng-click="absCheckpointOptions=!absCheckpointOptions" class="filter-title" >More Options&nbsp; 
-                                    <i ng-class="{'fa fa-caret-down':!absCheckpointOptions, 'fa fa-caret-up':absCheckpointOptions}" ></i>
-                                </a>
+                            <input type="checkbox" ng-model="absCheckpoint.selected" bind-indeterminate="absCheckpoint.indeterminate" ng-change="refresh(absCheckpoint.selected)">
+                            Checkpoints ({{absCheckpoint.count}})
                              </label>
-                             <div ng-show="absCheckpointOptions">
+                            <!--  <div ng-show="absCheckpointOptions">
                                 <div class="well" >                                                                 
                                     <div km-select multiple required name="cpjurisdictions" ng-model="cpjurisdictions" items="options.cpjurisdictions()" placeholder="Jurisdiction"></div>
                                     Inform All Authorities <span km-yes-no  ng-model="cpInformAllAuthorities" ></span>          
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
 
                         <div class="checkbox"><label>
-                            <input type="checkbox" ng-model="absCheckpointCommunique.selected" bind-indeterminate="absCheckpointCommunique.indeterminate" ng-change="refresh()">
-                            Checkpoint Communiqués ({{absCheckpointCommunique.count}})&nbsp; 
-                                <a ng-click="absCheckpointCommuniqueOptions=!absCheckpointCommuniqueOptions" class="filter-title" >More Options&nbsp; 
-                                    <i ng-class="{'fa fa-caret-down':!absCheckpointCommuniqueOptions, 'fa fa-caret-up':absCheckpointCommuniqueOptions}" ></i>
-                                </a>
+                            <input type="checkbox" ng-model="absCheckpointCommunique.selected" bind-indeterminate="absCheckpointCommunique.indeterminate" ng-change="refresh(absCheckpointCommunique.selected)">
+                            Checkpoint Communiqués ({{absCheckpointCommunique.count}})
                              </label>
-                             <div ng-show="absCheckpointCommuniqueOptions">
+                            <!--  <div ng-show="absCheckpointCommuniqueOptions">
                                 <div class="well" >                                                                 
                                     <div km-select multiple required name="cpcoriginCountries" ng-model="cpcoriginCountries" items="options.countries()" placeholder="Origin Countries"></div>                                             
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
 
                     </div>
                     <div class="reference-records">
                         <h4>Reference Records</h4>
                         <div class="checkbox"><label>
-                            <input type="checkbox" ng-model="resource.selected" bind-indeterminate="resource.indeterminate" ng-change="refresh()">
-                            Virtual Library Records ({{resource.count}})&nbsp; 
-                                <a ng-click="vlrOptions=!vlrOptions" class="filter-title" >More Options&nbsp; 
-                                    <i ng-class="{'fa fa-caret-down':!vlrOptions, 'fa fa-caret-up':vlrOptions}" ></i>
-                                </a>
+                            <input type="checkbox" ng-model="resource.selected" bind-indeterminate="resource.indeterminate" ng-change="refresh(resource.selected)">
+                            Virtual Library Records ({{resource.count}})
                              </label>
-                             <div ng-show="vlrOptions">
-                                <div class="well" >
-                                    <!-- <div class="km-control-group" required name="vlrpublicationYear" caption="Publication year"> -->
-                                         <input type="number" required name="vlrpublicationYear" ng-model="vlrpublicationYear" placeholder="Publication year"/>
-                                    <!-- </div>      -->
-                                    <!-- <div class="km-control-group" name="vlrresourceTypes" caption="Type of resource"> -->
-                                        <div km-select multiple name="vlrresourceTypes" ng-model="vlrresourceTypes" items="options.resourceTypes()" placeholder="Type of resource"></div>
-                                    <!-- </div>                                                                                                 -->
-                                    <!-- <div class="km-control-group" required name="vlrRegions" caption="Country(ies), Regional or Economic group(s) related to the resource"> -->
-                                        <div km-select style="display: inline-block" name="vlrRegions" ng-model="vlrRegions" items="options.regions()" multiple placeholder="Select a country(ies) and/or region(s)..."></div>
-                                    <!-- </div>                                       -->
-                                    <div class="km-control-group" required name="vlrabsSubjects" caption="Thematic areas(s)">
-                                        <div km-term-check name="vlrabsSubjects" required ng-model="vlrabsSubjects" terms="options.absSubjects()" binding-type="term[]"></div>
-                                    </div>                                            
-                                </div>
-                            </div>
                         </div>
 
                         

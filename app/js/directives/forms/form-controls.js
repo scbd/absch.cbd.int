@@ -1707,9 +1707,18 @@ require('app').directive('kmToggle', [function ()
 		},
 		link: function ($scope, $element, $attrs, ngModelController) 
 		{
-			$scope.value = false;
+			//$scope.value = false;
 			
-		}
+		},
+		controller: ["$scope", function ($scope) 
+		{
+			$scope.$watch('value', function(oldValue, newValue){
+				if(oldValue!=undefined)
+					$scope.binding = newValue;				
+			});
+
+		}]
+
 	};
 }])
 

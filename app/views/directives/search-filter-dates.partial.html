@@ -1,32 +1,50 @@
-<div class="list-group" >
-    <div class="list-group-item active">{{title}}</div>
-    <div class="list-group-item" >   
-        <select class="form-control" ng-model="selectedDate" ng-change-"onSelectedDate()" ng-options="date.text for date in dates"></select>
-        <div class="row" style="margin-top:6px">
-            <div class="col-md-6">
-                <div style="font-size:10px;font-weight:bold">SINCE</div>
-                <div class="km-date" ng-model="since"></div>
-            </div>
-            <div class="col-md-6">
-                <div style="font-size:10px;font-weight:bold">UNTIL</div>
-                <div class="km-date" ng-model="until"></div>
-            </div>
+<ul class="nav nav-pills blaise" style="clear:none;">
+  <li class="dropdown">
+    <a class="dropdown-toggle"
+       data-toggle="dropdown"
+       href="#">
+        {{title}}
+        <b class="caret"></b>
+      </a>
+    <ul class="dropdown-menu" style="width:300px">
+       <!-- <span search-filter-dates title='Date of Adoption' query='adoptionDate'></span>  -->
+        <div class="list-group" >
+            <button class="btn btn-xs btn-default"  type ="button" ng-click="clearSelection()" ng-disabled="!hasSelectedItems()">Clear selection</button>
+            <div class="list-group-item active">{{title}}</div>
+            <div class="list-group-item dropdowndate" >   
+                <select class="form-control" ng-model="selectedDate" ng-change-"onSelectedDate()" ng-options="date.text for date in dates"></select>
+                <div class="row" style="margin-top:6px">
+                    <div class="col-md-6">
+                        <div style="font-size:10px;font-weight:bold">SINCE</div>
+                        <div class="km-date" ng-model="since"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div style="font-size:10px;font-weight:bold">UNTIL</div>
+                        <div class="km-date" ng-model="until"></div>
+                    </div>
+                </div>
+                <style>
+                    .km-date input {
+                        padding-left: 4px;
+                        padding-right: 4px;
+                        font-size: 10px;
+                        height:30px;
+                        text-align: center;
+                    }
+                    .km-date button {
+                        margin-left:-1px;
+                        padding-left: 8px;
+                        padding-right: 8px;
+                        height:30px;
+                        font-size: 10px;
+                    }
+                    div .blaise{
+                        list-style-type: none;                        
+                    } 
+                </style>
+            </div>     
         </div>
-        <style>
-            .km-date input {
-                padding-left: 4px;
-                padding-right: 4px;
-                font-size: 10px;
-                height:30px;
-                text-align: center;
-            }
-            .km-date button {
-                margin-left:-1px;
-                padding-left: 8px;
-                padding-right: 8px;
-                height:30px;
-                font-size: 10px;
-            }
-        </style>
-    </div>     
-</div>
+    </ul>
+  </li>
+</ul>
+

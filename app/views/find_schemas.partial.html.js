@@ -19,8 +19,15 @@ require('app').directive('searchFilterSchemas', function ($http) {
             $scope.selectedItems = [];
             $scope.facet = $scope.field.replace('_s', ''); // TODO: replace @field by @facet
 
-            $scope.adoptionDate= '*:*'
+            $scope.expandSearch = 0;
+            $scope.msrAdoptionDate= '*:*'
+            $scope.msrRetirementDate= '*:*'
+            $scope.msrEntryinForceDate= '*:*'
+            $scope.mssApplicationDate= '*:*'
 
+            $scope.permitIssuanceDate= '*:*'
+            $scope.permitExpiryDate= '*:*'
+            
             $scope.options  = {
                jurisdiction             : function () { return $http.get("/api/v2013/thesaurus/domains/7A56954F-7430-4B8B-B733-54B8A5E7FF40/terms",  { cache: true }).then(function(o){ return o.data; }); },
                status                   : function () { return $http.get("/api/v2013/thesaurus/domains/ED7CDBD8-7762-4A84-82DD-30C01458A799/terms",  { cache: true }).then(function(o){ return o.data; }); },
@@ -45,6 +52,7 @@ require('app').directive('searchFilterSchemas', function ($http) {
             $scope.isSelected = function(item) {
                 return $.inArray(item.symbol, $scope.selectedItems) >= 0;
             };
+
 
             $scope.closeDialog = function() {
                 $element.find("#dialogSelect").modal("hide");
@@ -88,8 +96,6 @@ require('app').directive('searchFilterSchemas', function ($http) {
             };
 
             $scope.updateQuery = function() {
-
-                console.log($scope.query);
                 
                 $scope.query = '';
 
@@ -106,7 +112,10 @@ require('app').directive('searchFilterSchemas', function ($http) {
             };
 
             $scope.onclick = function (scope, evt) {
-                scope.item.selected = !scope.item.selected;
+                
+                $scope[scope].selected = !$scope[scope].selected;
+                $scope.expandSearch--;
+                //console.log( $scope.terms);
                 buildQuery();
             }
 
@@ -120,6 +129,7 @@ require('app').directive('searchFilterSchemas', function ($http) {
                     conditions.forEach(function (condition) { query = query + (query=='' ? '( ' : ' OR ') + condition; });
                     query += ' )';
                     $scope.query = query;
+                    console.log (query);
                 }
             }
 
@@ -129,24 +139,41 @@ require('app').directive('searchFilterSchemas', function ($http) {
                     if(item.selected){
 
                         var subFilterQuery = '(' + $scope.field+':'+item.identifier;
-                        // if(item.subFilters){
-                        //     item.subFilters.forEach(function(filter){
+                        if(item.subFilters){
+                            item.subFilters.forEach(function(filter){
 
-                        //         if(filter.type=='multiselect'){
-                        //             if( $scope[filter.name]){
-                        //                 subFilterQuery = subFilterQuery + ' AND ' + filter.name +':'+ $scope[filter.name];                                                                       
-                        //             }
-                        //         }
-                        //     });
-                        // }
+                                    // console.log($scope);
+                                    // console.log($scope['msrTJurisdiction'])
+                                if(filter.type=='multiselect'){
+                                    if( $scope[filter.name] && $scope[filter.name].length > 0){
+                                        // debugger;
+                                        var selectedValues = $scope[filter.name];    
+                                        console.log (selectedValues)                                     ;
+                                            subFilterQuery = subFilterQuery + ' AND (' + filter.field +':'+ selectedValues + ')';      
+                                            subFilterQuery = subFilterQuery.replace(',', ' OR ');                                        
+                                    }
+                                }
+                                else if(filter.type=='calendar'){
+                                        var selectedValues = $scope[filter.name];  
+                                        if(selectedValues != '*:*'){
+                                            subFilterQuery = subFilterQuery + ' AND ' + selectedValues;                                                  
+                                        }
+                                }
+                                else {
+                                    if($scope[filter.name])
+                                        subFilterQuery = subFilterQuery + ' AND ('  + filter.field +':'+  $scope[filter.name] + ')';       
+                                }
+                            });
+                        }
 
                       subFilterQuery = subFilterQuery + ')'
-                console.log(subFilterQuery);
+                //console.log(subFilterQuery);
                         conditions.push(subFilterQuery);
                     }
                 });                 
  
             }
+
 
             function dictionarize(items) {
                 var dictionary = [];
@@ -157,42 +184,56 @@ require('app').directive('searchFilterSchemas', function ($http) {
                 return dictionary;
             }
 
-            $scope.focalpoint              = { identifier: 'focalPoint',               title: 'National Focal Points',
-                                               subFilters : [
-                                                                { name: 'jurisdiction', type: 'multiselect' },
-                                                                { name: 'status', type: 'multiselect' },
-                                                                { name: 'type', type: 'multiselect' }
-                                                            ]
+            $scope.focalpoint              = { identifier: 'focalPoint',               title: 'National Focal Points'
                                              };
             $scope.authority               = { identifier: 'authority',                title: 'Competent National Authorities' ,
                                                subFilters : [
-                                                                { name: 'cnaResponsibleForAll',     type: 'yesno' },
-                                                                { name: 'cnaJurisdiction',          type: 'multiselect' },
-                                                                { name: 'cnaGeneticResourceTypes',  type: 'multiselect' }
+                                                                { name: 'cnaResponsibleForAll',     type: 'yesno' , field: 'responsibleForAll_b'},
+                                                                { name: 'cnaJurisdiction',          type: 'multiselect', field: 'jurisdiction_s' },
+                                                                { name: 'cnaGeneticResourceTypes',  type: 'multiselect' , field: 'geneticResourceTypes_s'}                                                         
                                                             ]
                                              };
             $scope.database                = { identifier: 'database',                 title: 'National Websites and Databases', count: 0 };
-            $scope.measure                 = { identifier: 'measure',                  title: 'Legislative, administrative and policy measures', count: 0  };
+            $scope.measure                 = { identifier: 'measure',                  title: 'Legislative, administrative and policy measures', count: 0,
+                                               subFilters : [
+                                                                { name: 'msrJurisdiction', type: 'multiselect', field: 'jurisdiction_s' },
+                                                                { name: 'msrGeneticResourceTypes', type: 'multiselect', field: 'GeneticResourceTypes_s' },
+                                                                { name: 'msrType', type: 'multiselect', field: 'type_s' },
+
+                                                                { name: 'msrAdoptionDate', type: 'calendar' , field: 'adoption_s'},
+                                                                { name: 'msrRetirementDate', type: 'calendar' , field: 'retired_s'},
+                                                                { name: 'msrEntryinForceDate', type: 'calendar' , field: 'entryIntoForce_s'},
+                                                                { name: 'mssApplicationDate', type: 'calendar' , field: 'limitedApplication_s'}      
+                                                            ]
+                                            };
             $scope.absPermit               = { identifier: 'absPermit',                title: 'Permits and their equivalent' ,
                                                subFilters : [
-                                                                { name: 'permitAuthority',  type: 'reference' },
-                                                                { name: 'permitusage',      type: 'multiselect' },
-                                                                { name: 'permitkeywords',   type: 'multiselect' }
+                                                                //{ name: 'permitAuthority',  type: 'reference' , field: 'jurisdiction_s'},
+                                                                { name: 'permitusage',      type: 'multiselect' , field: 'usage_s'},
+                                                                { name: 'permitkeywords',   type: 'multiselect' , field: 'keywords_s'},
+                                                                { name: 'permitExpiryDate', type: 'calendar' , field: 'expiration_s'},
+                                                                { name: 'permitIssuanceDate', type: 'calendar' , field: 'date_s'}      
                                                             ]
                                              };
             $scope.absCheckpoint           = { identifier: 'absCheckpoint',            title: 'Checkpoints' ,
                                                subFilters : [
-                                                                { name: 'cpInformAllAuthorities', type: 'yesno' },
-                                                                { name: 'cpjurisdictions',      type: 'multiselect' }
+                                                                { name: 'cpInformAllAuthorities', type: 'yesno' , field: 'informAllAuthorities_b'},
+                                                                { name: 'cpJurisdiction',      type: 'multiselect', field: 'jurisdiction_s' }
                                                             ]
                                               };
             $scope.absCheckpointCommunique = { identifier: 'absCheckpointCommunique',  title: 'Checkpoint Communiqués' ,
                                                subFilters : [
-                                                                { name: 'cpcoriginCountries',      type: 'multiselect' }
+                                                                { name: 'cpcoriginCountries',      type: 'multiselect', field: 'originCountries_s' }
                                                             ]
                                                };
 
-            $scope.resource                = { identifier: 'resource',                 title: 'Virtual Library Record' };
+            $scope.resource                = { identifier: 'resource',                 title: 'Virtual Library Record' ,
+                                               subFilters : [
+                                                                { name: 'vlrpublicationYear', type: 'multiselect', field: 'publicationYear_is'},
+                                                                { name: 'vlrresourceTypes',   type: 'multiselect' , field: 'resourceTypes_s'},
+                                                                { name: 'vlrRegions',         type: 'multiselect', field: 'regions_s' }
+                                                            ]
+                                               };
             $scope.organization            = { identifier: 'organization',             title: 'ABS Related Organizations' };
             $scope.meeting                 = { identifier: 'meeting',                  title: 'Meetings &amp; Meeting Outcomes ({{meeting.count}})' };
             $scope.notification            = { identifier: 'notification',             title: 'Notifications' };
@@ -211,18 +252,53 @@ require('app').directive('searchFilterSchemas', function ($http) {
             }
 
             function onWatch_items(values) { if(!values) return;
-                values.forEach(function (item) {
+                values.forEach(function (item) { console.log (item);
                     if(_.has($scope.termsx, item.symbol))
+                    {
                         $scope.termsx[item.symbol].count = item.count;
+
+                    }
                 });
             }
 
             $scope.$watch('items', onWatch_items);
+ 
+            $scope.refresh = function(selected){
+                
+                if(selected)
+                    $scope.expandSearch++;
+                else
+                    $scope.expandSearch--;
 
-            $scope.refresh = buildQuery;
+                buildQuery();
+            }
             
             buildQuery();
+            
+            $scope.terms.forEach(function (item) { 
+                if(item.subFilters){
+                    item.subFilters.forEach(function(filter){
+                        $scope.$watch(filter.name, 
+                            function(oldValue, newValue){
+                               if(oldValue != newValue){
+                                    buildQuery();
+                                }
+                            });
+                        }
+                    );                    
+                }
+            });
 
+            // $('.dropdownCheck').on("click", "*", function (e) {
+            //     e.stopPropagation();
+            // });
+
+            // // $('.date-filter').on("click", "ul li *", function (e) {
+            // //     e.stopPropagation();
+            // // });
+            // $(document).on('click', 'blaise.ul', function (e) {
+            //     e.stopPropagation();
+            // });
             
 
         }]

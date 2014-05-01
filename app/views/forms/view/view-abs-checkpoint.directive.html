@@ -2,6 +2,7 @@
 
 	<h2><span class="record-title-national">ABSCH-CP</span> Checkpoint</h2> 
 
+                {{document.header.identifier}}
 	<h2>{{document.name | lstring:locale}}</h2>
 
 	<div ng-show="document.government">
@@ -31,10 +32,10 @@
 	</div>
 
 	<div ng-show="document.authoritiesToInform || document.informAllAuthorities">
-		<legend>National authority/ies</legend>
+		<legend>National authority/ies</legend>{{document.informAllAuthorities}}
 		<label>National authority/ies to be informed through e-mail</label>
 		<div class="km-value" ng-show="document.informAllAuthorities">
-			<span >Inform all national CNAs</span>
+			<span >Inform all national CNAs {{document.informAllAuthorities | yesno}}</span>
 		</div>
 
 		<div ng-show="document.authoritiesToInform">

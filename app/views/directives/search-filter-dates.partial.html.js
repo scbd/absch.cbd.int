@@ -6,7 +6,8 @@ require('app')
         replace: true,
         scope: {
               title: '@title',
-              query: '=query'//,
+              query: '=query',
+              field: '@field'
               //since: '=since',
               //until: '=until'
         },
@@ -40,7 +41,7 @@ require('app')
                     var since = $scope.since ? $scope.since + 'T00:00:00.000Z' : '*';
                     var until = $scope.until ? $scope.until + 'T23:59:59.999Z' : '*';
 
-                    $scope.query = ' ( createdDate_s:[ ' + since + ' TO ' + until + ' ] ) ';
+                    $scope.query = ' (' + $scope.field +':[ ' + since + ' TO ' + until + ' ] ) ';
                 } else {
                     $scope.query = '*:*';
                 }
@@ -52,6 +53,23 @@ require('app')
             });
 
             $scope.updateQuery = updateQuery;
+
+             $('.dropdowndate').on("click", "*", function (e) {
+                e.stopPropagation();
+            });
+
+            $(document).on('click', 'span.month, th.next, th.prev, th.switch, span.year, td.day, th.dow, th.datepicker-switch', function (e) {
+                e.stopPropagation();
+            });
+
+            $scope.clearSelection = function(){
+                $scope.since = null;
+                $scope.until = null;
+                $scope.selectedDate = '';
+            }
+            $scope.hasSelectedItems = function(){
+                    return $scope.query.length > 0 && $scope.query !="*:*";
+            }
         }]
     }
 })
