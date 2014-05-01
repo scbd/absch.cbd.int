@@ -37,7 +37,8 @@ require("app").directive("editAuthority", [function () {
 		    $scope.ChangeEvent = function () { console.log("Change Event called"); };
 		    $scope.BeforeChangeEvent = function () { console.log("Before Change Event called"); };
 
-		   
+		  
+
 
 			//==================================
 			//

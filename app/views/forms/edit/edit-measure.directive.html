@@ -19,6 +19,7 @@
 		editForm.authorities.$error.required	||
 		( isLegallyBinded() && editForm.entryIntoForce.$error.required) ||
 		editForm.documents.$error.required">
+
 		<strong>Mandatory information:</strong>
 		<ul>
 			<li ng-show="editForm.government.$error.required" >Field is mandatory / 
@@ -60,19 +61,18 @@
                 </div>
             </div>
         </div>
-        
+
+
 		<form class="editForm" name="editForm" style="margin-top:10px">
+			
+			{{document}}
 		
+			<a ng-click="checkform=!checkform">review</a>
 
-			<!-- <div ng-show="tab=='review'" km-tab="review"> -->
-	           <!--  <div km-document-validation ng-model="validationReport" ></div>
+			<div ng-show="checkform" > 
+	            <div km-document-validation ng-model="validationReport" ></div>
+			</div> 
 
-	            <div class="btn-group" ng-show="reviewDocument.header.languages.length>1">
-	                <input type="button" class="btn" ng-class="{'active' : review.locale==locale, 'btn-info' : review.locale==locale}" ng-repeat="locale in document.header.languages" ng-click="$parent.review.locale = locale" value="{{locale | uppercase}}" />
-	            </div>  -->
-<!-- 			</div> -->
-
-			<!-- 	<span class="help-block"><i>Introduction</i><br /><br />This common format is to be used for legislative, administrative and policy measures on access and benefit-sharing. This information shall be made available to the Access and Benefit-Sharing Clearing-House (ABS-CH) in accordance with Article 14, paragraph 2(a), of the Nagoya Protocol on Access and Benefit-sharing. <br /> <br /> Access and benefit-sharing measures may include national or regional strategies, policies, legislation or regulations. They may also include measures undertaken at the regional, national, sub-national or community level.</span> -->
 
 				<legend>General information</legend>
 				<div class="row">
@@ -154,17 +154,12 @@
 
 				</div>
 
-				
-
-				
-				
-				
 				<hr>
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="km-control-group" required name="type" caption="Type of document/measure">
-							<div km-term-radio name="type" description="true" required ng-model="document.type" 
-							terms="options.typeOfDocuments()" required></div>
+							<div km-term-radio name="type"required ng-model="document.type" 
+							terms="options.typeOfDocuments()" description="true" binding-type="term" ng-click="save()" required></div>
 							
 						</div>
 					</div>

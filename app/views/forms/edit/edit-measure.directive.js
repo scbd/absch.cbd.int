@@ -8,6 +8,7 @@ require("app").directive("editMeasure", [ "authHttp", "Enumerable", "$filter", "
 		scope      : {},
 		controller : ["$scope", "authHttp", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage", "authentication", "Enumerable", "editFormUtility", function ($scope, $http, guid, $filter, thesaurus, $q, $location, storage, authentication, Enumerable, editFormUtility)
 		{
+			$scope.checkform = false;
 			$scope.status   = "";
 			$scope.error    = null;
 			$scope.document = null;
@@ -86,6 +87,7 @@ require("app").directive("editMeasure", [ "authHttp", "Enumerable", "$filter", "
 					throw err;
 
 				});
+
 			}
 
 			//==================================
@@ -109,17 +111,12 @@ require("app").directive("editMeasure", [ "authHttp", "Enumerable", "$filter", "
 			//==================================
 			//
 			//==================================
-			$scope.$watch("tab", function(tab) {
+			$scope.$watch("checkform", function() {
 
-				if(tab == "edit")   { $scope.prevTab = "edit";  $scope.nextTab = "absch"; }
-				if(tab == "absch")  { $scope.prevTab = "edit";  $scope.nextTab = "review"; }
-				if(tab == "review") { $scope.prevTab = "absch"; $scope.nextTab = "review"; }
-
-				if(tab == "review") 
+				if($scope.checkform) 
 					validate();
 			});
-
-
+			
 			//==================================
 			//
 			//==================================

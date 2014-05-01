@@ -54,6 +54,10 @@ require('app').controller('FindController', ['$scope', '$rootScope', '$http', '$
     $scope.rawDocs = [];
 
     $scope.load = function(item) {
+
+        if(item.data)
+            return;
+
       item.data = {'schema':item.schema, 'url_ss': item.url_ss, 'data': item};
         $http.get("/api/v2013/documents/"+item.identifier_s).then(function (result) {  
             item.data = result.data;

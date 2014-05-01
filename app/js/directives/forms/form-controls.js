@@ -541,14 +541,14 @@ require('app').directive('kmTermRadio', function ($http) {
 			bindingName : '@ngModel',
 			bindingType : '@',
 			termsFn     : '&terms',
-			description : '=',
+			description : "=",
 			layout      : "@",
 			required    : "@"
 		},
 		link: function ($scope, $element, $attr, ngModelController) 
 		{
-			$scope.description=false;
 
+			$scope.description = true;
 			$scope.selection = null;
 			$scope.terms     = null;
 			$scope.rootTerms   = [];
@@ -616,6 +616,8 @@ require('app').directive('kmTermRadio', function ($http) {
 			//==============================
 			$scope.save = function() 
 			{
+				//debugger;
+
 				if(!$scope.selection)
 					return;
 
@@ -1727,8 +1729,21 @@ require('app').directive('kmYesNo', [function ()
 		transclude: false,
 		scope: {
 			binding      : '=ngModel',
-			ngDisabledFn : '&ngDisabled'
-		}
+			ngDisabledFn : '&ngDisabled',
+			required     : "@"
+		},
+		link: {},
+		controller: ["$scope",  function ($scope) 
+		{
+			//==============================
+			//
+			//==============================
+			$scope.isRequired = function()
+			{
+				return $scope.required!=undefined 
+					&& $.isEmptyObject($scope.binding);
+			}
+		}]
 	};
 }])
 
