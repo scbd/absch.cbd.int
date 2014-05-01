@@ -5,7 +5,7 @@
 
 	 <div ng-show="display('title')">
 	 	<label>Title</label>
-	 	<h5 class="km-value">{{document.title | lstring:locale}}</h5>
+	 	<div class="km-value km-pre"><strong>{{document.title | lstring:locale}}</strong></div>
 	 </div>
 
 	<div ng-show="document.summary">
@@ -211,31 +211,32 @@
 	</div>
 
 </div>
-	<div class="container record-metadata" style="margin:0 20px;padding:10px;">
+	<div class="container-fluid record-metadata" style="margin:0 20px;padding:10px;">
 		<div class="row">
 
-			<div ng-show="document.info.createdBy" class="col-xs-3">
-					<label>Published by:</label>
-					<div>
-					{{document.info.createdBy.firstName}} {{document.info.createdBy.lastName}} ({{document.info.createdBy.email}})</div>
-			</div>		
-			<div ng-show="document.info.createdBy" class="col-xs-2">
-					<label>Published on:</label>
-					<div>{{document.info.createdOn}}</div>
-			</div>
-			
-			<div ng-show="document.info.updatedBy && document.info.updatedOn != document.info.createdOn"  class="col-xs-3">
-					<label>Last udpated by:</label>
-					<div >{{document.info.updatedBy.firstName}} {{document.info.updatedBy.lastName}} ({{document.info.updatedBy.email}})</div>
-			</div>
-			<div ng-show="document.info.updatedBy && document.info.updatedOn != document.info.createdOn"  class="col-xs-2">
-					<label>Last updated on:</label>
-					<div>{{document.info.updatedOn}}</div>
-			</div>
-			<div ng-show="document.header.identifier"  class="col-xs-2">
-					<label>record identifier</label>
-					<div><a href="/database/record?documentID={{document.header.identifier}}">{{document.header.identifier}}</a> </div>
-			</div>
+				<div ng-show="document.info.createdBy" class="col-xs-3">
+						<label>Published by:</label>
+						<div>
+						{{document.info.createdBy.firstName}} {{document.info.createdBy.lastName}} ({{document.info.createdBy.email}})</div>
+				</div>		
+				<div ng-show="document.info.createdBy" class="col-xs-2">
+						<label>Published on:</label>
+						<div>{{document.info.createdOn}}</div>
+				</div>
+				
+				<div ng-show="document.info.updatedBy && document.info.updatedOn != document.info.createdOn"  class="col-xs-3">
+						<label>Last udpated by:</label>
+						<div >{{document.info.updatedBy.firstName}} {{document.info.updatedBy.lastName}} ({{document.info.updatedBy.email}})</div>
+				</div>
+				<div ng-show="document.info.updatedBy && document.info.updatedOn != document.info.createdOn"  class="col-xs-2">
+						<label>Last updated on:</label>
+						<div>{{document.info.updatedOn}}</div>
+				</div>
+				<div ng-show="document.header.identifier"  class="col-xs-2">
+						<label>record identifier</label>
+						<div><a href="/database/record?documentID={{document.header.identifier}}">{{document.header.identifier}}</a> </div>
+				</div>
+
 
 		</div>
 
