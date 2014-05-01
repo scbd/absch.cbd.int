@@ -155,7 +155,14 @@ require("app").directive("registerRecordList", ["$timeout", function ($timeout) 
 				return "";
 			};
 
+			//============================================================
+			//
+			//
+			//============================================================
 			$scope.loadDocument = function(item){
+
+				if(item.data)
+					return;
 				
 		        item.data = {'schema':item.type, 'url_ss': '', 'data': []};
 		        $http.get("/api/v2013/documents/"+item.identifier).then(function (result) {  
