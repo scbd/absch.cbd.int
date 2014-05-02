@@ -2,57 +2,13 @@
 <div class="well" style="margin: 5px -15px 0 -15px;padding:0 20px;">
     <div class="row">
         <div class="col-xs-2"> 
-            <a ng-click="showSelect=!showSelect" href="#schemaPartial"  class="filter-title" style="text-decoration:none;color:#111;">
+            <a ng-click="showSelect=!showSelect" ng-href="#"  class="filter-title" style="text-decoration:none;color:#111;">
                 <i ng-class="{'fa fa-caret-down':!showSelect, 'fa fa-caret-up':showSelect}" ></i> &nbsp; {{title}}
             </a>
         </div>
-    </div>
-    <!-- <div class="row" ng-show="terms | filter:{selected:true}" style="margin-top:10px;">
-        <div class="col-xs-12" style="background-color:white;margin-bottom:10px;"> 
-
-            <div class="list-group-item-expand">
-                <div ng-repeat="item in terms | orderBy:'title' | filter:{selected:true}" ng-class="ccc(item)" >
-                    <div class="filter-selected" style="cursor:pointer">
-                       <a ng-click="onclick(this, $event)" href="#"> 
-                            <i class="fa fa-times-circle "></i> 
-                            {{item.title}} ({{item.count}})
-                            
-                       </a>
-                        <ng-switch on="item.identifier" >
-                            
-                            <span ng-switch-when="focalPoint">
-                             <span class="divider">&nbsp; |&nbsp; </span>
-                                <span km-select multiple ng-model="jurisdiction" binding-type="string" placeholder="Type" items="options.jurisdiction()"></span>
-                            </span>
-
-                            <span ng-switch-when="authority">
-                                 <span class="divider">&nbsp; |&nbsp; </span>
-                                <span km-toggle  placeholder="Responsible for all"  ng-model="cnaResponsibleForAll" ></span> 
-                                 <span class="divider">&nbsp; |&nbsp; </span>
-                                <span km-select multiple ng-model="cnaJurisdiction" binding-type="string" placeholder="Jurisdictions" items="options.absJurisdictions()"></span>     
-                                 <span class="divider">&nbsp; |&nbsp; </span>                                           
-                                <span km-select multiple ng-model="cnaGeneticResourceTypes" binding-type="string" placeholder="Genetic Resource Types" items="options.absGeneticResourceTypes()"></span>
-                            </span>
-
-                            <span ng-switch-when="measure">
-                                 <span class="divider">&nbsp; |&nbsp; </span>
-                                <span km-select multiple ng-model="type" binding-type="string" placeholder="Type" items="options.typeOfDocuments()"></span>
-                                 <span class="divider">&nbsp; |&nbsp; </span> 
-                                <span km-select multiple ng-model="cnaJurisdiction" binding-type="string" placeholder="Jurisdictions" items="options.absJurisdictions()"></span>    
-                                 <span class="divider">&nbsp; |&nbsp; </span>                                             
-                                <span km-select multiple ng-model="cnaGeneticResourceTypes" binding-type="string" placeholder="Genetic Resource Types" items="options.absGeneticResourceTypes()"></span>
-                            </span>
-
-                            </ng-switch>
-                       
-                    </div>
-                   
-                </div>
-            </div>
-        </div>
-    </div> -->
+    </div>   
 <style type="text/css">
-    .filter-selected div{
+    .filter-selected .section{
         padding-top: 10px;
     }
 </style>
@@ -60,12 +16,12 @@
         <div class="col-xs-12"> 
             <div class="list-group-item-expand">
                 <div style="background-color:white;margin-bottom:10px;"> 
-                     <div class="filter-selected">                        
+                     <div class="filter-selected" class="section">                        
                         <div ng-show="focalpoint.selected">
                             <i class="fa fa-times-circle" ng-click="onclick('focalpoint', $event)"></i>  National Focal Points ({{focalpoint.count}})
                         </div>
 
-                        <div ng-show="authority.selected">
+                        <div ng-show="authority.selected" class="section">
                             <i class="fa fa-times-circle" ng-click="onclick('authority', $event)"></i>  Competent National Authorities ({{authority.count}}) 
                              <span class="divider">&nbsp; |&nbsp; </span>
                             <span km-toggle  placeholder="Responsible for all"  ng-model="cnaResponsibleForAll" ></span> 
@@ -75,14 +31,18 @@
                             <span km-select multiple ng-model="cnaGeneticResourceTypes" binding-type="string" placeholder="Genetic Resource Types" items="options.absGeneticResourceTypes()"></span>
                         </div>
 
-                        <span ng-show="measure.selected">
+                        <div ng-show="measure.selected" class="section">
                             <i class="fa fa-times-circle" ng-click="onclick('measure', $event)"></i>  Legislative, administrative or policy measures ({{measure.count}}) 
                             <span class="divider">&nbsp; |&nbsp; </span>
                             <span km-select multiple ng-model="msrJurisdiction" binding-type="string" placeholder="Jurisdictions" items="options.jurisdiction()"></span><span class="divider">&nbsp; |&nbsp; </span>
                             <span km-select multiple ng-model="msrStatus" binding-type="string" placeholder="Status" items="options.status()"></span>
                             <span class="divider">&nbsp; |&nbsp; </span> 
                             <span km-select multiple ng-model="msrType" binding-type="string" placeholder="Types" items="options.typeOfDocuments()"></span>
-                            <div class="row">
+                            
+                            <a ng-click="showdate=!showdate" class="filter-title" >&nbsp; Dates
+                                <i ng-class="{'fa fa-caret-down':!showdate, 'fa fa-caret-up':showdate}" ></i>
+                            </a>
+                            <div class="row" ng-show="showdate">
                                 <div class="col-lg-2"> 
                                     <span search-filter-dates title='Date of Adoption' query='msrAdoptionDate' field="adoption_s"></span>  
                                 </div>
@@ -99,41 +59,39 @@
                                   <span search-filter-dates title='Date of application' query='mssApplicationDate' field="limitedApplication_s"></span>
                                 </div>
                             </div>
-                        </span>
-
-                        <div ng-show="absPermit.selected">
-                             <i class="fa fa-times-circle" ng-click="onclick('absPermit', $event)"></i>Permits and their equivalent ({{absPermit.count}})
-                            <div class="row">
-                                  
-                                <div class="col-lg-3"> 
-                                    <span search-filter-dates title='Date of issuance of the permit' query='permitIssuanceDate'></span>
-                                </div>
-                                <div class="col-lg-3">    
-                                    <span search-filter-dates title='Date of expiry of the permit' query='permitExpiryDate'></span>
-                                </div>
-                                <div class="col-lg-1"> 
-                                    <div km-select multiple required name="permitusage" ng-model="permitusage" items="options.usage()" placeholder="Usage"></div>                               
-                                </div>
-                                <div class="col-lg-1">    
-                                     <div km-select multiple required name="permitkeywords" ng-model="permitkeywords" items="options.keywords()" placeholder="Keywords"></div>
-                                </div>                                
-                            </div>
                         </div>
 
-                         <div ng-show="absCheckpointCommunique.selected">
+                        <div ng-show="absPermit.selected" class="section">
+                             <i class="fa fa-times-circle" ng-click="onclick('absPermit', $event)"></i>  Permits and their equivalent ({{absPermit.count}})
+                                <div km-select multiple required name="permitusage" ng-model="permitusage" items="options.usage()" placeholder="Usage"></div> | 
+                                <div km-select multiple required name="permitkeywords" ng-model="permitkeywords" items="options.keywords()" placeholder="Keywords"></div> | 
+                                 <a ng-click="showpermitdate=!showpermitdate" class="filter-title" >&nbsp; Dates
+                                    <i ng-class="{'fa fa-caret-down':!showpermitdate, 'fa fa-caret-up':showpermitdate}" ></i>
+                                </a>
+                                <div class="row" ng-show="showpermitdate">
+                                    <div class="col-lg-3"> 
+                                        <span search-filter-dates title='Date of issuance of the permit' query='permitIssuanceDate'></span>
+                                    </div>
+                                    <div class="col-lg-3">    
+                                         <span search-filter-dates title='Date of expiry of the permit' query='permitExpiryDate'></span>
+                                    </div>                                
+                                </div>
+                        </div>
+
+                         <div ng-show="absCheckpointCommunique.selected" class="section">
                             <i class="fa fa-times-circle" ng-click="onclick('absCheckpointCommunique', $event)"></i>  Checkpoint Communiqués ({{absCheckpointCommunique.count}})
                              <span class="divider">&nbsp; |&nbsp; </span>
                                 <div km-select multiple required name="cpcoriginCountries" binding-type="string"  ng-model="cpcoriginCountries" items="options.countries()" placeholder="Origin Countries"></div>                               
                         </div>
                        
-                         <div ng-show="absCheckpoint.selected">
+                         <div ng-show="absCheckpoint.selected" class="section">
                             <i class="fa fa-times-circle" ng-click="onclick('absCheckpoint', $event)"></i> Checkpoints ({{absCheckpoint.count}})
                                 <span class="divider">&nbsp; |&nbsp; </span>
                                 <span km-toggle  placeholder="Inform all authorities"  ng-model="cpInformAllAuthorities" ></span> 
                                 <span class="divider">&nbsp; |&nbsp; </span>
                                 <span km-select multiple ng-model="cpJurisdiction" binding-type="string" placeholder="Jurisdictions" items="options.absJurisdictions()"></span>
                         </div>
-                        <div ng-show="resource.selected">
+                        <div ng-show="resource.selected" class="section">
                             <i class="fa fa-times-circle" ng-click="onclick('resource', $event)"></i> Virtual Library Records ({{resource.count}})
                                 <span class="divider">&nbsp; |&nbsp; </span>
                                 <input type="number" required name="vlrpublicationYear" ng-model="vlrpublicationYear" placeholder="Publication year"/>
