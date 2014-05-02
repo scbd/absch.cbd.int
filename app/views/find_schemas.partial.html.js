@@ -27,7 +27,7 @@ require('app').directive('searchFilterSchemas', function ($http) {
 
             $scope.permitIssuanceDate= '*:*'
             $scope.permitExpiryDate= '*:*'
-            
+
             $scope.options  = {
                jurisdiction             : function () { return $http.get("/api/v2013/thesaurus/domains/7A56954F-7430-4B8B-B733-54B8A5E7FF40/terms",  { cache: true }).then(function(o){ return o.data; }); },
                status                   : function () { return $http.get("/api/v2013/thesaurus/domains/ED7CDBD8-7762-4A84-82DD-30C01458A799/terms",  { cache: true }).then(function(o){ return o.data; }); },
@@ -149,8 +149,8 @@ require('app').directive('searchFilterSchemas', function ($http) {
                                         // debugger;
                                         var selectedValues = $scope[filter.name];    
                                         console.log (selectedValues)                                     ;
-                                            subFilterQuery = subFilterQuery + ' AND (' + filter.field +':'+ selectedValues + ')';      
-                                            subFilterQuery = subFilterQuery.replace(',', ' OR ');                                        
+                                            subFilterQuery = subFilterQuery + ' AND (' + filter.field +':'+ selectedValues.join(' OR ' + filter.field + ': ') + ')';      
+                                            //subFilterQuery = subFilterQuery.replace(',', ' OR ');                                        
                                     }
                                 }
                                 else if(filter.type=='calendar'){
@@ -197,7 +197,7 @@ require('app').directive('searchFilterSchemas', function ($http) {
             $scope.measure                 = { identifier: 'measure',                  title: 'Legislative, administrative and policy measures', count: 0,
                                                subFilters : [
                                                                 { name: 'msrJurisdiction', type: 'multiselect', field: 'jurisdiction_s' },
-                                                                { name: 'msrGeneticResourceTypes', type: 'multiselect', field: 'GeneticResourceTypes_s' },
+                                                                { name: 'msrStatus', type: 'multiselect', field: 'status_s' },
                                                                 { name: 'msrType', type: 'multiselect', field: 'type_s' },
 
                                                                 { name: 'msrAdoptionDate', type: 'calendar' , field: 'adoption_s'},

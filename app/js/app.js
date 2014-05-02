@@ -2,7 +2,7 @@
 
 define([/*'angular', 'angular-route', 'angular-cookies', */], function () {
 
-	var app = require('angular').module('app', ['ngRoute', 'ngCookies']);
+	var app = require('angular').module('app', ['ngRoute', 'ngCookies','chieffancypants.loadingBar', 'ngAnimate']);
 
 	app.config(['$controllerProvider', '$compileProvider', '$provide', '$filterProvider', function($controllerProvider, $compileProvider, $provide, $filterProvider) {
 		  
