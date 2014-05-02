@@ -119,3 +119,23 @@ ul.km-value
 #scrollUp:hover {
     margin-bottom: 0px;
 }
+
+
+#loading-bar-spinner {  
+  left: 50% !important;
+}
+
+#loading-bar-spinner .spinner-icon {
+  width: 20px !important;
+  height: 20px !important;
+  /*border:  solid 5px transparent !important;*/
+  border-top-color:  #29d;
+  border-left-color: #29d;
+  border-radius: 15px;
+
+  -webkit-animation: loading-bar-spinner 400ms linear infinite;
+  -moz-animation:    loading-bar-spinner 400ms linear infinite;
+  -ms-animation:     loading-bar-spinner 400ms linear infinite;
+  -o-animation:      loading-bar-spinner 400ms linear infinite;
+  animation:         loading-bar-spinner 400ms linear infinite;
+}
