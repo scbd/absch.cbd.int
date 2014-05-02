@@ -46,7 +46,7 @@
                                       <span style="display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;"> virtual library record 
                                       <span style="color:#666;font-weight:bold;" > | type </span> 
                                       <span style="color:#666;font-weight:bold;" > | country </span>
-                                      <span style="color:#666;font-weight:bold;" > | year </span>
+                                      <span style="color:#666;font-weight:bold;" > | year : {{document.Year}} </span>
                                       <span style="color:#666;font-weight:bold;" > | languages </span>  
                                        
                                     </span> 
@@ -71,7 +71,41 @@
                                 </tr>
                               </table>
                             </div> <!-- end reference record -->
-
+                            
+                            <div ng-switch-when="RESOURCE" class="result reference-result"> 
+                               <table>
+                                <tr>
+                                  <td rowspan="4" style="width:3px;background-color:#ed9c28;"></td>
+                                  <td colspan="2" style="padding:10px 0 0 20px;margin:0;">
+                                      <span style="display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;"> virtual library record 
+                                      <span style="color:#666;font-weight:bold;" > | <b>type:</b> {{document.Types}}</span> 
+                                      <span style="color:#666;font-weight:bold;" > | <b>country:</b> {{document.Regions}} </span>
+                                      <span style="color:#666;font-weight:bold;" > | <b>year:</b> {{document.Year}} </span>
+                                      <span style="color:#666;font-weight:bold;" > | <b>languages:</b> {{document.Languages}}</span>  
+                                       
+                                    </span> 
+                                   
+                                    </td>
+                                </tr> {{document}}
+                                <tr>
+                                  <td style="padding:0;margin:0;padding-left:20px;padding-top:3px;">
+                                   <i ng-class="{'fa fa-caret-down':displayDetails, 'fa fa-caret-right':!displayDetails}" style="font-size:11px;color:#999;position:relative; top:-1px;font-size:14px;"></i> 
+                                    <a ng-click="load(document); displayDetails = !displayDetails" class="title">
+                                       &nbsp; {{document.title}}</a> 
+                                  </td>
+                                 <!--  <td rowspan="4" style="width:5px;background-color:#999;padding:5px;margin:0;">V</td> -->
+                                </tr>
+                                <tr>
+                                  <td style="padding-bottom:15px;">
+                                    <div style="padding:3px 0 0 20px;margin:0;" ng-hide="displayDetails" > 
+                                    {{document}}
+                                    SUMMARY GOES HERE (MAX 100 char)</div>
+                                    <div ng-show="displayDetails" record-loader document="document.data" 
+                                    hide="title;headerlibraries" ></div>
+                                  </td>
+                                </tr>
+                              </table>
+                            </div> <!-- end reference record -->
 
 
                              <div ng-switch-when="MEETING" class="result reference-result"> 

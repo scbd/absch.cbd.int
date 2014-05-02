@@ -16,7 +16,7 @@ require('app').directive('documentList', function ($http) {
                   currentPage: '=',
                   documentCount: '='
             },
-            controller: ['$scope', function ($scope){
+            controller: ['$scope', "underscore", function ($scope, underscore){
 
 
               $scope.formatDate = function formatDate (date) {
@@ -160,9 +160,30 @@ require('app').directive('documentList', function ($http) {
                         output.dates = formatDate(document.startDate_s) + ' to ' + formatDate(document.endDate_s);
                         output.venue = document.eventCity_EN_t + ', ' + document.eventCountry_EN_t;
                     }
+                    
+                    if(document.schema_s=='resource') {
+                        output.Year = document.publicationYear_is;
+                        output.Types = getString(document.resourceTypes_CEN_ss, "en");
+                        output.Regions = getString(document.regions_CEN_ss, "en");
+                        output.Languages = getString(document.languages_CEN_ss, "en");
 
+                        //console.log(underscore.pluck(document.regions_CEN_ss, "en"));
+                    }
                     return output;
                 }     
+
+                function getString(source, key){
+                    var lstring = [];
+
+                    if(source!=undefined)
+                    {
+                        source.forEach(function(record){                      
+                          lstring.push(JSON.parse(record)[key] );
+                        });
+                        
+                        return lstring.toString() ;
+                    }                    
+                }
 
 
             }]
