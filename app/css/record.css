@@ -1,53 +1,51 @@
 
 
-.modal-dialog {
+#Record .modal-dialog {
 	width:650px;
 	margin:30px auto;
 }
 
-label{
-	 display: inline;
-	 padding:10px 10px 10px 0;
+#Record label{
+	 padding:10px 10px 0 0;
 	 font-size: 11px;
 	 text-transform: uppercase;
 
 }
 
-.km-value{
+#Record .km-value{
 	color:#333;
-	display: inline;
 }
 
-.record-body{
+#Record .record-body{
 	/*background-color: #fff;*/
 	padding:0 20px 10px 20px;
 }
 
-.record div {
+#Record .record div {
 	padding-top:5px;
 }
-.record ul{padding: 0;margin: 0;}
-.record ul > li {
+#Record .record ul{padding: 0;margin: 0;}
+#Record .record ul > li {
 	padding: 9.5px;
 	margin: 0; 
 	margin-bottom: 10px;
 	line-height: 20px;
 }
 
-.record h5{ font-weight: bold;}
+#Record .record h5{ font-weight: bold;}
 
-.record-metadata{
+#Record .record-metadata{
 	/*background-color:#ed9c28;*/
 	background-color:#ccc;
 /*	color:#fff;
 	padding:30px;*/
 }
 
-.record-metadata div{
+#Record .record-metadata div{
 	padding:0;
 	margin:0;
 }
-.record-body legend{
+#Record .record-body legend{
 	font-size: 14px;
 	font-weight: bold;
 	padding-top: 0px;
