@@ -117,14 +117,16 @@ require('app').controller('FindController', ['$scope', '$rootScope', '$http', '$
     function readFacets2(solrArray) {
 
         var facets = [];
+        if(solrArray){
+            for (var i = 0; i < solrArray.length; i += 2) {
 
-        for (var i = 0; i < solrArray.length; i += 2) {
+                var facet = solrArray[i];
 
-            var facet = solrArray[i];
-
-            facets.push({ symbol: facet, title: facet, count: solrArray[i + 1] });
+                facets.push({ symbol: facet, title: facet, count: solrArray[i + 1] });
+            }
         }
-
+        
+           // console.log(solrArray);
         return facets;
     };              
 
@@ -206,7 +208,7 @@ require('app').controller('FindController', ['$scope', '$rootScope', '$http', '$
 
                     $scope.schemas = readFacets2(data.facet_counts.facet_fields.schema_s);
                     $scope.governments = readFacets2(data.facet_counts.facet_fields.government_s);
-                    $scope.regions = readFacets2(data.facet_counts.facet_fields.government_REL_ss);
+                    $scope.regions = readFacets2(data.facet_counts.facet_fields.government_ss);
                     $scope.aichiTargets = readFacets2(data.facet_counts.facet_fields.aichiTarget_REL_ss);
                     $scope.thematicAreas = readFacets2(data.facet_counts.facet_fields.thematicArea_s);
 

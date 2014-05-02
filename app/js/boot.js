@@ -16,8 +16,8 @@ require.config({
         'moment'          : '../libs/moment/min/moment-with-langs.min',
         'bootstrap-datepicker' : '../libs/bootstrap-datepicker/js/bootstrap-datepicker'
         ,
-         'angular-loading-bar' : '../libs/angular-loading-bar/src/loading-bar',
-         'angular-annimate' : '../libs/angular-animate/anuglar-aninmate.min'
+         'angular-loading-bar'  : '../libs/angular-loading-bar/src/loading-bar',
+         'angular-animate'     : '../libs/angular-animate/angular-animate.min'
     },
     'shim': {
         'angular'        : { 'deps': ['jquery'], 'exports': 'angular' },
@@ -26,12 +26,13 @@ require.config({
         'bootstrap'      : { 'deps': ['jquery'] },
         'bootstrap-datepicker' : { 'deps': ['jquery'] },
         'underscore'     : { 'exports': '_' },
+        'angular-animate' : {'deps': ['angular']},
         'angular-loading-bar' : {'deps': ['angular']},
     }
 });
 
-require(['angular', 'angular-route', 'angular-cookies', 'bootstrap', 'domReady', 'bootstrap-datepicker'/*, 'main'*/], function (ng) {
-//,'angular-loading-bar', 'ngAnimate'
+require(['angular', 'angular-route', 'angular-cookies', 'bootstrap', 'domReady', 'bootstrap-datepicker','angular-loading-bar', 'angular-animate'/*, 'main'*/], function (ng) {
+
     // NOTE: place operations that need to initialize prior to app start here using the `run` function on the top-level module
 
     require(['domReady!', 'main'], function (document) {
