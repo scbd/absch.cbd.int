@@ -38,7 +38,7 @@
         <!--  {{document}} -->
                         <div ng-switch on="document.schema">
 
-                            <div ng-switch-when="BIOSAFETY INFORMATION RESOURCE" class="result reference-result"> 
+                            <div ng-switch-when="RESOURCE" class="result reference-result"> 
                                <table>
                                 <tr>
                                   <td rowspan="4" style="width:3px;background-color:#ed9c28;"></td>
@@ -63,10 +63,10 @@
                                 <tr>
                                   <td style="padding-bottom:15px;">
                                     <div style="padding:3px 0 0 20px;margin:0;" ng-hide="displayDetails" > 
-                                    {{document}}
-                                    SUMMARY GOES HERE (MAX 100 char)</div>
+                                    {{document.description}}
+                                  </div>
                                     <div ng-show="displayDetails" record-loader document="document.data" 
-                                    hide="title;headerlibraries" ></div>
+                                    hide="title;header;libraries" ></div>
                                   </td>
                                 </tr>
                               </table>
@@ -196,15 +196,15 @@
 
 
                             <!-- checkpoint --> 
-                          <div ng-switch-when="CHECKPOINT" class="result national-result"> 
+                          <div ng-switch-when="ABSCHECKPOINT" class="result national-result"> 
                                <table>
                                 <tr>
                                   <td rowspan="4" style="width:3px;background-color:#428bca;"></td>
                                   <td colspan="2" style="padding:10px 0 0 20px;margin:0;">
-                                      <span style="display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#287fcb;"> {{document.schema}} 
+                                      <span style="display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#287fcb;"> checkpoint
                                       
                                       <span style="color:#666;font-weight:bold;" > | {{document.source}} </span>
-                                       <span style="color:#666;font-weight:bold;" > | jurisdiction </span>
+                                       <span style="color:#666;font-weight:bold;" > | {{document.doc.jurisdiction_EN_t}} </span>
 
                                     </span> 
                                     </td>
@@ -220,10 +220,10 @@
                                 <tr>
                                   <td style="padding-bottom:15px;">
                                     <div style="padding:3px 0 0 20px;margin:0;" ng-hide="displayDetails" > 
-                                    {{document}}
-                                    SUMMARY GOES HERE (MAX 100 char)</div>
+                                    {{document.description}}
+                                    </div>
                                     <div ng-show="displayDetails" record-loader document="document.data" 
-                                    hide="title;headerlibraries;government" ></div>
+                                    hide="title;header;libraries;government" ></div>
                                   </td>
                                 </tr>
                               </table>
@@ -260,10 +260,10 @@
                                 <tr>
                                   <td style="padding-bottom:15px;">
                                     <div style="padding:3px 0 0 20px;margin:0;" ng-hide="displayDetails" > 
-                                    {{document}}
-                                    SUMMARY GOES HERE (MAX 100 char)</div>
+                                    {{document.description}}
+                                    </div>
                                     <div ng-show="displayDetails" record-loader document="document.data" 
-                                    hide="title;headerlibraries" ></div>
+                                    hide="title;header;libraries" ></div>
                                   </td>
                                 </tr>
                               </table>
