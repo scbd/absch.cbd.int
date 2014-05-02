@@ -15,8 +15,9 @@ require.config({
         'linqjs'          : '../libs/linqjs/linq',
         'moment'          : '../libs/moment/min/moment-with-langs.min',
         'bootstrap-datepicker' : '../libs/bootstrap-datepicker/js/bootstrap-datepicker'
-         // ,'angular-loading-bar' : '../libs/angular-loading-bar/src/loading-bar',
-         // 'angular-annimate' : '../libs/angular-animate/anuglar-aninmate.min'
+        ,
+         'angular-loading-bar' : '../libs/angular-loading-bar/src/loading-bar',
+         'angular-annimate' : '../libs/angular-animate/anuglar-aninmate.min'
     },
     'shim': {
         'angular'        : { 'deps': ['jquery'], 'exports': 'angular' },
@@ -25,7 +26,7 @@ require.config({
         'bootstrap'      : { 'deps': ['jquery'] },
         'bootstrap-datepicker' : { 'deps': ['jquery'] },
         'underscore'     : { 'exports': '_' },
-        // 'angular-loading-bar' : {'deps': ['angular']}
+        'angular-loading-bar' : {'deps': ['angular']},
     }
 });
 

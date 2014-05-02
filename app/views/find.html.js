@@ -163,7 +163,7 @@ require('app').controller('FindController', ['$scope', '$rootScope', '$http', '$
        //  console.log ( queryParameters);
        // $.merge(queryParameters, $scope.paginatioQuery);
         
-console.log(q);
+
 
         if (queryCanceler) {
             console.log('trying to abort pending request...');
@@ -198,17 +198,17 @@ console.log(q);
                     'wt': 'json',
                     'rows': 0,
                     'facet': true,
-                    'facet.field': ['schema_REL_ss', 'government_REL_ss', 'aichiTarget_REL_ss', 'thematicArea_REL_ss'],
+                    'facet.field': ['schema_s', 'government_s', 'aichiTarget_REL_ss', 'thematicArea_s'],
                     'facet.limit': 512
                 };
 
                 $http.get('/api/v2013/index/select', { params: queryFacetsParameters }).success(function (data) {
-console.log(data);
-                    $scope.schemas = readFacets2(data.facet_counts.facet_fields.schema_REL_ss);
-                    $scope.governments = readFacets2(data.facet_counts.facet_fields.government_REL_ss);
+
+                    $scope.schemas = readFacets2(data.facet_counts.facet_fields.schema_s);
+                    $scope.governments = readFacets2(data.facet_counts.facet_fields.government_s);
                     $scope.regions = readFacets2(data.facet_counts.facet_fields.government_REL_ss);
                     $scope.aichiTargets = readFacets2(data.facet_counts.facet_fields.aichiTarget_REL_ss);
-                    $scope.thematicAreas = readFacets2(data.facet_counts.facet_fields.thematicArea_REL_ss);
+                    $scope.thematicAreas = readFacets2(data.facet_counts.facet_fields.thematicArea_s);
 
                 }).error(function (error) { console.log('onerror'); console.log(error); } );
             }

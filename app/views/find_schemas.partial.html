@@ -16,11 +16,13 @@
         <div class="col-xs-12"> 
             <div class="list-group-item-expand">
                 <div style="background-color:white;margin-bottom:10px;"> 
-                     <div class="filter-selected" class="section">                        
-                        <div ng-show="focalpoint.selected">
+                     <div class="filter-selected">                        
+                        <div ng-show="focalpoint.selected" class="section">
                             <i class="fa fa-times-circle" ng-click="onclick('focalpoint', $event)"></i>  National Focal Points ({{focalpoint.count}})
                         </div>
-
+                        <div ng-show="database.selected" class="section">
+                            <i class="fa fa-times-circle" ng-click="onclick('database', $event)"></i> National Websites and Databases ({{database.count}}) 
+                        </div>
                         <div ng-show="authority.selected" class="section">
                             <i class="fa fa-times-circle" ng-click="onclick('authority', $event)"></i>  Competent National Authorities ({{authority.count}}) 
                              <span class="divider">&nbsp; |&nbsp; </span>
@@ -109,7 +111,19 @@
                                     <div style="background-color:white;height:200px;overflow:scroll" ng-show="vlrOptions" km-term-check name="vlrabsSubjects" ng-model="vlrabsSubjects" terms="options.absSubjects()" binding-type="term[]"></div>
                                 </span>      -->
                                                         
-                        </div>                      
+                        </div>   
+                         <div ng-show="meeting.selected" class="section">
+                            <i class="fa fa-times-circle" ng-click="onclick('meeting', $event)"></i> Meetings &amp; Meeting Outcomes ({{meeting.count}})
+                        </div>
+                         <div ng-show="notification.selected" class="section">
+                            <i class="fa fa-times-circle" ng-click="onclick('notification', $event)"></i> Notifications ({{notification.count}})
+                        </div>
+                         <div ng-show="pressRelease.selected" class="section">
+                            <i class="fa fa-times-circle" ng-click="onclick('pressRelease', $event)"></i> Press Releases ({{pressRelease.count}})
+                        </div>
+                         <div ng-show="statement.selected" class="section">
+                            <i class="fa fa-times-circle" ng-click="onclick('statement', $event)"></i> Statements ({{statement.count}})
+                        </div>                   
                     </div>
              </div>
             </div>
@@ -178,11 +192,6 @@
                             <input type="checkbox" ng-model="absCheckpointCommunique.selected" bind-indeterminate="absCheckpointCommunique.indeterminate" ng-change="refresh(absCheckpointCommunique.selected)">
                             Checkpoint Communiqués ({{absCheckpointCommunique.count}})
                              </label>
-                            <!--  <div ng-show="absCheckpointCommuniqueOptions">
-                                <div class="well" >                                                                 
-                                    <div km-select multiple required name="cpcoriginCountries" ng-model="cpcoriginCountries" items="options.countries()" placeholder="Origin Countries"></div>                                             
-                                </div>
-                            </div> -->
                         </div>
 
                     </div>
@@ -200,19 +209,19 @@
                             ABS Related Organizations ({{organization.count}})
                         </label></div> -->
                         <div class="checkbox"><label>
-                            <input type="checkbox" ng-model="meeting.selected" bind-indeterminate="meeting.indeterminate" ng-change="refresh()">
+                            <input type="checkbox" ng-model="meeting.selected" bind-indeterminate="meeting.indeterminate" ng-change="refresh(meeting.selected)">
                             Meetings &amp; Meeting Outcomes ({{meeting.count}})
                         </label></div>
                         <div class="checkbox"><label>
-                            <input type="checkbox" ng-model="notification.selected" bind-indeterminate="notification.indeterminate" ng-change="refresh()">
+                            <input type="checkbox" ng-model="notification.selected" bind-indeterminate="notification.indeterminate" ng-change="refresh(notification.selected)">
                             Notifications ({{notification.count}})
                         </label></div>
                         <div class="checkbox"><label>
-                            <input type="checkbox" ng-model="pressRelease.selected" bind-indeterminate="pressRelease.indeterminate" ng-change="refresh()">
+                            <input type="checkbox" ng-model="pressRelease.selected" bind-indeterminate="pressRelease.indeterminate" ng-change="refresh(pressRelease.selected)">
                             Press Releases ({{pressRelease.count}})
                         </label></div>
                         <div class="checkbox"><label>
-                            <input type="checkbox" ng-model="statement.selected" bind-indeterminate="statement.indeterminate" ng-change="refresh()">
+                            <input type="checkbox" ng-model="statement.selected" bind-indeterminate="statement.indeterminate" ng-change="refresh(statement.selected)">
                             Statements ({{statement.count}})
                         </label></div>
                     </div>
