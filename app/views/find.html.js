@@ -41,7 +41,7 @@ require('app').controller('FindController', ['$scope', '$rootScope', '$http', '$
 
     // $scope.loaded          = false;
     $scope.itemsPerPage    = 25;
-    $scope.documentCount       = 0;
+    $scope.documentCount   = 0;
     $scope.currentPage     = 0;
 
     $scope.querySchema     = '*:*';
@@ -128,105 +128,24 @@ require('app').controller('FindController', ['$scope', '$rootScope', '$http', '$
         return facets;
     };              
 
-   
-
-    // $scope.range = function (start, end) {
-
-    //     var ret = [];
-    //     if (!end) {
-    //         end = start;
-    //         start = 0;
-    //     }
-
-    //     var maxCount = 10;
-    //     var middle = 5;
-    //     var count = end - start;
-        
-    //     if (count > maxCount) {
-    //         if ($scope.currentPage > middle)
-    //             start = $scope.currentPage - middle;
-
-    //         end = Math.min(count, start + maxCount);
-    //         start = Math.max(0, end - maxCount);
-    //     }
-        
-    //     for (var i = start; i < end; i++) {
-    //         ret.push(i);
-    //     }
-    //     return ret;
-    // };
-
-    //============================================================
-    //
-    //
-    //============================================================
-    // function transformDocument (document) {
-    	
-    // 	var output = {};
-
-    // 	var formatDate = function formatDate (date) {
-    //         return date+'';//moment(date).format('MMMM Do YYYY');
-    //     };
-
-    //     output.id          = document.id;
-    //     output.schema      = document.schema_EN_t.toUpperCase();
-    //     output.title       = document.title_t;
-    //     output.description = document.description_t;
-    //     output.source      = document.government_EN_t;
-    //     output.url_ss      = document.url_ss;
-    //     output.identifier_s = document.identifier_s;
-    //     output.doc = document;
-
-    //     if(document.schema_s=='focalPoint') {
-    //         output.description  = document.function_t||'';
-    //         output.description += (document.function_t && document.department_t) ? ', ' : '';
-    //         output.description += document.department_t||'';
-    //         output.description2 = document.organization_t||'';
-    //     }
-
-    //     if(document.schema_s=='decision' && document.body_s=='XXVII8-COP' ) output.source = 'COP TO THE CONVENTION';
-    //     if(document.schema_s=='decision' && document.body_s=='XXVII8b-MOP') output.source = 'COP-MOP TO THE CARTAGENA PROTOCOL ON BIOSAFETY';
-    //     if(document.schema_s=='decision') output.title       = 'Decision ' + document.code_s;
-    //     if(document.schema_s=='decision') output.description = document.title_t;
-
-    //     if(document.schema_s=='recommendation' && document.body_s=='XXVII8-SBSTTA') { output.source = 'SBSTTA'; output.sourceTooltip = 'Subsidiary Body on Scientific, Technical and Technological Advice'; }
-    //     if(document.schema_s=='recommendation' && document.body_s=='XXVII8-WGRI'  ) { output.source = 'WGRI';   output.sourceTooltip = 'Working Group on the Review of Implementation'; }
-    //     if(document.schema_s=='recommendation' && document.body_s=='XXVII8b-ICCP' ) { output.source = 'ICCP';   output.sourceTooltip = 'Intergovernmental Committee for the Cartagena Protocol on Biosafety'; }
-    //     if(document.schema_s=='recommendation' && document.body_s=='XXVII8c-ICNP' ) { output.source = 'ICNP';   output.sourceTooltip = 'Intergovernmental Committee for the Nagoya Protocol on ABS'; }
-    //     if(document.schema_s=='recommendation') output.title       = 'Recommendation ' + document.code_s;
-    //     if(document.schema_s=='recommendation') output.description = document.title_t;
-
-    //     if(document.schema_s=='meetingDocument') output.source      = document.meeting_s;
-    //     if(document.schema_s=='meetingDocument') output.title       = document.symbol_s;
-    //     if(document.schema_s=='meetingDocument') output.description = document.title_t;
-    //     if(document.schema_s=='meetingDocument' && document.group_s=='INF') output.source += ' - INFORMATION';
-    //     if(document.schema_s=='meetingDocument' && document.group_s=='OFC') output.source += ' - PRE-SESSION';
-
-    //     if(document.schema_s=='nationalReport') output.description = document.summary_EN_t;
-    //     if(document.schema_s=='nationalReport') output.type        = document.reportType_EN_t;
-
-    //     if(document.schema_s=='implementationActivity') output.type = document.jurisdiction_EN_t + ' - ' + document.completion_EN_t;
-        
-    //     if(document.schema_s=='marineEbsa') output.schema = 'ECOLOGICALLY OR BIOLOGICALLY SIGNIFICANT AREA';
-
-    //     if(document.schema_s=='event') {
-    //         output.dates = formatDate(document.startDate_s) + ' to ' + formatDate(document.endDate_s);
-    //         output.venue = document.eventCity_EN_t + ', ' + document.eventCountry_EN_t;
-    //     }
-
-    //     return output;
-    // }
-
     //============================================================
     //
     //
     //============================================================
 	function query () {
 
-        var q = 'realm_ss:absch AND schema_s:*';//' AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryTheme + ' AND ' + $scope.queryTargets +' AND ' + $scope.queryDate + ' AND ' + $scope.queryKeywords;
+        var q = 'realm_ss:absch';//' AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryTheme + ' AND ' + $scope.queryTargets +' AND ' + $scope.queryDate + ' AND ' + $scope.queryKeywords;
 
         if($scope.keyword)         q += ' AND (title_t:' + $scope.keyword + '* OR description_t:' + $scope.keyword + '* OR text_EN_txt:' + $scope.keyword + '*)';
-        if($scope.querySchema)     q += ' AND (' + $scope.querySchema + ')';
+        
+        
+        if($scope.querySchema != "*:*" ){            
+            q += ' AND (' + $scope.querySchema + ')';
+        }
+        else
+        {
+             q += ' AND schema_s:*';
+        }
         if($scope.queryGovernment) q += ' AND (' + $scope.queryGovernment + ')';
         if($scope.queryTheme)      q += ' AND (' + $scope.queryTheme + ')';
 
@@ -244,7 +163,7 @@ require('app').controller('FindController', ['$scope', '$rootScope', '$http', '$
        //  console.log ( queryParameters);
        // $.merge(queryParameters, $scope.paginatioQuery);
         
-
+console.log(q);
 
         if (queryCanceler) {
             console.log('trying to abort pending request...');
@@ -284,7 +203,7 @@ require('app').controller('FindController', ['$scope', '$rootScope', '$http', '$
                 };
 
                 $http.get('/api/v2013/index/select', { params: queryFacetsParameters }).success(function (data) {
-
+console.log(data);
                     $scope.schemas = readFacets2(data.facet_counts.facet_fields.schema_REL_ss);
                     $scope.governments = readFacets2(data.facet_counts.facet_fields.government_REL_ss);
                     $scope.regions = readFacets2(data.facet_counts.facet_fields.government_REL_ss);

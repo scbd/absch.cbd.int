@@ -34,37 +34,29 @@
         <div class="col-xs-2" style="background-color:#428BCA;"> 
           <div class="filters text-center" >FILTERS</div>
         </div>
-    </div><!-- end row -->
+      </div><!-- end row -->
 
-    <!-- record types -->
-    <search-filter-schemas title='Record Types' ng-model='schemas' field='schema_s' query='querySchema'></search-filter-schemas>
-    <search-filter-countries title='Countries' ng-model='governments' field='government_s' query='queryGovernment'></search-filter-countries>
-    <search-filter-themes title='Thematic Areas' ng-model='thematicAreas' field='thematicArea_REL_ss' query='queryTheme'></search-filter-themes>
+      <!-- record types -->
+      <search-filter-schemas title='Record Types' ng-model='schemas' field='schema_s' query='querySchema'></search-filter-schemas>
+      <search-filter-countries title='Countries' ng-model='governments' field='government_s' query='queryGovernment'></search-filter-countries>
+      <search-filter-themes title='Thematic Areas' ng-model='thematicAreas' field='thematicArea_REL_ss' query='queryTheme'></search-filter-themes>
 
-     <div  style="margin:5px; 0 0 0; padding:0 0 0 0"">
-
-    <input type="text" ng-model="keyword" placeholder=" Keyword " class="form-control keyword" 
-     style="height:24px;width:160px;></div>
-
-
-  </div>  <!-- end container -->
-
-
-
+      <div  style="margin:5px; 0 0 0; padding:0 0 0 0">
+        <input type="text" ng-model="keyword" placeholder=" Keyword " class="form-control keyword" 
+         style="height:24px;width:160px;">
+      </div>
+   </div>  <!-- end container -->
     <div class="container">
-    <div class="row">
-    <div class="col-md-12">
-
-    <br>
-    <div class="alert alert-warning"> <i class="glyphicon glyphicon-warning-sign"></i> 
-    <strong>This page is currently under construction.</strong>
-    <br>Please email questions to: absch@cbd.int
-    </div>
-          <div document-list  documents='rawDocs' filter='*' show-pagination='true' current-page='currentPage' document-Count='documentCount'>b</div>
-     </div>
-
-
-       </div> <!-- end col        -->
+      <div class="row">
+        <div class="col-md-12">
+          <br>
+          <div class="alert alert-warning"> <i class="glyphicon glyphicon-warning-sign"></i> 
+            <strong>This page is currently under construction.</strong>
+            <br>Please email questions to: absch@cbd.int
+          </div>
+     
+          <div document-list  documents='rawDocs' filter='*' show-pagination='true' current-page='currentPage' document-Count='documentCount'></div>
+        </div>
+      </div> <!-- end col        -->
    </div> <!-- end row -->
 </div> <!-- end container -->
-</div>

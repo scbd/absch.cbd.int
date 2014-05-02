@@ -52,6 +52,17 @@
 		<div class="km-value">{{document.entryIntoForce}}</div>
 	</div>
 
+	<div ng-show="document.retired">
+		<label>Date from which the measure was no longer applicable</label>
+		<div class="km-value">{{document.retired}}</div>
+	</div>
+
+	<div ng-show="document.entryIntoForce">
+		<label>Date of measure no longer in force</label>
+		<div class="km-value">{{document.limitedApplication}}</div>
+	</div>
+
+
 	<div ng-show="document.type">
 		<label>Type of document / measure</label>
 		<ul class="km-value">
