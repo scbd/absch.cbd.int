@@ -88,7 +88,6 @@ require("app").directive("editResource", [ function () {
 			$scope.$watch("tab", function(tab) {
 
 				if(tab == "edit")   { $scope.prevTab = "edit";  $scope.nextTab = "absch"; }
-				if(tab == "absch")  { $scope.prevTab = "edit";  $scope.nextTab = "review"; }
 				if(tab == "review") { $scope.prevTab = "absch"; $scope.nextTab = "review"; }
 
 				if(tab == "review")

@@ -20,11 +20,10 @@
 
             <div class="col-lg-8 col-sm-7 col-xs-12" id="helpTip2">
                 <ul class="pagination">
-                    <li ng-class="{ disabled: tab=='edit'   }"><a href="" ng-click="tab=prevTab">&laquo;</a></li>
-                    <li ng-class="{ active  : tab=='edit'   }"><a href="" ng-click="tab='edit'" >General</a></li>
-                    <li ng-class="{ active  : tab=='absch'  }"><a href="" ng-click="tab='absch'">ABS</a></li>
+                    <!-- <li ng-class="{ disabled: tab=='edit'   }"><a href="" ng-click="tab=prevTab">&laquo;</a></li> -->
+                    <li ng-class="{ active  : tab=='edit'   }"><a href="" ng-click="tab='edit'" >Submission Form</a></li>
                     <li ng-class="{ active  : tab=='review' }"><a href="" ng-click="tab='review'">Review</a></li>
-                    <li ng-class="{ disabled: tab=='review' }"><a href="" ng-click="tab=nextTab">&raquo;</a></li>
+                   <!--  <li ng-class="{ disabled: tab=='review' }"><a href="" ng-click="tab=nextTab">&raquo;</a></li> -->
                 </ul>   
             </div>
 
@@ -232,10 +231,6 @@
 					</div>
 				</div>
 
-			</div>
-
-			<div ng-show="tab=='absch'" km-tab="absch">
-
 				<legend>ABS Subjects</legend>
 
 				<div class="row">
@@ -246,7 +241,11 @@
 					</div>
 				</div>
 
+
 			</div>
+
+
+				
 
 		</form>
 
@@ -266,11 +265,11 @@
 
             <div class="col-lg-9 col-sm-8 col-xs-12" id="helpTip2">
                 <ul class="pagination">
-                    <li ng-class="{ disabled: tab=='edit'   }"><a href="" ng-click="tab=prevTab">&laquo;</a></li>
-                    <li ng-class="{ active  : tab=='edit'   }"><a href="" ng-click="tab='edit'" >General</a></li>
-                    <li ng-class="{ active  : tab=='absch'  }"><a href="" ng-click="tab='absch'">ABS</a></li>
+                    <!-- <li ng-class="{ disabled: tab=='edit'   }"><a href="" ng-click="tab=prevTab">&laquo;</a></li> -->
+                    <li ng-class="{ active  : tab=='edit'   }"><a href="" ng-click="tab='edit'" >Submission form</a></li>
+                    <!-- <li ng-class="{ active  : tab=='absch'  }"><a href="" ng-click="tab='absch'">ABS</a></li> -->
                     <li ng-class="{ active  : tab=='review' }"><a href="" ng-click="tab='review'">Review</a></li>
-                    <li ng-class="{ disabled: tab=='review' }"><a href="" ng-click="tab=nextTab">&raquo;</a></li>
+                    <!-- <li ng-class="{ disabled: tab=='review' }"><a href="" ng-click="tab=nextTab">&raquo;</a></li> -->
                 </ul>   
             </div>
 
