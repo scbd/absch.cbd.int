@@ -12,98 +12,23 @@
     </div>
 
     <div ng-show="!isLoading() && status!='hidden'">
-
-
-        <div  class="alert alert-warning" ng-show="
-                editForm.government.$error.required      || 
-                editForm.name.$error.required            ||
-                editForm.city.$error.required            ||
-                editForm.country.$error.required         ||
-                editForm.phones.$error.required          ||
-                editForm.emails.$error.required          ||
-                editForm.absResponsibleForAll.$error.required        ||
-                (!document.absResponsibleForAll && editForm.responsibilities.$error.required) ||
-                (!document.absResponsibleForAll && editForm.absJurisdiction.$error.required)">
-        <strong>Mandatory information:</strong>
-        <ul>
-            <li ng-show="editForm.government.$error.required" >Field is mandatory / 
-            <strong>government</strong></li>
-            <li ng-show="editForm.name.$error.required" >Field is mandatory / 
-            <strong>name</strong></li>
-            <li ng-show="editForm.city.$error.required" >Field is mandatory / 
-            <strong>city</strong></li>
-            <li ng-show="editForm.country.$error.required" >Field is mandatory / 
-            <strong>country</strong></li>
-            <li ng-show="editForm.phones.$error.required" >Field is mandatory / 
-            <strong>phone</strong></li>
-            <li ng-show="editForm.emails.$error.required" >Field is mandatory / 
-            <strong>email</strong></li>
-            <li ng-show="editForm.absResponsibleForAll.$error.required" >Field is mandatory / 
-            <strong>is responsible for all functions?</strong></li>
-            <li ng-show="(!document.absResponsibleForAll && editForm.responsibilities.$error.required)" >Field is mandatory / 
-            <strong>responsibilities: description  </strong></li>
-            <li ng-show="(!document.absResponsibleForAll && editForm.absJurisdiction.$error.required)" >Field is mandatory / 
-            <strong>responsibilities : area of jurisdiction </strong></li>
-
-        </ul>
-    </div>
-
-
-    <div  class="alert alert-success" ng-hide="
-       editForm.government.$error.required      || 
-                editForm.name.$error.required            ||
-                editForm.city.$error.required            ||
-                editForm.country.$error.required         ||
-                editForm.phones.$error.required          ||
-                editForm.emails.$error.required          ||
-                editForm.absResponsibleForAll.$error.required        ||
-                (!document.absResponsibleForAll && editForm.responsibilities.$error.required) ||
-                (!document.absResponsibleForAll && editForm.absJurisdiction.$error.required)">
-        <i class="glyphicon glyphicon-ok-circle"></i> 
-        Your document is valid. All mandatory fields have been completed.
-    </div>
-
-
-   <!--  <p>document = {{document}} </p>
-
-    <p>name  = {{editForm.name.$error.required}}</p>
-
-    <p>res  = {{editForm.absResponsibleForAll.$error.required}}</p>
-
-    <p>form = {{editForm}}</p> -->
-
-<!-- 
-<div km-document-validation ng-model="validationReport" ng-show="invalid"></div>
- -->
-
-<!--     
-        
-            <div class="col-md-12 visible-md">
-                <div>
-                    <span km-form-std-buttons document="getCleanDocument()"></span>
-                    <span km-form-languages ng-model="document.header.languages"></span>
-                </div>
-            </div> -->
-
-<!--             <div class="col-lg-8 col-md-12" id="helpTip2">
+    
+        <div class="row">
+            <div class="col-xs-12">
                 <ul class="pagination">
-                    <li ng-class="{ disabled: tab=='edit'           }"><a href="" ng-click="tab=prevTab">&laquo;</a></li>
-                    <li ng-class="{ active  : tab=='edit'           }"><a href="" ng-click="tab='edit'" >General</a></li>
-                    <li ng-class="{ active  : tab=='absch'          }"><a href="" ng-click="tab='absch'">ABS</a></li>
-                    <li ng-class="{ active  : tab=='review'         }"><a href="" ng-click="tab='review'">Review</a></li>
-                    <li ng-class="{ disabled: tab=='review'         }"><a href="" ng-click="tab=nextTab">&raquo;</a></li>
-                </ul>   
-            </div> -->
-            <div class="row">
-                <div class="col-lg-12 text-right">
-                    <div class="pull-right">
-                        <span km-form-languages ng-model="document.header.languages"></span>
-                        <span km-form-std-buttons document="getCleanDocument()"></span>
-                    </div>
+                    <li ng-class="{ active  : tab=='edit'   }"><a href="" ng-click="tab='edit'" >Submission form</a></li>
+                    <li ng-class="{ active  : tab=='review' }"><a href="" ng-click="tab='review'">Review</a></li>
+                </ul> 
+                <div class="pagination  pull-right">
+                    <span km-form-languages ng-model="document.header.languages"></span>
+                    <span km-form-std-buttons document="getCleanDocument()"></span>
                 </div>
             </div>
+        </div>
+
 
         <form class="editForm" name="editForm">
+            <div ng-show="tab=='edit'" km-tab="edit">
 
                     <legend>General information</legend>
 
@@ -303,8 +228,19 @@
                         </div>
                     </div>
                 </div>
-
+            </div>
         </form>
+
+
+        <div ng-show="tab=='review'" km-tab="review"> 
+            <div km-document-validation ng-model="validationReport"></div>
+
+            <div class="btn-group" ng-show="reviewDocument.header.languages.length>1">
+                <input type="button" class="btn" ng-class="{'active' : review.locale==locale, 'btn-info' : review.locale==locale}" ng-repeat="locale in document.header.languages" ng-click="$parent.review.locale = locale" value="{{locale | uppercase}}" />
+            </div> 
+
+           <div view-authority ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></div> 
+        </div>
 
         <hr>
 
@@ -315,40 +251,5 @@
             </div>
         </div>
 
-        <!-- <div ng-show="tab=='review'" km-tab="review"> -->
-<!-- 
-            <div km-document-validation ng-model="validationReport"></div>
-
-            <div class="btn-group" ng-show="reviewDocument.header.languages.length>1">
-                <input type="button" class="btn" ng-class="{'active' : review.locale==locale, 'btn-info' : review.locale==locale}" ng-repeat="locale in document.header.languages" ng-click="$parent.review.locale = locale" value="{{locale | uppercase}}" />
-            </div> -->
-
-           <!--  <div view-authority ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></div> -->
-        <!-- </div> -->
-
-        <!-- <div class="row">
-
-            <div class="col-lg-8 col-md-12" id="helpTip2">
-                <ul class="pagination">
-                    <li ng-class="{ disabled: tab=='edit'           }"><a href="" ng-click="tab=prevTab">&laquo;</a></li>
-                    <li ng-class="{ active  : tab=='edit'           }"><a href="" ng-click="tab='edit'" >General</a></li>
-                    <li ng-class="{ active  : tab=='absch'          }"><a href="" ng-click="tab='absch'">ABS</a></li>
-                    <li ng-class="{ active  : tab=='review'         }"><a href="" ng-click="tab='review'">Review</a></li>
-                    <li ng-class="{ disabled: tab=='review'         }"><a href="" ng-click="tab=nextTab">&raquo;</a></li>
-                </ul>   
-            </div>
-
-            <div class="col-lg-4 hidden-md text-right">
-                <div class="pagination">
-                    <span km-form-std-buttons document="getCleanDocument()"></span>
-                </div>
-            </div>
-
-            <div class="col-md-12 visible-md">
-                <div>
-                    <span km-form-std-buttons document="getCleanDocument()"></span>
-                </div>
-            </div>-->
-      
-  
+    </div>  
 </div>
