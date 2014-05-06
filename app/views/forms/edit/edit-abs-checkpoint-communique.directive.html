@@ -11,33 +11,19 @@
     <div ng-show="!isLoading() && status!='hidden'">
 
         <div class="row">
-            <div class="col-xs-12 visible-xs">
-                <div>
-                    <span km-form-std-buttons document="getCleanDocument()"></span>
-                    <span km-form-languages ng-model="document.header.languages"></span>
-                </div>
-            </div>
-
-            <div class="col-sm-7 col-xs-12">
+            <div class="col-xs-12">
                 <ul class="pagination">
-                    <li ng-class="{ disabled: tab=='edit'   }"><a href="" ng-click="tab='edit'">&laquo;</a></li>
-                    <li ng-class="{ active  : tab=='edit'   }"><a href="" ng-click="tab='edit'" >General</a></li>
+                    <li ng-class="{ active  : tab=='edit'   }"><a href="" ng-click="tab='edit'" >Submission form</a></li>
                     <li ng-class="{ active  : tab=='review' }"><a href="" ng-click="tab='review'">Review</a></li>
-                    <li ng-class="{ disabled: tab=='review' }"><a href="" ng-click="tab='review'">&raquo;</a></li>
-                </ul>   
-            </div>
-
-            <div class="col-sm-5 hidden-xs text-right">
-                <div class="pagination">
+                </ul> 
+                <div class="pagination  pull-right">
                     <span km-form-languages ng-model="document.header.languages"></span>
                     <span km-form-std-buttons document="getCleanDocument()"></span>
                 </div>
             </div>
-
         </div>
 
 		<form class="editForm" name="editForm" style="margin-top:10px">
-
 			<div ng-show="tab=='edit'" km-tab="edit">
 				
 			<!-- 	<span class="help-block"><i>Introduction</i><br /><br />This common format is to be used to provide relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources (Article 17, paragraph 1 (a) (i)), including from the internationally recognized certificate of compliance, when such a certificate is available. In accordance with paragraph 1 (a) (iii) of Article 17 of the Nagoya Protocol, such information collected by the checkpoint needs to be provided to relevant national authorities, to the Party providing prior informed consent and to the ABS Clearing-House, as appropriate. <br /><br />On the basis of the information collected or received by the checkpoint and provided by the national publishing authority to the ABS Clearing-House, a courtesy copy of the record will be automatically sent by electronic means to the following entities, as appropriate: 
@@ -270,29 +256,12 @@
 			<div class="view-abs-checkpoint-communique" ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></div>
 		</div>
 
+        <hr>
+
         <div class="row">
-
-            <div class="col-sm-7 col-xs-12">
-                <ul class="pagination">
-                    <li ng-class="{ disabled: tab=='edit'   }"><a href="" ng-click="tab='edit'">&laquo;</a></li>
-                    <li ng-class="{ active  : tab=='edit'   }"><a href="" ng-click="tab='edit'" >General</a></li>
-                    <li ng-class="{ active  : tab=='review' }"><a href="" ng-click="tab='review'">Review</a></li>
-                    <li ng-class="{ disabled: tab=='review' }"><a href="" ng-click="tab='review'">&raquo;</a></li>
-                </ul>   
+            <div class="col-xs-12" >
+                <a ng-click="scrollToTop()" style="padding-top:20px;" class="pull-right"><i class="glyphicon glyphicon-circle-arrow-up"></i> back to top</a>
             </div>
-
-            <div class="col-sm-5 hidden-xs text-right">
-                <div class="pagination">
-                    <span km-form-std-buttons document="getCleanDocument()"></span>
-                </div>
-            </div>
-
-            <div class="col-xs-12 visible-xs">
-                <div>
-                    <span km-form-std-buttons document="getCleanDocument()"></span>
-                </div>
-            </div>
-
         </div>
 
 	</div>
