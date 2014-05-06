@@ -18,7 +18,6 @@ require('app').directive('documentList', function ($http) {
             },
             controller: ['$scope', "underscore", function ($scope, underscore){
 
-
               $scope.formatDate = function formatDate (date) {
                     return moment(date).format('MMMM Do YYYY');
               }; 
@@ -110,11 +109,12 @@ require('app').directive('documentList', function ($http) {
                 function transformDocument (document) {
       
                   var output = {};
-
+                  var locale = "en";//$scope.$root.locale;
+                  
                   var formatDate = function formatDate (date) {
                         return date+'';//moment(date).format('MMMM Do YYYY');
                     };
-
+// console.log(document);
                     output.id          = document.id;
                     output.schema      = document.schema_s.toUpperCase();
                     output.title       = document.title_t;
@@ -123,6 +123,8 @@ require('app').directive('documentList', function ($http) {
                     output.url_ss      = document.url_ss;
                     output.identifier_s = document.identifier_s;
                     output.doc = document;
+                    output.cssClass="defaultRecords";
+                    output.cssRecordClass="defaultDiif";
 
                     if(document.schema_s=='focalPoint') {
                         output.description  = document.function_t||'';
@@ -162,13 +164,59 @@ require('app').directive('documentList', function ($http) {
                     }
                     
                     if(document.schema_s=='resource') {
+                      console.log (document);
                         output.Year = document.publicationYear_is;
-                        output.Types = getString(document.resourceTypes_CEN_ss, "en");
-                        output.Regions = getString(document.regions_CEN_ss, "en");
-                        output.Languages = getString(document.languages_CEN_ss, "en");
-
-                        //console.log(underscore.pluck(document.regions_CEN_ss, "en"));
+                        output.Types = getString(document.resourceTypes_CEN_ss, locale);
+                        output.Regions = getString(document.regions_CEN_ss, locale);
+                        output.Languages = getString(document.languages_CEN_ss, locale);
+                        output.cssClass="resourceRecords";
+                        output.cssRecordClass="recordsDiif";
                     }
+                    if(document.schema_s=='authority') {
+                        output.responsibleForAll = document.responsibleForAll_b;
+                        output.jusrisdiction = document.jurisdiction_EN_t;                        
+                        output.grType = (document.geneticResourceTypes_ss );
+                        output.cssClass="resourceRecords";
+                        output.cssRecordClass="recordsDiif";
+                    }
+
+                    if(document.schema_s=='absCheckpoint') {
+                        output.jusrisdiction = document.jurisdiction_EN_t;   
+                        output.informAllAuthorities = (document.informAllAuthorities_b);  
+                        output.cssClass="resourceRecords";
+                        output.cssRecordClass="recordsDiif";
+                    }
+
+                    if(document.schema_s=='permit') {
+                        output.usage = (document.usage_CEN_ss);
+                        output.keywords = (document.keywords_CEN_ss);
+                        output.cssClass="resourceRecords";
+                        output.cssRecordClass="recordsDiif";
+                    }
+
+                    if(document.schema_s=='absCheckpointCommunique') {
+                        output.originCountries = (document.originCountries_CEN_ss);
+                        output.cssClass="resourceRecords";
+                        output.cssRecordClass="recordsDiif";
+                    }
+
+                    if(document.schema_s=='statement') {
+                        output.cssClass="statementRecords";
+                        output.cssRecordClass="recordsDiif";
+                    }
+                    if(document.schema_s=='meeting') {
+                        output.cssClass="meetingRecords";
+                        output.cssRecordClass="recordsDiif";
+                    }
+                    if(document.schema_s=='notification') {
+                        output.cssClass="notificationRecords";
+                        output.cssRecordClass="recordsDiif";
+                    }
+                    if(document.schema_s=='press release') {
+                        output.cssClass="pressReleaseRecords";
+                        output.cssRecordClass="recordsDiif";
+                    }
+
                     return output;
                 }     
 
@@ -177,11 +225,24 @@ require('app').directive('documentList', function ($http) {
 
                     if(source!=undefined)
                     {
+                          //console.log(JSON.parse('{"response": {   "success": "The activity has been removed",   "message": "0"  }}' ));
+                         
+                        //  if(angular.isString(source))
+                        //  {
+                        //   console.log(source);
+                        //    var jst = (JSON.parse(( source )));
+                        //   console.log((jst[0]));
+                        //     //   jst.forEach(function(record){                      
+                        //     //    console.log(record);
+                        //     // });
+                        // }
+                        //console.log(source);
                         source.forEach(function(record){                      
                           lstring.push(JSON.parse(record)[key] );
                         });
                         
                         return lstring.toString() ;
+                        
                     }                    
                 }
 
