@@ -336,7 +336,14 @@ require("app").controller("RegisterController", ["$rootScope", "$location" , "$s
 	});
 
 	$scope.$watch('tab()', function(value) {
-		if(value=='authority'              ) require(['../views/forms/view/view-authority.directive',                 '../views/forms/edit/edit-authority.directive'],                 function() { $scope.authorityReady = true; });
+		if(value=='authority'              ) 
+			require(['../views/forms/view/view-authority.directive',
+		             '../views/forms/edit/edit-authority.directive',               
+		             '../views/forms/view/view-authority-reference.directive'],                 
+		                 function() { $scope.authorityReady = true; });
+		
+
+
 		if(value=='absCheckpoint'          ) require(['../views/forms/view/view-abs-checkpoint.directive',            '../views/forms/edit/edit-abs-checkpoint.directive'],            function() { $scope.absCheckpointReady = true; });
 		if(value=='absCheckpointCommunique') require(['../views/forms/view/view-abs-checkpoint-communique.directive', '../views/forms/edit/edit-abs-checkpoint-communique.directive'], function() { $scope.absCheckpointCommuniqueReady = true; });
 		if(value=='absPermit'              ) require(['../views/forms/view/view-abs-permit.directive',                '../views/forms/edit/edit-abs-permit.directive'],                function() { $scope.absPermitReady = true; });

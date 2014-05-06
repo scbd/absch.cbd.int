@@ -4,8 +4,7 @@
 	 <h4 ng-show="display('header')"><span style="color:#ed9c28">ABSCH-VLR</span> Virtual Library Record</h4> 
 
 	 <div ng-show="display('title')">
-	 	<label>Title</label>
-	 	<div class="km-value km-pre"><strong>{{document.title | lstring:locale}}</strong></div>
+	 	<h3>{{document.title | lstring:locale}}</h3>
 	 </div>
 
 	<div ng-show="document.summary">
@@ -236,7 +235,6 @@
 						<label>record identifier</label>
 						<div><a href="/database/record?documentID={{document.header.identifier}}">{{document.header.identifier}}</a> </div>
 				</div>
-
 
 		</div>
 

@@ -8,7 +8,8 @@ require("app").directive("viewAuthority", [function () {
 			document: "=ngModel",
 			locale  : "=",
 			target  : "@linkTarget",
-			allowDrafts : "@"
+			allowDrafts : "@",
+			hide : "@"
 		},
 		link : function ($scope)
 		{
@@ -16,6 +17,17 @@ require("app").directive("viewAuthority", [function () {
 		},
 		controller : ["$scope", "IStorage", function ($scope, storage)
 		{
+			//====================
+			//
+			//====================
+			$scope.display = function(field) {
+				
+				if(!$scope.hide) return true; //show all fields
+
+				return( $scope.hide.indexOf(field) >= 0 ? false : true);
+			}
+
+
 			//====================
 			//
 			//====================

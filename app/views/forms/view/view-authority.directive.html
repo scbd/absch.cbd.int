@@ -1,12 +1,11 @@
 ﻿<div id="Record" class="record">	 
 <div class="record-body">
 
-	<h4 ng-show="display('header')"><span class="record-title-national">ABSCH-CNA</span> 
+	<h4 ng-show="display('header')" class="record-title"><span class="record-title-national">ABSCH-CNA</span> 
 	Competent National Authority</h4> 
 
-	<div ng-show="display('title')">
-	 	<label>Name</label>
-	 	<div class="km-value km-pre"><strong>{{document.name | lstring:locale}}</strong></div>
+	<div ng-show="display('title') && document.name">
+	 	<h3>{{document.name | lstring:locale}}</h3>
 	 </div>
 
 	<div ng-show="document.government">

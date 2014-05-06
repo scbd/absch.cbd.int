@@ -9,7 +9,8 @@ require("app").directive("viewAbsCheckpointCommunique", [function () {
 			document: "=ngModel",
 			locale  : "=",
 			target  : "@linkTarget",
-			allowDrafts : "@"
+			allowDrafts : "@",
+			hide: "@"
 		},
 		link : function ($scope, $element, $attr)
 		{
@@ -20,6 +21,16 @@ require("app").directive("viewAbsCheckpointCommunique", [function () {
 			$scope.contacts = undefined;
 			$scope.gisMapLayers = null;
 			$scope.gisMapCenter = null;
+
+			//====================
+			//
+			//====================
+			$scope.display = function(field) {
+				
+				if(!$scope.hide) return true; //show all fields
+
+				return( $scope.hide.indexOf(field) >= 0 ? false : true);
+			}
 
 			//==================================
 			//

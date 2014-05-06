@@ -22,9 +22,26 @@
 	padding:10px 20px 10px 20px;
 }
 
+
+#Record .record-title-national{
+	color: #428BCA; 
+	font-weight: bold;
+}
+
+#Record .record-title-reference{
+	color: #ed9c28; 
+	font-weight: bold;
+}
+
 #Record .record div {
 	padding-top:5px;
 }
+
+#Record .record-title {
+	border-bottom: 2px solid #fff;
+	padding-top:3px;
+}
+
 #Record .record ul{padding: 0;margin: 0;}
 #Record .record ul > li {
 	padding: 9.5px;
@@ -50,7 +67,8 @@
 	font-size: 14px;
 	font-weight: bold;
 	padding-top: 0px;
-	margin-top: 0px;	
+	margin-top: 10px;	
 	color:#999;
 	margin-bottom: 5px;
+	border-bottom: 1px solid #fff;
 }
