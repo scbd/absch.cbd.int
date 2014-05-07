@@ -190,7 +190,7 @@ require('app').directive('searchFilterSchemas', function ($http) {
                                                subFilters : [
                                                                 { name: 'cnaResponsibleForAll',     type: 'yesno' , field: 'responsibleForAll_b'},
                                                                 { name: 'cnaJurisdiction',          type: 'multiselect', field: 'jurisdiction_s' },
-                                                                { name: 'cnaGeneticResourceTypes',  type: 'multiselect' , field: 'geneticResourceTypes_s'}                                                         
+                                                                { name: 'cnaGeneticResourceTypes',  type: 'multiselect' , field: 'geneticResourceTypes_ss'}                                                         
                                                             ]
                                              };
             $scope.database                = { identifier: 'database',                 title: 'National Websites and Databases', count: 0 };
@@ -209,8 +209,8 @@ require('app').directive('searchFilterSchemas', function ($http) {
             $scope.absPermit               = { identifier: 'absPermit',                title: 'Permits and their equivalent' ,
                                                subFilters : [
                                                                 //{ name: 'permitAuthority',  type: 'reference' , field: 'jurisdiction_s'},
-                                                                { name: 'permitusage',      type: 'multiselect' , field: 'usage_s'},
-                                                                { name: 'permitkeywords',   type: 'multiselect' , field: 'keywords_s'},
+                                                                { name: 'permitusage',      type: 'multiselect' , field: 'usage_ss'},
+                                                                { name: 'permitkeywords',   type: 'multiselect' , field: 'keywords_ss'},
                                                                 { name: 'permitExpiryDate', type: 'calendar' , field: 'expiration_s'},
                                                                 { name: 'permitIssuanceDate', type: 'calendar' , field: 'date_s'}      
                                                             ]
@@ -223,15 +223,15 @@ require('app').directive('searchFilterSchemas', function ($http) {
                                               };
             $scope.absCheckpointCommunique = { identifier: 'absCheckpointCommunique',  title: 'Checkpoint Communiqués' ,
                                                subFilters : [
-                                                                { name: 'cpcoriginCountries',      type: 'multiselect', field: 'originCountries_s' }
+                                                                { name: 'cpcoriginCountries',      type: 'multiselect', field: 'originCountries_ss' }
                                                             ]
                                                };
 
             $scope.resource                = { identifier: 'resource',                 title: 'Virtual Library Record' ,
                                                subFilters : [
                                                                 { name: 'vlrpublicationYear', type: 'multiselect', field: 'publicationYear_is'},
-                                                                { name: 'vlrresourceTypes',   type: 'multiselect' , field: 'resourceTypes_s'},
-                                                                { name: 'vlrRegions',         type: 'multiselect', field: 'regions_s' }
+                                                                { name: 'vlrresourceTypes',   type: 'multiselect' , field: 'resourceTypes_ss'},
+                                                                { name: 'vlrRegions',         type: 'multiselect', field: 'regions_ss' }
                                                             ]
                                                };
             $scope.organization            = { identifier: 'organization',             title: 'ABS Related Organizations' };

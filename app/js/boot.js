@@ -14,10 +14,10 @@ require.config({
         'underscore'      : '../libs/underscore/underscore',
         'linqjs'          : '../libs/linqjs/linq',
         'moment'          : '../libs/moment/min/moment-with-langs.min',
-        'bootstrap-datepicker' : '../libs/bootstrap-datepicker/js/bootstrap-datepicker'
-        ,
-         'angular-loading-bar'  : '../libs/angular-loading-bar/src/loading-bar',
-         'angular-animate'     : '../libs/angular-animate/angular-animate.min'
+        'bootstrap-datepicker'  : '../libs/bootstrap-datepicker/js/bootstrap-datepicker',
+        'angular-loading-bar'   : '../libs/angular-loading-bar/src/loading-bar',
+        'angular-animate'       : '../libs/angular-animate/angular-animate.min',
+        'dragAndDrop'     : '../libs/angular-dragndrop/angular-dnd', 
     },
     'shim': {
         'angular'        : { 'deps': ['jquery'], 'exports': 'angular' },
@@ -28,10 +28,13 @@ require.config({
         'underscore'     : { 'exports': '_' },
         'angular-animate' : {'deps': ['angular']},
         'angular-loading-bar' : {'deps': ['angular']},
+        'dragAndDrop'     : {'deps':['angular']},
     }
 });
 
-require(['angular', 'angular-route', 'angular-cookies', 'bootstrap', 'domReady', 'bootstrap-datepicker','angular-loading-bar', 'angular-animate'/*, 'main'*/], function (ng) {
+require(['angular', 'angular-route', 'angular-cookies', 'bootstrap', 'domReady', 
+    'bootstrap-datepicker','angular-loading-bar', 'angular-animate',
+    'dragAndDrop'/*, 'main'*/], function (ng) {
 
     // NOTE: place operations that need to initialize prior to app start here using the `run` function on the top-level module
 

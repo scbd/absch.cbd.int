@@ -132,12 +132,12 @@
     <div class="row" style="padding:20px;" id="schemaPartial" ng-show="showSelect">
     <!--Save Dialog -->
     <div class="col-xs-12 " >
-        <div class="filter-options">          
+        <div class="filter-options row">          
             <div>
                 <!-- <div class="pull-right" >
                      <a ng-click="showSelect=!showSelect" style="text-decoration:none;" ><i class="glyphicon glyphicon-remove-circle"></i> Close</a>
                 </div> -->
-                    <div class="national-records">
+                    <div class="col-lg-6 col-md-6 col-sm-6 national-records">
                         <h4>National Records</h4>
                         <div class="checkbox">
                             <label>
@@ -193,9 +193,8 @@
                             Checkpoint Communiqués ({{absCheckpointCommunique.count}})
                              </label>
                         </div>
-
                     </div>
-                    <div class="reference-records">
+                    <div class="col-lg-6 col-md-6 col-sm-6 reference-records">
                         <h4>Reference Records</h4>
                         <div class="checkbox"><label>
                             <input type="checkbox" ng-model="resource.selected" bind-indeterminate="resource.indeterminate" ng-change="refresh(resource.selected)">

@@ -16,7 +16,26 @@
     font-size: 14px;
     font-weight: bold;
   }
+  .rowDetails{
+     color:#666;
+     font-weight:bold;
+  }
+  .recordsDiif{
+    background-color:#ed9c28;
+    width:3px;
+  }
 
+  .defaultDiif{
+    background-color:#428bca;
+    width:3px;
+  }
+
+  .resourceRecords{display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;}
+.meetingRecords{display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;}
+.notificationRecords{display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;}
+.pressReleaseRecords{display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;}
+.statementRecords{display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;}
+.defaultRecords{display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#287fcb;}
 </style>
 
 
@@ -34,316 +53,94 @@
     <div class="clearfix"></div>
   
 
-    <div ng-repeat="document in transformedDocuments | filter:filterCategory">
+    <div ng-repeat="document in transformedDocuments | filter:filterCategory" style="
+    padding:10px 0 10px 0;">
         <!--  {{document}} -->
-                        <div ng-switch on="document.schema">
+        <div class="result reference-result">
+           <table>
+            <tr>
+              <td rowspan="4" class="{{document.cssRecordClass}}" ></td>
+              <td colspan="2" style="padding:10px 0 0 20px;margin:0;">
+                  <span class="{{document.cssClass}}">
+                    <div ng-switch on="document.schema" class="result reference-result">
+                          <div ng-switch-when="MEASURE"> 
+                             {{document.schema}} 
+                              <span ng-show="document.jusrisdiction">| <span >jusrisdiction:</span>  <span class="rowDetails">{{document.jusrisdiction}} </span></span>
+                              <span ng-show="document.type">| <span >type:</span>  <span class="rowDetails" > {{document.type}} </span></span>
+                              <span ng-show="document.status">| <span >Status:</span>  <span class="rowDetails" > {{document.status}} </span></span>
+                              <span ng-show="document.source">| <span >Country:</span>  <span class="rowDetails" > {{document.source}} </span></span>
+                          </div>
+                          <div ng-switch-when="AUTHORITY" class="result reference-result"> 
+                               Competent National Authority
+                               <span ng-show="document.source">| <span >Country:</span>  <span class="rowDetails" > {{document.source}} </span></span>
+                              <span ng-show="document.responsibleForAll">| <span >responsible for all :</span>  <span class="rowDetails" > {{document.responsibleForAll | yesno}} </span></span>
+                              <span ng-show="document.grType">| <span >GR type :</span>  <span class="rowDetails" > {{document.grType}} </span></span>
+                              <span ng-show="document.jusrisdiction">| <span >jusrisdiction:</span>  <span class="rowDetails">{{document.jusrisdiction | lstring:locale}} </span></span>
+                          </div>
+                          <div ng-switch-when="ABSCHECKPOINT" class="result reference-result"> 
+                              checkpoint
+                              <span ng-show="document.informAllAuthorities">| <span >inform All Authorities :</span>  <span class="rowDetails" > {{document.informAllAuthorities | yesno}} </span></span>
+                              <span ng-show="document.source">| <span >Country:</span>  <span class="rowDetails" > {{document.source}} </span></span
+                              <span ng-show="document.jusrisdiction">| <span >jusrisdiction:</span>  <span class="rowDetails">{{document.jusrisdiction| lstring:locale}} </span></span>
+                          </div>
+                          <div ng-switch-when="PERMIT" class="result reference-result"> 
+                                Legislative, administrative or policy measures                                          
+                              <span ng-show="document.usage">| <span >usage:</span>  <span class="rowDetails" > {{document.usage| lstring:locale}} </span></span>
+                              <span ng-show="document.keywords">| <span >keywords:</span>  <span class="rowDetails">{{document.keywords| lstring:locale}} </span></span>
+                          </div>                                     
+                          <div ng-switch-when="ABSCHECKPOINTCOMMUNIQUE" class="result reference-result"> 
+                              Checkpoint Communiqués                                      
+                              <span ng-show="document.originCountries">| <span >origin Countries:</span>  <span class="rowDetails" > {{document.originCountries| lstring:locale}} </span></span>
+                          </div>
 
-                            <div ng-switch-when="RESOURCE" class="result reference-result"> 
-                               <table>
-                                <tr>
-                                  <td rowspan="4" style="width:3px;background-color:#ed9c28;"></td>
-                                  <td colspan="2" style="padding:10px 0 0 20px;margin:0;">
-                                      <span style="display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;"> virtual library record 
-                                      <span style="color:#666;font-weight:bold;" > | type </span> 
-                                      <span style="color:#666;font-weight:bold;" > | country </span>
-                                      <span style="color:#666;font-weight:bold;" > | year : {{document.Year}} </span>
-                                      <span style="color:#666;font-weight:bold;" > | languages </span>  
-                                       
-                                    </span> 
-                                    </td>
-                                </tr>
-                                <tr>
-                                  <td style="padding:0;margin:0;padding-left:20px;padding-top:3px;">
-                                   <i ng-class="{'fa fa-caret-down':displayDetails, 'fa fa-caret-right':!displayDetails}" style="font-size:11px;color:#999;position:relative; top:-1px;font-size:14px;"></i> 
-                                    <a ng-click="load(document); displayDetails = !displayDetails" class="title">
-                                       &nbsp; {{document.title}}</a> 
-                                  </td>
-                                 <!--  <td rowspan="4" style="width:5px;background-color:#999;padding:5px;margin:0;">V</td> -->
-                                </tr>
-                                <tr>
-                                  <td style="padding-bottom:15px;">
-                                    <div style="padding:3px 0 0 20px;margin:0;" ng-hide="displayDetails" > 
-                                    {{document.description}}
-                                  </div>
-                                    <div ng-show="displayDetails" record-loader document="document.data" 
-                                    hide="title;header;libraries" ></div>
-                                  </td>
-                                </tr>
-                              </table>
-                            </div> <!-- end reference record -->
-                            
-                            
-
-
-                             <div ng-switch-when="MEETING" class="result reference-result"> 
-                               <table>
-                                <tr>
-                                  <td rowspan="4" style="width:3px;background-color:#ed9c28;"></td>
-                                  <td colspan="2" style="padding:10px 0 0 20px;margin:0;">
-                                      <span style="display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;"> meeting
-                                      <span style="color:#666;font-weight:bold;" > | date </span> 
-                                      <span style="color:#666;font-weight:bold;" > | city, country </span>
-                                       
-                                    </span> 
-                                    </td>
-                                </tr>
-                                <tr>
-                                  <td style="padding:0;margin:0;padding-left:20px;padding-top:3px;">
-                                   <i ng-class="{'fa fa-caret-down':displayDetails, 'fa fa-caret-right':!displayDetails}" style="font-size:11px;color:#999;position:relative; top:-1px;font-size:14px;"></i> 
-                                    <a ng-click="load(document); displayDetails = !displayDetails" class="title">
-                                       &nbsp; {{document.title}}</a> 
-                                  </td>
-                                 <!--  <td rowspan="4" style="width:5px;background-color:#999;padding:5px;margin:0;">V</td> -->
-                                </tr>
-                                <tr>
-                                  <td style="padding-bottom:15px;">
-                                    <div style="padding:3px 0 0 20px;margin:0;" ng-hide="displayDetails" > 
-                                     {{document}} </div>
-                                    <div ng-show="displayDetails" record-loader document="document.data" 
-                                    hide="title;header;libraries" ></div>
-                                  </td>
-                                </tr>
-                              </table>
-                            </div> <!-- end reference record -->
-
-
-                            <div ng-switch-when="NOTIFICATION" class="result reference-result"> 
-                               <table>
-                                <tr>
-                                  <td rowspan="4" style="width:3px;background-color:#ed9c28;"></td>
-                                  <td colspan="2" style="padding:10px 0 0 20px;margin:0;">
-                                      <span style="display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;"> notification
-                                      <span style="color:#666;font-weight:bold;" > | {{document.doc.reference_s}} </span> 
-                                      <span style="color:#666;font-weight:bold;" > | {{formatDate(document.date_dt)}} </span> 
-                                    </span> 
-                                    </td>
-                                </tr>
-                                <tr>
-                                  <td style="padding:0;margin:0;padding-left:20px;padding-top:3px;">
-                                   <i ng-class="{'fa fa-caret-down':displayDetails, 'fa fa-caret-right':!displayDetails}" style="font-size:11px;color:#999;position:relative; top:-1px;font-size:14px;"></i> 
-                                    <a href="http://www.cbd.int{{document.url_ss[0]}}" target="_new" class="title">
-                                       &nbsp; {{document.title}}</a> 
-                                  </td>
-                                 <!--  <td rowspan="4" style="width:5px;background-color:#999;padding:5px;margin:0;">V</td> -->
-                                </tr>
-                                <tr>
-                                  <td style="padding-bottom:15px;">
-                                    <div style="padding:3px 0 0 20px;margin:0;" ng-hide="displayDetails" >
-                                      {{document.description}}
-
-                                    </div>
-                                    
-                                  </td>
-                                </tr>
-                              </table>
-                            </div> <!-- end reference record -->
-
-                            <div ng-switch-when="PRESS RELEASE" class="result reference-result"> 
-                               <table>
-                                <tr>
-                                  <td rowspan="4" style="width:3px;background-color:#ed9c28;"></td>
-                                  <td colspan="2" style="padding:10px 0 0 20px;margin:0;">
-                                      <span style="display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;"> press release
-                                      <span style="color:#666;font-weight:bold;" > | {{formatDate(document.date_dt)}} </span> 
-                                    </span> 
-                                    </td>
-                                </tr>
-                                <tr>
-                                  <td style="padding:0;margin:0;padding-left:20px;padding-top:3px;">
-                                   <i ng-class="{'fa fa-caret-down':displayDetails, 'fa fa-caret-right':!displayDetails}" style="font-size:11px;color:#999;position:relative; top:-1px;font-size:14px;"></i> 
-                                    <a href="http://www.cbd.int{{document.url_ss[0]}}" target="_new" class="title">
-                                       &nbsp; {{document.title}}</a> 
-                                  </td>
-                                 <!--  <td rowspan="4" style="width:5px;background-color:#999;padding:5px;margin:0;">V</td> -->
-                                </tr>
-                                <tr>
-                                  <td style="padding-bottom:15px;">
-                                   <div style="padding:3px 0 0 20px;margin:0;" ng-hide="displayDetails" >
-                                      {{document.description}}
-                                    </div>
-                          
-                                  </td>
-                                </tr>
-                              </table>
-                            </div> <!-- end reference record -->
-
-                            <div ng-switch-when="STATEMENT" class="result reference-result"> 
-                               <table>
-                                <tr>
-                                  <td rowspan="4" style="width:3px;background-color:#ed9c28;"></td>
-                                  <td colspan="2" style="padding:10px 0 0 20px;margin:0;">
-                                      <span style="display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;"> statement
-                                    </span> 
-                                    </td>
-                                </tr>
-                                <tr>
-                                  <td style="padding:0;margin:0;padding-left:20px;padding-top:3px;">
-                                   <i ng-class="{'fa fa-caret-down':displayDetails, 'fa fa-caret-right':!displayDetails}" style="font-size:11px;color:#999;position:relative; top:-1px;font-size:14px;"></i> 
-                                    <a href="http://www.cbd.int{{document.url_ss[0]}}" target="_new" class="title">
-                                       &nbsp; {{document.title}}</a> 
-                                  </td>
-                                 <!--  <td rowspan="4" style="width:5px;background-color:#999;padding:5px;margin:0;">V</td> -->
-                                </tr>
-                                <tr>
-                                  <td style="padding-bottom:15px;">
-                                    
-                                  </td>
-                                </tr>
-                              </table>
-                            </div> <!-- end reference record -->
-
-
-                            <div ng-switch-when="FOCALPOINT" class="result national-result"> 
-                               <table>
-                                <tr>
-                                  <td rowspan="4" style="width:3px;background-color:#428bca;"></td>
-                                  <td colspan="2" style="padding:10px 0 0 20px;margin:0;">
-                                      <span style="display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#287fcb;"> FOCALPOINT
-                                      
-                                      <span style="color:#666;font-weight:bold;" > | {{document.source}} </span>
-                                       <span style="color:#666;font-weight:bold;" > | {{document.doc.schema_EN_t}} </span>
-
-                                    </span> 
-                                    </td>
-                                </tr>
-                                <tr>
-                                  <td style="padding:0;margin:0;padding-left:20px;padding-top:3px;">
-                                   <i ng-class="{'fa fa-caret-down':displayDetails, 'fa fa-caret-right':!displayDetails}" style="font-size:11px;color:#999;position:relative; top:-1px;font-size:14px;"></i> 
-                                    <a ng-click="displayDetails = !displayDetails" class="title">
-                                      &nbsp; {{document.title}}</a> 
-                                  </td>
-                                 <!--  <td rowspan="4" style="width:5px;background-color:#999;padding:5px;margin:0;">V</td> -->
-                                </tr>
-                                <tr>
-                                  <td style="padding-bottom:15px;">
-                                    <div style="padding:3px 0 0 20px;margin:0;" ng-hide="displayDetails" > 
-                                    {{document.description}}
-                                    </div>
-                                    <div ng-show="displayDetails" >
-                                      
-                                      {{document}}
-
-                                    </div>
-                                  </td>
-                                </tr>
-                              </table>
-                           
-                            </div> <!-- end focal point -->
-
-
-                            <!-- checkpoint --> 
-                          <div ng-switch-when="ABSCHECKPOINT" class="result national-result"> 
-                               <table>
-                                <tr>
-                                  <td rowspan="4" style="width:3px;background-color:#428bca;"></td>
-                                  <td colspan="2" style="padding:10px 0 0 20px;margin:0;">
-                                      <span style="display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#287fcb;"> checkpoint
-                                      
-                                      <span style="color:#666;font-weight:bold;" > | {{document.source}} </span>
-                                       <span style="color:#666;font-weight:bold;" > | {{document.doc.jurisdiction_EN_t}} </span>
-
-                                    </span> 
-                                    </td>
-                                </tr>
-                                <tr>
-                                  <td style="padding:0;margin:0;padding-left:20px;padding-top:3px;">
-                                   <i ng-class="{'fa fa-caret-down':displayDetails, 'fa fa-caret-right':!displayDetails}" style="font-size:11px;color:#999;position:relative; top:-1px;font-size:14px;"></i> 
-                                    <a ng-click="load(document); displayDetails = !displayDetails" class="title">
-                                      &nbsp; {{document.title}}</a> 
-                                  </td>
-                                 <!--  <td rowspan="4" style="width:5px;background-color:#999;padding:5px;margin:0;">V</td> -->
-                                </tr>
-                                <tr>
-                                  <td style="padding-bottom:15px;">
-                                    <div style="padding:3px 0 0 20px;margin:0;" ng-hide="displayDetails" > 
-                                    {{document.description}}
-                                    </div>
-                                    <div ng-show="displayDetails" record-loader document="document.data" 
-                                    hide="title;header;libraries;government" ></div>
-                                  </td>
-                                </tr>
-                              </table>
-                           
-                            </div> <!-- end checkpoint -->
-
-
-                             <!-- CNA --> 
-                          <div ng-switch-when="AUTHORITY" class="result national-result"> 
-                               <table>
-                                <tr>
-                                  <td rowspan="4" style="width:3px;background-color:#428bca;"></td>
-                                  <td colspan="2" style="padding:10px 0 0 20px;margin:0;">
-                                      <span style="display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#287fcb;">  Competent National Authority
-
-                                      
-                                      <span style="color:#666;font-weight:bold;" > | {{document.source}} </span>
-                                       <span style="color:#666;font-weight:bold;" > | responsible for all </span>
-                                       <span style="color:#666;font-weight:bold;" > | GR type </span>
-                                       <span style="color:#666;font-weight:bold;" > | jurisdiciton</span>
-
-                                    </span> 
-                                    </td>
-                                </tr>
-                                <tr>
-                                  <td style="padding:0;margin:0;padding-left:20px;padding-top:3px;">
-                                   <i ng-class="{'fa fa-caret-down':displayDetails, 'fa fa-caret-right':!displayDetails}" style="font-size:11px;color:#999;position:relative; top:-1px;font-size:14px;"></i> 
-                                    <a ng-click="load(document); displayDetails = !displayDetails" class="title">
-                                      &nbsp; {{document.title}}</a> 
-                                  </td>
-                                 <!--  <td rowspan="4" style="width:5px;background-color:#999;padding:5px;margin:0;">V</td> -->
-                                </tr>
-                                <tr>
-                                  <td style="padding-bottom:15px;">
-                                    <div style="padding:3px 0 0 20px;margin:0;" ng-hide="displayDetails" > 
-                                    {{document}}
-                                    </div>
-                                    <div ng-show="displayDetails" record-loader document="document.data" 
-                                    hide="title;header;libraries;government" ></div>
-                                  </td>
-                                </tr>
-                              </table>
-                           
-                            </div> <!-- end CNA -->
-
-
-                          <!-- National Record  --> 
-                          <div ng-switch-default class="result national-result"> 
-                               <table>
-                                <tr>
-                                  <td rowspan="4" style="width:3px;background-color:#428bca;"></td>
-                                  <td colspan="2" style="padding:10px 0 0 20px;margin:0;">
-                                      <span style="display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#287fcb;"> {{document.schema}} 
-                                      <span style="color:#666;font-weight:bold;" > | type </span> 
-                                      <span style="color:#666;font-weight:bold;" > | country </span>
-                                      <span style="color:#666;font-weight:bold;" > | year </span>
-                                      <span style="color:#666;font-weight:bold;" > | languages </span>  
-                                       
-                                    </span> 
-                                    </td>
-                                </tr>
-                                <tr>
-                                  <td style="padding:0;margin:0;padding-left:20px;padding-top:3px;">
-                                   <i ng-class="{'fa fa-caret-down':displayDetails, 'fa fa-caret-right':!displayDetails}" style="font-size:11px;color:#999;position:relative; top:-1px;font-size:14px;"></i> 
-                                    <a ng-click="load(document); displayDetails = !displayDetails" class="title">
-                                      {{document.title}}</a> 
-                                  </td>
-                                 <!--  <td rowspan="4" style="width:5px;background-color:#999;padding:5px;margin:0;">V</td> -->
-                                </tr>
-                                <tr>
-                                  <td style="padding-bottom:15px;">
-                                    <div style="padding:3px 0 0 20px;margin:0;" ng-hide="displayDetails" > 
-                                    {{document.description}}
-                                    </div>
-                                    <div ng-show="displayDetails" record-loader document="document.data" 
-                                    hide="title;header;libraries" ></div>
-                                  </td>
-                                </tr>
-                              </table>
-                           
-                            </div> <!-- end national record -->
-                          <br>
-                        </div> <!-- end switch -->
-
+                          <div ng-switch-when="RESOURCE" class="result reference-result"> 
+                               virtual library record 
+                              <span ng-show="document.Year">| <span >Year:</span>  <span class="rowDetails" > {{document.Year}} </span></span>
+                              <span ng-show="document.languages">|  <span >languages:</span>  <span class="rowDetails" > {{document.languages}} </span></span>
+                              <span ng-show="document.type">| <span >type:</span>  <span class="rowDetails" > {{document.type}} </span></span>
+                              <span ng-show="document.Regions">| <span >countries:</span>  <span class="rowDetails" > {{document.Regions}} </span></span>
+                          </div>
+                          <div ng-switch-when="MEETING" class="result reference-result"> 
+                               meeting
+                              <span style="color:#666;font-weight:bold;" > | date </span> 
+                              <span style="color:#666;font-weight:bold;" > | city, country </span>
+                          </div>
+                          <div ng-switch-when="NOTIFICATION" class="result reference-result"> 
+                               notification
+                              <span style="color:#666;font-weight:bold;" > | {{document.doc.reference_s}} </span> 
+                              <span style="color:#666;font-weight:bold;" > | {{formatDate(document.date_dt)}} </span> 
+                          </div>
+                          <div ng-switch-when="PRESS RELEASE" class="result reference-result"> 
+                               press release
+                               <span style="color:#666;font-weight:bold;" > | {{formatDate(document.date_dt)}} </span> 
+                          </div>
+                          <div ng-switch-default class="result reference-result"> 
+                            {{document.schema}}                                          
+                             <span ng-show="document.source">| <span >Country:</span><span class="rowDetails" > {{document.source}} </span></span>
+                          </div> 
+                    </div>                                        
+                  </span> 
+                </td>
+            </tr>
+            <tr>
+              <td style="padding:0;margin:0;padding-left:20px;padding-top:3px;">
+               <i ng-class="{'fa fa-caret-down':displayDetails, 'fa fa-caret-right':!displayDetails}" style="font-size:11px;color:#999;position:relative; top:-1px;font-size:14px;"></i> 
+                <a ng-click="load(document); displayDetails = !displayDetails" class="title">
+                  {{document.title}}</a> 
+              </td>
+             <!--  <td rowspan="4" style="width:5px;background-color:#999;padding:5px;margin:0;">V</td> -->
+            </tr>
+            <tr>
+              <td style="padding:10px;">
+                <div style="padding:3px 0 0 20px;margin:0;" ng-hide="displayDetails" > 
+               <!--  {{document}} -->
+                </div>
+                <div ng-show="displayDetails" record-loader document="document.data" 
+                hide="title;header;libraries" ></div>
+              </td>
+            </tr>
+          </table>
+        </div> <!-- end switch -->
         <div class="clearfix"></div>
     </div>
     <!---Bottom pager-->
