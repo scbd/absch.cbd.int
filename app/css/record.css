@@ -1,4 +1,10 @@
-
+#Record .record{
+	padding-bottom:20px;
+}
+#Record h3{
+	padding:0;
+	margin:0;
+}
 
 #Record .modal-dialog {
 	width:650px;
@@ -10,6 +16,9 @@
 	 font-size: 11px;
 	 text-transform: uppercase;
 
+}
+#Record .list{
+	margin:0;padding:0;padding-left:15px;
 }
 
 #Record .km-value{

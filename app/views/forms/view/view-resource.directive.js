@@ -10,9 +10,32 @@ require("app").directive("viewResource", [function () {
 			target  : "@linkTarget",
 			hide : "@"
 		},
-		controller : ["$scope", "IStorage", function ($scope, storage)
+		controller : ["$scope", "IStorage", "$http", function ($scope, storage, $http)
 		{
-			
+			// $scope.load();
+
+			// //====================
+			// //
+			// //====================
+			// $scope.load = function() {
+
+			//         if(!$scope.document)
+			    
+
+			//       item.data = {'schema':item.schema, 'url_ss': item.url_ss, 'data': item};
+			//         $http.get("/api/v2013/documents/"+item.identifier_s).then(function (result) {  
+			//             item.data = result.data;
+
+			//             $http.get("/api/v2013/documents/"+item.identifier_s + "?info").then(function (result) {  
+			//                 item.data.info = result.data;
+			//             });
+
+			//         });
+
+			//     }
+
+
+
 			//====================
 			//
 			//====================

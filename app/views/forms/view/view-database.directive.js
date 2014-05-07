@@ -7,10 +7,21 @@ require("app").directive("viewDatabase", [function () {
 		scope: {
 			document: "=ngModel",
 			locale  : "=",
-			target  : "@linkTarget"
+			target  : "@linkTarget",
+			hide	: "@"
 		},
-		controller : [function ()
+		controller : ["$scope", function ($scope)
 		{
+
+			//====================
+			//
+			//====================
+			$scope.display = function(field) {
+				
+				if(!$scope.hide) return true; //show all fields
+
+				return( $scope.hide.indexOf(field) >= 0 ? false : true);
+			}
 		}]
 	};
 }]);
