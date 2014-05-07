@@ -3,8 +3,12 @@
 
 	<h4 ng-show="display('header')"><span class="record-title-national">ABSCH-CP</span> Checkpoint</h4> 
 
-	<div ng-show="display('title') && document.name">
+
+	 <div ng-show="display('title') && document.name">
+	 <label>Name</label>
+	 	<div class="km-value">
 	 	<h3>{{document.name | lstring:locale}}</h3>
+	 	</div>
 	 </div>
 
 	<div ng-show="document.government && display('government')">
