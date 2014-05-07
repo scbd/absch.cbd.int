@@ -78,13 +78,14 @@
 	line-height: 11px;
     text-transform: uppercase;
     background-color: transparent;
+    padding-top: 2px;
 }
 
 .national-record .rec-title{
 	background-color:#287fcb;
 	color:white;
 	font-weight:bold;
-	padding:3px 20px;
+	padding:3px 3px 3px 20px;
 	text-transform: uppercase;
 	position: relative;
 	top:-1px;
@@ -97,7 +98,7 @@
 	padding:3px 3px 3px 20px;
 	text-transform: uppercase;
 	position: relative;
-	top:1px;
+	top:-1px;
 	margin-right:5px;
 }
 

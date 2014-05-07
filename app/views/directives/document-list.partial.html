@@ -57,13 +57,16 @@
     padding:10px 0 10px 0;">
         <!--  {{document}} -->
         <div class="result reference-result">
-        {{document.cssRecordClass}}
            <table>
             <tr>
               <td rowspan="4" class="{{document.cssRecordClass}}" ></td>
               <td colspan="2" style="padding:3px 0 0 0;margin:0;">
                   <span class="{{document.cssClass}}">
                     <div ng-switch on="document.schema" class="result">
+                          
+                          <a href="/database/record?documentID={{document.header.identifier}}" target="_new"
+                          class="pull-right" style="padding:0px 3px;color:#999;"><i class="glyphicon glyphicon-new-window"></i></a>
+
                           <div ng-switch-when="MEASURE" class="national-record"> 
                               <span class="rec-title">Legislative, administrative or policy measures</span>
                               <span ng-show="document.jusrisdiction"><span >jusrisdiction:</span>  <span class="rowDetails">{{document.jusrisdiction}} </span></span>
@@ -103,12 +106,13 @@
                           <div ng-switch-when="RESOURCE" class="reference-record"> 
                               <span class="rec-title">virtual library record </span>
 
-                                <span ng-show="document.resourceTypes_CEN_ss">| <span >Type:</span>  <span class="rowDetails" > {{document.resourceTypes_CEN_ss.en}} </span></span>
+                              <span ng-show="document.types">| <span >type:</span>  <span class="rowDetails" > {{document.types}} </span> </span>
 
-                              <span ng-show="document.Year">| <span >Year:</span>  <span class="rowDetails" > {{document.Year}} </span></span>
-                              <span ng-show="document.languages">|  <span >languages:</span>  <span class="rowDetails" > {{document.languages}} </span></span>
-                              <span ng-show="document.type">| <span >type:</span>  <span class="rowDetails" > {{document.type}} </span></span>
-                              <span ng-show="document.Regions">| <span >countries:</span>  <span class="rowDetails" > {{document.Regions}} </span></span>
+                              <span ng-show="document.Year">| <span >Year:</span>  <span class="rowDetails" > {{document.Year}} </span> </span>
+
+                              <span ng-show="document.languages">|  <span >languages:</span>  <span class="rowDetails" > {{document.languages}} </span> </span>
+                              
+                              <span ng-show="document.Regions">| <span >countries:</span>  <span class="rowDetails" > {{document.Regions}} </span> </span>
                           </div>
                           <div ng-switch-when="MEETING" class="reference-record"> 
                                <span class="rec-title">meeting</span>
@@ -143,7 +147,7 @@
             <tr>
               <td style="padding:5px 10px 10px 10px;">
                 <div style="padding:0 0 0 20px;margin:0;" ng-hide="displayDetails" > 
-                    {{document}}
+                    {{document.description}}
                 </div>
                 <div ng-show="displayDetails" record-loader document="document.data" 
                 hide="title;header;libraries" ></div>
