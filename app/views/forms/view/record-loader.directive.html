@@ -12,20 +12,37 @@
 			<button  type="button" class="btn" ng-click="edit()" ng-show="user().isAuthenticated" ng-disabled="!canEdit()">Edit</button>
 		</div>
 
-<!-- 	<h1>{{internalDocument.type}}</h1> -->
-
-		 <!-- {{internalDocument}}   -->
-
+	<!-- <h1>{{internalDocument}}</h1> -->
+<!--  {{document}} -->
+<!-- {{internalDocument}} -->
 		<div ng-switch on="internalDocument.header.schema" >
-			<div view-authority	ng-switch-when="authority" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
-			<div view-contact ng-switch-when="contact"	ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
-			<div view-database ng-switch-when="database" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
+			<div view-authority	ng-switch-when="authority" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}  hide={{hide}}></div>
+			
+			<div view-contact ng-switch-when="contact"	ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}  hide={{hide}}></div>
+			
+			<div view-database ng-switch-when="database" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}  hide={{hide}}></div>
+			
 			<div view-resource ng-switch-when="resource" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}} hide={{hide}}></div>
+<<<<<<< HEAD
 			<div view-organization	ng-switch-when="organization" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
 			<div view-measure ng-switch-when="measure" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
 			<div view-abs-checkpoint ng-switch-when="absCheckpoint" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
 			<div view-abs-checkpoint-communique ng-switch-when="absCheckpointCommunique" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
 			<div view-abs-permit ng-switch-when="absPermit"	 ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
+			<div view-focal-point ng-switch-when="focalPoint" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
+			<div view-meeting ng-switch-when="meeting" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
+=======
+			
+			<div view-organization	ng-switch-when="organization" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}  hide={{hide}}></div>
+			
+			<div view-measure ng-switch-when="measure" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}  hide={{hide}}></div>
+			
+			<div view-abs-checkpoint ng-switch-when="absCheckpoint" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}} hide={{hide}}></div>
+			
+			<div view-abs-checkpoint-communique ng-switch-when="absCheckpointCommunique" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}  hide={{hide}}></div>
+			
+			<div view-abs-permit ng-switch-when="absPermit"	 ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}  hide={{hide}}></div>
+>>>>>>> 7d837cc38aac7fa1b6151f222b82cf825ee24c9e
 
 			<div ng-switch-default>
 				<div class="text-center"><h1 style="color:#fa6938"><i class="fa fa-spinner fa-spin"></i></h1></div>

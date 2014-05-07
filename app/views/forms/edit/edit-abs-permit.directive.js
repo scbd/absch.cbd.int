@@ -8,6 +8,7 @@ require("app").directive("editAbsPermit", [ function () {
 		scope      : {},
 		controller : ["$scope", "$q", "authHttp", "Enumerable", "$filter", "guid", "IStorage", "authentication", "editFormUtility", "Thesaurus", function ($scope, $q, $http, Enumerable, $filter, guid, storage, authentication, editFormUtility, Thesaurus)
 		{
+			$scope.tab = "edit";
 			$scope.status   = "";
 			$scope.error    = null;
 			$scope.document = null;
@@ -26,17 +27,6 @@ require("app").directive("editAbsPermit", [ function () {
         		$("body, html").animate({scrollTop: 0}, "slow");
       		};
 
-      		//==================================
-			//
-			//==================================
-			$scope.toggleReview = function() {
-        		
-          		if($scope.tab=='review')
-        			$scope.tab='edit';
-        		
-        		if($scope.tab=='edit')
-        			$scope.tab='review';
-      		};
 
 			//==================================
 			//

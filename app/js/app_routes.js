@@ -21,7 +21,7 @@ define(['app', 'authentication', 'services', 'filters', 'storage', 'workflows'],
             when('/register',                    { templateUrl: '/app/views/register.html'                  , resolve: { user: resolveUser }}).
             when('/countries',                   { templateUrl: '/app/views/countries.html'                 , resolve: { user: resolveUser }}).
             when('/countries/:code',             { templateUrl: '/app/views/profiles.html'                  , resolve: { user: resolveUser }}).
-            when('/database/record',             { templateUrl: '/app/views/forms/view/records-id.html'     , resolve: { user: resolveUser }}).
+            //when('/database/record',             { templateUrl: '/app/views/forms/view/records-id.html'     , resolve: { user: resolveUser }}).
             when('/database/record/:documentID', { templateUrl: '/app/views/forms/view/records-id.html'     , resolve: { user: resolveUser }}).
             when('/register/tasks/:id',          { templateUrl: '/app/views/tasks/tasks-id.html'            , resolve: { user: resolveUser }}).
             when('/register/tasks/:id/:activity',{ templateUrl: '/app/views/tasks/tasks-id-activity.html'   , resolve: { user: resolveUser }}).

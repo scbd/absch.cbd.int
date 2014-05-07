@@ -10,7 +10,8 @@ require("app").directive("viewAbsPermit", [function () {
 			documentInfo: "=documentInfo",
 			locale  : "=",
 			target  : "@linkTarget",
-			allowDrafts: "@"
+			allowDrafts: "@",
+			hide:"@"
 		},
 		link : function ($scope, $element, $attr)
 		{
@@ -22,6 +23,17 @@ require("app").directive("viewAbsPermit", [function () {
 
 			$scope.gisMapLayers = null;
 			$scope.gisMapCenter = null;
+
+
+			//====================
+			//
+			//====================
+			$scope.display = function(field) {
+				
+				if(!$scope.hide) return true; //show all fields
+
+				return( $scope.hide.indexOf(field) >= 0 ? false : true);
+			}
 
 			//==================================
 			//

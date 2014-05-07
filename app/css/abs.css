@@ -44,7 +44,6 @@ h1, h2, h3 {
 
 
 
-
 .disclaimer-sm{
 	margin-bottom:0px;background-color:#fa6938;color:white;height:28px;padding:3px 0 3px 0;
 }
@@ -646,16 +645,7 @@ display: block;
     width: 900px;
   }
 }
-.record-title-national{
-	color: #428BCA; 
-	font-weight: bold;
-	font-size:180%;
-}
-.record-title-reference{
-	color: #ed9c28; 
-	font-weight: bold;
-	font-size:180%;
-}
+
 
 .editForm > div >  legend{
 	margin-top:30px;

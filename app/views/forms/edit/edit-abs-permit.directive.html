@@ -12,45 +12,22 @@
     <div ng-show="!isLoading() && status!='hidden'">
 
         <div class="row">
-
-            <div class="col-xs-12" >
-            	<div class="pull-right">
-                    
-                    <span km-form-languages ng-model="document.header.languages"></span>
-                    <span km-form-std-buttons document="getCleanDocument()"></span>
-                </div>
+            <div class="col-xs-12">
                 <ul class="pagination">
-                   <li ng-class="{ disabled: tab=='edit'   }"><a href="" ng-click="tab='edit'">&laquo;</a></li>
-                    <li ng-class="{ active  : tab=='edit'   }"><a href="" ng-click="tab='edit'" >General</a></li> 
-                    <li ng-class="{ active  : tab=='review' }">
-                    <a href="" ng-click="toggleReview()">Review</a></li>
-                    <li ng-class="{ disabled: tab=='review' }"><a href="" ng-click="tab='review'">&raquo;</a></li> 
-                </ul>   
-            </div>
-
-           <!--  <div class="col-sm-5 hidden-xs text-right">
-                <div class="pagination">
+                    <li ng-class="{ active  : tab=='edit'   }"><a href="" ng-click="tab='edit'" >Submission form</a></li>
+                    <li ng-class="{ active  : tab=='review' }"><a href="" ng-click="tab='review'">Review</a></li>
+                </ul> 
+                <div class="pagination  pull-right">
                     <span km-form-languages ng-model="document.header.languages"></span>
                     <span km-form-std-buttons document="getCleanDocument()"></span>
                 </div>
-            </div> -->
-
+            </div>
         </div>
 
-        <div ng-show="tab=='review'"  km-tab="review" >
-
-			<div km-document-validation ng-model="validationReport"></div>
-
-			<!-- <div class="btn-group" ng-show="reviewDocument.header.languages.length>1">
-				<input type="button" class="btn" ng-class="{'active' : review.locale==locale, 'btn-info' : review.locale==locale}" ng-repeat="locale in document.header.languages" ng-click="$parent.review.locale = locale" value="{{locale | uppercase}}" />
-			</div> -->
-
-			<!-- <div class="view-abs-permit" show-pdf="false" ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></div> -->
-		</div>
+        
 
 		<form class="editForm" name="editForm" style="margin-top:10px">
-
-			<div>
+			 <div ng-show="tab=='edit'" km-tab="edit">
 				
 				
 				<legend>General information</legend>
@@ -58,7 +35,6 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="km-control-group" name="government" required caption="Country">
-							<div class="alert alert-info" ng-show="userGovernment()"><i class="icon-hand-right"></i>You cannot change this value.</div>
 							<div km-select required name="government" ng-disabled="userGovernment()" ng-model="document.government" items="options.countries()" placeholder="Please select a country..."></div>
 						</div>
 					</div>
@@ -130,12 +106,10 @@
 							<button
 								data-toggle="buttons-checkbox"
 								type="button"
-								class="btn btn-info"
-								ng-class="{active:document.consentGranted && !document.consentGranted}"
+								class="btn"
+								ng-class="{'btn-primary':document.consentGranted, 'btn-default': !document.consentGranted}"
 								ng-click="document.consentGranted=!document.consentGranted"
 								>Yes</button>
-
-                           
 						</div>
 					</div>
 				</div>
@@ -239,46 +213,45 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="km-control-group" required name="mutuallyAgreedTermsEstablished" caption="Confirmation that mutually agreed terms (MAT) were established">
-							<span class="help-block">Only one option may be selected. If the option NO is selected, the record cannot be posted in the ABS Clearing-House and, therefore, the internationally recognized certificate of compliance</span>
+							<span class="help-block">If no mutually agreed terms (MAT) have been established, this record cannot be published in the ABS Clearing-House and, therefore, an internationally recognized certificate of compliance can not be issued.</span>
+
 								<button
 								data-toggle="buttons-checkbox"
 								type="button"
-								class="btn btn-info btn-"
-								ng-class="{active:document.mutuallyAgreedTermsEstablished && !document.mutuallyAgreedTermsEstablished}"
+								class="btn"
+								ng-class="{'btn-primary':document.mutuallyAgreedTermsEstablished, 'btn-default':!document.mutuallyAgreedTermsEstablished}"
 								ng-click="document.mutuallyAgreedTermsEstablished=!document.mutuallyAgreedTermsEstablished"
 								>Yes</button>
                             
 						</div>
 					</div>
 				</div>
-				<hr>
-				<div class="row">
-					<div class="col-xs-12">
-						<div class="km-control-group" name="consentDocuments" caption="Additional information about the prior informed consent - Documents">
-							<div km-link name="consentDocuments" ng-model="document.consentDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
-						</div>
-					</div>
-				</div>
 				
-				<div ng-show="document.mutuallyAgreedTermsEstablished==true">
+<style>
+    .disable {background-color:#888; color:#666;}
+    .enable{background-color:#ededed;}
+</style>
+				
+				<!-- <div class="well" ng-class="{disable:document.mutuallyAgreedTermsEstablished, enable:!document.mutuallyAgreedTermsEstablished}"> -->
 					
-					<div class="row">
+					<div class="row" >
 						<div class="col-xs-12">
-							<span class="help-block">If applicable, please provide any information about the MAT. For example, this may include information on conditions for access and for benefit-sharing and other relevant information included in the MAT. Detailed information may be provided in an attached document.</span>
+							
 							<div class="km-control-group" name="mutuallyAgreedTermsInformation" caption="Additional information about the mutually agreed terms - Information">
+							<span class="help-block"><strong>If applicable</strong>, please provide any information about the MAT. For example, this may include information on conditions for access and for benefit-sharing and other relevant information included in the MAT. Detailed information may be provided in an attached document.</span>
 								<div km-textbox-ml name="mutuallyAgreedTermsInformation" rows="4" ng-model="document.mutuallyAgreedTermsInformation" locales="document.header.languages"></div>
 							</div>
 						</div>
-					</div>
-					<hr>
-					<div class="row">
+					
+			
 						<div class="col-xs-12">
 							<div class="km-control-group" name="mutuallyAgreedTermsDocuments" caption="Additional information about the mutually agreed terms - Documents">
+							<span class="help-block"><strong>If applicable</strong>, please provide the link or upload the documents.</span>
 								<div km-link name="mutuallyAgreedTermsDocuments" ng-model="document.mutuallyAgreedTermsDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
 							</div>
 						</div>
 					</div>
-				</div>
+				<!-- </div> -->
 				<hr>
 				<div class="row">
 					<div class="col-xs-12">
@@ -404,7 +377,19 @@
 			</div>
 		</form>
 
-		     <hr>
+		<div class="row" ng-show="tab=='review'"  km-tab="review" >
+			<div class="col-xs-12">
+				<div km-document-validation ng-model="validationReport"></div>
+
+				<div class="btn-group" ng-show="reviewDocument.header.languages.length>1">
+					<input type="button" class="btn" ng-class="{'active' : review.locale==locale, 'btn-info' : review.locale==locale}" ng-repeat="locale in document.header.languages" ng-click="$parent.review.locale = locale" value="{{locale | uppercase}}" />
+				</div>
+
+				<div class="view-abs-permit" show-pdf="false" ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></div> 
+			</div>
+		</div>
+
+	 	<hr>
 
         <div class="row">
             <div class="col-xs-12" >
@@ -412,31 +397,6 @@
             </div>
         </div>
 
-	
-<!-- 
-        <div class="row">
 
-            <div class="col-sm-7 col-xs-12">
-                <ul class="pagination">
-                    <li ng-class="{ disabled: tab=='edit'   }"><a href="" ng-click="tab='edit'">&laquo;</a></li>
-                    <li ng-class="{ active  : tab=='edit'   }"><a href="" ng-click="tab='edit'" >General</a></li>
-                    <li ng-class="{ active  : tab=='review' }"><a href="" ng-click="tab='review'">Review</a></li>
-                    <li ng-class="{ disabled: tab=='review' }"><a href="" ng-click="tab='review'">&raquo;</a></li>
-                </ul>   
-            </div>
-
-            <div class="col-sm-5 hidden-xs text-right">
-                <div class="pagination">
-                    <span km-form-std-buttons document="getCleanDocument()"></span>
-                </div>
-            </div>
-
-            <div class="col-xs-12 visible-xs">
-                <div>
-                    <span km-form-std-buttons document="getCleanDocument()"></span>
-                </div>
-            </div>
-
-        </div> -->
 	</div>
 </div>

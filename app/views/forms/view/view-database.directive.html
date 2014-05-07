@@ -1,41 +1,77 @@
-﻿<div>
-	<h2><span class="record-title-national">ABSCH-NDB</span> National Database or Website</h2> 
+﻿<div id="Record" class="record">	 
+	<div class="record-body">
 
-	<h2>{{document.title | lstring:locale}}</h2>
+		 <h4 ng-show="display('header')"><span class="record-title-national">ABSCH-NDB</span>  
+		 National Database or Website</h4>
 
-	<div ng-show="document.description">
-		<label>Description</label>
-		<div class="km-value km-pre">{{document.description | lstring:locale}}</div>
-	</div>
-
-	<div ng-show="document.website">
-		<label>URL of the website</label>
-		<div class="km-value">
-			<a target="{{target}}" ng-href="{{document.website.url}}">{{document.website.name||document.website.url}}</a>
-			<i ng-show="document.website.name">({{document.website.url}})</i>
-		</div>
-	</div>
-
-	<div ng-show="document.government">
-		<label>Country</label>
-		<div class="km-value">
-			{{document.government|term}}
-		</div>
-	</div>
-
-	<div ng-show="document.relevantInformation||document.relevantDocuments">
-		<legend>Additional Information</legend>
-
-		<div ng-show="document.relevantInformation">
-			<div class="km-value" ng-bind="document.relevantInformation | lstring:locale"></div>
+		<div ng-show="display('title')">
+			<label>Title</label>
+			<div class="km-value km-pre">{{document.title | lstring:locale}}</div>
 		</div>
 
-		<div ng-show="document.relevantDocuments">
-			<label>Other relevant website address or attached documents</label>
-			<div class="km-value" ng-repeat="item in document.relevantDocuments">
-				<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-				<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+		<div ng-show="document.description">
+			<label>Description</label>
+			<div class="km-value km-pre">{{document.description | lstring:locale}}</div>
+		</div>
+
+		<div ng-show="document.website">
+			<label>URL of the website</label>
+			<div class="km-value">
+				<a target="{{target}}" ng-href="{{document.website.url}}">{{document.website.name||document.website.url}}</a>
+				<i ng-show="document.website.name">({{document.website.url}})</i>
+			</div>
+		</div>
+
+		<div ng-show="document.government">
+			<label>Country</label>
+			<div class="km-value">
+				{{document.government|term}}
+			</div>
+		</div>
+
+		<div ng-show="document.relevantInformation||document.relevantDocuments">
+			<legend>Additional Information</legend>
+
+			<div ng-show="document.relevantInformation">
+				<div class="km-value" ng-bind="document.relevantInformation | lstring:locale"></div>
+			</div>
+
+			<div ng-show="document.relevantDocuments">
+				<label>Other relevant website address or attached documents</label>
+				<div class="km-value" ng-repeat="item in document.relevantDocuments">
+					<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+					<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+				</div>
 			</div>
 		</div>
 	</div>
+
+	<div class="container-fluid record-metadata" style="margin:0 20px;padding:10px;">
+		<div class="row">
+
+				<div ng-show="document.info.createdBy" class="col-xs-3">
+						<label>Published by:</label>
+						<div>
+						{{document.info.createdBy.firstName}} {{document.info.createdBy.lastName}} ({{document.info.createdBy.email}})</div>
+				</div>		
+				<div ng-show="document.info.createdBy" class="col-xs-2">
+						<label>Published on:</label>
+						<div>{{document.info.createdOn}}</div>
+				</div>
+				
+				<div ng-show="document.info.updatedBy && document.info.updatedOn != document.info.createdOn"  class="col-xs-3">
+						<label>Last udpated by:</label>
+						<div >{{document.info.updatedBy.firstName}} {{document.info.updatedBy.lastName}} ({{document.info.updatedBy.email}})</div>
+				</div>
+				<div ng-show="document.info.updatedBy && document.info.updatedOn != document.info.createdOn"  class="col-xs-2">
+						<label>Last updated on:</label>
+						<div>{{document.info.updatedOn}}</div>
+				</div>
+				<div ng-show="document.header.identifier"  class="col-xs-2">
+						<label>record identifier</label>
+						<div><a href="/database/record?documentID={{document.header.identifier}}">{{document.header.identifier}}</a> </div>
+				</div>
+
+		</div>
+
 </div>

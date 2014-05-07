@@ -4,16 +4,16 @@
 	 <h4 ng-show="display('header')"><span class="record-title-national">ABSCH-MSR</span> Legislative, administrative or policy measures on access and benefit-sharing</h4>
 	
 	<div ng-show="display('title')">
-	 	<label>Title</label>
-	 	<div class="km-value km-pre"><strong>{{document.title | lstring:locale}}</strong></div>
+	 	<h3>{{document.title | lstring:locale}}</h3>
 	 </div>
 
 	<div ng-show="document.description">
+		<label>Brief description</label>
 		<div class="km-value km-pre">{{document.description | lstring:local}}</div>
 	</div>
 
 	<div ng-show="document.government">
-		<legend>Country</legend>
+		<label>Country</label>
 		<div class="km-value">
 			{{document.government|term}}
 		</div>

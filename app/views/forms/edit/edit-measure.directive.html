@@ -11,12 +11,13 @@
 
     <div ng-show="!isLoading() && status!='hidden'">
 
-    <div  class="alert alert-warning" ng-show="
+    <!-- <div  class="alert alert-warning" ng-show="
 		editForm.government.$error.required 	|| 
 		editForm.title.$error.required			||
 		editForm.jurisdiction.$error.required	||
 		editForm.type.$error.required 			||
 		editForm.authorities.$error.required	||
+		editForm.status.$error.required 		||
 		( isLegallyBinded() && editForm.entryIntoForce.$error.required) ||
 		editForm.documents.$error.required">
 
@@ -30,6 +31,8 @@
 			<strong>jurisdiction</strong></li>
 			<li ng-show="editForm.type.$error.required" >Field is mandatory / 
 			<strong>type of measure</strong></li>
+			<li ng-show="editForm.status.$error.required" >Field is mandatory / 
+			<strong>legal status</strong></li>
 
 			<li ng-show="( isLegallyBinded() && editForm.entryIntoForce.$error.required)" >Field is mandatory / 
 			<strong>date of entry into force</strong></li>
@@ -46,15 +49,23 @@
 		editForm.title.$error.required			||
 		editForm.jurisdiction.$error.required	||
 		editForm.type.$error.required 			||
+		editForm.status.$error.required 		||
 		editForm.authorities.$error.required	||
 		( isLegallyBinded() && editForm.entryIntoForce.$error.required) ||
 		editForm.documents.$error.required">
 		<i class="glyphicon glyphicon-ok-circle"></i> 
 		Your document is valid.
-	</div>
+	</div> -->
 
         <div class="row">
             <div class="col-xs-12">
+            	<ul class="pagination">
+                    <!-- <li ng-class="{ disabled: tab=='edit'   }"><a href="" ng-click="tab=prevTab">&laquo;</a></li> -->
+                    <li ng-class="{ active  : tab=='edit'   }"><a href="" ng-click="tab='edit'" >Submission form</a></li>
+                    <!-- <li ng-class="{ active  : tab=='absch'  }"><a href="" ng-click="tab='absch'">ABS Measures</a></li> -->
+                    <li ng-class="{ active  : tab=='review' }"><a href="" ng-click="tab='review'">Review</a></li>
+                    <!-- <li ng-class="{ disabled: tab=='review' }"><a href="" ng-click="tab=nextTab">&raquo;</a></li> -->
+                </ul> 
                 <div class="pagination  pull-right">
                     <span km-form-languages ng-model="document.header.languages"></span>
                     <span km-form-std-buttons document="getCleanDocument()"></span>
@@ -64,13 +75,7 @@
 
 
 		<form class="editForm" name="editForm" style="margin-top:10px">
-
-		
-<!-- 			<a ng-click="checkform=!checkform">review</a>
-
-			<div ng-show="checkform" > 
-	            <div km-document-validation ng-model="validationReport" ></div>
-			</div>  -->
+			<div ng-show="tab=='edit'" km-tab="edit">
 
 
 				<legend>General information</legend>
@@ -349,8 +354,20 @@
 					</div>
 				</div>
 
-
+			</div>
 		</form>
+
+		<div class="row" ng-show="tab=='review'" km-tab="review">
+ 			<div class="col-xs-12">
+	            <div km-document-validation ng-model="validationReport"></div>
+	 
+	            <div class="btn-group" ng-show="reviewDocument.header.languages.length>1">
+	                <input type="button" class="btn" ng-class="{'active' : review.locale==locale, 'btn-info' : review.locale==locale}" ng-repeat="locale in document.header.languages" ng-click="$parent.review.locale = locale" value="{{locale | uppercase}}" />
+	            </div>
+	 
+	            <div view-measure ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></div>
+            </div>
+        </div>
 
 		<hr>
 
@@ -361,26 +378,5 @@
 		</div>
 
 
-       <!--  <div class="row">
-            <div class="col-lg-9 col-sm-8 col-xs-12" id="helpTip2">
-                <ul class="pagination">
-                  <li ng-class="{ disabled: tab=='edit'   }"><a href="" ng-click="tab=prevTab">&laquo;</a></li>
-                    <li ng-class="{ active  : tab=='edit'   }"><a href="" ng-click="tab='edit'" >General</a></li>
-                    <li ng-class="{ active  : tab=='absch'  }"><a href="" ng-click="tab='absch'">ABS Measures</a></li> 
-                    <li ng-class="{ active  : tab=='review' }"><a href="" ng-click="tab='review'">Review</a></li>
-                    <li ng-class="{ disabled: tab=='review' }"><a href="" ng-click="tab=nextTab">&raquo;</a></li> 
-                </ul>   
-            </div>
-            <div class="col-lg-3 col-sm-4 hidden-xs text-right">
-                <div class="pagination">
-                    <span km-form-std-buttons document="getCleanDocument()"></span>
-                </div>
-            </div>
-            <div class="col-xs-12 visible-xs">
-                <div>
-                    <span km-form-std-buttons document="getCleanDocument()"></span>
-                </div>
-            </div>
-        </div> -->
 	</div>
 </div>

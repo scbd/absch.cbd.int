@@ -9,7 +9,7 @@ require("app").directive("editAuthority", [function () {
 		scope      : {},
 		controller : ["$scope", "authHttp", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage", "authentication", "Enumerable", "editFormUtility", function ($scope, $http, guid, $filter, Thesaurus, $q, $location, storage, authentication, Enumerable, editFormUtility)
 		{
-
+			$scope.tab      = "edit";
 			$scope.status   = "";
 			$scope.error    = null;
 			$scope.document = null;
@@ -36,8 +36,6 @@ require("app").directive("editAuthority", [function () {
 		    $scope.ExitEvent = function () { console.log("Exit Event called"); };
 		    $scope.ChangeEvent = function () { console.log("Change Event called"); };
 		    $scope.BeforeChangeEvent = function () { console.log("Before Change Event called"); };
-
-		  
 
 
 			//==================================
@@ -103,6 +101,7 @@ require("app").directive("editAuthority", [function () {
 					throw err;
 
 				});
+
 			}
 
 			//==================================
@@ -120,25 +119,18 @@ require("app").directive("editAuthority", [function () {
 			
 			//==================================
 			$scope.$on("documentInvalid", function(){
-				//$scope.tab = "review";
+				
 				$scope.invalid = true;
 				validate();
 			});
 
-			// //==================================
-			// //
-			// //==================================
-			// $scope.$watch("check_valid", function(item) {
-
-			// 	// if(tab == "help")           { $scope.prevTab = "help";           $scope.nextTab = "edit"; }
-			// 	// if(tab == "edit")           { $scope.prevTab = "help";           $scope.nextTab = "absch"; }
-			// 	// if(tab == "absch")          { $scope.prevTab = "edit";           $scope.nextTab = "additionalInfo"; }
-			// 	// if(tab == "additionalInfo") { $scope.prevTab = "absch";          $scope.nextTab = "review"; }
-			// 	// if(tab == "review")         { $scope.prevTab = "additionalInfo"; $scope.nextTab = "review"; }
-				
-			// 	// if(tab=='review')
-			// 	//  	validate();
-			// });
+			//==================================
+			//
+			//==================================
+			$scope.$watch("tab", function(tab) {
+				if(tab == "review") 
+					validate();
+			});
 
 			//==================================
 			//
@@ -159,20 +151,22 @@ require("app").directive("editAuthority", [function () {
 				return false;
 			};
 
-			//==================================
-			//
-			//==================================
-			$scope.allowJurisdictionName = function(document) {
+			// //==================================
+			// //
+			// //==================================
+			// $scope.allowJurisdictionName = function(document) {
 
-				document = document || $scope.document;
+			// 	debugger;
 
-				if (!document || !document.absJurisdiction)
-					return false;
+			// 	 document = document || $scope.document;
 
-				var qabsJurisdictions = Enumerable.from([document.absJurisdiction]);
+			// 	if (!document || !document.absJurisdiction)
+			// 		return false;
 
-				return qabsJurisdictions.Any(function (o) { return o.identifier == "DEBB019D-8647-40EC-8AE5-10CA88572F6E"; });
-			};
+			// 	var qabsJurisdictions = Enumerable.from([document.absJurisdiction]);
+
+			// 	return qabsJurisdictions.Any(function (o) { return o.identifier == "DEBB019D-8647-40EC-8AE5-10CA88572F6E"; });
+			// };
 
 			//==================================
 			//
@@ -188,6 +182,7 @@ require("app").directive("editAuthority", [function () {
 			//
 			//==================================
 			$scope.getCleanDocument = function(document) {
+				debugger;
 
 				document = document || $scope.document;
 
@@ -205,8 +200,8 @@ require("app").directive("editAuthority", [function () {
 					document.absResponsibilities     = undefined;
 				}
 
-				if (!$scope.allowJurisdictionName(document))
-					document.absJurisdictionName = undefined;
+				 if (document.absJurisdiction && document.absJurisdiction.identifier == '7437F880-7B12-4F26-AA91-CED37250DD0A' )
+				 	document.absJurisdictionName = undefined;
 
 				if (/^\s*$/g.test(document.notes))
 					document.notes = undefined;
