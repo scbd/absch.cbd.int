@@ -1,12 +1,16 @@
 "use strict";
-require("app").controller("RegisterController", ["$rootScope", "$location" , "$scope", "$q", "$window", "IStorage", "underscore", "schemaTypes", "$compile", function ($rootScope, $location, $scope, $q, $window, storage, _, schemaTypes, $compile) {
+require("app", "dragAndDrop").controller("RegisterController", 
+	["$rootScope", "$location" , "$scope", "$q", "$window", "IStorage", "underscore",
+	 "schemaTypes", "$compile", 
+	 function ($rootScope, $location, $scope, $q, $window, storage, _,
+	  schemaTypes) {
 
 	//============================================================
 	//============================================================
 	//====================== SECURIZE ============================
 	//============================================================
 	//============================================================
-
+// console.log(dragAndDrop);
     $scope.isAuthenticated      = $rootScope.user.isAuthenticated;
     $scope.canRegisterNational  = !!_.intersection($rootScope.user.roles, ["AbsAdministrator", "AbsNationalAuthorizedUser", "AbsNationalFocalPoint", "AbsPublishingAuthorities", "Administrator"]).length;
     $scope.canRegisterReference = $rootScope.user.isAuthenticated;
