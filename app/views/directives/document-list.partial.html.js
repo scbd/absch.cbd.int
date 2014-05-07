@@ -172,35 +172,7 @@ require('app').directive('documentList', function ($http) {
                         output.cssClass="resourceRecords";
                         output.cssRecordClass="recordsDiif";
                     }
-                    if(document.schema_s=='authority') {
-                        output.responsibleForAll = document.responsibleForAll_b;
-                        output.jusrisdiction = document.jurisdiction_EN_t;                        
-                        output.grType = (document.geneticResourceTypes_ss );
-                        output.cssClass="resourceRecords";
-                        output.cssRecordClass="recordsDiif";
-                    }
-
-                    if(document.schema_s=='absCheckpoint') {
-                        output.jusrisdiction = document.jurisdiction_EN_t;   
-                        output.informAllAuthorities = (document.informAllAuthorities_b);  
-                        output.cssClass="resourceRecords";
-                        output.cssRecordClass="recordsDiif";
-                    }
-
-                    if(document.schema_s=='permit') {
-                        output.usage = (document.usage_CEN_ss);
-                        output.keywords = (document.keywords_CEN_ss);
-                        output.cssClass="resourceRecords";
-                        output.cssRecordClass="recordsDiif";
-                    }
-
-                    if(document.schema_s=='absCheckpointCommunique') {
-                        output.originCountries = (document.originCountries_CEN_ss);
-                        output.cssClass="resourceRecords";
-                        output.cssRecordClass="recordsDiif";
-                    }
-
-                    if(document.schema_s=='statement') {
+                     if(document.schema_s=='statement') {
                         output.cssClass="statementRecords";
                         output.cssRecordClass="recordsDiif";
                     }
@@ -216,6 +188,41 @@ require('app').directive('documentList', function ($http) {
                         output.cssClass="pressReleaseRecords";
                         output.cssRecordClass="recordsDiif";
                     }
+
+                    if(document.schema_s=='authority') {
+                        output.responsibleForAll = document.responsibleForAll_b;
+                        output.jusrisdiction = document.jurisdiction_EN_t;                        
+                        output.grType = (document.geneticResourceTypes_ss );
+                        output.cssClass="cnaRecords";
+                        output.cssRecordClass="defaultDiif";
+                    }
+
+                    if(document.schema_s=='absCheckpoint') {
+                        output.jusrisdiction = document.jurisdiction_EN_t;   
+                        output.informAllAuthorities = (document.informAllAuthorities_b);  
+                        output.cssClass="cpRecords";
+                        output.cssRecordClass="defaultDiif";
+                    }
+
+                    if(document.schema_s=='permit') {
+                        output.usage = (document.usage_CEN_ss);
+                        output.keywords = (document.keywords_CEN_ss);
+                        output.cssClass="irccRecords";
+                        output.cssRecordClass="defaultDiif";
+                    }
+
+                    if(document.schema_s=='absCheckpointCommunique') {
+                        output.originCountries = (document.originCountries_CEN_ss);
+                        output.cssClass="cpcRecords";
+                        output.cssRecordClass="defaultDiif";
+                    }
+                    if(document.schema_s=='measure') {
+                        //output.originCountries = (document.originCountries_CEN_ss);
+                        output.cssClass="msrRecords";
+                        output.cssRecordClass="defaultDiif";
+                    }
+
+                   
 
                     return output;
                 }     

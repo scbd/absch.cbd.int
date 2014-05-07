@@ -64,10 +64,42 @@
 	color:#333;
 }
 
-.national-records{
+.national-record{
 	color:#287fcb;
+	font-size: 11px;
+	line-height: 11px;
+    text-transform: uppercase;
+    background-color: transparent;
+    padding-top: 2px;
 }
-.reference-records{
+.reference-record{
 	color:#f0ad4e;
+	font-size: 11px;
+	line-height: 11px;
+    text-transform: uppercase;
+    background-color: transparent;
 }
+
+.national-record .rec-title{
+	background-color:#287fcb;
+	color:white;
+	font-weight:bold;
+	padding:3px 20px;
+	text-transform: uppercase;
+	position: relative;
+	top:-1px;
+	margin-right:5px;
+}
+.reference-record .rec-title{
+	background-color:#f0ad4e;
+	color:white;
+	font-weight:bold;
+	padding:3px 3px 3px 20px;
+	text-transform: uppercase;
+	position: relative;
+	top:1px;
+	margin-right:5px;
+}
+
+
 
