@@ -7,7 +7,6 @@
 <script src="/app/views/find_themes.partial.html.js"></script>
 <script src="/app/views/forms/view/record-loader.directive.js"></script>
 <script src="/app/views/directives/document-list.partial.html.js"></script>
-
 <script src="/app/views/forms/view/view-abs-checkpoint.directive.js"></script>
 <script src="/app/views/forms/view/view-abs-checkpoint-communique.directive.js"></script>
 <script src="/app/views/forms/view/view-abs-permit.directive.js"></script>
@@ -21,43 +20,125 @@
 <script src="/app/views/forms/view/view-organization-reference.directive.js"></script>
 <script src="/app/views/forms/view/view-resource.directive.js"></script>
 <script src="/app/views/forms/view/view-other.directive.js"></script>
-
 <script src="/app/views/directives/search-filter-dates.partial.html.js"></script>
-
 <script type="text/javascript" src="/app/js/directives/forms/form-controls.js"></script>
-
 <div ng-controller="FindController">
-<br>
-    <div class="container" >
+  <br>
+  <div class="container">
+    <div class="col-xs-3" >
+      <h3>National Records</h3>
+      <a  ng-click="tab('measure')"  href="#" role="button">
+      <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='measure'}">
+        <div class="btn-commonformat-national">ABSCH-MSR
+          <span ng-show="(records | filter:{type:'measure'}| filter:isDraft).length > 0" class="pull-right label label-default">
+          {{(records | filter:{type:'measure'}| filter:isDraft).length}}</span>
+          <span ng-show="(records | filter:{type:'measure'}| filter:isPublished).length > 0" class="pull-right label label-success">
+          {{(records | filter:{type:'measure'}| filter:isPublished).length}}</span>
+          <span ng-show="(records | filter:{type:'measure'}| filter:isRequest).length > 0" class="pull-right label label-danger">
+          {{(records | filter:{type:'measure'}| filter:isRequest).length}}</span>
+          <!-- <span ng-show="(records | filter:{type:'measure'}).length > 0" class="pull-right label label-info">
+        {{(records | filter:{type:'measure'}).length}}</span> --> </div>
+        <span class="btn-commonformat-name">Legislative, administrative or policy measures </span>
+      </div></a>
+      <a  ng-click="tab('authority')"  href="#" role="button">
+      <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='authority'}">
+        <span class="btn-commonformat-national">ABSCH-CNA </span>
+        <span ng-show="(records | filter:{type:'authority'}| filter:isDraft).length > 0"  class="pull-right label label-default">{{(records | filter:{type:'authority'}| filter:isDraft).length}}</span>
+        <span ng-show="(records | filter:{type:'authority'}| filter:isPublished).length > 0"  class="pull-right label label-success">{{(records | filter:{type:'authority'}| filter:isPublished).length}}</span>
+        <span ng-show="(records | filter:{type:'authority'}| filter:isRequest).length > 0"  class="pull-right label label-danger">{{(records | filter:{type:'authority'}| filter:isRequest).length}}</span>
+        <!-- <span ng-show="(records | filter:{type:'authority'}).length > 0"  class="pull-right label label-info">{{(records | filter:{type:'authority'}).length}}</span>
+        --><br><span class="btn-commonformat-name">Competent National Authority </span>
+      </div></a>
+      <a  ng-click="tab('absPermit')"  href="#" role="button">
+      <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='absPermit'}">
+        <span class="btn-commonformat-national">ABSCH-IRCC </span>
+        <span ng-show="(records | filter:{type:'absPermit'}| filter:isDraft).length > 0" class="pull-right label label-default">{{(records | filter:{type:'absPermit'}| filter:isDraft).length}}</span>
+        <span ng-show="(records | filter:{type:'absPermit'}| filter:isPublished).length > 0" class="pull-right label label-success">{{(records | filter:{type:'absPermit'}| filter:isPublished).length}}</span>
+        <span ng-show="(records | filter:{type:'absPermit'}| filter:isRequest).length > 0" class="pull-right label label-danger">{{(records | filter:{type:'absPermit'}| filter:isRequest).length}}</span>
+        <!-- <span ng-show="(records | filter:{type:'absPermit'}).length > 0" class="pull-right label label-info">{{(records | filter:{type:'absPermit'}).length}}</span>   -->
+        <br><span class="btn-commonformat-name">Internationally recognized certificate of compliance </span>
+      </div></a>
+      <a  ng-click="tab('absCheckpoint')"  href="#" role="button">
+      <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='absCheckpoint'}">
+        <span class="btn-commonformat-national">ABSCH-CP </span>
+        <span ng-show="(records | filter:{type:'absCheckpoint'}| filter:isDraft).length > 0" class="pull-right label label-default">{{(records | filter:{type:'absCheckpoint'}| filter:isDraft).length}}</span>
+        <span ng-show="(records | filter:{type:'absCheckpoint'}| filter:isPublished).length > 0" class="pull-right label label-success">{{(records | filter:{type:'absCheckpoint'}| filter:isPublished).length}}</span>
+        <span ng-show="(records | filter:{type:'absCheckpoint'}| filter:isRequest).length > 0" class="pull-right label label-danger">{{(records | filter:{type:'absCheckpoint'}| filter:isRequest).length}}</span>
+        <!-- <span ng-show="(records | filter:{type:'absCheckpoint'}.length > 0" class="pull-right label label-info">{{(records | filter:{type:'absCheckpoint'}).length}}</span>   -->
+        <br><span class="btn-commonformat-name">Checkpoint </span>
+      </div></a>
+      <a  ng-click="tab('absCheckpointCommunique')"  href="#" role="button">
+      <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='absCheckpointCommunique'}">
+        <span class="btn-commonformat-national">ABSCH-CPC </span>
+        <span ng-show="(records | filter:{type:'absCheckpointCommunique'}| filter:isDraft).length > 0" class="pull-right label label-default">{{(records | filter:{type:'absCheckpointCommunique'}| filter:isDraft).length}}</span>
+        <span ng-show="(records | filter:{type:'absCheckpointCommunique'}| filter:isPublished).length > 0" class="pull-right label label-success">{{(records | filter:{type:'absCheckpointCommunique'}| filter:isPublished).length}}</span>
+        <span ng-show="(records | filter:{type:'absCheckpointCommunique'}| filter:isRequest).length > 0" class="pull-right label label-danger">{{(records | filter:{type:'absCheckpointCommunique'}| filter:isRequest).length}}</span>
+        <!-- <span ng-show="(records | filter:{type:'absCheckpointCommunique'}).length > 0" class="pull-right label label-info">{{(records | filter:{type:'absCheckpointCommunique'}).length}}</span> -->
+        <br><span class="btn-commonformat-name">Checkpoint Communiqué </span>
+      </div></a>
+      <a  ng-click="tab('database')"  href="#" role="button">
+      <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='database'}">
+        <span class="btn-commonformat-national">ABSCH-NDB </span>
+        <span ng-show="(records | filter:{type:'database'}| filter:isDraft).length > 0" class="pull-right label label-default">{{(records | filter:{type:'database'}| filter:isDraft).length}}</span>
+        <span ng-show="(records | filter:{type:'database'}| filter:isPublished).length > 0" class="pull-right label label-success">{{(records | filter:{type:'database'}| filter:isPublished).length}}</span>
+        <span ng-show="(records | filter:{type:'database'}| filter:isRequest).length > 0" class="pull-right label label-danger">{{(records | filter:{type:'database'}| filter:isRequest).length}}</span>
+        <!-- <span ng-show="(records | filter:{type:'database'}).length > 0" class="pull-right label label-info">{{(records | filter:{type:'database'}).length}}</span> -->
+        <br><span class="btn-commonformat-name">ABS National Website or Database </span>
+      </div></a>
+    
+    <h3>Reference Records</h3>
+      <a  ng-click="tab('resource')"  href="#" role="button">
+      <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='resource'}">
+        <span class="btn-commonformat-reference">ABSCH-VLR </span>
+        <span  ng-show="(records | filter:{type:'resource'} | filter:isDraft).length > 0"  class="pull-right label label-default">{{(records | filter:{type:'resource'}| filter:isDraft).length}}</span>
+        <span  ng-show="(records | filter:{type:'resource'} | filter:isPublished).length > 0"  class="pull-right label label-success">{{(records | filter:{type:'resource'}| filter:isPublished).length}}</span>
+        <span  ng-show="(records | filter:{type:'resource'} | filter:isRequest).length > 0"  class="pull-right label label-danger">{{(records | filter:{type:'resource'}| filter:isRequest).length}}</span>
+        <!--  <span  ng-show="(records | filter:{type:'resource'}).length > 0"  class="pull-right label label-info">{{(records | filter:{type:'resource'}).length}}</span> -->
+        <br><span class="btn-commonformat-name">Virtual Library Record</span>
+      </div></a>
+    </div>
+    
 
-      <div class="row">
-        <div class="col-xs-2" style="background-color:#428BCA;"> 
-          <div class="filters text-center" >FILTERS</div>
-        </div>
-        <div class="col-xs-10">
-          <input type="text" ng-model="keyword" placeholder=" Keyword " class="form-control keyword" 
-          style="height:24px;width:160px;">
-        </div>
+   
+
+
+
+    <div class="col-xs-9">
+      <div document-list  documents='rawDocs' filter='*' show-pagination='true' current-page='currentPage' document-Count='documentCount'></div>
+    </div>
+  </div>
+
+
+
+
+
+  <div class="container" >
+    <div class="row">
+      <div class="col-xs-2" style="background-color:#428BCA;">
+        <div class="filters text-center" >FILTERS</div>
+      </div>
+      <div class="col-xs-10">
+        <input type="text" ng-model="keyword" placeholder=" Keyword " class="form-control keyword"
+        style="height:24px;width:160px;">
+      </div>
       </div><!-- end row -->
-
       <!-- record types -->
       <search-filter-schemas title='Record Types' ng-model='schemas' field='schema_s' query='querySchema'></search-filter-schemas>
       <search-filter-countries title='Countries' ng-model='governments' field='government_s' query='queryGovernment'></search-filter-countries>
       <search-filter-themes title='Thematic Areas' ng-model='thematicAreas' field='thematicArea_REL_ss' query='queryTheme'></search-filter-themes>
-
       
-   </div>  <!-- end container -->
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <br>
-          <div class="alert alert-warning"> <i class="glyphicon glyphicon-warning-sign"></i> 
-            <strong>This page is currently under construction.</strong>
-            <br>Please email questions to: absch@cbd.int
+      </div>  <!-- end container -->
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <br>
+            <div class="alert alert-warning"> <i class="glyphicon glyphicon-warning-sign"></i>
+              <strong>This page is currently under construction.</strong>
+              <br>Please email questions to: absch@cbd.int
+            </div>
+            
+            <div document-list  documents='rawDocs' filter='*' show-pagination='true' current-page='currentPage' document-Count='documentCount'></div>
           </div>
-     
-          <div document-list  documents='rawDocs' filter='*' show-pagination='true' current-page='currentPage' document-Count='documentCount'></div>
-        </div>
-      </div> <!-- end col        -->
-   </div> <!-- end row -->
-</div> <!-- end container -->
+          </div> <!-- end col        -->
+          </div> <!-- end row -->
+          </div> <!-- end container -->

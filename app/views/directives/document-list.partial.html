@@ -1,176 +1,165 @@
 <div style="padding: 0px; margin: 0;">
-
-<style type="text/css">
+  <style type="text/css">
   .result{
-
   }
   .result > table{
-    width:100%;
-    padding:10px 0 10px 0;
-    margin:0;
-    background-color:#e9e9e9;
-    font-size: 11px;
+  width:100%;
+  padding:10px 0 10px 0;
+  margin:0;
+  background-color:#e9e9e9;
+  font-size: 11px;
   }
   .result .title{
-    color:#111;
-    font-size: 14px;
-    font-weight: bold;
+  color:#111;
+  font-size: 14px;
+  font-weight: bold;
   }
   .rowDetails{
-     color:#333;
-     font-weight:bold;
+  color:#333;
+  font-weight:bold;
   }
   .recordsDiif{
-    background-color:#f0ad4e;
-    width:3px;
+  background-color:#f0ad4e;
+  width:3px;
   }
-
   .defaultDiif{
-    background-color:#287fcb;
-    width:3px;
+  background-color:#287fcb;
+  width:3px;
   }
-
-.resourceRecords{display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;}
-.meetingRecords{display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;}
-.notificationRecords{display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;}
-.pressReleaseRecords{display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;}
-.statementRecords{display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;}
-.defaultRecords{display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#287fcb;}
-</style>
-
-
-    <ul class="pagination pull-right" ng-show='showPagination'>
-        <li ng-class="{disabled: currentPage == 0}">
-            <a href ng-click="actionSetPage(currentPage-1)">« Prev</a>
-        </li>
-        <li ng-repeat="n in range(pageCount)" ng-class="{active: n == currentPage}" ng-click="actionSetPage(n)">
-            <a href>{{n+1}}</a>
-        </li>
-        <li ng-class="{disabled: currentPage >= pageCount - 1}">
-            <a href ng-click="actionSetPage(currentPage+1)">Next »</a>
-        </li>
-    </ul>
-    <div class="clearfix"></div>
+  .resourceRecords{display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;}
+  .meetingRecords{display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;}
+  .notificationRecords{display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;}
+  .pressReleaseRecords{display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;}
+  .statementRecords{display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;}
+  .defaultRecords{display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#287fcb;}
+  </style>
+  <ul class="pagination pull-right" ng-show='showPagination'>
+    <li ng-class="{disabled: currentPage == 0}">
+      <a href ng-click="actionSetPage(currentPage-1)">« Prev</a>
+    </li>
+    <li ng-repeat="n in range(pageCount)" ng-class="{active: n == currentPage}" ng-click="actionSetPage(n)">
+      <a href>{{n+1}}</a>
+    </li>
+    <li ng-class="{disabled: currentPage >= pageCount - 1}">
+      <a href ng-click="actionSetPage(currentPage+1)">Next »</a>
+    </li>
+  </ul>
+  <div class="clearfix"></div>
   
-
-    <div ng-repeat="document in transformedDocuments | filter:filterCategory" style="
+  <div ng-repeat="document in transformedDocuments | filter:filterCategory" style="
     padding:10px 0 10px 0;">
-        <!--  {{document}} -->
-        <div class="result reference-result">
-           <table>
-            <tr>
-              <td rowspan="4" class="{{document.cssRecordClass}}" ></td>
-              <td colspan="2" style="padding:3px 0 0 0;margin:0;">
-                  <span class="{{document.cssClass}}">
-                    <div ng-switch on="document.schema" class="result">
-                          
-                          <a href="/database/record?documentID={{document.identifier_s}}" target="_new"
-                          class="pull-right" style="padding:0px 3px;color:#999;"><i class="glyphicon glyphicon-new-window"></i></a>
-
-                          <div ng-switch-when="MEASURE" class="national-record"> 
-                              <span class="rec-title">Legislative, administrative or policy measures</span>
-                              <span ng-show="document.jusrisdiction"><span >jusrisdiction:</span>  <span class="rowDetails">{{document.jusrisdiction}} </span></span>
-                              <span ng-show="document.type">| <span >type:</span>  <span class="rowDetails" > {{document.type}} </span></span>
-                              <span ng-show="document.status">| <span >Status:</span>  <span class="rowDetails" > {{document.status}} </span></span>
-                              <span ng-show="document.source">| <span >Country:</span>  <span class="rowDetails" > {{document.source}} </span></span>
-                          </div>
-                          <div ng-switch-when="AUTHORITY" class="national-record"> 
-                               <span class="rec-title">Competent National Authority</span>
-                               <span ng-show="document.source"><span >Country:</span>  <span class="rowDetails" > {{document.source}} </span></span>
-                              <span ng-show="document.responsibleForAll">| <span >responsible for all :</span>  <span class="rowDetails" > {{document.responsibleForAll | yesno}} </span></span>
-                              <span ng-show="document.grType">| <span >GR type :</span>  <span class="rowDetails" > {{document.grType}} </span></span>
-                              <span ng-show="document.jusrisdiction">| <span >jusrisdiction:</span>  <span class="rowDetails">{{document.jusrisdiction | lstring:locale}} </span></span>
-                          </div>
-                          <div ng-switch-when="ABSCHECKPOINT" class="national-record"> 
-                              <span class="rec-title">checkpoint</span>
-                              <!-- <span ng-show="document.informAllAuthorities">| <span >inform All Authorities :</span>  <span class="rowDetails" > {{document.informAllAuthorities | yesno}} </span></span> -->
-                              <span ng-show="document.source"><span >Country:</span>  <span class="rowDetails" > {{document.source}} </span></span>
-                              <span ng-show="document.jusrisdiction">| <span >jusrisdiction:</span>  <span class="rowDetails">{{document.jusrisdiction| lstring:locale}} </span></span>
-                          </div>
-                          <div ng-switch-when="ABSPERMIT" class="national-record"> 
-                              <span class="rec-title">Permit</span>                                     
-                              <span ng-show="document.usage"><span >usage:</span>  <span class="rowDetails" > {{document.usage| lstring:locale}} </span></span>
-                              <span ng-show="document.keywords">| <span >keywords:</span>  <span class="rowDetails">{{document.keywords| lstring:locale}} </span></span>
-                          </div>                                     
-                          <div ng-switch-when="ABSCHECKPOINTCOMMUNIQUE" class="national-record"> 
-                              <span class="rec-title">Checkpoint Communiqué</span>
-                              <span ng-show="document.originCountries">| <span >origin Countries:</span>  
-                              <span class="rowDetails" > {{document.originCountries| lstring:locale}}</span></span>
-                          </div>
-                           <div ng-switch-when="DATABASE" class="national-record"> 
-                              <span class="rec-title">National datasource</span>
-                              <span ng-show="document.source">
-                                <span >Country:</span>  <span class="rowDetails" > {{document.source}} </span>
-                              </span>
-                          </div>
-
-                          <div ng-switch-when="RESOURCE" class="reference-record"> 
-                              <span class="rec-title">virtual library record </span>
-
-                              <span ng-show="document.types"> <span >type:</span>  <span class="rowDetails" > {{document.types}} </span> 
-                              </span>
-
-                              <span ng-show="document.Year">| <span >Year:</span>  <span class="rowDetails" > {{document.Year}} </span> </span>
-
-                              <span ng-show="document.languages">|  <span >languages:</span>  <span class="rowDetails" > {{document.languages}} </span> </span>
-                              
-                              <span ng-show="document.Regions">| <span >countries:</span>  <span class="rowDetails" > {{document.Regions}} </span> </span>
-                          </div>
-                          <div ng-switch-when="MEETING" class="reference-record"> 
-                               <span class="rec-title">meeting</span>
-                              <span style="color:#666;font-weight:bold;" > | date </span> 
-                              <span style="color:#666;font-weight:bold;" > | city, country </span>
-                          </div>
-                          <div ng-switch-when="NOTIFICATION" class="reference-record"> 
-                               <span class="rec-title">notification</span>
-                              <span style="color:#666;font-weight:bold;" > | {{document.doc.reference_s}} </span> 
-                              <span style="color:#666;font-weight:bold;" > | {{formatDate(document.date_dt)}} </span> 
-                          </div>
-                          <div ng-switch-when="PRESS RELEASE" class="reference-record"> 
-                               <span class="rec-title">press release</span>
-                               <span style="color:#666;font-weight:bold;" > | {{formatDate(document.date_dt)}} </span> 
-                          </div>
-                          <div ng-switch-default class=" national-record"> 
-                            {{document.schema}}                                          
-                             <span ng-show="document.source">| <span >Country:</span><span class="rowDetails" > {{document.source}} </span></span>
-                          </div> 
-                    </div>                                        
-                  </span> 
-                </td>
-            </tr>
-            <tr>
-              <td style="padding:0;margin:0;padding-left:20px;padding-top:10px;">
-               <i ng-class="{'fa fa-caret-down':displayDetails, 'fa fa-caret-right':!displayDetails}" 
-                  style="font-size:11px;color:#999;position:relative; top:-1px;font-size:14px;"></i> 
-                <a ng-click="load(document); displayDetails = !displayDetails" class="title">
-                  &nbsp; {{document.title}}</a> 
-              </td>
-            </tr>
-            <tr>
-              <td style="padding:5px 10px 10px 10px;">
-                <div style="padding:0 0 0 20px;margin:0;" ng-hide="displayDetails" > 
-                    {{document.description}}
-                </div>
-                <div ng-show="displayDetails" record-loader document="document.data" 
-                hide="title;header;libraries" ></div>
-              </td>
-            </tr>
-          </table>
-        </div> <!-- end switch -->
-        <div class="clearfix"></div>
+    <!--  {{document}} -->
+    <div class="result reference-result">
+      <table>
+        <tr>
+          <td rowspan="4" class="{{document.cssRecordClass}}" ></td>
+          <td colspan="2" style="padding:3px 0 0 0;margin:0;">
+            <span class="{{document.cssClass}}">
+            <div ng-switch on="document.schema" class="result">
+              
+              <a href="/database/record?documentID={{document.identifier_s}}" target="_new"
+              class="pull-right" style="padding:0px 3px;color:#999;"><i class="glyphicon glyphicon-new-window"></i></a>
+              <div ng-switch-when="MEASURE" class="national-record">
+                <span class="rec-title">Legislative, administrative or policy measures</span>
+                <span ng-show="document.jusrisdiction"><span >jusrisdiction:</span>  <span class="rowDetails">{{document.jusrisdiction}} </span></span>
+                <span ng-show="document.type">| <span >type:</span>  <span class="rowDetails" > {{document.type}} </span></span>
+                <span ng-show="document.status">| <span >Status:</span>  <span class="rowDetails" > {{document.status}} </span></span>
+                <span ng-show="document.source">| <span >Country:</span>  <span class="rowDetails" > {{document.source}} </span></span>
+              </div>
+              <div ng-switch-when="AUTHORITY" class="national-record">
+                <span class="rec-title">Competent National Authority</span>
+                <span ng-show="document.source"><span >Country:</span>  <span class="rowDetails" > {{document.source}} </span></span>
+                <span ng-show="document.responsibleForAll">| <span >responsible for all :</span>  <span class="rowDetails" > {{document.responsibleForAll | yesno}} </span></span>
+                <span ng-show="document.grType">| <span >GR type :</span>  <span class="rowDetails" > {{document.grType}} </span></span>
+                <span ng-show="document.jusrisdiction">| <span >jusrisdiction:</span>  <span class="rowDetails">{{document.jusrisdiction | lstring:locale}} </span></span>
+              </div>
+              <div ng-switch-when="ABSCHECKPOINT" class="national-record">
+                <span class="rec-title">checkpoint</span>
+                <!-- <span ng-show="document.informAllAuthorities">| <span >inform All Authorities :</span>  <span class="rowDetails" > {{document.informAllAuthorities | yesno}} </span></span> -->
+                <span ng-show="document.source"><span >Country:</span>  <span class="rowDetails" > {{document.source}} </span></span>
+                <span ng-show="document.jusrisdiction">| <span >jusrisdiction:</span>  <span class="rowDetails">{{document.jusrisdiction| lstring:locale}} </span></span>
+              </div>
+              <div ng-switch-when="ABSPERMIT" class="national-record">
+                <span class="rec-title">Permit</span>
+                <span ng-show="document.usage"><span >usage:</span>  <span class="rowDetails" > {{document.usage| lstring:locale}} </span></span>
+                <span ng-show="document.keywords">| <span >keywords:</span>  <span class="rowDetails">{{document.keywords| lstring:locale}} </span></span>
+              </div>
+              <div ng-switch-when="ABSCHECKPOINTCOMMUNIQUE" class="national-record">
+                <span class="rec-title">Checkpoint Communiqué</span>
+                <span ng-show="document.originCountries">| <span >origin Countries:</span>
+                <span class="rowDetails" > {{document.originCountries| lstring:locale}}</span></span>
+              </div>
+              <div ng-switch-when="DATABASE" class="national-record">
+                <span class="rec-title">National datasource</span>
+                <span ng-show="document.source">
+                <span >Country:</span>  <span class="rowDetails" > {{document.source}} </span>
+                </span>
+              </div>
+              <div ng-switch-when="RESOURCE" class="reference-record">
+                <span class="rec-title">virtual library record </span>
+                <span ng-show="document.types"> <span >type:</span>  <span class="rowDetails" > {{document.types}} </span>
+                </span>
+                <span ng-show="document.Year">| <span >Year:</span>  <span class="rowDetails" > {{document.Year}} </span> </span>
+                <span ng-show="document.languages">|  <span >languages:</span>  <span class="rowDetails" > {{document.languages}} </span> </span>
+                <span ng-show="document.Regions">| <span >countries:</span>  <span class="rowDetails" > {{document.Regions}} </span> </span>
+              </div>
+              <div ng-switch-when="MEETING" class="reference-record">
+                <span class="rec-title">meeting</span>
+                <span style="color:#666;font-weight:bold;" > | date </span>
+                <span style="color:#666;font-weight:bold;" > | city, country </span>
+              </div>
+              <div ng-switch-when="NOTIFICATION" class="reference-record">
+                <span class="rec-title">notification</span>
+                <span style="color:#666;font-weight:bold;" > | {{document.doc.reference_s}} </span>
+                <span style="color:#666;font-weight:bold;" > | {{formatDate(document.date_dt)}} </span>
+              </div>
+              <div ng-switch-when="PRESS RELEASE" class="reference-record">
+                <span class="rec-title">press release</span>
+                <span style="color:#666;font-weight:bold;" > | {{formatDate(document.date_dt)}} </span>
+              </div>
+              <div ng-switch-default class=" national-record">
+                {{document.schema}}
+                <span ng-show="document.source">| <span >Country:</span><span class="rowDetails" > {{document.source}} </span></span>
+              </div>
+            </div>
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:0;margin:0;padding-left:20px;padding-top:10px;">
+            <i ng-class="{'fa fa-caret-down':displayDetails, 'fa fa-caret-right':!displayDetails}"
+            style="font-size:11px;color:#999;position:relative; top:-1px;font-size:14px;"></i>
+            <a ng-click="load(document); displayDetails = !displayDetails" class="title">
+            &nbsp; {{document.title}}</a>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:5px 10px 10px 10px;">
+            <div style="padding:0 0 0 20px;margin:0;" ng-hide="displayDetails" >
+              {{document.description}}
+            </div>
+            <div ng-show="displayDetails" record-loader document="document.data"
+            hide="title;header;libraries" ></div>
+          </td>
+        </tr>
+      </table>
+      </div> <!-- end switch -->
+      <div class="clearfix"></div>
     </div>
+
+    
     <!---Bottom pager-->
     <div class="clearfix"></div>
-      <ul class="pagination pull-right" ng-show='showPagination'>
-          <li ng-class="{disabled: currentPage == 0}">
-              <a href ng-click="actionSetPage(currentPage-1)">« Prev</a>
-          </li>
-          <li ng-repeat="n in range(pageCount)" ng-class="{active: n == currentPage}" ng-click="actionSetPage(n)">
-              <a href>{{n+1}}</a>
-          </li>
-          <li ng-class="{disabled: currentPage >= pageCount - 1}">
-              <a href ng-click="actionSetPage(currentPage+1)">Next »</a>
-          </li>
-      </ul>
+    <ul class="pagination pull-right" ng-show='showPagination'>
+      <li ng-class="{disabled: currentPage == 0}">
+        <a href ng-click="actionSetPage(currentPage-1)">« Prev</a>
+      </li>
+      <li ng-repeat="n in range(pageCount)" ng-class="{active: n == currentPage}" ng-click="actionSetPage(n)">
+        <a href>{{n+1}}</a>
+      </li>
+      <li ng-class="{disabled: currentPage >= pageCount - 1}">
+        <a href ng-click="actionSetPage(currentPage+1)">Next »</a>
+      </li>
+    </ul>
     
-</div>
+  </div>
