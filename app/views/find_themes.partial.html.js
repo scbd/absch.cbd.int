@@ -248,7 +248,7 @@ require('app').directive('searchFilterThemes', function ($http) {
                 return collection;
             }
 
-            $http.get('/api/v2013/thesaurus/domains/CBD-SUBJECTS/terms').success(function (data) {
+            $http.get('/api/v2013/thesaurus/domains/50616B56-12F3-4C46-BC43-2DFC26679177/terms').success(function (data) {
                 $scope.terms = thesaurus.buildTree(data);
 
                 $scope.termsMap   = flatten($scope.terms, {});
