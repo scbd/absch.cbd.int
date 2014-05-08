@@ -15,6 +15,8 @@ require('app').directive('searchFilterSchemas', function ($http) {
         controller : ['$scope', '$element', '$location', 'Thesaurus', "IStorage", "guid", "$q", "Enumerable", "$filter",
          function ($scope, $element, $location, Thesaurus, storage, guid, $q, Enumerable, $filter)
         {
+            $scope.showNationalFilters = true;
+            $scope.showReferenceFilters = true;
             $scope.expanded = false;
             $scope.selectedItems = [];
             $scope.facet = $scope.field.replace('_s', ''); // TODO: replace @field by @facet
