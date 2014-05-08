@@ -18,22 +18,28 @@
   color:#333;
   font-weight:bold;
   }
-  .recordsDiif{
-  background-color:#f0ad4e;
-  width:3px;
+  .referenceRecords{
+    background-color:#f0ad4e;
+    width:3px;
   }
-  .defaultDiif{
+  .nationalRecords{
   background-color:#287fcb;
   width:3px;
   }
-  .resourceRecords{display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;}
+  /*.resourceRecords{display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;}
   .meetingRecords{display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;}
   .notificationRecords{display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;}
   .pressReleaseRecords{display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;}
   .statementRecords{display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;}
-  .defaultRecords{display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#287fcb;}
+  .defaultRecords{display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#287fcb;}*/
   </style>
   <ul class="pagination pull-right" ng-show='showPagination'>
+    <li ng-class="disabled" >
+      <a href>  {{pageCount==0 ? 0 : currentPage+1 }} of {{pageCount}}</a>
+    </li>
+    <li ng-class="{disabled: currentPage == 0}">
+      <a href ng-click="actionSetPage(0)">First »</a>
+    </li>
     <li ng-class="{disabled: currentPage == 0}">
       <a href ng-click="actionSetPage(currentPage-1)">« Prev</a>
     </li>
@@ -42,6 +48,9 @@
     </li>
     <li ng-class="{disabled: currentPage >= pageCount - 1}">
       <a href ng-click="actionSetPage(currentPage+1)">Next »</a>
+    </li>
+    <li ng-class="{disabled: currentPage == pageCount - 1 || pageCount ==0}">
+      <a href ng-click="actionSetPage(pageCount - 1)">Last »</a>
     </li>
   </ul>
   <div class="clearfix"></div>
@@ -61,6 +70,7 @@
               class="pull-right" style="padding:0px 3px;color:#999;"><i class="glyphicon glyphicon-new-window"></i></a>
               <div ng-switch-when="MEASURE" class="national-record">
                 <span class="rec-title">Legislative, administrative or policy measures</span>
+                <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
                 <span ng-show="document.jusrisdiction"><span >jusrisdiction:</span>  <span class="rowDetails">{{document.jusrisdiction}} </span></span>
                 <span ng-show="document.type">| <span >type:</span>  <span class="rowDetails" > {{document.type}} </span></span>
                 <span ng-show="document.status">| <span >Status:</span>  <span class="rowDetails" > {{document.status}} </span></span>
@@ -68,6 +78,7 @@
               </div>
               <div ng-switch-when="AUTHORITY" class="national-record">
                 <span class="rec-title">Competent National Authority</span>
+                <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
                 <span ng-show="document.source"><span >Country:</span>  <span class="rowDetails" > {{document.source}} </span></span>
                 <span ng-show="document.responsibleForAll">| <span >responsible for all :</span>  <span class="rowDetails" > {{document.responsibleForAll | yesno}} </span></span>
                 <span ng-show="document.grType">| <span >GR type :</span>  <span class="rowDetails" > {{document.grType}} </span></span>
@@ -75,28 +86,33 @@
               </div>
               <div ng-switch-when="ABSCHECKPOINT" class="national-record">
                 <span class="rec-title">checkpoint</span>
+                <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
                 <!-- <span ng-show="document.informAllAuthorities">| <span >inform All Authorities :</span>  <span class="rowDetails" > {{document.informAllAuthorities | yesno}} </span></span> -->
                 <span ng-show="document.source"><span >Country:</span>  <span class="rowDetails" > {{document.source}} </span></span>
                 <span ng-show="document.jusrisdiction">| <span >jusrisdiction:</span>  <span class="rowDetails">{{document.jusrisdiction| lstring:locale}} </span></span>
               </div>
               <div ng-switch-when="ABSPERMIT" class="national-record">
                 <span class="rec-title">Permit</span>
+                <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
                 <span ng-show="document.usage"><span >usage:</span>  <span class="rowDetails" > {{document.usage| lstring:locale}} </span></span>
                 <span ng-show="document.keywords">| <span >keywords:</span>  <span class="rowDetails">{{document.keywords| lstring:locale}} </span></span>
               </div>
               <div ng-switch-when="ABSCHECKPOINTCOMMUNIQUE" class="national-record">
                 <span class="rec-title">Checkpoint Communiqué</span>
+                <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
                 <span ng-show="document.originCountries">| <span >origin Countries:</span>
                 <span class="rowDetails" > {{document.originCountries| lstring:locale}}</span></span>
               </div>
               <div ng-switch-when="DATABASE" class="national-record">
                 <span class="rec-title">National datasource</span>
+                <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
                 <span ng-show="document.source">
                 <span >Country:</span>  <span class="rowDetails" > {{document.source}} </span>
                 </span>
               </div>
               <div ng-switch-when="RESOURCE" class="reference-record">
                 <span class="rec-title">virtual library record </span>
+                <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
                 <span ng-show="document.types"> <span >type:</span>  <span class="rowDetails" > {{document.types}} </span>
                 </span>
                 <span ng-show="document.Year">| <span >Year:</span>  <span class="rowDetails" > {{document.Year}} </span> </span>
@@ -105,20 +121,30 @@
               </div>
               <div ng-switch-when="MEETING" class="reference-record">
                 <span class="rec-title">meeting</span>
+                <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
                 <span style="color:#666;font-weight:bold;" > | date </span>
                 <span style="color:#666;font-weight:bold;" > | city, country </span>
               </div>
               <div ng-switch-when="NOTIFICATION" class="reference-record">
                 <span class="rec-title">notification</span>
+                <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
                 <span style="color:#666;font-weight:bold;" > | {{document.doc.reference_s}} </span>
                 <span style="color:#666;font-weight:bold;" > | {{formatDate(document.date_dt)}} </span>
               </div>
-              <div ng-switch-when="PRESS RELEASE" class="reference-record">
+             <!--  <div ng-switch-when="PRESSRELEASE" class="reference-record">
                 <span class="rec-title">press release</span>
+                <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
                 <span style="color:#666;font-weight:bold;" > | {{formatDate(document.date_dt)}} </span>
+              </div> -->
+
+              <div ng-switch-when="FOCALPOINT" class="national-record">
+                <span class="rec-title">{{document.schema}}</span>
+                <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
+                <span ng-show="document.source">| <span >Country:</span><span class="rowDetails" > {{document.source}} </span></span>
               </div>
-              <div ng-switch-default class=" national-record">
-                {{document.schema}}
+              <div ng-switch-default class="reference-record">
+                <span class="rec-title">{{document.schema}}</span>
+                <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
                 <span ng-show="document.source">| <span >Country:</span><span class="rowDetails" > {{document.source}} </span></span>
               </div>
             </div>
@@ -151,15 +177,24 @@
     <!---Bottom pager-->
     <div class="clearfix"></div>
     <ul class="pagination pull-right" ng-show='showPagination'>
-      <li ng-class="{disabled: currentPage == 0}">
-        <a href ng-click="actionSetPage(currentPage-1)">« Prev</a>
-      </li>
-      <li ng-repeat="n in range(pageCount)" ng-class="{active: n == currentPage}" ng-click="actionSetPage(n)">
-        <a href>{{n+1}}</a>
-      </li>
-      <li ng-class="{disabled: currentPage >= pageCount - 1}">
-        <a href ng-click="actionSetPage(currentPage+1)">Next »</a>
-      </li>
+        <li ng-class="disabled" >
+          <a href>  {{pageCount==0 ? 0 : currentPage+1 }} of {{pageCount}}</a>
+        </li>
+        <li ng-class="{disabled: currentPage == 0}">
+          <a href ng-click="actionSetPage(0)">First »</a>
+        </li>
+        <li ng-class="{disabled: currentPage == 0}">
+          <a href ng-click="actionSetPage(currentPage-1)">« Prev</a>
+        </li>
+        <li ng-repeat="n in range(pageCount)" ng-class="{active: n == currentPage}" ng-click="actionSetPage(n)">
+          <a href>{{n+1}}</a>
+        </li>
+        <li ng-class="{disabled: currentPage >= pageCount - 1}">
+          <a href ng-click="actionSetPage(currentPage+1)">Next »</a>
+        </li>
+        <li ng-class="{disabled: currentPage == pageCount - 1 || pageCount ==0}">
+          <a href ng-click="actionSetPage(pageCount - 1)">Last »</a>
+        </li>
     </ul>
     
   </div>

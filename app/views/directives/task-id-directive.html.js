@@ -66,7 +66,7 @@ require('app').directive('taskId', function () {
 
 
 						 $scope.$watch('loadTaskData', function (newValue, oldValue) { 
-                    //console.log(newValue);
+                    console.log(newValue);
 		                    if(newValue != undefined && newValue != oldValue);
 							{
 								load();

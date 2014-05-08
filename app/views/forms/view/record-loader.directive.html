@@ -23,18 +23,29 @@
 			<div view-database ng-switch-when="database" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}  hide={{hide}}></div>
 			
 			<div view-resource ng-switch-when="resource" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}} hide={{hide}}></div>
-			<div view-organization	ng-switch-when="organization" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
-			<div view-measure ng-switch-when="measure" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
-			<div view-abs-checkpoint ng-switch-when="absCheckpoint" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
-			<div view-abs-checkpoint-communique ng-switch-when="absCheckpointCommunique" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
-			<div view-abs-permit ng-switch-when="absPermit"	 ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
-			<div view-focal-point ng-switch-when="focalPoint" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
-			<div view-meeting ng-switch-when="meeting" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>		
 			
+			<div view-organization	ng-switch-when="organization" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
+			
+			<div view-measure ng-switch-when="measure" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
+			
+			<div view-abs-checkpoint ng-switch-when="absCheckpoint" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
+			
+			<div view-abs-checkpoint-communique ng-switch-when="absCheckpointCommunique" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
+			
+			<div view-abs-permit ng-switch-when="absPermit"	 ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
+			
+			<div view-focal-point ng-switch-when="focalPoint" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
+			
+			<div view-meeting ng-switch-when="meeting" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>	
+
+			<div view-notification ng-switch-when="notification" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
+			
+			<div view-press-release ng-switch-when="pressRelease" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
+			
+			<div view-statement ng-switch-when="statement" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>				
 
 			<div ng-switch-default>
-				<div class="text-center"><h1 style="color:#fa6938"><i class="fa fa-spinner fa-spin"></i></h1></div>
-					
+				<div class="text-center"><h1 style="color:#fa6938"><i class="fa fa-spinner fa-spin"></i></h1></div>					
 			</div>
 		</div>
 	</div>
