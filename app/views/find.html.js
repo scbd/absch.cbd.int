@@ -53,66 +53,6 @@ require('app').controller('FindController', ['$scope', '$rootScope', '$http', '$
     $scope.displayDetails = false;
     $scope.rawDocs = [];
 
-    $scope.load = function(item) {
-
-        if(item.data)
-            return;
-
-      item.data = {'schema':item.schema, 'url_ss': item.url_ss, 'data': item};
-        $http.get("/api/v2013/documents/"+item.identifier_s).then(function (result) {  
-            item.data = result.data;
-
-            $http.get("/api/v2013/documents/"+item.identifier_s + "?info").then(function (result) {  
-                item.data.info = result.data;
-            });
-
-        });
-
-    }
-
-
-    // if($location.search().q) {
-    //     $scope.keywords = $location.search().q;
-    //     $location.replace();
-    //     $location.search({});
-    // }
-
-    // $scope.fixHtml = function (htmlText) {
-    //     htmlText = (htmlText || "").replace(/\r\n/g, '<br>')
-    // 	htmlText = (htmlText || "").replace(/href="\//g, 'href="http://www.cbd.int/')
-    // 	htmlText = (htmlText || "").replace(/href='\//g, "href='http://www.cbd.int/");
-
-    // 	var qHtml = $('<div/>').html(htmlText);
-
-    // 	qHtml.find("script,style").remove();
-
-    // 	return qHtml.html();
-    // };
-
-    // $scope.fixUrl = function (url) {
-    //     if(url) {
-    //              if(url.indexOf( "http://chm.cbd.int/")==0) url = url.substr("http://chm.cbd.int".length);
-    //         else if(url.indexOf("https://chm.cbd.int/")==0) url = url.substr("https://chm.cbd.int".length);
-    //     }
-
-    //     return url;
-    // }
-
-
-    // function readFacets(solrArray) {
-
-    //     var facets = [];
-
-    //     for (var i = 0; i < solrArray.length; i += 2) {
-
-    //         var facet = JSON.parse(solrArray[i]);
-
-    //         facets.push({ symbol: facet.symbol, title: facet.en, count: solrArray[i + 1] });
-    //     }
-
-    //     return facets;
-    // };         
-
 
     function readFacets2(solrArray) {
 

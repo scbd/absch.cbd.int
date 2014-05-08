@@ -50,6 +50,30 @@ define(["app"], function (app) {
 	//
 	// 
 	//
+	//============================================================	
+	app.filter("formatDate", function(){
+		return function(date,formart){	
+			if(formart== undefined)
+				formart = 'MMMM Do YYYY';		
+			return moment(date).format(formart);
+		}
+	});
+
+	//============================================================
+	//
+	// 
+	//
+	//============================================================	
+	app.filter("stringToJSON", function(){
+		return function(strValue){					
+			return JSON.parse(strValue);
+		}
+	});
+
+	//============================================================
+	//
+	// 
+	//
 	//============================================================
 	app.filter("lstring", function() {
 		return lstring;

@@ -30,17 +30,40 @@ require('app').directive('documentList', function ($http) {
               $scope.descriptionLimit = 50;
 
                 $scope.load = function(item) {
-                 console.log(item);
-                      item.data = {'schema':item.schema, 'url_ss': item.url_ss, 'data': []};
-                        $http.get("/api/v2013/documents/"+item.identifier_s).then(function (result) {  
-                            item.data = result.data;
-                           
-                            $http.get("/api/v2013/documents/"+item.identifier_s + "?info").then(function (result) {  
-                                item.data.info = result.data;
-                            });
+                 //console.log(item);                     
+                       item.data = {'schema':item.schema, 'url_ss': item.url_ss, 'data': item};
+                        console.log(item.schema);
+                        if(item.schema=="FOCALPOINT" || item.schema=="MEETING")
+                        {
+                          var queryFields = 'fl=identifier_s,schema_s,createdDate_dt,createdByEmail_s,createdBy_s,updatedDate_dt,updatedByEmail_s,updatedBy_s,url_ss,';
 
-                        });
+                          if(item.schema=="FOCALPOINT"){
+                              queryFields += 'description_EN_t,government_EN_t,organization_EN_t,text_EN_txt,title_EN_t,treaty_CEN_ss,type_CEN_ss';
+                          }
+                          else if (item.schema=="MEETING"){
+                            queryFields += 'symbol_s,startDate_dt,endDate_dt,eventCountry_CEN_s,title_s,eventCity_s,text_EN_txt,themes_CEN_ss,thematicAreas_CEN_ss,thematicAreas_ss';
+                          }
 
+                            $http.get("/api/v2013/index/select?" + queryFields + "&q=id:"+item.id)
+                                 .then(function (result) { 
+
+                                    item.data = result.data.response.docs[0]; 
+                                    item.data.info=[];
+                                    console.log(item.data.schema_s);
+                                    item.data.header = {'schema':item.data.schema_s};                                  
+                                 });
+                        }
+                        else
+                        {
+                              $http.get("/api/v2013/documents/"+item.identifier_s).then(function (result) {  
+                                  item.data = result.data;
+
+                                  $http.get("/api/v2013/documents/"+item.identifier_s + "?info").then(function (result) {  
+                                      item.data.info = result.data;
+                                  });
+
+                              });
+                          }
                     }
 
                 $scope.filterCategory = function(item) {
@@ -97,9 +120,10 @@ require('app').directive('documentList', function ($http) {
                      if (newValue != oldValue) 
                      {     
                         $scope.pageCount = Math.ceil($scope.documentCount / $scope.itemsPerPage);
-                       
+                       console.log('transform doc');
                        $scope.transformedDocuments = [];                                                     
-                       $scope.documents.forEach(function (doc) {                       
+                       $scope.documents.forEach(function (doc) {  
+
                            $scope.transformedDocuments.push(transformDocument(doc));
                         });
                                        

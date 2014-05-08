@@ -13,7 +13,7 @@ require.config({
         'bootstrap'       : '../libs/bootstrap/dist/js/bootstrap',
         'underscore'      : '../libs/underscore/underscore',
         'linqjs'          : '../libs/linqjs/linq',
-        'moment'          : '../libs/moment/min/moment-with-langs.min',
+        'moment'          : '../libs/momentjs/min/moment-with-langs.min',
         'bootstrap-datepicker'  : '../libs/bootstrap-datepicker/js/bootstrap-datepicker',
         'angular-loading-bar'   : '../libs/angular-loading-bar/src/loading-bar',
         'angular-animate'       : '../libs/angular-animate/angular-animate.min',
@@ -34,7 +34,7 @@ require.config({
 
 require(['angular', 'angular-route', 'angular-cookies', 'bootstrap', 'domReady', 
     'bootstrap-datepicker','angular-loading-bar', 'angular-animate',
-    'dragAndDrop'/*, 'main'*/], function (ng) {
+    'dragAndDrop','moment'/*, 'main'*/], function (ng) {
 
     // NOTE: place operations that need to initialize prior to app start here using the `run` function on the top-level module
 
