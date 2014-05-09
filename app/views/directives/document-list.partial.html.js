@@ -195,6 +195,7 @@ require('app').directive('documentList', function ($http) {
                         output.Languages = getString(document.languages_CEN_ss, locale);
                         output.cssClass="resourceRecords";
                         output.cssRecordClass="recordsDiif";
+
                     }
                      if(document.schema_s=='statement') {
                         output.cssClass="statementRecords";
@@ -239,6 +240,7 @@ require('app').directive('documentList', function ($http) {
                         output.originCountries = (document.originCountries_CEN_ss);
                         output.cssClass="cpcRecords";
                         output.cssRecordClass="defaultDiif";
+                        output.doc = document;
                     }
                     if(document.schema_s=='measure') {
                         //output.originCountries = (document.originCountries_CEN_ss);

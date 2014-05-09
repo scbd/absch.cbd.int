@@ -61,10 +61,10 @@
               class="pull-right" style="padding:0px 3px;color:#999;"><i class="glyphicon glyphicon-new-window"></i></a>
               <div ng-switch-when="MEASURE" class="national-record">
                 <span class="rec-title">Legislative, administrative or policy measures</span>
-                <span ng-show="document.jusrisdiction"><span >jusrisdiction:</span>  <span class="rowDetails">{{document.jusrisdiction}} </span></span>
+                <span ng-show="document.source"><span >Country:</span>  <span class="rowDetails" > {{document.source}} </span></span>
+                <span ng-show="document.jusrisdiction">| <span >jusrisdiction:</span>  <span class="rowDetails">{{document.jusrisdiction}} </span></span>
                 <span ng-show="document.type">| <span >type:</span>  <span class="rowDetails" > {{document.type}} </span></span>
                 <span ng-show="document.status">| <span >Status:</span>  <span class="rowDetails" > {{document.status}} </span></span>
-                <span ng-show="document.source">| <span >Country:</span>  <span class="rowDetails" > {{document.source}} </span></span>
               </div>
               <div ng-switch-when="AUTHORITY" class="national-record">
                 <span class="rec-title">Competent National Authority</span>
@@ -75,17 +75,23 @@
               </div>
               <div ng-switch-when="ABSCHECKPOINT" class="national-record">
                 <span class="rec-title">checkpoint</span>
-                <!-- <span ng-show="document.informAllAuthorities">| <span >inform All Authorities :</span>  <span class="rowDetails" > {{document.informAllAuthorities | yesno}} </span></span> -->
                 <span ng-show="document.source"><span >Country:</span>  <span class="rowDetails" > {{document.source}} </span></span>
+                <span ng-show="document.informAllAuthorities">| <span >inform All Authorities :</span>  <span class="rowDetails" > {{document.informAllAuthorities | yesno}} </span></span>
                 <span ng-show="document.jusrisdiction">| <span >jusrisdiction:</span>  <span class="rowDetails">{{document.jusrisdiction| lstring:locale}} </span></span>
               </div>
               <div ng-switch-when="ABSPERMIT" class="national-record">
                 <span class="rec-title">Permit</span>
-                <span ng-show="document.usage"><span >usage:</span>  <span class="rowDetails" > {{document.usage| lstring:locale}} </span></span>
+                <span ng-show="document.source">
+                <span >Country:</span>  <span class="rowDetails" > {{document.source}} </span>
+                </span>
+                <span ng-show="document.usage">| <span >usage:</span>  <span class="rowDetails" > {{document.usage| lstring:locale}} </span></span>
                 <span ng-show="document.keywords">| <span >keywords:</span>  <span class="rowDetails">{{document.keywords| lstring:locale}} </span></span>
               </div>
               <div ng-switch-when="ABSCHECKPOINTCOMMUNIQUE" class="national-record">
                 <span class="rec-title">Checkpoint Communiqué</span>
+                <span ng-show="document.source">
+                <span >Country:</span>  <span class="rowDetails" > {{document.source}} </span>
+                </span>
                 <span ng-show="document.originCountries">| <span >origin Countries:</span>
                 <span class="rowDetails" > {{document.originCountries| lstring:locale}}</span></span>
               </div>

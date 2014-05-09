@@ -1,9 +1,11 @@
 <ul class="blaise btn" style="clear:none;">
   <li class="dropdown">
     <a class="btn dropdown-toggle"
-       data-toggle="dropdown"
+       data-toggle="dropdown" style="color:#111;" 
        href="#">
-        {{title}}
+            <span ng-hide="since || until"> {{title}} </span>
+            <span ng-show="since"><span style="color:#428BCA">since:</span> {{since}} </span>
+            <span ng-show="until"><span style="color:#428BCA">until:</span> {{until}} </span>
         <b class="caret"></b>
       </a>
     <ul class="dropdown-menu" style="width:300px">
