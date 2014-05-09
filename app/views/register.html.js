@@ -150,6 +150,29 @@ require("app", "dragAndDrop").controller("RegisterController",
 		});
 	}
 
+	function refreshRecords(){
+		var currentTab = $scope.tab();
+
+		//remove tab details from isLoded array which is used to avoid reload of records on tab change.
+		$scope.isLoaded.splice($.inArray(currentTab,$scope.isLoaded),1);
+
+		//remove records for the current tab from records array and refetch from server.
+		// var currentTabRecords = _.where($scope.records, {"type": currentTab})
+		// console.log(currentTabRecords)
+		debugger;
+		// $scope.records.forEach(function(row){
+		// 	console.log(row);
+
+		// 	if(row.type==currentTab)
+		// 		$scope.records.splice($.inArray(row,$scope.records),1);
+		// });
+	$scope.records =_.reject($scope.records, function(record){
+							return record.type== currentTab;
+					});
+
+		loadRecords($scope.tab());
+	}
+
 	// loadRecords();
 
 	//============================================================
@@ -301,6 +324,7 @@ require("app", "dragAndDrop").controller("RegisterController",
 		evt.stopPropagation();
 		$scope.editing = false;
 		$scope.msg = "Your record has been closed without saving.";
+
 		
 	});
 
@@ -310,8 +334,8 @@ require("app", "dragAndDrop").controller("RegisterController",
 	//
 	//============================================================
 	$scope.$on("documentDraftSaved", function(evt, draftInfo) {
-		
-		loadRecords();
+		//debugger;
+		refreshRecords();
 		evt.stopPropagation();
 		$scope.editing = false;
 		$scope.msg = "Your record has been saved as a draft.";
@@ -325,7 +349,7 @@ require("app", "dragAndDrop").controller("RegisterController",
 	//============================================================
 	$scope.$on("documentPublishRequested", function(evt, workflowInfo){
 		
-		loadRecords();
+		refreshRecords();
 		evt.stopPropagation();
 		$scope.editing = false;
 		$scope.msg = "Record saved. A publishing request has been sent to your Publishing Authority.";
@@ -340,7 +364,7 @@ require("app", "dragAndDrop").controller("RegisterController",
 	//============================================================
 	$scope.$on("documentPublished", function(evt, documentInfo){
 		
-		loadRecords();
+		refreshRecords();
 		evt.stopPropagation();
 		$scope.editing = false;
 		$scope.msg = "Record published.";
@@ -355,8 +379,7 @@ require("app", "dragAndDrop").controller("RegisterController",
 	//
 	//============================================================
 	$scope.$on("documentDeleted", function(evt){
-		
-		loadRecords();
+		refreshRecords();
 		evt.stopPropagation();
 		$scope.editing = false;
 		$scope.msg = "Record deleted.";
