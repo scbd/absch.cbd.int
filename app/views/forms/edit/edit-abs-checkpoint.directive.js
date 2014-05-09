@@ -16,6 +16,14 @@ require("app").directive("editAbsCheckpoint", [ function () {
 				countries		: function () { return $http.get("/api/v2013/thesaurus/domains/countries/terms",							{ cache: true }).then(function(o){ return $filter("orderBy")(o.data, "name"); }); },
 				jurisdictions	: function () { return $http.get("/api/v2013/thesaurus/domains/D7BD5BDE-A6B9-4261-B788-16839CCC4F7E/terms",	{ cache: true }).then(function(o){ return o.data; }); }
 			};
+			
+			//==================================
+			//
+			//==================================
+			$scope.scrollToTop = function() {
+        		$("body, html").animate({scrollTop: 0}, "slow");
+      		};
+
 
 			//==================================
 			//
