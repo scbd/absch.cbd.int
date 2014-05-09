@@ -35,6 +35,7 @@ require('app')
             $scope.$watch('since', updateQuery);
             $scope.$watch('until', updateQuery);
 
+
             function updateQuery () {
 
                 if($scope.since || $scope.until) {

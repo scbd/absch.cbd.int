@@ -12,17 +12,17 @@
         <div ng-show="measure.selected" class="subfilters-section">
             <div km-select multiple ng-model="msrJurisdiction" binding-type="string" placeholder="Jurisdictions" items="options.jurisdiction()"></div>
             <br>
-            <div km-select multiple ng-model="msrStatus" binding-type="string" placeholder="Status" items="options.status()"></div>
-            <br>
+            <!-- <div km-select multiple ng-model="msrStatus" binding-type="string" placeholder="Status" items="options.status()"></div>
+            <br> -->
             <div km-select multiple ng-model="msrType" binding-type="string" placeholder="Types" items="options.typeOfDocuments()"></div>
-            <br>
+            <!-- <br>
             <div search-filter-dates title='Date of Adoption' query='msrAdoptionDate' field="adoption_s"></div>
             <br>
             <div search-filter-dates title='Date of Retirement' query='msrRetirementDate' field="retired_s"></div>
             <br>
             <div search-filter-dates title='Entry into Force' query='msrEntryinForceDate' field="entryIntoForce_s"></div>
             <br>
-            <div search-filter-dates title='Date of application' query='mssApplicationDate' field="limitedApplication_s"></div>
+            <div search-filter-dates title='Date of application' query='mssApplicationDate' field="limitedApplication_s"></div> -->
         </div>
     </div>
 
@@ -74,8 +74,8 @@
             <input type="checkbox" ng-model="absCheckpoint.selected" bind-indeterminate="absCheckpoint.indeterminate" ng-change="refresh(absCheckpoint.selected)">Checkpoints ({{absCheckpoint.count}})
         </label>
         <div ng-show="absCheckpoint.selected" class="subfilters-section">
-            <span km-toggle placeholder="Inform all authorities" ng-model="cpInformAllAuthorities"></span>
-            <br>
+            <!-- <span km-toggle placeholder="Inform all authorities" ng-model="cpInformAllAuthorities"></span>
+            <br> -->
             <span km-select multiple ng-model="cpJurisdiction" binding-type="string" placeholder="Jurisdictions" items="options.absJurisdictions()"></span>
         </div>
     </div>
@@ -84,9 +84,9 @@
         <label>
             <input type="checkbox" ng-model="absCheckpointCommunique.selected" bind-indeterminate="absCheckpointCommunique.indeterminate" ng-change="refresh(absCheckpointCommunique.selected)">Checkpoint Communiqués ({{absCheckpointCommunique.count}})
         </label>
-        <div ng-show="absCheckpointCommunique.selected" class="subfilters-section">
+        <!-- <div ng-show="absCheckpointCommunique.selected" class="subfilters-section">
             <div km-select multiple required name="cpcoriginCountries" binding-type="string" ng-model="cpcoriginCountries" items="options.countries()" placeholder="Origin Countries"></div>
-        </div>
+        </div> -->
     </div>
 
 
