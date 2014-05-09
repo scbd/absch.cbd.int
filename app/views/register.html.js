@@ -63,14 +63,14 @@ require("app", "dragAndDrop").controller("RegisterController",
 	// 
 	//
 	//============================================================
-	function loadRecords()
+	function loadRecords(schema)
 	{
 		if(!$rootScope.user.isAuthenticated)
 			return $scope.records = null;
 
 		var qAnd = [];
-
-		qAnd.push("(type eq '"+schemaTypes.join("' or type eq '") + "')");
+// "+schemaTypes.join("' or type eq '") + "
+		qAnd.push("(type eq '" + schema + "')");
 
 		var qDocuments = storage.documents.query(qAnd.join(" and ")||undefined);
 		var qDrafts    = storage.drafts   .query(qAnd.join(" and ")||undefined);
@@ -89,7 +89,7 @@ require("app", "dragAndDrop").controller("RegisterController",
 		});
 	}
 
-	loadRecords();
+	//loadRecords();
 
 	//============================================================
 	//
@@ -340,6 +340,8 @@ require("app", "dragAndDrop").controller("RegisterController",
 	});
 
 	$scope.$watch('tab()', function(value) {
+
+		loadRecords(value)
 		if(value=='authority'              ) 
 			require(['../views/forms/view/view-authority.directive',
 		             '../views/forms/edit/edit-authority.directive',               
@@ -347,11 +349,22 @@ require("app", "dragAndDrop").controller("RegisterController",
 		                 function() { $scope.authorityReady = true; });
 		
 
+		if(value=='absCheckpoint'          )
+		{
+			require(['../views/forms/view/view-abs-checkpoint.directive',
+			         '../views/forms/edit/edit-abs-checkpoint.directive'],
+			         function() {
 
-		if(value=='absCheckpoint'          ) require(['../views/forms/view/view-abs-checkpoint.directive',            '../views/forms/edit/edit-abs-checkpoint.directive'],            function() { $scope.absCheckpointReady = true; });
+console.log(value);
+			          $scope.absCheckpointReady = true; });
+		}
 		if(value=='absCheckpointCommunique') require(['../views/forms/view/view-abs-checkpoint-communique.directive', '../views/forms/edit/edit-abs-checkpoint-communique.directive'], function() { $scope.absCheckpointCommuniqueReady = true; });
 		if(value=='absPermit'              ) require(['../views/forms/view/view-abs-permit.directive',                '../views/forms/edit/edit-abs-permit.directive'],                function() { $scope.absPermitReady = true; });
-		if(value=='database'               ) require(['../views/forms/view/view-database.directive',                  '../views/forms/edit/edit-database.directive'],                  function() { $scope.databaseReady = true; });
+		if(value=='database'               ) require(['../views/forms/view/view-database.directive',                  '../views/forms/edit/edit-database.directive'],                  
+						function() {
+							console.log(value);
+							$rootScope.$apply();
+							 $scope.databaseReady = true; });
 		if(value=='measure'                ) require(['../views/forms/view/view-measure.directive',                   '../views/forms/edit/edit-measure.directive'],                   function() { $scope.measureReady = true; });
 		if(value=='resource'               ) require(['../views/forms/view/view-resource.directive',                  '../views/forms/edit/edit-resource.directive'],                  function() { $scope.resourceReady = true; });
 	})
