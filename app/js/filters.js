@@ -64,6 +64,18 @@ define(["app"], function (app) {
 	// 
 	//
 	//============================================================	
+	app.filter("formatDateWithTime", function(){
+		return function(date,formart){	
+			if(formart== undefined)
+				formart = 'MMM Do YYYY hh:mm';		
+			return moment(date).format(formart);
+		}
+	});
+	//============================================================
+	//
+	// 
+	//
+	//============================================================	
 	app.filter("stringToJSON", function(){
 		return function(strValue){					
 			return JSON.parse(strValue);

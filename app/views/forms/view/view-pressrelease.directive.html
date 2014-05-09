@@ -1,26 +1,19 @@
 <div id="Record" class="record panel panel-default">		
-	<div class="panel-heading">Nation Focal Point</div>
+	<div class="panel-heading">Statement</div>
 	<div class="record-body panel-body">
 		
 
-		<div ng-show="document.description_EN_t">
-			<label>Description</label>
+		<div ng-show="document.symbol_s">
+			<label>Symbol</label>
 			<span class="km-value">
-				{{document.description_EN_t}}
+				{{document.symbol_s}}
 			</span>
 		</div>
 
-		<div ng-show="document.government_EN_t">
-			<label>Country</label>
+		<div ng-show="document.date_s">
+			<label>Date</label>
 			<span class="km-value">
-				{{document.government_EN_t}}
-			</span>
-		</div>
-
-		<div ng-show="document.organization_EN_t">
-			<label>Organization</label>
-			<span class="km-value">
-				{{document.organization_EN_t}}
+				{{document.date_s}}
 			</span>
 		</div>
 
@@ -31,21 +24,40 @@
 			</span>
 		</div>
 
-		<div ng-show="document.text_EN_txt">
+		<div ng-show="document.description_EN_t">
+			<label>Description</label>
+			<span class="km-value">
+				{{document.description_EN_t}}
+			</span>
+		</div>
+
+		<!-- <div ng-show="document.text_EN_txt">
 			<label>Text</label>
 			<span class="km-value">
 				{{document.text_EN_txt | lstring:locale}}
 			</span>
 		</div>
-
-		<div ng-show="document.treaty_CEN_ss">
-			<label>Treaties</label>	
+		 -->
+<!-- 
+		<div ng-show="document.themes_CEN_ss">
+			<label>Themes</label>	
 			<div class="km-value" >
 				<ul class="list">
-					<li ng-repeat="item in document.treaty_CEN_ss">{{item |stringToJSON | lstring:locale}}</li>
+					<li ng-repeat="item in document.themes_CEN_ss">{{item |stringToJSON | lstring:locale}}</li>
+				</ul>
+			</div>
+		</div> -->
+
+		<div ng-show="document.thematicAreas_CEN_ss">
+			<label>Thematic Areas</label>	
+			<div class="km-value" >
+				<ul class="list">
+					<li ng-repeat="item in document.thematicAreas_CEN_ss">{{item |stringToJSON | lstring:locale}}</li>
 				</ul>
 			</div>
 		</div>
+
+		
 		<div ng-show="document.url_ss">
 			<label>Meeting Link</label>
 			<span class="km-value">
@@ -63,7 +75,7 @@
 				</div>		
 				<div ng-show="document.createdDate_dt" class="col-xs-2">
 						<label>Published on:</label>
-						<div>{{document.createdDate_dt}}</div>
+						<div>{{document.createdDate_dt | formatDateWithTime}}</div>
 				</div>
 
 				<div ng-show="document.updatedBy && document.updatedDate_dt != document.createdDate_dt"  class="col-xs-3">
@@ -72,7 +84,7 @@
 				</div>
 				<div ng-show="document.updatedBy && document.updatedDate_dt != document.createdDate_dt"  class="col-xs-2">
 						<label>Last updated on:</label>
-						<div>{{document.updatedDate_dt}}</div>
+						<div>{{document.updatedDate_dt | formatDateWithTime}}</div>
 				</div>
 				<div ng-show="document.identifier_s"  class="col-xs-2">
 						<label>record identifier</label>

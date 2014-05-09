@@ -32,26 +32,36 @@ require('app').directive('documentList', function ($http) {
                 $scope.load = function(item) {
                  //console.log(item);                     
                        item.data = {'schema':item.schema, 'url_ss': item.url_ss, 'data': item};
-                        console.log(item.schema);
-                        if(item.schema=="FOCALPOINT" || item.schema=="MEETING")
+                        
+                        if(item.schema=="FOCALPOINT" || item.schema=="MEETING" || item.schema=="NOTIFICATION"
+                           || item.schema=="PRESSRELEASE" || item.schema=="STATEMENT")
                         {
-                          var queryFields = 'fl=identifier_s,schema_s,createdDate_dt,createdByEmail_s,createdBy_s,updatedDate_dt,updatedByEmail_s,updatedBy_s,url_ss,';
+                              var queryFields = 'fl=identifier_s,schema_s,createdDate_dt,createdByEmail_s,createdBy_s,updatedDate_dt,updatedByEmail_s,updatedBy_s,url_ss,';
 
-                          if(item.schema=="FOCALPOINT"){
-                              queryFields += 'description_EN_t,government_EN_t,organization_EN_t,text_EN_txt,title_EN_t,treaty_CEN_ss,type_CEN_ss';
-                          }
-                          else if (item.schema=="MEETING"){
-                            queryFields += 'symbol_s,startDate_dt,endDate_dt,eventCountry_CEN_s,title_s,eventCity_s,text_EN_txt,themes_CEN_ss,thematicAreas_CEN_ss,thematicAreas_ss';
-                          }
+                              if(item.schema=="FOCALPOINT"){
+                                  queryFields += 'description_EN_t,government_EN_t,organization_EN_t,text_EN_txt,title_EN_t,treaty_CEN_ss,type_CEN_ss';
+                              }
+                              else if (item.schema=="MEETING"){
+                                queryFields += 'symbol_s,startDate_dt,endDate_dt,eventCountry_CEN_s,title_s,eventCity_s,text_EN_txt,themes_CEN_ss,thematicAreas_CEN_ss,thematicAreas_ss';
+                              }
+                              else if (item.schema=="NOTIFICATION"){
+                                queryFields += 'date_s,deadline_s,symbol_s,reference_s,sender_s,schema_CEN_s,title_EN_t,description_EN_t,recipient_ss,url_ss,text_EN_txt';
+                              }
+                              else if (item.schema=="PRESSRELEASE"){
+                                queryFields += 'date_s,symbol_s,schema_CEN_s,title_EN_t,description_EN_t,themes_CEN_ss,url_ss,thematicAreas_CEN_ss,text_EN_txt';
+                              }
+                              else if (item.schema=="STATEMENT"){
+                                queryFields += 'date_s,symbol_s,schema_CEN_s,title_EN_t,description_EN_t,themes_CEN_ss,url_ss,thematicAreas_CEN_ss,text_EN_txt';
+                              }
 
-                            $http.get("/api/v2013/index/select?" + queryFields + "&q=id:"+item.id)
-                                 .then(function (result) { 
+                              $http.get("/api/v2013/index/select?" + queryFields + "&q=id:"+item.id)
+                                   .then(function (result) { 
 
-                                    item.data = result.data.response.docs[0]; 
-                                    item.data.info=[];
-                                    console.log(item.data.schema_s);
-                                    item.data.header = {'schema':item.data.schema_s};                                  
-                                 });
+                                      item.data = result.data.response.docs[0]; 
+                                      item.data.info=[];
+                                      console.log(item.data.schema_s);
+                                      item.data.header = {'schema':item.data.schema_s};                                  
+                              });
                         }
                         else
                         {
@@ -147,8 +157,9 @@ require('app').directive('documentList', function ($http) {
                     output.url_ss      = document.url_ss;
                     output.identifier_s = document.identifier_s;
                     output.doc = document;
-                    output.cssClass="defaultRecords";
-                    output.cssRecordClass="defaultDiif";
+                    output.createdDateOn = document.createdDate_dt;
+                   
+                    output.cssRecordClass="referenceRecords";
 
                     if(document.schema_s=='focalPoint') {
                         output.description  = document.function_t||'';
@@ -186,66 +197,34 @@ require('app').directive('documentList', function ($http) {
                         output.dates = formatDate(document.startDate_s) + ' to ' + formatDate(document.endDate_s);
                         output.venue = document.eventCity_EN_t + ', ' + document.eventCountry_EN_t;
                     }
-                    
                     if(document.schema_s=='resource') {
                       console.log (document);
                         output.Year = document.publicationYear_is;
                         output.Types = getString(document.resourceTypes_CEN_ss, locale);
                         output.Regions = getString(document.regions_CEN_ss, locale);
-                        output.Languages = getString(document.languages_CEN_ss, locale);
-                        output.cssClass="resourceRecords";
-                        output.cssRecordClass="recordsDiif";
-
-                    }
-                     if(document.schema_s=='statement') {
-                        output.cssClass="statementRecords";
-                        output.cssRecordClass="recordsDiif";
-                    }
-                    if(document.schema_s=='meeting') {
-                        output.cssClass="meetingRecords";
-                        output.cssRecordClass="recordsDiif";
-                    }
-                    if(document.schema_s=='notification') {
-                        output.cssClass="notificationRecords";
-                        output.cssRecordClass="recordsDiif";
-                    }
-                    if(document.schema_s=='press release') {
-                        output.cssClass="pressReleaseRecords";
-                        output.cssRecordClass="recordsDiif";
-                    }
-
-                    if(document.schema_s=='authority') {
+                        output.Languages = getString(document.languages_CEN_ss, locale);                        
+                    }else if(document.schema_s=='authority') {
                         output.responsibleForAll = document.responsibleForAll_b;
                         output.jusrisdiction = document.jurisdiction_EN_t;                        
                         output.grType = (document.geneticResourceTypes_ss );
-                        output.cssClass="cnaRecords";
-                        output.cssRecordClass="defaultDiif";
+                        output.cssRecordClass="nationalRecords";
                     }
-
-                    if(document.schema_s=='absCheckpoint') {
+                    else if(document.schema_s=='absCheckpoint') {
                         output.jusrisdiction = document.jurisdiction_EN_t;   
                         output.informAllAuthorities = (document.informAllAuthorities_b);  
-                        output.cssClass="cpRecords";
-                        output.cssRecordClass="defaultDiif";
+                        output.cssRecordClass="nationalRecords";
                     }
-
-                    if(document.schema_s=='permit') {
+                    else if(document.schema_s=='absPermit') {
                         output.usage = (document.usage_CEN_ss);
                         output.keywords = (document.keywords_CEN_ss);
-                        output.cssClass="irccRecords";
-                        output.cssRecordClass="defaultDiif";
+                        output.cssRecordClass="nationalRecords";
                     }
-
-                    if(document.schema_s=='absCheckpointCommunique') {
+                    else if(document.schema_s=='absCheckpointCommunique') {
                         output.originCountries = (document.originCountries_CEN_ss);
-                        output.cssClass="cpcRecords";
-                        output.cssRecordClass="defaultDiif";
-                        output.doc = document;
+                        output.cssRecordClass="nationalRecords";
                     }
-                    if(document.schema_s=='measure') {
-                        //output.originCountries = (document.originCountries_CEN_ss);
-                        output.cssClass="msrRecords";
-                        output.cssRecordClass="defaultDiif";
+                    else if(document.schema_s=='measure' || document.schema_s=='focalPoint' || document.schema_s=='database') {
+                        output.cssRecordClass="nationalRecords";
                     }
 
                    
