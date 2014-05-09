@@ -34,71 +34,86 @@
  
               <a ng-click="tab('dashboard')" class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='dashboard'}"  href="#" role="button" style="color:#333;font-weight:bold;"> 
               <i class="glyphicon glyphicon-list-alt"></i> DASHBOARD » </a>
-          
+          <!--  <div ng-switch on="document.schema">
+      <div ng-switch-when="nationRecords">
+      </div>
+    </div> -->  
+<!-- <div ng-repeat="schema in schemaTypesFacets" > 
+    
+    <a  ng-click="tab(schema.schema)"  href="#" role="button">
+      <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='{{schema.schema}}'}">
+        <div class="btn-commonformat-national">{{schema.header}}
+          <span ng-show="facets(schema.schema,'draft') > 0" class="pull-right label label-default">
+            {{facets(schema.schema,'draft')}}</span> 
+          <span ng-show="facets(schema.schema,'publish') > 0" class="pull-right label label-success">
+            {{facets(schema.schema,'publish')}}</span>
+          <span ng-show="facets(schema.schema,'request') > 0" class="pull-right label label-danger">
+            {{facets(schema.schema,'request')}}</span>
+        </div>   
+        <span class="btn-commonformat-name">{{schema.commonFormat}}</span>
+      </div>
+    </a>
+</div> -->
+
               <h3>National Records</h3>
 
 <a  ng-click="tab('measure')"  href="#" role="button">
 <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='measure'}">
 <div class="btn-commonformat-national">ABSCH-MSR 
-<span ng-show="(records | filter:{type:'measure'}| filter:isDraft).length > 0" class="pull-right label label-default">
-  {{(records | filter:{type:'measure'}| filter:isDraft).length}}</span> 
-<span ng-show="(records | filter:{type:'measure'}| filter:isPublished).length > 0" class="pull-right label label-success">
-  {{(records | filter:{type:'measure'}| filter:isPublished).length}}</span>
-<span ng-show="(records | filter:{type:'measure'}| filter:isRequest).length > 0" class="pull-right label label-danger">
-  {{(records | filter:{type:'measure'}| filter:isRequest).length}}</span>
-<!-- <span ng-show="(records | filter:{type:'measure'}).length > 0" class="pull-right label label-info">
-  {{(records | filter:{type:'measure'}).length}}</span> --> </div>   
+<!-- <span ng-show="facets('measure','draft') > 0" class="pull-right label label-default">
+  {{facets('measure','draft')}}</span> 
+<span ng-show="facets('measure','publish') > 0" class="pull-right label label-success">
+  {{facets('measure','publish')}}</span>
+<span ng-show="facets('measure','request') > 0" class="pull-right label label-danger">
+  {{facets('measure','request')}}</span> --> </div>   
 <span class="btn-commonformat-name">Legislative, administrative or policy measures </span>
 </div></a>
 
 <a  ng-click="tab('authority')"  href="#" role="button">
 <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='authority'}">
 <span class="btn-commonformat-national">ABSCH-CNA </span> 
-<span ng-show="(records | filter:{type:'authority'}| filter:isDraft).length > 0"  class="pull-right label label-default">{{(records | filter:{type:'authority'}| filter:isDraft).length}}</span>  
-<span ng-show="(records | filter:{type:'authority'}| filter:isPublished).length > 0"  class="pull-right label label-success">{{(records | filter:{type:'authority'}| filter:isPublished).length}}</span>
-<span ng-show="(records | filter:{type:'authority'}| filter:isRequest).length > 0"  class="pull-right label label-danger">{{(records | filter:{type:'authority'}| filter:isRequest).length}}</span> 
-<!-- <span ng-show="(records | filter:{type:'authority'}).length > 0"  class="pull-right label label-info">{{(records | filter:{type:'authority'}).length}}</span>  
- --><br><span class="btn-commonformat-name">Competent National Authority </span>
+<!-- <span ng-show="facets('authority','draft') > 0"  class="pull-right label label-default">{{facets('authority','draft')}}</span>  
+<span ng-show="facets('authority','publish') > 0"  class="pull-right label label-success">{{facets('authority','publish')}}</span>
+<span ng-show="facets('authority','request') > 0"  class="pull-right label label-danger">{{facets('authority','request')}}</span>  -->
+  
+ <br><span class="btn-commonformat-name">Competent National Authority </span>
 </div></a>
 
 <a  ng-click="tab('absPermit')"  href="#" role="button">
 <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='absPermit'}">
 <span class="btn-commonformat-national">ABSCH-IRCC </span> 
-<span ng-show="(records | filter:{type:'absPermit'}| filter:isDraft).length > 0" class="pull-right label label-default">{{(records | filter:{type:'absPermit'}| filter:isDraft).length}}</span>  
-<span ng-show="(records | filter:{type:'absPermit'}| filter:isPublished).length > 0" class="pull-right label label-success">{{(records | filter:{type:'absPermit'}| filter:isPublished).length}}</span>
-<span ng-show="(records | filter:{type:'absPermit'}| filter:isRequest).length > 0" class="pull-right label label-danger">{{(records | filter:{type:'absPermit'}| filter:isRequest).length}}</span>
-<!-- <span ng-show="(records | filter:{type:'absPermit'}).length > 0" class="pull-right label label-info">{{(records | filter:{type:'absPermit'}).length}}</span>   -->
-<br><span class="btn-commonformat-name">Internationally recognized certificate of compliance </span>
+<!-- <span ng-show="facets('absPermit','draft') > 0" class="pull-right label label-default">{{facets('absPermit','draft')}}</span>  
+<span ng-show="facets('absPermit','publish') > 0" class="pull-right label label-success">{{facets('absPermit','publish')}}</span>
+<span ng-show="facets('absPermit','request') > 0" class="pull-right label label-danger">{{facets('absPermit','request')}}</span>
+ --><br><span class="btn-commonformat-name">Internationally recognized certificate of compliance </span>
 </div></a>
 
 
 <a  ng-click="tab('absCheckpoint')"  href="#" role="button">
 <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='absCheckpoint'}">
 <span class="btn-commonformat-national">ABSCH-CP </span>
-<span ng-show="(records | filter:{type:'absCheckpoint'}| filter:isDraft).length > 0" class="pull-right label label-default">{{(records | filter:{type:'absCheckpoint'}| filter:isDraft).length}}</span>  
-<span ng-show="(records | filter:{type:'absCheckpoint'}| filter:isPublished).length > 0" class="pull-right label label-success">{{(records | filter:{type:'absCheckpoint'}| filter:isPublished).length}}</span>
-<span ng-show="(records | filter:{type:'absCheckpoint'}| filter:isRequest).length > 0" class="pull-right label label-danger">{{(records | filter:{type:'absCheckpoint'}| filter:isRequest).length}}</span> 
-<!-- <span ng-show="(records | filter:{type:'absCheckpoint'}.length > 0" class="pull-right label label-info">{{(records | filter:{type:'absCheckpoint'}).length}}</span>   -->
+<!-- <span ng-show="facets('absCheckpoint','draft') > 0" class="pull-right label label-default">{{facets('absCheckpoint','draft')}}</span>  
+<span ng-show="facets('absCheckpoint','publish') > 0" class="pull-right label label-success">{{facets('absCheckpoint','publish')}}</span>
+<span ng-show="facets('absCheckpoint','request') > 0" class="pull-right label label-danger">{{facets('absCheckpoint','request')}}</span> 
+ -->
 <br><span class="btn-commonformat-name">Checkpoint </span>
 </div></a>
 
 <a  ng-click="tab('absCheckpointCommunique')"  href="#" role="button">
 <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='absCheckpointCommunique'}">
 <span class="btn-commonformat-national">ABSCH-CPC </span>
-<span ng-show="(records | filter:{type:'absCheckpointCommunique'}| filter:isDraft).length > 0" class="pull-right label label-default">{{(records | filter:{type:'absCheckpointCommunique'}| filter:isDraft).length}}</span>  
-<span ng-show="(records | filter:{type:'absCheckpointCommunique'}| filter:isPublished).length > 0" class="pull-right label label-success">{{(records | filter:{type:'absCheckpointCommunique'}| filter:isPublished).length}}</span>
-<span ng-show="(records | filter:{type:'absCheckpointCommunique'}| filter:isRequest).length > 0" class="pull-right label label-danger">{{(records | filter:{type:'absCheckpointCommunique'}| filter:isRequest).length}}</span> 
-<!-- <span ng-show="(records | filter:{type:'absCheckpointCommunique'}).length > 0" class="pull-right label label-info">{{(records | filter:{type:'absCheckpointCommunique'}).length}}</span> -->  
+<!-- <span ng-show="facets('absCheckpointCommunique','draft') > 0" class="pull-right label label-default">{{facets('absCheckpointCommunique','draft')}}</span>  
+<span ng-show="facets('absCheckpointCommunique','publish') > 0" class="pull-right label label-success">{{facets('absCheckpointCommunique','publish')}}</span>
+<span ng-show="facets('absCheckpointCommunique','request') > 0" class="pull-right label label-danger">{{facets('absCheckpointCommunique','request')}}</span>  -->
 <br><span class="btn-commonformat-name">Checkpoint Communiqué </span>
 </div></a>
 
 <a  ng-click="tab('database')"  href="#" role="button">
 <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='database'}">
 <span class="btn-commonformat-national">ABSCH-NDB </span> 
-<span ng-show="(records | filter:{type:'database'}| filter:isDraft).length > 0" class="pull-right label label-default">{{(records | filter:{type:'database'}| filter:isDraft).length}}</span>  
-<span ng-show="(records | filter:{type:'database'}| filter:isPublished).length > 0" class="pull-right label label-success">{{(records | filter:{type:'database'}| filter:isPublished).length}}</span>
-<span ng-show="(records | filter:{type:'database'}| filter:isRequest).length > 0" class="pull-right label label-danger">{{(records | filter:{type:'database'}| filter:isRequest).length}}</span>  
-<!-- <span ng-show="(records | filter:{type:'database'}).length > 0" class="pull-right label label-info">{{(records | filter:{type:'database'}).length}}</span> -->  
+<!-- <span ng-show="facets('database','draft') > 0" class="pull-right label label-default">{{facets('database','draft')}}</span>  
+<span ng-show="facets('database','publish') > 0" class="pull-right label label-success">{{facets('database','publish')}}</span>
+<span ng-show="facets('database','request') > 0" class="pull-right label label-danger">{{facets('database','request')}}</span>   -->
 <br><span class="btn-commonformat-name">ABS National Website or Database </span>
 </div></a>
 
@@ -110,11 +125,10 @@
       <a  ng-click="tab('resource')"  href="#" role="button">
       <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='resource'}">
       <span class="btn-commonformat-reference">ABSCH-VLR </span>    
-      <span  ng-show="(records | filter:{type:'resource'} | filter:isDraft).length > 0"  class="pull-right label label-default">{{(records | filter:{type:'resource'}| filter:isDraft).length}}</span>  
-      <span  ng-show="(records | filter:{type:'resource'} | filter:isPublished).length > 0"  class="pull-right label label-success">{{(records | filter:{type:'resource'}| filter:isPublished).length}}</span>
-      <span  ng-show="(records | filter:{type:'resource'} | filter:isRequest).length > 0"  class="pull-right label label-danger">{{(records | filter:{type:'resource'}| filter:isRequest).length}}</span>  
-     <!--  <span  ng-show="(records | filter:{type:'resource'}).length > 0"  class="pull-right label label-info">{{(records | filter:{type:'resource'}).length}}</span> -->
-      <br><span class="btn-commonformat-name">Virtual Library Record</span>
+     <!--  <span  ng-show="facets('resource','draft') > 0"  class="pull-right label label-default">{{facets('resource','draft')}}</span>  
+      <span  ng-show="facets('resource','draft') > 0"  class="pull-right label label-success">{{facets('resource','draft')}}</span>
+      <span  ng-show="facets('resource','draft') > 0"  class="pull-right label label-danger">{{facets('resource','draft')}}</span>  
+      --> <br><span class="btn-commonformat-name">Virtual Library Record</span>
       </div></a>
   </div>
 
@@ -648,24 +662,26 @@
 </div>
 
 <script src="/app/views/register.html.js"></script>
+<script src="/app/views/directives/login.directive.html.js"></script>
 <script src="/app/views/register-record-list.directive.js"></script>
-<script src="/app/views/forms/edit/km-form-buttons.js"></script>
 
 <script src="/app/views/tasks/my-completed-tasks.directive.js"></script>
 <script src="/app/views/tasks/my-pending-tasks.directive.js"></script>
 <script src="/app/views/tasks/my-tasks.directive.js"></script>
 
 <script src="/app/js/directives/forms/form-controls.js"></script>
+<script src="/app/views/forms/edit/km-form-buttons.js"></script>
 <script src="/app/views/forms/edit/editFormUtility.js"></script>
+
 <script src="/app/views/forms/edit/field-embed-contact.directive.js"></script>
 <script src="/app/views/forms/edit/edit-contact-base.directive.js"></script>
 <script src="/app/views/forms/view/view-contact-reference.directive.js"></script>
 <script src="/app/views/forms/view/view-organization-reference.directive.js"></script>
 <script src="/app/views/forms/view/view-authority-reference.directive.js"></script>
-<script src="/app/views/directives/login.directive.html.js"></script>
 
-<script src="/app/views/forms/view/record-loader.directive.js"></script>
-<script src="/app/views/forms/view/view-abs-checkpoint.directive.js"></script>
+
+<!-- <script src="/app/views/forms/view/record-loader.directive.js"></script> -->
+<!-- <script src="/app/views/forms/view/view-abs-checkpoint.directive.js"></script>
 <script src="/app/views/forms/view/view-abs-checkpoint-communique.directive.js"></script>
 <script src="/app/views/forms/view/view-abs-permit.directive.js"></script>
 <script src="/app/views/forms/view/view-authority.directive.js"></script>
@@ -677,6 +693,6 @@
 <script src="/app/views/forms/view/view-organization.directive.js"></script>
 <script src="/app/views/forms/view/view-organization-reference.directive.js"></script>
 <script src="/app/views/forms/view/view-resource.directive.js"></script>
-<script src="/app/views/forms/view/view-other.directive.js"></script>
-<script src="/app/views/directives/task-id-directive.html.js"></script>
-<script src="/app/views/directives/user-details.directive.html.js"></script>
+<script src="/app/views/forms/view/view-other.directive.js"></script> -->
+<!-- <script src="/app/views/directives/task-id-directive.html.js"></script>
+<script src="/app/views/directives/user-details.directive.html.js"></script> -->

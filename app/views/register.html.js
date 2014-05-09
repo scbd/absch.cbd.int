@@ -93,22 +93,22 @@ require("app", "dragAndDrop").controller("RegisterController",
 	// 
 	//
 	//============================================================
-	function loadRecords()
+	function loadRecords(schema)
 	{
 		//console.log( schema);
 		
-		// if(schema == null || schema==undefined)
-		// 	return;
+		if(schema == null || schema==undefined)
+			return;
 		
-		// if(_.contains($scope.isLoaded, schema))
-		// 	return;
+		if(_.contains($scope.isLoaded, schema))
+			return;
 
 		if(!$rootScope.user.isAuthenticated)
 			return $scope.records = null;
 
 		var qAnd = [];
-// "+schemaTypes.join("' or type eq '") + "" + schema + "
-		qAnd.push("(type eq '"+schemaTypes.join("' or type eq '") + "')");
+// "+schemaTypes.join("' or type eq '") + "
+		qAnd.push("(type eq '" + schema + "')");
 
 		var qDocuments = storage.documents.query(qAnd.join(" and ")||undefined);
 		var qDrafts    = storage.drafts   .query(qAnd.join(" and ")||undefined);
@@ -123,24 +123,24 @@ require("app", "dragAndDrop").controller("RegisterController",
 			_.map(documents, function(o) { map[o.identifier] = o });
 			_.map(drafts,    function(o) { map[o.identifier] = o });
 
-			//$scope.isLoaded.push(schema);
+			$scope.isLoaded.push(schema);
 			
 			_.values(map).forEach(function(row){				
 					  	
-				var schemaCount = _.where($scope.schemaTypesFacets,{"schema":row.type});
+				// var schemaCount = _.where($scope.schemaTypesFacets,{"schema":row.type});
 				
-				if(schemaCount != null && schemaCount.length > 0)
-				{
-					schemaCount[0].draftCount 	+= $scope.isDraft(row) ? 1:0;					
-					schemaCount[0].requestCount += $scope.isRequest(row) ? 1:0;
-					schemaCount[0].publishCount += $scope.isPublished(row) ? 1:0;
-				}
-				else
-				{
-					$scope.schemaTypesFacets.push({"schema":row.type, "draftCount":$scope.isDraft(row) ? 1:0
-						,"requestCount":$scope.isPublished(row) ? 1:0
-						,"publishCount":$scope.isRequest(row) ? 1:0})
-				}
+				// if(schemaCount != null && schemaCount.length > 0)
+				// {
+				// 	schemaCount[0].draftCount 	+= $scope.isDraft(row) ? 1:0;					
+				// 	schemaCount[0].requestCount += $scope.isRequest(row) ? 1:0;
+				// 	schemaCount[0].publishCount += $scope.isPublished(row) ? 1:0;
+				// }
+				// else
+				// {
+				// 	$scope.schemaTypesFacets.push({"schema":row.type, "draftCount":$scope.isDraft(row) ? 1:0
+				// 		,"requestCount":$scope.isPublished(row) ? 1:0
+				// 		,"publishCount":$scope.isRequest(row) ? 1:0})
+				// }
 					
 				$scope.records.push(row);
 			})
@@ -150,7 +150,7 @@ require("app", "dragAndDrop").controller("RegisterController",
 		});
 	}
 
-	loadRecords();
+	// loadRecords();
 
 	//============================================================
 	//
@@ -402,7 +402,7 @@ require("app", "dragAndDrop").controller("RegisterController",
 
 	$scope.$watch('tab()', function(value) {
 
-		//loadRecords(value)
+		loadRecords(value)
 		if(value=='authority'              ) 
 			require(['../views/forms/view/view-authority.directive',
 		             '../views/forms/edit/edit-authority.directive',               
