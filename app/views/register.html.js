@@ -26,6 +26,18 @@ require("app", "dragAndDrop").controller("RegisterController",
 	$scope.records = [];
 	$scope.dashboardFilter = "All";
   	$scope.isLoaded = [];
+
+	$scope.schemaTypesFacets = [
+		{"schema":"measure","schemaType":"nationalRecords", "header":"ABSCH-MSR","commonFormat":"Legislative, administrative or policy measures", "draftCount":0,"requestCount":0,"publishCount": 0},
+		{"schema":"authority","schemaType":"nationalRecords", "header":"ABSCH-CNA ","commonFormat":"Competent National Authority ", "draftCount":0,"requestCount":0,"publishCount": 0},
+		{"schema":"absPermit","schemaType":"nationalRecords", "header":"ABSCH-IRCC","commonFormat":"Internationally recognized certificate of compliance", "draftCount":0,"requestCount":0,"publishCount": 0},
+		{"schema":"absCheckpoint","schemaType":"nationalRecords", "header":"ABSCH-CP","commonFormat":"Checkpoint", "draftCount":0,"requestCount":0,"publishCount": 0},
+		{"schema":"absCheckpointCommunique","schemaType":"nationalRecords", "header":"ABSCH-CPC","commonFormat":"Checkpoint Communiqué", "draftCount":0,"requestCount":0,"publishCount": 0},
+		{"schema":"database","schemaType":"nationalRecords", "header":"ABSCH-NDB","commonFormat":"ABS National Website or Database", "draftCount":0,"requestCount":0,"publishCount": 0},
+		{"schema":"resource","schemaType":"referenceRecords", "header":"ABSCH-VLR","commonFormat":"Virtual Library Record", "draftCount":0,"requestCount":0,"publishCount": 0}
+	];
+
+
  	$scope.setDashFilter = function(filter){
  		console.log(filter);
  			$scope.dashboardFilter = filter;
@@ -54,6 +66,24 @@ require("app", "dragAndDrop").controller("RegisterController",
 	//
 	//
 	//============================================================
+	$scope.facets = function(entity,type){
+		var schemaCount = _.where($scope.schemaTypesFacets,{"schema":entity});
+ console.log(entity + ''+ type);
+		if(schemaCount.length>0)
+		{
+			if(type=='draft')
+				return schemaCount[0].draftCount;
+			else if(type=='publish')
+				return schemaCount[0].publishCount;
+			else if(type=='request')
+				return schemaCount[0].requestCount;
+		}
+		return 0;//schema[0][type+ 'Count'];
+	};
+	//============================================================
+	//
+	//
+	//============================================================
 	$scope.isPublished = function(entity){
 		return entity && entity.documentID;
 	};
@@ -63,23 +93,22 @@ require("app", "dragAndDrop").controller("RegisterController",
 	// 
 	//
 	//============================================================
-	function loadRecords(schema)
+	function loadRecords()
 	{
-console.log('shema' );
-		console.log( schema);
+		//console.log( schema);
 		
-		if(schema == null || schema==undefined)
-			return;
+		// if(schema == null || schema==undefined)
+		// 	return;
 		
-		if(_.contains($scope.isLoaded, schema))
-			return;
+		// if(_.contains($scope.isLoaded, schema))
+		// 	return;
 
 		if(!$rootScope.user.isAuthenticated)
 			return $scope.records = null;
 
 		var qAnd = [];
-// "+schemaTypes.join("' or type eq '") + "
-		qAnd.push("(type eq '" + schema + "')");
+// "+schemaTypes.join("' or type eq '") + "" + schema + "
+		qAnd.push("(type eq '"+schemaTypes.join("' or type eq '") + "')");
 
 		var qDocuments = storage.documents.query(qAnd.join(" and ")||undefined);
 		var qDrafts    = storage.drafts   .query(qAnd.join(" and ")||undefined);
@@ -94,20 +123,34 @@ console.log('shema' );
 			_.map(documents, function(o) { map[o.identifier] = o });
 			_.map(drafts,    function(o) { map[o.identifier] = o });
 
-console.log($scope.records);
-
-			// if($scope.isLoaded==null)
-			// 	$scope.isLoaded = _.values(map)
-			// else
-				$scope.isLoaded.push(schema);
-			_.values(map).forEach(function(row){
-					$scope.records.push(row);
+			//$scope.isLoaded.push(schema);
+			
+			_.values(map).forEach(function(row){				
+					  	
+				var schemaCount = _.where($scope.schemaTypesFacets,{"schema":row.type});
+				
+				if(schemaCount != null && schemaCount.length > 0)
+				{
+					schemaCount[0].draftCount 	+= $scope.isDraft(row) ? 1:0;					
+					schemaCount[0].requestCount += $scope.isRequest(row) ? 1:0;
+					schemaCount[0].publishCount += $scope.isPublished(row) ? 1:0;
+				}
+				else
+				{
+					$scope.schemaTypesFacets.push({"schema":row.type, "draftCount":$scope.isDraft(row) ? 1:0
+						,"requestCount":$scope.isPublished(row) ? 1:0
+						,"publishCount":$scope.isRequest(row) ? 1:0})
+				}
+					
+				$scope.records.push(row);
 			})
+			// var recrords _.groupBy($scope.records,'')
+// console.log($scope.schemaTypesFacets);
 			return $scope.records;
 		});
 	}
 
-	//loadRecords();
+	loadRecords();
 
 	//============================================================
 	//
@@ -359,7 +402,7 @@ console.log($scope.records);
 
 	$scope.$watch('tab()', function(value) {
 
-		loadRecords(value)
+		//loadRecords(value)
 		if(value=='authority'              ) 
 			require(['../views/forms/view/view-authority.directive',
 		             '../views/forms/edit/edit-authority.directive',               
