@@ -29,6 +29,13 @@ require("app").directive("editAbsCheckpointCommunique", [ function () {
 					}]
 			};
 
+			//==================================
+			//
+			//==================================
+			$scope.scrollToTop = function() {
+        		$("body, html").animate({scrollTop: 0}, "slow");
+      		};
+
 
 			//==================================
 			//
