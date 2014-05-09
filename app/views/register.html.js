@@ -23,9 +23,9 @@ require("app", "dragAndDrop").controller("RegisterController",
 	
 	var leftTab = "dashboard";
 	$scope.msg="";
-	$scope.records = null;
+	$scope.records = [];
 	$scope.dashboardFilter = "All";
-  
+  	$scope.isLoaded = [];
  	$scope.setDashFilter = function(filter){
  		console.log(filter);
  			$scope.dashboardFilter = filter;
@@ -65,6 +65,15 @@ require("app", "dragAndDrop").controller("RegisterController",
 	//============================================================
 	function loadRecords(schema)
 	{
+console.log('shema' );
+		console.log( schema);
+		
+		if(schema == null || schema==undefined)
+			return;
+		
+		if(_.contains($scope.isLoaded, schema))
+			return;
+
 		if(!$rootScope.user.isAuthenticated)
 			return $scope.records = null;
 
@@ -85,7 +94,16 @@ require("app", "dragAndDrop").controller("RegisterController",
 			_.map(documents, function(o) { map[o.identifier] = o });
 			_.map(drafts,    function(o) { map[o.identifier] = o });
 
-			return $scope.records = _.values(map);
+console.log($scope.records);
+
+			// if($scope.isLoaded==null)
+			// 	$scope.isLoaded = _.values(map)
+			// else
+				$scope.isLoaded.push(schema);
+			_.values(map).forEach(function(row){
+					$scope.records.push(row);
+			})
+			return $scope.records;
 		});
 	}
 
