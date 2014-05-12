@@ -1,3 +1,30 @@
+
+.confidential-box
+{
+	border: 2px solid #aaa;
+	padding:10px;
+}
+.confidential-text {
+	font-weight:bold;
+	color:#d8534f;
+	text-transform: uppercase;
+	font-size: 80%;
+	padding-bottom:10px;
+}
+ .disable {
+                    background-color:#888;
+                    color:#666;
+                }
+                .enable {
+                    background-color:#ededed;
+                }
+                
+legend{
+
+	padding:30px 0 10px 0;
+	margin: 0;
+}
+
 .header{
 	
 	border-bottom: 5px #333 solid;
