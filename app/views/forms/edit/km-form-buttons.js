@@ -2,7 +2,9 @@
 //
 //
 //============================================================
-require('app').directive('kmFormButtons', ["$q", "$timeout", function ($q, $timeout)
+define(['app'], function (app) {
+
+app.directive('kmFormButtons', ["$q", "$timeout", function ($q, $timeout)
 {
 	return {
 		restrict: 'EAC',
@@ -321,3 +323,5 @@ require('app').directive('kmFormButtons', ["$q", "$timeout", function ($q, $time
 		}]
 	};
 }])
+
+});

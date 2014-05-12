@@ -1,4 +1,21 @@
-require("app", "linqjs").controller("ProfileController", ["$scope", "$http", "$routeParams","linqjs", function ($scope, $http, $routeParams, linqjs) {
+ define(['app',
+    './profiles.html.js',
+    './forms/view/record-loader.directive.html.js',
+    './directives/document-list.partial.html.js',
+    './forms/view/view-abs-checkpoint.directive.js',
+    './forms/view/view-abs-checkpoint-communique.directive.js',
+    './forms/view/view-abs-permit.directive.js',
+    './forms/view/view-authority.directive.js',
+    './forms/view/view-authority-reference.directive.js',
+    './forms/view/view-contact.directive.js',
+    './forms/view/view-contact-reference.directive.js',
+    './forms/view/view-database.directive.js',
+    './forms/view/view-measure.directive.js',
+    './forms/view/view-organization.directive.js',
+    './forms/view/view-organization-reference.directive.js',
+    './forms/view/view-resource.directive.js'], function (app) {
+//require("app", "linqjs")
+app.controller("ProfileController", ["$scope", "$http", "$routeParams","linqjs", function ($scope, $http, $routeParams, linqjs) {
 
   $scope.code = $routeParams.code;
  $scope.documentCount       = 0;
@@ -16,35 +33,36 @@ require("app", "linqjs").controller("ProfileController", ["$scope", "$http", "$r
             var linqObj = linqjs.from(response.data.response.docs);
             
             $scope.nationalAuthority = linqObj.count(function(schema){
-                        return schema.schema_EN_t.toLowerCase() == 'competent national authority';
+
+                        return schema.schema_s.toLowerCase() == 'competent national authority';
                 });  
             
             $scope.nfpCount = linqObj.count(function(schema){
                 // console.log(schema.schema_EN_t.toLowerCase() + ' ' + 'national focal point'.toLowerCase());
-                        return schema.schema_EN_t.toLowerCase() == 'national focal point'.toLowerCase();
+                        return schema.schema_s.toLowerCase() == 'national focal point'.toLowerCase();
                 });    
 
             $scope.nationalMeasure =linqObj.count(function(schema){
-                        return schema.schema_EN_t.toLowerCase() =='national measure';
+                        return schema.schema_s.toLowerCase() =='national measure';
                 }); 
 
             $scope.Permit = linqObj.count(function(schema){
-                        return schema.schema_EN_t.toLowerCase() =='permit';
+                        return schema.schema_s.toLowerCase() =='permit';
                 });    
 
             $scope.absCheckpoint = linqObj.count(function(schema){
-                        return schema.schema_EN_t.toLowerCase() =='abscheckpoint';
+                        return schema.schema_s.toLowerCase() =='abscheckpoint';
                 });   
       
             $scope.absCheckpointCommunique = linqObj.count(function(schema){
-                        return schema.schema_EN_t.toLowerCase() =='abscheckpointcommunique';
+                        return schema.schema_s.toLowerCase() =='abscheckpointcommunique';
                 });   
 
             $scope.Unknow = linqObj.count(function(schema){
-                        return schema.schema_EN_t.toLowerCase() =='unknow';
+                        return schema.schema_s.toLowerCase() =='unknow';
                 });   
             $scope.resource = linqObj.count(function(schema){
-                        return schema.schema_EN_t.toLowerCase() =='resource';
+                        return schema.schema_s.toLowerCase() =='resource';
                 }); 
 
         // }) ;
@@ -57,3 +75,5 @@ require("app", "linqjs").controller("ProfileController", ["$scope", "$http", "$r
     
 
 }]);
+
+})

@@ -1,4 +1,6 @@
-require('app').directive('login', function ($http) {
+define(['app'], function (app) {
+
+app.directive('login', function ($http) {
         return {
             restrict: 'EAC',
             templateUrl: '/app/views/directives/login.directive.html',
@@ -56,3 +58,4 @@ require('app').directive('login', function ($http) {
 
         };
     });
+});

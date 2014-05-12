@@ -1,4 +1,6 @@
-require('app').directive('taskId', function () {
+define(['app'], function (app) {
+
+app.directive('taskId', function () {
         return {
             restrict: 'EAC',
             templateUrl: '/app/views/directives/task-id-directive.html?'+(new Date().getTime()),
@@ -78,3 +80,4 @@ require('app').directive('taskId', function () {
 
         };
     });
+});

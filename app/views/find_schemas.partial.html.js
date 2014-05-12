@@ -1,4 +1,5 @@
-require('app').directive('searchFilterSchemas', function ($http) {
+define(['app'], function (app) {
+app.directive('searchFilterSchemas', function ($http) {
     return {
         restrict: 'EAC',
         templateUrl: '/app/views/find_schemas.partial.html',
@@ -131,7 +132,7 @@ require('app').directive('searchFilterSchemas', function ($http) {
                     conditions.forEach(function (condition) { query = query + (query=='' ? '( ' : ' OR ') + condition; });
                     query += ' )';
                     $scope.query = query;
-                    console.log (query);
+                    //console.log (query);
                 }
             }
 
@@ -150,7 +151,7 @@ require('app').directive('searchFilterSchemas', function ($http) {
                                     if( $scope[filter.name] && $scope[filter.name].length > 0){
                                         // debugger;
                                         var selectedValues = $scope[filter.name];    
-                                        console.log (selectedValues)                                     ;
+                                        //console.log (selectedValues)                                     ;
                                             subFilterQuery = subFilterQuery + ' AND (' + filter.field +':'+ selectedValues.join(' OR ' + filter.field + ': ') + ')';      
                                             //subFilterQuery = subFilterQuery.replace(',', ' OR ');                                        
                                     }
@@ -254,7 +255,7 @@ require('app').directive('searchFilterSchemas', function ($http) {
             }
 
             function onWatch_items(values) { if(!values) return;
-                values.forEach(function (item) { console.log (item);
+                values.forEach(function (item) { 
                     if(_.has($scope.termsx, item.symbol))
                     {
                         $scope.termsx[item.symbol].count = item.count;
@@ -305,4 +306,6 @@ require('app').directive('searchFilterSchemas', function ($http) {
 
         }]
     }
+});
+
 });

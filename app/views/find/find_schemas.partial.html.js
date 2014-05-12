@@ -1,4 +1,6 @@
-require('app').directive('searchFilterSchemas', function ($http) {
+define(['app'], function (app) {
+
+app.directive('searchFilterSchemas', function ($http) {
     return {
         restrict: 'EAC',
         templateUrl: '/app/views/find_schemas.partial.html',
@@ -303,4 +305,5 @@ require('app').directive('searchFilterSchemas', function ($http) {
 
         }]
     }
+});
 });

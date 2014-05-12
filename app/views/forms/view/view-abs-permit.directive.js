@@ -1,4 +1,6 @@
-require("app").directive("viewAbsPermit", [function () {
+define(['app'], function (app) {
+
+app.directive("viewAbsPermit", [function () {
 
 	return {
 		restrict   : "EAC",
@@ -123,3 +125,4 @@ require("app").directive("viewAbsPermit", [function () {
 		}]
 	};
 }]);
+});

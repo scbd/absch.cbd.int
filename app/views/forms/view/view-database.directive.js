@@ -1,4 +1,6 @@
-require("app").directive("viewDatabase", [function () {
+define(['app'], function (app) {
+
+app.directive("viewDatabase", [function () {
 	return {
 		restrict   : "EAC",
 		templateUrl: "/app/views/forms/view/view-database.directive.html",
@@ -25,3 +27,5 @@ require("app").directive("viewDatabase", [function () {
 		}]
 	};
 }]);
+
+});

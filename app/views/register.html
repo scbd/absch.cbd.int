@@ -399,7 +399,6 @@
                   <h2 style="border-bottom: 1px solid #333;margin-bottom:5px;">Records</h2>
                   <register-record-list records="records" schema="authority"></register-record-list>  
               </div>
-              
             </div>
           </div>
 <!-- END CNA ****************************************-->
@@ -501,7 +500,9 @@
 
                 <div ng-show="isAuthenticated && !editing">
                     <h2 style="border-bottom: 1px solid #333;margin-bottom:5px;">Records</h2>
-                    <register-record-list records="records" schema="absCheckpoint"></register-record-list>                  
+                    <ngx-lazy  ready="absCheckpointReady">
+                      <register-record-list records="records" schema="absCheckpoint"></register-record-list>   
+                    </ngx-lazy>               
                 </div>
               </div>
           </div>
@@ -514,7 +515,7 @@
             <div class="registerpage-header" >
               <h2>
                 <span class="abbreviation">ABSCH-CPC</span> 
-                <span class="title">Information for the Checkpoint Communiqué</span>
+                <span class="title">Information for the Checkpoint Communiqué {{editing}}</span>
               </h2>
             </div>
 
@@ -660,39 +661,3 @@
       </div>
   </div>
 </div>
-
-<script src="/app/views/register.html.js"></script>
-<script src="/app/views/directives/login.directive.html.js"></script>
-<script src="/app/views/register-record-list.directive.js"></script>
-
-<script src="/app/views/tasks/my-completed-tasks.directive.js"></script>
-<script src="/app/views/tasks/my-pending-tasks.directive.js"></script>
-<script src="/app/views/tasks/my-tasks.directive.js"></script>
-
-<script src="/app/js/directives/forms/form-controls.js"></script>
-<script src="/app/views/forms/edit/km-form-buttons.js"></script>
-<script src="/app/views/forms/edit/editFormUtility.js"></script>
-
-<script src="/app/views/forms/edit/field-embed-contact.directive.js"></script>
-<script src="/app/views/forms/edit/edit-contact-base.directive.js"></script>
-<script src="/app/views/forms/view/view-contact-reference.directive.js"></script>
-<script src="/app/views/forms/view/view-organization-reference.directive.js"></script>
-<script src="/app/views/forms/view/view-authority-reference.directive.js"></script>
-
-
-<!-- <script src="/app/views/forms/view/record-loader.directive.js"></script> -->
-<!-- <script src="/app/views/forms/view/view-abs-checkpoint.directive.js"></script>
-<script src="/app/views/forms/view/view-abs-checkpoint-communique.directive.js"></script>
-<script src="/app/views/forms/view/view-abs-permit.directive.js"></script>
-<script src="/app/views/forms/view/view-authority.directive.js"></script>
-<script src="/app/views/forms/view/view-authority-reference.directive.js"></script>
-<script src="/app/views/forms/view/view-contact.directive.js"></script>
-<script src="/app/views/forms/view/view-contact-reference.directive.js"></script>
-<script src="/app/views/forms/view/view-database.directive.js"></script>
-<script src="/app/views/forms/view/view-measure.directive.js"></script>
-<script src="/app/views/forms/view/view-organization.directive.js"></script>
-<script src="/app/views/forms/view/view-organization-reference.directive.js"></script>
-<script src="/app/views/forms/view/view-resource.directive.js"></script>
-<script src="/app/views/forms/view/view-other.directive.js"></script> -->
-<!-- <script src="/app/views/directives/task-id-directive.html.js"></script>
-<script src="/app/views/directives/user-details.directive.html.js"></script> -->

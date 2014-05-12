@@ -18,6 +18,7 @@ require.config({
         'angular-loading-bar'   : '../libs/angular-loading-bar/src/loading-bar',
         'angular-animate'       : '../libs/angular-animate/angular-animate.min',
         'dragAndDrop'     : '../libs/angular-dragndrop/angular-dnd.min', 
+        'view-abs-checkpoint':'../views/forms/view/view-abs-checkpoint.directive',
     },
     'shim': {
         'angular'        : { 'deps': ['jquery'], 'exports': 'angular' },

@@ -1,4 +1,6 @@
-require("app").directive('viewFocalPoint', [function() {
+define(['app'], function (app) {
+
+app.directive('viewFocalPoint', [function() {
 	return {
 		restrict: 'EAC',
 		templateUrl: '/app/views/forms/view/view-focalpoint.directive.html',
@@ -13,3 +15,4 @@ require("app").directive('viewFocalPoint', [function() {
 		}]
 	}
 }]);
+});

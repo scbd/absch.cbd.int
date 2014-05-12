@@ -1,4 +1,6 @@
-require("app").directive("editAbsCheckpoint", [ function () {
+define(['app'], function (app) {
+
+app.directive("editAbsCheckpoint", [ function () {
 
 	return {
 		restrict   : "EAC",
@@ -257,3 +259,4 @@ require("app").directive("editAbsCheckpoint", [ function () {
 		}]
 	};
 }]);
+});

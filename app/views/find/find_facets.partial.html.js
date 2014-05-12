@@ -1,4 +1,6 @@
-require('app').directive('searchFilterFacets', function ($http) {
+define(['app'], function (app) {
+
+app.directive('searchFilterFacets', function ($http) {
     return {
         restrict: 'EAC',
         templateUrl: '/app/views/find_facets.partial.html',
@@ -199,7 +201,7 @@ require('app').directive('searchFilterFacets', function ($http) {
         }]
     }
 });
-
+});
 //============================================================
 //
 //

@@ -1,4 +1,6 @@
-require("app").directive('viewStatement', [function() {
+define(['app'], function (app) {
+
+app.directive('viewStatement', [function() {
 	return {
 		restrict: 'EAC',
 		templateUrl: '/app/views/forms/view/view-statement.directive.html',
@@ -13,3 +15,4 @@ require("app").directive('viewStatement', [function() {
 		}]
 	}
 }]);
+});

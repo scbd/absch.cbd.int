@@ -1,4 +1,6 @@
-require("app").directive("viewContactReference", [function () {
+define(['app'], function (app) {
+
+app.directive("viewContactReference", [function () {
 	return {
 		restrict: "EAC",
 		templateUrl: "/app/views/forms/view/view-contact-reference.directive.html",
@@ -34,3 +36,4 @@ require("app").directive("viewContactReference", [function () {
 		}]
 	};
 }]);
+});

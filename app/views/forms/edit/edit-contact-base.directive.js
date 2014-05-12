@@ -1,4 +1,6 @@
-require("app").directive("editContactBase", [ function () {
+define(['app'], function (app) {
+
+app.directive("editContactBase", [ function () {
 
 	return {
 		restrict   : "EA",
@@ -46,3 +48,5 @@ require("app").directive("editContactBase", [ function () {
 		}]
 	};
 }]);
+
+});

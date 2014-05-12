@@ -1,4 +1,6 @@
-require("app").directive("viewOrganization", [function () {
+define(['app'], function (app) {
+
+app.directive("viewOrganization", [function () {
 	return {
 		restrict   : "EAC",
 		templateUrl: "/app/views/forms/view/view-organization.directive.html",
@@ -81,3 +83,5 @@ require("app").directive("viewOrganization", [function () {
 		}]
 	};
 }]);
+
+});

@@ -4,11 +4,12 @@ define([/*'angular', 'angular-route', 'angular-cookies', */], function () {
 
 	var app = require('angular').module('app', ['ngRoute', 'ngCookies','chieffancypants.loadingBar', 'ngAnimate','dragAndDrop']);
 
-	app.config(['$controllerProvider', '$compileProvider', '$provide', '$filterProvider', function($controllerProvider, $compileProvider, $provide, $filterProvider) {
-		  
-	//	app.controllerProvider = $controllerProvider;
-	//	app.routeProvider      = $routeProvider;
-	//	app.compileProvider    = $compileProvider;
+	app.config(['$controllerProvider', '$compileProvider', '$provide', '$filterProvider', 
+		function($controllerProvider, $compileProvider, $provide, $filterProvider) {
+		 // console.log($routeProvider);
+		//app.controllerProvider = $controllerProvider;
+		//app.routeProvider      = $routeProvider;
+		//app.compileProvider    = $compileProvider;
 		app.filter = function(name, param1, param2, param3, param4) {
 			return (fromCache('filter', name) ||
 					toCache  ('filter', name, $filterProvider.register(name, param1, param2, param3, param4))).data;

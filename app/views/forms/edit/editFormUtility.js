@@ -1,5 +1,6 @@
-﻿
-require("app").factory("editFormUtility", ["IStorage", "IWorkflows", "$q", "realm", function(storage, workflows, $q, realm) {
+﻿define(['app'], function (app) {
+
+app.factory("editFormUtility", ["IStorage", "IWorkflows", "$q", "realm", function(storage, workflows, $q, realm) {
 
 	var schemasWorkflowTypes  = {
 
@@ -200,3 +201,4 @@ require("app").factory("editFormUtility", ["IStorage", "IWorkflows", "$q", "real
 	return _self;
 
 }]);
+});

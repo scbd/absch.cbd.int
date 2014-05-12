@@ -1,5 +1,7 @@
-﻿"use strict";
-require("app").directive("myTasks", ['authHttp', function ($http) {
+﻿define(['app'], function (app) {
+
+"use strict";
+app.directive("myTasks", ['authHttp', function ($http) {
 	return {
 		priority: 0,
 		restrict: 'EAC',
@@ -42,7 +44,7 @@ require("app").directive("myTasks", ['authHttp', function ($http) {
 
 					$scope.tasks = tasks;
 
-					nextLoad = $timeout(load, 15*1000);
+					//nextLoad = $timeout(load, 15*1000);
 				});
 			}
 
@@ -78,6 +80,6 @@ require("app").directive("myTasks", ['authHttp', function ($http) {
 			});
 		}]
 	}
-}])
+}]);
 
-;
+});

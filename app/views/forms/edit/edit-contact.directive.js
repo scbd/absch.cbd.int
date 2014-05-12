@@ -1,4 +1,6 @@
-require("app").directive("editContact", [ function () {
+define(['app'], function (app) {
+
+app.directive("editContact", [ function () {
 
 	return {
 		restrict   : "EAC",
@@ -173,3 +175,4 @@ require("app").directive("editContact", [ function () {
 		}]
 	};
 }]);
+});

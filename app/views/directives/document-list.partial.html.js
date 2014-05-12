@@ -1,4 +1,6 @@
-require('app').directive('documentList', function ($http) {
+define(['app'], function (app) {
+
+app.directive('documentList', function ($http) {
         return {
             restrict: 'EAC',
             templateUrl: '/app/views/directives/document-list.partial.html',
@@ -59,7 +61,7 @@ require('app').directive('documentList', function ($http) {
 
                                       item.data = result.data.response.docs[0]; 
                                       item.data.info=[];
-                                      console.log(item.data.schema_s);
+                                      //console.log(item.data.schema_s);
                                       item.data.header = {'schema':item.data.schema_s};                                  
                               });
                         }
@@ -120,7 +122,7 @@ require('app').directive('documentList', function ($http) {
                 $scope.$watch('currentPage', function (newValue, oldValue) { 
                      if (newValue != oldValue) 
                      {                      
-                       console.log('current page changed');
+                       //console.log('current page changed');
                         $scope.currentPage = newValue;                        
                     }
                 });
@@ -130,7 +132,6 @@ require('app').directive('documentList', function ($http) {
                      if (newValue != oldValue) 
                      {     
                         $scope.pageCount = Math.ceil($scope.documentCount / $scope.itemsPerPage);
-                       console.log('transform doc');
                        $scope.transformedDocuments = [];                                                     
                        $scope.documents.forEach(function (doc) {  
 
@@ -198,7 +199,6 @@ require('app').directive('documentList', function ($http) {
                         output.venue = document.eventCity_EN_t + ', ' + document.eventCountry_EN_t;
                     }
                     if(document.schema_s=='resource') {
-                      console.log (document);
                         output.Year = document.publicationYear_is;
                         output.Types = getString(document.resourceTypes_CEN_ss, locale);
                         output.Regions = getString(document.regions_CEN_ss, locale);
@@ -263,3 +263,4 @@ require('app').directive('documentList', function ($http) {
 
         };
     });
+});

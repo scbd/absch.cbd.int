@@ -1,4 +1,6 @@
-﻿require("app").directive('parties', ['$http', function ($http) {
+﻿define(['app'], function (app) {
+
+app.directive('parties', ['$http', function ($http) {
     return {
         priority: 0,
         restrict: 'EC',
@@ -14,3 +16,4 @@
         }]
     };
 }]);
+});

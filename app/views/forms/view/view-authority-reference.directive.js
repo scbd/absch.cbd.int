@@ -1,4 +1,6 @@
-require("app").directive('viewAuthorityReference', [function() {
+define(['app'], function (app) {
+
+app.directive('viewAuthorityReference', [function() {
 	return {
 		restrict: 'EAC',
 		templateUrl: '/app/views/forms/view/view-authority-reference.directive.html',
@@ -13,3 +15,4 @@ require("app").directive('viewAuthorityReference', [function() {
 		}]
 	}
 }]);
+});
