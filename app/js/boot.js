@@ -4,20 +4,20 @@ window.name = 'NG_DEFER_BOOTSTRAP!';
 
 require.config({
     'paths': {
-        'angular'         : '../libs/angular/angular',
-        'angular-route'   : '../libs/angular-route/angular-route',
-        'angular-cookies' : '../libs/angular-cookies/angular-cookies',
+        'angular'         : '../libs/angular/angular.min',
+        'angular-route'   : '../libs/angular-route/angular-route.min',
+        'angular-cookies' : '../libs/angular-cookies/angular-cookies.min',
         'async'           : '../libs/requirejs-plugins/src/async',
         'domReady'        : '../libs/requirejs-domready/domReady',
-        'jquery'          : '../libs/jquery/jquery',
-        'bootstrap'       : '../libs/bootstrap/dist/js/bootstrap',
+        'jquery'          : '../libs/jquery/jquery.min',
+        'bootstrap'       : '../libs/bootstrap/dist/js/bootstrap.min',
         'underscore'      : '../libs/underscore/underscore',
         'linqjs'          : '../libs/linqjs/linq',
         'moment'          : '../libs/momentjs/min/moment-with-langs.min',
         'bootstrap-datepicker'  : '../libs/bootstrap-datepicker/js/bootstrap-datepicker',
         'angular-loading-bar'   : '../libs/angular-loading-bar/src/loading-bar',
         'angular-animate'       : '../libs/angular-animate/angular-animate.min',
-        'dragAndDrop'     : '../libs/angular-dragndrop/angular-dnd', 
+        'dragAndDrop'     : '../libs/angular-dragndrop/angular-dnd.min', 
     },
     'shim': {
         'angular'        : { 'deps': ['jquery'], 'exports': 'angular' },
