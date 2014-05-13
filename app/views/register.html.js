@@ -182,7 +182,7 @@ app.controller("RegisterController",
 		//remove records for the current tab from records array and refetch from server.
 		// var currentTabRecords = _.where($scope.records, {"type": currentTab})
 		// console.log(currentTabRecords)
-		debugger;
+		//debugger;
 		// $scope.records.forEach(function(row){
 		// 	console.log(row);
 

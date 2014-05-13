@@ -222,7 +222,7 @@
                     </h2>
 
 
-                    <p class="help1" ng-show="help && !editing">
+                    <p class="help1" ng-show="help">
                         The dashboard is a personal working area where it will be possible to follow-up the status of records prepared for their publication in the ABS-CH. The content of the dashboard will differ depending on the role assigned in the ABS-CH (publishing authority or national authorized user).
                         <br>
                         <br>In this area you can check whether there are items that require your approval (in the case of the publishing authority) or what is the status of records sent for validation of the publishing authority (in the case of national authorized users).
@@ -340,7 +340,7 @@
                         <span class="title">Legislative, administrative or policy measures on access and benefit-sharing</span>
                     </h2>
 
-                    <p class="help1" ng-show="help && !editing">
+                    <p class="help1" ng-show="help">
                         This common format is to be used for legislative, administrative and policy measures on access and benefit-sharing. This information shall be made available to the Access and Benefit-Sharing Clearing-House (ABS-CH) in accordance with Article 14, paragraph 2(a), of the Nagoya Protocol on Access and Benefit-sharing.
                         <br>
                         <br>Access and benefit-sharing measures may include strategies, policies, legislation or regulations. They may also include measures undertaken at the regional, national, sub-national or community level. For each ABS measure a new common format has to be filled. The format includes a list of ABS elements and the possibility of pointing out to the specific articles and sections where the specific element is addressed in the measure. Having this information for all existing ABS measures of a country displayed in the ABS Clearing-House would help users to find the specific information they are looking for in order to access to genetic resources and traditional knowledge associated to genetic resources.
@@ -402,17 +402,17 @@
                         <span class="title">Competent National Authority</span>
                     </h2>
 
-                    <p class="help1" ng-show="help && !editing">
+                    <p class="help1" ng-show="help">
                         Article 13 of the Nagoya Protocol requires the designation of one or more competent national authorities on access and benefit-sharing. This information shall be made available to the Access and Benefit-Sharing Clearing-House (ABS-CH) in accordance with Article 14, paragraph 2(b), of the Nagoya Protocol on Access and Benefit-sharing.
                         <br>
                         <br>CNAs are bodies established by governments and are responsible for granting access to users of their genetic resources. Parties can decide to establish one or more CNAs, however if more than one CNAs are established, their responsibilities need to be clearly identified. National implementation measures establish how CNAs work in a given country. Therefore, this common format has been prepared for facilitating the submission of information on competent national authorities by Parties.
 
-                        <div class="alert alert-warning" ng-show="help && !editing">
+                        <div class="alert alert-warning" ng-show="help">
                             <strong>Timeframe for confirmation or updating of information</strong>
                             <br>Please note that this category of information requires confirmation or updating after two years from the date of submission. After the deadline you will be asked to confirm or update the record within 3 months. After this period, if no confirmation has been received, the record will be marked as “Not confirmed”.
                         </div>
 
-                        <div ng-show="help && !editing">
+                        <div ng-show="help">
                             <div class="panel panel-info">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">Tips for publishing an ABSCH-CNA common format:</h4>
@@ -466,7 +466,7 @@
                         <span class="title">Permit or its equivalent constituting an internationally recognized certificate of compliance</span>
                     </h2>
 
-                    <div class="help1" ng-show="help && !editing">
+                    <div class="help1" ng-show="help">
                         <p>
                             This common format is to be used for registering permits or their equivalent issued at the time of access as evidence of the decision to grant prior informed consent (PIC) and of the establishment of mutually agreed terms (MAT) in accordance with Article 6, paragraph 3 (e) of the Nagoya Protocol on Access and Benefit-sharing. This information is to be made available to the ABS Clearing-House in accordance with Article 14, paragraph 2 (c).
                             <br />
@@ -475,7 +475,7 @@
                             <br />Article 17, paragraph 3, further establishes that the internationally recognized certificate of compliance shall serve as evidence that the genetic resource which it covers has been accessed in accordance with PIC and that MAT have been established, as required by the domestic ABS legislation or regulatory requirements of the Party providing PIC.
                             <br />
                             <br />Article 17, paragraph 4, sets out the minimum information required for the internationally recognized certificate of compliance when it is not confidential, which in turn provides the minimum information to be reported to the ABS Clearing-House in this regard. This information includes:
-                            <ol type="a" ng-show="help && !editing">
+                            <ol type="a" ng-show="help">
                                 <li>Issuing authority;</li>
                                 <li>Date of issuance;</li>
                                 <li>The provider;</li>
@@ -557,7 +557,7 @@
                         <span class="abbreviation">ABSCH-CP</span>
                         <span class="title">Checkpoint</span>
                     </h2>
-                    <div class="help1" ng-show="help && !editing">
+                    <div class="help1" ng-show="help">
                         <p>
                             Checkpoints are designated by each Party in order to collect and receive information from users of genetic resources. This common format is to be used for registering information on checkpoints that collect or receive relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources.
                         </p>
@@ -603,7 +603,7 @@
                         <span class="abbreviation">ABSCH-CPC</span>
                         <span class="title">Information for the Checkpoint Communiqué {{editing}}</span>
                     </h2>
-                    <div class="help1" ng-show="help && !editing">
+                    <div class="help1" ng-show="help">
                         <p>
                             The checkpoint communiqué contains information collected by the checkpoint. The ABS Clearing-House will send automatically by email a courtesy copy of the record to the relevant national authorities of the country where the checkpoint is located as designated in the common format on the checkpoint and the national focal point of the country and the competent national authority/ies of the country which is the provider of the genetic resource. Therefore, this common format is to be used to facilitate the provision of relevant information collected by the checkpoint related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources, including from the internationally recognized certificate of compliance, when such a certificate is available.
                         </p>
@@ -649,7 +649,7 @@
                         <span class="abbreviation" style="color: #ed9c28;">ABSCH-VLR</span>
                         <span class="title">Virtual Library Record</span>
                     </h2>
-                    <div class="help1" ng-show="help && !editing">
+                    <div class="help1" ng-show="help">
                         <p ng-hide="editing">
                             The forms under the “reference records” category will allow the submission of non-mandatory information relevant to the Protocol from any registered user (e.g. governments, representatives of indigenous and local communities, academia, NGOs, research institutions, business representatives, etc.) to the ABS Clearing-House .The Secretariat would be responsible for validating all reference records.
                             <br>
@@ -695,7 +695,7 @@
                         <span class="abbreviation">ABSCH-NDB</span>
                         <span class="title">ABS National Website or Database</span>
                     </h2>
-                    <div class="help1" ng-show="help && !editing">
+                    <div class="help1" ng-show="help">
                         <p ng-hide="editing">
                             This common format is to be used for registering information on national website or databases relevant to access and benefit-sharing.
                         </p>
