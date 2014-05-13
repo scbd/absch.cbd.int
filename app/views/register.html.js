@@ -119,8 +119,9 @@ app.controller("RegisterController",
 	function loadRecords(schema)
 	{
 		//console.log( schema);
+
 		
-		if(schema == null || schema==undefined)
+		if(schema == null || schema==undefined )
 			return;
 		
 		if(_.contains($scope.isLoaded, schema))
@@ -131,7 +132,11 @@ app.controller("RegisterController",
 
 		var qAnd = [];
 // "+schemaTypes.join("' or type eq '") + "
-		qAnd.push("(type eq '" + schema + "')");
+
+		if(schema == "dashboard")
+			qAnd.push("(type eq '" +schemaTypes.join("' or type eq '") + "')");
+		else
+			qAnd.push("(type eq '" + schema + "')");
 
 		var qDocuments = storage.documents.query(qAnd.join(" and ")||undefined);
 		var qDrafts    = storage.drafts   .query(qAnd.join(" and ")||undefined);
