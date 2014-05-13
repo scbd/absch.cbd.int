@@ -111,9 +111,9 @@ define(['app',
                         $scope.governments = readFacets2(data.facet_counts.facet_fields.government_s);
                         $scope.regions = readFacets2(data.facet_counts.facet_fields.government_ss);
                         $scope.aichiTargets = readFacets2(data.facet_counts.facet_fields.aichiTarget_REL_ss);
-                        $scope.thematicAreas = readFacets2(data.facet_counts.facet_fields.thematicArea_s);
-                        console.log(data.facet_counts.facet_fields);
-                        console.log(queryFacetsParameters);
+                        $scope.thematicAreas = readFacets2(data.facet_counts.facet_fields.thematicArea_ss);
+                        //console.log(data.facet_counts.facet_fields);
+                        //console.log($scope.thematicAreas);
 
                     }).error(function (error) { console.log('onerror'); console.log(error); } );
                 }

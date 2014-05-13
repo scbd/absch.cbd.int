@@ -34,20 +34,20 @@ app.controller("ProfileController", ["$scope", "$http", "$routeParams","linqjs",
             
             $scope.nationalAuthority = linqObj.count(function(schema){
 
-                        return schema.schema_s.toLowerCase() == 'competent national authority';
+                        return schema.schema_s.toLowerCase() == 'authority';
                 });  
-            
+            console.log(response.data.response.docs);
             $scope.nfpCount = linqObj.count(function(schema){
                 // console.log(schema.schema_EN_t.toLowerCase() + ' ' + 'national focal point'.toLowerCase());
-                        return schema.schema_s.toLowerCase() == 'national focal point'.toLowerCase();
+                        return schema.schema_s.toLowerCase() == 'focalpoint'.toLowerCase();
                 });    
 
             $scope.nationalMeasure =linqObj.count(function(schema){
-                        return schema.schema_s.toLowerCase() =='national measure';
+                        return schema.schema_s.toLowerCase() =='measure';
                 }); 
 
             $scope.Permit = linqObj.count(function(schema){
-                        return schema.schema_s.toLowerCase() =='permit';
+                        return schema.schema_s.toLowerCase() =='abspermit';
                 });    
 
             $scope.absCheckpoint = linqObj.count(function(schema){
@@ -58,8 +58,8 @@ app.controller("ProfileController", ["$scope", "$http", "$routeParams","linqjs",
                         return schema.schema_s.toLowerCase() =='abscheckpointcommunique';
                 });   
 
-            $scope.Unknow = linqObj.count(function(schema){
-                        return schema.schema_s.toLowerCase() =='unknow';
+            $scope.database = linqObj.count(function(schema){
+                        return schema.schema_s.toLowerCase() =='database';
                 });   
             $scope.resource = linqObj.count(function(schema){
                         return schema.schema_s.toLowerCase() =='resource';
