@@ -101,7 +101,7 @@ define(['app',
                         'wt': 'json',
                         'rows': 0,
                         'facet': true,
-                        'facet.field': ['schema_s', 'government_s', 'aichiTarget_REL_ss', 'thematicArea_s'],
+                        'facet.field': ['schema_s', 'government_s', 'aichiTarget_REL_ss', 'thematicArea_ss'],
                         'facet.limit': 512
                     };
 

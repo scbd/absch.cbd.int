@@ -122,16 +122,19 @@ ul.km-value
 
 
 #loading-bar-spinner {  
-  left: 50% !important;
+	top: 50% !important;
+  	left: 50% !important;
 }
 
 #loading-bar-spinner .spinner-icon {
-  width: 20px !important;
-  height: 20px !important;
-  /*border:  solid 5px transparent !important;*/
+  width: 40px !important;
+  height: 40px !important;
+  /*border:  solid 25px transparent !important;*/
   border-top-color:  #29d;
   border-left-color: #29d;
-  border-radius: 15px;
+  border-radius: 45px;
+  border-style: solid;
+  border-width: 45px;
 
   -webkit-animation: loading-bar-spinner 400ms linear infinite;
   -moz-animation:    loading-bar-spinner 400ms linear infinite;
