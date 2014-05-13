@@ -1,3 +1,6 @@
+.panel-info, .alert, .panel-title{
+ font-size: 11px;
+}
 
 .confidential-box
 {
@@ -93,6 +96,8 @@ legend{
 .registerpage-header{
 	background-color:#333;
 	padding:3px 20px; 
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
 }
 .registerpage-header .abbreviation{
 	color: #428BCA; 
@@ -122,12 +127,16 @@ legend{
 	margin: 0;
 }
 
-
+.help1{
+	color:#eee;
+	font-weight: normal;
+	font-size: 11px;
+}
 .help_icon{
 	padding:5px;
 }
 .help-block{
-	font-size:12px;
+	font-size:11px;
 	color:#666;
 	padding: 0;
 	margin: 0;
