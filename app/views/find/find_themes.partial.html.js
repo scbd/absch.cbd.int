@@ -1,4 +1,6 @@
-require('app').directive('searchFilterThemes', function ($http) {
+define(['app'], function (app) {
+
+app.directive('searchFilterThemes', function ($http) {
     return {
         restrict: 'EAC',
         templateUrl: '/app/views/find_themes.partial.html',
@@ -272,7 +274,7 @@ require('app').directive('searchFilterThemes', function ($http) {
         }]
     }
 });
-
+});
 //============================================================
 //
 //

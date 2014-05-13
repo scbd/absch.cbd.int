@@ -1,4 +1,6 @@
-require("app").directive("viewResource", [function () {
+define(['app'], function (app) {
+
+app.directive("viewResource", [function () {
 	return {
 		restrict   : "EAC",
 		templateUrl: "/app/views/forms/view/view-resource.directive.html",
@@ -92,3 +94,5 @@ require("app").directive("viewResource", [function () {
 		}]
 	};
 }]);
+
+});

@@ -1,4 +1,6 @@
-require("app").directive("fieldEmbedContact", [ function () {
+define(['app'], function (app) {
+
+app.directive("fieldEmbedContact", [ function () {
 
 	return {
 		restrict   : "EA",
@@ -146,3 +148,5 @@ require("app").directive("fieldEmbedContact", [ function () {
 		}]
 	};
 }]);
+
+});

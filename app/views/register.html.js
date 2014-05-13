@@ -1,5 +1,28 @@
+define(['app',
+	'./register.html.js',
+	'../views/directives/login.directive.html.js',
+	'./register-record-list.directive.js',
+	'./tasks/my-completed-tasks.directive.js',
+	'./tasks/my-pending-tasks.directive.js',
+	'./tasks/my-tasks.directive.js',
+	'../js/directives/forms/form-controls.js',
+	'./forms/edit/km-form-buttons.js',
+	'./forms/edit/editFormUtility.js',
+	'./forms/edit/field-embed-contact.directive.js',
+	'./forms/edit/edit-contact-base.directive.js',
+	'./forms/view/view-contact-reference.directive.js',
+	'./forms/view/view-organization-reference.directive.js',
+	'./forms/view/record-loader.directive.html.js',
+	'./forms/view/view-organization.directive.js',
+	'./forms/view/view-organization-reference.directive.js',
+	'./directives/task-id-directive.html.js',
+	'./directives/user-details.directive.html.js',
+	'./directives/ngxLazy.directive.js'], function (app) {
+
 "use strict";
-require("app", "dragAndDrop").controller("RegisterController", 
+//require("app", "dragAndDrop")
+
+app.controller("RegisterController", 
 	["$rootScope", "$location" , "$scope", "$q", "$window", "IStorage", "underscore",
 	 "schemaTypes", "$compile", 
 	 function ($rootScope, $location, $scope, $q, $window, storage, _,
@@ -433,43 +456,49 @@ require("app", "dragAndDrop").controller("RegisterController",
 		                 function() { $scope.authorityReady = true; });
 		
 
-		if(value=='absCheckpoint'          )
+		if(value=='absCheckpoint')
 		{
-			require(['../views/forms/view/view-abs-checkpoint.directive',
-			         '../views/forms/edit/edit-abs-checkpoint.directive'],
+			require(['../views/forms/edit/edit-abs-checkpoint.directive'],
 			         function() {
-
-console.log(value);
-			          $scope.absCheckpointReady = true; });
+			          	$scope.absCheckpointReady = true;					
+			      });
 		}
-		if(value=='absCheckpointCommunique') require(['../views/forms/view/view-abs-checkpoint-communique.directive', '../views/forms/edit/edit-abs-checkpoint-communique.directive'], function() { $scope.absCheckpointCommuniqueReady = true; });
+		if(value=='absCheckpointCommunique') require(['../views/forms/edit/edit-abs-checkpoint-communique.directive'], function() { $scope.absCheckpointCommuniqueReady = true; });
 		if(value=='absPermit'              ) require(['../views/forms/view/view-abs-permit.directive',                '../views/forms/edit/edit-abs-permit.directive'],                function() { $scope.absPermitReady = true; });
-		if(value=='database'               ) require(['../views/forms/view/view-database.directive',                  '../views/forms/edit/edit-database.directive'],                  
-						function() {
-							console.log(value);
-							$rootScope.$apply();
-							 $scope.databaseReady = true; });
+		if(value=='database'               ) require(['../views/forms/view/view-database.directive',                  '../views/forms/edit/edit-database.directive'],                  function() {$scope.databaseReady = true; });
 		if(value=='measure'                ) require(['../views/forms/view/view-measure.directive',                   '../views/forms/edit/edit-measure.directive'],                   function() { $scope.measureReady = true; });
 		if(value=='resource'               ) require(['../views/forms/view/view-resource.directive',                  '../views/forms/edit/edit-resource.directive'],                  function() { $scope.resourceReady = true; });
 	})
 }]);
+});
 
-//============================================================
-//
-//
-//============================================================
-require("app").directive('ngxLazy', function ($http, $compile, $timeout) {
-    return {
-        restrict: 'E',
-        scope: {
-            ready: '=ready'
-        },
-        link: function (scope, $element, attr, ctrl, $transclude) {
-        	scope.$watch('ready', function (value) { 
-        		if(value) {
-        			$compile($element.contents())(scope);
-        		}
-        	});
-    	}
-    }
-})
+//debugger;
+//       	console.log('function here');
+// console.log(module);
+// deferred.resolve(module);
+// $timeoux(function(){
+// 	var el = $compile( "<view-abs-checkpoint source='fkdlfkdlfkld'></view-abs-checkpoint>" )( $scope );
+// 	$("whre it goes").append(el);
+			   
+// //============================================================
+// //
+// //
+// //============================================================
+// define(['app'], function (app) {
+// 	app.directive('ngxLazy', function ($http, $compile, $timeout) {
+// 	    return {
+// 	        restrict: 'E',
+// 	        scope: {
+// 	            ready: '=ready'
+// 	        },
+// 	        link: function (scope, $element, attr, ctrl, $transclude) {
+// 	        	scope.$watch('ready', function (value) { 
+// 	        		if(value) {
+// 	        			console.log(value);
+// 	        			$compile($element.contents())(scope);
+// 	        		}
+// 	        	});
+// 	    	}
+// 	    }
+// 	})
+// });

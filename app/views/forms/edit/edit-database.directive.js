@@ -1,4 +1,6 @@
-require("app").directive("editDatabase", [ function () {
+define(['app'], function (app) {
+
+app.directive("editDatabase", [ function () {
 
 	return {
 		restrict   : "EAC",
@@ -231,3 +233,4 @@ require("app").directive("editDatabase", [ function () {
 		}]
 	};
 }]);
+});

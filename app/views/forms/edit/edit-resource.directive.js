@@ -1,4 +1,6 @@
-require("app").directive("editResource", [ function () {
+define(['app'], function (app) {
+
+app.directive("editResource", [ function () {
 
 	return {
 		restrict   : "EAC",
@@ -224,3 +226,4 @@ require("app").directive("editResource", [ function () {
 		}]
 	};
 }]);
+});

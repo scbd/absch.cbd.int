@@ -1,5 +1,6 @@
+define(['app'], function (app) {
 
-require("app").directive("editAuthority", [function () {
+app.directive("editAuthority", [function () {
 
 	return {
 		restrict   : "EAC",
@@ -297,3 +298,4 @@ require("app").directive("editAuthority", [function () {
 		}]
 	};
 }]);
+});

@@ -1,4 +1,6 @@
-require('app').controller('CallbackController', ['$scope', '$rootScope', '$location', function ($scope, $rootScope, $location) {
+define(['app'], function (app) {
+
+app.controller('CallbackController', ['$scope', '$rootScope', '$location', function ($scope, $rootScope, $location) {
 
 	//============================================================
     // TODO: USE ANGULARJS EQUIVALENT
@@ -37,3 +39,5 @@ require('app').controller('CallbackController', ['$scope', '$rootScope', '$locat
     }
 
 }]);
+
+});

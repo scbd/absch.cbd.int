@@ -1,4 +1,6 @@
-require('app').directive('userDetails', function($http){
+define(['app'], function (app) {
+
+app.directive('userDetails', function($http){
 
 	return{
 		restrict: 'EAC',
@@ -40,4 +42,5 @@ require('app').directive('userDetails', function($http){
 		}]
 	};
 
+});
 });

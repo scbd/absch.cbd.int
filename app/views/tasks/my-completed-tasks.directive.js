@@ -1,5 +1,7 @@
-﻿"use strict";
-require("app").directive("myCompletedTasks", [function () {
+﻿define(['app'], function (app) {
+
+"use strict";
+app.directive("myCompletedTasks", [function () {
 	return {
 		priority: 0,
 		restrict: 'EAC',
@@ -28,7 +30,7 @@ require("app").directive("myCompletedTasks", [function () {
 
 					$scope.workflows = workflows;
 
-					nextLoad = $timeout(load, 15*1000);
+					//nextLoad = $timeout(load, 15*1000);
 				});
 			}
 
@@ -56,5 +58,5 @@ require("app").directive("myCompletedTasks", [function () {
 			});
 		}]
 	}
-}])
-;
+}]);
+});

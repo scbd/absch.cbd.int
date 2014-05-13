@@ -1,4 +1,6 @@
-require('app').directive('searchFilterCountries', function ($http) {
+define(['app'], function (app) {
+
+app.directive('searchFilterCountries', function ($http) {
     return {
         restrict: 'EAC',
         templateUrl: '/app/views/find_countries.partial.html',
@@ -130,4 +132,5 @@ require('app').directive('searchFilterCountries', function ($http) {
             $scope.refresh = buildQuery;
         }]
     }
+});
 });

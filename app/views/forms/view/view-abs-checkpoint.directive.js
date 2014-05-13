@@ -1,90 +1,99 @@
-require("app").directive("viewAbsCheckpoint", [function () {
+ define(["app"], function(app){
 
-	return {
-		restrict   : "EAC",
-		templateUrl: "/app/views/forms/view/view-abs-checkpoint.directive.html",
-		replace    : true,
-		transclude : false,
-		scope: {
-			document: "=ngModel",
-			locale  : "=",
-			target  : "@linkTarget",
-			allowDrafts : "@",
-			hide:"@"
-		},
-		link : function ($scope)
-		{
-			$scope.contacts = undefined;
-		},
-		controller : ["$scope", "IStorage", function ($scope, storage)
-		{
-			//====================
-			//
-			//====================
-			$scope.display = function(field) {
-				
-				if(!$scope.hide) return true; //show all fields
+	// });
+//	 require("app")
+	// console.log(app);
+//	return {
+			app.directive("viewAbsCheckpoint", [function () {
+					
+				return {
+					restrict   : "EAC",
+					templateUrl: "/app/views/forms/view/view-abs-checkpoint.directive.html",
+					replace    : true,
+					transclude : false,
+					scope: {
+						document: "=ngModel",
+						locale  : "=",
+						target  : "@linkTarget",
+						allowDrafts : "@",
+						hide:"@"
+					},
+					link : function ($scope)
+					{
+						$scope.contacts = undefined;
+					},
+					controller : ["$scope", "IStorage", function ($scope, storage)
+					{
+						//====================
+						//
+						//====================
+						$scope.display = function(field) {
+							
+							if(!$scope.hide) return true; //show all fields
 
-				return( $scope.hide.indexOf(field) >= 0 ? false : true);
-			}
+							return( $scope.hide.indexOf(field) >= 0 ? false : true);
+						}
 
-			//====================
-			//
-			//====================
-			$scope.$watch("document.contacts", function()
-			{
-				if ($scope.document) {
-					$scope.contacts = angular.fromJson(angular.toJson($scope.document.contacts));
+						//====================
+						//
+						//====================
+						$scope.$watch("document.contacts", function()
+						{
+							if ($scope.document) {
+								$scope.contacts = angular.fromJson(angular.toJson($scope.document.contacts));
 
-					if ($scope.contacts)
-						$scope.loadReferences($scope.contacts);
-				}
-			});
+								if ($scope.contacts)
+									$scope.loadReferences($scope.contacts);
+							}
+						});
 
-			//====================
-			//
-			//====================
-			$scope.$watch("document.authoritiesToInform", function () {
-				if ($scope.document) {
-					$scope.authoritiesToInform = angular.fromJson(angular.toJson($scope.document.authoritiesToInform));
+						//====================
+						//
+						//====================
+						$scope.$watch("document.authoritiesToInform", function () {
+							if ($scope.document) {
+								$scope.authoritiesToInform = angular.fromJson(angular.toJson($scope.document.authoritiesToInform));
 
-					if ($scope.authoritiesToInform)
-						$scope.loadReferences($scope.authoritiesToInform);
-				}
-			});
+								if ($scope.authoritiesToInform)
+									$scope.loadReferences($scope.authoritiesToInform);
+							}
+						});
 
-			//====================
-			//
-			//====================
-			$scope.loadReferences = function(targets) {
+						//====================
+						//
+						//====================
+						$scope.loadReferences = function(targets) {
 
-				angular.forEach(targets, function(ref){
+							angular.forEach(targets, function(ref){
 
-					storage.documents.get(ref.identifier, { cache : true})
-						.success(function(data){
-							ref.document = data;
-						})
-						.error(function(error, code){
-							if (code == 404 && $scope.allowDrafts == "true") {
-
-								storage.drafts.get(ref.identifier, { cache : true})
+								storage.documents.get(ref.identifier, { cache : true})
 									.success(function(data){
 										ref.document = data;
 									})
-									.error(function(){
+									.error(function(error, code){
+										if (code == 404 && $scope.allowDrafts == "true") {
+
+											storage.drafts.get(ref.identifier, { cache : true})
+												.success(function(data){
+													ref.document = data;
+												})
+												.error(function(){
+													ref.document  = undefined;
+													ref.error     = error;
+													ref.errorCode = code;
+												});
+										}
+
 										ref.document  = undefined;
 										ref.error     = error;
 										ref.errorCode = code;
+
 									});
-							}
-
-							ref.document  = undefined;
-							ref.error     = error;
-							ref.errorCode = code;
-
-						});
-				});
-			};
-		}]
-	};
-}]);
+							});
+						};
+					}]
+				};
+			}]);
+		//}
+ 	}
+ );

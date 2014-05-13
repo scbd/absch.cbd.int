@@ -1,4 +1,6 @@
-require("app").directive('viewNotification', [function() {
+define(['app'], function (app) {
+
+app.directive('viewNotification', [function() {
 	return {
 		restrict: 'EAC',
 		templateUrl: '/app/views/forms/view/view-notification.directive.html',
@@ -13,3 +15,4 @@ require("app").directive('viewNotification', [function() {
 		}]
 	}
 }]);
+});

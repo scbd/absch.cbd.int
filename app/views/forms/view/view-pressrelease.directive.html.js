@@ -1,4 +1,6 @@
-require("app").directive('viewPressRelease', [function() {
+define(['app'], function (app) {
+
+app.directive('viewPressRelease', [function() {
 	return {
 		restrict: 'EAC',
 		templateUrl: '/app/views/forms/view/view-pressrelease.directive.html',
@@ -13,3 +15,4 @@ require("app").directive('viewPressRelease', [function() {
 		}]
 	}
 }]);
+});

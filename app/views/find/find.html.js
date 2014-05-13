@@ -1,5 +1,6 @@
+define(['app'], function (app) {
 
-require('app').controller('FindController', ['$scope', '$rootScope', '$http', '$timeout', '$q', function ($scope, $rootScope, $http, $timeout, $q) {
+app.controller('FindController', ['$scope', '$rootScope', '$http', '$timeout', '$q', function ($scope, $rootScope, $http, $timeout, $q) {
     
     var self = this;
     var queryCanceler = null;
@@ -298,3 +299,4 @@ require('app').controller('FindController', ['$scope', '$rootScope', '$http', '$
     $scope.$watch('keyword',         function() { $scope.currentPage=0; refresh(); });    
 
 }]);
+});

@@ -1,4 +1,6 @@
-require("app").directive("viewMeasure", [function () {
+define(['app'], function (app) {
+
+app.directive("viewMeasure", [function () {
 	return {
 		restrict   : "EAC",
 		templateUrl: "/app/views/forms/view/view-measure.directive.html",
@@ -101,3 +103,5 @@ require("app").directive("viewMeasure", [function () {
 		}]
 	};
 }]);
+
+});

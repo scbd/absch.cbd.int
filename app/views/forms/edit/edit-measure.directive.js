@@ -1,4 +1,6 @@
-require("app").directive("editMeasure", [ "authHttp", "Enumerable", "$filter", "$q", "guid", function ($http, Enumerable, $filter, $q, guid) {
+define(['app'], function (app) {
+
+app.directive("editMeasure", [ "authHttp", "Enumerable", "$filter", "$q", "guid", function ($http, Enumerable, $filter, $q, guid) {
 
 	return {
 		restrict   : "EAC",
@@ -537,5 +539,5 @@ require("app").directive("editMeasure", [ "authHttp", "Enumerable", "$filter", "
 				$scope.$emit("getDocumentInfo", {});
 			}]
 		}
-	})
-;
+	});
+});

@@ -1,5 +1,7 @@
-﻿"use strict";
-require("app").directive("myPendingTasks", [function () {
+﻿define(['app'], function (app) {
+
+"use strict";
+app.directive("myPendingTasks", [function () {
 	return {
 		priority: 0,
 		restrict: 'EAC',
@@ -33,7 +35,7 @@ require("app").directive("myPendingTasks", [function () {
 
 					$scope.workflows = workflows;
 
-					nextLoad = $timeout(load, 15*1000);
+					//nextLoad = $timeout(load, 15*1000);
 				})
 			}
 
@@ -68,5 +70,5 @@ require("app").directive("myPendingTasks", [function () {
 			});
 		}]
 	}
-}])
-;
+}]);
+});

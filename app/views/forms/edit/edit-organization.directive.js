@@ -1,4 +1,6 @@
-require("app").directive("editOrganization", [ function () {
+define(['app'], function (app) {
+
+app.directive("editOrganization", [ function () {
 
 	return {
 		restrict   : "EAC",
@@ -210,3 +212,4 @@ require("app").directive("editOrganization", [ function () {
 		}]
 	};
 }]);
+});

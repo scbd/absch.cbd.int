@@ -1,4 +1,6 @@
-require("app").directive("viewAbsCheckpointCommunique", [function () {
+define(['app'], function (app) {
+
+app.directive("viewAbsCheckpointCommunique", [function () {
 
 	return {
 		restrict   : "EAC",
@@ -161,3 +163,5 @@ require("app").directive("viewAbsCheckpointCommunique", [function () {
 		}]
 	};
 }]);
+
+})

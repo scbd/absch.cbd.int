@@ -1,4 +1,6 @@
-require("app").directive('viewMeeting', [function() {
+define(['app'], function (app) {
+
+app.directive('viewMeeting', [function() {
 	return {
 		restrict: 'EAC',
 		templateUrl: '/app/views/forms/view/view-meeting.directive.html',
@@ -13,3 +15,4 @@ require("app").directive('viewMeeting', [function() {
 		}]
 	}
 }]);
+});

@@ -1,4 +1,5 @@
-require('app').directive('searchFilterThemes', function ($http) {
+define(['app'], function (app) {
+app.directive('searchFilterThemes', function ($http) {
     return {
         restrict: 'EAC',
         templateUrl: '/app/views/find_themes.partial.html',
@@ -65,18 +66,7 @@ require('app').directive('searchFilterThemes', function ($http) {
 
 
                 $element.find("#dialogSelect").modal("show");
-
                 
-
-
-
-
-                
-
-
-
-
-
                 //if(!$scope.expanded)
                     //$scope.$parent.$broadcast('onExpand', $scope);
 
@@ -262,7 +252,9 @@ require('app').directive('searchFilterThemes', function ($http) {
                //console.log (data);
             });
 
-            $scope.$watch('items', function (values) { if(!values) return;
+            $scope.$watch('items', function (values) { 
+
+                if(!values) return;
                 if($scope.termsMap)
                     values.forEach(function (item) {
                         if(_.has($scope.termsMap, item.symbol))
@@ -272,18 +264,7 @@ require('app').directive('searchFilterThemes', function ($http) {
         }]
     }
 });
+});
 
-//============================================================
-//
-//
-//============================================================
-// angular.module('kmApp').compileProvider.directive('bindIndeterminate', [function () {
-//     return {
-//         restrict: 'A',
-//         link: function (scope, element, attrs) {
-//             scope.$watch(attrs.bindIndeterminate, function (value) {
-//                 element[0].indeterminate = value;
-//             });
-//         }
-//     };
-// }]);
+
+

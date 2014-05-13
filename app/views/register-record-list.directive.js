@@ -1,3 +1,4 @@
+define(['app'], function (app) {
 "use strict";
 require("app").directive("registerRecordList", ["$timeout", function ($timeout) {
 
@@ -178,3 +179,5 @@ require("app").directive("registerRecordList", ["$timeout", function ($timeout) 
 		}]
 	};
 }]);
+
+});

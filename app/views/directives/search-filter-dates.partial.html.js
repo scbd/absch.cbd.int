@@ -1,5 +1,6 @@
-require('app')
-.directive('searchFilterDates', function ($http) {
+define(['app'], function (app) {
+
+app.directive('searchFilterDates', function ($http) {
     return {
         restrict: 'EAC',
         templateUrl: '/app/views/directives/search-filter-dates.partial.html',
@@ -74,3 +75,5 @@ require('app')
         }]
     }
 })
+
+});
