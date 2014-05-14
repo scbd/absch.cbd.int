@@ -69,6 +69,27 @@ app.controller("RegisterController",
  			return	$scope.dashboardFilter == filter || $scope.dashboardFilter == "All";
  	}
 
+
+	//============================================================
+	//
+	// 
+	//
+	//============================================================
+	$scope.findString = function (arr, str)
+	{
+		if(!arr)
+			return false;
+		if(!str)
+			return false;
+
+		for(var i=0; i < arr.length; i++) {
+			if(arr[i] == str)
+				return true;
+		}
+
+		return false;
+	};
+
 	//============================================================
 	//
 	//
@@ -118,11 +139,16 @@ app.controller("RegisterController",
 	//============================================================
 	function loadRecords(schema)
 	{
+
 		console.log( schema);
 		
-		if(schema == null || schema==undefined){
+		if(schema == null || schema==undefined || schema=="dashboard"){
 			schema = schemaTypes.join("' or type eq '");
 		}
+
+		if(schema == null || schema==undefined )
+			return;
+
 		
 		if(_.contains($scope.isLoaded, schema))
 			return;
@@ -131,7 +157,6 @@ app.controller("RegisterController",
 			return $scope.records = null;
 
 		var qAnd = [];
-
 		qAnd.push("(type eq '" + schema + "')");
 
 		var qDocuments = storage.documents.query(qAnd.join(" and ")||undefined);
@@ -173,7 +198,7 @@ app.controller("RegisterController",
 			return $scope.records;
 		});
 	}
-	loadRecords();
+	//loadRecords();
 
 	function refreshRecords(){
 		var currentTab = $scope.tab();
@@ -184,7 +209,7 @@ app.controller("RegisterController",
 		//remove records for the current tab from records array and refetch from server.
 		// var currentTabRecords = _.where($scope.records, {"type": currentTab})
 		// console.log(currentTabRecords)
-		debugger;
+		//debugger;
 		// $scope.records.forEach(function(row){
 		// 	console.log(row);
 

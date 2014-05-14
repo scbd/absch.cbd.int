@@ -57,7 +57,7 @@
               D</a>
               
               <a ng-click="loadDocument(record); displayDetails=!displayDetails" ng-show="record.documentID">
-              <i ng-class="{'fa fa-caret-down':displayDetails, 'fa fa-caret-right':!displayDetails}" style="font-size:11px;color:#999;position:relative; top:-1px;font-size:14px;"></i> 
+              <i class="fa" ng-class="{'fa-caret-down':displayDetails, 'fa-caret-right':!displayDetails}" style="font-size:11px;color:#999;position:relative; top:-1px;font-size:14px;"></i> 
               <h4 style="display:inline;">{{(record.workingDocumentTitle||record.title)|lstring}}</h4></a>
 
               <span ng-hide="record.documentID">
