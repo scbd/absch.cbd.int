@@ -77,11 +77,12 @@
               <a style="color:#666" href="mailto:{{record.updatedBy.email}}"><strong>{{record.updatedBy.firstName}} {{record.updatedBy.lastName}}</strong> </a>
               <span style="font-size:10px;white-space:nowrap;">{{record.updatedOn | date:"dd MMM yyyy h:mm a (Z)" }}</span>
           </div>
-          </div> <!-- end col -->
+          </div> <!-- end col glyphicon glyphicon-lock -->
           <div class="col-xs-2" style="text-align:right;">
              <div class="btn-group">
-              <button type="button" class="btn btn-default" ng-click="edit(record)"><i class="fa fa-edit"></i></button>
-              <button ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
+                <button ng-show="isRequest(record)" type="button" class="btn btn-default"><i class="glyphicon glyphicon-lock"></i></button>
+                <button ng-show="!isRequest(record)" type="button" class="btn btn-default" ng-click="edit(record)"><i class="fa fa-edit"></i></button>
+                <button ng-show="!isRequest(record)"ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
             </div>
           </div> <!-- end col -->
      
