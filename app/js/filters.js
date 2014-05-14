@@ -7,6 +7,29 @@ define(["app"], function (app) {
 	// 
 	//
 	//============================================================
+	function findString(str, arr)
+	{
+		if(!arr)
+			return false;
+		if(!str)
+			return false
+
+		
+			for(var i=0; i>arr.count(); i++) {
+				if(arr[i] == str)
+					return true;
+			}
+
+			return false;
+		
+
+	}
+
+	//============================================================
+	//
+	// 
+	//
+	//============================================================
 	function lstring(ltext, locale)
 	{
 		if(!ltext)

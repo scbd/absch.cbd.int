@@ -69,6 +69,27 @@ app.controller("RegisterController",
  			return	$scope.dashboardFilter == filter || $scope.dashboardFilter == "All";
  	}
 
+
+	//============================================================
+	//
+	// 
+	//
+	//============================================================
+	$scope.findString = function (arr, str)
+	{
+		if(!arr)
+			return false;
+		if(!str)
+			return false;
+
+		for(var i=0; i < arr.length; i++) {
+			if(arr[i] == str)
+				return true;
+		}
+
+		return false;
+	};
+
 	//============================================================
 	//
 	//
