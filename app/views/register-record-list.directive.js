@@ -19,7 +19,7 @@ require("app").directive("registerRecordList", ["$timeout", function ($timeout) 
 
 
 			$scope.$watch("recordToDelete", function(val){
-				console.log("recordToDelete", val);
+
 
 				if( val && !deleteRecordModel.is(":visible")) { console.log("show"); deleteRecordModel.modal("show"); }
 				if(!val &&  deleteRecordModel.is(":visible")) { console.log("hide"); deleteRecordModel.modal("hide"); }

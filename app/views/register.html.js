@@ -24,9 +24,9 @@ define(['app',
 
 app.controller("RegisterController", 
 	["$rootScope", "$location" , "$scope", "$q", "$window", "IStorage", "underscore",
-	 "schemaTypes", "$compile", 
+	 "schemaTypes", "$compile", "$timeout",
 	 function ($rootScope, $location, $scope, $q, $window, storage, _,
-	  schemaTypes) {
+	  schemaTypes,$compile,$timeout) {
 
 	//============================================================
 	//============================================================
@@ -68,7 +68,6 @@ app.controller("RegisterController",
  	$scope.isFilter = function(filter){
  			return	$scope.dashboardFilter == filter || $scope.dashboardFilter == "All";
  	}
-
 
 	//============================================================
 	//
@@ -159,8 +158,8 @@ app.controller("RegisterController",
 		var qAnd = [];
 		qAnd.push("(type eq '" + schema + "')");
 
-		var qDocuments = storage.documents.query(qAnd.join(" and ")||undefined);
-		var qDrafts    = storage.drafts   .query(qAnd.join(" and ")||undefined);
+		var qDocuments = storage.documents.query(qAnd.join(" and ")||undefined,undefined,{cache:false});
+		var qDrafts    = storage.drafts   .query(qAnd.join(" and ")||undefined,{cache:false});
 
 		$q.all([qDocuments, qDrafts]).then(function(results) {
 
@@ -198,7 +197,7 @@ app.controller("RegisterController",
 			return $scope.records;
 		});
 	}
-	loadRecords();
+		loadRecords();
 
 	function refreshRecords(){
 		var currentTab = $scope.tab();
@@ -207,19 +206,9 @@ app.controller("RegisterController",
 		$scope.isLoaded.splice($.inArray(currentTab,$scope.isLoaded),1);
 
 		//remove records for the current tab from records array and refetch from server.
-		// var currentTabRecords = _.where($scope.records, {"type": currentTab})
-		// console.log(currentTabRecords)
-		//debugger;
-		// $scope.records.forEach(function(row){
-		// 	console.log(row);
-
-		// 	if(row.type==currentTab)
-		// 		$scope.records.splice($.inArray(row,$scope.records),1);
-		// });
-	$scope.records =_.reject($scope.records, function(record){
+		$scope.records =_.reject($scope.records, function(record){
 							return record.type== currentTab;
 					});
-
 		loadRecords(currentTab);
 	}
 
@@ -472,6 +461,19 @@ app.controller("RegisterController",
 		unreg_routeChangeStart();
 		unreg_locationChangeStart();
 	});
+
+	$scope.$watch('msg',function(newValue){
+ 		console.log(newValue + '-'  + 'msg');
+ 		if(newValue != "")
+ 		{
+ 			$timeout(function() {
+ 				console.log($scope.msg);
+ 				$scope.msg ="";
+ 				}
+ 			, 10000);
+ 			console.log($scope.msg);
+ 		}
+ 	});
 
 	$scope.$watch('tab()', function(value) {
 
