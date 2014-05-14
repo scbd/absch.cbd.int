@@ -198,7 +198,7 @@ app.controller("RegisterController",
 			return $scope.records;
 		});
 	}
-	//loadRecords();
+	loadRecords();
 
 	function refreshRecords(){
 		var currentTab = $scope.tab();
