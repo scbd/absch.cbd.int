@@ -22,8 +22,8 @@
 
                 <div>
 
-                    <a ng-click="tab('dashboard')" class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='dashboard'}" href="#" role="button" style="color:#333;font-weight:bold;">
-                        <i class="glyphicon glyphicon-list-alt"></i> DASHBOARD »</a>
+                    <h3 ><a ng-click="tab('dashboard')"  ng-class="{ 'btn-commonformat-selected' : tab()=='dashboard'}" href="#" role="button">
+                        <i class="glyphicon glyphicon-list-alt" style="position:relative;top:4px;"></i> Dashboard </a></h3>
                     <!--  <div ng-switch on="document.schema">
       <div ng-switch-when="nationRecords">
       </div>
@@ -139,14 +139,14 @@
                     </a>
                 </div>
 
-                <div>
+             <!--    <div>
                     <h3>National Users</h3>
 
                     <a href="http://www.cbd.int/doc/abs/commonformats/ABSCH-PA.doc">
                         <i class="glyphicon glyphicon-circle-arrow-down"></i> Download Publishing Authority(PA) and National Authorized User(NAU) nomination form
                     </a>
 
-                    <!-- <a  ng-click="tab('abschNFP')"  href="#" role="button">
+                    <a  ng-click="tab('abschNFP')"  href="#" role="button">
               <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='abschNFP'}">
               <span class="btn-commonformat-national">ABSCH-NFP </span>   
               <br><span class="btn-commonformat-name">National ABS Focal Points</span>
@@ -162,10 +162,10 @@
               <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='abschNAU'}">
               <span class="btn-commonformat-national">ABSCH-NAU </span>   
               <br><span class="btn-commonformat-name">National Authorized Users</span>
-              </div></a> -->
-                </div>
+              </div></a>
+                </div>-->
 
-            </div>
+            </div> 
 
             <div class="col-xs-12" ng-hide="isAuthenticated" style="padding-top:20px;">
                 <div class="alert" ng-hide="isAuthenticated">
@@ -240,10 +240,9 @@
                     <div class="alert alert-info" ng-show="isAuthenticated">
                         <p>You are signed in as:
                             <strong>{{user.name}}</strong>
-                            <span ng-show="user.roles.indexOf('AbsPublishingAuthorities') > 0">(PA)</span>
-                            <span ng-show="user.roles.indexOf('abschiac') > 0">(IAC)</span>
-                            <span ng-show="user.roles.indexOf('AbsNationalAuthorizedUser') > 0">(NAU)</span>
-                        </p>
+                            <span ng-show="findString(user.roles,'AbsPublishingAuthorities')">(PA)</span>
+                            <span ng-show="findString(user.roles,'abschiac')">(IAC)</span>
+                            <span ng-show="findString(user.roles,'AbsNationalAuthorizedUser')">(NAU)</span>
                     </div>
 
                     <div ng-hide="isAuthenticated">
@@ -263,11 +262,11 @@
                                 <i ng-show="isFilter('Urgent')" class="glyphicon glyphicon-ok"></i> Urgent
                                 <span class="badge badge-default"></span>
                             </span>
-                            <span ng-click="setDashFilter('Pending')" class="btn btn-success">
+                            <span ng-click="setDashFilter('Pending')" class="btn btn-warning">
                                 <i ng-show="isFilter('Pending')" class="glyphicon glyphicon-ok"></i> Pending
                                 <span class="badge badge-default"></span>
                             </span>
-                            <span ng-click="setDashFilter('Completed')" class="btn btn-default btn-draft" style="color:#fff">
+                            <span ng-click="setDashFilter('Completed')" class="btn btn-success" style="color:#fff">
                                 <i ng-show="isFilter('Completed')" class="glyphicon glyphicon-ok"></i> Completed
                                 <span class="badge badge-default" style="color:#999"></span>
                             </span>
@@ -281,22 +280,22 @@
                     <div ng-show="isAuthenticated" class="row">
                         <div class="col-ld-12 col-md-12 col-sm-12">
                             </br>
-                            <div class="panel panel-default" ng-show="isFilter('Urgent')">
-                                <div class="panel-heading">Items requiring your attention</div>
+                            <div class="panel panel-danger" ng-show="isFilter('Urgent')">
+                                <div class="panel-heading" style="background-color:#d9534f;color:white;">Items requiring your attention</div>
                                 <div class="panel-body">
                                     <my-tasks></my-tasks>
                                 </div>
                             </div>
 
-                            <div class="panel panel-default" ng-show="isFilter('Pending')">
-                                <div class="panel-heading">Pending requests</div>
+                            <div class="panel panel-warning" ng-show="isFilter('Pending')">
+                                <div class="panel-heading"  style="background-color:#f0ad4e;color:white;">Pending requests</div>
                                 <div class="panel-body">
                                     <my-pending-tasks></my-pending-tasks>
                                 </div>
                             </div>
 
-                            <div class="panel panel-default" ng-show="isFilter('Completed')">
-                                <div class="panel-heading">Completed requests</div>
+                            <div class="panel panel-success" ng-show="isFilter('Completed')">
+                                <div class="panel-heading" style="background-color:#5cb85c;color:white;">Completed requests</div>
                                 <div class="panel-body">
                                     <my-completed-tasks></my-completed-tasks>
                                 </div>
