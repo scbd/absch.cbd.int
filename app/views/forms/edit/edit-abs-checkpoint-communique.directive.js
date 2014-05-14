@@ -16,8 +16,6 @@ app.directive("editAbsCheckpointCommunique", [ function () {
 			$scope.review   = { locale : "en" };
 			$scope.options  = {
 				countries		: function () { return $http.get("/api/v2013/thesaurus/domains/countries/terms", { cache: true }).then(function (o) { return $filter("orderBy")(o.data, "name"); }); },
-				// permits			: function () { return $http.get("api/v2013/index/select?cb=1400016720572&fl=identifier_s,title_t,createdDate_dt,&q=realm_ss:absch+AND+((+(schema_s:absPermit)+))&sort=createdDate_dt+desc,+title_t+asc&start=0&wt=json",
-				// 								 { cache: true }).then(function (o) { console.log(o); return o.data.response.docs[0]; }); },
 				permits         : function () { return $http.get("api/v2013/index/select?cb=1400016720572&fl=identifier_s,title_t,createdDate_dt,&q=realm_ss:absch+AND+((+(schema_s:absPermit)+))&start=0&wt=json",  { cache: true })
 										.then(function(o){ 
 												 

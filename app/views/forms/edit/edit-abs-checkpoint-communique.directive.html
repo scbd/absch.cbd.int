@@ -57,8 +57,7 @@
 
                             <div class="km-control-group" name="permit" required caption="Reference number(s) of the internationally recognized certificate(s) of compliance that relate(s) to this communiqué">
 
-                                <!-- <div ng-disabled="isPermitNotAvailable()" km-select required multiple name="permit" ng-model="document.permit" watch-items items="options.permits()" placeholder="Please select ..."></div> -->
-                                <div km-select required name="permit" ng-disabled="isPermitNotAvailable()" ng-model="document.permit" items="options.permits()" placeholder="Please select..."></div>
+                                <div ng-disabled="isPermitNotAvailable()" km-select required multiple name="permit" ng-model="document.permit"items="options.permits()" placeholder="Please select ..."></div> <!-- watch-items -->                              
 
                             </div>
                         </div>
