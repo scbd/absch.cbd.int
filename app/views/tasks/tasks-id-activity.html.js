@@ -41,6 +41,7 @@ app.controller("TaskIdActivityController", [ "$scope", "$timeout", "authHttp", "
 
 			$scope.workflow = workflow;
 			$scope.activity = activity
+			console.log($scope.activity);
 		});
 	}
 	

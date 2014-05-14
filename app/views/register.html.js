@@ -49,6 +49,7 @@ app.controller("RegisterController",
 	$scope.records = [];
 	$scope.dashboardFilter = "All";
   	$scope.isLoaded = [];
+  	$scope.refreshTab = false;
 
 	$scope.schemaTypesFacets = [
 		{"schema":"measure","schemaType":"nationalRecords", "header":"ABSCH-MSR","commonFormat":"Legislative, administrative or policy measures", "draftCount":0,"requestCount":0,"publishCount": 0},
@@ -160,7 +161,7 @@ app.controller("RegisterController",
 
 		var qDocuments = storage.documents.query(qAnd.join(" and ")||undefined,undefined,{cache:false});
 		var qDrafts    = storage.drafts   .query(qAnd.join(" and ")||undefined,{cache:false});
-
+		console.log(qDrafts);
 		$q.all([qDocuments, qDrafts]).then(function(results) {
 
 			var documents = results[0].data.Items;
@@ -197,14 +198,18 @@ app.controller("RegisterController",
 			return $scope.records;
 		});
 	}
-		loadRecords();
+	
+	loadRecords();
 
-	function refreshRecords(){
+	$scope.refreshRecords = function (){
 		var currentTab = $scope.tab();
 
 		//remove tab details from isLoded array which is used to avoid reload of records on tab change.
 		$scope.isLoaded.splice($.inArray(currentTab,$scope.isLoaded),1);
-
+		var schemaCount = _.where($scope.schemaTypesFacets,{"schema":currentTab});
+		schemaCount[0].draftCount 	= 0;					
+		schemaCount[0].requestCount = 0;
+		schemaCount[0].publishCount	= 0;
 		//remove records for the current tab from records array and refetch from server.
 		$scope.records =_.reject($scope.records, function(record){
 							return record.type== currentTab;
@@ -388,7 +393,7 @@ app.controller("RegisterController",
 	//============================================================
 	$scope.$on("documentPublishRequested", function(evt, workflowInfo){
 		
-		refreshRecords();
+		$scope.refreshRecords();
 		evt.stopPropagation();
 		$scope.editing = false;
 		$scope.msg = "Record saved. A publishing request has been sent to your Publishing Authority.";
@@ -403,7 +408,7 @@ app.controller("RegisterController",
 	//============================================================
 	$scope.$on("documentPublished", function(evt, documentInfo){
 		
-		refreshRecords();
+		$scope.refreshRecords();
 		evt.stopPropagation();
 		$scope.editing = false;
 		$scope.msg = "Record published.";
@@ -418,7 +423,7 @@ app.controller("RegisterController",
 	//
 	//============================================================
 	$scope.$on("documentDeleted", function(evt){
-		refreshRecords();
+		$scope.refreshRecords();
 		evt.stopPropagation();
 		$scope.editing = false;
 		$scope.msg = "Record deleted.";
@@ -472,6 +477,12 @@ app.controller("RegisterController",
  				}
  			, 10000);
  			console.log($scope.msg);
+ 		}
+ 	});
+
+ 	$scope.$watch('refreshTab', function(newValue){
+ 		if(newValue==true){
+ 			refreshTab();
  		}
  	});
 

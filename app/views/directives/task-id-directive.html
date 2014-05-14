@@ -1,12 +1,8 @@
-<div>
-
-<div ng-cloak class="home-bottom" style="position:relative" >
-    <div id="main" >
-      	<div class="row top">  
-	    	
-	    	<h1>Task</h1>  
-	        
-			<table class="table table-striped">
+<div id="Record" class="record panel panel-default">		
+	<div class="panel-heading">	<h4>Task</h4> 
+	</div>
+	<div class="record-body panel-body">
+		<table class="table table-striped">
 			  <tr>
 				  <th colspan="2">
 				  	Request information and status
@@ -62,12 +58,9 @@
 			  	<td>Created on</td>
 			  	<td>{{workflow.createdOn|date:'short'}} by {{workflow.createdBy_info.firstName}} {{workflow.createdBy_info.lastName}}</td>
 			  </tr>
+		</table>
 
-			</table>
-
-
-			<!-- Pending activity(ies) -->
-
+		<!-- Pending activity(ies) -->
 			<table class="table table-striped" ng-show="(workflow.activities|filter:isOpen).length">
 			  <tr>
 			  	<th style="width:40%">Pending activity(ies)</th>
@@ -114,20 +107,67 @@
 							<em>Not assigned yet</em>
 						</span>
 					</span>
-
-					
-
 			  	</td>
+			  	<td class="text-right">	
+			  			<div ng-show="isAssignedToMe(activity)">
+							<div ng-hide="activity.closedOn" ng-switch="activity.name">
+								<div ng-switch-when="publishRecord">
+									<span ng-hide="activity.closedOn">
+										<div ng-show="isAssignedToMe(activity)">
+											<button type="button" class="btn btn-primary" ng-click="updateActivity({ action : 'approve' })"><i class="glyphicon glyphicon-ok"></i> </button><!-- Approve -->
+											<button type="button" class="btn btn-warning"  data-toggle="modal" data-target="#rejectModal"><i class="glyphicon glyphicon-remove"></i> </button><!-- Reject Request Changes /  -->
+										</div>
+									</span>
+									<form name="rejectForm" role="form">
+										<div class="modal fade" id="rejectModal">
+										  <div class="modal-dialog">
+										    <div class="modal-content">
+										      <div class="modal-header">
+										        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+										        <h4 class="modal-title">Request Changes or Reject a record revision</h4>
+										      </div>
+										      <div class="modal-body">
+											    <p ng-class="{ 'has-warning':rejectForm.reason.$error.required, 'has-success':!rejectForm.reason.$invalid }">
+												    <textarea class="form-control" rows="5" name="reason" ng-model="rejectReason" required></textarea>
+												    <span class="help-block" ng-show="rejectForm.reason.$error.required">Please provide instructions on how you want the record to be modified or the reason why you rejected this record.</span>
+										        </p>
+										      </div>
+										      <div class="modal-footer">
+										        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+												<button type="button" class="btn btn-warning" data-dismiss="modal" ng-disabled="rejectForm.reason.$error.required" ng-click="updateActivity({ action : 'reject', reason: rejectReason })"><i class="glyphicon glyphicon-remove"></i> Request Changes / Reject </button>
+										      </div>
+										    </div><!-- /.modal-content -->
+										  </div><!-- /.modal-dialog -->
+										</div><!-- /.modal -->	
+								    </form>
+								</div>
+							</div>
 
-			  	<td class="text-right">
-					<a ng-show="isAssignedToMe(activity)" class="btn btn-info" ng-href="/register/tasks/{{workflow._id}}/{{activity.name}}"  type="button"><i class="glyphicon glyphicon-edit"></i></button>
+							<div ng-show="activity.completedOn">
+
+								<span ng-show="activity" ng-switch="activity.result.action">
+									<span ng-switch-when="approve"><i class="glyphicon glyphicon-ok"></i> Approved</span>
+									<span ng-switch-when="reject"><i class="glyphicon glyphicon-remove"></i> Rejected</span>
+								</span>
+
+								<span ng-hide="activity"><i class="glyphicon glyphicon-ok"></i> Completed</span>
+
+								on {{activity.completedOn|date:'short'}} by {{activity.completedBy_info.firstName}} {{activity.completedBy_info.lastName}}
+							</div>
+
+							<div ng-show="activity.canceledOn">
+								Canceled on {{activity.canceledOn|date:'short'}} by {{activity.canceledBy_info.firstName}} {{activity.canceledBy_info.lastName}}
+							</div>
+
+							<div ng-show="activity.failedOn">
+								Failed on {{activity.failedOn|date:'short'}}
+							</div>
+						</div> 
 			  	</td>
-
-			  </tr>
+			  </tr>			 
 			</table>
-
-
-			<!-- Completed activity(ies) -->
+			
+		<!-- Completed activity(ies) -->
 
 			<table class="table table-striped" ng-show="(workflow.activities|filter:isClose).length">
 			  <tr>
@@ -169,33 +209,29 @@
 			<div ng-show="document" class="t-document">
 				<record-loader document="document" hide-buttons="true" link-target="_self"></record-loader>
 			</div>	
+	
 
-  		</div>
 	</div>
-
-</div>
-
-<style>
-.t-document {
-  position: relative;
-  padding: 45px 15px 15px;
-  margin: 0 -15px 15px;
-  border-color: #e5e5e5 #eee #eee;
-  border-style: solid;
-  border-width: 1px 1px;
-}
-/* Echo out a label for the example */
-.t-document:after {
-  content: "Document to approve";
-  position: absolute;
-  top:  15px;
-  left: 15px;
-  font-size: 12px;
-  font-weight: bold;
-  color: #bbb;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-</style>
-
+	<style>
+	.t-document {
+	  position: relative;
+	  padding: 45px 15px 15px;
+	  margin: 0 -15px 15px;
+	  border-color: #e5e5e5 #eee #eee;
+	  border-style: solid;
+	  border-width: 1px 1px;
+	}
+	/* Echo out a label for the example */
+	.t-document:after {
+	  content: "Document to approve";
+	  position: absolute;
+	  top:  15px;
+	  left: 15px;
+	  font-size: 12px;
+	  font-weight: bold;
+	  color: #bbb;
+	  text-transform: uppercase;
+	  letter-spacing: 1px;
+	}
+	</style>
 </div>

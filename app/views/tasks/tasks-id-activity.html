@@ -76,6 +76,7 @@
 			</table>
 
 
+{{activity.closedOn}}blaise
 			<div ng-hide="activity.closedOn" ng-switch="activity.name">
 				<div ng-switch-when="publishRecord">
 
@@ -103,7 +104,6 @@
 					
 				</div>
 			</div>
-
 			<div ng-show="activity.completedOn">
 
 				<span ng-show="activity" ng-switch="activity.result.action">

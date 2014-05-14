@@ -7,7 +7,8 @@ app.directive('taskId', function () {
             replace: true,
             scope: {
                 loadTaskData : '=',
-                workflowTaskId : '@'
+                workflowTaskId : '@',
+                parentWatcher : '@', //used in case if the directive parent needs to be refreshed else the workflow details will be fetched.
             },
             controller: [ "$scope", "$timeout", "authHttp", "$route", "IStorage", "IWorkflows", "authentication", "underscore",
 					 function ($scope, $timeout, $http, $route, IStorage, IWorkflows, authentication, _) 
@@ -17,12 +18,16 @@ app.directive('taskId', function () {
 						//
 						//==================================================
 						function load() {
+
+								var activityName = $route.current.params.activity;
 								if($scope.workflowTaskId != undefined && $scope.loadTaskData != undefined)
 								{
 									//console.log	($scope.workflowTaskId + '-' + $scope.loadTaskData)
 									IWorkflows.get($scope.workflowTaskId).then(function(workflow){
-										$scope.workflow = workflow;
 
+										$scope.workflow = workflow;
+										// $scope.activity = _.findWhere(workflow.activities[0], {name : activityName });
+// console.log(workflow.activities);
 										if(workflow.data.identifier && !workflow.closedOn) {
 
 											IStorage.drafts.get(workflow.data.identifier).then(function(result){
@@ -31,10 +36,29 @@ app.directive('taskId', function () {
 										}
 										//console.log	('promise exe');
 									});
-									//console.log	('load exe');
+								
 								}
-						}
 
+						}
+						//==================================================
+						//
+						//
+						//==================================================
+						$scope.updateActivity = function(resultData) {
+
+							IWorkflows.updateActivity($scope.workflowTaskId, $scope.workflow.activities[0].name, resultData).then(function(){
+									// if($scope.$parentWatcher){
+										alert('done');
+										$scope.$parent.$parent.$parent.refreshRecords();
+									// }
+									// else{
+									// 	load();
+									// }
+
+							}).catch(function(error) {
+								alert(error);
+							});
+						};
 						//==================================================
 						//
 						//
