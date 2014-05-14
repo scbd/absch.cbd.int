@@ -1,225 +1,223 @@
-﻿<div>
+﻿<div id="Record" class="record panel panel-default">		
+	<div class="panel-heading"> <h2><span class="record-title-national">ABSCH-IRCC</span> Permit or its equivalent constituting an internationally recognized certificate of compliance</h2> </div>
+	<div class="record-body panel-body">
+			<a type="button" ng-show="showPdf" target="_blank" class="btn btn-info pull-right" ng-href="http://absch.cbd.int/app/abs/docs/ABSCH-BA-103882-X-TEST.pdf">Download the Compliance Certificate</a>
+			<h3>{{document.title | lstring:locale}}</h3>
+
+			<div ng-show="document.government || document.updateReasons">
+				<legend>General information</legend>
+
+				<div ng-show="showPdf && documentInfo">
+					<label>ABS Clearing House Unique Identifier</label>
+					<div class="km-value">ABSCH-{{document.government.identifier|uppercase}}-{{documentInfo.documentID}}-X</div>
+				</div>
 
 
-
- <h2><span class="record-title-national">ABSCH-IRCC</span> Permit or its equivalent constituting an internationally recognized certificate of compliance</h2> 
-
-	<a type="button" ng-show="showPdf" target="_blank" class="btn btn-info pull-right" ng-href="http://absch.cbd.int/app/abs/docs/ABSCH-BA-103882-X-TEST.pdf">Download the Compliance Certificate</a>
-	<h3>{{document.title | lstring:locale}}</h3>
-
-	<div ng-show="document.government || document.updateReasons">
-		<legend>General information</legend>
-
-		<div ng-show="showPdf && documentInfo">
-			<label>ABS Clearing House Unique Identifier</label>
-			<div class="km-value">ABSCH-{{document.government.identifier|uppercase}}-{{documentInfo.documentID}}-X</div>
-		</div>
-
-
-		<div ng-show="document.government">
-			<label>Country</label>
-			<div class="km-value" >
-				{{document.government|term}}
-			</div>
-		</div>
-		<div ng-show="document.updateReasons">
-			<label>Provide a summary of the reason for the update of the record</label>
-			<div class="km-value km-pre">{{document.updateReasons | lstring:locale}}</div>
-		</div>
-	</div>
-
-	<div ng-show="authority">
-		<legend>Issuing Authority</legend>
-		<label>Competent national authority responsible for issuing the permit</label>
-		<div class="km-value">
-			<div class="view-authority-reference" ng-model="authority.document" locale="locale"></div>
-		</div>
-	</div>
-	<div ng-show="document.nationalReferences ||
-		document.date || document.provider || document.informedConsent ||
-		document.geneticResources || document.consentGranted ||
-		document.consentInformation || document.consentDocuments ||
-		document.specimen || document.taxonomy || document.gisFiles">
-		<legend>Details of the permit or its equivalent</legend>
-
-		<div ng-show="document.nationalReferences">
-			<label>Additional national references or identifiers</label>
-			<div class="km-value km-pre">{{document.nationalReferences | lstring:locale}}</div>
-		</div>
-
-		<div ng-show="document.date">
-			<label>Date of issuance of the permit or its equivalent</label>
-			<div class="km-value">{{document.date}}</div>
-		</div>
-
-		<div ng-show="document.provider || document.providerConfidential">
-			<label>The provider</label>
-			<div class="km-value">
-				<div view-contact-reference ng-model="document.provider" locale="locale"></div>
-				<div ng-show="document.providerConfidential">
-					Confidential information
+				<div ng-show="document.government">
+					<label>Country</label>
+					<div class="km-value" >
+						{{document.government|term}}
+					</div>
+				</div>
+				<div ng-show="document.updateReasons">
+					<label>Provide a summary of the reason for the update of the record</label>
+					<div class="km-value km-pre">{{document.updateReasons | lstring:locale}}</div>
 				</div>
 			</div>
-		</div>
 
-		<div ng-show="document.consentGranted!=undefined">
-			<label>Confirmation that prior informed consent was obtained or granted</label>
-			<div class="km-value" ng-show="document.consentGranted">Yes</div>
-			<div class="km-value" ng-show="!document.consentGranted">No</div>
-		</div>
-		<div ng-show="document.consentInformation">
-			<label>Additional information about the prior informed consent - Information</label>
-			<div class="km-value km-pre">{{document.consentInformation | lstring:locale}}</div>
-		</div>
-		<div ng-show="document.consentDocuments">
-			<label>Additional information about the prior informed consent - Documents</label>
-			<div class="km-value" ng-repeat="item in document.consentDocuments">
-				<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-				<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-			</div>
-		</div>
-
-		<div ng-show="document.informedConsent || document.informedConsentConfidential">
-			<label>Person or entity to whom prior informed consent was granted</label>
-			<div class="km-value">
-				<div view-contact-reference ng-model="document.informedConsent" locale="locale"></div>
-				<div ng-show="document.informedConsentConfidential">
-					Confidential information
+			<div ng-show="authority">
+				<legend>Issuing Authority</legend>
+				<label>Competent national authority responsible for issuing the permit</label>
+				<div class="km-value">
+					<div class="view-authority-reference" ng-model="authority.document" locale="locale"></div>
 				</div>
 			</div>
-		</div>
+			<div ng-show="document.nationalReferences ||
+				document.date || document.provider || document.informedConsent ||
+				document.geneticResources || document.consentGranted ||
+				document.consentInformation || document.consentDocuments ||
+				document.specimen || document.taxonomy || document.gisFiles">
+				<legend>Details of the permit or its equivalent</legend>
 
-		<div ng-show="document.geneticResources">
-			<label>Subject-matter or genetic resources covered by the permit or its equivalent</label>
-			<div class="km-value km-pre">{{document.geneticResources | lstring:locale}}</div>
-		</div>
-		<div ng-show="document.geneticResourcesConfidential">
-			<label>Subject-matter or genetic resources covered by the permit or its equivalent</label>
-			<div class="km-value km-pre">Confidential information</div>
-		</div>
+				<div ng-show="document.nationalReferences">
+					<label>Additional national references or identifiers</label>
+					<div class="km-value km-pre">{{document.nationalReferences | lstring:locale}}</div>
+				</div>
 
-		<div ng-show="document.specimen || document.taxonomy || document.gisFiles">
-			<legend>Optional additional subject matter details</legend>
-			<div ng-show="document.specimen">
-				<label>Specimen data</label>
-				<div class="km-value" ng-repeat="item in document.specimen">
+				<div ng-show="document.date">
+					<label>Date of issuance of the permit or its equivalent</label>
+					<div class="km-value">{{document.date}}</div>
+				</div>
+
+				<div ng-show="document.provider || document.providerConfidential">
+					<label>The provider</label>
+					<div class="km-value">
+						<div view-contact-reference ng-model="document.provider" locale="locale"></div>
+						<div ng-show="document.providerConfidential">
+							Confidential information
+						</div>
+					</div>
+				</div>
+
+				<div ng-show="document.consentGranted!=undefined">
+					<label>Confirmation that prior informed consent was obtained or granted</label>
+					<div class="km-value" ng-show="document.consentGranted">Yes</div>
+					<div class="km-value" ng-show="!document.consentGranted">No</div>
+				</div>
+				<div ng-show="document.consentInformation">
+					<label>Additional information about the prior informed consent - Information</label>
+					<div class="km-value km-pre">{{document.consentInformation | lstring:locale}}</div>
+				</div>
+				<div ng-show="document.consentDocuments">
+					<label>Additional information about the prior informed consent - Documents</label>
+					<div class="km-value" ng-repeat="item in document.consentDocuments">
+						<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+					</div>
+				</div>
+
+				<div ng-show="document.informedConsent || document.informedConsentConfidential">
+					<label>Person or entity to whom prior informed consent was granted</label>
+					<div class="km-value">
+						<div view-contact-reference ng-model="document.informedConsent" locale="locale"></div>
+						<div ng-show="document.informedConsentConfidential">
+							Confidential information
+						</div>
+					</div>
+				</div>
+
+				<div ng-show="document.geneticResources">
+					<label>Subject-matter or genetic resources covered by the permit or its equivalent</label>
+					<div class="km-value km-pre">{{document.geneticResources | lstring:locale}}</div>
+				</div>
+				<div ng-show="document.geneticResourcesConfidential">
+					<label>Subject-matter or genetic resources covered by the permit or its equivalent</label>
+					<div class="km-value km-pre">Confidential information</div>
+				</div>
+
+				<div ng-show="document.specimen || document.taxonomy || document.gisFiles">
+					<legend>Optional additional subject matter details</legend>
+					<div ng-show="document.specimen">
+						<label>Specimen data</label>
+						<div class="km-value" ng-repeat="item in document.specimen">
+							<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+							<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+						</div>
+					</div>
+					<div ng-show="document.taxonomy">
+						<label>Taxonomy data</label>
+						<div class="km-value" ng-repeat="item in document.taxonomy">
+							<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+							<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+						</div>
+					</div>
+					<div ng-show="document.gisFiles">
+						<label>Geographic coordinates</label>
+						<div class="km-value" ng-repeat="item in document.gisFiles">
+							<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+							<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+						</div>
+						<div class="leaflet" center="gisMapCenter" layers="gisMapLayers"></div>
+					</div>
+				</div>
+			</div>
+			<br />
+			<br />
+			<div ng-show="document.keywords">
+				<label>Keywords to describe the subject-matter or genetic resource(s) covered by the permit or its equivalent</label>
+				<ul class="km-value">
+					<li ng-repeat="term in document.keywords">{{term|term}} </li>
+				</ul>
+			</div>
+
+			<div ng-show="document.mutuallyAgreedTermsEstablished!=undefined">
+				<label>Confirmation that mutually agreed terms were established</label>
+				<div class="km-value" ng-show="document.mutuallyAgreedTermsEstablished">Yes</div>
+				<div class="km-value" ng-show="!document.mutuallyAgreedTermsEstablished">No</div>
+				<div ng-show="document.mutuallyAgreedTermsInformation">
+					<label>Additional information about the mutually agreed terms - Information</label>
+					<div class="km-value km-pre">{{document.mutuallyAgreedTermsInformation | lstring:locale}}</div>
+				</div>
+				<div ng-show="document.mutuallyAgreedTermsDocuments">
+					<label>Additional information about the mutually agreed terms - Documents</label>
+					<div class="km-value" ng-repeat="item in document.mutuallyAgreedTermsDocuments">
+						<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+					</div>
+				</div>
+			</div>
+
+			<div ng-show="document.usage">
+				<label>Indicate if the permit or its equivalent covers commercial and/or non-commercial use</label>
+				<ul class="km-value">
+					<li ng-repeat="term in document.usage">{{term|term}}</li>
+				</ul>
+			</div>
+			<div ng-show="document.usageDescription">
+				<label>Additional information about the specified uses covered by the permit or its equivalent or use restrictions</label>
+				<div class="km-value km-pre">{{document.usageDescription | lstring:locale}}</div>
+			</div>
+			<div ng-show="document.thirdPartyTransferConditions">
+				<label>Conditions for third party transfer</label>
+				<div class="km-value km-pre">{{document.thirdPartyTransferConditions | lstring:locale}}</div>
+			</div>
+
+			<div ng-show="document.expiration">
+				<label>Date of expiry of the permit or its equivalent</label>
+				<div class="km-value">{{document.expiration}}</div>
+			</div>
+
+			<div ng-show="amendedPermits || document.amendmentsDescription">
+				<legend>Amendments</legend>
+
+				<div ng-show="amendedPermits">
+					<label>Amended permits</label>
+					<div class="km-value" ng-repeat="item in amendedPermits">
+						<b>{{item.document.title|lstring:locale}}</b>
+						<div class="km-pre">{{item.document.summary|lstring:locale}}</div>
+					</div>
+				</div>
+
+				<div ng-show="document.consentedAmendment!=undefined">
+					<label>Was the modification of this permit or its equivalent made as mutually agreed with the person or entity to whom prior informed consent was granted?</label>
+					<div class="km-value" ng-show="document.consentedAmendment">Yes</div>
+					<div class="km-value" ng-show="!document.consentedAmendment">No</div>
+				</div>
+				<div ng-show="document.amendmentsDescription">
+					<label>Summary of the amendments</label>
+					<div class="km-value km-pre">{{document.amendmentsDescription | lstring:review.local}}</div>
+				</div>
+
+			</div>
+			<div ng-show="document.permitFiles">
+				<legend>Documentation</legend>
+				<label>Copy of permit or its equivalent, or other relevant open-access document</label>
+				<div class="km-value" ng-repeat="item in document.permitFiles">
 					<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
 					<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 				</div>
 			</div>
-			<div ng-show="document.taxonomy">
-				<label>Taxonomy data</label>
-				<div class="km-value" ng-repeat="item in document.taxonomy">
-					<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-					<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+			<div ng-show="document.permitDescription">
+				<label>Description</label>
+				<div class="km-value km-pre">{{document.permitDescription | lstring:review.local}}</div>
+			</div>
+
+
+			<div ng-show="document.relevantInformation||document.relevantDocuments">
+				<legend>Additional Information</legend>
+
+				<div ng-show="document.relevantInformation">
+					<div class="km-value" ng-bind="document.relevantInformation | lstring:locale"></div>
+				</div>
+
+				<div ng-show="document.relevantDocuments">
+					<label>Other relevant website address or attached documents</label>
+					<div class="km-value" ng-repeat="item in document.relevantDocuments">
+						<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+					</div>
 				</div>
 			</div>
-			<div ng-show="document.gisFiles">
-				<label>Geographic coordinates</label>
-				<div class="km-value" ng-repeat="item in document.gisFiles">
-					<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-					<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-				</div>
-				<div class="leaflet" center="gisMapCenter" layers="gisMapLayers"></div>
-			</div>
-		</div>
-	</div>
-	<br />
-	<br />
-	<div ng-show="document.keywords">
-		<label>Keywords to describe the subject-matter or genetic resource(s) covered by the permit or its equivalent</label>
-		<ul class="km-value">
-			<li ng-repeat="term in document.keywords">{{term|term}} </li>
-		</ul>
-	</div>
-
-
-	<div ng-show="document.mutuallyAgreedTermsEstablished!=undefined">
-		<label>Confirmation that mutually agreed terms were established</label>
-		<div class="km-value" ng-show="document.mutuallyAgreedTermsEstablished">Yes</div>
-		<div class="km-value" ng-show="!document.mutuallyAgreedTermsEstablished">No</div>
-		<div ng-show="document.mutuallyAgreedTermsInformation">
-			<label>Additional information about the mutually agreed terms - Information</label>
-			<div class="km-value km-pre">{{document.mutuallyAgreedTermsInformation | lstring:locale}}</div>
-		</div>
-		<div ng-show="document.mutuallyAgreedTermsDocuments">
-			<label>Additional information about the mutually agreed terms - Documents</label>
-			<div class="km-value" ng-repeat="item in document.mutuallyAgreedTermsDocuments">
-				<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-				<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-			</div>
-		</div>
-	</div>
-
-	<div ng-show="document.usage">
-		<label>Indicate if the permit or its equivalent covers commercial and/or non-commercial use</label>
-		<ul class="km-value">
-			<li ng-repeat="term in document.usage">{{term|term}}</li>
-		</ul>
-	</div>
-	<div ng-show="document.usageDescription">
-		<label>Additional information about the specified uses covered by the permit or its equivalent or use restrictions</label>
-		<div class="km-value km-pre">{{document.usageDescription | lstring:locale}}</div>
-	</div>
-	<div ng-show="document.thirdPartyTransferConditions">
-		<label>Conditions for third party transfer</label>
-		<div class="km-value km-pre">{{document.thirdPartyTransferConditions | lstring:locale}}</div>
-	</div>
-
-	<div ng-show="document.expiration">
-		<label>Date of expiry of the permit or its equivalent</label>
-		<div class="km-value">{{document.expiration}}</div>
-	</div>
-
-	<div ng-show="amendedPermits || document.amendmentsDescription">
-		<legend>Amendments</legend>
-
-		<div ng-show="amendedPermits">
-			<label>Amended permits</label>
-			<div class="km-value" ng-repeat="item in amendedPermits">
-				<b>{{item.document.title|lstring:locale}}</b>
-				<div class="km-pre">{{item.document.summary|lstring:locale}}</div>
-			</div>
-		</div>
-
-		<div ng-show="document.consentedAmendment!=undefined">
-			<label>Was the modification of this permit or its equivalent made as mutually agreed with the person or entity to whom prior informed consent was granted?</label>
-			<div class="km-value" ng-show="document.consentedAmendment">Yes</div>
-			<div class="km-value" ng-show="!document.consentedAmendment">No</div>
-		</div>
-		<div ng-show="document.amendmentsDescription">
-			<label>Summary of the amendments</label>
-			<div class="km-value km-pre">{{document.amendmentsDescription | lstring:review.local}}</div>
-		</div>
-
-	</div>
-	<div ng-show="document.permitFiles">
-		<legend>Documentation</legend>
-		<label>Copy of permit or its equivalent, or other relevant open-access document</label>
-		<div class="km-value" ng-repeat="item in document.permitFiles">
-			<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-			<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-		</div>
-	</div>
-	<div ng-show="document.permitDescription">
-		<label>Description</label>
-		<div class="km-value km-pre">{{document.permitDescription | lstring:review.local}}</div>
-	</div>
-
-
-	<div ng-show="document.relevantInformation||document.relevantDocuments">
-		<legend>Additional Information</legend>
-
-		<div ng-show="document.relevantInformation">
-			<div class="km-value" ng-bind="document.relevantInformation | lstring:locale"></div>
-		</div>
-
-		<div ng-show="document.relevantDocuments">
-			<label>Other relevant website address or attached documents</label>
-			<div class="km-value" ng-repeat="item in document.relevantDocuments">
-				<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-				<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-			</div>
-		</div>
+			<div document-metadata ></div>
 	</div>
 </div>

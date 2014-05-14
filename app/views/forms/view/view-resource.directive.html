@@ -1,255 +1,214 @@
-﻿<div id="Record" class="record">	 
-<div class="record-body">
+﻿<div id="Record" class="record panel panel-default">		
+	<div class="panel-heading"><h4 ><span style="color:#ed9c28">ABSCH-VLR</span> Virtual Library Record</h4></div>
+	<div class="record-body panel-body">	  
+		<a href="/database/record?documentID={{document.header.identifier}}" target="_new" class="pull-right"><i class="glyphicon glyphicon-new-window"></i></a>
+		 <div ng-show="display('title')">
+		 	<label>Title</label>
+		 	<div class="km-value">
+		 		<h3>{{document.title | lstring:locale}}</h3>
+		 	</div>
+		 </div>
 
-	  
-	 <a href="/database/record?documentID={{document.header.identifier}}" target="_new" class="pull-right"><i class="glyphicon glyphicon-new-window"></i></a>
-
-	 <h4 ng-show="display('header')"><span style="color:#ed9c28">ABSCH-VLR</span> Virtual Library Record</h4>
-
-	 <div ng-show="display('title')">
-	 <label>Title</label>
-	 	<div class="km-value">
-	 	<h3>{{document.title | lstring:locale}}</h3>
-	 	</div>
-	 </div>
-
-	<div ng-show="document.summary">
-		<label>Summary</label>
-		<div class="km-value km-pre">{{document.summary | lstring:locale}}</div>
-	</div>
-
-	<div ng-show="document.resourceLinks">
-		<label>Link to the resource(s)</label>
-		<span class="km-value" ng-repeat="item in document.resourceLinks">
-			<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-			<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-		</span>
-	</div>
-
-	<div ng-show="document.resourceAccess">
-		<label>How to obtain the resource</label>
-		<div class="km-value km-pre">{{document.resourceAccess | lstring:locale}}</div>
-	</div>
-
-
-	<div ng-show="display('libraries')" ng-show="document.libraries">
-		<label>Relevant CBD libraries</label>
-		<ul class="km-value">
-			<li ng-repeat="term in document.libraries">{{term|term}}</li>
-		</ul>
-	</div>
-
-	<div ng-show="document.authors">
-		<label>Author(s)</label>
-		<div class="km-value km-pre">{{document.authors | lstring:locale}}</div>
-	</div>
-
-	<div ng-show="document.authorsInfo">
-		<label>Author’s contact information</label>
-		<div class="km-value km-pre">{{document.authorsInfo | lstring:locale}}</div>
-	</div>
-
-	<div ng-show="document.languages">
-		<label>Language(s)</label>
-		<div class="km-value">
-			<span ng-repeat="term in document.languages">{{term|term}}<span ng-hide="$last">, </span></span>
-		</div>
-	</div>
-
-	<div ng-show="document.publicationYear">
-		<label>Publication year</label>
-		<div class="km-value">{{document.publicationYear}}</div>
-	</div>
-
-	<div ng-show="organizations">
-		<label>Organization(s) involved in the publication of this resource</label>
-		<div class="km-value" ng-repeat="item in organizations">
-			<div class="cbdViewOrganizationReference" ng-model="item.document" locale="locale"></div>
-		</div>
-	</div>
-
-
-	<div ng-show="document.covers">
-		<label >Cover image(s)</label>
-		<div class="km-value">
-			<a ng-repeat="link in document.covers" ng-href="{{link.url}}" target="_blank">
-				<img class="img-polaroid" ng-src="{{link.url}}" alt="{{link.name}}" style="max-height: 150px; max-width: 150px" />
-			</a>
-		</div>
-	</div>
-
-	<div ng-show="document.resourceTypes">
-		<label>Type of resource</label>
-		<div class="km-value" >
-			<ul ng-repeat="term in document.resourceTypes" class="list">
-				<li>{{term | term | lstring:locale}}</li>
-			</ul>
-		</div>
-	</div>
-
-	<div ng-show="document.publisher">
-		<label>Publisher and its location</label>
-		<div class="km-value km-pre">{{document.publisher | lstring:locale}}</div>
-	</div>
-
-	<div ng-show="document.rights">
-		<label>Rights</label>
-		<div class="km-value km-pre">{{document.rights | lstring:locale}}</div>
-	</div>
-
-	<div ng-show="document.format">
-		<label>Format</label>
-		<div class="km-value km-pre">{{document.format | lstring:locale}}</div>
-	</div>
-
-	<div ng-show="document.source">
-		<label>Source</label>
-		<div class="km-value km-pre">{{document.source | lstring:locale}}</div>
-	</div>
-
-	<div ng-show="document.regions">
-		<!-- <legend>Resource references</legend>
- -->
-		<label>Country(ies), Regional or Economic group(s) related to the resource</label>
-		<div class="km-value" >
-			<ul ng-repeat="term in document.regions" class="list">
-				<li>{{term | term | lstring:locale}}</li>
-			</ul>
-		</div>
-<!-- 
-		<ul class="km-value">
-			<li ng-repeat="term in document.regions">{{term|term}}</li>
-		</ul> -->
-	</div>
-
-	<div ng-show="document.keywords">
-		<label>Keywords and any other relevant information</label>
-		<div class="km-value km-pre">{{document.keywords | lstring:locale}}</div>
-	</div>
-
-	
-
-	<div ng-show="isInLibrary('chm')">
-
-		<legend>Clearing-House Mechanism (CHM)</legend>
-
-		<label>Thematic areas(s)</label>
-		<ul class="km-value">
-			<li ng-repeat="term in document.cbdSubjects">{{term|term}}</li>
-		</ul>
-
-		<div ng-show="document.aichiTargets">
-			<label>Related Aichi target(s)</label>
-			<ul class="km-value">
-				<li ng-repeat="term in document.aichiTargets">{{term|term}}</li>
-			</ul>
-		</div>
-	</div>
-
-	<div ng-show="isInLibrary('absch')">
-
-		<legend>Access and Benefit Sharing Clearing-House (ABS-CH)</legend>
-
-		<label>Thematic areas(s)</label>
-		<ul class="km-value">
-			<li ng-repeat="term in document.absSubjects">{{term|term}}</li>
-		</ul>
-
-	</div>
-
-	<div ng-show="isInLibrary('bch')">
-
-		<legend>Biosafety Clearing-House (BCH)</legend>
-
-		<label>Thematic areas(s)</label>
-		<ul class="km-value">
-			<li ng-repeat="term in document.bchSubjects">{{term|term}}</li>
-		</ul>
-
-
-		<div ng-show="IsBchRa() && document.bchRaRecommend">
-
-			<legend>Background material to the “Guidance on risk assessment of living modified organisms” </legend>
-
-			<label>Relevant section(s) of the “Guidance” background material</label>
-			<ul class="km-value">
-				<li ng-repeat="term in document.bchRaSubjects">{{term|term}}</li>
-			</ul>
-
-			<div ng-show="document.bchRaOrganisms">
-				<label>Organism(s) identification</label>
-				<div class="km-value" ng-model="document.bchRaOrganisms" loader="">
-					TODO: {{document.bchRaOrganisms}}
-				</div>
-			</div>
-
-			<div ng-show="document.bchRaGenes">
-				<label>Gene(s) identification</label>
-				<div class="km-value" ng-model="document.bchRaGenes" loader="">
-					TODO: {{document.bchRaGenes}}
-				</div>
-			</div>
-
-			<div ng-show="document.bchRaLmos">
-				<label>LMO(s) identification</label>
-				<div class="km-value" ng-model="document.bchRaLmos" loader="">
-					TODO: {{document.bchRaLmos}}
-				</div>
-			</div>
-
-		</div>
-	</div>
-
-	<div ng-show="document.relevantInformation||document.relevantDocuments">
-		<legend>Additional Information</legend>
-
-		<div ng-show="document.relevantInformation">
-			<div class="km-value" ng-bind="document.relevantInformation | lstring:locale"></div>
+		<div ng-show="document.summary">
+			<label>Summary</label>
+			<div class="km-value km-pre">{{document.summary | lstring:locale}}</div>
 		</div>
 
-		<div ng-show="document.relevantDocuments">
-			<label>Other relevant website address or attached documents</label>
-			<div class="km-value" ng-repeat="item in document.relevantDocuments">
+		<div ng-show="document.resourceLinks">
+			<label>Link to the resource(s)</label>
+			<span class="km-value" ng-repeat="item in document.resourceLinks">
 				<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
 				<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+			</span>
+		</div>
+
+		<div ng-show="document.resourceAccess">
+			<label>How to obtain the resource</label>
+			<div class="km-value km-pre">{{document.resourceAccess | lstring:locale}}</div>
+		</div>
+
+
+		<div ng-show="display('libraries')" ng-show="document.libraries">
+			<label>Relevant CBD libraries</label>
+			<ul class="km-value">
+				<li ng-repeat="term in document.libraries">{{term|term}}</li>
+			</ul>
+		</div>
+
+		<div ng-show="document.authors">
+			<label>Author(s)</label>
+			<div class="km-value km-pre">{{document.authors | lstring:locale}}</div>
+		</div>
+
+		<div ng-show="document.authorsInfo">
+			<label>Author’s contact information</label>
+			<div class="km-value km-pre">{{document.authorsInfo | lstring:locale}}</div>
+		</div>
+
+		<div ng-show="document.languages">
+			<label>Language(s)</label>
+			<div class="km-value">
+				<span ng-repeat="term in document.languages">{{term|term}}<span ng-hide="$last">, </span></span>
 			</div>
 		</div>
-	</div>
 
-	<legend>Link to this record</legend>
-	<div class="km-value"><a href="/database/record?documentID={{document.header.identifier}}">
-	http://absch.cbd.int/database/record?documentID={{document.header.identifier}}</a></div>
+		<div ng-show="document.publicationYear">
+			<label>Publication year</label>
+			<div class="km-value">{{document.publicationYear}}</div>
+		</div>
+
+		<div ng-show="organizations">
+			<label>Organization(s) involved in the publication of this resource</label>
+			<div class="km-value" ng-repeat="item in organizations">
+				<div class="cbdViewOrganizationReference" ng-model="item.document" locale="locale"></div>
+			</div>
+		</div>
 
 
-</div>
-	<div class="container-fluid record-metadata" style="margin:0 20px;padding:10px;">
-		<div class="row">
+		<div ng-show="document.covers">
+			<label >Cover image(s)</label>
+			<div class="km-value">
+				<a ng-repeat="link in document.covers" ng-href="{{link.url}}" target="_blank">
+					<img class="img-polaroid" ng-src="{{link.url}}" alt="{{link.name}}" style="max-height: 150px; max-width: 150px" />
+				</a>
+			</div>
+		</div>
 
-				<div ng-show="document.info.createdBy" class="col-xs-3">
-						<label>Published by:</label>
-						<div>
-						{{document.info.createdBy.firstName}} {{document.info.createdBy.lastName}} ({{document.info.createdBy.email}})</div>
-				</div>		
-				<div ng-show="document.info.createdBy" class="col-xs-2">
-						<label>Published on:</label>
-						<div>{{document.info.createdOn}}</div>
-				</div>
-				
-				<div ng-show="document.info.updatedBy && document.info.updatedOn != document.info.createdOn"  class="col-xs-3">
-						<label>Last udpated by:</label>
-						<div >{{document.info.updatedBy.firstName}} {{document.info.updatedBy.lastName}} ({{document.info.updatedBy.email}})</div>
-				</div>
-				<div ng-show="document.info.updatedBy && document.info.updatedOn != document.info.createdOn"  class="col-xs-2">
-						<label>Last updated on:</label>
-						<div>{{document.info.updatedOn}}</div>
-				</div>
-				<div ng-show="document.header.identifier"  class="col-xs-2">
-						<label>record identifier</label>
-						<div><a href="/database/record?documentID={{document.header.identifier}}">{{document.header.identifier}}</a> </div>
-				</div>
+		<div ng-show="document.resourceTypes">
+			<label>Type of resource</label>
+			<div class="km-value" >
+				<ul ng-repeat="term in document.resourceTypes" class="list">
+					<li>{{term | term | lstring:locale}}</li>
+				</ul>
+			</div>
+		</div>
 
+		<div ng-show="document.publisher">
+			<label>Publisher and its location</label>
+			<div class="km-value km-pre">{{document.publisher | lstring:locale}}</div>
+		</div>
+
+		<div ng-show="document.rights">
+			<label>Rights</label>
+			<div class="km-value km-pre">{{document.rights | lstring:locale}}</div>
+		</div>
+
+		<div ng-show="document.format">
+			<label>Format</label>
+			<div class="km-value km-pre">{{document.format | lstring:locale}}</div>
+		</div>
+
+		<div ng-show="document.source">
+			<label>Source</label>
+			<div class="km-value km-pre">{{document.source | lstring:locale}}</div>
+		</div>
+
+		<div ng-show="document.regions">
+			<label>Country(ies), Regional or Economic group(s) related to the resource</label>
+			<div class="km-value" >
+				<ul ng-repeat="term in document.regions" class="list">
+					<li>{{term | term | lstring:locale}}</li>
+				</ul>
+			</div>
+		</div>
+
+		<div ng-show="document.keywords">
+			<label>Keywords and any other relevant information</label>
+			<div class="km-value km-pre">{{document.keywords | lstring:locale}}</div>
 		</div>
 
 		
+
+		<div ng-show="isInLibrary('chm')">
+
+			<legend>Clearing-House Mechanism (CHM)</legend>
+
+			<label>Thematic areas(s)</label>
+			<ul class="km-value">
+				<li ng-repeat="term in document.cbdSubjects">{{term|term}}</li>
+			</ul>
+
+			<div ng-show="document.aichiTargets">
+				<label>Related Aichi target(s)</label>
+				<ul class="km-value">
+					<li ng-repeat="term in document.aichiTargets">{{term|term}}</li>
+				</ul>
+			</div>
+		</div>
+
+		<div ng-show="isInLibrary('absch')">
+
+			<legend>Access and Benefit Sharing Clearing-House (ABS-CH)</legend>
+
+			<label>Thematic areas(s)</label>
+			<ul class="km-value">
+				<li ng-repeat="term in document.absSubjects">{{term|term}}</li>
+			</ul>
+
+		</div>
+
+		<div ng-show="isInLibrary('bch')">
+
+			<legend>Biosafety Clearing-House (BCH)</legend>
+
+			<label>Thematic areas(s)</label>
+			<ul class="km-value">
+				<li ng-repeat="term in document.bchSubjects">{{term|term}}</li>
+			</ul>
+
+
+			<div ng-show="IsBchRa() && document.bchRaRecommend">
+
+				<legend>Background material to the “Guidance on risk assessment of living modified organisms” </legend>
+
+				<label>Relevant section(s) of the “Guidance” background material</label>
+				<ul class="km-value">
+					<li ng-repeat="term in document.bchRaSubjects">{{term|term}}</li>
+				</ul>
+
+				<div ng-show="document.bchRaOrganisms">
+					<label>Organism(s) identification</label>
+					<div class="km-value" ng-model="document.bchRaOrganisms" loader="">
+						TODO: {{document.bchRaOrganisms}}
+					</div>
+				</div>
+
+				<div ng-show="document.bchRaGenes">
+					<label>Gene(s) identification</label>
+					<div class="km-value" ng-model="document.bchRaGenes" loader="">
+						TODO: {{document.bchRaGenes}}
+					</div>
+				</div>
+
+				<div ng-show="document.bchRaLmos">
+					<label>LMO(s) identification</label>
+					<div class="km-value" ng-model="document.bchRaLmos" loader="">
+						TODO: {{document.bchRaLmos}}
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div ng-show="document.relevantInformation||document.relevantDocuments">
+			<legend>Additional Information</legend>
+
+			<div ng-show="document.relevantInformation">
+				<div class="km-value" ng-bind="document.relevantInformation | lstring:locale"></div>
+			</div>
+
+			<div ng-show="document.relevantDocuments">
+				<label>Other relevant website address or attached documents</label>
+				<div class="km-value" ng-repeat="item in document.relevantDocuments">
+					<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+					<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+				</div>
+			</div>
+		</div>
+
+		<legend>Link to this record</legend>
+		<div class="km-value"><a href="/database/record?documentID={{document.header.identifier}}">
+		http://absch.cbd.int/database/record?documentID={{document.header.identifier}}</a></div>
+		<div document-metadata ></div>
 	</div>
 </div>

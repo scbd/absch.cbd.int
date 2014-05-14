@@ -7,7 +7,8 @@ app.directive("editAbsCheckpointCommunique", [ function () {
 		replace    : true,
 		transclude : false,
 		scope      : {},
-		controller : ["$scope", "$q", "authHttp", "Enumerable", "$filter", "guid", "IStorage", "authentication", "editFormUtility", function ($scope, $q, $http, Enumerable, $filter, guid, storage, authentication, editFormUtility)
+		controller : ["$scope", "$q", "authHttp", "Enumerable", "$filter", "guid", "IStorage", "authentication", "editFormUtility", "Thesaurus" ,
+		 function ($scope, $q, $http, Enumerable, $filter, guid, storage, authentication, editFormUtility, Thesaurus)
 		{
 			$scope.status   = "";
 			$scope.error    = null;
@@ -15,21 +16,34 @@ app.directive("editAbsCheckpointCommunique", [ function () {
 			$scope.review   = { locale : "en" };
 			$scope.options  = {
 				countries		: function () { return $http.get("/api/v2013/thesaurus/domains/countries/terms", { cache: true }).then(function (o) { return $filter("orderBy")(o.data, "name"); }); },
-				permits			: [
-					{
-						identifier: "ABSCH-BA-156951-X",
-						title : { en:"ABSCH-BA-156951-X" }
-					},
-					{
-						identifier: "ABSCH-BA-155971-X",
-						title : { en:"ABSCH-BA-155971-X" }
-					},
-					{
-						identifier: "ABSCH-BA-997431-X",
-						title : { en:"ABSCH-BA-997431-X" }
-					}]
+				// permits			: function () { return $http.get("api/v2013/index/select?cb=1400016720572&fl=identifier_s,title_t,createdDate_dt,&q=realm_ss:absch+AND+((+(schema_s:absPermit)+))&sort=createdDate_dt+desc,+title_t+asc&start=0&wt=json",
+				// 								 { cache: true }).then(function (o) { console.log(o); return o.data.response.docs[0]; }); },
+				permits         : function () { return $http.get("api/v2013/index/select?cb=1400016720572&fl=identifier_s,title_t,createdDate_dt,&q=realm_ss:absch+AND+((+(schema_s:absPermit)+))&start=0&wt=json",  { cache: true })
+										.then(function(o){ 
+												 
+													var permits =  [];
+													o.data.response.docs.forEach(function(permit){
+														 
+														permits.push({"title": permit.title_t, "identifier": permit.identifier_s});
+													}); 
+													console.log(permits);
+													return	permits;
+												});},
+              
 			};
-
+// [
+				// 	{
+				// 		identifier: "ABSCH-BA-156951-X",
+				// 		title : { en:"ABSCH-BA-156951-X" }
+				// 	},
+				// 	{
+				// 		identifier: "ABSCH-BA-155971-X",
+				// 		title : { en:"ABSCH-BA-155971-X" }
+				// 	},
+				// 	{
+				// 		identifier: "ABSCH-BA-997431-X",
+				// 		title : { en:"ABSCH-BA-997431-X" }
+				// 	}]
 			//==================================
 			//
 			//==================================

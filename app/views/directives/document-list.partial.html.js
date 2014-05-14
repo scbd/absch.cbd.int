@@ -1,4 +1,6 @@
-define(['app'], function (app) {
+define(['app',
+        './document-metadata-directive.html.js']
+      , function (app) {
 
 app.directive('documentList', function ($http) {
         return {
@@ -31,8 +33,12 @@ app.directive('documentList', function ($http) {
               $scope.transformedDocuments = [];
               $scope.descriptionLimit = 50;
 
-                $scope.load = function(item) {
-                 //console.log(item);                     
+                $scope.load = function(item,displayDetails) {
+                      
+                      //occours when a user actions collapses the detail section.
+                      if(!displayDetails)                     
+                          return;
+
                        item.data = {'schema':item.schema, 'url_ss': item.url_ss, 'data': item};
                         
                         if(item.schema=="FOCALPOINT" || item.schema=="MEETING" || item.schema=="NOTIFICATION"
@@ -59,10 +65,21 @@ app.directive('documentList', function ($http) {
                               $http.get("/api/v2013/index/select?" + queryFields + "&q=id:"+item.id)
                                    .then(function (result) { 
 
-                                      item.data = result.data.response.docs[0]; 
-                                      item.data.info=[];
-                                      //console.log(item.data.schema_s);
-                                      item.data.header = {'schema':item.data.schema_s};                                  
+                                      item.data = result.data.response.docs[0];                                       
+                                          
+                                      item.data.info = [];                              
+                                      item.data.header = {'schema':item.data.schema_s};
+                                      if(item.data.createdBy_s){
+                                        item.data.info.createdBy.firstName = item.data.createdBy_s;
+                                        item.data.info.createdBy.email = item.data.createdByEmail_s;
+                                      }
+                                      item.data.info.createdOn = item.data.createdDate_dt;
+                                      if(item.data.updatedBy_s){
+                                        item.data.info.updatedBy.firstName = item.data.updatedBy_s;
+                                        item.data.info.updatedBy.email = item.data.updatedByEmail_s;
+                                      }
+                                      item.data.info.updatedOn = item.data.updatedDate_dt;
+                                      item.data.header.identifier = item.data.identifier_s;  
                               });
                         }
                         else
@@ -134,7 +151,6 @@ app.directive('documentList', function ($http) {
                         $scope.pageCount = Math.ceil($scope.documentCount / $scope.itemsPerPage);
                        $scope.transformedDocuments = [];                                                     
                        $scope.documents.forEach(function (doc) {  
-
                            $scope.transformedDocuments.push(transformDocument(doc));
                         });
                                        
@@ -216,7 +232,7 @@ app.directive('documentList', function ($http) {
                     }
                     else if(document.schema_s=='absPermit') {
                         output.usage = (document.usage_CEN_ss);
-                        output.keywords = (document.keywords_CEN_ss);
+                        output.keywords = getString(document.keywords_CEN_ss, locale);
                         output.cssRecordClass="nationalRecords";
                     }
                     else if(document.schema_s=='absCheckpointCommunique') {
@@ -226,7 +242,7 @@ app.directive('documentList', function ($http) {
                     else if(document.schema_s=='measure' || document.schema_s=='focalPoint' || document.schema_s=='database') {
                         output.cssRecordClass="nationalRecords";
                     }
-
+                    
                    
 
                     return output;

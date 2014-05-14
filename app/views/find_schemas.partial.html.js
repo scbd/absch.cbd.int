@@ -193,7 +193,7 @@ app.directive('searchFilterSchemas', function ($http) {
                                                subFilters : [
                                                                 { name: 'cnaResponsibleForAll',     type: 'yesno' , field: 'responsibleForAll_b'},
                                                                 { name: 'cnaJurisdiction',          type: 'multiselect', field: 'jurisdiction_s' },
-                                                                { name: 'cnaGeneticResourceTypes',  type: 'multiselect' , field: 'geneticResourceTypes_ss'}                                                         
+                                                                { name: 'cnaGeneticResourceTypes',  type: 'multiselect' , field: 'absGeneticResourceTypes_ss'}                                                         
                                                             ]
                                              };
             $scope.database                = { identifier: 'database',                 title: 'National Websites and Databases', count: 0 };

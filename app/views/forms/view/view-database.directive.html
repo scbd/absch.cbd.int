@@ -1,8 +1,7 @@
-﻿<div id="Record" class="record">	 
-	<div class="record-body">
-
-		 <h4 ng-show="display('header')"><span class="record-title-national">ABSCH-NDB</span>  
-		 National Database or Website</h4>
+﻿<div id="Record" class="record panel panel-default">		
+	<div class="panel-heading"><h4 ><span class="record-title-national">ABSCH-NDB</span>  
+		 National Database or Website</h4></div>
+	<div class="record-body panel-body">
 
 		<div ng-show="display('title')">
 			<label>Title</label>
@@ -44,34 +43,6 @@
 				</div>
 			</div>
 		</div>
+		<div document-metadata ></div>
 	</div>
-
-	<div class="container-fluid record-metadata" style="margin:0 20px;padding:10px;">
-		<div class="row">
-
-				<div ng-show="document.info.createdBy" class="col-xs-3">
-						<label>Published by:</label>
-						<div>
-						{{document.info.createdBy.firstName}} {{document.info.createdBy.lastName}} ({{document.info.createdBy.email}})</div>
-				</div>		
-				<div ng-show="document.info.createdBy" class="col-xs-2">
-						<label>Published on:</label>
-						<div>{{document.info.createdOn}}</div>
-				</div>
-				
-				<div ng-show="document.info.updatedBy && document.info.updatedOn != document.info.createdOn"  class="col-xs-3">
-						<label>Last udpated by:</label>
-						<div >{{document.info.updatedBy.firstName}} {{document.info.updatedBy.lastName}} ({{document.info.updatedBy.email}})</div>
-				</div>
-				<div ng-show="document.info.updatedBy && document.info.updatedOn != document.info.createdOn"  class="col-xs-2">
-						<label>Last updated on:</label>
-						<div>{{document.info.updatedOn}}</div>
-				</div>
-				<div ng-show="document.header.identifier"  class="col-xs-2">
-						<label>record identifier</label>
-						<div><a href="/database/record?documentID={{document.header.identifier}}">{{document.header.identifier}}</a> </div>
-				</div>
-
-		</div>
-
 </div>

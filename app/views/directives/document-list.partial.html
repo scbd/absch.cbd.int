@@ -26,13 +26,7 @@
   background-color:#287fcb;
   width:3px;
   }
-  /*.resourceRecords{display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;}
-  .meetingRecords{display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;}
-  .notificationRecords{display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;}
-  .pressReleaseRecords{display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;}
-  .statementRecords{display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#d39845;}
-  .defaultRecords{display:inline;line-height:10px;color:#333;font-weight:bold;text-transform:uppercase;padding:0;margin:0;color:#287fcb;}*/
-  </style>
+ </style>
   <ul class="pagination pull-right" ng-show='showPagination'>
     <li ng-class="disabled" >
       <a href>  {{pageCount==0 ? 0 : currentPage+1 }} of {{pageCount}}</a>
@@ -155,8 +149,14 @@
           <td style="padding:0;margin:0;padding-left:20px;padding-top:10px;">
             <i class="fa" ng-class="{'fa-caret-down':displayDetails, 'fa-caret-right':!displayDetails}"
             style="font-size:11px;color:#999;position:relative; top:-1px;font-size:14px;"></i>
-            <a ng-click="load(document); displayDetails = !displayDetails" class="title">
-            &nbsp; {{document.title}}</a>
+            <a ng-click="displayDetails = !displayDetails;load(document,displayDetails); " class="title">
+            &nbsp;   {{document.title}}
+              <ab ng-switch on="document.schema">
+                <ab ng-switch-when="ABSCHECKPOINTCOMMUNIQUE">
+                    {{document.source}} {{document.createdDateOn | formatDate}}
+                <ab>
+              </ab>
+            </a>
           </td>
         </tr>
         <tr>
