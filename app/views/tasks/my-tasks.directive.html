@@ -1,55 +1,62 @@
-﻿<div>
+﻿<div style="background-color:#f9f9f9;padding:5px">
 	<div class="alert alert-danger" ng-show="__error">
 		<strong>Error: </strong>{{__error}}
 	</div>
 	
-	<table ng-show="tasks.length && !__error" class="table table-striped">
+	<div ng-show="tasks.length && !__error" >
 
-		<tr>
-			<th>ID</th>
-			<th>Description</th>
-			<th>Status</th>
-			<th>Requested on</th>
-			<th>&nbsp;</th>
-		</tr>
+		<div class="row" style="border-bottom:1px solid gray;">
+			<div class="col-xs-2 col-md-2 col-ls-2">ID</div>
+			<div class="col-xs-3 col-md-3 col-ls-3">Description</div>
+			<div class="col-xs-3 col-md-3 col-ls-3">Status</div>
+			<div class="col-xs-3 col-md-3 col-ls-3">Requested on</div>
+			<div class="col-xs-1 col-md-1 col-ls-1">&nbsp;</div>
+		</div>
 
-		<tr ng-repeat="task in tasks|orderBy:'activity.createdOn'">
-	
-			<td> <!-- ID -->
-				<a style="text-transform:uppercase;white-space:nowrap;" ng-href="/register/tasks/{{task.workflow._id}}/{{task.activity.name}}"  type="button">{{formatWID(task.workflow._id)}}</a>
-				<div ng-switch="task.workflow.type.name">
-					<em ng-switch-when="publishNationalRecord">Publishing request</em>
-					<em ng-switch-when="publishReferenceRecord">Publishing request</em>
-					<em ng-switch-default>*{{task.workflow.type.name|uppercase}}*</em>
+		<div ng-repeat="task in tasks|orderBy:'activity.createdOn'"style="border-bottom:1px solid gray;padding-top:5px;">
+			<div class="row" >
+				<div class="col-xs-2 col-md-2 col-ls-2"> <!-- ID -->
+					<a style="text-transform:uppercase;white-space:nowrap;" ng-href="/register/tasks/{{task.workflow._id}}/{{task.activity.name}}"  type="button">{{formatWID(task.workflow._id)}}</a>
+					<div ng-switch="task.workflow.type.name">
+						<em ng-switch-when="publishNationalRecord">Publishing request</em>
+						<em ng-switch-when="publishReferenceRecord">Publishing request</em>
+						<em ng-switch-default>*{{task.workflow.type.name|uppercase}}*</em>
+					</div>
 				</div>
-			</td>
 
-			<td> <!-- Description -->
-				<strong ng-show="task.workflow.result.documentID||task.workflow.data.documentID"><a ng-href="/database/record?documentID={{task.workflow.result.documentID||task.workflow.data.documentID}}">{{task.workflow.data.metadata.schema|schemaName}}</a></strong>
-				<strong ng-hide="task.workflow.result.documentID||task.workflow.data.documentID">{{task.workflow.data.metadata.schema|schemaName}}</strong>
+				<div class="col-xs-3 col-md-3 col-ls-3"> <!-- Description -->
+					<strong ng-show="task.workflow.result.documentID||task.workflow.data.documentID"><a ng-href="/database/record?documentID={{task.workflow.result.documentID||task.workflow.data.documentID}}">{{task.workflow.data.metadata.schema|schemaName}}</a></strong>
+					<strong ng-hide="task.workflow.result.documentID||task.workflow.data.documentID">{{task.workflow.data.metadata.schema|schemaName}}</strong>
 
-				<div>{{task.workflow.data.title | lstring}}</div>
-			</td>
-			
-			<td> <!-- Status -->
-				<div ng-switch="task.activity.name">
-					<span ng-switch-when="publishRecord">Waiting for validation</span>
-					<span ng-switch-default>{{activity.name}}*</span>
+					<div>{{task.workflow.data.title | lstring}}</div>
 				</div>
-			</td>
+				
+				<div class="col-xs-3 col-md-3 col-ls-3"> <!-- Status -->
+					<div ng-switch="task.activity.name">
+						<span ng-switch-when="publishRecord">Waiting for validation</span>
+						<span ng-switch-default>{{activity.name}}*</span>
+					</div>
+				</div>
 
-			<td> <!-- Requested on -->
-				<div>{{task.workflow.createdOn|date:'short'}}</div>
-				<div><em> by {{task.workflow.createdBy_info.firstName}} {{task.workflow.createdBy_info.lastName}}</em></div>
-			</td>
+				<div class="col-xs-3 col-md-3 col-ls-3"> <!-- Requested on -->
+					<div>{{task.workflow.createdOn|date:'short'}}</div>
+					<div><em> by {{task.workflow.createdBy_info.firstName}} {{task.workflow.createdBy_info.lastName}}</em></div>
+				</div>
 
-			<td style="text-align:end">
-				<a class="btn btn-info" ng-href="/register/tasks/{{task.workflow._id}}/{{task.activity.name}}"  type="button"><i class="glyphicon glyphicon-edit"></i></button>
-			</td>
-		</tr>
+				<div style="text-align:end" class="col-xs-1 col-md-1 col-ls-1">
+					<!-- <a class="btn btn-info" ng-href="/register/tasks/{{task.workflow._id}}/{{task.activity.name}}"  type="button"><i class="glyphicon glyphicon-edit"></i></button> -->					
+					<a class="btn btn-info" ng-click="tasksDisplay=!tasksDisplay; formLoading=false" type="button"><i class="glyphicon glyphicon-edit"></i></a>
+				</div>	
 
-
-	</table>
+			</div>
+			<div class="row" ng-show="tasksDisplay">
+				<div class="col-xs-12 col-md-12 col-ls-12">					
+					<div  task-id class="record-body" load-task-data='formLoading' workflow-task-id="{{task.workflow._id}}" parent-watcher="dashboard" >
+					</div>
+				</div>		
+			</div>
+		</div>
+	</div>
 
 	<div ng-show="tasks.length==0">
 		No Item is requiring your attention

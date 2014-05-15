@@ -48,12 +48,20 @@ app.directive('taskId', function () {
 
 							IWorkflows.updateActivity($scope.workflowTaskId, $scope.workflow.activities[0].name, resultData).then(function(){
 									// if($scope.$parentWatcher){
-										alert('done');
-										$scope.$parent.$parent.$parent.refreshRecords();
-									// }
-									// else{
-									// 	load();
-									// }
+										var msg = "";
+										if(resultData.action == 'approve'){
+											msg = "Record approved successfully";
+										}
+										else{
+											msg = "Record rejected successfully";
+										}
+										//console.log($scope.parentWatcher);
+										if($scope.parentWatcher=="dashboard")
+											$scope.$parent.load();
+										else if($scope.parentWatcher=="documents")										
+											$scope.$parent.$parent.$parent.refreshRecords(msg);
+										else
+											load();		
 
 							}).catch(function(error) {
 								alert(error);

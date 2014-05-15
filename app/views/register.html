@@ -24,26 +24,6 @@
 
                     <h3 ><a ng-click="tab('dashboard')"  ng-class="{ 'btn-commonformat-selected' : tab()=='dashboard'}" href="#" role="button">
                         <i class="glyphicon glyphicon-list-alt" style="position:relative;top:4px;"></i> Dashboard </a></h3>
-                    <!--  <div ng-switch on="document.schema">
-      <div ng-switch-when="nationRecords">
-      </div>
-    </div> -->
-                    <!-- <div ng-repeat="schema in schemaTypesFacets" > 
-    
-    <a  ng-click="tab(schema.schema)"  href="#" role="button">
-      <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='{{schema.schema}}'}">
-        <div class="btn-commonformat-national">{{schema.header}}
-          <span ng-show="facets(schema.schema,'draft') > 0" class="pull-right label label-default">
-            {{facets(schema.schema,'draft')}}</span> 
-          <span ng-show="facets(schema.schema,'publish') > 0" class="pull-right label label-success">
-            {{facets(schema.schema,'publish')}}</span>
-          <span ng-show="facets(schema.schema,'request') > 0" class="pull-right label label-danger">
-            {{facets(schema.schema,'request')}}</span>
-        </div>   
-        <span class="btn-commonformat-name">{{schema.commonFormat}}</span>
-      </div>
-    </a>
-</div> -->
 
                     <h3>National Records</h3>
 
@@ -51,11 +31,11 @@
                         <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='measure'}">
                             <div class="btn-commonformat-national">ABSCH-MSR
                                 <span ng-show="facets('measure','draft') > 0" class="pull-right label label-default">
-  {{facets('measure','draft')}}</span> 
-<span ng-show="facets('measure','publish') > 0" class="pull-right label label-success">
-  {{facets('measure','publish')}}</span>
-<span ng-show="facets('measure','request') > 0" class="pull-right label label-danger">
-  {{facets('measure','request')}}</span>
+                                  {{facets('measure','draft')}}</span> 
+                                <span ng-show="facets('measure','publish') > 0" class="pull-right label label-success">
+                                  {{facets('measure','publish')}}</span>
+                                <span ng-show="facets('measure','request') > 0" class="pull-right label label-danger">
+                                  {{facets('measure','request')}}</span>
                             </div>
                             <span class="btn-commonformat-name">Legislative, administrative or policy measures</span>
                         </div>
