@@ -89,7 +89,7 @@ app.directive('searchFilterThemes', function ($http) {
 
             $scope.updateQuery = function() {
 
-                console.log($scope.query);
+                console.log($scope.query );
                 
                 $scope.query = '';
 
@@ -168,6 +168,7 @@ app.directive('searchFilterThemes', function ($http) {
             }
 
             $scope.onclick = function (scope, evt) {
+                console.log('onclick');
                 scope.item.selected = !scope.item.selected;
                 $scope.ts(scope, evt);
             }
@@ -175,7 +176,7 @@ app.directive('searchFilterThemes', function ($http) {
             $scope.ts = function (scope, evt) {
 
                 var term = scope.item;
-
+                term.selected = !scope.item.selected;
                 term.indeterminate = !term.selected && (term.indeterminateCounterA + term.indeterminateCounterB) > 0;
 
                 setBroaders(term.broaderTerms, term.selected);
