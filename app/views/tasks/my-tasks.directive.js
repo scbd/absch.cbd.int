@@ -23,11 +23,12 @@ app.directive("myTasks", ['authHttp', function ($http) {
 
 			$scope.tasks = null;
 
+			$scope.load = load;
 			//==============================
 			//
 			//==============================
 			function load() {
-				
+				console.log('my task list');
 				IWorkflows.query(query).then(function(workflows){
 
 					var tasks  = [];
@@ -78,6 +79,7 @@ app.directive("myTasks", ['authHttp', function ($http) {
 				if(nextLoad)
 					$timeout.cancel(nextLoad);
 			});
+
 		}]
 	}
 }]);

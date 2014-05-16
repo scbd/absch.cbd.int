@@ -1,190 +1,151 @@
 <div>
 
-    <style>
-    .red {
-        background-color:#ccc!important;
-    }
-    </style>
+<style>
+  .red{background-color:#ccc!important;}
+</style>
 
-    <link href="/app/css/record.css" rel="stylesheet">
+<link href="/app/css/record.css" rel="stylesheet">
 
-    <div class="row">
-        <div class="col-xs-10">
-            <span ng-click="statusFilter=null" class="btn btn-info">
-                <i ng-hide="statusFilter" class="glyphicon glyphicon-ok"></i> All
-                <span class="badge badge-default">
-                    {{(records | filter:schemaFilter).length}}</span>
-            </span>
-            <span ng-click="statusFilter=isRequest" class="btn btn-danger">
-                <i ng-show="statusFilter==isRequest" class="glyphicon glyphicon-ok"></i> Requests
-                <span class="badge badge-default">{{(records | filter:schemaFilter | filter:isRequest).length}}</span>
-            </span>
-            <span ng-click="statusFilter=isPublished" class="btn btn-success">
-                <i ng-show="statusFilter==isPublished" class="glyphicon glyphicon-ok"></i> Published
-                <span class="badge badge-default">{{(records | filter:schemaFilter | filter:isPublished).length}}</span>
-            </span>
-            <span ng-click="statusFilter=isDraft" class="btn btn-default btn-draft" style="color:#fff">
-                <i ng-show="statusFilter==isDraft" class="glyphicon glyphicon-ok"></i> Draft
-                <span class="badge badge-default" style="color:#999">{{(records | filter:schemaFilter | filter:isDraft).length}}</span>
-            </span>
-            <input type="text" ng-model="keywords" placeholder=" Keyword " class="form-control keyword" style="width:160px;display:inline;">
-        </div>
-        <div class="col-xs-2 pull-right">
-            <span style="font-size: 16px; color: white;margin:0;padding:0;float:right;">
-                <a ng-click="newDoc(schema, null)" class="btn btn-primary">
-                    <span class="glyphicon glyphicon-plus-sign"></span>Add new</a>
-            </span>
-        </div>
+  <div class="row">
+      <div class="col-xs-10" >
+        <span ng-click="statusFilter=null" class="btn btn-info"> 
+        <i ng-hide="statusFilter" class="glyphicon glyphicon-ok"></i> All <span class="badge badge-default">
+        {{(records | filter:schemaFilter).length}}</span></span>
+        <span ng-click="statusFilter=isRequest" class="btn btn-danger"> 
+        <i ng-show="statusFilter==isRequest" class="glyphicon glyphicon-ok"></i> Requests <span class="badge badge-default">{{(records | filter:schemaFilter | filter:isRequest).length}}</span></span>
+        <span ng-click="statusFilter=isPublished" class="btn btn-success"> 
+        <i ng-show="statusFilter==isPublished" class="glyphicon glyphicon-ok"></i> Published  <span class="badge badge-default">{{(records | filter:schemaFilter | filter:isPublished).length}}</span></span>
+        <span ng-click="statusFilter=isDraft" class="btn btn-default btn-draft" style="color:#fff">
+        <i ng-show="statusFilter==isDraft" class="glyphicon glyphicon-ok"></i> Draft  <span class="badge badge-default" style="color:#999">{{(records | filter:schemaFilter | filter:isDraft).length}}</span></span>
+        <input type="text" ng-model="keywords" placeholder=" Keyword " class="form-control keyword" style="width:160px;display:inline;">
+      </div>
+      <div class="col-xs-2 pull-right">
+        <span style="font-size: 16px; color: white;margin:0;padding:0;float:right;">
+        <a ng-click="newDoc(schema, null)" class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span> Add new</a></span>
+      </div>
+  </div>
+
+  <p></p>
+<style type="text/css">
+  
+  .odd {
+      background-color: #efefef;
+  }
+  .even {
+      background-color: #fff;
+  }
+</style>
+
+  <div class="container-fluid">
+    <div class="row-fluid" >
+        <div class="col-xs-4 header" style="margin:font-weight:bold;">Title</div>
+        <div class="col-xs-3 header" style="font-weight:bold;">Created</div>
+        <div class="col-xs-3 header" style="font-weight:bold;">Last update</div>
+        <div class="col-xs-2 header" style="text-align:right;">
+        {{filteredRecords.length}} record(s)</div>
     </div>
+    
 
-    <p></p>
-    <style type="text/css">
-    .odd {
-        background-color: #efefef;
-    }
-    .even {
-        background-color: #fff;
-    }
-    </style>
+    <div ng-repeat="record in (filteredRecords = (records | filter:schemaFilter | filter:statusFilter | filter:keywords | orderBy:'-createdOn'))" ng-class-odd="'odd'" ng-class-even="'even'">
+      <div class="row" style="padding:10px;border-bottom:1px solid #dedede;">
+          <div class="col-xs-4">
+              <a ng-show="isPublished(record)" ng-click="loadDocument(record); displayDetails =  !displayDetails;displayRequest =false" class="btn btn-xs btn-success" title="Published">
+              P</a>
+              <a ng-show="isRequest(record)" ng-click="displayDetails =false; displayRequest = !displayRequest; formLoading=false" class="btn btn-xs btn-danger" title="Request">
+              R</a><!--  href="/register/tasks/{{getWorkflowID(record)}}" -->
+              <a ng-show="isDraft(record)"     ng-click="edit(record)" class="btn btn-xs btn-default btn-draft" title="Draft" style="color:#fff">
+              D</a>
+              
+              <a ng-click="loadDocument(record); displayDetails=!displayDetails" ng-show="record.documentID">
+              <i class="fa" ng-class="{'fa-caret-down':displayDetails, 'fa-caret-right':!displayDetails}" style="font-size:11px;color:#999;position:relative; top:-1px;font-size:14px;"></i> 
+              <h4 style="display:inline;">{{(record.workingDocumentTitle||record.title)|lstring}}</h4></a>
 
-    <div class="container-fluid">
-        <div class="row-fluid">
-            <div class="col-xs-4 header" style="margin:font-weight:bold;">Title</div>
-            <div class="col-xs-3 header" style="font-weight:bold;">Created</div>
-            <div class="col-xs-3 header" style="font-weight:bold;">Last update</div>
-            <div class="col-xs-2 header" style="text-align:right;">
-                {{filteredRecords.length}} record(s)</div>
+              <span ng-hide="record.documentID">
+                <a href="" ng-click="edit(record)"><h4 style="display:inline;">
+                {{(record.workingDocumentTitle||record.title)|lstring}}</h4></a>
+              </span> 
+
+          </div> <!-- end col -->
+          <div class="col-xs-3">
+              <div ng-show="record.createdBy">
+              <a style="color:#666" href="mailto:{{record.createdBy.email}}"><strong>{{record.createdBy.firstName}} {{record.createdBy.lastName}}</strong></a>
+              <span style="font-size:10px;white-space:nowrap;">{{record.createdOn | date:"dd MMM yyyy h:mm a (Z)" }}</span>
+          </div>
+          </div> <!-- end col -->
+          <div class="col-xs-3">
+              <div ng-show="record.updatedBy && record.updatedOn != record.createdOn">
+              <a style="color:#666" href="mailto:{{record.updatedBy.email}}"><strong>{{record.updatedBy.firstName}} {{record.updatedBy.lastName}}</strong> </a>
+              <span style="font-size:10px;white-space:nowrap;">{{record.updatedOn | date:"dd MMM yyyy h:mm a (Z)" }}</span>
+          </div>
+          </div> <!-- end col glyphicon glyphicon-lock -->
+          <div class="col-xs-2" style="text-align:right;">
+             <div class="btn-group">
+                <button ng-show="isRequest(record)" type="button" class="btn btn-default"><i class="glyphicon glyphicon-lock"></i></button>
+                <button ng-show="!isRequest(record)" type="button" class="btn btn-default" ng-click="edit(record)"><i class="fa fa-edit"></i></button>
+                <button ng-show="!isRequest(record)"ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
+            </div>
+          </div> <!-- end col -->
+     
+   
+
+     </div> <!-- end row -->
+
+
+        <div class="row-fluid" ng-show="displayDetails || displayRequest" >
+          <div class="col-xs-12" style="border-bottom:2px solid #666;margin-bottom:20px;" ng-class-odd="'odd'" ng-class-even="'even'">
+              <div ng-show="displayDetails" >                                                
+                  <div  record-loader document="record.data" hide="header;title;libraries" class="record-body" ></div>
+              </div>                          
+               <div  ng-show="displayRequest">                                                 
+                  <div  task-id class="record-body" load-task-data='formLoading' workflow-task-id="{{getWorkflowID(record)}}"
+                   parent-watcher="documents"  ></div>
+                       <!-- href="/register/tasks/{{getWorkflowID(record)}}" -->                               
+              </div>
+          </div> <!-- end col -->
+        </div>  <!-- end row -->
+
+    </div> <!-- end repeat -->
+
+  
+
+
+
+
+  <div id="deleteRecordModel" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">What do you want to delete? <i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
         </div>
+        <div class="modal-body" ng-hide="cantDelete">
 
-
-        <div ng-repeat="record in (filteredRecords = (records | filter:schemaFilter | filter:statusFilter | filter:keywords | orderBy:'-createdOn'))" ng-class-odd="'odd'" ng-class-even="'even'">
-            <div class="row" style="padding:10px;border-bottom:1px solid #dedede;">
-                <div class="col-xs-4">
-
-                    <span ng-show="isPublished(record)">
-                        <a ng-click="loadDocument(record); displayDetails =  !displayDetails;displayRequest =false" class="btn btn-xs btn-success" title="Published">P</a>
-                        <a ng-click="loadDocument(record); displayDetails=!displayDetails" ng-show="record.documentID">
-                            <i class="fa" ng-class="{'fa-caret-down':displayDetails, 'fa-caret-right':!displayDetails}" style="font-size:11px;color:#999;position:relative; top:-1px;font-size:14px;"></i> 
-                            <h4 style="display:inline;">{{(record.workingDocumentTitle||record.title)|lstring}}</h4>
-                        </a>
-                    </span>
-
-                    <span ng-show="isRequest(record)">
-                        <a ng-click="displayDetails =false; displayRequest = !displayRequest; formLoading=false" class="btn btn-xs btn-danger" title="Request">R</a>
-                        <!--  href="/register/tasks/{{getWorkflowID(record)}}" -->
-                        <a href="" ng-click="displayDetails =false; displayRequest = !displayRequest; formLoading=false">
-                            <h4 style="display:inline;">{{(record.workingDocumentTitle||record.title)|lstring}}</h4>
-                        </a>
-                    </span>
-
-                    <span ng-show="isDraft(record) && !isRequest(record)">
-                        <a ng-click="edit(record)" class="btn btn-xs btn-default btn-draft" title="Draft" style="color:#fff">D</a>
-                         <a href="" ng-click="loadDocument(record); displayDetails=!displayDetails" >
-                            <h4 style="display:inline;">{{(record.workingDocumentTitle||record.title)|lstring}}</h4>
-                        </a>
-                    </span>
-
-                </div>
-                <!-- end col -->
-                <div class="col-xs-3">
-                    <div ng-show="record.createdBy">
-                        <a style="color:#666" href="mailto:{{record.createdBy.email}}">
-                            <strong>{{record.createdBy.firstName}} {{record.createdBy.lastName}}</strong>
-                        </a>
-                        <span style="font-size:10px;white-space:nowrap;">{{record.createdOn | date:"dd MMM yyyy h:mm a (Z)" }}</span>
-                    </div>
-                </div>
-                <!-- end col -->
-                <div class="col-xs-3">
-                    <div ng-show="record.updatedBy && record.updatedOn != record.createdOn">
-                        <a style="color:#666" href="mailto:{{record.updatedBy.email}}">
-                            <strong>{{record.updatedBy.firstName}} {{record.updatedBy.lastName}}</strong>
-                        </a>
-                        <span style="font-size:10px;white-space:nowrap;">{{record.updatedOn | date:"dd MMM yyyy h:mm a (Z)" }}</span>
-                    </div>
-                </div>
-                <!-- end col glyphicon glyphicon-lock -->
-                <div class="col-xs-2" style="text-align:right;">
-                    <div class="btn-group">
-                        <button ng-show="isRequest(record)" type="button" class="btn btn-default"><i class="glyphicon glyphicon-lock"></i>
-                        </button>
-                        <button ng-show="!isRequest(record)" type="button" class="btn btn-default" ng-click="edit(record)"><i class="fa fa-edit"></i>
-                        </button>
-                        <button ng-show="!isRequest(record)" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i>
-                        </button>
-                    </div>
-                </div>
-                <!-- end col -->
-
-
-
-            </div>
-            <!-- end row -->
-
-
-            <div class="row-fluid" ng-show="displayDetails || displayRequest">
-                <div class="col-xs-12" style="border-bottom:2px solid #666;margin-bottom:20px;" ng-class-odd="'odd'" ng-class-even="'even'">
-                    <div ng-show="displayDetails">
-                        <div record-loader document="record.data" hide="header;title;libraries" class="record-body"></div>
-                    </div>
-                    <div ng-show="displayRequest">
-                        <div task-id class="record-body" load-task-data='formLoading' workflow-task-id="{{getWorkflowID(record)}}"></div>
-                        <!-- href="/register/tasks/{{getWorkflowID(record)}}" -->
-                    </div>
-                </div>
-                <!-- end col -->
-            </div>
-            <!-- end row -->
+          <div ng-show="isDraft(recordToDelete)" class="well">
+            <button type="button" class="btn btn-warning pull-right" ng-disabled="loading" ng-click="deleteDraft(recordToDelete)">Delete the draft</button>
+            <em>Draft {{recordToDelete.documentID||'[new]'}}</em>
+            <p><b>{{recordToDelete.workingDocumentTitle|lstring}}</b></p>
+            <p>{{recordToDelete.workingDocumentSummary|lstring}}</p>
+          </div>
+        
+          <div ng-show="isPublished(recordToDelete)" class="well">
+            <button type="button" class="btn btn-danger pull-right" ng-disabled="loading" ng-click="deleteRecord(recordToDelete)" data-toggle="tooltip" data-placement="top" title="Note: Any pending draft will also be deleted">Unpublish the record</button>
+            <em>Published record {{recordToDelete.documentID}}</em>
+            <p><b>{{recordToDelete.title|lstring}}</b></p>
+            <p>{{recordToDelete.summary|lstring}}</p>
+          </div>
 
         </div>
-        <!-- end repeat -->
+        <div class="modal-body" ng-show="cantDelete">
 
+          Not allow to delete published ABSCH-IRCC records. You can only modify them.
 
-
-
-
-
-        <div id="deleteRecordModel" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">What do you want to delete? <i ng-show="loading" class="fa fa-spinner fa-spin"></i>
-                        </h4>
-                    </div>
-                    <div class="modal-body" ng-hide="cantDelete">
-
-                        <div ng-show="isDraft(recordToDelete)" class="well">
-                            <button type="button" class="btn btn-warning pull-right" ng-disabled="loading" ng-click="deleteDraft(recordToDelete)">Delete the draft</button>
-                            <em>Draft {{recordToDelete.documentID||'[new]'}}</em>
-                            <p><b>{{recordToDelete.workingDocumentTitle|lstring}}</b>
-                            </p>
-                            <p>{{recordToDelete.workingDocumentSummary|lstring}}</p>
-                        </div>
-
-                        <div ng-show="isPublished(recordToDelete)" class="well">
-                            <button type="button" class="btn btn-danger pull-right" ng-disabled="loading" ng-click="deleteRecord(recordToDelete)" data-toggle="tooltip" data-placement="top" title="Note: Any pending draft will also be deleted">Unpublish the record</button>
-                            <em>Published record {{recordToDelete.documentID}}</em>
-                            <p><b>{{recordToDelete.title|lstring}}</b>
-                            </p>
-                            <p>{{recordToDelete.summary|lstring}}</p>
-                        </div>
-
-                    </div>
-                    <div class="modal-body" ng-show="cantDelete">
-
-                        Not allow to delete published ABSCH-IRCC records. You can only modify them.
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
         </div>
-        <!-- /.modal -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->  
 
 
-    </div>
+</div>

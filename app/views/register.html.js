@@ -141,8 +141,8 @@ app.controller("RegisterController",
 	{
 
 		console.log( schema);
-		
-		if(schema == null || schema==undefined || schema=="dashboard"){
+		// || schema=="dashboard"
+		if(schema == null || schema==undefined ){
 			schema = schemaTypes.join("' or type eq '");
 		}
 
@@ -175,46 +175,53 @@ app.controller("RegisterController",
 			$scope.isLoaded.push(schema);
 			
 			_.values(map).forEach(function(row){				
-					  	
-				var schemaCount = _.where($scope.schemaTypesFacets,{"schema":row.type});
-				
-				if(schemaCount != null && schemaCount.length > 0)
-				{
-					schemaCount[0].draftCount 	+= $scope.isDraft(row) ? 1:0;					
-					schemaCount[0].requestCount += $scope.isRequest(row) ? 1:0;
-					schemaCount[0].publishCount += $scope.isPublished(row) ? 1:0;
-				}
-				else
-				{
-					$scope.schemaTypesFacets.push({"schema":row.type, "draftCount":$scope.isDraft(row) ? 1:0
-						,"requestCount":$scope.isPublished(row) ? 1:0
-						,"publishCount":$scope.isRequest(row) ? 1:0})
-				}
+					  
+				if(schema!="dashboard"){
+					var schemaCount = _.where($scope.schemaTypesFacets,{"schema":row.type});
 					
+					if(schemaCount != null && schemaCount.length > 0)
+					{
+						schemaCount[0].draftCount 	+= $scope.isDraft(row) ? 1:0;					
+						schemaCount[0].requestCount += $scope.isRequest(row) ? 1:0;
+						schemaCount[0].publishCount += $scope.isPublished(row) ? 1:0;
+					}
+					else
+					{
+						$scope.schemaTypesFacets.push({"schema":row.type, "draftCount":$scope.isDraft(row) ? 1:0
+							,"requestCount":$scope.isPublished(row) ? 1:0
+							,"publishCount":$scope.isRequest(row) ? 1:0})
+					}
+				}
 				$scope.records.push(row);
 			})
 			// var recrords _.groupBy($scope.records,'')
-// console.log($scope.schemaTypesFacets);
+ console.log($scope.records);
 			return $scope.records;
 		});
 	}
 	
 	loadRecords();
 
-	$scope.refreshRecords = function (){
+	$scope.refreshRecords = function (msg){
 		var currentTab = $scope.tab();
-
-		//remove tab details from isLoded array which is used to avoid reload of records on tab change.
-		$scope.isLoaded.splice($.inArray(currentTab,$scope.isLoaded),1);
-		var schemaCount = _.where($scope.schemaTypesFacets,{"schema":currentTab});
-		schemaCount[0].draftCount 	= 0;					
-		schemaCount[0].requestCount = 0;
-		schemaCount[0].publishCount	= 0;
+console.log(currentTab + 'rerec');
+		if(currentTab != "dashboard"){
+			//remove tab details from isLoded array which is used to avoid reload of records on tab change.
+			$scope.isLoaded.splice($.inArray(currentTab,$scope.isLoaded),1);
+			var schemaCount = _.where($scope.schemaTypesFacets,{"schema":currentTab});
+			schemaCount[0].draftCount 	= 0;					
+			schemaCount[0].requestCount = 0;
+			schemaCount[0].publishCount	= 0;
+		}
 		//remove records for the current tab from records array and refetch from server.
 		$scope.records =_.reject($scope.records, function(record){
 							return record.type== currentTab;
 					});
 		loadRecords(currentTab);
+
+		if(msg){
+			$scope.msg = msg;
+		}
 	}
 
 	// loadRecords();
