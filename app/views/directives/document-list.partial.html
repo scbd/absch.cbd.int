@@ -52,8 +52,8 @@
   <div ng-repeat="document in transformedDocuments | filter:filterCategory" style="
     padding:10px 0 10px 0;">
     <!--  {{document}} -->
-    <div class="result reference-result">
-      <table>
+    <div class="result reference-result" style="border:1px solid #ccc;">
+      <table >
         <tr>
           <td rowspan="4" class="{{document.cssRecordClass}}" ></td>
           <td colspan="2" style="padding:3px 0 0 0;margin:0;">
@@ -160,7 +160,7 @@
           </td>
         </tr>
         <tr>
-          <td style="padding:5px 10px 10px 10px;">
+          <td style="padding:20px 10px 0px 10px;">
             <div style="padding:0 0 0 20px;margin:0;" ng-hide="displayDetails" >
               {{document.description}}
             </div>
