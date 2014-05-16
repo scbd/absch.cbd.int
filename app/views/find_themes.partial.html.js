@@ -86,6 +86,12 @@ app.directive('searchFilterThemes', function ($http) {
             $scope.ccc = function(item) {
                 return $scope.isSelected(item) ? 'facet selected' : 'facet unselected';
             };
+            $scope.showSelected = function(item) {
+                console.log(item.selected,item.indeterminate )
+                if(item.selected || item.indeterminate)
+                    return true;
+                return false;
+            }
 
             $scope.updateQuery = function() {
 
@@ -120,9 +126,9 @@ app.directive('searchFilterThemes', function ($http) {
                 if(!broaderTerms) return;
 
                 broaderTerms.forEach(function (term) {
-
+console.log(term);
                     term.indeterminateCounterA = term.indeterminateCounterA + (selected ? 1 : -1);
-                    console.log(term.indeterminateCounterA);
+                    //console.log('indeterminateCounterA setBroaders' + term.indeterminateCounterA);
                     term.indeterminate = !term.selected && (term.indeterminateCounterA + term.indeterminateCounterB) > 0;
 
                     setBroaders(term.broaderTerms, selected); 
@@ -149,9 +155,9 @@ app.directive('searchFilterThemes', function ($http) {
                 if(!narrowerTerms) return;
 
                 narrowerTerms.forEach(function (term) { 
-
+ 
                     term.indeterminateCounterB = term.indeterminateCounterB + (selected ? 1 : -1);
-                    console.log(term.indeterminateCounterB);
+                   // console.log('indeterminateCounterB setNarrowers' + term.indeterminateCounterB);
                     term.indeterminate = !term.selected && (term.indeterminateCounterA + term.indeterminateCounterB) > 0;
 
                     setNarrowers(term.narrowerTerms, selected); 
@@ -175,6 +181,7 @@ app.directive('searchFilterThemes', function ($http) {
 
             $scope.ts = function (scope, evt) {
 
+console.log(scope.item);
                 var term = scope.item;
                 term.selected = !scope.item.selected;
                 term.indeterminate = !term.selected && (term.indeterminateCounterA + term.indeterminateCounterB) > 0;
