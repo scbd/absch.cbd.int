@@ -16,7 +16,7 @@
 		<div ng-repeat="task in tasks|orderBy:'activity.createdOn'"style="border-bottom:1px solid gray;padding-top:5px;">
 			<div class="row" >
 				<div class="col-xs-2 col-md-2 col-ls-2"> <!-- ID -->
-					<a style="text-transform:uppercase;white-space:nowrap;" ng-href="/register/tasks/{{task.workflow._id}}/{{task.activity.name}}"  type="button">{{formatWID(task.workflow._id)}}</a>
+					<a style="text-transform:uppercase;white-space:nowrap;" href="" ng-click="tasksDisplay=!tasksDisplay; formLoading=false"  type="button">{{formatWID(task.workflow._id)}}</a><!-- /register/tasks/{{task.workflow._id}}/{{task.activity.name}} -->
 					<div ng-switch="task.workflow.type.name">
 						<em ng-switch-when="publishNationalRecord">Publishing request</em>
 						<em ng-switch-when="publishReferenceRecord">Publishing request</em>
