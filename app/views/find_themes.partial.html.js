@@ -87,7 +87,7 @@ app.directive('searchFilterThemes', function ($http) {
                 return $scope.isSelected(item) ? 'facet selected' : 'facet unselected';
             };
             $scope.showSelected = function(item) {
-                console.log(item.selected,item.indeterminate )
+                //console.log(item.selected,item.indeterminate )
                 if(item.selected || item.indeterminate)
                     return true;
                 return false;
@@ -95,7 +95,7 @@ app.directive('searchFilterThemes', function ($http) {
 
             $scope.updateQuery = function() {
 
-                console.log($scope.query );
+               // console.log($scope.query );
                 
                 $scope.query = '';
 
@@ -108,7 +108,7 @@ app.directive('searchFilterThemes', function ($http) {
                 else
                     $scope.query = '*:*';
 
-                console.log($scope.query);
+               // console.log($scope.query);
             };
 
             function select(item) {
@@ -126,7 +126,7 @@ app.directive('searchFilterThemes', function ($http) {
                 if(!broaderTerms) return;
 
                 broaderTerms.forEach(function (term) {
-console.log(term);
+//console.log(term);
                     term.indeterminateCounterA = term.indeterminateCounterA + (selected ? 1 : -1);
                     //console.log('indeterminateCounterA setBroaders' + term.indeterminateCounterA);
                     term.indeterminate = !term.selected && (term.indeterminateCounterA + term.indeterminateCounterB) > 0;
@@ -181,7 +181,7 @@ console.log(term);
 
             $scope.ts = function (scope, evt) {
 
-console.log(scope.item);
+//console.log(scope.item);
                 var term = scope.item;
                 term.selected = !scope.item.selected;
                 term.indeterminate = !term.selected && (term.indeterminateCounterA + term.indeterminateCounterB) > 0;
@@ -221,7 +221,7 @@ console.log(scope.item);
                     $scope.query = query;
                 }
 
-                console.log($scope.query);
+                //console.log($scope.query);
             }
 
             function buildConditions (conditions, items) {

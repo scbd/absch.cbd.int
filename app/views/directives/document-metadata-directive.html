@@ -20,7 +20,7 @@
 			</div>
 			<div ng-show="document.header.identifier"  class="col-xs-4">
 					<label>record identifier</label>
-					<div><a href="/database/record?documentID={{document.header.identifier}}">
+					<div><a href="/database/record?documentID={{document.header.identifier}}&documentSchema={{document.header.schema | uppercase}}">
 					{{document.header.identifier}}</a> </div>
 			</div>
 		</div>

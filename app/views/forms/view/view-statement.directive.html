@@ -13,7 +13,7 @@
 		<div ng-show="document.date_s">
 			<label>Date</label>
 			<span class="km-value">
-				{{document.date_s}}
+				{{document.date_s| formatDate}}
 			</span>
 		</div>
 
@@ -59,9 +59,9 @@
 
 		
 		<div ng-show="document.url_ss">
-			<label>Meeting Link</label>
+			<label>Document Link</label>
 			<span class="km-value">
-				<a ng-href="{{document.url_ss | lstring:locale}}" target="_">{{document.url_ss | lstring:locale}}</a>
+				<a ng-href="http://www.cbd.int/doc/speech/{{document.date_s| formatDate:'YYYY'}}/{{document.url_ss | lstring:locale}}" target="_">{{document.url_ss | lstring:locale}}</a>
 			</span>
 		</div>		
 		<div document-metadata ></div>

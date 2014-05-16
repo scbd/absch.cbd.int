@@ -1,5 +1,6 @@
 define(['app',
-        './document-metadata-directive.html.js']
+        './document-metadata-directive.html.js',
+    '/app/js/common.js',]
       , function (app) {
 
 app.directive('documentList', function ($http) {
@@ -20,7 +21,7 @@ app.directive('documentList', function ($http) {
                   currentPage: '=',
                   documentCount: '='
             },
-            controller: ['$scope', "underscore", function ($scope, underscore){
+            controller: ['$scope', "underscore", "commonjs",function ($scope, underscore, commonjs){
 
               $scope.formatDate = function formatDate (date) {
                     return moment(date).format('MMMM Do YYYY');
@@ -44,43 +45,46 @@ app.directive('documentList', function ($http) {
                         if(item.schema=="FOCALPOINT" || item.schema=="MEETING" || item.schema=="NOTIFICATION"
                            || item.schema=="PRESSRELEASE" || item.schema=="STATEMENT")
                         {
-                              var queryFields = 'fl=identifier_s,schema_s,createdDate_dt,createdByEmail_s,createdBy_s,updatedDate_dt,updatedByEmail_s,updatedBy_s,url_ss,';
-
-                              if(item.schema=="FOCALPOINT"){
-                                  queryFields += 'description_EN_t,government_EN_t,organization_EN_t,text_EN_txt,title_EN_t,treaty_CEN_ss,type_CEN_ss';
-                              }
-                              else if (item.schema=="MEETING"){
-                                queryFields += 'symbol_s,startDate_dt,endDate_dt,eventCountry_CEN_s,title_s,eventCity_s,text_EN_txt,themes_CEN_ss,thematicAreas_CEN_ss,thematicAreas_ss';
-                              }
-                              else if (item.schema=="NOTIFICATION"){
-                                queryFields += 'date_s,deadline_s,symbol_s,reference_s,sender_s,schema_CEN_s,title_EN_t,description_EN_t,recipient_ss,url_ss,text_EN_txt';
-                              }
-                              else if (item.schema=="PRESSRELEASE"){
-                                queryFields += 'date_s,symbol_s,schema_CEN_s,title_EN_t,description_EN_t,themes_CEN_ss,url_ss,thematicAreas_CEN_ss,text_EN_txt';
-                              }
-                              else if (item.schema=="STATEMENT"){
-                                queryFields += 'date_s,symbol_s,schema_CEN_s,title_EN_t,description_EN_t,themes_CEN_ss,url_ss,thematicAreas_CEN_ss,text_EN_txt';
-                              }
-
-                              $http.get("/api/v2013/index/select?" + queryFields + "&q=id:"+item.id)
-                                   .then(function (result) { 
-
-                                      item.data = result.data.response.docs[0];                                       
-                                          
-                                      item.data.info = [];                              
-                                      item.data.header = {'schema':item.data.schema_s};
-                                      if(item.data.createdBy_s){
-                                        item.data.info.createdBy.firstName = item.data.createdBy_s;
-                                        item.data.info.createdBy.email = item.data.createdByEmail_s;
-                                      }
-                                      item.data.info.createdOn = item.data.createdDate_dt;
-                                      if(item.data.updatedBy_s){
-                                        item.data.info.updatedBy.firstName = item.data.updatedBy_s;
-                                        item.data.info.updatedBy.email = item.data.updatedByEmail_s;
-                                      }
-                                      item.data.info.updatedOn = item.data.updatedDate_dt;
-                                      item.data.header.identifier = item.data.identifier_s;  
+                             commonjs.getReferenceRecordIndex(item.schema,item.id).then(function(data){
+                                item.data = data.data;
                               });
+                              // var queryFields = 'fl=identifier_s,schema_s,createdDate_dt,createdByEmail_s,createdBy_s,updatedDate_dt,updatedByEmail_s,updatedBy_s,url_ss,';
+
+                              // if(item.schema=="FOCALPOINT"){
+                              //     queryFields += 'description_EN_t,government_EN_t,organization_EN_t,text_EN_txt,title_EN_t,treaty_CEN_ss,type_CEN_ss';
+                              // }
+                              // else if (item.schema=="MEETING"){
+                              //   queryFields += 'symbol_s,startDate_dt,endDate_dt,eventCountry_CEN_s,title_s,eventCity_s,text_EN_txt,themes_CEN_ss,thematicAreas_CEN_ss,thematicAreas_ss';
+                              // }
+                              // else if (item.schema=="NOTIFICATION"){
+                              //   queryFields += 'date_s,deadline_s,symbol_s,reference_s,sender_s,schema_CEN_s,title_EN_t,description_EN_t,recipient_ss,url_ss,text_EN_txt';
+                              // }
+                              // else if (item.schema=="PRESSRELEASE"){
+                              //   queryFields += 'date_s,symbol_s,schema_CEN_s,title_EN_t,description_EN_t,themes_CEN_ss,url_ss,thematicAreas_CEN_ss,text_EN_txt';
+                              // }
+                              // else if (item.schema=="STATEMENT"){
+                              //   queryFields += 'date_s,symbol_s,schema_CEN_s,title_EN_t,description_EN_t,themes_CEN_ss,url_ss,thematicAreas_CEN_ss,text_EN_txt';
+                              // }
+
+                              // $http.get("/api/v2013/index/select?" + queryFields + "&q=id:"+item.id)
+                              //      .then(function (result) { 
+
+                              //         item.data = result.data.response.docs[0];                                       
+                                          
+                              //         item.data.info = [];                              
+                              //         item.data.header = {'schema':item.data.schema_s};
+                              //         if(item.data.createdBy_s){
+                              //           item.data.info.createdBy.firstName = item.data.createdBy_s;
+                              //           item.data.info.createdBy.email = item.data.createdByEmail_s;
+                              //         }
+                              //         item.data.info.createdOn = item.data.createdDate_dt;
+                              //         if(item.data.updatedBy_s){
+                              //           item.data.info.updatedBy.firstName = item.data.updatedBy_s;
+                              //           item.data.info.updatedBy.email = item.data.updatedByEmail_s;
+                              //         }
+                              //         item.data.info.updatedOn = item.data.updatedDate_dt;
+                              //         item.data.header.identifier = item.data.identifier_s;  
+                              // });
                         }
                         else
                         {
@@ -241,8 +245,11 @@ app.directive('documentList', function ($http) {
                     }
                     else if(document.schema_s=='measure' || document.schema_s=='focalPoint' || document.schema_s=='database') {
                         output.cssRecordClass="nationalRecords";
+                    }                    
+                    else if(document.schema_s=='meeting') {
+                        output.eventCity=document.eventCity_EN_t;
+                        output.eventCountry=document.eventCountry_EN_t;
                     }
-                    
                    
 
                     return output;

@@ -60,8 +60,9 @@
             <span class="{{document.cssClass}}">
             <div ng-switch on="document.schema" class="result">
               
-              <a href="/database/record?documentID={{document.identifier_s}}" target="_new"
-              class="pull-right" style="padding:0px 3px;color:#999;"><i class="glyphicon glyphicon-new-window"></i></a>
+              <a href="/database/record?documentID={{document.schema=='MEETING' ? document.id : document.identifier_s}}&documentSchema={{document.schema}}" target="_new" 
+                  class="pull-right" style="padding:0px 3px;color:#999;"><i class="glyphicon glyphicon-new-window"></i>
+              </a>
               <div ng-switch-when="MEASURE" class="national-record">
                 <span class="rec-title">Legislative, administrative or policy measures</span>
                 <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
@@ -115,22 +116,17 @@
               </div>
               <div ng-switch-when="MEETING" class="reference-record">
                 <span class="rec-title">meeting</span>
-                <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
-                <span style="color:#666;font-weight:bold;" > | date </span>
-                <span style="color:#666;font-weight:bold;" > | city, country </span>
+                <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>                
+                <span ng-show="document.startDate_dt">| <span >Date:</span>  <span class="rowDetails" > {{document.startDate_dt}} </span> </span>
+                <span ng-show="document.eventCity">| <span >City:</span>  <span class="rowDetails" > {{document.eventCity}} </span> </span>
+                <span ng-show="document.eventCountry">| <span >Country:</span>  <span class="rowDetails" > {{document.eventCountry | lstring:locale}} </span> </span>                
               </div>
               <div ng-switch-when="NOTIFICATION" class="reference-record">
                 <span class="rec-title">notification</span>
                 <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
                 <span style="color:#666;font-weight:bold;" > | {{document.doc.reference_s}} </span>
                 <span style="color:#666;font-weight:bold;" > | {{formatDate(document.date_dt)}} </span>
-              </div>
-             <!--  <div ng-switch-when="PRESSRELEASE" class="reference-record">
-                <span class="rec-title">press release</span>
-                <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
-                <span style="color:#666;font-weight:bold;" > | {{formatDate(document.date_dt)}} </span>
-              </div> -->
-
+              </div>           
               <div ng-switch-when="FOCALPOINT" class="national-record">
                 <span class="rec-title">{{document.schema}}</span>
                 <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>

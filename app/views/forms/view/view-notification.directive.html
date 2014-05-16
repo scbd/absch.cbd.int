@@ -13,7 +13,7 @@
 		<div ng-show="document.date_s">
 			<label>Date</label>
 			<span class="km-value">
-				{{document.date_s}}
+				{{document.date_s| formatDate}}
 			</span>
 		</div>
 
@@ -47,28 +47,28 @@
 		<div ng-show="document.reference_s">
 			<label>Reference</label>
 			<span class="km-value">
-				{{document.reference_s}}
+				{{document.reference_s| lstring:locale}}
 			</span>
 		</div>
 
 		<div ng-show="document.sender_s">
 			<label>Sender</label>
 			<span class="km-value">
-				{{document.sender_s}}
+				{{document.sender_s| lstring:locale}}
 			</span>
 		</div>
 
 		<div ng-show="document.recipient_ss">
 			<label>Recepient</label>
 			<span class="km-value">
-				{{document.recipient_ss}}
+				{{document.recipient_ss| lstring:locale}}
 			</span>
 		</div>
 		
 		<div ng-show="document.url_ss">
-			<label>Meeting Link</label>
+			<label>Document Link</label>
 			<span class="km-value">
-				<a ng-href="{{document.url_ss | lstring:locale}}" target="_">{{document.url_ss | lstring:locale}}</a>
+				<a ng-href="http://www.cbd.int{{document.url_ss | lstring:locale}}" target="_">{{document.url_ss | lstring:locale}}</a>
 			</span>
 		</div>
 		<div document-metadata ></div>		

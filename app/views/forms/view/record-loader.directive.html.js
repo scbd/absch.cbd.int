@@ -15,7 +15,9 @@
     './view-meeting.directive.html.js',
     './view-statement.directive.html.js',
     './view-pressrelease.directive.html.js',
-    './view-notification.directive.html.js'], function (app) {
+    './view-notification.directive.html.js',
+    '/app/js/common.js',
+    '/app/views/directives/document-metadata-directive.html.js'], function (app) {
 app.directive('recordLoader', [function () {
 	return {
 		restrict: 'EAC',
@@ -42,7 +44,8 @@ app.directive('recordLoader', [function () {
 			if(!$scope.document)
 				$scope.init();
 		},
-		controller: ['$scope', "$route", 'IStorage', "authentication", "localization", "$q", "$location", function ($scope, $route, storage, authentication, localization, $q, $location) {
+		controller: ['$scope', "$route", 'IStorage', "authentication", "localization", "$q", "$location", "commonjs",
+			function ($scope, $route, storage, authentication, localization, $q, $location,commonjs) {
 			
 			//==================================
 			//
@@ -56,9 +59,19 @@ app.directive('recordLoader', [function () {
 					return;
 
 				var documentID = $route.current.params.documentID;
+				var documentSchema = $route.current.params.documentSchema;
 
-				if (documentID)
+				if(documentSchema=="FOCALPOINT" || documentSchema=="MEETING" || documentSchema=="NOTIFICATION"
+                   || documentSchema=="PRESSRELEASE" || documentSchema=="STATEMENT")
+				{
+					 commonjs.getReferenceRecordIndex(documentSchema,documentID).then(function(data){
+						$scope.internalDocument = data.data;
+					console.log($scope.internalDocument );
+					});
+				}										
+				else if (documentID){
 					$scope.load(documentID);
+				}
 				// else
 				// 	$scope.error = "documentID not specified";
 				
