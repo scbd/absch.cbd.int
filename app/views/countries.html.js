@@ -4,11 +4,12 @@ define(['app', './countries.html.js'], function (app, country) {
 
     	//*******************************************************
     	$scope.countries = $http.get('/api/v2013/countries', { cache: true }).then(function (response) {
+            $scope.selected_circle="party";
             $scope.countries = response.data;
             $scope.ratifications = 0;
             $scope.signatures = 0;
 
-            $scope.parties = $scope.countries.length;
+            $scope.parties = 0;
             
             for (var i = 0; i < $scope.countries.length; i++) {
                 if ($scope.countries[i].treaties.XXVII8b.instrument == "ratification" 
@@ -18,6 +19,9 @@ define(['app', './countries.html.js'], function (app, country) {
                 }
                 if ($scope.countries[i].treaties.XXVII8b.signature != null ) {
                     $scope.signatures++;
+                }
+                if($scope.countries[i].treaties.XXVII8.party != null){
+                  $scope.parties++;
                 }
             }
 
@@ -39,14 +43,17 @@ define(['app', './countries.html.js'], function (app, country) {
        	 }
 
          $scope.isPartyToCBD= function(entity){
-            return entity;
+            $scope.selected_circle="party";
+            return entity && entity.treaties.XXVII8.party != null; 
          }
 
          $scope.isSignatory = function(entity){
-            return entity && entity.treaties.XXVII8b.signature != null;
+            $scope.selected_circle="signatory";
+            return entity && entity.treaties.XXVII8b.signature != null; 
          }
 
          $scope.isRatified= function(entity){
+            $scope.selected_circle="ratified";
             return entity && (entity.treaties.XXVII8b.instrument == "ratification" ||
                               entity.treaties.XXVII8b.instrument == "accession" ||
                               entity.treaties.XXVII8b.instrument == "acceptance" );
