@@ -1687,6 +1687,12 @@ require('app').directive('kmSelect', ["underscore", "htmlUtility", function (_, 
 
 				$scope.save();
 			}
+			$('#filterText').on("click", "*", function (e) {
+                e.stopPropagation();
+            });
+             $(document).on('click', '#filterText input', function (e) {
+                e.stopPropagation();
+            });
 		}]
 	}
 }])
