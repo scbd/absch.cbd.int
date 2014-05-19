@@ -1,10 +1,5 @@
-define(['app',  'directives/angucomplete-extended']
-      , function (app,angucomplete) {
- console.log(angucomplete);
-// require(['/app/libs/angucomplete/angucomplete.js'], function(angu){
-    // var aucomplete = require(['/app/libs/angucomplete/angucomplete.js']);
-    // //require('angular').module('app', ['angucomplete']);
-    // var app1 = angular.module('app', ["angucomplete", aucomplete1]);
+define(['app',  'directives/angucomplete-extended'], function (app,angucomplete) {
+  
     app.controller("CountriesController", ["$scope", "$http", function ($scope, $http) {
 
     	//*******************************************************

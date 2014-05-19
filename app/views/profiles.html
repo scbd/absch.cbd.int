@@ -2,6 +2,7 @@
 <link href="/app/css/find.css" rel="stylesheet">
 <link href="/app/css/record.css" rel="stylesheet">
 <link href="/app/libs/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+<link href="/app/libs/angucomplete/angucomplete.css" rel="stylesheet">
 
 <div ng-controller="ProfileController">
 
@@ -62,12 +63,15 @@
 				
 			</div> 
 <hr/> -->
-<div class="clearfix"></div>
+ 
 
 
 
   		<div class="col-sm-12" >
-
+<div class="pull-right" style="width:30%" >
+                 <div angucomplete id="ex1" placeholder="Search countries" pause="100"  localdata="autocompleteData" minlength="1" inputclass="form-control form-control-small"   searchfields="title" selectedObject="selectedCountry" searchStr="searchText.$" titlefield="title"/>
+                  </div>                  
+<div class="clearfix"></div>
   			<div class="panel-group" id="accordion">
 			  
 			  <div class="panel" ng-show="absch_nfp.response.numFound > 0">
@@ -87,7 +91,7 @@
 			       <!-- {{absch_nfp.response.docs}}-->			      		
 					<div>
 					<!-- <div document-list documents='absch_nfp.response.docs' filter='National Focal Point' show-pagination='false' ></div> -->
-					<div document-list  documents='absch_nfp.response.docs' filter='focalPoint' show-pagination='false'
+					<div document-list  documents='absch_nfp.response.docs' filter='focalPoint' show-pagination='false' advance-filter="searchText"
 						 current-page='currentPage' document-Count='documentCount' ></div>
 					</div>
 			      </div>
@@ -108,7 +112,7 @@
 			    </div>
 			    <div id="collapseTwo" class="panel-collapse collapse">
 			      <div class="panel-body">			        
-			        <div document-list  documents='absch_nfp.response.docs' filter='authority' show-pagination='false'
+			        <div document-list  documents='absch_nfp.response.docs' filter='authority' show-pagination='false' advance-filter="searchText"
 						 current-page='currentPage' document-Count='documentCount' ></div>
 			      </div>
 			    </div>
@@ -127,7 +131,7 @@
 			    </div>
 			    <div id="collapseThree" class="panel-collapse collapse">
 			      <div class="panel-body">			       
-			       <div document-list  documents='absch_nfp.response.docs' filter='measure' show-pagination='false'
+			       <div document-list  documents='absch_nfp.response.docs' filter='measure' show-pagination='false' advance-filter="searchText"
 						 current-page='currentPage' document-Count='documentCount' ></div>
 			      </div>
 			    </div>
@@ -147,7 +151,7 @@
 			    </div>
 			    <div id="collapseFour" class="panel-collapse collapse">
 			      <div class="panel-body">			       
-			       <div document-list  documents='absch_nfp.response.docs' filter='absPermit' show-pagination='false'
+			       <div document-list  documents='absch_nfp.response.docs' filter='absPermit' show-pagination='false' advance-filter="searchText"
 						 current-page='currentPage' document-Count='documentCount' ></div>
 			      </div>
 			    </div>
@@ -167,7 +171,7 @@
 			    </div>
 			    <div id="collapseFive" class="panel-collapse collapse">
 			      <div class="panel-body">			       	
-			       	<div document-list  documents='absch_nfp.response.docs' filter='absCheckpoint' show-pagination='false'
+			       	<div document-list  documents='absch_nfp.response.docs' filter='absCheckpoint' show-pagination='false' advance-filter="searchText"
 						 current-page='currentPage' document-Count='documentCount' ></div>
 			      </div>
 			    </div>
@@ -187,7 +191,7 @@
 			    </div>
 			    <div id="collapseSix" class="panel-collapse collapse">
 			      <div class="panel-body">			       	
-			       	<div document-list  documents='absch_nfp.response.docs' filter='absCheckpointCommunique' show-pagination='false'
+			       	<div document-list  documents='absch_nfp.response.docs' filter='absCheckpointCommunique' show-pagination='false' advance-filter="searchText"
 						 current-page='currentPage' document-Count='documentCount' ></div>
 			      </div>
 			    </div>
@@ -206,7 +210,7 @@
 			    </div>
 			    <div id="collapseSeven" class="panel-collapse collapse">
 			      <div class="panel-body">
-			       	<div document-list  documents='absch_nfp.response.docs' filter='database' show-pagination='false'
+			       	<div document-list  documents='absch_nfp.response.docs' filter='database' show-pagination='false' advance-filter="searchText"
 						 current-page='currentPage' document-Count='documentCount' ></div>
 			      </div>
 			    </div>

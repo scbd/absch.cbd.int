@@ -48,8 +48,7 @@
     </li>
   </ul>
   <div class="clearfix"></div>
-  
-  <div ng-repeat="document in transformedDocuments | filter:filterCategory" style="
+  <div ng-repeat="document in transformedDocuments | filter:advanceFilter | filter:filterCategory " style="
     padding:10px 0 10px 0;">
     <!--  {{document}} -->
     <div class="result reference-result" style="border:1px solid #ccc;">

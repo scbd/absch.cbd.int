@@ -170,9 +170,10 @@ app.directive('angucomplete', function ($parse, $http, $sce, $timeout) {
 
             $scope.selectResult = function(result) {
                 if ($scope.matchClass) {
-                    result.title = result.title.toString().replace(/(<([^>]+)>)/ig, '');
+                    result.title = nospace(result.title.toString().replace(/(<([^>]+)>)/ig, ''));
                 }
                 $scope.searchStr = $scope.lastSearchTerm = result.title;
+
                 $scope.selectedObject = result;
                 $scope.showDropdown = false;
                 $scope.results = [];
@@ -231,6 +232,10 @@ app.directive('angucomplete', function ($parse, $http, $sce, $timeout) {
                     $scope.$apply();
                 }
             });
+
+            $scope.nospace = function(value){
+                 return (!value) ? '' : value.replace(/[\s]/g, '');
+            }
 
         }
     };
