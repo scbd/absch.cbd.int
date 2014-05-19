@@ -24,7 +24,7 @@ define(['app'], function(app){
 
 				return $http.get("/api/v2013/index/select?" + queryFields + "&q=id:"+documentId)
 				   .then(function (result) { 
-
+console.log(result);
 				      item.data = result.data.response.docs[0];                                       
 				          
 				      item.data.info = [];                              

@@ -1,4 +1,4 @@
-define(['app','./app/views/about.html.js'], function (app) {
+define(['app'], function (app) {
 
 	app.controller('AboutController', ['$scope','$rootScope', '$location', '$window', function ($scope, $rootScope, $location, $window) {
 		$scope.tab = "about";

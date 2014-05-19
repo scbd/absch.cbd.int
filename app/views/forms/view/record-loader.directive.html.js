@@ -67,7 +67,7 @@ app.directive('recordLoader', [function () {
 				{
 					 commonjs.getReferenceRecordIndex(documentSchema,documentID).then(function(data){
 						$scope.internalDocument = data.data;
-					console.log($scope.internalDocument );
+					//console.log($scope.internalDocument );
 					});
 				}										
 				else if (documentID){
@@ -101,7 +101,8 @@ app.directive('recordLoader', [function () {
 					$scope.internalDocumentInfo = results[1];
 
 				}).then(null, function(error) {
-					 $scope.error = error.Message || error || "Http Error: " + errorCode;
+					 // $scope.error = error.Message || error || "Http Error: " + errorCode;
+					 console.log( $scope.error );
 				})
 
 				console.log($scope.document);

@@ -157,7 +157,7 @@
                     <div class="col-xs-12">
                         <div ng-class="{'alert alert-danger':document.geneticResourcesConfidential}" class="confidential-box">
                             <span class="pull-right confidential-text">
-                                <input type="checkbox" name="geneticResourcesConfidential" ng-model="document.geneticResourcesConfidential" watch-items>Confidential</input>
+                                <input type="checkbox" name="geneticResourcesConfidential" ng-model="document.geneticResourcesConfidential" ng-click="document.geneticResources=''" watch-items>Confidential</input>
                             </span>
 
                             <div class="km-control-group" required name="geneticResources" caption="Subject-matter or genetic resources covered by the permit or its equivalent">

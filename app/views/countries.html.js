@@ -1,5 +1,10 @@
-define(['app', './countries.html.js'], function (app, country) {
-
+define(['app',  'directives/angucomplete-extended']
+      , function (app,angucomplete) {
+ console.log(angucomplete);
+// require(['/app/libs/angucomplete/angucomplete.js'], function(angu){
+    // var aucomplete = require(['/app/libs/angucomplete/angucomplete.js']);
+    // //require('angular').module('app', ['angucomplete']);
+    // var app1 = angular.module('app', ["angucomplete", aucomplete1]);
     app.controller("CountriesController", ["$scope", "$http", function ($scope, $http) {
 
     	//*******************************************************
@@ -7,9 +12,10 @@ define(['app', './countries.html.js'], function (app, country) {
             $scope.selected_circle="party";
             $scope.countries = response.data;
             $scope.ratifications = 0;
-            $scope.signatures = 0;
+            $scope.signatures = 0;            
 
             $scope.parties = 0;
+            $scope.countriesforAutocomplete = [];
             
             for (var i = 0; i < $scope.countries.length; i++) {
                 if ($scope.countries[i].treaties.XXVII8b.instrument == "ratification" 
@@ -23,6 +29,7 @@ define(['app', './countries.html.js'], function (app, country) {
                 if($scope.countries[i].treaties.XXVII8.party != null){
                   $scope.parties++;
                 }
+                 $scope.countriesforAutocomplete.push({name:$scope.countries[i].name.en});
             }
 
         });
@@ -62,4 +69,5 @@ define(['app', './countries.html.js'], function (app, country) {
 
 
     }]);
+// });
 });

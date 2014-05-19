@@ -1,5 +1,4 @@
 define(['app',
-    '../views/find.html.js',
     '../js/directives/forms/form-controls.js',
     '../views/forms/view/record-loader.directive.html.js',
     '../views/find_schemas.partial.html.js',

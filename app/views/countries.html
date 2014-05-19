@@ -1,6 +1,36 @@
 <link href="/app/css/country.css" rel="stylesheet">
-<!-- <script src="/app/views/countries.html.js"></script> -->
+<!-- <script src="/app/libs/angucomplete/angucomplete.js"></script> -->
+<link href="/app/libs/angucomplete/angucomplete.css" rel="stylesheet">
+<style type="text/css">
+    .active-circle{border:2px solid #ccc;}
 
+    .animate-enter, 
+    .animate-leave
+    { 
+      -webkit-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+      -moz-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+      -ms-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+      -o-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+      transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+      position: relative;
+      display: block;
+    } 
+     
+    .animate-enter.animate-enter-active, 
+    .animate-leave {
+      opacity: 1;
+      top: 0;
+      height: 30px;
+    }
+     
+    .animate-leave.animate-leave-active,
+    .animate-enter {
+      opacity: 0;
+      top: -50px;
+      height: 0px;
+    }
+  
+</style>
 
 <div ng-controller="CountriesController">
 
@@ -10,10 +40,6 @@
               <div class="row"  >
                   <div class="span12">
 
-                <style type="text/css">
-                    .active-circle{border:2px solid #ccc;}
-                  
-                </style>
 
                     <table align="center" style="width: 90%;text-align:center;" cellspacing="10" cellpadding="10">
                        
@@ -83,6 +109,13 @@
 
         <table class="table table-countries">
           <tr>
+              <td colspan="5" >
+                  <div class="pull-right" style="width:30%" >
+                 <div angucomplete id="ex1" placeholder="Search countries" pause="100"  localdata="countriesforAutocomplete" minlength="1" inputclass="form-control form-control-small"   searchfields="name" selectedObject="selectedCountry" searchStr="countryFilter" titlefield="name"/>
+                  </div>
+              </td>
+          </tr>
+          <tr>
             <th>#</th>
             <th style="white-space:nowrap;"><span style="cursor:pointer;" ng-click="sortTable('name.en')">Country 
              <i ng-show="sortTerm=='name.en'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span></th>
@@ -93,8 +126,8 @@
             <th style="white-space:nowrap;"><span style="cursor:pointer;" ng-click="sortTable('treaties.XXVII8b.deposit')">Deposit 
              <i ng-show="sortTerm=='treaties.XXVII8b.deposit'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span></th>
             <!-- <th>Entry into force</th> -->
-          </tr>
-          <tr ng-repeat="country in (countries | filter: searchFilter | orderBy:sortTerm:orderList)" ng-class="{'success' : (country.treaties.XXVII8b.instrument=='ratification' ||  country.treaties.XXVII8b.instrument=='accession' ||  country.treaties.XXVII8b.instrument=='acceptance')}">
+          </tr><!-- -->
+          <tr ng-repeat="country in (countries | filter:countryFilter | filter: searchFilter | orderBy:sortTerm:orderList)" ng-class="{'success' : (country.treaties.XXVII8b.instrument=='ratification' ||  country.treaties.XXVII8b.instrument=='accession' ||  country.treaties.XXVII8b.instrument=='acceptance')}" ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}" >
             <td>{{$index + 1}}</td>
             <td><a ng-href="countries/{{country.code}}" class="country-list-name">{{country.name.en}}</a></td>
             <td>{{country.treaties.XXVII8b.signature}}</td>
