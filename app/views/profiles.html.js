@@ -36,7 +36,7 @@ app.controller("ProfileController", ["$scope", "$http", "$routeParams","linqjs",
         // console.log($scope.absch_nfp);
 
         $scope.absch_nfp.response.docs.forEach(function(document){
-                $scope.autocompleteData.push({title: document.title_t ? document.title_t: ''});
+                $scope.autocompleteData.push({ title: document.title_t ? document.title_t: ''});
                 $scope.autocompleteData.push({ title:document.description_t ? document.description_t: ''});
                 $scope.autocompleteData.push({ title:document.department_t ? document.department_t: ''});
                 $scope.autocompleteData.push({ title:document.organization_t ? document.organization_t: ''});
