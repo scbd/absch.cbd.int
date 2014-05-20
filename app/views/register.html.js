@@ -23,9 +23,9 @@ define(['app',
 
 app.controller("RegisterController", 
 	["$rootScope", "$location" , "$scope", "$q", "$window", "IStorage", "underscore",
-	 "schemaTypes", "$compile", "$timeout",
+	 "schemaTypes", "$compile", "$timeout","lstringFilter",
 	 function ($rootScope, $location, $scope, $q, $window, storage, _,
-	  schemaTypes,$compile,$timeout) {
+	  schemaTypes,$compile,$timeout,lstringFilter) {
 
 	//============================================================
 	//============================================================
@@ -136,6 +136,7 @@ app.controller("RegisterController",
 	// 
 	//
 	//============================================================
+	$scope.userActivities = [];
 	function loadRecords(schema)
 	{
 
@@ -190,11 +191,31 @@ app.controller("RegisterController",
 							,"requestCount":$scope.isPublished(row) ? 1:0
 							,"publishCount":$scope.isRequest(row) ? 1:0})
 					}
+					if($scope.isRequest(row)){
+						$scope.userActivities.push({
+													"title" : row.createdBy.firstName + ' ' + row.createdBy.lastName + ' has requested '+ 
+													 	_.where($scope.schemaTypesFacets,{"schema":row.type})[0].header
+													 	+ ' draft ' + (lstringFilter(row.workingDocumentTitle||row.title,$scope.$root.locale)) 
+													 	+ ' to be published',
+													"identifier" : row.identifier,
+													"schema"	 : row.type
+												   });
+					}
+					else if($scope.isDraft(row)){
+						$scope.userActivities.push({
+													"title" : row.createdBy.firstName + ' ' + row.createdBy.lastName + ' is working on ' +
+														_.where($scope.schemaTypesFacets,{"schema":row.type})[0].header + ' draft '
+													 	+(lstringFilter(row.workingDocumentTitle||row.title,$scope.$root.locale)) 
+													 	,
+													"identifier" : row.identifier,
+													"schema"	 : row.type
+												   });
+					}
 				}
 				$scope.records.push(row);
 			})
 			// var recrords _.groupBy($scope.records,'')
-
+console.log($scope.userActivities);
 			return $scope.records;
 		});
 	}
