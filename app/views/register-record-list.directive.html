@@ -49,11 +49,12 @@
     <div ng-repeat="record in (filteredRecords = (records | filter:schemaFilter | filter:statusFilter | filter:keywords | orderBy:'-createdOn'))" ng-class-odd="'odd'" ng-class-even="'even'">
       <div class="row" style="padding:10px;border-bottom:1px solid #dedede;">
            <div class="col-xs-4">
-              <span ng-show="isPublished(record)">
+                         <span ng-show="isPublished(record)">
                         <a ng-click="loadDocument(record); displayDetails =  !displayDetails;displayRequest =false" class="btn btn-xs btn-success" title="Published">P</a>
                         <a ng-click="loadDocument(record); displayDetails=!displayDetails" ng-show="record.documentID">
                             <i class="fa" ng-class="{'fa-caret-down':displayDetails, 'fa-caret-right':!displayDetails}" style="font-size:11px;color:#999;position:relative; top:-1px;font-size:14px;"></i> 
-                            <h4 style="display:inline;">{{(record.workingDocumentTitle||record.title)|lstring}}</h4>
+                            <h4 style="display:inline;">{{(record.workingDocumentTitle||record.title)|lstring}}
+                            <span ng-show="record.metadata.schema == 'absCheckpointCommunique'">Checkpoint Communique - {{record.createdOn | date:"dd MMM yyyy h:mm a (Z)" }}</span></h4>
                         </a>
                     </span>
  
@@ -61,14 +62,16 @@
                         <a ng-click="displayDetails =false; displayRequest = !displayRequest; formLoading=false" class="btn btn-xs btn-danger" title="Request">R</a>
                         <!--  href="/register/tasks/{{getWorkflowID(record)}}" -->
                         <a href="" ng-click="displayDetails =false; displayRequest = !displayRequest; formLoading=false">
-                            <h4 style="display:inline;">{{(record.workingDocumentTitle||record.title)|lstring}}</h4>
+                            <h4 style="display:inline;">{{(record.workingDocumentTitle||record.title)|lstring}}
+                            <span ng-show="record.metadata.schema == 'absCheckpointCommunique'">Checkpoint Communique - {{record.createdOn | date:"dd MMM yyyy h:mm a (Z)" }}</span></h4>
                         </a>
                     </span>
  
                     <span ng-show="isDraft(record) && !isRequest(record)">
                         <a ng-click="edit(record)" class="btn btn-xs btn-default btn-draft" title="Draft" style="color:#fff">D</a>
                          <a href="" ng-click="loadDocument(record); displayDetails=!displayDetails" >
-                            <h4 style="display:inline;">{{(record.workingDocumentTitle||record.title)|lstring}}</h4>
+                            <h4 style="display:inline;">{{(record.workingDocumentTitle||record.title)|lstring}}
+                            <span ng-show="record.metadata.schema == 'absCheckpointCommunique'">Checkpoint Communique - {{record.createdOn | date:"dd MMM yyyy h:mm a (Z)" }}</span></h4>
                         </a>
                     </span>
  
@@ -83,9 +86,10 @@
               <div ng-show="record.updatedBy && record.updatedOn != record.createdOn">
               <a style="color:#666" href="mailto:{{record.updatedBy.email}}"><strong>{{record.updatedBy.firstName}} {{record.updatedBy.lastName}}</strong> </a>
               <span style="font-size:10px;white-space:nowrap;">{{record.updatedOn | date:"dd MMM yyyy h:mm a (Z)" }}</span>
-          </div>
+              </div>
+              &nbsp;
           </div> <!-- end col glyphicon glyphicon-lock -->
-          <div class="col-xs-2" style="text-align:right;">
+          <div class="col-xs-2 pull-right" style="text-align:right;">
              <div class="btn-group">
                 <button ng-show="isRequest(record)" type="button" class="btn btn-default"><i class="glyphicon glyphicon-lock"></i></button>
                 <button ng-show="!isRequest(record)" type="button" class="btn btn-default" ng-click="edit(record)"><i class="fa fa-edit"></i></button>
