@@ -19,7 +19,7 @@
         <i ng-show="statusFilter==isDraft" class="glyphicon glyphicon-ok"></i> Draft  <span class="badge badge-default" style="color:#999">{{(records | filter:schemaFilter | filter:isDraft).length}}</span></span>
         <input type="text" ng-model="keywords" placeholder=" Keyword " class="form-control keyword" style="width:160px;display:inline;">
       </div>
-      <div class="col-xs-2 pull-right">
+      <div class="col-xs-2 pull-right" ng-show="showAddButton()">
         <span style="font-size: 16px; color: white;margin:0;padding:0;float:right;">
         <a ng-click="newDoc(schema, null)" class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span> Add new</a></span>
       </div>
