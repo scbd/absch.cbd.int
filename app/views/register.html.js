@@ -62,7 +62,7 @@ app.controller("RegisterController",
 
 
  	$scope.setDashFilter = function(filter){
- 		//console.log(filter);
+ 		console.log(filter);
  			$scope.dashboardFilter = filter;
  	}
  	$scope.isFilter = function(filter){
@@ -139,7 +139,7 @@ app.controller("RegisterController",
 	function loadRecords(schema)
 	{
 
-		
+		console.log( schema);
 		// || schema=="dashboard"
 		if(schema == null || schema==undefined ){
 			schema = schemaTypes.join("' or type eq '");
@@ -160,7 +160,7 @@ app.controller("RegisterController",
 
 		var qDocuments = storage.documents.query(qAnd.join(" and ")||undefined,undefined,{cache:false});
 		var qDrafts    = storage.drafts   .query(qAnd.join(" and ")||undefined,{cache:false});
-		
+		console.log(qDrafts);
 		$q.all([qDocuments, qDrafts]).then(function(results) {
 
 			var documents = results[0].data.Items;
@@ -194,7 +194,7 @@ app.controller("RegisterController",
 				$scope.records.push(row);
 			})
 			// var recrords _.groupBy($scope.records,'')
-
+ console.log($scope.records);
 			return $scope.records;
 		});
 	}
@@ -203,7 +203,7 @@ app.controller("RegisterController",
 
 	$scope.refreshRecords = function (msg){
 		var currentTab = $scope.tab();
-
+console.log(currentTab + 'rerec');
 		if(currentTab != "dashboard"){
 			//remove tab details from isLoded array which is used to avoid reload of records on tab change.
 			$scope.isLoaded.splice($.inArray(currentTab,$scope.isLoaded),1);
@@ -474,15 +474,15 @@ app.controller("RegisterController",
 	});
 
 	$scope.$watch('msg',function(newValue){
- 		//console.log(newValue + '-'  + 'msg');
+ 		console.log(newValue + '-'  + 'msg');
  		if(newValue != "")
  		{
  			$timeout(function() {
- 				//console.log($scope.msg);
+ 				console.log($scope.msg);
  				$scope.msg ="";
  				}
  			, 10000);
- 			//console.log($scope.msg);
+ 			console.log($scope.msg);
  		}
  	});
 

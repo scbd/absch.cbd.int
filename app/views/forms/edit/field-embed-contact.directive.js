@@ -10,8 +10,7 @@ app.directive("fieldEmbedContact", [ function () {
 		scope      : {
 			model : "=ngModel",
 			locales : "=locales",
-			caption : "@caption",
-			documents : "@"
+			caption : "@caption"
 		},
 		link : function($scope, $element, $attrs) {
 			
@@ -31,11 +30,10 @@ app.directive("fieldEmbedContact", [ function () {
 
 			
         },
-		controller : ["$scope", "authHttp", "$window", "$filter", "underscore", "guid", "editFormUtility", "$q","IStorage",
-		 function ($scope, $http, $window, $filter, _, guid, editFormUtility, $q, storage)
+		controller : ["$scope", "authHttp", "$window", "$filter", "underscore", "guid", function ($scope, $http, $window, $filter, _, guid)
 		{
 			var workingContacts = null;
-			$scope.buttonText = "Show existing";
+
 			$scope.edition = null;
 
 			//============================================================
@@ -71,21 +69,11 @@ app.directive("fieldEmbedContact", [ function () {
 				var contacts = $scope.getContacts();
 
 				if(index<0 || index>=contacts.length) {
-					var government = $scope.$root.user.government;
+
 					$scope.edition = {
-						contact : {
-									header: {
-												identifier: guid(),
-												schema   : "contact",
-												languages: ["en"]
-											},
-									type: "organization" ,
-									government: government ? { identifier: government } : undefined
-								  },
+						contact : { source : guid(),  type: "organization" },
 						index   : -1
 					};
-
-					console.log($scope.edition);
 				}
 				else {
 
@@ -100,7 +88,7 @@ app.directive("fieldEmbedContact", [ function () {
 			//
 			//
 			//============================================================
-			$scope.saveContact = function(saveContact) {
+			$scope.saveContact = function() {
 
 				if(!$scope.edition)
 					return;
@@ -112,10 +100,6 @@ app.directive("fieldEmbedContact", [ function () {
 				if(contact.middleName!==undefined && (!contact.middleName || empty.test(contact.middleName))) delete contact.middleName;
 				if(contact.lastName  !==undefined && (!contact.lastName   || empty.test(contact.lastName  ))) delete contact.lastName;
 
-				//save the contact to db for furture use.
-				if(saveContact!=false)
-					saveContactDraft(contact);
-
 				if($scope.multiple) {
 
 					var contacts =  _.clone($scope.getContacts());
@@ -126,14 +110,12 @@ app.directive("fieldEmbedContact", [ function () {
 						contacts.push(contact);
 					
 					$scope.model = contacts;
-
-
 				}
 				else {
 
 					$scope.model = contact;
 				}
-				$scope.existingContacts = null;
+
 				$scope.edition = null;
 			};
 
@@ -161,69 +143,8 @@ app.directive("fieldEmbedContact", [ function () {
 			//
 			//============================================================
 			$scope.closeContact = function() {
-				$scope.selectExisting = false;	
-				$scope.buttonText = "Show existing";
 				$scope.edition = null;
 			};
-
-			$scope.loadExisting = function(){
-				
-
-				$scope.selectExisting = !$scope.selectExisting;
-
-				if($scope.selectExisting)
-					$scope.buttonText = "Create New";
-				else
-					$scope.buttonText = "Show existing";
-
-				if($scope.existingContacts)
-					return;
-				
-				var qDrafts = storage.drafts.query("(type eq 'contact')", {body:true});
-				$scope.existingContacts= [];
-
-				$q.all([qDrafts]).then(function(results) {
-					//debugger;
-					results[0].data.Items.forEach(function(contact){
-						$scope.existingContacts.push(contact.body);
-					});
-
-
-				});
-
-			}
-
-			saveContactDraft = function(contact){
-
-				return $q.when(contact).then(function(document)
-				{
-					if(!document)
-						throw "Invalid document";
-
-					return editFormUtility.saveDraft(document);
-
-				}).catch(function(error){
-
-					console.log(error);
-
-				})
-			}
-
-			$scope.selectContact = function(contact){
-				$scope.buttonText = "Show existing";
-				$scope.selectExisting = !$scope.selectExisting;				
-				$scope.edition.contact = contact;
-				$scope.saveContact(false);				
-			}
-
-			$scope.isSelected = function(contact){
-				var selected = false;
-				$scope.getContacts().forEach(function(cont){
-					if(cont.header && cont.header.identifier == contact.header.identifier)
-							selected = true;
-				});
-				return !selected;
-			}
 		}]
 	};
 }]);

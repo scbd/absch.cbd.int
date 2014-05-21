@@ -43,8 +43,6 @@ app.directive('documentList', function ($http) {
 
                 $scope.load = function(item,displayDetails) {
                       
-                      console.log($scope.documents);
-
                       //occours when a user actions collapses the detail section.
                       if(!displayDetails)                     
                           return;
@@ -153,14 +151,7 @@ app.directive('documentList', function ($http) {
                     output.createdDateOn = document.createdDate_dt;
                    
                     output.cssRecordClass="referenceRecords";
-                     if(document.orgperson_s) {
-                      var obj = JSON.parse(document.orgperson_s);
-                      console.log(obj);
-                      obj.forEach(function(org){
-                        console.log(org.organization.en);
-                      })
-                        
-                     }
+
                     if(document.schema_s=='focalPoint') {
                         output.description  = document.function_t||'';
                         output.description += (document.function_t && document.department_t) ? ', ' : '';
