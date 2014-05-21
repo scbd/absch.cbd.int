@@ -406,7 +406,7 @@ console.log($scope.userActivities);
 	//============================================================
 	$scope.$on("documentDraftSaved", function(evt, draftInfo) {
 		//debugger;
-		refreshRecords();
+		$scope.refreshRecords();
 		evt.stopPropagation();
 		$scope.editing = false;
 		$scope.msg = "Your record has been saved as a draft.";
