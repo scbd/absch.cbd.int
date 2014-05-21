@@ -1,6 +1,6 @@
-define(['app', '/app/js/common.js'], function (app) {
+define(['app'], function (app) {
 "use strict";
-require("app").directive("registerRecordList", ["$timeout", "commonjs", function ($timeout,commonjs) {
+require("app").directive("registerRecordList", ["$timeout", function ($timeout) {
 
 	return {
 		restrict   : "EA",
@@ -175,16 +175,6 @@ require("app").directive("registerRecordList", ["$timeout", "commonjs", function
 
 		        });				
 				//href="/database/record?documentID={{record.documentID}}" 
-			}
-
-			$scope.showAddButton=function(){
-
-				return	commonjs.isUserInRole('AbsPublishingAuthorities')|| 
-						commonjs.isUserInRole('AbsNationalAuthorizedUser')||  
-						commonjs.isUserInRole('AbsNationalFocalPoint')|| 
-						commonjs.isUserInRole('abschiac') ||
-						$scope.schema == 'resource';
-
 			}
 		}]
 	};

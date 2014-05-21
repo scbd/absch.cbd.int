@@ -1,5 +1,5 @@
 define(['app'], function(app){
-	app.factory('commonjs', ['authHttp','$rootScope', function($http,$rootScope){
+	app.factory('commonjs', ['authHttp', function($http){
 		return new function(){
 			this.getReferenceRecordIndex = function(schema,documentId){
 
@@ -24,7 +24,7 @@ define(['app'], function(app){
 
 				return $http.get("/api/v2013/index/select?" + queryFields + "&q=id:"+documentId)
 				   .then(function (result) { 
-
+console.log(result);
 				      item.data = result.data.response.docs[0];                                       
 				          
 				      item.data.info = [];                              
@@ -43,20 +43,6 @@ define(['app'], function(app){
 
 				      return item; 
 				});				
-			}
-
-			this.isUserInRole = function(role){
-
-				var userRoles = $rootScope.user.roles;
-				if(!role)
-					return false;
-
-				for(var i=0; i < userRoles.length; i++) {
-					if(userRoles[i] == role)
-						return true;
-				}
-
-				return false;
 			}
 		}
 	}]);
