@@ -101,11 +101,11 @@ app.directive('recordLoader', [function () {
 					$scope.internalDocumentInfo = results[1];
 
 				}).then(null, function(error) {
+					//debugger;
 					 // $scope.error = error.Message || error || "Http Error: " + errorCode;
 					 console.log( $scope.error );
 				})
-
-				console.log($scope.document);
+				
 			};
 
 			//==================================

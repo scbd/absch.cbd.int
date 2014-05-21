@@ -140,7 +140,7 @@ app.controller("RegisterController",
 	function loadRecords(schema)
 	{
 
-		
+		$("a[role*='button']").toggleClass('ui-disabled');
 		// || schema=="dashboard"
 		if(schema == null || schema==undefined ){
 			schema = schemaTypes.join("' or type eq '");
@@ -215,7 +215,8 @@ app.controller("RegisterController",
 				$scope.records.push(row);
 			})
 			// var recrords _.groupBy($scope.records,'')
-console.log($scope.userActivities);
+			$("a[role*='button']").toggleClass('ui-disabled');
+
 			return $scope.records;
 		});
 	}
@@ -516,11 +517,10 @@ console.log($scope.userActivities);
 	$scope.$watch('tab()', function(value) {
 
 		//loadRecords(value)
+		console.log(value);
 		$scope.msg = "";
 		if(value=='authority'              ) 
-			require(['../views/forms/view/view-authority.directive',
-		             '../views/forms/edit/edit-authority.directive',               
-		             '../views/forms/view/view-authority-reference.directive'],                 
+			require(['../views/forms/edit/edit-authority.directive'],                 
 		                 function() { $scope.authorityReady = true; });
 		
 
@@ -532,41 +532,10 @@ console.log($scope.userActivities);
 			      });
 		}
 		if(value=='absCheckpointCommunique') require(['../views/forms/edit/edit-abs-checkpoint-communique.directive'], function() { $scope.absCheckpointCommuniqueReady = true; });
-		if(value=='absPermit'              ) require(['../views/forms/view/view-abs-permit.directive',                '../views/forms/edit/edit-abs-permit.directive'],                function() { $scope.absPermitReady = true; });
-		if(value=='database'               ) require(['../views/forms/view/view-database.directive',                  '../views/forms/edit/edit-database.directive'],                  function() {$scope.databaseReady = true; });
-		if(value=='measure'                ) require(['../views/forms/view/view-measure.directive',                   '../views/forms/edit/edit-measure.directive'],                   function() { $scope.measureReady = true; });
-		if(value=='resource'               ) require(['../views/forms/view/view-resource.directive',                  '../views/forms/edit/edit-resource.directive'],                  function() { $scope.resourceReady = true; });
+		if(value=='absPermit'              ) require(['../views/forms/edit/edit-abs-permit.directive'],                function() { $scope.absPermitReady = true; });
+		if(value=='database'               ) require(['../views/forms/edit/edit-database.directive'],                  function() {console.log('dab loaded');$scope.databaseReady = true; });
+		if(value=='measure'                ) require(['../views/forms/edit/edit-measure.directive'],                   function() { $scope.measureReady = true; });
+		if(value=='resource'               ) require(['../views/forms/edit/edit-resource.directive'],                  function() { $scope.resourceReady = true; });
 	})
 }]);
 });
-
-//debugger;
-//       	console.log('function here');
-// console.log(module);
-// deferred.resolve(module);
-// $timeoux(function(){
-// 	var el = $compile( "<view-abs-checkpoint source='fkdlfkdlfkld'></view-abs-checkpoint>" )( $scope );
-// 	$("whre it goes").append(el);
-			   
-// //============================================================
-// //
-// //
-// //============================================================
-// define(['app'], function (app) {
-// 	app.directive('ngxLazy', function ($http, $compile, $timeout) {
-// 	    return {
-// 	        restrict: 'E',
-// 	        scope: {
-// 	            ready: '=ready'
-// 	        },
-// 	        link: function (scope, $element, attr, ctrl, $transclude) {
-// 	        	scope.$watch('ready', function (value) { 
-// 	        		if(value) {
-// 	        			console.log(value);
-// 	        			$compile($element.contents())(scope);
-// 	        		}
-// 	        	});
-// 	    	}
-// 	    }
-// 	})
-// });

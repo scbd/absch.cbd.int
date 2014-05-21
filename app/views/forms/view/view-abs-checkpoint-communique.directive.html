@@ -24,7 +24,14 @@
 				<legend>Details of the internationally recognize certificate of compliance</legend>
 				<div ng-show="document.permit">
 					<label>Reference number(s) of the internationally recognized certificate(s) of compliance that relate(s) to this communiqué</label>
-					<div class="km-value km-pre">{{document.permit | lstring:locale}}</div>
+					<div class="km-value">
+						<ul>
+							<li ng-repeat="permit in document.permit">								
+								<a href="http://localhost:2010/database/record?documentSchema=ABSPERMIT&documentID={{permit | lstring:locale}}">{{permit | lstring:locale}}</a>
+							</li>
+						</ul>
+						
+					</div>
 				</div>
 				<div ng-show="document.permitNotAvailable">
 					<label>The internationally recognized certificate of compliance is not available</label>

@@ -51,7 +51,7 @@ define(['app',
         //============================================================
     	function query () {
 
-            var q = 'realm_ss:absch';//' AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryTheme + ' AND ' + $scope.queryTargets +' AND ' + $scope.queryDate + ' AND ' + $scope.queryKeywords;
+            var q = 'realm_ss:absch AND NOT version_s:*';//' AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryTheme + ' AND ' + $scope.queryTargets +' AND ' + $scope.queryDate + ' AND ' + $scope.queryKeywords;
 
             if($scope.keyword)         q += ' AND (title_t:' + $scope.keyword + '* OR description_t:' + $scope.keyword + '* OR text_EN_txt:' + $scope.keyword + '*)';
             
@@ -95,7 +95,7 @@ define(['app',
 
                 if(!$scope.schemas) {
                     var queryFacetsParameters = {
-                        'q': 'realm_ss:absch',
+                        'q': 'realm_ss:absch AND NOT version_s:*',
                         'fl': '',
                         'wt': 'json',
                         'rows': 0,

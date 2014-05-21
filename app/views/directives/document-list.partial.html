@@ -146,10 +146,10 @@
             style="font-size:11px;color:#999;position:relative; top:-1px;font-size:14px;"></i>
             <a ng-click="displayDetails = !displayDetails;load(document,displayDetails); " class="title">
             &nbsp;   {{document.title}}
-              <ab ng-switch on="document.schema">
-                <ab ng-switch-when="ABSCHECKPOINTCOMMUNIQUE">
-                    {{document.source}} {{document.createdDateOn | formatDate}}
-                <ab>
+                <span ng-show="document.schema=='ABSCHECKPOINTCOMMUNIQUE'">
+                    <!-- {{document.source}} {{document.createdDateOn | formatDate}} -->
+                     Checkpoint Communique - {{record.createdOn | formatDate:"D MMMM YYYY h:mm a (Z)" }}
+                <span>
               </ab>
             </a>
           </td>
