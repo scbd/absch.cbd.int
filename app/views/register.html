@@ -281,13 +281,24 @@
                                     <my-completed-tasks></my-completed-tasks>
                                 </div>
                             </div>
-
                             <div class="panel panel-default" ng-show="isFilter('Users')">
+                                <div class="panel-heading">User Activities</div> 
+                                <div class="panel-body" style="max-height:300px;overflow:scroll">
+                                    <ul class="list-group " rel="scrollcontent1">
+                                        <li ng-repeat="item in userActivities" class="list-group-item">
+                                            {{item.title}}  
+                                           <!--  <a href="/database/record?documentID={{item.identifier}}&documentSchema={{item.schema}}" target="_new"  style="padding:0px 3px;color:#999;">   <i class="glyphicon glyphicon-new-window"></i>
+                                          </a> -->
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- <div class="panel panel-default" ng-show="isFilter('Users')">
                                 <div class="panel-heading">Manage Users</div>
                                 <div class="panel-body">
                                     <span user-details></span>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <!-- <div ng-show="isAuthenticated">
@@ -581,7 +592,7 @@
                 <div class="registerpage-header">
                     <h2>
                         <span class="abbreviation">ABSCH-CPC</span>
-                        <span class="title">Information for the Checkpoint Communiqué {{editing}}</span>
+                        <span class="title">Information for the Checkpoint Communiqué </span>
                     </h2>
                     <div class="help1" ng-show="help">
                         <p>
