@@ -27,6 +27,7 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
             when('/register/tasks/:id/:activity',{ templateUrl: '/app/views/tasks/tasks-id-activity.html'   ,resolveController: true, resolveUser: true}).
             when('/oauth2/callback',             { templateUrl: '/app/views/oauth2/callback.html'           ,resolveController: true, resolveUser: true}).
             when('/workshops/lac',               { templateUrl: '/app/views/workshops/lac.html'             ,resolveController: true, resolveUser: true}).
+            when('/workshops/caribbean',         { templateUrl: '/app/views/workshops/caribbean.html'             ,resolveController: true, resolveUser: true}).
             
             otherwise({redirectTo:'/help/404'});
     }]);
