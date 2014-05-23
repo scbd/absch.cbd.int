@@ -1,0 +1,192 @@
+<html >
+<head>
+	<title>Access and Benefit-Sharing Clearing-House</title>
+	<meta name="description" content="Access and Benefit-Sharing Clearing-House">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="shortcut icon" href="ico/favicon.png">
+
+	<!-- Bootstrap core CSS -->
+	<link href="/app/css/bootstrap.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/app/css/template.css" rel="stylesheet">
+
+	<link rel="stylesheet" href="/app/libs/font-awesome/css/font-awesome.min.css">
+	<link href="/app/libs/bootstrap-datepicker/css/datepicker.css" rel="stylesheet">
+	<link href="/app/libs/angular-loading-bar/src/loading-bar.css" rel="stylesheet">
+	<script src="/app/libs/momentjs/min/moment.min.js"></script>
+
+ 		<script src="/app/libs/requirejs/require.js"  ></script>
+	    <script src="/app/libs/angular/angular.min.js"  ></script>	    
+	    <script src="absPermitPrint.html.js" ></script>
+	    <style type="text/css">
+	    	.main-nav{
+	    		border-bottom:none;
+	    	}
+	    	table{
+	    		width:100%;
+	    		/*border:1px solid black;*/
+	    	}
+	    	table tr td{
+	    		/*padding:5px !important;*/
+	    	}
+	    </style>
+</head>
+<body >
+	<div ng-app="ngapp" class="main-nav" >
+		<div ng-controller="printPermit" class="container">		  
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-xs-3">
+                	<img src="http://www.cbd.int/styles/ui/templates/cbd2011/images/logo-cbd-leaf-line.gif"/>
+                    <img src="http://www.cbd.int/styles/ui/templates/cbd2011/images/logo-cbd-text-en.gif"/>           
+                </div>
+                <div class="col-lg-5 col-md-5 col-xs-5">
+                	<strong>
+                    Internationally recognized certificate of
+					compliance constituted from information on the
+					permit or its equivalent made available to the
+					ABS Clearing-House    
+				</strong>
+                </div>
+                <div class="col-lg-4  col-md-4 col-xs-4 pull-right">
+                	<img class="pull-right" src="http://www.cbd.int/styles/ui/templates/cbd2011/images/un-logo-white.gif"/>   
+                    <img class="pull-right" src="http://www.cbd.int/styles/ui/templates/cbd2011/images/unep-logo-white-en.gif"/>           
+                </div>
+            <div> 
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-xs-12"> 
+                	In accordance with Article 17, paragraph 2, of the Nagoya Protocol on Access and Benefit-sharing, a permit or its equivalent issued in accordance with Article 6, paragraph 3 (e) and made available to the Access and Benefit-sharing Clearing-House, shall constitute an internationally recognized certificate of compliance.
+                </div>
+            <div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-xs-12"> 
+                	<table >
+                		<tr>
+                			<td><h4>Title/reference number of the permit or its equivalent</h4></td>
+                			<td><h4>ABS Clearing House Unique Identifier</h4></td>
+                		</tr>
+                		<tr>
+                			<td>{{document.title| lstring:locale}}</td>
+                			<td>{{document.title| lstring:locale}}</td>
+                		</tr>
+                		<tr>
+                			<td><h4>Additional national references or identifiers</h4></td>
+                			<td><h4>Date of creation of the record</h4></td>
+                		</tr>
+                		<tr>
+                			<td></td>
+                			<td>{{documentInfo.createdOn}}</td>
+                		</tr>
+                		<tr>
+                			<td colspan="2"><div><h3>Issuing Authority</h3><div><hr></div></div></td>
+                		</tr>
+                		<tr>
+                			<td><h4>Country</h4></td>
+                			<td><h4>Date of issuance of the permit or its equivalent</h4></td>
+                		</tr>
+                		<tr>
+                			<td>{{document.government.name}}</td>
+                			<td>{{document.date}}</td>
+                		</tr>
+                		<tr>
+                			<td><h4>Competent National Authority responsible for issuing the permit or its equivalent</h4></td>
+                			<td><h4></h4></td>
+                		</tr>
+                		<tr>
+                			<td>      
+									<b>{{document.authority.name| lstring:locale}} <i ng-show="document.acronym">({{document.authority.acronym | lstring:locale}})</i></b>
+									<div class="value">
+										{{document.authority.government|term}}
+									</div>
+
+									<span style="margin-top: 5px; margin-bottom: 5px">
+										<div class="km-pre">{{document.authority.address | lstring:locale}}</div>
+										{{document.authority.city | lstring:locale}}<span ng-show="document.city">, </span>
+										{{document.authority.state | lstring:locale}}<br ng-show="document.city || document.state" />
+										{{document.authority.postalCode | lstring:locale}}<span ng-show="document.postalCode">, </span>
+										<b>{{document.authority.country|term}}</b>
+									</span>
+									<div ng-show="document.authority.phones.length>0">
+										Phone: <span ng-repeat="item in document.authority.phones">{{item}}<span ng-show="!$last">, </span></span>
+									</div>
+									<div ng-show="document.authority.faxes">
+										Fax: <span ng-repeat="item in document.authority.faxes">{{item}}<span ng-show="!$last">, </span></span>
+									</div>
+									<div ng-show="document.authority.emails">
+										Emails: <span ng-repeat="item in document.authority.emails"><a ng-href="mailto:{{item}}">{{item}}</a><span ng-show="!$last">, </span></span>
+									</div>
+									<div ng-show="document.authority.websites">
+										Websites: <span ng-repeat="item in document.authority.websites"><a ng-href="{{item.url}}">{{item.name||item.url}}</a><span ng-show="!$last">, </span></span>
+									</div>
+                			</td>
+                			<td></td>
+                		</tr>
+                		<tr>
+                			<td colspan="2"><div><h3>Permit</h3><div><hr></div></div></td>
+                		</tr>
+                		<tr>
+                			<td></td>
+                			<td></td>
+                		</tr>
+                		<tr>
+                			<td><h4>Subject-matter or genetic resources covered by the certificate</h4></td>
+                			<td><h4>Provider</h4></td>
+                		</tr>
+                		<tr>
+                			<td>
+                				<span ng-show="document.geneticResourcesConfidential">CONFIDENTIAL</span>
+                				<span ng-show="!document.geneticResourcesConfidential">{document.geneticResources}</span>
+                			</td>
+                			<td>
+                				<span ng-show="document.providerConfidential">CONFIDENTIAL</span>
+                				<span ng-show="!document.providerConfidential">{document.provider}</span></td>
+                		</tr>                	
+                		<tr>
+                			<td><h4>The person or entity to whom prior informed consent was granted</h4></td>
+                			<td><h4>Confirmation that prior informed consent was obtained</h4></td>
+                		</tr>
+                		<tr>
+                			<td>
+                				<span ng-show="document.informedConsentConfidential">CONFIDENTIAL</span>
+                				<span ng-show="!document.informedConsentConfidential">{document.informedConsent}</span></td>
+                			<td>
+                				{{document.consentGranted}}
+                			</td>
+                		</tr>                	
+                		<tr>
+                			<td><h4>Additional information</h4></td>
+                			<td><h4>Additional information</h4></td>
+                		</tr>
+                		<tr>
+                			<td>{{document.Fields}}</td>
+                			<td>{{document.consentInformation}}</td>
+                		</tr>
+                	                	
+                		<tr>
+                			<td><h4>Commercial and/or Non-Commercial use</h4></td>
+                			<td><h4>Date of expiry</h4></td>
+                		</tr>
+                		<tr>
+                			<td>
+                				<span ng-repeat="item in document.usage">
+                					{{lstring(item.title)}}<br/>
+                				</span>
+                			</td>
+                			<td>{{document.expiration}}</td>
+                		</tr>
+                		<tr>
+                			<td><h4></h4></td>
+                			<td><h4></h4></td>
+                		</tr>
+                		<tr>
+                			<td></td>
+                			<td></td>
+                		</tr>
+                	</table>
+                </div>
+            <div>
+		</div>
+	</div>
+</body>
+</html>
