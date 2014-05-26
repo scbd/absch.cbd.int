@@ -41,6 +41,8 @@ app.directive("editAbsPermit", [ function () {
 
 				if(identifier) {
 					qDocument = editFormUtility.load(identifier, "absPermit");
+
+
 				}
 				else {
 					qDocument = {
@@ -153,10 +155,10 @@ app.directive("editAbsPermit", [ function () {
 					document.amendmentsDescription = undefined;
 				}
 				if (document.providerConfidential) {
-					document.provider = undefined;
+					document.providers = undefined;
 				}
 				if (document.informedConsentConfidential) {
-					document.informedConsent = undefined;
+					document.informedConsents = undefined;
 				}
 				if (document.geneticResourcesConfidential) {
 					document.geneticResources	= undefined;

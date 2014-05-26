@@ -3,6 +3,58 @@
 
  var app = angular.module('ngapp',[])
 
+app.directive("viewContact", [function () {
+	return {
+			restrict   : "EAC",
+			templateUrl: "../views/forms/view/view-contact.directive.html",
+			replace    : true,
+			transclude : false,
+			scope: {
+				document: "=ngModel",
+				locale: "=",
+				target: "@linkTarget"
+			},
+			controller: [function () {
+			}]
+		};
+	}]);
+
+app.directive("viewContactReference", [function () {
+	return {
+		restrict: "EAC",
+		templateUrl: "../views/forms/view/view-contact-reference.directive.html",
+		replace: true,
+		transclude: false,
+		scope: {
+			document: "=ngModel",
+			locale: "=",
+			target: "@linkTarget"
+		},
+		controller: ["$scope", function ($scope) {
+
+			$scope.isPerson = function() {
+
+				var doc = $scope.document;
+	
+				if(!doc)
+					return false;
+
+				if(doc.type=="person")
+					return true;
+
+				if(!doc.type && (document.firstName || document.lastName))
+					return true; //default behaviour
+
+				return false;
+			};
+
+			$scope.isOrganization = function() {
+
+				return !$scope.isPerson();
+			};
+		}]
+	};
+}]);
 
 app.controller('printPermit', ['$scope','$http', function($scope,$http) {
 
@@ -75,6 +127,7 @@ app.controller('printPermit', ['$scope','$http', function($scope,$http) {
 
 
 
+
 app.filter("lstring", function() {
 		return lstring;
 	});
@@ -114,6 +167,19 @@ app.filter("term", ["$http", function($http) {
 		};
 	}]);
 
+	app.filter("yesno", function(){
+		return function(boolValue){
+			return boolValue ? "Yes" :  "No";
+		}
+	});
+
+	app.filter("formatDate", function(){
+		return function(date,formart){	
+			if(formart== undefined)
+				formart = 'MMMM Do YYYY';		
+			return moment(date).format(formart);
+		}
+	});
 
 function lstring(ltext, locale)
 	{

@@ -33,7 +33,7 @@
 				</div>
 			</div>
 			<div ng-show="document.nationalReferences ||
-				document.date || document.provider || document.informedConsent ||
+				document.date || document.providers || document.informedConsents ||
 				document.geneticResources || document.consentGranted ||
 				document.consentInformation || document.consentDocuments ||
 				document.specimen || document.taxonomy || document.gisFiles">
@@ -49,10 +49,10 @@
 					<div class="km-value">{{document.date}}</div>
 				</div>
 
-				<div ng-show="document.provider || document.providerConfidential">
+				<div ng-show="document.providers || document.providerConfidential">
 					<label>The provider</label>
 					<div class="km-value">
-						<div view-contact-reference ng-model="document.provider" locale="locale"></div>
+						<div view-contact-reference ng-model="document.providers" locale="locale"></div>
 						<div ng-show="document.providerConfidential">
 							Confidential information
 						</div>
@@ -76,10 +76,10 @@
 					</div>
 				</div>
 
-				<div ng-show="document.informedConsent || document.informedConsentConfidential">
+				<div ng-show="document.informedConsents || document.informedConsentConfidential">
 					<label>Person or entity to whom prior informed consent was granted</label>
 					<div class="km-value">
-						<div view-contact-reference ng-model="document.informedConsent" locale="locale"></div>
+						<div view-contact-reference ng-model="document.informedConsents" locale="locale"></div>
 						<div ng-show="document.informedConsentConfidential">
 							Confidential information
 						</div>
