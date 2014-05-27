@@ -24,7 +24,7 @@ app.configure(function() {
 var proxy = httpProxy.createProxyServer({});
 
 app.get   ('/app/absPDFViewer/*'   , function(req, res) { 
-	fs.readFile(__dirname + '/app/absPDFViewer/absPDFViewer.html', 'utf8', function (error, text) {
+	fs.readFile(__dirname + '/app/absPDFViewer/absPermitPrint.html', 'utf8', function (error, text) {
 		res.send(text);
 	});} );
 
