@@ -24,8 +24,15 @@
 	    		/*border:1px solid black;*/
 	    	}
 	    	table tr td{
+                width: 50%;
+                text-align: justify;
+                padding-left: 10px !important;
+                vertical-align: top;
 	    		/*padding:5px !important;*/
 	    	}
+            body{
+                
+            }
 	    </style>
 </head>
 <body >
@@ -38,10 +45,7 @@
                 </div>
                 <div class="col-lg-5 col-md-5 col-xs-5">
                 	<strong>
-                    Internationally recognized certificate of
-					compliance constituted from information on the
-					permit or its equivalent made available to the
-					ABS Clearing-House    
+                    Internationally recognized certificate of compliance constituted from information on the permit or its equivalent made available to the ABS Clearing-House    
 				</strong>
                 </div>
                 <div class="col-lg-4  col-md-4 col-xs-4 pull-right">
@@ -63,7 +67,7 @@
                 		</tr>
                 		<tr>
                 			<td>{{document.title| lstring:locale}}</td>
-                			<td>{{document.title| lstring:locale}}</td>
+                			<td>ABSCH-{{document.government.identifier |uppercase}}-{{documentInfo.documentID}}-{{documentInfo.revision}}</td>
                 		</tr>
                 		<tr>
                 			<td><h4>Additional national references or identifiers</h4></td>
@@ -82,7 +86,7 @@
                 		</tr>
                 		<tr>
                 			<td>{{document.government.name}}</td>
-                			<td>{{document.date}}</td>
+                			<td>{{document.date| formatDate}}</td>
                 		</tr>
                 		<tr>
                 			<td><h4>Competent National Authority responsible for issuing the permit or its equivalent</h4></td>
@@ -108,11 +112,11 @@
                 		<tr>
                 			<td>
                 				<div class="value" ng-show="document.geneticResourcesConfidential">CONFIDENTIAL</div>
-                				<span class="value" ng-show="!document.geneticResourcesConfidential">{document.geneticResources}</span>
+                				<span class="value" ng-show="!document.geneticResourcesConfidential">{{document.geneticResources}}</span>
                 			</td>
                 			<td>
                 				<span ng-show="document.providerConfidential">CONFIDENTIAL</span>
-                				<span ng-show="!document.providerConfidential" ng-repeat="provider document.provider"> 
+                				<span ng-show="!document.providerConfidential" ng-repeat="provider in document.providers"> 
                                    <div view-contact-reference ng-model="provider" locale="locale"></div>
                                 </span></td>
                 		</tr>                	
@@ -123,7 +127,7 @@
                 		<tr>
                 			<td>
                 				<span ng-show="document.informedConsentConfidential">CONFIDENTIAL</span>
-                				<span ng-show="!document.informedConsentConfidential" ng-repeat="informedConsent in document.informedConsent">
+                				<span ng-show="!document.informedConsentConfidential" ng-repeat="informedConsent in document.informedConsents">
                                     <div view-contact-reference ng-model="informedConsent" locale="locale"></div>            
                                 </span>
                             </td>
@@ -132,51 +136,117 @@
                 			</td>
                 		</tr>                	
                 		<tr>
-                			<td><h4></h4></td>
                 			<td><h4>Additional information</h4></td>
+                			<td><h4></h4></td>
                 		</tr>
                 		<tr>
-                			<td></td>
-                			<td>{{document.consentInformation}}</td>
+                			<td colspna="2">{{document.consentInformation}}</td>
                 		</tr>
                 	                	
                 		<tr>
                 			<td><h4>Commercial and/or Non-Commercial use</h4></td>
-                			<td><h4>Date of expiry</h4></td>
+                			<td><h4></h4></td>
                 		</tr>
                 		<tr>
                 			<td class="value" >
                 				<span ng-repeat="item in document.usage">
-                					{{item.title | lstring}}<br/>
+                					{{item.title | lstring}}<span ng-show="!$last">, </span>
                 				</span>
                 			</td>
-                			<td>{{document.expiration}}</td>
-                		</tr>
-                        <tr>
-                            <td><h4>Additional information</h4></td>
-                            <td><h4></h4></td>
-                        </tr>
-                        <tr>
-                            <td>{{document.usageDescription}}</td>
-                            <td></td>
-                        </tr>
-                		<tr>
-                			<td><h4></h4></td>
-                			<td><h4>Confirmation that mutually agreed terms (MAT) were established</h4></td>
-                		</tr>
-                		<tr>
                 			<td></td>
-                			<td>{{document.mutuallyAgreedTermsEstablished | yesno}}</td>
                 		</tr>
                         <tr>
-                            <td><h4></h4></td>
                             <td><h4>Additional information</h4></td>
+                            <td><h4></h4></td>
                         </tr>
                         <tr>
-                            <td></td>
-                            <td>{{document.mutuallyAgreedTermsInformation | lstring:locale}}</td>
+                            <td colspan="2">{{document.usageDescription}}</td>                            
                         </tr>
-                	</table>
+                		<tr>
+                			<td><h4>Confirmation that mutually agreed terms (MAT) were established</h4></td>
+                			<td><h4>Date of Expiry</h4></td>
+                		</tr>
+                		<tr>
+                			<td>{{document.mutuallyAgreedTermsEstablished | yesno}}</td>
+                			<td>{{document.expiration| formatDate}}</td>
+                		</tr>
+                        <tr>
+                            <td><h4>Additional information</h4></td>
+                            <td><h4></h4></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{document.amendmentsDescription}}</td>
+                        </tr>                	
+                   
+                        <tr>
+                            <td><h4>Copy of permit or its equivalent or other relevant document</h4></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="km-value" ng-repeat="item in document.permitFiles">
+                                    <a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+                                    <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+                                </div>
+                            </td>                            
+                        </tr>                         
+                        <tr>
+                            <td colspan="2"><h4>Conditions of third party transfer</h4></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{document.thirdPartyTransferConditions | lstring}}</td>                            
+                        </tr> 
+                        <tr>
+                            <td><h4>Any other relevant information</h4></td>
+                            <td><h4></h4></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{document.relevantInformation | lstring}}</td>
+                        </tr> 
+                        <tr>
+                            <td colspan="2"><br/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="row">
+                                    <div class="col-lg-9 col-md-9 col-xs-9" >       
+                                        The internationally recognized certificate of compliance constituted from information on the permit or its equivalent made available to the ABS Clearing-House can also be found on the Access and Benefit-sharing Clearing-House at:
+                                    </div>                        
+                                    <div class="col-lg-3 col-md-3 col-xs-3 pull-right">....barcode.....</div>
+                                </div>
+                                <a href="https://absch.cbd.int/database/record?documentSchema=MEASURE&documentID={{document.header.identifier}}">
+                                    https://absch.cbd.int/database/record?documentSchema=MEASURE&documentID={{document.header.identifier}} </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><br/></td>
+                        </tr>
+                        <tr>
+                            <td><h4>Further Information</h4></td>
+                            <td><h4></h4></td>
+                        </tr>
+                        <tr>
+                            <td >Questions about the permit or its equivalent constituting an internationally
+                                recognized certificate of compliance should be addressed to the competent
+                                national authority issuing the permit or its equivalent. Additional information about
+                                the permit or its equivalent may be available in the Access and Benefit-Sharing
+                                Clearing House Centre (<a href="http://absch.cbd.int/">http://absch.cbd.int/</a>).
+                            </td>
+                            <td>Questions about the Nagoya Protocol on Access and Benefit-sharing or the
+                                operation of the Access and Benefit-sharing Clearing-House may be directed to:
+                                <br/>
+                                <strong>Secretariat of the Convention on Biological</strong><br/>
+                                Diversity
+                                413 rue Saint-Jacques, suite 800<br/>
+                                Montreal, Québec, H2Y 1N9<br/>
+                                Canada<br/>
+                                Fax: +1 514 288-6588<br/>
+                                Email: <a href="mailto:secretariat@cbd.int">secretariat@cbd.int</a>
+                            </td>
+                        </tr> 
+
+
+                    </table>
                 </div>
             <div>
 		</div>

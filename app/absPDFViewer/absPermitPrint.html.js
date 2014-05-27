@@ -3,60 +3,7 @@
 
  var app = angular.module('ngapp',[])
 
-app.directive("viewContact", [function () {
-	return {
-			restrict   : "EAC",
-			templateUrl: "../views/forms/view/view-contact.directive.html",
-			replace    : true,
-			transclude : false,
-			scope: {
-				document: "=ngModel",
-				locale: "=",
-				target: "@linkTarget"
-			},
-			controller: [function () {
-			}]
-		};
-	}]);
-
-app.directive("viewContactReference", [function () {
-	return {
-		restrict: "EAC",
-		templateUrl: "../views/forms/view/view-contact-reference.directive.html",
-		replace: true,
-		transclude: false,
-		scope: {
-			document: "=ngModel",
-			locale: "=",
-			target: "@linkTarget"
-		},
-		controller: ["$scope", function ($scope) {
-
-			$scope.isPerson = function() {
-
-				var doc = $scope.document;
-	
-				if(!doc)
-					return false;
-
-				if(doc.type=="person")
-					return true;
-
-				if(!doc.type && (document.firstName || document.lastName))
-					return true; //default behaviour
-
-				return false;
-			};
-
-			$scope.isOrganization = function() {
-
-				return !$scope.isPerson();
-			};
-		}]
-	};
-}]);
-
-app.controller('printPermit', ['$scope','$http', function($scope,$http) {
+app.controller('printPermit', ['$scope','$http','$location', function($scope,$http,$location) {
 
 	var sLocale      = "en";
 	$scope.locale = sLocale;
@@ -65,7 +12,9 @@ app.controller('printPermit', ['$scope','$http', function($scope,$http) {
 
 	var params = {};
 	// params            = clone(params||{});
-	 params.identifier = '32E4D584-EA07-EC34-6CDF-A74E57E334F1';
+	
+	 params.identifier =  $location.search().documentID;
+	 //'32E4D584-EA07-EC34-6CDF-A74E57E334F1';
 
 	// var useCache = !!params.cache;
 
@@ -120,13 +69,63 @@ app.controller('printPermit', ['$scope','$http', function($scope,$http) {
 		//  });
 
 
-	}
-				
-
+	}				
 }]);
 
 
 
+app.directive("viewContact", [function () {
+	return {
+			restrict   : "EAC",
+			templateUrl: "../views/forms/view/view-contact.directive.html",
+			replace    : true,
+			transclude : false,
+			scope: {
+				document: "=ngModel",
+				locale: "=",
+				target: "@linkTarget"
+			},
+			controller: [function () {
+			}]
+		};
+	}]);
+
+app.directive("viewContactReference", [function () {
+	return {
+		restrict: "EAC",
+		templateUrl: "../views/forms/view/view-contact-reference.directive.html",
+		replace: true,
+		transclude: false,
+		scope: {
+			document: "=ngModel",
+			locale: "=",
+			target: "@linkTarget"
+		},
+		controller: ["$scope", function ($scope) {
+
+			$scope.isPerson = function() {
+
+				var doc = $scope.document;
+	
+				if(!doc)
+					return false;
+
+				if(doc.type=="person")
+					return true;
+
+				if(!doc.type && (document.firstName || document.lastName))
+					return true; //default behaviour
+
+				return false;
+			};
+
+			$scope.isOrganization = function() {
+
+				return !$scope.isPerson();
+			};
+		}]
+	};
+}]);
 
 app.filter("lstring", function() {
 		return lstring;
