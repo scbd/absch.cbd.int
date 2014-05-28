@@ -70,17 +70,11 @@ app.directive("fieldEmbedContact", [ function () {
 
 				var contacts = $scope.getContacts();
 
-				if(index<0 || index>=contacts.length) {
-					var government = $scope.$root.user.government;
+				if(index<0 || index>=contacts.length) {					
 					$scope.edition = {
 						contact : {
-									header: {
-												identifier: guid(),
-												schema   : "contact",
-												languages: ["en"]
-											},
 									type: "organization" ,
-									government: government ? { identifier: government } : undefined
+									source: guid()
 								  },
 						index   : -1
 					};
@@ -185,7 +179,13 @@ app.directive("fieldEmbedContact", [ function () {
 				$q.all([qDrafts]).then(function(results) {
 					//debugger;
 					results[0].data.Items.forEach(function(contact){
-						$scope.existingContacts.push(contact.body);
+						contact = contact.body;
+						if(!contact.source && contact.header)
+							contact.source = contact.header.identifier;
+						delete contact.government;
+						delete contact.header;
+						console.log(contact);
+						$scope.existingContacts.push(contact);
 					});
 
 
@@ -219,7 +219,7 @@ app.directive("fieldEmbedContact", [ function () {
 			$scope.isSelected = function(contact){
 				var selected = false;
 				$scope.getContacts().forEach(function(cont){
-					if(cont.header && cont.header.identifier == contact.header.identifier)
+					if(cont.source && cont.source == contact.source)
 							selected = true;
 				});
 				return !selected;

@@ -23,6 +23,11 @@ app.configure(function() {
 
 var proxy = httpProxy.createProxyServer({});
 
+app.get   ('/app/absPDFViewer/*'   , function(req, res) { 
+	fs.readFile(__dirname + '/app/absPDFViewer/absPermitPrint.html', 'utf8', function (error, text) {
+		res.send(text);
+	});} );
+
 app.get   ('/app/*'   , function(req, res) { res.send('404', 404); } );
 app.get   ('/public/*', function(req, res) { res.send('404', 404); } );
 

@@ -184,6 +184,8 @@ app.directive("registerRecordList", ["$timeout", "commonjs", function ($timeout,
 						commonjs.isUserInRole('AbsNationalAuthorizedUser')||  
 						commonjs.isUserInRole('AbsNationalFocalPoint')|| 
 						commonjs.isUserInRole('abschiac') ||
+						commonjs.isUserInRole('ABS-CH Administrator') ||
+						commonjs.isUserInRole('Administrator') ||
 						$scope.schema == 'resource';
 
 			}
