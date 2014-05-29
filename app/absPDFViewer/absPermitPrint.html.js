@@ -54,6 +54,8 @@ app.controller('printPermit', ['$scope','$http','$location', function($scope,$ht
 	$http.get('/api/v2013/documents/' +  params.identifier + '?info', { }).success(function(data){
 		 	console.log(data	);
 		 	$scope.documentInfo = data;
+
+		 	var barcode = new Barcode39();
 	});
 					//TODO: return result.data;
 

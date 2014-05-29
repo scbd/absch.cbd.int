@@ -11,6 +11,7 @@
 	<link href="/app/css/template.css" rel="stylesheet">
 	<link rel="stylesheet" href="/app/libs/font-awesome/css/font-awesome.min.css">
 	<script src="/app/libs/momentjs/min/moment.min.js"></script>
+    <script src="/app/libs/barcode-39.js/barcode-39.min.js"></script>
 
  		<script src="/app/libs/requirejs/require.js"  ></script>
 	    <script src="/app/libs/angular/angular.min.js"  ></script>	    
@@ -30,8 +31,9 @@
                 vertical-align: top;
 	    		/*padding:5px !important;*/
 	    	}
-            body{
-                
+            #barcode img{
+                max-width: 300px;
+                max-height: 90px;
             }
 	    </style>
 </head>
@@ -114,13 +116,16 @@
                 		<tr>
                 			<td>
                 				<div class="value" ng-show="document.geneticResourcesConfidential">CONFIDENTIAL</div>
-                				<span class="value" ng-show="!document.geneticResourcesConfidential">{{document.geneticResources}}</span>
+                				<span class="value" ng-show="!document.geneticResourcesConfidential">{{document.geneticResources | lstring}}</span>
                 			</td>
                 			<td>
                 				<span ng-show="document.providerConfidential">CONFIDENTIAL</span>
-                				<span ng-show="!document.providerConfidential" ng-repeat="provider in document.providers"> 
-                                   <div view-contact-reference ng-model="provider" locale="locale"></div>
-                                </span></td>
+                				<span ng-show="!document.providerConfidential" class="row">                                     
+                                    <div class="col-sm-12" ng-class="{'col-md-4' : document.providers.length>1, 'col-md-12' : document.providers.length<=1}" ng-repeat="provider in document.providers">
+                                        <div view-contact-reference ng-model="provider" locale="locale"></div>
+                                    </div>
+                                </span>
+                            </td>
                 		</tr>                	
                 		<tr>
                 			<td><h4>The person or entity to whom prior informed consent was granted</h4></td>
@@ -129,8 +134,10 @@
                 		<tr>
                 			<td>
                 				<span ng-show="document.informedConsentConfidential">CONFIDENTIAL</span>
-                				<span ng-show="!document.informedConsentConfidential" ng-repeat="informedConsent in document.informedConsents">
-                                    <div view-contact-reference ng-model="informedConsent" locale="locale"></div>            
+                				<span ng-show="!document.informedConsentConfidential" class="row">
+                                    <div class="col-sm-12" ng-class="{'col-md-4' : document.informedConsents.length>1, 'col-md-12' : document.informedConsents.length<=1}" ng-repeat="consent in document.informedConsents">
+                                        <div view-contact-reference ng-model="consent" locale="locale"></div>
+                                    </div>           
                                 </span>
                             </td>
                 			<td>
@@ -142,7 +149,7 @@
                 			<td><h4></h4></td>
                 		</tr>
                 		<tr>
-                			<td colspna="2">{{document.consentInformation}}</td>
+                			<td colspna="2">{{document.consentInformation| lstring}}</td>
                 		</tr>
                 	                	
                 		<tr>
@@ -162,7 +169,7 @@
                             <td><h4></h4></td>
                         </tr>
                         <tr>
-                            <td colspan="2">{{document.usageDescription}}</td>                            
+                            <td colspan="2">{{document.usageDescription| lstring}}</td>                            
                         </tr>
                 		<tr>
                 			<td><h4>Confirmation that mutually agreed terms (MAT) were established</h4></td>
@@ -177,7 +184,7 @@
                             <td><h4></h4></td>
                         </tr>
                         <tr>
-                            <td colspan="2">{{document.amendmentsDescription}}</td>
+                            <td colspan="2">{{document.amendmentsDescription| lstring}}</td>
                         </tr>                	
                    
                         <tr>
@@ -211,10 +218,10 @@
                         <tr>
                             <td colspan="2">
                                 <div class="row">
-                                    <div class="col-lg-9 col-md-9 col-xs-9" >       
+                                    <div class="col-lg-8 col-md-4 col-xs-4" >       
                                         The internationally recognized certificate of compliance constituted from information on the permit or its equivalent made available to the ABS Clearing-House can also be found on the Access and Benefit-sharing Clearing-House at:
                                     </div>                        
-                                    <div class="col-lg-3 col-md-3 col-xs-3 pull-right">....barcode.....</div>
+                                    <div class="col-lg-4 col-md-4 col-xs-4 pull-right" style="vertical-align:top" id="barcode">https://absch.cbd.int/database/record?documentSchema=MEASURE&documentID={{document.header.identifier}}</div>
                                 </div>
                                 <a href="https://absch.cbd.int/database/record?documentSchema=MEASURE&documentID={{document.header.identifier}}">
                                     https://absch.cbd.int/database/record?documentSchema=MEASURE&documentID={{document.header.identifier}} </a>
@@ -236,7 +243,7 @@
                             </td>
                             <td>Questions about the Nagoya Protocol on Access and Benefit-sharing or the
                                 operation of the Access and Benefit-sharing Clearing-House may be directed to:
-                                <br/>
+                                <br/> <br/> 
                                 <strong>Secretariat of the Convention on Biological</strong><br/>
                                 Diversity
                                 413 rue Saint-Jacques, suite 800<br/>
