@@ -24,8 +24,8 @@ app.directive("fieldEmbedContact", [ function () {
 
 				var show = !!val;
 
-				if( show && !modalEdit.is(":visible")) { console.log("show"); modalEdit.modal("show"); }
-				if(!show &&  modalEdit.is(":visible")) { console.log("hide"); modalEdit.modal("hide"); }
+				if( show && !modalEdit.is(":visible")) {  modalEdit.modal("show"); }
+				if(!show &&  modalEdit.is(":visible")) {  modalEdit.modal("hide"); }
 
 			});
 
@@ -70,11 +70,19 @@ app.directive("fieldEmbedContact", [ function () {
 
 				var contacts = $scope.getContacts();
 
-				if(index<0 || index>=contacts.length) {					
+				if(index<0 || index>=contacts.length) {		
+					var id = guid();	
+					var government = $scope.$root.user.government;		
 					$scope.edition = {
-						contact : {
+						contact : {															
+									header: {
+												identifier: id,
+												schema   : "contact",
+												languages: ["en"]
+											},
 									type: "organization" ,
-									source: guid()
+									government: government ? { identifier: government } : undefined,
+									source: id
 								  },
 						index   : -1
 					};
@@ -129,6 +137,9 @@ app.directive("fieldEmbedContact", [ function () {
 				}
 				$scope.existingContacts = null;
 				$scope.edition = null;
+
+				//clear the dropdown list display text which remains after the dialog is closed.
+				$scope.$broadcast('clearSelectSelection');
 			};
 
 			//============================================================
@@ -158,6 +169,9 @@ app.directive("fieldEmbedContact", [ function () {
 				$scope.selectExisting = false;	
 				$scope.buttonText = "Show existing";
 				$scope.edition = null;
+
+				//clear the dropdown list display text which remains after the dialog is closed.
+				$scope.$broadcast('clearSelectSelection');
 			};
 
 			$scope.loadExisting = function(){
@@ -184,7 +198,7 @@ app.directive("fieldEmbedContact", [ function () {
 							contact.source = contact.header.identifier;
 						delete contact.government;
 						delete contact.header;
-						console.log(contact);
+						//console.log(contact);
 						$scope.existingContacts.push(contact);
 					});
 
