@@ -1394,6 +1394,11 @@ require('app').directive('kmSelect', ["underscore", "htmlUtility", function (_, 
 						return "<ul><li style=\"width:500px;\">" + oNames.join("</li>\n<li>") + "</li></ul>";
 					}
 				});
+
+			
+			$scope.$on('clearSelectSelection', function(){
+				$scope.clearSelection();
+			})
 		},
 		controller: ["$scope", "$q","$filter", "$timeout", "underscore", function ($scope, $q, $filter, $timeout, _) 
 		{
@@ -1431,7 +1436,6 @@ require('app').directive('kmSelect', ["underscore", "htmlUtility", function (_, 
 
 				return oResult;
 			}
-
 			//==============================
 			//
 			//==============================
