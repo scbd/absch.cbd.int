@@ -18,6 +18,13 @@ app.directive("editDatabase", [ function () {
 				countries         : function() { return $http.get("/api/v2013/thesaurus/domains/countries/terms",            { cache: true }).then(function(o){ return $filter("orderBy")(o.data, "name"); }); },
 				libraries         : function() { return $http.get("/api/v2013/thesaurus/domains/cbdClearingHouses/terms",    { cache: true }).then(function(o){ return $filter("orderBy")(o.data, "name"); }); }
 			};
+			
+			//==================================
+			//
+			//==================================
+			$scope.scrollToTop = function() {
+        		$("body, html").animate({scrollTop: 0}, "slow");
+      		};
 
 			//==================================
 			//

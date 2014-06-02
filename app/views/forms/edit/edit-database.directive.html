@@ -21,10 +21,10 @@
 
             <div class="col-sm-7 col-xs-12" id="helpTip2">
                 <ul class="pagination">
-                    <li ng-class="{ disabled: tab=='edit'   }"><a href="" ng-click="tab='edit'">&laquo;</a></li>
+                   <!--  <li ng-class="{ disabled: tab=='edit'   }"><a href="" ng-click="tab='edit'">&laquo;</a></li> -->
                     <li ng-class="{ active  : tab=='edit'   }"><a href="" ng-click="tab='edit'" >General</a></li>
                     <li ng-class="{ active  : tab=='review' }"><a href="" ng-click="tab='review'">Review</a></li>
-                    <li ng-class="{ disabled: tab=='review' }"><a href="" ng-click="tab='review'">&raquo;</a></li>
+                    <!-- <li ng-class="{ disabled: tab=='review' }"><a href="" ng-click="tab='review'">&raquo;</a></li> -->
                 </ul>   
             </div>
 
@@ -126,30 +126,14 @@
 
 		</div>
 
+ 		<hr>
 
         <div class="row">
-
-            <div class="col-sm-7 col-xs-12">
-                <ul class="pagination">
-                    <li ng-class="{ disabled: tab=='edit'   }"><a href="" ng-click="tab='edit'">&laquo;</a></li>
-                    <li ng-class="{ active  : tab=='edit'   }"><a href="" ng-click="tab='edit'" >General</a></li>
-                    <li ng-class="{ active  : tab=='review' }"><a href="" ng-click="tab='review'">Review</a></li>
-                    <li ng-class="{ disabled: tab=='review' }"><a href="" ng-click="tab='review'">&raquo;</a></li>
-                </ul>   
+            <div class="col-xs-12">
+                <a ng-click="scrollToTop()" style="padding-top:20px;" class="pull-right">
+                    <i class="glyphicon glyphicon-circle-arrow-up"></i> back to top</a>
             </div>
-
-            <div class="col-sm-5 hidden-xs text-right">
-                <div class="pagination">
-                    <span km-form-std-buttons document="getCleanDocument()"></span>
-                </div>
-            </div>
-
-            <div class="col-xs-12 visible-xs">
-                <div>
-                    <span km-form-std-buttons document="getCleanDocument()"></span>
-                </div>
-            </div>
-
         </div>
-	</div>
+
+    </div>
 </div>
