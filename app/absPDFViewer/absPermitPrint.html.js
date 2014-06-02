@@ -34,7 +34,6 @@ app.controller('printPermit', ['$scope','$http','$location', function($scope,$ht
 									 });
 			});
 			$scope.document.usage = usageDetails;
-
 			$scope.getTerm($scope.document.government.identifier)
 				  .success(function(data){										
 					 	$scope.document.government = data;
@@ -52,9 +51,8 @@ app.controller('printPermit', ['$scope','$http','$location', function($scope,$ht
 
 
 	$http.get('/api/v2013/documents/' +  params.identifier + '?info', { }).success(function(data){
-		 	console.log(data	);
-		 	$scope.documentInfo = data;
-
+		 	//console.log($scope.documentInfo.documentID	);
+		 	$scope.documentInfo = data;			
 		 	var barcode = new Barcode39();
 	});
 					//TODO: return result.data;
@@ -71,7 +69,52 @@ app.controller('printPermit', ['$scope','$http','$location', function($scope,$ht
 		//  });
 
 
-	}				
+	}
+
+	
+	 
+
+	//============================================================
+	//
+	//
+	//============================================================
+	$scope.Encode = function(id)
+	{
+		var CHARSET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		var    BASE    = CHARSET.length;// ABS PERMIT SECRET // MUST be < BASE*BASE - BASE - 1 // < 1259
+		var    SECRET  = 937;
+	       var sID = "";
+	       var sCS = "";
+
+	       var iIndex  = 0;
+	       var iNumber = 0;
+	       //compute ID
+
+	       iNumber = id;
+
+	       while(iNumber>0)
+	       {
+	             iIndex  = (iNumber % BASE);
+	             iNumber = (iNumber - iIndex) / BASE;
+
+	             sID = CHARSET[iIndex] + sID;
+	       }
+// console.log('index %i number %i id %i',iIndex,iNumber, sID);
+	       //compute Checksum
+
+	       iNumber = (id + SECRET) % (BASE * BASE - BASE - 1);
+
+	       for(var i=0; i<2; ++i)
+	       {
+	             iIndex  = (iNumber % BASE);
+	             iNumber = (iNumber - iIndex) / BASE;
+
+	             sCS = CHARSET[iIndex] + sCS;
+	       }
+
+	       return sID+sCS;
+	}
+			
 }]);
 
 

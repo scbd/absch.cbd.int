@@ -1,7 +1,26 @@
 ﻿<div>
 
-	<div class="row" ng-show="getContacts()">	
-	  <div class="col-sm-12" ng-class="{'col-md-6' : getContacts().length>1, 'col-md-12' : getContacts().length<=1}" ng-repeat="contact in getContacts()">
+	<div class="row" ng-show="getContacts()">
+		<div class="row" ng-show="showFilter">
+	          <div class="col-xs-10" >
+	            <span ng-click="filterBy=null" class="btn btn-info"> 
+	            <i ng-hide="filterBy" class="glyphicon glyphicon-ok"></i> All <span class="badge badge-default">
+	            {{(getContacts() ).length}}</span></span>
+	          	<span ng-click="filterBy=isOrganization" class="btn btn-danger"> 
+	            <i ng-show="filterBy==isOrganization" class="glyphicon glyphicon-ok"></i> Organizations <span class="badge badge-default">{{(getContacts() | filter:isOrganization).length}}</span></span>
+	              <span ng-click="filterBy=isPerson" class="btn btn-success"> 
+	            <i ng-show="filterBy==isPerson" class="glyphicon glyphicon-ok"></i> Person  <span class="badge badge-default">{{(getContacts() | filter:isPerson).length}}</span></span>
+	            <span ng-click="filterBy=isCNA" class="btn btn-default btn-draft" style="color:#fff">
+	            <i ng-show="filterBy==isCNA" class="glyphicon glyphicon-ok"></i> CNA  <span class="badge badge-default" style="color:#999">{{(getContacts() | filter:isCNA).length}}</span></span>
+	            <input type="text" ng-model="keywords" placeholder=" Keyword " class="form-control keyword" style="width:160px;display:inline;">
+	          </div>
+	          <div class="col-xs-2 pull-right" ng-show="showAddButton()">
+	            <span style="font-size: 16px; color: white;margin:0;padding:0;float:right;">
+	            <a ng-click="closeContact()" class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span> Add new</a></span>
+	          </div>
+	          <br/><br/>
+	    </div>
+	  <div class="col-sm-12" ng-class="{'col-md-6' : getContacts().length>1, 'col-md-12' : getContacts().length<=1}" ng-repeat="contact in getContacts() | filter:filterBy | filter:keywords">
 		<div class="well" >
 			<div class="pull-right">
 				<button type="button" class="btn btn-default" ng-click="deleteContact($index)"><i class="fa fa-trash-o"></i></button>
@@ -33,7 +52,7 @@
    	        	name="editionContactType"/> Organization</label>
 	        <label ng-hide="selectExisting" class="radio-inline"><input type="radio" ng-model="edition.contact.type" value="person" 
 	        	name="editionContactType"/> Person</label>
-	        <a type="button" class="btn btn-primary" ng-click="loadExisting()">{{buttonText}}</a>
+	        <a type="button" class="btn btn-primary" ng-click="loadExisting()" ng-show="!showFilter">{{buttonText}}</a>
 
           </div>
 	      <div class="modal-body" >
@@ -47,7 +66,7 @@
 			        <a type="button" class="btn btn-primary" ng-disabled="!editContactForm.$valid" ng-click="saveContact()">Save changes</a>
 			      </div>
 			   	</div>
-		       	<div ng-show="selectExisting" >
+		       	<div ng-show="selectExisting && !showFilter">
 		       		<div class="row">
 			      		<div class="col-sm-12" ng-class="{'col-md-6' : existingContacts.length>1, 'col-md-12' : existingContacts.length<=1}" ng-repeat="contact in existingContacts | filter:isSelected">  
 							<div class="well" >

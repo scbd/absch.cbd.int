@@ -224,6 +224,13 @@ app.directive('documentList', function ($http) {
                     }
                     else if(document.schema_s=='measure' || document.schema_s=='focalPoint' || document.schema_s=='database') {
                         output.cssRecordClass="nationalRecords";
+
+                        if(document.status_EN_t){
+                         //  console.log(document.status_EN_t);
+                         // if(document.status_EN_t != "Legally binding")
+                         //    output.cssRecordClass="notLegallyBinded";
+                          output.status = document.status_EN_t;
+                        }
                     }                    
                     else if(document.schema_s=='meeting') {
                         output.eventCity=document.eventCity_EN_t;

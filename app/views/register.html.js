@@ -27,6 +27,7 @@ app.controller("RegisterController",
 	 function ($rootScope, $location, $scope, $q, $window, storage, _,
 	  schemaTypes,$compile,$timeout,lstringFilter) {
 
+	 	
 	//============================================================
 	//============================================================
 	//====================== SECURIZE ============================
@@ -50,6 +51,8 @@ app.controller("RegisterController",
   	$scope.isLoaded = [];
   	$scope.refreshTab = false;
 
+  	$scope.localeRegister= ["en"];
+
 	$scope.schemaTypesFacets = [
 		{"schema":"measure","schemaType":"nationalRecords", "header":"ABSCH-MSR","commonFormat":"Legislative, administrative or policy measures", "draftCount":0,"requestCount":0,"publishCount": 0},
 		{"schema":"authority","schemaType":"nationalRecords", "header":"ABSCH-CNA ","commonFormat":"Competent National Authority ", "draftCount":0,"requestCount":0,"publishCount": 0},
@@ -57,7 +60,8 @@ app.controller("RegisterController",
 		{"schema":"absCheckpoint","schemaType":"nationalRecords", "header":"ABSCH-CP","commonFormat":"Checkpoint", "draftCount":0,"requestCount":0,"publishCount": 0},
 		{"schema":"absCheckpointCommunique","schemaType":"nationalRecords", "header":"ABSCH-CPC","commonFormat":"Checkpoint Communiqué", "draftCount":0,"requestCount":0,"publishCount": 0},
 		{"schema":"database","schemaType":"nationalRecords", "header":"ABSCH-NDB","commonFormat":"ABS National Website or Database", "draftCount":0,"requestCount":0,"publishCount": 0},
-		{"schema":"resource","schemaType":"referenceRecords", "header":"ABSCH-VLR","commonFormat":"Virtual Library Record", "draftCount":0,"requestCount":0,"publishCount": 0}
+		{"schema":"resource","schemaType":"referenceRecords", "header":"ABSCH-VLR","commonFormat":"Virtual Library Record", "draftCount":0,"requestCount":0,"publishCount": 0},
+		{"schema":"contact","schemaType":"others", "header":"Contacts","commonFormat":"", "draftCount":0,"requestCount":0,"publishCount": 0}
 	];
 
 
@@ -160,7 +164,12 @@ app.controller("RegisterController",
 		qAnd.push("(type eq '" + schema + "')");
 
 		var qDocuments = storage.documents.query(qAnd.join(" and ")||undefined,undefined,{cache:false});
-		var qDrafts    = storage.drafts   .query(qAnd.join(" and ")||undefined,{cache:false});
+		
+		var draftParams = {cache:false};
+		if(schema =="contact")
+			 draftParams.body=true;
+
+		var qDrafts    = storage.drafts   .query(qAnd.join(" and ")||undefined,draftParams);
 		
 		$q.all([qDocuments, qDrafts]).then(function(results) {
 
@@ -176,7 +185,7 @@ app.controller("RegisterController",
 			
 			_.values(map).forEach(function(row){				
 					  
-				if(schema!="dashboard"){
+				if(schema!="dashboard" && schema!="contact"){
 					var schemaCount = _.where($scope.schemaTypesFacets,{"schema":row.type});
 					
 					if(schemaCount != null && schemaCount.length > 0)
@@ -213,6 +222,13 @@ app.controller("RegisterController",
 					}
 				}
 				$scope.records.push(row);
+				if(schema =="contact"){
+
+					if(!$scope.contacts)
+						$scope.contacts = [];
+					//console.log(row.body);
+					$scope.contacts.push(row.body)
+				}
 			})
 			// var recrords _.groupBy($scope.records,'')
 			$("a[role*='button']").toggleClass('ui-disabled');
@@ -533,9 +549,16 @@ app.controller("RegisterController",
 		}
 		if(value=='absCheckpointCommunique') require(['../views/forms/edit/edit-abs-checkpoint-communique.directive'], function() { $scope.absCheckpointCommuniqueReady = true; });
 		if(value=='absPermit'              ) require(['../views/forms/edit/edit-abs-permit.directive'],                function() { $scope.absPermitReady = true; });
-		if(value=='database'               ) require(['../views/forms/edit/edit-database.directive'],                  function() {console.log('dab loaded');$scope.databaseReady = true; });
+		if(value=='database'               ) require(['../views/forms/edit/edit-database.directive'],                  function() { $scope.databaseReady = true; });
 		if(value=='measure'                ) require(['../views/forms/edit/edit-measure.directive'],                   function() { $scope.measureReady = true; });
 		if(value=='resource'               ) require(['../views/forms/edit/edit-resource.directive'],                  function() { $scope.resourceReady = true; });
+		if(value=='contact'               ) { 
+					if(!$scope.contacts){
+						loadRecords(value);}
+					$scope.contactReady = true; 
+		};
 	})
+
+	
 }]);
 });

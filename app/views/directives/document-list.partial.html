@@ -26,9 +26,16 @@
   background-color:#287fcb;
   width:3px;
   }
+  .notLegallyBinded{
+  background-color:#dfa162;
+  width:3px;
+  }
  </style>
   <ul class="pagination pull-right" ng-show='showPagination'>
-    <li ng-class="disabled" >
+     <li class="disabled" >
+      <a href>  Found {{documentCount}}</a>
+    </li>
+    <li class="disabled" >
       <a href>  {{pageCount==0 ? 0 : currentPage+1 }} of {{pageCount}}</a>
     </li>
     <li ng-class="{disabled: currentPage == 0}">
@@ -67,7 +74,7 @@
                 <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
                 <span ng-show="document.jusrisdiction"><span >jusrisdiction:</span>  <span class="rowDetails">{{document.jusrisdiction}} </span></span>
                 <span ng-show="document.type">| <span >type:</span>  <span class="rowDetails" > {{document.type}} </span></span>
-                <span ng-show="document.status">| <span >Status:</span>  <span class="rowDetails" > {{document.status}} </span></span>
+                <span ng-show="document.status">| <span >Status:</span>  <span class="rowDetails" ng-class="{'notLegallyBinded' :  document.status !='Legally binding'}"  > {{document.status}} </span></span>
                 <span ng-show="document.source">| <span >Country:</span>  <span class="rowDetails" > {{document.source}} </span></span>
               </div>
               <div ng-switch-when="AUTHORITY" class="national-record">

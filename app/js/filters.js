@@ -100,7 +100,7 @@ define(["app"], function (app) {
 	app.filter("formatDateWithTime", function(){
 		return function(date,formart){	
 			if(formart== undefined)
-				formart = 'MMM Do YYYY hh:mm';		
+				formart = 'MM/DD/YYYY hh:mm';		
 			return moment(date).format(formart);
 		}
 	});

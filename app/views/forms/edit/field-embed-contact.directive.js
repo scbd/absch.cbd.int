@@ -1,4 +1,8 @@
-define(['app'], function (app) {
+define(['app',
+	// 'app/js/directives/forms/form-controls.js',
+	// './km-form-buttons.js',
+	// './editFormUtility.js'
+	], function (app) {
 
 app.directive("fieldEmbedContact", [ function () {
 
@@ -17,7 +21,8 @@ app.directive("fieldEmbedContact", [ function () {
 			
 
 			$scope.multiple = $attrs.multiple!==undefined;
-
+			$scope.showFilter = $attrs.showFilter!==undefined;
+			console.log($scope.showFilter)
 			var modalEdit = $element.find("#editContact");
 
 			$scope.$watch("edition", function(val){
@@ -42,7 +47,7 @@ app.directive("fieldEmbedContact", [ function () {
 			//
 			//
 			//============================================================
-			$scope.$watch("model", function() {
+			$scope.$watch("model", function() {				
 				workingContacts = null;
 			});
 
@@ -50,8 +55,7 @@ app.directive("fieldEmbedContact", [ function () {
 			//
 			//
 			//============================================================
-			$scope.getContacts = function() {
-
+			$scope.getContacts = function() {				
 				if(workingContacts===null) {
 
 					     if(_.isArray ($scope.model)) workingContacts = _.clone($scope.model);
@@ -237,6 +241,18 @@ app.directive("fieldEmbedContact", [ function () {
 							selected = true;
 				});
 				return !selected;
+			}
+
+		 	$scope.isOrganization=function(entity){ 
+		 	//console.log(entity)		;
+				return entity && entity.type == "organization";
+			}
+			$scope.isPerson=function(entity){
+				// console.log(entity);
+				return entity && entity.type == "person";
+			}
+			$scope.isCNA=function(entity){
+				return entity && entity.type == "CNA";
 			}
 		}]
 	};
