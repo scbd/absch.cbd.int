@@ -40,6 +40,8 @@
 
 			<div ng-show="tab=='edit'" km-tab="edit">
 
+				
+				<section>
 				<legend>General information</legend>
 
 				<div class="row">
@@ -105,6 +107,9 @@
 						</div>
 					</div>
 				</div>
+				</section>
+
+				<section>
 
 				<legend>Resource information</legend>
 
@@ -158,7 +163,9 @@
 						</div>
 					</div>
 				</div>
+</section>
 
+<section>
 
 				<legend>Resource references</legend>
 
@@ -178,6 +185,9 @@
 						</div>
 					</div>
 				</div>
+				</section>
+
+				<section>
 
 				<legend>Access to the resource</legend>
 
@@ -200,7 +210,24 @@
 						</div>
 					</div>
 				</div>
+</section>
 
+	<section>
+
+				<legend>ABS Thematic Areas</legend>
+
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="km-control-group" required name="absSubjects" caption="Thematic areas(s)">
+							<div km-term-check name="absSubjects" required ng-model="document.absSubjects" terms="options.absSubjects()" binding-type="term[]"></div>
+						</div>
+					</div>
+				</div>
+				</section>
+
+				
+
+<section>
 
 				<a name="#AdditionalInformation"></a>
 				<legend>Additional information</legend>
@@ -221,25 +248,19 @@
 						</div>
 					</div>
 				</div>
+				</section>
+				<section style="background-color:#bbb;">
+                    <legend>Notes</legend>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" name="notes" >
+                                <div class="help-block">The “Notes” field is for your personal notes or comments and will be hidden when viewing the record. This field is not meant to be used for confidential information.</div>
+                                <textarea class="form-control" rows="4" name="notes" ng-model="document.notes"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
-				<div class="row">
-					<div class="col-xs-12">
-						<div class="km-control-group" name="notes" caption="Notes">
-							<div class="help-block">The field “Notes” is for personal reference and can be seen only when the record is being edited</div>
-							<textarea class="input-block-level" name="notes" ng-model="document.notes" rows="4"></textarea>
-						</div>
-					</div>
-				</div>
-
-				<legend>ABS Subjects</legend>
-
-				<div class="row">
-					<div class="col-xs-12">
-						<div class="km-control-group" required name="absSubjects" caption="Thematic areas(s)">
-							<div km-term-check name="absSubjects" required ng-model="document.absSubjects" terms="options.absSubjects()" binding-type="term[]"></div>
-						</div>
-					</div>
-				</div>
 
 
 			</div>
@@ -249,42 +270,24 @@
 
 		</form>
 
-		<div ng-show="tab=='review'" km-tab="review">
-
+		  <div ng-show="tab=='review'" km-tab="review">
             <div km-document-validation ng-model="validationReport"></div>
 
             <div class="btn-group" ng-show="reviewDocument.header.languages.length>1">
                 <input type="button" class="btn" ng-class="{'active' : review.locale==locale, 'btn-info' : review.locale==locale}" ng-repeat="locale in document.header.languages" ng-click="$parent.review.locale = locale" value="{{locale | uppercase}}" />
             </div>
 
-            <div view-resource ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></div>
+            <div view-authority ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></div>
+        </div>
 
-		</div>
+        <hr>
 
         <div class="row">
-
-            <div class="col-lg-9 col-sm-8 col-xs-12" id="helpTip2">
-                <ul class="pagination">
-                    <!-- <li ng-class="{ disabled: tab=='edit'   }"><a href="" ng-click="tab=prevTab">&laquo;</a></li> -->
-                    <li ng-class="{ active  : tab=='edit'   }"><a href="" ng-click="tab='edit'" >Submission form</a></li>
-                    <!-- <li ng-class="{ active  : tab=='absch'  }"><a href="" ng-click="tab='absch'">ABS</a></li> -->
-                    <li ng-class="{ active  : tab=='review' }"><a href="" ng-click="tab='review'">Review</a></li>
-                    <!-- <li ng-class="{ disabled: tab=='review' }"><a href="" ng-click="tab=nextTab">&raquo;</a></li> -->
-                </ul>   
+            <div class="col-xs-12">
+                <a ng-click="scrollToTop()" style="padding-top:20px;" class="pull-right">
+                    <i class="glyphicon glyphicon-circle-arrow-up"></i> back to top</a>
             </div>
-
-            <div class="col-lg-3 col-sm-4 hidden-xs text-right">
-                <div class="pagination">
-                    <span km-form-std-buttons document="getCleanDocument()"></span>
-                </div>
-            </div>
-
-            <div class="col-xs-12 visible-xs">
-                <div>
-                    <span km-form-std-buttons document="getCleanDocument()"></span>
-                </div>
-            </div>
-
         </div>
-	</div>
+
+    </div>
 </div>

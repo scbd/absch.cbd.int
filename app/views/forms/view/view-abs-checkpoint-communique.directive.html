@@ -4,7 +4,15 @@
 
 			<a type="button" ng-show="showPdf" target="_blank" class="btn btn-info pull-right" ng-href="http://absch.cbd.int/app/abs/docs/sample_communique.pdf">Download the Checkpoint Communiqué</a>
 			
-			<h3 ng-show="display('title')">{{document.title | lstring:locale}}</h3>
+	
+				<div ng-show="document.title">
+			 	<label>Title</label>
+			 	<div class="km-value">
+			 	<h3>{{document.title | lstring:locale}}</h3>
+			 	</div>
+		 	</div> 
+
+
 
 			<div ng-show="document.government || document.checkpoint">
 				<legend>General information</legend>

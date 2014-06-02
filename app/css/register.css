@@ -1,3 +1,13 @@
+
+section {
+	padding: 5px 10px 20px 10px;
+	background-color: #ccc;
+	margin-top: 20px;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
 .panel-info,  .panel-title{
  font-size: 11px;
 }
@@ -6,6 +16,7 @@
 {
 	border: 2px solid #aaa;
 	padding:10px;
+
 }
 .confidential-text {
 	font-weight:bold;
@@ -15,16 +26,16 @@
 	padding-bottom:10px;
 }
  .disable {
-                    background-color:#888;
-                    color:#666;
-                }
-                .enable {
-                    background-color:#ededed;
-                }
+    background-color:#888;
+    color:#666;
+}
+.enable {
+    background-color:#ededed;
+}
                 
 legend{
 
-	padding:30px 0 10px 0;
+	padding:10px 0 10px 0;
 	margin: 0;
 }
 

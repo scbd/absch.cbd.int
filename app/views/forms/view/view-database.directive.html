@@ -3,10 +3,15 @@
 		 National Database or Website</h4></div>
 	<div class="record-body panel-body">
 
-		<div ng-show="display('title')">
-			<label>Title</label>
-			<div class="km-value km-pre">{{document.title | lstring:locale}}</div>
-		</div>
+	
+
+			<div ng-show="document.title">
+			 	<label>Title</label>
+			 	<div class="km-value">
+			 	<h3>{{document.title | lstring:locale}}</h3>
+			 	</div>
+		 	</div> 
+ 
 
 		<div ng-show="document.description">
 			<label>Description</label>

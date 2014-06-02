@@ -1,10 +1,10 @@
 <link href="/app/css/register.css" rel="stylesheet">
 
 
-<br>
 <div ng-cloak ng-controller="RegisterController">
 
     <div class="container">
+    
 
         <!--         <div class="row">
         <div class="col-xs-3"></div>
@@ -19,7 +19,7 @@
 
         <div class="row">
             <div class="col-xs-3" ng-show="isAuthenticated">
-
+                <h1>Register Information</h1>
                 <div>
 
                     <h3 ><a ng-click="tab('dashboard')"  ng-class="{ 'btn-commonformat-selected' : tab()=='dashboard'}" href="#" role="button">
@@ -199,7 +199,7 @@
 
 
             <!-- DASHBOARD ****************************************-->
-            <div ng-show="tab()=='dashboard' && isAuthenticated" class="col-xs-9">
+            <div ng-show="tab()=='dashboard' && isAuthenticated" class="col-xs-9" style="padding-top:20px;">
 
                 <div>
                     <a class="pull-right" ng-show="!help" ng-click="help=!help;" style="cursor:pointer;padding:5px;"><i class="glyphicon glyphicon-question-sign" >
@@ -329,7 +329,7 @@
             <!-- END DASHBOARD ****************************************-->
 
             <!-- MSR ****************************************-->
-            <div ng-show="tab()=='measure'" class="col-xs-9">
+            <div ng-show="tab()=='measure'" class="col-xs-9" style="padding-top:20px;">
 
                 <div>
                     <a class="pull-right" ng-show="!help" ng-click="help=!help;" style="cursor:pointer;padding:5px;"><i class="glyphicon glyphicon-question-sign" >
@@ -391,7 +391,7 @@
             <!-- END ****************************************-->
 
             <!-- CNA ****************************************-->
-            <div ng-show="tab()=='authority'" class="col-xs-9">
+            <div ng-show="tab()=='authority'" class="col-xs-9" style="padding-top:20px;">
 
                 <div>
                     <a class="pull-right" ng-show="!help" ng-click="help=!help;" style="cursor:pointer;padding:5px;"><i class="glyphicon glyphicon-question-sign" >
@@ -455,7 +455,7 @@
             <!-- END CNA ****************************************-->
 
             <!-- Start Permit ****************************************-->
-            <div ng-show="tab()=='absPermit'" class="col-xs-9">
+            <div ng-show="tab()=='absPermit'" class="col-xs-9" style="padding-top:20px;">
 
                 <div>
                     <a class="pull-right" ng-show="!help" ng-click="help=!help;" style="cursor:pointer;padding:5px;"><i class="glyphicon glyphicon-question-sign" >
@@ -547,7 +547,7 @@
 
 
             <!-- start checkpoint -->
-            <div ng-show="tab()=='absCheckpoint'" class="col-xs-9">
+            <div ng-show="tab()=='absCheckpoint'" class="col-xs-9" style="padding-top:20px;">
 
                 <div>
                     <a class="pull-right" ng-show="!help" ng-click="help=!help;" style="cursor:pointer;padding:5px;"><i class="glyphicon glyphicon-question-sign" >
@@ -593,7 +593,7 @@
 
 
             <!-- start CPC -->
-            <div ng-show="tab()=='absCheckpointCommunique'" class="col-xs-9">
+            <div ng-show="tab()=='absCheckpointCommunique'" class="col-xs-9" style="padding-top:20px;">
 
                 <div>
                     <a class="pull-right" ng-show="!help" ng-click="help=!help;" style="cursor:pointer;padding:5px;"><i class="glyphicon glyphicon-question-sign" >
@@ -639,7 +639,7 @@
 
 
             <!-- start resource -->
-            <div ng-show="tab()=='resource'" class="col-xs-9">
+            <div ng-show="tab()=='resource'" class="col-xs-9" style="padding-top:20px;">
 
                 <div>
                     <a class="pull-right" ng-show="!help" ng-click="help=!help;" style="cursor:pointer;padding:5px;"><i class="glyphicon glyphicon-question-sign" >
@@ -686,7 +686,7 @@
 
 
             <!-- start ndb -->
-            <div ng-show="tab()=='database'" class="col-xs-9">
+            <div ng-show="tab()=='database'" class="col-xs-9" style="padding-top:20px;">
                 <div>
                     <a class="pull-right" ng-show="!help" ng-click="help=!help;" style="cursor:pointer;padding:5px;"><i class="glyphicon glyphicon-question-sign" >
                     </i> show help</a>

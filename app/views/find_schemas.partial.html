@@ -56,7 +56,7 @@
 
     <div class="checkbox" ng-show="showNationalFilters || absPermit.selected">
         <label>
-            <input type="checkbox" ng-model="absPermit.selected" bind-indeterminate="absPermit.indeterminate" ng-change="refresh(absPermit.selected)">International Certificate of Compliance ({{absPermit.count}})
+            <input type="checkbox" ng-model="absPermit.selected" bind-indeterminate="absPermit.indeterminate" ng-change="refresh(absPermit.selected)">Internationally Recognized Certificate of Compliance ({{absPermit.count}})
         </label>
         <div ng-show="absPermit.selected" class="subfilters-section">
             <div km-select multiple required name="permitusage" ng-model="permitusage" items="options.usage()" placeholder="Usage"></div>

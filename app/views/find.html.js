@@ -96,10 +96,10 @@ define(['app',
                 if(!$scope.schemas) {
                     var queryFacetsParameters = {
                         'q': 'realm_ss:absch AND NOT version_s:*',
-                        'fl': '',
+                        'fl': '', 		//fields for results.
                         'wt': 'json',
-                        'rows': 0,
-                        'facet': true,
+                        'rows': 0,		//limit
+                        'facet': true,	//get counts back
                         'facet.field': ['schema_s', 'government_s', 'aichiTarget_REL_ss', 'thematicArea_ss'],
                         'facet.limit': 512
                     };

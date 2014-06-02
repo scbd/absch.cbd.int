@@ -83,7 +83,6 @@ app.controller("ProfileController", ["$scope", "$http", "$routeParams","linqjs",
                 }); 
         });
 
-    
  
 
 }]);

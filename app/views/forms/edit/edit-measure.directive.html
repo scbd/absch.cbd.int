@@ -77,7 +77,7 @@
 		<form class="editForm" name="editForm" style="margin-top:10px">
 			<div ng-show="tab=='edit'" km-tab="edit">
 
-
+			<section>
 				<legend>General information</legend>
 				<div class="row">
 					<div class="col-sm-12">
@@ -96,34 +96,7 @@
 					</div>
 				</div>
 				<hr>
-				<div class="row">
-					<div class="col-sm-4">
-						<div class="km-control-group" required name="jurisdiction" caption="Area of jurisdiction">
-							<div km-select required name="jurisdiction" ng-model="document.jurisdiction" items="options.jurisdiction()"></div>
-						</div>
-					</div>
 
-
-					<div class="col-sm-8">
-						<div ng-show="isJurisdictionRegional()">
-							<div class="km-control-group" required name="jurisdictionRegions" caption="Country name and/or Geographical or political/economic group(s)">
-							<div km-select required name="jurisdictionRegions" ng-model="document.jurisdictionRegions" items="options.regions()" multiple ></div>
-							</div>
-						</div>
-
-						<div ng-show="isJurisdictionSubNationalOrCommunity()">
-							<div class="km-control-group" required name="jurisdictionName" caption="Name of the sub-national jurisdiction / community">
-							<div km-textbox-ml required ng-model="document.jurisdictionName" locales="document.header.languages"></div>
-							</div>
-						</div>
-				
-					</div>
-
-				</div>
-
-				
-				
-				<hr>
 				<div class="row">
 					<div class="col-sm-4">
 						<div required class="km-control-group" name="status" caption="Legal status of the measure">
@@ -159,6 +132,7 @@
 				</div>
 
 				<hr>
+
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="km-control-group" required name="type" caption="Type of document/measure">
@@ -169,6 +143,32 @@
 					</div>
 				</div>
 				<hr>
+
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="km-control-group" required name="jurisdiction" caption="Area of jurisdiction">
+							<div km-select required name="jurisdiction" ng-model="document.jurisdiction" items="options.jurisdiction()"></div>
+						</div>
+					</div>
+
+
+					<div class="col-sm-8">
+						<div ng-show="isJurisdictionRegional()">
+							<div class="km-control-group" required name="jurisdictionRegions" caption="Country name and/or Geographical or political/economic group(s)">
+							<div km-select required name="jurisdictionRegions" ng-model="document.jurisdictionRegions" items="options.regions()" multiple ></div>
+							</div>
+						</div>
+
+						<div ng-show="isJurisdictionSubNationalOrCommunity()">
+							<div class="km-control-group" required name="jurisdictionName" caption="Name of the sub-national jurisdiction / community">
+							<div km-textbox-ml required ng-model="document.jurisdictionName" locales="document.header.languages"></div>
+							</div>
+						</div>
+				
+					</div>
+
+				</div>
+				<hr>
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="km-control-group" name="description" caption="Brief description of the document including  objective and scope (max. 300 words)">
@@ -176,7 +176,11 @@
 						</div>
 					</div>
 				</div>
-				<hr>
+
+				</section>
+
+				<section>
+				<legend>Is this records an amendment to previously published record? </legend>
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="km-control-group" name="amendedMeasures" caption="List of amended measures">
@@ -198,8 +202,9 @@
 						</div>
 					</div>
 				</div>
+				</section>
 				
-
+				<section>
 				<legend>Document details</legend>
 				<div class="row">
 					<div class="col-sm-12">
@@ -254,7 +259,10 @@
 						</div>
 					</div>
 				</div>
+
  -->
+</section>
+			<section>
 				<legend>Regulatory contact information</legend>
 				<div class="row">
 					<div class="col-sm-12">
@@ -265,8 +273,9 @@
 						</div>
 					</div>
 				</div>
+				</section>
 
-
+				<section>
 				<legend>Elements of the measure</legend>
 	
 				<div class="help-block">Please select which elements are included in the measure being registered and identify which are the relevant articles of sections of the measure for each of the selected elements.</div>
@@ -321,11 +330,11 @@
 						<div edit-measure-abs name="absMeasures" required ng-model="document.absMeasures" locales="document.header.languages" terms="options.absMeasures()"></div>
 					</div>
 				</div>
+			</section>
 
 
 
-
-
+<section>
 				<legend>Additional information</legend>
 
 				<div class="row">
@@ -344,15 +353,18 @@
 						</div>
 					</div>
 				</div>
-				<hr>
+				</section>
+				<section>
+				<legend>Notes</legend>
 				<div class="row">
 					<div class="col-sm-12">
-						<div class="km-control-group" name="notes" caption="Notes">
+						<div class="km-control-group" name="notes">
 							<div class="help-block">The field “Notes” is for personal reference and can be seen only when the record is being edited</div>
 							<textarea class="form-control" name="notes" ng-model="document.notes" rows="4"></textarea>
 						</div>
 					</div>
 				</div>
+				</section>
 
 			</div>
 		</form>

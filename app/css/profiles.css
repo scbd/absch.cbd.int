@@ -28,6 +28,25 @@
 	     margin: 0;
 	     line-height: 40px;
 	}
+
+.numberCircle1 {
+	    -webkit-border-radius: 999px;
+	    -moz-border-radius: 999px;
+	    border-radius: 999px;
+	    behavior: url(PIE.htc);
+
+	    width: 24px;
+	    height: 24px;
+	    padding: 0px;
+
+	    background: #6495ED;
+	    color: #fff;
+	    display:inline-block;
+	    text-align: left;
+
+    	font: 16px "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeueW01-45Ligh", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	}
+
 	.numberCircle {
 	    -webkit-border-radius: 999px;
 	    -moz-border-radius: 999px;
