@@ -5,9 +5,13 @@
 
 	
 
-		<div ng-show="display('title') && document.name">
-		 	<h3>{{document.name | lstring:locale}}</h3>
-		 </div>
+		 	<div ng-show="document.title">
+			 	<label>Title</label>
+			 	<div class="km-value">
+			 	<h3>{{document.name | lstring:locale}}</h3>
+			 	</div>
+		 	</div> 
+
 
 		<div ng-show="document.government">
 			<label>Country</label>

@@ -1,9 +1,14 @@
 ﻿<div id="Record" class="record panel panel-default">		
 	<div class="panel-heading"> <h4 ng-show="display('header')"><span class="record-title-national">ABSCH-MSR</span> Legislative, administrative or policy measures on access and benefit-sharing</h4></div>
 	<div class="record-body panel-body">
-		<div ng-show="display('title')">
-		 	<h3>{{document.title | lstring:locale}}</h3>
-		 </div>
+		
+		
+			<div ng-show="document.title">
+			 	<label>Title</label>
+			 	<div class="km-value">
+			 	<h3>{{document.title | lstring:locale}}</h3>
+			 	</div>
+		 	</div> 
 
 		<div ng-show="document.description">
 			<label>Brief description</label>
