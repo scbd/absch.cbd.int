@@ -28,6 +28,7 @@
         <form name="editForm" style="margin-top:10px">
             <div class="editForm" ng-show="tab=='edit'" km-tab="edit">
 
+                <section>
                 <legend>General information</legend>
 
                 <div class="row">
@@ -49,6 +50,9 @@
                         </div>
                     </div>
                 </div>
+                </section>
+
+                <section>
 
                 <legend>Responsibilities</legend>
                 <div class="row">
@@ -81,6 +85,9 @@
                         </div>
                     </div>
                 </div>
+                </section>
+
+                <section>
 
                 <legend>National authority/ies to receive the information collected or received by the designated checkpoint</legend>
                 <span class="help-block">In accordance with Article 17, paragraph 1 (a) (i) and (iii), of the Nagoya Protocol, the information collected or received by the checkpoint related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources, including from the internationally recognized certificate of compliance, needs to be provided to relevant national authorities, to the Party providing prior informed consent and to the ABS Clearing-House, as appropriate. On the basis of the information provided, the ABS Clearing-House will issue a communiqué and automatically send a courtesy copy to the designated national authority/ies of your country.</span>
@@ -117,6 +124,9 @@
                         </div>
                     </div>
                 </div>
+                </section>
+
+                <section>
 
                 <legend>Additional Information</legend>
                 <div class="row">
@@ -135,16 +145,19 @@
                         </div>
                     </div>
                 </div>
+                </section>
 
-
+                <section>
+                <legend>Notes</legend>
                 <div class="row">
                     <div class="col-xs-12">
-                        <div class="km-control-group" name="notes" caption="Notes">
+                        <div class="km-control-group" name="notes">
                             <div class="help-block">The field “Notes” is for personal reference and can be seen only when the record is being edited.</div>
                             <textarea class="form-control" rows="4" name="notes" ng-model="document.notes"></textarea>
                         </div>
                     </div>
                 </div>
+                </section>
             </div>
 
         </form>

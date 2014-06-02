@@ -3,10 +3,11 @@
 
 <div ng-controller="FindController">
     <div class="container" style="min-height:1200px;">
-        <h1>Search Information</h1>
+       
         <div class="row">
             <div class="col-xs-3">
-            
+                 <h1>Search Information</h1>
+                 
                 <input type="text" ng-model="keyword" placeholder=" Keyword " class="form-control keyword" style="height:24px;">
 
                 <search-filter-schemas title='Record Types' ng-model='schemas' field='schema_s' query='querySchema'></search-filter-schemas>

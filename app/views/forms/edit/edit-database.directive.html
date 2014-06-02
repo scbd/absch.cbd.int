@@ -41,6 +41,7 @@
 
 			<div ng-show="tab=='edit'" km-tab="edit">
 
+				<section>
 				<legend>Website or Database details </legend>
 				<div class="row">
 					<div class="col-xs-12">
@@ -73,6 +74,9 @@
 						</div>
 					</div>
 				</div>
+				</section>
+
+				<section>
 
 				<legend>Additional information</legend>
 
@@ -92,15 +96,20 @@
 						</div>
 					</div>
 				</div>
+				</section>
 
+				<section>
+
+				<legend>Notes</legend>
 				<div class="row">
 					<div class="col-xs-12">
-						<div class="km-control-group" name="notes" caption="Notes">
+						<div class="km-control-group" name="notes">
 							<div class="help-block">The field “Notes” is for personal reference and can be seen only when the record is being edited</div>
 							<textarea class="form-control" name="notes" ng-model="document.notes" rows="4"></textarea>
 						</div>
 					</div>
 				</div>
+				</section>
 
 			</div>
 		</form>

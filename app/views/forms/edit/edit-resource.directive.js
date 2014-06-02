@@ -32,6 +32,14 @@ app.directive("editResource", [ function () {
 			//==================================
 			//
 			//==================================
+			$scope.scrollToTop = function() {
+        		$("body, html").animate({scrollTop: 0}, "slow");
+      		};
+
+
+			//==================================
+			//
+			//==================================
 			function load(identifier) {
 
 				$scope.status = "loading";

@@ -531,6 +531,7 @@ app.controller("RegisterController",
 			          	$scope.absCheckpointReady = true;					
 			      });
 		}
+		
 		if(value=='absCheckpointCommunique') require(['../views/forms/edit/edit-abs-checkpoint-communique.directive'], function() { $scope.absCheckpointCommuniqueReady = true; });
 		if(value=='absPermit'              ) require(['../views/forms/edit/edit-abs-permit.directive'],                function() { $scope.absPermitReady = true; });
 		if(value=='database'               ) require(['../views/forms/edit/edit-database.directive'],                  function() {console.log('dab loaded');$scope.databaseReady = true; });
