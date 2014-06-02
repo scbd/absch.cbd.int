@@ -69,12 +69,28 @@
                 <span ng-show="document.jusrisdiction"><span >jusrisdiction:</span>  <span class="rowDetails">{{document.jusrisdiction}} </span></span>
                 <span ng-show="document.type">| <span >type:</span>  <span class="rowDetails" > {{document.type}} </span></span>
                 <span ng-show="document.status">| <span >Status:</span>  <span class="rowDetails" > {{document.status}} </span></span>
-                <span ng-show="document.source">| <span >Country:</span>  <span class="rowDetails" > {{document.source}} </span></span>
+					 <span ng-show="document.source">
+						 | <span>Country:</span>
+						 <span class="rowDetails" style="border: dotted 1px gray; padding-bottom: 2px;">
+							 <span>{{document.source}}</span>
+							 <span ng-show="document.isParty" class="label label-success">party</span>
+							 <span ng-show="document.isSignatory" class="label label-info">signed</span>
+							 <span ng-show="document.isRatified" class="label label-default">ratified</span>
+						 </span>
+					 </span>
               </div>
               <div ng-switch-when="AUTHORITY" class="national-record">
                 <span class="rec-title">Competent National Authority</span>
                 <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
-                <span ng-show="document.source"><span >Country:</span>  <span class="rowDetails" > {{document.source}} </span></span>
+					 <span ng-show="document.source">
+						 | <span>Country:</span>
+						 <span class="rowDetails" style="border: dotted 1px gray; padding-bottom: 2px;">
+							 <span>{{document.source}}</span>
+							 <span ng-show="document.isParty" class="label label-success">party</span>
+							 <span ng-show="document.isSignatory" class="label label-info">signed</span>
+							 <span ng-show="document.isRatified" class="label label-default">ratified</span>
+						 </span>
+					 </span>
                 <span ng-show="document.responsibleForAll">| <span >responsible for all :</span>  <span class="rowDetails" > {{document.responsibleForAll | yesno}} </span></span>
                 <span ng-show="document.grType">| <span >GR type :</span>  <span class="rowDetails" > {{document.grType}} </span></span>
                 <span ng-show="document.jusrisdiction">| <span >jusrisdiction:</span>  <span class="rowDetails">{{document.jusrisdiction | lstring:locale}} </span></span>
@@ -83,7 +99,15 @@
                 <span class="rec-title">checkpoint</span>
                 <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
                 <!-- <span ng-show="document.informAllAuthorities">| <span >inform All Authorities :</span>  <span class="rowDetails" > {{document.informAllAuthorities | yesno}} </span></span> -->
-                <span ng-show="document.source"><span >Country:</span>  <span class="rowDetails" > {{document.source}} </span></span>
+					 <span ng-show="document.source">
+						 | <span>Country:</span>
+						 <span class="rowDetails" style="border: dotted 1px gray; padding-bottom: 2px;">
+							 <span>{{document.source}}</span>
+							 <span ng-show="document.isParty" class="label label-success">party</span>
+							 <span ng-show="document.isSignatory" class="label label-info">signed</span>
+							 <span ng-show="document.isRatified" class="label label-default">ratified</span>
+						 </span>
+					 </span>
                 <span ng-show="document.jusrisdiction">| <span >jusrisdiction:</span>  <span class="rowDetails">{{document.jusrisdiction| lstring:locale}} </span></span>
               </div>
               <div ng-switch-when="ABSPERMIT" class="national-record">
@@ -101,9 +125,15 @@
               <div ng-switch-when="DATABASE" class="national-record">
                 <span class="rec-title">National datasource</span>
                 <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
-                <span ng-show="document.source">
-                <span >Country:</span>  <span class="rowDetails" > {{document.source}} </span>
-                </span>
+					 <span ng-show="document.source">
+						 | <span>Country:</span>
+						 <span class="rowDetails" style="border: dotted 1px gray; padding-bottom: 2px;">
+							 <span>{{document.source}}</span>
+							 <span ng-show="document.isParty" class="label label-success">party</span>
+							 <span ng-show="document.isSignatory" class="label label-info">signed</span>
+							 <span ng-show="document.isRatified" class="label label-default">ratified</span>
+						 </span>
+					 </span>
               </div>
               <div ng-switch-when="RESOURCE" class="reference-record">
                 <span class="rec-title">virtual library record </span>
@@ -129,13 +159,29 @@
               </div>           
               <div ng-switch-when="FOCALPOINT" class="national-record">
                 <span class="rec-title">{{document.schema}}</span>
-                <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
-                <span ng-show="document.source">| <span >Country:</span><span class="rowDetails" > {{document.source}} </span></span>
+					 <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
+					 <span ng-show="document.source">
+						 | <span>Country:</span>
+						 <span class="rowDetails" style="border: dotted 1px gray; padding-bottom: 2px;">
+							 <span>{{document.source}}</span>
+							 <span ng-show="document.isParty" class="label label-success">party</span>
+							 <span ng-show="document.isSignatory" class="label label-info">signed</span>
+							 <span ng-show="document.isRatified" class="label label-default">ratified</span>
+						 </span>
+					 </span>
               </div>
               <div ng-switch-default class="reference-record">
                 <span class="rec-title">{{document.schema}}</span>
                 <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
-                <span ng-show="document.source">| <span >Country:</span><span class="rowDetails" > {{document.source}} </span></span>
+					 <span ng-show="document.source">
+						 | <span>Country:</span>
+						 <span class="rowDetails" style="border: dotted 1px gray; padding-bottom: 2px;">
+							 <span>{{document.source}}</span>
+							 <span ng-show="document.isParty" class="label label-success">party</span>
+							 <span ng-show="document.isSignatory" class="label label-info">signed</span>
+							 <span ng-show="document.isRatified" class="label label-default">ratified</span>
+						 </span>
+					 </span>
               </div>
             </div>
             </span>

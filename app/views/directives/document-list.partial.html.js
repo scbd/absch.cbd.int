@@ -43,8 +43,6 @@ app.directive('documentList', function ($http) {
 
                 $scope.load = function(item,displayDetails) {
                       
-                      console.log($scope.documents);
-
                       //occours when a user actions collapses the detail section.
                       if(!displayDetails)                     
                           return;
@@ -151,6 +149,20 @@ app.directive('documentList', function ($http) {
                     output.identifier_s = document.identifier_s;
                     output.doc = document;
                     output.createdDateOn = document.createdDate_dt;
+
+						  //Jason's code. gets a list of countries to find out if they are ratified or what not. TODO: not do this. countries should exist on a high level scope, so I don't have to ajax it. Or there should be a cache. Also use underscore for algorithms.
+						  $http.get('/api/v2013/countries', {cache: true}).then(function(response) {
+							  var countries = response.data;
+							  for(var i=0; i!=countries.length; ++i)
+							  		if(countries[i].name.en == output.source) {
+									  var treaties = countries[i].treaties;
+									  output.isParty = treaties.XXVII8.party;
+									  output.isSignatory = treaties.XXVII8b.signature;
+									  output.isRatified = treaties.XXVII8b.instrument == "ratification" || treaties.XXVII8b.instrument == "accession" || treaties.XXVII8b.instrument == "acceptance";
+									  console.log(output);
+									}
+						  });
+
                    
                     output.cssRecordClass="referenceRecords";
                      if(document.orgperson_s) {
