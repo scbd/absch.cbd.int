@@ -26,6 +26,18 @@ define(['app',
         // $scope.queryDate       = '*:*';
         $scope.queryKeywords   = '*:*';
         $scope.displayDetails = false;
+
+		    $scope.sortBy = '';
+		    $scope.sortOptions = [
+          { label: 'Date Published', value: 'createdDate_dt', },
+          { label: 'Title', value: 'title_t', },
+          { label: 'Country', value: 'government_EN_T', },
+        ];
+        $scope.sortResults = function() {
+          console.log('sort by: ', $scope.sortBy);
+          query();
+        };
+
         $scope.rawDocs = [];
 
 
@@ -76,6 +88,8 @@ define(['app',
                 'rows': $scope.itemsPerPage,
                 'cb': new Date().getTime()
             };
+            if($scope.sortBy)
+              queryParameters.sort = $scope.sortBy + ' desc, ' + queryParameters.sort;
            
             if (queryCanceler) {
                 console.log('trying to abort pending request...');
@@ -91,7 +105,6 @@ define(['app',
                  $scope.rawDocs = [];
                  $scope.rawDocs = data.response.docs;
                  $scope.documentCount   = data.response.numFound;
-                
 
                 if(!$scope.schemas) {
                     var queryFacetsParameters = {
