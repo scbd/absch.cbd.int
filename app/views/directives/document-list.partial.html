@@ -38,6 +38,10 @@
   }
 
   .label-party{font-size:10px;}
+  .rec-title{
+    width:98%;
+    top:-5px !important;
+  }
  </style>
  
   <ul class="pagination pull-right" ng-show='showPagination'>
@@ -83,7 +87,7 @@
                   class="pull-right" style="padding:0px 3px;color:#999;"><i class="glyphicon glyphicon-new-window"></i>
               </a>
               <div ng-switch-when="MEASURE" class="national-record">
-                <div style="width:98%;top:-5px" class="rec-title">Legislative, administrative or policy measures</div>
+                <div class="rec-title">Legislative, administrative or policy measures</div>
                 
                 <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
                 <span ng-show="document.jusrisdiction"><span >jusrisdiction:</span>  <span class="rowDetails">{{document.jusrisdiction}} </span></span>
@@ -98,7 +102,7 @@
 					 </span>
               </div>
               <div ng-switch-when="AUTHORITY" class="national-record">
-                <span class="rec-title">Competent National Authority</span>
+                <div class="rec-title">Competent National Authority</div>
                 <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
 					 <span ng-show="document.source">
 						 | <span>Country:</span>
@@ -111,7 +115,7 @@
                 <span ng-show="document.jusrisdiction">| <span >jusrisdiction:</span>  <span class="rowDetails">{{document.jusrisdiction | lstring:locale}} </span></span>
               </div>
               <div ng-switch-when="ABSCHECKPOINT" class="national-record">
-                <span class="rec-title">checkpoint</span>
+                <div class="rec-title">checkpoint</div>
                 <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
                 <!-- <span ng-show="document.informAllAuthorities">| <span >inform All Authorities :</span>  <span class="rowDetails" > {{document.informAllAuthorities | yesno}} </span></span> -->
 					 <span ng-show="document.source">
@@ -123,19 +127,19 @@
                 <span ng-show="document.jusrisdiction">| <span >jusrisdiction:</span>  <span class="rowDetails">{{document.jusrisdiction| lstring:locale}} </span></span>
               </div>
               <div ng-switch-when="ABSPERMIT" class="national-record">
-                <span class="rec-title">Internationally Recognized Certificate of Compliance</span>
+                <div class="rec-title">Internationally Recognized Certificate of Compliance</div>
                 <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
                 <span ng-show="document.usage"><span >usage:</span>  <span class="rowDetails" > {{document.usage| lstring:locale}} </span></span>
                 <span ng-show="document.keywords">| <span >keywords:</span>  <span class="rowDetails">{{document.keywords| lstring:locale}} </span></span>
               </div>
               <div ng-switch-when="ABSCHECKPOINTCOMMUNIQUE" class="national-record">
-                <span class="rec-title">Checkpoint Communiqué</span>
+                <div class="rec-title">Checkpoint Communiqué</div>
                 <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
                 <span ng-show="document.originCountries">| <span >origin Countries:</span>
                 <span class="rowDetails" > {{document.originCountries| lstring:locale}}</span></span>
               </div>
               <div ng-switch-when="DATABASE" class="national-record">
-                <span class="rec-title">National datasource</span>
+                <div class="rec-title">National datasource</div>
                 <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
 					 <span ng-show="document.source">
 						 | <span>Country:</span>
@@ -145,7 +149,7 @@
 					 </span>
               </div>
               <div ng-switch-when="RESOURCE" class="reference-record">
-                <span class="rec-title">virtual library record </span>
+                <div class="rec-title">virtual library record </div>
                 <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
                 <span ng-show="document.types"> <span >type:</span>  <span class="rowDetails" > {{document.types}} </span>
                 </span>
@@ -154,20 +158,20 @@
                 <span ng-show="document.Regions">| <span >countries:</span>  <span class="rowDetails" > {{document.Regions}} </span> </span>
               </div>
               <div ng-switch-when="MEETING" class="reference-record">
-                <span class="rec-title">meeting</span>
+                <div class="rec-title">meeting</div>
                 <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>                
                 <span ng-show="document.startDate_dt">| <span >Date:</span>  <span class="rowDetails" > {{document.startDate_dt}} </span> </span>
                 <span ng-show="document.eventCity">| <span >City:</span>  <span class="rowDetails" > {{document.eventCity}} </span> </span>
                 <span ng-show="document.eventCountry">| <span >Country:</span>  <span class="rowDetails" > {{document.eventCountry | lstring:locale}} </span> </span>                
               </div>
               <div ng-switch-when="NOTIFICATION" class="reference-record">
-                <span class="rec-title">notification</span>
+                <div class="rec-title">notification</div>
                 <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
                 <span style="color:#666;font-weight:bold;" > | {{document.doc.reference_s}} </span>
                 <span style="color:#666;font-weight:bold;" > | {{formatDate(document.date_dt)}} </span>
               </div>           
               <div ng-switch-when="FOCALPOINT" class="national-record">
-                <span class="rec-title">{{document.schema}}</span>
+                <div class="rec-title">{{document.schema}}</div>
 					 <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
 					 <span ng-show="document.source">
 						 | <span>Country:</span>
@@ -177,7 +181,7 @@
 					 </span>
               </div>
               <div ng-switch-default class="reference-record">
-                <span class="rec-title">{{document.schema}}</span>
+                <div class="rec-title">{{document.schema}}</div>
                 <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
 					 <span ng-show="document.source">
 						 | <span>Country:</span>
