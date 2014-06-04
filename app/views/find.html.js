@@ -113,7 +113,7 @@ define(['app',
                         'wt': 'json',
                         'rows': 0,		//limit
                         'facet': true,	//get counts back
-                        'facet.field': ['schema_s', 'government_s', 'aichiTarget_REL_ss', 'thematicArea_ss'],
+                        'facet.field': ['schema_s', 'government_s', 'aichiTarget_REL_ss', 'thematicAreas_ss'],
                         'facet.limit': 512
                     };
 
@@ -123,7 +123,7 @@ define(['app',
                         $scope.governments = readFacets2(data.facet_counts.facet_fields.government_s);
                         $scope.regions = readFacets2(data.facet_counts.facet_fields.government_ss);
                         $scope.aichiTargets = readFacets2(data.facet_counts.facet_fields.aichiTarget_REL_ss);
-                        $scope.thematicAreas = readFacets2(data.facet_counts.facet_fields.thematicArea_ss);
+                        $scope.thematicAreas = readFacets2(data.facet_counts.facet_fields.thematicAreas_ss);
                         //console.log(data.facet_counts.facet_fields);
                         //console.log($scope.thematicAreas);
 
