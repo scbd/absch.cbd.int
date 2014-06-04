@@ -41,8 +41,7 @@ app.directive("editAbsPermit", [ function () {
 
 				if(identifier) {
 					qDocument = editFormUtility.load(identifier, "absPermit");
-
-
+					
 				}
 				else {
 					qDocument = {
@@ -57,9 +56,14 @@ app.directive("editAbsPermit", [ function () {
 
 				$q.when(qDocument).then(function(doc) {
 
+					delete doc.provider;
+					delete doc.informedConsent;
+					
 					$scope.tab    = "edit";
 					$scope.status = "ready";
 					$scope.document = doc;
+
+					
 
 				}).catch(function(err) {
 

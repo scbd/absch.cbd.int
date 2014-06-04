@@ -22,7 +22,7 @@ app.directive("fieldEmbedContact", [ function () {
 
 			$scope.multiple = $attrs.multiple!==undefined;
 			$scope.showFilter = $attrs.showFilter!==undefined;
-			console.log($scope.showFilter)
+			
 			var modalEdit = $element.find("#editContact");
 
 			$scope.$watch("edition", function(val){
@@ -75,23 +75,18 @@ app.directive("fieldEmbedContact", [ function () {
 				var contacts = $scope.getContacts();
 
 				if(index<0 || index>=contacts.length) {		
-					var id = guid();	
-					var government = $scope.$root.user.government;		
+					var id = guid();						
 					$scope.edition = {
 						contact : {															
-									header: {
-												identifier: id,
+									header: {												
 												schema   : "contact",
 												languages: ["en"]
 											},
-									type: "organization" ,
-									government: government ? { identifier: government } : undefined,
+									type: "organization" ,									
 									source: id
 								  },
 						index   : -1
 					};
-
-					console.log($scope.edition);
 				}
 				else {
 
@@ -119,9 +114,14 @@ app.directive("fieldEmbedContact", [ function () {
 				if(contact.lastName  !==undefined && (!contact.lastName   || empty.test(contact.lastName  ))) delete contact.lastName;
 
 				//save the contact to db for furture use.
-				if(saveContact!=false)
-					saveContactDraft(contact);
-
+				if(saveContact!=false){
+					var cont = _.clone(contact)
+					saveContactDraft(cont);						
+				}			
+				
+				delete contact.government;
+				delete contact.header;
+					// console.log(contact);
 				if($scope.multiple) {
 
 					var contacts =  _.clone($scope.getContacts());
@@ -212,19 +212,19 @@ app.directive("fieldEmbedContact", [ function () {
 			}
 
 			saveContactDraft = function(contact){
-
-				return $q.when(contact).then(function(document)
-				{
-					if(!document)
+					if(!contact)
 						throw "Invalid document";
-
-					return editFormUtility.saveDraft(document);
-
-				}).catch(function(error){
-
-					console.log(error);
-
-				})
+					
+					var government = $scope.$root.user.government;	
+					if(!contact.header)	
+					{
+						contact.header = {schema   : "contact",languages: ["en"]};
+					}
+					contact.header.identifier = contact.source;
+					contact.government = government ? { identifier: government } : undefined;
+					
+					$q.when(editFormUtility.saveDraft(contact), function(contact){							
+					});
 			}
 
 			$scope.selectContact = function(contact){
