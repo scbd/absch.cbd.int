@@ -65,7 +65,7 @@
 
   		<div class="col-sm-12" >
 <div class="pull-right" style="width:30%" >
-                 <div angucomplete id="ex1" placeholder="Search countries" pause="100"  localdata="autocompleteData" minlength="1" inputclass="form-control form-control-small"   searchfields="title" selectedObject="selectedCountry" searchStr="searchText.$" titlefield="title"/>
+                 <div angucomplete id="ex1" placeholder="search country information" pause="100"  localdata="autocompleteData" minlength="1" inputclass="form-control form-control-small"   searchfields="title" selectedObject="selectedCountry" searchStr="searchText.$" titlefield="title"/>
                   </div>                  
 <div class="clearfix"></div>
   			<div class="panel-group" id="accordion">
@@ -73,11 +73,10 @@
 			  <div class="panel" ng-show="absch_nfp.response.numFound > 0">
 			        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
 			         <h4> 
-
-			       <!--  <i class="fa" ng-class="{'fa-caret-right':!collapse, 'fa-caret-down':collapse}"> -->
-			        <!--   <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span> -->
-			          <!-- <span style="color: #428BCA; font-weight: bold;font-size:120%;">ABSCH-NFP</span>  -->
+			          <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span>
+			          <span style="color: #428BCA; ">ABSCH-NFP</span> 
 			         <span style="color:#111;">ICNP ABS National Focal Points ({{nfpCount}})</span> 
+
 			         </h4> 
 			        </a>
 			    </div>
@@ -97,8 +96,8 @@
 			        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
 			         <h4> 
 
-			          <!-- <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span> -->
-			        <!--   <span style="color: #428BCA; font-weight: bold;font-size:120%;">ABSCH-CNA</span>  -->
+			          <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span>
+			          <span style="color: #428BCA; ">ABSCH-CNA</span> 
 			         <span style="color:#111;">Competent National Authority ({{nationalAuthority}})</span>
 			         </h4> 
 			        </a>
@@ -113,11 +112,11 @@
 			  <div class="panel">
 			        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
 			         <h4> 
-			         <div class="numberCircle1" style="padding-left:16px;">		         	
-			         	<!-- {{absch_nfp.response.numFound}} -->
-			         </div>
-			          <!-- <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span> -->
-			         <!--  <span style="color: #428BCA; font-weight: bold;font-size:120%;">ABSCH-MSR</span>  -->
+			         <!-- <div class="numberCircle1" style="padding-left:16px;">		         	
+			         	
+			         </div> -->
+			          <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span>
+			          <span style="color: #428BCA; ">ABSCH-MSR</span> 
 			         <span style="color:#111;">Legislative, administrative or policy measures on access and benefit-sharing ({{nationalMeasure}})</span>
 			         </h4>  
 			        </a>
@@ -133,12 +132,12 @@
 			  <div class="panel">
 			        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
 			         <h4> 
-			         <div class="numberCircle1" style="padding-left:16px;">		         	
-			         {{Permit}}	<!-- {{absch_nfp.response.numFound}} -->
-			         </div>
-			          <!-- <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span> -->
-			         <!--  <span style="color: #428BCA; font-weight: bold;font-size:120%;">ABSCH-IRCC</span> --> 
-			         <span style="color:#111;">Permit or its equivalent constituting an internationally recognized certificate of compliance</span>
+			        <!--  <div class="numberCircle1" style="padding-left:16px;">		         	
+			         {{Permit}}
+			         </div> -->
+			          <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span>
+			          <span style="color: #428BCA; ">ABSCH-IRCC</span> 
+			         <span style="color:#111;">Permit or its equivalent constituting an internationally recognized certificate of compliance ({{Permit}})</span>
 			         </h4>  
 			        </a>
 			    </div>
@@ -153,12 +152,12 @@
 			  <div class="panel">
 			        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
 			         <h4> 
-			         <div class="numberCircle1" style="padding-left:16px;">		         	
-			         {{absCheckpoint}}	<!-- {{absch_nfp.response.numFound}} -->
-			         </div>
-			          <!-- <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span> -->
-			          <!-- <span style="color: #428BCA; font-weight: bold;font-size:120%;">ABSCH-CP</span>  -->
-			         <span style="color:#111;">Checkpoint</span>
+			        <!--  <div class="numberCircle1" style="padding-left:16px;">		         	
+			         {{absCheckpoint}}	
+			         </div> -->
+			          <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span>
+			          <span style="color: #428BCA; ">ABSCH-CP</span> 
+			         <span style="color:#111;">Checkpoint ({{absCheckpoint}})</span>
 			         </h4>  
 			        </a>
 			    </div>
@@ -173,12 +172,12 @@
 			  <div class="panel">
 			        <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
 			         <h4> 
-			         <div class="numberCircle1" style="padding-left:16px;">		         	
-			         {{absCheckpointCommunique}}	<!-- {{absch_nfp.response.numFound}} -->
-			         </div>
-			          <!-- <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span> -->
-			          <!-- <span style="color: #428BCA; font-weight: bold;font-size:120%;">ABSCH-CPC</span>  -->
-			         <span style="color:#111;">Checkpoint Communiqué</span>
+			        <!--  <div class="numberCircle1" style="padding-left:16px;">		         	
+			         {{absCheckpointCommunique}}	
+			         </div> -->
+			          <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span>
+			          <span style="color: #428BCA; ">ABSCH-CPC</span> 
+			         <span style="color:#111;">Checkpoint Communiqué ({{absCheckpointCommunique}})</span>
 			         </h4>  
 			        </a>
 			    </div>
@@ -193,11 +192,12 @@
 			  <div class="panel">
 			        <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">
 			         <h4> 
-			         <div class="numberCircle1" style="padding-left:16px;">		         	
+			         <!-- <div class="numberCircle1" style="padding-left:16px;">		         	
 			         {{database}}	
-			         </div>
-			         <!--  <span style="color: #428BCA; font-weight: bold;font-size:120%;">ABSCH-NDB</span>  -->
-			         <span style="color:#111;">ABS National Databases and Websites</span>
+			         </div> -->
+			         <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span>
+			          <span style="color: #428BCA; ">ABSCH-NDB</span> 
+		         <span style="color:#111;">ABS National Databases and Websites ({{database}})</span>
 			         </h4>  
 			        </a>
 			    </div>
@@ -215,7 +215,7 @@
 			         <div class="numberCircle1" style="padding-left:16px;">		         	
 			         {{resource}}	
 			         </div>
-			          <span style="color: #428BCA; font-weight: bold;font-size:120%;">ABSCH-VLR</span> 
+			          <span style="color: #428BCA; ">ABSCH-VLR</span> 
 			         <span style="color:#111;">Virtual Library Record</span>
 			         </h4>  
 			        </a>

@@ -1,4 +1,7 @@
 <div style="padding: 0px; margin: 0;">
+
+
+
   <style type="text/css">
   .result{
   }
@@ -33,6 +36,8 @@
   .national-record span{
     padding-left: 5px;
   }
+
+  .label-party{font-size:10px;}
  </style>
  
   <ul class="pagination pull-right" ng-show='showPagination'>
@@ -59,6 +64,10 @@
     </li>
   </ul>
   <div class="clearfix"></div>
+
+             
+
+
   <div ng-repeat="document in transformedDocuments | filter:advanceFilter | filter:filterCategory " style="
     padding:10px 0 10px 0;">
     <!--  {{document}} -->
@@ -80,28 +89,21 @@
                 <span ng-show="document.jusrisdiction"><span >jusrisdiction:</span>  <span class="rowDetails">{{document.jusrisdiction}} </span></span>
                 <span ng-show="document.type">| <span >type:</span>  <span class="rowDetails" > {{document.type}} </span></span>
                <span ng-show="document.status">| <span >Status:</span>  <span class="rowDetails" ng-class="{'notLegallyBinded' :  document.status !='Legally binding'}"  > {{document.status}} </span></span>
-    					 <span ng-show="document.source">
-    						 | <span>Country:</span>
-    						 <span class="rowDetails" style="border: dotted 1px gray; padding-bottom: 2px;">
-    							 <span>{{document.source}}</span>
-    							 <span ng-show="document.isParty" class="label label-success">party</span>
-    							 <span ng-show="document.isSignatory" class="label label-info">signed</span>
-    							 <span ng-show="document.isRatified" class="label label-default">ratified</span>
-    						 </span>
-    					 </span>
-            
-
+					 <span ng-show="document.source">
+						 | <span>Country:</span>
+						 <span class="rowDetails" >
+							 <span class="label label-party" ng-class="{'label-info':document.isSignatory, 'label-primary':document.isRatified, 'label-default':!document.isRatified}">{{document.source}}</span>
+							 
+						 </span>
+					 </span>
               </div>
               <div ng-switch-when="AUTHORITY" class="national-record">
                 <span class="rec-title">Competent National Authority</span>
                 <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
 					 <span ng-show="document.source">
 						 | <span>Country:</span>
-						 <span class="rowDetails" style="border: dotted 1px gray; padding-bottom: 2px;">
-							 <span>{{document.source}}</span>
-							 <span ng-show="document.isParty" class="label label-success">party</span>
-							 <span ng-show="document.isSignatory" class="label label-info">signed</span>
-							 <span ng-show="document.isRatified" class="label label-default">ratified</span>
+						 <span class="rowDetails" >
+							  <span class="label label-party" ng-class="{'label-info':document.isSignatory, 'label-primary':document.isRatified, 'label-default':!document.isRatified}">{{document.source}}</span>
 						 </span>
 					 </span>
                 <span ng-show="document.responsibleForAll">| <span >responsible for all :</span>  <span class="rowDetails" > {{document.responsibleForAll | yesno}} </span></span>
@@ -114,11 +116,8 @@
                 <!-- <span ng-show="document.informAllAuthorities">| <span >inform All Authorities :</span>  <span class="rowDetails" > {{document.informAllAuthorities | yesno}} </span></span> -->
 					 <span ng-show="document.source">
 						 | <span>Country:</span>
-						 <span class="rowDetails" style="border: dotted 1px gray; padding-bottom: 2px;">
-							 <span>{{document.source}}</span>
-							 <span ng-show="document.isParty" class="label label-success">party</span>
-							 <span ng-show="document.isSignatory" class="label label-info">signed</span>
-							 <span ng-show="document.isRatified" class="label label-default">ratified</span>
+						 <span class="rowDetails" >
+							    <span class="label label-party" ng-class="{'label-info':document.isSignatory, 'label-primary':document.isRatified, 'label-default':!document.isRatified}">{{document.source}}</span>
 						 </span>
 					 </span>
                 <span ng-show="document.jusrisdiction">| <span >jusrisdiction:</span>  <span class="rowDetails">{{document.jusrisdiction| lstring:locale}} </span></span>
@@ -140,11 +139,8 @@
                 <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
 					 <span ng-show="document.source">
 						 | <span>Country:</span>
-						 <span class="rowDetails" style="border: dotted 1px gray; padding-bottom: 2px;">
-							 <span>{{document.source}}</span>
-							 <span ng-show="document.isParty" class="label label-success">party</span>
-							 <span ng-show="document.isSignatory" class="label label-info">signed</span>
-							 <span ng-show="document.isRatified" class="label label-default">ratified</span>
+						 <span class="rowDetails" >
+							    <span class="label label-party" ng-class="{'label-info':document.isSignatory, 'label-primary':document.isRatified, 'label-default':!document.isRatified}">{{document.source}}</span>
 						 </span>
 					 </span>
               </div>
@@ -175,11 +171,8 @@
 					 <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
 					 <span ng-show="document.source">
 						 | <span>Country:</span>
-						 <span class="rowDetails" style="border: dotted 1px gray; padding-bottom: 2px;">
-							 <span>{{document.source}}</span>
-							 <span ng-show="document.isParty" class="label label-success">party</span>
-							 <span ng-show="document.isSignatory" class="label label-info">signed</span>
-							 <span ng-show="document.isRatified" class="label label-default">ratified</span>
+						 <span class="rowDetails" >
+							  <span class="label label-party" ng-class="{'label-info':document.isSignatory, 'label-primary':document.isRatified, 'label-default':!document.isRatified}">{{document.source}}</span>
 						 </span>
 					 </span>
               </div>
@@ -188,11 +181,8 @@
                 <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
 					 <span ng-show="document.source">
 						 | <span>Country:</span>
-						 <span class="rowDetails" style="border: dotted 1px gray; padding-bottom: 2px;">
-							 <span>{{document.source}}</span>
-							 <span ng-show="document.isParty" class="label label-success">party</span>
-							 <span ng-show="document.isSignatory" class="label label-info">signed</span>
-							 <span ng-show="document.isRatified" class="label label-default">ratified</span>
+						 <span class="rowDetails" >
+							    <span class="label label-party" ng-class="{'label-info':document.isSignatory, 'label-primary':document.isRatified, 'label-default':!document.isRatified}">{{document.source}}</span>
 						 </span>
 					 </span>
               </div>

@@ -6,7 +6,7 @@
        
         <div class="row">
             <div class="col-xs-3">
-                 <h1>Search Information</h1>
+                <h1>Search&nbsp;Information</h1>              
                  
                 <input type="text" ng-model="keyword" placeholder=" Keyword " class="form-control keyword" style="height:24px;">
 
@@ -16,6 +16,10 @@
 
                 <search-filter-themes title='Thematic Areas' ng-model='thematicAreas' field='thematicArea_REL_ss' query='queryTheme'></search-filter-themes>
 
+                 <div class="form-group">
+                  <label for="sortby">Sort By</label>
+                  <select ng-options="obj.value as obj.label for obj in sortOptions" ng-model="sortBy" class="form-control" ng-change="sortResults()" id="sortby"></select>
+                </div>
                 
             </div>
 
