@@ -30,6 +30,9 @@
   background-color:#dfa162;
   width:3px;
   }
+  .national-record span{
+    padding-left: 5px;
+  }
  </style>
  
   <ul class="pagination pull-right" ng-show='showPagination'>
@@ -71,20 +74,22 @@
                   class="pull-right" style="padding:0px 3px;color:#999;"><i class="glyphicon glyphicon-new-window"></i>
               </a>
               <div ng-switch-when="MEASURE" class="national-record">
-                <span class="rec-title">Legislative, administrative or policy measures</span>
+                <div style="width:98%;top:-5px" class="rec-title">Legislative, administrative or policy measures</div>
+                
                 <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
                 <span ng-show="document.jusrisdiction"><span >jusrisdiction:</span>  <span class="rowDetails">{{document.jusrisdiction}} </span></span>
                 <span ng-show="document.type">| <span >type:</span>  <span class="rowDetails" > {{document.type}} </span></span>
                <span ng-show="document.status">| <span >Status:</span>  <span class="rowDetails" ng-class="{'notLegallyBinded' :  document.status !='Legally binding'}"  > {{document.status}} </span></span>
-					 <span ng-show="document.source">
-						 | <span>Country:</span>
-						 <span class="rowDetails" style="border: dotted 1px gray; padding-bottom: 2px;">
-							 <span>{{document.source}}</span>
-							 <span ng-show="document.isParty" class="label label-success">party</span>
-							 <span ng-show="document.isSignatory" class="label label-info">signed</span>
-							 <span ng-show="document.isRatified" class="label label-default">ratified</span>
-						 </span>
-					 </span>
+    					 <span ng-show="document.source">
+    						 | <span>Country:</span>
+    						 <span class="rowDetails" style="border: dotted 1px gray; padding-bottom: 2px;">
+    							 <span>{{document.source}}</span>
+    							 <span ng-show="document.isParty" class="label label-success">party</span>
+    							 <span ng-show="document.isSignatory" class="label label-info">signed</span>
+    							 <span ng-show="document.isRatified" class="label label-default">ratified</span>
+    						 </span>
+    					 </span>
+            
 
               </div>
               <div ng-switch-when="AUTHORITY" class="national-record">

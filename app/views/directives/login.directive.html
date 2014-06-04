@@ -8,6 +8,15 @@
                     <a href="https://accounts.cbd.int/password/reset" style="text-decoration:none;color:#666;" target="_new">Forgot password?</a>
                 </span>
             </h2>
+            <div class="alert alert-danger" ng-show="errorInvalid">
+                <strong>Oops! Login failed.</strong></br>
+                The email address and password combination you entered is incorrect.
+            </div>
+
+            <div class="alert alert-danger" ng-show="errorTimeout">
+                <strong>Aw, Snap! Operation failed.</strong></br>
+                The service is not available. Please try again later.
+            </div>
             <form name="form" ng-submit="doSignIn()" class="ng-pristine ng-invalid ng-invalid-required" >
                 <div class="form-group">
                     <div class="input-group" >

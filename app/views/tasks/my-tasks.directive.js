@@ -28,7 +28,6 @@ app.directive("myTasks", ['authHttp', function ($http) {
 			//
 			//==============================
 			function load() {
-				console.log('my task list');
 				IWorkflows.query(query).then(function(workflows){
 
 					var tasks  = [];

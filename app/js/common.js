@@ -7,7 +7,7 @@ define(['app'], function(app){
 				var queryFields = 'fl=identifier_s,schema_s,createdDate_dt,createdByEmail_s,createdBy_s,updatedDate_dt,updatedByEmail_s,updatedBy_s,url_ss,';
 
 				if(schema=="FOCALPOINT"){
-				  queryFields += 'description_EN_t,government_EN_t,organization_EN_t,text_EN_txt,title_EN_t,treaty_CEN_ss,type_CEN_ss';
+				  queryFields += 'description_EN_t,government_EN_t,organization_EN_t,text_EN_txt,title_EN_t,treaty_CEN_ss,type_CEN_ss,email_s,telephone_s';
 				}
 				else if (schema=="MEETING"){
 				queryFields += 'symbol_s,startDate_dt,endDate_dt,eventCountry_CEN_s,title_s,eventCity_s,text_EN_txt,themes_CEN_ss,thematicAreas_CEN_ss,thematicAreas_ss';

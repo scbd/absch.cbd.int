@@ -27,11 +27,11 @@ app.directive('documentList', function ($http) {
               $scope.formatDate = function formatDate (date) {
                     return moment(date).format('MMMM Do YYYY');
               }; 
-              console.log($scope.advanceFilter) ;
+              //console.log($scope.advanceFilter) ;
               if($scope.advanceFilter && $scope.advanceFilter.$==null)
               {
                 $scope.advanceFilter.$ = '';
-               console.log($scope.advanceFilter) ;
+               // console.log($scope.advanceFilter) ;
               }
 
               $scope.loaded = false;
@@ -159,20 +159,20 @@ app.directive('documentList', function ($http) {
 									  output.isParty = treaties.XXVII8.party;
 									  output.isSignatory = treaties.XXVII8b.signature;
 									  output.isRatified = treaties.XXVII8b.instrument == "ratification" || treaties.XXVII8b.instrument == "accession" || treaties.XXVII8b.instrument == "acceptance";
-									  console.log(output);
+									  // console.log(output);
 									}
 						  });
 
                    
                     output.cssRecordClass="referenceRecords";
-                     if(document.orgperson_s) {
-                      var obj = JSON.parse(document.orgperson_s);
-                      console.log(obj);
-                      obj.forEach(function(org){
-                        console.log(org.organization.en);
-                      })
+                     // if(document.orgperson_s) {
+                     //  var obj = JSON.parse(document.orgperson_s);
+                     // // console.log(obj);
+                     //  obj.forEach(function(org){
+                     //   // console.log(org.organization.en);
+                     //  })
                         
-                     }
+                     // }
                     if(document.schema_s=='focalPoint') {
                         output.description  = document.function_t||'';
                         output.description += (document.function_t && document.department_t) ? ', ' : '';
@@ -209,6 +209,11 @@ app.directive('documentList', function ($http) {
                         output.dates = formatDate(document.startDate_s) + ' to ' + formatDate(document.endDate_s);
                         output.venue = document.eventCity_EN_t + ', ' + document.eventCountry_EN_t;
                     }
+
+                     if(document.jurisdiction_EN_t){
+                          output.jusrisdiction = document.jurisdiction_EN_t;
+                        }
+
                     if(document.schema_s=='resource') {
                         output.Year = document.publicationYear_is;
                         output.Types = getString(document.resourceTypes_CEN_ss, locale);
@@ -216,17 +221,24 @@ app.directive('documentList', function ($http) {
                         output.Languages = getString(document.languages_CEN_ss, locale);                        
                     }else if(document.schema_s=='authority') {
                         output.responsibleForAll = document.responsibleForAll_b;
-                        output.jusrisdiction = document.jurisdiction_EN_t;                        
+                        // output.jusrisdiction = document.jurisdiction_EN_t;                        
                         output.grType = (document.geneticResourceTypes_ss );
                         output.cssRecordClass="nationalRecords";
                     }
                     else if(document.schema_s=='absCheckpoint') {
-                        output.jusrisdiction = document.jurisdiction_EN_t;   
+                        // output.jusrisdiction = document.jurisdiction_EN_t;   
                         output.informAllAuthorities = (document.informAllAuthorities_b);  
                         output.cssRecordClass="nationalRecords";
                     }
                     else if(document.schema_s=='absPermit') {
-                        output.usage = (document.usage_CEN_ss);
+                      
+                        if(document.usage_CEN_ss){
+                          output.usage = '';
+                          document.usage_CEN_ss.forEach(function(usage){                           
+                            output.usage +=  (output.usage.length > 0 ? "," : "") +  JSON.parse(usage).en;
+                          });
+                        }
+                        // console.log(output.usage);
                         output.keywords = getString(document.keywords_CEN_ss, locale);
                         output.cssRecordClass="nationalRecords";
                     }
@@ -236,11 +248,12 @@ app.directive('documentList', function ($http) {
                     }
                     else if(document.schema_s=='measure' || document.schema_s=='focalPoint' || document.schema_s=='database') {
                         output.cssRecordClass="nationalRecords";
+                        
+                        if(document.type_EN_t){
+                          output.type = document.type_EN_t;
+                        }
 
                         if(document.status_EN_t){
-                         //  console.log(document.status_EN_t);
-                         // if(document.status_EN_t != "Legally binding")
-                         //    output.cssRecordClass="notLegallyBinded";
                           output.status = document.status_EN_t;
                         }
                     }                    
