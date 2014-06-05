@@ -29,9 +29,9 @@
 	            <i ng-show="filterBy==isCNA" class="glyphicon glyphicon-ok"></i> CNA  <span class="badge badge-default" style="color:#999">{{(getContacts() | filter:isCNA).length}}</span></span>
 	            <input type="text" ng-model="keywords" placeholder=" Keyword " class="form-control keyword" style="width:160px;display:inline;">
 	          </div>
-	          <div class="col-xs-2 pull-right" ng-show="showAddButton()">
+	          <div class="col-xs-2 pull-right" ng-show="showButtons()">
 	            <span style="font-size: 16px; color: white;margin:0;padding:0;float:right;">
-	            <a ng-click="closeContact()" class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span> Add new</a></span>
+	            <a ng-click="editContact(-1)" class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span> Add new</a></span>
 	          </div>
 	          <br/><br/>
 	    </div>
