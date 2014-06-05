@@ -8,6 +8,7 @@ lib-cov
 *.gz
 *.swp
 .vimrc
+*.DS_STORE
 
 pids
 logs

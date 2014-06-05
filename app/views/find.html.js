@@ -3,6 +3,7 @@ define(['app',
     '../views/forms/view/record-loader.directive.html.js',
     '../views/find_schemas.partial.html.js',
     '../views/find_countries.partial.html.js',
+    '../views/search-filter-regions.js',
     '../views/find_facets.partial.html.js',
     '../views/find_themes.partial.html.js',    
     '../views/directives/search-filter-dates.partial.html.js',
@@ -23,6 +24,7 @@ define(['app',
         $scope.queryGovernment = '*:*';
         // $scope.queryTargets    = '*:*';
         $scope.queryTheme      = '*:*';
+        $scope.queryRegion      = '*:*';
         // $scope.queryDate       = '*:*';
         $scope.queryKeywords   = '*:*';
         $scope.displayDetails = false;
@@ -77,6 +79,8 @@ define(['app',
             }
             if($scope.queryGovernment) q += ' AND (' + $scope.queryGovernment + ')';
             if($scope.queryTheme)      q += ' AND (' + $scope.queryTheme + ')';
+              console.log('region: ', $scope.queryRegion);
+            if($scope.queryRegion)      q += ' AND (' + $scope.queryRegion + ')';
 
             var queryParameters = {
                 'q': q,
@@ -171,6 +175,7 @@ define(['app',
         $scope.$watch('queryGovernment', function() { $scope.currentPage=0; refresh(); });
         $scope.$watch('queryTargets',    function() { $scope.currentPage=0; refresh(); });
         $scope.$watch('queryTheme',      function() { $scope.currentPage=0; refresh(); });
+        $scope.$watch('queryRegion',      function() { $scope.currentPage=0; refresh(); });
         $scope.$watch('queryDate',       function() { $scope.currentPage=0; refresh(); });
         $scope.$watch('keyword',         function() { $scope.currentPage=0; refresh(); });    
 

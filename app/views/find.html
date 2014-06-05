@@ -16,11 +16,13 @@
 
                 <search-filter-themes title='Thematic Areas' ng-model='thematicAreas' field='thematicAreas_REL_ss' query='queryTheme'></search-filter-themes>
 
+                <search-filter-regions title="Regions" ng-model="regions" field="government_REL_ss" query="queryRegion"></search-filter-regions>
+
                  <div class="form-group">
                   <label for="sortby">Sort By</label>
                   <select ng-options="obj.value as obj.label for obj in sortOptions" ng-model="sortBy" class="form-control" ng-change="sortResults()" id="sortby"></select>
                 </div>
-                
+
             </div>
 
             <div class="col-xs-9">
