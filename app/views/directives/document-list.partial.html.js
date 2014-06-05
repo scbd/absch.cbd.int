@@ -158,7 +158,7 @@ app.directive('documentList', function ($http) {
 									  var treaties = countries[i].treaties;
 									  output.isParty = treaties.XXVII8.party;
 									  output.isSignatory = treaties.XXVII8b.signature;
-									  output.isRatified = treaties.XXVII8b.instrument == "ratification" || treaties.XXVII8b.instrument == "accession" || treaties.XXVII8b.instrument == "acceptance";
+									  output.isRatified = treaties.XXVII8b.instrument == "ratification" || treaties.XXVII8b.instrument == "accession" || treaties.XXVII8b.instrument == "acceptance" ||treaties.XXVII8b.instrument == "approval";
 									  // console.log(output);
 									}
 						  });
