@@ -1,0 +1,30 @@
+<div>
+  <h3>
+    <a ng-click="showSelect=!showSelect" ng-href="#">
+      <i class="fa" ng-class="{'fa-caret-right':!showSelect, 'fa-caret-down':showSelect}"></i>
+      <span> &nbsp; {{title | lstring:locale}}
+    </a>
+  </h3>
+  <div class="panel-group" id="accordion" ng-hide="!showSelect">
+    <div class="panel panel-default" ng-repeat="class in terms">
+      <div class="panel-heading">
+        <h4 class="panel-title" style="margin:0">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" ng-href="#{{class.identifier}}">{{class.title.en}}</a>
+        </h4>
+      </div>
+      <div id="{{class.identifier}}" class="panel-collapse" ng-class="{ true:'in', false:'collapse' }[$index==0]">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-sm-12" ng-repeat="region in class.narrowerTerms">
+              <div class="checkbox" style="margin-top:0;margin-bottom:0">
+                <label><input type="checkbox" ng-model="region.selected" ng-click="refresh(region)"> {{region.title.en}} ({{region.count}})</label>
+              </div>
+              <div class="checkbox" style="margin-top:0;margin-bottom:0;margin-left:20px" ng-repeat="region2 in region.narrowerTerms">
+                <label><input type="checkbox" ng-model="region2.selected" ng-click="refresh(region2)">{{region2.title.en}} ({{region2.count}})</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
