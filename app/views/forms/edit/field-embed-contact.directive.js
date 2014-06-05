@@ -1,8 +1,5 @@
-define(['app',
-	// 'app/js/directives/forms/form-controls.js',
-	// './km-form-buttons.js',
-	// './editFormUtility.js'
-	], function (app) {
+define(['app', '/app/js/common.js'
+	], function (app,commonjs) {
 
 app.directive("fieldEmbedContact", [ function () {
 
@@ -36,8 +33,8 @@ app.directive("fieldEmbedContact", [ function () {
 
 			
         },
-		controller : ["$scope", "authHttp", "$window", "$filter", "underscore", "guid", "editFormUtility", "$q","IStorage",
-		 function ($scope, $http, $window, $filter, _, guid, editFormUtility, $q, storage)
+		controller : ["$scope", "authHttp", "$window", "$filter", "underscore", "guid", "editFormUtility", "$q","IStorage","commonjs",
+		 function ($scope, $http, $window, $filter, _, guid, editFormUtility, $q, storage,commonjs)
 		{
 			var workingContacts = null;
 			$scope.buttonText = "Show existing";
@@ -157,13 +154,47 @@ app.directive("fieldEmbedContact", [ function () {
 				if(index<0 || index>=contacts.length)
 					return;
 
-				contacts.splice(index,1);
+				// if showfilter then permanently delete the record from draft.
+				if($scope.showFilter){					
+									    
+				    $("#myModal").modal({ 
+				      "backdrop"  : "static",
+				      "keyboard"  : true,
+				      "show"      : true  
+				    });
+			        $("#deleteOk").on("click", function(e) {
+			            var contact = contacts[index];
+			            console.log(contact);
+						storage.drafts.delete(contact.header.identifier);
 
-				if($scope.multiple)
-					$scope.model = contacts;
-				else
-					$scope.model = _.first(contacts);
+						contacts.splice(index,1);
+						if($scope.multiple)
+							$scope.model = contacts;
+						else
+							$scope.model = _.first(contacts);
+			            
+			            $("#myModal").modal('hide');     
+			        });
+				    $("#myModal").on("hide", function() {  
+				        $("#myModal a.btn").off("click");
+				    });
+				    
+				    $("#myModal").on("hidden", function() { 
+				        $("#myModal").remove();
+				    });
+
+				}
+				else{
+					contacts.splice(index,1);
+					if($scope.multiple)
+						$scope.model = contacts;
+					else
+						$scope.model = _.first(contacts);
+				}
 			};
+
+			
+
 
 			//============================================================
 			//
@@ -253,6 +284,17 @@ app.directive("fieldEmbedContact", [ function () {
 			}
 			$scope.isCNA=function(entity){
 				return entity && entity.type == "CNA";
+			}
+
+			$scope.showButtons=function(){
+				
+				return	commonjs.isUserInRole('AbsPublishingAuthorities')|| 
+						commonjs.isUserInRole('AbsNationalAuthorizedUser')||  
+						commonjs.isUserInRole('AbsNationalFocalPoint')|| 
+						commonjs.isUserInRole('abschiac') ||
+						commonjs.isUserInRole('ABS-CH Administrator') ||
+						commonjs.isUserInRole('Administrator');
+
 			}
 		}]
 	};

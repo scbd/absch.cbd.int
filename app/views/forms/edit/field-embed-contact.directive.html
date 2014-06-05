@@ -1,5 +1,20 @@
 ﻿<div>
-
+	<div id="myModal" class="modal fade" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <!-- dialog body -->
+	      <div class="modal-body">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        Are you sure you want to permanently delete this contact?
+	      </div>
+	      <!-- dialog buttons -->
+	      <div class="modal-footer">
+	      		<button type="button" id="deleteOk" class="btn btn-danger">OK</button>
+	      		<button type="button" data-dismiss="modal" class="btn btn-primary">Cancel</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 	<div class="row" ng-show="getContacts()">
 		<div class="row" ng-show="showFilter">
 	          <div class="col-xs-10" >
@@ -22,7 +37,7 @@
 	    </div>
 	  <div class="col-sm-12" ng-class="{'col-md-6' : getContacts().length>1, 'col-md-12' : getContacts().length<=1}" ng-repeat="contact in getContacts() | filter:filterBy | filter:keywords">
 		<div class="well" >
-			<div class="pull-right">
+			<div class="pull-right" ng-show="showButtons()">
 				<button type="button" class="btn btn-default" ng-click="deleteContact($index)"><i class="fa fa-trash-o"></i></button>
 				<button type="button" class="btn btn-default" ng-click="editContact($index)"  ><i class="fa fa-edit"></i></button>
 			</div>
@@ -30,8 +45,7 @@
 		</div>
 	  </div>
 	</div>							
-
-	<button class="btn btn-default" ng-click="editContact(-1)">
+	<button class="btn btn-default" ng-click="editContact(-1)" ng-show="showButtons()">
 	  {{caption||'ADD ORGANIZATION OR CONTACT »'}}
 	</button>
 
@@ -78,7 +92,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="row">						
+					<div class="row" >						
 						<div class="modal-footer">
 					      	<a type="button" class="btn btn-default" ng-click="closeContact()">Close</a>					        
 					    </div>

@@ -226,7 +226,9 @@ app.controller("RegisterController",
 
 					if(!$scope.contacts)
 						$scope.contacts = [];
-					//console.log(row.body);
+					//console.log(row);
+					if(!row.body.source && row.body.header)
+						row.body.source = row.body.header.identifier;
 					$scope.contacts.push(row.body)
 				}
 			})
