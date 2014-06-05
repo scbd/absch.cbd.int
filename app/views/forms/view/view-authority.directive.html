@@ -36,41 +36,56 @@
 
 		<div ng-show="document.phones">
 			<label>Phone numbers</label>
-			<ul class="km-value">
-				<li ng-repeat="item in document.phones">{{item}}</li>
-			</ul>
+			<div class="km-value" >
+				<ul class="list">
+					<li ng-repeat="item in document.phones">{{item}}</li>
+				</ul>
+			</div>
 		</div>
 
 		<div ng-show="document.faxes">
 			<label>Fax Numbers</label>
-			<ul class="km-value">
-				<li ng-repeat="item in document.faxes">{{item}}</li>
-			</ul>
+			<div class="km-value" >
+				<ul class="list">
+					<li ng-repeat="item in document.faxes">{{item}}</li>
+				</ul>			
+			</div>
 		</div>
 
 		<div ng-show="document.emails">
 			<label>Emails</label>
-			<ul class="km-value">
-				<li ng-repeat="item in document.emails"><a ng-href="mailto:{{item}}">{{item}}</a></li>
-			</ul>
+			<div class="km-value" >
+				<ul class="list">
+					<li ng-repeat="item in document.emails"><a ng-href="mailto:{{item}}">{{item}}</a></li>
+				</ul>
+			</div>
 		</div>
 
 		<div ng-show="document.websites">
 			<label>Web Sites</label>
 			<div class="km-value" ng-repeat="item in document.websites">
-				<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-				<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+				<ul class="list">
+					<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+					<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+				</ul>
 			</div>
 		</div>
-
-		<div ng-show="contacts">
-			<label>Contact person in the organization</label>
-			<div class="km-value" ng-repeat="contact in contacts">
-				<div view-contact-reference ng-model="contact" locale="locale"></div>
+		<div ng-show="document.absPolicyBasisForCompetency || contacts">
+			<legend>Legal, administrative or policy basis for the competence of the CNA</legend>
+			<div ng-show="contacts">
+				<label>Contact person in the organization</label>
+				<div class="km-value" ng-repeat="contact in contacts">
+					<div view-contact-reference ng-model="contact" locale="locale"></div>
+				</div>
+			</div>
+			<div ng-show="document.absPolicyBasisForCompetency">
+				<label>Additional information on the legal, administrative or policy basis for the competence of the CNA</label>
+				<div class="km-value">
+					{{document.absPolicyBasisForCompetency | lstring:locale}}</i>
+				</div>
 			</div>
 		</div>
-
-
+				
 		<div ng-show="document.absFunctions||document.absJurisdiction||document.absJurisdictionName||document.absGeneticResourceTypes||document.absGeneticResourceAreas||document.absResponsibilities">
 			<legend>ABS Responsibilities </legend>
 
@@ -96,30 +111,31 @@
 				<div class="km-value">{{document.absJurisdictionName | lstring:locale}}</div>
 			</div>
 
-			<div ng-show="document.absGeneticResourceTypes">
+			<!-- <div ng-show="document.absGeneticResourceTypes">
 				<label>According to the type of organism</label>
 				<ul class="km-value">
 					<li ng-repeat="term in document.absGeneticResourceTypes">{{term|term}} </li>
 				</ul>
-			</div>
+			</div> -->
 
-			<div ng-show="document.absGeneticResourceAreas">
+			<!-- <div ng-show="document.absGeneticResourceAreas">
 				<label>According to the area where the genetic resource is found</label>
 				<ul class="km-value">
 					<li ng-repeat="term in document.absGeneticResourceAreas">{{term|term}} </li>
 				</ul>
-			</div>
-
-			<div ng-show="document.absResponsibilities">
+			</div> -->
+			<div ng-show="document.responsibilities">
 				<label>Detailed description of other functions and responsibilities</label>
-				<div class="km-value">{{document.absResponsibilities | lstring:locale}}</div>
+				<div class="km-value">{{document.responsibilities | lstring:locale}}</div>
 			</div>
 
 			<div ng-show="document.absGeneticResourceTypes ">
-				<label>Keywords to describe scope of CNA responsibilities</label>
-				<ul class="km-value">
-					<li>{{document.absGeneticResourceTypes |term}}</li>
-				</ul>
+				<label>Keywords to describe scope of CNA responsibilities</label>				
+				<div class="km-value" >
+					<ul class="list">
+						<li ng-repeat="term in document.absGeneticResourceTypes">{{term|term}} </li>
+					</ul>
+				</div>
 			</div>
 
 		</div>

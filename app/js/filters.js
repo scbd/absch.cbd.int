@@ -172,7 +172,7 @@ define(["app"], function (app) {
 			if(cacheMap[term.identifier])
 				return lstring(cacheMap[term.identifier].title, locale) ;
 
-			cacheMap[term.identifier] = $http.get("/api/v2013/thesaurus/terms/"+encodeURI(term.identifier),  {cache:true}).then(function(result) {
+			cacheMap[term.identifier] = $http.get("/api/v2013/thesaurus/terms/"+encodeURIComponent(term.identifier),  {cache:true}).then(function(result) {
 
 				cacheMap[term.identifier] = result.data;
 
