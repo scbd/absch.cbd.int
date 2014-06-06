@@ -116,8 +116,10 @@ app.directive("fieldEmbedContact", [ function () {
 					saveContactDraft(cont);						
 				}			
 				
-				delete contact.government;
-				delete contact.header;
+				if(!$scope.showFilter){	
+					delete contact.government;
+					delete contact.header;
+				}
 					// console.log(contact);
 				if($scope.multiple) {
 
@@ -150,47 +152,58 @@ app.directive("fieldEmbedContact", [ function () {
 			$scope.deleteContact = function(index) {
 
 				var contacts = _.clone($scope.getContacts());
-
+var indexNo = index;
 				if(index<0 || index>=contacts.length)
 					return;
 
 				// if showfilter then permanently delete the record from draft.
 				if($scope.showFilter){					
-									    
-				    $("#myModal").modal({ 
-				      "backdrop"  : "static",
-				      "keyboard"  : true,
-				      "show"      : true  
-				    });
-			        $("#deleteOk").on("click", function(e) {
-			            var contact = contacts[index];
+
+					if(confirm("Are you you want to delete this record?")){
+						var contact = contacts[index];
 			            console.log(contact);
+			            console.log(indexNo);
 						storage.drafts.delete(contact.header.identifier);
-
-						contacts.splice(index,1);
-						if($scope.multiple)
-							$scope.model = contacts;
-						else
-							$scope.model = _.first(contacts);
-			            
-			            $("#myModal").modal('hide');     
-			        });
-				    $("#myModal").on("hide", function() {  
-				        $("#myModal a.btn").off("click");
-				    });
-				    
-				    $("#myModal").on("hidden", function() { 
-				        $("#myModal").remove();
-				    });
-
+					}
+					else
+						return;
 				}
-				else{
+									    
+				    // $("#myModal").modal({ 
+				    //   "backdrop"  : "static",
+				    //   "keyboard"  : true,
+				    //   "show"      : true  
+				    // });
+			     //    $("#deleteOk").on("click", function(e) {
+			   //          var contact = contacts[index];
+			   //          console.log(contact);
+			   //          console.log(indexNo);
+						// storage.drafts.delete(contact.header.identifier);
+
+				// 		contacts.splice(index,1);
+				// 		if($scope.multiple)
+				// 			$scope.model = contacts;
+				// 		else
+				// 			$scope.model = _.first(contacts);
+			            
+			 //            $("#myModal").modal('hide');     
+			 //        });
+				//     $("#myModal").on("hide", function() {  
+				//         $("#myModal a.btn").off("click");
+				//     });
+				    
+				//     $("#myModal").on("hidden", function() { 
+				//         $("#myModal").remove();
+				//     });
+
+				// }
+				// else{
 					contacts.splice(index,1);
 					if($scope.multiple)
 						$scope.model = contacts;
 					else
 						$scope.model = _.first(contacts);
-				}
+				// }
 			};
 
 			

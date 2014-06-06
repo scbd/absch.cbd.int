@@ -59,6 +59,7 @@
 	        	<span ng-hide="edition.contact.type">Edit an organization or a contact person</span>
 	        	<span ng-show="edition.contact.type=='organization'">Edit an organization</span>
 	        	<span ng-show="edition.contact.type=='person'">Edit a contact person</span>
+	        	<span ng-show="edition.contact.type=='CNA'">Edit a CNA as a contact</span>
 	        </h4>
 
 	        	
@@ -66,6 +67,8 @@
    	        	name="editionContactType"/> Organization</label>
 	        <label ng-hide="selectExisting" class="radio-inline"><input type="radio" ng-model="edition.contact.type" value="person" 
 	        	name="editionContactType"/> Person</label>
+	        <label ng-hide="selectExisting" class="radio-inline"><input type="radio" ng-model="edition.contact.type" value="CNA" 
+	        	name="editionContactType"/> CNA</label>
 	        <a type="button" class="btn btn-primary" ng-click="loadExisting()" ng-show="!showFilter">{{buttonText}}</a>
 
           </div>
