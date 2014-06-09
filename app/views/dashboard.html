@@ -33,10 +33,10 @@
 
       <div class="alert alert-info" ng-show="isAuthenticated">
         <p>You are signed in as: <strong>{{user.name}}</strong>
-          <span ng-show="user.roles.indexOf('AbsPublishingAuthorities')!=-1">(PA)</span>
-          <span ng-show="user.roles.indexOf('abschiac')">(IAC)</span>
-          <span ng-show="user.roles.indexOf('AbsNationalAuthorizedUser')">(NAU)</span>
-          <span ng-show="user.roles.indexOf('AbsNationalFocalPoint')">(FP)</span>
+          <span ng-show="user.roles.indexOf('AbsPublishingAuthorities') != -1">(PA)</span>
+          <span ng-show="user.roles.indexOf('abschiac') != -1">(IAC)</span>
+          <span ng-show="user.roles.indexOf('AbsNationalAuthorizedUser') != -1">(NAU)</span>
+          <span ng-show="user.roles.indexOf('AbsNationalFocalPoint') != -1">(FP)</span>
         </p>
       </div>
 
