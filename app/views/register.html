@@ -25,139 +25,34 @@
                     <h3 ><a href="/dashboard" ng-click="tab('dashboard')"  ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/dashboard.html'}" href="#" role="button">
                         <i class="glyphicon glyphicon-list-alt" style="position:relative;top:4px;"></i> Dashboard </a></h3>
 
-                    <h3>National Records</h3>
+                    <h3 ng-repeat-start="(heading,types) in subheadings">{{heading}}</h3>
 
-                    <a href="/register/measure" role="button">
-                        <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : document_type=='measure'}">
-                            <div class="btn-commonformat-national">ABSCH-MSR
-                                <span ng-show="facets('measure','draft') > 0" class="pull-right label label-default">
-                                  {{facets('measure','draft')}}</span> 
-                                <span ng-show="facets('measure','publish') > 0" class="pull-right label label-success">
-                                  {{facets('measure','publish')}}</span>
-                                <span ng-show="facets('measure','request') > 0" class="pull-right label label-danger">
-                                  {{facets('measure','request')}}</span>
+                    <a ng-repeat="type in types" ng-href="/register/{{type}}" role="button">
+                        <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : document_type==type}">
+                          <div class="btn-commonformat-national">{{document_types[type].abbreviation}}
+                                <span ng-show="facets(type,'draft') > 0" class="pull-right label label-default">
+                                  {{facets(type,'draft')}}</span> 
+                                <span ng-show="facets(type,'publish') > 0" class="pull-right label label-success">
+                                  {{facets(type,'publish')}}</span>
+                                <span ng-show="facets(type,'request') > 0" class="pull-right label label-danger">
+                                  {{facets(type,'request')}}</span>
                             </div>
-                            <span class="btn-commonformat-name">Legislative, administrative or policy measures</span>
+                            <span class="btn-commonformat-name">{{document_types[type].title}}</span>
                         </div>
+
                     </a>
 
-                    <a href="/register/authority" role="button">
-                        <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : document_type=='authority'}">
-                            <span class="btn-commonformat-national">ABSCH-CNA</span>
-                            <span ng-show="facets('authority','draft') > 0"  class="pull-right label label-default">{{facets('authority','draft')}}</span>  
-<span ng-show="facets('authority','publish') > 0"  class="pull-right label label-success">{{facets('authority','publish')}}</span>
-<span ng-show="facets('authority','request') > 0"  class="pull-right label label-danger">{{facets('authority','request')}}</span> 
-
-                            <br>
-                            <span class="btn-commonformat-name">Competent National Authority</span>
-                        </div>
-                    </a>
-
-                    <a href="/register/absPermit" ng-click="tab('absPermit')" href="#" role="button">
-                        <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='absPermit'}">
-                            <span class="btn-commonformat-national">ABSCH-IRCC</span>
-                            <span ng-show="facets('absPermit','draft') > 0" class="pull-right label label-default">{{facets('absPermit','draft')}}</span>  
-<span ng-show="facets('absPermit','publish') > 0" class="pull-right label label-success">{{facets('absPermit','publish')}}</span>
-<span ng-show="facets('absPermit','request') > 0" class="pull-right label label-danger">{{facets('absPermit','request')}}</span>
-
-                            <br>
-                            <span class="btn-commonformat-name">Internationally recognized certificate of compliance</span>
-                        </div>
-                    </a>
-
-
-                    <a href="/register/absCheckpoint" ng-click="tab('absCheckpoint')" href="#" role="button">
-                        <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='absCheckpoint'}">
-                            <span class="btn-commonformat-national">ABSCH-CP</span>
-                            <span ng-show="facets('absCheckpoint','draft') > 0" class="pull-right label label-default">{{facets('absCheckpoint','draft')}}</span>  
-<span ng-show="facets('absCheckpoint','publish') > 0" class="pull-right label label-success">{{facets('absCheckpoint','publish')}}</span>
-<span ng-show="facets('absCheckpoint','request') > 0" class="pull-right label label-danger">{{facets('absCheckpoint','request')}}</span> 
-
-                            <br>
-                            <span class="btn-commonformat-name">Checkpoint</span>
-                        </div>
-                    </a>
-
-                    <a href="/register/absCheckpointCommunique" ng-click="tab('absCheckpointCommunique')" href="#" role="button">
-                        <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='absCheckpointCommunique'}">
-                            <span class="btn-commonformat-national">ABSCH-CPC</span>
-                            <span ng-show="facets('absCheckpointCommunique','draft') > 0" class="pull-right label label-default">{{facets('absCheckpointCommunique','draft')}}</span>  
-<span ng-show="facets('absCheckpointCommunique','publish') > 0" class="pull-right label label-success">{{facets('absCheckpointCommunique','publish')}}</span>
-<span ng-show="facets('absCheckpointCommunique','request') > 0" class="pull-right label label-danger">{{facets('absCheckpointCommunique','request')}}</span> 
-                            <br>
-                            <span class="btn-commonformat-name">Checkpoint Communiqué</span>
-                        </div>
-                    </a>
-
-                    <a href="/register/database" ng-click="tab('database')" href="#" role="button">
-                        <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='database'}">
-                            <span class="btn-commonformat-national">ABSCH-NDB</span>
-                            <span ng-show="facets('database','draft') > 0" class="pull-right label label-default">{{facets('database','draft')}}</span>  
-<span ng-show="facets('database','publish') > 0" class="pull-right label label-success">{{facets('database','publish')}}</span>
-<span ng-show="facets('database','request') > 0" class="pull-right label label-danger">{{facets('database','request')}}</span>  
-                            <br>
-                            <span class="btn-commonformat-name">ABS National Website or Database</span>
-                        </div>
-                    </a>
-
-                </div>
-
-
-                <div>
-                    <h3>Reference Records</h3>
-
-                    <a href="/register/resource" ng-click="tab('resource')" href="#" role="button">
-                        <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='resource'}">
-                            <span class="btn-commonformat-reference">ABSCH-VLR</span>
-                             <span  ng-show="facets('resource','draft') > 0"  class="pull-right label label-default">{{facets('resource','draft')}}</span>  
-      <span  ng-show="facets('resource','draft') > 0"  class="pull-right label label-success">{{facets('resource','publish')}}</span>
-      <span  ng-show="facets('resource','draft') > 0"  class="pull-right label label-danger">{{facets('resource','request')}}</span>  
-     
-                            <br>
-                            <span class="btn-commonformat-name">Virtual Library Record</span>
-                        </div>
-                    </a>
-                </div>
-                <div>
+                    <span ng-repeat-end></span> <!--need to end the ng-repeat-->
+                  <div>
                     <h3>Others</h3>
 
-                    <a href="/contacts" ng-click="tab('contact')" href="#" role="button">
+                    <a href="/contacts" ng-click="tab('contact')" role="button">
                         <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='contact'}">
                             <span class="btn-commonformat-reference">Contacts</span>
-                              <!-- <span  ng-show="facets('contact','draft') > 0"  class="pull-right label label-default">{{facets('contact','draft')}}</span>  
-                              <span  ng-show="facets('contact','draft') > 0"  class="pull-right label label-success">{{facets('contact','publish')}}</span>
-                              <span  ng-show="facets('contact','draft') > 0"  class="pull-right label label-danger">{{facets('contact','request')}}</span>   -->     
                             <br>
-                            <!-- <span class="btn-commonformat-name">Virtual Library Record</span> -->
                         </div>
                     </a>
                 </div>
-             <!--    <div>
-                    <h3>National Users</h3>
-
-                    <a href="http://www.cbd.int/doc/abs/commonformats/ABSCH-PA.doc">
-                        <i class="glyphicon glyphicon-circle-arrow-down"></i> Download Publishing Authority(PA) and National Authorized User(NAU) nomination form
-                    </a>
-
-                    <a  ng-click="tab('abschNFP')"  href="#" role="button">
-              <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='abschNFP'}">
-              <span class="btn-commonformat-national">ABSCH-NFP </span>   
-              <br><span class="btn-commonformat-name">National ABS Focal Points</span>
-              </div></a>
-
-              <a  ng-click="tab('abschPA')"  href="#" role="button">
-              <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='abschPA'}">
-              <span class="btn-commonformat-national">ABSCH-PA </span>   
-              <br><span class="btn-commonformat-name">National Authorized Users</span>
-              </div></a>
-
-              <a  ng-click="tab('abschNAU')"  href="#" role="button">
-              <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='abschNAU'}">
-              <span class="btn-commonformat-national">ABSCH-NAU </span>   
-              <br><span class="btn-commonformat-name">National Authorized Users</span>
-              </div></a>
-                </div>-->
-
             </div> 
 
             <div class="col-xs-12" ng-hide="isAuthenticated" style="padding-top:20px;">
