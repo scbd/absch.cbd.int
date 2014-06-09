@@ -29,22 +29,15 @@ app.controller("RegisterController",
 
 	 	
 	//============================================================
-	//============================================================
 	//====================== SECURIZE ============================
 	//============================================================
-	//============================================================
-// console.log(dragAndDrop);
     $scope.isAuthenticated      = $rootScope.user.isAuthenticated;
-    $scope.canRegisterNational  = !!_.intersection($rootScope.user.roles, ["AbsAdministrator", "AbsNationalAuthorizedUser", "AbsNationalFocalPoint", "AbsPublishingAuthorities", "Administrator"]).length;
-    $scope.canRegisterReference = $rootScope.user.isAuthenticated;
+    //$scope.canRegisterNational  = !!_.intersection($rootScope.user.roles, ["AbsAdministrator", "AbsNationalAuthorizedUser", "AbsNationalFocalPoint", "AbsPublishingAuthorities", "Administrator"]).length;
+    //$scope.canRegisterReference = $rootScope.user.isAuthenticated;
 
 	//============================================================
-	//============================================================
-	//============================================================
-	//============================================================
-	//============================================================
-  //
   
+  //TODO: stop using so many globals =P I should inherit the controller scope or something.
   $rootScope.subheadings = {
     'National Records': [
       'measure', 'authority', 'absPermit', 'absCheckpoint', 'absCheckpointCommunique', 'database',
@@ -139,54 +132,33 @@ app.controller("RegisterController",
   if($routeParams.document_type) //this is used to highlight the item on the left
     $scope.document_type = $routeParams.document_type;
 	
-	var leftTab = "dashboard";
+	var leftTab;
 	$scope.msg="";
 	$scope.records = [];
 	$scope.dashboardFilter = "All";
-  	$scope.isLoaded = [];
-  	$scope.refreshTab = false;
+  $scope.isLoaded = []; //not sure what this does yet.
 
-  	$scope.localeRegister= ["en"];
+  $scope.localeRegister= ["en"];
 
+  //TODO: combine this with document_types
 	$scope.schemaTypesFacets = [
-		{"schema":"measure","schemaType":"nationalRecords", "header":"ABSCH-MSR","commonFormat":"Legislative, administrative or policy measures", "draftCount":0,"requestCount":0,"publishCount": 0},
-		{"schema":"authority","schemaType":"nationalRecords", "header":"ABSCH-CNA ","commonFormat":"Competent National Authority ", "draftCount":0,"requestCount":0,"publishCount": 0},
-		{"schema":"absPermit","schemaType":"nationalRecords", "header":"ABSCH-IRCC","commonFormat":"Internationally recognized certificate of compliance", "draftCount":0,"requestCount":0,"publishCount": 0},
-		{"schema":"absCheckpoint","schemaType":"nationalRecords", "header":"ABSCH-CP","commonFormat":"Checkpoint", "draftCount":0,"requestCount":0,"publishCount": 0},
-		{"schema":"absCheckpointCommunique","schemaType":"nationalRecords", "header":"ABSCH-CPC","commonFormat":"Checkpoint Communiqué", "draftCount":0,"requestCount":0,"publishCount": 0},
-		{"schema":"database","schemaType":"nationalRecords", "header":"ABSCH-NDB","commonFormat":"ABS National Website or Database", "draftCount":0,"requestCount":0,"publishCount": 0},
-		{"schema":"resource","schemaType":"referenceRecords", "header":"ABSCH-VLR","commonFormat":"Virtual Library Record", "draftCount":0,"requestCount":0,"publishCount": 0},
-		{"schema":"contact","schemaType":"others", "header":"Contacts","commonFormat":"", "draftCount":0,"requestCount":0,"publishCount": 0}
+		{"schema":"measure","schemaType":"nationalRecords", "draftCount":0,"requestCount":0,"publishCount": 0},
+		{"schema":"authority","schemaType":"nationalRecords", "draftCount":0,"requestCount":0,"publishCount": 0},
+		{"schema":"absPermit","schemaType":"nationalRecords", "draftCount":0,"requestCount":0,"publishCount": 0},
+		{"schema":"absCheckpoint","schemaType":"nationalRecords", "draftCount":0,"requestCount":0,"publishCount": 0},
+		{"schema":"absCheckpointCommunique","schemaType":"nationalRecords", "draftCount":0,"requestCount":0,"publishCount": 0},
+		{"schema":"database","schemaType":"nationalRecords", "draftCount":0,"requestCount":0,"publishCount": 0},
+		{"schema":"resource","schemaType":"referenceRecords", "draftCount":0,"requestCount":0,"publishCount": 0},
+		{"schema":"contact","schemaType":"others", "draftCount":0,"requestCount":0,"publishCount": 0}
 	];
 
 
  	$scope.setDashFilter = function(filter){
- 		//console.log(filter);
- 			$scope.dashboardFilter = filter;
+    $scope.dashboardFilter = filter;
  	}
  	$scope.isFilter = function(filter){
- 			return	$scope.dashboardFilter == filter || $scope.dashboardFilter == "All";
+    return	$scope.dashboardFilter == filter || $scope.dashboardFilter == "All";
  	}
-
-	//============================================================
-	//
-	// 
-	//
-	//============================================================
-	$scope.findString = function (arr, str)
-	{
-		if(!arr)
-			return false;
-		if(!str)
-			return false;
-
-		for(var i=0; i < arr.length; i++) {
-			if(arr[i] == str)
-				return true;
-		}
-
-		return false;
-	};
 
 	//============================================================
 	//
@@ -618,12 +590,6 @@ app.controller("RegisterController",
  				}
  			, 10000);
  			//console.log($scope.msg);
- 		}
- 	});
-
- 	$scope.$watch('refreshTab', function(newValue){
- 		if(newValue==true){
- 			refreshTab();
  		}
  	});
 

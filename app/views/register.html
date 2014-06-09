@@ -2,99 +2,72 @@
 
 
 <div ng-cloak ng-controller="RegisterController">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-3" ng-show="isAuthenticated">
+        <h1>Register Information</h1>
+        <div>
 
-    <div class="container">
-    
+          <h3>
+            <a href="/dashboard" ng-click="tab('dashboard')"  ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/dashboard.html'}" href="#" role="button">
+              <i class="glyphicon glyphicon-list-alt" style="position:relative;top:4px;"></i> Dashboard 
+            </a>
+          </h3>
 
-        <!--         <div class="row">
-        <div class="col-xs-3"></div>
-         <div class="col-xs-9">
-                  <div ng-show="msg" class="alert alert-success alert-dismissable">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                  <strong>{{msg}}</strong> 
-                </div>
+          <h3 ng-repeat-start="(heading,types) in subheadings">{{heading}}</h3>
+
+          <a ng-repeat="type in types" ng-href="/register/{{type}}" role="button">
+            <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : document_type==type}">
+              <div class="btn-commonformat-national">{{document_types[type].abbreviation}}
+                <span ng-show="facets(type,'draft') > 0" class="pull-right label label-default">
+                  {{facets(type,'draft')}}</span> 
+                <span ng-show="facets(type,'publish') > 0" class="pull-right label label-success">
+                  {{facets(type,'publish')}}</span>
+                <span ng-show="facets(type,'request') > 0" class="pull-right label label-danger">
+                  {{facets(type,'request')}}</span>
+              </div>
+              <span class="btn-commonformat-name">{{document_types[type].title}}</span>
+            </div>
+          </a>
+
+          <span ng-repeat-end></span> <!--need to end the ng-repeat-->
+          <div>
+            <h3>Others</h3>
+
+            <a href="/contacts" role="button">
+              <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : document_type=='contact'}">
+                <span class="btn-commonformat-reference">Contacts</span><br />
+              </div>
+            </a>
           </div>
-        </div> -->
+        </div>
+      </div> 
 
-
-        <div class="row">
-            <div class="col-xs-3" ng-show="isAuthenticated">
-                <h1>Register Information</h1>
-                <div>
-
-                    <h3 ><a href="/dashboard" ng-click="tab('dashboard')"  ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/dashboard.html'}" href="#" role="button">
-                        <i class="glyphicon glyphicon-list-alt" style="position:relative;top:4px;"></i> Dashboard </a></h3>
-
-                    <h3 ng-repeat-start="(heading,types) in subheadings">{{heading}}</h3>
-
-                    <a ng-repeat="type in types" ng-href="/register/{{type}}" role="button">
-                        <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : document_type==type}">
-                          <div class="btn-commonformat-national">{{document_types[type].abbreviation}}
-                                <span ng-show="facets(type,'draft') > 0" class="pull-right label label-default">
-                                  {{facets(type,'draft')}}</span> 
-                                <span ng-show="facets(type,'publish') > 0" class="pull-right label label-success">
-                                  {{facets(type,'publish')}}</span>
-                                <span ng-show="facets(type,'request') > 0" class="pull-right label label-danger">
-                                  {{facets(type,'request')}}</span>
-                            </div>
-                            <span class="btn-commonformat-name">{{document_types[type].title}}</span>
-                        </div>
-
-                    </a>
-
-                    <span ng-repeat-end></span> <!--need to end the ng-repeat-->
-                  <div>
-                    <h3>Others</h3>
-
-                    <a href="/contacts" ng-click="tab('contact')" role="button">
-                        <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='contact'}">
-                            <span class="btn-commonformat-reference">Contacts</span>
-                            <br>
-                        </div>
-                    </a>
-                </div>
-               </div>
-            </div> 
-
-            <div class="col-xs-12" ng-hide="isAuthenticated" style="padding-top:20px;">
-                <div class="alert" ng-hide="isAuthenticated">
-
-
-                    <div class="row well" ng-show="!user.isAuthenticated">
-                        <div class="col-xs-12">
-                            <div login></div>
-                        </div>
-                        <!-- <div class="col-xs-4" >
-                                <div>
-                                <h2 >No account? <a href="#" ng-click="actionSignup()" style="font-family:Tahoma, Trebuchet MS" class="btn btn-info" ng-disabled="waiting" style="margin-bottom:24px">SIGN UP</a></h2>
-                                <p>
-                                    <strong>Get started.</strong>
-                                    <span>Create your ABS-CH account.</span>
-                                </p>
-                                
-                            </div>
-                        </div> -->
-
-
-                        <div class="col-xs-12" style="padding-top:30px;">
-                            <hr>
-                            <h3>Designation of the ABS Clearing-House publishing authority and national authorised users</h3>
-                            <p>In order to operationalize the ABS Clearing-House, Parties need to nominate a single publishing authority to clear national records prior to publishing them in the ABS Clearing-House.</p>
-                            <p>The registration of who has the authority to publish national records in the ABS Clearing-House can only be done by the Secretariat upon receipt of an official written communications addressed to the Executive Secretary and endorsed as follows by the focal point for the Intergovernmental Committee for the Nagoya Protocol (ICNP Focal Point). The duties of the ICNP Focal Point could also be expanded to incorporate the role of the publishing authority.</p>
-
-                            <p>The designation of national autorised users can be done at any time by the ICNP Focal Point or the publishing authority. These designations may be sent to the Secretariat by postal mail, fax or as an attachment to an e mail and must contain the complete contact details and the appropriate endorsements.</p>
-
-                            <a href="http://www.cbd.int/doc/abs/commonformats/ABSCH-PA.doc">
-                                <i class="glyphicon glyphicon-circle-arrow-down"></i> Download Publishing Authority(PA) and National Authorized User(NAU) nomination form
-                            </a>
-
-                        </div>
-                    </div>
-                </div>
+      <div class="col-xs-12" ng-hide="isAuthenticated" style="padding-top:20px;">
+        <div class="alert" ng-hide="isAuthenticated">
+          <div class="row well" ng-show="!user.isAuthenticated">
+            <div class="col-xs-12">
+              <div login></div>
             </div>
 
-            <ng-include src="subTemplateUrl"></ng-include>
+            <div class="col-xs-12" style="padding-top:30px;">
+              <hr>
+              <h3>Designation of the ABS Clearing-House publishing authority and national authorised users</h3>
+              <p>In order to operationalize the ABS Clearing-House, Parties need to nominate a single publishing authority to clear national records prior to publishing them in the ABS Clearing-House.</p>
+              <p>The registration of who has the authority to publish national records in the ABS Clearing-House can only be done by the Secretariat upon receipt of an official written communications addressed to the Executive Secretary and endorsed as follows by the focal point for the Intergovernmental Committee for the Nagoya Protocol (ICNP Focal Point). The duties of the ICNP Focal Point could also be expanded to incorporate the role of the publishing authority.</p>
 
+              <p>The designation of national autorised users can be done at any time by the ICNP Focal Point or the publishing authority. These designations may be sent to the Secretariat by postal mail, fax or as an attachment to an e mail and must contain the complete contact details and the appropriate endorsements.</p>
+
+              <a href="http://www.cbd.int/doc/abs/commonformats/ABSCH-PA.doc">
+                  <i class="glyphicon glyphicon-circle-arrow-down"></i> Download Publishing Authority(PA) and National Authorized User(NAU) nomination form
+              </a>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <ng-include src="subTemplateUrl"></ng-include>
+
     </div>
+  </div>
 </div>

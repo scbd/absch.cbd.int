@@ -63,10 +63,10 @@
                     <div ng-cloak class="dropdown" ng-show="user && user.isAuthenticated">
                         <a data-toggle="dropdown" href="#" class="account-name pull-right">
                             <i class="fa fa-chevron-down" style="font-size:15px"></i> {{user.name}}
-                           <span ng-show="findString(user.roles,'AbsPublishingAuthorities')">(PA)</span>
-                            <span ng-show="findString(user.roles,'abschiac')">(IAC)</span>
-                            <span ng-show="findString(user.roles,'AbsNationalAuthorizedUser')">(NAU)</span>
-                            <span ng-show="findString(user.roles,'AbsNationalFocalPoint')">(FP)</span>
+                           <span ng-show="user.roles.indexOf('AbsPublishingAuthorities') != -1">(PA)</span>
+                            <span ng-show="user.roles.indexOf('abschiac') != -1">(IAC)</span>
+                            <span ng-show="user.roles.indexOf('AbsNationalAuthorizedUser') != -1">(NAU)</span>
+                            <span ng-show="user.roles.indexOf('AbsNationalFocalPoint') != -1">(FP)</span>
                         </a>
                         <ul class="dropdown-menu pull-right" role="menu" style="position:relative;top:3px;left:140px;">
                             <li>
