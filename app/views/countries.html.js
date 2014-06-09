@@ -15,7 +15,8 @@ define(['app',  'directives/angucomplete-extended'], function (app,angucomplete)
             for (var i = 0; i < $scope.countries.length; i++) {
                 if ($scope.countries[i].treaties.XXVII8b.instrument == "ratification" 
                 	|| $scope.countries[i].treaties.XXVII8b.instrument == "accession" 
-                	|| $scope.countries[i].treaties.XXVII8b.instrument == "acceptance" ) {
+                	|| $scope.countries[i].treaties.XXVII8b.instrument == "acceptance" 
+                  || $scope.countries[i].treaties.XXVII8b.instrument == "approval" ) {
                     $scope.ratifications++;
                 }
                 if ($scope.countries[i].treaties.XXVII8b.signature != null ) {
@@ -58,7 +59,8 @@ define(['app',  'directives/angucomplete-extended'], function (app,angucomplete)
             $scope.selected_circle="ratified";
             return entity && (entity.treaties.XXVII8b.instrument == "ratification" ||
                               entity.treaties.XXVII8b.instrument == "accession" ||
-                              entity.treaties.XXVII8b.instrument == "acceptance" );
+                              entity.treaties.XXVII8b.instrument == "acceptance"
+                              || entity.treaties.XXVII8b.instrument == "approval" );
          }
 
 

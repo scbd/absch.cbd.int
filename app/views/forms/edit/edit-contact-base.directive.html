@@ -5,7 +5,7 @@
 		}
 	</style>
 
-	<div ng-hide="document.type=='organization'">
+	<div ng-hide="document.type=='organization' || document.type=='CNA'">
 
 		<legend>Personal Information</legend>
 
@@ -71,7 +71,7 @@
 		</div>
 	</div>
 
-	<div ng-show="document.type=='organization'">
+	<div ng-show="document.type=='organization' || document.type=='CNA'">
 
 		<legend>Contact Person </legend>
 

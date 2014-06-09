@@ -182,8 +182,7 @@ app.directive("editAuthority", [function () {
 			//==================================
 			//
 			//==================================
-			$scope.getCleanDocument = function(document) {
-				debugger;
+			$scope.getCleanDocument = function(document) {				
 
 				document = document || $scope.document;
 

@@ -1967,10 +1967,13 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 						$scope.$emit("documentInvalid", validationReport);
 					}
 					else return $q.when(editFormUtility.publish(document)).then(function(documentInfo) {
-
-						$scope.$emit("documentPublished", documentInfo, document)
-
-						return documentInfo;
+						
+						if(documentInfo.type='authority'){
+							//in case of authority save the CNA as a contact in drafts
+							saveAuthorityInContacts(documentInfo);
+						}
+						$scope.$emit("documentPublished", documentInfo, document);
+						return documentInfo;						
 
 					});						
 				}).catch(function(error){
@@ -2009,10 +2012,13 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 					}
 					else return $q.when(editFormUtility.publishRequest(document)).then(function(workflowInfo) {
 
+						if(workflowInfo.type='authority'){
+							//in case of authority save the CNA as a contact in drafts
+							saveAuthorityInContacts(workflowInfo);
+						}													
 						$scope.$emit("documentPublishRequested", workflowInfo, document)
-
 						return workflowInfo;
-						
+
 					});						
 				}).catch(function(error){
 
@@ -2041,8 +2047,11 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 
 				}).then(function(draftInfo) {
 
+					if(draftInfo.type='authority'){
+						//in case of authority save the CNA as a contact in drafts
+						saveAuthorityInContacts(draftInfo);
+					}					
 					$scope.$emit("documentDraftSaved", draftInfo)
-
 					return draftInfo;
 
 				}).catch(function(error){
@@ -2055,6 +2064,56 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 
 				});
 			};
+
+			saveAuthorityInContacts = function(draftInfo){
+				
+				var document = $scope.getDocumentFn();
+				if(!document)
+					document = draftInfo;
+
+				$q.when(document).then(function(document)
+				{
+					//replace the last char of authority doc GUID with C to create a new GUID for contact
+					//this will help for easy update
+					var id =''
+					if(draftInfo.identifier)
+						id = draftInfo.identifier;
+					else if(draftInfo.data.identifier)
+						id = draftInfo.data.identifier;
+
+					if(id=='') {
+						console.log('identifier not found in document info passed');
+						return;
+					}
+
+					id = id.substr(0, id.length-1) + 'C'
+
+					var qDocument = {															
+										header: {	
+													identifier : id,											
+													schema   : "contact",
+													languages: ["en"]
+												},
+										type: "CNA" ,
+										government : document.government,
+										source: id,
+										organization : document.name,
+										organizationAcronym:{en:'NA'},	
+										city : document.city,
+										country : document.country,
+										phones : document.phones,
+										emails : document.emails
+									}	
+
+					if(document.address)qDocument.address = document.address;
+					if(document.state)qDocument.state = document.state;	
+					if(document.postalCode)qDocument.postalCode = document.postalCode;
+					if(document.websites)qDocument.websites = document.websites;
+					if(document.faxes)qDocument.faxes = document.faxes;		
+
+					editFormUtility.saveDraft(qDocument);
+				});
+			}
 
 			//====================
 			//

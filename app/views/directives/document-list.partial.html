@@ -92,7 +92,7 @@
                 <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
                 <span ng-show="document.jusrisdiction"><span >jusrisdiction:</span>  <span class="rowDetails">{{document.jusrisdiction}} </span></span>
                 <span ng-show="document.type">| <span >type:</span>  <span class="rowDetails" > {{document.type}} </span></span>
-               <span ng-show="document.status">| <span >Status:</span>  <span class="rowDetails" ng-class="{'notLegallyBinded' :  document.status !='Legally binding'}"  > {{document.status}} </span></span>
+               <span ng-show="document.status">| <span >Status:</span>  <span class="rowDetails" ng-class="{'notLegallyBinded' :  document.status =='Draft' || document.status =='retired'}"  > {{document.status}} </span></span>
 					 <span ng-show="document.source">
 						 | <span>Country:</span>
 						 <span class="rowDetails" >
