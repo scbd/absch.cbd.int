@@ -1,0 +1,35 @@
+<div ng-controller="ContactsController">
+  <div class="col-xs-9">
+    <div>
+        <a class="pull-right" ng-show="!help" ng-click="help=!help;" style="cursor:pointer;padding:5px;"><i class="glyphicon glyphicon-question-sign" >
+        </i> show help</a>
+        <a class="pull-right" ng-show="help" ng-click="help=!help;" style="cursor:pointer;color:#666;padding:5px;"><i class="glyphicon glyphicon-question-sign" >
+        </i> hide help</a>
+    </div>
+
+    <div class="registerpage-header">
+        <h2>
+            <span class="abbreviation">Contacts</span>
+            <span class="title">Contacts management</span>
+        </h2>
+        <div class="help1" ng-show="help">
+            <p ng-hide="editing">
+                This common format is to be used for registering contacts which can be used in documents.
+            </p>
+        </div>
+
+    </div>
+
+    <div class="registerpage-content">
+        <div ng-show="msg" class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="msg=''">&times;</button>
+            <strong>{{msg}}</strong>
+        </div>
+        <div ng-show="isAuthenticated && !editing"> 
+              <br/>
+            <field-embed-contact multiple ng-model="contacts" show-filter locales="localeRegister" caption="Add an organisation or a contact/CNA »"></field-embed-contact>
+        </div>
+        
+    </div>
+  </div>
+</div>

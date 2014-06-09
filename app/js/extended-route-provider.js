@@ -70,7 +70,11 @@ define(['app', 'angular', 'authentication'], function(app, angular) {
      
                 var deferred = $q.defer();
      
-                require([$route.current.$$route.templateUrl + '.js'], function (module) {
+                var controllers = [];
+                controllers.push($route.current.$$route.templateUrl + '.js');
+                if($route.current.$$route.subTemplateUrl)
+                  controllers.push($route.current.$$route.subTemplateUrl + '.js');
+                require(controllers, function (module) {
                     deferred.resolve(module);
                 });
      

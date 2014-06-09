@@ -1,0 +1,129 @@
+<div ng-controller="DashboardController">
+  <div class="col-xs-9" style="padding-top:20px;">
+
+    <div>
+        <a class="pull-right" ng-show="!help" ng-click="help=!help;" style="cursor:pointer;padding:5px;"><i class="glyphicon glyphicon-question-sign" >
+  </i> show help</a>
+        <a class="pull-right" ng-show="help" ng-click="help=!help;" style="cursor:pointer;color:#666;padding:5px;"><i class="glyphicon glyphicon-question-sign" >
+  </i> hide help</a>
+    </div>
+
+    <div class="registerpage-header">
+        <h2>
+            <span class="abbreviation">DASHBOARD</span>
+            <span class="title">Check the status of your work in the ABS-CH</span>
+        </h2>
+
+
+        <p class="help1" ng-show="help">
+            The dashboard is a personal working area where it will be possible to follow-up the status of records prepared for their publication in the ABS-CH. The content of the dashboard will differ depending on the role assigned in the ABS-CH (publishing authority or national authorized user).
+            <br>
+            <br>In this area you can check whether there are items that require your approval (in the case of the publishing authority) or what is the status of records sent for validation of the publishing authority (in the case of national authorized users).
+        </p>
+
+    </div>
+
+    <div class="registerpage-content">
+
+        <div ng-show="msg" class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="msg=''">&times;</button>
+            <strong>{{msg}}</strong>
+        </div>
+
+        <div class="alert alert-info" ng-show="isAuthenticated">
+            <p>You are signed in as:
+                <strong>{{user.name}}</strong>
+                <span ng-show="findString(user.roles,'AbsPublishingAuthorities')">(PA)</span>
+                <span ng-show="findString(user.roles,'abschiac')">(IAC)</span>
+                <span ng-show="findString(user.roles,'AbsNationalAuthorizedUser')">(NAU)</span>
+                <span ng-show="findString(user.roles,'AbsNationalFocalPoint')">(FP)</span>
+        </div>
+
+        <div ng-hide="isAuthenticated">
+            <a ng-show="!isAuthenticated" ng-click="signIn('dashboard')" class="btn btn-info">
+                <i class="glyphicon glyphicon-off"></i> SIGN IN
+            </a>
+        </div>
+
+        <div ng-show="isAuthenticated" class="row">
+            <div class="col-ld-12 col-md-12 col-sm-12">
+
+                <span ng-click="setDashFilter('All')" class="btn btn-info">
+                    <i ng-show="isFilter('All')" class="glyphicon glyphicon-ok"></i> All
+                    <span class="badge badge-default"></span>
+                </span>
+                <span ng-click="setDashFilter('Urgent')" class="btn btn-danger">
+                    <i ng-show="isFilter('Urgent')" class="glyphicon glyphicon-ok"></i> Urgent
+                    <span class="badge badge-default"></span>
+                </span>
+                <span ng-click="setDashFilter('Pending')" class="btn btn-warning">
+                    <i ng-show="isFilter('Pending')" class="glyphicon glyphicon-ok"></i> Pending
+                    <span class="badge badge-default"></span>
+                </span>
+                <span ng-click="setDashFilter('Completed')" class="btn btn-success" style="color:#fff">
+                    <i ng-show="isFilter('Completed')" class="glyphicon glyphicon-ok"></i> Completed
+                    <span class="badge badge-default" style="color:#999"></span>
+                </span>
+
+                <span ng-click="setDashFilter('Users')" class="btn btn-default btn-draft" style="color:#zzz">
+                    <i ng-show="isFilter('Users')" class="glyphicon glyphicon-ok"></i> Manage Users
+                    <span class="badge badge-default" style="color:#998"></span>
+                </span>
+            </div>
+        </div>
+        <div ng-show="isAuthenticated" class="row">
+            <div class="col-ld-12 col-md-12 col-sm-12">
+                </br>
+                <div class="panel panel-danger" ng-show="isFilter('Urgent')">
+                    <div class="panel-heading" style="background-color:#d9534f;color:white;">Items requiring your attention</div>
+                    <div class="panel-body">
+                        <my-tasks></my-tasks>
+                    </div>
+                </div>
+
+                <div class="panel panel-warning" ng-show="isFilter('Pending')">
+                    <div class="panel-heading"  style="background-color:#f0ad4e;color:white;">Pending requests</div>
+                    <div class="panel-body">
+                        <my-pending-tasks></my-pending-tasks>
+                    </div>
+                </div>
+
+                <div class="panel panel-success" ng-show="isFilter('Completed')">
+                    <div class="panel-heading" style="background-color:#5cb85c;color:white;">Completed requests</div>
+                    <div class="panel-body">
+                        <my-completed-tasks></my-completed-tasks>
+                    </div>
+                </div>
+                <div class="panel panel-default" ng-show="isFilter('Users')">
+                    <div class="panel-heading">User Activities</div> 
+                    <div class="panel-body" style="max-height:300px;overflow:scroll">
+                        <ul class="list-group " rel="scrollcontent1">
+                            <li ng-repeat="item in userActivities" class="list-group-item">
+                                {{item.title}}  
+                               <!--  <a href="/database/record?documentID={{item.identifier}}&documentSchema={{item.schema}}" target="_new"  style="padding:0px 3px;color:#999;">   <i class="glyphicon glyphicon-new-window"></i>
+                              </a> -->
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- <div class="panel panel-default" ng-show="isFilter('Users')">
+                    <div class="panel-heading">Manage Users</div>
+                    <div class="panel-body">
+                        <span user-details></span>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        <!-- <div ng-show="isAuthenticated">
+    <h2>Items requiring your attention</h2>  
+    <my-tasks></my-tasks>
+    
+    <h2>Pending requests</h2>  
+    <my-pending-tasks></my-pending-tasks>
+
+    <h2>Completed requests</h2>  
+    <my-completed-tasks></my-completed-tasks>
+  </div> -->
+    </div>
+  </div>
+</div>

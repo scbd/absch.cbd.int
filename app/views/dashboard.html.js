@@ -21,11 +21,11 @@ define(['app',
 "use strict";
 //require("app", "dragAndDrop")
 
-app.controller("RegisterController", 
+app.controller("DashboardController", 
 	["$rootScope", "$location" , "$scope", "$q", "$window", "IStorage", "underscore",
-	 "schemaTypes", "$compile", "$timeout","lstringFilter", "$routeParams",
+	 "schemaTypes", "$compile", "$timeout","lstringFilter",
 	 function ($rootScope, $location, $scope, $q, $window, storage, _,
-	  schemaTypes,$compile,$timeout,lstringFilter, $routeParams) {
+	  schemaTypes,$compile,$timeout,lstringFilter) {
 
 	 	
 	//============================================================
@@ -43,9 +43,6 @@ app.controller("RegisterController",
 	//============================================================
 	//============================================================
 	//============================================================
-  
-  if($routeParams.document_type) //this is used to highlight the item on the left
-    $scope.document_type = $routeParams.document_type;
 	
 	var leftTab = "dashboard";
 	$scope.msg="";

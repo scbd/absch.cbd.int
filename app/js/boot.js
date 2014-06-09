@@ -7,6 +7,7 @@ require.config({
         'angular'         : '../libs/angular/angular.min',
         'angular-route'   : '../libs/angular-route/angular-route.min',
         'angular-cookies' : '../libs/angular-cookies/angular-cookies.min',
+        'angular-sanitize' : '../libs/angular-sanitize/angular-sanitize.min',
         'async'           : '../libs/requirejs-plugins/src/async',
         'domReady'        : '../libs/requirejs-domready/domReady',
         'jquery'          : '../libs/jquery/jquery.min',
@@ -24,6 +25,7 @@ require.config({
         'angular'        : { 'deps': ['jquery'], 'exports': 'angular' },
         'angular-route'  : { 'deps': ['angular'] },
         'angular-cookies': { 'deps': ['angular'] },
+        'angular-sanitize': { 'deps': ['angular'] },
         'bootstrap'      : { 'deps': ['jquery'] },
         'bootstrap-datepicker' : { 'deps': ['jquery'] },
         'underscore'     : { 'exports': '_' },
@@ -33,7 +35,7 @@ require.config({
     }
 });
 
-require(['angular', 'angular-route', 'angular-cookies', 'bootstrap', 'domReady', 
+require(['angular', 'angular-route', 'angular-cookies', 'angular-sanitize', 'bootstrap', 'domReady', 
     'bootstrap-datepicker','angular-loading-bar', 'angular-animate',
     'dragAndDrop','moment'/*, 'main'*/], function (ng) {
 

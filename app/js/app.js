@@ -2,7 +2,7 @@
 
 define([/*'angular', 'angular-route', 'angular-cookies', */], function () {
 
-	var app = require('angular').module('app', ['ngRoute', 'ngCookies','chieffancypants.loadingBar', 'ngAnimate','dragAndDrop']);
+	var app = require('angular').module('app', ['ngRoute', 'ngCookies','chieffancypants.loadingBar', 'ngAnimate','dragAndDrop', 'ngSanitize']);
 
 	app.config(['$controllerProvider', '$compileProvider', '$provide', '$filterProvider', 
 		function($controllerProvider, $compileProvider, $provide, $filterProvider) {
@@ -66,6 +66,13 @@ define([/*'angular', 'angular-route', 'angular-cookies', */], function () {
 		}
 
 	}]);
+
+  app.run(function($rootScope) {
+    $rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
+      //padding route attributes to the rootscope
+      $rootScope.subTemplateUrl = current.$$route.subTemplateUrl;
+    });
+  });
 
 	return app;
 });
