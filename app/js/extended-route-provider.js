@@ -72,6 +72,11 @@ define(['app', 'angular', 'authentication'], function(app, angular) {
      
                 var controllers = [];
                 controllers.push($route.current.$$route.templateUrl + '.js');
+
+                //TODO: I'm not sure if this is the most elegant approach... reconsider
+                if($route.current.$$route.subTemplateUrl == '/app/views/forms/edit/edit-')
+                  $route.current.$$route.subTemplateUrl += $route.current.params.document_type + '.html';
+
                 if($route.current.$$route.subTemplateUrl)
                   controllers.push($route.current.$$route.subTemplateUrl + '.js');
                 require(controllers, function (module) {

@@ -1,0 +1,400 @@
+﻿<div class="col-xs-9" style="padding-top:20px;">
+  <div class="registerpage-content" ng-controller="editMeasure">
+
+    <div ng-show="msg" class="alert alert-success alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="msg=''">&times;</button>
+      <strong>{{msg}}</strong>
+    </div>
+
+    <div class="alert alert-error" ng-show="hasError()">
+      <strong>Error as occured...</strong>
+      <div>{{error}}</div>
+    </div>
+
+      <div ng-show="isLoading()">
+          <i class="fa fa-spinner fa-spin"></i> Loading...
+      </div>
+
+      <div ng-show="!isLoading() && status!='hidden'">
+
+      <!-- <div  class="alert alert-warning" ng-show="
+      editForm.government.$error.required 	|| 
+      editForm.title.$error.required			||
+      editForm.jurisdiction.$error.required	||
+      editForm.type.$error.required 			||
+      editForm.authorities.$error.required	||
+      editForm.status.$error.required 		||
+      ( isLegallyBinded() && editForm.entryIntoForce.$error.required) ||
+      editForm.documents.$error.required">
+
+      <strong>Mandatory information:</strong>
+      <ul>
+        <li ng-show="editForm.government.$error.required" >Field is mandatory / 
+        <strong>country</strong></li>
+        <li ng-show="editForm.title.$error.required" >Field is mandatory / 
+        <strong>title</strong></li>
+        <li ng-show="editForm.jurisdiction.$error.required" >Field is mandatory / 
+        <strong>jurisdiction</strong></li>
+        <li ng-show="editForm.type.$error.required" >Field is mandatory / 
+        <strong>type of measure</strong></li>
+        <li ng-show="editForm.status.$error.required" >Field is mandatory / 
+        <strong>legal status</strong></li>
+
+        <li ng-show="( isLegallyBinded() && editForm.entryIntoForce.$error.required)" >Field is mandatory / 
+        <strong>date of entry into force</strong></li>
+
+
+        <li ng-show="editForm.authorities.$error.required" >Field is mandatory / 
+        <strong>contact institution</strong></li>
+        <li ng-show="editForm.documents.$error.required" >Field is mandatory / 
+        <strong>document text (in its original language)</strong></li>
+      </ul>
+    </div>
+    <div  class="alert alert-success" ng-hide="
+      editForm.government.$error.required 	|| 
+      editForm.title.$error.required			||
+      editForm.jurisdiction.$error.required	||
+      editForm.type.$error.required 			||
+      editForm.status.$error.required 		||
+      editForm.authorities.$error.required	||
+      ( isLegallyBinded() && editForm.entryIntoForce.$error.required) ||
+      editForm.documents.$error.required">
+      <i class="glyphicon glyphicon-ok-circle"></i> 
+      Your document is valid.
+    </div> -->
+
+          <div class="row">
+              <div class="col-xs-12">
+                <ul class="pagination">
+                      <!-- <li ng-class="{ disabled: tab=='edit'   }"><a href="" ng-click="tab=prevTab">&laquo;</a></li> -->
+                      <li ng-class="{ active  : tab=='edit'   }"><a href="" ng-click="tab='edit'" >Submission form</a></li>
+                      <!-- <li ng-class="{ active  : tab=='absch'  }"><a href="" ng-click="tab='absch'">ABS Measures</a></li> -->
+                      <li ng-class="{ active  : tab=='review' }"><a href="" ng-click="tab='review'">Review</a></li>
+                      <!-- <li ng-class="{ disabled: tab=='review' }"><a href="" ng-click="tab=nextTab">&raquo;</a></li> -->
+                  </ul> 
+                  <div class="pagination  pull-right">
+                      <span km-form-languages ng-model="document.header.languages"></span>
+                      <span km-form-std-buttons document="getCleanDocument()"></span>
+                  </div>
+              </div>
+          </div>
+
+
+      <form class="editForm" name="editForm" style="margin-top:10px">
+        <div ng-show="tab=='edit'" km-tab="edit">
+
+        <section>
+          <legend>General information</legend>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="km-control-group" name="government" required caption="Country">
+                
+                <div km-select required name="government" ng-disabled="userGovernment()" ng-model="document.government" items="options.countries()" placeholder="Please select a country..."></div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="km-control-group" required name="title" caption="Title of the legislative administrative or policy measures on access and benefit-sharing">
+                <div km-textbox-ml name="title" required ng-model="document.title" locales="document.header.languages"></div>
+              </div>
+            </div>
+          </div>
+          <hr>
+
+          <div class="row">
+            <div class="col-sm-4">
+              <div required class="km-control-group" name="status" caption="Legal status of the measure">
+                <div km-select name="status" ng-model="document.status" items="options.status()" layout="flat" ></div>
+              </div>
+            </div>
+
+            <div class="col-sm-8">
+              <div ng-show="isNotLegallyBinded()">
+                <div class="km-control-group" name="adoption" required caption="Please provide the date of adoption">
+                <div km-date placeholder="YYYY-MM-DD" name="adoption" required ng-model="document.adoption"></div>
+                </div>
+              </div>
+              <div ng-show="isLegallyBinded()">
+                <div class="km-control-group" name="entryIntoForce" required caption="Please provide the date of entry into force">
+                  <div km-date placeholder="YYYY-MM-DD" name="entryIntoForce" required ng-model="document.entryIntoForce"></div>
+                </div>
+              </div>
+              <div ng-show="isRetired()">
+                <div class="km-control-group" name="retired" required caption="Please provide the date from which the measure was no longer applicable">
+                  <div km-date placeholder="YYYY-MM-DD" name="retired" required ng-model="document.retired">
+                  </div>
+                </div>
+              </div>
+
+              <div class="km-control-group" name="limitedApplication" caption="Indicate the date the measure is no longer in force if the measure has a limited application in time">
+                <div km-date placeholder="YYYY-MM-DD" name="limitedApplication" ng-model="document.limitedApplication"></div>
+              </div>
+
+
+            </div>
+
+          </div>
+
+          <hr>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="km-control-group" required name="type" caption="Type of document/measure">
+                <div km-term-radio name="type"  ng-model="document.type" 
+                terms="options.typeOfDocuments()" description="true" binding-type="term" ng-click="save()" required></div>
+                
+              </div>
+            </div>
+          </div>
+          <hr>
+
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="km-control-group" required name="jurisdiction" caption="Area of jurisdiction">
+                <div km-select required name="jurisdiction" ng-model="document.jurisdiction" items="options.jurisdiction()"></div>
+              </div>
+            </div>
+
+
+            <div class="col-sm-8">
+              <div ng-show="isJurisdictionRegional()">
+                <div class="km-control-group" required name="jurisdictionRegions" caption="Country name and/or Geographical or political/economic group(s)">
+                <div km-select required name="jurisdictionRegions" ng-model="document.jurisdictionRegions" items="options.regions()" multiple ></div>
+                </div>
+              </div>
+
+              <div ng-show="isJurisdictionSubNationalOrCommunity()">
+                <div class="km-control-group" required name="jurisdictionName" caption="Name of the sub-national jurisdiction / community">
+                <div km-textbox-ml required ng-model="document.jurisdictionName" locales="document.header.languages"></div>
+                </div>
+              </div>
+          
+            </div>
+
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="km-control-group" name="description" caption="Brief description of the document including  objective and scope (max. 300 words)">
+                <div km-textbox-ml ng-model="document.description" rows="4" locales="document.header.languages"></div>
+              </div>
+            </div>
+          </div>
+
+          </section>
+
+          <section>
+          <legend>Is this records an amendment to previously published record? </legend>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="km-control-group" name="amendedMeasures" caption="List of amended measures">
+                <div class="help-block">Please indicate if this measure amends a previously registered one by providing a cross-reference link to the amended measure.</div>
+                <div km-reference multiple name="amendedMeasures" ng-model="document.amendedMeasures" loader="loadRecords(identifier, 'measure')">
+                  <div>
+                    <div><strong>{{reference.title | lstring}}</strong></div>
+                    <div>{{reference.summary | lstring}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="km-control-group" name="amendmentsDescription" caption="Summary of the amendments">
+                <div km-textbox-ml ng-model="document.amendmentsDescription" rows="4" locales="document.header.languages"></div>
+              </div>
+            </div>
+          </div>
+          </section>
+          
+          <section>
+          <legend>Document details</legend>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="km-control-group" required name="documents" caption="Document text (in its original language)">
+                <div km-link required name="documents" ng-model="document.documents" extensions="options.documentLinksExt" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="km-control-group" name="documentTranslations" caption="Translation in one of the official UN languages">
+                <div km-link name="documentTranslations" ng-model="document.documentTranslations" extensions="options.documentTranslationsExt" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="km-control-group" name="linkedMeasures" caption="Relationship with other measures">
+              <div class="help-block">Please indicate if there is any relationship between this document / measure and other law, regulation, guidelines, administrative or policy measures by providing text with the information or/and by linking it to an existing clearing-house record.</div>
+                <div km-reference multiple name="linkedMeasures" ng-model="document.linkedMeasures" loader="loadRecords(identifier, 'measure')">
+                  <div>
+                    <div><strong>{{reference.title | lstring}}</strong></div>
+                    <div>{{reference.summary | lstring}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="km-control-group" name="linkedMeasuresDescription" caption="Please describe the relationship ">
+                <div km-textbox-ml ng-model="document.linkedMeasuresDescription" rows="4" placeholder="" locales="document.header.languages"></div>
+              </div>
+            </div>
+          </div>
+          <!-- <hr>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="km-control-group" name="otherDocuments" caption="Any other relevant information">
+                <div km-link name="otherDocuments" ng-model="document.otherDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="km-control-group" name="otherInformation" caption="Short description">
+                <div km-textbox-ml ng-model="document.otherInformation" rows="4" placeholder="" locales="document.header.languages"></div>
+              </div>
+            </div>
+          </div>
+
+   -->
+  </section>
+        <section>
+          <legend>Regulatory contact information</legend>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="km-control-group" required name="authorities" caption="Contact Institution">
+
+                              <field-embed-contact multiple ng-model="$parent.document.authorities" locales="$parent.document.header.languages" caption="Add an institution »"></field-embed-contact>
+
+              </div>
+            </div>
+          </div>
+          </section>
+
+          <section>
+          <legend>Elements of the measure</legend>
+    
+          <div class="help-block">Please select which elements are included in the measure being registered and identify which are the relevant articles of sections of the measure for each of the selected elements.</div>
+
+          <style>
+            .measureChecked 
+            {
+              background-color:#f0f0f0;
+              margin: 2px 2px 2px -5px;
+              padding: 10px 5px 10px 5px;
+            }
+
+          </style>
+          <script type="text/ng-template"  id="/app/views/forms/edit/edit-measure.directive/abs">
+            <ul>
+              <li ng:repeat="term in rootTerms" ng-include="'/app/views/forms/edit/edit-measure.directive/abs/inner'"></li>
+            </ul>									
+          </script>
+          <script type="text/ng-template"  id="/app/views/forms/edit/edit-measure.directive/abs/inner">
+            <div ng-class="{measureChecked : identifiers[term.identifier]}" style="">
+              <table style="width:100%" cellspacing="0" cellpadding="0">
+              <tr>
+                <td style="text-align:left;vertical-align:middle">
+                  <label>
+                    <input type="checkbox" ng-model="identifiers[term.identifier]" ng-required="IsRequired()" value="{{term.identifier}}" />
+                       <span title="{{term.description|lstring:locale}}" style="font-weight:normal;">
+                        <span >{{term.title||term.name | lstring:locale}} </span>
+                        <i ng-show="term.description" class="icon-question-sign"></i> 
+                        </span>
+                  </label>
+                </td>
+                <td ng-show="identifiers[term.identifier]" style="width:200px;text-align:right;vertical-align:middle">
+                  <div km-textbox-ml ng-model="sections[term.identifier]" locales="locales" ng-required="identifiers[term.identifier]" ng-disabled="!identifiers[term.identifier]"></div>
+                </td>
+              </tr>
+              </table>
+            </div>
+            <ul style="list-style:none">
+              <li ng:repeat="term in term.narrowerTerms" ng-include="'/app/views/forms/edit/edit-measure.directive/abs/inner'">
+            </ul>
+          </script>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <table style="width: 100%" cellspacing="0" cellpadding="0">
+                <tr>
+                  <th style="text-align: left">Elements of the measure</th>
+                  <th style="width: 200px; text-align: center">Reference to relevant articles and sections </th>
+                </tr>
+              </table>
+
+              <div edit-measure-abs name="absMeasures" required ng-model="document.absMeasures" locales="document.header.languages" terms="options.absMeasures()"></div>
+            </div>
+          </div>
+        </section>
+
+
+
+  <section>
+          <legend>Additional information</legend>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="km-control-group" name="address" caption="Any other relevant information">
+                <div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
+                <div km-textbox-ml ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
+                <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+              </div>
+            </div>
+          </div>
+          </section>
+          <section>
+          <legend>Notes</legend>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="km-control-group" name="notes">
+                <div class="help-block">The field “Notes” is for personal reference and can be seen only when the record is being edited</div>
+                <textarea class="form-control" name="notes" ng-model="document.notes" rows="4"></textarea>
+              </div>
+            </div>
+          </div>
+          </section>
+
+        </div>
+      </form>
+
+      <div class="row" ng-show="tab=='review'" km-tab="review">
+        <div class="col-xs-12">
+                <div km-document-validation ng-model="validationReport"></div>
+     
+                <div class="btn-group" ng-show="reviewDocument.header.languages.length>1">
+                    <input type="button" class="btn" ng-class="{'active' : review.locale==locale, 'btn-info' : review.locale==locale}" ng-repeat="locale in document.header.languages" ng-click="$parent.review.locale = locale" value="{{locale | uppercase}}" />
+                </div>
+     
+                <div view-measure ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></div>
+              </div>
+          </div>
+
+      <hr>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <a ng-click="scrollToTop()" style="padding-top:20px;" class="pull-right"><i class="glyphicon glyphicon-circle-arrow-up"></i> back to top</a>
+        </div>
+      </div>
+
+
+  </div>
+</div>

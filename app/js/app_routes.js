@@ -47,6 +47,13 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
               resolveUser: true,
               subTemplateUrl: '/app/views/contacts.html',
             }).
+
+            when('/register/:document_type/new', {
+              templateUrl: '/app/views/register.html',
+              resolveController: true,
+              resolveUser: true,
+              subTemplateUrl: '/app/views/forms/edit/edit-', //filled in through controller
+            }).
             
             otherwise({redirectTo:'/help/404'});
     }]);

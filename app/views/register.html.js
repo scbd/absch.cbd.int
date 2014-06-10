@@ -35,7 +35,7 @@ define(['app',
       //$scope.canRegisterReference = $rootScope.user.isAuthenticated;
 
     //============================================================
-    
+   
     //TODO: stop using so many globals =P I should inherit the controller scope or something.
     $rootScope.subheadings = {
       'National Records': [
@@ -351,6 +351,7 @@ define(['app',
           return;
         }
 
+        //My god the coupling is horrible
         $scope.$broadcast("loadDocument", {
           schema : schema,
           identifier : identifier

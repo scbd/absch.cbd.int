@@ -78,6 +78,7 @@ app.directive("editMeasure", [ "authHttp", "Enumerable", "$filter", "$q", "guid"
 				}
 
 				$q.when(qDocument).then(function(doc) {
+          console.log(doc);
 
 					$scope.tab    = "edit";
 					$scope.status = "ready";
@@ -96,6 +97,7 @@ app.directive("editMeasure", [ "authHttp", "Enumerable", "$filter", "$q", "guid"
 			//
 			//==================================
 			$scope.$on("loadDocument", function(evt, info) {
+        console.log('hmmmm? ', info);
 
 				if(info.schema!="measure")
 					return;
@@ -460,8 +462,10 @@ app.directive("editMeasure", [ "authHttp", "Enumerable", "$filter", "$q", "guid"
 						}
 					}
 
-					if (!angular.equals(oNewIdentifiers,  $scope.identifiers)) $scope.identifiers = oNewIdentifiers;
-					if (!angular.equals(oNewSections,     $scope.sections   )) $scope.sections    = oNewSections;
+					if (!angular.equals(oNewIdentifiers,  $scope.identifiers))
+            $scope.identifiers = oNewIdentifiers;
+					if (!angular.equals(oNewSections,     $scope.sections   ))
+            $scope.sections    = oNewSections;
 				}
 
 				//==============================
