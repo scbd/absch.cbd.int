@@ -314,8 +314,9 @@ app.controller("RegisterController",
 
 			if(!allowed) {
 
-				if(identifier) alert("You are not authorized to edit this record");
-				else           alert("You are not authorized to create a new record");
+        //TODO: do something nicer.
+				//if(identifier) alert("You are not authorized to edit this record");
+				//else           alert("You are not authorized to create a new record");
 
 				return;
 			}
@@ -369,8 +370,14 @@ app.controller("RegisterController",
 	var canEdit_cache = {}
 	$scope.canEdit = function (schema, identifier) {
 
-		if(!$rootScope.user.isAuthenticated)
+		if(!$rootScope.user.isAuthenticated) {
+      $rootScope.errorMessage = {
+        title: 'Session Expired',
+        body: '<p>Your session has expired, please login again.</p><div login></div>',
+      };
+      $('#error-message').modal('show');
 			return false;
+    }
 
 		var cacheKey = (schema||"") + "+" + (identifier||"");
 
