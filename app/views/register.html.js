@@ -23,9 +23,9 @@ define(['app',
 
 app.controller("RegisterController", 
 	["$rootScope", "$location" , "$scope", "$q", "$window", "IStorage", "underscore",
-	 "schemaTypes", "$compile", "$timeout","lstringFilter",
+	 "schemaTypes", "$compile", "$timeout","lstringFilter", '$cookies',
 	 function ($rootScope, $location, $scope, $q, $window, storage, _,
-	  schemaTypes,$compile,$timeout,lstringFilter) {
+	  schemaTypes,$compile,$timeout,lstringFilter, $cookies) {
 
 	 	
 	//============================================================
@@ -374,8 +374,14 @@ app.controller("RegisterController",
 
 		var cacheKey = (schema||"") + "+" + (identifier||"");
 
-		if(canEdit_cache[cacheKey]!==undefined)
+		if(canEdit_cache[cacheKey]!==undefined){
+
+			if(canEdit_cache[cacheKey] && $rootScope.user.isAuthenticated &&  !$cookies.authenticationToken){
+				alert('session expired please login again');
+				$scope.actionSignin();
+			}
 			return canEdit_cache[cacheKey];
+		}
 
 		if(identifier) {
 
