@@ -1,109 +1,132 @@
 ﻿<div>
-	<div id="myModal" class="modal fade" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <!-- dialog body -->
-	      <div class="modal-body">
-	        <button type="button" class="close" data-dismiss="modal">&times;</button>
-	        Are you sure you want to permanently delete this contact?
-	      </div>
-	      <!-- dialog buttons -->
-	      <div class="modal-footer">
-	      		<button type="button" id="deleteOk" class="btn btn-danger">OK</button>
-	      		<button type="button" data-dismiss="modal" class="btn btn-primary">Cancel</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	<div class="row" ng-show="getContacts()">
-		<div class="row" ng-show="showFilter">
-	          <div class="col-xs-10" >
-	            <span ng-click="filterBy=null" class="btn btn-info"> 
-	            <i ng-hide="filterBy" class="glyphicon glyphicon-ok"></i> All <span class="badge badge-default">
-	            {{(getContacts() ).length}}</span></span>
-	          	<span ng-click="filterBy=isOrganization" class="btn btn-danger"> 
-	            <i ng-show="filterBy==isOrganization" class="glyphicon glyphicon-ok"></i> Organizations <span class="badge badge-default">{{(getContacts() | filter:isOrganization).length}}</span></span>
-	              <span ng-click="filterBy=isPerson" class="btn btn-success"> 
-	            <i ng-show="filterBy==isPerson" class="glyphicon glyphicon-ok"></i> Person  <span class="badge badge-default">{{(getContacts() | filter:isPerson).length}}</span></span>
-	            <span ng-click="filterBy=isCNA" class="btn btn-default btn-draft" style="color:#fff">
-	            <i ng-show="filterBy==isCNA" class="glyphicon glyphicon-ok"></i> CNA  <span class="badge badge-default" style="color:#999">{{(getContacts() | filter:isCNA).length}}</span></span>
-	            <input type="text" ng-model="keywords" placeholder=" Keyword " class="form-control keyword" style="width:160px;display:inline;">
-	          </div>
-	          <div class="col-xs-2 pull-right" ng-show="showButtons()">
-	            <span style="font-size: 16px; color: white;margin:0;padding:0;float:right;">
-	            <a ng-click="editContact(-1)" class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span> Add new</a></span>
-	          </div>
-	          <br/><br/>
-	    </div>
-	  <div class="col-sm-12" ng-class="{'col-md-6' : getContacts().length>1, 'col-md-12' : getContacts().length<=1}" ng-repeat="contact in getContacts() | filter:filterBy | filter:keywords">
-		<div class="well" >
-			<div class="pull-right" ng-show="showButtons()">
-				<button type="button" class="btn btn-default" ng-click="deleteContact($index)"><i class="fa fa-trash-o"></i></button>
-				<button type="button" class="btn btn-default" ng-click="editContact($index)"  ><i class="fa fa-edit"></i></button>
-			</div>
-			<view-contact-reference ng-model='contact' locale="en"></view-contact-reference>
-		</div>
-	  </div>
-	</div>							
-	<button class="btn btn-default" ng-click="editContact(-1)" ng-show="showButtons()">
+    <link href="/app/css/record.css" rel="stylesheet">
+
+    <div id="myModal" class="modal fade" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- dialog body -->
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    Are you sure you want to permanently delete this contact?
+                </div>
+                <!-- dialog buttons -->
+                <div class="modal-footer">
+                    <button type="button" id="deleteOk" class="btn btn-danger">Ok</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-primary">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-show="getContacts()">
+        <div ng-show="showFilter">
+            <div class="col-xs-10" style="padding-bottom:3px;">
+                <span ng-click="filterBy=null" class="btn" style="font-weight:strong;">
+                    <i ng-hide="filterBy" class="glyphicon glyphicon-ok"></i> All
+                    <span class="badge">
+                        {{(getContacts() ).length}}</span>
+                </span>
+                <!-- <span ng-click="filterBy=isOrganization" class="btn" style="font-weight:strong;">
+                    <i ng-show="filterBy==isOrganization" class="glyphicon glyphicon-ok"></i> Organizations
+                    <span class="badge">{{(getContacts() | filter:isOrganization).length}}</span>
+                </span>
+                <span ng-click="filterBy=isPerson" class="btn" style="font-weight:strong;">
+                    <i ng-show="filterBy==isPerson" class="glyphicon glyphicon-ok"></i> People
+                    <span class="badge">{{(getContacts() | filter:isPerson).length}}</span>
+                </span> -->
+                <span ng-click="filterBy=isCNA" class="btn" style="font-weight:strong;">
+                    <i ng-show="filterBy==isCNA" class="glyphicon glyphicon-ok"></i> CNA
+                    <span class="badge">{{(getContacts() | filter:isCNA).length}}</span>
+                </span>
+                <input type="text" ng-model="keywords" placeholder=" Keyword " class="form-control keyword" style="width:160px;display:inline;">
+            </div>
+            <div class="col-xs-2" ng-show="showButtons()" style="padding-bottom:3px;">
+                <span style="font-size: 16px; color: white;margin:0;padding:0;float:right;">
+                    <a ng-click="editContact(-1)" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-plus-sign"></span>Add new</a>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12"><div style="border-bottom:3px solid #111;"></div></div>
+    </div>
+
+    <div class="row" style="padding-top:20px">
+
+        <div class="col-sm-12" ng-class="{'col-md-6' : getContacts().length>1, 'col-md-12' : getContacts().length<=1}" ng-repeat="contact in getContacts() | filter:filterBy | filter:keywords">
+            <div class="well">
+                <div class="pull-right" ng-show="showButtons()">
+                    <button type="button" class="btn btn-default" ng-click="deleteContact($index)"><i class="fa fa-trash-o"></i>
+                    </button>
+                    <button type="button" class="btn btn-default" ng-click="editContact($index)"><i class="fa fa-edit"></i>
+                    </button>
+                </div>
+                <view-contact-reference ng-model='contact' locale="en"></view-contact-reference>
+            </div>
+        </div>
+    </div>
+    <!-- 	<button class="btn btn-default" ng-click="editContact(-1)" ng-show="showButtons()">
 	  {{caption||'ADD ORGANIZATION OR CONTACT »'}}
-	</button>
+	</button> -->
 
-	<!-- Modal -->
-	<div class="modal fade"  id="editContact"  data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	  <div class="modal-dialog modal-lg">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" aria-hidden="true" ng-click="closeContact()">&times;</button>
-	        <h4 class="modal-title" id="myModalLabel">
-	        	<span ng-hide="edition.contact.type">Edit an organization or a contact person</span>
-	        	<span ng-show="edition.contact.type=='organization'">Edit an organization</span>
-	        	<span ng-show="edition.contact.type=='person'">Edit a contact person</span>
-	        	<span ng-show="edition.contact.type=='CNA'">Edit a CNA as a contact</span>
-	        </h4>
+    <!-- Modal -->
+    <div class="modal fade" id="editContact" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-hidden="true" ng-click="closeContact()">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        <span ng-hide="edition.contact.type">Edit an organization or a contact person</span>
+                        <span ng-show="edition.contact.type=='organization'">Edit an organization</span>
+                        <span ng-show="edition.contact.type=='person'">Edit a contact person</span>
+                        <span ng-show="edition.contact.type=='CNA'">Edit a CNA as a contact</span>
+                    </h4>
 
-	        	
-   	        <label ng-hide="selectExisting" class="radio-inline"><input type="radio" ng-model="edition.contact.type" value="organization" 
-   	        	name="editionContactType"/> Organization</label>
-	        <label ng-hide="selectExisting" class="radio-inline"><input type="radio" ng-model="edition.contact.type" value="person" 
-	        	name="editionContactType"/> Person</label>
-	        <label ng-hide="selectExisting" class="radio-inline"><input type="radio" ng-model="edition.contact.type" value="CNA" 
-	        	name="editionContactType"/> CNA</label>
-	        <a type="button" class="btn btn-primary" ng-click="loadExisting()" ng-show="!showFilter">{{buttonText}}</a>
 
-          </div>
-	      <div class="modal-body" >
-		       <div ng-hide="selectExisting">
-			      <form name="editContactForm">
-			      		<div edit-contact-base ng-model="edition.contact" locales="locales" form="editContactForm"></div>	
-			      	</form>
-			      <div class="modal-footer">
-			      	<span ng-hide="editContactForm.$valid">You need to fill all mandatory fields before you can save.</span>
-			        <a type="button" class="btn btn-default" ng-click="closeContact()">Close</a>
-			        <a type="button" class="btn btn-primary" ng-disabled="!editContactForm.$valid" ng-click="saveContact()">Save changes</a>
-			      </div>
-			   	</div>
-		       	<div ng-show="selectExisting && !showFilter">
-		       		<div class="row">
-			      		<div class="col-sm-12" ng-class="{'col-md-6' : existingContacts.length>1, 'col-md-12' : existingContacts.length<=1}" ng-repeat="contact in existingContacts | filter:isSelected">  
-							<div class="well" >
-								<div class="pull-right">
-									<!-- <button type="button" class="btn btn-default" ng-click="deleteContact($index)"><i class="fa fa-trash-o"></i></button> -->
-									<button type="button" class="btn btn-default" ng-click="selectContact(contact)"  ><i class="glyphicon glyphicon-thumbs-up"></i></button>
-								</div>
-								<view-contact-reference ng-model='contact' locale="en"></view-contact-reference>
-							</div>
-						</div>
-					</div>
-					<div class="row" >						
-						<div class="modal-footer">
-					      	<a type="button" class="btn btn-default" ng-click="closeContact()">Close</a>					        
-					    </div>
-					</div>
-	      		</div>
-	      </div>
-	     
-	    </div>
-	  </div>
-	</div>	
+                    <label ng-hide="selectExisting" class="radio-inline">
+                        <input type="radio" ng-model="edition.contact.type" value="organization" name="editionContactType" />Organization</label>
+                    <label ng-hide="selectExisting" class="radio-inline">
+                        <input type="radio" ng-model="edition.contact.type" value="person" name="editionContactType" />Person</label>
+                    <label ng-hide="selectExisting" class="radio-inline">
+                        <input type="radio" ng-model="edition.contact.type" value="CNA" name="editionContactType" />CNA</label>
+                    <a type="button" class="btn btn-primary" ng-click="loadExisting()" ng-show="!showFilter">{{buttonText}}</a>
+
+                </div>
+                <div class="modal-body">
+                    <div ng-hide="selectExisting">
+                        <form name="editContactForm">
+                            <div edit-contact-base ng-model="edition.contact" locales="locales" form="editContactForm"></div>
+                        </form>
+                        <div class="modal-footer">
+                            <span ng-hide="editContactForm.$valid">You need to fill all mandatory fields before you can save.</span>
+                            <a type="button" class="btn btn-default" ng-click="closeContact()">Close</a>
+                            <a type="button" class="btn btn-primary" ng-disabled="!editContactForm.$valid" ng-click="saveContact()">Save changes</a>
+                        </div>
+                    </div>
+                    <div ng-show="selectExisting && !showFilter">
+                        <div class="row">
+                            <div class="col-sm-12" ng-class="{'col-md-6' : existingContacts.length>1, 'col-md-12' : existingContacts.length<=1}" ng-repeat="contact in existingContacts | filter:isSelected">
+                                <div class="well">
+                                    <div class="pull-right">
+                                        <!-- <button type="button" class="btn btn-default" ng-click="deleteContact($index)"><i class="fa fa-trash-o"></i></button> -->
+                                        <button type="button" class="btn btn-default" ng-click="selectContact(contact)"><i class="glyphicon glyphicon-thumbs-up"></i>
+                                        </button>
+                                    </div>
+                                    <view-contact-reference ng-model='contact' locale="en"></view-contact-reference>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="modal-footer">
+                                <a type="button" class="btn btn-default" ng-click="closeContact()">Close</a>	
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>

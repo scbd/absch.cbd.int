@@ -22,8 +22,44 @@
                 <h1>Register Information</h1>
                 <div>
 
-                    <h3 ><a ng-click="tab('dashboard')"  ng-class="{ 'btn-commonformat-selected' : tab()=='dashboard'}" href="#" role="button">
+                    <h3 ng-class="{ 'btn-commonformat-selected' : tab()=='dashboard'}"><a ng-click="tab('dashboard')"   href="#" role="button">
                         <i class="glyphicon glyphicon-list-alt" style="position:relative;top:4px;"></i> Dashboard </a></h3>
+
+
+                    <h3>National Entities</h3>
+
+                        <a ng-click="tab('authority')" href="#" role="button">
+                        <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='authority'}">
+                            <span class="btn-commonformat-national">ABSCH-CNA</span>
+                            <span ng-show="facets('authority','draft') > 0"  class="pull-right label label-default">{{facets('authority','draft')}}</span>  
+<span ng-show="facets('authority','publish') > 0"  class="pull-right label label-success">{{facets('authority','publish')}}</span>
+<span ng-show="facets('authority','request') > 0"  class="pull-right label label-danger">{{facets('authority','request')}}</span> 
+
+                            <br>
+                            <span class="btn-commonformat-name">Competent National Authorities</span>
+                        </div>
+                    </a>
+
+                    <a ng-click="tab('absCheckpoint')" href="#" role="button">
+                        <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='absCheckpoint'}">
+                            <span class="btn-commonformat-national">ABSCH-CP</span>
+                            <span ng-show="facets('absCheckpoint','draft') > 0" class="pull-right label label-default">{{facets('absCheckpoint','draft')}}</span>  
+<span ng-show="facets('absCheckpoint','publish') > 0" class="pull-right label label-success">{{facets('absCheckpoint','publish')}}</span>
+<span ng-show="facets('absCheckpoint','request') > 0" class="pull-right label label-danger">{{facets('absCheckpoint','request')}}</span> 
+
+                            <br>
+                            <span class="btn-commonformat-name">Checkpoints</span>
+                        </div>
+                    </a>
+
+                 <!--    <a ng-click="tab('contact')" href="#" role="button">
+                        <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='contact'}">
+                            <span class="btn-commonformat-national">National Contacts</span>
+                             
+                        </div>
+                    </a> -->
+
+
 
                     <h3>National Records</h3>
 
@@ -41,17 +77,7 @@
                         </div>
                     </a>
 
-                    <a ng-click="tab('authority')" href="#" role="button">
-                        <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='authority'}">
-                            <span class="btn-commonformat-national">ABSCH-CNA</span>
-                            <span ng-show="facets('authority','draft') > 0"  class="pull-right label label-default">{{facets('authority','draft')}}</span>  
-<span ng-show="facets('authority','publish') > 0"  class="pull-right label label-success">{{facets('authority','publish')}}</span>
-<span ng-show="facets('authority','request') > 0"  class="pull-right label label-danger">{{facets('authority','request')}}</span> 
-
-                            <br>
-                            <span class="btn-commonformat-name">Competent National Authority</span>
-                        </div>
-                    </a>
+                    
 
                     <a ng-click="tab('absPermit')" href="#" role="button">
                         <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='absPermit'}">
@@ -66,17 +92,7 @@
                     </a>
 
 
-                    <a ng-click="tab('absCheckpoint')" href="#" role="button">
-                        <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='absCheckpoint'}">
-                            <span class="btn-commonformat-national">ABSCH-CP</span>
-                            <span ng-show="facets('absCheckpoint','draft') > 0" class="pull-right label label-default">{{facets('absCheckpoint','draft')}}</span>  
-<span ng-show="facets('absCheckpoint','publish') > 0" class="pull-right label label-success">{{facets('absCheckpoint','publish')}}</span>
-<span ng-show="facets('absCheckpoint','request') > 0" class="pull-right label label-danger">{{facets('absCheckpoint','request')}}</span> 
-
-                            <br>
-                            <span class="btn-commonformat-name">Checkpoint</span>
-                        </div>
-                    </a>
+                    
 
                     <a ng-click="tab('absCheckpointCommunique')" href="#" role="button">
                         <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='absCheckpointCommunique'}">
@@ -100,6 +116,7 @@
                         </div>
                     </a>
 
+                      
                 </div>
 
 
@@ -118,20 +135,7 @@
                         </div>
                     </a>
                 </div>
-                <div>
-                    <h3>Others</h3>
-
-                    <a ng-click="tab('contact')" href="#" role="button">
-                        <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : tab()=='contact'}">
-                            <span class="btn-commonformat-reference">Contacts</span>
-                              <!-- <span  ng-show="facets('contact','draft') > 0"  class="pull-right label label-default">{{facets('contact','draft')}}</span>  
-                              <span  ng-show="facets('contact','draft') > 0"  class="pull-right label label-success">{{facets('contact','publish')}}</span>
-                              <span  ng-show="facets('contact','draft') > 0"  class="pull-right label label-danger">{{facets('contact','request')}}</span>   -->     
-                            <br>
-                            <!-- <span class="btn-commonformat-name">Virtual Library Record</span> -->
-                        </div>
-                    </a>
-                </div>
+   
              <!--    <div>
                     <h3>National Users</h3>
 
@@ -727,7 +731,7 @@
             <!-- end ndb -->
 
 
-            <div ng-show="tab()=='contact'" class="col-xs-9">
+            <div ng-show="tab()=='contact'" class="col-xs-9"  style="padding-top:20px;">
                 <div>
                     <a class="pull-right" ng-show="!help" ng-click="help=!help;" style="cursor:pointer;padding:5px;"><i class="glyphicon glyphicon-question-sign" >
                     </i> show help</a>
@@ -737,12 +741,12 @@
 
                 <div class="registerpage-header">
                     <h2>
-                        <span class="abbreviation">Contacts</span>
-                        <span class="title">Contacts management</span>
+                        <span class="abbreviation">National Contacts</span>
+                        <span class="title">Manage Contacts</span>
                     </h2>
                     <div class="help1" ng-show="help">
                         <p ng-hide="editing">
-                            This common format is to be used for registering contacts which can be used in documents.
+                            This common format is to be used for registering organizations and contacts which can be used in other national records.
                         </p>
                     </div>
 
