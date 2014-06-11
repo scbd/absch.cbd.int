@@ -27,7 +27,8 @@
 
 
 #Record .record-body{
-	background-color: #E7E7E7;
+	/*background-color: #E7E7E7;*/
+	background-color:transparent;
 	padding:10px 20px 10px 20px;
 }
 
@@ -81,3 +82,7 @@
 	margin-bottom: 5px;
 	border-bottom: 1px solid #ccc;
 }
+	#Record .confidential{
+		color:#a94442!important;
+		background-color: #F2DEDE!important;
+	}

@@ -38,7 +38,7 @@
             <input type="checkbox" ng-model="authority.selected" bind-indeterminate="authority.indeterminate" ng-change="refresh(authority.selected,'authority')">Competent National Authorities ({{authority.count}})
         </label>
         <div ng-show="authority.selected" class="subfilters-section">
-            <div km-toggle placeholder="Responsible for all" ng-model="cnaResponsibleForAll"></div>
+            <div km-toggle placeholder="Responsible for all functions" ng-model="cnaResponsibleForAll"></div>
             <br>
             <div km-select multiple ng-model="cnaJurisdiction" binding-type="string" placeholder="Jurisdictions" items="options.cnaJurisdictions()"></div>
             <br>
