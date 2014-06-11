@@ -1,4 +1,7 @@
 ﻿<div id="Record" class="record panel panel-default">		
+
+
+
 	<div class="panel-heading"> <h4><span class="record-title-national">ABSCH-IRCC</span> Permit or its equivalent constituting an internationally recognized certificate of compliance</h4> </div>
 	<div class="record-body panel-body">
 			<a type="button" ng-show="showPdf" target="_blank" class="btn btn-info pull-right" ng-href="http://absch.cbd.int/app/abs/docs/ABSCH-BA-103882-X-TEST.pdf">Download the Compliance Certificate</a>
@@ -69,7 +72,7 @@
 							</div>
 						</div>						
 						<div ng-show="document.providerConfidential">
-							Confidential information
+							<div class="km-value km-pre confidential">Confidential information</div>
 						</div>					
 				</div>
 
@@ -100,7 +103,7 @@
 							</div>
 						</div>
 						<div ng-show="document.informedConsentConfidential">
-							Confidential information
+							<div class="km-value km-pre confidential">Confidential information</div>
 						</div>
 				</div>
 
@@ -110,7 +113,7 @@
 				</div>
 				<div ng-show="document.geneticResourcesConfidential">
 					<label>Subject-matter or genetic resources covered by the permit or its equivalent</label>
-					<div class="km-value km-pre">Confidential information</div>
+					<div class="km-value km-pre confidential">Confidential information</div>
 				</div>
 
 				<div ng-show="document.specimen || document.taxonomy || document.gisFiles">
