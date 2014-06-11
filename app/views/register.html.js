@@ -121,7 +121,7 @@ define(['app',
       },
       database: {
         abbreviation: 'ABSCH-NDB',
-        title: 'ABS National Website or Databse',
+        title: 'ABS National Website or Database',
         help: 'This common format is to be used for registering information on national website or databases relevant to access and benefit-sharing.',
         tips: [
         ],
@@ -554,33 +554,5 @@ define(['app',
       }
     });
 
-    //TODO: is this still needed?
-    $scope.$watch('tab()', function(value) {
-
-      $scope.msg = "";
-      if(value=='authority'              ) 
-        require(['../views/forms/edit/edit-authority.directive'],                 
-                       function() { $scope.authorityReady = true; });
-      
-
-      if(value=='absCheckpoint')
-      {
-        require(['../views/forms/edit/edit-abs-checkpoint.directive'],
-                 function() {
-                    $scope.absCheckpointReady = true;					
-              });
-      }
-      
-      if(value=='absCheckpointCommunique') require(['../views/forms/edit/edit-abs-checkpoint-communique.directive'], function() { $scope.absCheckpointCommuniqueReady = true; });
-      if(value=='absPermit'              ) require(['../views/forms/edit/edit-abs-permit.directive'],                function() { $scope.absPermitReady = true; });
-      if(value=='database'               ) require(['../views/forms/edit/edit-database.directive'],                  function() { $scope.databaseReady = true; });
-      if(value=='measure'                ) require(['../views/forms/edit/edit-measure.directive'],                   function() { $scope.measureReady = true; });
-      if(value=='resource'               ) require(['../views/forms/edit/edit-resource.directive'],                  function() { $scope.resourceReady = true; });
-      if(value=='contact'               ) { 
-            if(!$scope.contacts){
-              loadRecords(value);}
-            $scope.contactReady = true; 
-      };
-    })
   }]);
 });
