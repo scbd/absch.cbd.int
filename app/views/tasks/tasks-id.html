@@ -156,6 +156,7 @@
 							<span ng-switch-when="publishRecord-approve"><i class="glyphicon glyphicon-ok"></i> Approved</span>
 							<span ng-switch-when="publishRecord-reject"><i class="glyphicon glyphicon-remove"></i> Rejected</span>
 							<span ng-switch-default>{{activity.name+'-'+activity.result.action}}*</span>
+							<span ng-show="activity.result.reason"><STRONG> for {{activity.result.reason}} </STRONG></span>
 						</span>
 
 						on {{activity.completedOn|date:'short'}} by {{activity.completedBy_info.firstName}} {{activity.completedBy_info.lastName}}
