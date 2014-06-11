@@ -38,6 +38,6 @@ app.controller("ContactsController",
         return	$scope.dashboardFilter == filter || $scope.dashboardFilter == "All";
     }
 
-    $scope.tab('contact');
+    $rootScope.loadRecords('contact');
    }]);
 });

@@ -186,6 +186,7 @@ define(['app',
     $scope.userActivities = []; //Jason: what does this do?
     function loadRecords(schema)
     {
+      console.log('schema: ', schema);
 
       $("a[role*='button']").toggleClass('ui-disabled');
       if(schema == null || schema==undefined ){
@@ -280,6 +281,8 @@ define(['app',
         return $scope.records;
       });
     }
+    //TODO: this is a scoping disaster. Needed for contacts, fix later.
+    $rootScope.loadRecords = loadRecords;
     
     loadRecords();
 
@@ -313,7 +316,6 @@ define(['app',
     //
     //============================================================
     $scope.tab = function(newTab) {
-
       if(!newTab)
         return leftTab;
 
