@@ -37,7 +37,8 @@ h4, h5, h6 {
   text-rendering: optimizeLegibility;
 }
 h1, h2, h3 {
-     font-family: 'alternategotno3dotregular';
+     /*font-family: 'alternategotno3dotregular';*/
+     font-family:Tahoma, Trebuchet MS, "Helvetica Neue", Helvetica, Arial, sans-serif;
      text-rendering: optimizeLegibility;
 }
 
