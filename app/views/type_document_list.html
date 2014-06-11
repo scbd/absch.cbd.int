@@ -38,10 +38,6 @@
         <strong>{{msg}}</strong>
       </div>
 
-      <!-- TODO: obviously this won't work right, until it gets fixed to be more generic or removed. -->
-      <ngx-lazy ng-show="editing" ready="measureReady">
-        <div edit-measure></div>
-      </ngx-lazy>
       <div ng-hide="editing">
         <h2 style="border-bottom: 1px solid #333;margin-bottom:5px;">Records</h2>
         <div ng-show="isAuthenticated">

@@ -1,12 +1,8 @@
-define(['app'], function (app) {
+define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 
-  app.controller("editAuthority", ["$scope", "authHttp", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage", "authentication", "Enumerable", "editFormUtility", function ($scope, $http, guid, $filter, Thesaurus, $q, $location, storage, authentication, Enumerable, editFormUtility) {
+  app.controller("editAuthority", ["$scope", "authHttp", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage", "authentication", "Enumerable", "editFormUtility", "$routeParams", "$controller", function ($scope, $http, guid, $filter, Thesaurus, $q, $location, storage, authentication, Enumerable, editFormUtility, $routeParams, $controller) {
+    $controller('editController', {$scope: $scope});
 		
-      $scope.tab      = "edit";
-			$scope.status   = "";
-			$scope.error    = null;
-			$scope.document = null;
-			$scope.review   = { locale : "en" };
 			$scope.options  = {
 				countries					: function () { return $http.get("/api/v2013/thesaurus/domains/countries/terms",            { cache: true }).then(function(o){ return $filter("orderBy")(o.data, "name"); }); },
 				organizationTypes			: function () { return $http.get("/api/v2013/thesaurus/domains/Organization%20Types/terms", { cache: true }).then(function(o){ return o.data; }); },
@@ -25,156 +21,7 @@ define(['app'], function (app) {
 			//==================================
 			//
 			//==================================
-		    $scope.CompletedEvent = function () { console.log("Completed Event called"); };
-		    $scope.ExitEvent = function () { console.log("Exit Event called"); };
-		    $scope.ChangeEvent = function () { console.log("Change Event called"); };
-		    $scope.BeforeChangeEvent = function () { console.log("Before Change Event called"); };
-
-
-			//==================================
-			//
-			//==================================
-			$scope.scrollToTop = function() {
-        		$("body, html").animate({scrollTop: 0}, "slow");
-      		};
-
-
-		    //==================================
-			//
-			//==================================
-			$scope.isLoading = function() {
-				return $scope.status=="loading";
-			};
-
-			//==================================
-			//
-			//==================================
-			$scope.hasError = function() {
-				return $scope.error!==null;
-			};
-
-			//==================================
-			//
-			//==================================
-			$scope.userGovernment = function() {
-				return $scope.$root.user.government;
-			};
-
-			//==================================
-			//
-			//==================================
-			function load(identifier) {
-
-				$scope.status = "loading";
-
-				var qDocument = null;
-
-				if(identifier) {
-					qDocument = editFormUtility.load(identifier, "authority");
-				}
-				else {
-					qDocument = {
-						header: {
-							identifier: guid(),
-							schema: "authority",
-							languages: ["en"]
-						},
-						government: $scope.userGovernment() ? { identifier: $scope.userGovernment() } : undefined,
-						libraries: [{ identifier: "cbdLibrary:abs-ch" }] //Force to ABS
-					};
-				}
-
-				$q.when(qDocument).then(function(doc) {
-					$scope.status = "ready";
-					$scope.document = doc;
-
-				}).catch(function(err) {
-
-					$scope.onError(err.data, err.status);
-					throw err;
-
-				});
-
-			}
-
-			//==================================
-			//
-			//==================================
-			$scope.$on("loadDocument", function(evt, info) {
-
-				if(info.schema!="authority")
-					return;
-
-				load(info.identifier);
-			});
-
-			//==================================
-			
-			//==================================
-			$scope.$on("documentInvalid", function(){
-				
-				$scope.invalid = true;
-				validate();
-			});
-
-			//==================================
-			//
-			//==================================
-			$scope.$watch("tab", function(tab) {
-				if(tab == "review") 
-					validate();
-			});
-
-			//==================================
-			//
-			//==================================
-			$scope.isInLibrary = function(name, document) {
-				document = document || $scope.document;
-
-				if (!document || !document.libraries)
-					return false;
-
-				var qLibraries = Enumerable.from(document.libraries);
-
-				if(name=="chm"  ) return qLibraries.any(function(o){ return o.identifier == "cbdLibrary:chm";    });
-				if(name=="absch") return qLibraries.any(function(o){ return o.identifier == "cbdLibrary:abs-ch"; });
-				if(name=="bch"  ) return qLibraries.any(function(o){ return o.identifier == "cbdLibrary:bch";    });
-				if(name=="ebsa" ) return qLibraries.any(function(o){ return o.identifier == "cbdLibrary:ebsa";   });
-
-				return false;
-			};
-
-			// //==================================
-			// //
-			// //==================================
-			// $scope.allowJurisdictionName = function(document) {
-
-			// 	debugger;
-
-			// 	 document = document || $scope.document;
-
-			// 	if (!document || !document.absJurisdiction)
-			// 		return false;
-
-			// 	var qabsJurisdictions = Enumerable.from([document.absJurisdiction]);
-
-			// 	return qabsJurisdictions.Any(function (o) { return o.identifier == "DEBB019D-8647-40EC-8AE5-10CA88572F6E"; });
-			// };
-
-			//==================================
-			//
-			//==================================
-			$scope.isFieldValid = function(field) {
-				if (field && $scope.validationReport && $scope.validationReport.errors)
-					return !Enumerable.from($scope.validationReport.errors).any(function(x){return x.property==field;});
-
-				return true;
-			};
-
-			//==================================
-			//
-			//==================================
-			$scope.getCleanDocument = function(document) {				
+			$scope.getCleanDocument = function(document) {
 
 				document = document || $scope.document;
 
@@ -183,17 +30,41 @@ define(['app'], function (app) {
 
 				document = angular.fromJson(angular.toJson(document));
 
-				if (!$scope.isInLibrary("absch", document)){
-				    document.responsibilities        = undefined;
-					document.absJurisdiction         = undefined;
-					document.absJurisdictionName     = undefined;
-					document.absGeneticResourceTypes = undefined;
-					document.absGeneticResourceAreas = undefined;
-					document.absResponsibilities     = undefined;
+				if (!document.consentGranted) {
+					document.consentInformation = undefined;
+					document.consentDocuments = undefined;
 				}
 
-				 if (document.absJurisdiction && document.absJurisdiction.identifier == '7437F880-7B12-4F26-AA91-CED37250DD0A' )
-				 	document.absJurisdictionName = undefined;
+				if (!document.mutuallyAgreedTermsEstablished) {
+					document.mutuallyAgreedTermsInformation = undefined;
+					document.mutuallyAgreedTermsDocuments = undefined;
+				}
+
+				if (document.gisFiles && document.gisFiles.length===0) {
+					document.gisFiles = undefined;
+				}
+
+				if (document.amendedPermits && document.amendedPermits.length===0) {
+					document.amendedPermits = undefined;
+				}
+
+				if (!document.amendedPermits) {
+					document.consentedAmendment = undefined;
+					document.amendmentsDescription = undefined;
+				}
+				if (document.providerConfidential) {
+					document.providers = undefined;
+				}
+				if (document.informedConsentConfidential) {
+					document.informedConsents = undefined;
+				}
+				if (document.geneticResourcesConfidential) {
+					document.geneticResources	= undefined;
+					document.specimen			= undefined;
+					document.taxonomy			= undefined;
+					document.gisFiles			= undefined;
+					document.gisMapCenter		= undefined;
+				}
 
 				if (/^\s*$/g.test(document.notes))
 					document.notes = undefined;
@@ -201,90 +72,5 @@ define(['app'], function (app) {
 				return document;
 			};
 
-			//==================================
-			//
-			//==================================
-			function validate() {
-
-				$scope.validationReport = null;
-
-				var oDocument = $scope.reviewDocument = $scope.getCleanDocument();
-
-				return storage.documents.validate(oDocument).then(function(success) {
-				
-					$scope.validationReport = success.data;
-					return !!(success.data && success.data.errors && success.data.errors.length);
-
-				}).catch(function(error) {
-					
-					$scope.onError(error.data);
-					return true;
-
-				});
-			}
-
-			//==================================
-			//
-			//==================================
-			$scope.onError = function(error, status)
-			{
-				$scope.status = "error";
-
-				if (status == "notAuthorized") {
-					$scope.status = "hidden";
-					$scope.error  = "You are not authorized to modify this record";
-				}
-				else if (status == 404) {
-					$scope.status = "hidden";
-					$scope.error  = "Record not found.";
-				}
-				else if (status == "badSchema") {
-					$scope.status = "hidden";
-					$scope.error  = "Record type is invalid.";
-				}
-				else if (error.Message)
-					$scope.error = error.Message;
-				else
-					$scope.error = error;
-			};
-			
-			//==================================
-			//
-			//==================================
-			$scope.loadRecords = function(identifier, schema) {
-
-				if (identifier) { //lookup single record
-					var deferred = $q.defer();
-
-					storage.documents.get(identifier, { info: "" })
-						.then(function(r) {
-							deferred.resolve(r.data);
-						}, function(e) {
-							if (e.status == 404) {
-								storage.drafts.get(identifier, { info: "" })
-									.then(function(r) { deferred.resolve(r.data);},
-										  function(e) { deferred.reject (e);});
-							}
-							else {
-								deferred.reject (e);
-							}
-						});
-					return deferred.promise;
-				}
-
-				//Load all record of specified schema;
-
-				var sQuery = "type eq '" + encodeURI(schema) + "'";
-
-				return $q.all([storage.documents.query(sQuery, null, { cache: true }),
-							   storage.drafts   .query(sQuery, null, { cache: true })])
-					.then(function(results) {
-						var qResult = Enumerable.from (results[0].data.Items)
-												.union(results[1].data.Items, "$.identifier");
-						return qResult.toArray();
-					});
-			};
-
-			$scope.$emit("getDocumentInfo", {});
   }]);
 });
