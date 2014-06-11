@@ -448,6 +448,7 @@ define(['app',
       evt.stopPropagation();
       $scope.editing = false;
       $scope.msg = "Your record has been closed without saving.";
+      $location.path('/register/'+$scope.document_type);
 
       
     });
