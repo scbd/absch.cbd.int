@@ -22,9 +22,9 @@ define(['app',
 
   app.controller("RegisterController", 
     ["$rootScope", "$location" , "$scope", "$q", "$window", "IStorage", "underscore",
-     "schemaTypes", "$compile", "$timeout","lstringFilter", "$routeParams",
+     "schemaTypes", "$compile", "$timeout","lstringFilter", "$routeParams", "$cookies",
 	  function ($rootScope, $location, $scope, $q, $window, storage, _,
-      schemaTypes,$compile,$timeout,lstringFilter, $routeParams) {
+      schemaTypes,$compile,$timeout,lstringFilter, $routeParams, $cookies) {
 
       
     //============================================================
@@ -100,7 +100,7 @@ define(['app',
       absCheckpoint: {
         abbreviation: 'ABSCH-CP',
         title: 'Checkpoint',
-        help: 'Checkpoints are designated by each Party in order to collect and receive information from users of genetic resources. This common format is to be used for registering information on checkpoints that collect or receive relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources.',
+        help: 'This common format is to be used for registering contact details of checkpoints designated under paragraph 1 (a) of Article 17, who would collect or receive, as appropriate, relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources.',
         tips: [
         ],
       },
@@ -408,8 +408,16 @@ define(['app',
 
       var cacheKey = (schema||"") + "+" + (identifier||"");
 
-      if(canEdit_cache[cacheKey]!==undefined)
+      if(canEdit_cache[cacheKey]!==undefined){
+
+        if(canEdit_cache[cacheKey] && $rootScope.user.isAuthenticated &&  !$cookies.authenticationToken){
+          alert('session expired please login again');
+          $scope.actionSignin();
+        }
         return canEdit_cache[cacheKey];
+      }
+
+
 
       if(identifier) {
 
