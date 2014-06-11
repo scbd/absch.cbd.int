@@ -139,7 +139,7 @@ app.directive('documentList', function ($http, $filter) {
                   var formatDate = function formatDate (date) {
                         return date+'';//moment(date).format('MMMM Do YYYY');
                     };
-// console.log(document);
+console.log(document);
                     output.id          = document.id;
                     output.schema      = document.schema_s.toLowerCase();
                     output.title       = document.title_t;
@@ -224,7 +224,8 @@ app.directive('documentList', function ($http, $filter) {
                         output.grType = (document.geneticResourceTypes_ss );
                         output.recordtype="nationalRecord";
 
-                         if(output.responsibleForAll)output.description ="This CNA responsible for all functions under the Nagoya Protocol.";
+                         if(output.responsibleForAll) 
+                            output.description ="This CNA is responsible for all functions under the Nagoya Protocol.";
                          else{
                             // TODO: output.description should be the summary of responsibilities
                             if(output.jusrisdiction)output.metadata.push(output.jusrisdiction);
@@ -256,7 +257,6 @@ app.directive('documentList', function ($http, $filter) {
                         //TODO: keywords should show up in the metadata. if(output.keywords)output.metadata.push(output.keywords);
                         //TODO: the metadata should be a link to download the pdf
                         if(output.usage)output.metadata.push(output.usage);
-                       
 
                     }
                     else if(document.schema_s=='absCheckpointCommunique') {
@@ -266,6 +266,7 @@ app.directive('documentList', function ($http, $filter) {
 
                         //TODO: output.description should be the summary of utilization
                         //TODO: the metadata should include a link to download the pdf
+                        
                     }
                      else if(document.schema_s=='database') {
                         output.recordtype="nationalRecord";
