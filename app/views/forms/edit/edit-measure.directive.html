@@ -160,7 +160,7 @@
 						</div>
 
 						<div ng-show="isJurisdictionSubNationalOrCommunity()">
-							<div class="km-control-group" required name="jurisdictionName" caption="Name of the sub-national jurisdiction / community">
+							<div class="km-control-group" required name="jurisdictionName" caption="Name of the sub-national jurisdiction / community / other">
 							<div km-textbox-ml required ng-model="document.jurisdictionName" locales="document.header.languages"></div>
 							</div>
 						</div>
@@ -268,7 +268,7 @@
 					<div class="col-sm-12">
 						<div class="km-control-group" required name="authorities" caption="Contact Institution">
 
-                            <field-embed-contact multiple ng-model="$parent.document.authorities" locales="$parent.document.header.languages" caption="Add an institution »"></field-embed-contact>
+                            <field-embed-contact multiple ng-model="document.authorities" locales="document.header.languages" caption="Add an institution »"></field-embed-contact>
 
 						</div>
 					</div>

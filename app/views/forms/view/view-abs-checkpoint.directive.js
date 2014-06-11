@@ -91,6 +91,41 @@
 									});
 							});
 						};
+
+						//==================================
+						//
+						//==================================
+						$scope.isSubNational = function(document) {
+
+							document = document || $scope.document;
+
+							return document &&
+								   document.jurisdiction &&
+								   document.jurisdiction.identifier == "DEBB019D-8647-40EC-8AE5-10CA88572F6E";
+						};
+						
+						//==================================
+						//
+						//==================================
+						$scope.isOthers = function(document) {
+
+							document = document || $scope.document;
+
+							return document &&
+								   document.jurisdiction &&
+								   document.jurisdiction.identifier == "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED";
+						};
+						//==================================
+						//
+						//==================================
+						$scope.isCommunity = function (document) {
+
+							document = document || $scope.document;
+
+							return document &&
+								   document.jurisdiction &&
+								   document.jurisdiction.identifier == "DEEEDB35-A34B-4755-BF77-D713017195E3";
+						};
 					}]
 				};
 			}]);

@@ -66,7 +66,7 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="control-group">
-                            <div class="km-control-group" name="jurisdiction" caption="Area of Jurisdiction"></div>
+                            <div class="km-control-group" name="jurisdiction" caption="Area of jurisdiction"></div>
                             <div km-select required name="jurisdiction" ng-model="document.jurisdiction" items="options.jurisdictions()" placeholder="Specify"></div>
                         </div>
                     </div>
@@ -85,6 +85,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="row" ng-show="isOthers()">
+                    <div class="col-xs-12">
+                        <div class="km-control-group" required name="jurisdictionName" caption="Name of other jurisdiction">
+                            <div km-textbox-ml required name="jurisdictionName" rows="1" ng-model="document.jurisdictionName" locales="document.header.languages"></div>
+                        </div>
+                    </div>
+                </div>
+
                 </section>
 
                 <section>
@@ -100,7 +108,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" ng-show="document.informAllAuthorities==false">
+               <!--  <div class="row" ng-show="document.informAllAuthorities==false">
                     <div class="col-xs-12">
                         <div class="km-control-group" required name="authoritiesToInform" caption="Please select which competent national authority/ies from the list to whom you wish to send a copy of the communiqué">
                             <div km-reference required name="authoritiesToInform" ng-model="document.authoritiesToInform" loader="loadRecords(identifier, 'authority')">
@@ -113,13 +121,12 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="row">
                     <div class="col-xs-12">
-                        <div class="km-control-group" name="contactsToInform" caption="Select other national authorities">
-
-                            <field-embed-contact multiple ng-model="$parent.document.contactsToInform" locales="$parent.document.header.languages" caption="Add an organisation or a contact »" ></field-embed-contact>
+                        <div class="km-control-group" name="contactsToInform" caption="Please select any  other national authority/ies to whom you wish to send a copy of the communiqué">
+                            <field-embed-contact multiple ng-model="document.contactsToInform" locales="document.header.languages" caption="Add an organisation or a contact »" ></field-embed-contact>
 
                         </div>
                     </div>

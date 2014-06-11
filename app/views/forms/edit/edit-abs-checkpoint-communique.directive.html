@@ -79,7 +79,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="km-control-group" name="subjectMatter" required caption="Subject-matter or genetic resources relevant to the information collected or received">
-                                <div class="help-block">Please provide details on the subject-matter or genetic resources relevant to the information collected or received by the checkpoint. This could include biota at any taxonomic rank, which may carry a taxonomic name. It may also include a locality of collection of the material. It may also be possible to identify the genetic resource through reference to a voucher specimen or field notes held in an identified archive or collection. Providing details about the subject matter or genetic resource covered by the permit or its equivalent can provide additional legal certainty.</div>
+                                <div class="help-block">Please provide details  on the subject-matter or genetic resources relevant to the information collected or received by the checkpoint. This could include biota at any taxonomic rank, which may carry a taxonomic name. It may also include a locality of collection of the material. It may also be possible to identify the genetic resource through reference to a voucher specimen or field notes held in an identified archive or collection. Providing details about the subject matter or genetic resource covered by the permit or its equivalent can provide additional legal certainty.</div>
                                 <div km-textbox-ml name="subjectMatter" rows="6" ng-model="document.subjectMatter" locales="document.header.languages"></div>
                             </div>
                         </div>
@@ -144,24 +144,25 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-12">
-                            <div class="km-control-group" required name="responsibleAuthority" caption="Authority responsible for granting prior informed consent (PIC)">
-                                <div km-reference name="responsibleAuthority" ng-model="document.responsibleAuthority" loader="loadRecords(identifier, 'authority')">
+                            <div class="km-control-group" name="responsibleAuthorities" caption="Person or entity who granted prior informed consent (PIC)"> 
+                                <field-embed-contact ng-model="document.responsibleAuthorities" locales="document.header.languages" caption="{{document.responsibleAuthorities ? 'Replace organisation or a contact »' : 'Add an organisation or a contact »'}}"></field-embed-contact>
+                                <!-- <div km-reference name="responsibleAuthorities" ng-model="document.responsibleAuthorities" loader="loadRecords(identifier, 'authority')">
                                     <div>
                                         <div>
                                             <strong>{{reference.title | lstring}}</strong>
                                         </div>
                                         <div>{{reference.summary | lstring}}</div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12">
-                            <div class="km-control-group" required name="personeToWhomGranted" caption="Person or entity to whom prior informed consent (PIC) was granted">
+                            <div class="km-control-group" name="personeToWhomGranted" caption="Person or entity to whom prior informed consent (PIC) was granted">
                                 <span class="help-block">Please provide the contact details of the person or entity to whom prior informed consent was granted.</span>
 
-                                <field-embed-contact ng-model="$parent.document.personeToWhomGranted" locales="$parent.document.header.languages" caption="{{$parent.document.personeToWhomGranted ? 'Replace organisation or a contact »' : 'Add an organisation or a contact »'}}"></field-embed-contact>
+                                <field-embed-contact ng-model="document.personeToWhomGranted" locales="document.header.languages" caption="{{document.personeToWhomGranted ? 'Replace organisation or a contact »' : 'Add an organisation or a contact »'}}"></field-embed-contact>
 
                             </div>
                         </div>
@@ -185,7 +186,7 @@
 
                 <div class="row">
                     <div class="col-xs-12">
-                        <div class="km-control-group" required name="description" caption="Short description of the information collected or received relevant to the utilization of genetic resources, including  the type of use">
+                        <div class="km-control-group" required name="description" caption="Short description of the information collected or received by the checkpoint relevant to the utilization of genetic resources, including  the type of use">
                             <span class="help-block">This could include information on utilization of genetic resources at, inter alia, any stage of research, development, innovation, pre-commercialization or commercialization.</span>
                             <div km-textbox-ml name="description" rows="4" ng-model="document.description" locales="document.header.languages"></div>
                         </div>
@@ -194,8 +195,7 @@
 
                 <div class="row">
                     <div class="col-xs-12">
-                        <div class="km-control-group" required name="geneticRessourceUsers" caption="Person or entity utilizing the genetic resource">
-
+                        <div class="km-control-group" required name="geneticRessourceUsers" caption="Person or entity utilizing the genetic resource at the checkpoint">
                             <field-embed-contact multiple ng-model="$parent.document.geneticRessourceUsers" locales="$parent.document.header.languages" caption="Add an organisation or a contact »"></field-embed-contact>
 
                         </div>

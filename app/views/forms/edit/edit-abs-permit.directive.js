@@ -18,9 +18,14 @@ app.directive("editAbsPermit", [ function () {
 			$scope.options  = {
 				countries	: function () { return $http.get("/api/v2013/thesaurus/domains/countries/terms",							{ cache: true }).then(function (o) { return $filter("orderBy")(o.data, "name"); }); },
 				usage		: function () { return $http.get("/api/v2013/thesaurus/domains/A7B77788-8C90-4849-9327-E181E9522F3A/terms",	{ cache: true }).then(function (o) { return o.data; }); },
-				keywords	: function () { return $http.get("/api/v2013/thesaurus/domains/1A22EAAB-9BBC-4543-890E-DEF913F59E98/terms", { cache: true }).then(function (o) { return Thesaurus.buildTree(o.data); }); },
+				keywords	: function () { return $q.all([$http.get("/api/v2013/thesaurus/domains/1A22EAAB-9BBC-4543-890E-DEF913F59E98/terms", { cache: true }),
+														   $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })])
+													 .then(function (o) { 
+													 						var data = o[0].data;
+																			data.push(o[1].data)
+													 						return Thesaurus.buildTree(data); 
+													 					}); },
 			};
-
 
 			//==================================
 			//
@@ -38,6 +43,7 @@ app.directive("editAbsPermit", [ function () {
 				$scope.status = "loading";
 
 				var qDocument = null;
+				$scope.documentExists = false;
 
 				if(identifier) {
 					qDocument = editFormUtility.load(identifier, "absPermit");
@@ -51,7 +57,7 @@ app.directive("editAbsPermit", [ function () {
 							languages: ["en"]
 						},
 						government: $scope.userGovernment() ? { identifier: $scope.userGovernment() } : undefined
-					};
+					};					
 				}
 
 				$q.when(qDocument).then(function(doc) {
@@ -63,7 +69,10 @@ app.directive("editAbsPermit", [ function () {
 					$scope.status = "ready";
 					$scope.document = doc;
 
-					
+					if(identifier)
+						$q.when(editFormUtility.documentExists(identifier),function(exists){
+								$scope.documentExists = exists;						
+						});
 
 				}).catch(function(err) {
 
@@ -156,7 +165,7 @@ app.directive("editAbsPermit", [ function () {
 
 				if (!document.amendedPermits) {
 					document.consentedAmendment = undefined;
-					document.amendmentsDescription = undefined;
+					//document.amendmentsDescription = undefined;
 				}
 				if (document.providerConfidential) {
 					document.providers = undefined;
@@ -171,7 +180,13 @@ app.directive("editAbsPermit", [ function () {
 					document.gisFiles			= undefined;
 					document.gisMapCenter		= undefined;
 				}
-
+				if(!$scope.documentExists){
+					document.amendmentIntent = undefined;
+					document.amendmentsDescription = undefined;
+				}
+				if(!$scope.isOthers()){
+					document.keywordOthers = undefined;
+				}
 				if (/^\s*$/g.test(document.notes))
 					document.notes = undefined;
 
@@ -298,6 +313,21 @@ app.directive("editAbsPermit", [ function () {
 			//==================================
 			$scope.hasError = function() {
 				return $scope.error!==null;
+			};
+
+			//==================================
+			//
+			//==================================
+			$scope.isOthers = function(document) {
+
+				document = document || $scope.document;
+				if (!document || !document.keywords)
+					return false;
+
+				var qLibraries = Enumerable.from(document.keywords);
+
+				return qLibraries.any(function (o) { return o.identifier == "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED"; });
+				
 			};
 
 			//==================================

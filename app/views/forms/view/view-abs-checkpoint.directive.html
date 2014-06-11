@@ -29,7 +29,9 @@
 				</ul>
 			</div>
 			<div ng-show="document.jurisdictionName">
-				<label>Name of the sub-national jurisdiction</label>
+				<label ng-show="isSubNational()">Name of the sub-national jurisdiction</label>
+				<label ng-show="isCommunity()">Name of the community</label>
+				<label ng-show="isOthers()">other jurisdiction</label>
 				<div class="km-value">{{document.jurisdictionName | lstring:locale}}</div>
 			</div>
 		</div>
