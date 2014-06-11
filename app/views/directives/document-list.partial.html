@@ -3,45 +3,67 @@
 
 
   <style type="text/css">
-  .result{
+
+  #Result .label-party{
+    font-size:10px;
+    text-transform: uppercase;
   }
-  .result > table{
-  width:100%;
-  padding:10px 0 10px 0;
-  margin:0;
-  background-color:#e9e9e9;
-  font-size: 11px;
+  #Result .nationalRecord .schema{
+    font-size:12px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color:#287fcb;
+   
   }
-  .result .title{
-  color:#111;
-  font-size: 14px;
-  font-weight: bold;
+   #Result .referenceRecord .schema{
+    font-size:12px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color:#FA6938;
+   
   }
-  .rowDetails{
-  color:#333;
-  font-weight:bold;
+  #Result .pubDate{
+    font-size:10px;
+    color:#666;
+    text-transform: uppercase;
+    padding-top:3px;
+    padding-right:3px;
   }
-  .referenceRecords{
-    background-color:#f0ad4e;
-    width:3px;
+  #Result .title{
+    font-size: 14px;
+    color:#111;
   }
-  .nationalRecords{
-  background-color:#287fcb;
-  width:3px;
+  
+  #Result .description{
+    font-size: 11px;
+    color:#111;
+    padding-top: 5px;
+    cursor: pointer;
+
   }
-  .notLegallyBinded{
-  background-color:#dfa162;
-  width:3px;
+ #Result  .details{
+    padding-top: 10px;
+
   }
-  .national-record span{
-    padding-left: 5px;
+  #Result .metadetails{
+    color:#111;
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: bold;
+    padding-top:5px;
+        cursor: pointer;
   }
 
-  .label-party{font-size:10px;}
-  .rec-title{
-    width:98%;
-    top:-5px !important;
-  }
+  #Result .nationalRecord{
+
+  border-left:solid #287fcb 5px;background-color:#D9EDF7;
+}
+
+#Result .referenceRecord{
+
+  border-left:solid #FA6938 5px;background-color:#FCF8E3;
+}
+
  </style>
  
   <ul class="pagination pull-right" ng-show='showPagination'>
@@ -69,155 +91,62 @@
   </ul>
   <div class="clearfix"></div>
 
-             
-
+            
 
   <div ng-repeat="document in transformedDocuments | filter:advanceFilter | filter:filterCategory " style="
     padding:10px 0 10px 0;">
     <!--  {{document}} -->
-    <div class="result reference-result" style="border:1px solid #ccc;">
-      <table >
-        <tr>
-          <td rowspan="4" class="{{document.cssRecordClass}}" ></td>
-          <td colspan="2" style="padding:3px 0 0 0;margin:0;">
-            <span class="{{document.cssClass}}">
-            <div ng-switch on="document.schema" class="result">
-              
-              <a href="/database/record?documentID={{document.schema=='MEETING' ? document.id : document.identifier_s}}&documentSchema={{document.schema}}" target="_new" 
-                  class="pull-right" style="padding:0px 3px;color:#999;"><i class="glyphicon glyphicon-new-window"></i>
-              </a>
-              <div ng-switch-when="MEASURE" class="national-record">
-                <div class="rec-title">Legislative, administrative or policy measures</div>
-                
-                <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
-                <span ng-show="document.jusrisdiction"><span >jusrisdiction:</span>  <span class="rowDetails">{{document.jusrisdiction}} </span></span>
-                <span ng-show="document.type">| <span >type:</span>  <span class="rowDetails" > {{document.type}} </span></span>
-               <span ng-show="document.status">| <span >Status:</span>  <span class="rowDetails" ng-class="{'notLegallyBinded' :  document.status =='Draft' || document.status =='retired'}"  > {{document.status}} </span></span>
-					 <span ng-show="document.source">
-						 | <span>Country:</span>
-						 <span class="rowDetails" >
-							 <span class="label label-party" ng-class="{'label-info':document.isSignatory, 'label-primary':document.isRatified, 'label-default':!document.isRatified}">{{document.source}}</span>
-							 
-						 </span>
-					 </span>
-              </div>
-              <div ng-switch-when="AUTHORITY" class="national-record">
-                <div class="rec-title">Competent National Authority</div>
-                <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
-					 <span ng-show="document.source">
-						 | <span>Country:</span>
-						 <span class="rowDetails" >
-							  <span class="label label-party" ng-class="{'label-info':document.isSignatory, 'label-primary':document.isRatified, 'label-default':!document.isRatified}">{{document.source}}</span>
-						 </span>
-					 </span>
-                <span ng-show="document.responsibleForAll">| <span >responsible for all :</span>  <span class="rowDetails" > {{document.responsibleForAll | yesno}} </span></span>
-                <span ng-show="document.grType">| <span >GR type :</span>  <span class="rowDetails" > {{document.grType}} </span></span>
-                <span ng-show="document.jusrisdiction">| <span >jusrisdiction:</span>  <span class="rowDetails">{{document.jusrisdiction | lstring:locale}} </span></span>
-              </div>
-              <div ng-switch-when="ABSCHECKPOINT" class="national-record">
-                <div class="rec-title">checkpoint</div>
-                <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
-                <!-- <span ng-show="document.informAllAuthorities">| <span >inform All Authorities :</span>  <span class="rowDetails" > {{document.informAllAuthorities | yesno}} </span></span> -->
-					 <span ng-show="document.source">
-						 | <span>Country:</span>
-						 <span class="rowDetails" >
-							    <span class="label label-party" ng-class="{'label-info':document.isSignatory, 'label-primary':document.isRatified, 'label-default':!document.isRatified}">{{document.source}}</span>
-						 </span>
-					 </span>
-                <span ng-show="document.jusrisdiction">| <span >jusrisdiction:</span>  <span class="rowDetails">{{document.jusrisdiction| lstring:locale}} </span></span>
-              </div>
-              <div ng-switch-when="ABSPERMIT" class="national-record">
-                <div class="rec-title">Internationally Recognized Certificate of Compliance</div>
-                <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
-                <span ng-show="document.usage"><span >usage:</span>  <span class="rowDetails" > {{document.usage| lstring:locale}} </span></span>
-                <span ng-show="document.keywords">| <span >keywords:</span>  <span class="rowDetails">{{document.keywords| lstring:locale}} </span></span>
-              </div>
-              <div ng-switch-when="ABSCHECKPOINTCOMMUNIQUE" class="national-record">
-                <div class="rec-title">Checkpoint Communiqué</div>
-                <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
-                <span ng-show="document.originCountries">| <span >origin Countries:</span>
-                <span class="rowDetails" > {{document.originCountries| lstring:locale}}</span></span>
-              </div>
-              <div ng-switch-when="DATABASE" class="national-record">
-                <div class="rec-title">National datasource</div>
-                <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
-					 <span ng-show="document.source">
-						 | <span>Country:</span>
-						 <span class="rowDetails" >
-							    <span class="label label-party" ng-class="{'label-info':document.isSignatory, 'label-primary':document.isRatified, 'label-default':!document.isRatified}">{{document.source}}</span>
-						 </span>
-					 </span>
-              </div>
-              <div ng-switch-when="RESOURCE" class="reference-record">
-                <div class="rec-title">virtual library record </div>
-                <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
-                <span ng-show="document.types"> <span >type:</span>  <span class="rowDetails" > {{document.types}} </span>
-                </span>
-                <span ng-show="document.Year">| <span >Year:</span>  <span class="rowDetails" > {{document.Year}} </span> </span>
-                <span ng-show="document.languages">|  <span >languages:</span>  <span class="rowDetails" > {{document.languages}} </span> </span>
-                <span ng-show="document.Regions">| <span >countries:</span>  <span class="rowDetails" > {{document.Regions}} </span> </span>
-              </div>
-              <div ng-switch-when="MEETING" class="reference-record">
-                <div class="rec-title">meeting</div>
-                <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>                
-                <span ng-show="document.startDate_dt">| <span >Date:</span>  <span class="rowDetails" > {{document.startDate_dt}} </span> </span>
-                <span ng-show="document.eventCity">| <span >City:</span>  <span class="rowDetails" > {{document.eventCity}} </span> </span>
-                <span ng-show="document.eventCountry">| <span >Country:</span>  <span class="rowDetails" > {{document.eventCountry | lstring:locale}} </span> </span>                
-              </div>
-              <div ng-switch-when="NOTIFICATION" class="reference-record">
-                <div class="rec-title">notification</div>
-                <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
-                <span style="color:#666;font-weight:bold;" > | {{document.doc.reference_s}} </span>
-                <span style="color:#666;font-weight:bold;" > | {{formatDate(document.date_dt)}} </span>
-              </div>           
-              <div ng-switch-when="FOCALPOINT" class="national-record">
-                <div class="rec-title">{{document.schema}}</div>
-					 <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
-					 <span ng-show="document.source">
-						 | <span>Country:</span>
-						 <span class="rowDetails" >
-							  <span class="label label-party" ng-class="{'label-info':document.isSignatory, 'label-primary':document.isRatified, 'label-default':!document.isRatified}">{{document.source}}</span>
-						 </span>
-					 </span>
-              </div>
-              <div ng-switch-default class="reference-record">
-                <div class="rec-title">{{document.schema}}</div>
-                <span ng-show="document.createdDateOn"><span >Published On:</span>  <span class="rowDetails">{{document.createdDateOn | formatDate}} </span></span>
-					 <span ng-show="document.source">
-						 | <span>Country:</span>
-						 <span class="rowDetails" >
-							    <span class="label label-party" ng-class="{'label-info':document.isSignatory, 'label-primary':document.isRatified, 'label-default':!document.isRatified}">{{document.source}}</span>
-						 </span>
-					 </span>
-              </div>
-            </div>
-            </span>
-          </td>
-        </tr>
-        <tr>
-          <td style="padding:0;margin:0;padding-left:20px;padding-top:10px;">
-            <i class="fa" ng-class="{'fa-caret-down':displayDetails, 'fa-caret-right':!displayDetails}"
-            style="font-size:11px;color:#999;position:relative; top:-1px;font-size:14px;"></i>
-            <a ng-click="displayDetails = !displayDetails;load(document,displayDetails); " class="title">
-            &nbsp;   {{document.title}}
-                <span ng-show="document.schema=='ABSCHECKPOINTCOMMUNIQUE'">
-                    <!-- {{document.source}} {{document.createdDateOn | formatDate}} -->
-                     Checkpoint Communique - {{record.createdOn | formatDate:"D MMMM YYYY h:mm a (Z)" }}
-                <span>
-              </ab>
-            </a>
-          </td>
-        </tr>
-        <tr>
-          <td style="padding:5px 10px 10px 10px;">
-            <div style="padding:0 0 0 20px;margin:0;" ng-hide="displayDetails" >
-              {{document.description}}
-            </div>
-            <div ng-show="displayDetails" record-loader document="document.data"
-            hide="title;header;libraries" ></div>
-          </td>
-        </tr>
-      </table>
+    <div id="Result">
+
+
+        <div class="row {{document.recordtype}}">
+                <div class="col-xs-12" style="">
+
+                    <div class="row" >
+                        <div style="padding:0px 0 3px 3px; ">
+                            <span class="label label-party" ng-class="{'label-info':document.isSignatory, 'label-primary':document.isRatified, 'label-default':!document.isRatified}">{{document.source}}</span>
+                            <span class="schema">{{document.schema | schemaName}}</span>
+                            <span><a href="/database/record?documentID={{document.schema=='MEETING' ? document.id : document.identifier_s}}&documentSchema={{document.schema}}" target="_new" class="pull-right" style="padding:0px 3px;color:#999;"><i class="glyphicon glyphicon-new-window"></i>
+                            </a>
+                            </span>
+                            <span class="pubDate pull-right">{{document.createdDateOn | formatDate}}</span>
+                        </div>
+                    </div>
+
+                    <div class="row" style="padding:10px;">
+                        <div class="col-xs-12">
+
+                        <i class="fa" ng-class="{'fa-caret-down':displayDetails, 'fa-caret-right':!displayDetails}"
+                        style="font-size:11px;color:#999;position:relative; top:-1px;font-size:14px;"></i>
+
+                        <a ng-click="displayDetails = !displayDetails;load(document,displayDetails);">
+                          <span class="title">{{document.title}} </span>
+
+                          <div class="description" ng-hide="displayDetails" >
+                          {{document.description}}
+                          </div>
+
+                          <div class="metadetails" ng-hide="displayDetails" >
+                            <span ng-repeat="m in document.metadata">
+                             {{m}} {{$last ? '' : '|'}}
+                            <span>
+                          </div>
+                        </a>
+
+                        <div class="details" ng-show="displayDetails" record-loader document="document.data"
+                        hide="title;header;libraries" ></div>
+                            
+                        </div>
+                    </div>
+
+                </div><!--  end result col -->
+            </div> <!-- end row -->
+
+
+
+        
+
+      
       </div> <!-- end switch -->
       <div class="clearfix"></div>
     </div>

@@ -87,7 +87,7 @@ define(["app"], function (app) {
 	app.filter("formatDate", function(){
 		return function(date,formart){	
 			if(formart== undefined)
-				formart = 'MMMM Do YYYY';		
+				formart = 'DD MMM YYYY';		
 			return moment(date).format(formart);
 		}
 	});
@@ -131,18 +131,18 @@ define(["app"], function (app) {
 	//============================================================
 	app.filter("schemaName", [function() {
 
-		return function(schame) {
+		return function( schame ) {
 
-			if(schame=="focalPoint"				) return "National Focal Point (FP)";
-			if(schame=="authority"				) return "Competent National Authority (CNA)";
+			if(schame=="focalpoint"				) return "ABS National Focal Point";
+			if(schame=="authority"				) return "Competent National Authority";
 			if(schame=="contact"				) return "Contact";
-			if(schame=="database"				) return "National Database (NDB)";
-			if(schame=="resource"				) return "Virtual Library Resource (VLR)";
+			if(schame=="database"				) return "National Website or Database";
+			if(schame=="resource"				) return "Virtual Library Resource";
 			if(schame=="organization"			) return "Organization";
-			if(schame=="measure"				) return "ABS Measure (MSR)";
-			if(schame=="absCheckpoint"			) return "Checkpoint (CP)";
-			if(schame=="absCheckpointCommunique") return "Checkpoint Communiqué (CPC)";
-			if(schame=="absPermit"				) return "Permit (IRCC)";
+			if(schame=="measure" 				) return "Legislative, Administrative or Policy Measures";
+			if(schame=="abscheckpoint"			) return "Checkpoint";
+			if(schame=="abscheckpointcommunique") return "Checkpoint Communiqué";
+			if(schame=="abspermit"				) return "Internationally Recognized Certificate of Compliance";
 
 			return schame;
 		};
