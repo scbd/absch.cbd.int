@@ -48,11 +48,13 @@ app.directive('documentList', function ($http, $filter) {
                           return;
 
                        item.data = {'schema':item.schema, 'url_ss': item.url_ss, 'data': item};
-                        
-                        if(item.schema=="FOCALPOINT" || item.schema=="MEETING" || item.schema=="NOTIFICATION"
-                           || item.schema=="PRESSRELEASE" || item.schema=="STATEMENT")
+                        console.log(item.schema);
+                        if(item.schema.toUpperCase()=="FOCALPOINT" || 
+                          item.schema.toUpperCase()=="MEETING" || 
+                          item.schema.toUpperCase()=="NOTIFICATION"
+                           || item.schema.toUpperCase()=="PRESSRELEASE" || item.schema.toUpperCase()=="STATEMENT")
                         {
-                             commonjs.getReferenceRecordIndex(item.schema,item.id).then(function(data){
+                             commonjs.getReferenceRecordIndex(item.schema.toUpperCase(),item.id).then(function(data){
                                 item.data = data.data;
                               });                              
                         }
