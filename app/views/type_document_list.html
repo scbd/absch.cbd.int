@@ -1,0 +1,50 @@
+<div ng-controller="TypeDocumentListController">
+  <div class="col-xs-9" style="padding-top:20px;">
+
+    <div>
+      <a class="pull-right" ng-show="!toggleHelp" ng-click="toggleHelp=!toggleHelp;" style="cursor:pointer;padding:5px;"><i class="glyphicon glyphicon-question-sign" >
+        </i> show help
+      </a>
+      <a class="pull-right" ng-show="toggleHelp" ng-click="toggleHelp=!toggleHelp;" style="cursor:pointer;color:#666;padding:5px;"><i class="glyphicon glyphicon-question-sign" >
+        </i> hide help
+      </a>
+    </div>
+
+    <div class="registerpage-header">
+      <h2>
+        <span class="abbreviation">{{type.abbreviation}}</span>
+        <span class="title">{{type.title}}</span>
+      </h2>
+
+      <div ng-show="toggleHelp">
+        <p class="help1" ng-bind-html="type.help"></p>
+        <div class="panel panel-info" ng-show="toggleHelp && !editing">
+          <div class="panel-heading">
+            <h4 class="panel-title">Tips for publishing a {{type.abbreviation}} common format:</h4>
+          </div>
+          <div class="panel-body">
+            <ol>
+              <li ng-repeat="tip in type.tips" ng-bind-html="tip"></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="registerpage-content">
+
+      <div ng-show="msg" class="alert alert-success alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="msg=''">&times;</button>
+        <strong>{{msg}}</strong>
+      </div>
+
+      <div ng-hide="editing">
+        <h2 style="border-bottom: 1px solid #333;margin-bottom:5px;">Records</h2>
+        <div ng-show="isAuthenticated">
+          <register-record-list records="records" schema="{{document_type}}"></register-record-list>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

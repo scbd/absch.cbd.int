@@ -28,7 +28,40 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
             when('/oauth2/callback',             { templateUrl: '/app/views/oauth2/callback.html'           ,resolveController: true, resolveUser: true}).
             when('/workshops/lac',               { templateUrl: '/app/views/workshops/lac.html'             ,resolveController: true, resolveUser: true}).
             when('/workshops/caribbean',         { templateUrl: '/app/views/workshops/caribbean.html'             ,resolveController: true, resolveUser: true}).
-            
+          
+            when('/dashboard', {
+              templateUrl: '/app/views/register.html',
+              resolveController: true,
+              resolveUser: true,
+              subTemplateUrl: '/app/views/dashboard.html',
+            }).
+            when('/register/:document_type', {
+              templateUrl: '/app/views/register.html',
+              resolveController: true,
+              resolveUser: true,
+              subTemplateUrl: '/app/views/type_document_list.html',
+            }).
+            when('/contacts', {
+              templateUrl: '/app/views/register.html',
+              resolveController: true,
+              resolveUser: true,
+              subTemplateUrl: '/app/views/contacts.html',
+            }).
+
+            when('/register/:document_type/new', {
+              templateUrl: '/app/views/register.html',
+              resolveController: true,
+              resolveUser: true,
+              subTemplateUrl: '/app/views/forms/edit/edit-', //filled in through controller
+            }).
+
+             when('/register/:document_type/:identifier/edit', {
+              templateUrl: '/app/views/register.html',
+              resolveController: true,
+              resolveUser: true,
+              subTemplateUrl: '/app/views/forms/edit/edit-', //filled in through controller
+            }).
+           
             otherwise({redirectTo:'/help/404'});
     }]);
 });

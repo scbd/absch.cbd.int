@@ -67,5 +67,12 @@ define([/*'angular', 'angular-route', 'angular-cookies', */], function () {
 
 	}]);
 
+  app.run(function($rootScope) {
+    $rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
+      //padding route attributes to the rootscope
+      $rootScope.subTemplateUrl = current.$$route.subTemplateUrl;
+    });
+  });
+
 	return app;
 });

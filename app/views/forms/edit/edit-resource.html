@@ -1,8 +1,15 @@
-﻿<div>
-	<div class="alert alert-error" ng-show="hasError()">
-		<strong>Error as occured...</strong>
-		<div>{{error}}</div>
-	</div>
+﻿<div class="col-xs-9" style="padding-top:20px;">
+  <div class="registerpage-content" ng-controller="editResource">
+
+    <div ng-show="msg" class="alert alert-success alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="msg=''">&times;</button>
+      <strong>{{msg}}</strong>
+    </div>
+
+    <div class="alert alert-error" ng-show="hasError()">
+      <strong>Error as occured...</strong>
+      <div>{{error}}</div>
+    </div>
 
     <div ng-show="isLoading()">
         <i class="fa fa-spinner fa-spin"></i> Loading...
@@ -290,4 +297,5 @@
         </div>
 
     </div>
+  </div>
 </div>

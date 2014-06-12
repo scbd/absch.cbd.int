@@ -165,16 +165,16 @@ app.directive("registerRecordList", ["$timeout", "commonjs", function ($timeout,
 
 				if(item.data)
 					return;
-				
-		        item.data = {'schema':item.type, 'url_ss': '', 'data': []};
-		        $http.get("/api/v2013/documents/"+item.identifier).then(function (result) {  
-		            item.data = result.data;
-		           
-		            $http.get("/api/v2013/documents/"+item.identifier + "?info").then(function (result) {  
-		                item.data.info = result.data;
-		            });
+    
+        item.data = {'schema':item.type, 'url_ss': '', 'data': []};
+        $http.get("/api/v2013/documents/"+item.identifier).then(function (result) {  
+            item.data = result.data;
+           
+            $http.get("/api/v2013/documents/"+item.identifier + "?info").then(function (result) {  
+                item.data.info = result.data;
+            });
 
-		        });				
+        });				
 				//href="/database/record?documentID={{record.documentID}}" 
 			}
 
