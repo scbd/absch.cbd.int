@@ -245,7 +245,7 @@ define(['app'], function (app) {
         });
     }
 
-    $scope.setDocument = function(withLibraries) {
+    $scope.setDocument = function(additionalParams, excludeGovernment) {
       var qDocument;
       if($routeParams.identifier)
         qDocument = editFormUtility.load($routeParams.identifier, $routeParams.document_type);
@@ -258,8 +258,10 @@ define(['app'], function (app) {
           },
           government: $scope.userGovernment() ? { identifier: $scope.userGovernment() } : undefined,
         };
-        if(withLibraries)
-          qDocument.libraries = [{ identifier: "cbdLibrary:abs-ch" }];
+        for(var key in additionalParams)
+          qDocument[key] = additionalParams[key];
+        if(excludeGovernment)
+          delete qDocument['government'];
       }
 
 
