@@ -72,5 +72,6 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 				return document;
 			};
 
+    $scope.setDocument();
   }]);
 });

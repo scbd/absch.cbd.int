@@ -15,7 +15,7 @@ define(['app'], function (app) {
           $("body, html").animate({scrollTop: 0}, "slow");
         };
 
-        //==================================
+    //==================================
     //
     //==================================
     $scope.isDefined = function(obj) {
@@ -245,19 +245,23 @@ define(['app'], function (app) {
         });
     }
 
-    var qDocument;
-    if($routeParams.identifier)
-      qDocument = editFormUtility.load($routeParams.identifier, $routeParams.document_type);
-    else
-      qDocument = {
-        header: {
-          identifier: guid(),
-          schema   : $routeParams.document_type,
-          languages: ["en"]
-        },
-        government: $scope.userGovernment() ? { identifier: $scope.userGovernment() } : undefined,
-        libraries: [{ identifier: "cbdLibrary:abs-ch" }]
-      };
+    $scope.setDocument = function(withLibraries) {
+      var qDocument;
+      if($routeParams.identifier)
+        qDocument = editFormUtility.load($routeParams.identifier, $routeParams.document_type);
+      else {
+        qDocument = {
+          header: {
+            identifier: guid(),
+            schema   : $routeParams.document_type,
+            languages: ["en"]
+          },
+          government: $scope.userGovernment() ? { identifier: $scope.userGovernment() } : undefined,
+        };
+        if(withLibraries)
+          qDocument.libraries = [{ identifier: "cbdLibrary:abs-ch" }];
+      }
+
 
       $q.when(qDocument).then(function(doc) {
 
@@ -271,7 +275,7 @@ define(['app'], function (app) {
         throw err;
 
       });
-
+    };
 
   }]);
 });

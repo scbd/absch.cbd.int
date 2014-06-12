@@ -472,6 +472,7 @@ define(['app',
       evt.stopPropagation();
       $scope.editing = false;
       $scope.msg = "Your record has been saved as a draft.";
+      $location.path('/register/'+$scope.document_type);
     });
 
     //============================================================
@@ -486,6 +487,7 @@ define(['app',
       evt.stopPropagation();
       $scope.editing = false;
       $scope.msg = "Record saved. A publishing request has been sent to your Publishing Authority.";
+      $location.path('/register/'+$scope.document_type);
       
     });
 
@@ -502,8 +504,7 @@ define(['app',
       $scope.editing = false;
       $scope.msg = "Record published.";
 
-      
-
+      $location.path('/register/'+$scope.document_type);
     });
 
     //============================================================

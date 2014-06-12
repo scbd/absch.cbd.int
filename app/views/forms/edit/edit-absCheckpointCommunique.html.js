@@ -86,5 +86,6 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
            document.permitNotAvailable;
     };
 
+    $scope.setDocument();
   }]);
 });

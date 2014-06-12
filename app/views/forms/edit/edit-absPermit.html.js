@@ -122,9 +122,6 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
       $scope.document[$scope.editedProperty] = clone($scope.editedContact);
     };
 
-
-
-
-
+    $scope.setDocument();
   }]);
 });
