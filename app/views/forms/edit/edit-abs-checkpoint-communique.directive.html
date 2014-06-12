@@ -76,44 +76,46 @@
                         </div>
                     </div>
                     <hr>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="km-control-group" name="subjectMatter" required caption="Subject-matter or genetic resources relevant to the information collected or received">
-                                <div class="help-block">Please provide details  on the subject-matter or genetic resources relevant to the information collected or received by the checkpoint. This could include biota at any taxonomic rank, which may carry a taxonomic name. It may also include a locality of collection of the material. It may also be possible to identify the genetic resource through reference to a voucher specimen or field notes held in an identified archive or collection. Providing details about the subject matter or genetic resource covered by the permit or its equivalent can provide additional legal certainty.</div>
-                                <div km-textbox-ml name="subjectMatter" rows="6" ng-model="document.subjectMatter" locales="document.header.languages"></div>
+                    <section>
+                        <LEGEND>Subject-matter</LEGEND>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="km-control-group" name="subjectMatter" required caption="Subject-matter or genetic resources relevant to the information collected or received">
+                                    <div class="help-block">Please provide details  on the subject-matter or genetic resources relevant to the information collected or received by the checkpoint. This could include biota at any taxonomic rank, which may carry a taxonomic name. It may also include a locality of collection of the material. It may also be possible to identify the genetic resource through reference to a voucher specimen or field notes held in an identified archive or collection. Providing details about the subject matter or genetic resource covered by the permit or its equivalent can provide additional legal certainty.</div>
+                                    <div km-textbox-ml name="subjectMatter" rows="6" ng-model="document.subjectMatter" locales="document.header.languages"></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <hr>
-                    <legend>Optional additional subject matter details</legend>
-                    <span class="help-block">Providing details about the subject matter or genetic resource covered by the permit or its equivalent can provide additional legal certainty</span>
+                        <div class="km-control-group" name="optionalSubjectMatterinfo" caption="Optional additional subject matter details"> 
+                            <span class="help-block">Providing details about the subject matter or genetic resource covered by the permit or its equivalent can provide additional legal certainty</span>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="km-control-group" name="specimen" caption="Specimen data">
+                                        <span class="help-block">Link to a voucher specimen held in an appropriate facility</span>
+                                        <div km-link name="specimen" ng-model="document.specimen" allow-link="true" allow-file="false" identifier="document.header.identifier"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="km-control-group" name="taxonomy" caption="Taxonomy">
+                                        <span class="help-block">Link to record in external taxonomy database, e.g. GBIF, Catalogue of Life</span>
+                                        <div km-link name="taxonomy" ng-model="document.taxonomy" allow-link="true" allow-file="false" identifier="document.header.identifier"></div>
+                                    </div>
+                                </div>
+                            </div>
 
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="km-control-group" name="specimen" caption="Specimen data">
-                                <span class="help-block">Link to a voucher specimen held in an appropriate facility</span>
-                                <div km-link name="specimen" ng-model="document.specimen" allow-link="true" allow-file="false" identifier="document.header.identifier"></div>
+                            <div class="row">
+                                <div class="col-xs-12" style="padding-top:15px;">
+                                    <div class="control-group" ng-class="{warning:isInvalid('gisFiles')}">
+                                        <label class="control-label" for="gisFiles">Geographic coordinates</label>
+                                        <span class="help-block">Limited to .geojson files (<a href="http://www.geojson.org/" target="_blank" >http://www.geojson.org/</a>)</span>
+                                        <div km-link required name="gisFiles" ng-model="document.gisFiles" allow-link="false" identifier="document.header.identifier" mime-types="application/json"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="km-control-group" name="taxonomy" caption="Taxonomy">
-                                <span class="help-block">Link to record in external taxonomy database, e.g. GBIF, Catalogue of Life</span>
-                                <div km-link name="taxonomy" ng-model="document.taxonomy" allow-link="true" allow-file="false" identifier="document.header.identifier"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-12" style="padding-top:15px;">
-                            <div class="control-group" ng-class="{warning:isInvalid('gisFiles')}">
-                                <label class="control-label" for="gisFiles">Geographic coordinates</label>
-                                <span class="help-block">Limited to .geojson files (<a href="http://www.geojson.org/">http://www.geojson.org/</a>)</span>
-                                <div km-link required name="gisFiles" ng-model="document.gisFiles" allow-link="false" identifier="document.header.identifier" mime-types="application/json"></div>
-                            </div>
-                        </div>
-                    </div>
+                    </section>
 
 
                     <div ng-show="document.gisFiles">

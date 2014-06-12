@@ -75,7 +75,46 @@
 
 
 		<form class="editForm" name="editForm" style="margin-top:10px">
-			<div ng-show="tab=='edit'" km-tab="edit">
+		  <div ng-show="tab=='edit'" km-tab="edit">
+			<section>
+				<legend>Is this an amendment to previous legislative, administrative or policy measure? </legend>	
+				<div class="row">
+	                <div class="col-xs-12">
+	                    <div class="km-control-group" name="isAmendment" required caption="Is this an amendment to previous legislative, administrative or policy measure? ">
+	                        <div class="help-block"></div>
+	                        <div km-yes-no required ng-model="document.isAmendment" locales="document.header.languages"></div>
+	                    </div>
+	                </div>
+	            </div>
+
+	            <div class="row well" ng-class="{disable:!document.isAmendment, enable:document.isAmendment}" style="margin:10px;">
+	                <!-- IF NO SECTION -->
+	                <div class="col-xs-12">
+	                    <strong ng-show="document.isAmendment==null">
+	                        If no, the following information is not required.
+	                    </strong>
+	                    <strong ng-show="document.isAmendment==false" style="color:black!important;">
+	                        This section is not required.
+	                    </strong> 
+	                    <strong ng-show="document.isAmendment==true" style="color:black!important;">
+	                        Please enter the clearing house record number containing the measure being amended   .
+	                    </strong>
+	                    <hr>
+	                    <div class="km-control-group" name="amendedMeasures" required caption="List of amended measures">
+							<div class="help-block">Please indicate if this measure amends a previously registered one by providing a cross-reference link to the amended measure.</div>
+							<div km-reference multiple name="amendedMeasures" ng-model="document.amendedMeasures" loader="loadRecords(identifier, 'measure')">
+								<div>
+									<div><strong>{{reference.title | lstring}}</strong></div>
+									<div>{{reference.summary | lstring}}</div>
+								</div>
+							</div>
+						</div>
+	                   <div class="km-control-group" name="amendmentsDescription" caption="Summary of the amendment(s)">
+							<div km-textbox-ml ng-model="document.amendmentsDescription" rows="4" locales="document.header.languages"></div>
+						</div>
+	            </div>
+			</section>
+
 
 			<section>
 				<legend>General information</legend>
@@ -122,7 +161,7 @@
 							</div>
 						</div>
 
-						<div class="km-control-group" name="limitedApplication" caption="Indicate the date the measure is no longer in force if the measure has a limited application in time">
+						<div class="km-control-group" name="limitedApplication" caption="Indicate the date the measure is no longer in force if the measure has a limited application in time"  ng-show="isLegallyBinded() || isNotLegallyBinded()">
 							<div km-date placeholder="YYYY-MM-DD" name="limitedApplication" ng-model="document.limitedApplication"></div>
 						</div>
 
@@ -139,6 +178,15 @@
 							<div km-term-radio name="type"  ng-model="document.type" 
 							terms="options.typeOfDocuments()" description="true" binding-type="term" ng-click="save()" required></div>
 							
+						</div>
+					</div>
+				</div>
+				<div class="row" ng-show="isTypeOther()">
+					<div class="col-sm-12">
+						<div >
+							<div class="km-control-group" required name="otherTypeName" caption="Name of the other type of document/measure">
+							<div km-textbox-ml required ng-model="document.otherTypeName" locales="document.header.languages"></div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -178,31 +226,7 @@
 				</div>
 
 				</section>
-
-				<section>
-				<legend>Is this records an amendment to previously published record? </legend>
-				<div class="row">
-					<div class="col-sm-12">
-						<div class="km-control-group" name="amendedMeasures" caption="List of amended measures">
-							<div class="help-block">Please indicate if this measure amends a previously registered one by providing a cross-reference link to the amended measure.</div>
-							<div km-reference multiple name="amendedMeasures" ng-model="document.amendedMeasures" loader="loadRecords(identifier, 'measure')">
-								<div>
-									<div><strong>{{reference.title | lstring}}</strong></div>
-									<div>{{reference.summary | lstring}}</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-sm-12">
-						<div class="km-control-group" name="amendmentsDescription" caption="Summary of the amendments">
-							<div km-textbox-ml ng-model="document.amendmentsDescription" rows="4" locales="document.header.languages"></div>
-						</div>
-					</div>
-				</div>
-				</section>
+		
 				
 				<section>
 				<legend>Document details</legend>
@@ -225,7 +249,7 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="km-control-group" name="linkedMeasures" caption="Relationship with other measures">
-						<div class="help-block">Please indicate if there is any relationship between this document / measure and other law, regulation, guidelines, administrative or policy measures by providing text with the information or/and by linking it to an existing clearing-house record.</div>
+						<div class="help-block">Please indicate if there is any relationship between this document / measure and other law, regulation, guidelines, administrative or policy measures. For example, if  the measure being submitted is implementing an existing law. This information will assist in displaying information on the national legal framework.</div>
 							<div km-reference multiple name="linkedMeasures" ng-model="document.linkedMeasures" loader="loadRecords(identifier, 'measure')">
 								<div>
 									<div><strong>{{reference.title | lstring}}</strong></div>
@@ -278,7 +302,7 @@
 				<section>
 				<legend>Elements of the measure</legend>
 	
-				<div class="help-block">Please select which elements are included in the measure being registered and identify which are the relevant articles of sections of the measure for each of the selected elements.</div>
+				<div class="help-block">Please select which elements are included in the measure being registered and identify which are the relevant articles of sections of the measure for each of the selected elements.This information will assist to in displaying information on the national legal framework.</div>
 
 				<style>
 					.measureChecked 
