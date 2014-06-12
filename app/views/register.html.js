@@ -38,8 +38,11 @@ define(['app',
    
     //TODO: stop using so many globals =P I should inherit the controller scope or something.
     $rootScope.subheadings = {
+      'National Entities': [
+        'authority', 'absCheckpoint',
+      ],
       'National Records': [
-        'measure', 'authority', 'absPermit', 'absCheckpoint', 'absCheckpointCommunique', 'database',
+        'measure', 'absPermit', 'absCheckpointCommunique', 'database',
       ],
       'Reference Records': ['resource',],
     };
