@@ -5,8 +5,9 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 
     $scope.options  = {
       countries		: function () { return $http.get("/api/v2013/thesaurus/domains/countries/terms", { cache: true }).then(function (o) { return $filter("orderBy")(o.data, "name"); }); },
-      permits         : function () { return $http.get("api/v2013/index/select?cb=1400692102906&fl=identifier_s,title_t,createdDate_dt,&q=realm_ss:absch AND schema_s:absPermit AND NOT version_s:*&start=0&wt=json",  { cache: true })
+      permits         : function () { return $http.get("/api/v2013/index/select?cb=1400692102906&fl=identifier_s,title_t,createdDate_dt,&q=realm_ss:absch AND schema_s:absPermit AND NOT version_s:*&start=0&wt=json",  { cache: true })
                   .then(function(o){ 
+                    console.log(o.data);
                        
                         var permits =  [];
                         o.data.response.docs.forEach(function(permit){
