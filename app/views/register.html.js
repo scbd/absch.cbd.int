@@ -260,7 +260,9 @@ define(['app',
               $scope.userActivities.push({
                             "title" : row.createdBy.firstName + ' ' + row.createdBy.lastName + ' is working on ' +
                               _.where($scope.schemaTypesFacets,{"schema":row.type})[0].header + ' draft '
-                              +(lstringFilter(row.workingDocumentTitle||row.title,$scope.$root.locale)) 
+                              //+(lstringFilter(row.workingDocumentTitle||row.title,$scope.$root.locale)) 
+
+                              +(row.workingDocumentTitle||row.title) 
                               ,
                             "identifier" : row.identifier,
                             "schema"	 : row.type
@@ -370,10 +372,10 @@ define(['app',
 
     $scope.$on("getDocumentInfo", function(evt, info) {
       if($scope.lastSchema)
-      $scope.$broadcast("loadDocument", {
-        schema : $scope.lastSchema,
-        identifier : $scope.lastIdentifier
-      });
+        $scope.$broadcast("loadDocument", {
+          schema : $scope.lastSchema,
+          identifier : $scope.lastIdentifier
+        });
     });
 
 
@@ -459,7 +461,7 @@ define(['app',
       evt.stopPropagation();
       $scope.editing = false;
       $scope.msg = "Your record has been closed without saving.";
-      $location.path('/register/'+$scope.document_type);
+      $timeout(function() { $location.path('/register/'+$scope.document_type); }, 500);
 
       
     });
@@ -475,7 +477,7 @@ define(['app',
       evt.stopPropagation();
       $scope.editing = false;
       $scope.msg = "Your record has been saved as a draft.";
-      $location.path('/register/'+$scope.document_type);
+      $timeout(function() { $location.path('/register/'+$scope.document_type); }, 500);
     });
 
     //============================================================
@@ -490,7 +492,7 @@ define(['app',
       evt.stopPropagation();
       $scope.editing = false;
       $scope.msg = "Record saved. A publishing request has been sent to your Publishing Authority.";
-      $location.path('/register/'+$scope.document_type);
+      $timeout(function() { $location.path('/register/'+$scope.document_type); }, 500);
       
     });
 
@@ -507,7 +509,7 @@ define(['app',
       $scope.editing = false;
       $scope.msg = "Record published.";
 
-      $location.path('/register/'+$scope.document_type);
+      $timeout(function() { $location.path('/register/'+$scope.document_type); }, 500);
     });
 
     //============================================================
