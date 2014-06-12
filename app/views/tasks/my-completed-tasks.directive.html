@@ -36,7 +36,8 @@
 						<span ng-show="activity" ng-switch="activity.result.action">
 							<span ng-switch-when="approve"><i class="glyphicon glyphicon-ok"></i> Approved</span>
 							<span ng-switch-when="reject"><i class="glyphicon glyphicon-remove"></i> Rejected</span>
-							<span ng-switch-default>*{{activity.result.action}}
+							<span ng-switch-default>*{{activity.result.action}}</span>
+							<span ng-show="activity.result.reason"><STRONG> for {{activity.result.reason | limitTo:50}} </STRONG></span>
 						</span>
 						<span> on {{activity.completedOn|date:'short'}} </span>
 					</div>

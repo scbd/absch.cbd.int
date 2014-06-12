@@ -3,7 +3,7 @@ define(['app',
     '/app/js/common.js',]
       , function (app) {
 
-app.directive('documentList', function ($http) {
+app.directive('documentList', function ($http, $filter) {
         return {
             restrict: 'EAC',
             templateUrl: '/app/views/directives/document-list.partial.html',
@@ -22,7 +22,7 @@ app.directive('documentList', function ($http) {
                   currentPage: '=',
                   documentCount: '='
             },
-            controller: ['$scope', "underscore", "commonjs",function ($scope, underscore, commonjs){
+            controller: ['$scope', "underscore", "commonjs",function ($scope, underscore, commonjs, filter){
 
               $scope.formatDate = function formatDate (date) {
                     return moment(date).format('MMMM Do YYYY');
@@ -48,11 +48,13 @@ app.directive('documentList', function ($http) {
                           return;
 
                        item.data = {'schema':item.schema, 'url_ss': item.url_ss, 'data': item};
-                        
-                        if(item.schema=="FOCALPOINT" || item.schema=="MEETING" || item.schema=="NOTIFICATION"
-                           || item.schema=="PRESSRELEASE" || item.schema=="STATEMENT")
+                        console.log(item.schema);
+                        if(item.schema.toUpperCase()=="FOCALPOINT" || 
+                          item.schema.toUpperCase()=="MEETING" || 
+                          item.schema.toUpperCase()=="NOTIFICATION"
+                           || item.schema.toUpperCase()=="PRESSRELEASE" || item.schema.toUpperCase()=="STATEMENT")
                         {
-                             commonjs.getReferenceRecordIndex(item.schema,item.id).then(function(data){
+                             commonjs.getReferenceRecordIndex(item.schema.toUpperCase(),item.id).then(function(data){
                                 item.data = data.data;
                               });                              
                         }
@@ -139,9 +141,9 @@ app.directive('documentList', function ($http) {
                   var formatDate = function formatDate (date) {
                         return date+'';//moment(date).format('MMMM Do YYYY');
                     };
-// console.log(document);
+console.log(document);
                     output.id          = document.id;
-                    output.schema      = document.schema_s.toUpperCase();
+                    output.schema      = document.schema_s.toLowerCase();
                     output.title       = document.title_t;
                     output.description = document.description_t;
                     output.source      = document.government_EN_t;
@@ -149,6 +151,7 @@ app.directive('documentList', function ($http) {
                     output.identifier_s = document.identifier_s;
                     output.doc = document;
                     output.createdDateOn = document.createdDate_dt;
+                    output.metadata = [];
 
 						  //Jason's code. gets a list of countries to find out if they are ratified or what not. TODO: not do this. countries should exist on a high level scope, so I don't have to ajax it. Or there should be a cache. Also use underscore for algorithms.
 						  $http.get('/api/v2013/countries', {cache: true}).then(function(response) {
@@ -163,16 +166,8 @@ app.directive('documentList', function ($http) {
 									}
 						  });
 
-                   
-                    output.cssRecordClass="referenceRecords";
-                     // if(document.orgperson_s) {
-                     //  var obj = JSON.parse(document.orgperson_s);
-                     // // console.log(obj);
-                     //  obj.forEach(function(org){
-                     //   // console.log(org.organization.en);
-                     //  })
-                        
-                     // }
+                   output.recordtype="referenceRecord";
+
                     if(document.schema_s=='focalPoint') {
                         output.description  = document.function_t||'';
                         output.description += (document.function_t && document.department_t) ? ', ' : '';
@@ -210,25 +205,43 @@ app.directive('documentList', function ($http) {
                         output.venue = document.eventCity_EN_t + ', ' + document.eventCountry_EN_t;
                     }
 
-                     if(document.jurisdiction_EN_t){
-                          output.jusrisdiction = document.jurisdiction_EN_t;
-                        }
-
                     if(document.schema_s=='resource') {
                         output.Year = document.publicationYear_is;
                         output.Types = getString(document.resourceTypes_CEN_ss, locale);
                         output.Regions = getString(document.regions_CEN_ss, locale);
-                        output.Languages = getString(document.languages_CEN_ss, locale);                        
+                        output.Languages = getString(document.languages_CEN_ss, locale);
+                        output.recordtype="referenceRecord";  
+
+                        // TODO: add summary as output.description and limit to 200 chars
+
+                        if(output.Types)output.metadata.push(output.Types);
+                        if(output.Year)output.metadata.push(output.Year);
+                        if(output.Regions)output.metadata.push(output.Regions);
+                        if(output.Languages)output.metadata.push(output.Languages);
+                        
+
                     }else if(document.schema_s=='authority') {
                         output.responsibleForAll = document.responsibleForAll_b;
-                        // output.jusrisdiction = document.jurisdiction_EN_t;                        
+                        output.jusrisdiction = document.jurisdiction_EN_t;                        
                         output.grType = (document.geneticResourceTypes_ss );
-                        output.cssRecordClass="nationalRecords";
+                        output.recordtype="nationalRecord";
+
+                         if(output.responsibleForAll) 
+                            output.description ="This CNA is responsible for all functions under the Nagoya Protocol.";
+                         else{
+                            // TODO: output.description should be the summary of responsibilities
+                            if(output.jusrisdiction)output.metadata.push(output.jusrisdiction);
+                            if(output.grType)output.metadata.push(output.grType);
+                         }
                     }
                     else if(document.schema_s=='absCheckpoint') {
-                        // output.jusrisdiction = document.jurisdiction_EN_t;   
+                        output.jusrisdiction = document.jurisdiction_EN_t;   
                         output.informAllAuthorities = (document.informAllAuthorities_b);  
-                        output.cssRecordClass="nationalRecords";
+                        output.recordtype="nationalRecord";
+
+                        if(output.jusrisdiction)output.metadata.push(output.jusrisdiction);
+
+                        //TODO: output.description should be the summary of responsibilities
                     }
                     else if(document.schema_s=='absPermit') {
                       
@@ -240,24 +253,43 @@ app.directive('documentList', function ($http) {
                         }
                         // console.log(output.usage);
                         output.keywords = getString(document.keywords_CEN_ss, locale);
-                        output.cssRecordClass="nationalRecords";
+                        output.recordtype="nationalRecord";
+
+                        //TODO: output.description should be the subjectmatter
+                        //TODO: keywords should show up in the metadata. if(output.keywords)output.metadata.push(output.keywords);
+                        //TODO: the metadata should be a link to download the pdf
+                        if(output.usage)output.metadata.push(output.usage);
+
                     }
                     else if(document.schema_s=='absCheckpointCommunique') {
+                        output.recordtype="nationalRecord";
                         output.originCountries = (document.originCountries_CEN_ss);
-                        output.cssRecordClass="nationalRecords";
+                        output.title = "Checkpoint communique ["+ formatDate(document.createdDate_dt) +"]";
+
+                        //TODO: output.description should be the summary of utilization
+                        //TODO: the metadata should include a link to download the pdf
+                        
+                    }
+                     else if(document.schema_s=='database') {
+                        output.recordtype="nationalRecord";
+                        //TODO: output.description should be the description 
+                        //TODO: metadata should be the url opening to a new window
                     }
                     else if(document.schema_s=='measure' || document.schema_s=='focalPoint' || document.schema_s=='database') {
-                        output.cssRecordClass="nationalRecords";
-                        
+                        output.recordtype="nationalRecord";
+              
                         if(document.type_EN_t){
                           output.type = document.type_EN_t;
+                          if(output.type)output.metadata.push(output.type);
                         }
 
                         if(document.status_EN_t){
                           output.status = document.status_EN_t;
+                          if(output.status)output.metadata.push(output.status);
                         }
                     }                    
                     else if(document.schema_s=='meeting') {
+                        output.recordtype="referenceRecord";
                         output.eventCity=document.eventCity_EN_t;
                         output.eventCountry=document.eventCountry_EN_t;
                     }

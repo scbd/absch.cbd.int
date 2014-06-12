@@ -6,19 +6,19 @@ define(['app'], function(app){
 				var item = [];
 				var queryFields = 'fl=identifier_s,schema_s,createdDate_dt,createdByEmail_s,createdBy_s,updatedDate_dt,updatedByEmail_s,updatedBy_s,url_ss,';
 
-				if(schema=="FOCALPOINT"){
+				if(schema.toUpperCase()=="FOCALPOINT"){
 				  queryFields += 'description_EN_t,government_EN_t,organization_EN_t,text_EN_txt,title_EN_t,treaty_CEN_ss,type_CEN_ss,email_s,telephone_s';
 				}
-				else if (schema=="MEETING"){
+				else if (schema.toUpperCase()=="MEETING"){
 				queryFields += 'symbol_s,startDate_dt,endDate_dt,eventCountry_CEN_s,title_s,eventCity_s,text_EN_txt,themes_CEN_ss,thematicAreas_CEN_ss,thematicAreas_ss';
 				}
-				else if (schema=="NOTIFICATION"){
+				else if (schema.toUpperCase()=="NOTIFICATION"){
 				queryFields += 'date_s,deadline_s,symbol_s,reference_s,sender_s,schema_CEN_s,title_EN_t,description_EN_t,recipient_ss,url_ss,text_EN_txt';
 				}
-				else if (schema=="PRESSRELEASE"){
+				else if (schema.toUpperCase()=="PRESSRELEASE"){
 				queryFields += 'date_s,symbol_s,schema_CEN_s,title_EN_t,description_EN_t,themes_CEN_ss,url_ss,thematicAreas_CEN_ss,text_EN_txt';
 				}
-				else if (schema=="STATEMENT"){
+				else if (schema.toUpperCase()=="STATEMENT"){
 				queryFields += 'date_s,symbol_s,schema_CEN_s,title_EN_t,description_EN_t,themes_CEN_ss,url_ss,thematicAreas_CEN_ss,text_EN_txt';
 				}
 

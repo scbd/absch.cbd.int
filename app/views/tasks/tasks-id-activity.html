@@ -106,7 +106,8 @@
 
 				<span ng-show="activity" ng-switch="activity.result.action">
 					<span ng-switch-when="approve"><i class="glyphicon glyphicon-ok"></i> Approved</span>
-					<span ng-switch-when="reject"><i class="glyphicon glyphicon-remove"></i> Rejected</span>
+					<span ng-switch-when="reject"><i class="glyphicon glyphicon-remove"></i> Rejected</span>					
+					<span ng-show="activity.result.reason"><STRONG> for {{activity.result.reason}} </STRONG></span>
 				</span>
 
 				<span ng-hide="activity"><i class="glyphicon glyphicon-ok"></i> Completed</span>
