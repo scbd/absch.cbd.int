@@ -198,23 +198,38 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="km-control-group" required name="geneticRessourceUsers" caption="Person or entity utilizing the genetic resource at the checkpoint">
-                            <field-embed-contact multiple ng-model="$parent.document.geneticRessourceUsers" locales="$parent.document.header.languages" caption="Add an organisation or a contact »"></field-embed-contact>
+                            <field-embed-contact multiple ng-model="document.geneticRessourceUsers" locales="document.header.languages" caption="Add an organisation or a contact »"></field-embed-contact>
 
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12 col-xs-12">
-                        <div class="km-control-group" name="dateFrom" caption="Date on which the information started being collected">
-                            <div km-date placeholder="YYYY-MM-DD" required name="dateFrom" ng-model="document.dateFrom"></div>
+                <section>
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12 enable well">
+                            <div class="km-control-group" name="date" caption="Date on which the information was collected">
+                                <div km-date placeholder="YYYY-MM-DD" required name="date" ng-model="document.date"></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-12 col-xs-12">
-                        <div class="km-control-group" name="dateTo" caption="Date on which the information was received">
-                            <div km-date placeholder="YYYY-MM-DD" required name="dateTo" ng-model="document.dateTo"></div>
+                    <div class="row">
+                        <div class="col-md-6 col-xs-6" >  
+                            <div class="km-control-group pull-right" name="dateOR" caption="OR">                               
+                            </div>                                           
+                        </div>  
+                    </div>
+                    <div class="row enable well">                  
+                        <div class="col-md-6 col-xs-6">
+                            <div class="km-control-group" name="dateFrom" caption="Date on which the information started being collected">
+                                <div km-date placeholder="YYYY-MM-DD" required name="dateFrom" ng-model="document.dateFrom"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-5 col-xs-5">
+                            <div class="km-control-group" name="dateTo" caption="Date on which the information was received">
+                                <div km-date placeholder="YYYY-MM-DD" required name="dateTo" ng-model="document.dateTo"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </section>
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="km-control-group" name="informationDocuments" caption="Upload relevant document">

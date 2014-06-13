@@ -16,7 +16,14 @@ define(['app',
 	'./forms/view/view-organization-reference.directive.js',
 	'./directives/task-id-directive.html.js',
 	'./directives/user-details.directive.html.js',
-	'./directives/ngxLazy.directive.js'], function (app) {
+		'./directives/ngxLazy.directive.js',
+	'../views/forms/edit/edit-authority.directive.js',
+	'../views/forms/edit/edit-abs-checkpoint.directive.js',
+	'../views/forms/edit/edit-abs-checkpoint-communique.directive.js',
+	'../views/forms/edit/edit-abs-permit.directive.js',
+	'../views/forms/edit/edit-database.directive.js',
+	'../views/forms/edit/edit-measure.directive.js',
+	'../views/forms/edit/edit-resource.directive.js'], function (app) {
 
 "use strict";
 //require("app", "dragAndDrop")
