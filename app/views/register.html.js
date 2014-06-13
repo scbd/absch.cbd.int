@@ -16,7 +16,7 @@ define(['app',
 	'./forms/view/view-organization-reference.directive.js',
 	'./directives/task-id-directive.html.js',
 	'./directives/user-details.directive.html.js',
-	'./directives/ngxLazy.directive.js'], function (app) {
+		'./directives/ngxLazy.directive.js'], function (app) {
 
   "use strict";
 

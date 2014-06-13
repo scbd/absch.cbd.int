@@ -37,6 +37,25 @@
 
                 <section>
                     <legend>General information</legend>
+                    <div class="row" ng-show="documentExists">
+                        <div class="col-xs-12">
+                             <div class="km-control-group" name="amendmentIntent" required caption="Please indicate what the intent of the modification is">
+                                <input type="radio" name="amendmentIntent" ng-model="document.amendmentIntent" ng-value="0">Information is being submitted to modify a previously issued internationally recognized certificate of compliance (a new certificate will be constituted and the old one will still be valid)</br>
+                                <input type="radio" name="amendmentIntent" ng-model="document.amendmentIntent" ng-value="1">Information is being submitted to replace a previously issued internationally recognized certificate of compliance (a new certificate will be constituted and the old one will no longer be valid)</br>                       
+                                <input type="radio" name="amendmentIntent" ng-model="document.amendmentIntent" ng-value="2">
+                                An existing permit or its equivalent is being revoked and the constituted internationally recognized certificate of compliance will no longer be valid.  
+                            </div>                          
+                        </div>
+                    </div>
+                    <div class="row" ng-show="documentExists">
+                        <div class="col-xs-12">
+                            <div class="control-group">
+                                <div class="km-control-group" name="amendmentsDescription" required caption="Provide a summary of the reason for the update of the record">
+                                    <div km-textbox-ml ng-model="document.amendmentsDescription" rows="3" placeholder="" locales="document.header.languages" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="row">
                         <div class="col-xs-12">
@@ -158,6 +177,7 @@
                                     <div ng-show="!document.informedConsentConfidential">
                                         <field-embed-contact multiple ng-model="document.informedConsents" locales="$parent.document.header.languages" caption="Add an organisation or a contact »"></field-embed-contact>
                                     </div>
+                                    <span class="help-block" ng-show="document.informedConsentConfidential">Please note that the ABS-CH wont be able to send a courtersy copy of the IRCC</span>
                                 </div>
                             </div>
                         </div>
@@ -166,7 +186,7 @@
                     </section>
 
                     <section>
-                        <legend>Mutual Agreed Terms (MAT) Information</legend>
+                        <legend>Mutually Agreed Terms (MAT) Information</legend>
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="km-control-group" required name="mutuallyAgreedTermsEstablished" caption="Confirmation that mutually agreed terms (MAT) were established">
@@ -204,7 +224,7 @@
 
 
                 <section>
-                    <legend>Subject Matter</legend>
+                    <legend>Subject-matter</legend>
                     <div class="row">
                         <div class="col-xs-12">
                             <div ng-class="{'alert alert-danger':document.geneticResourcesConfidential}" class="confidential-box">
@@ -275,8 +295,15 @@
                             <div class="km-control-group" name="keywords" caption="Keywords to describe the subject-matter or genetic resource(s) covered by the permit or its equivalent">
                                 <span class="help-block">The collection of this information is important for facilitating harmonized searches throughout the records. Please select all relevant keywords that could assist in describing the subject-matter or genetic resource(s) covered by the permit or its equivalent.</span>
                                 <div km-select multiple required name="keywords" ng-model="document.keywords" items="options.keywords()"></div>
+                            </div>                            
+                        </div>                        
+                    </div>
+                    <div class="row">                        
+                        <div class="col-xs-12" ng-show="isOthers()">
+                            <div class="km-control-group" required name="keywordOthers" caption="Other keywords">
+                                <div km-textbox-ml required name="keywordOthers" rows="1" ng-model="document.keywordOthers" locales="document.header.languages"></div>
                             </div>
-                        </div>
+                        </div>    
                     </div>
                 </section>
 
@@ -360,7 +387,7 @@
 
                     </section>
 
-                <section  ng-show="document.amendedPermits">
+               <!--  <section  ng-show="document.amendedPermits">
                     <legend>Amendments</legend>
                     <div>
                         <div class="row">
@@ -380,7 +407,7 @@
                         </div>
                     </div>
 
-                </section>
+                </section> -->
 
                 <section>
                     <legend>Additional Information</legend>

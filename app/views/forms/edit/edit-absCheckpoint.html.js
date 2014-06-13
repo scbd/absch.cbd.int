@@ -5,7 +5,13 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 
     $scope.options  = {
       countries		: function () { return $http.get("/api/v2013/thesaurus/domains/countries/terms",							{ cache: true }).then(function(o){ return $filter("orderBy")(o.data, "name"); }); },
-      jurisdictions	: function () { return $http.get("/api/v2013/thesaurus/domains/D7BD5BDE-A6B9-4261-B788-16839CCC4F7E/terms",	{ cache: true }).then(function(o){ return o.data; }); }
+      jurisdictions : function () {return $q.all([$http.get("/api/v2013/thesaurus/domains/D7BD5BDE-A6B9-4261-B788-16839CCC4F7E/terms", { cache: true }), 
+                                 $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })]).then(function(o) {
+                                var data = o[0].data;
+                                data.push(o[1].data)
+                                return  data;
+                                })
+      }
     };
 
     //==================================
@@ -31,31 +37,41 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
            document.jurisdiction &&
            document.jurisdiction.identifier == "DEEEDB35-A34B-4755-BF77-D713017195E3";
     };
+    //==================================
+    //
+    //==================================
+    $scope.isOthers = function(document) {
 
+      document = document || $scope.document;
+
+      return document &&
+           document.jurisdiction &&
+           document.jurisdiction.identifier == "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED";
+    };
     //==================================
     //
     //==================================
     $scope.getCleanDocument = function(document) {
 
-      document = document || $scope.document;
+        document = document || $scope.document;
 
-      if (!document)
-        return undefined;
+        if (!document)
+          return undefined;
 
-      document = angular.fromJson(angular.toJson(document));
+        document = angular.fromJson(angular.toJson(document));
 
-      if (!$scope.isSubNational(document) || !$scope.isCommunity(document)) {
-        document.jurisdictionName = undefined;
-      }
-      if (document.informAllAuthorities !== false) {
-        document.authoritiesToInform = undefined;
-      }
+        if (!$scope.isSubNational(document) && !$scope.isCommunity(document) && !$scope.isOthers(document)) {
+          document.jurisdictionName = undefined;
+        }
+        if (document.informAllAuthorities !== false) {
+          document.authoritiesToInform = undefined;
+        }
 
-      if (/^\s*$/g.test(document.notes))
-        document.notes = undefined;
+        if (/^\s*$/g.test(document.notes))
+          document.notes = undefined;
 
-      return document;
-    };
+        return document;
+      };
 
     $scope.setDocument();
   }]);

@@ -31,10 +31,14 @@ app.get   ('/app/absPDFViewer/*'   , function(req, res) {
 app.get   ('/app/*'   , function(req, res) { res.send('404', 404); } );
 app.get   ('/public/*', function(req, res) { res.send('404', 404); } );
 
-app.get   ('/api/*', function(req, res) { proxy.web(req, res, { target: 'https://api.cbd.int', secure: false } ); } );
-app.put   ('/api/*', function(req, res) { proxy.web(req, res, { target: 'https://api.cbd.int', secure: false } ); } );
-app.post  ('/api/*', function(req, res) { proxy.web(req, res, { target: 'https://api.cbd.int', secure: false } ); } );
-app.delete('/api/*', function(req, res) { proxy.web(req, res, { target: 'https://api.cbd.int', secure: false } ); } );
+// var targetURL = 'http://localhost';
+var targetURL = 'https://api.cbd.int';
+
+app.all('/api/v2013/documents/*', function(req, res) { proxy.web(req, res, { target: 'http://localhost', secure: false } ); } );
+app.get   ('/api/*', function(req, res) { proxy.web(req, res, { target: targetURL, secure: false } ); } );
+app.put   ('/api/*', function(req, res) { proxy.web(req, res, { target: targetURL, secure: false } ); } );
+app.post  ('/api/*', function(req, res) { proxy.web(req, res, { target: targetURL, secure: false } ); } );
+app.delete('/api/*', function(req, res) { proxy.web(req, res, { target: targetURL, secure: false } ); } );
 
 // Configure index.html
 
