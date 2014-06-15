@@ -80,7 +80,7 @@ app.directive("registerRecordList", ["$timeout", "commonjs", function ($timeout,
 
 				return $q.when(storage.drafts.delete(record.identifier)).then(function(){
 					
-					$scope.$emit("documentDeleted");
+					$scope.$emit("documentDeleted", record);
 					$scope.recordToDelete = null;
 
 				}).finally(function(){

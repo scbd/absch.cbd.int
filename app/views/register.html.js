@@ -13,18 +13,6 @@ define(['app',
 	  function ($rootScope, $location, $scope, $q, $window, storage, _,
       schemaTypes, $timeout, lstringFilter, $routeParams, $cookies) {
 
-      
-    //============================================================
-    //====================== SECURIZE ============================
-    //============================================================
-      $scope.isAuthenticated      = $rootScope.user.isAuthenticated;
-      //$scope.canRegisterNational  = !!_.intersection($rootScope.user.roles, ["AbsAdministrator", "AbsNationalAuthorizedUser", "AbsNationalFocalPoint", "AbsPublishingAuthorities", "Administrator"]).length;
-      //$scope.canRegisterReference = $rootScope.user.isAuthenticated;
-
-    //============================================================
-    
-    $scope.$root = $rootScope;
-   
     //TODO: stop using so many globals =P I should inherit the controller scope or something.
     $rootScope.subheadings = {
       'National Entities': [
@@ -132,14 +120,12 @@ define(['app',
     if($routeParams.document_type) //this is used to highlight the item on the left
       $scope.document_type = $routeParams.document_type;
     
-    var leftTab = $routeParams.document_type;
     $scope.msg="";
     $scope.records = [];
-    $scope.isLoaded = []; //not sure what this does yet.
+    $scope.isLoaded = []; //What schemas are currently loaded
 
     $scope.localeRegister= ["en"];
 
-    //TODO: combine this with document_types
     $scope.schemaTypesFacets = [
       {"schema":"measure","schemaType":"nationalRecords", "draftCount":0,"requestCount":0,"publishCount": 0},
       {"schema":"authority","schemaType":"nationalRecords", "draftCount":0,"requestCount":0,"publishCount": 0},
@@ -248,7 +234,7 @@ define(['app',
               $scope.userActivities.push({
                             "title" : row.createdBy.firstName + ' ' + row.createdBy.lastName + ' has requested '+ 
                               _.where($scope.schemaTypesFacets,{"schema":row.type})[0].header
-                              + ' draft ' + (lstringFilter(row.workingDocumentTitle||row.title,$scope.$root.locale)) 
+                              + ' draft ' + (lstringFilter(row.workingDocumentTitle||row.title,$rootScope.locale)) 
                               + ' to be published',
                             "identifier" : row.identifier,
                             "schema"	 : row.type
@@ -258,7 +244,7 @@ define(['app',
               $scope.userActivities.push({
                             "title" : row.createdBy.firstName + ' ' + row.createdBy.lastName + ' is working on ' +
                               _.where($scope.schemaTypesFacets,{"schema":row.type})[0].header + ' draft '
-                              +(lstringFilter(row.workingDocumentTitle||row.title,$scope.$root.locale)) 
+                              +(lstringFilter(row.workingDocumentTitle||row.title,$rootScope.locale)) 
 
                               +(row.workingDocumentTitle||row.title) 
                               ,
@@ -289,85 +275,7 @@ define(['app',
     
     loadRecords();
 
-    $scope.refreshRecords = function (msg){
-      var currentTab = $scope.tab();
-
-      if(currentTab != "dashboard"){
-        //remove tab details from isLoded array which is used to avoid reload of records on tab change.
-        $scope.isLoaded.splice($.inArray(currentTab,$scope.isLoaded),1);
-        var schemaCount = _.where($scope.schemaTypesFacets,{"schema":currentTab});
-        schemaCount[0].draftCount 	= 0;					
-        schemaCount[0].requestCount = 0;
-        schemaCount[0].publishCount	= 0;
-      }
-      //remove records for the current tab from records array and refetch from server.
-      $scope.records =_.reject($scope.records, function(record){
-                return record.type== currentTab;
-            });
-      loadRecords(currentTab);
-
-      if(msg){
-        $scope.msg = msg;
-      }
-    }
-
-    // loadRecords();
-
-    //============================================================
-    //
-    // 
-    //
-    //============================================================
-    $scope.tab = function(newTab) {
-      if(!newTab)
-        return leftTab;
-
-      if(canSwitch())
-        leftTab = newTab;
-
-      return leftTab;
-    };
-
-    //============================================================
-    //
-    // Start edition of a new or an existing document/draft
-    //
-    //============================================================
-    $scope.edit = function(schema, identifier) {
-
-      if(!$rootScope.user.isAuthenticated) {  //navigation.securize();
-            $scope.actionSignin();
-            return;
-        }
-
-      if(!canSwitch())
-        return;
-
-      $q.when($scope.canEdit(schema, identifier), function (allowed) {
-
-        $scope.lastSchema = schema;
-        $scope.lastIdentifier = identifier; 
-
-        if(!allowed) {
-
-          if(identifier) alert("You are not authorized to edit this record");
-          else           alert("You are not authorized to create a new record");
-
-          return;
-        }
-
-        //My god the coupling is horrible
-        $scope.$broadcast("loadDocument", {
-          schema : schema,
-          identifier : identifier
-        });
-
-        leftTab = schema;
-        $scope.editing = true;
-
-      });
-    };
-
+    //So this is like a request for info... I don't like the idea of using JS as an message driven language. KISS
     $scope.$on("getDocumentInfo", function(evt, info) {
       if($scope.lastSchema)
         $scope.$broadcast("loadDocument", {
@@ -375,79 +283,6 @@ define(['app',
           identifier : $scope.lastIdentifier
         });
     });
-
-
-    //============================================================
-    //
-    //
-    //
-    //============================================================
-    $scope.$on("newDocument", function(evt, schema){
-
-      evt.stopPropagation();
-      $scope.edit(schema);
-    }); 
-    //============================================================
-    //
-    //
-    //
-    //============================================================
-    $scope.$on("editDocument", function(evt, schema, identifier){
-
-      evt.stopPropagation();
-      $scope.edit(schema, identifier);
-    });
-
-    //============================================================
-    //
-    //
-    //
-    //============================================================
-    var canEdit_cache = {}
-    $scope.canEdit = function (schema, identifier) {
-
-      if(!$rootScope.user.isAuthenticated)
-        return false;
-
-      var cacheKey = (schema||"") + "+" + (identifier||"");
-
-      if(canEdit_cache[cacheKey]!==undefined){
-
-        if(canEdit_cache[cacheKey] && $rootScope.user.isAuthenticated &&  !$cookies.authenticationToken){
-          alert('session expired please login again');
-          $scope.actionSignin();
-        }
-        return canEdit_cache[cacheKey];
-      }
-
-
-
-      if(identifier) {
-
-        return storage.drafts.get(identifier, {info:""}).then(function (result) {
-
-          var info = result.data || result;
-
-          if(info.type!=schema)
-            throw "Schema type mismatch";
-
-          return storage.drafts.security.canUpdate(identifier, schema);
-
-        }).catch(function(error) {
-
-          if(error.status==404)
-            return storage.drafts.security.canCreate(identifier, schema);
-
-          throw error;
-        })
-      }
-      else {
-
-        return canEdit_cache[cacheKey] = storage.drafts.security.canCreate(identifier, schema).then(function(allowed){
-          return canEdit_cache[cacheKey] = allowed||false;
-        });
-      }
-    }
 
     //============================================================
     //
@@ -471,7 +306,6 @@ define(['app',
     //============================================================
     $scope.$on("documentDraftSaved", function(evt, draftInfo) {
       //debugger;
-      $scope.refreshRecords();
       evt.stopPropagation();
       $scope.editing = false;
       $scope.msg = "Your record has been saved as a draft.";
@@ -486,7 +320,6 @@ define(['app',
     //============================================================
     $scope.$on("documentPublishRequested", function(evt, workflowInfo){
       
-      $scope.refreshRecords();
       evt.stopPropagation();
       $scope.editing = false;
       $scope.msg = "Record saved. A publishing request has been sent to your Publishing Authority.";
@@ -502,7 +335,6 @@ define(['app',
     //============================================================
     $scope.$on("documentPublished", function(evt, documentInfo){
       
-      $scope.refreshRecords();
       evt.stopPropagation();
       $scope.editing = false;
       $scope.msg = "Record published.";
@@ -515,49 +347,15 @@ define(['app',
     // Occurs when record-list delete a record or a draft
     //
     //============================================================
-    $scope.$on("documentDeleted", function(evt){
-      $scope.refreshRecords();
+    $scope.$on("documentDeleted", function(evt, doc){
+      for(var i=0; i!=$scope.records.length; ++i)
+        if($scope.records[i] == doc)
+          $scope.records.splice(i, 1);
+
       evt.stopPropagation();
       $scope.editing = false;
       $scope.msg = "Record deleted.";
 
-    });
-
-    //============================================================
-    //
-    //
-    //
-    //============================================================
-    var unreg_locationChangeStart = $scope.$on('$locationChangeStart', function(evt, next, current) {
-
-      if(!canSwitch()) {
-        evt.preventDefault();
-      }
-    });
-
-    //============================================================
-    //
-    //
-    //
-    //============================================================
-    function canSwitch() {
-
-      if(!$scope.editing || $window.confirm("Are you sure you want to leave this form and lose your changes?")) {
-        $scope.editing = false;
-      }
-
-      return !$scope.editing;
-    }
-
-    //============================================================
-    //
-    // ROUTE CHANGE CLEAN-UP
-    //
-    //============================================================
-    var unreg_routeChangeStart = $scope.$on('$routeChangeStart', function() {
-
-      unreg_routeChangeStart();
-      unreg_locationChangeStart();
     });
 
     $scope.$watch('msg',function(newValue){

@@ -12,7 +12,7 @@ define([
     '/app/views/forms/view/view-organization-reference.directive.js',
   ], function (app) {
 
-  app.controller("editController", ["$rootScope", "$scope", "authHttp", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage", "authentication", "Enumerable", "editFormUtility", "$routeParams", function ($rootScope, $scope, $http, guid, $filter, thesaurus, $q, $location, storage, authentication, Enumerable, editFormUtility, $routeParams) {
+  app.controller("editController", ["$rootScope", "$scope", "authHttp", "$window", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage", "authentication", "Enumerable", "editFormUtility", "$routeParams", function ($rootScope, $scope, $http, $window, guid, $filter, thesaurus, $q, $location, storage, authentication, Enumerable, editFormUtility, $routeParams) {
 
     $scope.type = $rootScope.document_types[$routeParams.document_type];
 
@@ -302,6 +302,19 @@ define([
 
       });
     };
+
+    var confirmLeaving = function(evt, next, current) {
+      if(!canSwitch())
+        evt.preventDefault();
+    };
+    $scope.$on('$locationChangeStart', confirmLeaving);
+
+    function canSwitch() {
+      if($window.confirm("Are you sure you want to leave this form and lose your changes?"))
+        return true;
+
+      return false;
+    }
 
   }]);
 });

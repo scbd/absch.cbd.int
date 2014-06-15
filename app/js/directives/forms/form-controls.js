@@ -2047,7 +2047,7 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 
 				}).then(function(draftInfo) {
 
-					if(draftInfo.type='authority'){
+					if(draftInfo.type=='authority'){
 						//in case of authority save the CNA as a contact in drafts
 						saveAuthorityInContacts(draftInfo);
 					}					

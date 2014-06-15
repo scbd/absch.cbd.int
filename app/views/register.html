@@ -4,12 +4,12 @@
 <div ng-cloak ng-controller="RegisterController">
   <div class="container">
     <div class="row">
-      <div class="col-xs-3" ng-show="isAuthenticated">
+      <div class="col-xs-3" ng-show="user.isAuthenticated">
         <h1>Register Information</h1>
         <div>
 
           <h3>
-            <a href="/dashboard" ng-click="tab('dashboard')"  ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/dashboard.html'}" href="#" role="button">
+            <a href="/dashboard" ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/dashboard.html'}" href="#" role="button">
               <i class="glyphicon glyphicon-list-alt" style="position:relative;top:4px;"></i> Dashboard 
             </a>
           </h3>
@@ -44,8 +44,8 @@
       </div> 
 
       <!-- TODO: if not authenticated, should be handled by the router, which redirects the user to login, NOT by a hidden div -->
-      <div class="col-xs-12" ng-hide="isAuthenticated" style="padding-top:20px;">
-        <div class="alert" ng-hide="isAuthenticated">
+      <div class="col-xs-12" ng-hide="user.isAuthenticated" style="padding-top:20px;">
+        <div class="alert" ng-hide="user.isAuthenticated">
           <div class="row well" ng-show="!user.isAuthenticated">
             <div class="col-xs-12">
               <div login></div>
