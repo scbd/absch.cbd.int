@@ -52,30 +52,6 @@ app.directive('recordLoader', [function () {
 			//
 			//==================================
 			$scope.init = function () {
-
-				if ($scope.internalDocument)
-					return;
-
-				if ($scope.document || $scope.schema)
-					return;
-
-				var documentID = $route.current.params.documentID;
-				var documentSchema = $route.current.params.documentSchema;
-
-				if(documentSchema.toUpperCase()=="FOCALPOINT" || documentSchema.toUpperCase()=="MEETING" || documentSchema.toUpperCase()=="NOTIFICATION"
-                   || documentSchema.toUpperCase()=="PRESSRELEASE" || documentSchema.toUpperCase()=="STATEMENT")
-				{
-					 commonjs.getReferenceRecordIndex(documentSchema,documentID).then(function(data){
-						$scope.internalDocument = data.data;
-					//console.log($scope.internalDocument );
-					});
-				}										
-				else if (documentID){
-					$scope.load(documentID);
-				}
-				// else
-				// 	$scope.error = "documentID not specified";
-				
 			}
 
 			//==================================
