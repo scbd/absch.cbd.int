@@ -12,7 +12,9 @@ define([
     '/app/views/forms/view/view-organization-reference.directive.js',
   ], function (app) {
 
-  app.controller("editController", ["$scope", "authHttp", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage", "authentication", "Enumerable", "editFormUtility", "$routeParams", function ($scope, $http, guid, $filter, thesaurus, $q, $location, storage, authentication, Enumerable, editFormUtility, $routeParams) {
+  app.controller("editController", ["$rootScope", "$scope", "authHttp", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage", "authentication", "Enumerable", "editFormUtility", "$routeParams", function ($rootScope, $scope, $http, guid, $filter, thesaurus, $q, $location, storage, authentication, Enumerable, editFormUtility, $routeParams) {
+
+    $scope.type = $rootScope.document_types[$routeParams.document_type];
 
     $scope.status   = "";
     $scope.error    = null;

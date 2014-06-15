@@ -1,5 +1,8 @@
-﻿<div class="col-xs-9" style="padding-top:20px;">
-  <div class="registerpage-content" ng-controller="editAbsCheckpoint">
+﻿<div class="col-xs-9" style="padding-top:20px;" ng-controller="editAbsCheckpoint">
+
+  <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
+  
+  <div class="registerpage-content">
 
     <div ng-show="msg" class="alert alert-success alert-dismissable">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="msg=''">&times;</button>

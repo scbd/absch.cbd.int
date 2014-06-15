@@ -27,6 +27,7 @@ define(['app',
       schemaTypes,$compile,$timeout,lstringFilter, $routeParams) {
 
     $scope.type = $rootScope.document_types[$routeParams.document_type];
+    console.log('type: ', $scope.type);
 
     $scope.dashboardFilter = "All";
 
