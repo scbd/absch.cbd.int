@@ -303,17 +303,19 @@ define([
       });
     };
 
-    var confirmLeaving = function(evt, next, current) {
+    var confirmLeaving = function(next, current) {
+      console.log('evt: ', next, current);
       if(!canSwitch())
         evt.preventDefault();
     };
-    $scope.$on('$locationChangeStart', confirmLeaving);
+    $scope.$on('$routeChangeStart', confirmLeaving);
 
     function canSwitch() {
-      if($window.confirm("Are you sure you want to leave this form and lose your changes?"))
+      //TODO: re-enable when I've figured out how to do a custom confirmation div
+      //if($window.confirm("Are you sure you want to leave this form and lose your changes?"))
         return true;
 
-      return false;
+      //return false;
     }
 
   }]);
