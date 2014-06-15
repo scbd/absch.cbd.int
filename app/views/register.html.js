@@ -22,6 +22,8 @@ define(['app',
       //$scope.canRegisterReference = $rootScope.user.isAuthenticated;
 
     //============================================================
+    
+    $scope.$root = $rootScope;
    
     //TODO: stop using so many globals =P I should inherit the controller scope or something.
     $rootScope.subheadings = {
@@ -247,7 +249,7 @@ define(['app',
               $scope.userActivities.push({
                             "title" : row.createdBy.firstName + ' ' + row.createdBy.lastName + ' is working on ' +
                               _.where($scope.schemaTypesFacets,{"schema":row.type})[0].header + ' draft '
-                              //+(lstringFilter(row.workingDocumentTitle||row.title,$scope.$root.locale)) 
+                              +(lstringFilter(row.workingDocumentTitle||row.title,$scope.$root.locale)) 
 
                               +(row.workingDocumentTitle||row.title) 
                               ,
