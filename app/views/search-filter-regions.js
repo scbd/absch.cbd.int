@@ -11,6 +11,7 @@ define(['app'], function(app) {
               items: '=ngModel',
               field: '@field',
               query: '=query',
+              facets: '=facets'
         },
         link: function ($scope, element, attrs, ngModelController)
         {
@@ -102,31 +103,6 @@ define(['app'], function(app) {
                 var classes   = _.filter(termsTree, function where (o) { return !!o.narrowerTerms && o.identifier!='1796f3f3-13ae-4c71-a5d2-0df261e4f218'});
 
                 _.values(self.termsMap).forEach(function (term) {
-                  /*
-                    term.name = term.name.replace('CBD Regional Groups - ', '');
-                    term.name = term.name.replace('Inland water ecosystems - ', '');
-                    term.name = term.name.replace('Large marine ecosystems - ', '');
-
-                    term.name = term.name.replace('Mountains - All countries', 'Mountains');
-                    term.name = term.name.replace('Global - All countries', 'Global');
-                    term.name = term.name.replace('Americas - All countries', 'Americas');
-                    term.name = term.name.replace('Africa - All countries', 'Africa');
-                    term.name = term.name.replace('Asia - All countries', 'Asia');
-                    term.name = term.name.replace('Europe - All countries', 'Europe');
-                    term.name = term.name.replace('Oceania - All countries', 'Oceania');
-
-                    term.name = term.name.replace('Mountains - ', '');
-                    term.name = term.name.replace('Global - ', '');
-                    term.name = term.name.replace('Americas - ', '');
-                    term.name = term.name.replace('Africa - ', '');
-                    term.name = term.name.replace('Asia - ', '');
-                    term.name = term.name.replace('Europe - ', '');
-                    term.name = term.name.replace('Oceania - ', '');
-
-                    term.name = term.name.replace('regions', '<All>');
-                    term.name = term.name.replace('groups', '<All>');
-                    */
-
                     term.selected = false;
                     term.count = 0;
                 });
@@ -138,7 +114,7 @@ define(['app'], function(app) {
                         self.termsMap[item.symbol].count = item.count;
                 });
 
-                $scope.terms = classes;
+                $scope.terms = classes;                
             });
 
             function onWatch_items(values) {
@@ -149,6 +125,16 @@ define(['app'], function(app) {
             }
 
             $scope.refresh = buildQuery;
+            
+            $scope.$watch('facets', function(items){
+                 if(items){
+                     (items).forEach(function (item) {
+                        if(_.has(self.termsMap, item.symbol))
+                            self.termsMap[item.symbol].count = item.count;
+                    });
+                }
+            });
+            
         }]
     }
   })

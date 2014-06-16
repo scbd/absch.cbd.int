@@ -5,6 +5,13 @@
       <span> &nbsp; {{title | lstring:locale}}
     </a>
   </h3>
+  <div class="list-group-item-expand">
+    <div ng-animate="'animate'" ng-repeat="item in allTerms | orderBy:'title' | filter:{selected:true}" ng-click="onclick(this, $event)">
+        <div class="truncate" style="cursor:pointer">
+          {{item.title.en}} ({{item.count}}) <div class="glyphicon glyphicon-remove"></div>
+        </div>
+    </div>
+  <div>
   <div class="panel-group" id="accordion" ng-hide="!showSelect">
     <div class="panel panel-default" ng-repeat="class in terms">
       <div class="panel-heading">
