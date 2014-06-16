@@ -16,7 +16,7 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
                                                   $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })]).then(function(o) {
                                                         var data = o[0].data;
                                                         data.push(o[1].data)
-                                                        return  thesaurus.buildTree(data);
+                                                        return  Thesaurus.buildTree(data);
                                                 })},
       absSubjects   : function() { return $http.get("/api/v2013/thesaurus/domains/CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924/terms", { cache: true }).then(function(o){ return o.data; }); },
       regions       : function() { return $q.all([$http.get("/api/v2013/thesaurus/domains/countries/terms", { cache: true }),
@@ -44,30 +44,17 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
       if (/^\s*$/g.test(document.notes))
         document.notes = undefined;
 
+      if(!$scope.isOtherSelected(document.languages))
+          document.languageName = undefined;
+
+      if(!$scope.isOtherSelected(document.resourceTypes))
+          document.resourceTypeName = undefined;
+
+
       return document;
     };
 
     $scope.setDocument({libraries: [{ identifier: "cbdLibrary:abs-ch" }]}, true);
-
-    $scope.isOtherLanguage = function(document){ 
-     
-     document = document || $scope.document;
-
-console.log(document);
-       return document &&   document.languages ;
-       // &&           
-       //      Enumerable.from(document.languages).where(function(type){
-       //        return type.identifier == "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED";
-       //      });
-    }
-
-    $scope.isOtherType = function(document){
-      document = document || $scope.document;
-      return document &&   document.resourceTypes &&             
-            Enumerable.from(document.resourceTypes).where(function(type){
-              return type.identifier == "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED";
-            });
-    }
 
   }]);
 });

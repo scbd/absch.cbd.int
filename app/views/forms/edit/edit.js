@@ -51,6 +51,15 @@ define([
         validate();
     });
     
+    
+    $scope.isOtherSelected = function(document){
+      
+       return document &&  Enumerable.from(document).any(function(type){
+              return type.identifier == "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED";
+            });
+    }
+
+
     //==================================
     //
     //==================================

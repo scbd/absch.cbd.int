@@ -85,7 +85,7 @@
 							<div km-select name="languages" required ng-model="document.languages" items="options.languages()" multiple></div>
 						</div>
 					</div>
-					 <div class="col-xs-6" ng-show="isOtherLanguage()">
+					 <div class="col-xs-6" ng-show="isOtherSelected(document.languages)">
                         <div class="km-control-group" required name="languageName" caption="Name of other language">
                             <div km-textbox-ml required name="languageName" rows="1" ng-model="document.languageName" locales="document.header.languages"></div>
                         </div>
@@ -142,7 +142,7 @@
 							<div km-select multiple name="resourceTypes" required ng-model="document.resourceTypes" items="options.resourceTypes()"></div>
 						</div>
 					</div>
-					 <div class="col-xs-6" >
+					 <div class="col-xs-6" ng-show="isOtherSelected(document.resourceTypes)" >
                         <div class="km-control-group" required name="resourceTypeName" caption="Name of other type of resource">
                             <div km-textbox-ml required name="resourceTypeName" rows="1" ng-model="document.resourceTypeName" locales="document.header.languages"></div>
                         </div>
@@ -186,29 +186,6 @@
 				</section>
 
 				<section>
-
-				<legend>Resource references</legend>
-
-				<div class="row">
-					<div class="col-xs-12">
-						<div class="km-control-group" name="regions" caption="Country(ies), Regional or Economic group(s) related to the resource">
-							<div km-select style="display: inline-block" name="regions" ng-model="document.regions" items="options.regions()" multiple placeholder="Select a country(ies) and/or region(s)..."></div>
-						</div>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-xs-12">
-						<div class="km-control-group" name="keywords" caption="Keywords and any other relevant information">
-							<div class="help-block">Please use this field to provide additional keywords or any other relevant information not contained elsewhere in the record.</div>
-							<div km-textbox-ml name="keywords" ng-model="document.keywords" rows="4" locales="document.header.languages"></div>
-						</div>
-					</div>
-				</div>
-				</section>
-
-				<section>
-
 				<legend>Access to the resource</legend>
 
 				<div class="row">
@@ -230,16 +207,31 @@
 						</div>
 					</div>
 				</div>
+
 </section>
 
 	<section>
 
-				<legend>ABS Thematic Areas</legend>
-
+				<legend>Keywords for facilitating online searches</legend>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="km-control-group" name="regions" caption="Country(ies), Regional or Economic group(s) related to the resource">
+							<div km-select style="display: inline-block" name="regions" ng-model="document.regions" items="options.regions()" multiple placeholder="Select a country(ies) and/or region(s)..."></div>
+						</div>
+					</div>
+				</div>
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="km-control-group" required name="absSubjects" caption="Thematic areas(s)">
 							<div km-term-check name="absSubjects" required ng-model="document.absSubjects" terms="options.absSubjects()" binding-type="term[]"></div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="km-control-group" name="keywords" caption="Keywords and any other relevant information">
+							<div class="help-block">Please use this field to provide additional keywords or any other relevant information not contained elsewhere in the record.</div>
+							<div km-textbox-ml name="keywords" ng-model="document.keywords" rows="4" locales="document.header.languages"></div>
 						</div>
 					</div>
 				</div>
@@ -268,6 +260,7 @@
 						</div>
 					</div>
 				</div>
+
 				</section>
 				<section style="background-color:#bbb;">
                     <legend>Notes</legend>
