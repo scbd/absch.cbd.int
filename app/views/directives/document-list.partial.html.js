@@ -141,7 +141,6 @@ app.directive('documentList', function ($http, $filter) {
                   var formatDate = function formatDate (date) {
                         return date+'';//moment(date).format('MMMM Do YYYY');
                     };
-console.log(document);
                     output.id          = document.id;
                     output.schema      = document.schema_s.toLowerCase();
                     output.title       = document.title_t;

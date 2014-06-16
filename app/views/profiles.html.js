@@ -15,7 +15,7 @@
     './forms/view/view-resource.directive.js',
     'directives/angucomplete-extended'], function (app) {
 //require("app", "linqjs")
-app.controller("ProfileController", ["$scope", "$http", "$routeParams","linqjs", function ($scope, $http, $routeParams, linqjs) {
+app.controller("ProfileController", ["$scope", "$http", "$routeParams","linqjs", "$filter", function ($scope, $http, $routeParams, linqjs, $filter) {
 
     $scope.code = $routeParams.code;
     $scope.documentCount       = 0;
@@ -45,11 +45,17 @@ app.controller("ProfileController", ["$scope", "$http", "$routeParams","linqjs",
 
     $scope.$watch('absch_nfp', function(value){
         
-        if(undefined == value) return;
+        if(undefined == value) return;        
 
-            var linqObj = linqjs.from(value.response.docs);
-            
-            $scope.nationalAuthority = linqObj.count(function(schema){
+        $scope.getFacets(value.response.docs);
+                        
+             
+    });
+
+    $scope.getFacets = function(data){
+
+        var linqObj = linqjs.from(data);
+        $scope.nationalAuthority = linqObj.count(function(schema){
 
                         return schema.schema_s.toLowerCase() == 'authority';
                 });  
@@ -80,10 +86,16 @@ app.controller("ProfileController", ["$scope", "$http", "$routeParams","linqjs",
                 });   
             $scope.resource = linqObj.count(function(schema){
                         return schema.schema_s.toLowerCase() =='resource';
-                }); 
-        });
+                });
+    }
 
- 
+    $scope.$watch('searchText.$', function(value){
+        
+        if(undefined == value || value ==null || $scope.absch_nfp ==null) return;         
+        $scope.getFacets($filter('filter')($scope.absch_nfp.response.docs,value));
+                        
+             
+    });
 
 }]);
 
