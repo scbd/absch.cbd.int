@@ -62,8 +62,8 @@ app.directive('recordLoader', [function () {
 				var documentID = $route.current.params.documentID;
 				var documentSchema = $route.current.params.documentSchema;
 
-				if(documentSchema.toUpperCase()=="FOCALPOINT" || documentSchema.toUpperCase()=="MEETING" || documentSchema.toUpperCase()=="NOTIFICATION"
-                   || documentSchema.toUpperCase()=="PRESSRELEASE" || documentSchema.toUpperCase()=="STATEMENT")
+				if(documentSchema && (documentSchema.toUpperCase()=="FOCALPOINT" || documentSchema.toUpperCase()=="MEETING" || documentSchema.toUpperCase()=="NOTIFICATION"
+                   || documentSchema.toUpperCase()=="PRESSRELEASE" || documentSchema.toUpperCase()=="STATEMENT"))
 				{
 					 commonjs.getReferenceRecordIndex(documentSchema,documentID).then(function(data){
 						$scope.internalDocument = data.data;

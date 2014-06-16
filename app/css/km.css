@@ -121,7 +121,7 @@ ul.km-value
 }
 
 
-#loading-bar-spinner {  
+/*#loading-bar-spinner {  
 	top: 50% !important;
   	left: 50% !important;
 }
@@ -129,7 +129,7 @@ ul.km-value
 #loading-bar-spinner .spinner-icon {
   width: 40px !important;
   height: 40px !important;
-  /*border:  solid 25px transparent !important;*/
+  border:  solid 25px transparent !important;--commented 
   border-top-color:  #29d;
   border-left-color: #29d;
   border-radius: 45px;
@@ -141,4 +141,4 @@ ul.km-value
   -ms-animation:     loading-bar-spinner 400ms linear infinite;
   -o-animation:      loading-bar-spinner 400ms linear infinite;
   animation:         loading-bar-spinner 400ms linear infinite;
-}
+}*/

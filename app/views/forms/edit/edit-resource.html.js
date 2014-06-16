@@ -5,8 +5,19 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 
     $scope.options  = {
       libraries     : function() { return $http.get("/api/v2013/thesaurus/domains/cbdLibraries/terms",                         { cache: true }).then(function(o){ return Enumerable.from(o.data).where("$.identifier!='cbdLibrary:bch'").toArray();});},
-      languages     : function() { return $http.get("/api/v2013/thesaurus/domains/52AFC0EE-7A02-4EFA-9277-8B6C327CE21F/terms", { cache: true }).then(function(o){ return $filter("orderBy")(o.data, "name"); }); },
-      resourceTypes : function() { return $http.get("/api/v2013/thesaurus/domains/83BA4728-A843-442B-9664-705F55A8EC52/terms", { cache: true }).then(function(o){ return thesaurus.buildTree(o.data); }); },
+      
+      languages     : function() { return $q.all([$http.get("/api/v2013/thesaurus/domains/52AFC0EE-7A02-4EFA-9277-8B6C327CE21F/terms", { cache: true }), 
+                                                  $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })]).then(function(o) {
+                                                        var data = $filter("orderBy")(o[0].data, "name");
+                                                        data.push(o[1].data)
+                                                        return  data;
+                                                })},
+      resourceTypes : function() { return $q.all([$http.get("/api/v2013/thesaurus/domains/83BA4728-A843-442B-9664-705F55A8EC52/terms", { cache: true }), 
+                                                  $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })]).then(function(o) {
+                                                        var data = o[0].data;
+                                                        data.push(o[1].data)
+                                                        return  thesaurus.buildTree(data);
+                                                })},
       absSubjects   : function() { return $http.get("/api/v2013/thesaurus/domains/CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924/terms", { cache: true }).then(function(o){ return o.data; }); },
       regions       : function() { return $q.all([$http.get("/api/v2013/thesaurus/domains/countries/terms", { cache: true }),
                             $http.get("/api/v2013/thesaurus/domains/regions/terms",   { cache: true })]).then(function(o) {
@@ -37,5 +48,26 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
     };
 
     $scope.setDocument({libraries: [{ identifier: "cbdLibrary:abs-ch" }]}, true);
+
+    $scope.isOtherLanguage = function(document){ 
+     
+     document = document || $scope.document;
+
+console.log(document);
+       return document &&   document.languages ;
+       // &&           
+       //      Enumerable.from(document.languages).where(function(type){
+       //        return type.identifier == "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED";
+       //      });
+    }
+
+    $scope.isOtherType = function(document){
+      document = document || $scope.document;
+      return document &&   document.resourceTypes &&             
+            Enumerable.from(document.resourceTypes).where(function(type){
+              return type.identifier == "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED";
+            });
+    }
+
   }]);
 });

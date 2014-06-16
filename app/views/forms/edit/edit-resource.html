@@ -77,11 +77,16 @@
 				</div>
 
 			 <div class="row">
-					<div class="col-xs-12">
+					<div class="col-xs-6">
 						<div class="km-control-group" required name="languages" caption="Language(s)">
 							<div km-select name="languages" required ng-model="document.languages" items="options.languages()" multiple></div>
 						</div>
 					</div>
+					 <div class="col-xs-6" ng-show="isOtherLanguage()">
+                        <div class="km-control-group" required name="languageName" caption="Name of other language">
+                            <div km-textbox-ml required name="languageName" rows="1" ng-model="document.languageName" locales="document.header.languages"></div>
+                        </div>
+                    </div>
 				</div> 
 				
 
@@ -129,11 +134,16 @@
 				</div>
 
 				<div class="row">
-					<div class="col-xs-12">
+					<div class="col-xs-6">
 						<div class="km-control-group" required name="resourceTypes" caption="Type of resource">
 							<div km-select multiple name="resourceTypes" required ng-model="document.resourceTypes" items="options.resourceTypes()"></div>
 						</div>
 					</div>
+					 <div class="col-xs-6" >
+                        <div class="km-control-group" required name="resourceTypeName" caption="Name of other type of resource">
+                            <div km-textbox-ml required name="resourceTypeName" rows="1" ng-model="document.resourceTypeName" locales="document.header.languages"></div>
+                        </div>
+                    </div>
 				</div>
 
 				<div class="row">
@@ -170,15 +180,15 @@
 						</div>
 					</div>
 				</div>
-</section>
+				</section>
 
-<section>
+				<section>
 
 				<legend>Resource references</legend>
 
 				<div class="row">
 					<div class="col-xs-12">
-						<div class="km-control-group" required name="regions" caption="Country(ies), Regional or Economic group(s) related to the resource">
+						<div class="km-control-group" name="regions" caption="Country(ies), Regional or Economic group(s) related to the resource">
 							<div km-select style="display: inline-block" name="regions" ng-model="document.regions" items="options.regions()" multiple placeholder="Select a country(ies) and/or region(s)..."></div>
 						</div>
 					</div>
