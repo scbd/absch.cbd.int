@@ -1,6 +1,6 @@
 define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 
-  app.controller("editMeasure", ["$scope", "authHttp", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage", "authentication", "Enumerable", "editFormUtility", "$routeParams", "$controller", function ($scope, $http, guid, $filter, thesaurus, $q, $location, storage, authentication, Enumerable, editFormUtility, $routeParams, $controller) {
+  app.controller("editMeasure", ["$scope", "authHttp", "$filter", "$q", "Enumerable", "$controller", function ($scope, $http, $filter, $q, Enumerable, $controller) {
     $controller('editController', {$scope: $scope});
 
     $scope.options  = {

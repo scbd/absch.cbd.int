@@ -43,6 +43,7 @@
         </div>
       </div> 
 
+      <!-- TODO: if not authenticated, should be handled by the router, which redirects the user to login, NOT by a hidden div -->
       <div class="col-xs-12" ng-hide="isAuthenticated" style="padding-top:20px;">
         <div class="alert" ng-hide="isAuthenticated">
           <div class="row well" ng-show="!user.isAuthenticated">

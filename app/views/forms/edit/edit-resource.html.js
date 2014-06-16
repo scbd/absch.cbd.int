@@ -1,11 +1,11 @@
 define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 
-  app.controller("editResource", ["$scope", "authHttp", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage", "authentication", "Enumerable", "editFormUtility", "$routeParams", "$controller", function ($scope, $http, guid, $filter, thesaurus, $q, $location, storage, authentication, Enumerable, editFormUtility, $routeParams, $controller) {
+  app.controller("editResource", ["$scope", "authHttp", "$filter", "Thesaurus", "$q", "Enumerable", "$controller", function ($scope, $http, $filter, Thesaurus, $q, Enumerable, $controller) {
     $controller('editController', {$scope: $scope});
 
     $scope.options  = {
       libraries     : function() { return $http.get("/api/v2013/thesaurus/domains/cbdLibraries/terms",                         { cache: true }).then(function(o){ return Enumerable.from(o.data).where("$.identifier!='cbdLibrary:bch'").toArray();});},
-      
+     
       languages     : function() { return $q.all([$http.get("/api/v2013/thesaurus/domains/52AFC0EE-7A02-4EFA-9277-8B6C327CE21F/terms", { cache: true }), 
                                                   $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })]).then(function(o) {
                                                         var data = $filter("orderBy")(o[0].data, "name");

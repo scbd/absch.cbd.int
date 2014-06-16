@@ -1,6 +1,20 @@
-define(['app'], function (app) {
+define([
+    'app',
+    '/app/views/forms/edit/km-form-buttons.js',
+    '/app/views/forms/edit/editFormUtility.js',
+    '/app/views/forms/edit/field-embed-contact.directive.js',
+    '/app/views/forms/edit/edit-contact-base.directive.js',
+    '/app/js/directives/forms/form-controls.js',
+    '/app/views/forms/view/view-contact-reference.directive.js',
+    '/app/views/forms/view/view-organization-reference.directive.js',
+    '/app/views/forms/view/record-loader.directive.html.js',
+    '/app/views/forms/view/view-organization.directive.js',
+    '/app/views/forms/view/view-organization-reference.directive.js',
+  ], function (app) {
 
-  app.controller("editController", ["$scope", "authHttp", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage", "authentication", "Enumerable", "editFormUtility", "$routeParams", function ($scope, $http, guid, $filter, thesaurus, $q, $location, storage, authentication, Enumerable, editFormUtility, $routeParams) {
+  app.controller("editController", ["$rootScope", "$scope", "authHttp", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage", "authentication", "Enumerable", "editFormUtility", "$routeParams", function ($rootScope, $scope, $http, guid, $filter, thesaurus, $q, $location, storage, authentication, Enumerable, editFormUtility, $routeParams) {
+
+    $scope.type = $rootScope.document_types[$routeParams.document_type];
 
     $scope.status   = "";
     $scope.error    = null;

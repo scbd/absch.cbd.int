@@ -1,6 +1,6 @@
 define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 
-  app.controller("editAuthority", ["$scope", "authHttp", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage", "authentication", "Enumerable", "editFormUtility", "$routeParams", "$controller", function ($scope, $http, guid, $filter, Thesaurus, $q, $location, storage, authentication, Enumerable, editFormUtility, $routeParams, $controller) {
+  app.controller("editAuthority", ["$scope", "authHttp", "$filter", "Thesaurus", "$q", "$controller", function ($scope, $http, $filter, Thesaurus, $q, $controller) {
     $controller('editController', {$scope: $scope});
 		
 			$scope.options  = {
@@ -78,6 +78,6 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 				return document;
 			};
 
-    $scope.setDocument();
+    $scope.setDocument({libraries: [{ identifier: "cbdLibrary:abs-ch" }]});
   }]);
 });
