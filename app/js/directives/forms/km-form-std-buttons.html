@@ -23,7 +23,7 @@
 
 				</div>
 				<div class="modal-footer" style="margin-top:0">
-					<button type="button" ng-click="closeDialog()" class="btn btn-default" >Cancel</button>
+					<button type="button" ng-click="closeDialog()" class="cancelClose btn btn-default" >Cancel</button>
 					<button type="button" ng-click="saveDraft()"      ng-disabled="loading || !security.canSaveDraft" class="btn btn-info"    >Save as draft</button>
 					<button type="button"                             ng-show="security.canSave===undefined" disabled class="btn btn-info"    >Save and publish</button>
 					<button type="button" ng-click="publish()"        ng-show="security.canSave!==undefined &&  security.canSave" ng-disabled="loading || !security.canSave" class="btn btn-primary" >Save and publish</button>

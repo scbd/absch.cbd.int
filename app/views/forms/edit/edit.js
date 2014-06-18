@@ -311,8 +311,11 @@ define([
       $('#dialogCancel').find('.closeWithoutSaving').click(function() {
         consideringClosing = true;
       });
-      $('#dialogCancel').find('.cancelClose').click(function() {
+      $('.cancelClose').click(function() {
         consideringClosing = false;
+      });
+      $('#dialogSave').on('shown.bs.modal', function() {
+        consideringClosing = true;
       });
     });
     $rootScope.$on('$includeContentLoaded', function(event) {
