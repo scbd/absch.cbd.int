@@ -299,8 +299,11 @@ var indexNo = index;
 				return entity && entity.type == "CNA";
 			}
 
-			$scope.showButtons=function(){
+			$scope.showButtons=function(entity){
 				
+				if($scope.isCNA(entity))
+					return false;
+
 				return	commonjs.isUserInRole('AbsPublishingAuthorities')|| 
 						commonjs.isUserInRole('AbsNationalAuthorizedUser')||  
 						commonjs.isUserInRole('AbsNationalFocalPoint')|| 

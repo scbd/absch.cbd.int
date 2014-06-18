@@ -25,9 +25,9 @@
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="msg=''">&times;</button>
             <strong>{{msg}}</strong>
         </div>
-        <div ng-show="isAuthenticated && !editing"> 
+        <div ng-show="user.isAuthenticated && !editing"> 
               <br/>
-            <field-embed-contact multiple ng-model="contacts" show-filter locales="localeRegister" caption="Add an organisation or a contact/CNA »"></field-embed-contact>
+            <field-embed-contact multiple ng-model="contacts" show-filter locales="localeRegister" caption="Add an organisation or a contact »"></field-embed-contact>
         </div>
         
     </div>

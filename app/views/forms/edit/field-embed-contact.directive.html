@@ -57,7 +57,7 @@
 
         <div class="col-sm-12" ng-class="{'col-md-6' : getContacts().length>1, 'col-md-12' : getContacts().length<=1}" ng-repeat="contact in getContacts() | filter:filterBy | filter:keywords">
             <div class="well">
-                <div class="pull-right" ng-show="showButtons()">
+                <div class="pull-right" ng-show="showButtons(contact)">
                     <button type="button" class="btn btn-default" ng-click="deleteContact($index)"><i class="fa fa-trash-o"></i>
                     </button>
                     <button type="button" class="btn btn-default" ng-click="editContact($index)"><i class="fa fa-edit"></i>
@@ -80,8 +80,7 @@
                     <h4 class="modal-title" id="myModalLabel">
                         <span ng-hide="edition.contact.type">Edit an organization or a contact person</span>
                         <span ng-show="edition.contact.type=='organization'">Edit an organization</span>
-                        <span ng-show="edition.contact.type=='person'">Edit a contact person</span>
-                        <span ng-show="edition.contact.type=='CNA'">Edit a CNA as a contact</span>
+                        <span ng-show="edition.contact.type=='person'">Edit a contact person</span>                        
                     </h4>
 
 
@@ -89,8 +88,6 @@
                         <input type="radio" ng-model="edition.contact.type" value="organization" name="editionContactType" />Organization</label>
                     <label ng-hide="selectExisting" class="radio-inline">
                         <input type="radio" ng-model="edition.contact.type" value="person" name="editionContactType" />Person</label>
-                    <label ng-hide="selectExisting" class="radio-inline">
-                        <input type="radio" ng-model="edition.contact.type" value="CNA" name="editionContactType" />CNA</label>
                     <a type="button" class="btn btn-primary" ng-click="loadExisting()" ng-show="!showFilter">{{buttonText}}</a>
 
                 </div>
