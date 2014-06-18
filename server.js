@@ -34,7 +34,7 @@ app.get   ('/public/*', function(req, res) { res.send('404', 404); } );
 // var targetURL = 'http://localhost';
 var targetURL = 'https://api.cbd.int';
 
-app.all('/api/v2013/documents/*', function(req, res) { proxy.web(req, res, { target: 'http://localhost', secure: false } ); } );
+app.all('/api/v2013/documents/*', function(req, res) { proxy.web(req, res, { target: targetURL, secure: false } ); } );
 app.get   ('/api/*', function(req, res) { proxy.web(req, res, { target: targetURL, secure: false } ); } );
 app.put   ('/api/*', function(req, res) { proxy.web(req, res, { target: targetURL, secure: false } ); } );
 app.post  ('/api/*', function(req, res) { proxy.web(req, res, { target: targetURL, secure: false } ); } );
