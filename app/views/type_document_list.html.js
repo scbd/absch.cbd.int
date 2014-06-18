@@ -21,13 +21,12 @@ define(['app',
   "use strict";
 
   app.controller("TypeDocumentListController", 
-    ["$rootScope", "$location" , "$scope", "$q", "$window", "IStorage", "underscore",
+    ["$rootScope", "$scope", "$q", "$window", "IStorage", "underscore",
      "schemaTypes", "$compile", "$timeout","lstringFilter", "$routeParams",
-    function ($rootScope, $location, $scope, $q, $window, storage, _,
+    function ($rootScope, $scope, $q, $window, storage, _,
       schemaTypes,$compile,$timeout,lstringFilter, $routeParams) {
 
     $scope.type = $rootScope.document_types[$routeParams.document_type];
-    console.log('type: ', $scope.type);
 
     $scope.dashboardFilter = "All";
 

@@ -12,7 +12,7 @@ define([
     '/app/views/forms/view/view-organization-reference.directive.js',
   ], function (app) {
 
-  app.controller("editController", ["$rootScope", "$scope", "authHttp", "$window", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage", "authentication", "Enumerable", "editFormUtility", "$routeParams", function ($rootScope, $scope, $http, $window, guid, $filter, thesaurus, $q, $location, storage, authentication, Enumerable, editFormUtility, $routeParams) {
+  app.controller("editController", ["$rootScope", "$scope", "authHttp", "$window", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage", "authentication", "Enumerable", "editFormUtility", "$routeParams", "$timeout", function ($rootScope, $scope, $http, $window, guid, $filter, thesaurus, $q, $location, storage, authentication, Enumerable, editFormUtility, $routeParams, $timeout) {
 
     $scope.type = $rootScope.document_types[$routeParams.document_type];
 
@@ -303,20 +303,29 @@ define([
       });
     };
 
-    var confirmLeaving = function(next, current) {
-      console.log('evt: ', next, current);
-      if(!canSwitch())
-        evt.preventDefault();
-    };
-    $scope.$on('$routeChangeStart', confirmLeaving);
+    var consideringClosing = false;
+    var attachEvents = _.once(function() {
+      $('#dialogCancel').find('.closeWithoutSaving').click(function() {
+        consideringClosing = true;
+      });
+      $('#dialogCancel').find('.cancelClose').click(function() {
+        consideringClosing = false;
+      });
+    });
+    $rootScope.$on('$includeContentLoaded', function(event) {
+      if($('#dialogCancel').length != 0)
+        attachEvents();
+    });
+    function confirmLeaving(evt, next, current) {
+      if(consideringClosing)
+        return;
 
-    function canSwitch() {
-      //TODO: re-enable when I've figured out how to do a custom confirmation div
-      //if($window.confirm("Are you sure you want to leave this form and lose your changes?"))
-        return true;
+      evt.preventDefault();
 
-      //return false;
+      $('#dialogCancel').modal('show');
+      consideringClosing = true;
     }
 
+    $scope.$on('$locationChangeStart', confirmLeaving);
   }]);
 });
