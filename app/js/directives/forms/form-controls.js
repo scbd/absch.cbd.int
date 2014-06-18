@@ -1840,6 +1840,10 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 			}
 
 			$scope.showCancelDialog = function(visible) {
+        if($('form').filter('.dirty').length == 0) {
+					$scope.$emit("documentClosed");
+          return;
+        }
 
 				var isVisible = qCancelDialog.css("display")!='none';
 

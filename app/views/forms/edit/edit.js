@@ -305,6 +305,9 @@ define([
 
     var consideringClosing = false;
     var attachEvents = _.once(function() {
+      $('form :input').change(function() {
+        $(this).closest('form').addClass('dirty');
+      });
       $('#dialogCancel').find('.closeWithoutSaving').click(function() {
         consideringClosing = true;
       });
@@ -317,7 +320,7 @@ define([
         attachEvents();
     });
     function confirmLeaving(evt, next, current) {
-      if(consideringClosing)
+      if(consideringClosing || $('form').filter('.dirty').length == 0)
         return;
 
       evt.preventDefault();
