@@ -31,7 +31,7 @@
         <strong>{{msg}}</strong>
       </div>
 
-      <div class="alert alert-info" ng-show="isAuthenticated">
+      <div class="alert alert-info" ng-show="user.isAuthenticated">
         <p>You are signed in as: <strong>{{user.name}}</strong>
           <span ng-show="user.roles.indexOf('AbsPublishingAuthorities') != -1">(PA)</span>
           <span ng-show="user.roles.indexOf('abschiac') != -1">(IAC)</span>
@@ -40,13 +40,13 @@
         </p>
       </div>
 
-      <div ng-hide="isAuthenticated">
-        <a ng-show="!isAuthenticated" ng-click="signIn('dashboard')" class="btn btn-info">
+      <div ng-hide="user.isAuthenticated">
+        <a ng-show="!user.isAuthenticated" ng-click="signIn('dashboard')" class="btn btn-info">
           <i class="glyphicon glyphicon-off"></i> SIGN IN
         </a>
       </div>
 
-      <div ng-show="isAuthenticated" class="row">
+      <div ng-show="user.isAuthenticated" class="row">
         <div class="col-ld-12 col-md-12 col-sm-12">
 
           <span ng-click="setDashFilter('All')" class="btn btn-info">
@@ -72,7 +72,7 @@
           </span>
         </div>
       </div>
-      <div ng-show="isAuthenticated" class="row">
+      <div ng-show="user.isAuthenticated" class="row">
         <div class="col-ld-12 col-md-12 col-sm-12">
           </br>
           <div class="panel panel-danger" ng-show="isFilter('Urgent')">
