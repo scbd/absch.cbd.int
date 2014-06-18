@@ -58,6 +58,35 @@ define(['app'], function(app){
 
 				return false;
 			}
+
+			this.getCountries = function(){
+
+				// if($rootScope.countries)
+				// 	return $rootScope.countries;
+
+				return $http.get('/api/v2013/countries', {cache: true}).then(function(response) {
+						  var countries = response.data;
+						  var countriesDetails = []
+						 
+						  for(var i=0; i!=countries.length; ++i)
+						  		if(1==1) {
+									var country = {} ;
+									var treaties = countries[i].treaties;
+									country.code = countries[i].code;
+									country.isParty = treaties.XXVII8.party;
+									country.isSignatory = treaties.XXVII8b.signature;
+									country.isRatified = treaties.XXVII8b.instrument == "ratification" || 
+															treaties.XXVII8b.instrument == "accession" || 
+															treaties.XXVII8b.instrument == "acceptance" ||
+															treaties.XXVII8b.instrument == "approval";
+								  	// console.log($rootScope.countries);
+								  	countriesDetails.push(country);
+								}
+							return countriesDetails;
+					  });
+					
+
+			}
 		}
 	}]);
 });

@@ -246,19 +246,7 @@ app.directive('searchFilterThemes', function ($http) {
                 return collection;
             }
 
-            $http.get('/api/v2013/thesaurus/domains/50616B56-12F3-4C46-BC43-2DFC26679177/terms').success(function (data) {
-                $scope.terms = thesaurus.buildTree(data);
-
-                $scope.termsMap   = flatten($scope.terms, {});
-                $scope.termsArray = _.values($scope.termsMap);
-                
-                if($scope.items)
-                    $scope.items.forEach(function (item) {
-                        if(_.has($scope.termsMap, item.symbol))
-                            $scope.termsMap[item.symbol].count = item.count;
-                    });
-               //console.log (data);
-            });
+            
 
             $scope.$watch('items', function (values) { 
 
@@ -269,6 +257,27 @@ app.directive('searchFilterThemes', function ($http) {
                             $scope.termsMap[item.symbol].count = item.count;
                     });
             });
+
+            $scope.terms = [];
+            $scope.$watch('showSelect', function(value){
+                    if(value && $scope.terms.length==0){
+                        $http.get('/api/v2013/thesaurus/domains/50616B56-12F3-4C46-BC43-2DFC26679177/terms').success(function (data) {
+                            $scope.terms = thesaurus.buildTree(data);
+
+                            $scope.termsMap   = flatten($scope.terms, {});
+                            $scope.termsArray = _.values($scope.termsMap);
+                            
+                            if($scope.items)
+                                $scope.items.forEach(function (item) {
+                                    if(_.has($scope.termsMap, item.symbol))
+                                        $scope.termsMap[item.symbol].count = item.count;
+                                });
+                           //console.log (data);
+                        });
+                    }
+                }
+            );
+                
         }]
     }
 });

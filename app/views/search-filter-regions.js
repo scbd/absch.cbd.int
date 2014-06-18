@@ -97,25 +97,7 @@ define(['app'], function(app) {
                 return collection;
             }
 
-            $http.get('/api/v2013/thesaurus/domains/regions/terms').then(function (response) {
-                var termsTree = thesaurus.buildTree(response.data);
-                self.termsMap = flatten(termsTree, {});
-                var classes   = _.filter(termsTree, function where (o) { return !!o.narrowerTerms && o.identifier!='1796f3f3-13ae-4c71-a5d2-0df261e4f218'});
-
-                _.values(self.termsMap).forEach(function (term) {
-                    term.selected = false;
-                    term.count = 0;
-                });
-
-                $scope.allTerms = _.values(self.termsMap);
-
-                ($scope.items||[]).forEach(function (item) {
-                    if(_.has(self.termsMap, item.symbol))
-                        self.termsMap[item.symbol].count = item.count;
-                });
-
-                $scope.terms = classes;                
-            });
+            
 
             function onWatch_items(values) {
                 (values||[]).forEach(function (item) {
@@ -125,15 +107,44 @@ define(['app'], function(app) {
             }
 
             $scope.refresh = buildQuery;
-            
+            $scope.facets = [];
             $scope.$watch('facets', function(items){
                  if(items){
-                     (items).forEach(function (item) {
-                        if(_.has(self.termsMap, item.symbol))
-                            self.termsMap[item.symbol].count = item.count;
-                    });
+                    $scope.facets = items;
                 }
             });
+
+            $scope.terms = [];
+            $scope.$watch('showSelect', function(value){
+                    if(value && $scope.terms.length==0){
+                        $http.get('/api/v2013/thesaurus/domains/regions/terms').then(function (response) {
+                            var termsTree = thesaurus.buildTree(response.data);
+                            self.termsMap = flatten(termsTree, {});
+                            var classes   = _.filter(termsTree, function where (o) { return !!o.narrowerTerms && o.identifier!='1796f3f3-13ae-4c71-a5d2-0df261e4f218'});
+
+                            _.values(self.termsMap).forEach(function (term) {
+                                term.selected = false;
+                                term.count = 0;
+                            });
+
+                            $scope.allTerms = _.values(self.termsMap);
+
+                            ($scope.items||[]).forEach(function (item) {
+                                if(_.has(self.termsMap, item.symbol))
+                                    self.termsMap[item.symbol].count = item.count;
+                            });
+
+                            $scope.terms = classes;
+
+                            //update facets 
+                            ($scope.facets).forEach(function (item) {
+                                if(_.has(self.termsMap, item.symbol))
+                                    self.termsMap[item.symbol].count = item.count;
+                            });                
+                        });
+                    }
+                }
+            );
             
         }]
     }

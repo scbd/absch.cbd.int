@@ -8,24 +8,24 @@
 
     <div class="list-group-item-expand" ng-hide="showSelect">
         <div ng-repeat="item in terms | orderBy:'title' | filter:showSelected" ng-class="ccc(item)" ng-click="ts(this, $event)">
-        		<label>
+        		<label><div class="glyphicon glyphicon-remove"></div> 
                     <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">
                     <strong>{{item.title.en}} ({{item.count ? item.count : 0}})</strong>
                 </label>
                 <div class="checkbox" ng-repeat="item in item.narrowerTerms | filter:showSelected" style="padding-left:20px">
-                    <label>
+                    <label><div class="glyphicon glyphicon-remove"></div> 
                         <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">{{item.title.en}} ({{item.count ? item.count : 0}})</label>
                     <div class="checkbox" ng-repeat="item in item.narrowerTerms | filter:showSelected" style="padding-left:20px">
-                        <label>
+                        <label><div class="glyphicon glyphicon-remove"></div> 
                             <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">{{item.title.en}} ({{item.count ? item.count : 0}})</label>
                         <div class="checkbox" ng-repeat="item in item.narrowerTerms" style="padding-left:20px">
-                            <label>
+                            <label><div class="glyphicon glyphicon-remove"></div> 
                                 <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">{{item.title.en}} ({{item.count ? item.count : 0}})</label>
                             <div class="checkbox" ng-repeat="item in item.narrowerTerms | filter:showSelected" style="padding-left:20px">
-                                <label>
+                                <label><div class="glyphicon glyphicon-remove"></div> 
                                     <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">{{item.title.en}} ({{item.count ? item.count : 0}})</label>
                                 <div class="checkbox" ng-repeat="item in item.narrowerTerms | filter:showSelected" style="background-color:red;padding-left:20px">
-                                    <label>
+                                    <label><div class="glyphicon glyphicon-remove"></div> 
                                         <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">{{item.title.en}} ({{item.count ? item.count : 0}})</label>
                                 </div>
                             </div>
@@ -50,10 +50,19 @@
         top: 10px;
         right: 0;
     }
+    .section{
+        height:400px;
+        overflow-y:auto
+    }
     </style>
 
     <div class="filter-options subfilters-section" ng-show="showSelect">
-        <div style="height:400px;overflow-y:auto">
+        <div ng-class="{'section':terms.length>0}">
+            <div class="progress progress-striped active" ng-show="showSelect && terms.length<=0">
+                  <div class="progress-bar"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                    <span class="sr-only">45% Complete</span>
+                  </div>
+            </div>
             <div ng-repeat="item in terms" class="checkbox">
 
                 <label>

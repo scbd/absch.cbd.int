@@ -1,4 +1,4 @@
-define(['app'], function (app) {
+define(['app','/app/js/common.js'], function (app) {
 
     app.directive('searchFilterCountries', function ($http) {
         return {
@@ -14,13 +14,14 @@ define(['app'], function (app) {
             link: function ($scope, element, attrs, ngModelController)
             {
             },
-            controller : ['$scope', '$element', '$location', function ($scope, $element, $location)
+            controller : ['$scope', '$element', '$location','commonjs', '$q', function ($scope, $element, $location,commonjs,$q)
             {
                 $scope.alphabet = ['All','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
                 $scope.expanded = false;
                 $scope.selectedItems = [];
                 $scope.facet = $scope.field.replace('_s', ''); // TODO: replace @field by @facet
                 $scope.countryFilter ='All';
+
 
                 var parameters = $location.search();
 
@@ -114,11 +115,7 @@ define(['app'], function (app) {
 
                 $scope.terms = [];
                 $scope.termsx = [];
-                $http.get('/api/v2013/thesaurus/domains/countries/terms').success(function (data) {
-                    $scope.terms = data;
-                    $scope.termsx = dictionarize($scope.terms);
-                    onWatch_items($scope.items);
-                });
+                
 
                 function onWatch_items(values) { if(!values) return;
                     values.forEach(function (item) {
@@ -130,6 +127,31 @@ define(['app'], function (app) {
                 $scope.$watch('items', onWatch_items);
 
                 $scope.refresh = buildQuery;
+
+                $scope.$watch('showSelect', function(value){
+                    if(value && $scope.terms.length==0)
+                        $http.get('/api/v2013/thesaurus/domains/countries/terms').success(function (data) {
+                            
+                            $scope.terms = data;
+                            $scope.termsx = dictionarize($scope.terms);
+                            onWatch_items($scope.items);
+
+                            $q.when(commonjs.getCountries(),function(countries){                            
+                                $scope.terms.forEach(function(country){
+                                    var cd = _.where(countries, {code:country.identifier.toUpperCase()})
+                                    if(cd.length>0){
+                                        country.isParty = cd[0].isParty;
+                                        country.isSignatory = cd[0].isSignatory;
+                                        country.isRatified  = cd[0].isRatified
+                                    }                                
+                                });
+
+                                console.log($scope.terms);
+                            }); 
+                        });
+                });
+                
+                
             }]
         }
     });
