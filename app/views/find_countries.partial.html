@@ -7,12 +7,12 @@
     </h3>
 
 
-    <div class="list-group-item-expand" ng-hide="showSelect">
-        <div ng-repeat="item in terms | orderBy:'title' | filter:{selected:true}" ng-class="ccc(item)" ng-click="onclick(this, $event)">
+    <div class="list-group-item-expand" ng-hide="showSelect" ng-class="{'scroll':terms.length>0}">
+        <div class="col-xs-12" style="white-space:nowrap;text-overflow:ellipsis;"  ng-repeat="item in terms | orderBy:'title' | filter:{selected:true}" ng-class="ccc(item)" ng-click="onclick(this, $event)">
             
-            <div class="checkbox" style="margin-top:2px;margin-bottom:2px">
+            <div class="checkbox" style="margin-top:2px;margin-bottom:2px;">
                 <div class="glyphicon glyphicon-remove"></div> 
-                <label class="country-options-title">
+                <label class="label label-party" ng-class="{'label-info':item.isSignatory && !item.isRatified, 'label-primary':item.isRatified, 'label-default':!item.isRatified && !item.isSignatory}">
                     <input type="checkbox" ng-model="item.selected" ng-change="refresh()">{{item.title.en}} ({{item.count}})</label>
             </div>
 
@@ -29,6 +29,7 @@
         overflow-y:auto;
         width:100%;
     } 
+    .scroll{overflow-x:scroll;}
 </style>
 
         <!--Save Dialog-->
@@ -47,7 +48,7 @@
                                     <span class="sr-only">45% Complete</span>
                                   </div>
                             </div>
-                            <div class="col-xs-12" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" ng-repeat="item in (terms | filter: filterCountries | orderBy:'title.en')">
+                            <div class="col-xs-12" style="white-space:nowrap;text-overflow:ellipsis;width:200%" ng-repeat="item in (terms | filter: filterCountries | orderBy:'title.en')">
                                 <div class="checkbox" style="margin-top:2px;margin-bottom:2px">                                   
                                         <label class="label label-party" ng-class="{'label-info':item.isSignatory && !item.isRatified, 'label-primary':item.isRatified, 'label-default':!item.isRatified && !item.isSignatory}">{{item.title.en}} ({{item.count}})
                                             <input type="checkbox" ng-model="item.selected" ng-change="refresh()">

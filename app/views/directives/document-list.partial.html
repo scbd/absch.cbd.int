@@ -90,8 +90,8 @@
     </li>
   </ul>
   <div class="clearfix"></div>
-  <div class="pull-right">
-    <span class="label label-default">Party</span>
+  <div class="pull-right" ng-show='showPagination'>
+    <span class="label label-default">Not Ratified</span>
     <span class="label label-primary">Ratified</span>
     <span class="label label-info">Signatory</span>  
   </div><br>
@@ -107,7 +107,7 @@
                     <div class="row" >
                         <div style="padding:0px 0 3px 3px; ">
                             <span class="label label-party" ng-class="{'label-info':document.isSignatory && !document.isRatified, 'label-primary':document.isRatified, 'label-default':!document.isRatified && !document.isSignatory}">{{document.source}}</span>
-                            <span class="schema">{{document.schema | schemaName}}</span>
+                            <span ng-show='showPagination' class="schema">{{document.schema | schemaName}}</span>
                             <span><a href="/database/record?documentID={{document.schema=='MEETING' ? document.id : document.identifier_s}}&documentSchema={{document.schema}}" target="_new" class="pull-right" style="padding:0px 3px;color:#999;"><i class="glyphicon glyphicon-new-window"></i>
                             </a>
                             </span>

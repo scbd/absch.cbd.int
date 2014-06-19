@@ -41,7 +41,7 @@ app.directive('login', function ($http) {
                       $window.location.href = $window.location.href;
 
                     }, function onerror(error) {
-
+                      console.log(error);
                       $scope.password     = "";
                         $scope.errorInvalid = error.status == 403;
                         $scope.errorTimeout = error.status != 403;

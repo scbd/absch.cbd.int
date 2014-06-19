@@ -109,9 +109,14 @@
 
         <table class="table table-countries table-striped">
           <tr>
-              <td colspan="5" >
+              <td colspan="5" > 
+                  <div class="pull-left">
+                    <span class="label label-default">Not Ratified</span>
+                    <span class="label label-primary">Ratified</span>
+                    <span class="label label-info">Signatory</span>  
+                  </div>
                   <div class="pull-right" style="width:30%" >
-                 <div angucomplete id="ex1" placeholder="Search countries" pause="100"  localdata="countriesforAutocomplete" minlength="1" inputclass="form-control form-control-small"   searchfields="name" selectedObject="selectedCountry" searchStr="countryFilter" titlefield="name"/>
+                    <div angucomplete id="ex1" placeholder="Search countries" pause="100"  localdata="countriesforAutocomplete" minlength="1" inputclass="form-control form-control-small"   searchfields="name" selectedObject="selectedCountry" searchStr="countryFilter" titlefield="name"/>
                   </div>
               </td>
           </tr>
@@ -129,7 +134,7 @@
           </tr><!-- -->
           <tr ng-repeat="country in (countries | filter:countryFilter | filter: searchFilter | orderBy:sortTerm:orderList)"  ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}" >
             <td>{{$index + 1}}</td>
-            <td><a ng-href="countries/{{country.code}}"  class="country-list-name label" ng-class="{'label-info' : (country.treaties.XXVII8b.instrument!='ratification' && country.treaties.XXVII8b.instrument!='accession' &&  country.treaties.XXVII8b.instrument!='approval' && country.treaties.XXVII8b.instrument!='acceptance' && country.treaties.XXVII8b.signature), 'label-default' : (country.treaties.XXVII8b.instrument!='ratification' && country.treaties.XXVII8b.instrument!='accession' &&  country.treaties.XXVII8b.instrument!='approval' && country.treaties.XXVII8b.instrument!='acceptance' && !country.treaties.XXVII8b.signature), 'label-primary' : (country.treaties.XXVII8b.instrument=='ratification' ||  country.treaties.XXVII8b.instrument=='accession' ||  country.treaties.XXVII8b.instrument=='approval' ||  country.treaties.XXVII8b.instrument=='acceptance')}">{{country.name.en}}</a></td>
+            <td><a ng-href="countries/{{country.code}}"  class="country-list-name label" ng-class="{'label-info':country.isSignatory && !country.isRatified, 'label-primary':country.isRatified, 'label-default':!country.isRatified && !country.isSignatory}">{{country.name.en}}</a></td>
             <td>{{country.treaties.XXVII8b.signature}}</td>
             <td>{{country.treaties.XXVII8b.instrument}}</td>
             <td>{{country.treaties.XXVII8b.deposit}}</td>

@@ -154,30 +154,20 @@ app.directive('documentList', function ($http, $filter) {
                    
                    // if(output.source && output.source.toLowerCase() =='european union'){
                    //      output.isParty = true;
+                   //      output.isRatified = true;
+                   //      console.log('%s : %s', document.government_s,true);
                    //  }
                    //  else{
                         if(document.government_s){
                             $q.when(commonjs.getCountries(),function(countries){ 
-                                    var cd = _.where(countries, {code:document.government_s.toUpperCase()})
+                                    var cd = _.where(countries, {code:document.government_s.substring(0,2).toUpperCase()})
                                     if(cd.length>0){
                                         output.isParty = cd[0].isParty;
                                         output.isSignatory = cd[0].isSignatory;
-                                        output.isRatified  = cd[0].isRatified
+                                        output.isRatified  = cd[0].isRatified;
                                     }
                             }); 
                         }
-        						  // //Jason's code. gets a list of countries to find out if they are ratified or what not. TODO: not do this. countries should exist on a high level scope, so I don't have to ajax it. Or there should be a cache. Also use underscore for algorithms.
-        						  // $http.get('/api/v2013/countries', {cache: true}).then(function(response) {
-        							 //  var countries = response.data;
-        							 //  for(var i=0; i!=countries.length; ++i)
-        							 //  		if(countries[i].name.en == output.source) {
-          						// 			  var treaties = countries[i].treaties;
-          						// 			  output.isParty = treaties.XXVII8.party;
-          						// 			  output.isSignatory = treaties.XXVII8b.signature;
-          						// 			  output.isRatified = treaties.XXVII8b.instrument == "ratification" || treaties.XXVII8b.instrument == "accession" || treaties.XXVII8b.instrument == "acceptance" ||treaties.XXVII8b.instrument == "approval";
-          						// 			  // console.log(output);                      
-          						// 			}
-        						  // });
                     // }
                    output.recordtype="referenceRecord";
 

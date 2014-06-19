@@ -77,7 +77,8 @@ define(['app'], function(app){
 									country.isRatified = treaties.XXVII8b.instrument == "ratification" || 
 															treaties.XXVII8b.instrument == "accession" || 
 															treaties.XXVII8b.instrument == "acceptance" ||
-															treaties.XXVII8b.instrument == "approval";
+															treaties.XXVII8b.instrument == "approval"||
+															country.code == 'EU';
 								  	// console.log($rootScope.countries);
 								  	countriesDetails.push(country);
 							}

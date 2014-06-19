@@ -137,8 +137,8 @@ define(['app','/app/js/common.js'], function (app) {
                             onWatch_items($scope.items);
 
                             $q.when(commonjs.getCountries(),function(countries){                            
-                                $scope.terms.forEach(function(country){
-                                    var cd = _.where(countries, {code:country.identifier.toUpperCase()})
+                                $scope.terms.forEach(function(country){                                   
+                                    var cd = _.where(countries, {code:country.identifier.substring(0,2).toUpperCase()})
                                     if(cd.length>0){
                                         country.isParty = cd[0].isParty;
                                         country.isSignatory = cd[0].isSignatory;
@@ -146,7 +146,6 @@ define(['app','/app/js/common.js'], function (app) {
                                     }                                
                                 });
 
-                                console.log($scope.terms);
                             }); 
                         });
                 });

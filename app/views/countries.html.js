@@ -13,21 +13,27 @@ define(['app',  'directives/angucomplete-extended'], function (app,angucomplete)
             $scope.countriesforAutocomplete = [];
             
             for (var i = 0; i < $scope.countries.length; i++) {
+                
+                $scope.countries[i].isParty = true;                   
                 if ($scope.countries[i].treaties.XXVII8b.instrument == "ratification" 
                 	|| $scope.countries[i].treaties.XXVII8b.instrument == "accession" 
                 	|| $scope.countries[i].treaties.XXVII8b.instrument == "acceptance" 
-                  || $scope.countries[i].treaties.XXVII8b.instrument == "approval" ) {
+                  || $scope.countries[i].treaties.XXVII8b.instrument == "approval" 
+                  || $scope.countries[i].code == 'EU') {
                     $scope.ratifications++;
+                    $scope.countries[i].isRatified = true;
                 }
                 if ($scope.countries[i].treaties.XXVII8b.signature != null ) {
                     $scope.signatures++;
+                    $scope.countries[i].isSignatory = true
                 }
                 if($scope.countries[i].treaties.XXVII8.party != null){
                   $scope.parties++;
                 }
                  $scope.countriesforAutocomplete.push({name:$scope.countries[i].name.en});
             }
-
+            //deduct EU count
+            $scope.ratifications--;
         });
 
         $scope.orderList = true;
