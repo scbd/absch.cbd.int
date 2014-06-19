@@ -275,8 +275,8 @@ app.directive('documentList', function ($http, $filter) {
                         //TODO: metadata should be the url opening to a new window
                     }
                     else if(document.schema_s=='measure' || document.schema_s=='focalPoint' || document.schema_s=='database') {
-                        output.recordtype="nationalRecord";
-              
+                        output.recordtype="nationalRecord";  
+                                   ;
                         if(document.type_EN_t){
                           output.type = document.type_EN_t;
                           if(output.type)output.metadata.push(output.type);
@@ -291,44 +291,20 @@ app.directive('documentList', function ($http, $filter) {
                         output.recordtype="referenceRecord";
                         output.eventCity=document.eventCity_EN_t;
                         output.eventCountry=document.eventCountry_EN_t;
-                    }
-                   
-
+                    }                    
                     return output;
                 }     
 
                 function getString(source, key){
                     var lstring = [];
-
                     if(source!=undefined)
                     {
-                          //console.log(JSON.parse('{"response": {   "success": "The activity has been removed",   "message": "0"  }}' ));
-                         
-                        //  if(angular.isString(source))
-                        //  {
-                        //   console.log(source);
-                        //    var jst = (JSON.parse(( source )));
-                        //   console.log((jst[0]));
-                        //     //   jst.forEach(function(record){                      
-                        //     //    console.log(record);
-                        //     // });
-                        // }
-                        //console.log(source);
                         source.forEach(function(record){                      
                           lstring.push(JSON.parse(record)[key] );
-                        });
-                        
-                        return lstring.toString() ;
-                        
+                        });                        
+                        return lstring.toString() ;                        
                     }                    
                 }
-
-                // $scope.$watch('advanceFilter', function(newvalue,old){
-                //   console.log(old);
-                //   console.log(newvalue);
-                // })
-
-
             }]
 
         };
