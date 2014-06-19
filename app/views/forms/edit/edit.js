@@ -326,8 +326,6 @@ define([
         attachEvents();
     });
     function confirmLeaving(evt, next, current) {
-      console.log('consider: ', consideringClosing);
-      console.log('count: ', $('form :input').length);
       if(consideringClosing || $('form').filter('.dirty').length == 0)
         return;
 
