@@ -60,7 +60,7 @@
                              <td style="text-align:center;width:200px;">
                                 <div style="width: 180px; height: 100px;cursor:pointer;" ng-click="searchFilter=isSignatory">
                                     
-                                <div class="numberCircle" style="width:80px;height:80px;padding-top:20px;background-color:#1FA65D;"  ng-class="{'active-circle': selected_circle=='signatory'}">
+                                <div class="numberCircle" style="width:80px;height:80px;padding-top:20px;background-color:#5bc0de;"  ng-class="{'active-circle': selected_circle=='signatory'}">
                                 {{signatures}}</div>
                                 <div style="padding-top:5px;color: #fff; font-size: 10px; text-transform: uppercase;font-weight:bold;">
                                 Signatures</div>
@@ -71,7 +71,7 @@
                             <td style="text-align: center; width: 200px;">
                               <div style="width: 180px; height: 100px;cursor:pointer;" ng-click="searchFilter=isRatified">
                                     
-                                  <div class="numberCircle" style="width:80px;height:80px;padding-top:20px;background-color:#1FA65D;"  ng-class="{'active-circle': selected_circle=='ratified'}">
+                                  <div class="numberCircle" style="width:80px;height:80px;padding-top:20px;background-color:#428bca;"  ng-class="{'active-circle': selected_circle=='ratified'}">
                                   {{ratifications}}</div>
                                   <div style="padding-top:5px;color: #fff; font-size: 10px; text-transform: uppercase;font-weight:bold;">
                                   ratifications</div>
@@ -107,7 +107,7 @@
     <div class="row"  >
       <div class="span12"  style="padding-top:20px;">
 
-        <table class="table table-countries">
+        <table class="table table-countries table-striped">
           <tr>
               <td colspan="5" >
                   <div class="pull-right" style="width:30%" >
@@ -127,9 +127,9 @@
              <i ng-show="sortTerm=='treaties.XXVII8b.deposit'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span></th>
             <!-- <th>Entry into force</th> -->
           </tr><!-- -->
-          <tr ng-repeat="country in (countries | filter:countryFilter | filter: searchFilter | orderBy:sortTerm:orderList)" ng-class="{'success' : (country.treaties.XXVII8b.instrument=='ratification' ||  country.treaties.XXVII8b.instrument=='accession' ||  country.treaties.XXVII8b.instrument=='acceptance')}" ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}" >
+          <tr ng-repeat="country in (countries | filter:countryFilter | filter: searchFilter | orderBy:sortTerm:orderList)"  ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}" >
             <td>{{$index + 1}}</td>
-            <td><a ng-href="countries/{{country.code}}" class="country-list-name">{{country.name.en}}</a></td>
+            <td><a ng-href="countries/{{country.code}}"  class="country-list-name label" ng-class="{'label-info' : (country.treaties.XXVII8b.instrument!='ratification' && country.treaties.XXVII8b.instrument!='accession' &&  country.treaties.XXVII8b.instrument!='approval' && country.treaties.XXVII8b.instrument!='acceptance' && country.treaties.XXVII8b.signature), 'label-default' : (country.treaties.XXVII8b.instrument!='ratification' && country.treaties.XXVII8b.instrument!='accession' &&  country.treaties.XXVII8b.instrument!='approval' && country.treaties.XXVII8b.instrument!='acceptance' && !country.treaties.XXVII8b.signature), 'label-primary' : (country.treaties.XXVII8b.instrument=='ratification' ||  country.treaties.XXVII8b.instrument=='accession' ||  country.treaties.XXVII8b.instrument=='approval' ||  country.treaties.XXVII8b.instrument=='acceptance')}">{{country.name.en}}</a></td>
             <td>{{country.treaties.XXVII8b.signature}}</td>
             <td>{{country.treaties.XXVII8b.instrument}}</td>
             <td>{{country.treaties.XXVII8b.deposit}}</td>

@@ -23,6 +23,7 @@
     "momentjs": "latest",
     "angular-dragndrop": "latest",
     "angucomplete": "*",
-    "barcode-39.js": "https://github.com/erik5388/barcode-39.js.git"
+    "barcode-39.js": "https://github.com/erik5388/barcode-39.js.git",
+    "angular-intro.js": "latest"
   }
 }
