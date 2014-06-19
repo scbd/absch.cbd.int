@@ -14,10 +14,10 @@
             </a>
           </h3>
 
-          <h3 ng-repeat-start="(heading,types) in subheadings">{{heading}}</h3>
-
-          <a ng-repeat="type in types" ng-href="/register/{{type}}" role="button">
-            <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : document_type==type}">
+          <h3 ng-repeat-start="(heading,types) in subheadings"
+          ng-class="{'btn-commonformat-header-national':heading!='Reference Records','btn-commonformat-header-reference':heading=='Reference Records'}">{{heading}}</h3>
+          <a ng-repeat="type in types" ng-href="{{type!='contacts' ? '/register' : ''}}/{{type}}" role="button">
+            <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : document_type==type ,'btn-commonformat-reference-selected' : document_type=='resource' && document_type==type}">
               <div class="btn-commonformat-national">{{document_types[type].abbreviation}}
                 <span ng-show="facets(type,'draft') > 0" class="pull-right label label-default">
                   {{facets(type,'draft')}}</span> 
@@ -30,16 +30,7 @@
             </div>
           </a>
 
-          <span ng-repeat-end></span> <!--need to end the ng-repeat-->
-          <div>
-            <h3>Others</h3>
-
-            <a href="/contacts" role="button">
-              <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : document_type=='contact'}">
-                <span class="btn-commonformat-reference">Contacts</span><br />
-              </div>
-            </a>
-          </div>
+          <span ng-repeat-end></span> <!--need to end the ng-repeat-->          
         </div>
       </div> 
 

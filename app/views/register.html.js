@@ -16,7 +16,7 @@ define(['app',
     //TODO: stop using so many globals =P I should inherit the controller scope or something.
     $rootScope.subheadings = {
       'National Entities': [
-        'authority', 'absCheckpoint',
+        'authority', 'absCheckpoint','contacts',
       ],
       'National Records': [
         'measure', 'absPermit', 'absCheckpointCommunique', 'database',
@@ -115,6 +115,13 @@ define(['app',
         tips: [
         ],
       },
+      contacts: {
+        abbreviation: 'ABSCH-CONTACTS',
+        title: 'Contacts',
+        help: '',
+        tips: [],
+      },
+      
     };
 
     if($routeParams.document_type) //this is used to highlight the item on the left
