@@ -304,25 +304,30 @@ define([
     };
 
     var consideringClosing = false;
+    //TODO: burn angular... essentially the issue is that this function is called once the ng-include finished with the form html, but that form html still needs to be parsed and the directives still need to load THEIR templates, so those inputs aren't in the form yet... hence while change isn't triggering.
     var attachEvents = _.once(function() {
-      $('form :input').change(function() {
-        $(this).closest('form').addClass('dirty');
-      });
-      $('#dialogCancel').find('.closeWithoutSaving').click(function() {
-        consideringClosing = true;
-      });
-      $('.cancelClose').click(function() {
-        consideringClosing = false;
-      });
-      $('#dialogSave').on('shown.bs.modal', function() {
-        consideringClosing = true;
-      });
+      $timeout(function() {
+        $('input').change(function() {
+          $(this).closest('form').addClass('dirty');
+        });
+        $('#dialogCancel').find('.closeWithoutSaving').click(function() {
+          consideringClosing = true;
+        });
+        $('.cancelClose').click(function() {
+          consideringClosing = false;
+        });
+        $('#dialogSave').on('shown.bs.modal', function() {
+          consideringClosing = true;
+        });
+      }, 2000);
     });
     $rootScope.$on('$includeContentLoaded', function(event) {
       if($('#dialogCancel').length != 0)
         attachEvents();
     });
     function confirmLeaving(evt, next, current) {
+      console.log('consider: ', consideringClosing);
+      console.log('count: ', $('form :input').length);
       if(consideringClosing || $('form').filter('.dirty').length == 0)
         return;
 
