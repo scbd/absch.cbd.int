@@ -69,7 +69,8 @@ h3 a{ color:#111;}
 .filter-options{
 }
 .filter-options label{
-	color:#333;
+	/*color:#333;*/
+	color:white;
 }
 
 .national-record{
