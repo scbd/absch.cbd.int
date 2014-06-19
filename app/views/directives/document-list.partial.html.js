@@ -22,7 +22,7 @@ app.directive('documentList', function ($http, $filter) {
                   currentPage: '=',
                   documentCount: '='
             },
-            controller: ['$scope', "underscore", "commonjs",function ($scope, underscore, commonjs, filter){
+            controller: ['$scope', "underscore", "commonjs", '$q',function ($scope, underscore, commonjs,$q, filter){
 
               $scope.formatDate = function formatDate (date) {
                     return moment(date).format('MMMM Do YYYY');
@@ -151,20 +151,34 @@ app.directive('documentList', function ($http, $filter) {
                     output.doc = document;
                     output.createdDateOn = document.createdDate_dt;
                     output.metadata = [];
-
-						  //Jason's code. gets a list of countries to find out if they are ratified or what not. TODO: not do this. countries should exist on a high level scope, so I don't have to ajax it. Or there should be a cache. Also use underscore for algorithms.
-						  $http.get('/api/v2013/countries', {cache: true}).then(function(response) {
-							  var countries = response.data;
-							  for(var i=0; i!=countries.length; ++i)
-							  		if(countries[i].name.en == output.source) {
-									  var treaties = countries[i].treaties;
-									  output.isParty = treaties.XXVII8.party;
-									  output.isSignatory = treaties.XXVII8b.signature;
-									  output.isRatified = treaties.XXVII8b.instrument == "ratification" || treaties.XXVII8b.instrument == "accession" || treaties.XXVII8b.instrument == "acceptance" ||treaties.XXVII8b.instrument == "approval";
-									  // console.log(output);
-									}
-						  });
-
+                   
+                   // if(output.source && output.source.toLowerCase() =='european union'){
+                   //      output.isParty = true;
+                   //  }
+                   //  else{
+                        if(document.government_s){
+                            $q.when(commonjs.getCountries(),function(countries){ 
+                                    var cd = _.where(countries, {code:document.government_s.toUpperCase()})
+                                    if(cd.length>0){
+                                        output.isParty = cd[0].isParty;
+                                        output.isSignatory = cd[0].isSignatory;
+                                        output.isRatified  = cd[0].isRatified
+                                    }
+                            }); 
+                        }
+        						  // //Jason's code. gets a list of countries to find out if they are ratified or what not. TODO: not do this. countries should exist on a high level scope, so I don't have to ajax it. Or there should be a cache. Also use underscore for algorithms.
+        						  // $http.get('/api/v2013/countries', {cache: true}).then(function(response) {
+        							 //  var countries = response.data;
+        							 //  for(var i=0; i!=countries.length; ++i)
+        							 //  		if(countries[i].name.en == output.source) {
+          						// 			  var treaties = countries[i].treaties;
+          						// 			  output.isParty = treaties.XXVII8.party;
+          						// 			  output.isSignatory = treaties.XXVII8b.signature;
+          						// 			  output.isRatified = treaties.XXVII8b.instrument == "ratification" || treaties.XXVII8b.instrument == "accession" || treaties.XXVII8b.instrument == "acceptance" ||treaties.XXVII8b.instrument == "approval";
+          						// 			  // console.log(output);                      
+          						// 			}
+        						  // });
+                    // }
                    output.recordtype="referenceRecord";
 
                     if(document.schema_s=='focalPoint') {
