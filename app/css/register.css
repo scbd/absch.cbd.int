@@ -53,6 +53,12 @@ legend{
 	color:#666;
 
 }
+.btn-commonformat-header-national {	
+	/*color:#418BCA;*/
+}
+.btn-commonformat-header-reference {	
+	color:#ed9c28;
+}
 
 .btn-commonformat-national {
 	font-weight: bold;
@@ -75,12 +81,17 @@ legend{
 }
 
  .btn-commonformat-selected {
-   border-left:#FA6938 solid 3px;
+   border-left:#418BCA solid 3px;
    color:#111;
    text-decoration: none;
    padding-left:10px;
    background-color: #dedede;
   }
+ 
+ .btn-commonformat-reference-selected {
+   border-left:#FA6938 solid 3px;  
+  } 
+
   .btn-commonformat-selected:hover, a.btn-commonformat-selected:focus {
      
   }

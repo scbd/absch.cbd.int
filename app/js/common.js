@@ -68,20 +68,19 @@ define(['app'], function(app){
 						  var countries = response.data;
 						  var countriesDetails = []
 						 
-						  for(var i=0; i!=countries.length; ++i)
-						  		if(1==1) {
+						  for(var i=0; i!=countries.length; ++i){
 									var country = {} ;
 									var treaties = countries[i].treaties;
 									country.code = countries[i].code;
-									country.isParty = treaties.XXVII8.party;
-									country.isSignatory = treaties.XXVII8b.signature;
+									country.isParty = treaties.XXVII8.party!=null;
+									country.isSignatory = treaties.XXVII8b.signature!=null;
 									country.isRatified = treaties.XXVII8b.instrument == "ratification" || 
 															treaties.XXVII8b.instrument == "accession" || 
 															treaties.XXVII8b.instrument == "acceptance" ||
 															treaties.XXVII8b.instrument == "approval";
 								  	// console.log($rootScope.countries);
 								  	countriesDetails.push(country);
-								}
+							}
 							return countriesDetails;
 					  });
 					
