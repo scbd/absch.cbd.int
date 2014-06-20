@@ -120,6 +120,7 @@ define(["app"], function (app) {
 	// 
 	//
 	//============================================================
+  //TODO: this is now duplicated in form-controls. It should be put somewhere else central I think
 	app.filter("lstring", function() {
 		return lstring;
 	});
@@ -145,46 +146,6 @@ define(["app"], function (app) {
 			if(schame=="abspermit"				) return "Internationally Recognized Certificate of Compliance";
 
 			return schame;
-		};
-	}]);
-
-	//============================================================
-	//
-	// 
-	//
-	//============================================================
-	app.filter("term", ["$http", function($http) {
-		var cacheMap = {};
-
-		return function(term, locale) {
-
-			if(!term)
-				return "";
-
-			if(term && angular.isString(term))
-				term = { identifier : term };
-
-			locale = locale||"en";
-
-			if(term.customValue)
-				return lstring(term.customValue, locale);
-
-			if(cacheMap[term.identifier])
-				return lstring(cacheMap[term.identifier].title, locale) ;
-
-			cacheMap[term.identifier] = $http.get("/api/v2013/thesaurus/terms/"+encodeURIComponent(term.identifier),  {cache:true}).then(function(result) {
-
-				cacheMap[term.identifier] = result.data;
-
-				return lstring(cacheMap[term.identifier].title, locale);
-
-			}).catch(function(){
-
-				cacheMap[term.identifier] = term.identifier;
-
-				return term.identifier;
-
-			});
 		};
 	}]);
 
@@ -220,6 +181,7 @@ define(["app"], function (app) {
 	//
 	//
 	//============================================================
+  //TODO: this is now in form-controls.
 	app.filter("truncate", function() {
 		return function(text, maxSize, suffix) {
 

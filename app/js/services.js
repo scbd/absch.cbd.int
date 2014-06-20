@@ -30,6 +30,7 @@ define(['app', 'underscore', 'linqjs'], function (app, _, Enumerable) {
 		return Enumerable;
 	}])
 
+  //TODO: this is also in form-controls... it should only be in one place
 	app.factory('Thesaurus', [function() {
 		return {
 			buildTree : function(terms) {
