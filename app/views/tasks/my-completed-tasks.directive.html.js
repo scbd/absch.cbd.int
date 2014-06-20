@@ -13,6 +13,19 @@ app.controller("myCompletedTasksCotroller", [ "$scope", "$timeout", "IWorkflows"
 				] 
 			};
 
+			$scope.sortTerm = 'closedOn';
+			$scope.orderList = true;
+	       	 //==================================
+	       	 $scope.sortTable = function (term) {
+
+	       	     if ($scope.sortTerm == term) {
+	       	         $scope.orderList = !$scope.orderList;
+	       	     }
+	       	     else {
+	       	         $scope.sortTerm = term;
+	       	         $scope.orderList = true;
+	       	     }
+	       	 }
 			//==============================
 			//
 			//==============================

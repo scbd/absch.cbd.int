@@ -22,6 +22,8 @@ define(['app',  'directives/angucomplete-extended'], function (app,angucomplete)
                   || $scope.countries[i].code == 'EU') {
                     $scope.ratifications++;
                     $scope.countries[i].isRatified = true;
+                    if($scope.countries[i].code == 'EU')
+                      $scope.countries[i].code = 'EUR'; //temp fix for EU
                 }
                 if ($scope.countries[i].treaties.XXVII8b.signature != null ) {
                     $scope.signatures++;

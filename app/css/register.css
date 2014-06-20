@@ -236,3 +236,30 @@ form label[required]:before
 
 }*/
 
+
+
+.up-caret {
+    border-bottom: 5px solid #000000;
+    border-top: 5px solid transparent;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    display: inline-block;
+    height: 0;
+    opacity: 0.5;
+    vertical-align: top;
+    width: 0;
+    top: -3px;
+    position: relative;
+}
+
+.down-caret {
+    border-bottom: 5px solid transparent;
+    border-top: 5px solid #000000;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    display: inline-block;
+    height: 0;
+    opacity: 0.5;
+    vertical-align: top;
+    width: 0;
+}

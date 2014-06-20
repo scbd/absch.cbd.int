@@ -25,17 +25,26 @@
 		<div class="alert alert-danger" ng-show="__error">
 			<strong>Error: </strong>{{__error}}
 		</div>
+		<div class="pull-right">
+			<input type="text" ng-model="keywords" placeholder=" Search " class="form-control keyword" style="width:250px;display:inline;">
+		</div>
+		<br>
+		<br>
 		<div class="table table-striped">
 			<div ng-show="tasks.length && !__error" >
 				<div class="row header1" >
-					<div class="col-xs-2 col-md-2 col-ls-2">ID</div>
-					<div class="col-xs-3 col-md-3 col-ls-3 ">Description</div>
-					<div class="col-xs-3 col-md-3 col-ls-3 ">Status</div>
-					<div class="col-xs-3 col-md-3 col-ls-3 ">Requested on</div>
+					<div class="col-xs-2 col-md-2 col-ls-2"><span style="cursor:pointer;" ng-click="sortTable('workflow._id')">ID 
+             		<i ng-show="sortTerm=='workflow._id'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></div>
+					<div class="col-xs-3 col-md-3 col-ls-3 "><span style="cursor:pointer;" ng-click="sortTable('workflow.data.metadata.schema')">Description 
+             		<i ng-show="sortTerm=='workflow.data.metadata.schema'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></div>
+					<div class="col-xs-3 col-md-3 col-ls-3 "><span style="cursor:pointer;" ng-click="sortTable('activity.name')">Status 
+             		<i ng-show="sortTerm=='activity.name'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></div>
+					<div class="col-xs-3 col-md-3 col-ls-3 "><span style="cursor:pointer;" ng-click="sortTable('workflow.createdOn')">Requested on 
+             		<i ng-show="sortTerm=='workflow.createdOn'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></div>
 					<div class="col-xs-1 col-md-1 col-ls-1 ">&nbsp;</div>
 				</div>
 
-				<div class="table-striped" ng-repeat="task in tasks|orderBy:'activity.createdOn'"style="border-bottom:1px solid gray;padding:5px;">
+				<div class="table-striped" ng-repeat="task in tasks|filter:keywords|orderBy:sortTerm:orderList"style="border-bottom:1px solid gray;padding:5px;">
 					<div class="row" >
 						<div class="col-xs-2 col-md-2 col-ls-2"> <!-- ID -->
 							<a style="text-transform:uppercase;white-space:nowrap;" href="" ng-click="tasksDisplay=!tasksDisplay; formLoading=false"  type="button">{{formatWID(task.workflow._id)}}</a><!-- /register/tasks/{{task.workflow._id}}/{{task.activity.name}} -->

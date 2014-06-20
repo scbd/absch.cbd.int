@@ -16,17 +16,25 @@
 		<div class="alert alert-danger" ng-show="__error">
 			<strong>Error: </strong>{{__error}}
 		</div>
-
+		<div class="pull-right">
+			<input type="text" ng-model="keywords" placeholder=" Search " class="form-control keyword" style="width:250px;display:inline;">
+		</div>
+		<br>
+		<br>
 		<table ng-show="workflows.length && !__error" class="table table-striped">
 			<tr>
-				<th>ID</th>
-				<th>Description</th>
-				<th>Status</th>
-				<th>Assigned to</th>
+				<th><span style="cursor:pointer;" ng-click="sortTable('_id')">ID 
+             		<i ng-show="sortTerm=='_id'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></th>
+				<th><span style="cursor:pointer;" ng-click="sortTable('data.title.en')">Description 
+             		<i ng-show="sortTerm=='data.title.en'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></th>
+				<th><span style="cursor:pointer;" ng-click="sortTable('activities')">Status 
+             		<i ng-show="sortTerm=='activities'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></th>
+				<th><span style="cursor:pointer;" ng-click="sortTable('createdOn')">Assigned to 
+             		<i ng-show="sortTerm=='createdOn'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></th>
 			</tr>
 
 
-			<tr ng-repeat="workflow in workflows|orderBy:'createdOn'">
+			<tr ng-repeat="workflow in workflows|filter:keywords|orderBy:sortTerm:orderList">
 
 				<td> <!-- ID -->
 					<a style="text-transform:uppercase;white-space:nowrap;" ng-href="/register/tasks/{{workflow._id}}"  type="button">{{formatWID(workflow._id)}}</a>
