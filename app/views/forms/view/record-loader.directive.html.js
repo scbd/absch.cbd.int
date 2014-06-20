@@ -99,6 +99,7 @@ app.directive('recordLoader', [function () {
 
 					$scope.internalDocument     = results[0];
 					$scope.internalDocumentInfo = results[1];
+					$scope.internalDocument.info = results[1];
 
 				}).then(null, function(error) {
 					//debugger;

@@ -112,6 +112,9 @@ define(['app','/app/js/common.js'], function (app) {
                         (entity && entity.title.en.indexOf($scope.countryFilter) == 0);
 
                 };
+                $scope.selectedCount = function() {
+                   return _.where($scope.terms, {selected:true}).length;
+                };
 
                 $scope.terms = [];
                 $scope.termsx = [];
