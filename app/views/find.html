@@ -1,8 +1,10 @@
 <link href="/app/css/find.css" rel="stylesheet">
 <link href="/app/css/record.css" rel="stylesheet">
 
-<div ng-controller="FindController" ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart="true">
+<div ng-controller="FindController" ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart="false">
     <div class="container" style="min-height:1200px;">
+
+       <a class="pull-right" href="" ng-click="startIntro()"> need help <span class="fa fa-question-circle "></span></a>
        
         <div class="row">
             <div class="col-xs-3" id="search_controls">
