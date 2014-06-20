@@ -1,64 +1,46 @@
 ﻿define(['app'], function (app) {
 
 "use strict";
-app.directive("myTasks", ['authHttp', function ($http) {
-	return {
-		priority: 0,
-		restrict: 'EAC',
-		templateUrl: '/app/views/tasks/my-tasks.directive.html',
-		replace: true,
-		transclude: false,
-		scope : true,
-		controller: [ "$scope", "$timeout", "IWorkflows", "realm", "underscore", function ($scope, $timeout, IWorkflows, realm, _) 
+app.controller("myPendingTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm", function ($scope, $timeout, IWorkflows, realm) 
 		{
-			var nextLoad  = null
+			var nextLoad = null;
 			var myUserID = $scope.$root.user.userID;
 			var query    = { 
 				$and : [
-					{ "activities.assignedTo" : myUserID }, 
+					{ "createdBy" : myUserID } , 
 					{ closedOn : { $exists : false } },
 					{ "data.realm" : realm }
 				] 
 			};
 
-			$scope.tasks = null;
-
-			$scope.load = load;
 			//==============================
 			//
 			//==============================
 			function load() {
+				
 				IWorkflows.query(query).then(function(workflows){
 
-					var tasks  = [];
-
-					workflows.forEach(function(workflow) {
-						
-						workflow.activities.forEach(function(activity){
-
-							if(isAssignedToMe(activity)) {
-								tasks.push({ workflow : workflow, activity : activity});
-							}
-						});
+					workflows.forEach(function(workflow) { //tweaks
+						if(!workflow.activities || !workflow.activities.length)
+							workflow.activities = [null];
 					});
 
-					$scope.tasks = tasks;
+					$scope.workflows = workflows;
 
 					//nextLoad = $timeout(load, 15*1000);
-				});
+				})
 			}
 
 			if($scope.$root.user.isAuthenticated)
 				load();
-			
+
 			//==============================
 			//
 			//==============================
-			function isAssignedToMe(activity) {
-
-				return _.contains(activity.assignedTo||[], $scope.$root.user.userID||-1);
+			$scope.isOpen = function(element) {
+				return element && !element.closedOn;
 			}
-		
+
 			//==============================
 			//
 			//==============================
@@ -78,9 +60,5 @@ app.directive("myTasks", ['authHttp', function ($http) {
 				if(nextLoad)
 					$timeout.cancel(nextLoad);
 			});
-
-		}]
-	}
-}]);
-
+		}]);
 });

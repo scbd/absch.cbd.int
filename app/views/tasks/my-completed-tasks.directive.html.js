@@ -1,15 +1,7 @@
 ﻿define(['app'], function (app) {
 
 "use strict";
-app.directive("myCompletedTasks", [function () {
-	return {
-		priority: 0,
-		restrict: 'EAC',
-		templateUrl: '/app/views/tasks/my-completed-tasks.directive.html',
-		replace: true,
-		transclude: false,
-		scope : true,
-		controller: [ "$scope", "$timeout", "IWorkflows", "realm", function ($scope, $timeout, IWorkflows, realm) 
+app.controller("myCompletedTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm", function ($scope, $timeout, IWorkflows, realm) 
 		{
 			var nextLoad = null;
 			var myUserID = $scope.$root.user.userID;
@@ -56,7 +48,5 @@ app.directive("myCompletedTasks", [function () {
 				if(nextLoad)
 					$timeout.cancel(nextLoad);
 			});
-		}]
-	}
-}]);
+		}]);	
 });

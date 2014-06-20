@@ -1,4 +1,5 @@
 <div ng-controller="DashboardController">
+<link rel="stylesheet" href="/app/libs/nvd3/nv.d3.css"/>
   <div class="col-xs-9" style="padding-top:20px;">
 
     <div>
@@ -45,68 +46,122 @@
           <i class="glyphicon glyphicon-off"></i> SIGN IN
         </a>
       </div>
-
-      <div ng-show="user.isAuthenticated" class="row">
-        <div class="col-ld-12 col-md-12 col-sm-12">
-
-          <span ng-click="setDashFilter('All')" class="btn btn-info">
-            <i ng-show="isFilter('All')" class="glyphicon glyphicon-ok"></i> All
-            <span class="badge badge-default"></span>
-          </span>
-          <span ng-click="setDashFilter('Urgent')" class="btn btn-danger">
-            <i ng-show="isFilter('Urgent')" class="glyphicon glyphicon-ok"></i> Urgent
-            <span class="badge badge-default"></span>
-          </span>
-          <span ng-click="setDashFilter('Pending')" class="btn btn-warning">
-            <i ng-show="isFilter('Pending')" class="glyphicon glyphicon-ok"></i> Pending
-            <span class="badge badge-default"></span>
-          </span>
-          <span ng-click="setDashFilter('Completed')" class="btn btn-success" style="color:#fff">
-            <i ng-show="isFilter('Completed')" class="glyphicon glyphicon-ok"></i> Completed
-            <span class="badge badge-default" style="color:#999"></span>
-          </span>
-
-          <span ng-click="setDashFilter('Users')" class="btn btn-default btn-draft" style="color:#zzz">
-            <i ng-show="isFilter('Users')" class="glyphicon glyphicon-ok"></i> Manage Users
-            <span class="badge badge-default" style="color:#998"></span>
-          </span>
-        </div>
+      <div class="row">        
+          <div class="col-lg-4">
+            <div class="panel panel-warning">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col-xs-6">
+                    <i class="fa fa-check fa-5x"></i>
+                  </div>
+                  <div class="col-xs-6 text-right">
+                    <p class="announcement-heading">{{completedRequestCount}}</p>
+                    <p class="announcement-text">Completed requests</p>
+                  </div>
+                </div>
+              </div>
+              <a href="/dashboard/completed">
+                <div class="panel-footer announcement-bottom">
+                  <div class="row">
+                    <div class="col-xs-10">
+                      View Complete requests
+                    </div>
+                    <div class="col-xs-2 text-right">
+                      <i class="fa fa-arrow-circle-right"></i>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="panel panel-danger">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col-xs-6">
+                    <i class="fa fa-tasks fa-5x"></i>
+                  </div>
+                  <div class="col-xs-6 text-right">
+                    <p class="announcement-heading">{{urgentAttentionCount}}</p>
+                    <p class="announcement-text">Urgent attention</p>
+                  </div>
+                </div>
+              </div>
+              <a href="/dashboard/pending">
+                <div class="panel-footer announcement-bottom">
+                  <div class="row">
+                    <div class="col-xs-6">
+                      View requests
+                    </div>
+                    <div class="col-xs-6 text-right">
+                      <i class="fa fa-arrow-circle-right"></i>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="panel panel-success">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col-xs-6">
+                    <i class="fa fa-comments fa-5x"></i>
+                  </div>
+                  <div class="col-xs-6 text-right">
+                    <p class="announcement-heading">{{pendingCount}}</p>
+                    <p class="announcement-text">Pending requests</p>
+                  </div>
+                </div>
+              </div>
+              <a href="/dashboard/mytasks">
+                <div class="panel-footer announcement-bottom">
+                  <div class="row">
+                    <div class="col-xs-10">
+                      View pending requests
+                    </div>
+                    <div class="col-xs-2 text-right">
+                      <i class="fa fa-arrow-circle-right"></i>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
       </div>
-      <div ng-show="user.isAuthenticated" class="row">
-        <div class="col-ld-12 col-md-12 col-sm-12">
-          </br>
-          <div class="panel panel-danger" ng-show="isFilter('Urgent')">
-            <div class="panel-heading" style="background-color:#d9534f;color:white;">Items requiring your attention</div>
-            <div class="panel-body">
-              <my-tasks></my-tasks>
+      <div class="row">  
+        <div class="col-md-12 col-sm-12 col-sx-12">
+          <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+              <i class="icon-tag"></i>
+              <h3 class="panel-title">Feeds</h3>
             </div>
-          </div>
-
-          <div class="panel panel-warning" ng-show="isFilter('Pending')">
-            <div class="panel-heading"  style="background-color:#f0ad4e;color:white;">Pending requests</div>
             <div class="panel-body">
-              <my-pending-tasks></my-pending-tasks>
-            </div>
-          </div>
-
-          <div class="panel panel-success" ng-show="isFilter('Completed')">
-            <div class="panel-heading" style="background-color:#5cb85c;color:white;">Completed requests</div>
-            <div class="panel-body">
-              <my-completed-tasks></my-completed-tasks>
-            </div>
-          </div>
-          <div class="panel panel-default" ng-show="isFilter('Users')">
-            <div class="panel-heading">User Activities</div> 
-            <div class="panel-body" style="max-height:300px;overflow:scroll">
-              <ul class="list-group " rel="scrollcontent1">
-                <li ng-repeat="item in userActivities" class="list-group-item">
-                  {{item.title}}  
+              <ul id="myTab" class="nav nav-tabs">
+                <li class="active">
+                  <a href="#activites" data-toggle="tab" data-original-title="">Activites</a>
                 </li>
               </ul>
+              <br>
+              <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade active in" id="activites">
+                  <div id="scrollbar">
+                    <div class="scrollbar" style="height: 280px;overflow:scroll">
+                           <ul class="list-group " rel="scrollcontent1">
+                            <li ng-repeat="item in userActivities" class="list-group-item">
+                              {{item.title}}  
+                            </li>
+                          </ul>                 
+                    </div>
+                  </div>
+                </div>
+               
+              </div>
             </div>
           </div>
-        </div> <!-- col-sm-12 -->
-      </div> <!-- row: 2nd isAuthenticated -->
+        </div>
+      </div>
+      <!-- row: 2nd isAuthenticated -->
     </div> <!-- registerpage-content -->
   </div> <!-- col-xs-9 -->
 </div> <!-- controller -->

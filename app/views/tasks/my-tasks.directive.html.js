@@ -1,54 +1,56 @@
 ﻿define(['app'], function (app) {
 
 "use strict";
-app.directive("myPendingTasks", [function () {
-	return {
-		priority: 0,
-		restrict: 'EAC',
-		templateUrl: '/app/views/tasks/my-pending-tasks.directive.html',
-		replace: true,
-		transclude: false,
-		scope : true,
-		controller: [ "$scope", "$timeout", "IWorkflows", "realm", function ($scope, $timeout, IWorkflows, realm) 
+app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm", "underscore", function ($scope, $timeout, IWorkflows, realm, _) 
 		{
-			var nextLoad = null;
+			var nextLoad  = null
 			var myUserID = $scope.$root.user.userID;
 			var query    = { 
 				$and : [
-					{ "createdBy" : myUserID } , 
+					{ "activities.assignedTo" : myUserID }, 
 					{ closedOn : { $exists : false } },
 					{ "data.realm" : realm }
 				] 
 			};
 
+			$scope.tasks = null;
+
+			$scope.load = load;
 			//==============================
 			//
 			//==============================
 			function load() {
-				
 				IWorkflows.query(query).then(function(workflows){
 
-					workflows.forEach(function(workflow) { //tweaks
-						if(!workflow.activities || !workflow.activities.length)
-							workflow.activities = [null];
+					var tasks  = [];
+
+					workflows.forEach(function(workflow) {
+						
+						workflow.activities.forEach(function(activity){
+
+							if(isAssignedToMe(activity)) {
+								tasks.push({ workflow : workflow, activity : activity});
+							}
+						});
 					});
 
-					$scope.workflows = workflows;
+					$scope.tasks = tasks;
 
 					//nextLoad = $timeout(load, 15*1000);
-				})
+				});
 			}
 
 			if($scope.$root.user.isAuthenticated)
 				load();
-
+			
 			//==============================
 			//
 			//==============================
-			$scope.isOpen = function(element) {
-				return element && !element.closedOn;
-			}
+			function isAssignedToMe(activity) {
 
+				return _.contains(activity.assignedTo||[], $scope.$root.user.userID||-1);
+			}
+		
 			//==============================
 			//
 			//==============================
@@ -68,7 +70,6 @@ app.directive("myPendingTasks", [function () {
 				if(nextLoad)
 					$timeout.cancel(nextLoad);
 			});
-		}]
-	}
-}]);
+
+		}]);
 });

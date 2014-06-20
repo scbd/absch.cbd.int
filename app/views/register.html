@@ -1,6 +1,5 @@
 <link href="/app/css/register.css" rel="stylesheet">
 
-
 <div ng-cloak ng-controller="RegisterController">
   <div class="container">
     <div class="row">
@@ -13,7 +12,17 @@
               <i class="glyphicon glyphicon-list-alt" style="position:relative;top:4px;"></i> Dashboard 
             </a>
           </h3>
-
+          <div style="padding-left:15px">
+             <a href="/dashboard/completed" ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-completed-tasks.directive.html'}" href="#" role="button">
+                 <i class="fa fa-check fa-1x" ></i> Completed requests 
+            </a><br>
+            <a href="/dashboard/pending" ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-tasks.directive.html'}" href="#" role="button">
+                  <i class="fa fa-tasks fa-1x" ></i> Urgent requests 
+            </a><br>
+            <a href="/dashboard/mytasks" ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-pending-tasks.directive.html'}" href="#" role="button">
+                  <i class="fa fa-comments fa-1x" ></i> Pending requests 
+            </a>
+          </div>
           <h3 ng-repeat-start="(heading,types) in subheadings"
           ng-class="{'btn-commonformat-header-national':heading!='Reference Records','btn-commonformat-header-reference':heading=='Reference Records'}">{{heading}}</h3>
           <a ng-repeat="type in types" ng-href="{{type!='contacts' ? '/register' : ''}}/{{type}}" role="button">
@@ -57,6 +66,7 @@
           </div>
         </div>
       </div>
+   
 
       <ng-include src="subTemplateUrl"  ng-show="user.isAuthenticated"></ng-include>
 

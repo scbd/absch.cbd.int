@@ -1,95 +1,110 @@
-﻿<div>
-	<div class="alert alert-danger" ng-show="__error">
-		<strong>Error: </strong>{{__error}}
+﻿<div ng-controller="myPendingTasksCotroller" class="col-xs-9" style="padding-top:20px;">
+	<div>
+	    <a class="pull-right" ng-show="!toggleHelp" ng-click="toggleHelp=!toggleHelp;" style="cursor:pointer;padding:5px;"><i class="glyphicon glyphicon-question-sign" >
+	      </i> show help
+	    </a>
+	    <a class="pull-right" ng-show="toggleHelp" ng-click="toggleHelp=!toggleHelp;" style="cursor:pointer;color:#666;padding:5px;"><i class="glyphicon glyphicon-question-sign" >
+	      </i> hide help
+	    </a>
 	</div>
+	<div class="registerpage-header">
+	    <h2>
+	      <span class="abbreviation">My pending requests</span>	     
+	    </h2>	  
+  	</div>  
+	<div class="registerpage-content">
+		<div class="alert alert-danger" ng-show="__error">
+			<strong>Error: </strong>{{__error}}
+		</div>
 
-	<table ng-show="workflows.length && !__error" class="table table-striped">
-		<tr>
-			<th>ID</th>
-			<th>Description</th>
-			<th>Status</th>
-			<th>Assigned to</th>
-		</tr>
+		<table ng-show="workflows.length && !__error" class="table table-striped">
+			<tr>
+				<th>ID</th>
+				<th>Description</th>
+				<th>Status</th>
+				<th>Assigned to</th>
+			</tr>
 
 
-		<tr ng-repeat="workflow in workflows|orderBy:'createdOn'">
+			<tr ng-repeat="workflow in workflows|orderBy:'createdOn'">
 
-			<td> <!-- ID -->
-				<a style="text-transform:uppercase;white-space:nowrap;" ng-href="/register/tasks/{{workflow._id}}"  type="button">{{formatWID(workflow._id)}}</a>
-				<div ng-switch="workflow.type.name">
-					<em ng-switch-when="publishNationalRecord">Publishing request</em>
-					<em ng-switch-when="publishReferenceRecord">Publishing request</em>
-					<em ng-switch-default>*{{workflow.type.name|uppercase}}*</em>
-				</div>
-			</td>
-
-			<td> <!-- Description -->
-				<strong ng-show="workflow.result.documentID||workflow.data.documentID"><a ng-href="/database/record?documentID={{workflow.result.documentID||workflow.data.documentID}}">{{workflow.data.metadata.schema|schemaName}}</a></strong>
-				<strong ng-hide="workflow.result.documentID||workflow.data.documentID">{{workflow.data.metadata.schema|schemaName}}</strong>
-
-				<div>{{workflow.data.title | lstring}}</div>
-			</td>
-			
-			<td> <!-- Status -->
-				<div ng-repeat="activity in workflow.activities|orderBy:'createdOn'">
-
-					<div ng-show="isOpen(activity)">
-						<div ng-switch="activity.name">
-							<span ng-switch-when="publishRecord"><i class="glyphicon glyphicon-time"></i> Waiting for validation</span>
-							<span ng-switch-default>{{activity.name}}*</span>
-						</div>
+				<td> <!-- ID -->
+					<a style="text-transform:uppercase;white-space:nowrap;" ng-href="/register/tasks/{{workflow._id}}"  type="button">{{formatWID(workflow._id)}}</a>
+					<div ng-switch="workflow.type.name">
+						<em ng-switch-when="publishNationalRecord">Publishing request</em>
+						<em ng-switch-when="publishReferenceRecord">Publishing request</em>
+						<em ng-switch-default>*{{workflow.type.name|uppercase}}*</em>
 					</div>
+				</td>
 
-					<div ng-hide="isOpen(activity)">
-						<div ng-switch="activity.name+'-'+activity.result.action">
-							<span ng-switch-when="publishRecord-approve"><i class="glyphicon glyphicon-ok"></i> Approved</span>
-							<span ng-switch-when="publishRecord-reject"> <i class="glyphicon glyphicon-remove"></i> Rejected</span>
-							<span ng-switch-when="null-null"> <i class="glyphicon glyphicon-cog"></i> Pending</span>
-							<span ng-switch-default>*{{activity.name+'-'+activity.result.action}}*</span>
-						</div>
-					</div>
-				</div>
-			</td>
+				<td> <!-- Description -->
+					<strong ng-show="workflow.result.documentID||workflow.data.documentID"><a ng-href="/database/record?documentID={{workflow.result.documentID||workflow.data.documentID}}">{{workflow.data.metadata.schema|schemaName}}</a></strong>
+					<strong ng-hide="workflow.result.documentID||workflow.data.documentID">{{workflow.data.metadata.schema|schemaName}}</strong>
 
-			<td>  <!-- Assigned to -->
-				<div ng-repeat="activity in workflow.activities|orderBy:'createdOn'">
+					<div>{{workflow.data.title | lstring}}</div>
+				</td>
+				
+				<td> <!-- Status -->
+					<div ng-repeat="activity in workflow.activities|orderBy:'createdOn'">
 
-					<div ng-show="isOpen(activity)">
-						<div ng-show="activity.assignedToRule">
-							<div ng-switch="activity.assignedToRule|limitTo:7">
-								<span ng-switch-when="ABS-NFP">ABS-CH Focal Point or Publishing Authority</span>
-								<span ng-switch-when="BCH-NFP">BCH Focal Point</span>
-								<span ng-switch-when="CHM-NFP">CHM Focal Point</span>
-								<span ng-switch-when="BCH-Adm">SCBD</span>
-								<span ng-switch-when="ABS-Adm">SCBD</span>
-								<span ng-switch-when="CHM-Adm">SCBD</span>
-								<span ng-switch-default>*{{activity.assignedToRule}}*</span>
+						<div ng-show="isOpen(activity)">
+							<div ng-switch="activity.name">
+								<span ng-switch-when="publishRecord"><i class="glyphicon glyphicon-time"></i> Waiting for validation</span>
+								<span ng-switch-default>{{activity.name}}*</span>
 							</div>
 						</div>
 
-						<div ng-hide="activity.assignedToRule">
-
-							<div ng-show="activity.assignedTo">
-								<span ng-repeat="user in activity.assignedTo_info|orderBy:'lastName'">{{user.firstName}} {{user.lastName}}<span ng-hide="$last">, </span>
-							</span>
-
-							<div ng-hide="activity.assignedTo">
-								<em>Not assigned yet</em>
+						<div ng-hide="isOpen(activity)">
+							<div ng-switch="activity.name+'-'+activity.result.action">
+								<span ng-switch-when="publishRecord-approve"><i class="glyphicon glyphicon-ok"></i> Approved</span>
+								<span ng-switch-when="publishRecord-reject"> <i class="glyphicon glyphicon-remove"></i> Rejected</span>
+								<span ng-switch-when="null-null"> <i class="glyphicon glyphicon-cog"></i> Pending</span>
+								<span ng-switch-default>*{{activity.name+'-'+activity.result.action}}*</span>
 							</div>
 						</div>
-						
 					</div>
+				</td>
 
-					<div ng-hide="isOpen(activity)">
-						Not assigned
+				<td>  <!-- Assigned to -->
+					<div ng-repeat="activity in workflow.activities|orderBy:'createdOn'">
+
+						<div ng-show="isOpen(activity)">
+							<div ng-show="activity.assignedToRule">
+								<div ng-switch="activity.assignedToRule|limitTo:7">
+									<span ng-switch-when="ABS-NFP">ABS-CH Focal Point or Publishing Authority</span>
+									<span ng-switch-when="BCH-NFP">BCH Focal Point</span>
+									<span ng-switch-when="CHM-NFP">CHM Focal Point</span>
+									<span ng-switch-when="BCH-Adm">SCBD</span>
+									<span ng-switch-when="ABS-Adm">SCBD</span>
+									<span ng-switch-when="CHM-Adm">SCBD</span>
+									<span ng-switch-default>*{{activity.assignedToRule}}*</span>
+								</div>
+							</div>
+
+							<div ng-hide="activity.assignedToRule">
+
+								<div ng-show="activity.assignedTo">
+									<span ng-repeat="user in activity.assignedTo_info|orderBy:'lastName'">{{user.firstName}} {{user.lastName}}<span ng-hide="$last">, </span>
+								</span>
+
+								<div ng-hide="activity.assignedTo">
+									<em>Not assigned yet</em>
+								</div>
+							</div>
+							
+						</div>
+
+						<div ng-hide="isOpen(activity)">
+							Not assigned
+						</div>
+
 					</div>
+				</td>
+			</tr>
+		</table>
 
-				</div>
-			</td>
-		</tr>
-	</table>
-
-	<div ng-show="workflows.length==0">
-		No Pending request
+		<div class="alert alert-success" ng-show="workflows.length==0">
+			No Pending request
+		</div>
 	</div>
 </div>

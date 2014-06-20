@@ -6,6 +6,7 @@ define(['app',
   './directives/ngxLazy.directive.js'], function (app) {
 
   "use strict";
+// angular.module([]);
 
   app.controller("RegisterController", 
     ["$rootScope", "$location" , "$scope", "$q", "$window", "IStorage", "underscore",

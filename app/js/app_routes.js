@@ -35,6 +35,24 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
               resolveUser: true,
               subTemplateUrl: '/app/views/dashboard.html',
             }).
+             when('/dashboard/completed', {
+              templateUrl: '/app/views/register.html',
+              resolveController: true,
+              resolveUser: true,
+              subTemplateUrl: '/app/views/tasks/my-completed-tasks.directive.html',
+            }).
+             when('/dashboard/pending', {
+              templateUrl: '/app/views/register.html',
+              resolveController: true,
+              resolveUser: true,
+              subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',
+            }).
+             when('/dashboard/mytasks', {
+              templateUrl: '/app/views/register.html',
+              resolveController: true,
+              resolveUser: true,
+              subTemplateUrl: '/app/views/tasks/my-pending-tasks.directive.html',
+            }).
             when('/register/:document_type', {
               templateUrl: '/app/views/register.html',
               resolveController: true,
