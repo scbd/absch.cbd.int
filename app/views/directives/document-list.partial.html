@@ -125,7 +125,7 @@
                           <span class="title">{{document.title}} </span>
 
                           <div class="description" ng-hide="displayDetails" >
-                          {{document.description}}
+                          {{document.description | truncate:700:' ... more'}}
                           </div>
 
                           <div class="metadetails" ng-hide="displayDetails" >
