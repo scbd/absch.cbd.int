@@ -295,6 +295,8 @@ app.directive('documentList', function ($http, $filter) {
                         output.recordtype="referenceRecord";
                         output.eventCity=document.eventCity_EN_t;
                         output.eventCountry=document.eventCountry_EN_t;
+                        output.description = document.eventCity_EN_t + ' from ' + moment(document.startDate_dt).format('Do MMM YYYY') + ' to ' + moment(document.endDate_dt).format('Do MMM YYYY'); 
+
                     }                    
                     return output;
                 }     
