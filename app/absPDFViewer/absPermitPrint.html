@@ -5,63 +5,52 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<link rel="shortcut icon" href="ico/favicon.png">
-	<!-- Bootstrap core CSS -->
-	<link href="/app/css/bootstrap.css" rel="stylesheet">
+	
+    <!-- Bootstrap core CSS -->
+	<link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 	<!-- Custom styles for this template -->
-	<link href="/app/css/template.css" rel="stylesheet">
-	<link rel="stylesheet" href="/app/libs/font-awesome/css/font-awesome.min.css">
-	<script src="/app/libs/momentjs/min/moment.min.js"></script>
-    <script src="/app/libs/barcode-39.js/barcode-39.min.js"></script>
+	<link href="../css/permitPDF.css" rel="stylesheet">
+	<link rel="stylesheet" href="../libs/font-awesome/css/font-awesome.min.css">
+	
+    <script src="../libs/momentjs/min/moment.min.js"></script>
+    <script src="../libs/barcode-39.js/barcode-39.min.js"></script>
 
- 		<script src="/app/libs/requirejs/require.js"  ></script>
-	    <script src="/app/libs/angular/angular.min.js"  ></script>	    
-	    <script src="absPermitPrint.html.js" ></script>
-	    <style type="text/css">
-	    	.main-nav{
-	    		border-bottom:none;
-	    	}
-	    	table{
-	    		width:100%;
-	    		/*border:1px solid black;*/
-	    	}
-	    	table tr td{
-                width: 50%;
-                text-align: justify;
-                padding-left: 10px !important;
-                vertical-align: top;
-	    		/*padding:5px !important;*/
-	    	}
-            #barcode img{
-                max-width: 300px;
-                max-height: 90px;
-            }
-	    </style>
+	<script src="../libs/requirejs/require.js"  ></script>
+    <script src="../libs/angular/angular.min.js"  ></script>	    
+    <script src="absPermitPrint.html.js" ></script>
 </head>
-<body >
+
+<body>
 	<div ng-app="ngapp" class="main-nav" >
-		<div ng-controller="printPermit" class="container" style="padding-left:40px;padding-right:100px;">		  
+		<div ng-controller="printPermit" class="container" style="padding:60px;border:10px ridge #999;" >		  
+            
             <div class="row">
-                <div class="col-lg-3 col-md-3 col-xs-3">
-                	<img src="https://chm.cbd.int/app/img/cbd-logo-en.svg" style="width:148px;height:65px"/>           
-                </div>
-                <div class="col-lg-5 col-md-5 col-xs-5">
-                	<strong>
-                    Internationally recognized certificate of compliance constituted from information on the permit or its equivalent made available to the ABS Clearing-House    
-				</strong>
-                </div>
-                <div class="col-lg-4  col-md-4 col-xs-4 pull-right"> 
-                    <img class="pull-right" style="width:79px;height:79px;margin-top:-5px" 
+                <div class="col-xs-4" style="text-align:center;top:20px;">
+                    <img  style="width:85px;height:85px;"
                     src="../img/UNEP_logo.svg"/>
-                   <img class="pull-right" style="width:79px;height:79px;margin-top:-15px" 
-                   src="../img/Emblem_of_the_United_Nations.svg"/>
+                </div>
+                <div class="col-xs-4" style="text-align:center;">
+                    <img src="https://chm.cbd.int/app/img/cbd-logo-en.svg" style="height:100px"/>
+                </div>
+                <div class="col-xs-4" style="text-align:center;top:20px;">
+                    <img  style="width:85px;height:85px;"
+                    src="../img/Emblem_of_the_United_Nations.svg"/>
+                </div>
                 
-                </div>
-            <div> 
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-xs-12"> 
-                	In accordance with Article 17, paragraph 2, of the Nagoya Protocol on Access and Benefit-sharing, a permit or its equivalent issued in accordance with Article 6, paragraph 3 (e) and made available to the Access and Benefit-sharing Clearing-House, shall constitute an internationally recognized certificate of compliance.
-                </div>
-            <div>
+            </div>
+
+            <hr>
+
+            <div class="row" style="margin-bottom:30px;">
+                <div class="col-xs-12" style="text-align:center;">
+                    <h1>
+                    Internationally recognized certificate of compliance constituted from information on the permit or its equivalent made available to the Access and Benefit-sharing Clearing-House    
+                    </h1>
+                    <hr>
+                    <span class="blue">In accordance with Article 17, paragraph 2, of the Nagoya Protocol on Access and Benefit-sharing, a permit or its equivalent issued in accordance with Article 6, paragraph 3 (e) and made available to the Access and Benefit-sharing Clearing-House, shall constitute an internationally recognized certificate of compliance.</span>
+                </div> 
+            </div> 
+            <hr>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-xs-12"> 
                 	<table >
