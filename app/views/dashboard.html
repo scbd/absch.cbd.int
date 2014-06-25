@@ -46,52 +46,26 @@
           <i class="glyphicon glyphicon-off"></i> SIGN IN
         </a>
       </div>
-      <div class="row">        
-          <div class="col-lg-4">
-            <div class="panel panel-warning">
-              <div class="panel-heading">
-                <div class="row">
-                  <div class="col-xs-6">
-                    <i class="fa fa-check fa-5x"></i>
-                  </div>
-                  <div class="col-xs-6 text-right">
-                    <p class="announcement-heading">{{completedRequestCount}}</p>
-                    <p class="announcement-text">Completed requests</p>
-                  </div>
-                </div>
-              </div>
-              <a href="/dashboard/completed">
-                <div class="panel-footer announcement-bottom">
-                  <div class="row">
-                    <div class="col-xs-10">
-                      View Complete requests
-                    </div>
-                    <div class="col-xs-2 text-right">
-                      <i class="fa fa-arrow-circle-right"></i>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="col-lg-4">
+      <div class="row">  
+
+           <div class="col-lg-4">
             <div class="panel panel-danger">
               <div class="panel-heading">
                 <div class="row">
                   <div class="col-xs-6">
-                    <i class="fa fa-tasks fa-5x"></i>
+                    <i class="fa fa-exclamation-circle fa-5x"></i>
                   </div>
                   <div class="col-xs-6 text-right">
                     <p class="announcement-heading">{{urgentAttentionCount}}</p>
-                    <p class="announcement-text">Urgent attention</p>
+                    <p class="announcement-text">New <br>requests</p>
                   </div>
                 </div>
               </div>
               <a href="/dashboard/pending">
                 <div class="panel-footer announcement-bottom">
                   <div class="row">
-                    <div class="col-xs-6">
-                      View requests
+                    <div class="col-xs-6" style="white-space:nowrap;">
+                      View new requests
                     </div>
                     <div class="col-xs-6 text-right">
                       <i class="fa fa-arrow-circle-right"></i>
@@ -101,12 +75,13 @@
               </a>
             </div>
           </div>
+
           <div class="col-lg-4">
-            <div class="panel panel-success">
+            <div class="panel panel-warning">
               <div class="panel-heading">
                 <div class="row">
                   <div class="col-xs-6">
-                    <i class="fa fa-comments fa-5x"></i>
+                    <i class="fa fa-clock-o  fa-5x"></i>
                   </div>
                   <div class="col-xs-6 text-right">
                     <p class="announcement-heading">{{pendingCount}}</p>
@@ -128,6 +103,36 @@
               </a>
             </div>
           </div>
+
+          <div class="col-lg-4">
+            <div class="panel panel-success">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col-xs-6">
+                    <i class="fa fa-check-square fa-5x"></i>
+                  </div>
+                  <div class="col-xs-6 text-right">
+                    <p class="announcement-heading">{{completedRequestCount}}</p>
+                    <p class="announcement-text">Completed requests</p>
+                  </div>
+                </div>
+              </div>
+              <a href="/dashboard/completed">
+                <div class="panel-footer announcement-bottom">
+                  <div class="row">
+                    <div class="col-xs-10">
+                      View completed requests
+                    </div>
+                    <div class="col-xs-2 text-right">
+                      <i class="fa fa-arrow-circle-right"></i>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+       
+          
       </div>
       <div class="row">  
         <div class="col-md-12 col-sm-12 col-sx-12">
