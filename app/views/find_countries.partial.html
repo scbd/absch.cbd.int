@@ -23,8 +23,9 @@
         <style type="text/css" media="screen">
             .letter-active{font-weight: bold; color:#111;text-decoration: underline;} 
             .letter{ }  
-            .section{
-                height:500px;
+            .section1{
+
+                max-height:500px;
                 overflow-y:auto;
                 width:100%;
             } 
@@ -41,13 +42,13 @@
                                 <a ng-href="#" ng-click="setCountryFilter(letter)" class="letter" ng-class="{'letter-active':countryFilter == letter}">{{letter}}</a>
                             </span>
                         </div>
-                        <div ng-class="{'section':terms.length>0}">
+                        <div ng-class="{'section1':terms.length>0}">
                             <div class="progress progress-striped active" ng-show="showSelect && terms.length<=0">
                                   <div class="progress-bar"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
                                     <span class="sr-only">45% Complete</span>
                                   </div>
                             </div>
-                            <div class="col-xs-12" style="white-space:nowrap;text-overflow:ellipsis;width:200%" ng-repeat="item in (terms | filter: filterCountries | orderBy:'title.en')">
+                            <div class="col-xs-12" style="white-space:nowrap;text-overflow:ellipsis;max-width:140%" ng-repeat="item in (terms | filter: filterCountries | orderBy:'title.en')">
                                 <div class="checkbox" style="margin-top:2px;margin-bottom:2px">                                   
                                         <label class="label label-party" ng-class="{'label-info':item.isSignatory && !item.isRatified, 'label-primary':item.isRatified, 'label-default':!item.isRatified && !item.isSignatory}">{{item.title.en}} ({{item.count}})
                                             <input type="checkbox" ng-model="item.selected" ng-change="refresh()">

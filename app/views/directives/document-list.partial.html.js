@@ -22,7 +22,8 @@ app.directive('documentList', function ($http, $filter) {
                   currentPage: '=',
                   documentCount: '='
             },
-            controller: ['$scope', "underscore", "commonjs", '$q',function ($scope, underscore, commonjs,$q, filter){
+            controller: ['$scope', "underscore", "commonjs","authentication", '$q',
+            function ($scope, underscore, commonjs,authentication,$q, filter){
 
               $scope.formatDate = function formatDate (date) {
                     return moment(date).format('MMMM Do YYYY');
@@ -48,11 +49,11 @@ app.directive('documentList', function ($http, $filter) {
                           return;
 
                        item.data = {'schema':item.schema, 'url_ss': item.url_ss, 'data': item};
-                        console.log(item.schema);
-                        if(item.schema.toUpperCase()=="FOCALPOINT" || 
+                        //console.log(item.schema);
+                        if(item.schema && (item.schema.toUpperCase()=="FOCALPOINT" || 
                           item.schema.toUpperCase()=="MEETING" || 
                           item.schema.toUpperCase()=="NOTIFICATION"
-                           || item.schema.toUpperCase()=="PRESSRELEASE" || item.schema.toUpperCase()=="STATEMENT")
+                           || item.schema.toUpperCase()=="PRESSRELEASE" || item.schema.toUpperCase()=="STATEMENT"))
                         {
                              commonjs.getReferenceRecordIndex(item.schema.toUpperCase(),item.id).then(function(data){
                                 item.data = data.data;
@@ -143,6 +144,7 @@ app.directive('documentList', function ($http, $filter) {
                     };
                     output.id          = document.id;
                     output.schema      = document.schema_s.toLowerCase();
+                    output.schemaForEdit = document.schema_s;
                     output.title       = document.title_t;
                     output.description = document.description_t;
                     output.source      = document.government_EN_t;
@@ -295,8 +297,14 @@ app.directive('documentList', function ($http, $filter) {
                         output.recordtype="referenceRecord";
                         output.eventCity=document.eventCity_EN_t;
                         output.eventCountry=document.eventCountry_EN_t;
-                    }                    
-                    return output;
+                        output.description = document.eventCity_EN_t + ' from ' + moment(document.startDate_dt).format('Do MMM YYYY') + ' to ' + moment(document.endDate_dt).format('Do MMM YYYY'); 
+
+                    }
+                    $q.when(canUserEdit(document), function(canedit){
+                      output.canEdit =  canedit;
+                    }) ; 
+
+                  return output;
                 }     
 
                 function getString(source, key){
@@ -309,6 +317,35 @@ app.directive('documentList', function ($http, $filter) {
                         return lstring.toString() ;                        
                     }                    
                 }
+
+                //==================================
+                //
+                //==================================
+                 $scope.user= null;
+              function  canUserEdit  (document) {
+
+                  if(!$scope.user){
+                    $scope.user = authentication.getUser();
+                  }
+                return  $q.when($scope.user, function(user){
+                    $scope.user = user;
+
+                    if (!user.isAuthenticated)
+                      return false;
+
+                    if (!document)
+                      return false;
+
+                    return user.government == document.government_s
+                    && (document.schema_s == 'absPermit' ||
+                      document.schema_s == 'absCheckpoint' ||
+                      document.schema_s == 'absCheckpointCommunique' ||
+                      document.schema_s == 'authority' ||
+                      document.schema_s == 'measure' ||
+                      document.schema_s == 'database' ||
+                      document.schema_s == 'resource');
+                  });
+                };
             }]
 
         };
