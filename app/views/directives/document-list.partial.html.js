@@ -337,13 +337,13 @@ app.directive('documentList', function ($http, $filter) {
                       return false;
 
                     return user.government == document.government_s
-                    && (document.schema_s = 'absPermit' ||
-                      document.schema_s = 'absCheckpoint' ||
-                      document.schema_s = 'absCheckpointCommunique' ||
-                      document.schema_s = 'authority' ||
-                      document.schema_s = 'measure' ||
-                      document.schema_s = 'database' ||
-                      document.schema_s = 'resource');
+                    && (document.schema_s == 'absPermit' ||
+                      document.schema_s == 'absCheckpoint' ||
+                      document.schema_s == 'absCheckpointCommunique' ||
+                      document.schema_s == 'authority' ||
+                      document.schema_s == 'measure' ||
+                      document.schema_s == 'database' ||
+                      document.schema_s == 'resource');
                   });
                 };
             }]
