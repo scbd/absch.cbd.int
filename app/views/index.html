@@ -18,7 +18,8 @@
         <div class="item active" >
             <div class="container" >
                 <div class="carousel-caption" style="text-align:left;">
-                    <h1 >Participate in the testing of the <span style="color:#fa6938;">pilot phase</span> of the ABS-CH</h1>
+
+                    <h1>Participate in the testing of the <span style="color:#fa6938;">pilot phase</span> of the ABS-CH</h1>
                     <p class="visible-lg" style="font-size:14px;">Login and start publishing records and providing feedback on how we can improve it.</p>
                          <div class="row" ng-show="user.isAuthenticated">
 
@@ -87,8 +88,8 @@
         <div class="col-md-12">
             <div class="home-col">
                 <!-- <h3 class="headline1"><a href="/about#about">What is the ABS-CH?</a></h3> -->
-                <h2>The Access and Benefit-sharing Clearing-house (ABSCH) is a platform for exchanging information on ABS and a key tool for facilitating the implementation of the Nagoya Protocolby enhancing transparency on procedures for access and on the utilization of genetic resources, and in this way increasing the opportunities for benefit-sharing. <a href="/about#about">
-                <span style="font-size:80%"> &nbsp; <i class="fa fa-forward"></i> read more</a></span></h2>
+                <h3 style="text-align:justify;">The Access and Benefit-sharing Clearing-house (ABSCH) is a platform for exchanging information on ABS and a key tool for facilitating the implementation of the Nagoya Protocolby enhancing transparency on procedures for access and on the utilization of genetic resources, and in this way increasing the opportunities for benefit-sharing. <a href="/about#about">
+                <span style="font-size:80%"> &nbsp; <i class="fa fa-forward"></i> read more</a></span></h3>
             </div>
         </div>
 
@@ -124,7 +125,14 @@
     <div class="row">
 
         <div class="col-md-6">
+
             <div class="home-col">
+                <h3>About the Nagoya Protocol</h3>
+                The Nagoya Protocol on Access to Genetic Resources and the Fair and Equitable Sharing of Benefits Arising from their Utilization to the Convention on Biological Diversity is an international agreement which aims at sharing the benefits arising from the utilization of genetic resources in a fair and equitable way, including by appropriate access to genetic resources and by appropriate transfer of relevant technologies, taking into account all rights over those resources and to technologies, and by appropriate funding, thereby contributing to the conservation of biological diversity and the sustainable use of its components. 
+                <a href="http://www.cbd.int/abs"> <i class="fa fa-forward"></i> read more at: www.cbd.int/abs</a>
+            </div>
+
+            <!-- <div class="home-col">
                 <h3>News from the development blog</h3>
                     <div class="feeds">
                     <ul>
@@ -136,15 +144,14 @@
                         </li>                
                     </ul>            
                     </div>
-            </div>
+            </div> -->
         </div>
 
         <div class="col-md-6">
             <div class="home-col">
                 <h3>Meetings</h3>
                 <div class="feeds">
-                    <ul>
-                        
+                    <ul>     
                         <li ng-repeat="meeting in meetings.response.docs" style="padding-top:10px;">  
                              <span class="small" >{{meeting.startDate_s | date:'dd MMM'}} - {{meeting.endDate_s | date:'dd MMM yyyy'}} 
                             </span>               
@@ -188,11 +195,7 @@
         </div>
 
         <div class="col-md-3">
-            <div class="home-col">
-                <h3>About the Nagoya Protocol</h3>
-                The Nagoya Protocol on Access to Genetic Resources and the Fair and Equitable Sharing of Benefits Arising from their Utilization to the Convention on Biological Diversity is an international agreement which aims at sharing the benefits arising from the utilization of genetic resources in a fair and equitable way, including by appropriate access to genetic resources and by appropriate transfer of relevant technologies, taking into account all rights over those resources and to technologies, and by appropriate funding, thereby contributing to the conservation of biological diversity and the sustainable use of its components. 
-                <a href="http://www.cbd.int/abs"> <i class="fa fa-forward"></i> read more at: www.cbd.int/abs</a>
-            </div>
+            
         </div>
         <div class="col-md-3">
             <div class="home-col">
