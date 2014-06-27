@@ -1,6 +1,36 @@
-<div class="container-fluid record-metadata" style="padding:5px;" >
+
+		<div class="container-fluid record-metadata ">
 		<div class="row">
-			<div ng-show="document.info.createdBy" class="col-xs-2">
+		 <div class="col-xs-12">
+
+			<div ng-show="document.info.createdBy">
+				<label class="record-metadata-label">Published by:</label>
+				<span class="record-metadata-text">
+					{{document.info.createdBy.firstName}} {{document.info.createdBy.lastName}} ({{document.info.createdBy.email}}) on {{document.info.createdOn | date:'d-MMM-y  h:mm:ss a'}}
+				</span>
+			</div>
+
+			<div ng-show="!document.info.createdBy && document.info.createdOn">
+				<label class="record-metadata-label">Published by:</label>
+				<span class="record-metadata-text">
+					SCBD (secretariat@cbd.int) on {{document.info.createdOn| date:'d-MMM-y  h:mm:ss a'}}
+				</span>
+			</div>
+		
+			<div ng-show="document.info.updatedBy && document.info.updatedOn != document.info.createdOn">				
+				<label class="record-metadata-label">Last udpated by:</label>
+				<span class="record-metadata-text">
+					{{document.info.updatedBy.firstName}} {{document.info.updatedBy.lastName}} ({{document.info.updatedBy.email}}) on {{document.info.updatedOn| date:'d-MMM-y  h:mm:ss a'}}
+				</span>
+			</div>
+
+			<div ng-show="document.header.identifier" >
+					<label class="record-metadata-label">Record identifier:</label>
+					<span class="record-metadata-text"><a href="/database/record?documentID={{document.header.identifier}}&documentSchema={{document.header.schema | uppercase}}">
+					{{document.header.identifier}}</a> </span>
+			</div>
+
+			<!-- <div ng-show="document.info.createdBy" class="col-xs-2">
 					<label>Published by:</label>
 					<div>
 					{{document.info.createdBy.firstName}} {{document.info.createdBy.lastName}} ({{document.info.createdBy.email}})</div>
@@ -22,6 +52,7 @@
 					<label>record identifier</label>
 					<div><a href="/database/record?documentID={{document.header.identifier}}&documentSchema={{document.header.schema | uppercase}}">
 					{{document.header.identifier}}</a> </div>
+			</div> -->
 			</div>
 		</div>
 </div>
