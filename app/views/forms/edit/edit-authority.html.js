@@ -1,6 +1,6 @@
 define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 
-  app.controller("editAuthority", ["$scope", "authHttp", "$filter", "Thesaurus", "$q", "$controller", function ($scope, $http, $filter, Thesaurus, $q, $controller) {
+  app.controller("editAuthority", ["$scope", "authHttp", "$filter", "Thesaurus", "$q", "$controller","Enumerable", function ($scope, $http, $filter, Thesaurus, $q, $controller,Enumerable) {
     $controller('editController', {$scope: $scope});
 		
 			$scope.options  = {
@@ -23,7 +23,17 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 				absFunctions				: function () { return $http.get("/api/v2013/thesaurus/domains/8102E184-E282-47F7-A49F-4C219B0EE235/terms", { cache: true }).then(function (o) { return o.data; }); },
 				keywords					: function () { return $http.get("/api/v2013/thesaurus/domains/1A22EAAB-9BBC-4543-890E-DEF913F59E98/terms", { cache: true }).then(function (o) { return Thesaurus.buildTree(o.data); }); },
 			};
+			$scope.showResponsibleforAllMsg = function(){
 
+			if(!$scope.document.absResponsibleForAll || !$scope.validationReport)
+				return false;
+
+			return	Enumerable.from($scope.validationReport.errors).any(function(error){
+					return error.property=='absResponsibleForAllNot';
+				});
+				//
+				return true;
+			}
 			//==================================
 			//
 			//==================================
@@ -70,6 +80,12 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 					document.taxonomy			= undefined;
 					document.gisFiles			= undefined;
 					document.gisMapCenter		= undefined;
+				}
+				if (document.absResponsibleForAll) {
+					document.responsibilities	= undefined;
+					document.absJurisdiction = undefined;
+					document.absJurisdictionName = undefined;
+					document.absGeneticResourceTypes = undefined;
 				}
 
 				if (/^\s*$/g.test(document.notes))
