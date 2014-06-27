@@ -8,7 +8,8 @@
   <div class="list-group-item-expand">
     <div ng-animate="'animate'" ng-repeat="item in allTerms | orderBy:'title' | filter:{selected:true}" ng-click="onclick(this, $event)">
         <div class="truncate" style="cursor:pointer">
-          <div class="glyphicon glyphicon-remove"></div> {{item.title.en}} ({{item.count}}) 
+         <!--  <div class="glyphicon glyphicon-remove"></div> --> 
+         <input type="checkbox" checked=true > {{item.title.en}} ({{item.count}}) </input>
         </div>
     </div>
   <div>

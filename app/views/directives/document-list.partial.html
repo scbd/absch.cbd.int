@@ -36,7 +36,7 @@
   
   #Result .description{
     font-size: 11px;
-    color:#111;
+    color:#888;
     padding-top: 5px;
     cursor: pointer;
 
@@ -90,11 +90,7 @@
     </li>
   </ul>
   <div class="clearfix"></div>
-  <div class="pull-right" ng-show='showPagination'>
-    <span class="label label-default">Not Ratified</span>
-    <span class="label label-primary">Ratified</span>
-    <span class="label label-info">Signatory</span>  
-  </div><br>
+  <br>
   <div ng-repeat="document in transformedDocuments | filter:advanceFilter | filter:filterCategory " style="
     padding:10px 0 10px 0;">
     <!--  {{document}} -->

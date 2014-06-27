@@ -5,84 +5,95 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<link rel="shortcut icon" href="ico/favicon.png">
-	<!-- Bootstrap core CSS -->
-	<link href="/app/css/bootstrap.css" rel="stylesheet">
+	
+    <!-- Bootstrap core CSS -->
+	<link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 	<!-- Custom styles for this template -->
-	<link href="/app/css/template.css" rel="stylesheet">
-	<link rel="stylesheet" href="/app/libs/font-awesome/css/font-awesome.min.css">
-	<script src="/app/libs/momentjs/min/moment.min.js"></script>
-    <script src="/app/libs/barcode-39.js/barcode-39.min.js"></script>
+	<link href="../css/permitPDF.css" rel="stylesheet">
+	<link rel="stylesheet" href="../libs/font-awesome/css/font-awesome.min.css">
+	
+    <script src="../libs/momentjs/min/moment.min.js"></script>
+    <script src="../libs/barcode-39.js/barcode-39.min.js"></script>
 
- 		<script src="/app/libs/requirejs/require.js"  ></script>
-	    <script src="/app/libs/angular/angular.min.js"  ></script>	    
-	    <script src="absPermitPrint.html.js" ></script>
-	    <style type="text/css">
-	    	.main-nav{
-	    		border-bottom:none;
-	    	}
-	    	table{
-	    		width:100%;
-	    		/*border:1px solid black;*/
-	    	}
-	    	table tr td{
-                width: 50%;
-                text-align: justify;
-                padding-left: 10px !important;
-                vertical-align: top;
-	    		/*padding:5px !important;*/
-	    	}
-            #barcode img{
-                max-width: 300px;
-                max-height: 90px;
-            }
-	    </style>
+	<script src="../libs/requirejs/require.js"  ></script>
+    <script src="../libs/angular/angular.min.js"  ></script>	    
+    <script src="absPermitPrint.html.js" ></script>
 </head>
-<body >
+
+<body>
 	<div ng-app="ngapp" class="main-nav" >
-		<div ng-controller="printPermit" class="container" style="padding-left:40px;padding-right:100px;">		  
+		<div ng-controller="printPermit" class="container" style="padding:60px;border:10px ridge #999;" >		  
+            
             <div class="row">
-                <div class="col-lg-3 col-md-3 col-xs-3">
-                	<img src="https://chm.cbd.int/app/img/cbd-logo-en.svg" style="width:148px;height:65px"/>           
-                </div>
-                <div class="col-lg-5 col-md-5 col-xs-5">
-                	<strong>
-                    Internationally recognized certificate of compliance constituted from information on the permit or its equivalent made available to the ABS Clearing-House    
-				</strong>
-                </div>
-                <div class="col-lg-4  col-md-4 col-xs-4 pull-right"> 
-                    <img class="pull-right" style="width:79px;height:79px;margin-top:-5px" 
+                <div class="col-xs-4" style="text-align:center;top:20px;">
+                    <img  style="width:85px;height:85px;"
                     src="../img/UNEP_logo.svg"/>
-                   <img class="pull-right" style="width:79px;height:79px;margin-top:-15px" 
-                   src="../img/Emblem_of_the_United_Nations.svg"/>
+                </div>
+                <div class="col-xs-4" style="text-align:center;">
+                    <img src="https://chm.cbd.int/app/img/cbd-logo-en.svg" style="height:100px"/>
+                </div>
+                <div class="col-xs-4" style="text-align:center;top:20px;">
+                    <img  style="width:85px;height:85px;"
+                    src="../img/Emblem_of_the_United_Nations.svg"/>
+                </div>
                 
-                </div>
-            <div> 
+            </div>
+
+            <hr>
+
+            <div class="row" style="margin-bottom:30px;">
+                <div class="col-xs-12" style="text-align:center;">
+                    <h1>
+                    Internationally recognized certificate of compliance constituted from information on the permit or its equivalent made available to the Access and Benefit-sharing Clearing-House    
+                    </h1>
+
+                    <span class="blue">In accordance with Article 17, paragraph 2, of the Nagoya Protocol on Access and Benefit-sharing, a permit or its equivalent issued in accordance with Article 6, paragraph 3 (e) and made available to the Access and Benefit-sharing Clearing-House, shall constitute an internationally recognized certificate of compliance.</span>
+                </div> 
+            </div> 
+            <hr>
             <div class="row">
-                <div class="col-lg-12 col-md-12 col-xs-12"> 
-                	In accordance with Article 17, paragraph 2, of the Nagoya Protocol on Access and Benefit-sharing, a permit or its equivalent issued in accordance with Article 6, paragraph 3 (e) and made available to the Access and Benefit-sharing Clearing-House, shall constitute an internationally recognized certificate of compliance.
+                <div class="col-xs-8"> 
+                	<label>Title/reference number of the permit or its equivalent</label>
+                    <div class="text">{{document.title| lstring:locale}} TEST TEST test test TEST TEST test test</div>
                 </div>
-            <div>
+                <div class="col-xs-4">
+                    <label>ABS Clearing-House Unique Identifier</label>
+                    <div class="text">ABSCH-{{document.government.identifier |uppercase}}-{{documentInfo.documentID}}-{{documentInfo.revision}}</div>
+                </div>
+            </div>
             <div class="row">
-                <div class="col-lg-12 col-md-12 col-xs-12"> 
-                	<table >
+                <div class="col-xs-8"> 
+                    <label>Additional national references or identifiers</label>
+                    <div class="text">{{document.nationalReferences | lstring:locale}} TEST TEST test test TEST TEST test test</div>
+                </div>
+                <div class="col-xs-4">
+                    <label>Permanent online verification link</label>
+                    <div class="text">http://absch.cbd.int/ircc/absch-{{document.government.identifier |uppercase}}-{{documentInfo.documentID}}-{{documentInfo.revision}}</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-8"> 
+                    <label>Published to the ABS Clearing-House by: </label>
+                    <div class="text">Issuing person and country name</div>
+                </div>
+                <div class="col-xs-4">
+                    <label>Published on:</label>
+                    <div class="text">{{documentInfo.createdOn | formatDate}}</div>
+                </div>
+            </div>
+
+            <h3>Permit information</h3>
+
+            <h3>Issuing Authority</h3>
+
+
+
+
+                <table>
+                
                 		<tr>
-                			<td><h4>Title/reference number of the permit or its equivalent</h4></td>
-                			<td><h4>ABS Clearing House Unique Identifier</h4></td>
-                		</tr>
-                		<tr>
-                			<td>{{document.title| lstring:locale}}</td>
-                			<td>ABSCH-{{document.government.identifier |uppercase}}-{{documentInfo.documentID}}-{{documentInfo.revision}}</td>
-                		</tr>
-                		<tr>
-                			<td><h4>Additional national references or identifiers</h4></td>
-                			<td><h4>Date of creation of the record</h4></td>
-                		</tr>
-                		<tr>
-                			<td></td>
-                			<td>{{documentInfo.createdOn | formatDate}}</td>
-                		</tr>
-                		<tr>
-                			<td colspan="2"><div><h3>Issuing Authority</h3><div><hr></div></div></td>
+                			<td colspan="2"><div><div><hr></div></div></td>
                 		</tr>
                 		<tr>
                 			<td><h4>Country</h4></td>
