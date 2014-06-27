@@ -280,9 +280,27 @@ app.directive('documentList', function ($http, $filter) {
                         //TODO: output.description should be the description 
                         //TODO: metadata should be the url opening to a new window
                     }
-                    else if(document.schema_s=='measure' || document.schema_s=='focalPoint' || document.schema_s=='database') {
+                     else if(document.schema_s=='measure' ) {
                         output.recordtype="nationalRecord";  
-                                   ;
+                        
+                        output.jusrisdiction = document.jurisdiction_EN_t; 
+
+                        if(output.jusrisdiction)
+                          output.metadata.push(output.jusrisdiction);
+
+                        if(document.type_EN_t){
+                          output.type = document.type_EN_t;
+                          if(output.type)output.metadata.push(output.type);
+                        }
+
+                        if(document.status_EN_t){
+                          output.status = document.status_EN_t;
+                          if(output.status)output.metadata.push(output.status);
+                        }
+                    }       
+                    else if(document.schema_s=='focalPoint' || document.schema_s=='database') {
+                        output.recordtype="nationalRecord";  
+
                         if(document.type_EN_t){
                           output.type = document.type_EN_t;
                           if(output.type)output.metadata.push(output.type);
