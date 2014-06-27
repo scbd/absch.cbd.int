@@ -17,7 +17,8 @@
 
   	<div class="row top" style="padding-bottom:30px;">
   		<div style="position:absolute; top:100px; margin:auto; width:100%">
-			<img src="/app/libs/mapsicon/all/{{code.toLowerCase()}}/1024.png" style="opacity:0.15">
+			<img ng-hide="code=='EUR'" src="/app/libs/mapsicon/all/{{code.toLowerCase()}}/1024.png" style="opacity:0.15">
+			<img ng-show="code=='EUR'" src="/app/img/EUMap.svg" style="opacity:0.15;padding-top:100px;padding-left:100px;">
 		</div>
 
   		<div class="col-lg-7 col-md-6 col-sm-5">
@@ -37,6 +38,7 @@
 
 		<div class="col-lg-2 col-md-2 col-sm-2 text-right ">
            <div style="height:100px;" class="flag-icon-background flag-icon-{{code.toLowerCase()}}"></div>
+          
 		</div> 
 
 		<div class="clearfix"></div>

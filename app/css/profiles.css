@@ -63,3 +63,7 @@
 
     	font: 32px "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeueW01-45Ligh", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	}
+	.flag-icon-eur{
+		background-image :url('/app/img/EUFlag.png');
+		width: :165px;
+	}
