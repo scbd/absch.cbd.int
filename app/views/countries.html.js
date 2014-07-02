@@ -70,9 +70,7 @@ define(['app',  'directives/angucomplete-extended'], function (app,angucomplete)
                               entity.treaties.XXVII8b.instrument == "acceptance"
                               || entity.treaties.XXVII8b.instrument == "approval" );
          }
-
-
-
+         
     }]);
 // });
 });
