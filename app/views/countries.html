@@ -31,7 +31,9 @@
     }
   
 </style>
-
+<script type="text/javascript">
+  $("#signature").tooltip();
+</script>
 <div ng-controller="CountriesController">
 
     <div class="category-container" >
@@ -58,7 +60,7 @@
                                 </div>
                             </td>
                              <td style="text-align:center;width:200px;">
-                                <div style="width: 180px; height: 100px;cursor:pointer;" ng-click="searchFilter=isSignatory">
+                                <div  style="width: 180px; height: 100px;cursor:pointer;" ng-click="searchFilter=isSignatory">
                                     
                                 <div class="numberCircle" style="width:80px;height:80px;padding-top:20px;background-color:#5bc0de;"  ng-class="{'active-circle': selected_circle=='signatory'}">
                                 {{signatures}}</div>
@@ -69,7 +71,7 @@
                                 </div>
                                  </td>
                             <td style="text-align: center; width: 200px;">
-                              <div style="width: 180px; height: 100px;cursor:pointer;" ng-click="searchFilter=isRatified">
+                              <div data-toggle="tooltip" title="Includes EU" id="signature" style="width: 180px; height: 100px;cursor:pointer;" ng-click="searchFilter=isRatified">
                                     
                                   <div class="numberCircle" style="width:80px;height:80px;padding-top:20px;background-color:#428bca;"  ng-class="{'active-circle': selected_circle=='ratified'}">
                                   {{ratifications}}</div>
@@ -81,7 +83,7 @@
                                 <div style=" width: 180px; height: 100px;">
                                     
                                   <div class="numberCircle" style="width:80px;height:80px;padding-top:20px;background-color:#d8534f;">
-                                  {{50-ratifications}}</div>
+                                  {{51-ratifications}}</div>
                                   <div style="padding-top:5px;color: #fff; font-size: 10px; text-transform: uppercase;font-weight:bold;">
                                   Countdown to entry into force </div>
 

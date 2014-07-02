@@ -35,7 +35,7 @@ define(['app',  'directives/angucomplete-extended'], function (app,angucomplete)
                  $scope.countriesforAutocomplete.push({name:$scope.countries[i].name.en});
             }
             //deduct EU count
-            $scope.ratifications--;
+            //$scope.ratifications--;
         });
 
         $scope.orderList = true;
