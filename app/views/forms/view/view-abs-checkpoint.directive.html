@@ -26,9 +26,11 @@
 			</div>
 			<div ng-show="document.jurisdiction">
 				<label>Area of Jurisdiction</label>
-				<ul class="km-value">
-					<li>{{document.jurisdiction|term}} </li>
-				</ul>
+				<div class="km-value">
+					<ul>
+						<li>{{document.jurisdiction|term}} </li>
+					</ul>
+				</div>
 			</div>
 			<div ng-show="document.jurisdictionName">
 				<label ng-show="isSubNational()">Name of the sub-national jurisdiction</label>
