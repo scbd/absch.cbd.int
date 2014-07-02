@@ -53,23 +53,25 @@
             <hr>
             <div class="row">
                 <div class="col-xs-8"> 
-                	<label>Title/reference number of the permit or its equivalent</label>
+                	<label>Title/reference number of the permit or its equivalent:</label>
                     <div class="text">{{document.title| lstring:locale}} TEST TEST test test TEST TEST test test</div>
                 </div>
                 <div class="col-xs-4">
-                    <label>ABS Clearing-House Unique Identifier</label>
-                    <div class="text">ABSCH-{{document.government.identifier |uppercase}}-{{documentInfo.documentID}}-{{documentInfo.revision}}</div>
+                    <label>Permanent online verification link:</label>
+                    <div class="text">http://absch.cbd.int/ircc/absch-{{document.government.identifier |uppercase}}-{{documentInfo.documentID}}-{{documentInfo.revision}}</div>
                 </div>
+               
             </div>
             <div class="row">
                 <div class="col-xs-8"> 
-                    <label>Additional national references or identifiers</label>
+                    <label>Additional national references or identifiers:</label>
                     <div class="text">{{document.nationalReferences | lstring:locale}} TEST TEST test test TEST TEST test test</div>
                 </div>
-                <div class="col-xs-4">
-                    <label>Permanent online verification link</label>
-                    <div class="text">http://absch.cbd.int/ircc/absch-{{document.government.identifier |uppercase}}-{{documentInfo.documentID}}-{{documentInfo.revision}}</div>
+                 <div class="col-xs-4">
+                    <label>ABS Clearing-House unique identifier:</label>
+                    <div class="text">ABSCH-{{document.government.identifier |uppercase}}-{{documentInfo.documentID}}-{{documentInfo.revision}}</div>
                 </div>
+                
             </div>
 
             <div class="row">
@@ -85,8 +87,111 @@
 
             <h3>Permit information</h3>
 
-            <h3>Issuing Authority</h3>
+             <div class="row">
+                <div class="col-xs-6"> 
+                    <label>Permit or equivalent issued by: </label>
+                    <div class="text">xxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x x</div>
+                </div>
+                <div class="col-xs-6">
+                    <label>Permit or equivalent valid from:</label>
+                    <div class="text">{{document.date | formatDate}}</div>
+                    <div class="text" ng-show="document.expiration"> to {{document.expiration | formatDate}}</div>
+                </div>
+            </div>
 
+
+            <div class="row">
+                <div class="col-xs-6"> 
+                    <label>Prior informed consent (PIC) obtained: </label>
+                    <div class="text"> <i class="fa fa-check-square"></i>  YES</div>
+                </div>
+                <div class="col-xs-6">
+                    <label>Mutually agreed terms (MAT) have been established: </label>
+                    <div class="text"> <i class="fa fa-check-square"></i>  YES </div>
+                </div>
+            </div>
+            <div class="row">      
+                <div class="col-xs-6">
+                    <label>Entity to whom PIC was granted: </label>
+                    <div class="text"> xxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x x</div>
+                </div>
+                <div class="col-xs-6"> 
+                    <label>Provider: </label>
+                    <div class="text">xxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x x</div>
+                </div>
+            </div>
+
+            <div class="row">      
+                <div class="col-xs-12">
+                    <label>Additional information about the PIC: </label>
+                    <div class="text">xxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x x
+
+
+                    <div>links to  PIC info</div>
+
+                    </div>
+
+
+                </div>
+                <div class="col-xs-12">
+                    <label>Additional information about the MAT: </label>
+                    <div class="text">xxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x x
+
+                    <div>links to  MAT info</div>
+
+                    </div>
+                </div>
+            </div>
+
+        <h3>Subject-matter</h3>
+
+            <div class="row">      
+                <div class="col-xs-12">
+                    <label>Subject-matter or genetic resources covered:</label>
+                    <div class="text">xxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x x
+
+                    <div>links to  Specmin data</div>
+                    <div>links to  taxomony data</div>
+                    <div>links to  geographic coordinates data</div>
+                    <div>keywords</div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">      
+                <div class="col-xs-12">
+                    <label>Geographic data:</label>
+                    <div class="text">
+                        MAP image
+                    </div>
+                </div>
+            </div>
+        
+           
+             <h3>Utiliztion</h3>
+
+             <div class="row">      
+                <div class="col-xs-12">
+                    <label>Specific uses covered by the permit or its equivalent or use restrictions:</label>
+                    <div class="text">
+                        <div>Utilization type:  xxxxx</div>
+
+                        <div>additional infromation</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">      
+                <div class="col-xs-12">
+                    <label>Conditions for third party transfer:</label>
+                    <div class="text">
+                        
+                    </div>
+                </div>
+            </div>
+
+            <h3
 
 
 
