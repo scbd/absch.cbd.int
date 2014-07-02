@@ -107,7 +107,7 @@
                             <span><a href="/database/record?documentID={{document.schema=='MEETING' ? document.id : document.identifier_s}}&documentSchema={{document.schema}}" target="_new" class="pull-right" style="padding:0px 3px;color:#999;"><i class="glyphicon glyphicon-new-window"></i>
                             </a>
                             </span>
-                            <span ng-show="document.canEdit" ><a href="/register/{{document.schemaForEdit}}/{{document.identifier_s}}/edit"><i class="fa fa-edit"></i>
+                            <span ng-show="document.canEdit" ><a href="/register/{{document.schemaForEdit}}/{{document.identifier_s}}/edit" target="_new_"><i class="fa fa-edit"></i>
                             </a>
                             </span>
                             <span class="pubDate pull-right">{{document.createdDateOn | formatDate}}</span>
