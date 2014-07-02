@@ -64,12 +64,10 @@
 
 				<div ng-show="document.providers || document.providerConfidential">
 					<label>The provider</label>										
-						<div class="row km-value" ng-show="!document.providerConfidential">	
-							  <div class="col-sm-12" ng-class="{'col-md-6' : document.providers.length>1, 'col-md-12' : document.providers.length<=1}" ng-repeat="provider in document.providers">
-								<div class="well" >
+						<div class="km-value" ng-show="!document.providerConfidential" ng-repeat="provider in document.providers">	
+
 									<div view-contact-reference ng-model="provider" locale="locale"></div>
-								</div>
-							</div>
+									
 						</div>						
 						<div ng-show="document.providerConfidential">
 							<div class="km-value km-pre confidential">Confidential information</div>
@@ -95,12 +93,10 @@
 
 				<div ng-show="document.informedConsents || document.informedConsentConfidential">
 					<label>Person or entity to whom prior informed consent was granted</label>
-						<div class="row km-value" ng-show="!document.informedConsentConfidential">	
-							<div class="col-sm-12" ng-class="{'col-md-6' : document.informedConsents.length>1, 'col-md-12' : document.informedConsents.length<=1}" ng-repeat="consent in document.informedConsents">
-								<div class="well" >
+						<div class="km-value" ng-repeat="consent in document.informedConsents" ng-show="!document.informedConsentConfidential">	
+							
 									<div view-contact-reference ng-model="consent" locale="locale"></div>
-								</div>
-							</div>
+								
 						</div>
 						<div ng-show="document.informedConsentConfidential">
 							<div class="km-value km-pre confidential">Confidential information</div>
@@ -139,16 +135,19 @@
 							<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 						</div>
 						<div class="leaflet" center="gisMapCenter" layers="gisMapLayers"></div>
+						<br />
+						<br />
 					</div>
 				</div>
 			</div>
-			<br />
-			<br />
+			
 			<div ng-show="document.keywords">
 				<label>Keywords to describe the subject-matter or genetic resource(s) covered by the permit or its equivalent</label>
-				<ul class="km-value">
-					<li ng-repeat="term in document.keywords">{{term|term}} </li>
-				</ul>
+				<div class="km-value">
+					<ul>
+						<li ng-repeat="term in document.keywords">{{term|term}} </li>
+					</ul>
+				</div>
 			</div>
 
 			<div ng-show="document.mutuallyAgreedTermsEstablished!=undefined">
@@ -170,9 +169,11 @@
 
 			<div ng-show="document.usage">
 				<label>Indicate if the permit or its equivalent covers commercial and/or non-commercial use</label>
-				<ul class="km-value">
-					<li ng-repeat="term in document.usage">{{term|term}}</li>
-				</ul>
+				<div class="km-value">
+					<ul>
+						<li ng-repeat="term in document.usage">{{term|term}}</li>
+					</ul>
+				</div>
 			</div>
 			<div ng-show="document.usageDescription">
 				<label>Additional information about the specified uses covered by the permit or its equivalent or use restrictions</label>
