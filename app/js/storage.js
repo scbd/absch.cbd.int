@@ -12,7 +12,8 @@ define(["app", "authentication"], function (app) {
 				attachmentUrl      : function() { return "/api/v2013/documents/:identifier/attachments/:filename"; },
 				securityUrl        : function() { return "/api/v2013/documents/:identifier/securities/:operation"; },
 				draftSecurityUrl   : function() { return "/api/v2013/documents/:identifier/versions/draft/securities/:operation"; },
-				draftLockUrl       : function() { return "/api/v2013/documents/:identifier/versions/draft/locks/:lockID"; }
+				draftLockUrl       : function() { return "/api/v2013/documents/:identifier/versions/draft/locks/:lockID"; },
+				documentVersionUrl : function() { return "/api/v2013/documents/:identifier/versions"; }
 			};
 
 			//==================================================
@@ -349,6 +350,36 @@ define(["app", "authentication"], function (app) {
 				"getMimeType": function(file)
 				{
 					return getMimeTypes(file.name, file.type || "application/octet-stream");
+				}
+			};
+
+			//==================================================
+			//
+			// Documents
+			//
+			//==================================================
+			this.documentVersions = {
+
+				//===========================
+				//
+				//===========================
+				"get" : function(identifier, params)
+				{
+					params            = clone(params||{});
+					params.identifier = identifier;
+
+					var useCache = !!params.cache;
+
+					if(!params.cache)
+						params.cache = true;
+
+
+					var oTrans = transformPath(serviceUrls.documentVersionUrl(), params);
+
+					return $http.get(oTrans.url, { params : oTrans.params, cache:useCache });
+
+					//TODO: return result.data;
+
 				}
 			};
 

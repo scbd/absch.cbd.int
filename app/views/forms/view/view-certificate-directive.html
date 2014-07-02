@@ -1,0 +1,24 @@
+<div class="panel panel-default">		
+	<div class="panel-heading" ng-show="display('header')">	
+			<h4 ><span class="record-title-national">ABSCH-CPC</span> 
+				
+			</h4> 
+	</div>
+	<div class="panel-body">
+		<div class="km-value">
+			<ul class="list">
+				<li ng-repeat="document in documents | orderBy:document.createdOn">
+					<a type="button" target="_blank"  ng-href="https://s3.amazonaws.com/absch.documents/ABSCH-{{government}}-{{document.documentID}}-{{document.revision}}.pdf">ABSCH-{{government|uppercase}}-{{document.documentID}}-{{document.revision}}</a>
+					 Updated by: {{document.createdBy.firstName}} {{document.createdBy.lastName}}
+					  on: {{document.createdOn |formatDateWithTime}}
+				</li>
+			</ul>
+		</div>
+		<div ng-hide="documents">
+			<div class="text-center"><h1 style="color:#fa6938"><i class="fa fa-spinner fa-spin"></i></h1></div>	
+		</div>
+		<span ng-show="error" >{{error}}</span>	
+	</div>
+</div>
+
+
