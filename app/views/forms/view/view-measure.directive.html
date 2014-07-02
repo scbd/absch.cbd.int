@@ -23,17 +23,9 @@
 
 		<div ng-show="document.jurisdiction">
 			<label>Jurisdiction</label>
-			<ul class="km-value">
-				<li>{{document.jurisdiction|term}}</li>
-			</ul>
-		</div>
-
-		<div ng-show="document.jurisdictionRegions">
-			<label>Country name and/or Geographical or political/economic group(s)</label>
-
-			<div class="km-value" >
-				<ul class="list">
-					<li ng-repeat="term in document.jurisdictionRegions">{{term|term}}</li>
+			<div class="km-value">
+				<ul>
+					<li>{{document.jurisdiction|term}}</li>
 				</ul>
 			</div>
 		</div>
@@ -43,11 +35,23 @@
 			<div class="km-value km-pre">{{document.jurisdictionName | lstring:review.local}}</div>
 		</div>
 
+		<div ng-show="document.jurisdictionRegions">
+			<label>Country name and/or Geographical or political/economic group(s)</label>
+			<div class="km-value" >
+				<ul>
+					<li ng-repeat="term in document.jurisdictionRegions">{{term|term}}</li>
+				</ul>
+			</div>
+		</div>
+
+	
 		<div ng-show="document.status">
 			<label>Current status of the measure</label>
-			<ul class="km-value">
-				<li>{{document.status|term}}</li>
-			</ul>
+			<div class="km-value">
+				<ul>
+					<li>{{document.status|term}}</li>
+				</ul>
+			</div>	
 		</div>
 
 		<div ng-show="document.adoption">
@@ -73,15 +77,17 @@
 
 		<div ng-show="document.type">
 			<label>Type of document / measure</label>
-			<ul class="km-value">
-				<li>{{document.type|term}}</li>
-			</ul>
+			<div class="km-value">
+				<ul>
+					<li>{{document.type|term}}</li>
+				</ul>
+			</div>
 		</div>
 
 		<div ng-show="registeredMeasures">
 			<label>Related measures</label>
 			<div class="km-value" >
-				<ul class="list">
+				<ul>
 					<li ng-repeat="item in registeredMeasures">
 						<div ng-hide="item.errorCode">
 							<b>{{item.document.title|lstring:locale}}</b>
@@ -101,7 +107,7 @@
 			<legend>Document details</legend>
 			<label>Document text</label>
 			<div class="km-value" >
-				<ul class="list">
+				<ul>
 					<li ng-repeat="item in document.documents">
 						<a target="_blank" ng-href="{{item.url}}">{{item.name||item.url}}</a>
 						<i ng-show="item.language">({{item.language|term}})</i>
@@ -114,7 +120,7 @@
 		<div ng-show="document.documentTranslations">
 			<label>Translation</label>
 			<div class="km-value" >
-				<ul class="list">
+				<ul>
 					<li ng-repeat="item in document.documentTranslations">
 						<a target="_blank" ng-href="{{item.url}}">{{item.name||item.url}}</a>
 						<i ng-show="item.language">({{item.language|term}})</i>
@@ -127,7 +133,7 @@
 		<div ng-show="linkedMeasures">
 			<label>Related measures</label>
 			<div class="km-value" >
-				<ul class="list">
+				<ul>
 					<li ng-repeat="item in linkedMeasures">
 						<div ng-hide="item.errorCode">
 							<b>{{item.document.title|lstring:locale}}</b>
@@ -151,7 +157,7 @@
 			<div ng-show="amendedMeasures">
 				<label>Amended regulations</label>
 				<div class="km-value" >
-					<ul class="list">
+					<ul>
 						<li ng-repeat="item in amendedMeasures">
 							<b>{{item.document.title|lstring:locale}}</b>
 							<div class="km-pre">{{item.document.summary|lstring:locale}}</div>
@@ -171,7 +177,7 @@
 		<div ng-show="document.absMeasures">
 			<label>Elements of the measure</label>
 				<div class="km-value" >
-					<ul class="list">
+					<ul>
 						<li ng-repeat="term in document.absMeasures">{{term|term:locale}} <i ng-show="term.section">({{term.section | lstring:locale}})</i>
 					</ul>
 				</div>	
@@ -187,7 +193,7 @@
 			<div ng-show="document.relevantDocuments">
 				<label>Other relevant website address or attached documents</label>
 				<div class="km-value" >
-					<ul class="list">
+					<ul>
 						<li ng-repeat="item in document.relevantDocuments">
 							<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
 							<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
