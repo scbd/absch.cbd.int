@@ -12,29 +12,10 @@ app.directive("viewCertificate", [function () {
 			government:  "=government"
 		},
 		link: function($scope) {
-			
-			if(!$scope.document)
-				$scope.init();
 		},
 		controller: ['$scope', 'IStorage', "$q","$route", 
 			function ($scope, storage, $q,$route) {
 			
-			//==================================
-			//
-			//==================================
-			$scope.init = function () {
-
-				if ($scope.document)
-					return;
-
-				// var documentID = $route.current.params.documentID;
-				// var documentSchema = $route.current.params.documentSchema;
-				
-				// if ((documentSchema == 'absPermit' || documentSchema == 'checkpoint') && documentID){
-				// 	$scope.load(documentID);
-				// }
-				
-			}
 
 			$scope.$watch('loadDocuments', function(value){
 				if(value && !$scope.documents){

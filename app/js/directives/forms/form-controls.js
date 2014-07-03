@@ -1816,9 +1816,11 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 
 			var qSaveDialog   = $element.find("#dialogSave");
 			var qCancelDialog = $element.find("#dialogCancel");
+			var qDuplicateDialog = $element.find("#dialogDuplicate");
 
 			$scope.saveDialogDefered = [];
 			$scope.cancelDialogDefered = [];
+			$scope.duplicateDialogDefered = [];
 
 			$scope.showSaveDialog = function(visible) {
 
@@ -1840,10 +1842,10 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 			}
 
 			$scope.showCancelDialog = function(visible) {
-        if($('form').filter('.dirty').length == 0) {
-					$scope.$emit("documentClosed");
-          return;
-        }
+		        if($('form').filter('.dirty').length == 0) {
+							$scope.$emit("documentClosed");
+		          return;
+		        }
 
 				var isVisible = qCancelDialog.css("display")!='none';
 
@@ -1858,7 +1860,24 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 
 				return defered.promise;
 			}
+			$scope.showDuplicateDialog = function(visible) {
 
+				var isVisible = qDuplicateDialog.css("display")!='none';
+
+				if(visible == isVisible)
+					return $q.when(isVisible);
+
+				if(visible)
+					$scope.updateSecurity();
+
+				var defered = $q.defer();
+
+				$scope.duplicateDialogDefered.push(defered)
+
+				qDuplicateDialog.modal(visible ? "show" : "hide");
+
+				return defered.promise;
+			}
 			qSaveDialog.on('shown.bs.modal' ,function() {
 
 				$timeout(function(){
@@ -1898,8 +1917,28 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 						promise.resolve(false);
 				});
 			});
+
+			qDuplicateDialog.on('shown.bs.modal' ,function() {
+				
+				$timeout(function(){
+
+					var promise = null;
+					while((promise=$scope.duplicateDialogDefered.pop()))
+						promise.resolve(true);
+				});
+			});
+
+			qDuplicateDialog.on('hidden.bs.modal' ,function() {
+
+				$timeout(function(){
+
+					var promise = null;
+					while((promise=$scope.duplicateDialogDefered.pop()))
+						promise.resolve(false);
+				});
+			});
 		},
-		controller: ["$scope", "IStorage", "editFormUtility", function ($scope, storage, editFormUtility) 
+		controller: ["$scope", "IStorage", "editFormUtility","guid", function ($scope, storage, editFormUtility,guid) 
 		{
 			//====================
 			//
@@ -2069,6 +2108,38 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 				});
 			};
 
+			//====================
+			//
+			//====================
+			$scope.duplicate = function()
+			{
+				$scope.loading = true;
+
+				return $q.when($scope.getDocumentFn()).then(function(document)
+				{
+					if(!document)
+						throw "Invalid document";
+					
+					document.header.identifier = guid();
+				
+					return editFormUtility.saveDraft(document);
+
+				}).then(function(draftInfo) {
+
+					$scope.$emit("documentDraftSaved", draftInfo)
+					return draftInfo;
+
+				}).catch(function(error){
+					
+					$scope.$emit("documentError", { action: "saveDraft", error: error })
+
+				}).finally(function(){
+
+					return $scope.closeDialog();
+
+				});
+			};
+
 			saveAuthorityInContacts = function(draftInfo){
 				
 				var document = $scope.getDocumentFn();
@@ -2173,7 +2244,7 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 			//====================
 			$scope.closeDialog = function() 
 			{
-				return $q.all([$scope.showSaveDialog(false), $scope.showCancelDialog(false)]).finally(function(){
+				return $q.all([$scope.showSaveDialog(false), $scope.showCancelDialog(false), $scope.showDuplicateDialog(false)]).finally(function(){
 					$scope.loading = false;
 				});
 			};

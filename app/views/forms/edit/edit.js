@@ -321,6 +321,9 @@ define([
         $('#dialogSave').on('shown.bs.modal', function() {
           consideringClosing = true;
         });
+        $('#dialogDuplicate').on('shown.bs.modal', function() {
+          consideringClosing = true;
+        });
       }, 2000);
     });
     $rootScope.$on('$includeContentLoaded', function(event) {
