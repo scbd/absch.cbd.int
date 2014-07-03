@@ -10,7 +10,11 @@
 				<li ng-repeat="document in documents | orderBy:document.createdOn">
 					<a type="button" target="_blank"  ng-href="https://s3.amazonaws.com/absch.documents/ABSCH-{{government}}-{{document.documentID}}-{{document.revision}}.pdf">ABSCH-{{government|uppercase}}-{{document.documentID}}-{{document.revision}}</a>
 					 Updated by: {{document.createdBy.firstName}} {{document.createdBy.lastName}}
-					  on: {{document.createdOn |formatDateWithTime}}
+					  on: {{document.createdOn |formatDateWithTime}} 
+					  <span ng-show="document.body.amendmentsDescription">
+						  <span ng-show="!more"> {{document.body.amendmentsDescription | limitTo:50}} ...
+						  <a ng-href="#" ng-click="more=!more"> more</a></span><span ng-show="more"> {{document.body.amendmentsDescription}} <a ng-href="#" ng-click="more=!more"> less</a></span>
+					  </span>
 				</li>
 			</ul>
 		</div>

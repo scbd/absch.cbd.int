@@ -45,6 +45,7 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
     //==================================
     $scope.$on("loadDocument", function(evt, info) {
 
+console.log(info);
       if(info.schema!="absPermit")
         return;
       
@@ -135,7 +136,6 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
     //
     //==================================
     $scope.editContact = function(property) {
-
       $scope.editedProperty = property;
       $scope.editedContact  = clone($scope.document[property] || { source : guid(),  type: "organization" });
     };

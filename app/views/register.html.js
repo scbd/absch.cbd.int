@@ -285,6 +285,7 @@ define(['app',
 
     //So this is like a request for info... I don't like the idea of using JS as an message driven language. KISS
     $scope.$on("getDocumentInfo", function(evt, info) {
+     
       if($scope.lastSchema)
         $scope.$broadcast("loadDocument", {
           schema : $scope.lastSchema,

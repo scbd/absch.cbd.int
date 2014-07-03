@@ -61,7 +61,7 @@
                                     <span class="sr-only">45% Complete</span>
                                   </div>
                             </div>
-                            <div class="col-xs-12" style="white-space:nowrap;text-overflow:ellipsis;max-width:140%" ng-repeat="item in (terms | filter: filterCountries | orderBy:'title.en')">
+                            <div class="col-xs-12" style="white-space:nowrap;text-overflow:ellipsis;max-width:200%;width:140%" ng-repeat="item in (terms | filter: filterCountries | orderBy:'title.en')">
                                 <div class="checkbox" style="margin-top:2px;margin-bottom:2px">                                   
                                         <label class="label label-party" ng-class="{'label-info':item.isSignatory && !item.isRatified, 'label-primary':item.isRatified, 'label-default':!item.isRatified && !item.isSignatory}">{{item.title.en}} ({{item.count}})
                                             <input type="checkbox" ng-model="item.selected" ng-change="refresh()">

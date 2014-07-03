@@ -294,6 +294,8 @@ define([
         $scope.tab    = "edit";
         $scope.status = "ready";
         $scope.document = doc;
+        
+        $scope.$emit("loadDocument", {identifier:doc.header.identifier,schema:doc.header.schema});
 
       }).catch(function(err) {
 

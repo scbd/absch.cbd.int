@@ -43,10 +43,9 @@
                     <div class="row" ng-show="documentExists">
                         <div class="col-xs-12">
                              <div class="km-control-group" name="amendmentIntent" required caption="Please indicate what the intent of the modification is">
-                                <input type="radio" name="amendmentIntent" ng-model="document.amendmentIntent" ng-value="0">Information is being submitted to modify a previously issued internationally recognized certificate of compliance (a new certificate will be constituted and the old one will still be valid)</br>
-                                <input type="radio" name="amendmentIntent" ng-model="document.amendmentIntent" ng-value="1">Information is being submitted to replace a previously issued internationally recognized certificate of compliance (a new certificate will be constituted and the old one will no longer be valid)</br>                       
-                                <input type="radio" name="amendmentIntent" ng-model="document.amendmentIntent" ng-value="2">
-                                An existing permit or its equivalent is being revoked and the constituted internationally recognized certificate of compliance will no longer be valid.  
+                                <input type="radio" name="amendmentIntent" ng-model="document.amendmentIntent" ng-value="0"> Information is being submitted to modify a previously issued internationally recognized certificate of compliance (a new certificate will be constituted and the old one will still be valid)</br>
+                                <input type="radio" name="amendmentIntent" ng-model="document.amendmentIntent" ng-value="1"> Information is being submitted to replace a previously issued internationally recognized certificate of compliance (a new certificate will be constituted and the old one will no longer be valid)</br>                       
+                                <input type="radio" name="amendmentIntent" ng-model="document.amendmentIntent" ng-value="2"> An existing permit or its equivalent is being revoked and the constituted internationally recognized certificate of compliance will no longer be valid.  
                             </div>                          
                         </div>
                     </div>
@@ -75,7 +74,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="km-control-group" name="authority" required caption="Competent national authority responsible for issuing the permit or its equivalent">
-                                <div km-reference name="authority" ng-model="document.authority" loader="loadRecords(identifier, 'authority')">
+                                <div km-reference name="authority" ng-model="document.authority" loader="loadRecords(identifier, 'absPermit')">
                                     <div>
                                         <div>
                                             <strong>{{reference.title | lstring}}</strong>
