@@ -11,7 +11,9 @@
 		margin-top:6px;
 		text-transform: uppercase;
 	}
-	
+	.panel-group > .panel{
+		background-color: transparent;
+	}
 	.panel > a {
 		text-decoration: none;
 	}
