@@ -4,10 +4,14 @@
 
 	<div class="panel-heading"> <h4><span class="record-title-national">ABSCH-IRCC</span> Permit or its equivalent constituting an internationally recognized certificate of compliance</h4> </div>
 	<div class="record-body panel-body">
-			<a type="button" ng-show="showPdf" target="_blank" class="btn btn-info pull-right" ng-href="https://s3.amazonaws.com/absch.documents/ABSCH-{{document.government.identifier}}-{{document.info.documentID}}-{{document.info.revision}}.pdf">Download the Compliance Certificate</a>
-			<a class="btn" ng-click="showOld=!showOld">View Certificate History</a>
-			<br/>
-			<div ng-show="showOld" view-certificate document-id="document.header.identifier" load-documents="showOld" government="document.government.identifier"></div>
+			
+			<!-- <a type="button" ng-show="showPdf" target="_blank" class="btn btn-info pull-right" ng-href="https://s3.amazonaws.com/absch.documents/ABSCH-{{document.government.identifier}}-{{document.info.documentID}}-{{document.info.revision}}.pdf">Download the Compliance Certificate</a> -->
+			
+
+			<label>Download the Compliance Certificate</label>
+			<div class="km-value">
+				<div view-certificate document-id="document.header.identifier" load-documents="true" government="document.government.identifier"></div>
+			</div>
 			
 			<div ng-show="document.title">
 			 	<label>Title</label>
@@ -15,8 +19,6 @@
 			 	<strong>{{document.title | lstring:locale}}</strong>
 			 	</div>
 		 	</div> 
-
-
 
 			<div ng-show="document.government || document.updateReasons">
 				<legend>General information</legend>

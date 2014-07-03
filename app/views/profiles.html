@@ -16,27 +16,27 @@
       		<div class="container ng-scope">
 
   	<div class="row top" style="padding-bottom:30px;">
-  		<div style="position:absolute; top:100px; margin:auto; width:100%">
-			<img ng-hide="code=='EUR'" src="/app/libs/mapsicon/all/{{code.toLowerCase()}}/1024.png" style="opacity:0.15">
-			<img ng-show="code=='EUR'" src="/app/img/EUMap.svg" style="opacity:0.15;padding-top:100px;padding-left:100px;">
+  		<div style="position:absolute; top:150px;  margin:auto; width:100%">
+			 <img ng-hide="code=='EUR'" src="/app/libs/mapsicon/all/{{code.toLowerCase()}}/1024.png" style="opacity:0.15; z-index:-9999;"> 
+			<!-- <img ng-show="code=='EUR'" src="/app/img/EUMap.svg" style="opacity:0.15;padding-top:100px;padding-left:100px;"> -->
 		</div>
 
-  		<div class="col-lg-7 col-md-6 col-sm-5">
+  		<div class="col-xs-6">
 			<span class="country-name">{{country.name.en}}</span>
 			
 		</div>
-		<div class="col-lg-3 col-md-4 col-sm-5">
+		<div class="col-xs-3" >
 
-			<h3 style="padding:0;margin: 0 0 0 80px;white-space:nowrap;color:#1FA65D;">Nagoya Protocol on ABS</h3>
-			<dl class="dl-horizontal">
-				<dt>Signature</dt><dd>{{country.treaties.XXVII8b.signature}}</dd>
-				<dt>Instrument</dt><dd>{{country.treaties.XXVII8b.instrument}}</dd>
-				<dt>Deposit</dt></dt><dd>{{country.treaties.XXVII8b.deposit}}</dd>
+			<h3 style="padding:0 0 15px 0; margin: 0 0 0 80px;white-space:nowrap;color:#1FA65D;">Nagoya Protocol on ABS</h3>
+			<dl class="dl-horizontal" style="text-align:right;">
+				<dt>Signature</dt><dd>{{ country.treaties.XXVII8b.signature ? country.treaties.XXVII8b.signature  : '- - - - - -'}}</dd>
+				<dt>Instrument</dt><dd>{{country.treaties.XXVII8b.instrument ? country.treaties.XXVII8b.instrument : '- - - - - -'}}</dd>
+				<dt>Deposit</dt></dt><dd>{{country.treaties.XXVII8b.deposit ? country.treaties.XXVII8b.deposit  : '- - - - - -'}}</dd>
 				
 			</dl>
 		</div>
 
-		<div class="col-lg-2 col-md-2 col-sm-2 text-right ">
+		<div class="col-xs-3  text-right" >
            <div style="height:100px;" class="flag-icon-background flag-icon-{{code.toLowerCase()}}"></div>
           
 		</div> 
