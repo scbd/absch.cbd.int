@@ -77,7 +77,7 @@
               <div class="col-sm-12">
                 <div class="km-control-group" name="government" required caption="Country">
                   
-                  <div km-select required name="government" ng-disabled="userGovernment()" ng-model="document.government" items="options.countries()" placeholder="Please select a country..."></div>
+                  <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="ac_countries" filter="countriesFilter" mapping="countryMapping" selectbox="true" placeholder="Please select a country..."></div>
                 </div>
               </div>
             </div>
@@ -208,6 +208,7 @@
                 <div class="help-block">Please indicate if there is any relationship between this document / measure and other law, regulation, guidelines, administrative or policy measures. For example, if  the measure being submitted is implementing an existing law. This information will assist in displaying information on the national legal framework.</div>
                   <div km-reference multiple name="linkedMeasures" ng-model="document.linkedMeasures" loader="loadRecords(identifier, 'measure')">
                     <div>
+                      <span>{{reference.title.en}}<span>
                       <div><strong>{{reference.title | lstring}}</strong></div>
                       <div>{{reference.summary | lstring}}</div>
                     </div>

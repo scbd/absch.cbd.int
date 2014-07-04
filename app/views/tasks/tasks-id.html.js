@@ -12,7 +12,7 @@
 	'../forms/view/view-organization-reference.directive.js',
 	'../forms/view/view-resource.directive.js',
 	'../forms/view/record-loader.directive.html.js',
-	'/app/js/directives/forms/form-controls.js'], function (app) {
+], function (app) {
 
 app.controller("TaskIdController", [ "$scope", "$timeout", "authHttp", "$route", "IStorage", "IWorkflows", "authentication", "underscore", function ($scope, $timeout, $http, $route, IStorage, IWorkflows, authentication, _) 
 {
