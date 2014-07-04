@@ -15,6 +15,7 @@ app.directive("registerRecordList", ["$timeout", "commonjs", function ($timeout,
 		link : function ($scope, $element) {
 
 			var deleteRecordModel = $element.find("#deleteRecordModel");
+			var duplicateRecordModel = $element.find("#duplicateRecordModel");
 
 			$element.find("[data-toggle='tooltip']").tooltip({trigger:'hover'});
 
@@ -26,13 +27,26 @@ app.directive("registerRecordList", ["$timeout", "commonjs", function ($timeout,
 				if(!val &&  deleteRecordModel.is(":visible")) { console.log("hide"); deleteRecordModel.modal("hide"); }
 			});
 
+			$scope.$watch("recordToDuplicate", function(val){
+
+
+				if( val && !duplicateRecordModel.is(":visible")) { duplicateRecordModel.modal("show"); }
+				if(!val &&  duplicateRecordModel.is(":visible")) { duplicateRecordModel.modal("hide"); }
+			});
+
 			deleteRecordModel.on("hidden.bs.modal", function(){
 				$timeout(function() {
 					$scope.recordToDelete = null; //clear on backdrop click
 				});
 			});
+
+			duplicateRecordModel.on("hidden.bs.modal", function(){
+				$timeout(function() {
+					$scope.recordToDuplicate = null; //clear on backdrop click
+				});
+			});
 		},
-		controller : ["$scope", "$q", "IStorage","$http", function ($scope, $q, storage, $http) {
+		controller : ["$scope", "$q", "IStorage","$http", "guid", "editFormUtility", "$timeout", function ($scope, $q, storage, $http, guid, editFormUtility, $timeout) {
 
 			//============================================================
 			//
@@ -166,15 +180,15 @@ app.directive("registerRecordList", ["$timeout", "commonjs", function ($timeout,
 				if(item.data)
 					return;
     
-        item.data = {'schema':item.type, 'url_ss': '', 'data': []};
-        $http.get("/api/v2013/documents/"+item.identifier).then(function (result) {  
-            item.data = result.data;
-           
-            $http.get("/api/v2013/documents/"+item.identifier + "?info").then(function (result) {  
-                item.data.info = result.data;
-            });
+		        item.data = {'schema':item.type, 'url_ss': '', 'data': []};
+		        $http.get("/api/v2013/documents/"+item.identifier).then(function (result) {  
+		            item.data = result.data;
+		           
+		            $http.get("/api/v2013/documents/"+item.identifier + "?info").then(function (result) {  
+		                item.data.info = result.data;
+		            });
 
-        });				
+		        });				
 				//href="/database/record?documentID={{record.documentID}}" 
 			}
 
@@ -188,6 +202,73 @@ app.directive("registerRecordList", ["$timeout", "commonjs", function ($timeout,
 						commonjs.isUserInRole('Administrator') ||
 						$scope.schema == 'resource';
 
+			}
+			
+			//============================================================
+			//
+			//
+			//============================================================
+			$scope.askDuplicate = function(record) {
+
+				$scope.recordToDuplicate = record;
+				
+			};
+
+			$scope.duplicate = function(entity)
+			{
+				 $scope.loading = true;
+				var document;
+				console.log(entity);
+				if($scope.isDraft(entity) || $scope.isRequest(entity)){
+					document = storage.drafts.get(entity.identifier)
+				}
+				else if($scope.isPublished(entity)){
+					document = storage.documents.get(entity.identifier	);
+				}
+
+				return $q.when(document).then(function(document)
+				{
+					console.log(document);
+					if(!document.data)
+						throw "Invalid document";
+					
+					document = document.data;
+
+					document.header.identifier = guid();
+				
+					return editFormUtility.saveDraft(document);
+
+				}).then(function(draftInfo) {
+
+					//$emit("documentDraftSaved", draftInfo)
+					$scope.records.push(draftInfo);
+					$timeout(function(){
+						shake("#record0");//.effect( "shake" );
+					},500)
+					
+					
+					return draftInfo;
+
+				}).catch(function(error){
+					
+					$scope.$emit("documentError", { action: "saveDraft", error: error })
+
+				}).finally(function(){
+ 					$scope.loading = false;	
+ 					$scope.recordToDuplicate = null;
+				});
+			};
+
+			function shake(div){
+				var interval=100,distance=20,times=10
+			    $(div).css('position','relative');
+			    for(var iter=0;iter<(times+1);iter++){
+			        $(div).animate({ left: ((iter%2==0 ? distance : distance*-1))}, interval);
+			    }//for
+			    $(div).animate({ left: 0},interval, function(){
+			    	$(div).css('position','inherit');	
+			    });
+			    //
 			}
 		}]
 	};
