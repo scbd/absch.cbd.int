@@ -30,6 +30,7 @@ define(["app"], function (app) {
 	// 
 	//
 	//============================================================
+  /*
 	function lstring(ltext, locale)
 	{
 		if(!ltext)
@@ -57,6 +58,7 @@ define(["app"], function (app) {
 		return sText||"";
 
 	}
+  */
 	//============================================================
 	//
 	// 
@@ -121,9 +123,11 @@ define(["app"], function (app) {
 	//
 	//============================================================
   //TODO: this is now duplicated in form-controls. It should be put somewhere else central I think
+  /*
 	app.filter("lstring", function() {
 		return lstring;
 	});
+  */
 
 	//============================================================
 	//

@@ -11,8 +11,8 @@
 	'../forms/view/view-organization.directive.js',
 	'../forms/view/view-organization-reference.directive.js',
 	'../forms/view/view-resource.directive.js',
-	'../forms/view/record-loader.directive.html.js',
-	'/app/js/directives/forms/form-controls.js'], function (app) {
+	'../forms/view/record-loader.directive.html.js'
+], function (app) {
 
 app.controller("TaskIdActivityController", [ "$scope", "$timeout", "authHttp", "$route", "$location", "IStorage", "IWorkflows", "authentication", "underscore", function ($scope, $timeout, $http, $route, $location, IStorage, IWorkflows, authentication, _) 
 {

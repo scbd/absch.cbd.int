@@ -4,7 +4,6 @@ define([
     '/app/views/forms/edit/editFormUtility.js',
     '/app/views/forms/edit/field-embed-contact.directive.js',
     '/app/views/forms/edit/edit-contact-base.directive.js',
-    '/app/js/directives/forms/form-controls.js',
     '/app/views/forms/view/view-contact-reference.directive.js',
     '/app/views/forms/view/view-organization-reference.directive.js',
     '/app/views/forms/view/record-loader.directive.html.js',
@@ -288,7 +287,11 @@ define([
         if(excludeGovernment)
           delete qDocument['government'];
       }
-
+      /*
+      console.log('doc, ', qDocument);
+      console.log('languages: ', qDocument.header.languages);
+      console.log('id, ', qDocument.header.identifier);
+      */
 
       $q.when(qDocument).then(function(doc) {
         console.log('the doc: ', doc);

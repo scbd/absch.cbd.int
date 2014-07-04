@@ -40,6 +40,28 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
                      { model:"translationType", title:"Translation Type", required:true, options: $http.get("/api/v2013/thesaurus/domains/19E3C535-2919-4804-966C-E62728507291/terms", { cache: true }).then(function(o){ return $scope.options.documentTranslationsExt[1].options = $filter("orderBy")(o.data, "name"); }) },]
     };
 
+    $scope.ac_countries = function() {
+      return $scope.options.countries().then(function(countries) {
+        _.each(countries, function(element) {
+          element.__value = element.name;
+        });
+        return countries;
+      });
+    };
+
+    $scope.countriesFilter = function($query, items) {
+      var matchedOptions = [];
+      for(var i=0; i!=items.length; ++i)
+        if(items[i].__value.toLowerCase().indexOf($query.toLowerCase()) !== -1)
+          matchedOptions.push(items[i]);
+
+      return matchedOptions;
+    };
+
+    $scope.countryMapping = function(item) {
+      return {identifier: item.identifier};
+    };
+
     //==================================
     //
     //==================================
