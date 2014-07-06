@@ -48,8 +48,24 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
         return countries;
       });
     };
+    $scope.ac_statuses = function() {
+      return $scope.options.status().then(function(statuses) {
+        _.each(statuses, function(element) {
+          element.__value = element.name;
+        });
+        return statuses;
+      });
+    };
+    $scope.ac_jurisdictions = function() {
+      return $scope.options.jurisdiction().then(function(jurisdictions) {
+        _.each(jurisdictions, function(element) {
+          element.__value = element.name;
+        });
+        return jurisdictions;
+      });
+    };
 
-    $scope.countriesFilter = function($query, items) {
+    $scope.genericFilter = function($query, items) {
       var matchedOptions = [];
       for(var i=0; i!=items.length; ++i)
         if(items[i].__value.toLowerCase().indexOf($query.toLowerCase()) !== -1)
@@ -58,7 +74,7 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
       return matchedOptions;
     };
 
-    $scope.countryMapping = function(item) {
+    $scope.genericMapping = function(item) {
       return {identifier: item.identifier};
     };
 

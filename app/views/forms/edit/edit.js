@@ -270,7 +270,8 @@ define([
     }
 
     $scope.setDocument = function(additionalParams, excludeGovernment) {
-      var qDocument;
+      var qDocument = {};
+      $scope.document = {};
       if($routeParams.identifier)
         qDocument = editFormUtility.load($routeParams.identifier, $routeParams.document_type);
       else {
