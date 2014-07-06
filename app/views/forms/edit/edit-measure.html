@@ -77,7 +77,7 @@
               <div class="col-sm-12">
                 <div class="km-control-group" name="government" required caption="Country">
                   
-                  <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="ac_countries" filter="countriesFilter" mapping="countryMapping" selectbox="true" placeholder="Please select a country..."></div>
+                  <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="ac_countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
                 </div>
               </div>
             </div>
@@ -94,7 +94,7 @@
             <div class="row">
               <div class="col-sm-4">
                 <div required class="km-control-group" name="status" caption="Legal status of the measure">
-                  <div km-select name="status" ng-model="document.status" items="options.status()" layout="flat" ></div>
+                  <div afc-autocomplete required name="status"  ng-model="document.status" source="ac_statuses" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Status..."></div>
                 </div>
               </div>
 
@@ -151,7 +151,7 @@
               
               <div class="col-sm-4">
                 <div class="km-control-group" required name="jurisdiction" caption="Area of jurisdiction">
-                  <div km-select required name="jurisdiction" ng-model="document.jurisdiction" items="options.jurisdiction()"></div>
+                  <div afc-autocomplete required name="jurisdiction"  ng-model="document.jurisdiction" source="ac_jurisdictions" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Status..."></div>
                 </div>
               </div>
 
