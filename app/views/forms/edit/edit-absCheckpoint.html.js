@@ -16,6 +16,15 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
       },
     });
 
+    $scope.ac_jurisdictions = function() {
+      return $scope.options.jurisdictions().then(function(jurisdictions) {
+        _.each(jurisdictions, function(element) {
+          element.__value = element.name;
+        });
+        return jurisdictions;
+      });
+    };
+
     //==================================
     //
     //==================================
