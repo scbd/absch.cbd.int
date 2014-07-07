@@ -22,6 +22,39 @@ define([
     $scope.tab      = "edit";
     $scope.review   = { locale: "en" };
 
+
+    $scope.options  = {
+      countries		: function() {
+        return $http.get("/api/v2013/thesaurus/domains/countries/terms", { cache: true }).then(function(o){
+          return $filter("orderBy")(o.data, "name");
+        });
+      },
+      libraries		: function() {
+        return $http.get("/api/v2013/thesaurus/domains/cbdClearingHouses/terms", { cache: true }).then(function(o){
+          return o.data;
+        });
+      },
+      regions			: function() {
+        return $q.all([
+          $http.get("/api/v2013/thesaurus/domains/regions/terms", { cache: true }), 
+          $http.get("/api/v2013/thesaurus/domains/countries/terms",   { cache: true })
+        ]).then(function(o) {
+          return Enumerable.from($filter("orderBy")(o[0].data, "name")).union(
+            Enumerable.from($filter("orderBy")(o[1].data, "name"))
+          ).toArray();
+        });
+      },
+    };
+
+    $scope.ac_countries = function() {
+      return $scope.options.countries().then(function(countries) {
+        _.each(countries, function(element) {
+          element.__value = element.name;
+        });
+        return countries;
+      });
+    };
+
     //==================================
     //
     //==================================
