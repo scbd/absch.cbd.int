@@ -40,7 +40,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="km-control-group" name="government" required caption="Country">
-                                <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="ac_countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
+                                <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
                             </div>
                         </div>
                     </div>
@@ -88,7 +88,7 @@
 
                         <div class="col-xs-6">
                             <div class="km-control-group" name="country" required caption="Country">
-                                <div afc-autocomplete name="country" ng-model="document.country" source="ac_countries" filter="genericFilter" mapping="genericMapping" selectbox="true" required></div>
+                                <div afc-autocomplete name="country" ng-model="document.country" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" required></div>
                             </div>
                         </div>
                     </div>
@@ -172,7 +172,7 @@
 
                         <div class="col-xs-6">
                             <div class="km-control-group" name="absJurisdiction" caption="Area of jurisdiction for granting access to genetic resources" required></div>
-                            <div afc-autocomplete name="absJurisdiction" ng-model="document.absJurisdiction" source="ac_jurisdictions" filter="genericFilter" mapping="genericMapping" selectbox="true" required></div>
+                            <div afc-autocomplete name="absJurisdiction" ng-model="document.absJurisdiction" source="options.jurisdictions" filter="genericFilter" mapping="genericMapping" selectbox="true" required></div>
                         </div>
                         <div class="col-xs-6">
                             <div ng-show="document.absJurisdiction.identifier=='DEBB019D-8647-40EC-8AE5-10CA88572F6E' ||document.absJurisdiction.identifier=='DEEEDB35-A34B-4755-BF77-D713017195E3' ||document.absJurisdiction.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">

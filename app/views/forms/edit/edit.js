@@ -26,7 +26,11 @@ define([
     $scope.options  = {
       countries		: function() {
         return $http.get("/api/v2013/thesaurus/domains/countries/terms", { cache: true }).then(function(o){
-          return $filter("orderBy")(o.data, "name");
+          var countries = $filter("orderBy")(o.data, "name");
+          _.each(countries, function(element) {
+            element.__value = element.name;
+          });
+          return countries;
         });
       },
       libraries		: function() {
@@ -47,12 +51,7 @@ define([
     };
 
     $scope.ac_countries = function() {
-      return $scope.options.countries().then(function(countries) {
-        _.each(countries, function(element) {
-          element.__value = element.name;
-        });
-        return countries;
-      });
+      return $scope.options.countries();
     };
 
     $scope.genericFilter = function($query, items) {

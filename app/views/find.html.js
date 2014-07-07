@@ -1,6 +1,5 @@
 define(['app',
     'introjs',
-    '../js/directives/forms/form-controls.js',
     '../views/forms/view/record-loader.directive.html.js',
     '../views/find_schemas.partial.html.js',
     '../views/find_countries.partial.html.js',

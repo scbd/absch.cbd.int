@@ -19,9 +19,14 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
             $http.get("/api/v2013/thesaurus/domains/D7BD5BDE-A6B9-4261-B788-16839CCC4F7E/terms", { cache: true }), 
             $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })
           ]).then(function(o) {
-            var data = o[0].data;
-            data.push(o[1].data)
-            return  data;
+            var jurisdictions = o[0].data;
+            jurisdictions.push(o[1].data);
+
+            _.each(jurisdictions, function(element) {
+              element.__value = element.name;
+            });
+
+            return jurisdictions;
           });
 				},
 				absJurisdictions			: function () {
@@ -74,12 +79,6 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 			};
 
       $scope.ac_jurisdictions = function() {
-        return $scope.options.jurisdictions().then(function(jurisdictions) {
-          _.each(jurisdictions, function(element) {
-            element.__value = element.name;
-          });
-          return jurisdictions;
-        });
       };
 
 			//==================================
