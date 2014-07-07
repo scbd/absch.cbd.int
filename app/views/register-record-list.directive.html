@@ -7,7 +7,7 @@
 <link href="/app/css/record.css" rel="stylesheet">
 
   <div class="row">
-      <div class="col-xs-10" >
+      <div class="col-xs-10" id="filter_buttons">
         <span ng-click="statusFilter=null" class="btn btn-info"> 
         <i ng-hide="statusFilter" class="glyphicon glyphicon-ok"></i> All <span class="badge badge-default">
         {{(records | filter:schemaFilter).length}}</span></span>
@@ -21,7 +21,7 @@
       </div>
       <div class="col-xs-2 pull-right" ng-show="showAddButton()">
         <span style="font-size: 16px; color: white;margin:0;padding:0;float:right;">
-          <a href="/register/{{schema}}/new" class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span> Add New</a></span>
+          <a href="/register/{{schema}}/new" class="btn btn-primary" id="new_button"><span class="glyphicon glyphicon-plus-sign"></span> Add New</a></span>
       </div>
   </div>
 
@@ -90,7 +90,7 @@
               &nbsp;
           </div> <!-- end col glyphicon glyphicon-lock -->
           <div class="col-xs-3 pull-right" style="text-align:right;">
-             <div class="btn-group">
+             <div class="btn-group document_buttons">
                 <button title="Duplicate" type="button" class="btn btn-default" ng-click="askDuplicate(record)"><i class="fa fa-files-o"></i></button>
                 <button title="Locked for edit" ng-show="isRequest(record)" type="button" class="btn btn-default"><i class="glyphicon glyphicon-lock"></i></button>
                 <a title="Edit" ng-show="!isRequest(record)" type="button" class="btn btn-default" href="/register/{{record.type}}/{{record.identifier}}/edit"><i class="fa fa-edit"></i></a>

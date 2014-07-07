@@ -1,5 +1,11 @@
-<div ng-controller="TypeDocumentListController">
+<div ng-controller="TypeDocumentListController" ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart="false">
   <div class="col-xs-9" style="padding-top:20px;">
+    <div>
+      <a class="pull-left" href="" ng-click="startIntro()">
+        Where do I get started
+        <span class="fa fa-question-circle "></span>
+      </a>
+    </div>
 
     <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
 

@@ -25,6 +25,25 @@ define(['app',
 
     $scope.type = $rootScope.document_types[$routeParams.document_type];
 
+    //intro.js configurations
+    $scope.introOptions = {
+      steps: [
+        {
+          element: '#filter_buttons',
+          intro: 'Use these buttons to filter by the status of the document, and you may type in a keyword to quickly narrow down the list',
+        },
+        {
+          element: '#new_button',
+          intro: 'Create a new ' + $routeParams.document_type + ' document by clicking here.',
+        },
+        {
+          element: '.document_buttons',
+          intro: 'duplicate, edit, and delete documents using these buttons.',
+          position: 'left',
+        },
+      ],
+    };
+
     $scope.dashboardFilter = "All";
 
     $scope.setDashFilter = function(filter){

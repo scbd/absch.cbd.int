@@ -1,6 +1,12 @@
-<div ng-controller="DashboardController">
+<div ng-controller="DashboardController" ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart="false">
   <div class="col-xs-9" style="padding-top:20px;">
 
+    <div>
+      <a class="pull-left" href="" ng-click="startIntro()">
+        Where do I get started
+        <span class="fa fa-question-circle "></span>
+      </a>
+    </div>
     <div>
       <a class="pull-right" ng-show="!help" ng-click="help=!help;" style="cursor:pointer;padding:5px;">
         <i class="glyphicon glyphicon-question-sign"></i> show help
@@ -45,7 +51,7 @@
           <i class="glyphicon glyphicon-off"></i> SIGN IN
         </a>
       </div>
-      <div class="row">  
+      <div class="row" id="dashboard_panels">  
 
            <div class="col-lg-4">
             <div class="panel panel-danger">
