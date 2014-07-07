@@ -3,51 +3,74 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
   app.controller("editMeasure", ["$scope", "authHttp", "$filter", "$q", "Enumerable", "$controller", function ($scope, $http, $filter, $q, Enumerable, $controller) {
     $controller('editController', {$scope: $scope});
 
-    $scope.options  = {
-      countries		: function() { return $http.get("/api/v2013/thesaurus/domains/countries/terms",								{ cache: true }).then(function(o){ return $filter("orderBy")(o.data, "name"); }); },
-      regions			: function() { return $http.get("/api/v2013/thesaurus/domains/regions/terms",								{ cache: true }).then(function(o){ return $filter("orderBy")(o.data, "name"); }); },
-      libraries		: function() { return $http.get("/api/v2013/thesaurus/domains/cbdClearingHouses/terms",						{ cache: true }).then(function(o){ return o.data; }); },
-      languages		: function() { return $http.get("/api/v2013/thesaurus/domains/52AFC0EE-7A02-4EFA-9277-8B6C327CE21F/terms",	{ cache: true }).then(function(o){ return $filter("orderBy")(o.data, "name"); }); },
-     
-	absMeasures		: function() { return $q.all([$http.get("/api/v2013/thesaurus/domains/50616B56-12F3-4C46-BC43-2DFC26679177/terms", { cache: true }), 
-												   $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })]).then(function(o) {
-													var data = o[0].data;
-													data.push(o[1].data)
-													return  data;
-												  })},				
-	typeOfDocuments	: function() {return $q.all([$http.get("/api/v2013/thesaurus/domains/144CF550-7629-43F3-817E-CACDED34837E/terms", { cache: true }), 
-															   $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })]).then(function(o) {
-																var data = o[0].data;
-																data.push(o[1].data)
-																return  data;
-															  })},	
-	jurisdiction	: function () { return $q.all([$http.get("/api/v2013/thesaurus/domains/7A56954F-7430-4B8B-B733-54B8A5E7FF40/terms", { cache: true }), 
-												   $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })]).then(function(o) {
-													var data = o[0].data;
-													data.push(o[1].data)
-													return  data;
-												  })
-	},				
-      status			: function() { return $http.get("/api/v2013/thesaurus/domains/ED7CDBD8-7762-4A84-82DD-30C01458A799/terms",	{ cache: true }).then(function(o){ return o.data; }); },
-      regions			: function() { return $q.all([$http.get("/api/v2013/thesaurus/domains/regions/terms", { cache: true }), 
-                              $http.get("/api/v2013/thesaurus/domains/countries/terms",   { cache: true })]).then(function(o) {
-                              return Enumerable.from($filter("orderBy")(o[0].data, "name")).union(
-                                   Enumerable.from($filter("orderBy")(o[1].data, "name"))).toArray();
-                              })
+    _.extend($scope.options, {
+      languages		: function() {
+        return $http.get("/api/v2013/thesaurus/domains/52AFC0EE-7A02-4EFA-9277-8B6C327CE21F/terms",	{ cache: true }).then(function(o){ return $filter("orderBy")(o.data, "name"); });
       },
-      documentLinksExt :        [{ model:"language",        title:"Language",         required:true, options: $http.get("/api/v2013/thesaurus/domains/ISO639-2/terms", { cache: true }).then(function(o){ return $scope.options.documentLinksExt       [0].options = $filter("orderBy")(o.data, "name"); }) }],
-      documentTranslationsExt : [{ model:"language",        title:"Language",         required:true, options: $http.get("/api/v2013/thesaurus/domains/52AFC0EE-7A02-4EFA-9277-8B6C327CE21F/terms", { cache: true }).then(function(o){ return $scope.options.documentTranslationsExt[0].options = $filter("orderBy")(o.data, "name"); }) },
-                     { model:"translationType", title:"Translation Type", required:true, options: $http.get("/api/v2013/thesaurus/domains/19E3C535-2919-4804-966C-E62728507291/terms", { cache: true }).then(function(o){ return $scope.options.documentTranslationsExt[1].options = $filter("orderBy")(o.data, "name"); }) },]
-    };
-
-    $scope.ac_countries = function() {
-      return $scope.options.countries().then(function(countries) {
-        _.each(countries, function(element) {
-          element.__value = element.name;
+      absMeasures		: function() { 
+        return $q.all([
+          $http.get("/api/v2013/thesaurus/domains/50616B56-12F3-4C46-BC43-2DFC26679177/terms", { cache: true }), 
+          $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })
+        ]).then(function(o) {
+          //TODO: this function appears generic to returning from .all, perhaps cut code by making this function and reusing it?
+          var data = o[0].data;
+          data.push(o[1].data);
+          return  data;
         });
-        return countries;
-      });
-    };
+      },				
+	    typeOfDocuments	: function() {
+        return $q.all([
+          $http.get("/api/v2013/thesaurus/domains/144CF550-7629-43F3-817E-CACDED34837E/terms", { cache: true }), 
+          $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })
+        ]).then(function(o) {
+          var data = o[0].data;
+          data.push(o[1].data);
+          return  data;
+        });
+      },	
+	    jurisdiction	: function () {
+        return $q.all([
+          $http.get("/api/v2013/thesaurus/domains/7A56954F-7430-4B8B-B733-54B8A5E7FF40/terms", { cache: true }), 
+          $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })
+        ]).then(function(o) {
+          var data = o[0].data;
+          data.push(o[1].data)
+          return  data;
+        });
+      },				
+      status			: function() {
+        return $http.get("/api/v2013/thesaurus/domains/ED7CDBD8-7762-4A84-82DD-30C01458A799/terms",	{ cache: true }).then(function(o){
+          return o.data;
+        });
+      },
+      documentLinksExt : [{
+        model:"language",
+        title:"Language",
+        required:true,
+        options: $http.get("/api/v2013/thesaurus/domains/ISO639-2/terms", { cache: true }).then(function(o){
+          return $scope.options.documentLinksExt[0].options = $filter("orderBy")(o.data, "name");
+        }),
+      }],
+      documentTranslationsExt : [
+        {
+          model:"language",
+          title:"Language",
+          required:true,
+          options: $http.get("/api/v2013/thesaurus/domains/52AFC0EE-7A02-4EFA-9277-8B6C327CE21F/terms", { cache: true }).then(function(o){
+            return $scope.options.documentTranslationsExt[0].options = $filter("orderBy")(o.data, "name");
+          }),
+        },
+        {
+          model:"translationType",
+          title:"Translation Type",
+          required:true,
+          options: $http.get("/api/v2013/thesaurus/domains/19E3C535-2919-4804-966C-E62728507291/terms", { cache: true }).then(function(o){
+            return $scope.options.documentTranslationsExt[1].options = $filter("orderBy")(o.data, "name");
+          }),
+        },
+      ],
+    });
+
     $scope.ac_statuses = function() {
       return $scope.options.status().then(function(statuses) {
         _.each(statuses, function(element) {
