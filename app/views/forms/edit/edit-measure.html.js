@@ -28,19 +28,28 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
           return  data;
         });
       },	
-	    jurisdiction	: function () {
+	    jurisdictions	: function () {
         return $q.all([
           $http.get("/api/v2013/thesaurus/domains/7A56954F-7430-4B8B-B733-54B8A5E7FF40/terms", { cache: true }), 
           $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })
         ]).then(function(o) {
-          var data = o[0].data;
-          data.push(o[1].data)
-          return  data;
+          var jurisdictions = o[0].data;
+          jurisdictions.push(o[1].data)
+
+          _.each(jurisdictions, function(element) {
+            element.__value = element.name;
+          });
+
+          return jurisdictions;
         });
       },				
-      status			: function() {
+      statuses			: function() {
         return $http.get("/api/v2013/thesaurus/domains/ED7CDBD8-7762-4A84-82DD-30C01458A799/terms",	{ cache: true }).then(function(o){
-          return o.data;
+          var statuses = o.data;
+          _.each(statuses, function(element) {
+            element.__value = element.name;
+          });
+          return statuses;
         });
       },
       documentLinksExt : [{
@@ -71,22 +80,6 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
       ],
     });
 
-    $scope.ac_statuses = function() {
-      return $scope.options.status().then(function(statuses) {
-        _.each(statuses, function(element) {
-          element.__value = element.name;
-        });
-        return statuses;
-      });
-    };
-    $scope.ac_jurisdictions = function() {
-      return $scope.options.jurisdiction().then(function(jurisdictions) {
-        _.each(jurisdictions, function(element) {
-          element.__value = element.name;
-        });
-        return jurisdictions;
-      });
-    };
 
     //==================================
     //
