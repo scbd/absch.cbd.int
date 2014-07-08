@@ -29,7 +29,9 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
             when('/workshops/lac',               { templateUrl: '/app/views/workshops/lac.html'             ,resolveController: true, resolveUser: true}).
             when('/workshops/caribbean',         { templateUrl: '/app/views/workshops/caribbean.html'       ,resolveController: true, resolveUser: true}).            
             //when('/searchforum.shtml',           { templateUrl:'/app/views/about.html#iac'}).
-
+            
+            when('/certificate/:documentNumber',{ templateUrl: '/app/views/certificate.html'       ,resolveController: true, resolveUser: true}).            
+            
             when('/dashboard', {
               templateUrl: '/app/views/register.html',
               resolveController: true,
