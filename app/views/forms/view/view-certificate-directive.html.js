@@ -30,7 +30,11 @@ app.directive("viewCertificate", [function () {
 			$scope.load = function (identifier) {
 
 				$scope.error = undefined;
-
+				if(!identifier)
+				{
+					$scope.loading=false;
+					return;
+				}
 				var qDocument     = storage.documentVersions.get(identifier,{body:true});
 				// .then(function(result) { return result.data || result });
 				

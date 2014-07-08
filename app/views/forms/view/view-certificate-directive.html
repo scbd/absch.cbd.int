@@ -1,5 +1,5 @@
 
-	<div>
+	<div >
 
 			<ul style="list-style-type: none;">
 				<li ng-repeat="document in documents | orderBy:document.createdOn">
@@ -10,13 +10,13 @@
 					  on <strong>{{document.createdOn |formatDateWithTime}}</strong>
 					 
 					  <span ng-show="document.body.amendmentsDescription">
-						  <span ng-show="!more"> {{document.body.amendmentsDescription | limitTo:50}} ...
-						  <a ng-href="#" ng-click="more=!more"> more</a></span><span ng-show="more"> {{document.body.amendmentsDescription}} <a ng-href="#" ng-click="more=!more"> less</a></span>
+						  <span ng-show="!more"> {{document.body.amendmentsDescription| lstring:locale | limitTo:50}} ...
+						  <a ng-href="#" ng-click="more=!more"> more</a></span><span ng-show="more"> {{document.body.amendmentsDescription| lstring:locale}} <a ng-href="#" ng-click="more=!more"> less</a></span>
 					  </span>
 				</li>
 			</ul>
 
-		<div ng-hide="documents">
+		<div ng-hide="documents || !loading">
 			<div class="text-center"><h1 style="color:#fa6938"><i class="fa fa-spinner fa-spin"></i></h1></div>	
 		</div>
 		<span ng-show="error" >{{error}}</span>	

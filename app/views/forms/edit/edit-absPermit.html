@@ -37,15 +37,13 @@
 
                 <div class="alert alert-warning">Please note that all information published on the ABS Clearing-House will be made public and therefore, confidential information should not be submitted. Publishing authorities are reminded that it is their responsibility to ensure that any confidentiality clauses in mutually agreed terms are respected.
                 </div>
-
                 <section>
-                    <legend>General information</legend>
+                    <legend>Amendment intent</legend>
                     <div class="row" ng-show="documentExists">
                         <div class="col-xs-12">
                              <div class="km-control-group" name="amendmentIntent" required caption="Please indicate what the intent of the modification is">
-                                <input type="radio" name="amendmentIntent" ng-model="document.amendmentIntent" ng-value="0"> Information is being submitted to modify a previously issued internationally recognized certificate of compliance (a new certificate will be constituted and the old one will still be valid)</br>
-                                <input type="radio" name="amendmentIntent" ng-model="document.amendmentIntent" ng-value="1"> Information is being submitted to replace a previously issued internationally recognized certificate of compliance (a new certificate will be constituted and the old one will no longer be valid)</br>                       
-                                <input type="radio" name="amendmentIntent" ng-model="document.amendmentIntent" ng-value="2"> An existing permit or its equivalent is being revoked and the constituted internationally recognized certificate of compliance will no longer be valid.  
+                                <input type="radio" name="amendmentIntent" ng-model="document.amendmentIntent" ng-value="0"> Update: Information is being submitted to replace a previously issued internationally recognized certificate of compliance (a new certificate will be constituted and the old one will no longer be valid)</br>                       
+                                <input type="radio" name="amendmentIntent" ng-model="document.amendmentIntent" ng-value="1"> Revoke: An existing permit or its equivalent is being revoked and the constituted internationally recognized certificate of compliance will no longer be valid.  
                             </div>                          
                         </div>
                     </div>
@@ -58,7 +56,10 @@
                             </div>
                         </div>
                     </div>
+                </section>
 
+                <section>
+                    <legend>General information</legend>
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="km-control-group" name="government" required caption="Country">
@@ -452,7 +453,6 @@
                 <div class="btn-group" ng-show="reviewDocument.header.languages.length>1">
                     <input type="button" class="btn" ng-class="{'active' : review.locale==locale, 'btn-info' : review.locale==locale}" ng-repeat="locale in document.header.languages" ng-click="$parent.review.locale = locale" value="{{locale | uppercase}}" />
                 </div>
-
                 <div class="view-abs-permit" show-pdf="false" ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></div>
             </div>
         </div>
