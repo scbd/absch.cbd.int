@@ -148,6 +148,7 @@
             <hr>
 
             <div class="row">
+              
               <div class="col-sm-4">
                 <div class="km-control-group" required name="jurisdiction" caption="Area of jurisdiction">
                   <div km-select required name="jurisdiction" ng-model="document.jurisdiction" items="options.jurisdiction()"></div>
@@ -156,18 +157,21 @@
 
 
               <div class="col-sm-8">
+                
                 <div ng-show="isJurisdictionRegional()">
                   <div class="km-control-group" required name="jurisdictionRegions" caption="Country name and/or Geographical or political/economic group(s)">
                   <div km-select required name="jurisdictionRegions" ng-model="document.jurisdictionRegions" items="options.regions()" multiple ></div>
                   </div>
                 </div>
 
-            <div ng-show="isJurisdictionSubNationalOrCommunity()">
-              <div class="km-control-group" required name="jurisdictionName" caption="Name of the sub-national / community / other jurisdiction">
-              <div km-textbox-ml required ng-model="document.jurisdictionName" locales="document.header.languages"></div>
-              </div>
-
+                <div ng-show="isJurisdictionSubNationalOrCommunity()">
+                  <div class="km-control-group" required name="jurisdictionName" caption="Name of the sub-national / community / other jurisdiction">
+                  <div km-textbox-ml required ng-model="document.jurisdictionName" locales="document.header.languages"></div>
+                  </div>
+                </div>
             </div>
+            </div>
+            
             <hr>
             <div class="row">
               <div class="col-sm-12">
