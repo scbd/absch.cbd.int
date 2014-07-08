@@ -1,7 +1,7 @@
 {
   "name": "absch-cbd-int",
   "dependencies": {
-    "angular": "~1.2.5",
+    "angular": "~1.2.15",
     "angular-animate": "~1.2.5",
     "angular-cookies": "~1.2.5",
     "angular-route": "~1.2.5",
@@ -27,6 +27,6 @@
     "angular-intro.js": "latest"
   },
   "resolutions": {
-    "angular": "~1.2.5"
+    "angular": "~1.2.15"
   }
 }
