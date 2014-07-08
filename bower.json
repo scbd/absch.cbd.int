@@ -25,5 +25,8 @@
     "angucomplete": "*",
     "barcode-39.js": "https://github.com/erik5388/barcode-39.js.git",
     "angular-intro.js": "latest"
+  },
+  "resolutions": {
+    "angular": "1.2.19"
   }
 }
