@@ -1,6 +1,5 @@
 
 	<div >
-
 			<ul style="list-style-type: none;">
 				<li ng-repeat="document in documents | orderBy:document.createdOn">
 					<a type="button" target="_blank"  ng-href="https://s3.amazonaws.com/absch.documents/ABSCH-{{government}}-{{document.documentID}}-{{document.revision}}.pdf">
@@ -15,10 +14,10 @@
 					  </span>
 				</li>
 			</ul>
-
+<!-- {{loading}}
 		<div ng-hide="documents || !loading">
 			<div class="text-center"><h1 style="color:#fa6938"><i class="fa fa-spinner fa-spin"></i></h1></div>	
-		</div>
+		</div> -->
 		<span ng-show="error" >{{error}}</span>	
 	</div>
 

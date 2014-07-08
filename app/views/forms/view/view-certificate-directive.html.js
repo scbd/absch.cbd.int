@@ -12,15 +12,25 @@ app.directive("viewCertificate", [function () {
 			government:  "=government"
 		},
 		link: function($scope) {
+
 		},
 		controller: ['$scope', 'IStorage', "$q","$route", 
 			function ($scope, storage, $q,$route) {
 			
+			$scope.$watch('documentID', function(value){
+				if(value && !$scope.documents){
+					$scope.load($scope.documentID);
+				}
+				else
+					$scope.loading=false;
+			});
 
 			$scope.$watch('loadDocuments', function(value){
 				if(value && !$scope.documents){
 					$scope.load($scope.documentID);
 				}
+				else
+					$scope.loading=false;
 			});
 
 
@@ -30,6 +40,7 @@ app.directive("viewCertificate", [function () {
 			$scope.load = function (identifier) {
 
 				$scope.error = undefined;
+
 				if(!identifier)
 				{
 					$scope.loading=false;

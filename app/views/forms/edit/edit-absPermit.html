@@ -37,9 +37,15 @@
 
                 <div class="alert alert-warning">Please note that all information published on the ABS Clearing-House will be made public and therefore, confidential information should not be submitted. Publishing authorities are reminded that it is their responsibility to ensure that any confidentiality clauses in mutually agreed terms are respected.
                 </div>
-                <section>
+                <section ng-show="documentExists">
+                    <label>Download the Compliance Certificate</label>
+                    <div class="km-value">
+                        <div view-certificate document-id="document.header.identifier" load-documents="true" government="document.government.identifier"></div>
+                    </div>
+                </section>
+                <section ng-show="documentExists">
                     <legend>Amendment intent</legend>
-                    <div class="row" ng-show="documentExists">
+                    <div class="row" >
                         <div class="col-xs-12">
                              <div class="km-control-group" name="amendmentIntent" required caption="Please indicate what the intent of the modification is">
                                 <input type="radio" name="amendmentIntent" ng-model="document.amendmentIntent" ng-value="0"> Update: Information is being submitted to replace a previously issued internationally recognized certificate of compliance (a new certificate will be constituted and the old one will no longer be valid)</br>                       
@@ -47,7 +53,7 @@
                             </div>                          
                         </div>
                     </div>
-                    <div class="row" ng-show="documentExists">
+                    <div class="row" >
                         <div class="col-xs-12">
                             <div class="control-group">
                                 <div class="km-control-group" name="amendmentsDescription" required caption="Provide a summary of the reason for the update of the record">
