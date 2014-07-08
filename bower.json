@@ -27,6 +27,6 @@
     "angular-intro.js": "latest"
   },
   "resolutions": {
-    "angular": "1.2.19"
+    "angular": "~1.2.5"
   }
 }
