@@ -70,7 +70,7 @@
 
 			  <tr ng-show="workflow.createdOn">
 			  	<td>Created on</td>
-			  	<td>{{workflow.createdOn|date:'short'}} by {{workflow.createdBy_info.firstName}} {{workflow.createdBy_info.lastName}}</td>
+			  	<td>{{workflow.createdOn|date:'short'}} by {{workflow.createdBy_info.firstName}} {{workflow.createdBy_info.lastName}}  ({{workflow.createdBy_info.email}})</td>
 			  </tr>
 
 			</table>
