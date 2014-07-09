@@ -2,13 +2,13 @@
 	<div >
 			<ul style="list-style-type: none;padding:0;">
 				<li ng-repeat="document in documents | orderBy:document.createdOn">
+				
 					
-					
-					<span ng-show="document.body.amendmentIntent==1"><h5 class="label label-danger">CANCELLED</h5></span>
+					<span ng-show="document.body.amendmentIntent==1"><h5 class="label label-danger"><i ng-show="$first" class="fa fa-star"></i> CANCELLED</h5></span>
 
-					<span ng-show="document.body.amendmentIntent==0"><h5 class="label label-primary">AMENDED</h5></span>
+					<span ng-show="document.body.amendmentIntent==0"><h5 class="label label-primary"><i ng-show="$first" class="fa fa-star"></i> AMENDED</h5></span>
 
-					<span ng-show="document.body.amendmentIntent==undefined"><h5 class="label label-success">CERTIFICATE CREATED</h5></span>
+					<span ng-show="document.body.amendmentIntent==undefined"><h5 class="label label-success"><i ng-show="$first" class="fa fa-star"></i> CERTIFICATE CREATED</h5></span>
 
 					&nbsp;[<strong>{{document.createdOn |formatDateWithTime}} 
 					<!-- <span style="color:#999;"> by <strong>{{document.createdBy.firstName}} {{document.createdBy.lastName}} ({{document.createdBy.email}})</strong> -->
