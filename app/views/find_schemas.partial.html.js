@@ -128,7 +128,7 @@ app.directive('searchFilterSchemas', function ($http) {
                 else
                     $scope.query = '*:*';
 
-                console.log($scope.query);
+                //console.log($scope.query);
             };
 
             $scope.onclick = function (scope, evt) {
@@ -167,7 +167,8 @@ app.directive('searchFilterSchemas', function ($http) {
                                 if(filter.type=='multiselect'){
                                     if( $scope[filter.name] && $scope[filter.name].length > 0){
                                         // debugger;
-                                        var selectedValues = $scope[filter.name];    
+                                        var selectedValues = $scope[filter.name];   
+                                        selectedValues = _.pluck(selectedValues, "identifier"); 
                                         //console.log (selectedValues)                                     ;
                                             subFilterQuery = subFilterQuery + ' AND (' + filter.field +':'+ selectedValues.join(' OR ' + filter.field + ': ') + ')';      
                                             //subFilterQuery = subFilterQuery.replace(',', ' OR ');                                        
@@ -190,7 +191,8 @@ app.directive('searchFilterSchemas', function ($http) {
                 //console.log(subFilterQuery);
                         conditions.push(subFilterQuery);
                     }
-                });                 
+                });  
+                console.log(conditions)               
  
             }            
             $scope.updateFacets = function(schema,fieldName,data){
@@ -203,10 +205,9 @@ app.directive('searchFilterSchemas', function ($http) {
                 facets = facets.facets;
                 for (var i = 0; i < facets.length; i+=2) {
                    var item =  _.where(data,{identifier:facets[i]});
-                   console.log(item);
+                   
                    if(item.length>0){
-                        item[0].title.en += ' (' + facets[i+1] + ')';
-                        console.log(facets[i] + ":" + facets[i+1]);
+                        item[0].title.en += ' (' + facets[i+1] + ')';                        
                     }
                 };
                 return data;
@@ -235,7 +236,6 @@ app.directive('searchFilterSchemas', function ($http) {
 
                         $http.get('/api/v2013/index/select', { params: queryFacetsParameters })
                         .success(function (data) {                          
-                            console.log(data);
                             $scope[schema].subFilters.forEach(function(filter){
                                 if(filter.type=='multiselect'){
                                     filter.facets = data.facet_counts.facet_fields[filter.field];                                                                ;
@@ -243,7 +243,7 @@ app.directive('searchFilterSchemas', function ($http) {
                             });
                         })
                         .error(function (error) { 
-                            console.log('onerror'); console.log(error); 
+                             console.log(error); 
                         });
                 }
             }
@@ -283,7 +283,7 @@ app.directive('searchFilterSchemas', function ($http) {
             $scope.absPermit               = { identifier: 'absPermit',                title: 'Permits and their equivalent' ,
                                                subFilters : [
                                                                 //{ name: 'permitAuthority',  type: 'reference' , field: 'jurisdiction_s'},
-                                                                { name: 'permitusage',      type: 'multiselect' , field: 'usage_ss'},
+                                                                { name: 'permitusage',      type: 'multiselect' , field: 'usage_REL_ss'},
                                                                 { name: 'permitkeywords',   type: 'multiselect' , field: 'keywords_ss'},
                                                                 { name: 'permitExpiryDate', type: 'calendar' , field: 'expiration_s'},
                                                                 { name: 'permitIssuanceDate', type: 'calendar' , field: 'date_s'}      
