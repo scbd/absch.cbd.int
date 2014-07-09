@@ -2,16 +2,27 @@
 	<div >
 			<ul style="list-style-type: none;">
 				<li ng-repeat="document in documents | orderBy:document.createdOn">
+					
+					
+					<span ng-show="document.body.amendmentIntent==1"><h5 class="label label-danger">CANCELLED</h5></span>
+
+					<span ng-show="document.body.amendmentIntent==0"><h5 class="label label-primary">UPDATED</h5></span>
+
+					<span ng-show="document.body.amendmentIntent==undefined"><h5 class="label label-success">IRCC CREATED</h5></span>
+
+					&nbsp;[<strong>{{document.createdOn |formatDateWithTime}} 
+					<!-- <span style="color:#999;"> by <strong>{{document.createdBy.firstName}} {{document.createdBy.lastName}} ({{document.createdBy.email}})</strong> -->
+					</span></strong>]:
+
 					<a type="button" target="_blank"  ng-href="https://s3.amazonaws.com/absch.documents/ABSCH-{{government}}-{{document.documentID}}-{{document.revision}}.pdf">
-					<i class="glyphicon glyphicon-file"></i> 
+					<i class="glyphicon glyphicon-file"></i>
 					ABSCH-{{government|uppercase}}-{{document.documentID}}-{{document.revision}}</a>
-					 updated by <strong>{{document.createdBy.firstName}} {{document.createdBy.lastName}}</strong>
-					  on <strong>{{document.createdOn |formatDateWithTime}}</strong>
-					 
-					  <span ng-show="document.body.amendmentsDescription">
-						  <span ng-show="!more"> {{document.body.amendmentsDescription| lstring:locale | limitTo:50}} ...
-						  <a ng-href="#" ng-click="more=!more"> more</a></span><span ng-show="more"> {{document.body.amendmentsDescription| lstring:locale}} <a ng-href="#" ng-click="more=!more"> less</a></span>
-					  </span>
+					
+					  
+					<div>
+						<span style="color:#999;"> {{document.body.amendmentsDescription | lstring:local}}</span>
+					</div>
+					<hr style="padding:0;margin:5px 0 10px 0;">
 				</li>
 			</ul>
 <!-- {{loading}}
