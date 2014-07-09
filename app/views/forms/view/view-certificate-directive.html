@@ -6,7 +6,7 @@
 					
 					<span ng-show="document.body.amendmentIntent==1"><h5 class="label label-danger">CANCELLED</h5></span>
 
-					<span ng-show="document.body.amendmentIntent==0"><h5 class="label label-primary">UPDATED</h5></span>
+					<span ng-show="document.body.amendmentIntent==0"><h5 class="label label-primary">AMENDED</h5></span>
 
 					<span ng-show="document.body.amendmentIntent==undefined"><h5 class="label label-success">IRCC CREATED</h5></span>
 
@@ -17,11 +17,12 @@
 					<a type="button" target="_blank"  ng-href="https://s3.amazonaws.com/absch.documents/ABSCH-{{government}}-{{document.documentID}}-{{document.revision}}.pdf">
 					<i class="glyphicon glyphicon-file"></i>
 					ABSCH-{{government|uppercase}}-{{document.documentID}}-{{document.revision}}</a>
-					
-					  
 					<div>
-						<span style="color:#999;"> {{document.body.amendmentsDescription | lstring:local}}</span>
-					</div>
+					<span ng-show="document.body.amendmentsDescription">
+						  <span ng-show="!more"> {{document.body.amendmentsDescription| lstring:locale | limitTo:200}} ...
+						  <a ng-href="#" ng-click="more=!more" ng-show="(document.body.amendmentsDescription| lstring:locale).length > 200"> more</a></span><span ng-show="more"> {{document.body.amendmentsDescription| lstring:locale}} <a ng-href="#" ng-click="more=!more"> less</a></span>
+					  </span>
+					  </div>
 					<hr style="padding:0;margin:5px 0 10px 0;">
 				</li>
 			</ul>
