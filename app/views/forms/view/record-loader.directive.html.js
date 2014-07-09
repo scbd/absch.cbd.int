@@ -65,6 +65,10 @@ app.directive('recordLoader', [function () {
 				if($route.current.params.documentNumber)
 					var documentID = $route.current.params.documentNumber;
 					
+				if(documentID.toLowerCase().indexOf('absch')==0){					
+					documentID = documentID.substring(9,documentID.length);
+				}
+
 				if(documentSchema && (documentSchema.toUpperCase()=="FOCALPOINT" || documentSchema.toUpperCase()=="MEETING" || documentSchema.toUpperCase()=="NOTIFICATION"
                    || documentSchema.toUpperCase()=="PRESSRELEASE" || documentSchema.toUpperCase()=="STATEMENT"))
 				{
