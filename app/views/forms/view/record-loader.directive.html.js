@@ -66,7 +66,13 @@ app.directive('recordLoader', [function () {
 					var documentID = $route.current.params.documentNumber;
 					
 				if(documentID.toLowerCase().indexOf('absch')==0){					
-					documentID = documentID.substring(9,documentID.length);
+					 var docNum = documentID.substring(9,documentID.length);
+					if(docNum.indexOf('-')>=0){
+						documentID = documentID.toLowerCase().replace('absch','ABSCH');
+						window.location.href ="https://s3.amazonaws.com/absch.documents/" + documentID + '.pdf';
+						return;
+					}
+					documentID = docNum;
 				}
 
 				if(documentSchema && (documentSchema.toUpperCase()=="FOCALPOINT" || documentSchema.toUpperCase()=="MEETING" || documentSchema.toUpperCase()=="NOTIFICATION"
