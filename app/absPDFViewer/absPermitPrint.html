@@ -22,30 +22,56 @@
 
 <body>
 	<div ng-app="ngapp" class="main-nav" >
-		<div ng-controller="printPermit" class="container" style="padding:20px 0;" >		  
+		<div ng-controller="printPermit" class="container" style="border:1px solid #111;border-radius:5px;" >		  
          
-            <div class="row">
-                <div class="col-xs-4" style="text-align:center;top:20px;">
-                    <img  style="width:85px;height:85px;"
-                    src="../img/UNEP_logo.svg"/>
-                </div>
-                <div class="col-xs-4" style="text-align:center;top:10px;">
-                    <img src="https://chm.cbd.int/app/img/cbd-logo-en.svg" style="height:85px"/>
-                </div>
-                <div class="col-xs-4" style="text-align:center;top:20px;">
-                    <img  style="width:85px;height:85px;"
-                    src="../img/Emblem_of_the_United_Nations.svg"/>
-                </div>
-                
+            
+        <!-- <div class="row" style="background-color:#f0ad4e;height:10px;">
+            <div class="col-xs-12"
             </div>
+        </div> -->
+                <div class="row" style="padding-bottom:30px;padding-top:20px;">
+                        <div class="col-xs-1">
+                        </div>
 
-            <div class="row" style="margin-top:20px;margin-bottom:30px;">
+                        <div class="col-xs-3" style="text-align:center;">
+                            <img  style="width:85px;height:85px;"
+                            src="../img/UNEP_logo.svg"/>
+                        </div>
+                        <div class="col-xs-4" style="text-align:center;padding-top:5px;">
+                            <img src="../img/cbd-logo-print-black-en.png" style="height:80px"/>
+                        </div>
+                        <div class="col-xs-3" style="text-align:center;">
+                            <img  style="width:85px;height:85px;"
+                            src="../img/Emblem_of_the_United_Nations.svg"/>
+                        </div>
+
+                         <div class="col-xs-1">
+                        </div>
+                        
+                    </div> 
+
+
+            <div class="row" style="margin-bottom:30px;padding-bottom:15px; background-color:#1FA65D;color:white;">
                 <div class="col-xs-12" style="text-align:center;">
                     <h1>
-                    Internationally recognized certificate of compliance constituted from information on the permit or its equivalent made available to the Access and Benefit-sharing Clearing-House    
+                    Internationally recognized certificate of compliance constituted from information on the permit or its equivalent made available to the Access and Benefit-sharing Clearing-House 
+
+                    <div style="padding:20px 40px 0 40px;">In accordance with Article 17, paragraph 2, of the Nagoya Protocol on Access and Benefit-sharing, a permit or its equivalent issued in accordance with Article 6, paragraph 3 (e) and made available to the Access and Benefit-sharing Clearing-House, shall constitute an internationally recognized certificate of compliance.</div>
+
                     </h1>
 
-                    <span class="blue">In accordance with Article 17, paragraph 2, of the Nagoya Protocol on Access and Benefit-sharing, a permit or its equivalent issued in accordance with Article 6, paragraph 3 (e) and made available to the Access and Benefit-sharing Clearing-House, shall constitute an internationally recognized certificate of compliance.</span>
+                    <div class="cancelled" ng-show="document.body.amendmentIntent==1"> 
+                        THIS CERTIFICATE HAS BEEN REVOKED
+                        <p> 
+                        [<strong>{{document.createdOn |formatDateWithTime}}</strong>]
+                        by <strong>{{document.createdBy.firstName}} {{document.createdBy.lastName}} 
+                        ({{document.createdBy.email}})</strong>: 
+
+                        {{document.body.amendmentsDescription| lstring:locale}}
+
+                        </p>
+                    </div>
+                    
                 </div> 
             </div>  
 
@@ -55,8 +81,8 @@
                     <div class="text">{{document.title| lstring:locale}}</div>
                 </div>
                 <div class="col-xs-4">
-                    <label>Permanent online verification link:</label>
-                    <div class="text">http://absch.cbd.int/ircc/absch-{{document.government.identifier |uppercase}}-{{documentInfo.documentID}}-{{documentInfo.revision}}</div>
+                    <label>Latest version verification link:</label>
+                    <div class="text">http://absch.cbd.int/certificate/{{documentInfo.documentID}}</div>
                 </div>
                
             </div>
@@ -72,16 +98,28 @@
                 
             </div>
 
+            <h3>Certificate History</h3>
             <div class="row">
-                <div class="col-xs-8"> 
-                    <label>Published to the ABS Clearing-House by: </label>
-                    <div class="text">{{document.info.createdBy.firstName}} {{document.info.createdBy.lastName}} ({{document.info.createdBy.email}})</div>
+                <div class="col-xs-1"><label>Date</label></div>
+                <div class="col-xs-1"><label>Action</label></div>
+                <div class="col-xs-2"><label>Author</label></div>
+                <div class="col-xs-8"><label>Reason</label></div>
+            </div>
+              
+            <div class="row" ng-repeat="document in documents | orderBy:document.createdOn" >
+                <div class="col-xs-1">{{document.createdOn |formatDateWithTime}}</div>
+                <div class="col-xs-1">
+                    <span ng-show="document.body.amendmentIntent==1"><h5 class="label label-danger">CANCELLED</h5></span>
+                    <span ng-show="document.body.amendmentIntent==0"><h5 class="label label-primary">AMENDED</h5></span>
+                    <span ng-show="document.body.amendmentIntent==undefined"><h5 class="label label-success">CREATED</h5></span>
                 </div>
-                <div class="col-xs-4">
-                    <label>Published on:</label>
-                    <div class="text">{{documentInfo.createdOn | formatDate}}</div>
+                <div class="col-xs-2">
+                    {{document.createdBy.firstName}} {{document.createdBy.lastName}} ({{document.createdBy.email}})</div>
+                <div class="col-xs-8">
+                    {{document.body.amendmentsDescription| lstring:locale}}
                 </div>
             </div>
+  
 
             <h3>Information from the National Permit or Equivalent</h3>
 
@@ -230,9 +268,29 @@
                 </div>
             </div>
 
-            <h3>Further Information</h3>
+            <h3>Amendment History</h3>
+
 
             <div class="row">      
+                <div class="col-xs-12">
+                    <label>Copy of permit or its equivalent, or other relevant open-access document:</label>
+                    <div class="text">
+                        List of links and descriptions
+
+                    </div>
+                </div>
+            </div>
+
+          
+
+            
+
+            <div class="row" style="background-color:#1FA65D;color:white;border-bottom-radius:5px;">
+                    
+                <div class="col-xs-12"><h3 >Further Information</h3></div>
+
+                <div class="clearfix"></div>
+
                 <div class="col-xs-8">
 
                     Questions about the permit or its equivalent constituting an internationally
