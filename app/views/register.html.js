@@ -303,8 +303,12 @@ define(['app',
       evt.stopPropagation();
       $scope.editing = false;
       $scope.msg = "Your record has been closed without saving.";
-      $timeout(function() { $location.path('/register/'+$scope.document_type); }, 500);
-
+      $timeout(function() {
+        if($rootScope.next_url)
+          $window.location.href = $rootScope.next_url;
+        else
+          $window.location.href = '/register/'+$scope.document_type;
+      }, 500);
       
     });
 

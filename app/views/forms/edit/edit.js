@@ -291,6 +291,7 @@ define([
 
 
       $q.when(qDocument).then(function(doc) {
+        console.log('the doc: ', doc);
 
         $scope.tab    = "edit";
         $scope.status = "ready";
@@ -338,6 +339,7 @@ define([
       evt.preventDefault();
 
       $('#dialogCancel').modal('show');
+      $rootScope.next_url = next;
       consideringClosing = true;
     }
 
