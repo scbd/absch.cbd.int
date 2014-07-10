@@ -56,10 +56,16 @@ label{
     font-family: sans-serif, Trebuchet MS, Helvetica, "Helvetica Neue" ;
     font-size:12px;
     text-transform: uppercase;
-    padding-left:10px;
+    /*padding-left:5px;*/
     font-weight: bold;
     color:#1FA65D; 
    /* color:#999;*/
+}
+.inner-label{
+    font-family: sans-serif, Trebuchet MS, Helvetica, "Helvetica Neue" ;
+    font-size:11px;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 .text{
   font-family: sans-serif, Trebuchet MS, Helvetica, "Helvetica Neue" ;
@@ -90,7 +96,9 @@ label{
     color:#a94442!important;
     background-color: #F2DEDE!important;
 }
-
+.confidential-text{
+    color:#a94442!important;
+}
 
 .bdr-orange{
 	border:3px solid #fa6938;

@@ -13,7 +13,7 @@ app.controller('printPermit', ['$scope','$http','$location', function($scope,$ht
 	var params = {};
 	// params            = clone(params||{});
 	
-	 params.identifier ='451A7F8F-1173-A524-9381-D8ECCE8C5387';// $location.search().documentID;
+	 params.identifier ='1E49C732-6063-320D-ACCD-62A1362FAC4F';// $location.search().documentID;
 	 //'32E4D584-EA07-EC34-6CDF-A74E57E334F1';
 
 	// var useCache = !!params.cache;
