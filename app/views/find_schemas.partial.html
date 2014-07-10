@@ -64,8 +64,22 @@
             <div km-select multiple required name="permitkeywords" ng-model="permitkeywords" items="options.keywords()" placeholder="Keywords"></div>
             <br>
             <span search-filter-dates title='Date of issuance of the permit' query='permitIssuanceDate' field="expiration_s"></span>
-           <!--  <br>
-            <span search-filter-dates title='Date of expiry of the permit' query='permitExpiryDate'></span> -->
+            <br>
+            <div class="btn-group" style="padding:5px 0px 2px 2px" data-toggle="buttons">
+                <label class="btn btn-primary btnExt"  ng-click="amendmentIntent=-2;buildQuery()">
+                    <input type="radio" value="-1"  ng-model="amendmentIntent" name="amendmentIntent">All</button>
+                </label>
+                <label class="btn btnExt btn-success" ng-click="amendmentIntent=-1;buildQuery()">
+                    <input type="radio" value="1"  ng-model="amendmentIntent" name="amendmentIntent">Created</button>
+                </label>
+                <label class="btn btn-primary btnExt" ng-click="amendmentIntent=0;buildQuery()">
+                    <input type="radio" value="0"  ng-model="amendmentIntent" name="amendmentIntent" >Amended</button>
+                </label>
+                <label class="btn btn-danger btnExt" ng-click="amendmentIntent=1;buildQuery()">
+                    <input type="radio" value="1"  ng-model="amendmentIntent" name="amendmentIntent">Revoked</button>
+                </label>
+            </div>
+            <!-- <span search-filter-dates title='Date of expiry of the permit' query='permitExpiryDate'></span> -->
         </div>
     </div>
 

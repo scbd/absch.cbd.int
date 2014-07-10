@@ -259,7 +259,11 @@ app.directive('documentList', function ($http, $filter) {
                         // console.log(output.usage);
                         output.keywords = getString(document.keywords_CEN_ss, locale);
                         output.recordtype="nationalRecord";
-
+                        //
+                        if(document.amendmentIntent_i != undefined){
+                          output.amendmentIntent = String(document.amendmentIntent_i) + 's';
+                          console.log(output.amendmentIntent);
+                        }
                         //TODO: output.description should be the subjectmatter
                         //TODO: keywords should show up in the metadata. if(output.keywords)output.metadata.push(output.keywords);
                         //TODO: the metadata should be a link to download the pdf

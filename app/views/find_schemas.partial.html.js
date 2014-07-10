@@ -136,10 +136,10 @@ app.directive('searchFilterSchemas', function ($http) {
                 $scope[scope].selected = !$scope[scope].selected;
                 $scope.expandSearch--;
                 //console.log( $scope.terms);
-                buildQuery();
+                $scope.buildQuery();
             }
 
-            function buildQuery () {
+            $scope.buildQuery = function () {
                 var conditions = [];
                 buildConditions(conditions, $scope.terms);
 
@@ -179,6 +179,16 @@ app.directive('searchFilterSchemas', function ($http) {
                                         if(selectedValues != '*:*'){
                                             subFilterQuery = subFilterQuery + ' AND ' + selectedValues;                                                  
                                         }
+                                }
+                                else if(filter.type=='radio'){
+                                    var selectedValues = $scope[filter.name];
+                                     
+                                    if(selectedValues!=undefined && parseInt(selectedValues) != -2){//skipp All option
+                                        if(parseInt(selectedValues) == -1)
+                                            subFilterQuery = subFilterQuery + ' AND NOT ' + filter.field + ':*'; 
+                                        else
+                                            subFilterQuery = subFilterQuery + ' AND (' + filter.field +':'+ selectedValues + ')';                                              
+                                    }
                                 }
                                 else {
                                     if($scope[filter.name])
@@ -283,10 +293,11 @@ app.directive('searchFilterSchemas', function ($http) {
             $scope.absPermit               = { identifier: 'absPermit',                title: 'Permits and their equivalent' ,
                                                subFilters : [
                                                                 //{ name: 'permitAuthority',  type: 'reference' , field: 'jurisdiction_s'},
-                                                                { name: 'permitusage',      type: 'multiselect' , field: 'usage_REL_ss'},
-                                                                { name: 'permitkeywords',   type: 'multiselect' , field: 'keywords_ss'},
-                                                                { name: 'permitExpiryDate', type: 'calendar' , field: 'expiration_s'},
-                                                                { name: 'permitIssuanceDate', type: 'calendar' , field: 'date_s'}      
+                                                                { name: 'permitusage',          type: 'multiselect' , field: 'usage_REL_ss'},
+                                                                { name: 'permitkeywords',       type: 'multiselect' , field: 'keywords_ss'},
+                                                                { name: 'permitExpiryDate',     type: 'calendar' , field: 'expiration_s'},
+                                                                { name: 'permitIssuanceDate',   type: 'calendar' , field: 'date_s'},
+                                                                { name: 'amendmentIntent',      type: 'radio' , field: 'amendmentIntent_i'}           
                                                             ]
                                              };
             $scope.absCheckpoint           = { identifier: 'absCheckpoint',            title: 'Checkpoints' ,
@@ -344,12 +355,12 @@ app.directive('searchFilterSchemas', function ($http) {
                 else
                     $scope.expandSearch--;
 
-                buildQuery();
+                $scope.buildQuery();
 
                 $scope.loadSchemaFacets(schema);
             }
             
-            buildQuery();
+            $scope.buildQuery();
             
             $scope.terms.forEach(function (item) { 
                 if(item.subFilters){
@@ -357,7 +368,7 @@ app.directive('searchFilterSchemas', function ($http) {
                         $scope.$watch(filter.name, 
                             function(oldValue, newValue){
                                if(oldValue != newValue){
-                                    buildQuery();
+                                    $scope.buildQuery();
                                 }
                             });
                         }
