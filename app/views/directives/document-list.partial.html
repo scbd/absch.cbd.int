@@ -1,70 +1,6 @@
 <div style="padding: 0px; margin: 0;">
 
-
-
-  <style type="text/css">
-
-  #Result .label-party{
-    font-size:10px;
-    text-transform: uppercase;
-  }
-  #Result .nationalRecord .schema{
-    font-size:12px;
-    text-transform: uppercase;
-    font-weight: bold;
-    color:#287fcb;
-   
-  }
-   #Result .referenceRecord .schema{
-    font-size:12px;
-    text-transform: uppercase;
-    font-weight: bold;
-    color:#FA6938;
-   
-  }
-  #Result .pubDate{
-    font-size:10px;
-    color:#666;
-    text-transform: uppercase;
-    padding-top:3px;
-    padding-right:3px;
-  }
-  #Result .title{
-    font-size: 14px;
-    color:#111;
-  }
-  
-  #Result .description{
-    font-size: 11px;
-    color:#888;
-    padding-top: 5px;
-    cursor: pointer;
-
-  }
- #Result  .details{
-    padding-top: 10px;
-
-  }
-  #Result .metadetails{
-    color:#111;
-    text-transform: uppercase;
-    font-size: 11px;
-    font-weight: bold;
-    padding-top:5px;
-        cursor: pointer;
-  }
-
-  #Result .nationalRecord{
-
-  border-left:solid #287fcb 5px;background-color:#D9EDF7;
-}
-
-#Result .referenceRecord{
-
-  border-left:solid #FA6938 5px;background-color:#FCF8E3;
-}
-
- </style>
+<link rel="stylesheet" href="/app/css/result.css">
  
   <ul class="pagination pull-right" ng-show='showPagination'>
      <li class="disabled" >
@@ -93,7 +29,7 @@
   <br>
   <div ng-repeat="document in transformedDocuments | filter:advanceFilter | filter:filterCategory " style="
     padding:10px 0 10px 0;">
-    <!--  {{document}} -->
+     <!-- {{document}} -->
     <div id="Result">
 
 
@@ -103,7 +39,7 @@
                     <div class="row" >
                         <div style="padding:0px 0 3px 3px; ">
                             <span class="label label-party" ng-class="{'label-info':document.isSignatory && !document.isRatified, 'label-primary':document.isRatified, 'label-default':!document.isRatified && !document.isSignatory}">{{document.source}}</span>
-                            <span ng-show='showPagination' class="schema">{{document.schema | schemaName}}</span>
+                            <span  class="schema">{{document.schema | schemaName}}</span>
                             <span><a href="/database/record?documentID={{document.schema=='MEETING' ? document.id : document.identifier_s}}&documentSchema={{document.schema}}" target="_new" class="pull-right" style="padding:0px 3px;color:#999;"><i class="glyphicon glyphicon-new-window"></i>
                             </a>
                             </span>
@@ -125,11 +61,12 @@
 
                           <div class="description" ng-hide="displayDetails" >
                           {{document.description | truncate:700:' ... more'}}
-                          </div>
 
+                          </div>
                           <div class="metadetails" ng-hide="displayDetails" >
+                            
                             <span ng-repeat="m in document.metadata">
-                             {{m}} {{$last ? '' : ' &nbsp;|&nbsp; '}}
+                             <span ng-bind-html="m"> </span> {{$last ? '' : ' &nbsp;|&nbsp; '}}
                             <span>
                           </div>
                         </a>

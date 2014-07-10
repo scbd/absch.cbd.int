@@ -12,15 +12,25 @@ app.directive("viewCertificate", [function () {
 			government:  "=government"
 		},
 		link: function($scope) {
+
 		},
 		controller: ['$scope', 'IStorage', "$q","$route", 
 			function ($scope, storage, $q,$route) {
 			
+			$scope.$watch('documentID', function(value){
+				if(value && !$scope.documents){
+					$scope.load($scope.documentID);
+				}
+				else
+					$scope.loading=false;
+			});
 
 			$scope.$watch('loadDocuments', function(value){
 				if(value && !$scope.documents){
 					$scope.load($scope.documentID);
 				}
+				else
+					$scope.loading=false;
 			});
 
 
@@ -31,6 +41,11 @@ app.directive("viewCertificate", [function () {
 
 				$scope.error = undefined;
 
+				if(!identifier)
+				{
+					$scope.loading=false;
+					return;
+				}
 				var qDocument     = storage.documentVersions.get(identifier,{body:true});
 				// .then(function(result) { return result.data || result });
 				

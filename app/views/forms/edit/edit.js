@@ -10,6 +10,7 @@ define([
     '/app/views/forms/view/record-loader.directive.html.js',
     '/app/views/forms/view/view-organization.directive.js',
     '/app/views/forms/view/view-organization-reference.directive.js',
+    '/app/views/forms/view/view-certificate-directive.html.js',
   ], function (app) {
 
   app.controller("editController", ["$rootScope", "$scope", "authHttp", "$window", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage", "authentication", "Enumerable", "editFormUtility", "$routeParams", "$timeout", function ($rootScope, $scope, $http, $window, guid, $filter, thesaurus, $q, $location, storage, authentication, Enumerable, editFormUtility, $routeParams, $timeout) {
@@ -290,6 +291,7 @@ define([
 
 
       $q.when(qDocument).then(function(doc) {
+        console.log('the doc: ', doc);
 
         $scope.tab    = "edit";
         $scope.status = "ready";
@@ -337,6 +339,7 @@ define([
       evt.preventDefault();
 
       $('#dialogCancel').modal('show');
+      $rootScope.next_url = next;
       consideringClosing = true;
     }
 

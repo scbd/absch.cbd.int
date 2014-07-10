@@ -45,13 +45,19 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
     //==================================
     $scope.$on("loadDocument", function(evt, info) {
 
-console.log(info);
       if(info.schema!="absPermit")
         return;
       
       if(info.identifier)
           $q.when(editFormUtility.documentExists(info.identifier),function(exists){
-              $scope.documentExists = exists;           
+              $scope.documentExists = exists;
+              //amendment intent shoudl be entered by users for every edit/ clear it on load if any from previous update
+              if($scope.document.amendmentIntent != undefined){
+                $scope.document.amendmentIntent = undefined;   
+}
+              if($scope.document.amendmentsDescription)
+                $scope.document.amendmentsDescription = undefined; 
+                    
           });      
     });
 
@@ -95,6 +101,10 @@ console.log(info);
       }
       if (document.informedConsentConfidential) {
         document.informedConsents = undefined;
+      }
+
+      if (document.expiration=="") {
+        document.expiration = undefined;
       }
       if (document.geneticResourcesConfidential) {
         document.geneticResources = undefined;

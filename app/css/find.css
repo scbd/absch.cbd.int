@@ -112,4 +112,26 @@ h3 a{ color:#111;}
 }
 
 
+.btnExt{
+    font-size: 11px;
+    text-transform: none;
+    background-color: #428bca;
+    display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	font-weight: normal;
+	line-height: 1.428571429;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
 

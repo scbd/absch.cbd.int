@@ -16,7 +16,7 @@
   font-size: 12px;
 }
 
-
+a {color:#333;}
 
 #barcode img{
     max-width: 300px;
@@ -26,21 +26,40 @@
 h1{
 	font-family: alternategotno3dotregular;
 	font-size:36px;
+  padding:0;
+  margin-bottom: 5px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  text-rendering: optimizeLegibility;
 }
 h3{
   margin-bottom:15px;
   border-bottom: 1px solid #e3e3e3;
   font-size: 18px;
 }
+.cancelled{
+  background-color:#c7532c;
+  font-color:#fff;
+  font-weight: bold;
+  font-size: 40px;
+  padding:20px;
+  margin-top: 20px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  text-rendering: optimizeLegibility;
+  border-radius:3px;
+}
+.cancelled  p{
+  font-color:#fff;
+  font-weight: normal;
+}
 
 label{
     font-family: sans-serif, Trebuchet MS, Helvetica, "Helvetica Neue" ;
     font-size:12px;
-    /*color:#111;*/
-    /*text-transform: uppercase;*/
+    text-transform: uppercase;
     padding-left:10px;
     font-weight: bold;
-
+    color:#1FA65D; 
+   /* color:#999;*/
 }
 .text{
   font-family: sans-serif, Trebuchet MS, Helvetica, "Helvetica Neue" ;
@@ -54,10 +73,23 @@ label{
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
           box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
+
+.text-row{
+  font-family: sans-serif, Trebuchet MS, Helvetica, "Helvetica Neue" ;
+  font-size:12px;
+  min-height: 20px;
+  padding: 9px 0 9px 0;
+  margin-bottom: 10px;
+  background-color: #f5f5f5;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+} 
 .confidential{
     color:#a94442!important;
     background-color: #F2DEDE!important;
-  }
+}
 
 
 .bdr-orange{

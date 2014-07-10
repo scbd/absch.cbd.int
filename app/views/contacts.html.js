@@ -28,6 +28,8 @@ app.controller("ContactsController",
 
     $scope.dashboardFilter = "All";
 
+  
+
     $scope.setDashFilter = function(filter){
         $scope.dashboardFilter = filter;
     }

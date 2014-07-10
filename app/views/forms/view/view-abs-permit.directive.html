@@ -8,11 +8,6 @@
 			<!-- <a type="button" ng-show="showPdf" target="_blank" class="btn btn-info pull-right" ng-href="https://s3.amazonaws.com/absch.documents/ABSCH-{{document.government.identifier}}-{{document.info.documentID}}-{{document.info.revision}}.pdf">Download the Compliance Certificate</a> -->
 			
 
-			<label>Download the Compliance Certificate</label>
-			<div class="km-value">
-				<div view-certificate document-id="document.header.identifier" load-documents="true" government="document.government.identifier"></div>
-			</div>
-			
 			<div ng-show="document.title">
 			 	<label>Title</label>
 			 	<div class="km-value">
@@ -192,7 +187,7 @@
 				<div class="km-value">{{document.expiration}}</div>
 			</div>
 
-			<div ng-show="amendedPermits || document.amendmentsDescription">
+		<!-- 	<div ng-show="amendedPermits || document.amendmentsDescription">
 				<legend>Amendments</legend>
 
 				<div ng-show="amendedPermits">
@@ -213,7 +208,7 @@
 					<div class="km-value km-pre">{{document.amendmentsDescription | lstring:review.local}}</div>
 				</div>
 
-			</div>
+			</div> -->
 			<div ng-show="document.permitFiles">
 				<legend>Documentation</legend>
 				<label>Copy of permit or its equivalent, or other relevant open-access document</label>
@@ -243,6 +238,10 @@
 					</div>
 				</div>
 			</div>
+
+			
+			<legend>Certificate History</legend>
+			<div view-certificate document-id="document.header.identifier" load-documents="true" government="document.government.identifier"></div>
 	</div>
 	<div document-metadata  class="panel-footer"></div>
 </div>

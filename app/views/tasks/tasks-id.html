@@ -4,7 +4,6 @@
 <div ng-cloak class="home-bottom" style="position:relative" ng-controller="TaskIdController">
     <div class="container main" id="main" style="padding-top:6px">
       	<div class="row top">
-
       	<br>
     <div class="alert alert-warning"> <i class="glyphicon glyphicon-warning-sign"></i> 
     <strong>This page is currently under construction.</strong>
@@ -67,7 +66,7 @@
 
 			  <tr ng-show="workflow.createdOn">
 			  	<td>Created on</td>
-			  	<td>{{workflow.createdOn|date:'short'}} by {{workflow.createdBy_info.firstName}} {{workflow.createdBy_info.lastName}}</td>
+			  	<td>{{workflow.createdOn|date:'short'}} by {{workflow.createdBy_info.firstName}} {{workflow.createdBy_info.lastName}} ({{workflow.createdBy_info.email}} )</td>
 			  </tr>
 
 			</table>
