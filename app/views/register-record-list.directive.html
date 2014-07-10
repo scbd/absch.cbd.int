@@ -46,7 +46,7 @@
     </div>
     
 
-    <div ng-repeat="record in (filteredRecords = (records | filter:schemaFilter | filter:statusFilter | filter:keywords | orderBy:'-createdOn'))" ng-class-odd="'odd'" ng-class-even="'even'" id="record{{$index}}">
+    <div ng-repeat="record in (filteredRecords = (records | filter:schemaFilter | filter:statusFilter | filter:keywords | orderBy:['-updatedOn','-createdOn']))" ng-class-odd="'odd'" ng-class-even="'even'" id="record{{$index}}">
       <div class="row" style="padding:10px;border-bottom:1px solid #dedede;">
            <div class="col-xs-4">
                          <span ng-show="isPublished(record)">
