@@ -98,6 +98,8 @@ label{
 }
 .confidential-text{
     color:#a94442!important;
+     padding:3px; 
+     background-color: #F2DEDE!important;
 }
 
 .bdr-orange{
