@@ -262,7 +262,7 @@ app.directive('documentList', function ($http, $filter) {
                         //
                         if(document.amendmentIntent_i != undefined){
                           output.amendmentIntent = String(document.amendmentIntent_i) + 's';
-                          console.log(output.amendmentIntent);
+                          
                         }
                          if(output.amendmentIntent == "1s")output.metadata.push($sce.trustAsHtml("<span style='color:red'>REVOKED</span>"));
                          if(output.amendmentIntent == "0s")output.metadata.push("AMENDED");

@@ -103,10 +103,10 @@
                     <input type="radio" value="1"  ng-model="amendmentIntent" name="amendmentIntent">Unchanged</button>
                 </label>  
                 <label class="btn btn-primary btnExt" ng-click="amendmentIntent=0;buildQuery()">
-                    <input type="radio" value="0"  ng-model="amendmentIntent" name="amendmentIntent" >Amended</button>
+                    <input type="radio" value="0" ng-model="amendmentIntent" name="amendmentIntent" >Amended {{getAmendmentFacets(0)}}</button>
                 </label>
                 <label class="btn btn-danger btnExt" ng-click="amendmentIntent=1;buildQuery()">
-                    <input type="radio" value="1"  ng-model="amendmentIntent" name="amendmentIntent">Revoked</button>
+                    <input type="radio" value="1" ng-model="amendmentIntent" name="amendmentIntent">Revoked {{getAmendmentFacets(1)}}</button>
                 </label>
             </div> -->
             <!-- <span search-filter-dates title='Date of expiry of the permit' query='permitExpiryDate'></span> -->
