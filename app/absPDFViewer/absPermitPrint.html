@@ -81,15 +81,15 @@
                     <div class="text">{{document.title| lstring:locale}}</div>
                 </div>
                 <div class="col-xs-4">
-                    <label>Latest version verification link:</label>
-                    <div class="text">http://absch.cbd.int/certificate/{{documentInfo.documentID}}</div>
+                    <label>Verification link (latest version):</label>
+                    <div class="text"><a href="http://absch.cbd.int/certificate/{{documentInfo.documentID}}">http://absch.cbd.int/certificate/{{documentInfo.documentID}}</a></div>
                 </div>
                
             </div>
             <div class="row">
                 <div class="col-xs-8"> 
                     <label>Additional national references or identifiers:</label>
-                    <div class="text">{{document.nationalReferences | lstring:locale}}</div>
+                    <div class="text">{{document.nationalReferences ?  (document.nationalReferences | lstring:locale) : '-'}}</div>
                 </div>
                  <div class="col-xs-4">
                     <label>ABS Clearing-House unique identifier:</label>
@@ -97,6 +97,8 @@
                 </div>
                 
             </div>
+            ducmnet={{versions}}
+
 
             <h3>Certificate History</h3>
             <div class="row">

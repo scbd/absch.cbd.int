@@ -1,19 +1,19 @@
 
-// define(['app'], function(app){
-
- var app = angular.module('ngapp',[])
+//define(['app'], function(app){
+var app = angular.module('ngapp',[])
 
 app.controller('printPermit', ['$scope','$http','$location', function($scope,$http,$location) {
 
 	var sLocale      = "en";
 	$scope.locale = sLocale;
-	$scope.greeting = "hello moto1212121";
+
+	//$scope.greeting = "hello moto1212121";
 	//console.log(printPermitController);
 
 	var params = {};
 	// params            = clone(params||{});
 	
-	 params.identifier =  $location.search().documentID;
+	 params.identifier ='5CFC5CE3-40F0-44D6-8131-9DC2B8878823';// $location.search().documentID;
 	 //'32E4D584-EA07-EC34-6CDF-A74E57E334F1';
 
 	// var useCache = !!params.cache;
@@ -45,10 +45,17 @@ app.controller('printPermit', ['$scope','$http','$location', function($scope,$ht
 						  .success(function(data){										
 							 	$scope.document.authority.government = data;
 							});
+
+						
 					});
 			console.log(data);
 	});
 
+	$http.get('/api/v2013/documents/'+params.identifier+'/versions', {body:true})
+				  .success(function(data){										
+					 	$scope.versions  = data;	 
+					 	console.log(data);	
+				});
 
 	$http.get('/api/v2013/documents/' +  params.identifier + '?info', { }).success(function(data){
 		 	//console.log($scope.documentInfo.documentID	);
@@ -70,6 +77,8 @@ app.controller('printPermit', ['$scope','$http','$location', function($scope,$ht
 
 
 	}
+
+
 
 	
 	 
@@ -252,3 +261,28 @@ function lstring(ltext, locale)
 		return sText||"";
 
 	}
+	//============================================================
+	//
+	// 
+	//
+	//============================================================	
+	app.filter("formatDate", function(){
+		return function(date,formart){	
+			if(formart== undefined)
+				formart = 'DD MMM YYYY';		
+			return moment(date).format(formart);
+		}
+	});
+
+	//============================================================
+	//
+	// 
+	//
+	//============================================================	
+	app.filter("formatDateWithTime", function(){
+		return function(date,formart){	
+			if(formart== undefined)
+				formart = 'MM/DD/YYYY hh:mm';		
+			return moment(date).format(formart);
+		}
+	});
