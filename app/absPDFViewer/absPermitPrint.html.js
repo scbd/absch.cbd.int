@@ -13,7 +13,7 @@ app.controller('printPermit', ['$scope','$http','$location', function($scope,$ht
 	var params = {};
 	// params            = clone(params||{});
 	
-	 params.identifier ='5CFC5CE3-40F0-44D6-8131-9DC2B8878823';// $location.search().documentID;
+	 params.identifier ='451A7F8F-1173-A524-9381-D8ECCE8C5387';// $location.search().documentID;
 	 //'32E4D584-EA07-EC34-6CDF-A74E57E334F1';
 
 	// var useCache = !!params.cache;
@@ -38,24 +38,22 @@ app.controller('printPermit', ['$scope','$http','$location', function($scope,$ht
 				  .success(function(data){										
 					 	$scope.document.government = data;
 					});
-			$http.get('/api/v2013/documents/' + $scope.document.authority.identifier)
-				  .success(function(data){										
-					 	$scope.document.authority = data;
-					 	$scope.getTerm($scope.document.authority.government.identifier)
-						  .success(function(data){										
-							 	$scope.document.authority.government = data;
-							});
-
-						
-					});
+			// $http.get('/api/v2013/documents/' + $scope.document.authority.identifier)
+			// 	  .success(function(data){										
+			// 		 	$scope.document.authority = data;
+			// 		 	$scope.getTerm($scope.document.authority.government.identifier)
+			// 			  .success(function(data){										
+			// 				 	$scope.document.authority.government = data;
+			// 				});			
+			// 		});
 			console.log(data);
 	});
 
-	$http.get('/api/v2013/documents/'+params.identifier+'/versions', {body:true})
+	$http.get('/api/v2013/documents/'+params.identifier+'/versions?body=true&cache=true')
 				  .success(function(data){										
-					 	$scope.versions  = data;	 
+					 	$scope.versions  = data.Items;	 
 					 	console.log(data);	
-				});
+	});
 
 	$http.get('/api/v2013/documents/' +  params.identifier + '?info', { }).success(function(data){
 		 	//console.log($scope.documentInfo.documentID	);

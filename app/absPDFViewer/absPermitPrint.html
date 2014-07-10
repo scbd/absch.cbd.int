@@ -97,30 +97,8 @@
                 </div>
                 
             </div>
-            ducmnet={{versions}}
-
-
-            <h3>Certificate History</h3>
-            <div class="row">
-                <div class="col-xs-1"><label>Date</label></div>
-                <div class="col-xs-1"><label>Action</label></div>
-                <div class="col-xs-2"><label>Author</label></div>
-                <div class="col-xs-8"><label>Reason</label></div>
-            </div>
-              
-            <div class="row" ng-repeat="document in documents | orderBy:document.createdOn" >
-                <div class="col-xs-1">{{document.createdOn |formatDateWithTime}}</div>
-                <div class="col-xs-1">
-                    <span ng-show="document.body.amendmentIntent==1"><h5 class="label label-danger">CANCELLED</h5></span>
-                    <span ng-show="document.body.amendmentIntent==0"><h5 class="label label-primary">AMENDED</h5></span>
-                    <span ng-show="document.body.amendmentIntent==undefined"><h5 class="label label-success">CREATED</h5></span>
-                </div>
-                <div class="col-xs-2">
-                    {{document.createdBy.firstName}} {{document.createdBy.lastName}} ({{document.createdBy.email}})</div>
-                <div class="col-xs-8">
-                    {{document.body.amendmentsDescription| lstring:locale}}
-                </div>
-            </div>
+           
+            
   
 
             <h3>Information from the National Permit or Equivalent</h3>
@@ -171,18 +149,17 @@
                 </div>
             </div>
 
-            <div class="row" ng-show="document.consentInformation || ">      
+            <div class="row" ng-show="document.consentInformation">      
                 <div class="col-xs-12">
                     <label>Additional information about the PIC: </label>
                     <div class="text">
-                        {{document.consentInformation | lstring:locale}}
-                    <div>links to  PIC info</div>
-
+                        {{document.consentInformation ?  (document.consentInformation | lstring:locale) : '-'}}
                     </div>
                 </div>
                 <div class="col-xs-12">
                     <label>Additional information about the MAT: </label>
-                    <div class="text">xxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x x
+                    <div class="text">
+                        {{document.mutuallyAgreedTermsInformation ?  (document.mutuallyAgreedTermsInformation | lstring:locale) : '-'}}
 
                     <div>links to  MAT info</div>
 
@@ -195,6 +172,15 @@
             <div class="row">      
                 <div class="col-xs-12">
                     <label>Subject-matter or genetic resources covered:</label>
+
+
+                    <div class="text" ng-show="!document.providerConfidential" ng-repeat="provider in document.providers">  
+                        <div view-contact-reference ng-model="provider" locale="locale"></div>
+                    </div>                      
+                    <div ng-show="document.providerConfidential">
+                        <div class="text confidential">Confidential information</div>
+                    </div> 
+
                     <div class="text">xxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x xxxxx xxxx xx xxxxxx x x x x x x x x xxxxxxxx xx x x x x x
 
                     <div>links to  Specmin data</div>
@@ -270,24 +256,49 @@
                 </div>
             </div>
 
-            <h3>Amendment History</h3>
-
-
-            <div class="row">      
-                <div class="col-xs-12">
-                    <label>Copy of permit or its equivalent, or other relevant open-access document:</label>
-                    <div class="text">
-                        List of links and descriptions
-
+            <div ng-show="versions">
+                <h3>Certificate History</h3>
+                <div class="row">
+                    <div class="col-xs-1"><label style="padding-left:20px;">Date</label></div>
+                    <div class="col-xs-1"><label style="padding-left:15px;">Action</label></div>
+                    <div class="col-xs-2"><label style="padding-left:10px;">Author</label></div>
+                    <div class="col-xs-6"><label style="padding-left:5px;">Reason for amendment</label></div>
+                    <div class="col-xs-2"><label style="padding-left:0px;">File</label></div>
+                </div> 
+                  
+                <div class="row"  >
+                    <div class="col-xs-12">
+                        <div class="row-fluid text-row" ng-repeat="document in versions | orderBy:document.createdOn">
+                            <div class="col-xs-1"><strong>{{document.createdOn |formatDateWithTime}}</strong></div>
+                            <div class="col-xs-1" style="top:3px;">
+                                <span ng-show="document.body.amendmentIntent==1"><h5 class="label label-danger">REVOKED</h5></span>
+                                <span ng-show="document.body.amendmentIntent==0"><h5 class="label label-primary">AMENDED</h5></span>
+                                <span ng-show="document.body.amendmentIntent==undefined"><h5 class="label label-success">CREATED</h5></span>
+                            </div>
+                            <div class="col-xs-2">
+                                {{document.createdBy.firstName}} {{document.createdBy.lastName}} ({{document.createdBy.email}})</div>
+                            <div class="col-xs-6">
+                                {{document.body.amendmentsDescription| lstring:locale}}
+                            </div>
+                             <div class="col-xs-2">
+                                <a type="button" target="_blank"  ng-href="https://s3.amazonaws.com/absch.documents/ABSCH-{{government}}-{{document.documentID}}-{{document.revision}}.pdf">
+                                <i class="glyphicon glyphicon-file"></i>
+                                ABSCH-{{government|uppercase}}-{{document.documentID}}-{{document.revision}}</a>
+                            </div>
+                            <div class="clearfix">
+                            <!-- <div class="clearfix">
+                            <div class="col-xs-12">
+                                <hr style="padding:3px 0;margin:0;">
+                            </div> -->
+                        </div>
                     </div>
                 </div>
             </div>
-
           
 
             
 
-            <div class="row" style="background-color:#1FA65D;color:white;border-bottom-radius:5px;">
+            <div class="row" style="background-color:#1FA65D;color:white;border-bottom-radius:5px;padding-bottom:40px;">
                     
                 <div class="col-xs-12"><h3 >Further Information</h3></div>
 
