@@ -22,8 +22,8 @@ app.directive('documentList', function ($http, $filter) {
                   currentPage: '=',
                   documentCount: '='
             },
-            controller: ['$scope', "underscore", "commonjs","authentication", '$q',
-            function ($scope, underscore, commonjs,authentication,$q, filter){
+            controller: ['$scope','$sce', "underscore", "commonjs","authentication", '$q',
+            function ($scope, $sce, underscore, commonjs,authentication,$q, filter){
 
               $scope.formatDate = function formatDate (date) {
                     return moment(date).format('MMMM Do YYYY');
@@ -264,6 +264,8 @@ app.directive('documentList', function ($http, $filter) {
                           output.amendmentIntent = String(document.amendmentIntent_i) + 's';
                           console.log(output.amendmentIntent);
                         }
+                         if(output.amendmentIntent == "1s")output.metadata.push($sce.trustAsHtml("<span style='color:red'>REVOKED</span>"));
+                         if(output.amendmentIntent == "0s")output.metadata.push("AMENDED");
                         //TODO: output.description should be the subjectmatter
                         //TODO: keywords should show up in the metadata. if(output.keywords)output.metadata.push(output.keywords);
                         //TODO: the metadata should be a link to download the pdf
@@ -325,6 +327,8 @@ app.directive('documentList', function ($http, $filter) {
                     $q.when(canUserEdit(document), function(canedit){
                       output.canEdit =  canedit;
                     }) ; 
+
+                    
 
                   return output;
                 }     

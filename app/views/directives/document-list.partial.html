@@ -61,13 +61,12 @@
 
                           <div class="description" ng-hide="displayDetails" >
                           {{document.description | truncate:700:' ... more'}}
+
                           </div>
                           <div class="metadetails" ng-hide="displayDetails" >
-                              <span ng-show="document.amendmentIntent=='1s'"><h5 class="label label-danger"><i class="fa fa-star"></i> REVOKED</h5></span>
-                              <span ng-show="document.amendmentIntent=='0s'"><h5 class="label label-primary"><i class="fa fa-star"></i> AMENDED</h5></span>
-                              <span ng-show="document.amendmentIntent==undefined"><h5 class="label label-success"><i class="fa fa-star"></i> CREATED</h5></span>
+                            
                             <span ng-repeat="m in document.metadata">
-                             {{m}} {{$last ? '' : ' &nbsp;|&nbsp; '}}
+                             <span ng-bind-html="m"> </span> {{$last ? '' : ' &nbsp;|&nbsp; '}}
                             <span>
                           </div>
                         </a>
