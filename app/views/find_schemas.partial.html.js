@@ -161,17 +161,14 @@ app.directive('searchFilterSchemas', function ($http) {
                         var subFilterQuery = '(' + $scope.field+':'+item.identifier;
                         if(item.subFilters){
                             item.subFilters.forEach(function(filter){
-
-                                    // console.log($scope);
-                                    // console.log($scope['msrTJurisdiction'])
                                 if(filter.type=='multiselect'){
                                     if( $scope[filter.name] && $scope[filter.name].length > 0){
-                                        // debugger;
-                                        var selectedValues = $scope[filter.name];   
-                                        selectedValues = _.pluck(selectedValues, "identifier"); 
-                                        //console.log (selectedValues)                                     ;
-                                            subFilterQuery = subFilterQuery + ' AND (' + filter.field +':'+ selectedValues.join(' OR ' + filter.field + ': ') + ')';      
-                                            //subFilterQuery = subFilterQuery.replace(',', ' OR ');                                        
+                                        
+                                        var selectedValues = $scope[filter.name]; 
+                                        if(typeof selectedValues[0]== "object" )
+                                            selectedValues = _.pluck(selectedValues, "identifier"); 
+
+                                        subFilterQuery = subFilterQuery + ' AND (' + filter.field +':'+ selectedValues.join(' OR ' + filter.field + ': ') + ')';                                         
                                     }
                                 }
                                 else if(filter.type=='calendar'){

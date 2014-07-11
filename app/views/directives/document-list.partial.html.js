@@ -154,6 +154,10 @@ app.directive('documentList', function ($http, $filter) {
                     output.createdDateOn = document.createdDate_dt;
                     output.metadata = [];
                     output.amendmentIntent = 'none';
+                    if(!document.identifier_s){
+                      output.identifier_s = output.id;
+                    }
+
                    // if(output.source && output.source.toLowerCase() =='european union'){
                    //      output.isParty = true;
                    //      output.isRatified = true;
