@@ -34,6 +34,11 @@ define(['app',
               position: 'right',
             },
             {
+              element: '#help-record-type',
+              intro: 'Blue records indicate national information. Orange records indicate supplementary reference information.',
+              position: 'bottom',
+            },
+            {
               element: '#help-record-title',
               intro: 'Open and close the record details by clicking on the title of the record.',
               position: 'right',
