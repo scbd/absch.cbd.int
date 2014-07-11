@@ -40,7 +40,7 @@
                         <div style="padding:0px 0 3px 3px; ">
                             <span class="label label-party" ng-class="{'label-info':document.isSignatory && !document.isRatified, 'label-primary':document.isRatified, 'label-default':!document.isRatified && !document.isSignatory}">{{document.source}}</span>
                             <span  class="schema">{{document.schema | schemaName}}</span>
-                            <span><a href="/database/record?documentID={{document.schema=='MEETING' ? document.id : document.identifier_s}}&documentSchema={{document.schema}}" target="_new" class="pull-right" style="padding:0px 3px;color:#999;"><i class="glyphicon glyphicon-new-window"></i>
+                            <span><a href="/database/record?documentID={{document.schema=='MEETING' ? document.id : document.identifier_s}}&documentSchema={{document.schema}}" target="_new" class="pull-right" style="padding:0px 3px;color:#999;"><i class="glyphicon glyphicon-new-window" id="help-record-newwindow"></i>
                             </a>
                             </span>
                             <span ng-show="document.canEdit" ><a href="/register/{{document.schemaForEdit}}/{{document.identifier_s}}/edit" target="_new_"><i class="fa fa-edit"></i>
@@ -57,7 +57,7 @@
                         style="font-size:11px;color:#999;position:relative; top:-1px;font-size:14px;"></i>
 
                         <a ng-click="displayDetails = !displayDetails;load(document,displayDetails);">
-                          <span class="title">{{document.title}} </span>
+                          <span class="title" id="help-record-title">{{document.title}} </span>
 
                           <div class="description" ng-hide="displayDetails" >
                           {{document.description | truncate:700:' ... more'}}

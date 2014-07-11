@@ -26,17 +26,23 @@ define(['app',
             },
             {
               element: '.keyword',
-              intro: 'Type in any words corresponding to titles, summaries, countries or anything! This is the quickest way to find a document or set of documents.',
+              intro: 'Type in any words corresponding to titles, summaries, countries or anything!',
             },
             {
               element: '#filterCheckboxes',
-              intro: 'To browse documents of a certain category, check and uncheck the boxes here; the number in the brackets corresponds to the number of matching documents. You can click the arrows to see more specific constraints.',
+              intro: 'To browse documents of a certain category, check and uncheck the boxes here; the number in the brackets corresponds to the number of matching documents.',
               position: 'right',
             },
             {
-              element: '.form-group',
-              intro: 'Sort the records using this drop down',
+              element: '#help-record-title',
+              intro: 'Open and close the record details by clicking on the title of the record.',
+              position: 'right',
             },
+            {
+              element: '#help-record-newwindow',
+              intro: 'Click here to open the full record in a new window',
+              position: 'left',
+            }
           ],
         };
 
