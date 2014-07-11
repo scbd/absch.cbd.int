@@ -22,14 +22,14 @@
 
 <body>
 	<div ng-app="ngapp" class="main-nav" >
-		<div ng-controller="printPermit" class="container" style="border:1px solid #111;border-radius:5px;" >		  
+		<div ng-controller="printPermit" style="width:1000px;" >		  
          
             
         <!-- <div class="row" style="background-color:#f0ad4e;height:10px;">
             <div class="col-xs-12"
             </div>
         </div> -->
-                <div class="row" style="padding-bottom:30px;padding-top:20px;">
+                <div class="row" style="padding-bottom:30px;">
                         <div class="col-xs-1">
                         </div>
 
@@ -51,12 +51,12 @@
                     </div> 
 
 
-            <div class="row" style="margin-bottom:30px;padding-bottom:15px; background-color:#1FA65D;color:white;">
+            <div class="row" class="header-title" style="background-color:#1FA65D!important;margin-bottom:20px!important;padding-bottom:10px!important;" >
                 <div class="col-xs-12" style="text-align:center;">
                     <h1>
                     Internationally recognized certificate of compliance constituted from information on the permit or its equivalent made available to the Access and Benefit-sharing Clearing-House 
 
-                    <div style="padding:20px 40px 0 40px;">In accordance with Article 17, paragraph 2, of the Nagoya Protocol on Access and Benefit-sharing, a permit or its equivalent issued in accordance with Article 6, paragraph 3 (e) and made available to the Access and Benefit-sharing Clearing-House, shall constitute an internationally recognized certificate of compliance.</div>
+                    <div style="padding:20px 40px 0 40px;color:#fff!important;">In accordance with Article 17, paragraph 2, of the Nagoya Protocol on Access and Benefit-sharing, a permit or its equivalent issued in accordance with Article 6, paragraph 3 (e) and made available to the Access and Benefit-sharing Clearing-House, shall constitute an internationally recognized certificate of compliance.</div>
 
                     </h1>
                     <div ng-show="versions">
@@ -317,7 +317,8 @@
             </div>
           
 
-            <div ng-show="versions">
+            <div ng-show="versions && false">
+
                 <h3>Certificate History</h3>
                 <div class="row">
                     <div class="col-xs-1"><label style="padding-left:20px;">Date</label></div>
@@ -356,11 +357,11 @@
                     </div>
                 </div>
             </div>
-          
+          </div>
 
             
 
-            <div class="row" style="background-color:#1FA65D;color:white;border-bottom-radius:5px;padding-bottom:40px;">
+            <div class="row" style="padding-bottom:20px;">
                     
                 <div class="col-xs-12"><h3 >Further Information</h3></div>
 
@@ -391,9 +392,7 @@
             </div>
            
 
-                </div>
-            <div>
-		</div>
+        </div>
 	</div>
 </body>
 </html>
