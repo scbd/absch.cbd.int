@@ -39,6 +39,11 @@ define(['app',
               position: 'right',
             },
             {
+              element: '#help-record-country',
+              intro: 'The color of the country name indicates their Nagoya Protocol status (grey = not ratified, light-blue = Signatory, darker-blue = Ratified).',
+              position: 'left',
+            },
+            {
               element: '#help-record-newwindow',
               intro: 'Click here to open the full record in a new window',
               position: 'left',
