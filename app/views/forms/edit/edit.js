@@ -1,4 +1,4 @@
-//minor feature additon commit.
+//fixed a bug with the comment up here ;)
 define([
     'app',
     '/app/views/forms/edit/km-form-buttons.js',
