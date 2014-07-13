@@ -24,9 +24,8 @@
     "angular-dragndrop": "latest",
     "angucomplete": "*",
     "barcode-39.js": "https://github.com/erik5388/barcode-39.js.git",
-    "angular-intro.js": "latest"
-  },
-  "resolutions": {
-    "angular": "~1.2.15"
+    "angular-intro.js": "latest",
+    "ngLocalizer": "latest",
+    "angular_form_controls": "latest"
   }
 }
