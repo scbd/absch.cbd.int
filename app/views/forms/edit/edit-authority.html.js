@@ -67,14 +67,15 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 			});
 			$scope.showResponsibleforAllMsg = function(){
 
-      //TODO: you need to gain access to the promise in order to do this correctly.a Otherwise the document won't be loaded when angular evaluated the ng-show.
-			if(!$scope.document || ( !$scope.document.absResponsibleForAll || !$scope.validationReport))
-				return false;
+        //TODO: you need to gain access to the promise in order to do this correctly.a Otherwise the document won't be loaded when angular evaluated the ng-show.
+        if(!$scope.document || ( !$scope.document.absResponsibleForAll || !$scope.validationReport))
+          return false;
 
-			return	Enumerable.from($scope.validationReport.errors).any(function(error){
+        return	Enumerable.from($scope.validationReport.errors).any(function(error){
 					return error.property=='absResponsibleForAllNot';
 				});
 				//
+
 				return true;
 			};
 
