@@ -161,17 +161,14 @@ app.directive('searchFilterSchemas', function ($http) {
                         var subFilterQuery = '(' + $scope.field+':'+item.identifier;
                         if(item.subFilters){
                             item.subFilters.forEach(function(filter){
-
-                                    // console.log($scope);
-                                    // console.log($scope['msrTJurisdiction'])
                                 if(filter.type=='multiselect'){
                                     if( $scope[filter.name] && $scope[filter.name].length > 0){
-                                        // debugger;
-                                        var selectedValues = $scope[filter.name];   
-                                        selectedValues = _.pluck(selectedValues, "identifier"); 
-                                        //console.log (selectedValues)                                     ;
-                                            subFilterQuery = subFilterQuery + ' AND (' + filter.field +':'+ selectedValues.join(' OR ' + filter.field + ': ') + ')';      
-                                            //subFilterQuery = subFilterQuery.replace(',', ' OR ');                                        
+                                        
+                                        var selectedValues = $scope[filter.name]; 
+                                        if(typeof selectedValues[0]== "object" )
+                                            selectedValues = _.pluck(selectedValues, "identifier"); 
+
+                                        subFilterQuery = subFilterQuery + ' AND (' + filter.field +':'+ selectedValues.join(' OR ' + filter.field + ': ') + ')';                                         
                                     }
                                 }
                                 else if(filter.type=='calendar'){
@@ -201,14 +198,12 @@ app.directive('searchFilterSchemas', function ($http) {
                 //console.log(subFilterQuery);
                         conditions.push(subFilterQuery);
                     }
-                });  
-                console.log(conditions)               
+                });                
  
             }            
             $scope.updateFacets = function(schema,fieldName,data){
                 
                 var facets = _.where(schema.subFilters,{name:fieldName})[0]||[]; 
-                console.log(data);
                 if(!facets.facets)
                     return data;
 
@@ -229,7 +224,7 @@ app.directive('searchFilterSchemas', function ($http) {
 
                     var facetFields = [];
                     $scope[schema].subFilters.forEach(function(filter){
-                        if(filter.type=='multiselect' && !filter.facets)
+                        if((filter.type=='multiselect' || filter.type=='radio') && !filter.facets)
                             facetFields.push(filter.field);
                     });
                     if(facetFields.length<=0)
@@ -247,7 +242,7 @@ app.directive('searchFilterSchemas', function ($http) {
                         $http.get('/api/v2013/index/select', { params: queryFacetsParameters })
                         .success(function (data) {                          
                             $scope[schema].subFilters.forEach(function(filter){
-                                if(filter.type=='multiselect'){
+                                if(filter.type=='multiselect' || filter.type=='radio'){
                                     filter.facets = data.facet_counts.facet_fields[filter.field];                                                                ;
                                 }
                             });
@@ -358,8 +353,23 @@ app.directive('searchFilterSchemas', function ($http) {
                 $scope.buildQuery();
 
                 $scope.loadSchemaFacets(schema);
+
+                if(schema == 'absPermit'){
+                    console.log($scope.absPermit.subFilters[4]);
+                }
             }
-            
+            $scope.getAmendmentFacets = function(type){
+                
+                if($scope.absPermit.subFilters[4].facets){
+                    var facets = $scope.absPermit.subFilters[4].facets;
+                   for (var i = 0; i < facets.length; i+=2) {
+                        if(facets[i] == type){
+                            return '(' + facets[i+1] + ')'; 
+                        }
+                    }
+                }
+            }
+
             $scope.buildQuery();
             
             $scope.terms.forEach(function (item) { 

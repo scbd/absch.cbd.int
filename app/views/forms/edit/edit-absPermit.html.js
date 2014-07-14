@@ -108,10 +108,6 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
       }
       if (document.geneticResourcesConfidential) {
         document.geneticResources = undefined;
-        document.specimen     = undefined;
-        document.taxonomy     = undefined;
-        document.gisFiles     = undefined;
-        document.gisMapCenter   = undefined;
       }
       if(!$scope.documentExists){
         document.amendmentIntent = undefined;
