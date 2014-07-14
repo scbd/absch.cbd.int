@@ -2054,11 +2054,6 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 						$scope.$emit("documentInvalid", validationReport);
 					}
 					else return $q.when(editFormUtility.publishRequest(document)).then(function(workflowInfo) {
-
-						if(workflowInfo.type='authority'){
-							//in case of authority save the CNA as a contact in drafts
-							saveAuthorityInContacts(workflowInfo);
-						}													
 						$scope.$emit("documentPublishRequested", workflowInfo, document)
 						return workflowInfo;
 
@@ -2089,11 +2084,6 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 					return editFormUtility.saveDraft(document);
 
 				}).then(function(draftInfo) {
-
-					if(draftInfo.type=='authority'){
-						//in case of authority save the CNA as a contact in drafts
-						saveAuthorityInContacts(draftInfo);
-					}					
 					$scope.$emit("documentDraftSaved", draftInfo)
 					return draftInfo;
 
@@ -2107,39 +2097,7 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 
 				});
 			};
-
-			//====================
-			//
-			//====================
-			// $scope.duplicate = function()
-			// {
-			// 	$scope.loading = true;
-
-			// 	return $q.when($scope.getDocumentFn()).then(function(document)
-			// 	{
-			// 		if(!document)
-			// 			throw "Invalid document";
-					
-			// 		document.header.identifier = guid();
-				
-			// 		return editFormUtility.saveDraft(document);
-
-			// 	}).then(function(draftInfo) {
-
-			// 		$scope.$emit("documentDraftSaved", draftInfo)
-			// 		return draftInfo;
-
-			// 	}).catch(function(error){
-					
-			// 		$scope.$emit("documentError", { action: "saveDraft", error: error })
-
-			// 	}).finally(function(){
-
-			// 		return $scope.closeDialog();
-
-			// 	});
-			// };
-
+			
 			saveAuthorityInContacts = function(draftInfo){
 				
 				var document = $scope.getDocumentFn();
@@ -2161,7 +2119,7 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 						return;
 					}
 
-					id = id.substr(0, id.length-1) + 'C'
+					id = id.substr(0, id.length-3) + 'CNA'
 
 					var qDocument = {															
 										header: {	
