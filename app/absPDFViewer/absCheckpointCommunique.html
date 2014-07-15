@@ -1,0 +1,329 @@
+<html>
+<head>
+	<title>Access and Benefit-Sharing Clearing-House</title>
+	<meta name="description" content="Access and Benefit-Sharing Clearing-House">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="shortcut icon" href="ico/favicon.png">
+
+    <!-- Bootstrap core CSS -->
+	<link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+	<!-- Custom styles for this template -->
+	<link href="../css/permitPDF.css" rel="stylesheet">
+	<link rel="stylesheet" href="../libs/font-awesome/css/font-awesome.min.css">
+
+    <script src="../libs/momentjs/min/moment.min.js"></script>
+    <script src="../libs/barcode-39.js/barcode-39.min.js"></script>
+
+	<script src="../libs/requirejs/require.js"  ></script>
+    <script src="../libs/angular/angular.min.js"  ></script>
+    <script src="absCheckpointCommunique.html.js" ></script>
+
+	<style type="text/css">
+		#watermark {
+		 color: black;
+		padding-left:250px;
+		}
+		#watermark p{
+		  color: black;
+		  font-weight:bolder;
+		  font-size: xx-large;
+		}
+	</style>
+</head>
+
+<body>
+	<div ng-app="ngapp" class="main-nav" >
+		<div ng-controller="printPermit" style="width:1000px;" >
+
+
+
+        <!-- <div class="row" style="background-color:#f0ad4e;height:10px;">
+            <div class="col-xs-12"
+            </div>
+        </div> -->
+                <div class="row" >
+                        <div class="col-xs-1">
+                        </div>
+
+                        <div class="col-xs-3" style="text-align:center;">
+                            <img  style="width:85px;height:85px;"
+                            src="../img/UNEP_logo.svg"/>
+                        </div>
+                        <div class="col-xs-4" style="text-align:center;padding-top:5px;">
+                            <img src="../img/cbd-logo-print-black-en.png" style="height:80px"/>
+                        </div>
+                        <div class="col-xs-3" style="text-align:center;">
+                            <img  style="width:85px;height:85px;"
+                            src="../img/Emblem_of_the_United_Nations.svg"/>
+                        </div>
+
+                         <div class="col-xs-1">
+                        </div>
+                    </div>
+
+			<div id="watermark">
+			<p>This is the test version.</p>
+			</div>
+            <div class="row" class="header-title" style="background-color:#1FA65D!important;margin-bottom:20px!important;padding-bottom:10px!important;" >
+                <div class="col-xs-12" style="text-align:center;">
+                    <h1>
+                    Checkpoint Communiqué
+                    <div style="padding:20px 40px 0 40px;color:#fff!important;">
+                        <!-- In accordance with Article 17, paragraph 2, of the Nagoya Protocol on Access and Benefit-sharing, a permit or its equivalent issued in accordance with Article 6, paragraph 3 (e) and made available to the Access and Benefit-sharing Clearing-House, shall constitute an internationally recognized certificate of compliance.</div> -->
+
+                    </h1>
+                </div>
+            </div>
+
+            <div class="" style="padding:20px">
+
+    			<a type="button" ng-show="showPdf" target="_blank" class="btn btn-info pull-right" ng-href="http://absch.cbd.int/app/abs/docs/sample_communique.pdf">Download the Checkpoint Communiqué</a>
+
+                <div class="row" ng-show="document.title">
+                    <div class="col-xs-12">
+                    	<label>Title:</label>
+                        <div class="text">{{document.title| lstring:locale}}</div>
+                    </div>
+                </div>
+
+                <div class="row" ng-show="document.government || document.checkpoint">
+                    	<legend>General information</legend>
+                    <div class="col-xs-12">
+                    	<label>Country:</label>
+                        <div class="text">{{document.government|term:locale}}</div>
+                    </div>
+                </div>
+
+
+    			<div ng-show="document.permit || document.permitNotAvailable ||
+    						document.originCountries || responsibleAuthority ||
+    						document.specimen || document.taxonomy || document.gisFiles || document.subjectMatter ||
+    						document.referenceOfInformedConsent || document.referenceOfAgreedTerms ||
+    						document.personeToWhomGranted || document.geneticRessourceUsers">
+    				<legend>Details of the internationally recognize certificate of compliance</legend>
+    				<div class="row" ng-show="document.permit">
+                        <div class="col-xs-12">
+        					<label>Reference number(s) of the internationally recognized certificate(s) of compliance that relate(s) to this communiqué</label>
+        					<div class="text">
+        						<ul>
+        							<li ng-repeat="permit in document.permit">
+        								<a href="http://localhost:2010/database/record?documentSchema=ABSPERMIT&documentID={{permit | lstring:locale}}">{{permit | lstring:locale}}</a>
+        							</li>
+        						</ul>
+        					</div>
+        				</div>
+    				</div>
+    				<div ng-show="document.permitNotAvailable" class="text">
+    					<strong>The internationally recognized certificate of compliance is not available</strong>
+    				</div>
+
+    				<div ng-show="document.originCountries || responsibleAuthority ||
+    					document.specimen || document.taxonomy || document.gisFiles || document.subjectMatter ||
+    					document.referenceOfInformedConsent || document.referenceOfAgreedTerms ||
+    					document.personeToWhomGranted || document.geneticRessourceUsers">
+    					<div ng-show="document.originCountries" class="row" >
+                            <div class="col-xs-12">
+        						<label>Source of the genetic resource</label>
+        						<div class="text">
+        							<ul class="list">
+        								<li ng-repeat="term in document.originCountries">{{term|term:locale}}</li>
+        							</ul>
+        						</div>
+        					</div>
+    					</div>
+    					<div ng-show="responsibleAuthority"class="row" >
+                            <div class="col-xs-12">
+    						<label>Person or entity who granted prior informed consent</label>
+    						<div class="text">
+    							<b>{{responsibleAuthority.document.name | lstring:locale}}</b><br />
+    						</div>
+    				</div>
+    					</div>
+    					<div ng-show="document.subjectMatter"class="row" >
+                            <div class="col-xs-12">
+    						<label>Subject-matter or genetic resources relevant to the information collected or received</label>
+    						<div class="text km-pre">{{document.subjectMatter | lstring:locale}}</div>
+    				</div>
+    					</div>
+    					<div ng-show="document.specimen || document.taxonomy || document.gisFiles"class="row" >
+                            <div class="col-xs-12">
+    						<label>Optional additional subject-matter details</label>
+    						<div ng-show="document.specimen">
+    							<label>Specimen data</label>
+    							<div class="text">
+    							<ul class="list">
+    								<li ng-repeat="item in document.specimen">
+    									<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+    									<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+    								</li>
+    							</ul>
+                            </div>
+    				</div>
+    						</div>
+    						<div ng-show="document.taxonomy"class="row" >
+                            <div class="col-xs-12">
+    							<label>Taxonomy data</label>
+    							<div class="text">
+    								<ul class="list">
+    									<li ng-repeat="item in document.taxonomy">
+    										<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+    										<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+    									</li>
+    								</ul>
+    							</div>
+    				</div>
+    						</div>
+    						<div ng-show="document.gisFiles"class="row" >
+                            <div class="col-xs-12">
+    							<label>Geographic coordinates</label>
+    							<div class="text">
+    								<ul class="list">
+    									<li ng-repeat="item in document.gisFiles">
+    										<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+    										<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+    									</li>
+    								</ul>
+    							</div>
+    							<div class="leaflet" center="gisMapCenter" layers="gisMapLayers"></div>
+    				</div>
+    						</div>
+    					</div>
+    					<div ng-show="document.referenceOfInformedConsent"class="row" >
+                            <div class="col-xs-12">
+    						<label>Reference or evidence of prior informed consent</label>
+    						<div class="text km-pre">{{document.referenceOfInformedConsent | lstring:locale}}</div>
+    				</div>
+    					</div>
+
+    					<div ng-show="document.referenceOfAgreedTerms"class="row" >
+                            <div class="col-xs-12">
+    						<label>Reference or evidence of establishment of mutually agreed terms</label>
+    						<div class="text km-pre">{{document.referenceOfAgreedTerms | lstring:locale}}</div>
+    				</div>
+    					</div>
+
+    					<div ng-show="document.personeToWhomGranted"class="row" >
+                            <div class="col-xs-12">
+    						<label>Person or entity to whom prior informed consent was granted</label>
+    						<div class="text">
+    							<div view-contact-reference ng-model="document.personeToWhomGranted" locale="locale"></div>
+    						</div>
+    				</div>
+    					</div>
+    				</div>
+    			</div>
+    			<div ng-show="document.description || document.dateFrom || document.dateTo ||
+    				 information || informationDocuments">
+    				<legend>Information on the utilization of the genetic resource(s)</legend>
+    				<div ng-show="document.description"class="row" >
+                            <div class="col-xs-12">
+    					<label>Short description of the information collected or received by the checkpoint relevant to the utilization of genetic resources</label>
+    					<div class="text km-pre">{{document.description | lstring:locale}}</div>
+    				</div>
+    				</div>
+    				<div ng-show="document.geneticRessourceUsers"class="row" >
+                            <div class="col-xs-12">
+    					<label>Person or entity utilizing the genetic resource at the checkpoint</label>
+    					<div class="text" ng-repeat="user in document.geneticRessourceUsers">
+    						<div view-contact-reference ng-model="user" locale="locale"></div>
+    					</div>
+    				</div>
+    				</div>
+    				<div ng-show="document.date"class="row" >
+                            <div class="col-xs-12">
+    					<label>Date on which the information was collected</label>
+    					<div class="text">{{document.date}}</div>
+    				</div>
+    				</div>
+    				<div ng-show="document.dateFrom"class="row" >
+                            <div class="col-xs-12">
+    					<label>Date on which the information started being collected</label>
+    					<div class="text">{{document.dateFrom}}</div>
+    				</div>
+    				</div>
+    				<div ng-show="document.dateTo"class="row" >
+                            <div class="col-xs-12">
+    					<label>Date on which the information was received</label>
+    					<div class="text">{{document.dateTo}}</div>
+    				</div>
+    				</div>
+    				<div ng-show="document.informationDocuments"class="row" >
+                            <div class="col-xs-12">
+    					<label>Upload a copy of relevant document</label>
+    					<div class="text" ng-repeat="item in document.informationDocuments">
+    						<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+    						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+    					</div>
+    				</div>
+    				</div>
+    				<div ng-show="document.information"class="row" >
+                            <div class="col-xs-12">
+    					<label>Copy of relevant information</label>
+    					<div class="text km-pre">{{document.information | lstring:locale}}</div>
+    				</div>
+    				</div>
+    			</div>
+    			<div ng-show="document.relevantInformation||document.relevantDocuments"class="row" >
+                            <div class="col-xs-12">
+    				<legend>Additional Information</legend>
+
+    				<div ng-show="document.relevantInformation">
+    					<div class="text" ng-bind="document.relevantInformation | lstring:locale"></div>
+    				</div>
+
+    				<div ng-show="document.relevantDocuments">
+    					<label>Other relevant website address or attached documents</label>
+    					<div class="text" ng-repeat="item in document.relevantDocuments">
+    						<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+    						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+    					</div>
+    				</div>
+    				</div>
+    			</div>
+    	    </div>
+
+            <div class="row" style="padding-bottom:20px;">
+
+                <div class="col-xs-12"><h3 >Further Information</h3></div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-xs-8">
+
+                    Questions about the permit or its equivalent constituting an internationally
+                    recognized certificate of compliance should be addressed to the competent
+                    national authority issuing the permit or its equivalent. Additional information about
+                    the permit or its equivalent may be available in the Access and Benefit-Sharing
+                    Clearing House (<a href="http://absch.cbd.int/" style="color:white;">http://absch.cbd.int/</a>).
+                    <br><br>
+                    Questions about the Nagoya Protocol on Access and Benefit-sharing or the
+                    operation of the Access and Benefit-sharing Clearing-House may be directed to the Secretariat of the Convention on Biological Diversity.
+
+                </div>
+                <div class="col-xs-4">
+                    <strong>Secretariat of the Convention on Biological Diversity</strong><br/>
+
+                    413 rue Saint-Jacques, suite 800<br/>
+                    Montreal, Québec, H2Y 1N9<br/>
+                    Canada<br/>
+                    Fax: +1 514 288-6588<br/>
+                    Email: <a href="mailto:secretariat@cbd.int" style="color:white;">secretariat@cbd.int</a>
+
+                </div>
+            </div>
+
+
+        </div>
+	</div>
+</body>
+</html>
+
+
+
+                <div class="row">
+                    <div class="col-xs-8">
+                    	<label>:</label>
+                        <div class="text"></div>
+                    </div>
+                </div>

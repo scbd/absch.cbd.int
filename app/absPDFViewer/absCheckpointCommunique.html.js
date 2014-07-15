@@ -7,120 +7,16 @@ app.controller('printPermit', ['$scope','$http','$location', function($scope,$ht
 	var sLocale      = "en";
 	$scope.locale = sLocale;
 
-	//$scope.greeting = "hello moto1212121";
-	//console.log(printPermitController);
-
 	var params = {};
 	// params            = clone(params||{});
 
-	 params.identifier ='1E49C732-6063-320D-ACCD-62A1362FAC4F';// $location.search().documentID;
-	 //'32E4D584-EA07-EC34-6CDF-A74E57E334F1';
+	 params.identifier = $location.search().documentID;
 
-	// var useCache = !!params.cache;
-
-	// params.cache = false;
-
-	// var oTrans = transformPath(serviceUrls.documentUrl(), params);
 
 	$http.get('/api/v2013/documents/' +  params.identifier, { }).success(function(data){
 
 		 	$scope.document = data;
-		 	var usageDetails = []
-
-		 	$scope.document.usage.forEach(function(usage){
-
-				$scope.getTerm(usage.identifier).success(function(data){
-									 	usageDetails.push( data);
-									 });
-			});
-			$scope.document.usage = usageDetails;
-			$scope.getTerm($scope.document.government.identifier)
-				  .success(function(data){
-					 	$scope.document.government = data;
-					});
-			// $http.get('/api/v2013/documents/' + $scope.document.authority.identifier)
-			// 	  .success(function(data){
-			// 		 	$scope.document.authority = data;
-			// 		 	$scope.getTerm($scope.document.authority.government.identifier)
-			// 			  .success(function(data){
-			// 				 	$scope.document.authority.government = data;
-			// 				});
-			// 		});
-			console.log(data);
 	});
-
-	$http.get('/api/v2013/documents/'+params.identifier+'/versions?body=true&cache=true')
-				  .success(function(data){
-					 	$scope.versions  = data.Items;
-					 	console.log(data);
-	});
-
-	$http.get('/api/v2013/documents/' +  params.identifier + '?info', { }).success(function(data){
-		 	//console.log($scope.documentInfo.documentID	);
-		 	$scope.documentInfo = data;
-		 	//var barcode = new Barcode39();
-	});
-					//TODO: return result.data;
-
-
-
-	$scope.getTerm = function(identifier)
-	{
-			//console.log($http.get('/api/v2013/thesaurus/terms/' +  identifier, { }));
-		return	 $http.get('/api/v2013/thesaurus/terms/' +  identifier, { });
-		// .success(function(data){
-		// 	//console.log(data);
-		//  	return data;
-		//  });
-
-
-	}
-
-
-
-
-
-
-	//============================================================
-	//
-	//
-	//============================================================
-	$scope.Encode = function(id)
-	{
-		var CHARSET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		var    BASE    = CHARSET.length;// ABS PERMIT SECRET // MUST be < BASE*BASE - BASE - 1 // < 1259
-		var    SECRET  = 937;
-	       var sID = "";
-	       var sCS = "";
-
-	       var iIndex  = 0;
-	       var iNumber = 0;
-	       //compute ID
-
-	       iNumber = id;
-
-	       while(iNumber>0)
-	       {
-	             iIndex  = (iNumber % BASE);
-	             iNumber = (iNumber - iIndex) / BASE;
-
-	             sID = CHARSET[iIndex] + sID;
-	       }
-// console.log('index %i number %i id %i',iIndex,iNumber, sID);
-	       //compute Checksum
-
-	       iNumber = (id + SECRET) % (BASE * BASE - BASE - 1);
-
-	       for(var i=0; i<2; ++i)
-	       {
-	             iIndex  = (iNumber % BASE);
-	             iNumber = (iNumber - iIndex) / BASE;
-
-	             sCS = CHARSET[iIndex] + sCS;
-	       }
-
-	       return sID+sCS;
-	}
 
 }]);
 

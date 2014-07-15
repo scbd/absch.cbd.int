@@ -5,26 +5,38 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<link rel="shortcut icon" href="ico/favicon.png">
-	
+
     <!-- Bootstrap core CSS -->
 	<link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 	<!-- Custom styles for this template -->
 	<link href="../css/permitPDF.css" rel="stylesheet">
 	<link rel="stylesheet" href="../libs/font-awesome/css/font-awesome.min.css">
-	
-    <script src="../libs/momentjs/min/moment.min.js"></script>
-    <script src="../libs/barcode-39.js/barcode-39.min.js"></script>
 
-	<script src="../libs/requirejs/require.js"  ></script>
-    <script src="../libs/angular/angular.min.js"  ></script>	    
+    <script src="../libs/momentjs/min/moment.min.js"></script>
+    <!--<script src="../libs/barcode-39.js/barcode-39.min.js"></script>-->
+
+    <script src="../libs/angular/angular.min.js"  ></script>
     <script src="absPermitPrint.html.js" ></script>
+
+	<style type="text/css">
+		#watermark {
+		 color: black;
+		padding-left:250px;
+		}
+		#watermark p{
+		  color: black;
+		  font-weight:bolder;
+		  font-size: xx-large;
+		}
+	</style>
 </head>
 
 <body>
 	<div ng-app="ngapp" class="main-nav" >
-		<div ng-controller="printPermit" style="width:1000px;" >		  
-         
-            
+		<div ng-controller="printPermit" style="width:1000px;" >
+
+
+
         <!-- <div class="row" style="background-color:#f0ad4e;height:10px;">
             <div class="col-xs-12"
             </div>
@@ -47,31 +59,32 @@
 
                          <div class="col-xs-1">
                         </div>
-                        
-                    </div> 
+                    </div>
 
-
+			<div id="watermark">
+			<p>This is the test version.</p>
+			</div>
             <div class="row" class="header-title" style="background-color:#1FA65D!important;margin-bottom:20px!important;padding-bottom:10px!important;" >
                 <div class="col-xs-12" style="text-align:center;">
                     <h1>
-                    Internationally recognized certificate of compliance constituted from information on the permit or its equivalent made available to the Access and Benefit-sharing Clearing-House 
+                    Internationally recognized certificate of compliance constituted from information on the permit or its equivalent made available to the Access and Benefit-sharing Clearing-House
 
                     <div style="padding:20px 40px 0 40px;color:#fff!important;">In accordance with Article 17, paragraph 2, of the Nagoya Protocol on Access and Benefit-sharing, a permit or its equivalent issued in accordance with Article 6, paragraph 3 (e) and made available to the Access and Benefit-sharing Clearing-House, shall constitute an internationally recognized certificate of compliance.</div>
 
                     </h1>
                     <div ng-show="versions">
-                        <div class="cancelled" ng-show="versions[0].body.amendmentIntent==1"> 
+                        <div class="cancelled" ng-show="versions[0].body.amendmentIntent==1">
                             THIS CERTIFICATE HAS BEEN REVOKED
-                            <p> 
+                            <p>
                             See certificate history for more information.
                             </p>
                         </div>
-                    </div>        
-                </div> 
-            </div>  
+                    </div>
+                </div>
+            </div>
 
             <div class="row">
-                <div class="col-xs-8"> 
+                <div class="col-xs-8">
                 	<label>Title/reference number of the permit or its equivalent:</label>
                     <div class="text">{{document.title| lstring:locale}}</div>
                 </div>
@@ -79,10 +92,10 @@
                     <label>Verification link (latest version):</label>
                     <div class="text"><a href="http://absch.cbd.int/certificate/{{documentInfo.documentID}}">http://absch.cbd.int/certificate/{{documentInfo.documentID}}</a></div>
                 </div>
-               
+
             </div>
             <div class="row">
-                <div class="col-xs-8"> 
+                <div class="col-xs-8">
                     <label>Additional national references or identifiers:</label>
                     <div class="text">{{document.nationalReferences ?  (document.nationalReferences | lstring:locale) : '-'}}</div>
                 </div>
@@ -90,19 +103,19 @@
                     <label>ABS Clearing-House unique identifier:</label>
                     <div class="text">ABSCH-{{document.government.identifier |uppercase}}-{{documentInfo.documentID}}-{{documentInfo.revision}}</div>
                 </div>
-                
+
             </div>
-           
-            
-  
+
+
+
 
             <h3>Information from the National Permit or Equivalent</h3>
 
              <div class="row">
-                <div class="col-xs-6"> 
+                <div class="col-xs-6">
                     <label>Permit or equivalent issued by: </label>
                     <div class="text">
-                        <div view-contact-reference ng-model="authority" locale="locale"></div>   
+                        <div view-contact-reference ng-model="authority" locale="locale"></div>
                     </div>
                 </div>
                 <div class="col-xs-6">
@@ -114,7 +127,7 @@
 
 
             <div class="row">
-                <div class="col-xs-6"> 
+                <div class="col-xs-6">
                     <label>Prior informed consent (PIC) obtained: </label>
                     <div class="text"> <i class="fa fa-check"></i>  YES</div>
                 </div>
@@ -123,28 +136,27 @@
                     <div class="text"> <i class="fa fa-check"></i>  YES </div>
                 </div>
             </div>
-            <div class="row">      
+            <div class="row">
                 <div class="col-xs-6">
                     <label>Entity to whom PIC was granted: </label>
-                    <div class="text" ng-repeat="consent in document.informedConsents" ng-show="!document.informedConsentConfidential">       
-                        <div view-contact-reference ng-model="consent" locale="locale"></div>        
+                    <div class="text" ng-repeat="consent in document.informedConsents" ng-show="!document.informedConsentConfidential">
+                        <div view-contact-reference ng-model="consent" locale="locale"></div>
                     </div>
                     <div ng-show="document.informedConsentConfidential">
                         <div class="text confidential">Confidential information</div>
                     </div>
                 </div>
-                <div class="col-xs-6"> 
+                <div class="col-xs-6">
                     <label>Provider: </label>
-                    <div class="text" ng-show="!document.providerConfidential" ng-repeat="provider in document.providers">  
+                    <div class="text" ng-show="!document.providerConfidential" ng-repeat="provider in document.providers">
                         <div view-contact-reference ng-model="provider" locale="locale"></div>
-                    </div>                      
+                    </div>
                     <div ng-show="document.providerConfidential">
                         <div class="text confidential">Confidential information</div>
-                    </div>  
+                    </div>
                 </div>
             </div>
-
-            <div class="row" ng-show="document.consentInformation">      
+            <div class="row" ng-show="document.consentInformation">
                 <div class="col-xs-12">
                     <label>Additional PIC information: </label>
                     <div class="text">
@@ -153,7 +165,7 @@
                         <div ng-show="document.consentInformation && document.consentDocuments" style="height:10px;"> </div>
 
                          <div ng-repeat="item in document.consentDocuments">
-                            <i class="glyphicon glyphicon-file"></i> 
+                            <i class="glyphicon glyphicon-file"></i>
                             <a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
                             <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
                         </div>
@@ -169,7 +181,7 @@
                         <div ng-show="document.mutuallyAgreedTermsDocuments && document.mutuallyAgreedTermsInformation" style="height:10px;"> </div>
 
                         <div ng-repeat="item in document.mutuallyAgreedTermsDocuments">
-                            <i class="glyphicon glyphicon-file"></i> 
+                            <i class="glyphicon glyphicon-file"></i>
                             <a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
                             <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
                         </div>
@@ -182,19 +194,19 @@
 
         <h3>Subject-matter</h3>
 
-            <div class="row">      
+            <div class="row">
                 <div class="col-xs-12">
                     <label>Subject-matter or genetic resources covered:</label>
-                    <div class="text" ng-show="!document.geneticResourcesConfidential" >  
+                    <div class="text" ng-show="!document.geneticResourcesConfidential" >
                         {{document.geneticResources | lstring:locale}}
-                    </div>                          
+                    </div>
                     <div ng-show="document.geneticResourcesConfidential">
                         <div class="text confidential">Confidential information</div>
-                    </div>  
+                    </div>
                 </div>
             </div>
 
-            <div class="row" ng-show="document.specimen || document.taxonomy || document.gisFiles ">      
+            <div class="row" ng-show="document.specimen || document.taxonomy || document.gisFiles ">
                 <div class="col-xs-12">
                     <label>Additional Genetic Resources Information Links:</label>
                     <div class="text">
@@ -224,19 +236,19 @@
                 </div>
             </div>
 
-            <div class="row" ng-show="document.keywords">      
+            <div class="row" ng-show="document.keywords">
                 <div class="col-xs-12">
                     <label>keywords:</label>
-                    <div class="text">  
+                    <div class="text">
                         <span ng-repeat="term in document.keywords">
                                 {{term|term}}{{$last ? '' : ', '}}
                         </span>
-                    </div>                          
+                    </div>
                 </div>
             </div>
 
-            
-            <!-- <div class="row">      
+
+            <!-- <div class="row">
                 <div class="col-xs-12">
                     <label>Geographic data:</label>
                     <div class="text">
@@ -244,15 +256,15 @@
                     </div>
                 </div>
             </div> -->
-        
-           
+
+
              <h3>Utilization</h3>
 
-             <div class="row">      
+             <div class="row">
                 <div class="col-xs-12">
                     <label>Specific uses covered by the permit or its equivalent or use restrictions:</label>
-                    <div class="text">               
-                        <div><span class="inner-label">Utilization type:</span> 
+                    <div class="text">
+                        <div><span class="inner-label">Utilization type:</span>
                             <span ng-show="!document.usageConfidential" ng-repeat="term in document.usage">{{term|term}}{{$last ? '' : ' and '}}</span>
                              <span ng-show="document.usageConfidential" class="confidential-text">Confidential information</span>
 
@@ -266,7 +278,7 @@
             </div>
 
 
-            <div class="row">      
+            <div class="row">
                 <div class="col-xs-12">
                     <label>Conditions for third party transfer:</label>
                     <div class="text">
@@ -277,7 +289,7 @@
 
             <h3>Documents and Additional information</h3>
 
-            <div class="row">      
+            <div class="row">
                 <div class="col-xs-12">
                     <label>Copy of permit or its equivalent, or other relevant open-access document:</label>
                     <div class="text">
@@ -289,17 +301,17 @@
                          <div ng-show="document.permitDescription && document.permitFiles" style="height:10px;"> </div>
 
                         <div ng-repeat="item in document.permitFiles">
-                            <i class="glyphicon glyphicon-file"></i> 
+                            <i class="glyphicon glyphicon-file"></i>
                             <a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
                             <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
                         </div>
-                        
+
                         <div ng-show="!document.permitDescription && !document.permitFiles"> - </div>
                     </div>
                 </div>
             </div>
 
-            <div class="row"  ng-show="document.relevantInformation">      
+            <div class="row"  ng-show="document.relevantInformation">
                 <div class="col-xs-12">
                     <label>Additional information:</label>
                     <div class="text">
@@ -308,14 +320,14 @@
                         <div ng-show="document.relevantInformation && document.relevantDocuments" style="height:10px;"> </div>
 
                         <div ng-repeat="item in document.relevantDocuments">
-                            <i class="glyphicon glyphicon-file"></i> 
+                            <i class="glyphicon glyphicon-file"></i>
                             <a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
                             <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-                        </div> 
+                        </div>
                     </div>
                 </div>
             </div>
-          
+
 
             <div ng-show="versions && false">
 
@@ -326,8 +338,8 @@
                     <div class="col-xs-2"><label style="padding-left:10px;">Author</label></div>
                     <div class="col-xs-6"><label style="padding-left:5px;">Reason for amendment</label></div>
                     <div class="col-xs-2"><label style="padding-left:0px;">File</label></div>
-                </div> 
-                  
+                </div>
+
                 <div class="row"  >
                     <div class="col-xs-12">
                         <div class="row-fluid text-row" ng-repeat="document in versions | orderBy:document.createdOn">
@@ -360,7 +372,7 @@
           </div>
 
             <div class="row" style="padding-bottom:20px;">
-                    
+
                 <div class="col-xs-12"><h3 >Further Information</h3></div>
 
                 <div class="clearfix"></div>
@@ -371,15 +383,15 @@
                     recognized certificate of compliance should be addressed to the competent
                     national authority issuing the permit or its equivalent. Additional information about
                     the permit or its equivalent may be available in the Access and Benefit-Sharing
-                    Clearing House (<a href="http://absch.cbd.int/" style="color:white;">http://absch.cbd.int/</a>). 
+                    Clearing House (<a href="http://absch.cbd.int/" style="color:white;">http://absch.cbd.int/</a>).
                     <br><br>
                     Questions about the Nagoya Protocol on Access and Benefit-sharing or the
                     operation of the Access and Benefit-sharing Clearing-House may be directed to the Secretariat of the Convention on Biological Diversity.
-                              
+
                 </div>
                 <div class="col-xs-4">
                     <strong>Secretariat of the Convention on Biological Diversity</strong><br/>
-                    
+
                     413 rue Saint-Jacques, suite 800<br/>
                     Montreal, Québec, H2Y 1N9<br/>
                     Canada<br/>
@@ -388,7 +400,7 @@
 
                 </div>
             </div>
-           
+
 
         </div>
 	</div>
