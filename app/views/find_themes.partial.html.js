@@ -19,7 +19,7 @@ app.directive('searchFilterThemes', function ($http) {
         link: function ($scope, element, attrs, ngModelController)
         {
         },
-        controller : ['$scope', '$element', '$location', 'Thesaurus', function ($scope, $element, $location, thesaurus)
+        controller : ['$scope', '$element', '$location', 'Thesaurus', 'underscore', function ($scope, $element, $location, thesaurus, _)
         {
             $scope.expanded = false;
             $scope.selectedItems = [];
@@ -66,7 +66,7 @@ app.directive('searchFilterThemes', function ($http) {
 
 
                 $element.find("#dialogSelect").modal("show");
-                
+
                 //if(!$scope.expanded)
                     //$scope.$parent.$broadcast('onExpand', $scope);
 
@@ -96,7 +96,7 @@ app.directive('searchFilterThemes', function ($http) {
             $scope.updateQuery = function() {
 
                // console.log($scope.query );
-                
+
                 $scope.query = '';
 
                 $scope.selectedItems.forEach(function(item) {
@@ -126,55 +126,28 @@ app.directive('searchFilterThemes', function ($http) {
                 if(!broaderTerms) return;
 
                 broaderTerms.forEach(function (term) {
-//console.log(term);
                     term.indeterminateCounterA = term.indeterminateCounterA + (selected ? 1 : -1);
-                    //console.log('indeterminateCounterA setBroaders' + term.indeterminateCounterA);
                     term.indeterminate = !term.selected && (term.indeterminateCounterA + term.indeterminateCounterB) > 0;
 
-                    setBroaders(term.broaderTerms, selected); 
+                    setBroaders(term.broaderTerms, selected);
                 });
 
-
-                // if(term.indeterminate) {
-                //     term.state = term.selected;
-                //     term.selected = false;
-                // }
-
-                // if(!term.indeterminate) {
-                //     term.selected = term.state;
-                //     term.state = null;
-                // }
-
-                // term.indeterminate = selected;
-
-                
             }
 
             function setNarrowers(narrowerTerms, selected) {
 
                 if(!narrowerTerms) return;
 
-                narrowerTerms.forEach(function (term) { 
- 
+                narrowerTerms.forEach(function (term) {
+
                     term.indeterminateCounterB = term.indeterminateCounterB + (selected ? 1 : -1);
-                   // console.log('indeterminateCounterB setNarrowers' + term.indeterminateCounterB);
                     term.indeterminate = !term.selected && (term.indeterminateCounterA + term.indeterminateCounterB) > 0;
 
-                    setNarrowers(term.narrowerTerms, selected); 
+                    setNarrowers(term.narrowerTerms, selected);
                 });
-
-
-                // 
-
-                // 
-
-                // term.indeterminate = selected;
-
-                
             }
 
             $scope.onclick = function (scope, evt) {
-                console.log('onclick');
                 scope.item.selected = !scope.item.selected;
                 $scope.ts(scope, evt);
             }
@@ -188,23 +161,6 @@ app.directive('searchFilterThemes', function ($http) {
 
                 setBroaders(term.broaderTerms, term.selected);
                 setNarrowers(term.narrowerTerms, term.selected);
-                
-                //if(scope.item.indeterminate)
-                  //  scope.item.indeterminate = scope.item.indeterminate = false;
-
-                //if(scope.item.selected==true) unselect(scope.item);
-                //else          
-         //       if(scope.item.selected) { if(scope.item.narrowerTerms) scope.item.narrowerTerms.forEach(select); }
-           //     else                    { if(scope.item.narrowerTerms) scope.item.narrowerTerms.forEach(unselect); }
-
-                //var cb = evt.target;
-                                
-                //if (cb.readOnly) cb.checked=cb.readOnly=false;
-                //else if (!cb.checked) cb.readOnly=cb.indeterminate=true;
-
-                //$scope.actionSelect(scope.item);
-
-
 
                 buildQuery();
             }
@@ -225,9 +181,9 @@ app.directive('searchFilterThemes', function ($http) {
             }
 
             function buildConditions (conditions, items) {
-                items.forEach(function (item) { 
+                items.forEach(function (item) {
                     if(item.selected)
-                        conditions.push('thematicAreas_REL_ss:'+item.identifier);
+                        conditions.push('thematicAreas_REL_ss:'+encodeURIComponent(item.identifier));
                     else if(item.narrowerTerms) {
                         buildConditions(conditions, item.narrowerTerms);
                     }
@@ -235,20 +191,20 @@ app.directive('searchFilterThemes', function ($http) {
             }
 
             function flatten(items, collection) {
-                items.forEach(function (item) { 
+                items.forEach(function (item) {
                     item.selected = false;
                     item.indeterminateCounterA = 0;
                     item.indeterminateCounterB = 0;
                     collection[item.identifier] = item;
-                    if(item.narrowerTerms) 
+                    if(item.narrowerTerms)
                         flatten(item.narrowerTerms, collection);
                 });
                 return collection;
             }
 
-            
 
-            $scope.$watch('items', function (values) { 
+
+            $scope.$watch('items', function (values) {
 
                 if(!values) return;
                 if($scope.termsMap)
@@ -261,12 +217,13 @@ app.directive('searchFilterThemes', function ($http) {
             $scope.terms = [];
             $scope.$watch('showSelect', function(value){
                     if(value && $scope.terms.length==0){
-                        $http.get('/api/v2013/thesaurus/domains/50616B56-12F3-4C46-BC43-2DFC26679177/terms').success(function (data) {
+
+                        $http.get('/api/v2013/thesaurus/domains/CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924/terms').success(function (data) {
                             $scope.terms = thesaurus.buildTree(data);
 
                             $scope.termsMap   = flatten($scope.terms, {});
                             $scope.termsArray = _.values($scope.termsMap);
-                            
+
                             if($scope.items)
                                 $scope.items.forEach(function (item) {
                                     if(_.has($scope.termsMap, item.symbol))
@@ -277,11 +234,62 @@ app.directive('searchFilterThemes', function ($http) {
                     }
                 }
             );
-                
+            $scope.$on("clearFilter", function(evt, info){
+
+                $scope.terms[0].selected = false;
+                $scope.terms[0].indeterminate = !$scope.terms[0].selected && ($scope.terms[0].indeterminateCounterA + $scope.terms[0].indeterminateCounterB) > 0;
+
+                $scope.terms[0].indeterminateCounterA = $scope.terms[0].indeterminateCounterA + 1;
+                resetIndeterminante($scope.terms[0], false);
+
+                resetCheckbox($scope.terms[0].narrowerTerms);
+                setNarrowers($scope.terms.narrowerTerms, false);
+
+                $scope.terms[0].narrowerTerms.forEach(function (term) {
+
+                    resetCheckbox1(term.broaderTerms);
+                    setBroaders(term.broaderTerms, false);
+                });
+
+                buildQuery();
+
+            });
+            function resetIndeterminante(term ,selected){
+                term.indeterminateCounterB = term.indeterminateCounterB + (selected ? 1 : -1);
+                term.indeterminate = !term.selected && (term.indeterminateCounterA + term.indeterminateCounterB) > 0;
+            }
+
+            function resetCheckbox(terms) {
+
+                if(!terms) return;
+                terms.forEach(function (term) {
+                    // if(term.selected)
+                    // {
+                        term.selected = false;
+                    // }
+                        term.indeterminate = !term.selected && (term.indeterminateCounterA + term.indeterminateCounterB) > 0;
+                        resetIndeterminante(term, false);
+
+                    //}
+                    resetCheckbox(term.narrowerTerms);
+                });
+
+            }
+
+            function resetCheckbox1(terms) {
+
+                if(!terms) return;
+                terms.forEach(function (term) {
+                    // if(term.selected)
+                        term.selected = false;
+                    term.indeterminate = !term.selected && (term.indeterminateCounterA + term.indeterminateCounterB) > 0;
+                        term.indeterminateCounterA = term.indeterminateCounterA + (selected ? 1 : -1);
+                        term.indeterminate = !term.selected && (term.indeterminateCounterA + term.indeterminateCounterB) > 0;
+                    resetCheckbox(term.broaderTerms);
+                });
+
+            }
         }]
     }
 });
 });
-
-
-

@@ -8,10 +8,10 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
       usage		: function () { return $http.get("/api/v2013/thesaurus/domains/A7B77788-8C90-4849-9327-E181E9522F3A/terms",	{ cache: true }).then(function (o) { return o.data; }); },
       keywords  : function () { return $q.all([$http.get("/api/v2013/thesaurus/domains/1A22EAAB-9BBC-4543-890E-DEF913F59E98/terms", { cache: true }),
                                $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })])
-                           .then(function (o) { 
+                           .then(function (o) {
                                       var data = o[0].data;
                                       data.push(o[1].data)
-                                      return Thesaurus.buildTree(data); 
+                                      return Thesaurus.buildTree(data);
                                     }); },
     };
 
@@ -38,7 +38,7 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
         $scope.gisLayer = layers;
       });
     });
-    
+
 
     //==================================
     //
@@ -47,18 +47,18 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 
       if(info.schema!="absPermit")
         return;
-      
-      if(info.identifier)
+
+      if(info.identifier)//$scope.status=="loading"
           $q.when(editFormUtility.documentExists(info.identifier),function(exists){
               $scope.documentExists = exists;
               //amendment intent shoudl be entered by users for every edit/ clear it on load if any from previous update
               if($scope.document.amendmentIntent != undefined){
-                $scope.document.amendmentIntent = undefined;   
+                $scope.document.amendmentIntent = undefined;
 }
               if($scope.document.amendmentsDescription)
-                $scope.document.amendmentsDescription = undefined; 
-                    
-          });      
+                $scope.document.amendmentsDescription = undefined;
+
+          });
     });
 
 
@@ -158,7 +158,7 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
       var qLibraries = Enumerable.from(document.keywords);
 
       return qLibraries.any(function (o) { return o.identifier == "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED"; });
-      
+
     };
 
     //==================================

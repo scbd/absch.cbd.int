@@ -29,7 +29,7 @@
 					<a href><em>Nothing to select...</em></a>
 				</li>
 				<li ng-show="!!rootItems && (getMinimum()==0 || allowOther == 'true')" style="padding:2px 20px" id="filterText">
-					<input type="textbox"  ng-show="getMinimum()==0 && rootItems.length!=0" ng-model="filterText" style="width:95% !important" />
+					<input type="textbox"  ng-show="getMinimum()==0 && rootItems.length>=10" ng-model="filterText" style="width:95% !important" />
 					<i title="Clear search text" ng-show="filterText" ng-click="filterText='';" class="glyphicon glyphicon-remove" style="height:1px !important;width:1px !important;cursor:pointer"></i>
 					<button class="btn btn-xs btn-default" ng-show="getMinimum()==0 && (hasSelectedItems() || rootItems.length!=0)"      type ="button" ng-click="clearSelection()" ng-disabled="!hasSelectedItems()">Clear selection</button>
 					<button class="btn btn-xs btn-default" ng-show="allowOther == 'true'" type="button" ng-click="chooseOther()"    ng-show="allowOther">Specify another value</button>
