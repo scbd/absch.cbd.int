@@ -5,11 +5,11 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 
     _.extend($scope.options, {
       permits         : function () {
-        return $http.get("/api/v2013/index/select?cb=1400692102906&fl=identifier_s,title_t,createdDate_dt,&q=realm_ss:absch AND schema_s:absPermit AND NOT version_s:*&start=0&wt=json",  { cache: true }).then(function(o){ 
+        return $http.get("/api/v2013/index/select?cb=1400692102906&fl=identifier_s,title_t,createdDate_dt,&q=realm_ss:absch AND schema_s:absPermit AND NOT version_s:*&start=0&wt=json",  { cache: true }).then(function(o){
           var permits =  [];
           o.data.response.docs.forEach(function(permit){
             permits.push({"title": permit.title_t, "identifier": permit.identifier_s});
-          }); 
+          });
           console.log(permits);
         });
       },

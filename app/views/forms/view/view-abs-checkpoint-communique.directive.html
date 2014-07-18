@@ -1,16 +1,16 @@
 ﻿<div id="Record" class="record panel panel-default">
-	<div class="panel-heading">	<h4 ng-show="display('header')"><span class="record-title-national">CPC</span> Information for the Checkpoint communiqué</h4> 
+
+	<div class="panel-heading">	<h4 ng-show="display('header')"><span class="record-title-national">ABSCH-CPC</span> Information for the Checkpoint communiqué</h4>
 	</div>
 	<div class="record-body panel-body">
 
-			<a type="button" ng-show="showPdf" target="_blank" class="btn btn-info pull-right" ng-href="http://absch.cbd.int/app/abs/docs/sample_communique.pdf">Download the Checkpoint Communiqué</a>
 
+    	    <div ng-show="document.title">
+    		 	<label>Title</label>
+    		 	<div class="km-value">
+    		 	    <strong>{{document.title | lstring:locale}}</strong>
+    		 	</div>
 
-				<div ng-show="document.title">
-			 	<label>Title</label>
-			 	<div class="km-value">
-			 	<strong>{{document.title | lstring:locale}}</strong>
-			 	</div>
 		 	</div>
 
 
@@ -174,6 +174,15 @@
 					</div>
 				</div>
 			</div>
+
+            <div class="row" style="padding-top:10px;" ng-show="document.info.revision">
+                <div class="col-xs-12">
+                    <label>Amendment history</label>
+                    <div view-certificate document-id="document.header.identifier" load-documents="true"
+                    government="document.government.identifier"></div>
+                </div>
+            </div>
+
 	</div>
 	<div document-metadata  class="panel-footer"></div>
 </div>
