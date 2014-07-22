@@ -1,16 +1,21 @@
 ﻿<div ng-controller="myPendingTasksCotroller" class="col-xs-9" style="padding-top:20px;">
-	<div>
-	    <a class="pull-right" ng-show="!toggleHelp" ng-click="toggleHelp=!toggleHelp;" style="cursor:pointer;padding:5px;"><i class="glyphicon glyphicon-question-sign" >
-	      </i> show help
-	    </a>
-	    <a class="pull-right" ng-show="toggleHelp" ng-click="toggleHelp=!toggleHelp;" style="cursor:pointer;color:#666;padding:5px;"><i class="glyphicon glyphicon-question-sign" >
-	      </i> hide help
-	    </a>
-	</div>
+	
 	<div class="registerpage-header">
 	    <h2>
-	      <span class="abbreviation">My pending requests</span>	     
-	    </h2>	  
+	      <span style="color:#c7532c;">Your pending requests</span>	
+	      <div class="pull-right" style="font-size:12px;">
+	    	<a class="pull-right" ng-show="!toggleHelp" ng-click="toggleHelp=!toggleHelp;" style="cursor:pointer;padding:5px;"><i class="glyphicon glyphicon-plus" >
+	      	</i> more
+	    	</a>
+	    	<a class="pull-right" ng-show="toggleHelp" ng-click="toggleHelp=!toggleHelp;" style="cursor:pointer;color:#666;padding:5px;"><i class="glyphicon glyphicon-minus" >
+	      	</i> less
+	    	</a>
+		</div>     
+	    </h2>	
+
+	    <p class="help1" ng-show="toggleHelp">
+        	Pending requests you have sent to others for approval to be published on the ABSCH. 
+        </p>  
   	</div>  
 	<div class="registerpage-content">
 		<div class="alert alert-danger" ng-show="__error">
