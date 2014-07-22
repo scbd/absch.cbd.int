@@ -27,7 +27,7 @@ define(['app',
 
     $rootScope.document_types = {
       measure: {
-        abbreviation: 'ABSCH-MSR',
+        abbreviation: 'MSR',
         title: 'Legislative, administrative or policy measures on access and benefit-sharing',
         help: 'This common format is to be used for legislative, administrative and policy measures on access and benefit-sharing. This information shall be made available to the Access and Benefit-Sharing Clearing-House (ABS-CH) in accordance with Article 14, paragraph 2(a), of the Nagoya Protocol on Access and Benefit-sharing. <br /><br /> Access and benefit-sharing measures may include strategies, policies, legislation or regulations. They may also include measures undertaken at the regional, national, sub-national or community level. For each ABS measure a new common format has to be filled. The format includes a list of ABS elements and the possibility of pointing out to the specific articles and sections where the specific element is addressed in the measure. Having this information for all existing ABS measures of a country displayed in the ABS Clearing-House would help users to find the specific information they are looking for in order to access to genetic resources and traditional knowledge associated to genetic resources.'
                + '<br><div class="alert alert-warning" ng-show="help">'
@@ -40,7 +40,7 @@ define(['app',
         ],
       },
       authority: {
-        abbreviation: 'ABSCH-CNA',
+        abbreviation: 'CNA',
         title: 'Competent National Authority',
         help: 'Article 13 of the Nagoya Protocol requires the designation of one or more competent national authorities on access and benefit-sharing. This information shall be made available to the Access and Benefit-Sharing Clearing-House (ABS-CH) in accordance with Article 14, paragraph 2(b), of the Nagoya Protocol on Access and Benefit-sharing. <br /><br /> CNAs are bodies established by governments and are responsible for granting access to users of their genetic resources. Parties can decide to establish one or more CNAs, however if more than one CNAs are established, their responsibilities need to be clearly identified. National implementation measures establish how CNAs work in a given country. Therefore, this common format has been prepared for facilitating the submission of information on competent national authorities by Parties.'
          + '<div class="alert alert-warning" ng-show="help">'
@@ -53,7 +53,7 @@ define(['app',
         ],
       },
       absPermit: {
-        abbreviation: 'ABSCH-IRCC',
+        abbreviation: 'IRCC',
         title: 'Permit or its equivalent constituting an internationally recognized certificate of compliance',
         //TODO: use partials instead. For the entire help portion... because this is ridiculous.
         help: 'This common format is to be used for registering permits or their equivalent issued at the time of access as evidence of the decision to grant prior informed consent (PIC) and of the establishment of mutually agreed terms (MAT) in accordance with Article 6, paragraph 3 (e) of the Nagoya Protocol on Access and Benefit-sharing. This information is to be made available to the ABS Clearing-House in accordance with Article 14, paragraph 2 (c).<br />'
@@ -83,14 +83,14 @@ define(['app',
         ],
       },
       absCheckpoint: {
-        abbreviation: 'ABSCH-CP',
+        abbreviation: 'CP',
         title: 'Checkpoint',
         help: 'This common format is to be used for registering contact details of checkpoints designated under paragraph 1 (a) of Article 17, who would collect or receive, as appropriate, relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources.',
         tips: [
         ],
       },
       absCheckpointCommunique: {
-        abbreviation: 'ABSCH-CPC',
+        abbreviation: 'CPC',
         title: 'Information for the Checkpoint Communiqué',
         help: 'This common format is to be used to provide relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources (Article 17, paragraph 1 (a) (i)), including from the internationally recognized certificate of compliance, when such a certificate is available. In accordance with paragraph 1 (a) (iii) of Article 17 of the Nagoya Protocol, such information collected by the checkpoint needs to be provided to relevant national authorities, to the Party providing prior informed consent and to the ABS Clearing-House, as appropriate'
          + '<br><div class="alert alert-warning" ng-show="help">'
@@ -102,7 +102,7 @@ define(['app',
         ],
       },
       resource: {
-        abbreviation: 'ABSCH-VLR',
+        abbreviation: 'VLR',
         title: 'Virtual Library Record',
         help: 'The forms under the “reference records” category will allow the submission of non-mandatory information relevant to the Protocol from any registered user (e.g. governments, representatives of indigenous and local communities, academia, NGOs, research institutions, business representatives, etc.) to the ABS Clearing-House .The Secretariat would be responsible for validating all reference records.<br />'
          + '<br>Through its virtual library, the ABS Clearing-House provides access to different categories of information and publications categorised in a list of thematic areas. The information provided through this common format will facilitate online searches of information on the ABS relevant resources made available through the ABS Clearing-House, such as books, articles, papers, videos, and others.',
@@ -110,14 +110,14 @@ define(['app',
         ],
       },
       database: {
-        abbreviation: 'ABSCH-NDB',
+        abbreviation: 'NDB',
         title: 'ABS National Website or Database',
         help: 'This common format is to be used for registering information on national website or databases relevant to access and benefit-sharing.',
         tips: [
         ],
       },
       contacts: {
-        abbreviation: 'ABSCH-CON',
+        abbreviation: 'CON',
         title: 'Contacts',
         help: '',
         tips: [],

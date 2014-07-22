@@ -27,5 +27,8 @@
     "angular-intro.js": "latest",
     "ngLocalizer": "latest",
     "angular_form_controls": "latest"
+  },
+  "resolutions": {
+    "angular": "1.2.18"
   }
 }

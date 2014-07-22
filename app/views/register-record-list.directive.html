@@ -7,21 +7,26 @@
 <link href="/app/css/record.css" rel="stylesheet">
 
   <div class="row">
-      <div class="col-xs-10" id="filter_buttons">
-        <span ng-click="statusFilter=null" class="btn btn-info"> 
-        <i ng-hide="statusFilter" class="glyphicon glyphicon-ok"></i> All <span class="badge badge-default">
-        {{(records | filter:schemaFilter).length}}</span></span>
-        <span ng-click="statusFilter=isRequest" class="btn btn-danger"> 
-        <i ng-show="statusFilter==isRequest" class="glyphicon glyphicon-ok"></i> Requests <span class="badge badge-default">{{(records | filter:schemaFilter | filter:isRequest).length}}</span></span>
-        <span ng-click="statusFilter=isPublished" class="btn btn-success"> 
-        <i ng-show="statusFilter==isPublished" class="glyphicon glyphicon-ok"></i> Published  <span class="badge badge-default">{{(records | filter:schemaFilter | filter:isPublished).length}}</span></span>
-        <span ng-click="statusFilter=isDraft" class="btn btn-default btn-draft" style="color:#fff">
-        <i ng-show="statusFilter==isDraft" class="glyphicon glyphicon-ok"></i> Draft  <span class="badge badge-default" style="color:#999">{{(records | filter:schemaFilter | filter:isDraft).length}}</span></span>
-        <input type="text" ng-model="keywords" placeholder=" Keyword " class="form-control keyword" style="width:160px;display:inline;">
+      <div class="col-xs-10 " id="filter_buttons">
+        <div class="btn-group-sm">
+          <button type="button" ng-click="statusFilter=null" class="btn btn-info"> 
+          <i ng-hide="statusFilter" class="glyphicon glyphicon-ok"></i> All <span class="badge badge-default">
+          {{(records | filter:schemaFilter).length}}</span></button>
+          <button type="button"  ng-click="statusFilter=isRequest" class="btn btn-danger"> 
+          <i ng-show="statusFilter==isRequest" class="glyphicon glyphicon-ok"></i> Requests <span class="badge badge-default">{{(records | filter:schemaFilter | filter:isRequest).length}}</span></button>
+          <button type="button"    ng-click="statusFilter=isPublished" class="btn btn-success"> 
+          <i ng-show="statusFilter==isPublished" class="glyphicon glyphicon-ok"></i> Published  <span class="badge badge-default">{{(records | filter:schemaFilter | filter:isPublished).length}}</span></button>
+          <button type="button" ng-click="statusFilter=isDraft" class="btn btn-default btn-draft" style="color:#fff">
+          <i ng-show="statusFilter==isDraft" class="glyphicon glyphicon-ok"></i> Draft  <span class="badge badge-default" style="color:#999;background-color:white;">{{(records | filter:schemaFilter | filter:isDraft).length}}</span></button>
+         
+
+          <input type="text" ng-model="keywords" placeholder=" Keyword " class="form-control keyword input-group" style="width:160px;display:inline;font-size:12px;height:31px;"> 
+          </div>
+        
       </div>
       <div class="col-xs-2 pull-right" ng-show="showAddButton()">
         <span style="font-size: 16px; color: white;margin:0;padding:0;float:right;">
-          <a href="/register/{{schema}}/new" class="btn btn-primary" id="new_button"><span class="glyphicon glyphicon-plus-sign"></span> Add New</a></span>
+          <a href="/register/{{schema}}/new" class="btn btn-sm btn-primary" id="new_button"><span class="glyphicon glyphicon-plus-sign"></span> Add New</a></span>
       </div>
   </div>
 
@@ -36,15 +41,19 @@
   }
 </style>
 
-  <div class="container-fluid">
-    <div class="row-fluid" >
-        <div class="col-xs-3 header" style="margin:font-weight:bold;">Title</div>
-        <div class="col-xs-3 header" style="font-weight:bold;">Created</div>
-        <div class="col-xs-3 header" style="font-weight:bold;">Last update</div>
-        <div class="col-xs-3 header" style="text-align:right;">
+
+<br/>
+
+  <!-- <div class="container-fluid"> -->
+    <div class="row" >
+        <div class="col-xs-4" style="font-weight:bold;">Title</div>
+        <div class="col-xs-3" style="font-weight:bold;">Created</div>
+        <div class="col-xs-3" style="font-weight:bold;">Last update</div>
+        <div class="col-xs-2" style="font-weight:bold;text-align:right;">
         {{filteredRecords.length}} record(s)</div>
     </div>
     
+    <hr class="header" style="padding:0; margin:0;">
 
     <div ng-repeat="record in (filteredRecords = (records | filter:schemaFilter | filter:statusFilter | filter:keywords | orderBy:['-updatedOn','-createdOn']))" ng-class-odd="'odd'" ng-class-even="'even'" id="record{{$index}}">
       <div class="row" style="padding:10px;border-bottom:1px solid #dedede;">
@@ -178,4 +187,4 @@
       </div>
     </div>
   </div>
-</div>
+<!-- </div> -->

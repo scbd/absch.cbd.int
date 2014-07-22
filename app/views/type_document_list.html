@@ -18,9 +18,9 @@
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="msg=''">&times;</button>
         <strong>{{msg}}</strong>
       </div>
-
+      
       <div ng-hide="editing">
-        <h2 style="border-bottom: 1px solid #333;margin-bottom:5px;">Records</h2>
+        <!-- <h2 style="border-bottom: 1px solid #333;margin-bottom:5px;">Records</h2> -->
         <div ng-show="user.isAuthenticated">
           <register-record-list records="records" schema="{{document_type}}"></register-record-list>
         </div>
