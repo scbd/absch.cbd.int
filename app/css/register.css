@@ -40,9 +40,7 @@ legend{
 }
 
 .header{
-	
 	border-bottom: 5px #333 solid;
-	margin-bottom: 10px;
 }
 
 .table-striped{
@@ -57,7 +55,7 @@ legend{
 	/*color:#418BCA;*/
 }
 .btn-commonformat-header-reference {	
-	color:#ed9c28;
+	/*color:#ed9c28;*/
 }
 
 .btn-commonformat-national {
@@ -112,7 +110,17 @@ legend{
 }
 
 .btn-draft{
-	background-color:#999;
+	/*background-color:#999;*/
+	color: #fff;
+background-color: #999;
+border-color: #888;
+}
+
+.btn-draft{
+	/*background-color:#999;*/
+	color: #fff;
+background-color: #999;
+border-color: #888;
 }
 
 .registerpage-header{
@@ -124,6 +132,7 @@ legend{
 .registerpage-header .abbreviation{
 	color: #428BCA; 
 	font-weight: bold;
+	font-size: 18px;
 }
 .registerpage-header .title{
 	color: #fefefe; 
