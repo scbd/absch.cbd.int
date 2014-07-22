@@ -1,17 +1,22 @@
 ﻿<div ng-controller="myTasksCotroller" class="col-xs-9" style="padding-top:20px;">
-	<div>
-	    <a class="pull-right" ng-show="!toggleHelp" ng-click="toggleHelp=!toggleHelp;" style="cursor:pointer;padding:5px;"><i class="glyphicon glyphicon-question-sign" >
-	      </i> show help
-	    </a>
-	    <a class="pull-right" ng-show="toggleHelp" ng-click="toggleHelp=!toggleHelp;" style="cursor:pointer;color:#666;padding:5px;"><i class="glyphicon glyphicon-question-sign" >
-	      </i> hide help
-	    </a>
-	</div>
 	<div class="registerpage-header">
 	    <h2>
-	      <span class="abbreviation">My new requests</span>	     
-	    </h2>	  
-  	</div>  
+	      <span style="color:#c7532c;">Publishing requests for your approval</span>	
+	      <div class="pull-right" style="font-size:12px;">
+	    	<a class="pull-right" ng-show="!toggleHelp" ng-click="toggleHelp=!toggleHelp;" style="cursor:pointer;padding:5px;"><i class="glyphicon glyphicon-plus" >
+	      	</i> more
+	    	</a>
+	    	<a class="pull-right" ng-show="toggleHelp" ng-click="toggleHelp=!toggleHelp;" style="cursor:pointer;color:#666;padding:5px;"><i class="glyphicon glyphicon-minus" >
+	      	</i> less
+	    	</a>
+		</div>     
+	    </h2>	
+
+	    <p class="help1" ng-show="toggleHelp">
+        	Requests waiting for your approval to be published online.
+        </p>
+       
+  	</div>   
   	<style type="text/css">
   		.header1{
   			padding: 8px;

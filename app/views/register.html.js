@@ -117,7 +117,7 @@ define(['app',
         ],
       },
       contacts: {
-        abbreviation: 'ABSCH-CONTACTS',
+        abbreviation: 'ABSCH-CON',
         title: 'Contacts',
         help: '',
         tips: [],
