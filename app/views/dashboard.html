@@ -1,25 +1,26 @@
 <div ng-controller="DashboardController" ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart="false">
-  <div class="col-xs-9" style="padding-top:20px;">
 
-    <div>
+
+<div style="padding-top:20px;padding-right:10px;" class="pull-right">
       <a class="pull-left" href="" ng-click="startIntro()">
         Where do I get started
         <span class="fa fa-question-circle "></span>
       </a>
     </div>
-    <div>
-      <a class="pull-right" ng-show="!help" ng-click="help=!help;" style="cursor:pointer;padding:5px;">
-        <i class="glyphicon glyphicon-question-sign"></i> show help
-      </a>
-      <a class="pull-right" ng-show="help" ng-click="help=!help;" style="cursor:pointer;color:#666;padding:5px;">
-        <i class="glyphicon glyphicon-question-sign" ></i> hide help
-      </a>
-    </div>
+
+
+  <div class="col-xs-9" >
+
+      
 
     <div class="registerpage-header">
       <h2>
-        <span class="abbreviation">DASHBOARD</span>
+        <span style="color:#efefef;">DASHBOARD</span>
         <span class="title">Check the status of your work in the ABS-CH</span>
+        <div class="pull-right" style="font-size:12px;">
+          <a class="pull-right" ng-show="!help" ng-click="help=!help;" style="cursor:pointer;padding:5px;"><i class="glyphicon glyphicon-plus"></i> more </a>
+          <a class="pull-right" ng-show="help" ng-click="help=!help;" style="cursor:pointer;color:#666;padding:5px;"><i class="glyphicon glyphicon-minus" ></i> less</a>
+        </div>
       </h2>
 
       <p class="help1" ng-show="help">
