@@ -173,7 +173,11 @@ define(['app',
     };
 
 	//============================================================
+<<<<<<< HEAD
 	$scope.PAroles= ['AbsPublishingAuthorities', 'AbsNationalFocalPoint','AbsAdministrator','Administrator'];
+=======
+
+>>>>>>> restrict viewing links to forms for roles
 	 $scope.compareRoles = function(array1, array2) {
 
 		if(!array1) return false;
