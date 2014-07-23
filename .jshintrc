@@ -1,12 +1,13 @@
 {
-	"browser": true,
-	"smarttabs" : true,
-	"strict" : false,
-	"devel" : true,
-	"quotmark" : true,
-	"globals" : {
-		"angular" : true,
-		"require" : true,
-		"define" : true
-	}
+    "maxerr"   : 50,
+    "undef"    : true,
+    "unused"   : true,
+    "strict"   : false,
+    "browser"  : true,
+    "debug"    : true,
+    "jquery"   : true,
+    "devel"    : true,
+    "smarttabs": true,
+    "trailing" : true,
+    "predef"   : [ "angular", "define", "require"]
 }
