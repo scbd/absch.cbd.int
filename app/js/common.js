@@ -7,7 +7,7 @@ define(['app'], function(app){
 				var queryFields = 'fl=identifier_s,schema_s,createdDate_dt,createdByEmail_s,createdBy_s,updatedDate_dt,updatedByEmail_s,updatedBy_s,url_ss,';
 
 				if(schema.toUpperCase()=="FOCALPOINT"){
-				  queryFields += 'description_EN_t,government_EN_t,organization_EN_t,text_EN_txt,title_EN_t,treaty_CEN_ss,type_CEN_ss,email_s,telephone_s';
+				  queryFields += 'description_EN_t,government_EN_t,organization_EN_t,function_EN_t,department_EN_t,title_EN_t,treaty_CEN_ss,type_CEN_ss,email_s,telephone_s';
 				}
 				else if (schema.toUpperCase()=="MEETING"){
 				queryFields += 'symbol_s,startDate_dt,endDate_dt,eventCountry_CEN_s,title_s,eventCity_s,text_EN_txt,themes_CEN_ss,thematicAreas_CEN_ss,thematicAreas_ss';
@@ -23,11 +23,11 @@ define(['app'], function(app){
 				}
 
 				return $http.get("/api/v2013/index/select?" + queryFields + "&q=id:"+documentId)
-				   .then(function (result) { 
+				   .then(function (result) {
 
-				      item.data = result.data.response.docs[0];                                       
-				          
-				      item.data.info = [];                              
+				      item.data = result.data.response.docs[0];
+
+				      item.data.info = [];
 				      item.data.header = {'schema':item.data.schema_s};
 				      if(item.data.createdBy_s){
 				        item.data.info.createdBy.firstName = item.data.createdBy_s;
@@ -41,8 +41,8 @@ define(['app'], function(app){
 				      item.data.info.updatedOn = item.data.updatedDate_dt;
 				      item.data.header.identifier = item.data.identifier_s;
 
-				      return item; 
-				});				
+				      return item;
+				});
 			}
 
 			this.isUserInRole = function(role){
@@ -67,15 +67,15 @@ define(['app'], function(app){
 				return $http.get('/api/v2013/countries', {cache: true}).then(function(response) {
 						  var countries = response.data;
 						  var countriesDetails = []
-						 
+
 						  for(var i=0; i!=countries.length; ++i){
 									var country = {} ;
 									var treaties = countries[i].treaties;
 									country.code = countries[i].code;
 									country.isParty = treaties.XXVII8.party!=null;
 									country.isSignatory = treaties.XXVII8b.signature!=null;
-									country.isRatified = treaties.XXVII8b.instrument == "ratification" || 
-															treaties.XXVII8b.instrument == "accession" || 
+									country.isRatified = treaties.XXVII8b.instrument == "ratification" ||
+															treaties.XXVII8b.instrument == "accession" ||
 															treaties.XXVII8b.instrument == "acceptance" ||
 															treaties.XXVII8b.instrument == "approval"||
 															country.code == 'EU';
@@ -84,10 +84,9 @@ define(['app'], function(app){
 							}
 							return countriesDetails;
 					  });
-					
+
 
 			}
 		}
 	}]);
 });
-

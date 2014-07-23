@@ -16,7 +16,8 @@ define(['app','/app/js/common.js'], function (app) {
             },
             controller : ['$scope', '$element', '$location','commonjs', '$q', function ($scope, $element, $location,commonjs,$q)
             {
-                $scope.alphabet = ['All','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+                $scope.alphabet = ['All','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V',
+                'W','X','Y','Z'];
                 $scope.expanded = false;
                 $scope.selectedItems = [];
                 $scope.facet = $scope.field.replace('_s', ''); // TODO: replace @field by @facet
@@ -89,7 +90,7 @@ define(['app','/app/js/common.js'], function (app) {
                 }
 
                 function buildConditions (conditions, items) {
-                    items.forEach(function (item) { 
+                    items.forEach(function (item) {
                         if(item.selected)
                             conditions.push($scope.field+':'+item.identifier);
                     });
@@ -97,7 +98,7 @@ define(['app','/app/js/common.js'], function (app) {
 
                 function dictionarize(items) {
                     var dictionary = [];
-                    items.forEach(function (item) { 
+                    items.forEach(function (item) {
                         item.selected = false;
                         dictionary[item.identifier] = item;
                     });
@@ -105,10 +106,10 @@ define(['app','/app/js/common.js'], function (app) {
                 }
                  $scope.setCountryFilter = function(letter){
 
-                        $scope.countryFilter = letter;                   
+                        $scope.countryFilter = letter;
                 };
                 $scope.filterCountries = function(entity){
-                        return $scope.countryFilter == 'All' || 
+                        return $scope.countryFilter == 'All' ||
                         (entity && entity.title.en.indexOf($scope.countryFilter) == 0);
 
                 };
@@ -118,7 +119,7 @@ define(['app','/app/js/common.js'], function (app) {
 
                 $scope.terms = [];
                 $scope.termsx = [];
-                
+
 
                 function onWatch_items(values) { if(!values) return;
                     values.forEach(function (item) {
@@ -134,26 +135,26 @@ define(['app','/app/js/common.js'], function (app) {
                 $scope.$watch('showSelect', function(value){
                     if(value && $scope.terms.length==0)
                         $http.get('/api/v2013/thesaurus/domains/countries/terms').success(function (data) {
-                            
+
                             $scope.terms = data;
                             $scope.termsx = dictionarize($scope.terms);
                             onWatch_items($scope.items);
 
-                            $q.when(commonjs.getCountries(),function(countries){                            
-                                $scope.terms.forEach(function(country){                                   
+                            $q.when(commonjs.getCountries(),function(countries){
+                                $scope.terms.forEach(function(country){
                                     var cd = _.where(countries, {code:country.identifier.substring(0,2).toUpperCase()})
                                     if(cd.length>0){
                                         country.isParty = cd[0].isParty;
                                         country.isSignatory = cd[0].isSignatory;
                                         country.isRatified  = cd[0].isRatified
-                                    }                                
+                                    }
                                 });
 
-                            }); 
+                            });
                         });
                 });
-                
-                
+
+
             }]
         }
     });

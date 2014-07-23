@@ -5,12 +5,12 @@ define(['app',
     '../views/find_countries.partial.html.js',
     '../views/search-filter-regions.js',
     '../views/find_facets.partial.html.js',
-    '../views/find_themes.partial.html.js',    
+    '../views/find_themes.partial.html.js',
     '../views/directives/search-filter-dates.partial.html.js',
     '../views/directives/document-list.partial.html.js'], function (app) {
 
     app.controller('FindController', ['$scope', '$rootScope', '$http', '$timeout', '$q', function ($scope, $rootScope, $http, $timeout, $q) {
-        
+
         var self = this;
         var queryCanceler = null;
         var refreshTimeout = null;
@@ -94,10 +94,10 @@ define(['app',
                     facets.push({ symbol: facet, title: facet, count: solrArray[i + 1] });
                 }
             }
-            
+
                // console.log(solrArray);
             return facets;
-        };              
+        };
 
         //============================================================
         //
@@ -108,9 +108,9 @@ define(['app',
             var q = 'realm_ss:absch AND NOT version_s:*';//' AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryTheme + ' AND ' + $scope.queryTargets +' AND ' + $scope.queryDate + ' AND ' + $scope.queryKeywords;
 
             if($scope.keyword)         q += ' AND (title_t:*' + $scope.keyword + '* OR description_t:*' + $scope.keyword + '* OR text_EN_txt:*' + $scope.keyword + '* OR uniqueIdentifier_ss:*' + $scope.keyword.toLowerCase() + '*)';
-            
-            
-            if($scope.querySchema != "*:*" ){            
+
+
+            if($scope.querySchema != "*:*" ){
                 q += ' AND (' + $scope.querySchema + ')';
             }
             else
@@ -119,7 +119,7 @@ define(['app',
             }
             if($scope.queryGovernment) q += ' AND (' + $scope.queryGovernment + ')';
             if($scope.queryTheme)      q += ' AND (' + $scope.queryTheme + ')';
-              console.log('region: ', $scope.queryRegion);
+              console.log('region: ', q);
             if($scope.queryRegion)      q += ' AND (' + $scope.queryRegion + ')';
 
             var queryParameters = {
@@ -134,7 +134,7 @@ define(['app',
             };
             if($scope.sortBy)
               queryParameters.sort = $scope.sortBy + ' desc, ' + queryParameters.sort;
-           
+
             if (queryCanceler) {
                 console.log('trying to abort pending request...');
                 queryCanceler.resolve(true);
@@ -143,7 +143,7 @@ define(['app',
             queryCanceler = $q.defer();
 
             $http.get('/api/v2013/index/select', { params: queryParameters, timeout: queryCanceler }).success(function (data) {
-               
+
                 queryCanceler = null;
 
                  $scope.rawDocs = [];
@@ -157,7 +157,7 @@ define(['app',
                         'wt': 'json',
                         'rows': 0,		//limit
                         'facet': true,	//get counts back
-                        'facet.field': ['schema_s', 'government_s', 'aichiTarget_REL_ss', 'thematicAreas_ss', 'government_REL_ss'],
+                        'facet.field': ['schema_s', 'government_s', 'aichiTarget_REL_ss', 'thematicAreas_REL_ss', 'government_REL_ss'],
                         'facet.limit': 512
                     };
 
@@ -167,7 +167,7 @@ define(['app',
                         $scope.governments = readFacets2(data.facet_counts.facet_fields.government_s);
                         $scope.regions = readFacets2(data.facet_counts.facet_fields.government_ss);
                         $scope.aichiTargets = readFacets2(data.facet_counts.facet_fields.aichiTarget_REL_ss);
-                        $scope.thematicAreas = readFacets2(data.facet_counts.facet_fields.thematicAreas_ss);
+                        $scope.thematicAreas = readFacets2(data.facet_counts.facet_fields.thematicAreas_REL_ss);
                         $scope.regionFacets = readFacets2(data.facet_counts.facet_fields.government_REL_ss);
                         //console.log(data.facet_counts.facet_fields);
                         //console.log($scope.thematicAreas);
@@ -198,6 +198,11 @@ define(['app',
             return url;
         }
 
+        $scope.clearFilter = function(){
+            
+            $scope.$broadcast("clearFilter",{});
+        }
+
         //============================================================
         //
         //
@@ -209,7 +214,7 @@ define(['app',
 
             refreshTimeout = $timeout(function () { query(); }, 200);
         }
-        
+
 
         $scope.$watch('currentPage',     refresh);
         $scope.$watch('querySchema',     function() { $scope.currentPage=0; refresh(); });
@@ -218,7 +223,7 @@ define(['app',
         $scope.$watch('queryTheme',      function() { $scope.currentPage=0; refresh(); });
         $scope.$watch('queryRegion',      function() { $scope.currentPage=0; refresh(); });
         $scope.$watch('queryDate',       function() { $scope.currentPage=0; refresh(); });
-        $scope.$watch('keyword',         function() { $scope.currentPage=0; refresh(); });    
+        $scope.$watch('keyword',         function() { $scope.currentPage=0; refresh(); });
     }]);
 
 });
