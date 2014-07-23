@@ -8,42 +8,50 @@
         <div>
           <h3 ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/dashboard.html'}">
             <a href="/dashboard"  href="#" role="button">
-              <i class="glyphicon glyphicon-list-alt" style="position:relative;top:2px;"></i> My Dashboard 
+              <i class="glyphicon glyphicon-list-alt" style="position:relative;top:2px;"></i> My Dashboard
             </a>
           </h3>
 
           <h3>Requests</h3>
           <div style="padding-left:10px">
             <a href="/dashboard/pending" ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-tasks.directive.html'}" href="#" role="button">
-              Publishing requests for your approval 
+              Publishing requests for your approval
             </a><br>
             <a href="/dashboard/mytasks" ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-pending-tasks.directive.html'}" href="#" role="button">
-              Your pending requests 
+              Your pending requests
             </a><br>
              <a href="/dashboard/completed" ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-completed-tasks.directive.html'}" href="#" role="button">
-              Your completed requests 
+              Your completed requests
             </a>
-            
-          </div>
-          <h3 ng-repeat-start="(heading,types) in subheadings"
-          ng-class="{'btn-commonformat-header-national':heading!='Reference Records','btn-commonformat-header-reference':heading=='Reference Records'}">{{heading}}</h3>
-          <a ng-repeat="type in types" ng-href="{{type!='contacts' ? '/register' : ''}}/{{type}}" role="button">
-            <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : document_type==type ,'btn-commonformat-reference-selected' : document_type=='resource' && document_type==type}">
-              <div class="btn-commonformat-national">{{document_types[type].abbreviation}}
-                <span ng-show="facets(type,'draft') > 0" class="pull-right label label-default">
-                  {{facets(type,'draft')}}</span> 
-                <span ng-show="facets(type,'publish') > 0" class="pull-right label label-success">
-                  {{facets(type,'publish')}}</span>
-                <span ng-show="facets(type,'request') > 0" class="pull-right label label-danger">
-                  {{facets(type,'request')}}</span>
-              </div>
-              <span class="btn-commonformat-name">{{document_types[type].title}}</span>
-            </div>
-          </a>
 
-          <span ng-repeat-end></span> <!--need to end the ng-repeat-->          
+          </div>
+
+
+
+
+                <div ng-repeat="heading in subheadings" >
+
+                <div ng-show="compareRoles(user.roles, heading.roles)" >
+                    <h3 ng-class="{'btn-commonformat-header-national':heading.title!='Reference Records', 'btn-commonformat-header-reference': heading.title=='Reference Records'}">{{heading.title}}</h3>
+                      <a ng-repeat="type in heading.formats" ng-href="{{type!='contacts' ? '/register' : ''}}/{{type}}" role="button">
+                        <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : document_type==type ,'btn-commonformat-reference-selected' : document_type=='resource' && document_type==type}">
+                          <div class="btn-commonformat-national">{{document_types[type].abbreviation}}
+                            <span ng-show="facets(type,'draft') > 0" class="pull-right label label-default">
+                              {{facets(type,'draft')}}</span>
+                            <span ng-show="facets(type,'publish') > 0" class="pull-right label label-success">
+                              {{facets(type,'publish')}}</span>
+                            <span ng-show="facets(type,'request') > 0" class="pull-right label label-danger">
+                              {{facets(type,'request')}}</span>
+                          </div>
+                          <span class="btn-commonformat-name">{{document_types[type].title}}</span>
+                        </div>
+                    </a>
+                </div>
+
+              </div>
+
         </div>
-      </div> 
+      </div>
 
       <!-- TODO: if not authenticated, should be handled by the router, which redirects the user to login, NOT by a hidden div -->
       <div class="col-xs-12" ng-hide="user.isAuthenticated" style="padding-top:20px;">
@@ -68,7 +76,7 @@
           </div>
         </div>
       </div>
-   
+
 
       <ng-include src="subTemplateUrl"  ng-show="user.isAuthenticated"></ng-include>
 
