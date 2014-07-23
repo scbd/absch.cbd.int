@@ -8,7 +8,7 @@ define(['app',
   "use strict";
 // angular.module([]);
 
-  app.controller("RegisterController", 
+  app.controller("RegisterController",
     ["$rootScope", "$location" , "$scope", "$q", "$window", "IStorage", "underscore",
      "schemaTypes", "$timeout","lstringFilter", "$routeParams", "$cookies",
 	  function ($rootScope, $location, $scope, $q, $window, storage, _,
@@ -122,12 +122,12 @@ define(['app',
         help: '',
         tips: [],
       },
-      
+
     };
 
     if($routeParams.document_type) //this is used to highlight the item on the left
       $scope.document_type = $routeParams.document_type;
-    
+
     $scope.msg="";
     $scope.records = [];
     $scope.isLoaded = []; //What schemas are currently loaded
@@ -160,7 +160,7 @@ define(['app',
     };
 
     //============================================================
-    
+
     $scope.facets = function(entity,type){
       var schemaCount = _.where($scope.schemaTypesFacets,{"schema":entity});
 
@@ -184,14 +184,14 @@ define(['app',
       console.log('schema: ', schema);
 
       $("a[role*='button']").toggleClass('ui-disabled');
-      if(schema == null || schema==undefined ){
+      if(schema === null || schema===undefined ){
         schema = schemaTypes.join("' or type eq '");
       }
 
-      if(schema == null || schema==undefined )
+      if(schema === null || schema==undefined )
         return;
 
-      
+
       if(_.contains($scope.isLoaded, schema))
         return;
 
@@ -202,13 +202,13 @@ define(['app',
       qAnd.push("(type eq '" + schema + "')");
 
       var qDocuments = storage.documents.query(qAnd.join(" and ")||undefined,undefined,{cache:false});
-      
+
       var draftParams = {cache:false};
       if(schema =="contact")
          draftParams.body=true;
 
       var qDrafts    = storage.drafts   .query(qAnd.join(" and ")||undefined,draftParams);
-      
+
       $q.all([qDocuments, qDrafts]).then(function(results) {
 
         var documents = results[0].data.Items;
@@ -216,19 +216,19 @@ define(['app',
 
         var map = {};
 
-        _.map(documents, function(o) { map[o.identifier] = o });
-        _.map(drafts,    function(o) { map[o.identifier] = o });
+        _.map(documents, function(o) { map[o.identifier] = o; });
+        _.map(drafts,    function(o) { map[o.identifier] = o; });
 
         $scope.isLoaded.push(schema);
-        
-        _.values(map).forEach(function(row){				
-              
+
+        _.values(map).forEach(function(row){
+
           if(schema!="dashboard" && schema!="contact"){
             var schemaCount = _.where($scope.schemaTypesFacets,{"schema":row.type});
-            
-            if(schemaCount != null && schemaCount.length > 0)
+
+            if(schemaCount !== null && schemaCount.length > 0)
             {
-              schemaCount[0].draftCount 	+= $scope.isDraft(row) ? 1:0;					
+              schemaCount[0].draftCount 	+= $scope.isDraft(row) ? 1:0;
               schemaCount[0].requestCount += $scope.isRequest(row) ? 1:0;
               schemaCount[0].publishCount += $scope.isPublished(row) ? 1:0;
             }
@@ -236,13 +236,13 @@ define(['app',
             {
               $scope.schemaTypesFacets.push({"schema":row.type, "draftCount":$scope.isDraft(row) ? 1:0
                 ,"requestCount":$scope.isPublished(row) ? 1:0
-                ,"publishCount":$scope.isRequest(row) ? 1:0})
+                ,"publishCount":$scope.isRequest(row) ? 1:0});
             }
             if($scope.isRequest(row)){
               $scope.userActivities.push({
-                            "title" : row.createdBy.firstName + ' ' + row.createdBy.lastName + ' has requested '+ 
+                            "title" : row.createdBy.firstName + ' ' + row.createdBy.lastName + ' has requested '+
                               _.where($scope.schemaTypesFacets,{"schema":row.type})[0].header
-                              + ' draft ' + (lstringFilter(row.workingDocumentTitle||row.title,$rootScope.locale)) 
+                              + ' draft ' + (lstringFilter(row.workingDocumentTitle||row.title,$rootScope.locale))
                               + ' to be published',
                             "identifier" : row.identifier,
                             "schema"	 : row.type
@@ -252,9 +252,9 @@ define(['app',
               $scope.userActivities.push({
                             "title" : row.createdBy.firstName + ' ' + row.createdBy.lastName + ' is working on ' +
                               _.where($scope.schemaTypesFacets,{"schema":row.type})[0].header + ' draft '
-                              +(lstringFilter(row.workingDocumentTitle||row.title,$rootScope.locale)) 
+                              +(lstringFilter(row.workingDocumentTitle||row.title,$rootScope.locale))
 
-                              +(row.workingDocumentTitle||row.title) 
+                              +(row.workingDocumentTitle||row.title)
                               ,
                             "identifier" : row.identifier,
                             "schema"	 : row.type
@@ -280,12 +280,12 @@ define(['app',
     }
     //TODO: this is a scoping disaster. Needed for contacts, fix later.
     $rootScope.loadRecords = loadRecords;
-    
+
     loadRecords();
 
     //So this is like a request for info... I don't like the idea of using JS as an message driven language. KISS
-    $scope.$on("getDocumentInfo", function(evt, info) {
-     
+    $scope.$on("getDocumentInfo", function(evt) {
+
       if($scope.lastSchema)
         $scope.$broadcast("loadDocument", {
           schema : $scope.lastSchema,
@@ -295,11 +295,11 @@ define(['app',
 
     //============================================================
     //
-    // Occurs when edit-form is closed without saving 
+    // Occurs when edit-form is closed without saving
     //
     //============================================================
     $scope.$on("documentClosed", function(evt){
-      
+
       evt.stopPropagation();
       $scope.editing = false;
       $scope.msg = "Your record has been closed without saving.";
@@ -309,7 +309,7 @@ define(['app',
         else
           $window.location.href = '/register/'+$scope.document_type;
       }, 500);
-      
+
     });
 
     //============================================================
@@ -332,22 +332,22 @@ define(['app',
     //
     //============================================================
     $scope.$on("documentPublishRequested", function(evt, workflowInfo){
-      
+
       evt.stopPropagation();
       $scope.editing = false;
       $scope.msg = "Record saved. A publishing request has been sent to your Publishing Authority.";
       $timeout(function() { $location.path('/register/'+$scope.document_type); }, 500);
-      
+
     });
 
     //============================================================
     //
-    // Occurs when edit-form is closed and document is saved 
+    // Occurs when edit-form is closed and document is saved
     // and published directly to the repository
     //
     //============================================================
     $scope.$on("documentPublished", function(evt, documentInfo){
-      
+
       evt.stopPropagation();
       $scope.editing = false;
       $scope.msg = "Record published.";
@@ -372,7 +372,7 @@ define(['app',
     });
 
     $scope.$watch('msg',function(newValue){
-      if(newValue != "")
+      if(newValue !== "")
       {
         $timeout(function() {
           $scope.msg ="";

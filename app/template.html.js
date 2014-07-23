@@ -5,6 +5,18 @@ define(['app'], function (app) {
 
         $scope.controller = "TemplateController";
 
+
+
+
+        $scope.getClass = function(path) {
+            if ($location.path().substr(0, path.length) == path) {
+              return true;
+            } else {
+              return false;
+            }
+        }
+
+
        function setCookie (name, value, days, path) {
 
             var cookieString = escape(name) + "=";
@@ -27,7 +39,7 @@ define(['app'], function (app) {
             document.cookie = cookieString
         };
 
-       
+
         //_loadCss('/app/libs/font-awesome/css/font-awesome.css');
         //_loadCss('//fast.fonts.net/cssapi/ab363dc0-d9f9-4148-a52d-4dca15df47ba.css');
 
@@ -46,7 +58,7 @@ define(['app'], function (app) {
         //
         //
         //============================================================
-        $scope.actionSignOut = function () { 
+        $scope.actionSignOut = function () {
             document.cookie = "authenticationToken=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT";
             var redirect_uri = encodeURIComponent($location.protocol()+'://'+$location.host()+':'+$location.port()+'/');
             $window.location.href = 'https://accounts.cbd.int/signout?redirect_uri='+redirect_uri;
@@ -56,7 +68,7 @@ define(['app'], function (app) {
         //
         //
         //============================================================
-        $scope.actionSignup = function () { 
+        $scope.actionSignup = function () {
             var redirect_uri = encodeURIComponent($location.protocol()+'://'+$location.host()+':'+$location.port()+'/');
             $window.location.href = 'https://accounts.cbd.int/signup?redirect_uri='+redirect_uri;
         };
@@ -65,7 +77,7 @@ define(['app'], function (app) {
         //
         //
         //============================================================
-        $scope.actionPassword = function () { 
+        $scope.actionPassword = function () {
             var redirect_uri = encodeURIComponent($location.protocol()+'://'+$location.host()+':'+$location.port()+'/');
             $window.location.href = 'https://accounts.cbd.int/password?redirect_uri='+redirect_uri;
         };
@@ -74,7 +86,7 @@ define(['app'], function (app) {
         //
         //
         //============================================================
-        $scope.actionProfile = function () { 
+        $scope.actionProfile = function () {
             var redirect_uri = encodeURIComponent($location.protocol()+'://'+$location.host()+':'+$location.port()+'/');
             $window.location.href = 'https://accounts.cbd.int/profile?redirect_uri='+redirect_uri;
         };

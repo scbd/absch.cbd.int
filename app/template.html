@@ -56,7 +56,7 @@
                     </a>
                     <div ng-cloak ng-show="user && !user.isAuthenticated" class="account-signin pull-right">
                         <a class="signin" href="#" ng-click="actionSignin()" data-slug="signin">
-                            <i class="fa fa-power-off"></i> 
+                            <i class="fa fa-power-off"></i>
                             <strong>sign in</strong>
                         </a>
                     </div>
@@ -86,7 +86,7 @@
                     </div>
 
 
-                    <!-- 
+                    <!--
                             <a class="pull-right set-languages" data-toggle="dropdown" href="#">
                                Language: <span style="font-weight:bold;"> EN </span></a>
                                 <ul class="dropdown-menu" role="menu">
@@ -104,7 +104,7 @@
         </div>
     </div>
 
-    
+
     <div class="modal fade" id="error-message" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -134,33 +134,34 @@
                 </div>
                 <div class="main-link col-xs-3 ">
                     <a href="/find">
-                        <div class="text-center">
+                        <div class="text-center" ng-class="{'link-active' : getClass('/find')}">
                             <span class="glyphicon glyphicon-search" style="position:relative;top:3px;"></span> Search
                             <span class="hidden-xs hidden-sm">Information</span>
                         </div>
                     </a>
                 </div>
-                <div class="main-link col-xs-3">
+                <div class="main-link col-xs-3" >
                     <a href="/dashboard">
-                        <div class="text-center">
+                        <div class="text-center" ng-class="{'link-active' : getClass('/dashboard') || getClass('/register') }" >
                             <span class="glyphicon glyphicon-edit" style="position:relative;top:3px;"></span> Register
                             <span class="hidden-xs hidden-sm">Information</span>
                         </div>
+
                     </a>
                 </div>
                 <div class="main-link col-xs-3">
                     <a href="/countries">
-                        <div class="text-center">
+                        <div class="text-center" ng-class="{'link-active' : getClass('/countries') }">
                             <span class="glyphicon glyphicon-globe" style="position:relative;top:3px;"></span> Browse
                             <span class="hidden-xs hidden-sm">Country&nbsp;Profiles</span>
                         </div>
                     </a>
                 </div>
                 <!--          <div class="col-xs-2 main-side-link main-link text-center">
-                    
+
                     <a href="mailto:absch@cbd.int">
-                    
-                    <i class="glyphicon glyphicon-envelope" style="position:relative;top:3px;"></i> 
+
+                    <i class="glyphicon glyphicon-envelope" style="position:relative;top:3px;"></i>
                        About the ABSCH
                     </a>
                 </div> -->
@@ -277,7 +278,7 @@
         </div>
     </footer>
 
-    <!-- Bootstrap core JavaScript 
+    <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="/app/libs/requirejs/require.js" data-main="/app/js/boot.js"></script>

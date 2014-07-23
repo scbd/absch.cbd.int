@@ -44,14 +44,18 @@ h2{
      text-rendering: optimizeLegibility;
      font-size: 24px;
      font-weight: bold;
-     
+
 }
 h3 {
      /*font-family: 'alternategotno3dotregular';*/
      font-family:Tahoma, Trebuchet MS, "Helvetica Neue", Helvetica, Arial, sans-serif;
      text-rendering: optimizeLegibility;
      font-size: 20px;
-     
+
+}
+
+.link-active {
+    color:#000;
 }
 
 /*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*/
@@ -113,8 +117,8 @@ h3 {
 	white-space: nowrap;
 }
 .brand > a > h1 >img{
-	height: 40px; 
-	position: relative; 
+	height: 40px;
+	position: relative;
 	top: -5px;
 	padding:0;
 	margin:0;
@@ -137,8 +141,8 @@ h3 {
 	text-transform: uppercase;
 	list-style: none;
 	list-style: none;
-	font-family: 'alternategotno3dotregular';	
-	padding-left:20px;	
+	font-family: 'alternategotno3dotregular';
+	padding-left:20px;
 	top:-3px;
 	position: relative;
 }
@@ -153,7 +157,7 @@ h3 {
 	list-style: none;
     padding-top: 3px;
 	list-style: none;
-	font-family: 'alternategotno3dotregular';	
+	font-family: 'alternategotno3dotregular';
 }
 .account-name{
 	position: relative;
@@ -240,4 +244,3 @@ footer .logo {
   width: 132px;
   height: 39px;
 }
-

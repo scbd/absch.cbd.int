@@ -41,7 +41,7 @@ define([
       },
       regions			: function() {
         return $q.all([
-          $http.get("/api/v2013/thesaurus/domains/regions/terms", { cache: true }), 
+          $http.get("/api/v2013/thesaurus/domains/regions/terms", { cache: true }),
           $http.get("/api/v2013/thesaurus/domains/countries/terms",   { cache: true })
         ]).then(function(o) {
           return Enumerable.from($filter("orderBy")(o[0].data, "name")).union(
@@ -93,17 +93,17 @@ define([
     //
     //==================================
     $scope.$watch("tab", function(tab) {
-      if(tab == "review") 
+      if(tab == "review")
         validate();
     });
-    
-    
+
+
     $scope.isOtherSelected = function(document){
-      
+
        return document &&  Enumerable.from(document).any(function(type){
               return type.identifier == "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED";
             });
-    }
+    };
 
 
     //==================================
@@ -117,15 +117,15 @@ define([
 
       var qLibraries = Enumerable.from(document.libraries);
 
-      if(name=="chm"  ) return qLibraries.any(function(o){ return o.identifier == "cbdLibrary:chm"    });
-      if(name=="absch") return qLibraries.any(function(o){ return o.identifier == "cbdLibrary:abs-ch" });
-      if(name=="bch"  ) return qLibraries.any(function(o){ return o.identifier == "cbdLibrary:bch"    });
-      if(name=="ebsa" ) return qLibraries.any(function(o){ return o.identifier == "cbdLibrary:ebsa"   });
+      if(name=="chm"  ) return qLibraries.any(function(o){ return o.identifier == "cbdLibrary:chm";    });
+      if(name=="absch") return qLibraries.any(function(o){ return o.identifier == "cbdLibrary:abs-ch"; });
+      if(name=="bch"  ) return qLibraries.any(function(o){ return o.identifier == "cbdLibrary:bch";    });
+      if(name=="ebsa" ) return qLibraries.any(function(o){ return o.identifier == "cbdLibrary:ebsa";   });
 
       return false;
-    }
+  };
 
-    
+
     //==================================
     //
     //==================================
@@ -137,8 +137,8 @@ define([
 
       var qJurisdiction = Enumerable.from([document.jurisdiction]);
 
-      return qJurisdiction.any(function (o) { return o.identifier == "528B1187-F1BD-4479-9FB3-ADBD9076D361" });
-    }
+      return qJurisdiction.any(function (o) { return o.identifier == "528B1187-F1BD-4479-9FB3-ADBD9076D361"; });
+  };
 
     //==================================
     //
@@ -151,9 +151,9 @@ define([
 
       var qJurisdiction = Enumerable.from([document.jurisdiction]);
 
-      var response  = qJurisdiction.any(function (o) { return o.identifier == "DEBB019D-8647-40EC-8AE5-10CA88572F6E" });
-          response |= qJurisdiction.any(function (o) { return o.identifier == "9627DF2B-FFAC-4F85-B075-AF783FF2A0B5" });
-          response |= qJurisdiction.any(function (o) { return o.identifier == "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED" });
+      var response  = qJurisdiction.any(function (o) { return o.identifier == "DEBB019D-8647-40EC-8AE5-10CA88572F6E"; });
+          response |= qJurisdiction.any(function (o) { return o.identifier == "9627DF2B-FFAC-4F85-B075-AF783FF2A0B5"; });
+          response |= qJurisdiction.any(function (o) { return o.identifier == "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED"; });
 
       return response;
     }
@@ -231,7 +231,7 @@ define([
       var oDocument = $scope.reviewDocument = $scope.getCleanDocument();
 
       return storage.documents.validate(oDocument).then(function(success) {
-      
+
         $scope.validationReport = success.data;
         return !!(success.data && success.data.errors && success.data.errors.length);
 
@@ -277,7 +277,7 @@ define([
       else
         $scope.error = error;
     }
-    
+
     //==================================
     //
     //==================================
@@ -306,7 +306,7 @@ define([
 
       var sQuery = "type eq '" + encodeURI(schema) + "'";
 
-      return $q.all([storage.documents.query(sQuery, null, { cache: true }), 
+      return $q.all([storage.documents.query(sQuery, null, { cache: true }),
                storage.drafts   .query(sQuery, null, { cache: true })])
         .then(function(results) {
           var qResult = Enumerable.from (results[0].data.Items)
@@ -345,7 +345,7 @@ define([
         $scope.tab    = "edit";
         $scope.status = "ready";
         $scope.document = doc;
-        
+
         $scope.$emit("loadDocument", {identifier:doc.header.identifier,schema:doc.header.schema});
 
       }).catch(function(err) {
