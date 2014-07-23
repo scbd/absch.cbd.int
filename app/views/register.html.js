@@ -24,17 +24,17 @@ define(['app',
       	'National Entities':{
 		'title': 'National Entities',
 		'formats': ['authority', 'absCheckpoint'],
-		'roles':['AbsPublishingAuthorities', 'abschiac','AbsNationalAuthorizedUser','AbsNationalFocalPoint','AbsAdministrator']
+		'roles':['AbsPublishingAuthorities', 'abschiac','AbsNationalAuthorizedUser','AbsNationalFocalPoint','AbsAdministrator','Administrator']
 		},
       	'National Records': {
 		'title': 'National Records',
 		'formats': ['measure', 'absPermit', 'absCheckpointCommunique', 'database'],
-		'roles':['AbsPublishingAuthorities', 'abschiac','AbsNationalAuthorizedUser','AbsNationalFocalPoint','AbsAdministrator']
+		'roles':['AbsPublishingAuthorities', 'abschiac','AbsNationalAuthorizedUser','AbsNationalFocalPoint','AbsAdministrator','Administrator']
 		},
 	  	'Reference Records': {
 		'title': 'Reference Records',
 		'formats': ['resource'],
-		'roles':['AbsPublishingAuthorities', 'abschiac','AbsNationalAuthorizedUser','AbsNationalFocalPoint', 'AbsAdministrator', 'User']
+		'roles':['AbsPublishingAuthorities', 'abschiac','AbsNationalAuthorizedUser','AbsNationalFocalPoint', 'AbsAdministrator','Administrator', 'User']
 		}
     };
 

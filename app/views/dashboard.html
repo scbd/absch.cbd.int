@@ -11,7 +11,7 @@
 
   <div class="col-xs-9" >
 
-      
+
 
     <div class="registerpage-header">
       <h2>
@@ -44,6 +44,8 @@
           <span ng-show="user.roles.indexOf('abschiac') != -1">(IAC)</span>
           <span ng-show="user.roles.indexOf('AbsNationalAuthorizedUser') != -1">(NAU)</span>
           <span ng-show="user.roles.indexOf('AbsNationalFocalPoint') != -1">(FP)</span>
+          <span ng-show="user.roles.indexOf('AbsAdministrator') != -1">(ABS ADMIN)</span>
+          <span ng-show="user.roles.indexOf('Administrator') != -1">(ADMIN)</span>
         </p>
       </div>
 
@@ -52,7 +54,7 @@
           <i class="glyphicon glyphicon-off"></i> SIGN IN
         </a>
       </div>
-      <div class="row" id="dashboard_panels">  
+      <div class="row" id="dashboard_panels">
 
            <div class="col-lg-4">
             <div class="panel panel-danger">
@@ -137,10 +139,10 @@
               </a>
             </div>
           </div>
-       
-          
+
+
       </div>
-      <div class="row">  
+      <div class="row">
         <div class="col-md-12 col-sm-12 col-sx-12">
           <div class="panel panel-default">
             <div class="panel-heading clearfix">
@@ -160,13 +162,13 @@
                     <div class="scrollbar" style="height: 280px;overflow:scroll">
                            <ul class="list-group " rel="scrollcontent1">
                             <li ng-repeat="item in userActivities" class="list-group-item">
-                              {{item.title}}  
+                              {{item.title}}
                             </li>
-                          </ul>                 
+                          </ul>
                     </div>
                   </div>
                 </div>
-               
+
               </div>
             </div>
           </div>
