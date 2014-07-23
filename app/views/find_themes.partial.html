@@ -2,7 +2,7 @@
 
     <h3>
         <a ng-click="showSelect=!showSelect" ng-href="#">
-            <i class="fa" ng-class="{'fa-caret-right':!showSelect, 'fa-caret-down':showSelect}">	
+            <i class="fa" ng-class="{'fa-caret-right':!showSelect, 'fa-caret-down':showSelect}">
         </i> &nbsp; {{title | lstring:locale}}</a>
     </h3>
 
@@ -63,7 +63,7 @@
                     <span class="sr-only">45% Complete</span>
                   </div>
             </div>
-            <div ng-repeat="item in terms" class="checkbox">
+            <div ng-repeat="item in terms" class="checkbox" id="chkboxList">
 
                 <label>
                     <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">

@@ -1,12 +1,12 @@
 {
   "name": "absch-cbd-int",
   "dependencies": {
-    "angular": "~1.2.15",
+    "angular": "1.2.18",
     "angular-animate": "~1.2.5",
     "angular-cookies": "~1.2.5",
     "angular-route": "~1.2.5",
     "angular-sanitize": "~1.2.5",
-    "bootstrap": "~3.0.3",
+    "bootstrap": "~3.1.*",
     "font-awesome": "~4.0.3",
     "jquery": "~2.0.3",
     "requirejs": "latest",
@@ -24,6 +24,11 @@
     "angular-dragndrop": "latest",
     "angucomplete": "*",
     "barcode-39.js": "https://github.com/erik5388/barcode-39.js.git",
-    "angular-intro.js": "latest"
+    "angular-intro.js": "latest",
+    "ngLocalizer": "latest",
+    "angular_form_controls": "latest"
+  },
+  "resolutions": {
+    "angular": "1.2.18"
   }
 }
