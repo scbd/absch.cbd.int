@@ -1,19 +1,19 @@
-﻿<div id="Record" class="record panel panel-default">		
+﻿<div id="Record" class="record panel panel-default">
 
 
 
-	<div class="panel-heading"> <h4><span class="record-title-national">ABSCH-IRCC</span> Permit or its equivalent constituting an internationally recognized certificate of compliance</h4> </div>
+	<div class="panel-heading"> <h4><span class="record-title-national">IRCC</span> Permit or its equivalent constituting an internationally recognized certificate of compliance</h4> </div>
 	<div class="record-body panel-body">
-			
+
 			<!-- <a type="button" ng-show="showPdf" target="_blank" class="btn btn-info pull-right" ng-href="https://s3.amazonaws.com/absch.documents/ABSCH-{{document.government.identifier}}-{{document.info.documentID}}-{{document.info.revision}}.pdf">Download the Compliance Certificate</a> -->
-			
+
 
 			<div ng-show="document.title">
 			 	<label>Title</label>
 			 	<div class="km-value">
 			 	<strong>{{document.title | lstring:locale}}</strong>
 			 	</div>
-		 	</div> 
+		 	</div>
 
 			<div ng-show="document.government || document.updateReasons">
 				<legend>General information</legend>
@@ -61,15 +61,15 @@
 				</div>
 
 				<div ng-show="document.providers || document.providerConfidential">
-					<label>The provider</label>										
-						<div class="km-value" ng-show="!document.providerConfidential" ng-repeat="provider in document.providers">	
+					<label>The provider</label>
+						<div class="km-value" ng-show="!document.providerConfidential" ng-repeat="provider in document.providers">
 
 									<div view-contact-reference ng-model="provider" locale="locale"></div>
-									
-						</div>						
+
+						</div>
 						<div ng-show="document.providerConfidential">
 							<div class="km-value km-pre confidential">Confidential information</div>
-						</div>					
+						</div>
 				</div>
 
 				<div ng-show="document.consentGranted!=undefined">
@@ -91,10 +91,10 @@
 
 				<div ng-show="document.informedConsents || document.informedConsentConfidential">
 					<label>Person or entity to whom prior informed consent was granted</label>
-						<div class="km-value" ng-repeat="consent in document.informedConsents" ng-show="!document.informedConsentConfidential">	
-							
+						<div class="km-value" ng-repeat="consent in document.informedConsents" ng-show="!document.informedConsentConfidential">
+
 									<div view-contact-reference ng-model="consent" locale="locale"></div>
-								
+
 						</div>
 						<div ng-show="document.informedConsentConfidential">
 							<div class="km-value km-pre confidential">Confidential information</div>
@@ -138,7 +138,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<div ng-show="document.keywords">
 				<label>Keywords to describe the subject-matter or genetic resource(s) covered by the permit or its equivalent</label>
 				<div class="km-value">
@@ -239,7 +239,7 @@
 				</div>
 			</div>
 
-			
+
 			<legend>Certificate History</legend>
 			<div view-certificate document-id="document.header.identifier" load-documents="true" government="document.government.identifier"></div>
 	</div>

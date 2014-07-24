@@ -1,16 +1,16 @@
-﻿<div id="Record" class="record panel panel-default">		
-	<div class="panel-heading"><h4 ><span class="record-title-national">ABSCH-CNA</span> 
+﻿<div id="Record" class="record panel panel-default">
+	<div class="panel-heading"><h4 ><span class="record-title-national">CNA</span> 
 	Competent National Authority</h4> </div>
 	<div class="record-body panel-body">
 
-	
+
 
 		 	<div ng-show="document.title">
 			 	<label>Title</label>
 			 	<div class="km-value">
 			 	<strong>{{document.name | lstring:locale}}</strong>
 			 	</div>
-		 	</div> 
+		 	</div>
 
 
 		<div ng-show="document.government">
@@ -21,7 +21,7 @@
 		</div>
 
 		<div ng-show="document.address || document.city || document.state || document.postalCode || document.country">
-			
+
 			<legend>Coordinates</legend>
 
 			<label>Address</label>
@@ -48,7 +48,7 @@
 			<div class="km-value" >
 				<ul class="list">
 					<li ng-repeat="item in document.faxes">{{item}}</li>
-				</ul>			
+				</ul>
 			</div>
 		</div>
 
@@ -85,7 +85,7 @@
 				</div>
 			</div>
 		</div>
-				
+
 		<div ng-show="document.absFunctions||document.absJurisdiction||document.absJurisdictionName||document.absGeneticResourceTypes||document.absGeneticResourceAreas||document.absResponsibilities">
 			<legend>ABS Responsibilities </legend>
 
@@ -130,7 +130,7 @@
 			</div>
 
 			<div ng-show="document.absGeneticResourceTypes ">
-				<label>Keywords to describe scope of CNA responsibilities</label>				
+				<label>Keywords to describe scope of CNA responsibilities</label>
 				<div class="km-value" >
 					<ul class="list">
 						<li ng-repeat="term in document.absGeneticResourceTypes">{{term|term}} </li>

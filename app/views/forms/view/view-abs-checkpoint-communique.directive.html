@@ -1,17 +1,17 @@
-﻿<div id="Record" class="record panel panel-default">		
-	<div class="panel-heading">	<h4 ng-show="display('header')"><span class="record-title-national">ABSCH-CPC</span> Information for the Checkpoint communiqué</h4> 
+﻿<div id="Record" class="record panel panel-default">
+	<div class="panel-heading">	<h4 ng-show="display('header')"><span class="record-title-national">CPC</span> Information for the Checkpoint communiqué</h4> 
 	</div>
 	<div class="record-body panel-body">
 
 			<a type="button" ng-show="showPdf" target="_blank" class="btn btn-info pull-right" ng-href="http://absch.cbd.int/app/abs/docs/sample_communique.pdf">Download the Checkpoint Communiqué</a>
-			
-	
+
+
 				<div ng-show="document.title">
 			 	<label>Title</label>
 			 	<div class="km-value">
 			 	<strong>{{document.title | lstring:locale}}</strong>
 			 	</div>
-		 	</div> 
+		 	</div>
 
 
 
@@ -35,11 +35,11 @@
 					<label>Reference number(s) of the internationally recognized certificate(s) of compliance that relate(s) to this communiqué</label>
 					<div class="km-value">
 						<ul>
-							<li ng-repeat="permit in document.permit">								
+							<li ng-repeat="permit in document.permit">
 								<a href="http://localhost:2010/database/record?documentSchema=ABSPERMIT&documentID={{permit | lstring:locale}}">{{permit | lstring:locale}}</a>
 							</li>
 						</ul>
-						
+
 					</div>
 				</div>
 				<div ng-show="document.permitNotAvailable" class="km-value">

@@ -1,7 +1,7 @@
-﻿<div id="Record" class="record panel panel-default">		
-	<div class="panel-heading"><h4 ><span style="color:#ed9c28">ABSCH-VLR</span> Virtual Library Record</h4></div>
-	<div class="record-body panel-body">	  
-		
+﻿<div id="Record" class="record panel panel-default">
+	<div class="panel-heading"><h4 ><span style="color:#ed9c28">VLR</span> Virtual Library Record</h4></div>
+	<div class="record-body panel-body">
+
 		 <div ng-show="document.title">
 		 	<label>Title</label>
 		 	<div class="km-value">
@@ -23,7 +23,7 @@
 						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 					</li>
 				</ul>
-			</div>			
+			</div>
 		</div>
 
 		<div ng-show="document.resourceAccess">
@@ -89,12 +89,12 @@
 		</div>
 
 		<div ng-show="document.resourceTypes">
-			<label>Type of resource</label>			
+			<label>Type of resource</label>
 				<div class="km-value" >
 					<ul>
 						<li  ng-repeat="term in document.resourceTypes">{{term | term | lstring:locale}}</li>
-					</ul>	
-				</div>		
+					</ul>
+				</div>
 		</div>
 
 		<div ng-show="document.publisher">
@@ -131,7 +131,7 @@
 			<div class="km-value km-pre">{{document.keywords | lstring:locale}}</div>
 		</div>
 
-		
+
 
 		<div ng-show="isInLibrary('chm')">
 

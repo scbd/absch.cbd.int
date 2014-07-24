@@ -1,13 +1,13 @@
-﻿<div id="Record" class="record panel panel-default">		
-	<div class="panel-heading"> <h4 ng-show="display('header')"><span class="record-title-national">ABSCH-MSR</span> Legislative, administrative or policy measures on access and benefit-sharing</h4></div>
+﻿<div id="Record" class="record panel panel-default">
+	<div class="panel-heading"> <h4 ng-show="display('header')"><span class="record-title-national">MSR</span> Legislative, administrative or policy measures on access and benefit-sharing</h4></div>
 	<div class="record-body panel-body">
-			
+
 			<div ng-show="document.title">
 			 	<label>Title</label>
 			 	<div class="km-value">
 			 	<strong>{{document.title | lstring:locale}}</strong>
 			 	</div>
-		 	</div> 
+		 	</div>
 
 		<div ng-show="document.description">
 			<label>Brief description</label>
@@ -44,14 +44,14 @@
 			</div>
 		</div>
 
-	
+
 		<div ng-show="document.status">
 			<label>Current status of the measure</label>
 			<div class="km-value">
 				<ul>
 					<li>{{document.status|term}}</li>
 				</ul>
-			</div>	
+			</div>
 		</div>
 
 		<div ng-show="document.adoption">
@@ -128,7 +128,7 @@
 						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 					</li>
 				</ul>
-			</div>				
+			</div>
 		</div>
 		<div ng-show="linkedMeasures">
 			<label>Related measures</label>
@@ -142,7 +142,7 @@
 						<div class="alert alert-block" ng-show="item.errorCode"><strong>Record not found</strong> {{item.identifier}}</div>
 					</li>
 				</ul>
-			</div>				
+			</div>
 		</div>
 
 
@@ -180,7 +180,7 @@
 					<ul>
 						<li ng-repeat="term in document.absMeasures">{{term|term:locale}} <i ng-show="term.section">({{term.section | lstring:locale}})</i>
 					</ul>
-				</div>	
+				</div>
 		</div>
 
 		<div ng-show="document.relevantInformation||document.relevantDocuments">
@@ -202,6 +202,6 @@
 				</div>
 			</div>
 		</div>
-	</div> 
+	</div>
 	<div document-metadata class="panel-footer"></div>
 </div>
