@@ -29,10 +29,33 @@ section {
     background-color:#888;
     color:#666;
 }
-.enable {
-    background-color:#ededed;
+
+.disable  button {
+	background-color:#888!important;
+	border-color:#666;
 }
-                
+.disable  hr {
+	background-color:#888!important;
+	border-color:#666;
+}
+.disable  input{
+	background-color:#888!important;
+	border-color:#666;
+}
+.disable textarea{
+	background-color:#888!important;
+	border-color:#666;
+}
+.disable span{
+	background-color:#888!important;
+	border-color:#666;
+}
+
+
+.enable {
+    background-color:#ddd;
+}
+
 legend{
 
 	padding:10px 0 10px 0;
@@ -51,10 +74,10 @@ legend{
 	color:#666;
 
 }
-.btn-commonformat-header-national {	
+.btn-commonformat-header-national {
 	/*color:#418BCA;*/
 }
-.btn-commonformat-header-reference {	
+.btn-commonformat-header-reference {
 	/*color:#ed9c28;*/
 }
 
@@ -85,13 +108,13 @@ legend{
    padding-left:10px;
    background-color: #dedede;
   }
- 
+
  .btn-commonformat-reference-selected {
-   border-left:#FA6938 solid 3px;  
-  } 
+   border-left:#FA6938 solid 3px;
+  }
 
   .btn-commonformat-selected:hover, a.btn-commonformat-selected:focus {
-     
+
   }
 
 
@@ -125,18 +148,18 @@ border-color: #888;
 
 .registerpage-header{
 	background-color:#333;
-	padding:3px 20px; 
+	padding:3px 20px;
 	border-top-left-radius: 4px;
 	border-top-right-radius: 4px;
 	padding-bottom:15px;
 }
 .registerpage-header .abbreviation{
-	color: #428BCA; 
+	color: #428BCA;
 	font-weight: bold;
 	font-size: 18px;
 }
 .registerpage-header .title{
-	color: #fefefe; 
+	color: #fefefe;
 	font-weight: normal;
 	font-family:Tahoma, Trebuchet MS, "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 18px;
@@ -242,7 +265,7 @@ form label[required]:before
 {
 
 	content: '*';
-	
+
 
 }*/
 
