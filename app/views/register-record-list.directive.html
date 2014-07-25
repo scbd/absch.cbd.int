@@ -9,20 +9,20 @@
   <div class="row">
       <div class="col-xs-10 " id="filter_buttons">
         <div class="btn-group-sm">
-          <button type="button" ng-click="statusFilter=null" class="btn btn-info"> 
+          <button type="button" ng-click="statusFilter=null" class="btn btn-info">
           <i ng-hide="statusFilter" class="glyphicon glyphicon-ok"></i> All <span class="badge badge-default">
           {{(records | filter:schemaFilter).length}}</span></button>
-          <button type="button"  ng-click="statusFilter=isRequest" class="btn btn-danger"> 
+          <button type="button"  ng-click="statusFilter=isRequest" class="btn btn-danger">
           <i ng-show="statusFilter==isRequest" class="glyphicon glyphicon-ok"></i> Requests <span class="badge badge-default">{{(records | filter:schemaFilter | filter:isRequest).length}}</span></button>
-          <button type="button"    ng-click="statusFilter=isPublished" class="btn btn-success"> 
+          <button type="button"    ng-click="statusFilter=isPublished" class="btn btn-success">
           <i ng-show="statusFilter==isPublished" class="glyphicon glyphicon-ok"></i> Published  <span class="badge badge-default">{{(records | filter:schemaFilter | filter:isPublished).length}}</span></button>
           <button type="button" ng-click="statusFilter=isDraft" class="btn btn-default btn-draft" style="color:#fff">
           <i ng-show="statusFilter==isDraft" class="glyphicon glyphicon-ok"></i> Draft  <span class="badge badge-default" style="color:#999;background-color:white;">{{(records | filter:schemaFilter | filter:isDraft).length}}</span></button>
-         
 
-          <input type="text" ng-model="keywords" placeholder=" Keyword " class="form-control keyword input-group" style="width:160px;display:inline;font-size:12px;height:31px;"> 
+
+          <input type="text" ng-model="keywords" placeholder=" Keyword " class="form-control keyword input-group" style="width:160px;display:inline;font-size:12px;height:31px;">
           </div>
-        
+
       </div>
       <div class="col-xs-2 pull-right" ng-show="showAddButton()">
         <span style="font-size: 16px; color: white;margin:0;padding:0;float:right;">
@@ -32,7 +32,7 @@
 
   <p></p>
 <style type="text/css">
-  
+
   .odd {
       background-color: #efefef;
   }
@@ -52,38 +52,47 @@
         <div class="col-xs-2" style="font-weight:bold;text-align:right;">
         {{filteredRecords.length}} record(s)</div>
     </div>
-    
+
     <hr class="header" style="padding:0; margin:0;">
 
     <div ng-repeat="record in (filteredRecords = (records | filter:schemaFilter | filter:statusFilter | filter:keywords | orderBy:['-updatedOn','-createdOn']))" ng-class-odd="'odd'" ng-class-even="'even'" id="record{{$index}}">
       <div class="row" style="padding:10px;border-bottom:1px solid #dedede;">
            <div class="col-xs-4">
                          <span ng-show="isPublished(record)">
+
+
+
                         <a href="" ng-click="loadDocument(record); displayDetails =  !displayDetails;displayRequest =false" class="btn btn-xs btn-success" title="Published">P</a>
-                        <a href=""  ng-click="loadDocument(record); displayDetails=!displayDetails" ng-show="record.documentID">
-                            <i class="fa" ng-class="{'fa-caret-down':displayDetails, 'fa-caret-right':!displayDetails}" style="font-size:11px;color:#999;position:relative; top:-1px;font-size:14px;"></i> 
+                        <a href="/register/{{record.type}}/{{record.identifier}}/edit" ng-show="isDraft(record) && !isRequest(record)"  class="btn btn-xs btn-default btn-draft" title="Draft">D</a>
+
+                         <a ng-show="isDraft(record) && !isRequest(record)"  href="/register/{{record.type}}/{{record.identifier}}/edit">
+                            <h4 style="display:inline;">{{(record.workingDocumentTitle||record.title)|lstring}}
+                            <span ng-show="record.metadata.schema == 'absCheckpointCommunique'">Checkpoint Communique - {{record.createdOn | formatDate:"D MMMM YYYY h:mm a (Z)" }}</span></h4>
+                        </a>
+
+                        <a ng-show="!isDraft(record) && !isRequest(record)" href=""  ng-click="loadDocument(record); displayDetails=!displayDetails" ng-show="record.documentID"> 
+                            <i class="fa" ng-class="{'fa-caret-down':displayDetails, 'fa-caret-right':!displayDetails}" style="font-size:11px;color:#999;position:relative; top:-1px;font-size:14px;"></i>
                             <h4 style="display:inline;">{{(record.workingDocumentTitle||record.title)|lstring}}
                             <span ng-show="record.metadata.schema == 'absCheckpointCommunique'">Checkpoint Communique - {{record.createdOn | formatDate:"D MMMM YYYY h:mm a (Z)" }}</span></h4>
                         </a>
                     </span>
- 
+
                     <span ng-show="isRequest(record)">
                         <a href="" ng-click="displayDetails =false; displayRequest = !displayRequest; formLoading=false" class="btn btn-xs btn-danger" title="Request">R</a>
-                        <!--  href="/register/tasks/{{getWorkflowID(record)}}" -->
                         <a href="" ng-click="displayDetails =false; displayRequest = !displayRequest; formLoading=false">
                             <h4 style="display:inline;">{{(record.workingDocumentTitle||record.title)|lstring}}
                             <span ng-show="record.metadata.schema == 'absCheckpointCommunique'">Checkpoint Communique - {{record.createdOn | formatDate:"D MMMM YYYY h:mm a (Z)" }}</span></h4>
                         </a>
                     </span>
- 
-                    <span ng-show="isDraft(record) && !isRequest(record)">
+
+                    <span ng-show="isDraft(record) && !isPublished(record) && !isRequest(record)" >
                       <a ng-href="/register/{{record.type}}/{{record.identifier}}/edit" class="btn btn-xs btn-default btn-draft" title="Draft" style="color:#fff">D</a>
                       <a href="/register/{{record.type}}/{{record.identifier}}/edit">
                             <h4 style="display:inline;">{{(record.workingDocumentTitle||record.title)|lstring}}
                             <span ng-show="record.metadata.schema == 'absCheckpointCommunique'">Checkpoint Communique - {{record.createdOn | formatDate:"D MMMM YYYY h:mm a (Z)" }}</span></h4>
                         </a>
                     </span>
- 
+
           </div> <!-- end col -->
           <div class="col-xs-3">
               <div ng-show="record.createdBy">
@@ -106,28 +115,28 @@
                 <button title="Delete"  ng-show="!isRequest(record)"ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
             </div>
           </div> <!-- end col -->
-     
-   
+
+
 
      </div> <!-- end row -->
 
 
         <div class="row-fluid" ng-show="displayDetails || displayRequest" >
           <div class="col-xs-12" style="border-bottom:2px solid #666;margin-bottom:20px;" ng-class-odd="'odd'" ng-class-even="'even'">
-              <div ng-show="displayDetails" >                                                
+              <div ng-show="displayDetails" >
                   <div  record-loader document="record.data" hide="header;title;libraries" class="record-body" ></div>
-              </div>                          
-               <div  ng-show="displayRequest">                                                 
+              </div>
+               <div  ng-show="displayRequest">
                   <div  task-id class="record-body" load-task-data='formLoading' workflow-task-id="{{getWorkflowID(record)}}"
                    parent-watcher="documents"  ></div>
-                       <!-- href="/register/tasks/{{getWorkflowID(record)}}" -->                               
+                       <!-- href="/register/tasks/{{getWorkflowID(record)}}" -->
               </div>
           </div> <!-- end col -->
         </div>  <!-- end row -->
 
     </div> <!-- end repeat -->
 
-  
+
 
 
 
@@ -147,7 +156,7 @@
             <p><b>{{recordToDelete.workingDocumentTitle|lstring}}</b></p>
             <p>{{recordToDelete.workingDocumentSummary|lstring}}</p>
           </div>
-        
+
           <div ng-show="isPublished(recordToDelete)" class="well">
             <button type="button" class="btn btn-danger pull-right" ng-disabled="loading" ng-click="deleteRecord(recordToDelete)" data-toggle="tooltip" data-placement="top" title="Note: Any pending draft will also be deleted">Unpublish the record</button>
             <em>Published record {{recordToDelete.documentID}}</em>
@@ -166,7 +175,7 @@
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->  
+  </div><!-- /.modal -->
 
 <div id="duplicateRecordModel" class="modal fade" data-backdrop="static">
     <div class="modal-dialog">
@@ -182,7 +191,7 @@
         <div class="modal-footer" style="margin-top:0">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
           <button ng-disabled="loading" type="button"  ng-click="duplicate(recordToDuplicate)" class="btn btn-primary" >Yes</button>
-          
+
         </div>
       </div>
     </div>
