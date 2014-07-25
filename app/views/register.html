@@ -13,10 +13,13 @@
           </h3>
 
           <h3>Requests</h3>
+
           <div style="padding-left:10px">
-            <a href="/dashboard/pending" ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-tasks.directive.html'}" href="#" role="button">
-              Publishing requests for your approval
-            </a><br>
+            <span ng-show="compareRoles(user.roles, PAroles)">
+                <a href="/dashboard/pending" ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-tasks.directive.html'}" href="#" role="button">
+                    Publishing requests for your approval
+                </a><br>
+            </span>
             <a href="/dashboard/mytasks" ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-pending-tasks.directive.html'}" href="#" role="button">
               Your pending requests
             </a><br>

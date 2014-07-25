@@ -6,7 +6,7 @@ define(['app',], function (app) {
 "use strict";
 //require("app", "dragAndDrop")
 
-app.controller("DashboardController", 
+app.controller("DashboardController",
 	["$rootScope", "$scope", "underscore", "lstringFilter","IWorkflows","realm","$q",
 	function ($rootScope, $scope, _, lstringFilter,workflows,realm,$q) {
 
@@ -35,6 +35,22 @@ app.controller("DashboardController",
     };
 
 
+//============================================================
+	$scope.PAroles= ['AbsPublishingAuthorities', 'AbsNationalFocalPoint','AbsAdministrator','Administrator'];
+	 $scope.compareRoles = function(array1, array2) {
+
+		if(!array1) return false;
+		if(!array2) return false;
+
+		for(var i=0; i < array1.length; i++){
+			for(var j=0; j < array2.length; j++){
+				if(array1[i] == array2[j])
+					return true;
+			}
+		}
+    };
+
+//============================================================
 
   //TODO: this is almost identical to type_document_list.html.js... inherit them
 
@@ -49,20 +65,20 @@ app.controller("DashboardController",
 
 
     var myUserID = $scope.$root.user.userID;
-    var query    = {  
+    var query    = {
                 $and : [
-                    { "createdBy" : myUserID }, 
+                    { "createdBy" : myUserID },
                     { closedOn : { $exists : true } },
                     { "data.realm" : realm }
-                ]                
+                ]
             };
     $q.when(workflows.query(query), function(data){
-        $scope.completedRequestCount = data.length;    
+        $scope.completedRequestCount = data.length;
     });
      $scope.completedRequestCount = 0
      $scope.pendingCount = 0;
      $scope.urgentAttentionCount = 0;
 
- 	
+
 }]);
 });
