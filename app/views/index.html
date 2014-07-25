@@ -3,7 +3,7 @@
 <!-- <script src="/app/views/index.html.js"></script> -->
 <!-- <script src="/app/views/directives/login.directive.html.js"></script> -->
 <div ng-controller="IndexController">
-                                       
+
 
 <!-- Carousel
 ================================================== -->
@@ -40,9 +40,9 @@
         <div class="item" >
             <img  class="image-responsive" style="border:5px solid #000;" src="https://dl.dropboxusercontent.com/u/281146418/Regional%20Workshops/Guyana/pics/slider1.jpg">
             <div class="container">
-                
+
                 <div class="carousel-caption">
-                    <h1 style="background-color: #000;opacity: 0.8;">SUBREGIONAL CAPACITY-BUILDING WORKSHOP ON THE NAGOYA PROTOCOL ON ACCESS AND BENEFIT SHARING FOR THE CARIBBEAN 
+                    <h1 style="background-color: #000;opacity: 0.8;">SUBREGIONAL CAPACITY-BUILDING WORKSHOP ON THE NAGOYA PROTOCOL ON ACCESS AND BENEFIT SHARING FOR THE CARIBBEAN
                     <span style="color:#999">19-22 MAY 2014 - GEORGETOWN, GUYANA</span>
                     </h1>
                     <p><a class="btn btn-lg btn-primary" href="/workshops/caribbean" role="button">Learn more</a></p>
@@ -53,12 +53,12 @@
         <div class="item" >
             <img  class="image-responsive" style="border:5px solid #000;" src="https://dl.dropboxusercontent.com/u/281146418/Regional%20Workshops/LAC%20Region/slider1.jpg">
             <div class="container">
-                
+
                 <div class="carousel-caption">
                     <h1 style="background-color: #000;opacity: 0.8;">Regional Capacity-building Workshop for Latin America on Nagoya Protocol on Access and Benefit-sharing
                     <span style="color:#999">24 - 28 March 2014 - Montevideo, Uruguay</span>
                     </h1>
-                    
+
                     <p><a class="btn btn-lg btn-primary" href="/workshops/lac" role="button">Learn more</a></p>
                 </div>
             </div>
@@ -86,11 +86,19 @@
     <div class="row" >
 
         <div class="col-md-12">
+
+            <div class="well text-center">
+                <span style="color:#000;font-weight:bold; font-size:80px;text-shadow: 0 1px 2px rgba(0, 0, 0, .6);">
+                      {{daysUntilEntry}}</span><br><span style="color: #999; text-transform: uppercase;font-weight:bold;font-size:20px;">
+                          Days left until entry into force</span>
+            </div>
+
             <div class="home-col">
                 <!-- <h3 class="headline1"><a href="/about#about">What is the ABS-CH?</a></h3> -->
                 <h3 style="text-align:justify;">The Access and Benefit-sharing Clearing-house (ABSCH) is a platform for exchanging information on ABS and a key tool for facilitating the implementation of the Nagoya Protocolby enhancing transparency on procedures for access and on the utilization of genetic resources, and in this way increasing the opportunities for benefit-sharing. <a href="/about#about">
                 <span style="font-size:80%"> &nbsp; <i class="fa fa-forward"></i> read more</a></span></h3>
             </div>
+
         </div>
 
          <!--  <div class="col-md-4">
@@ -104,14 +112,14 @@
             <div class="home-col">
                 <h3 class="headline1"><a href="">Development of the pilot phase</a></h3>
                 <p>The ABS-CH is currently in its pilot phase and needs your participation and feedback so that it can be fully operational by the time of entry into force of the Nagoya Protocol.
-                 </p>       
+                 </p>
                 <p>
                     <a href="http://absch.tumblr.com/"><i class="fa fa-forward"></i> Follow our development <strong>blog</strong> here</a>
                 </p>
             </div>
         </div> -->
 
-      
+
 
     </div>
 </div>
@@ -126,23 +134,24 @@
 
         <div class="col-md-6">
 
-            <div class="home-col">
+        <div class="home-col">
                 <h3>About the Nagoya Protocol</h3>
-                The Nagoya Protocol on Access to Genetic Resources and the Fair and Equitable Sharing of Benefits Arising from their Utilization to the Convention on Biological Diversity is an international agreement which aims at sharing the benefits arising from the utilization of genetic resources in a fair and equitable way, including by appropriate access to genetic resources and by appropriate transfer of relevant technologies, taking into account all rights over those resources and to technologies, and by appropriate funding, thereby contributing to the conservation of biological diversity and the sustainable use of its components. 
+                The Nagoya Protocol on Access to Genetic Resources and the Fair and Equitable Sharing of Benefits Arising from their Utilization to the Convention on Biological Diversity is an international agreement which aims at sharing the benefits arising from the utilization of genetic resources in a fair and equitable way, including by appropriate access to genetic resources and by appropriate transfer of relevant technologies, taking into account all rights over those resources and to technologies, and by appropriate funding, thereby contributing to the conservation of biological diversity and the sustainable use of its components.
                 <a href="http://www.cbd.int/abs"> <i class="fa fa-forward"></i> read more at: www.cbd.int/abs</a>
             </div>
+
 
             <!-- <div class="home-col">
                 <h3>News from the development blog</h3>
                     <div class="feeds">
                     <ul>
-                        
-                        <li ng-repeat="feed in feeds | filter:filterText" style="padding-top:10px;">                 
-                            <h4><a href="{{feed.link}}" target="_new" style="color:#287fcb;font-size:14px;font-weight:bold;">{{feed.title}}</a></h4>                                        
-                            <p class="text-left">{{feed.contentSnippet}}</p>                  
+
+                        <li ng-repeat="feed in feeds | filter:filterText" style="padding-top:10px;">
+                            <h4><a href="{{feed.link}}" target="_new" style="color:#287fcb;font-size:14px;font-weight:bold;">{{feed.title}}</a></h4>
+                            <p class="text-left">{{feed.contentSnippet}}</p>
                             <span class="small" >{{feed.publishedDate | date:'dd MMM yyyy'}}</span>
-                        </li>                
-                    </ul>            
+                        </li>
+                    </ul>
                     </div>
             </div> -->
         </div>
@@ -151,16 +160,16 @@
             <div class="home-col">
                 <h3>Meetings</h3>
                 <div class="feeds">
-                    <ul>     
-                        <li ng-repeat="meeting in meetings.response.docs" style="padding-top:10px;">  
-                             <span class="small" >{{meeting.startDate_s | date:'dd MMM'}} - {{meeting.endDate_s | date:'dd MMM yyyy'}} 
-                            </span>               
+                    <ul>
+                        <li ng-repeat="meeting in meetings.response.docs" style="padding-top:10px;">
+                             <span class="small" >{{meeting.startDate_s | date:'dd MMM'}} - {{meeting.endDate_s | date:'dd MMM yyyy'}}
+                            </span>
                             <h4><a href="{{meeting.url_ss[0]}}" target="_new" style="color:#287fcb;font-size:14px;font-weight:bold;">
-                            {{meeting.title_t}}</a></h4>                                                         
+                            {{meeting.title_t}}</a></h4>
                             <span>
                             <strong>{{meeting.eventCountry_EN_t}}</strong></span>
-                        </li>                
-                    </ul>            
+                        </li>
+                    </ul>
                     </div>
             </div>
         </div>
@@ -195,7 +204,7 @@
         </div>
 
         <div class="col-md-3">
-            
+
         </div>
         <div class="col-md-3">
             <div class="home-col">
@@ -205,7 +214,7 @@
                         <br>
                         <li><a href="/about#portal10"> <i class="fa fa-comment-o"></i> <strong>Art. 10</strong> Discussion Forum</a></li>
                 </ul>
-           
+
             </div>
         </div>
 

@@ -4,9 +4,9 @@
 <style type="text/css">
     .active-circle{border:2px solid #ccc;}
 
-    .animate-enter, 
+    .animate-enter,
     .animate-leave
-    { 
+    {
       -webkit-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
       -moz-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
       -ms-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
@@ -14,22 +14,22 @@
       transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
       position: relative;
       display: block;
-    } 
-     
-    .animate-enter.animate-enter-active, 
+    }
+
+    .animate-enter.animate-enter-active,
     .animate-leave {
       opacity: 1;
       top: 0;
       height: 30px;
     }
-     
+
     .animate-leave.animate-leave-active,
     .animate-enter {
       opacity: 0;
       top: -50px;
       height: 0px;
     }
-  
+
 </style>
 <script type="text/javascript">
   $("#signature").tooltip();
@@ -44,11 +44,11 @@
 
 
                     <table align="center" style="width: 90%;text-align:center;" cellspacing="10" cellpadding="10">
-                       
+
                         <tr>
                             <td style="text-align: center; width: 200px;">
                                 <div style="width: 180px; height: 100px;cursor:pointer;" ng-click="searchFilter=isPartyToCBD">
-                                    
+
                                   <div class="numberCircle" style="width:80px;height:80px;padding-top:20px;background-color:#1FA65D;" ng-class="{'active-circle': selected_circle=='party'}">
                                   {{parties}}</div>
                                   <div style="padding-top:5px;color: #fff; font-size: 10px; text-transform: uppercase;font-weight:bold;">
@@ -61,18 +61,18 @@
                             </td>
                              <td style="text-align:center;width:200px;">
                                 <div  style="width: 180px; height: 100px;cursor:pointer;" ng-click="searchFilter=isSignatory">
-                                    
+
                                 <div class="numberCircle" style="width:80px;height:80px;padding-top:20px;background-color:#5bc0de;"  ng-class="{'active-circle': selected_circle=='signatory'}">
                                 {{signatures}}</div>
                                 <div style="padding-top:5px;color: #fff; font-size: 10px; text-transform: uppercase;font-weight:bold;">
                                 Signatures</div>
 
-                                   
+
                                 </div>
                                  </td>
                             <td style="text-align: center; width: 200px;">
                               <div style="width: 180px; height: 100px;cursor:pointer;" ng-click="searchFilter=isRatified">
-                                    
+
                                   <div class="numberCircle" style="width:80px;height:80px;padding-top:20px;background-color:#428bca;"  ng-class="{'active-circle': selected_circle=='ratified'}">
                                   {{ratifications}}</div>
                                   <div style="padding-top:5px;color: #fff; font-size: 10px; text-transform: uppercase;font-weight:bold;">
@@ -81,29 +81,32 @@
                             </td>
                             <td style="text-align:center;width:200px;">
                                 <div style=" width: 180px; height: 100px;">
-                                    
-                                  <div class="numberCircle" style="width:80px;height:80px;padding-top:20px;background-color:#C7532C;">
-                                  {{51-ratifications}}</div>
-                                  <div style="padding-top:5px;color: #fff; font-size: 10px; text-transform: uppercase;font-weight:bold;">
-                                  Countdown to entry into force </div>
+
+                                  <div class="numberCircle" style="width:80px;height:80px;padding-top:20px;background-color:#fff;color:#000;font-weight:bold;">
+                                  {{daysUntilEntry}}<br><span style="position:relative;top:-20px;color: #999; font-size: 11px; text-transform: uppercase;font-weight:bold;">days</span></div>
+                                  <div style="position:relative;top:-15px;padding-top:5px;color: #fff; font-size: 10px; text-transform: uppercase;font-weight:bold;">
+                                   until entry into force
+                                    </div>
+
+
 
                                 </div>
-                                
-                                
+
+
                                </td>
-                           
-                           
+
+
                         </tr>
                     </table>
 
-           
+
 
                   </div>
                </div>
         </div>
    </div>
 
-   <div class="container"> 
+   <div class="container">
 
 
     <div class="row"  >
@@ -111,11 +114,11 @@
 
         <table class="table table-countries table-striped">
           <tr>
-              <td colspan="5" > 
+              <td colspan="5" >
                   <!-- <div class="pull-left">
                     <span class="label label-default">Not Ratified</span>
                     <span class="label label-primary">Ratified</span>
-                    <span class="label label-info">Signatory</span>  
+                    <span class="label label-info">Signatory</span>
                   </div> -->
                   <div class="pull-right" style="width:30%" >
                     <div angucomplete id="ex1" placeholder="Search countries" pause="100"  localdata="countriesforAutocomplete" minlength="1" inputclass="form-control form-control-small"   searchfields="name" selectedObject="selectedCountry" searchStr="countryFilter" titlefield="name"/>
@@ -124,13 +127,13 @@
           </tr>
           <tr>
             <th>#</th>
-            <th style="white-space:nowrap;"><span style="cursor:pointer;" ng-click="sortTable('name.en')">Country 
+            <th style="white-space:nowrap;"><span style="cursor:pointer;" ng-click="sortTable('name.en')">Country
              <i ng-show="sortTerm=='name.en'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span></th>
-             <th style="white-space:nowrap;"><span style="cursor:pointer;" ng-click="sortTable('treaties.XXVII8b.signature')">Signature 
+             <th style="white-space:nowrap;"><span style="cursor:pointer;" ng-click="sortTable('treaties.XXVII8b.signature')">Signature
              <i ng-show="sortTerm=='treaties.XXVII8b.signature'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span></th>
-             <th style="white-space:nowrap;"><span style="cursor:pointer;" ng-click="sortTable('treaties.XXVII8b.instrument')">Instrument 
+             <th style="white-space:nowrap;"><span style="cursor:pointer;" ng-click="sortTable('treaties.XXVII8b.instrument')">Instrument
              <i ng-show="sortTerm=='treaties.XXVII8b.instrument'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span></th>
-            <th style="white-space:nowrap;"><span style="cursor:pointer;" ng-click="sortTable('treaties.XXVII8b.deposit')">Deposit 
+            <th style="white-space:nowrap;"><span style="cursor:pointer;" ng-click="sortTable('treaties.XXVII8b.deposit')">Deposit
              <i ng-show="sortTerm=='treaties.XXVII8b.deposit'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span></th>
             <!-- <th>Entry into force</th> -->
           </tr><!-- -->

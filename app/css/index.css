@@ -1,10 +1,28 @@
+
+.numberCircle {
+	    -webkit-border-radius: 999px;
+	    -moz-border-radius: 999px;
+	    border-radius: 999px;
+	    behavior: url(PIE.htc);
+
+	    width: 48px;
+	    height: 48px;
+	    padding: 4px;
+
+	    background: #6495ED;
+	    color: #fff;
+	    display:inline-block;
+
+    	font: 32px "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeueW01-45Ligh", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	}
+
 .feeds * {
 	padding:0;
 	margin:0;
 }
 
 .feeds > ul > li{
-	
+
 	list-style: none;
 }
 @font-face {

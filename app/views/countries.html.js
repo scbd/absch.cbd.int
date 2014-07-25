@@ -1,5 +1,5 @@
 define(['app',  'directives/angucomplete-extended'], function (app,angucomplete) {
-  
+
     app.controller("CountriesController", ["$scope", "$http", function ($scope, $http) {
 
     	//*******************************************************
@@ -7,18 +7,18 @@ define(['app',  'directives/angucomplete-extended'], function (app,angucomplete)
             $scope.selected_circle="party";
             $scope.countries = response.data;
             $scope.ratifications = 0;
-            $scope.signatures = 0;            
+            $scope.signatures = 0;
 
             $scope.parties = 0;
             $scope.countriesforAutocomplete = [];
-            
+
             for (var i = 0; i < $scope.countries.length; i++) {
-                
-                $scope.countries[i].isParty = true;                   
-                if ($scope.countries[i].treaties.XXVII8b.instrument == "ratification" 
-                	|| $scope.countries[i].treaties.XXVII8b.instrument == "accession" 
-                	|| $scope.countries[i].treaties.XXVII8b.instrument == "acceptance" 
-                  || $scope.countries[i].treaties.XXVII8b.instrument == "approval" 
+
+                $scope.countries[i].isParty = true;
+                if ($scope.countries[i].treaties.XXVII8b.instrument == "ratification"
+                	|| $scope.countries[i].treaties.XXVII8b.instrument == "accession"
+                	|| $scope.countries[i].treaties.XXVII8b.instrument == "acceptance"
+                  || $scope.countries[i].treaties.XXVII8b.instrument == "approval"
                   || $scope.countries[i].code == 'EU') {
                     $scope.ratifications++;
                     $scope.countries[i].isRatified = true;
@@ -38,6 +38,11 @@ define(['app',  'directives/angucomplete-extended'], function (app,angucomplete)
             //$scope.ratifications--;
         });
 
+        var today= moment();
+        var entry= moment("20141012", "YYYYMMDD");
+        $scope.Math = window.Math;
+        $scope.daysUntilEntry = $scope.Math.floor(entry.diff(today, 'milliseconds', true)/86400000);
+
         $scope.orderList = true;
        	$scope.sortTerm = 'treaties.XXVII8b.deposit';
 
@@ -55,12 +60,12 @@ define(['app',  'directives/angucomplete-extended'], function (app,angucomplete)
 
          $scope.isPartyToCBD= function(entity){
             $scope.selected_circle="party";
-            return entity && entity.treaties.XXVII8.party != null; 
+            return entity && entity.treaties.XXVII8.party != null;
          }
 
          $scope.isSignatory = function(entity){
             $scope.selected_circle="signatory";
-            return entity && entity.treaties.XXVII8b.signature != null; 
+            return entity && entity.treaties.XXVII8b.signature != null;
          }
 
          $scope.isRatified= function(entity){
@@ -70,7 +75,7 @@ define(['app',  'directives/angucomplete-extended'], function (app,angucomplete)
                               entity.treaties.XXVII8b.instrument == "acceptance"
                               || entity.treaties.XXVII8b.instrument == "approval" );
          }
-         
+
     }]);
 // });
 });
