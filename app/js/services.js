@@ -1,5 +1,5 @@
 ﻿
-define(['app', 'underscore', 'linqjs'], function (app, _, Enumerable) {
+define(['app', 'underscore', 'linqjs','bootbox'], function (app, _, Enumerable,bootbox) {
 
 	app.factory("htmlUtility", function() {
 		return {
@@ -28,6 +28,10 @@ define(['app', 'underscore', 'linqjs'], function (app, _, Enumerable) {
 
 	app.factory('linqjs', [function() {
 		return Enumerable;
+	}])
+
+    app.factory('bootbox', [function() {
+		return bootbox;
 	}])
 
   //TODO: this is also in form-controls... it should only be in one place

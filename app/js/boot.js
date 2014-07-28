@@ -19,11 +19,12 @@ require.config({
         'bootstrap-datepicker'  : '../libs/bootstrap-datepicker/js/bootstrap-datepicker',
         'angular-loading-bar'   : '../libs/angular-loading-bar/src/loading-bar',
         'angular-animate'       : '../libs/angular-animate/angular-animate.min',
-        'dragAndDrop'     : '../libs/angular-dragndrop/angular-dnd.min', 
+        'dragAndDrop'     : '../libs/angular-dragndrop/angular-dnd.min',
         'view-abs-checkpoint':'../views/forms/view/view-abs-checkpoint.directive',
         'introjs'         : '../libs/intro.js/intro',
         'angular-introjs' : '../js/directives/angular-intro',
         'angular-form-controls': '../libs/angular_form_controls/form-controls',
+        'bootbox'              :'../libs/bootbox/bootbox'
     },
     'shim': {
         'angular'        : { 'deps': ['jquery'], 'exports': 'angular' },
@@ -40,10 +41,11 @@ require.config({
         'angular-introjs' : {'deps':['angular', 'introjs']},
         'angular-localizer': {'deps':['angular']},
         'angular-form-controls' : {'deps': ['angular', 'angular-sanitize', 'angular-localizer']},
+        'bootbox'     : {'deps':['bootstrap', 'jquery']},
     }
 });
 
-require(['angular', 'angular-route', 'angular-cookies', 'angular-sanitize', 'bootstrap', 'domReady', 
+require(['angular', 'angular-route', 'angular-cookies', 'angular-sanitize', 'bootstrap', 'domReady',
     'bootstrap-datepicker','angular-loading-bar', 'angular-animate',
     'dragAndDrop','moment', 'introjs', 'angular-form-controls'/*, 'main'*/], function (ng) {
     // NOTE: place operations that need to initialize prior to app start here using the `run` function on the top-level module
@@ -57,4 +59,3 @@ require(['angular', 'angular-route', 'angular-cookies', 'angular-sanitize', 'boo
         }
     });
 });
-

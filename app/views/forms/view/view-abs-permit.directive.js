@@ -32,7 +32,7 @@ app.directive("viewAbsPermit", [function () {
 			//
 			//====================
 			$scope.display = function(field) {
-				
+
 				if(!$scope.hide) return true; //show all fields
 
 				return( $scope.hide.indexOf(field) >= 0 ? false : true);
@@ -67,14 +67,14 @@ app.directive("viewAbsPermit", [function () {
 			//====================
 			//
 			//====================
-			$scope.$watch("document.authority", function (_new) {
-				$scope.authority = undefined;
-
-				if (_new) {
-					$scope.authority = angular.fromJson(angular.toJson(_new));
-					$scope.loadReferences($scope.authority);
-				}
-			});
+			// $scope.$watch("document.authority", function (_new) {
+			// 	$scope.authority = undefined;
+			//
+			// 	if (_new) {
+			// 		$scope.authority = angular.fromJson(angular.toJson(_new));
+			// 		$scope.loadReferences($scope.authority);
+			// 	}
+			// });
 
 			//====================
 			//

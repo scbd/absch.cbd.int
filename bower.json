@@ -26,7 +26,8 @@
     "barcode-39.js": "https://github.com/erik5388/barcode-39.js.git",
     "angular-intro.js": "latest",
     "ngLocalizer": "latest",
-    "angular_form_controls": "latest"
+    "angular_form_controls": "latest",
+    "bootbox": "~4.3.0"
   },
   "resolutions": {
     "angular": "1.2.18"

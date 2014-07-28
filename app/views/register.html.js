@@ -3,17 +3,16 @@ define(['app',
 	'./register-record-list.directive.js',
 	'./directives/task-id-directive.html.js',
 	'./directives/user-details.directive.html.js',
-  './directives/ngxLazy.directive.js'], function (app) {
+  './directives/ngxLazy.directive.js','bootbox'], function (app) {
 
   "use strict";
 // angular.module([]);
 
   app.controller("RegisterController",
     ["$rootScope", "$location" , "$scope", "$q", "$window", "IStorage", "underscore",
-     "schemaTypes", "$timeout","lstringFilter", "$routeParams", "$cookies",
+     "schemaTypes", "$timeout","lstringFilter", "$routeParams", "$cookies","bootbox",
 	  function ($rootScope, $location, $scope, $q, $window, storage, _,
-      schemaTypes, $timeout, lstringFilter, $routeParams, $cookies) {
-
+      schemaTypes, $timeout, lstringFilter, $routeParams, $cookies,bootbox) {
 
 
 
@@ -330,6 +329,8 @@ define(['app',
     //============================================================
     $scope.$on("documentClosed", function(evt){
 
+	  if($scope.showingFeedback)
+		return;
       evt.stopPropagation();
       $scope.editing = false;
       $scope.msg = "Your record has been closed without saving.";
@@ -351,8 +352,13 @@ define(['app',
       //debugger;
       evt.stopPropagation();
       $scope.editing = false;
-      $scope.msg = "Your record has been saved as a draft.";
-      $timeout(function() { $location.path('/register/'+$scope.document_type); }, 500);
+	  $scope.showingFeedback = true;
+	  bootbox.alert('Your record has been saved as a draft.', function(){
+		    $scope.showingFeedback = false;
+			//$location.path()
+      		$window.location.href = '/register/'+$scope.document_type;
+	  });
+      //$scope.msg = "Your record has been saved as a draft.";
     });
 
     //============================================================
@@ -365,8 +371,13 @@ define(['app',
 
       evt.stopPropagation();
       $scope.editing = false;
-      $scope.msg = "Record saved. A publishing request has been sent to your Publishing Authority.";
-      $timeout(function() { $location.path('/register/'+$scope.document_type); }, 500);
+
+	  $scope.showingFeedback = true;
+	  bootbox.alert('Record saved. A publishing request has been sent to your Publishing Authority.', function(){
+		    $scope.showingFeedback = false;
+			$window.location.href = '/register/'+$scope.document_type;
+	  });
+      //$timeout(function() { $location.path('/register/'+$scope.document_type); }, 500);
 
     });
 
@@ -380,9 +391,13 @@ define(['app',
 
       evt.stopPropagation();
       $scope.editing = false;
-      $scope.msg = "Record published.";
 
-      $timeout(function() { $location.path('/register/'+$scope.document_type); }, 500);
+	  $scope.showingFeedback = true;
+	  bootbox.alert('Record published.', function(){
+		    $scope.showingFeedback = false;
+			$window.location.href = '/register/'+$scope.document_type;
+	  });
+      //$timeout(function() { $location.path('/register/'+$scope.document_type); }, 500);
     });
 
     //============================================================
@@ -397,6 +412,7 @@ define(['app',
 
       evt.stopPropagation();
       $scope.editing = false;
+	  bootbox.alert('Record deleted.');
       $scope.msg = "Record deleted.";
 
     });
