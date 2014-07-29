@@ -1,6 +1,7 @@
 define(['app'], function(app){
 	app.factory('commonjs', ['authHttp','$rootScope', function($http,$rootScope){
 		return new function(){
+
 			this.getReferenceRecordIndex = function(schema,documentId){
 
 				var item = [];
@@ -85,6 +86,20 @@ define(['app'], function(app){
 							return countriesDetails;
 					  });
 
+
+			}
+
+			this.isIAC = function(){
+				return	this.isUserInRole('abschiac');
+			}
+
+			this.isAnyOtherRoleThenIAC = function(){
+
+				return	this.isUserInRole('AbsPublishingAuthorities')||
+						this.isUserInRole('AbsNationalAuthorizedUser')||
+						this.isUserInRole('AbsNationalFocalPoint')||
+						this.isUserInRole('ABS-CH Administrator') ||
+						this.isUserInRole('Administrator')
 
 			}
 		}

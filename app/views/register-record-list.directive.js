@@ -1,7 +1,7 @@
 define(['app', '/app/js/common.js'], function (app) {
 "use strict";
 
-app.directive("registerRecordList", ["$timeout", "commonjs", function ($timeout,commonjs) {
+app.directive("registerRecordList", ["$timeout", "commonjs","bootbox", function ($timeout,commonjs,bootbox) {
 
 	return {
 		restrict   : "EA",
@@ -23,8 +23,8 @@ app.directive("registerRecordList", ["$timeout", "commonjs", function ($timeout,
 			$scope.$watch("recordToDelete", function(val){
 
 
-				if( val && !deleteRecordModel.is(":visible")) { console.log("show"); deleteRecordModel.modal("show"); }
-				if(!val &&  deleteRecordModel.is(":visible")) { console.log("hide"); deleteRecordModel.modal("hide"); }
+				if( val && !deleteRecordModel.is(":visible")) {  deleteRecordModel.modal("show"); }
+				if(!val &&  deleteRecordModel.is(":visible")) {  deleteRecordModel.modal("hide"); }
 			});
 
 			$scope.$watch("recordToDuplicate", function(val){
@@ -72,6 +72,12 @@ app.directive("registerRecordList", ["$timeout", "commonjs", function ($timeout,
 			//============================================================
 			$scope.askDelete = function(record) {
 
+				if(commonjs.isIAC() && !commonjs.isAnyOtherRoleThenIAC()){
+					$scope.iacCantDelete = true;
+					$scope.cantDelete = false;
+					$scope.recordToDelete = "0";
+					
+				}
 				if(record.type == 'absPermit' && $scope.isPublished(record)){
 					//cant delete only modify
 					$scope.cantDelete = true;
@@ -89,6 +95,7 @@ app.directive("registerRecordList", ["$timeout", "commonjs", function ($timeout,
 			//
 			//============================================================
 			$scope.deleteDraft = function(record) {
+
 
 				$scope.loading = true;
 
@@ -204,6 +211,12 @@ app.directive("registerRecordList", ["$timeout", "commonjs", function ($timeout,
 
 			}
 
+			$scope.isIAC=function(){
+
+			return	commonjs.isUserInRole('abschiac');
+
+			}
+
 			//============================================================
 			//
 			//
@@ -239,7 +252,6 @@ app.directive("registerRecordList", ["$timeout", "commonjs", function ($timeout,
 					return editFormUtility.saveDraft(document);
 
 				}).then(function(draftInfo) {
-
 					$scope.$emit("documentDuplicated", draftInfo)
 					//$scope.records.push(draftInfo);
 					$timeout(function(){
@@ -250,8 +262,10 @@ app.directive("registerRecordList", ["$timeout", "commonjs", function ($timeout,
 					return draftInfo;
 
 				}).catch(function(error){
-
-					$scope.$emit("documentError", { action: "saveDraft", error: error })
+					if(error.error.indexOf('Not authorized to save draft')>=0){
+						bootbox.alert('Yur are not authorized to create duplicate records.')
+					}
+					$scope.$emit("documentError", { action: "duplicate", error: error })
 
 				}).finally(function(){
  					$scope.loading = false;

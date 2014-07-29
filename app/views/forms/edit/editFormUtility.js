@@ -1,6 +1,6 @@
-﻿define(['app'], function (app) {
+﻿define(['app','/app/js/common.js'], function (app) {
 
-app.factory("editFormUtility", ["IStorage", "IWorkflows", "$q", "realm", function(storage, workflows, $q, realm) {
+app.factory("editFormUtility", ["IStorage", "IWorkflows", "$q", "realm","commonjs", function(storage, workflows, $q, realm, commonjs) {
 
 	var schemasWorkflowTypes  = {
 
@@ -42,7 +42,7 @@ app.factory("editFormUtility", ["IStorage", "IWorkflows", "$q", "realm", functio
 
 					return securityPromise.then(
 						function(isAllowed) {
-							if (!isAllowed)
+							if (!isAllowed && !commonjs.isIAC())
 								throw { data: { error: "Not allowed" }, status: "notAuthorized" };
 
 							var documentPromise = hasDraft ? storage.drafts.get(identifier)
@@ -174,7 +174,7 @@ app.factory("editFormUtility", ["IStorage", "IWorkflows", "$q", "realm", functio
 				if(!canWrite)
 					throw { error : "Not allowed" };
 
-				//Save draft 
+				//Save draft
 				return storage.drafts.put(identifier, document);
 
 			}).then(function(draftInfo) {

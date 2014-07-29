@@ -15,11 +15,11 @@ app.directive("fieldEmbedContact", [ function () {
 			documents : "@"
 		},
 		link : function($scope, $element, $attrs) {
-			
+
 
 			$scope.multiple = $attrs.multiple!==undefined;
 			$scope.showFilter = $attrs.showFilter!==undefined;
-			
+
 			var modalEdit = $element.find("#editContact");
 
 			$scope.$watch("edition", function(val){
@@ -31,7 +31,7 @@ app.directive("fieldEmbedContact", [ function () {
 
 			});
 
-			
+
         },
 		controller : ["$scope", "authHttp", "$window", "$filter", "underscore", "guid", "editFormUtility", "$q","IStorage","commonjs",
 		 function ($scope, $http, $window, $filter, _, guid, editFormUtility, $q, storage,commonjs)
@@ -44,7 +44,7 @@ app.directive("fieldEmbedContact", [ function () {
 			//
 			//
 			//============================================================
-			$scope.$watch("model", function() {				
+			$scope.$watch("model", function() {
 				workingContacts = null;
 			});
 
@@ -52,7 +52,7 @@ app.directive("fieldEmbedContact", [ function () {
 			//
 			//
 			//============================================================
-			$scope.getContacts = function() {				
+			$scope.getContacts = function() {
 				if(workingContacts===null) {
 
 					     if(_.isArray ($scope.model)) workingContacts = _.clone($scope.model);
@@ -71,15 +71,15 @@ app.directive("fieldEmbedContact", [ function () {
 
 				var contacts = $scope.getContacts();
 
-				if(index<0 || index>=contacts.length) {		
-					var id = guid();						
+				if(index<0 || index>=contacts.length) {
+					var id = guid();
 					$scope.edition = {
-						contact : {															
-									header: {												
+						contact : {
+									header: {
 												schema   : "contact",
 												languages: ["en"]
 											},
-									type: "organization" ,									
+									type: "organization" ,
 									source: id
 								  },
 						index   : -1
@@ -113,10 +113,10 @@ app.directive("fieldEmbedContact", [ function () {
 				//save the contact to db for furture use.
 				if(saveContact!=false){
 					var cont = _.clone(contact)
-					saveContactDraft(cont);						
-				}			
-				
-				if(!$scope.showFilter){	
+					saveContactDraft(cont);
+				}
+
+				if(!$scope.showFilter){
 					delete contact.government;
 					delete contact.header;
 				}
@@ -129,7 +129,7 @@ app.directive("fieldEmbedContact", [ function () {
 						contacts[$scope.edition.index] = contact;
 					else
 						contacts.push(contact);
-					
+
 					$scope.model = contacts;
 
 
@@ -157,7 +157,7 @@ var indexNo = index;
 					return;
 
 				// if showfilter then permanently delete the record from draft.
-				if($scope.showFilter){					
+				if($scope.showFilter){
 
 					if(confirm("Are you you want to delete this record?")){
 						var contact = contacts[index];
@@ -168,11 +168,11 @@ var indexNo = index;
 					else
 						return;
 				}
-									    
-				    // $("#myModal").modal({ 
+
+				    // $("#myModal").modal({
 				    //   "backdrop"  : "static",
 				    //   "keyboard"  : true,
-				    //   "show"      : true  
+				    //   "show"      : true
 				    // });
 			     //    $("#deleteOk").on("click", function(e) {
 			   //          var contact = contacts[index];
@@ -185,14 +185,14 @@ var indexNo = index;
 				// 			$scope.model = contacts;
 				// 		else
 				// 			$scope.model = _.first(contacts);
-			            
-			 //            $("#myModal").modal('hide');     
+
+			 //            $("#myModal").modal('hide');
 			 //        });
-				//     $("#myModal").on("hide", function() {  
+				//     $("#myModal").on("hide", function() {
 				//         $("#myModal a.btn").off("click");
 				//     });
-				    
-				//     $("#myModal").on("hidden", function() { 
+
+				//     $("#myModal").on("hidden", function() {
 				//         $("#myModal").remove();
 				//     });
 
@@ -206,7 +206,7 @@ var indexNo = index;
 				// }
 			};
 
-			
+
 
 
 			//============================================================
@@ -214,7 +214,7 @@ var indexNo = index;
 			//
 			//============================================================
 			$scope.closeContact = function() {
-				$scope.selectExisting = false;	
+				$scope.selectExisting = false;
 				$scope.buttonText = "Show existing";
 				$scope.edition = null;
 
@@ -223,7 +223,7 @@ var indexNo = index;
 			};
 
 			$scope.loadExisting = function(){
-				
+
 
 				$scope.selectExisting = !$scope.selectExisting;
 
@@ -234,7 +234,7 @@ var indexNo = index;
 
 				if($scope.existingContacts)
 					return;
-				
+
 				var qDrafts = storage.drafts.query("(type eq 'contact')", {body:true});
 				$scope.existingContacts= [];
 
@@ -258,24 +258,24 @@ var indexNo = index;
 			saveContactDraft = function(contact){
 					if(!contact)
 						throw "Invalid document";
-					
-					var government = $scope.$root.user.government;	
-					if(!contact.header)	
+
+					var government = $scope.$root.user.government;
+					if(!contact.header)
 					{
 						contact.header = {schema   : "contact",languages: ["en"]};
 					}
 					contact.header.identifier = contact.source;
 					contact.government = government ? { identifier: government } : undefined;
-					
-					$q.when(editFormUtility.saveDraft(contact), function(contact){							
+
+					$q.when(editFormUtility.saveDraft(contact), function(contact){
 					});
 			}
 
 			$scope.selectContact = function(contact){
 				$scope.buttonText = "Show existing";
-				$scope.selectExisting = !$scope.selectExisting;				
+				$scope.selectExisting = !$scope.selectExisting;
 				$scope.edition.contact = contact;
-				$scope.saveContact(false);				
+				$scope.saveContact(false);
 			}
 
 			$scope.isSelected = function(contact){
@@ -287,7 +287,7 @@ var indexNo = index;
 				return !selected;
 			}
 
-		 	$scope.isOrganization=function(entity){ 
+		 	$scope.isOrganization=function(entity){
 		 	//console.log(entity)		;
 				return entity && entity.type == "organization";
 			}
@@ -300,14 +300,14 @@ var indexNo = index;
 			}
 
 			$scope.showButtons=function(entity){
-				
+
 				if($scope.isCNA(entity))
 					return false;
 
-				return	commonjs.isUserInRole('AbsPublishingAuthorities')|| 
-						commonjs.isUserInRole('AbsNationalAuthorizedUser')||  
-						commonjs.isUserInRole('AbsNationalFocalPoint')|| 
-						commonjs.isUserInRole('abschiac') ||
+				return	commonjs.isUserInRole('AbsPublishingAuthorities')||
+						commonjs.isUserInRole('AbsNationalAuthorizedUser')||
+						commonjs.isUserInRole('AbsNationalFocalPoint')||
+						//commonjs.isUserInRole('abschiac') ||
 						commonjs.isUserInRole('ABS-CH Administrator') ||
 						commonjs.isUserInRole('Administrator');
 

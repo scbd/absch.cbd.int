@@ -109,10 +109,10 @@
           </div> <!-- end col glyphicon glyphicon-lock -->
           <div class="col-xs-2 pull-right" style="text-align:right;">
              <div class="btn-group document_buttons btn-group-sm">
-                <button title="Duplicate" type="button" class="btn btn-default" ng-click="askDuplicate(record)"><i class="fa fa-files-o"></i></button>
-                <button title="Locked for edit" ng-show="isRequest(record)" type="button" class="btn btn-default"><i class="glyphicon glyphicon-lock"></i></button>
-                <a title="Edit" ng-show="!isRequest(record)" type="button" class="btn btn-default" href="/register/{{record.type}}/{{record.identifier}}/edit"><i class="fa fa-edit"></i></a>
-                <button title="Delete"  ng-show="!isRequest(record)"ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
+                <button ng-show="showAddButton()" title="Duplicate" type="button" class="btn btn-default" ng-click="askDuplicate(record)"><i class="fa fa-files-o"></i></button>
+                <button title="Locked for edit" ng-show="isRequest(record) && showAddButton()" type="button" class="btn btn-default"><i class="glyphicon glyphicon-lock"></i></button>
+                <a title="Edit" ng-show="!isRequest(record) && showAddButton()" type="button" class="btn btn-default" href="/register/{{record.type}}/{{record.identifier}}/edit"><i class="fa fa-edit"></i></a>
+                <button title="Delete"  ng-show="!isRequest(record) && showAddButton()"ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
             </div>
           </div> <!-- end col -->
 
@@ -147,7 +147,7 @@
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h4 class="modal-title">What do you want to delete? <i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
         </div>
-        <div class="modal-body" ng-hide="cantDelete">
+        <div class="modal-body" ng-hide="cantDelete || iacCantDelete">
 
           <div ng-show="isDraft(recordToDelete)" class="well">
             <button type="button" class="btn btn-warning pull-right" ng-disabled="loading" ng-click="deleteDraft(recordToDelete)">Delete the draft</button>
@@ -167,6 +167,11 @@
         <div class="modal-body" ng-show="cantDelete">
 
           Not allow to delete published ABSCH-IRCC records. You can only modify them.
+
+        </div>
+        <div class="modal-body" ng-show="iacCantDelete">
+
+             You don not have sufficient privileges to delete document
 
         </div>
         <div class="modal-footer">
