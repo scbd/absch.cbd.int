@@ -2,9 +2,9 @@ define(['app',
 	'../views/directives/login.directive.html.js',
 	'./register-record-list.directive.js',
 	'../js/directives/forms/form-controls.js',
-	'./tasks/my-completed-tasks.directive.js',
-	'./tasks/my-pending-tasks.directive.js',
-	'./tasks/my-tasks.directive.js',
+	'./tasks/my-completed-tasks.directive.html.js',
+	'./tasks/my-pending-tasks.directive.html.js',
+	'./tasks/my-tasks.directive.html.js',
 	'./forms/edit/km-form-buttons.js',
 	'./forms/edit/editFormUtility.js',
 	'./forms/edit/field-embed-contact.directive.js',
@@ -21,7 +21,7 @@ define(['app',
 "use strict";
 //require("app", "dragAndDrop")
 
-app.controller("ContactsController", 
+app.controller("ContactsController",
 	["$rootScope", "$location" , "$scope", "$q", "$window", "IStorage", "underscore",
 	 "schemaTypes", "$compile", "$timeout","lstringFilter", "$routeParams",
 	 function ($rootScope, $location, $scope, $q, $window, storage, _,
@@ -31,7 +31,7 @@ app.controller("ContactsController",
 
     $scope.dashboardFilter = "All";
 
-  
+
 
     $scope.setDashFilter = function(filter){
         $scope.dashboardFilter = filter;

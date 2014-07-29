@@ -22,7 +22,7 @@ define(['app',
     $rootScope.subheadings = {
       	'National Entities':{
 		'title': 'National Entities',
-		'formats': ['authority', 'absCheckpoint'],
+		'formats': ['authority', 'absCheckpoint','contacts'],
 		'roles':['AbsPublishingAuthorities', 'abschiac','AbsNationalAuthorizedUser','AbsNationalFocalPoint','AbsAdministrator','Administrator']
 		},
       	'National Records': {
@@ -406,7 +406,7 @@ define(['app',
     //
     //============================================================
     $scope.$on("documentDeleted", function(evt, doc){
-		
+
       for(var i=0; i<=$scope.records.length; ++i)
         if($scope.records[i] == doc)
           $scope.records.splice(i, 1);
