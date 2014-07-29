@@ -5,19 +5,16 @@
     <div class="container main" id="main" style="padding-top:6px">
       	<div class="row top">
       	<br>
-    <div class="alert alert-warning"> <i class="glyphicon glyphicon-warning-sign"></i> 
-    <strong>This page is currently under construction.</strong>
-    <br>Please email questions to: absch@cbd.int
-    </div>
-	    	
-	    	<h1>Task</h1>  
-	        
+
+
+	    	<h1>Task</h1>
+
 			<table class="table table-striped">
 			  <tr>
 				  <th colspan="2">
 				  	Request information and status
-				  </th>	
-			  </tr>	
+				  </th>
+			  </tr>
 			  <tr>
 			  	<td style="width:40%">Request ID</td>
 			  	<td style="text-transform:uppercase;white-space:nowrap;">
@@ -55,7 +52,7 @@
 			  	<td>Status</td>
 			  	<td>
 			  		<span ng-switch="workflow.state">
-			  			<span ng-switch-when="running"><i class="glyphicon glyphicon-cog"></i> Pending</span>	  				
+			  			<span ng-switch-when="running"><i class="glyphicon glyphicon-cog"></i> Pending</span>
 			  			<span ng-switch-when="completed">Completed on {{workflow.closedOn|date:'short'}}</span>
 			  			<span ng-switch-when="canceled"><i class="glyphicon glyphicon-remove-circle"></i> Canceled on {{workflow.closedOn|date:'short'}}</span>
 			  			<span ng-switch-when=""><i class="glyphicon glyphicon-exclamation-sign"></i> Failed on {{workflow.closedOn|date:'short'}}</span>
@@ -95,10 +92,10 @@
 						<span ng-switch-default>{{activity.name}}*</span>
 					</span>
 
-					 
+
 
 					<span ng-show="activity.assignedToRule">
-						by 
+						by
 						<em ng-switch="activity.assignedToRule|limitTo:7">
 							<span ng-switch-when="ABS-NFP">ABS-CH Focal Point or Publishing Authority</span>
 							<span ng-switch-when="BCH-NFP">BCH Focal Point</span>
@@ -121,7 +118,7 @@
 						</span>
 					</span>
 
-					
+
 
 			  	</td>
 
@@ -171,11 +168,11 @@
 
 			  	</td>
 			  </tr>
-			</table>			
+			</table>
 
 			<div ng-show="document" class="t-document">
 				<record-loader document="document" hide-buttons="true" link-target="_self"></record-loader>
-			</div>	
+			</div>
 
   		</div>
 	</div>
@@ -204,4 +201,3 @@
   letter-spacing: 1px;
 }
 </style>
-
