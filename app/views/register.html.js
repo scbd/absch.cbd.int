@@ -10,9 +10,9 @@ define(['app',
 
   app.controller("RegisterController",
     ["$rootScope", "$location" , "$scope", "$q", "$window", "IStorage", "underscore",
-     "schemaTypes", "$timeout","lstringFilter", "$routeParams", "$cookies","bootbox",
+     "schemaTypes", "$timeout","lstringFilter", "$routeParams", "$cookies","bootbox","realm","IWorkflows",
 	  function ($rootScope, $location, $scope, $q, $window, storage, _,
-      schemaTypes, $timeout, lstringFilter, $routeParams, $cookies,bootbox) {
+      schemaTypes, $timeout, lstringFilter, $routeParams, $cookies,bootbox,realm,workflows) {
 
 
 
@@ -154,7 +154,12 @@ define(['app',
       {"schema":"absCheckpointCommunique","schemaType":"nationalRecords", "draftCount":0,"requestCount":0,"publishCount": 0},
       {"schema":"database","schemaType":"nationalRecords", "draftCount":0,"requestCount":0,"publishCount": 0},
       {"schema":"resource","schemaType":"referenceRecords", "draftCount":0,"requestCount":0,"publishCount": 0},
-      {"schema":"contact","schemaType":"others", "draftCount":0,"requestCount":0,"publishCount": 0}
+      {"schema":"contact","schemaType":"others", "draftCount":0,"requestCount":0,"publishCount": 0},
+
+	{"schema":"completedTasks","schemaType":"others", "requestCount":0},
+	{"schema":"pendingTasks","schemaType":"others", "requestCount": 0},
+	{"schema":"urgentTasks","schemaType":"others", "requestCount": 0}
+
     ];
 
     //============================================================
@@ -192,7 +197,6 @@ define(['app',
 
     $scope.facets = function(entity,type){
       var schemaCount = _.where($scope.schemaTypesFacets,{"schema":entity});
-
       if(schemaCount.length>0)
       {
         if(type=='draft')
@@ -311,6 +315,51 @@ define(['app',
     $rootScope.loadRecords = loadRecords;
 
     loadRecords();
+	loadActivitiesFacets();
+
+	function loadActivitiesFacets(){
+
+		var myUserID = $scope.$root.user.userID;
+
+	    var query    = {
+	                $and : [
+	                    { "createdBy" : myUserID },
+	                    { closedOn : { $exists : true } },
+	                    { "data.realm" : realm }
+	                ]
+	            };
+
+	    $q.when(workflows.query(query), function(data){
+			var schemaCount = _.where($scope.schemaTypesFacets,{"schema":"completedTasks"});
+	        schemaCount[0].requestCount = data.length;
+
+	    });
+
+		query    = {
+				$and : [
+					{ "createdBy" : myUserID } ,
+					{ closedOn : { $exists : false } },
+					{ "data.realm" : realm }
+				]
+			};
+	    $q.when(workflows.query(query), function(data){
+			var schemaCount = _.where($scope.schemaTypesFacets,{"schema":"pendingTasks"});
+	        schemaCount[0].requestCount = data.length;
+	    });
+
+		query    = {
+				$and : [
+					{ "activities.assignedTo" : myUserID },
+					{ closedOn : { $exists : false } },
+					{ "data.realm" : realm }
+				]
+			};
+	    $q.when(workflows.query(query), function(data){
+			var schemaCount = _.where($scope.schemaTypesFacets,{"schema":"urgentTasks"});
+	        schemaCount[0].requestCount = data.length;
+	    });
+	}
+
 
     //So this is like a request for info... I don't like the idea of using JS as an message driven language. KISS
     $scope.$on("getDocumentInfo", function(evt) {
