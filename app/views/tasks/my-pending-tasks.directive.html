@@ -1,8 +1,8 @@
 ﻿<div ng-controller="myPendingTasksCotroller" class="col-xs-9" style="padding-top:20px;">
-	
+
 	<div class="registerpage-header">
 	    <h2>
-	      <span style="color:#c7532c;">Your pending requests</span>	
+	      <span style="color:#c7532c;">Your pending requests</span>
 	      <div class="pull-right" style="font-size:12px;">
 	    	<a class="pull-right" ng-show="!toggleHelp" ng-click="toggleHelp=!toggleHelp;" style="cursor:pointer;padding:5px;"><i class="glyphicon glyphicon-plus" >
 	      	</i> more
@@ -10,13 +10,13 @@
 	    	<a class="pull-right" ng-show="toggleHelp" ng-click="toggleHelp=!toggleHelp;" style="cursor:pointer;color:#666;padding:5px;"><i class="glyphicon glyphicon-minus" >
 	      	</i> less
 	    	</a>
-		</div>     
-	    </h2>	
+		</div>
+	    </h2>
 
 	    <p class="help1" ng-show="toggleHelp">
-        	Pending requests you have sent to others for approval to be published on the ABSCH. 
-        </p>  
-  	</div>  
+        	Pending requests you have sent to others for approval to be published on the ABSCH.
+        </p>
+  	</div>
 	<div class="registerpage-content">
 		<div class="alert alert-danger" ng-show="__error">
 			<strong>Error: </strong>{{__error}}
@@ -28,13 +28,13 @@
 		<br>
 		<table ng-show="workflows.length && !__error" class="table table-striped">
 			<tr>
-				<th><span style="cursor:pointer;" ng-click="sortTable('_id')">ID 
+				<th><span style="cursor:pointer;" ng-click="sortTable('_id')">ID
              		<i ng-show="sortTerm=='_id'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></th>
-				<th><span style="cursor:pointer;" ng-click="sortTable('data.title.en')">Description 
+				<th><span style="cursor:pointer;" ng-click="sortTable('data.title.en')">Description
              		<i ng-show="sortTerm=='data.title.en'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></th>
-				<th><span style="cursor:pointer;" ng-click="sortTable('activities')">Status 
+				<th><span style="cursor:pointer;" ng-click="sortTable('activities')">Status
              		<i ng-show="sortTerm=='activities'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></th>
-				<th><span style="cursor:pointer;" ng-click="sortTable('createdOn')">Assigned to 
+				<th><span style="cursor:pointer;" ng-click="sortTable('createdOn')">Assigned to
              		<i ng-show="sortTerm=='createdOn'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></th>
 			</tr>
 
@@ -56,7 +56,7 @@
 
 					<div>{{workflow.data.title | lstring}}</div>
 				</td>
-				
+
 				<td> <!-- Status -->
 					<div ng-repeat="activity in workflow.activities|orderBy:'createdOn'">
 
@@ -90,21 +90,24 @@
 									<span ng-switch-when="BCH-Adm">SCBD</span>
 									<span ng-switch-when="ABS-Adm">SCBD</span>
 									<span ng-switch-when="CHM-Adm">SCBD</span>
-									<span ng-switch-default>*{{activity.assignedToRule}}*</span>
+									<span ng-switch-default>*{{activity.assignedToRule}}*</span> on {{createdOn | formatDateWithTime}}
 								</div>
+
 							</div>
 
 							<div ng-hide="activity.assignedToRule">
 
 								<div ng-show="activity.assignedTo">
-									<span ng-repeat="user in activity.assignedTo_info|orderBy:'lastName'">{{user.firstName}} {{user.lastName}}<span ng-hide="$last">, </span>
+									<span ng-repeat="user in activity.assignedTo_info|orderBy:'lastName'">
+                                        {{user.firstName}} {{user.lastName}}<span ng-hide="$last">, </span>
+                                         on {{createdOn | formatDateWithTime}}
 								</span>
 
 								<div ng-hide="activity.assignedTo">
 									<em>Not assigned yet</em>
 								</div>
 							</div>
-							
+
 						</div>
 
 						<div ng-hide="isOpen(activity)">
