@@ -10,9 +10,9 @@ define(['app',
 
   app.controller("RegisterController",
     ["$rootScope", "$location" , "$scope", "$q", "$window", "IStorage", "underscore",
-     "schemaTypes", "$timeout","lstringFilter", "$routeParams", "$cookies","bootbox","realm","IWorkflows",
+     "schemaTypes", "$timeout","$filter", "$routeParams", "$cookies","bootbox","realm","IWorkflows",
 	  function ($rootScope, $location, $scope, $q, $window, storage, _,
-      schemaTypes, $timeout, lstringFilter, $routeParams, $cookies,bootbox,realm,workflows) {
+      schemaTypes, $timeout, $filter, $routeParams, $cookies,bootbox,realm,workflows) {
 
 
 
@@ -147,14 +147,14 @@ define(['app',
     $scope.localeRegister= ["en"];
 
     $scope.schemaTypesFacets = [
-      {"schema":"measure","schemaType":"nationalRecords", "draftCount":0,"requestCount":0,"publishCount": 0},
-      {"schema":"authority","schemaType":"nationalRecords", "draftCount":0,"requestCount":0,"publishCount": 0},
-      {"schema":"absPermit","schemaType":"nationalRecords", "draftCount":0,"requestCount":0,"publishCount": 0},
-      {"schema":"absCheckpoint","schemaType":"nationalRecords", "draftCount":0,"requestCount":0,"publishCount": 0},
-      {"schema":"absCheckpointCommunique","schemaType":"nationalRecords", "draftCount":0,"requestCount":0,"publishCount": 0},
-      {"schema":"database","schemaType":"nationalRecords", "draftCount":0,"requestCount":0,"publishCount": 0},
-      {"schema":"resource","schemaType":"referenceRecords", "draftCount":0,"requestCount":0,"publishCount": 0},
-      {"schema":"contact","schemaType":"others", "draftCount":0,"requestCount":0,"publishCount": 0},
+      {"schema":"measure","schemaType":"nationalRecords", "header": "MSR","draftCount":0,"requestCount":0,"publishCount": 0},
+      {"schema":"authority","schemaType":"nationalRecords", "header": "CNA","draftCount":0,"requestCount":0,"publishCount": 0},
+      {"schema":"absPermit","schemaType":"nationalRecords", "header": "IRCC","draftCount":0,"requestCount":0,"publishCount": 0},
+      {"schema":"absCheckpoint","schemaType":"nationalRecords", "header": "CP","draftCount":0,"requestCount":0,"publishCount": 0},
+      {"schema":"absCheckpointCommunique","schemaType":"nationalRecords", "header": "CPC","draftCount":0,"requestCount":0,"publishCount": 0},
+      {"schema":"database","schemaType":"nationalRecords", "header": "NDB","draftCount":0,"requestCount":0,"publishCount": 0},
+      {"schema":"resource","schemaType":"referenceRecords", "header": "VLR","draftCount":0,"requestCount":0,"publishCount": 0},
+      {"schema":"contact","schemaType":"others", "header": "CON","draftCount":0,"requestCount":0,"publishCount": 0},
 
 	{"schema":"completedTasks","schemaType":"others", "requestCount":0},
 	{"schema":"pendingTasks","schemaType":"others", "requestCount": 0},
@@ -214,7 +214,7 @@ define(['app',
     $scope.userActivities = []; //Jason: what does this do?
     function loadRecords(schema)
     {
-      console.log('schema: ', schema);
+     // console.log('schema: ', schema);
 
       $("a[role*='button']").toggleClass('ui-disabled');
       if(schema === null || schema===undefined ){
@@ -273,21 +273,21 @@ define(['app',
             }
             if($scope.isRequest(row)){
               $scope.userActivities.push({
-                            "title" : row.createdBy.firstName + ' ' + row.createdBy.lastName + ' has requested '+
+                            "title" : row.createdBy.firstName + ' ' + row.createdBy.lastName + ' has requested for publishing '+
                               _.where($scope.schemaTypesFacets,{"schema":row.type})[0].header
-                              + ' draft ' + (lstringFilter(row.workingDocumentTitle||row.title,$rootScope.locale))
-                              + ' to be published',
+                              + ' draft ' + ($filter("lstring")(row.workingDocumentTitle||row.title,$scope.localeRegister))
+                              + ' on ' + $filter('formatDateWithTime')(row.workingDocumentLock.lockedOn),
                             "identifier" : row.identifier,
                             "schema"	 : row.type
                              });
             }
             else if($scope.isDraft(row)){
+
               $scope.userActivities.push({
                             "title" : row.createdBy.firstName + ' ' + row.createdBy.lastName + ' is working on ' +
                               _.where($scope.schemaTypesFacets,{"schema":row.type})[0].header + ' draft '
-                              +(lstringFilter(row.workingDocumentTitle||row.title,$rootScope.locale))
-
-                              +(row.workingDocumentTitle||row.title)
+                              +($filter("lstring")(row.workingDocumentTitle||row.title,$scope.localeRegister))
+							  + ', last updated on ' + $filter('formatDateWithTime')(row.updatedOn)
                               ,
                             "identifier" : row.identifier,
                             "schema"	 : row.type
