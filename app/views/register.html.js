@@ -406,7 +406,8 @@ define(['app',
     //
     //============================================================
     $scope.$on("documentDeleted", function(evt, doc){
-      for(var i=0; i!=$scope.records.length; ++i)
+		
+      for(var i=0; i<=$scope.records.length; ++i)
         if($scope.records[i] == doc)
           $scope.records.splice(i, 1);
 
@@ -414,6 +415,20 @@ define(['app',
       $scope.editing = false;
 	  bootbox.alert('Record deleted.');
       $scope.msg = "Record deleted.";
+
+    });
+
+	//============================================================
+    //
+    // Occurs when record-list duplicate a record or a draft
+    //
+    //============================================================
+    $scope.$on("documentDuplicated", function(evt, doc){
+
+	  $scope.records.push(doc);
+
+      evt.stopPropagation();
+      $scope.editing = false;
 
     });
 

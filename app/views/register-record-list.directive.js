@@ -93,7 +93,7 @@ app.directive("registerRecordList", ["$timeout", "commonjs", function ($timeout,
 				$scope.loading = true;
 
 				return $q.when(storage.drafts.delete(record.identifier)).then(function(){
-					
+
 					$scope.$emit("documentDeleted", record);
 					$scope.recordToDelete = null;
 
@@ -179,31 +179,31 @@ app.directive("registerRecordList", ["$timeout", "commonjs", function ($timeout,
 
 				if(item.data)
 					return;
-    
+
 		        item.data = {'schema':item.type, 'url_ss': '', 'data': []};
-		        $http.get("/api/v2013/documents/"+item.identifier).then(function (result) {  
+		        $http.get("/api/v2013/documents/"+item.identifier).then(function (result) {
 		            item.data = result.data;
-		           
-		            $http.get("/api/v2013/documents/"+item.identifier + "?info").then(function (result) {  
+
+		            $http.get("/api/v2013/documents/"+item.identifier + "?info").then(function (result) {
 		                item.data.info = result.data;
 		            });
 
-		        });				
-				//href="/database/record?documentID={{record.documentID}}" 
+		        });
+				//href="/database/record?documentID={{record.documentID}}"
 			}
 
 			$scope.showAddButton=function(){
 
-				return	commonjs.isUserInRole('AbsPublishingAuthorities')|| 
-						commonjs.isUserInRole('AbsNationalAuthorizedUser')||  
-						commonjs.isUserInRole('AbsNationalFocalPoint')|| 
+				return	commonjs.isUserInRole('AbsPublishingAuthorities')||
+						commonjs.isUserInRole('AbsNationalAuthorizedUser')||
+						commonjs.isUserInRole('AbsNationalFocalPoint')||
 						commonjs.isUserInRole('abschiac') ||
 						commonjs.isUserInRole('ABS-CH Administrator') ||
 						commonjs.isUserInRole('Administrator') ||
 						$scope.schema == 'resource';
 
 			}
-			
+
 			//============================================================
 			//
 			//
@@ -211,14 +211,14 @@ app.directive("registerRecordList", ["$timeout", "commonjs", function ($timeout,
 			$scope.askDuplicate = function(record) {
 
 				$scope.recordToDuplicate = record;
-				
+
 			};
 
 			$scope.duplicate = function(entity)
 			{
 				 $scope.loading = true;
 				var document;
-				console.log(entity);
+			//	console.log(entity);
 				if($scope.isDraft(entity) || $scope.isRequest(entity)){
 					document = storage.drafts.get(entity.identifier)
 				}
@@ -228,33 +228,33 @@ app.directive("registerRecordList", ["$timeout", "commonjs", function ($timeout,
 
 				return $q.when(document).then(function(document)
 				{
-					console.log(document);
+					//console.log(document);
 					if(!document.data)
 						throw "Invalid document";
-					
+
 					document = document.data;
 
 					document.header.identifier = guid();
-				
+
 					return editFormUtility.saveDraft(document);
 
 				}).then(function(draftInfo) {
 
-					//$emit("documentDraftSaved", draftInfo)
-					$scope.records.push(draftInfo);
+					$scope.$emit("documentDuplicated", draftInfo)
+					//$scope.records.push(draftInfo);
 					$timeout(function(){
 						shake("#record0");//.effect( "shake" );
 					},500)
-					
-					
+
+
 					return draftInfo;
 
 				}).catch(function(error){
-					
+
 					$scope.$emit("documentError", { action: "saveDraft", error: error })
 
 				}).finally(function(){
- 					$scope.loading = false;	
+ 					$scope.loading = false;
  					$scope.recordToDuplicate = null;
 				});
 			};
@@ -266,7 +266,7 @@ app.directive("registerRecordList", ["$timeout", "commonjs", function ($timeout,
 			        $(div).animate({ left: ((iter%2==0 ? distance : distance*-1))}, interval);
 			    }//for
 			    $(div).animate({ left: 0},interval, function(){
-			    	$(div).css('position','inherit');	
+			    	$(div).css('position','inherit');
 			    });
 			    //
 			}
