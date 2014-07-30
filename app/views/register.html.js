@@ -273,7 +273,8 @@ define(['app',
             }
             if($scope.isRequest(row)){
               $scope.userActivities.push({
-                            "title" : '<span class=\'activityfeed-time\'>' + $filter('formatDateWithTime')(row.workingDocumentLock.lockedOn) + '</span><strong>' + row.createdBy.firstName + ' ' + row.createdBy.lastName + '</strong> has requested for publishing '+
+                            "title" : '<span class=\'activityfeed-time\'>' + $filter('formatDateWithTime')(row.workingDocumentLock.lockedOn)
+							+ '</span><strong>' + row.createdBy.firstName + ' ' + row.createdBy.lastName + '</strong> has requested for publishing '+
                               _.where($scope.schemaTypesFacets,{"schema":row.type})[0].header
                               + ' draft ' + ' <em>' + ($filter("lstring")(row.workingDocumentTitle||row.title,$scope.localeRegister)) + '</em>'
                              ,
@@ -284,7 +285,8 @@ define(['app',
             else if($scope.isDraft(row)){
 
               $scope.userActivities.push({
-                            "title" : '<span class=\'activityfeed-time\'>' + $filter('formatDateWithTime')(row.updatedOn) + '</span> <strong>' + row.createdBy.firstName + ' ' + row.createdBy.lastName + '</strong> is working on ' +
+                            "title" : '<span class=\'activityfeed-time\'>' + $filter('formatDateWithTime')(row.updatedOn)
+							+ '</span> <strong>' + row.createdBy.firstName + ' ' + row.createdBy.lastName + '</strong> was working on ' +
                               _.where($scope.schemaTypesFacets,{"schema":row.type})[0].header + ' draft '
                               +' <em>' + ($filter("lstring")(row.workingDocumentTitle||row.title,$scope.localeRegister)) + '</em>'
 
