@@ -183,7 +183,7 @@
                   <div id="scrollbar">
                     <div class="scrollbar" style="height: 280px;overflow-y:scroll">
                            <ul class="list-group " rel="scrollcontent1">
-                            <li ng-repeat="item in userActivities" class="list-group-item">
+                            <li ng-repeat="item in userActivities|orderBy:'date':true|limitTo:30" class="list-group-item">
                               <span ng-bind-html="item.title"> </span>
                             </li>
                           </ul>

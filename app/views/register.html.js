@@ -254,6 +254,7 @@ define(['app',
 
         $scope.isLoaded.push(schema);
 
+
         _.values(map).forEach(function(row){
 
           if(schema!="dashboard" && schema!="contact"){
@@ -272,29 +273,46 @@ define(['app',
                 ,"publishCount":$scope.isRequest(row) ? 1:0});
             }
             if($scope.isRequest(row)){
+
               $scope.userActivities.push({
                             "title" : '<span class=\'activityfeed-time\'>' + $filter('formatDateWithTime')(row.workingDocumentLock.lockedOn)
-							+ '</span><strong>' + row.createdBy.firstName + ' ' + row.createdBy.lastName + '</strong> has requested for publishing '+
+							+ '</span><strong> ' + row.createdBy.firstName + ' ' + row.createdBy.lastName + '</strong> has requested for publishing '+
                               _.where($scope.schemaTypesFacets,{"schema":row.type})[0].header
                               + ' draft ' + ' <em>' + ($filter("lstring")(row.workingDocumentTitle||row.title,$scope.localeRegister)) + '</em>'
                              ,
                             "identifier" : row.identifier,
-                            "schema"	 : row.type
+                            "schema"	 : row.type,
+							"date"		 : $filter('formatDateWithTime')(row.workingDocumentLock.lockedOn)
                              });
             }
             else if($scope.isDraft(row)){
 
               $scope.userActivities.push({
                             "title" : '<span class=\'activityfeed-time\'>' + $filter('formatDateWithTime')(row.updatedOn)
-							+ '</span> <strong>' + row.createdBy.firstName + ' ' + row.createdBy.lastName + '</strong> was working on ' +
+							+ '</span> <strong> ' + row.createdBy.firstName + ' ' + row.createdBy.lastName + '</strong> was working on ' +
                               _.where($scope.schemaTypesFacets,{"schema":row.type})[0].header + ' draft '
                               +' <em>' + ($filter("lstring")(row.workingDocumentTitle||row.title,$scope.localeRegister)) + '</em>'
 
                               ,
                             "identifier" : row.identifier,
-                            "schema"	 : row.type
+                            "schema"	 : row.type,
+							"date"		 : $filter('formatDateWithTime')(row.updatedOn)
                              });
             }
+			else if($scope.isPublished(row)){
+				console.log(row)
+		      $scope.userActivities.push({
+                            "title" : '<span class=\'activityfeed-time\'>' + $filter('formatDateWithTime')(row.updatedOn)
+							+ '</span> <strong> ' + row.updatedBy.firstName + ' ' + row.updatedBy.lastName + '</strong> approved ' +
+                              _.where($scope.schemaTypesFacets,{"schema":row.type})[0].header + ' draft '
+                              +' <em>' + ($filter("lstring")(row.workingDocumentTitle||row.title,$scope.localeRegister)) + '</em>'
+
+                              ,
+                            "identifier" : row.identifier,
+                            "schema"	 : row.type,
+							"date"		 : $filter('formatDateWithTime')(row.updatedOn)
+                             });
+		    }
           }
           $scope.records.push(row);
           if(schema =="contact"){
