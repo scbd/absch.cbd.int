@@ -89,6 +89,7 @@ define(['app'], function (app) {
         $scope.actionProfile = function () {
             var redirect_uri = encodeURIComponent($location.protocol()+'://'+$location.host()+':'+$location.port()+'/');
             $window.location.href = 'https://accounts.cbd.int/profile?redirect_uri='+redirect_uri;
+
         };
 
         //============================================================

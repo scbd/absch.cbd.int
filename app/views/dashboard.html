@@ -38,16 +38,32 @@
         <strong>{{msg}}</strong>
       </div>
 
-      <div class="alert alert-info" ng-show="user.isAuthenticated">
+      <!-- <div class="alert alert-info" ng-show="user.isAuthenticated">
         <p>You are signed in as: <strong>{{user.name}}</strong>
-          <span ng-show="user.roles.indexOf('AbsPublishingAuthorities') != -1">(PA)</span>
-          <span ng-show="user.roles.indexOf('abschiac') != -1">(IAC)</span>
-          <span ng-show="user.roles.indexOf('AbsNationalAuthorizedUser') != -1">(NAU)</span>
-          <span ng-show="user.roles.indexOf('AbsNationalFocalPoint') != -1">(FP)</span>
-          <span ng-show="user.roles.indexOf('AbsAdministrator') != -1">(ABS ADMIN)</span>
-          <span ng-show="user.roles.indexOf('Administrator') != -1">(ADMIN)</span>
+
         </p>
-      </div>
+      </div> -->
+
+      <div class="panel panel-default">
+  				<div class="panel-body">
+					<h2 style="color:#333;">Welcome to the ABSCH. You are signed in! <button class="btn btn-info pull-right" ng-click="actionSignOut()">Sign out</button> </h2>
+					<dl class="dl-horizontal" style="padding-top:10px;">
+					  	<dt style="text-align:left">Name</dt><dd>{{user.name}}
+                              <span ng-show="user.roles.indexOf('AbsPublishingAuthorities') != -1">(PA)</span>
+                              <span ng-show="user.roles.indexOf('abschiac') != -1">(IAC)</span>
+                              <span ng-show="user.roles.indexOf('AbsNationalAuthorizedUser') != -1">(NAU)</span>
+                              <span ng-show="user.roles.indexOf('AbsNationalFocalPoint') != -1">(FP)</span>
+                              <span ng-show="user.roles.indexOf('AbsAdministrator') != -1">(ABS ADMIN)</span>
+                              <span ng-show="user.roles.indexOf('Administrator') != -1">(ADMIN)</span>
+                          </dd>
+					  	   <dt style="text-align:left;white-space:nowrap;">Primary email</dt><dd>{{user.email}}</dd>
+                          <dt style="text-align:left;white-space:nowrap;">Country</dt><dd style="text-transform:uppercase;">{{user.government }}</dd>
+					  	  <dt style="text-align:left;white-space:nowrap;">Phone</dt><dd>{{user.phone}}</dd>
+					</dl>
+                    <a href="#" ng-click="actionProfile()" >update your profile</a>
+
+				</div>
+			</div>
 
       <div ng-hide="user.isAuthenticated">
         <a ng-show="!user.isAuthenticated" ng-click="signIn('dashboard')" class="btn btn-info">
