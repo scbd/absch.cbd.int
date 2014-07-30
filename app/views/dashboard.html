@@ -46,7 +46,14 @@
 
       <div class="panel panel-default">
   				<div class="panel-body">
-					<h2 style="color:#333;">Welcome to the ABSCH. You are signed in! <button class="btn btn-info pull-right" ng-click="actionSignOut()">Sign out</button> </h2>
+					<h2 style="color:#333;">Welcome to the ABSCH. You are signed in!
+                        <div class="pull-right text-align:right;" style="padding-left:15px;border-left:3px solid #999;">
+                            <div><button class="btn btn-info " ng-click="actionSignOut()">Sign out</button></div>
+                            <div style="padding-top:10px;"><a href="#" ng-click="actionProfile()" style="font-size:14px;font-weight:normal;" >update your profile</a></div>
+                            <div style="padding-top:10px;padding-bottom:10px;"><a href="#" ng-click="actionPassword()" style="font-size:14px;font-weight:normal;" > change your password</a></div>
+                        </div>
+                    </h2>
+
 					<dl class="dl-horizontal" style="padding-top:10px;">
 					  	<dt style="text-align:left">Name</dt><dd>{{user.name}}
                               <span ng-show="user.roles.indexOf('AbsPublishingAuthorities') != -1">(PA)</span>
@@ -60,7 +67,7 @@
                           <dt style="text-align:left;white-space:nowrap;">Country</dt><dd style="text-transform:uppercase;">{{user.government }}</dd>
 					  	  <dt style="text-align:left;white-space:nowrap;">Phone</dt><dd>{{user.phone}}</dd>
 					</dl>
-                    <a href="#" ng-click="actionProfile()" >update your profile</a>
+
 
 				</div>
 			</div>
