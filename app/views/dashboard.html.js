@@ -75,6 +75,29 @@ app.controller("DashboardController",
     $q.when(workflows.query(query), function(data){
         $scope.completedRequestCount = data.length;
     });
+
+	query    = {
+				$and : [
+					{ "createdBy" : myUserID } ,
+					{ closedOn : { $exists : false } },
+					{ "data.realm" : realm }
+				]
+			};
+    $q.when(workflows.query(query), function(data){
+	    $scope.pendingCount  = data.length;
+    });
+
+	query    = {
+			$and : [
+				{ "activities.assignedTo" : myUserID },
+				{ closedOn : { $exists : false } },
+				{ "data.realm" : realm }
+			]
+		};
+    $q.when(workflows.query(query), function(data){
+		$scope.urgentAttentionCount = data.length;
+    });
+
      $scope.completedRequestCount = 0
      $scope.pendingCount = 0;
      $scope.urgentAttentionCount = 0;
