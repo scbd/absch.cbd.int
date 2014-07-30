@@ -76,17 +76,18 @@ app.directive("registerRecordList", ["$timeout", "commonjs","bootbox", function 
 					$scope.iacCantDelete = true;
 					$scope.cantDelete = false;
 					$scope.recordToDelete = "0";
-					
+
 				}
 				if(record.type == 'absPermit' && $scope.isPublished(record)){
 					//cant delete only modify
-					$scope.cantDelete = true;
-					$scope.recordToDelete = "0";
+					$scope.pilotDelete = true;
+					//$scope.cantDelete = true;
+					//$scope.recordToDelete = "0"; //TODO:only for pilot phase
 				}
-				else{
+				// else{
 					$scope.recordToDelete = record;
 					$scope.cantDelete = false;
-				}
+				// }
 
 			};
 
@@ -118,7 +119,7 @@ app.directive("registerRecordList", ["$timeout", "commonjs","bootbox", function 
 				$scope.loading = true;
 
 				return $q.when(storage.documents.delete(record.identifier)).then(function(){
-					$scope.$emit("documentDeleted");
+					$scope.$emit("documentDeleted", record);
 					$scope.recordToDelete = null;
 
 				}).finally(function(){

@@ -300,7 +300,7 @@ define(['app',
                              });
             }
 			else if($scope.isPublished(row)){
-				console.log(row)
+
 		      $scope.userActivities.push({
                             "title" : '<span class=\'activityfeed-time\'>' + $filter('formatDateWithTime')(row.updatedOn)
 							+ '</span> <strong> ' + row.updatedBy.firstName + ' ' + row.updatedBy.lastName + '</strong> approved ' +
@@ -476,10 +476,22 @@ define(['app',
     //============================================================
     $scope.$on("documentDeleted", function(evt, doc){
 
-      for(var i=0; i<=$scope.records.length; ++i)
-        if($scope.records[i] == doc)
-          $scope.records.splice(i, 1);
+      for(var i=0; i<=$scope.records.length; ++i){
+        if($scope.records[i] == doc){
+			$scope.records.splice(i, 1);
 
+			var schemaCount = _.where($scope.schemaTypesFacets,{"schema":doc.type});
+			if($scope.isRequest(doc)){
+           		schemaCount[0].requestCount--;
+			}
+			else if($scope.isDraft(doc)){
+				schemaCount[0].draftCount--;
+			}
+			else if($scope.isPublished(doc)){
+				schemaCount[0].publishCount--;
+			}
+		}
+	  }
       evt.stopPropagation();
       $scope.editing = false;
 	  bootbox.alert('Record deleted.');
@@ -496,6 +508,30 @@ define(['app',
 
 	  $scope.records.push(doc);
 
+      evt.stopPropagation();
+      $scope.editing = false;
+
+    });
+
+	//============================================================
+    //
+    // Occurs when there is a action on tasks
+    //
+    //============================================================
+    $scope.$on("taskAction", function(evt, doc, workflowAction){
+
+	  	var schemaCount = _.where($scope.schemaTypesFacets,{"schema":"urgentTasks"});
+	  	schemaCount[0].requestCount--;
+
+	    schemaCount = _.where($scope.schemaTypesFacets,{"schema":doc.header.schema});
+		if(workflowAction.action == 'approve'){
+			schemaCount[0].publishCount++;
+			schemaCount[0].draftCount--;
+			schemaCount[0].requestCount--;
+		}
+		else if(workflowAction.action == 'reject'){
+			schemaCount[0].requestCount--;
+		}
       evt.stopPropagation();
       $scope.editing = false;
 

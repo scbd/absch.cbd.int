@@ -11,7 +11,7 @@ app.directive('taskId', function () {
                 parentWatcher : '@', //used in case if the directive parent needs to be refreshed else the workflow details will be fetched.
             },
             controller: [ "$scope", "$timeout", "authHttp", "$route", "IStorage", "IWorkflows", "authentication", "underscore",
-					 function ($scope, $timeout, $http, $route, IStorage, IWorkflows, authentication, _) 
+					 function ($scope, $timeout, $http, $route, IStorage, IWorkflows, authentication, _)
 					{
 						//==================================================
 						//
@@ -36,7 +36,7 @@ app.directive('taskId', function () {
 										}
 										//console.log	('promise exe');
 									});
-								
+
 								}
 
 						}
@@ -55,13 +55,14 @@ app.directive('taskId', function () {
 										else{
 											msg = "Record rejected successfully";
 										}
+                                        $scope.$emit('taskAction',$scope.document, resultData);
 										//console.log($scope.parentWatcher);
 										if($scope.parentWatcher=="dashboard")
 											$scope.$parent.load();
-										else if($scope.parentWatcher=="documents")										
+										else if($scope.parentWatcher=="documents")
 											$scope.$parent.$parent.$parent.refreshRecords(msg);
 										else
-											load();		
+											load();
 
 							}).catch(function(error) {
 								alert(error);
@@ -99,11 +100,11 @@ app.directive('taskId', function () {
 						};
 
 
-						 $scope.$watch('loadTaskData', function (newValue, oldValue) { 
+						 $scope.$watch('loadTaskData', function (newValue, oldValue) {
                             if(newValue != undefined && newValue != oldValue);
 							{
 								load();
-							}	
+							}
 		                });
 
 					}
