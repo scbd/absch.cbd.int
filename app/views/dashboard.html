@@ -177,7 +177,7 @@
                     <div class="scrollbar" style="height: 280px;overflow-y:scroll">
                            <ul class="list-group " rel="scrollcontent1">
                             <li ng-repeat="item in userActivities" class="list-group-item">
-                              {{item.title}}
+                              <span ng-bind-html="item.title"> </span>
                             </li>
                           </ul>
                     </div>

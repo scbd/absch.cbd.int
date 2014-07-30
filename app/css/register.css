@@ -1,3 +1,15 @@
+.activityfeed-time{
+
+	/*font-weight:bold;*/
+	background-color:#999;
+	padding:2px;
+	color:white;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	-ms-border-radius: 2px;
+	-o-border-radius: 2px;
+}
+}
 
 section {
 	padding: 5px 10px 20px 10px;

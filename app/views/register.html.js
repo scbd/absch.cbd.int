@@ -273,10 +273,10 @@ define(['app',
             }
             if($scope.isRequest(row)){
               $scope.userActivities.push({
-                            "title" : row.createdBy.firstName + ' ' + row.createdBy.lastName + ' has requested for publishing '+
+                            "title" : '<span class=\'activityfeed-time\'>' + $filter('formatDateWithTime')(row.workingDocumentLock.lockedOn) + '</span><strong>' + row.createdBy.firstName + ' ' + row.createdBy.lastName + '</strong> has requested for publishing '+
                               _.where($scope.schemaTypesFacets,{"schema":row.type})[0].header
-                              + ' draft ' + ($filter("lstring")(row.workingDocumentTitle||row.title,$scope.localeRegister))
-                              + ' on ' + $filter('formatDateWithTime')(row.workingDocumentLock.lockedOn),
+                              + ' draft ' + ' <em>' + ($filter("lstring")(row.workingDocumentTitle||row.title,$scope.localeRegister)) + '</em>'
+                             ,
                             "identifier" : row.identifier,
                             "schema"	 : row.type
                              });
@@ -284,10 +284,10 @@ define(['app',
             else if($scope.isDraft(row)){
 
               $scope.userActivities.push({
-                            "title" : row.createdBy.firstName + ' ' + row.createdBy.lastName + ' is working on ' +
+                            "title" : '<span class=\'activityfeed-time\'>' + $filter('formatDateWithTime')(row.updatedOn) + '</span> <strong>' + row.createdBy.firstName + ' ' + row.createdBy.lastName + '</strong> is working on ' +
                               _.where($scope.schemaTypesFacets,{"schema":row.type})[0].header + ' draft '
-                              +($filter("lstring")(row.workingDocumentTitle||row.title,$scope.localeRegister))
-							  + ', last updated on ' + $filter('formatDateWithTime')(row.updatedOn)
+                              +' <em>' + ($filter("lstring")(row.workingDocumentTitle||row.title,$scope.localeRegister)) + '</em>'
+
                               ,
                             "identifier" : row.identifier,
                             "schema"	 : row.type
