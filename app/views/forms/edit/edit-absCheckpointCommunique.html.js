@@ -69,7 +69,16 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
         document.referenceOfInformedConsent = undefined;
         document.referenceOfAgreedTerms		= undefined;
         document.personeToWhomGranted		= undefined;
+        document.responsibleAuthorities     = undefined;
       }
+      if(document.date=='')
+          document.date = undefined;
+
+      if(document.dateFrom=='')
+          document.dateFrom = undefined;
+
+      if(document.dateTo=='')
+          document.dateTo = undefined;
 
       if (/^\s*$/g.test(document.notes))
         document.notes = undefined;
