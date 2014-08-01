@@ -20,7 +20,7 @@
     "flag-icon-css": "https://github.com/lipis/flag-icon-css.git#~0.6.0",
     "bootstrap-datepicker": "~1.3.0",
     "angular-loading-bar": "https://github.com/chieffancypants/angular-loading-bar.git",
-    "momentjs": "latest",
+    "momentjs": "2.7.0",
     "angular-dragndrop": "latest",
     "angucomplete": "*",
     "barcode-39.js": "https://github.com/erik5388/barcode-39.js.git",

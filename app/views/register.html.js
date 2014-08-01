@@ -533,7 +533,7 @@ define(['app',
 		$(".card").toggleClass("flipped");
     	$timeout(function(){
 			$(".card").toggleClass("flipped");
-		}, 1000);
+		}, 500);
 	}
 	function updateFacets(doc){
 		var schemaCount = _.where($scope.schemaTypesFacets,{"schema":doc.type});
