@@ -1,5 +1,5 @@
 ﻿<div id="Record" class="record panel panel-default">
-	<div class="panel-heading"><h4 ><span class="record-title-national">NDB</span>  
+	<div class="panel-heading"><h4 ><span class="record-title-national">NDB</span>
 		 National Database or Website</h4></div>
 	<div class="record-body panel-body">
 
@@ -48,6 +48,14 @@
 				</div>
 			</div>
 		</div>
+        <div class="row" style="padding-top:10px;" ng-show="document.info.revision">
+            <div class="col-xs-12">
+                <label>Amendment history</label>
+                <div view-certificate document-id="document.header.identifier" load-documents="true"
+                government="document.government.identifier"></div>
+            </div>
+        </div>
+	
 	</div>
 	<div document-metadata  class="panel-footer"></div>
 </div>

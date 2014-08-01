@@ -22,7 +22,7 @@ define(['app',
     $rootScope.subheadings = {
       	'National Entities':{
 		'title': 'National Entities',
-		'formats': ['authority', 'absCheckpoint','contacts'],
+		'formats': ['authority', 'absCheckpoint'],
 		'roles':['AbsPublishingAuthorities', 'abschiac','AbsNationalAuthorizedUser','AbsNationalFocalPoint','AbsAdministrator','Administrator']
 		},
       	'National Records': {

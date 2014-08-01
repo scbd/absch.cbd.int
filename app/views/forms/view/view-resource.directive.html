@@ -232,6 +232,14 @@
 				</div>
 			</div>
 		</div>
+        <div class="row" style="padding-top:10px;" ng-show="document.info.revision">
+            <div class="col-xs-12">
+                <label>Amendment history</label>
+                <div view-certificate document-id="document.header.identifier" load-documents="true"
+                government="document.government.identifier"></div>
+            </div>
+        </div>
+	
 
 		<!-- <legend>Link to this record</legend>
 		<div class="km-value"><a href="/database/record?documentID={{document.header.identifier}}">

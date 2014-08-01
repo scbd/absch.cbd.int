@@ -14,9 +14,9 @@ app.directive("viewCertificate", [function () {
 		link: function($scope) {
 
 		},
-		controller: ['$scope', 'IStorage', "$q","$route", 
+		controller: ['$scope', 'IStorage', "$q","$route",
 			function ($scope, storage, $q,$route) {
-			
+
 			$scope.$watch('documentID', function(value){
 				if(value && !$scope.documents){
 					$scope.load($scope.documentID);
@@ -48,20 +48,21 @@ app.directive("viewCertificate", [function () {
 				}
 				var qDocument     = storage.documentVersions.get(identifier,{body:true});
 				// .then(function(result) { return result.data || result });
-				
+
 				$q.when(qDocument).then(function(results) {
 
 					$scope.documents     = results.data.Items;
-
+					if($scope.documents && $scope.documents.length >0 && ($scope.documents[0].type=="absPermit" || $scope.documents[0].type=="absCheckpointCommunique"))
+					 	$scope.showFile = true;
 
 				}).then(null, function(error) {
 					$scope.error = "error loading document history";
 					 console.log( $scope.error );
 				})
-				
+
 			};
 
-			
+
 		}]
 	};
 }]);
