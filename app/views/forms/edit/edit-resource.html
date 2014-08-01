@@ -25,7 +25,7 @@
           <ul class="pagination">
             <li ng-class="{ active  : tab=='edit'   }"><a href="" ng-click="tab='edit'" >Submission Form</a></li>
             <li ng-class="{ active  : tab=='review' }"><a href="" ng-click="tab='review'">Review</a></li>
-          </ul>   
+          </ul>
           <div class="pagination pull-right">
             <span km-form-languages ng-model="document.header.languages"></span>
             <span km-form-std-buttons document="getCleanDocument()"></span>
@@ -37,7 +37,7 @@
 
 			<div ng-show="tab=='edit'" km-tab="edit">
 
-				
+
 				<section>
 				<legend>General information</legend>
 
@@ -77,8 +77,8 @@
                             <div km-textbox-ml required name="languageName" rows="1" ng-model="document.languageName" locales="document.header.languages"></div>
                         </div>
                     </div>
-				</div> 
-				
+				</div>
+
 
 				<div class="row">
 					<div class="col-xs-12">
@@ -224,7 +224,7 @@
 				</div>
 				</section>
 
-				
+
 
 <section>
 
@@ -266,7 +266,7 @@
 			</div>
 
 
-				
+
 
 		</form>
 
@@ -277,7 +277,7 @@
                 <input type="button" class="btn" ng-class="{'active' : review.locale==locale, 'btn-info' : review.locale==locale}" ng-repeat="locale in document.header.languages" ng-click="$parent.review.locale = locale" value="{{locale | uppercase}}" />
             </div>
 
-            <div view-authority ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></div>
+            <div view-resource ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></div>
         </div>
 
         <hr>
