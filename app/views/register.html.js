@@ -327,7 +327,7 @@ define(['app',
         })
         // var recrords _.groupBy($scope.records,'')
         $("a[role*='button']").toggleClass('ui-disabled');
-
+		flipFacets();
         return $scope.records;
       });
     }
@@ -378,6 +378,8 @@ define(['app',
 			var schemaCount = _.where($scope.schemaTypesFacets,{"schema":"urgentTasks"});
 	        schemaCount[0].requestCount = data.length;
 	    });
+
+	 // flipFacets();
 	}
 
 
@@ -479,17 +481,7 @@ define(['app',
       for(var i=0; i<=$scope.records.length; ++i){
         if($scope.records[i] == doc){
 			$scope.records.splice(i, 1);
-
-			var schemaCount = _.where($scope.schemaTypesFacets,{"schema":doc.type});
-			if($scope.isRequest(doc)){
-           		schemaCount[0].requestCount--;
-			}
-			else if($scope.isDraft(doc)){
-				schemaCount[0].draftCount--;
-			}
-			else if($scope.isPublished(doc)){
-				schemaCount[0].publishCount--;
-			}
+			updateFacets(doc);
 		}
 	  }
       evt.stopPropagation();
@@ -507,7 +499,7 @@ define(['app',
     $scope.$on("documentDuplicated", function(evt, doc){
 
 	  $scope.records.push(doc);
-
+	  updateFacets(doc);
       evt.stopPropagation();
       $scope.editing = false;
 
@@ -532,11 +524,30 @@ define(['app',
 		else if(workflowAction.action == 'reject'){
 			schemaCount[0].requestCount--;
 		}
+	  flipFacets();
       evt.stopPropagation();
       $scope.editing = false;
 
     });
-
+	function flipFacets(){
+		$(".card").toggleClass("flipped");
+    	$timeout(function(){
+			$(".card").toggleClass("flipped");
+		}, 1000);
+	}
+	function updateFacets(doc){
+		var schemaCount = _.where($scope.schemaTypesFacets,{"schema":doc.type});
+		if($scope.isRequest(doc)){
+       		schemaCount[0].requestCount--;
+		}
+		else if($scope.isDraft(doc)){
+			schemaCount[0].draftCount--;
+		}
+		else if($scope.isPublished(doc)){
+			schemaCount[0].publishCount--;
+		}
+  		flipFacets();
+	}
     $scope.$watch('msg',function(newValue){
       if(newValue !== "")
       {

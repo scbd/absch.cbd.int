@@ -17,14 +17,35 @@
           <div style="padding-left:10px">
             <span ng-show="compareRoles(user.roles, PAroles)">
                 <a href="/dashboard/pending" ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-tasks.directive.html'}" href="#" role="button">
-                    Requests for your approval <span  class="pull-right label label-danger">{{facets('urgentTasks','request')}}</span>
+                    Requests for your approval
+                    <span class="flip pull-right">
+                        <span class=" card">
+                            <span class="face front">
+                                <span  class="label label-danger">{{facets('urgentTasks','request')}}</span>
+                            </span>
+                        </span>
+                    </span>
                 </a><br>
             </span>
             <a href="/dashboard/mytasks" ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-pending-tasks.directive.html'}" href="#" role="button">
-              Your pending requests <span  class="pull-right label label-default">{{facets('pendingTasks','request')}}</span>
+              Your pending requests
+                    <span class="flip pull-right ">
+                      <span class=" card">
+                        <span class="face front">
+                            <span  class="label label-default">{{facets('pendingTasks','request')}}</span>
+                        </span>
+                    </span>
+                  </span>
             </a><br>
              <a href="/dashboard/completed" ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-completed-tasks.directive.html'}" href="#" role="button">
-              Your completed requests <span  class="pull-right label label-success">{{facets('completedTasks','request')}}</span>
+              Your completed requests
+                    <span class="flip pull-right ">
+                      <span class=" card">
+                        <span class="face front">
+                            <span  class="label label-success">{{facets('completedTasks','request')}}</span>
+                        </span>
+                        </span>
+                    </span>
             </a>
 
           </div>
@@ -39,12 +60,24 @@
                       <a ng-repeat="type in heading.formats" ng-href="{{type!='contacts' ? '/register' : ''}}/{{type}}" role="button">
                         <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : document_type==type ,'btn-commonformat-reference-selected' : document_type=='resource' && document_type==type}">
                           <div class="btn-commonformat-national">{{document_types[type].abbreviation}}
-                            <span ng-show="facets(type,'draft') > 0" class="pull-right label label-default">
-                              {{facets(type,'draft')}}</span>
-                            <span ng-show="facets(type,'publish') > 0" class="pull-right label label-success">
-                              {{facets(type,'publish')}}</span>
-                            <span ng-show="facets(type,'request') > 0" class="pull-right label label-danger">
-                              {{facets(type,'request')}}</span>
+
+                            <!-- <div class="flip pull-right ">
+                                <div class=" card">
+                                    <div class="face front"style="padding-right:10px"> -->
+                                        <div ng-show="facets(type,'draft') > 0" class="pull-right label label-default">
+                                      {{facets(type,'draft')}}</div>
+                                  <!-- </div>
+                                  <div class="face front"style="padding-right:10px"> -->
+                                                <div ng-show="facets(type,'publish') > 0" class="pull-right label label-success">
+                                      {{facets(type,'publish')}}</div>
+                                  <!-- </div>
+                                 <div class="face front"style="padding-right:10px"> -->
+                                                <div ng-show="facets(type,'request') > 0" class="pull-right label label-danger">
+                                      {{facets(type,'request')}}</div>
+                                  <!-- </div>
+                              </div>
+                          </div> -->
+
                           </div>
                           <span class="btn-commonformat-name">{{document_types[type].title}}</span>
                         </div>
