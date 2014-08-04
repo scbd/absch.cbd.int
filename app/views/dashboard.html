@@ -64,7 +64,7 @@
                               <span ng-show="user.roles.indexOf('Administrator') != -1">(ADMIN)</span>
                           </dd>
 					  	   <dt style="text-align:left;white-space:nowrap;">Primary email</dt><dd>{{user.email}}</dd>
-                          <dt style="text-align:left;white-space:nowrap;">Country</dt><dd style="text-transform:uppercase;">{{user.government }}</dd>
+                          <dt style="text-align:left;white-space:nowrap;">Country</dt><dd style="text-transform:uppercase;">{{user.government |term}}</dd>
 					  	  <dt style="text-align:left;white-space:nowrap;">Phone</dt><dd>{{user.phone}}</dd>
 					</dl>
 
