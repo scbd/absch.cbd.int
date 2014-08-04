@@ -1,20 +1,30 @@
 define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 
-  app.controller("editCheckpointCommunique", ["$scope", "authHttp", "$filter", "$q", "$controller", "IStorage",
-   function ($scope, $http, $filter, $q, $controller, storage) {
+  app.controller("editCheckpointCommunique", ["$scope", "authHttp", "$filter", "$q", "$controller", "IStorage","underscore",
+   function ($scope, $http, $filter, $q, $controller, storage, _) {
     $controller('editController', {$scope: $scope});
 
+    $scope.checkpointList = [];
     _.extend($scope.options, {
       permits         : function () {
             var permit = storage.documents.query("(type eq 'absPermit')",undefined,{cache:false});
             return $q.all(permit).then(function(o){
-                //console.log(o.data);
                   var permits =  [];
                   o.data.Items.forEach(function(permit){
                     permits.push({"title": permit.title.en, "identifier": permit.identifier});
                   });
-                  //console.log(permits)
                   return permits;
+            });
+        },
+      checkpoints         : function () {
+            var checkpoint = storage.documents.query("(type eq 'absCheckpoint')",undefined,{body:true,cache:false});
+            return $q.all(checkpoint).then(function(o){
+                 var checkpoints =  [];
+                  o.data.Items.forEach(function(checkpoint){
+                    checkpoints.push({"title": checkpoint.title.en,"identifier": checkpoint.identifier, "body": checkpoint.body});
+                  });
+                  $scope.checkpointList = checkpoints;
+                  return checkpoints;
             });
         }
     });
@@ -82,6 +92,19 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 
       if (/^\s*$/g.test(document.notes))
         document.notes = undefined;
+      
+      if(document.checkpointSelected){
+       
+            document.checkpointSelected.forEach(function(checkpoint){
+                if(!document.checkpoint)
+                  document.checkpoint = [];
+                var selected = _.where($scope.checkpointList,{"identifier": checkpoint.identifier});
+                document.checkpoint.push(selected[0].body);
+            });
+        
+        
+        
+      }
 
       return document;
     };

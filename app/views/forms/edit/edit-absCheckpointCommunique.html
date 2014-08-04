@@ -64,6 +64,20 @@
                 </section>
 
                 <section>
+                <legend>Checkpoint/s that collected or received the information: </legend>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="control-group">
+                            <div class="km-control-group" name="checkpointSelected"  caption="Checkpoint">
+                                <div  km-select  multiple name="checkpointSelected" ng-model="document.checkpointSelected"items="options.checkpoints()" placeholder="Please select ..."></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </section>
+
+                <section>
                 <legend>Details of the internationally recognized certificate of compliance</legend>
                 <div class="row">
                     <div class="col-xs-12">
@@ -92,7 +106,7 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="control-group">
-                                    <div class="km-control-group" name="originCountries" required caption="">
+                                    <div class="km-control-group" name="originCountries" required caption="Source of the genetic resource">
                                         <div km-select required name="originCountries" ng-model="document.originCountries" multiple items="options.countries()" placeholder="Please select a country..."></div>
                                     </div>
                                 </div>
@@ -223,7 +237,7 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="km-control-group" required name="geneticRessourceUsers" caption="Person or entity utilizing the genetic resource at the checkpoint">
-                            <field-embed-contact multiple ng-model="document.geneticRessourceUsers" locales="document.header.languages" caption="Add an organisation or a contact »"></field-embed-contact>
+                            <field-embed-contact multiple ng-model="document.geneticRessourceUsers" name="geneticRessourceUsers" locales="document.header.languages" caption="Add an organisation or a contact »"></field-embed-contact>
 
                         </div>
                     </div>
@@ -231,7 +245,7 @@
                 <section>
                     <div class="row">
                         <div class="col-md-12 col-xs-12">
-                            <div class="km-control-group" name="date" caption="Date on which the information was collected">
+                            <div class="km-control-group" name="date" caption="Date on which the information was collected or received">
                                 <div class="row">
                                     <div class="col-md-4 col-xs-4">
                                         <div km-date placeholder="YYYY-MM-DD" required name="date" ng-model="document.date"></div>
@@ -241,16 +255,16 @@
                                     </div>
                                     <div class="col-md-6 col-xs-6">
                                         <div class="row">
-                                            <div class="col-md-4 col-xs-4">
-                                                <div style="margin-top:8px;">collected from</div>
+                                            <div class="col-md-1 col-xs-1">
+                                                <div style="margin-top:8px;">from</div>
                                             </div>
                                             <div class="col-md-6 col-xs-6">
                                                 <div km-date placeholder="YYYY-MM-DD" required name="dateFrom" ng-model="document.dateFrom"></div>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-4 col-xs-4">
-                                                    <div style="margin-top:8px;">collected to</div>
+                                            <div class="col-md-1 col-xs-1">
+                                                    <div style="margin-top:8px;">to</div>
                                             </div>
                                             <div class="col-md-6 col-xs-6">
                                                 <div km-date placeholder="YYYY-MM-DD" required name="dateTo" ng-model="document.dateTo"></div>

@@ -1,6 +1,6 @@
 ﻿<div id="Record" class="record panel panel-default">
 
-	<div class="panel-heading">	<h4 ng-show="display('header')"><span class="record-title-national">ABSCH-CPC</span> Information for the Checkpoint communiqué</h4>
+	<div class="panel-heading" ng-show="display('header')">	<h4 ><span class="record-title-national">ABSCH-CPC</span> Information for the Checkpoint communiqué</h4>
 	</div>
 	<div class="record-body panel-body">
 
@@ -22,7 +22,17 @@
 					</div>
 				</div>
 			</div>
-
+			<div ng-show="document.checkpoint">
+				<legend>Checkpoint/s that collected or received the information</legend>
+				<div class="km-value">
+					<ul>
+						<li ng-repeat="checkpoint in document.checkpoint">
+							{{checkpoint.name | lstring:locale}} <a ng-href="#" ng-click="showcp= !showcp">more details</a>
+							<div ng-show="showcp" view-abs-checkpoint  ng-model="checkpoint" document-info="checkpoint" hide="header,footer" locale="getLocale()" link-target={{linkTarget}}></div>
+						</li>
+					</ul>
+				</div>
+			</div>
 			<div ng-show="document.permit || document.permitNotAvailable ||
 						document.originCountries || responsibleAuthority ||
 						document.specimen || document.taxonomy || document.gisFiles || document.subjectMatter ||
@@ -182,5 +192,5 @@
             </div>
 
 	</div>
-	<div document-metadata  class="panel-footer"></div>
+	<div document-metadata  class="panel-footer" ></div>
 </div>
