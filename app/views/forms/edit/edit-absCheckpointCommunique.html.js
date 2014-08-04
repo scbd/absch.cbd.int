@@ -92,20 +92,17 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 
       if (/^\s*$/g.test(document.notes))
         document.notes = undefined;
-      
+
       if(document.checkpointSelected){
-       
+            document.checkpoint = [];
             document.checkpointSelected.forEach(function(checkpoint){
-                if(!document.checkpoint)
-                  document.checkpoint = [];
+
                 var selected = _.where($scope.checkpointList,{"identifier": checkpoint.identifier});
                 document.checkpoint.push(selected[0].body);
             });
-        
-        
-        
       }
-
+      else
+          document.checkpoint = undefined;
       return document;
     };
 
