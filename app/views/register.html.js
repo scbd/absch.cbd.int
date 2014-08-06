@@ -481,7 +481,7 @@ define(['app',
       for(var i=0; i<=$scope.records.length; ++i){
         if($scope.records[i] == doc){
 			$scope.records.splice(i, 1);
-			updateFacets(doc);
+			updateFacets(doc, false);
 		}
 	  }
       evt.stopPropagation();
@@ -497,9 +497,8 @@ define(['app',
     //
     //============================================================
     $scope.$on("documentDuplicated", function(evt, doc){
-
 	  $scope.records.push(doc);
-	  updateFacets(doc);
+	  updateFacets(doc, true);
       evt.stopPropagation();
       $scope.editing = false;
 
@@ -535,19 +534,30 @@ define(['app',
 			$(".card").toggleClass("flipped");
 		}, 500);
 	}
-	function updateFacets(doc){
+
+	function updateFacets(doc, newRec){
 		var schemaCount = _.where($scope.schemaTypesFacets,{"schema":doc.type});
 		if($scope.isRequest(doc)){
-       		schemaCount[0].requestCount--;
+			if(newRec)
+				schemaCount[0].requestCount++;
+			else
+       			schemaCount[0].requestCount--;
 		}
 		else if($scope.isDraft(doc)){
-			schemaCount[0].draftCount--;
+			if(newRec)
+				schemaCount[0].draftCount++;
+			else
+       			schemaCount[0].draftCount--;
 		}
 		else if($scope.isPublished(doc)){
-			schemaCount[0].publishCount--;
+			if(newRec)
+				schemaCount[0].publishCount++;
+			else
+       			schemaCount[0].publishCount--;
 		}
   		flipFacets();
 	}
+
     $scope.$watch('msg',function(newValue){
       if(newValue !== "")
       {
