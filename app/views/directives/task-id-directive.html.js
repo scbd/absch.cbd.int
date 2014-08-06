@@ -1,4 +1,5 @@
-define(['app'], function (app) {
+define(['app',
+	'../forms/view/record-loader.directive.html.js'], function (app) {
 
 app.directive('taskId', function () {
         return {

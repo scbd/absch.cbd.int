@@ -57,7 +57,7 @@
 
         <div class="col-sm-12" ng-class="{'col-md-6' : getContacts().length>1, 'col-md-12' : getContacts().length<=1}" ng-repeat="contact in getContacts() | filter:filterBy | filter:keywords">
             <div class="well">
-                <div class="pull-right" ng-show="showButtons(contact)">
+                <div class="pull-right" ><!-- ng-show="showButtons(contact)" -->
                     <button type="button" class="btn btn-default" ng-click="deleteContact($index)"><i class="fa fa-trash-o"></i>
                     </button>
                     <button type="button" class="btn btn-default" ng-click="editContact($index)"><i class="fa fa-edit"></i>

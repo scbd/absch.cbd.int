@@ -1,7 +1,7 @@
 define(['app', '/app/js/common.js'], function (app) {
 "use strict";
 
-app.directive("registerRecordList", ["$timeout", "commonjs","bootbox", function ($timeout,commonjs,bootbox) {
+app.directive("registerRecordList", ["$timeout", "commonjs","bootbox", "authHttp", function ($timeout,commonjs,bootbox, $http) {
 
 	return {
 		restrict   : "EA",

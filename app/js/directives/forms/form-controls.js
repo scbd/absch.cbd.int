@@ -2011,7 +2011,7 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 					}
 					else return $q.when(editFormUtility.publish(document)).then(function(documentInfo) {
 						
-						if(documentInfo.type='authority'){
+						if(documentInfo.type=='authority'){
 							//in case of authority save the CNA as a contact in drafts
 							saveAuthorityInContacts(documentInfo);
 						}
