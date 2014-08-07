@@ -95,7 +95,16 @@
                     </div>
                 </div>
 
-
+				<div ng-show="document.checkpoint">
+					<legend>Checkpoint/s that collected or received the information</legend>
+					<div class="km-value">
+						<ul>
+							<li ng-repeat="checkpoint in document.checkpoint">
+								{{checkpoint.name | lstring:locale}}
+							</li>
+						</ul>
+					</div>
+				</div>
     			<div ng-show="document.permit || document.permitNotAvailable ||
     						document.originCountries || responsibleAuthority ||
     						document.specimen || document.taxonomy || document.gisFiles || document.subjectMatter ||
