@@ -14,8 +14,11 @@
                 <!-- <div class="row"  >
                     <div class="col-xs-12"> -->
                         <div class="row-fluid text-row km-value" ng-repeat="document in documents | orderBy:document.createdOn">
-
-                        	<div class="col-xs-3"> <i ng-show="$first" class="fa fa-star" style="color:#f0ad4e;"></i> <strong>{{document.createdOn |formatDateWithTime}}</strong></div>
+<!-- data-toggle="tooltip" data-placement="top" -->
+                        	<div class="col-xs-3"><a
+								ng-href="record?documentID=ABSCH-{{document.body.government.identifier}}-{{document.documentID}}&revision={{document.revision}}">
+								 <i class="fa fa-folder-open-o" style="cursor:pointer"
+								 title="View this version" ></i></a> <i ng-show="$first" class="fa fa-star" style="color:#f0ad4e;"></i> <strong>{{document.createdOn |formatDateWithTime}}</strong></div>
                             <div class="col-xs-2" >
                                <span ng-show="document.body.amendmentIntent==1"><h5 class="label label-danger"> REVOKED</h5></span>
 

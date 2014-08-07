@@ -10,7 +10,7 @@ define(['app',
     './view-measure.directive.js',
     './view-organization.directive.js',
     './view-organization-reference.directive.js',
-    './view-resource.directive.js',    
+    './view-resource.directive.js',
     './view-focalpoint.directive.html.js',
     './view-meeting.directive.html.js',
     './view-statement.directive.html.js',
@@ -37,23 +37,23 @@ app.directive('recordLoader', [function () {
 			$scope.internalDocument     = undefined;
 			$scope.internalDocumentInfo = undefined;
 
-			$scope.$watch("document", function(_new) { 
+			$scope.$watch("document", function(_new) {
 				$scope.error = null;
-				$scope.internalDocument = _new; 
+				$scope.internalDocument = _new;
 			});
-			
+
 			if(!$scope.document)
 				$scope.init();
 		},
 		controller: ['$scope', "$route", 'IStorage', "authentication", "localization", "$q", "$location", "commonjs",
 			function ($scope, $route, storage, authentication, localization, $q, $location,commonjs) {
-			
+
 			//==================================
 			//
 			//==================================
 			$scope.init = function () {
 
-				if ($scope.internalDocument)
+				if ($scope.internalDocument && !$scope.revisionNo)
 					return;
 
 				if ($scope.document || $scope.schema)
@@ -61,11 +61,15 @@ app.directive('recordLoader', [function () {
 
 				var documentID = $route.current.params.documentID;
 				var documentSchema = $route.current.params.documentSchema;
+				var documentRevision = $route.current.params.revision;
+
+				if($scope.revisionNo)
+					documentRevision = $scope.revisionNo;
 
 				if($route.current.params.documentNumber)
 					var documentID = $route.current.params.documentNumber;
-					
-				if(documentID && documentID.toLowerCase().indexOf('absch')==0){					
+
+				if(documentID && documentID.toLowerCase().indexOf('absch')==0){
 					 var docNum = documentID.substring(9,documentID.length);
 					if(docNum.indexOf('-')>=0){
 						documentID = documentID.toLowerCase().replace('absch','ABSCH');
@@ -82,13 +86,13 @@ app.directive('recordLoader', [function () {
 						$scope.internalDocument = data.data;
 					//console.log($scope.internalDocument );
 					});
-				}										
+				}
 				else if (documentID){
-					$scope.load(documentID);
+					$scope.load(documentID,documentRevision);
 				}
 				// else
 				// 	$scope.error = "documentID not specified";
-				
+
 			}
 
 			//==================================
@@ -101,12 +105,25 @@ app.directive('recordLoader', [function () {
 			//==================================
 			//
 			//==================================
-			$scope.load = function (identifier) {
+			$scope.load = function (identifier, version) {
 
 				$scope.error = undefined;
+				var qDocument;
+				var qDocumentInfo;
+				if(version==undefined){
 
-				var qDocument     = storage.documents.get(identifier)                .then(function(result) { return result.data || result });
-				var qDocumentInfo = storage.documents.get(identifier, { info: true }).then(function(result) { return result.data || result });
+					qDocument = storage.documents.get(identifier)
+									   .then(function(result) { return result.data || result });
+				}
+				else{
+					qDocument = storage.documentVersions.get(identifier,{'version':version})
+									   .then(function(result) { return result.data || result });
+
+					qDocumentInfo = storage.documentVersions.get(identifier,{ info: true,'version':version }).then(function(result) { return result.data || result });
+
+				}
+				qDocumentInfo = storage.documents.get(identifier,{ info: true}).then(function(result) { return result.data || result });
+
 
 				$q.all([qDocument, qDocumentInfo]).then(function(results) {
 
@@ -114,12 +131,23 @@ app.directive('recordLoader', [function () {
 					$scope.internalDocumentInfo = results[1];
 					$scope.internalDocument.info = results[1];
 
+					$scope.documentVersionCount = $scope.internalDocumentInfo.revision
+
+					if(version && $scope.internalDocumentInfo.revision != version){
+						$scope.internalDocumentInfo.revision = version;
+					}
+					if(version)
+						$scope.revisionNo  = version
+					else
+						$scope.revisionNo  = $scope.documentVersionCount
+
+
 				}).then(null, function(error) {
 					//debugger;
 					 // $scope.error = error.Message || error || "Http Error: " + errorCode;
 					 console.log( $scope.error );
 				})
-				
+
 			};
 
 			//==================================
@@ -166,7 +194,7 @@ app.directive('recordLoader', [function () {
 								 : storage.drafts.security.canCreate(identifier, schema); // has no draft
 
 					qCanEdit.then(function(isAllowed) {
-						
+
 						$scope.internalCanEdit = isAllowed || false;
 
 					}).then(null, function(error) {
@@ -177,6 +205,15 @@ app.directive('recordLoader', [function () {
 
 				return $scope.internalCanEdit===true;
 			};
+
+			$scope.loadRevision = function(val){
+
+				if($scope.revisionNo!=val){
+					$scope.revisionNo=val;
+					//$scope.internalDocument = null
+					$scope.init();
+				}
+			}
 		}]
 	}
 }]);

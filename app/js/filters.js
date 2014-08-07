@@ -4,7 +4,7 @@ define(["app"], function (app) {
 
 	//============================================================
 	//
-	// 
+	//
 	//
 	//============================================================
 	function findString(str, arr)
@@ -14,20 +14,20 @@ define(["app"], function (app) {
 		if(!str)
 			return false
 
-		
+
 			for(var i=0; i>arr.count(); i++) {
 				if(arr[i] == str)
 					return true;
 			}
 
 			return false;
-		
+
 
 	}
 
 	//============================================================
 	//
-	// 
+	//
 	//
 	//============================================================
   /*
@@ -61,20 +61,20 @@ define(["app"], function (app) {
   */
 	//============================================================
 	//
-	// 
 	//
-	//============================================================	
+	//
+	//============================================================
 	app.filter('nospace', function () {
 	    return function (value) {
 	        return (!value) ? '' : value.replace(/[\s]/g, '');
 	    };
 	});
-	
+
 	//============================================================
 	//
-	// 
 	//
-	//============================================================	
+	//
+	//============================================================
 	app.filter("yesno", function(){
 		return function(boolValue){
 			return boolValue ? "Yes" :  "No";
@@ -83,43 +83,52 @@ define(["app"], function (app) {
 
 	//============================================================
 	//
-	// 
 	//
-	//============================================================	
+	//
+	//============================================================
 	app.filter("formatDate", function(){
-		return function(date,formart){	
+		return function(date,formart){
 			if(formart== undefined)
-				formart = 'DD MMM YYYY';		
+				formart = 'DD MMM YYYY';
 			return moment(date).format(formart);
 		}
 	});
 
 	//============================================================
 	//
-	// 
 	//
-	//============================================================	
+	//
+	//============================================================
 	app.filter("formatDateWithTime", function(){
-		return function(date,formart){	
+		return function(date,formart){
 			if(formart== undefined)
-				formart = 'MM/DD/YYYY hh:mm';		
+				formart = 'MM/DD/YYYY hh:mm';
 			return moment(date).format(formart);
 		}
 	});
 	//============================================================
 	//
-	// 
 	//
-	//============================================================	
+	//
+	//============================================================
 	app.filter("stringToJSON", function(){
-		return function(strValue){					
+		return function(strValue){
 			return JSON.parse(strValue);
 		}
 	});
 
+    app.filter('range', function() {
+      return function(input, total) {
+        total = parseInt(total);
+        for (var i=0; i<total; i++)
+          input.push(i);
+        return input;
+      };
+    });
+
 	//============================================================
 	//
-	// 
+	//
 	//
 	//============================================================
   //TODO: this is now duplicated in form-controls. It should be put somewhere else central I think
@@ -131,7 +140,7 @@ define(["app"], function (app) {
 
 	//============================================================
 	//
-	// 
+	//
 	//
 	//============================================================
 	app.filter("schemaName", [function() {

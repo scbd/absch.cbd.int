@@ -11,8 +11,8 @@ app.directive("viewCertificate", [function () {
 			loadDocuments: "=loadDocuments",
 			government:  "=government"
 		},
-		link: function($scope) {
-
+		link: function($scope, $element) {
+		//	$element.find("[data-toggle='tooltip']").tooltip({trigger:'hover'});
 		},
 		controller: ['$scope', 'IStorage', "$q","$route",
 			function ($scope, storage, $q,$route) {
@@ -54,6 +54,8 @@ app.directive("viewCertificate", [function () {
 					$scope.documents     = results.data.Items;
 					if($scope.documents && $scope.documents.length >0 && ($scope.documents[0].type=="absPermit" || $scope.documents[0].type=="absCheckpointCommunique"))
 					 	$scope.showFile = true;
+// console.log($("[data-toggle='tooltip']"));
+// 					$("[data-toggle='tooltip']").tooltip({trigger:'hover'});
 
 				}).then(null, function(error) {
 					$scope.error = "error loading document history";
