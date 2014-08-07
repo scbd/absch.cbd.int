@@ -45,6 +45,20 @@
 					  			</span>
 
                             </div>
+							<div class="col-xs-12 " style="padding-top:10px; color:#999" ng-show="(document.body.responsibleAuthorities.emails ||
+								document.body.personeToWhomGranted.emails || document.body.geneticRessourceUsers.emails ||
+								document.body.providers.emails || document.body.informedConsents.emails ||
+								document.body.authority.emails) && showFile">
+	                                <span style="font-weight:bold;text-transform:uppercase;"> Email sent to: </span>
+							  		<span> {{document.body.responsibleAuthorities.emails| lstring:locale}}
+										{{document.body.personeToWhomGranted.emails| lstring:locale}}
+										{{document.body.geneticRessourceUsers.emails| lstring:locale}}
+										 {{document.body.providers.emails| lstring:locale}}
+										{{document.body.informedConsents.emails| lstring:locale}}
+										{{document.body.authority.emails| lstring:locale}}
+					  				</span>
+
+                            </div>
                         </div>
 
 				</div>
