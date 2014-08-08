@@ -479,7 +479,7 @@ define(['app',
       $scope.editing = false;
 
 	  $scope.showingFeedback = true;
-	  bootbox.alert('Record published.', function(){
+	  bootbox.alert('<h1>Record published.</h1>', function(){
 		    $scope.showingFeedback = false;
 			$timeout(function(){$location.path('/register/'+$scope.document_type);},1);
 	  });
@@ -502,8 +502,8 @@ define(['app',
 	  }
       evt.stopPropagation();
       $scope.editing = false;
-	  bootbox.alert('Record deleted.');
-      $scope.msg = "Record deleted.";
+	  bootbox.alert('<h1>Record deleted.</h1>');
+      $scope.msg = "<h1>Record deleted.</h1>";
 
     });
 

@@ -11,6 +11,7 @@ define([
     '/app/views/forms/view/view-organization.directive.js',
     '/app/views/forms/view/view-organization-reference.directive.js',
     '/app/views/forms/view/view-certificate-directive.html.js',
+    '/app/views/forms/view/view-history-directive.html.js',
   ], function (app) {
 
   app.controller("editController", ["$rootScope", "$scope", "authHttp", "$window", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage", "authentication", "Enumerable", "editFormUtility", "$routeParams", "$timeout", function ($rootScope, $scope, $http, $window, guid, $filter, thesaurus, $q, $location, storage, authentication, Enumerable, editFormUtility, $routeParams, $timeout) {

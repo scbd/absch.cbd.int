@@ -16,6 +16,7 @@ define(['app',
     './view-statement.directive.html.js',
     './view-pressrelease.directive.html.js',
     './view-notification.directive.html.js',
+	'./view-history-directive.html.js',
     '/app/js/common.js',
     '/app/views/directives/document-metadata-directive.html.js'
     ], function (app) {
