@@ -44,9 +44,7 @@
 					<div class="km-value">
 						<ul>
 							<li ng-repeat="permit in document.permit">
-								<a href="/database/record?documentSchema=ABSPERMIT&documentID={{permit | lstring:locale}}">
-                                    <!-- TODO: add the proper UID: ABSCH-IRCC-DocID-Revision  -->
-                                    ABSCH-IRCC-{{permit | lstring:locale}}</a>
+								<a href="/database/record?documentSchema=ABSPERMIT&documentID={{permit | lstring:locale}}">{{permit | lstring:locale | uniqueID}}</a>
 							</li>
 						</ul>
 

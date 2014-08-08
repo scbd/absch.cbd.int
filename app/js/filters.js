@@ -126,6 +126,40 @@ define(["app"], function (app) {
       };
     });
 
+    app.filter("uniqueID", ["IStorage", '$filter', function(storage, $filter) {
+		var cacheMap = {};
+
+		return function(term) {
+
+			if(!term)
+				return "";
+
+			if(term && angular.isString(term))
+				term = { identifier : term };
+
+
+			if(cacheMap[term.identifier])
+				return cacheMap[term.identifier] ;
+
+			cacheMap[term.identifier] = storage.documents.get(term.identifier, {info:true}).then(function(document) {
+                document = document.data;
+                var unique = 'ABSCH-' + //$filter("schemaShortName")($filter("lowercase")(document.type)) + '-' +
+                        document.documentID + '-' + document.revision;
+				cacheMap[term.identifier] = unique;
+
+				return unique;
+
+			}).catch(function(){
+
+				cacheMap[term.identifier] = term.identifier;
+
+				return term.identifier;
+
+			});
+		};
+	}])
+
+
 	//============================================================
 	//
 	//

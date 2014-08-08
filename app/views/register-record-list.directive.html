@@ -74,7 +74,7 @@
 
                          <a ng-show="isDraft(record) && !isRequest(record)"  href="/register/{{record.type}}/{{record.identifier}}/edit">
                             <h4 style="display:inline;">{{(record.workingDocumentTitle||record.title)|lstring}}
-                            <span ng-show="record.metadata.schema == 'absCheckpointCommunique'">Checkpoint Communique - {{record.createdOn | formatDate:"D MMMM YYYY h:mm a (Z)" }}</span></h4>
+                            <span ng-show="record.metadata.schema == 'absCheckpointCommunique'">Checkpoint Communique - {{record.createdOn | formatDateWithTime }}</span></h4>
                         </a>
 
                         <a ng-show="!isDraft(record) && !isRequest(record)" href=""  ng-click="loadDocument(record); displayDetails=!displayDetails" ng-show="record.documentID">
@@ -88,7 +88,7 @@
                         <a href="" ng-click="displayDetails =false; displayRequest = !displayRequest; formLoading=false" class="btn btn-xs btn-danger" title="Request">R</a>
                         <a href="" ng-click="displayDetails =false; displayRequest = !displayRequest; formLoading=false">
                             <h4 style="display:inline;">{{(record.workingDocumentTitle||record.title)|lstring}}
-                            <span ng-show="record.metadata.schema == 'absCheckpointCommunique'">Checkpoint Communique - {{record.createdOn | formatDate:"D MMMM YYYY h:mm a (Z)" }}</span></h4>
+                            <span ng-show="record.metadata.schema == 'absCheckpointCommunique'">Checkpoint Communique - {{record.createdOn | formatDateWithTime }}</span></h4>
                         </a>
                     </span>
 
@@ -96,7 +96,7 @@
                       <a ng-href="/register/{{record.type}}/{{record.identifier}}/edit" class="btn btn-xs btn-default btn-draft" title="Draft" style="color:#fff">D</a>
                       <a href="/register/{{record.type}}/{{record.identifier}}/edit">
                             <h4 style="display:inline;">{{(record.workingDocumentTitle||record.title)|lstring}}
-                            <span ng-show="record.metadata.schema == 'absCheckpointCommunique'">Checkpoint Communique - {{record.createdOn | formatDate:"D MMMM YYYY h:mm a (Z)" }}</span></h4>
+                            <span ng-show="record.metadata.schema == 'absCheckpointCommunique'">Checkpoint Communique - {{record.createdOn | formatDateWithTime }}</span></h4>
                         </a>
                     </span>
 
@@ -104,13 +104,13 @@
           <div class="col-xs-3">
               <div ng-show="record.createdBy">
               <a style="color:#666" href="mailto:{{record.createdBy.email}}"><strong>{{record.createdBy.firstName}} {{record.createdBy.lastName}}</strong></a>
-              <span style="font-size:10px;white-space:nowrap;">{{record.createdOn | formatDate:"D MMMM YYYY h:mm a (Z)" }}</span>
+              <span style="font-size:10px;white-space:nowrap;">{{record.createdOn | formatDateWithTime }}</span>
           </div>
           </div> <!-- end col -->
           <div class="col-xs-3">
               <div ng-show="record.updatedBy && record.updatedOn != record.createdOn">
               <a style="color:#666" href="mailto:{{record.updatedBy.email}}"><strong>{{record.updatedBy.firstName}} {{record.updatedBy.lastName}}</strong> </a>
-              <span style="font-size:10px;white-space:nowrap;">{{record.updatedOn | formatDate:"D MMMM YYYY h:mm a (Z)" }}</span>
+              <span style="font-size:10px;white-space:nowrap;">{{record.updatedOn | formatDateWithTime }}</span>
               </div>
               &nbsp;
           </div> <!-- end col glyphicon glyphicon-lock -->

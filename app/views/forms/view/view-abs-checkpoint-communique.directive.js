@@ -28,7 +28,7 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 			//
 			//====================
 			$scope.display = function(field) {
-				
+
 				if(!$scope.hide) return true; //show all fields
 
 				return( $scope.hide.indexOf(field) >= 0 ? false : true);
@@ -64,15 +64,15 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 			//====================
 			//
 			//====================
-			$scope.$watch("document.checkpoint", function ()
-			{
-				if ($scope.document) {
-					$scope.checkpoint = angular.fromJson(angular.toJson($scope.document.checkpoint));
-
-					if ($scope.checkpoint)
-						$scope.loadReference($scope.checkpoint);
-				}
-			});
+			// $scope.$watch("document.checkpoint", function ()
+			// {
+			// 	if ($scope.document) {
+			// 		$scope.checkpoint = angular.fromJson(angular.toJson($scope.document.checkpoint));
+			//
+			// 		if ($scope.checkpoint)
+			// 			$scope.loadReference($scope.checkpoint);
+			// 	}
+			// });
 
 			//====================
 			//

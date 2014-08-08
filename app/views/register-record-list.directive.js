@@ -200,6 +200,9 @@ app.directive("registerRecordList", ["$timeout", "commonjs","bootbox", "authHttp
 		            $http.get("/api/v2013/documents/"+item.identifier + "?info").then(function (result) {
 		                item.data.info = result.data;
 		            });
+					// if(item.type='absPermit'){
+					// 	console.log($scope.records);
+					// }
 
 		        });
 				//href="/database/record?documentID={{record.documentID}}"
