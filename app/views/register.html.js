@@ -415,7 +415,7 @@ define(['app',
       $timeout(function() {
         if($rootScope.next_url){
 		   var url = $rootScope.next_url.replace($location.$$protocol + '://' +
-		             $location.$$host + ($location.$$port? ':' + $location.$$port : '') + '/', '')
+		             $location.$$host + ($location.$$host != 'absch.cbd.int' ? ':' + $location.$$port : '') + '/', '')
           $timeout(function(){$location.path(url);},1)}
         else{
           $timeout(function(){$location.path('/register/'+$scope.document_type);},1);}
