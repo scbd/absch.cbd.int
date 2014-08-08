@@ -16,7 +16,7 @@
                         <div class="row-fluid text-row km-value" ng-repeat="document in documents | orderBy:document.createdOn">
 <!-- data-toggle="tooltip" data-placement="top" -->
                         	<div class="col-xs-3"><a
-								ng-href="record?documentID=ABSCH-{{document.body.government.identifier}}-{{document.documentID}}&revision={{document.revision}}">
+								ng-href="/database/record?documentID=ABSCH-{{document.body.government.identifier}}-{{document.documentID}}&revision={{document.revision}}">
 								 <i class="fa fa-folder-open-o" style="cursor:pointer"
 								 title="View this version" ></i></a> <i ng-show="$first" class="fa fa-star" style="color:#f0ad4e;"></i> <strong>{{document.createdOn |formatDateWithTime}}</strong></div>
                             <div class="col-xs-2" >

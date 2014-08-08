@@ -402,16 +402,30 @@ define(['app',
 
 	  if($scope.showingFeedback)
 		return;
+	  if($scope.documentInvalid){
+		$scope.documentInvalid = false;
+		return;
+	  }
+
       evt.stopPropagation();
       $scope.editing = false;
       $scope.msg = "Your record has been closed without saving.";
+
+
       $timeout(function() {
-        if($rootScope.next_url)
-          $window.location.href = $rootScope.next_url;
-        else
-          $window.location.href = '/register/'+$scope.document_type;
+        if($rootScope.next_url){
+		   var url = $rootScope.next_url.replace($location.$$protocol + '://' +
+		             $location.$$host + ($location.$$port? ':' + $location.$$port : '') + '/', '')
+          $timeout(function(){$location.path(url);},1)}
+        else{
+          $timeout(function(){$location.path('/register/'+$scope.document_type);},1);}
       }, 500);
 
+    });
+
+    $scope.$on("documentInvalid", function(evt, invalidDocument) {
+
+	  $scope.documentInvalid = true;
     });
 
     //============================================================
@@ -426,8 +440,7 @@ define(['app',
 	  $scope.showingFeedback = true;
 	  bootbox.alert('Your record has been saved as a draft.', function(){
 		    $scope.showingFeedback = false;
-			//$location.path()
-      		$window.location.href = '/register/'+$scope.document_type;
+			$timeout(function(){$location.path('/register/'+$scope.document_type);},1);
 	  });
       //$scope.msg = "Your record has been saved as a draft.";
     });
@@ -446,7 +459,7 @@ define(['app',
 	  $scope.showingFeedback = true;
 	  bootbox.alert('Record saved. A publishing request has been sent to your Publishing Authority.', function(){
 		    $scope.showingFeedback = false;
-			$window.location.href = '/register/'+$scope.document_type;
+			$timeout(function(){$location.path('/register/'+$scope.document_type);},1);
 	  });
       //$timeout(function() { $location.path('/register/'+$scope.document_type); }, 500);
 
@@ -466,7 +479,7 @@ define(['app',
 	  $scope.showingFeedback = true;
 	  bootbox.alert('Record published.', function(){
 		    $scope.showingFeedback = false;
-			$window.location.href = '/register/'+$scope.document_type;
+			$timeout(function(){$location.path('/register/'+$scope.document_type);},1);
 	  });
       //$timeout(function() { $location.path('/register/'+$scope.document_type); }, 500);
     });
