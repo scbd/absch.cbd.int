@@ -378,10 +378,16 @@ define([
       }, 2000);
     });
     $rootScope.$on('$includeContentLoaded', function(event) {
-      if($('#dialogCancel').length != 0)
+
+      if($('#dialogCancel').length != 0){
         attachEvents();
+        $('input').change(function() {
+          $(this).closest('form').addClass('dirty');
+        });
+      }
     });
     function confirmLeaving(evt, next, current) {
+
       if(consideringClosing || $('form').filter('.dirty').length == 0)
         return;
 
