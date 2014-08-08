@@ -256,7 +256,7 @@ app.directive("registerRecordList", ["$timeout", "commonjs","bootbox", "authHttp
 					$scope.$emit("documentDuplicated", draftInfo)
 					//$scope.records.push(draftInfo);
 					$timeout(function(){
-						shake("#record0");//.effect( "shake" );
+						shake("#record" + draftInfo.identifier);//.effect( "shake" );
 					},500)
 
 
@@ -273,6 +273,11 @@ app.directive("registerRecordList", ["$timeout", "commonjs","bootbox", "authHttp
  					$scope.recordToDuplicate = null;
 				});
 			};
+
+			$scope.$on('shakeUpdatedRecord', function(evt, document){
+				//console.log(document);
+				shake("#record" + document.identifier);
+			});
 
 			function shake(div){
 				var interval=100,distance=20,times=10

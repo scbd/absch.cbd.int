@@ -442,6 +442,7 @@ define(['app',
 		    $scope.showingFeedback = false;
 			$timeout(function(){$location.path('/register/'+$scope.document_type);},1);
 	  });
+	  $rootScope.updatedRecord = draftInfo;
       //$scope.msg = "Your record has been saved as a draft.";
     });
 
@@ -461,6 +462,7 @@ define(['app',
 		    $scope.showingFeedback = false;
 			$timeout(function(){$location.path('/register/'+$scope.document_type);},1);
 	  });
+	  $rootScope.updatedRecord = workflowInfo;
       //$timeout(function() { $location.path('/register/'+$scope.document_type); }, 500);
 
     });
@@ -481,6 +483,7 @@ define(['app',
 		    $scope.showingFeedback = false;
 			$timeout(function(){$location.path('/register/'+$scope.document_type);},1);
 	  });
+	  $rootScope.updatedRecord = documentInfo;
       //$timeout(function() { $location.path('/register/'+$scope.document_type); }, 500);
     });
 
@@ -546,6 +549,14 @@ define(['app',
     	$timeout(function(){
 			$(".card").toggleClass("flipped");
 		}, 500);
+
+		if($rootScope.updatedRecord){
+			$timeout(function(){
+				//console.log($rootScope.updatedRecord);
+				$scope.$broadcast('shakeUpdatedRecord',$rootScope.updatedRecord);
+				$rootScope.updatedRecord = null;
+			},1000);
+		}
 	}
 
 	function updateFacets(doc, newRec){
