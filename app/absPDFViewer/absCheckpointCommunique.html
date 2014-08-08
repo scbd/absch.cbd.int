@@ -117,7 +117,10 @@
         					<div class="text">
         						<ul>
         							<li ng-repeat="permit in document.permit">
-        								<a href="http://localhost:2010/database/record?documentSchema=ABSPERMIT&documentID={{permit | lstring:locale}}">{{permit | lstring:locale}}</a>
+        								<a href="/database/record?documentSchema=ABSPERMIT&documentID={{permit | lstring:locale}}">
+											{{permit | lstring:locale}}
+											ABSCH-IRCC-{{permit}}
+											</a>
         							</li>
         						</ul>
         					</div>
@@ -141,7 +144,7 @@
         						</div>
         					</div>
     					</div>
-    					<div ng-show="responsibleAuthority"class="row" >
+    					<div ng-show="responsibleAuthority" class="row" >
                             <div class="col-xs-12">
     						<label>Person or entity who granted prior informed consent</label>
     						<div class="text">
@@ -149,13 +152,13 @@
     						</div>
     				</div>
     					</div>
-    					<div ng-show="document.subjectMatter"class="row" >
+    					<div ng-show="document.subjectMatter" class="row" >
                             <div class="col-xs-12">
     						<label>Subject-matter or genetic resources relevant to the information collected or received</label>
     						<div class="text km-pre">{{document.subjectMatter | lstring:locale}}</div>
     				</div>
     					</div>
-    					<div ng-show="document.specimen || document.taxonomy || document.gisFiles"class="row" >
+    					<div ng-show="document.specimen || document.taxonomy || document.gisFiles" class="row" >
                             <div class="col-xs-12">
     						<label>Optional additional subject-matter details</label>
     						<div ng-show="document.specimen">
@@ -170,7 +173,7 @@
                             </div>
     				</div>
     						</div>
-    						<div ng-show="document.taxonomy"class="row" >
+    						<div ng-show="document.taxonomy" class="row" >
                             <div class="col-xs-12">
     							<label>Taxonomy data</label>
     							<div class="text">
@@ -183,7 +186,7 @@
     							</div>
     				</div>
     						</div>
-    						<div ng-show="document.gisFiles"class="row" >
+    						<div ng-show="document.gisFiles" class="row" >
                             <div class="col-xs-12">
     							<label>Geographic coordinates</label>
     							<div class="text">
@@ -198,21 +201,21 @@
     				</div>
     						</div>
     					</div>
-    					<div ng-show="document.referenceOfInformedConsent"class="row" >
+    					<div ng-show="document.referenceOfInformedConsent" class="row" >
                             <div class="col-xs-12">
     						<label>Reference or evidence of prior informed consent</label>
     						<div class="text km-pre">{{document.referenceOfInformedConsent | lstring:locale}}</div>
     				</div>
     					</div>
 
-    					<div ng-show="document.referenceOfAgreedTerms"class="row" >
+    					<div ng-show="document.referenceOfAgreedTerms" class="row" >
                             <div class="col-xs-12">
     						<label>Reference or evidence of establishment of mutually agreed terms</label>
     						<div class="text km-pre">{{document.referenceOfAgreedTerms | lstring:locale}}</div>
     				</div>
     					</div>
 
-    					<div ng-show="document.personeToWhomGranted"class="row" >
+    					<div ng-show="document.personeToWhomGranted" class="row" >
                             <div class="col-xs-12">
     						<label>Person or entity to whom prior informed consent was granted</label>
     						<div class="text">

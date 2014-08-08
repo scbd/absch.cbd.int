@@ -44,7 +44,9 @@
 					<div class="km-value">
 						<ul>
 							<li ng-repeat="permit in document.permit">
-								<a href="http://localhost:2010/database/record?documentSchema=ABSPERMIT&documentID={{permit | lstring:locale}}">{{permit | lstring:locale}}</a>
+								<a href="/database/record?documentSchema=ABSPERMIT&documentID={{permit | lstring:locale}}">
+                                    <!-- TODO: add the proper UID: ABSCH-IRCC-DocID-Revision  -->
+                                    ABSCH-IRCC-{{permit | lstring:locale}}</a>
 							</li>
 						</ul>
 
@@ -185,7 +187,7 @@
 
             <div class="row" style="padding-top:10px;" ng-show="document.info.revision">
                 <div class="col-xs-12">
-                    <label>Amendment history</label>
+                    <label>Record history</label>
                     <div view-certificate document-id="document.header.identifier" load-documents="true"
                     government="document.government.identifier"></div>
                 </div>
