@@ -119,8 +119,13 @@ app.directive("registerRecordList", ["$timeout", "commonjs","bootbox", "authHttp
 				$scope.loading = true;
 
 				return $q.when(storage.documents.delete(record.identifier)).then(function(){
-					$scope.$emit("documentDeleted", record);
-					$scope.recordToDelete = null;
+					//alert($("#record" + record.identifier));
+						// $("#record" + record.identifier).toggle('Explode');
+						//
+						// $timeout(function(){
+							$scope.$emit("documentDeleted", record);
+							$scope.recordToDelete = null;
+						// },1500);
 
 				}).finally(function(){
 					delete $scope.loading
@@ -276,7 +281,9 @@ app.directive("registerRecordList", ["$timeout", "commonjs","bootbox", "authHttp
 
 			$scope.$on('shakeUpdatedRecord', function(evt, document){
 				//console.log(document);
+				//$("#record" + document.identifier).toggle('toggleUpdated',1000);
 				shake("#record" + document.identifier);
+				//$("#record" + document.identifier).toggle('explode',{},500);
 			});
 
 			function shake(div){
