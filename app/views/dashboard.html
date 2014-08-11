@@ -79,16 +79,15 @@
       </div>
       <div class="row" id="dashboard_panels">
 
-           <div class="col-lg-4" ng-show="compareRoles(user.roles, PAroles)">
-            <div class="panel panel-danger">
+           <div class="col-lg-4" ng-show="compareRoles(user.roles, PAroles)" >
+            <div class="panel" ng-class="{'greyout': !urgentAttentionCount,  'panel-danger': urgentAttentionCount  }">
               <div class="panel-heading">
                 <div class="row">
-                  <div class="col-xs-6">
+                  <div class="col-xs-4">
                     <i class="fa fa-exclamation-circle fa-5x"></i>
                   </div>
-                  <div class="col-xs-6 text-right">
-                    <p class="announcement-heading">{{urgentAttentionCount}}</p>
-                    <p class="announcement-text">New <br>requests</p>
+                  <div class="col-xs-8">
+                    <h2 style="padding-top:7px;">New requests</h2>
                   </div>
                 </div>
               </div>
@@ -99,7 +98,7 @@
                       View new requests
                     </div>
                     <div class="col-xs-6 text-right">
-                      <i class="fa fa-arrow-circle-right"></i>
+                      <span class="label label-danger" ng-show="urgentAttentionCount">{{urgentAttentionCount}}</span>
                     </div>
                   </div>
                 </div>
@@ -107,16 +106,15 @@
             </div>
           </div>
 
-          <div class="col-lg-4">
-            <div class="panel panel-warning">
+          <div class="col-lg-4" >
+            <div class="panel" ng-class="{'greyout': !pendingCount,  'panel-warning': pendingCount  }">
               <div class="panel-heading">
                 <div class="row">
-                  <div class="col-xs-6">
+                  <div class="col-xs-4">
                     <i class="fa fa-clock-o  fa-5x"></i>
                   </div>
-                  <div class="col-xs-6 text-right">
-                    <p class="announcement-heading">{{pendingCount}}</p>
-                    <p class="announcement-text">Pending requests</p>
+                  <div class="col-xs-8">
+                    <h2 style="padding-top:7px;">Pending requests</h2>
                   </div>
                 </div>
               </div>
@@ -127,7 +125,7 @@
                       View pending requests
                     </div>
                     <div class="col-xs-2 text-right">
-                      <i class="fa fa-arrow-circle-right"></i>
+                      <span class="label label-warning" ng-show="pendingCount">{{pendingCount}}</span>
                     </div>
                   </div>
                 </div>
@@ -136,15 +134,14 @@
           </div>
 
           <div class="col-lg-4">
-            <div class="panel panel-success">
+            <div class="panel "  ng-class="{'greyout': !completedRequestCount,  'panel-success': completedRequestCount  }">
               <div class="panel-heading">
                 <div class="row">
-                  <div class="col-xs-6">
+                  <div class="col-xs-4">
                     <i class="fa fa-check-square fa-5x"></i>
                   </div>
-                  <div class="col-xs-6 text-right">
-                    <p class="announcement-heading">{{completedRequestCount}}</p>
-                    <p class="announcement-text">Completed requests</p>
+                  <div class="col-xs-8">
+                    <h2  style="padding-top:7px;">Completed requests</h2>
                   </div>
                 </div>
               </div>
@@ -155,7 +152,7 @@
                       View completed requests
                     </div>
                     <div class="col-xs-2 text-right">
-                      <i class="fa fa-arrow-circle-right"></i>
+                      <span class="label label-warning" ng-show="completedRequestCount">{{completedRequestCount}}</span>
                     </div>
                   </div>
                 </div>

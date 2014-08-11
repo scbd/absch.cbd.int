@@ -1,3 +1,12 @@
+.greyout{
+	background-color:#eee;
+	color:#ddd;
+}
+.greyout > a{
+	background-color:#eee;
+	color:#ddd;
+}
+
 .activityfeed-time{
 
 	/*font-weight:bold;*/
