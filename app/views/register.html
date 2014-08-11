@@ -21,7 +21,7 @@
                     <span class="flip pull-right">
                         <span class=" card">
                             <span class="face front">
-                                <span  class="label label-danger">{{facets('urgentTasks','request')}}</span>
+                                <span  class="label label-danger" ng-show="facets('urgentTasks','request')>0" >{{facets('urgentTasks','request')}}</span>
                             </span>
                         </span>
                     </span>
@@ -32,7 +32,7 @@
                     <span class="flip pull-right ">
                       <span class=" card">
                         <span class="face front">
-                            <span  class="label label-default">{{facets('pendingTasks','request')}}</span>
+                            <span  class="label label-default" ng-show="facets('pendingTasks','request')>0" >{{facets('pendingTasks','request')}}</span>
                         </span>
                     </span>
                   </span>
@@ -42,7 +42,7 @@
                     <span class="flip pull-right ">
                       <span class=" card">
                         <span class="face front">
-                            <span  class="label label-success">{{facets('completedTasks','request')}}</span>
+                            <span  class="label label-success" ng-show="facets('completedTasks','request')>0">{{facets('completedTasks','request')}}</span>
                         </span>
                         </span>
                     </span>
