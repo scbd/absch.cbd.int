@@ -1,7 +1,7 @@
 ﻿<div class="col-xs-9" style="padding-top:20px;" ng-controller="editAbsCheckpoint">
 
   <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
-  
+
   <div class="registerpage-content">
 
     <div ng-show="msg" class="alert alert-success alert-dismissable">
@@ -20,6 +20,7 @@
 
     <div ng-show="!isLoading() && status!='hidden'">
 
+        <div workflow-std-buttons document="getCleanDocument()"/>
         <div class="row">
             <div class="col-xs-12">
                 <ul class="pagination">
@@ -49,7 +50,7 @@
                         </div>
                     </div>
 
-                 
+
                 </div>
                 <div class="row">
                     <div class="col-xs-12">

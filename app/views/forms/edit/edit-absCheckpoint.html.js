@@ -1,4 +1,4 @@
-define(['app', '/app/views/forms/edit/edit.js'], function (app) {
+define(['app', '/app/views/forms/edit/edit.js', '/app/views/directives/workflow-std-buttons.html.js'], function (app) {
 
   app.controller("editAbsCheckpoint", ["$scope", "authHttp", "$filter", "$q", "$routeParams", "$controller", function ($scope, $http, $filter, $q, $routeParams, $controller) {
     $controller('editController', {$scope: $scope});
@@ -6,7 +6,7 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
     _.extend($scope.options, {
       jurisdictions : function () {
         return $q.all([
-          $http.get("/api/v2013/thesaurus/domains/D7BD5BDE-A6B9-4261-B788-16839CCC4F7E/terms", { cache: true }), 
+          $http.get("/api/v2013/thesaurus/domains/D7BD5BDE-A6B9-4261-B788-16839CCC4F7E/terms", { cache: true }),
           $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED", { cache: true })
         ]).then(function(o) {
           var jurisdictions = o[0].data;

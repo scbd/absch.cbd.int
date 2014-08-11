@@ -1,0 +1,110 @@
+<div>
+<style type="text/css">
+    /*progressbar*/
+    #progressbar {
+    	margin-bottom: 30px;
+    	overflow: hidden;
+    	/*CSS counters to number the steps*/
+    	counter-reset: step;
+    }
+    #progressbar li {
+    	list-style-type: none;
+    	color: white;
+    	text-transform: uppercase;
+    	font-size: 9px;
+    	width: 18.33%;
+    	float: left;
+    	position: relative;
+        text-align: center;
+        z-index:1;
+        padding-right: 19px;
+        /*a {
+             text-decoration: none;
+             display: block;
+             width: 100%;
+             height: 100%;
+        }*/
+    }
+    /*#progressbar li:hover {
+        cursor:pointer;
+    }*/
+    #progressbar li:before {
+    	content: counter(step);
+    	counter-increment: step;
+    	width: 20px;
+    	line-height: 20px;
+    	display: block;
+    	font-size: 10px;
+    	color: #333;
+    	background: white;
+    	border-radius: 3px;
+    	margin: 0 auto 5px auto;
+        z-index:-1;
+    }
+    /*progressbar connectors*/
+    #progressbar li:after {
+    	content: '';
+    	width: 100%;
+    	height: 2px;
+    	background: white;
+    	position: absolute;
+    	left: -50%;
+    	top: 9px;
+    	z-index: -1; /*put it behind the numbers*/
+    }
+    #progressbar li:first-child:after {
+    	/*connector not needed before the first step*/
+    	/*content: none;*/
+    }
+    /*marking active/completed steps green*/
+    /*The number of the step and the connector before it = green*/
+    #progressbar li.active:before,  #progressbar li.active:after{
+    	background: #27AE60;
+    	color: white;
+    }
+    #progressbar li a{
+        color: white;
+        font-size: small;
+    }
+    .rowbg{
+        padding-top: 30px;
+        background-color: #4e5b70;
+        padding-bottom: 1px;
+    }
+    .colbg{
+        padding-bottom: 2px;
+        max-height: 60px;
+    }
+    </style>
+
+    <div class="row rowbg">
+        <div class="col-xs-12 colbg">
+            <ul id="progressbar">
+                <li class="active" id="stepedit">
+                    <a ng-href="#" ng-click="tab='edit'">Submission form</a>
+                </li>
+                <li ng-class="{ active  : tab=='review' }" id="stepreview">
+                    <a ng-href="#" ng-click="tab='review'">Review</a>
+                </li>
+        		<li ng-show="security.canSaveDraft" id="stepdraft">
+                    <a ng-href="#" ng-click="tab='draft';saveDraft()" >Save as draft</a>
+                </li>
+                <li ng-show="security.canSave" id="steppublish">
+                    <a ng-href="#" ng-click="tab='publish';publish()">Save and publish</a>
+                </li>
+        		<li id="steppublishRequest"
+                    ng-show="security.canSave!==undefined && (!security.canSave && security.canSaveDraft)">
+                    <a ng-href="#"ng-click="tab='publishRequest';publishRequest()">Save and request publication</a>
+                </li>
+                <li  id="prg3" ng-show="loading || security==undefined">
+                    <span ng-show="security==undefined">Loading access controls</span>
+                    <span ng-show="tab=='review' && loading">Validating</span>
+                    <span ng-show="tab=='draft' && loading">Saving draft</span>
+                    <span ng-show="tab=='publishRequest' && loading">Requesting for publication</span>
+                    <span ng-show="tab=='publish' && loading">Publishing</span>
+                    <i ng-show="loading || security==undefined" class="fa fa-spinner fa-spin"></i>
+                </li>
+        	</ul>
+        </div>
+    </div>
+</div>
