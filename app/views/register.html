@@ -61,23 +61,27 @@
                         <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : document_type==type ,'btn-commonformat-reference-selected' : document_type=='resource' && document_type==type}">
                           <div class="btn-commonformat-national">{{document_types[type].abbreviation}}
 
-                            <!-- <div class="flip pull-right ">
-                                <div class=" card">
-                                    <div class="face front"style="padding-right:10px"> -->
-                                        <div ng-show="facets(type,'draft') > 0" class="pull-right label label-default">
-                                      {{facets(type,'draft')}}</div>
-                                  <!-- </div>
-                                  <div class="face front"style="padding-right:10px"> -->
-                                                <div ng-show="facets(type,'publish') > 0" class="pull-right label label-success">
-                                      {{facets(type,'publish')}}</div>
-                                  <!-- </div>
-                                 <div class="face front"style="padding-right:10px"> -->
-                                                <div ng-show="facets(type,'request') > 0" class="pull-right label label-danger">
-                                      {{facets(type,'request')}}</div>
-                                  <!-- </div>
-                              </div>
-                          </div> -->
-
+                            <div class="flip pull-right">
+                                <div class="card">
+                                    <div class="face front">
+                                        <div ng-show="facets(type,'draft') > 0" class="label label-default">{{facets(type,'draft')}}</div>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="flip pull-right">
+                                <div class="card">
+                                    <div class="face front">
+                                        <div ng-show="facets(type,'publish') > 0" class="label label-success">{{facets(type,'publish')}}</div>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="flip pull-right">
+                                <div class="card">
+                                    <div class="face front">
+                                        <div ng-show="facets(type,'request') > 0" class="label label-danger">{{facets(type,'request')}}</div>
+                                    </div>
+                                </div>
+                            </div>
                           </div>
                           <span class="btn-commonformat-name">{{document_types[type].title}}</span>
                         </div>
