@@ -126,7 +126,7 @@ define(["app"], function (app) {
       };
     });
 
-    app.filter("uniqueID", ["IStorage", '$filter', function(storage, $filter) {
+    app.filter("uniqueID", ["IStorage", '$filter', '$q', function(storage, $filter, $q) {
 		var cacheMap = {};
 
 		return function(term) {
@@ -134,16 +134,33 @@ define(["app"], function (app) {
 			if(!term)
 				return "";
 
-			if(term && angular.isString(term))
-				term = { identifier : term };
+            var document;
+
+			if(term && angular.isString(term)){
+                
+                term = { identifier : term };
+                document = storage.documents.get(term.identifier, {info:true})
+
+            }
+            else if(term && angular.isObject(term)){
+
+                document = term;
+                term = { identifier : term.identifier + '-' + document.revision};
+
+            }
+
+    		if(cacheMap[term.identifier])
+    			return cacheMap[term.identifier] ;
 
 
-			if(cacheMap[term.identifier])
-				return cacheMap[term.identifier] ;
 
-			cacheMap[term.identifier] = storage.documents.get(term.identifier, {info:true}).then(function(document) {
-                document = document.data;
-                var unique = 'ABSCH-' + //$filter("schemaShortName")($filter("lowercase")(document.type)) + '-' +
+			cacheMap[term.identifier] = $q.when(document).then(function(document) {
+                if(document.data)
+                    document = document.data;
+                else
+                    document = document;
+
+                var unique = 'ABSCH-' + $filter("schemaShortName")($filter("lowercase")(document.type)) + '-' +
                         document.documentID + '-' + document.revision;
 				cacheMap[term.identifier] = unique;
 

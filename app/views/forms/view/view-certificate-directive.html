@@ -32,15 +32,16 @@
 
 								 <a ng-href="/database/record?documentID={{document.documentID}}&revision={{document.revision}}">
 
-									<span>ABSCH-{{document.body.header.schema | lowercase | schemaShortName}}-{{document.documentID}}-{{document.revision}}</span>
+									<span>{{document | uniqueID}}</span>
 
 								</a>
 
                             </div>
 							<div class="col-xs-2" ng-show="showFile">
-                                <a type="button" target="_blank"  ng-href="https://s3.amazonaws.com/absch.documents/ABSCH-{{document.body.government.identifier}}-{{document.documentID}}-{{document.revision}}.pdf">
+                                <a type="button" target="_blank"  ng-href="https://s3.amazonaws.com/absch.documents/{{document | uniqueID}}.pdf">
                                 <i class="fa fa-file-o"></i>
-                                	<span>ABSCH-{{document.body.header.schema | lowercase | schemaShortName}}-{{document.documentID}}-{{document.revision}}</span>
+                                	 <span>{{document | uniqueID}}</span>
+									<!-- ABSCH-{{document.body.header.schema | lowercase | schemaShortName}}-{{document.documentID}}-{{document.revision}} -->
 								</a>
 
                             </div>

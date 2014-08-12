@@ -62,7 +62,7 @@
     	background: #27AE60;
     	color: white;
     }
-    #progressbar li a{
+    #progressbar li a,#progressbar li span{
         color: white;
         font-size: small;
     }
@@ -80,21 +80,29 @@
     <div class="row rowbg">
         <div class="col-xs-12 colbg">
             <ul id="progressbar">
-                <li class="active" id="stepedit">
-                    <a ng-href="#" ng-click="tab='edit'">Submission form</a>
+                <!-- class="fa fa-database"
+                class="fa fa-eye-slash"class="fa fa-suitcase"class="fa fa-trophy"class="fa fa-suitcase"
+                -->
+                <li class="active" id="stepedit" >
+                    <span ng-show="loading">Submission form</span>
+                    <a ng-show="!loading" ng-href="#" ng-click="tab='edit'"ng-disabled="loading">Submission form</a>
                 </li>
-                <li ng-class="{ active  : tab=='review' }" id="stepreview">
-                    <a ng-href="#" ng-click="tab='review'">Review</a>
+                <li ng-class="{ active  : tab=='review' }" id="stepreview" >
+                    <span ng-show="loading">Review</span>
+                    <a ng-show="!loading" ng-href="#" ng-click="tab='review'"ng-disabled="loading">Review</a>
                 </li>
-        		<li ng-show="security.canSaveDraft" id="stepdraft">
-                    <a ng-href="#" ng-click="tab='draft';saveDraft()" >Save as draft</a>
+        		<li ng-show="security.canSaveDraft" id="stepdraft" >
+                    <span ng-show="loading">Save as draft</span>
+                    <a ng-show="!loading" ng-href="#" ng-click="tab='draft';saveDraft()" ng-disabled="loading">Save as draft</a>
                 </li>
-                <li ng-show="security.canSave" id="steppublish">
-                    <a ng-href="#" ng-click="tab='publish';publish()">Save and publish</a>
+                <li ng-show="security.canSave" id="steppublish" >
+                    <span ng-show="loading">Save and publish</span>
+                    <a ng-show="!loading" ng-href="#" ng-click="tab='publish';publish()"ng-disabled="loading">Save and publish</a>
                 </li>
         		<li id="steppublishRequest"
                     ng-show="security.canSave!==undefined && (!security.canSave && security.canSaveDraft)">
-                    <a ng-href="#"ng-click="tab='publishRequest';publishRequest()">Save and request publication</a>
+                    <span ng-show="loading">Save and request publication</span>
+                    <a ng-show="!loading" ng-href="#"ng-click="tab='publishRequest';publishRequest()"ng-disabled="loading">Save and request publication</a>
                 </li>
                 <li  id="prg3" ng-show="loading || security==undefined">
                     <span ng-show="security==undefined">Loading access controls</span>

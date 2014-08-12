@@ -27,7 +27,10 @@
 			<div>
 					<label class="record-metadata-label">Record identifier:</label>
 					<span class="record-metadata-text"><a href="/database/record?documentID={{document.header.identifier}}&documentSchema={{document.header.schema | uppercase}}">
-				 	<span>ABSCH-{{document.header.schema | lowercase | schemaShortName}}-{{document.info.documentID ?  document.info.documentID : (document.header.identifier ? document.header.identifier : document.symbol_s)}}{{document.info.revision ? "-"+document.info.revision : ""}}</span>
+				 	<span>{{document.info | uniqueID }}</span>
+						<!-- ABSCH-{{document.header.schema | lowercase | schemaShortName}}-{{document.info.documentID ?  document.info.documentID :
+						(document.header.identifier ? document.header.identifier : document.symbol_s)}}{{document.info.revision ?
+						"-"+document.info.revision : ""}} -->
 
 					</a> </span>
 			</div>
