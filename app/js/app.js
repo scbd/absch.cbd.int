@@ -5,7 +5,7 @@ define([/*'angular', 'angular-route', 'angular-cookies', */], function () {
   //TODO: reevaluate what is actually needed. Ie. I don't think we still need drag and drop here.
 	var app = require('angular').module('app', ['ngRoute', 'ngCookies','chieffancypants.loadingBar', 'ngAnimate','dragAndDrop', 'ngSanitize', 'angular-intro', 'formControls',]);
 
-	app.config(['$controllerProvider', '$compileProvider', '$provide', '$filterProvider', 
+	app.config(['$controllerProvider', '$compileProvider', '$provide', '$filterProvider',
 		function($controllerProvider, $compileProvider, $provide, $filterProvider) {
 		 // console.log($routeProvider);
 		//app.controllerProvider = $controllerProvider;
@@ -50,7 +50,7 @@ define([/*'angular', 'angular-route', 'angular-cookies', */], function () {
 
 			if(lazyCache[key])
 				console.log('Already defined: '+key);
-			
+
 			return lazyCache[key];
 		}
 
@@ -60,7 +60,7 @@ define([/*'angular', 'angular-route', 'angular-cookies', */], function () {
 
 			if(lazyCache[key])
 				throw 'Cannot cache: Already defined: '+key;
-			
+
 			lazyCache[key] = { data : data };
 
 			return lazyCache[key];
@@ -68,12 +68,13 @@ define([/*'angular', 'angular-route', 'angular-cookies', */], function () {
 
 	}]);
 
-  app.run(function($rootScope) {
+  app.run(function($rootScope, $location) {
     $rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
       //padding route attributes to the rootscope
-      if(current.$$route.subTemplateUrl)
+      if(current.$$route && current.$$route.subTemplateUrl)
         $rootScope.subTemplateUrl = current.$$route.subTemplateUrl;
     });
+
   });
 
 	return app;

@@ -10,7 +10,6 @@ define([
     '/app/views/forms/view/record-loader.directive.html.js',
     '/app/views/forms/view/view-organization.directive.js',
     '/app/views/forms/view/view-organization-reference.directive.js',
-    '/app/views/forms/view/view-certificate-directive.html.js',
     '/app/views/forms/view/view-history-directive.html.js',
   ], function (app) {
 
@@ -361,8 +360,8 @@ define([
     //TODO: burn angular... essentially the issue is that this function is called once the ng-include finished with the form html, but that form html still needs to be parsed and the directives still need to load THEIR templates, so those inputs aren't in the form yet... hence while change isn't triggering.
     var attachEvents = _.once(function() {
       $timeout(function() {
-        $('input').change(function() {
-          $(this).closest('form').addClass('dirty');
+        $('#editForm input').change(function() {
+          $('#editForm').addClass('dirty');
         });
         $('#dialogCancel').find('.closeWithoutSaving').click(function() {
           consideringClosing = true;
@@ -382,9 +381,10 @@ define([
 
       if($('#dialogCancel').length != 0){
         attachEvents();
-        $('input').change(function() {
-          $(this).closest('form').addClass('dirty');
-        });
+        //console.log($('#editForm'))
+        // $('#editForm input').change(function() {    console.log(this);
+        //   $('#editForm').addClass('dirty');
+        // });
       }
     });
     function confirmLeaving(evt, next, current) {

@@ -5,7 +5,7 @@ define(['app'], function(app){
 			this.getReferenceRecordIndex = function(schema,documentId){
 
 				var item = [];
-				var queryFields = 'fl=identifier_s,schema_s,createdDate_dt,createdByEmail_s,createdBy_s,updatedDate_dt,updatedByEmail_s,updatedBy_s,url_ss,';
+				var queryFields = 'fl=id,identifier_s,schema_s,createdDate_dt,createdByEmail_s,createdBy_s,updatedDate_dt,updatedByEmail_s,updatedBy_s,url_ss,';
 
 				if(schema.toUpperCase()=="FOCALPOINT"){
 				  queryFields += 'description_EN_t,government_EN_t,organization_EN_t,function_EN_t,department_EN_t,title_EN_t,treaty_CEN_ss,type_CEN_ss,email_s,telephone_s';

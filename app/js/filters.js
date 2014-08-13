@@ -137,22 +137,39 @@ define(["app"], function (app) {
             var document;
 
 			if(term && angular.isString(term)){
-                
+
                 term = { identifier : term };
+    		    if(cacheMap[term.identifier])
+    			     return cacheMap[term.identifier] ;
+
                 document = storage.documents.get(term.identifier, {info:true})
 
             }
             else if(term && angular.isObject(term)){
 
-                document = term;
-                term = { identifier : term.identifier + '-' + document.revision};
+                document = term.info && term.info.metadata ? term.info : term;
 
+                var revision = ''
+                if(document.revision)
+                    revision = '-' + document.revision;
+                var identifier = '';
+                if(term.identifier)
+                    identifier = term.identifier;
+                else if(document.identifier)
+                    identifier = document.identifier;
+                else if(document.data && document.data.identifier)
+                    identifier = document.data.identifier;
+                else if(document.id)
+                    identifier = document.id;
+
+                    if(identifier == '')
+                        return;
+
+                term = { identifier : identifier + revision};
+
+        		if(cacheMap[term.identifier])
+        			return cacheMap[term.identifier] ;
             }
-
-    		if(cacheMap[term.identifier])
-    			return cacheMap[term.identifier] ;
-
-
 
 			cacheMap[term.identifier] = $q.when(document).then(function(document) {
                 if(document.data)
@@ -160,8 +177,25 @@ define(["app"], function (app) {
                 else
                     document = document;
 
+                if(document.schema_s && (document.schema_s.toLowerCase() == "statement" || document.schema_s.toLowerCase() == "notification" ||
+                    document.schema_s.toLowerCase() == "meeting" ||  document.schema_s.toLowerCase() == "pressrelease" ||
+                    document.schema_s.toLowerCase() == "focalpoint")){
+                        cacheMap[term.identifier] = document.identifier_s ? document.identifier_s : document.id;
+                        return cacheMap[term.identifier];
+
+                    }
+
+                var government = ''
+                if(document.government)
+                    government = document.government.identifier;
+                else if(document.metadata.government)
+                    government = document.metadata.government;
+                else if(document.body.government)
+                    government = document.body.government.identifier;
+
                 var unique = 'ABSCH-' + $filter("schemaShortName")($filter("lowercase")(document.type)) + '-' +
-                        document.documentID + '-' + document.revision;
+                        $filter("uppercase")(government) +
+                        '-' + document.documentID + '-' + document.revision;
 				cacheMap[term.identifier] = unique;
 
 				return unique;
@@ -176,7 +210,18 @@ define(["app"], function (app) {
 		};
 	}])
 
+    app.filter("uniqueIDWithoutRevision", ['$filter', function($filter) {
 
+		return function( document ) {
+            var unique = $filter("uniqueID")(document);
+
+            if(angular.isString(unique))
+                return unique.replace('-' + document.revision, '');
+
+            return '';
+
+		};
+	}]);
 	//============================================================
 	//
 	//

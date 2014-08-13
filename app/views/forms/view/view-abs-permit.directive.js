@@ -1,5 +1,4 @@
-define(['app',
-	'/app/views/forms/view/view-certificate-directive.html.js'], function (app) {
+define(['app'], function (app) {
 
 app.directive("viewAbsPermit", [function () {
 

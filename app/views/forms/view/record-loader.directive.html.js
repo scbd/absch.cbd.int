@@ -71,13 +71,16 @@ app.directive('recordLoader', [function () {
 					var documentID = $route.current.params.documentNumber;
 
 				if(documentID && documentID.toLowerCase().indexOf('absch')==0){
-					 var docNum = documentID.substring(9,documentID.length);
-					if(docNum.indexOf('-')>=0){
-						documentID = documentID.toLowerCase().replace('absch','ABSCH');
+					var docNum = documentID.split('-');
+					if(docNum.length ==5){
+						documentID = documentID.toLowerCase();//.replace('absch','ABSCH');
 						window.location.href ="https://s3.amazonaws.com/absch.documents/" + documentID + '.pdf';
+						//window.close();
 						return;
 					}
-					documentID = docNum;
+					if(docNum.length == 4)
+						documentID = docNum[3];
+
 				}
 
 				if(documentSchema && (documentSchema.toUpperCase()=="FOCALPOINT" || documentSchema.toUpperCase()=="MEETING" || documentSchema.toUpperCase()=="NOTIFICATION"
