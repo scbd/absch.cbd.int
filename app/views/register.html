@@ -6,7 +6,7 @@
       <div class="col-xs-3" id="document_type_links" ng-show="user.isAuthenticated">
         <h1>Register Information</h1>
         <div>
-          <h3 ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/dashboard.html'}">
+          <h3 ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/dashboard.html'}"  style="padding:5px; margin:0!important;">
             <a href="/dashboard"  href="#" role="button">
               <i class="glyphicon glyphicon-list-alt" style="position:relative;top:2px;"></i> My Dashboard
             </a>
@@ -14,9 +14,10 @@
 
           <h3>Requests</h3>
 
-          <div style="padding-left:10px">
+
             <span ng-show="compareRoles(user.roles, PAroles)">
-                <a href="/dashboard/pending" ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-tasks.directive.html'}" href="#" role="button">
+                <div class="btn-commonformat"  ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-tasks.directive.html'}" style="padding:5px;margin:3px!important;">
+                <a href="/dashboard/pending"  href="#" role="button">
                     Requests for your approval
                     <span class="flip pull-right">
                         <span class=" card">
@@ -25,9 +26,10 @@
                             </span>
                         </span>
                     </span>
-                </a><br>
+                </a></div>
             </span>
-            <a href="/dashboard/mytasks" ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-pending-tasks.directive.html'}" href="#" role="button">
+            <div class="btn-commonformat"  ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-pending-tasks.directive.html'}" style="padding:5px;margin:3px!important; ">
+            <a href="/dashboard/mytasks"  href="#" role="button">
               Your pending requests
                     <span class="flip pull-right ">
                       <span class=" card">
@@ -36,8 +38,9 @@
                         </span>
                     </span>
                   </span>
-            </a><br>
-             <a href="/dashboard/completed" ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-completed-tasks.directive.html'}" href="#" role="button">
+            </a></div>
+            <div class="btn-commonformat"  ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-completed-tasks.directive.html'}" style="padding:5px;margin:3px!important; ">
+             <a href="/dashboard/completed" href="#" role="button">
               Your completed requests
                     <span class="flip pull-right ">
                       <span class=" card">
@@ -46,9 +49,9 @@
                         </span>
                         </span>
                     </span>
-            </a>
+            </a></div>
 
-          </div>
+
 
 
 
@@ -83,7 +86,7 @@
                                 </div>
                             </div>
                           </div>
-                          <span class="btn-commonformat-name">{{document_types[type].title}}</span>
+                          <div class="btn-commonformat-name" >{{document_types[type].title}}</div>
                         </div>
                     </a>
                 </div>

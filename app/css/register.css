@@ -94,6 +94,7 @@ legend{
 
 .btn-commonformat-name{
 	color:#666;
+	padding-top:5px;
 
 }
 .btn-commonformat-header-national {
@@ -117,18 +118,50 @@ legend{
 	text-align: left;
     line-height: 14px;
     white-space: normal;
-    padding:3px;
+    padding:5px;
     margin-bottom: 20px;
     font-size:14px;
     text-decoration: none;
+
+padding-right:5px!important;
+
+
+ background-color: #fafafa;
+
+
+-webkit-border-radius: 3px;
+-webkit-border-top-left-radius: 0px;
+-webkit-border-bottom-left-radius: 0px;
+-moz-border-radius: 3px;
+-moz-border-radius-topleft: 0px;
+-moz-border-radius-bottomleft: 0px;
+border-radius: 3px;
+border-top-left-radius: 0px;
+border-bottom-left-radius: 0px;
+
 }
 
  .btn-commonformat-selected {
-   border-left:#418BCA solid 3px;
+  	border:0;
+	border-left:#418BCA solid 3px;
+
    color:#111;
    text-decoration: none;
    padding-left:10px;
+   padding-right:10px;
    background-color: #dedede;
+   padding:5px;
+
+
+-webkit-border-radius: 3px;
+-webkit-border-top-left-radius: 0px;
+-webkit-border-bottom-left-radius: 0px;
+-moz-border-radius: 3px;
+-moz-border-radius-topleft: 0px;
+-moz-border-radius-bottomleft: 0px;
+border-radius: 3px;
+border-top-left-radius: 0px;
+border-bottom-left-radius: 0px;
   }
 
  .btn-commonformat-reference-selected {
