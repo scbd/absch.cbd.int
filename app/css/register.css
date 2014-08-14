@@ -126,7 +126,7 @@ legend{
 padding-right:5px!important;
 
 
- background-color: #fafafa;
+ /*background-color: #fafafa;*/
 
 
 -webkit-border-radius: 3px;
@@ -149,7 +149,7 @@ border-bottom-left-radius: 0px;
    text-decoration: none;
    padding-left:10px;
    padding-right:10px;
-   background-color: #dedede;
+   background-color: #FFF;
    padding:5px;
 
 

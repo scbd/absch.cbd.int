@@ -8,7 +8,7 @@
     text-transform: uppercase;
     font-weight: bold;
     color:#287fcb;
-   
+
   }
    #Result .referenceRecord .schema{
     font-size:12px;
@@ -16,7 +16,7 @@
     font-weight: bold;
     color:#FA6938;
     margin-left:18px;
-   
+
   }
   #Result .pubDate{
     font-size:10px;
@@ -29,7 +29,7 @@
     font-size: 14px;
     color:#111;
   }
-  
+
   #Result .description{
     font-size: 11px;
     color:#888;
@@ -52,10 +52,14 @@
 
   #Result .nationalRecord{
 
-  border-left:solid #287fcb 5px;background-color:#D9EDF7;
+  border-left:solid #287fcb 5px;
+  /*background-color:#D9EDF7;*/
+  background-color:#FFF;
 }
 
 #Result .referenceRecord{
 
-  border-left:solid #FA6938 5px;background-color:#FCF8E3;
+  border-left:solid #FA6938 5px;
+  /*background-color:#FCF8E3;*/
+  background-color:#FFF;
 }

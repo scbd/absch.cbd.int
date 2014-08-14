@@ -24,7 +24,7 @@ body{
   font-family: Trebuchet MS, "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-rendering: optimizeLegibility;
   font-size:14px;
-
+background-color:#eee;
 }
 
 h4, h5, h6 {
@@ -99,6 +99,7 @@ h3 {
 	border-bottom:1px solid #ccc;
 	padding-bottom:20px;
 	padding-top: 20px;
+    background-color:#fff;
 }
 .brand h1, img, span{
 	margin:0;
