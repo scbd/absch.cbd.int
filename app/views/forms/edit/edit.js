@@ -346,6 +346,9 @@ define([
         $scope.status = "ready";
         $scope.document = doc;
 
+        $scope.origanalDocument = angular.copy(doc);
+
+
         $scope.$emit("loadDocument", {identifier:doc.header.identifier,schema:doc.header.schema});
 
       }).catch(function(err) {
@@ -356,12 +359,13 @@ define([
       });
     };
 
+
     var consideringClosing = false;
     //TODO: burn angular... essentially the issue is that this function is called once the ng-include finished with the form html, but that form html still needs to be parsed and the directives still need to load THEIR templates, so those inputs aren't in the form yet... hence while change isn't triggering.
     var attachEvents = _.once(function() {
       $timeout(function() {
-        $('#editForm input').change(function() {
-          $('#editForm').addClass('dirty');
+        $('.editForm input').change(function() {
+          $(this).closest('form').addClass('dirty');
         });
         $('#dialogCancel').find('.closeWithoutSaving').click(function() {
           consideringClosing = true;
@@ -381,13 +385,13 @@ define([
 
       if($('#dialogCancel').length != 0){
         attachEvents();
-        //console.log($('#editForm'))
-        // $('#editForm input').change(function() {    console.log(this);
-        //   $('#editForm').addClass('dirty');
-        // });
       }
     });
     function confirmLeaving(evt, next, current) {
+        var formChanged = !angular.equals($scope.getCleanDocument(), $scope.origanalDocument);
+
+        if(formChanged)
+            $('.editForm').closest('form').addClass('dirty');
 
       if(consideringClosing || $('form').filter('.dirty').length == 0)
         return;

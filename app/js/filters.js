@@ -215,7 +215,7 @@ define(["app"], function (app) {
 		return function( document ) {
             var unique = $filter("uniqueID")(document);
 
-            if(angular.isString(unique))
+            if(angular.isString(unique) && document)
                 return unique.replace('-' + document.revision, '');
 
             return '';

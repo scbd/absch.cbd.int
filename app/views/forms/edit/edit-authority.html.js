@@ -2,12 +2,12 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 
   app.controller("editAuthority", ["$scope", "authHttp", "$filter", "Thesaurus", "$q", "$controller","Enumerable", function ($scope, $http, $filter, Thesaurus, $q, $controller,Enumerable) {
     $controller('editController', {$scope: $scope});
-		
+
 			_.extend($scope.options, {
 				organizationTypes			: function () {
           return $http.get("/api/v2013/thesaurus/domains/Organization%20Types/terms", { cache: true }).then(function(o){
             return o.data;
-          }); 
+          });
         },
 				cbdSubjects					: function () {
           return $http.get("/api/v2013/thesaurus/domains/CBD-SUBJECTS/terms",         { cache: true }).then(function(o){
@@ -16,7 +16,7 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
         },
 				jurisdictions				: function () {
           return $q.all([
-            $http.get("/api/v2013/thesaurus/domains/D7BD5BDE-A6B9-4261-B788-16839CCC4F7E/terms", { cache: true }), 
+            $http.get("/api/v2013/thesaurus/domains/D7BD5BDE-A6B9-4261-B788-16839CCC4F7E/terms", { cache: true }),
             $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })
           ]).then(function(o) {
             var jurisdictions = o[0].data;
@@ -82,66 +82,66 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
       $scope.ac_jurisdictions = function() {
       };
 
-			//==================================
-			//
-			//==================================
-			$scope.getCleanDocument = function(document) {
+	//==================================
+	//
+	//==================================
+	$scope.getCleanDocument = function(document) {
 
-				document = document || $scope.document;
+		document = document || $scope.document;
 
-				if (!document)
-					return undefined;
+		if (!document)
+			return undefined;
 
-				document = angular.fromJson(angular.toJson(document));
+		document = angular.fromJson(angular.toJson(document));
 
-				if (!document.consentGranted) {
-					document.consentInformation = undefined;
-					document.consentDocuments = undefined;
-				}
+		if (!document.consentGranted) {
+			document.consentInformation = undefined;
+			document.consentDocuments = undefined;
+		}
 
-				if (!document.mutuallyAgreedTermsEstablished) {
-					document.mutuallyAgreedTermsInformation = undefined;
-					document.mutuallyAgreedTermsDocuments = undefined;
-				}
+		if (!document.mutuallyAgreedTermsEstablished) {
+			document.mutuallyAgreedTermsInformation = undefined;
+			document.mutuallyAgreedTermsDocuments = undefined;
+		}
 
-				if (document.gisFiles && document.gisFiles.length===0) {
-					document.gisFiles = undefined;
-				}
+		if (document.gisFiles && document.gisFiles.length===0) {
+			document.gisFiles = undefined;
+		}
 
-				if (document.amendedPermits && document.amendedPermits.length===0) {
-					document.amendedPermits = undefined;
-				}
+		if (document.amendedPermits && document.amendedPermits.length===0) {
+			document.amendedPermits = undefined;
+		}
 
-				if (!document.amendedPermits) {
-					document.consentedAmendment = undefined;
-					document.amendmentsDescription = undefined;
-				}
-				if (document.providerConfidential) {
-					document.providers = undefined;
-				}
-				if (document.informedConsentConfidential) {
-					document.informedConsents = undefined;
-				}
-				if (document.geneticResourcesConfidential) {
-					document.geneticResources	= undefined;
-					document.specimen			= undefined;
-					document.taxonomy			= undefined;
-					document.gisFiles			= undefined;
-					document.gisMapCenter		= undefined;
-				}
-				if (document.absResponsibleForAll) {
-					document.responsibilities	= undefined;
-					document.absJurisdiction = undefined;
-					document.absJurisdictionName = undefined;
-					document.absGeneticResourceTypes = undefined;
-				}
+		if (!document.amendedPermits) {
+			document.consentedAmendment = undefined;
+			document.amendmentsDescription = undefined;
+		}
+		if (document.providerConfidential) {
+			document.providers = undefined;
+		}
+		if (document.informedConsentConfidential) {
+			document.informedConsents = undefined;
+		}
+		if (document.geneticResourcesConfidential) {
+			document.geneticResources	= undefined;
+			document.specimen			= undefined;
+			document.taxonomy			= undefined;
+			document.gisFiles			= undefined;
+			document.gisMapCenter		= undefined;
+		}
+		if (document.absResponsibleForAll) {
+			document.responsibilities	= undefined;
+			document.absJurisdiction = undefined;
+			document.absJurisdictionName = undefined;
+			document.absGeneticResourceTypes = undefined;
+		}
 
-				if (/^\s*$/g.test(document.notes))
-					document.notes = undefined;
+		if (/^\s*$/g.test(document.notes))
+			document.notes = undefined;
 
-				return document;
-			};
-
+		return document;
+	};
     $scope.setDocument({libraries: [{ identifier: "cbdLibrary:abs-ch" }]});
+
   }]);
 });
