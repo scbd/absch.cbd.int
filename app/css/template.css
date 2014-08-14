@@ -25,6 +25,7 @@ body{
   text-rendering: optimizeLegibility;
   font-size:14px;
 background-color:#eee;
+color:#555;
 }
 
 h4, h5, h6 {

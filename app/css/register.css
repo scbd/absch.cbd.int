@@ -94,7 +94,9 @@ legend{
 
 .btn-commonformat-name{
 	color:#666;
-	padding-top:5px;
+	margin-top:5px;
+	padding-top:3px;
+	border-top:1px solid #fefefe;
 
 }
 .btn-commonformat-header-national {
@@ -221,7 +223,7 @@ border-color: #888;
 }
 
 .registerpage-content{
-	min-height: 700px;
+	min-height: 800px;
 	padding: 20px;
 	background-color:#dedede;
 	margin:0 0 50px 0;
