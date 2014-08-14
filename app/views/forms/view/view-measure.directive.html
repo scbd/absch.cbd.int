@@ -107,9 +107,9 @@
 			<legend>Document details</legend>
 			<label>Document text</label>
 			<div class="km-value" >
-				<ul>
+				<ul  style="list-style-type: none;padding: 0px;margin: 0px;">
 					<li ng-repeat="item in document.documents">
-						<a target="_blank" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+						<a target="_blank" ng-href="{{item.url}}"><i class="fa fa-file"></i> {{item.name||item.url}}</a>
 						<i ng-show="item.language">({{item.language|term}})</i>
 						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 					</li>
@@ -135,11 +135,11 @@
 			<div class="km-value" >
 				<ul>
 					<li ng-repeat="item in linkedMeasures">
-						<div ng-hide="item.errorCode">
-							<b>{{item.document.title|lstring:locale}}</b>
-							<div class="km-pre">{{item.document.summary|lstring:locale}}</div>
-						</div>
-						<div class="alert alert-block" ng-show="item.errorCode"><strong>Record not found</strong> {{item.identifier}}</div>
+						<span ng-hide="item.errorCode">
+							<a href="/database/record?documentID={{item.identifier}}" target="_new_">{{item.document.title|lstring:locale}}</a>
+							<span class="km-pre">{{item.document.summary|lstring:locale}}</span>
+						</span>
+						<span ng-show="item.errorCode"><strong>Record not found: </strong> {{item.identifier}}</span>
 					</li>
 				</ul>
 			</div>

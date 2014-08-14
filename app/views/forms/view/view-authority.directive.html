@@ -37,8 +37,8 @@
 		<div ng-show="document.phones">
 			<label>Phone numbers</label>
 			<div class="km-value" >
-				<ul class="list">
-					<li ng-repeat="item in document.phones">{{item}}</li>
+				<ul class="list"  style="list-style-type: none;padding: 0px;margin: 0px;">
+					<li ng-repeat="item in document.phones"><i class="fa fa-phone"></i> {{item}}</li>
 				</ul>
 			</div>
 		</div>
@@ -46,17 +46,18 @@
 		<div ng-show="document.faxes">
 			<label>Fax Numbers</label>
 			<div class="km-value" >
-				<ul class="list">
-					<li ng-repeat="item in document.faxes">{{item}}</li>
+				<ul class="list"  style="list-style-type: none;padding: 0px;margin: 0px;" >
+					<li ng-repeat="item in document.faxes"><i class="fa fa-fax"></i> {{item}}</li>
 				</ul>
 			</div>
 		</div>
 
 		<div ng-show="document.emails">
 			<label>Emails</label>
-			<div class="km-value" >
-				<ul class="list">
-					<li ng-repeat="item in document.emails"><a ng-href="mailto:{{item}}">{{item}}</a></li>
+			<div class="km-value"  >
+				<ul class="list" style="list-style-type: none;padding: 0px;margin: 0px;">
+					<li ng-repeat="item in document.emails">
+                        <a ng-href="mailto:{{item}}"><i class="fa fa-envelope-o"></i> {{item}}</a></li>
 				</ul>
 			</div>
 		</div>
@@ -101,9 +102,9 @@
 
 			<div ng-show="document.absJurisdiction">
 				<label>Jurisdiction</label>
-				<ul class="km-value">
-					<li>{{document.absJurisdiction|term}}</li>
-				</ul>
+				<div class="km-value">
+					{{document.absJurisdiction|term}}
+				</div>
 			</div>
 
 			<div ng-show="document.absJurisdictionName">
