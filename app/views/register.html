@@ -22,7 +22,7 @@
                     <span class="flip pull-right">
                         <span class=" card" >
                             <span class="face front">
-                                <span  class="label label-danger" ng-show="facets('urgentTasks','request')>0" >{{facets('urgentTasks','request')}}</span>
+                                <span  class="label label-danger" ng-show="facets('urgentTasks','request')>0"  style="position:relative;top:-1px;">{{facets('urgentTasks','request')}}</span>
                             </span>
                         </span>
                     </span>
@@ -34,7 +34,7 @@
                     <span class="flip pull-right ">
                       <span class=" card" >
                         <span class="face front">
-                            <span  class="label label-default" ng-show="facets('pendingTasks','request')>0" >{{facets('pendingTasks','request')}}</span>
+                            <span  class="label label-default" ng-show="facets('pendingTasks','request')>0"   style="position:relative;top:-1px;">{{facets('pendingTasks','request')}}</span>
                         </span>
                     </span>
                   </span>
@@ -45,7 +45,7 @@
                     <span class="flip pull-right ">
                       <span class=" card" >
                         <span class="face front">
-                            <span  class="label label-success" ng-show="facets('completedTasks','request')>0">{{facets('completedTasks','request')}}</span>
+                            <span  class="label label-success" ng-show="facets('completedTasks','request')>0"  style="position:relative;top:-1px;">{{facets('completedTasks','request')}}</span>
                         </span>
                         </span>
                     </span>
@@ -64,7 +64,7 @@
                         <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : document_type==type ,'btn-commonformat-reference-selected' : document_type=='resource' && document_type==type}">
                           <div class="btn-commonformat-national" ng-class="{'btn-commonformat-reference':document_types[type].abbreviation=='VLR'}">{{document_types[type].abbreviation}}
 
-                            <div class="flip pull-right">
+                            <div class="flip pull-right" >
                                 <div class="card" ng-class="{cardMargin:facets(type,'publish')>9}">
                                     <div class="face front">
                                         <div ng-show="facets(type,'draft') > 0" class="label label-default">{{facets(type,'draft')}}</div>

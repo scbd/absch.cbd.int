@@ -6,9 +6,9 @@
                 	<div class="col-xs-3"><label style="padding-left:20px;">Date</label></div>
                 	<div class="col-xs-2"><label style="padding-left:15px;">Action</label></div>
 
-                    <div class="col-xs-3"><label >Author</label></div>
-					<div class="col-xs-2" ><label >Link</label></div>
-                    <div class="col-xs-2" ng-show="showFile"><label >File (pdf)</label></div>
+                    <div class="col-xs-3"><label >Author </label></div>
+					<div ng-class="{'col-xs-2': documents[0].body.header.schema=='absPermit', 'col-xs-4':documents[0].body.header.schema!='absPermit'}" ><label >Link</label></div>
+                    <div class="col-xs-2" ng-show="showFile"><label >File (pdf) </label></div>
                 </div>
                 <div class="clearfix">
 
@@ -26,9 +26,11 @@
                             </div>
 
                             <div class="col-xs-3">
-                                {{document.createdBy.firstName}} {{document.createdBy.lastName}} ({{document.createdBy.email}})</div>
 
-                             <div class="col-xs-2" >
+								<a href="mailto:{{document.createdBy.email}}"><i class="fa fa-envelope"></i> {{document.createdBy.firstName}} {{document.createdBy.lastName}}</a>
+								</div>
+
+                             <div ng-class="{'col-xs-2': document.body.header.schema=='absPermit', 'col-xs-4':document.body.header.schema!='absPermit'}">
 
 								 <a ng-href="/database/record/{{document | uniqueIDWithoutRevision}}/{{document.revision}}">
 
@@ -37,7 +39,7 @@
 								</a>
 
                             </div>
-							<div class="col-xs-2" ng-show="showFile">
+							<div class="col-xs-2" ng-show="showFile && document.body.header.schema=='absPermit'">
                                 <a type="button" target="_blank"  ng-href="/database/record/{{document | uniqueID}}">
                                 <i class="fa fa-file-o"></i>
                                 	 <span>{{document | uniqueID}}</span>
