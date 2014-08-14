@@ -389,4 +389,8 @@ form label[required]:before
   position: absolute;
   z-index: 1;
   cursor: pointer;
+  margin-left:5px;
+}
+.cardMargin{
+	margin-left:5px;
 }

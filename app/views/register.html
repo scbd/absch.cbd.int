@@ -20,7 +20,7 @@
                 <a href="/dashboard/pending"  href="#" role="button">
                     Requests for your approval
                     <span class="flip pull-right">
-                        <span class=" card">
+                        <span class=" card" >
                             <span class="face front">
                                 <span  class="label label-danger" ng-show="facets('urgentTasks','request')>0" >{{facets('urgentTasks','request')}}</span>
                             </span>
@@ -32,7 +32,7 @@
             <a href="/dashboard/mytasks"  href="#" role="button">
               Your pending requests
                     <span class="flip pull-right ">
-                      <span class=" card">
+                      <span class=" card" >
                         <span class="face front">
                             <span  class="label label-default" ng-show="facets('pendingTasks','request')>0" >{{facets('pendingTasks','request')}}</span>
                         </span>
@@ -43,7 +43,7 @@
              <a href="/dashboard/completed" href="#" role="button">
               Your completed requests
                     <span class="flip pull-right ">
-                      <span class=" card">
+                      <span class=" card" >
                         <span class="face front">
                             <span  class="label label-success" ng-show="facets('completedTasks','request')>0">{{facets('completedTasks','request')}}</span>
                         </span>
@@ -65,21 +65,21 @@
                           <div class="btn-commonformat-national" ng-class="{'btn-commonformat-reference':document_types[type].abbreviation=='VLR'}">{{document_types[type].abbreviation}}
 
                             <div class="flip pull-right">
-                                <div class="card">
+                                <div class="card" ng-class="{cardMargin:facets(type,'publish')>9}">
                                     <div class="face front">
                                         <div ng-show="facets(type,'draft') > 0" class="label label-default">{{facets(type,'draft')}}</div>
                                   </div>
                                 </div>
                             </div>
                             <div class="flip pull-right">
-                                <div class="card">
+                                <div class="card" ng-class="{cardMargin:facets(type,'request')>9}">
                                     <div class="face front">
                                         <div ng-show="facets(type,'publish') > 0" class="label label-success">{{facets(type,'publish')}}</div>
                                   </div>
                                 </div>
                             </div>
                             <div class="flip pull-right">
-                                <div class="card">
+                                <div class="card" >
                                     <div class="face front">
                                         <div ng-show="facets(type,'request') > 0" class="label label-danger">{{facets(type,'request')}}</div>
                                     </div>
