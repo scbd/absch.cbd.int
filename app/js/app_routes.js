@@ -15,7 +15,6 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
 
         $routeProvider.
             when('/',                            { templateUrl: '/app/views/index.html'                     ,resolveController: true, resolveUser: true}).
-            when('/about',                       { templateUrl: '/app/views/about.html'                     ,resolveController: true, resolveUser: true}).
             when('/find',                        { templateUrl: '/app/views/find.html'                      ,resolveController: true, resolveUser: true}).
             when('/countries',                   { templateUrl: '/app/views/countries.html'                 ,resolveController: true, resolveUser: true}).
             when('/countries/:code',             { templateUrl: '/app/views/profiles.html'                  ,resolveController: true, resolveUser: true}).
@@ -29,6 +28,16 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
             when('/workshops/lac',               { templateUrl: '/app/views/workshops/lac.html'             ,resolveController: true, resolveUser: true}).
             when('/workshops/caribbean',         { templateUrl: '/app/views/workshops/caribbean.html'       ,resolveController: true, resolveUser: true}).
             when('/certificate/:documentNumber',{ templateUrl: '/app/views/forms/view/records-id.html'       ,resolveController: true, resolveUser: true}).
+
+            //TODO: rename document_type to something more generic... or make this feature more flexible
+            when('/about/:document_type', {
+              templateUrl: '/app/views/about.html',
+              resolveController: true,
+              resolveUser: true,
+              subTemplateUrl: '/app/views/about/-',
+              ignoreSubController: true,
+            }).
+            when('/about', { redirectTo: '/about/absch' }).
 
             when('/dashboard', {
               templateUrl: '/app/views/register.html',
@@ -71,14 +80,14 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
               templateUrl: '/app/views/register.html',
               resolveController: true,
               resolveUser: true,
-              subTemplateUrl: '/app/views/forms/edit/edit-', //filled in through controller
+              subTemplateUrl: '/app/views/forms/edit/edit--', //filled in through controller
             }).
 
              when('/register/:document_type/:identifier/edit', {
               templateUrl: '/app/views/register.html',
               resolveController: true,
               resolveUser: true,
-              subTemplateUrl: '/app/views/forms/edit/edit-', //filled in through controller
+              subTemplateUrl: '/app/views/forms/edit/edit--', //filled in through controller
             }).
 
              when('/forum', {
@@ -87,7 +96,7 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
               resolveUser: true,
             }).
 
-            when('/searchforum.shtml',           { redirectTo:'/about#iac' }).
+            when('/searchforum.shtml',           { redirectTo:'/about/iac' }).
 
             otherwise({redirectTo:'/help/404'});
     }]);

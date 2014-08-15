@@ -72,7 +72,7 @@ define([/*'angular', 'angular-route', 'angular-cookies', */], function () {
     $rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
       //padding route attributes to the rootscope
       if(current.$$route && current.$$route.subTemplateUrl)
-        $rootScope.subTemplateUrl = current.$$route.subTemplateUrl;
+        $rootScope.subTemplateUrl = current.$$route.subTemplateUrlFull;
     });
 
   });
