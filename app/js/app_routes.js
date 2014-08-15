@@ -28,8 +28,6 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
             when('/oauth2/callback',             { templateUrl: '/app/views/oauth2/callback.html'           ,resolveController: true, resolveUser: true}).
             when('/workshops/lac',               { templateUrl: '/app/views/workshops/lac.html'             ,resolveController: true, resolveUser: true}).
             when('/workshops/caribbean',         { templateUrl: '/app/views/workshops/caribbean.html'       ,resolveController: true, resolveUser: true}).
-            //when('/searchforum.shtml',           { templateUrl:'/app/views/about.html#iac'}).
-
             when('/certificate/:documentNumber',{ templateUrl: '/app/views/forms/view/records-id.html'       ,resolveController: true, resolveUser: true}).
 
             when('/dashboard', {
@@ -88,6 +86,8 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
               resolveController: true,
               resolveUser: true,
             }).
+
+            when('/searchforum.shtml',           { redirectTo:'/about#iac' }).
 
             otherwise({redirectTo:'/help/404'});
     }]);
