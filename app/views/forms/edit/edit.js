@@ -39,6 +39,26 @@ define([
           return o.data;
         });
       },
+      //TODO: once multiple is ready, I'll use this instead of Regions
+      /*
+      regions2			: function() {
+        return $q.all([
+          $http.get("/api/v2013/thesaurus/domains/regions/terms", { cache: true }),
+          $http.get("/api/v2013/thesaurus/domains/countries/terms",   { cache: true })
+        ]).then(function(o) {
+          var regions2 = Enumerable.from($filter("orderBy")(o[0].data, "name")).union(
+            Enumerable.from($filter("orderBy")(o[1].data, "name"))
+          ).toArray();
+
+          _.each(regions2, function(element) {
+            element.__value = element.name;
+          });
+
+          return regions2;
+        });
+      },
+      */
+
       regions			: function() {
         return $q.all([
           $http.get("/api/v2013/thesaurus/domains/regions/terms", { cache: true }),
