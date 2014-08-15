@@ -4,8 +4,7 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
     $controller('editController', {$scope: $scope});
 
 
-    $scope.options  = {
-      countries	: function () { return $http.get("/api/v2013/thesaurus/domains/countries/terms",							{ cache: true }).then(function (o) { return $filter("orderBy")(o.data, "name"); }); },
+    _.extend($scope.options, {
       usage		: function () { return $http.get("/api/v2013/thesaurus/domains/A7B77788-8C90-4849-9327-E181E9522F3A/terms",	{ cache: true }).then(function (o) { return o.data; }); },
       keywords  : function () { return $q.all([$http.get("/api/v2013/thesaurus/domains/1A22EAAB-9BBC-4543-890E-DEF913F59E98/terms", { cache: true }),
                                $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })])
@@ -14,7 +13,7 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
                                       data.push(o[1].data)
                                       return Thesaurus.buildTree(data);
                                     }); },
-    };
+    });
 
 
     //==================================
