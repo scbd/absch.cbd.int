@@ -193,8 +193,8 @@ define(["app"], function (app) {
                 else if(document.body.government)
                     government = document.body.government.identifier;
 
-                var unique = 'ABSCH-' + $filter("schemaShortName")($filter("lowercase")(document.type)) + '-' +
-                        $filter("uppercase")(government) +
+                var unique = 'ABSCH-' + $filter("schemaShortName")($filter("lowercase")(document.type)) +
+                        (government != '' ? '-' + $filter("uppercase")(government) : '') +
                         '-' + document.documentID + '-' + document.revision;
 				cacheMap[term.identifier] = unique;
 
@@ -287,6 +287,25 @@ define(["app"], function (app) {
 		};
 	}]);
 
+    //============================================================
+	//
+	//
+	//
+	//============================================================
+	app.filter("languageLongName", [function() {
+
+		return function( language ) {
+
+			if(language=="ar") return "Arabic";
+			if(language=="en") return "English";
+			if(language=="es") return "Spanish";
+			if(language=="fr") return "French";
+			if(language=="ru") return "Russian";
+			if(language=="zh") return "Chinese";
+
+			return language;
+		};
+	}]);
 	//============================================================
 	//
 	//

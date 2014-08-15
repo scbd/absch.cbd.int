@@ -22,12 +22,12 @@ app.directive('documentList', function ($http, $filter) {
                   currentPage: '=',
                   documentCount: '='
             },
-            controller: ['$scope','$sce', "underscore", "commonjs","authentication", '$q',
-            function ($scope, $sce, underscore, commonjs,authentication,$q, filter){
+            controller: ['$scope','$sce', "underscore", "commonjs","authentication", '$q',"$filter",
+            function ($scope, $sce, underscore, commonjs,authentication,$q, $filter){
 
               $scope.formatDate = function formatDate (date) {
                     return moment(date).format('MMMM Do YYYY');
-              }; 
+              };
               //console.log($scope.advanceFilter) ;
               if($scope.advanceFilter && $scope.advanceFilter.$==null)
               {
@@ -43,28 +43,28 @@ app.directive('documentList', function ($http, $filter) {
               $scope.descriptionLimit = 50;
 
                 $scope.load = function(item,displayDetails) {
-                      
+
                       //occours when a user actions collapses the detail section.
-                      if(!displayDetails)                     
+                      if(!displayDetails)
                           return;
 
                        item.data = {'schema':item.schema, 'url_ss': item.url_ss, 'data': item};
                         //console.log(item.schema);
-                        if(item.schema && (item.schema.toUpperCase()=="FOCALPOINT" || 
-                          item.schema.toUpperCase()=="MEETING" || 
+                        if(item.schema && (item.schema.toUpperCase()=="FOCALPOINT" ||
+                          item.schema.toUpperCase()=="MEETING" ||
                           item.schema.toUpperCase()=="NOTIFICATION"
                            || item.schema.toUpperCase()=="PRESSRELEASE" || item.schema.toUpperCase()=="STATEMENT"))
                         {
                              commonjs.getReferenceRecordIndex(item.schema.toUpperCase(),item.id).then(function(data){
                                 item.data = data.data;
-                              });                              
+                              });
                         }
                         else
                         {
-                              $http.get("/api/v2013/documents/"+item.identifier_s).then(function (result) {  
+                              $http.get("/api/v2013/documents/"+item.identifier_s).then(function (result) {
                                   item.data = result.data;
 
-                                  $http.get("/api/v2013/documents/"+item.identifier_s + "?info").then(function (result) {  
+                                  $http.get("/api/v2013/documents/"+item.identifier_s + "?info").then(function (result) {
                                       item.data.info = result.data;
                                   });
 
@@ -79,9 +79,9 @@ app.directive('documentList', function ($http, $filter) {
 
                             return false;
 
-                                
+
                   }
-                
+
                 $scope.actionSetPage = function (pageNumber) {
                   //debugger;
                                   $scope.currentPage = Math.min($scope.pageCount-1, Math.max(0, pageNumber));
@@ -98,7 +98,7 @@ app.directive('documentList', function ($http, $filter) {
                     var maxCount = 10;
                     var middle = 5;
                     var count = end - start;
-                    
+
                     if (count > maxCount) {
                         if ($scope.currentPage > middle)
                             start = $scope.currentPage - middle;
@@ -106,39 +106,39 @@ app.directive('documentList', function ($http, $filter) {
                         end = Math.min(count, start + maxCount);
                         start = Math.max(0, end - maxCount);
                     }
-                    
+
                     for (var i = start; i < end; i++) {
                         ret.push(i);
                     }
                     return ret;
                 };
 
-                $scope.$watch('currentPage', function (newValue, oldValue) { 
-                     if (newValue != oldValue) 
-                     {                      
+                $scope.$watch('currentPage', function (newValue, oldValue) {
+                     if (newValue != oldValue)
+                     {
                        //console.log('current page changed');
-                        $scope.currentPage = newValue;                        
+                        $scope.currentPage = newValue;
                     }
                 });
 
-                $scope.$watch('documents', function (newValue, oldValue) { 
-                    
-                     if (newValue != oldValue) 
-                     {     
+                $scope.$watch('documents', function (newValue, oldValue) {
+
+                     if (newValue != oldValue)
+                     {
                         $scope.pageCount = Math.ceil($scope.documentCount / $scope.itemsPerPage);
-                       $scope.transformedDocuments = [];                                                     
-                       $scope.documents.forEach(function (doc) {  
+                       $scope.transformedDocuments = [];
+                       $scope.documents.forEach(function (doc) {
                            $scope.transformedDocuments.push(transformDocument(doc));
                         });
-                                       
+
                     }
                 });
 
                 function transformDocument (document) {
-      
+
                   var output = {};
                   var locale = "en";//$scope.$root.locale;
-                  
+
                   var formatDate = function formatDate (date) {
                         return date+'';//moment(date).format('MMMM Do YYYY');
                     };
@@ -158,30 +158,24 @@ app.directive('documentList', function ($http, $filter) {
                       output.identifier_s = output.id;
                     }
 
-                   // if(output.source && output.source.toLowerCase() =='european union'){
-                   //      output.isParty = true;
-                   //      output.isRatified = true;
-                   //      console.log('%s : %s', document.government_s,true);
-                   //  }
-                   //  else{
-                        if(document.government_s){
-                            $q.when(commonjs.getCountries(),function(countries){ 
-                                    var cd = _.where(countries, {code:document.government_s.substring(0,2).toUpperCase()})
-                                    if(cd.length>0){
-                                        output.isParty = cd[0].isParty;
-                                        output.isSignatory = cd[0].isSignatory;
-                                        output.isRatified  = cd[0].isRatified;
-                                    }
-                            }); 
-                        }
-                    // }
+                    if(document.government_s){
+                        $q.when(commonjs.getCountries(),function(countries){
+                                var cd = _.where(countries, {code:document.government_s.substring(0,2).toUpperCase()})
+                                if(cd.length>0){
+                                    output.isParty = cd[0].isParty;
+                                    output.isSignatory = cd[0].isSignatory;
+                                    output.isRatified  = cd[0].isRatified;
+                                }
+                        });
+                    }
+
                    output.recordtype="referenceRecord";
 
                     if(document.schema_s=='focalPoint') {
                         output.description  = document.function_t||'';
                         output.description += (document.function_t && document.department_t) ? ', ' : '';
                         output.description += document.department_t||'';
-                        output.description2 = document.organization_t||'';
+                        output.description += document.organization_t||'';
                     }
 
                     if(document.schema_s=='decision' && document.body_s=='XXVII8-COP' ) output.source = 'COP TO THE CONVENTION';
@@ -206,7 +200,7 @@ app.directive('documentList', function ($http, $filter) {
                     if(document.schema_s=='nationalReport') output.type        = document.reportType_EN_t;
 
                     if(document.schema_s=='implementationActivity') output.type = document.jurisdiction_EN_t + ' - ' + document.completion_EN_t;
-                    
+
                     if(document.schema_s=='marineEbsa') output.schema = 'ECOLOGICALLY OR BIOLOGICALLY SIGNIFICANT AREA';
 
                     if(document.schema_s=='event') {
@@ -218,24 +212,31 @@ app.directive('documentList', function ($http, $filter) {
                         output.Year = document.publicationYear_is;
                         output.Types = getString(document.resourceTypes_CEN_ss, locale);
                         output.Regions = getString(document.regions_CEN_ss, locale);
-                        output.Languages = getString(document.languages_CEN_ss, locale);
-                        output.recordtype="referenceRecord";  
 
+                        if(document.documentLanguages_ss){
+                            var languages = [];
+                            document.documentLanguages_ss.forEach(function(language){
+                                languages.push($filter("languageLongName")(language));
+                            });
+                            output.Languages = languages.toString();
+                        }
+                        
+                        output.recordtype="referenceRecord";
                         // TODO: add summary as output.description and limit to 200 chars
 
                         if(output.Types)output.metadata.push(output.Types);
                         if(output.Year)output.metadata.push(output.Year);
                         if(output.Regions)output.metadata.push(output.Regions);
                         if(output.Languages)output.metadata.push(output.Languages);
-                        
+
 
                     }else if(document.schema_s=='authority') {
-                        output.responsibleForAll = document.responsibleForAll_b;
-                        output.jusrisdiction = document.jurisdiction_EN_t;                        
+                        output.responsibleForAll = document.absResposibleForAll_b;
+                        output.jusrisdiction = document.jurisdiction_EN_t;
                         output.grType = (document.geneticResourceTypes_ss );
                         output.recordtype="nationalRecord";
 
-                         if(output.responsibleForAll) 
+                         if(output.responsibleForAll)
                             output.description ="This CNA is responsible for all functions under the Nagoya Protocol.";
                          else{
                             // TODO: output.description should be the summary of responsibilities
@@ -244,8 +245,8 @@ app.directive('documentList', function ($http, $filter) {
                          }
                     }
                     else if(document.schema_s=='absCheckpoint') {
-                        output.jusrisdiction = document.jurisdiction_EN_t;   
-                        output.informAllAuthorities = (document.informAllAuthorities_b);  
+                        output.jusrisdiction = document.jurisdiction_EN_t;
+                        output.informAllAuthorities = (document.informAllAuthorities_b);
                         output.recordtype="nationalRecord";
 
                         if(output.jusrisdiction)output.metadata.push(output.jusrisdiction);
@@ -253,10 +254,10 @@ app.directive('documentList', function ($http, $filter) {
                         //TODO: output.description should be the summary of responsibilities
                     }
                     else if(document.schema_s=='absPermit') {
-                      
+
                         if(document.usage_CEN_ss){
                           output.usage = '';
-                          document.usage_CEN_ss.forEach(function(usage){                           
+                          document.usage_CEN_ss.forEach(function(usage){
                             output.usage +=  (output.usage.length > 0 ? "," : "") +  JSON.parse(usage).en;
                           });
                         }
@@ -266,7 +267,7 @@ app.directive('documentList', function ($http, $filter) {
                         //
                         if(document.amendmentIntent_i != undefined){
                           output.amendmentIntent = String(document.amendmentIntent_i) + 's';
-                          
+
                         }
                          if(output.amendmentIntent == "1s")output.metadata.push($sce.trustAsHtml("<span style='color:red'>REVOKED</span>"));
                          if(output.amendmentIntent == "0s")output.metadata.push("AMENDED");
@@ -283,17 +284,17 @@ app.directive('documentList', function ($http, $filter) {
 
                         //TODO: output.description should be the summary of utilization
                         //TODO: the metadata should include a link to download the pdf
-                        
+
                     }
                      else if(document.schema_s=='database') {
                         output.recordtype="nationalRecord";
-                        //TODO: output.description should be the description 
+                        //TODO: output.description should be the description
                         //TODO: metadata should be the url opening to a new window
                     }
                      else if(document.schema_s=='measure' ) {
-                        output.recordtype="nationalRecord";  
-                        
-                        output.jusrisdiction = document.jurisdiction_EN_t; 
+                        output.recordtype="nationalRecord";
+
+                        output.jusrisdiction = document.jurisdiction_EN_t;
 
                         if(output.jusrisdiction)
                           output.metadata.push(output.jusrisdiction);
@@ -307,9 +308,9 @@ app.directive('documentList', function ($http, $filter) {
                           output.status = document.status_EN_t;
                           if(output.status)output.metadata.push(output.status);
                         }
-                    }       
+                    }
                     else if(document.schema_s=='focalPoint' || document.schema_s=='database') {
-                        output.recordtype="nationalRecord";  
+                        output.recordtype="nationalRecord";
 
                         if(document.type_EN_t){
                           output.type = document.type_EN_t;
@@ -320,32 +321,32 @@ app.directive('documentList', function ($http, $filter) {
                           output.status = document.status_EN_t;
                           if(output.status)output.metadata.push(output.status);
                         }
-                    }                    
+                    }
                     else if(document.schema_s=='meeting') {
                         output.recordtype="referenceRecord";
                         output.eventCity=document.eventCity_EN_t;
                         output.eventCountry=document.eventCountry_EN_t;
-                        output.description = document.eventCity_EN_t + ' from ' + moment(document.startDate_dt).format('Do MMM YYYY') + ' to ' + moment(document.endDate_dt).format('Do MMM YYYY'); 
+                        output.description = document.eventCity_EN_t + ' from ' + moment(document.startDate_dt).format('Do MMM YYYY') + ' to ' + moment(document.endDate_dt).format('Do MMM YYYY');
 
                     }
                     $q.when(canUserEdit(document), function(canedit){
                       output.canEdit =  canedit;
-                    }) ; 
+                    }) ;
 
-                    
+
 
                   return output;
-                }     
+                }
 
                 function getString(source, key){
                     var lstring = [];
                     if(source!=undefined)
                     {
-                        source.forEach(function(record){                      
+                        source.forEach(function(record){
                           lstring.push(JSON.parse(record)[key] );
-                        });                        
-                        return lstring.toString() ;                        
-                    }                    
+                        });
+                        return lstring.toString() ;
+                    }
                 }
 
                 //==================================

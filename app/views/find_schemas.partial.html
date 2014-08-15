@@ -151,8 +151,9 @@
             <span class="filter-text">Virtual Library Records ({{resource.count}})</span>
         </label>
         <div ng-show="resource.selected" class="subfilters-section">
-            <div km-select multiple name="vlrresourceTypes" binding-type="string" ng-model="vlrresourceTypes" items="options.resourceTypes()" placeholder="Type of resource"></div>
+            <div km-select multiple name="vlrresourceTypes" binding-type="string" ng-model="vlrresourceTypes" items="options.resourceTypes()" placeholder="Type of resource"></div></br>
             <!-- <input type="number" required name="vlrpublicationYear" ng-model="vlrpublicationYear" placeholder="Publication year" /> -->
+            <div km-select multiple name= "vlrLanguages" binding-type="string" ng-model="vlrLanguages" items="options.languages()" placeholder="Available Languages"></div>
         </div>
     </div>
 

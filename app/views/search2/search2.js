@@ -58,7 +58,7 @@ $compile.directive('search2', function ($http) {
                 }
 
                 return facets;
-            };         
+            };
 
 
             function readFacets2(solrArray) {
@@ -82,7 +82,7 @@ $compile.directive('search2', function ($http) {
 
                 console.log("QUERY");
 
-                var q = 'realm_ss:absch AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryTheme + ' AND ' + $scope.queryDate + ' AND ' + $scope.queryKeywords;
+                var q = '(realm_ss:absch OR realm_ss:ABS) AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryTheme + ' AND ' + $scope.queryDate + ' AND ' + $scope.queryKeywords;
 
                 var queryParameters = {
                     'q': q,
@@ -137,7 +137,7 @@ $compile.directive('search2', function ($http) {
                 var maxCount = 10;
                 var middle = 5;
                 var count = end - start;
-                
+
                 if (count > maxCount) {
                     if ($scope.currentPage > middle)
                         start = $scope.currentPage - middle;
@@ -145,7 +145,7 @@ $compile.directive('search2', function ($http) {
                     end = Math.min(count, start + maxCount);
                     start = Math.max(0, end - maxCount);
                 }
-                
+
                 for (var i = start; i < end; i++) {
                     ret.push(i);
                 }
@@ -262,7 +262,7 @@ $compile.directive('search2Schema', function ($http) {
             $scope.updateQuery = function() {
 
                 console.log($scope.query);
-                
+
                 $scope.query = '';
 
                 $scope.selectedItems.forEach(function(item) {
@@ -297,7 +297,7 @@ $compile.directive('search2Schema', function ($http) {
             }
 
             function buildConditions (conditions, items) {
-                items.forEach(function (item) { 
+                items.forEach(function (item) {
                     if(item.selected)
                         conditions.push($scope.field+':'+item.identifier);
                 });
@@ -305,7 +305,7 @@ $compile.directive('search2Schema', function ($http) {
 
             function dictionarize(items) {
                 var dictionary = [];
-                items.forEach(function (item) { 
+                items.forEach(function (item) {
                     item.selected = false;
                     dictionary[item.identifier] = item;
                 });
@@ -454,7 +454,7 @@ $compile.directive('search2Facet', function ($http) {
             }
 
             function buildConditions (conditions, items) {
-                items.forEach(function (item) { 
+                items.forEach(function (item) {
                     if(item.selected)
                         conditions.push($scope.field+':'+item.identifier);
                 });
@@ -462,7 +462,7 @@ $compile.directive('search2Facet', function ($http) {
 
             function dictionarize(items) {
                 var dictionary = [];
-                items.forEach(function (item) { 
+                items.forEach(function (item) {
                     item.selected = false;
                     dictionary[item.identifier] = item;
                 });
@@ -564,12 +564,12 @@ $compile.directive('search2Theme', function ($http) {
 
                 $element.find("#dialogSelect").modal("show");
 
-                
 
 
 
 
-                
+
+
 
 
 
@@ -598,7 +598,7 @@ $compile.directive('search2Theme', function ($http) {
             $scope.updateQuery = function() {
 
                 console.log($scope.query);
-                
+
                 $scope.query = '';
 
                 $scope.selectedItems.forEach(function(item) {
@@ -633,7 +633,7 @@ $compile.directive('search2Theme', function ($http) {
                     console.log(term.indeterminateCounterA);
                     term.indeterminate = !term.selected && (term.indeterminateCounterA + term.indeterminateCounterB) > 0;
 
-                    setBroaders(term.broaderTerms, selected); 
+                    setBroaders(term.broaderTerms, selected);
                 });
 
 
@@ -649,30 +649,30 @@ $compile.directive('search2Theme', function ($http) {
 
                 // term.indeterminate = selected;
 
-                
+
             }
 
             function setNarrowers(narrowerTerms, selected) {
 
                 if(!narrowerTerms) return;
 
-                narrowerTerms.forEach(function (term) { 
+                narrowerTerms.forEach(function (term) {
 
                     term.indeterminateCounterB = term.indeterminateCounterB + (selected ? 1 : -1);
                     console.log(term.indeterminateCounterB);
                     term.indeterminate = !term.selected && (term.indeterminateCounterA + term.indeterminateCounterB) > 0;
 
-                    setNarrowers(term.narrowerTerms, selected); 
+                    setNarrowers(term.narrowerTerms, selected);
                 });
 
 
-                // 
+                //
 
-                // 
+                //
 
                 // term.indeterminate = selected;
 
-                
+
             }
 
             $scope.onclick = function (scope, evt) {
@@ -688,17 +688,17 @@ $compile.directive('search2Theme', function ($http) {
 
                 setBroaders(term.broaderTerms, term.selected);
                 setNarrowers(term.narrowerTerms, term.selected);
-                
+
                 //if(scope.item.indeterminate)
                   //  scope.item.indeterminate = scope.item.indeterminate = false;
 
                 //if(scope.item.selected==true) unselect(scope.item);
-                //else          
+                //else
          //       if(scope.item.selected) { if(scope.item.narrowerTerms) scope.item.narrowerTerms.forEach(select); }
            //     else                    { if(scope.item.narrowerTerms) scope.item.narrowerTerms.forEach(unselect); }
 
                 //var cb = evt.target;
-                                
+
                 //if (cb.readOnly) cb.checked=cb.readOnly=false;
                 //else if (!cb.checked) cb.readOnly=cb.indeterminate=true;
 
@@ -725,7 +725,7 @@ $compile.directive('search2Theme', function ($http) {
             }
 
             function buildConditions (conditions, items) {
-                items.forEach(function (item) { 
+                items.forEach(function (item) {
                     if(item.selected)
                         conditions.push('thematicArea_REL_ss:'+item.identifier);
                     else if(item.narrowerTerms) {
@@ -735,12 +735,12 @@ $compile.directive('search2Theme', function ($http) {
             }
 
             function flatten(items, collection) {
-                items.forEach(function (item) { 
+                items.forEach(function (item) {
                     item.selected = false;
                     item.indeterminateCounterA = 0;
                     item.indeterminateCounterB = 0;
                     collection[item.identifier] = item;
-                    if(item.narrowerTerms) 
+                    if(item.narrowerTerms)
                         flatten(item.narrowerTerms, collection);
                 });
                 return collection;
@@ -828,7 +828,7 @@ $compile.directive('search2Date', function ($http) {
                 } else {
                     $scope.query = '*:*';
                 }
-                
+
                 console.log($scope.query);
             };
 
@@ -880,5 +880,3 @@ $compile.directive('search2Keywords', function ($http) {
         }]
     }
 })
-
-

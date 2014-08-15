@@ -41,7 +41,7 @@ app.directive('searchFilterSchemas', function ($http) {
                cnaJurisdictions         : function () { return $http.get("/api/v2013/thesaurus/domains/D7BD5BDE-A6B9-4261-B788-16839CCC4F7E/terms", { cache: true })
                                                                     .then(function (o) { return $scope.updateFacets($scope.authority,'cnaJurisdiction',o.data) }); },
                absGeneticResourceTypes  : function () { return $http.get("/api/v2013/thesaurus/domains/1A22EAAB-9BBC-4543-890E-DEF913F59E98/terms", { cache: true })
-                                                                    .then(function (o) { 
+                                                                    .then(function (o) {
 
                                                                        return $scope.updateFacets($scope.authority,'cnaGeneticResourceTypes',Thesaurus.buildTree(o.data)) ;
                                                                          }); },
@@ -49,7 +49,7 @@ app.directive('searchFilterSchemas', function ($http) {
                                                                     .then(function (o) {return $scope.updateFacets($scope.absPermit,'permitkeywords',Thesaurus.buildTree(o.data)) ; }); },
                usage                    : function () { return $http.get("/api/v2013/thesaurus/domains/A7B77788-8C90-4849-9327-E181E9522F3A/terms", { cache: true })
                                                                     .then(function (o) { return $scope.updateFacets($scope.absPermit,'permitusage',o.data); }); },
-               cpJurisdictions         : function () { return $q.all([$http.get("/api/v2013/thesaurus/domains/D7BD5BDE-A6B9-4261-B788-16839CCC4F7E/terms", { cache: true }), 
+               cpJurisdictions         : function () { return $q.all([$http.get("/api/v2013/thesaurus/domains/D7BD5BDE-A6B9-4261-B788-16839CCC4F7E/terms", { cache: true }),
                                                                $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })]).then(function(o) {
                                                                 var data = o[0].data;
                                                                 data.push(o[1].data)
@@ -64,9 +64,11 @@ app.directive('searchFilterSchemas', function ($http) {
                                                                             return Enumerable.from($filter("orderBy")(o[0].data, "name")).union(
                                                                                    Enumerable.from($filter("orderBy")(o[1].data, "name"))).toArray();
                                                            });
-                                                      },            
+                                                      },
                 absSubjects             : function () { return $http.get("/api/v2013/thesaurus/domains/CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924/terms", { cache: true }).then(function(o){ return o.data; }); },
-                
+                languages             : function () { return [{identifier:"ar", name:"Arabic"  },{identifier:"en", name:"English" },{identifier:"es", name:"Spanish" },
+					                                            {identifier:"fr", name:"French"  },{identifier:"ru", name:"Russian" },{identifier:"zh", name:"Chinese" }]},
+
             };
 
             $scope.isSelected = function(item) {
@@ -116,7 +118,7 @@ app.directive('searchFilterSchemas', function ($http) {
             };
 
             $scope.updateQuery = function() {
-                
+
                 $scope.query = '';
 
                 $scope.selectedItems.forEach(function(item) {
@@ -132,7 +134,7 @@ app.directive('searchFilterSchemas', function ($http) {
             };
 
             $scope.onclick = function (scope, evt) {
-                
+
                 $scope[scope].selected = !$scope[scope].selected;
                 $scope.expandSearch--;
                 //console.log( $scope.terms);
@@ -154,7 +156,7 @@ app.directive('searchFilterSchemas', function ($http) {
             }
 
             function buildConditions (conditions, items) {
-                items.forEach(function (item) { 
+                items.forEach(function (item) {
 
                     if(item.selected){
 
@@ -163,33 +165,33 @@ app.directive('searchFilterSchemas', function ($http) {
                             item.subFilters.forEach(function(filter){
                                 if(filter.type=='multiselect'){
                                     if( $scope[filter.name] && $scope[filter.name].length > 0){
-                                        
-                                        var selectedValues = $scope[filter.name]; 
-                                        if(typeof selectedValues[0]== "object" )
-                                            selectedValues = _.pluck(selectedValues, "identifier"); 
 
-                                        subFilterQuery = subFilterQuery + ' AND (' + filter.field +':'+ selectedValues.join(' OR ' + filter.field + ': ') + ')';                                         
+                                        var selectedValues = $scope[filter.name];
+                                        if(typeof selectedValues[0]== "object" )
+                                            selectedValues = _.pluck(selectedValues, "identifier");
+
+                                        subFilterQuery = subFilterQuery + ' AND (' + filter.field +':'+ selectedValues.join(' OR ' + filter.field + ': ') + ')';
                                     }
                                 }
                                 else if(filter.type=='calendar'){
-                                        var selectedValues = $scope[filter.name];  
+                                        var selectedValues = $scope[filter.name];
                                         if(selectedValues != '*:*'){
-                                            subFilterQuery = subFilterQuery + ' AND ' + selectedValues;                                                  
+                                            subFilterQuery = subFilterQuery + ' AND ' + selectedValues;
                                         }
                                 }
                                 else if(filter.type=='radio'){
                                     var selectedValues = $scope[filter.name];
-                                     
+
                                     if(selectedValues!=undefined && parseInt(selectedValues) != -2){//skipp All option
                                         if(parseInt(selectedValues) == -1)
-                                            subFilterQuery = subFilterQuery + ' AND NOT ' + filter.field + ':*'; 
+                                            subFilterQuery = subFilterQuery + ' AND NOT ' + filter.field + ':*';
                                         else
-                                            subFilterQuery = subFilterQuery + ' AND (' + filter.field +':'+ selectedValues + ')';                                              
+                                            subFilterQuery = subFilterQuery + ' AND (' + filter.field +':'+ selectedValues + ')';
                                     }
                                 }
                                 else {
                                     if($scope[filter.name])
-                                        subFilterQuery = subFilterQuery + ' AND ('  + filter.field +':'+  $scope[filter.name] + ')';       
+                                        subFilterQuery = subFilterQuery + ' AND ('  + filter.field +':'+  $scope[filter.name] + ')';
                                 }
                             });
                         }
@@ -198,21 +200,21 @@ app.directive('searchFilterSchemas', function ($http) {
                 //console.log(subFilterQuery);
                         conditions.push(subFilterQuery);
                     }
-                });                
- 
-            }            
+                });
+
+            }
             $scope.updateFacets = function(schema,fieldName,data){
-                
-                var facets = _.where(schema.subFilters,{name:fieldName})[0]||[]; 
+
+                var facets = _.where(schema.subFilters,{name:fieldName})[0]||[];
                 if(!facets.facets)
                     return data;
 
                 facets = facets.facets;
                 for (var i = 0; i < facets.length; i+=2) {
                    var item =  _.where(data,{identifier:facets[i]});
-                   
+
                    if(item.length>0){
-                        item[0].title.en += ' (' + facets[i+1] + ')';                        
+                        item[0].title.en += ' (' + facets[i+1] + ')';
                     }
                 };
                 return data;
@@ -230,7 +232,7 @@ app.directive('searchFilterSchemas', function ($http) {
                     if(facetFields.length<=0)
                         return;
                     var queryFacetsParameters = {
-                            'q': 'realm_ss:absch AND NOT version_s:* AND schema_s:' + schema,
+                            'q': '(realm_ss:absch OR realm_ss:ABS) AND NOT version_s:* AND schema_s:' + schema,
                             'fl': '',       //fields for results.
                             'wt': 'json',
                             'rows': 0,      //limit
@@ -240,15 +242,15 @@ app.directive('searchFilterSchemas', function ($http) {
                         };
 
                         $http.get('/api/v2013/index/select', { params: queryFacetsParameters })
-                        .success(function (data) {                          
+                        .success(function (data) {
                             $scope[schema].subFilters.forEach(function(filter){
                                 if(filter.type=='multiselect' || filter.type=='radio'){
                                     filter.facets = data.facet_counts.facet_fields[filter.field];                                                                ;
                                 }
                             });
                         })
-                        .error(function (error) { 
-                             console.log(error); 
+                        .error(function (error) {
+                             console.log(error);
                         });
                 }
             }
@@ -256,7 +258,7 @@ app.directive('searchFilterSchemas', function ($http) {
 
             function dictionarize(items) {
                 var dictionary = [];
-                items.forEach(function (item) { 
+                items.forEach(function (item) {
                     item.selected = false;
                     dictionary[item.identifier] = item;
                 });
@@ -267,9 +269,9 @@ app.directive('searchFilterSchemas', function ($http) {
                                              };
             $scope.authority               = { identifier: 'authority',                title: 'Competent National Authorities' ,
                                                subFilters : [
-                                                                { name: 'cnaResponsibleForAll',     type: 'yesno' , field: 'responsibleForAll_b'},
+                                                                { name: 'cnaResponsibleForAll',     type: 'yesno' , field: 'absResposibleForAll_b'},
                                                                 { name: 'cnaJurisdiction',          type: 'multiselect', field: 'jurisdiction_s' },
-                                                                { name: 'cnaGeneticResourceTypes',  type: 'multiselect' , field: 'absGeneticResourceTypes_ss'}                                                         
+                                                                { name: 'cnaGeneticResourceTypes',  type: 'multiselect' , field: 'absGeneticResourceTypes_ss'}
                                                             ]
                                              };
             $scope.database                = { identifier: 'database',                 title: 'National Websites and Databases', count: 0 };
@@ -282,7 +284,7 @@ app.directive('searchFilterSchemas', function ($http) {
                                                                 { name: 'msrAdoptionDate', type: 'calendar' , field: 'adoption_s'},
                                                                 { name: 'msrRetirementDate', type: 'calendar' , field: 'retired_s'},
                                                                 { name: 'msrEntryinForceDate', type: 'calendar' , field: 'entryIntoForce_s'},
-                                                                { name: 'mssApplicationDate', type: 'calendar' , field: 'limitedApplication_s'}      
+                                                                { name: 'mssApplicationDate', type: 'calendar' , field: 'limitedApplication_s'}
                                                             ]
                                             };
             $scope.absPermit               = { identifier: 'absPermit',                title: 'Permits and their equivalent' ,
@@ -292,7 +294,7 @@ app.directive('searchFilterSchemas', function ($http) {
                                                                 { name: 'permitkeywords',       type: 'multiselect' , field: 'keywords_ss'},
                                                                 { name: 'permitExpiryDate',     type: 'calendar' , field: 'expiration_s'},
                                                                 { name: 'permitIssuanceDate',   type: 'calendar' , field: 'date_s'},
-                                                                { name: 'amendmentIntent',      type: 'radio' , field: 'amendmentIntent_i'}           
+                                                                { name: 'amendmentIntent',      type: 'radio' , field: 'amendmentIntent_i'}
                                                             ]
                                              };
             $scope.absCheckpoint           = { identifier: 'absCheckpoint',            title: 'Checkpoints' ,
@@ -311,7 +313,8 @@ app.directive('searchFilterSchemas', function ($http) {
                                                subFilters : [
                                                                 { name: 'vlrpublicationYear', type: 'multiselect', field: 'publicationYear_is'},
                                                                 { name: 'vlrresourceTypes',   type: 'multiselect' , field: 'resourceTypes_ss'},
-                                                                { name: 'vlrRegions',         type: 'multiselect', field: 'regions_ss' }
+                                                                { name: 'vlrRegions',         type: 'multiselect', field: 'regions_ss' },
+                                                                { name: 'vlrLanguages',       type: 'multiselect', field: 'documentLanguages_ss' }
                                                             ]
                                                };
             $scope.organization            = { identifier: 'organization',             title: 'ABS Related Organizations' };
@@ -332,7 +335,7 @@ app.directive('searchFilterSchemas', function ($http) {
             }
 
             function onWatch_items(values) { if(!values) return;
-                values.forEach(function (item) { 
+                values.forEach(function (item) {
                     if(_.has($scope.termsx, item.symbol))
                     {
                         $scope.termsx[item.symbol].count = item.count;
@@ -342,9 +345,9 @@ app.directive('searchFilterSchemas', function ($http) {
             }
 
             $scope.$watch('items', onWatch_items);
- 
+
             $scope.refresh = function(selected, schema){
-                
+
                 if(selected)
                     $scope.expandSearch++;
                 else
@@ -359,30 +362,30 @@ app.directive('searchFilterSchemas', function ($http) {
                 }
             }
             $scope.getAmendmentFacets = function(type){
-                
+
                 if($scope.absPermit.subFilters[4].facets){
                     var facets = $scope.absPermit.subFilters[4].facets;
                    for (var i = 0; i < facets.length; i+=2) {
                         if(facets[i] == type){
-                            return '(' + facets[i+1] + ')'; 
+                            return '(' + facets[i+1] + ')';
                         }
                     }
                 }
             }
 
             $scope.buildQuery();
-            
-            $scope.terms.forEach(function (item) { 
+
+            $scope.terms.forEach(function (item) {
                 if(item.subFilters){
                     item.subFilters.forEach(function(filter){
-                        $scope.$watch(filter.name, 
+                        $scope.$watch(filter.name,
                             function(oldValue, newValue){
                                if(oldValue != newValue){
                                     $scope.buildQuery();
                                 }
                             });
                         }
-                    );                    
+                    );
                 }
             });
 
@@ -396,7 +399,7 @@ app.directive('searchFilterSchemas', function ($http) {
             // $(document).on('click', 'blaise.ul', function (e) {
             //     e.stopPropagation();
             // });
-            
+
 
         }]
     }

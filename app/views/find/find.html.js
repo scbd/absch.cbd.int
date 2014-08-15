@@ -1,7 +1,7 @@
 define(['app'], function (app) {
 
 app.controller('FindController', ['$scope', '$rootScope', '$http', '$timeout', '$q', function ($scope, $rootScope, $http, $timeout, $q) {
-    
+
     var self = this;
     var queryCanceler = null;
     var refreshTimeout = null;
@@ -60,10 +60,10 @@ app.controller('FindController', ['$scope', '$rootScope', '$http', '$timeout', '
             return;
 
       item.data = {'schema':item.schema, 'url_ss': item.url_ss, 'data': item};
-        $http.get("/api/v2013/documents/"+item.identifier_s).then(function (result) {  
+        $http.get("/api/v2013/documents/"+item.identifier_s).then(function (result) {
             item.data = result.data;
 
-            $http.get("/api/v2013/documents/"+item.identifier_s + "?info").then(function (result) {  
+            $http.get("/api/v2013/documents/"+item.identifier_s + "?info").then(function (result) {
                 item.data.info = result.data;
             });
 
@@ -112,7 +112,7 @@ app.controller('FindController', ['$scope', '$rootScope', '$http', '$timeout', '
     //     }
 
     //     return facets;
-    // };         
+    // };
 
 
     function readFacets2(solrArray) {
@@ -126,10 +126,10 @@ app.controller('FindController', ['$scope', '$rootScope', '$http', '$timeout', '
                 facets.push({ symbol: facet, title: facet, count: solrArray[i + 1] });
             }
         }
-        
+
            // console.log(solrArray);
         return facets;
-    };              
+    };
 
     //============================================================
     //
@@ -137,12 +137,12 @@ app.controller('FindController', ['$scope', '$rootScope', '$http', '$timeout', '
     //============================================================
 	function query () {
 
-        var q = 'realm_ss:absch';//' AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryTheme + ' AND ' + $scope.queryTargets +' AND ' + $scope.queryDate + ' AND ' + $scope.queryKeywords;
+        var q = '(realm_ss:absch OR realm_ss:ABS)';//' AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryTheme + ' AND ' + $scope.queryTargets +' AND ' + $scope.queryDate + ' AND ' + $scope.queryKeywords;
 
-        if($scope.keyword)         q += ' AND (title_t:' + $scope.keyword + '* OR description_t:' + $scope.keyword + '* OR text_EN_txt:' + $scope.keyword + '*)';
-        
-        
-        if($scope.querySchema != "*:*" ){            
+        if($scope.keyword)         q += ' AND (title_s:' + $scope.keyword + '* OR description_t:' + $scope.keyword + '* OR text_EN_txt:' + $scope.keyword + '*)';
+
+
+        if($scope.querySchema != "*:*" ){
             q += ' AND (' + $scope.querySchema + ')';
         }
         else
@@ -156,17 +156,17 @@ app.controller('FindController', ['$scope', '$rootScope', '$http', '$timeout', '
             'q': q,
             'sort': 'createdDate_dt desc, title_t asc',
             'fl': 'id,identifier_s,title_t,description_t,url_ss,schema_EN_t,date_dt,government_EN_t,schema_s,number_d,aichiTarget_ss,reference_s,sender_s,meeting_ss,recipient_ss,symbol_s,eventCity_EN_t,eventCountry_EN_t,startDate_s,endDate_s,body_s,code_s,meeting_s,group_s,function_t,department_t,organization_t,summary_EN_t,reportType_EN_t,completion_EN_t,jurisdiction_EN_t,development_EN_t,' +
-                    'publicationYear_is,resourceTypes_CEN_ss,regions_CEN_ss,languages_CEN_ss,responsibleForAll_b,jurisdiction_CEN_s,geneticResourceTypes_CEN_ss,usage_CEN_ss,keywords_CEN_ss,informAllAuthorities_b,originCountries_CEN_ss',
+                    'publicationYear_is,resourceTypes_CEN_ss,regions_CEN_ss,languages_CEN_ss,absResposibleForAll_b,jurisdiction_CEN_s,geneticResourceTypes_CEN_ss,usage_CEN_ss,keywords_CEN_ss,informAllAuthorities_b,originCountries_CEN_ss',
             'wt': 'json',
             'start': $scope.currentPage * $scope.itemsPerPage,
             'rows': $scope.itemsPerPage,
             'cb': new Date().getTime()
         };
-        
+
        // console.log ( $scope.paginatioQuery);
        //  console.log ( queryParameters);
        // $.merge(queryParameters, $scope.paginatioQuery);
-        
+
 
 
         if (queryCanceler) {
@@ -177,7 +177,7 @@ app.controller('FindController', ['$scope', '$rootScope', '$http', '$timeout', '
         queryCanceler = $q.defer();
 
         $http.get('/api/v2013/index/select', { params: queryParameters, timeout: queryCanceler }).success(function (data) {
-           
+
             queryCanceler = null;
 
             // $scope.count     = data.response.numFound;
@@ -185,7 +185,7 @@ app.controller('FindController', ['$scope', '$rootScope', '$http', '$timeout', '
             // $scope.stop      = data.response.start+data.response.docs.length-1;
             // $scope.rows      = data.response.docs.length;
             // $scope.documents = [];
-            
+
              $scope.rawDocs = [];
              $scope.rawDocs = data.response.docs;
              $scope.documentCount   = data.response.numFound;
@@ -193,11 +193,11 @@ app.controller('FindController', ['$scope', '$rootScope', '$http', '$timeout', '
             // 	$scope.documents.push(transformDocument(document));
             // });
 
-            
+
 
             if(!$scope.schemas) {
                 var queryFacetsParameters = {
-                    'q': 'realm_ss:absch',
+                    'q': '(realm_ss:absch OR realm_ss:ABS)',
                     'fl': '',
                     'wt': 'json',
                     'rows': 0,
@@ -275,7 +275,7 @@ app.controller('FindController', ['$scope', '$rootScope', '$http', '$timeout', '
     //     var maxCount = 10;
     //     var middle = 5;
     //     var count = end - start;
-        
+
     //     if (count > maxCount) {
     //         if ($scope.currentPage > middle)
     //             start = $scope.currentPage - middle;
@@ -283,7 +283,7 @@ app.controller('FindController', ['$scope', '$rootScope', '$http', '$timeout', '
     //         end = Math.min(count, start + maxCount);
     //         start = Math.max(0, end - maxCount);
     //     }
-        
+
     //     for (var i = start; i < end; i++) {
     //         ret.push(i);
     //     }
@@ -296,7 +296,7 @@ app.controller('FindController', ['$scope', '$rootScope', '$http', '$timeout', '
     $scope.$watch('queryTargets',    function() { $scope.currentPage=0; refresh(); });
     $scope.$watch('queryTheme',      function() { $scope.currentPage=0; refresh(); });
     $scope.$watch('queryDate',       function() { $scope.currentPage=0; refresh(); });
-    $scope.$watch('keyword',         function() { $scope.currentPage=0; refresh(); });    
+    $scope.$watch('keyword',         function() { $scope.currentPage=0; refresh(); });
 
 }]);
 });

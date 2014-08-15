@@ -1,6 +1,13 @@
 ﻿<div ng-cloak>
 
-	<style>legend {width: 98%;}</style>
+	<style>legend {width: 98%;}
+        .localeBtn{
+            padding: 6px 12px;
+            font-size: 14px;
+            border: 1px solid transparent;
+            background-color: rgb(192, 192, 192);
+        }
+    </style>
 
 	<div class="alert alert-error text-center" ng-show="error" >
 		<strong>Error as occured...</strong>
@@ -25,6 +32,7 @@
 <!--  {{document}} -->
 <!-- {{internalDocument}} -->
 		<div ng-switch on="internalDocument.header.schema" >
+
 			<div view-authority	ng-switch-when="authority" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}  hide={{hide}}></div>
 
 			<div view-contact ng-switch-when="contact"	ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}  hide={{hide}}></div>
@@ -60,3 +68,4 @@
 	</div>
 	<!-- <div view-other	ng-model="internalDocument"  locale="getLocale()" link-target={{linkTarget}} ></div> -->
 </div>
+        

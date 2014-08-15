@@ -46,9 +46,9 @@ app.directive('searchFilterSchemas', function ($http) {
                                                                             return Enumerable.from($filter("orderBy")(o[0].data, "name")).union(
                                                                                    Enumerable.from($filter("orderBy")(o[1].data, "name"))).toArray();
                                                            });
-                                                      },            
+                                                      },
                 absSubjects             : function () { return $http.get("/api/v2013/thesaurus/domains/CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924/terms", { cache: true }).then(function(o){ return o.data; }); },
-                
+
             };
 
             $scope.isSelected = function(item) {
@@ -98,7 +98,7 @@ app.directive('searchFilterSchemas', function ($http) {
             };
 
             $scope.updateQuery = function() {
-                
+
                 $scope.query = '';
 
                 $scope.selectedItems.forEach(function(item) {
@@ -114,7 +114,7 @@ app.directive('searchFilterSchemas', function ($http) {
             };
 
             $scope.onclick = function (scope, evt) {
-                
+
                 $scope[scope].selected = !$scope[scope].selected;
                 $scope.expandSearch--;
                 //console.log( $scope.terms);
@@ -136,7 +136,7 @@ app.directive('searchFilterSchemas', function ($http) {
             }
 
             function buildConditions (conditions, items) {
-                items.forEach(function (item) { 
+                items.forEach(function (item) {
 
                     if(item.selected){
 
@@ -149,21 +149,21 @@ app.directive('searchFilterSchemas', function ($http) {
                                 if(filter.type=='multiselect'){
                                     if( $scope[filter.name] && $scope[filter.name].length > 0){
                                         // debugger;
-                                        var selectedValues = $scope[filter.name];    
+                                        var selectedValues = $scope[filter.name];
                                         console.log (selectedValues)                                     ;
-                                            subFilterQuery = subFilterQuery + ' AND (' + filter.field +':'+ selectedValues.join(' OR ' + filter.field + ': ') + ')';      
-                                            //subFilterQuery = subFilterQuery.replace(',', ' OR ');                                        
+                                            subFilterQuery = subFilterQuery + ' AND (' + filter.field +':'+ selectedValues.join(' OR ' + filter.field + ': ') + ')';
+                                            //subFilterQuery = subFilterQuery.replace(',', ' OR ');
                                     }
                                 }
                                 else if(filter.type=='calendar'){
-                                        var selectedValues = $scope[filter.name];  
+                                        var selectedValues = $scope[filter.name];
                                         if(selectedValues != '*:*'){
-                                            subFilterQuery = subFilterQuery + ' AND ' + selectedValues;                                                  
+                                            subFilterQuery = subFilterQuery + ' AND ' + selectedValues;
                                         }
                                 }
                                 else {
                                     if($scope[filter.name])
-                                        subFilterQuery = subFilterQuery + ' AND ('  + filter.field +':'+  $scope[filter.name] + ')';       
+                                        subFilterQuery = subFilterQuery + ' AND ('  + filter.field +':'+  $scope[filter.name] + ')';
                                 }
                             });
                         }
@@ -172,14 +172,14 @@ app.directive('searchFilterSchemas', function ($http) {
                 //console.log(subFilterQuery);
                         conditions.push(subFilterQuery);
                     }
-                });                 
- 
+                });
+
             }
 
 
             function dictionarize(items) {
                 var dictionary = [];
-                items.forEach(function (item) { 
+                items.forEach(function (item) {
                     item.selected = false;
                     dictionary[item.identifier] = item;
                 });
@@ -190,9 +190,9 @@ app.directive('searchFilterSchemas', function ($http) {
                                              };
             $scope.authority               = { identifier: 'authority',                title: 'Competent National Authorities' ,
                                                subFilters : [
-                                                                { name: 'cnaResponsibleForAll',     type: 'yesno' , field: 'responsibleForAll_b'},
+                                                                { name: 'cnaResponsibleForAll',     type: 'yesno' , field: 'absResposibleForAll_b'},
                                                                 { name: 'cnaJurisdiction',          type: 'multiselect', field: 'jurisdiction_s' },
-                                                                { name: 'cnaGeneticResourceTypes',  type: 'multiselect' , field: 'geneticResourceTypes_ss'}                                                         
+                                                                { name: 'cnaGeneticResourceTypes',  type: 'multiselect' , field: 'geneticResourceTypes_ss'}
                                                             ]
                                              };
             $scope.database                = { identifier: 'database',                 title: 'National Websites and Databases', count: 0 };
@@ -205,7 +205,7 @@ app.directive('searchFilterSchemas', function ($http) {
                                                                 { name: 'msrAdoptionDate', type: 'calendar' , field: 'adoption_s'},
                                                                 { name: 'msrRetirementDate', type: 'calendar' , field: 'retired_s'},
                                                                 { name: 'msrEntryinForceDate', type: 'calendar' , field: 'entryIntoForce_s'},
-                                                                { name: 'mssApplicationDate', type: 'calendar' , field: 'limitedApplication_s'}      
+                                                                { name: 'mssApplicationDate', type: 'calendar' , field: 'limitedApplication_s'}
                                                             ]
                                             };
             $scope.absPermit               = { identifier: 'absPermit',                title: 'Permits and their equivalent' ,
@@ -214,7 +214,7 @@ app.directive('searchFilterSchemas', function ($http) {
                                                                 { name: 'permitusage',      type: 'multiselect' , field: 'usage_ss'},
                                                                 { name: 'permitkeywords',   type: 'multiselect' , field: 'keywords_ss'},
                                                                 { name: 'permitExpiryDate', type: 'calendar' , field: 'expiration_s'},
-                                                                { name: 'permitIssuanceDate', type: 'calendar' , field: 'date_s'}      
+                                                                { name: 'permitIssuanceDate', type: 'calendar' , field: 'date_s'}
                                                             ]
                                              };
             $scope.absCheckpoint           = { identifier: 'absCheckpoint',            title: 'Checkpoints' ,
@@ -264,9 +264,9 @@ app.directive('searchFilterSchemas', function ($http) {
             }
 
             $scope.$watch('items', onWatch_items);
- 
+
             $scope.refresh = function(selected){
-                
+
                 if(selected)
                     $scope.expandSearch++;
                 else
@@ -274,20 +274,20 @@ app.directive('searchFilterSchemas', function ($http) {
 
                 buildQuery();
             }
-            
+
             buildQuery();
-            
-            $scope.terms.forEach(function (item) { 
+
+            $scope.terms.forEach(function (item) {
                 if(item.subFilters){
                     item.subFilters.forEach(function(filter){
-                        $scope.$watch(filter.name, 
+                        $scope.$watch(filter.name,
                             function(oldValue, newValue){
                                if(oldValue != newValue){
                                     buildQuery();
                                 }
                             });
                         }
-                    );                    
+                    );
                 }
             });
 
@@ -301,7 +301,7 @@ app.directive('searchFilterSchemas', function ($http) {
             // $(document).on('click', 'blaise.ul', function (e) {
             //     e.stopPropagation();
             // });
-            
+
 
         }]
     }
