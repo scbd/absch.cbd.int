@@ -213,21 +213,20 @@ app.directive('documentList', function ($http, $filter) {
                         output.Types = getString(document.resourceTypes_CEN_ss, locale);
                         output.Regions = getString(document.regions_CEN_ss, locale);
 
-                        if(document.documentLanguages_ss){
-                            var languages = [];
-                            document.documentLanguages_ss.forEach(function(language){
-                                languages.push($filter("languageLongName")(language));
-                            });
-                            output.Languages = languages.toString();
+                        if(document.resourceLinksLanguage_ss){
+                            output.Languages = [];
+                            document.resourceLinksLanguage_ss.forEach(function(language){
+                                        output.Languages.push(language)
+                                    });
                         }
-                        
+
                         output.recordtype="referenceRecord";
                         // TODO: add summary as output.description and limit to 200 chars
 
                         if(output.Types)output.metadata.push(output.Types);
                         if(output.Year)output.metadata.push(output.Year);
                         if(output.Regions)output.metadata.push(output.Regions);
-                        if(output.Languages)output.metadata.push(output.Languages);
+                        //if(output.Languages)output.metadata.push({"metadata":output.Languages,"filter":"term"});
 
 
                     }else if(document.schema_s=='authority') {

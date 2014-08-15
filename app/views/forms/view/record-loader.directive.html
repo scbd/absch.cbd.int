@@ -15,7 +15,7 @@
 	</div>
 	<div ng-show="!error && internalDocument">
 		<div style="float:right">
-			<button  type="button" class="btn" ng-click="edit()" ng-show="user().isAuthenticated" ng-disabled="!canEdit()">Edit</button>
+			<button  type="button" class="btn localeBtn" ng-click="edit()" ng-show="canEdit()" >Edit</button>
 
             <div class="btn-group" ng-show="documentVersionCount>1">
               <button type="button" class="btn btn-danger">Revision {{revisionNo}}</button>
@@ -68,4 +68,3 @@
 	</div>
 	<!-- <div view-other	ng-model="internalDocument"  locale="getLocale()" link-target={{linkTarget}} ></div> -->
 </div>
-        

@@ -41,13 +41,14 @@ app.directive('recordLoader', [function () {
 			$scope.$watch("document", function(_new) {
 				$scope.error = null;
 				$scope.internalDocument = _new;
+
 			});
 
 			if(!$scope.document)
 				$scope.init();
 		},
-		controller: ['$scope', "$route", 'IStorage', "authentication", "localization", "$q", "$location", "commonjs",
-			function ($scope, $route, storage, authentication, localization, $q, $location,commonjs) {
+		controller: ['$scope', "$route", 'IStorage', "authentication", "localization", "$q", "$location", "commonjs","$timeout",
+			function ($scope, $route, storage, authentication, localization, $q, $location,commonjs,$timeout) {
 
 			//==================================
 			//
@@ -78,8 +79,8 @@ app.directive('recordLoader', [function () {
 						//window.close();
 						return;
 					}
-					if(docNum.length == 4)
-						documentID = docNum[3];
+					if(docNum.length <= 4)
+						documentID = docNum[docNum.length-1];
 
 				}
 
@@ -123,7 +124,7 @@ app.directive('recordLoader', [function () {
 					qDocument = storage.documentVersions.get(identifier,{'version':version})
 									   .then(function(result) { return result.data || result });
 
-					qDocumentInfo = storage.documentVersions.get(identifier,{ info: true,'version':version }).then(function(result) { return result.data || result });
+				//	qDocumentInfo = storage.documentVersions.get(identifier,{ info: true,'version':version }).then(function(result) { return result.data || result });
 
 				}
 				qDocumentInfo = storage.documents.get(identifier,{ info: true}).then(function(result) { return result.data || result });
@@ -157,8 +158,12 @@ app.directive('recordLoader', [function () {
 			//==================================
 			//
 			//==================================
-			$scope.user = function() {
-				return authentication.getUser();
+			$scope.getUser = function() {
+
+				if(!$scope.user)
+				 	$q.when(authentication.getUser(), function(user){ $scope.user = user; });
+
+				return $scope.user
 			};
 
 			//==================================
@@ -170,21 +175,26 @@ app.directive('recordLoader', [function () {
 
 				var schema     = $scope.internalDocumentInfo.type;
 				var identifier = $scope.internalDocumentInfo.identifier;
+				$timeout(function(){
+					$location.path("/register/" + schema + "/" + identifier + '/edit');},1);
 
-				$location.path("/register/" + schema + "/" + identifier);
-				$location.search({});
 			}
 
 			//==================================
 			//
 			//==================================
 			$scope.canEdit = function() {
-				if (!$scope.user().isAuthenticated)
+
+				if ($scope.getUser() && !$scope.getUser().isAuthenticated)
 					return false;
+
+				if(!$scope.internalDocumentInfo && $scope.internalDocument && $scope.internalDocument.info)
+				{
+					$scope.internalDocumentInfo = $scope.internalDocument.info;
+				}
 
 				if (!$scope.internalDocumentInfo)
 					return false;
-
 				if ($scope.internalCanEdit === undefined) {
 
 					$scope.internalCanEdit = null; // avoid recall => null !== undefined

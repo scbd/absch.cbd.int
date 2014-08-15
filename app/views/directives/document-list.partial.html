@@ -1,7 +1,7 @@
 <div style="padding: 0px; margin: 0;">
 
 <link rel="stylesheet" href="/app/css/result.css">
- 
+
   <ul class="pagination pull-right" ng-show='showPagination'>
      <li class="disabled" >
       <a href>  Found {{documentCount}}</a>
@@ -64,16 +64,20 @@
 
                           </div>
                           <div class="metadetails" ng-hide="displayDetails" >
-                            
+
                             <span ng-repeat="m in document.metadata">
-                             <span ng-bind-html="m"> </span> {{$last ? '' : ' &nbsp;|&nbsp; '}}
+                             <span ng-bind-html="m"></span> {{$last ? '' : ' &nbsp;|&nbsp; '}}
                             <span>
+                            <span ng-show="document.Languages && document.metadata"> | </span>
+                            <span ng-repeat="b in document.Languages">
+                                {{b | term}} {{$last ? '' : ', '}}
+                            </span>
                           </div>
                         </a>
 
                         <div class="details" ng-show="displayDetails" record-loader document="document.data"
                         hide="title;header;libraries" ></div>
-                            
+
                         </div>
                     </div>
 
@@ -82,14 +86,14 @@
 
 
 
-        
 
-      
+
+
       </div> <!-- end switch -->
       <div class="clearfix"></div>
     </div>
 
-    
+
     <!---Bottom pager-->
     <div class="clearfix"></div>
     <ul class="pagination pull-right" ng-show='showPagination'>
@@ -112,5 +116,5 @@
           <a href ng-click="actionSetPage(pageCount - 1)">Last »</a>
         </li>
     </ul>
-    
+
   </div>

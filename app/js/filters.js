@@ -146,7 +146,7 @@ define(["app"], function (app) {
 
             }
             else if(term && angular.isObject(term)){
-
+// console.log(term);
                 document = term.info && term.info.metadata ? term.info : term;
 
                 var revision = ''
@@ -171,7 +171,11 @@ define(["app"], function (app) {
         			return cacheMap[term.identifier] ;
             }
 
+            if(!document)
+                return;
+
 			cacheMap[term.identifier] = $q.when(document).then(function(document) {
+
                 if(document.data)
                     document = document.data;
                 else
@@ -188,9 +192,9 @@ define(["app"], function (app) {
                 var government = ''
                 if(document.government)
                     government = document.government.identifier;
-                else if(document.metadata.government)
+                else if(document.metadata && document.metadata.government)
                     government = document.metadata.government;
-                else if(document.body.government)
+                else if(document.body && document.body.government)
                     government = document.body.government.identifier;
 
                 var unique = 'ABSCH-' + $filter("schemaShortName")($filter("lowercase")(document.type)) +

@@ -66,8 +66,9 @@ app.directive('searchFilterSchemas', function ($http) {
                                                            });
                                                       },
                 absSubjects             : function () { return $http.get("/api/v2013/thesaurus/domains/CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924/terms", { cache: true }).then(function(o){ return o.data; }); },
-                languages             : function () { return [{identifier:"ar", name:"Arabic"  },{identifier:"en", name:"English" },{identifier:"es", name:"Spanish" },
-					                                            {identifier:"fr", name:"French"  },{identifier:"ru", name:"Russian" },{identifier:"zh", name:"Chinese" }]},
+                languages               : function () { return $http.get("/api/v2013/thesaurus/domains/ISO639-2/terms", { cache: true }).then(function(o){
+                                                                      return $filter("orderBy")(o.data, "name");
+                                                                    })},
 
             };
 
@@ -314,7 +315,7 @@ app.directive('searchFilterSchemas', function ($http) {
                                                                 { name: 'vlrpublicationYear', type: 'multiselect', field: 'publicationYear_is'},
                                                                 { name: 'vlrresourceTypes',   type: 'multiselect' , field: 'resourceTypes_ss'},
                                                                 { name: 'vlrRegions',         type: 'multiselect', field: 'regions_ss' },
-                                                                { name: 'vlrLanguages',       type: 'multiselect', field: 'documentLanguages_ss' }
+                                                                { name: 'vlrLanguages',       type: 'multiselect', field: 'resourceLinksLanguage_ss' }
                                                             ]
                                                };
             $scope.organization            = { identifier: 'organization',             title: 'ABS Related Organizations' };
