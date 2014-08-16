@@ -1,0 +1,13 @@
+.help-feature-box{
+    width:200px;
+    background-color:#fff;
+    height:160px;
+    text-align:center;
+    vertical-align:center;
+    padding:20px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px; /* future proofing */
+    -khtml-border-radius: 10px; /* for old Konqueror browsers */
+    border:5px solid #ddd;
+}
