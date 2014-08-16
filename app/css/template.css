@@ -1,4 +1,39 @@
 
+.color-red{
+    color:#C7532C;
+}
+.color-orange{
+    color:#FA6938;
+}
+
+
+
+.fa-6 {
+font-size: 20em;
+}
+
+
+.fa-5 {
+font-size: 18em;
+}
+
+
+.fa-4 {
+font-size: 12em;
+}
+
+
+.fa-3{
+font-size: 6em;
+}
+
+
+.fa-2 {
+font-size: 2em;
+}
+
+
+
 @font-face {
     font-family: 'alternategotno3dotregular';
     src: url('/app/fonts/alternategotno3dot-webfont.eot');
