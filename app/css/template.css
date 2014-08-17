@@ -3,8 +3,13 @@
     color:#C7532C;
 }
 .color-orange{
-    color:#FA6938;
+    color:##fa6938;
 }
+.bg-orange{
+    background-color:#fa6938!important;
+    color:#FFF;
+}
+
 
 
 
