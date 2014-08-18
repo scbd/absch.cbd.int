@@ -1,6 +1,6 @@
 ﻿<div id="Record" class="record panel panel-default">
 	<div class="panel-heading"><h4 ><span style="color:#ed9c28;font-weight:bold;">VLR</span> Virtual Library Record</h4>
-        
+
     </div>
 	<div class="record-body panel-body">
 
@@ -53,14 +53,14 @@
 			<div class="km-value km-pre">{{document.authorsInfo | lstring:locale}}</div>
 		</div>
 
-		<div ng-show="document.languages">
+		<!-- <div ng-show="document.languages">
 			<label>Language(s)</label>
 			<div class="km-value" >
 				<ul>
 					<li ng-repeat="term in document.languages">{{term|term}}</li>
 				</ul>
 			</div>
-		</div>
+		</div> -->
 
 		<div ng-show="document.publicationYear">
 			<label>Publication year</label>

@@ -6,7 +6,7 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
     _.extend($scope.options, {
       languages     : function() {
         return $q.all([
-          $http.get("/api/v2013/thesaurus/domains/52AFC0EE-7A02-4EFA-9277-8B6C327CE21F/terms", { cache: true }), 
+          $http.get("/api/v2013/thesaurus/domains/52AFC0EE-7A02-4EFA-9277-8B6C327CE21F/terms", { cache: true }),
           $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })
         ]).then(function(o) {
           var data = $filter("orderBy")(o[0].data, "name");
@@ -16,7 +16,7 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
       },
       resourceTypes : function() {
         return $q.all([
-          $http.get("/api/v2013/thesaurus/domains/83BA4728-A843-442B-9664-705F55A8EC52/terms", { cache: true }), 
+          $http.get("/api/v2013/thesaurus/domains/83BA4728-A843-442B-9664-705F55A8EC52/terms", { cache: true }),
           $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })
         ]).then(function(o) {
           var data = o[0].data;
@@ -54,8 +54,9 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
       if (/^\s*$/g.test(document.notes))
         document.notes = undefined;
 
-      if(!$scope.isOtherSelected(document.languages))
+      //if(!$scope.isOtherSelected(document.languages))
           document.languageName = undefined;
+          document.languages = undefined;
 
       if(!$scope.isOtherSelected(document.resourceTypes))
           document.resourceTypeName = undefined;
