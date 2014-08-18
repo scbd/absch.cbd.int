@@ -3,12 +3,36 @@
     color:#C7532C;
 }
 .color-orange{
-    color:##fa6938;
+    color:#fa6938;
+}
+.color-blue{
+    color:#428bca;
+}
+.color-green{
+    color:#1FA65D;
+}
+.color-grey{
+    color:#555;
+}
+.color-litegrey{
+    color:#999;
+}
+.color-black{
+    color:#111;
 }
 .bg-orange{
     background-color:#fa6938!important;
     color:#FFF;
 }
+.bg-white{
+    background-color:#FFF!important;
+    color:#555;
+}
+.bg-grey{
+    background-color:#EEE!important;
+    color:#555;
+}
+
 
 
 
@@ -34,7 +58,7 @@ font-size: 6em;
 
 
 .fa-2 {
-font-size: 2em;
+font-size: 4em;
 }
 
 
