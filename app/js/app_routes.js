@@ -91,7 +91,7 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
               templateUrl: '/app/views/register.html',
               resolveController: true,
               resolveUser: true,
-              subTemplateUrl: '/app/views/forms/edit/edit-', //filled in through controller
+              subTemplateUrl: '/app/views/forms/edit/edit--', //filled in through controller
             }).
 
              when('/forum', {
