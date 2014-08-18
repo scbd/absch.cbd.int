@@ -23,18 +23,16 @@
 					<div class="km-value">ABSCH-{{document.government.identifier|uppercase}}-{{documentInfo.documentID}}-{{documentInfo.revision}}</div>
 				</div>
 
-                <legend>Reference to others internationally recognize certificates of compliance</legend>
-    				<div ng-show="document.referencePermits">
-    					<label>Reference number(s) of the internationally recognized certificate(s) of compliance that relate(s) to this permit</label>
-    					<div class="km-value">
-    						<ul>
-    							<li ng-repeat="permit in document.referencePermits">
-    								<a href="/database/record?documentSchema=ABSPERMIT&documentID={{permit | lstring:locale}}">{{permit | lstring:locale | uniqueID}}</a>
-    							</li>
-    						</ul>
-
-    					</div>
-    				</div>
+	     <div ng-show="document.referencePermits">
+					<label>Reference number(s) of the internationally recognized certificate(s) of compliance that relate(s) to this permit</label>
+					<div class="km-value">
+						<ul>
+							<li ng-repeat="permit in document.referencePermits">
+								<a href="/database/record?documentSchema=ABSPERMIT&documentID={{permit | lstring:locale}}">{{permit | lstring:locale | uniqueID}}</a>
+							</li>
+						</ul>
+					</div>
+				</div>
 				<div ng-show="document.government">
 					<label>Country</label>
 					<div class="km-value" >

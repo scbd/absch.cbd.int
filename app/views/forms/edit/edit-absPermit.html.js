@@ -1,6 +1,7 @@
 define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 
-  app.controller("editAbsPermit", ["$scope", "authHttp", "Thesaurus", "guid", "$filter", "$q", "Enumerable", "editFormUtility", "$controller", function ($scope, $http, Thesaurus, guid, $filter, $q, Enumerable, editFormUtility, $controller) {
+  app.controller("editAbsPermit", ["$scope", "authHttp", "Thesaurus", "guid", "$filter", "$q", "Enumerable", "editFormUtility", "$controller","IStorage",
+   function ($scope, $http, Thesaurus, guid, $filter, $q, Enumerable, editFormUtility, $controller, storage) {
     $controller('editController', {$scope: $scope});
 
 
@@ -18,7 +19,8 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
                                 return $q.all(permit).then(function(o){
                                       var permits =  [];
                                       o.data.Items.forEach(function(permit){
-                                        permits.push({"title": permit.title.en, "identifier": permit.identifier});
+                                        if(permit.identifier != $scope.document.header.identifier)
+                                          permits.push({"title": permit.title.en, "identifier": permit.identifier});
                                       });
                                       return permits;
                                 });
