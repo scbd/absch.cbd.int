@@ -1,7 +1,7 @@
 .help-feature-box{
     width:160px;
     background-color:#fff;
-    height:160px;
+    height:140px;
     text-align:center;
     vertical-align:center;
     padding:20px;
@@ -10,4 +10,21 @@
     border-radius: 10px; /* future proofing */
     -khtml-border-radius: 10px; /* for old Konqueror browsers */
     border:5px solid #ddd;
+}
+
+.help-section-title{
+
+    border-bottom:1px solid #DDD;
+
+}
+.pic{
+
+    width:160px;
+    height:110px;
+    text-align:center;
+    vertical-align:middle;
+    padding:20px 20px 0 20px;
+    border-bottom: 5px solid #1FA65D;
+
+
 }
