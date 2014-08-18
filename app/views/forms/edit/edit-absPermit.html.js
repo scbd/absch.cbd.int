@@ -13,6 +13,16 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
                                       data.push(o[1].data)
                                       return Thesaurus.buildTree(data);
                                     }); },
+     permits    : function () {
+                                var permit = storage.documents.query("(type eq 'absPermit')",undefined,{cache:false});
+                                return $q.all(permit).then(function(o){
+                                      var permits =  [];
+                                      o.data.Items.forEach(function(permit){
+                                        permits.push({"title": permit.title.en, "identifier": permit.identifier});
+                                      });
+                                      return permits;
+                                });
+                              },
     });
 
 
