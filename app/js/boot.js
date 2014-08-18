@@ -26,6 +26,7 @@ require.config({
         'bootbox'               : '../libs/bootbox/bootbox',
         'jqvmap'                : '../libs/jqvmap/jqvmap/jquery.vmap.min',
         'jqvmapworld'           : '../libs/jqvmap/jqvmap/maps/jquery.vmap.world'
+
     },
     'shim': {
         'angular'        : { 'deps': ['jquery'], 'exports': 'angular' },
