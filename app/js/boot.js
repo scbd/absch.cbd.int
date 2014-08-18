@@ -19,7 +19,6 @@ require.config({
         'bootstrap-datepicker'  : '../libs/bootstrap-datepicker/js/bootstrap-datepicker',
         'angular-loading-bar'   : '../libs/angular-loading-bar/src/loading-bar',
         'angular-animate'       : '../libs/angular-animate/angular-animate.min',
-        'dragAndDrop'     : '../libs/angular-dragndrop/angular-dnd.min',
         'view-abs-checkpoint':'../views/forms/view/view-abs-checkpoint.directive',
         'introjs'         : '../libs/intro.js/intro',
         'angular-introjs' : '../js/directives/angular-intro',
@@ -36,7 +35,6 @@ require.config({
         'underscore'     : { 'exports': '_' },
         'angular-animate' : {'deps': ['angular']},
         'angular-loading-bar' : {'deps': ['angular']},
-        'dragAndDrop'     : {'deps':['angular']},
         'introjs'         : {'exports': 'introJs'},
         'angular-introjs' : {'deps':['angular', 'introjs']},
         'angular-localizer': {'deps':['angular']},
@@ -47,7 +45,7 @@ require.config({
 
 require(['angular', 'angular-route', 'angular-cookies', 'angular-sanitize', 'bootstrap', 'domReady',
     'bootstrap-datepicker','angular-loading-bar', 'angular-animate',
-    'dragAndDrop','moment', 'introjs', 'angular-form-controls'/*, 'main'*/], function (ng) {
+    'moment', 'introjs', 'angular-form-controls'/*, 'main'*/], function (ng) {
     // NOTE: place operations that need to initialize prior to app start here using the `run` function on the top-level module
 
     require(['domReady!', 'main', 'angular-introjs'], function (document) {
