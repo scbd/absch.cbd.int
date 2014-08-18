@@ -76,9 +76,9 @@ define(['app', 'angular', 'authentication'], function(app, angular) {
                 //TODO: I'm not sure if this is the most elegant approach... reconsider
                 //NOTE: for some reason the subTemplareUrl is staying as the old one, not as the newly defined one. Yet the document_type is being changed.
                 if($route.current.$$route.subTemplateUrl && $route.current.$$route.subTemplateUrl.slice(-1) == '-')
-                  $route.current.$$route.subTemplateUrlFull = $route.current.$$route.subTemplateUrl.slice(-1) + $route.current.params.document_type + '.html';
+                    $route.current.$$route.subTemplateUrlFull = $route.current.$$route.subTemplateUrl.slice(0, -1) + $route.current.params.document_type + '.html';
                 else
-                  $route.current.$$route.subTemplateUrlFull = $route.current.$$route.subTemplateUrl;
+                    $route.current.$$route.subTemplateUrlFull = $route.current.$$route.subTemplateUrl;
 
                 if($route.current.$$route.subTemplateUrlFull && !$route.current.$$route.ignoreSubController)
                   controllers.push($route.current.$$route.subTemplateUrlFull + '.js');
