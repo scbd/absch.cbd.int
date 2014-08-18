@@ -26,7 +26,6 @@ require.config({
         'bootbox'               : '../libs/bootbox/bootbox',
         'jqvmap'                : '../libs/jqvmap/jqvmap/jquery.vmap.min',
         'jqvmapworld'           : '../libs/jqvmap/jqvmap/maps/jquery.vmap.world'
-
     },
     'shim': {
         'angular'        : { 'deps': ['jquery'], 'exports': 'angular' },
@@ -38,9 +37,9 @@ require.config({
         'underscore'     : { 'exports': '_' },
         'angular-animate' : {'deps': ['angular']},
         'angular-loading-bar' : {'deps': ['angular']},
-        'introjs'               : {'exports': 'introJs'},
-        'angular-introjs'       : {'deps':['angular', 'introjs']},
-        'angular-localizer'     : {'deps':['angular']},
+        'introjs'         : {'exports': 'introJs'},
+        'angular-introjs' : {'deps':['angular', 'introjs']},
+        'angular-localizer': {'deps':['angular']},
         'angular-form-controls' : {'deps': ['angular', 'angular-sanitize', 'angular-localizer']},
         'bootbox'               : {'deps':['bootstrap', 'jquery']},
         'jqvmap'                : { 'deps': ['jquery'] },
