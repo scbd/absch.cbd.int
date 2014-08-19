@@ -1,4 +1,4 @@
-define(['app'], function (app) {
+define(['app','angular-form-controls'], function (app) {
 
     app.directive('workflowStdButtons',["$q", "$timeout", function($q, $timeout){
 
@@ -30,10 +30,11 @@ define(['app'], function (app) {
 				//====================
 				$scope.updateSecurity = function()
 				{
+                    $scope.languages = $scope.getDocumentFn().header.languages;
 					$scope.security = {};
 					$scope.loading = true;
-
 					$q.when($scope.getDocumentFn()).then(function(document){
+
 
 						if(!document || !document.header)
 							return;
@@ -322,6 +323,14 @@ define(['app'], function (app) {
                     $("#step" + tab).addClass('active');
                     $("#step" + tab).prevAll().addClass('active');
 
+                }
+                $scope.$watch('languages', function(newValue){
+                    if(newValue)
+                        $scope.$parent.document.header.languages = newValue;
+                });
+
+                $scope.close = function(){
+                    $scope.$emit("documentClosed");
                 }
 			}]
     	};

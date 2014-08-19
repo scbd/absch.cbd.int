@@ -1,7 +1,6 @@
 //fixed a bug with the comment up here ;)
 define([
-    'app',
-    '/app/views/forms/edit/km-form-buttons.js',
+    'app',    
     '/app/views/forms/edit/editFormUtility.js',
     '/app/views/forms/edit/field-embed-contact.directive.js',
     '/app/views/forms/edit/edit-contact-base.directive.js',
@@ -429,7 +428,7 @@ define([
     //raised when  a document is published or requested for publishing
     //update orignal document with the updated one to avoid validation on page leave event(confirmLeaving).
     $scope.$on('updateOrignalDocument', function(evt,newDocument){
-        
+
         $scope.origanalDocument = newDocument;
     });
   }]);

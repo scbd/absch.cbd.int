@@ -21,20 +21,7 @@
     <div ng-show="!isLoading() && status!='hidden'">
 
         <div workflow-std-buttons document="getCleanDocument()"/>
-        <div class="row">
-            <div class="col-xs-12">
-                <!-- <ul class="pagination">
-                    <li ng-class="{ active  : tab=='edit'   }"><a href="" ng-click="tab='edit'">Submission form</a>
-                    </li>
-                    <li ng-class="{ active  : tab=='review' }"><a href="" ng-click="tab='review'">Review</a>
-                    </li>
-                </ul> -->
-                <div class="pagination  pull-right">
-                    <span km-form-languages ng-model="document.header.languages"></span>
-                    <span km-form-std-buttons document="getCleanDocument()"></span>
-                </div>
-            </div>
-        </div>
+        
 
         <form name="editForm" style="margin-top:10px" class="editForm" >
             <div class="editForm" ng-show="tab=='edit'" km-tab="edit">

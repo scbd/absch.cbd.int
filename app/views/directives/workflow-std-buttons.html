@@ -1,107 +1,30 @@
 <div>
-<style type="text/css">
-    /*progressbar*/
-    #progressbar {
-    	margin-bottom: 30px;
-    	overflow: hidden;
-    	/*CSS counters to number the steps*/
-    	counter-reset: step;
-    }
-    #progressbar li {
-    	list-style-type: none;
-    	color: white;
-    	text-transform: uppercase;
-    	font-size: 9px;
-    	width: 18.33%;
-    	float: left;
-    	position: relative;
-        text-align: center;
-        z-index:1;
-        padding-right: 19px;
-        /*a {
-             text-decoration: none;
-             display: block;
-             width: 100%;
-             height: 100%;
-        }*/
-    }
-    /*#progressbar li:hover {
-        cursor:pointer;
-    }*/
-    #progressbar li:before {
-    	content: counter(step);
-    	counter-increment: step;
-    	width: 20px;
-    	line-height: 20px;
-    	display: block;
-    	font-size: 10px;
-    	color: #333;
-    	background: white;
-    	border-radius: 3px;
-    	margin: 0 auto 5px auto;
-        z-index:-1;
-    }
-    /*progressbar connectors*/
-    #progressbar li:after {
-    	content: '';
-    	width: 100%;
-    	height: 2px;
-    	background: white;
-    	position: absolute;
-    	left: -50%;
-    	top: 9px;
-    	z-index: -1; /*put it behind the numbers*/
-    }
-    #progressbar li:first-child:after {
-    	/*connector not needed before the first step*/
-    	content: none;
-    }
-    /*marking active/completed steps green*/
-    /*The number of the step and the connector before it = green*/
-    #progressbar li.active:before,  #progressbar li.active:after{
-    	background: #27AE60;
-    	color: white;
-    }
-    #progressbar li a,#progressbar li span{
-        color: white;
-        font-size: small;
-    }
-    .rowbg{
-        padding-top: 30px;
-        background-color: #4e5b70;
-        padding-bottom: 1px;
-    }
-    .colbg{
-        padding-bottom: 2px;
-        max-height: 60px;
-    }
-    </style>
     <div class="row rowbg">
-        <div class="col-xs-12 colbg">
+        <div class="col-xs-10 colbg">
             <ul id="progressbar">
                 <!-- class="fa fa-database"
                 class="fa fa-eye-slash"class="fa fa-suitcase"class="fa fa-trophy"class="fa fa-suitcase"
                 -->
                 <li class="active" id="stepedit" >
-                    <button type="button" class="btn btn-info" ng-href="#" ng-click="tab='edit'"
-                        ng-disabled="loading || security==undefined">Submission form</button>
+                    <button type="button" class="btn btn-info" width="50px" ng-click="tab='edit'"
+                        ng-disabled="loading || security==undefined">Submission</br>form</button>
                 </li>
                 <li ng-class="{ active  : tab=='review' }" id="stepreview" >
-                    <button type="button" class="btn btn-info" ng-href="#" ng-click="tab='review'"
-                        ng-disabled="loading || security==undefined">Review</button>
+                    <button type="button" class="btn btn-info" width="50px"  ng-click="tab='review'"
+                        ng-disabled="loading || security==undefined">Review</br>form</button>
                 </li>
         		<li ng-show="security.canSaveDraft" id="stepdraft" >
-                    <button type="button" class="btn btn-info" ng-href="#" ng-click="tab='draft';saveDraft()"
-                        ng-disabled="loading">Save as draft</button>
+                    <button type="button" class="btn btn-info" width="50px"  ng-click="tab='draft';saveDraft()"
+                        ng-disabled="loading">Save as</br>draft</button>
                 </li>
                 <li ng-show="security.canSave" id="steppublish" >
-                    <button type="button" class="btn btn-info" ng-href="#" ng-click="tab='publish';publish()"
-                        ng-disabled="loading">Save and publish</button>
+                    <button type="button" class="btn btn-info" width="50px"  ng-click="tab='publish';publish()"
+                        ng-disabled="loading">Save and</br>publish</button>
                 </li>
         		<li id="steppublishRequest"
                     ng-show="security.canSave!==undefined && (!security.canSave && security.canSaveDraft)">
                     <button type="button" class="btn btn-info" ng-href="#" ng-click="tab='publishRequest';publishRequest()"
-                        ng-disabled="loading">Save and request publication</button>
+                        ng-disabled="loading">Save and request</br> publication</button>
                 </li>
                 <li  id="prg3" ng-show="loading || security==undefined">
                     <span ng-show="security==undefined">Loading access controls</span>
@@ -112,6 +35,15 @@
                     <i ng-show="loading || security==undefined" class="fa fa-spinner fa-spin"></i>
                 </li>
         	</ul>
+        </div>
+        <div class="col-xs-2 colbg pull-right">
+            <div class="pull-right">
+                <span km-form-languages ng-model="languages"></span>
+            </div><br><br>
+            <div class="pull-right">
+                <button type="button" class="btn btn-info" style="margin-top:10px" ng-click="close()"
+                        ng-disabled="loading">Cancel</button>
+            </div>
         </div>
     </div>
 </div>
