@@ -14,15 +14,15 @@
     </div>
 
     <div ng-show="!isLoading() && status!='hidden'">
-
+        <div workflow-std-buttons document="getCleanDocument()"/>
         <div class="row">
             <div class="col-xs-12">
-                <ul class="pagination">
+                <!-- <ul class="pagination">
                     <li ng-class="{ active  : tab=='edit'   }"><a href="" ng-click="tab='edit'">Submission form</a>
                     </li>
                     <li ng-class="{ active  : tab=='review' }"><a href="" ng-click="tab='review'">Review</a>
                     </li>
-                </ul>
+                </ul> -->
                 <div class="pagination  pull-right">
                     <span km-form-languages ng-model="document.header.languages"></span>
                     <span km-form-std-buttons document="getCleanDocument()"></span>
@@ -64,17 +64,16 @@
                 </section>
 
                 <section>
-                <legend>Checkpoint/s that collected or received the information: </legend>
-
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="control-group">
-                            <div class="km-control-group" name="checkpointSelected"  caption="Checkpoint">
-                                <div  km-select  multiple name="checkpointSelected" ng-model="document.checkpointSelected"items="options.checkpoints()" placeholder="Please select ..."></div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="control-group">
+                                <div class="km-control-group" name="checkpointSelected"  caption="Checkpoint/s that collected or received the information">
+                                    <div  km-select  multiple name="checkpointSelected" ng-model="document.checkpointSelected"
+                                    items="options.checkpoints()" placeholder="Please select ..."></div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </section>
 
                 <section>
@@ -242,48 +241,44 @@
                         </div>
                     </div>
                 </div>
+                <br>
                 <section>
                     <div class="row">
                         <div class="col-md-12 col-xs-12">
-                            <div class="km-control-group" name="date" caption="Date on which the information was collected or received">
-                                <div class="row">
-                                    <div class="col-md-4 col-xs-4">
-                                        <div km-date placeholder="YYYY-MM-DD" required name="date" ng-model="document.date"></div>
-                                    </div>
-                                    <div class="col-md-2 col-xs-2">
-                                        <div  style="padding-left:50%;margin-top:8px;" name="dateOR" caption="OR">OR</div>
-                                    </div>
-                                    <div class="col-md-6 col-xs-6">
-                                        <div class="row">
-                                            <div class="col-md-1 col-xs-1">
-                                                <div style="margin-top:8px;">from</div>
+
+                              <label >Date on which the information was collected or received</label>
+                              <div style="border-radius: 4px;border: 1px solid #C2BEBE;">
+                                    <div class="row" style="padding:10px">
+                                        <div class="col-md-4 col-xs-4">
+                                            <div km-date placeholder="YYYY-MM-DD" required name="date" ng-model="document.date"></div>
+                                        </div>
+                                        <div class="col-md-2 col-xs-2">
+                                            <div  style="padding-left:50%;margin-top:8px;" name="dateOR" caption="OR">OR</div>
+                                        </div>
+                                        <div class="col-md-6 col-xs-6">
+                                            <div class="row">
+                                                <div class="col-md-1 col-xs-1">
+                                                    <div style="margin-top:8px;">from</div>
+                                                </div>
+                                                <div class="col-md-6 col-xs-6">
+                                                    <div km-date placeholder="YYYY-MM-DD" required name="dateFrom" ng-model="document.dateFrom"></div>
+                                                </div>
                                             </div>
-                                            <div class="col-md-6 col-xs-6">
-                                                <div km-date placeholder="YYYY-MM-DD" required name="dateFrom" ng-model="document.dateFrom"></div>
+                                            <div class="row">
+                                                <div class="col-md-1 col-xs-1">
+                                                        <div style="margin-top:8px;">to</div>
+                                                </div>
+                                                <div class="col-md-6 col-xs-6">
+                                                    <div km-date placeholder="YYYY-MM-DD" required name="dateTo" ng-model="document.dateTo"></div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-1 col-xs-1">
-                                                    <div style="margin-top:8px;">to</div>
-                                            </div>
-                                            <div class="col-md-6 col-xs-6">
-                                                <div km-date placeholder="YYYY-MM-DD" required name="dateTo" ng-model="document.dateTo"></div>
-                                            </div>
-                                        </div>
                                     </div>
-                                </div>
-                            </div>
+
+                              </div>
 
                         </div>
                     </div>
-                    <div class="row">
-
-                        <!-- <div class="col-md-8 col-xs-8">
-                            <div class="row"> -->
-
-                    </div>
-
-
                 </section>
                 <div class="row">
                     <div class="col-xs-12">

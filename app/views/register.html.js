@@ -434,16 +434,15 @@ define(['app',
     //
     //============================================================
     $scope.$on("documentDraftSaved", function(evt, draftInfo) {
-      //debugger;
       evt.stopPropagation();
       $scope.editing = false;
 	  $scope.showingFeedback = true;
 	  bootbox.alert('Your record has been saved as a draft.', function(){
 		    $scope.showingFeedback = false;
-			$timeout(function(){$location.path('/register/'+$scope.document_type);},1);
+		//	$timeout(function(){$location.path('/register/'+$scope.document_type);},1);
 	  });
 	  $rootScope.updatedRecord = draftInfo;
-      //$scope.msg = "Your record has been saved as a draft.";
+    //   $scope.msg = "Your record has been saved as a draft.";
     });
 
     //============================================================
@@ -479,7 +478,7 @@ define(['app',
       $scope.editing = false;
 
 	  $scope.showingFeedback = true;
-	  bootbox.alert('<h1>Record published.</h1>', function(){
+	  bootbox.alert('Record published. The record will be now publicly accessable on ABSCH.', function(){
 		    $scope.showingFeedback = false;
 			$timeout(function(){$location.path('/register/'+$scope.document_type);},1);
 	  });

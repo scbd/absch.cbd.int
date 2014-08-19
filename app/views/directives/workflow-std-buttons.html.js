@@ -13,99 +13,13 @@ define(['app'], function (app) {
 			{
 				$scope.errors              = null;
                 var next_fs
-                $("#progressbar li a").click(function(){
+                $("#progressbar li button").click(function(){
                 	next_fs = $(this).parent();
                     next_fs.nextAll().removeClass("active");
                     next_fs.prevAll().addClass("active");
                     next_fs.addClass("active");
 
                 });
-				//BOOTSTRAP Dialog handling
-
-				var qSaveDialog   = $element.find("#dialogSave");
-				var qCancelDialog = $element.find("#dialogCancel");
-
-				$scope.saveDialogDefered = [];
-				$scope.cancelDialogDefered = [];
-
-				$scope.showSaveDialog = function(visible) {
-
-					var isVisible = qSaveDialog.css("display")!='none';
-
-					if(visible == isVisible)
-						return $q.when(isVisible);
-
-					if(visible)
-						$scope.updateSecurity();
-
-					var defered = $q.defer();
-
-					$scope.saveDialogDefered.push(defered)
-
-					qSaveDialog.modal(visible ? "show" : "hide");
-
-					return defered.promise;
-				}
-
-				$scope.showCancelDialog = function(visible) {
-        			  if($('form').filter('.dirty').length == 0) {
-        						$scope.$emit("documentClosed");
-        				 return;
-        			  }
-
-					var isVisible = qCancelDialog.css("display")!='none';
-
-					if(visible == isVisible)
-						return $q.when(isVisible);
-
-					var defered = $q.defer();
-
-					$scope.cancelDialogDefered.push(defered)
-
-					qCancelDialog.modal(visible ? "show" : "hide");
-
-					return defered.promise;
-				}
-
-				qSaveDialog.on('shown.bs.modal' ,function() {
-
-					$timeout(function(){
-
-						var promise = null;
-						while((promise=$scope.saveDialogDefered.pop()))
-							promise.resolve(true);
-					});
-				});
-
-				qSaveDialog.on('hidden.bs.modal' ,function() {
-
-					$timeout(function(){
-
-						var promise = null;
-						while((promise=$scope.saveDialogDefered.pop()))
-							promise.resolve(false);
-					});
-				});
-
-				qCancelDialog.on('shown.bs.modal' ,function() {
-
-					$timeout(function(){
-
-						var promise = null;
-						while((promise=$scope.cancelDialogDefered.pop()))
-							promise.resolve(true);
-					});
-				});
-
-				qCancelDialog.on('hidden.bs.modal' ,function() {
-
-					$timeout(function(){
-
-						var promise = null;
-						while((promise=$scope.cancelDialogDefered.pop()))
-							promise.resolve(false);
-					});
-				});
                 $timeout(function(){$scope.updateSecurity();}, 3500);
 			},
     		controller: ["$rootScope","$scope", "IStorage", "editFormUtility",
@@ -187,8 +101,9 @@ define(['app'], function (app) {
 								//in case of authority save the CNA as a contact in drafts
 								saveAuthorityInContacts(documentInfo);
 							}
-							$scope.$emit("documentPublished", documentInfo, document);
                             $('form').filter('.dirty').removeClass('dirty');
+							$scope.$emit("documentPublished", documentInfo, document);
+                            $scope.$emit("updateOrignalDocument", document);
 							return documentInfo;
 
 						});
@@ -198,8 +113,8 @@ define(['app'], function (app) {
 
 					}).finally(function(){
 						    $scope.loading = false;
-
-						return $scope.closeDialog();
+                            $scope.$emit("documentClosed");
+						//return $scope.closeDialog();
 
 					});
 				};
@@ -233,8 +148,9 @@ define(['app'], function (app) {
 								//in case of authority save the CNA as a contact in drafts
 								saveAuthorityInContacts(workflowInfo);
 							}
-							$scope.$emit("documentPublishRequested", workflowInfo, document)
                             $('form').filter('.dirty').removeClass('dirty');
+							$scope.$emit("documentPublishRequested", workflowInfo, document);
+                            $scope.$emit("updateOrignalDocument", document);
 							return workflowInfo;
 
 						});
@@ -245,7 +161,8 @@ define(['app'], function (app) {
 					}).finally(function(){
 
 						    $scope.loading = false;
-						return $scope.closeDialog();
+                            $scope.$emit("documentClosed");
+						//return $scope.closeDialog();
 
 					});
 				};
@@ -270,8 +187,10 @@ define(['app'], function (app) {
 							//in case of authority save the CNA as a contact in drafts
 							saveAuthorityInContacts(draftInfo);
 						}
-						$scope.$emit("documentDraftSaved", draftInfo)
+						//$scope.$emit("documentDraftSaved", draftInfo)
                         $('form').filter('.dirty').removeClass('dirty');
+                        $scope.$emit("updateOrignalDocument", $scope.getDocumentFn());
+                        $scope.$emit("documentDraftSaved", draftInfo);
 						return draftInfo;
 
 					}).catch(function(error){
@@ -281,7 +200,7 @@ define(['app'], function (app) {
 					}).finally(function(){
 						    $scope.loading = false;
 
-						return $scope.closeDialog();
+						//return $scope.closeDialog();
 
 					});
 				};
@@ -307,7 +226,7 @@ define(['app'], function (app) {
 							return;
 						}
 
-						id = id.substr(0, id.length-1) + 'C'
+						id = id.substr(0, id.length-3) + 'CNA'
 
 						var qDocument = {
 											header: {
@@ -335,26 +254,6 @@ define(['app'], function (app) {
 						editFormUtility.saveDraft(qDocument);
 					});
 				}
-
-				//====================
-				//
-				//====================
-				$scope.close = function()
-				{
-					return $scope.closeDialog().then(function() {
-
-						$scope.$emit("documentClosed")
-
-					}).catch(function(error){
-
-						$scope.$emit("documentError", { action: "close", error: error })
-
-					}).finally(function(){
-
-						return $scope.closeDialog();
-
-					});
-				};
 
 				//====================
 				//
@@ -403,30 +302,27 @@ define(['app'], function (app) {
                 //
                 //==================================
                 $scope.$watch("tab", function(tab) {
-                  if(tab == "review" || tab == "edit" && !$scope.parentTabChanged){
+                  if(tab == "review" || tab == "edit"){
                       $scope.$parent.tab = tab;
-                      $scope.tabChanged = true;
+                      $scope.updateStep(tab);
                   }
-                  if($scope.parentTabChanged)
-                      $scope.parentTabChanged = false;
+
 
 
                 });
                 $scope.$parent.$watch("tab", function(tab) {
 
                   if(tab == "review" || tab == "edit" ){
-                      $scope.parentTabChanged = true;
-                      $("#progressbar li").removeClass('active');
-                      $("#step" + tab).addClass('active');
-                      $("#step" + tab).prevAll().addClass('active');
-
-                      if($scope.tabChanged)
-                          $scope.tab = tab;
+                      $scope.updateStep(tab);
+                      $scope.tab = tab;
                   }
-
-                  if($scope.tabChanged)
-                      $scope.tabChanged = false;
                 });
+                $scope.updateStep = function(tab){
+                    $("#progressbar li").removeClass('active');
+                    $("#step" + tab).addClass('active');
+                    $("#step" + tab).prevAll().addClass('active');
+
+                }
 			}]
     	};
 

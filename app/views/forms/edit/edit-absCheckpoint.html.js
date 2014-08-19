@@ -1,4 +1,4 @@
-define(['app', '/app/views/forms/edit/edit.js', '/app/views/directives/workflow-std-buttons.html.js'], function (app) {
+define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 
   app.controller("editAbsCheckpoint", ["$scope", "authHttp", "$filter", "$q", "$routeParams", "$controller", function ($scope, $http, $filter, $q, $routeParams, $controller) {
     $controller('editController', {$scope: $scope});
