@@ -466,15 +466,22 @@ form label[required]:before
         font-size: small;
     }
     .rowbg{
-        padding-top: 15px;
-        background-color: #EEE;
+        padding-top:20px;
+        background-color: #FFF;
         /*padding-bottom: 10px;*/
 		position:relative;
 		top:-15px;
 		/*border-bottom:1px solid #ccc;*/
+
+		margin:0;
 
     }
     .colbg{
         padding-bottom: 2px;
         max-height: 100px;
     }
+
+	.prg3 > span {
+		/*background-color:yellow;*/
+		color:#555!important;
+	}
