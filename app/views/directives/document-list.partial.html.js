@@ -175,6 +175,7 @@ app.directive('documentList', function ($http, $filter) {
                         output.description  = document.function_t||'';
                         output.description += (document.function_t && document.department_t) ? ', ' : '';
                         output.description += document.department_t||'';
+                        output.description += (output.description && document.organization_t) ? ', ' : '';
                         output.description += document.organization_t||'';
                     }
 
