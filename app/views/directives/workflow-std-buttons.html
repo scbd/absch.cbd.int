@@ -6,24 +6,24 @@
                 class="fa fa-eye-slash"class="fa fa-suitcase"class="fa fa-trophy"class="fa fa-suitcase"
                 -->
                 <li class="active" id="stepedit" >
-                    <button type="button" class="btn btn-info" width="50px" ng-click="tab='edit'"
+                    <button type="button" class="btn btn-primary" width="50px" ng-click="tab='edit'"
                         ng-disabled="loading || security==undefined">Submission</br>form</button>
                 </li>
                 <li ng-class="{ active  : tab=='review' }" id="stepreview" >
-                    <button type="button" class="btn btn-info" width="50px"  ng-click="tab='review'"
+                    <button type="button" class="btn btn-primary" width="50px"  ng-click="tab='review'"
                         ng-disabled="loading || security==undefined">Review</br>form</button>
                 </li>
         		<li ng-show="security.canSaveDraft" id="stepdraft" >
-                    <button type="button" class="btn btn-info" width="50px"  ng-click="tab='draft';saveDraft()"
+                    <button type="button" class="btn btn-primary" width="50px"  ng-click="tab='draft';saveDraft()"
                         ng-disabled="loading">Save as</br>draft</button>
                 </li>
                 <li ng-show="security.canSave" id="steppublish" >
-                    <button type="button" class="btn btn-info" width="50px"  ng-click="tab='publish';publish()"
+                    <button type="button" class="btn btn-primary" width="50px"  ng-click="tab='publish';publish()"
                         ng-disabled="loading">Save and</br>publish</button>
                 </li>
         		<li id="steppublishRequest"
                     ng-show="security.canSave!==undefined && (!security.canSave && security.canSaveDraft)">
-                    <button type="button" class="btn btn-info" ng-href="#" ng-click="tab='publishRequest';publishRequest()"
+                    <button type="button" class="btn btn-primary" ng-href="#" ng-click="tab='publishRequest';publishRequest()"
                         ng-disabled="loading">Save and request</br> publication</button>
                 </li>
                 <li  id="prg3" ng-show="loading || security==undefined">
@@ -37,13 +37,19 @@
         	</ul>
         </div>
         <div class="col-xs-2 colbg pull-right">
+
+            <div class="pull-right">
+                <button type="button" class="btn btn-warning" style="margin-bottom:15px" ng-click="close()"
+                        ng-disabled="loading"><i class="glyphicon glyphicon-remove"></i> Cancel</button>
+            </div>
+
+            <br><br>
+
+
             <div class="pull-right">
                 <span km-form-languages ng-model="languages"></span>
-            </div><br><br>
-            <div class="pull-right">
-                <button type="button" class="btn btn-info" style="margin-top:10px" ng-click="close()"
-                        ng-disabled="loading">Cancel</button>
             </div>
+
         </div>
     </div>
 </div>
