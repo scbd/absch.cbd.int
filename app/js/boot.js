@@ -19,11 +19,13 @@ require.config({
         'bootstrap-datepicker'  : '../libs/bootstrap-datepicker/js/bootstrap-datepicker',
         'angular-loading-bar'   : '../libs/angular-loading-bar/src/loading-bar',
         'angular-animate'       : '../libs/angular-animate/angular-animate.min',
-        'view-abs-checkpoint':'../views/forms/view/view-abs-checkpoint.directive',
-        'introjs'         : '../libs/intro.js/intro',
-        'angular-introjs' : '../js/directives/angular-intro',
-        'angular-form-controls': '../libs/angular_form_controls/form-controls',
-        'bootbox'              :'../libs/bootbox/bootbox'
+        'view-abs-checkpoint'   :'../views/forms/view/view-abs-checkpoint.directive',
+        'introjs'               : '../libs/intro.js/intro',
+        'angular-introjs'       : '../js/directives/angular-intro',
+        'angular-form-controls' : '../libs/angular_form_controls/form-controls',
+        'bootbox'               : '../libs/bootbox/bootbox',
+        'jqvmap'                : '../libs/jqvmap/jqvmap/jquery.vmap.min',
+        'jqvmapworld'           : '../libs/jqvmap/jqvmap/maps/jquery.vmap.world'
     },
     'shim': {
         'angular'        : { 'deps': ['jquery'], 'exports': 'angular' },
@@ -35,11 +37,13 @@ require.config({
         'underscore'     : { 'exports': '_' },
         'angular-animate' : {'deps': ['angular']},
         'angular-loading-bar' : {'deps': ['angular']},
-        'introjs'         : {'exports': 'introJs'},
-        'angular-introjs' : {'deps':['angular', 'introjs']},
-        'angular-localizer': {'deps':['angular']},
+        'introjs'               : {'exports': 'introJs'},
+        'angular-introjs'       : {'deps':['angular', 'introjs']},
+        'angular-localizer'     : {'deps':['angular']},
         'angular-form-controls' : {'deps': ['angular', 'angular-sanitize', 'angular-localizer']},
-        'bootbox'     : {'deps':['bootstrap', 'jquery']},
+        'bootbox'               : {'deps':['bootstrap', 'jquery']},
+        'jqvmap'                : { 'deps': ['jquery'] },
+        'jqvmapworld'                : { 'deps': ['jqvmap'] },
     }
 });
 

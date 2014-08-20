@@ -27,7 +27,8 @@
     "angular-intro.js": "latest",
     "ngLocalizer": "latest",
     "angular_form_controls": "latest",
-    "bootbox": "~4.3.0"
+    "bootbox": "~4.3.0",
+    "jqvmap": "*"
   },
   "resolutions": {
     "angular": "1.2.18"
