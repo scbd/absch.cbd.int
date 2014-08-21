@@ -6,7 +6,8 @@
 			<div ng-show="document.info.createdBy">
 				<label class="record-metadata-label">Published by:</label>
 				<span class="record-metadata-text">
-					{{document.info.createdBy.firstName}} {{document.info.createdBy.lastName}} ({{document.info.createdBy.email}}) on {{document.info.createdOn | date:'d-MMM-y  h:mm:ss a'}}
+					{{document.info.createdBy.firstName}} {{document.info.createdBy.lastName}}
+					(<a href="mailto:{{document.info.createdBy.email}}">{{document.info.createdBy.email}}</a>) on {{document.info.createdOn | date:'d-MMM-y  h:mm:ss a'}}
 				</span>
 			</div>
 
