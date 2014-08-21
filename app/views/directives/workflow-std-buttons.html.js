@@ -20,16 +20,23 @@ define(['app','angular-form-controls'], function (app) {
                     next_fs.addClass("active");
 
                 });
-                $timeout(function(){$scope.updateSecurity();}, 3500);
+                $scope.loadSecurity();
 			},
     		controller: ["$rootScope","$scope", "IStorage", "editFormUtility",
             function ($rootScope, $scope, storage, editFormUtility)
 			{
+
+                $scope.loadSecurity = function(){
+                    $timeout(function(){$scope.updateSecurity();}, 3500);
+                }
 				//====================
 				//
 				//====================
 				$scope.updateSecurity = function()
 				{
+                    if(!$scope.getDocumentFn().header)
+                        $scope.loadSecurity();
+
                     $scope.languages = $scope.getDocumentFn().header.languages;
 					$scope.security = {};
 					$scope.loading = true;
