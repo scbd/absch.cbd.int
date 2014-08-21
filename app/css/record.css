@@ -78,11 +78,12 @@
 	color:#959595;
 	padding-left:10px;
 	font-weight: bold;
+	display: inline;
 
 }
 #Record .record-metadata-text{
 	color:#666;
-
+	display: inline;
 }
 
 #Record .record-body legend{
