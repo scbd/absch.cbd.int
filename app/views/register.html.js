@@ -502,7 +502,7 @@ define(['app',
       evt.stopPropagation();
       $scope.editing = false;
 	  bootbox.alert('<h1>Record deleted.</h1>');
-      $scope.msg = "<h1>Record deleted.</h1>";
+      $scope.msg = "Record deleted.";
 
     });
 
