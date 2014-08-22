@@ -6,7 +6,7 @@
 
 <div ng-controller="ProfileController">
 
- <div class="container"> 
+ <div class="container">
     <div class="row"  >
       <div class="span12"  style="padding-top:20px;">
 
@@ -17,13 +17,13 @@
 
   	<div class="row top" style="padding-bottom:30px;">
   		<div style="position:absolute; top:150px;  margin:auto; width:100%">
-			 <img ng-hide="code=='EUR'" src="/app/libs/mapsicon/all/{{code.toLowerCase()}}/1024.png" style="opacity:0.15; z-index:-9999;"> 
+			 <img ng-hide="code=='EUR'" src="/app/libs/mapsicon/all/{{code.toLowerCase()}}/1024.png" style="opacity:0.15; z-index:-9999;">
 			<!-- <img ng-show="code=='EUR'" src="/app/img/EUMap.svg" style="opacity:0.15;padding-top:100px;padding-left:100px;"> -->
 		</div>
 
   		<div class="col-xs-6">
 			<span class="country-name">{{country.name.en}}</span>
-			
+
 		</div>
 		<div class="col-xs-3" >
 
@@ -32,14 +32,14 @@
 				<dt>Signature</dt><dd>{{ country.treaties.XXVII8b.signature ? country.treaties.XXVII8b.signature  : '- - - - - -'}}</dd>
 				<dt>Instrument</dt><dd>{{country.treaties.XXVII8b.instrument ? country.treaties.XXVII8b.instrument : '- - - - - -'}}</dd>
 				<dt>Deposit</dt></dt><dd>{{country.treaties.XXVII8b.deposit ? country.treaties.XXVII8b.deposit  : '- - - - - -'}}</dd>
-				
+
 			</dl>
 		</div>
 
 		<div class="col-xs-3  text-right" >
            <div style="height:100px;" class="flag-icon-background flag-icon-{{code.toLowerCase()}}"></div>
-          
-		</div> 
+
+		</div>
 
 		<div class="clearfix"></div>
 <hr/>
@@ -47,44 +47,44 @@
 				<div class="col-lg-12 col-md-12 col-sm-12">
 					<div class="row text-center">
 						<div class="col-sm-2" ></div>
-						<div class="col-sm-1"><div class="numberCircle1">8</div><div class="name">ABSCH-NFP</div></div>
-						<div class="col-sm-1"><div class="numberCircle1">4</div><div class="name">ABSCH-CNA</div></div>
-						<div class="col-sm-1"><div class="numberCircle1">2</div><div class="name">ABSCH-MSR</div></div>
-						<div class="col-sm-1"><div class="numberCircle1">1</div><div class="name">ABSCH-IRCC</div></div>
-						<div class="col-sm-1"><div class="numberCircle1">1</div><div class="name">ABSCH-CPC</div></div>
-						<div class="col-sm-1"><div class="numberCircle1">1</div><div class="name">ABSCH-CP</div></div>
-						<div class="col-sm-1"><div class="numberCircle1">1</div><div class="name">ABSCH-NDB</div></div>
-						<div class="col-sm-1"><div class="numberCircle1">1</div><div class="name">ABSCH-VLR</div></div>
+						<div class="col-sm-1"><div class="numberCircle1">8</div><div class="name">NFP</div></div>
+						<div class="col-sm-1"><div class="numberCircle1">4</div><div class="name">CNA</div></div>
+						<div class="col-sm-1"><div class="numberCircle1">2</div><div class="name">MSR</div></div>
+						<div class="col-sm-1"><div class="numberCircle1">1</div><div class="name">IRCC</div></div>
+						<div class="col-sm-1"><div class="numberCircle1">1</div><div class="name">CPC</div></div>
+						<div class="col-sm-1"><div class="numberCircle1">1</div><div class="name">CP</div></div>
+						<div class="col-sm-1"><div class="numberCircle1">1</div><div class="name">NDB</div></div>
+						<div class="col-sm-1"><div class="numberCircle1">1</div><div class="name">VLR</div></div>
 						<div class="col-sm-2" ></div>
 					</div>
 				</div>
-				
-			</div> 
+
+			</div>
 <hr/> -->
- 
+
 
 
 
   		<div class="col-sm-12" >
 <div class="pull-right" style="width:30%" >
                  <div angucomplete id="ex1" placeholder="search country information" pause="100"  localdata="autocompleteData" minlength="1" inputclass="form-control form-control-small"   searchfields="title" selectedObject="selectedCountry" searchStr="searchText.$" titlefield="title"/>
-                  </div>                  
+                  </div>
 <div class="clearfix"></div>
   			<div class="panel-group" id="accordion">
-			  
+
 			  <div class="panel" ng-show="absch_nfp.response.numFound > 0">
 			        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-			         <h4> 
+			         <h4>
 			          <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span>
-			          <span style="color: #428BCA; ">ABSCH-NFP</span> 
-			         <span style="color:#111;">ICNP ABS National Focal Points ({{nfpCount}})</span> 
+			          <span style="color: #428BCA; ">NFP</span>
+			         <span style="color:#111;">ICNP ABS National Focal Points ({{nfpCount}})</span>
 
-			         </h4> 
+			         </h4>
 			        </a>
 			    </div>
 			    <div id="collapseOne" class="panel-collapse collapse">
 			      <div class="panel-body">
-			       <!-- {{absch_nfp.response.docs}}-->			      		
+			       <!-- {{absch_nfp.response.docs}}-->
 					<div>
 					<!-- <div document-list documents='absch_nfp.response.docs' filter='National Focal Point' show-pagination='false' ></div> -->
 					<div document-list  documents='absch_nfp.response.docs' filter='focalPoint' show-pagination='false' advance-filter="searchText"
@@ -92,39 +92,39 @@
 					</div>
 			      </div>
 			    </div>
-			  
+
 
 				<div class="panel">
 			        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-			         <h4> 
+			         <h4>
 
 			          <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span>
-			          <span style="color: #428BCA; ">ABSCH-CNA</span> 
+			          <span style="color: #428BCA; ">CNA</span>
 			         <span style="color:#111;">Competent National Authority ({{nationalAuthority}})</span>
-			         </h4> 
+			         </h4>
 			        </a>
 			    </div>
 			    <div id="collapseTwo" class="panel-collapse collapse">
-			      <div class="panel-body">			        
+			      <div class="panel-body">
 			        <div document-list  documents='absch_nfp.response.docs' filter='authority' show-pagination='false' advance-filter="searchText"
 						 current-page='currentPage' document-Count='documentCount' ></div>
 			      </div>
 			    </div>
-			
+
 			  <div class="panel">
 			        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-			         <h4> 
-			         <!-- <div class="numberCircle1" style="padding-left:16px;">		         	
-			         	
+			         <h4>
+			         <!-- <div class="numberCircle1" style="padding-left:16px;">
+
 			         </div> -->
 			          <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span>
-			          <span style="color: #428BCA; ">ABSCH-MSR</span> 
+			          <span style="color: #428BCA; ">MSR</span>
 			         <span style="color:#111;">Legislative, administrative or policy measures on access and benefit-sharing ({{nationalMeasure}})</span>
-			         </h4>  
+			         </h4>
 			        </a>
 			    </div>
 			    <div id="collapseThree" class="panel-collapse collapse">
-			      <div class="panel-body">			       
+			      <div class="panel-body">
 			       <div document-list  documents='absch_nfp.response.docs' filter='measure' show-pagination='false' advance-filter="searchText"
 						 current-page='currentPage' document-Count='documentCount' ></div>
 			      </div>
@@ -133,18 +133,18 @@
 
 			  <div class="panel">
 			        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-			         <h4> 
-			        <!--  <div class="numberCircle1" style="padding-left:16px;">		         	
+			         <h4>
+			        <!--  <div class="numberCircle1" style="padding-left:16px;">
 			         {{Permit}}
 			         </div> -->
 			          <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span>
-			          <span style="color: #428BCA; ">ABSCH-IRCC</span> 
+			          <span style="color: #428BCA; ">IRCC</span>
 			         <span style="color:#111;">Permit or its equivalent constituting an internationally recognized certificate of compliance ({{Permit}})</span>
-			         </h4>  
+			         </h4>
 			        </a>
 			    </div>
 			    <div id="collapseFour" class="panel-collapse collapse">
-			      <div class="panel-body">			       
+			      <div class="panel-body">
 			       <div document-list  documents='absch_nfp.response.docs' filter='absPermit' show-pagination='false' advance-filter="searchText"
 						 current-page='currentPage' document-Count='documentCount' ></div>
 			      </div>
@@ -153,18 +153,18 @@
 
 			  <div class="panel">
 			        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
-			         <h4> 
-			        <!--  <div class="numberCircle1" style="padding-left:16px;">		         	
-			         {{absCheckpoint}}	
+			         <h4>
+			        <!--  <div class="numberCircle1" style="padding-left:16px;">
+			         {{absCheckpoint}}
 			         </div> -->
 			          <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span>
-			          <span style="color: #428BCA; ">ABSCH-CP</span> 
+			          <span style="color: #428BCA; ">CP</span>
 			         <span style="color:#111;">Checkpoint ({{absCheckpoint}})</span>
-			         </h4>  
+			         </h4>
 			        </a>
 			    </div>
 			    <div id="collapseFive" class="panel-collapse collapse">
-			      <div class="panel-body">			       	
+			      <div class="panel-body">
 			       	<div document-list  documents='absch_nfp.response.docs' filter='absCheckpoint' show-pagination='false' advance-filter="searchText"
 						 current-page='currentPage' document-Count='documentCount' ></div>
 			      </div>
@@ -173,18 +173,18 @@
 
 			  <div class="panel">
 			        <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
-			         <h4> 
-			        <!--  <div class="numberCircle1" style="padding-left:16px;">		         	
-			         {{absCheckpointCommunique}}	
+			         <h4>
+			        <!--  <div class="numberCircle1" style="padding-left:16px;">
+			         {{absCheckpointCommunique}}
 			         </div> -->
 			          <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span>
-			          <span style="color: #428BCA; ">ABSCH-CPC</span> 
+			          <span style="color: #428BCA; ">CPC</span>
 			         <span style="color:#111;">Checkpoint Communiqué ({{absCheckpointCommunique}})</span>
-			         </h4>  
+			         </h4>
 			        </a>
 			    </div>
 			    <div id="collapseSix" class="panel-collapse collapse">
-			      <div class="panel-body">			       	
+			      <div class="panel-body">
 			       	<div document-list  documents='absch_nfp.response.docs' filter='absCheckpointCommunique' show-pagination='false' advance-filter="searchText"
 						 current-page='currentPage' document-Count='documentCount' ></div>
 			      </div>
@@ -193,14 +193,14 @@
 
 			  <div class="panel">
 			        <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">
-			         <h4> 
-			         <!-- <div class="numberCircle1" style="padding-left:16px;">		         	
-			         {{database}}	
+			         <h4>
+			         <!-- <div class="numberCircle1" style="padding-left:16px;">
+			         {{database}}
 			         </div> -->
 			         <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span>
-			          <span style="color: #428BCA; ">ABSCH-NDB</span> 
+			          <span style="color: #428BCA; ">NDB</span>
 		         <span style="color:#111;">ABS National Databases and Websites ({{database}})</span>
-			         </h4>  
+			         </h4>
 			        </a>
 			    </div>
 			    <div id="collapseSeven" class="panel-collapse collapse">
@@ -210,27 +210,27 @@
 			      </div>
 			    </div>
 
-<!-- 
+<!--
 			  <div class="panel">
 			        <a data-toggle="collapse" data-parent="#accordion" href="#collapseEight">
-			         <h4> 
-			         <div class="numberCircle1" style="padding-left:16px;">		         	
-			         {{resource}}	
+			         <h4>
+			         <div class="numberCircle1" style="padding-left:16px;">
+			         {{resource}}
 			         </div>
-			          <span style="color: #428BCA; ">ABSCH-VLR</span> 
+			          <span style="color: #428BCA; ">VLR</span>
 			         <span style="color:#111;">Virtual Library Record</span>
-			         </h4>  
+			         </h4>
 			        </a>
 			    </div>
 			    <div id="collapseEight" class="panel-collapse collapse">
-			      <div class="panel-body">			        	
+			      <div class="panel-body">
 			        	<div document-list  documents='absch_nfp.response.docs' filter='resource' show-pagination='false'
 						 current-page='currentPage' document-Count='documentCount' ></div>
 			      </div>
 			    </div>
 
 			  </div> -->
-			</div> 
+			</div>
 
 		</div>
 
