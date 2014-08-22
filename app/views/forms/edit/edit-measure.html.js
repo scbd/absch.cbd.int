@@ -56,26 +56,32 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
         model:"language",
         title:"Language",
         required:true,
-        options: $http.get("/api/v2013/thesaurus/domains/ISO639-2/terms", { cache: true }).then(function(o){
-          return $scope.options.documentLinksExt[0].options = $filter("orderBy")(o.data, "name");
-        }),
+        options: function() {
+          return $http.get("/api/v2013/thesaurus/domains/ISO639-2/terms", { cache: true }).then(function(o){
+            return $scope.options.documentLinksExt[0].options = $filter("orderBy")(o.data, "name");
+          }),
+        },
       }],
       documentTranslationsExt : [
         {
           model:"language",
           title:"Language",
           required:true,
-          options: $http.get("/api/v2013/thesaurus/domains/52AFC0EE-7A02-4EFA-9277-8B6C327CE21F/terms", { cache: true }).then(function(o){
-            return $scope.options.documentTranslationsExt[0].options = $filter("orderBy")(o.data, "name");
-          }),
+          options: function() {
+            return $http.get("/api/v2013/thesaurus/domains/52AFC0EE-7A02-4EFA-9277-8B6C327CE21F/terms", { cache: true }).then(function(o){
+              return $scope.options.documentTranslationsExt[0].options = $filter("orderBy")(o.data, "name");
+            }),
+          },
         },
         {
           model:"translationType",
           title:"Translation Type",
           required:true,
-          options: $http.get("/api/v2013/thesaurus/domains/19E3C535-2919-4804-966C-E62728507291/terms", { cache: true }).then(function(o){
-            return $scope.options.documentTranslationsExt[1].options = $filter("orderBy")(o.data, "name");
-          }),
+          options: function() {
+            return $http.get("/api/v2013/thesaurus/domains/19E3C535-2919-4804-966C-E62728507291/terms", { cache: true }).then(function(o){
+              return $scope.options.documentTranslationsExt[1].options = $filter("orderBy")(o.data, "name");
+            }),
+          },
         },
       ],
     });
