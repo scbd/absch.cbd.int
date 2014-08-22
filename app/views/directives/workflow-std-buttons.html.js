@@ -20,6 +20,53 @@ define(['app','angular-form-controls'], function (app) {
                     next_fs.addClass("active");
 
                 });
+
+                //BOOTSTRAP Dialog handling
+				var qCancelDialog = $element.find("#dialogCancel");
+
+				$scope.cancelDialogDefered = [];
+
+				$scope.showCancelDialog = function(visible) {
+        			  if($('form').filter('.dirty').length == 0) {
+        				 $scope.$emit("documentClosed");
+        				 return;
+        			  }
+
+					var isVisible = qCancelDialog.css("display")!='none';
+
+					if(visible == isVisible)
+						return $q.when(isVisible);
+
+					var defered = $q.defer();
+
+					$scope.cancelDialogDefered.push(defered)
+
+					qCancelDialog.modal(visible ? "show" : "hide");
+
+					return defered.promise;
+				}
+
+
+				qCancelDialog.on('shown.bs.modal' ,function() {
+
+					$timeout(function(){
+
+						var promise = null;
+						while((promise=$scope.cancelDialogDefered.pop()))
+							promise.resolve(true);
+					});
+				});
+
+				qCancelDialog.on('hidden.bs.modal' ,function() {
+
+					$timeout(function(){
+
+						var promise = null;
+						while((promise=$scope.cancelDialogDefered.pop()))
+							promise.resolve(false);
+					});
+				});
+
                 $scope.loadSecurity();
 			},
     		controller: ["$rootScope","$scope", "IStorage", "editFormUtility",
@@ -292,12 +339,32 @@ define(['app','angular-form-controls'], function (app) {
 						$scope.errors = null;
 				};
 
+                //====================
+				//
+				//====================
+				$scope.close = function()
+				{
+					return $scope.closeDialog().then(function() {
+
+						$scope.$emit("documentClosed")
+
+					}).catch(function(error){
+
+						$scope.$emit("documentError", { action: "close", error: error })
+
+					}).finally(function(){
+
+						return $scope.closeDialog();
+
+					});
+				};
+
 				//====================
 				//
 				//====================
 				$scope.closeDialog = function()
 				{
-					return $q.all([$scope.showSaveDialog(false), $scope.showCancelDialog(false)]).finally(function(){
+					return $q.all([$scope.showCancelDialog(false)]).finally(function(){
 						$scope.loading = false;
 					});
 				};
@@ -336,9 +403,6 @@ define(['app','angular-form-controls'], function (app) {
                         $scope.$parent.document.header.languages = newValue;
                 });
 
-                $scope.close = function(){
-                    $scope.$emit("documentClosed");
-                }
 			}]
     	};
 

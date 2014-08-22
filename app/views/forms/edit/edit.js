@@ -1,6 +1,6 @@
 //fixed a bug with the comment up here ;)
 define([
-    'app',    
+    'app',
     '/app/views/forms/edit/editFormUtility.js',
     '/app/views/forms/edit/field-embed-contact.directive.js',
     '/app/views/forms/edit/edit-contact-base.directive.js',
