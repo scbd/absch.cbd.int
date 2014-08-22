@@ -257,6 +257,8 @@ define(["app"], function (app) {
 			if(schame=="abscheckpoint"			) return "Checkpoint";
 			if(schame=="abscheckpointcommunique") return "Checkpoint Communiqué";
 			if(schame=="abspermit"				) return "Internationally Recognized Certificate of Compliance";
+            if(schame=="meetingdocument"		) return "Meeting Document";
+
 
 			return schame;
 		};
@@ -285,6 +287,7 @@ define(["app"], function (app) {
         	if(schame=="notification"			) return "NT";
         	if(schame=="meeting"				) return "MT";
         	if(schame=="pressrelease"			) return "PR";
+            if(schame=="meetingdocument"    	) return "MTD";
 
 
 			return schame;
