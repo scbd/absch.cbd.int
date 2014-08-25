@@ -7,6 +7,29 @@
 	color:#ddd;
 }
 
+/*last-child is the record count, which we don't sort by, so remove all effects*/
+.columnHeaders > div:last-child {
+  cursor: default;
+}
+.columnHeaders > div:last-child:hover::after  {
+  content: "";
+}
+.columnHeaders > div {
+  cursor: pointer;
+}
+
+.columnHeaders > div:last-child:hover {
+  background-color: #DEDEDE;
+}
+
+.columnHeaders > div:hover {
+  /*background-color: #ECEDFD;*/
+}
+.columnHeaders > div:hover::after {
+  content: " < order by";
+  color: #fff;
+}
+
 .activityfeed-time{
 
 	/*font-weight:bold;*/
