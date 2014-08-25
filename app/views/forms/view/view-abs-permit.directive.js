@@ -1,4 +1,4 @@
-define(['app'], function (app) {
+define(['app','/app/views/forms/view/view-releated-checkpoint-communique-directive.html.js'], function (app) {
 
 app.directive("viewAbsPermit", [function () {
 

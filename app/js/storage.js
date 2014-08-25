@@ -6,15 +6,16 @@ define(["app", "authentication"], function (app) {
 		return new function()
 		{
 			var serviceUrls = { // Add Https if not .local
-				documentQueryUrl   : function() { return "/api/v2013/documents/"; },
-				documentUrl        : function() { return "/api/v2013/documents/:identifier"; },
-				validateUrl        : function() { return "/api/v2013/documents/x/validate"; },
-				draftUrl           : function() { return "/api/v2013/documents/:identifier/versions/draft"; },
-				attachmentUrl      : function() { return "/api/v2013/documents/:identifier/attachments/:filename"; },
-				securityUrl        : function() { return "/api/v2013/documents/:identifier/securities/:operation"; },
-				draftSecurityUrl   : function() { return "/api/v2013/documents/:identifier/versions/draft/securities/:operation"; },
-				draftLockUrl       : function() { return "/api/v2013/documents/:identifier/versions/draft/locks/:lockID"; },
-				documentVersionUrl : function() { return "/api/v2013/documents/:identifier/versions"; }
+				documentQueryUrl        : function() { return "/api/v2013/documents/"; },
+				documentUrl             : function() { return "/api/v2013/documents/:identifier"; },
+				validateUrl             : function() { return "/api/v2013/documents/x/validate"; },
+				draftUrl                : function() { return "/api/v2013/documents/:identifier/versions/draft"; },
+				attachmentUrl           : function() { return "/api/v2013/documents/:identifier/attachments/:filename"; },
+				securityUrl             : function() { return "/api/v2013/documents/:identifier/securities/:operation"; },
+				draftSecurityUrl        : function() { return "/api/v2013/documents/:identifier/versions/draft/securities/:operation"; },
+				draftLockUrl            : function() { return "/api/v2013/documents/:identifier/versions/draft/locks/:lockID"; },
+				documentVersionUrl      : function() { return "/api/v2013/documents/:identifier/versions"; },
+        documentBodyQueryUrl    : function() { return "/api/v2013/documents/query/body"; },
 			};
 
 			//==================================================
@@ -88,11 +89,11 @@ define(["app", "authentication"], function (app) {
 					var oTrans = transformPath(serviceUrls.documentUrl(), params);
 
 					return $http.head(oTrans.url, { params : oTrans.params, cache:useCache }).then(function() {
-						
+
 						return true;
-						
+
 					}).catch(function(error) {
-						
+
 						if(error.status!="404")
 							throw "Error";
 
@@ -183,7 +184,7 @@ define(["app", "authentication"], function (app) {
 					params.$filter    = query;
 
 					var useCache = !!params.cache;
-					
+
 					if(!params.cache)
 						params.cache = true;
 
@@ -231,11 +232,11 @@ define(["app", "authentication"], function (app) {
 					var oTrans = transformPath(serviceUrls.draftUrl(), params);
 
 					return $http.head(oTrans.url, {  params : oTrans.params, cache:useCache }).then(function() {
-						
+
 						return true;
-						
+
 					}).catch(function(error) {
-						
+
 						if(error.status!="404")
 							throw "Error";
 
@@ -383,6 +384,38 @@ define(["app", "authentication"], function (app) {
 
 				}
 			};
+
+      //==================================================
+      //
+      // Document Query
+      //
+      //==================================================
+      this.documentQuery = {
+
+        //===========================
+        //
+        //===========================
+        "body" : function(filter, query, params)
+        {
+          params            = _.extend({}, params||{});
+          params.query      = query;
+          params.$filter    = filter;
+
+          var useCache = !!params.cache;
+          if(!params.cache)
+            params.cache = true;
+
+          var oTrans = transformPath(serviceUrls.documentBodyQueryUrl(), params);
+
+          return $http.get(oTrans.url, {  params : oTrans.params, cache:useCache });
+
+          //TODO: return result.data;
+        }
+
+      };
+
+
+
 
 			//==================================================
 			//
