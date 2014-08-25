@@ -38,7 +38,7 @@
 			<label>Phone numbers</label>
 			<div class="km-value" >
 				<ul class="list"  style="list-style-type: none;padding: 0px;margin: 0px;">
-					<li ng-repeat="item in document.phones"><i class="fa fa-phone"></i> {{item}}</li>
+					<li ng-repeat="item in document.phones track by $index"><i class="fa fa-phone"></i> {{item}}</li>
 				</ul>
 			</div>
 		</div>
