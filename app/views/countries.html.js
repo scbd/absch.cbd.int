@@ -59,7 +59,7 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
             //$scope.ratifications--;
 
              loadMap(countryColors);
-             $scope.slide('#mapDiv','#listDiv');
+             $scope.slideMap('#mapDiv','#listDiv');
         });
 
         var today= moment();
@@ -178,7 +178,7 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
             });
         }
 
-        $scope.slide = function(divShow,divHide){
+        $scope.slideMap = function(divShow,divHide){
 
             $(divHide).slideUp( "slow" );
             $(divShow).slideDown( "slow" );
