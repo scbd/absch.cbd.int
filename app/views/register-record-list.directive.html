@@ -52,16 +52,16 @@
 
   <!-- <div class="container-fluid"> -->
     <div class="row" >
-        <div class="col-xs-4" style="font-weight:bold;">Title</div>
-        <div class="col-xs-3" style="font-weight:bold;">Created</div>
-        <div class="col-xs-3" style="font-weight:bold;">Last update</div>
+        <div class="col-xs-4" style="font-weight:bold;" ng-click="toggleOrderBy('title|lstring')" id="titleHeader">Title</div>
+        <div class="col-xs-3" style="font-weight:bold;" ng-click="toggleOrderBy('createdOn')" id="createdOnHeader">Created</div>
+        <div class="col-xs-3" style="font-weight:bold;" ng-click="toggleOrderBy('updatedOn')" id="updatedOnHeader">Last update</div>
         <div class="col-xs-2" style="font-weight:bold;text-align:right;">
         {{filteredRecords.length}} record(s)</div>
     </div>
 
     <hr class="header" style="padding:0; margin:0;">
 
-    <div ng-repeat="record in (filteredRecords = (records | filter:schemaFilter | filter:statusFilter | filter:keywords | orderBy:['-updatedOn','-createdOn']))"
+    <div ng-repeat="record in (filteredRecords = (records | filter:schemaFilter | filter:statusFilter | filter:keywords | orderBy:orderBy))"
     ng-class-odd="'odd'" ng-class-even="'even'" id="record{{record.identifier}}">
       <div class="row" style="padding:10px;border-bottom:1px solid #dedede;">
            <div class="col-xs-4">

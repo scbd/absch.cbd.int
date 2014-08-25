@@ -48,6 +48,18 @@ app.directive("registerRecordList", ["$timeout", "commonjs","bootbox", "authHttp
 		},
 		controller : ["$scope", "$q", "IStorage","$http", "guid", "editFormUtility", "$timeout", function ($scope, $q, storage, $http, guid, editFormUtility, $timeout) {
 
+      $scope.orderBy = ['-updatedOn'];
+      $scope.toggleOrderBy = function(key) {
+        if(key == $scope.orderBy[0].substr(1))
+          $scope.orderBy = (($scope.orderBy[0].substr(0,1)=='+')?'-':'+') + key;
+        else
+          $scope.orderBy = ['-'+key];
+
+        $('.ordericon').remove();
+        var direction = (($scope.orderBy[0].substr(0,1)=='-')?'down':'up');
+        $('#' + key.split('|')[0] + 'Header').append(' <span class="ordericon glyphicon glyphicon-chevron-'+direction+'"></span>');
+      };
+
 			//============================================================
 			//
 			//
@@ -221,9 +233,7 @@ app.directive("registerRecordList", ["$timeout", "commonjs","bootbox", "authHttp
 			}
 
 			$scope.isIAC=function(){
-
-			return	commonjs.isUserInRole('abschiac');
-
+        return	commonjs.isUserInRole('abschiac');
 			}
 
 			//============================================================
