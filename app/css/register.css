@@ -11,7 +11,9 @@
 .columnHeaders > div:last-child {
   cursor: default;
 }
-
+.columnHeaders > div:last-child:hover::after  {
+  content: "";
+}
 .columnHeaders > div {
   cursor: pointer;
 }
@@ -21,11 +23,11 @@
 }
 
 .columnHeaders > div:hover {
-  background-color: #ECEDFD;
+  /*background-color: #ECEDFD;*/
 }
 .columnHeaders > div:hover::after {
-  content: "<- order by";
-  color: #BBBBBB;
+  content: " < order by";
+  color: #fff;
 }
 
 .activityfeed-time{
