@@ -57,7 +57,7 @@ app.directive("registerRecordList", ["$timeout", "commonjs","bootbox", "authHttp
 
         $('.ordericon').remove();
         var direction = (($scope.orderBy[0].substr(0,1)=='-')?'down':'up');
-        $('#' + key.split('|')[0] + 'Header').append(' <span class="ordericon glyphicon glyphicon-chevron-'+direction+'"></span>');
+        $('#' + key.split('|')[0] + 'Header').append(' <span class="ordericon glyphicon glyphicon-chevron-'+direction+' text-primary"></span>');
       };
 
 			//============================================================

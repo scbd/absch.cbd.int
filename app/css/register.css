@@ -7,6 +7,10 @@
 	color:#ddd;
 }
 
+.columnHeaders > div {
+  cursor: pointer;
+}
+
 .activityfeed-time{
 
 	/*font-weight:bold;*/
