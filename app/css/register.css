@@ -23,6 +23,10 @@
 .columnHeaders > div:hover {
   background-color: #ECEDFD;
 }
+.columnHeaders > div:hover::after {
+  content: "<- order by";
+  color: #BBBBBB;
+}
 
 .activityfeed-time{
 
