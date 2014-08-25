@@ -107,7 +107,7 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
              jQuery('#vmap').vectorMap(
                 {
                     map: 'world_en',
-                    backgroundColor: 'black',
+                    backgroundColor: '#EEE',
                     selectedColor: '#666666',
         		    enableZoom: true,
         		    showTooltip: true,
