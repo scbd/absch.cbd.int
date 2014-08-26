@@ -14,24 +14,24 @@ app.directive("viewHistory", [function () {
 		link: function($scope, $element) {
 		//	$element.find("[data-toggle='tooltip']").tooltip({trigger:'hover'});
 		},
-		controller: ['$scope', 'IStorage', "$q","$route",
-			function ($scope, storage, $q,$route) {
+		controller: ['$scope', 'IStorage', "$q","$route","$filter",
+			function ($scope, storage, $q,$route, $filter) {
 
 			$scope.$watch('documentID', function(value){
 				if(value && !$scope.documents){
-					$scope.load($scope.documentID);
+					$scope.load(value);
 				}
 				else
 					$scope.loading=false;
 			});
 
-			$scope.$watch('loadDocuments', function(value){
-				if(value && !$scope.documents){
-					$scope.load($scope.documentID);
-				}
-				else
-					$scope.loading=false;
-			});
+			// $scope.$watch('loadDocuments', function(value){
+			// 	if(value && !$scope.documents){
+			// 		$scope.load($scope.documentID);
+			// 	}
+			// 	else
+			// 		$scope.loading=false;
+			// });
 
 
 			//==================================
@@ -41,28 +41,68 @@ app.directive("viewHistory", [function () {
 
 				$scope.error = undefined;
 
+				if($scope.loading)
+					return
+
 				if(!identifier)
 				{
 					$scope.loading=false;
 					return;
 				}
+
+				$scope.loading=true;
 				var qDocument     = storage.documentVersions.get(identifier,{body:true});
 				// .then(function(result) { return result.data || result });
 
 				$q.when(qDocument).then(function(results) {
 
-					$scope.documents     = results.data.Items;
-					if($scope.documents && $scope.documents.length >0 && ($scope.documents[0].type=="absPermit" || $scope.documents[0].type=="absCheckpointCommunique"))
-					 	$scope.showFile = true;
-// console.log($("[data-toggle='tooltip']"));
-// 					$("[data-toggle='tooltip']").tooltip({trigger:'hover'});
+						$scope.documents     = results.data.Items;
+						if($scope.documents && $scope.documents.length >0 && ($scope.documents[0].type=="absPermit" || $scope.documents[0].type=="absCheckpointCommunique"))
+						 	$scope.showFile = true;
+
+						if(results.data.Items && results.data.Items.length >0 && $scope.documents[0].type=="absPermit"){
+							loadPermitCPC(identifier, results.data.Items);
+							$scope.isPermit = true;
+						}
+						$scope.loading=false;
 
 				}).then(null, function(error) {
 					$scope.error = "error loading document history";
 					 console.log( $scope.error );
-				})
+				});
 
 			};
+
+
+	      function loadPermitCPC(identifier, documents) {
+
+			if(!documents)
+				return;
+
+	        if(!identifier)
+	        {
+	          $scope.loading=false;
+	          return;
+	        }
+	        var filter = ["type eq 'absCheckpointCommunique'"];
+	        var query = [[{permit : identifier}]];
+
+	        var qDocument     = storage.documentQuery.body(filter,query,{body:true, collection:"my"});
+	         $q.when(qDocument).then(function(results) {
+			    $q.when(results.data.forEach(function(cpc){
+					 var qDoc = storage.documentVersions.get(cpc.identifier,{body:true});
+					  $q.when(qDoc).then(function(results) {
+						  results.data.Items.forEach(function(history){
+								$scope.documents.push(history);
+							});
+					});
+				}));
+			});
+		  };
+
+		$scope.$watch("documents", function(){
+			$scope.column = 'createdOn';
+		})
 
 
 		}]
