@@ -30,7 +30,6 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
 
             for (var i = 0; i < $scope.countries.length; i++) {
 
-                $scope.countries[i].isParty = true;
                 if ($scope.countries[i].treaties.XXVII8b.instrument == "ratification"
                 	|| $scope.countries[i].treaties.XXVII8b.instrument == "accession"
                 	|| $scope.countries[i].treaties.XXVII8b.instrument == "acceptance"
@@ -50,10 +49,12 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
                 }
                 if($scope.countries[i].treaties.XXVII8.party != null){
                   $scope.parties++;
+                  $scope.countries[i].isParty = true;
                   if(!countryColors[$scope.countries[i].code.toLowerCase()])
                       countryColors[$scope.countries[i].code.toLowerCase()] = "#808080";
                 }
-                 $scope.countriesforAutocomplete.push({name:$scope.countries[i].name.en});
+                if($scope.countries[i].isParty)
+                    $scope.countriesforAutocomplete.push({name:$scope.countries[i].name.en});
             }
             //deduct EU count
             //$scope.ratifications--;
@@ -175,6 +176,8 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
                     $("#jqvmap1_"+country.code.toLowerCase()).attr("fill", "#5bc0de");
                 else if(action == 'party' && country.isParty)
                      $("#jqvmap1_"+country.code.toLowerCase()).attr("fill", "#808080");
+                // else
+                //      $("#jqvmap1_"+country.code.toLowerCase()).attr("fill", "#fff");
             });
         }
 
