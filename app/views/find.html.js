@@ -105,6 +105,8 @@ define(['app',
         //============================================================
     	function query () {
 
+            var schema = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "resource", "meeting", "notification","pressRelease","statement" ]
+
             var q = '(realm_ss:absch OR realm_ss:ABS) AND NOT version_s:*';//' AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryTheme + ' AND ' + $scope.queryTargets +' AND ' + $scope.queryDate + ' AND ' + $scope.queryKeywords;
 
             if($scope.keyword)         q += ' AND (title_t:*' + $scope.keyword + '* OR description_t:*' + $scope.keyword + '* OR text_EN_txt:*' + $scope.keyword + '* OR uniqueIdentifier_ss:*' + $scope.keyword.toLowerCase() + '*)';
@@ -115,7 +117,8 @@ define(['app',
             }
             else
             {
-                 q += ' AND schema_s:*';
+                 q += ' AND (schema_s:' + schema.join(' OR schema_s:') + ')';
+                 console.log(q);
             }
             if($scope.queryGovernment) q += ' AND (' + $scope.queryGovernment + ')';
             if($scope.queryTheme)      q += ' AND (' + $scope.queryTheme + ')';
@@ -153,7 +156,7 @@ define(['app',
 
                 if(!$scope.schemas) {
                     var queryFacetsParameters = {
-                        'q': '(realm_ss:absch OR realm_ss:ABS) AND NOT version_s:*',
+                        'q': '(realm_ss:absch OR realm_ss:ABS) AND NOT version_s:* AND (schema_s:' + schema.join(' OR schema_s:') + ')',
                         'fl': '', 		//fields for results.
                         'wt': 'json',
                         'rows': 0,		//limit
