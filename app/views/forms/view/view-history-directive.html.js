@@ -87,7 +87,7 @@ app.directive("viewHistory", [function () {
 	        var filter = ["type eq 'absCheckpointCommunique'"];
 	        var query = [[{permit : identifier}]];
 
-	        var qDocument     = storage.documentQuery.body(filter,query,{body:true, collection:"my"});
+	        var qDocument     = storage.documentQuery.body(filter,query,{body:true});
 	         $q.when(qDocument).then(function(results) {
 			    $q.when(results.data.forEach(function(cpc){
 					 var qDoc = storage.documentVersions.get(cpc.identifier,{body:true});
