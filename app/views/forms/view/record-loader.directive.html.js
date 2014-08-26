@@ -75,7 +75,10 @@ app.directive('recordLoader', [function () {
 					var docNum = documentID.split('-');
 					if(docNum.length ==5){
 						documentID = documentID.toLowerCase();//.replace('absch','ABSCH');
-						window.location.href ="https://s3.amazonaws.com/absch.documents/" + documentID + '.pdf';
+						$scope.documentUID = documentID.toUpperCase()
+						$scope.documentUrl = "https://s3.amazonaws.com/absch.documents/" + documentID + '.pdf';
+						closeWindow();
+						window.location.href = $scope.documentUrl;
 						//window.close();
 						return;
 					}
@@ -100,6 +103,13 @@ app.directive('recordLoader', [function () {
 
 			}
 
+			$scope.timeLaspe = 20;
+			function closeWindow(){
+				if($scope.timeLaspe==0)
+					window.close();
+				$scope.timeLaspe--;
+				$timeout(function(){closeWindow();},1000)
+			}
 			//==================================
 			//
 			//==================================

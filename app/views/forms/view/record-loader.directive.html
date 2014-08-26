@@ -13,6 +13,12 @@
 		<strong>Error as occured...</strong>
 		<div>{{error}}</div>
 	</div>
+    <div class="alert alert-success" role="alert" ng-show="documentUID">
+      Thank you for downloading document {{documentUID}}. If the document did not download try clicking
+      <a href="{{documentUrl}}" class="alert-link">here...</a>
+      </br></br></br></br>
+      This window will close in {{timeLaspe}} secs.
+    </div>
 	<div ng-show="!error && internalDocument">
 		<div style="float:right">
 			<button  type="button" class="btn localeBtn" ng-click="edit()" ng-show="canEdit()" >Edit</button>
@@ -32,7 +38,7 @@
 <!--  {{document}} -->
 <!-- {{internalDocument}} -->
 		<div ng-switch on="internalDocument.header.schema" >
-
+            <div class="alert alert-danger" role="alert" ng-show="documentVersionCount != revisionNo">The latest revision is {{documentVersionCount}}, you are viewing revison {{revisionNo}}</div>
 			<div view-authority	ng-switch-when="authority" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}  hide={{hide}}></div>
 
 			<div view-contact ng-switch-when="contact"	ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}  hide={{hide}}></div>
