@@ -82,7 +82,7 @@ $compile.directive('search2', function ($http) {
 
                 console.log("QUERY");
 
-                var q = '(realm_ss:' + realm.value + ') AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryTheme + ' AND ' + $scope.queryDate + ' AND ' + $scope.queryKeywords;
+                var q = '(realm_ss:' + realm.value.toLowerCase() + ') AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryTheme + ' AND ' + $scope.queryDate + ' AND ' + $scope.queryKeywords;
 
                 var queryParameters = {
                     'q': q,

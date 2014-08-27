@@ -108,7 +108,7 @@ define(['app',
             var schema = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "resource", "meeting", "notification","pressRelease","statement" ]
 console.log(realm);
 //realm_ss:absch OR realm_ss:ABS
-            var q = '(realm_ss:' + realm.value + ') AND NOT version_s:*';//' AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryTheme + ' AND ' + $scope.queryTargets +' AND ' + $scope.queryDate + ' AND ' + $scope.queryKeywords;
+            var q = '(realm_ss:' + realm.value.toLowerCase() + ') AND NOT version_s:*';//' AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryTheme + ' AND ' + $scope.queryTargets +' AND ' + $scope.queryDate + ' AND ' + $scope.queryKeywords;
 
             if($scope.keyword)         q += ' AND (title_t:*' + $scope.keyword + '* OR description_t:*' + $scope.keyword + '* OR text_EN_txt:*' + $scope.keyword + '* OR uniqueIdentifier_ss:*' + $scope.keyword.toLowerCase() + '*)';
 
@@ -157,7 +157,7 @@ console.log(realm);
 
                 if(!$scope.schemas) {
                     var queryFacetsParameters = {
-                        'q': '(realm_ss:' + realm.value + ') AND NOT version_s:* AND (schema_s:' + schema.join(' OR schema_s:') + ')',
+                        'q': '(realm_ss:' + realm.value.toLowerCase() + ') AND NOT version_s:* AND (schema_s:' + schema.join(' OR schema_s:') + ')',
                         'fl': '', 		//fields for results.
                         'wt': 'json',
                         'rows': 0,		//limit
