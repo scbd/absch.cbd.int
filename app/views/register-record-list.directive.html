@@ -26,7 +26,7 @@
       </div>
       <div class="col-xs-2 pull-right" ng-show="showAddButton()">
         <span style="font-size: 16px; color: white;margin:0;padding:0;float:right;">
-          <a href="/register/{{schema}}/new" class="btn btn-sm btn-primary" id="new_button"><span class="glyphicon glyphicon-plus-sign"></span> Add New</a></span>
+          <a href="/register/{{schema|mapSchema}}/new" class="btn btn-sm btn-primary" id="new_button"><span class="glyphicon glyphicon-plus-sign"></span> Add New</a></span>
       </div>
   </div>
 
@@ -70,9 +70,9 @@
 
 
                         <a href="" ng-click="loadDocument(record); displayDetails =  !displayDetails;displayRequest =false" class="btn btn-xs btn-success" title="Published">P</a>
-                        <a href="/register/{{record.type}}/{{record.identifier}}/edit" ng-show="isDraft(record) && !isRequest(record)"  class="btn btn-xs btn-default btn-draft" title="Draft">D</a>
+                        <a href="/register/{{record.type|mapSchema}}/{{record.identifier}}/edit" ng-show="isDraft(record) && !isRequest(record)"  class="btn btn-xs btn-default btn-draft" title="Draft">D</a>
 
-                         <a ng-show="isDraft(record) && !isRequest(record)"  href="/register/{{record.type}}/{{record.identifier}}/edit">
+                         <a ng-show="isDraft(record) && !isRequest(record)"  href="/register/{{record.type|mapSchema}}/{{record.identifier}}/edit">
                             <h4 style="display:inline;">{{(record.workingDocumentTitle||record.title)|lstring}}
                             <span ng-show="record.metadata.schema == 'absCheckpointCommunique'">Checkpoint Communique - {{record.createdOn | formatDateWithTime }}</span></h4>
                         </a>
@@ -93,8 +93,8 @@
                     </span>
 
                     <span ng-show="isDraft(record) && !isPublished(record) && !isRequest(record)" >
-                      <a ng-href="/register/{{record.type}}/{{record.identifier}}/edit" class="btn btn-xs btn-default btn-draft" title="Draft" style="color:#fff">D</a>
-                      <a href="/register/{{record.type}}/{{record.identifier}}/edit">
+                      <a ng-href="/register/{{record.type|mapSchema}}/{{record.identifier}}/edit" class="btn btn-xs btn-default btn-draft" title="Draft" style="color:#fff">D</a>
+                      <a href="/register/{{record.type|mapSchema}}/{{record.identifier}}/edit">
                             <h4 style="display:inline;">{{(record.workingDocumentTitle||record.title)|lstring}}
                             <span ng-show="record.metadata.schema == 'absCheckpointCommunique'">Checkpoint Communique - {{record.createdOn | formatDateWithTime }}</span></h4>
                         </a>
@@ -118,7 +118,7 @@
              <div class="btn-group document_buttons btn-group-sm">
                 <button ng-show="showAddButton()" title="Duplicate" type="button" class="btn btn-default" ng-click="askDuplicate(record)"><i class="fa fa-files-o"></i></button>
                 <button title="Locked for edit" ng-show="isRequest(record) && showAddButton()" type="button" class="btn btn-default"><i class="glyphicon glyphicon-lock"></i></button>
-                <a title="Edit" ng-show="!isRequest(record) && showAddButton()" type="button" class="btn btn-default" href="/register/{{record.type}}/{{record.identifier}}/edit"><i class="fa fa-edit"></i></a>
+                <a title="Edit" ng-show="!isRequest(record) && showAddButton()" type="button" class="btn btn-default" href="/register/{{record.type|mapSchema}}/{{record.identifier}}/edit"><i class="fa fa-edit"></i></a>
                 <button title="Delete"  ng-show="!isRequest(record) && showAddButton()"ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
             </div>
           </div> <!-- end col -->

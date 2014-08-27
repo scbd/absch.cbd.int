@@ -299,6 +299,50 @@ define(["app"], function (app) {
 	//
 	//
 	//============================================================
+	app.filter("mapSchema", [function() {
+
+		return function( schame ) {
+
+			if(schame.toLowerCase()=="focalpoint"				    ) return "FP";
+			if(schame.toLowerCase()=="authority"				    ) return "CNA";
+			if(schame.toLowerCase()=="contact"				        ) return "CON";
+			if(schame.toLowerCase()=="database"				        ) return "NDB";
+			if(schame.toLowerCase()=="resource"				        ) return "VLR";
+			if(schame.toLowerCase()=="organization"			        ) return "ORG";
+			if(schame.toLowerCase()=="measure" 				        ) return "MSR";
+			if(schame.toLowerCase()=="abscheckpoint"			    ) return "CP";
+			if(schame.toLowerCase()=="abscheckpointcommunique"      ) return "CPC";
+			if(schame.toLowerCase()=="abspermit"				    ) return "IRCC";
+            if(schame.toLowerCase()=="statement"				    ) return "ST";
+        	if(schame.toLowerCase()=="notification"			        ) return "NT";
+        	if(schame.toLowerCase()=="meeting"				) return "MT";
+        	if(schame.toLowerCase()=="pressrelease"			) return "PR";
+
+            if(schame.toUpperCase()=="FP"				        ) return "focalPoint";
+			if(schame.toUpperCase()=="CNA"				    ) return "authority";
+			if(schame.toUpperCase()=="CON"				    ) return "contact";
+			if(schame.toUpperCase()=="NDB"				    ) return "database";
+			if(schame.toUpperCase()=="VLR"				    ) return "resource";
+			if(schame.toUpperCase()=="ORG"			        ) return "organization";
+			if(schame.toUpperCase()=="MSR" 				    ) return "measure";
+			if(schame.toUpperCase()=="CP"			            ) return "absCheckpoint";
+			if(schame.toUpperCase()=="CPC"                    ) return "absCheckpointCommunique";
+			if(schame.toUpperCase()=="IRCC"				    ) return "absPermit";
+            if(schame.toUpperCase()=="ST"				        ) return "statement";
+        	if(schame.toUpperCase()=="NT"			            ) return "notification";
+        	if(schame.toUpperCase()=="MT"				        ) return "meeting";
+        	if(schame.toUpperCase()=="PR"			            ) return "pressRelease";
+
+
+			return schame;
+		};
+	}]);
+
+    //============================================================
+	//
+	//
+	//
+	//============================================================
 	app.filter("languageLongName", [function() {
 
 		return function( language ) {

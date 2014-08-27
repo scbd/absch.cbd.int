@@ -69,7 +69,7 @@ app.controller("DashboardController",
                 $and : [
                     { "createdBy" : myUserID },
                     { closedOn : { $exists : true } },
-                    { "data.realm" : realm }
+                    { "data.realm" : realm.value }
                 ]
             };
     $q.when(workflows.query(query), function(data){
@@ -80,7 +80,7 @@ app.controller("DashboardController",
 				$and : [
 					{ "createdBy" : myUserID } ,
 					{ closedOn : { $exists : false } },
-					{ "data.realm" : realm }
+					{ "data.realm" : realm.value }
 				]
 			};
     $q.when(workflows.query(query), function(data){
@@ -91,7 +91,7 @@ app.controller("DashboardController",
 			$and : [
 				{ "activities.assignedTo" : myUserID },
 				{ closedOn : { $exists : false } },
-				{ "data.realm" : realm }
+				{ "data.realm" : realm.value }
 			]
 		};
     $q.when(workflows.query(query), function(data){

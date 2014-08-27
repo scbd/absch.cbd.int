@@ -9,7 +9,7 @@ define(['app',
     '../views/directives/search-filter-dates.partial.html.js',
     '../views/directives/document-list.partial.html.js'], function (app) {
 
-    app.controller('FindController', ['$scope', '$rootScope', '$http', '$timeout', '$q', function ($scope, $rootScope, $http, $timeout, $q) {
+    app.controller('FindController', ['$scope', '$rootScope', '$http', '$timeout', '$q','realm', function ($scope, $rootScope, $http, $timeout, $q, realm) {
 
         var self = this;
         var queryCanceler = null;
@@ -106,8 +106,9 @@ define(['app',
     	function query () {
 
             var schema = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "resource", "meeting", "notification","pressRelease","statement" ]
-
-            var q = '(realm_ss:absch OR realm_ss:ABS) AND NOT version_s:*';//' AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryTheme + ' AND ' + $scope.queryTargets +' AND ' + $scope.queryDate + ' AND ' + $scope.queryKeywords;
+console.log(realm);
+//realm_ss:absch OR realm_ss:ABS
+            var q = '(realm_ss:' + realm.value + ') AND NOT version_s:*';//' AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryTheme + ' AND ' + $scope.queryTargets +' AND ' + $scope.queryDate + ' AND ' + $scope.queryKeywords;
 
             if($scope.keyword)         q += ' AND (title_t:*' + $scope.keyword + '* OR description_t:*' + $scope.keyword + '* OR text_EN_txt:*' + $scope.keyword + '* OR uniqueIdentifier_ss:*' + $scope.keyword.toLowerCase() + '*)';
 
@@ -156,7 +157,7 @@ define(['app',
 
                 if(!$scope.schemas) {
                     var queryFacetsParameters = {
-                        'q': '(realm_ss:absch OR realm_ss:ABS) AND NOT version_s:* AND (schema_s:' + schema.join(' OR schema_s:') + ')',
+                        'q': '(realm_ss:' + realm.value + ') AND NOT version_s:* AND (schema_s:' + schema.join(' OR schema_s:') + ')',
                         'fl': '', 		//fields for results.
                         'wt': 'json',
                         'rows': 0,		//limit

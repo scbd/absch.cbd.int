@@ -1,11 +1,11 @@
 define(['app', 'jqvmap', 'jqvmapworld'], function (app,angucomplete) {
 
-    app.controller("CountryMapController", ["$scope", "authHttp","underscore","$q","$filter","$timeout", "$location",
-     function ($scope, $http, _, $q,$filter,$timeout, $location) {
+    app.controller("CountryMapController", ["$scope", "authHttp","underscore","$q","$filter","$timeout", "$location","realm",
+     function ($scope, $http, _, $q,$filter,$timeout, $location, realm) {
 
     	//*******************************************************
         var queryFacetsParameters = {
-                    'q': '(realm_ss:absch OR realm_ss:ABS) AND NOT version_s:*',
+                    'q': '(realm_ss:' + realm.value + ') AND NOT version_s:*',
                     'fl': '', 		//fields for results.
                     'wt': 'json',
                     'rows': 0,		//limit

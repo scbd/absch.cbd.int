@@ -1,6 +1,6 @@
 define(['app'], function (app) {
 
-app.controller('FindController', ['$scope', '$rootScope', '$http', '$timeout', '$q', function ($scope, $rootScope, $http, $timeout, $q) {
+app.controller('FindController', ['$scope', '$rootScope', '$http', '$timeout', '$q','realm', function ($scope, $rootScope, $http, $timeout, $q, realm) {
 
     var self = this;
     var queryCanceler = null;
@@ -137,7 +137,7 @@ app.controller('FindController', ['$scope', '$rootScope', '$http', '$timeout', '
     //============================================================
 	function query () {
 
-        var q = '(realm_ss:absch OR realm_ss:ABS)';//' AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryTheme + ' AND ' + $scope.queryTargets +' AND ' + $scope.queryDate + ' AND ' + $scope.queryKeywords;
+        var q = '(realm_ss:' + realm.value + ')';//' AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryTheme + ' AND ' + $scope.queryTargets +' AND ' + $scope.queryDate + ' AND ' + $scope.queryKeywords;
 
         if($scope.keyword)         q += ' AND (title_s:' + $scope.keyword + '* OR description_t:' + $scope.keyword + '* OR text_EN_txt:' + $scope.keyword + '*)';
 
@@ -197,7 +197,7 @@ app.controller('FindController', ['$scope', '$rootScope', '$http', '$timeout', '
 
             if(!$scope.schemas) {
                 var queryFacetsParameters = {
-                    'q': '(realm_ss:absch OR realm_ss:ABS)',
+                    'q': '(realm_ss:' + realm.value + ')',
                     'fl': '',
                     'wt': 'json',
                     'rows': 0,

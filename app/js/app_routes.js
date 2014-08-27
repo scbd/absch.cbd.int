@@ -2,7 +2,7 @@
 
 define(['app', 'extended-route-provider','authentication', 'services', 'filters', 'storage', 'workflows'], function (app) {
 
-    app.value("realm", "ABS");
+     app.value("realm", {value:"ABS"});
     app.value("schemaTypes", [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "resource" ]);
 
 	// var resolveUser = ['$rootScope', 'authentication', function($rootScope, authentication) {

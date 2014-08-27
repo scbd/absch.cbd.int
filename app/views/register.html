@@ -60,7 +60,7 @@
 
                 <div ng-show="compareRoles(user.roles, heading.roles)" >
                     <h3 ng-class="{'btn-commonformat-header-national':heading.title!='Reference Records', 'btn-commonformat-header-reference': heading.title=='Reference Records'}">{{heading.title}}</h3>
-                      <a ng-repeat="type in heading.formats" ng-href="{{type!='contacts' ? '/register' : ''}}/{{type}}" role="button">
+                      <a ng-repeat="type in heading.formats" ng-href="{{type!='contacts' ? '/register' : ''}}/{{type | mapSchema}}" role="button">
                         <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : document_type==type ,'btn-commonformat-reference-selected' : document_type=='resource' && document_type==type}">
                           <div class="btn-commonformat-national" ng-class="{'btn-commonformat-reference':document_types[type].abbreviation=='VLR'}">{{document_types[type].abbreviation}}
 

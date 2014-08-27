@@ -138,7 +138,7 @@ define(['app',
     };
 
     if($routeParams.document_type) //this is used to highlight the item on the left
-      $scope.document_type = $routeParams.document_type;
+      $scope.document_type = $filter("mapSchema")($routeParams.document_type);
 
     $scope.msg="";
     $scope.records = [];
@@ -345,7 +345,7 @@ define(['app',
 	                $and : [
 	                    { "createdBy" : myUserID },
 	                    { closedOn : { $exists : true } },
-	                    { "data.realm" : realm }
+	                    { "data.realm" : realm.value }
 	                ]
 	            };
 
@@ -359,7 +359,7 @@ define(['app',
 				$and : [
 					{ "createdBy" : myUserID } ,
 					{ closedOn : { $exists : false } },
-					{ "data.realm" : realm }
+					{ "data.realm" : realm.value }
 				]
 			};
 	    $q.when(workflows.query(query), function(data){
@@ -371,7 +371,7 @@ define(['app',
 				$and : [
 					{ "activities.assignedTo" : myUserID },
 					{ closedOn : { $exists : false } },
-					{ "data.realm" : realm }
+					{ "data.realm" : realm.value }
 				]
 			};
 	    $q.when(workflows.query(query), function(data){
@@ -418,7 +418,8 @@ define(['app',
 		             $location.$$host + ($location.$$host != 'absch.cbd.int' ? ':' + $location.$$port : '') + '/', '')
           $timeout(function(){$location.path(url);},1)}
         else{
-          $timeout(function(){$location.path('/register/'+$scope.document_type);},1);}
+          $timeout(function(){$location.path('/register/'+
+		                      $filter("mapSchema")($scope.document_type));},1);}
       }, 500);
 
     });
@@ -459,7 +460,7 @@ define(['app',
 	  $scope.showingFeedback = true;
 	  bootbox.alert('Record saved. A publishing request has been sent to your Publishing Authority.', function(){
 		    $scope.showingFeedback = false;
-			$timeout(function(){$location.path('/register/'+$scope.document_type);},1);
+			$timeout(function(){$location.path('/register/'+$filter("mapSchema")($scope.document_type));},1);
 	  });
 	  $rootScope.updatedRecord = workflowInfo;
       //$timeout(function() { $location.path('/register/'+$scope.document_type); }, 500);
@@ -480,7 +481,7 @@ define(['app',
 	  $scope.showingFeedback = true;
 	  bootbox.alert('Record published. The record will be now publicly accessable on ABSCH.', function(){
 		    $scope.showingFeedback = false;
-			$timeout(function(){$location.path('/register/'+$scope.document_type);},1);
+			$timeout(function(){$location.path('/register/'+$filter("mapSchema")($scope.document_type));},1);
 	  });
 	  $rootScope.updatedRecord = documentInfo;
       //$timeout(function() { $location.path('/register/'+$scope.document_type); }, 500);

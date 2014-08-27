@@ -1,16 +1,16 @@
 ﻿define(['app'], function (app) {
 
 "use strict";
-app.controller("myPendingTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm", function ($scope, $timeout, IWorkflows, realm) 
+app.controller("myPendingTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm", function ($scope, $timeout, IWorkflows, realm)
 		{
 			var nextLoad = null;
 			var myUserID = $scope.$root.user.userID;
-			var query    = { 
+			var query    = {
 				$and : [
-					{ "createdBy" : myUserID } , 
+					{ "createdBy" : myUserID } ,
 					{ closedOn : { $exists : false } },
-					{ "data.realm" : realm }
-				] 
+					{ "data.realm" : realm.value }
+				]
 			};
 
 			$scope.sortTerm = 'createdOn';
@@ -31,7 +31,7 @@ app.controller("myPendingTasksCotroller", [ "$scope", "$timeout", "IWorkflows", 
 			//
 			//==============================
 			function load() {
-				
+
 				IWorkflows.query(query).then(function(workflows){
 
 					workflows.forEach(function(workflow) { //tweaks

@@ -1,21 +1,21 @@
 ﻿define(['app'], function (app) {
 
 "use strict";
-app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm", "underscore", function ($scope, $timeout, IWorkflows, realm, _) 
+app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm", "underscore", function ($scope, $timeout, IWorkflows, realm, _)
 		{
 			var nextLoad  = null
 			var myUserID = $scope.$root.user.userID;
-			var query    = { 
+			var query    = {
 				$and : [
-					{ "activities.assignedTo" : myUserID }, 
+					{ "activities.assignedTo" : myUserID },
 					{ closedOn : { $exists : false } },
-					{ "data.realm" : realm }
-				] 
+					{ "data.realm" : realm.value }
+				]
 			};
 
 			$scope.tasks = null;
 			$scope.load = load;
-			
+
 			$scope.sortTerm = 'activity.createdOn';
 			$scope.orderList = true;
 	       	 //==================================
@@ -38,7 +38,7 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
 					var tasks  = [];
 
 					workflows.forEach(function(workflow) {
-						
+
 						workflow.activities.forEach(function(activity){
 
 							if(isAssignedToMe(activity)) {
@@ -55,7 +55,7 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
 
 			if($scope.$root.user.isAuthenticated)
 				load();
-			
+
 			//==============================
 			//
 			//==============================
@@ -63,7 +63,7 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
 
 				return _.contains(activity.assignedTo||[], $scope.$root.user.userID||-1);
 			}
-		
+
 			//==============================
 			//
 			//==============================

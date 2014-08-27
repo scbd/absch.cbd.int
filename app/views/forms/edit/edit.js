@@ -13,9 +13,12 @@ define([
     '/app/views/directives/workflow-std-buttons.html.js'
   ], function (app) {
 
-  app.controller("editController", ["$rootScope", "$scope", "authHttp", "$window", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage", "authentication", "Enumerable", "editFormUtility", "$routeParams", "$timeout", function ($rootScope, $scope, $http, $window, guid, $filter, thesaurus, $q, $location, storage, authentication, Enumerable, editFormUtility, $routeParams, $timeout) {
+  app.controller("editController", ["$rootScope", "$scope", "authHttp", "$window", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage",
+                                   "authentication", "Enumerable", "editFormUtility", "$routeParams", "$timeout","$filter",
+                                    function ($rootScope, $scope, $http, $window, guid, $filter, thesaurus, $q, $location, storage,
+                                              authentication, Enumerable, editFormUtility, $routeParams, $timeout, $filter) {
 
-    $scope.type = $rootScope.document_types[$routeParams.document_type];
+    $scope.type = $rootScope.document_types[$filter("mapSchema")($routeParams.document_type)];
 
     $scope.status   = "";
     $scope.error    = null;
@@ -339,12 +342,12 @@ define([
       var qDocument = {};
       $scope.document = {};
       if($routeParams.identifier)
-        qDocument = editFormUtility.load($routeParams.identifier, $routeParams.document_type);
+        qDocument = editFormUtility.load($routeParams.identifier, $filter("mapSchema")($routeParams.document_type));
       else {
         qDocument = {
           header: {
             identifier: guid(),
-            schema   : $routeParams.document_type,
+            schema   : $filter("mapSchema")($routeParams.document_type),
             languages: ["en"]
           },
           government: $scope.userGovernment() ? { identifier: $scope.userGovernment() } : undefined,

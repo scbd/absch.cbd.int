@@ -14,7 +14,7 @@ $compile.directive('search2', function ($http) {
         link: function ($scope, element, attrs, ngModelController)
         {
         },
-        controller: ['$scope', '$q', function ($scope, $q)
+        controller: ['$scope', '$q','realm', function ($scope, $q, realm)
         {
             var self = this;
 
@@ -82,7 +82,7 @@ $compile.directive('search2', function ($http) {
 
                 console.log("QUERY");
 
-                var q = '(realm_ss:absch OR realm_ss:ABS) AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryTheme + ' AND ' + $scope.queryDate + ' AND ' + $scope.queryKeywords;
+                var q = '(realm_ss:' + realm.value + ') AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryTheme + ' AND ' + $scope.queryDate + ' AND ' + $scope.queryKeywords;
 
                 var queryParameters = {
                     'q': q,

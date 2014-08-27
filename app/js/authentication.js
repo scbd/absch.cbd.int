@@ -2,7 +2,7 @@
 
 define(['app'], function (app) {
 
-	app.factory('authentication', ["$http", "$browser", function($http, $browser) { 
+	app.factory('authentication', ["$http", "$browser", function($http, $browser) {
 
 		var currentUser = null;
 
@@ -48,13 +48,17 @@ define(['app'], function (app) {
 
 	}]);
 
-	app.factory('authHttp', ["$http", "$browser","realm", function($http, $browser,realm) {
+	app.factory('authHttp', ["$http", "$browser","realm","$location", function($http, $browser,realm,$location) {
 
 		function addAuthentication(config) {
-		
+
 			if(!config)         config         = {};
 			if(!config.headers) config.headers = {};
-			if(!config.headers.realm) config.headers.realm = realm;
+			if($location.$$host != 'absch.cbd.int' && realm.value != "ABS-DEV"){
+				realm.value = "ABS-DEV";
+				config.headers.realm = realm.value;
+			}
+			if(!config.headers.realm) config.headers.realm = realm.value;
 
 			if($browser.cookies().authenticationToken) config.headers.Authorization = "Ticket "+$browser.cookies().authenticationToken;
 			else                                       config.headers.Authorization = undefined;

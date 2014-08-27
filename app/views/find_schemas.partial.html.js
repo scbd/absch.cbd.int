@@ -13,8 +13,8 @@ app.directive('searchFilterSchemas', function ($http) {
         link: function ($scope, element, attrs, ngModelController)
         {
         },
-        controller : ['$scope', '$element', '$location', 'Thesaurus', "IStorage", "guid", "$q", "Enumerable", "$filter","underscore",
-         function ($scope, $element, $location, Thesaurus, storage, guid, $q, Enumerable, $filter,_)
+        controller : ['$scope', '$element', '$location', 'Thesaurus', "IStorage", "guid", "$q", "Enumerable", "$filter","underscore","realm",
+         function ($scope, $element, $location, Thesaurus, storage, guid, $q, Enumerable, $filter,_,realm)
         {
             $scope.showNationalFilters = true;
             $scope.showReferenceFilters = true;
@@ -233,7 +233,7 @@ app.directive('searchFilterSchemas', function ($http) {
                     if(facetFields.length<=0)
                         return;
                     var queryFacetsParameters = {
-                            'q': '(realm_ss:absch OR realm_ss:ABS) AND NOT version_s:* AND schema_s:' + schema,
+                            'q': '(realm_ss:' + realm.value + ') AND NOT version_s:* AND schema_s:' + schema,
                             'fl': '',       //fields for results.
                             'wt': 'json',
                             'rows': 0,      //limit

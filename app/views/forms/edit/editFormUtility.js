@@ -185,7 +185,7 @@ app.factory("editFormUtility", ["IStorage", "IWorkflows", "$q", "realm","commonj
 					throw "No workflow type defined for this record type: " + draftInfo.type;
 
 				var workflowData = {
-					"realm"      : realm,
+					"realm"      : realm.value,
 					"documentID" : draftInfo.documentID,
 					"identifier" : draftInfo.identifier,
 					"title"      : draftInfo.workingDocumentTitle,

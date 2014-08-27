@@ -30,8 +30,6 @@ define(["app", "authentication"], function (app) {
 				//===========================
 				"query" : function(query, collection, params)
 				{
-					console.log('query');
-					console.log(params);
 					params            = _.extend({}, params||{});
 					params.collection = collection;
 					params.$filter    = query;
@@ -511,7 +509,7 @@ define(["app", "authentication"], function (app) {
 						metadata = angular.extend(metadata, { "government": user.government });
 
 					if (!metadata.realm && defaultRealm)
-						metadata = angular.extend(metadata, { "realm": defaultRealm });
+						metadata = angular.extend(metadata, { "realm": defaultRealm.value });
 
 					var params = {
 						"identifier" : identifier || "x",

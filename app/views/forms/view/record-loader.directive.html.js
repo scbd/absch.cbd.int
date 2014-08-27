@@ -47,8 +47,8 @@ app.directive('recordLoader', [function () {
 			if(!$scope.document)
 				$scope.init();
 		},
-		controller: ['$scope', "$route", 'IStorage', "authentication", "localization", "$q", "$location", "commonjs","$timeout",
-			function ($scope, $route, storage, authentication, localization, $q, $location,commonjs,$timeout) {
+		controller: ['$scope', "$route", 'IStorage', "authentication", "localization", "$q", "$location", "commonjs","$timeout","$filter",
+			function ($scope, $route, storage, authentication, localization, $q, $location,commonjs,$timeout, $filter) {
 
 			//==================================
 			//
@@ -186,7 +186,7 @@ app.directive('recordLoader', [function () {
 				var schema     = $scope.internalDocumentInfo.type;
 				var identifier = $scope.internalDocumentInfo.identifier;
 				$timeout(function(){
-					$location.path("/register/" + schema + "/" + identifier + '/edit');},1);
+					$location.path("/register/" + $filter("mapSchema")(schema) + "/" + identifier + '/edit');},1);
 
 			}
 

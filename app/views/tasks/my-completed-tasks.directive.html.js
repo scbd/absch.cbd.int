@@ -1,16 +1,16 @@
 ﻿define(['app'], function (app) {
 
 "use strict";
-app.controller("myCompletedTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm", function ($scope, $timeout, IWorkflows, realm) 
+app.controller("myCompletedTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm", function ($scope, $timeout, IWorkflows, realm)
 		{
 			var nextLoad = null;
 			var myUserID = $scope.$root.user.userID;
-			var query    = {  
+			var query    = {
 				$and : [
-					{ "createdBy" : myUserID }, 
+					{ "createdBy" : myUserID },
 					{ closedOn : { $exists : true } },
-					{ "data.realm" : realm }
-				] 
+					{ "data.realm" : realm.value }
+				]
 			};
 
 			$scope.sortTerm = 'closedOn';
@@ -30,7 +30,7 @@ app.controller("myCompletedTasksCotroller", [ "$scope", "$timeout", "IWorkflows"
 			//
 			//==============================
 			function load() {
-				
+
 				IWorkflows.query(query).then(function(workflows){
 
 					$scope.workflows = workflows;
@@ -61,5 +61,5 @@ app.controller("myCompletedTasksCotroller", [ "$scope", "$timeout", "IWorkflows"
 				if(nextLoad)
 					$timeout.cancel(nextLoad);
 			});
-		}]);	
+		}]);
 });
