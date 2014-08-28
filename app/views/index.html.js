@@ -1,5 +1,5 @@
 define(['app','./directives/login.directive.html.js'], function (app) {
-    app.controller('IndexController', ['$scope', '$http', '$window', '$cookies','realm',  function ($scope, $http, $window, $cookies, realm) {
+    app.controller('IndexController', ['$scope', 'authHttp', '$window', '$cookies','realm',  function ($scope, $http, $window, $cookies, realm) {
 
     	$scope.email = null;
     	$scope.password = null;

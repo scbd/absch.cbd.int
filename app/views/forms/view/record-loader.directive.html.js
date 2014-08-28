@@ -47,8 +47,8 @@ app.directive('recordLoader', [function () {
 			if(!$scope.document)
 				$scope.init();
 		},
-		controller: ['$scope', "$route", 'IStorage', "authentication", "localization", "$q", "$location", "commonjs","$timeout","$filter",
-			function ($scope, $route, storage, authentication, localization, $q, $location,commonjs,$timeout, $filter) {
+		controller: ['$scope', "$route", 'IStorage', "authentication", "localization", "$q", "$location", "commonjs","$timeout","$filter","authHttp",
+			function ($scope, $route, storage, authentication, localization, $q, $location,commonjs,$timeout, $filter, $http) {
 
 			//==================================
 			//
@@ -75,10 +75,14 @@ app.directive('recordLoader', [function () {
 					var docNum = documentID.split('-');
 					if(docNum.length ==5){
 						documentID = documentID.toLowerCase();//.replace('absch','ABSCH');
-						$scope.documentUID = documentID.toUpperCase()
+						$scope.documentUID = documentID.toUpperCase();
 						$scope.documentUrl = "https://s3.amazonaws.com/absch.documents/" + documentID + '.pdf';
-						closeWindow();
-						window.location.href = $scope.documentUrl;
+
+						$http.head($scope.documentUrl).then(function(success){console.log(success);}, function(error){console.log('this was the error');console.log(error); });
+
+
+						//closeWindow();
+						//window.location.href = $scope.documentUrl;
 						//window.close();
 						return;
 					}

@@ -15,7 +15,7 @@
     './forms/view/view-resource.directive.js',
     'directives/angucomplete-extended'], function (app) {
 //require("app", "linqjs")
-app.controller("ProfileController", ["$scope", "$http", "$routeParams","linqjs", "$filter", "realm", function ($scope, $http, $routeParams, linqjs, $filter, realm) {
+app.controller("ProfileController", ["$scope", "authHttp", "$routeParams","linqjs", "$filter", "realm", function ($scope, $http, $routeParams, linqjs, $filter, realm) {
 
     $scope.code = $routeParams.code;
     $scope.documentCount       = 0;
