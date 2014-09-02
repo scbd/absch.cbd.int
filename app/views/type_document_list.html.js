@@ -1,6 +1,6 @@
 define(['app',
 	'../views/directives/login.directive.html.js',
-	'./register-record-list.directive.js',	
+	'./register-record-list.directive.js',
 	//'../js/directives/forms/form-controls.js',
 	//'./tasks/my-completed-tasks.directive.js',
 	//'./tasks/my-pending-tasks.directive.js',
@@ -20,13 +20,13 @@ define(['app',
 
   "use strict";
 
-  app.controller("TypeDocumentListController", 
+  app.controller("TypeDocumentListController",
     ["$rootScope", "$scope", "$q", "$window", "IStorage", "underscore",
-     "schemaTypes", "$compile", "$timeout","lstringFilter", "$routeParams",
+     "schemaTypes", "$compile", "$timeout","lstringFilter", "$routeParams","$filter",
     function ($rootScope, $scope, $q, $window, storage, _,
-      schemaTypes,$compile,$timeout,lstringFilter, $routeParams) {
+      schemaTypes,$compile,$timeout,lstringFilter, $routeParams, $filter) {
 
-    $scope.type = $rootScope.document_types[$routeParams.document_type];
+    $scope.type = $rootScope.document_types[$filter("mapSchema")($routeParams.document_type)];
 
     //intro.js configurations
     $scope.introOptions = {
