@@ -103,7 +103,7 @@
 			<div ng-show="document.absJurisdiction">
 				<label>Jurisdiction</label>
 				<div class="km-value">
-					{{document.absJurisdiction|term}}
+					<li ng-repeat="term in document.absJurisdiction">{{term|term}} </li>
 				</div>
 			</div>
 
