@@ -233,7 +233,7 @@ app.directive('searchFilterSchemas', function ($http) {
                     if(facetFields.length<=0)
                         return;
                     var queryFacetsParameters = {
-                            'q': '(realm_ss:' + realm.value.toLowerCase() + ') AND NOT version_s:* AND schema_s:' + schema,
+                            'q': '(realm_ss:' + realm.value.toLowerCase() + ' or realm_ss:absch) AND NOT version_s:* AND schema_s:' + schema,
                             'fl': '',       //fields for results.
                             'wt': 'json',
                             'rows': 0,      //limit

@@ -6,7 +6,7 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
     	//*******************************************************
         var queryFacetsParameters = {
             //realm_ss:absch OR realm_ss:ABS)
-                    'q': '(realm_ss:' + realm.value.toLowerCase() +  ') AND NOT version_s:*',
+                    'q': '(realm_ss:' + realm.value.toLowerCase() + ' or realm_ss:absch) AND NOT version_s:*',
                     'fl': '', 		//fields for results.
                     'wt': 'json',
                     'rows': 0,		//limit

@@ -137,7 +137,7 @@ app.controller('FindController', ['$scope', '$rootScope', '$http', '$timeout', '
     //============================================================
 	function query () {
 
-        var q = '(realm_ss:' + realm.value.toLowerCase() + ')';//' AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryTheme + ' AND ' + $scope.queryTargets +' AND ' + $scope.queryDate + ' AND ' + $scope.queryKeywords;
+        var q = '(realm_ss:' + realm.value.toLowerCase() + ' or realm_ss:absch)';//' AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryTheme + ' AND ' + $scope.queryTargets +' AND ' + $scope.queryDate + ' AND ' + $scope.queryKeywords;
 
         if($scope.keyword)         q += ' AND (title_s:' + $scope.keyword + '* OR description_t:' + $scope.keyword + '* OR text_EN_txt:' + $scope.keyword + '*)';
 
@@ -197,7 +197,7 @@ app.controller('FindController', ['$scope', '$rootScope', '$http', '$timeout', '
 
             if(!$scope.schemas) {
                 var queryFacetsParameters = {
-                    'q': '(realm_ss:' + realm.value.toLowerCase() + ')',
+                    'q': '(realm_ss:' + realm.value.toLowerCase() + ' or realm_ss:absch)',
                     'fl': '',
                     'wt': 'json',
                     'rows': 0,

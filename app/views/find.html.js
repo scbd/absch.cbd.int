@@ -105,7 +105,7 @@ define(['app',
         //============================================================
     	function query () {
 
-            var schema = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "resource", "meeting", "notification","pressRelease","statement" ]
+            var schema = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "resource", "meeting", "notification","pressRelease","statement" ,"focalPoint"]
 console.log(realm);
 //realm_ss:absch OR realm_ss:ABS
             var q = '(realm_ss:' + realm.value.toLowerCase() + ' or realm_ss:absch) AND NOT version_s:*';//' AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryTheme + ' AND ' + $scope.queryTargets +' AND ' + $scope.queryDate + ' AND ' + $scope.queryKeywords;
