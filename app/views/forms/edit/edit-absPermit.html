@@ -15,7 +15,7 @@
 
     <div ng-show="!isLoading() && status!='hidden'">
         <div workflow-std-buttons document="getCleanDocument()"/>
-        
+
         <form class="editForm" name="editForm" id="editForm" style="margin-top:10px">
             <div ng-show="tab=='edit'" km-tab="edit">
 
@@ -66,7 +66,7 @@
                                 <div class="km-control-group" name="permit"
                                     caption="Reference number(s) of the internationally recognized certificate(s) of compliance that relate(s) to this permit">
 
-                                    <div ng-disabled="isPermitNotAvailable()" km-select multiple name="permit"
+                                    <div km-select multiple name="permit"
                                     ng-model="document.referencePermits"items="options.permits()" placeholder="Please select ..."></div>
 
                                 </div>
@@ -150,7 +150,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="km-control-group" required name="consentGranted" caption="Confirmation that prior informed consent (PIC) was obtained or granted">
-                                <span class="help-block">PIC must be obtained or granted. If the option NO is selected, the record cannot be posted in the ABS Clearing-House and, therefore, the internationally recognized certificate of compliance will not be issued.</span>
+                                <span class="help-block">If PIC has not been obtained or granted,  this record cannot be posted in the ABS Clearing-House and, therefore, the internationally recognized certificate of compliance will not be issued.</span>
                                 <button data-toggle="buttons-checkbox" type="button" class="btn" ng-class="{'btn-primary':document.consentGranted, 'btn-default': !document.consentGranted}" ng-click="document.consentGranted=!document.consentGranted">Yes</button>
                             </div>
                         </div>
@@ -318,7 +318,7 @@
 
 
                     <section>
-                    <legend>Usage Information</legend>
+                    <legend>Information on the utilization of the genetic resource(s)</legend>
                     <div class="row">
                         <div class="col-xs-12">
                             <div ng-class="{'alert alert-danger':document.usageConfidential}" class="confidential-box">
