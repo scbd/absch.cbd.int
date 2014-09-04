@@ -34,7 +34,11 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
         title:"Language",
         required:true,
         options: $http.get("/api/v2013/thesaurus/domains/ISO639-2/terms", { cache: true }).then(function(o){
-          return $scope.options.documentLinksExt[0].options = $filter("orderBy")(o.data, "name");
+            $scope.options.documentLinksExt[0].options = $filter("orderBy")(o.data, "name");
+              _.each($scope.options.documentLinksExt[0].options, function(element) {
+                    element.__value = element.name;
+                  });
+              return $scope.options.documentLinksExt[0].options;
         })
       }],
     });

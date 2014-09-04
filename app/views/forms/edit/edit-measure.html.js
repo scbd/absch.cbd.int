@@ -7,9 +7,9 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
       languages		: function() {
         return $http.get("/api/v2013/thesaurus/domains/52AFC0EE-7A02-4EFA-9277-8B6C327CE21F/terms",	{ cache: true }).then(function(o){ return $filter("orderBy")(o.data, "name"); });
       },
-      absMeasures		: function() { 
+      absMeasures		: function() {
         return $q.all([
-          $http.get("/api/v2013/thesaurus/domains/50616B56-12F3-4C46-BC43-2DFC26679177/terms", { cache: true }), 
+          $http.get("/api/v2013/thesaurus/domains/50616B56-12F3-4C46-BC43-2DFC26679177/terms", { cache: true }),
           $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })
         ]).then(function(o) {
           //TODO: this function appears generic to returning from .all, perhaps cut code by making this function and reusing it?
@@ -17,20 +17,20 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
           data.push(o[1].data);
           return  data;
         });
-      },				
+      },
 	    typeOfDocuments	: function() {
         return $q.all([
-          $http.get("/api/v2013/thesaurus/domains/144CF550-7629-43F3-817E-CACDED34837E/terms", { cache: true }), 
+          $http.get("/api/v2013/thesaurus/domains/144CF550-7629-43F3-817E-CACDED34837E/terms", { cache: true }),
           $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })
         ]).then(function(o) {
           var data = o[0].data;
           data.push(o[1].data);
           return  data;
         });
-      },	
+      },
 	    jurisdictions	: function () {
         return $q.all([
-          $http.get("/api/v2013/thesaurus/domains/7A56954F-7430-4B8B-B733-54B8A5E7FF40/terms", { cache: true }), 
+          $http.get("/api/v2013/thesaurus/domains/7A56954F-7430-4B8B-B733-54B8A5E7FF40/terms", { cache: true }),
           $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })
         ]).then(function(o) {
           var jurisdictions = o[0].data;
@@ -42,7 +42,7 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 
           return jurisdictions;
         });
-      },				
+      },
       statuses			: function() {
         return $http.get("/api/v2013/thesaurus/domains/ED7CDBD8-7762-4A84-82DD-30C01458A799/terms",	{ cache: true }).then(function(o){
           var statuses = o.data;
@@ -61,7 +61,12 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
             "/api/v2013/thesaurus/domains/ISO639-2/terms",
             { cache: true }
           ).then(function(o){
-            return $scope.options.documentLinksExt[0].options = $filter("orderBy")(o.data, "name");
+            $scope.options.documentLinksExt[0].options = $filter("orderBy")(o.data, "name");
+            _.each($scope.options.documentLinksExt[0].options, function(element) {
+                element.__value = element.name;
+              });
+
+              return $scope.options.documentLinksExt[0].options;
           });
         },
       }],
@@ -72,7 +77,12 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
           required:true,
           options: function() {
             return $http.get("/api/v2013/thesaurus/domains/52AFC0EE-7A02-4EFA-9277-8B6C327CE21F/terms", { cache: true }).then(function(o){
-              return $scope.options.documentTranslationsExt[0].options = $filter("orderBy")(o.data, "name");
+              $scope.options.documentTranslationsExt[0].options = $filter("orderBy")(o.data, "name");
+              _.each($scope.options.documentTranslationsExt[0].options, function(element) {
+                element.__value = element.name;
+              });
+
+              return $scope.options.documentTranslationsExt[0].options;
             });
           },
         },
@@ -82,7 +92,13 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
           required:true,
           options: function() {
             return $http.get("/api/v2013/thesaurus/domains/19E3C535-2919-4804-966C-E62728507291/terms", { cache: true }).then(function(o){
-              return $scope.options.documentTranslationsExt[1].options = $filter("orderBy")(o.data, "name");
+
+              $scope.options.documentTranslationsExt[1].options = $filter("orderBy")(o.data, "name");
+              _.each($scope.options.documentTranslationsExt[1].options, function(element) {
+                element.__value = element.name;
+              });
+console.log($scope.options.documentTranslationsExt);
+              return $scope.options.documentTranslationsExt[1].options;
             });
           },
         },
@@ -149,7 +165,7 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 
 		return qStatus.any(function (o) { return o.identifier == "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED" });
 	}
-	
+
   }]);
 
 
@@ -171,7 +187,7 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 				required    : "@",
 				layout      : "@"
 			},
-			link: function ($scope, $element, $attr, ngModelController) 
+			link: function ($scope, $element, $attr, ngModelController)
 			{
 				$scope.identifiers = null;
 				$scope.sections    = null;
@@ -188,12 +204,12 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 				$scope.$watch(function(){return angular.toJson($scope.sections   ) }, $scope.save);
 
 				$scope.init();
-	
+
 				if(!$attr["class"])
 					$element.addClass("list-unstyled");
 
 			},
-			controller: ["$scope", "$q", "Thesaurus", "Enumerable", function ($scope, $q, thesaurus, Enumerable) 
+			controller: ["$scope", "$q", "Thesaurus", "Enumerable", function ($scope, $q, thesaurus, Enumerable)
 			{
 				//==============================
 				//
@@ -202,7 +218,7 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 					$scope.setError(null);
 					$scope.__loading = true;
 
-					$q.when($scope.termsFn(), 
+					$q.when($scope.termsFn(),
 						function(data) { // on success
 							$scope.__loading = false;
 							$scope.terms     = data;
@@ -215,7 +231,7 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 				//==============================
 				//
 				//==============================
-				$scope.load = function() 
+				$scope.load = function()
 				{
 					if (!$scope.terms) // Not initialized
 						return;
@@ -245,14 +261,14 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 				//==============================
 				//
 				//==============================
-				$scope.save = function() 
+				$scope.save = function()
 				{
 					if(!$scope.identifiers)
 						return;
 
 					var oNewBinding = [];
 
-					angular.forEach($scope.terms, function(term, i) 
+					angular.forEach($scope.terms, function(term, i)
 					{
 						if(term==undefined) return //IE8 BUG
 
@@ -279,7 +295,7 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 				//==============================
 				$scope.isRequired = function()
 				{
-					return $scope.required!=undefined 
+					return $scope.required!=undefined
 						&& $.isEmptyObject($scope.binding);
 				}
 
