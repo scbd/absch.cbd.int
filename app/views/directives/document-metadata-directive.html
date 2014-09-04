@@ -28,7 +28,7 @@
 			<div>
 					<label class="record-metadata-label">Record identifier:</label>
 					<span class="record-metadata-text">
-						<a target="_new_" href="/database/record?documentID={{document.header.identifier ? document.header.identifier : document.id}}&documentSchema={{document.header.schema | uppercase}}">
+						<a target="_new_" href="/database/record?documentID={{getDocumentId(document)}}&documentSchema={{document.header.schema | uppercase}}">
 				 			<span >{{document.info | uniqueIDWithoutRevision }}</span>
 							<span ng-show="document.id">{{document.id}}</span>
 					    </a>

@@ -25,6 +25,14 @@ app.directive('documentList', function ($http, $filter) {
             controller: ['$scope','$sce', "underscore", "commonjs","authentication", '$q',"$filter",
             function ($scope, $sce, underscore, commonjs,authentication,$q, $filter){
 
+             $scope.getDocumentId = function(document){
+
+                if((document.recordtype == "referenceRecord" && document.schema != "resource") ||document.schema == "focalPoint")
+					return document.id;
+                else{console.log(document)
+                    return $filter("uniqueIDWithoutRevision")(document.doc.identifier_s);}
+			 }
+
               $scope.formatDate = function formatDate (date) {
                     return moment(date).format('MMMM Do YYYY');
               };
