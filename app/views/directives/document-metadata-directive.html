@@ -6,22 +6,32 @@
 			<div ng-show="document.info.createdBy">
 				<label class="record-metadata-label">Published by:</label>
 				<span class="record-metadata-text">
-					{{document.info.createdBy.firstName}} {{document.info.createdBy.lastName}}
-					(<a href="mailto:{{document.info.createdBy.email}}">{{document.info.createdBy.email}}</a>) on {{document.info.createdOn | date:'d-MMM-y  h:mm:ss a'}}
+					<a href="mailto:{{document.info.createdBy.email}}"><i class="fa fa-envelope"></i>
+						{{document.info.createdBy.firstName}} {{document.info.createdBy.lastName}}
+					</a>
+					on {{document.info.createdOn | date:'d-MMM-y  h:mm:ss a'}}
+					<!-- {{document.info.createdBy.firstName}} {{document.info.createdBy.lastName}}
+					(<a href="mailto:{{document.info.createdBy.email}}">{{document.info.createdBy.email}}</a>) on {{document.info.createdOn | date:'d-MMM-y  h:mm:ss a'}} -->
 				</span>
 			</div>
 
 			<div ng-show="!document.info.createdBy && document.info.createdOn">
 				<label class="record-metadata-label">Published by:</label>
 				<span class="record-metadata-text">
-					SCBD (secretariat@cbd.int) on {{document.info.createdOn| date:'d-MMM-y  h:mm:ss a'}}
+					<a href="mailto:secretariat@cbd.int"><i class="fa fa-envelope"></i>
+						SCBD
+					</a>
+				 	 on {{document.info.createdOn| date:'d-MMM-y  h:mm:ss a'}}
 				</span>
 			</div>
 
 			<div ng-show="document.info.updatedBy && document.info.updatedOn != document.info.createdOn">
 				<label class="record-metadata-label">Last udpated by:</label>
 				<span class="record-metadata-text">
-					{{document.info.updatedBy.firstName}} {{document.info.updatedBy.lastName}} ({{document.info.updatedBy.email}}) on {{document.info.updatedOn| date:'d-MMM-y  h:mm:ss a'}}
+					<a href="mailto:{{document.info.updatedBy.email}}"><i class="fa fa-envelope"></i>
+						{{document.info.updatedBy.firstName}} {{document.info.updatedBy.lastName}} ({{document.info.updatedBy.email}})
+					</a>
+					 on {{document.info.updatedOn| date:'d-MMM-y  h:mm:ss a'}}
 				</span>
 			</div>
 
