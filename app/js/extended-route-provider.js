@@ -66,7 +66,12 @@ define(['app', 'angular', 'authentication'], function(app, angular) {
         //============================================================
         function resolveController() {
 
-            return ['$q', '$route', '$filter', function($q, $route, $filter) {
+            return ['$q', '$route', '$filter','realm', '$location', function($q, $route, $filter, realm, $location) {
+
+                //change relam if not production
+                if($location.$$host != 'absch.cbd.int' && realm.value != "ABS-DEV"){
+    				realm.value = "ABS-DEV";
+    			}
 
                 var deferred = $q.defer();
 
