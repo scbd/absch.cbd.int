@@ -236,20 +236,9 @@ app.directive('searchFilterThemes', function ($http) {
             );
             $scope.$on("clearFilter", function(evt, info){
 
-                $scope.terms[0].selected = false;
-                $scope.terms[0].indeterminate = !$scope.terms[0].selected && ($scope.terms[0].indeterminateCounterA + $scope.terms[0].indeterminateCounterB) > 0;
-
-                $scope.terms[0].indeterminateCounterA = $scope.terms[0].indeterminateCounterA + 1;
-                resetIndeterminante($scope.terms[0], false);
-
-                resetCheckbox($scope.terms[0].narrowerTerms);
-                setNarrowers($scope.terms.narrowerTerms, false);
-
-                $scope.terms[0].narrowerTerms.forEach(function (term) {
-
-                    resetCheckbox1(term.broaderTerms);
-                    setBroaders(term.broaderTerms, false);
-                });
+                $scope.termsMap   = flatten($scope.terms, {});
+                $scope.terms.forEach(unselect)
+                $scope.termsArray = _.values($scope.termsMap);
 
                 buildQuery();
 

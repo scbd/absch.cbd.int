@@ -390,6 +390,26 @@ app.directive('searchFilterSchemas', function ($http) {
                 }
             });
 
+
+
+            $scope.$on("clearFilter", function(evt, info){
+
+                $scope.$emit('clearSelectSelection');
+                $scope.terms.forEach(function(data){
+                    if(data.selected){
+                        data.selected = false;
+
+                        if(data.identifier == 'absPermit'){
+                            data.subFilters.forEach(function(filter){
+                                if(filter.type=='radio')
+                                    $scope[filter.name] = null;
+                            });
+                        }
+                    }
+                })
+                $scope.buildQuery();
+
+            });
             // $('.dropdownCheck').on("click", "*", function (e) {
             //     e.stopPropagation();
             // });

@@ -71,7 +71,7 @@ define(['app'], function(app) {
             }
 
             function buildConditions (conditions, items) {
-                _.values(items).forEach(function (item) { 
+                _.values(items).forEach(function (item) {
                     if(item.selected){
                         conditions.push($scope.field+':'+item.identifier);
                     }
@@ -80,7 +80,7 @@ define(['app'], function(app) {
 
             function dictionarize(items) {
                 var dictionary = [];
-                (items||[]).forEach(function (item) { 
+                (items||[]).forEach(function (item) {
                     item.selected = false;
                     dictionary[item.identifier] = item;
                 });
@@ -88,16 +88,16 @@ define(['app'], function(app) {
             }
 
             function flatten(items, collection) {
-                items.forEach(function (item) { 
+                items.forEach(function (item) {
                     item.selected = false;
                     collection[item.identifier] = item;
-                    if(item.narrowerTerms) 
+                    if(item.narrowerTerms)
                         flatten(item.narrowerTerms, collection);
                 });
                 return collection;
             }
 
-            
+
 
             function onWatch_items(values) {
                 (values||[]).forEach(function (item) {
@@ -136,16 +136,31 @@ define(['app'], function(app) {
 
                             $scope.terms = classes;
 
-                            //update facets 
+                            //update facets
                             ($scope.facets).forEach(function (item) {
                                 if(_.has(self.termsMap, item.symbol))
                                     self.termsMap[item.symbol].count = item.count;
-                            });                
+                            });
                         });
                     }
                 }
             );
-            
+
+
+            $scope.$on("clearFilter", function(evt, info){
+
+                if(!$scope.allTerms)
+                    return;
+                    
+                $scope.allTerms.forEach(function(data){
+                    if(data.selected)
+                        data.selected = false;
+                })
+
+                buildQuery();
+
+            });
+
         }]
     }
   })

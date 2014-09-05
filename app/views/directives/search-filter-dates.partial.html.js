@@ -69,6 +69,11 @@ app.directive('searchFilterDates', function ($http) {
                 $scope.until = null;
                 $scope.selectedDate = '';
             }
+
+			$scope.$parent.$on('clearSelectSelection', function(){
+				 $scope.clearSelection();
+			})
+
             $scope.hasSelectedItems = function(){
                     return $scope.query.length > 0 && $scope.query !="*:*";
             }

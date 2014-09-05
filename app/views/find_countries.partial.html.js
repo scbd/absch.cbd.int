@@ -59,11 +59,6 @@ define(['app','/app/js/common.js'], function (app) {
                     $scope.items2 = $scope.items.slice(count1, count2+count2);
                     $scope.items3 = $scope.items.slice(count1+count2, count1+count2+count3);
 
-                    console.log($scope.items1);
-                    console.log($scope.items2);
-                    console.log($scope.items3);
-
-
                     $element.find("#dialogSelect").modal("show");
                 };
 
@@ -152,6 +147,21 @@ define(['app','/app/js/common.js'], function (app) {
 
                             });
                         });
+                });
+
+
+
+                $scope.$on("clearFilter", function(evt, info){
+                    if(!$scope.terms)
+                        return;
+                        
+                    $scope.terms.forEach(function(data){
+                        if(data.selected)
+                            data.selected = false;
+                    })
+
+                    buildQuery();
+
                 });
 
 
