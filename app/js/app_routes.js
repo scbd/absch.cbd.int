@@ -15,9 +15,11 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
 
         $routeProvider.
             when('/',                            { templateUrl: '/app/views/index.html'                     ,resolveController: true, resolveUser: true}).
-            when('/commonformat',                { templateUrl: '/app/views/common-formats.html'                     ,resolveController: true, resolveUser: true}).
+            when('/commonformat',                { templateUrl: '/app/views/common-formats.html'            ,resolveController: true, resolveUser: true}).
             when('/about',                       { templateUrl: '/app/views/about.html'                     ,resolveController: true, resolveUser: true}).
             when('/help',                        { templateUrl: '/app/views/help.html'                      ,resolveController: true, resolveUser: true}).
+            when('/help/theatre-access/',        { templateUrl: '/app/views/help/theatre-access.html'       ,resolveController: true, resolveUser: true}).
+            
             when('/find',                        { templateUrl: '/app/views/find.html'                      ,resolveController: true, resolveUser: true}).
             when('/countries',                   { templateUrl: '/app/views/countries.html'                 ,resolveController: true, resolveUser: true}).
             //when('/countries/map',               { templateUrl: '/app/views/countries/countryMap.html'        ,resolveController: true, resolveUser: true}).
