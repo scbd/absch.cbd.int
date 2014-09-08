@@ -246,6 +246,8 @@ define(['app','angular-form-controls'], function (app) {
                         $('form').filter('.dirty').removeClass('dirty');
                         $scope.$emit("updateOrignalDocument", $scope.getDocumentFn());
                         $scope.$emit("documentDraftSaved", draftInfo);
+                        $scope.showMessage = true;
+                        $timeout(function() { $scope.showMessage = false;}, 10000);
 						return draftInfo;
 
 					}).catch(function(error){

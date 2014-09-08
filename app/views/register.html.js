@@ -437,11 +437,11 @@ define(['app',
     $scope.$on("documentDraftSaved", function(evt, draftInfo) {
       evt.stopPropagation();
       $scope.editing = false;
-	  $scope.showingFeedback = true;
-	  bootbox.alert('Your record has been saved as a draft.', function(){
-		    $scope.showingFeedback = false;
-		//	$timeout(function(){$location.path('/register/'+$scope.document_type);},1);
-	  });
+	//   $scope.showingFeedback = true;
+	//   bootbox.alert('Your record has been saved as a draft.', function(){
+	// 	    $scope.showingFeedback = false;
+	// 	//	$timeout(function(){$location.path('/register/'+$scope.document_type);},1);
+	//   });
 	  $rootScope.updatedRecord = draftInfo;
     //   $scope.msg = "Your record has been saved as a draft.";
     });
