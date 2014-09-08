@@ -13,11 +13,12 @@
 		<strong>Error as occured...</strong>
 		<div>{{error}}</div>
 	</div>
-    <div class="alert alert-success" role="alert" ng-show="documentUID">
-      Thank you for downloading document {{documentUID}}. If the document did not download try clicking
-      <a href="{{documentUrl}}" class="alert-link">here...</a>
+    <div class="jumbotron" style="background-color:white;" role="alert" ng-show="documentUID">
+      <h2>Thank you for downloading document {{documentUID}}.</h2>
+      <p>If the document did not download try clicking
+      <a href="{{documentUrl}}" class="alert-link">here...</a></p>
       </br></br></br></br>
-      This window will close in {{timeLaspe}} secs.
+      This window will close automatically in {{timeLaspe}} seconds.
     </div>
 	<div ng-show="!error && internalDocument">
 		<div style="float:right">
