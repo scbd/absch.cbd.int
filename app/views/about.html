@@ -1,47 +1,31 @@
 <link rel="stylesheet" href="/app/css/about.css">
-<!-- <script src="/app/views/about.html.js"></script> -->
 
-
-<div ng-controller="AboutController" data-spy="scroll" data-target="#affix-nav" >
-
+<div ng-controller="AboutController" >
 
 
     <div class="container" style="padding:10px;">
-
         <ng-include src="'/app/views/help/links/helplinks.html'"></ng-inlcude>
-
     </div>
 
 
     <div style="background-color:white;padding-top:20px;border-top:2px solid #ddd;">
 
-<div class="container">
-    <div  class="row">
-      <div  class="col-xs-9 main-content" >
-        <ng-include src="subTemplateUrl" ng-show="user.isAuthenticated"></ng-include></ng-include>
-      </div>
+        <div class="container">
+            <div  class="row">
 
-      <div class="col-xs-3" style="padding-left:40px;" >
-        <div class="right-links" >
+              <div  class="col-xs-9 main-content" >
+                  <ng-include src="subTemplateUrl" ng-show="user.isAuthenticated"></ng-include></ng-include>
+              </div>
 
-             <ng-include   src="'/app/views/help/links/about.html'"></ng-inlcude>
 
-        </div>
-      </div>
-    </div> <!-- end row -->
-  </div> <!-- end container  -->
+              <div class="col-xs-3"  >
+                  <ng-include  src="'/app/views/help/links/about.html'"></ng-inlcude>
+              </div>
 
-  <br><br><br>
-  </div>
+            </div> <!-- end row -->
+          </div> <!-- end container  -->
+
+          <br><br><br>
+
+    </div>
 </div><!--  end controller -->
-
-<script type="text/javascript">
-    $('#affix-nav').affix({
-    offset: {
-      top: 10
-    , bottom: function () {
-        return (this.bottom = $('.footer').outerHeight(true))
-      }
-    }
-  })
-</script>

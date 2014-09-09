@@ -63,36 +63,50 @@
         </ul>
 
         <div class="well" ng-show="show_about" style="height:250px;">
-            <a style="font-size:30px;" class="pull-right" ng-click="show_about=false;show_presentations=false;show_tours=false;show_accounts=false;show_search=false;show_register=false;show_email=false;show_skype=false;">
-                x </a>
+            <a  style="font-size:20px;" class="pull-right" ng-click="show_about=false;show_presentations=false;show_tours=false;show_accounts=false;show_search=false;show_register=false;show_email=false;show_skype=false;">
+                <i class="glyphicon glyphicon-remove-circle"></i> </a>
             <ng-include   src="'/app/views/help/links/about.html'"></ng-inlcude>
         </div>
 
         <div class="well" ng-show="show_presentations" style="height:250px;">
+            <a  style="font-size:20px;" class="pull-right" ng-click="show_about=false;show_presentations=false;show_tours=false;show_accounts=false;show_search=false;show_register=false;show_email=false;show_skype=false;">
+            <i class="glyphicon glyphicon-remove-circle"></i> </a>
             <ng-include   src="'/app/views/help/links/presentations.html'"></ng-inlcude>
         </div>
 
         <div class="well" ng-show="show_tours" style="height:250px;">
+            <a style="font-size:20px;" class="pull-right" ng-click="show_about=false;show_presentations=false;show_tours=false;show_accounts=false;show_search=false;show_register=false;show_email=false;show_skype=false;">
+            <i class="glyphicon glyphicon-remove-circle"></i> </a>
             <ng-include   src="'/app/views/help/links/tours.html'"></ng-inlcude>
         </div>
 
         <div class="well" ng-show="show_accounts" style="height:250px;">
+            <a style="font-size:20px;" class="pull-right" ng-click="show_about=false;show_presentations=false;show_tours=false;show_accounts=false;show_search=false;show_register=false;show_email=false;show_skype=false;">
+                <i class="glyphicon glyphicon-remove-circle"></i> </a>
             <ng-include   src="'/app/views/help/links/accounts.html'"></ng-inlcude>
         </div>
 
         <div class="well" ng-show="show_search" style="height:250px;">
+            <a style="font-size:20px;" class="pull-right" ng-click="show_about=false;show_presentations=false;show_tours=false;show_accounts=false;show_search=false;show_register=false;show_email=false;show_skype=false;">
+                <i class="glyphicon glyphicon-remove-circle"></i> </a>
             <ng-include   src="'/app/views/help/links/search.html'"></ng-inlcude>
         </div>
 
         <div class="well" ng-show="show_register" style="height:250px;">
+            <a style="font-size:20px;" class="pull-right" ng-click="show_about=false;show_presentations=false;show_tours=false;show_accounts=false;show_search=false;show_register=false;show_email=false;show_skype=false;">
+                <i class="glyphicon glyphicon-remove-circle"></i> </a>
             <ng-include   src="'/app/views/help/links/register.html'"></ng-inlcude>
         </div>
 
         <div class="well" ng-show="show_email" style="height:250px;">
+            <a style="font-size:20px;" class="pull-right" ng-click="show_about=false;show_presentations=false;show_tours=false;show_accounts=false;show_search=false;show_register=false;show_email=false;show_skype=false;">
+            <i class="glyphicon glyphicon-remove-circle"></i> </a>
             contact information
         </div>
 
         <div class="well" ng-show="show_skype" style="height:250px;">
+            <a style="font-size:20px;" class="pull-right" ng-click="show_about=false;show_presentations=false;show_tours=false;show_accounts=false;show_search=false;show_register=false;show_email=false;show_skype=false;">
+            <i class="glyphicon glyphicon-remove-circle"></i> </a>
             skype info
         </div>
 </div>
