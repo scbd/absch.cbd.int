@@ -22,6 +22,12 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
             when('/help/accounts',              { templateUrl: '/app/views/help/accounts/accounts.html'                      ,resolveController: true, resolveUser: true}).
             when('/help/accounts/:question',              { templateUrl: '/app/views/help/accounts/accounts.html'                      ,resolveController: true, resolveUser: true}).
 
+            when('/help/search',              { templateUrl: '/app/views/help/search/search.html'                      ,resolveController: true, resolveUser: true}).
+            when('/help/search/:question',              { templateUrl: '/app/views/help/search/search.html'                      ,resolveController: true, resolveUser: true}).
+
+
+            when('/help/register',              { templateUrl: '/app/views/help/register/register.html'                      ,resolveController: true, resolveUser: true}).
+            when('/help/register/:question',              { templateUrl: '/app/views/help/register/register.html'                      ,resolveController: true, resolveUser: true}).
 
 
             when('/find',                        { templateUrl: '/app/views/find.html'                      ,resolveController: true, resolveUser: true}).
