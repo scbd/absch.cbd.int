@@ -1,6 +1,6 @@
 define(['app'], function (app) {
 
-	app.controller('TheatreAccessController', ['$scope', 'commonjs', '$rootScope', '$location', '$window', function ($scope, commonjs, $rootScope, $location, $window) {
+	app.controller('TheatreAccessController', ['$scope', '$rootScope', '$location', '$window', function ($scope, $rootScope, $location, $window) {
 
 
 		}]);

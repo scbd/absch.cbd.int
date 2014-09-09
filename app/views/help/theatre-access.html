@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="/app/css/theatre.css">
+<link rel="stylesheet" href="/app/css/help.css">
 
 <div ng-controller="TheatreAccessController"  >
 
@@ -6,16 +7,8 @@
 
     <div class="container" style="padding:10px;">
 
-        <div class="row">
-            <div class="col-xs-12">
+        <ng-include src="'/app/views/help/links/helplinks.html'"></ng-inlcude>
 
-                    <h1>
-
-                        <a href="/help" data-toggle="tooltip" data-placement="top" title="help"><i class="fa fa-question-circle" style="font-size:32px;"></i>  </a> <i class="fa fa-11 fa-caret-right"></i>
-                        <a href="/help#presentations"><i class="fa fa-desktop"></i>  </a> <i class="fa fa-11 fa-caret-right"></i>  <span style="color:#333;">ABSCH Theatre: Access</span></h1>
-
-            </div>
-        </div>
     </div>
 
 

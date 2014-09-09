@@ -20,6 +20,9 @@
 .color-black{
     color:#111;
 }
+.color-yellow{
+    color:#FFD801;
+}
 .bg-orange{
     background-color:#fa6938!important;
     color:#FFF;
@@ -80,6 +83,9 @@ font-size: 10px;
 font-size: 25px;
 }
 
+.fa-12 {
+font-size: 38px;
+}
 
 
 @font-face {
