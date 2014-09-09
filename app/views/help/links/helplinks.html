@@ -12,58 +12,59 @@
                 </li>
 
                 <li>
-                    <a ng-click="show_about=!show_about;" ng-class="{'color-yellow':show_about, 'color-litegrey':!show_about}">
+                    <a ng-click="show_about=!show_about;show_presentations=false;show_tours=false;show_accounts=false;show_search=false;show_register=false;show_email=false;show_skype=false;" ng-class="{'color-yellow':show_about, 'color-litegrey':!show_about}">
                     <i class="fa fa-star fa-2"> </i>
                     </a>
                 </li>
 
                     <li>
-                    <a ng-click="show_presentations=!show_presentations;" ng-class="{'color-grey':show_presentations, 'color-litegrey':!show_presentations}">
+                    <a ng-click="show_about=false;show_presentations=!show_presentations;show_tours=false;show_accounts=false;show_search=false;show_register=false;show_email=false;show_skype=false;" ng-class="{'color-grey':show_presentations, 'color-litegrey':!show_presentations}">
                     <i class="fa fa-desktop  fa-2"> </i>
                     </a>
                 </li>
 
 
                     <li>
-                    <a href="#presentations" class="color-grey">
+                    <a ng-click="show_about=false;show_presentations=false;show_tours=!show_tours;show_accounts=false;show_search=false;show_register=false;show_email=false;show_skype=false;" ng-class="{'color-red':show_tours, 'color-litegrey':!show_tours}">
                     <i class="fa fa-youtube-play fa-2"> </i>
                     </a>
                 </li>
 
                     <li>
-                    <a href="#presentations" class="color-green">
+                    <a ng-click="show_about=false;show_presentations=false;show_tours=false;show_accounts=!show_accounts;show_search=false;show_register=false;show_email=false;show_skype=false;" ng-class="{'color-green':show_accounts, 'color-litegrey':!show_accounts}">
                     <i class="fa fa-user fa-2"> </i>
                     </a>
                 </li>
 
                     <li>
-                    <a href="#presentations" class="color-blue">
+                    <a ng-click="show_about=false;show_presentations=false;show_tours=false;show_accounts=false;show_search=!show_search;show_register=false;show_email=false;show_skype=false;" ng-class="{'color-blue':show_search, 'color-litegrey':!show_search}">
                     <i class="fa fa-search fa-2"> </i>
                     </a>
                 </li>
 
                     <li>
-                    <a href="#presentations" class="color-orange">
+                    <a ng-click="show_about=false;show_presentations=false;show_tours=false;show_accounts=false;show_search=false;show_register=!show_register;show_email=false;show_skype=false;" ng-class="{'color-orange':show_register, 'color-litegrey':!show_register}">
                     <i class="fa fa- fa-pencil-square-o  fa-2"> </i>
                     </a>
                 </li>
 
                     <li>
-                    <a href="#presentations" class="color-litegrey">
+                    <a ng-click="show_about=false;show_presentations=false;show_tours=false;show_accounts=false;show_search=false;show_register=false;show_email=!show_email;show_skype=false;" ng-class="{'color-black':show_email, 'color-litegrey':!show_email}">
                     <i class="fa fa- fa-envelope  fa-2"> </i>
                     </a>
                 </li>
 
                     <li>
-                    <a href="#presentations" class="color-blue">
+                    <a ng-click="show_about=false;show_presentations=false;show_tours=false;show_accounts=false;show_search=false;show_register=false;show_email=false;show_skype=!show_skype;" ng-class="{'color-blue':show_skype, 'color-litegrey':!show_skype}">
                     <i class="fa fa- fa-skype  fa-2"> </i>
                     </a>
                 </li>
 
         </ul>
 
-
         <div class="well" ng-show="show_about" style="height:250px;">
+            <a style="font-size:30px;" class="pull-right" ng-click="show_about=false;show_presentations=false;show_tours=false;show_accounts=false;show_search=false;show_register=false;show_email=false;show_skype=false;">
+                x </a>
             <ng-include   src="'/app/views/help/links/about.html'"></ng-inlcude>
         </div>
 
@@ -71,4 +72,27 @@
             <ng-include   src="'/app/views/help/links/presentations.html'"></ng-inlcude>
         </div>
 
+        <div class="well" ng-show="show_tours" style="height:250px;">
+            <ng-include   src="'/app/views/help/links/tours.html'"></ng-inlcude>
+        </div>
+
+        <div class="well" ng-show="show_accounts" style="height:250px;">
+            <ng-include   src="'/app/views/help/links/accounts.html'"></ng-inlcude>
+        </div>
+
+        <div class="well" ng-show="show_search" style="height:250px;">
+            <ng-include   src="'/app/views/help/links/search.html'"></ng-inlcude>
+        </div>
+
+        <div class="well" ng-show="show_register" style="height:250px;">
+            <ng-include   src="'/app/views/help/links/register.html'"></ng-inlcude>
+        </div>
+
+        <div class="well" ng-show="show_email" style="height:250px;">
+            contact information
+        </div>
+
+        <div class="well" ng-show="show_skype" style="height:250px;">
+            skype info
+        </div>
 </div>
