@@ -22,13 +22,13 @@ app.directive("viewResource", [function () {
 			// $scope.load = function() {
 
 			//         if(!$scope.document)
-			    
+
 
 			//       item.data = {'schema':item.schema, 'url_ss': item.url_ss, 'data': item};
-			//         $http.get("/api/v2013/documents/"+item.identifier_s).then(function (result) {  
+			//         $http.get("/api/v2013/documents/"+item.identifier_s).then(function (result) {
 			//             item.data = result.data;
 
-			//             $http.get("/api/v2013/documents/"+item.identifier_s + "?info").then(function (result) {  
+			//             $http.get("/api/v2013/documents/"+item.identifier_s + "?info").then(function (result) {
 			//                 item.data.info = result.data;
 			//             });
 
@@ -42,7 +42,7 @@ app.directive("viewResource", [function () {
 			//
 			//====================
 			$scope.display = function(field) {
-				
+
 				if(!$scope.hide) return true; //show all fields
 
 				return( $scope.hide.indexOf(field) >= 0 ? false : true);
@@ -71,7 +71,7 @@ app.directive("viewResource", [function () {
 							ref.document = data;
 						})
 						.error(function(error, code){
-							if (code == 404 && $scope.allowDrafts == "true") {
+							if (code == 404) {
 
 								storage.drafts.get(ref.identifier, { cache : true})
 									.success(function(data){

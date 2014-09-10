@@ -69,11 +69,20 @@
 
 		<div ng-show="organizations">
 			<label>Organization(s) involved in the publication of this resource</label>
-			<div class="km-value" >
+			<div class="km-valu1">
+				<div class="row">
+		            <div class="col-sm-12" ng-class="{'col-md-6' : organizations.length>1, 'col-md-12' : organizations.length<=1}" ng-repeat="organization in organizations">
+		                <div class="well">
+							<div class="view-authority-reference" ng-model="organization.document" locale="locale"></div>
+		                </div>
+		            </div>
+		        </div>
+			</div>
+			<!-- <div class="km-value" >
 				<ul>
 				<li class="cbdViewOrganizationReference" ng-repeat="item in organizations" ng-model="item.document" locale="locale"></li>
 				</ul>
-			</div>
+			</div> -->
 		</div>
 
 

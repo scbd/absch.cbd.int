@@ -20,7 +20,7 @@
 
     <div ng-show="!isLoading() && status!='hidden'">
         <div workflow-std-buttons document="getCleanDocument()"/>
-      
+
 		<form name="editForm" class="editForm" style="margin-top:10px">
 
 			<div ng-show="tab=='edit'" km-tab="edit">
@@ -79,12 +79,17 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="km-control-group" name="organizations" caption="Organization(s) involved in the publication of this resource">
-							<div km-reference multiple name="organizations" ng-model="document.organizations" loader="loadRecords(identifier, 'organization')" order-by="sortContacts(reference)">
+							<!-- <div km-reference multiple name="organizations" ng-model="document.organizations" loader="loadRecords(identifier, 'organization')" order-by="sortContacts(reference)">
 									<div>
 										<div><strong>{{reference.title | lstring}}</strong></div>
 										<div>{{reference.summary | lstring}}</div>
 									</div>
-							</div>
+							</div> -->
+
+                            <field-embed-contact multiple ng-model="document.organizationsRef" organization-only
+                                    locales="$parent.document.header.languages" caption="Add organizations »">
+                            </field-embed-contact>
+
 						</div>
 					</div>
 				</div>

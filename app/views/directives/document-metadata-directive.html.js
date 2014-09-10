@@ -7,7 +7,8 @@ define(['app'], function (app) {
 			controller: ['$scope', '$filter', function($scope, $filter){
 
 				$scope.getDocumentId = function(document){
-
+					if(!document)
+						return;
 					if(!document.id)
 						return $filter("uniqueIDWithoutRevision")(document.info);
 					else
