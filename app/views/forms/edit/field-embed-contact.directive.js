@@ -31,6 +31,8 @@ app.directive("fieldEmbedContact", [ function () {
 
 			});
 
+			$scope.organizationOnly = $attrs.organizationOnly!==undefined;
+
 
         },
 		controller : ["$scope", "authHttp", "$window", "$filter", "underscore", "guid", "editFormUtility", "$q","IStorage","commonjs",
@@ -53,8 +55,8 @@ app.directive("fieldEmbedContact", [ function () {
 			//
 			//============================================================
 			$scope.getContacts = function() {
-				if(workingContacts===null) {
 
+				if(workingContacts===null) {
 					     if(_.isArray ($scope.model)) workingContacts = _.clone($scope.model);
 					else if(_.isObject($scope.model)) workingContacts = [$scope.model];
 					else							  workingContacts = [];
@@ -73,17 +75,30 @@ app.directive("fieldEmbedContact", [ function () {
 
 				if(index<0 || index>=contacts.length) {
 					var id = guid();
-					$scope.edition = {
-						contact : {
-									header: {
-												schema   : "contact",
-												languages: ["en"]
-											},
-									type: "organization" ,
-									source: id
-								  },
-						index   : -1
-					};
+					if(!$scope.organizationOnly)
+						$scope.edition = {
+							contact : {
+										header: {
+													schema   : "contact",
+													languages: ["en"]
+												},
+										type: "organization" ,
+										source: id
+									  },
+							index   : -1
+						};
+					else
+						$scope.edition = {
+							contact : {
+										header: {
+													identifier : id,
+													schema   : "organization",
+													languages: ["en"]
+												},
+										type: "organization"
+									  },
+							index   : -1
+						};
 				}
 				else {
 
@@ -91,6 +106,9 @@ app.directive("fieldEmbedContact", [ function () {
 						contact : angular.fromJson(angular.toJson(contacts[index])),
 						index   : index
 					};
+					if($scope.organizationOnly){
+						$scope.edition.contact.type = "organization";
+					}
 				}
 			};
 
@@ -116,7 +134,7 @@ app.directive("fieldEmbedContact", [ function () {
 					saveContactDraft(cont);
 				}
 
-				if(!$scope.showFilter){
+				if(!$scope.showFilter && !$scope.organizationOnly){
 					delete contact.government;
 					delete contact.header;
 				}
@@ -152,7 +170,7 @@ app.directive("fieldEmbedContact", [ function () {
 			$scope.deleteContact = function(index) {
 
 				var contacts = _.clone($scope.getContacts());
-var indexNo = index;
+				var indexNo = index;
 				if(index<0 || index>=contacts.length)
 					return;
 
@@ -235,18 +253,24 @@ var indexNo = index;
 				if($scope.existingContacts)
 					return;
 
-				var qDrafts = storage.drafts.query("(type eq 'contact')", {body:true});
+				var contactType = 'contact';
+				if($scope.organizationOnly)
+					contactType = 'organization';
+
+				var qDrafts = storage.drafts.query("(type eq '" + contactType + "')", {body:true});
 				$scope.existingContacts= [];
 
 				$q.all([qDrafts]).then(function(results) {
 					//debugger;
 					results[0].data.Items.forEach(function(contact){
 						contact = contact.body;
-						if(!contact.source && contact.header)
-							contact.source = contact.header.identifier;
-						delete contact.government;
-						delete contact.header;
 						//console.log(contact);
+						if(!$scope.organizationOnly){
+							if(!contact.source && contact.header)
+								contact.source = contact.header.identifier;
+							delete contact.government;
+							delete contact.header;
+						}	//console.log(contact);
 						$scope.existingContacts.push(contact);
 					});
 
@@ -258,30 +282,85 @@ var indexNo = index;
 			saveContactDraft = function(contact){
 					if(!contact)
 						throw "Invalid document";
+					if(!$scope.organizationOnly){
 
-					var government = $scope.$root.user.government;
-					if(!contact.header)
-					{
-						contact.header = {schema   : "contact",languages: ["en"]};
+						var government = $scope.$root.user.government;
+						if(!contact.header)
+						{
+							contact.header = {schema   : "contact",languages: ["en"]};
+						}
+						contact.header.identifier = contact.source;
+						contact.government = government ? { identifier: government } : undefined;
+
+						$q.when(editFormUtility.saveDraft(contact), function(contact){});
 					}
-					contact.header.identifier = contact.source;
-					contact.government = government ? { identifier: government } : undefined;
+					else{
 
-					$q.when(editFormUtility.saveDraft(contact), function(contact){
-					});
+						$q.when(updateSecurity(contact)).then(function(){
+							if(!$scope.security)
+								return;
+							delete contact.type
+							if($scope.security.canSave)
+								$q.when(editFormUtility.publish(contact), function(contact){});
+							else
+								$q.when(editFormUtility.saveDraft(contact), function(contact){});
+						});
+					}
+
 			}
+
+			function updateSecurity(document)
+			{
+				$scope.security = {};
+				$scope.loading = true;
+
+				if(!document || !document.header)
+					return;
+
+				var identifier = document.header.identifier;
+				var schema     = document.header.schema;
+
+				var a = storage.documents.exists(identifier).then(function(exist){
+
+					var q = exist
+						  ? storage.documents.security.canUpdate(document.header.identifier, schema)
+						  : storage.documents.security.canCreate(document.header.identifier, schema);
+
+					return q.then(function(allowed) {
+						$scope.security.canSave = allowed
+					});
+				})
+
+				var b = storage.drafts.exists(identifier).then(function(exist){
+
+					var q = exist
+						  ? storage.drafts.security.canUpdate(document.header.identifier, schema)
+						  : storage.drafts.security.canCreate(document.header.identifier, schema);
+
+					return q.then(function(allowed) {
+						$scope.security.canSaveDraft = allowed
+					});
+				})
+
+				return $q.all([a,b]);
+			}
+
 
 			$scope.selectContact = function(contact){
 				$scope.buttonText = "Show existing";
 				$scope.selectExisting = !$scope.selectExisting;
 				$scope.edition.contact = contact;
 				$scope.saveContact(false);
+
 			}
 
 			$scope.isSelected = function(contact){
 				var selected = false;
+
 				$scope.getContacts().forEach(function(cont){
 					if(cont.source && cont.source == contact.source)
+							selected = true;
+					else if($scope.organizationOnly && contact.header && contact.header.identifier == cont.header.identifier)
 							selected = true;
 				});
 				return !selected;

@@ -1,6 +1,9 @@
 define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 
-  app.controller("editResource", ["$scope", "authHttp", "$filter", "Thesaurus", "$q", "Enumerable", "$controller", function ($scope, $http, $filter, Thesaurus, $q, Enumerable, $controller) {
+  app.controller("editResource", ["$scope", "authHttp", "$filter", "Thesaurus", "$q", "Enumerable", "$controller", "IStorage",
+                function ($scope, $http, $filter, Thesaurus, $q, Enumerable, $controller, storage) {
+
+    //$scope.organizationsRef = [];
     $controller('editController', {$scope: $scope});
 
     _.extend($scope.options, {
@@ -42,7 +45,6 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
         })
       }],
     });
-
     //==================================
     //
     //==================================
@@ -66,48 +68,61 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
           document.resourceTypeName = undefined;
 
 
-      return document;
+        var documentCopy = _.clone(document)
+
+        delete documentCopy.organizationsRef;
+      return documentCopy;
     };
 
     $scope.setDocument({libraries: [{ identifier: "cbdLibrary:abs-ch" }]}, true);
 
+    $scope.$on("loadDocument", function(evt, info) {
+        var loadRecords = [];
+        _.each($scope.document.organizations, function(org){
+            loadRecords.push($scope.loadRecords(org.identifier));
+        });
+        $q.all(loadRecords).then(function(data){
+            $scope.document.organizationsRef = data;
+        })
+    });
+
+    $scope.$watch("document.organizationsRef", function(newValue){
+
+        if(newValue){
+            $scope.document.organizations = [];
+            _.each(newValue, function(org){
+                $scope.document.organizations.push({identifier: org.header.identifier})
+            });
+
+        }
+    });
+
     // //==================================
 	// //
 	// //==================================
-	// $scope.loadRecords = function(identifier, schema) {
-    //
-    //
-	// 	if (identifier) { //lookup single record
-	// 		var deferred = $q.defer();
-    //
-	// 		storage.documents.get(identifier, { info: "" })
-	// 			.then(function(r) {
-	// 				deferred.resolve(r.data);
-	// 			}, function(e) {
-	// 				if (e.status == 404) {
-	// 					storage.drafts.get(identifier, { info: "" })
-	// 						.then(function(r) { deferred.resolve(r.data)},
-	// 							  function(e) { deferred.reject (e)});
-	// 				}
-	// 				else {
-	// 					deferred.reject (e)
-	// 				}
-	// 			});
-	// 		return deferred.promise;
-	// 	}
-    //
-	// 	//Load all record of specified schema;
-    //
-	// 	var sQuery = "type eq '" + encodeURI(schema) + "'";
-    //
-	// 	return $q.all([storage.documents.query(sQuery, null, { cache: true }),
-	// 				   storage.drafts   .query(sQuery, null, { cache: true })])
-	// 		.then(function(results) {
-	// 			var qResult = Enumerable.From (results[0].data.Items)
-	// 									.Union(results[1].data.Items, "$.identifier");
-	// 			return qResult.ToArray();
-	// 		});
-	// }
+	$scope.loadRecords = function(identifier) {
+
+
+		if (identifier) { //lookup single record
+			var deferred = $q.defer();
+
+			storage.documents.get(identifier)
+				.then(function(r) {
+					deferred.resolve(r.data);
+				}, function(e) {
+					if (e.status == 404) {
+						storage.drafts.get(identifier)
+							.then(function(r) { deferred.resolve(r.data)},
+								  function(e) { deferred.reject (e)});
+					}
+					else {
+						deferred.reject (e)
+					}
+				});
+			return deferred.promise;
+		}
+
+	}
 
 
   }]);
