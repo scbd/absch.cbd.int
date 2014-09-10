@@ -78,12 +78,10 @@ app.directive('recordLoader', [function () {
 						$scope.documentUID = documentID.toUpperCase();
 						$scope.documentUrl = "https://s3.amazonaws.com/absch.documents/" + documentID + '.pdf';
 
-						$http.head($scope.documentUrl).then(function(success){console.log(success);}, function(error){console.log('this was the error');console.log(error); });
+						//$http.head($scope.documentUrl).then(function(success){console.log(success);}, function(error){console.log('this was the error');console.log(error); });
 
-
-						//closeWindow();
-						//window.location.href = $scope.documentUrl;
-						//window.close();
+						closeWindow();
+						window.location.href = $scope.documentUrl;
 						return;
 					}
 					if(docNum.length <= 4)
