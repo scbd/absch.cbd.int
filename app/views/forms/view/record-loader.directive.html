@@ -13,12 +13,18 @@
 		<strong>Error as occured...</strong>
 		<div>{{error}}</div>
 	</div>
-    <div class="jumbotron" style="background-color:white;" role="alert" ng-show="documentUID">
+    <div class="jumbotron" style="background-color:white;" role="alert" ng-show="documentSuccess">
       <h2>Thank you for downloading document {{documentUID}}.</h2>
       <p>If the document did not download try clicking
       <a href="{{documentUrl}}" class="alert-link">here...</a></p>
       </br></br></br></br>
       This window will close automatically in {{timeLaspe}} seconds.
+    </div>
+
+	<div class="jumbotron" style="background-color:white;" role="alert" ng-show="documentError">
+      <h2>Thank you for requesting document {{documentUID}}.</h2>
+      <p>The document does not exists, if you think this file should be available, please report to
+		<a href="mailto:absch@cbd.int" class="alert-link">absch@cbd.int</a></p>
     </div>
 	<div ng-show="!error && internalDocument">
 		<div style="float:right">
