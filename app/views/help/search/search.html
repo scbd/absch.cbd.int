@@ -1,0 +1,66 @@
+<link rel="stylesheet" href="/app/css/help.css">
+
+<div ng-controller="SearchController"  >
+
+
+    <div class="container" style="padding:10px;">
+        <ng-include src="'/app/views/help/links/helplinks.html'"></ng-inlcude>
+    </div>
+
+
+    <div style="background-color:white;padding-top:20px;padding-bottom:30px;border-top:2px solid #ddd;">
+
+        <div class="container">
+            <div  class="row">
+
+              <div  class="col-xs-9 main-content" >
+
+                  <!-- ABOUT -->
+                  <div ng-show="question=='about'">
+                      <h1>About CBD accounts</h1>
+                      <p>
+                        A CBD account can be setup through <a href="http://accounts.cbd.int" style="font-weight:bold;">accounts.cbd.int</a> and gives you access to manage
+                        information registered under the different CBD Clearing-Houses including the BCH, ABS-CH and CHM.
+                      </p>
+
+                      <p>
+                        Click on any <strong class="color-black"><i class="fa fa-power-off"></i> SIGN IN</strong> link on a CBD Clearing-House page or click here to sign in now:
+                        <a href="http://accounts.cbd.int/signin" style="font-weight:bold;">accounts.cbd.int/signin</a>
+                      </p>
+
+                  </div>
+
+                <!-- LOGIN -->
+                  <div ng-show="question=='login'">
+                      <h1>Signing in to the ABSCH</h1>
+                      <p>  </p>
+
+                  </div>
+
+
+                  <!-- PASSWORD -->
+                  <div ng-show="question=='password'">
+                      <h1>Forgot your password</h1>
+                  </div>
+
+
+
+                  <!-- PROFILE -->
+                  <div ng-show="question=='profile'">
+                      <h1>Updating your profile</h1>
+                  </div>
+
+
+              </div>
+
+
+              <div class="col-xs-3"  >
+                  <ng-include  src="'/app/views/help/links/search.html'"></ng-inlcude>
+              </div>
+
+            </div> <!-- end row -->
+          </div> <!-- end container  -->
+
+
+    </div>
+</div>

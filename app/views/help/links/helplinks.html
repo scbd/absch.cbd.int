@@ -12,7 +12,8 @@
                 </li>
 
                 <li>
-                    <a ng-click="show_about=!show_about;show_presentations=false;show_tours=false;show_accounts=false;show_search=false;show_register=false;show_email=false;show_skype=false;" ng-class="{'color-yellow':show_about, 'color-litegrey':!show_about}">
+                    <a ng-click="show_about=!show_about;show_presentations=false;show_tours=false;show_accounts=false;show_search=false;show_register=false;show_email=false;show_skype=false;"
+                    ng-class="{'color-yellow':show_about, 'color-litegrey':!show_about}">
                     <i class="fa fa-star fa-2"> </i>
                     </a>
                 </li>
@@ -62,7 +63,7 @@
 
         </ul>
 
-        <div class="well" ng-show="show_about" style="height:250px;">
+        <div class="well"  ng-show="show_about" style="height:250px;">
             <a  style="font-size:20px;" class="pull-right" ng-click="show_about=false;show_presentations=false;show_tours=false;show_accounts=false;show_search=false;show_register=false;show_email=false;show_skype=false;">
                 <i class="glyphicon glyphicon-remove-circle"></i> </a>
             <ng-include   src="'/app/views/help/links/about.html'"></ng-inlcude>
@@ -98,15 +99,30 @@
             <ng-include   src="'/app/views/help/links/register.html'"></ng-inlcude>
         </div>
 
-        <div class="well" ng-show="show_email" style="height:250px;">
+        <div class="well" ng-show="show_email" style="height:320px;">
             <a style="font-size:20px;" class="pull-right" ng-click="show_about=false;show_presentations=false;show_tours=false;show_accounts=false;show_search=false;show_register=false;show_email=false;show_skype=false;">
             <i class="glyphicon glyphicon-remove-circle"></i> </a>
-            contact information
+            <h1>Contact us by email at <strong><a href="mailto:absch@cbd.int">absch@cbd.int</a></strong></h1>
+            <ng-include src="'/app/views/help/contacts.html'">
         </div>
 
         <div class="well" ng-show="show_skype" style="height:250px;">
             <a style="font-size:20px;" class="pull-right" ng-click="show_about=false;show_presentations=false;show_tours=false;show_accounts=false;show_search=false;show_register=false;show_email=false;show_skype=false;">
             <i class="glyphicon glyphicon-remove-circle"></i> </a>
-            skype info
+
+                    <h1>
+
+                        You can use Skype to chat or send us question or comments. <br><br>
+                        <span class="color-litegrey">If you are having any difficulties using the ABS Clearing-House please
+                        connect with us and we will be happy to arrange an online training session or any other help as needed.</span>
+
+                        <br><br>
+
+                        Connect with us over Skype, our address is:
+                        <a href="skype:abs-ch?chat" style="font-weight:bold;"><i class="fa fa-skype"></i> abs-ch</a>
+
+                    </h1>
+
+            </div>
         </div>
 </div>

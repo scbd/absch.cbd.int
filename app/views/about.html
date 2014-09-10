@@ -8,13 +8,16 @@
     </div>
 
 
-    <div style="background-color:white;padding-top:20px;border-top:2px solid #ddd;">
+    <div style="background-color:white;padding-top:20px;padding-bottom:30px;border-top:2px solid #ddd;">
 
         <div class="container">
             <div  class="row">
 
               <div  class="col-xs-9 main-content" >
-                  <ng-include src="subTemplateUrl" ng-show="user.isAuthenticated"></ng-include></ng-include>
+
+
+
+                  <ng-include src="subTemplateUrl" ></ng-include></ng-include>
               </div>
 
 
@@ -25,7 +28,6 @@
             </div> <!-- end row -->
           </div> <!-- end container  -->
 
-          <br><br><br>
 
     </div>
 </div><!--  end controller -->
