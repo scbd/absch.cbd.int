@@ -71,7 +71,7 @@
 }
 .helpList{
     list-style-type:none;
-    padding-bottom:20px;
+    padding:0 20px 20px 20px;
     color:#555;
 }
 
