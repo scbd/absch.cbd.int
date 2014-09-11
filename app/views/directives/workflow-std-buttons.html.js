@@ -69,8 +69,8 @@ define(['app','angular-form-controls'], function (app) {
 
                 $scope.loadSecurity();
 			},
-    		controller: ["$rootScope","$scope", "IStorage", "editFormUtility",
-            function ($rootScope, $scope, storage, editFormUtility)
+    		controller: ["$rootScope","$scope", "IStorage", "editFormUtility", "$route","IWorkflows",
+            function ($rootScope, $scope, storage, editFormUtility, $route, IWorkflows)
 			{
 
                 $scope.loadSecurity = function(){
@@ -151,6 +151,10 @@ define(['app','angular-form-controls'], function (app) {
 							$scope.$emit("documentInvalid", validationReport);
 						}
 						else return $q.when(editFormUtility.publish(document)).then(function(documentInfo) {
+
+                            if($route.current.params.workflow){
+                                IWorkflows.updateActivity($route.current.params.workflow, 'publishRecord', { action : 'approve' })
+                            }
 
 							if(documentInfo.type=='authority'){
 								//in case of authority save the CNA as a contact in drafts

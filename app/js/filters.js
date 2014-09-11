@@ -274,21 +274,21 @@ define(["app"], function (app) {
 
 		return function( schame ) {
 
-			if(schame=="focalpoint"				) return "FP";
-			if(schame=="authority"				) return "CNA";
-			if(schame=="contact"				) return "CON";
-			if(schame=="database"				) return "NDB";
-			if(schame=="resource"				) return "VLR";
-			if(schame=="organization"			) return "ORG";
-			if(schame=="measure" 				) return "MSR";
-			if(schame=="abscheckpoint"			) return "CP";
-			if(schame=="abscheckpointcommunique") return "CPC";
-			if(schame=="abspermit"				) return "IRCC";
-            if(schame=="statement"				) return "ST";
-        	if(schame=="notification"			) return "NT";
-        	if(schame=="meeting"				) return "MT";
-        	if(schame=="pressrelease"			) return "PR";
-            if(schame=="meetingdocument"    	) return "MTD";
+			if(schame.toLowerCase() =="focalpoint"				) return "FP";
+			if(schame.toLowerCase() =="authority"				) return "CNA";
+			if(schame.toLowerCase() =="contact"					) return "CON";
+			if(schame.toLowerCase() =="database"				) return "NDB";
+			if(schame.toLowerCase() =="resource"				) return "VLR";
+			if(schame.toLowerCase() =="organization"			) return "ORG";
+			if(schame.toLowerCase() =="measure" 				) return "MSR";
+			if(schame.toLowerCase() =="abscheckpoint"			) return "CP";
+			if(schame.toLowerCase() =="abscheckpointcommunique"	) return "CPC";
+			if(schame.toLowerCase() =="abspermit"				) return "IRCC";
+            if(schame.toLowerCase() =="statement"				) return "ST";
+        	if(schame.toLowerCase() =="notification"			) return "NT";
+        	if(schame.toLowerCase() =="meeting"					) return "MT";
+        	if(schame.toLowerCase() =="pressrelease"			) return "PR";
+            if(schame.toLowerCase() =="meetingdocument"    		) return "MTD";
 
 
 			return schame;

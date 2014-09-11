@@ -1,7 +1,7 @@
 ﻿<div ng-controller="myTasksCotroller" class="col-xs-9" style="padding-top:20px;">
 	<div class="registerpage-header">
 	    <h2>
-	      <span style="color:#c7532c;">Publishing requests for your approval</span>	
+	      <span style="color:#c7532c;">Publishing requests for your approval</span>
 	      <div class="pull-right" style="font-size:12px;">
 	    	<a class="pull-right" ng-show="!toggleHelp" ng-click="toggleHelp=!toggleHelp;" style="cursor:pointer;padding:5px;"><i class="glyphicon glyphicon-plus" >
 	      	</i> more
@@ -9,14 +9,14 @@
 	    	<a class="pull-right" ng-show="toggleHelp" ng-click="toggleHelp=!toggleHelp;" style="cursor:pointer;color:#666;padding:5px;"><i class="glyphicon glyphicon-minus" >
 	      	</i> less
 	    	</a>
-		</div>     
-	    </h2>	
+		</div>
+	    </h2>
 
 	    <p class="help1" ng-show="toggleHelp">
         	Requests waiting for your approval to be published online.
         </p>
-       
-  	</div>   
+
+  	</div>
   	<style type="text/css">
   		.header1{
   			padding: 8px;
@@ -38,13 +38,13 @@
 		<div class="table table-striped">
 			<div ng-show="tasks.length && !__error" >
 				<div class="row header1" >
-					<div class="col-xs-2 col-md-2 col-ls-2"><span style="cursor:pointer;" ng-click="sortTable('workflow._id')">ID 
+					<div class="col-xs-2 col-md-2 col-ls-2"><span style="cursor:pointer;" ng-click="sortTable('workflow._id')">ID
              		<i ng-show="sortTerm=='workflow._id'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></div>
-					<div class="col-xs-3 col-md-3 col-ls-3 "><span style="cursor:pointer;" ng-click="sortTable('workflow.data.metadata.schema')">Description 
+					<div class="col-xs-3 col-md-3 col-ls-3 "><span style="cursor:pointer;" ng-click="sortTable('workflow.data.metadata.schema')">Description
              		<i ng-show="sortTerm=='workflow.data.metadata.schema'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></div>
-					<div class="col-xs-3 col-md-3 col-ls-3 "><span style="cursor:pointer;" ng-click="sortTable('activity.name')">Status 
+					<div class="col-xs-3 col-md-3 col-ls-3 "><span style="cursor:pointer;" ng-click="sortTable('activity.name')">Status
              		<i ng-show="sortTerm=='activity.name'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></div>
-					<div class="col-xs-3 col-md-3 col-ls-3 "><span style="cursor:pointer;" ng-click="sortTable('workflow.createdOn')">Requested on 
+					<div class="col-xs-3 col-md-3 col-ls-3 "><span style="cursor:pointer;" ng-click="sortTable('workflow.createdOn')">Requested on
              		<i ng-show="sortTerm=='workflow.createdOn'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></div>
 					<div class="col-xs-1 col-md-1 col-ls-1 ">&nbsp;</div>
 				</div>
@@ -66,7 +66,7 @@
 
 							<div>{{task.workflow.data.title | lstring}}</div>
 						</div>
-						
+
 						<div class="col-xs-3 col-md-3 col-ls-3"> <!-- Status -->
 							<div ng-switch="task.activity.name">
 								<span ng-switch-when="publishRecord">Waiting for validation</span>
@@ -80,16 +80,16 @@
 						</div>
 
 						<div style="text-align:end" class="col-xs-1 col-md-1 col-ls-1">
-							<!-- <a class="btn btn-info" ng-href="/register/tasks/{{task.workflow._id}}/{{task.activity.name}}"  type="button"><i class="glyphicon glyphicon-edit"></i></button> -->					
+							<!-- <a class="btn btn-info" ng-href="/register/tasks/{{task.workflow._id}}/{{task.activity.name}}"  type="button"><i class="glyphicon glyphicon-edit"></i></button> -->
 							<a class="btn btn-info" ng-click="tasksDisplay=!tasksDisplay; formLoading=false" type="button"><i class="glyphicon glyphicon-edit"></i></a>
-						</div>	
+						</div>
 
 					</div>
 					<div class="row" ng-show="tasksDisplay">
-						<div class="col-xs-12 col-md-12 col-ls-12">					
+						<div class="col-xs-12 col-md-12 col-ls-12">	{{task.workflow._id}}				
 							<div  task-id class="record-body" load-task-data='formLoading' workflow-task-id="{{task.workflow._id}}" parent-watcher="dashboard" >
 							</div>
-						</div>		
+						</div>
 					</div>
 				</div>
 			</div>

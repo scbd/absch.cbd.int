@@ -1,9 +1,9 @@
-<div id="Record" class="record ">		
-	<div >	<h4>Request information and status</h4> 
+<div id="Record" class="record ">
+	<div >	<h4>Request information and status</h4>{{workflowTaskId}}
 	</div>
 	<div c>
 		<table class="table table-striped">
-			  
+
 			  <tr>
 			  	<td style="width:40%">Request ID</td>
 			  	<td style="text-transform:uppercase;white-space:nowrap;">
@@ -41,7 +41,7 @@
 			  	<td>Status</td>
 			  	<td>
 			  		<span ng-switch="workflow.state">
-			  			<span ng-switch-when="running"><i class="glyphicon glyphicon-cog"></i> Pending</span>	  				
+			  			<span ng-switch-when="running"><i class="glyphicon glyphicon-cog"></i> Pending</span>
 			  			<span ng-switch-when="completed">Completed on {{workflow.closedOn|date:'short'}}</span>
 			  			<span ng-switch-when="canceled"><i class="glyphicon glyphicon-remove-circle"></i> Canceled on {{workflow.closedOn|date:'short'}}</span>
 			  			<span ng-switch-when=""><i class="glyphicon glyphicon-exclamation-sign"></i> Failed on {{workflow.closedOn|date:'short'}}</span>
@@ -78,10 +78,10 @@
 						<span ng-switch-default>{{activity.name}}*</span>
 					</span>
 
-					 
+
 
 					<span ng-show="activity.assignedToRule">
-						by 
+						by
 						<em ng-switch="activity.assignedToRule|limitTo:7">
 							<span ng-switch-when="ABS-NFP">ABS-CH Focal Point or Publishing Authority</span>
 							<span ng-switch-when="BCH-NFP">BCH Focal Point</span>
@@ -104,12 +104,14 @@
 						</span>
 					</span>
 			  	</td>
-			  	<td class="text-right">	
+			  	<td class="text-right">
 			  			<div ng-show="isAssignedToMe(activity)">
 							<div ng-hide="activity.closedOn" ng-switch="activity.name">
 								<div ng-switch-when="publishRecord">
 									<span ng-hide="activity.closedOn">
 										<div ng-show="isAssignedToMe(activity)">
+											<a type="button" class="btn btn-primary"
+											ng-href="/register/{{workflow.data.metadata.schema | schemaShortName}}/{{activity.input.identifier}}/edit?workflow={{workflowTaskId}}"><i class="glyphicon glyphicon-edit"></i> </a><!-- edit and approve -->
 											<button type="button" class="btn btn-primary" ng-click="updateActivity({ action : 'approve' })"><i class="glyphicon glyphicon-ok"></i> </button><!-- Approve -->
 											<button type="button" class="btn btn-warning"  data-toggle="modal" data-target="#rejectModal"><i class="glyphicon glyphicon-remove"></i> </button><!-- Reject Request Changes /  -->
 										</div>
@@ -134,7 +136,7 @@
 										      </div>
 										    </div><!-- /.modal-content -->
 										  </div><!-- /.modal-dialog -->
-										</div><!-- /.modal -->	
+										</div><!-- /.modal -->
 								    </form>
 								</div>
 							</div>
@@ -158,11 +160,11 @@
 							<div ng-show="activity.failedOn">
 								Failed on {{activity.failedOn|date:'short'}}
 							</div>
-						</div> 
+						</div>
 			  	</td>
-			  </tr>			 
+			  </tr>
 			</table>
-			
+
 		<!-- Completed activity(ies) -->
 
 			<table class="table table-striped" ng-show="(workflow.activities|filter:isClose).length">
@@ -200,14 +202,14 @@
 
 			  	</td>
 			  </tr>
-					
+
 			  </table>
-			  
+
 			<div ng-show="document" class="t-document">
 				<record-loader document="document" hide-buttons="true" link-target="_self"></record-loader>
-			</div>	
+			</div>
 
-	
+
 
 	</div>
 	<style>
