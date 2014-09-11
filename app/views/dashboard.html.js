@@ -7,13 +7,22 @@ define(['app',], function (app) {
 //require("app", "dragAndDrop")
 
 app.controller("DashboardController",
-	["$rootScope", "$scope", "underscore", "lstringFilter","IWorkflows","realm","$q",
-	function ($rootScope, $scope, _, lstringFilter,workflows,realm,$q) {
+	["$rootScope", "$scope", "underscore", "lstringFilter","IWorkflows","realm","$q","$routeParams",
+	function ($rootScope, $scope, _, lstringFilter,workflows,realm,$q,$routeParams) {
 
     //intro.js configurations
+	$scope.startTour=false;
+
+    if($routeParams.tour)
+    {
+        $scope.startTour=true;
+    }
     $scope.introOptions = {
       steps: [
         {
+          intro: "Welcome to the introduction the ABSCH Dashboard. When the page is fully loaded click 'Next ->' to start the tour.",
+        },
+		{
           element: '#dashboard_panels',
           intro: 'Use these panels to get an overview of your documents and requests, as well as view the detail lists of requests.',
         },

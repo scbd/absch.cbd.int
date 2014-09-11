@@ -1,6 +1,4 @@
-<div ng-controller="DashboardController" ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart="false">
-
-    <a class="pull-right help-icon bg-orange"  ng-click="startIntro()"> <i class="fa fa-youtube-play"></i> help</a>
+<div ng-controller="DashboardController" ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart="startTour">
 
   <div class="col-xs-9"  style="margin-top:30px;">
 
@@ -12,6 +10,7 @@
           <a class="pull-right" ng-show="!help" ng-click="help=!help;" style="cursor:pointer;padding:5px;"><i class="glyphicon glyphicon-plus"></i> more </a>
           <a class="pull-right" ng-show="help" ng-click="help=!help;" style="cursor:pointer;color:#666;padding:5px;"><i class="glyphicon glyphicon-minus" ></i> less</a>
         </div>
+        <a class="pull-right color-orange fa-11"  ng-click="startIntro()"> <i class="fa fa-youtube-play"></i></a>
       </h2>
 
       <p class="help1" ng-show="help">

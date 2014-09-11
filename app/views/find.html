@@ -1,16 +1,13 @@
 <link href="/app/css/find.css" rel="stylesheet">
 <link href="/app/css/record.css" rel="stylesheet">
 
-<div ng-controller="FindController" ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart="false">
+<div ng-controller="FindController" ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart="startTour">
+
     <div class="container" style="min-height:1200px;">
-
-
-        <a class="pull-right help-icon bg-orange"  ng-click="startIntro()"> <i class="fa fa-youtube-play"></i> help</a>
-
 
         <div class="row">
             <div class="col-xs-3" id="search_controls">
-                <h1 style="padding-bottom:25px;">Search&nbsp;Information</h1>
+                <h1 style="padding-bottom:25px;">Search&nbsp;Information <a class="pull-right color-orange fa-11"  ng-click="startIntro()"> <i class="fa fa-youtube-play"></i></a></h1>
                 <a ng-href="#" ng-click="clearFilter()">Clear all filters</a>
                 <input type="text" ng-model="keyword" placeholder=" Keyword " class="form-control keyword" style="height:24px;">
                 <div id="filterCheckboxes">

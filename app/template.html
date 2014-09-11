@@ -49,8 +49,10 @@
                 <div class="content">
                     <span style="margin-left: 5px;">All information is for testing purposes only</span>
 
+
                     <a href="/help" class="pull-right" style="padding-left:10px;font-size:18px;color:#fff;position:relative;top:-2px;">
-                        <i class="fa fa-question-circle"></i></a>
+                        <i class="fa fa-question-circle"></i>
+                    </a>
 
                     <!-- <a href="mailto:absch@cbd.int" class="pull-right" style="padding-left:10px;">
                         <span class="glyphicon glyphicon-envelope"></span>
@@ -110,6 +112,56 @@
             </div>
         </div>
     </div>
+
+
+<!-- <div class="bg-orange">
+    <div class="container" >
+        <div class="col-xs-2 pilotphase bg-red">
+                <div>ABS-CH PILOT PHASE</div>
+        </div>
+        <div class="col-xs-4" style="padding-top:5px;">
+                <span style="margin-left: 5px;">All information is for testing purposes only</span>
+        </div>
+
+        <div class="col-xs-6 pull-right">
+                    <div ng-cloak ng-show="user && !user.isAuthenticated" class="account-signin pull-right">
+                        <a class="signin" href="#" ng-click="actionSignin()" data-slug="signin">
+                            <i class="fa fa-power-off"></i>
+                            <strong>sign in</strong>
+                        </a>
+                    </div>
+
+                    <div ng-cloak class="dropdown" ng-show="user && user.isAuthenticated">
+                        <a data-toggle="dropdown" href="#" class="account-name pull-right">
+                            <i class="fa fa-chevron-down" style="font-size:15px"></i> {{user.name}}
+                           <span ng-show="user.roles.indexOf('AbsPublishingAuthorities') != -1">(PA)</span>
+                            <span ng-show="user.roles.indexOf('abschiac') != -1">(IAC)</span>
+                            <span ng-show="user.roles.indexOf('AbsNationalAuthorizedUser') != -1">(NAU)</span>
+                            <span ng-show="user.roles.indexOf('AbsNationalFocalPoint') != -1">(FP)</span>
+                            <span ng-show="user.roles.indexOf('AbsAdministrator') != -1">(ABS ADMIN)</span>
+                            <span ng-show="user.roles.indexOf('Administrator') != -1">(ADMIN)</span>
+                        </a>
+                        <ul class="dropdown-menu pull-right" role="menu" style="position:relative;top:3px;left:140px;">
+                            <li>
+                                <a href="#" ng-click="actionProfile()">
+                                    <i class="fa fa-user" style="font-size:15px"></i>&nbsp; Profile</a>
+                            </li>
+                            <li>
+                                <a href="#" ng-click="actionPassword()">
+                                    <i class="fa fa-user" style="font-size:15px"></i>&nbsp; Password</a>
+                            </li>
+                            <li>
+                                <a href="#" ng-click="actionSignOut()">
+                                    <i class="fa fa-sign-out" style="font-size:15px"></i>&nbsp; Sign-out</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <span id="HelpLinksSmall" ><ng-include src="'/app/views/help/links/helplinks.html'"></ng-include></span>
+        </div>
+    </div>
+</div> -->
+
 
 
     <div class="modal fade" id="error-message" tabindex="-1" role="dialog" aria-hidden="true">

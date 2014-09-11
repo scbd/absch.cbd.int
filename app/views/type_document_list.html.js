@@ -29,6 +29,12 @@ define(['app',
     $scope.type = $rootScope.document_types[$filter("mapSchema")($routeParams.document_type)];
 
     //intro.js configurations
+	$scope.startTour=false;
+
+        if($routeParams.tour)
+        {
+            $scope.startTour=true;
+        }
     $scope.introOptions = {
       steps: [
         {
