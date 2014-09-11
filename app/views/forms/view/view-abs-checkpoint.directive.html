@@ -22,7 +22,7 @@
 			<legend>Responsibilities</legend>
 			<div ng-show="document.responsibilities">
 				<label>Short description of responsibilities</label>
-				<div class="km-value km-pre">{{document.responsibilities | lstring:locale}}</div>
+				<div class="km-value km-pre" ng-bind-html="document.responsibilities|lstring:locale"></div>
 			</div>
 			<div ng-show="document.jurisdiction">
 				<label>Area of Jurisdiction</label>

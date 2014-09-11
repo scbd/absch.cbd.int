@@ -28,7 +28,8 @@
     "ngLocalizer": "latest",
     "angular_form_controls": "latest",
     "bootbox": "~4.3.0",
-    "jqvmap": "*"
+    "jqvmap": "*",
+    "textAngular": "~1.2.2"
   },
   "resolutions": {
     "angular": "1.2.18"
