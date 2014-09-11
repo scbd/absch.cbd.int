@@ -28,36 +28,25 @@
     border:5px solid #ddd;
 }
 
-.helplinks{
-    list-style-type: none;
-    margin: 0;
-    padding-top:20px;
-    padding-bottom:20px;
-}
 
-.helplinks > li {
-    display: inline;
-    /*width:80px;*/
-    /*background-color:#fff;
-    text-align:center;
-    vertical-align:center;*/
-    /*padding:25px 10px 10px 15px;*/
-    padding:0 10px;
-    margin:0 20px;
-    /*-moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-    -khtml-border-radius: 10px;
-    border:5px solid #ddd;*/
-
-}
 
 #HelpLinksSmall .helplinks{
     list-style-type: none;
     margin: 0;
     padding-top:0px;
     padding-bottom:0px;
+    padding-right:5px!important;
+
 }
+#HelpLinksSmall li{
+    padding-right:5px!important;
+
+}
+
+#HelpLinksSmall  .help_icon{
+    color:#FFF!important;
+}
+
 
 #HelpLinksSmall .helplinks > li {
     display: inline;
@@ -75,19 +64,25 @@
     border:5px solid #ddd;*/
 
 }
-#HelpLinksSmall .color-litegrey{
-    color:#fff;
-}
-#HelpLinksSmall .color-orange{
-    color:#fff;
-}
-#HelpLinksSmall .fa-2{
-    font-size:14px;
-}
+
 
 .help-section-title{
-    border-bottom:1px solid #DDD;
+    /*border-bottom:1px solid #DDD;*/
 }
+.helpList{
+    list-style-type:none;
+    padding:0 20px 20px 20px;
+    color:#555;
+}
+
+.helpList > span > li{
+    color:#ddd;
+}
+.helpList li > span {
+    color:#C7532C;
+}
+
+
 
 .pic{
     width:160px;

@@ -1,43 +1,44 @@
-        <h3 class="color-red help-section-title" > <i class="fa fa-youtube-play"></i> <a id="tours" class="color-red">Guided tours</a></h3>
-                <div class="col-xs-12">
-                 <div class="panel-group">
-                     <ul style="list-style-type: none;padding:0;margin:0;">
-                         <li style="font-weight:bold;">Finding Information</li>
-                         <li><a href="/find/?tour=start"> <i class=" fa-1 fa fa-circle"></i> Introduction to the Search</a></li>
 
 
-                         <li style="padding-top:10px;font-weight:bold;">Registering Information  <span ng-hide="user && user.isAuthenticated" class="color-orange">(you must be signed in to access these tours)</span></li>
+    <ul class="helpList" style="width:450px;" >
+        <li>
+                <h3 class="color-red help-section-title" > <i class="fa fa-youtube-play"></i> <a id="tours" class="color-red">Guided tours</a></h3>
+        </li>
 
-                         <span ng-show="user && user.isAuthenticated">
-                             <li ng-show="user && user.isAuthenticated"><a href="/dashboard/?tour=start"> <i class=" fa-1 fa fa-circle"></i> Introduction to the Dashboard</a></li>
-                             <li ng-show="user && user.isAuthenticated"><a href="/register/VLR/?tour=start"> <i class=" fa-1 fa fa-circle"></i> Introduction to the Register interface</a></li>
-                         </span>
-                         <span ng-hide="user && user.isAuthenticated" class="color-litegrey">
-                             <li ng-hide="user && user.isAuthenticated"> <i class=" fa-1 fa fa-circle"></i> Introduction to the Dashboard</li>
-                             <li ng-hide="user && user.isAuthenticated"> <i class=" fa-1 fa fa-circle"></i> Introduction to the Register interface</li>
-                         </span>
+         <li style="font-weight:bold;">Finding Information</li>
+         <li><a href="/find/?tour=start"> <i class=" fa-1 fa fa-circle"></i> Introduction to the Search</a></li>
 
 
-                         <li style="padding-top:10px;font-weight:bold;">Submission forms/Common formats <span ng-hide="user && user.isAuthenticated" class="color-orange">(you must be signed in to access these tours)</span></li>
+         <li style="padding-top:10px;font-weight:bold;">Registering Information  <span ng-hide="user && user.isAuthenticated">(you must be signed in to access these tours)</span></li>
 
-                         <span ng-show="user && user.isAuthenticated">
-                             <li><a href="/register/CNA/new/?tour=start"> <i class=" fa-1 fa fa-circle"></i> Competent National Authority (CNA)</a></li>
-                             <li><a href="/register/CP/new/?tour=start"> <i class=" fa-1 fa fa-circle"></i> Checkpoint (CP)</a></li>
-                             <li><a href="/register/MSR/new/?tour=start"> <i class=" fa-1 fa fa-circle"></i> Legislative, administrative or policy measures on access and benefit-sharing (MSR)</a></li>
-                             <li><a href="/register/IRCC/new/?tour=start"> <i class=" fa-1 fa fa-circle"></i> Permit or its equivalent constituting an internationally recognized certificate of compliance (IRCC)</a></li>
-                             <li><a href="/register/CPC/new/?tour=start"> <i class=" fa-1 fa fa-circle"></i> Checkpoint Communiqué (CPC)</a></li>
-                             <li><a href="/register/NDB/new/?tour=start"> <i class=" fa-1 fa fa-circle"></i> ABS National Website or Database (NDB)</a></li>
-                             <li><a href="/register/VLR/new/?tour=start"> <i class=" fa-1 fa fa-circle"></i> Virtual Library Record (VLR)</a></li>
-                         </span>
-                         <span ng-hide="user && user.isAuthenticated"  class="color-litegrey">
-                             <li><i class=" fa-1 fa fa-circle"></i> Competent National Authority (CNA)</li>
-                             <li><i class=" fa-1 fa fa-circle"></i> Checkpoint (CP)</li>
-                             <li><i class=" fa-1 fa fa-circle"></i> Legislative, administrative or policy measures on access and benefit-sharing (MSR)</li>
-                             <li><i class=" fa-1 fa fa-circle"></i> Permit or its equivalent constituting an internationally recognized certificate of compliance (IRCC)</li>
-                             <li><i class=" fa-1 fa fa-circle"></i> Checkpoint Communiqué (CPC)</li>
-                             <li><i class=" fa-1 fa fa-circle"></i> ABS National Website or Database (NDB)</li>
-                             <li><i class=" fa-1 fa fa-circle"></i> Virtual Library Record (VLR)</li>
-                         </span>
-                    </ul>
-                </div>
-        </div>
+         <span ng-show="user && user.isAuthenticated">
+             <li ng-show="user && user.isAuthenticated"><a href="/dashboard/?tour=start"> <i class=" fa-1 fa fa-circle"></i> Introduction to the Dashboard</a></li>
+             <li ng-show="user && user.isAuthenticated"><a href="/register/VLR/?tour=start"> <i class=" fa-1 fa fa-circle"></i> Introduction to the Register interface</a></li>
+         </span>
+         <span ng-hide="user && user.isAuthenticated" class="color-litegrey">
+             <li ng-hide="user && user.isAuthenticated"> <i class=" fa-1 fa fa-circle"></i> Introduction to the Dashboard</li>
+             <li ng-hide="user && user.isAuthenticated"> <i class=" fa-1 fa fa-circle"></i> Introduction to the Register interface</li>
+         </span>
+
+
+         <li style="padding-top:10px;font-weight:bold;">Submission forms/Common formats <span ng-hide="user && user.isAuthenticated" >(you must be signed in to access these tours)</span></li>
+
+         <span ng-show="user && user.isAuthenticated">
+             <li><a href="/register/CNA/new/?tour=start"> <i class=" fa-1 fa fa-circle"></i> Competent National Authority (CNA)</a></li>
+             <li><a href="/register/CP/new/?tour=start"> <i class=" fa-1 fa fa-circle"></i> Checkpoint (CP)</a></li>
+             <li><a href="/register/MSR/new/?tour=start"> <i class=" fa-1 fa fa-circle"></i> Legislative, administrative or policy measures on access and benefit-sharing (MSR)</a></li>
+             <li><a href="/register/IRCC/new/?tour=start"> <i class=" fa-1 fa fa-circle"></i> Permit or its equivalent constituting an internationally recognized certificate of compliance (IRCC)</a></li>
+             <li><a href="/register/CPC/new/?tour=start"> <i class=" fa-1 fa fa-circle"></i> Checkpoint Communiqué (CPC)</a></li>
+             <li><a href="/register/NDB/new/?tour=start"> <i class=" fa-1 fa fa-circle"></i> ABS National Website or Database (NDB)</a></li>
+             <li><a href="/register/VLR/new/?tour=start"> <i class=" fa-1 fa fa-circle"></i> Virtual Library Record (VLR)</a></li>
+         </span>
+         <span ng-hide="user && user.isAuthenticated"  class="color-litegrey">
+             <li><i class=" fa-1 fa fa-circle"></i> Competent National Authority (CNA)</li>
+             <li><i class=" fa-1 fa fa-circle"></i> Checkpoint (CP)</li>
+             <li><i class=" fa-1 fa fa-circle"></i> Legislative, administrative or policy measures on access and benefit-sharing (MSR)</li>
+             <li><i class=" fa-1 fa fa-circle"></i> Permit or its equivalent constituting an internationally recognized certificate of compliance (IRCC)</li>
+             <li><i class=" fa-1 fa fa-circle"></i> Checkpoint Communiqué (CPC)</li>
+             <li><i class=" fa-1 fa fa-circle"></i> ABS National Website or Database (NDB)</li>
+             <li><i class=" fa-1 fa fa-circle"></i> Virtual Library Record (VLR)</li>
+         </span>
+    </ul>

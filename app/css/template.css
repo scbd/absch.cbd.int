@@ -20,6 +20,9 @@
 .color-black{
     color:#111;
 }
+.color-white{
+    color:#FFF;
+}
 .color-yellow{
     color:#FFD801;
 }
@@ -255,7 +258,7 @@ h3 {
 	list-style: none;
 	font-family: 'alternategotno3dotregular';
 	padding-left:20px;
-	top:-3px;
+	top:-22px;
 	position: relative;
 }
 .account-signin a:hover, a:focus{
