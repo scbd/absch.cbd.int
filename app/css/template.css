@@ -35,6 +35,9 @@
     background-color:#EEE!important;
     color:#555;
 }
+.bg-red{
+    background-color:#C7532C!important;
+}
 
 
 .help-icon{
@@ -47,6 +50,10 @@
 border-bottom-right-radius: 3px;
 border-bottom-left-radius: 3px;
 cursor:pointer;
+color:#EEE;
+border-bottom:1px solid #888;
+border-left:1px solid #888;
+border-right:1px solid #888;
 
 }
 
@@ -149,6 +156,20 @@ h3 {
 }
 
 /*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*/
+
+.pilotphase{
+    text-align:center;
+    height:30px;
+    vertical-align:middle;
+
+}
+.pilotphase > div{
+    padding-top:5px;
+    font-size: 12px;
+	letter-spacing: 1px;
+	line-height: 24px;
+}
+
 
 .disclaimer{
 	margin:0;

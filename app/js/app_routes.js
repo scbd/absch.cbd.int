@@ -20,17 +20,24 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
             when('/help',                        { templateUrl: '/app/views/help.html'                      ,resolveController: true, resolveUser: true}).
             when('/help/presentations/theatre-access',         { templateUrl: '/app/views/help/presentations/theatre-access.html'                      ,resolveController: true, resolveUser: true}).
             when('/help/accounts',              { templateUrl: '/app/views/help/accounts/accounts.html'                      ,resolveController: true, resolveUser: true}).
-            when('/help/accounts/:question',              { templateUrl: '/app/views/help/accounts/accounts.html'                      ,resolveController: true, resolveUser: true}).
+            // when('/help/accounts/:question',              { templateUrl: '/app/views/help/accounts/accounts.html'                      ,resolveController: true, resolveUser: true}).
 
             when('/help/search',              { templateUrl: '/app/views/help/search/search.html'                      ,resolveController: true, resolveUser: true}).
-            when('/help/search/:question',              { templateUrl: '/app/views/help/search/search.html'                      ,resolveController: true, resolveUser: true}).
+            // when('/help/search/:question',              { templateUrl: '/app/views/help/search/search.html'                      ,resolveController: true, resolveUser: true}).
 
 
             when('/help/register',              { templateUrl: '/app/views/help/register/register.html'                      ,resolveController: true, resolveUser: true}).
-            when('/help/register/:question',              { templateUrl: '/app/views/help/register/register.html'                      ,resolveController: true, resolveUser: true}).
+            // when('/help/register/:question',              { templateUrl: '/app/views/help/register/register.html'                      ,resolveController: true, resolveUser: true}).
 
 
             when('/find',                        { templateUrl: '/app/views/find.html'                      ,resolveController: true, resolveUser: true}).
+            // when('/find/:tour',                   { templateUrl: '/app/views/find.html'                      ,resolveController: true, resolveUser: true}).
+
+
+
+
+
+
             when('/countries',                   { templateUrl: '/app/views/countries.html'                 ,resolveController: true, resolveUser: true}).
             //when('/countries/map',               { templateUrl: '/app/views/countries/countryMap.html'        ,resolveController: true, resolveUser: true}).
             when('/countries/:code',             { templateUrl: '/app/views/profiles.html'                  ,resolveController: true, resolveUser: true}).
@@ -63,6 +70,14 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
               resolveUser: true,
               subTemplateUrl: '/app/views/dashboard.html',
             }).
+
+            // when('/dashboard/:tour', {
+            //   templateUrl: '/app/views/register.html',
+            //   resolveController: true,
+            //   resolveUser: true,
+            //   subTemplateUrl: '/app/views/dashboard.html',
+            // }).
+
              when('/dashboard/completed', {
               templateUrl: '/app/views/register.html',
               resolveController: true,
@@ -81,17 +96,19 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
               resolveUser: true,
               subTemplateUrl: '/app/views/tasks/my-pending-tasks.directive.html',
             }).
-            when('/register/:document_type', {
-              templateUrl: '/app/views/register.html',
-              resolveController: true,
-              resolveUser: true,
-              subTemplateUrl: '/app/views/type_document_list.html',
-            }).
+
             when('/contacts', {
               templateUrl: '/app/views/register.html',
               resolveController: true,
               resolveUser: true,
               subTemplateUrl: '/app/views/contacts.html',
+            }).
+
+            when('/register/:document_type', {
+              templateUrl: '/app/views/register.html',
+              resolveController: true,
+              resolveUser: true,
+              subTemplateUrl: '/app/views/type_document_list.html',
             }).
 
             when('/register/:document_type/new', {
@@ -102,6 +119,13 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
             }).
 
              when('/register/:document_type/:identifier/edit', {
+              templateUrl: '/app/views/register.html',
+              resolveController: true,
+              resolveUser: true,
+              subTemplateUrl: '/app/views/forms/edit/edit--', //filled in through controller
+            }).
+
+             when('/register/:document_type/:identifier/edit/:tour', {
               templateUrl: '/app/views/register.html',
               resolveController: true,
               resolveUser: true,

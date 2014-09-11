@@ -9,7 +9,17 @@ define(['app',
     '../views/directives/search-filter-dates.partial.html.js',
     '../views/directives/document-list.partial.html.js'], function (app) {
 
-    app.controller('FindController', ['$scope', '$rootScope', 'authHttp', '$timeout', '$q','realm', function ($scope, $rootScope, $http, $timeout, $q, realm) {
+    app.controller('FindController', ['$scope', '$rootScope', 'authHttp', '$timeout', '$q','realm', '$routeParams', function ($scope, $rootScope, $http, $timeout, $q, realm, $routeParams) {
+
+
+        $scope.startTour=false;
+
+        if($routeParams.tour)
+        {
+            $scope.startTour=true;
+        }
+
+
 
         var self = this;
         var queryCanceler = null;
@@ -18,6 +28,10 @@ define(['app',
         //intro.js configurations
         $scope.introOptions = {
           steps: [
+
+            {
+              intro: "Welcome to the introduction to the search page. When the page is fully loaded click 'Next ->' to start the tour.",
+            },
             {
               element: '#search_controls',
               intro: 'Use these controls to search for documents on the clearing house',
@@ -83,6 +97,11 @@ define(['app',
         $scope.rawDocs = [];
 
 
+
+        //============================================================
+        //
+        //
+        //============================================================
         function readFacets2(solrArray) {
 
             var facets = [];
@@ -182,6 +201,11 @@ console.log(realm);
             }).error(function (error) { console.log('onerror'); console.log(error); });
         };
 
+
+        //============================================================
+        //
+        //
+        //============================================================
         $scope.fixHtml = function (htmlText) {
             htmlText = (htmlText || "").replace(/\r\n/g, '<br>')
             htmlText = (htmlText || "").replace(/href="\//g, 'href="http://www.cbd.int/')
@@ -192,7 +216,13 @@ console.log(realm);
             qHtml.find("script,style").remove();
 
             return qHtml.html();
+
         };
+
+        //============================================================
+        //
+        //
+        //============================================================
 
         $scope.fixUrl = function (url) {
             if(url) {
@@ -202,7 +232,10 @@ console.log(realm);
 
             return url;
         }
-
+        //============================================================
+        //
+        //
+        //============================================================
         $scope.clearFilter = function(){
 
             $scope.$broadcast("clearFilter",{});

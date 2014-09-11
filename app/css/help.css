@@ -52,8 +52,41 @@
 
 }
 
+#HelpLinksSmall .helplinks{
+    list-style-type: none;
+    margin: 0;
+    padding-top:0px;
+    padding-bottom:0px;
+}
+
+#HelpLinksSmall .helplinks > li {
+    display: inline;
+    /*width:80px;*/
+    /*background-color:#fff;
+    text-align:center;
+    vertical-align:center;*/
+    /*padding:25px 10px 10px 15px;*/
+    padding:0;
+    margin:0;
+    /*-moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    -khtml-border-radius: 10px;
+    border:5px solid #ddd;*/
+
+}
+#HelpLinksSmall .color-litegrey{
+    color:#fff;
+}
+#HelpLinksSmall .color-orange{
+    color:#fff;
+}
+#HelpLinksSmall .fa-2{
+    font-size:14px;
+}
+
 .help-section-title{
-    border-bottom:1px solid #DDD;\
+    border-bottom:1px solid #DDD;
 }
 
 .pic{

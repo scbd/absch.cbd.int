@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="/app/css/help.css">
 
 
-<div class="align-center">
+
 
         <ul class="helplinks" >
 
@@ -63,7 +63,7 @@
 
         </ul>
 
-        <div class="well"  ng-show="show_about" style="height:250px;">
+        <div class="well"  ng-show="show_about" style="height:250px;position:absolute;z-index:9999;">
             <a  style="font-size:20px;" class="pull-right" ng-click="show_about=false;show_presentations=false;show_tours=false;show_accounts=false;show_search=false;show_register=false;show_email=false;show_skype=false;">
                 <i class="glyphicon glyphicon-remove-circle"></i> </a>
             <ng-include   src="'/app/views/help/links/about.html'"></ng-inlcude>
@@ -111,9 +111,8 @@
             <i class="glyphicon glyphicon-remove-circle"></i> </a>
 
                     <h1>
-                        Do you use Skype? Great, we do as well. Our address is:
+                        Do you use Skype? We do too! Our address is:
                         <a href="skype:abs-ch?chat" style="font-weight:bold;"><i class="fa fa-skype"></i> abs-ch</a>. <br><br>Connect with us and chat whenever you have questions or comments.
                     </h1>
             </div>
         </div>
-</div>
