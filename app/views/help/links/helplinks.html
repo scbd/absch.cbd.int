@@ -3,116 +3,87 @@
 
 
 
-        <ul class="helplinks" >
+        <ul class="helplinks" ng-mouseover="show_icons=true" ng-mouseleave="show_icons=false;">
 
                 <li>
-                    <a href="/help" class="color-orange">
-                    <i class="fa fa-question-circle fa-2"> </i>
+                    <a href="/help" class="color-orange help_icon">
+                    <i class="fa fa-question-circle" style="font-size:20px;"> </i>
                     </a>
                 </li>
-
-                <li>
-                    <a ng-click="show_about=!show_about;show_presentations=false;show_tours=false;show_accounts=false;show_search=false;show_register=false;show_email=false;show_skype=false;"
-                    ng-class="{'color-yellow':show_about, 'color-litegrey':!show_about}">
-                    <i class="fa fa-star fa-2"> </i>
+                <li class="dropdown" ng-show="show_icons">
+                    <a class="dropdown-toggle" style="color:#fff;" data-toggle="dropdown" href="#">
+                        <i class="fa fa-star"> </i>
                     </a>
+                    <div class="dropdown-menu" role="menu" >
+                    <ng-include   src="'/app/views/help/links/about.html'"></ng-inlcude>
                 </li>
 
-                    <li>
-                    <a ng-click="show_about=false;show_presentations=!show_presentations;show_tours=false;show_accounts=false;show_search=false;show_register=false;show_email=false;show_skype=false;" ng-class="{'color-grey':show_presentations, 'color-litegrey':!show_presentations}">
-                    <i class="fa fa-desktop  fa-2"> </i>
+                <li class="dropdown" ng-show="show_icons">
+                    <a class="dropdown-toggle" style="color:#fff;" data-toggle="dropdown" href="#">
+                        <i class="fa fa-desktop"> </i>
                     </a>
+                    <div class="dropdown-menu" role="menu" >
+                    <ng-include   src="'/app/views/help/links/presentations.html'"></ng-inlcude>
+                    </div>
                 </li>
 
-
-                    <li>
-                    <a ng-click="show_about=false;show_presentations=false;show_tours=!show_tours;show_accounts=false;show_search=false;show_register=false;show_email=false;show_skype=false;" ng-class="{'color-red':show_tours, 'color-litegrey':!show_tours}">
-                    <i class="fa fa-youtube-play fa-2"> </i>
+                <li class="dropdown" ng-show="show_icons">
+                    <a class="dropdown-toggle" style="color:#fff;" data-toggle="dropdown" href="#">
+                        <i class="fa fa-youtube-play"> </i>
                     </a>
+                    <div class="dropdown-menu" role="menu" >
+                    <ng-include   src="'/app/views/help/links/tours.html'"></ng-inlcude>
+                    </div>
                 </li>
 
-                    <li>
-                    <a ng-click="show_about=false;show_presentations=false;show_tours=false;show_accounts=!show_accounts;show_search=false;show_register=false;show_email=false;show_skype=false;" ng-class="{'color-green':show_accounts, 'color-litegrey':!show_accounts}">
-                    <i class="fa fa-user fa-2"> </i>
+                <li class="dropdown" ng-show="show_icons">
+                    <a class="dropdown-toggle" style="color:#fff;" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user"> </i>
                     </a>
+                    <div class="dropdown-menu" role="menu" >
+                    <ng-include   src="'/app/views/help/links/accounts.html'"></ng-inlcude>
+                    </div>
                 </li>
 
-                    <li>
-                    <a ng-click="show_about=false;show_presentations=false;show_tours=false;show_accounts=false;show_search=!show_search;show_register=false;show_email=false;show_skype=false;" ng-class="{'color-blue':show_search, 'color-litegrey':!show_search}">
-                    <i class="fa fa-search fa-2"> </i>
+                <li class="dropdown" ng-show="show_icons">
+                    <a class="dropdown-toggle" style="color:#fff;" data-toggle="dropdown" href="#">
+                        <i class="fa fa-search "> </i>
                     </a>
+                    <div class="dropdown-menu" role="menu" >
+                    <ng-include   src="'/app/views/help/links/search.html'"></ng-inlcude>
+                    </div>
                 </li>
 
-                    <li>
-                    <a ng-click="show_about=false;show_presentations=false;show_tours=false;show_accounts=false;show_search=false;show_register=!show_register;show_email=false;show_skype=false;" ng-class="{'color-orange':show_register, 'color-litegrey':!show_register}">
-                    <i class="fa fa- fa-pencil-square-o  fa-2"> </i>
+                <li class="dropdown" ng-show="show_icons">
+                    <a class="dropdown-toggle" style="color:#fff;" data-toggle="dropdown" href="#">
+                        <i class="fa fa-pencil-square-o "> </i>
                     </a>
+                    <div class="dropdown-menu" role="menu" >
+                    <ng-include   src="'/app/views/help/links/register.html'"></ng-inlcude>
+                    </div>
                 </li>
 
-                    <li>
-                    <a ng-click="show_about=false;show_presentations=false;show_tours=false;show_accounts=false;show_search=false;show_register=false;show_email=!show_email;show_skype=false;" ng-class="{'color-black':show_email, 'color-litegrey':!show_email}">
-                    <i class="fa fa- fa-envelope  fa-2"> </i>
+                <li class="dropdown" ng-show="show_icons">
+                    <a class="dropdown-toggle" style="color:#fff;" data-toggle="dropdown" href="#">
+                    <i class="fa fa-envelope "> </i>
                     </a>
+
+                    <div class="well dropdown-menu bg-white" role="menu" style="width:750px;left:-340px;" >
+                        <h1 class="color-grey">Contact us by email at <strong><a href="mailto:absch@cbd.int">absch@cbd.int</a></strong></h1>
+                        <ng-include src="'/app/views/help/contacts.html'">
+                    </div>
                 </li>
 
-                    <li>
-                    <a ng-click="show_about=false;show_presentations=false;show_tours=false;show_accounts=false;show_search=false;show_register=false;show_email=false;show_skype=!show_skype;" ng-class="{'color-blue':show_skype, 'color-litegrey':!show_skype}">
-                    <i class="fa fa- fa-skype  fa-2"> </i>
-                    </a>
+                <li class="dropdown" ng-show="show_icons">
+                        <a   class="dropdown-toggle" style="color:#fff;" data-toggle="dropdown" href="#">
+                        <i class="fa fa-skype"> </i>
+                        </a>
+                        <div class="well dropdown-menu color-grey bg-white"  style="width:750px;left:-365px;"  >
+                         <h1>Do you use Skype? We do too! Our address is:
+                        <a href="skype:abs-ch?chat" style="font-weight:bold;"><i class="fa fa-skype"></i> abs-ch</a>. <br><br>Connect with us and chat whenever you have questions or comments.
+                        </h1>
+                    </div>
                 </li>
+            </span>
 
         </ul>
-
-        <div class="well"  ng-show="show_about" style="height:250px;position:absolute;z-index:9999;">
-            <a  style="font-size:20px;" class="pull-right" ng-click="show_about=false;show_presentations=false;show_tours=false;show_accounts=false;show_search=false;show_register=false;show_email=false;show_skype=false;">
-                <i class="glyphicon glyphicon-remove-circle"></i> </a>
-            <ng-include   src="'/app/views/help/links/about.html'"></ng-inlcude>
-        </div>
-
-        <div class="well" ng-show="show_presentations" style="height:250px;">
-            <a  style="font-size:20px;" class="pull-right" ng-click="show_about=false;show_presentations=false;show_tours=false;show_accounts=false;show_search=false;show_register=false;show_email=false;show_skype=false;">
-            <i class="glyphicon glyphicon-remove-circle"></i> </a>
-            <ng-include   src="'/app/views/help/links/presentations.html'"></ng-inlcude>
-        </div>
-
-        <div class="well" ng-show="show_tours" style="height:250px;">
-            <a style="font-size:20px;" class="pull-right" ng-click="show_about=false;show_presentations=false;show_tours=false;show_accounts=false;show_search=false;show_register=false;show_email=false;show_skype=false;">
-            <i class="glyphicon glyphicon-remove-circle"></i> </a>
-            <ng-include   src="'/app/views/help/links/tours.html'"></ng-inlcude>
-        </div>
-
-        <div class="well" ng-show="show_accounts" style="height:250px;">
-            <a style="font-size:20px;" class="pull-right" ng-click="show_about=false;show_presentations=false;show_tours=false;show_accounts=false;show_search=false;show_register=false;show_email=false;show_skype=false;">
-                <i class="glyphicon glyphicon-remove-circle"></i> </a>
-            <ng-include   src="'/app/views/help/links/accounts.html'"></ng-inlcude>
-        </div>
-
-        <div class="well" ng-show="show_search" style="height:250px;">
-            <a style="font-size:20px;" class="pull-right" ng-click="show_about=false;show_presentations=false;show_tours=false;show_accounts=false;show_search=false;show_register=false;show_email=false;show_skype=false;">
-                <i class="glyphicon glyphicon-remove-circle"></i> </a>
-            <ng-include   src="'/app/views/help/links/search.html'"></ng-inlcude>
-        </div>
-
-        <div class="well" ng-show="show_register" style="height:250px;">
-            <a style="font-size:20px;" class="pull-right" ng-click="show_about=false;show_presentations=false;show_tours=false;show_accounts=false;show_search=false;show_register=false;show_email=false;show_skype=false;">
-                <i class="glyphicon glyphicon-remove-circle"></i> </a>
-            <ng-include   src="'/app/views/help/links/register.html'"></ng-inlcude>
-        </div>
-
-        <div class="well" ng-show="show_email" style="height:320px;">
-            <a style="font-size:20px;" class="pull-right" ng-click="show_about=false;show_presentations=false;show_tours=false;show_accounts=false;show_search=false;show_register=false;show_email=false;show_skype=false;">
-            <i class="glyphicon glyphicon-remove-circle"></i> </a>
-            <h1>Contact us by email at <strong><a href="mailto:absch@cbd.int">absch@cbd.int</a></strong></h1>
-            <ng-include src="'/app/views/help/contacts.html'">
-        </div>
-
-        <div class="well" ng-show="show_skype" style="height:150px;">
-            <a style="font-size:20px;" class="pull-right" ng-click="show_about=false;show_presentations=false;show_tours=false;show_accounts=false;show_search=false;show_register=false;show_email=false;show_skype=false;">
-            <i class="glyphicon glyphicon-remove-circle"></i> </a>
-
-                    <h1>
-                        Do you use Skype? We do too! Our address is:
-                        <a href="skype:abs-ch?chat" style="font-weight:bold;"><i class="fa fa-skype"></i> abs-ch</a>. <br><br>Connect with us and chat whenever you have questions or comments.
-                    </h1>
-            </div>
-        </div>

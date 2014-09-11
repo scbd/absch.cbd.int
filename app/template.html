@@ -47,12 +47,12 @@
             <div class="container">
                 <div class="title" style="padding-top:5px;white-space:nowrap;">ABS-CH Pilot Phase</div>
                 <div class="content">
-                    <span style="margin-left: 5px;">All information is for testing purposes only</span>
+                    <span style="position:relative;"><span id="HelpLinksSmall" ><ng-include src="'/app/views/help/links/helplinks.html'"></ng-include></span></span>
 
 
-                    <a href="/help" class="pull-right" style="padding-left:10px;font-size:18px;color:#fff;position:relative;top:-2px;">
+                    <!-- <a href="/help" class="pull-right" style="padding-left:10px;font-size:18px;color:#fff;position:relative;top:-2px;">
                         <i class="fa fa-question-circle"></i>
-                    </a>
+                    </a> -->
 
                     <!-- <a href="mailto:absch@cbd.int" class="pull-right" style="padding-left:10px;">
                         <span class="glyphicon glyphicon-envelope"></span>
@@ -194,7 +194,7 @@
                 <div class="main-link col-xs-3 ">
                     <a href="/find">
                         <div class="text-center" ng-class="{'link-active' : getClass('/find')}">
-                            <span class="glyphicon glyphicon-search" style="position:relative;top:3px;"></span> Search
+                            <span class="glyphicon glyphicon-search" style="position:relative;top:3px;"></span> Search<br/>
                             <span class="hidden-xs hidden-sm">Information</span>
                         </div>
                     </a>
@@ -202,7 +202,7 @@
                 <div class="main-link col-xs-3" >
                     <a href="/dashboard">
                         <div class="text-center" ng-class="{'link-active' : getClass('/dashboard') || getClass('/register') }" >
-                            <span class="glyphicon glyphicon-edit" style="position:relative;top:3px;"></span> Register
+                            <span class="glyphicon glyphicon-edit" style="position:relative;top:3px;"></span> Register<br/>
                             <span class="hidden-xs hidden-sm">Information</span>
                         </div>
 
@@ -211,7 +211,7 @@
                 <div class="main-link col-xs-3">
                     <a href="/countries">
                         <div class="text-center" ng-class="{'link-active' : getClass('/countries') }">
-                            <span class="glyphicon glyphicon-globe" style="position:relative;top:3px;"></span> Browse
+                            <span class="glyphicon glyphicon-globe" style="position:relative;top:3px;"></span> Browse<br/>
                             <span class="hidden-xs hidden-sm">Country&nbsp;Profiles</span>
                         </div>
                     </a>
