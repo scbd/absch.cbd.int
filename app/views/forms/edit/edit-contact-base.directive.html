@@ -64,9 +64,14 @@
 	</div>
 
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-8">
 			<div class="km-control-group" name="contact_organizationType" caption="Type of organization">
 				<div km-select name="contact_organizationType" ng-model="document.organizationType" items="options.organizationTypes()"></div>
+			</div>
+		</div>
+		<div class="col-md-4" ng-show="document.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">
+			<div class="km-control-group" name="contact_organizationTypeName" caption="Other organization type">
+				<div km-textbox-ml name="contact_organizationTypeName" ng-model="document.organizationType.customValue" placeholder="example: SCBD" locales="locales"></div>
 			</div>
 		</div>
 	</div>

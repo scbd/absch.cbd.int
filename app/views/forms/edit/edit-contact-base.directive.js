@@ -12,13 +12,21 @@ app.directive("editContactBase", [ function () {
 			locales : "=locales",
 			form : "=form"
 		},
-		controller : ["$scope", "authHttp", "$filter", "underscore", function ($scope, $http, $filter, _)
+		controller : ["$scope", "authHttp", "$filter", "underscore", "$q", function ($scope, $http, $filter, _, $q)
 		{
 			$scope._urls = [];
 
 			$scope.options  = {
 				countries         : function() { return $http.get("/api/v2013/thesaurus/domains/countries/terms",            { cache: true }).then(function(o){ return $filter("orderBy")(o.data, "name"); }); },
-				organizationTypes : function() { return $http.get("/api/v2013/thesaurus/domains/Organization%20Types/terms", { cache: true }).then(function(o){ return o.data; }); }
+				organizationTypes : function() {
+					return $q.all([$http.get("/api/v2013/thesaurus/domains/Organization%20Types/terms", { cache: true })
+							,$http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })])
+					.then(function(o){
+						var orgs = o[0].data;
+						orgs.push(o[1].data);
+						return orgs;
+					});
+				}
 			};
 
 			$scope.$watch("document.websites", function(){
@@ -42,6 +50,13 @@ app.directive("editContactBase", [ function () {
 					$scope.document.websites = _.map(_urls, function(url){
 						return { url : url };
 					});
+				}
+			});
+
+			$scope.$watch('document.organizationType', function(newValue){
+				if(newValue && newValue.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'){
+					if(document.organizationType.customValue)
+						document.organizationType.customValue = undefined;
 				}
 			});
 

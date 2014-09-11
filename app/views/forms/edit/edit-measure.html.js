@@ -97,7 +97,6 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
               _.each($scope.options.documentTranslationsExt[1].options, function(element) {
                 element.__value = element.name;
               });
-console.log($scope.options.documentTranslationsExt);
               return $scope.options.documentTranslationsExt[1].options;
             });
           },
