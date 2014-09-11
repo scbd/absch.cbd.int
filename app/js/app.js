@@ -3,7 +3,9 @@
 define([/*'angular', 'angular-route', 'angular-cookies', */], function () {
 
   //TODO: reevaluate what is actually needed. Ie. I don't think we still need drag and drop here.
-	var app = require('angular').module('app', ['ngRoute', 'ngCookies','chieffancypants.loadingBar', 'ngAnimate', 'ngSanitize', 'angular-intro', 'formControls',]);
+	var app = require('angular').module('app',
+		['ngRoute', 'ngCookies','chieffancypants.loadingBar', 'ngAnimate', 'ngSanitize', 'angular-intro', 'formControls',
+		 'textAngular']);
 
 	app.config(['$controllerProvider', '$compileProvider', '$provide', '$filterProvider',
 		function($controllerProvider, $compileProvider, $provide, $filterProvider) {

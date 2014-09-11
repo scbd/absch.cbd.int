@@ -25,31 +25,34 @@ require.config({
         'angular-form-controls' : '../libs/angular_form_controls/form-controls',
         'bootbox'               : '../libs/bootbox/bootbox',
         'jqvmap'                : '../libs/jqvmap/jqvmap/jquery.vmap.min',
-        'jqvmapworld'           : '../libs/jqvmap/jqvmap/maps/jquery.vmap.world'
+        'jqvmapworld'           : '../libs/jqvmap/jqvmap/maps/jquery.vmap.world',
+        'text-angular-sanitize' : '../libs/textAngular/dist/textAngular-sanitize.min',
+        'text-angular'          : '../libs/textAngular/dist/textAngular.min'
     },
     'shim': {
-        'angular'        : { 'deps': ['jquery'], 'exports': 'angular' },
-        'angular-route'  : { 'deps': ['angular'] },
-        'angular-cookies': { 'deps': ['angular'] },
-        'angular-sanitize': { 'deps': ['angular'] },
-        'bootstrap'      : { 'deps': ['jquery'] },
-        'bootstrap-datepicker' : { 'deps': ['jquery'] },
-        'underscore'     : { 'exports': '_' },
-        'angular-animate' : {'deps': ['angular']},
-        'angular-loading-bar' : {'deps': ['angular']},
-        'introjs'         : {'exports': 'introJs'},
-        'angular-introjs' : {'deps':['angular', 'introjs']},
-        'angular-localizer': {'deps':['angular']},
-        'angular-form-controls' : {'deps': ['angular', 'angular-sanitize', 'angular-localizer']},
-        'bootbox'               : {'deps':['bootstrap', 'jquery']},
-        'jqvmap'                : { 'deps': ['jquery'] },
-        'jqvmapworld'                : { 'deps': ['jqvmap'] },
+        'angular'                       : { 'deps': ['jquery'], 'exports': 'angular' },
+        'angular-route'                 : { 'deps': ['angular'] },
+        'angular-cookies'               : { 'deps': ['angular'] },
+        'angular-sanitize'              : { 'deps': ['angular'] },
+        'bootstrap'                     : { 'deps': ['jquery'] },
+        'bootstrap-datepicker'          : { 'deps': ['jquery'] },
+        'underscore'                    : { 'exports': '_' },
+        'angular-animate'               : { 'deps': ['angular']},
+        'angular-loading-bar'           : { 'deps': ['angular']},
+        'introjs'                       : { 'exports': 'introJs'},
+        'angular-introjs'               : { 'deps':['angular', 'introjs']},
+        'angular-localizer'             : { 'deps':['angular']},
+        'angular-form-controls'         : { 'deps': ['angular', 'angular-sanitize', 'angular-localizer']},
+        'bootbox'                       : { 'deps':['bootstrap', 'jquery']},
+        'jqvmap'                        : { 'deps': ['jquery'] },
+        'jqvmapworld'                   : { 'deps': ['jqvmap'] },
+        'text-angular'                  : { 'deps': ['text-angular-sanitize', 'angular'] },
     }
 });
 
 require(['angular', 'angular-route', 'angular-cookies', 'angular-sanitize', 'bootstrap', 'domReady',
     'bootstrap-datepicker','angular-loading-bar', 'angular-animate',
-    'moment', 'introjs', 'angular-form-controls'/*, 'main'*/], function (ng) {
+    'moment', 'introjs', 'angular-form-controls', 'text-angular'/*, 'main'*/], function (ng) {
     // NOTE: place operations that need to initialize prior to app start here using the `run` function on the top-level module
 
     require(['domReady!', 'main', 'angular-introjs'], function (document) {
