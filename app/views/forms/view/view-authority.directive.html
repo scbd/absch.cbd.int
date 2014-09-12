@@ -81,8 +81,7 @@
 			</div>
 			<div ng-show="document.absPolicyBasisForCompetency">
 				<label>Additional information on the legal, administrative or policy basis for the competence of the CNA</label>
-				<div class="km-value">
-					{{document.absPolicyBasisForCompetency | lstring:locale}}</i>
+				<div class="km-value" ng-bind-html="document.absPolicyBasisForCompetency | lstring:locale">
 				</div>
 			</div>
 		</div>
@@ -127,7 +126,7 @@
 			</div> -->
 			<div ng-show="document.responsibilities">
 				<label>Detailed description of other functions and responsibilities</label>
-				<div class="km-value">{{document.responsibilities | lstring:locale}}</div>
+				<div class="km-value" ng-bind-html="document.responsibilities | lstring:locale"></div>
 			</div>
 
 			<div ng-show="document.absGeneticResourceTypes ">
@@ -145,7 +144,7 @@
 			<legend>Additional Information</legend>
 
 			<div ng-show="document.relevantInformation">
-				<div class="km-value" ng-bind="document.relevantInformation | lstring:locale"></div>
+				<div class="km-value" ng-bind-html="document.relevantInformation | lstring:locale"></div>
 			</div>
 
 			<div ng-show="document.relevantDocuments">

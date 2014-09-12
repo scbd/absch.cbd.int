@@ -15,7 +15,7 @@
 
       <div ng-show="!isLoading() && status!='hidden'">
         <div workflow-std-buttons document="getCleanDocument()"/>
-        
+
         <form class="editForm" name="editForm" style="margin-top:10px">
           <div ng-show="tab=='edit'" km-tab="edit">
           <section>
@@ -52,7 +52,7 @@
                   </div>
                 </div>
                 <div class="km-control-group" name="amendmentsDescription" caption="Summary of the amendment(s)">
-                  <div km-textbox-ml ng-model="document.amendmentsDescription" rows="4" locales="document.header.languages"></div>
+                  <div km-rich-textbox ng-model="document.amendmentsDescription" rows="4" locales="document.header.languages"></div>
                 </div>
               </div>
             </div>
@@ -164,7 +164,7 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="km-control-group" name="description" caption="Brief description of the document including  objective and scope (max. 300 words)">
-                  <div km-textbox-ml ng-model="document.description" rows="4" locales="document.header.languages"></div>
+                  <div km-rich-textbox ng-model="document.description" rows="4" locales="document.header.languages"></div>
                 </div>
               </div>
             </div>
@@ -208,7 +208,7 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="km-control-group" name="linkedMeasuresDescription" caption="Please describe the relationship ">
-                  <div km-textbox-ml ng-model="document.linkedMeasuresDescription" rows="4" placeholder="" locales="document.header.languages"></div>
+                  <div km-rich-textbox ng-model="document.linkedMeasuresDescription" rows="4" placeholder="" locales="document.header.languages"></div>
                 </div>
               </div>
             </div>
@@ -310,7 +310,7 @@
               <div class="col-sm-12">
                 <div class="km-control-group" name="address" caption="Any other relevant information">
                   <div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
-                  <div km-textbox-ml ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
+                  <div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
                 </div>
               </div>
             </div>

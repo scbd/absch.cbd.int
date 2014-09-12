@@ -20,7 +20,7 @@
 
     <div ng-show="!isLoading() && status!='hidden'">
     <div workflow-std-buttons document="getCleanDocument()"/>
-      
+
 		<form name="editForm" class="editForm" style="margin-top:10px">
 			<div ng-show="tab=='edit'" km-tab="edit">
 				<section>
@@ -44,7 +44,7 @@
 					<div class="col-xs-12">
 						<div class="km-control-group" name="description" required caption="Description">
 							<div class="help-block">Please enter a short description of the national website or database, such as its function or information it makes available.</div>
-							<div km-textbox-ml required name="description" ng-model="document.description" rows="4" locales="document.header.languages" placeholder="example: The description"></div>
+							<div km-rich-textbox required name="description" ng-model="document.description" rows="4" locales="document.header.languages" placeholder="example: The description"></div>
 						</div>
 					</div>
 				</div>
@@ -66,7 +66,7 @@
 					<div class="col-xs-12">
 						<div class="km-control-group" name="address" caption="Any other relevant information">
 							<div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
-							<div km-textbox-ml ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
+							<div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
 						</div>
 					</div>
 				</div>

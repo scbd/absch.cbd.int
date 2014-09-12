@@ -61,7 +61,7 @@
 
 				<div ng-show="document.nationalReferences">
 					<label>Additional national references or identifiers</label>
-					<div class="km-value km-pre">{{document.nationalReferences | lstring:locale}}</div>
+					<div class="km-value km-pre"ng-bind-html="document.nationalReferences | lstring:locale"></div>
 				</div>
 
 				<div ng-show="document.date">
@@ -91,7 +91,7 @@
 				</div>
 				<div ng-show="document.consentInformation">
 					<label>Additional information about the prior informed consent - Information</label>
-					<div class="km-value km-pre">{{document.consentInformation | lstring:locale}}</div>
+					<div class="km-value km-pre" ng-bind-html="document.consentInformation | lstring:locale"></div>
 				</div>
 				<div ng-show="document.consentDocuments">
 					<label>Additional information about the prior informed consent - Documents</label>
@@ -126,7 +126,7 @@
     				<div class="km-value" ng-show="!document.mutuallyAgreedTermsEstablished">No</div>
     				<div ng-show="document.mutuallyAgreedTermsInformation">
     					<label>Additional information about the mutually agreed terms - Information</label>
-    					<div class="km-value km-pre">{{document.mutuallyAgreedTermsInformation | lstring:locale}}</div>
+    					<div class="km-value km-pre"ng-bind-html="document.mutuallyAgreedTermsInformation | lstring:locale"></div>
     				</div>
     				<div ng-show="document.mutuallyAgreedTermsDocuments">
     					<label>Additional information about the mutually agreed terms - Documents</label>
@@ -148,7 +148,7 @@
     			</div>
 				<div ng-show="document.geneticResources">
 					<label>Subject-matter or genetic resources covered by the permit or its equivalent</label>
-					<div class="km-value km-pre">{{document.geneticResources | lstring:locale}}</div>
+					<div class="km-value km-pre"ng-bind-html="document.geneticResources | lstring:locale"></div>
 				</div>
 				<div ng-show="document.geneticResourcesConfidential">
 					<label>Subject-matter or genetic resources covered by the permit or its equivalent</label>
@@ -235,11 +235,11 @@
 			</div>
 			<div ng-show="document.usageDescription">
 				<label>Additional information about the specified uses covered by the permit or its equivalent or use restrictions</label>
-				<div class="km-value km-pre">{{document.usageDescription | lstring:locale}}</div>
+				<div class="km-value km-pre"ng-bind-html="document.usageDescription | lstring:locale"></div>
 			</div>
 			<div ng-show="document.thirdPartyTransferConditions">
 				<label>Conditions for third party transfer</label>
-				<div class="km-value km-pre">{{document.thirdPartyTransferConditions | lstring:locale}}</div>
+				<div class="km-value km-pre"ng-bind-html="document.thirdPartyTransferConditions | lstring:locale"></div>
 			</div>
 
 
@@ -285,7 +285,7 @@
 			</div>
 			<div ng-show="document.permitDescription">
 				<label>Description</label>
-				<div class="km-value km-pre">{{document.permitDescription | lstring:review.local}}</div>
+				<div class="km-value km-pre"ng-bind-html="document.permitDescription | lstring:review.local"></div>
 			</div>
 
 
@@ -293,7 +293,7 @@
 				<legend>Additional Information</legend>
 
 				<div ng-show="document.relevantInformation">
-					<div class="km-value" ng-bind="document.relevantInformation | lstring:locale"></div>
+					<div class="km-value" ng-bind-html="document.relevantInformation | lstring:locale"></div>
 				</div>
 
 				<div ng-show="document.relevantDocuments">

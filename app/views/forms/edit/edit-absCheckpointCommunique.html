@@ -106,7 +106,7 @@
                             <div class="col-xs-12">
                                 <div class="km-control-group" name="subjectMatter" required caption="Subject-matter or genetic resources relevant to the information collected or received">
                                     <div class="help-block">Please provide details  on the subject-matter or genetic resources relevant to the information collected or received by the checkpoint. This could include biota at any taxonomic rank, which may carry a taxonomic name. It may also include a locality of collection of the material. It may also be possible to identify the genetic resource through reference to a voucher specimen or field notes held in an identified archive or collection. Providing details about the subject matter or genetic resource covered by the permit or its equivalent can provide additional legal certainty.</div>
-                                    <div km-textbox-ml name="subjectMatter" rows="6" ng-model="document.subjectMatter" locales="document.header.languages"></div>
+                                    <div km-rich-textbox name="subjectMatter" rows="6" ng-model="document.subjectMatter" locales="document.header.languages"></div>
                                 </div>
                             </div>
                         </div>
@@ -164,7 +164,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="km-control-group" name="referenceOfInformedConsent" caption="Reference or evidence of prior informed consent (PIC)">
-                                <div km-textbox-ml name="referenceOfInformedConsent" rows="4" ng-model="document.referenceOfInformedConsent" locales="document.header.languages"></div>
+                                <div km-rich-textbox name="referenceOfInformedConsent" rows="4" ng-model="document.referenceOfInformedConsent" locales="document.header.languages"></div>
                             </div>
                         </div>
                     </div>
@@ -196,7 +196,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="km-control-group" name="referenceOfAgreedTerms" caption="Reference or evidence of establishment of mutually agreed terms (MAT)">
-                                <div km-textbox-ml name="referenceOfAgreedTerms" rows="4" ng-model="document.referenceOfAgreedTerms" locales="document.header.languages"></div>
+                                <div km-rich-textbox name="referenceOfAgreedTerms" rows="4" ng-model="document.referenceOfAgreedTerms" locales="document.header.languages"></div>
                             </div>
                         </div>
                     </div>
@@ -214,7 +214,7 @@
                     <div class="col-xs-12">
                         <div class="km-control-group" required name="description" caption="Short description of the information collected or received by the checkpoint relevant to the utilization of genetic resources, including  the type of use">
                             <span class="help-block">This could include information on utilization of genetic resources at, inter alia, any stage of research, development, innovation, pre-commercialization or commercialization.</span>
-                            <div km-textbox-ml name="description" rows="4" ng-model="document.description" locales="document.header.languages"></div>
+                            <div km-rich-textbox name="description" rows="4" ng-model="document.description" locales="document.header.languages"></div>
                         </div>
                     </div>
                 </div>
@@ -289,7 +289,7 @@
                     <div class="col-xs-12">
                         <div class="km-control-group" name="relevantInformation" caption="Additional Information">
                             <div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
-                            <div km-textbox-ml name="relevantInformation" rows="6" ng-model="document.relevantInformation" locales="document.header.languages"></div>
+                            <div km-rich-textbox name="relevantInformation" rows="6" ng-model="document.relevantInformation" locales="document.header.languages"></div>
                         </div>
                     </div>
                 </div>
