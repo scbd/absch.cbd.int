@@ -95,7 +95,10 @@ section {
 	background-color:#888!important;
 	border-color:#666;
 }
-
+.disable div{
+	background-color:#888!important;
+	border-color:#666;
+}
 
 .enable {
     background-color:#ddd;
