@@ -7,7 +7,10 @@ define(['app'], function (app) {
 
 
 
-
+        //============================================================
+        //
+        //
+        //============================================================
         $scope.getClass = function(path) {
             if ($location.path().substr(0, path.length) == path) {
               return true;
@@ -16,7 +19,16 @@ define(['app'], function (app) {
             }
         }
 
+        //============================================================
+        //
+        //
+        //============================================================
+        $scope.development_env = $location.absUrl().toLowerCase().indexOf("://absch.cbd.int");
 
+        //============================================================
+        //
+        //
+        //============================================================
        function setCookie (name, value, days, path) {
 
             var cookieString = escape(name) + "=";
