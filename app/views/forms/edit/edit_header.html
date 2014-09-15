@@ -7,12 +7,7 @@
       <span class="title">{{type.title}}</span>
 
       <div class="pull-right" style="font-size:12px;">
-          <a class="pull-right" ng-show="!toggleHelp" ng-click="toggleHelp=!toggleHelp;" style="cursor:pointer;padding:5px;"><i class="glyphicon glyphicon-plus" >
-          </i> more
-          </a>
-          <a class="pull-right" ng-show="toggleHelp" ng-click="toggleHelp=!toggleHelp;" style="cursor:pointer;color:#666;padding:5px;"><i class="glyphicon glyphicon-minus" >
-           </i> less
-          </a>
+
 
           <a class="pull-right color-orange fa-11"  ng-click="startIntro()"> <i class="fa fa-youtube-play"></i></a>
       </div>
@@ -21,7 +16,8 @@
 
     <div ng-show="toggleHelp">
       <p class="help1" ng-bind-html="type.help"></p>
-      <div class="panel panel-info" ng-show="type.tips.length > 0">
+
+      <!-- <div class="panel panel-info" ng-show="type.tips.length > 0">
         <div class="panel-heading">
           <h4 class="panel-title">Tips for publishing a {{type.abbreviation}} common format:</h4>
         </div>
@@ -30,6 +26,17 @@
             <li ng-repeat="tip in type.tips" ng-bind-html="tip"></li>
           </ol>
         </div>
-      </div>
+      </div> -->
+      <a class="pull-right color-orange" ng-show="toggleHelp" ng-click="toggleHelp=!toggleHelp;" style="cursor:pointer;position:relative;top:-10px;"> - less</a>
+
     </div>
+
+    <div ng-show="!toggleHelp">
+          <span class="color-grey" ng-bind-html="type.help | limitTo:116"></span>...
+          <a ng-show="!toggleHelp"class="pull-right" ng-click="toggleHelp=!toggleHelp;" style="cursor:pointer">+ more
+          </a>
+    </div>
+
+
+
   </div>

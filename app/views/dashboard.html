@@ -6,18 +6,22 @@
       <h2>
         <span style="color:#aaa;">DASHBOARD</span>
         <span class="title">Check the status of your work in the ABSCH</span>
-        <div class="pull-right" style="font-size:12px;">
-          <a class="pull-right" ng-show="!help" ng-click="help=!help;" style="cursor:pointer;padding:5px;"><i class="glyphicon glyphicon-plus"></i> more </a>
-          <a class="pull-right" ng-show="help" ng-click="help=!help;" style="cursor:pointer;color:#666;padding:5px;"><i class="glyphicon glyphicon-minus" ></i> less</a>
-        </div>
+
         <a class="pull-right color-orange fa-11"  ng-click="startIntro()"> <i class="fa fa-youtube-play"></i></a>
       </h2>
 
       <p class="help1" ng-show="help">
-        The dashboard is a personal working area where it will be possible to follow-up the status of records prepared for their publication in the ABSCH. The content of the dashboard will differ depending on the role assigned in the ABSCH (Publishing Authority (PA) or National Authorized User (NAU)).<br>
+        The dashboard is a personal working area to follow-up the status of records prepared for their publication in the ABSCH. The content of the dashboard will differ depending on the role assigned in the ABSCH (Publishing Authority (PA) or National Authorized User (NAU)).<br>
         <br>
         In this area you can check whether there are items that require your approval (in the case of the PA) or what is the status of records sent for validation of the PA (in the case of NAUs).
+        <a class="pull-right color-orange"  ng-click="help=!help;" style="cursor:pointer;"> - less</a>
       </p>
+        <p class="help1" ng-show="!help">
+         <span class="color-grey"> The dashboard is where to follow-up the status of records prepared for their publication in the ABSCH...</span>
+        <a class="pull-right" ng-show="!help" ng-click="help=!help;" style="cursor:pointer;"> + more </a>
+      </p>
+
+
 
     </div>
 
