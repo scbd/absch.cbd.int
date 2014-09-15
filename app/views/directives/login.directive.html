@@ -2,16 +2,16 @@
 <div class="row" ng-show="!user.isAuthenticated" >
     <div class="col-xs-7" style="height:250px" >
         <div style="padding:1px 10px 10px 10px; margin:0;">
-            <h2 style="text-align:left;">
-                Sign in 
-            </h2>
+            <h1 style="text-align:left;">
+                Sign into the <span class="color-orange">ABS-CH</span>
+            </h1>
             <div class="alert alert-danger" ng-show="errorInvalid">
-                <strong>Oops! Login failed.</strong></br>
+                <strong>Login failed.</strong></br>
                 The email address and password combination you entered is incorrect.
             </div>
 
             <div class="alert alert-danger" ng-show="errorTimeout">
-                <strong>Aw, Snap! Operation failed.</strong></br>
+                <strong>Operation failed.</strong></br>
                 The service is not available. Please try again later.
             </div>
             <form name="form" ng-submit="doSignIn()" class="ng-pristine ng-invalid ng-invalid-required" >
@@ -30,11 +30,12 @@
                 <div class="form-group">
                     <div class="checkbox">
                         <label class="pull-right">
-                            <input type="checkbox" ng-model="rememberMe" class="ng-pristine ng-valid"> <a style="text-decoration:none;color:#ccc;">Remember me</a> | <a href="https://accounts.cbd.int/password/reset" style="text-decoration:none;color:#ccc;" target="_new">Forgot password?</a>
-                        </label> 
+                            <input type="checkbox" ng-model="rememberMe" class="ng-pristine ng-valid"> <a style="text-decoration:none;" class="color-litegrey">Remember me</a> <span class="color-litegrey">|</span>
+                            <a href="https://accounts.cbd.int/password/reset" style="text-decoration:none;" class="color-litegrey" target="_new">Forgot password?</a>
+                        </label>
                     </div>
-                    <button type="submit" class="btn btn-primary pull-left" ng-disabled="waiting" style="position:relative;top:-30px;width:100px;margin:0;">Sign in</button>
-               
+                    <button type="submit" class="btn btn-primary pull-left" ng-disabled="waiting" style="position:relative;top:-30px;margin:0;width:100px;">Sign in</button>
+
                     <div class="spinner ng-hide" ng-show="waiting">
                         <div class="bounce1"></div>
                         <div class="bounce2"></div>
@@ -44,13 +45,11 @@
             </form>
         </div>
     </div>
-    <div class="col-xs-5" style="border-left:5px solid #ccc;height:250px">
+    <div class="col-xs-5" style="border-left:5px solid #ccc;height:250px;margin-top:5px;">
         <div style="padding:1px 10px 15px 10px; margin:0;">
-        <h1>No account? <h2>Get started. Create your ABS-CH account.</h2></h1>
-        <p>
-            <h3> <a href="#" ng-click="actionSignup()" class="btn btn-primary" ng-disabled="waiting" >Sign up</a> </h3>
-        </p>
-        
+        <h1>No account? <h2>Get started. Create your CBD account for the <span class="color-orange">ABS-CH</span>. Sign up at accounts.cbd.int</h2>
+        <a href="#" style="width:100px;" ng-click="actionSignup()" class="btn btn-primary" ng-disabled="waiting" >Sign up</a></h1>
+
     </div>
 </div>
 </div>

@@ -7,8 +7,9 @@
 
 <!-- Carousel
 ================================================== -->
+<!--
 <div id="myCarousel" class="carousel slide" data-ride="carousel" >
-    <!-- Indicators -->
+
     <ol class="carousel-indicators" >
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
@@ -63,37 +64,81 @@
                 </div>
             </div>
         </div>
-         <!--
-        <div class="item">
-            <img data-src="holder.js/900x500/auto/#555:#5a5a5a/text:Third slide" alt="Third slide">
-            <div class="container">
-                <div class="carousel-caption">
-                    <h1>One more for good measure.</h1>
-                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
-                </div>
-            </div>
-        </div> -->
+
     </div>
     <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
     <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-</div>
+</div> -->
 <!-- /.carousel -->
+
+<div class="bg-texture-green" style="border-bottom:2px solid #ddd;border-top:2px solid #111;">
+    <div class="container" style="color:white;padding:20px;" >
+
+
+                        <div class="row  bg-green" style="padding:20px;margin-top:10px;margin-bottom:20px;">
+                            <div class="col-md-12">
+                                <div class="home-col dropshadow">
+                                    <!-- <h3 class="headline1"><a href="/about#about">What is the ABS-CH?</a></h3> -->
+                                    <h3 style="text-align:justify;">The Access and Benefit-sharing Clearing-house (ABSCH) is a platform for exchanging information on ABS and a key tool for facilitating the implementation of the Nagoya Protocol.
+                                    &nbsp;<a href="/about#about" style="font-size:80%;padding:3px;line-height:16px;" class="btn btn-small btn-primary">read more</a></h3>
+                                </div>
+
+                            </div>
+                        </div>
+
+                         <div class="row" ng-show="user.isAuthenticated" >
+
+                                    <div  style="background-color:#1a9351; padding:50px; margin:0;" class="text-center dropshadow">
+                                       <h1 style="font-size:360%;"> WELCOME {{user.name}} </h1>
+                                    </div>
+
+                          </div>
+                        <div class="row" ng-show="!user.isAuthenticated">
+                                <div class="dropshadow col-xs-12" >
+                                   <div login></div>
+                            </div>
+                        </div>
+
+
+
+    </div>
+</div>
+
 
 
 
 <div class="container">
     <div class="row" >
 
+        <div class="col-xs-6">
+            <h3>Latest National Records</h3>
+
+        </div>
+
+        <div class="col-xs-6">
+            <h3>Latest Virtual Library Records</h3>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<!--
+<div class="container">
+    <div class="row" >
+
 
         <div class="col-md-12">
             <div class="home-col">
-                <!-- <h3 class="headline1"><a href="/about#about">What is the ABS-CH?</a></h3> -->
-                <h3 style="text-align:justify;">The Access and Benefit-sharing Clearing-house (ABSCH) is a platform for exchanging information on ABS and a key tool for facilitating the implementation of the Nagoya Protocolby enhancing transparency on procedures for access and on the utilization of genetic resources, and in this way increasing the opportunities for benefit-sharing. <a href="/about#about">
-                <span style="font-size:80%"> &nbsp; <i class="fa fa-forward"></i> read more</a></span></h3>
+
+                <h3 style="text-align:justify;">The Access and Benefit-sharing Clearing-house (ABSCH) is a platform for exchanging information on ABS and a key tool for facilitating the implementation of the Nagoya Protocol by enhancing transparency on procedures for access and on the utilization of genetic resources, and in this way increasing the opportunities for benefit-sharing.
+                    <a href="/about#about" style="font-size:80%;padding:3px;line-height:16px;" class="btn btn-small btn-primary">read more</a></h3>
             </div>
 
-        </div>
+        </div> -->
 
          <!--  <div class="col-md-4">
             <div class="home-col">
@@ -115,18 +160,18 @@
 
 
 
-    </div>
+    <!-- </div>
 </div>
 
 
-<hr>
+<hr> -->
 
 
 <div class="container">
 
     <div class="row">
 
-        <div class="col-md-6">
+        <div class="col-md-8">
 
         <div class="home-col">
                 <h3>About the Nagoya Protocol</h3>
@@ -154,7 +199,7 @@
             </div> -->
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="home-col">
 
             <br><br><br>
@@ -162,7 +207,7 @@
                 <span style="color:#000;font-weight:bold; font-size:50px;text-shadow: 0 1px 2px rgba(0, 0, 0, .6);">
 
                       {{daysUntilEntry}}</span><br><span style="color: #999; text-transform: uppercase;font-weight:bold;font-size:16px;">
-                         <br>
+                         
                           Days left until entry into force of the Nagoya Protocol</span>
             </div>
 
