@@ -23,7 +23,7 @@ define(['app'], function (app) {
         //
         //
         //============================================================
-        $scope.development_env = $location.absUrl().toLowerCase().indexOf("://absch.cbd.int");
+        $scope.development_env = false;//$location.absUrl().toLowerCase().indexOf("://absch.cbd.int");
 
         //============================================================
         //
