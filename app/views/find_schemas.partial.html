@@ -48,7 +48,34 @@ label{width:100%;}
             <span class="filter-text">Competent National Authorities  </span>
         </label>
         <div ng-show="authority.selected" class="subfilters-section">
-            <div km-toggle placeholder="Responsible for all functions" ng-model="cnaResponsibleForAll"></div>
+            <!-- <div km-toggle placeholder="Responsible for all functions" ng-model="cnaResponsibleForAll"></div> -->
+            <div class="btn-group" >
+                <button style="button" class="btn btn-default dropdown-toggle"  data-toggle="dropdown">
+                    <span ng-show="cnaResponsibleForAll"  style="color:#428BCA">Responsible for all functions </span>
+                    <span ng-show="!cnaResponsibleForAll && cnaResponsibleForAll!=null"  style="color:#428BCA">Not responsible for all functions </span>
+                    <span ng-show="cnaResponsibleForAll==null" style="color:#428BCA">Both responsible and not</span>
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" style="max-height:400px;overflow-y:auto;text-align:left">
+                    <li >
+                        <a style="color:#999;" href ng-click="cnaResponsibleForAll=null;buildQuery()" value="null"
+                        ng-model="cnaResponsibleForAll" name="cnaResponsibleForAll">clear selection</a>
+                    </li>
+                    <li>
+                        <a href ng-click="cnaResponsibleForAll=true;buildQuery()" value="true"  ng-model="cnaResponsibleForAll" name="cnaResponsibleForAll">
+                        <span ng-show="cnaResponsibleForAll==true" class="glyphicon glyphicon-ok"></span>Responsible for all functions </a>
+                    </li>
+                    <li>
+                        <a href ng-click="cnaResponsibleForAll=false;buildQuery()" value="false"  ng-model="cnaResponsibleForAll" name="cnaResponsibleForAll">
+                        <span ng-show="cnaResponsibleForAll==false" class="glyphicon glyphicon-ok"></span>Not responsible for all functions </a>
+                    </li>
+                    <li >
+                        <a href ng-click="cnaResponsibleForAll=null;buildQuery()" value="null"  ng-model="cnaResponsibleForAll" name="cnaResponsibleForAll">
+                        <span ng-show="cnaResponsibleForAll==null" class="glyphicon glyphicon-ok"></span>Both responsible and not</a>
+                    </li>
+
+                </ul>
+            </div>
             <br>
             <div km-select multiple ng-model="cnaJurisdiction" binding-type="string" placeholder="Jurisdictions" items="options.cnaJurisdictions()"></div>
             <br>
