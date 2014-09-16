@@ -54,11 +54,12 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
                   if(!countryColors[$scope.countries[i].code.toLowerCase()])
                       countryColors[$scope.countries[i].code.toLowerCase()] = "#808080";
                 }
+
                 if($scope.countries[i].isParty)
                     $scope.countriesforAutocomplete.push({name:$scope.countries[i].name.en});
             }
-            //deduct EU count
-            //$scope.ratifications--;
+
+            countryColors['tw'] = "#808080";
 
              loadMap(countryColors);
              $scope.slideMap('#mapDiv','#listDiv');
@@ -123,8 +124,11 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
                     },
                     onLabelShow: function(event, label, code)
                     {
-                            //console.log($scope.countries["government_s,schema_s"]);
 
+                            //tiwan should be shown as China
+                            if(code == 'tw')
+                                code = 'cn'
+                            // console.log(code);
                             var country = _.where($scope.countries, {code: code.toUpperCase()})
                             var countryFacet = _.where($scope.countryFacets["government_s,schema_s"], {value: code})
 
@@ -168,15 +172,18 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
             _.each($scope.countries, function(country){
                     $("#jqvmap1_"+country.code.toLowerCase()).attr("fill", "#fff");
             });
-
+            //fix for taiwan
+            $("#jqvmap1_tw").attr("fill", "#fff");
             _.each($scope.countries, function(country){
 
                 if((action == 'party' || action == 'ratified') && country.isRatified)
                     $("#jqvmap1_"+country.code.toLowerCase()).attr("fill", "#428bca");
                 else if((action == 'party' || action == 'signatory') && country.isSignatory)
                     $("#jqvmap1_"+country.code.toLowerCase()).attr("fill", "#5bc0de");
-                else if(action == 'party' && country.isParty)
+                else if(action == 'party' && country.isParty){
                      $("#jqvmap1_"+country.code.toLowerCase()).attr("fill", "#808080");
+                     $("#jqvmap1_tw").attr("fill", "#808080");
+                }
                 // else
                 //      $("#jqvmap1_"+country.code.toLowerCase()).attr("fill", "#fff");
             });
