@@ -75,7 +75,7 @@
     <div class="container" style="color:white;padding:20px;" >
 
 
-                        <div class="row  bg-green" style="padding:20px;margin-top:10px;margin-bottom:20px;">
+                        <div class="row  bg-green" style="padding:20px;margin-bottom:20px;">
                             <div class="col-md-12">
                                 <div class="home-col dropshadow">
                                     <!-- <h3 class="headline1"><a href="/about#about">What is the ABS-CH?</a></h3> -->
@@ -86,13 +86,28 @@
                             </div>
                         </div>
 
-                         <div class="row" ng-show="user.isAuthenticated" >
+                         <div class="row bg-green"  style="padding:30px;" ng-show="user.isAuthenticated" >
+                                <div class="text-center col-xs-10"  >
+                                    <h1 class="dropshadow" style="font-size:360%;margin-bottom:0;padding:0;position:relative;top:-10px;"> WELCOME {{user.name}}</h1>
+                                    <h2 class="color-grey" style="text-transform:uppercase;padding:0;margin:0;">{{user.government | term}}
 
-                                    <div  style="background-color:#1a9351; padding:50px; margin:0;" class="text-center dropshadow">
-                                       <h1 style="font-size:360%;"> WELCOME {{user.name}} </h1>
-                                    </div>
+                                      <span ng-show="user.roles.indexOf('AbsPublishingAuthorities') != -1"> (PA) </span>
+                                      <span ng-show="user.roles.indexOf('abschiac') != -1">(IAC)</span>
+                                      <span ng-show="user.roles.indexOf('AbsNationalAuthorizedUser') != -1"> (NAU) </span>
+                                      <span ng-show="user.roles.indexOf('AbsNationalFocalPoint') != -1"> (FP) </span>
+                                      <span ng-show="user.roles.indexOf('AbsAdministrator') != -1"> (ABS-ADMIN) </span>
+                                      <span ng-show="user.roles.indexOf('Administrator') != -1"> (CBD-ADMIN) </span>
 
+                                    </h2>
+                                </div>
+
+                                <div class="col-xs-2 pull-right text-align:right;" style="padding-left:15px;border-left:3px solid #999;">
+                                    <div><button class="btn btn-info " ng-click="actionSignOut()">Sign out</button></div>
+                                    <div style="padding-top:10px;"><a href="#" ng-click="actionProfile()" class="color-white" style="font-size:14px;font-weight:normal;" >update your profile</a></div>
+                                    <div style="padding-top:10px;padding-bottom:10px;"><a href="#"  class="color-white" ng-click="actionPassword()" style="font-size:14px;font-weight:normal;" > change your password</a></div>
+                                </div>
                           </div>
+
                         <div class="row" ng-show="!user.isAuthenticated">
                                 <div class="dropshadow col-xs-12" >
                                    <div login></div>
@@ -207,7 +222,7 @@
                 <span style="color:#000;font-weight:bold; font-size:50px;text-shadow: 0 1px 2px rgba(0, 0, 0, .6);">
 
                       {{daysUntilEntry}}</span><br><span style="color: #999; text-transform: uppercase;font-weight:bold;font-size:16px;">
-                         
+
                           Days left until entry into force of the Nagoya Protocol</span>
             </div>
 

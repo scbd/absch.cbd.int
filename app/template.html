@@ -38,16 +38,16 @@
     </style>
 </head>
 
-<body ng-controller="TemplateController">
+<body ng-controller="TemplateController" ng-cloak>
 
     <iframe id="authenticationFrame" src="https://accounts.cbd.int/app/authorize.html" style="display:none"></iframe>
 
     <div class="disclaimer">
         <div class="promo" ng-class="{'bg-blue':development_env==true}" href="/about/#pilotphase">
             <div class="container">
-                <div class="title" style="padding-top:5px;white-space:nowrap;">
-                        <span ng-show="development_env==false">ABS-CH PILOT PHASE</span>
-                        <span ng-hide="development_env==false">&nbsp;&nbsp;&nbsp;&nbsp;DEVELOPMENT&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+                <div class="title" class="text-center" style="padding-top:5px;white-space:nowrap;width:170px;">
+                    <span class="text-center">{{env_name}}</span>
+                </div>
                 <div class="content">
                     <span style="position:relative;"><span id="HelpLinksSmall" ><ng-include src="'/app/views/help/links/helplinks.html'"></ng-include></span></span>
 
