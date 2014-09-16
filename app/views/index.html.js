@@ -1,4 +1,6 @@
-define(['app','./directives/login.directive.html.js'], function (app) {
+define(['app','./directives/login.directive.html.js',
+    '../views/forms/view/record-loader.directive.html.js',
+    '../views/directives/document-list.partial.html.js'], function (app) {
     app.controller('IndexController', ['$scope', 'authHttp', '$window', '$cookies','realm',  function ($scope, $http, $window, $cookies, realm) {
 
     	$scope.email = null;
@@ -56,6 +58,45 @@ define(['app','./directives/login.directive.html.js'], function (app) {
     	}
 
 
+        //============================================================
+        //
+        //
+        //============================================================
+    	function query () {
+
+            var schema = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database",  "meeting", "notification","pressRelease","statement" ,"focalPoint"]
+
+            var q = '(realm_ss:' + realm.value.toLowerCase() + ' or realm_ss:absch) AND NOT version_s:*';
+            var schemaQuery = ' AND (schema_s:' + schema.join(' OR schema_s:') + ')';
+            var queryParameters = {
+                'q': q + schemaQuery,
+                'sort': 'createdDate_dt desc, title_t asc',
+                'fl': 'id,identifier_s,title_t,createdDate_dt,description_t,url_ss,schema_EN_t,date_dt,government_EN_t,schema_s,number_d,aichiTarget_ss,reference_s,sender_s,meeting_ss,recipient_ss,symbol_s,eventCity_EN_t,eventCountry_EN_t,startDate_s,endDate_s,body_s,code_s,meeting_s,group_s,function_t,department_t,organization_t,summary_EN_t,reportType_EN_t,completion_EN_t,jurisdiction_EN_t,development_EN_t,' +
+                        'government_s,publicationYear_is,resourceTypes_CEN_ss,regions_CEN_ss,languages_CEN_ss,absResposibleForAll_b,jurisdiction_CEN_s,geneticResourceTypes_CEN_ss,usage_CEN_ss,keywords_CEN_ss,informAllAuthorities_b,originCountries_CEN_ss,orgperson_s,status_EN_t,type_EN_t,endDate_dt,startDate_dt,amendmentIntent_i,' +
+                        'resourceLinksLanguage_ss,',
+                'wt': 'json',
+                'start': 0,
+                'rows': 10,
+                'cb': new Date().getTime()
+            };
+            var nationalRecordsParam = queryParameters.q + schemaQuery
+
+            $http.get('/api/v2013/index/select', { params: queryParameters})
+                 .success(function (data) {
+                    $scope.rawNationalDocs = data.response.docs;
+                }).error(function(error){$scope.rawNationalDocs=[]});
+
+            schemaQuery = ' AND (schema_s:resource)';
+            var referenceRecordsParam = angular.copy(queryParameters);
+            referenceRecordsParam.q = q + schemaQuery
+            $http.get('/api/v2013/index/select', { params: referenceRecordsParam})
+                 .success(function (data) {
+                    $scope.rawRefDocs = data.response.docs;
+                }).error(function(error){$scope.rawRefDocs=[]});
+
+
+        };
+        query()
 
     }]);
 });
