@@ -23,12 +23,17 @@ define(['app'], function (app) {
         //
         //
         //============================================================
+        $scope.development_env = false;
+        $scope.env_name = "ABS-CH PILOT PHASE";
         $scope.development_env = $location.absUrl().toLowerCase().indexOf("://absch.cbd.int");
-
-        if(!$scope.development_env || $scope.development_env == -1)
-            $scope.development_env =false;
-        else
+        if(!$scope.development_env || $scope.development_env == -1){
             $scope.development_env = true;
+            $scope.env_name = "DEVELOPMENT";
+        }
+        else{
+            $scope.development_env = false;
+            $scope.env_name = "ABS-CH PILOT PHASE";
+        }
 
         //============================================================
         //
