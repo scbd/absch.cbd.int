@@ -26,9 +26,9 @@ define(['app'], function (app) {
         $scope.development_env = $location.absUrl().toLowerCase().indexOf("://absch.cbd.int");
 
         if(!$scope.development_env || $scope.development_env == -1)
-            $scope.development_env =false;
-        else
             $scope.development_env = true;
+        else
+            $scope.development_env = false;
 
         //============================================================
         //

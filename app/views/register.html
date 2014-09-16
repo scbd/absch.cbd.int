@@ -96,23 +96,36 @@
         </div>
       </div>
 
+
+    <ng-include src="subTemplateUrl"  ng-show="user.isAuthenticated"></ng-include>
+
+  </div>
+
+ </div>
+
       <!-- TODO: if not authenticated, should be handled by the router, which redirects the user to login, NOT by a hidden div -->
+
+<div  ng-hide="user.isAuthenticated">
+<div class="container">
+
       <div class="col-xs-12" ng-hide="user.isAuthenticated" style="padding-top:20px;">
         <div class="alert" ng-hide="user.isAuthenticated">
-          <div class="row well" ng-show="!user.isAuthenticated">
-            <div class="col-xs-12">
+          <div class="row bg-green well" ng-show="!user.isAuthenticated" >
+
+
+            <div class="col-xs-12 color-white dropshadow">
               <div login></div>
             </div>
 
             <div class="col-xs-12" style="padding-top:30px;">
               <hr>
-              <h3>Designation of the ABS Clearing-House publishing authority and national authorised users</h3>
+              <h3 class="dropshadow1">Designation of the ABS Clearing-House publishing authority and national authorised users</h3>
               <p>In order to operationalize the ABS Clearing-House, Parties need to nominate a single publishing authority to clear national records prior to publishing them in the ABS Clearing-House.</p>
               <p>The registration of who has the authority to publish national records in the ABS Clearing-House can only be done by the Secretariat upon receipt of an official written communications addressed to the Executive Secretary and endorsed as follows by the focal point for the Intergovernmental Committee for the Nagoya Protocol (ICNP Focal Point). The duties of the ICNP Focal Point could also be expanded to incorporate the role of the publishing authority.</p>
 
               <p>The designation of national autorised users can be done at any time by the ICNP Focal Point or the publishing authority. These designations may be sent to the Secretariat by postal mail, fax or as an attachment to an e mail and must contain the complete contact details and the appropriate endorsements.</p>
 
-              <a href="http://www.cbd.int/doc/abs/commonformats/ABSCH-PA.doc">
+              <a href="http://www.cbd.int/doc/abs/commonformats/ABSCH-PA.doc" class="color-white">
                   <i class="glyphicon glyphicon-circle-arrow-down"></i> Download Publishing Authority(PA) and National Authorized User(NAU) nomination form
               </a>
             </div>
@@ -120,9 +133,10 @@
         </div>
       </div>
 
-
-      <ng-include src="subTemplateUrl"  ng-show="user.isAuthenticated"></ng-include>
-
-    </div>
   </div>
+
+
+
+</div>
+
 </div>
