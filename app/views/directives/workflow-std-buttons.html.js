@@ -123,9 +123,19 @@ define(['app','angular-form-controls'], function (app) {
 					}).finally(function(){
 
 						$scope.loading = false;
+                        $scope.timer(true);
 					});
 				}
 
+                $scope.timer = function(startNew){
+                    if(startNew){
+                        $scope.lastSaved = '';
+                        $scope.lastSavedTime = moment();
+                    }
+                    var duration = moment.duration(moment() - $scope.lastSavedTime)
+                    $scope.lastSaved = duration._data.hours + ':' + duration._data.minutes + ':' + duration._data.seconds
+                    $timeout(function(){$scope.timer();},1000);
+                }
 
 				//====================
 				//
@@ -260,7 +270,7 @@ define(['app','angular-form-controls'], function (app) {
 
 					}).finally(function(){
 						    $scope.loading = false;
-
+                            $scope.timer(true);
 						//return $scope.closeDialog();
 
 					});
