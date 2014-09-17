@@ -63,6 +63,7 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
 
              loadMap(countryColors);
              $scope.slideMap('#mapDiv','#listDiv');
+             CalculateFacets();
         });
 
         var today= moment();
@@ -169,24 +170,50 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
 
         $scope.updateMap = function(action){
 
+            $scope.selected_facet= action
+
             _.each($scope.countries, function(country){
                     $("#jqvmap1_"+country.code.toLowerCase()).attr("fill", "#fff");
             });
             //fix for taiwan
             $("#jqvmap1_tw").attr("fill", "#fff");
-            _.each($scope.countries, function(country){
+            if(action == 'signatory' || action == 'party' || action == 'ratified'){
+                _.each($scope.countries, function(country){
 
-                if((action == 'party' || action == 'ratified') && country.isRatified)
-                    $("#jqvmap1_"+country.code.toLowerCase()).attr("fill", "#428bca");
-                else if((action == 'party' || action == 'signatory') && country.isSignatory)
-                    $("#jqvmap1_"+country.code.toLowerCase()).attr("fill", "#5bc0de");
-                else if(action == 'party' && country.isParty){
-                     $("#jqvmap1_"+country.code.toLowerCase()).attr("fill", "#808080");
-                     $("#jqvmap1_tw").attr("fill", "#808080");
-                }
-                // else
-                //      $("#jqvmap1_"+country.code.toLowerCase()).attr("fill", "#fff");
+                    if((action == 'party' || action == 'ratified') && country.isRatified)
+                        $("#jqvmap1_"+country.code.toLowerCase()).attr("fill", "#428bca");
+                    else if((action == 'party' || action == 'signatory') && country.isSignatory)
+                        $("#jqvmap1_"+country.code.toLowerCase()).attr("fill", "#5bc0de");
+                    else if(action == 'party' && country.isParty){
+                         $("#jqvmap1_"+country.code.toLowerCase()).attr("fill", "#808080");
+                         $("#jqvmap1_tw").attr("fill", "#808080");
+                    }
+                });
+            }
+            else{
+                    _.each($scope.countryFacets['government_s,schema_s'], function(data){
+                        var colorCountry = false;
+                        var search = _.where(data.pivot, {value:action});
+                        if(search.length>0){
+                            $("#jqvmap1_"+data.value.toLowerCase()).attr("fill", "#428bca");
+                        }
+                    });
+            }
+        }
+
+        $scope.isSelected = function(facet){
+            return facet == $scope.selected_facet;
+        }
+
+        function CalculateFacets(){
+            var tempFacets = {};
+            _.each($scope.countryFacets['government_s,schema_s'], function(data){
+                _.each(data.pivot, function(facets){
+                    tempFacets[facets.value] = (tempFacets[facets.value] ? tempFacets[facets.value] : 0) + facets.count;
+                });
+
             });
+            $scope.commonFormatFacets = _.pairs(tempFacets);
         }
 
         $scope.slideMap = function(divShow,divHide){
