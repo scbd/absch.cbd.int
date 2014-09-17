@@ -13,13 +13,13 @@ app.directive("viewMeasure", [function () {
 			allowDrafts : "@",
 			hide		: "@"
 		},
-		controller : ["$scope", "IStorage", function ($scope, storage) 
+		controller : ["$scope", "IStorage","$filter", function ($scope, storage, $filter)
 		{
 			//====================
 			//
 			//====================
 			$scope.display = function(field) {
-				
+
 				if(!$scope.hide) return true; //show all fields
 
 				return( $scope.hide.indexOf(field) >= 0 ? false : true);
@@ -62,6 +62,15 @@ app.directive("viewMeasure", [function () {
 						$scope.loadReferences($scope.linkedMeasures, true);
 				}
 			});
+
+			$scope.showLanguage = function(model, type){
+
+				if(type=='file'){
+					return $filter("term")(model);
+				}
+				else
+					return model;
+			}
 
 			//====================
 			//

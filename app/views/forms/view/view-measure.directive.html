@@ -110,7 +110,7 @@
 				<ul  style="list-style-type: none;padding: 0px;margin: 0px;">
 					<li ng-repeat="item in document.documents">
 						<a target="_blank" ng-href="{{item.url}}"><i class="fa fa-file"></i> {{item.name||item.url}}</a>
-						<i ng-show="item.language">({{item.language|term}})</i>
+						<i ng-show="item.language">({{showLanguage(item.language, item.type)}})</i>
 						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 					</li>
 				</ul>
@@ -123,7 +123,7 @@
 				<ul>
 					<li ng-repeat="item in document.documentTranslations">
 						<a target="_blank" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-						<i ng-show="item.language">({{item.language|term}})</i>
+						<i ng-show="item.language">({{showLanguage(item.language, item.type)}})</i>
 						<i ng-show="item.translationType">({{item.translationType|term}})</i>
 						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 					</li>
