@@ -1,4 +1,4 @@
-define(['app','./directives/login.directive.html.js',
+define(['app',
     '../views/forms/view/record-loader.directive.html.js',
     '../views/directives/document-list.partial.html.js'], function (app) {
     app.controller('IndexController', ['$scope', 'authHttp', '$window', '$cookies','realm',  function ($scope, $http, $window, $cookies, realm) {
