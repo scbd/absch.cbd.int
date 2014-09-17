@@ -133,8 +133,25 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
                             var country = _.where($scope.countries, {code: code.toUpperCase()})
                             var countryFacet = _.where($scope.countryFacets["government_s,schema_s"], {value: code})
 
-
                             var cfHtml = '';
+                            var countryName = code;
+                            var headerClass = "panel-default"
+                            if(country.length > 0){
+                                countryName = country[0].name.en;
+
+                                if($scope.isRatified(country[0])){
+                                    headerClass = "panel-primary"
+                                    cfHtml += '<li class="list-group-item"><span class="label label-primary">Ratified</span></li>'
+                                }
+                                else if($scope.isSignatory(country[0])){
+                                    headerClass = "panel-info"
+                                    cfHtml += '<li class="list-group-item"><span class="label label-info">Signatory</span></li>'
+                                }
+                                else if($scope.isPartyToCBD(country[0])){
+                                    headerClass = "panel-default"
+                                    cfHtml += '<li class="list-group-item"><span class="label label-default">Not Ratified/CBD party</span></li>'
+                                }
+                            }
                             if(countryFacet.length>0){
                                 countryFacet[0].pivot.forEach(function(document){
                                     cfHtml +=    '<li class="list-group-item" style="color:black">'+
@@ -142,21 +159,9 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
                                                 $filter("schemaShortName")(document.value.toLowerCase()) + ' </li>'
                                 });
                             }
-                            var countryName = code;
-                            var headerClass = "panel-default"
-                            if(country.length > 0){
-                                countryName = country[0].name.en;
-
-                                if($scope.isRatified(country[0]))
-                                    headerClass = "panel-primary"
-
-                                else if($scope.isSignatory(country[0]))
-                                    headerClass = "panel-info"
-
-                                else if($scope.isPartyToCBD(country[0]))
-                                    headerClass = "panel-default"
+                            else{
+                                cfHtml += '<li class="list-group-item" style="color:black">No information available</li>'
                             }
-
                         label.html(
                             '<div style="min-width:150px;" class="panel ' + headerClass + '"><div class="panel-heading"><h3 class="panel-title">' + countryName + '</h3>'+
                             '</div> <div class="panel-body"><ul class="list-group">'+ cfHtml +'</ul></div></div>'
