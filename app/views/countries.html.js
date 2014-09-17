@@ -171,6 +171,9 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
 
                 }
             );
+
+            $('.jqvmap-zoomin').html('<i class="glyphicon glyphicon-plus"/>')
+            $('.jqvmap-zoomout').html('<i class="glyphicon glyphicon-minus"/>')
         }
 
         $scope.updateMap = function(action){
