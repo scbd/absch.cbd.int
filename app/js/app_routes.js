@@ -71,6 +71,12 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
               subTemplateUrl: '/app/views/dashboard.html',
             }).
 
+            when('/register', {
+              templateUrl: '/app/views/register.html',
+              resolveController: true,
+              resolveUser: true,
+              subTemplateUrl: '/app/views/dashboard.html',
+            }).
             // when('/dashboard/:tour', {
             //   templateUrl: '/app/views/register.html',
             //   resolveController: true,
