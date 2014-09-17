@@ -191,7 +191,7 @@ app.directive('searchFilterSchemas', function ($http) {
                                     }
                                 }
                                 else {
-                                    if($scope[filter.name])
+                                    if($scope[filter.name]!=null)
                                         subFilterQuery = subFilterQuery + ' AND ('  + filter.field +':'+  $scope[filter.name] + ')';
                                 }
                             });
