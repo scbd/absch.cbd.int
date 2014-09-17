@@ -1,4 +1,5 @@
-define(['app'], function (app) {
+define(['app',
+	'app/views/directives/login.directive.html.js'], function (app) {
     'use strict';
 
     app.controller('TemplateController', ['$scope', '$rootScope', '$window', '$location', 'authentication', '$browser', function ($scope, $rootScope, $window, $location, authentication, $browser) {
