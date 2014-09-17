@@ -1,12 +1,11 @@
 <div>
 
     <h3>
-        <a ng-click="showSelect=!showSelect" ng-href="#">
-            <i class="fa" ng-class="{'fa-caret-right':!showSelect, 'fa-caret-down':showSelect}">
-        </i> &nbsp; {{title | lstring:locale}}</a>
+        <a ng-click="showSelect=!showSelect" ng-href="#" data-toggle="modal" data-target="#themeModal">
+            {{title | lstring:locale}}</a>
     </h3>
 
-    <div class="list-group-item-expand" ng-hide="showSelect">
+    <div class="list-group-item-expand">
         <div ng-repeat="item in terms | orderBy:'title' | filter:showSelected" ng-class="ccc(item)" ng-click="ts(this, $event)">
         		<label><!-- <div class="glyphicon glyphicon-remove"></div>  -->
                     <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">
@@ -54,45 +53,67 @@
         height:400px;
         overflow-y:auto
     }
+
+.localBtn{
+    padding: 6px 12px;
+    font-size: 14px;
+    border: 1px solid transparent;
+    background-color: #3276b1;
+}
+
     </style>
 
-    <div class="filter-options subfilters-section" ng-show="showSelect">
-        <div ng-class="{'section':terms.length>0}">
-            <div class="progress progress-striped active" ng-show="showSelect && terms.length<=0">
-                  <div class="progress-bar"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
-                    <span class="sr-only">45% Complete</span>
-                  </div>
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="themeModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel"> {{title | lstring:locale}}</h4>
             </div>
-            <div ng-repeat="item in terms" class="checkbox" id="chkboxList">
+            <div class="modal-body">
+                <div class="filter-options subfilters-section">
+                <div ng-class="{'section':terms.length>0}">
+                    <div class="progress progress-striped active" ng-show="showSelect && terms.length<=0">
+                          <div class="progress-bar"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                            <span class="sr-only">45% Complete</span>
+                          </div>
+                    </div>
+                    <div ng-repeat="item in terms" class="checkbox" id="chkboxList">
 
-                <label>
-                    <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">
-                    <strong>{{item.title.en}} ({{item.count ? item.count : 0}})</strong>
-                </label>
-                <div class="checkbox" ng-repeat="item in item.narrowerTerms" style="padding-left:20px">
-                    <label>
-                        <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">{{item.title.en}} ({{item.count ? item.count : 0}})</label>
-                    <div class="checkbox" ng-repeat="item in item.narrowerTerms" style="padding-left:20px">
                         <label>
-                            <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">{{item.title.en}} ({{item.count ? item.count : 0}})</label>
+                            <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">
+                            <strong>{{item.title.en}} ({{item.count ? item.count : 0}})</strong>
+                        </label>
                         <div class="checkbox" ng-repeat="item in item.narrowerTerms" style="padding-left:20px">
                             <label>
                                 <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">{{item.title.en}} ({{item.count ? item.count : 0}})</label>
                             <div class="checkbox" ng-repeat="item in item.narrowerTerms" style="padding-left:20px">
                                 <label>
                                     <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">{{item.title.en}} ({{item.count ? item.count : 0}})</label>
-                                <div class="checkbox" ng-repeat="item in item.narrowerTerms" style="background-color:red;padding-left:20px">
+                                <div class="checkbox" ng-repeat="item in item.narrowerTerms" style="padding-left:20px">
                                     <label>
                                         <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">{{item.title.en}} ({{item.count ? item.count : 0}})</label>
+                                    <div class="checkbox" ng-repeat="item in item.narrowerTerms" style="padding-left:20px">
+                                        <label>
+                                            <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">{{item.title.en}} ({{item.count ? item.count : 0}})</label>
+                                        <div class="checkbox" ng-repeat="item in item.narrowerTerms" style="background-color:red;padding-left:20px">
+                                            <label>
+                                                <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">{{item.title.en}} ({{item.count ? item.count : 0}})</label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                </div>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn localBtn btn-primary" data-dismiss="modal">Close</button>
+          </div>
         </div>
     </div>
-
+</div>
 
 
 </div>

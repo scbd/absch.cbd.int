@@ -105,7 +105,10 @@ define(['app','/app/js/common.js'], function (app) {
                 };
                 $scope.filterCountries = function(entity){
                         return $scope.countryFilter == 'All' ||
-                        (entity && entity.title.en.indexOf($scope.countryFilter) == 0);
+                        (entity && entity.title.en.indexOf($scope.countryFilter) == 0)
+                        ||$scope.countryFilter == 'isPartyToCBD' && !entity.isSignatory && !entity.isRatified
+                        ||$scope.countryFilter == 'isSignatory' && entity.isSignatory
+                        ||$scope.countryFilter == 'isRatified' && entity.isRatified;
 
                 };
                 $scope.selectedCount = function() {
@@ -154,7 +157,7 @@ define(['app','/app/js/common.js'], function (app) {
                 $scope.$on("clearFilter", function(evt, info){
                     if(!$scope.terms)
                         return;
-                        
+
                     $scope.terms.forEach(function(data){
                         if(data.selected)
                             data.selected = false;

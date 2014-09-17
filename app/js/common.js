@@ -102,6 +102,21 @@ define(['app'], function(app){
 						this.isUserInRole('Administrator')
 
 			}
+
+			this.isPartyToCBD= function(entity){
+	            return entity && entity.treaties.XXVII8.party != null;
+	        }
+
+	        this.isSignatory = function(entity){
+	            return entity && entity.treaties.XXVII8b.signature != null;
+	         }
+
+	        this.isRatified= function(entity){
+	            return entity && (entity.treaties.XXVII8b.instrument == "ratification" ||
+	                              entity.treaties.XXVII8b.instrument == "accession" ||
+	                              entity.treaties.XXVII8b.instrument == "acceptance"
+	                              || entity.treaties.XXVII8b.instrument == "approval" );
+	         }
 		}
 	}]);
 });
