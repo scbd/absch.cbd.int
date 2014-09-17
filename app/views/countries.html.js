@@ -196,6 +196,9 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
                         var search = _.where(data.pivot, {value:action});
                         if(search.length>0){
                             $("#jqvmap1_"+data.value.toLowerCase()).attr("fill", "#428bca");
+                            //fix for taiwan
+                            if(data.value.toLowerCase()=='cn')
+                                $("#jqvmap1_tw").attr("fill", "#808080");
                         }
                     });
             }
