@@ -9,7 +9,7 @@
          <li><a href="/find/?tour=start"> <i class=" fa-1 fa fa-circle"></i> Introduction to the Search</a></li>
 
 
-         <li style="padding-top:10px;font-weight:bold;">Registering Information  <span ng-hide="user && user.isAuthenticated">(you must be signed in to access these tours)</span></li>
+         <li style="padding-top:10px;font-weight:bold;">Registering Information  <span ng-hide="user && user.isAuthenticated">(you must be signed in)</span></li>
 
          <span ng-show="user && user.isAuthenticated">
              <li ng-show="user && user.isAuthenticated"><a href="/dashboard/?tour=start"> <i class=" fa-1 fa fa-circle"></i> Introduction to the Dashboard</a></li>
@@ -21,7 +21,7 @@
          </span>
 
 
-         <li style="padding-top:10px;font-weight:bold;">Submission forms/Common formats <span ng-hide="user && user.isAuthenticated" >(you must be signed in to access these tours)</span></li>
+         <li style="padding-top:10px;font-weight:bold;">Submission forms/Common formats <span ng-hide="user && user.isAuthenticated" >(you must be signed in)</span></li>
 
          <span ng-show="user && user.isAuthenticated">
              <li><a href="/register/CNA/new/?tour=start"> <i class=" fa-1 fa fa-circle"></i> Competent National Authority (CNA)</a></li>
