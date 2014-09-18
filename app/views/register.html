@@ -60,6 +60,7 @@
                         <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : document_type==type ,'btn-commonformat-reference-selected' : document_type=='resource' && document_type==type}">
                           <div class="btn-commonformat-national" ng-class="{'btn-commonformat-reference':document_types[type].abbreviation=='VLR'}">{{document_types[type].abbreviation}}
 
+                            <div style="padding-right:10px;position:relative;top:-15px;">
                             <div class="flip pull-right" ng-show="facets(type,'draft') > 0">
                                 <div class="card" ng-class="{cardMargin:facets(type,'publish')>9}">
                                     <div class="face front">
@@ -74,13 +75,14 @@
                                   </div>
                                 </div>
                             </div>
-                            <div class="flip pull-right" ng-show="facets(type,'request') > 0">
+                            <div class="flip pull-right"   ng-show="facets(type,'request') > 0">
                                 <div class="card" >
                                     <div class="face front">
                                         <div ng-show="facets(type,'request') > 0" class="label label-danger">{{facets(type,'request')}}</div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                           </div>
                           <div class="btn-commonformat-name" >{{document_types[type].title}}</div>
                         </div>
