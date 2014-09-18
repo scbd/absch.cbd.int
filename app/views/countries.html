@@ -155,7 +155,7 @@
           <div class="row" >
               <div class="col-lg-2" ng-repeat="facet in commonFormatFacets" style="padding:5px !important;width:13.66% !important">
                     <div style="width: 180px; height: 100px;cursor:pointer;" ng-click="selected_facet=facet[0];updateMap(facet[0]);">
-                          <div class="numberCircle facetCircle" ng-class="{'active-circle active-facet': isSelected(facet[0])}">
+                          <div class="numberCircle1 facetCircle" ng-class="{'active-circle active-facet': isSelected(facet[0])}">
                           {{facet[1]}}</div>
                           <div style="padding-top:5px;padding-left:30px;font-size: 10px; text-transform: uppercase;font-weight:bold;">
                           {{facet[0]|schemaShortName}}</div>
