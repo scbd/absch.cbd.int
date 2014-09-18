@@ -1,12 +1,12 @@
 <link href="/app/css/register.css" rel="stylesheet">
 
-<div ng-cloak ng-controller="RegisterController">
+<div ng-cloak ng-controller="RegisterController" >
   <div class="container">
     <div class="row">
       <div class="col-xs-3" id="document_type_links" ng-show="user.isAuthenticated">
         <h1>Register Information</h1><br>
         <div>
-          <h3 ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/dashboard.html'}"  style="padding:5px; margin:0!important;">
+          <h3 class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/dashboard.html'}"  style="padding:5px; margin:0!important;">
             <a href="/dashboard"  href="#" role="button">
               <i class="glyphicon glyphicon-list-alt" style="position:relative;top:2px;"></i> My Dashboard
             </a>
@@ -15,8 +15,8 @@
           <h3>Requests</h3>
 
 
-            <span ng-show="compareRoles(user.roles, PAroles)">
-                <div class="btn-commonformat"  ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-tasks.directive.html'}" style="padding:5px;margin:3px!important;">
+            <span ng-show="compareRoles(user.roles, PAroles)" >
+                <div class="btn-commonformat "  ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-tasks.directive.html'}" style="padding:5px;margin:3px!important;">
                 <a href="/dashboard/pending"  href="#" role="button">
                     Requests for your approval
                     <span class="flip pull-right">
@@ -28,7 +28,7 @@
                     </span>
                 </a></div>
             </span>
-            <div class="btn-commonformat"  ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-pending-tasks.directive.html'}" style="padding:5px;margin:3px!important; ">
+            <div class="btn-commonformat "  ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-pending-tasks.directive.html'}" style="padding:5px;margin:3px!important; ">
             <a href="/dashboard/mytasks"  href="#" role="button">
               Your pending requests
                     <span class="flip pull-right ">
@@ -39,7 +39,7 @@
                     </span>
                   </span>
             </a></div>
-            <div class="btn-commonformat"  ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-completed-tasks.directive.html'}" style="padding:5px;margin:3px!important; ">
+            <div class="btn-commonformat "  ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-completed-tasks.directive.html'}" style="padding:5px;margin:3px!important; ">
              <a href="/dashboard/completed" href="#" role="button">
               Your completed requests
                     <span class="flip pull-right ">
@@ -52,10 +52,6 @@
             </a></div>
 
 
-
-
-
-
                 <div ng-repeat="heading in subheadings" >
 
                 <div ng-show="compareRoles(user.roles, heading.roles)" >
@@ -64,21 +60,21 @@
                         <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : document_type==type ,'btn-commonformat-reference-selected' : document_type=='resource' && document_type==type}">
                           <div class="btn-commonformat-national" ng-class="{'btn-commonformat-reference':document_types[type].abbreviation=='VLR'}">{{document_types[type].abbreviation}}
 
-                            <div class="flip pull-right" >
+                            <div class="flip pull-right" ng-show="facets(type,'draft') > 0">
                                 <div class="card" ng-class="{cardMargin:facets(type,'publish')>9}">
                                     <div class="face front">
                                         <div ng-show="facets(type,'draft') > 0" class="label label-default">{{facets(type,'draft')}}</div>
                                   </div>
                                 </div>
                             </div>
-                            <div class="flip pull-right">
+                            <div class="flip pull-right" ng-show="facets(type,'publish') > 0">
                                 <div class="card" ng-class="{cardMargin:facets(type,'request')>9}">
                                     <div class="face front">
                                         <div ng-show="facets(type,'publish') > 0" class="label label-success">{{facets(type,'publish')}}</div>
                                   </div>
                                 </div>
                             </div>
-                            <div class="flip pull-right">
+                            <div class="flip pull-right" ng-show="facets(type,'request') > 0">
                                 <div class="card" >
                                     <div class="face front">
                                         <div ng-show="facets(type,'request') > 0" class="label label-danger">{{facets(type,'request')}}</div>
@@ -105,7 +101,7 @@
 
       <!-- TODO: if not authenticated, should be handled by the router, which redirects the user to login, NOT by a hidden div -->
 
-<div  ng-hide="user.isAuthenticated">
+<div  ng-hide="user.isAuthenticated" class="bg-texture-litegrey">
 <div class="container">
 
       <div class="col-xs-12" ng-hide="user.isAuthenticated" style="padding-top:20px;">
@@ -119,7 +115,7 @@
 
             <div class="col-xs-12" style="padding-top:30px;">
               <hr>
-              <h3 class="dropshadow1">Designation of the ABS Clearing-House publishing authority and national authorised users</h3>
+              <h3 class="dropshadow1">Designation of the ABS Clearing-House publishing authority(PA) and national authorised users(NAU)</h3>
               <p>In order to operationalize the ABS Clearing-House, Parties need to nominate a single publishing authority to clear national records prior to publishing them in the ABS Clearing-House.</p>
               <p>The registration of who has the authority to publish national records in the ABS Clearing-House can only be done by the Secretariat upon receipt of an official written communications addressed to the Executive Secretary and endorsed as follows by the focal point for the Intergovernmental Committee for the Nagoya Protocol (ICNP Focal Point). The duties of the ICNP Focal Point could also be expanded to incorporate the role of the publishing authority.</p>
 
