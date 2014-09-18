@@ -1,0 +1,43 @@
+<div class="panel panel-info">
+<div class="panel-heading" style="height:50px">
+ABSCH Stats
+    <div class="pull-right" style="max-width:300px">
+        <div afc-autocomplete ng-model="document.countryStats"
+         source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true"
+         placeholder="Please select a country..."></div>
+    </div>
+</div>
+  <div class="panel-body">
+    <div class="text-center" >
+        <h1 style="color:#fa6938">
+            <i ng-show="loadingFacets" class="fa fa-spinner fa-spin"></i>
+            <span ng-show="commonFormatFacets.length==0 && !loadingFacets">No details available</span>
+        </h1>
+    </div>
+    <div class="row" ng-hide="loadingFacets">
+            <div class="col-lg-2 col-md-4" ng-repeat="facet in commonFormatFacets">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-comments fa-2x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge">{{facet[1]}}</div>
+                                <div>{{facet[0]|schemaShortName}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Details</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+  </div>
+
+</div>
