@@ -66,7 +66,7 @@
 			<label>Web Sites</label>
 			<div class="km-value" ng-repeat="item in document.websites">
 				<ul class="list">
-					<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+					<a target="_new_" ng-href="{{item.url}}">{{item.name||item.url}}</a>
 					<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 				</ul>
 			</div>
