@@ -18,7 +18,7 @@
                 <!-- <div class="row"  >
                     <div class="col-xs-12"> -->
                         <div class="row-fluid text-row km-value"
-							ng-repeat="document in documents | orderBy:column:reverse" >
+							ng-repeat="document in documents | orderBy:column:true" >
 <!-- data-toggle="tooltip" data-placement="top" -->
                         	<div class="col-xs-3"> <i ng-show="$first" class="fa fa-star" style="color:#f0ad4e;"></i> <strong>{{document.createdOn |formatDateWithTime}}</strong></div>
                             <div class="col-xs-2" >
