@@ -91,7 +91,7 @@
 					<li ng-repeat="item in registeredMeasures">
 						<div ng-hide="item.errorCode">
 							<b>{{item.document.title|lstring:locale}}</b>
-							<div class="km-pre">{{item.document.summary|lstring:locale}}</div>
+							<div class="km-pre" ng-bind-html="item.document.summary|lstring:locale"></div>
 						</div>
 						<div class="alert alert-block" ng-show="item.errorCode"><strong>Record not found</strong> {{item.identifier}}</div>
 					</li>

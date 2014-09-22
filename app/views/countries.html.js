@@ -104,6 +104,21 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
                               || entity.treaties.XXVII8b.instrument == "approval" );
          }
 
+         $scope.hasFacets= function(entity){
+            // console.log($scope.commonFormatFacets,$scope.selected_facet);
+
+             for(var i=0; i<$scope.commonFormatFacets.length;i++){
+                 var data = $scope.commonFormatFacets[i];
+
+                 if(data[0] == $scope.selected_facet){
+                     //console.log(data[1].countries.indexOf(entity.code.toLowerCase()));
+                     return data[1].countries.indexOf(entity.code.toLowerCase())>0
+                }
+             }
+
+            return false;
+         }
+
          function loadMap(colors){
 
             if(!colors)
@@ -199,6 +214,7 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
                 });
             }
             else{
+                    $scope.searchFilter = $scope.hasFacets;
                     _.each($scope.countryFacets['government_s,schema_s'], function(data){
                         var colorCountry = false;
                         var search = _.where(data.pivot, {value:action});
@@ -213,14 +229,19 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
         }
 
         $scope.isSelected = function(facet){
+
+            //
             return facet == $scope.selected_facet;
         }
+
 
         function CalculateFacets(){
             var tempFacets = {};
             _.each($scope.countryFacets['government_s,schema_s'], function(data){
                 _.each(data.pivot, function(facets){
-                    tempFacets[facets.value] = (tempFacets[facets.value] ? tempFacets[facets.value] : 0) + facets.count;
+                    tempFacets[facets.value] = {"facetCount" : (tempFacets[facets.value] ? tempFacets[facets.value].facetCount : 0) + facets.count,
+                                                "countryCount" : (tempFacets[facets.value] ? tempFacets[facets.value].countryCount : 0) + 1,
+                                                "countries" : (tempFacets[facets.value] ? tempFacets[facets.value].countries : '') + data.value + ','};
                 });
 
             });
