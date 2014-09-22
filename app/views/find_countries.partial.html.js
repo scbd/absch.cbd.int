@@ -22,6 +22,7 @@ define(['app','/app/js/common.js'], function (app) {
                 $scope.selectedItems = [];
                 $scope.facet = $scope.field.replace('_s', ''); // TODO: replace @field by @facet
                 $scope.countryFilter ='All';
+                $scope.typeFilter = 'All';
 
 
                 var parameters = $location.search();
@@ -105,10 +106,18 @@ define(['app','/app/js/common.js'], function (app) {
                 };
                 $scope.filterCountries = function(entity){
                         return $scope.countryFilter == 'All' ||
-                        (entity && entity.title.en.indexOf($scope.countryFilter) == 0)
-                        ||$scope.countryFilter == 'isPartyToCBD' && !entity.isSignatory && !entity.isRatified
-                        ||$scope.countryFilter == 'isSignatory' && entity.isSignatory
-                        ||$scope.countryFilter == 'isRatified' && entity.isRatified;
+                        (entity && entity.title.en.indexOf($scope.countryFilter) == 0);
+                        // ||$scope.countryFilter == 'isPartyToCBD' && !entity.isSignatory && !entity.isRatified
+                        // ||$scope.countryFilter == 'isSignatory' && entity.isSignatory
+                        // ||$scope.countryFilter == 'isRatified' && entity.isRatified;
+
+                };
+
+                $scope.filterByType = function(entity){
+                        return $scope.typeFilter == 'All'
+                        ||$scope.typeFilter == 'isPartyToCBD' && !entity.isSignatory && !entity.isRatified
+                        ||$scope.typeFilter == 'isSignatory' && entity.isSignatory
+                        ||$scope.typeFilter == 'isRatified' && entity.isRatified;
 
                 };
                 $scope.selectedCount = function() {

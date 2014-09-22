@@ -43,9 +43,10 @@
                     <div class="modal-body">
                         <div class="filter-options">
                             <div style="text-align:center;padding-bottom:5px" >
-                                <a ng-href="#" ng-click="setCountryFilter('isPartyToCBD')"><span class="label label-default">Not Ratified</span></a>
-                                <a ng-href="#" ng-click="setCountryFilter('isRatified')"><span class="label label-primary">Ratified</span></a>
-                                <a ng-href="#" ng-click="setCountryFilter('isSignatory')"><span class="label label-info">Signatory</span></a>
+                                <a ng-href="#" ng-click="typeFilter = 'All'"><span class="label label-success" ng-class="{'letter-active' : typeFilter == 'All'}">All</span></a>
+                                <a ng-href="#" ng-click="typeFilter = 'isPartyToCBD'"><span class="label label-default" ng-class="{'letter-active' : typeFilter == 'isPartyToCBD'}">Not Ratified</span></a>
+                                <a ng-href="#" ng-click="typeFilter = 'isRatified'"><span class="label label-primary" ng-class="{'letter-active' : typeFilter == 'isRatified'}">Ratified</span></a>
+                                <a ng-href="#" ng-click="typeFilter = 'isSignatory'"><span class="label label-info" ng-class="{'letter-active' : typeFilter == 'isSignatory'}">Signatory</span></a>
                               </div>
                             <div style="padding-bottom:5px">
                                 <span ng-repeat="letter in alphabet">
@@ -59,7 +60,7 @@
                                       </div>
                                 </div>
                                 <div class="col-xs-4" style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;padding-left:5px;padding-right:5px;"
-                                ng-repeat="item in (terms | filter: filterCountries | orderBy:'title.en')">
+                                ng-repeat="item in (terms | filter: filterCountries | filter:filterByType |orderBy:'title.en')">
                                     <div class="checkbox" style="margin-top:2px;margin-bottom:2px">&nbsp;
                                             <label class="label label-party"
                                             ng-class="{'label-info':item.isSignatory && !item.isRatified, 'label-primary':item.isRatified,
