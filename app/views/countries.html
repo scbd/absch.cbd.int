@@ -132,16 +132,38 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="row" >
-              <div class="col-lg-2" ng-repeat="facet in commonFormatFacets" style="padding:5px !important;width:13.66% !important">
+                <div class="col-lg-1" style="padding:5px !important;width:10.66% !important">
                 <a ng-href="#">
-                    <div class="panel panel-info"
+                    <div class="panel panel-default"
+                    ng-class="{'panel-primary': isSelected('party')}"  ng-click="searchFilter=isPartyToCBD;updateMap('party')">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-10 text-center">
+                                    <div class="huge">All</div>
+                                </div>
+                                <div class="col-xs-10 text-right">
+                                    <div class="huge">&nbsp;</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <span class="pull-left">View</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </a>
+              </div>
+              <div class="col-lg-1" ng-repeat="facet in commonFormatFacets" style="padding:5px !important;width:10.66% !important">
+                <a ng-href="#">
+                    <div class="panel panel-default"
                     ng-class="{'panel-primary': isSelected(facet[0])}"  ng-click="selected_facet=facet[0];updateMap(facet[0]);">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-10 text-right">
                                     <div class="huge">{{facet[0]|schemaShortName}} {{facet[1].facetCount}}</div>
                                 </div>
-                                <div class="col-xs-10 text-right">
+                                <div class="col-xs-12 text-right">
                                     <div class="huge">Countries {{facet[1].countryCount}}</div>
                                 </div>
                             </div>
