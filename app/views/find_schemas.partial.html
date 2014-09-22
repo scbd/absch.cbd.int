@@ -202,6 +202,9 @@ label{width:100%;}
             <input type="checkbox" ng-model="meeting.selected" bind-indeterminate="meeting.indeterminate" ng-change="refresh(meeting.selected,'meeting')">
             <span class="filter-text">Meetings &amp; Meeting Outcomes </span>
         </label>
+        <div ng-show="meeting.selected" class="subfilters-section">
+            <div km-select ng-model="mtgRange" binding-type="string" placeholder="Meeting year" items="options.meetingYear()"></div>
+        </div>
     </div>
 
     <div class="main_filter" ng-show="showReferenceFilters || notification.selected" ng-class="{'check_active': notification.selected}">
