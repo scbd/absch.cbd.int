@@ -29,7 +29,7 @@ app.directive('documentList', function ($http, $filter) {
 
                 if((document.recordtype == "referenceRecord" && document.schema != "resource") ||document.schema == "focalPoint")
 					return document.id;
-                else{console.log(document)
+                else{//console.log(document)
                     return $filter("uniqueIDWithoutRevision")(document.doc.identifier_s);}
 			 }
 
@@ -331,6 +331,7 @@ app.directive('documentList', function ($http, $filter) {
                         }
                     }
                     else if(document.schema_s=='meeting') {
+                        output.createdDateOn = document.startDate_s;
                         output.recordtype="referenceRecord";
                         output.eventCity=document.eventCity_EN_t;
                         output.eventCountry=document.eventCountry_EN_t;
