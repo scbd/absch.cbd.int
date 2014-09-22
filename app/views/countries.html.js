@@ -60,6 +60,7 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
             }
 
             countryColors['tw'] = "#808080";
+            countryColors['gl'] = "#428bca";
 
              loadMap(countryColors);
              $scope.slideMap('#mapDiv','#listDiv');
@@ -144,6 +145,8 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
                             //tiwan should be shown as China
                             if(code == 'tw')
                                 code = 'cn'
+                            if(code == 'gl')//greenland  as denmark
+                                code = 'dk'
                             // console.log(code);
                             var country = _.where($scope.countries, {code: code.toUpperCase()})
                             var countryFacet = _.where($scope.countryFacets["government_s,schema_s"], {value: code})
@@ -200,11 +203,14 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
             });
             //fix for taiwan
             $("#jqvmap1_tw").attr("fill", "#fff");
+            $("#jqvmap1_gl").attr("fill", "#fff");
             if(action == 'signatory' || action == 'party' || action == 'ratified'){
                 _.each($scope.countries, function(country){
 
-                    if((action == 'party' || action == 'ratified') && country.isRatified)
+                    if((action == 'party' || action == 'ratified') && country.isRatified){
                         $("#jqvmap1_"+country.code.toLowerCase()).attr("fill", "#428bca");
+                        $("#jqvmap1_gl").attr("fill", "#428bca");
+                    }
                     else if((action == 'party' || action == 'signatory') && country.isSignatory)
                         $("#jqvmap1_"+country.code.toLowerCase()).attr("fill", "#5bc0de");
                     else if(action == 'party' && country.isParty){
@@ -223,6 +229,9 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
                             //fix for taiwan
                             if(data.value.toLowerCase()=='cn')
                                 $("#jqvmap1_tw").attr("fill", "#808080");
+
+                            if(data.value.toLowerCase()=='dk')
+                                $("#jqvmap1_gl").attr("fill", "#428bca");
                         }
                     });
             }
