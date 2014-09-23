@@ -69,7 +69,15 @@ app.directive('searchFilterSchemas', function ($http) {
                 languages               : function () { return $http.get("/api/v2013/thesaurus/domains/ISO639-2/terms", { cache: true }).then(function(o){
                                                                       return $filter("orderBy")(o.data, "name");
                                                                     })},
+                meetingYear             : function () {
+                                                        var year = [];
+                                                        year.push({'identifier':'[' + moment().add('days',1).format("YYYY-MM-DD")+ 'T00:00:00Z TO *]','name' : 'Upcomming meetings'});
+                                                        year.push({'identifier':'[* TO ' + moment().format("YYYY-MM-DD") + 'T00:00:00Z ]','name' : 'Previous meetings'});
+                                                        for (var i=moment().year(); i>= 2009; i--)
+                                                            year.push({'identifier':'['+i + '-01-01T00:00:00Z TO ' + i + '-12-31T00:00:00Z]','name' : '' + i});
 
+                                                        return year;
+                                                      },
             };
 
             $scope.isSelected = function(item) {
@@ -164,7 +172,17 @@ app.directive('searchFilterSchemas', function ($http) {
                         var subFilterQuery = '(' + $scope.field+':'+item.identifier;
                         if(item.subFilters){
                             item.subFilters.forEach(function(filter){
-                                if(filter.type=='multiselect'){
+                                if(filter.type=='select'){
+                                    if( $scope[filter.name] && $scope[filter.name].length > 0){
+
+                                        var selectedValues = $scope[filter.name];
+                                        if(typeof selectedValues[0]== "object" )
+                                            selectedValues = _.pluck(selectedValues, "identifier");
+
+                                        subFilterQuery = subFilterQuery + ' AND (' + filter.field +':'+ selectedValues + ')';
+                                    }
+                                }
+                                else if(filter.type=='multiselect'){
                                     if( $scope[filter.name] && $scope[filter.name].length > 0){
 
                                         var selectedValues = $scope[filter.name];
@@ -319,7 +337,11 @@ app.directive('searchFilterSchemas', function ($http) {
                                                             ]
                                                };
             $scope.organization            = { identifier: 'organization',             title: 'ABS Related Organizations' };
-            $scope.meeting                 = { identifier: 'meeting',                  title: 'Meetings &amp; Meeting Outcomes ({{meeting.count}})' };
+            $scope.meeting                 = { identifier: 'meeting',                  title: 'Meetings &amp; Meeting Outcomes ({{meeting.count}})',
+                                               subFilters : [
+                                                                { name: 'mtgRange', type: 'select', field: 'startDate_dt'},
+                                                            ]
+                                             };
             $scope.notification            = { identifier: 'notification',             title: 'Notifications' };
             $scope.pressRelease            = { identifier: 'pressRelease',             title: 'Press Releases' };
             $scope.statement               = { identifier: 'statement',                title: 'Statements' };

@@ -129,21 +129,34 @@
     <div class="row" >
 
         <div class="col-xs-6">
-            <h3>Latest National Records</h3>
-            <div  style="max-height:300px;overflow:scroll;padding-right:15px">
-                <div class="text-center"ng-hide="rawNationalDocs"><h1 style="color:#fa6938"><i class="fa fa-spinner fa-spin"></i></h1></div>
-                <div document-list documents='rawNationalDocs' filter='*' show-pagination='false' current-page='currentPage' document-Count='documentCount'>
+
+            <div class="panel panel-success">
+                <div class="panel-heading active">
+                    Latest National Records
+                </div>
+                <div class="panel-body">
+                    <div  style="max-height:300px;overflow:scroll;padding-right:15px">
+                        <div class="text-center"ng-hide="rawNationalDocs"><h1 style="color:#fa6938"><i class="fa fa-spinner fa-spin"></i></h1></div>
+                        <div document-list documents='rawNationalDocs' filter='*' show-pagination='false' current-page='currentPage' document-Count='documentCount'>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="col-xs-6">
-            <h3>Latest Virtual Library Records</h3>
-            <div  style="max-height:300px;overflow:scroll;padding-right:15px">
-                <div class="text-center" ng-hide="rawRefDocs"><h1 style="color:#fa6938"><i class="fa fa-spinner fa-spin"></i></h1></div>
-                <div document-list documents='rawRefDocs' filter='*' show-pagination='false' current-page='currentPage' document-Count='documentCount'>
+            <div class="panel panel-success">
+                <div class="panel-heading active">
+                    Latest Virtual Library Records
                 </div>
-            </div>
+                <div class="panel-body">
+                    <div  style="max-height:300px;overflow:scroll;padding-right:15px">
+                        <div class="text-center" ng-hide="rawRefDocs"><h1 style="color:#fa6938"><i class="fa fa-spinner fa-spin"></i></h1></div>
+                        <div document-list documents='rawRefDocs' filter='*' show-pagination='false' current-page='currentPage' document-Count='documentCount'>
+                        </div>
+                    </div>
+                </div>
+            </div>        
         </div>
 
     </div>
