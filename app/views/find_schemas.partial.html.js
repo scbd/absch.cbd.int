@@ -71,7 +71,7 @@ app.directive('searchFilterSchemas', function ($http) {
                                                                     })},
                 meetingYear             : function () {
                                                         var year = [];
-                                                        year.push({'identifier':'[' + moment().add('days',1).format("YYYY-MM-DD")+ 'T00:00:00Z TO *]','name' : 'Upcomming meetings'});
+                                                        year.push({'identifier':'[' + moment().add('days',1).format("YYYY-MM-DD")+ 'T00:00:00Z TO *]','name' : 'Upcoming meetings'});
                                                         year.push({'identifier':'[* TO ' + moment().format("YYYY-MM-DD") + 'T00:00:00Z ]','name' : 'Previous meetings'});
                                                         for (var i=moment().year(); i>= 2009; i--)
                                                             year.push({'identifier':'['+i + '-01-01T00:00:00Z TO ' + i + '-12-31T00:00:00Z]','name' : '' + i});
