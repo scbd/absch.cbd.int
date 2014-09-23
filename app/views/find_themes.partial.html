@@ -9,23 +9,23 @@
         <div ng-repeat="item in terms | orderBy:'title' | filter:showSelected" ng-class="ccc(item)" ng-click="ts(this, $event)">
         		<label><!-- <div class="glyphicon glyphicon-remove"></div>  -->
                     <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">
-                    <strong>{{item.title.en}} ({{item.count ? item.count : 0}})</strong>
+                    <strong>&nbsp;{{item.title.en}} ({{item.count ? item.count : 0}})</strong>
                 </label>
                 <div class="checkbox" ng-repeat="item in item.narrowerTerms | filter:showSelected" style="padding-left:20px">
                     <label><!-- <div class="glyphicon glyphicon-remove"></div>  -->
-                        <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">{{item.title.en}} ({{item.count ? item.count : 0}})</label>
+                        <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">&nbsp;{{item.title.en}} ({{item.count ? item.count : 0}})</label>
                     <div class="checkbox" ng-repeat="item in item.narrowerTerms | filter:showSelected" style="padding-left:20px">
                         <label><!-- <div class="glyphicon glyphicon-remove"></div>  -->
-                            <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">{{item.title.en}} ({{item.count ? item.count : 0}})</label>
+                            <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">&nbsp;{{item.title.en}} ({{item.count ? item.count : 0}})</label>
                         <div class="checkbox" ng-repeat="item in item.narrowerTerms" style="padding-left:20px">
                             <label><!-- <div class="glyphicon glyphicon-remove"></div>  -->
-                                <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">{{item.title.en}} ({{item.count ? item.count : 0}})</label>
+                                <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">&nbsp;{{item.title.en}} ({{item.count ? item.count : 0}})</label>
                             <div class="checkbox" ng-repeat="item in item.narrowerTerms | filter:showSelected" style="padding-left:20px">
                                 <label><!-- <div class="glyphicon glyphicon-remove"></div>  -->
-                                    <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">{{item.title.en}} ({{item.count ? item.count : 0}})</label>
+                                    <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">&nbsp;{{item.title.en}} ({{item.count ? item.count : 0}})</label>
                                 <div class="checkbox" ng-repeat="item in item.narrowerTerms | filter:showSelected" style="background-color:red;padding-left:20px">
                                     <label><!-- <div class="glyphicon glyphicon-remove"></div>  -->
-                                        <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">{{item.title.en}} ({{item.count ? item.count : 0}})</label>
+                                        <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">&nbsp;{{item.title.en}} ({{item.count ? item.count : 0}})</label>
                                 </div>
                             </div>
                         </div>
@@ -82,23 +82,23 @@
 
                         <label>
                             <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">
-                            <strong>{{item.title.en}} ({{item.count ? item.count : 0}})</strong>
+                            <strong>&nbsp;{{item.title.en}} ({{item.count ? item.count : 0}})</strong>
                         </label>
                         <div class="checkbox" ng-repeat="item in item.narrowerTerms" style="padding-left:20px">
                             <label>
-                                <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">{{item.title.en}} ({{item.count ? item.count : 0}})</label>
+                                <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">&nbsp;{{item.title.en}} ({{item.count ? item.count : 0}})</label>
                             <div class="checkbox" ng-repeat="item in item.narrowerTerms" style="padding-left:20px">
                                 <label>
-                                    <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">{{item.title.en}} ({{item.count ? item.count : 0}})</label>
+                                    <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">&nbsp;{{item.title.en}} ({{item.count ? item.count : 0}})</label>
                                 <div class="checkbox" ng-repeat="item in item.narrowerTerms" style="padding-left:20px">
                                     <label>
-                                        <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">{{item.title.en}} ({{item.count ? item.count : 0}})</label>
+                                        <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">&nbsp;{{item.title.en}} ({{item.count ? item.count : 0}})</label>
                                     <div class="checkbox" ng-repeat="item in item.narrowerTerms" style="padding-left:20px">
                                         <label>
-                                            <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">{{item.title.en}} ({{item.count ? item.count : 0}})</label>
+                                            <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">&nbsp;{{item.title.en}} ({{item.count ? item.count : 0}})</label>
                                         <div class="checkbox" ng-repeat="item in item.narrowerTerms" style="background-color:red;padding-left:20px">
                                             <label>
-                                                <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">{{item.title.en}} ({{item.count ? item.count : 0}})</label>
+                                                <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">&nbsp;{{item.title.en}} ({{item.count ? item.count : 0}})</label>
                                         </div>
                                     </div>
                                 </div>

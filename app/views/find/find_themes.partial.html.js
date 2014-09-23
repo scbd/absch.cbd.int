@@ -231,7 +231,7 @@ app.directive('searchFilterThemes', function ($http) {
             function buildConditions (conditions, items) {
                 items.forEach(function (item) { 
                     if(item.selected)
-                        conditions.push('thematicAreas_REL_ss:'+item.identifier);
+                        conditions.push('thematicAreas_ss:'+item.identifier);
                     else if(item.narrowerTerms) {
                         buildConditions(conditions, item.narrowerTerms);
                     }

@@ -181,7 +181,7 @@ console.log(realm);
                         'wt': 'json',
                         'rows': 0,		//limit
                         'facet': true,	//get counts back
-                        'facet.field': ['schema_s', 'government_s', 'aichiTarget_REL_ss', 'thematicAreas_REL_ss', 'government_REL_ss'],
+                        'facet.field': ['schema_s', 'government_s', 'aichiTarget_REL_ss', 'thematicAreas_ss', 'government_REL_ss'],
                         'facet.limit': 512
                     };
 
@@ -191,7 +191,7 @@ console.log(realm);
                         $scope.governments = readFacets2(data.facet_counts.facet_fields.government_s);
                         $scope.regions = readFacets2(data.facet_counts.facet_fields.government_ss);
                         $scope.aichiTargets = readFacets2(data.facet_counts.facet_fields.aichiTarget_REL_ss);
-                        $scope.thematicAreas = readFacets2(data.facet_counts.facet_fields.thematicAreas_REL_ss);
+                        $scope.thematicAreas = readFacets2(data.facet_counts.facet_fields.thematicAreas_ss);
                         $scope.regionFacets = readFacets2(data.facet_counts.facet_fields.government_REL_ss);
                         //console.log(data.facet_counts.facet_fields);
                         //console.log($scope.thematicAreas);
