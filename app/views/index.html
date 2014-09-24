@@ -119,8 +119,71 @@
 
 
 
+<div class="container" style="padding-top:20px;">
 
-<div class="container">
+    <div class="row">
+
+        <div class="col-md-8">
+
+        <div class="home-col">
+                <h1>About the Nagoya Protocol</h1>
+                The Nagoya Protocol on Access to Genetic Resources and the Fair and Equitable Sharing of Benefits Arising from their Utilization to the Convention on Biological Diversity is an international agreement which aims at sharing the benefits arising from the utilization of genetic resources in a fair and equitable way, including by appropriate access to genetic resources and by appropriate transfer of relevant technologies, taking into account all rights over those resources and to technologies, and by appropriate funding, thereby contributing to the conservation of biological diversity and the sustainable use of its components.
+                <a href="http://www.cbd.int/abs"> <i class="fa fa-forward"></i> read more at: www.cbd.int/abs</a>
+            </div>
+            <br>
+
+
+
+
+
+            <!-- <div class="home-col">
+                <h3>News from the development blog</h3>
+                    <div class="feeds">
+                    <ul>
+
+                        <li ng-repeat="feed in feeds | filter:filterText" style="padding-top:10px;">
+                            <h4><a href="{{feed.link}}" target="_new" style="color:#287fcb;font-size:14px;font-weight:bold;">{{feed.title}}</a></h4>
+                            <p class="text-left">{{feed.contentSnippet}}</p>
+                            <span class="small" >{{feed.publishedDate | date:'dd MMM yyyy'}}</span>
+                        </li>
+                    </ul>
+                    </div>
+            </div> -->
+        </div>
+
+        <div class="col-md-4">
+            <div class="home-col">
+
+            <br>
+                    <div class="well text-center">
+                <span style="color:#000;font-weight:bold; font-size:50px;text-shadow: 0 1px 2px rgba(0, 0, 0, .6);">
+
+                      {{daysUntilEntry}}</span><br><span style="color: #999; text-transform: uppercase;font-weight:bold;font-size:16px;">
+
+                          Days left until entry into force of the Nagoya Protocol</span>
+            </div>
+
+
+                <!--    <h3>Meetings</h3>
+             <div class="feeds">
+                    <ul>
+                        <li ng-repeat="meeting in meetings.response.docs" style="padding-top:10px;">
+                             <span class="small" >{{meeting.startDate_s | date:'dd MMM'}} - {{meeting.endDate_s | date:'dd MMM yyyy'}}
+                            </span>
+                            <h4><a href="{{meeting.url_ss[0]}}" target="_new" style="color:#287fcb;font-size:14px;font-weight:bold;">
+                            {{meeting.title_t}}</a></h4>
+                            <span>
+                            <strong>{{meeting.eventCountry_EN_t}}</strong></span>
+                        </li>
+                    </ul>
+                    </div> -->
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="container" style="padding-top:20px;">
     <!-- <div class="row">
         <div class="col-xs-12">
             <span home-country-dashboard></span>
@@ -130,22 +193,53 @@
 
         <div class="col-xs-6">
 
-            <div class="panel panel-success">
-                <div class="panel-heading active">
-                    Latest National Records
+
+                <h1>Latest National Records</h1>
+
+                <div ng-repeat="doc in rawNationalDocs">
+                    <div class="latest">
+                        <a  href="/database/record?documentID={{document.schema=='MEETING' ? doc.id : doc.identifier_s}}&documentSchema={{doc.schema_EN_t}}" class="latest-link">
+                        <span class="latest-date"> {{doc.createdDate_dt | formatDate}} </span> |
+                        <span class="latest-country"> {{doc.government_EN_t}} </span> |
+                        <span class="latest-schema"> {{doc.schema_EN_t | schemaName}} </span>
+                        <div class="latest-title">{{doc.title_t}} </div>
+                     </a>
+                 </div>
                 </div>
-                <div class="panel-body">
+
+                <hr>
+
+                <!-- {{rawNationalDocs}} -->
+
+
+                <!-- <div class="panel-body">
                     <div  style="max-height:300px;overflow:scroll;padding-right:15px">
                         <div class="text-center"ng-hide="rawNationalDocs"><h1 style="color:#fa6938"><i class="fa fa-spinner fa-spin"></i></h1></div>
-                        <div document-list documents='rawNationalDocs' filter='*' show-pagination='false' current-page='currentPage' document-Count='documentCount'>
-                        </div>
+                        <div document-list documents='rawNationalDocs' filter='*' show-pagination='false' current-page='currentPage' document-Count='documentCount'></div>
                     </div>
-                </div>
-            </div>
+                </div> -->
         </div>
 
         <div class="col-xs-6">
-            <div class="panel panel-success">
+
+
+
+                <h1>Latest Virtual Library Records</h1>
+
+                <div ng-repeat="doc in rawRefDocs">
+                    <div class="latest">
+                        <a  href="/database/record?documentID={{document.schema=='MEETING' ? doc.id : doc.identifier_s}}&documentSchema={{doc.schema_EN_t}}" class="latest-link">
+                        <span class="latest-date"> {{doc.createdDate_dt | formatDate}} </span> |
+                        <span class="latest-schema"> {{doc.resourceTypes_CEN_ss[0].en </span>
+                        <div class="latest-title color-orange">{{doc.title_t}} </div>
+                     </a>
+                 </div>
+                </div>
+
+                <!-- {{rawRefDocs}} -->
+
+
+            <!-- <div class="panel panel-success">
                 <div class="panel-heading active">
                     Latest Virtual Library Records
                 </div>
@@ -156,7 +250,7 @@
                         </div>
                     </div>
                 </div>
-            </div>        
+            </div> -->
         </div>
 
     </div>
@@ -206,76 +300,13 @@
 <hr> -->
 
 
-<div class="container">
-
-    <div class="row">
-
-        <div class="col-md-8">
-
-        <div class="home-col">
-                <h3>About the Nagoya Protocol</h3>
-                The Nagoya Protocol on Access to Genetic Resources and the Fair and Equitable Sharing of Benefits Arising from their Utilization to the Convention on Biological Diversity is an international agreement which aims at sharing the benefits arising from the utilization of genetic resources in a fair and equitable way, including by appropriate access to genetic resources and by appropriate transfer of relevant technologies, taking into account all rights over those resources and to technologies, and by appropriate funding, thereby contributing to the conservation of biological diversity and the sustainable use of its components.
-                <a href="http://www.cbd.int/abs"> <i class="fa fa-forward"></i> read more at: www.cbd.int/abs</a>
-            </div>
-            <br>
-
-
-
-
-
-            <!-- <div class="home-col">
-                <h3>News from the development blog</h3>
-                    <div class="feeds">
-                    <ul>
-
-                        <li ng-repeat="feed in feeds | filter:filterText" style="padding-top:10px;">
-                            <h4><a href="{{feed.link}}" target="_new" style="color:#287fcb;font-size:14px;font-weight:bold;">{{feed.title}}</a></h4>
-                            <p class="text-left">{{feed.contentSnippet}}</p>
-                            <span class="small" >{{feed.publishedDate | date:'dd MMM yyyy'}}</span>
-                        </li>
-                    </ul>
-                    </div>
-            </div> -->
-        </div>
-
-        <div class="col-md-4">
-            <div class="home-col">
-
-            <br><br><br>
-                    <div class="well text-center">
-                <span style="color:#000;font-weight:bold; font-size:50px;text-shadow: 0 1px 2px rgba(0, 0, 0, .6);">
-
-                      {{daysUntilEntry}}</span><br><span style="color: #999; text-transform: uppercase;font-weight:bold;font-size:16px;">
-
-                          Days left until entry into force of the Nagoya Protocol</span>
-            </div>
-
-
-                <!--    <h3>Meetings</h3>
-             <div class="feeds">
-                    <ul>
-                        <li ng-repeat="meeting in meetings.response.docs" style="padding-top:10px;">
-                             <span class="small" >{{meeting.startDate_s | date:'dd MMM'}} - {{meeting.endDate_s | date:'dd MMM yyyy'}}
-                            </span>
-                            <h4><a href="{{meeting.url_ss[0]}}" target="_new" style="color:#287fcb;font-size:14px;font-weight:bold;">
-                            {{meeting.title_t}}</a></h4>
-                            <span>
-                            <strong>{{meeting.eventCountry_EN_t}}</strong></span>
-                        </li>
-                    </ul>
-                    </div> -->
-            </div>
-        </div>
-
-    </div>
-</div>
 
 
 <hr>
 
 
 <div class="container" >
-    <div class="row" style="min-height: 300px;">
+    <!-- <div class="row" style="min-height: 300px;">
         <div class="col-md-4" >
             <div class="home-col">
                 <h3>Regional Workshops</h3>
@@ -321,7 +352,7 @@
             </div>
         </div>
 
-    </div>
+    </div> -->
 
     <div class="row" >
         <div class="col-xs-12">
@@ -332,7 +363,7 @@
 
             <div class="col-xs-2" >
 
-                <a href="#about" class="color-litegrey"><div class="help-feature-box1">
+                <a href="/help" class="color-litegrey"><div class="help-feature-box1">
                     <i class="fa fa-star fa-2 color-yellow" ></i><br>
                     About the ABSCH</div>
                 </a>
@@ -341,7 +372,7 @@
 
                 <div class="col-xs-2" >
 
-                <a href="#presentations" class="color-grey"><div class="help-feature-box1">
+                <a href="/help" class="color-grey"><div class="help-feature-box1">
                         <i class="fa fa-desktop fa-2"></i><br>
                     Presentations</div>
                 </a>
@@ -351,7 +382,7 @@
 
             <div class="col-xs-2" >
 
-                <a href="#tours" class="color-red"><div class="help-feature-box1">
+                <a href="/help" class="color-red"><div class="help-feature-box1">
                     <i class="fa fa-youtube-play fa-2"></i><br>
                      Guided tours</div>
                 </a>
@@ -361,7 +392,7 @@
 
             <div class="col-xs-2" style="text-align:center;">
 
-                <a href="#accounts" class="color-green"><div class="help-feature-box1">
+                <a href="/help" class="color-green"><div class="help-feature-box1">
                     <i class="fa fa-user fa-2"></i><br>
                     Help signing in to your account</div>
                 </a>
@@ -369,7 +400,7 @@
             </div>
             <div class="col-xs-2" style="text-align:center;">
 
-                <a href="#search" class="color-blue"><div class="help-feature-box1">
+                <a href="/help" class="color-blue"><div class="help-feature-box1">
                         <i class="fa fa-search fa-2"></i><br>
                         Help finding information</div>
                     </a>
@@ -377,7 +408,7 @@
             </div>
             <div class="col-xs-2" style="text-align:center;">
 
-                <a href="#register" class="color-orange"><div class="help-feature-box1">
+                <a href="/help" class="color-orange"><div class="help-feature-box1">
                         <i class="fa fa-pencil-square-o fa-2"></i><br>
                     Help registering information</div>
                 </a>
