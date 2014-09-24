@@ -112,8 +112,8 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
                  var data = $scope.commonFormatFacets[i];
 
                  if(data[0] == $scope.selected_facet){
-                     //console.log(data[1].countries.indexOf(entity.code.toLowerCase()));
-                     return data[1].countries.indexOf(entity.code.toLowerCase())>0
+                     //console.log(data[1].countries,(entity.code.toLowerCase()));
+                     return data[1].countries.indexOf(entity.code.toLowerCase())>=0
                 }
              }
 
@@ -255,6 +255,7 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
 
             });
             $scope.commonFormatFacets = _.pairs(tempFacets);
+            console.log($scope.commonFormatFacets)
         }
 
         $scope.slideMap = function(divShow,divHide){

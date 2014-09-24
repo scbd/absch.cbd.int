@@ -153,18 +153,18 @@
                         </div>
                     </div>
                 </a>
-              </div>
-              <div class="col-lg-1" ng-repeat="facet in commonFormatFacets" style="padding:5px !important;width:10.66% !important">
+            </div>
+              <div class="col-lg-1" ng-repeat="facet in commonFormatFacets" style="padding:5px !important;width:11.66% !important">
                 <a ng-href="#">
                     <div class="panel panel-default"
                     ng-class="{'panel-primary': isSelected(facet[0])}"  ng-click="selected_facet=facet[0];updateMap(facet[0]);">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-10 text-right">
-                                    <div class="huge">{{facet[0]|schemaShortName}} {{facet[1].facetCount}}</div>
+                                    <div class="huge">{{facet[0]|schemaShortName}} <b>{{facet[1].facetCount}}</b></div>
                                 </div>
                                 <div class="col-xs-12 text-right">
-                                    <div class="huge">Countries {{facet[1].countryCount}}</div>
+                                    <div class="huge">Countries <b>{{facet[1].countryCount}}</b></div>
                                 </div>
                             </div>
                         </div>
