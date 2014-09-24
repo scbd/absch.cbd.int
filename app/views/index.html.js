@@ -65,7 +65,7 @@ define(['app',
         //============================================================
     	function query () {
 
-            var schema = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database",  "meeting", "notification","pressRelease","statement" ,"focalPoint"]
+            var schema = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database"]
 
             var q = '(realm_ss:' + realm.value.toLowerCase() + ' or realm_ss:absch) AND NOT version_s:*';
             var schemaQuery = ' AND (schema_s:' + schema.join(' OR schema_s:') + ')';
