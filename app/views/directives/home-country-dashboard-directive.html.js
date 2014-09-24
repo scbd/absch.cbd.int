@@ -4,7 +4,10 @@ define(['app'], function (app) {
 			restrict: 'EAC',
 			replace:true,
 			templateUrl: '/app/views/directives/home-country-dashboard-directive.html',
-			controller: ['$scope', '$filter','schemaTypes', 'realm', function($scope, $filter, schemaTypes, realm){
+			link : function($scope, $element){
+				//$element.find("[data-toggle='tooltip']").tooltip({trigger:'hover'});
+			},
+			controller: ['$scope', '$filter','schemaTypes', 'realm', '$q', 'underscore', function($scope, $filter, schemaTypes, realm, $q, _){
 
                 $scope.options  = {
                       countries		: function() {
@@ -46,6 +49,19 @@ define(['app'], function (app) {
                         countryQuery = ' AND government_s:' + country;
                     }
 
+					var queryFacetsVLRParameters = {
+                        'q': '(realm_ss:' + realm.value.toLowerCase() + ' or realm_ss:absch) AND NOT version_s:* AND (schema_s:resource)',
+                        'fl': '', 		//fields for results.
+                        'wt': 'json',
+                        'rows': 0,		//limit
+                        'facet': true,	//get counts back
+						'facet.query': '(realm_ss:' + realm.value.toLowerCase() + ' or realm_ss:absch) AND NOT version_s:* AND (schema_s:resource)',
+                        'facet.field': ['schema_s'],
+                        'facet.limit': 512
+                    };
+                    var queryFacetsVLR = $http.get('/api/v2013/index/select', { params: queryFacetsVLRParameters })
+
+
     				var queryFacetsParameters = {
                         'q': 'realm_ss:' + realm.value.toLowerCase() + ' AND NOT version_s:* AND (schema_s:'
                                           + schemaTypes.join(' OR schema_s:') + ') '+ countryQuery ,
@@ -57,21 +73,48 @@ define(['app'], function (app) {
                         'facet.limit': 512
                     };
 
-                    $http.get('/api/v2013/index/select', { params: queryFacetsParameters }).success(function (data) {
+                    var queryFacets = $http.get('/api/v2013/index/select', { params: queryFacetsParameters });
+					var countries = $http.get('/api/v2013/countries');
 
+					$q.all([queryFacets, queryFacetsVLR, countries]).then(function (results) {
+						console.log(results)
                         var tempFacets = {};
-                        _.each(data.facet_counts.facet_pivot['government_s,schema_s'], function(data){
+                        _.each(results[0].data.facet_counts.facet_pivot['government_s,schema_s'], function(data){
                             _.each(data.pivot, function(facets){
                                 tempFacets[facets.value] = {"facetCount" : (tempFacets[facets.value] ? tempFacets[facets.value].facetCount : 0) + facets.count,
                                                 "countryCount" : (tempFacets[facets.value] ? tempFacets[facets.value].countryCount : 0) + 1};
                             });
 
                         });
+
+						var resourceFacets = results[1].data.facet_counts.facet_fields.schema_s;
+						for (var i = 0; i < resourceFacets.length; i += 2) {
+		                    var facet = resourceFacets[i];
+							if(facet == 'resource')
+		                    	tempFacets['resource'] = {"facetCount" : resourceFacets[i + 1] };
+		                }
+
+						var ratificationCount=0;
+						_.each( results[2].data, function(country){
+							if (   country.treaties.XXVII8b.instrument == "ratification"
+			                	|| country.treaties.XXVII8b.instrument == "accession"
+			                	|| country.treaties.XXVII8b.instrument == "acceptance"
+			                  	|| country.treaties.XXVII8b.instrument == "approval"
+			                  	|| country.code == 'EU') {
+
+			                    	ratificationCount++;
+			                }
+						});
+						tempFacets['RAT'] = {"facetCount" : ratificationCount };
+
                         $scope.commonFormatFacets = _.pairs(tempFacets);
                         $scope.loadingFacets = false;
 
-                    }).error(function (error) {$scope.commonFormatFacets={};console.log(error); } )
+                    },function (error) {$scope.commonFormatFacets={};console.log(error); } )
                     .finally(function(){$scope.loadingFacets = false;})
+
+
+
 
     			}
                 //$scope.loadFacets();
