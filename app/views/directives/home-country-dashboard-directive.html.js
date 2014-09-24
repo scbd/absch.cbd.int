@@ -30,7 +30,7 @@ define(['app'], function (app) {
                   return {identifier: item.identifier};
                 };
                 $scope.$watch('document.countryStats', function(newValue){
-                    console.log(newValue)
+                    //console.log(newValue)
                     if(newValue && newValue.identifier){
                         $scope.loadFacets(newValue.identifier);
                     }
@@ -62,7 +62,8 @@ define(['app'], function (app) {
                         var tempFacets = {};
                         _.each(data.facet_counts.facet_pivot['government_s,schema_s'], function(data){
                             _.each(data.pivot, function(facets){
-                                tempFacets[facets.value] = (tempFacets[facets.value] ? tempFacets[facets.value] : 0) + facets.count;
+                                tempFacets[facets.value] = {"facetCount" : (tempFacets[facets.value] ? tempFacets[facets.value].facetCount : 0) + facets.count,
+                                                "countryCount" : (tempFacets[facets.value] ? tempFacets[facets.value].countryCount : 0) + 1};
                             });
 
                         });

@@ -184,11 +184,11 @@
 </div>
 
 <div class="container" style="padding-top:20px;">
-    <!-- <div class="row">
+    <div class="row">
         <div class="col-xs-12">
             <span home-country-dashboard></span>
         </div>
-    </div> -->
+    </div>
     <div class="row" >
 
         <div class="col-xs-6">
@@ -230,7 +230,7 @@
                     <div class="latest" ng-class="{'latest-even-row':$even}">
                         <a  href="/database/record?documentID={{document.schema=='MEETING' ? doc.id : doc.identifier_s}}&documentSchema={{doc.schema_EN_t}}" class="latest-link">
                         <span class="latest-date"> {{doc.createdDate_dt | formatDate}} </span> |
-                        <span class="latest-schema"> {{doc.resourceTypes_CEN_ss[0].en </span>
+                        <span class="latest-schema"> VIRTUAL LIBRARY RESOURCE </span>
                         <div class="latest-title color-orange">{{doc.title_t}} </div>
                      </a>
                  </div>
