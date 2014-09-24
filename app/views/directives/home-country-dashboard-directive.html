@@ -15,7 +15,8 @@
     </style>
 
     <div class="row" style="margin-bottom:-22px;">
-        <div ng-repeat="facet in commonFormatFacets" style="display:inline;" ng-mouseover="wellChanged(facet[0])">
+        <div ng-repeat="facet in commonFormatFacets" style="display:inline;" ng-mouseover="wellChanged(facet[0])"
+        ng-mouseout="wellChanged('')">
             <div class="well text-center col-xs-9ths" id="myWell" >
                     <span style="color:#000;font-weight:bold; font-size:50px;text-shadow: 0 1px 2px rgba(0, 0, 0, .6);">
                           {{facet[0]|schemaShortName}} {{facet[1].facetCount}}</span>
@@ -30,7 +31,7 @@
     ng-repeat="facet in commonFormatFacets"  ng-show="currentFacet==facet[0]" >
           <span  style="color: #999; text-transform: uppercase;font-weight:bold;font-size:16px;">
                 <span ng-show="facet[0]!= 'RAT'">{{facet[0]|lowercase|schemaName}}</span>
-                <span ng-show="facet[0]== 'RAT'">Ratifications</span>            
+                <span ng-show="facet[0]== 'RAT'">Ratifications</span>
           </span>
 
     </div>
