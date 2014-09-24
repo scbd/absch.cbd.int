@@ -117,3 +117,37 @@ h3 {
 		font-family: 'alternategotno3dotregular';
      	text-rendering: optimizeLegibility;
 }
+
+
+.col-xs-9ths,
+.col-sm-9ths,
+.col-md-9ths,
+.col-lg-9ths {
+    position: relative;
+    min-height: 1px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.col-xs-9ths {
+    width: 11%;
+    float: left;
+}
+@media (min-width: 768px) {
+.col-sm-9ths {
+        width: 11%;
+        float: left;
+    }
+}
+@media (min-width: 992px) {
+    .col-md-9ths {
+        width: 11%;
+        float: left;
+    }
+}
+@media (min-width: 1200px) {
+    .col-lg-9ths {
+        width: 11%;
+        float: left;
+    }
+}
