@@ -9,6 +9,9 @@ define(['app'], function (app) {
 			},
 			controller: ['$scope', '$filter','schemaTypes', 'realm', '$q', 'underscore', function($scope, $filter, schemaTypes, realm, $q, _){
 
+				$scope.wellChanged = function(facet){
+					$scope.currentFacet = facet;
+				}
                 $scope.options  = {
                       countries		: function() {
                         return $http.get("/api/v2013/thesaurus/domains/countries/terms", { cache: true }).then(function(o){
