@@ -196,8 +196,8 @@
 
                 <h1>Latest National Records</h1>
 
-                <div ng-repeat="doc in rawNationalDocs">
-                    <div class="latest">
+                <div ng-repeat="doc in rawNationalDocs" >
+                    <div class="latest" ng-class="{'latest-even-row':$even}">
                         <a  href="/database/record?documentID={{document.schema=='MEETING' ? doc.id : doc.identifier_s}}&documentSchema={{doc.schema_EN_t}}" class="latest-link">
                         <span class="latest-date"> {{doc.createdDate_dt | formatDate}} </span> |
                         <span class="latest-country"> {{doc.government_EN_t}} </span> |
@@ -227,7 +227,7 @@
                 <h1>Latest Virtual Library Records</h1>
 
                 <div ng-repeat="doc in rawRefDocs">
-                    <div class="latest">
+                    <div class="latest" ng-class="{'latest-even-row':$even}">
                         <a  href="/database/record?documentID={{document.schema=='MEETING' ? doc.id : doc.identifier_s}}&documentSchema={{doc.schema_EN_t}}" class="latest-link">
                         <span class="latest-date"> {{doc.createdDate_dt | formatDate}} </span> |
                         <span class="latest-schema"> {{doc.resourceTypes_CEN_ss[0].en </span>

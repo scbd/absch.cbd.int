@@ -53,7 +53,7 @@ h3 {
 .help-feature-box1{
 	text-align:center;
 	width:160px;
-    /*background-color:#1FA65D;*/
+    background-color:#f5f5f5;
     height:120px;
     text-align:center;
     vertical-align:center;
@@ -74,7 +74,17 @@ h3 {
 }
 
 .latest:hover{
-	background-color:white;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+	background-color: white;
+	border: 1px solid #e3e3e3;
+	border-radius: 4px;
+}
+
+.latest-even-row{
+	/*box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);*/
+	background-color: #f5f5f5;
+	border: 1px solid #e3e3e3;
+	/*border-radius: 4px;*/
 }
 
 .latest-country{
