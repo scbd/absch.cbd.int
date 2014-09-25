@@ -80,12 +80,13 @@ define(['app'], function (app) {
 					var countries = $http.get('/api/v2013/countries');
 
 					$q.all([queryFacets, queryFacetsVLR, countries]).then(function (results) {
-						console.log(results)
+						//console.log(results)
                         var tempFacets = {};
                         _.each(results[0].data.facet_counts.facet_pivot['government_s,schema_s'], function(data){
                             _.each(data.pivot, function(facets){
                                 tempFacets[facets.value] = {"facetCount" : (tempFacets[facets.value] ? tempFacets[facets.value].facetCount : 0) + facets.count,
-                                                "countryCount" : (tempFacets[facets.value] ? tempFacets[facets.value].countryCount : 0) + 1};
+                                                "countryCount" : (tempFacets[facets.value] ? tempFacets[facets.value].countryCount : 0) + 1,
+												"id": getSequence(facets.value)};
                             });
 
                         });
@@ -94,7 +95,8 @@ define(['app'], function (app) {
 						for (var i = 0; i < resourceFacets.length; i += 2) {
 		                    var facet = resourceFacets[i];
 							if(facet == 'resource')
-		                    	tempFacets['resource'] = {"facetCount" : resourceFacets[i + 1] };
+		                    	tempFacets['resource'] = {"facetCount" : resourceFacets[i + 1],
+								"id" : getSequence('resource')};
 		                }
 
 						var ratificationCount=0;
@@ -108,9 +110,10 @@ define(['app'], function (app) {
 			                    	ratificationCount++;
 			                }
 						});
-						tempFacets['RAT'] = {"facetCount" : ratificationCount };
+						tempFacets['RAT'] = {"facetCount" : ratificationCount,
+								"id" : getSequence('ratification')};
 
-                        $scope.commonFormatFacets = _.pairs(tempFacets);
+                        $scope.commonFormatFacets = _.sortBy(_.pairs(tempFacets), function(format){ return format[1].id});
                         $scope.loadingFacets = false;
 
                     },function (error) {$scope.commonFormatFacets={};console.log(error); } )
@@ -120,6 +123,28 @@ define(['app'], function (app) {
 
 
     			}
+
+				function getSequence(format){
+					switch(format.toLowerCase()){
+
+						case  'ratification':
+							return 1;
+						case  'authority':
+							return 2;
+						case  'measure':
+							return 3;
+						case  'abscheckpoint':
+							return 4;
+						case  'abspermit':
+							return 5;
+						case  'abscheckpointcommunique':
+							return 6;
+						case 'database':
+							return 7;
+						case  'resource':
+							return 8;
+					}
+				}
                 //$scope.loadFacets();
 
 
