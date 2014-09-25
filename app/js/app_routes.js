@@ -34,10 +34,6 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
             // when('/find/:tour',                   { templateUrl: '/app/views/find.html'                      ,resolveController: true, resolveUser: true}).
 
 
-
-
-
-
             when('/countries',                   { templateUrl: '/app/views/countries.html'                 ,resolveController: true, resolveUser: true}).
             //when('/countries/map',               { templateUrl: '/app/views/countries/countryMap.html'        ,resolveController: true, resolveUser: true}).
             when('/countries/:code',             { templateUrl: '/app/views/profiles.html'                  ,resolveController: true, resolveUser: true}).
@@ -55,6 +51,19 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
             when('/certificate/:documentNumber',{ templateUrl: '/app/views/forms/view/records-id.html'       ,resolveController: true, resolveUser: true}).
 
             //TODO: rename document_type to something more generic... or make this feature more flexible
+                when('/commonformat', {
+              templateUrl: '/app/views/about.html',
+              resolveController: true,
+              resolveUser: true,
+              subTemplateUrl: '/app/views/about/common-formats.html',
+              ignoreSubController: true,
+            }).
+            when('/about', { redirectTo: '/about/absch' }).
+
+
+
+
+
             when('/about/:document_type', {
               templateUrl: '/app/views/about.html',
               resolveController: true,
