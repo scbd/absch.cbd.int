@@ -13,8 +13,8 @@ app.directive('searchFilterSchemas', function ($http) {
         link: function ($scope, element, attrs, ngModelController)
         {
         },
-        controller : ['$scope', '$element', '$location', 'Thesaurus', "IStorage", "guid", "$q", "Enumerable", "$filter","underscore","realm",
-         function ($scope, $element, $location, Thesaurus, storage, guid, $q, Enumerable, $filter,_,realm)
+        controller : ['$scope', '$element', '$location', 'Thesaurus', "IStorage", "guid", "$q", "Enumerable", "$filter","underscore","realm","$routeParams",
+         function ($scope, $element, $location, Thesaurus, storage, guid, $q, Enumerable, $filter,_,realm, $routeParams)
         {
             $scope.showNationalFilters = true;
             $scope.showReferenceFilters = true;
@@ -396,6 +396,10 @@ app.directive('searchFilterSchemas', function ($http) {
                 }
             }
 
+            if($routeParams.commonFormat)
+            {
+                $scope[$routeParams.commonFormat].selected = true;
+            }
             $scope.buildQuery();
 
             $scope.terms.forEach(function (item) {
