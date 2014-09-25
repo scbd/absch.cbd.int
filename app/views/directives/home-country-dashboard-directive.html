@@ -19,7 +19,7 @@
         ng-mouseout="wellChanged('')">
             <div class="well text-center col-xs-8ths" id="myWell" >
 
-                <div style="height:20px;line-height:10px!important;color: #999; text-transform: uppercase;font-weight:bold;font-size:10px;">
+                <div style="font-family: 'alternategotno3dotregular';text-rendering: optimizeLegibility;height:20px;line-height:10px!important;color: #999; text-transform: uppercase;font-weight:bold;font-size:10px;">
                     <span  ng-show="facet[0]!= 'RAT'">{{facet[0]|lowercase|schemaName}}</span>
                     <span  ng-show="facet[0]== 'RAT'">Ratifications</span>
                 </div>
@@ -27,7 +27,7 @@
                 <span style="color:#000;font-weight:bold; font-size:40px;text-shadow: 0 1px 2px rgba(0, 0, 0, .6);">
                     {{facet[1].facetCount}}</span>
                 <br>
-                <span  style="color: #999; text-transform: uppercase;font-weight:bold;font-size:12px;" ng-click="currentFacet=facet[0]">
+                <span  style="font-family: 'alternategotno3dotregular';text-rendering: optimizeLegibility;color: #999; text-transform: uppercase;font-weight:bold;font-size:12px;" ng-click="currentFacet=facet[0]">
                     Countries <span style="color:#777">{{facet[1].countryCount}}</span></span>
                     <!-- <span ng-show="!facet[1].countryCount">Countries</span> -->
 
