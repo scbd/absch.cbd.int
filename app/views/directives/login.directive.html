@@ -5,13 +5,11 @@
                 Sign into the <span class="color-orange">ABS-CH</span>
             </h1>
             <div class="alert alert-danger" ng-show="errorInvalid">
-                <strong>Login failed.</strong></br>
-                The email address and password combination you entered is incorrect.
+                <strong>Login failed.</strong> The email address and password combination you entered is incorrect.
             </div>
 
             <div class="alert alert-danger" ng-show="errorTimeout">
-                <strong>Operation failed.</strong></br>
-                The service is not available. Please try again later.
+                <strong>Operation failed.</strong> The service is not available. Please try again later.
             </div>
             <form name="form" ng-submit="doSignIn()" class="ng-pristine ng-invalid ng-invalid-required" >
                 <div class="form-group">
