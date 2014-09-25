@@ -228,9 +228,9 @@
 
                 <div ng-repeat="doc in rawRefDocs">
                     <div class="latest" ng-class="{'latest-even-row':$even}">
-                        <a  href="/database/record?documentID={{document.schema=='MEETING' ? doc.id : doc.identifier_s}}&documentSchema={{doc.schema_EN_t}}" class="latest-link">
+                        <a  href="/database/record?documentID={{doc.schema=='MEETING' ? doc.id : doc.identifier_s}}&documentSchema={{doc.schema_EN_t}}" class="latest-link">
                         <span class="latest-date"> {{doc.createdDate_dt | formatDate}} </span> |
-                        <span class="latest-schema"> VIRTUAL LIBRARY RESOURCE </span>
+                        <span class="latest-schema">{{getResourceType(doc.resourceTypes_CEN_ss)}}</span>
                         <div class="latest-title color-orange">{{doc.title_t}} </div>
                      </a>
                  </div>

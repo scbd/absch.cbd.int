@@ -2,7 +2,8 @@ define(['app',
     '../views/forms/view/record-loader.directive.html.js',
     '../views/directives/document-list.partial.html.js',
     '/app/views/directives/home-country-dashboard-directive.html.js'], function (app) {
-    app.controller('IndexController', ['$scope', 'authHttp', '$window', '$cookies','realm',  function ($scope, $http, $window, $cookies, realm) {
+    app.controller('IndexController', ['$scope', 'authHttp', '$window', '$cookies','realm', '$filter',
+    function ($scope, $http, $window, $cookies, realm, $filter) {
 
     	$scope.email = null;
     	$scope.password = null;
@@ -16,7 +17,7 @@ define(['app',
         $http.get("/api/v2013/index/select?cb=1394824945962&fl=id,identifier_s,title_t,description_t,url_ss,schema_EN_t,date_dt,government_EN_t,schema_s,number_d,aichiTarget_ss,reference_s,sender_s,meeting_ss,recipient_ss,symbol_s,eventCity_EN_t,eventCountry_EN_t,startDate_s,endDate_s,body_s,code_s,meeting_s,group_s,function_t,department_t,organization_t,summary_EN_t,reportType_EN_t,completion_EN_t,jurisdiction_EN_t,development_EN_t&q=(realm_ss:" + realm.value + ")+AND+schema_s:*+AND+((+schema_s:meeting+))+AND+(*:*)+AND+(*:*)&rows=4&sort=createdDate_dt+desc,+title_t+asc&start=0&wt=json").then(function (result) {
                 $scope.meetings = result.data;
         });
-
+        $scope.locale = 'en';
         var today= moment();
         var entry= moment("20141012", "YYYYMMDD");
         $scope.Math = window.Math;
@@ -98,6 +99,14 @@ define(['app',
 
         };
         query()
+
+        $scope.getResourceType = function(type){
+
+            if(type && type.length>0){
+                return JSON.parse((type[0])).en;
+            }
+
+        }
 
     }]);
 });
