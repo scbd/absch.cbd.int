@@ -146,6 +146,8 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
 
             when('/searchforum.shtml',           { redirectTo:'/about/iac' }).
 
+            when('/commonformat',           { redirectTo:'/about/common-formats' }).
+
             otherwise({redirectTo:'/help/404'});
     }]);
 });
