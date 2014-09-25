@@ -119,35 +119,35 @@ h3 {
 }
 
 
-.col-xs-9ths,
-.col-sm-9ths,
-.col-md-9ths,
-.col-lg-9ths {
+.col-xs-8ths,
+.col-sm-8ths,
+.col-md-8ths,
+.col-lg-8ths {
     position: relative;
     min-height: 1px;
     padding-right: 10px;
     padding-left: 10px;
 }
 
-.col-xs-9ths {
-    width: 11%;
+.col-xs-8ths {
+    width: 12.5%;
     float: left;
 }
 @media (min-width: 768px) {
-.col-sm-9ths {
-        width: 11%;
+.col-sm-8ths {
+    width: 12.5%;
         float: left;
     }
 }
 @media (min-width: 992px) {
-    .col-md-9ths {
-        width: 11%;
+    .col-md-8ths {
+    width: 12.5%;
         float: left;
     }
 }
 @media (min-width: 1200px) {
-    .col-lg-9ths {
-        width: 11%;
+    .col-lg-8ths {
+    width: 12.5%;
         float: left;
     }
 }
