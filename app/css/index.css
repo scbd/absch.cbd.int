@@ -152,3 +152,32 @@ h3 {
         float: left;
     }
 }
+
+    #myWell .well{
+            padding:5px;
+        }
+
+.stats-schema{
+	font-family: 'alternategotno3dotregular';
+	text-rendering: optimizeLegibility;
+	height:20px;
+	line-height:10px!important;
+	color: #999;
+	text-transform: uppercase;
+	font-weight:bold;
+	font-size:10px;
+}
+.stats-count{
+	color:#000;
+	font-weight:bold;
+	font-size:40px;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+}
+.stats-country{
+	font-family: 'alternategotno3dotregular';
+	text-rendering: optimizeLegibility;
+	color: #999;
+	text-transform: uppercase;
+	font-weight:bold;
+	font-size:12px;
+}
