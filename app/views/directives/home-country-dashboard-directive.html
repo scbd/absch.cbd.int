@@ -12,12 +12,17 @@
         #myWell:hover{
             border-bottom : none!important;
         }
+        #myWell .well{
+            padding:5px;
+        }
     </style>
 
     <div class="row" style="margin-bottom:-22px;">
         <div ng-repeat="facet in commonFormatFacets" style="display:inline;" ng-mouseover="wellChanged(facet[0])"
         ng-mouseout="wellChanged('')">
-            <div class="well text-center col-xs-8ths" id="myWell" >
+            <div class="col-xs-8ths" id="myWell"  >
+                <div class="well text-center">
+
 
                 <div style="font-family: 'alternategotno3dotregular';text-rendering: optimizeLegibility;height:20px;line-height:10px!important;color: #999; text-transform: uppercase;font-weight:bold;font-size:10px;">
                     <span  ng-show="facet[0]!= 'RAT'">{{facet[0]|lowercase|schemaName}}</span>
@@ -31,7 +36,7 @@
                     Countries <span style="color:#777">{{facet[1].countryCount}}</span></span>
                     <!-- <span ng-show="!facet[1].countryCount">Countries</span> -->
 
-
+                </div>
             </div>
         </div>
     </div>
