@@ -25,18 +25,20 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="checkbox">
+                    <div class="checkbox pull-right">
                         <label class="pull-right">
                             <input type="checkbox" ng-model="rememberMe" class="ng-pristine ng-valid"> <a style="text-decoration:none;" class="color-white">Remember me</a> <span class="color-white">|</span>
                             <a href="https://accounts.cbd.int/password/reset" style="text-decoration:none;" class="color-white" target="_new">Forgot password?</a>
                         </label>
                     </div>
-                    <button type="submit" class="btn btn-primary pull-left" ng-disabled="waiting" style="position:relative;top:-30px;margin:0;width:100px;">Sign in</button>
+                    <div>
+                        <button type="submit" class="btn btn-primary" ng-disabled="waiting" >Sign in</button>
 
-                    <div class="spinner ng-hide" ng-show="waiting">
-                        <div class="bounce1"></div>
-                        <div class="bounce2"></div>
-                        <div class="bounce3"></div>
+                        <div class="spinner ng-hide" ng-show="waiting">
+                            <div class="bounce1"></div>
+                            <div class="bounce2"></div>
+                            <div class="bounce3"></div>
+                        </div>
                     </div>
                 </div>
             </form>

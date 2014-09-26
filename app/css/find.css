@@ -40,7 +40,7 @@ h3 a{ color:#111;}
 	color:#999;
 }
 
-.btn{
+#Filters .btn{
     border: 0;
     font-size: 11px;
     text-transform: uppercase;
@@ -48,7 +48,7 @@ h3 a{ color:#111;}
     margin: 0;
     padding: 0;
 }
-.btn-info{
+#Filters .btn-info{
     color:#428BCA;
     background-color: transparent;
 }
