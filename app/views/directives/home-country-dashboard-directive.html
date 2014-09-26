@@ -6,7 +6,7 @@
 
 
     <div class="row" style="margin-bottom:-22px;">
-        <a ng-href="/find?commonFormat={{facet[0]}}" ng-repeat="facet in commonFormatFacets" style="display:inline;" >
+        <a ng-href="/{{facet[0]== 'RAT' ? 'countries' : 'find'}}?commonFormat={{facet[0]}}" ng-repeat="facet in commonFormatFacets" style="display:inline;" >
             <div class="col-xs-8ths" id="myWell"  >
                 <div class="well text-center">
 
