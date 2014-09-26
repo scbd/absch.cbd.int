@@ -74,14 +74,16 @@
     color:#555;
 }
 
+.helpList li{
+    padding-bottom:5px;
+}
+
 .helpList > span > li{
     color:#ddd;
 }
 .helpList li > span {
     color:#C7532C;
 }
-
-
 
 .pic{
     width:160px;
@@ -90,4 +92,14 @@
     vertical-align:middle;
     padding:20px 20px 0 20px;
     border-bottom: 5px solid #1FA65D;
+}
+
+.help_content ul{
+    list-style-type:none;
+}
+
+.help_content h1{
+    margin-bottom:30px;
+    padding-bottom:5px;
+    border-bottom:1px solid #ddd;
 }
