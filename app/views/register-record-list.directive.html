@@ -74,13 +74,13 @@
 
                          <a ng-show="isDraft(record) && !isRequest(record)"  href="/register/{{record.type|mapSchema}}/{{record.identifier}}/edit">
                             <h4 style="display:inline;">{{(record.workingDocumentTitle||record.title)|lstring}}
-                            <span ng-show="record.metadata.schema == 'absCheckpointCommunique'">Checkpoint Communique - {{record.createdOn | formatDateWithTime }}</span></h4>
+                            <span ng-show="record.metadata.schema == 'absCheckpointCommunique'">Checkpoint Communiqué - {{record.createdOn | formatDateWithTime }}</span></h4>
                         </a>
 
                         <a ng-show="!isDraft(record) && !isRequest(record)" href=""  ng-click="loadDocument(record); displayDetails=!displayDetails" ng-show="record.documentID">
                             <i class="fa" ng-class="{'fa-caret-down':displayDetails, 'fa-caret-right':!displayDetails}" style="font-size:11px;color:#999;position:relative; top:-1px;font-size:14px;"></i>
                             <h4 style="display:inline;">{{(record.workingDocumentTitle||record.title)|lstring}}
-                            <span ng-show="record.metadata.schema == 'absCheckpointCommunique'">Checkpoint Communique - {{record.createdOn | formatDate }}</span></h4>
+                            <span ng-show="record.metadata.schema == 'absCheckpointCommunique'">Checkpoint Communiqué - {{record.createdOn | formatDateWithTime }}</span></h4>
                         </a>
                     </span>
 
@@ -88,7 +88,7 @@
                         <a href="" ng-click="displayDetails =false; displayRequest = !displayRequest; formLoading=false" class="btn btn-xs btn-danger" title="Request">R</a>
                         <a href="" ng-click="displayDetails =false; displayRequest = !displayRequest; formLoading=false">
                             <h4 style="display:inline;">{{(record.workingDocumentTitle||record.title)|lstring}}
-                            <span ng-show="record.metadata.schema == 'absCheckpointCommunique'">Checkpoint Communique - {{record.createdOn | formatDateWithTime }}</span></h4>
+                            <span ng-show="record.metadata.schema == 'absCheckpointCommunique'">Checkpoint Communiqué - {{record.createdOn | formatDateWithTime }}</span></h4>
                         </a>
                     </span>
 
@@ -96,7 +96,7 @@
                       <a ng-href="/register/{{record.type|mapSchema}}/{{record.identifier}}/edit" class="btn btn-xs btn-default btn-draft" title="Draft" style="color:#fff">D</a>
                       <a href="/register/{{record.type|mapSchema}}/{{record.identifier}}/edit">
                             <h4 style="display:inline;">{{(record.workingDocumentTitle||record.title)|lstring}}
-                            <span ng-show="record.metadata.schema == 'absCheckpointCommunique'">Checkpoint Communique - {{record.createdOn | formatDateWithTime }}</span></h4>
+                            <span ng-show="record.metadata.schema == 'absCheckpointCommunique'">Checkpoint Communiqué - {{record.createdOn | formatDateWithTime }}</span></h4>
                         </a>
                     </span>
 
