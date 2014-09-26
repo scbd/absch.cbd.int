@@ -4,7 +4,17 @@
 
 
     <div class="container" style="padding:10px;">
-        <ng-include src="'/app/views/help/links/helplinks.html'"></ng-inlcude>
+        <a href="/help" class="color-orange"><i class="fa fa-question-circle" ></i> HELP</a>
+        &nbsp;&nbsp;&nbsp;<i class="fa fa-caret-right color-litegrey" ></i>&nbsp;&nbsp;&nbsp;
+
+
+        <span class="dropdown">
+            <a class="dropdown-toggle"  data-toggle="dropdown" href="#"><i class="fa fa-user" ></i> YOUR CBD ACCOUNT</a>
+            <div class="dropdown-menu" role="menu" >
+                <ng-include   src="'/app/views/help/links/accounts.html'"></ng-inlcude>
+            </div>
+        </span>
+
     </div>
 
 
@@ -13,41 +23,87 @@
         <div class="container">
             <div  class="row">
 
-              <div  class="col-xs-9 main-content" >
+              <div  class="col-xs-9 main-content help_content" >
 
                   <!-- ABOUT -->
-                  <div ng-show="question=='about'">
-                      <h1>About CBD accounts</h1>
+                  <div ng-show="question=='register'">
+                      <h1> How do I register for a CBD account?</h1>
                       <p>
-                        A CBD account can be setup through <a href="http://accounts.cbd.int" style="font-weight:bold;">accounts.cbd.int</a> and gives you access to manage
-                        information registered under the different CBD Clearing-Houses including the BCH, ABS-CH and CHM.
+                            Any person can have a CBD account which will give you access to register information in all CBD
+                            clearing-houses including the Biosafety Clearing-House (BCH), the ABS Clearing-House (ABS-CH)
+                            and the clearing-house mechanism (CHM) under the Convention. You can  register for a
+                            CBD account at <a href="http://accounts.cbd.int/signin">accounts.cbd.int/signin</a>
                       </p>
-
                       <p>
-                        Click on any <strong class="color-black"><i class="fa fa-power-off"></i> SIGN IN</strong> link on a CBD Clearing-House page or click here to sign in now:
-                        <a href="http://accounts.cbd.int/signin" style="font-weight:bold;">accounts.cbd.int/signin</a>
+                            Make sure you enter all the information required as instructed on the form. You’ll automatically
+                            receive an e-mail with a link you have to click to confirm your account.
+                     </p>
+                  </div>
+
+                  <div ng-show="question=='no_account'">
+                      <h1> I am not sure if my account is still active?</h1>
+                      <p>
+                        The easiest way to check if you are registered accounts.cbd.int is to go to the
+                        <a href="https://accounts.cbd.int/password/reset">forgot password page</a> and enter the email
+                        associated with that account. If you have an account you will be emailed by the system a link to re-activate your password.
+                     </p>
+                  </div>
+
+                  <div ng-show="question=='searching'">
+                      <h1>Do I need a CBD account for searching information in the ABS-CH?</h1>
+                      <p>
+                         No. You can search information and consult the country profiles without requiring a CBD account.
                       </p>
 
                   </div>
 
-                <!-- LOGIN -->
-                  <div ng-show="question=='login'">
-                      <h1>Signing in to the ABSCH</h1>
-                      <p>  </p>
+                  <div ng-show="question=='infotypes'">
+                      <h1>What kind of information can I register in the ABS-CH having a CBD account?</h1>
+                      <p>The type of information you can register will depend on your role in the ABS-CH.
+                          <a href="/about/available_information">National records</a> can only be registered by
+                          <a href="">national authorized users (NAUs)</a> or
+                          <a href="">publishing authority (PA)</a> duly <a href="">designated</a> by a country.</p>
 
+                       <p>However, any registered user will be able to register
+                           <a href="/about/available_information">Reference Records</a> in the Virtual Library.</p>
                   </div>
 
-
-                  <!-- PASSWORD -->
                   <div ng-show="question=='password'">
-                      <h1>Forgot your password</h1>
+                      <h1>Forgot your password?</h1>
+                      <p>
+                          You can click here <a href="https://accounts.cbd.int/password/reset">accounts.cbd.int/password/reset</a>.
+                          You will be asked for your email address and, if you are a registered user, an email will be sent immediately
+                          to your registered email account with instructions to reset your password.
+                      </p>
                   </div>
 
+                   <div ng-show="question=='signingin'">
+                      <h1>Problems signing in? Check your internet browser.</h1>
+                      <p>
+                          At the moment, the ABS-CH works best with the most recent verisons of internet
+                          browsers (Firefox, Chrome or Internet Explorer), and sometimes problems arise from having
+                          older versions of the browsers. We will continue working to improve browser compatibility,
+                          but in the meanwhile, please make sure you have the most recent version of your favorite
+                          browser installed on your computer:
 
+                          <ul>
+                              <li> For Firefox: http://www.mozilla.org/en-US/firefox/new / </li>
+                               <li> For Chrome: https://www.google.com/intl/en/chrome/browser/ei  </li>
+                                <li> For Internet explorer:  http://windows.microsoft.com/en-ca/internet-explorer/download-ie</li>
+                            </ul>
 
-                  <!-- PROFILE -->
+                            If your problems persists please contact us at absch@cbd.int
+                      </p>
+                  </div>
+
                   <div ng-show="question=='profile'">
-                      <h1>Updating your profile</h1>
+                      <h1>How do I update my profile?</h1>
+                      <p>
+                         You can update your profile here: <a href="https://accounts.cbd.int/profile">accounts.cbd.int/profile</a>. You will be asked
+                         to sign-in before you can update your profile information.
+                     </p>
+                     <p> Please note, to set up your account as a Publishing Authority (PA) or National Authorized User (NAU) will need to be
+                         offically deisgnated by the ABS or National Focal Point.
                   </div>
 
 
