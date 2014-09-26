@@ -27,8 +27,8 @@
 				<div class="km-value">
 					<ul>
 						<li ng-repeat="checkpoint in document.checkpoint">
-							{{checkpoint.name | lstring:locale}} <a ng-href="#" ng-click="showcp= !showcp">more details</a>
-							<div ng-show="showcp" view-abs-checkpoint  ng-model="checkpoint" document-info="checkpoint" hide="header,footer" locale="getLocale()" link-target={{linkTarget}}></div>
+							{{checkpoint.name | lstring:locale}} <a ng-href="#" ng-click="showcp= !showcp" class="btn btn-xs btn-info">{{showcp ? "- less" : "+ more"}} details</a>
+							<div ng-show="showcp" view-abs-checkpoint  ng-model="checkpoint" document-info="checkpoint" hide="footer" locale="getLocale()" link-target={{linkTarget}}></div>
 						</li>
 					</ul>
 				</div>

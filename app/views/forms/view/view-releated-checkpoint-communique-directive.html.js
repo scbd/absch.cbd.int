@@ -16,7 +16,7 @@ app.directive("viewRelatedCheckpointCommunique", [function () {
       function ($scope, storage, $q,$route) {
 
       $scope.$watch('permitId', function(value){
-        
+
         if(value){
           $scope.load($scope.permitId);
         }
@@ -47,7 +47,7 @@ app.directive("viewRelatedCheckpointCommunique", [function () {
           $scope.referenceCheckpointCommunique   = results.data;
 
         }).then(null, function(error) {
-          $scope.error = "error loading permit releated checkpoint communique.";
+          $scope.error = "error loading permit releated checkpoint communiqué.";
            console.log( $scope.error );
         })
 
