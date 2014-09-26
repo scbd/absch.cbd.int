@@ -1,7 +1,7 @@
 define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], function (app,angucomplete) {
 
-    app.controller("CountriesController", ["$scope", "authHttp","underscore","$q","$filter","$timeout", "$location","realm",
-     function ($scope, $http, _, $q,$filter,$timeout, $location, realm) {
+    app.controller("CountriesController", ["$scope", "authHttp","underscore","$q","$filter","$timeout", "$location","realm","$routeParams",
+     function ($scope, $http, _, $q,$filter,$timeout, $location, realm, $routeParams) {
 
     	//*******************************************************
         var queryFacetsParameters = {
@@ -65,6 +65,12 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
              loadMap(countryColors);
              $scope.slideMap('#mapDiv','#listDiv');
              CalculateFacets();
+            //  console.log($routeParams.commonFormat)
+            if($routeParams.commonFormat)
+            {
+                $scope.searchFilter=$scope.isRatified;
+                $scope.updateMap('ratified');
+            }
         });
 
         var today= moment();
@@ -124,7 +130,7 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
 
             if(!colors)
                 colors = this.countryColors;
-             jQuery('#vmap').vectorMap(
+            jQuery('#vmap').vectorMap(
                 {
                     map: 'world_en',
                     backgroundColor: '#EEE',
@@ -192,6 +198,7 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
 
             $('.jqvmap-zoomin').html('<i class="glyphicon glyphicon-plus"/>')
             $('.jqvmap-zoomout').html('<i class="glyphicon glyphicon-minus"/>')
+        //    console.log(map);
         }
 
         $scope.updateMap = function(action){
@@ -199,39 +206,41 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
             $scope.selected_facet= action
 
             _.each($scope.countries, function(country){
-                    $("#jqvmap1_"+country.code.toLowerCase()).attr("fill", "#fff");
+            //    console.log(country);
+                    $("#jqvmap" + getMapIndex() + "_"+country.code.toLowerCase()).attr("fill", "#fff");
             });
             //fix for taiwan
-            $("#jqvmap1_tw").attr("fill", "#fff");
-            $("#jqvmap1_gl").attr("fill", "#fff");
+            $("#jqvmap" + getMapIndex() + "_tw").attr("fill", "#fff");
+            $("#jqvmap" + getMapIndex() + "_gl").attr("fill", "#fff");
             if(action == 'signatory' || action == 'party' || action == 'ratified'){
                 _.each($scope.countries, function(country){
-
+                    //console.log(country);
                     if((action == 'party' || action == 'ratified') && country.isRatified){
-                        $("#jqvmap1_"+country.code.toLowerCase()).attr("fill", "#428bca");
-                        $("#jqvmap1_gl").attr("fill", "#428bca");
+                        $("#jqvmap" + getMapIndex() + "_"+country.code.toLowerCase()).attr("fill", "#428bca");
+                        $("#jqvmap" + getMapIndex() + "_gl").attr("fill", "#428bca");
                     }
                     else if((action == 'party' || action == 'signatory') && country.isSignatory)
-                        $("#jqvmap1_"+country.code.toLowerCase()).attr("fill", "#5bc0de");
+                        $("#jqvmap" + getMapIndex() + "_"+country.code.toLowerCase()).attr("fill", "#5bc0de");
                     else if(action == 'party' && country.isParty){
-                         $("#jqvmap1_"+country.code.toLowerCase()).attr("fill", "#808080");
-                         $("#jqvmap1_tw").attr("fill", "#808080");
+                         $("#jqvmap" + getMapIndex() + "_"+country.code.toLowerCase()).attr("fill", "#808080");
+                         $("#jqvmap" + getMapIndex() + "_tw").attr("fill", "#808080");
                     }
                 });
             }
             else{
                     $scope.searchFilter = $scope.hasFacets;
                     _.each($scope.countryFacets['government_s,schema_s'], function(data){
+                        console.log(("#jqvmap" + getMapIndex() + "_tw"));
                         var colorCountry = false;
                         var search = _.where(data.pivot, {value:action});
                         if(search.length>0){
-                            $("#jqvmap1_"+data.value.toLowerCase()).attr("fill", "#428bca");
+                            $("#jqvmap" + getMapIndex() + "_"+data.value.toLowerCase()).attr("fill", "#428bca");
                             //fix for taiwan
                             if(data.value.toLowerCase()=='cn')
-                                $("#jqvmap1_tw").attr("fill", "#808080");
+                                $("#jqvmap" + getMapIndex() + "_tw").attr("fill", "#808080");
 
                             if(data.value.toLowerCase()=='dk')
-                                $("#jqvmap1_gl").attr("fill", "#428bca");
+                                $("#jqvmap" + getMapIndex() + "_gl").attr("fill", "#428bca");
                         }
                     });
             }
@@ -243,6 +252,14 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
             return facet == $scope.selected_facet;
         }
 
+        function getMapIndex(id){
+            if(!id)
+                id = 1;
+            if($("#jqvmap" + id + "_gl").length == 0)
+                return getMapIndex(id+1)
+
+            return id;
+        }
 
         function CalculateFacets(){
             var tempFacets = {};
@@ -255,7 +272,7 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
 
             });
             $scope.commonFormatFacets = _.pairs(tempFacets);
-            console.log($scope.commonFormatFacets)
+            //console.log($scope.commonFormatFacets)
         }
 
         $scope.slideMap = function(divShow,divHide){
@@ -264,6 +281,8 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
             $(divShow).slideDown( "slow" );
 
         }
+
+
 
     }]);
 // });
