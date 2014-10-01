@@ -105,23 +105,8 @@ app.controller("presentationController",
 						            'text':'Continue.',
 						            'target':'providerDesignatingCheckpoints'
 								}],
-<<<<<<< HEAD
-							  'points' : [{
-											'user' : [{
-												'r' : 1,
-												'b' : 0,
-												'c' : 0
-											}],
-											'provider' :  [{
-												'r' : 0,
-												'b' : 0,
-												'c' : 0
-											}]
-										 }]
-=======
-							  'points' : [{	'user' : [{'Relationsship' : 50,'Type2' : 37,'Mat' : 58}],
-											'provider' : [{'Relationsship' : 50,'Type2' : 37,'Mat' : 58}]}]
->>>>>>> 8f44581326d053670ab73ff9a0295885d359dcc8
+							  'points' : [{	'user' : [{'r' : 50,'b' : 37,'c' : 58}],
+											'provider' : [{'r' : 50,'b' : 37,'c' : 58}]}]
 						   },
 						   {
 							  'name' : 'providerDesignatingCheckpoints',
@@ -141,8 +126,8 @@ app.controller("presentationController",
 						         {
 						            'text':'You designate the national patent office responsible for magic genetic resources.',
 						            'value':'national patent office',
-							  		'points' : [{	'user' : [{'Relationsship' : 50,'Type2' : 37,'Mat' : 58}],
-											'provider' : [{'Relationsship' : 50,'Type2' : 37,'Mat' : 58}]}]
+							  		'points' : [{	'user' : [{'r' : 50,'b' : 37,'c' : 58}],
+											'provider' : [{'r' : 50,'b' : 37,'c' : 58}]}]
 								},{
 						            'text':'You designate the WIZARD WORLD Review, a premier magic journal.',
 						            'value':'WIZARD WORLD Review',
