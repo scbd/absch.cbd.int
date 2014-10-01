@@ -105,8 +105,7 @@ app.controller("presentationController",
 						            'text':'Continue.',
 						            'target':'providerDesignatingCheckpoints'
 								}],
-							  'points' : [{	'user' : [{'r' : 50,'b' : 37,'c' : 58}],
-											'provider' : [{'r' : 50,'b' : 37,'c' : 58}]}]
+							  'points' : [{	'user' : [{'r' : 50,'b' : 37,'c' : 58}],'provider' : [{'r' : 50,'b' : 37,'c' : 58}]}]
 						   },
 						   {
 							  'name' : 'providerDesignatingCheckpoints',
@@ -126,17 +125,13 @@ app.controller("presentationController",
 						         {
 						            'text':'You designate the national patent office responsible for magic genetic resources.',
 						            'value':'national patent office',
-							  		'points' : [{	'user' : [{'Relationsship' : 570,'Type2' : 337,'Mat' : 958}],
-											'provider' : [{'Relationsship' : 550,'Type2' : 37,'Mat' : 58}]}]
+							  		'points' : [{'user' : [{'r' : 50,'b' : 37,'c' : 58}],'provider' : [{'r' : 50,'b' : 37,'c' : 58}]}]
 								},{
 						            'text':'You designate the WIZARD WORLD Review, a premier magic journal.',
 						            'value':'WIZARD WORLD Review',
-							  		'points' : [{	'user' : [{'Relationsship' : 530,'Type2' : 3457,'Mat' : 548}],
-											'provider' : [{'Relationsship' : 5,'Type2' : 3,'Mat' : 5}]}]
+							  		'points' :[{'user' : [{'r' : 50,'b' : 37,'c' : 58}],'provider' : [{'r' : 50,'b' : 37,'c' : 58}]}]
 								}],
-							  'points' : [{	'user' : [{'Relationsship' : 40,'Type2' : 37,'Mat' : 58}],
-											'provider' : [{'Relationsship' : 50,'Type2' : 37,'Mat' : 58}]
-										 }]
+							  'points' :[{'user' : [{'r' : 50,'b' : 37,'c' : 58}],'provider' : [{'r' : 50,'b' : 37,'c' : 58}]}]
 						   }
 						];
 
@@ -154,28 +149,36 @@ app.controller("presentationController",
 				var val = this.value;//.replace('_yes','').replace('_no', '');
 				var negate = false;
 
-				if(!this.selected)
+				if(!this.checked)
 					negate = true;
-				$timeout(function(){$scope.choicesMade.push(val); $scope.choicesMade = _.uniq($scope.choicesMade);},10);
+				$timeout(function(){
+					if(!negate)
+						$scope.choicesMade.push(val);
+					else{
+						$scope.choicesMade.remove(val);
+					}
+					// $scope.choicesMade = _.uniq($scope.choicesMade);
+					 console.log($scope.choicesMade);
+				},10);
 
 	            var page_data = _.where($scope.PAGES, {name : current_page})[0];
 				var choicespoints = _.where(page_data.choices, {value : val});
 				if(choicespoints.length > 0){
 
-						if(!$scope.userChoicePoints)
-							$scope.userChoicePoints = [];
-						var pointCal = $scope.userChoicePoints;
+						if(!$scope.userPoints)
+							$scope.userPoints = [];
+						var pointCal = $scope.userPoints;
 						$scope.calculatePoints(choicespoints[0].points[0].user[0], pointCal, negate)
 						$timeout(function(){
-							$scope.userChoicePoints = pointCal
+							$scope.userPoints = pointCal
 						},10);
 
-						if(!$scope.providerChoicePoints)
-							$scope.providerChoicePoints = [];
-						var pointCal1 = $scope.providerChoicePoints;
+						if(!$scope.providerPoints)
+							$scope.providerPoints = [];
+						var pointCal1 = $scope.providerPoints;
 						$scope.calculatePoints(choicespoints[0].points[0].provider[0], pointCal1, negate)
 						$timeout(function(){
-							$scope.providerChoicePoints = pointCal1
+							$scope.providerPoints = pointCal1
 						},10);
 				}
 
@@ -210,6 +213,23 @@ app.controller("presentationController",
 					return existingPoints;
 				}
 			}
+
+
+			Object.defineProperty(Array.prototype, "remove", {
+			    enumerable: false,
+			    value: function (item) {
+			        var removeCounter = 0;
+
+			        for (var index = 0; index < this.length; index++) {
+			            if (this[index] === item) {
+			                this.splice(index, 1);
+			                removeCounter++;
+			                index--;
+			            }
+			        }
+			        return removeCounter;
+			    }
+			});
 
 
 
