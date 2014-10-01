@@ -29,7 +29,23 @@ app.controller("presentationController",
 			if (page_data.navigation) {
                 for (var navigation in page_data.navigation) {
                     var navigation_data = page_data.navigation[navigation];
-                    add_navigation(navigation_data.text, navigation_data.target);
+
+					if(navigation_data.condition){
+						var choiceMadeCount = 0
+						_.forEach(navigation_data.condition, function(choice){
+							if($scope.choicesMade.indexOf(choice)>=0){
+								choiceMadeCount++;
+							}
+						});
+						if(choiceMadeCount == navigation_data.condition.length ||
+							navigation_data.condition.indexOf('none') >= 0 && choiceMadeCount==0){
+								console.log($scope.choicesMade,choiceMadeCount,navigation_data.condition,navigation_data.condition.indexOf('none'))
+							add_navigation(navigation_data.text, navigation_data.target);
+						}
+
+					}
+					else
+                    	add_navigation(navigation_data.text, navigation_data.target);
                 }
             }
 			if(page_data.points){
@@ -115,11 +131,7 @@ app.controller("presentationController",
 						      'navigation':[
 						         {
 						            'text':'Continue.',
-						            'target':1
-								},
-								{
-						            'text':'back.',
-						            'target':'theUser'
+						            'target':'providerDesignating'
 								}],
 						      'choices':[
 						         {
@@ -132,6 +144,33 @@ app.controller("presentationController",
 							  		'points' :[{'user' : [{'r' : 50,'b' : 37,'c' : 58}],'provider' : [{'r' : 50,'b' : 37,'c' : 58}]}]
 								}],
 							  'points' :[{'user' : [{'r' : 50,'b' : 37,'c' : 58}],'provider' : [{'r' : 50,'b' : 37,'c' : 58}]}]
+						},
+						   {
+							  'name' : 'providerDesignating',
+						      'text':'Slide - Provider Designating Checkpoints Continue',
+							  'template' : 'presentations/images/theatre-access/theatre-access.003.jpg',
+						      'type':'choice',
+						      'navigation':[
+								{
+						            'text':'Whola.',
+						            'target':'Destiny',
+									'condition' : ['national patent office']
+								},
+								{
+						            'text':'Whola  again',
+						            'target':'DestinyD',
+									'condition' : ['national patent office','WIZARD WORLD Review']
+								},
+								{
+						            'text':'Nothing selected, you end up no where.',
+						            'target':'',
+									'condition' : ['none','national patent office','WIZARD WORLD Review']
+								},
+								{
+						            'text':'Back',
+						            'target':'providerDesignatingCheckpoints'
+								}],
+							  'points' :[{'user' : [{'r' : 50,'b' : 37,'c' : 58}],'provider' : [{'r' : 50,'b' : 37,'c' : 58}]}]
 						   }
 						];
 
@@ -141,7 +180,9 @@ app.controller("presentationController",
 		    load_page(current_page);
             $('#response').on('click', '.navigation', function () {
                 var target = $(this).data('target');
-                load_page(target);
+				console.log(target)
+				if(target.length>0)
+                	load_page(target);
             });
 
 			$scope.choicesMade = [];
