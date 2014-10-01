@@ -107,14 +107,14 @@ app.controller("presentationController",
 								}],
 							  'points' : [{
 											'user' : [{
-												'Relationsship' : 10,
-												'Type2' : 3,
-												'Mat' : 5
+												'r' : 1,
+												'b' : 0,
+												'c' : 0
 											}],
 											'provider' :  [{
-												'Relationsship' : 1,
-												'Type2' : 6,
-												'Mat' : 9
+												'r' : 0,
+												'b' : 0,
+												'c' : 0
 											}]
 										 }]
 						   },
