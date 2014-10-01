@@ -16,7 +16,7 @@ app.controller("presentationController",
 
             // Fetch JSON for page data associated with given ID
             var page_data = _.where($scope.PAGES, {name : id})[0];
-
+			current_page = id;
             clear_page();
             set_page_text(page_data.text, 'page_data.name', page_data.template);
             if (page_data.choices) {
@@ -77,8 +77,8 @@ app.controller("presentationController",
         }
 
         function add_choices(text, value) {
-            $("#response").append(text + "<input class=\"choice\" type=\"radio\" name=\"" + value + "\" value=\"" + value + "\" /> Yes "
-								+ "<input class=\"choice\" type=\"radio\" name=\"" + value + "\" value=\"" + value + "\" /> No </br>");
+            $("#response").append(text + "<input class=\"choice\" type=\"radio\" name=\"" + value + "\" value=\"" + value + "_yes\" /> Yes "
+								+ "<input class=\"choice\" type=\"radio\" name=\"" + value + "\" value=\"" + value + "_no\" /> No </br>");
 
         }
 
@@ -105,18 +105,8 @@ app.controller("presentationController",
 						            'text':'Continue.',
 						            'target':'providerDesignatingCheckpoints'
 								}],
-							  'points' : [{
-											'user' : [{
-												'Relationsship' : 10,
-												'Type2' : 3,
-												'Mat' : 5
-											}],
-											'provider' :  [{
-												'Relationsship' : 1,
-												'Type2' : 6,
-												'Mat' : 9
-											}]
-										 }]
+							  'points' : [{	'user' : [{'Relationsship' : 50,'Type2' : 37,'Mat' : 58}],
+											'provider' : [{'Relationsship' : 50,'Type2' : 37,'Mat' : 58}]}]
 						   },
 						   {
 							  'name' : 'providerDesignatingCheckpoints',
@@ -135,22 +125,17 @@ app.controller("presentationController",
 						      'choices':[
 						         {
 						            'text':'You designate the national patent office responsible for magic genetic resources.',
-						            'value':'national patent office'
+						            'value':'national patent office',
+							  		'points' : [{	'user' : [{'Relationsship' : 50,'Type2' : 37,'Mat' : 58}],
+											'provider' : [{'Relationsship' : 50,'Type2' : 37,'Mat' : 58}]}]
 								},{
 						            'text':'You designate the WIZARD WORLD Review, a premier magic journal.',
-						            'value':'WIZARD WORLD Review'
+						            'value':'WIZARD WORLD Review',
+							  		'points' : [{	'user' : [{'Relationsship' : 50,'Type2' : 37,'Mat' : 58}],
+											'provider' : [{'Relationsship' : 50,'Type2' : 37,'Mat' : 58}]}]
 								}],
-							  'points' : [{
-											'user' : [{
-												'Relationsship' : 50,
-												'Type2' : 37,
-												'Mat' : 58
-											}],
-											'provider' :  [{
-												'Relationsship' : 11,
-												'Type2' : 16,
-												'Mat' : 19
-											}]
+							  'points' : [{	'user' : [{'Relationsship' : 50,'Type2' : 37,'Mat' : 58}],
+											'provider' : [{'Relationsship' : 50,'Type2' : 37,'Mat' : 58}]
 										 }]
 						   }
 						];
@@ -166,13 +151,64 @@ app.controller("presentationController",
 
 			$scope.choicesMade = [];
 			$('#response').on('change', '.choice', function () {
-				var val = this.value;
+				var val = this.value.replace('_yes','').replace('_no', '');
+				var negate = false;
+
+				if(this.value.indexOf('_no') > 0)
+					negate = true;
 				$timeout(function(){$scope.choicesMade.push(val)},10);
+
+	            var page_data = _.where($scope.PAGES, {name : current_page})[0];
+				var choicespoints = _.where(page_data.choices, {value : val});
+				if(choicespoints.length > 0){
+
+						if(!$scope.userChoicePoints)
+							$scope.userChoicePoints = [];
+						var pointCal = $scope.userChoicePoints;
+						$scope.calculatePoints(choicespoints[0].points[0].user[0], pointCal, negate)
+						$timeout(function(){
+							$scope.userChoicePoints = pointCal
+						},10);
+
+						if(!$scope.providerChoicePoints)
+							$scope.providerChoicePoints = [];
+						var pointCal1 = $scope.providerChoicePoints;
+						$scope.calculatePoints(choicespoints[0].points[0].provider[0], pointCal1, negate)
+						$timeout(function(){
+							$scope.providerChoicePoints = pointCal1
+						},10);
+				}
+
             });
 
+			$scope.calculatePoints = function(pointArray, pointCal, negate){
+				_.forEach(_.pairs(pointArray), function(data){
+					var existing = _.where(pointCal, {type : data[0]});
+					if(existing.length == 0)
+						pointCal.push({type : data[0], score : (negate ? -1 : 1)  * data[1]});
+					else
+						existing[0].score = existing[0].score + (negate ? -1 : 1)  * data[1]
+				})
+			}
 
+			$scope.sumPoints = function(existingPoints, type, entity){
 
+				if(entity == 'user'){
+					if($scope.userChoicePoints){
+						var points = _.where($scope.userChoicePoints, {type : type})[0];
+						return points.score + existingPoints;
+					}
+					return existingPoints;
+				}
 
+				if(entity == 'provider'){
+					if($scope.providerChoicePoints){
+						var points = _.where($scope.providerChoicePoints, {type : type})[0];
+						return points.score + existingPoints;
+					}
+					return existingPoints;
+				}
+			}
 
 
 
