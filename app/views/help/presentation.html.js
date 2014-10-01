@@ -73,12 +73,12 @@ app.controller("presentationController",
         function set_page_text(text, name,template) {
 			//"<div ></div>
             $("#page_text").append("<p id=\"presentation\"" + name  +">" + text + "</p>");
-			$('#presentation').html('<img width="100%" src="/app/views/help/' + template + '" />');
+			$('#presentation').html('<img width="100%" height="200px" src="/app/views/help/' + template + '" />');
         }
 
         function add_choices(text, value) {
-            $("#response").append(text + "<input class=\"choice\" type=\"radio\" name=\"" + value + "\" value=\"" + value + "_yes\" /> Yes "
-								+ "<input class=\"choice\" type=\"radio\" name=\"" + value + "\" value=\"" + value + "_no\" /> No </br>");
+            $("#response").append("<input class=\"choice\" type=\"checkbox\" name=\"" + value + "\" value=\"" + value + "\" />" + text
+								+ "</br>");
 
         }
 
@@ -126,15 +126,15 @@ app.controller("presentationController",
 						         {
 						            'text':'You designate the national patent office responsible for magic genetic resources.',
 						            'value':'national patent office',
-							  		'points' : [{	'user' : [{'r' : 50,'b' : 37,'c' : 58}],
-											'provider' : [{'r' : 50,'b' : 37,'c' : 58}]}]
+							  		'points' : [{	'user' : [{'Relationsship' : 570,'Type2' : 337,'Mat' : 958}],
+											'provider' : [{'Relationsship' : 550,'Type2' : 37,'Mat' : 58}]}]
 								},{
 						            'text':'You designate the WIZARD WORLD Review, a premier magic journal.',
 						            'value':'WIZARD WORLD Review',
-							  		'points' : [{	'user' : [{'Relationsship' : 50,'Type2' : 37,'Mat' : 58}],
-											'provider' : [{'Relationsship' : 50,'Type2' : 37,'Mat' : 58}]}]
+							  		'points' : [{	'user' : [{'Relationsship' : 530,'Type2' : 3457,'Mat' : 548}],
+											'provider' : [{'Relationsship' : 5,'Type2' : 3,'Mat' : 5}]}]
 								}],
-							  'points' : [{	'user' : [{'Relationsship' : 50,'Type2' : 37,'Mat' : 58}],
+							  'points' : [{	'user' : [{'Relationsship' : 40,'Type2' : 37,'Mat' : 58}],
 											'provider' : [{'Relationsship' : 50,'Type2' : 37,'Mat' : 58}]
 										 }]
 						   }
@@ -151,12 +151,12 @@ app.controller("presentationController",
 
 			$scope.choicesMade = [];
 			$('#response').on('change', '.choice', function () {
-				var val = this.value.replace('_yes','').replace('_no', '');
+				var val = this.value;//.replace('_yes','').replace('_no', '');
 				var negate = false;
 
-				if(this.value.indexOf('_no') > 0)
+				if(!this.selected)
 					negate = true;
-				$timeout(function(){$scope.choicesMade.push(val)},10);
+				$timeout(function(){$scope.choicesMade.push(val); $scope.choicesMade = _.uniq($scope.choicesMade);},10);
 
 	            var page_data = _.where($scope.PAGES, {name : current_page})[0];
 				var choicespoints = _.where(page_data.choices, {value : val});
@@ -196,7 +196,7 @@ app.controller("presentationController",
 				if(entity == 'user'){
 					if($scope.userChoicePoints){
 						var points = _.where($scope.userChoicePoints, {type : type})[0];
-						return points.score + existingPoints;
+						return existingPoints + points.score;
 					}
 					return existingPoints;
 				}
@@ -204,7 +204,8 @@ app.controller("presentationController",
 				if(entity == 'provider'){
 					if($scope.providerChoicePoints){
 						var points = _.where($scope.providerChoicePoints, {type : type})[0];
-						return points.score + existingPoints;
+						console.log(points, 'provider');
+						return existingPoints + points.score ;
 					}
 					return existingPoints;
 				}
