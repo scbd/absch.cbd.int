@@ -114,7 +114,28 @@
                 <div id="response">
                 </div>
             </div>
+<<<<<<< HEAD
+=======
+            <div class="col-xs-4 col-lg-4 col-md-4">
+                <ul class="list-group" >
+                    <li class="list-group-item active">selected answers</li>
+                  <li class="list-group-item" ng-repeat="selected in choicesMade">{{selected}}</li>
+                </ul>
+
+                <ul class="list-group"  ng-show="userPoints">
+                    <li class="list-group-item active">Provider Points</li>
+                   <li class="list-group-item" ng-repeat="point in userPoints">{{point.type}} ({{sumPoints(point.score,point.type, 'user')}})</li>
+                </ul>
+
+
+                <ul class="list-group"  ng-show="providerPoints">
+                 <li class="list-group-item active">Provider Points</li>
+                  <li class="list-group-item" ng-repeat="point in providerPoints">{{point.type}} ({{sumPoints(point.score,point.type, 'provider')}})</li>
+                </ul>
+            </div>
+>>>>>>> 8f44581326d053670ab73ff9a0295885d359dcc8
         </div>
 
     </div>
+    {{choicesMade}}
 </div>
