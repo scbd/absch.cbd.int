@@ -16,7 +16,7 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
         $routeProvider.
             when('/',                            { templateUrl: '/app/views/index.html'                     ,resolveController: true, resolveUser: true}).
             when('/commonformat',                { templateUrl: '/app/views/common-formats.html'            ,resolveController: true, resolveUser: true}).
-            when('/presentation',                { templateUrl: '/app/views/help/presentation.html'            ,resolveController: true, resolveUser: true}).
+            //when('/presentation',                { templateUrl: '/app/views/help/presentation.html'            ,resolveController: true, resolveUser: true}).
             when('/about',                       { templateUrl: '/app/views/about.html'                     ,resolveController: true, resolveUser: true}).
             when('/help',                        { templateUrl: '/app/views/help.html'                      ,resolveController: true, resolveUser: true}).
             when('/help/presentations/theatre-access',         { templateUrl: '/app/views/help/presentations/theatre-access.html'                      ,resolveController: true, resolveUser: true}).
@@ -61,7 +61,14 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
             }).
             when('/about', { redirectTo: '/about/absch' }).
 
-
+            when('/presentation/:document_type', {
+              templateUrl: '/app/views/help/presentations/presentation.html',
+              resolveController: true,
+              resolveUser: true,
+              subTemplateUrl: '/app/views/help/presentations/slides/-',
+              ignoreSubController: true,
+            }).
+            when('/presentation', { redirectTo: '/presentation/start' }).
 
 
 
