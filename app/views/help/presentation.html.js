@@ -18,8 +18,35 @@ app.controller("presentationController",
             var page_data = _.where($scope.PAGES, {name : id})[0];
 			current_page = id;
             clear_page();
-            set_page_text(page_data.text, 'page_data.name', page_data.template);
-            if (page_data.choices) {
+
+
+			if (page_data.text) {
+				console.log(typeof(page_data.text))
+			  if(angular.isObject(page_data.text))
+	                for (var navigation in page_data.text) {
+	                    var navigation_data = page_data.text[navigation];
+						if(!navigation_data.condition || (navigation_data.condition && validateCondition(navigation_data)))
+							set_page_text(navigation_data.text, 'page_data.name');
+	                }
+			  else
+					set_page_text(page_data.text, 'page_data.name');
+            }
+
+			if (page_data.template) {
+				//console.log(typeof(page_data.text))
+			  if(angular.isObject(page_data.text))
+                for (var navigation in page_data.template) {
+                    var navigation_data = page_data.template[navigation];
+					if(!navigation_data.condition || (navigation_data.condition && validateCondition(navigation_data)))
+						set_page_template(navigation_data.slide);
+                }
+			  else
+					set_page_template(page_data.template);
+            }
+
+
+
+			if (page_data.choices) {
                 for (var choice in page_data.choices) {
                     var choice_data = page_data.choices[choice];
                     add_choices(choice_data.text, choice_data.value);
@@ -27,26 +54,11 @@ app.controller("presentationController",
             }
 
 			if (page_data.navigation) {
-                for (var navigation in page_data.navigation) {
-                    var navigation_data = page_data.navigation[navigation];
-
-					if(navigation_data.condition){
-						var choiceMadeCount = 0
-						_.forEach(navigation_data.condition, function(choice){
-							if($scope.choicesMade.indexOf(choice)>=0){
-								choiceMadeCount++;
-							}
-						});
-						if(choiceMadeCount == navigation_data.condition.length ||
-							navigation_data.condition.indexOf('none') >= 0 && choiceMadeCount==0){
-								console.log($scope.choicesMade,choiceMadeCount,navigation_data.condition,navigation_data.condition.indexOf('none'))
+	                for (var navigation in page_data.navigation) {
+	                    var navigation_data = page_data.navigation[navigation];
+						if(!navigation_data.condition || (navigation_data.condition && validateCondition(navigation_data)))
 							add_navigation(navigation_data.text, navigation_data.target);
-						}
-
-					}
-					else
-                    	add_navigation(navigation_data.text, navigation_data.target);
-                }
+	                }
             }
 			if(page_data.points){
 				if(page_data.points[0].user){
@@ -85,11 +97,28 @@ app.controller("presentationController",
 			}
 
         }
+		function validateCondition(data){
+			var choiceMadeCount = 0
+			_.forEach(data.condition, function(choice){
+				if($scope.choicesMade.indexOf(choice)>=0){
+					choiceMadeCount++;
+				}
+			});
+			if(choiceMadeCount == data.condition.length ||
+				data.condition.indexOf('none') >= 0 && choiceMadeCount==0){
+				return true;
+			}
+			return false;
+		}
 
-        function set_page_text(text, name,template) {
+        function set_page_text(text, name) {
 			//"<div ></div>
             $("#page_text").append("<p id=\"presentation\"" + name  +">" + text + "</p>");
-			$('#presentation').html('<img width="100%" height="200px" src="/app/views/help/' + template + '" />');
+			//$('#presentation').html('<img width="100%" height="200px" src="/app/views/help/' + template + '" />');
+        }
+        function set_page_template(template) {
+
+			$('#presentation').append('<img width="100%" height="200px" src="/app/views/help/' + template + '" />');
         }
 
         function add_choices(text, value) {
@@ -147,19 +176,45 @@ app.controller("presentationController",
 						},
 						   {
 							  'name' : 'providerDesignating',
-						      'text':'Slide - Provider Designating Checkpoints Continue',
-							  'template' : 'presentations/images/theatre-access/theatre-access.003.jpg',
+						      'text':[
+								{
+						            'text':'Slide - Provider Designating Checkpoints Continue',
+									'condition' : ['national patent office']
+								},
+								{
+						            'text':'Whola  again',
+									'condition' : ['WIZARD WORLD Review']
+								},
+								{
+						            'text':'Nothing selected, you end up no where.',
+									'condition' : ['none','national patent office','WIZARD WORLD Review']
+								}],
+							  'template' : [
+								{
+						            'slide':'presentations/images/theatre-access/theatre-access.003.jpg',
+									'condition' : ['national patent office']
+								},
+								{
+						            'slide':'presentations/images/theatre-access/theatre-access.007.jpg',
+									'condition' : ['WIZARD WORLD Review']
+								},
+								{
+						            'slide':'presentations/images/theatre-access/theatre-access.008.jpg',
+									'condition' : ['none','national patent office','WIZARD WORLD Review']
+								}],
 						      'type':'choice',
 						      'navigation':[
 								{
 						            'text':'Whola.',
 						            'target':'Destiny',
-									'condition' : ['national patent office']
+									'condition' : ['national patent office'],
+							  		'points' :[{'user' : [{'r' : 50,'b' : 37,'c' : 58}],'provider' : [{'r' : 50,'b' : 37,'c' : 58}]}],
+									'value' : 'wholaaaaaaaaaa'
 								},
 								{
 						            'text':'Whola  again',
 						            'target':'DestinyD',
-									'condition' : ['national patent office','WIZARD WORLD Review']
+									'condition' : ['WIZARD WORLD Review']
 								},
 								{
 						            'text':'Nothing selected, you end up no where.',
@@ -180,7 +235,32 @@ app.controller("presentationController",
 		    load_page(current_page);
             $('#response').on('click', '.navigation', function () {
                 var target = $(this).data('target');
-				console.log(target)
+
+				var page_data = _.where($scope.PAGES, {name : current_page})[0];
+				var navigation = _.where(page_data.navigation, {target : target});
+				if(navigation.length > 0){
+					if(navigation[0].points){
+						var pointCal = $scope.userPoints;
+						$scope.calculatePoints(navigation[0].points[0].user[0], pointCal, false)
+						$timeout(function(){
+							$scope.userPoints = pointCal
+						},10);
+
+						if(!$scope.providerPoints)
+							$scope.providerPoints = [];
+						var pointCal1 = $scope.providerPoints;
+						$scope.calculatePoints(navigation[0].points[0].provider[0], pointCal1, false)
+						$timeout(function(){
+							$scope.providerPoints = pointCal1
+						},10);
+					}
+					if(navigation[0].value){
+						$scope.choicesMade.push(navigation[0].value);
+					}
+				}
+
+
+			//	console.log(target)
 				if(target.length>0)
                 	load_page(target);
             });
@@ -199,7 +279,7 @@ app.controller("presentationController",
 						$scope.choicesMade.remove(val);
 					}
 					// $scope.choicesMade = _.uniq($scope.choicesMade);
-					 console.log($scope.choicesMade);
+					 //console.log($scope.choicesMade);
 				},10);
 
 	            var page_data = _.where($scope.PAGES, {name : current_page})[0];
@@ -248,7 +328,7 @@ app.controller("presentationController",
 				if(entity == 'provider'){
 					if($scope.providerChoicePoints){
 						var points = _.where($scope.providerChoicePoints, {type : type})[0];
-						console.log(points, 'provider');
+						//console.log(points, 'provider');
 						return existingPoints + points.score ;
 					}
 					return existingPoints;
