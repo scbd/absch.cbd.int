@@ -10,7 +10,7 @@ app.controller("presentationController",
 	  schemaTypes,$compile,$timeout,lstringFilter, $routeParams) {
 
 
-		var current_page = 'theUser';
+		var current_page = 'start';
 
         function load_page(id) {
 
@@ -141,89 +141,72 @@ app.controller("presentationController",
 		// $scope.choicesMade = [];//['blaise fonseca', 'Schnell fonseca'];
         $scope.PAGES = [
 						   {
-							  'name' : 'theUser',
-						      'text':'Slide - The User',
+							  'name' : 'start',
+						      'text':'Slide - Start',
 							  'template' : 'presentations/images/theatre-access/theatre-access.001.jpg',
 						      'type':'choice',
 						      'navigation':[
 						         {
 						            'text':'Continue.',
-						            'target':'providerDesignatingCheckpoints'
-								}],
-							  'points' : [{	'user' : [{'r' : 50,'b' : 37,'c' : 58}],'provider' : [{'r' : 50,'b' : 37,'c' : 58}]}]
+						            'target':'selectMSR'
+								}]
 						   },
+
+
 						   {
-							  'name' : 'providerDesignatingCheckpoints',
-						      'text':'Slide - Provider Designating Checkpoints',
+							  'name' : 'selectMSR',
+						      'text':'Slide - select measures',
 							  'template' : 'presentations/images/theatre-access/theatre-access.002.jpg',
 						      'type':'choice',
+
 						      'navigation':[
 						         {
-						            'text':'Continue.',
-						            'target':'providerDesignating'
-								}],
-						      'choices':[
-						         {
-						            'text':'You designate the national patent office responsible for magic genetic resources.',
-						            'value':'national patent office',
-							  		'points' : [{'user' : [{'r' : 50,'b' : 37,'c' : 58}],'provider' : [{'r' : 50,'b' : 37,'c' : 58}]}]
-								},{
-						            'text':'You designate the WIZARD WORLD Review, a premier magic journal.',
-						            'value':'WIZARD WORLD Review',
-							  		'points' :[{'user' : [{'r' : 50,'b' : 37,'c' : 58}],'provider' : [{'r' : 50,'b' : 37,'c' : 58}]}]
-								}],
-							  'points' :[{'user' : [{'r' : 50,'b' : 37,'c' : 58}],'provider' : [{'r' : 50,'b' : 37,'c' : 58}]}]
+						            'target':'selectCP',
+									'text':'good MSR',
+						            'value':'goodMSR',
+							  		'points' : [{'user' : [{'r' : 1,'b' : 1,'c' : 1}],'provider' : [{'r' : 1,'b' : 1,'c' : 1}]}]
+								},
+								{
+						            'target':'selectCP',
+									'text':'bad MSR',
+						            'value':'badMSR',
+							  		'points' :[{'user' : [{'r' : -5,'b' : -5,'c' : -5}],'provider' : [{'r' : -5,'b' : -5,'c' : -5}]}]
+								}]
+
 						},
 						   {
-							  'name' : 'providerDesignating',
+							  'name' : 'selectCP',
 						      'text':[
+
 								{
-						            'text':'Slide - Provider Designating Checkpoints Continue',
-									'condition' : ['national patent office']
+						            'text':'now select your checkpoints',
+									'condition' : ['none']
 								},
 								{
-						            'text':'Whola  again',
-									'condition' : ['WIZARD WORLD Review']
+						            'text':'you selected a good msr',
+									'condition' : ['goodMSR']
 								},
 								{
-						            'text':'Nothing selected, you end up no where.',
-									'condition' : ['none','national patent office','WIZARD WORLD Review']
-								}],
-							  'template' : [
-								{
-						            'slide':'presentations/images/theatre-access/theatre-access.003.jpg',
-									'condition' : ['national patent office']
-								},
-								{
-						            'slide':'presentations/images/theatre-access/theatre-access.007.jpg',
-									'condition' : ['WIZARD WORLD Review']
-								},
-								{
-						            'slide':'presentations/images/theatre-access/theatre-access.008.jpg',
-									'condition' : ['none','national patent office','WIZARD WORLD Review']
-								}],
+						            'text':'you selected a bad msr',
+									'condition' : ['badMSR']
+								}
+								],
+							  'template' : 'presentations/images/theatre-access/theatre-access.003.jpg',
+
 						      'type':'choice',
-						      'navigation':[
+						      'choice':[
 								{
-						            'text':'Whola.',
-						            'target':'Destiny',
-									'condition' : ['national patent office'],
+						            'text':'cp - patent office.',
 							  		'points' :[{'user' : [{'r' : 50,'b' : 37,'c' : 58}],'provider' : [{'r' : 50,'b' : 37,'c' : 58}]}],
-									'value' : 'wholaaaaaaaaaa'
+									'value' : 'patentoffice'
 								},
 								{
-						            'text':'Whola  again',
-						            'target':'DestinyD',
-									'condition' : ['WIZARD WORLD Review']
+						            'text':'cp = wizard world',
+						            'points' :[{'user' : [{'r' : 50,'b' : 37,'c' : 58}],'provider' : [{'r' : 50,'b' : 37,'c' : 58}]}],
+									'value' : 'wizardworld'
 								},
 								{
-						            'text':'Nothing selected, you end up no where.',
-						            'target':'',
-									'condition' : ['none','national patent office','WIZARD WORLD Review']
-								},
-								{
-						            'text':'Back',
-						            'target':'providerDesignatingCheckpoints'
+						            'text':'none.',
 								}],
 							  'points' :[{'user' : [{'r' : 50,'b' : 37,'c' : 58}],'provider' : [{'r' : 50,'b' : 37,'c' : 58}]}]
 						   }
@@ -306,6 +289,8 @@ app.controller("presentationController",
             });
 
 			$scope.calculatePoints = function(pointArray, pointCal, negate){
+				if(!pointCal)
+					pointCal = [];
 				_.forEach(_.pairs(pointArray), function(data){
 					var existing = _.where(pointCal, {type : data[0]});
 					if(existing.length == 0)
