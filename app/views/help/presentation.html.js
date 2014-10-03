@@ -34,7 +34,7 @@ app.controller("presentationController",
 
 			if (page_data.template) {
 				//console.log(typeof(page_data.text))
-			  if(angular.isObject(page_data.text))
+			  if(angular.isObject(page_data.template))
                 for (var navigation in page_data.template) {
                     var navigation_data = page_data.template[navigation];
 					if(!navigation_data.condition || (navigation_data.condition && validateCondition(navigation_data)))
@@ -177,7 +177,6 @@ app.controller("presentationController",
 						   {
 							  'name' : 'selectCP',
 						      'text':[
-
 								{
 						            'text':'now select your checkpoints',
 									'condition' : ['none']
@@ -192,13 +191,45 @@ app.controller("presentationController",
 								}
 								],
 							  'template' : 'presentations/images/theatre-access/theatre-access.003.jpg',
+						      'type':'choice',
+						      'choices':[
+								{
+						            'text':'cp - patent office.',
+							  		'points' :[{'user' : [{'r' : 50,'b' : 37,'c' : 58}],'provider' : [{'r' : 50,'b' : 37,'c' : 58}]}],
+									'value' : 'patentoffice',
+									'condition':['none']
+								},
+								{
+						            'text':'cp = wizard world',
+						            'points' :[{'user' : [{'r' : 50,'b' : 37,'c' : 58}],'provider' : [{'r' : 50,'b' : 37,'c' : 58}]}],
+									'value' : 'cp-wizardworld',
+									'condition':['none']
+								}
+								],
+							  'points' :[{'user' : [{'r' : 50,'b' : 37,'c' : 58}],'provider' : [{'r' : 50,'b' : 37,'c' : 58}]}]
+						},
 
+						{
+							  'name' : 'WizardWorld',
+						      'text':[
+
+								{
+						            'text':'this is NOT a checkpoint',
+									'condition' : ['none']
+								},
+								{
+						            'text':'this is a checkppoint',
+									'condition' : ['cp-wizardworld']
+								}
+								],
+							  'template' : 'presentations/images/theatre-access/theatre-access.004.jpg',
 						      'type':'choice',
 						      'choice':[
 								{
 						            'text':'cp - patent office.',
 							  		'points' :[{'user' : [{'r' : 50,'b' : 37,'c' : 58}],'provider' : [{'r' : 50,'b' : 37,'c' : 58}]}],
-									'value' : 'patentoffice'
+									'value' : 'patentoffice',
+
 								},
 								{
 						            'text':'cp = wizard world',
