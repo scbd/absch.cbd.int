@@ -146,6 +146,9 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
       if (/^\s*$/g.test(document.notes))
         document.notes = undefined;
 
+      if (document.limitedApplication =='')
+        document.limitedApplication = undefined;
+
       return document
     };
 
