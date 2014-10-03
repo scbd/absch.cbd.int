@@ -61,11 +61,11 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
             }).
             when('/about', { redirectTo: '/about/absch' }).
 
-            when('/presentation/:document_type', {
+            when('/presentation/:folder/:document_type', {
               templateUrl: '/app/views/help/presentations/presentation.html',
               resolveController: true,
               resolveUser: true,
-              subTemplateUrl: '/app/views/help/presentations/slides/-',
+              subTemplateUrl: '/app/views/help/presentations/:folder/-',
               ignoreSubController: true,
             }).
             when('/presentation', { redirectTo: '/presentation/start' }).
