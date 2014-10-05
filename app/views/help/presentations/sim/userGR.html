@@ -1,0 +1,58 @@
+
+<div class="row" id="Presentation">
+    <div  class="col-xs-12" ng-class="{'col-xs-8':help}">
+
+    <div class="thumbnail" >
+        <img class="slide" src="/app/views/help/presentations/images/theatre-access/theatre-access.001.jpg" >
+    </div>
+
+    </div>
+    <div class="col-xs-4" ng-show="help">
+        <ul>
+        <li><a href="">Read the text of the Nagoya Protocol</a></li>
+        <li><a href="">Fact sheet: Becoming a Party</a></li>
+        <li><a href="">Fact sheet: Becoming a Party</a></li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="row" id="Presentation">
+    <div  class="col-xs-12" >
+
+        <div class="title">The User needs to get some genetic resources</div>
+
+        <div class="text">
+            <p>YOU are the User</p>
+            <p>YOU have all the ingredients for your magic potion except one, Sopophorous beans. Sopophorous beans are very very rare and only grow in special environments on Middle-earth.  </p>
+        </div>
+        <div class="choices" >
+            <p><u class="color-red">YOU MUST CHOOSE:</u>  </p>
+
+            <div class="option" ng-class="{'option-selected':hasParam('user_no_beans')}" ng-click="addParam('user_no_beans');removeParam('user_store');removeParam('user_plan_expedition')">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_no_beans'),'glyphicon-ok':hasParam('user_no_beans')}"></i>
+                Make the potion without the beans
+            </div>
+
+            <div class="option" ng-class="{'option-selected':hasParam('user_store')}" ng-click="addParam('user_store');removeParam('user_no_beans');removeParam('user_plan_expedition')">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_store'),'glyphicon-ok':hasParam('user_store')}"></i>
+                See if you can buy some at the wizard store
+            </div>
+
+            <div class="option" ng-class="{'option-selected':hasParam('user_plan_expedition')}" ng-click="addParam('user_plan_expedition');removeParam('user_no_beans');;removeParam('user_store')">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_plan_expedition'),'glyphicon-ok':hasParam('user_plan_expedition')}"></i>
+                Make an expedition to Middle-earth to find and collect the beans yourself
+            </div>
+
+        </div>
+
+        <div class="continue">
+            <a class="btn btn-primary btn-lg" href="endNoBeans" ng-show="hasParam('user_no_beans')">Continue</a>
+            <a class="btn btn-primary btn-lg" href="userStore" ng-show="hasParam('user_store')">Continue</a>
+            <a class="btn btn-primary btn-lg" href="userPlanExp" ng-show="hasParam('user_plan_expedition')">Continue</a>
+            <a class="btn btn-default btn-lg" href="" ng-show="!hasParam('user_no_beans') && !hasParam('user_store') &&  !hasParam('user_plan_expedition') ">Please make your choice</a>
+        </div>
+
+    </div>
+
+</div>

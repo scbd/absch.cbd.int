@@ -8,8 +8,6 @@
 
     </div>
     <div class="col-xs-4" ng-show="help">
-        params  = {{params}}
-
         <ul>
         <li><a href="">Read the text of the Nagoya Protocol</a></li>
         <li><a href="">Fact sheet: Becoming a Party</a></li>
@@ -39,7 +37,7 @@
         </div>
 
         <div class="choices">
-            <p>You have been asked to advice on the designation of checkpoints for your country.
+            <p>You have been asked to advise on the designation of checkpoints for your country.
             <u class="color-red">YOU MUST CHOOSE:</u> </p>
 
             <div class="option" ng-class="{'option-selected':hasParam('CP_patent')}" ng-click="addParam('CP_patent');removeParam('CP_none');addPoints('CP_patent','user', [1,1,1])">

@@ -1,0 +1,52 @@
+
+<div class="row" id="Presentation">
+    <div  class="col-xs-12" ng-class="{'col-xs-8':help}">
+
+    <div class="thumbnail" >
+        <img class="slide" src="/app/views/help/presentations/images/theatre-access/theatre-access.001.jpg" >
+    </div>
+
+    </div>
+    <div class="col-xs-4" ng-show="help">
+        <ul>
+        <li><a href="">Read the text of the Nagoya Protocol</a></li>
+        <li><a href="">Fact sheet: Becoming a Party</a></li>
+        <li><a href="">Fact sheet: Becoming a Party</a></li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="row" id="Presentation">
+    <div  class="col-xs-12" >
+
+        <div class="title">Planning Your Expedition to Middle-earth</div>
+
+        <div class="text">
+            <p>YOU are the User</p>
+            <p>You decide to plan an expedition to collect the Sopophorous beans yourself. Since you are interested in using the magic genetic resources and magic knowledge from another famous fantasy movie or books.</p>
+        </div>
+        <div class="choices" >
+            <p><u class="color-red">YOU MUST CHOOSE:</u>  </p>
+
+            <div class="option" ng-class="{'option-selected':hasParam('plan_exp_no_absch')}" ng-click="addParam('plan_exp_no_absch');removeParam('plan_exp_absch');">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('plan_exp_no_absch'),'glyphicon-ok':hasParam('plan_exp_no_absch')}"></i>
+                Not to worry about looking at what are the conditions for accessing magic genetic resources and associated magic knowledge in the Middle-earth and you get on your broom stick and fly to Middle-earth to get some beans.
+            </div>
+
+            <div class="option" ng-class="{'option-selected':hasParam('plan_exp_absch')}" ng-click="addParam('plan_exp_absch');removeParam('plan_exp_no_absch');">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('plan_exp_absch'),'glyphicon-ok':hasParam('plan_exp_absch')}"></i>
+                Check the ABS-CH, look at the legislation and contact the CNA responsible for Middle-earth in order to prepare your trip to Middle-earth.
+            </div>
+
+        </div>
+
+        <div class="continue">
+            <a class="btn btn-primary btn-lg" href="userExp" ng-show="hasParam('plan_exp_no_absch')">Continue</a>
+            <a class="btn btn-primary btn-lg" href="abschAccess" ng-show="hasParam('plan_exp_absch')">Continue</a>
+            <a class="btn btn-default btn-lg" href="" ng-show="!hasParam('plan_exp_absch') && !hasParam('plan_exp_no_absch')">Please make your choice</a>
+        </div>
+
+    </div>
+
+</div>

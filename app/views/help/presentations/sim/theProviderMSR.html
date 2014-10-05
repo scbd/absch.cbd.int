@@ -31,7 +31,7 @@
 
             <div class="option" ng-class="{'option-selected':hasParam('MSR_good')}" ng-click="addParam('MSR_good');removeParam('MSR_bad');removeParam('MSR_none')">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('MSR_good'),'glyphicon-ok':hasParam('MSR_good')}"></i></i>
-                You develop your ABS legislation that includes provision for mandatory prior informed consent or approval and involvement of
+                You develop your ABS legislation that includes provision for mandatory prior informed consent (PIC) or approval and involvement of
                 elf local communities whenever access to magic genetic resource or associated magic knowledge is being considered. It also
                 includes the obligation to share benefits with the elf local communities. All USERs need to obtain PIC and establish MAT prior
                  to any utilization of the magic genetic resources and associated magic knowledge.
@@ -53,9 +53,9 @@
         </div>
 
         <div class="continue">
-            <a class="btn btn-primary btn-lg" href="" ng-show="hasParam('MSR_good') || hasParam('MSR_bad')">Continue</a>
+            <a class="btn btn-primary btn-lg" href="userGR" ng-show="hasParam('MSR_good') || hasParam('MSR_bad')">Continue</a>
             <a class="btn btn-primary btn-lg" href="endNoPic" ng-show="hasParam('MSR_none')">Continue</a>
-            <a class="btn btn-default btn-lg" href="" ng-show="!hasParam('MSR_good') && !hasParam('MSR_bad') &&  !hasParam('MSR_none') ">Please make your choice</a>
+            <a class="btn btn-default btn-lg" href="#" ng-show="!hasParam('MSR_good') && !hasParam('MSR_bad') &&  !hasParam('MSR_none') ">Please make your choice</a>
         </div>
 
     </div>
