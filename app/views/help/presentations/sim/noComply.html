@@ -1,3 +1,4 @@
+
 <div class="row" id="Presentation">
     <div  class="col-xs-12" ng-class="{'col-xs-8':help}">
 
@@ -7,12 +8,12 @@
 
     </div>
     <div class="col-xs-4" ng-show="help">
-        <!-- <h2 class="help-title">help section</h2>
-        <ul>
+
+        <ul ng-show="hasParam('CP_none')">
         <li><a href="">Read the text of the Nagoya Protocol</a></li>
         <li><a href="">Fact sheet: Becoming a Party</a></li>
         <li><a href="">Fact sheet: Becoming a Party</a></li>
-        </ul> -->
+        </ul>
     </div>
 </div>
 
@@ -20,8 +21,15 @@
 <div class="row" id="Presentation">
     <div  class="col-xs-12" >
 
+        <div class="title color-red">You are not complying with the obligations of the Protocol. </div>
+
+        <div class="text" ng-show="hasParam('CP_none')">
+            You must designate at least one Checkpoint to comply with the Nagoya Protocol.
+        </div>
+
         <div class="continue">
-            <a class="btn btn-primary btn-lg" href="theUser">Continue</a>
+            <a class="btn btn-primary btn-lg" href="theUserCountry">Go back</a>
+            <a class="btn btn-danger btn-lg" ng-click="help=true;" ng-show="!help">Need help?</a>
         </div>
 
     </div>

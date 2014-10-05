@@ -51,3 +51,59 @@ color:#ddd;
     width:300px;
     height:300px;
 }
+#Presentation .title{
+    font-size:24px;
+    font-weight:bold;
+    margin-bottom:20px;
+
+
+}
+
+#Presentation .continue{
+    margin-top:20px;
+    border-top:1px solid #ddd;
+    padding-top:10px;
+}
+
+#Presentation .text{
+    font-size:20px;
+    border-top:1px solid #ddd;
+    padding-top:10px;
+}
+#Presentation .choices{
+    font-size:20px;
+    border-top:1px solid #ddd;
+    padding-top:10px;
+}
+
+#Presentation .choices p{
+    font-weight:bold;
+    color:#555;
+}
+
+#Presentation .choices .option{
+    border: 1px solid #ddd;
+    padding:5px;
+    background-color:#ddd;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    margin-bottom:3px;
+    color:#428bca;
+}
+
+#Presentation .choices .option-selected{
+    background-color:#fff;
+    font-weight:bold;
+}
+
+#Presentation .goal{
+    font-size:20px;
+    font-weight:bold;
+}
+#Presentation .help-title{
+    font-size:24px;
+    font-weight:bold;
+    padding-bottom:10px;
+    border-bottom:1px solid #ddd;
+}

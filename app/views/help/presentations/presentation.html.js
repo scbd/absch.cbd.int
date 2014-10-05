@@ -10,14 +10,137 @@ app.controller("presentationController",
 	  schemaTypes,$compile,$timeout,lstringFilter, $routeParams) {
 
 
+
+		//==================================
+       	 $scope.getPoints = function (type) {
+
+			if(type=="user"){
+				if($rootScope.userPoints == undefined){
+					$rootScope.userPoints = [];
+					$rootScope.userPoints.r = 0;
+					$rootScope.userPoints.b = 0;
+					$rootScope.userPoints.c = 0;
+				}
+				else{
+					return $rootScope.userPoints;
+				}
+			}
+			if(type =="provider"){
+
+				if($rootScope.providerPoints == undefined){
+					$rootScope.providerPoints = [];
+					$rootScope.providerPoints.r = 0;
+					$rootScope.providerPoints.b = 0;
+					$rootScope.providerPoints.c = 0;
+				}
+				else{
+					return $rootScope.providerPoints;
+				}
+
+			}
+		}
+
+		//==================================
+       	 $scope.addPoints = function (p, type, value) {
+
+
+
+				if(type=="user"){
+					if($rootScope.userPoints == undefined){
+						$rootScope.userPoints = [];
+						$rootScope.userPoints.r = value[0];
+						$rootScope.userPoints.b = value[1];
+						$rootScope.userPoints.c = value[2];
+					}
+					else{
+						if($scope.hasParam(p)){
+							$rootScope.userPoints.r = $rootScope.userPoints.r + value[0];
+							$rootScope.userPoints.b = $rootScope.userPoints.b + value[1];
+							$rootScope.userPoints.c = $rootScope.userPoints.c + value[2];
+						}
+						else{
+							$rootScope.userPoints.r = $rootScope.userPoints.r - value[0];
+							$rootScope.userPoints.b = $rootScope.userPoints.b - value[1];
+							$rootScope.userPoints.c = $rootScope.userPoints.c - value[2];
+						}
+					}
+				}
+				if(type =="provider"){
+
+					if($rootScope.providerPoints == undefined){
+						$rootScope.providerPoints = [];
+						$rootScope.providerPoints.r = value[0];
+						$rootScope.providerPoints.b = value[1];
+						$rootScope.providerPoints.c = value[2];
+					}
+					else{
+					if($scope.hasParam(p)){
+							$rootScope.providerPoints.r = $rootScope.providerPoints.r + value[0];
+							$rootScope.providerPoints.b = $rootScope.providerPoints.b + value[1];
+							$rootScope.providerPoints.c = $rootScope.providerPoints.c + value[2];
+						}
+						else{
+							$rootScope.providerPoints.r = $rootScope.providerPoints.r - value[0];
+							$rootScope.providerPoints.b = $rootScope.providerPoints.b - value[1];
+							$rootScope.providerPoints.c = $rootScope.providerPoints.c - value[2];
+						}
+					}
+
+				}
+
+		}
+
+
+		//==================================
+       	 $scope.toggleHelp = function () {
+				if($rootScope.help == undefined){
+					$rootScope.help = false;
+				}
+				else{
+					$rootScope.help =!$rootScope.help;
+				}
+		}
+
+
 		//==================================
        	 $scope.addParam = function (p) {
 
-				if(!$rootScope.params)
-					$rootScope.params = p;
-				else
-					$rootScope.params = $rootScope.params + " " + p;
+				if(!$rootScope.params){
+					$rootScope.params = [];
+					$rootScope.params.push(p);
+				}
+				else{
+
+					var i = $rootScope.params.indexOf(p);
+
+					if(i >= 0 )
+						$rootScope.params.splice(i, 1);
+					else{
+						$rootScope.params.push(p);
+					}
+				}
        	 }
+
+			//==================================
+       	 $scope.removeParam = function (p) {
+				if($rootScope.params){
+					var i = $rootScope.params.indexOf(p);
+					if(i >= 0 )
+						$rootScope.params.splice(i, 1);
+
+				}
+       	 }
+
+		//==================================
+       	 $scope.hasParam = function (p) {
+			if($rootScope.params){
+				var i = $rootScope.params.indexOf(p);
+				if(i >= 0 )
+					return true;
+			}
+			return false;
+       	 }
+
 
    }]);
 });
