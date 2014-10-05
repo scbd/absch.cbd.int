@@ -1,0 +1,63 @@
+
+<div class="row" id="Presentation">
+    <div  class="col-xs-12" ng-class="{'col-xs-8':help}">
+
+    <div class="thumbnail" >
+        <img class="slide" src="/app/views/help/presentations/images/theatre-access/theatre-access.001.jpg" >
+    </div>
+
+    </div>
+    <div class="col-xs-4" ng-show="help">
+        <ul>
+        <li><a href="">Read the text of the Nagoya Protocol</a></li>
+        <li><a href="">Fact sheet: Becoming a Party</a></li>
+        <li><a href="">Fact sheet: Becoming a Party</a></li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="row" id="Presentation">
+    <div  class="col-xs-12" >
+
+        <div class="title">The Provider Country: ABS Measures</div>
+
+        <div class="text">
+            <p>You have been asked to designate your competent national authority (CNA). You decide to appoint GANDALF, the only wizard in middle-earth, and the most knowledgeable on the subject of Middle-earths magic genetic resources to be the CNA for your country.</p>
+        </div>
+        <div class="choices" >
+            <p>You have been also tasked to develop the legislation regulating the access and utilization of the magic genetic resources and associated magic knowledge and to publish it in the ABS-CH.
+            <u class="color-red">YOU MUST CHOOSE:</u>  </p>
+
+            <div class="option" ng-class="{'option-selected':hasParam('MSR_good')}" ng-click="addParam('MSR_good');removeParam('MSR_bad');removeParam('MSR_none')">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('MSR_good'),'glyphicon-ok':hasParam('MSR_good')}"></i></i>
+                You develop your ABS legislation that includes provision for mandatory prior informed consent or approval and involvement of
+                elf local communities whenever access to magic genetic resource or associated magic knowledge is being considered. It also
+                includes the obligation to share benefits with the elf local communities. All USERs need to obtain PIC and establish MAT prior
+                 to any utilization of the magic genetic resources and associated magic knowledge.
+            </div>
+
+            <div class="option" ng-class="{'option-selected':hasParam('MSR_bad')}" ng-click="addParam('MSR_bad');removeParam('MSR_good');;removeParam('MSR_none')">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('MSR_bad'),'glyphicon-ok':hasParam('MSR_bad')}"></i></i>
+                Because of the poor relationship between the centralized national government and the elf local communities, in order to
+                save time, you develop ABS legislation without including provisions to consult or distribute benefits among the local
+                communities when access to the magic genetic resources or associated magic knowledge are concerned. All USERs need to
+                obtain PIC and establish MAT prior to any utilization of the magic genetic resources and associated magic knowledge.
+            </div>
+
+            <div class="option" ng-class="{'option-selected':hasParam('MSR_none')}" ng-click="addParam('MSR_none');removeParam('MSR_good');;removeParam('MSR_bad')">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('MSR_none'),'glyphicon-ok':hasParam('MSR_none')}"></i></i>
+                You decide not to require PIC for accessing magic genetic resources.
+            </div>
+
+        </div>
+
+        <div class="continue">
+            <a class="btn btn-primary btn-lg" href="" ng-show="hasParam('MSR_good') || hasParam('MSR_bad')">Continue</a>
+            <a class="btn btn-primary btn-lg" href="endNoPic" ng-show="hasParam('MSR_none')">Continue</a>
+            <a class="btn btn-default btn-lg" href="" ng-show="!hasParam('MSR_good') && !hasParam('MSR_bad') &&  !hasParam('MSR_none') ">Please make your choice</a>
+        </div>
+
+    </div>
+
+</div>

@@ -17,9 +17,10 @@ app.controller("presentationController",
 			$rootScope.userPoints.c = 0;
 
 			$rootScope.providerPoints.r = 0;
+			$rootScope.providerPoints.i = 0;
 			$rootScope.providerPoints.b = 0;
 			$rootScope.providerPoints.c = 0;
-			
+
 			$rootScope.params = [];
 		}
 
@@ -42,6 +43,7 @@ app.controller("presentationController",
 				if($rootScope.providerPoints == undefined){
 					$rootScope.providerPoints = [];
 					$rootScope.providerPoints.r = 0;
+					$rootScope.providerPoints.i = 0;
 					$rootScope.providerPoints.b = 0;
 					$rootScope.providerPoints.c = 0;
 				}
@@ -88,13 +90,15 @@ app.controller("presentationController",
 					else{
 					if($scope.hasParam(p)){
 							$rootScope.providerPoints.r = $rootScope.providerPoints.r + value[0];
-							$rootScope.providerPoints.b = $rootScope.providerPoints.b + value[1];
-							$rootScope.providerPoints.c = $rootScope.providerPoints.c + value[2];
+							$rootScope.providerPoints.i = $rootScope.providerPoints.i + value[1];
+							$rootScope.providerPoints.b = $rootScope.providerPoints.b + value[2];
+							$rootScope.providerPoints.c = $rootScope.providerPoints.c + value[3];
 						}
 						else{
 							$rootScope.providerPoints.r = $rootScope.providerPoints.r - value[0];
-							$rootScope.providerPoints.b = $rootScope.providerPoints.b - value[1];
-							$rootScope.providerPoints.c = $rootScope.providerPoints.c - value[2];
+							$rootScope.providerPoints.i = $rootScope.providerPoints.i - value[1];
+							$rootScope.providerPoints.b = $rootScope.providerPoints.b - value[2];
+							$rootScope.providerPoints.c = $rootScope.providerPoints.c - value[3];
 						}
 					}
 
