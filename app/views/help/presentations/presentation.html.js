@@ -9,6 +9,7 @@ app.controller("presentationController",
 	 function ($rootScope, $location, $scope, $q, $window, storage, _,
 	  schemaTypes,$compile,$timeout,lstringFilter, $routeParams) {
 
+
 		//==================================
        	$scope.restart = function () {
 
@@ -22,6 +23,19 @@ app.controller("presentationController",
 			$rootScope.providerPoints.c = 0;
 
 			$rootScope.params = [];
+		}
+
+	
+		//==================================
+       	 $scope.setStart = function (s) {
+			$rootScope.startSlide == s;
+		}
+
+		 $scope.getStart = function () {
+			if(!$rootScope.startSlide)
+				$rootScope.startSlide=" ";
+
+			return $rootScope.startSlide;
 		}
 
 		//==================================

@@ -5,13 +5,13 @@
     <div class="container" style="padding-top:30px;padding-bottom:30px;">
 
         <div class="row">
-            <span class="p-h1">Choose your own adventure: <span class="color-litegrey">Nagoya Protocol Simulator</span></span>
+            <span class="p-h1">Choose your own adventure: <span class="color-litegrey">{{title}}</span></span>
         </div>
 
         <div class="row well" style="padding-top:10px;padding-bottom:10px;" >
 
             <div class="col-xs-2">
-                <a href="/help/presentations/" ng-click="restart();" class="p-start color-red"><i class="glyphicon glyphicon-repeat"></i> Start over</a>
+                <a href="/help/presentations/{{getStart()}}" ng-click="restart();" class="p-start color-red"><i class="glyphicon glyphicon-repeat"></i> Start over</a>
             </div>
 
             <div class="col-xs-4">

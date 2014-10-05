@@ -33,7 +33,7 @@
 
             <div class="option" ng-class="{'option-selected':hasParam('user_ask_funding')}" ng-click="addParam('user_ask_funding');removeParam('user_ask_publish');removeParam('user_ask_patent');removeParam('user_ask_commercial')">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_ask_funding'),'glyphicon-ok':hasParam('user_ask_funding')}"></i>
-                Ask for some more funding to Dumbledore Grants to continue your research on the beans.
+                Ask for some more funding to Dumbledore Grants to continue your research on the magic beans.
             </div>
 
             <div class="option" ng-class="{'option-selected':hasParam('user_ask_publish')}" ng-click="addParam('user_ask_publish');removeParam('user_ask_funding');removeParam('user_ask_patent');removeParam('user_ask_commercial')">
@@ -48,16 +48,16 @@
 
             <div class="option" ng-class="{'option-selected':hasParam('user_ask_commercial')}" ng-click="addParam('user_ask_commercial');removeParam('user_ask_funding');removeParam('user_ask_publish');removeParam('user_ask_patent')">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_ask_commercial'),'glyphicon-ok':hasParam('user_ask_commercial')}"></i>
-                Directly commercialize your potion.  Your teacher tells you that before commercializing it you need the market approval of the Hedwig Market Approval Authority, where they make sure that all potions fulfill the phytosanitary and magic conditions required to ensure the quality of all potions available in the shops of the Wizards’ Kingdom.
+                Directly commercialize your magic potion.  Your teacher tells you that before commercializing it you need the market approval of the Hedwig Market Approval Authority, where they make sure that all potions fulfill the phytosanitary and magic conditions required to ensure the quality of all potions available in the shops of the Wizards’ Kingdom.
             </div>
 
         </div>
 
         <div class="continue">
-            <a class="btn btn-primary btn-lg" href="" ng-show="hasParam('user_ask_funding')">Continue</a>
-            <a class="btn btn-primary btn-lg" href="" ng-show="hasParam('user_ask_publish')">Continue</a>
-            <a class="btn btn-primary btn-lg" href="" ng-show="hasParam('user_ask_patent')">Continue</a>
-            <a class="btn btn-primary btn-lg" href="" ng-show="hasParam('user_ask_commercial')">Continue</a>
+            <a class="btn btn-primary btn-lg" href="cpGrant" ng-show="hasParam('user_ask_funding')">Continue</a>
+            <a class="btn btn-primary btn-lg" href="cpJournal" ng-show="hasParam('user_ask_publish')">Continue</a>
+            <a class="btn btn-primary btn-lg" href="cpPatent" ng-show="hasParam('user_ask_patent')">Continue</a>
+            <a class="btn btn-primary btn-lg" href="cpCommercialize" ng-show="hasParam('user_ask_commercial')">Continue</a>
             <a class="btn btn-default btn-lg" href="" ng-show="!hasParam('user_ask_funding') && !hasParam('user_ask_publish') &&  !hasParam('user_ask_patent') && !hasParam('user_ask_commercial')  ">Please make your choice</a>
         </div>
 
