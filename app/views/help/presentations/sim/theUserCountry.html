@@ -18,15 +18,13 @@
 
 
 <div class="row" id="Presentation">
-    <div  class="col-xs-12" >
-
-        <div class="title">The User Country: Designating Checkpoints</div>
+    <div class="col-xs-9">
+        <div class="title">The User Country: Wizards Kingdom</div>
         <div class="text">
+            <p>Wizard’s Kingdom has ratified the Nagoya Protocol.</p>
+            <p></p>
 
-            <p>The CBD national focal point has just designated YOU as the National Focal Point
-                and publishing authority for the Wizards’ kingdom, a country that ratified the Nagoya Protocol.</p>
-
-             <p class="goal color-red">
+              <p class="goal color-red">
                  The User Country's goal is to comply with the Nagoya Protocol. Therefore you need to take measures
                   to monitor the utilization of genetic resources, including the designation of one or more effective checkpoint.
                   You also need to take measures to provide that magic genetic resources  and associated magic knowledge utilized
@@ -36,46 +34,14 @@
 
         </div>
 
-        <div class="choices">
-            <p>You have been asked to advise on the designation of checkpoints for your country.
-            <u class="color-red">YOU MUST CHOOSE:</u> </p>
-
-            <div class="option" ng-class="{'option-selected':hasParam('CP_patent')}" ng-click="addParam('CP_patent');removeParam('CP_none');addPoints('CP_patent','user', [1,1,1])">
-                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('CP_patent'),'glyphicon-ok':hasParam('CP_patent')}"></i></i>
-                Designate the national patent office responsible for magic genetic resources
-            </div>
-
-            <div class="option" ng-class="{'option-selected':hasParam('CP_journal')}" ng-click="addParam('CP_journal');removeParam('CP_none');">
-                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('CP_journal'),'glyphicon-ok':hasParam('CP_journal')}"></i></i>
-                Designate the Wizard World Review, a premier magic journal
-            </div>
-
-            <div class="option" ng-class="{'option-selected':hasParam('CP_grants')}" ng-click="addParam('CP_grants');removeParam('CP_none');">
-                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('CP_grants'),'glyphicon-ok':hasParam('CP_grants')}"></i></i>
-                Designate a research funding authority, Dumbledore Grants, for magic research grants. 
-            </div>
-
-            <div class="option" ng-class="{'option-selected':hasParam('CP_market')}" ng-click="addParam('CP_market');removeParam('CP_none');">
-                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('CP_market'),'glyphicon-ok':hasParam('CP_market')}"></i></i>
-                Designate the authority for market approval, Hedwig Market Approval Authority, responsible of giving the final approval before any potion can be commercialized. 
-            </div>
-
-            <div class="option" ng-class="{'option-selected':hasParam('CP_none')}" ng-click="addParam('CP_none');removeParam('CP_market');removeParam('CP_grants');removeParam('CP_journal');removeParam('CP_patent');">
-                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('CP_none'),'glyphicon-ok':hasParam('CP_none')}"></i></i>
-                Decide to not designate any Checkpoints. 
-            </div>
-        </div>
-
         <div class="continue">
-            <a class="btn btn-primary btn-lg" href="theUserCountryCP" ng-show="hasParam('CP_patent') || hasParam('CP_journal') || hasParam('CP_grants') ||hasParam('CP_market')">
-                Continue</a>
-            <a class="btn btn-primary btn-lg" href="noComply" ng-show="hasParam('CP_none')">Continue</a>
-
-            <a class="btn btn-default btn-lg" ng-hide="hasParam('CP_none') || hasParam('CP_patent') || hasParam('CP_journal') || hasParam('CP_grants') ||hasParam('CP_market')">
-                You must choose before you can continue.</a>
-
+            <a class="btn btn-primary btn-lg" href="theUserCountryCP1">Continue</a>
         </div>
 
+    </div>
+
+    <div class="col-xs-3">
+        <img class="pull-right" src="/app/views/help/presentations/sim/characters/userCountry.png" />
     </div>
 
 </div>
