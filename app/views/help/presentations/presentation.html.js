@@ -10,13 +10,9 @@ app.controller("presentationController",
 	  schemaTypes,$compile,$timeout,lstringFilter, $routeParams) {
 
 
-		//$rootScope.params = "";
-
 		//==================================
        	 $scope.addParam = function (p) {
 
-
-	
 				if(!$rootScope.params)
 					$rootScope.params = p;
 				else

@@ -19,7 +19,7 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
             //when('/presentation',                { templateUrl: '/app/views/help/presentation.html'            ,resolveController: true, resolveUser: true}).
             when('/about',                       { templateUrl: '/app/views/about.html'                     ,resolveController: true, resolveUser: true}).
             when('/help',                        { templateUrl: '/app/views/help.html'                      ,resolveController: true, resolveUser: true}).
-            when('/help/presentations/theatre-access',         { templateUrl: '/app/views/help/presentations/theatre-access.html'                      ,resolveController: true, resolveUser: true}).
+            when('/help/presentations/',         { templateUrl: '/app/views/help/presentations/home.html'                      ,resolveController: true, resolveUser: true}).
             when('/help/accounts',              { templateUrl: '/app/views/help/accounts/accounts.html'                      ,resolveController: true, resolveUser: true}).
             // when('/help/accounts/:question',              { templateUrl: '/app/views/help/accounts/accounts.html'                      ,resolveController: true, resolveUser: true}).
 
@@ -61,14 +61,14 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
             }).
             when('/about', { redirectTo: '/about/absch' }).
 
-            when('/presentation/:folder/:document_type', {
+            when('/help/presentations/:folder/:document_type', {
               templateUrl: '/app/views/help/presentations/presentation.html',
               resolveController: true,
               resolveUser: true,
               subTemplateUrl: '/app/views/help/presentations/:folder/-',
               ignoreSubController: true,
             }).
-            when('/presentation', { redirectTo: '/presentation/start' }).
+            when('/help/presentations/:folder', { redirectTo: '/help/presentations/:folder/start' }).
 
 
 

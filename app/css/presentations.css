@@ -1,0 +1,53 @@
+.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
+z-index: 2;
+color: #fff;
+background-color: #428bca;
+border-color: #428bca;
+}
+
+.p-start{
+font-weight: bold;
+font-size: 20px;
+font-family: 'alternategotno3dotregular';
+text-rendering: optimizeLegibility;
+text-transform:uppercase;
+
+}
+
+.p-h1{
+font-weight: normal;
+font-size: 40px;
+font-family: 'alternategotno3dotregular';
+text-rendering: optimizeLegibility;
+text-transform:uppercase;
+
+}
+.p-points{
+font-weight: bold;
+font-size: 20px;
+font-family: 'alternategotno3dotregular';
+text-rendering: optimizeLegibility;
+text-transform:uppercase;
+}
+.p-help-on{
+font-weight: bold;
+font-size: 20px;
+font-family: 'alternategotno3dotregular';
+text-rendering: optimizeLegibility;
+text-transform:uppercase;
+
+}
+.p-help-off{
+font-weight: bold;
+font-size: 20px;
+font-family: 'alternategotno3dotregular';
+text-rendering: optimizeLegibility;
+text-transform:uppercase;
+color:#ddd;
+}
+
+
+#Presentation .slide{
+    width:300px;
+    height:300px;
+}
