@@ -109,12 +109,14 @@ app.controller("presentationController",
 
 		//==================================
        	 $scope.toggleHelp = function () {
+
 				if($rootScope.help == undefined){
 					$rootScope.help = false;
+					return;
 				}
-				else{
-					$rootScope.help =!$rootScope.help;
-				}
+
+				$rootScope.help =!$rootScope.help;
+
 		}
 
 

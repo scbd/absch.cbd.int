@@ -95,6 +95,7 @@ color:#ddd;
 #Presentation .choices .option-selected{
     background-color:#fff;
     font-weight:bold;
+    /*color:#1FA65D;*/
 }
 
 #Presentation .goal{

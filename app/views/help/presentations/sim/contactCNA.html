@@ -1,0 +1,59 @@
+
+<div class="row" id="Presentation">
+    <div  class="col-xs-12" ng-class="{'col-xs-8':help}">
+
+    <div class="thumbnail" >
+        <img class="slide" src="/app/views/help/presentations/images/theatre-access/theatre-access.001.jpg" >
+    </div>
+
+    </div>
+    <div class="col-xs-4" ng-show="help">
+        <ul>
+        <li><a href="">Read the text of the Nagoya Protocol</a></li>
+        <li><a href="">Fact sheet: Becoming a Party</a></li>
+        <li><a href="">Fact sheet: Becoming a Party</a></li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="row" id="Presentation">
+    <div  class="col-xs-12" >
+
+        <div class="title">Contact the CNA</div>
+
+        <div class="text">
+            <p>YOU are Gandalf, the PROVIDER COUNTRY CNA</p>
+            <p>You get a call extra long distance call from a young USER who wants to discuss access to magic Sopophorous beans for research and the development of a magic potion.</p>
+            <p>You know that Sopophorous beans are mainly grown on Elf tribal lands and used almost exclusively by the local Elf community. </p>
+            <p>You find a national record for legislation with all requirements and a national record with the details of the competent national authority(CNA).</p>
+
+        </div>
+        <div class="choices" >
+            <p><u class="color-red">YOU MUST CHOOSE:</u></p>
+
+            <div class="option" ng-class="{'option-selected':hasParam('cna_consult_ilc')}" ng-click="addParam('cna_consult_ilc');removeParam('cna_no_consult');removeParam('user_consult_ilc');">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('cna_consult_ilc'),'glyphicon-ok':hasParam('cna_consult_ilc')}"></i>
+                Consult the Elves about access to the beans.
+            </div>
+
+            <div class="option" ng-class="{'option-selected':hasParam('cna_no_consult')}" ng-click="addParam('cna_no_consult');removeParam('cna_consult_ilc');removeParam('ignore_msr_store');">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('cna_no_consult'),'glyphicon-ok':hasParam('cna_no_consult')}"></i>
+                Do not consult the local Elf community and you negotiatePIC and MAT directly with the user.
+            </div>
+
+            <div class="option" ng-class="{'option-selected':hasParam('user_consult_ilc')}" ng-click="addParam('user_consult_ilc');removeParam('cna_consult_ilc');removeParam('cna_no_consult');">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_consult_ilc'),'glyphicon-ok':hasParam('user_consult_ilc')}"></i>
+                You tell the user to talk to the local community representative about accessing the beans.
+            </div>
+
+        </div>
+
+        <div class="continue">
+            <a class="btn btn-primary btn-lg" href="negotiatingPICMAT" ng-show="hasParam('user_consult_ilc') || hasParam('cna_no_consult') || hasParam('cna_consult_ilc')" >Continue</a>
+            <a class="btn btn-default btn-lg" href="" ng-show="!hasParam('user_consult_ilc') && !hasParam('cna_no_consult') && !hasParam('cna_consult_ilc')">Please make your choice</a>
+        </div>
+
+    </div>
+
+</div>

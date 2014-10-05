@@ -1,0 +1,69 @@
+
+<div class="row" id="Presentation">
+    <div  class="col-xs-12" ng-class="{'col-xs-8':help}">
+
+    <div class="thumbnail" >
+        <img class="slide" src="/app/views/help/presentations/images/theatre-access/theatre-access.001.jpg" >
+    </div>
+
+    </div>
+    <div class="col-xs-4" ng-show="help">
+        <ul>
+        <li><a href="">Read the text of the Nagoya Protocol</a></li>
+        <li><a href="">Fact sheet: Becoming a Party</a></li>
+        <li><a href="">Fact sheet: Becoming a Party</a></li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="row" id="Presentation">
+    <div  class="col-xs-12" >
+
+        <div class="title">Check the ABS-CH</div>
+
+        <div class="text">
+            <p>YOU are the User</p>
+            <p>You decide it can’t hurt to find out more about access legislation and the rules governing access to magic genetic resources and associated magic knowledge in Middle-earth before accessing or using thier genetic resource.</p>
+            <p>You go to the ABSCH website (absch.cbd.int) and look up Middle-earth country profile.</p>
+            <p>You find a national record for legislation with all requirements and a national record with the details of the competent national authority(CNA).</p>
+            <p class="absch-record">MSR</p>
+            <p class="absch-record">CNA</p>
+
+        </div>
+        <div class="choices" >
+            <p><u class="color-red">YOU MUST CHOOSE:</u>  </p>
+
+            <div class="option" ng-class="{'option-selected':hasParam('contact_cna')}" ng-click="addParam('contact_cna');removeParam('ingnore_msr_exp');removeParam('ignore_msr_store');removeParam('ingnore_msr_research');">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('contact_cna'),'glyphicon-ok':hasParam('contact_cna')}"></i>
+                Contact the CNA.  Better safe than sorry. You decide to call up the CNA of Middle-earth to discuss getting PIC and MAT for accessing the magic beans.
+            </div>
+
+            <div  ng-show="!hasParam('store_absch')"  class="option" ng-class="{'option-selected':hasParam('ignore_msr_store')}" ng-click="addParam('ignore_msr_store');removeParam('contact_cna');removeParam('ingnore_msr_exp');removeParam('ingnore_msr_research');">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('ignore_msr_store'),'glyphicon-ok':hasParam('ignore_msr_store')}"></i>
+                Ignore the ABS measures and go to the store.
+            </div>
+
+            <div  ng-show="!hasParam('store_absch')"  class="option" ng-class="{'option-selected':hasParam('ingnore_msr_exp')}" ng-click="addParam('ingnore_msr_exp');removeParam('contact_cna');removeParam('ignore_msr_store');removeParam('ingnore_msr_research');">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('ingnore_msr_exp'),'glyphicon-ok':hasParam('ingnore_msr_exp')}"></i>
+                Ignore the ABS measures and start the expedition to Middle-earth to find the beans yourself.
+            </div>
+
+            <div ng-show="hasParam('store_absch')" class="option" ng-class="{'option-selected':hasParam('ingnore_msr_research')}" ng-click="addParam('ingnore_msr_research');removeParam('contact_cna');removeParam('ignore_msr_store');removeParam('ingnore_msr_exp');">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('ingnore_msr_research'),'glyphicon-ok':hasParam('ingnore_msr_research')}"></i>
+                I'm too excited! Ignore the ABS measures and start your research.
+            </div>
+
+        </div>
+
+        <div class="continue">
+            <a class="btn btn-primary btn-lg" href="contactCNA" ng-show="hasParam('contact_cna')">Continue</a>
+            <a class="btn btn-primary btn-lg" href="userStore" ng-show="hasParam('ignore_msr_store')">Continue</a>
+            <a class="btn btn-primary btn-lg" href="userExp" ng-show="hasParam('ingnore_msr_exp')">Continue</a>
+            <a class="btn btn-primary btn-lg" href="userResearch" ng-show="hasParam('ingnore_msr_research')">Continue</a>
+            <a class="btn btn-default btn-lg" href="" ng-show="!hasParam('ingnore_msr_research') && !hasParam('contact_cna') && !hasParam('ignore_msr_store') && !hasParam('ingnore_msr_exp')">Please make your choice</a>
+        </div>
+
+    </div>
+
+</div>
