@@ -1,0 +1,39 @@
+
+<div class="row" id="Presentation">
+    <div  class="col-xs-12" ng-class="{'col-xs-8':help}">
+
+    <div class="thumbnail" >
+        <img class="slide" src="/app/views/help/presentations/images/theatre-access/theatre-access.001.jpg" >
+    </div>
+
+    </div>
+    <div class="col-xs-4" ng-show="help">
+
+    </div>
+</div>
+
+
+<div class="row" id="Presentation">
+    <div  class="col-xs-12" >
+
+        <div class="title">Warning</div>
+
+        <div class="choices" ng-show="!hasParam(CP_none)">
+            <p>I have read the above warning.
+                <u class="color-red">YOU MUST CHOOSE:</u>  </p>
+
+            <div class="option" ng-class="{'option-selected':hasParam('warning_understood')}" ng-click="addParam('warning_understood');">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('warning_understood'),'glyphicon-ok':hasParam('warning_understood')}"></i>
+                I understand the risks.
+            </div>
+            
+        </div>
+
+        <div class="continue">
+            <a class="btn btn-primary btn-lg" href="theUser" ng-show="hasParam('warning_understood')">Ok, continue. Please choose wisely</a>
+            <a class="btn btn-default btn-lg" href="" ng-show="!hasParam('warning_understood')">Please make your choice</a>
+        </div>
+
+    </div>
+
+</div>

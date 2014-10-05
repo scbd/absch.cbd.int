@@ -9,7 +9,19 @@ app.controller("presentationController",
 	 function ($rootScope, $location, $scope, $q, $window, storage, _,
 	  schemaTypes,$compile,$timeout,lstringFilter, $routeParams) {
 
+		//==================================
+       	$scope.restart = function () {
 
+			$rootScope.userPoints.r = 0;
+			$rootScope.userPoints.b = 0;
+			$rootScope.userPoints.c = 0;
+
+			$rootScope.providerPoints.r = 0;
+			$rootScope.providerPoints.b = 0;
+			$rootScope.providerPoints.c = 0;
+			
+			$rootScope.params = [];
+		}
 
 		//==================================
        	 $scope.getPoints = function (type) {

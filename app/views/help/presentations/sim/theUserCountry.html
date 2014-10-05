@@ -39,7 +39,8 @@
         </div>
 
         <div class="choices">
-            <p>You have been asked to advice on the designation of checkpoints for your country. YOU CHOOSE TO:</p>
+            <p>You have been asked to advice on the designation of checkpoints for your country.
+            <u class="color-red">YOU MUST CHOOSE:</u> </p>
 
             <div class="option" ng-class="{'option-selected':hasParam('CP_patent')}" ng-click="addParam('CP_patent');removeParam('CP_none');addPoints('CP_patent','user', [1,1,1])">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('CP_patent'),'glyphicon-ok':hasParam('CP_patent')}"></i></i>
@@ -68,8 +69,13 @@
         </div>
 
         <div class="continue">
-            <a class="btn btn-primary btn-lg" href="theUserCountryCP" ng-show="!hasParam('CP_none')">Continue</a>
+            <a class="btn btn-primary btn-lg" href="theUserCountryCP" ng-show="hasParam('CP_patent') || hasParam('CP_journal') || hasParam('CP_grants') ||hasParam('CP_market')">
+                Continue</a>
             <a class="btn btn-primary btn-lg" href="noComply" ng-show="hasParam('CP_none')">Continue</a>
+
+            <a class="btn btn-default btn-lg" ng-hide="hasParam('CP_none') || hasParam('CP_patent') || hasParam('CP_journal') || hasParam('CP_grants') ||hasParam('CP_market')">
+                You must choose before you can continue.</a>
+
         </div>
 
     </div>
