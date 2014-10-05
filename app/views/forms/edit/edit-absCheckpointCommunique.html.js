@@ -1,4 +1,5 @@
-define(['app', '/app/views/forms/edit/edit.js'], function (app) {
+define(['app', '/app/views/forms/edit/edit.js',
+        '/app/views/forms/edit/permit-selection-directive.html.js'], function (app) {
 
   app.controller("editCheckpointCommunique", ["$scope", "authHttp", "$filter", "$q", "$controller", "IStorage","underscore",
    function ($scope, $http, $filter, $q, $controller, storage, _) {
