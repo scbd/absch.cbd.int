@@ -23,7 +23,7 @@
 
 
 <style media="screen">
-    .dateBox{padding:0px;}
+    .dateBox{padding:0px;background-color:#fff;}
     .dateBox li{
         border: 1px solid transparent;
         border-radius: 4px;
@@ -31,25 +31,23 @@
     }
 </style>
     <button class="btn btn-default" ng-click="openDialog();" ng-disabled="disabled" >
-	  {{caption||'ADD Existing permits »'}}
+	  {{caption||'Add link to existing IRCCs »'}}
 	</button>
 
     <!-- Modal -->
     <div class="modal fade" id="existingPermits" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header bg-grey">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    List of existing Permits
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div >
+                    <h1>Published Internationally Recognized Certificates of Compliance (IRCC)</h1>
+
+                    <div>
                             <div km-select multiple required name="queryGovernment" ng-model="queryGovernment" items="options.government()" placeholder="Government"></div>
                             <div km-select multiple required name="permitusage" ng-model="permitusage" items="options.usage()" placeholder="Intent"></div>
                             <div km-select multiple required name="permitkeywords" ng-model="permitkeywords" items="options.keywords()" placeholder="Keywords"></div>
 
-                            <span class="dateBox" search-filter-dates title='Date of issuance of the permit' query='permitIssuanceDate' field="expiration_s"></span>
+                            <span  class="dateBox" search-filter-dates title='Date of issuance of the permit' query='permitIssuanceDate' field="expiration_s"></span>
 
                             <div class="btn-group" >
                                 <button style="button" class="btn btn-default dropdown-toggle"  data-toggle="dropdown">
@@ -79,8 +77,11 @@
                             </ul>
                             </div>
                         </div>
+                </div>
+                <div class="modal-body">
+
                         <div   style="max-height:400px;overflow-y:auto">
-                            	<table class="table table-hover">
+                            	<table class="table table-hover" style="padding:0;margin:0">
             						<tr ng-show="!isLoading" ng-repeat="doc in rawPermitDocs | filter:isSelected">
             							<td>
             								<input type="checkbox" ng-model="doc.__checked"/>
@@ -95,7 +96,7 @@
             						</tr>
 
             						<tr ng-show="rawPermitDocs.length==0">
-            							<td colspan="2">No record.</td>
+            							<td colspan="2">No records.</td>
             						</tr>
 
             						<tr ng-show="isLoading">
@@ -105,9 +106,9 @@
             						</tr>
             					</table>
                         </div>
-                    </div>
+
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer bg-grey">
                     <div class="row">
                         <a type="button" class="btn btn-primary" ng-click="savePermits()">Save</a>
                         <a type="button" class="btn btn-default" data-dismiss="modal">Close</a>
