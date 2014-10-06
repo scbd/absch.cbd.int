@@ -20,12 +20,15 @@ div.viewForm a {
 }
 
 div.km-pre
-{ 
-	word-break: break-all; word-wrap: break-word; white-space: pre-wrap; 
+{
+	/*word-break: break-all;*/
+	/*word-wrap: break-word; */
+	white-space: pre-wrap;
+	text-align:justify;
 }
 
-address.km-value, 
-div.km-value, 
+address.km-value,
+div.km-value,
 span.km-value,
 ul.km-value > li,
 ol.km-value > li
@@ -121,7 +124,7 @@ ul.km-value
 }
 
 
-/*#loading-bar-spinner {  
+/*#loading-bar-spinner {
 	top: 50% !important;
   	left: 50% !important;
 }
@@ -129,7 +132,7 @@ ul.km-value
 #loading-bar-spinner .spinner-icon {
   width: 40px !important;
   height: 40px !important;
-  border:  solid 25px transparent !important;--commented 
+  border:  solid 25px transparent !important;--commented
   border-top-color:  #29d;
   border-left-color: #29d;
   border-radius: 45px;
