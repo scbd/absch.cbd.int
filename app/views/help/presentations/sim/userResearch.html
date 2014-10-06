@@ -33,34 +33,39 @@
         <div class="choices" >
             <p><u class="color-red">YOU MUST CHOOSE:</u>  </p>
 
-            <div class="option" ng-class="{'option-selected':hasParam('user_ask_funding')}" ng-click="addParam('user_ask_funding');removeParam('user_ask_publish');removeParam('user_ask_patent');removeParam('user_ask_commercial')">
+            <div class="option" ng-class="{'option-selected':hasParam('user_ask_funding')}" ng-click="addParam('user_ask_funding');removeParam('user_finalize');removeParam('user_ask_publish');removeParam('user_ask_patent');removeParam('user_ask_commercial')">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_ask_funding'),'glyphicon-ok':hasParam('user_ask_funding')}"></i>
                 Ask for some more funding to Dumbledore Grants to continue your research on the magic beans.
             </div>
 
-            <div class="option" ng-class="{'option-selected':hasParam('user_ask_publish')}" ng-click="addParam('user_ask_publish');removeParam('user_ask_funding');removeParam('user_ask_patent');removeParam('user_ask_commercial')">
+            <div class="option" ng-class="{'option-selected':hasParam('user_ask_publish')}" ng-click="addParam('user_ask_publish');removeParam('user_finalize');removeParam('user_ask_funding');removeParam('user_ask_patent');removeParam('user_ask_commercial')">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_ask_publish'),'glyphicon-ok':hasParam('user_ask_publish')}"></i>
                 Publish your research in Witchcraft Review, the premier magic journal in the kingdom among serious wizards.
             </div>
 
-            <div class="option" ng-class="{'option-selected':hasParam('user_ask_patent')}" ng-click="addParam('user_ask_patent');removeParam('user_ask_funding');removeParam('user_ask_publish');removeParam('user_ask_commercial')">
+            <div class="option" ng-class="{'option-selected':hasParam('user_ask_patent')}" ng-click="addParam('user_ask_patent');removeParam('user_finalize');removeParam('user_ask_funding');removeParam('user_ask_publish');removeParam('user_ask_commercial')">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_ask_patent'),'glyphicon-ok':hasParam('user_ask_patent')}"></i>
                 Patent your magic potion. The magic potion’s market in Wizard’s Kingdom is very competitive you decide to go the patent office to patent the formula.
             </div>
 
-            <div class="option" ng-class="{'option-selected':hasParam('user_ask_commercial')}" ng-click="addParam('user_ask_commercial');removeParam('user_ask_funding');removeParam('user_ask_publish');removeParam('user_ask_patent')">
+            <div class="option" ng-class="{'option-selected':hasParam('user_ask_commercial')}" ng-click="addParam('user_ask_commercial');removeParam('user_finalize');removeParam('user_ask_funding');removeParam('user_ask_publish');removeParam('user_ask_patent')">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_ask_commercial'),'glyphicon-ok':hasParam('user_ask_commercial')}"></i>
                 Directly commercialize your magic potion.  Your teacher tells you that before commercializing it you need the market approval of the Hedwig Market Approval Authority, where they make sure that all potions fulfill the phytosanitary and magic conditions required to ensure the quality of all potions available in the shops of the Wizards’ Kingdom.
+            </div>
+            <div class="option" ng-class="{'option-selected':hasParam('user_finalize')}" ng-click="addParam('user_finalize');removeParam('user_ask_commercial');removeParam('user_ask_funding');removeParam('user_ask_publish');removeParam('user_ask_patent')">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_finalize'),'glyphicon-ok':hasParam('user_finalize')}"></i>
+                Let's stop here. Finalize magic potion and see how you did.
             </div>
 
         </div>
 
         <div class="continue">
+            <a class="btn btn-primary btn-lg" href="finalize" ng-show="hasParam('user_finalize')">Continue</a>
             <a class="btn btn-primary btn-lg" href="cpGrant" ng-show="hasParam('user_ask_funding')">Continue</a>
             <a class="btn btn-primary btn-lg" href="cpJournal" ng-show="hasParam('user_ask_publish')">Continue</a>
             <a class="btn btn-primary btn-lg" href="cpPatent" ng-show="hasParam('user_ask_patent')">Continue</a>
             <a class="btn btn-primary btn-lg" href="cpCommercialize" ng-show="hasParam('user_ask_commercial')">Continue</a>
-            <a class="btn btn-default btn-lg" href="" ng-show="!hasParam('user_ask_funding') && !hasParam('user_ask_publish') &&  !hasParam('user_ask_patent') && !hasParam('user_ask_commercial')  ">Please make your choice</a>
+            <a class="btn btn-default btn-lg" href="" ng-show="!hasParam('user_ask_funding') && !hasParam('user_ask_publish') &&  !hasParam('user_ask_patent') && !hasParam('user_ask_commercial') && !hasParam('user_finalize')">Please make your choice</a>
         </div>
 
     </div>

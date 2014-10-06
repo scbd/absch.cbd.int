@@ -21,7 +21,8 @@
 <div class="row" id="Presentation">
     <div  class="col-xs-12" >
 
-        <div class="title">Provider country recieving the Checkpoint Communiqué</div>
+        <div class="title">Provider country recieving the Checkpoint Communiqué
+            <img class="pull-right pov_img" src="/app/views/help/presentations/sim/characters/provider.png" /></div>
 
         <div class="text">
             <p>YOU are Gandalf the CNA for the provider country Middle-earth</p>
@@ -31,35 +32,42 @@
         <div class="choices" >
             <p><u class="color-red">YOU MUST CHOOSE:</u></p>
 
-            <div class="option" ng-class="{'option-selected':hasParam('userCNA_file_CPC')}" ng-click="addParam('userCNA_file_CPC');removeParam('userCNA_ignore_CPC');removeParam('userCNA_contactuser_CPC');removeParam('userCNA_takemsr_CPC');">
-                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('userCNA_file_CPC'),'glyphicon-ok':hasParam('userCNA_file_CPC')}"></i>
-                File the checkpoint communique in the dossier and share the article with
-                your universities and the elf communities.  Everything is in order and
-                you are very happy with the results coming from your magic beans.
+            <div class="option" ng-class="{'option-selected':hasParam('proCNA_file_CPC')}" ng-click="addParam('proCNA_file_CPC');removeParam('proCNA_sueUser_CPC');removeParam('proCNA_callCNA_CPC');removeParam('proCNA_callUser_CPC');">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('proCNA_file_CPC'),'glyphicon-ok':hasParam('proCNA_file_CPC')}"></i>
+                File the checkpoint communique in the dossier and
+
+                <span ng-show="hasParam('cp_journal_accepts')"> share the article with your universities and the elf communities.</span>
+
+                Everything is in order and you are very happy with the results coming from your magic beans.
                 GO TO FINALISE POTION TO FINISH YOUR ADVENTURE OR GO TO USER DOING RESEARCH TO EXPLORE OTHER CHECKPOINTS
             </div>
 
-            <div class="option" ng-class="{'option-selected':hasParam('userCNA_ignore_CPC')}" ng-click="addParam('userCNA_ignore_CPC');removeParam('userCNA_file_CPC');removeParam('userCNA_takemsr_CPC');removeParam('userCNA_contactuser_CPC');">
-                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('userCNA_ignore_CPC'),'glyphicon-ok':hasParam('userCNA_ignore_CPC')}"></i>
+            <div class="option" ng-class="{'option-selected':hasParam('proCNA_callUser_CPC')}" ng-click="addParam('proCNA_callUser_CPC');removeParam('proCNA_sueUser_CPC');removeParam('proCNA_callCNA_CPC');removeParam('proCNA_file_CPC');">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('proCNA_callUser_CPC'),'glyphicon-ok':hasParam('proCNA_callUser_CPC')}"></i>
                 Call the user to point out that he is not complying with the agreed terms and try to renegotiate MAT. Now that you know the potential of the beans maybe you can also benefit from better conditions.- GO TO SLIDE ON NEGOTIATE PIC AND MAT
             </div>
 
-            <div class="option" ng-class="{'option-selected':hasParam('userCNA_takemsr_CPC')}" ng-click="addParam('userCNA_takemsr_CPC');removeParam('userCNA_file_CPC');removeParam('userCNA_ignore_CPC');removeParam('userCNA_contactuser_CPC');">
-                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('userCNA_takemsr_CPC'),'glyphicon-ok':hasParam('userCNA_takemsr_CPC')}"></i>
-                Call the user and the designated authorities of the Wizards’ Kingdom to point out that he is not complying with the agreed terms and try to renegotiate MAT. Now that you know the potential of the beans maybe you can also benefit from better conditions.  GO TO SLIDE ON NEGOTIATING PIC AND MAT
+            <div class="option" ng-class="{'option-selected':hasParam('proCNA_callCNA_CPC')}" ng-click="addParam('proCNA_callCNA_CPC');removeParam('proCNA_sueUser_CPC');removeParam('proCNA_callUser_CPC');removeParam('proCNA_file_CPC');">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('proCNA_callCNA_CPC'),'glyphicon-ok':hasParam('proCNA_callcna_CPC')}"></i>
+                Call the user and the designated authorities of the Wizards’ Kingdom to point out that he is not complying with the terms and try to renegotiate MAT. Now that you know the potential of the beans maybe you can also benefit from better conditions.  GO TO SLIDE ON NEGOTIATING PIC AND MAT
             </div>
 
-            <div class="option" ng-class="{'option-selected':hasParam('userCNA_contactuser_CPC')}" ng-click="addParam('userCNA_contactuser_CPC');removeParam('userCNA_file_CPC');removeParam('userCNA_ignore_CPC');removeParam('userCNA_takemsr_CPC');">
-                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('userCNA_contactuser_CPC'),'glyphicon-ok':hasParam('userCNA_contactuser_CPC')}"></i>
+            <div class="option" ng-class="{'option-selected':hasParam('proCNA_sueUser_CPC')}" ng-click="addParam('proCNA_sueUser_CPC');removeParam('proCNA_callCNA_CPC');removeParam('proCNA_callUser_CPC');removeParam('proCNA_file_CPC');">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('proCNA_sueUser_CPC'),'glyphicon-ok':hasParam('proCNA_sueUser_CPC')}"></i>
                 Sue the user for not complying with the agreed terms- GO TO SLIDE SUE THE USER
             </div>
-            
+
         </div>
 
 
         <div class="continue">
-            <a class="btn btn-primary btn-lg" href="providerCNACPC" ng-show="hasParam('userCNA_file_CPC') || hasParam('userCNA_ignore_CPC') || hasParam('userCNA_contactuser_CPC') || hasParam('userCNA_takemsr_CPC')">Continue</a>
-            <a class="btn btn-default btn-lg" ng-hide="hasParam('userCNA_file_CPC') || hasParam('userCNA_ignore_CPC') || hasParam('userCNA_contactuser_CPC') || hasParam('userCNA_takemsr_CPC')">
+
+            <a class="btn btn-primary btn-lg" href="userResearch" ng-show="hasParam('proCNA_file_CPC')">Continue</a>
+            <a class="btn btn-primary btn-lg" href="sueUser" ng-show="hasParam('proCNA_sueUser_CPC')">Continue</a>
+            <a class="btn btn-primary btn-lg" href="negotiatingPICMAT" ng-show="hasParam('proCNA_callCNA_CPC')">Continue</a>
+            <a class="btn btn-primary btn-lg" href="negotiatingPICMAT" ng-show="hasParam('proCNA_callUser_CPC')">Continue</a>
+
+            <a class="btn btn-default btn-lg" ng-hide="hasParam('proCNA_file_CPC') || hasParam('proCNA_callUser_CPC') || hasParam('proCNA_callCNA_CPC') || hasParam('proCNA_sueUser_CPC')">
                 You must choose before you can continue.</a>
         </div>
 
