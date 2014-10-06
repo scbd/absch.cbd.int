@@ -81,7 +81,7 @@ define(['app','angular-form-controls'], function (app) {
 				//====================
 				$scope.updateSecurity = function()
 				{
-                    if(!$scope.getDocumentFn().header)
+                    if(!$scope.getDocumentFn().header || !$scope.getDocumentFn().header.languages)
                         $scope.loadSecurity();
 
                     $scope.languages = $scope.getDocumentFn().header.languages;
