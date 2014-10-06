@@ -40,11 +40,14 @@
 			</div>
 		</div>
 
-		<div ng-show="document.authoritiesToInform || document.informAllAuthorities">
+		<div>
 			<legend>National authority/ies</legend>
 			<label>National authority/ies to be informed through e-mail</label>
 			<div class="km-value" ng-show="document.informAllAuthorities">
 				<span >Inform all national CNAs</span>
+			</div>
+			<div class="km-value" ng-show="!document.informAllAuthorities">
+				<span >Do not inform all national CNAs</span>
 			</div>
 
 			<div ng-show="document.authoritiesToInform">
