@@ -20,7 +20,9 @@
 <div class="row" id="Presentation">
     <div  class="col-xs-12" >
 
-        <div class="title">The User doing some research</div>
+        <div class="title">The User doing some research
+            <img class="pull-right pov_img" src="/app/views/help/presentations/sim/characters/user.png" /></div>
+
 
         <div class="text">
             <p>YOU are the User</p>
@@ -43,7 +45,7 @@
 
             <div class="option" ng-class="{'option-selected':hasParam('user_ask_patent')}" ng-click="addParam('user_ask_patent');removeParam('user_ask_funding');removeParam('user_ask_publish');removeParam('user_ask_commercial')">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_ask_patent'),'glyphicon-ok':hasParam('user_ask_patent')}"></i>
-                Patent the potion. The magic potion’s market in Wizard’s Kingdom is very competitive you decide to go the patent office to patent the formula.
+                Patent your magic potion. The magic potion’s market in Wizard’s Kingdom is very competitive you decide to go the patent office to patent the formula.
             </div>
 
             <div class="option" ng-class="{'option-selected':hasParam('user_ask_commercial')}" ng-click="addParam('user_ask_commercial');removeParam('user_ask_funding');removeParam('user_ask_publish');removeParam('user_ask_patent')">

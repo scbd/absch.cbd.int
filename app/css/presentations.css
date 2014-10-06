@@ -108,6 +108,10 @@ color:#ddd;
     /*color:#1FA65D;*/
 }
 
+#Presentation .choices .option-disabled{
+    background-color:#999;
+}
+
 #Presentation .goal{
     font-size:20px;
     font-weight:bold;

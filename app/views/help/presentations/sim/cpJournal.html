@@ -23,11 +23,17 @@
         <div class="title">Witchcraft Review the premier journal for serious wizards</div>
 
         <div class="text">
-            <p>YOU are the editor at Witchcraft Review</p>
-            <p>One day as you are editing your latest review when a USER walks into your office and shows you a very interesting research paper on a notoriously rare and magic bean. You would love to publish the paper in your magazine.</p>
-            <p ng-show="!hasParam('CP_journal')">
-                Witchcraft Review is not a Checkpoint. You agree to publish the paper in your journal. The article will come out in the following weeks magazine.
+            <p>YOU are the editor at Witchcraft Review.
+                <span ng-show="!hasParam('CP_journal')" >
+                    <u>Witchcraft Review is not a Checkpoint. </u>
+                </span>
             </p>
+            <p>One day as you are editing your latest review when a USER walks into your office and shows you a very interesting research paper on a notoriously rare and magic bean. You would love to publish the paper in your magazine.</p>
+
+            <p ng-show="!hasParam('CP_journal')">
+                You agree to publish the paper in your journal. The article will come out in the following weeks magazine.
+            </p>
+
             <p ng-show="hasParam('CP_journal')">
                 As an appointed checkpoint for the Nagoya Protocol, you ask the USER to provide information on prior
                  informed consent, the source of the genetic resource, the establishment of mutually agreed terms,
@@ -35,37 +41,54 @@
                  would make your job of filling the form for the checkpoint communique easier.
              </p>
 
+        </div>
 
-            </p>
+        <div class="choices" >
+            <p>The user provides you with one of the following options. <u class="color-red">YOU MUST CHOOSE:</u></p>
+
+            <div class="option" ng-class="{'option-selected':hasParam('user_provides_ircc')}" ng-click="addParam('user_provides_ircc');removeParam('user_provides_pcountry');removeParam('user_provides_np')">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_provides_ircc'),'glyphicon-ok':hasParam('user_provides_ircc')}"></i>
+                The IRCC <span ng-show="!hasParam('IRCC_sent')" class="color-red"> (This user didnt not recieve an IRCC but since this is a only game you can choose it to see what will happen) </span>
+            </div>
 
 
+
+            <div class="option" ng-class="{'option-selected':hasParam('user_provides_np')}" ng-click="addParam('user_provides_np');removeParam('user_provides_pcountry');removeParam('user_provides_ircc')">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_provides_np'),'glyphicon-ok':hasParam('user_provides_np')}"></i>
+                The user provides the national permit. <span ng-show="!hasParam('IRCC_sent')" class="color-red" > (This user did not recieve a national permit but since this is a only game you can choose it to see what will happen) </span>
+            </div>
+
+
+
+            <div class="option" ng-class="{'option-selected':hasParam('user_provides_pcountry')}" ng-click="addParam('user_provides_pcountry');removeParam('user_provides_ircc');removeParam('user_provides_np')">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_provides_pcountry'),'glyphicon-ok':hasParam('user_provides_pcountry')}"></i>
+                The user only tells you the magic beans in the research paper come from Middle-earth
+            </div>
 
         </div>
-        <div class="choices" >
-            <p><u class="color-red">YOU MUST CHOOSE:</u>  </p>
 
-            <div class="option" ng-class="{'option-selected':hasParam('user_no_beans')}" ng-click="addParam('user_no_beans');removeParam('user_store');removeParam('user_plan_expedition')">
-                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_no_beans'),'glyphicon-ok':hasParam('user_no_beans')}"></i>
-                Make the potion without the beans
+        <div class="choices">
+
+        <!-- ng-show="hasParam('CP_exam')"> -->
+            <p>You have been tasked to do a SUBSTANTIAL EXAMINATION.
+            You carefully look at all the information presented by the user and <u class="color-red">YOU MUST CHOOSE:</u></p>
+
+            <div class="option" ng-class="{'option-selected':hasParam('cp_journal_accepts')}" ng-click="addParam('cp_journal_accepts');removeParam('cp_journal_rejects');">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('cp_journal_accepts'),'glyphicon-ok':hasParam('cp_journal_accepts')}"></i>
+                That everything is in order and that you can go ahead and publish the paper
             </div>
 
-            <div class="option" ng-class="{'option-selected':hasParam('user_store')}" ng-click="addParam('user_store');removeParam('user_no_beans');removeParam('user_plan_expedition')">
-                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_store'),'glyphicon-ok':hasParam('user_store')}"></i>
-                See if you can buy some at a store in Diagon Alley.
-            </div>
-
-            <div class="option" ng-class="{'option-selected':hasParam('user_plan_expedition')}" ng-click="addParam('user_plan_expedition');removeParam('user_no_beans');;removeParam('user_store')">
-                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_plan_expedition'),'glyphicon-ok':hasParam('user_plan_expedition')}"></i>
-                Make an expedition to Middle-earth to find and collect the beans yourself
+            <div class="option" ng-class="{'option-selected':hasParam('cp_journal_rejects')}" ng-click="addParam('cp_journal_rejects');removeParam('cp_journal_accepts');">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('cp_journal_rejects'),'glyphicon-ok':hasParam('cp_journal_rejects')}"></i>
+                That you cannot publish the paper.
             </div>
 
         </div>
 
         <div class="continue">
-            <a class="btn btn-primary btn-lg" href="endNoBeans" ng-show="hasParam('user_no_beans')">Continue</a>
-            <a class="btn btn-primary btn-lg" href="userStore" ng-show="hasParam('user_store')">Continue</a>
-            <a class="btn btn-primary btn-lg" href="userPlanExp" ng-show="hasParam('user_plan_expedition')">Continue</a>
-            <a class="btn btn-default btn-lg" href="" ng-show="!hasParam('user_no_beans') && !hasParam('user_store') &&  !hasParam('user_plan_expedition') ">Please make your choice</a>
+            <a class="btn btn-primary btn-lg" href="" ng-show="!hasParam('CP_journal')" >Continue</a>
+            <a class="btn btn-primary btn-lg" href="sendCPC" ng-show="hasParam('CP_journal') && ((hasParam('user_provides_ircc') || hasParam('user_provides_np') || hasParam('user_provides_pcountry')) && (hasParam('cp_journal_accepts') || hasParam('cp_journal_rejects')))" >Continue</a>
+            <a class="btn btn-default btn-lg" href="" ng-show="hasParam('CP_journal') && !((hasParam('user_provides_ircc') || hasParam('user_provides_np') || hasParam('user_provides_pcountry')) && (hasParam('cp_journal_accepts') || hasParam('cp_journal_rejects'))) ">Please make your choice</a>
         </div>
 
     </div>
