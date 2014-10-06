@@ -12,7 +12,7 @@
     					</td>
                         <td>
                             <span style="font-size: 16px; color: white;margin:0;padding:0;float:right;">
-                                <a ng-click="removePermit(doc)" class="btn btn-primary">
+                                <a ng-click="removePermit(doc)" class="btn btn-warning">
                                     <span class="glyphicon glyphicon-remove"></span>&nbsp;remove</a>
                             </span>
                         </td>
@@ -30,13 +30,17 @@
         border-color: #ccc;
     }
     .datepicker{z-index:1151 !important;}
+
 </style>
+
+
+
     <button class="btn btn-default" ng-click="openDialog();" ng-disabled="disabled" >
 	  {{caption||'Add link to existing IRCCs »'}}
 	</button>
 
     <!-- Modal -->
-    <div class="modal fade" id="existingPermits" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade rounded" id="existingPermits" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header bg-grey">
