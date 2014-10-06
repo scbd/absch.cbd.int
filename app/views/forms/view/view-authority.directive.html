@@ -86,12 +86,11 @@
 			</div>
 		</div>
 
-		<div ng-show="document.absFunctions||document.absJurisdiction||document.absJurisdictionName||document.absGeneticResourceTypes||document.absGeneticResourceAreas||document.absResponsibilities">
+		<div>
 			<legend>ABS Responsibilities </legend>
-
-			<div ng-show="document.absResposibleForAll">
+			<div>
 				<label>CNA responsible for all functions under the Nagoya Protocol </label>
-				<div class="km-value km-pre">{{document.absResposibleForAll | yesno}}</div>
+				<div class="km-value km-pre">{{document.absResponsibleForAll | yesno}}</div>
 			</div>
 
 			<div ng-show="document.absFunctions">
