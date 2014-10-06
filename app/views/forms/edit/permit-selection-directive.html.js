@@ -36,14 +36,14 @@ app.directive("existingPermit", [ function () {
 				      }
 	            };
 
+
+        		var queryCanceler = null;
             	function query () {
 					$scope.isLoading = true;
                     var q = '(realm_ss:' + realm.value.toLowerCase() + ' ) AND NOT version_s:*';
 
-                    if($scope.keyword)
-                        q += ' AND (title_t:*' + $scope.keyword + '* OR description_t:*' +
-                         $scope.keyword + '* OR text_EN_txt:*' + $scope.keyword +
-                         '* OR uniqueIdentifier_ss:*' + $scope.keyword.toLowerCase() + '*)';
+                    if($scope.uniqueId)
+                        q += ' AND ( uniqueIdentifier_ss:*' + $scope.uniqueId.toLowerCase() + '*)';
 
                     q += ' AND (schema_s:absPermit)';
 
@@ -81,9 +81,15 @@ app.directive("existingPermit", [ function () {
                         'cb': new Date().getTime()
                     };
 
+                    if (queryCanceler) {
+		                queryCanceler.resolve(true);
+		            }
 
-                    $http.get('/api/v2013/index/select', { params: queryParameters }).success(function (data) {
+		            queryCanceler = $q.defer();
 
+		            $http.get('/api/v2013/index/select', { params: queryParameters, timeout: queryCanceler }).success(function (data) {
+
+						 queryCanceler = null;						
                          $scope.rawPermitDocs = [];
                          $scope.rawPermitDocs = data.response.docs;
 						 $scope.isLoading = false;
@@ -120,6 +126,11 @@ app.directive("existingPermit", [ function () {
 					}
 				})
 				$scope.$watch('queryGovernment', function(newValue){
+					if(loaded){
+						query()
+					}
+				})
+				$scope.$watch('uniqueId', function(newValue){
 					if(loaded){
 						query()
 					}
