@@ -13,7 +13,7 @@
                         <td>
                             <span style="font-size: 16px; color: white;margin:0;padding:0;float:right;">
                                 <a ng-click="removePermit(doc)" class="btn btn-primary">
-                                    <span class="glyphicon glyphicon-remove"></span>&nbsp;Delete</a>
+                                    <span class="glyphicon glyphicon-remove"></span>&nbsp;remove</a>
                             </span>
                         </td>
     				</tr>
@@ -91,11 +91,13 @@
             								<input type="checkbox" ng-model="doc.__checked"/>
             							</td>
             							<td>
+                                            <a target="_new" href="/database/record?documentID={{doc.identifier_s}}&documentSchema={{doc.schema_EN_t}}">
             								<span class="latest-date"> {{doc.createdDate_dt | formatDate}} </span> |
                                             <span class="latest-country"> {{doc.government_s | term:locale}} </span> |
                                             <span>{{doc.identifier_s | uniqueID}}</span>
                                             <!-- <span class="latest-schema"> {{doc.schema_EN_t | schemaName}} </span> -->
                                             <div class="latest-title">{{doc.title_t}} </div>
+                                            </a>
             							</td>
             						</tr>
 

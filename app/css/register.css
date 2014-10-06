@@ -504,3 +504,24 @@ form label[required]:before
 		/*background-color:yellow;*/
 		color:#555!important;
 	}
+
+
+.latest-country{
+		color:#555;
+		font-weight:bold;
+		text-transform:uppercase;
+		font-size:14px;
+
+}
+.latest-title{
+		font-weight:bold;
+		font-size:14px;
+		color:#428bca;
+}
+
+.latest-date{
+		color:#555;
+		font-weight:bold;
+		text-transform:uppercase;
+		font-size:14px;
+}
