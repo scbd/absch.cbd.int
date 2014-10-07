@@ -74,18 +74,19 @@ define(['app','angular-form-controls'], function (app) {
 			{
 
                 $scope.loadSecurity = function(){
-                    $timeout(function(){$scope.updateSecurity();}, 3500);
+                    $timeout(function(){$scope.updateSecurity();}, 1000);
                 }
 				//====================
 				//
 				//====================
 				$scope.updateSecurity = function()
 				{
-                    if(!$scope.getDocumentFn().header || !$scope.getDocumentFn().header.languages)
-                        $scope.loadSecurity();
-                
-					$scope.security = {};
+
 					$scope.loading = true;
+                    if(!$scope.getDocumentFn().header || !$scope.getDocumentFn().header.languages)
+                        return $scope.loadSecurity();
+
+					$scope.security = {};
 					$q.when($scope.getDocumentFn()).then(function(document){
 
 						if(!document || !document.header)
