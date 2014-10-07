@@ -60,7 +60,7 @@
                                 <span ng-show="document.body.amendmentsDescription">
                                 <span style="font-weight:bold;text-transform:uppercase;"> Reason for amendment: </span>
 						  		<span ng-show="!more"> {{document.body.amendmentsDescription| lstring:locale | limitTo:80}}
-						  		<a ng-href="#" ng-click="more=!more" ng-show="(document.body.amendmentsDescription| lstring:locale).length > 200"><strong>...more</strong> </a></span><span ng-show="more"> {{document.body.amendmentsDescription| lstring:locale}} <a ng-href="#" ng-click="more=!more"> <strong>less</strong></a></span>
+						  		<a ng-href="#" ng-click="more=!more" ng-show="(document.body.amendmentsDescription| lstring:locale).length > 200"><strong>...more</strong> </a></span><span ng-show="more" ng-bind-html="document.body.amendmentsDescription| lstring:locale"> <a ng-href="#" ng-click="more=!more"> <strong>less</strong></a></span>
 					  			</span>
 
                             </div>
