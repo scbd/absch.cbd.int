@@ -64,7 +64,7 @@
             <a class="btn btn-primary btn-lg" href="cpGrants" ng-show="hasParam('user_ask_funding') && !hasParam('grants_done')">Continue</a>
             <a class="btn btn-primary btn-lg" href="cpJournal" ng-show="hasParam('user_ask_publish') && !hasParam('journal_done')">Continue</a>
             <a class="btn btn-primary btn-lg" href="cpPatent" ng-show="hasParam('user_ask_patent') && !hasParam('patent_done')">Continue</a>
-            <a class="btn btn-primary btn-lg" href="cpCommercialize" ng-show="hasParam('user_ask_commercial') && !hasParam('market_done')">Continue</a>
+            <a class="btn btn-primary btn-lg" href="cpMarket" ng-show="hasParam('user_ask_commercial') && !hasParam('market_done')">Continue</a>
             <a class="btn btn-default btn-lg" href="" ng-show="(!hasParam('user_ask_funding') || hasParam('grants_done')) && (!hasParam('user_ask_publish') || hasParam('journal_done')) &&  (!hasParam('user_ask_patent') || hasParam('patent_done')) && (!hasParam('user_ask_commercial') || hasParam('market_done')) && !hasParam('user_finalize')">Please make your choice</a>
         </div>
 

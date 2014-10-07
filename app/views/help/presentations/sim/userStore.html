@@ -34,12 +34,11 @@
         </div>
 
         <div class="choices" >
-            <p>
-                <u class="color-red">YOU MUST CHOOSE:</u>  </p>
+            <p><u class="color-red">YOU MUST CHOOSE:</u></p>
 
             <div class="option" ng-class="{'option-selected':hasParam('store_no_absch')}" ng-click="addParam('store_no_absch');removeParam('store_absch');">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('store_no_absch'),'glyphicon-ok':hasParam('store_no_absch')}"></i>
-                You are much too exctied to check the ABS-CH now. Start on your research.
+                Start on your research. You are much too exctied and forget to check the ABS-CH.
             </div>
 
             <div class="option" ng-class="{'option-selected':hasParam('store_absch')}" ng-click="addParam('store_absch');removeParam('store_no_absch');">
