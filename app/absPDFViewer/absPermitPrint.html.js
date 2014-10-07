@@ -2,7 +2,8 @@
 //define(['app'], function(app){
 var app = angular.module('ngapp',[])
 
-app.controller('printPermit', ['$scope','$http','$location', function($scope,$http,$location) {
+app.controller('printPermit', ['$scope','$http','$location','$sce','$filter',
+ 	function($scope,$http,$location,$sce, $filter) {
 
 	var sLocale      = "en";
 	$scope.locale = sLocale;
@@ -27,12 +28,14 @@ app.controller('printPermit', ['$scope','$http','$location', function($scope,$ht
 		 	$scope.document = data;
 		 	var usageDetails = []
 
-		 	$scope.document.usage.forEach(function(usage){
+			if($scope.document.usage){
+			 	$scope.document.usage.forEach(function(usage){
 
-				$scope.getTerm(usage.identifier).success(function(data){
-									 	usageDetails.push( data);
-									 });
-			});
+					$scope.getTerm(usage.identifier).success(function(data){
+										 	usageDetails.push( data);
+										 });
+				});
+			}
 			$scope.document.usage = usageDetails;
 			$scope.getTerm($scope.document.government.identifier)
 				  .success(function(data){
@@ -62,7 +65,10 @@ app.controller('printPermit', ['$scope','$http','$location', function($scope,$ht
 	});
 					//TODO: return result.data;
 
-
+	$scope.renderHtml = function(html_code)
+	{
+	    return $sce.trustAsHtml($filter("lstring")(html_code,sLocale));
+	};
 
 	$scope.getTerm = function(identifier)
 	{

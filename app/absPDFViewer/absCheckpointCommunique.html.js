@@ -2,7 +2,7 @@
 //define(['app'], function(app){
 var app = angular.module('ngapp',[])
 
-app.controller('printPermit', ['$scope','$http','$location', function($scope,$http,$location) {
+app.controller('printPermit', ['$scope','$http','$location','$sce','$filter', function($scope,$http,$location, $sce, $filter) {
 
 	var sLocale      = "en";
 	$scope.locale = sLocale;
@@ -17,6 +17,12 @@ app.controller('printPermit', ['$scope','$http','$location', function($scope,$ht
 
 		 	$scope.document = data;
 	});
+
+
+	$scope.renderHtml = function(html_code)
+	{
+	    return $sce.trustAsHtml($filter("lstring")(html_code,sLocale));
+	};
 
 }]);
 
@@ -180,3 +186,79 @@ function lstring(ltext, locale)
 			return moment(date).format(formart);
 		}
 	});
+
+app.filter("uniqueID", ['$filter', '$q','$http', function( $filter, $q, $http) {
+		var cacheMap = {};
+
+		return function(term) {
+
+			if(!term)
+				return "";
+
+            var document;
+
+			if(term ){
+    		    if(cacheMap[term.identifier])
+    			     return cacheMap[term.identifier] ;
+
+            	document = $http.get('/api/v2013/documents/' +  term.identifier +'?info=true');
+            }
+
+
+            if(!document)
+                return;
+
+			cacheMap[term.identifier] = $q.when(document).then(function(document) {
+
+				document = document.data;
+
+                var government = ''
+                if(document.government)
+                    government = document.government.identifier;
+                else if(document.metadata && document.metadata.government)
+                    government = document.metadata.government;
+                else if(document.body && document.body.government)
+                    government = document.body.government.identifier;
+
+                var unique = 'ABSCH-' + $filter("schemaShortName")($filter("lowercase")(document.type)) +
+                        (government != '' ? '-' + $filter("uppercase")(government) : '') +
+                        '-' + document.documentID + '-' + document.revision;
+				cacheMap[term.identifier] = unique;
+
+				return unique;
+
+			}).catch(function(){
+
+				cacheMap[term.identifier] = term.identifier;
+
+				return term.identifier;
+
+			});
+		};
+	}]);
+
+
+		app.filter("schemaShortName", [function() {
+
+		return function( schame ) {
+
+			if(schame.toLowerCase() =="focalpoint"				) return "FP";
+			if(schame.toLowerCase() =="authority"				) return "CNA";
+			if(schame.toLowerCase() =="contact"					) return "CON";
+			if(schame.toLowerCase() =="database"				) return "NDB";
+			if(schame.toLowerCase() =="resource"				) return "VLR";
+			if(schame.toLowerCase() =="organization"			) return "ORG";
+			if(schame.toLowerCase() =="measure" 				) return "MSR";
+			if(schame.toLowerCase() =="abscheckpoint"			) return "CP";
+			if(schame.toLowerCase() =="abscheckpointcommunique"	) return "CPC";
+			if(schame.toLowerCase() =="abspermit"				) return "IRCC";
+            if(schame.toLowerCase() =="statement"				) return "ST";
+        	if(schame.toLowerCase() =="notification"			) return "NT";
+        	if(schame.toLowerCase() =="meeting"					) return "MT";
+        	if(schame.toLowerCase() =="pressrelease"			) return "PR";
+            if(schame.toLowerCase() =="meetingdocument"    		) return "MTD";
+
+
+			return schame;
+		};
+	}]);

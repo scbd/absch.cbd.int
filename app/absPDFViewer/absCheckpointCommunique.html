@@ -118,8 +118,7 @@
         						<ul>
         							<li ng-repeat="permit in document.permit">
         								<a href="/database/record?documentSchema=ABSPERMIT&documentID={{permit | lstring:locale}}">
-											{{permit | lstring:locale}}
-											ABSCH-IRCC-{{permit}}
+											{{permit | uniqueID}}
 											</a>
         							</li>
         						</ul>
@@ -155,7 +154,7 @@
     					<div ng-show="document.subjectMatter" class="row" >
                             <div class="col-xs-12">
     						<label>Subject-matter or genetic resources relevant to the information collected or received</label>
-    						<div class="text km-pre">{{document.subjectMatter | lstring:locale}}</div>
+    						<div class="text km-pre" ng-bind-html="renderHtml(document.subjectMatter)"></div>
     				</div>
     					</div>
     					<div ng-show="document.specimen || document.taxonomy || document.gisFiles" class="row" >
@@ -204,14 +203,14 @@
     					<div ng-show="document.referenceOfInformedConsent" class="row" >
                             <div class="col-xs-12">
     						<label>Reference or evidence of prior informed consent</label>
-    						<div class="text km-pre">{{document.referenceOfInformedConsent | lstring:locale}}</div>
+    						<div class="text km-pre" ng-bind-html="renderHtml(document.referenceOfInformedConsent)"></div>
     				</div>
     					</div>
 
     					<div ng-show="document.referenceOfAgreedTerms" class="row" >
                             <div class="col-xs-12">
     						<label>Reference or evidence of establishment of mutually agreed terms</label>
-    						<div class="text km-pre">{{document.referenceOfAgreedTerms | lstring:locale}}</div>
+    						<div class="text km-pre"ng-bind-html="renderHtml(document.referenceOfAgreedTerms)"></div>
     				</div>
     					</div>
 
@@ -231,7 +230,7 @@
     				<div ng-show="document.description"class="row" >
                             <div class="col-xs-12">
     					<label>Short description of the information collected or received by the checkpoint relevant to the utilization of genetic resources</label>
-    					<div class="text km-pre">{{document.description | lstring:locale}}</div>
+    					<div class="text km-pre" ng-bind-html="renderHtml(document.description)"></div>
     				</div>
     				</div>
     				<div ng-show="document.geneticRessourceUsers"class="row" >
@@ -272,7 +271,7 @@
     				<div ng-show="document.information"class="row" >
                             <div class="col-xs-12">
     					<label>Copy of relevant information</label>
-    					<div class="text km-pre">{{document.information | lstring:locale}}</div>
+    					<div class="text km-pre"ng-bind-html="renderHtml(document.information)"></div>
     				</div>
     				</div>
     			</div>
@@ -281,7 +280,7 @@
     				<legend>Additional Information</legend>
 
     				<div ng-show="document.relevantInformation">
-    					<div class="text" ng-bind="document.relevantInformation | lstring:locale"></div>
+    					<div class="text" ng-bind-html="renderHtml(document.relevantInformation)"></div>
     				</div>
 
     				<div ng-show="document.relevantDocuments">

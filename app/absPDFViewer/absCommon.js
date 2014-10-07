@@ -54,7 +54,28 @@ angular.directive("viewContactReference", [function () {
 
 angular.filter("lstring", function() {
 		return lstring;
-	});
+});
+
+angular.filter("yesno", function(){
+	return function(boolValue){
+		return boolValue ? "Yes" :  "No";
+	}
+});
+
+angular.filter("renderhtml", function(){
+	return function(html_code){
+		return html_code;
+		//return $sce.trustAsHtml(html_code);
+	}
+});
+
+angular.filter("formatDate", function(){
+	return function(date,formart){
+		if(formart== undefined)
+			formart = 'MMMM Do YYYY';
+		return moment(date).format(formart);
+	}
+});
 
 angular.filter("term", ["$http", function($http) {
 		var cacheMap = {};
@@ -89,21 +110,9 @@ angular.filter("term", ["$http", function($http) {
 
 			});
 		};
-	}]);
+}]);
 
-	angular.filter("yesno", function(){
-		return function(boolValue){
-			return boolValue ? "Yes" :  "No";
-		}
-	});
 
-	angular.filter("formatDate", function(){
-		return function(date,formart){
-			if(formart== undefined)
-				formart = 'MMMM Do YYYY';
-			return moment(date).format(formart);
-		}
-	});
 
 function lstring(ltext, locale)
 	{
