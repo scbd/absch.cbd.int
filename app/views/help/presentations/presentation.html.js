@@ -158,6 +158,29 @@ app.controller("presentationController",
        	 }
 
 			//==================================
+       	 $scope.addParamCheck = function (p,n) {
+
+				if(!$rootScope.params){
+					$rootScope.params = [];
+					$rootScope.params.push(p);
+				}
+				else{
+
+					// var i = $rootScope.params.indexOf(p);
+					//
+					// if(i >= 0 )
+					// 	$rootScope.params.splice(i, 1);
+					// else{
+
+					if(!$scope.checkLastParam(p, n))
+						$rootScope.params.push(p);
+
+
+					//}
+				}
+       	 }
+
+			//==================================
        	 $scope.addParamR = function (p) {
 
 				if(!$rootScope.params){
@@ -166,7 +189,7 @@ app.controller("presentationController",
 				}
 				else{
 
-					var i = $rootScope.params.indexOf(p);
+					var i = $rootScope.params.lastIndexOf(p);
 
 					if(i >= 0 )
 						$rootScope.params.splice(i, 1);
@@ -176,11 +199,23 @@ app.controller("presentationController",
 				}
        	 }
 
+			//==================================
+       	 	$scope.removeParamCheck = function (p, n) {
+				if($rootScope.params){
+					var i = $rootScope.params.lastIndexOf(p);
+
+					var l = $rootScope.params.length;
+
+					if( i >= 0 && i >= (l-n))
+						$rootScope.params.splice(i, 1);
+
+				}
+       	 	}
 
 			//==================================
        	 $scope.removeParam = function (p) {
 				if($rootScope.params){
-					var i = $rootScope.params.indexOf(p);
+					var i = $rootScope.params.lastIndexOf(p);
 
 					if(i >= ($rootScope.params.length - 2) )
 						$rootScope.params.splice(i, 1);
@@ -191,7 +226,7 @@ app.controller("presentationController",
 				//==================================
        	 $scope.removeParamALL = function (p) {
 				if($rootScope.params){
-					var i = $rootScope.params.indexOf(p);
+					var i = $rootScope.params.lastIndexOf(p);
 
 					if(i >= 0 )
 						$rootScope.params.splice(i, 1);

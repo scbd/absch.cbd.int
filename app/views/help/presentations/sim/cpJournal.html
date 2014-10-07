@@ -43,46 +43,42 @@
 
         </div>
 
-        <div class="choices" ng-show="hasParam('CP_journal')">
+    <div class="choices"  ng-show="hasParam('CP_journal')" >
             <p>The user provides you with one of the following options. <u class="color-red">YOU MUST CHOOSE:</u></p>
 
-            <div class="option" ng-class="{'option-selected':hasParam('user_provides_ircc')}" ng-click="addParam('user_provides_ircc');removeParam('user_provides_pcountry');removeParam('user_provides_np')">
-                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_provides_ircc'),'glyphicon-ok':hasParam('user_provides_ircc')}"></i>
-                The IRCC <span ng-show="hasParam('user_provides_ircc')">*</span> <span ng-show="!hasParam('IRCC_sent')" class="color-red"> (This user didnt not recieve an IRCC but since this is a only game you can choose it to see what will happen) </span>
+            <div class="option" ng-class="{'option-selected':checkLastParam('user_provides_ircc',3)}" ng-click="addParamCheck('user_provides_ircc',3);removeParamCheck('user_provides_pcountry',3);removeParamCheck('user_provides_np',3);">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!checkLastParam('user_provides_ircc',3),'glyphicon-ok':checkLastParam('user_provides_ircc',3)}"></i>
+                The IRCC <span ng-show="checkLastParam('user_provides_ircc',3)">*</span> <span ng-show="!hasParam('IRCC_sent')" class="color-red"> (This user didnt not recieve an IRCC but since this is a only game you can choose it to see what will happen) </span>
             </div>
 
-
-
-            <div class="option" ng-class="{'option-selected':hasParam('user_provides_np')}" ng-click="addParam('user_provides_np');removeParam('user_provides_pcountry');removeParam('user_provides_ircc')">
-                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_provides_np'),'glyphicon-ok':hasParam('user_provides_np')}"></i>
+            <div class="option" ng-class="{'option-selected':checkLastParam('user_provides_np',3)}" ng-click="addParamCheck('user_provides_np',3);removeParamCheck('user_provides_pcountry',3);removeParamCheck('user_provides_ircc',3);">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!checkLastParam('user_provides_np',3),'glyphicon-ok':checkLastParam('user_provides_np',3)}"></i>
                 The user provides the national permit. <span ng-show="!hasParam('IRCC_sent')" class="color-red" > (This user did not recieve a national permit but since this is a only game you can choose it to see what will happen) </span>
             </div>
 
-
-
-            <div class="option" ng-class="{'option-selected':hasParam('user_provides_pcountry')}" ng-click="addParam('user_provides_pcountry');removeParam('user_provides_ircc');removeParam('user_provides_np')">
-                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_provides_pcountry'),'glyphicon-ok':hasParam('user_provides_pcountry')}"></i>
+            <div class="option" ng-class="{'option-selected':checkLastParam('user_provides_pcountry',3)}" ng-click="addParamCheck('user_provides_pcountry',3);removeParamCheck('user_provides_ircc',3);removeParamCheck('user_provides_np',3);">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!checkLastParam('user_provides_pcountry',3),'glyphicon-ok':checkLastParam('user_provides_pcountry',3)}"></i>
                 The user only tells you the magic beans in the potion come from Middle-earth
             </div>
 
         </div>
 
-        <div class="choices" ng-show="hasParam('CP_journal') && hasParam('CP_exam')">
+        <div class="choices"  ng-show="hasParam('CP_journal') &&  hasParam('CP_exam') && (checkLastParam('user_provides_ircc',3) || checkLastParam('user_provides_np',3) || checkLastParam('user_provides_pcountry',3))">
             <p>You have been tasked to do a SUBSTANTIAL EXAMINATION.
             You carefully look at all the information presented by the user.</p>
-            <p ng-show="hasParam('user_provides_ircc')">* You remember to check the ABS-CH to make sure you are checking the latest verison of the IRCC and that no chanages have been made to the permit.</p>
+
+            <p ng-show="checkLastParam('user_provides_ircc',3)">* You remember to check the ABS-CH to make sure you are checking the latest verison of the IRCC and that no chanages have been made to the permit.</p>
             <p><u class="color-red">YOU MUST CHOOSE:</u></p>
 
-            <div class="option" ng-class="{'option-selected':hasParam('cp_journal_accepts')}" ng-click="addParam('cp_journal_accepts');removeParam('cp_journal_rejects');">
+            <div class="option" ng-class="{'option-selected':hasParam('cp_journal_accepts')}" ng-click="addParamR('cp_journal_accepts');removeParamALL('cp_journal_rejects');">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('cp_journal_accepts'),'glyphicon-ok':hasParam('cp_journal_accepts')}"></i>
-                Everything is in order and that you can go ahead and publish the paper
+                Everything is in order and that you can go ahead and approve the request.
             </div>
 
-            <div class="option" ng-class="{'option-selected':hasParam('cp_journal_rejects')}" ng-click="addParam('cp_journal_rejects');removeParam('cp_journal_accepts');">
+            <div class="option" ng-class="{'option-selected':hasParam('cp_journal_rejects')}" ng-click="addParamR('cp_journal_rejects');removeParamALL('cp_journal_accepts');">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('cp_journal_rejects'),'glyphicon-ok':hasParam('cp_journal_rejects')}"></i>
-                You cannot publish the paper.
+                 You cannot approve the request until the required conditions are met.
             </div>
-
         </div>
 
         <div class="choices"  ng-show="hasParam('CP_journal') && hasParam('CP_no_exam')">
@@ -90,17 +86,17 @@
         </div>
 
         <div class="continue"  ng-show="!hasParam('CP_journal')">
-            <a class="btn btn-primary btn-lg" href="notCP" ng-show="!hasParam('CP_journal')" >Continue</a>
+            <a class="btn btn-primary btn-lg" href="notCP" ng-show="!hasParam('CP_journal')" ng-click="addParam('journal_done')">Continue</a>
         </div>
 
         <div class="continue"  ng-show="hasParam('CP_journal') && hasParam('CP_no_exam')">
-            <a class="btn btn-primary btn-lg" href="sendCPC" ng-show="(hasParam('user_provides_ircc') || hasParam('user_provides_np')|| hasParam('user_provides_pcountry'))" >Continue</a>
-            <a class="btn btn-default btn-lg" href="" ng-show="!(hasParam('user_provides_ircc') || hasParam('user_provides_np')|| hasParam('user_provides_pcountry'))">Please make your choice</a>
+            <a class="btn btn-primary btn-lg" href="sendCPC" ng-show="(checkLastParam('user_provides_ircc',3)|| checkLastParam('user_provides_np',3)|| checkLastParam('user_provides_pcountry',3))" ng-click="addParam('journal_done')">Continue</a>
+            <a class="btn btn-default btn-lg" href="" ng-show="!(checkLastParam('user_provides_ircc',3)|| checkLastParam('user_provides_np',3)|| checkLastParam('user_provides_pcountry',3))">Please make your choice</a>
         </div>
 
         <div class="continue" ng-show="hasParam('CP_journal') && hasParam('CP_exam')">
-            <a class="btn btn-primary btn-lg" href="sendCPC" ng-show="hasParam('CP_journal') && ((hasParam('user_provides_ircc') || hasParam('user_provides_np') || hasParam('user_provides_pcountry')) && (hasParam('cp_journal_accepts') || hasParam('cp_journal_rejects')))" >Continue</a>
-            <a class="btn btn-default btn-lg" href="" ng-show="hasParam('CP_journal') && !((hasParam('user_provides_ircc') || hasParam('user_provides_np') || hasParam('user_provides_pcountry')) && (hasParam('cp_journal_accepts') || hasParam('cp_journal_rejects'))) ">Please make your choice</a>
+            <a class="btn btn-primary btn-lg" href="sendCPC" ng-show="hasParam('CP_journal') && ((checkLastParam('user_provides_ircc',3)|| checkLastParam('user_provides_np',3)|| checkLastParam('user_provides_pcountry',3)) && (checkLastParam('cp_journal_accepts',3) || checkLastParam('cp_journal_rejects',3)))" ng-click="addParam('journal_done')">Continue</a>
+            <a class="btn btn-default btn-lg" href="" ng-show="hasParam('CP_journal') && !((checkLastParam('user_provides_ircc',3)|| checkLastParam('user_provides_np',3)|| checkLastParam('user_provides_pcountry',3)) && (checkLastParam('cp_journal_accepts',3) || checkLastParam('cp_journal_rejects',3))) ">Please make your choice</a>
         </div>
 
     </div>
