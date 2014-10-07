@@ -76,7 +76,7 @@ app.directive("existingPermit", [ function () {
                         'fl': 'id,identifier_s,title_t,createdDate_dt,government_s,amendmentIntent_i,' +
                                 'resourceLinksLanguage_ss,',
                         'wt': 'json',
-                        'start': 1,
+                        'start': 0,
                         'rows': 25,
                         'cb': new Date().getTime()
                     };
