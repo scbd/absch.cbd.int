@@ -160,7 +160,7 @@
             <button type="button" class="btn btn-warning pull-right" ng-disabled="loading" ng-click="deleteDraft(recordToDelete)">Delete the draft</button>
             <em>Draft {{recordToDelete.documentID||'[new]'}}</em>
             <p><b>{{recordToDelete.workingDocumentTitle|lstring}}</b></p>
-            <p>{{recordToDelete.workingDocumentSummary|lstring}}</p>
+            <p ng-bind-html="recordToDelete.workingDocumentSummary|lstring"></p>
           </div>
 
           <div ng-show="isPublished(recordToDelete)" class="well">
@@ -168,7 +168,7 @@
                 Unpublish and delete the record</button>
             <em>Published record {{recordToDelete.documentID}}</em>
             <p><b>{{recordToDelete.title|lstring}}</b></p>
-            <p>{{recordToDelete.summary|lstring}}</p>
+            <p ng-bind-html="recordToDelete.summary|lstring"></p>
           </div>
 
         </div>
