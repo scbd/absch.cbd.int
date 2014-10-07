@@ -51,6 +51,10 @@
     .facetCircle{
         width:80px;height:80px;padding-top:20px;padding-left:20px;background-color:#1FA65D;
     }
+    .myWell-on{
+            /*background-color:#428bca!important;*/
+            color:#428bca!important;
+    }
 </style>
 <script type="text/javascript">
   $("#signature").tooltip();
@@ -130,12 +134,32 @@
 
    <div class="container">
     <div class="row">
-        <div class="col-lg-12">
-            <div class="row" >
-                <div class="col-lg-1" style="padding:5px !important;width:10.66% !important">
-                <a ng-href="#">
-                    <div class="panel panel-default"
-                    ng-class="{'panel-primary': isSelected('party')}"  ng-click="searchFilter=isPartyToCBD;updateMap('party')">
+        <div class="col-xs-12">
+            <div class="row" style="margin-bottom:-22px;padding-top:20px;padding-bottom:20px;">
+
+
+
+                <a ng-href="#" ng-click="searchFilter=isPartyToCBD;updateMap('party')">
+                    <div class="col-xs-8ths" id="myWell" style="height:80px;">
+
+
+                        <div class="well text-center" >
+
+                        <!-- <div class="stats-schema" >
+                            <span  ng-show="facet[0]!= 'RAT'">{{facet[0]|lowercase|schemaName}}</span>
+                            <span  ng-show="facet[0]== 'RAT'">Ratifications</span>
+                        </div> -->
+                        <br>
+                        <span class="stats-count" ng-class="{'myWell-on': isSelected(facet[0])}" >
+                            ALL</span>
+                        <br><br>
+                        <!-- <span class="stats-country">
+                            <span ng-show="!facet[1].countryCount">&nbsp;</span>
+                            <span ng-show="facet[1].countryCount"style="color:#777">Countries {{facet[1].countryCount}}</span></span> -->
+                        </div>
+
+
+                        <!-- <div class="panel panel-default" ng-class="{'panel-primary': isSelected('party')}"  >
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-10 text-center">
@@ -151,10 +175,32 @@
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                             <div class="clearfix"></div>
                         </div>
+                    </div> -->
+                </div>
+                </a>
+
+
+                <a ng-href="#" ng-click="selected_facet=facet[0];updateMap(facet[0]);" ng-repeat="facet in commonFormatFacets" style="display:inline;" >
+                    <div class="col-xs-8ths" id="myWell"   >
+                        <div class="well text-center" >
+
+                        <div class="stats-schema" >
+                            <span  ng-show="facet[0]!= 'RAT'">{{facet[0]|lowercase|schemaName}}</span>
+                            <span  ng-show="facet[0]== 'RAT'">Ratifications</span>
+                        </div>
+
+                        <span class="stats-count" ng-class="{'myWell-on': isSelected(facet[0])}" >
+                            {{facet[1].facetCount}}</span>
+                        <br>
+                        <span class="stats-country">
+                            <span ng-show="!facet[1].countryCount">&nbsp;</span>
+                            <span ng-show="facet[1].countryCount"style="color:#777">Countries {{facet[1].countryCount}}</span></span>
+                        </div>
                     </div>
                 </a>
-            </div>
-              <div class="col-lg-1" ng-repeat="facet in commonFormatFacets" style="padding:5px !important;width:11.66% !important">
+
+
+              <!-- <div class="col-lg-1" ng-repeat="facet in commonFormatFacets" style="padding:5px !important;width:11.66% !important">
                 <a ng-href="#">
                     <div class="panel panel-default"
                     ng-class="{'panel-primary': isSelected(facet[0])}"  ng-click="selected_facet=facet[0];updateMap(facet[0]);">
@@ -175,7 +221,13 @@
                         </div>
                     </div>
                 </a>
-              </div>
+              </div> -->
+
+
+
+
+
+
           </div>
         </div>
     </div>
