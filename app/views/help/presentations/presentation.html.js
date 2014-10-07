@@ -22,7 +22,7 @@ app.controller("presentationController",
 			$rootScope.providerPoints.b = 0;
 			$rootScope.providerPoints.c = 0;
 
-			$rootScope.params = [];
+			$rootScope.params = undefined;
 		}
 
 
@@ -71,9 +71,8 @@ app.controller("presentationController",
 		//==================================
        	 $scope.addPoints = function (p, type, value) {
 
-
-
 				if(type=="user"){
+
 					if($rootScope.userPoints == undefined){
 						$rootScope.userPoints = [];
 						$rootScope.userPoints.r = value[0];
@@ -81,43 +80,29 @@ app.controller("presentationController",
 						$rootScope.userPoints.c = value[2];
 					}
 					else{
-						if($scope.hasParam(p)){
-							$rootScope.userPoints.r = $rootScope.userPoints.r + value[0];
-							$rootScope.userPoints.b = $rootScope.userPoints.b + value[1];
-							$rootScope.userPoints.c = $rootScope.userPoints.c + value[2];
-						}
-						else{
-							$rootScope.userPoints.r = $rootScope.userPoints.r - value[0];
-							$rootScope.userPoints.b = $rootScope.userPoints.b - value[1];
-							$rootScope.userPoints.c = $rootScope.userPoints.c - value[2];
-						}
+						$rootScope.userPoints.r = $rootScope.userPoints.r + value[0];
+						$rootScope.userPoints.b = $rootScope.userPoints.b + value[1];
+						$rootScope.userPoints.c = $rootScope.userPoints.c + value[2];
 					}
+
 				}
 				if(type =="provider"){
 
 					if($rootScope.providerPoints == undefined){
 						$rootScope.providerPoints = [];
 						$rootScope.providerPoints.r = value[0];
-						$rootScope.providerPoints.b = value[1];
-						$rootScope.providerPoints.c = value[2];
+						$rootScope.providerPoints.i = value[1];
+						$rootScope.providerPoints.b = value[2];
+						$rootScope.providerPoints.c = value[3];
 					}
 					else{
-					if($scope.hasParam(p)){
-							$rootScope.providerPoints.r = $rootScope.providerPoints.r + value[0];
-							$rootScope.providerPoints.i = $rootScope.providerPoints.i + value[1];
-							$rootScope.providerPoints.b = $rootScope.providerPoints.b + value[2];
-							$rootScope.providerPoints.c = $rootScope.providerPoints.c + value[3];
-						}
-						else{
-							$rootScope.providerPoints.r = $rootScope.providerPoints.r - value[0];
-							$rootScope.providerPoints.i = $rootScope.providerPoints.i - value[1];
-							$rootScope.providerPoints.b = $rootScope.providerPoints.b - value[2];
-							$rootScope.providerPoints.c = $rootScope.providerPoints.c - value[3];
-						}
+
+						$rootScope.providerPoints.r = $rootScope.providerPoints.r + value[0];
+						$rootScope.providerPoints.i = $rootScope.providerPoints.i + value[1];
+						$rootScope.providerPoints.b = $rootScope.providerPoints.b + value[2];
+						$rootScope.providerPoints.c = $rootScope.providerPoints.c + value[3];
 					}
-
 				}
-
 		}
 
 
@@ -148,15 +133,86 @@ app.controller("presentationController",
 					// if(i >= 0 )
 					// 	$rootScope.params.splice(i, 1);
 					// else{
+
+					if(!$scope.checkLastParam(p, 1))
 						$rootScope.params.push(p);
+
+
 					//}
 				}
        	 }
 
 			//==================================
+       	 $scope.addParamCheck = function (p,n) {
+
+				if(!$rootScope.params){
+					$rootScope.params = [];
+					$rootScope.params.push(p);
+				}
+				else{
+
+					// var i = $rootScope.params.indexOf(p);
+					//
+					// if(i >= 0 )
+					// 	$rootScope.params.splice(i, 1);
+					// else{
+
+					if(!$scope.checkLastParam(p, n))
+						$rootScope.params.push(p);
+
+
+					//}
+				}
+       	 }
+
+			//==================================
+       	 $scope.addParamR = function (p) {
+
+				if(!$rootScope.params){
+					$rootScope.params = [];
+					$rootScope.params.push(p);
+				}
+				else{
+
+					var i = $rootScope.params.lastIndexOf(p);
+
+					if(i >= 0 )
+						$rootScope.params.splice(i, 1);
+					else{
+						$rootScope.params.push(p);
+					}
+				}
+       	 }
+
+			//==================================
+       	 	$scope.removeParamCheck = function (p, n) {
+				if($rootScope.params){
+					var i = $rootScope.params.lastIndexOf(p);
+
+					var l = $rootScope.params.length;
+
+					if( i >= 0 && i >= (l-n))
+						$rootScope.params.splice(i, 1);
+
+				}
+       	 	}
+
+			//==================================
        	 $scope.removeParam = function (p) {
 				if($rootScope.params){
-					var i = $rootScope.params.indexOf(p);
+					var i = $rootScope.params.lastIndexOf(p);
+
+					if(i >= ($rootScope.params.length - 2) )
+						$rootScope.params.splice(i, 1);
+
+				}
+       	 }
+
+				//==================================
+       	 $scope.removeParamALL = function (p) {
+				if($rootScope.params){
+					var i = $rootScope.params.lastIndexOf(p);
+
 					if(i >= 0 )
 						$rootScope.params.splice(i, 1);
 
@@ -176,16 +232,86 @@ app.controller("presentationController",
 
 			//==================================
        	 $scope.checkLastParam = function (p, n) {
-			if($rootScope.params){
+
+			if (!n) n=1;
+
+			if($rootScope.params && $rootScope.params.length > 0){
+
 
 				var l = $rootScope.params.length;
 
 				for(var i=l-n; i<l;i++){
-						if($rootScope.params == p)
+						if($rootScope.params[i] == p)
 							return true;
 				}
 			}
 			return false;
+       	 }
+
+
+		//==================================
+       	 $scope.calcPoints = function () {
+
+			var	scoring = [
+				{
+					'param': 'CP_journal',
+					'user': [2,0,1],
+					'provider':[0,0,0,0]
+				},
+				{
+					'param': 'CP_grants',
+					'user': [2,0,1],
+					'provider':[0,0,0,0]
+				},
+				{
+					'param': 'CP_patent',
+					'user': [2,0,1],
+					'provider':[0,0,0,0]
+				},
+				{
+					'param': 'CP_market',
+					'user': [2,0,1],
+					'provider':[0,0,0,0]
+				},
+				{
+					'param': 'CP_exam',
+					'user': [2,0,1],
+					'provider':[0,0,0,0]
+				},
+				{
+					'param': 'CP_no_exam',
+					'user': [0,0,0],
+					'provider':[0,0,0,0]
+				},
+				{
+					'param': 'MSR_good',
+					'user': [0,0,0],
+					'provider':[1,2,1,1]
+				},
+				{
+					'param': 'MSR_bad',
+					'user': [0,0,0],
+					'provider':[-1,1,0,1]
+				},
+				{
+					'param': 'MSR_none',
+					'user': [0,0,0],
+					'provider':[0,0,0,0]
+				}
+			];
+
+
+			for(var i=0; i < $rootScope.params.length; i++)
+			{
+				for(var j=0; j < scoring.length; j++){
+
+					if($rootScope.params[i] == scoring[j].param){
+						$scope.addPoints( scoring[i].param, "user", scoring[i].user );
+						$scope.addPoints( scoring[i].param, "provider", scoring[i].provider );
+					}
+				}
+			}
+
        	 }
 
 
