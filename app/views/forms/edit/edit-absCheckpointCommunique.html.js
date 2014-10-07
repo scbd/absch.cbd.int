@@ -99,7 +99,10 @@ define(['app', '/app/views/forms/edit/edit.js',
             document.checkpointSelected.forEach(function(checkpoint){
 
                 var selected = _.where($scope.checkpointList,{"identifier": checkpoint.identifier});
-                document.checkpoint.push(selected[0].body);
+                if(selected && selected.length > 0 && selected[0].body)
+                    selected = selected[0].body
+                if(selected)
+                    document.checkpoint.push(selected);
             });
       }
       else
