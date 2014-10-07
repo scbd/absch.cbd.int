@@ -12,10 +12,10 @@ app.directive("viewHistory", [function () {
 			government:  "=government"
 		},
 		link: function($scope, $element) {
-		//	$element.find("[data-toggle='tooltip']").tooltip({trigger:'hover'});
+			// $element.find("[data-toggle='tooltip']").tooltip({trigger:'hover'});
 		},
-		controller: ['$scope', 'IStorage', "$q","$route","$filter",
-			function ($scope, storage, $q,$route, $filter) {
+		controller: ['$scope', 'IStorage', "$q","$route","$filter","$timeout",
+			function ($scope, storage, $q,$route, $filter,$timeout) {
 
 			$scope.$watch('documentID', function(value){
 				if(value && !$scope.documents){
@@ -65,6 +65,10 @@ app.directive("viewHistory", [function () {
 							$scope.isPermit = true;
 						}
 						$scope.loading=false;
+						$timeout(function(){
+							console.log($("[data-toggle='tooltip']"));
+							$("[data-toggle='tooltip']").tooltip({trigger:'hover'});
+						},200);
 
 				}).then(null, function(error) {
 					$scope.error = "error loading document history";

@@ -72,7 +72,7 @@
 								document.body.personeToWhomGranted.emails || document.body.geneticRessourceUsers.emails ||
 								document.body.providers.emails || document.body.informedConsents.emails ||
 								document.body.authority.emails) && showFile">
-	                                <span style="font-weight:bold;text-transform:uppercase;"> Email sent to: </span>
+	                                <span style="font-weight:bold;text-transform:uppercase;"> AN EMAIL HAS BEEN AUTOMATICALLY SENT TO THE FOLLOWING ADDRESS: </span>
 							  		<!-- TODO: need to comma delimit the below list of emails -->
 									<span>
 										{{document.body.responsibleAuthorities.emails | lstring:locale}}
@@ -82,7 +82,8 @@
 										{{document.body.informedConsents.emails | lstring:locale}}
 										{{document.body.authority.emails | lstring:locale}}
 					  				</span>
-
+									<i class="fa fa-info" style="color:#428bca;cursor:pointer;" data-toggle="tooltip" data-placement="top" title="NOTE: THE ABS-CH DOES NOT GUARANTEE THAT THE EMAIL HAS BEEN RECEIVED.">
+									</i>
                             </div>
                         </div>
 
