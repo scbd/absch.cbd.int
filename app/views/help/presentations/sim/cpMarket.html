@@ -85,7 +85,8 @@
         </div>
 
         <div class="continue"  ng-show="!hasParam('CP_market')">
-            <a class="btn btn-primary btn-lg" href="notCP" ng-show="!hasParam('CP_market')" ng-click="addParam('market_done')">Continue</a>
+            <a class="btn btn-primary btn-lg" href="notCP" ng-show="hasParam('picmat_research') || hasParam('picmat_commercial')" ng-click="addParam('market_done')">Continue</a>
+            <a class="btn btn-primary btn-lg" href="userResearch" ng-show="!hasParam('picmat_research') && !hasParam('picmat_commercial')" ng-click="addParam('market_done')">Continue</a>
         </div>
 
         <div class="continue"  ng-show="hasParam('CP_market') && hasParam('CP_no_exam')">

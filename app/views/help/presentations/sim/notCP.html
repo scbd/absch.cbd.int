@@ -1,0 +1,81 @@
+
+<div class="row" id="Presentation">
+    <div  class="col-xs-12" ng-class="{'col-xs-8':help}">
+
+    <div class="thumbnail" >
+        <img class="slide" src="/app/views/help/presentations/images/theatre-access/theatre-access.001.jpg" >
+    </div>
+
+    </div>
+    <div class="col-xs-4" ng-show="help">
+
+        <ul ng-show="hasParam('CP_none')">
+        <li><a href="">Read the text of the Nagoya Protocol</a></li>
+        <li><a href="">Fact sheet: Becoming a Party</a></li>
+        <li><a href="">Fact sheet: Becoming a Party</a></li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="row" id="Presentation">
+    <div  class="col-xs-12" >
+
+        <div class="title">6 months later...</div>
+
+        <div class="text">
+            <p>YOU are Gandalf the provider country CNA.</p>
+
+            <p ng-show="checkLastParam('grants_done',3)">6 month later and it’s been a while since Harry User accessed the magic beans from your country.</p>
+            <p ng-show="checkLastParam('journal_done',3)">6 month later. One day you pick up a copy of Witchcraft Review, and read an article about your magic beans</p>
+            <p ng-show="checkLastParam('patent_done',3)">6 month later and been a while since Harry User accessed the magic beans from your country.</p>
+            <p ng-show="checkLastParam('market_done',3)">6 month later. One day your are out shopping and you notice a new product made of your magic beans.</p>
+
+            <p ng-show="hasParam('picmat_research')">You seem to remember giving him a non-commercial use permit. You should check your records or the ABS-CH to be sure.</p>
+            <p ng-show="hasParam('picmat_commercial')">You seem to remember giving him a commercial use permit. You should check your records or the ABS-CH to be sure.</p>
+
+        </div>
+
+        <div class="choices">
+            <p><u class="color-red">YOU MUST CHOOSE:</u> </p>
+
+            <div class="option" ng-class="{'option-selected':checkLastParam('proCNA_trust')}" ng-click="addParam('proCNA_trust');removeParam('proCNA_ok');removeParam('proCNA_angry');">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!checkLastParam('proCNA_trust'),'glyphicon-ok':checkLastParam('proCNA_trust')}"></i></i>
+                To trust him. All the negotiation process went really good and he is in regular
+                communication with one of your universities. You know that he will comply with
+                the terms agreed and that he will share the benefits. Besides, you have a very good
+                relationship with Wizards’ Kingdom and a long standing collaboration with the researchers
+                coming from there, so there is no reason to think that this time would be different. You are reassured
+                that if any problem arise, you can address it easily with the Wizards Kingdom authorities.
+            </div>.
+        </div>
+        <div class="text">
+            To try to find out if Harry User is really complying with the terms agreed. You are suspicious
+            of this whole thing. Things with Harry User were not clean from the very beginning and it’s not
+            the first time that a researcher from Wizards Kingdom does not comply with your norms and don’t
+            follow what was agreed in MAT. When you complained to Wizards’ Kingdom you did not receive any answer.
+            You put two of your employees to search and contact people to find out what use is being made from your
+            magic beans, and they find out that:
+        </div>
+        <div class="choices">
+            <div class="option" ng-class="{'option-selected':checkLastParam('proCNA_ok')}" ng-click="addParam('proCNA_ok');removeParam('proCNA_angry');removeParam('proCNA_trust');;">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('proCNA_ok'),'glyphicon-ok':hasParam('proCNA_ok')}"></i></i>
+                Everything is OK.
+            </div>
+            <div class="option" ng-class="{'option-selected':checkLastParam('proCNA_angry')}" ng-click="addParam('proCNA_angry');removeParam('proCNA_ok');removeParam('proCNA_trust');">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!checkLastParam('proCNA_angry'),'glyphicon-ok':checkLastParam('proCNA_angry')}"></i></i>
+                Harry User hasn’t been complying with the agreed MAT. You are angry and decide to sue him.
+            </div>
+        </div>
+
+
+        <div class="continue">
+            <a class="btn btn-primary btn-lg" href="userResearch" ng-show="checkLastParam('proCNA_ok') " >Continue</a>
+            <a class="btn btn-primary btn-lg" href="sueUser" ng-show="checkLastParam('proCNA_angry') " >Continue</a>
+            <a class="btn btn-primary btn-lg" href="userResearch" ng-show="checkLastParam('proCNA_trust') " >Continue</a>
+            <a class="btn btn-default btn-lg" href="" ng-show="!(checkLastParam('proCNA_ok') || checkLastParam('proCNA_angry') || checkLastParam('proCNA_trust') )">Please make your choice</a>
+        </div>
+
+    </div>
+
+</div>
