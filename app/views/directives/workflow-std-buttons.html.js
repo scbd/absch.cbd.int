@@ -83,16 +83,15 @@ define(['app','angular-form-controls'], function (app) {
 				{
                     if(!$scope.getDocumentFn().header || !$scope.getDocumentFn().header.languages)
                         $scope.loadSecurity();
-
-                    $scope.languages = $scope.getDocumentFn().header.languages;
+                
 					$scope.security = {};
 					$scope.loading = true;
 					$q.when($scope.getDocumentFn()).then(function(document){
 
-
 						if(!document || !document.header)
 							return;
 
+                        $scope.languages = document.header.languages;
 						var identifier = document.header.identifier;
 						var schema     = document.header.schema;
 
