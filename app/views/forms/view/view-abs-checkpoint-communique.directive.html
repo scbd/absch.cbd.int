@@ -135,7 +135,7 @@
 				<legend>Information on the utilization of the genetic resource(s)</legend>
 				<div ng-show="document.description">
 					<label>Short description of the information collected or received by the checkpoint relevant to the utilization of genetic resources</label>
-					<div class="km-value km-pre">{{document.description | lstring:locale}}</div>
+					<div class="km-value km-pre" ng-bind-html="document.description | lstring:locale"></div>
 				</div>
 				<div ng-show="document.geneticRessourceUsers">
 					<label>Person or entity utilizing the genetic resource at the checkpoint</label>
