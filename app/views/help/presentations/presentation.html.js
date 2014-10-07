@@ -158,9 +158,41 @@ app.controller("presentationController",
        	 }
 
 			//==================================
+       	 $scope.addParamR = function (p) {
+
+				if(!$rootScope.params){
+					$rootScope.params = [];
+					$rootScope.params.push(p);
+				}
+				else{
+
+					var i = $rootScope.params.indexOf(p);
+
+					if(i >= 0 )
+						$rootScope.params.splice(i, 1);
+					else{
+						$rootScope.params.push(p);
+					}
+				}
+       	 }
+
+
+			//==================================
        	 $scope.removeParam = function (p) {
 				if($rootScope.params){
 					var i = $rootScope.params.indexOf(p);
+
+					if(i >= ($rootScope.params.length - 2) )
+						$rootScope.params.splice(i, 1);
+
+				}
+       	 }
+
+				//==================================
+       	 $scope.removeParamALL = function (p) {
+				if($rootScope.params){
+					var i = $rootScope.params.indexOf(p);
+
 					if(i >= 0 )
 						$rootScope.params.splice(i, 1);
 
