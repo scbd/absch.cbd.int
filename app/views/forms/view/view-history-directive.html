@@ -44,7 +44,7 @@
 								</a>
 
                             </div>
-							<div class="col-xs-2" ng-show="showFile">
+							<div class="col-xs-2" ng-show="showFile" style="padding-left:5px;padding-right:5px">
                                 <a type="button" target="_blank"  ng-href="/database/record/{{document | uniqueID}}">
                                 <i class="fa fa-file-o"></i>
                                 	 <span>{{document | uniqueID}}</span>
@@ -59,8 +59,12 @@
 
                                 <span ng-show="document.body.amendmentsDescription">
                                 <span style="font-weight:bold;text-transform:uppercase;"> Reason for amendment: </span>
-						  		<span ng-show="!more"> {{document.body.amendmentsDescription| lstring:locale | limitTo:80}}
-						  		<a ng-href="#" ng-click="more=!more" ng-show="(document.body.amendmentsDescription| lstring:locale).length > 200"><strong>...more</strong> </a></span><span ng-show="more" ng-bind-html="document.body.amendmentsDescription| lstring:locale"> <a ng-href="#" ng-click="more=!more"> <strong>less</strong></a></span>
+						  		<span ng-show="!more" ng-bind-html="document.body.amendmentsDescription| lstring:locale | limitTo:80">
+						  		<a ng-href="#" ng-click="more=!more" ng-show="(document.body.amendmentsDescription| lstring:locale).length > 200">
+									<strong>...more</strong> </a></span>
+									<span ng-show="more" ng-bind-html="document.body.amendmentsDescription| lstring:locale">
+										<a ng-href="#" ng-click="more=!more"> <strong>less</strong></a>
+									</span>
 					  			</span>
 
                             </div>
