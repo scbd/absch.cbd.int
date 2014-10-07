@@ -21,11 +21,11 @@
 <div class="row" id="Presentation">
     <div  class="col-xs-12" >
 
-        <div class="title">User country desginated authority recieving the Checkpoint communiqué</div>
+        <div class="title">User Country Desginated Authority recieving the Checkpoint Communiqué</div>
 
         <div class="text">
-            <p>YOU are a DESIGNATED AUTHORITY of Wizard’s Kingdom</p>
-            <p>You recieve the above checkpoint communiqué</p>
+            <p>YOU are a Desginated Authority of Wizard’s Kingdom</p>
+            <p>You recieve a checkpoint communiqué.</p>
         </div>
 
         <div class="choices" >
@@ -39,19 +39,19 @@
                 helpful to enhance the collaboration between the two fiction worlds.
             </div>
 
-            <div class="option" ng-class="{'option-selected':hasParam('userCNA_ignore_CPC')}" ng-click="addParam('userCNA_ignore_CPC');removeParam('userCNA_file_CPC');removeParam('userCNA_takemsr_CPC');removeParam('userCNA_contactuser_CPC');">
-                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('userCNA_ignore_CPC'),'glyphicon-ok':hasParam('userCNA_ignore_CPC')}"></i>
-                Ignore it. This is not my problem.
-            </div>
-
             <div class="option" ng-class="{'option-selected':hasParam('userCNA_contactuser_CPC')}" ng-click="addParam('userCNA_contactuser_CPC');removeParam('userCNA_file_CPC');removeParam('userCNA_ignore_CPC');removeParam('userCNA_takemsr_CPC');">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('userCNA_contactuser_CPC'),'glyphicon-ok':hasParam('userCNA_contactuser_CPC')}"></i>
-                Contact the user and the CNA to try to solve the problem.
+                Contact the user and the CNA to try to solve any problems.
             </div>
 
             <div class="option" ng-class="{'option-selected':hasParam('userCNA_takemsr_CPC')}" ng-click="addParam('userCNA_takemsr_CPC');removeParam('userCNA_file_CPC');removeParam('userCNA_ignore_CPC');removeParam('userCNA_contactuser_CPC');">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('userCNA_takemsr_CPC'),'glyphicon-ok':hasParam('userCNA_takemsr_CPC')}"></i>
                 Take measures to ensure that the user is in compliance with ABS requirements.
+            </div>
+
+            <div class="option" ng-class="{'option-selected':hasParam('userCNA_ignore_CPC')}" ng-click="addParam('userCNA_ignore_CPC');removeParam('userCNA_file_CPC');removeParam('userCNA_takemsr_CPC');removeParam('userCNA_contactuser_CPC');">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('userCNA_ignore_CPC'),'glyphicon-ok':hasParam('userCNA_ignore_CPC')}"></i>
+                Take no action.
             </div>
 
         </div>

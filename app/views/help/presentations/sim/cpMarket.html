@@ -20,27 +20,26 @@
 <div class="row" id="Presentation">
     <div  class="col-xs-12" >
 
-        <div class="title">Witchcraft Review the premier journal for serious wizards</div>
+        <div class="title">The Market Approval Authority</div>
 
         <div class="text">
-            <p>YOU are the editor at Witchcraft Review.
-                <span ng-show="!hasParam('CP_journal')" >
-                    <u>Witchcraft Review is not a Checkpoint. </u>
-                </span>
-            </p>
-            <p>One day as you are editing your latest review when a USER walks into your office and shows you a very interesting research paper on a notoriously rare and magic bean. You would love to publish the paper in your magazine.</p>
-
-            <p ng-show="!hasParam('CP_journal')">
-                You agree to publish the paper in your journal. The article will come out in the following weeks magazine.
+            <p>YOU are working at the Market Approval Authority in Wizards Kingdom, you make sure that all
+                potions fulfill the phytosanitary and magic conditions required to ensure the quality of all
+                potions available in the shops of the Wizards Kingdom.
             </p>
 
-            <p ng-show="hasParam('CP_journal')">
-                As an appointed checkpoint for the Nagoya Protocol, you ask the USER to provide information on prior
-                 informed consent, the source of the genetic resource, the establishment of mutually agreed terms,
-                 and/or the utilization of genetic resources. You secretly hope that he will have the IRCC, as it
-                 would make your job of filling the form for the checkpoint communique easier.
-             </p>
+            <p>Harry User has applied for a market approval for commercializing a new magic potion.</p>
 
+            <p ng-show="!hasParam('CP_market')" >
+                <u>The Market Approval Authority is not a Checkpoint.</u>
+                After checking that the application is correct and meet the phytosanitary requirements for commercialization you agree to grant the patent requested.
+            </p>
+
+            <p ng-show="hasParam('CP_market')">
+                As an appointed checkpoint for the Nagoya Protocol, you ask the Harry to provide information on prior informed consent,
+                the source of the genetic resource, the establishment of mutually agreed terms, and/or the utilization of genetic resources.
+                You secretly hope that he will have the IRCC, as it would make your job of filling the form for the checkpoint communique easier.
+            </p>
         </div>
 
         <div class="choices" >
@@ -51,14 +50,10 @@
                 The IRCC <span ng-show="hasParam('user_provides_ircc')">*</span> <span ng-show="!hasParam('IRCC_sent')" class="color-red"> (This user didnt not recieve an IRCC but since this is a only game you can choose it to see what will happen) </span>
             </div>
 
-
-
             <div class="option" ng-class="{'option-selected':hasParam('user_provides_np')}" ng-click="addParam('user_provides_np');removeParam('user_provides_pcountry');removeParam('user_provides_ircc')">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_provides_np'),'glyphicon-ok':hasParam('user_provides_np')}"></i>
                 The user provides the national permit. <span ng-show="!hasParam('IRCC_sent')" class="color-red" > (This user did not recieve a national permit but since this is a only game you can choose it to see what will happen) </span>
             </div>
-
-
 
             <div class="option" ng-class="{'option-selected':hasParam('user_provides_pcountry')}" ng-click="addParam('user_provides_pcountry');removeParam('user_provides_ircc');removeParam('user_provides_np')">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_provides_pcountry'),'glyphicon-ok':hasParam('user_provides_pcountry')}"></i>
@@ -67,28 +62,28 @@
 
         </div>
 
-        <div class="choices" ng-show="hasParam('CP_exam')">
+        <div class="choices"  ng-show="hasParam('CP_exam')">
             <p>You have been tasked to do a SUBSTANTIAL EXAMINATION.
             You carefully look at all the information presented by the user.</p>
             <p ng-show="hasParam('user_provides_ircc')">* You remember to check the ABS-CH to make sure you are checking the latest verison of the IRCC and that no chanages have been made to the permit.</p>
             <p><u class="color-red">YOU MUST CHOOSE:</u></p>
 
-            <div class="option" ng-class="{'option-selected':hasParam('cp_journal_accepts')}" ng-click="addParam('cp_journal_accepts');removeParam('cp_journal_rejects');">
-                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('cp_journal_accepts'),'glyphicon-ok':hasParam('cp_journal_accepts')}"></i>
-                Everything is in order and that you can go ahead and publish the paper
+            <div class="option" ng-class="{'option-selected':hasParam('cp_market_accepts')}" ng-click="addParam('cp_market_accepts');removeParam('cp_market_rejects');">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('cp_market_accepts'),'glyphicon-ok':hasParam('cp_market_accepts')}"></i>
+                 Everything is right and that you can go ahead and give the market authorization
             </div>
 
-            <div class="option" ng-class="{'option-selected':hasParam('cp_journal_rejects')}" ng-click="addParam('cp_journal_rejects');removeParam('cp_journal_accepts');">
-                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('cp_journal_rejects'),'glyphicon-ok':hasParam('cp_journal_rejects')}"></i>
-                You cannot publish the paper.
+            <div class="option" ng-class="{'option-selected':hasParam('cp_market_rejects')}" ng-click="addParam('cp_market_rejects');removeParam('cp_market_accepts');">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('cp_market_rejects'),'glyphicon-ok':hasParam('cp_market_rejects')}"></i>
+                You cannot authorize the commercialization of the potion until all necessary conditions are met. 
             </div>
 
         </div>
 
         <div class="continue">
-            <a class="btn btn-primary btn-lg" href="" ng-show="!hasParam('CP_journal')" >Continue</a>
-            <a class="btn btn-primary btn-lg" href="sendCPC" ng-show="hasParam('CP_journal') && ((hasParam('user_provides_ircc') || hasParam('user_provides_np') || hasParam('user_provides_pcountry')) && (hasParam('cp_journal_accepts') || hasParam('cp_journal_rejects')))" >Continue</a>
-            <a class="btn btn-default btn-lg" href="" ng-show="hasParam('CP_journal') && !((hasParam('user_provides_ircc') || hasParam('user_provides_np') || hasParam('user_provides_pcountry')) && (hasParam('cp_journal_accepts') || hasParam('cp_journal_rejects'))) ">Please make your choice</a>
+            <a class="btn btn-primary btn-lg" href="" ng-show="!hasParam('CP_market')" >Continue</a>
+            <a class="btn btn-primary btn-lg" href="sendCPC" ng-show="hasParam('CP_market') && ((hasParam('user_provides_ircc') || hasParam('user_provides_np') || hasParam('user_provides_pcountry')) && (hasParam('cp_market_accepts') || hasParam('cp_market_rejects')))" >Continue</a>
+            <a class="btn btn-default btn-lg" href="" ng-show="hasParam('CP_market') && !((hasParam('user_provides_ircc') || hasParam('user_provides_np') || hasParam('user_provides_pcountry')) && (hasParam('cp_market_accepts') || hasParam('cp_market_rejects'))) ">Please make your choice</a>
         </div>
 
     </div>

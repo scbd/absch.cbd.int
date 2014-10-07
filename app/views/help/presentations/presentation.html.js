@@ -25,7 +25,7 @@ app.controller("presentationController",
 			$rootScope.params = [];
 		}
 
-	
+
 		//==================================
        	 $scope.setStart = function (s) {
 			$rootScope.startSlide == s;
@@ -143,13 +143,13 @@ app.controller("presentationController",
 				}
 				else{
 
-					var i = $rootScope.params.indexOf(p);
-
-					if(i >= 0 )
-						$rootScope.params.splice(i, 1);
-					else{
+					// var i = $rootScope.params.indexOf(p);
+					//
+					// if(i >= 0 )
+					// 	$rootScope.params.splice(i, 1);
+					// else{
 						$rootScope.params.push(p);
-					}
+					//}
 				}
        	 }
 
@@ -169,6 +169,21 @@ app.controller("presentationController",
 				var i = $rootScope.params.indexOf(p);
 				if(i >= 0 )
 					return true;
+			}
+			return false;
+       	 }
+
+
+			//==================================
+       	 $scope.checkLastParam = function (p, n) {
+			if($rootScope.params){
+
+				var l = $rootScope.params.length;
+
+				for(var i=l-n; i<l;i++){
+						if($rootScope.params == p)
+							return true;
+				}
 			}
 			return false;
        	 }
