@@ -25,6 +25,19 @@
         <div class="text">
             <p>YOU are a Wizards Kingdom Checkpoint</p>
             <p>You login online to the ABS-CH and fill out the Checkpoint communiqué.</p>
+
+            <p ng-show="checkLastParam('user_provides_ircc', 3)">
+                You are lucky. Harry has provided you with the IRCC which makes filling out the Checkpoint Communique much more simple.
+            </p>
+
+            <p ng-show="checkLastParam('user_provides_np', 3)">
+                Harry has provided you with the national permit. You enter all the information possible that is not confidential including a national permit identifier.
+            </p>
+
+            <p ng-show="checkLastParam('user_provides_pcountry', 3)">
+                Harry has only provided you with the name of country where he got the magic beans.
+            </p>
+
         </div>
 
         <div class="continue">

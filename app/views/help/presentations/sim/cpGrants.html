@@ -20,7 +20,7 @@
 <div class="row" id="Presentation">
     <div  class="col-xs-12" >
 
-        <div class="title">Dumbledore Grants</div>
+        <div class="title">Dumbledore Grants <span ng-show="hasParam('CP_grants')" >CHECKPOINT</span></div>
 
         <div class="text">
             <p>YOU are working at Dumbledore Grants a University institutions in Wizards Kingdom which provides funding for spells and innovative magic potions.</p>
@@ -28,8 +28,8 @@
             <p>Harry User has applied for funding in your institution for conducting research on the magic properties of some rare magic beans.</p>
 
             <p ng-show="!hasParam('CP_grants')" >
-                <u>Witchcraft Review is not a Checkpoint.</u>
-                After checking that the application is correct and meet the requirements you  agree to provide funding for his research project.
+                <u>Dumbledore Grants is not a Checkpoint.</u>
+                After checking that the application is correct and meets the requirements you agree to provide funding for his research project.
             </p>
 
             <p ng-show="hasParam('CP_grants')">
@@ -40,7 +40,7 @@
             </p>
         </div>
 
-        <div class="choices" >
+        <div class="choices"  ng-show="hasParam('CP_grants')" >
             <p>The user provides you with one of the following options. <u class="color-red">YOU MUST CHOOSE:</u></p>
 
             <div class="option" ng-class="{'option-selected':hasParam('user_provides_ircc')}" ng-click="addParam('user_provides_ircc');removeParam('user_provides_pcountry');removeParam('user_provides_np')">
@@ -60,9 +60,10 @@
 
         </div>
 
-        <div class="choices"  ng-show="hasParam('CP_exam')">
+        <div class="choices"  ng-show="hasParam('CP_grants') &&  hasParam('CP_exam')">
             <p>You have been tasked to do a SUBSTANTIAL EXAMINATION.
             You carefully look at all the information presented by the user.</p>
+
             <p ng-show="hasParam('user_provides_ircc')">* You remember to check the ABS-CH to make sure you are checking the latest verison of the IRCC and that no chanages have been made to the permit.</p>
             <p><u class="color-red">YOU MUST CHOOSE:</u></p>
 
@@ -75,11 +76,22 @@
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('cp_grants_rejects'),'glyphicon-ok':hasParam('cp_grants_rejects')}"></i>
                  You cannot grant the funding until the required conditions are met.
             </div>
-
         </div>
 
-        <div class="continue">
-            <a class="btn btn-primary btn-lg" href="" ng-show="!hasParam('CP_grants')" >Continue</a>
+        <div class="choices"  ng-show="hasParam('CP_grants') && hasParam('CP_no_exam')">
+            It seems that Harry has everything in order from your point of view.  You go ahead and approve the request.
+        </div>
+
+        <div class="continue"  ng-show="!hasParam('CP_grants')">
+            <a class="btn btn-primary btn-lg" href="notCP" ng-show="!hasParam('CP_grants')" >Continue</a>
+        </div>
+
+        <div class="continue"  ng-show="hasParam('CP_grants') && hasParam('CP_no_exam')">
+            <a class="btn btn-primary btn-lg" href="sendCPC" ng-show="(hasParam('user_provides_ircc') || hasParam('user_provides_np')|| hasParam('user_provides_pcountry'))" >Continue</a>
+            <a class="btn btn-default btn-lg" href="" ng-show="!(hasParam('user_provides_ircc') || hasParam('user_provides_np')|| hasParam('user_provides_pcountry'))">Please make your choice</a>
+        </div>
+
+        <div class="continue" ng-show="hasParam('CP_grants') && hasParam('CP_exam')">
             <a class="btn btn-primary btn-lg" href="sendCPC" ng-show="hasParam('CP_grants') && ((hasParam('user_provides_ircc') || hasParam('user_provides_np') || hasParam('user_provides_pcountry')) && (hasParam('cp_grants_accepts') || hasParam('cp_grants_rejects')))" >Continue</a>
             <a class="btn btn-default btn-lg" href="" ng-show="hasParam('CP_grants') && !((hasParam('user_provides_ircc') || hasParam('user_provides_np') || hasParam('user_provides_pcountry')) && (hasParam('cp_grants_accepts') || hasParam('cp_grants_rejects'))) ">Please make your choice</a>
         </div>

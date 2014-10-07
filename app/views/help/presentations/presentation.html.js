@@ -22,7 +22,7 @@ app.controller("presentationController",
 			$rootScope.providerPoints.b = 0;
 			$rootScope.providerPoints.c = 0;
 
-			$rootScope.params = [];
+			$rootScope.params = undefined;
 		}
 
 
@@ -148,7 +148,11 @@ app.controller("presentationController",
 					// if(i >= 0 )
 					// 	$rootScope.params.splice(i, 1);
 					// else{
+
+					if(!$scope.checkLastParam(p, 1))
 						$rootScope.params.push(p);
+
+
 					//}
 				}
        	 }
@@ -176,12 +180,16 @@ app.controller("presentationController",
 
 			//==================================
        	 $scope.checkLastParam = function (p, n) {
-			if($rootScope.params){
+
+			if (!n) n=1;
+
+			if($rootScope.params && $rootScope.params.length > 0){
+
 
 				var l = $rootScope.params.length;
 
 				for(var i=l-n; i<l;i++){
-						if($rootScope.params == p)
+						if($rootScope.params[i] == p)
 							return true;
 				}
 			}
