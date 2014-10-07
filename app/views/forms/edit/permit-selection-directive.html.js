@@ -89,7 +89,7 @@ app.directive("existingPermit", [ function () {
 
 		            $http.get('/api/v2013/index/select', { params: queryParameters, timeout: queryCanceler }).success(function (data) {
 
-						 queryCanceler = null;						
+						 queryCanceler = null;
                          $scope.rawPermitDocs = [];
                          $scope.rawPermitDocs = data.response.docs;
 						 $scope.isLoading = false;
@@ -139,8 +139,8 @@ app.directive("existingPermit", [ function () {
 				$scope.openDialog = function(){
 
 					$('#existingPermits').modal('show');
-					if(!loaded)
-						$scope.queryGovernment = [{identifier : 'ht'}]
+					if(!loaded && $scope.$root.user.government)
+						$scope.queryGovernment = [{identifier : $scope.$root.user.government}]
                 	query();
 				}
 
