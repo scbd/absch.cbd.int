@@ -50,7 +50,7 @@
 
             <div ng-show="!hasParam('market_done')" class="option" ng-class="{'option-selected':hasParam('user_ask_commercial')}" ng-click="addParam('user_ask_commercial');removeParam('user_finalize');removeParam('user_ask_funding');removeParam('user_ask_publish');removeParam('user_ask_patent')">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_ask_commercial'),'glyphicon-ok':hasParam('user_ask_commercial')}"></i>
-                Directly commercialize your magic potion.  Your teacher tells you that before commercializing it you need the market approval of the Hedwig Market Approval Authority, where they make sure that all potions fulfill the phytosanitary and magic conditions required to ensure the quality of all potions available in the shops of the Wizards’ Kingdom.
+                Directly commercialize your magic potion.  Your teacher tells you that before commercializing it you need the market approval of the Hedwig Market Approval Authority, where they make sure that all potions fulfill the phytosanitary and magic conditions required to ensure the quality of all potions available in the shops of the Wizards Kingdom.
             </div>
             <div class="option" ng-class="{'option-selected':hasParam('user_finalize')}" ng-click="addParam('user_finalize');removeParam('user_ask_commercial');removeParam('user_ask_funding');removeParam('user_ask_publish');removeParam('user_ask_patent')">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_finalize'),'glyphicon-ok':hasParam('user_finalize')}"></i>
