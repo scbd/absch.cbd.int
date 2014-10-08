@@ -60,7 +60,7 @@
         </div>
 
         <div class="continue">
-            <a class="btn btn-primary btn-lg" href="points" ng-show="hasParam('user_finalize')">Continue</a>
+            <a class="btn btn-primary btn-lg" href="points" ng-show="hasParam('user_finalize');" ng-click="calcPoints();">Continue</a>
             <a class="btn btn-primary btn-lg" href="cpGrants" ng-show="hasParam('user_ask_funding') && !hasParam('grants_done')">Continue</a>
             <a class="btn btn-primary btn-lg" href="cpJournal" ng-show="hasParam('user_ask_publish') && !hasParam('journal_done')">Continue</a>
             <a class="btn btn-primary btn-lg" href="cpPatent" ng-show="hasParam('user_ask_patent') && !hasParam('patent_done')">Continue</a>
