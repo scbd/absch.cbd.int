@@ -478,7 +478,13 @@ app.controller("presentationController",
 					'param': 'proCNA_angry',
 					'user': [-1,4,-4],
 					'provider':[0,-1,3,-1]
+				},
+					{
+					'param': 'user_finalize',
+					'user': [3,0,4],
+					'provider':[3,3,0,4]
 				}
+
 
 			];
 
