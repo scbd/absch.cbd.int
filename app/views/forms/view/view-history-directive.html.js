@@ -106,7 +106,31 @@ app.directive("viewHistory", [function () {
 
 		$scope.$watch("documents", function(){
 			$scope.column = 'createdOn';
-		})
+		});
+
+		$scope.formatEmails = function(emailList){
+			var emailString = '';
+			// console.log(angular.isArray(emailList),emailList)
+			if(angular.isArray(emailList))
+				emailList.forEach(function(email){
+					//console.log(email.emails.join(',') +'(' + email.firstName + ' ' + email.lastName + ')');
+					if(email.emails){
+						emailString += email.emails.join(',');
+
+						if(email.firstName || email.lastName){
+								emailString += '(';
+							if(email.firstName)
+								emailString += email.firstName + ' ';
+							if(email.lastName)
+								emailString += email.lastName;
+
+							emailString += '); ';
+						}
+					}
+				});
+// console.log(emailString)
+			return emailString;
+		}
 
 
 		}]

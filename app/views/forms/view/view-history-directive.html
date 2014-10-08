@@ -68,19 +68,19 @@
 					  			</span>
 
                             </div>
-							<div class="col-xs-12 " style="padding-top:10px; color:#999" ng-show="(document.body.responsibleAuthorities.emails ||
-								document.body.personeToWhomGranted.emails || document.body.geneticRessourceUsers.emails ||
-								document.body.providers.emails || document.body.informedConsents.emails ||
-								document.body.authority.emails) && showFile">
+							<div class="col-xs-12 " style="padding-top:10px; color:#999" ng-show="(document.body.responsibleAuthorities ||
+								document.body.personeToWhomGranted || document.body.geneticRessourceUsers ||
+								document.body.providers || document.body.informedConsents ||
+								document.body.authority) && showFile">
 	                                <span style="font-weight:bold;text-transform:uppercase;"> AN EMAIL HAS BEEN AUTOMATICALLY SENT TO THE FOLLOWING ADDRESS: </span>
 							  		<!-- TODO: need to comma delimit the below list of emails -->
 									<span>
-										{{document.body.responsibleAuthorities.emails | lstring:locale}}
-										{{document.body.personeToWhomGranted.emails | lstring:locale}}
-										{{document.body.geneticRessourceUsers.emails | lstring:locale}}
-										{{document.body.providers.emails | lstring:locale}}
-										{{document.body.informedConsents.emails | lstring:locale}}
-										{{document.body.authority.emails | lstring:locale}}
+										{{formatEmails(document.body.responsibleAuthorities||[])}}
+										{{formatEmails(document.body.personeToWhomGranted||[])}}
+										{{formatEmails(document.body.geneticRessourceUsers||[])}}
+										{{formatEmails(document.body.providers||[])}}
+									 	{{formatEmails(document.body.informedConsents||[])}}
+										{{formatEmails(document.body.authority||[])}}
 					  				</span>
 									<i class="fa fa-info" style="color:#428bca;cursor:pointer;" data-toggle="tooltip" data-placement="top" title="NOTE: THE ABS-CH DOES NOT GUARANTEE THAT THE EMAIL HAS BEEN RECEIVED.">
 									</i>

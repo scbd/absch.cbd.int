@@ -1,20 +1,28 @@
 define(['app','angular-form-controls'], function (app) {
 
-    app.directive('workflowStdButtons',["$q", "$timeout", function($q, $timeout){
+    app.directive('workflowStdButtons',["$q", "$timeout","underscore",
+     function($q, $timeout, _){
 
     	return{
     		restrict: 'EAC',
     		replace:false,
     		templateUrl: '/app/views/directives/workflow-std-buttons.html',
     		scope: {
-    			getDocumentFn : '&document'
+    			getDocumentFn : '&document',
+                languages     : '=languages',
+                hideTimer     : '@hideTimer'
     		},
             link: function ($scope, $element)
 			{
+                console.log($scope.hideTime)
 				$scope.errors              = null;
                 var next_fs
-                $("#progressbar li button").click(function(){
+                $(".progressbar li button").click(function(){
                 	next_fs = $(this).parent();
+                    var classes = next_fs.attr("class").split(' ')
+
+                    var selectedClass = _.find(classes, function(className){if(className.indexOf("step")>=0) return true; else return false;} );
+                    next_fs = $('.' + selectedClass);
                     next_fs.nextAll().removeClass("active");
                     next_fs.prevAll().addClass("active");
                     next_fs.addClass("active");
@@ -409,15 +417,11 @@ define(['app','angular-form-controls'], function (app) {
                   }
                 });
                 $scope.updateStep = function(tab){
-                    $("#progressbar li").removeClass('active');
-                    $("#step" + tab).addClass('active');
-                    $("#step" + tab).prevAll().addClass('active');
+                    $(".progressbar li").removeClass('active');
+                    $(".step" + tab).addClass('active');
+                    $(".step" + tab).prevAll().addClass('active');
 
                 }
-                $scope.$watch('languages', function(newValue){
-                    if(newValue)
-                        $scope.$parent.document.header.languages = newValue;
-                });
 
 			}]
     	};
