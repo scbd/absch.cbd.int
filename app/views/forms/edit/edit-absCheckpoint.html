@@ -20,7 +20,7 @@
 
     <div ng-show="!isLoading() && status!='hidden'">
 
-        <div workflow-std-buttons document="getCleanDocument()"/>
+        <div workflow-std-buttons document="getCleanDocument()" languages="document.header.languages"/>
 
 
         <form name="editForm" style="margin-top:10px" class="editForm" >
@@ -176,7 +176,8 @@
             </div>
             <div class="view-abs-checkpoint" ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></div>
         </div>
-
+        <hr>
+        <div workflow-std-buttons document="getCleanDocument()" languages="document.header.languages" hide-timer="true"/>
         <hr>
 
         <div class="row">
