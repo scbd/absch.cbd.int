@@ -3,7 +3,7 @@
     <div  class="col-xs-12" ng-class="{'col-xs-8':help}">
 
     <div class="text-center slide-holder">
-        <img class="slide img-rounded" src="/app/views/help/presentations/sim/absch-ws-monitoring/absch-ws-monitoring.CP.jpg" >
+        <img class="slide img-rounded" src="{{slide}}.jpg" >
     </div>
 
     </div>
@@ -27,27 +27,25 @@
             <p>The CBD national focal point has just designated YOU as the National Focal Point
                 and publishing authority for the Wizards’ kingdom, a country that ratified the Nagoya Protocol.</p>
 
-
-
         </div>
 
         <div class="choices">
             <p>You have been asked to advise on the designation of checkpoints for your country.
-            <u class="color-red">YOU MUST CHOOSE:</u> </p>
-
-            <div class="option" ng-class="{'option-selected':hasParam('CP_patent')}" ng-click="addParamR('CP_patent');removeParamALL('CP_none');">
-                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('CP_patent'),'glyphicon-ok':hasParam('CP_patent')}"></i></i>
-                Designate the national patent office responsible for magic genetic resources.
-            </div>
-
-            <div class="option" ng-class="{'option-selected':hasParam('CP_journal')}" ng-click="addParamR('CP_journal');removeParamALL('CP_none');">
-                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('CP_journal'),'glyphicon-ok':hasParam('CP_journal')}"></i></i>
-                Designate the Witchcraft Review, the premier magic journal.
-            </div>
+            <br><u class="color-red">YOU MUST CHOOSE (you can choose more than one):</u> </p>
 
             <div class="option" ng-class="{'option-selected':hasParam('CP_grants')}" ng-click="addParamR('CP_grants');removeParamALL('CP_none');">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('CP_grants'),'glyphicon-ok':hasParam('CP_grants')}"></i></i>
                 Designate a research funding authority, Dumbledore Grants, for magic research grants. 
+            </div>
+
+            <div class="option" ng-class="{'option-selected':hasParam('CP_journal')}" ng-click="addParamR('CP_journal');removeParamALL('CP_none');">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('CP_journal'),'glyphicon-ok':hasParam('CP_journal')}"></i></i>
+                Designate the Witchcraft Review, the premier magic journal in Wizards Kingdom.
+            </div>
+
+            <div class="option" ng-class="{'option-selected':hasParam('CP_patent')}" ng-click="addParamR('CP_patent');removeParamALL('CP_none');">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('CP_patent'),'glyphicon-ok':hasParam('CP_patent')}"></i></i>
+                Designate the patent office responsible for magic genetic resources.
             </div>
 
             <div class="option" ng-class="{'option-selected':hasParam('CP_market')}" ng-click="addParamR('CP_market');removeParamALL('CP_none');">

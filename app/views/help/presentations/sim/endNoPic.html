@@ -2,8 +2,8 @@
 <div class="row" id="Presentation">
     <div  class="col-xs-12" ng-class="{'col-xs-8':help}">
 
-    <div class="thumbnail" >
-        <img class="slide" src="/app/views/help/presentations/images/theatre-access/theatre-access.001.jpg" >
+    <div class="text-center slide-holder">
+        <img class="slide img-rounded" src="{{slide}}.jpg" >
     </div>
 
     </div>
@@ -28,7 +28,7 @@
         </div>
 
         <div class="continue">
-            <a class="btn btn-primary btn-lg" href="points" >The end. See your score</a>
+            <a class="btn btn-primary btn-lg" href="points" ng-click="calcPoints();" >Game over. Lets see your score</a>
         </div>
 
     </div>

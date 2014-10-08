@@ -2,8 +2,8 @@
 <div class="row" id="Presentation">
     <div  class="col-xs-12" ng-class="{'col-xs-8':help}">
 
-    <div class="thumbnail" >
-        <img class="slide" src="/app/views/help/presentations/images/theatre-access/theatre-access.001.jpg" >
+    <div class="text-center slide-holder">
+        <img class="slide img-rounded" src="{{slide}}.jpg" >
     </div>
 
     </div>
@@ -50,7 +50,7 @@
 
             <div ng-show="!hasParam('market_done')" class="option" ng-class="{'option-selected':hasParam('user_ask_commercial')}" ng-click="addParam('user_ask_commercial');removeParam('user_finalize');removeParam('user_ask_funding');removeParam('user_ask_publish');removeParam('user_ask_patent')">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_ask_commercial'),'glyphicon-ok':hasParam('user_ask_commercial')}"></i>
-                Directly commercialize your magic potion.  Your teacher tells you that before commercializing it you need the market approval of the Hedwig Market Approval Authority, where they make sure that all potions fulfill the phytosanitary and magic conditions required to ensure the quality of all potions available in the shops of the Wizards’ Kingdom.
+                Directly commercialize your magic potion.  Your teacher tells you that before commercializing it you need the market approval of the Hedwig Market Approval Authority, where they make sure that all potions fulfill the phytosanitary and magic conditions required to ensure the quality of all potions available in the shops of the Wizards Kingdom.
             </div>
             <div class="option" ng-class="{'option-selected':hasParam('user_finalize')}" ng-click="addParam('user_finalize');removeParam('user_ask_commercial');removeParam('user_ask_funding');removeParam('user_ask_publish');removeParam('user_ask_patent')">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_finalize'),'glyphicon-ok':hasParam('user_finalize')}"></i>
@@ -60,7 +60,7 @@
         </div>
 
         <div class="continue">
-            <a class="btn btn-primary btn-lg" href="points" ng-show="hasParam('user_finalize')">Continue</a>
+            <a class="btn btn-primary btn-lg" href="points" ng-show="hasParam('user_finalize');" ng-click="calcPoints();">Continue</a>
             <a class="btn btn-primary btn-lg" href="cpGrants" ng-show="hasParam('user_ask_funding') && !hasParam('grants_done')">Continue</a>
             <a class="btn btn-primary btn-lg" href="cpJournal" ng-show="hasParam('user_ask_publish') && !hasParam('journal_done')">Continue</a>
             <a class="btn btn-primary btn-lg" href="cpPatent" ng-show="hasParam('user_ask_patent') && !hasParam('patent_done')">Continue</a>
