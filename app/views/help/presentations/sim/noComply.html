@@ -21,15 +21,14 @@
 <div class="row" id="Presentation">
     <div  class="col-xs-12" >
 
-        <div class="title color-red">You are not complying with the obligations of the Protocol. </div>
+        <div class="title color-red">You did comply with the obligations of the Protocol. Game over.</div>
 
         <div class="text" ng-show="hasParam('CP_none')">
-            You must designate at least one Checkpoint to comply with the Nagoya Protocol.
+            You must designate at least one Checkpoint if you want to play the game.
         </div>
 
         <div class="continue">
-            <a class="btn btn-primary btn-lg" href="theUserCountryCP1" ng-click="removeParam('CP_none')">Go back</a>
-            <!-- <a class="btn btn-danger btn-lg" ng-click="help=true;" ng-show="!help">Do you need some help?</a> -->
+            <a class="btn btn-primary btn-lg" href="points" ng-click="calcPoints();" >Click here to see how you did.</a>
         </div>
 
     </div>
