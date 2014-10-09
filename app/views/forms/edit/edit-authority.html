@@ -16,7 +16,7 @@
 
     <div ng-show="!isLoading() && status!='hidden'">
 
-        <div workflow-std-buttons document="getCleanDocument()"/>
+        <div workflow-std-buttons document="getCleanDocument()" languages="document.header.languages"  hide-timer="false"/>
 
         <form class="editForm" name="editForm">
 

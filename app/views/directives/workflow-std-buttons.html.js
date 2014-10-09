@@ -14,7 +14,7 @@ define(['app','angular-form-controls'], function (app) {
     		},
             link: function ($scope, $element)
 			{
-                console.log($scope.hideTime)
+                //console.log($scope.hideTime)
 				$scope.errors              = null;
                 var next_fs
                 $(".progressbar li button").click(function(){
