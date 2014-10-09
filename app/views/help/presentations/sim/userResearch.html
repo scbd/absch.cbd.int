@@ -64,7 +64,7 @@
 
             <div class="option" ng-class="{'option-selected':hasParam('user_check_absch')}" ng-click="addParam('user_check_absch');removeParam('user_finalize');removeParam('user_ask_commercial');removeParam('user_ask_funding');removeParam('user_ask_publish');removeParam('user_ask_patent')">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_check_absch'),'glyphicon-ok':hasParam('user_check_absch')}"></i>
-                Look up the provider country's details in the ABSCH and contact them to negotiate MAT.
+                Look up the provider country's details in the ABSCH and contact them to <span ng-show="hasParam('IRCC_sent')">re</span>negotiate MAT.
             </div>
 
             <div ng-show="(hasParam('patent_done') || hasParam('journal_done') || hasParam('market_done') || hasParam('grants_done'))" class="option" ng-class="{'option-selected':hasParam('user_finalize')}" ng-click="addParam('user_finalize');removeParam('user_ask_commercial');removeParam('user_check_absch');removeParam('user_ask_funding');removeParam('user_ask_publish');removeParam('user_ask_patent')">
