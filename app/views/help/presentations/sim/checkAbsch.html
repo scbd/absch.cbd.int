@@ -18,12 +18,14 @@
 
 
 <div class="row" id="Presentation">
-    <div  class="col-xs-12" >
+    <div  class="col-xs-9" >
 
         <div class="title">Check the ABS-CH</div>
 
         <div class="text">
-            <p>YOU are the User</p>
+
+            <p ng-show="checkLastParam('userCNA_takemsr_CPC')"> One day you get call from one the CNA of Wizards Kingdom. He informs you that you have not complied with
+            the Provider Country's ABS Measures.</p>
             <p>You decide it can’t hurt to find out more about access legislation and the rules governing access to magic genetic resources and associated magic knowledge in Middle-earth before accessing or using thier genetic resource.</p>
             <p>You go to the ABSCH website (absch.cbd.int) and look up Middle-earth country profile.</p>
             <p>You find a national record for legislation with all requirements and a national record with the details of the competent national authority(CNA).</p>
@@ -34,24 +36,24 @@
         <div class="choices" >
             <p><u class="color-red">YOU MUST CHOOSE:</u>  </p>
 
-            <div class="option" ng-class="{'option-selected':hasParam('contact_cna')}" ng-click="addParam('contact_cna');removeParam('ignore_msr_exp');removeParam('ignore_msr_store');removeParam('ignore_msr_research');">
+            <div class="option"  ng-class="{'option-selected':hasParam('contact_cna')}" ng-click="addParam('contact_cna');removeParam('ignore_msr_exp');removeParam('ignore_msr_store');removeParam('ignore_msr_research');">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('contact_cna'),'glyphicon-ok':hasParam('contact_cna')}"></i>
-                Contact the CNA.  Better safe than sorry. You decide to call up the CNA of Middle-earth to discuss getting PIC and MAT for accessing the magic beans.
+                Contact the Provider Country's CNA. Better safe than sorry.
             </div>
 
-            <div  ng-show="!hasParam('store_absch')"  class="option" ng-class="{'option-selected':hasParam('ignore_msr_store')}" ng-click="addParam('ignore_msr_store');removeParam('contact_cna');removeParam('ignore_msr_exp');removeParam('ignore_msr_research');">
+            <div  ng-show="!hasParam('user_has_beans')"  class="option" ng-class="{'option-selected':hasParam('ignore_msr_store')}" ng-click="addParam('ignore_msr_store');removeParam('contact_cna');removeParam('ignore_msr_exp');removeParam('ignore_msr_research');">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('ignore_msr_store'),'glyphicon-ok':hasParam('ignore_msr_store')}"></i>
                 Ignore the ABS measures and go to the store.
             </div>
 
-            <div  ng-show="!hasParam('store_absch')"  class="option" ng-class="{'option-selected':hasParam('ignore_msr_exp')}" ng-click="addParam('ignore_msr_exp');removeParam('contact_cna');removeParam('ignore_msr_store');removeParam('ignore_msr_research');">
+            <div  ng-show="!hasParam('user_has_beans')"  class="option" ng-class="{'option-selected':hasParam('ignore_msr_exp')}" ng-click="addParam('ignore_msr_exp');removeParam('contact_cna');removeParam('ignore_msr_store');removeParam('ignore_msr_research');">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('ignore_msr_exp'),'glyphicon-ok':hasParam('ignore_msr_exp')}"></i>
                 Ignore the ABS measures and start the expedition to Middle-earth to find the beans yourself.
             </div>
 
-            <div ng-show="hasParam('store_absch')" class="option" ng-class="{'option-selected':hasParam('ignore_msr_research')}" ng-click="addParam('ignore_msr_research');removeParam('contact_cna');removeParam('ignore_msr_store');removeParam('ignore_msr_exp');">
+            <div ng-show="hasParam('user_has_beans')" class="option" ng-class="{'option-selected':hasParam('ignore_msr_research')}" ng-click="addParam('ignore_msr_research');removeParam('contact_cna');removeParam('ignore_msr_store');removeParam('ignore_msr_exp');">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('ignore_msr_research'),'glyphicon-ok':hasParam('ignore_msr_research')}"></i>
-                I'm too excited! Ignore the ABS measures and start your research.
+                You're too excited! You go do some research.
             </div>
 
         </div>
@@ -64,6 +66,11 @@
             <a class="btn btn-default btn-lg" href="" ng-show="!hasParam('ignore_msr_research') && !hasParam('contact_cna') && !hasParam('ignore_msr_store') && !hasParam('ignore_msr_exp')">Please make your choice</a>
         </div>
 
+    </div>
+
+    <div class="col-xs-3 text-center" style="padding-top:30px;">
+        <img src="/app/views/help/presentations/sim/characters/user.png" />
+        <div class="info">You are the USER</div>
     </div>
 
 </div>

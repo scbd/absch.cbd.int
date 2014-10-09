@@ -18,14 +18,12 @@
 
 
 <div class="row" id="Presentation">
-    <div  class="col-xs-12" >
+    <div  class="col-xs-9" >
 
-        <div class="title">Harry needs some genetic resources
-        <img class="pull-right pov_img" src="/app/views/help/presentations/sim/characters/user.png" /></div>
+        <div class="title">The User needs some genetic resources</div>
 
         <div class="text">
-            <p>YOU are the User.</p>
-            <p>You have all the ingredients for your magic potion except one, Sopophorous beans. Sopophorous beans are very very rare and only grow in special environments on Middle-earth.  </p>
+            <p>You need to access Sopophorous beans to be able to modify its genetic resources and, with that, perfect your magic potion that help plants to grow faster. Sopophorous beans are very very rare and only grow in special environments on Middle-earth.</p>
         </div>
         <div class="choices" >
             <p><u class="color-red">YOU MUST CHOOSE:</u>  </p>
@@ -37,7 +35,7 @@
 
             <div class="option" ng-class="{'option-selected':hasParam('user_store')}" ng-click="addParam('user_store');removeParam('user_no_beans');removeParam('user_plan_expedition')">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_store'),'glyphicon-ok':hasParam('user_store')}"></i>
-                See if you can buy some at the magic store in Diagon Alley.
+                See if you can buy Sopophorous beans at the magic store in Diagon Alley.
             </div>
 
             <div class="option" ng-class="{'option-selected':hasParam('user_plan_expedition')}" ng-click="addParam('user_plan_expedition');removeParam('user_no_beans');;removeParam('user_store')">
@@ -53,7 +51,11 @@
             <a class="btn btn-primary btn-lg" href="userPlanExp" ng-show="hasParam('user_plan_expedition')">Continue</a>
             <a class="btn btn-default btn-lg" href="" ng-show="!hasParam('user_no_beans') && !hasParam('user_store') &&  !hasParam('user_plan_expedition') ">Please make your choice</a>
         </div>
+    </div>
 
+    <div class="col-xs-3 text-center" style="padding-top:30px;">
+        <img src="/app/views/help/presentations/sim/characters/user.png" />
+        <div class="info">You are the USER</div>
     </div>
 
 </div>

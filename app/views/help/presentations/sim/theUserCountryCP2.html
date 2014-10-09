@@ -20,29 +20,38 @@
 
 
 <div class="row" id="Presentation">
-    <div  class="col-xs-12" >
+    <div  class="col-xs-9" >
 
-        <div class="title">The User Country: Designating Checkpoints
-            <img class="pull-right pov_img" src="/app/views/help/presentations/characters/userCountry.png" /></div>
+        <div class="title">The User Country: Defining Checkpoints Tasks</div>
 
 
         <div class="text">
-            <p>A checkpoint (CP) will collect or receive information from users related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources. A summary of the information collected in the checkpoint can be sent to the ABS-CH through a form called checkpoint communiqué (CPC). The ABS-CH will send a copy to the designated national authority/ies within your own country and to the national focal point of the country and the competent national authority/ies of the country which is the provider of the genetic resource.</p>
-            You decide to make the checkpoint/s national authorized users of the ABS-CH to facilitate the task of sending the information gathered at the checkpoints to the ABS-CH. You decide that as NFP you are the designated authority to receive the checkpoint communiqués sent to the ABS-CH by the checkpoints in your country.</p>
+            <p>A summary of the information collected in the checkpoint can be sent to the ABS-CH through a form
+                called checkpoint communiqué (CPC). The ABS-CH will send a copy to the designated national authority/ies
+                within your own country and to the national focal point of the country and the competent national authority/ies
+                of the country which is the provider of the genetic resource.</p>
+
+            <p>You decide to make the checkpoint/s national authorized users of the ABS-CH to facilitate the task of sending
+                 the information gathered at the checkpoints to the ABS-CH. You decide that as NFP you are the designated
+                 authority to receive the checkpoint communiqués sent to the ABS-CH by the checkpoints in your country.</p>
         </div>
 
         <div class="choices" ng-show="!hasParam(CP_none)">
-            <p>You also have to decide whether the checkpoints that you have selected in addition to sending the information to the ABS-CH in through the checkpoint communiqué, will do substantive examination of the information received and take measures to address situations of non-compliance.
-                <u class="color-red">YOU MUST CHOOSE:</u>  </p>
+            <p>You also have to decide whether the checkpoints that you have selected in addition to sending the information
+                to the ABS-CH through the checkpoint communiqué, will do substantive examination of the information received
+                and take measures to address situations of non-compliance.
+                <u class="color-red">YOU MUST CHOOSE:</u> </p>
 
             <div class="option" ng-class="{'option-selected':hasParam('CP_exam')}" ng-click="addParam('CP_exam');removeParam('CP_no_exam');">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('CP_exam'),'glyphicon-ok':hasParam('CP_exam')}"></i></i>
-                Task the designated checkpoints to conduct substantive examination of the information collected or received. The checkpoint needs to be sure that the user is lawfully using the magic genetic resource before allowing user request. The checkpoint is also tasked to relay information to the ABS-CH via a checkpoint communique.
+                Task the designated checkpoints to conduct substantive examination of the information collected or received.
+                The checkpoint needs to be sure that the user is lawfully using the magic genetic resource before allowing user request.
+                The checkpoint is also tasked to relay information to the ABS-CH via a checkpoint communiqué.
             </div>
 
             <div class="option" ng-class="{'option-selected':hasParam('CP_no_exam')}" ng-click="addParam('CP_no_exam');removeParam('CP_exam');">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('CP_no_exam'),'glyphicon-ok':hasParam('CP_no_exam')}"></i></i>
-                Give the checkpoint the only task of relaying available information to the ABS-CH via  a checkpoint communiqué.
+                Give the checkpoint the only task of relaying available information to the ABS-CH via a checkpoint communiqué.
             </div>
 
         </div>
@@ -52,6 +61,10 @@
             <a class="btn btn-default btn-lg" href="" ng-show="!hasParam('CP_exam') && !hasParam('CP_no_exam') ">Please make your choice</a>
         </div>
 
+    </div>
+    <div class="col-xs-3 text-center" style="padding-top:30px;">
+        <img src="/app/views/help/presentations/sim/characters/userCountry.png" />
+        <div class="info">You are the User Country</div>
     </div>
 
 </div>

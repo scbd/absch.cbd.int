@@ -22,15 +22,17 @@
 
 
             <div class="text" ng-show="!hasParam('patent_done') && !hasParam('journal_done') && !hasParam('market_done') &&  !hasParam('grants_done')">
-                no checkpoint
+                The User didn't go through any checkpoints.
             </div>
+
 
             <div class="text" ng-show="(hasParam('patent_done') || hasParam('journal_done') || hasParam('market_done') || hasParam('grants_done'))">
-
                 <p>After all the efforts, Harry User has finally perfected the potion for making plants grow. The potion contributes to enhancing biodiversity, particularly in degraded areas.</p>
-                <p>Benefits arising from the use of the potion have been shared with the Middle Earth, and the Middle Earth is using them to contribute to conservation and sustainable use of biodiversity.</p>
-
+                <p ng-show="!hasParam('refuse_pic_mat')">Benefits arising from the use of the potion have been shared with the Middle Earth, and the Middle Earth is using them to contribute to conservation and sustainable use of biodiversity.</p>
+                <p ng-show="hasParam('refuse_pic_mat')">The Provider Country could not grant PIC or agree on the MAT with the User. Middle-earth received no benfits.</p>
             </div>
+
+
 
             <style>
                 .score-supertitle{

@@ -18,14 +18,13 @@
 
 
 <div class="row" id="Presentation">
-    <div  class="col-xs-12" >
+    <div  class="col-xs-9" >
 
-        <div class="title">Provider country recieving the Checkpoint Communiqué
-            <img class="pull-right pov_img" src="/app/views/help/presentations/sim/characters/provider.png" /></div>
+        <div class="title">Provider Country recieving the Checkpoint Communiqué</div>
 
         <div class="text">
-            <p>YOU are Gandalf the CNA for the provider country Middle-earth</p>
-            <p>You recieve the above checkpoint communiqué</p>
+            <p>You recieve the above Checkpoint Communiqué.
+                It seems that there is some real potential for your magic beans to become very useful and provide benefits to your country.</p>
         </div>
 
         <div class="choices" >
@@ -33,32 +32,33 @@
 
             <div class="option" ng-class="{'option-selected':checkLastParam('proCNA_file_CPC')}" ng-click="addParam('proCNA_file_CPC');removeParam('proCNA_ignore_CPC');removeParam('proCNA_sueUser_CPC');removeParam('proCNA_callCNA_CPC');removeParam('proCNA_callUser_CPC');">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!checkLastParam('proCNA_file_CPC'),'glyphicon-ok':checkLastParam('proCNA_file_CPC')}"></i>
-                File the checkpoint communique in the dossier and
-
-                <span ng-show="hasParam('cp_journal_accepts')"> share the article with your universities and the elf communities.</span>
-
+                File the Checkpoint Communique in the dossier<span ng-show="hasParam('cp_journal_accepts')"> and share the article with your universities and the elf communities</span>.
                 Everything is in order and you are very happy with the results coming from your magic beans.
             </div>
 
             <div class="option" ng-class="{'option-selected':checkLastParam('proCNA_callUser_CPC')}" ng-click="addParam('proCNA_callUser_CPC');removeParam('proCNA_ignore_CPC');removeParam('proCNA_sueUser_CPC');removeParam('proCNA_callCNA_CPC');removeParam('proCNA_file_CPC');">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!checkLastParam('proCNA_callUser_CPC'),'glyphicon-ok':checkLastParam('proCNA_callUser_CPC')}"></i>
-                Call the user to point out that he is not complying with the agreed terms and try to renegotiate MAT. Now that you know the potential of the beans maybe you can also benefit from better conditions.
+                    <span ng-show="!hasParam('picmat_research') || !hasParam('picmat_commercial')"> Try to negotiate MAT. Call the user to point out that he is not complying with your country's ABS Measures requiring PIC and MAT.</span>
+                    <span ng-show="hasParam('picmat_research') || hasParam('picmat_commercial')"> Try to re-negotiate MAT. Call the user to point out that he is not complying with the agreed MAT contract.</span>
             </div>
 
             <div class="option" ng-class="{'option-selected':checkLastParam('proCNA_callCNA_CPC')}" ng-click="addParam('proCNA_callCNA_CPC');removeParam('proCNA_ignore_CPC');removeParam('proCNA_sueUser_CPC');removeParam('proCNA_callUser_CPC');removeParam('proCNA_file_CPC');">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!checkLastParam('proCNA_callCNA_CPC'),'glyphicon-ok':checkLastParam('proCNA_callCNA_CPC')}"></i>
-                Call the user and the designated authorities of the Wizards Kingdom to point out that he is not complying with the terms and try to renegotiate MAT. Now that you know the potential of the beans maybe you can also benefit from better conditions.
+                    <span ng-show="!hasParam('picmat_research') || !hasParam('picmat_commercial')"> Try to negotiate MAT. Call the user and designated authorities of the Wizards Kingdom to point out that he is not complying with your country's ABS Measures requiring PIC and MAT.</span>
+                    <span ng-show="hasParam('picmat_research') || hasParam('picmat_commercial')"> Try to re-negotiate MAT. Call the user and designated authorities of the Wizards Kingdom to point out that he is not complying with the agreed MAT contract.</span>
             </div>
 
             <div class="option" ng-class="{'option-selected':checkLastParam('proCNA_sueUser_CPC')}" ng-click="addParam('proCNA_sueUser_CPC');removeParam('proCNA_ignore_CPC');removeParam('proCNA_callCNA_CPC');removeParam('proCNA_callUser_CPC');removeParam('proCNA_file_CPC');">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!checkLastParam('proCNA_sueUser_CPC'),'glyphicon-ok':checkLastParam('proCNA_sueUser_CPC')}"></i>
-                Sue the user for not complying with the agreed terms.
+                Sue the user for not complying with
+                <span ng-show="!hasParam('picmat_research') || !hasParam('picmat_commercial')">  your country's ABS Measures requiring PIC and MAT.</span>
+                <span ng-show="hasParam('picmat_research') || hasParam('picmat_commercial')" >  the agreed MAT.</span>
             </div>
 
             <div class="option" ng-class="{'option-selected':checkLastParam('proCNA_ignore_CPC')}" ng-click="addParam('proCNA_ignore_CPC');removeParam('proCNA_sueUser_CPC');removeParam('proCNA_callCNA_CPC');removeParam('proCNA_callUser_CPC');removeParam('proCNA_file_CPC');">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!checkLastParam('proCNA_ignore_CPC'),'glyphicon-ok':checkLastParam('proCNA_ignore_CPC')}"></i>
                 Take no action.
-            </div
+            </div>
 
         </div>
 
@@ -69,13 +69,15 @@
             <a class="btn btn-primary btn-lg" href="sueUser" ng-show="checkLastParam('proCNA_sueUser_CPC')">Continue</a>
             <a class="btn btn-primary btn-lg" href="negotiatingPICMAT" ng-show="checkLastParam('proCNA_callCNA_CPC')">Continue</a>
             <a class="btn btn-primary btn-lg" href="negotiatingPICMAT" ng-show="checkLastParam('proCNA_callUser_CPC')">Continue</a>
-
             <a class="btn btn-primary btn-lg" href="userResearch" ng-show="checkLastParam('proCNA_ignore_CPC')">Continue</a>
-
             <a class="btn btn-default btn-lg" ng-hide="checkLastParam('proCNA_ignore_CPC') || checkLastParam('proCNA_file_CPC') || checkLastParam('proCNA_callUser_CPC') || checkLastParam('proCNA_callCNA_CPC') || checkLastParam('proCNA_sueUser_CPC')">
                 You must choose before you can continue.</a>
         </div>
 
+    </div>
+    <div class="col-xs-3 text-center" style="padding-top:30px;">
+        <img src="/app/views/help/presentations/sim/characters/provider.png" />
+        <div class="info">You are the Provider Country CNA</div>
     </div>
 
 </div>

@@ -18,24 +18,23 @@
 
 
 <div class="row" id="Presentation">
-    <div  class="col-xs-12" >
+    <div  class="col-xs-9" >
 
         <div class="title">Dumbledore Grants <span ng-show="hasParam('CP_grants')" >CHECKPOINT</span></div>
 
         <div class="text">
-            <p>YOU are working at Dumbledore Grants a University institutions in Wizards Kingdom which provides funding for spells and innovative magic potions.</p>
+            <p>Dumbledore Grants is a University institutions in Wizards Kingdom which provides funding for spells and innovative magic potions.</p>
 
-            <p>Harry User has applied for funding in your institution for conducting research on the magic properties of some rare magic beans.</p>
+            <p>The User has applied for funding in your institution for conducting research on the magic properties of some rare magic beans.</p>
 
             <p ng-show="!hasParam('CP_grants')" >
-                <u>Dumbledore Grants is not a Checkpoint.</u>
                 After checking that the application is correct and meets the requirements you agree to provide funding for his research project.
             </p>
 
             <p ng-show="hasParam('CP_grants')">
-                One of the requirements for getting a grant for conducting research and development on a magic genetic resource is to
-                enclose with the application information on prior informed consent, the source of the genetic resource and/or the establishment
-                of mutually agreed terms. Depending on the circumstances, the applicant can also provide that information on the mid-term reporting
+                One of the requirements for receiving a grant for conducting research and development on a magic genetic resource is to
+                attach with the application information on prior informed consent(PIC), the source of the genetic resource and/or the establishment
+                of mutually agreed terms(MAT). Depending on the circumstances, the applicant can also provide that information in the mid-term report
                 after acquiring the research grant.
             </p>
         </div>
@@ -43,19 +42,19 @@
         <div class="choices"  ng-show="hasParam('CP_grants')" >
             <p>The user provides you with one of the following options. <u class="color-red">YOU MUST CHOOSE:</u></p>
 
-            <div class="option" ng-class="{'option-selected':checkLastParam('user_provides_ircc',3)}" ng-click="addParamCheck('user_provides_ircc',3);removeParamCheck('user_provides_pcountry',3);removeParamCheck('user_provides_np',3)">
+            <div class="option" ng-show="hasParam('IRCC_sent')" ng-class="{'option-selected':checkLastParam('user_provides_ircc',3)}" ng-click="addParamCheck('user_provides_ircc',3);removeParamCheck('user_provides_pcountry',3);removeParamCheck('user_provides_np',3)">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!checkLastParam('user_provides_ircc',3),'glyphicon-ok':checkLastParam('user_provides_ircc',3)}"></i>
-                The IRCC <span ng-show="checkLastParam('user_provides_ircc',3)">*</span> <span ng-show="!hasParam('IRCC_sent')" class="color-red"> (This user didnt not recieve an IRCC but since this is a only game you can choose it to see what will happen) </span>
+                The User provides the Internationally Recognized Certificate of Compliance (IRCC)
             </div>
 
-            <div class="option" ng-class="{'option-selected':checkLastParam('user_provides_np',3)}" ng-click="addParamCheck('user_provides_np',3);removeParamCheck('user_provides_pcountry',3);removeParamCheck('user_provides_ircc',3)">
+            <div class="option" ng-show="hasParam('IRCC_sent')" ng-class="{'option-selected':checkLastParam('user_provides_np',3)}" ng-click="addParamCheck('user_provides_np',3);removeParamCheck('user_provides_pcountry',3);removeParamCheck('user_provides_ircc',3)">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!checkLastParam('user_provides_np',3),'glyphicon-ok':checkLastParam('user_provides_np',3)}"></i>
-                The user provides the national permit. <span ng-show="!hasParam('IRCC_sent')" class="color-red" > (This user did not recieve a national permit but since this is a only game you can choose it to see what will happen) </span>
+                The User provides the national permit.
             </div>
 
             <div class="option" ng-class="{'option-selected':checkLastParam('user_provides_pcountry',3)}" ng-click="addParamCheck('user_provides_pcountry',3);removeParamCheck('user_provides_ircc',3);removeParamCheck('user_provides_np',3)">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!checkLastParam('user_provides_pcountry',3),'glyphicon-ok':checkLastParam('user_provides_pcountry',3)}"></i>
-                The user only tells you the magic beans in the potion come from Middle-earth
+                The User only tells you the magic beans in the potion come from Middle-earth
             </div>
 
         </div>
@@ -97,6 +96,13 @@
             <a class="btn btn-default btn-lg" href="" ng-show="hasParam('CP_grants') && !((checkLastParam('user_provides_ircc',3)|| checkLastParam('user_provides_np',3)|| checkLastParam('user_provides_pcountry',3)) && (checkLastParam('cp_grants_accepts',3) || checkLastParam('cp_grants_rejects',3))) ">Please make your choice</a>
         </div>
 
+    </div>
+    <div class="col-xs-3 text-center" style="padding-top:30px;">
+        <img ng-show="hasParam('CP_journal')" src="/app/views/help/presentations/sim/characters/checkpoint.png" />
+        <i ng-show="!hasParam('CP_journal')" class="fa fa-meh-o fa-5x"></i>
+        <div class="info">You work at Dumbledore Grants Office.</div>
+        <div ng-show="!hasParam('CP_journal')" class="info color-red"> Not a Checkpoint.</div>
+        <div ng-show="hasParam('CP_journal')" class="info color-red"> You are a Checkpoint.</div>
     </div>
 
 </div>

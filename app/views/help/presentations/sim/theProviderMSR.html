@@ -18,32 +18,35 @@
 
 
 <div class="row" id="Presentation">
-    <div  class="col-xs-12" >
+    <div  class="col-xs-9" >
 
-        <div class="title">The Provider Country: Develop ABS Measures for Middle-earth
-        <img class="pull-right pov_img" src="/app/views/help/presentations/sim/characters/provider.png" /></div>
+        <div class="title">The Provider Country: ABS Measures</div>
 
         <div class="text">
-            <p>You have been asked to designate your competent national authority (CNA). You decide to appoint Gandalf, the only wizard in middle-earth, and the most knowledgeable on the subject of Middle-earths magic genetic resources to be the CNA for your country.</p>
+            <p>As the National Focal Point and ABS-CH Publishing Authority, you have been also tasked to help develop the
+                legislation regulating the access and utilization of the magic genetic resources and associated magic
+                knowledge and to publish it in the ABS-CH. </p>
         </div>
+
         <div class="choices" >
-            <p>You have been also tasked to develop the legislation regulating the access and utilization of the magic genetic resources and associated magic knowledge and to publish it in the ABS-CH.
             <u class="color-red">YOU MUST CHOOSE:</u>  </p>
 
             <div class="option" ng-class="{'option-selected':hasParam('MSR_good')}" ng-click="addParam('MSR_good');removeParam('MSR_bad');removeParam('MSR_none')">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('MSR_good'),'glyphicon-ok':hasParam('MSR_good')}"></i></i>
-                You develop your ABS legislation that includes provision for mandatory prior informed consent (PIC) or approval and involvement of
-                elf local communities whenever access to magic genetic resource or associated magic knowledge is being considered. It also
-                includes the obligation to share benefits with the elf local communities. All USERs need to obtain PIC and establish MAT prior
-                 to any utilization of the magic genetic resources and associated magic knowledge.
+                You develop your ABS legislation that includes provision for mandatory prior informed consent (PIC) or
+                approval and involvement of elf local communities whenever access to magic genetic resource or associated
+                magic knowledge is being considered. It also includes the obligation to share benefits with the elf local
+                communities. All USERs need to obtain PIC and establish MAT prior to any utilization of the magic genetic
+                resources and associated magic knowledge.
             </div>
 
             <div class="option" ng-class="{'option-selected':hasParam('MSR_bad')}" ng-click="addParam('MSR_bad');removeParam('MSR_good');;removeParam('MSR_none')">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('MSR_bad'),'glyphicon-ok':hasParam('MSR_bad')}"></i></i>
-                Because of the poor relationship between the centralized national government and the elf local communities, in order to
-                save time, you develop ABS legislation without including provisions to consult or distribute benefits among the local
-                communities when access to the magic genetic resources or associated magic knowledge are concerned. All USERs need to
-                obtain PIC and establish MAT prior to any utilization of the magic genetic resources and associated magic knowledge.
+                Because of the difficult relationship between the centralized national government and the elf local communities,
+                in order to save time, you develop ABS legislation without including provisions to consult or distribute benefits
+                among the local communities when access to the magic genetic resources or associated magic knowledge are concerned.
+                All Users need to obtain PIC and establish MAT prior to any utilization of the magic genetic resources and
+                associated magic knowledge.
             </div>
 
             <div class="option" ng-class="{'option-selected':hasParam('MSR_none')}" ng-click="addParam('MSR_none');removeParam('MSR_good');;removeParam('MSR_bad')">
@@ -59,6 +62,10 @@
             <a class="btn btn-default btn-lg" href="#" ng-show="!hasParam('MSR_good') && !hasParam('MSR_bad') &&  !hasParam('MSR_none') ">Please make your choice</a>
         </div>
 
+    </div>
+    <div class="col-xs-3 text-center" style="padding-top:30px;">
+        <img src="/app/views/help/presentations/sim/characters/provider.png" />
+        <div class="info">You are the Provider Country</div>
     </div>
 
 </div>
