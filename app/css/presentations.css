@@ -130,3 +130,8 @@ text-rendering: optimizeLegibility;
 text-transform:uppercase;
 
 }
+
+#Presentation li{
+    padding-top:10px;
+
+}

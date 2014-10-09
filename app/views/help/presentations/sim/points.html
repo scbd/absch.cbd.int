@@ -22,7 +22,8 @@
 
 
             <div class="text" ng-show="!hasParam('patent_done') && !hasParam('journal_done') && !hasParam('market_done') &&  !hasParam('grants_done')">
-                The User didn't go through any checkpoints.
+                <p>After all the efforts, Harry User has finally perfected the potion for making plants grow and after commercialize it in the most renown wizardry shops, benefits are starting to flow to reward your hard job.</p>
+                <p>But, oh, oh!! Troubles at sight, the authorities from Middle-earth have found that you had utilized their magic genetic resources without their prior informed consent and without mutually agreed terms and they are taking you to court!</p>
             </div>
 
 
@@ -63,6 +64,9 @@
                 </div>
                 <div class="score-text"  ng-show="userPoints.r >= 5 && userPoints.r < 12">
                     You have an average relationship with providers of genetic resources and associated magic knowledge.
+                </div>
+                <div class="score-text"  ng-show="userPoints.r >= 0 && userPoints.r < 5">
+                    There is plenty of room for improvement in your relationship  with the provider of magic genetic resources and associated magic resources. You will need to do things much better if you want to work together in the future.
                 </div>
                 <div class="score-text"  ng-show="userPoints.r < 5">
                     Your relationship with providers of genetic resources and associated magic knowledge is catastrophic! Every time you are involved in an ABS agreement, providers become suspicious and your relationship is full of misunderstandings and mistrust.
