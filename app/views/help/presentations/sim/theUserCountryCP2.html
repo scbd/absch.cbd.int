@@ -23,7 +23,7 @@
             Guided tour: Registering a Checkpoint(CP). </a>
 
             <li><a href="https://absch.cbd.int/find?commonFormat=absCheckpoint" target="_new">
-            See what Checkpoints have been registered in the ABS-CH </a>
+            See what Checkpoints have been registered in the ABSCH </a>
 
             <li><a href="/app/views/help/presentations/sim/help/cp_journal.png" target="_new">
             See an example of a mock Checkpoint record for Witchcraft Review</a>
@@ -40,19 +40,19 @@
 
 
         <div class="text">
-            <p>A summary of the information collected in the checkpoint can be sent to the ABS-CH through a form
-                called checkpoint communiqué (CPC). The ABS-CH will send a copy to the designated national authority/ies
+            <p>A summary of the information collected in the checkpoint can be sent to the ABSCH through a form
+                called checkpoint communiqué (CPC). The ABSCH will send a copy to the designated national authority/ies
                 within your own country and to the national focal point of the country and the competent national authority/ies
                 of the country which is the provider of the genetic resource.</p>
 
-            <p>You decide to make the checkpoint/s national authorized users of the ABS-CH to facilitate the task of sending
-                 the information gathered at the checkpoints to the ABS-CH. You decide that as NFP you are the designated
-                 authority to receive the checkpoint communiqués sent to the ABS-CH by the checkpoints in your country.</p>
+            <p>You decide to make the checkpoint/s national authorized users of the ABSCH to facilitate the task of sending
+                 the information gathered at the checkpoints to the ABSCH. You decide that as NFP you are the designated
+                 authority to receive the checkpoint communiqués sent to the ABSCH by the checkpoints in your country.</p>
         </div>
 
         <div class="choices" ng-show="!hasParam(CP_none)">
             <p>You also have to decide whether the checkpoints that you have selected in addition to sending the information
-                to the ABS-CH through the checkpoint communiqué, will do substantive examination of the information received
+                to the ABSCH through the checkpoint communiqué, will do substantive examination of the information received
                 and take measures to address situations of non-compliance.
                 <u class="color-red">YOU MUST CHOOSE:</u> </p>
 
@@ -60,12 +60,12 @@
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('CP_exam'),'glyphicon-ok':hasParam('CP_exam')}"></i></i>
                 Task the designated checkpoints to conduct substantive examination of the information collected or received.
                 The checkpoint needs to be sure that the user is lawfully using the magic genetic resource before allowing user request.
-                The checkpoint is also tasked to relay information to the ABS-CH via a checkpoint communiqué.
+                The checkpoint is also tasked to relay information to the ABSCH via a checkpoint communiqué.
             </div>
 
             <div class="option" ng-class="{'option-selected':hasParam('CP_no_exam')}" ng-click="addParam('CP_no_exam');removeParam('CP_exam');">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('CP_no_exam'),'glyphicon-ok':hasParam('CP_no_exam')}"></i></i>
-                Give the checkpoint the only task of relaying available information to the ABS-CH via a checkpoint communiqué.
+                Give the checkpoint the only task of relaying available information to the ABSCH via a checkpoint communiqué.
             </div>
 
         </div>
