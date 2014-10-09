@@ -7,31 +7,49 @@
     </div>
 
     </div>
-    <div class="col-xs-4" ng-show="help">
+    <div class="col-xs-4 well" ng-show="help">
+
+        <h3>Help with Checkpoints</h3>
         <ul>
-        <li><a href="">Read the text of the Nagoya Protocol</a></li>
-        <li><a href="">Fact sheet: Becoming a Party</a></li>
-        <li><a href="">Fact sheet: Becoming a Party</a></li>
+
+            <li><a href="http://www.cbd.int/abs/text/articles/default.shtml?sec=abs-17" target="_new">
+            Learn more about what the Protocol says on designation of checkpoints.</a>
+
+            <li><a href="/app/views/help/presentations/sim/help/Checkpoints_Study.pdf" target="_new">
+            Read a recent study of Options for Implementation of Checkpoints</a>
+
+            <li><a href="https://absch.cbd.int/register/CP/new?tour=start" target="_new">
+            Guided tour: Registering a Checkpoint(CP). </a>
+
+            <li><a href="https://absch.cbd.int/find?commonFormat=absCheckpoint" target="_new">
+            See what Checkpoints have been registered in the ABSCH </a>
+
+            <li><a href="/app/views/help/presentations/sim/help/cp_journal.png" target="_new">
+            See an example of a mock Checkpoint record for Witchcraft Review</a>
+
+            <li><a href="/app/views/help/presentations/sim/help/mockcheckpoint.pdf" target="_new">
+            Excerise: Registering a Checkpoint</a>
+
+
         </ul>
     </div>
 </div>
 
 
 <div class="row" id="Presentation">
-    <div  class="col-xs-12" >
+    <div  class="col-xs-9" >
 
-        <div class="title">The User Country: Designating Checkpoints
-            <img class="pull-right pov_img" src="/app/views/help/presentations/characters/userCountry.png" /></div>
+        <div class="title">The User Country: Designating Checkpoints</div>
         <div class="text">
 
-            <p>The CBD national focal point has just designated YOU as the National Focal Point
-                and publishing authority for the Wizards’ kingdom, a country that ratified the Nagoya Protocol.</p>
+            <p>The CBD national focal point has just designated YOU as the National Focal Point and an ABSCH publishing authority(PA) for the Wizards Kingdom,
+                a country that ratified the Nagoya Protocol.</p>
 
         </div>
 
         <div class="choices">
             <p>You have been asked to advise on the designation of checkpoints for your country.
-            <br><u class="color-red">YOU MUST CHOOSE (you can choose more than one):</u> </p>
+            <br><u class="color-red">YOU MUST CHOOSE ONE OR MORE OPTIONS FROM THE LIST BELOW:</u> </p>
 
             <div class="option" ng-class="{'option-selected':hasParam('CP_grants')}" ng-click="addParamR('CP_grants');removeParamALL('CP_none');">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('CP_grants'),'glyphicon-ok':hasParam('CP_grants')}"></i></i>
@@ -55,7 +73,7 @@
 
             <div class="option" ng-class="{'option-selected':hasParam('CP_none')}" ng-click="addParamR('CP_none');removeParamALL('CP_market');removeParamALL('CP_grants');removeParamALL('CP_journal');removeParamALL('CP_patent');">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('CP_none'),'glyphicon-ok':hasParam('CP_none')}"></i></i>
-                Decide to not designate any Checkpoints. 
+                Decide not to designate any Checkpoints. 
             </div>
         </div>
 
@@ -69,6 +87,11 @@
 
         </div>
 
+    </div>
+
+    <div class="col-xs-3 text-center" style="padding-top:30px;">
+        <img src="/app/views/help/presentations/sim/characters/userCountry.png" />
+        <div class="info">You are the User Country</div>
     </div>
 
 </div>

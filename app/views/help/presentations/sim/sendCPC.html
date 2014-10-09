@@ -7,36 +7,59 @@
     </div>
 
     </div>
-    <div class="col-xs-4" ng-show="help">
+    <div class="col-xs-4 well" ng-show="help">
+
+        <h3>Helpful links for the Checkpoint Communiqué (CPC)</h3>
         <ul>
-        <li><a href="">Read the text of the Nagoya Protocol</a></li>
-        <li><a href="">Fact sheet: Becoming a Party</a></li>
-        <li><a href="">Fact sheet: Becoming a Party</a></li>
+            <li><a href="https://absch.cbd.int/register/CPC/new?tour=start" target="_new">
+            Guided tour: Registering a Checkpoint Communiqué(CPC)</a>
+
+            <li><a href="/app/views/help/presentations/sim/help/cpc.png" target="_new">
+            View a mock Checkpoint Communiqué(CPC)</a>
+
+            <li><a href="/app/views/help/presentations/sim/help/ircc.png" target="_new">
+            View a mock International Certificate of Compliance(IRCC)</a>
+
+            <li><a href="/app/views/help/presentations/sim/help/ircc.png" target="_new">
+            View a mock Checkpoint(CP)</a>
+
+            <li><a href="/app/views/help/presentations/sim/help/mockcheckpointcommunique.pdf" target="_new">
+            Excerise: Registering a Checkpoint Communiqué(CPC)</a>
+
         </ul>
     </div>
 </div>
 
 
 <div class="row" id="Presentation">
-    <div  class="col-xs-12" >
+    <div  class="col-xs-9" >
 
         <div class="title">Send Checkpoint Communiqué</div>
 
         <div class="text">
-            <p>YOU are a Wizards Kingdom Checkpoint</p>
-            <p>You login online to the ABS-CH and fill out the Checkpoint communiqué.</p>
+            <p>Since you have already been setup National Authorized User(NAU) for your country.
+               You sign-in to the ABSCH and fill out the Checkpoint Communiqué.</p>
 
-            <p ng-show="checkLastParam('user_provides_ircc', 3)">
-                You are lucky. Harry has provided you with the IRCC which makes filling out the Checkpoint Communique much more simple.
+            <p ng-show="checkLastParam('user_provides_ircc', 5)">
+                You are lucky. The User has provided you with the IRCC which makes filling out the Checkpoint Communique much more simple.
             </p>
 
-            <p ng-show="checkLastParam('user_provides_np', 3)">
-                Harry has provided you with the national permit. You enter all the information possible that is not confidential including a national permit identifier.
+            <p ng-show="checkLastParam('user_provides_np', 5)">
+                The User has provided you with the national permit.
+                It will take a little longer to fill out the CPC form.
+                You enter all the information possible including the national permit identifier.
             </p>
 
-            <p ng-show="checkLastParam('user_provides_pcountry', 3)">
-                Harry has only provided you with the name of country where he got the magic beans.
+            <p ng-show="checkLastParam('user_provides_pcountry', 5)">
+                The User has only provided you with the name of country where he got the magic beans.
+                It will take a little longer to fill out the CPC form.
             </p>
+
+            <p>After you fill out the form. You request it to be published by the Publishing Authority(PA).</p>
+
+            <p>Once published by the PA the ABSCH will email a copy to the designated national authority/ies
+                within their own country and to the national focal point of the country and the competent national authority/ies(CNA)
+                of the country providing the genetic resource.</p>
 
         </div>
 
@@ -44,6 +67,12 @@
             <a class="btn btn-primary btn-lg" href="userCNACPC">Continue</a>
         </div>
 
+    </div>
+    <div class="col-xs-3 text-center" style="padding-top:30px;">
+        <img ng-show="hasParam('CP_journal')" src="/app/views/help/presentations/sim/characters/checkpoint.png" />
+        <i ng-show="!hasParam('CP_journal')" class="fa fa-meh-o fa-5x"></i>
+        <div ng-show="!hasParam('CP_journal')" class="info color-red"> Not a Checkpoint.</div>
+        <div ng-show="hasParam('CP_journal')" class="info color-red"> You are a Checkpoint.</div>
     </div>
 
 </div>

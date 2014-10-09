@@ -14,14 +14,18 @@ app.controller("presentationController",
 		//==================================
        	$scope.restart = function () {
 
-			$rootScope.userPoints.r = 0;
-			$rootScope.userPoints.b = 0;
-			$rootScope.userPoints.c = 0;
+			$rootScope.userPoints = undefined;
 
-			$rootScope.providerPoints.r = 0;
-			$rootScope.providerPoints.i = 0;
-			$rootScope.providerPoints.b = 0;
-			$rootScope.providerPoints.c = 0;
+			// $rootScope.userPoints.r = 0;
+			// $rootScope.userPoints.b = 0;
+			// $rootScope.userPoints.c = 0;
+
+			$rootScope.providerPoints = undefined;
+
+			// $rootScope.providerPoints.r = 0;
+			// $rootScope.providerPoints.i = 0;
+			// $rootScope.providerPoints.b = 0;
+			// $rootScope.providerPoints.c = 0;
 
 			$rootScope.params = undefined;
 		}

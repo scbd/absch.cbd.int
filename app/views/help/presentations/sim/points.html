@@ -3,7 +3,8 @@
     <div  class="col-xs-12" ng-class="{'col-xs-8':help}">
 
     <div class="text-center slide-holder">
-        <img class="slide img-rounded" src="{{slide}}.jpg" >
+        <img class="slide img-rounded" src="{{slide}}_good.jpg" ng-show="!hasParam('patent_done') && !hasParam('journal_done') && !hasParam('market_done') &&  !hasParam('grants_done')">
+        <img class="slide img-rounded" src="{{slide}}_bad.jpg" ng-show="(hasParam('patent_done') || hasParam('journal_done') || hasParam('market_done') || hasParam('grants_done'))">
     </div>
 
     </div>
@@ -18,11 +19,18 @@
 
         <div class="title">THE END</div>
 
-            <div class="text" ng-show="hasParam('user_finalize')">
 
+
+            <div class="text" ng-show="!hasParam('patent_done') && !hasParam('journal_done') && !hasParam('market_done') &&  !hasParam('grants_done')">
+                <p>After all the efforts, Harry User has finally perfected the potion for making plants grow and after commercialize it in the most renown wizardry shops, benefits are starting to flow to reward your hard job.</p>
+                <p>But, oh, oh!! Troubles at sight, the authorities from Middle-earth have found that you had utilized their magic genetic resources without their prior informed consent and without mutually agreed terms and they are taking you to court!</p>
+            </div>
+
+
+            <div class="text" ng-show="(hasParam('patent_done') || hasParam('journal_done') || hasParam('market_done') || hasParam('grants_done'))">
                 <p>After all the efforts, Harry User has finally perfected the potion for making plants grow. The potion contributes to enhancing biodiversity, particularly in degraded areas.</p>
-                <p>Benefits arising from the use of the potion have been shared with the Middle Earth, and the Middle Earth is using them to contribute to conservation and sustainable use of biodiversity.</p>
-
+                <p ng-show="hasParam('picmat_research') || hasParam('picmat_commercial')">Benefits arising from the use of the potion have been shared with the Middle Earth, and the Middle Earth is using them to contribute to conservation and sustainable use of biodiversity.</p>
+                <p ng-show="!hasParam('picmat_research') && !hasParam('picmat_research')">The Provider Country did not establish PIC or MAT with the User. Middle-earth received no benfits.</p>
             </div>
 
             <style>
@@ -40,9 +48,12 @@
                     padding-bottom:10px;
                 }
             </style>
-
+            <br><br>
 
             <span class="score-supertitle color-blue">Your Score as the USER</span>
+                    &nbsp;<span class="label label-info">{{getPoints('user').r}}</span>
+                    &nbsp;<span class="label label-danger">{{getPoints('user').c}}</span>
+                    &nbsp;<span class="label label-success">{{getPoints('user').b}}</span>
             <div class="well">
                 <span class="score-title">Your relationship with the Provider Countries</span>
                 <div class="score-text" ng-show="userPoints.r >= 18">
@@ -53,6 +64,9 @@
                 </div>
                 <div class="score-text"  ng-show="userPoints.r >= 5 && userPoints.r < 12">
                     You have an average relationship with providers of genetic resources and associated magic knowledge.
+                </div>
+                <div class="score-text"  ng-show="userPoints.r >= 0 && userPoints.r < 5">
+                    There is plenty of room for improvement in your relationship  with the provider of magic genetic resources and associated magic resources. You will need to do things much better if you want to work together in the future.
                 </div>
                 <div class="score-text"  ng-show="userPoints.r < 5">
                     Your relationship with providers of genetic resources and associated magic knowledge is catastrophic! Every time you are involved in an ABS agreement, providers become suspicious and your relationship is full of misunderstandings and mistrust.
@@ -85,6 +99,11 @@
             </div>
 
             <span class="score-supertitle color-red">Your Score as the PROVIDER</span>
+                 &nbsp;<span class="label label-warning">{{getPoints('provider').i}}</span>
+                    &nbsp;<span class="label label-info">{{getPoints('provider').r}}</span>
+                    &nbsp;<span class="label label-danger">{{getPoints('provider').c}}</span>
+                    &nbsp;<span class="label label-success">{{getPoints('provider').b}}</span>
+
             <div class="well">
                 <span class="score-title">Your relationship with the ILCs</span>
                 <div class="score-text" ng-show="providerPoints.i >= 6">

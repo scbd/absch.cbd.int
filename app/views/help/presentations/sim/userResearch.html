@@ -7,67 +7,92 @@
     </div>
 
     </div>
-    <div class="col-xs-4" ng-show="help">
+    <div class="col-xs-4 well" ng-show="help">
+
+        <h3>Helpful links</h3>
         <ul>
-        <li><a href="">Read the text of the Nagoya Protocol</a></li>
-        <li><a href="">Fact sheet: Becoming a Party</a></li>
-        <li><a href="">Fact sheet: Becoming a Party</a></li>
+            <li><a href="http://www.cbd.int/abs/text/articles/default.shtml?sec=abs-17" target="_new">
+            Learn more about what the Protocol says on monitoring the utilization of genetic resources</a>
+
+            <li><a href="/app/views/help/presentations/sim/help/Checkpoints_Study.pdf" target="_new">
+            Read a recent study of Options for Implementation of Checkpoints</a>
+
+            <li><a href="http://www.cbd.int/abs/text/articles/default.shtml?sec=abs-02" target="_new">
+            Check how “utilization” is defined in the Protocol</a>
+
         </ul>
     </div>
 </div>
 
 
 <div class="row" id="Presentation">
-    <div  class="col-xs-12" >
+    <div  class="col-xs-9" >
 
-        <div class="title">The User doing some research
-            <img class="pull-right pov_img" src="/app/views/help/presentations/sim/characters/user.png" /></div>
+        <div class="title">The User doing some research</div>
 
 
         <div class="text">
-            <p>YOU are the User</p>
-            <p>You finally get the beans back to your laboratory and start your work refining the recipe of your magic potion. 
-                After a couple intensive months of research you start to have some exciting results.</p>
+
+            <p>You finally get the beans back to your laboratory and start your work in modifying the Sopophorous
+                 beans genetic components. After a couple of months and intensive work, your research finally starts to
+                 produce some exciting results.</p>
 
         </div>
         <div class="choices" >
             <p><u class="color-red">YOU MUST CHOOSE:</u>  </p>
 
-            <div ng-show="!hasParam('grants_done')" class="option" ng-class="{'option-selected':hasParam('user_ask_funding')}" ng-click="addParam('user_ask_funding');removeParam('user_finalize');removeParam('user_ask_publish');removeParam('user_ask_patent');removeParam('user_ask_commercial')">
+            <div ng-show="!hasParam('grants_done')" class="option" ng-class="{'option-selected':hasParam('user_ask_funding')}" ng-click="addParam('user_ask_funding');removeParam('user_check_absch');removeParam('user_finalize');removeParam('user_ask_publish');removeParam('user_ask_patent');removeParam('user_ask_commercial')">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_ask_funding'),'glyphicon-ok':hasParam('user_ask_funding')}"></i>
                 Ask for some more funding to Dumbledore Grants to continue your research on the magic beans.
             </div>
 
-            <div ng-show="!hasParam('journal_done')" class="option" ng-class="{'option-selected':hasParam('user_ask_publish')}" ng-click="addParam('user_ask_publish');removeParam('user_finalize');removeParam('user_ask_funding');removeParam('user_ask_patent');removeParam('user_ask_commercial')">
+            <div ng-show="!hasParam('journal_done')" class="option" ng-class="{'option-selected':hasParam('user_ask_publish')}" ng-click="addParam('user_ask_publish');removeParam('user_check_absch');removeParam('user_finalize');removeParam('user_ask_funding');removeParam('user_ask_patent');removeParam('user_ask_commercial')">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_ask_publish'),'glyphicon-ok':hasParam('user_ask_publish')}"></i>
-                Publish your research in Witchcraft Review, the premier magic journal in the kingdom among serious wizards.
+                Publish your research in Witchcraft Review, the premier peer reviewed magic journal in the kingdom.
             </div>
 
-            <div ng-show="!hasParam('patent_done')" class="option" ng-class="{'option-selected':hasParam('user_ask_patent')}" ng-click="addParam('user_ask_patent');removeParam('user_finalize');removeParam('user_ask_funding');removeParam('user_ask_publish');removeParam('user_ask_commercial')">
+            <div ng-show="!hasParam('patent_done')" class="option" ng-class="{'option-selected':hasParam('user_ask_patent')}" ng-click="addParam('user_ask_patent');removeParam('user_check_absch');removeParam('user_finalize');removeParam('user_ask_funding');removeParam('user_ask_publish');removeParam('user_ask_commercial')">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_ask_patent'),'glyphicon-ok':hasParam('user_ask_patent')}"></i>
-                Patent your magic potion. The magic potion’s market in Wizard’s Kingdom is very competitive you decide to go the patent office to patent the formula.
+                Patent your magic potion based on the modified Sopophorous beans. The magic potion’s market in Wizards Kingdom is very competitive you decide to go the patent office to patent the formula.
             </div>
 
-            <div ng-show="!hasParam('market_done')" class="option" ng-class="{'option-selected':hasParam('user_ask_commercial')}" ng-click="addParam('user_ask_commercial');removeParam('user_finalize');removeParam('user_ask_funding');removeParam('user_ask_publish');removeParam('user_ask_patent')">
+            <div ng-show="!hasParam('market_done')" class="option" ng-class="{'option-selected':hasParam('user_ask_commercial')}" ng-click="addParam('user_ask_commercial');removeParam('user_check_absch');removeParam('user_finalize');removeParam('user_ask_funding');removeParam('user_ask_publish');removeParam('user_ask_patent')">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_ask_commercial'),'glyphicon-ok':hasParam('user_ask_commercial')}"></i>
-                Directly commercialize your magic potion.  Your teacher tells you that before commercializing it you need the market approval of the Hedwig Market Approval Authority, where they make sure that all potions fulfill the phytosanitary and magic conditions required to ensure the quality of all potions available in the shops of the Wizards Kingdom.
+                Directly commercialize your magic potion based on the modified Sopophorous beans.
+                Your professor advises you that before commercializing it, you need the market approval of the Hedwig Market Approval Authority. This authority makes sure that all potions fulfill the phytosanitary and magic conditions required to ensure the quality of all potions available in the shops of the Wizards Kingdom.
             </div>
-            <div class="option" ng-class="{'option-selected':hasParam('user_finalize')}" ng-click="addParam('user_finalize');removeParam('user_ask_commercial');removeParam('user_ask_funding');removeParam('user_ask_publish');removeParam('user_ask_patent')">
+
+            <div class="option" ng-class="{'option-selected':hasParam('user_check_absch')}" ng-click="addParam('user_check_absch');removeParam('user_finalize');removeParam('user_ask_commercial');removeParam('user_ask_funding');removeParam('user_ask_publish');removeParam('user_ask_patent')">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_check_absch'),'glyphicon-ok':hasParam('user_check_absch')}"></i>
+                Look up the provider country's details in the ABSCH and contact them to negotiate MAT.
+            </div>
+
+            <div ng-show="(hasParam('patent_done') || hasParam('journal_done') || hasParam('market_done') || hasParam('grants_done'))" class="option" ng-class="{'option-selected':hasParam('user_finalize')}" ng-click="addParam('user_finalize');removeParam('user_ask_commercial');removeParam('user_check_absch');removeParam('user_ask_funding');removeParam('user_ask_publish');removeParam('user_ask_patent')">
                 <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_finalize'),'glyphicon-ok':hasParam('user_finalize')}"></i>
-                Let's stop here. You have completed your work on the magic potion. See how you did.
+                You have completed your work on the magic potion and you are happy with the results.
             </div>
 
         </div>
 
         <div class="continue">
-            <a class="btn btn-primary btn-lg" href="points" ng-show="hasParam('user_finalize');" ng-click="calcPoints();">Continue</a>
+            <a class="btn btn-primary btn-lg" href="contactCNA" ng-show="hasParam('user_check_absch');" >Continue</a>
+
+
+            <a class="btn btn-primary btn-lg" href="notCP" ng-show="hasParam('user_finalize') && (!hasParam('patent_done') && !hasParam('journal_done') && !hasParam('market_done') &&  !hasParam('grants_done'))" ng-click="calcPoints();">Continue</a>
+            <a class="btn btn-primary btn-lg" href="points" ng-show="hasParam('user_finalize') && (hasParam('patent_done') || hasParam('journal_done') || hasParam('market_done') || hasParam('grants_done'))" ng-click="calcPoints();">Continue</a>
+
+
             <a class="btn btn-primary btn-lg" href="cpGrants" ng-show="hasParam('user_ask_funding') && !hasParam('grants_done')">Continue</a>
             <a class="btn btn-primary btn-lg" href="cpJournal" ng-show="hasParam('user_ask_publish') && !hasParam('journal_done')">Continue</a>
             <a class="btn btn-primary btn-lg" href="cpPatent" ng-show="hasParam('user_ask_patent') && !hasParam('patent_done')">Continue</a>
             <a class="btn btn-primary btn-lg" href="cpMarket" ng-show="hasParam('user_ask_commercial') && !hasParam('market_done')">Continue</a>
-            <a class="btn btn-default btn-lg" href="" ng-show="(!hasParam('user_ask_funding') || hasParam('grants_done')) && (!hasParam('user_ask_publish') || hasParam('journal_done')) &&  (!hasParam('user_ask_patent') || hasParam('patent_done')) && (!hasParam('user_ask_commercial') || hasParam('market_done')) && !hasParam('user_finalize')">Please make your choice</a>
+            <a class="btn btn-default btn-lg" href="" ng-show="  !hasParam('user_check_absch') && (!hasParam('user_ask_funding') || hasParam('grants_done')) && (!hasParam('user_ask_publish') || hasParam('journal_done')) &&  (!hasParam('user_ask_patent') || hasParam('patent_done')) && (!hasParam('user_ask_commercial') || hasParam('market_done')) && !hasParam('user_finalize')">Please make your choice</a>
         </div>
 
+    </div>
+    <div class="col-xs-3 text-center" style="padding-top:30px;">
+        <img src="/app/views/help/presentations/sim/characters/user.png" />
+        <div class="info">You are the USER</div>
     </div>
 
 </div>

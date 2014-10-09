@@ -7,31 +7,38 @@
     </div>
 
     </div>
-    <div class="col-xs-4" ng-show="help">
+        <div class="col-xs-4 well" ng-show="help">
+        <h3>Helpful links</h3>
         <ul>
-        <li><a href="">Read the text of the Nagoya Protocol</a></li>
-        <li><a href="">Fact sheet: Becoming a Party</a></li>
-        <li><a href="">Fact sheet: Becoming a Party</a></li>
+            <li><a href="http://en.wikipedia.org/wiki/Middle-earth#mediaviewer/File:Baynes-Map_of_Middle-earth.jpg" target="_new">
+            Map of Middle-earth
+            </a>
+
         </ul>
     </div>
 </div>
 
 
 <div class="row" id="Presentation">
-    <div  class="col-xs-12" >
+    <div  class="col-xs-9" >
 
-        <div class="title">Expedition to Middle-earth
-            <img class="pull-right pov_img" src="/app/views/help/presentations/sim/characters/user.png" /></div>
+        <div class="title">Expedition to Middle-earth</div>
         <div class="text">
-            <p>YOU are the User</p>
-            <p>After a long dangerous journey to Middle-earth you finally find the beans. After talking with and observing some local elves use the beans you start get some ideas on how to use them in your research. </p>
-            <p>You can’t wait to get back home to your laboratory and start doing research.</p>
+            <p>After a long dangerous journey to Middle-earth you finally find the beans. After talking to and observing the local Elves use the
+                beans you start get some ideas on how to use them in your research. </p>
+            <p>You get very excited and you can’t wait to get back home to your laboratory and start doing some research.</p>
         </div>
 
         <div class="continue">
-            <a class="btn btn-primary btn-lg" href="userResearch">Continue</a>
+            <a class="btn btn-primary btn-lg" href="userResearch" ng-click="addParam('user_has_beans')">Continue</a>
         </div>
 
     </div>
+
+    <div class="col-xs-3 text-center" style="padding-top:30px;">
+        <img src="/app/views/help/presentations/sim/characters/user.png" />
+        <div class="info">You are the USER</div>
+    </div>
+
 
 </div>
