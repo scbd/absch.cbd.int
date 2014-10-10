@@ -93,13 +93,13 @@ app.directive("registerRecordList", ["$timeout", "commonjs","bootbox", "authHttp
 				if(record.type == 'absPermit' && $scope.isPublished(record)){
 					//cant delete only modify
 					$scope.pilotDelete = true;
-					//$scope.cantDelete = true;
-					//$scope.recordToDelete = "0"; //TODO:only for pilot phase
+					$scope.cantDelete = true;
+					$scope.recordToDelete = "0"; //TODO:only for pilot phase
 				}
-				// else{
+				else{
 					$scope.recordToDelete = record;
 					$scope.cantDelete = false;
-				// }
+				 }
 
 			};
 
