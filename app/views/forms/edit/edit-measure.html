@@ -44,10 +44,10 @@
                 <hr>
                 <div class="km-control-group" name="amendedMeasures" required caption="List of amended measures">
                   <div class="help-block">Please indicate if this measure amends a previously registered one by providing a cross-reference link to the amended measure.</div>
-                  <div km-reference multiple name="amendedMeasures" ng-model="document.amendedMeasures" loader="loadRecords(identifier, 'measure')">
+                  <div km-reference multiple name="amendedMeasures" ng-model="document.amendedMeasures" loader="loadRecords(identifier, 'measure', false)">
                     <div>
                       <div><strong>{{reference.title | lstring}}</strong></div>
-                      <div>{{reference.summary | lstring}}</div>
+                      <div ng-bind-html="reference.summary | lstring"></div>
                     </div>
                   </div>
                 </div>

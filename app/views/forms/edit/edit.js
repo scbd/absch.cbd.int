@@ -304,12 +304,14 @@ define([
     //==================================
     //
     //==================================
-    $scope.loadRecords = function(identifier, schema) {
+    $scope.loadRecords = function(identifier, schema, cache) {
+
+      if(cache == undefined) cache = true;
 
       if (identifier) { //lookup single record
         var deferred = $q.defer();
 
-        storage.documents.get(identifier, { info: "" })
+        storage.documents.get(identifier, { info: "", cache: cache })
           .then(function(r) {
             deferred.resolve(r.data);
           }, function(e) {
@@ -329,7 +331,7 @@ define([
 
       var sQuery = "type eq '" + encodeURI(schema) + "'";
       //,storage.drafts   .query(sQuery, null, { cache: true })
-      return $q.all([storage.documents.query(sQuery, null, { cache: true })])
+      return $q.all([storage.documents.query(sQuery, null, { cache: cache })])
         .then(function(results) {
           var qResult = Enumerable.from (results[0].data.Items)
                      //.union(results[1].data.Items, "$.identifier");
