@@ -16,7 +16,7 @@
 			<div ng-show="document.government || document.checkpoint">
 				<legend>General information</legend>
 				<div ng-show="document.government">
-					<label>Country</label>
+					<label>Country issuing this checkpoint communique</label>
 					<div class="km-value" >
 						{{document.government|term:locale}}
 					</div>
@@ -44,7 +44,7 @@
 					<div class="km-value">
 						<ul>
 							<li ng-repeat="permit in document.permit">
-								<a href="/database/record?documentSchema=ABSPERMIT&documentID={{permit | lstring:locale}}">{{permit | lstring:locale | uniqueID}}</a>
+								<a href="/database/record?documentSchema=ABSPERMIT&documentID={{permit | uniqueIDWithoutRevision}}">{{permit | lstring:locale | uniqueIDWithoutRevision}}</a>
 							</li>
 						</ul>
 
@@ -130,7 +130,6 @@
 					</div>
 				</div>
 			</div>
-			{{document}}
 			<div ng-show="document.description || document.dateFrom || document.dateTo ||
 				 information || informationDocuments ||document.geneticRessourceUsers">
 				<legend>Information on the utilization of the genetic resource(s)</legend>
