@@ -64,7 +64,7 @@ define(['app', '/app/views/forms/edit/edit.js',
         return undefined;
 
       document = angular.fromJson(angular.toJson(document));
-console.log(document.permitNotAvailable, document.permitNotAvailable===true)
+// console.log(document.permitNotAvailable, document.permitNotAvailable===true)
       if (document.permitNotAvailable===true) {
         document.permit = undefined;
       }
