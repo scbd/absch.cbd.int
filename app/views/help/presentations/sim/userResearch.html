@@ -62,8 +62,8 @@
                 Your professor advises you that before commercializing it, you need the market approval of the Hedwig Market Approval Authority. This authority makes sure that all potions fulfill the phytosanitary and magic conditions required to ensure the quality of all potions available in the shops of the Wizards Kingdom.
             </div>
 
-            <div class="option" ng-class="{'option-selected':hasParam('user_check_absch')}" ng-click="addParam('user_check_absch');removeParam('user_finalize');removeParam('user_ask_commercial');removeParam('user_ask_funding');removeParam('user_ask_publish');removeParam('user_ask_patent')">
-                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!hasParam('user_check_absch'),'glyphicon-ok':hasParam('user_check_absch')}"></i>
+            <div class="option" ng-class="{'option-selected':checkLastParam('user_check_absch')}" ng-click="addParam('user_check_absch');removeParam('user_finalize');removeParam('user_ask_commercial');removeParam('user_ask_funding');removeParam('user_ask_publish');removeParam('user_ask_patent')">
+                <i class="glyphicon" ng-class="{'glyphicon-unchecked':!checkLastParam('user_check_absch'),'glyphicon-ok':checkLastParam('user_check_absch')}"></i>
                 Look up the provider country's details in the ABSCH and contact them to <span ng-show="hasParam('IRCC_sent')">re</span>negotiate MAT.
             </div>
 
@@ -75,7 +75,7 @@
         </div>
 
         <div class="continue">
-            <a class="btn btn-primary btn-lg" href="contactCNA" ng-show="hasParam('user_check_absch');" >Continue</a>
+            <a class="btn btn-primary btn-lg" href="contactCNA" ng-show="checkLastParam('user_check_absch');" >Continue</a>
 
 
             <a class="btn btn-primary btn-lg" href="notCP" ng-show="hasParam('user_finalize') && (!hasParam('patent_done') && !hasParam('journal_done') && !hasParam('market_done') &&  !hasParam('grants_done'))" ng-click="calcPoints();">Continue</a>

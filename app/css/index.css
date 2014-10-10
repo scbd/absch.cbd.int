@@ -160,12 +160,13 @@ h3 {
 .stats-schema{
 	font-family: 'alternategotno3dotregular';
 	text-rendering: optimizeLegibility;
-	height:20px;
-	line-height:10px!important;
+	height:22px;
+	line-height:12px!important;
 	color: #999;
 	text-transform: uppercase;
 	font-weight:bold;
 	font-size:10px;
+
 }
 .stats-count{
 	color:#333;
