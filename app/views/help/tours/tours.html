@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="/app/css/help.css">
+
+<div ng-controller="ToursController"  >
+
+
+    <div class="container" style="padding:10px;">
+        <a href="/help" class="color-orange"><i class="fa fa-question-circle" ></i> HELP</a>
+        &nbsp;&nbsp;&nbsp;<i class="fa fa-caret-right color-litegrey" ></i>&nbsp;&nbsp;&nbsp;
+
+
+        <span class="dropdown">
+            <a class="dropdown-toggle"  data-toggle="dropdown" href="#"><i class="fa fa-youtube-play" ></i> GUIDED TOURS</a>
+            <div class="dropdown-menu" role="menu" >
+                <ng-include   src="'/app/views/help/links/tours.html'"></ng-inlcude>
+            </div>
+        </span>
+
+    </div>
+
+
+    <div style="background-color:white;padding-top:20px;padding-bottom:30px;border-top:2px solid #ddd;">
+
+        <div class="container">
+            <div  class="row">
+
+              <div  class="col-xs-12 main-content" >
+
+                  <ng-include  src="'/app/views/help/links/tours.html'"></ng-inlcude>
+              </div>
+
+            </div> <!-- end row -->
+          </div> <!-- end container  -->
+
+
+    </div>
+</div>
