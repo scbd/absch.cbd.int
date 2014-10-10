@@ -56,7 +56,7 @@
 				<div ng-show="document.originCountries || responsibleAuthority ||
 					document.specimen || document.taxonomy || document.gisFiles || document.subjectMatter ||
 					document.referenceOfInformedConsent || document.referenceOfAgreedTerms ||
-					document.personeToWhomGranted || document.geneticRessourceUsers">
+					document.personeToWhomGranted">
 					<div ng-show="document.originCountries">
 						<label>Source of the genetic resource</label>
 						<div class="km-value">
@@ -130,8 +130,9 @@
 					</div>
 				</div>
 			</div>
+			{{document}}
 			<div ng-show="document.description || document.dateFrom || document.dateTo ||
-				 information || informationDocuments">
+				 information || informationDocuments ||document.geneticRessourceUsers">
 				<legend>Information on the utilization of the genetic resource(s)</legend>
 				<div ng-show="document.description">
 					<label>Short description of the information collected or received by the checkpoint relevant to the utilization of genetic resources</label>
