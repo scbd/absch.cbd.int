@@ -139,8 +139,8 @@ app.directive("existingPermit", [ function () {
 				$scope.openDialog = function(){
 
 					$('#existingPermits').modal('show');
-					if(!loaded && $scope.$root.user.government)
-						$scope.queryGovernment = [{identifier : $scope.$root.user.government}]
+					// if(!loaded && $scope.$root.user.government)
+					// 	$scope.queryGovernment = [{identifier : $scope.$root.user.government}]
                 	query();
 				}
 
