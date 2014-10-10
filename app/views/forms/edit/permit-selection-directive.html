@@ -95,22 +95,26 @@
             								<input type="checkbox" ng-model="doc.__checked"/>
             							</td>
             							<td>
-                                            <a target="_new" href="/database/record?documentID={{doc.identifier_s}}&documentSchema={{doc.schema_EN_t}}">
+
             								<span class="latest-date"> {{doc.createdDate_dt | formatDate}} </span> |
                                             <span class="latest-country"> {{doc.government_s | term:locale}} </span> |
                                             <span>{{doc.identifier_s | uniqueID}}</span>
                                             <!-- <span class="latest-schema"> {{doc.schema_EN_t | schemaName}} </span> -->
                                             <div class="latest-title">{{doc.title_t}} </div>
-                                            </a>
             							</td>
+                                        <td>
+                                            <a target="_new" href="/database/record?documentID={{doc.identifier_s}}&documentSchema={{doc.schema_EN_t}}">
+                                                <i class="glyphicon glyphicon-new-window" id="help-record-newwindow"></i>
+                                            </a>
+                                        </td>
             						</tr>
 
             						<tr ng-show="rawPermitDocs.length==0">
-            							<td colspan="2">No records.</td>
+            							<td colspan="3">No records.</td>
             						</tr>
 
             						<tr ng-show="isLoading">
-            							<td colspan="2">
+            							<td colspan="3">
             								Loading...
             							</td>
             						</tr>
