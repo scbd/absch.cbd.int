@@ -86,16 +86,16 @@
 
 		<div ng-show="registeredMeasures">
 			<label>Related measures</label>
-			<div class="km-value" >
-				<ul>
-					<li ng-repeat="item in registeredMeasures">
-						<div ng-hide="item.errorCode">
-							<b>{{item.document.title|lstring:locale}}</b>
-							<div class="km-pre" ng-bind-html="item.document.summary|lstring:locale"></div>
-						</div>
-						<div class="alert alert-block" ng-show="item.errorCode"><strong>Record not found</strong> {{item.identifier}}</div>
-					</li>
-				</ul>
+			<div class="reference-select">
+				<table class="table table-hover table-striped">
+					<tr ng-repeat="item in registeredMeasures"  ng-hide="item.errorCode">
+						<td>
+							<strong>{{item.document.title | lstring}}</strong>
+							<div ng-bind-html="item.document.summary | lstring:locale"></div>
+							<div class="alert alert-block" ng-show="item.errorCode"><strong>Record not found</strong> {{item.identifier}}</div>
+						</td>
+					</tr>
+				</table>
 			</div>
 		</div>
 
@@ -132,7 +132,18 @@
 		</div>
 		<div ng-show="linkedMeasures">
 			<label>Related measures</label>
-			<div class="km-value" >
+			<div class="reference-select">
+				<table class="table table-hover table-striped">
+					<tr ng-repeat="item in registeredMeasures"  ng-hide="item.errorCode">
+						<td>
+							<strong><a href="/database/record?documentID={{item.identifier}}" target="_new_">{{item.document.title | lstring}}</a></strong>
+							<div ng-bind-html="item.document.summary | lstring:locale"></div>
+							<div class="alert alert-block" ng-show="item.errorCode"><strong>Record not found</strong> {{item.identifier}}</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<!-- <div class="km-value" >
 				<ul>
 					<li ng-repeat="item in linkedMeasures">
 						<span ng-hide="item.errorCode">
@@ -142,7 +153,7 @@
 						<span ng-show="item.errorCode"><strong>Record not found: </strong> {{item.identifier}}</span>
 					</li>
 				</ul>
-			</div>
+			</div> -->
 		</div>
 
 
