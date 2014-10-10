@@ -64,7 +64,7 @@ define(['app', '/app/views/forms/edit/edit.js',
         return undefined;
 
       document = angular.fromJson(angular.toJson(document));
-
+console.log(document.permitNotAvailable, document.permitNotAvailable===true)
       if (document.permitNotAvailable===true) {
         document.permit = undefined;
       }
@@ -76,7 +76,7 @@ define(['app', '/app/views/forms/edit/edit.js',
         document.taxonomy					= undefined;
         document.gisFiles					= undefined;
         document.gisMapCenter				= undefined;
-        document.geneticRessourceUsers		= undefined;
+        // document.geneticRessourceUsers		= undefined;
         document.referenceOfInformedConsent = undefined;
         document.referenceOfAgreedTerms		= undefined;
         document.personeToWhomGranted		= undefined;
