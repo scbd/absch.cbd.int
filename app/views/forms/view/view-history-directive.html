@@ -1,7 +1,14 @@
 
 	<div >
+			<div class="row">
+				<div class="col-xs-12 col-lg-12" >
+						<div class="alert alert-info" width >NOTE: THE ABS-CH DOES NOT GUARANTEE THAT THE EMAIL HAS BEEN RECEIVED.
+						</div>
+				</div>
+			</div>
+
 			<div ng-show="documents">
-                <div class="row-fluid">
+                <div class="row-fluid tioBorder">
                 	<div class="col-xs-3" ><label style="padding-left:20px;"><a ng-href="#" ng-click="column='createdOn'">Date</a></label></div>
                 	<div class="col-xs-2"><label style="padding-left:15px;">Action</label></div>
 
@@ -10,11 +17,14 @@
                     <div class="col-xs-2" ng-show="showFile"><label >File (pdf) </label></div>
                 </div>
                 <div class="clearfix">
-<style>
-.cpc{
-	backgroundcolor:red;
-}
-</style>
+				<style>
+				.cpc{
+					backgroundcolor:red;
+				}
+				.tioBorder{
+					border-top:1px solid #ccc;
+				}
+				</style>
                 <!-- <div class="row"  >
                     <div class="col-xs-12"> -->
                         <div class="row-fluid text-row km-value"
@@ -82,8 +92,6 @@
 									 	{{formatEmails(document.body.informedConsents||[])}}
 										{{formatEmails(document.body.authority||[])}}
 					  				</span>
-									<i class="fa fa-info" style="color:#428bca;cursor:pointer;" data-toggle="tooltip" data-placement="top" title="NOTE: THE ABS-CH DOES NOT GUARANTEE THAT THE EMAIL HAS BEEN RECEIVED.">
-									</i>
                             </div>
                         </div>
 
