@@ -90,7 +90,7 @@
                 <div class="row" ng-show="document.government || document.checkpoint">
                     	<legend>General information</legend>
                     <div class="col-xs-12">
-                    	<label>Country:</label>
+                    	<label>Country issuing this checkpoint communique:</label>
                         <div class="text">{{document.government|term:locale}}</div>
                     </div>
                 </div>
@@ -117,7 +117,7 @@
         					<div class="text">
         						<ul>
         							<li ng-repeat="permit in document.permit">
-        								<a href="/database/record?documentSchema=ABSPERMIT&documentID={{permit | lstring:locale}}">
+        								<a href="/database/record?documentSchema=ABSPERMIT&documentID={{permit |uniqueID}}">
 											{{permit | uniqueID}}
 											</a>
         							</li>

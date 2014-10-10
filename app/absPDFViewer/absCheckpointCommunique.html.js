@@ -222,7 +222,7 @@ app.filter("uniqueID", ['$filter', '$q','$http', function( $filter, $q, $http) {
 
                 var unique = 'ABSCH-' + $filter("schemaShortName")($filter("lowercase")(document.type)) +
                         (government != '' ? '-' + $filter("uppercase")(government) : '') +
-                        '-' + document.documentID + '-' + document.revision;
+                        '-' + document.documentID;
 				cacheMap[term.identifier] = unique;
 
 				return unique;
