@@ -23,7 +23,7 @@ app.directive("viewAuthority", [function () {
 			//
 			//====================
 			$scope.display = function(field) {
-				
+
 				if(!$scope.hide) return true; //show all fields
 
 				return( $scope.hide.indexOf(field) >= 0 ? false : true);
@@ -39,6 +39,16 @@ app.directive("viewAuthority", [function () {
 
 				if($scope.contacts)
 					$scope.loadReferences($scope.contacts);
+			});
+
+			$scope.$watch("document.absPolicyBasisForCompetencyRef", function(_new)
+			{
+				if ($scope.document && $scope.document.absPolicyBasisForCompetencyRef) {
+					$scope.absPolicyBasisForCompetencyRef = angular.fromJson(angular.toJson($scope.document.absPolicyBasisForCompetencyRef));
+
+					if ($scope.absPolicyBasisForCompetencyRef)
+						$scope.loadReferences($scope.absPolicyBasisForCompetencyRef, true);
+				}
 			});
 
 			//====================

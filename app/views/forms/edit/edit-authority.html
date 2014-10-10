@@ -195,7 +195,7 @@
                                     <div>
                                         <strong>{{reference.title | lstring}}</strong>
                                     </div>
-                                    <div>{{reference.summary | lstring}}</div>
+                                    <div ng-bind-html="reference.summary | lstring"></div>
                                 </div>
                             </div>
                         </div>

@@ -25,7 +25,7 @@
                     <li ng-class="{ active  : tab=='edit'   }"><a href="" ng-click="tab='edit'" >General</a></li>
                     <li ng-class="{ active  : tab=='review' }"><a href="" ng-click="tab='review'">Review</a></li>
                     <li ng-class="{ disabled: tab=='review' }"><a href="" ng-click="tab='review'">&raquo;</a></li>
-                </ul>   
+                </ul>
             </div>
 
             <div class="col-sm-5 hidden-xs text-right">
@@ -63,7 +63,7 @@
 							<div km-reference multiple name="contacts" ng-model="document.contacts" loader="loadRecords(identifier, 'contact')">
 								<div>
 									<div><strong>{{reference.title | lstring}}</strong></div>
-									<div>{{reference.summary | lstring}}</div>
+										<div ng-bind-html="reference.summary | lstring"></div>
 								</div>
 							</div>
 						</div>
@@ -186,7 +186,7 @@
 							<div km-reference multiple name="linkedOrganizations" ng-model="document.linkedOrganizations" loader="loadRecords(identifier, 'organization')">
 								<div>
 									<div><strong>{{reference.title | lstring}}</strong></div>
-									<div>{{reference.summary | lstring}}</div>
+										<div ng-bind-html="reference.summary | lstring"></div>
 								</div>
 							</div>
 						</div>
@@ -247,7 +247,7 @@
                     <li ng-class="{ active  : tab=='edit'   }"><a href="" ng-click="tab='edit'" >General</a></li>
                     <li ng-class="{ active  : tab=='review' }"><a href="" ng-click="tab='review'">Review</a></li>
                     <li ng-class="{ disabled: tab=='review' }"><a href="" ng-click="tab='review'">&raquo;</a></li>
-                </ul>   
+                </ul>
             </div>
 
             <div class="col-sm-5 hidden-xs text-right">

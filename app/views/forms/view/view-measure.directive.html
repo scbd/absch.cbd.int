@@ -156,13 +156,15 @@
 
 			<div ng-show="amendedMeasures">
 				<label>Amended regulations</label>
-				<div class="km-value" >
-					<ul>
-						<li ng-repeat="item in amendedMeasures">
-							<b>{{item.document.title|lstring:locale}}</b>
-							<div class="km-pre">{{item.document.summary|lstring:locale}}</div>
-						</li>
-					</ul>
+				<div class="reference-select">
+					<table class="table table-hover table-striped">
+						<tr ng-repeat="item in amendedMeasures" >
+							<td>
+								<strong>{{item.document.title | lstring}}</strong>
+								<div ng-bind-html="item.document.summary | lstring"></div>
+							</td>
+						</tr>
+					</table>
 				</div>
 			</div>
 		</div>
