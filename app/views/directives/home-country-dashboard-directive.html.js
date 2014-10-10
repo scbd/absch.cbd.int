@@ -48,9 +48,9 @@ define(['app'], function (app) {
                     var countryQuery = '';
                     $scope.loadingFacets = true;
 
-                    // if(country){
-                    //     countryQuery = ' AND government_s:' + country;
-                    // }
+                    if(country){
+                        countryQuery = ' AND government_s:' + country;
+                    }
 
 					var queryFacetsVLRParameters = {
                         'q': '(realm_ss:' + realm.value.toLowerCase() + ' or realm_ss:absch) AND NOT version_s:* AND (schema_s:resource)',
