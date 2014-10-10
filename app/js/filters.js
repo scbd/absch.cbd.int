@@ -219,13 +219,50 @@ define(["app"], function (app) {
 		return function( document ) {
             var unique = $filter("uniqueID")(document);
 
+
             if(angular.isString(unique) && document)
-                return unique.replace('-' + document.revision, '');
+                return unique.substring(0,unique.lastIndexOf('-'));
+			// else if(angular.isString(unique) && document.identifier)
+            //     return unique.substring(0,unique.lastIndexOf('-'));
 
             return '';
 
 		};
 	}]);
+
+
+	app.filter("checkpointTitle", ["$http", '$filter', function($http, $filter) {
+		var cacheMap = {};
+
+		return function(term, locale) {
+
+			if(!term)
+				return "";
+
+			if(term && angular.isString(term))
+				term = { identifier : term };
+
+			locale = locale||"en";
+
+			if(cacheMap[term.identifier])
+				return cacheMap[term.identifier].title;
+
+			cacheMap[term.identifier] = $http.get("/api/v2013/documents/" + encodeURIComponent(term.identifier),  {cache:true}).then(function(result) {
+
+				cacheMap[term.identifier] = result.data;
+
+				return $filter("lstring")(cacheMap[term.identifier].title, locale);
+
+			}).catch(function(){
+
+				cacheMap[term.identifier] = term.identifier;
+
+				return term.identifier;
+
+			});
+		};
+	}])
+
 	//============================================================
 	//
 	//
