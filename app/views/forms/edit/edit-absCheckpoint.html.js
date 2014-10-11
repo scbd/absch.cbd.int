@@ -21,7 +21,7 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
       },
     });
 
-console.log($scope.introOptions)
+
 $scope.introOptions.steps.push(
         {
           element: '.km-yes-no',
