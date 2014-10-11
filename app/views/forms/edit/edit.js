@@ -26,6 +26,48 @@ define([
     $scope.tab      = "edit";
     $scope.review   = { locale: "en" };
 
+    //intro.js configurations
+	$scope.startTour=false;
+
+
+    $scope.introOptions = {
+      steps: [
+        {
+          intro: "Welcome to the introduction the ABSCH Dashboard. When the page is fully loaded click 'Next ->' to start the tour.",
+        },
+		{
+          element: '.stepedit',
+          intro: 'Use these panels to get an overview of your documents and requests, as well as view the detail lists of requests.',
+        },
+        {
+          element: '.stepreview',
+          intro: 'This feed give an overview of the activities of all members.',
+        },
+        {
+          element: '#stepdraft',
+          intro: 'To create a new document or view and edit current documents, select the type of document you want work with here.',
+          position: 'right',
+        },
+        {
+          element: '#steppublish',//steppublishRequest
+          intro: 'Blaise FOnsecaThese labels describe the number of documents in each phase.<br />Green is published<br />Gray is draft<br />Red is Requests',
+
+        },
+        {
+          element: 'input[type=text]',
+          intro: '<br />Green is published<br />Gray is draft<br />Red is Requests',
+        },
+        {
+          element: 'div[km-rich-textbox]',
+          intro: 'Febina Fonseca Gray is draft<br />Red is Requests',
+        },
+        {
+          element: 'div[km-link]',
+          intro: 'Febina Fonseca Gray is draft<br />Red is Requests',
+        }
+      ],
+    };
+
 
     $scope.options  = {
       countries		: function() {
@@ -372,6 +414,10 @@ define([
 
         $scope.origanalDocument = angular.copy(doc);
 
+        if($routeParams.tour)
+        {
+            $scope.startTour=true;
+        }
 
         $scope.$emit("loadDocument", {identifier:doc.header.identifier,schema:doc.header.schema});
 
