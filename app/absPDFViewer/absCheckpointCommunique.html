@@ -80,24 +80,23 @@
 
     			<a type="button" ng-show="showPdf" target="_blank" class="btn btn-info pull-right" ng-href="http://absch.cbd.int/app/abs/docs/sample_communique.pdf">Download the Checkpoint Communiqué</a>
 
-                <div class="row" ng-show="document.title">
-                    <div class="col-xs-12">
-                    	<label>Title:</label>
-                        <div class="text">{{document.title| lstring:locale}}</div>
-                    </div>
-                </div>
-
-                <div class="row" ng-show="document.government || document.checkpoint">
-                    	<legend>General information</legend>
-                    <div class="col-xs-12">
+                <div ng-show="document.government">
+                    <legend>General information</legend>
+                    <div >
                     	<label>Country issuing this checkpoint communique:</label>
                         <div class="text">{{document.government|term:locale}}</div>
                     </div>
                 </div>
 
+                <div ng-show="document.title">
+                    <div >
+                    	<label>Title of this checkpoint communique:</label>
+                        <div class="text">{{document.title| lstring:locale}}</div>
+                    </div>
+                </div>
 				<div ng-show="document.checkpoint">
 					<legend>Checkpoint/s that collected or received the information</legend>
-					<div class="km-value">
+					<div class="km-value text">
 						<ul>
 							<li ng-repeat="checkpoint in document.checkpoint">
 								{{checkpoint.name | lstring:locale}}

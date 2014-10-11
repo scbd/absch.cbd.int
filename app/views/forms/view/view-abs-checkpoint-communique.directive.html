@@ -4,16 +4,7 @@
 	</div>
 	<div class="record-body panel-body">
 
-    	    <div ng-show="document.title">
-    		 	<label>Title</label>
-    		 	<div class="km-value">
-    		 	    <strong>{{document.title | lstring:locale}}</strong>
-    		 	</div>
-		 	</div>
-
-
-
-			<div ng-show="document.government || document.checkpoint">
+    	   	<div ng-show="document.government || document.checkpoint">
 				<legend>General information</legend>
 				<div ng-show="document.government">
 					<label>Country issuing this checkpoint communique</label>
@@ -22,6 +13,13 @@
 					</div>
 				</div>
 			</div>
+			<div ng-show="document.title">
+    		 	<label>Title of this checkpoint communique</label>
+    		 	<div class="km-value">
+    		 	    <strong>{{document.title | lstring:locale}}</strong>
+    		 	</div>
+		 	</div>
+
 			<div ng-show="document.checkpoint">
 				<legend>Checkpoint/s that collected or received the information</legend>
 				<div class="km-value">
