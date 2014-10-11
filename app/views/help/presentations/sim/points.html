@@ -51,11 +51,11 @@
             <br><br>
 
             <span class="score-supertitle color-blue">Your Score as the USER</span>
-                    &nbsp;<span class="label label-info">{{getPoints('user').r}}</span>
+                    <!-- &nbsp;<span class="label label-info">{{getPoints('user').r}}</span>
                     &nbsp;<span class="label label-danger">{{getPoints('user').c}}</span>
-                    &nbsp;<span class="label label-success">{{getPoints('user').b}}</span>
+                    &nbsp;<span class="label label-success">{{getPoints('user').b}}</span> -->
             <div class="well">
-                <span class="score-title">Your relationship with the Provider Countries</span>
+                <div class="score-title">Your relationship with the Provider Countries</div>
                 <div class="score-text" ng-show="userPoints.r >= 18">
                     Your relationship with providers of genetic resources and associated magic knowledge is just amazing!!!  Providers from Middle-earth trust you blindly, and that has open so many opportunities for accessing other valuable magic resources that your magic industry and universities are flourishing
                 </div>
@@ -72,7 +72,7 @@
                     Your relationship with providers of genetic resources and associated magic knowledge is catastrophic! Every time you are involved in an ABS agreement, providers become suspicious and your relationship is full of misunderstandings and mistrust.
                 </div>
 
-                <span class="score-title">Your time/costs</span>
+                <div class="score-title">Your time/costs</div>
                 <div class="score-text"  ng-show="userPoints.c >= 20">
                     You have invested a lot of time and money in this project, I hope it has been worthy.
                 </div>
@@ -83,7 +83,7 @@
                     The time and money invested in the project is minimum.
                 </div>
 
-                <span class="score-title">Benefits</span>
+                <div class="score-title">Benefits</div>
                 <div class="score-text"  ng-show="userPoints.b >= 4">
                     Great job!!! You benefit from the results of your work and research and everything went as planned. Potion world, here I come!
                 </div>
@@ -99,13 +99,13 @@
             </div>
 
             <span class="score-supertitle color-red">Your Score as the PROVIDER</span>
-                 &nbsp;<span class="label label-warning">{{getPoints('provider').i}}</span>
+                 <!-- &nbsp;<span class="label label-warning">{{getPoints('provider').i}}</span>
                     &nbsp;<span class="label label-info">{{getPoints('provider').r}}</span>
                     &nbsp;<span class="label label-danger">{{getPoints('provider').c}}</span>
-                    &nbsp;<span class="label label-success">{{getPoints('provider').b}}</span>
+                    &nbsp;<span class="label label-success">{{getPoints('provider').b}}</span> -->
 
             <div class="well">
-                <span class="score-title">Your relationship with the ILCs</span>
+                <div class="score-title">Your relationship with the ILCs</div>
                 <div class="score-text" ng-show="providerPoints.i >= 6">
                     Middle-earth and Elf local communities have the best of the relationships ever. You work together towards conservation and sustainable use of biodiversity of Middle-earth and magic genetic resources and associated magic knowledge are in good hands. The Middle-earth is in peace and harmony.
                 </div>
@@ -119,7 +119,7 @@
                     You have a very bad relationship with the Elf local community, and this is impacting Middle-earth well-being in many ways.  Biodiversity in the Elf area is declining, and as a result poverty is starting to be an issue in an otherwise rich area 10 years ago. Yesterday you had an Elf protest supported by the NGO Witchcraft without borders.
                 </div>
 
-                <span class="score-title">Relationship with the User</span>
+                <div class="score-title">Relationship with the User</div>
                 <div class="score-text"  ng-show="providerPoints.r >= 8">
                     Your relationship with the user is the best! They know that you are reliable and that they know what to expect when they want to access the magic genetic resources in your country.  Your collaboration is based on mutual understanding and dialogue. With such a good relationship, you will for sure receive benefits from the utilization of your genetic resources and magic knowledge.
                 </div>
@@ -133,7 +133,7 @@
                     Your relationship with users of genetic resources and magic knowledge is very bad. Users try to avoid accessing genetic resources in your country as much as they can. You heard other countries are benefiting from ABS agreements.
                 </div>
 
-                <span class="score-title">Time/Costs</span>
+                <div class="score-title">Time/Costs</div>
                 <div class="score-text"  ng-show="providerPoints.c >= 11">
                     You have invested a lot of time and money in this project, I hope it has been worthy.
                 </div>
@@ -144,18 +144,20 @@
                     The time and money invested in the project is minimum.
                 </div>
 
-                <span class="score-title">Benefits</span>
-                <div class="score-text"  ng-show="providerPoints.cb>= 10">
-                    Wow! This project really has reported so many benefits to Middle-earth. Your universities and the Elf communities are really excited with the outcomes. The benefits will contribute to conservation and sustainable use of biodiversity in Middle-earth. In this way, future similar projects will be possible and everybody is just looking forward to the next ABS agreement.
-                </div>
-                <div class="score-text"  ng-show="providerPoints.b >= 5 && providerPoints.b < 10">
-                    The project has reported good benefits for your country and everybody is pretty happy with the results of the project. Now you know more about your genetic resources and benefits are flowing back to conservation and sustainable use of biodiversity in Middle-earth
-                </div>
-                <div class="score-text"  ng-show="providerPoints.b >= 0 && providerPoints.b < 5">
-                    Some benefits from the access to your magic beans have been reverted to Middle-earth. Benefits are less than expected, but you have learned a lot with this project and next time you will do things better.
-                </div>
-                <div class="score-text"  ng-show="providerPoints.b < 0">
-                    Disaster!  Instead of getting benefits you lost money and time.  This requires some serious consideration of what went wrong.
+                <div ng-show="hasParam('picmat_research') || hasParam('picmat_commercial')">
+                    <div class="score-title">Benefits</div>
+                    <div class="score-text"  ng-show="providerPoints.cb>= 10">
+                        Wow! This project really has reported so many benefits to Middle-earth. Your universities and the Elf communities are really excited with the outcomes. The benefits will contribute to conservation and sustainable use of biodiversity in Middle-earth. In this way, future similar projects will be possible and everybody is just looking forward to the next ABS agreement.
+                    </div>
+                    <div class="score-text"  ng-show="providerPoints.b >= 5 && providerPoints.b < 10">
+                        The project has reported good benefits for your country and everybody is pretty happy with the results of the project. Now you know more about your genetic resources and benefits are flowing back to conservation and sustainable use of biodiversity in Middle-earth
+                    </div>
+                    <div class="score-text"  ng-show="providerPoints.b >= 0 && providerPoints.b < 5">
+                        Some benefits from the access to your magic beans have been reverted to Middle-earth. Benefits are less than expected, but you have learned a lot with this project and next time you will do things better.
+                    </div>
+                    <div class="score-text"  ng-show="providerPoints.b < 0">
+                        Disaster!  Instead of getting benefits you lost money and time.  This requires some serious consideration of what went wrong.
+                    </div>
                 </div>
 
 
