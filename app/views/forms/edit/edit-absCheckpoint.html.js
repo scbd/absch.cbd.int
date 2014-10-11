@@ -21,6 +21,14 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
       },
     });
 
+console.log($scope.introOptions)
+$scope.introOptions.steps.push(
+        {
+          element: '.km-yes-no',
+          intro: "Welcome to the introduction the ABSCH Dashboard. When the page is fully loaded click 'Next ->' to start the tour.",
+        }
+    );
+
     $scope.ac_jurisdictions = function() {
       return $scope.options.jurisdictions().then(function(jurisdictions) {
         _.each(jurisdictions, function(element) {
