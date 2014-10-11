@@ -19,9 +19,13 @@ define(['app',
         });
         $scope.locale = 'en';
         var today= moment();
-        var entry= moment("20141012", "YYYYMMDD");
-        $scope.Math = window.Math;
-        $scope.daysUntilEntry = $scope.Math.floor(entry.diff(today, 'milliseconds', true)/86400000);
+        var entry= moment("2014-10-11T24:00:00-04:00");
+        //$scope.Math = window.Math;
+        //$scope.daysUntilEntry = $scope.Math.floor(entry.diff(today, 'milliseconds', true)/86400000);
+
+        $scope.entryintoforce = today.diff(entry, 'hours', true) >= 0 ? true:false;
+
+        $scope.daysUntilEntry = entry.startOf('hours').fromNow(true);
 
 
     	//============================================================
