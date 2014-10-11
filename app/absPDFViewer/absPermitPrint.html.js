@@ -61,6 +61,7 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter',
 	$http.get('/api/v2013/documents/' +  params.identifier + '?info', { }).success(function(data){
 		 	//console.log($scope.documentInfo.documentID	);
 		 	$scope.documentInfo = data;
+             //$scope.document.info = data;
 		 	//var barcode = new Barcode39();
 	});
 					//TODO: return result.data;
@@ -290,3 +291,80 @@ function lstring(ltext, locale)
 			return moment(date).format(formart);
 		}
 	});
+
+    app.filter("uniqueID", ['$filter', '$q','$http', function( $filter, $q, $http) {
+		var cacheMap = {};
+
+		return function(term) {
+
+			if(!term)
+				return "";
+
+            var document;
+
+			if(term ){
+                //console.log(document,cacheMap[term.identifier]);
+    		    if(cacheMap[term.identifier])
+    			     return cacheMap[term.identifier] ;
+
+                document = term;
+                console.log(document,cacheMap[term.identifier]);
+            	//document = $http.get('/api/v2013/documents/' +  term.identifier +'?info=true');
+            }
+
+
+            if(!document)
+                return;
+
+			cacheMap[term.identifier] = $q.when(document).then(function(document) {
+
+                var government = ''
+                if(document.government)
+                    government = document.government.identifier;
+                else if(document.metadata && document.metadata.government)
+                    government = document.metadata.government;
+                else if(document.body && document.body.government)
+                    government = document.body.government.identifier;
+
+                var unique = 'ABSCH-' + $filter("schemaShortName")($filter("lowercase")(document.type)) +
+                        (government != '' ? '-' + $filter("uppercase")(government) : '') +
+                        '-' + document.documentID;
+				cacheMap[term.identifier] = unique;
+
+				return unique;
+
+			}).catch(function(){
+
+				cacheMap[term.identifier] = term.identifier;
+
+				return term.identifier;
+
+			});
+		};
+	}]);
+
+
+		app.filter("schemaShortName", [function() {
+
+		return function( schame ) {
+
+			if(schame.toLowerCase() =="focalpoint"				) return "FP";
+			if(schame.toLowerCase() =="authority"				) return "CNA";
+			if(schame.toLowerCase() =="contact"					) return "CON";
+			if(schame.toLowerCase() =="database"				) return "NDB";
+			if(schame.toLowerCase() =="resource"				) return "VLR";
+			if(schame.toLowerCase() =="organization"			) return "ORG";
+			if(schame.toLowerCase() =="measure" 				) return "MSR";
+			if(schame.toLowerCase() =="abscheckpoint"			) return "CP";
+			if(schame.toLowerCase() =="abscheckpointcommunique"	) return "CPC";
+			if(schame.toLowerCase() =="abspermit"				) return "IRCC";
+            if(schame.toLowerCase() =="statement"				) return "ST";
+        	if(schame.toLowerCase() =="notification"			) return "NT";
+        	if(schame.toLowerCase() =="meeting"					) return "MT";
+        	if(schame.toLowerCase() =="pressrelease"			) return "PR";
+            if(schame.toLowerCase() =="meetingdocument"    		) return "MTD";
+
+
+			return schame;
+		};
+	}]);

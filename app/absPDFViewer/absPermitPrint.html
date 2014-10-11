@@ -85,7 +85,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-xs-8">
                 	<label>Title/reference number of the permit or its equivalent:</label>
@@ -93,7 +92,8 @@
                 </div>
                 <div class="col-xs-4">
                     <label>Verification link (latest version):</label>
-                    <div class="text"><a href="http://absch.cbd.int/certificate/{{documentInfo.documentID}}">http://absch.cbd.int/certificate/{{documentInfo.documentID}}</a></div>
+                    <div class="text"><a href="http://absch.cbd.int/database/record/{{documentInfo | uniqueID}}">
+						http://absch.cbd.int/database/record/{{documentInfo|uniqueID}}</a></div>
                 </div>
 
             </div>
@@ -106,7 +106,7 @@
                 </div>
                  <div class="col-xs-4">
                     <label>ABS Clearing-House unique identifier:</label>
-                    <div class="text">ABSCH-{{document.government.identifier |uppercase}}-{{documentInfo.documentID}}-{{documentInfo.revision}}</div>
+                    <div class="text">{{documentInfo |uniqueID}}</div>
                 </div>
                  <div class="col-xs-4">
                     <label>Country:</label>
