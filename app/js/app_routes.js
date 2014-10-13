@@ -161,7 +161,7 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
               resolveUser: true,
             }).
 
-            when('/searchforum.shtml',           { redirectTo:'/about/iac' }).
+            when('/searchforum.shtml',           { redirectTo:'/about/portal10' }).
 
             when('/commonformat',           { redirectTo:'/about/common-formats' }).
 
