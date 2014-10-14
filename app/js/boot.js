@@ -25,7 +25,7 @@ require.config({
         'angular-form-controls' : '../libs/angular_form_controls/form-controls',
         'bootbox'               : '../libs/bootbox/bootbox',
         'jqvmap'                : '../libs/jqvmap/jqvmap/jquery.vmap.min',
-        'jqvmapworld'           : '../libs/jqvmap/jqvmap/maps/jquery.vmap.world',
+        'jqvmapworld'           : '../js/jquery.vmap.world_update',
         'text-angular-sanitize' : '../libs/textAngular/dist/textAngular-sanitize.min',
         'text-angular'          : '../libs/textAngular/dist/textAngular.min'
     },

@@ -29,7 +29,8 @@
     "angular_form_controls": "latest",
     "bootbox": "~4.3.0",
     "jqvmap": "*",
-    "textAngular": "~1.2.2"
+    "textAngular": "~1.2.2",
+    "jvectormap": "~2.0.0"
   },
   "resolutions": {
     "angular": "1.2.18"

@@ -1,7 +1,8 @@
-define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], function (app,angucomplete) {
+define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], function (app,angucomplete, jqv, jqvmap) {
 
     app.controller("CountriesController", ["$scope", "authHttp","underscore","$q","$filter","$timeout", "$location","realm","$routeParams",
      function ($scope, $http, _, $q,$filter,$timeout, $location, realm, $routeParams) {
+
 
     	//*******************************************************
         var queryFacetsParameters = {
@@ -41,19 +42,19 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
                     $scope.countries[i].isRatified = true;
                     if($scope.countries[i].code == 'EU')
                       $scope.countries[i].code = 'EUR'; //temp fix for EU
-                    countryColors[$scope.countries[i].code.toLowerCase()] = "#428bca";
+                    countryColors[$scope.countries[i].code.toUpperCase()] = "#428bca";
                 }
                 if ($scope.countries[i].treaties.XXVII8b.signature != null ) {
                     $scope.signatures++;
                     $scope.countries[i].isSignatory = true;
-                    if(!countryColors[$scope.countries[i].code.toLowerCase()])
-                        countryColors[$scope.countries[i].code.toLowerCase()] = "#5bc0de";
+                    if(!countryColors[$scope.countries[i].code.toUpperCase()])
+                        countryColors[$scope.countries[i].code.toUpperCase()] = "#5bc0de";
                 }
                 if($scope.countries[i].treaties.XXVII8.party != null){
                   $scope.parties++;
                   $scope.countries[i].isParty = true;
-                  if(!countryColors[$scope.countries[i].code.toLowerCase()])
-                      countryColors[$scope.countries[i].code.toLowerCase()] = "#808080";
+                  if(!countryColors[$scope.countries[i].code.toUpperCase()])
+                      countryColors[$scope.countries[i].code.toUpperCase()] = "#808080";
                 }
 
                 if($scope.countries[i].isParty)
@@ -67,8 +68,8 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
                 //
             }
 
-            countryColors['tw'] = "#808080";
-            countryColors['gl'] = "#428bca";
+            countryColors[taiwan] = "#808080";
+            countryColors[greenland] = "#428bca";
 
              loadMap(countryColors);
              $scope.slideMap('#mapDiv','#listDiv');
@@ -155,17 +156,24 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
                     onRegionClick: function(event, code, region)
                     {
                         $('.jqvmap-label').html('');
+                            code = code.toUpperCase();
+                            //tiwan should be shown as China
+                            if(code == taiwan)
+                                code = china
+                            if(code == greenland)//greenland  as denmark
+                                code = denmark
+
                         $timeout(function(){
                             $location.path('countries/' + code.toUpperCase())},1)
                     },
                     onLabelShow: function(event, label, code)
                     {
-
+                            code = code.toUpperCase();
                             //tiwan should be shown as China
-                            if(code == 'tw')
-                                code = 'cn'
-                            if(code == 'gl')//greenland  as denmark
-                                code = 'dk'
+                            if(code == taiwan)
+                                code = china
+                            if(code == greenland)//greenland  as denmark
+                                code = denmark
                             // console.log(code);
                             var country = _.where($scope.countries, {code: code.toUpperCase()})
                             var countryFacet = _.where($scope.countryFacets["government_s,schema_s"], {value: code})
@@ -223,48 +231,53 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
             $scope.selected_facet= action
 
             _.each($scope.countries, function(country){
-            //    console.log(country);
-                    $("#jqvmap" + getMapIndex() + "_"+country.code.toLowerCase()).attr("fill", "#fff");
+               console.log($("#jqvmap" + getMapIndex() + "_"+country.code.toUpperCase()));
+                    $("#jqvmap" + getMapIndex() + "_"+country.code.toUpperCase()).attr("fill", "#fff");
             });
             //fix for taiwan
-            $("#jqvmap" + getMapIndex() + "_tw").attr("fill", "#fff");
-            $("#jqvmap" + getMapIndex() + "_gl").attr("fill", "#fff");
+            $("#jqvmap" + getMapIndex() + "_" + taiwan).attr("fill", "#fff");
+            $("#jqvmap" + getMapIndex() + "_"+greenland).attr("fill", "#fff");
             if(action == 'signatory' || action == 'party' || action == 'ratified' || action=='inbetweenParties'){
                 _.each($scope.countries, function(country){
                     //console.log(country);
                     if((action == 'party' || action=='ratified' || action == 'inbetweenParties') && country.inbetweenParties){
-                        $("#jqvmap" + getMapIndex() + "_"+country.code.toLowerCase()).attr("fill", "#5cb85c");
+                        $("#jqvmap" + getMapIndex() + "_"+country.code.toUpperCase()).attr("fill", "#5cb85c");
                     }
                     else if((action == 'party' || action == 'ratified') && country.isRatified){
-                        $("#jqvmap" + getMapIndex() + "_"+country.code.toLowerCase()).attr("fill", "#428bca");
-                        $("#jqvmap" + getMapIndex() + "_gl").attr("fill", "#428bca");
+                        $("#jqvmap" + getMapIndex() + "_"+country.code.toUpperCase()).attr("fill", "#428bca");
+                        $("#jqvmap" + getMapIndex() + "_"+greenland).attr("fill", "#428bca");
                     }
                     else if((action == 'party' || action == 'signatory') && country.isSignatory)
-                        $("#jqvmap" + getMapIndex() + "_"+country.code.toLowerCase()).attr("fill", "#5bc0de");
+                        $("#jqvmap" + getMapIndex() + "_"+country.code.toUpperCase()).attr("fill", "#5bc0de");
                     else if(action == 'party' && country.isParty){
-                         $("#jqvmap" + getMapIndex() + "_"+country.code.toLowerCase()).attr("fill", "#808080");
-                         $("#jqvmap" + getMapIndex() + "_tw").attr("fill", "#808080");
+                         $("#jqvmap" + getMapIndex() + "_"+country.code.toUpperCase()).attr("fill", "#808080");
+                         $("#jqvmap" + getMapIndex() + "_"+taiwan).attr("fill", "#808080");
                     }
                 });
             }
             else{
                     $scope.searchFilter = $scope.hasFacets;
                     _.each($scope.countryFacets['government_s,schema_s'], function(data){
-                        console.log(("#jqvmap" + getMapIndex() + "_tw"));
+                        console.log(("#jqvmap" + getMapIndex() + "_"+taiwan));
                         var colorCountry = false;
                         var search = _.where(data.pivot, {value:action});
                         if(search.length>0){
-                            $("#jqvmap" + getMapIndex() + "_"+data.value.toLowerCase()).attr("fill", "#428bca");
+                            $("#jqvmap" + getMapIndex() + "_"+data.value.toUpperCase()).attr("fill", "#428bca");
                             //fix for taiwan
-                            if(data.value.toLowerCase()=='cn')
-                                $("#jqvmap" + getMapIndex() + "_tw").attr("fill", "#808080");
+                            if(data.value.toLowerCase()=='CN')
+                                $("#jqvmap" + getMapIndex() + "_"+taiwan).attr("fill", "#808080");
 
-                            if(data.value.toLowerCase()=='dk')
-                                $("#jqvmap" + getMapIndex() + "_gl").attr("fill", "#428bca");
+                            if(data.value.toLowerCase()=='DK')
+                                $("#jqvmap" + getMapIndex() + "_"+greenland).attr("fill", "#428bca");
                         }
                     });
             }
         }
+
+        var taiwan = "TW"
+        var china  = "CN"
+        var denmark = "DK"
+        var greenland = "GL"
 
         $scope.isSelected = function(facet){
 
@@ -275,7 +288,7 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
         function getMapIndex(id){
             if(!id)
                 id = 1;
-            if($("#jqvmap" + id + "_gl").length == 0)
+            if($("#jqvmap" + id + "_"+greenland).length == 0)
                 return getMapIndex(id+1)
 
             return id;
