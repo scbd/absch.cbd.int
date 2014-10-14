@@ -43,6 +43,10 @@ define(['app'], function (app) {
                     else if(newValue ==null)
                         $scope.loadFacets();
                 })
+
+				schemas = _.clone(schemaTypes);
+				schemas.push('focalPoint');
+
     			$scope.loadFacets = function(country){
 
                     var countryQuery = '';
@@ -64,10 +68,9 @@ define(['app'], function (app) {
                     };
                     var queryFacetsVLR = $http.get('/api/v2013/index/select', { params: queryFacetsVLRParameters })
 
-
     				var queryFacetsParameters = {
                         'q': 'realm_ss:' + realm.value.toLowerCase() + ' AND NOT version_s:* AND (schema_s:'
-                                          + schemaTypes.join(' OR schema_s:') + ') '+ countryQuery ,
+                                          + schemas.join(' OR schema_s:') + ') '+ countryQuery ,
                         'fl': '', 		//fields for results.
                         'wt': 'json',
                         'rows': 0,		//limit
