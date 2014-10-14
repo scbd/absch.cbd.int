@@ -28,6 +28,7 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
             $scope.showMap = true;
             $scope.parties = 0;
             $scope.countriesforAutocomplete = [];
+            $scope.inbetweenParties = 0;
 
             for (var i = 0; i < $scope.countries.length; i++) {
 
@@ -57,6 +58,13 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
 
                 if($scope.countries[i].isParty)
                     $scope.countriesforAutocomplete.push({name:$scope.countries[i].name.en});
+
+                    // console.log(moment().diff(moment($scope.countries[i].treaties.XXVII8b.deposit),'days'))
+                if(moment().diff(moment($scope.countries[i].treaties.XXVII8b.deposit),'days')<90){
+                    $scope.countries[i].inbetweenParties = true;
+                    $scope.inbetweenParties++;
+                }
+                //
             }
 
             countryColors['tw'] = "#808080";
@@ -96,6 +104,11 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
          $scope.isPartyToCBD= function(entity){
             $scope.selected_circle="party";
             return entity && entity.treaties.XXVII8.party != null;
+         }
+
+         $scope.isInbetweenParties= function(entity){
+            $scope.selected_circle="inbetweenParties";
+            return entity && entity.inbetweenParties;
          }
 
          $scope.isSignatory = function(entity){
@@ -165,7 +178,11 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
 
                                 if($scope.isRatified(country[0])){
                                     headerClass = "panel-primary"
-                                    cfHtml += '<li class="list-group-item"><span class="label label-primary">Ratified</span></li>'
+                                    if($scope.isInbetweenParties(country[0])){
+                                        cfHtml += '<li class="list-group-item"><span class="label label-primary">Ratified</span>&nbsp;<span class="label label-success">in-between Party</span></li>'
+                                    }
+                                    else
+                                        cfHtml += '<li class="list-group-item"><span class="label label-primary">Ratified</span></li>'
                                 }
                                 else if($scope.isSignatory(country[0])){
                                     headerClass = "panel-info"
@@ -212,10 +229,13 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
             //fix for taiwan
             $("#jqvmap" + getMapIndex() + "_tw").attr("fill", "#fff");
             $("#jqvmap" + getMapIndex() + "_gl").attr("fill", "#fff");
-            if(action == 'signatory' || action == 'party' || action == 'ratified'){
+            if(action == 'signatory' || action == 'party' || action == 'ratified' || action=='inbetweenParties'){
                 _.each($scope.countries, function(country){
                     //console.log(country);
-                    if((action == 'party' || action == 'ratified') && country.isRatified){
+                    if((action == 'party' || action=='ratified' || action == 'inbetweenParties') && country.inbetweenParties){
+                        $("#jqvmap" + getMapIndex() + "_"+country.code.toLowerCase()).attr("fill", "#5cb85c");
+                    }
+                    else if((action == 'party' || action == 'ratified') && country.isRatified){
                         $("#jqvmap" + getMapIndex() + "_"+country.code.toLowerCase()).attr("fill", "#428bca");
                         $("#jqvmap" + getMapIndex() + "_gl").attr("fill", "#428bca");
                     }

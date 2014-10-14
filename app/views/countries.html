@@ -105,23 +105,15 @@
                                   ratifications</div>
                                 </div>
                             </td>
-                            <!-- <td style="text-align:center;width:200px;">
-                                <div style=" width: 180px; height: 100px;">
-
-                                  <div class="numberCircle" style="width:80px;height:80px;padding-top:20px;background-color:#fff;color:#000;font-weight:bold;">
-                                  {{daysUntilEntry}}<br><span style="position:relative;top:-20px;color: #999; font-size: 11px; text-transform: uppercase;font-weight:bold;">days</span></div>
-                                  <div style="position:relative;top:-15px;padding-top:5px;color: #fff; font-size: 10px; text-transform: uppercase;font-weight:bold;">
-                                   until entry into force
-                                    </div>
-
-
-
-                                </div>
-
-
-                               </td> -->
-
-
+                            <td style="text-align:center;width:200px;cursor:pointer;">
+                                <div style=" width: 180px; height: 100px;" ng-click="searchFilter=isInbetweenParties;updateMap('inbetweenParties')">
+                                  <div class="numberCircle" style="width:80px;height:80px;padding-top:20px;background-color:#5cb85c;"  ng-class="{'active-circle': selected_circle=='inbetweenParties'}">
+                                      {{inbetweenParties}}</div>
+                                      <div style="padding-top:5px;color: #fff; font-size: 10px; text-transform: uppercase;font-weight:bold;">
+                                          in-between parties
+                                      </div>
+                                   </div>
+                            </td>
                         </tr>
                     </table>
 
@@ -284,7 +276,9 @@
           </tr><!-- -->
           <tr ng-repeat="country in (countries | filter:countryFilter | filter: searchFilter | orderBy:sortTerm:orderList)"  ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}" >
             <td>{{$index + 1}}</td>
-            <td><a ng-href="countries/{{country.code}}"  class="country-list-name label" ng-class="{'label-info':country.isSignatory && !country.isRatified, 'label-primary':country.isRatified, 'label-default':!country.isRatified && !country.isSignatory}">{{country.name.en}}</a></td>
+            <td><a ng-href="countries/{{country.code}}"  class="country-list-name label" ng-class="{'label-info':country.isSignatory && !country.isRatified, 'label-primary':country.isRatified, 'label-default':!country.isRatified && !country.isSignatory}">{{country.name.en}}</a>
+                &nbsp;<span class="label label-success" ng-show={{country.inbetweenParties}}>in-between Party</span>
+            </td>
             <td>{{country.treaties.XXVII8b.signature}}</td>
             <td>{{country.treaties.XXVII8b.instrument}}</td>
             <td>{{country.treaties.XXVII8b.deposit}}</td>
