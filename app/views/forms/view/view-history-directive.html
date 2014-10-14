@@ -8,7 +8,7 @@
 			</div>
 
 			<div ng-show="documents">
-                <div class="row-fluid tioBorder">
+                <div class="row-fluid" ng-class='{ tioBorder : showFile}'>
                 	<div class="col-xs-3" ><label style="padding-left:20px;"><a ng-href="#" ng-click="column='createdOn'">Date</a></label></div>
                 	<div class="col-xs-2"><label style="padding-left:15px;">Action</label></div>
 
