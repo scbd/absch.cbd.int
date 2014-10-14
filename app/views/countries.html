@@ -60,7 +60,8 @@
   $("#signature").tooltip();
 </script>
 
-<div ng-controller="CountriesController">
+<div ng-controller="CountriesController"
+ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart="startTour">
 
     <div class="category-container" >
         <div class="container">
@@ -72,7 +73,7 @@
                     <table align="center" style="width: 90%;text-align:center;" cellspacing="10" cellpadding="10">
 
                         <tr>
-                            <td style="text-align: center; width: 200px;">
+                            <td style="text-align: center; width: 200px;" id="cbdParties">
                                 <div style="width: 180px; height: 100px;cursor:pointer;" ng-click="searchFilter=isPartyToCBD;updateMap('party')">
 
                                   <div class="numberCircle" style="width:80px;height:80px;padding-top:20px;background-color:#1FA65D;" ng-class="{'active-circle': selected_circle=='party'}">
@@ -85,7 +86,7 @@
                                     </div> -->
                                 </div>
                             </td>
-                             <td style="text-align:center;width:200px;">
+                             <td style="text-align:center;width:200px;" id="signatories">
                                 <div  style="width: 180px; height: 100px;cursor:pointer;" ng-click="searchFilter=isSignatory;updateMap('signatory')">
 
                                 <div class="numberCircle" style="width:80px;height:80px;padding-top:20px;background-color:#5bc0de;"  ng-class="{'active-circle': selected_circle=='signatory'}">
@@ -96,7 +97,7 @@
 
                                 </div>
                                  </td>
-                            <td style="text-align: center; width: 200px;">
+                            <td style="text-align: center; width: 200px;" id="ratified">
                               <div style="width: 180px; height: 100px;cursor:pointer;" ng-click="searchFilter=isRatified;updateMap('ratified')">
 
                                   <div class="numberCircle" style="width:80px;height:80px;padding-top:20px;background-color:#428bca;"  ng-class="{'active-circle': selected_circle=='ratified'}">
@@ -105,7 +106,7 @@
                                   ratifications</div>
                                 </div>
                             </td>
-                            <td style="text-align:center;width:200px;cursor:pointer;">
+                            <td style="text-align:center;width:200px;cursor:pointer;" id="inbetweenParties">
                                 <div style=" width: 180px; height: 100px;" ng-click="searchFilter=isInbetweenParties;updateMap('inbetweenParties')">
                                   <div class="numberCircle" style="width:80px;height:80px;padding-top:20px;background-color:#5cb85c;"  ng-class="{'active-circle': selected_circle=='inbetweenParties'}">
                                       {{inbetweenParties}}</div>
@@ -223,8 +224,12 @@
           </div>
         </div>
     </div>
+    <div class="pull-left">
+        <a class="color-orange fa-11" ng-href="#"  ng-click="startIntro()"> <i class="fa fa-youtube-play" ng-click="startIntro()" style="cursor:pointer"></i></a>
+
+    </div>
     <div class="row  pull-right">
-        <div class="col-lg-12">
+        <div class="col-lg-12" id="options">
             <div class="btn-group">
               <button class="btn btn-info" data-toggle="dropdown">
                   <i ng-hide="showMap" class="fa fa-list fa-lg">&nbsp;&nbsp;List</i>

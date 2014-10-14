@@ -316,6 +316,50 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
         }
 
 
+        //intro.js configurations
+        $scope.startTour=false;
+
+        if($routeParams.tour)
+        {
+            $scope.startTour=true;
+        }
+        $scope.introOptions = {
+          steps: [
+            {
+              intro: "Welcome to the country profile page.<br/> click to view countries",
+            },
+        	{
+              element: '#cbdParties',
+              intro: 'No. of parties to the CBD.<br/> click to view countries',
+            },
+            {
+              element: '#signatories',
+              intro: 'No of party signatories.<br/> click to view countries',
+            },
+            {
+              element: '#ratified',
+              intro: 'No of parties ratified the Nagoya Protocol<br/> click to view countries'
+            },
+            {
+              element: '#inbetweenParties',
+              intro: 'Parties ratified the Nagoya Protocol but yet to come in force. The protocol will come in force for the parties after the 90th day from the date of ratifiation.<br/> click to view countries'
+            },
+            {
+              element: '#myWell',
+              intro: 'Count of  resected common format and countries<br/> click to view countries'
+            },
+            {
+              element: '#options',
+              intro: 'Switch between map and list view'
+            },
+            {
+              element: '#mapDiv',
+              intro: 'hover over countries to view more details',
+              position:'top'
+            }
+          ],
+        };
+
 
     }]);
 // });
