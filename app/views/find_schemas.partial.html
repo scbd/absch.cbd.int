@@ -32,10 +32,10 @@ label{width:100%;}
     </div>
 
 
-    <div class="main_filter" ng-show="showNationalFilters || focalpoint.selected" ng-class="{'check_active': focalpoint.selected}">
+    <div class="main_filter" ng-show="showNationalFilters || focalPoint.selected" ng-class="{'check_active': focalPoint.selected}">
         <label>
-            <span class="badge badge-white pull-right">{{focalpoint.count}}</span>
-            <input type="checkbox" ng-model="focalpoint.selected" bind-indeterminate="focalpoint.indeterminate" ng-change="refresh(focalpoint.selected,'focalpoint')">
+            <span class="badge badge-white pull-right">{{focalPoint.count}}</span>
+            <input type="checkbox" ng-model="focalPoint.selected" bind-indeterminate="focalPoint.indeterminate" ng-change="refresh(focalPoint.selected,'focalPoint')">
             <span class="filter-text">National Focal Points </span>
         </label>
 

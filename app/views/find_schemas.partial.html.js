@@ -284,7 +284,7 @@ app.directive('searchFilterSchemas', function ($http) {
                 return dictionary;
             }
 
-            $scope.focalpoint              = { identifier: 'focalPoint',               title: 'National Focal Points'
+            $scope.focalPoint              = { identifier: 'focalPoint',               title: 'National Focal Points'
                                              };
             $scope.authority               = { identifier: 'authority',                title: 'Competent National Authorities' ,
                                                subFilters : [
@@ -346,7 +346,7 @@ app.directive('searchFilterSchemas', function ($http) {
             $scope.pressRelease            = { identifier: 'pressRelease',             title: 'Press Releases' };
             $scope.statement               = { identifier: 'statement',                title: 'Statements' };
 
-            $scope.terms  = [ $scope.focalpoint, $scope.authority, $scope.database, $scope.measure, $scope.absPermit, $scope.absCheckpoint, $scope.absCheckpointCommunique, $scope.resource, $scope.organization, $scope.meeting, $scope.notification, $scope.pressRelease, $scope.statement ];
+            $scope.terms  = [ $scope.focalPoint, $scope.authority, $scope.database, $scope.measure, $scope.absPermit, $scope.absCheckpoint, $scope.absCheckpointCommunique, $scope.resource, $scope.organization, $scope.meeting, $scope.notification, $scope.pressRelease, $scope.statement ];
             $scope.termsx = dictionarize($scope.terms);
 
             // Set intitial selection from QueryString parameters
