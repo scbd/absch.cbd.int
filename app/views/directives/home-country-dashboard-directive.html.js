@@ -69,7 +69,7 @@ define(['app'], function (app) {
                     var queryFacetsVLR = $http.get('/api/v2013/index/select', { params: queryFacetsVLRParameters })
 
     				var queryFacetsParameters = {
-                        'q': 'realm_ss:' + realm.value.toLowerCase() + ' AND NOT version_s:* AND (schema_s:'
+                        'q': '(realm_ss:' + realm.value.toLowerCase() + ' or realm_ss:absch) AND NOT version_s:* AND (schema_s:'
                                           + schemas.join(' OR schema_s:') + ') '+ countryQuery ,
                         'fl': '', 		//fields for results.
                         'wt': 'json',

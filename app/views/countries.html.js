@@ -13,7 +13,7 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
                     'rows': 0,		//limit
                     'facet': true,	//get counts back
                     'facet.pivot': 'government_s,schema_s',
-                    'limit':512
+                    'facet.limit':512
                 };
     	var countryFacets = $http.get('/api/v2013/index/select', { params: queryFacetsParameters })
         var countries = $http.get('/api/v2013/countries');
@@ -174,9 +174,9 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
                                 code = china
                             if(code == greenland)//greenland  as denmark
                                 code = denmark
-                            // console.log(code);
+                            // console.log(code,$scope.countries);
                             var country = _.where($scope.countries, {code: code.toUpperCase()})
-                            var countryFacet = _.where($scope.countryFacets["government_s,schema_s"], {value: code})
+                            var countryFacet = _.where($scope.countryFacets["government_s,schema_s"], {value: code.toLowerCase()})
 
                             var cfHtml = '';
                             var countryName = code;
@@ -231,7 +231,7 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
             $scope.selected_facet= action
 
             _.each($scope.countries, function(country){
-               console.log($("#jqvmap" + getMapIndex() + "_"+country.code.toUpperCase()));
+               //console.log($("#jqvmap" + getMapIndex() + "_"+country.code.toUpperCase()));
                     $("#jqvmap" + getMapIndex() + "_"+country.code.toUpperCase()).attr("fill", "#fff");
             });
             //fix for taiwan
@@ -258,16 +258,16 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
             else{
                     $scope.searchFilter = $scope.hasFacets;
                     _.each($scope.countryFacets['government_s,schema_s'], function(data){
-                        console.log(("#jqvmap" + getMapIndex() + "_"+taiwan));
+                        //console.log(("#jqvmap" + getMapIndex() + "_"+taiwan));
                         var colorCountry = false;
                         var search = _.where(data.pivot, {value:action});
                         if(search.length>0){
                             $("#jqvmap" + getMapIndex() + "_"+data.value.toUpperCase()).attr("fill", "#428bca");
                             //fix for taiwan
-                            if(data.value.toLowerCase()=='CN')
+                            if(data.value.toUpperCase()==china)
                                 $("#jqvmap" + getMapIndex() + "_"+taiwan).attr("fill", "#808080");
 
-                            if(data.value.toLowerCase()=='DK')
+                            if(data.value.toUpperCase()==denmark)
                                 $("#jqvmap" + getMapIndex() + "_"+greenland).attr("fill", "#428bca");
                         }
                     });
@@ -296,16 +296,24 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
 
         function CalculateFacets(){
             var tempFacets = {};
+console.log($scope.countryFacets['government_s,schema_s'].length)
+var count =0;
             _.each($scope.countryFacets['government_s,schema_s'], function(data){
+                if(!data.pivot)
+                    count++
                 _.each(data.pivot, function(facets){
+
+                    //if(facets.value == 'focalPoint')
+                        // console.log((tempFacets[facets.value] ? tempFacets[facets.value].facetCount : 0) + facets.count);
                     tempFacets[facets.value] = {"facetCount" : (tempFacets[facets.value] ? tempFacets[facets.value].facetCount : 0) + facets.count,
                                                 "countryCount" : (tempFacets[facets.value] ? tempFacets[facets.value].countryCount : 0) + 1,
                                                 "countries" : (tempFacets[facets.value] ? tempFacets[facets.value].countries : '') + data.value + ','};
                 });
 
             });
+            console.log(count)
             $scope.commonFormatFacets = _.pairs(tempFacets);
-            //console.log($scope.commonFormatFacets)
+            // console.log($scope.commonFormatFacets)
         }
 
         $scope.slideMap = function(divShow,divHide){
