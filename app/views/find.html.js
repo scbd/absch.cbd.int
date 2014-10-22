@@ -9,7 +9,8 @@ define(['app',
     '../views/directives/search-filter-dates.partial.html.js',
     '../views/directives/document-list.partial.html.js'], function (app) {
 
-    app.controller('FindController', ['$scope', '$rootScope', 'authHttp', '$timeout', '$q','realm', '$routeParams', function ($scope, $rootScope, $http, $timeout, $q, realm, $routeParams) {
+    app.controller('FindController', ['$scope', '$rootScope', 'authHttp', '$timeout', '$q','realm', '$routeParams','$location',
+        function ($scope, $rootScope, $http, $timeout, $q, realm, $routeParams,$location) {
 
 
         $scope.startTour=false;
@@ -17,6 +18,7 @@ define(['app',
         if($routeParams.tour)
         {
             $scope.startTour=true;
+            $location.search("tour", null);
         }
 
 

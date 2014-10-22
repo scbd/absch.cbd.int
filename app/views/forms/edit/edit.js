@@ -417,6 +417,7 @@ define([
         if($routeParams.tour)
         {
             $scope.startTour=true;
+            $location.search("tour", null);
         }
 
         $scope.$emit("loadDocument", {identifier:doc.header.identifier,schema:doc.header.schema});

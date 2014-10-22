@@ -296,22 +296,28 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
 
         function CalculateFacets(){
             var tempFacets = {};
-console.log($scope.countryFacets['government_s,schema_s'].length)
+// console.log($scope.countryFacets['government_s,schema_s'])
 var count =0;
+var countryC='';
             _.each($scope.countryFacets['government_s,schema_s'], function(data){
-                if(!data.pivot)
-                    count++
+                // if(!data.pivot)
+                //     count++
+                if(data.value=='ad')
+                    console.log(data);
+                countryC +=  data.value + ',';
                 _.each(data.pivot, function(facets){
 
-                    //if(facets.value == 'focalPoint')
-                        // console.log((tempFacets[facets.value] ? tempFacets[facets.value].facetCount : 0) + facets.count);
+                    if(facets.value == 'focalPoint' && tempFacets[facets.value]){
+                        count++
+                        // console.log(tempFacets[facets.value]);
+                    }// console.log((tempFacets[facets.value] ? tempFacets[facets.value].facetCount : 0) + facets.count);
                     tempFacets[facets.value] = {"facetCount" : (tempFacets[facets.value] ? tempFacets[facets.value].facetCount : 0) + facets.count,
                                                 "countryCount" : (tempFacets[facets.value] ? tempFacets[facets.value].countryCount : 0) + 1,
                                                 "countries" : (tempFacets[facets.value] ? tempFacets[facets.value].countries : '') + data.value + ','};
                 });
 
             });
-            console.log(count)
+            // console.log(count, countryC)
             $scope.commonFormatFacets = _.pairs(tempFacets);
             // console.log($scope.commonFormatFacets)
         }
@@ -330,6 +336,7 @@ var count =0;
         if($routeParams.tour)
         {
             $scope.startTour=true;
+            $location.search("tour", null);
         }
         $scope.introOptions = {
           steps: [
