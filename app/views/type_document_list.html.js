@@ -22,9 +22,9 @@ define(['app',
 
   app.controller("TypeDocumentListController",
     ["$rootScope", "$scope", "$q", "$window", "IStorage", "underscore",
-     "schemaTypes", "$compile", "$timeout","lstringFilter", "$routeParams","$filter",
+     "schemaTypes", "$compile", "$timeout","lstringFilter", "$routeParams","$filter",'$location',
     function ($rootScope, $scope, $q, $window, storage, _,
-      schemaTypes,$compile,$timeout,lstringFilter, $routeParams, $filter) {
+      schemaTypes,$compile,$timeout,lstringFilter, $routeParams, $filter, $location) {
 
     $scope.type = $rootScope.document_types[$filter("mapSchema")($routeParams.document_type)];
 
@@ -34,6 +34,7 @@ define(['app',
         if($routeParams.tour)
         {
             $scope.startTour=true;
+            $location.search("tour", null);
         }
     $scope.introOptions = {
       steps: [

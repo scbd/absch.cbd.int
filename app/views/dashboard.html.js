@@ -7,8 +7,8 @@ define(['app',], function (app) {
 //require("app", "dragAndDrop")
 
 app.controller("DashboardController",
-	["$rootScope", "$scope", "underscore", "lstringFilter","IWorkflows","realm","$q","$routeParams",
-	function ($rootScope, $scope, _, lstringFilter,workflows,realm,$q,$routeParams) {
+	["$rootScope", "$scope", "underscore", "lstringFilter","IWorkflows","realm","$q","$routeParams",'$location',
+	function ($rootScope, $scope, _, lstringFilter,workflows,realm,$q,$routeParams, $location) {
 
     //intro.js configurations
 	$scope.startTour=false;
@@ -16,6 +16,7 @@ app.controller("DashboardController",
     if($routeParams.tour)
     {
         $scope.startTour=true;
+        $location.search("tour", null);
     }
     $scope.introOptions = {
       steps: [
