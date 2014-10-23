@@ -1,0 +1,115 @@
+<link rel="stylesheet" href="/app/css/find.css">
+
+<style type="text/css">
+
+.find-title{
+	font-family: 'alternategotno3dotregular';
+	text-rendering: optimizeLegibility;
+	font-size: 24px;
+	/*color: #999;*/
+	text-transform: uppercase;
+	font-weight:bold;
+	display: block;
+}
+
+.find-box-active{
+	background-color: white!important;
+}
+.find-box{
+	cursor:pointer;
+
+}
+.section-header{
+	font-family: 'alternategotno3dotregular';
+	text-rendering: optimizeLegibility;
+	font-size: 18px;
+	/*color: #999;*/
+	text-transform: uppercase;
+	display: block;
+	border-bottom: 1px solid white;
+}
+
+</style>
+
+<div ng-controller="SimpleSearchController"  class="container" style="min-height:500px;">
+
+<a href="/find" class="pull-right link"> <i class="fa fa-th"></i> advanced search</a>
+<h1 style="padding-bottom:20px;"><span class="color-blue">Simple Search:</span> What are you looking for?</h1>
+
+
+	<div class="row row-centered">
+
+		<div class="col-xs-3 well col-centered find-box" ng-click="show='access'" ng-class="{'find-box-active':show=='access'}" >
+			<span class="find-title color-green">Access</span>
+			Information about how to access genetic resources and/or accociated traditional knowledge
+		</div>
+
+		<div class="col-xs-3 col-xs-offset-1 well col-centered find-box" ng-click="show='monitoring'" ng-class="{'find-box-active':show=='monitoring'}">
+			<span class="find-title color-blue">Monitoring</span>
+			Information related to monitoring the utilization of genetic resources and/or accociated traditional knowledge.
+		</div>
+
+		<div class="col-xs-3 col-xs-offset-1 well col-centered find-box">
+			<span class="find-title color-orange">Reference Material</span>
+			Monitor utilization of genetic resources and/or accociated traditional knowledge.
+		</div>
+
+	</div>
+
+	<div class="row" ng-show="show=='access'" style="border-top:1px solid #ddd;">
+		<div class="section-header">please select a country <div angucomplete id="ex1" placeholder="Search countries" pause="100"  localdata="countriesforAutocomplete" minlength="1" inputclass="form-control form-control-small"   searchfields="name" selectedObject="selectedCountry" searchStr="countryFilter" titlefield="name"/></div>
+
+			<table class="table">
+				<tr>
+					<th>Name</th>
+					<th>FP</th>
+					<th>CNA</th>
+					<th>MSR</th>
+					<th>CP</th>
+					<th>CPC</th>
+					<th>IRCC</th>
+				</tr>
+				<tr ng-repeat="c in countries">
+					<td>{{c.name.en}}</td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</table>
+
+		<div class="section-header">People and institutions to contact</div>
+			list focal points and CNAs.
+		<div class="section-header">ABS Measures related to Access</div>
+
+			list measures and specific articles about access.
+
+		<div class="section-header">ABSCH Country Profile</div>
+			link to the CP
+		<div class="section-header">related reference material</div>
+
+			community protocols and information on ILCs and TK
+
+	</div>
+
+
+	<div ng-show="show=='monitoring'">
+		<div class="row">
+
+			<div class="col-xs-6 text-center">
+
+				<div>Enter a unique identifier (UID)</div>
+			 	<div class="input-group text-center" >
+			      <input type="text" class="form-control">
+			      <span class="input-group-btn">
+			        <button class="btn btn-default" type="button">Go!</button>
+			      </span>
+			    </div><!-- /input-group -->
+
+			</div>
+
+		</div>
+	</div>
+
+
+
+</div>

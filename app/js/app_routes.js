@@ -32,7 +32,8 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
 
 
             when('/find',                        { templateUrl: '/app/views/find.html'                      ,resolveController: true, resolveUser: true}).
-            // when('/find/:tour',                   { templateUrl: '/app/views/find.html'                      ,resolveController: true, resolveUser: true}).
+             when('/find/simple',                { templateUrl: '/app/views/find/simple.html'     ,resolveController: true, resolveUser: true}).
+                                
 
 
             when('/countries',                   { templateUrl: '/app/views/countries.html'                 ,resolveController: true, resolveUser: true}).

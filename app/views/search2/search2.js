@@ -316,7 +316,7 @@ $compile.directive('search2Schema', function ($http) {
                 { identifier: 'focalPoint'             , title: 'National Focal Points' },
                 { identifier: 'authority'              , title: 'Competent National Authorities' },
                 { identifier: 'database'               , title: 'National Databases' },
-                { identifier: 'measure'                , title: 'National Measures' },
+                { identifier: 'measure'                , title: 'ABS Measures' },
                 { identifier: 'absCheckpoint'          , title: 'Checkpoints' },
                 { identifier: 'absPermit'              , title: 'Permits' },
                 { identifier: 'absCheckpointCommunique', title: 'Checkpoint Communiques' }];
