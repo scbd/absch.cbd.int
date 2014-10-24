@@ -101,7 +101,7 @@ define(['app', '/app/views/forms/edit/edit.js',
                 var selected = _.where($scope.checkpointList,{"identifier": checkpoint.identifier});
                 if(selected && selected.length > 0 && selected[0].body)
                     selected = selected[0].body;
-                    console.log(_.isEmpty(selected));
+                    // console.log(_.isEmpty(selected));
                 if(!_.isEmpty(selected))
                     document.checkpoint.push(selected);
             });

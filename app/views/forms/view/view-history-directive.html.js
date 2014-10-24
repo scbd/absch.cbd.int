@@ -65,10 +65,10 @@ app.directive("viewHistory", [function () {
 							$scope.isPermit = true;
 						}
 						$scope.loading=false;
-						$timeout(function(){
-							console.log($("[data-toggle='tooltip']"));
-							$("[data-toggle='tooltip']").tooltip({trigger:'hover'});
-						},200);
+						// $timeout(function(){
+						// 	console.log($("[data-toggle='tooltip']"));
+						// 	$("[data-toggle='tooltip']").tooltip({trigger:'hover'});
+						// },200);
 
 				}).then(null, function(error) {
 					$scope.error = "error loading document history";
