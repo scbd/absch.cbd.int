@@ -74,7 +74,33 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
              loadMap(countryColors);
              $scope.slideMap('#mapDiv','#listDiv');
              CalculateFacets();
-            //  console.log($routeParams.commonFormat)
+             $("#vmap").append("<div id=\"jqvmap1_EUR1\" class=\"europeanUnion jqvmap-zoomout flag-icon-background flag-icon-eur\" style=\"height:50px;width:100px;background-color:#eee\"></div>");
+             //console.log($('#jqvmap1_EUR'))
+
+             $('#jqvmap1_EUR1').on('click', function(e){
+                 navigateCountry(this,'EUR', null);
+             });
+             $('#jqvmap1_EUR1').on('mouseout', function(e){
+                 $('.jqvmap-label').hide();
+             });
+             $('#jqvmap1_EUR1').on('mouseover', function(e){
+                    var maplabel = $('.jqvmap-label');
+                    showCountryDetails(this, maplabel,'EUR');
+                    maplabel.show();
+                    var left = e.pageX - 15 - maplabel.width();
+                    var top = e.pageY - 15 - maplabel.height();
+
+                    if(left < 0)
+                       left = e.pageX + 15;
+                    if(top < 0)
+                        top = e.pageY + 15;
+
+                    maplabel.css({
+                        left: left,
+                        top: top
+                    });
+             })
+
             if($routeParams.commonFormat)
             {
                 $scope.searchFilter=$scope.isRatified;
@@ -153,69 +179,11 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
         		    showTooltip: true,
         		    colors: colors,
                     hoverColor: false,
-                    onRegionClick: function(event, code, region)
-                    {
-                        $('.jqvmap-label').html('');
-                            code = code.toUpperCase();
-                            //tiwan should be shown as China
-                            if(code == taiwan)
-                                code = china
-                            if(code == greenland)//greenland  as denmark
-                                code = denmark
-
-                        $timeout(function(){
-                            $location.path('countries/' + code.toUpperCase())},1)
+                    onRegionClick: function (event, code, region){
+                        navigateCountry(event, code, region)
                     },
-                    onLabelShow: function(event, label, code)
-                    {
-                            code = code.toUpperCase();
-                            //tiwan should be shown as China
-                            if(code == taiwan)
-                                code = china
-                            if(code == greenland)//greenland  as denmark
-                                code = denmark
-                            // console.log(code,$scope.countries);
-                            var country = _.where($scope.countries, {code: code.toUpperCase()})
-                            var countryFacet = _.where($scope.countryFacets["government_s,schema_s"], {value: code.toLowerCase()})
-
-                            var cfHtml = '';
-                            var countryName = code;
-                            var headerClass = "panel-default"
-                            if(country.length > 0){
-                                countryName = country[0].name.en;
-
-                                if($scope.isRatified(country[0])){
-                                    headerClass = "panel-primary"
-                                    if($scope.isInbetweenParties(country[0])){
-                                        cfHtml += '<li class="list-group-item"><span class="label label-primary">Ratified</span>&nbsp;<span class="label label-success">in-between Party</span></li>'
-                                    }
-                                    else
-                                        cfHtml += '<li class="list-group-item"><span class="label label-primary">Ratified</span></li>'
-                                }
-                                else if($scope.isSignatory(country[0])){
-                                    headerClass = "panel-info"
-                                    cfHtml += '<li class="list-group-item"><span class="label label-info">Signatory</span></li>'
-                                }
-                                else if($scope.isPartyToCBD(country[0])){
-                                    headerClass = "panel-default"
-                                    cfHtml += '<li class="list-group-item"><span class="label label-default">Not Ratified/CBD party</span></li>'
-                                }
-                            }
-                            if(countryFacet.length>0){
-                                countryFacet[0].pivot.forEach(function(document){
-                                    cfHtml +=    '<li class="list-group-item" style="color:black">'+
-                                                '    <span class="badge">'+ document.count +'</span>'+
-                                                $filter("schemaShortName")(document.value.toLowerCase()) + ' </li>'
-                                });
-                            }
-                            else{
-                                cfHtml += '<li class="list-group-item" style="color:black">No information available</li>'
-                            }
-                        label.html(
-                            '<div style="min-width:150px;" class="panel ' + headerClass + '"><div class="panel-heading"><h3 class="panel-title">' + countryName + '</h3>'+
-                            '</div> <div class="panel-body"><ul class="list-group">'+ cfHtml +'</ul></div></div>'
-
-                        );
+                    onLabelShow: function(event, label, code){
+                        showCountryDetails(event, label, code)
                     }
 
                 }
@@ -224,6 +192,70 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
             $('.jqvmap-zoomin').html('<i class="glyphicon glyphicon-plus"/>')
             $('.jqvmap-zoomout').html('<i class="glyphicon glyphicon-minus"/>')
         //    console.log(map);
+        }
+        function navigateCountry(event, code, region)
+        {
+            $('.jqvmap-label').html('');
+                code = code.toUpperCase();
+                //tiwan should be shown as China
+                if(code == taiwan)
+                    code = china
+                if(code == greenland)//greenland  as denmark
+                    code = denmark
+
+            $timeout(function(){
+                $location.path('countries/' + code.toUpperCase())},1)
+        }
+        function showCountryDetails(event, label, code)
+        {
+                code = code.toUpperCase();
+                //tiwan should be shown as China
+                if(code == taiwan)
+                    code = china
+                if(code == greenland)//greenland  as denmark
+                    code = denmark
+                // console.log(code,$scope.countries);
+                var country = _.where($scope.countries, {code: code.toUpperCase()})
+                var countryFacet = _.where($scope.countryFacets["government_s,schema_s"], {value: code.toLowerCase()})
+
+                var cfHtml = '';
+                var countryName = code;
+                var headerClass = "panel-default"
+                if(country.length > 0){
+                    countryName = country[0].name.en;
+
+                    if($scope.isRatified(country[0])){
+                        headerClass = "panel-primary"
+                        if($scope.isInbetweenParties(country[0])){
+                            cfHtml += '<li class="list-group-item"><span class="label label-primary">Ratified</span>&nbsp;<span class="label label-success">in-between Party</span></li>'
+                        }
+                        else
+                            cfHtml += '<li class="list-group-item"><span class="label label-primary">Ratified</span></li>'
+                    }
+                    else if($scope.isSignatory(country[0])){
+                        headerClass = "panel-info"
+                        cfHtml += '<li class="list-group-item"><span class="label label-info">Signatory</span></li>'
+                    }
+                    else if($scope.isPartyToCBD(country[0])){
+                        headerClass = "panel-default"
+                        cfHtml += '<li class="list-group-item"><span class="label label-default">Not Ratified/CBD party</span></li>'
+                    }
+                }
+                if(countryFacet.length>0){
+                    countryFacet[0].pivot.forEach(function(document){
+                        cfHtml +=    '<li class="list-group-item" style="color:black">'+
+                                    '    <span class="badge">'+ document.count +'</span>'+
+                                    $filter("schemaShortName")(document.value.toLowerCase()) + ' </li>'
+                    });
+                }
+                else{
+                    cfHtml += '<li class="list-group-item" style="color:black">No information available</li>'
+                }
+            label.html(
+                '<div style="min-width:150px;" class="panel ' + headerClass + '"><div class="panel-heading"><h3 class="panel-title">' + countryName + '</h3>'+
+                '</div> <div class="panel-body"><ul class="list-group">'+ cfHtml +'</ul></div></div>'
+
+            );
         }
 
         $scope.updateMap = function(action){
