@@ -84,7 +84,9 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
                  $('.jqvmap-label').hide();
              });
              $('#jqvmap1_EUR1').on('mouseover', function(e){
-                    var maplabel = $('.jqvmap-label');
+                    var maplabel = $('.jqvmap-label').last();
+                    maplabel.hide();
+                    maplabel.html('')
                     showCountryDetails(this, maplabel,'EUR');
                     maplabel.show();
                     var left = e.pageX - 15 - maplabel.width();
