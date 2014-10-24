@@ -373,35 +373,35 @@ var countryC='';
         $scope.introOptions = {
           steps: [
             {
-              intro: "Welcome to the country profile page.<br/> click to view countries",
+              intro: "Welcome to the country profile page.<br/> Click to view countries.",
             },
         	{
               element: '#cbdParties',
-              intro: 'No. of parties to the CBD.<br/> click to view countries',
+              intro: 'Number of Parties to the CBD.<br/> Click to view countries.',
             },
             {
               element: '#signatories',
-              intro: 'No of party signatories.<br/> click to view countries',
+              intro: 'Number of Party signatories.<br/> Click to view countries.',
             },
             {
               element: '#ratified',
-              intro: 'No of parties ratified the Nagoya Protocol<br/> click to view countries'
+              intro: 'Number of Parties ratified the Nagoya Protocol<br/> Click to view countries.'
             },
             {
               element: '#inbetweenParties',
-              intro: 'Parties ratified the Nagoya Protocol but yet to come in force. The protocol will come in force for the parties after the 90th day from the date of ratifiation.<br/> click to view countries'
+              intro: 'Parties that have ratified the Nagoya Protocol but the Protocol has not yet entered into force in their country. The Protocol will enter in force for the Parties after the 90th day from the date of ratifiation.<br/> click to view countries'
             },
             {
               element: '#myWell',
-              intro: 'Count of  resected common format and countries<br/> click to view countries'
+              intro: 'Count of common format and countries<br/> click to view countries'
             },
             {
               element: '#options',
-              intro: 'Switch between map and list view'
+              intro: 'Switch between the map and list view'
             },
             {
               element: '#mapDiv',
-              intro: 'hover over countries to view more details',
+              intro: 'Hover over countries to view more details. Click on a country to visit their profile.',
               position:'top'
             }
           ],

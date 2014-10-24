@@ -1,3 +1,11 @@
+.link {
+	font-family: 'alternategotno3dotregular';
+	text-rendering: optimizeLegibility;
+	font-size: 14px;
+	/*color: #999;*/
+	text-transform: uppercase;
+	color:#999;
+}
 
 .badge-white{
 
