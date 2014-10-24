@@ -19,8 +19,11 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
                                 return $q.all(permit).then(function(o){
                                       var permits =  [];
                                       o.data.Items.forEach(function(permit){
-                                        if(permit.identifier != $scope.document.header.identifier)
-                                          permits.push({"title": permit.title.en, "identifier": permit.identifier});
+                                        if(permit.identifier != $scope.document.header.identifier){
+                                                var uniqueID = 'ABSCH-' + $filter("schemaShortName")($filter("lowercase")(permit.type)) +
+                                                                $filter("uppercase")(permit.metadata.government) + '-' + permit.documentID;                                            
+                                                permits.push({"title": permit.title.en + '(' + uniqueID + ')', "identifier": permit.identifier});
+                                        }
                                       });
                                       return permits;
                                 });
