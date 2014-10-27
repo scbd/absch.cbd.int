@@ -56,7 +56,7 @@
 
         </div>
     </div>
-<div class="row" ng-show="showMessage">
+<div class="row" style="display:none" id="divShowMessage">
     <div class="col-xs-12">
         <div class="alert alert-info" role="alert">
             <button type="button" class="close" ng-click="showMessage=false">
@@ -67,7 +67,7 @@
 
     </div>
 </div>
-<div class="row" ng-show="lastSaved && !hideTimer" >
+<div class="row" ng-show="lastSaved && hideTimer=='false'" >
     <div class="col-xs-12 pull-right">
             <span class="pull-right">{{lastSaved}} since you last saved this record.</span>
     </div>
