@@ -214,7 +214,7 @@ define(['app',
     $scope.userActivities = []; //Jason: what does this do?
     function loadRecords(schema)
     {
-     // console.log('schema: ', schema);
+      //console.log('schema: ', schema);
 
       $("a[role*='button']").toggleClass('ui-disabled');
       if(schema === null || schema===undefined ){
@@ -258,20 +258,20 @@ define(['app',
         _.values(map).forEach(function(row){
 
           if(schema!="dashboard" && schema!="contact"){
-            var schemaCount = _.where($scope.schemaTypesFacets,{"schema":row.type});
+            //var schemaCount = _.where($scope.schemaTypesFacets,{"schema":row.type});
 
-            if(schemaCount !== null && schemaCount.length > 0)
-            {
-              schemaCount[0].draftCount 	+= $scope.isDraft(row) ? 1:0;
-              schemaCount[0].requestCount += $scope.isRequest(row) ? 1:0;
-              schemaCount[0].publishCount += $scope.isPublished(row) ? 1:0;
-            }
-            else
-            {
-              $scope.schemaTypesFacets.push({"schema":row.type, "draftCount":$scope.isDraft(row) ? 1:0
-                ,"requestCount":$scope.isPublished(row) ? 1:0
-                ,"publishCount":$scope.isRequest(row) ? 1:0});
-            }
+            // if(schemaCount !== null && schemaCount.length > 0)
+            // {
+            //   schemaCount[0].draftCount 	+= $scope.isDraft(row) ? 1:0;
+            //   schemaCount[0].requestCount += $scope.isRequest(row) ? 1:0;
+            //   schemaCount[0].publishCount += $scope.isPublished(row) ? 1:0;
+            // }
+            // else
+            // {
+            //   $scope.schemaTypesFacets.push({"schema":row.type, "draftCount":$scope.isDraft(row) ? 1:0
+            //     ,"requestCount":$scope.isPublished(row) ? 1:0
+            //     ,"publishCount":$scope.isRequest(row) ? 1:0});
+            // }
             if($scope.isRequest(row)){
 
               $scope.userActivities.push({
@@ -334,8 +334,44 @@ define(['app',
     //TODO: this is a scoping disaster. Needed for contacts, fix later.
     $rootScope.loadRecords = loadRecords;
 
-    loadRecords();
-	loadActivitiesFacets();
+	if($rootScope.user.isAuthenticated){
+		if($scope.document_type)
+	    	loadRecords($scope.document_type);
+
+		loadFacets();
+		loadActivitiesFacets();
+	}
+
+	function loadFacets(){
+		var published     = storage.documentQuery.facets("",{collection:"my"});
+		var drafts    	  = storage.documentQuery.facets("",{collection:"mydraft"});
+		var requests      = storage.documentQuery.facets("",{collection:"request"});
+        $q.all([published, drafts, requests]).then(function(results) {
+
+		  var index=0;
+		  _.each(results, function(facets){
+			  _.each(facets.data, function(count, format){
+
+					var schemaTypeFacet = _.where($scope.schemaTypesFacets,{"schema":format});
+					if(schemaTypeFacet.length>0){
+						if(index==0)
+						  	schemaTypeFacet[0].publishCount = count;
+			            else if(index==1)
+						  	schemaTypeFacet[0].draftCount = count;
+			            else if(index==2)
+							schemaTypeFacet[0].requestCount = count;
+					}
+			  })
+			index++;
+		  });
+		  //
+
+        }).then(null, function(error) {
+          $scope.error = "error loading permit releated checkpoint communiqué.";
+           console.log(error );
+        })
+
+	}
 
 	function loadActivitiesFacets(){
 
@@ -382,7 +418,15 @@ define(['app',
 	 // flipFacets();
 	}
 
-
+	//============================================================
+    //
+    // Occurs when external directive like dashboard wants to load schema data
+    //
+    //============================================================
+    $scope.$on("loadActivities", function(evt, schema){
+		  if(schema=='dashboard')
+			loadRecords();
+    });
     //So this is like a request for info... I don't like the idea of using JS as an message driven language. KISS
     $scope.$on("getDocumentInfo", function(evt) {
 

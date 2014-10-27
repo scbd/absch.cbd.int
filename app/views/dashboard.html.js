@@ -73,44 +73,47 @@ app.controller("DashboardController",
  			return	$scope.dashboardFilter == filter || $scope.dashboardFilter == "All";
  	}
 
+	if($rootScope.user.isAuthenticated){
+	    var myUserID = $scope.$root.user.userID;
+	    var query    = {
+	                $and : [
+	                    { "createdBy" : myUserID },
+	                    { closedOn : { $exists : true } },
+	                    { "data.realm" : realm.value }
+	                ]
+	            };
+	    $q.when(workflows.query(query), function(data){
+	        $scope.completedRequestCount = data.length;
+	    });
 
-    var myUserID = $scope.$root.user.userID;
-    var query    = {
-                $and : [
-                    { "createdBy" : myUserID },
-                    { closedOn : { $exists : true } },
-                    { "data.realm" : realm.value }
-                ]
-            };
-    $q.when(workflows.query(query), function(data){
-        $scope.completedRequestCount = data.length;
-    });
+		query    = {
+					$and : [
+						{ "createdBy" : myUserID } ,
+						{ closedOn : { $exists : false } },
+						{ "data.realm" : realm.value }
+					]
+				};
+	    $q.when(workflows.query(query), function(data){
+		    $scope.pendingCount  = data.length;
+	    });
 
-	query    = {
+		query    = {
 				$and : [
-					{ "createdBy" : myUserID } ,
+					{ "activities.assignedTo" : myUserID },
 					{ closedOn : { $exists : false } },
 					{ "data.realm" : realm.value }
 				]
 			};
-    $q.when(workflows.query(query), function(data){
-	    $scope.pendingCount  = data.length;
-    });
+	    $q.when(workflows.query(query), function(data){
+			$scope.urgentAttentionCount = data.length;
+	    });
 
-	query    = {
-			$and : [
-				{ "activities.assignedTo" : myUserID },
-				{ closedOn : { $exists : false } },
-				{ "data.realm" : realm.value }
-			]
-		};
-    $q.when(workflows.query(query), function(data){
-		$scope.urgentAttentionCount = data.length;
-    });
+		$scope.$emit('loadActivities','dashboard');
+	}
 
-     $scope.completedRequestCount = 0
-     $scope.pendingCount = 0;
-     $scope.urgentAttentionCount = 0;
+	$scope.completedRequestCount = 0
+	$scope.pendingCount = 0;
+	$scope.urgentAttentionCount = 0;
 
 
 }]);

@@ -15,7 +15,9 @@ define(["app", "authentication"], function (app) {
 				draftSecurityUrl        : function() { return "/api/v2013/documents/:identifier/versions/draft/securities/:operation"; },
 				draftLockUrl            : function() { return "/api/v2013/documents/:identifier/versions/draft/locks/:lockID"; },
 				documentVersionUrl      : function() { return "/api/v2013/documents/:identifier/versions"; },
-        documentBodyQueryUrl    : function() { return "/api/v2013/documents/query/body"; },
+
+				documentBodyQueryUrl    : function() { return "/api/v2013/documents/query/body"; },
+				documentFacetsQueryUrl  : function() { return "/api/v2013/documents/query/facets"; },
 			};
 
 			//==================================================
@@ -383,34 +385,53 @@ define(["app", "authentication"], function (app) {
 				}
 			};
 
-      //==================================================
-      //
-      // Document Query
-      //
-      //==================================================
-      this.documentQuery = {
+			//==================================================
+			//
+			// Document Query
+			//
+			//==================================================
+			this.documentQuery = {
 
-        //===========================
-        //
-        //===========================
-        "body" : function(filter, query, params)
-        {
-          params            = _.extend({}, params||{});
-          params.query      = query;
-          params.$filter    = filter;
+				//===========================
+				//
+				//===========================
+				"body" : function(filter, query, params)
+				{
+				  params            = _.extend({}, params||{});
+				  params.query      = query;
+				  params.$filter    = filter;
 
-          var useCache = !!params.cache;
-          if(!params.cache)
-            params.cache = true;
+				  var useCache = !!params.cache;
+				  if(!params.cache)
+				    params.cache = true;
 
-          var oTrans = transformPath(serviceUrls.documentBodyQueryUrl(), params);
+				  var oTrans = transformPath(serviceUrls.documentBodyQueryUrl(), params);
 
-          return $http.get(oTrans.url, {  params : oTrans.params, cache:useCache });
+				  return $http.get(oTrans.url, {  params : oTrans.params, cache:useCache });
 
-          //TODO: return result.data;
-        }
+				  //TODO: return result.data;
+				},
 
-      };
+				//===========================
+				//
+				//===========================
+				"facets" : function(filter, params)
+				{
+				  params            = _.extend({}, params||{});
+				  params.$filter    = filter;
+
+				  var useCache = !!params.cache;
+				  if(!params.cache)
+				    params.cache = true;
+
+				  var oTrans = transformPath(serviceUrls.documentFacetsQueryUrl(), params);
+
+				  return $http.get(oTrans.url, {  params : oTrans.params, cache:useCache });
+
+				  //TODO: return result.data;
+				}
+
+			};
 
 
 
