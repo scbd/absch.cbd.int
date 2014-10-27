@@ -151,6 +151,23 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                     </div>
                                 </div>
                             </div>
+                            
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="km-control-group" name="keywords" caption="Keywords to describe the subject-matter or genetic resource(s) covered by the permit or its equivalent">
+                                        <span class="help-block">The collection of this information is important for facilitating harmonized searches throughout the records. Please select all relevant keywords that could assist in describing the subject-matter or genetic resource(s) covered by the permit or its equivalent.</span>
+                                        <div km-select multiple required name="keywords" ng-model="document.keywords" items="options.keywords()"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12" ng-show="isOthers()">
+                                    <div class="km-control-group" required name="keywordOthers" caption="Other keywords">
+                                        <div km-textbox-ml required name="keywordOthers" rows="1" ng-model="document.keywordOthers" locales="document.header.languages"></div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </section>
 

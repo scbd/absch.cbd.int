@@ -1,8 +1,8 @@
 define(['app', '/app/views/forms/edit/edit.js',
         '/app/views/forms/edit/permit-selection-directive.html.js'], function (app) {
 
-  app.controller("editCheckpointCommunique", ["$scope", "authHttp", "$filter", "$q", "$controller", "IStorage","underscore",
-   function ($scope, $http, $filter, $q, $controller, storage, _) {
+  app.controller("editCheckpointCommunique", ["$scope", "authHttp", "$filter", "$q", "$controller", "IStorage","underscore","Thesaurus","Enumerable",
+   function ($scope, $http, $filter, $q, $controller, storage, _, Thesaurus, Enumerable) {
     $controller('editController', {$scope: $scope});
 
     $scope.checkpointList = [];
@@ -17,6 +17,13 @@ define(['app', '/app/views/forms/edit/edit.js',
                   return permits;
             });
         },
+    keywords  : function () { return $q.all([$http.get("/api/v2013/thesaurus/domains/1A22EAAB-9BBC-4543-890E-DEF913F59E98/terms", { cache: true }),
+                                            $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })])
+                                       .then(function (o) {
+                                                  var data = o[0].data;
+                                                  data.push(o[1].data)
+                                                  return Thesaurus.buildTree(data);
+                                        }); },
       checkpoints         : function () {
             var checkpoint = storage.documents.query("(type eq 'absCheckpoint')",undefined,{body:true,cache:false});
             return $q.all(checkpoint).then(function(o){
@@ -76,7 +83,7 @@ define(['app', '/app/views/forms/edit/edit.js',
         document.taxonomy					= undefined;
         document.gisFiles					= undefined;
         document.gisMapCenter				= undefined;
-        // document.geneticRessourceUsers		= undefined;
+        document.keywords           		= undefined;
         document.referenceOfInformedConsent = undefined;
         document.referenceOfAgreedTerms		= undefined;
         document.personeToWhomGranted		= undefined;
@@ -94,6 +101,10 @@ define(['app', '/app/views/forms/edit/edit.js',
       if (/^\s*$/g.test(document.notes))
         document.notes = undefined;
 
+      if(!$scope.isOthers()){
+        document.keywordOthers = undefined;
+      }
+      
       if(document.checkpointSelected){
             document.checkpoint = [];
             document.checkpointSelected.forEach(function(checkpoint){
@@ -122,6 +133,19 @@ define(['app', '/app/views/forms/edit/edit.js',
       return document &&
            document.permitNotAvailable;
     };
+
+    $scope.isOthers = function(document) {
+
+      document = document || $scope.document;
+      if (!document || !document.keywords)
+        return false;
+
+      var qLibraries = Enumerable.from(document.keywords);
+
+      return qLibraries.any(function (o) { return o.identifier == "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED"; });
+
+    };
+
 
     $scope.setDocument();
   }]);

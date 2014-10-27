@@ -54,7 +54,7 @@
 				<div ng-show="document.originCountries || responsibleAuthority ||
 					document.specimen || document.taxonomy || document.gisFiles || document.subjectMatter ||
 					document.referenceOfInformedConsent || document.referenceOfAgreedTerms ||
-					document.personeToWhomGranted">
+					document.personeToWhomGranted || document.keywords">
 					<div ng-show="document.originCountries">
 						<label>Source of the genetic resource</label>
 						<div class="km-value">
@@ -73,7 +73,7 @@
 						<label>Subject-matter or genetic resources relevant to the information collected or received</label>
 						<div class="km-value km-pre"ng-bind-html="document.subjectMatter | lstring:locale"></div>
 					</div>
-					<div ng-show="document.specimen || document.taxonomy || document.gisFiles">
+					<div ng-show="document.specimen || document.taxonomy || document.gisFiles || document.keywords">
 						<label>Optional additional subject-matter details</label>
 						<div ng-show="document.specimen">
 							<label>Specimen data</label>
@@ -108,6 +108,16 @@
 								</ul>
 							</div>
 							<div class="leaflet" center="gisMapCenter" layers="gisMapLayers"></div>
+						</div>
+						<div ng-show="document.keywords">
+							<label>Keywords to describe the subject-matter or genetic resource(s) covered by this communique</label>
+							<div class="km-value">
+								<ul class="list">
+									<li ng-repeat="term in document.keywords">{{term|term}}
+										<span ng-show="term.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'"> ({{document.keywordOthers|lstring:locale}})</span>
+									</li>
+								</ul>
+							</div>
 						</div>
 					</div>
 					<div ng-show="document.referenceOfInformedConsent">
