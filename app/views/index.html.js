@@ -2,8 +2,8 @@ define(['app',
     '../views/forms/view/record-loader.directive.html.js',
     '../views/directives/document-list.partial.html.js',
     '/app/views/directives/home-country-dashboard-directive.html.js'], function (app) {
-    app.controller('IndexController', ['$scope', 'authHttp', '$window', '$cookies','realm', '$filter',
-    function ($scope, $http, $window, $cookies, realm, $filter) {
+    app.controller('IndexController', ['$scope', 'authHttp', '$window', '$cookies','realm', '$filter','$rootScope',
+    function ($scope, $http, $window, $cookies, realm, $filter, $rootScope) {
 
     	$scope.email = null;
     	$scope.password = null;

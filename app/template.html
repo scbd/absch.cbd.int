@@ -73,12 +73,12 @@
                     <div ng-cloak class="dropdown" ng-show="user && user.isAuthenticated">
                         <a data-toggle="dropdown" href="#" class="account-name pull-right">
                             <i class="fa fa-chevron-down" style="font-size:15px"></i> {{user.name}}
-                           <span ng-show="user.roles.indexOf('AbsPublishingAuthorities') != -1">(PA)</span>
-                            <span ng-show="user.roles.indexOf('abschiac') != -1">(IAC)</span>
-                            <span ng-show="user.roles.indexOf('AbsNationalAuthorizedUser') != -1">(NAU)</span>
-                            <span ng-show="user.roles.indexOf('AbsNationalFocalPoint') != -1">(FP)</span>
-                            <span ng-show="user.roles.indexOf('AbsAdministrator') != -1">(ABS ADMIN)</span>
-                            <span ng-show="user.roles.indexOf('Administrator') != -1">(ADMIN)</span>
+                           <span ng-show="user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) != -1">(PA)</span>
+                            <span ng-show="user.roles.indexOf(getRoleName('abschiac')) != -1">(IAC)</span>
+                            <span ng-show="user.roles.indexOf(getRoleName('AbsNationalAuthorizedUser')) != -1">(NAU)</span>
+                            <span ng-show="user.roles.indexOf(getRoleName('AbsNationalFocalPoint')) != -1">(FP)</span>
+                            <span ng-show="user.roles.indexOf(getRoleName('AbsAdministrator')) != -1">(ABS ADMIN)</span>
+                            <span ng-show="user.roles.indexOf(getRoleName('Administrator')) != -1">(ADMIN)</span>
                         </a>
                         <ul class="dropdown-menu pull-right" role="menu" style="position:relative;top:3px;left:140px;">
                             <li>

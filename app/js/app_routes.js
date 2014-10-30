@@ -1,10 +1,10 @@
 'use strict';
 
-define(['app', 'extended-route-provider','authentication', 'services', 'filters', 'storage', 'workflows'], function (app) {
+define(['app', 'extended-route-provider','authentication', 'services', 'filters', 'storage', 'workflows', 'realm-configuration'], function (app) {
 
      app.value("realm", {value:"ABS"});
     app.value("schemaTypes", [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "resource" ]);
-
+    // console.log(app['realm']);
 	// var resolveUser = ['$rootScope', 'authentication', function($rootScope, authentication) {
 	// 	return authentication.getUser().then(function (user) { $rootScope.user = user; return user; });
 	// }];
@@ -33,7 +33,7 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
 
             when('/find',                        { templateUrl: '/app/views/find.html'                      ,resolveController: true, resolveUser: true}).
              when('/find/simple',                { templateUrl: '/app/views/find/simple.html'     ,resolveController: true, resolveUser: true}).
-                                
+
 
 
             when('/countries',                   { templateUrl: '/app/views/countries.html'                 ,resolveController: true, resolveUser: true}).

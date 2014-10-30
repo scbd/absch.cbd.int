@@ -33,10 +33,10 @@
 
       <div class="alert alert-info" ng-show="user.isAuthenticated">
         <p>You are signed in as: <strong>{{user.name}}</strong>
-          <span ng-show="user.roles.indexOf('AbsPublishingAuthorities') != -1">(PA)</span>
-          <span ng-show="user.roles.indexOf('abschiac') != -1">(IAC)</span>
-          <span ng-show="user.roles.indexOf('AbsNationalAuthorizedUser') != -1">(NAU)</span>
-          <span ng-show="user.roles.indexOf('AbsNationalFocalPoint') != -1">(FP)</span>
+          <span ng-show="user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) != -1">(PA)</span>
+          <span ng-show="user.roles.indexOf(getRoleName(''abschiac')) != -1">(IAC)</span>
+          <span ng-show="user.roles.indexOf(getRoleName(''AbsNationalAuthorizedUser')) != -1">(NAU)</span>
+          <span ng-show="user.roles.indexOf(getRoleName(''AbsNationalFocalPoint')) != -1">(FP)</span>
         </p>
       </div>
 
@@ -45,7 +45,7 @@
           <i class="glyphicon glyphicon-off"></i> SIGN IN
         </a>
       </div>
-    
+
 
     </div> <!-- registerpage-content -->
   </div> <!-- col-xs-9 -->

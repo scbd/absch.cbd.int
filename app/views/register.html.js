@@ -23,17 +23,21 @@ define(['app',
       	'National Entities':{
 		'title': 'National Entities',
 		'formats': ['authority', 'absCheckpoint'],
-		'roles':['AbsPublishingAuthorities', 'abschiac','AbsNationalAuthorizedUser','AbsNationalFocalPoint','AbsAdministrator','Administrator']
+		'roles':[$scope.$root.getRoleName('AbsPublishingAuthorities'), $scope.$root.getRoleName('abschiac'),$scope.$root.getRoleName('AbsNationalAuthorizedUser'),
+				 $scope.$root.getRoleName('AbsNationalFocalPoint'),$scope.$root.getRoleName('AbsAdministrator'),$scope.$root.getRoleName('Administrator')]
 		},
       	'National Records': {
 		'title': 'National Records',
 		'formats': ['measure', 'absPermit', 'absCheckpointCommunique', 'database'],
-		'roles':['AbsPublishingAuthorities', 'abschiac','AbsNationalAuthorizedUser','AbsNationalFocalPoint','AbsAdministrator','Administrator']
+		'roles':[$scope.$root.getRoleName('AbsPublishingAuthorities'), $scope.$root.getRoleName('abschiac'),$scope.$root.getRoleName('AbsNationalAuthorizedUser'),
+				 $scope.$root.getRoleName('AbsNationalFocalPoint'),$scope.$root.getRoleName('AbsAdministrator'),$scope.$root.getRoleName('Administrator')]
 		},
 	  	'Reference Records': {
 		'title': 'Reference Records',
 		'formats': ['resource'],
-		'roles':['AbsPublishingAuthorities', 'abschiac','AbsNationalAuthorizedUser','AbsNationalFocalPoint', 'AbsAdministrator','Administrator', 'User']
+		'roles':[$scope.$root.getRoleName('AbsPublishingAuthorities'), $scope.$root.getRoleName('abschiac'),$scope.$root.getRoleName('AbsNationalAuthorizedUser'),
+				 $scope.$root.getRoleName('AbsNationalFocalPoint'),$scope.$root.getRoleName('AbsAdministrator'),$scope.$root.getRoleName('Administrator'),
+				 $scope.$root.getRoleName('User')]
 		}
     };
 

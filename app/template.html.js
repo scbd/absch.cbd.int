@@ -2,11 +2,30 @@ define(['app',
 	'app/views/directives/login.directive.html.js'], function (app) {
     'use strict';
 
-    app.controller('TemplateController', ['$scope', '$rootScope', '$window', '$location', 'authentication', '$browser', function ($scope, $rootScope, $window, $location, authentication, $browser) {
+    app.controller('TemplateController', ['$scope', '$rootScope', '$window', '$location', 'authentication', '$browser', 'realmConfiguration', 'underscore',
+			function ($scope, $rootScope, $window, $location, authentication, $browse, realmConfiguration, _) {
 
         $scope.controller = "TemplateController";
 
 
+
+		$scope.$root.getRoleName = function(roleName){
+			if(roleName){
+				var realmConfig = _.where(realmConfiguration,{host:$location.$$host});
+				if(realmConfig.length >0){
+					 var role = _.find(realmConfig[0].roles,function(key){
+									return _.keys(key)[0] == roleName;
+								});
+								// console.log(realmConfig, role)
+					 if(role)
+					 	return _.values(role)[0];
+					 else
+						throw roleName + ' role is not configured for realm ' + realmConfig[0].realm + ', please update realm-configuration.js';
+				}
+				else
+					throw 'Realm not configured, please update realm-configuration.js';
+			}
+		}
 
         //============================================================
         //

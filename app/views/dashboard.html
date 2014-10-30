@@ -54,12 +54,12 @@
 
 					<dl class="dl-horizontal" style="padding-top:20px;">
 					  	<dt style="text-align:left">Name</dt><dd><strong>{{user.name}}
-                              <span ng-show="user.roles.indexOf('AbsPublishingAuthorities') != -1">(PA)</span>
-                              <span ng-show="user.roles.indexOf('abschiac') != -1">(IAC)</span>
-                              <span ng-show="user.roles.indexOf('AbsNationalAuthorizedUser') != -1">(NAU)</span>
-                              <span ng-show="user.roles.indexOf('AbsNationalFocalPoint') != -1">(FP)</span>
-                              <span ng-show="user.roles.indexOf('AbsAdministrator') != -1">(ABS ADMIN)</span>
-                              <span ng-show="user.roles.indexOf('Administrator') != -1">(ADMIN)</span></strong>
+                              <span ng-show="user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) != -1">(PA)</span>
+                              <span ng-show="user.roles.indexOf(getRoleName('abschiac')) != -1">(IAC)</span>
+                              <span ng-show="user.roles.indexOf(getRoleName('AbsNationalAuthorizedUser')) != -1">(NAU)</span>
+                              <span ng-show="user.roles.indexOf(getRoleName('AbsNationalFocalPoint')) != -1">(FP)</span>
+                              <span ng-show="user.roles.indexOf(getRoleName('AbsAdministrator')) != -1">(ABS ADMIN)</span>
+                              <span ng-show="user.roles.indexOf(getRoleName('Administrator')) != -1">(ADMIN)</span></strong>
                           </dd>
 					  	   <dt style="text-align:left;white-space:nowrap;">Primary email</dt><dd><strong>{{user.email}}</strong></dd>
                           <dt style="text-align:left;white-space:nowrap;">Country</dt><dd style="text-transform:uppercase;">

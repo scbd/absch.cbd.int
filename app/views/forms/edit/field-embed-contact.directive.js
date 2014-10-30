@@ -383,12 +383,12 @@ app.directive("fieldEmbedContact", [ function () {
 				if($scope.isCNA(entity))
 					return false;
 
-				return	commonjs.isUserInRole('AbsPublishingAuthorities')||
-						commonjs.isUserInRole('AbsNationalAuthorizedUser')||
-						commonjs.isUserInRole('AbsNationalFocalPoint')||
-						//commonjs.isUserInRole('abschiac') ||
-						commonjs.isUserInRole('ABS-CH Administrator') ||
-						commonjs.isUserInRole('Administrator');
+				return	commonjs.isUserInRole($scope.$root.getRoleName('AbsPublishingAuthorities'))||
+						commonjs.isUserInRole($scope.$root.getRoleName('AbsNationalAuthorizedUser'))||
+						commonjs.isUserInRole($scope.$root.getRoleName('AbsNationalFocalPoint'))||
+						//commonjs.isUserInRole($scope.$root.getRoleName('abschiac')) ||
+						commonjs.isUserInRole($scope.$root.getRoleName('AbsAdministrator')) ||
+						commonjs.isUserInRole($scope.$root.getRoleName('Administrator'));
 
 			}
 		}]

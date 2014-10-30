@@ -46,7 +46,9 @@ app.controller("DashboardController",
 
 
 //============================================================
-	$scope.PAroles= ['AbsPublishingAuthorities', 'AbsNationalFocalPoint','AbsAdministrator','Administrator'];
+	$scope.PAroles= [$scope.$root.getRoleName('AbsPublishingAuthorities'), $scope.$root.getRoleName('AbsNationalFocalPoint'),
+					$scope.$root.getRoleName('AbsAdministrator'),$scope.$root.getRoleName('Administrator')];
+	console.log($scope.PAroles);
 	 $scope.compareRoles = function(array1, array2) {
 
 		if(!array1) return false;

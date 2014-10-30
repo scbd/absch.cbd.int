@@ -54,11 +54,11 @@ define(['app'], function (app) {
 
 			if(!config)         config         = {};
 			if(!config.headers) config.headers = {};
-			if($location.$$host != 'absch.cbd.int' && realm.value != "ABS-DEV"){
-				realm.value = "ABS-DEV";
-				config.headers.realm = realm.value;
-			}
-			if(!config.headers.realm) config.headers.realm = realm.value;
+			// if($location.$$host != 'absch.cbd.int' && realm.value != "ABS-DEV"){
+			// 	realm.value = "ABS-DEV";
+			// 	config.headers.realm = realm.value;
+			// }
+			config.headers.realm = realm.value;
 
 			if($browser.cookies().authenticationToken) config.headers.Authorization = "Ticket "+$browser.cookies().authenticationToken;
 			else                                       config.headers.Authorization = undefined;

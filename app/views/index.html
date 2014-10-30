@@ -85,18 +85,18 @@
 
                             </div>
                         </div>
-
+                        blaise fpnjseca {{getRoleName('AbsPublishingAuthorities')}}
                          <div class="row bg-green"  style="padding:30px;" ng-show="user.isAuthenticated" >
                                 <div class="text-center col-xs-10"  >
                                     <h1 class="dropshadow" style="font-size:360%;margin-bottom:0;padding:0;position:relative;top:-10px;"> WELCOME {{user.name}}</h1>
                                     <h2 class="color-grey" style="text-transform:uppercase;padding:0;margin:0;">{{user.government | term}}
 
-                                      <span ng-show="user.roles.indexOf('AbsPublishingAuthorities') != -1"> (PA) </span>
-                                      <span ng-show="user.roles.indexOf('abschiac') != -1">(IAC)</span>
-                                      <span ng-show="user.roles.indexOf('AbsNationalAuthorizedUser') != -1"> (NAU) </span>
-                                      <span ng-show="user.roles.indexOf('AbsNationalFocalPoint') != -1"> (FP) </span>
-                                      <span ng-show="user.roles.indexOf('AbsAdministrator') != -1"> (ABS-ADMIN) </span>
-                                      <span ng-show="user.roles.indexOf('Administrator') != -1"> (CBD-ADMIN) </span>
+                                      <span ng-show="user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) != -1"> (PA) </span>
+                                      <span ng-show="user.roles.indexOf(getRoleName('abschiac')) != -1">(IAC)</span>
+                                      <span ng-show="user.roles.indexOf(getRoleName('AbsNationalAuthorizedUser')) != -1"> (NAU) </span>
+                                      <span ng-show="user.roles.indexOf(getRoleName('AbsNationalFocalPoint')) != -1"> (FP) </span>
+                                      <span ng-show="user.roles.indexOf(getRoleName('AbsAdministrator')) != -1"> (ABS-ADMIN) </span>
+                                      <span ng-show="user.roles.indexOf(getRoleName('Administrator')) != -1"> (CBD-ADMIN) </span>
 
                                     </h2>
                                 </div>

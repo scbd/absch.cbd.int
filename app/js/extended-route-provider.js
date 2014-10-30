@@ -60,17 +60,25 @@ define(['app', 'angular', 'authentication'], function(app, angular) {
             }];
         }
 
+
         //============================================================
         //
         //
         //============================================================
         function resolveController() {
+            // var realmConfigurations =[{'host':'absch.cbd.int', 'realm' : 'ABS'},{'host':'dev.absch.cbd.int', 'realm' : 'ABS-DEV'},{'host':'training-absch.cbd.int', 'realm' : 'ABS-TRAINING'}
+            //                           ,{'host':'localhost', 'realm' : 'ABS-DEV'},{'host':'127.0.0.1', 'realm' : 'ABS-DEV'}]
 
-            return ['$q', '$route', '$filter','realm', '$location', function($q, $route, $filter, realm, $location) {
+            return ['$q', '$route', '$filter','realm', '$location','underscore','realmConfiguration', function($q, $route, $filter, realm, $location, _,realmConfiguration) {
 
                 //change relam if not production
-                if($location.$$host != 'absch.cbd.int' && realm.value != "ABS-DEV"){
-    				realm.value = "ABS-DEV";
+            //    console.log(realmConfiguration)
+
+                if($location.$$host != 'absch.cbd.int'){
+
+                    var realmConfig = _.where(realmConfiguration,{host:$location.$$host});
+                    //console.log(realmConfig)
+    				realm.value = realmConfig[0].realm;
     			}
 
                 var deferred = $q.defer();

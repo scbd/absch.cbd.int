@@ -90,16 +90,16 @@ define(['app'], function(app){
 			}
 
 			this.isIAC = function(){
-				return	this.isUserInRole('abschiac');
+				return	this.isUserInRole($rootScope.getRoleName('abschiac'));
 			}
 
 			this.isAnyOtherRoleThenIAC = function(){
 
-				return	this.isUserInRole('AbsPublishingAuthorities')||
-						this.isUserInRole('AbsNationalAuthorizedUser')||
-						this.isUserInRole('AbsNationalFocalPoint')||
-						this.isUserInRole('ABS-CH Administrator') ||
-						this.isUserInRole('Administrator')
+				return	this.isUserInRole($rootScope.getRoleName('AbsPublishingAuthorities'))||
+						this.isUserInRole($rootScope.getRoleName('AbsNationalAuthorizedUser'))||
+						this.isUserInRole($rootScope.getRoleName('AbsNationalFocalPoint'))||
+						this.isUserInRole($rootScope.getRoleName('AbsAdministrator')) ||
+						this.isUserInRole($rootScope.getRoleName('Administrator'))
 
 			}
 
