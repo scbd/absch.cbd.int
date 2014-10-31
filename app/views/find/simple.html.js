@@ -3,7 +3,30 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
     app.controller("SimpleSearchController", ["$scope", "authHttp","underscore","$q","$filter","$timeout", "$location","realm","$routeParams",
      function ($scope, $http, _, $q,$filter,$timeout, $location, realm, $routeParams) {
 
+    $scope.options  = {
+                      countries		: function() {
+                        return $http.get("/api/v2013/thesaurus/domains/countries/terms", { cache: true }).then(function(o){
+                          var countries = $filter("orderBy")(o.data, "name");
+                          _.each(countries, function(element) {
+                            element.__value = element.name;
+                          });
+                          return countries;
+                        });
+                      }
+                };
 
+    $scope.genericFilter = function($query, items) {
+      var matchedOptions = [];
+      for(var i=0; i!=items.length; ++i)
+        if(items[i].__value.toLowerCase().indexOf($query.toLowerCase()) !== -1)
+          matchedOptions.push(items[i]);
+
+      return matchedOptions;
+    };
+
+    $scope.genericMapping = function(item) {
+      return {identifier: item.identifier};
+    };
     	//*******************************************************
         var queryFacetsParameters = {
             //realm_ss:absch OR realm_ss:ABS)
@@ -176,7 +199,69 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
 
 
 
+        var queryCanceler = null;
 
+        //============================================================
+        //
+        //
+        //============================================================
+    	function query () {
+
+            var schema = [ "focalPoint", "measure"]
+            //, "absCheckpoint", "absCheckpointCommunique", "authority", "meeting", "notification","pressRelease","statement" ,"focalPoint", "database", "resource"
+
+            var q = '(realm_ss:' + realm.value.toLowerCase() + ' ) AND NOT version_s:*';
+
+            // if($scope.querySchema != "*:*" ){
+            //     q += ' AND (' + $scope.querySchema + ')';
+            // }
+            // else
+            // {
+                 q += ' AND (schema_s:' + schema.join(' OR schema_s:') + ')';
+            // }
+            console.log($scope.country )
+            if($scope.country) q += ' AND (government_s:' + $scope.country.identifier + ')';
+
+            var queryParameters = {
+                'q': q,
+                'sort': 'createdDate_dt desc, title_t asc',
+                'fl': 'id,identifier_s,title_t,createdDate_dt,description_t,url_ss,schema_EN_t,date_dt,government_EN_t,schema_s,number_d,aichiTarget_ss,reference_s,sender_s,meeting_ss,recipient_ss,symbol_s,eventCity_EN_t,eventCountry_EN_t,startDate_s,endDate_s,body_s,code_s,meeting_s,group_s,function_t,department_t,organization_t,summary_EN_t,reportType_EN_t,completion_EN_t,jurisdiction_EN_t,development_EN_t,' +
+                        'government_s,publicationYear_is,resourceTypes_CEN_ss,regions_CEN_ss,languages_CEN_ss,absResposibleForAll_b,jurisdiction_CEN_s,geneticResourceTypes_CEN_ss,usage_CEN_ss,keywords_CEN_ss,informAllAuthorities_b,originCountries_CEN_ss,orgperson_s,status_EN_t,type_EN_t,endDate_dt,startDate_dt,amendmentIntent_i,' +
+                        'resourceLinksLanguage_ss,',
+                'wt': 'json',
+                'start': 0,
+                'rows': 100,
+                'cb': new Date().getTime()
+            };
+            if($scope.sortBy)
+              queryParameters.sort = $scope.sortBy + ' desc, ' + queryParameters.sort;
+
+            if (queryCanceler) {
+                console.log('trying to abort pending request...');
+                queryCanceler.resolve(true);
+            }
+
+            queryCanceler = $q.defer();
+
+            $http.get('/api/v2013/index/select', { params: queryParameters, timeout: queryCanceler }).success(function (data) {
+
+                queryCanceler = null;
+
+                 $scope.rawDocs = [];
+                 $scope.rawDocs = data.response.docs;
+                 $scope.documentCount   = data.response.numFound;
+
+                 console.log(data);
+
+            }).error(function (error) { console.log('onerror'); console.log(error); });
+        };
+
+
+        $scope.$watch('country', function(newValue, oldValue){
+            console.log(newValue, oldValue)
+            if(newValue && newValue!=oldValue)
+                query();
+        })
 
     }]);
 // });

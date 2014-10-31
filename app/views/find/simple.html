@@ -65,10 +65,17 @@
 
 			<div class="section-header well" style="background-color:#fff;">
 				<p class="bg-green" style="padding:10px;color:white;"> Find informartion about access....</p>
-
-				please select a country:
+				 <div class="row">
+					<div class="col-xs-3">
+					   please select a country:
+					</div>
+					<div class="col-xs-9">
+						<div width="60%" afc-autocomplete required name="country"  ng-model="country" source="options.countries" filter="genericFilter"
+							 mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
+					</div>
+                </div>
 			</div>
-
+			{{rawDocs}}
 			<div class="section-header">People and institutions to contact</div>
 				list focal points and CNAs.
 			<div class="section-header">ABS Measures related to Access</div>
