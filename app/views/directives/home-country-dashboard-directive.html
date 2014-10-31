@@ -4,7 +4,6 @@
 
 <div class="row" ng-hide="loadingFacets">
 
-
     <div class="row" style="margin-bottom:-22px;">
         <a ng-href="/{{facet[0]== 'RAT' ? 'countries' : 'find'}}?commonFormat={{facet[0]}}" ng-repeat="facet in commonFormatFacets" style="display:inline;" >
             <div class="col-xs-8ths" id="myWell"  >
@@ -12,7 +11,7 @@
 
                 <div class="stats-schema" >
                     <span  ng-show="facet[0]!= 'RAT'">{{facet[0]|lowercase|schemaName}}</span>
-                    <span  ng-show="facet[0]== 'RAT'">Ratifications</span>
+                    <span  ng-show="facet[0]== 'RAT'">Parties to the Nagoya Protocol</span>
                 </div>
 <br>
                 <span class="stats-count" >

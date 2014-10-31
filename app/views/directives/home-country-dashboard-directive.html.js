@@ -118,6 +118,10 @@ define(['app'], function (app) {
 						tempFacets['RAT'] = {"facetCount" : ratificationCount,
 								"id" : getSequence('ratification')};
 
+						tempFacets['focalPoint'] = {"facetCount" : tempFacets['focalPoint'].facetCount,
+								"countryCount" : tempFacets['focalPoint'].countryCount,
+								"id" : 2 };
+
                         $scope.commonFormatFacets = _.sortBy(_.pairs(tempFacets), function(format){ return format[1].id});
                         $scope.loadingFacets = false;
 
@@ -134,20 +138,22 @@ define(['app'], function (app) {
 
 						case  'ratification':
 							return 1;
-						case  'authority':
+						case  'FP':
 							return 2;
-						case  'measure':
+						case  'authority':
 							return 3;
-						case  'abscheckpoint':
+						case  'measure':
 							return 4;
-						case  'abspermit':
+						case  'abscheckpoint':
 							return 5;
-						case  'abscheckpointcommunique':
+						case  'abspermit':
 							return 6;
-						case 'database':
+						case  'abscheckpointcommunique':
 							return 7;
-						case  'resource':
+						case 'database':
 							return 8;
+						case  'resource':
+							return 9;
 					}
 				}
                 //$scope.loadFacets();

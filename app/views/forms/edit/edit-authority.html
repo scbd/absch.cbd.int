@@ -255,13 +255,14 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
             <div view-authority ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></div>
         </div>
 
-        <hr>
-        <div workflow-std-buttons document="getCleanDocument()" languages="document.header.languages" hide-timer="true"/>
 
-        <hr>
+        <hr style="margin-top:20px;">
 
-        <div class="row">
+        <div class="row" style="padding-top:20px;">
             <div class="col-xs-12">
+
+                <div workflow-std-buttons document="getCleanDocument()" languages="document.header.languages" hide-timer="true"/>
+
                 <a ng-click="scrollToTop()" style="padding-top:20px;" class="pull-right">
                     <i class="glyphicon glyphicon-circle-arrow-up"></i> back to top</a>
             </div>

@@ -33,7 +33,7 @@
     <div id="Result">
 
 
-        <div class="row {{document.recordtype}}" id="help-record-type">
+        <div class="row {{document.recordtype}}" id="help-record-type" style="cursor:pointer;" ng-click="displayDetails = !displayDetails;load(document,displayDetails);">
                 <div class="col-xs-12" style="">
 
                     <div class="row" >
@@ -56,7 +56,7 @@
                         <i class="fa" ng-class="{'fa-caret-down':displayDetails, 'fa-caret-right':!displayDetails}"
                         style="font-size:11px;color:#999;position:relative; top:-1px;font-size:14px;"></i>
 
-                        <a ng-click="displayDetails = !displayDetails;load(document,displayDetails);">
+
                           <span class="title" id="help-record-title">{{document.title}} </span>
 
                           <div class="description" ng-hide="displayDetails" >
@@ -73,7 +73,7 @@
                                 {{b | term}} {{$last ? '' : ', '}}
                             </span>
                           </div>
-                        </a>
+
 
                         <div class="details" ng-show="displayDetails" record-loader document="document.data"
                         hide="title;header;libraries" ></div>

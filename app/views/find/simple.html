@@ -34,76 +34,109 @@
 <div ng-controller="SimpleSearchController"  class="container" style="min-height:500px;">
 
 <a href="/find" class="pull-right link"> <i class="fa fa-th"></i> advanced search</a>
-<h1 style="padding-bottom:20px;"><span class="color-blue">Simple Search:</span> What are you looking for?</h1>
+<h1 style="padding-bottom:20px;"><span class="color-blue">Simplified Search:</span> What are you looking for?</h1>
 
 
 	<div class="row row-centered">
 
 		<div class="col-xs-3 well col-centered find-box" ng-click="show='access'" ng-class="{'find-box-active':show=='access'}" >
 			<span class="find-title color-green">Access</span>
-			Information about how to access genetic resources and/or accociated traditional knowledge
+			Information about how to access genetic resources and/or associated traditional knowledge
 		</div>
 
 		<div class="col-xs-3 col-xs-offset-1 well col-centered find-box" ng-click="show='monitoring'" ng-class="{'find-box-active':show=='monitoring'}">
 			<span class="find-title color-blue">Monitoring</span>
-			Information related to monitoring the utilization of genetic resources and/or accociated traditional knowledge.
+			Information related to monitoring the utilization of genetic resources and/or associated traditional knowledge.
 		</div>
 
-		<div class="col-xs-3 col-xs-offset-1 well col-centered find-box">
+		<div class="col-xs-3 col-xs-offset-1 well col-centered find-box"  ng-click="show='reference'" ng-class="{'find-box-active':show=='reference'}">
 			<span class="find-title color-orange">Reference Material</span>
-			Monitor utilization of genetic resources and/or accociated traditional knowledge.
+			Monitor utilization of genetic resources and/or associated traditional knowledge.
 		</div>
 
 	</div>
 
-	<div class="row" ng-show="show=='access'" style="border-top:1px solid #ddd;">
-		<div class="section-header">please select a country <div angucomplete id="ex1" placeholder="Search countries" pause="100"  localdata="countriesforAutocomplete" minlength="1" inputclass="form-control form-control-small"   searchfields="name" selectedObject="selectedCountry" searchStr="countryFilter" titlefield="name"/></div>
 
-			<table class="table">
-				<tr>
-					<th>Name</th>
-					<th>FP</th>
-					<th>CNA</th>
-					<th>MSR</th>
-					<th>CP</th>
-					<th>CPC</th>
-					<th>IRCC</th>
-				</tr>
-				<tr ng-repeat="c in countries">
-					<td>{{c.name.en}}</td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-			</table>
+	<!-- <hr style="margin-top:20px;margin-bottom:20px;border-color:#ddd;" ng-show="show=='access' || show=='monitoring' || show=='reference'"> -->
 
-		<div class="section-header">People and institutions to contact</div>
-			list focal points and CNAs.
-		<div class="section-header">ABS Measures related to Access</div>
 
-			list measures and specific articles about access.
+	<div class="row" ng-show="show=='access'">
+		<div class="col-xs-12">
 
-		<div class="section-header">ABSCH Country Profile</div>
-			link to the CP
-		<div class="section-header">related reference material</div>
+			<div class="section-header well" style="background-color:#fff;">
+				<p class="bg-green" style="padding:10px;color:white;"> Find informartion about access....</p>
 
-			community protocols and information on ILCs and TK
+				please select a country:
+			</div>
 
+			<div class="section-header">People and institutions to contact</div>
+				list focal points and CNAs.
+			<div class="section-header">ABS Measures related to Access</div>
+				list measures and specific articles about access.
+
+			<div class="section-header">ABSCH Country Profile</div>
+				link to the CP
+			<div class="section-header">related reference material</div>
+				community protocols and information on ILCs and TK
+		</div>
 	</div>
 
 
 	<div ng-show="show=='monitoring'">
 		<div class="row">
 
-			<div class="col-xs-6 text-center">
-
-				<div>Enter a unique identifier (UID)</div>
-			 	<div class="input-group text-center" >
+			<!-- <div class="col-xs-4">
+			 	Enter a unique identifier (UID)
+				<div class="input-group text-center">
 			      <input type="text" class="form-control">
 			      <span class="input-group-btn">
-			        <button class="btn btn-default" type="button">Go!</button>
+			        <button class="btn btn-primary" type="button">Go!</button>
 			      </span>
-			    </div><!-- /input-group -->
+			    </div>
+			</div>
+
+			<div class="col-xs-offset-1 col-xs-1" style="margin-top:20px;color:#9d9d9d;font-weight:bold;" >
+				<div class="row-centered" style="text-align:center;line-height:13px;">
+					|<br>|
+					<div style="position:relative;padding:5px 0;">OR</div>
+					|<br>|
+				</div>
+
+			</div> -->
+			<div class="col-xs-12">
+
+				<div class="tab-content well section-header" style="background-color:#fff;" >
+					<p class="bg-blue" style="padding:10px;color:white;"> Find informartion about monitoriing....</p>
+
+					<span >Search by:</span>
+
+					Enter a unique identifier (UID) <input type="text" class="form-control">
+					Select checkpoint:<br>
+					Select source country:<br>
+					Select user country:<br>
+					Find by issuing authority: <br>
+					Find by permit reference number :<br>
+					Find by provider:<br>
+					Find by user(entity to whom PIC was granted):<br>
+					Find by keywords, specimen, taxonomy, :<br>
+					Find by commercial or non commercial use:<br>
+
+					<button class="btn btn-primary" type="button">Go!</button>
+				</div>
+
+			</div>
+
+
+		</div>
+	</div>
+
+
+	<div ng-show="show=='reference'">
+		<div class="row">
+
+			<div class="col-xs-12">
+
+			reference material
 
 			</div>
 
