@@ -1,22 +1,35 @@
 <div ng-controller="TypeDocumentListController" ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart="startTour">
 
 
-  <div class="col-xs-9" style="margin-top:20px;" >
-
+  <div class="well" style="margin-top:20px;background-color:white;" >
 
     <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
 
-    <div class="registerpage-content">
+    <div class="registerpage-content" style="margin-top:30px;">
 
       <div ng-show="msg" class="alert alert-success alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="msg=''">&times;</button>
         <strong>{{msg}}</strong>
       </div>
 
-      <div ng-hide="editing">
-        <!-- <h2 style="border-bottom: 1px solid #333;margin-bottom:5px;">Records</h2> -->
-        <div ng-show="user.isAuthenticated">
-          <register-record-list records="records" schema="{{document_type}}"></register-record-list>
+      <div ng-show="path=='/register/'+type.abbreviation+'/help'">
+        This is the help
+      </div>
+
+      <div ng-show="path=='/register/'+type.abbreviation+'/new'">
+            <div ng-include="'/app/views/forms/edit/edit_authority.html'"></div>
+      </div>
+
+        <div ng-show="path.indexOf('/register/'+type.abbreviation+'/edit') > 0">
+            <div ng-include="'/app/views/forms/edit/edit_authority.html'"></div>
+      </div>
+
+      <div ng-show="path=='/register/'+type.abbreviation">
+        <div ng-hide="editing">
+            <!-- <h2 style="border-bottom: 1px solid #333;margin-bottom:5px;">Records</h2> -->
+            <div ng-show="user.isAuthenticated">
+                <register-record-list records="records" schema="{{document_type}}"></register-record-list>
+            </div>
         </div>
       </div>
 

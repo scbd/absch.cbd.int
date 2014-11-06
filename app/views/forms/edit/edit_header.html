@@ -1,41 +1,56 @@
 
 
 
-  <div class="registerpage-header">
+  <div class="nat-header" ng-class="{'bg-blue': type.abbreviation != 'VLR','bg-orange': type.abbreviation == 'VLR'}" >
+
     <h2>
-      <span class="abbreviation">{{type.abbreviation}}</span>
-      <span class="title">{{type.title}}</span>
-
-      <div class="pull-right" style="font-size:12px;">
-
-
-          <a class="pull-right color-orange fa-11"  ng-click="startIntro()"> <i class="fa fa-youtube-play"></i></a>
-      </div>
-
+     <a class="color-white fa-11" style="position:relative;top:2px;" ng-click="startIntro()"> <i class="fa fa-youtube-play"></i></a>
+      <span class="title dropshadow special-font">{{type.title}} <span style="font-weight:bold;" class="color-black">({{type.abbreviation}})</span></span>
     </h2>
 
-    <div ng-show="toggleHelp">
-      <p class="help1" ng-bind-html="type.help"></p>
 
-      <!-- <div class="panel panel-info" ng-show="type.tips.length > 0">
-        <div class="panel-heading">
-          <h4 class="panel-title">Tips for publishing a {{type.abbreviation}} common format:</h4>
-        </div>
-        <div class="panel-body">
-          <ol>
-            <li ng-repeat="tip in type.tips" ng-bind-html="tip"></li>
-          </ol>
-        </div>
-      </div> -->
-      <a class="pull-right color-orange" ng-show="toggleHelp" ng-click="toggleHelp=!toggleHelp;" style="cursor:pointer;position:relative;top:-10px;"> - less</a>
+    <style>
+    .nav-underline
+    {
+            position:relative;
+    }
 
-    </div>
+    .nav-underline a{
+            color:#ddd;
+            font-size:14px;
+            /*font-family: 'alternategotno3dotregular';*/
+            text-transform:uppercase;
+            text-rendering: optimizeLegibility;
+            /*letter-spacing: 1px;*/
+            text-shadow: 0 1px 2px rgba(0, 0, 0, .6)!important;
+            margin-right:30px;
 
-    <div ng-show="!toggleHelp">
-          <span class="help1" ng-bind-html="type.help | limitTo:116"></span>...
-          <a ng-show="!toggleHelp"class="pull-right" ng-click="toggleHelp=!toggleHelp;" style="cursor:pointer">+ more
-          </a>
-    </div>
+    }
+    .nav-underline > li > a:hover
+    {
+            background-color:transparent!important;
+            border-bottom:5px solid #FFEB3B;
+            margin-bottom:0;
+            padding-bottom:0;
+            color:white;
+    }
+
+    .nav-underline > li > a.active
+    {
+            background-color:transparent!important;
+            border-bottom:5px solid #FFEB3B;
+            margin-bottom:0;
+            padding-bottom:0;
+            color:white;
+    }
+
+    </style>
+
+    <ul class="nav navbar-nav nav-underline">
+        <li><a href="/register/{{type.abbreviation}}"      ng-class="{'active':path==('/register/'+type.abbreviation) || path.indexOf('edit') > 0}"><i class="glyphicon glyphicon-align-justify"></i> Exisiting records</a></li>
+        <li><a href="/register/{{type.abbreviation}}/new"  ng-class="{'active':path==('/register/'+type.abbreviation+'/new')}"><i class="glyphicon glyphicon-plus-sign"></i> Add a new record</a></li>
+        <li><a href="/register/{{type.abbreviation}}/help" ng-class="{'active':path==('/register/'+type.abbreviation+'/help')}"><i class="glyphicon glyphicon-question-sign"></i> Help and information</a></li>
+    </ul>
 
 
 

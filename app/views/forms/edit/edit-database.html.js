@@ -1,11 +1,13 @@
 define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 
-  app.controller("editDatabase", ["$scope", "authHttp", "$filter", "$controller", function ($scope, $http, $filter, $controller) {
+  app.controller("editDatabase", ["$scope", "authHttp", "$filter", "$controller", "$location", function ($scope, $http, $filter, $controller,$location) {
     $controller('editController', {$scope: $scope});
 
     //==================================
     //
     //==================================
+    $scope.path=$location.path();
+
     $scope.getCleanDocument = function(document) {
 
       document = document || $scope.document;

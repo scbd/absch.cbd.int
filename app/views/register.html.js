@@ -20,15 +20,15 @@ define(['app',
 
     //TODO: stop using so many globals =P I should inherit the controller scope or something.
     $rootScope.subheadings = {
-      	'National Entities':{
-		'title': 'National Entities',
-		'formats': ['authority', 'absCheckpoint'],
-		'roles':[$scope.$root.getRoleName('AbsPublishingAuthorities'), $scope.$root.getRoleName('abschiac'),$scope.$root.getRoleName('AbsNationalAuthorizedUser'),
-				 $scope.$root.getRoleName('AbsNationalFocalPoint'),$scope.$root.getRoleName('AbsAdministrator'),$scope.$root.getRoleName('Administrator')]
-		},
+     //  	'National Entities':{
+		// 'title': 'National Entities',
+		// 'formats': ['authority', 'absCheckpoint'],
+		// 'roles':[$scope.$root.getRoleName('AbsPublishingAuthorities'), $scope.$root.getRoleName('abschiac'),$scope.$root.getRoleName('AbsNationalAuthorizedUser'),
+		// 		 $scope.$root.getRoleName('AbsNationalFocalPoint'),$scope.$root.getRoleName('AbsAdministrator'),$scope.$root.getRoleName('Administrator')]
+		// },
       	'National Records': {
 		'title': 'National Records',
-		'formats': ['measure', 'absPermit', 'absCheckpointCommunique', 'database'],
+		'formats': ['authority', 'absCheckpoint', 'measure', 'absPermit', 'absCheckpointCommunique', 'database'],
 		'roles':[$scope.$root.getRoleName('AbsPublishingAuthorities'), $scope.$root.getRoleName('abschiac'),$scope.$root.getRoleName('AbsNationalAuthorizedUser'),
 				 $scope.$root.getRoleName('AbsNationalFocalPoint'),$scope.$root.getRoleName('AbsAdministrator'),$scope.$root.getRoleName('Administrator')]
 		},

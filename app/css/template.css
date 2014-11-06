@@ -147,6 +147,12 @@ font-size: 38px;
 	text-decoration: none;
 }
 
+.special-font{
+    font-family: 'alternategotno3dotregular';
+    text-transform:uppercase;
+    text-rendering: optimizeLegibility;
+}
+
 body{
   min-height:800px;
   font-family: Trebuchet MS, "Helvetica Neue", Helvetica, Arial, sans-serif;

@@ -28,6 +28,8 @@ define(['app',
 
     $scope.type = $rootScope.document_types[$filter("mapSchema")($routeParams.document_type)];
 
+	$scope.path = $location.path();
+
     //intro.js configurations
 	$scope.startTour=false;
 
@@ -62,5 +64,7 @@ define(['app',
     $scope.isFilter = function(filter){
         return	$scope.dashboardFilter == filter || $scope.dashboardFilter == "All";
     }
+
+
   }]);
 });

@@ -1,7 +1,10 @@
 define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 
-  app.controller("editAbsCheckpoint", ["$scope", "authHttp", "$filter", "$q", "$routeParams", "$controller", function ($scope, $http, $filter, $q, $routeParams, $controller) {
+  app.controller("editAbsCheckpoint", ["$scope", "authHttp", "$filter", "$q", "$routeParams", "$controller","$location", function ($scope, $http, $filter, $q, $routeParams, $controller,$location) {
     $controller('editController', {$scope: $scope});
+
+
+    $scope.path = $location.path();
 
     _.extend($scope.options, {
       jurisdictions : function () {

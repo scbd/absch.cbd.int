@@ -224,29 +224,49 @@ border-color: #888;
 }
 
 .registerpage-header{
-	background-color:#333;
-	padding:3px 20px;
-	border-top-left-radius: 4px;
+	/*background-color:#333;*/
+	/*padding:3px 20px;*/
+	/*border-top-left-radius: 4px;
 	border-top-right-radius: 4px;
-	padding-bottom:15px;
+	/*padding-bottom:15px;*/*/
 }
 .registerpage-header .abbreviation{
 	color: #428BCA;
 	font-weight: bold;
 	font-size: 18px;
 }
-.registerpage-header .title{
-	color: #fefefe;
+.title{
 	font-weight: normal;
-	font-family:Tahoma, Trebuchet MS, "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: 18px;
+	font-size: 22px;
+	text-transform:uppercase;
+	color:white;
+	letter-spacing: 1px;
 }
 
+.dash-header{
+	padding:1px 10px 10px 10px;
+	margin:-19px;
+	background-color:#333;
+	position:static;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	margin-bottom:30px;
+}
+.nat-header{
+	padding:1px 10px 41px 10px;
+	margin:-19px;
+	position:static;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	margin-bottom:30px;
+}
+
+
 .registerpage-content{
-	min-height: 800px;
-	padding: 20px;
+	min-height: 780px;
+	/*padding: 20px;
 	background-color:#dedede;
-	margin:0 0 50px 0;
+	margin:0 0 50px 0;*/
 }
 
 .registerpage-content h4{

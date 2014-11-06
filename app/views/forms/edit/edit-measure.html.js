@@ -1,7 +1,10 @@
 define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 
-  app.controller("editMeasure", ["$scope", "authHttp", "$filter", "$q", "Enumerable", "$controller", function ($scope, $http, $filter, $q, Enumerable, $controller) {
+  app.controller("editMeasure", ["$scope", "authHttp", "$filter", "$q", "Enumerable", "$controller", "$location", function ($scope, $http, $filter, $q, Enumerable, $controller, $location) {
     $controller('editController', {$scope: $scope});
+
+
+    $scope.path= $location.path();
 
     _.extend($scope.options, {
       languages		: function() {

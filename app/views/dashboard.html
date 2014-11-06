@@ -1,32 +1,25 @@
 <div ng-controller="DashboardController"
  ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart="startTour">
 
-  <div class="col-xs-9"  style="margin-top:30px;">
+  <div style="margin-top:20px;background-color:white;" class="well">
 
-    <div class="registerpage-header">
-      <h2>
-        <span style="color:#aaa;">DASHBOARD</span>
-        <span class="title">Check the status of your work in the ABSCH</span>
+      <div class="dash-header" >
+          <h3>
+            <span style="color:#aaa;">
+                <a class="color-orange fa-11"  ng-click="startIntro()"> <i class="fa fa-youtube-play"></i></a>
+                DASHBOARD</span>
+                <span class="title">Check the status of your work in the ABSCH</span>
+          </h3>
+      </div>
 
-        <a class="pull-right color-orange fa-11"  ng-click="startIntro()"> <i class="fa fa-youtube-play"></i></a>
-      </h2>
-
-      <p class="help1" ng-show="help">
+    <div class="alert alert-material-lightgrey" >
         The dashboard is a personal working area to follow-up the status of records prepared for their publication in the ABSCH. The content of the dashboard will differ depending on the role assigned in the ABSCH (Publishing Authority (PA) or National Authorized User (NAU)).<br>
         <br>
         In this area you can check whether there are items that require your approval (in the case of the PA) or what is the status of records sent for validation of the PA (in the case of NAUs).
-        <a class="pull-right color-orange"  ng-click="help=!help;" style="cursor:pointer;"> - less</a>
-      </p>
-        <p class="help1" ng-show="!help">
-         <span class=""> The dashboard is where to follow-up the status of records prepared for their publication in the ABSCH...</span>
-        <a class="pull-right" ng-show="!help" ng-click="help=!help;" style="cursor:pointer;"> + more </a>
-      </p>
-
-
-
     </div>
 
-    <div class="registerpage-content">
+
+    <div>
 
       <div ng-show="msg" class="alert alert-success alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="msg=''">&times;</button>
@@ -45,6 +38,7 @@
       <div class="panel panel-default">
   				<div class="panel-body">
 					<h2 style="color:#555;">Welcome to the ABSCH. You are signed in!
+
                         <div class="pull-right text-align:right;" style="padding-left:15px;border-left:3px solid #999;">
                             <div><button class="btn btn-info " ng-click="actionSignOut()">Sign out</button></div>
                             <div style="padding-top:10px;"><a href="#" ng-click="actionProfile()" style="font-size:14px;font-weight:normal;" >update your profile</a></div>
@@ -79,7 +73,7 @@
       <div class="row" id="dashboard_panels">
 
            <div class="col-lg-4" ng-show="compareRoles(user.roles, PAroles)" >
-            <div class="panel" ng-class="{'greyout': !urgentAttentionCount,  'panel-danger': urgentAttentionCount  }">
+            <div class="panel shadow-z-2" ng-class="{'greyout': !urgentAttentionCount,  'panel-danger': urgentAttentionCount  }">
               <div class="panel-heading">
                 <div class="row">
                   <div class="col-xs-4">
@@ -106,7 +100,7 @@
           </div>
 
           <div class="col-lg-4" >
-            <div class="panel" ng-class="{'greyout': !pendingCount,  'panel-warning': pendingCount  }">
+            <div class="panel shadow-z-2" ng-class="{'greyout': !pendingCount,  'panel-warning': pendingCount  }">
               <div class="panel-heading">
                 <div class="row">
                   <div class="col-xs-4">
@@ -133,7 +127,7 @@
           </div>
 
           <div class="col-lg-4">
-            <div class="panel "  ng-class="{'greyout': !completedRequestCount,  'panel-success': completedRequestCount  }">
+            <div class="panel shadow-z-2"  ng-class="{'greyout': !completedRequestCount,  'panel-success': completedRequestCount  }">
               <div class="panel-heading">
                 <div class="row">
                   <div class="col-xs-4">

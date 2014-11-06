@@ -1,9 +1,11 @@
 define(['app', '/app/views/forms/edit/edit.js',
         '/app/views/forms/edit/permit-selection-directive.html.js'], function (app) {
 
-  app.controller("editCheckpointCommunique", ["$scope", "authHttp", "$filter", "$q", "$controller", "IStorage","underscore","Thesaurus","Enumerable",
-   function ($scope, $http, $filter, $q, $controller, storage, _, Thesaurus, Enumerable) {
+  app.controller("editCheckpointCommunique", ["$scope", "authHttp", "$filter", "$q", "$controller", "IStorage","underscore","Thesaurus","Enumerable","$location",
+   function ($scope, $http, $filter, $q, $controller, storage, _, Thesaurus, Enumerable,$location) {
     $controller('editController', {$scope: $scope});
+
+    $scope.path=$location.path();
 
     $scope.checkpointList = [];
     _.extend($scope.options, {
@@ -104,7 +106,7 @@ define(['app', '/app/views/forms/edit/edit.js',
       if(!$scope.isOthers()){
         document.keywordOthers = undefined;
       }
-      
+
       if(document.checkpointSelected){
             document.checkpoint = [];
             document.checkpointSelected.forEach(function(checkpoint){

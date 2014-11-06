@@ -1,9 +1,10 @@
 define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 
-  app.controller("editAbsPermit", ["$scope", "authHttp", "Thesaurus", "guid", "$filter", "$q", "Enumerable", "editFormUtility", "$controller","IStorage",
-   function ($scope, $http, Thesaurus, guid, $filter, $q, Enumerable, editFormUtility, $controller, storage) {
+  app.controller("editAbsPermit", ["$scope", "authHttp", "Thesaurus", "guid", "$filter", "$q", "Enumerable", "editFormUtility", "$controller","IStorage","$location",
+   function ($scope, $http, Thesaurus, guid, $filter, $q, Enumerable, editFormUtility, $controller, storage, $location) {
     $controller('editController', {$scope: $scope});
 
+    $scope.path= $location.path();
 
     _.extend($scope.options, {
       usage		: function () { return $http.get("/api/v2013/thesaurus/domains/A7B77788-8C90-4849-9327-E181E9522F3A/terms",	{ cache: true }).then(function (o) { return o.data; }); },
@@ -21,7 +22,7 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
                                       o.data.Items.forEach(function(permit){
                                         if(permit.identifier != $scope.document.header.identifier){
                                                 var uniqueID = 'ABSCH-' + $filter("schemaShortName")($filter("lowercase")(permit.type)) +
-                                                                $filter("uppercase")(permit.metadata.government) + '-' + permit.documentID;                                            
+                                                                $filter("uppercase")(permit.metadata.government) + '-' + permit.documentID;
                                                 permits.push({"title": permit.title.en + '(' + uniqueID + ')', "identifier": permit.identifier});
                                         }
                                       });

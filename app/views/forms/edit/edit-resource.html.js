@@ -1,7 +1,10 @@
 define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 
-  app.controller("editResource", ["$scope", "authHttp", "$filter", "Thesaurus", "$q", "Enumerable", "$controller", "IStorage",
-                function ($scope, $http, $filter, Thesaurus, $q, Enumerable, $controller, storage) {
+  app.controller("editResource", ["$scope", "authHttp", "$filter", "Thesaurus", "$q", "Enumerable", "$controller", "IStorage", "$location",
+                function ($scope, $http, $filter, Thesaurus, $q, Enumerable, $controller, storage, $location) {
+
+
+    $scope.path=$location.path();
 
     //$scope.organizationsRef = [];
     $controller('editController', {$scope: $scope});

@@ -1,7 +1,9 @@
 define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 
-  app.controller("editAuthority", ["$scope", "authHttp", "$filter", "Thesaurus", "$q", "$controller","Enumerable", function ($scope, $http, $filter, Thesaurus, $q, $controller,Enumerable) {
+  app.controller("editAuthority", ["$scope", "authHttp", "$filter", "Thesaurus", "$q", "$controller","Enumerable", "$location", function ($scope, $http, $filter, Thesaurus, $q, $controller,Enumerable,$location) {
     $controller('editController', {$scope: $scope});
+
+            $scope.path=$location.path();
 
 			_.extend($scope.options, {
 				organizationTypes			: function () {

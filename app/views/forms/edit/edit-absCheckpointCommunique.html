@@ -1,4 +1,4 @@
-﻿<div class="col-xs-9" style="padding-top:20px;" ng-controller="editCheckpointCommunique"
+﻿<div class="well" style="margin-top:20px;" ng-controller="editCheckpointCommunique"
 ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart="startTour">
 
   <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
@@ -151,7 +151,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" name="keywords" caption="Keywords to describe the subject-matter or genetic resource(s) covered by the permit or its equivalent">
@@ -357,14 +357,15 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
             <div class="view-abs-checkpoint-communique" ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></div>
         </div>
 
-        <hr>
-        <div workflow-std-buttons document="getCleanDocument()" languages="document.header.languages" hide-timer="true"/>
+    <hr style="margin-top:20px;">
 
-        <hr>
-
-        <div class="row">
+        <div class="row" style="padding-top:20px;">
             <div class="col-xs-12">
-                <a ng-click="scrollToTop()" style="padding-top:20px;" class="pull-right"><i class="glyphicon glyphicon-circle-arrow-up"></i> back to top</a>
+
+                <div workflow-std-buttons document="getCleanDocument()" languages="document.header.languages" hide-timer="true"/>
+
+                <a ng-click="scrollToTop()" style="padding-top:20px;" class="pull-right">
+                    <i class="glyphicon glyphicon-circle-arrow-up"></i> back to top</a>
             </div>
         </div>
 
