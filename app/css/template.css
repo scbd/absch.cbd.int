@@ -55,6 +55,12 @@
     background-color:#EEE!important;
 
 }
+
+.bg-darkgrey{
+    background-color:#666!important;
+
+}
+
 .bg-texture-green{
     background:#1FA65D url('../img/feature-bkg.png')!important;
     background-image: linear-gradient(to right, rgba(0, 0, 0, .5) 0%, rgba(0, 0, 0, .0001) 100%);

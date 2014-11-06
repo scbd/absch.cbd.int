@@ -244,21 +244,20 @@ border-color: #888;
 }
 
 .dash-header{
-	padding:1px 10px 10px 10px;
+	padding:1px 10px 10px 20px;
 	margin:-19px;
-	background-color:#333;
 	position:static;
 	border-top-left-radius: 2px;
 	border-top-right-radius: 2px;
-	margin-bottom:30px;
+	margin-bottom:20px;
 }
 .nat-header{
-	padding:1px 10px 41px 10px;
+	padding:1px 10px 41px 20px;
 	margin:-19px;
 	position:static;
 	border-top-left-radius: 2px;
 	border-top-right-radius: 2px;
-	margin-bottom:30px;
+	margin-bottom:20px;
 }
 
 
