@@ -10,6 +10,10 @@
 }
 .color-green{
     color:#1FA65D;
+    #5cb85c
+}
+.color-published-green{
+    color:#5cb85c;
 }
 .color-grey{
     color:#555;
@@ -26,6 +30,21 @@
 .color-yellow{
     color:#FFD801;
 }
+
+.bg-yellow{
+    background-color:#FFD801!important;
+    color:#fff;
+}
+
+.highlight{
+    background-color:#FCEBBD!important;
+    color:#000;
+    font-weight:bold;
+
+}
+
+
+
 .bg-orange{
     background-color:#fa6938!important;
     color:#FFF;

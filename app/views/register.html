@@ -10,13 +10,19 @@
     <div id="document_type_links" ng-show="user.isAuthenticated">
         <h1 class="special-font">Register Information</h1>
 
+
+
         <div>
             <a href="/dashboard" role="button" >
             <div  class="well btn-commonformat" ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/dashboard.html'}" style="cursor:pointer;">
 
               <!-- <i class="glyphicon glyphicon-list-alt" style="position:relative;top:2px;"></i> -->
-              <div class="btn-commonformat-national" style="text-transform:uppercase;">Dashboard</div>
+
+
+              <div class="btn-commonformat-national" style="text-transform:uppercase;">
+                  <i class="mdi-action-assignment" style="font-size:16pt;position:relative;top:3px;"></i>&nbsp;Dashboard</div>
               <div style="padding-top:5px;"class="color-grey">Check the status of your work in the ABS-CH</div>
+
 
 
             <hr style="padding-top:5px;"  ng-show="facets('urgentTasks','request')">
@@ -100,7 +106,16 @@
                     </h3>
                       <a ng-repeat="type in heading.formats" ng-href="{{type!='contacts' ? '/register' : ''}}/{{type | mapSchema}}" role="button">
                         <div class="btn-commonformat well" ng-class="{ 'btn-commonformat-selected' : document_type==type ,'btn-commonformat-reference-selected' : document_type=='resource' && document_type==type}">
-                          <div class="btn-commonformat-national" ng-class="{'btn-commonformat-reference':document_types[type].abbreviation=='VLR'}">{{document_types[type].abbreviation}}
+                          <div class="btn-commonformat-national" ng-class="{'btn-commonformat-reference':document_types[type].abbreviation=='VLR'}">
+
+                              <i ng-class="{'mdi-action-account-box':document_types[type].abbreviation=='CNA'}" style="font-size:16pt;position:relative;top:3px;"></i>
+                              <i ng-class="{'mdi-action-verified-user':document_types[type].abbreviation=='CP'}" style="font-size:16pt;position:relative;top:3px;"></i>
+                              <i ng-class="{'mdi-action-stars':document_types[type].abbreviation=='MSR'}" style="font-size:16pt;position:relative;top:3px;"></i>
+                              <i ng-class="{'mdi-action-bookmark':document_types[type].abbreviation=='IRCC'}" style="font-size:16pt;position:relative;top:3px;"></i>
+                              <i ng-class="{'mdi-communication-message':document_types[type].abbreviation=='CPC'}" style="font-size:16pt;position:relative;top:3px;"></i>
+                              <i ng-class="{'mdi-file-folder':document_types[type].abbreviation=='NDB'}" style="font-size:16pt;position:relative;top:3px;"></i>
+                              <i ng-class="{'mdi-editor-insert-drive-file':document_types[type].abbreviation=='VLR'}" style="font-size:16pt;position:relative;top:3px;"></i>
+                              {{document_types[type].abbreviation}}
 
                             <div style="padding-right:10px;position:relative;top:-15px;">
                             <div class="flip pull-right" ng-show="facets(type,'draft') > 0">

@@ -4,8 +4,17 @@
   <div class="nat-header" ng-class="{'bg-blue': type.abbreviation != 'VLR','bg-orange': type.abbreviation == 'VLR'}" >
 
     <h2>
-     <a class="color-white fa-11" style="position:relative;top:2px;" ng-click="startIntro()"> <i class="fa fa-youtube-play"></i></a>
-      <span class="title dropshadow special-font">{{type.title}} <span style="font-weight:bold;" class="color-black">({{type.abbreviation}})</span></span>
+     <a class="color-white fa-11 pull-right" style="margin-right:10px;position:relative;top:2px;" ng-click="startIntro()"> <i class="fa fa-youtube-play"></i></a>
+
+
+          <i ng-class="{'mdi-action-account-box':type.abbreviation=='CNA'}" style="font-size:20pt;position:relative;top:3px;"></i>
+          <i ng-class="{'mdi-action-verified-user':type.abbreviation=='CP'}" style="font-size:20pt;position:relative;top:3px;"></i>
+          <i ng-class="{'mdi-action-stars':type.abbreviation=='MSR'}" style="font-size:20pt;position:relative;top:3px;"></i>
+          <i ng-class="{'mdi-action-bookmark':type.abbreviation=='IRCC'}" style="font-size:20pt;position:relative;top:3px;"></i>
+          <i ng-class="{'mdi-communication-message':type.abbreviation=='CPC'}" style="font-size:20pt;position:relative;top:3px;"></i>
+          <i ng-class="{'mdi-file-folder':type.abbreviation=='NDB'}" style="font-size:20pt;position:relative;top:3px;"></i>
+          <i ng-class="{'mdi-editor-insert-drive-file':type.abbreviation=='VLR'}" style="font-size:20pt;position:relative;top:3px;"></i>
+          <span class="title dropshadow special-font">{{type.title}} <span style="font-weight:bold;" class="color-black">({{type.abbreviation}})</span></span>
     </h2>
 
 
@@ -47,8 +56,8 @@
     </style>
 
     <ul class="nav navbar-nav nav-underline">
-        <li><a href="/register/{{type.abbreviation}}"      ng-class="{'active':path==('/register/'+type.abbreviation) || path.indexOf('edit') > 0}"><i class="glyphicon glyphicon-align-justify"></i> Exisiting records</a></li>
-        <li><a href="/register/{{type.abbreviation}}/new"  ng-class="{'active':path==('/register/'+type.abbreviation+'/new')}"><i class="glyphicon glyphicon-plus-sign"></i> Add a new record</a></li>
+        <li><a href="/register/{{type.abbreviation}}"      ng-class="{'active':path==('/register/'+type.abbreviation)}"><i class="glyphicon glyphicon-align-justify"></i> Exisiting records</a></li>
+        <li><a href="/register/{{type.abbreviation}}/new"  ng-class="{'active':path==('/register/'+type.abbreviation+'/new')|| path.indexOf('edit') > 0}"><i class="glyphicon glyphicon-plus-sign"></i> Add/edit a record</a></li>
         <li><a href="/register/{{type.abbreviation}}/help" ng-class="{'active':path==('/register/'+type.abbreviation+'/help')}"><i class="glyphicon glyphicon-question-sign"></i> Help and information</a></li>
     </ul>
 

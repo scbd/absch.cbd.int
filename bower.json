@@ -30,7 +30,8 @@
     "bootbox": "~4.3.0",
     "jqvmap": "*",
     "textAngular": "~1.2.2",
-    "jvectormap": "~2.0.0"
+    "jvectormap": "~2.0.0",
+    "bootstrap-material-design": "~0.1.5"
   },
   "resolutions": {
     "angular": "1.2.18"

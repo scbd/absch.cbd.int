@@ -49,6 +49,7 @@ app.directive("registerRecordList", ["$timeout", "commonjs","bootbox", "authHttp
 		controller : ["$scope", "$q", "IStorage","$http", "guid", "editFormUtility", "$timeout", function ($scope, $q, storage, $http, guid, editFormUtility, $timeout) {
 
       $scope.orderBy = ['-updatedOn'];
+
       $scope.toggleOrderBy = function(key) {
         if(key == $scope.orderBy[0].substr(1))
           $scope.orderBy = (($scope.orderBy[0].substr(0,1)=='+')?'-':'+') + key;
@@ -233,7 +234,7 @@ app.directive("registerRecordList", ["$timeout", "commonjs","bootbox", "authHttp
 			}
 
 			$scope.isIAC=function(){
-        return	commonjs.isUserInRole('abschiac');
+        		return	commonjs.isUserInRole('abschiac');
 			}
 
 			//============================================================
@@ -274,7 +275,7 @@ app.directive("registerRecordList", ["$timeout", "commonjs","bootbox", "authHttp
 					$scope.$emit("documentDuplicated", draftInfo)
 					//$scope.records.push(draftInfo);
 					$timeout(function(){
-						shake("#record" + draftInfo.identifier);//.effect( "shake" );
+						highlight("#record" + draftInfo.identifier);//.effect( "shake" );
 					},500)
 
 
@@ -295,7 +296,7 @@ app.directive("registerRecordList", ["$timeout", "commonjs","bootbox", "authHttp
 			$scope.$on('shakeUpdatedRecord', function(evt, document){
 				//console.log(document);
 				//$("#record" + document.identifier).toggle('toggleUpdated',1000);
-				shake("#record" + document.identifier);
+				highlight("#record" + document.identifier);
 				//$("#record" + document.identifier).toggle('explode',{},500);
 			});
 
@@ -308,7 +309,19 @@ app.directive("registerRecordList", ["$timeout", "commonjs","bootbox", "authHttp
 			    $(div).animate({ left: 0},interval, function(){
 			    	$(div).css('position','inherit');
 			    });
-			    //
+
+			}
+
+			function highlight(obj){
+				$('html, body').animate({scrollTop:0}, 1000);
+			   $(obj).toggleClass('highlight');
+			   setTimeout(function(){
+			        $(obj).toggle('fade');
+					$(obj).toggleClass('highlight');
+				 	$(obj).toggle('fade');
+			   }, 2000);
+
+
 			}
 		}]
 	};
