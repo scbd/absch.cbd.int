@@ -1,14 +1,14 @@
-<div id="Record" class="record panel panel-default">		
-	<div class="panel-heading"><h4>Press Release</h4></div>
+<div id="Record" class="record panel panel-default">
+	<div class="panel-heading  bg-orange"><h4>Press Release</h4></div>
 	<div class="record-body panel-body">
-		
 
-		<div ng-show="document.symbol_s">
+
+		<!-- <div ng-show="document.symbol_s">
 			<label>Symbol</label>
 			<span class="km-value">
 				{{document.symbol_s}}
 			</span>
-		</div>
+		</div> -->
 
 		<div ng-show="document.date_s">
 			<label>Date</label>
@@ -38,9 +38,9 @@
 			</span>
 		</div>
 		 -->
-<!-- 
+<!--
 		<div ng-show="document.themes_CEN_ss">
-			<label>Themes</label>	
+			<label>Themes</label>
 			<div class="km-value" >
 				<ul class="list">
 					<li ng-repeat="item in document.themes_CEN_ss">{{item |stringToJSON | lstring:locale}}</li>
@@ -49,7 +49,7 @@
 		</div> -->
 
 		<div ng-show="document.thematicAreas_CEN_ss">
-			<label>Thematic Areas</label>	
+			<label>Thematic Areas</label>
 			<div class="km-value" >
 				<ul class="list">
 					<li ng-repeat="item in document.thematicAreas_CEN_ss">{{item |stringToJSON | lstring:locale}}</li>
@@ -58,7 +58,7 @@
 
 		</div>
 
-		
+
 		<div ng-show="document.url_ss">
 			<label>Document</label>
 			<span class="km-value">

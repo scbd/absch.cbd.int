@@ -32,10 +32,10 @@
     <div id="Result">
 
 
-        <div class="{{document.recordtype}}" id="help-record-type" style="cursor:pointer;" ng-click="displayDetails = !displayDetails;load(document,displayDetails);">
+        <div class="{{document.recordtype}}" id="help-record-type" style="cursor:pointer;" >
                 <div class="" style="padding:20px 20px 10px 20px;">
 
-                    <div  >
+                    <div ng-click="displayDetails = !displayDetails;load(document,displayDetails);" >
                         <div style="padding:0px 0 3px 3px; ">
                             <span class="label label-party" id="help-record-country" ng-class="{'label-info':document.isSignatory && !document.isRatified, 'label-primary':document.isRatified, 'label-default':!document.isRatified && !document.isSignatory}">{{document.source}}</span>
                             <span  class="schema">{{document.schema | schemaName}}</span>
@@ -51,16 +51,16 @@
 
                     <div class="row" style="padding:10px;">
                         <div class="col-xs-12">
+                            <div ng-click="displayDetails = !displayDetails;load(document,displayDetails);">
+                                <i class="fa" ng-class="{'fa-caret-down':displayDetails, 'fa-caret-right':!displayDetails}"
+                                style="font-size:11px;color:#999;position:relative; top:-1px;font-size:14px;"></i>
 
-                        <i class="fa" ng-class="{'fa-caret-down':displayDetails, 'fa-caret-right':!displayDetails}"
-                        style="font-size:11px;color:#999;position:relative; top:-1px;font-size:14px;"></i>
 
+                                  <span class="title" id="help-record-title">{{document.title}} </span>
+                              </div>
 
-                          <span class="title" id="help-record-title">{{document.title}} </span>
-
-                          <div class="description" ng-hide="displayDetails" >
+                          <div class="description" ng-hide="displayDetails" ng-click="displayDetails = !displayDetails;load(document,displayDetails);" >
                           {{document.description | truncate:700:' ... more'}}
-
                           </div>
                           <div class="metadetails" ng-hide="displayDetails" >
 
@@ -73,8 +73,8 @@
                             </span>
                           </div>
 
-                            <div class="pull-right" ng-show="displayDetails" style="z-index:100;padding-top:50px;padding-right:20px;cursor:pointer;">
-                                <i class="mdi-action-highlight-remove" style="font-size:20px;" ></i>
+                            <div class="pull-right" ng-show="displayDetails" ng-click="displayDetails = !displayDetails;load(document,displayDetails);" style="z-index:100;padding-top:30px;padding-right:20px;cursor:pointer;">
+                                <i class="glyphicon glyphicon-remove-circle" style="font-size:20px;color:white;" ></i>
                             </div>
                         <div class="details" ng-show="displayDetails" record-loader document="document.data"
                         hide="title;header;libraries" ></div>

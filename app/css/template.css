@@ -55,7 +55,7 @@ background-color:#fff;
 
 .bg-orange{
     background-color:#fa6938!important;
-    color:#FFF;
+    color:white!important;
 }
 .bg-white{
     background-color:#FFF!important;
@@ -71,6 +71,7 @@ background-color:#fff;
 
 .bg-blue{
     background-color:#428bca!important;
+    color:white!important;
 }
 
 .bg-green{
