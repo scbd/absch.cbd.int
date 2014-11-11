@@ -18,8 +18,11 @@
                 <h1 style="padding-bottom:25px;">Search&nbsp;Information <a class="pull-right color-orange fa-11"  ng-click="startIntro()"> <i class="fa fa-youtube-play"></i></a></h1>
 
                 <div class="well">
-                    <a ng-href="#" ng-click="clearFilter()">Clear all filters</a>
-                    <input type="text" ng-model="keyword" placeholder=" Keyword " class="form-control keyword" style="height:24px;">
+
+                    <a ng-href="#" ng-click="clearFilter()" class="btn btn-info btn-xs pull-right " style="margin-bottom:10px;">Clear all filters</a>
+
+                    <input type="text" ng-model="keyword" placeholder=" Keyword " class="form-control keyword" style="height:24px;margin-bottom:10px;">
+
                     <div id="filterCheckboxes">
                         <search-filter-schemas  ng-model='schemas' field='schema_s' query='querySchema'></search-filter-schemas>
                         <search-filter-themes title='Thematic Areas' ng-model='thematicAreas' field='thematicAreas_ss' query='queryTheme'></search-filter-themes>

@@ -240,6 +240,7 @@ console.log(realm);
         //============================================================
         $scope.clearFilter = function(){
 
+            $scope.keyword = "";
             $scope.$broadcast("clearFilter",{});
         }
 
