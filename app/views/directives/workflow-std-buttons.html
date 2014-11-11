@@ -1,60 +1,76 @@
+<div class="row" ng-show="lastSaved && hideTimer=='false'" >
+    <div class="col-xs-12">
+        <div class="pull-right">
+            <span class="special-font color-blue label bg-white-to-red" style="text-transform:uppercase;font-size:14px;" >
+            <span style="position:relative;top:1px;"><i class="glyphicon glyphicon-time" style="position:relative;top:2px;"></i>
+            <span class="color-blue" style="padding:3px;">{{lastSaved}}</span>
+            since you last saved this record.</span></span>
+        </div>
+    </div>
+</div>
+<br>
 <div class="well" style="padding-bottom:0;margin-bottom:20px; background-color:#eee;">
-    <div class="row rowbg" style="margin-bottom:0;">
-        <div class="col-xs-10 colbg">
-            <ul id="progressbar" class="progressbar">
+
+
+
+    <div class="row " style="margin-bottom:0;">
+        <div class="col-xs-10 ">
+            <ul id="progressbar" class="progressbar" >
                 <!-- class="fa fa-database"
                 class="fa fa-eye-slash"class="fa fa-suitcase"class="fa fa-trophy"class="fa fa-suitcase"
             -->
                 <li class="active stepedit" id="stepedit" >
-                    <button type="button" class="btn btn-primary" width="50px" ng-click="tab='edit'"
-                        ng-disabled="loading || security==undefined">Submission</br>form</button>
+                    <button type="button" class="btn btn-primary shadow-z-2" width="50px" ng-click="tab='edit'"
+                        ng-disabled="loading || security==undefined">Submission<br>form</button>
                 </li>
                 <li ng-class="{ active  : tab=='review' }" id="stepreview" class="stepreview">
-                    <button type="button" class="btn btn-primary" width="50px"  ng-click="tab='review'"
-                        ng-disabled="loading || security==undefined">Review</br>form</button>
+                    <button type="button" class="btn btn-primary shadow-z-2" width="50px"  ng-click="tab='review'"
+                        ng-disabled="loading || security==undefined">Review<br>form</button>
                 </li>
         		<li ng-show="security.canSaveDraft" id="stepdraft" class="stepdraft">
-                    <button type="button" class="btn btn-primary" width="50px"  ng-click="tab='draft';saveDraft()"
-                        ng-disabled="loading">Save as</br>draft</button>
+                    <button type="button" class="btn btn-primary shadow-z-2" width="50px"  ng-click="tab='draft';saveDraft()"
+                        ng-disabled="loading">Save as<br>draft</button>
                 </li>
                 <li ng-show="security.canSave" id="steppublish" class="steppublish">
-                    <button type="button" class="btn btn-danger" width="50px"  ng-click="tab='publish';publish()"
-                        ng-disabled="loading">Save and</br>publish</button>
+                    <button type="button" class="btn btn-danger shadow-z-2" width="50px"  ng-click="tab='publish';publish()"
+                        ng-disabled="loading">Save and<br>publish</button>
                 </li>
         		<li id="steppublishRequest" class="steppublishRequest"
                     ng-show="security.canSave!==undefined && (!security.canSave && security.canSaveDraft)">
-                    <button type="button" class="btn btn-danger" ng-href="#" ng-click="tab='publishRequest';publishRequest()"
-                        ng-disabled="loading">Save and request</br> publication</button>
+                    <button type="button" class="btn btn-danger shadow-z-2" ng-href="#" ng-click="tab='publishRequest';publishRequest()"
+                        ng-disabled="loading">Save and request<br> publication</button>
                 </li>
                 <li  id="prg3" class="prg3" ng-show="loading || security==undefined" >
-                    <button class="btn btn-default" style="background-color:#999;">
-                    <span ng-show="security==undefined">Loading access<br> controls</span>
-                    <span ng-show="tab=='review' && loading">Validating</span>
-                    <span ng-show="tab=='draft' && loading">Saving draft</span>
-                    <span ng-show="tab=='publishRequest' && loading">Requesting for <br> publication</span>
-                    <span ng-show="tab=='publish' && loading">Publishing</span>
+                    <button class="btn btn-default shadow-z-2" style="background-color:#999;">
+                    <span  ng-show="security==undefined">Loading access<br> controls</span>
+                    <span  ng-show="tab=='review' && loading">Validating</span>
+                    <span  ng-show="tab=='draft' && loading">Saving draft</span>
+                    <span  ng-show="tab=='publishRequest' && loading">Requesting for <br> publication</span>
+                    <span  ng-show="tab=='publish' && loading">Publishing</span>
                     <i ng-show="loading || security==undefined" class="fa fa-spinner fa-spin">
                     </button>
 
                     </i>
                 </li>
         	</ul>
+
+
+
+
         </div>
         <div class="col-xs-2 colbg pull-right">
 
             <div class="pull-right">
-                <button type="button" class="btn btn-warning" style="margin-bottom:15px" ng-click="close()"
+                <button type="button" class="btn btn-warning" ng-click="close()"
                         ng-disabled="loading"><i class="glyphicon glyphicon-remove"></i> Cancel</button>
-            </div>
-
-            <br><br>
-
-
-            <div class="pull-right">
-                <span km-form-languages ng-model="languages"></span>
+                <br><br>
+                <div km-form-languages ng-model="languages"></div>
             </div>
 
         </div>
+
+
+
     </div>
 <div class="row" style="display:none" id="divShowMessage">
     <div class="col-xs-12">
@@ -67,11 +83,7 @@
 
     </div>
 </div>
-<div class="row" ng-show="lastSaved && hideTimer=='false'" >
-    <div class="col-xs-12 pull-right">
-            <span class="pull-right">{{lastSaved}} since you last saved this record.</span>
-    </div>
-</div>
+
 
     <div id="dialogCancel" class="modal fade" data-backdrop="static">
 		<div class="modal-dialog">

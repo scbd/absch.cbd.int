@@ -52,14 +52,14 @@
 
   #Result .nationalRecord{
 
-  border-left:solid #287fcb 5px;
+  border-left:solid #287fcb 10px;
   /*background-color:#D9EDF7;*/
   background-color:#FFF;
 }
 
 #Result .referenceRecord{
 
-  border-left:solid #FA6938 5px;
+  border-left:solid #FA6938 10px;
   /*background-color:#FCF8E3;*/
   background-color:#FFF;
 }

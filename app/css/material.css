@@ -1,3 +1,548 @@
+
+
+
+.mdi,
+icon {
+  line-height: inherit;
+  vertical-align: bottom;
+}
+.mdi,
+icon,
+.mdi-default,
+icon-default {
+  color: rgba(0, 0, 0, 0.84);
+}
+.mdi-primary,
+icon-primary {
+  color: #4285f4;
+}
+.mdi-success,
+icon-success {
+  color: #0f9d58;
+}
+.mdi-info,
+icon-info {
+  color: #03a9f4;
+}
+.mdi-warning,
+icon-warning {
+  color: #ff5722;
+}
+.mdi-danger,
+icon-danger {
+  color: #f44336;
+}
+.mdi-material-red,
+icon-material-red {
+  color: #f44336;
+}
+.mdi-material-pink,
+icon-material-pink {
+  color: #e91e63;
+}
+.mdi-material-purple,
+icon-material-purple {
+  color: #9c27b0;
+}
+.mdi-material-deeppurple,
+icon-material-deeppurple {
+  color: #673ab7;
+}
+.mdi-material-indigo,
+icon-material-indigo {
+  color: #3f51b5;
+}
+.mdi-material-lightblue,
+icon-material-lightblue {
+  color: #03a9f4;
+}
+.mdi-material-cyan,
+icon-material-cyan {
+  color: #00bcd4;
+}
+.mdi-material-teal,
+icon-material-teal {
+  color: #009688;
+}
+.mdi-material-lightgreen,
+icon-material-lightgreen {
+  color: #8bc34a;
+}
+.mdi-material-lime,
+icon-material-lime {
+  color: #cddc39;
+}
+.mdi-material-lightyellow,
+icon-material-lightyellow {
+  color: #ffeb3b;
+}
+.mdi-material-orange,
+icon-material-orange {
+  color: #ff9800;
+}
+.mdi-material-deeporange,
+icon-material-deeporange {
+  color: #ff5722;
+}
+.mdi-material-grey,
+icon-material-grey {
+  color: #9e9e9e;
+}
+.mdi-material-bluegrey,
+icon-material-bluegrey {
+  color: #607d8b;
+}
+.mdi-material-brown,
+icon-material-brown {
+  color: #795548;
+}
+.mdi-material-lightgrey,
+icon-material-lightgrey {
+  color: #ececec;
+}
+
+
+
+.shadow-z-1 {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+.shadow-z-2 {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+.shadow-z-2-hover {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.28);
+}
+.shadow-z-3 {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+.shadow-z-4 {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+.shadow-z-5 {
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+
+
+
+/*alert*/
+.alert {
+  border: 0px;
+  border-radius: 0;
+}
+.alert a,
+.alert .alert-link {
+  color: #FFFFFF;
+}
+.alert,
+.alert-default {
+  background-color: #ffffff;
+}
+.alert-primary {
+  background-color: #4285f4;
+}
+.alert-success {
+  background-color: #0f9d58;
+}
+.alert-info {
+  background-color: #03a9f4;
+}
+.alert-warning {
+  background-color: #ff5722;
+}
+.alert-danger {
+  background-color: #f44336;
+}
+.alert-material-red {
+  background-color: #f44336;
+}
+.alert-material-pink {
+  background-color: #e91e63;
+}
+.alert-material-purple {
+  background-color: #9c27b0;
+}
+.alert-material-deeppurple {
+  background-color: #673ab7;
+}
+.alert-material-indigo {
+  background-color: #3f51b5;
+}
+.alert-material-lightblue {
+  background-color: #03a9f4;
+}
+.alert-material-cyan {
+  background-color: #00bcd4;
+}
+.alert-material-teal {
+  background-color: #009688;
+}
+.alert-material-lightgreen {
+  background-color: #8bc34a;
+}
+.alert-material-lime {
+  background-color: #cddc39;
+}
+.alert-material-lightyellow {
+  background-color: #ffeb3b;
+}
+.alert-material-orange {
+  background-color: #ff9800;
+}
+.alert-material-deeporange {
+  background-color: #ff5722;
+}
+.alert-material-grey {
+  background-color: #9e9e9e;
+}
+.alert-material-bluegrey {
+  background-color: #607d8b;
+}
+.alert-material-brown {
+  background-color: #795548;
+}
+.alert-material-lightgrey {
+  background-color: #ececec;
+}
+.alert-info,
+.alert-danger,
+.alert-warning,
+.alert-success {
+  color: #FFFFFF;
+}
+.alert-default a,
+.alert-default .alert-link {
+  color: #000000;
+}
+
+/*well*/
+
+
+body .well,
+.container .well,
+.container-fluid .well,
+body .well:not([class^="well well-material-"]),
+.container .well:not([class^="well well-material-"]),
+.container-fluid .well:not([class^="well well-material-"]),
+body .well .form-control,
+.container .well .form-control,
+.container-fluid .well .form-control,
+body .well:not([class^="well well-material-"]) .form-control,
+.container .well:not([class^="well well-material-"]) .form-control,
+.container-fluid .well:not([class^="well well-material-"]) .form-control {
+  color: rgba(0, 0, 0, 0.84);
+}
+body .well .floating-label,
+.container .well .floating-label,
+.container-fluid .well .floating-label,
+body .well:not([class^="well well-material-"]) .floating-label,
+.container .well:not([class^="well well-material-"]) .floating-label,
+.container-fluid .well:not([class^="well well-material-"]) .floating-label {
+  color: #7e7e7e;
+}
+body .well .form-control,
+.container .well .form-control,
+.container-fluid .well .form-control,
+body .well:not([class^="well well-material-"]) .form-control,
+.container .well:not([class^="well well-material-"]) .form-control,
+.container-fluid .well:not([class^="well well-material-"]) .form-control {
+  border-bottom-color: #7e7e7e;
+}
+body .well .form-control::-webkit-input-placeholder,
+.container .well .form-control::-webkit-input-placeholder,
+.container-fluid .well .form-control::-webkit-input-placeholder,
+body .well:not([class^="well well-material-"]) .form-control::-webkit-input-placeholder,
+.container .well:not([class^="well well-material-"]) .form-control::-webkit-input-placeholder,
+.container-fluid .well:not([class^="well well-material-"]) .form-control::-webkit-input-placeholder {
+  color: #7e7e7e;
+}
+body .well .form-control::-moz-placeholder,
+.container .well .form-control::-moz-placeholder,
+.container-fluid .well .form-control::-moz-placeholder,
+body .well:not([class^="well well-material-"]) .form-control::-moz-placeholder,
+.container .well:not([class^="well well-material-"]) .form-control::-moz-placeholder,
+.container-fluid .well:not([class^="well well-material-"]) .form-control::-moz-placeholder {
+  color: #7e7e7e;
+  opacity: 1;
+}
+body .well .form-control:-ms-input-placeholder,
+.container .well .form-control:-ms-input-placeholder,
+.container-fluid .well .form-control:-ms-input-placeholder,
+body .well:not([class^="well well-material-"]) .form-control:-ms-input-placeholder,
+.container .well:not([class^="well well-material-"]) .form-control:-ms-input-placeholder,
+.container-fluid .well:not([class^="well well-material-"]) .form-control:-ms-input-placeholder {
+  color: #7e7e7e;
+}
+body .well .option,
+.container .well .option,
+.container-fluid .well .option,
+body .well:not([class^="well well-material-"]) .option,
+.container .well:not([class^="well well-material-"]) .option,
+.container-fluid .well:not([class^="well well-material-"]) .option,
+body .well .create,
+.container .well .create,
+.container-fluid .well .create,
+body .well:not([class^="well well-material-"]) .create,
+.container .well:not([class^="well well-material-"]) .create,
+.container-fluid .well:not([class^="well well-material-"]) .create {
+  color: rgba(0, 0, 0, 0.84);
+}
+body [class^="well well-material-"],
+.container [class^="well well-material-"],
+.container-fluid [class^="well well-material-"],
+body [class^="well well-material-"] .form-control,
+.container [class^="well well-material-"] .form-control,
+.container-fluid [class^="well well-material-"] .form-control,
+body [class^="well well-material-"] .floating-label,
+.container [class^="well well-material-"] .floating-label,
+.container-fluid [class^="well well-material-"] .floating-label {
+  color: rgba(255, 255, 255, 0.84);
+}
+body [class^="well well-material-"] .form-control,
+.container [class^="well well-material-"] .form-control,
+.container-fluid [class^="well well-material-"] .form-control {
+  border-bottom-color: rgba(255, 255, 255, 0.84);
+}
+body [class^="well well-material-"] .form-control::-webkit-input-placeholder,
+.container [class^="well well-material-"] .form-control::-webkit-input-placeholder,
+.container-fluid [class^="well well-material-"] .form-control::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.84);
+}
+body [class^="well well-material-"] .form-control::-moz-placeholder,
+.container [class^="well well-material-"] .form-control::-moz-placeholder,
+.container-fluid [class^="well well-material-"] .form-control::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.84);
+  opacity: 1;
+}
+body [class^="well well-material-"] .form-control:-ms-input-placeholder,
+.container [class^="well well-material-"] .form-control:-ms-input-placeholder,
+.container-fluid [class^="well well-material-"] .form-control:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.84);
+}
+body [class^="well well-material-"] .option,
+.container [class^="well well-material-"] .option,
+.container-fluid [class^="well well-material-"] .option,
+body [class^="well well-material-"] .create,
+.container [class^="well well-material-"] .create,
+.container-fluid [class^="well well-material-"] .create {
+  color: rgba(0, 0, 0, 0.84);
+}
+body .well,
+.container .well,
+.container-fluid .well,
+body .jumbotron,
+.container .jumbotron,
+.container-fluid .jumbotron {
+  /*background-color: #fff;*/
+  padding: 19px;
+  margin-bottom: 20px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  border-radius: 2px;
+  border: 0;
+}
+body .well p,
+.container .well p,
+.container-fluid .well p,
+body .jumbotron p,
+.container .jumbotron p,
+.container-fluid .jumbotron p {
+  font-weight: 300;
+}
+body .well,
+.container .well,
+.container-fluid .well,
+body .jumbotron,
+.container .jumbotron,
+.container-fluid .jumbotron,
+body .well-default,
+.container .well-default,
+.container-fluid .well-default,
+body .jumbotron-default,
+.container .jumbotron-default,
+.container-fluid .jumbotron-default {
+  /*background-color: #ffffff;*/
+}
+body .well-primary,
+.container .well-primary,
+.container-fluid .well-primary,
+body .jumbotron-primary,
+.container .jumbotron-primary,
+.container-fluid .jumbotron-primary {
+  background-color: #4285f4;
+}
+body .well-success,
+.container .well-success,
+.container-fluid .well-success,
+body .jumbotron-success,
+.container .jumbotron-success,
+.container-fluid .jumbotron-success {
+  background-color: #0f9d58;
+}
+body .well-info,
+.container .well-info,
+.container-fluid .well-info,
+body .jumbotron-info,
+.container .jumbotron-info,
+.container-fluid .jumbotron-info {
+  background-color: #03a9f4;
+}
+body .well-warning,
+.container .well-warning,
+.container-fluid .well-warning,
+body .jumbotron-warning,
+.container .jumbotron-warning,
+.container-fluid .jumbotron-warning {
+  background-color: #ff5722;
+}
+body .well-danger,
+.container .well-danger,
+.container-fluid .well-danger,
+body .jumbotron-danger,
+.container .jumbotron-danger,
+.container-fluid .jumbotron-danger {
+  background-color: #f44336;
+}
+body .well-material-red,
+.container .well-material-red,
+.container-fluid .well-material-red,
+body .jumbotron-material-red,
+.container .jumbotron-material-red,
+.container-fluid .jumbotron-material-red {
+  background-color: #f44336;
+}
+body .well-material-pink,
+.container .well-material-pink,
+.container-fluid .well-material-pink,
+body .jumbotron-material-pink,
+.container .jumbotron-material-pink,
+.container-fluid .jumbotron-material-pink {
+  background-color: #e91e63;
+}
+body .well-material-purple,
+.container .well-material-purple,
+.container-fluid .well-material-purple,
+body .jumbotron-material-purple,
+.container .jumbotron-material-purple,
+.container-fluid .jumbotron-material-purple {
+  background-color: #9c27b0;
+}
+body .well-material-deeppurple,
+.container .well-material-deeppurple,
+.container-fluid .well-material-deeppurple,
+body .jumbotron-material-deeppurple,
+.container .jumbotron-material-deeppurple,
+.container-fluid .jumbotron-material-deeppurple {
+  background-color: #673ab7;
+}
+body .well-material-indigo,
+.container .well-material-indigo,
+.container-fluid .well-material-indigo,
+body .jumbotron-material-indigo,
+.container .jumbotron-material-indigo,
+.container-fluid .jumbotron-material-indigo {
+  background-color: #3f51b5;
+}
+body .well-material-lightblue,
+.container .well-material-lightblue,
+.container-fluid .well-material-lightblue,
+body .jumbotron-material-lightblue,
+.container .jumbotron-material-lightblue,
+.container-fluid .jumbotron-material-lightblue {
+  background-color: #03a9f4;
+}
+body .well-material-cyan,
+.container .well-material-cyan,
+.container-fluid .well-material-cyan,
+body .jumbotron-material-cyan,
+.container .jumbotron-material-cyan,
+.container-fluid .jumbotron-material-cyan {
+  background-color: #00bcd4;
+}
+body .well-material-teal,
+.container .well-material-teal,
+.container-fluid .well-material-teal,
+body .jumbotron-material-teal,
+.container .jumbotron-material-teal,
+.container-fluid .jumbotron-material-teal {
+  background-color: #009688;
+}
+body .well-material-lightgreen,
+.container .well-material-lightgreen,
+.container-fluid .well-material-lightgreen,
+body .jumbotron-material-lightgreen,
+.container .jumbotron-material-lightgreen,
+.container-fluid .jumbotron-material-lightgreen {
+  background-color: #8bc34a;
+}
+body .well-material-lime,
+.container .well-material-lime,
+.container-fluid .well-material-lime,
+body .jumbotron-material-lime,
+.container .jumbotron-material-lime,
+.container-fluid .jumbotron-material-lime {
+  background-color: #cddc39;
+}
+body .well-material-lightyellow,
+.container .well-material-lightyellow,
+.container-fluid .well-material-lightyellow,
+body .jumbotron-material-lightyellow,
+.container .jumbotron-material-lightyellow,
+.container-fluid .jumbotron-material-lightyellow {
+  background-color: #ffeb3b;
+}
+body .well-material-orange,
+.container .well-material-orange,
+.container-fluid .well-material-orange,
+body .jumbotron-material-orange,
+.container .jumbotron-material-orange,
+.container-fluid .jumbotron-material-orange {
+  background-color: #ff9800;
+}
+body .well-material-deeporange,
+.container .well-material-deeporange,
+.container-fluid .well-material-deeporange,
+body .jumbotron-material-deeporange,
+.container .jumbotron-material-deeporange,
+.container-fluid .jumbotron-material-deeporange {
+  background-color: #ff5722;
+}
+body .well-material-grey,
+.container .well-material-grey,
+.container-fluid .well-material-grey,
+body .jumbotron-material-grey,
+.container .jumbotron-material-grey,
+.container-fluid .jumbotron-material-grey {
+  background-color: #9e9e9e;
+}
+body .well-material-bluegrey,
+.container .well-material-bluegrey,
+.container-fluid .well-material-bluegrey,
+body .jumbotron-material-bluegrey,
+.container .jumbotron-material-bluegrey,
+.container-fluid .jumbotron-material-bluegrey {
+  background-color: #607d8b;
+}
+body .well-material-brown,
+.container .well-material-brown,
+.container-fluid .well-material-brown,
+body .jumbotron-material-brown,
+.container .jumbotron-material-brown,
+.container-fluid .jumbotron-material-brown {
+  background-color: #795548;
+}
+body .well-material-lightgrey,
+.container .well-material-lightgrey,
+.container-fluid .well-material-lightgrey,
+body .jumbotron-material-lightgrey,
+.container .jumbotron-material-lightgrey,
+.container-fluid .jumbotron-material-lightgrey {
+  background-color: #ececec;
+}
+
+
+
+
+
 @font-face {
   font-family: 'RobotoDraft';
   font-style: normal;
@@ -2247,544 +2792,4 @@
 }
 .mdi-toggle-radio-button-on:before {
   content: "\e8e4";
-}
-
-
-
-.mdi,
-icon {
-  line-height: inherit;
-  vertical-align: bottom;
-}
-.mdi,
-icon,
-.mdi-default,
-icon-default {
-  color: rgba(0, 0, 0, 0.84);
-}
-.mdi-primary,
-icon-primary {
-  color: #4285f4;
-}
-.mdi-success,
-icon-success {
-  color: #0f9d58;
-}
-.mdi-info,
-icon-info {
-  color: #03a9f4;
-}
-.mdi-warning,
-icon-warning {
-  color: #ff5722;
-}
-.mdi-danger,
-icon-danger {
-  color: #f44336;
-}
-.mdi-material-red,
-icon-material-red {
-  color: #f44336;
-}
-.mdi-material-pink,
-icon-material-pink {
-  color: #e91e63;
-}
-.mdi-material-purple,
-icon-material-purple {
-  color: #9c27b0;
-}
-.mdi-material-deeppurple,
-icon-material-deeppurple {
-  color: #673ab7;
-}
-.mdi-material-indigo,
-icon-material-indigo {
-  color: #3f51b5;
-}
-.mdi-material-lightblue,
-icon-material-lightblue {
-  color: #03a9f4;
-}
-.mdi-material-cyan,
-icon-material-cyan {
-  color: #00bcd4;
-}
-.mdi-material-teal,
-icon-material-teal {
-  color: #009688;
-}
-.mdi-material-lightgreen,
-icon-material-lightgreen {
-  color: #8bc34a;
-}
-.mdi-material-lime,
-icon-material-lime {
-  color: #cddc39;
-}
-.mdi-material-lightyellow,
-icon-material-lightyellow {
-  color: #ffeb3b;
-}
-.mdi-material-orange,
-icon-material-orange {
-  color: #ff9800;
-}
-.mdi-material-deeporange,
-icon-material-deeporange {
-  color: #ff5722;
-}
-.mdi-material-grey,
-icon-material-grey {
-  color: #9e9e9e;
-}
-.mdi-material-bluegrey,
-icon-material-bluegrey {
-  color: #607d8b;
-}
-.mdi-material-brown,
-icon-material-brown {
-  color: #795548;
-}
-.mdi-material-lightgrey,
-icon-material-lightgrey {
-  color: #ececec;
-}
-
-
-
-.shadow-z-1 {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-}
-.shadow-z-2 {
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-}
-.shadow-z-2-hover {
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.28);
-}
-.shadow-z-3 {
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-}
-.shadow-z-4 {
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-}
-.shadow-z-5 {
-  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
-}
-
-
-
-
-/*alert*/
-.alert {
-  border: 0px;
-  border-radius: 0;
-}
-.alert a,
-.alert .alert-link {
-  color: #FFFFFF;
-}
-.alert,
-.alert-default {
-  background-color: #ffffff;
-}
-.alert-primary {
-  background-color: #4285f4;
-}
-.alert-success {
-  background-color: #0f9d58;
-}
-.alert-info {
-  background-color: #03a9f4;
-}
-.alert-warning {
-  background-color: #ff5722;
-}
-.alert-danger {
-  background-color: #f44336;
-}
-.alert-material-red {
-  background-color: #f44336;
-}
-.alert-material-pink {
-  background-color: #e91e63;
-}
-.alert-material-purple {
-  background-color: #9c27b0;
-}
-.alert-material-deeppurple {
-  background-color: #673ab7;
-}
-.alert-material-indigo {
-  background-color: #3f51b5;
-}
-.alert-material-lightblue {
-  background-color: #03a9f4;
-}
-.alert-material-cyan {
-  background-color: #00bcd4;
-}
-.alert-material-teal {
-  background-color: #009688;
-}
-.alert-material-lightgreen {
-  background-color: #8bc34a;
-}
-.alert-material-lime {
-  background-color: #cddc39;
-}
-.alert-material-lightyellow {
-  background-color: #ffeb3b;
-}
-.alert-material-orange {
-  background-color: #ff9800;
-}
-.alert-material-deeporange {
-  background-color: #ff5722;
-}
-.alert-material-grey {
-  background-color: #9e9e9e;
-}
-.alert-material-bluegrey {
-  background-color: #607d8b;
-}
-.alert-material-brown {
-  background-color: #795548;
-}
-.alert-material-lightgrey {
-  background-color: #ececec;
-}
-.alert-info,
-.alert-danger,
-.alert-warning,
-.alert-success {
-  color: #FFFFFF;
-}
-.alert-default a,
-.alert-default .alert-link {
-  color: #000000;
-}
-
-/*well*/
-
-
-body .well,
-.container .well,
-.container-fluid .well,
-body .well:not([class^="well well-material-"]),
-.container .well:not([class^="well well-material-"]),
-.container-fluid .well:not([class^="well well-material-"]),
-body .well .form-control,
-.container .well .form-control,
-.container-fluid .well .form-control,
-body .well:not([class^="well well-material-"]) .form-control,
-.container .well:not([class^="well well-material-"]) .form-control,
-.container-fluid .well:not([class^="well well-material-"]) .form-control {
-  color: rgba(0, 0, 0, 0.84);
-}
-body .well .floating-label,
-.container .well .floating-label,
-.container-fluid .well .floating-label,
-body .well:not([class^="well well-material-"]) .floating-label,
-.container .well:not([class^="well well-material-"]) .floating-label,
-.container-fluid .well:not([class^="well well-material-"]) .floating-label {
-  color: #7e7e7e;
-}
-body .well .form-control,
-.container .well .form-control,
-.container-fluid .well .form-control,
-body .well:not([class^="well well-material-"]) .form-control,
-.container .well:not([class^="well well-material-"]) .form-control,
-.container-fluid .well:not([class^="well well-material-"]) .form-control {
-  border-bottom-color: #7e7e7e;
-}
-body .well .form-control::-webkit-input-placeholder,
-.container .well .form-control::-webkit-input-placeholder,
-.container-fluid .well .form-control::-webkit-input-placeholder,
-body .well:not([class^="well well-material-"]) .form-control::-webkit-input-placeholder,
-.container .well:not([class^="well well-material-"]) .form-control::-webkit-input-placeholder,
-.container-fluid .well:not([class^="well well-material-"]) .form-control::-webkit-input-placeholder {
-  color: #7e7e7e;
-}
-body .well .form-control::-moz-placeholder,
-.container .well .form-control::-moz-placeholder,
-.container-fluid .well .form-control::-moz-placeholder,
-body .well:not([class^="well well-material-"]) .form-control::-moz-placeholder,
-.container .well:not([class^="well well-material-"]) .form-control::-moz-placeholder,
-.container-fluid .well:not([class^="well well-material-"]) .form-control::-moz-placeholder {
-  color: #7e7e7e;
-  opacity: 1;
-}
-body .well .form-control:-ms-input-placeholder,
-.container .well .form-control:-ms-input-placeholder,
-.container-fluid .well .form-control:-ms-input-placeholder,
-body .well:not([class^="well well-material-"]) .form-control:-ms-input-placeholder,
-.container .well:not([class^="well well-material-"]) .form-control:-ms-input-placeholder,
-.container-fluid .well:not([class^="well well-material-"]) .form-control:-ms-input-placeholder {
-  color: #7e7e7e;
-}
-body .well .option,
-.container .well .option,
-.container-fluid .well .option,
-body .well:not([class^="well well-material-"]) .option,
-.container .well:not([class^="well well-material-"]) .option,
-.container-fluid .well:not([class^="well well-material-"]) .option,
-body .well .create,
-.container .well .create,
-.container-fluid .well .create,
-body .well:not([class^="well well-material-"]) .create,
-.container .well:not([class^="well well-material-"]) .create,
-.container-fluid .well:not([class^="well well-material-"]) .create {
-  color: rgba(0, 0, 0, 0.84);
-}
-body [class^="well well-material-"],
-.container [class^="well well-material-"],
-.container-fluid [class^="well well-material-"],
-body [class^="well well-material-"] .form-control,
-.container [class^="well well-material-"] .form-control,
-.container-fluid [class^="well well-material-"] .form-control,
-body [class^="well well-material-"] .floating-label,
-.container [class^="well well-material-"] .floating-label,
-.container-fluid [class^="well well-material-"] .floating-label {
-  color: rgba(255, 255, 255, 0.84);
-}
-body [class^="well well-material-"] .form-control,
-.container [class^="well well-material-"] .form-control,
-.container-fluid [class^="well well-material-"] .form-control {
-  border-bottom-color: rgba(255, 255, 255, 0.84);
-}
-body [class^="well well-material-"] .form-control::-webkit-input-placeholder,
-.container [class^="well well-material-"] .form-control::-webkit-input-placeholder,
-.container-fluid [class^="well well-material-"] .form-control::-webkit-input-placeholder {
-  color: rgba(255, 255, 255, 0.84);
-}
-body [class^="well well-material-"] .form-control::-moz-placeholder,
-.container [class^="well well-material-"] .form-control::-moz-placeholder,
-.container-fluid [class^="well well-material-"] .form-control::-moz-placeholder {
-  color: rgba(255, 255, 255, 0.84);
-  opacity: 1;
-}
-body [class^="well well-material-"] .form-control:-ms-input-placeholder,
-.container [class^="well well-material-"] .form-control:-ms-input-placeholder,
-.container-fluid [class^="well well-material-"] .form-control:-ms-input-placeholder {
-  color: rgba(255, 255, 255, 0.84);
-}
-body [class^="well well-material-"] .option,
-.container [class^="well well-material-"] .option,
-.container-fluid [class^="well well-material-"] .option,
-body [class^="well well-material-"] .create,
-.container [class^="well well-material-"] .create,
-.container-fluid [class^="well well-material-"] .create {
-  color: rgba(0, 0, 0, 0.84);
-}
-body .well,
-.container .well,
-.container-fluid .well,
-body .jumbotron,
-.container .jumbotron,
-.container-fluid .jumbotron {
-  /*background-color: #fff;*/
-  padding: 19px;
-  margin-bottom: 20px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  border-radius: 2px;
-  border: 0;
-}
-body .well p,
-.container .well p,
-.container-fluid .well p,
-body .jumbotron p,
-.container .jumbotron p,
-.container-fluid .jumbotron p {
-  font-weight: 300;
-}
-body .well,
-.container .well,
-.container-fluid .well,
-body .jumbotron,
-.container .jumbotron,
-.container-fluid .jumbotron,
-body .well-default,
-.container .well-default,
-.container-fluid .well-default,
-body .jumbotron-default,
-.container .jumbotron-default,
-.container-fluid .jumbotron-default {
-  /*background-color: #ffffff;*/
-}
-body .well-primary,
-.container .well-primary,
-.container-fluid .well-primary,
-body .jumbotron-primary,
-.container .jumbotron-primary,
-.container-fluid .jumbotron-primary {
-  background-color: #4285f4;
-}
-body .well-success,
-.container .well-success,
-.container-fluid .well-success,
-body .jumbotron-success,
-.container .jumbotron-success,
-.container-fluid .jumbotron-success {
-  background-color: #0f9d58;
-}
-body .well-info,
-.container .well-info,
-.container-fluid .well-info,
-body .jumbotron-info,
-.container .jumbotron-info,
-.container-fluid .jumbotron-info {
-  background-color: #03a9f4;
-}
-body .well-warning,
-.container .well-warning,
-.container-fluid .well-warning,
-body .jumbotron-warning,
-.container .jumbotron-warning,
-.container-fluid .jumbotron-warning {
-  background-color: #ff5722;
-}
-body .well-danger,
-.container .well-danger,
-.container-fluid .well-danger,
-body .jumbotron-danger,
-.container .jumbotron-danger,
-.container-fluid .jumbotron-danger {
-  background-color: #f44336;
-}
-body .well-material-red,
-.container .well-material-red,
-.container-fluid .well-material-red,
-body .jumbotron-material-red,
-.container .jumbotron-material-red,
-.container-fluid .jumbotron-material-red {
-  background-color: #f44336;
-}
-body .well-material-pink,
-.container .well-material-pink,
-.container-fluid .well-material-pink,
-body .jumbotron-material-pink,
-.container .jumbotron-material-pink,
-.container-fluid .jumbotron-material-pink {
-  background-color: #e91e63;
-}
-body .well-material-purple,
-.container .well-material-purple,
-.container-fluid .well-material-purple,
-body .jumbotron-material-purple,
-.container .jumbotron-material-purple,
-.container-fluid .jumbotron-material-purple {
-  background-color: #9c27b0;
-}
-body .well-material-deeppurple,
-.container .well-material-deeppurple,
-.container-fluid .well-material-deeppurple,
-body .jumbotron-material-deeppurple,
-.container .jumbotron-material-deeppurple,
-.container-fluid .jumbotron-material-deeppurple {
-  background-color: #673ab7;
-}
-body .well-material-indigo,
-.container .well-material-indigo,
-.container-fluid .well-material-indigo,
-body .jumbotron-material-indigo,
-.container .jumbotron-material-indigo,
-.container-fluid .jumbotron-material-indigo {
-  background-color: #3f51b5;
-}
-body .well-material-lightblue,
-.container .well-material-lightblue,
-.container-fluid .well-material-lightblue,
-body .jumbotron-material-lightblue,
-.container .jumbotron-material-lightblue,
-.container-fluid .jumbotron-material-lightblue {
-  background-color: #03a9f4;
-}
-body .well-material-cyan,
-.container .well-material-cyan,
-.container-fluid .well-material-cyan,
-body .jumbotron-material-cyan,
-.container .jumbotron-material-cyan,
-.container-fluid .jumbotron-material-cyan {
-  background-color: #00bcd4;
-}
-body .well-material-teal,
-.container .well-material-teal,
-.container-fluid .well-material-teal,
-body .jumbotron-material-teal,
-.container .jumbotron-material-teal,
-.container-fluid .jumbotron-material-teal {
-  background-color: #009688;
-}
-body .well-material-lightgreen,
-.container .well-material-lightgreen,
-.container-fluid .well-material-lightgreen,
-body .jumbotron-material-lightgreen,
-.container .jumbotron-material-lightgreen,
-.container-fluid .jumbotron-material-lightgreen {
-  background-color: #8bc34a;
-}
-body .well-material-lime,
-.container .well-material-lime,
-.container-fluid .well-material-lime,
-body .jumbotron-material-lime,
-.container .jumbotron-material-lime,
-.container-fluid .jumbotron-material-lime {
-  background-color: #cddc39;
-}
-body .well-material-lightyellow,
-.container .well-material-lightyellow,
-.container-fluid .well-material-lightyellow,
-body .jumbotron-material-lightyellow,
-.container .jumbotron-material-lightyellow,
-.container-fluid .jumbotron-material-lightyellow {
-  background-color: #ffeb3b;
-}
-body .well-material-orange,
-.container .well-material-orange,
-.container-fluid .well-material-orange,
-body .jumbotron-material-orange,
-.container .jumbotron-material-orange,
-.container-fluid .jumbotron-material-orange {
-  background-color: #ff9800;
-}
-body .well-material-deeporange,
-.container .well-material-deeporange,
-.container-fluid .well-material-deeporange,
-body .jumbotron-material-deeporange,
-.container .jumbotron-material-deeporange,
-.container-fluid .jumbotron-material-deeporange {
-  background-color: #ff5722;
-}
-body .well-material-grey,
-.container .well-material-grey,
-.container-fluid .well-material-grey,
-body .jumbotron-material-grey,
-.container .jumbotron-material-grey,
-.container-fluid .jumbotron-material-grey {
-  background-color: #9e9e9e;
-}
-body .well-material-bluegrey,
-.container .well-material-bluegrey,
-.container-fluid .well-material-bluegrey,
-body .jumbotron-material-bluegrey,
-.container .jumbotron-material-bluegrey,
-.container-fluid .jumbotron-material-bluegrey {
-  background-color: #607d8b;
-}
-body .well-material-brown,
-.container .well-material-brown,
-.container-fluid .well-material-brown,
-body .jumbotron-material-brown,
-.container .jumbotron-material-brown,
-.container-fluid .jumbotron-material-brown {
-  background-color: #795548;
-}
-body .well-material-lightgrey,
-.container .well-material-lightgrey,
-.container-fluid .well-material-lightgrey,
-body .jumbotron-material-lightgrey,
-.container .jumbotron-material-lightgrey,
-.container-fluid .jumbotron-material-lightgrey {
-  background-color: #ececec;
 }

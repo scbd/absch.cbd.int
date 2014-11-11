@@ -31,6 +31,14 @@
     color:#FFD801;
 }
 
+.bg-white-to-red{
+background-color:#fff;
+    -webkit-transition: #C7532C 0.4s ease;
+    -moz-transition: #C7532C 0.4s ease;
+    -o-transition: #C7532C 0.4s ease;
+    transition: #C7532C 0.4s ease;
+}
+
 .bg-yellow{
     background-color:#FFD801!important;
     color:#fff;
@@ -185,6 +193,7 @@ body{
   font-size:14px;
 background-color:#eee;
 color:#555;
+position:relative;
 }
 
 h4, h5, h6 {

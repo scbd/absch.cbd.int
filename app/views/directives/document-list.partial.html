@@ -27,16 +27,15 @@
   </ul>
   <div class="clearfix"></div>
   <br>
-  <div ng-repeat="document in transformedDocuments | filter:advanceFilter | filter:filterCategory " style="
-    padding:10px 0 10px 0;">
+  <div ng-repeat="document in transformedDocuments | filter:advanceFilter | filter:filterCategory " style="border:1px solid #ddd;">
      <!-- {{document}} -->
     <div id="Result">
 
 
-        <div class="row {{document.recordtype}}" id="help-record-type" style="cursor:pointer;" ng-click="displayDetails = !displayDetails;load(document,displayDetails);">
-                <div class="col-xs-12" style="">
+        <div class="{{document.recordtype}}" id="help-record-type" style="cursor:pointer;" ng-click="displayDetails = !displayDetails;load(document,displayDetails);">
+                <div class="" style="padding:20px 20px 10px 20px;">
 
-                    <div class="row" >
+                    <div  >
                         <div style="padding:0px 0 3px 3px; ">
                             <span class="label label-party" id="help-record-country" ng-class="{'label-info':document.isSignatory && !document.isRatified, 'label-primary':document.isRatified, 'label-default':!document.isRatified && !document.isSignatory}">{{document.source}}</span>
                             <span  class="schema">{{document.schema | schemaName}}</span>
@@ -74,7 +73,9 @@
                             </span>
                           </div>
 
-
+                            <div class="pull-right" ng-show="displayDetails" style="z-index:100;padding-top:50px;padding-right:20px;cursor:pointer;">
+                                <i class="mdi-action-highlight-remove" style="font-size:20px;" ></i>
+                            </div>
                         <div class="details" ng-show="displayDetails" record-loader document="document.data"
                         hide="title;header;libraries" ></div>
 
@@ -83,8 +84,6 @@
 
                 </div><!--  end result col -->
             </div> <!-- end row -->
-
-
 
 
 
