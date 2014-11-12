@@ -1,14 +1,14 @@
-<div id="Record" class="record panel panel-default">		
-	<div class="panel-heading"><h4>Statement</h4></div>
+<div id="Record" class="record panel panel-default">
+	<div class="panel-heading  bg-orange"><h4>Statement</h4></div>
 	<div class="record-body panel-body">
-		
 
-		<div ng-show="document.symbol_s">
+
+		<!-- <div ng-show="document.symbol_s">
 			<label>Symbol</label>
 			<span class="km-value">
 				{{document.symbol_s}}
 			</span>
-		</div>
+		</div> -->
 
 		<div ng-show="document.date_s">
 			<label>Date</label>
@@ -37,10 +37,10 @@
 				{{document.text_EN_txt}}
 			</span>
 		</div> -->
-		
+
 
 		<div ng-show="document.themes_CEN_ss">
-			<label>Themes</label>	
+			<label>Themes</label>
 			<div class="km-value" >
 				<ul class="list">
 					<li ng-repeat="item in document.themes_CEN_ss">{{item |stringToJSON | lstring:locale}}</li>
@@ -49,7 +49,7 @@
 		</div>
 
 		<div ng-show="document.thematicAreas_CEN_ss">
-			<label>Thematic Areas</label>	
+			<label>Thematic Areas</label>
 			<div class="km-value" >
 				<ul class="list">
 					<li ng-repeat="item in document.thematicAreas_CEN_ss">{{item |stringToJSON | lstring:locale}}</li>
@@ -57,13 +57,13 @@
 			</div>
 		</div>
 
-		
+
 		<div ng-show="document.url_ss">
 			<label>Document Link</label>
 			<span class="km-value">
 				<a ng-href="http://www.cbd.int/doc/speech/{{document.date_s| formatDate:'YYYY'}}/{{document.url_ss | lstring:locale}}" target="_">http://www.cbd.int/doc/speech/{{document.date_s| formatDate:'YYYY'}}/{{document.url_ss | lstring:locale}}</a>
 			</span>
-		</div>		
+		</div>
 	</div>
 	<div document-metadata  class="panel-footer"></div>
 </div>

@@ -256,6 +256,8 @@ console.log(realm);
             refreshTimeout = $timeout(function () { query(); }, 200);
         }
 
+        
+
 
         $scope.$watch('currentPage',     refresh);
         $scope.$watch('querySchema',     function() { $scope.currentPage=0; refresh(); });

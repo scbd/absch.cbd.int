@@ -5,6 +5,7 @@
 #search_controls.affix-bottom {
     position: absolute;
 }
+
 </style>
 
 <div ng-controller="FindController" ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart="startTour">
@@ -15,14 +16,24 @@
         <!-- <a href="/find/simple" class="pull-right link"> <i class="fa fa-th-large"></i> simple search</a> -->
             <div class="col-xs-3" id="search_controls" >
 
-                <h1 style="margin-bottom:25px;">
+                <h1 style="padding-bottom:34px;">
                     <a class="color-orange fa-11"  ng-click="startIntro()"> <i class="fa fa-youtube-play"></i></a>
                     <span class="special-font">Search&nbsp;Information</span>
                 </h1>
 
                 <div class="well">
+                    <div style="font-size:16;font-weight:bold;">Party status</div>
+                    <span class="label label-primary">&nbsp;</span> Party to the Nagoya Protocol <br>
+                        <span class="label label-info">&nbsp;</span> Signatory to the Nagoya Protocol<br>
+                            <span class="label label-default">&nbsp;</span> Non-Party
 
-                    <a ng-href="#" ng-click="clearFilter()" class="btn btn-info btn-xs pull-right " style="text-transform:uppercase;margin-bottom:10px;">Clear all filters</a>
+                </div>
+
+
+
+                <div class="well">
+
+                    <strong>SEARCH FILTERS</strong> <a ng-href="#" ng-click="clearFilter()" class="btn btn-info btn-xs pull-right " style="text-transform:uppercase;margin-bottom:10px;">Clear all filters</a>
 
                     <input type="text" ng-model="keyword" placeholder=" Keyword " class="form-control keyword" style="height:24px;margin-bottom:10px;">
 
@@ -54,8 +65,8 @@
 $(document).ready(function(){
     $("#search_controls").affix({
         offset: {
-            top: 140,
-            bottom:600
+            top: 100,
+            bottom:458
         }
     });
 

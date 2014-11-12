@@ -18,12 +18,12 @@ require('app').directive('kmNotes', ["$http", "$filter", function ($http, $filte
         link: function ($scope, $element, attrs, ngModelController) {
             $scope.timestamp = Date.now();
             $scope.skipLoad = false;
-            $scope.texts = [];            
+            $scope.texts = [];
             $scope.$watch('binding', $scope.load);
             $scope.$watch('binding', function () {
                 ngModelController.$setViewValue($scope.binding);
             });
-           
+
         },
         controller: ["$scope", function ($scope) {
             //==============================
@@ -95,7 +95,7 @@ require('app').directive('kmNotes', ["$http", "$filter", function ($http, $filte
 //
 //
 //============================================================
-require('app').directive('kmTextboxMl', function ($http) 
+require('app').directive('kmTextboxMl', function ($http)
 {
 	return {
 		restrict: 'EAC',
@@ -111,7 +111,7 @@ require('app').directive('kmTextboxMl', function ($http)
 			required   : "@",
 			ngChange   : "&"
 		},
-		link: function ($scope, element, attrs, ngModelController) 
+		link: function ($scope, element, attrs, ngModelController)
 		{
 			$scope.text = {}
 			$scope.$watch('locales', $scope.watchLocales);
@@ -121,12 +121,12 @@ require('app').directive('kmTextboxMl', function ($http)
 			});
 
 		},
-		controller : ["$scope", function ($scope) 
+		controller : ["$scope", function ($scope)
 		{
 			//==============================
 			//Remove value of not selected languages/empty languages
 			//==============================
-			$scope.watchLocales = function() 
+			$scope.watchLocales = function()
 			{
 				var oLocales = $scope.locales || [];
 				var oBinding = $scope.binding || {};
@@ -139,7 +139,7 @@ require('app').directive('kmTextboxMl', function ($http)
 			//==============================
 			//Remove value of not selected languages/empty languages
 			//==============================
-			$scope.watchBinding = function() 
+			$scope.watchBinding = function()
 			{
 				var oLocales = $scope.locales || [];
 				var oBinding = $scope.binding || {};
@@ -152,7 +152,7 @@ require('app').directive('kmTextboxMl', function ($http)
 			//==============================
 			//Remove value of not selected languages/empty languages
 			//==============================
-			$scope.onchange = function() 
+			$scope.onchange = function()
 			{
 				var oLocales    = $scope.locales || [];
 				var oText       = $scope.text    || {};
@@ -161,7 +161,7 @@ require('app').directive('kmTextboxMl', function ($http)
 				angular.forEach(oLocales, function(locale, i)
 				{
 					if($.trim(oText[locale])!="")
-						oNewBinding[locale] = oText[locale]; 
+						oNewBinding[locale] = oText[locale];
 				});
 
 				$scope.binding = !$.isEmptyObject(oNewBinding) ? oNewBinding : undefined;
@@ -173,7 +173,7 @@ require('app').directive('kmTextboxMl', function ($http)
 			//==============================
 			$scope.isRequired = function()
 			{
-				return $scope.required!=undefined 
+				return $scope.required!=undefined
 					&& $.isEmptyObject($scope.binding);
 			}
 
@@ -206,7 +206,7 @@ require('app').directive('kmInputtextList', function ($http)
 			type        : "@type",
 			required    : "@"
 		},
-		link: function ($scope, $element, attrs, ngModelController) 
+		link: function ($scope, $element, attrs, ngModelController)
 		{
 			$scope.skipLoad = false;
 			$scope.texts    = [];
@@ -215,12 +215,12 @@ require('app').directive('kmInputtextList', function ($http)
 				ngModelController.$setViewValue($scope.binding);
 			});
 		},
-		controller: ["$scope", function ($scope) 
+		controller: ["$scope", function ($scope)
 		{
 			//==============================
 			//
 			//==============================
-			$scope.load = function () 
+			$scope.load = function ()
 			{
 				if($scope.skipLoad)
 				{
@@ -237,11 +237,11 @@ require('app').directive('kmInputtextList', function ($http)
 					$scope.texts.push({value : text});
 				});
 			};
-			
+
 			//==============================
 			//
 			//==============================
-			$scope.remove = function (index) 
+			$scope.remove = function (index)
 			{
 				$scope.texts.splice(index, 1);
 
@@ -251,7 +251,7 @@ require('app').directive('kmInputtextList', function ($http)
 			//==============================
 			//
 			//==============================
-			$scope.save = function () 
+			$scope.save = function ()
 			{
 				var oNewBinding = [];
 				var oText       = $scope.texts;
@@ -269,12 +269,12 @@ require('app').directive('kmInputtextList', function ($http)
 			//==============================
 			//
 			//==============================
-			$scope.getTexts = function () 
+			$scope.getTexts = function ()
 			{
 				if($scope.texts.length==0)
 					$scope.texts.push({value : ""});
 
-				var sLastValue = $scope.texts[$scope.texts.length-1].value; 
+				var sLastValue = $scope.texts[$scope.texts.length-1].value;
 
 				//NOTE: IE can set value to 'undefined' for a moment
 				if(sLastValue && sLastValue!="")
@@ -288,7 +288,7 @@ require('app').directive('kmInputtextList', function ($http)
 			//==============================
 			$scope.isRequired = function()
 			{
-				return $scope.required!=undefined 
+				return $scope.required!=undefined
 					&& $.isEmptyObject($scope.binding);
 			}
 		}]
@@ -299,7 +299,7 @@ require('app').directive('kmInputtextList', function ($http)
 //
 //
 //============================================================
-require('app').directive('kmTerms', function ($http) 
+require('app').directive('kmTerms', function ($http)
 {
 	return {
 		restrict: 'EAC',
@@ -308,18 +308,18 @@ require('app').directive('kmTerms', function ($http)
 		scope: {
 			binding : '=ngModel',
 		},
-		link: function ($scope, element, attrs, controller) 
+		link: function ($scope, element, attrs, controller)
 		{
 			$scope.termsX = [];
 			$scope.terms = [];
 			$scope.$watch('binding', $scope.load);
 		},
-		controller: ["$scope", "$q", "underscore", function ($scope, $q, _) 
+		controller: ["$scope", "$q", "underscore", function ($scope, $q, _)
 		{
 			//==============================
 			//
 			//==============================
-			$scope.load = function() 
+			$scope.load = function()
 			{
 				$scope.terms = [];
 				var oBinding = null;
@@ -380,7 +380,7 @@ require('app').directive('kmTermCheck', function ($http) {
 			required    : "@",
 			layout      : "@"
 		},
-		link: function ($scope, $element, $attr, ngModelController) 
+		link: function ($scope, $element, $attr, ngModelController)
 		{
 			$scope.identifiers = null;
 			$scope.terms       = null;
@@ -399,7 +399,7 @@ require('app').directive('kmTermCheck', function ($http) {
 				$element.addClass("list-unstyled");
 
 		},
-		controller: ["$scope", "$q", "Thesaurus", "Enumerable", '$timeout', function ($scope, $q, thesaurus, Enumerable, $timeout) 
+		controller: ["$scope", "$q", "Thesaurus", "Enumerable", '$timeout', function ($scope, $q, thesaurus, Enumerable, $timeout)
 		{
 			//==============================
 			//
@@ -413,7 +413,7 @@ require('app').directive('kmTermCheck', function ($http) {
 				if(qData==undefined)
 					$timeout($scope.init, 250); // MEGA UGLY PATCH
 
-				$q.when(qData, 
+				$q.when(qData,
 					function(data) { // on success
 						$scope.__loading = false;
 						$scope.terms     = data;
@@ -426,7 +426,7 @@ require('app').directive('kmTermCheck', function ($http) {
 			//==============================
 			//
 			//==============================
-			$scope.load = function() 
+			$scope.load = function()
 			{
 				if (!$scope.terms) // Not initialized
 					return;
@@ -456,14 +456,14 @@ require('app').directive('kmTermCheck', function ($http) {
 			//==============================
 			//
 			//==============================
-			$scope.save = function() 
+			$scope.save = function()
 			{
 				if(!$scope.identifiers)
 					return;
 
 				var oNewBinding = [];
 
-				angular.forEach($scope.terms, function(term, i) 
+				angular.forEach($scope.terms, function(term, i)
 				{
 					if(term==undefined) return //IE8 BUG
 
@@ -487,7 +487,7 @@ require('app').directive('kmTermCheck', function ($http) {
 			//==============================
 			$scope.isRequired = function()
 			{
-				return $scope.required!=undefined 
+				return $scope.required!=undefined
 					&& $.isEmptyObject($scope.binding);
 			}
 
@@ -545,7 +545,7 @@ require('app').directive('kmTermRadio', function ($http) {
 			layout      : "@",
 			required    : "@"
 		},
-		link: function ($scope, $element, $attr, ngModelController) 
+		link: function ($scope, $element, $attr, ngModelController)
 		{
 
 			$scope.description = true;
@@ -565,7 +565,7 @@ require('app').directive('kmTermRadio', function ($http) {
 			if(!$attr["class"])
 				$element.addClass("list-unstyled");
 		},
-		controller: ["$scope", "$q", "Thesaurus", "Enumerable", function ($scope, $q, thesaurus, Enumerable) 
+		controller: ["$scope", "$q", "Thesaurus", "Enumerable", function ($scope, $q, thesaurus, Enumerable)
 		{
 			//==============================
 			//
@@ -574,7 +574,7 @@ require('app').directive('kmTermRadio', function ($http) {
 				$scope.setError(null);
 				$scope.__loading = true;
 
-				$q.when($scope.termsFn(), 
+				$q.when($scope.termsFn(),
 					function(data) { // on success
 						$scope.__loading = false;
 						$scope.terms     = data;
@@ -587,7 +587,7 @@ require('app').directive('kmTermRadio', function ($http) {
 			//==============================
 			//
 			//==============================
-			$scope.load = function() 
+			$scope.load = function()
 			{
 				if (!$scope.terms) // Not initialized
 					return;
@@ -614,7 +614,7 @@ require('app').directive('kmTermRadio', function ($http) {
 			//==============================
 			//
 			//==============================
-			$scope.save = function() 
+			$scope.save = function()
 			{
 				//debugger;
 
@@ -642,7 +642,7 @@ require('app').directive('kmTermRadio', function ($http) {
 			//==============================
 			$scope.isRequired = function()
 			{
-				return $scope.required!=undefined 
+				return $scope.required!=undefined
 					&& $.isEmptyObject($scope.binding);
 			}
 
@@ -701,7 +701,7 @@ require('app').directive('kmLink', function ($http)
 			mimeTypes  : "@",
 			extensions : "="
 		},
-		link: function ($scope, $element, $attr, ngModelController) 
+		link: function ($scope, $element, $attr, ngModelController)
 		{
 			// init
 			$scope.links = [];
@@ -770,7 +770,7 @@ require('app').directive('kmLink', function ($http)
 
 			}
 		},
-		controller: ["$scope", "IStorage", "underscore", function ($scope, storage, _) 
+		controller: ["$scope", "IStorage", "underscore", function ($scope, storage, _)
 		{
 			$scope.editor = {};
 
@@ -807,7 +807,7 @@ require('app').directive('kmLink', function ($http)
 
 					oNewLink.url = $.trim(link.url);
 
-					if(link.name && $.trim(link.name)!="") 
+					if(link.name && $.trim(link.name)!="")
 						oNewLink.name = $.trim(link.name);
 
 					//
@@ -830,7 +830,7 @@ require('app').directive('kmLink', function ($http)
 			//==============================
 			$scope.isRequired = function()
 			{
-				return $scope.required!=undefined 
+				return $scope.required!=undefined
 					&& $.isEmptyObject($scope.binding);
 			}
 
@@ -841,7 +841,7 @@ require('app').directive('kmLink', function ($http)
 			{
 				if(!this.isAllowLink())
 					return;
-					
+
 				$scope.editor.editLink(null);
 			}
 
@@ -855,14 +855,14 @@ require('app').directive('kmLink', function ($http)
 
 				if(!$scope.identifier)
 					throw "identifier not specified";
-				
+
 				$scope.editor.editFile(null);
 			}
 
 			//==============================
 			//
 			//==============================
-			$scope.remove = function(link) 
+			$scope.remove = function(link)
 			{
 				$scope.links.splice($scope.links.indexOf(link), 1);
 				$scope.save();
@@ -953,7 +953,7 @@ require('app').directive('kmLink', function ($http)
 				$scope.editor.uploadPlaceholder.prepend("<input type='file' style='display:none' />");
 
 				var qHtmlInputFile = $scope.editor.uploadPlaceholder.children("input[type=file]:first");
-	
+
 				qHtmlInputFile.change(function()
 				{
 					var file = this.files[0];
@@ -998,7 +998,7 @@ require('app').directive('kmLink', function ($http)
 							});
 					});
 				});
-	
+
 				qHtmlInputFile.click();
 			}
 
@@ -1048,7 +1048,7 @@ require('app').directive('kmLink', function ($http)
 				console.log('xhr.upload error: ' + message)
 
 				$scope.editor.error = message;
-				
+
 				if($scope.editor.progress)
 					$scope.editor.progress.style   = "error";
 			}
@@ -1077,7 +1077,7 @@ require('app').directive('kmLink', function ($http)
 				if (obj === null) return null;
 
 				return _.clone(obj);
-			}	
+			}
 
 		}]
 	}
@@ -1100,7 +1100,7 @@ require('app').directive('kmReference', function ($http)
 			loaderFn  : "&loader",
 			orderByFn : "&orderBy"
 		},
-		link: function ($scope, $element, $attr, ngModelController) 
+		link: function ($scope, $element, $attr, ngModelController)
 		{
 			//Init
 			$scope.references = [];
@@ -1111,19 +1111,19 @@ require('app').directive('kmReference', function ($http)
 			});
 
 			//Watchers
-			 
+
 			$scope.$watch("binding", $scope.load);
 			$scope.$watch('binding', function() {
 				ngModelController.$setViewValue($scope.binding);
 			});
 
-			$scope.$watch("editor.visible", function(_new, _old) 
-			{ 
+			$scope.$watch("editor.visible", function(_new, _old)
+			{
 				if(_new!=_old &&  _new) $element.find("#editReference").modal("show");
 				if(_new!=_old && !_new) $element.find("#editReference").modal("hide");
 			});
 		},
-		controller: ["$scope", "authHttp", "underscore", function ($scope, $http, _) 
+		controller: ["$scope", "authHttp", "underscore", function ($scope, $http, _)
 		{
 			$scope.editor = {};
 
@@ -1214,13 +1214,13 @@ require('app').directive('kmReference', function ($http)
 
 				$scope.save();
 			};
-			
+
 			//====================
 			//
 			//====================
 			$scope.loadAllReferences = function(reload)
 			{
-				if($scope.editor.references && !reload) 
+				if($scope.editor.references && !reload)
 					return;
 
 				$scope.isLoading = true;
@@ -1307,7 +1307,7 @@ require('app').directive('kmReference', function ($http)
 			//====================
 			//
 			//====================
-			$scope.editor.filterExcludeSelected = function(ref) 
+			$scope.editor.filterExcludeSelected = function(ref)
 			{
 				return !_.findWhere($scope.references, { identifier: ref.identifier });
 			}
@@ -1315,7 +1315,7 @@ require('app').directive('kmReference', function ($http)
 			//====================
 			//
 			//====================
-			$scope.editor.sortReference = function(ref) 
+			$scope.editor.sortReference = function(ref)
 			{
 				if($scope.orderByFn)
 					return $scope.orderByFn({reference : ref});
@@ -1330,7 +1330,7 @@ require('app').directive('kmReference', function ($http)
 //
 //
 //============================================================
-require('app').directive('kmSelect', ["underscore", "htmlUtility", function (_, html) 
+require('app').directive('kmSelect', ["underscore", "htmlUtility", function (_, html)
 {
 	return {
 		restrict: 'EAC',
@@ -1349,7 +1349,7 @@ require('app').directive('kmSelect', ["underscore", "htmlUtility", function (_, 
 			minimumFn    : "&minimum",
 			maximumFn    : "&maximum",
 		},
-		link: function ($scope, $element, $attrs, ngModelController) 
+		link: function ($scope, $element, $attrs, ngModelController)
 		{
 			$scope.identifier = null;
 			$scope.rootItems  = null;
@@ -1395,12 +1395,12 @@ require('app').directive('kmSelect', ["underscore", "htmlUtility", function (_, 
 					}
 				});
 
-			
+
 			$scope.$on('clearSelectSelection', function(){
 				$scope.clearSelection();
 			})
 		},
-		controller: ["$scope", "$q","$filter", "$timeout", "underscore", function ($scope, $q, $filter, $timeout, _) 
+		controller: ["$scope", "$q","$filter", "$timeout", "underscore", function ($scope, $q, $filter, $timeout, _)
 		{
 			//==============================
 			//
@@ -1481,7 +1481,7 @@ require('app').directive('kmSelect', ["underscore", "htmlUtility", function (_, 
 			//==============================
 			//
 			//==============================
-			$scope.getTitle = function(maxCount, truncate) 
+			$scope.getTitle = function(maxCount, truncate)
 			{
 				if ($scope.__loading)
 					return "Loading...";
@@ -1508,7 +1508,7 @@ require('app').directive('kmSelect', ["underscore", "htmlUtility", function (_, 
 			//==============================
 			//
 			//==============================
-			$scope.getTitles = function() 
+			$scope.getTitles = function()
 			{
 				return _.map($scope.getSelectedItems(), function(o) {
 					return $filter("lstring")(o.title || o.name, $scope.locale);
@@ -1518,7 +1518,7 @@ require('app').directive('kmSelect', ["underscore", "htmlUtility", function (_, 
 			//==============================
 			//
 			//==============================
-			$scope.getMinimum = function() 
+			$scope.getMinimum = function()
 			{
 				var value = $scope.minimumFn();
 
@@ -1531,7 +1531,7 @@ require('app').directive('kmSelect', ["underscore", "htmlUtility", function (_, 
 			//==============================
 			//
 			//==============================
-			$scope.getMaximum = function() 
+			$scope.getMaximum = function()
 			{
 				var value = $scope.maximumFn();
 
@@ -1558,7 +1558,7 @@ require('app').directive('kmSelect', ["underscore", "htmlUtility", function (_, 
 			//==============================
 			//
 			//==============================
-			$scope.load = function() 
+			$scope.load = function()
 			{
 				if (!$scope.allItems) // Not initialized
 					return;
@@ -1583,7 +1583,7 @@ require('app').directive('kmSelect', ["underscore", "htmlUtility", function (_, 
 			//==============================
 			//
 			//==============================
-			$scope.save = function() 
+			$scope.save = function()
 			{
 				if (!$scope.allItems) // Not initialized
 					return;
@@ -1717,16 +1717,16 @@ require('app').directive('kmToggle', [function ()
 			ngDisabledFn : '&ngDisabled',
 			placeholder  : "@",
 		},
-		link: function ($scope, $element, $attrs, ngModelController) 
+		link: function ($scope, $element, $attrs, ngModelController)
 		{
 			//$scope.value = false;
-			
+
 		},
-		controller: ["$scope", function ($scope) 
+		controller: ["$scope", function ($scope)
 		{
 			$scope.$watch('value', function(oldValue, newValue){
 				if(oldValue!=undefined)
-					$scope.binding = newValue;				
+					$scope.binding = newValue;
 			});
 
 		}]
@@ -1752,14 +1752,14 @@ require('app').directive('kmYesNo', [function ()
 			required     : "@"
 		},
 		link: {},
-		controller: ["$scope",  function ($scope) 
+		controller: ["$scope",  function ($scope)
 		{
 			//==============================
 			//
 			//==============================
 			$scope.isRequired = function()
 			{
-				return $scope.required!=undefined 
+				return $scope.required!=undefined
 					&& $.isEmptyObject($scope.binding);
 			}
 		}]
@@ -1788,7 +1788,7 @@ require('app').directive('kmDate', [function ()
 			    autoclose: true
    			});
 		},
-		controller: ["$scope", function ($scope) 
+		controller: ["$scope", function ($scope)
 		{
 		}]
 	};
@@ -1808,7 +1808,7 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 		scope: {
 			getDocumentFn : '&document'
 		},
-		link: function ($scope, $element) 
+		link: function ($scope, $element)
 		{
 			$scope.errors              = null;
 
@@ -1889,7 +1889,7 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 			});
 
 			qSaveDialog.on('hidden.bs.modal' ,function() {
-				
+
 				$timeout(function(){
 
 					var promise = null;
@@ -1899,7 +1899,7 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 			});
 
 			qCancelDialog.on('shown.bs.modal' ,function() {
-				
+
 				$timeout(function(){
 
 					var promise = null;
@@ -1919,7 +1919,7 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 			});
 
 			// qDuplicateDialog.on('shown.bs.modal' ,function() {
-				
+
 			// 	$timeout(function(){
 
 			// 		var promise = null;
@@ -1938,7 +1938,7 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 			// 	});
 			// });
 		},
-		controller: ["$scope", "IStorage", "editFormUtility","guid", function ($scope, storage, editFormUtility,guid) 
+		controller: ["$scope", "IStorage", "editFormUtility","guid", function ($scope, storage, editFormUtility,guid)
 		{
 			//====================
 			//
@@ -1958,30 +1958,30 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 
 					var a = storage.documents.exists(identifier).then(function(exist){
 
-						var q = exist 
+						var q = exist
 							  ? storage.documents.security.canUpdate(document.header.identifier, schema)
 							  : storage.documents.security.canCreate(document.header.identifier, schema);
 
-						return q.then(function(allowed) { 
-							$scope.security.canSave = allowed 
+						return q.then(function(allowed) {
+							$scope.security.canSave = allowed
 						});
 					})
 
 					var b = storage.drafts.exists(identifier).then(function(exist){
 
-						var q = exist 
+						var q = exist
 							  ? storage.drafts.security.canUpdate(document.header.identifier, schema)
 							  : storage.drafts.security.canCreate(document.header.identifier, schema);
 
-						return q.then(function(allowed) { 
-							$scope.security.canSaveDraft = allowed 
+						return q.then(function(allowed) {
+							$scope.security.canSaveDraft = allowed
 						});
 					})
 
 					return $q.all([a,b]);
 
 				}).finally(function(){
-					
+
 					$scope.loading = false;
 				});
 			}
@@ -2005,20 +2005,20 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 						throw "Invalid document";
 
 					//Has validation errors ?
-					if(validationReport && validationReport.errors && validationReport.errors.length>0) { 
-						
+					if(validationReport && validationReport.errors && validationReport.errors.length>0) {
+
 						$scope.$emit("documentInvalid", validationReport);
 					}
 					else return $q.when(editFormUtility.publish(document)).then(function(documentInfo) {
-						
+
 						if(documentInfo.type=='authority'){
 							//in case of authority save the CNA as a contact in drafts
 							saveAuthorityInContacts(documentInfo);
 						}
 						$scope.$emit("documentPublished", documentInfo, document);
-						return documentInfo;						
+						return documentInfo;
 
-					});						
+					});
 				}).catch(function(error){
 
 					$scope.$emit("documentError", { action: "publish", error: error })
@@ -2049,15 +2049,15 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 						throw "Invalid document";
 
 					//Has validation errors ?
-					if(validationReport && validationReport.errors && validationReport.errors.length>0) { 
-						
+					if(validationReport && validationReport.errors && validationReport.errors.length>0) {
+
 						$scope.$emit("documentInvalid", validationReport);
 					}
 					else return $q.when(editFormUtility.publishRequest(document)).then(function(workflowInfo) {
 						$scope.$emit("documentPublishRequested", workflowInfo, document)
 						return workflowInfo;
 
-					});						
+					});
 				}).catch(function(error){
 
 					$scope.$emit("documentError", { action: "publishRequest", error: error })
@@ -2088,7 +2088,7 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 					return draftInfo;
 
 				}).catch(function(error){
-					
+
 					$scope.$emit("documentError", { action: "saveDraft", error: error })
 
 				}).finally(function(){
@@ -2097,9 +2097,9 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 
 				});
 			};
-			
+
 			saveAuthorityInContacts = function(draftInfo){
-				
+
 				var document = $scope.getDocumentFn();
 				if(!document)
 					document = draftInfo;
@@ -2121,9 +2121,9 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 
 					id = id.substr(0, id.length-3) + 'CNA'
 
-					var qDocument = {															
-										header: {	
-													identifier : id,											
+					var qDocument = {
+										header: {
+													identifier : id,
 													schema   : "contact",
 													languages: ["en"]
 												},
@@ -2131,18 +2131,18 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 										government : document.government,
 										source: id,
 										organization : document.name,
-										organizationAcronym:{en:'NA'},	
+										organizationAcronym:{en:'NA'},
 										city : document.city,
 										country : document.country,
 										phones : document.phones,
 										emails : document.emails
-									}	
+									}
 
 					if(document.address)qDocument.address = document.address;
-					if(document.state)qDocument.state = document.state;	
+					if(document.state)qDocument.state = document.state;
 					if(document.postalCode)qDocument.postalCode = document.postalCode;
 					if(document.websites)qDocument.websites = document.websites;
-					if(document.faxes)qDocument.faxes = document.faxes;		
+					if(document.faxes)qDocument.faxes = document.faxes;
 
 					editFormUtility.saveDraft(qDocument);
 				});
@@ -2158,7 +2158,7 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 					$scope.$emit("documentClosed")
 
 				}).catch(function(error){
-					
+
 					$scope.$emit("documentError", { action: "close", error: error })
 
 				}).finally(function(){
@@ -2181,7 +2181,7 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 					return storage.documents.validate(document);
 
 				}).then(function(result) {
-				
+
 					return result.data || result;
 				});
 			}
@@ -2189,7 +2189,7 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 			//====================
 			//
 			//====================
-			$scope.checkErrors = function() 
+			$scope.checkErrors = function()
 			{
 				$scope.errors = "";
 
@@ -2200,7 +2200,7 @@ require('app').directive('kmFormStdButtons', ["$q", "$timeout", function ($q, $t
 			//====================
 			//
 			//====================
-			$scope.closeDialog = function() 
+			$scope.closeDialog = function()
 			{
 				return $q.all([$scope.showSaveDialog(false), $scope.showCancelDialog(false)]).finally(function(){
 					$scope.loading = false;
@@ -2228,11 +2228,11 @@ require('app').directive('kmFormLanguages', ["$q", function ($q)
 		controller: ["$scope", "IStorage", "editFormUtility", function ($scope, storage, editFormUtility) {
 
 			$scope.locales = [
-				{identifier:"ar", name:"Arabic"  }, 
-				{identifier:"en", name:"English" }, 
-				{identifier:"es", name:"Spanish" }, 
-				{identifier:"fr", name:"French"  }, 
-				{identifier:"ru", name:"Russian" }, 
+				{identifier:"ar", name:"Arabic"  },
+				{identifier:"en", name:"English" },
+				{identifier:"es", name:"Spanish" },
+				{identifier:"fr", name:"French"  },
+				{identifier:"ru", name:"Russian" },
 				{identifier:"zh", name:"Chinese" }
 			];
 
@@ -2292,7 +2292,7 @@ require('app').directive('kmDocumentValidation', ["$timeout", function ($timeout
 			}
 
 		},
-		controller: ["$scope", function ($scope) 
+		controller: ["$scope", function ($scope)
 		{
 			//====================
 			//
@@ -2334,7 +2334,7 @@ require('app').directive('kmTab', ["$timeout", function ($timeout)
 {
 	return {
 		restrict: 'A',
-		link: function ($scope, $element, $attr) 
+		link: function ($scope, $element, $attr)
 		{
 			//==============================
 			//
@@ -2379,7 +2379,7 @@ require('app').directive('kmControlGroup', function ()
 			caption   : '@caption',
 			isValidFn : "&isValid"
 		},
-		link: function ($scope, $element, $attr) 
+		link: function ($scope, $element, $attr)
 		{
 			if ($attr.isValid) {
 				$scope.hasError = function() { return false; }
@@ -2400,12 +2400,12 @@ require('app').directive('kmControlGroup', function ()
 			}
 
 		},
-		controller: ["$scope", "underscore", function ($scope, _) 
+		controller: ["$scope", "underscore", function ($scope, _)
 		{
 			$scope.hasWarning = function() {  //default behavior
 
 				if($scope.name && $scope.$parent && $scope.$parent.validationReport && $scope.$parent.validationReport.warnings) {
-					
+
 					return !!_.findWhere($scope.$parent.validationReport.warnings, { property : $scope.name })
 				}
 
@@ -2413,7 +2413,7 @@ require('app').directive('kmControlGroup', function ()
 			}
 
 			$scope.hasError = function() {  //default behavior
-				
+
 				if($scope.name && $scope.$parent && $scope.$parent.validationReport && $scope.$parent.validationReport.errors) {
 
 					return !!_.findWhere($scope.$parent.validationReport.errors, { property : $scope.name })

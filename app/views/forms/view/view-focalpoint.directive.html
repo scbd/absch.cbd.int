@@ -1,5 +1,5 @@
 <div id="Record" class="record panel panel-default">
-	<div class="panel-heading"> <h4>ICNP ABS National Focal Point</h4></div>
+	<div class="panel-heading  bg-blue"> <h4>ICNP ABS National Focal Point</h4></div>
 	<div class="record-body panel-body">
 
 		<div ng-show="document.government_EN_t">
@@ -71,7 +71,7 @@
 			</div>
 		</div>
 		<div ng-show="document.url_ss">
-			<label>Meeting Link</label>
+			<label>Link to the information on the CBD website</label>
 			<span class="km-value">
 				<a ng-href="{{document.url_ss | lstring:locale}}" target="_">{{document.url_ss | lstring:locale}}</a>
 			</span>
