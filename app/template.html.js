@@ -3,7 +3,7 @@ define(['app',
     'use strict';
 
     app.controller('TemplateController', ['$scope', '$rootScope', '$window', '$location', 'authentication', '$browser', 'realmConfiguration', 'underscore',
-			function ($scope, $rootScope, $window, $location, authentication, $browse, realmConfiguration, _) {
+			function ($scope, $rootScope, $window, $location, authentication, $browser, realmConfiguration, _) {
 
         $scope.controller = "TemplateController";
 
