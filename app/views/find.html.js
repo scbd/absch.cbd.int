@@ -256,16 +256,41 @@ console.log(realm);
             refreshTimeout = $timeout(function () { query(); }, 200);
         }
 
-        
+        function affix(){
+            console.log($('.container-fluid').offsetTop)
+
+            $("#search_controls").affix({
+                offset: {
+                    top: function () {
+                      return (this.top = $('.container-fluid').offsetTop-100)
+                    },
+                    bottom:function () {
+                      return (this.bottom = $('#searchBox').outerHeight(true)+100)
+                    }
+                }
+            });
+        }
+// $("#search_controls").attr( "style", "top:10px !important" );
+        $("#search_controls").on('affixed.bs.affix', function(){
+            //$("#search-results").addClass( "col-xs-offset-3" );
+            console.log($("#search_controls").css( "top"))
+            // $("#search_controls").attr( "style", "top:10px !important" );
+// $("#search_controls").attr( "style", "top:10px !important" );
+        });
+
+        $("#search_controls").on('affix-top.bs.affix', function(){
+            //$("#search-results").removeClass( "col-xs-offset-3" );
+
+        });
 
 
         $scope.$watch('currentPage',     refresh);
-        $scope.$watch('querySchema',     function() { $scope.currentPage=0; refresh(); });
-        $scope.$watch('queryGovernment', function() { $scope.currentPage=0; refresh(); });
-        $scope.$watch('queryTargets',    function() { $scope.currentPage=0; refresh(); });
-        $scope.$watch('queryTheme',      function() { $scope.currentPage=0; refresh(); });
-        $scope.$watch('queryRegion',      function() { $scope.currentPage=0; refresh(); });
-        $scope.$watch('queryDate',       function() { $scope.currentPage=0; refresh(); });
+        $scope.$watch('querySchema',     function() { $scope.currentPage=0; refresh(); affix(); });
+        $scope.$watch('queryGovernment', function() { $scope.currentPage=0; refresh(); affix();  });
+        $scope.$watch('queryTargets',    function() { $scope.currentPage=0; refresh(); affix();  });
+        $scope.$watch('queryTheme',      function() { $scope.currentPage=0; refresh(); affix();  });
+        $scope.$watch('queryRegion',      function() { $scope.currentPage=0; refresh(); affix();  });
+        $scope.$watch('queryDate',       function() { $scope.currentPage=0; refresh(); affix();  });
         $scope.$watch('keyword',         function() { $scope.currentPage=0; refresh(); });
     }]);
 
