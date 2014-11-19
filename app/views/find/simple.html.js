@@ -208,7 +208,7 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
     	function query () {
 
             var schema = [ "focalPoint", "measure"]
-            //, "absCheckpoint", "absCheckpointCommunique", "authority", "meeting", "notification","pressRelease","statement" ,"focalPoint", "database", "resource"
+            //, "absCheckpoint", "absCheckpointCommunique", "authority", "meeting", "notification","pressRelease","statement" ,"focalPoint", "database", "resource", "news"
 
             var q = '(realm_ss:' + realm.value.toLowerCase() + ' ) AND NOT version_s:*';
 

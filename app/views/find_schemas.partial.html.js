@@ -345,8 +345,10 @@ app.directive('searchFilterSchemas', function ($http) {
             $scope.notification            = { identifier: 'notification',             title: 'Notifications' };
             $scope.pressRelease            = { identifier: 'pressRelease',             title: 'Press Releases' };
             $scope.statement               = { identifier: 'statement',                title: 'Statements' };
+            $scope.news                    = { identifier: 'news',                     title: 'News' };
 
-            $scope.terms  = [ $scope.focalPoint, $scope.authority, $scope.database, $scope.measure, $scope.absPermit, $scope.absCheckpoint, $scope.absCheckpointCommunique, $scope.resource, $scope.organization, $scope.meeting, $scope.notification, $scope.pressRelease, $scope.statement ];
+            $scope.terms  = [ $scope.focalPoint, $scope.authority, $scope.database, $scope.measure, $scope.absPermit, $scope.absCheckpoint,
+                              $scope.absCheckpointCommunique, $scope.resource, $scope.organization, $scope.meeting, $scope.notification, $scope.pressRelease, $scope.statement, $scope.news ];
             $scope.termsx = dictionarize($scope.terms);
 
             // Set intitial selection from QueryString parameters

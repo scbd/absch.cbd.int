@@ -18,7 +18,8 @@ define(['app',
     './view-notification.directive.html.js',
 	'./view-history-directive.html.js',
     '/app/js/common.js',
-    '/app/views/directives/document-metadata-directive.html.js'
+    '/app/views/directives/document-metadata-directive.html.js',
+	'/app/views/forms/view/view-news.directive.html.js'
     ], function (app) {
 app.directive('recordLoader', [function () {
 	return {
@@ -96,7 +97,7 @@ app.directive('recordLoader', [function () {
 				}
 
 				if(documentSchema && (documentSchema.toUpperCase()=="FOCALPOINT" || documentSchema.toUpperCase()=="MEETING" || documentSchema.toUpperCase()=="NOTIFICATION"
-                   || documentSchema.toUpperCase()=="PRESSRELEASE" || documentSchema.toUpperCase()=="STATEMENT"))
+                   || documentSchema.toUpperCase()=="PRESSRELEASE" || documentSchema.toUpperCase()=="STATEMENT" || documentSchema.toUpperCase()=="NEWS"))
 				{
 					 commonjs.getReferenceRecordIndex(documentSchema,documentID).then(function(data){
 						$scope.internalDocument = data.data;

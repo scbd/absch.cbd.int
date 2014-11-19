@@ -31,7 +31,7 @@
 
 
 			<!-- <button  type="button" class="btn localeBtn" ng-click="edit()" ng-show="canEdit()" >Edit</button> -->
-		
+
 
             <div class="btn-group" ng-show="documentVersionCount>1">
               <button type="button" class="btn btn-danger">Revision {{revisionNo}}</button>
@@ -76,6 +76,8 @@
 			<div view-press-release ng-switch-when="pressRelease" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
 
 			<div view-statement ng-switch-when="statement" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
+
+			<div view-news ng-switch-when="news" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
 
 			<div ng-switch-default>
 				<div class="text-center"><h1 style="color:#fa6938"><i class="fa fa-spinner fa-spin"></i></h1></div>

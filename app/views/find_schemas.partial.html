@@ -230,4 +230,12 @@ label{width:100%;}
             <span class="filter-text">Statements </span>
         </label>
     </div>
+
+    <div class="main_filter" ng-show="showReferenceFilters || news.selected" ng-class="{'check_active': news.selected}">
+        <label>
+            <span class="badge badge-white pull-right">{{news.count}}</span>
+            <input type="checkbox" ng-model="news.selected" bind-indeterminate="news.indeterminate" ng-change="refresh(news.selected,'news')">
+            <span class="filter-text">News</span>
+        </label>
+    </div>
 </div>
