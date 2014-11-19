@@ -295,7 +295,8 @@ define(["app"], function (app) {
 			if(schame=="abscheckpointcommunique") return "Checkpoint Communiqué";
 			if(schame=="abspermit"				) return "Internationally Recognized Certificate of Compliance";
             if(schame=="meetingdocument"		) return "Meeting Document";
-            if(schame=="pressrelease"		) return "Press Release";
+            if(schame=="pressrelease"			) return "Press Release";
+			if(schame=="news"					) return "News";
 
 
 			return schame;
@@ -326,6 +327,7 @@ define(["app"], function (app) {
         	if(schame.toLowerCase() =="meeting"					) return "MT";
         	if(schame.toLowerCase() =="pressrelease"			) return "PR";
             if(schame.toLowerCase() =="meetingdocument"    		) return "MTD";
+			if(schame.toLowerCase() =="news"					) return "NWS";
 
 
 			return schame;
@@ -355,7 +357,9 @@ define(["app"], function (app) {
         	if(schame.toLowerCase()=="notification"			        ) return "NT";
         	if(schame.toLowerCase()=="meeting"				) return "MT";
         	if(schame.toLowerCase()=="pressrelease"			) return "PR";
+			if(schame.toLowerCase() =="news"					) return "NWS";
 
+			if(schame.toUpperCase()=="NWS"				        ) return "news";
             if(schame.toUpperCase()=="FP"				        ) return "focalPoint";
 			if(schame.toUpperCase()=="CNA"				    ) return "authority";
 			if(schame.toUpperCase()=="CON"				    ) return "contact";

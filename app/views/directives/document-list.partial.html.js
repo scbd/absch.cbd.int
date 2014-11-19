@@ -61,7 +61,8 @@ app.directive('documentList', function ($http, $filter) {
                         if(item.schema && (item.schema.toUpperCase()=="FOCALPOINT" ||
                           item.schema.toUpperCase()=="MEETING" ||
                           item.schema.toUpperCase()=="NOTIFICATION"
-                           || item.schema.toUpperCase()=="PRESSRELEASE" || item.schema.toUpperCase()=="STATEMENT"))
+                           || item.schema.toUpperCase()=="PRESSRELEASE" || item.schema.toUpperCase()=="STATEMENT"
+                           || item.schema.toUpperCase()=="NEWS"))
                         {
                              commonjs.getReferenceRecordIndex(item.schema.toUpperCase(),item.id).then(function(data){
                                 item.data = data.data;
