@@ -1,4 +1,4 @@
-﻿<div ng-controller="myTasksCotroller" class="col-xs-9" style="padding-top:20px;">
+﻿<div ng-controller="myTasksCotroller" style="padding-top:20px;margin-top:20px;" class="well">
 	<div class="registerpage-header">
 	    <h2>
 	      <span style="color:#c7532c;">Publishing requests for your approval</span>
@@ -86,7 +86,7 @@
 
 					</div>
 					<div class="row" ng-show="tasksDisplay">
-						<div class="col-xs-12 col-md-12 col-ls-12">			
+						<div class="col-xs-12 col-md-12 col-ls-12">
 							<div  task-id class="record-body" load-task-data='formLoading' workflow-task-id="{{task.workflow._id}}" parent-watcher="dashboard" >
 							</div>
 						</div>

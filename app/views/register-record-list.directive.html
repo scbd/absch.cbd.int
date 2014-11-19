@@ -144,19 +144,19 @@
             </div>
         </td>
     </tr>
-     <tr ng-show="displayDetails || displayRequest" style="border:0!important;background-color:inherit!important;">
+     <tr ng-show="displayDetails || displayRequest" style="border:0!important;background-color:inherit!important;" >
         <!-- <td style="border:0;background-color:inherit!important;">&nbsp;</td> -->
         <td colspan="5" style="border:0!important;background-color:inherit!important;">
 
             <div class="pull-right" style="z-index:100;padding-top:18px;padding-right:20px;cursor:pointer;">
-                <i class="glyphicon glyphicon-remove-circle" style="font-size:20px;color:white;" ng-click="displayDetails=false;displayRequest=false;"></i>
+                <i class="glyphicon glyphicon-remove-circle" style="font-size:20px;" ng-click="displayDetails=false;displayRequest=false;"></i>
             </div>
 
               <div ng-show="displayDetails" >
                   <div record-loader document="record.data" hide="header;title;libraries" class="record-body" ></div>
               </div>
 
-               <div ng-show="displayRequest" class="well" >
+               <div ng-show="displayRequest"  class="well">
                   <div task-id class="record-body" load-task-data='formLoading' workflow-task-id="{{getWorkflowID(record)}}" parent-watcher="documents"  ></div>
               </div>
 

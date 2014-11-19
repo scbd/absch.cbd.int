@@ -1,19 +1,12 @@
-﻿<div ng-controller="myPendingTasksCotroller" class="col-xs-9" style="padding-top:20px;">
+﻿<div ng-controller="myPendingTasksCotroller"  style="padding-top:20px;margin-top:20px;" class="well">
 
 	<div class="registerpage-header">
 	    <h2>
-	      <span style="color:#c7532c;">Your pending requests</span>
-	      <div class="pull-right" style="font-size:12px;">
-	    	<a class="pull-right" ng-show="!toggleHelp" ng-click="toggleHelp=!toggleHelp;" style="cursor:pointer;padding:5px;"><i class="glyphicon glyphicon-plus" >
-	      	</i> more
-	    	</a>
-	    	<a class="pull-right" ng-show="toggleHelp" ng-click="toggleHelp=!toggleHelp;" style="cursor:pointer;color:#666;padding:5px;"><i class="glyphicon glyphicon-minus" >
-	      	</i> less
-	    	</a>
-		</div>
+	      <span class="color-red special-font">Your pending requests</span>
+
 	    </h2>
 
-	    <p class="help1" ng-show="toggleHelp">
+	    <p class="alert ">
         	Pending requests you have sent to others for approval to be published on the ABSCH.
         </p>
   	</div>

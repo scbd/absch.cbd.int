@@ -1,7 +1,9 @@
-<div id="Record" class="record ">
-	<div >	<h4>Request information and status</h4>{{workflowTaskId}}
-	</div>
-	<div c>
+
+
+<div>
+	<h4>Request information and status</h4>
+
+	<div>
 		<table class="table table-striped">
 
 			  <tr>
@@ -64,7 +66,7 @@
 			  	<th>&nbsp;</th>
 			  </tr>
 
-			  <tr ng-repeat="activity in workflow.activities|filter:isOpen|orderBy:'createdOn'">
+			  <tr class="bg-red" ng-repeat="activity in workflow.activities|filter:isOpen|orderBy:'createdOn'">
 			  	<td>
 					<div ng-show="activity" ng-switch="activity.name">
 						<span ng-switch-when="publishRecord">Approve or Reject record publication</span>
@@ -208,9 +210,6 @@
 			<div ng-show="document" class="t-document">
 				<record-loader document="document" hide-buttons="true" link-target="_self"></record-loader>
 			</div>
-
-
-
 	</div>
 	<style>
 	.t-document {
@@ -229,7 +228,7 @@
 	  left: 15px;
 	  font-size: 12px;
 	  font-weight: bold;
-	  color: #bbb;
+	  color: #333;
 	  text-transform: uppercase;
 	  letter-spacing: 1px;
 	}

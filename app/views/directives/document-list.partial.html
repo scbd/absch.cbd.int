@@ -27,12 +27,12 @@
   </ul>
   <div class="clearfix"></div>
   <br>
-  <div ng-repeat="document in transformedDocuments | filter:advanceFilter | filter:filterCategory " style="border:1px solid #ddd;">
+  <div ng-repeat="document in transformedDocuments | filter:advanceFilter | filter:filterCategory "  style="border-top:1px solid #ddd;border-bottom:1px solid #ddd;border-right:1px solid #ddd;">
      <!-- {{document}} -->
     <div id="Result">
 
 
-        <div class="{{document.recordtype}}" id="help-record-type" style="cursor:pointer;" >
+        <div class="{{document.recordtype}}" id="help-record-type" style="cursor:pointer;" ng-class="{'bg-grey': displayDetails}">
                 <div class="" style="padding:20px 20px 10px 20px;">
 
                     <div ng-click="displayDetails = !displayDetails;load(document,displayDetails);" >

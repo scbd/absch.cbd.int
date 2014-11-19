@@ -1,8 +1,8 @@
-﻿<div ng-controller="myCompletedTasksCotroller" class="col-xs-9" style="padding-top:20px;">
-	
+﻿<div ng-controller="myCompletedTasksCotroller" style="padding-top:20px;margin-top:20px;" class="well">
+
 	<div class="registerpage-header">
 	    <h2>
-	      <span style="color:#c7532c;">Your completed requests</span>	
+	      <span style="color:#c7532c;">Your completed requests</span>
 	      <div class="pull-right" style="font-size:12px;">
 	    	<a class="pull-right" ng-show="!toggleHelp" ng-click="toggleHelp=!toggleHelp;" style="cursor:pointer;padding:5px;"><i class="glyphicon glyphicon-plus" >
 	      	</i> more
@@ -10,14 +10,14 @@
 	    	<a class="pull-right" ng-show="toggleHelp" ng-click="toggleHelp=!toggleHelp;" style="cursor:pointer;color:#666;padding:5px;"><i class="glyphicon glyphicon-minus" >
 	      	</i> less
 	    	</a>
-		</div>     
-	    </h2>	
+		</div>
+	    </h2>
 
 	    <p class="help1" ng-show="toggleHelp">
-        	Completed requests you have sent to others for approval. 
+        	Completed requests you have sent to others for approval.
         </p>
-       
-  	</div>  
+
+  	</div>
 	<div class="registerpage-content">
 		<div class="alert alert-danger" ng-show="__error">
 			<strong>Error: </strong>{{__error}}
@@ -29,19 +29,19 @@
 		<br>
 		<table ng-show="workflows.length && !__error" class="table table-striped">
 			<tr>
-				<th><span style="cursor:pointer;" ng-click="sortTable('_id')">ID 
+				<th><span style="cursor:pointer;" ng-click="sortTable('_id')">ID
              		<i ng-show="sortTerm=='_id'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span>
              	</th>
-				<th><span style="cursor:pointer;" ng-click="sortTable('data.title.en')">Description 
+				<th><span style="cursor:pointer;" ng-click="sortTable('data.title.en')">Description
              		<i ng-show="sortTerm=='data.title.en'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span>
              	</th>
-				<th><span style="cursor:pointer;" ng-click="sortTable('closedOn')">Result 
+				<th><span style="cursor:pointer;" ng-click="sortTable('closedOn')">Result
              		<i ng-show="sortTerm=='closedOn'" ng-class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span>
              	</th>
 			</tr>
 
 			<tr ng-repeat="workflow in workflows|filter:keywords|orderBy:sortTerm:orderList">
-				
+
 				<td>
 					<a style="text-transform:uppercase;white-space:nowrap;" ng-href="/register/tasks/{{workflow._id}}"  type="button">{{formatWID(workflow._id)}}</a>
 					<div ng-switch="workflow.type.name">
@@ -71,9 +71,9 @@
 							</span>
 							<span> on {{activity.completedOn|date:'short'}} </span>
 						</div>
-						
+
 						<div ng-show="activity.canceledOn">
-							Canceled on {{activity.canceledOn|date:'short'}} 
+							Canceled on {{activity.canceledOn|date:'short'}}
 						</div>
 
 						<div ng-show="activity.failedOn">
@@ -83,13 +83,13 @@
 					</div>
 
 					<div ng-hide="workflow.activities">
-						
+
 						<div ng-show="workflow.completedOn">
 							Compledted on {{activity.completedOn|date:'short'}}
 						</div>
-						
+
 						<div ng-show="workflow.canceledOn">
-							Canceled on {{activity.canceledOn|date:'short'}} 
+							Canceled on {{activity.canceledOn|date:'short'}}
 						</div>
 
 						<div ng-show="workflow.failedOn">
