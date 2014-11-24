@@ -231,6 +231,7 @@
                     <div class="latest" ng-class="{'latest-even-row':$even}">
                         <a  href="/database/record?documentID={{doc.schema=='MEETING' ? doc.id : doc.identifier_s}}&documentSchema={{doc.schema_EN_t}}" class="latest-link">
                         <span class="latest-date"> {{doc.createdDate_dt | formatDate}} </span> |
+                            <span class="latest-schema"> {{doc.schema_s | schemaName}} </span> |
                         <span class="latest-schema">{{getResourceType(doc.resourceTypes_CEN_ss)}}</span>
                         <div class="latest-title color-orange">{{doc.title_t}} </div>
                      </a>
