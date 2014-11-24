@@ -92,7 +92,7 @@ define(['app',
                     $scope.rawNationalDocs = data.response.docs;
                 }).error(function(error){$scope.rawNationalDocs=[]});
 
-            schemaQuery = ' AND (schema_s:resource)';
+            schemaQuery = ' AND (schema_s:resource OR schema_s:news)';
             var referenceRecordsParam = angular.copy(queryParameters);
             referenceRecordsParam.q = q + schemaQuery
             $http.get('/api/v2013/index/select', { params: referenceRecordsParam})
