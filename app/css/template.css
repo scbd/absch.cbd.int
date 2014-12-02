@@ -52,6 +52,9 @@ background-color:#fff;
 }
 
 
+.bg-none{
+    background-color:inherit!important;
+}
 
 .bg-orange{
     background-color:#fa6938!important;
@@ -229,6 +232,38 @@ h3 {
     color:#000;
 }
 
+.box {
+/*margin-bottom: 20px;*/
+/*box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);*/
+border-radius: 3px;
+border: 2px solid #ddd;
+background-color: #f5f5f5;
+padding:20px;
+}
+.box-10 {
+/*margin-bottom: 20px;*/
+/*box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);*/
+border-radius: 3px;
+border: 2px solid #ddd;
+background-color: #f5f5f5;
+padding:10px;
+}
+.box-5 {
+/*margin-bottom: 20px;*/
+/*box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);*/
+border-radius: 3px;
+border: 2px solid #ddd;
+background-color: #f5f5f5;
+padding:5px;
+}
+.box-0 {
+/*margin-bottom: 20px;*/
+/*box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);*/
+border-radius: 3px;
+border: 2px solid #ddd;
+background-color: #f5f5f5;
+padding:3px;
+}
 /*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*/
 
 .pilotphase{
