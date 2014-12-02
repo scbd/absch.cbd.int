@@ -11,7 +11,7 @@ require.config({
         'angular-localizer':'../libs/ngLocalizer/localizer',
         'async'           : '../libs/requirejs-plugins/src/async',
         'domReady'        : '../libs/requirejs-domready/domReady',
-        'jquery'          : '../libs/jquery/jquery.min',
+        'jquery'          : '../libs/jquery/dist/jquery.min',
         'bootstrap'       : '../libs/bootstrap/dist/js/bootstrap.min',
         'underscore'      : '../libs/underscore/underscore',
         'linqjs'          : '../libs/linqjs/linq',
