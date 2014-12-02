@@ -117,7 +117,8 @@ define(['app','/app/js/common.js'], function (app) {
                         return $scope.typeFilter == 'All'
                         ||$scope.typeFilter == 'isPartyToCBD' && !entity.isSignatory && !entity.isRatified
                         ||$scope.typeFilter == 'isSignatory' && entity.isSignatory
-                        ||$scope.typeFilter == 'isRatified' && entity.isRatified;
+                        ||$scope.typeFilter == 'isRatified' && entity.isRatified
+                        ||$scope.typeFilter == 'isInbetween' && entity.isInbetween;
 
                 };
                 $scope.selectedCount = function() {
@@ -147,13 +148,29 @@ define(['app','/app/js/common.js'], function (app) {
                             $scope.termsx = dictionarize($scope.terms);
                             onWatch_items($scope.items);
 
+                            $scope.signatoryCount = 0;
+                            $scope.nonRatifiedCount  = 0;
+                            $scope.ratifiedCount  = 0;
+                            $scope.inbetweenCount = 0;
+
                             $q.when(commonjs.getCountries(),function(countries){
+
                                 $scope.terms.forEach(function(country){
                                     var cd = _.where(countries, {code:country.identifier.substring(0,2).toUpperCase()})
                                     if(cd.length>0){
                                         country.isParty = cd[0].isParty;
                                         country.isSignatory = cd[0].isSignatory;
-                                        country.isRatified  = cd[0].isRatified
+                                        country.isRatified  = cd[0].isRatified;
+                                        country.isInbetween = cd[0].isInbetweenParty;
+
+                                        if(country.isSignatory)
+                                            $scope.signatoryCount++;
+                                        if(!country.isSignatory && !country.isRatified)
+                                            $scope.nonRatifiedCount++;
+                                        if(country.isRatified)
+                                            $scope.ratifiedCount++;
+                                        if(country.isInbetween)
+                                            $scope.inbetweenCount++;
                                     }
                                 });
 

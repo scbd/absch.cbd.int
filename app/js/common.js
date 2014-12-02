@@ -77,7 +77,12 @@ define(['app'], function(app){
 															treaties.XXVII8b.instrument == "acceptance" ||
 															treaties.XXVII8b.instrument == "approval"||
 															country.code == 'EU';
-								  	// console.log($rootScope.countries);
+									country.isInbetweenParty = moment().diff(moment(treaties.XXVII8b.deposit),'days')<90;
+									if(country.isInbetweenParty)
+										country.entryIntoForce = moment(treaties.XXVII8b.deposit).add(90, 'day');
+									else
+										country.entryIntoForce = treaties.XXVII8b.deposit;
+                				  	// console.log($rootScope.countries);
 								  	countriesDetails.push(country);
 							}
 							return countriesDetails;

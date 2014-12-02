@@ -174,6 +174,8 @@ app.directive('documentList', function ($http, $filter) {
                                     output.isParty = cd[0].isParty;
                                     output.isSignatory = cd[0].isSignatory;
                                     output.isRatified  = cd[0].isRatified;
+                                    output.isInbetweenParty  = cd[0].isInbetweenParty;
+                                    output.entryIntoForce = cd[0].entryIntoForce;
                                 }
                         });
                     }
