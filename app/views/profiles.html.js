@@ -43,6 +43,9 @@ app.controller("ProfileController", ["$scope", "authHttp", "$routeParams","linqj
         });
     });
 
+    $scope.isInbetweenParty = function(){
+        return moment().diff(moment($scope.country.treaties.XXVII8b.deposit),'days')<90;
+    }
     $scope.$watch('absch_nfp', function(value){
 
         if(undefined == value) return;
