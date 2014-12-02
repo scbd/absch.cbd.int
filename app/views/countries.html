@@ -274,7 +274,7 @@
 
         <table class="table table-countries table-striped">
           <tr>
-              <td colspan="5" >
+              <td colspan="10" >
                   <!-- <div class="pull-left">
                     <span class="label label-default">Not Ratified</span>
                     <span class="label label-primary">Ratified</span>
@@ -289,23 +289,60 @@
             <th>#</th>
             <th style="white-space:nowrap;"><span style="cursor:pointer;" ng-click="sortTable('name.en')">Country
              <i ng-show="sortTerm=='name.en'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span></th>
-             <th style="white-space:nowrap;"><span style="cursor:pointer;" ng-click="sortTable('treaties.XXVII8b.signature')">Signature
+             <!-- <th style="white-space:nowrap;"><span style="cursor:pointer;" ng-click="sortTable('treaties.XXVII8b.signature')">Signature
              <i ng-show="sortTerm=='treaties.XXVII8b.signature'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span></th>
              <th style="white-space:nowrap;"><span style="cursor:pointer;" ng-click="sortTable('treaties.XXVII8b.instrument')">Instrument
-             <i ng-show="sortTerm=='treaties.XXVII8b.instrument'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span></th>
+             <i ng-show="sortTerm=='treaties.XXVII8b.instrument'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span></th> -->
             <th style="white-space:nowrap;"><span style="cursor:pointer;" ng-click="sortTable('treaties.XXVII8b.deposit')">Deposit
              <i ng-show="sortTerm=='treaties.XXVII8b.deposit'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span></th>
             <!-- <th>Entry into force</th> -->
+            <th style="white-space:nowrap;">
+                <span style="cursor:pointer;" ng-click="sortTable('CNA')">CNA
+                <i ng-show="sortTerm=='CNA'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span>
+            </th>
+            <th style="white-space:nowrap;">
+                <span style="cursor:pointer;" ng-click="sortTable('CP')">CP
+                <i ng-show="sortTerm=='CP'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span>
+            </th>
+            <th style="white-space:nowrap;">
+                <span style="cursor:pointer;" ng-click="sortTable('CPC')">CPC
+                <i ng-show="sortTerm=='CPC'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span>
+            </th>
+            <th style="white-space:nowrap;">
+                <span style="cursor:pointer;" ng-click="sortTable('IRCC')">IRCC
+                <i ng-show="sortTerm=='IRCC'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span>
+            </th>
+            <th style="white-space:nowrap;">
+                <span style="cursor:pointer;" ng-click="sortTable('MSR')">MSR
+                <i ng-show="sortTerm=='MSR'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span>
+            </th>
+            <th style="white-space:nowrap;">
+                <span style="cursor:pointer;" ng-click="sortTable('NDB')">NDB
+                <i ng-show="sortTerm=='NDB'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span>
+            </th>
+            <th style="white-space:nowrap;">
+                <span style="cursor:pointer;" ng-click="sortTable('FP')">FP
+                <i ng-show="sortTerm=='FP'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span>
+            </th>
+
           </tr><!-- -->
-          <tr ng-repeat="country in (countries | filter:countryFilter | filter: searchFilter | orderBy:sortTerm:orderList)"  ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}" >
+          <tr ng-repeat="country in (countries | filter:countryFilter | filter: searchFilter | orderBy:sortTermFilter:orderList)"  ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}" >
             <td>{{$index + 1}}</td>
             <td><a ng-href="countries/{{country.code}}"  class="country-list-name label" ng-class="{'label-info':country.isSignatory && !country.isRatified, 'label-primary':country.isRatified, 'label-default':!country.isRatified && !country.isSignatory}">{{country.name.en}}</a>
                 &nbsp;<span class="label label-success" ng-show={{country.inbetweenParties}}>in-between Party</span>
             </td>
-            <td>{{country.treaties.XXVII8b.signature}}</td>
-            <td>{{country.treaties.XXVII8b.instrument}}</td>
+            <!-- <td>{{country.treaties.XXVII8b.signature}}</td>
+            <td>{{country.treaties.XXVII8b.instrument}}</td> -->
             <td>{{country.treaties.XXVII8b.deposit}}</td>
             <!-- <td>{{country.treaties.XXVII8b.party}}</td> -->
+            <td>{{country.CNA}}</td>
+            <td>{{country.CP}}</td>
+            <td>{{country.CPC}}</td>
+            <td>{{country.IRCC}}</td>
+            <td>{{country.MSR}}</td>
+            <td>{{country.NDB}}</td>
+            <td>{{country.FP}}</td>
+
           </tr>
         </table>
 

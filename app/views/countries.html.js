@@ -74,6 +74,7 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
              loadMap(countryColors);
              $scope.slideMap('#mapDiv','#listDiv');
              CalculateFacets();
+             calculateListViewFacets();
              $("#vmap").append("<div id=\"jqvmap1_EUR1\" class=\"europeanUnion jqvmap-zoomout flag-icon-background flag-icon-eur\" style=\"height:50px;width:100px;background-color:#eee\"></div>");
              //console.log($('#jqvmap1_EUR'))
 
@@ -349,8 +350,8 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
         function CalculateFacets(){
             var tempFacets = {};
 // console.log($scope.countryFacets['government_s,schema_s'])
-var count =0;
-var countryC='';
+            var count =0;
+            var countryC='';
             _.each($scope.countryFacets['government_s,schema_s'], function(data){
                 // if(!data.pivot)
                 //     count++
@@ -381,6 +382,57 @@ var countryC='';
 
         }
 
+        function calculateListViewFacets(){
+
+            _.each($scope.countries, function(country){
+                var countryFacet = _.where($scope.countryFacets["government_s,schema_s"], {value: country.code.toLowerCase()});
+                if(countryFacet.length>0){
+                    countryFacet[0].pivot.forEach(function(document){
+                            country[$filter("schemaShortName")(document.value.toLowerCase())] = document.count ;
+                    });
+                }
+
+            });
+
+            console.log($scope.countries);
+
+
+        }
+
+        $scope.sortTermFilter = function(data){
+            // console.log(data[$scope.sortTerm],data,$scope.sortTerm);
+            if($scope.sortTerm == "treaties.XXVII8b.deposit")
+                return data.treaties.XXVII8b.deposit;
+            else if($scope.sortTerm == "name.en")
+                return data.name.en;
+            else if($scope.sortTerm == "CNA"){
+                return data.CNA ? data.CNA : ($scope.orderList ? -9999999 : 999999);
+            }
+            else if($scope.sortTerm == "CP"){
+                return data.CP ? data.CP : ($scope.orderList ? -9999999 : 999999);
+            }
+            else if($scope.sortTerm == "CPC"){
+                return data.CPC ? data.CPC : ($scope.orderList ? -9999999 : 999999);
+            }
+            else if($scope.sortTerm == "IRCC"){
+                return data.IRCC ? data.IRCC : ($scope.orderList ? -9999999 : 999999);
+            }
+            else if($scope.sortTerm == "MSR"){
+                return data.MSR ? data.MSR : ($scope.orderList ? -9999999 : 999999);
+            }
+            else if($scope.sortTerm == "NDB"){
+                return data.NDB ? data.NDB : ($scope.orderList ? -9999999 : 999999);
+            }
+            else if($scope.sortTerm == "FP"){
+                return data.FP ? data.FP : ($scope.orderList ? -9999999 : 999999);
+            }
+            // else if($scope.sortTerm == "")
+            //     return data.;
+            // else if($scope.sortTerm == "")
+            //     return data.;
+            // else if($scope.sortTerm == "")
+            //     return data.;
+        }
 
         //intro.js configurations
         $scope.startTour=false;
