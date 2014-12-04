@@ -330,7 +330,7 @@
             <td>{{$index + 1}}</td>
             <td><a ng-href="countries/{{country.code}}"  class="country-list-name label" ng-class="{'label-info':country.isSignatory && !country.isRatified, 'label-primary':country.isRatified, 'label-default':!country.isRatified && !country.isSignatory, 'label-success' : country.inbetweenParties}">{{country.name.en}}</a>
                 &nbsp;
-                <span class="label label-success" ng-show={{country.inbetweenParties}}>entry into force on {{moment(country.treaties.XXVII8b.deposit).add(90, 'day') | formatDate}}</span>
+                <span class="label label-success" ng-show={{country.inbetweenParties}}>entry into force on {{addDate(country.treaties.XXVII8b.deposit)| formatDate}}</span>
             </td>
             <!-- <td>{{country.treaties.XXVII8b.signature}}</td>
             <td>{{country.treaties.XXVII8b.instrument}}</td> -->
