@@ -1,5 +1,5 @@
 define(['app',
-	'app/views/directives/login.directive.html.js'], function (app) {
+	'/app/views/directives/login.directive.html.js'], function (app) {
     'use strict';
 
     app.controller('TemplateController', ['$scope', '$rootScope', '$window', '$location', 'authentication', '$browser', 'realmConfiguration', 'underscore',

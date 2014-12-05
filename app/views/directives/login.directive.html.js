@@ -6,9 +6,9 @@ app.directive('login', function ($http) {
             templateUrl: '/app/views/directives/login.directive.html',
             replace: true,
             scope: {
-                
+
             },
-            controller: ['$scope', '$http', '$window', '$location', '$cookies',  function ($scope, $http, $window, $location, $cookies) {
+            controller: ['$scope', '$http', '$window', '$location', '$browser',  function ($scope, $http, $window, $location, $browser) {
 
               $scope.email = null;
               $scope.password = null;
@@ -30,11 +30,11 @@ app.directive('login', function ($http) {
 
                     $http.post('/api/v2013/authentication/token', credentials).then(function onsuccess(success) {
 
-                  $cookies.authenticationToken = success.data.authenticationToken;
-                        $cookies.email = $scope.rememberMe ? $scope.email : undefined;
+                  $browser.cookies().authenticationToken = success.data.authenticationToken;
+                  $browser.cookies().email = $scope.rememberMe ? $scope.email : undefined;
 
-                        var response = { type: 'setAuthenticationToken', authenticationToken: $cookies.authenticationToken, setAuthenticationEmail: $cookies.email };
-                      
+                        var response = { type: 'setAuthenticationToken', authenticationToken: $browser.cookies().authenticationToken, setAuthenticationEmail: $browser.cookies().email };
+
                       var authenticationFrame = angular.element(document.querySelector('#authenticationFrame'))[0];
                         authenticationFrame.contentWindow.postMessage(JSON.stringify(response), 'https://accounts.cbd.int');
 
@@ -49,7 +49,7 @@ app.directive('login', function ($http) {
                     });
               }
 
-             $scope.actionSignup = function () { 
+             $scope.actionSignup = function () {
                   var redirect_uri = encodeURIComponent($location.protocol()+'://'+$location.host()+':'+$location.port()+'/');
                   $window.location.href = 'https://accounts.cbd.int/signup?redirect_uri='+redirect_uri;
               };
