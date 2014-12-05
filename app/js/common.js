@@ -69,6 +69,7 @@ define(['app'], function(app){
 						  for(var i=0; i!=countries.length; ++i){
 									var country = {} ;
 									var treaties = countries[i].treaties;
+									country.name = countries[i].name;
 									country.code = countries[i].code;
 									country.isParty = treaties.XXVII8.party!=null;
 									country.isSignatory = treaties.XXVII8b.signature!=null;
