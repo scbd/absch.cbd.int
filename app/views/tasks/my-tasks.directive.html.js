@@ -6,10 +6,13 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
 			var nextLoad  = null
 			var myUserID = $scope.$root.user.userID;
 			var query    = {
-				$and : [
-					{ "activities.assignedTo" : myUserID },
-					{ closedOn : { $exists : false } },
+				$and: [
 					{ "data.realm" : realm.value }
+				],
+
+				$or : [
+					{ "activities.assignedTo" : myUserID },
+					{ "activities.completedBy" : myUserID }
 				]
 			};
 
@@ -41,9 +44,9 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
 
 						workflow.activities.forEach(function(activity){
 
-							if(isAssignedToMe(activity)) {
+							//if(isAssignedToMe(activity)) {
 								tasks.push({ workflow : workflow, activity : activity});
-							}
+						//	}
 						});
 					});
 

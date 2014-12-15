@@ -13,11 +13,7 @@
       </h2>
     </div>
 
-    <div class="alert alert-material-lightgrey" >
-        The dashboard is a personal working area to follow-up the status of records prepared for their publication in the ABSCH. The content of the dashboard will differ depending on the role assigned in the ABSCH (Publishing Authority (PA) or National Authorized User (NAU)).<br>
-        <br>
-        In this area you can check whether there are items that require your approval (in the case of the PA) or what is the status of records sent for validation of the PA (in the case of NAUs).
-    </div>
+
 
 
     <div>
@@ -65,13 +61,46 @@
 
 				</div>
 			</div>
+            <div class="alert alert-material-lightgrey" >
+                The dashboard is a personal working area to follow-up the status of records prepared for their publication in the ABSCH. The content of the dashboard will differ depending on the role assigned in the ABSCH (Publishing Authority (PA) or National Authorized User (NAU)).<br>
+                <br>
+                In this area you can check whether there are items that require your approval (in the case of the PA) or what is the status of records sent for validation of the PA (in the case of NAUs).
+            </div>
+
 
       <div ng-hide="user.isAuthenticated">
         <a ng-show="!user.isAuthenticated" ng-click="signIn('dashboard')" class="btn btn-info">
           <i class="glyphicon glyphicon-off"></i> SIGN IN
         </a>
       </div>
-      <div class="row" id="dashboard_panels">
+
+
+      <div class="row">
+          <div class="col-md-12 col-sm-12 col-sx-12">
+              <div class="panel panel-default">
+                  <div class="panel-heading clearfix">
+                      <h1 class="panel-title" style="font-size:16px;font-weight:bold;">Requests and Notifications
+
+                          <a href="" class="btn btn-danger btn-small pull-right">view all requests</a>
+
+                      </1>
+                      </div>
+                      <div class="panel-body" style="padding:0;margin:0;">
+
+                          <div class="bg-red" style="color:white;padding:3px;"  ng-show="facets('urgentTasks','request')">
+                              <a href="/dashboard/pending"  href="#" role="button" style="color:white;">
+                                  <span  class="badge" style="position:relative;top:-1px;">{{facets('urgentTasks','request')}}</span>
+                                  Request(s) awaiting your approval
+                              </a>
+                          </div>
+
+                      </div>
+            </div>
+        </div>
+    </div>
+
+
+      <!-- <div class="row" id="dashboard_panels">
 
            <div class="col-lg-4" ng-show="compareRoles(user.roles, PAroles)" >
             <div class="panel shadow-z-2" ng-class="{'greyout': !urgentAttentionCount,  'panel-danger': urgentAttentionCount  }">
@@ -153,7 +182,7 @@
               </a>
             </div>
           </div>
-      </div>
+      </div> -->
 
 
       <div class="row">
