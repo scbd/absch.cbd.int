@@ -9,6 +9,7 @@ app.directive('searchFilterSchemas', function ($http) {
               items: '=ngModel',
               field: '@field',
               query: '=query',
+              skipRealmQuery : '=skipRealmQuery'
         },
         link: function ($scope, element, attrs, ngModelController)
         {
@@ -30,6 +31,7 @@ app.directive('searchFilterSchemas', function ($http) {
 
             $scope.permitIssuanceDate= '*:*'
             $scope.permitExpiryDate= '*:*'
+            $scope.focalPointQuery = '';
 
             $scope.options  = {
                jurisdiction             : function () { return $http.get("/api/v2013/thesaurus/domains/7A56954F-7430-4B8B-B733-54B8A5E7FF40/terms",  { cache: true })
@@ -154,6 +156,9 @@ app.directive('searchFilterSchemas', function ($http) {
                 var conditions = [];
                 buildConditions(conditions, $scope.terms);
 
+                if($scope.focalPointQuery!='')
+                    conditions.push($scope.focalPointQuery);
+
                 if(conditions.length==0) $scope.query = '*:*';
                 else {
                     var query = '';
@@ -162,6 +167,10 @@ app.directive('searchFilterSchemas', function ($http) {
                     $scope.query = query;
                     //console.log (query);
                 }
+                if($scope.focalPoint.selected && $scope.focalPointCBD)
+                    $scope.skipRealmQuery = ' (type_ss:CBD-FP1 OR type_ss:CBD-FP2) ';
+                else
+                    $scope.skipRealmQuery = '';
             }
 
             function buildConditions (conditions, items) {
@@ -208,6 +217,14 @@ app.directive('searchFilterSchemas', function ($http) {
                                             subFilterQuery = subFilterQuery + ' AND (' + filter.field +':'+ selectedValues + ')';
                                     }
                                 }
+                                else if(filter.type=='checkbox'){
+                                    var selectedValues = $scope[filter.name];
+                                    var query = buildFocalPointQuery();
+                                    console.log(subFilterQuery, conditions, subFilterQuery.indexOf(query));
+                                    if(selectedValues && query!='' && subFilterQuery.indexOf(query) ==-1){
+                                        subFilterQuery = subFilterQuery + ' AND ' +  query;
+                                    }
+                                }
                                 else {
                                     if($scope[filter.name]!=null)
                                         subFilterQuery = subFilterQuery + ' AND ('  + filter.field +':'+  $scope[filter.name] + ')';
@@ -220,6 +237,7 @@ app.directive('searchFilterSchemas', function ($http) {
                         conditions.push(subFilterQuery);
                     }
                 });
+
 
             }
             $scope.updateFacets = function(schema,fieldName,data){
@@ -284,7 +302,12 @@ app.directive('searchFilterSchemas', function ($http) {
                 return dictionary;
             }
 
-            $scope.focalPoint              = { identifier: 'focalPoint',               title: 'National Focal Points'
+            $scope.focalPoint              = { identifier: 'focalPoint',               title: 'National Focal Points',
+                                                subFilters : [
+                                                                { name: 'focalPointICNP',       type: 'checkbox' , field: 'type_ss', value : 'ABS-IC' },
+                                                                { name: 'focalPointNP',         type: 'checkbox',  field: 'type_ss', value : 'NP-FP' },
+                                                                { name: 'focalPointCBD'  ,      type: 'checkbox' , field: 'type_ss'}
+                                                ]
                                              };
             $scope.authority               = { identifier: 'authority',                title: 'Competent National Authorities' ,
                                                subFilters : [
@@ -385,6 +408,8 @@ app.directive('searchFilterSchemas', function ($http) {
                 if(schema == 'absPermit'){
                     console.log($scope.absPermit.subFilters[4]);
                 }
+
+
             }
             $scope.getAmendmentFacets = function(type){
 
@@ -419,6 +444,18 @@ app.directive('searchFilterSchemas', function ($http) {
             });
 
 
+            function buildFocalPointQuery(){
+                var query = '';
+                if($scope.focalPoint.selected){
+                    if($scope.focalPointICNP)
+                        query = ' type_ss:ABS-IC';
+
+                    if($scope.focalPointNP)
+                        query = query!='' ? ('(' + query + ' OR type_ss:NP-FP)') : 'type_ss:NP-FP';
+                }
+                return query;
+            }
+
 
             $scope.$on("clearFilter", function(evt, info){
 
@@ -427,10 +464,12 @@ app.directive('searchFilterSchemas', function ($http) {
                     if(data.selected){
                         data.selected = false;
 
-                        if(data.identifier == 'absPermit'){
+                        if(data.identifier == 'absPermit' || data.identifier == 'focalPoint'){
                             data.subFilters.forEach(function(filter){
                                 if(filter.type=='radio')
                                     $scope[filter.name] = null;
+                                else if(filter.type=='checkbox')
+                                        $scope[filter.name] = false;
                             });
                         }
                     }

@@ -131,8 +131,11 @@ console.log(realm);
 //realm_ss:absch OR realm_ss:ABS
             var q = '(realm_ss:' + realm.value.toLowerCase() + ' or realm_ss:absch) AND NOT version_s:*';//' AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryTheme + ' AND ' + $scope.queryTargets +' AND ' + $scope.queryDate + ' AND ' + $scope.queryKeywords;
 
-            if($scope.keyword)         q += ' AND (title_t:*' + $scope.keyword + '* OR description_t:*' + $scope.keyword + '* OR text_EN_txt:*' + $scope.keyword + '* OR uniqueIdentifier_ss:*' + $scope.keyword.toLowerCase() + '*)';
+            var keywordQuery = '';
 
+            if($scope.keyword){
+                q += keywordQuery = ' AND (title_t:*' + $scope.keyword + '* OR description_t:*' + $scope.keyword + '* OR text_EN_txt:*' + $scope.keyword + '* OR uniqueIdentifier_ss:*' + $scope.keyword.toLowerCase() + '*)';
+            }
 
             if($scope.querySchema != "*:*" ){
                 q += ' AND (' + $scope.querySchema + ')';
@@ -147,12 +150,16 @@ console.log(realm);
               //console.log('region: ', q);
             if($scope.queryRegion)      q += ' AND (' + $scope.queryRegion + ')';
 
+            if($scope.otherRealmQuery && $scope.otherRealmQuery.length > 0)
+                q = '(' + q + ') OR '+ $scope.otherRealmQuery
+                    + ($scope.keyword ? keywordQuery : '');
+
             var queryParameters = {
                 'q': q,
                 'sort': 'createdDate_dt desc, title_t asc',
                 'fl': 'id,identifier_s,title_t,createdDate_dt,description_t,url_ss,schema_EN_t,date_dt,government_EN_t,schema_s,number_d,aichiTarget_ss,reference_s,sender_s,meeting_ss,recipient_ss,symbol_s,eventCity_EN_t,eventCountry_EN_t,startDate_s,endDate_s,body_s,code_s,meeting_s,group_s,function_t,department_t,organization_t,summary_EN_t,reportType_EN_t,completion_EN_t,jurisdiction_EN_t,development_EN_t,' +
                         'government_s,publicationYear_is,resourceTypes_CEN_ss,regions_CEN_ss,languages_CEN_ss,absResposibleForAll_b,jurisdiction_CEN_s,geneticResourceTypes_CEN_ss,usage_CEN_ss,keywords_CEN_ss,informAllAuthorities_b,originCountries_CEN_ss,orgperson_s,status_EN_t,type_EN_t,endDate_dt,startDate_dt,amendmentIntent_i,' +
-                        'resourceLinksLanguage_ss,',
+                        'resourceLinksLanguage_ss,type_ss',
                 'wt': 'json',
                 'start': $scope.currentPage * $scope.itemsPerPage,
                 'rows': $scope.itemsPerPage,
@@ -257,18 +264,18 @@ console.log(realm);
         }
 
         function affix(){
-            console.log($('.container-fluid').offsetTop)
-
-            $("#search_controls").affix({
-                offset: {
-                    top: function () {
-                      return (this.top = $('.container-fluid').offsetTop-100)
-                    },
-                    bottom:function () {
-                      return (this.bottom = $('#searchBox').outerHeight(true)+100)
-                    }
-                }
-            });
+            // console.log($('.container-fluid').offsetTop)
+            //
+            // $("#search_controls").affix({
+            //     offset: {
+            //         top: function () {
+            //           return (this.top = $('.container-fluid').offsetTop-100)
+            //         },
+            //         bottom:function () {
+            //           return (this.bottom = $('#searchBox').outerHeight(true)+100)
+            //         }
+            //     }
+            // });
         }
 // $("#search_controls").attr( "style", "top:10px !important" );
         $("#search_controls").on('affixed.bs.affix', function(){
@@ -286,6 +293,7 @@ console.log(realm);
 
         $scope.$watch('currentPage',     refresh);
         $scope.$watch('querySchema',     function() { $scope.currentPage=0; refresh(); affix(); });
+        $scope.$watch('otherRealmQuery',  function() { $scope.currentPage=0; refresh(); affix(); });
         $scope.$watch('queryGovernment', function() { $scope.currentPage=0; refresh(); affix();  });
         $scope.$watch('queryTargets',    function() { $scope.currentPage=0; refresh(); affix();  });
         $scope.$watch('queryTheme',      function() { $scope.currentPage=0; refresh(); affix();  });

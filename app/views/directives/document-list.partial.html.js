@@ -322,7 +322,7 @@ app.directive('documentList', function ($http, $filter) {
                     }
                     else if(document.schema_s=='focalPoint' || document.schema_s=='database') {
                         output.recordtype="nationalRecord";
-
+                        output.typeList = document.type_ss;
                         if(document.type_EN_t){
                           output.type = document.type_EN_t;
                           if(output.type)output.metadata.push(output.type);
@@ -361,6 +361,23 @@ app.directive('documentList', function ($http, $filter) {
                     }
                 }
 
+            $scope.getNFPText = function(cdgList){
+
+                if(!cdgList)
+                    return;
+
+                if(underscore.indexOf(cdgList, 'NP-FP')>= 0)
+                    return "Nagoya Protocol NFP";
+                else if(underscore.indexOf(cdgList, 'ABS-IC')>= 0)
+                    return "ICNP ABS NFP";
+                else if(underscore.indexOf(cdgList, 'CBD-FP1')>= 0)
+                    return "CBD Primary NFP";
+                else if(underscore.indexOf(cdgList, 'CBD-FP2')>= 0)
+                    return "CBD Secondary NFP";
+
+                return "";
+
+            }
                 //==================================
                 //
                 //==================================
