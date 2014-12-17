@@ -69,6 +69,9 @@ app.directive('taskId', function () {
 								alert(error);
 							});
 						};
+						$scope.user = function() {
+							return $scope.$root.user.userID;
+						};
 						//==================================================
 						//
 						//

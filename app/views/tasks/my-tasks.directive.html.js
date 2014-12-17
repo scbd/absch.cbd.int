@@ -1,20 +1,33 @@
 ﻿define(['app'], function (app) {
 
 "use strict";
-app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm", "underscore", function ($scope, $timeout, IWorkflows, realm, _)
+app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm", "underscore","$route", function ($scope, $timeout, IWorkflows, realm, _, $route)
 		{
 			var nextLoad  = null
 			var myUserID = $scope.$root.user.userID;
-			var query    = {
-				$and: [
-					{ "data.realm" : realm.value }
-				],
-
+			var queryAllTasks    = {
 				$or : [
-					{ "activities.assignedTo" : myUserID },
-					{ "activities.completedBy" : myUserID }
-				]
+							{ $and : [	{ "activities.assignedTo" : myUserID },
+										{ closedOn : { $exists : false } },{ "data.realm" : realm.value }
+							] },
+							{ $and : [	{ "createdBy" : myUserID } ,
+									{ closedOn : { $exists : false } },{ "data.realm" : realm.value }
+									] },
+							{ $and : [	{ "createdBy" : myUserID },
+								{ closedOn : { $exists : true } },{ "data.realm" : realm.value }
+								] }
+								,
+								{ $and : [	{ "activities.completedBy" : myUserID },{ "data.realm" : realm.value }
+								] }
+					   ]
 			};
+			var queryMyTasks = {
+				$and : [
+							{ "activities.assignedTo" : myUserID },
+							{ closedOn : { $exists : false } },
+							{ "data.realm" : realm.value }
+						]
+					};
 
 			$scope.tasks = null;
 			$scope.load = load;
@@ -36,6 +49,13 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
 			//
 			//==============================
 			function load() {
+
+				var query = queryMyTasks;
+
+				if($route.current.$$route.type == 'all'){
+					query = queryAllTasks;
+				}
+
 				IWorkflows.query(query).then(function(workflows){
 
 					var tasks  = [];

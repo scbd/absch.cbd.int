@@ -36,7 +36,6 @@
 		<br>
 		<br>
 
-		{{tasks[0]}}
 
 
 		<div class="table table-striped">
@@ -72,9 +71,21 @@
 						</div>
 
 						<div class="col-xs-3 col-md-3 col-ls-3"> <!-- Status -->
-							<div ng-switch="task.activity.name">
-								<span ng-switch-when="publishRecord">Waiting for validation</span>
-								<span ng-switch-default>{{activity.name}}*</span>
+							<div ng-switch="task.workflow.state">
+								<div ng-switch-when="completed">
+									<div ng-show="task.activity.completedOn">
+										<span ng-show="task.activity" ng-switch="task.activity.result.action">
+											<span ng-switch-when="approve"><i class="glyphicon glyphicon-ok"></i> Approved</span>
+											<span ng-switch-when="reject"><i class="glyphicon glyphicon-remove"></i> Rejected</span>
+										</span>
+									</div>
+								</div>
+								<div ng-switch-default>
+									<div ng-switch="task.activity.name">
+										<span ng-switch-when="publishRecord">Waiting for validation</span>
+										<span ng-switch-default>{{activity.name}}*</span>
+									</div>
+								</div>
 							</div>
 						</div>
 

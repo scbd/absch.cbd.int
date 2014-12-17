@@ -113,6 +113,14 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
               resolveController: true,
               resolveUser: true,
               subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',
+              type : 'my'
+            }).
+            when('/dashboard/alltasks', {
+                templateUrl: '/app/views/register.html',
+                resolveController: true,
+                resolveUser: true,
+                subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',
+                type : 'all'
             }).
              when('/dashboard/mytasks', {
               templateUrl: '/app/views/register.html',

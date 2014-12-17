@@ -81,16 +81,28 @@
                   <div class="panel-heading clearfix">
                       <h1 class="panel-title" style="font-size:16px;font-weight:bold;">Requests and Notifications
 
-                          <a href="" class="btn btn-danger btn-small pull-right">view all requests</a>
+                          <a href="/dashboard/alltasks" class="btn btn-danger btn-small pull-right">view all requests</a>
 
                       </1>
                       </div>
                       <div class="panel-body" style="padding:0;margin:0;">
 
-                          <div class="bg-red" style="color:white;padding:3px;"  ng-show="facets('urgentTasks','request')">
+                          <div class="bg-red" style="color:white;padding:3px;margin-bottom:1px"  ng-show="urgentAttentionCount>0">
                               <a href="/dashboard/pending"  href="#" role="button" style="color:white;">
-                                  <span  class="badge" style="position:relative;top:-1px;">{{facets('urgentTasks','request')}}</span>
+                                  <span  class="badge" style="position:relative;top:-1px;">{{urgentAttentionCount}}</span>
                                   Request(s) awaiting your approval
+                              </a>
+                          </div>
+                          <div class="bg-red" style="color:white;padding:3px;margin-bottom:1px"  ng-show="completedRequestCount>0">
+                              <a href="/dashboard/completed"  href="#" role="button" style="color:white;">
+                                  <span  class="badge" style="position:relative;top:-1px;">{{completedRequestCount}}</span>
+                                  Your completed request(s)
+                              </a>
+                          </div>
+                          <div class="bg-red" style="color:white;padding:3px;"  ng-show="pendingCount>0">
+                              <a href="/dashboard/mytasks"  href="#" role="button" style="color:white;">
+                                  <span  class="badge" style="position:relative;top:-1px;">{{pendingCount}}</span>
+                                  Request(s) for approval
                               </a>
                           </div>
 
