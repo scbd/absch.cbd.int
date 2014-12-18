@@ -1,4 +1,4 @@
-define(['app',
+define(['app','underscore',
     'introjs',
     '../views/forms/view/record-loader.directive.html.js',
     '../views/find_schemas.partial.html.js',
@@ -7,7 +7,7 @@ define(['app',
     '../views/find_facets.partial.html.js',
     '../views/find_themes.partial.html.js',
     '../views/directives/search-filter-dates.partial.html.js',
-    '../views/directives/document-list.partial.html.js'], function (app) {
+    '../views/directives/document-list.partial.html.js'], function (app,_) {
 
     app.controller('FindController', ['$scope', '$rootScope', 'authHttp', '$timeout', '$q','realm', '$routeParams','$location',
         function ($scope, $rootScope, $http, $timeout, $q, realm, $routeParams,$location) {
@@ -84,6 +84,7 @@ define(['app',
         // $scope.queryDate       = '*:*';
         $scope.queryKeywords   = '*:*';
         $scope.displayDetails = false;
+        $scope.countryResultFilter = [];
 
 		    $scope.sortBy = '';
 		    $scope.sortOptions = [
@@ -127,7 +128,7 @@ define(['app',
     	function query () {
 
             var schema = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "resource", "meeting", "notification","pressRelease","statement" ,"focalPoint", "news"]
-console.log(realm);
+
 //realm_ss:absch OR realm_ss:ABS
             var q = '(realm_ss:' + realm.value.toLowerCase() + ' or realm_ss:absch) AND NOT version_s:*';//' AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryTheme + ' AND ' + $scope.queryTargets +' AND ' + $scope.queryDate + ' AND ' + $scope.queryKeywords;
 
@@ -143,7 +144,7 @@ console.log(realm);
             else
             {
                  q += ' AND (schema_s:' + schema.join(' OR schema_s:') + ')';
-                 console.log(q);
+                 //console.log(q);
             }
             if($scope.queryGovernment) q += ' AND (' + $scope.queryGovernment + ')';
             if($scope.queryTheme)      q += ' AND (' + $scope.queryTheme + ')';
@@ -300,6 +301,16 @@ console.log(realm);
         $scope.$watch('queryRegion',      function() { $scope.currentPage=0; refresh(); affix();  });
         $scope.$watch('queryDate',       function() { $scope.currentPage=0; refresh(); affix();  });
         $scope.$watch('keyword',         function() { $scope.currentPage=0; refresh(); });
+
+        $scope.$on('externalFilter', function(evt, data){
+            if(data.type == 'country'){
+                if(data.operation=='add' && _.indexOf($scope.countryResultFilter, data.value)==-1)
+                    $scope.countryResultFilter.push(data.value);
+                else if(data.operation=='remove' && _.indexOf($scope.countryResultFilter, data.value)>=0)
+                    $scope.countryResultFilter.splice(_.indexOf($scope.countryResultFilter, data.value), 1);
+            }
+                console.log(data);
+        })
     }]);
 
 });

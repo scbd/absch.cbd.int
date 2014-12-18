@@ -35,14 +35,15 @@
         <div class="{{document.recordtype}}" id="help-record-type" style="cursor:pointer;" ng-class="{'bg-grey': displayDetails}">
                 <div class="" style="padding:20px 20px 10px 20px;">
 
-                    <div ng-click="displayDetails = !displayDetails;load(document,displayDetails);" >
+                    <div  >
                         <div style="padding:0px 0 3px 3px; ">
-                            <span class="label label-party" id="help-record-country" ng-class="{'label-info':document.isSignatory && !document.isRatified, 'label-primary':document.isRatified, 'label-default':!document.isRatified && !document.isSignatory, 'label-success':document.isInbetweenParty}">{{document.source}}</span>
+                            <span class="label label-party" id="help-record-country" ng-class="{'label-info':document.isSignatory && !document.isRatified, 'label-primary':document.isRatified, 'label-default':!document.isRatified && !document.isSignatory, 'label-success':document.isInbetweenParty}"
+                                    data-popover="true" data-html="true" type="country" data-value="{{document.doc.government_s}}" >{{document.source}}</span>
                             <span ng-show="document.isInbetweenParty" class="label label-success">entry into force {{document.entryIntoForce | formatDate}}</span>
                             <span  class="schema">{{document.schema | schemaName}}</span>
                             <span>
                                 <a href="/database/record?documentID={{document.schema=='MEETING' ? document.id : document.identifier_s}}&documentSchema={{document.schema}}"
-                                    target="_new" class="pull-right" style="padding:0px 3px;color:#999;"><i class="glyphicon glyphicon-new-window" id="help-record-newwindow"></i>
+                                    target="_new" class="pull-right"style="padding:0px 3px;color:#999;"><i class="glyphicon glyphicon-new-window" id="help-record-newwindow"></i>
                                 </a>
                             </span>
                             <span ng-show="document.schema=='focalpoint'" class="label label-success">{{getNFPText(document.typeList)}}</span>

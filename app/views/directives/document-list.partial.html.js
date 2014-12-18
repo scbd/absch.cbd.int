@@ -22,8 +22,8 @@ app.directive('documentList', function ($http, $filter) {
                   currentPage: '=',
                   documentCount: '='
             },
-            controller: ['$scope','$sce', "underscore", "commonjs","authentication", '$q',"$filter",
-            function ($scope, $sce, underscore, commonjs,authentication,$q, $filter){
+            controller: ['$scope','$sce', "underscore", "commonjs","authentication", '$q',"$filter","$compile","$element","$timeout",
+            function ($scope, $sce, underscore, commonjs,authentication,$q, $filter, $compile, $element,$timeout){
 
              $scope.getDocumentId = function(document){
 
@@ -139,7 +139,9 @@ app.directive('documentList', function ($http, $filter) {
                        $scope.documents.forEach(function (doc) {
                            $scope.transformedDocuments.push(transformDocument(doc));
                         });
-
+                        // $timeout(function(){
+                        //     $compile($('.blaisePopOver').contents())($scope);
+                        // },500);
                     }
                 });
 
@@ -406,6 +408,77 @@ app.directive('documentList', function ($http, $filter) {
                       document.schema_s == 'resource');
                   });
                 };
+
+                var originalLeave = $.fn.popover.Constructor.prototype.leave;
+                $.fn.popover.Constructor.prototype.leave = function(obj){
+                    var self = obj instanceof this.constructor ?
+                    obj : $(obj.currentTarget)[this.type](this.getDelegateOptions()).data('bs.' + this.type)
+                    var container, timeout;
+
+                    originalLeave.call(this, obj);
+
+                    if(obj.currentTarget) {
+                        container = $(obj.currentTarget).siblings('.popover')
+                        timeout = self.timeout;
+                        container.one('mouseenter', function(){
+                            //We entered the actual popover – call off the dogs
+                            clearTimeout(timeout);
+                            //Let's monitor popover content instead
+                            container.one('mouseleave', function(){
+                                $.fn.popover.Constructor.prototype.leave.call(self, self);
+                            });
+                        })
+                    }
+                };
+
+                $scope.addFilter = function(type, value, operation){
+                    console.log($scope.countryResultFilter);
+                    $scope.$emit('externalFilter', {'operation':operation ,'type':type, 'value':value });
+                }
+
+                $scope.popOverHTML =function(type, value){
+                    var addFilter =     "<span ng-click=\"addFilter('" + type + "','" + value + "','add');\"><i class='fa fa-plus' /> Add filter</span>";
+                    var removeFilter =  "<span ng-click=\"addFilter('" + type + "','" + value + "','remove');\"><i class='fa fa-remove' /> remove filter</span>";
+
+                    return "<div class=\"blaisePopOver\">" + (hasFilter(type,value) ?  removeFilter : addFilter)  + "</div>";
+                }
+
+                function hasFilter(type, value){
+
+                    if(type=="country"){
+
+                        if(underscore.indexOf($scope.$parent.countryResultFilter,value)>=0)
+                            return true;
+
+                        return false;
+                    }
+                    return false;
+                }
+
+                $element.popover({
+                    content : function(data) {
+                        console.log($(this).attr('type'),$(this).attr('data-value'));
+                        var currentObj = $(this);
+                        $timeout(function(){
+                            console.log(currentObj.find('.blaisePopOver' ).data('popover'));
+                            //$compile(currentObj.find('.blaisePopOver_ht' ).data('popover').tip())(scope);
+                            $compile($('.blaisePopOver').contents())($scope);
+                        });
+                        return $scope.popOverHTML($(this).attr('type'),$(this).attr('data-value'));
+                    },
+                     selector: '[data-popover]', trigger: 'click hover', placement: 'auto', delay: {show: 50, hide: 400}
+                })
+                .on('shown.bs.popover', function (evt,data) {
+                    console.log(evt,data);
+                    // $compile($('.blaisePopOver').contents())($scope);
+                });
+
+                // content: function() {
+                //     $timeout(function(){
+                //         $compile($('#help-record-country').data('popover').tip())($scope);
+                //     });
+                //     return data;
+                // },
             }]
 
         };
