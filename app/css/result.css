@@ -1,7 +1,8 @@
   #Result .label-party{
     font-size:12px;
     text-transform: uppercase;
-    margin-left:15px;
+    margin-left:10px;
+    padding-bottom:2px;
   }
   #Result .nationalRecord .schema{
     font-size:12px;
@@ -15,7 +16,7 @@
     text-transform: uppercase;
     font-weight: bold;
     color:#FA6938;
-    margin-left:18px;
+    margin-left:10px;
 
   }
   #Result .pubDate{
