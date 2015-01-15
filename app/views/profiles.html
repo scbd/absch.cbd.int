@@ -23,20 +23,19 @@
     .list-group-item-success {color: #fff;
         background-color: #5cb85c;
     }
+    .list-flag {
+        background-position: 0%;
+    }
   </style>
 
   <div class="container-fluid" id="wrapper">
     <div class="row">
       <div class="col-xs-12" style="padding-top:20px;">
-        <div style="position:absolute;margin:auto; width:100%; padding-left:200px;">
-          <img ng-hide="code=='EUR'" src="/app/libs/mapsicon/all/{{code.toLowerCase()}}/1024.png" style="opacity:0.15; z-index:-9999;">
-          <!-- <img ng-show="code=='EUR'" src="/app/img/EUMap.svg" style="opacity:0.15;padding-top:100px;padding-left:100px;"> -->
-        </div>
-        <br>
+
         <!-- Sidebar -->
         <div class="row">
 
-            <div class="well col-xs-3" ng-show="showlist"  >
+            <div class="well col-xs-3" ng-show="true"  >
 
                 <!-- <span>Country List</span> -->
 
@@ -54,6 +53,7 @@
               <div style="max-height:500px;overflow:scroll;">
                 <ul class="list-group" >
                   <li class="list-group-item" ng-show="!countries">loading countries <i class="fa fa-spinner"/>
+
                   <li ng-click="loadCountryDetails(country.code)" class="list-group-item"
                       ng-repeat="country in countries | filter:countryFilter"
                       style="cursor:pointer"  ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}"
@@ -61,19 +61,31 @@
                       'list-group-item-primary':country.isRatified,
                       'list-group-item-default':!country.isRatified && !country.isSignatory,
                       'list-group-item-success' : country.isInbetweenParty}">
-                        {{country.name |lstring}}
-                    <!-- </span> -->
+
+                      <div class="flag-icon-background flag-icon-{{country.code.toLowerCase()}}"> </div>
+                      {{country.name |lstring}}
+
                   </li>
                 </ul>
               </div>
 
             </div>
 
-          <div ng-class="{'col-xs-12' : !showlist, 'col-xs-9':showlist}" >
+          <!-- <div ng-class="{'col-xs-12' : !showlist, 'col-xs-9':showlist}" > -->
+          <div class="col-xs-9" >
 
             <div id="page-content-wrapper">
               <div class="page-content inset">
-                <div class="container1 ng-scope">
+
+                  <div class="container1 ng-scope well" style="background-color:white;min-height:688px;">
+
+                  <!-- <div style="position:absolute;margin:auto; width:100%; padding-left:200px;">
+                      <img ng-hide="code=='EUR'" src="/app/libs/mapsicon/all/{{code.toLowerCase()}}/1024.png" style="opacity:0.15; z-index:-9999;">
+                  </div> -->
+
+
+
+
                   <!-- <div id="sidebar_menu" class="sidebar-nav">
                     <span class="sidebar-brand">
                         <a id="menu-toggle" ng-click="showlist=!showlist" class="toggleMe" href="#">
@@ -82,13 +94,13 @@
                     </span>
                   </div> -->
 
-                  <div class="row top" style="padding-bottom:30px;">
+                  <div class="row top " style="padding-bottom:30px;">
                     <div class="col-xs-12 col-md-5 col-lg-5">
 
                       <span class="country-name">
-                          <a ng-click="showlist=!showlist"  href="#" style="font-size:16px;top:-18px;position:relative;">
+                          <!-- <a ng-click="showlist=!showlist"  href="#" style="font-size:16px;top:-18px;position:relative;">
                               <span id="main_icon" class="glyphicon glyphicon-align-justify"></span>
-                          </a>
+                          </a> -->
                           {{country.name.en}}</span>
                       </br>
                       <span style="vertical-align:top" class="label label-success" ng-show="isInbetweenParty()">in-between Party</span>
@@ -110,7 +122,6 @@
 
                     <div class="col-xs-6 col-md-3 col-lg-3 text-right" style="max-width:20%">
                       <div style="height:100px;" class="flag-icon-background flag-icon-{{code.toLowerCase()}}"></div>
-
                     </div>
 
                   </div>
