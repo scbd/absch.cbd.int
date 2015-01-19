@@ -24,10 +24,9 @@
                 <div class="well">
                     <div style="font-size:16;font-weight:bold;">Party status</div>
                     <span class="label label-primary">&nbsp;</span> Party to the Nagoya Protocol <br>
-                    <span class="label label-success">&nbsp;</span> Inbetween party to the Nagoya Protocol <br>
-                        <span class="label label-info">&nbsp;</span> Signatory to the Nagoya Protocol<br>
-                            <span class="label label-default">&nbsp;</span> Non-Party
-
+                    <!-- <span class="label label-success">&nbsp;</span> Inbetween party to the Nagoya Protocol <br>
+                    <span class="label label-info">&nbsp;</span> Signatory to the Nagoya Protocol<br> -->
+                    <span class="label label-default">&nbsp;</span> Non-Party
                 </div>
 
 
@@ -41,7 +40,7 @@
                     <div id="filterCheckboxes">
                         <search-filter-schemas  ng-model='schemas' field='schema_s' query='querySchema' skip-realm-query='otherRealmQuery'></search-filter-schemas>
                         <search-filter-themes title='Thematic Areas' ng-model='thematicAreas' field='thematicAreas_ss' query='queryTheme'></search-filter-themes>
-                        
+
                         <search-filter-countries title='Countries' ng-model='governments' field='government_s' query='queryGovernment' external-filter="countryResultFilter"></search-filter-countries>
                         <search-filter-regions title="Regions" ng-model="regions" field="government_REL_ss" query="queryRegion" facets="regionFacets"></search-filter-regions>
                     </div>

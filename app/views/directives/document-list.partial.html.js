@@ -369,13 +369,13 @@ app.directive('documentList', function ($http, $filter) {
                     return;
 
                 if(underscore.indexOf(cdgList, 'NP-FP')>= 0)
-                    return "Nagoya Protocol NFP";
+                    return "Nagoya Protocol Focal Point";
                 else if(underscore.indexOf(cdgList, 'ABS-IC')>= 0)
-                    return "ICNP ABS NFP";
+                    return "ICNP Focal Point";
                 else if(underscore.indexOf(cdgList, 'CBD-FP1')>= 0)
-                    return "CBD Primary NFP";
+                    return "CBD Primary Focal Point";
                 else if(underscore.indexOf(cdgList, 'CBD-FP2')>= 0)
-                    return "CBD Secondary NFP";
+                    return "CBD Secondary Focal Point";
 
                 return "";
 

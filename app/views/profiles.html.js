@@ -121,18 +121,31 @@
 
        });
 
-       $(".toggleMe").click(function(e) {
+       $scope.showlist = false;
+
+       $scope.$watch('showlist', function(value) {
+
            if(!$scope.countries){
                $q.when(commonjs.getCountries(), function(countries){
                    $scope.countries = $filter("orderBy")(countries, "name.en");
                });
            }
-           e.preventDefault();
-           $("#wrapper").toggleClass("active");
-           $("#sidebar-wrapper").toggleClass("hide");
-           $("#sidebar-wrapper").toggleClass("show");
 
        });
+
+
+
+
+
+
+    //    $(".toggleMe").click(function(e) {
+       //
+    //        e.preventDefault();
+    //        $("#wrapper").toggleClass("active");
+    //        $("#sidebar-wrapper").toggleClass("hide");
+    //        $("#sidebar-wrapper").toggleClass("show");
+       //
+    //    });
      }
    ]);
 
