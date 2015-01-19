@@ -135,7 +135,7 @@ define(['app','underscore',
             var keywordQuery = '';
 
             if($scope.keyword){
-                q += keywordQuery = ' AND (title_t:*' + $scope.keyword + '* OR description_t:*' + $scope.keyword + '* OR text_EN_txt:*' + $scope.keyword + '* OR uniqueIdentifier_ss:*' + $scope.keyword.toLowerCase() + '*)';
+                q += keywordQuery = ' AND (title_t:*' + $scope.keyword + '* OR description_t:*' + $scope.keyword + '* OR text_EN_txt:*' + $scope.keyword + '* OR uniqueIdentifier_s:*' + $scope.keyword.toLowerCase() + '*)';
             }
 
             if($scope.querySchema != "*:*" ){
