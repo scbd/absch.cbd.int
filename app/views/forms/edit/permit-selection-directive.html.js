@@ -43,7 +43,7 @@ app.directive("existingPermit", [ function () {
                     var q = '(realm_ss:' + realm.value.toLowerCase() + ' ) AND NOT version_s:*';
 
                     if($scope.uniqueId)
-                        q += ' AND ( uniqueIdentifier_ss:*' + $scope.uniqueId.toLowerCase() + '*)';
+                        q += ' AND ( uniqueIdentifier_s:*' + $scope.uniqueId.toLowerCase() + '*)';
 
                     q += ' AND (schema_s:absPermit)';
 
