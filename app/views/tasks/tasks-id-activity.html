@@ -41,7 +41,7 @@
 			  <tr>
 			  	<td>Record ID</td>
 			  	<td>
-			  		<a    ng-show="workflow.result.documentID||workflow.data.documentID" ng-href="/database/record?documentID={{workflow.result.documentID||workflow.data.documentID}}">{{workflow.result.documentID||workflow.data.documentID}}</a>
+			  		<a ng-show="workflow.result.documentID||workflow.data.documentID" ng-href="/database/record?documentID={{workflow.result.documentID||workflow.data.documentID}}">{{workflow.result.documentID||workflow.data.documentID}}</a>
 			  		<span ng-hide="workflow.result.documentID||workflow.data.documentID">[new]</span>
 			  		<span ng-show="workflow.result.revision">(rev. {{workflow.result.revision}})</span>
 				</td>

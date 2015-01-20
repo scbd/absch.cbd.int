@@ -284,19 +284,47 @@ define(["app"], function (app) {
 
 		return function( schame ) {
 
-			if(schame=="focalpoint"				) return "ABS National Focal Point";
-			if(schame=="authority"				) return "Competent National Authority";
-			if(schame=="contact"				) return "Contact";
-			if(schame=="database"				) return "National Website or Database";
-			if(schame=="resource"				) return "Virtual Library Resource";
-			if(schame=="organization"			) return "Organization";
-			if(schame=="measure" 				) return "Legislative, Administrative or Policy Measures";
-			if(schame=="abscheckpoint"			) return "Checkpoint";
-			if(schame=="abscheckpointcommunique") return "Checkpoint Communiqué";
-			if(schame=="abspermit"				) return "Internationally Recognized Certificate of Compliance";
-            if(schame=="meetingdocument"		) return "Meeting Document";
-            if(schame=="pressrelease"			) return "Press Release";
-			if(schame=="news"					) return "News";
+			if(schame.toLowerCase()=="focalpoint"				) return "ABS National Focal Point";
+			if(schame.toLowerCase()=="authority"				) return "Competent National Authority";
+			if(schame.toLowerCase()=="contact"				) return "Contact";
+			if(schame.toLowerCase()=="database"				) return "National Website or Database";
+			if(schame.toLowerCase()=="resource"				) return "Virtual Library Resource";
+			if(schame.toLowerCase()=="organization"			) return "Organization";
+			if(schame.toLowerCase()=="measure" 				) return "Legislative, Administrative or Policy Measures";
+			if(schame.toLowerCase()=="abscheckpoint"			) return "Checkpoint";
+			if(schame.toLowerCase()=="abscheckpointcommunique") return "Checkpoint Communiqué";
+			if(schame.toLowerCase()=="abspermit"				) return "Internationally Recognized Certificate of Compliance";
+            if(schame.toLowerCase()=="meetingdocument"		) return "Meeting Document";
+            if(schame.toLowerCase()=="pressrelease"			) return "Press Release";
+			if(schame.toLowerCase()=="news"					) return "News";
+
+
+			return schame;
+		};
+	}]);
+
+	//============================================================
+	//
+	//
+	//
+	//============================================================
+	app.filter("schemaIcon", [function() {
+
+		return function( schame ) {
+
+			//if(schame.toLowerCase()=="focalpoint"				) return "ABS National Focal Point";
+			if(schame.toLowerCase()=="authority"				) return "mdi-action-account-box";
+			//if(schame.toLowerCase()=="contact"				) return "Contact";
+			if(schame.toLowerCase()=="database"				) return "mdi-file-folder";
+			if(schame.toLowerCase()=="resource"				) return "mdi-editor-insert-drive-file";
+			//if(schame.toLowerCase()=="organization"			) return "Organization";
+			if(schame.toLowerCase()=="measure" 				) return "mdi-action-stars";
+			if(schame.toLowerCase()=="abscheckpoint"			) return "mdi-action-verified-user";
+			if(schame.toLowerCase()=="abscheckpointcommunique") return "mdi-communication-message";
+			if(schame.toLowerCase()=="abspermit"				) return "mdi-action-bookmark";
+			//if(schame.toLowerCase()=="meetingdocument"		) return "Meeting Document";
+			//if(schame.toLowerCase()=="pressrelease"			) return "Press Release";
+			//if(schame.toLowerCase()=="news"					) return "News";
 
 
 			return schame;
