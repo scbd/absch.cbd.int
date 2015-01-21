@@ -151,9 +151,6 @@ define(['app','underscore',
               //console.log('region: ', q);
             if($scope.queryRegion)      q += ' AND (' + $scope.queryRegion + ')';
 
-            if($scope.otherRealmQuery && $scope.otherRealmQuery.length > 0)
-                q = '(' + q + ') OR '+ $scope.otherRealmQuery
-                    + ($scope.keyword ? keywordQuery : '');
 
             var queryParameters = {
                 'q': q,
@@ -281,7 +278,7 @@ define(['app','underscore',
 // $("#search_controls").attr( "style", "top:10px !important" );
         $("#search_controls").on('affixed.bs.affix', function(){
             //$("#search-results").addClass( "col-xs-offset-3" );
-            console.log($("#search_controls").css( "top"))
+            //console.log($("#search_controls").css( "top"))
             // $("#search_controls").attr( "style", "top:10px !important" );
 // $("#search_controls").attr( "style", "top:10px !important" );
         });
@@ -294,7 +291,6 @@ define(['app','underscore',
 
         $scope.$watch('currentPage',     refresh);
         $scope.$watch('querySchema',     function() { $scope.currentPage=0; refresh(); affix(); });
-        $scope.$watch('otherRealmQuery',  function() { $scope.currentPage=0; refresh(); affix(); });
         $scope.$watch('queryGovernment', function() { $scope.currentPage=0; refresh(); affix();  });
         $scope.$watch('queryTargets',    function() { $scope.currentPage=0; refresh(); affix();  });
         $scope.$watch('queryTheme',      function() { $scope.currentPage=0; refresh(); affix();  });

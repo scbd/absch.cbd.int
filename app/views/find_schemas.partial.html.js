@@ -8,8 +8,7 @@ app.directive('searchFilterSchemas', function ($http) {
               title: '@title',
               items: '=ngModel',
               field: '@field',
-              query: '=query',
-              skipRealmQuery : '=skipRealmQuery'
+              query: '=query'
         },
         link: function ($scope, element, attrs, ngModelController)
         {
@@ -167,10 +166,6 @@ app.directive('searchFilterSchemas', function ($http) {
                     $scope.query = query;
                     //console.log (query);
                 }
-                if($scope.focalPoint.selected && $scope.focalPointCBD)
-                    $scope.skipRealmQuery = ' (type_ss:CBD-FP1 OR type_ss:CBD-FP2) ';
-                else
-                    $scope.skipRealmQuery = '';
             }
 
             function buildConditions (conditions, items) {
@@ -220,7 +215,7 @@ app.directive('searchFilterSchemas', function ($http) {
                                 else if(filter.type=='checkbox'){
                                     var selectedValues = $scope[filter.name];
                                     var query = buildFocalPointQuery();
-                                    console.log(subFilterQuery, conditions, subFilterQuery.indexOf(query));
+                                    // console.log(subFilterQuery, conditions, subFilterQuery.indexOf(query));
                                     if(selectedValues && query!='' && subFilterQuery.indexOf(query) ==-1){
                                         subFilterQuery = subFilterQuery + ' AND ' +  query;
                                     }
@@ -306,7 +301,7 @@ app.directive('searchFilterSchemas', function ($http) {
                                                 subFilters : [
                                                                 { name: 'focalPointICNP',       type: 'checkbox' , field: 'type_ss', value : 'ABS-IC' },
                                                                 { name: 'focalPointNP',         type: 'checkbox',  field: 'type_ss', value : 'NP-FP' },
-                                                                { name: 'focalPointCBD'  ,      type: 'checkbox' , field: 'type_ss'}
+                                                                { name: 'focalPointCBD'  ,      type: 'checkbox' , field: 'type_ss', value : ['CBD-FP1', 'CBD-FP1']}
                                                 ]
                                              };
             $scope.authority               = { identifier: 'authority',                title: 'Competent National Authorities' ,
@@ -445,15 +440,24 @@ app.directive('searchFilterSchemas', function ($http) {
 
 
             function buildFocalPointQuery(){
-                var query = '';
+                var query = [];
                 if($scope.focalPoint.selected){
+
                     if($scope.focalPointICNP)
-                        query = ' type_ss:ABS-IC';
+                        query.push('ABS-IC');
 
                     if($scope.focalPointNP)
-                        query = query!='' ? ('(' + query + ' OR type_ss:NP-FP)') : 'type_ss:NP-FP';
+                        query.push('NP-FP');
+
+                    if($scope.focalPointCBD){
+                        query.push('CBD-FP1');
+                        query.push('CBD-FP2');
+                    }
                 }
-                return query;
+                if(query.length >0)
+                    return '(type_ss:' + query.join(' OR type_ss:') + ')';
+
+                return '';
             }
 
 
