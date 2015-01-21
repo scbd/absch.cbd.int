@@ -42,7 +42,7 @@
 				 			<span >{{document.info | uniqueIDWithoutRevision }}</span>
 							<span ng-show="document.id">{{document.id}}</span>
 					    </a>
-						<span ng-show="!document.id">not yet assigned</span>
+						<span ng-show="!document.info  && !document.id">not yet assigned</span>
 					</span>
 			</div>
 
