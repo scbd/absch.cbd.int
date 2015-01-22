@@ -4,214 +4,192 @@
 <link href="/app/libs/jqvmap/jqvmap/jqvmap.css" rel="stylesheet">
 
 <style type="text/css">
-
-    .jqvmap-label{
-        background:none;
-        color:none;
-    }
-    .jqvmap-zoomin, .jqvmap-zoomout{
-        /*padding:0px;*/
-        width:25px;
-        height:25px
-    }
-    .view li{
-        cursor:pointer
-    }
-
-    .active-circle{border:2px solid #ccc;}
-
-    .animate-enter,
-    .animate-leave
-    {
-      -webkit-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-      -moz-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-      -ms-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-      -o-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-      transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-      position: relative;
-      display: block;
-    }
-
-    .animate-enter.animate-enter-active,
-    .animate-leave {
-      opacity: 1;
-      top: 0;
-      height: 30px;
-    }
-
-    .animate-leave.animate-leave-active,
-    .animate-enter {
-      opacity: 0;
-      top: -50px;
-      height: 0px;
-    }
-    .active-facet{
-        background-color:#428bca!important;
-    }
-    .facetCircle{
-        width:80px;height:80px;padding-top:20px;padding-left:20px;background-color:#1FA65D;
-    }
-    .myWell-on{
-            /*background-color:#428bca!important;*/
-            color:#428bca!important;
-    }
-    .europeanUnion{
-        top: 25%;
-        left: 34%;
-        /*width: 10%;
+  .jqvmap-label {
+    background: none;
+    color: none;
+  }
+  .jqvmap-zoomin,
+  .jqvmap-zoomout {
+    /*padding:0px;*/
+    width: 25px;
+    height: 25px
+  }
+  .view li {
+    cursor: pointer
+  }
+  .active-circle {
+    border: 2px solid #ccc;
+  }
+  .animate-enter,
+  .animate-leave {
+    -webkit-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -moz-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -ms-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -o-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    position: relative;
+    display: block;
+  }
+  .animate-enter.animate-enter-active,
+  .animate-leave {
+    opacity: 1;
+    top: 0;
+    height: 30px;
+  }
+  .animate-leave.animate-leave-active,
+  .animate-enter {
+    opacity: 0;
+    top: -50px;
+    height: 0px;
+  }
+  .active-facet {
+    background-color: #428bca!important;
+  }
+  .facetCircle {
+    width: 80px;
+    height: 80px;
+    padding-top: 20px;
+    padding-left: 20px;
+    background-color: #1FA65D;
+  }
+  .myWell-on {
+    /*background-color:#428bca!important;*/
+    color: #428bca!important;
+  }
+  .europeanUnion {
+    top: 25%;
+    left: 34%;
+    /*width: 10%;
         background-color:#428bca;*/
-        /*min-height:25px;
+    /*min-height:25px;
         min-width:25px;
         z-index:-1;*/
-    }
-    .flag-icon-background {
-        background-size: contain;
-        background-position: 50%;
-        background-repeat: no-repeat;
-    }
-    .flag-icon-eur {
-        background-image: url('/app/img/EUFlag.png');
-        width: :165px;
-    }
+  }
+  .flag-icon-background {
+    background-size: contain;
+    background-position: 50%;
+    background-repeat: no-repeat;
+  }
+  .flag-icon-eur {
+    background-image: url('/app/img/EUFlag.png');
+    width: : 165px;
+  }
 </style>
 <script type="text/javascript">
   $("#signature").tooltip();
 </script>
 
-<div ng-controller="CountriesController"
- ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart="startTour">
+<div ng-controller="CountriesController" ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart="startTour">
 
-    <div class="category-container" >
-        <div class="container">
-            <span class="category">
-              <div class="row"  >
-                  <div class="span12">
+  <div class="category-container">
+    <div class="container">
+      <span class="category">
+        <div class="row"  >
+          <div class="span12">
+            <table align="center" style="width: 90%;text-align:center;" cellspacing="10" cellpadding="10">
 
+                <tr>
+                    <td style="text-align: center; width: 200px;" id="cbdParties">
+                        <div style="width: 180px; height: 100px;cursor:pointer;" ng-click="searchFilter=isPartyToCBD;updateMap('party')">
 
-                    <table align="center" style="width: 90%;text-align:center;" cellspacing="10" cellpadding="10">
+                          <div class="numberCircle" style="width:80px;height:80px;padding-top:20px;background-color:#1FA65D;" ng-class="{'active-circle': selected_circle=='party'}">
+                          {{parties}}</div>
+                          <div style="padding-top:5px;color: #fff; font-size: 10px; text-transform: uppercase;font-weight:bold;">
+                          PARTIES TO THE CBD</div>
 
-                        <tr>
-                            <td style="text-align: center; width: 200px;" id="cbdParties">
-                                <div style="width: 180px; height: 100px;cursor:pointer;" ng-click="searchFilter=isPartyToCBD;updateMap('party')">
+                            <!-- <div style="color: #666; font-size: 10px; text-transform: uppercase;">Parties to the CBD</div>
+                            <div style="color: #444; font-size: 28px; padding-top: 10px;font-weight:bold;"> 197
+                            </div> -->
+                        </div>
+                    </td>
+                     <td style="text-align:center;width:200px;" id="signatories">
+                        <div  style="width: 180px; height: 100px;cursor:pointer;" ng-click="searchFilter=isSignatory;updateMap('signatory')">
 
-                                  <div class="numberCircle" style="width:80px;height:80px;padding-top:20px;background-color:#1FA65D;" ng-class="{'active-circle': selected_circle=='party'}">
-                                  {{parties}}</div>
-                                  <div style="padding-top:5px;color: #fff; font-size: 10px; text-transform: uppercase;font-weight:bold;">
-                                  PARTIES TO THE CBD</div>
-
-                                    <!-- <div style="color: #666; font-size: 10px; text-transform: uppercase;">Parties to the CBD</div>
-                                    <div style="color: #444; font-size: 28px; padding-top: 10px;font-weight:bold;"> 197
-                                    </div> -->
-                                </div>
-                            </td>
-                             <td style="text-align:center;width:200px;" id="signatories">
-                                <div  style="width: 180px; height: 100px;cursor:pointer;" ng-click="searchFilter=isSignatory;updateMap('signatory')">
-
-                                <div class="numberCircle" style="width:80px;height:80px;padding-top:20px;background-color:#5bc0de;"  ng-class="{'active-circle': selected_circle=='signatory'}">
-                                {{signatures}}</div>
-                                <div style="padding-top:5px;color: #fff; font-size: 10px; text-transform: uppercase;font-weight:bold;">
-                                Signatures</div>
+                        <div class="numberCircle" style="width:80px;height:80px;padding-top:20px;background-color:#5bc0de;"  ng-class="{'active-circle': selected_circle=='signatory'}">
+                        {{signatures}}</div>
+                        <div style="padding-top:5px;color: #fff; font-size: 10px; text-transform: uppercase;font-weight:bold;">
+                        Signatures</div>
 
 
-                                </div>
-                                 </td>
-                            <td style="text-align: center; width: 200px;" id="ratified">
-                              <div style="width: 180px; height: 100px;cursor:pointer;" ng-click="searchFilter=isRatified;updateMap('ratified')">
+                        </div>
+                         </td>
+                    <td style="text-align: center; width: 200px;" id="ratified">
+                      <div style="width: 180px; height: 100px;cursor:pointer;" ng-click="searchFilter=isRatified;updateMap('ratified')">
 
-                                  <div class="numberCircle" style="width:80px;height:80px;padding-top:20px;background-color:#428bca;"  ng-class="{'active-circle': selected_circle=='ratified'}">
-                                  {{ratifications}}</div>
-                                  <div style="padding-top:5px;color: #fff; font-size: 10px; text-transform: uppercase;font-weight:bold;">
-                                  ratifications</div>
-                                </div>
-                            </td>
-                            <td style="text-align:center;width:200px;cursor:pointer;" id="inbetweenParties">
-                                <div style=" width: 180px; height: 100px;" ng-click="searchFilter=isInbetweenParties;updateMap('inbetweenParties')">
-                                  <div class="numberCircle" style="width:80px;height:80px;padding-top:20px;background-color:#5cb85c;"  ng-class="{'active-circle': selected_circle=='inbetweenParties'}">
-                                      {{inbetweenParties}}</div>
-                                      <div style="padding-top:5px;color: #fff; font-size: 10px; text-transform: uppercase;font-weight:bold;">
-                                          in-between parties
-                                      </div>
-                                   </div>
-                            </td>
-                        </tr>
-                    </table>
-
-
-
-                  </div>
-               </div>
+                          <div class="numberCircle" style="width:80px;height:80px;padding-top:20px;background-color:#428bca;"  ng-class="{'active-circle': selected_circle=='ratified'}">
+                          {{ratifications}}</div>
+                          <div style="padding-top:5px;color: #fff; font-size: 10px; text-transform: uppercase;font-weight:bold;">
+                          ratifications</div>
+                        </div>
+                    </td>
+                    <td style="text-align:center;width:200px;cursor:pointer;" id="inbetweenParties">
+                        <div style=" width: 180px; height: 100px;" ng-click="searchFilter=isInbetweenParties;updateMap('inbetweenParties')">
+                          <div class="numberCircle" style="width:80px;height:80px;padding-top:20px;background-color:#5cb85c;"  ng-class="{'active-circle': selected_circle=='inbetweenParties'}">
+                              {{inbetweenParties}}</div>
+                              <div style="padding-top:5px;color: #fff; font-size: 10px; text-transform: uppercase;font-weight:bold;">
+                                  in-between parties
+                              </div>
+                           </div>
+                    </td>
+                </tr>
+            </table>
+          </div>
         </div>
-   </div>
+      </span>
+    </div>
+  </div>
 
-   <div class="container">
+  <div class="container">
     <div class="row">
-        <div class="col-xs-12">
-            <div class="row" style="margin-bottom:-22px;padding-top:20px;padding-bottom:20px;">
+      <div class="col-xs-12">
+        <div class="row" style="margin-bottom:-22px;padding-top:20px;padding-bottom:20px;">
 
 
 
-                <a ng-href="#" ng-click="searchFilter=isPartyToCBD;updateMap('party')">
-                    <div class="col-xs-8ths" id="myWell" style="height:80px;">
+          <a ng-href="#" ng-click="searchFilter=isPartyToCBD;updateMap('party')">
+            <div class="col-xs-8ths" id="myWell" style="height:80px;">
 
 
-                        <div class="well text-center" >
+              <div class="well text-center">
 
-                        <!-- <div class="stats-schema" >
+                <!-- <div class="stats-schema" >
                             <span  ng-show="facet[0]!= 'RAT'">{{facet[0]|lowercase|schemaName}}</span>
-                            <span  ng-show="facet[0]== 'RAT'">Ratifications</span>
-                        </div> -->
-                        <br>
-                        <span class="stats-count" ng-class="{'myWell-on': isSelected(facet[0])}" >
+      <span ng-show="facet[0]== 'RAT'">Ratifications</span>
+    </div>-->
+                <br>
+                <span class="stats-count" ng-class="{'myWell-on': isSelected(facet[0])}">
                             ALL</span>
-                        <br><br>
-                        <!-- <span class="stats-country">
+                <br>
+                <br>
+                <!-- <span class="stats-country">
                             <span ng-show="!facet[1].countryCount">&nbsp;</span>
                             <span ng-show="facet[1].countryCount"style="color:#777">Countries {{facet[1].countryCount}}</span></span> -->
-                        </div>
+              </div>
+            </div>
+          </a>
 
 
-                        <!-- <div class="panel panel-default" ng-class="{'panel-primary': isSelected('party')}"  >
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-10 text-center">
-                                    <div class="huge">All</div>
-                                </div>
-                                <div class="col-xs-10 text-right">
-                                    <div class="huge">&nbsp;</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel-footer">
-                            <span class="pull-left">View</span>
-                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div> -->
+          <a ng-href="#" ng-click="selected_facet=facet[0];updateMap(facet[0]);" ng-repeat="facet in commonFormatFacets" style="display:inline;">
+            <div class="col-xs-8ths" id="myWell">
+              <div class="well text-center">
+
+                <div class="stats-schema">
+                  <span ng-show="facet[0]!= 'RAT'">{{facet[0]|lowercase|schemaName}}</span>
+                  <span ng-show="facet[0]== 'RAT'">Ratifications</span>
                 </div>
-                </a>
 
-
-                <a ng-href="#" ng-click="selected_facet=facet[0];updateMap(facet[0]);" ng-repeat="facet in commonFormatFacets" style="display:inline;" >
-                    <div class="col-xs-8ths" id="myWell"   >
-                        <div class="well text-center" >
-
-                        <div class="stats-schema" >
-                            <span  ng-show="facet[0]!= 'RAT'">{{facet[0]|lowercase|schemaName}}</span>
-                            <span  ng-show="facet[0]== 'RAT'">Ratifications</span>
-                        </div>
-
-                        <span class="stats-count" ng-class="{'myWell-on': isSelected(facet[0])}" >
+                <span class="stats-count" ng-class="{'myWell-on': isSelected(facet[0])}">
                             {{facet[1].facetCount}}</span>
-                        <br>
-                        <span class="stats-country">
+                <br>
+                <span class="stats-country">
                             <span ng-show="!facet[1].countryCount">&nbsp;</span>
-                            <span ng-show="facet[1].countryCount"style="color:#777">Countries {{facet[1].countryCount}}</span></span>
-                        </div>
-                    </div>
-                </a>
+                <span ng-show="facet[1].countryCount" style="color:#777">Countries {{facet[1].countryCount}}</span></span>
+              </div>
+            </div>
+          </a>
 
 
-              <!-- <div class="col-lg-1" ng-repeat="facet in commonFormatFacets" style="padding:5px !important;width:11.66% !important">
+          <!-- <div class="col-lg-1" ng-repeat="facet in commonFormatFacets" style="padding:5px !important;width:11.66% !important">
                 <a ng-href="#">
                     <div class="panel panel-default"
                     ng-class="{'panel-primary': isSelected(facet[0])}"  ng-click="selected_facet=facet[0];updateMap(facet[0]);">
@@ -239,98 +217,106 @@
 
 
 
-          </div>
         </div>
+      </div>
     </div>
     <!-- <div class="pull-left">
         <a class="color-orange fa-11" ng-href="#"  ng-click="startIntro()"> <i class="fa fa-youtube-play" ng-click="startIntro()" style="cursor:pointer"></i></a>
 
     </div> -->
-    <!-- <div class="row  pull-right">
-        <div class="col-lg-12" id="options">
-            <div class="btn-group">
-              <button class="btn btn-info" data-toggle="dropdown">
-                  <i ng-hide="showMap" class="fa fa-list fa-lg">&nbsp;&nbsp;List</i>
-                  <i ng-show="showMap" class="fa fa-globe fa-lg">&nbsp;&nbsp;Map</i>
-              </button>
-              <button class="btn dropdown-toggle btn-info" data-toggle="dropdown">
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu view">
-                <li><a ng-click="showMap=false;slideMap('#listDiv','#mapDiv')"><i class="fa fa-list fa-lg"></i>&nbsp;&nbsp;List</a></li>
-                <li><a ng-click="showMap=true;slideMap('#mapDiv','#listDiv')"><i class="fa fa-globe fa-lg"></i>&nbsp;&nbsp;Map</a></li>
-              </ul>
-            </div>
-
+    <div class="row  pull-right">
+      <div class="col-lg-12" id="options">
+        <div class="btn-group">
+          <button class="btn btn-info" data-toggle="dropdown">
+            <i ng-hide="showMap" class="fa fa-list fa-lg">&nbsp;&nbsp;List</i>
+            <i ng-show="showMap" class="fa fa-globe fa-lg">&nbsp;&nbsp;Map</i>
+          </button>
+          <button class="btn dropdown-toggle btn-info" data-toggle="dropdown">
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu view">
+            <li><a ng-click="showMap=false;slideMap('#listDiv','#mapDiv')"><i class="fa fa-list fa-lg"></i>&nbsp;&nbsp;List</a>
+            </li>
+            <li><a ng-click="showMap=true;slideMap('#mapDiv','#listDiv')"><i class="fa fa-globe fa-lg"></i>&nbsp;&nbsp;Map</a>
+            </li>
+          </ul>
         </div>
-    </div> -->
-<br/><br/><br/>
+
+      </div>
+    </div>
+    <br/>
+    <br/>
+    <br/>
     <div class="row">
-          <div id="vmap" style="width: 100%; height: 500px;"></div>
+      <div id="vmap" style="width: 100%; height: 500px;"></div>
     </div>
 
-    <div class="row"  >
+    <div class="row">
       <div class="span12">
 
         <table class="table table-countries table-striped">
           <tr>
-              <td colspan="10" >
-                  <!-- <div class="pull-left">
+            <td colspan="10">
+              <!-- <div class="pull-left">
                     <span class="label label-default">Not Ratified</span>
                     <span class="label label-primary">Ratified</span>
                     <span class="label label-info">Signatory</span>
                   </div> -->
-                  <div class="pull-right" style="width:30%" >
-                    <div angucomplete id="ex1" placeholder="Search countries" pause="100"  localdata="countriesforAutocomplete" minlength="1" inputclass="form-control form-control-small"   searchfields="name" selectedObject="selectedCountry" searchStr="countryFilter" titlefield="name"/>
-                  </div>
-              </td>
+              <div class="pull-right" style="width:30%">
+                <div angucomplete id="ex1" placeholder="Search countries" pause="100" localdata="countriesforAutocomplete" minlength="1" inputclass="form-control form-control-small" searchfields="name" selectedObject="selectedCountry" searchStr="countryFilter" titlefield="name"
+                />
+              </div>
+            </td>
           </tr>
           <tr>
             <th>#</th>
             <th style="white-space:nowrap;"><span style="cursor:pointer;" ng-click="sortTable('name.en')">Country
-             <i ng-show="sortTerm=='name.en'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span></th>
-             <!-- <th style="white-space:nowrap;"><span style="cursor:pointer;" ng-click="sortTable('treaties.XXVII8b.signature')">Signature
+             <i ng-show="sortTerm=='name.en'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span>
+            </th>
+            <!-- <th style="white-space:nowrap;"><span style="cursor:pointer;" ng-click="sortTable('treaties.XXVII8b.signature')">Signature
              <i ng-show="sortTerm=='treaties.XXVII8b.signature'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span></th>
              <th style="white-space:nowrap;"><span style="cursor:pointer;" ng-click="sortTable('treaties.XXVII8b.instrument')">Instrument
              <i ng-show="sortTerm=='treaties.XXVII8b.instrument'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span></th> -->
             <th style="white-space:nowrap;"><span style="cursor:pointer;" ng-click="sortTable('treaties.XXVII8b.deposit')">Deposit
-             <i ng-show="sortTerm=='treaties.XXVII8b.deposit'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span></th>
+             <i ng-show="sortTerm=='treaties.XXVII8b.deposit'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span>
+            </th>
             <!-- <th>Entry into force</th> -->
             <th style="white-space:nowrap;">
-                <span style="cursor:pointer;" ng-click="sortTable('CNA')">CNA
+              <span style="cursor:pointer;" ng-click="sortTable('CNA')">CNA
                 <i ng-show="sortTerm=='CNA'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span>
             </th>
             <th style="white-space:nowrap;">
-                <span style="cursor:pointer;" ng-click="sortTable('CP')">CP
+              <span style="cursor:pointer;" ng-click="sortTable('CP')">CP
                 <i ng-show="sortTerm=='CP'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span>
             </th>
             <th style="white-space:nowrap;">
-                <span style="cursor:pointer;" ng-click="sortTable('CPC')">CPC
+              <span style="cursor:pointer;" ng-click="sortTable('CPC')">CPC
                 <i ng-show="sortTerm=='CPC'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span>
             </th>
             <th style="white-space:nowrap;">
-                <span style="cursor:pointer;" ng-click="sortTable('IRCC')">IRCC
+              <span style="cursor:pointer;" ng-click="sortTable('IRCC')">IRCC
                 <i ng-show="sortTerm=='IRCC'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span>
             </th>
             <th style="white-space:nowrap;">
-                <span style="cursor:pointer;" ng-click="sortTable('MSR')">MSR
+              <span style="cursor:pointer;" ng-click="sortTable('MSR')">MSR
                 <i ng-show="sortTerm=='MSR'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span>
             </th>
             <th style="white-space:nowrap;">
-                <span style="cursor:pointer;" ng-click="sortTable('NDB')">NDB
+              <span style="cursor:pointer;" ng-click="sortTable('NDB')">NDB
                 <i ng-show="sortTerm=='NDB'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span>
             </th>
             <th style="white-space:nowrap;">
-                <span style="cursor:pointer;" ng-click="sortTable('FP')">FP
+              <span style="cursor:pointer;" ng-click="sortTable('FP')">FP
                 <i ng-show="sortTerm=='FP'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span>
             </th>
 
-          </tr><!-- -->
-          <tr ng-repeat="country in (countries | filter:countryFilter | filter: searchFilter | orderBy:sortTermFilter:orderList)"  ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}" >
+          </tr>
+          <!-- -->
+          <tr ng-repeat="country in (countries | filter:countryFilter | filter: searchFilter | orderBy:sortTermFilter:orderList)" ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
             <td>{{$index + 1}}</td>
-            <td><a ng-href="countries/{{country.code}}"  class="country-list-name label" ng-class="{'label-info':country.isSignatory && !country.isRatified, 'label-primary':country.isRatified, 'label-default':!country.isRatified && !country.isSignatory, 'label-success' : country.inbetweenParties}">{{country.name.en}}</a>
-                &nbsp;
-                <span class="label label-success" ng-show={{country.inbetweenParties}}>entry into force on {{addDate(country.treaties.XXVII8b.deposit)| formatDate}}</span>
+            <td><a ng-href="countries/{{country.code}}" class="country-list-name label" ng-class="{'label-info':country.isSignatory && !country.isRatified, 'label-primary':country.isRatified, 'label-default':!country.isRatified && !country.isSignatory, 'label-success' : country.inbetweenParties}">{{country.name.en}}</a>
+              &nbsp;
+              <span class="label label-success" ng-show={{country.inbetweenParties}}>entry into force on {{addDate(country.treaties.XXVII8b.deposit)| formatDate}}</span>
             </td>
             <!-- <td>{{country.treaties.XXVII8b.signature}}</td>
             <td>{{country.treaties.XXVII8b.instrument}}</td> -->
@@ -348,6 +334,6 @@
         </table>
 
 
-   </div>
+      </div>
 
-</div>
+    </div>

@@ -132,7 +132,7 @@ app.directive('documentList', function ($http, $filter) {
 
                 $scope.$watch('documents', function (newValue, oldValue) {
 
-                     if (newValue != oldValue)
+                     if (newValue && newValue != oldValue)
                      {
                         $scope.pageCount = Math.ceil($scope.documentCount / $scope.itemsPerPage);
                        $scope.transformedDocuments = [];
