@@ -284,7 +284,7 @@ define(["app"], function (app) {
 
 		return function( schame ) {
 
-			if(schame.toLowerCase()=="focalpoint"				) return "ABS National Focal Point";
+			if(schame.toLowerCase()=="focalpoint"				) return "Focal Point";
 			if(schame.toLowerCase()=="authority"				) return "Competent National Authority";
 			if(schame.toLowerCase()=="contact"				) return "Contact";
 			if(schame.toLowerCase()=="database"				) return "National Website or Database";

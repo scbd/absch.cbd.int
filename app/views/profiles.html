@@ -109,9 +109,15 @@
         <!-- Sidebar -->
         <div class="row">
 
-          <div class="well col-xs-3" ng-show="true">
+        <div class="col-xs-3">
+            <h1 class="special-font">Country Profiles</h1>
+
+            <div class="well" ng-show="true">
+
+
 
             <!-- <span>Country List</span> -->
+
 
             <div style="padding-bottom:10px;">
               <i class="pull-right fa fa-globe fa-lg" ng-click="showMap(true);" style="cursor:pointer">&nbsp;View Map</i>
@@ -152,6 +158,7 @@
             </div>
 
           </div>
+      </div>
 
           <!-- <div ng-class="{'col-xs-12' : !showlist, 'col-xs-9':showlist}" > -->
           <div class="col-xs-9">
@@ -250,7 +257,7 @@
                   </div>
 
                   <div class="row">
-                    <div id="vmap" style="width: 100%; height: 500px;"></div>
+                    <div id="vmap" style="width: 100%; height: 500px;background-color:#333!important;"></div>
                   </div>
 
                 </div>
@@ -300,7 +307,7 @@
                             <h4>
 			          <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span>
 			          <span style="color: #428BCA; ">NFP</span>
-			         <span style="color:#111;">ICNP ABS National Focal Points ({{nfpCount}})</span>
+			         <span style="color:#111;">National Focal Points ({{nfpCount}})</span>
 
 			         </h4>
                           </a>
