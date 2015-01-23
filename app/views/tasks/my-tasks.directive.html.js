@@ -3,6 +3,29 @@
 "use strict";
 app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm", "underscore","$route", function ($scope, $timeout, IWorkflows, realm, _, $route)
 		{
+
+			$scope.options = {
+					filterTypes : function(){
+							var types = [];
+							types.push({'identifier':'authority', 				'name':'Competent National Authority'});
+							types.push({'identifier':'measure', 				'name':'Legislative, administrative or policy measures'});
+							types.push({'identifier':'database', 				'name':'National Websites and Databases'});
+							types.push({'identifier':'absPermit', 				'name':'Internationally Recognized Certificate of Compliance'});
+							types.push({'identifier':'absCheckpoint', 			'name':'Checkpoints'});
+							types.push({'identifier':'absCheckpointCommunique', 'name':'Checkpoint Communiqués'});
+
+							return types;
+					},
+					filterStatus : function(){
+						var status = [];
+						status.push({'identifier':'1', 				'name':'Wating your approval'});
+						status.push({'identifier':'2', 				'name':'Approved'});
+						status.push({'identifier':'3', 				'name':'Rejected'});
+
+						return status;
+					}
+			};
+
 			var nextLoad  = null
 			var myUserID = $scope.$root.user.userID;
 			var queryAllTasks    = {
@@ -106,6 +129,32 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
 				if(nextLoad)
 					$timeout.cancel(nextLoad);
 			});
+
+			$scope.filterByType = function(entity){
+
+				console.log($scope.filterType,entity.workflow.data.metadata.schema)
+				if(!$scope.filterType)
+					return true;
+
+				return entity && $scope.filterType == entity.workflow.data.metadata.schema;
+			}
+
+			$scope.filterByStatus = function(task){
+
+				if(!$scope.filterStatus)
+					return true;
+
+				if($scope.filterStatus==1){
+					return task && task.workflow.state!='completed' &&  task.activity.name=='publishRecord';
+				}
+				else if($scope.filterStatus == 2){
+					return task && task.workflow.state=='completed' &&  task.activity.result.action=='approve';
+				}
+				else if($scope.filterStatus == 3){
+					return task && task.workflow.state=='completed' &&  task.activity.result.action=='reject';
+				}
+				//return entity && _.contains($scope.filterStatus, entity.workflow.data.metadata.schema);
+			}
 
 		}]);
 });
