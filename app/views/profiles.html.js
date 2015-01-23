@@ -17,8 +17,8 @@
    '/app/js/common.js', 'jqvmap', 'jqvmapworld'
  ], function(app) {
    //require("app", "linqjs")
-   app.controller("ProfileController", ["$scope", "authHttp", "$routeParams", "linqjs", "$filter", "realm", "commonjs", "$q", '$element',
-     function($scope, $http, $routeParams, linqjs, $filter, realm, commonjs, $q, $element) {
+   app.controller("ProfileController", ["$scope", "authHttp", "$routeParams", "linqjs", "$filter", "realm", "commonjs", "$q", '$element','$timeout',
+     function($scope, $http, $routeParams, linqjs, $filter, realm, commonjs, $q, $element, $timeout) {
 
 
         $scope.showMap = function(newValue) {
@@ -215,6 +215,7 @@
              $scope.slideMap('#mapDiv', '#listDiv');
              CalculateFacets();
              calculateListViewFacets();
+
              $("#vmap").append("<div id=\"jqvmap1_EUR1\" class=\"europeanUnion jqvmap-zoomout flag-icon-background flag-icon-eur\" style=\"height:50px;width:100px;background-color:#eee\"></div>");
              //console.log($('#jqvmap1_EUR'))
 
@@ -248,6 +249,10 @@
                $scope.searchFilter = $scope.isRatified;
                $scope.updateMap('ratified');
              }
+
+             $timeout(function(){
+                 $element.find('[data-toggle="tooltip"]').tooltip();
+             },1000)
            });
 
          }
@@ -579,6 +584,7 @@
            $scope.showMap(false);
         else
             $scope.showMap(true);
+
 
        //    $(".toggleMe").click(function(e) {
        //

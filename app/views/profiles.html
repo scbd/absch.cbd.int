@@ -138,7 +138,15 @@
 
                     <div class="flag-icon-background flag-icon-{{country.code.toLowerCase()}}"></div>
                     {{country.name |lstring}}
-
+                    <div>
+                        <i class="mdi-action-account-box" style="font-size:16pt;position:relative;top:3px;" ng-show="country.CNA" data-toggle="tooltip" data-placement="right"  title="Competent National Authority">{{country.CNA}}</i>
+                        <i class="mdi-action-verified-user" style="font-size:16pt;position:relative;top:3px;" ng-show="country.CP" data-toggle="tooltip" data-placement="bottom"  title="Checkpoints">{{country.CP}}</i>
+                        <i class="mdi-action-stars" style="font-size:16pt;position:relative;top:3px;" ng-show="country.MSR" data-toggle="tooltip" data-placement="bottom"  title="Legislative, administrative or policy measures">{{country.MSR}}</i>
+                        <i class="mdi-action-bookmark" style="font-size:16pt;position:relative;top:3px;" ng-show="country.IRCC" data-toggle="tooltip" data-placement="bottom"  title="Internationally Recognized Certificate of Compliance">{{country.IRCC}}</i>
+                        <i class="mdi-communication-message" style="font-size:16pt;position:relative;top:3px;" ng-show="country.CPC" data-toggle="tooltip" data-placement="bottom"  title="Checkpoint Communiqués">{{country.CPC}}</i>
+                        <i class="mdi-file-folder" style="font-size:16pt;position:relative;top:3px;" ng-show="country.NDB" data-toggle="tooltip" data-placement="bottom"  title="National Websites and Databases">{{country.NDB}}</i>
+                        <i class="mdi-editor-insert-drive-file" style="font-size:16pt;position:relative;top:3px;" ng-show="country.VLR" data-toggle="tooltip" data-placement="bottom"  title="Virtual Library Records">{{country.VLR}}</i>
+                    </div>
                   </li>
               </ul>
             </div>
