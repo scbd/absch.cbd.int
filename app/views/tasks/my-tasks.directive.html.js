@@ -79,24 +79,24 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
 					query = queryAllTasks;
 				}
 
-				IWorkflows.query(query).then(function(workflows){
+					IWorkflows.query(query).then(function(workflows){
 
-					var tasks  = [];
+						var tasks  = [];
 
-					workflows.forEach(function(workflow) {
+						workflows.forEach(function(workflow) {
 
-						workflow.activities.forEach(function(activity){
+							workflow.activities.forEach(function(activity){
 
-							//if(isAssignedToMe(activity)) {
-								tasks.push({ workflow : workflow, activity : activity});
-						//	}
+								//if(isAssignedToMe(activity)) {
+									tasks.push({ workflow : workflow, activity : activity});
+							//	}
+							});
 						});
+
+						$scope.tasks = tasks;
+
+						//nextLoad = $timeout(load, 15*1000);
 					});
-
-					$scope.tasks = tasks;
-
-					//nextLoad = $timeout(load, 15*1000);
-				});
 			}
 
 			if($scope.$root.user.isAuthenticated)
@@ -132,7 +132,6 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
 
 			$scope.filterByType = function(entity){
 
-				console.log($scope.filterType,entity.workflow.data.metadata.schema)
 				if(!$scope.filterType)
 					return true;
 
@@ -155,6 +154,11 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
 				}
 				//return entity && _.contains($scope.filterStatus, entity.workflow.data.metadata.schema);
 			}
+
+			$scope.$on("updateWorkflowList", function(evt,data){
+
+				$timeout(function(){ load(); }, 8000);
+			})
 
 		}]);
 });
