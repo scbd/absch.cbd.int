@@ -7,144 +7,97 @@
 <link href="/app/libs/jqvmap/jqvmap/jqvmap.css" rel="stylesheet">
 
 <div ng-controller="ProfileController">
-  <style>
-    .dl-horizontal dd {
-      text-align: left;
-    }
-    .list-group-item-default {
-      color: #fff;
-      background-color: #999;
-    }
-    .list-group-item-primary {
-      color: #fff;
-      background-color: #428bca;
-    }
-    .list-group-item-info {
-      color: #fff;
-      background-color: #5bc0de;
-    }
-    .list-group-item-success {
-      color: #fff;
-      background-color: #5cb85c;
-    }
-    .list-flag {
-      background-position: 0%;
-    }
-    .jqvmap-label {
-      background: none;
-      color: none;
-    }
-    .jqvmap-zoomin,
-    .jqvmap-zoomout {
-      /*padding:0px;*/
-      width: 25px;
-      height: 25px
-    }
-    .view li {
-      cursor: pointer
-    }
-    .active-circle {
-      border: 2px solid #ccc;
-    }
-    .animate-enter,
-    .animate-leave {
-      -webkit-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-      -moz-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-      -ms-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-      -o-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-      transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-      position: relative;
-      display: block;
-    }
-    .animate-enter.animate-enter-active,
-    .animate-leave {
-      opacity: 1;
-      top: 0;
-      height: 30px;
-    }
-    .animate-leave.animate-leave-active,
-    .animate-enter {
-      opacity: 0;
-      top: -50px;
-      height: 0px;
-    }
-    .active-facet {
-      background-color: #428bca!important;
-    }
-    .facetCircle {
-      width: 80px;
-      height: 80px;
-      padding-top: 20px;
-      padding-left: 20px;
-      background-color: #1FA65D;
-    }
-    .myWell-on {
-      /*background-color:#428bca!important;*/
-      color: #428bca!important;
-    }
-    .europeanUnion {
-      top: 25%;
-      left: 31%;
-      /*width: 10%;
-        background-color:#428bca;*/
-      /*min-height:25px;
-        min-width:25px;
-        z-index:-1;*/
-    }
-    .flag-icon-background {
-      background-size: contain;
-      background-position: 50%;
-      background-repeat: no-repeat;
-    }
-    .flag-icon-eur {
-      background-image: url('/app/img/EUFlag.png');
-      width: : 165px;
-    }
-  </style>
 
-  <div class="container-fluid" id="wrapper">
-    <div class="row">
-      <div class="col-xs-12" style="padding-top:20px;">
 
-        <!-- Sidebar -->
-        <div class="row">
+  <div class="container-fluid" id="wrapper" style="background-color:#333;">
+    <div class="row" >
 
-        <div class="col-xs-3">
-            <h1 class="special-font">Country Profiles</h1>
+        <div class="col-xs-3" style="padding-top:20px;">
+            <h1 class="special-font">Country Information</h1>
 
             <div class="well" ng-show="true">
 
+                <!-- <div style="padding-bottom:10px;">
+                    <span class="btn btn-default"><i class="fa fa-globe fa-lg" ng-click="showMap(true);" style="cursor:pointer">&nbsp;View Map</i></span>
+                </div> -->
 
-
-            <!-- <span>Country List</span> -->
+              <div class="btn-group" data-toggle="buttons" style="padding-bottom:10px;">
+                  <label class="btn btn-default active">
+                      <input type="radio" name="options" id="option1" autocomplete="off" checked>
+                      <i class="fa fa-globe fa-lg" ng-click="showMap(true);" style="cursor:pointer">&nbsp;Map</i>
+                  </label>
+                  <label class="btn btn-default">
+                      <input type="radio" name="options" id="option2" autocomplete="off">
+                      <i class="fa fa-align-justify fa-lg" ng-click="showMap(false);" style="cursor:pointer">&nbsp;List</i>
+                  </label>
+              </div>
 
 
             <div style="padding-bottom:10px;">
-              <i class="pull-right fa fa-globe fa-lg" ng-click="showMap(true);" style="cursor:pointer">&nbsp;View Map</i>
-              <div style="font-size:16;font-weight:bold;">Nagoya Protocol Party status</div>
-              <span class="label label-primary">&nbsp;</span> Party
-              <br>
-              <span class="label label-success">&nbsp;</span> Inbetween party
-              <br>
-              <span class="label label-info">&nbsp;</span> Signatory
-              <br>
-              <span class="label label-default">&nbsp;</span> Non-Party
+                <div style="font-size:16;font-weight:bold;">Nagoya Protocol Party status</div>
+                <div  ng-click="searchFilter=isRatified;updateMap('ratified')" style="cursor:pointer;"><span class="label label-primary">&nbsp;</span> Party ({{ratifications}})</div>
+                <span class="label label-success">&nbsp;</span> Inbetween party ({{inbetweenParties}})
+                <br>
+                <span class="label label-info">&nbsp;</span> Signatory ({{signatures}})
+                <br>
+                <span class="label label-default">&nbsp;</span> Non-Party ({{parties-ratifications}})
             </div>
 
-            <input type="textbox" ng-model="countryFilter" placeholder="filter by country name." class="form-control form-control-small">
+            <!--    <hr>
+             <div style="padding-bottom:10px;">
+                <table style="width:100%">
+                <tr>
+                    <th>type</th>
+                    <th>records</th>
+                </tr>
+                <tr>
+                    <td>Competent National Authority (CNA)</td>
+                    <td>35</td>
+                </tr>
+                <tr>
+                    <td>Competent National Authority (CNA)</td>
+                    <td>35</td>
+                </tr>
+                <tr>
+                    <td>Competent National Authority (CNA)</td>
+                    <td>35</td>
+                </tr>
+                <tr>
+                    <td>Competent National Authority (CNA)</td>
+                    <td>35</td>
+                </tr>
+                <tr>
+                    <td>Competent National Authority (CNA)</td>
+                    <td>35</td>
+                </tr>
+                <tr>
+                    <td>Competent National Authority (CNA)</td>
+                    <td>35</td>
+                </tr>
+                <tr>
+                    <td>Competent National Authority (CNA)</td>
+                    <td>35</td>
+                </tr>
 
-            <div style="max-height:500px;overflow:scroll;">
+            </table>
+            </div> -->
+
+            <div>
+            <strong>Select a country</strong>
+            <input type="textbox" ng-model="countryFilter" placeholder="filter by country name" class="form-control form-control-small">
+
+            <!-- <div style="max-height:500px;overflow:scroll;">
               <ul class="list-group">
-                <li class="list-group-item" ng-show="!countries">loading countries<i class="fa fa-spinner" />
-
+                 -->
+<!--
                   <li ng-click="loadCountryDetails(country.code)" class="list-group-item" ng-repeat="country in countries | filter:countryFilter" style="cursor:pointer" ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}" ng-class="{'list-group-item-info':country.isSignatory && !country.isRatified,
                       'list-group-item-primary':country.isRatified,
                       'list-group-item-default':!country.isRatified && !country.isSignatory,
-                      'list-group-item-success' : country.isInbetweenParty}">
+                      'list-group-item-success' : country.isInbetweenParty}"> -->
 
-                    <div class="flag-icon-background flag-icon-{{country.code.toLowerCase()}}"></div>
-                    {{country.name |lstring}}
-                    <div>
+                    <!-- <div class="flag-icon-background flag-icon-{{country.code.toLowerCase()}}"></div> -->
+
+                    <!-- <div>
                         <i class="mdi-action-account-box" style="font-size:16pt;position:relative;top:3px;" ng-show="country.CNA" data-toggle="tooltip" data-placement="right"  title="Competent National Authority">{{country.CNA}}</i>
                         <i class="mdi-action-verified-user" style="font-size:16pt;position:relative;top:3px;" ng-show="country.CP" data-toggle="tooltip" data-placement="bottom"  title="Checkpoints">{{country.CP}}</i>
                         <i class="mdi-action-stars" style="font-size:16pt;position:relative;top:3px;" ng-show="country.MSR" data-toggle="tooltip" data-placement="bottom"  title="Legislative, administrative or policy measures">{{country.MSR}}</i>
@@ -152,22 +105,92 @@
                         <i class="mdi-communication-message" style="font-size:16pt;position:relative;top:3px;" ng-show="country.CPC" data-toggle="tooltip" data-placement="bottom"  title="Checkpoint Communiqués">{{country.CPC}}</i>
                         <i class="mdi-file-folder" style="font-size:16pt;position:relative;top:3px;" ng-show="country.NDB" data-toggle="tooltip" data-placement="bottom"  title="National Websites and Databases">{{country.NDB}}</i>
                         <i class="mdi-editor-insert-drive-file" style="font-size:16pt;position:relative;top:3px;" ng-show="country.VLR" data-toggle="tooltip" data-placement="bottom"  title="Virtual Library Records">{{country.VLR}}</i>
-                    </div>
-                  </li>
-              </ul>
-            </div>
+                    </div> -->
 
-          </div>
-      </div>
+
+
+                    <div class="row" >
+                            <div class="col-xs-6"><strong>country<strong></div>
+                            <div class="col-xs-1 text-center"><i class="mdi-action-account-box"    style="font-size:16px;"  data-toggle="tooltip" data-placement="top"  title="Competent National Authority"></i></div>
+                            <div class="col-xs-1 text-center"><i class="mdi-action-stars"          style="font-size:16px;"  data-toggle="tooltip" data-placement="top"  title="Legislative, administrative or policy measures"></i></div>
+                            <div class="col-xs-1 text-center"><i class="mdi-action-verified-user"  style="font-size:16px;"  data-toggle="tooltip" data-placement="top"  title="Checkpoints"></i></div>
+                            <div class="col-xs-1 text-center"><i class="mdi-communication-message" style="font-size:16px;"  data-toggle="tooltip" data-placement="top"  title="Checkpoint Communiqués"></i></div>
+                            <div class="col-xs-1 text-center"><i class="mdi-action-bookmark"       style="font-size:16px;"  data-toggle="tooltip" data-placement="top"  title="Internationally Recognized Certificate of Compliance"></i></div>
+                            <div class="col-xs-1 text-center"><i class="mdi-file-folder"           style="font-size:16px;"  data-toggle="tooltip" data-placement="top"  title="National Websites and Databases"></i></div>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div style="max-height:500px;overflow:scroll; cursor:pointer;padding:5px;">
+                        <div class="row"
+                            style="min-width:300px;"
+                            ng-click="loadCountryDetails(country.code)"
+                            ng-repeat="country in countries | filter:countryFilter"
+                            ng-class="{'list-group-item-info':country.isSignatory && !country.isRatified,
+                        'list-group-item-primary':country.isRatified,
+                        'list-group-item-default':!country.isRatified && !country.isSignatory,
+                        'list-group-item-success' : country.isInbetweenParty}">
+
+                            <div class="col-xs-6" >{{country.name |lstring}}</div>
+                            <div class="col-xs-1 text-center">{{country.CNA}}</div>
+                            <div class="col-xs-1 text-center">{{country.MSR}}</div>
+                            <div class="col-xs-1 text-center">{{country.CP}}</div>
+                            <div class="col-xs-1 text-center">{{country.CPC}}</div>
+                            <div class="col-xs-1 text-center">{{country.IRCC}}</div>
+                            <div class="col-xs-1 text-center">{{country.NDB}}</div>
+                        </div>
+                        </div>
+
+
+                        <!-- <table class="country-select" style="width:100%;" >
+                        <tr>
+                            <td><strong>country<strong></td>
+                            <td><i class="mdi-action-account-box"    style="font-size:16px;"  data-toggle="tooltip" data-placement="top"  title="Competent National Authority"></i></td>
+                            <td><i class="mdi-action-stars"          style="font-size:16px;"  data-toggle="tooltip" data-placement="top"  title="Legislative, administrative or policy measures"></i></td>
+                            <td><i class="mdi-action-verified-user"  style="font-size:16px;"  data-toggle="tooltip" data-placement="top"  title="Checkpoints"></i></td>
+                            <td><i class="mdi-communication-message" style="font-size:16px;"  data-toggle="tooltip" data-placement="top"  title="Checkpoint Communiqués"></i></td>
+                            <td><i class="mdi-action-bookmark"       style="font-size:16px;"  data-toggle="tooltip" data-placement="top"  title="Internationally Recognized Certificate of Compliance"></i></td>
+                            <td><i class="mdi-file-folder"           style="font-size:16px;"  data-toggle="tooltip" data-placement="top"  title="National Websites and Databases"></i></td>
+                        </tr>
+                        <tr
+
+                        ng-click="loadCountryDetails(country.code)"
+                        ng-repeat="country in countries | filter:countryFilter"
+                        style="cursor:pointer"
+                        ng-class="{'list-group-item-info':country.isSignatory && !country.isRatified,
+                        'list-group-item-primary':country.isRatified,
+                        'list-group-item-default':!country.isRatified && !country.isSignatory,
+                        'list-group-item-success' : country.isInbetweenParty}">
+                            <td>{{country.name |lstring}}</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>2</td>
+                            <td>4</td>
+                        </tr>
+                        </table> -->
+
+
+
+
+                </div>
+            </div>
+         </div>
+
+
+
+
+
 
           <!-- <div ng-class="{'col-xs-12' : !showlist, 'col-xs-9':showlist}" > -->
-          <div class="col-xs-9">
+          <div class="col-xs-9" style="padding-top:20px;">
 
             <div id="page-content-wrapper">
               <div class="page-content inset">
                 <!-- Country Map and Other -->
-                <div class="container1 ng-scope well" style="background-color:white;min-height:688px;" id="worldMap">
-                  <div class="row">
+                <div class="container1 ng-scope" style="min-height:800px;" id="worldMap">
+                  <!-- <div class="row">
                     <div class="span12">
                       <table align="center" style="width: 90%;text-align:center;" cellspacing="10" cellpadding="10">
 
@@ -213,9 +236,14 @@
                         </tr>
                       </table>
                     </div>
-                  </div>
+                  </div> -->
+
 
                   <div class="row">
+                      <div id="vmap" style="min-width:1000px;width: 100%; height: 1000px;background-color:#333!important;"></div>
+                  </div>
+
+                  <!-- <div class="row">
                     <div class="col-xs-12">
                       <div class="row" style="margin-bottom:-22px;padding-top:20px;padding-bottom:20px;">
                         <a ng-href="#" ng-click="searchFilter=isPartyToCBD;updateMap('party')">
@@ -254,188 +282,245 @@
                         </a>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
 
-                  <div class="row">
-                    <div id="vmap" style="width: 100%; height: 500px;background-color:#333!important;"></div>
-                  </div>
+
 
                 </div>
 
-                <div class="container1 ng-scope well" style="background-color:white;min-height:688px;" id="countryDetails">
+                <div class="panel panel-default ng-scope" style="background-color:white;min-height:800px;" id="countryDetails">
+                  <div class="panel-heading" style="marign-bottom:30px;">
+                      <table>
+                          <tr>
+                              <td style="width:120px;padding-right:20px;">
+                                  <div style="height:100px;" class="flag-icon-background  flag-icon-{{code.toLowerCase()}}"></div>
+                              </td>
+                          <td><span class="country-name" style="font-size:300%;">{{country.name.en}}</span>
+                              <h3 style="margin:0;padding:0;padding-top:5px;">
+                                  <span style="vertical-align:top" class="label label-info" ng-show="isSignatory(country) && !isRatified(country)">Signatory</span>
+                                  <span style="vertical-align:top" class="label label-success" ng-show="isInbetweenParty(country)">Entry into force on {{entryIntoForceDate| formatDate}}</span>
+                                  <span style="vertical-align:top" class="label label-default" ng-show="!isRatified(country)">Non-Party</span>
+                                  <span style="vertical-align:top" class="label label-primary" ng-show="isRatified(country)">Party since {{(country.treaties.XXVII8b.deposit ? country.treaties.XXVII8b.deposit : '- - - - - -') | formatDate}} </span>
+                              </h3>
+                          </td>
+                      </tr>
+                  </table>
+                </div>
 
-                  <div class="row top " style="padding-bottom:30px;">
-                    <div class="col-xs-12 col-md-5 col-lg-5">
+                  <div class="panel-body">
+                      <div class="col-xs-12">
+                      <!-- <div class="pull-right" style="width:30%">
+                        <div angucomplete id="ex1" placeholder="search country information" pause="100" localdata="autocompleteData" minlength="1" inputclass="form-control form-control-small" searchfields="title" selectedObject="selectedCountry" searchStr="searchText.$" titlefield="title"/>
+                      </div> -->
 
-                      <span class="country-name">
-                         {{country.name.en}}
-                      </span>
-                      </br>
-                      <span style="vertical-align:top" class="label label-success" ng-show="isInbetweenParty()">
-                    entry into force on {{entryIntoForceDate| formatDate}}</span>
-                    </div>
-                    <div class="col-xs-4 col-md-4 col-lg-4">
 
-                      <h3 style="white-space:nowrap;color:#1FA65D;">Nagoya Protocol on ABS</h3>
-                      <div class="row" style="text-align:right;">
-                        <div class="col-xs-6 col-md-6 col-lg-6">Signature</div>
-                        <div class="col-xs-6 col-md-6 col-lg-6">{{ country.treaties.XXVII8b.signature ? country.treaties.XXVII8b.signature : '- - - - - -'}}</div>
-                        <div class="col-xs-6 col-md-6 col-lg-6">Instrument</div>
-                        <div class="col-xs-6 col-md-6 col-lg-6">{{country.treaties.XXVII8b.instrument ? country.treaties.XXVII8b.instrument : '- - - - - -'}}</div>
-                        <div class="col-xs-6 col-md-6 col-lg-6">Deposit</div>
-                        <div class="col-xs-6 col-md-6 col-lg-6">{{country.treaties.XXVII8b.deposit ? country.treaties.XXVII8b.deposit : '- - - - - -'}}</div>
-                      </div>
-                    </div>
-
-                    <div class="col-xs-6 col-md-3 col-lg-3 text-right" style="max-width:20%">
-                      <div style="height:100px;" class="flag-icon-background flag-icon-{{code.toLowerCase()}}"></div>
-                    </div>
-
-                  </div>
-                  <div class="row">
-
-                    <div class="col-sm-12">
-                      <div class="pull-right" style="width:30%">
-                        <div angucomplete id="ex1" placeholder="search country information" pause="100" localdata="autocompleteData" minlength="1" inputclass="form-control form-control-small" searchfields="title" selectedObject="selectedCountry" searchStr="searchText.$" titlefield="title"
-                        />
-                      </div>
                       <div class="clearfix"></div>
-                      <div class="panel-group" id="accordion">
+                      <h1>National Contacts and Information</h1>
+                      <hr>
+                      <div class="row" style="">
 
-                        <div class="panel" ng-show="absch_nfp.response.numFound > 0">
-                          <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                            <h4>
-			          <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span>
-			          <span style="color: #428BCA; ">NFP</span>
-			         <span style="color:#111;">National Focal Points ({{nfpCount}})</span>
-
-			         </h4>
-                          </a>
-                        </div>
-                        <div id="collapseOne" class="panel-collapse collapse">
-                          <div class="panel-body">
-                            <div>
-                              <div document-list documents='absch_nfp.response.docs' filter='focalPoint' show-pagination='false' advance-filter="searchText" current-page='currentPage' document-Count='documentCount'></div>
-                            </div>
+                          <div class="col-xs-3">
+                              <div class="panel panel-default">
+                                  <div class="panel-heading"> <h4 class="panel-title"> <i class="fa fa-user"></i> CBD National Focal Point</h4></div>
+                                  <div class="panel-body">
+                                      <strong>Full Name</strong><br>
+                                      official title<br>
+                                      +1 515 823-3433 <br>
+                                      <a href="mailto:#">first.last@example.com</a>
+                                  </div>
+                              </div>
                           </div>
-                        </div>
 
-
-                        <div class="panel">
-                          <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                            <h4>
-
-			          <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span>
-			          <span style="color: #428BCA; ">CNA</span>
-			         <span style="color:#111;">Competent National Authority ({{nationalAuthority}})</span>
-			         </h4>
-                          </a>
-                        </div>
-                        <div id="collapseTwo" class="panel-collapse collapse">
-                          <div class="panel-body">
-                            <div document-list documents='absch_nfp.response.docs' filter='authority' show-pagination='false' advance-filter="searchText" current-page='currentPage' document-Count='documentCount'></div>
+                          <div class="col-xs-3">
+                              <div class="panel panel-success">
+                                  <div class="panel-heading"> <h4 class="panel-title"> <i class="fa fa-user"></i> Nagoya Protocol Focal Point</h4></div>
+                                  <div class="panel-body">
+                                      <strong>Full Name</strong><br>
+                                      official title<br>
+                                      +1 515 823-3433 <br>
+                                      <a href="mailto:#">first.last@example.com</a>
+                                  </div>
+                              </div>
                           </div>
-                        </div>
 
-                        <div class="panel">
-                          <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                            <h4>
-			          <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span>
-			          <span style="color: #428BCA; ">MSR</span>
-			         <span style="color:#111;">Legislative, administrative or policy measures on access and benefit-sharing ({{nationalMeasure}})</span>
-			         </h4>
-                          </a>
-                        </div>
-                        <div id="collapseThree" class="panel-collapse collapse">
-                          <div class="panel-body">
-                            <div document-list documents='absch_nfp.response.docs' filter='measure' show-pagination='false' advance-filter="searchText" current-page='currentPage' document-Count='documentCount'></div>
+                          <div class="col-xs-3">
+                              <div class="panel panel-info">
+                                  <div class="panel-heading"> <h4 class="panel-title"> <i class="fa fa-user"></i> Competent National Authority</h4></div>
+                                  <div class="panel-body">
+                                      <strong>Full Name</strong><br>
+                                      official title<br>
+                                      +1 515 823-3433 <br>
+                                      <a href="mailto:#">first.last@example.com</a>
+                                  </div>
+                              </div>
                           </div>
-                        </div>
-
-
-                        <div class="panel">
-                          <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-                            <h4>
-			          <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span>
-			          <span style="color: #428BCA; ">IRCC</span>
-			         <span style="color:#111;">Permit or its equivalent constituting an internationally recognized certificate of compliance ({{Permit}})</span>
-			         </h4>
-                          </a>
-                        </div>
-                        <div id="collapseFour" class="panel-collapse collapse">
-                          <div class="panel-body">
-                            <div document-list documents='absch_nfp.response.docs' filter='absPermit' show-pagination='false' advance-filter="searchText" current-page='currentPage' document-Count='documentCount'></div>
-                          </div>
-                        </div>
-
-
-                        <div class="panel">
-                          <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
-                            <h4>
-			        <!--  <div class="numberCircle1" style="padding-left:16px;">
-			         {{absCheckpoint}}
-			         </div> -->
-			          <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span>
-			          <span style="color: #428BCA; ">CP</span>
-			         <span style="color:#111;">Checkpoint ({{absCheckpoint}})</span>
-			         </h4>
-                          </a>
-                        </div>
-                        <div id="collapseFive" class="panel-collapse collapse">
-                          <div class="panel-body">
-                            <div document-list documents='absch_nfp.response.docs' filter='absCheckpoint' show-pagination='false' advance-filter="searchText" current-page='currentPage' document-Count='documentCount'></div>
-                          </div>
-                        </div>
-
-
-                        <div class="panel">
-                          <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
-                            <h4>
-			        <!--  <div class="numberCircle1" style="padding-left:16px;">
-			         {{absCheckpointCommunique}}
-			         </div> -->
-			          <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span>
-			          <span style="color: #428BCA; ">CPC</span>
-			         <span style="color:#111;">Checkpoint Communiqué ({{absCheckpointCommunique}})</span>
-			         </h4>
-                          </a>
-                        </div>
-                        <div id="collapseSix" class="panel-collapse collapse">
-                          <div class="panel-body">
-                            <div document-list documents='absch_nfp.response.docs' filter='absCheckpointCommunique' show-pagination='false' advance-filter="searchText" current-page='currentPage' document-Count='documentCount'></div>
-                          </div>
-                        </div>
-
-
-                        <div class="panel">
-                          <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">
-                            <h4>
-			         <!-- <div class="numberCircle1" style="padding-left:16px;">
-			         {{database}}
-			         </div> -->
-			         <span style="color:#111;"><i class="fa fa-plus-circle"></i> </span>
-			          <span style="color: #428BCA; ">NDB</span>
-		         <span style="color:#111;">ABS National Databases and Websites ({{database}})</span>
-			         </h4>
-                          </a>
-                        </div>
-                        <div id="collapseSeven" class="panel-collapse collapse">
-                          <div class="panel-body">
-                            <div document-list documents='absch_nfp.response.docs' filter='database' show-pagination='false' advance-filter="searchText" current-page='currentPage' document-Count='documentCount'></div>
-                          </div>
-                        </div>
                       </div>
+                          <div class="row" style="">
+
+                          <div class="col-xs-3">
+                              <div class="panel panel-warning">
+                                  <div class="panel-heading"> <h4 class="panel-title"> <i class="mdi-action-verified-user"></i> Checkpoint</h4></div>
+                                  <div class="panel-body">
+                                      <strong>Full Name</strong><br>
+                                      official title<br>
+                                      +1 515 823-3433 <br>
+                                      <a href="mailto:#">first.last@example.com</a>
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div class="col-xs-3">
+                              <div class="panel panel-info">
+                                  <div class="panel-heading"> <h4 class="panel-title"> <i class="mdi-file-folder"></i> National Database</h4></div>
+                                  <div class="panel-body">
+                                      <strong>Full Name</strong><br>
+                                      official title<br>
+                                      +1 515 823-3433 <br>
+                                      <a href="mailto:#">first.last@example.com</a>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <h1>Legislative, administrative or policy measures on access and benefit-sharing (MSR)</h1>
+                      <hr>
+                      <div class="row" style="">
+                          <div class="col-xs-12">
+                             <table class="table table-hover table-msr" style="width:100%;">
+                                 <thead>
+                                 <tr>
+                                     <th>name</th>
+                                     <th>type</th>
+                                     <th>status</th>
+                                     <th>jurisdiction</th>
+                                     <th>date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th><a href="click to show doc">Estrategia Nacional de Biodiversidad</a></th>
+                                    <th>Strategy</th>
+                                    <th>Adopted</th>
+                                    <th>National/Federal</th>
+                                    <th>1999-01-01</th>
+                                </tr>
+                            <tbody>
+                            </table>
+                          </div>
+                      </div>
+
+                      <div class="clearfix"></div>
+                      <!-- <div document-list documents='absch_nfp.response.docs' filter='measure' show-pagination='false' advance-filter="searchText" current-page='currentPage' document-Count='documentCount'></div> -->
+
+
+                      <h1>Internationally Recognized Certificates of Compliance (IRCC)</h1>
+                      <hr>
+                      <div class="row" style="">
+                          <div class="col-xs-12">
+                              <table class="table table-hover table-msr" style="width:100%;">
+                                  <thead>
+                                      <tr>
+                                          <th>name</th>
+                                          <th>issued to</th>
+                                          <th>subject matter</th>
+                                          <th>use</th>
+                                          <th>date of issue</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <tr>
+                                          <th><a href="click to show doc">this is the title of the IRCC</a></th>
+                                          <th>Matthew Dias</th>
+                                          <th>Plants</th>
+                                          <th>non-commerical</th>
+                                          <th>1999-01-01</th>
+                                      </tr>
+                                      <tbody>
+                                      </table>
+                                  </div>
+                              </div>
+
+
+                              <h1><span class="label label-info">SENT</span>  Checkpoint Communiqués (CPC) </h1>
+                              <hr>
+                              <div class="row" style="">
+                                  <div class="col-xs-12">
+                                      <table class="table table-hover table-msr" style="width:100%;">
+                                          <thead>
+                                              <tr>
+                                                  <th>checkpoint</th>
+                                                  <th>title</th>
+                                                  <th>source country</th>
+                                                  <th>user</th>
+                                                  <th>subject matter</th>
+                                                  <th>IRCC</th>
+                                                  <th>sent on</th>
+                                              </tr>
+                                          </thead>
+                                          <tbody>
+                                              <tr>
+                                                  <th>National Patent Office</th>
+                                                  <th><a href="click to show doc">this is the title</a></th>
+                                                  <th>canada</th>
+                                                  <th>Matthew</th>
+                                                  <th>Plants</th>
+                                                  <th>ABSCH-IRCC-109230</th>
+                                                  <th>1999-01-01</th>
+                                              </tr>
+                                              <tbody>
+                                              </table>
+                                          </div>
+                                      </div>
+
+
+                                      <h1><span class="label label-warning">RECEIVED</span> Checkpoint Communiqués (CPC)  </h1>
+                                      <hr>
+                                      <div class="row" style="">
+                                          <div class="col-xs-12">
+                                              <table class="table table-hover table-msr" style="width:100%;">
+                                                  <thead>
+                                                      <tr>
+                                                          <th>issuing country</th>
+                                                          <th>checkpoint</th>
+                                                          <th>title</th>
+                                                          <th>user</th>
+                                                          <th>subject matter</th>
+                                                          <th>IRCC</th>
+                                                          <th>sent on</th>
+                                                      </tr>
+                                                  </thead>
+                                                  <tbody>
+                                                      <tr>
+                                                          <th>China</th>
+                                                          <th>National Patent Office</th>
+                                                          <th><a href="click to show doc">this is the title</a></th>
+                                                          <th>Matthew</th>
+                                                          <th>Plants</th>
+                                                          <th>ABSCH-IRCC-109230</th>
+                                                          <th>1999-01-01</th>
+                                                      </tr>
+                                                      <tbody>
+                                                      </table>
+                                                  </div>
+                                              </div>
+
+
+
 
                     </div>
                   </div>
                 </div>
                 <!-- end row -->
+
+
+
               </div>
               <!-- end container -->
+
+
             </div>
           </div>
         </div>
-      </div>
 
       <!-- end controller -->
     </div>
