@@ -5,7 +5,7 @@ app.directive("registerRecordList", ["$timeout", "commonjs","bootbox", "authHttp
 
 	return {
 		restrict   : "EA",
-		templateUrl: "/app/views/register-record-list.directive.html",
+		templateUrl: "/app/views/register/register-record-list.directive.html",
 		replace    : true,
 		transclude : false,
 		scope      : {

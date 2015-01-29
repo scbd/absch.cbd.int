@@ -2,7 +2,7 @@ define(['app'], function (app) {
 app.directive('searchFilterSchemas', function ($http) {
     return {
         restrict: 'EAC',
-        templateUrl: '/app/views/find_schemas.partial.html',
+        templateUrl: '/app/views/search/find_schemas.partial.html',
         replace: true,
         scope: {
               title: '@title',

@@ -1,9 +1,9 @@
 define(['app',
-	'../views/directives/login.directive.html.js',
-	'./register-record-list.directive.js',
-	'./directives/task-id-directive.html.js',
-	'./directives/user-details.directive.html.js',
-  './directives/ngxLazy.directive.js','bootbox'], function (app) {
+	'/app/views/directives/login.directive.html.js',
+	'/app/views/register/register-record-list.directive.js',
+	'/app/views/directives/task-id-directive.html.js',
+	'/app/views/directives/user-details.directive.html.js',
+  '/app/views/directives/ngxLazy.directive.js','bootbox'], function (app) {
 
   "use strict";
 // angular.module([]);

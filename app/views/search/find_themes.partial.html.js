@@ -2,7 +2,7 @@ define(['app'], function (app) {
 app.directive('searchFilterThemes', function ($http) {
     return {
         restrict: 'EAC',
-        templateUrl: '/app/views/find_themes.partial.html',
+        templateUrl: '/app/views/search/find_themes.partial.html',
         replace: true,
         // require : "?ngModel",
         scope: {

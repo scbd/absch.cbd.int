@@ -3,7 +3,7 @@ define(['app', 'underscore', '/app/js/common.js'], function(app, _) {
   app.directive('searchFilterCountries', function($http) {
     return {
       restrict: 'EAC',
-      templateUrl: '/app/views/find_countries.partial.html',
+      templateUrl: '/app/views/search/find_countries.partial.html',
       replace: true,
       scope: {
         title: '@title',

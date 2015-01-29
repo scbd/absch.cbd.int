@@ -4,7 +4,7 @@ define(['app'], function(app) {
   app.directive('searchFilterRegions', function ($http, $timeout) {
     return {
         restrict: 'EAC',
-        templateUrl: '/app/views/search-filter-regions.partial.html?v'+(new Date()).getTime(),
+        templateUrl: '/app/views/search/search-filter-regions.partial.html?v'+(new Date()).getTime(),
         replace: true,
         scope: {
               title: '@title',
@@ -151,7 +151,7 @@ define(['app'], function(app) {
 
                 if(!$scope.allTerms)
                     return;
-                    
+
                 $scope.allTerms.forEach(function(data){
                     if(data.selected)
                         data.selected = false;

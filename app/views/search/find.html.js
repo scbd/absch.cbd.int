@@ -1,13 +1,13 @@
 define(['app','underscore',
     'introjs',
-    '../views/forms/view/record-loader.directive.html.js',
-    '../views/find_schemas.partial.html.js',
-    '../views/find_countries.partial.html.js',
-    '../views/search-filter-regions.js',
-    '../views/find_facets.partial.html.js',
-    '../views/find_themes.partial.html.js',
-    '../views/directives/search-filter-dates.partial.html.js',
-    '../views/directives/document-list.partial.html.js'], function (app,_) {
+    '/app/views/forms/view/record-loader.directive.html.js',
+    '/app/views/search/find_schemas.partial.html.js',
+    '/app/views/search/find_countries.partial.html.js',
+    '/app/views/search/search-filter-regions.js',
+    '/app/views/search/find_facets.partial.html.js',
+    '/app/views/search/find_themes.partial.html.js',
+    '/app/views/directives/search-filter-dates.partial.html.js',
+    '/app/views/directives/document-list.partial.html.js'], function (app,_) {
 
     app.controller('FindController', ['$scope', '$rootScope', 'authHttp', '$timeout', '$q','realm', '$routeParams','$location',
         function ($scope, $rootScope, $http, $timeout, $q, realm, $routeParams,$location) {
