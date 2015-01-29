@@ -13,7 +13,7 @@
    '/app/views/forms/view/view-organization.directive.js',
    '/app/views/forms/view/view-organization-reference.directive.js',
    '/app/views/forms/view/view-resource.directive.js',
-   '/app/views/directives/angucomplete-extended',
+   '/app/js/directives/angucomplete-extended.js',
    '/app/js/common.js', 'jqvmap', 'jqvmapworld',
    '/app/views/countries/country-map-list-directive.html.js'
  ], function(app) {

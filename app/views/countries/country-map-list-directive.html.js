@@ -8,8 +8,8 @@ define(['app'], function(app) {
       scope: {
           countries: '=countries',
       },
-      controller: ['$scope', 'authHttp','realm','$q', '$filter','$routeParams', '$timeout',
-        function($scope, $http, realm, $q, $filter, $routeParams, $timeout ) {
+      controller: ['$scope', 'authHttp','realm','$q', '$filter','$routeParams', '$timeout','$element',
+        function($scope, $http, realm, $q, $filter, $routeParams, $timeout, $element ) {
 
 
             if (!$scope.countries) {
