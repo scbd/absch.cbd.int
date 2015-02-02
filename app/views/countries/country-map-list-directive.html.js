@@ -1,4 +1,4 @@
-define(['app'], function(app) {
+define(['app','./countries-commonJS.js'], function(app) {
 
   app.directive('countryMapList', function() {
     return {
@@ -8,8 +8,8 @@ define(['app'], function(app) {
       scope: {
           countries: '=countries',
       },
-      controller: ['$scope', 'authHttp','realm','$q', '$filter','$routeParams', '$timeout','$element',
-        function($scope, $http, realm, $q, $filter, $routeParams, $timeout, $element ) {
+      controller: ['$scope', 'authHttp','realm','$q', '$filter','$routeParams', '$timeout','$element','countriescommonjs',
+        function($scope, $http, realm, $q, $filter, $routeParams, $timeout, $element ,countriescommonjs) {
 
 
             if (!$scope.countries) {
@@ -89,7 +89,7 @@ define(['app'], function(app) {
                 $("#vmap").append("<div id=\"jqvmap1_EUR1\" class=\"europeanUnion jqvmap-zoomout flag-icon-background flag-icon-eur\" style=\"height:50px;width:100px;background-color:#eee\"></div>");
 
                 $('#jqvmap1_EUR1').on('click', function(e) {
-                  navigateCountry(this, 'EUR', null);
+                    $scope.navigateCountry(this, 'EUR', null);
                 });
                 $('#jqvmap1_EUR1').on('mouseout', function(e) {
                   $('.jqvmap-label').hide();
@@ -115,9 +115,13 @@ define(['app'], function(app) {
                 })
                 //$scope.showMap(true);
                 if ($routeParams.commonFormat) {
-                  $scope.searchFilter = $scope.isRatified;
+                  $scope.searchFilter = countriescommonjs.isRatified;
                   $scope.updateMap('ratified');
                 }
+
+                var mapDetails = {"ratifications":$scope.ratifications,"signatures":$scope.signatures,"parties":$scope.parties,"inbetweenParties":$scope.inbetweenParties};
+
+                $scope.$emit('mapDetailsLoad', {"mapDetails" : mapDetails});
 
                 $timeout(function() {
                   $element.find('[data-toggle="tooltip"]').tooltip();
@@ -146,32 +150,7 @@ define(['app'], function(app) {
             }
           }
 
-          $scope.isPartyToCBD = function(entity) {
-            $scope.selected_circle = "party";
-            return entity && entity.treaties.XXVII8.party != null;
-          }
 
-          $scope.isInbetweenParties = function(entity) {
-            $scope.selected_circle = "inbetweenParties";
-            return entity && entity.isInbetweenParties;
-          }
-
-          $scope.isSignatory = function(entity) {
-            $scope.selected_circle = "signatory";
-            return entity && entity.treaties.XXVII8b.signature != null;
-          }
-
-          $scope.isRatified = function(entity) {
-            $scope.selected_circle = "ratified";
-            return entity && (entity.treaties.XXVII8b.instrument == "ratification" ||
-              entity.treaties.XXVII8b.instrument == "accession" ||
-              entity.treaties.XXVII8b.instrument == "acceptance" || entity.treaties.XXVII8b.instrument == "approval");
-          }
-
-          $scope.isNonParties = function(entity) {
-            $scope.selected_circle = "nonParties";
-            return !$scope.isRatified(entity);
-          }
 
           $scope.hasFacets = function(entity) {
 
@@ -192,14 +171,14 @@ define(['app'], function(app) {
               colors = this.countryColors;
             jQuery('#vmap').vectorMap({
               map: 'world_en',
-              backgroundColor: '#EEE',
+              backgroundColor: '#f5f5f5',
               selectedColor: '#666666',
               enableZoom: true,
               showTooltip: true,
               colors: colors,
               hoverColor: false,
               onRegionClick: function(event, code, region) {
-                navigateCountry(event, code, region)
+                  $scope.navigateCountry(event, code, region)
               },
               onLabelShow: function(event, label, code) {
                 showCountryDetails(event, label, code)
@@ -212,7 +191,7 @@ define(['app'], function(app) {
             //    console.log(map);
           }
 
-          function navigateCountry(event, code, region) {
+          $scope.navigateCountry = function(event, code, region) {
             $('.jqvmap-label').html('');
             code = code.toUpperCase();
             //tiwan should be shown as China
@@ -221,7 +200,7 @@ define(['app'], function(app) {
             if (code == greenland) //greenland  as denmark
               code = denmark
 
-            $scope.loadCountryDetails(code);
+            $scope.$emit('loadCountryProfile', {'data' : {countryCode : code}});
           }
 
           function showCountryDetails(event, label, code) {
@@ -245,18 +224,18 @@ define(['app'], function(app) {
             if (country.length > 0) {
               countryName = country[0].name.en;
 
-              if ($scope.isRatified(country[0])) {
+              if (countriescommonjs.isRatified(country[0])) {
                 headerClass = "panel-primary"
-                if ($scope.isInbetweenParties(country[0])) {
+                if (countriescommonjs.isInbetweenParties(country[0])) {
 
                   cfHtml += '<li class="list-group-item"><span class="label label-primary">Ratified</span>&nbsp;<span class="label label-success">in-between Party</span>' +
                     '</br><span class="label label-success">entry into force on ' + moment(country[0].treaties.XXVII8b.deposit).add(90, 'day').format('YYYY-MM-DD') + '</span></li>'
                 } else
                   cfHtml += '<li class="list-group-item"><span class="label label-primary">Ratified</span></li>'
-              } else if ($scope.isSignatory(country[0])) {
+              } else if (countriescommonjs.isSignatory(country[0])) {
                 headerClass = "panel-info"
                 cfHtml += '<li class="list-group-item"><span class="label label-info">Signatory</span></li>'
-              } else if ($scope.isPartyToCBD(country[0])) {
+              } else if (countriescommonjs.isPartyToCBD(country[0])) {
                 headerClass = "panel-default"
                 cfHtml += '<li class="list-group-item"><span class="label label-default">Not Ratified/CBD party</span></li>'
               }
@@ -304,7 +283,7 @@ define(['app'], function(app) {
                   $("#jqvmap" + getMapIndex() + "_" + country.code.toUpperCase()).attr("fill", "#428bca");
                   $("#jqvmap" + getMapIndex() + "_" + greenland).attr("fill", "#428bca");
 
-                } else if ((action == 'party' || action == 'signatory') && country.isSignatory) {
+              } else if ((action == 'nonParties' && !country.isRatified && country.isSignatory) || (action == 'party' || action == 'signatory') && country.isSignatory) {
                   $("#jqvmap" + getMapIndex() + "_" + country.code.toUpperCase()).attr("fill", "#5bc0de");
 
                 } else if ((action == 'nonParties' && !country.isRatified && country.isParty) || (action == 'party' && country.isParty)) {
@@ -438,6 +417,24 @@ define(['app'], function(app) {
           $scope.addDate = function(date) {
             return moment(date).add(90, 'day');
           }
+
+          $scope.$on('showDetails', function(evt,data){
+              if(data.data=='map'){
+                  $element.find('#divList').slideUp('slow');
+                  $element.find('#divMap').slideDown('slow');
+              }
+              else{
+                  $element.find('#divMap').slideUp('slow');
+                  $element.find('#divList').slideDown('slow');
+              }
+          });
+
+          $scope.$on('updateMap', function(evt, eventData){
+
+              $scope.updateMap(eventData.data.type);
+              $scope.searchFilter = eventData.data.searchFilter;
+
+          });
 
         }
       ]

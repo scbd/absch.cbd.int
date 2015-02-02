@@ -12,7 +12,7 @@
   <div class="container-fluid" id="wrapper" >
     <div class="row" >
 
-        <div class="col-xs-3" style="padding-top:20px;">
+        <div class="col-xs-3" style="padding-top:5px;">
             <h1 class="special-font">Country Information</h1>
 
             <div class="well" ng-show="true">
@@ -24,24 +24,24 @@
               <div class="btn-group" data-toggle="buttons" style="padding-bottom:10px;">
                   <label class="btn btn-default active">
                       <input type="radio" name="options" id="option1" autocomplete="off" checked>
-                      <i class="fa fa-globe fa-lg" ng-click="showMap(true);" style="cursor:pointer">&nbsp;Map</i>
+                      <i class="fa fa-globe fa-lg" ng-click="show('map');" style="cursor:pointer">&nbsp;Map</i>
                   </label>
                   <label class="btn btn-default">
                       <input type="radio" name="options" id="option2" autocomplete="off">
-                      <i class="fa fa-align-justify fa-lg" ng-click="showMap(false);" style="cursor:pointer">&nbsp;List</i>
+                      <i class="fa fa-align-justify fa-lg" ng-click="show('list');" style="cursor:pointer">&nbsp;List</i>
                   </label>
               </div>
 
 
             <div style="padding-bottom:10px;">
                 <div style="font-size:16;font-weight:bold;">Nagoya Protocol Party status</div>
-                <div  ng-click="searchFilter=isRatified;updateMap('ratified')" style="cursor:pointer;"><span class="label label-primary">&nbsp;</span> Party ({{ratifications}})</div>
-                <div style="cursor:pointer" ng-click="searchFilter=isInbetweenParties;updateMap('inbetweenParties')"><span class="label label-success" >&nbsp;</span> Inbetween party ({{inbetweenParties}})</div>
+                <div  ng-click="updateMap('ratified')" ng-class="{'myWell-on':type=='ratified'}" style="cursor:pointer;"><span class="label label-primary">&nbsp;</span> Party ({{mapDetails.ratifications}})</div>
+                <div style="cursor:pointer" ng-click="updateMap('inbetweenParties')"ng-class="{'myWell-on':type=='inbetweenParties'}" ><span class="label label-success" >&nbsp;</span> Inbetween party ({{mapDetails.inbetweenParties}})</div>
 
-                <div style="cursor:pointer;" ng-click="searchFilter=isSignatory;updateMap('signatory')"><span class="label label-info">&nbsp;</span> Signatory ({{signatures}})</div>
+                <div style="cursor:pointer;" ng-click="updateMap('signatory')"ng-class="{'myWell-on':type=='signatory'}" ><span class="label label-info">&nbsp;</span> Signatory ({{mapDetails.signatures}})</div>
 
-                <div style="cursor:pointer" ng-click="searchFilter=isNonParties;updateMap('nonParties')"><span class="label label-default" >&nbsp;</span> Non-Party ({{parties-ratifications}})</div>
-                <div style="cursor:pointer" ng-click="searchFilter=isPartyToCBD;updateMap('party')"><span class="label" >&nbsp;</span> All ({{parties}})</div>
+                <div style="cursor:pointer" ng-click="updateMap('nonParties')"ng-class="{'myWell-on':type=='nonParties'}" ><span class="label label-default" >&nbsp;</span> Non-Party ({{mapDetails.parties-mapDetails.ratifications}})</div>
+                <div style="cursor:pointer" ng-click="updateMap('party')"ng-class="{'myWell-on':type=='party'}" ><span class="label" >&nbsp;</span> All ({{mapDetails.parties}})</div>
             </div>
 
             <!--    <hr>
@@ -189,9 +189,9 @@
           <!-- <div ng-class="{'col-xs-12' : !showlist, 'col-xs-9':showlist}" > -->
           <div class="col-xs-9" style="padding-top:20px;">
 
-            <div id="page-content-wrapper">
-              <div class="page-content inset">
-                <div country-map-list countries="countries"/>
+            <div id="page-content-wrapper" >
+              <div class="page-content inset well" >
+                <div country-map-list countries="countries" />
                 <div class="panel panel-default ng-scope" style="background-color:white;min-height:800px;" id="countryDetails">
                   <div class="panel-heading" style="marign-bottom:30px;">
                       <table>
