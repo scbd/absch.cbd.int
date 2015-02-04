@@ -130,7 +130,7 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
             return entity && entity.treaties.XXVII8.party != null;
          }
 
-         $scope.isInbetweenParties= function(entity){
+         $scope.isInbetweenParty= function(entity){
             $scope.selected_circle="inbetweenParties";
             return entity && entity.inbetweenParties;
          }

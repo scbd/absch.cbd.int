@@ -165,9 +165,14 @@
           </tr>
           <tr ng-repeat="country in (countries | filter:countryFilter | filter: searchFilter | orderBy:sortTermFilter:orderList)" ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
             <td>{{$index + 1}}</td>
-            <td><a ng-href="#" ng-click="navigateCountry('',country.code,'')" class="country-list-name label" ng-class="{'label-info':country.isSignatory && !country.isRatified, 'label-primary':country.isRatified, 'label-default':!country.isRatified && !country.isSignatory, 'label-success' : country.inbetweenParties}">{{country.name.en}}</a>
+            <td><a ng-href="#" ng-click="navigateCountry('',country.code,'')" class="country-list-name label"
+                ng-class="{'label-info':country.isSignatory && !country.isRatified,
+                'label-primary':country.isRatified,
+                'label-default':!country.isRatified && !country.isSignatory,
+                'label-success' : country.isInbetweenParty}">
+                {{country.name.en}}</a>
               &nbsp;
-              <span class="label label-success" ng-show={{country.inbetweenParties}}>entry into force on {{addDate(country.treaties.XXVII8b.deposit)| formatDate}}</span>
+              <span class="label label-success" ng-show={{country.isInbetweenParty}}>entry into force on {{addDate(country.treaties.XXVII8b.deposit)| formatDate}}</span>
             </td>
             <td>{{country.treaties.XXVII8b.deposit}}</td>
             <td>{{country.CNA}}</td>

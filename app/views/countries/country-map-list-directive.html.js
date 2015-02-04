@@ -72,7 +72,7 @@ define(['app','./countries-commonJS.js'], function(app) {
 
                   // console.log(moment().diff(moment($scope.countries[i].treaties.XXVII8b.deposit),'days'))
                   if (moment().diff(moment($scope.countries[i].treaties.XXVII8b.deposit), 'days') < 90) {
-                    $scope.countries[i].isInbetweenParties = true;
+                    $scope.countries[i].isInbetweenParty = true;
                     $scope.inbetweenParties++;
                   }
                   //
@@ -226,7 +226,7 @@ define(['app','./countries-commonJS.js'], function(app) {
 
               if (countriescommonjs.isRatified(country[0])) {
                 headerClass = "panel-primary"
-                if (countriescommonjs.isInbetweenParties(country[0])) {
+                if (countriescommonjs.isInbetweenParty(country[0])) {
 
                   cfHtml += '<li class="list-group-item"><span class="label label-primary">Ratified</span>&nbsp;<span class="label label-success">in-between Party</span>' +
                     '</br><span class="label label-success">entry into force on ' + moment(country[0].treaties.XXVII8b.deposit).add(90, 'day').format('YYYY-MM-DD') + '</span></li>'
@@ -267,16 +267,16 @@ define(['app','./countries-commonJS.js'], function(app) {
             //fix for taiwan
             $("#jqvmap" + getMapIndex() + "_" + taiwan).attr("fill", "#fff");
             $("#jqvmap" + getMapIndex() + "_" + greenland).attr("fill", "#fff");
-            if (action == 'signatory' || action == 'party' || action == 'nonParties' || action == 'ratified' || action == 'inbetweenParties') {
+            if (action == 'signatory' || action == 'party' || action == 'nonParties' || action == 'ratified' || action == 'inbetweenParty') {
 
-              if (action == 'inbetweenParties')
+              if (action == 'inbetweenParty')
                 $('#jqvmap1_EUR1').hide('slow');
               else
                 $('#jqvmap1_EUR1').show('slow');
 
               _.each($scope.countries, function(country) {
 
-                if ((action == 'party' || action == 'ratified' || action == 'inbetweenParties') && country.isInbetweenParties) {
+                if ((action == 'party' || action == 'ratified' || action == 'inbetweenParty') && country.isInbetweenParty) {
                   $("#jqvmap" + getMapIndex() + "_" + country.code.toUpperCase()).attr("fill", "#5cb85c");
 
                 } else if ((action == 'party' || action == 'ratified') && country.isRatified) {

@@ -80,11 +80,7 @@
          }
        }
        $scope.loadCountryDetails();
-       $scope.isInbetweenParty = function() {
-         if ($scope.country)
-           return moment().diff(moment($scope.country.treaties.XXVII8b.deposit), 'days') < 90;
-         return '';
-       }
+
        $scope.$watch('absch_nfp', function(value) {
 
          if (!value) return;
@@ -155,8 +151,8 @@
             $scope.type = type;
             if(type=='ratified')
                 $scope.searchFilter=countriescommonjs.isRatified;
-            else if(type=='inbetweenParties')
-                $scope.searchFilter=countriescommonjs.isInbetweenParties;
+            else if(type=='inbetweenParty')
+                $scope.searchFilter=countriescommonjs.isInbetweenParty;
             else if(type=='signatory')
                 $scope.searchFilter=countriescommonjs.isSignatory;
             else if(type=='nonParties')
@@ -167,7 +163,7 @@
             $scope.$broadcast('updateMap', {data:{'type':type,'searchFilter':$scope.searchFilter}});
 
        }
-
+       $scope.countriescommonjs = countriescommonjs;
        $scope.$on('loadCountryProfile', function(evt, evtData){
            console.log(evtData);
            $scope.loadCountryDetails(evtData.data.countryCode);

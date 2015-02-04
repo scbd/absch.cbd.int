@@ -134,9 +134,9 @@ define(['app', 'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fun
         return entity && entity.treaties.XXVII8.party != null;
       }
 
-      $scope.isInbetweenParties = function(entity) {
-        $scope.selected_circle = "inbetweenParties";
-        return entity && entity.inbetweenParties;
+      $scope.isInbetweenParty = function(entity) {
+        $scope.selected_circle = "inbetweenParty";
+        return entity && entity.inbetweenParty;
       }
 
       $scope.isSignatory = function(entity) {
@@ -229,7 +229,7 @@ define(['app', 'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fun
 
           if ($scope.isRatified(country[0])) {
             headerClass = "panel-primary"
-            if ($scope.isInbetweenParties(country[0])) {
+            if ($scope.isInbetweenParty(country[0])) {
 
               cfHtml += '<li class="list-group-item"><span class="label label-primary">Ratified</span>&nbsp;<span class="label label-success">in-between Party</span>' +
                 '</br><span class="label label-success">entry into force on ' + moment(country[0].treaties.XXVII8b.deposit).add(90, 'day').format('YYYY-MM-DD') + '</span></li>'

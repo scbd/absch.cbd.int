@@ -9,9 +9,12 @@ define(['app'], function(app) {
           return entity && entity.treaties.XXVII8.party != null;
       },
 
-        isInbetweenParties :function(entity) {
+        isInbetweenParty :function(entity) {
           //$scope.selected_circle = "inbetweenParties";
-          return entity && entity.isInbetweenParties;
+        //   console.log(entity);
+          return entity && (entity.isInbetweenParty ||
+              ( entity.treaties
+                && moment().diff(moment(entity.treaties.XXVII8b.deposit), 'days') < 90));
       },
 
         isSignatory : function(entity) {
