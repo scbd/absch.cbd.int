@@ -30,7 +30,7 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
             when('/help/register',              { templateUrl: '/app/views/help/register/register.html'                      ,resolveController: true, resolveUser: true}).
             // when('/help/register/:question',              { templateUrl: '/app/views/help/register/register.html'                      ,resolveController: true, resolveUser: true}).
 
-
+            when('/search',                        { templateUrl: '/app/views/search/find.html'                      ,resolveController: true, resolveUser: true}).
             when('/find',                        { templateUrl: '/app/views/search/find.html'                      ,resolveController: true, resolveUser: true}).
              when('/find/simple',                { templateUrl: '/app/views/find/simple.html'     ,resolveController: true, resolveUser: true}).
 
