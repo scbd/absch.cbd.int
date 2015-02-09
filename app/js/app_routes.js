@@ -14,7 +14,7 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
         $locationProvider.hashPrefix('!');
 
         $routeProvider.
-            when('/',                            { templateUrl: '/app/views/index.html'                     ,resolveController: true, resolveUser: true}).
+            when('/',                            { templateUrl: '/app/views/home/index.html'                     ,resolveController: true, resolveUser: true}).
             when('/commonformat',                { templateUrl: '/app/views/common-formats.html'            ,resolveController: true, resolveUser: true}).
             //when('/presentation',                { templateUrl: '/app/views/help/presentation.html'            ,resolveController: true, resolveUser: true}).
             when('/about',                       { templateUrl: '/app/views/about/about.html'                     ,resolveController: true, resolveUser: true}).
