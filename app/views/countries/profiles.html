@@ -9,42 +9,42 @@
 <div ng-controller="ProfileController">
 
 
-  <div class="container-fluid" id="wrapper" >
-    <div class="row" >
+  <div class="container-fluid" id="wrapper">
+    <div class="row">
 
-        <div class="col-xs-3" style="padding-top:5px;">
-            <h1 class="special-font">Country Information</h1>
+      <div class="col-xs-3" style="padding-top:5px;">
+        <h1 class="special-font">Country Information</h1>
 
-            <div class="well" ng-show="true">
+        <div class="well" ng-show="true">
 
-                <!-- <div style="padding-bottom:10px;">
+          <!-- <div style="padding-bottom:10px;">
                     <span class="btn btn-default"><i class="fa fa-globe fa-lg" ng-click="showMap(true);" style="cursor:pointer">&nbsp;View Map</i></span>
                 </div> -->
 
-              <div class="btn-group" data-toggle="buttons" style="padding-bottom:10px;">
-                  <label class="btn btn-default active">
-                      <input type="radio" name="options" id="option1" autocomplete="off" checked>
-                      <i class="fa fa-globe fa-lg" ng-click="show('map');" style="cursor:pointer">&nbsp;Map</i>
-                  </label>
-                  <label class="btn btn-default">
-                      <input type="radio" name="options" id="option2" autocomplete="off">
-                      <i class="fa fa-align-justify fa-lg" ng-click="show('list');" style="cursor:pointer">&nbsp;List</i>
-                  </label>
-              </div>
+          <div class="btn-group" data-toggle="buttons" style="padding-bottom:10px;">
+            <label class="btn btn-default active">
+              <input type="radio" name="options" id="option1" autocomplete="off" checked>
+              <i class="fa fa-globe fa-lg" ng-click="show('map');" style="cursor:pointer">&nbsp;Map</i>
+            </label>
+            <label class="btn btn-default">
+              <input type="radio" name="options" id="option2" autocomplete="off">
+              <i class="fa fa-align-justify fa-lg" ng-click="show('list');" style="cursor:pointer">&nbsp;List</i>
+            </label>
+          </div>
 
 
-            <div style="padding-bottom:10px;">
-                <div style="font-size:16;font-weight:bold;">Nagoya Protocol Party status</div>
-                <div  ng-click="updateMap('ratified')" ng-class="{'myWell-on':type=='ratified'}" style="cursor:pointer;"><span class="label label-primary">&nbsp;</span> Party ({{mapDetails.ratifications}})</div>
-                <div style="cursor:pointer" ng-click="updateMap('inbetweenParty')"ng-class="{'myWell-on':type=='inbetweenParties'}" ><span class="label label-success" >&nbsp;</span> Inbetween party ({{mapDetails.inbetweenParties}})</div>
+          <div style="padding-bottom:10px;">
+            <div style="font-size:16;font-weight:bold;">Nagoya Protocol Party status</div>
+            <div ng-click="updateMap('ratified')" ng-class="{'myWell-on':type=='ratified'}" style="cursor:pointer;"><span class="label label-primary">&nbsp;</span> Party ({{mapDetails.ratifications}})</div>
+            <div style="cursor:pointer" ng-click="updateMap('inbetweenParty')" ng-class="{'myWell-on':type=='inbetweenParties'}"><span class="label label-success">&nbsp;</span> Inbetween party ({{mapDetails.inbetweenParties}})</div>
 
-                <div style="cursor:pointer;" ng-click="updateMap('signatory')"ng-class="{'myWell-on':type=='signatory'}" ><span class="label label-info">&nbsp;</span> Signatory ({{mapDetails.signatures}})</div>
+            <div style="cursor:pointer;" ng-click="updateMap('signatory')" ng-class="{'myWell-on':type=='signatory'}"><span class="label label-info">&nbsp;</span> Signatory ({{mapDetails.signatures}})</div>
 
-                <div style="cursor:pointer" ng-click="updateMap('nonParties')"ng-class="{'myWell-on':type=='nonParties'}" ><span class="label label-default" >&nbsp;</span> Non-Party ({{mapDetails.parties-mapDetails.ratifications}})</div>
-                <div style="cursor:pointer" ng-click="updateMap('party')"ng-class="{'myWell-on':type=='party'}" ><span class="label" >&nbsp;</span> All ({{mapDetails.parties}})</div>
-            </div>
+            <div style="cursor:pointer" ng-click="updateMap('nonParties')" ng-class="{'myWell-on':type=='nonParties'}"><span class="label label-default">&nbsp;</span> Non-Party ({{mapDetails.parties-mapDetails.ratifications}})</div>
+            <div style="cursor:pointer" ng-click="updateMap('party')" ng-class="{'myWell-on':type=='party'}"><span class="label">&nbsp;</span> All ({{mapDetails.parties}})</div>
+          </div>
 
-            <!--    <hr>
+          <!--    <hr>
              <div style="padding-bottom:10px;">
                 <table style="width:100%">
                 <tr>
@@ -83,22 +83,22 @@
             </table>
             </div> -->
 
-            <div>
+          <div>
             <strong>Select a country</strong>
             <input type="textbox" ng-model="countryFilter" placeholder="filter by country name" class="form-control form-control-small">
 
             <!-- <div style="max-height:500px;overflow:scroll;">
               <ul class="list-group">
                  -->
-<!--
+            <!--
                   <li ng-click="loadCountryDetails(country.code)" class="list-group-item" ng-repeat="country in countries | filter:countryFilter" style="cursor:pointer" ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}" ng-class="{'list-group-item-info':country.isSignatory && !country.isRatified,
                       'list-group-item-primary':country.isRatified,
                       'list-group-item-default':!country.isRatified && !country.isSignatory,
                       'list-group-item-success' : country.isInbetweenParty}"> -->
 
-                    <!-- <div class="flag-icon-background flag-icon-{{country.code.toLowerCase()}}"></div> -->
+            <!-- <div class="flag-icon-background flag-icon-{{country.code.toLowerCase()}}"></div> -->
 
-                    <!-- <div>
+            <!-- <div>
                         <i class="mdi-action-account-box" style="font-size:16pt;position:relative;top:3px;" ng-show="country.CNA" data-toggle="tooltip" data-placement="right"  title="Competent National Authority">{{country.CNA}}</i>
                         <i class="mdi-action-verified-user" style="font-size:16pt;position:relative;top:3px;" ng-show="country.CP" data-toggle="tooltip" data-placement="bottom"  title="Checkpoints">{{country.CP}}</i>
                         <i class="mdi-action-stars" style="font-size:16pt;position:relative;top:3px;" ng-show="country.MSR" data-toggle="tooltip" data-placement="bottom"  title="Legislative, administrative or policy measures">{{country.MSR}}</i>
@@ -110,42 +110,45 @@
 
 
 
-                    <div class="row" >
-                            <div class="col-xs-6"><strong>country<strong></div>
-                            <div class="col-xs-1 text-center"><i class="mdi-action-account-box"    style="font-size:16px;"  data-toggle="tooltip" data-placement="top"  title="Competent National Authority"></i></div>
-                            <div class="col-xs-1 text-center"><i class="mdi-action-stars"          style="font-size:16px;"  data-toggle="tooltip" data-placement="top"  title="Legislative, administrative or policy measures"></i></div>
-                            <div class="col-xs-1 text-center"><i class="mdi-action-verified-user"  style="font-size:16px;"  data-toggle="tooltip" data-placement="top"  title="Checkpoints"></i></div>
-                            <div class="col-xs-1 text-center"><i class="mdi-communication-message" style="font-size:16px;"  data-toggle="tooltip" data-placement="top"  title="Checkpoint Communiqués"></i></div>
-                            <div class="col-xs-1 text-center"><i class="mdi-action-bookmark"       style="font-size:16px;"  data-toggle="tooltip" data-placement="top"  title="Internationally Recognized Certificate of Compliance"></i></div>
-                            <div class="col-xs-1 text-center"><i class="mdi-file-folder"           style="font-size:16px;"  data-toggle="tooltip" data-placement="top"  title="National Websites and Databases"></i></div>
-                        </div>
+            <div class="row">
+              <div class="col-xs-6"><strong>country</strong>
+              </div>
+              <div class="col-xs-1 text-center"><i class="mdi-action-account-box" style="font-size:16px;" data-toggle="tooltip" data-placement="top" title="Competent National Authority"></i>
+              </div>
+              <div class="col-xs-1 text-center"><i class="mdi-action-stars" style="font-size:16px;" data-toggle="tooltip" data-placement="top" title="Legislative, administrative or policy measures"></i>
+              </div>
+              <div class="col-xs-1 text-center"><i class="mdi-action-verified-user" style="font-size:16px;" data-toggle="tooltip" data-placement="top" title="Checkpoints"></i>
+              </div>
+              <div class="col-xs-1 text-center"><i class="mdi-communication-message" style="font-size:16px;" data-toggle="tooltip" data-placement="top" title="Checkpoint Communiqués"></i>
+              </div>
+              <div class="col-xs-1 text-center"><i class="mdi-action-bookmark" style="font-size:16px;" data-toggle="tooltip" data-placement="top" title="Internationally Recognized Certificate of Compliance"></i>
+              </div>
+              <div class="col-xs-1 text-center"><i class="mdi-file-folder" style="font-size:16px;" data-toggle="tooltip" data-placement="top" title="National Websites and Databases"></i>
+              </div>
+            </div>
 
-                        <div class="clearfix"></div>
+            <div class="clearfix"></div>
 
-                        <div style="max-height:500px;overflow:scroll; cursor:pointer;padding:5px;">
-                          <ul class="list-group">
-                            <li class="row list-group-item"
-                                style="min-width:300px;"
-                                ng-click="loadCountryDetails(country.code)"
-                                ng-repeat="country in countries | filter:countryFilter | filter:searchFilter"
-                                ng-class="{'list-group-item-info':country.isSignatory && !country.isRatified,
+            <div style="max-height:500px;overflow:scroll; cursor:pointer;padding:5px;">
+              <ul class="list-group">
+                <li class="row list-group-item" style="min-width:300px;" ng-click="loadCountryDetails(country.code)" ng-repeat="country in countries | filter:countryFilter | filter:searchFilter" ng-class="{'list-group-item-info':country.isSignatory && !country.isRatified,
                             'list-group-item-primary':country.isRatified,
                             'list-group-item-default':!country.isRatified && !country.isSignatory,
                             'list-group-item-success' : country.isInbetweenParty}">
 
-                                <div class="col-xs-6" >{{country.name |lstring}}</div>
-                                <div class="col-xs-1 text-center">{{country.CNA}}</div>
-                                <div class="col-xs-1 text-center">{{country.MSR}}</div>
-                                <div class="col-xs-1 text-center">{{country.CP}}</div>
-                                <div class="col-xs-1 text-center">{{country.CPC}}</div>
-                                <div class="col-xs-1 text-center">{{country.IRCC}}</div>
-                                <div class="col-xs-1 text-center">{{country.NDB}}</div>
-                            </li>
-                         </ul>
-                        </div>
+                  <div class="col-xs-6">{{country.name |lstring}}</div>
+                  <div class="col-xs-1 text-center">{{country.CNA}}</div>
+                  <div class="col-xs-1 text-center">{{country.MSR}}</div>
+                  <div class="col-xs-1 text-center">{{country.CP}}</div>
+                  <div class="col-xs-1 text-center">{{country.CPC}}</div>
+                  <div class="col-xs-1 text-center">{{country.IRCC}}</div>
+                  <div class="col-xs-1 text-center">{{country.NDB}}</div>
+                </li>
+              </ul>
+            </div>
 
 
-                        <!-- <table class="country-select" style="width:100%;" >
+            <!-- <table class="country-select" style="width:100%;" >
                         <tr>
                             <td><strong>country<strong></td>
                             <td><i class="mdi-action-account-box"    style="font-size:16px;"  data-toggle="tooltip" data-placement="top"  title="Competent National Authority"></i></td>
@@ -177,52 +180,74 @@
 
 
 
-                </div>
-            </div>
-         </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div ng-class="{'col-xs-12' : !showlist, 'col-xs-9':showlist}" > -->
+      <div class="col-xs-9" style="padding-top:20px;">
 
-
-
-
-
-
-          <!-- <div ng-class="{'col-xs-12' : !showlist, 'col-xs-9':showlist}" > -->
-          <div class="col-xs-9" style="padding-top:20px;">
-
-            <div id="page-content-wrapper" >
-              <div class="page-content inset well" >
-                <div country-map-list countries="countries" />
-                <div class="panel panel-default ng-scope" style="background-color:white;min-height:800px;" id="countryDetails">
-                  <div class="panel-heading" style="marign-bottom:30px;">
-                      <table>
-                          <tr>
-                              <td style="width:120px;padding-right:20px;">
-                                  <div style="height:100px;" class="flag-icon-background  flag-icon-{{code.toLowerCase()}}"></div>
-                              </td>
-                          <td><span class="country-name" style="font-size:300%;">{{country.name.en}}</span>
-                              <h3 style="margin:0;padding:0;padding-top:5px;">
+        <div id="page-content-wrapper">
+          <div class="page-content inset well">
+            <div country-map-list countries="countries" />
+            <div class="panel panel-default ng-scope" style="background-color:white;min-height:800px;" id="countryDetails">
+              <div class="panel-heading" style="marign-bottom:30px;">
+                <table>
+                  <tr>
+                    <td style="width:120px;padding-right:20px;">
+                      <div style="height:100px;" class="flag-icon-background  flag-icon-{{code.toLowerCase()}}"></div>
+                    </td>
+                    <td><span class="country-name" style="font-size:300%;">{{country.name.en}}</span>
+                      <h3 style="margin:0;padding:0;padding-top:5px;">
                                   <span style="vertical-align:top" class="label label-info" ng-show="countriescommonjs.isSignatory(country) && !countriescommonjs.isRatified(country)">Signatory</span>
                                   <span style="vertical-align:top" class="label label-success" ng-show="countriescommonjs.isInbetweenParty(country)">Entry into force on {{entryIntoForceDate| formatDate}}</span>
                                   <span style="vertical-align:top" class="label label-default" ng-show="!countriescommonjs.isRatified(country)">Non-Party</span>
                                   <span style="vertical-align:top" class="label label-primary" ng-show="countriescommonjs.isRatified(country) && !countriescommonjs.isInbetweenParty(country)">Party since {{(country.treaties.XXVII8b.deposit ? country.treaties.XXVII8b.deposit : '- - - - - -') | formatDate}} </span>
                               </h3>
-                          </td>
-                      </tr>
-                  </table>
-                </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
 
-                  <div class="panel-body">
-                      <div class="col-xs-12">
-                      <!-- <div class="pull-right" style="width:30%">
+              <div class="panel-body">
+                <div class="col-xs-12">
+                  <!-- <div class="pull-right" style="width:30%">
                         <div angucomplete id="ex1" placeholder="search country information" pause="100" localdata="autocompleteData" minlength="1" inputclass="form-control form-control-small" searchfields="title" selectedObject="selectedCountry" searchStr="searchText.$" titlefield="title"/>
                       </div> -->
 
 
-                      <div class="clearfix"></div>
-                      <h1>National Contacts and Information</h1>
-                      <hr>
-                      <div class="row" style="">
+                  <div class="clearfix"></div>
+                  <h1>National Contacts and Information</h1>
+                  <hr>
 
+                  <div class="row">
+                    <div class="col-xs-4" ng-repeat="contact in absch_nfp|filter:isContactInformation|orderBy:schema_s">
+                      <div class="panel panel-default" ng-class="{'panel-success':(contact.type_ss.indexOf('ABS-IC')>=0 || contact.type_ss.indexOf('NP-FP')>=0),
+                                        'panel-warning':contact.schema_s=='absCheckpoint',
+                                        'panel-info':contact.schema_s=='authority'||contact.schema_s=='database'}">
+                        <div class="panel-heading">
+                          <h4 class="panel-title">
+                                          <i  ng-class="{'fa fa-user':(contact.schema_s=='focalPoint'||contact.schema_s=='authority'),
+                                                         'mdi-action-verified-user':contact.schema_s=='absCheckpoint',
+                                                         'mdi-file-folder':contact.schema_s=='database'}"></i>
+                                          {{getTitle(contact.schema_s,contact.type_ss,contact.schema_EN_t)}}
+                                      </h4>
+                        </div>
+                        <div class="panel-body">
+                          <strong>{{contact.title_t}}</strong>
+                          <div ng-show="contact.description_t" ng-bind-html="contact.description_t"></div>
+                          <div ng-show="contact.telephone_s"><i class="fa fa-phone" />{{contact.telephone_s}}</div>
+                          <div ng-show="contact.telephones" ng-repeat="item in contact.telephones"><i class="fa fa-phone" />{{item}}</div>
+                          <div ng-show="contact.email_s">
+                            <a href="mailto:{{contact.email_s}}"><i class="fa fa-envelope-o" />{{contact.email_s}}</a>
+                          </div>
+                          <div ng-show="contact.emails" ng-repeat="item in contact.emails"><a ng-href="mailto:{{item}}"><i class="fa fa-envelope-o"></i> {{item}}</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- <div class="row" style="">
                           <div class="col-xs-3">
                               <div class="panel panel-default">
                                   <div class="panel-heading"> <h4 class="panel-title"> <i class="fa fa-user"></i> CBD National Focal Point</h4></div>
@@ -284,149 +309,178 @@
                                   </div>
                               </div>
                           </div>
-                      </div>
+                      </div> -->
 
-                      <h1>Legislative, administrative or policy measures on access and benefit-sharing (MSR)</h1>
-                      <hr>
-                      <div class="row" style="">
-                          <div class="col-xs-12">
-                             <table class="table table-hover table-msr" style="width:100%;">
-                                 <thead>
-                                 <tr>
-                                     <th>name</th>
-                                     <th>type</th>
-                                     <th>status</th>
-                                     <th>jurisdiction</th>
-                                     <th>date</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th><a href="click to show doc">Estrategia Nacional de Biodiversidad</a></th>
-                                    <th>Strategy</th>
-                                    <th>Adopted</th>
-                                    <th>National/Federal</th>
-                                    <th>1999-01-01</th>
-                                </tr>
-                            <tbody>
-                            </table>
+                  <h1>Legislative, administrative or policy measures on access and benefit-sharing (MSR)</h1>
+
+                  <hr>
+                  <div class="row" style="">
+                    <div class="col-xs-12">
+                      <!-- <table class="table table-hover table-msr" style="width:100%;"> -->
+
+                      <div class="row table-hover table-msr">
+                        <div class="col-lg-3 col-md-3 col-xs-3 tableheader">name</div>
+                        <div class="col-lg-3 col-md-3 col-xs-3 tableheader">type</div>
+                        <div class="col-lg-2 col-md-2 col-xs-2 tableheader">status</div>
+                        <div class="col-lg-2 col-md-2 col-xs-2 tableheader">jurisdiction</div>
+                        <div class="col-lg-2 col-md-2 col-xs-2 tableheader">date</div>
+                      </div>
+                      <hr/>
+                      <div class="row  table-hover table-msr" ng-repeat="measure in absMeasure = (absch_nfp|filter:isMeasure)">
+                        <div class="row">
+                          <div class="col-lg-3 col-md-3 col-xs-3">
+                            <a ng-click="displayDetails=!displayDetails;showDetails(measure)" ng-href="#">{{measure.title_t}}</a>
+                            <i class="fa fa-refresh fa-spin" ng-show="displayDetails&& !measure.data" />
                           </div>
+                          <div class="col-lg-3 col-md-3 col-xs-3">{{measure.type_EN_t}}</div>
+                          <div class="col-lg-2 col-md-2 col-xs-2">{{measure.status_EN_t}}</div>
+                          <div class="col-lg-2 col-md-2 col-xs-2">{{measure.jurisdiction_EN_t}}</div>
+                          <div class="col-lg-2 col-md-2 col-xs-2">{{measure.entryIntoForce_dt|formatDate}}</div>
+                        </div>
+                        <div class="row">
+                          <div class="col-lg-1 col-md-1 col-xs-1" />
+                          <div class="col-lg-10 col-md-10 col-xs-10 details document-show-hide" ng-show="displayDetails" record-loader document="measure.data" hide="title;header;libraries"></div>
+                          <i class="glyphicon glyphicon-remove-circle circle" style="font-size:20px;color:white;" ng-click="displayDetails=!displayDetails;"></i>
+                          <div class="col-lg-1 col-md-1 col-xs-1" />
+                        </div>
                       </div>
-
-                      <div class="clearfix"></div>
-                      <!-- <div document-list documents='absch_nfp.response.docs' filter='measure' show-pagination='false' advance-filter="searchText" current-page='currentPage' document-Count='documentCount'></div> -->
-
-
-                      <h1>Internationally Recognized Certificates of Compliance (IRCC)</h1>
-                      <hr>
-                      <div class="row" style="">
-                          <div class="col-xs-12">
-                              <table class="table table-hover table-msr" style="width:100%;">
-                                  <thead>
-                                      <tr>
-                                          <th>name</th>
-                                          <th>issued to</th>
-                                          <th>subject matter</th>
-                                          <th>use</th>
-                                          <th>date of issue</th>
-                                      </tr>
-                                  </thead>
-                                  <tbody>
-                                      <tr>
-                                          <th><a href="click to show doc">this is the title of the IRCC</a></th>
-                                          <th>Matthew Dias</th>
-                                          <th>Plants</th>
-                                          <th>non-commerical</th>
-                                          <th>1999-01-01</th>
-                                      </tr>
-                                      <tbody>
-                                      </table>
-                                  </div>
-                              </div>
-
-
-                              <h1><span class="label label-info">SENT</span>  Checkpoint Communiqués (CPC) </h1>
-                              <hr>
-                              <div class="row" style="">
-                                  <div class="col-xs-12">
-                                      <table class="table table-hover table-msr" style="width:100%;">
-                                          <thead>
-                                              <tr>
-                                                  <th>checkpoint</th>
-                                                  <th>title</th>
-                                                  <th>source country</th>
-                                                  <th>user</th>
-                                                  <th>subject matter</th>
-                                                  <th>IRCC</th>
-                                                  <th>sent on</th>
-                                              </tr>
-                                          </thead>
-                                          <tbody>
-                                              <tr>
-                                                  <th>National Patent Office</th>
-                                                  <th><a href="click to show doc">this is the title</a></th>
-                                                  <th>canada</th>
-                                                  <th>Matthew</th>
-                                                  <th>Plants</th>
-                                                  <th>ABSCH-IRCC-109230</th>
-                                                  <th>1999-01-01</th>
-                                              </tr>
-                                              <tbody>
-                                              </table>
-                                          </div>
-                                      </div>
-
-
-                                      <h1><span class="label label-warning">RECEIVED</span> Checkpoint Communiqués (CPC)  </h1>
-                                      <hr>
-                                      <div class="row" style="">
-                                          <div class="col-xs-12">
-                                              <table class="table table-hover table-msr" style="width:100%;">
-                                                  <thead>
-                                                      <tr>
-                                                          <th>issuing country</th>
-                                                          <th>checkpoint</th>
-                                                          <th>title</th>
-                                                          <th>user</th>
-                                                          <th>subject matter</th>
-                                                          <th>IRCC</th>
-                                                          <th>sent on</th>
-                                                      </tr>
-                                                  </thead>
-                                                  <tbody>
-                                                      <tr>
-                                                          <th>China</th>
-                                                          <th>National Patent Office</th>
-                                                          <th><a href="click to show doc">this is the title</a></th>
-                                                          <th>Matthew</th>
-                                                          <th>Plants</th>
-                                                          <th>ABSCH-IRCC-109230</th>
-                                                          <th>1999-01-01</th>
-                                                      </tr>
-                                                      <tbody>
-                                                      </table>
-                                                  </div>
-                                              </div>
-
-
-
-
+                      <div class="row" ng-show="absMeasure.length==0">
+                        <div class="col-lg-10 col-md-12 col-xs-12 tableheader pull-right">No Legislative, administrative or policy measures on access and benefit-sharing (MSR) available</div>
+                      </div>
                     </div>
                   </div>
+
+                  <div class="clearfix"></div>
+                  <!-- <div document-list documents='absch_nfp.response.docs' filter='measure' show-pagination='false' advance-filter="searchText" current-page='currentPage' document-Count='documentCount'></div> -->
+
+
+                  <h1>Internationally Recognized Certificates of Compliance (IRCC)</h1>
+                  <hr>
+                  <div class="row" style="">
+                    <div class="col-xs-12">
+                       <!-- <table class="table table-hover table-msr" style="width:100%;"> -->
+
+                           <div class="row table-hover table-msr">
+                              <div class="col-lg-3 col-md-3 col-xs-3 tableheader">name</div>
+                              <div class="col-lg-3 col-md-3 col-xs-3 tableheader">issued to</div>
+                              <div class="col-lg-2 col-md-2 col-xs-2 tableheader">subject matter</div>
+                              <div class="col-lg-2 col-md-2 col-xs-2 tableheader">use</div>
+                              <div class="col-lg-2 col-md-2 col-xs-2 tableheader">date of issue</div>
+                          </div><hr/>
+                          <div class="row  table-hover table-msr" ng-repeat="permit in absPermit = (absch_nfp|filter:isPermit)">
+                              <div class="row">
+                                  <div class="col-lg-3 col-md-3 col-xs-3">
+                                      <a ng-click="displayDetails=!displayDetails;showDetails(permit)" ng-href="#">{{permit.title_t}}</a>
+                                      <i class="fa fa-refresh fa-spin" ng-show="displayDetails&& !permit.data"/>
+                                  </div>
+                                  <div class="col-lg-3 col-md-3 col-xs-3">{{permit.informedConsents_CEN_sw}}</div>
+                                  <div class="col-lg-2 col-md-2 col-xs-2"><span ng-repeat="keyword in permit.keywords_CEN_ss">{{parseJSON(keyword)|lstring}}{{$last ? '':', '}}</span></div>
+                                  <div class="col-lg-2 col-md-2 col-xs-2"><span ng-repeat="usage in permit.usage_CEN_ss">{{parseJSON(usage)|lstring}}{{$last ? '':', '}}</span></div>
+                                  <div class="col-lg-2 col-md-2 col-xs-2">{{permit.date_dt|formatDate}}</div>
+                              </div>
+                              <div class="row" >
+                                  <div class="col-lg-1 col-md-1 col-xs-1" />
+                                  <div class="col-lg-10 col-md-10 col-xs-10 details document-show-hide" ng-show="displayDetails" record-loader document="permit.data"
+                                      hide="title;header;libraries" ></div>
+                                      <i class="glyphicon glyphicon-remove-circle circle" style="font-size:20px;color:white;" ng-click="displayDetails=!displayDetails;"></i>
+                                  <div class="col-lg-1 col-md-1 col-xs-1" />
+                              </div>
+                          </div>
+                          <div class="row" ng-show="absMeasure.length==0">
+                              <div class="col-lg-10 col-md-12 col-xs-12 tableheader pull-right">No Internationally Recognized Certificates of Compliance (IRCC)</div>
+                          </div>
+                    </div>
+
+
+                  </div>
+
+
+                  <h1><span class="label label-info">SENT</span>  Checkpoint Communiqués (CPC) </h1>
+                  <hr>
+                  <div class="row" style="">
+                    <div class="col-xs-12">
+                          <div class="row table-hover table-msr">
+                             <div class="col-lg-2 col-md-2 col-xs-2 tableheader">checkpoint</div>
+                             <div class="col-lg-2 col-md-2 col-xs-2 tableheader">title</div>
+                             <div class="col-lg-2 col-md-2 col-xs-2 tableheader">source country</div>
+                             <div class="col-lg-1 col-md-1 col-xs-1 tableheader">user</div>
+                             <div class="col-lg-2 col-md-2 col-xs-2 tableheader">subject matter</div>
+                             <div class="col-lg-2 col-md-2 col-xs-2 tableheader">IRCC</div>
+                             <div class="col-lg-1 col-md-1 col-xs-1 tableheader">sent</div>
+                         </div>
+                         <hr/>
+                         <div class="row table-hover table-msr" ng-repeat="communique in absCommunique = (absch_nfp|filter:isCheckpointCommunique)">
+                            <div class="col-lg-2 col-md-2 col-xs-2">{{parseJSON(communique.checkpoint_CEN_ss)|lstring}}</div>
+                            <div class="col-lg-2 col-md-2 col-xs-2">{{communique.title_t}}</div>
+                            <div class="col-lg-2 col-md-2 col-xs-2">
+                                <span ng-repeat="country in communique.originCountries_CEN_ss">{{parseJSON(country)|lstring}}<br/></span></div>
+                            <div class="col-lg-1 col-md-1 col-xs-1">
+                                <span ng-repeat="user in communique.geneticRessourceUsers">{{user.organization|lstring}}<br/></span></div>
+                            <div class="col-lg-2 col-md-2 col-xs-2">
+                                <span ng-repeat="keyword in communique.keywords_CEN_ss">{{parseJSON(keyword)|lstring}}{{$last ? '':', '}}</span></div>
+                            <div class="col-lg-2 col-md-2 col-xs-2">
+                                <span ng-show="!communique.permit">Not available</span>
+                                <span ng-repeat="permit in communique.permit">{{permit.header.identifier|uniqueID}}<br/></span>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-xs-1">{{communique.createdDate_dt|formatDate}}</div>
+                            <!-- <br>{{communique}} -->
+                            <hr style="width:100%"/>
+                        </div>
+                    </div>
+                  </div>
+
+
+                  <h1><span class="label label-warning">RECEIVED</span> Checkpoint Communiqués (CPC)  </h1>
+                  <hr>
+                  <div class="row" style="">
+                    <div class="col-xs-12">
+                      <table class="table table-hover table-msr" style="width:100%;">
+                        <thead>
+                          <tr>
+                            <th>issuing country</th>
+                            <th>checkpoint</th>
+                            <th>title</th>
+                            <th>user</th>
+                            <th>subject matter</th>
+                            <th>IRCC</th>
+                            <th>sent on</th>
+                          </tr>
+                        </thead>
+                        <!-- <tbody>
+                          <tr>
+                            <th>China</th>
+                            <th>National Patent Office</th>
+                            <th><a href="click to show doc">this is the title</a>
+                            </th>
+                            <th>Matthew</th>
+                            <th>Plants</th>
+                            <th>ABSCH-IRCC-109230</th>
+                            <th>1999-01-01</th>
+                          </tr>
+                          <tbody> -->
+                      </table>
+                    </div>
+                  </div>
+
+
+
+
                 </div>
-                <!-- end row -->
-
-
-
               </div>
-              <!-- end container -->
-
-
             </div>
-          </div>
-        </div>
+            <!-- end row -->
 
-      <!-- end controller -->
+
+
+          </div>
+          <!-- end container -->
+
+
+        </div>
+      </div>
     </div>
+
+    <!-- end controller -->
   </div>
+</div>
 </div>

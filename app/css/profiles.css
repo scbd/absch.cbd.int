@@ -166,12 +166,36 @@
 	{
 		margin-top:0;
 	}
-	.table-msr > thead > tr > th{
+	.table-msr > thead > tr > th, .tableheader{
 		text-transform: uppercase;
 		color:#999;
 	}
 
-	.table-msr > tbody > tr >  td{
+	.table-msr > tbody > tr >  td,{
 		text-transform: uppercase;
 		color:#333;
+	}
+	.document-show-hide {
+		-webkit-transition:all linear 0.5s !important;
+		transition:all linear 0.5s;
+	}
+
+	.document-show-hide.ng-hide {
+		opacity:0;
+	}
+	.circle {
+		font-size: 20px;
+		color: white;
+		left: -40px;
+		top: 10px;
+		cursor:pointer
+	}
+	.nopadding-right{
+		padding-right:0px!important;
+	}
+	.nopadding-left{
+			padding-left:0px!important;
+		}
+	.nopadding{
+		padding:0px!important;
 	}

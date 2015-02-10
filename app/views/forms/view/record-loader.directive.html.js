@@ -96,20 +96,26 @@ app.directive('recordLoader', [function () {
 
 				}
 
+				$scope.loadDocument(documentSchema,documentID,documentRevision);
+				// else
+				// 	$scope.error = "documentID not specified";
+
+			}
+
+			$scope.loadDocument = function(documentSchema,documentID,documentRevision){
+				console.log(documentID,documentSchema);
 				if(documentSchema && (documentSchema.toUpperCase()=="FOCALPOINT" || documentSchema.toUpperCase()=="MEETING" || documentSchema.toUpperCase()=="NOTIFICATION"
-                   || documentSchema.toUpperCase()=="PRESSRELEASE" || documentSchema.toUpperCase()=="STATEMENT" || documentSchema.toUpperCase()=="NEWS"))
+				|| documentSchema.toUpperCase()=="PRESSRELEASE" || documentSchema.toUpperCase()=="STATEMENT" || documentSchema.toUpperCase()=="NEWS"))
 				{
-					 commonjs.getReferenceRecordIndex(documentSchema,documentID).then(function(data){
+					commonjs.getReferenceRecordIndex(documentSchema,documentID).then(function(data){
 						$scope.internalDocument = data.data;
 					//console.log($scope.internalDocument );
 					});
 				}
 				else if (documentID){
+					console.log(documentID);
 					$scope.load(documentID,documentRevision);
 				}
-				// else
-				// 	$scope.error = "documentID not specified";
-
 			}
 
 			$scope.timeLaspe = 20;
@@ -247,6 +253,16 @@ app.directive('recordLoader', [function () {
 					$scope.init();
 				}
 			}
+
+			$scope.$on('loadDocument', function(evt, evtData){
+console.log(evtData,$scope.document);
+				if(evtData.documentId && evtData.schema && !$scope.document){
+					console.log('$scope.loadDocument')
+					$scope.loadDocument(evtData.schema,evtData.documentId);
+				}
+
+			});
+
 		}]
 	}
 }]);
