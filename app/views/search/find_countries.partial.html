@@ -34,39 +34,52 @@
         </style>
 
         <!--Save Dialog-->
-        <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="countryModal">
-            <div class="modal-dialog modal-lg">
+        <div class="modal fade" style="" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="countryModal">
+            <div class="modal-dialog modal-md">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <h4 class="modal-title" id="myModalLabel"> {{title | lstring:locale}}</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="filter-options">
-                            <div style="text-align:center;padding-bottom:5px" >
-                                <a ng-href="#" ng-click="typeFilter = 'All'"><span class="label label-warning" ng-class="{'letter-active' : typeFilter == 'All'}">All ({{terms.length}})</span></a>
+                        <div class="modal-title" id="myModalLabel">
+
+
+                            <span style="font-weight:bold;font-size:24px;text-transform:uppercase;"> {{title | lstring:locale}}<span>
+
+                            <br>
+
+                            <span style="font-weight:bold;font-size:16px;" >
+                                <a ng-href="#" ng-click="typeFilter = 'All'"><span class="label label-warning bg-white" style="border-color:#111;" ng-class="{'letter-active' : typeFilter == 'All'}"><strong>All ({{terms.length}})</strong></span></a>
                                 <a ng-href="#" ng-click="typeFilter = 'isPartyToCBD'"><span class="label label-default" ng-class="{'letter-active' : typeFilter == 'isPartyToCBD'}">Not Ratified ({{nonRatifiedCount}})</span></a>
                                 <a ng-href="#" ng-click="typeFilter = 'isRatified'"><span class="label label-primary" ng-class="{'letter-active' : typeFilter == 'isRatified'}">Ratified ({{ratifiedCount}})</span></a>
                                 <a ng-href="#" ng-click="typeFilter = 'isSignatory'"><span class="label label-info" ng-class="{'letter-active' : typeFilter == 'isSignatory'}">Signatory ({{signatoryCount}})</span></a>
                                 <a ng-href="#" ng-click="typeFilter = 'isInbetween'"><span class="label label-success" ng-class="{'letter-active' : typeFilter == 'isInbetween'}">Inbetween ({{inbetweenCount}})</span></a>
-                              </div>
-                            <div style="padding-bottom:5px">
+                            </span>
+
+                            <div style="padding-top:5px;font-size:20px;">
                                 <span ng-repeat="letter in alphabet">
                                     <a ng-href="#" ng-click="setCountryFilter(letter)" class="letter" ng-class="{'letter-active':countryFilter == letter}">{{letter}}</a>
                                 </span>
                             </div>
+
+                        </div>
+
+                    </div>
+                    <div class="modal-body">
+                        <div class="filter-options">
+
+
                             <div ng-class="{'section1':terms.length>0}">
                                 <div class="progress progress-striped active" ng-show="showSelect && terms.length<=0">
                                       <div class="progress-bar"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
                                         <span class="sr-only">45% Complete</span>
                                       </div>
                                 </div>
-                                <div class="col-xs-4" style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;padding-left:5px;padding-right:5px;"
-                                ng-repeat="item in (terms | filter: filterCountries | filter:filterByType |orderBy:'title.en')">
-                                    <div class="checkbox" style="margin-top:2px;margin-bottom:2px">&nbsp;
-                                            <label class="label label-party"
-                                            ng-class="{'label-info':item.isSignatory && !item.isRatified, 'label-primary':item.isRatified,
-                                            'label-default':!item.isRatified && !item.isSignatory, 'label-success':item.isInbetween}">
+                                <div class="col-xs-12" style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;padding-left:5px;padding-right:5px;"
+                                ng-repeat="item in (terms | filter: filterCountries | filter:filterByType |orderBy:'title.en')" ng-class="{'label-info':item.isSignatory && !item.isRatified, 'label-primary':item.isRatified,
+                                'label-default':!item.isRatified && !item.isSignatory, 'label-success':item.isInbetween}">
+                                    <div class="checkbox" style="margin-top:2px;margin-bottom:2px" >
+                                        &nbsp;
+                                            <label class="label label-party" style="font-size:18px;font-weight:bold;white-space:normal;"
+                                            >
                                                 <input type="checkbox" ng-model="item.selected" ng-change="refresh()">
                                                 {{item.title.en}} ({{item.count}})
                                             </label>
