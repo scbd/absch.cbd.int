@@ -11,7 +11,8 @@ app.directive('viewFocalPoint', [function() {
 			locale: "=",
 			target: "@linkTarget"
 		},
-		controller: ['$scope', function ($scope) {
+		controller: ['$scope','commonjs', function ($scope, commonjs) {
+			$scope.getNFPText = commonjs.getNFPText;
 		}]
 	}
 }]);

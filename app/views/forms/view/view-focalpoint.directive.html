@@ -1,5 +1,5 @@
 <div id="Record" class="record panel panel-default">
-	<div class="panel-heading  bg-blue"> <h4>NATIONAL FOCAL POINT</h4></div>
+	<div class="panel-heading  bg-blue"> <h4>{{getNFPText(document.ctgList_ss) | uppercase}}</h4></div>
 	<div class="record-body panel-body">
 
 		<div ng-show="document.government_EN_t">
@@ -45,20 +45,34 @@
 			</span>
 		</div>
 
-
-
-
-		<div ng-show="document.email_s">
+		<div ng-show="document.email_ss">
 			<label>Email</label>
 			<span class="km-value">
-				{{document.email_s}}
+				<ul>
+					<li ng-repeat="item in document.email_ss">
+						<a href="mailto:{{item}}"><i class="fa fa-envelope-o" /> {{item}}</a>
+					</li>
+				</ul>
 			</span>
 		</div>
 
 		<div ng-show="document.telephone_s">
 			<label>Telephone</label>
 			<span class="km-value">
-				{{document.telephone_s}}
+				<i class="fa fa-phone" /> {{document.telephone_s}}
+			</span>
+		</div>
+
+
+
+		<div ng-show="document.fax_ss">
+			<label>Fax</label>
+			<span class="km-value">
+				<ul>
+					<li ng-repeat="item in document.fax_ss">
+						<a href="mailto:{{item}}"><i class="fa fa-fax" /> {{item}}</a>
+					</li>
+				</ul>
 			</span>
 		</div>
 

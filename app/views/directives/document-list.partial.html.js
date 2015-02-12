@@ -363,30 +363,11 @@ app.directive('documentList', function ($http, $filter) {
                     }
                 }
 
-            $scope.getNFPText = function(cdgList){
-
-                if(!cdgList)
-                    return;
-                if(underscore.indexOf(cdgList, 'NP-FP')>= 0 && (underscore.indexOf(cdgList, 'CBD-FP1')>= 0 || underscore.indexOf(cdgList, 'CBD-FP2')>= 0))
-                    return "Nagoya Protocol/CBD Focal Point";
-                else if(underscore.indexOf(cdgList, 'ABS-IC')>= 0 && (underscore.indexOf(cdgList, 'CBD-FP1')>= 0 || underscore.indexOf(cdgList, 'CBD-FP2')>= 0))
-                    return "ICNP/CBD Focal Point";
-                if(underscore.indexOf(cdgList, 'NP-FP')>= 0)
-                    return "Nagoya Protocol Focal Point";
-                else if(underscore.indexOf(cdgList, 'ABS-IC')>= 0)
-                    return "ICNP Focal Point";
-                else if(underscore.indexOf(cdgList, 'CBD-FP1')>= 0)
-                    return "CBD Primary Focal Point";
-                else if(underscore.indexOf(cdgList, 'CBD-FP2')>= 0)
-                    return "CBD Secondary Focal Point";
-
-                return "";
-
-            }
-                //==================================
-                //
-                //==================================
-                 $scope.user= null;
+            $scope.getNFPText = commonjs.getNFPText;
+              //==================================
+              //
+              //==================================
+              $scope.user= null;
               function  canUserEdit  (document) {
 
                   if(!$scope.user){
