@@ -1,4 +1,5 @@
-define(['app'], function(app){
+define(['app','underscore'], function(app,underscore){
+
 	app.factory('commonjs', ['authHttp','$rootScope', function($http,$rootScope){
 		return new function(){
 
@@ -8,7 +9,7 @@ define(['app'], function(app){
 				var queryFields = 'fl=id,identifier_s,schema_s,createdDate_dt,createdByEmail_s,createdBy_s,updatedDate_dt,updatedByEmail_s,updatedBy_s,url_ss,';
 
 				if(schema.toUpperCase()=="FOCALPOINT"){
-				  	queryFields += 'description_EN_t,government_EN_t,organization_EN_t,function_EN_t,department_EN_t,title_EN_t,treaty_CEN_ss,type_CEN_ss,email_s,telephone_s';
+				  	queryFields += 'description_EN_t,government_EN_t,organization_EN_t,function_EN_t,department_EN_t,title_EN_t,treaty_CEN_ss,type_CEN_ss,email_ss,telephone_s,ctgList_ss,fax_ss';
 				}
 				else if (schema.toUpperCase()=="MEETING"){
 					queryFields += 'symbol_s,startDate_dt,endDate_dt,eventCountry_CEN_s,title_s,eventCity_s,text_EN_txt,themes_CEN_ss,thematicAreas_CEN_ss,thematicAreas_ss';
@@ -120,6 +121,27 @@ define(['app'], function(app){
 	                              entity.treaties.XXVII8b.instrument == "acceptance"
 	                              || entity.treaties.XXVII8b.instrument == "approval" );
 	         }
+
+			 this.getNFPText = function(cdgList){
+
+                if(!cdgList)
+                    return;
+                if(underscore.indexOf(cdgList, 'NP-FP')>= 0 && (underscore.indexOf(cdgList, 'CBD-FP1')>= 0 || underscore.indexOf(cdgList, 'CBD-FP2')>= 0))
+                    return "Nagoya Protocol/CBD Focal Point";
+                else if(underscore.indexOf(cdgList, 'ABS-IC')>= 0 && (underscore.indexOf(cdgList, 'CBD-FP1')>= 0 || underscore.indexOf(cdgList, 'CBD-FP2')>= 0))
+                    return "ICNP/CBD Focal Point";
+                if(underscore.indexOf(cdgList, 'NP-FP')>= 0)
+                    return "Nagoya Protocol Focal Point";
+                else if(underscore.indexOf(cdgList, 'ABS-IC')>= 0)
+                    return "ICNP Focal Point";
+                else if(underscore.indexOf(cdgList, 'CBD-FP1')>= 0)
+                    return "CBD Primary Focal Point";
+                else if(underscore.indexOf(cdgList, 'CBD-FP2')>= 0)
+                    return "CBD Secondary Focal Point";
+
+                return "";
+
+            }
 		}
 	}]);
 });

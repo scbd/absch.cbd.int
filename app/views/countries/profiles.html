@@ -235,10 +235,13 @@
                         <div class="panel-body">
                           <strong>{{contact.title_t}}</strong>
                           <div ng-show="contact.description_t" ng-bind-html="contact.description_t"></div>
-                          <div ng-show="contact.telephone_s"><i class="fa fa-phone" />{{contact.telephone_s}}</div>
-                          <div ng-show="contact.telephones" ng-repeat="item in contact.telephones"><i class="fa fa-phone" />{{item}}</div>
-                          <div ng-show="contact.email_s">
-                            <a href="mailto:{{contact.email_s}}"><i class="fa fa-envelope-o" />{{contact.email_s}}</a>
+                          <div ng-show="contact.telephone_s"><i class="fa fa-phone" /> {{contact.telephone_s}}</div>
+                          <div ng-show="contact.telephones" ng-repeat="item in contact.telephones"><i class="fa fa-phone" /> {{item}}</div>
+                          <div ng-show="contact.fax_ss">
+                            <a href="mailto:{{item}}" ng-repeat="item in contact.fax_ss"><i class="fa fa-fax" /> {{item}} </a>
+                          </div>
+                          <div ng-show="contact.email_ss">
+                              <a href="mailto:{{item}}" ng-repeat="item in contact.email_ss"><i class="fa fa-envelope-o" /> {{item}} </a>
                           </div>
                           <div ng-show="contact.emails" ng-repeat="item in contact.emails"><a ng-href="mailto:{{item}}"><i class="fa fa-envelope-o"></i> {{item}}</a>
                           </div>
