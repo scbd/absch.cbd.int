@@ -15,22 +15,22 @@
       <div class="col-xs-3" style="padding-top:5px;">
         <h1 class="special-font">Country Information</h1>
 
+        <div style="padding-bottom:10px;">
+            <label class="btn btn-default">
+                <span class="fa fa-globe fa-lg" ng-click="show('map');" style="cursor:pointer">&nbsp;Map</span>
+            </label>
+            <label class="btn btn-default">
+                <span class="fa fa-align-justify fa-lg" ng-click="show('list');" style="cursor:pointer">&nbsp;List</span>
+            </label>
+        </div>
+
+
         <div class="well" ng-show="true">
 
           <!-- <div style="padding-bottom:10px;">
                     <span class="btn btn-default"><i class="fa fa-globe fa-lg" ng-click="showMap(true);" style="cursor:pointer">&nbsp;View Map</i></span>
                 </div> -->
 
-          <div class="btn-group" data-toggle="buttons" style="padding-bottom:10px;">
-            <label class="btn btn-default active">
-              <input type="radio" name="options" id="option1" autocomplete="off" checked>
-              <i class="fa fa-globe fa-lg" ng-click="show('map');" style="cursor:pointer">&nbsp;Map</i>
-            </label>
-            <label class="btn btn-default">
-              <input type="radio" name="options" id="option2" autocomplete="off">
-              <i class="fa fa-align-justify fa-lg" ng-click="show('list');" style="cursor:pointer">&nbsp;List</i>
-            </label>
-          </div>
 
 
           <div style="padding-bottom:10px;">
@@ -111,9 +111,9 @@
 
 
             <div class="row">
-              <div class="col-xs-6"><strong>country</strong>
-              </div>
-              <div class="col-xs-1 text-center"><i class="mdi-action-account-box" style="font-size:16px;" data-toggle="tooltip" data-placement="top" title="Competent National Authority"></i>
+              <div class="col-xs-12"><strong>country</strong>
+             </div>
+             <!-- <div class="col-xs-1 text-center"><i class="mdi-action-account-box" style="font-size:16px;" data-toggle="tooltip" data-placement="top" title="Competent National Authority"></i>
               </div>
               <div class="col-xs-1 text-center"><i class="mdi-action-stars" style="font-size:16px;" data-toggle="tooltip" data-placement="top" title="Legislative, administrative or policy measures"></i>
               </div>
@@ -124,7 +124,7 @@
               <div class="col-xs-1 text-center"><i class="mdi-action-bookmark" style="font-size:16px;" data-toggle="tooltip" data-placement="top" title="Internationally Recognized Certificate of Compliance"></i>
               </div>
               <div class="col-xs-1 text-center"><i class="mdi-file-folder" style="font-size:16px;" data-toggle="tooltip" data-placement="top" title="National Websites and Databases"></i>
-              </div>
+              </div> -->
             </div>
 
             <div class="clearfix"></div>
@@ -136,13 +136,13 @@
                             'list-group-item-default':!country.isRatified && !country.isSignatory,
                             'list-group-item-success' : country.isInbetweenParty}">
 
-                  <div class="col-xs-6">{{country.name |lstring}}</div>
-                  <div class="col-xs-1 text-center">{{country.CNA}}</div>
+                  <div class="col-xs-12">{{country.name |lstring}}</div>
+                  <!-- <div class="col-xs-1 text-center">{{country.CNA}}</div>
                   <div class="col-xs-1 text-center">{{country.MSR}}</div>
                   <div class="col-xs-1 text-center">{{country.CP}}</div>
                   <div class="col-xs-1 text-center">{{country.CPC}}</div>
                   <div class="col-xs-1 text-center">{{country.IRCC}}</div>
-                  <div class="col-xs-1 text-center">{{country.NDB}}</div>
+                  <div class="col-xs-1 text-center">{{country.NDB}}</div> -->
                 </li>
               </ul>
             </div>
@@ -187,7 +187,7 @@
       <div class="col-xs-9" style="padding-top:20px;">
 
         <div id="page-content-wrapper">
-          <div class="page-content inset well">
+          <div class="page-content inset ">
             <div country-map-list countries="countries" />
             <div class="panel panel-default ng-scope" style="background-color:white;min-height:800px;" id="countryDetails">
               <div class="panel-heading" style="marign-bottom:30px;">
