@@ -47,7 +47,7 @@
 
 
                             <span>
-                                <a href="/database/record?documentID={{document.schema=='MEETING' ? document.id : document.identifier_s}}&documentSchema={{document.schema}}"
+                                <a href="/database/{{document.schema}}/{{getDocumentId(document)}}"
                                     target="_new" class="pull-right"style="padding:0px 3px;color:#999;"><i class="glyphicon glyphicon-new-window" id="help-record-newwindow"></i>
                                 </a>
                             </span>

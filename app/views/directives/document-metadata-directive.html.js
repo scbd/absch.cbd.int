@@ -4,7 +4,7 @@ define(['app'], function (app) {
 			restrict: 'EAC',
 			replace:true,
 			templateUrl: '/app/views/directives/document-metadata-directive.html',
-			controller: ['$scope', '$filter', function($scope, $filter){
+			controller: ['$scope', '$filter','commonjs', function($scope, $filter, commonjs){
 
 				$scope.getDocumentId = function(document){
 					if(!document)
@@ -12,7 +12,17 @@ define(['app'], function (app) {
 					if(!document.id)
 						return $filter("uniqueIDWithoutRevision")(document.info);
 					else
-						return document.id;
+						return commonjs.hexToInteger(document.id);
+				}
+
+				$scope.getDocumentSchema = function(schema){
+
+					if(schema.toLowerCase() == "pressrelease" || schema.toLowerCase() == "statement"
+						|| schema.toLowerCase() == "news" || schema.toLowerCase() == "notification" ||
+						schema.toLowerCase() == "meeting" || schema.toLowerCase() == "focalpoint")
+						return schema;
+					else
+						return $filter("schemaShortName")(schema.toLowerCase())
 				}
 			}]
 		};

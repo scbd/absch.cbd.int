@@ -62,9 +62,10 @@ app.directive('recordLoader', [function () {
 				if ($scope.document || $scope.schema)
 					return;
 
-				var documentID = $route.current.params.documentID;
 				var documentSchema = $route.current.params.documentSchema;
 				var documentRevision = $route.current.params.revision;
+
+				var documentID = documentSchema ? commonjs.integerToHex($route.current.params.documentID, documentSchema) : $route.current.params.documentID;
 
 				if($scope.revisionNo)
 					documentRevision = $scope.revisionNo;
@@ -103,7 +104,7 @@ app.directive('recordLoader', [function () {
 			}
 
 			$scope.loadDocument = function(documentSchema,documentID,documentRevision){
-				console.log(documentID,documentSchema);
+
 				if(documentSchema && (documentSchema.toUpperCase()=="FOCALPOINT" || documentSchema.toUpperCase()=="MEETING" || documentSchema.toUpperCase()=="NOTIFICATION"
 				|| documentSchema.toUpperCase()=="PRESSRELEASE" || documentSchema.toUpperCase()=="STATEMENT" || documentSchema.toUpperCase()=="NEWS"))
 				{
@@ -255,9 +256,9 @@ app.directive('recordLoader', [function () {
 			}
 
 			$scope.$on('loadDocument', function(evt, evtData){
-console.log(evtData,$scope.document);
+
 				if(evtData.documentId && evtData.schema && !$scope.document){
-					console.log('$scope.loadDocument')
+
 					$scope.loadDocument(evtData.schema,evtData.documentId);
 				}
 

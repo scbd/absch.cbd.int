@@ -38,9 +38,9 @@
 			<div >
 					<label class="record-metadata-label">Record identifier:</label>
 					<span class="record-metadata-text">
-						<a target="_new_" href="/database/record?documentID={{getDocumentId(document)}}&documentSchema={{document.header.schema | uppercase}}">
+						<a target="_new_" href="/database/{{getDocumentSchema(document.header.schema)}}/{{getDocumentId(document)}}">
 				 			<span >{{document.info | uniqueIDWithoutRevision }}</span>
-							<span ng-show="document.id">{{document.id}}</span>
+							<span ng-show="document.id">{{getDocumentId(document)}}</span>
 					    </a>
 						<span ng-show="!document.info  && !document.id">not yet assigned</span>
 					</span>

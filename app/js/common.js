@@ -142,6 +142,34 @@ define(['app','underscore'], function(app,underscore){
                 return "";
 
             }
+
+			this.hexToInteger = function(hex){
+				if(hex && hex.length==24)
+					return parseInt(hex.substr(15, 9),16);
+
+				return hex;
+			}
+
+			this.integerToHex = function(d, schema){
+				var schemaCode = '';
+				if(schema.toLowerCase() == "pressrelease" || schema.toLowerCase() == "statement"
+					|| schema.toLowerCase() == "news")
+					schemaCode = "52000000CBD0180000000000";
+				else if(schema.toLowerCase() == "notification")
+					schemaCode = "52000000CBD0120000000000";
+				else if(schema.toLowerCase() == "meeting")
+					schemaCode = "52000000CBD0050000000000";
+				else if(schema.toLowerCase() == "focalpoint")
+					schemaCode = "52000000CBD0220000000000";
+
+				if(schemaCode=='')
+					return d;
+
+				var hex = Number(d).toString(16);
+				hex = schemaCode.substr(0, 24 - hex.length) + hex;
+
+				return hex;
+			}
 		}
 	}]);
 });
