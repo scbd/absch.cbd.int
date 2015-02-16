@@ -41,9 +41,9 @@
                                     data-popover="true" data-html="true" type="country" data-value="{{document.doc.government_s}}" >{{document.source}}</span>
                             <small ng-show="document.isInbetweenParty" >(entry into force on {{document.entryIntoForce | formatDate}})</small>
 
-                            <span ng-hide="document.schema=='focalpoint'" class="schema">{{document.schema | schemaName}}</span>
+                            <span ng-click="displayDetails = !displayDetails;load(document,displayDetails);" ng-hide="document.schema=='focalpoint'" class="schema">{{document.schema | schemaName}}</span>
 
-                            <span ng-show="document.schema=='focalpoint'" class="schema">{{getNFPText(document.typeList)}}</span>
+                            <span ng-click="displayDetails = !displayDetails;load(document,displayDetails);" ng-show="document.schema=='focalpoint'" class="schema">{{getNFPText(document.typeList)}}</span>
 
 
                             <span>
