@@ -74,6 +74,7 @@ define(['app','./countries-commonJS.js'], function(app) {
                   if (moment().diff(moment($scope.countries[i].treaties.XXVII8b.deposit), 'days') < 90) {
                     $scope.countries[i].isInbetweenParty = true;
                     $scope.inbetweenParties++;
+                    countryColors[$scope.countries[i].code.toUpperCase()] = "#5cb85c";
                   }
                   //
                 }
@@ -114,7 +115,7 @@ define(['app','./countries-commonJS.js'], function(app) {
                   });
                 })
                 //$scope.showMap(true);
-                if ($routeParams.commonFormat) {
+                if ($routeParams.code && $routeParams.code.toUpperCase()=='RAT') {
                   $scope.searchFilter = countriescommonjs.isRatified;
                   $scope.updateMap('ratified');
                 }
@@ -172,7 +173,7 @@ define(['app','./countries-commonJS.js'], function(app) {
             jQuery('#vmap').vectorMap({
               map: 'world_en',
               backgroundColor: '#f5f5f5',
-              selectedColor: '#666666',
+              selectedColor: null,
               enableZoom: true,
               showTooltip: true,
               colors: colors,

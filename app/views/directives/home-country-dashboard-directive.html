@@ -5,7 +5,7 @@
 <div class="row" ng-hide="loadingFacets">
 
     <div class="row" style="margin-bottom:-22px;">
-        <a ng-href="/{{facet[0]== 'RAT' ? 'countries' : 'find'}}?commonFormat={{facet[0]}}" ng-repeat="facet in commonFormatFacets" style="display:inline;" >
+        <a ng-href="/{{facet[0]== 'RAT' ? 'countries' : 'database'}}/{{facet[0]|mapSchema}}" ng-repeat="facet in commonFormatFacets" style="display:inline;" >
             <div class="col-xs-8ths" id="myWell"  >
                 <div class="box-0 text-center">
 

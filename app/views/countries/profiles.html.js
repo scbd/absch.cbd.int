@@ -82,6 +82,7 @@
                   }
                   else if(document.schema_s == "authority" || document.schema_s == "database" ||
                      document.schema_s == "absCheckpoint"){
+                         document.description_t = '';
                          $q.when(IStorage.documents.get(document.identifier_s))
                          .then(function(data) {
                              var doc = data.data
@@ -199,7 +200,7 @@
        $scope.$on('mapDetailsLoad', function(evt, data){
            $scope.mapDetails = data.mapDetails;
            $scope.type = 'party';
-          if ($routeParams.commonFormat || $routeParams.code)
+          if ($routeParams.code && $routeParams.code.toUpperCase() != 'RAT')
             $scope.show('profile');
           else
             $scope.show('map');

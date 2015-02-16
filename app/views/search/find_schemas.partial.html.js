@@ -418,9 +418,9 @@ app.directive('searchFilterSchemas', function ($http) {
                 }
             }
 
-            if($routeParams.commonFormat)
+            if($routeParams.documentSchema)
             {
-                $scope[$routeParams.commonFormat].selected = true;
+                $scope[$filter("mapSchema")($routeParams.documentSchema.toUpperCase())].selected = true;
             }
             $scope.buildQuery();
 
