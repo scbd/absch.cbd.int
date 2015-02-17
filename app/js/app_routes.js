@@ -30,25 +30,23 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
             when('/help/register',              { templateUrl: '/app/views/help/register/register.html'                      ,resolveController: true, resolveUser: true}).
             // when('/help/register/:question',              { templateUrl: '/app/views/help/register/register.html'                      ,resolveController: true, resolveUser: true}).
 
-            when('/search',                        { templateUrl: '/app/views/search/find.html'                      ,resolveController: true, resolveUser: true}).
-            when('/find',                        { templateUrl: '/app/views/search/find.html'                      ,resolveController: true, resolveUser: true}).
-            when('/find/simple',                { templateUrl: '/app/views/find/simple.html'     ,resolveController: true, resolveUser: true}).
+            when('/search',                         { templateUrl: '/app/views/search/find.html'                      ,resolveController: true, resolveUser: true}).
+            //when('/search/',                                      { templateUrl: '/app/views/search/find.html'              ,resolveController: true, resolveUser: true}).
+            when('/search/:documentSchema',                       { templateUrl: '/app/views/search/find.html'              ,resolveController: true, resolveUser: true}).
+            when('/search/:documentSchema/:countryCode',              { templateUrl: '/app/views/search/find.html'              ,resolveController: true, resolveUser: true}).
 
-
+            when('/find',                           { redirectTo:'/search'}).
+            when('/find/simple',                    { templateUrl: '/app/views/find/simple.html'     ,resolveController: true, resolveUser: true}).
 
             when('/countries',                   { templateUrl: '/app/views/countries/profiles.html'                 ,resolveController: true, resolveUser: true}).
-            //when('/countries/map',               { templateUrl: '/app/views/countries/countryMap.html'        ,resolveController: true, resolveUser: true}).
             when('/countries/:code',             { templateUrl: '/app/views/countries/profiles.html'                  ,resolveController: true, resolveUser: true}).
 
-            when('/database/record',             { templateUrl: '/app/views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
-            when('/database/record/:documentID',  { templateUrl: '/app/views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
-            when('/database/record/:documentID/:revision', { templateUrl: '/app/views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
-
-            when('/database/',                        { templateUrl: '/app/views/search/find.html'                      ,resolveController: true, resolveUser: true}).
-            when('/database/:documentSchema',         { templateUrl: '/app/views/search/find.html'                      ,resolveController: true, resolveUser: true}).
-
-            when('/database/:documentSchema/:documentID', { templateUrl: '/app/views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
-            when('/database/:documentSchema/:documentID/:revision', { templateUrl: '/app/views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
+            // when('/database/record',             { templateUrl: '/app/views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
+            // when('/database/record/:documentID',  { templateUrl: '/app/views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
+            // when('/database/record/:documentID/:revision', { templateUrl: '/app/views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
+            when('/database/:documentID',                           { templateUrl: '/app/views/forms/view/records-id.html'    ,resolveController: true, resolveUser: true}).
+            when('/database/:documentSchema/:documentID',           { templateUrl: '/app/views/forms/view/records-id.html'    ,resolveController: true, resolveUser: true}).
+            when('/database/:documentSchema/:documentID/:revision', { templateUrl: '/app/views/forms/view/records-id.html'    ,resolveController: true, resolveUser: true}).
 
             when('/register',                    { templateUrl: '/app/views/register.html'                  ,resolveController: true, resolveUser: true}).
             when('/register/tasks/:id',          { templateUrl: '/app/views/tasks/tasks-id.html'            ,resolveController: true, resolveUser: true}).

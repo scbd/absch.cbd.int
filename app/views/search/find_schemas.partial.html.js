@@ -420,7 +420,18 @@ app.directive('searchFilterSchemas', function ($http) {
 
             if($routeParams.documentSchema)
             {
-                $scope[$filter("mapSchema")($routeParams.documentSchema.toUpperCase())].selected = true;
+                var documentSchema = $routeParams.documentSchema.toUpperCase();
+                var schema = $filter("mapSchema")(documentSchema);
+                if($scope[schema])
+                    $scope[schema].selected = true;
+                else{
+                    var schemaShort = $filter("schemaShortName")(documentSchema);
+                    if(schemaShort!=documentSchema){
+                        var schemaN = $filter("mapSchema")(schemaShort);
+                        if($scope[schemaN])
+                            $scope[schemaN].selected = true;
+                    }
+                }
             }
             $scope.buildQuery();
 

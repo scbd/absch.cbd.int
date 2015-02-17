@@ -27,9 +27,11 @@ define(['app',
 
           $scope.getDocumentId = function(document) {
 
-            if ((document.recordtype == "referenceRecord" && document.schema != "resource") || document.schema == "focalPoint")
-              return document.id;
-            else { //console.log(document)
+            if ((document.recordtype == "referenceRecord" && document.schema != "resource") || document.schema.toLowerCase() == "focalpoint"){
+              return commonjs.hexToInteger(document.id || document.identifier_s);
+            }
+            else {
+                //console.log(document)
               return $filter("uniqueIDWithoutRevision")(document.doc.identifier_s);
             }
           }
@@ -477,9 +479,11 @@ define(['app',
           //     return data;
           // },
 
-          $scope.getDocumentId = function(document) {
-            return commonjs.hexToInteger(document.identifier_s);
-          }
+        //   $scope.getDocumentId = function(document) {
+          //
+        //     return commonjs.hexToInteger($scope.getDocumentId(document));
+        //   }
+
         }
       ]
 

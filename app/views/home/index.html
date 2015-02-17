@@ -85,7 +85,7 @@
 
                             </div>
                         </div>
-                    
+
                          <div class="row bg-green"  style="padding:30px;" ng-show="user.isAuthenticated" >
                                 <div class="text-center col-xs-10"  >
                                     <h1 class="dropshadow" style="font-size:360%;margin-bottom:0;padding:0;position:relative;top:-10px;"> WELCOME {{user.name}}</h1>
@@ -198,7 +198,7 @@
 
                 <div ng-repeat="doc in rawNationalDocs" >
                     <div class="latest" ng-class="{'latest-even-row':$even}">
-                        <a  href="/database/record?documentID={{document.schema=='MEETING' ? doc.id : doc.identifier_s}}&documentSchema={{doc.schema_EN_t}}" class="latest-link">
+                        <a  href="/database/{{getDocumentId(doc)}}" class="latest-link">
                         <span class="latest-date"> {{doc.createdDate_dt | formatDate}} </span> |
                         <span class="latest-country"> {{doc.government_EN_t}} </span> |
                         <span class="latest-schema"> {{doc.schema_EN_t | schemaName}} </span>
@@ -229,7 +229,7 @@
 
                 <div ng-repeat="doc in rawRefDocs">
                     <div class="latest" ng-class="{'latest-even-row':$even}">
-                        <a  href="/database/record?documentID={{doc.schema=='MEETING' ? doc.id : doc.identifier_s}}&documentSchema={{doc.schema_EN_t}}" class="latest-link">
+                        <a  href="/database/{{doc.schema_s == 'resource' ? '' : doc.schema_EN_t + '/'}}{{getDocumentId(doc)}}" class="latest-link">
                         <span class="latest-date"> {{doc.createdDate_dt | formatDate}} </span> |
                             <span class="latest-schema"> {{doc.schema_s | schemaName}} </span> |
                         <span class="latest-schema">{{getResourceType(doc.resourceTypes_CEN_ss)}}</span>

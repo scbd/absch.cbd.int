@@ -2,8 +2,8 @@ define(['app',
     '/app/views/forms/view/record-loader.directive.html.js',
     '/app/views/directives/document-list.partial.html.js',
     '/app/views/directives/home-country-dashboard-directive.html.js'], function (app) {
-    app.controller('IndexController', ['$scope', 'authHttp', '$window', '$cookies','realm', '$filter','$rootScope',
-    function ($scope, $http, $window, $cookies, realm, $filter, $rootScope) {
+    app.controller('IndexController', ['$scope', 'authHttp', '$window', '$cookies','realm', '$filter','$rootScope','commonjs',
+    function ($scope, $http, $window, $cookies, realm, $filter, $rootScope, commonjs) {
 
     	$scope.email = null;
     	$scope.password = null;
@@ -111,6 +111,17 @@ define(['app',
             }
 
         }
+          $scope.getDocumentId = function(document) {
+              if ((document.schema_s == 'absPermit' || document.schema_s == 'absCheckpoint' ||
+                    document.schema_s == 'absCheckpointCommunique' || document.schema_s == 'authority' ||
+                    document.schema_s == 'measure' || document.schema_s == 'database' ||
+                    document.schema_s == 'resource')){
+                return $filter("uniqueIDWithoutRevision")(document.identifier_s);
+              }
+              else {
+                  return commonjs.hexToInteger(document.id || document.identifier_s);
+              }
+          }
 
     }]);
 });
