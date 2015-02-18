@@ -7,36 +7,39 @@
 <link href="/app/libs/jqvmap/jqvmap/jqvmap.css" rel="stylesheet">
 
 <div ng-controller="ProfileController">
-<style>
-.ng-hide-add-active, .ng-hide-remove {
-    display: inline!important;
-}
-.table-hover:hover{  background-color: #f5f5f5;}
-.border{
-    border-bottom: 1px solid #eee;
-    padding:10px 0px 00px 00px;
-}
-.confidential{
-    color:#a94442!important;
-}
-.tableheader{
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-.table-msr{
-    border-bottom:1px solid #eee;
-    padding-left:20px;
-    padding-right:20px;
-}
-.fullBorder{
-    border: 1px solid #eee;
-}
-.sectionHeader{
-    border: 1px solid #eee;
-     padding:10px;
-     margin-top:50px;
-}
-</style>
+  <style>
+    .ng-hide-add-active,
+    .ng-hide-remove {
+      display: inline!important;
+    }
+    .table-hover:hover {
+      background-color: #f5f5f5;
+    }
+    .border {
+      border-bottom: 1px solid #eee;
+      padding: 10px 0px 00px 00px;
+    }
+    .confidential {
+      color: #a94442!important;
+    }
+    .tableheader {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+    .table-msr {
+      border-bottom: 1px solid #eee;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .fullBorder {
+      border: 1px solid #eee;
+    }
+    .sectionHeader {
+      border: 1px solid #eee;
+      padding: 10px;
+      margin-top: 50px;
+    }
+  </style>
 
   <div class="container-fluid" id="wrapper">
     <div class="row">
@@ -45,12 +48,12 @@
         <h1 class="special-font">Country Information</h1>
 
         <div style="padding-bottom:10px;">
-            <label class="btn btn-default">
-                <span class="fa fa-globe fa-lg" ng-click="show('map');" style="cursor:pointer">&nbsp;Map</span>
-            </label>
-            <label class="btn btn-default">
-                <span class="fa fa-align-justify fa-lg" ng-click="show('list');" style="cursor:pointer">&nbsp;List</span>
-            </label>
+          <label class="btn btn-default">
+            <span class="fa fa-globe fa-lg" ng-click="show('map');" style="cursor:pointer">&nbsp;Map</span>
+          </label>
+          <label class="btn btn-default">
+            <span class="fa fa-align-justify fa-lg" ng-click="show('list');" style="cursor:pointer">&nbsp;List</span>
+          </label>
         </div>
 
 
@@ -120,16 +123,17 @@
 
               <div class="panel-body">
                 <div class="col-xs-12">
-                  <!-- <div class="pull-right" style="width:30%">
-                        <div angucomplete id="ex1" placeholder="search country information" pause="100" localdata="autocompleteData" minlength="1" inputclass="form-control form-control-small" searchfields="title" selectedObject="selectedCountry" searchStr="searchText.$" titlefield="title"/>
-                      </div> -->
-
 
                   <div class="clearfix"></div>
-                  <h3>National Contacts and Information</h1>
-                  <hr>
 
-                  <div class="row">
+                  <div class="row sectionHeader">
+                    <h3>National Contacts and Information
+                          <a ng-href="#" ng-click="showContacts = !showContacts" >
+                              <i class="fa fa-chevron-circle-up" ng-show="showContacts" ></i>
+                              <i class="fa fa-chevron-circle-down" ng-show="!showContacts" ></i></a>
+                      </h3>
+                  </div>
+                  <div class="row fullBorder" ng-show="showContacts"><br/>
                     <div class="col-xs-4" ng-repeat="contact in absch_nfp|filter:isContactInformation|orderBy:schema_s">
                       <div class="panel panel-default" ng-class="{'panel-success':(contact.type_ss.indexOf('ABS-IC')>=0 || contact.type_ss.indexOf('NP-FP')>=0),
                                         'panel-warning':contact.schema_s=='absCheckpoint',
@@ -145,13 +149,13 @@
                         <div class="panel-body">
                           <strong>{{contact.title_t}}</strong>
                           <div ng-show="contact.description_t" ng-bind-html="contact.description_t"></div>
-                          <div ng-show="contact.telephone_s"><i class="fa fa-phone" /> {{contact.telephone_s}}</div>
-                          <div ng-show="contact.telephones" ng-repeat="item in contact.telephones"><i class="fa fa-phone" /> {{item}}</div>
+                          <div ng-show="contact.telephone_s"><i class="fa fa-phone" />{{contact.telephone_s}}</div>
+                          <div ng-show="contact.telephones" ng-repeat="item in contact.telephones"><i class="fa fa-phone" />{{item}}</div>
                           <div ng-show="contact.fax_ss">
-                            <a href="mailto:{{item}}" ng-repeat="item in contact.fax_ss"><i class="fa fa-fax" /> {{item}} </a>
+                            <a href="mailto:{{item}}" ng-repeat="item in contact.fax_ss"><i class="fa fa-fax" />{{item}}</a>
                           </div>
                           <div ng-show="contact.email_ss">
-                              <a href="mailto:{{item}}" ng-repeat="item in contact.email_ss"><i class="fa fa-envelope-o" /> {{item}} </a>
+                            <a href="mailto:{{item}}" ng-repeat="item in contact.email_ss"><i class="fa fa-envelope-o" />{{item}}</a>
                           </div>
                           <div ng-show="contact.emails" ng-repeat="item in contact.emails"><a ng-href="mailto:{{item}}"><i class="fa fa-envelope-o"></i> {{item}}</a>
                           </div>
@@ -161,13 +165,17 @@
                   </div>
 
                   <div class="row sectionHeader">
-                      <h3>Legislative, administrative or policy measures on access and benefit-sharing (MSR)</h1>
+                    <h3>Legislative, administrative or policy measures on access and benefit-sharing (MSR)
+                          <a ng-href="#" ng-click="showMSR = !showMSR" >
+                              <i class="fa fa-chevron-circle-up" ng-show="showMSR" ></i>
+                              <i class="fa fa-chevron-circle-down" ng-show="!showMSR" ></i></a>
+                      </h3>
                   </div>
-                  <div class="row fullBorder">
+                  <div class="row fullBorder " ng-show="showMSR">
                     <div class="col-xs-12">
                       <!-- <table class="table table-hover table-msr" style="width:100%;"> -->
 
-                      <div class="row table-hover table-msr" >
+                      <div class="row table-hover table-msr">
                         <div class="col-lg-3 col-md-3 col-xs-3 tableheader">name</div>
                         <div class="col-lg-3 col-md-3 col-xs-3 tableheader">type</div>
                         <div class="col-lg-2 col-md-2 col-xs-2 tableheader">status</div>
@@ -175,20 +183,20 @@
                         <div class="col-lg-2 col-md-2 col-xs-2 tableheader">date</div>
                       </div>
                       <div class="row table-hover table-msr" ng-repeat="measure in absMeasure = (absch_nfp|filter:isMeasure)">
-                          <div class="row border">
-                              <div class="col-lg-3 col-md-3 col-xs-3">
-                                  <a ng-click="displayDetails=!displayDetails;showDetails(measure)" ng-href="#">{{measure.title_t}}</a>
-                                  <i class="fa fa-refresh fa-spin" ng-show="displayDetails&& !measure.data" />
-                              </div>
-                              <div class="col-lg-3 col-md-3 col-xs-3">{{measure.type_EN_t}}</div>
-                              <div class="col-lg-2 col-md-2 col-xs-2">{{measure.status_EN_t}}</div>
-                              <div class="col-lg-2 col-md-2 col-xs-2">{{measure.jurisdiction_EN_t}}</div>
-                              <div class="col-lg-2 col-md-2 col-xs-2">{{measure.entryIntoForce_dt|formatDate}}</div>
-                              <div class="row">
-                                  <i class="glyphicon glyphicon-remove-circle circle pull-right" style="position:relative;top:40px;z-index:100;font-size:20px;color:white;" ng-click="displayDetails=!displayDetails;"></i>
-                                  <div class="col-xs-12 details document-show-hide" ng-show="displayDetails" record-loader document="measure.data" hide="title;header;libraries"></div>
-                              </div>
+                        <div class="row border">
+                          <div class="col-lg-3 col-md-3 col-xs-3">
+                            <a ng-click="displayDetails=!displayDetails;showDetails(measure)" ng-href="#">{{measure.title_t}}</a>
+                            <i class="fa fa-refresh fa-spin" ng-show="displayDetails&& !measure.data" />
                           </div>
+                          <div class="col-lg-3 col-md-3 col-xs-3">{{measure.type_EN_t}}</div>
+                          <div class="col-lg-2 col-md-2 col-xs-2">{{measure.status_EN_t}}</div>
+                          <div class="col-lg-2 col-md-2 col-xs-2">{{measure.jurisdiction_EN_t}}</div>
+                          <div class="col-lg-2 col-md-2 col-xs-2">{{measure.entryIntoForce_dt|formatDate}}</div>
+                          <div class="row">
+                            <i class="glyphicon glyphicon-remove-circle circle pull-right" style="position:relative;top:40px;z-index:100;font-size:20px;color:white;" ng-click="displayDetails=!displayDetails;"></i>
+                            <div class="col-xs-12 details document-show-hide" ng-show="displayDetails" record-loader document="measure.data" hide="title;header;libraries"></div>
+                          </div>
+                        </div>
                       </div>
                       <div class="row" ng-show="absMeasure.length==0">
                         <div class="col-lg-10 col-md-12 col-xs-12 tableheader color-orange">No Legislative, administrative or policy measures on access and benefit-sharing (MSR) available</div>
@@ -198,43 +206,47 @@
 
                   <div class="clearfix"></div>
                   <div class="row sectionHeader">
-                      <h3>Internationally Recognized Certificates of Compliance (IRCC)</h3>
+                    <h3>Internationally Recognized Certificates of Compliance (IRCC)
+                          <a ng-href="#" ng-click="showIRCC = !showIRCC" >
+                              <i class="fa fa-chevron-circle-up" ng-show="showIRCC" ></i>
+                              <i class="fa fa-chevron-circle-down" ng-show="!showIRCC" ></i></a>
+                      </h3>
                   </div>
-                  <div class="row fullBorder">
+                  <div class="row fullBorder " ng-show="showIRCC">
                     <div class="col-xs-12">
-                           <div class="row table-msr">
-                              <div class="col-lg-3 col-md-3 col-xs-3 tableheader">name</div>
-                              <div class="col-lg-3 col-md-3 col-xs-3 tableheader">issued to</div>
-                              <div class="col-lg-2 col-md-2 col-xs-2 tableheader">subject matter</div>
-                              <div class="col-lg-2 col-md-2 col-xs-2 tableheader">use</div>
-                              <div class="col-lg-2 col-md-2 col-xs-2 tableheader">date of issue</div>
+                      <div class="row table-msr">
+                        <div class="col-lg-3 col-md-3 col-xs-3 tableheader">name</div>
+                        <div class="col-lg-3 col-md-3 col-xs-3 tableheader">issued to</div>
+                        <div class="col-lg-2 col-md-2 col-xs-2 tableheader">subject matter</div>
+                        <div class="col-lg-2 col-md-2 col-xs-2 tableheader">use</div>
+                        <div class="col-lg-2 col-md-2 col-xs-2 tableheader">date of issue</div>
+                      </div>
+                      <div class="row table-hover table-msr" ng-repeat="permit in absPermit = (absch_nfp|filter:isPermit)">
+                        <div class="row border">
+                          <div class="col-lg-3 col-md-3 col-xs-3">
+                            <a ng-click="displayDetails=!displayDetails;showDetails(permit)" ng-href="#">{{permit.title_t}}</a>
+                            <i class="fa fa-refresh fa-spin" ng-show="displayDetails&& !permit.data" />
                           </div>
-                          <div class="row table-hover table-msr" ng-repeat="permit in absPermit = (absch_nfp|filter:isPermit)">
-                              <div class="row border">
-                                  <div class="col-lg-3 col-md-3 col-xs-3">
-                                      <a ng-click="displayDetails=!displayDetails;showDetails(permit)" ng-href="#">{{permit.title_t}}</a>
-                                      <i class="fa fa-refresh fa-spin" ng-show="displayDetails&& !permit.data"/>
-                                  </div>
-                                  <div class="col-lg-3 col-md-3 col-xs-3">
-                                      <div class="confidential" ng-show="!permit.informedConsents_CEN_ss">Confidential information</div>
-                                        {{permit.informedConsents_CEN_ss}}
-                                   </div>
-                                  <div class="col-lg-2 col-md-2 col-xs-2">
-                                      <div class="confidential" ng-show="!permit.keywords_CEN_ss">Confidential information</div>
-                                      <span ng-repeat="keyword in permit.keywords_CEN_ss">{{parseJSON(keyword)|lstring}}{{$last ? '':', '}}</span>
-                                  </div>
-                                  <div class="col-lg-2 col-md-2 col-xs-2"><span ng-repeat="usage in permit.usage_CEN_ss">{{parseJSON(usage)|lstring}}{{$last ? '':', '}}<br/></span></div>
-                                  <div class="col-lg-2 col-md-2 col-xs-2">{{permit.date_dt|formatDate}}</div>
-                                  <div class="row" >
-                                      <i class="glyphicon glyphicon-remove-circle circle pull-right" style="position:relative;top:40px;z-index:100;font-size:20px;color:white;" ng-click="displayDetails=!displayDetails;"></i>
-                                      <div class="col-xs-12 details document-show-hide" ng-show="displayDetails" record-loader document="permit.data"
-                                          hide="title;header;libraries" ></div>
-                                 </div>
-                              </div>
+                          <div class="col-lg-3 col-md-3 col-xs-3">
+                            <div class="confidential" ng-show="!permit.informedConsents_CEN_ss">Confidential information</div>
+                            {{permit.informedConsents_CEN_ss}}
                           </div>
-                          <div class="row" ng-show="absMeasure.length==0">
-                              <div class="col-lg-10 col-md-12 col-xs-12 tableheader color-orange">No Internationally Recognized Certificates of Compliance (IRCC)</div>
+                          <div class="col-lg-2 col-md-2 col-xs-2">
+                            <div class="confidential" ng-show="!permit.keywords_CEN_ss">Confidential information</div>
+                            <span ng-repeat="keyword in permit.keywords_CEN_ss">{{parseJSON(keyword)|lstring}}{{$last ? '':', '}}</span>
                           </div>
+                          <div class="col-lg-2 col-md-2 col-xs-2"><span ng-repeat="usage in permit.usage_CEN_ss">{{parseJSON(usage)|lstring}}{{$last ? '':', '}}<br/></span>
+                          </div>
+                          <div class="col-lg-2 col-md-2 col-xs-2">{{permit.date_dt|formatDate}}</div>
+                          <div class="row">
+                            <i class="glyphicon glyphicon-remove-circle circle pull-right" style="position:relative;top:40px;z-index:100;font-size:20px;color:white;" ng-click="displayDetails=!displayDetails;"></i>
+                            <div class="col-xs-12 details document-show-hide" ng-show="displayDetails" record-loader document="permit.data" hide="title;header;libraries"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row" ng-show="absMeasure.length==0">
+                        <div class="col-lg-10 col-md-12 col-xs-12 tableheader color-orange">No Internationally Recognized Certificates of Compliance (IRCC)</div>
+                      </div>
                     </div>
 
 
@@ -242,53 +254,56 @@
 
                   <div class="clearfix"></div>
                   <div class="row sectionHeader">
-                      <h3>Checkpoint Communiqués (CPC) <span class="label label-info">SENT</span> </h3>
+                    <h3>Checkpoint Communiqués (CPC) <span class="label label-info">SENT</span>
+                          <a ng-href="#" ng-click="showCPCSent = !showCPCSent" >
+                              <i class="fa fa-chevron-circle-up" ng-show="showCPCSent" ></i>
+                              <i class="fa fa-chevron-circle-down" ng-show="!showCPCSent" ></i></a>
+                      </h3>
                   </div>
-                  <div class="row fullBorder" >
+                  <div class="row fullBorder " ng-show="showCPCSent">
                     <div class="col-xs-12">
-                          <div class="row table-msr">
-                             <div class="col-lg-2 col-md-2 col-xs-2 tableheader">checkpoint</div>
-                             <div class="col-lg-2 col-md-2 col-xs-2 tableheader">title</div>
-                             <div class="col-lg-2 col-md-2 col-xs-2 tableheader">source country</div>
-                             <div class="col-lg-1 col-md-1 col-xs-1 tableheader">user</div>
-                             <div class="col-lg-2 col-md-2 col-xs-2 tableheader">subject matter</div>
-                             <div class="col-lg-2 col-md-2 col-xs-2 tableheader">IRCC</div>
-                             <div class="col-lg-1 col-md-1 col-xs-1 tableheader">sent</div>
-                         </div>
-                         <div class="row table-hover table-msr" ng-repeat="communique in absCommunique = (absch_nfp|filter:isCheckpointCommunique)">
-                             <div class="row border" style="padding-top: 10px;padding-bottom: 10px;">
-                                    <div class="col-lg-2 col-md-2 col-xs-2">
-                                        <span ng-repeat="checkpoint in communique.checkpoint_CEN_ss">
+                      <div class="row table-msr">
+                        <div class="col-lg-2 col-md-2 col-xs-2 tableheader">checkpoint</div>
+                        <div class="col-lg-2 col-md-2 col-xs-2 tableheader">title</div>
+                        <div class="col-lg-2 col-md-2 col-xs-2 tableheader">source country</div>
+                        <div class="col-lg-1 col-md-1 col-xs-1 tableheader">user</div>
+                        <div class="col-lg-2 col-md-2 col-xs-2 tableheader">subject matter</div>
+                        <div class="col-lg-2 col-md-2 col-xs-2 tableheader">IRCC</div>
+                        <div class="col-lg-1 col-md-1 col-xs-1 tableheader">sent</div>
+                      </div>
+                      <div class="row table-hover table-msr" ng-repeat="communique in absCommunique = (absch_nfp|filter:isCheckpointCommunique)">
+                        <div class="row border" style="padding-top: 10px;padding-bottom: 10px;">
+                          <div class="col-lg-2 col-md-2 col-xs-2">
+                            <span ng-repeat="checkpoint in communique.checkpoint_CEN_ss">
                                                 {{parseJSON(checkpoint)|lstring}}<br/>
                                         </span>
-                                    </div>
-                                    <div class="col-lg-2 col-md-2 col-xs-2">
-                                        <a ng-href="#" ng-click="displayDetails=!displayDetails;showDetails(communique)">{{communique.title_t}}</a>
-                                        <i class="fa fa-refresh fa-spin" ng-show="displayDetails && !communique.data"/>
-                                    </div>
-                                    <div class="col-lg-2 col-md-2 col-xs-2">
-                                        <span ng-repeat="country in communique.originCountries_CEN_ss">{{parseJSON(country)|lstring}}<br/></span></div>
-                                    <div class="col-lg-1 col-md-1 col-xs-1">
-                                        <span ng-repeat="user in communique.geneticRessourceUsers">{{user.organization|lstring}}<br/></span></div>
-                                    <div class="col-lg-2 col-md-2 col-xs-2">
-                                        <span ng-repeat="keyword in communique.keywords_CEN_ss">{{parseJSON(keyword)|lstring}}{{$last ? '':', '}}</span></div>
-                                    <div class="col-lg-2 col-md-2 col-xs-2">
-                                        <span ng-show="!communique.permit_ss">Not available</span>
-                                        <span ng-repeat="permit in communique.permit_ss">
+                          </div>
+                          <div class="col-lg-2 col-md-2 col-xs-2">
+                            <a ng-href="#" ng-click="displayDetails=!displayDetails;showDetails(communique)">{{communique.title_t}}</a>
+                            <i class="fa fa-refresh fa-spin" ng-show="displayDetails && !communique.data" />
+                          </div>
+                          <div class="col-lg-2 col-md-2 col-xs-2">
+                            <span ng-repeat="country in communique.originCountries_CEN_ss">{{parseJSON(country)|lstring}}<br/></span>
+                          </div>
+                          <div class="col-lg-1 col-md-1 col-xs-1">
+                            <span ng-repeat="user in communique.geneticRessourceUsers">{{user.organization|lstring}}<br/></span>
+                          </div>
+                          <div class="col-lg-2 col-md-2 col-xs-2">
+                            <span ng-repeat="keyword in communique.keywords_CEN_ss">{{parseJSON(keyword)|lstring}}{{$last ? '':', '}}</span>
+                          </div>
+                          <div class="col-lg-2 col-md-2 col-xs-2">
+                            <span ng-show="!communique.permit_ss">Not available</span>
+                            <span ng-repeat="permit in communique.permit_ss">
                                             <a ng-href="/database/{{permit|uniqueIDWithoutRevision}}" target="_new">{{permit|uniqueIDWithoutRevision}}</a><br/></span>
-                                    </div>
-                                    <div class="col-lg-1 col-md-1 col-xs-1">{{communique.createdDate_dt|formatDate}}</div>
+                          </div>
+                          <div class="col-lg-1 col-md-1 col-xs-1">{{communique.createdDate_dt|formatDate}}</div>
 
-                                    <div class="row" >
-                                        <i  ng-show="displayDetails"
-                                        class="glyphicon glyphicon-remove-circle circle pull-right"
-                                        style="position:relative;top:{{40 + (communique.permit_ss ? communique.permit_ss.length*10 :0  )}}px;z-index:100;font-size:20px;color:white;"
-                                        ng-click="displayDetails=!displayDetails;"></i>
-                                        <div class="col-xs-12 details document-show-hide" ng-show="displayDetails" record-loader document="communique.data"
-                                            hide="title;header;libraries" ></div>
-                                    </div>
-                                </div>
+                          <div class="row">
+                            <i ng-show="displayDetails" class="glyphicon glyphicon-remove-circle circle pull-right" style="position:relative;top:{{40 + (communique.permit_ss ? communique.permit_ss.length*10 :0  )}}px;z-index:100;font-size:20px;color:white;" ng-click="displayDetails=!displayDetails;"></i>
+                            <div class="col-xs-12 details document-show-hide" ng-show="displayDetails" record-loader document="communique.data" hide="title;header;libraries"></div>
+                          </div>
                         </div>
+                      </div>
                     </div>
                   </div>
 

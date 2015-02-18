@@ -186,7 +186,6 @@ define(['app','./countries-commonJS.js'], function(app) {
               }
 
             });
-
             $('.jqvmap-zoomin').html('<i class="glyphicon glyphicon-plus"/>')
             $('.jqvmap-zoomout').html('<i class="glyphicon glyphicon-minus"/>')
             //    console.log(map);

@@ -24,7 +24,13 @@
      function($scope, $http, $routeParams, linqjs, $filter, realm, commonjs, $q,
                 $element, $timeout, countriescommonjs, IStorage) {
 
-
+       function resetList(){
+           $scope.showCPCSent = true;
+           $scope.showIRCC = true;
+           $scope.showMSR = true;
+           $scope.showContacts = true;
+       }
+       resetList();
        $scope.show = function(type) {
          if (type=='map' || type=='list') {
            $element.find('#countryDetails').slideUp('slow');
@@ -33,6 +39,7 @@
          } else {
            $element.find('#worldMap').slideUp('slow');
            $element.find('#countryDetails').slideDown('slow');
+           resetList()
          }
 
          $scope.$broadcast('showDetails', {data:type});
