@@ -13,8 +13,8 @@ define(['app', 'underscore', '/app/js/common.js'], function(app, _) {
         externalFilter: '=externalFilter'
       },
       link: function($scope, element, attrs, ngModelController) {},
-      controller: ['$scope', '$element', '$location', 'commonjs', '$q',
-        function($scope, $element, $location, commonjs, $q) {
+      controller: ['$scope', '$element', '$location', 'commonjs', '$q','$routeParams',
+        function($scope, $element, $location, commonjs, $q, $routeParams) {
           $scope.alphabet = ['All', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
             'W', 'X', 'Y', 'Z'
           ];
@@ -169,6 +169,10 @@ define(['app', 'underscore', '/app/js/common.js'], function(app, _) {
             updateExternalFilter();
 
           }, true);
+
+          if($routeParams.countryCode){
+              $scope.externalFilter = [$routeParams.countryCode];
+          }
 
           $scope.$watch('showSelect', function(value) {
               loadContryDetails(value);
