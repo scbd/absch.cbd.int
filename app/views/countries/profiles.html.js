@@ -29,6 +29,7 @@
            $scope.showIRCC = true;
            $scope.showMSR = true;
            $scope.showContacts = true;
+           $scope.showCPCRecv = true;
        }
        resetList();
        $scope.show = function(type) {
@@ -66,7 +67,7 @@
            });
            //*******************************************************
            var schema = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database"]
-           var schemQuery = ' AND (schema_s:' + schema.join(' OR schema_s:') + ' OR (schema_s:focalPoint AND (type_ss:NP-FP OR type_ss:ABS-IC)))';
+           var schemQuery = ' (schema_s:' + schema.join(' OR schema_s:') + ' OR (schema_s:focalPoint AND (type_ss:NP-FP OR type_ss:ABS-IC)))';
            var queryURL = '/api/v2013/index/select?cb=1394816088237&fl=id,identifier_s,title_t,description_t,url_ss,schema_EN_t,date_dt,' +
                             'government_s,government_EN_t,schema_s,number_d,aichiTarget_ss,reference_s,sender_s,meeting_ss,recipient_ss,' +
                             'symbol_s,eventCity_EN_t,eventCountry_EN_t,startDate_s,endDate_s,body_s,code_s,meeting_s,group_s,function_t,' +
@@ -74,14 +75,22 @@
                             ',type_ss,email_ss,fax_ss,telephone_s,government_CEN_s,type_EN_t,status_EN_t,entryIntoForce_dt, usage_CEN_ss,keywords_CEN_ss,'+
                             'date_s,informedConsents_s,permit_ss,originCountries_CEN_ss,checkpoint_CEN_ss,createdDate_dt,geneticRessourceUsers_s'+
                             '' +
-                            '&q=(realm_ss:' + realm.value.toLowerCase() + ' OR realm_ss:absch)' + schemQuery +
-                            '+AND+((+government_s:' +
-                            $scope.code.toLowerCase() + '+))+AND+(*:*)&rows=100&sort=createdDate_dt+desc,+title_t+asc&start=0&wt=json';
+                            '&q=(realm_ss:' + realm.value.toLowerCase() + ' OR realm_ss:absch) AND ((' + schemQuery +
+                            ' AND government_s:' + $scope.code.toLowerCase() + ') OR (originCountries_ss:'+
+                            $scope.code.toLowerCase() + ' OR permitSourceCountry_ss:' + $scope.code.toLowerCase() + '))' +
+                            '&rows=100&sort=createdDate_dt+desc,+title_t+asc&start=0&wt=json';
+            var queryCPCRevURL = '/api/v2013/index/select?cb=1394816088237&fl=id,identifier_s,title_t,keywords_CEN_ss'+
+                             'checkpoint_CEN_ss,createdDate_dt,geneticRessourceUsers_s,government_s,permit_ss,' +
+                             '&q=(realm_ss:' + realm.value.toLowerCase() + ' OR realm_ss:absch) AND schema_s:absCheckpointCommunique AND (originCountries_ss:'+
+                             $scope.code.toLowerCase() + ' OR permitSourceCountry_ss:' + $scope.code.toLowerCase() + ')' +
+                             '&rows=100&sort=createdDate_dt+desc,+title_t+asc&start=0&wt=json';
+           var queryProfile = $http.get(queryURL, {cache: true})
+           var queryCPCRecv = $http.get(queryCPCRevURL, {cache: true})
 
-           $http.get(queryURL, {
-             cache: true
-           }).then(function(results) {
-             $scope.absch_nfp = results.data.response.docs;
+           $q.all([queryProfile,queryCPCRecv])
+            .then(function(results) {
+             $scope.absch_nfp = results[0].data.response.docs;
+             $scope.cpcReceived = results[1].data.response.docs;
               console.log($scope.absch_nfp);
               $scope.absch_nfp.forEach(function(document){
 
@@ -129,21 +138,13 @@
 
               });
 
-            //  $scope.absch_nfp.response.docs.forEach(function(document) {
-            //    $scope.autocompleteData.push({
-            //      title: document.title_t ? document.title_t : ''
-            //    });
-            //    $scope.autocompleteData.push({
-            //      title: document.description_t ? document.description_t : ''
-            //    });
-            //    $scope.autocompleteData.push({
-            //      title: document.department_t ? document.department_t : ''
-            //    });
-            //    $scope.autocompleteData.push({
-            //      title: document.organization_t ? document.organization_t : ''
-            //    });
-            //  });
-             //
+              $scope.cpcReceived.forEach(function(document){                 
+                  if(document.geneticRessourceUsers_s){
+                    document.geneticRessourceUsers = $scope.parseJSON(document.geneticRessourceUsers_s);
+                  }
+              });
+
+
            });
          }
        }
@@ -257,6 +258,12 @@
       $scope.isPermit = function(entity){
 
           return entity && entity.schema_s == "absPermit";
+      }
+
+      $scope.isCheckpointCommuniqueReceived = function(entity){
+          console.log(entity.originCountries_ss,entity.permitSourceCountry_ss)
+          return entity && entity.schema_s == "absCheckpointCommunique"
+          && (entity.originCountries_ss==$scope.code  || entity.permitSourceCountry_ss==$scope.code);
       }
 
        $scope.showDetails = function(document){
