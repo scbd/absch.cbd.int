@@ -17,6 +17,9 @@ define(['app'], function (app) {
 
 				$scope.getDocumentSchema = function(schema){
 
+					if(!schema)
+						return;
+						
 					if(schema.toLowerCase() == "pressrelease" || schema.toLowerCase() == "statement"
 						|| schema.toLowerCase() == "news" || schema.toLowerCase() == "notification" ||
 						schema.toLowerCase() == "meeting" || schema.toLowerCase() == "focalpoint")

@@ -299,13 +299,18 @@ define(['app','underscore',
         $scope.$watch('keyword',         function() { $scope.currentPage=0; refresh(); });
 
         $scope.$on('externalFilter', function(evt, data){
-            if(data.type == 'country'){
-                if(data.operation=='add' && _.indexOf($scope.countryResultFilter, data.value)==-1)
-                    $scope.countryResultFilter.push(data.value);
-                else if(data.operation=='remove' && _.indexOf($scope.countryResultFilter, data.value)>=0)
-                    $scope.countryResultFilter.splice(_.indexOf($scope.countryResultFilter, data.value), 1);
-            }
-                console.log(data);
+            $timeout(function(){
+                if(data.type == 'country'){
+                    if(data.operation=='add' && _.indexOf($scope.countryResultFilter, data.value)==-1)
+                        $scope.countryResultFilter.push(data.value);
+                    else if(data.operation=='remove' && _.indexOf($scope.countryResultFilter, data.value)>=0)
+                        $scope.countryResultFilter.splice(_.indexOf($scope.countryResultFilter, data.value), 1);
+                }
+                else if(data.type == 'keyword'){
+                    $scope.keyword = data.value;
+                }
+            },100);
+            //console.log(data,    $scope.keyword );
         })
     }]);
 

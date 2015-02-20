@@ -138,6 +138,7 @@ define(['app',
               $scope.documents.forEach(function(doc) {
                 $scope.transformedDocuments.push(transformDocument(doc));
               });
+              addTooltipEvents();
               // $timeout(function(){
               //     $compile($('.blaisePopOver').contents())($scope);
               // },500);
@@ -353,8 +354,6 @@ define(['app',
               output.canEdit = canedit;
             });
 
-
-
             return output;
           }
 
@@ -421,7 +420,6 @@ define(['app',
           };
 
           $scope.addFilter = function(type, value, operation) {
-            console.log($scope.countryResultFilter);
             $scope.$emit('externalFilter', {
               'operation': operation,
               'type': type,
@@ -450,11 +448,9 @@ define(['app',
 
           $element.popover({
             content: function(data) {
-              console.log($(this).attr('type'), $(this).attr('data-value'));
+              // console.log($(this).attr('type'), $(this).attr('data-value'));
               var currentObj = $(this);
               $timeout(function() {
-                console.log(currentObj.find('.blaisePopOver').data('popover'));
-                //$compile(currentObj.find('.blaisePopOver_ht' ).data('popover').tip())(scope);
                 $compile($('.blaisePopOver').contents())($scope);
               });
               return $scope.popOverHTML($(this).attr('type'), $(this).attr('data-value'));
@@ -472,17 +468,94 @@ define(['app',
               // $compile($('.blaisePopOver').contents())($scope);
             });
 
-          // content: function() {
-          //     $timeout(function(){
-          //         $compile($('#help-record-country').data('popover').tip())($scope);
-          //     });
-          //     return data;
-          // },
+            var parentContainerId = ".textDescription"
 
-        //   $scope.getDocumentId = function(document) {
-          //
-        //     return commonjs.hexToInteger($scope.getDocumentId(document));
-        //   }
+             if(!window.CurrentSelection){
+              CurrentSelection = {}
+             }
+
+             CurrentSelection.Selector = {}
+
+             //get the current selection
+             CurrentSelection.Selector.getSelected = function(){
+              var sel = '';
+              if(window.getSelection){
+               sel = window.getSelection()
+              }
+              else if(document.getSelection){
+               sel = document.getSelection()
+              }
+              else if(document.selection){
+               sel = document.selection.createRange()
+              }
+              //console.log(sel);
+              return sel
+             }
+             //function to be called on mouseup
+             CurrentSelection.Selector.mouseup = function(){
+
+              var st = CurrentSelection.Selector.getSelected()
+              if(document.selection && !window.getSelection){
+                var range = st;
+                range.pasteHTML("<span class=\"selectedText\">Blaise Fonseca" + range.htmlText + "</span>");
+              }
+              else{
+                  if(st.type=='None')
+                  return;
+                var range = st.getRangeAt(0)
+                var newNode = document.createElement("span");
+                newNode.setAttribute("class", "selectedText");
+                range.surroundContents(newNode);
+                //
+                var getTitle = newNode.innerHTML;
+                newNode.setAttribute("title", getTitle);
+
+                //
+                var popDiv = document.createElement('span');
+                popDiv.setAttribute('class', 'popDiv');
+                popDiv.setAttribute("title", getTitle);
+                popDiv.innerHTML = getTitle;
+                popDiv.innerHTML += '</br><button type="button" id=\'btn\' class="btn btn-primary" >Filter</button>';
+// console.log($('#selectedTextDiv'));
+                if(newNode.innerHTML.length > 0) {
+                 newNode.appendChild(popDiv);
+                 $compile($('#btn').contents())($scope);
+                 $('#btn').on('click', function(e){
+                     e.stopPropagation();
+                     $scope.add($(this));
+                 })
+                }
+                //Remove Selection: To avoid extra text selection in IE
+                if (window.getSelection) {
+                  window.getSelection().removeAllRanges();
+                }
+                else if (document.selection){
+                 document.selection.empty();
+                }
+                    //
+              }
+             }
+             $scope.add = function(e){
+                 $scope.addFilter('keyword',e.parent().attr('title'),'add')
+                 $('span.selectedText').contents().unwrap();
+                 $('body').find('span.popDiv').remove();
+             }
+            function addTooltipEvents() {
+                $timeout(function(){
+                    $('body').on('mousedown', function(e, data){
+
+                        if(e.target.innerText=='Filter')
+                            return;
+
+                      $('span.selectedText').contents().unwrap();
+                      $(this).find('span.popDiv').remove();
+                    });
+                    $(parentContainerId).bind("mouseup",CurrentSelection.Selector.mouseup);
+                },100);
+             }
+
+
+
 
         }
       ]

@@ -25,6 +25,33 @@
       <a href ng-click="actionSetPage(pageCount - 1)">Last »</a>
     </li>
   </ul>
+  <style type="text/css">
+        ::selection{
+          background: SeaGreen;
+          color: White;
+        }
+        ::-moz-selection{
+          background: SeaGreen;
+          color: White;
+        }
+
+         .selectedText{
+          position: relative;
+          background-color: SeaGreen; color:#fff; line-height: 1.2em;
+         }
+         .popDiv{
+          background: ForestGreen; color: white; padding: 6px; max-width: 250px;min-width:100px;
+          position: absolute; top: 18px; left: 0;
+          border-radius: 4px; box-shadow: 2px 3px 4px #444;
+
+          -webkit-animation: slideIn .5s;
+          animation: slideIn .5s;
+         }
+
+  </style>
+  <script type="text/javascript">
+
+  </script>
   <div class="clearfix"></div>
   <br>
   <div ng-repeat="document in transformedDocuments | filter:advanceFilter | filter:filterCategory "  style="border-top:1px solid #ddd;border-bottom:1px solid #ddd;border-right:1px solid #ddd;">
@@ -33,7 +60,7 @@
 
 
         <div class="{{document.recordtype}}" id="help-record-type" style="cursor:pointer;" ng-class="{'bg-grey': displayDetails}">
-                <div class="" style="padding:20px 20px 10px 20px;">
+                <div class="" style="padding:20px 20px 10px 20px;" >
 
                     <div>
                         <div style="padding:0px 0 0px 0px; ">
@@ -56,14 +83,14 @@
                         </div>
                     </div>
 
-                    <div class="row" style="padding:10px;">
+                    <div class="row textDescription" style="padding:10px;">
                         <div class="col-xs-12">
                             <div ng-click="displayDetails = !displayDetails;load(document,displayDetails);">
                                 <i class="fa" ng-class="{'fa-caret-down':displayDetails, 'fa-caret-right':!displayDetails}"
                                 style="font-size:11px;color:#999;position:relative; top:-1px;font-size:14px;"></i>
 
 
-                                  <span class="title" id="help-record-title">{{document.title}} </span>
+                                  <span class="title text" id="help-record-title">{{document.title}} </span>
                               </div>
 
                           <div class="description" ng-hide="displayDetails" ng-click="displayDetails = !displayDetails;load(document,displayDetails);" >
