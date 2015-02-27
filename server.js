@@ -17,6 +17,7 @@ app.configure(function() {
     app.use(express.compress());
     app.use('/app', express.static(__dirname + '/app'));
     app.use('/afc_template', express.static(__dirname + '/app/libs/angular_form_controls/afc_template'));
+    app.use('/cbd-forums',   express.static(__dirname + '/app/libs/cbd-forums'));
     app.use('/favicon.ico', express.static(__dirname + '/favicon.ico', { maxAge: oneDay }));
 });
 
@@ -24,7 +25,7 @@ app.configure(function() {
 
 var proxy = httpProxy.createProxyServer({});
 
-app.get   ('/app/absPDFViewer/*'   , function(req, res) { 
+app.get   ('/app/absPDFViewer/*'   , function(req, res) {
 	fs.readFile(__dirname + '/app/absPDFViewer/absPermitPrint.html', 'utf8', function (error, text) {
 		res.send(text);
 	});} );

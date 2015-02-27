@@ -27,7 +27,8 @@ require.config({
         'jqvmap'                : '../libs/jqvmap/jqvmap/jquery.vmap.min',
         'jqvmapworld'           : '../js/jquery.vmap.world_update',
         'text-angular-sanitize' : '../libs/textAngular/dist/textAngular-sanitize.min',
-        'text-angular'          : '../libs/textAngular/dist/textAngular.min'
+        'text-angular'          : '../libs/textAngular/dist/textAngular.min',
+        'cbd-forums'            : '../libs/cbd-forums/cbd-forums'
     },
     'shim': {
         'angular'                       : { 'deps': ['jquery'], 'exports': 'angular' },
@@ -47,12 +48,14 @@ require.config({
         'jqvmap'                        : { 'deps': ['jquery'] },
         'jqvmapworld'                   : { 'deps': ['jqvmap'] },
         'text-angular'                  : { 'deps': ['text-angular-sanitize', 'angular'] },
+        'text-angular-sanitize'         : { 'deps': ['angular', 'angular-sanitize']},
+        'cbd-forums'                    : { 'deps': ['angular', 'bootstrap']},
     }
 });
 
 require(['angular', 'angular-route', 'angular-cookies', 'angular-sanitize', 'bootstrap', 'domReady',
     'bootstrap-datepicker','angular-loading-bar', 'angular-animate',
-    'moment', 'introjs', 'angular-form-controls', 'text-angular'/*, 'main'*/], function (ng) {
+    'moment', 'introjs', 'angular-form-controls', 'text-angular', 'cbd-forums'/*, 'main'*/], function (ng) {
     // NOTE: place operations that need to initialize prior to app start here using the `run` function on the top-level module
 
     require(['domReady!', 'main', 'angular-introjs'], function (document) {

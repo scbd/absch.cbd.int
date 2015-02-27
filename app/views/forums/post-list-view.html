@@ -1,0 +1,45 @@
+<div class="container">
+    <br/>
+    <div class="row">
+        <div class="col-lg-12">
+            <ol class="breadcrumb">
+                <li><a ng-href="/">Home</a>
+                </li>
+                <li><a ng-href="/forums">ABSCH Forums</a>
+                </li>
+                <li><a ng-href="{{forumListUrl}}">{{forum}}</a>
+                </li>
+                <li class="active">{{threadSubject}}</li>
+            </ol>
+        </div>
+    </div>
+    <div ng-show="user.isAuthenticated">
+        <div class="row">
+            <div class="col-lg-12">
+                <div forum-id="forumId" thread-id="threadId" show-details="true" type="thread" forum-details forum-list-url="forumListUrl"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="successMsg" style="display:none" class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    Post updated successfully.</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div posts forum-id="forumId" thread-id="threadId" />
+            </div>
+        </div>
+    </div>
+
+
+    <div ng-show="!user.isAuthenticated">
+        <div login></div>
+    </div>
+
+</div>
