@@ -1,4 +1,4 @@
-define(['app'], function (app) {
+define(['app','/app/views/directives/discussion-directive.html.js'], function (app) {
 
 app.directive("viewResource", [function () {
 	return {
@@ -59,6 +59,10 @@ app.directive("viewResource", [function () {
 					$scope.loadReferences($scope.organizations);
 			});
 
+			$scope.tryme = function(){
+				console.log('tryme');
+			}
+
 			//====================
 			//
 			//====================
@@ -90,6 +94,8 @@ app.directive("viewResource", [function () {
 
 						});
 				});
+
+
 			};
 		}]
 	};
