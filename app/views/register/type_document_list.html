@@ -1,20 +1,79 @@
 <div ng-controller="TypeDocumentListController" ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart="startTour">
 
 
-  <div class="well" style="margin-top:20px;background-color:white;" >
+<style>
+.nav-underline
+{
+    position:relative;
+}
 
-    <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
+.nav-underline a{
+    color:#ddd;
+    font-size:14px;
+    /*font-family: 'alternategotno3dotregular';*/
+    text-transform:uppercase;
+    text-rendering: optimizeLegibility;
+    /*letter-spacing: 1px;*/
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .6)!important;
+    margin-right:30px;
 
-    <div class="registerpage-content" style="margin-top:30px;">
+}
+.nav-underline > li > a:hover
+{
+    background-color:transparent!important;
+    border-bottom:5px solid #FFEB3B;
+    margin-bottom:0;
+    padding-bottom:0;
+    color:white;
+}
+
+.nav-underline > li > a.active
+{
+    background-color:transparent!important;
+    border-bottom:5px solid #FFEB3B;
+    margin-bottom:0;
+    padding-bottom:0;
+    color:white;
+}
+
+</style>
+
+    <div style="margin-top:20px;background-color:white;" class="well no-shadow thin-border ">
+
+        <div class="nat-header" ng-class="{'bg-blue': type.abbreviation != 'VLR','bg-orange': type.abbreviation == 'VLR'}" >
+
+            <h2>
+                <a class="color-white fa-11 pull-right" style="margin-right:10px;position:relative;top:2px;" ng-click="startIntro()"> <i class="fa fa-youtube-play"></i></a>
+                <i ng-class="{'mdi-action-account-box':type.abbreviation=='CNA'}" style="font-size:20pt;position:relative;top:3px;"></i>
+                <i ng-class="{'mdi-action-verified-user':type.abbreviation=='CP'}" style="font-size:20pt;position:relative;top:3px;"></i>
+                <i ng-class="{'mdi-action-stars':type.abbreviation=='MSR'}" style="font-size:20pt;position:relative;top:3px;"></i>
+                <i ng-class="{'mdi-action-bookmark':type.abbreviation=='IRCC'}" style="font-size:20pt;position:relative;top:3px;"></i>
+                <i ng-class="{'mdi-communication-message':type.abbreviation=='CPC'}" style="font-size:20pt;position:relative;top:3px;"></i>
+                <i ng-class="{'mdi-file-folder':type.abbreviation=='NDB'}" style="font-size:20pt;position:relative;top:3px;"></i>
+                <i ng-class="{'mdi-editor-insert-drive-file':type.abbreviation=='VLR'}" style="font-size:20pt;position:relative;top:3px;"></i>
+                <span class="title dropshadow">{{type.title}} <span class="color-darkgrey">({{type.abbreviation}})</span></span>
+            </h2>
+        </div>
+
+    <div class="registerpage-content" >
+
+
+    <!-- <ul class="nav navbar-nav nav-underline">
+        <li><a href="/register/{{type.abbreviation}}"      ng-class="{'active':path==('/register/'+type.abbreviation)}"><i class="glyphicon glyphicon-align-justify"></i> Exisiting records</a></li>
+        <li><a href="/register/{{type.abbreviation}}/new"  ng-class="{'active':path==('/register/'+type.abbreviation+'/new')|| path.indexOf('edit') > 0}"><i class="glyphicon glyphicon-plus-sign"></i> Add/edit a record</a></li>
+        <li><a href="/register/{{type.abbreviation}}/help" ng-class="{'active':path==('/register/'+type.abbreviation+'/help')}"><i class="glyphicon glyphicon-question-sign"></i> Help and information</a></li>
+    </ul> -->
+
 
       <div ng-show="msg" class="alert alert-success alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="msg=''">&times;</button>
         <strong>{{msg}}</strong>
       </div>
 
+      <!--
       <div ng-show="path=='/register/'+type.abbreviation+'/help'">
         This is the help
-      </div>
+      </div>-->
 
       <div ng-show="path=='/register/'+type.abbreviation+'/new'">
             <div ng-include="'/app/views/forms/edit/edit-authority.html'"></div>
@@ -26,7 +85,6 @@
 
       <div ng-show="path=='/register/'+type.abbreviation">
         <div ng-hide="editing">
-            <!-- <h2 style="border-bottom: 1px solid #333;margin-bottom:5px;">Records</h2> -->
             <div ng-show="user.isAuthenticated">
                 <register-record-list records="records" schema="{{document_type}}"></register-record-list>
             </div>

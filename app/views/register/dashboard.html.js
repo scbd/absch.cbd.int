@@ -62,6 +62,7 @@ app.controller("DashboardController",
 		}
     };
 
+
 //============================================================
 
   //TODO: this is almost identical to type_document_list.html.js... inherit them
@@ -71,6 +72,8 @@ app.controller("DashboardController",
  	$scope.setDashFilter = function(filter){
  			$scope.dashboardFilter = filter;
  	}
+
+
  	$scope.isFilter = function(filter){
  			return	$scope.dashboardFilter == filter || $scope.dashboardFilter == "All";
  	}
@@ -85,7 +88,21 @@ app.controller("DashboardController",
 	                ]
 	            };
 	    $q.when(workflows.query(query), function(data){
-	        $scope.completedRequestCount = data.length;
+
+			$scope.completedRequests = data;
+
+			for(var i=0; i < data.length; i++){
+				for(var j=0; j < data[i].activities.length; j++){
+
+					if(data[i].activities[j].result.action == 'reject')
+						$scope.rejectedRequests++;
+
+					if(data[i].activities[j].result.action == 'approve')
+							$scope.approvedRequests++;
+				}
+			}
+
+
 	    });
 
 		query    = {
@@ -113,7 +130,9 @@ app.controller("DashboardController",
 		$scope.$emit('loadActivities','dashboard');
 	}
 
-	$scope.completedRequestCount = 0
+	$scope.approvedRequests = 0;
+	$scope.rejectedRequests = 0;
+	$scope.completedRequestCount = 0;
 	$scope.pendingCount = 0;
 	$scope.urgentAttentionCount = 0;
 

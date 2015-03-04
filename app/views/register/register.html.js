@@ -593,10 +593,12 @@ define(['app',
 
     });
 	function flipFacets(){
-		$(".card").toggleClass("flipped");
-    	$timeout(function(){
-			$(".card").toggleClass("flipped");
-		}, 500);
+
+		//sometimes not working...
+		//$(".card").toggleClass("flipped");
+    	//$timeout(function(){
+		//	$(".card").toggleClass("flipped");
+		//	}, 500);
 
 		if($rootScope.updatedRecord){
 			$timeout(function(){

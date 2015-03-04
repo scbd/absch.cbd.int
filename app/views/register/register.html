@@ -20,24 +20,26 @@
 
         <div>
             <a href="/dashboard" role="button" >
-            <div  class="well btn-commonformat" ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/dashboard.html'}" style="cursor:pointer;">
+            <div  class="well btn-commonformat" ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/register/dashboard.html'}" style="cursor:pointer;">
 
               <!-- <i class="glyphicon glyphicon-list-alt" style="position:relative;top:2px;"></i> -->
 
 
               <div class="btn-commonformat-national" style="text-transform:uppercase;">
-                  <i class="mdi-action-assignment" style="font-size:16pt;position:relative;top:3px;"></i>&nbsp;Dashboard</div>
-              <div style="padding-top:5px;"class="color-grey">Check the status of your work</div>
+                  <span class="color-grey"><i class="mdi-action-assignment" style="font-size:16pt;position:relative;top:3px;"></i>&nbsp;Dashboard</span></div>
+              <div style="padding-top:5px;"class="color-grey">
+              <!-- Check the status of your work -->
+              </div>
 
 
 
-            <hr style="padding-top:5px;"  ng-show="facets('urgentTasks','request')">
+            <!-- <hr style="padding-top:5px;"  ng-show="facets('urgentTasks','request')">
                 <div class="bg-red" style="color:white;padding:3px;"  ng-show="facets('urgentTasks','request')">
                  <a href="/dashboard/alltasks"  href="#" role="button" style="color:white;">
                      <span  class="badge" style="position:relative;top:-1px;">{{facets('urgentTasks','request')}}</span>
                      Request(s) awaiting your approval
                     </a>
-                </div>
+                </div> -->
                 <!-- <div><a href="/dashboard/mytasks"  href="#" role="button">Your pending requests
                         <span class="flip pull-right ">
                           <span class=" card" >
@@ -61,6 +63,29 @@
 
 
         </div></a>
+
+        <a href="/register/requests" role="button" >
+            <div  class="well btn-commonformat" ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-tasks.directive.html'}" style="cursor:pointer;">
+
+                <!-- <i class="glyphicon glyphicon-list-alt" style="position:relative;top:2px;"></i> -->
+
+
+                <div class="btn-commonformat-national" style="text-transform:uppercase;">
+                    <span class="color-grey">
+                    <i class="fa fa-retweet" style="font-size:16pt;position:relative;top:3px;"></i>&nbsp;Requests</span></div>
+                    <div style="padding-top:5px;"class="color-grey">Records submitted for approval</div>
+
+
+                    <hr style="padding-top:5px;"  ng-show="facets('urgentTasks','request')">
+                    <div class="bg-red" style="color:white;padding:3px;"  ng-show="facets('urgentTasks','request')">
+                        <a href="/register/requests/"  href="#" role="button" style="color:white;">
+                            <span  class="badge" style="position:relative;top:-1px;">{{facets('urgentTasks','request')}}</span>
+                            Request(s) awaiting your approval
+                        </a>
+                    </div>
+
+
+                </div></a>
 
           <!-- <h3>Requests</h3>
 
