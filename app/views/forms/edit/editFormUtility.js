@@ -149,7 +149,7 @@ app.factory("editFormUtility", ["IStorage", "IWorkflows", "$q", "realm","commonj
 		//==================================
 		//
 		//==================================
-		publishRequest: function(document) {
+		publishRequest: function(document, additionalInfo) {
 
 			var identifier = document.header.identifier;
 			var schema     = document.header.schema;
@@ -185,12 +185,13 @@ app.factory("editFormUtility", ["IStorage", "IWorkflows", "$q", "realm","commonj
 					throw "No workflow type defined for this record type: " + draftInfo.type;
 
 				var workflowData = {
-					"realm"      : realm.value,
-					"documentID" : draftInfo.documentID,
-					"identifier" : draftInfo.identifier,
-					"title"      : draftInfo.workingDocumentTitle,
-					"abstract"   : draftInfo.workingDocumentSummary,
-					"metadata"   : draftInfo.workingDocumentMetadata
+					"realm"      		: realm.value,
+					"documentID" 		: draftInfo.documentID,
+					"identifier" 		: draftInfo.identifier,
+					"title"      		: draftInfo.workingDocumentTitle,
+					"abstract"   		: draftInfo.workingDocumentSummary,
+					"metadata"   		: draftInfo.workingDocumentMetadata,
+					"additionalInfo"	: additionalInfo
 				};
 
 				return workflows.create(type.name, type.version, workflowData); // return workflow info

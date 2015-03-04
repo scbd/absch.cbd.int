@@ -31,8 +31,10 @@ define(['app','angular-form-controls'], function (app) {
 
                 //BOOTSTRAP Dialog handling
 				var qCancelDialog = $element.find("#dialogCancel");
+                var qAdditionalInfoDialog = $element.find("#divAdditionalInfo");
 
 				$scope.cancelDialogDefered = [];
+                $scope.AdditionalInfoDialogDefered = [];
 
 				$scope.showCancelDialog = function(visible) {
         			  if($('form').filter('.dirty').length == 0) {
@@ -54,7 +56,6 @@ define(['app','angular-form-controls'], function (app) {
 					return defered.promise;
 				}
 
-
 				qCancelDialog.on('shown.bs.modal' ,function() {
 
 					$timeout(function(){
@@ -75,10 +76,38 @@ define(['app','angular-form-controls'], function (app) {
 					});
 				});
 
+
+                $scope.showAdditionalInfoDialog = function(visible) {
+                    var isVisible = qAdditionalInfoDialog.css("display")!='none';
+                    if(visible == isVisible)
+                        return $q.when(isVisible);
+                    var defered = $q.defer();
+                    $scope.AdditionalInfoDialogDefered.push(defered)
+                    qAdditionalInfoDialog.modal(visible ? "show" : "hide");
+                    return defered.promise;
+                }
+
+                qAdditionalInfoDialog.on('shown.bs.modal' ,function() {
+                    $timeout(function(){
+                        var promise = null;
+                        while((promise=$scope.AdditionalInfoDialogDefered.pop()))
+                            promise.resolve(true);
+                    });
+                });
+
+                qAdditionalInfoDialog.on('hidden.bs.modal' ,function() {
+                    $timeout(function(){
+                        var promise = null;
+                        while((promise=$scope.AdditionalInfoDialogDefered.pop()))
+                            promise.resolve(false);
+                    });
+                });
+
+
                 $scope.loadSecurity();
 			},
-    		controller: ["$rootScope","$scope", "IStorage", "editFormUtility", "$route","IWorkflows",
-            function ($rootScope, $scope, storage, editFormUtility, $route, IWorkflows)
+    		controller: ["$rootScope","$scope", "IStorage", "editFormUtility", "$route","IWorkflows",'$element',
+            function ($rootScope, $scope, storage, editFormUtility, $route, IWorkflows, $element)
 			{
 
                 $scope.loadSecurity = function(){
@@ -219,30 +248,47 @@ define(['app','angular-form-controls'], function (app) {
 
 							$scope.$emit("documentInvalid", validationReport);
 						}
-						else return $q.when(editFormUtility.publishRequest(document)).then(function(workflowInfo) {
+						else{
 
-							if(workflowInfo.type=='authority'){
-								//in case of authority save the CNA as a contact in drafts
-								saveAuthorityInContacts(workflowInfo);
-							}
-                            $('form').filter('.dirty').removeClass('dirty');
-							$scope.$emit("documentPublishRequested", workflowInfo, document);
-                            $scope.$emit("updateOrignalDocument", document);
-							return workflowInfo;
+                            $element.find('#continueRequest').bind('click', function(){
+                                $scope.closeAddInfoDialog(true);
+                                $scope.loading = true;
+                                $q.when(editFormUtility.publishRequest(document,$scope.InfoDoc ? $scope.InfoDoc.additionalInfo:'')).then(function(workflowInfo) {
 
-						});
+                                    if(workflowInfo.type=='authority'){
+                                        //in case of authority save the CNA as a contact in drafts
+                                        saveAuthorityInContacts(workflowInfo);
+                                    }
+                                    $('form').filter('.dirty').removeClass('dirty');
+                                    $scope.$emit("documentPublishRequested", workflowInfo, document);
+                                    $scope.$emit("updateOrignalDocument", document);
+                                    return workflowInfo;
+
+                                }).catch(function(error){
+                                    $scope.$emit("documentError", { action: "publishRequest", error: error })
+
+                                }).finally(function(){
+                                        $scope.loading = false;
+                                        $scope.$emit("documentClosed");
+                                });
+
+                            });
+                            return 	$scope.showAdditionalInfoDialog(true);
+                        }
+
 					}).catch(function(error){
-
-						$scope.$emit("documentError", { action: "publishRequest", error: error })
-
+						$scope.$emit("documentError", { action: "publishRequest", error: error });
 					}).finally(function(){
+                            $scope.loading = false;
+                    });
 
-						    $scope.loading = false;
-                            $scope.$emit("documentClosed");
-						//return $scope.closeDialog();
-
-					});
 				};
+
+                $scope.continuePublishRequest = function(){
+                    var qDocument = $scope.getDocumentFn();
+
+
+                }
 
 				//====================
 				//
@@ -396,6 +442,14 @@ define(['app','angular-form-controls'], function (app) {
 						$scope.loading = false;
 					});
 				};
+
+                $scope.closeAddInfoDialog = function(changeLoading)
+                {
+                    return $q.all([$scope.showAdditionalInfoDialog(false)]).finally(function(){
+                        $scope.loading = changeLoading;
+                    });
+                };
+
 
                 $scope.$on("documentInvalid", function(){
                   $scope.tab = "review";
