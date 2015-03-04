@@ -1,6 +1,8 @@
-define(['app', 'underscore', 'cbd-forums'], function(app, _) {
+define(['app', 'underscore', 'cbd-forums',
+        '/app/js/common.js'], function(app, _) {
 
-    return ["$scope", "authHttp", "$q", "$route", "$routeParams", function($scope, $http, $q, $route, $routeParams) {
+    return ["$scope", "authHttp", "$q", "$route", "$routeParams","commonjs","$rootScope",
+     function($scope, $http, $q, $route, $routeParams, commonjs, $rootScope) {
 
         if (!$route.current.$$route.forumListUrl) {
             throw 'Forum list URL not specified in route, please forumListUrl attribute in routes'
@@ -19,6 +21,11 @@ define(['app', 'underscore', 'cbd-forums'], function(app, _) {
 
         });
 
+        $scope.isAdmin = function(){
+            return commonjs.isUserInRole($rootScope.getRoleName('AbsAdministrator')) ||
+            commonjs.isUserInRole($rootScope.getRoleName('Administrator'))
+
+        }
 
     }];
 });

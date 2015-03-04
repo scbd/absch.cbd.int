@@ -1,9 +1,10 @@
 define(['app', 'cbd-forums',
-	'/app/views/directives/login.directive.html.js'], function(app) {
+	'/app/views/directives/login.directive.html.js',
+	'/app/js/common.js'], function(app) {
 
 
-    return ["$scope", "$http", "$q", "$filter", "$timeout", "$location", "$route",
-        function($scope, $http, $q, $filter, $timeout, $location, $route) {
+    return ["$scope", "$http", "$q", "$filter", "$timeout", "$location", "$route","commonjs","$rootScope",
+        function($scope, $http, $q, $filter, $timeout, $location, $route, commonjs, $rootScope) {
 
             //$scope.forumId = 17384;
 
@@ -14,6 +15,12 @@ define(['app', 'cbd-forums',
 
             $scope.forumId = $route.current.$$route.forumId;
 			$scope.forum = $route.current.$$route.text;
+
+			$scope.isAdmin = function(){
+				return commonjs.isUserInRole($rootScope.getRoleName('AbsAdministrator')) ||
+				commonjs.isUserInRole($rootScope.getRoleName('Administrator'))
+
+			}
 
         }
     ];
