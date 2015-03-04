@@ -11,7 +11,7 @@ define(['app','./countries-commonJS.js'], function(app) {
       controller: ['$scope', 'authHttp','realm','$q', '$filter','$routeParams', '$timeout','$element','countriescommonjs',
         function($scope, $http, realm, $q, $filter, $routeParams, $timeout, $element ,countriescommonjs) {
 
-
+            $scope.lastAction = 'party';
             if (!$scope.countries) {
 
               //*******************************************************
@@ -87,7 +87,7 @@ define(['app','./countries-commonJS.js'], function(app) {
                 CalculateFacets();
                 calculateListViewFacets();
 
-                $("#vmap").append("<div id=\"jqvmap1_EUR1\" class=\"europeanUnion jqvmap-zoomout flag-icon-background flag-icon-eur\" style=\"height:50px;width:100px;background-color:#eee\"></div>");
+                $("#vmap").append("<div id=\"jqvmap1_EUR1\" class=\"europeanUnion jqvmap-zoomout flag-icon-background flag-icon-eur\" style=\"max-height:50px;max-width:100px;background-color:#eee\"></div>");
 
                 $('#jqvmap1_EUR1').on('click', function(e) {
                     $scope.navigateCountry(this, 'EUR', null);
@@ -173,13 +173,16 @@ define(['app','./countries-commonJS.js'], function(app) {
             jQuery('#vmap').vectorMap({
               map: 'world_en',
               backgroundColor: '#f5f5f5',
-              selectedColor: null,
+              selectedColor: '#fff',
               enableZoom: true,
               showTooltip: true,
               colors: colors,
               hoverColor: false,
               onRegionClick: function(event, code, region) {
-                  $scope.navigateCountry(event, code, region)
+                //   console.log(event);
+                  $scope.navigateCountry(event, code, region);
+                //   event.preventDefault();
+                //   return false;
               },
               onLabelShow: function(event, label, code) {
                 showCountryDetails(event, label, code)
@@ -200,7 +203,7 @@ define(['app','./countries-commonJS.js'], function(app) {
             if (code == greenland) //greenland  as denmark
               code = denmark
 
-            $scope.$emit('loadCountryProfile', {'data' : {countryCode : code}});
+            $scope.$emit('loadCountryProfile', {'data' : {countryCode : code, lastAction:$scope.lastAction, searchFilter:$scope.searchFilter}});
           }
 
           function showCountryDetails(event, label, code) {
@@ -427,6 +430,7 @@ define(['app','./countries-commonJS.js'], function(app) {
                   $element.find('#divMap').slideUp('slow');
                   $element.find('#divList').slideDown('slow');
               }
+              //$scope.updateMap($scope.lastAction);
           });
 
           $scope.$on('updateMap', function(evt, eventData){

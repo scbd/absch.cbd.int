@@ -138,7 +138,7 @@
 
               });
 
-              $scope.cpcReceived.forEach(function(document){                 
+              $scope.cpcReceived.forEach(function(document){
                   if(document.geneticRessourceUsers_s){
                     document.geneticRessourceUsers = $scope.parseJSON(document.geneticRessourceUsers_s);
                   }
@@ -234,7 +234,6 @@
        }
        $scope.countriescommonjs = countriescommonjs;
        $scope.$on('loadCountryProfile', function(evt, evtData){
-           console.log(evtData);
            $scope.loadCountryDetails(evtData.data.countryCode);
        })
 
@@ -261,7 +260,6 @@
       }
 
       $scope.isCheckpointCommuniqueReceived = function(entity){
-          console.log(entity.originCountries_ss,entity.permitSourceCountry_ss)
           return entity && entity.schema_s == "absCheckpointCommunique"
           && (entity.originCountries_ss==$scope.code  || entity.permitSourceCountry_ss==$scope.code);
       }
