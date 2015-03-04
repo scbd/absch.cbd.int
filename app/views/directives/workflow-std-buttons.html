@@ -1,18 +1,10 @@
-<div class="row" ng-show="lastSaved && hideTimer=='false'" >
+<div class="row"  >
     <div class="col-xs-12">
-        <div class="pull-left">
-            <span class="special-font color-blue label bg-white-to-red" style="text-transform:uppercase;font-size:14px;" >
-            <span style="position:relative;top:1px;"><i class="glyphicon glyphicon-time" style="position:relative;top:2px;"></i>
-            <span class="color-blue" style="padding:3px;">{{lastSaved}}</span>
-            since you last saved this record.</span></span>
-        </div>
-
         <div km-form-languages ng-model="languages" class="pull-right btn-xs"></div>
-
     </div>
 </div>
 <br>
-<div class="well" style="padding-bottom:0;margin-bottom:20px; background-color:#eee;">
+<div class="well no-shadow thin-border" style="padding-bottom:0;margin-bottom:20px; background-color:#F5F5F5;">
 
 
 
@@ -23,24 +15,24 @@
                 class="fa fa-eye-slash"class="fa fa-suitcase"class="fa fa-trophy"class="fa fa-suitcase"
             -->
                 <li class="active stepedit" id="stepedit" >
-                    <button type="button" class="btn btn-primary shadow-z-2" width="50px" ng-click="tab='edit'"
+                    <button type="button" class="btn btn-primary " width="50px" ng-click="tab='edit'"
                         ng-disabled="loading || security==undefined">Submission<br>form</button>
                 </li>
                 <li ng-class="{ active  : tab=='review' }" id="stepreview" class="stepreview">
-                    <button type="button" class="btn btn-primary shadow-z-2" width="50px"  ng-click="tab='review'"
+                    <button type="button" class="btn btn-primary " width="50px"  ng-click="tab='review'"
                         ng-disabled="loading || security==undefined">Review<br>form</button>
                 </li>
         		<li ng-show="security.canSaveDraft" id="stepdraft" class="stepdraft">
-                    <button type="button" class="btn btn-primary shadow-z-2" width="50px"  ng-click="tab='draft';saveDraft()"
+                    <button type="button" class="btn btn-primary" width="50px"  ng-click="tab='draft';saveDraft()"
                         ng-disabled="loading">Save as<br>draft</button>
                 </li>
                 <li ng-show="security.canSave" id="steppublish" class="steppublish">
-                    <button type="button" class="btn btn-danger shadow-z-2" width="50px"  ng-click="tab='publish';publish()"
+                    <button type="button" class="btn btn-danger " width="50px"  ng-click="tab='publish';publish()"
                         ng-disabled="loading">Save and<br>publish</button>
                 </li>
         		<li id="steppublishRequest" class="steppublishRequest"
                     ng-show="security.canSave!==undefined && (!security.canSave && security.canSaveDraft)">
-                    <button type="button" class="btn btn-danger shadow-z-2" ng-href="#" ng-click="tab='publishRequest';publishRequest()"
+                    <button type="button" class="btn btn-danger " ng-href="#" ng-click="tab='publishRequest';publishRequest()"
                         ng-disabled="loading">Save and request<br> publication</button>
                 </li>
                 <li  id="prg3" class="prg3" ng-show="loading || security==undefined" >
@@ -61,15 +53,21 @@
 
 
         </div>
-        <div class="col-xs-2 colbg pull-right">
+        <div class="col-xs-2">
 
-            <div class="pull-right" style="padding-top:10px; height:50px;width:50px; margin-right:30px">
 
-                <div >
 
-                <button type="button" class="btn btn-warning" ng-click="close()" ng-disabled="loading">
+            <div class="pull-right">
+
+                <span ng-show="lastSaved && hideTimer=='false'" class="color-grey label" style="background-color:#ddd;text-transform:uppercase;font-size:12px;" >
+                    <span style="position:relative;top:1px;"><i class="glyphicon glyphicon-time" style="position:relative;top:2px;"></i>
+                        <span class="color-blue" style="padding:3px;">{{lastSaved}}</span>
+                        since last save</span></span>
+
+
+                <button style="margin-top:10px;" type="button" class="btn btn-warning pull-right" ng-click="close()" ng-disabled="loading">
                              <i class="glyphicon glyphicon-remove"></i> <br> Cancel</button>
-                </div>
+
 
             </div>
 
@@ -78,7 +76,7 @@
 
 
     </div>
-<div class="row" style="display:none" id="divShowMessage">
+<div class="row" style="display:none" id="divShowMessage" ng-show="showMessage">
     <div class="col-xs-12">
         <div class="alert alert-info" role="alert">
             <button type="button" class="close" ng-click="showMessage=false">

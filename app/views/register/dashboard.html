@@ -1,115 +1,200 @@
 <div ng-controller="DashboardController"
  ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart="startTour">
 
-  <div style="margin-top:20px;background-color:white;" class="well">
+
+    <style>
+    dt{color:#888;padding-top:10px;}
+    dd{color:#428bca;padding-top:10px;font-weight:bold;}
+    </style>
+
+
+  <div style="margin-top:20px;background-color:white;" class="well no-shadow thin-border ">
 
      <div class="dash-header bg-darkgrey" >
       <h2>
           <a class="color-white fa-11 pull-right" style="position:relative;top:2px;margin-right:10px;" ng-click="startIntro()"> <i class="fa fa-youtube-play"></i></a>
 
            <i class="mdi-action-assignment" style="font-size:20pt;position:relative;top:3px;"></i>&nbsp;
-           <span class="title dropshadow special-font">DASHBOARD<span style="font-weight:bold;" class="color-black">
-               Check the status of your work in the ABS-CH</span></span>
+           <span class="title dropshadow">DASHBOARD</span>
       </h2>
     </div>
 
 
+    <!-- <div class="row" style="margin-bottom:20px;">
+        <div class="col-xs-12">
+            <div style="font-weight:bold;">The dashboard gives an overview of your draft and published ABS records and publishing requests.
+                The content of the dashboard will differ depending on the role assigned in the ABSCH.</div>
+        </div>
+    </div> -->
 
 
-    <div>
 
+<div class="row row-same-height" style="margin-bottom:20px;">
+    <div class="col-xs-6 col-xs-height col-top" >
+                <h1 style="color:#555;">Welcome. You are signed in!</h1>
+                <dl class="dl-horizontal" style="padding-top:20px;">
+                <dt style="text-align:left">Name</dt><dd>{{user.name}}</dd>
+                <!-- <dt style="text-align:left">Role(s)</dt>
+                <dd><strong>
+                    <div ng-show="user.roles.indexOf(getRoleName('User')) != -1">Registered User</div>
+                    <div ng-show="user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) != -1">Publishing Authority(PA)</div>
+                    <div ng-show="user.roles.indexOf(getRoleName('abschiac')) != -1">Informal Advisory Committee(IAC)</div>
+                    <div ng-show="user.roles.indexOf(getRoleName('AbsNationalAuthorizedUser')) != -1">National Authorized User(NAU)</div>
+                    <div ng-show="user.roles.indexOf(getRoleName('AbsNationalFocalPoint')) != -1">Focal Point(FP)</div>
+                    <div ng-show="user.roles.indexOf(getRoleName('AbsAdministrator')) != -1">ABSCH Administrator(ABS ADMIN)</div>
+                    <div ng-show="user.roles.indexOf(getRoleName('Administrator')) != -1">Administrator(ADMIN)</div></strong>
+                </dd> -->
+                <dt style="text-align:left;white-space:nowrap;">Primary email</dt><dd><strong>{{user.email}}</strong></dd>
+                <dt style="text-align:left;white-space:nowrap;" ng-show="user.government">Country</dt><dd style="text-transform:uppercase;">
+                    <a href="/countries/{{user.government | uppercase}}"><strong>{{user.government | term}}</strong></a></dd>
+                </dl>
+
+                <div>
+                    <a href="#" ng-click="actionProfile()" class="btn btn-default">update your profile</a>
+                    <a href="#" ng-click="actionPassword()" class="btn btn-default">change your password</a>
+                    <a href="#" ng-click="actionSignOut()" class="btn btn-info">sign out</a>
+                </div>
+    </div>
+
+    <div class="col-xs-6 bg-white col-xs-height col-top" style="border-left:3px solid #999;">
+    <!-- TODO: add training roles -->
+
+
+        <!-- <div style="padding-bottom:10px;" ng-show="user.roles.indexOf(getRoleName('Administrator')) != -1">
+            <span class="label label-warning" style="text-transform:uppercase;">ADMIN</span>
+        </div>
+
+        <div style="padding-bottom:10px;" ng-show="user.roles.indexOf(getRoleName('AbsAdministrator')) != -1">
+            <span class="label label-warning" style="text-transform:uppercase;">ABSCH ADMIN</span>
+        </div> -->
+
+        <div style="padding-bottom:10px;" ng-show="user.roles.indexOf(getRoleName('AbsNationalFocalPoint')) != -1">
+            <span ng-show="user.roles.indexOf(getRoleName('AbsNationalFocalPoint')) != -1" class="label label-primary" style="text-transform:uppercase;">You are a Focal Points (NP-FP)</span>
+            <span ng-hide="user.roles.indexOf(getRoleName('AbsNationalFocalPoint')) != -1" class="label label-default" style="text-transform:uppercase;">Focal Points (NP-FP)</span>
+
+            CBD Primary Focal Points or Nagoya Focal Points have the responsiblity to designate themselves or another user as the Publishing Authority (PA). A Focal Point can complete <a href="http://www.cbd.int/abs/doc/commonformats/ABSCH-PA-NAU.doc">this offline form</a> and email it to <a href="mailto:absch@cbd.int" class="color-blue">absch@cbd.int</a> to designate or change a PA.
+        </div>
+
+        <div>
+            <span ng-show="user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) != -1" class="label label-primary" style="text-transform:uppercase;">YOU ARE THE PUBLISHING AUTHORITY (PA)</span>
+            <span ng-hide="user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) != -1" class="label label-default" style="text-transform:uppercase;">Publishing Authority (PA)</span>
+
+            Each country can designate only one PA. The PA's job to ensure all records are validated before they are published and become publically available on the ABS-CH. PAs can also designate National Authorized Users (NAUs) who are allowed to submit draft records for your country.
+            To designated or change a NAU, the PA should send an email to <a href="mailto:absch@cbd.int" class="color-blue">absch@cbd.int</a> indicating the change, name and email of the NAU.
+        </div>
+
+        <div style="padding-top:10px;">
+            <span ng-show="user.roles.indexOf(getRoleName('AbsNationalAuthorizedUser')) != -1" class="label label-primary" style="text-transform:uppercase;">You are a National Authorized User (NAU)</span>
+            <span ng-hide="user.roles.indexOf(getRoleName('AbsNationalAuthorizedUser')) != -1" class="label label-default" style="text-transform:uppercase;">National Authorized Users (NAU)</span>
+
+            NAUs can save draft national records and request national records to be published by the Publishing Authority (PA).
+        </div>
+
+        <div style="padding-top:10px;">
+            <span ng-show="user.roles.indexOf(getRoleName('User')) != -1" class="label label-primary" style="text-transform:uppercase;">YOU ARE A REGISTERED USER</span>
+            <span ng-hide="user.roles.indexOf(getRoleName('User')) != -1" class="label label-default" style="text-transform:uppercase;">REGISTERED USERS</span>
+
+            Registered Users can save draft reference records and request reference records to be published in the Virtual Library.
+            Reference records are validated by the SCBD Secretariat before they are published in the ABSCH.
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- <div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+            <h1 class="panel-title" style="font-size:16px;font-weight:bold;">Your Publishing Requests
+                <a href="/register/requests" class="btn btn-default btn-small pull-right">view all requests</a>
+            </h1>
+        </div>
+        <div class="panel-body" style="padding:0;margin:0;">
+
+
+            <div class="row" style="padding:10px;">
+                <div class="col-xs-3" ng-show="user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) != -1">
+                    <div class="btn btn-danger" style="width:100%;">
+                        <a href="/register/requests/all/urgent"  href="#" role="button" style="color:white;text-align:center;">
+                            <span  class="badge" style="color:#666;background-color:white;position:relative;top:-1px;font-weight:bold;">{{urgentAttentionCount}}</span>
+                             Awaiting your approval
+                        </a>
+                    </div>
+                </div>
+                <div ng-class="{'col-xs-3': user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) != -1, 'col-xs-4': user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) == -1}">
+                    <div class="btn btn-warning" style="width:100%;">
+                        <a href="/register/requests/all/pending"  href="#" role="button"  style="color:white;text-align:center;">
+                            <span  class="badge" style="color:#666;background-color:white;position:relative;top:-1px;font-weight:bold;">{{pendingCount}}</span>
+                            Pending approval
+                        </a>
+                    </div>
+                </div>
+                <div ng-class="{'col-xs-3': user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) != -1, 'col-xs-4': user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) == -1}">
+                    <div class="btn btn-success" style="width:100%;">
+                        <a href="/register/requests/all/approved"  href="#" role="button" style="color:white;text-align:center;">
+                            <span  class="badge" style="color:#666;background-color:white;position:relative;top:-1px;font-weight:bold;">{{approvedRequests}}</span>
+                            Approved
+                        </a>
+                    </div>
+                </div>
+                <div ng-class="{'col-xs-3': user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) != -1, 'col-xs-4': user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) == -1}">
+                    <div class="btn btn-default bg-darkgrey" style="width:100%;">
+                        <a href="/register/requests/all/rejected"  href="#" role="button" style="color:white;text-align:center;">
+                            <span  class="badge" style="color:#666;background-color:white;position:relative;top:-1px;font-weight:bold;">{{rejectedRequests}}</span>
+                            <span>Rejected
+                            </a>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</div> -->
+
+
+
+
+    <!-- <div>
       <div ng-show="msg" class="alert alert-success alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="msg=''">&times;</button>
         <strong>{{msg}}</strong>
-      </div>
+      </div> -->
+
+
+
+
+
+
+
 
       <!-- <div class="alert alert-info" ng-show="user.isAuthenticated">
         <p>You are signed in as: <strong>{{user.name}}</strong>
 
         </p>
       </div> -->
-      <style>
-      dt {font-weight:normal;}
-      </style>
-
-      <div class="panel panel-default">
-  				<div class="panel-body">
-					<h2 style="color:#555;">Welcome to the ABSCH. You are signed in!
-
-                        <div class="pull-right text-align:right;" style="padding-left:15px;border-left:3px solid #999;">
-                            <div><button class="btn btn-info " ng-click="actionSignOut()">Sign out</button></div>
-                            <div style="padding-top:10px;"><a href="#" ng-click="actionProfile()" style="font-size:14px;font-weight:normal;" >update your profile</a></div>
-                            <div style="padding-top:10px;padding-bottom:10px;"><a href="#" ng-click="actionPassword()" style="font-size:14px;font-weight:normal;" > change your password</a></div>
-                        </div>
-                    </h2>
-
-					<dl class="dl-horizontal" style="padding-top:20px;">
-					  	<dt style="text-align:left">Name</dt><dd><strong>{{user.name}}
-                              <span ng-show="user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) != -1">(PA)</span>
-                              <span ng-show="user.roles.indexOf(getRoleName('abschiac')) != -1">(IAC)</span>
-                              <span ng-show="user.roles.indexOf(getRoleName('AbsNationalAuthorizedUser')) != -1">(NAU)</span>
-                              <span ng-show="user.roles.indexOf(getRoleName('AbsNationalFocalPoint')) != -1">(FP)</span>
-                              <span ng-show="user.roles.indexOf(getRoleName('AbsAdministrator')) != -1">(ABS ADMIN)</span>
-                              <span ng-show="user.roles.indexOf(getRoleName('Administrator')) != -1">(ADMIN)</span></strong>
-                          </dd>
-					  	   <dt style="text-align:left;white-space:nowrap;">Primary email</dt><dd><strong>{{user.email}}</strong></dd>
-                          <dt style="text-align:left;white-space:nowrap;">Country</dt><dd style="text-transform:uppercase;">
-                              <a href="/countries/{{user.government | uppercase}}"><strong>{{user.government | term}}</strong></a></dd>
-
-					</dl>
 
 
-				</div>
-			</div>
-            <div class="alert alert-material-lightgrey" >
-                The dashboard is a personal working area to follow-up the status of records prepared for their publication in the ABSCH. The content of the dashboard will differ depending on the role assigned in the ABSCH (Publishing Authority (PA) or National Authorized User (NAU)).<br>
-                <br>
-                In this area you can check whether there are items that require your approval (in the case of the PA) or what is the status of records sent for validation of the PA (in the case of NAUs).
-            </div>
 
 
-      <div ng-hide="user.isAuthenticated">
+
+
+
+
+      <!-- <div ng-hide="user.isAuthenticated">
         <a ng-show="!user.isAuthenticated" ng-click="signIn('dashboard')" class="btn btn-info">
           <i class="glyphicon glyphicon-off"></i> SIGN IN
         </a>
-      </div>
+      </div> -->
 
 
-      <div class="row">
-          <div class="col-md-12 col-sm-12 col-sx-12">
-              <div class="panel panel-default">
-                  <div class="panel-heading clearfix">
-                      <h1 class="panel-title" style="font-size:16px;font-weight:bold;">Requests and Notifications
 
-                          <a href="/dashboard/alltasks" class="btn btn-danger btn-small pull-right">view all requests</a>
-
-                      </1>
-                      </div>
-                      <div class="panel-body" style="padding:0;margin:0;">
-
-                          <div class="bg-red" style="color:white;padding:3px;margin-bottom:1px"  ng-show="urgentAttentionCount>0">
-                              <a href="/dashboard/pending"  href="#" role="button" style="color:white;">
-                                  <span  class="badge" style="position:relative;top:-1px;">{{urgentAttentionCount}}</span>
-                                  Request(s) awaiting your approval
-                              </a>
-                          </div>
-                          <div class="bg-red" style="color:white;padding:3px;margin-bottom:1px"  ng-show="completedRequestCount>0">
-                              <a href="/dashboard/completed"  href="#" role="button" style="color:white;">
-                                  <span  class="badge" style="position:relative;top:-1px;">{{completedRequestCount}}</span>
-                                  Your completed request(s)
-                              </a>
-                          </div>
-                          <div class="bg-red" style="color:white;padding:3px;"  ng-show="pendingCount>0">
-                              <a href="/dashboard/mytasks"  href="#" role="button" style="color:white;">
-                                  <span  class="badge" style="position:relative;top:-1px;">{{pendingCount}}</span>
-                                  Request(s) for approval
-                              </a>
-                          </div>
-
-                      </div>
-            </div>
-        </div>
-    </div>
 
 
       <!-- <div class="row" id="dashboard_panels">
@@ -197,19 +282,14 @@
       </div> -->
 
 
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-sx-12">
+      <!-- <div class="row" ng-show="userActivities.length > 0" >
+        <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="panel panel-default">
             <div class="panel-heading clearfix">
               <h1 class="panel-title" style="font-size:16px;font-weight:bold;">Activity Feed</1>
             </div>
             <div class="panel-body" style="padding:0;margin:0;">
-              <!-- <ul id="myTab" class="nav nav-tabs">
-                <li class="active">
-                  <a href="#activites" data-toggle="tab" data-original-title="">Activites</a>
-                </li>
-              </ul>
-              <br>-->
+
               <div id="myTabContent" class="tab-content">
                 <div class="tab-pane fade active in" id="activites">
                   <div id="scrollbar">
@@ -227,7 +307,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <!-- row: 2nd isAuthenticated -->
     </div> <!-- registerpage-content -->
   </div> <!-- col-xs-9 -->

@@ -260,6 +260,8 @@ define(['app','angular-form-controls'], function (app) {
 
 					}).then(function(draftInfo) {
 
+                        $scope.showMessage = true;
+
 						if(draftInfo.type=='authority'){
 							//in case of authority save the CNA as a contact in drafts
 							saveAuthorityInContacts(draftInfo);
@@ -269,8 +271,10 @@ define(['app','angular-form-controls'], function (app) {
                         $scope.$emit("updateOrignalDocument", $scope.getDocumentFn());
                         $scope.$emit("documentDraftSaved", draftInfo);
                         $('#divShowMessage').show('slow');
+
                         $timeout(function() { $('#divShowMessage').hide('slow');}, 10000);
 						return draftInfo;
+
 
 					}).catch(function(error){
 

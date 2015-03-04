@@ -123,32 +123,48 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
             //   subTemplateUrl: '/app/views/dashboard.html',
             // }).
 
-             when('/dashboard/completed', {
-              templateUrl: '/app/views/register/register.html',
-              resolveController: true,
-              resolveUser: true,
-              subTemplateUrl: '/app/views/tasks/my-completed-tasks.directive.html',
-            }).
-             when('/dashboard/pending', {
-              templateUrl: '/app/views/register/register.html',
-              resolveController: true,
-              resolveUser: true,
-              subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',
-              type : 'my'
-            }).
-            when('/dashboard/alltasks', {
+            //  when('/dashboard/completed', {
+            //   templateUrl: '/app/views/register/register.html',
+            //   resolveController: true,
+            //   resolveUser: true,
+            //   subTemplateUrl: '/app/views/tasks/my-completed-tasks.directive.html',
+            // }).
+            //  when('/dashboard/pending', {
+            //   templateUrl: '/app/views/register/register.html',
+            //   resolveController: true,
+            //   resolveUser: true,
+            //   subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',
+            //   type : 'my'
+            // }).
+            // when('/dashboard/mytasks', {
+            //     templateUrl: '/app/views/register/register.html',
+            //     resolveController: true,
+            //     resolveUser: true,
+            //     subTemplateUrl: '/app/views/tasks/my-pending-tasks.directive.html',
+            // }).
+            //
+
+
+            when('/register/requests', {
                 templateUrl: '/app/views/register/register.html',
                 resolveController: true,
                 resolveUser: true,
                 subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',
                 type : 'all'
             }).
-             when('/dashboard/mytasks', {
-              templateUrl: '/app/views/register/register.html',
-              resolveController: true,
-              resolveUser: true,
-              subTemplateUrl: '/app/views/tasks/my-pending-tasks.directive.html',
+
+            when('/register/requests/:type/:status', {
+                templateUrl: '/app/views/register/register.html',
+                resolveController: true,
+                resolveUser: true,
+                subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',
             }).
+
+
+
+
+
+
 
             when('/contacts', {
               templateUrl: '/app/views/register/register.html',

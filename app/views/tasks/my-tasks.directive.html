@@ -1,33 +1,36 @@
-﻿<div ng-controller="myTasksCotroller" style="padding-top:20px;margin-top:20px;" class="well bg-white">
-	<div>
-	    <h2>
-	      <span style="color:#c7532c;">Publishing Requests</span>
-	      <!-- <div class="pull-right" style="font-size:12px;">
-	    	<a class="pull-right" ng-show="!toggleHelp" ng-click="toggleHelp=!toggleHelp;" style="cursor:pointer;padding:5px;"><i class="glyphicon glyphicon-plus" >
-	      	</i> more
-	    	</a>
-	    	<a class="pull-right" ng-show="toggleHelp" ng-click="toggleHelp=!toggleHelp;" style="cursor:pointer;color:#666;padding:5px;"><i class="glyphicon glyphicon-minus" >
-	      	</i> less
-	    	</a>
-		</div> -->
-	    </h2>
+﻿<div ng-controller="myTasksCotroller" style="padding-top:20px;margin-top:20px;" class="well no-shadow thin-border bg-white">
+<style type="text/css">
+.header1{
+	padding: 8px;
+	margin-bottom:20px;
+	line-height: 1.428571429;
+	vertical-align: top;
+	border-bottom: 2px solid #111;
+	font-weight: bold;
+}
 
-	    <!-- <p class="help1" ng-show="toggleHelp">
-        	Requests waiting for your approval to be published online.
-        </p> -->
-  	</div>
+</style>
 
-  	<style type="text/css">
-  		.header1{
-  			padding: 8px;
-			margin-bottom:20px;
-			line-height: 1.428571429;
-			vertical-align: top;
-			border-bottom: 2px solid #111;
-			font-weight: bold;
-  		}
 
-  	</style>
+
+	<div class="dash-header bg-red" >
+		<h2>
+			<!-- <a class="color-white fa-11 pull-right" style="position:relative;top:2px;margin-right:10px;" ng-click="startIntro()"> <i class="fa fa-youtube-play"></i></a> -->
+
+			<i class="fa fa-retweet" style="font-size:20pt;position:relative;top:3px;"></i>&nbsp;
+			<span class="title dropshadow">REQUESTS</span>
+		</h2>
+	</div>
+
+
+	<div class="row" style="margin-bottom:20px;">
+		<div class="col-xs-12">
+			<div style="font-weight:bold;">Find out the status of records submitted for approval by the Publishing Authority.</div>
+		</div>
+	</div>
+
+
+
 	<div class="registerpage-content">
 
 		<div class="alert alert-danger" ng-show="__error">
@@ -149,5 +152,6 @@
 		<div class="alert alert-success" ng-show="tasks.length==0">
 			No Item is requiring your attention
 		</div>
+	</div>
 	</div>
 </div>
