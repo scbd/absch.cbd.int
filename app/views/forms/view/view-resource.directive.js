@@ -1,5 +1,5 @@
-define(['app','/app/views/directives/discussion-directive.html.js'], function (app) {
-
+define(['app'], function (app) {
+	// ,'/app/views/directives/discussion-directive.html.js'
 app.directive("viewResource", [function () {
 	return {
 		restrict   : "EAC",
