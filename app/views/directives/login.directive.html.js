@@ -31,7 +31,7 @@ app.directive('login', function ($http) {
                     $http.post('/api/v2013/authentication/token', credentials).then(function onsuccess(success) {
 
                   $browser.cookies().authenticationToken = success.data.authenticationToken;
-                  $browser.cookies().email = $scope.rememberMe ? $scope.email : undefined;
+                  $browser.cookies().email = $scope.rememberMe ? $scope.email : '';
 
                         var response = { type: 'setAuthenticationToken', authenticationToken: $browser.cookies().authenticationToken, setAuthenticationEmail: $browser.cookies().email };
 
