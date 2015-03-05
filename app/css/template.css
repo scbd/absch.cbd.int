@@ -132,6 +132,11 @@ background-color:#fff;
 
 }
 
+.bg-black{
+    background-color:#111!important;
+    color:white!important;
+}
+
 .bg-litegrey{
     background-color:#EEE!important;
 
