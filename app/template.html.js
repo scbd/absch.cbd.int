@@ -43,17 +43,24 @@ define(['app',
         //
         //
         //============================================================
-        $scope.development_env = false;
-        $scope.env_name = "ABS-CH PILOT PHASE";
-        $scope.development_env = $location.absUrl().toLowerCase().indexOf("://absch.cbd.int");
-        if(!$scope.development_env || $scope.development_env == -1){
-            $scope.development_env = true;
-            $scope.env_name = "DEVELOPMENT";
-        }
-        else{
-            $scope.development_env = false;
-            $scope.env_name = "ABS-CH PILOT PHASE";
-        }
+        $scope.env_name = "ABS-CH";
+		$scope.production_env = true;
+		$scope.development_env = false;
+		$scope.training_env = false;
+
+		if($location.absUrl().toLowerCase().indexOf("://dev.absch.cbd.int") > 0 || $location.absUrl().toLowerCase().indexOf("localhost:2010") > 0){
+			$scope.development_env = true;
+			$scope.training_env = false;
+			$scope.production_env = false;
+			$scope.env_name = "DEVELOPMENT";
+		}
+		if($location.absUrl().toLowerCase().indexOf("://training-absch.cbd.int") > 0 ){
+			$scope.development_env = false;
+			$scope.training_env = true;
+			$scope.production_env = false;
+			$scope.env_name = "TRAINING";
+		}
+
 
         //============================================================
         //
