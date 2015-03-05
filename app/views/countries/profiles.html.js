@@ -49,6 +49,10 @@
        $scope.loadCountryDetails = function(countryCode) {
 
          $scope.code = countryCode || $routeParams.code;
+         //fix for EU
+         if($scope.code.toLowerCase() == 'eu')
+            $scope.code = 'eur';
+            
          $scope.documentCount = 0;
          $scope.currentPage = 0;
          $scope.searchText = '';
