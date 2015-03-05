@@ -92,6 +92,7 @@
 						<div class="col-xs-5"> <!-- Description -->
 							<strong ng-show="task.workflow.result.documentID||task.workflow.data.documentID"><a ng-href="/database/record?documentID={{task.workflow.result.documentID||task.workflow.data.documentID}}">{{task.workflow.data.title | lstring}}</a></strong>
 							<strong ng-hide="task.workflow.result.documentID||task.workflow.data.documentID"><a href="#" ng-click="tasksDisplay=!tasksDisplay; formLoading=false;">{{task.workflow.data.title | lstring}}</a></strong>
+							<span ng-show="task.workflow.data.additionalInfo">(additional info:-{{task.workflow.data.additionalInfo}})
 						</div>
 
 

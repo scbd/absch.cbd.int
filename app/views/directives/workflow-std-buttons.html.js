@@ -481,6 +481,18 @@ define(['app','angular-form-controls'], function (app) {
 
                 }
 
+                $scope.showPreviousHistory = function(){
+                    $scope.showHistory = true;
+                    IWorkflows.query({"data.identifier": $scope.getDocumentFn().header.identifier})
+                    .then(function(data){
+                        $scope.workflowHistory = data;
+                    });
+                }
+
+                $scope.formatWID = function (workflowID) {
+                    return workflowID ? workflowID.replace(/(?:.*)(.{3})(.{4})$/g, "W$1-$2") : "";
+                };
+
 			}]
     	};
 
