@@ -397,162 +397,162 @@ define(['app',
             });
           }
 
-          var originalLeave = $.fn.popover.Constructor.prototype.leave;
-          $.fn.popover.Constructor.prototype.leave = function(obj) {
-            var self = obj instanceof this.constructor ?
-              obj : $(obj.currentTarget)[this.type](this.getDelegateOptions()).data('bs.' + this.type)
-            var container, timeout;
-
-            originalLeave.call(this, obj);
-
-            if (obj.currentTarget) {
-              container = $(obj.currentTarget).siblings('.popover')
-              timeout = self.timeout;
-              container.one('mouseenter', function() {
-                //We entered the actual popover – call off the dogs
-                clearTimeout(timeout);
-                //Let's monitor popover content instead
-                container.one('mouseleave', function() {
-                  $.fn.popover.Constructor.prototype.leave.call(self, self);
-                });
-              })
-            }
-          };
-
-          $scope.addFilter = function(type, value, operation) {
-            $scope.$emit('externalFilter', {
-              'operation': operation,
-              'type': type,
-              'value': value
-            });
-          }
-
-          $scope.popOverHTML = function(type, value) {
-            var addFilter = "<span ng-click=\"addFilter('" + type + "','" + value + "','add');\"><i class='fa fa-plus' /> Add filter</span>";
-            var removeFilter = "<span ng-click=\"addFilter('" + type + "','" + value + "','remove');\"><i class='fa fa-remove' /> remove filter</span>";
-
-            return "<div class=\"blaisePopOver\">" + (hasFilter(type, value) ? removeFilter : addFilter) + "</div>";
-          }
-
-          function hasFilter(type, value) {
-
-            if (type == "country") {
-
-              if (underscore.indexOf($scope.$parent.countryResultFilter, value) >= 0)
-                return true;
-
-              return false;
-            }
-            return false;
-          }
-
-          $element.popover({
-            content: function(data) {
-              // console.log($(this).attr('type'), $(this).attr('data-value'));
-              var currentObj = $(this);
-              $timeout(function() {
-                $compile($('.blaisePopOver').contents())($scope);
-              });
-              return $scope.popOverHTML($(this).attr('type'), $(this).attr('data-value'));
-            },
-            selector: '[data-popover]',
-            trigger: 'click hover',
-            placement: 'auto',
-            delay: {
-              show: 50,
-              hide: 400
-            }
-          })
-            .on('shown.bs.popover', function(evt, data) {
-              console.log(evt, data);
-              // $compile($('.blaisePopOver').contents())($scope);
-            });
-
-            var parentContainerId = ".textDescription"
-
-             if(!window.CurrentSelection){
-              CurrentSelection = {}
-             }
-
-             CurrentSelection.Selector = {}
-
-             //get the current selection
-             CurrentSelection.Selector.getSelected = function(){
-              var sel = '';
-              if(window.getSelection){
-               sel = window.getSelection()
-              }
-              else if(document.getSelection){
-               sel = document.getSelection()
-              }
-              else if(document.selection){
-               sel = document.selection.createRange()
-              }
-              //console.log(sel);
-              return sel
-             }
-             //function to be called on mouseup
-             CurrentSelection.Selector.mouseup = function(){
-
-              var st = CurrentSelection.Selector.getSelected()
-              if(document.selection && !window.getSelection){
-                var range = st;
-                range.pasteHTML("<span class=\"selectedText\">Blaise Fonseca" + range.htmlText + "</span>");
-              }
-              else{
-                  if(st.type=='None')
-                  return;
-                var range = st.getRangeAt(0)
-                var newNode = document.createElement("span");
-                newNode.setAttribute("class", "selectedText");
-                range.surroundContents(newNode);
-                //
-                var getTitle = newNode.innerHTML;
-                newNode.setAttribute("title", getTitle);
-
-                //
-                var popDiv = document.createElement('span');
-                popDiv.setAttribute('class', 'popDiv');
-                popDiv.setAttribute("title", getTitle);
-                popDiv.innerHTML = getTitle;
-                popDiv.innerHTML += '</br><button type="button" id=\'btn\' class="btn btn-primary" >Filter</button>';
-// console.log($('#selectedTextDiv'));
-                if(newNode.innerHTML.length > 0) {
-                 newNode.appendChild(popDiv);
-                 $compile($('#btn').contents())($scope);
-                 $('#btn').on('click', function(e){
-                     e.stopPropagation();
-                     $scope.add($(this));
-                 })
-                }
-                //Remove Selection: To avoid extra text selection in IE
-                if (window.getSelection) {
-                  window.getSelection().removeAllRanges();
-                }
-                else if (document.selection){
-                 document.selection.empty();
-                }
-                    //
-              }
-             }
-             $scope.add = function(e){
-                 $scope.addFilter('keyword',e.parent().attr('title'),'add')
-                 $('span.selectedText').contents().unwrap();
-                 $('body').find('span.popDiv').remove();
-             }
-            function addTooltipEvents() {
-                $timeout(function(){
-                    $('body').on('mousedown', function(e, data){
-
-                        if(e.target.innerText=='Filter')
-                            return;
-
-                      $('span.selectedText').contents().unwrap();
-                      $(this).find('span.popDiv').remove();
-                    });
-                    $(parentContainerId).bind("mouseup",CurrentSelection.Selector.mouseup);
-                },100);
-             }
+//           var originalLeave = $.fn.popover.Constructor.prototype.leave;
+//           $.fn.popover.Constructor.prototype.leave = function(obj) {
+//             var self = obj instanceof this.constructor ?
+//               obj : $(obj.currentTarget)[this.type](this.getDelegateOptions()).data('bs.' + this.type)
+//             var container, timeout;
+//
+//             originalLeave.call(this, obj);
+//
+//             if (obj.currentTarget) {
+//               container = $(obj.currentTarget).siblings('.popover')
+//               timeout = self.timeout;
+//               container.one('mouseenter', function() {
+//                 //We entered the actual popover – call off the dogs
+//                 clearTimeout(timeout);
+//                 //Let's monitor popover content instead
+//                 container.one('mouseleave', function() {
+//                   $.fn.popover.Constructor.prototype.leave.call(self, self);
+//                 });
+//               })
+//             }
+//           };
+//
+//           $scope.addFilter = function(type, value, operation) {
+//             $scope.$emit('externalFilter', {
+//               'operation': operation,
+//               'type': type,
+//               'value': value
+//             });
+//           }
+//
+//           $scope.popOverHTML = function(type, value) {
+//             var addFilter = "<span ng-click=\"addFilter('" + type + "','" + value + "','add');\"><i class='fa fa-plus' /> Add filter</span>";
+//             var removeFilter = "<span ng-click=\"addFilter('" + type + "','" + value + "','remove');\"><i class='fa fa-remove' /> remove filter</span>";
+//
+//             return "<div class=\"blaisePopOver\">" + (hasFilter(type, value) ? removeFilter : addFilter) + "</div>";
+//           }
+//
+//           function hasFilter(type, value) {
+//
+//             if (type == "country") {
+//
+//               if (underscore.indexOf($scope.$parent.countryResultFilter, value) >= 0)
+//                 return true;
+//
+//               return false;
+//             }
+//             return false;
+//           }
+//
+//           $element.popover({
+//             content: function(data) {
+//               // console.log($(this).attr('type'), $(this).attr('data-value'));
+//               var currentObj = $(this);
+//               $timeout(function() {
+//                 $compile($('.blaisePopOver').contents())($scope);
+//               });
+//               return $scope.popOverHTML($(this).attr('type'), $(this).attr('data-value'));
+//             },
+//             selector: '[data-popover]',
+//             trigger: 'click hover',
+//             placement: 'auto',
+//             delay: {
+//               show: 50,
+//               hide: 400
+//             }
+//           })
+//             .on('shown.bs.popover', function(evt, data) {
+//               console.log(evt, data);
+//               // $compile($('.blaisePopOver').contents())($scope);
+//             });
+//
+//             var parentContainerId = ".textDescription"
+//
+//              if(!window.CurrentSelection){
+//               CurrentSelection = {}
+//              }
+//
+//              CurrentSelection.Selector = {}
+//
+//              //get the current selection
+//              CurrentSelection.Selector.getSelected = function(){
+//               var sel = '';
+//               if(window.getSelection){
+//                sel = window.getSelection()
+//               }
+//               else if(document.getSelection){
+//                sel = document.getSelection()
+//               }
+//               else if(document.selection){
+//                sel = document.selection.createRange()
+//               }
+//               //console.log(sel);
+//               return sel
+//              }
+//              //function to be called on mouseup
+//              CurrentSelection.Selector.mouseup = function(){
+//
+//               var st = CurrentSelection.Selector.getSelected()
+//               if(document.selection && !window.getSelection){
+//                 var range = st;
+//                 range.pasteHTML("<span class=\"selectedText\">Blaise Fonseca" + range.htmlText + "</span>");
+//               }
+//               else{
+//                   if(st.type=='None')
+//                   return;
+//                 var range = st.getRangeAt(0)
+//                 var newNode = document.createElement("span");
+//                 newNode.setAttribute("class", "selectedText");
+//                 range.surroundContents(newNode);
+//                 //
+//                 var getTitle = newNode.innerHTML;
+//                 newNode.setAttribute("title", getTitle);
+//
+//                 //
+//                 var popDiv = document.createElement('span');
+//                 popDiv.setAttribute('class', 'popDiv');
+//                 popDiv.setAttribute("title", getTitle);
+//                 popDiv.innerHTML = getTitle;
+//                 popDiv.innerHTML += '</br><button type="button" id=\'btn\' class="btn btn-primary" >Filter</button>';
+// // console.log($('#selectedTextDiv'));
+//                 if(newNode.innerHTML.length > 0) {
+//                  newNode.appendChild(popDiv);
+//                  $compile($('#btn').contents())($scope);
+//                  $('#btn').on('click', function(e){
+//                      e.stopPropagation();
+//                      $scope.add($(this));
+//                  })
+//                 }
+//                 //Remove Selection: To avoid extra text selection in IE
+//                 if (window.getSelection) {
+//                   window.getSelection().removeAllRanges();
+//                 }
+//                 else if (document.selection){
+//                  document.selection.empty();
+//                 }
+//                     //
+//               }
+//              }
+//              $scope.add = function(e){
+//                  $scope.addFilter('keyword',e.parent().attr('title'),'add')
+//                  $('span.selectedText').contents().unwrap();
+//                  $('body').find('span.popDiv').remove();
+//              }
+//             function addTooltipEvents() {
+//                 $timeout(function(){
+//                     $('body').on('mousedown', function(e, data){
+//
+//                         if(e.target.innerText=='Filter')
+//                             return;
+//
+//                       $('span.selectedText').contents().unwrap();
+//                       $(this).find('span.popDiv').remove();
+//                     });
+//                     $(parentContainerId).bind("mouseup",CurrentSelection.Selector.mouseup);
+//                 },100);
+//              }
 
 
 
