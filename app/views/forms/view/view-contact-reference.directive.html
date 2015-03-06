@@ -1,5 +1,5 @@
 ﻿<div>
-	
+
 	<div ng-show="isOrganization()">
 		<div>
 			<b>{{document.organization | lstring:locale}}</b> <i ng-show="document.organizationAcronym">({{document.organizationAcronym | lstring:locale}})</i>
@@ -23,7 +23,7 @@
 			{{document.designation | lstring:locale}}<span ng-show="document.designation && document.department">, </span>
 			{{document.department | lstring:locale}}
 		</div>
-		
+
 		<div>
 			{{document.organization | lstring:locale}} <i ng-show="document.organizationAcronym">({{document.organizationAcronym | lstring:locale}})</i>
 		</div>
@@ -45,9 +45,9 @@
 		Fax: <span ng-repeat="item in document.faxes">{{item}}<span ng-show="!$last">, </span></span>
 	</div>
 	<div ng-show="document.emails">
-		Emails: <span ng-repeat="item in document.emails"><a ng-href="mailto:{{item}}">{{item}}</a><span ng-show="!$last">, </span></span>
+		Email: <span ng-repeat="item in document.emails"><a ng-href="mailto:{{item}}">{{item}}</a><span ng-show="!$last">, </span></span>
 	</div>
 	<div ng-show="document.websites">
-		Websites: <span ng-repeat="item in document.websites"><a ng-href="{{item.url}}">{{item.name||item.url}}</a><span ng-show="!$last">, </span></span>
+		Website: <span ng-repeat="item in document.websites"><a ng-href="{{item.url}}">{{item.name||item.url}}</a><span ng-show="!$last">, </span></span>
 	</div>
 </div>

@@ -39,53 +39,45 @@
 		<div ng-controller="printPermit" style="width:1000px;" >
 
 
+			<div class="row" style="padding-bottom:30px;">
+				<div class="col-xs-1">
+				</div>
 
-        <!-- <div class="row" style="background-color:#f0ad4e;height:10px;">
-            <div class="col-xs-12"
-            </div>
-        </div> -->
-                <div class="row" style="padding-bottom:30px;">
-                        <div class="col-xs-1">
-                        </div>
+				<div class="col-xs-3" style="text-align:center;">
+					<img  style="width:60px;"
+					src="../img/UNEP_logo.svg"/>
+				</div>
+				<div class="col-xs-4" style="text-align:center;padding-top:5px;">
+					<img src="../img/cbd-logo-print-black-en.png" />
+				</div>
+				<div class="col-xs-3" style="text-align:center;">
+					<img  style="width:70px;padding-top:5px;"
+					src="../img/Emblem_of_the_United_Nations.svg"/>
+				</div>
 
-                        <div class="col-xs-3" style="text-align:center;">
-                            <img  style="width:85px;height:85px;"
-                            src="../img/UNEP_logo.svg"/>
-                        </div>
-                        <div class="col-xs-4" style="text-align:center;padding-top:5px;">
-                            <img src="../img/cbd-logo-print-black-en.png" style="height:80px"/>
-                        </div>
-                        <div class="col-xs-3" style="text-align:center;">
-                            <img  style="width:85px;height:85px;"
-                            src="../img/Emblem_of_the_United_Nations.svg"/>
-                        </div>
+				<div class="col-xs-1">
+				</div>
+			</div>
 
-                         <div class="col-xs-1">
-                        </div>
-                    </div>
+			<div class="bg-green" style="padding-bottom:3px;padding-top:3px;padding-left:15px;padding-right:15px;margin-bottom:5px;">
+				<h1 class="color-litegreen" style="padding:0;">
+				Internationally recognized certificate of compliance constituted from information on the permit or its equivalent made available to the Access and Benefit-sharing Clearing-House
+				<span class="color-white">{{documentInfo |uniqueID}}</span>
+			</h1></div>
 
-			<!-- <div id="watermark">
-			<p>This is the test version.</p>
-			</div> -->
-            <div class="row" class="header-title" style="background-color:#1FA65D!important;margin-bottom:20px!important;padding-bottom:10px!important;" >
-                <div class="col-xs-12" style="text-align:center;">
-                    <h1>
-                    Internationally recognized certificate of compliance constituted from information on the permit or its equivalent made available to the Access and Benefit-sharing Clearing-House
+			<p>In accordance with Article 17, paragraph 2, of the Nagoya Protocol on Access and Benefit-sharing, a permit or its equivalent issued in accordance with Article 6, paragraph 3 (e) and made available to the Access and Benefit-sharing Clearing-House, shall constitute an internationally recognized certificate of compliance.</p>
 
-                    <div style="padding:20px 40px 0 40px;color:#fff!important;">In accordance with Article 17, paragraph 2, of the Nagoya Protocol on Access and Benefit-sharing, a permit or its equivalent issued in accordance with Article 6, paragraph 3 (e) and made available to the Access and Benefit-sharing Clearing-House, shall constitute an internationally recognized certificate of compliance.</div>
+			<div class="alert alert-danger" ng-show="versions && versions[0].body.amendmentIntent==1">
+				<div class="text-center">
+					<h1 class="color-white">THIS CERTIFICATE HAS BEEN REVOKED</h1>
+					<p>
+						See certificate history for more information.
+					</p>
+				</div>
+			</div>
 
-                    </h1>
-                    <div ng-show="versions">
-                        <div class="cancelled" ng-show="versions[0].body.amendmentIntent==1">
-                            THIS CERTIFICATE HAS BEEN REVOKED
-                            <p>
-                            See certificate history for more information.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
+			<legend>General Information</legend>
+			<div class="row top-border bg-litegreen">
                 <div class="col-xs-8">
                 	<label>Title/reference number of the permit or its equivalent:</label>
                     <div class="text">{{document.title| lstring:locale}}</div>
@@ -93,34 +85,28 @@
                 <div class="col-xs-4">
                     <label>Verification link (latest version):</label>
                     <div class="text"><a href="http://absch.cbd.int/database/record/{{documentInfo | uniqueID}}">
-						http://absch.cbd.int/database/record/{{documentInfo|uniqueID}}</a></div>
+						http://absch.cbd.int/{{documentInfo|uniqueID}}</a></div>
                 </div>
 
-            </div>
-            <div class="row">
-                <div class="col-xs-8">
+				<div class="clearfix"></div>
+				<div class="col-xs-12">
+					<label>Country:</label>
+					<div class="text">{{document.government.identifier|term |uppercase}}</div>
+				</div>
+
+				<div class="clearfix"></div>
+                <div class="col-xs-12">
                     <label>Additional national references or identifiers:</label>
+                    <div class="text" ng-bind-html="renderHtml(document.nationalReferences)"></div>
+                </div>
 
-                    <div class="text km-pr" ng-bind-html="renderHtml(document.nationalReferences)"></div>
-
-                </div>
-                 <div class="col-xs-4">
-                    <label>ABS Clearing-House unique identifier:</label>
-                    <div class="text">{{documentInfo |uniqueID}}</div>
-                </div>
-                 <div class="col-xs-4">
-                    <label>Country:</label>
-                    <div class="text">{{document.government.identifier|term |uppercase}}</div>
-                </div>
 
             </div>
 
 
 
-
-            <h3>Information from the National Permit or Equivalent</h3>
-
-             <div class="row">
+			<legend>Information from the National Permit or Equivalent</legend>
+			<div class="row top-border bg-litegreen">
                 <div class="col-xs-6">
                     <label>Permit or equivalent issued by: </label>
                     <div class="text">
@@ -132,20 +118,18 @@
                     <div class="text">{{document.date | formatDate}}</div>
                     <div class="text" ng-show="document.expiration"> to {{document.expiration | formatDate}}</div>
                 </div>
-            </div>
 
-
-            <div class="row">
+				<div class="clearfix"></div>
                 <div class="col-xs-6">
                     <label>Prior informed consent (PIC) obtained: </label>
-                    <div class="text"> <i class="fa fa-check"></i>  YES</div>
+                    <div class="text"> YES</div>
                 </div>
                 <div class="col-xs-6">
                     <label>Mutually agreed terms (MAT) have been established: </label>
-                    <div class="text"> <i class="fa fa-check"></i>  YES </div>
+                    <div class="text"> YES </div>
                 </div>
-            </div>
-            <div class="row">
+
+				<div class="clearfix"></div>
                 <div class="col-xs-6">
                     <label>Entity to whom PIC was granted: </label>
                     <div class="text" ng-repeat="consent in document.informedConsents" ng-show="!document.informedConsentConfidential">
@@ -164,9 +148,9 @@
                         <div class="text confidential">Confidential information</div>
                     </div>
                 </div>
-            </div>
-            <div class="row" ng-show="document.consentInformation">
-                <div class="col-xs-12">
+
+				<div class="clearfix"></div>
+                <div class="col-xs-12" ng-show="document.consentInformation">
                     <label>Additional PIC information: </label>
                     <div class="text">
                         <span ng-bind-html="renderHtml(document.consentInformation)"></span>
@@ -182,6 +166,8 @@
                         <div ng-show="!document.consentInformation && !document.consentDocuments"> - </div>
                     </div>
                 </div>
+
+				<div class="clearfix"></div>
                 <div class="col-xs-12">
                     <label>Additional MAT information: </label>
                     <div class="text">
@@ -195,16 +181,23 @@
                             <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
                         </div>
 
-                        <div ng-show="!document.mutuallyAgreedTermsDocuments && !document.mutuallyAgreedTermsInformation"> - </div>
+                        <!-- <div ng-show="!document.mutuallyAgreedTermsDocuments && !document.mutuallyAgreedTermsInformation"> - </div> -->
 
                     </div>
                 </div>
             </div>
 
-        <h3>Subject-matter</h3>
 
-            <div class="row">
-                <div class="col-xs-12">
+
+
+
+
+
+		<legend>Subject-matter</legend>
+		<div class="row top-border bg-litegreen">
+
+				<div class="clearfix"></div>
+				<div class="col-xs-12">
                     <label>Subject-matter or genetic resources covered:</label>
                     <div class="text" ng-show="!document.geneticResourcesConfidential" >
                         <span ng-bind-html="renderHtml(document.geneticResources)"></span>
@@ -213,10 +206,9 @@
                         <div class="text confidential">Confidential information</div>
                     </div>
                 </div>
-            </div>
 
-            <div class="row" ng-show="document.specimen || document.taxonomy || document.gisFiles ">
-                <div class="col-xs-12">
+				<div class="clearfix"></div>
+                <div class="col-xs-12" ng-show="document.specimen || document.taxonomy || document.gisFiles ">
                     <label>Additional Genetic Resources Information Links:</label>
                     <div class="text">
                         <div class="inner-label" ng-show="document.specimen">Specmin data:</div>
@@ -243,10 +235,9 @@
                             </ul>
                     </div>
                 </div>
-            </div>
 
-            <div class="row" ng-show="document.keywords">
-                <div class="col-xs-12">
+				<div class="clearfix"></div>
+                <div class="col-xs-12" ng-show="document.keywords">
                     <label>keywords:</label>
                     <div class="text">
                         <span ng-repeat="term in document.keywords">
@@ -257,19 +248,13 @@
             </div>
 
 
-            <!-- <div class="row">
-                <div class="col-xs-12">
-                    <label>Geographic data:</label>
-                    <div class="text">
-                        MAP image
-                    </div>
-                </div>
-            </div> -->
 
 
-             <h3>Utilization</h3>
 
-             <div class="row">
+
+			<legend>Utilization</legend>
+			<div class="row top-border bg-litegreen">
+
                 <div class="col-xs-12">
                     <label>Specific uses covered by the permit or its equivalent or use restrictions:</label>
                     <div class="text">
@@ -284,19 +269,17 @@
                         <span ng-bind-html="renderHtml(document.usageDescription)"></span>
                     </div>
                 </div>
-            </div>
 
-
-            <div class="row">
+				<div class="clearfix"></div>
                 <div class="col-xs-12">
                     <label>Conditions for third party transfer:</label>
                     <div class="text" ng-bind-html="renderHtml(document.thirdPartyTransferConditions ?  (document.thirdPartyTransferConditions) : '-')"></div>
                 </div>
             </div>
 
-            <h3>Documents and Additional information</h3>
 
-            <div class="row">
+			<legend>Documents and Additional information</legend>
+			<div class="row top-border bg-litegreen">
                 <div class="col-xs-12">
                     <label>Copy of permit or its equivalent, or other relevant open-access document:</label>
                     <div class="text">
@@ -313,12 +296,12 @@
                             <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
                         </div>
 
-                        <div ng-show="!document.permitDescription && !document.permitFiles"> - </div>
+                        <!-- <div ng-show="!document.permitDescription && !document.permitFiles"> - </div> -->
                     </div>
                 </div>
-            </div>
-            <div class="row"  ng-show="document.relevantInformation || document.relevantDocuments">
-                <div class="col-xs-12">
+
+				<div class="clearfix"></div>
+                <div class="col-xs-12" ng-show="document.relevantInformation || document.relevantDocuments">>
                     <label>Additional information:</label>
                     <div class="text">
                         <div  ng-show="document.relevantInformation" ng-bind-html="renderHtml(document.relevantInformation)"></div>
@@ -329,21 +312,20 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
+			</div>
 
             <div ng-show="versions && false">
+				<legend>Certificate History</legend>
+				<div class="row top-border bg-litegreen">
 
-                <h3>Certificate History</h3>
-                <div class="row">
-                    <div class="col-xs-1"><label style="padding-left:20px;">Date</label></div>
+					<div class="col-xs-1"><label style="padding-left:20px;">Date</label></div>
                     <div class="col-xs-1"><label style="padding-left:15px;">Action</label></div>
                     <div class="col-xs-2"><label style="padding-left:10px;">Author</label></div>
                     <div class="col-xs-6"><label style="padding-left:5px;">Reason for amendment</label></div>
                     <div class="col-xs-2"><label style="padding-left:0px;">File</label></div>
-                </div>
 
-                <div class="row"  >
+
+					<div class="clearfix"></div>
                     <div class="col-xs-12">
                         <div class="row-fluid text-row" ng-repeat="document in versions | orderBy:document.createdOn">
                             <div class="col-xs-1"><strong>{{document.createdOn |formatDateWithTime}}</strong></div>
@@ -363,49 +345,38 @@
                                 <i class="glyphicon glyphicon-file"></i>
                                 ABSCH-{{document.body.government.identifier |uppercase}}-{{document.documentID}}-{{document.revision}}</a>
                             </div>
-                            <div class="clearfix">
-                            <!-- <div class="clearfix">
-                            <div class="col-xs-12">
-                                <hr style="padding:3px 0;margin:0;">
-                            </div> -->
-                        </div>
                     </div>
                 </div>
             </div>
           </div>
 
-            <div class="row" style="padding-bottom:20px;">
+				<legend>Further Information</legend>
+				<div class="row top-border">
+		                <div class="clearfix"></div>
+		                <div class="col-xs-8" style="font-size:12px;">
+		                    Questions about the permit or its equivalent constituting an internationally
+		                    recognized certificate of compliance should be addressed to the competent
+		                    national authority issuing the permit or its equivalent. Additional information about
+		                    the permit or its equivalent may be available in the Access and Benefit-Sharing
+		                    Clearing House (<a href="http://absch.cbd.int/" style="color:white;">http://absch.cbd.int/</a>).
+		                    <br><br>
+		                    Questions about the Nagoya Protocol on Access and Benefit-sharing or the
+		                    operation of the Access and Benefit-sharing Clearing-House may be directed to the Secretariat of the Convention on Biological Diversity.
+		                </div>
+		                <div class="col-xs-4" style="font-size:12px;">
+		                    <strong>Secretariat of the Convention on Biological Diversity</strong><br/>
 
-                <div class="col-xs-12"><h3 >Further Information</h3></div>
+		                    413 rue Saint-Jacques, suite 800<br/>
+		                    Montreal, Québec, H2Y 1N9<br/>
+		                    Canada<br/>
+		                    Fax: +1 514 288-6588<br/>
+		                    Email: <a href="mailto:secretariat@cbd.int" style="color:white;">secretariat@cbd.int</a>
 
-                <div class="clearfix"></div>
-
-                <div class="col-xs-8">
-
-                    Questions about the permit or its equivalent constituting an internationally
-                    recognized certificate of compliance should be addressed to the competent
-                    national authority issuing the permit or its equivalent. Additional information about
-                    the permit or its equivalent may be available in the Access and Benefit-Sharing
-                    Clearing House (<a href="http://absch.cbd.int/" style="color:white;">http://absch.cbd.int/</a>).
-                    <br><br>
-                    Questions about the Nagoya Protocol on Access and Benefit-sharing or the
-                    operation of the Access and Benefit-sharing Clearing-House may be directed to the Secretariat of the Convention on Biological Diversity.
-
-                </div>
-                <div class="col-xs-4">
-                    <strong>Secretariat of the Convention on Biological Diversity</strong><br/>
-
-                    413 rue Saint-Jacques, suite 800<br/>
-                    Montreal, Québec, H2Y 1N9<br/>
-                    Canada<br/>
-                    Fax: +1 514 288-6588<br/>
-                    Email: <a href="mailto:secretariat@cbd.int" style="color:white;">secretariat@cbd.int</a>
-
-                </div>
-            </div>
-
+		                </div>
+		        </div>
 
         </div>
 	</div>
+</div>
 </body>
 </html>

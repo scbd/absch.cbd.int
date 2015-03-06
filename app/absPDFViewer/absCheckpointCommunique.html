@@ -9,7 +9,7 @@
     <!-- Bootstrap core CSS -->
 	<link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 	<!-- Custom styles for this template -->
-	<link href="../css/permitPDF.css" rel="stylesheet">
+	<link href="../css/communiquePDF.css" rel="stylesheet">
 	<link rel="stylesheet" href="../libs/font-awesome/css/font-awesome.min.css">
 
     <script src="../libs/momentjs/min/moment.min.js"></script>
@@ -39,47 +39,220 @@
 	<div ng-app="ngapp" class="main-nav" >
 		<div ng-controller="printPermit" style="width:1000px;" >
 
+			<div class="row" style="padding-bottom:30px;">
+				<div class="col-xs-1">
+				</div>
+
+				<div class="col-xs-3" style="text-align:center;">
+					<img  style="width:60px;"
+					src="../img/UNEP_logo.svg"/>
+				</div>
+				<div class="col-xs-4" style="text-align:center;padding-top:5px;">
+					<img src="../img/cbd-logo-print-black-en.png" />
+				</div>
+				<div class="col-xs-3" style="text-align:center;">
+					<img  style="width:70px;padding-top:5px;"
+					src="../img/Emblem_of_the_United_Nations.svg"/>
+				</div>
+
+				<div class="col-xs-1">
+				</div>
+			</div>
 
 
-        <!-- <div class="row" style="background-color:#f0ad4e;height:10px;">
-            <div class="col-xs-12"
-            </div>
-        </div> -->
-                <div class="row" >
-                        <div class="col-xs-1">
-                        </div>
+			<h1>Checkpoint Communiqué: <span  class="color-green">ABSCH-CPC-CA-291922-2</span></h1>
 
-                        <div class="col-xs-3" style="text-align:center;">
-                            <img  style="width:85px;height:85px;"
-                            src="../img/UNEP_logo.svg"/>
-                        </div>
-                        <div class="col-xs-4" style="text-align:center;padding-top:5px;">
-                            <img src="../img/cbd-logo-print-black-en.png" style="height:80px"/>
-                        </div>
-                        <div class="col-xs-3" style="text-align:center;">
-                            <img  style="width:85px;height:85px;"
-                            src="../img/Emblem_of_the_United_Nations.svg"/>
-                        </div>
+			<p style="margin-bottom:30px;">
+				On the basis of the information collected or received by the checkpoint and provided to the ABS Clearing-House pursuant to Article 17 of the Nagoya Protocol, a courtesy copy of the report of the records on the communique will be automatically sent by electronic means to the designated national authorities, the national focal point of the country and the compentent national authorities providing prior informed consent, as appropriate.
+			</p>
 
-                         <div class="col-xs-1">
-                        </div>
-                    </div>
+			<legend>General information</legend>
+			<div class="row top-border bg-lightblue">
+				<div class="col-xs-6" >
+					<label>Title:</label>
+					<div class="text">{{document.title| lstring:locale}}</div>
+				</div>
+				<div class="col-xs-3" >
+					<label>UID:</label>
+					<div class="text">
+						ABSCH-CPC-XX-XXXXXX
+					</div>
+				</div>
+				<div class="col-xs-3" >
+					<label>Sent:</label>
+					<div class="text">
+						date published
+					</div>
+				</div>
+			</div>
 
-			<!-- <div id="watermark">
-			<p>This is the test version.</p>
-			</div> -->
-            <div class="row" class="header-title" style="background-color:#1FA65D!important;margin-bottom:20px!important;padding-bottom:10px!important;" >
-                <div class="col-xs-12" style="text-align:center;">
-                    <h1>
-                    Checkpoint Communiqué
-                    <div style="padding:20px 40px 0 40px;color:#fff!important;">
-                        <!-- In accordance with Article 17, paragraph 2, of the Nagoya Protocol on Access and Benefit-sharing, a permit or its equivalent issued in accordance with Article 6, paragraph 3 (e) and made available to the Access and Benefit-sharing Clearing-House, shall constitute an internationally recognized certificate of compliance.</div> -->
 
-                    </h1>
-                </div>
-            </div>
+			<legend>From: Issuing Authority</legend>
+			<div class="row top-border bg-lightblue">
+				<div class="col-xs-12" >
+					<label>Issuing country:</label>
+					<div class="text">{{document.government|term:locale}}</div>
+				</div>
+				<div class="col-xs-6" >
+					<label>Checkpoint that collected or recieved this information:</label>
+					<div class="text">XXX</div>
+				</div>
+				<div class="col-xs-6" >
+					<label>Checkpoint responsibilities:</label>
+					<div class="text">XXX</div>
+				</div>
+			</div>
 
-            <div class="" style="padding:20px">
+
+			<legend>To: Recipients</legend>
+			<div class="row top-border bg-lightblue">
+				<div class="col-xs-4" ><div class="text">full contact details</div></div>
+				<div class="col-xs-4" ><div class="text">full contact details</div></div>
+				<div class="col-xs-4" ><div class="text">full contact details</div></div>
+			</div>
+
+
+			<legend>Information Collected or Received at the Checkpoint</legend>
+				<div class="row top-border bg-lightblue">
+
+					<!-- repeat for each IRCC, if IRCC was included-->
+					<div class="clearfix"></div>
+					<div class="ircc-title color-litegreen">INTERNATIONAL RECOGNIZED CERTIFICATE OF COMPLIANCE:<span class="color-white">ABSCH-IRCC-CA-12345-1</span></div>
+					<div class="ircc-row">
+						<div class="clearfix"></div>
+						<div class="col-xs-6" >
+							<label>Title</label>
+							<div class="text">title</div>
+						</div>
+						<div class="col-xs-6" >
+							<label>Link for more information</label>
+							<div class="text">http://absch.cbd.int/UID</div>
+						</div>
+
+						<div class="clearfix"></div>
+						<div class="col-xs-6" >
+							<label>National Identifiers</label>
+							<div class="text">XXXX</div>
+						</div>
+						<div class="col-xs-3" >
+							<label>Usage</label>
+							<div class="text">commercial/non-commercial</div>
+						</div>
+						<div class="col-xs-3" >
+							<label>Third Party Transfer</label>
+							<div class="text">allowed/not allowed</div>
+						</div>
+
+						<div class="clearfix"></div>
+						<div class="col-xs-6" >
+							<label>Issuing Authority</label>
+							<div class="text">CNA</div>
+						</div>
+						<div class="col-xs-6" >
+							<label>PIC Granted To;</label>
+							<div class="text">user</div>
+						</div>
+
+						<div class="clearfix"></div>
+						<div class="col-xs-12" >
+							<label>Subject Matter</label>
+							<div class="text">keywords</div>
+						</div>
+
+						<div class="clearfix"></div>
+						<div class="col-xs-12" >
+							<label>Additional Information</label>
+							<div class="text">xxxxxx</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+
+				<!-- if IRCC was NOT included-->
+				<div class="col-xs-12" >
+					<div class="text alert-text" >Internationally Recognized Certificate of Complicance not available.</div>
+				</div>
+
+
+				<div class="clearfix"></div>
+				<div class="col-xs-4" >
+					<label>Source Country</label>
+					<div class="text">source country</div>
+				</div>
+				<div class="col-xs-4" >
+					<label>Subject Matter</label>
+					<div class="text">keywords</div>
+				</div>
+				<div class="col-xs-4" >
+					<label>Date</label>
+					<div class="text">date 1 or date1 to date 2</div>
+				</div>
+
+				<div class="clearfix"></div>
+				<div class="col-xs-12" >
+					<label>Evidence of prior informed consent (PIC)</label>
+					<div class="text">text</div>
+				</div>
+				<div class="clearfix"></div>
+				<div class="col-xs-6" >
+					<label>Grantor of prior informed consent (PIC)</label>
+					<div class="text">contact details</div>
+				</div>
+				<div class="col-xs-6" >
+					<label>Grantee of prior informed consent (PIC)</label>
+					<div class="text">contact details</div>
+				</div>
+
+				<div class="clearfix"></div>
+				<div class="col-xs-12" >
+					<label>Evidence of mutually agreed terms (MAT)</label>
+					<div class="text">text</div>
+				</div>
+				<!-- end if no IRCC -->
+
+
+				<div class="clearfix"></div>
+				<div class="col-xs-8" >
+					<label>Information collected or received relevant to the utilization of genetic resources</label>
+					<div class="text">information on the utilization, type of use</div>
+				</div>
+				<div class="col-xs-4" >
+				<label>Information collected or received on:</label>
+					<div class="text">
+						<span ng-show="document.date">{{document.date}}</span>
+						<span ng-show="document.dateFrom && !document.date">{{document.dateFrom}}</span>
+						<span ng-show="document.dateTo && document.dateFrom"> to {{document.dateTo}}</span>
+					</div>
+				</div>
+
+				<div class="clearfix"></div>
+				<div class="col-xs-12" >
+					<label>People or entities utilizing the genetic resource at the checkpoint</label>
+					<div class="text" ng-repeat="user in document.geneticRessourceUsers">
+						<div view-contact-reference ng-model="user" locale="locale"></div>
+					</div>
+				</div>
+
+
+				<div class="clearfix"></div>
+				<div class="col-xs-12" >
+					<label>Additional Information</label>
+					<div class="text">
+						<div ng-bind-html="renderHtml(document.relevantInformation)"></div>
+					</div>
+				</div>
+
+				<div class="clearfix"></div>
+				<div class="col-xs-12" >
+					<label>Attached documents</label>
+					<ul style="list-style-type: none;" class="text" ng-show="document.informationDocuments || document.relevantDocuments" >
+						<li ng-repeat="item in document.informationDocuments"><strong>{{item.name}}</strong> (http://absch.cbd.int/{{item.url}}) </span>
+						<li ng-repeat="item in document.relevantDocuments"><strong>{{item.name}}</strong> (http://absch.cbd.int/{{item.url}}) </span>
+					</ul>
+				</div>
+
+		</div>
+<!--
+<div class="" style="padding:20px">
 
     			<a type="button" ng-show="showPdf" target="_blank" class="btn btn-info pull-right" ng-href="http://absch.cbd.int/app/abs/docs/sample_communique.pdf">Download the Checkpoint Communiqué</a>
 
@@ -294,20 +467,13 @@
     				</div>
     				</div>
     			</div>
-    	    </div>
+    	    </div> -->
 
-            <div class="row" style="padding-bottom:20px;">
-
-                <div class="col-xs-12"><h3 >Further Information</h3></div>
-
-                <div class="clearfix"></div>
-
+			<legend class="color-green" style="font-weight:bold;">Further Information</legend>
+            <div class="row top-border" style="padding-bottom:20px;">
                 <div class="col-xs-8">
-
-                    Questions about the permit or its equivalent constituting an internationally
-                    recognized certificate of compliance should be addressed to the competent
-                    national authority issuing the permit or its equivalent. Additional information about
-                    the permit or its equivalent may be available in the Access and Benefit-Sharing
+                    Questions about the checkpoint communique should be addressed to the issuing authority. Additional information about
+                    this checkpoint communique may be available in the Access and Benefit-Sharing
                     Clearing House (<a href="http://absch.cbd.int/" style="color:white;">http://absch.cbd.int/</a>).
                     <br><br>
                     Questions about the Nagoya Protocol on Access and Benefit-sharing or the
@@ -316,16 +482,13 @@
                 </div>
                 <div class="col-xs-4">
                     <strong>Secretariat of the Convention on Biological Diversity</strong><br/>
-
                     413 rue Saint-Jacques, suite 800<br/>
                     Montreal, Québec, H2Y 1N9<br/>
                     Canada<br/>
                     Fax: +1 514 288-6588<br/>
                     Email: <a href="mailto:secretariat@cbd.int" style="color:white;">secretariat@cbd.int</a>
-
                 </div>
             </div>
-
 
         </div>
 	</div>
