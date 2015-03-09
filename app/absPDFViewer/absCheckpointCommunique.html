@@ -1,505 +1,329 @@
 <html>
+
 <head>
-	<title>Access and Benefit-Sharing Clearing-House</title>
-	<meta name="description" content="Access and Benefit-Sharing Clearing-House">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<link rel="shortcut icon" href="ico/favicon.png">
+    <title>Access and Benefit-Sharing Clearing-House</title>
+    <meta name="description" content="Access and Benefit-Sharing Clearing-House">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="ico/favicon.png">
 
     <!-- Bootstrap core CSS -->
-	<link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
-	<!-- Custom styles for this template -->
-	<link href="../css/communiquePDF.css" rel="stylesheet">
-	<link rel="stylesheet" href="../libs/font-awesome/css/font-awesome.min.css">
+    <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="../css/communiquePDF.css" rel="stylesheet">
+    <link rel="stylesheet" href="../libs/font-awesome/css/font-awesome.min.css">
 
     <script src="../libs/momentjs/min/moment.min.js"></script>
     <script src="../libs/barcode-39.js/barcode-39.min.js"></script>
 
-	<script src="../libs/requirejs/require.js"  ></script>
-    <script src="../libs/angular/angular.min.js"  ></script>
-    <script src="absCheckpointCommunique.html.js" ></script>
+    <script src="../libs/angular/angular.min.js"></script>
+    <script src="absCheckpointCommunique.html.js"></script>
+    <!-- <script src="absCommon.js"></script>-->
 
-	<style type="text/css">
-		#watermark {
-		 color: black;
-		padding-left:250px;
-		}
-		#watermark p{
-		  color: black;
-		  font-weight:bolder;
-		  font-size: xx-large;
-		}
-		a[href]:after {
-	    content: '';
-	  }
-	</style>
+    <style type="text/css">
+        #watermark {
+            color: black;
+            padding-left: 250px;
+        }
+        #watermark p {
+            color: black;
+            font-weight: bolder;
+            font-size: xx-large;
+        }
+        a[href]:after {
+            content: '';
+        };
+    </style>
 </head>
 
 <body>
-	<div ng-app="ngapp" class="main-nav" >
-		<div ng-controller="printPermit" style="width:1000px;" >
+    <div ng-app="ngapp" class="main-nav">
+        <div ng-controller="printPermit" style="width:1000px;">
 
-			<div class="row" style="padding-bottom:30px;">
-				<div class="col-xs-1">
-				</div>
-
-				<div class="col-xs-3" style="text-align:center;">
-					<img  style="width:60px;"
-					src="../img/UNEP_logo.svg"/>
-				</div>
-				<div class="col-xs-4" style="text-align:center;padding-top:5px;">
-					<img src="../img/cbd-logo-print-black-en.png" />
-				</div>
-				<div class="col-xs-3" style="text-align:center;">
-					<img  style="width:70px;padding-top:5px;"
-					src="../img/Emblem_of_the_United_Nations.svg"/>
-				</div>
-
-				<div class="col-xs-1">
-				</div>
-			</div>
-
-			<div class="bg-blue" style="padding:5px;">
-				<h1><span class="color-lightblue">Checkpoint Communiqué: <span  class="color-white">ABSCH-CPC-CA-291922-2</span></h1>
-			</div>
-
-			<p style="margin-bottom:30px;">
-				On the basis of the information collected or received by the checkpoint and provided to the ABS Clearing-House pursuant to Article 17 of the Nagoya Protocol, a courtesy copy of the report of the records on the communique will be automatically sent by electronic means to the designated national authorities, the national focal point of the country and the compentent national authorities providing prior informed consent, as appropriate.
-			</p>
-
-			<p>{{document}}</p>
-
-			<legend>General information</legend>
-			<div class="row top-border bg-lightblue">
-				<div class="col-xs-6" >
-					<label>Title:</label>
-					<div class="text">{{document.title| lstring:locale}}</div>
-				</div>
-				<div class="col-xs-3" >
-					<label>UID:</label>
-					<div class="text">
-						ABSCH-CPC-XX-XXXXXX
-					</div>
-				</div>
-				<div class="col-xs-3" >
-					<label>Sent:</label>
-					<div class="text">
-						date published
-					</div>
-				</div>
-			</div>
-
-
-			<legend>From: Issuing Authority</legend>
-			<div class="row top-border bg-lightblue">
-				<div class="col-xs-12" >
-					<label>Issuing country:</label>
-					<div class="text">{{document.government|term:locale}}</div>
-				</div>
-				<div class="col-xs-6" >
-					<label>Checkpoint that collected or recieved this information:</label>
-					<div class="text">XXX</div>
-				</div>
-				<div class="col-xs-6" >
-					<label>Checkpoint responsibilities:</label>
-					<div class="text">XXX</div>
-				</div>
-			</div>
-
-
-			<legend>To: Recipients</legend>
-			<div class="row top-border bg-lightblue">
-				<div class="col-xs-4" ><div class="text">full contact details</div></div>
-				<div class="col-xs-4" ><div class="text">full contact details</div></div>
-				<div class="col-xs-4" ><div class="text">full contact details</div></div>
-			</div>
-
-
-			<legend>Information Collected or Received at the Checkpoint</legend>
-				<div class="row top-border bg-lightblue">
-
-					<!-- repeat for each IRCC, if IRCC was included-->
-					<div class="clearfix"></div>
-					<div ng-show="document.permitNotAvailable==false" >
-						<div class="ircc-title color-litegreen">
-							INTERNATIONAL RECOGNIZED CERTIFICATE OF COMPLIANCE:<span class="color-white">ABSCH-IRCC-CA-12345-1</span></div>
-						<div class="ircc-row">
-							<div class="clearfix"></div>
-							<div class="col-xs-6" >
-								<label>Title</label>
-								<div class="text">title</div>
-							</div>
-							<div class="col-xs-6" >
-								<label>Link for more information</label>
-								<div class="text">http://absch.cbd.int/UID</div>
-							</div>
-
-							<div class="clearfix"></div>
-							<div class="col-xs-6" >
-								<label>National Identifiers</label>
-								<div class="text">XXXX</div>
-							</div>
-							<div class="col-xs-3" >
-								<label>Usage</label>
-								<div class="text">commercial/non-commercial</div>
-							</div>
-							<div class="col-xs-3" >
-								<label>Third Party Transfer</label>
-								<div class="text">allowed/not allowed</div>
-							</div>
-
-							<div class="clearfix"></div>
-							<div class="col-xs-6" >
-								<label>Issuing Authority</label>
-								<div class="text">CNA</div>
-							</div>
-							<div class="col-xs-6" >
-								<label>PIC Granted To;</label>
-								<div class="text">user</div>
-							</div>
-
-							<div class="clearfix"></div>
-							<div class="col-xs-12" >
-								<label>Subject Matter</label>
-								<div class="text">keywords</div>
-							</div>
-
-							<div class="clearfix"></div>
-							<div class="col-xs-12" >
-								<label>Additional Information</label>
-								<div class="text">xxxxxx</div>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-					</div>
-
-				<!-- if IRCC was NOT included-->
-				<div ng-show="document.permitNotAvailable==true" >
-					<div class="clearfix"></div>
-					<div class="col-xs-12" >
-						<label>Internationally Recognized Certificate of Complicance (IRCC)</label>
-						<div class="text alert-text" >not available</div>
-					</div>
-
-					<div class="clearfix"></div>
-					<div class="col-xs-4" >
-						<label>Source Country</label>
-						<div class="text">source country</div>
-					</div>
-					<div class="col-xs-4" >
-						<label>Subject Matter</label>
-						<div class="text">keywords</div>
-					</div>
-					<div class="col-xs-4" >
-						<label>Date</label>
-						<div class="text">date 1 or date1 to date 2</div>
-					</div>
-
-					<div class="clearfix"></div>
-					<div class="col-xs-12" >
-						<label>Evidence of prior informed consent (PIC)</label>
-						<div class="text">text</div>
-					</div>
-					<div class="clearfix"></div>
-					<div class="col-xs-6" >
-						<label>Grantor of prior informed consent (PIC)</label>
-						<div class="text">contact details</div>
-					</div>
-					<div class="col-xs-6" >
-						<label>Grantee of prior informed consent (PIC)</label>
-						<div class="text">contact details</div>
-					</div>
-
-					<div class="clearfix"></div>
-					<div class="col-xs-12" >
-						<label>Evidence of mutually agreed terms (MAT)</label>
-						<div class="text">text</div>
-					</div>
-				</div>
-				<!-- end if no IRCC -->
-
-
-				<div class="clearfix"></div>
-				<div class="col-xs-8">
-					<label>Information collected or received relevant to the utilization of genetic resources</label>
-					<div class="text">information on the utilization, type of use</div>
-				</div>
-				<div class="col-xs-4">
-				<label>Information collected or received on:</label>
-					<div class="text">
-						<span ng-show="document.date">{{document.date}}</span>
-						<span ng-show="document.dateFrom && !document.date">{{document.dateFrom}}</span>
-						<span ng-show="document.dateTo && document.dateFrom"> to {{document.dateTo}}</span>
-					</div>
-				</div>
-
-				<div class="clearfix"></div>
-				<div class="col-xs-12" >
-					<label>People or entities utilizing the genetic resource at the checkpoint</label>
-					<div class="text" ng-repeat="user in document.geneticRessourceUsers">
-						<div view-contact-reference ng-model="user" locale="locale"></div>
-					</div>
-				</div>
-
-
-				<div class="clearfix"></div>
-				<div class="col-xs-12" >
-					<label>Additional Information</label>
-					<div class="text">
-						<div ng-bind-html="renderHtml(document.relevantInformation)"></div>
-					</div>
-				</div>
-
-				<div class="clearfix"></div>
-				<div class="col-xs-12" >
-					<label>Attached documents</label>
-					<ul style="list-style-type: none;" class="text" ng-show="document.informationDocuments || document.relevantDocuments" >
-						<li ng-repeat="item in document.informationDocuments"><strong>{{item.name}}</strong> (http://absch.cbd.int/{{item.url}}) </span>
-						<li ng-repeat="item in document.relevantDocuments"><strong>{{item.name}}</strong> (http://absch.cbd.int/{{item.url}}) </span>
-					</ul>
-				</div>
-
-		</div>
-<!--
-<div class="" style="padding:20px">
-
-    			<a type="button" ng-show="showPdf" target="_blank" class="btn btn-info pull-right" ng-href="http://absch.cbd.int/app/abs/docs/sample_communique.pdf">Download the Checkpoint Communiqué</a>
-
-                <div ng-show="document.government">
-                    <legend>General information</legend>
-                    <div >
-                    	<label>Country issuing this checkpoint communique:</label>
-                        <div class="text">{{document.government|term:locale}}</div>
-                    </div>
+            <div class="row" style="padding-bottom:30px;">
+                <div class="col-xs-1">
                 </div>
 
-                <div ng-show="document.title">
-                    <div >
-                    	<label>Title of this checkpoint communique:</label>
-                        <div class="text">{{document.title| lstring:locale}}</div>
+                <div class="col-xs-3" style="text-align:center;">
+                    <img style="width:60px;" src="../img/UNEP_logo.svg" />
+                </div>
+                <div class="col-xs-4" style="text-align:center;padding-top:5px;">
+                    <img src="../img/cbd-logo-print-black-en.png" />
+                </div>
+                <div class="col-xs-3" style="text-align:center;">
+                    <img style="width:70px;padding-top:5px;" src="../img/Emblem_of_the_United_Nations.svg" />
+                </div>
+
+                <div class="col-xs-1">
+                </div>
+            </div>
+
+            <div class="bg-blue" style="padding:5px;">
+                <h1>
+                    <span class="color-lightblue">Checkpoint Communiqué:
+                        <span class="color-white">{{documentInfo|uniqueID}}</span>
+                </h1>
+            </div>
+
+            <p style="margin-bottom:30px;">
+                On the basis of the information collected or received by the checkpoint and provided to the ABS Clearing-House pursuant to Article 17 of the Nagoya Protocol, a courtesy copy of the report of the records on the communique will be automatically sent by
+                electronic means to the designated national authorities, the national focal point of the country and the compentent national authorities providing prior informed consent, as appropriate.
+            </p>
+
+            <!--
+            <p>{{document}}</p> -->
+            <legend>General information</legend>
+            <div class="row top-border bg-lightblue">
+                <div class="col-xs-6">
+                    <label>Title:</label>
+                    <div class="text">{{document.title| lstring:locale}}</div>
+                </div>
+                <div class="col-xs-3">
+                    <label>UID:</label>
+                    <div class="text">
+                        {{documentInfo|uniqueID}}
                     </div>
                 </div>
-				<div ng-show="document.checkpoint">
-					<legend>Checkpoint/s that collected or received the information</legend>
-					<div class="km-value text">
-						<ul>
-							<li ng-repeat="checkpoint in document.checkpoint">
-								{{checkpoint.name | lstring:locale}}
-							</li>
-						</ul>
-					</div>
-				</div>
-    			<div ng-show="document.permit || document.permitNotAvailable ||
-    						document.originCountries || responsibleAuthority ||
-    						document.specimen || document.taxonomy || document.gisFiles || document.subjectMatter ||
-    						document.referenceOfInformedConsent || document.referenceOfAgreedTerms ||
-    						document.personeToWhomGranted || document.geneticRessourceUsers">
-    				<legend>Details of the internationally recognize certificate of compliance</legend>
-    				<div class="row" ng-show="document.permit">
-                        <div class="col-xs-12">
-        					<label>Reference number(s) of the internationally recognized certificate(s) of compliance that relate(s) to this communiqué</label>
-        					<div class="text">
-        						<ul>
-        							<li ng-repeat="permit in document.permit">
-        								<a href="/database/record?documentSchema=ABSPERMIT&documentID={{permit |uniqueID}}">
-											{{permit | uniqueID}}
-											</a>
-        							</li>
-        						</ul>
-        					</div>
-        				</div>
-    				</div>
-    				<div ng-show="document.permitNotAvailable" class="text">
-    					<strong>The internationally recognized certificate of compliance is not available</strong>
-    				</div>
+                <div class="col-xs-3">
+                    <label>Sent:</label>
+                    <div class="text">
+                        {{documentVersion.createdOn |formatDate}}
+                    </div>
+                </div>
+            </div>
 
-    				<div ng-show="document.originCountries || responsibleAuthority ||
-    					document.specimen || document.taxonomy || document.gisFiles || document.subjectMatter ||
-    					document.referenceOfInformedConsent || document.referenceOfAgreedTerms ||
-    					document.personeToWhomGranted || document.geneticRessourceUsers">
-    					<div ng-show="document.originCountries" class="row" >
-                            <div class="col-xs-12">
-        						<label>Source of the genetic resource</label>
-        						<div class="text">
-        							<ul class="list">
-        								<li ng-repeat="term in document.originCountries">{{term|term:locale}}</li>
-        							</ul>
-        						</div>
-        					</div>
-    					</div>
-    					<div ng-show="responsibleAuthority" class="row" >
-                            <div class="col-xs-12">
-    						<label>Person or entity who granted prior informed consent</label>
-    						<div class="text">
-    							<b>{{responsibleAuthority.document.name | lstring:locale}}</b><br />
-    						</div>
-    				</div>
-    					</div>
-    					<div ng-show="document.subjectMatter" class="row" >
-                            <div class="col-xs-12">
-    						<label>Subject-matter or genetic resources relevant to the information collected or received</label>
-    						<div class="text km-pre" ng-bind-html="renderHtml(document.subjectMatter)"></div>
-    				</div>
-    					</div>
-    					<div ng-show="document.specimen || document.taxonomy || document.gisFiles" class="row" >
-                            <div class="col-xs-12">
-    						<label>Optional additional subject-matter details</label>
-    						<div ng-show="document.specimen">
-    							<label>Specimen data</label>
-    							<div class="text">
-    							<ul class="list">
-    								<li ng-repeat="item in document.specimen">
-    									<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-    									<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-    								</li>
-    							</ul>
+
+            <legend>From: Issuing Authority</legend>
+            <div class="row top-border bg-lightblue">
+                <div class="col-xs-12">
+                    <label>Issuing country:</label>
+                    <div class="text">{{document.government|term:locale}}</div>
+                </div>
+                <div class="col-xs-6">
+                    <label>Checkpoint that collected or recieved this information:</label>
+                </div>
+                <div class="col-xs-6">
+                    <label>Checkpoint responsibilities:</label>
+                </div>
+                <span ng-repeat="cp in document.checkpoint">
+                    <div class="col-xs-6">
+                        <div class="text">{{cp.name|lstring}}</div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="text" ng-bind-html="renderHtml(cp.responsibilities)"></div>
+                    </div>
+                </span>
+            </div>
+
+
+            <legend>To: Recipients</legend>
+            <div class="row top-border bg-lightblue">
+                <div class="col-xs-4" ng-repeat="contact in emailList">
+                    <div class="text"><div view-contact-reference ng-model="contact" locale="locale"></div></div>
+                </div>
+            </div>
+
+
+            <legend>Information Collected or Received at the Checkpoint</legend>
+            <div class="row top-border bg-lightblue">
+
+                <!-- repeat for each IRCC, if IRCC was included-->
+                <div class="clearfix"></div>
+                <div ng-show="document.permitNotAvailable==false || document.permit">
+                    <div class="ircc-title color-litegreen">
+                        INTERNATIONAL RECOGNIZED CERTIFICATE OF COMPLIANCE:
+                    </div>
+                    <div class="ircc-row" ng-repeat="permit in document.permit">
+                        <div class="clearfix"></div>
+                        <!-- <div class="col-xs-12 pull-right"><span class="color-white">{{permit.document.header | uniqueID}}</span>
+							<div class="clearfix"></div>
+						</div> -->
+                        <div class="col-xs-6">
+                            <label>Title</label>
+                            <div class="text">{{permit.document.title|lstring}}</div>
+                        </div>
+                        <div class="col-xs-6">
+                            <label>Link for more information</label>
+                            <div class="text"><a style="style:blue" ng-href="http://absch.cbd.int/database/{{permit.document.header | uniqueID}}">{{permit.document.header | uniqueID}}</a>
                             </div>
-    				</div>
-    						</div>
-    						<div ng-show="document.taxonomy" class="row" >
-                            <div class="col-xs-12">
-    							<label>Taxonomy data</label>
-    							<div class="text">
-    								<ul class="list">
-    									<li ng-repeat="item in document.taxonomy">
-    										<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-    										<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-    									</li>
-    								</ul>
-    							</div>
-    				</div>
-    						</div>
-    						<div ng-show="document.gisFiles" class="row" >
-                            <div class="col-xs-12">
-    							<label>Geographic coordinates</label>
-    							<div class="text">
-    								<ul class="list">
-    									<li ng-repeat="item in document.gisFiles">
-    										<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-    										<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-    									</li>
-    								</ul>
-    							</div>
-    							<div class="leaflet" center="gisMapCenter" layers="gisMapLayers"></div>
-    				</div>
-    						</div>
-    					</div>
-    					<div ng-show="document.referenceOfInformedConsent" class="row" >
-                            <div class="col-xs-12">
-    						<label>Reference or evidence of prior informed consent</label>
-    						<div class="text km-pre" ng-bind-html="renderHtml(document.referenceOfInformedConsent)"></div>
-    				</div>
-    					</div>
+                        </div>
 
-    					<div ng-show="document.referenceOfAgreedTerms" class="row" >
-                            <div class="col-xs-12">
-    						<label>Reference or evidence of establishment of mutually agreed terms</label>
-    						<div class="text km-pre"ng-bind-html="renderHtml(document.referenceOfAgreedTerms)"></div>
-    				</div>
-    					</div>
+                        <div class="clearfix"></div>
+                        <div class="col-xs-12">
+                            <label>National Identifiers</label>
+                            <div class="text" ng-bind-html="renderHtml(permit.document.nationalReferences)"></div>
+                        </div>
+                        <div class="col-xs-3">
+                            <label>Usage</label>
+                            <div class="text">
+                                <li ng-repeat="term in permit.document.usage">{{term|term}}</li>
+                            </div>
+                        </div>
+                        <div class="col-xs-3">
+                            <label>Third Party Transfer</label>
+                            <div class="text" ng-show="permit.document.thirdPartyTransferConditions">allowed</div>
+                            <div class="text" ng-show="!permit.document.thirdPartyTransferConditions">not allowed</div>
+                        </div>
 
-    					<div ng-show="document.personeToWhomGranted" class="row" >
-                            <div class="col-xs-12">
-    						<label>Person or entity to whom prior informed consent was granted</label>
-    						<div class="text">
-    							<div view-contact-reference ng-model="document.personeToWhomGranted" locale="locale"></div>
-    						</div>
-    				</div>
-    					</div>
-    				</div>
-    			</div>
-    			<div ng-show="document.description || document.dateFrom || document.dateTo ||
-    				 information || informationDocuments || document.geneticRessourceUsers">
-    				<legend>Information on the utilization of the genetic resource(s)</legend>
-    				<div ng-show="document.description"class="row" >
-                            <div class="col-xs-12">
-    					<label>Short description of the information collected or received by the checkpoint relevant to the utilization of genetic resources</label>
-    					<div class="text km-pre" ng-bind-html="renderHtml(document.description)"></div>
-    				</div>
-    				</div>
-    				<div ng-show="document.geneticRessourceUsers"class="row" >
-                            <div class="col-xs-12">
-    					<label>Person or entity utilizing the genetic resource at the checkpoint</label>
-    					<div class="text" ng-repeat="user in document.geneticRessourceUsers">
-    						<div view-contact-reference ng-model="user" locale="locale"></div>
-    					</div>
-    				</div>
-    				</div>
-    				<div ng-show="document.date"class="row" >
-                            <div class="col-xs-12">
-    					<label>Date on which the information was collected</label>
-    					<div class="text">{{document.date}}</div>
-    				</div>
-    				</div>
-    				<div ng-show="document.dateFrom"class="row" >
-                            <div class="col-xs-12">
-    					<label>Date on which the information started being collected</label>
-    					<div class="text">{{document.dateFrom}}</div>
-    				</div>
-    				</div>
-    				<div ng-show="document.dateTo"class="row" >
-                            <div class="col-xs-12">
-    					<label>Date on which the information was received</label>
-    					<div class="text">{{document.dateTo}}</div>
-    				</div>
-    				</div>
-    				<div ng-show="document.informationDocuments"class="row" >
-                            <div class="col-xs-12">
-    					<label>Upload a copy of relevant document</label>
-    					<div class="text" ng-repeat="item in document.informationDocuments">
-    						<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-    						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-    					</div>
-    				</div>
-    				</div>
-    				<div ng-show="document.information"class="row" >
-                            <div class="col-xs-12">
-    					<label>Copy of relevant information</label>
-    					<div class="text km-pre"ng-bind-html="renderHtml(document.information)"></div>
-    				</div>
-    				</div>
-    			</div>
-    			<div ng-show="document.relevantInformation||document.relevantDocuments"class="row" >
-                            <div class="col-xs-12">
-    				<legend>Additional Information</legend>
+                        <div class="clearfix"></div>
+                        <div class="col-xs-6">
+                            <label>Issuing Authority</label>
+                            <div class="text">
+                                <div view-contact-reference ng-model="permit.document.authority" locale="locale"></div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <label>PIC Granted To;</label>
 
-    				<div ng-show="document.relevantInformation">
-    					<div class="text" ng-bind-html="renderHtml(document.relevantInformation)"></div>
-    				</div>
+                            <div ng-show="!permit.document.providerConfidential" ng-repeat="provider in permit.document.providers">
+                                <div class="text">
+                                    <div view-contact-reference ng-model="provider" locale="locale"></div>
+                                </div>
+                                <div ng-show="permit.document.providerConfidential" class="confidential">Confidential information</div>
+                            </div>
+                        </div>
 
-    				<div ng-show="document.relevantDocuments">
-    					<label>Other relevant website address or attached documents</label>
-    					<div class="text" ng-repeat="item in document.relevantDocuments">
-    						<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-    						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-    					</div>
-    				</div>
-    				</div>
-    			</div>
-    	    </div> -->
+                        <div class="clearfix"></div>
+                        <div class="col-xs-12">
+                            <label>Subject Matter</label>
+                            <div class="text">
+                                <ul>
+                                    <li ng-repeat="term in permit.document.keywords">{{term|term}} </li>
+                                </ul>
+                            </div>
+                        </div>
 
-			<legend class="color-green" style="font-weight:bold;">Further Information</legend>
+                        <div class="clearfix"></div>
+                        <div class="col-xs-12">
+                            <label>Additional Information</label>
+                            <div class="text" ng-bind-html="renderHtml(document.usageDescription)"></div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+
+                <!-- if IRCC was NOT included-->
+                <div ng-show="document.permitNotAvailable==true">
+                    <div class="clearfix"></div>
+                    <div class="col-xs-12">
+                        <label>Internationally Recognized Certificate of Complicance (IRCC)</label>
+                        <div class="text alert-text">not available</div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <div class="col-xs-6">
+                        <label>Source Country</label>
+                        <div class="text">
+                            <ul>
+                                <li ng-repeat="country in document.originCountries">{{country|term}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <label>Subject Matter</label>
+                        <div class="text">
+                            <ul>
+                                <li ng-repeat="keyword in document.keywords">{{keyword|term}}</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <div class="col-xs-12">
+                        <label>Evidence of prior informed consent (PIC)</label>
+                        <div class="text" ng-bind-html="renderHtml(document.referenceOfInformedConsent)"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-xs-6">
+                        <label>Grantor of prior informed consent (PIC)</label>
+                        <div class="text">
+                            <div view-contact-reference ng-model="document.responsibleAuthorities" locale="locale"></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <label>Grantee of prior informed consent (PIC)</label>
+                        <div class="text">
+                            <div view-contact-reference ng-model="document.personeToWhomGranted" locale="locale"></div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <div class="col-xs-12">
+                        <label>Evidence of mutually agreed terms (MAT)</label>
+                        <div class="text" ng-bind-html="renderHtml(document.referenceOfAgreedTerms)"></div>
+                    </div>
+                </div>
+                <!-- end if no IRCC -->
+
+
+                <div class="clearfix"></div>
+                <div class="col-xs-8">
+                    <label>Information collected or received relevant to the utilization of genetic resources</label>
+                    <div class="text" ng-bind-html="renderHtml(document.description)"></div>
+                </div>
+                <div class="col-xs-4">
+                    <label>Information collected or received on:</label>
+                    <div class="text">
+                        <span ng-show="document.date">{{document.date}}</span>
+                        <span ng-show="document.dateFrom && !document.date">{{document.dateFrom}}</span>
+                        <span ng-show="document.dateTo && document.dateFrom"> to {{document.dateTo}}</span>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+				<div class="col-xs-12">
+					<label>People or entities utilizing the genetic resource at the checkpoint</label>
+				</div>
+				<div class="col-xs-12">
+					<div class="col-xs-4" ng-repeat="user in document.geneticRessourceUsers">
+						<div class="text"><div view-contact-reference ng-model="user" locale="locale"></div></div>
+					</div>
+				</div>
+
+                <div class="clearfix"></div>
+                <div class="col-xs-12">
+                    <label>Additional Information</label>
+                    <div class="text">
+                        <div ng-bind-html="renderHtml(document.relevantInformation)"></div>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="col-xs-12">
+                    <label>Attached documents</label>
+                    <ul style="list-style-type: none;" class="text" ng-show="document.informationDocuments || document.relevantDocuments">
+                        <li ng-repeat="item in document.informationDocuments">
+                            <strong><a ng-href="http://absch.cbd.int/{{item.url}}" >{{item.name}}</strong>
+						</li>
+						<li ng-repeat="item in document.relevantDocuments">
+							<strong><a ng-href="http://absch.cbd.int/{{item.url}}" >{{item.name}}</strong>
+						</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <legend class="color-green" style="font-weight:bold;">Further Information</legend>
             <div class="row top-border" style="padding-bottom:20px;">
                 <div class="col-xs-8" style="font-size:12px;">
-                    Questions about the checkpoint communique should be addressed to the issuing authority. Additional information about
-                    this checkpoint communique may be available in the Access and Benefit-Sharing
-                    Clearing House (<a href="http://absch.cbd.int/" style="color:white;">http://absch.cbd.int/</a>).
-                    <br><br>
-                    Questions about the Nagoya Protocol on Access and Benefit-sharing or the
-                    operation of the Access and Benefit-sharing Clearing-House may be directed to the Secretariat of the Convention on Biological Diversity.
+                    Questions about the checkpoint communique should be addressed to the issuing authority. Additional information about this checkpoint communique may be available in the Access and Benefit-Sharing Clearing House (<a href="http://absch.cbd.int/"
+                    style="color:white;">http://absch.cbd.int/</a>).
+                    <br>
+                    <br> Questions about the Nagoya Protocol on Access and Benefit-sharing or the operation of the Access and Benefit-sharing Clearing-House may be directed to the Secretariat of the Convention on Biological Diversity.
 
                 </div>
                 <div class="col-xs-4" style="font-size:12px;">
-                    <strong>Secretariat of the Convention on Biological Diversity</strong><br/>
-                    413 rue Saint-Jacques, suite 800<br/>
-                    Montreal, Québec, H2Y 1N9<br/>
-                    Canada<br/>
-                    Fax: +1 514 288-6588<br/>
-                    Email: <a href="mailto:secretariat@cbd.int" style="color:white;">secretariat@cbd.int</a>
+                    <strong>Secretariat of the Convention on Biological Diversity</strong>
+                    <br/> 413 rue Saint-Jacques, suite 800
+                    <br/> Montreal, Québec, H2Y 1N9
+                    <br/> Canada
+                    <br/> Fax: +1 514 288-6588
+                    <br/> Email: <a href="mailto:secretariat@cbd.int" style="color:white;">secretariat@cbd.int</a>
                 </div>
             </div>
 
         </div>
-	</div>
+    </div>
 </body>
+
 </html>

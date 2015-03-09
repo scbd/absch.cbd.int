@@ -2,7 +2,7 @@
 //define(['app'], function(app){
 var app = angular.module('ngapp',[])
 
-app.controller('printPermit', ['$scope','$http','$location','$sce','$filter', function($scope,$http,$location, $sce, $filter) {
+app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q', function($scope,$http,$location, $sce, $filter, $q) {
 
 	var sLocale      = "en";
 	$scope.locale = sLocale;
@@ -13,16 +13,75 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter', fu
 	 params.identifier = $location.search().documentID;
 
 
-	$http.get('/api/v2013/documents/' +  params.identifier, { }).success(function(data){
+	var document = 			$http.get('/api/v2013/documents/' +  params.identifier, { });
+	var documentInfo = 		$http.get('/api/v2013/documents/' +  params.identifier + '?info', { });
+	var documentVersion=	$http.get('/api/v2013/documents/'+params.identifier+'/versions?body=true&cache=true')
 
-		 	$scope.document = data;
+	$q.all([document,documentInfo,documentVersion]).then(function(result){
+
+		 	$scope.document = result[0].data;
+			$scope.documentInfo = result[1].data;
+			$scope.documentVersion = result[2].data;
+
+			if($scope.document.permit){
+				$scope.document.permit.forEach(function(item){
+					$http.get('/api/v2013/documents/' +  item.identifier, { info:true})
+					.success(function(result){
+						item.document = result;
+					}).finally(function(){
+						getContacts($scope.document)
+					});
+				})
+			}
+			else
+				getContacts($scope.document);
 	});
-
 
 	$scope.renderHtml = function(html_code)
 	{
 	    return $sce.trustAsHtml($filter("lstring")(html_code,sLocale));
 	};
+
+
+	function getContacts(document){
+		$scope.emailList = [];
+		if(document.permit){
+				angular.forEach(document.permit, function(permit){
+					if(permit.document.authority)
+						$scope.emailList.push(permit.document.authority);
+				})
+		}
+		else if(document.responsibleAuthorities){
+			$scope.emailList.push(document.personeToWhomGranted);
+		}
+		else if(document.originCountries){
+
+			var country = _.map(document.originCountries, function(country){ return country.identifier })
+			var query = "http://absch.cbd.int/api/v2013/index/select?cb=1412881121649&fl=id,identifier_s&q=(realm_ss:" + realm.toLowerCase() +
+			"+AND+NOT+version_s:*+AND+schema_s:authority+AND+(government_s:" + country.join('+OR government_s:') + "))&rows=50"
+
+			$http.get(query).success(function(res) {
+				var cnaQuery=[]
+				angular.forEach(res.body.response.docs, function(cna){
+					cnaQuery.push($http.get('/api/v2013/documents/' + cna.identifier_s, {}));
+				});
+				$q.all(cnaQuery).then(function(data){
+					angular.forEach(data, function(document){
+						$scope.emailList.push(document);
+					});
+				})
+			});
+		}
+		if(document.checkpoint){
+			angular.forEach(document.checkpoint, function(checkpoint){
+				if(checkpoint.contactsToInform)
+					angular.forEach(checkpoint.contactsToInform, function(contact){
+						$scope.emailList.push(contact);
+					});
+			});
+		}
+	}
+
 
 }]);
 

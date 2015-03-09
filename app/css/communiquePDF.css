@@ -46,7 +46,7 @@ legend{margin-top:20px;margin-bottom:0;border:0;}
 .bg-lightblue{background-color:#eee!important;}
 .ircc-row{background-color:#DFF0D8!important;margin-bottom:15px;padding-top:10px;padding-bottom:10px;border-top:1px solid #bbb;border-bottom:1px solid #ddd;}
 .ircc-title{text-transform: uppercase;background-color:#bbb!important;padding-top:3px;padding-bottom:1px;padding-left:15px;font-weight:bold!important;}
-a {color:#333;}
+/*a {color:#333;}*/
 
 body{
   background-color: #fff!important;
