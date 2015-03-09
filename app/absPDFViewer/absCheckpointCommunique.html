@@ -107,7 +107,12 @@
                 </div>
                 <span ng-repeat="cp in document.checkpoint">
                     <div class="col-xs-6">
-                        <div class="text">{{cp.name|lstring}}</div>
+                        <div class="text">
+							{{cp.name|lstring}}<br/>
+							{{cp.government.identifier|term}}<br/>
+							<span ng-show="cp.jurisidction">{{cp.jurisidction|term}}<br/></span>
+							<span ng-bind-html="renderHtml(cp.relevantInformation)"/>
+						</div>
                     </div>
                     <div class="col-xs-6">
                         <div class="text" ng-bind-html="renderHtml(cp.responsibilities)"></div>
@@ -130,14 +135,11 @@
                 <!-- repeat for each IRCC, if IRCC was included-->
                 <div class="clearfix"></div>
                 <div ng-show="document.permitNotAvailable==false || document.permit">
-                    <div class="ircc-title color-litegreen">
-                        INTERNATIONAL RECOGNIZED CERTIFICATE OF COMPLIANCE:
-                    </div>
                     <div class="ircc-row" ng-repeat="permit in document.permit">
-                        <div class="clearfix"></div>
-                        <!-- <div class="col-xs-12 pull-right"><span class="color-white">{{permit.document.header | uniqueID}}</span>
-							<div class="clearfix"></div>
-						</div> -->
+						<div class="ircc-title color-litegreen">
+							INTERNATIONAL RECOGNIZED CERTIFICATE OF COMPLIANCE:<span class="color-white">{{permit.document.header | uniqueID}}</span>
+						</div>
+						<div class="clearfix"></div>
                         <div class="col-xs-6">
                             <label>Title</label>
                             <div class="text">{{permit.document.title|lstring}}</div>
@@ -281,27 +283,30 @@
 				</div>
 
                 <div class="clearfix"></div>
-                <div class="col-xs-12">
-                    <label>Additional Information</label>
-                    <div class="text">
-                        <div ng-bind-html="renderHtml(document.relevantInformation)"></div>
-                    </div>
-                </div>
+            </div>
+			<legend>Additional Information</legend>
+			<div class="row top-border bg-lightblue">
+				<div class="col-xs-12">
+					<label>Additional Information</label>
+					<div class="text">
+						<div ng-bind-html="renderHtml(document.relevantInformation)"></div>
+					</div>
+				</div>
 
-                <div class="clearfix"></div>
-                <div class="col-xs-12">
-                    <label>Attached documents</label>
-                    <ul style="list-style-type: none;" class="text" >
-                        <li ng-repeat="item in document.informationDocuments">
-                            <strong><a ng-href="http://absch.cbd.int/{{item.url}}" >{{item.name}}</strong>
+				<div class="clearfix"></div>
+				<div class="col-xs-12">
+					<label>Attached documents</label>
+					<ul style="list-style-type: none;" class="text" >
+						<li ng-repeat="item in document.informationDocuments">
+							<strong><a ng-href="http://absch.cbd.int/{{item.url}}" >{{item.name}}</strong>
 						</li>
 						<li ng-repeat="item in document.relevantDocuments">
 							<strong><a ng-href="http://absch.cbd.int/{{item.url}}" >{{item.name}}</strong>
 						</li>
-                    </ul>
-                </div>
+					</ul>
+				</div>
 
-            </div>
+			</div>
 
             <legend class="color-green" style="font-weight:bold;">Further Information</legend>
             <div class="row top-border" style="padding-bottom:20px;">
