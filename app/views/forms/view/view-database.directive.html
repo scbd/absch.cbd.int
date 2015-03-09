@@ -23,7 +23,7 @@
 		<div ng-show="document.website">
 			<label>URL of the website</label>
 			<div class="km-value">
-				<a target="{{target}}" ng-href="{{document.website.url}}">{{document.website.name||document.website.url}}</a>
+				<a target="{{target}}" target="_new" ng-href="{{document.website.url}}">{{document.website.name||document.website.url}}</a>
 				<i ng-show="document.website.name">({{document.website.url}})</i>
 			</div>
 		</div>
