@@ -9,7 +9,6 @@
     font-style: normal;
 }
 
-
 * {
   font-family: sans-serif, Trebuchet MS, Helvetica, "Helvetica Neue" ;
   text-rendering: optimizeLegibility;
@@ -35,6 +34,11 @@ h3{
 .color-litegreen{
     color:#DFF0D8!important;
 }
+.color-lightblue{color:#ccc!important;}
+.color-white{color:#FFF!important;}
+.bg-blue{    background-color:#428bca!important;
+    color:white!important;}
+
 legend{margin-top:20px;margin-bottom:0;border:0;}
 .row{margin-top:0;padding-left:15px;padding-top:15px;padding-bottom:15px;}
 .top-border{border-top:1px solid #777;}

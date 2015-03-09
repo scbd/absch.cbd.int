@@ -59,12 +59,15 @@
 				</div>
 			</div>
 
-
-			<h1>Checkpoint Communiqué: <span  class="color-green">ABSCH-CPC-CA-291922-2</span></h1>
+			<div class="bg-blue" style="padding:5px;">
+				<h1><span class="color-lightblue">Checkpoint Communiqué: <span  class="color-white">ABSCH-CPC-CA-291922-2</span></h1>
+			</div>
 
 			<p style="margin-bottom:30px;">
 				On the basis of the information collected or received by the checkpoint and provided to the ABS Clearing-House pursuant to Article 17 of the Nagoya Protocol, a courtesy copy of the report of the records on the communique will be automatically sent by electronic means to the designated national authorities, the national focal point of the country and the compentent national authorities providing prior informed consent, as appropriate.
 			</p>
+
+			<p>{{document}}</p>
 
 			<legend>General information</legend>
 			<div class="row top-border bg-lightblue">
@@ -117,105 +120,111 @@
 
 					<!-- repeat for each IRCC, if IRCC was included-->
 					<div class="clearfix"></div>
-					<div class="ircc-title color-litegreen">INTERNATIONAL RECOGNIZED CERTIFICATE OF COMPLIANCE:<span class="color-white">ABSCH-IRCC-CA-12345-1</span></div>
-					<div class="ircc-row">
-						<div class="clearfix"></div>
-						<div class="col-xs-6" >
-							<label>Title</label>
-							<div class="text">title</div>
-						</div>
-						<div class="col-xs-6" >
-							<label>Link for more information</label>
-							<div class="text">http://absch.cbd.int/UID</div>
-						</div>
+					<div ng-show="document.permitNotAvailable==false" >
+						<div class="ircc-title color-litegreen">
+							INTERNATIONAL RECOGNIZED CERTIFICATE OF COMPLIANCE:<span class="color-white">ABSCH-IRCC-CA-12345-1</span></div>
+						<div class="ircc-row">
+							<div class="clearfix"></div>
+							<div class="col-xs-6" >
+								<label>Title</label>
+								<div class="text">title</div>
+							</div>
+							<div class="col-xs-6" >
+								<label>Link for more information</label>
+								<div class="text">http://absch.cbd.int/UID</div>
+							</div>
 
-						<div class="clearfix"></div>
-						<div class="col-xs-6" >
-							<label>National Identifiers</label>
-							<div class="text">XXXX</div>
-						</div>
-						<div class="col-xs-3" >
-							<label>Usage</label>
-							<div class="text">commercial/non-commercial</div>
-						</div>
-						<div class="col-xs-3" >
-							<label>Third Party Transfer</label>
-							<div class="text">allowed/not allowed</div>
-						</div>
+							<div class="clearfix"></div>
+							<div class="col-xs-6" >
+								<label>National Identifiers</label>
+								<div class="text">XXXX</div>
+							</div>
+							<div class="col-xs-3" >
+								<label>Usage</label>
+								<div class="text">commercial/non-commercial</div>
+							</div>
+							<div class="col-xs-3" >
+								<label>Third Party Transfer</label>
+								<div class="text">allowed/not allowed</div>
+							</div>
 
-						<div class="clearfix"></div>
-						<div class="col-xs-6" >
-							<label>Issuing Authority</label>
-							<div class="text">CNA</div>
-						</div>
-						<div class="col-xs-6" >
-							<label>PIC Granted To;</label>
-							<div class="text">user</div>
-						</div>
+							<div class="clearfix"></div>
+							<div class="col-xs-6" >
+								<label>Issuing Authority</label>
+								<div class="text">CNA</div>
+							</div>
+							<div class="col-xs-6" >
+								<label>PIC Granted To;</label>
+								<div class="text">user</div>
+							</div>
 
-						<div class="clearfix"></div>
-						<div class="col-xs-12" >
-							<label>Subject Matter</label>
-							<div class="text">keywords</div>
-						</div>
+							<div class="clearfix"></div>
+							<div class="col-xs-12" >
+								<label>Subject Matter</label>
+								<div class="text">keywords</div>
+							</div>
 
-						<div class="clearfix"></div>
-						<div class="col-xs-12" >
-							<label>Additional Information</label>
-							<div class="text">xxxxxx</div>
+							<div class="clearfix"></div>
+							<div class="col-xs-12" >
+								<label>Additional Information</label>
+								<div class="text">xxxxxx</div>
+							</div>
+							<div class="clearfix"></div>
 						</div>
-						<div class="clearfix"></div>
 					</div>
 
 				<!-- if IRCC was NOT included-->
-				<div class="col-xs-12" >
-					<div class="text alert-text" >Internationally Recognized Certificate of Complicance not available.</div>
-				</div>
+				<div ng-show="document.permitNotAvailable==true" >
+					<div class="clearfix"></div>
+					<div class="col-xs-12" >
+						<label>Internationally Recognized Certificate of Complicance (IRCC)</label>
+						<div class="text alert-text" >not available</div>
+					</div>
 
+					<div class="clearfix"></div>
+					<div class="col-xs-4" >
+						<label>Source Country</label>
+						<div class="text">source country</div>
+					</div>
+					<div class="col-xs-4" >
+						<label>Subject Matter</label>
+						<div class="text">keywords</div>
+					</div>
+					<div class="col-xs-4" >
+						<label>Date</label>
+						<div class="text">date 1 or date1 to date 2</div>
+					</div>
 
-				<div class="clearfix"></div>
-				<div class="col-xs-4" >
-					<label>Source Country</label>
-					<div class="text">source country</div>
-				</div>
-				<div class="col-xs-4" >
-					<label>Subject Matter</label>
-					<div class="text">keywords</div>
-				</div>
-				<div class="col-xs-4" >
-					<label>Date</label>
-					<div class="text">date 1 or date1 to date 2</div>
-				</div>
+					<div class="clearfix"></div>
+					<div class="col-xs-12" >
+						<label>Evidence of prior informed consent (PIC)</label>
+						<div class="text">text</div>
+					</div>
+					<div class="clearfix"></div>
+					<div class="col-xs-6" >
+						<label>Grantor of prior informed consent (PIC)</label>
+						<div class="text">contact details</div>
+					</div>
+					<div class="col-xs-6" >
+						<label>Grantee of prior informed consent (PIC)</label>
+						<div class="text">contact details</div>
+					</div>
 
-				<div class="clearfix"></div>
-				<div class="col-xs-12" >
-					<label>Evidence of prior informed consent (PIC)</label>
-					<div class="text">text</div>
-				</div>
-				<div class="clearfix"></div>
-				<div class="col-xs-6" >
-					<label>Grantor of prior informed consent (PIC)</label>
-					<div class="text">contact details</div>
-				</div>
-				<div class="col-xs-6" >
-					<label>Grantee of prior informed consent (PIC)</label>
-					<div class="text">contact details</div>
-				</div>
-
-				<div class="clearfix"></div>
-				<div class="col-xs-12" >
-					<label>Evidence of mutually agreed terms (MAT)</label>
-					<div class="text">text</div>
+					<div class="clearfix"></div>
+					<div class="col-xs-12" >
+						<label>Evidence of mutually agreed terms (MAT)</label>
+						<div class="text">text</div>
+					</div>
 				</div>
 				<!-- end if no IRCC -->
 
 
 				<div class="clearfix"></div>
-				<div class="col-xs-8" >
+				<div class="col-xs-8">
 					<label>Information collected or received relevant to the utilization of genetic resources</label>
 					<div class="text">information on the utilization, type of use</div>
 				</div>
-				<div class="col-xs-4" >
+				<div class="col-xs-4">
 				<label>Information collected or received on:</label>
 					<div class="text">
 						<span ng-show="document.date">{{document.date}}</span>
@@ -471,7 +480,7 @@
 
 			<legend class="color-green" style="font-weight:bold;">Further Information</legend>
             <div class="row top-border" style="padding-bottom:20px;">
-                <div class="col-xs-8">
+                <div class="col-xs-8" style="font-size:12px;">
                     Questions about the checkpoint communique should be addressed to the issuing authority. Additional information about
                     this checkpoint communique may be available in the Access and Benefit-Sharing
                     Clearing House (<a href="http://absch.cbd.int/" style="color:white;">http://absch.cbd.int/</a>).
@@ -480,7 +489,7 @@
                     operation of the Access and Benefit-sharing Clearing-House may be directed to the Secretariat of the Convention on Biological Diversity.
 
                 </div>
-                <div class="col-xs-4">
+                <div class="col-xs-4" style="font-size:12px;">
                     <strong>Secretariat of the Convention on Biological Diversity</strong><br/>
                     413 rue Saint-Jacques, suite 800<br/>
                     Montreal, Québec, H2Y 1N9<br/>
