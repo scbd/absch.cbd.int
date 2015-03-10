@@ -77,7 +77,7 @@
 			<legend>Legal, administrative or policy basis for the competence of the CNA</legend>
 			<div ng-show="contacts">
 				<label>Contact people in the organization</label>
-				<div class="km-value" ng-repeat="contact in contacts">
+				<div class="km-value" ng-repeat="contact in contacts" >
 					<div view-contact-reference ng-model="contact" locale="locale"></div>
 				</div>
 			</div>
@@ -86,7 +86,7 @@
 				<div  class="km-value">
 					<ul>
 						<li ng-repeat="item in absPolicyBasisForCompetencyRef" ng-show="item.document.title" >
-							<a href="/database/{{item.document.header.schema}}/{{item.document.header.identifier}}"><strong>{{item.document.title | lstring}}</strong></a>
+							<a target="_new_win" href="/database/{{item.document.header.schema}}/{{item.document.header.identifier}}"><strong>{{item.document.title | lstring}}</strong></a>
 							<span ng-bind-html="item.document.description | lstring"></span>
 							</li>
 					</ul>
