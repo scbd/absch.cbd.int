@@ -30,40 +30,6 @@ define(["app"], function (app) {
 	//
 	//
 	//============================================================
-  /*
-	function lstring(ltext, locale)
-	{
-		if(!ltext)
-			return "";
-
-		if(angular.isString(ltext))
-			return ltext;
-
-		var sText;
-
-		if(!sText && locale)
-			sText = ltext[locale];
-
-		if(!sText)
-			sText = ltext.en;
-
-		if(!sText) {
-			for(var key in ltext) {
-				sText = ltext[key];
-				if(sText)
-					break;
-			}
-		}
-
-		return sText||"";
-
-	}
-  */
-	//============================================================
-	//
-	//
-	//
-	//============================================================
 	app.filter('nospace', function () {
 	    return function (value) {
 	        return (!value) ? '' : value.replace(/[\s]/g, '');
@@ -283,7 +249,8 @@ define(["app"], function (app) {
 	app.filter("schemaName", [function() {
 
 		return function( schame ) {
-
+			if(!schame)
+				return schame;
 			if(schame.toLowerCase()=="focalpoint"				) return "Focal Point";
 			if(schame.toLowerCase()=="authority"				) return "Competent National Authority";
 			if(schame.toLowerCase()=="contact"				) return "Contact";
@@ -312,6 +279,8 @@ define(["app"], function (app) {
 
 		return function( schame ) {
 
+			if(!schame)
+				return schame;
 			//if(schame.toLowerCase()=="focalpoint"				) return "ABS National Focal Point";
 			if(schame.toLowerCase()=="authority"				) return "mdi-action-account-box";
 			//if(schame.toLowerCase()=="contact"				) return "Contact";
@@ -339,6 +308,9 @@ define(["app"], function (app) {
 	app.filter("schemaShortName", [function() {
 
 		return function( schame ) {
+
+			if(!schame)
+				return schame;
 
 			if(schame.toLowerCase() =="focalpoint"				) return "FP";
 			if(schame.toLowerCase() =="authority"				) return "CNA";
@@ -370,6 +342,9 @@ define(["app"], function (app) {
 	app.filter("mapSchema", [function() {
 
 		return function( schame ) {
+
+			if(!schame)
+				return schame;
 
 			if(schame.toLowerCase()=="focalpoint"				    ) return "FP";
 			if(schame.toLowerCase()=="authority"				    ) return "CNA";
@@ -478,4 +453,14 @@ define(["app"], function (app) {
 			return text;
 		};
 	});
+
+	app.filter('groupBy',["underscore","$parse",function(_,$parse) {
+		var cacheMap = {};
+		return _.memoize(function(items, field) {
+			var getter = $parse(field);
+			return _.groupBy(items, function(item) {
+				return getter(item);
+			});
+		});
+	}]);
 });
