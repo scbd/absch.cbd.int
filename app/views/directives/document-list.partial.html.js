@@ -138,7 +138,7 @@ define(['app',
               $scope.documents.forEach(function(doc) {
                 $scope.transformedDocuments.push(transformDocument(doc));
               });
-              addTooltipEvents();
+            //   addTooltipEvents();
               // $timeout(function(){
               //     $compile($('.blaisePopOver').contents())($scope);
               // },500);
