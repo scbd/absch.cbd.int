@@ -82,16 +82,14 @@
 				</div>
 			</div>
 			<div ng-show="absPolicyBasisForCompetencyRef">
-				<label>Reference to the legal, administrative or policy measure ABSCH record</label>
-				<div class="reference-select">
-					<table class="table table-hover table-striped">
-						<tr ng-repeat="item in absPolicyBasisForCompetencyRef" >
-							<td>
-								<strong>{{item.document.title | lstring}}</strong>
-								<div ng-bind-html="item.document.description | lstring"></div>
-							</td>
-						</tr>
-					</table>
+				<label>Reference to the legal, administrative or policy measure</label>
+				<div  class="km-value">
+					<ul>
+						<li ng-repeat="item in absPolicyBasisForCompetencyRef" ng-show="item.document.title" >
+							<a href="/database/{{item.document.header.schema}}/{{item.document.header.identifier}}"><strong>{{item.document.title | lstring}}</strong></a>
+							<span ng-bind-html="item.document.description | lstring"></span>
+							</li>
+					</ul>
 				</div>
 			</div>
 
