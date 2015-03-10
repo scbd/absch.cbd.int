@@ -65,7 +65,8 @@ app.directive('taskId', function () {
 											msg = "Record rejected successfully";
 										}
                                         $scope.$emit('taskAction',$scope.document, resultData);
-										//console.log($scope.parentWatcher);
+										
+										//TODO: call proper event on parent instead going by parent object.
 										if($scope.parentWatcher=="dashboard")
 											$scope.$emit("updateWorkflowList");//.$parent.load();
 										else if($scope.parentWatcher=="documents")
@@ -79,7 +80,7 @@ app.directive('taskId', function () {
 								$element.find('#spiner').css('display', 'none');
 								$scope.isUpdating = false;
 							}).finally(function(){
-
+								$scope.isUpdating = false;
 							});
 						};
 						$scope.user = function() {

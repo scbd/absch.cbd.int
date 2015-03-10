@@ -1,7 +1,7 @@
-﻿define(['app'], function (app) {
+﻿define(['app','underscore','/app/js/common.js'], function (app,_) {
 
-"use strict";
-app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm", "underscore","$route", function ($scope, $timeout, IWorkflows, realm, _, $route)
+app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm", "$route","$filter","commonjs",'$parse','$element',
+ 	function ($scope, $timeout, IWorkflows, realm, $route, $filter,commonjs,$parse,$element)
 		{
 
 			$scope.options = {
@@ -88,13 +88,12 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
 							workflow.activities.forEach(function(activity){
 
 								//if(isAssignedToMe(activity)) {
-									tasks.push({ workflow : workflow, activity : activity});
+									tasks.push({ workflow : workflow, activity : activity, identifier: workflow.data.identifier});
 							//	}
 							});
 						});
-
-						$scope.tasks = tasks;
-
+						$scope.taskLists = $filter("orderBy")(tasks,'workflow.createdOn',true);
+						$scope.taskGroupBy = 'workflow._id';
 						//nextLoad = $timeout(load, 15*1000);
 					});
 			}
@@ -158,6 +157,53 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
 			$scope.$on("updateWorkflowList", function(evt,data){
 
 				$timeout(function(){ load(); }, 8000);
+			});
+
+			$scope.getGroupTaskDetails = function(tasks){
+				// console.log($filter("orderBy")(tasks,'createdOn'));
+				 //console.log(_.last(_.sortBy(tasks,'createdOn')));
+				// console.log(commonjs.underscoreSort(tasks,'createdOn'))
+				if(tasks)
+					return _.last(_.sortBy(tasks,'createdOn'));
+				return '';
+			}
+
+			$scope.$watch('taskGroupBy', function(newVal,oldVal){
+
+				if(newVal && newVal!=oldVal && $scope.taskLists ){
+					$element.find('#taskList').fadeOut();
+                    $timeout(function(){
+                        $scope.tasks = [];
+                        if(newVal=='workflow.data.identifier'){
+                            if(!$scope.tasksGroup){
+                                $scope.tasksGroup=[]
+                                var taskList = angular.copy($scope.taskLists);
+                                _.each(taskList, function(item){
+                                    var task = _.find($scope.tasksGroup, {identifier : item.workflow.data.identifier});
+                                    if(!task || task.length==0){
+                                        $scope.tasksGroup.push(item);
+                                    }
+                                    else{
+                                        if(!task.workflowHistory){
+                                            task.workflowHistory=[];
+                                        }
+                                        task.workflowHistory.push(item)
+                                    }
+                                });
+                            }
+                            $scope.tasks = $scope.tasksGroup;
+                        }
+                        else
+                        {
+                            $scope.tasks = $scope.taskLists;
+                        }
+                    },200);
+					// var getter = $parse(newVal);
+					// $scope.tasks =  _.groupBy($scope.taskLists, function(item) {
+					// 	return getter(item);
+					// });
+					$element.find('#taskList').fadeIn();
+				}
 			})
 
 		}]);
