@@ -249,7 +249,7 @@ function lstring(ltext, locale)
 app.filter("uniqueID", ['$filter', '$q','$http', function( $filter, $q, $http) {
 		var cacheMap = {};
 
-		return function(term) {
+		return function(term,revision) {
 
 			if(!term)
 				return "";
@@ -281,7 +281,7 @@ app.filter("uniqueID", ['$filter', '$q','$http', function( $filter, $q, $http) {
 
                 var unique = 'ABSCH-' + $filter("schemaShortName")($filter("lowercase")(document.type)) +
                         (government != '' ? '-' + $filter("uppercase")(government) : '') +
-                        '-' + document.documentID + '-' + document.revision;
+                        '-' + document.documentID +  (revision==false ? '' : ('-' + document.revision));
 				cacheMap[term.identifier] = unique;
 
 				return unique;

@@ -109,9 +109,9 @@
                     <div class="col-xs-6">
                         <div class="text">
 							{{cp.name|lstring}}<br/>
-							{{cp.government.identifier|term}}<br/>
 							<span ng-show="cp.jurisidction">{{cp.jurisidction|term}}<br/></span>
-							<span ng-bind-html="renderHtml(cp.relevantInformation)"/>
+							<span ng-bind-html="renderHtml(cp.relevantInformation)"/></span>
+							<span>https://absch.cbd.int/database/{{cp.header|uniqueID:false}}</span>
 						</div>
                     </div>
                     <div class="col-xs-6">
