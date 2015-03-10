@@ -111,7 +111,7 @@
 							{{cp.name|lstring}}<br/>
 							<span ng-show="cp.jurisidction">{{cp.jurisidction|term}}<br/></span>
 							<span ng-bind-html="renderHtml(cp.relevantInformation)"/></span>
-							<span>https://absch.cbd.int/database/{{cp.header|uniqueID:false}}</span>
+							<!-- <span>https://absch.cbd.int/database/{{cp.header|uniqueID:false}}</span> -->
 						</div>
                     </div>
                     <div class="col-xs-6">
@@ -123,8 +123,11 @@
 
             <legend>To: Recipients</legend>
             <div class="row top-border bg-lightblue">
-                <div class="col-xs-4" ng-repeat="contact in emailList">
-                    <div class="text"><div view-contact-reference ng-model="contact" locale="locale"></div></div>
+                <div ng-repeat="contact in emailList">
+                    <div ng-class="{'row': ($index+1)%4==0}">    </div>
+                    <div class="col-xs-4" >
+                        <div class="text"><div view-contact-reference ng-model="contact" locale="locale"></div></div>
+                    </div>
                 </div>
             </div>
 
@@ -134,75 +137,21 @@
 
                 <!-- repeat for each IRCC, if IRCC was included-->
                 <div class="clearfix"></div>
-                <div ng-show="document.permitNotAvailable==false || document.permit">
-                    <div class="ircc-row" ng-repeat="permit in document.permit">
-						<div class="ircc-title color-litegreen">
-							INTERNATIONAL RECOGNIZED CERTIFICATE OF COMPLIANCE:<span class="color-white">{{permit.document.header | uniqueID}}</span>
-						</div>
-						<div class="clearfix"></div>
-                        <div class="col-xs-6">
-                            <label>Title</label>
-                            <div class="text">{{permit.document.title|lstring}}</div>
+                <div class="col-xs-8">
+                    <label>INTERNATIONAL RECOGNIZED CERTIFICATE(s) OF COMPLIANCE</label>
+                    <div class="text" >
+                        <div ng-show="document.permitNotAvailable==false || document.permit">
+                            <ul>
+                                <li ng-repeat="permit in document.permit" class="ng-scope">
+                                    <a href="https://absch.cbd.int/database/record/{{permit.document.header | uniqueID}}" >
+                                        {{permit.document.header | uniqueID}}
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
-                        <div class="col-xs-6">
-                            <label>Link for more information</label>
-                            <div class="text"><a style="style:blue" ng-href="http://absch.cbd.int/database/{{permit.document.header | uniqueID}}">{{permit.document.header | uniqueID}}</a>
-                            </div>
-                        </div>
-
-                        <div class="clearfix"></div>
-                        <div class="col-xs-12">
-                            <label>National Identifiers</label>
-                            <div class="text" ng-bind-html="renderHtml(permit.document.nationalReferences)"></div>
-                        </div>
-                        <div class="col-xs-3">
-                            <label>Usage</label>
-                            <div class="text">
-                                <li ng-repeat="term in permit.document.usage">{{term|term}}</li>
-                            </div>
-                        </div>
-                        <div class="col-xs-3">
-                            <label>Third Party Transfer</label>
-                            <div class="text" ng-show="permit.document.thirdPartyTransferConditions">allowed</div>
-                            <div class="text" ng-show="!permit.document.thirdPartyTransferConditions">not allowed</div>
-                        </div>
-
-                        <div class="clearfix"></div>
-                        <div class="col-xs-6">
-                            <label>Issuing Authority</label>
-                            <div class="text">
-                                <div view-contact-reference ng-model="permit.document.authority" locale="locale"></div>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <label>PIC Granted To;</label>
-
-                            <div ng-show="!permit.document.providerConfidential" ng-repeat="provider in permit.document.providers">
-                                <div class="text">
-                                    <div view-contact-reference ng-model="provider" locale="locale"></div>
-                                </div>
-                                <div ng-show="permit.document.providerConfidential" class="confidential">Confidential information</div>
-                            </div>
-                        </div>
-
-                        <div class="clearfix"></div>
-                        <div class="col-xs-12">
-                            <label>Subject Matter</label>
-                            <div class="text">
-                                <ul>
-                                    <li ng-repeat="term in permit.document.keywords">{{term|term}} </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="clearfix"></div>
-                        <div class="col-xs-12">
-                            <label>Additional Information</label>
-                            <div class="text" ng-bind-html="renderHtml(document.usageDescription)"></div>
-                        </div>
-                        <div class="clearfix"></div>
                     </div>
                 </div>
+
 
                 <!-- if IRCC was NOT included-->
                 <div ng-show="document.permitNotAvailable==true">
@@ -312,7 +261,7 @@
             <div class="row top-border" style="padding-bottom:20px;">
                 <div class="col-xs-8" style="font-size:12px;">
                     Questions about the checkpoint communique should be addressed to the issuing authority. Additional information about this checkpoint communique may be available in the Access and Benefit-Sharing Clearing House (<a href="http://absch.cbd.int/"
-                    style="color:white;">http://absch.cbd.int/</a>).
+                    >http://absch.cbd.int/</a>).
                     <br>
                     <br> Questions about the Nagoya Protocol on Access and Benefit-sharing or the operation of the Access and Benefit-sharing Clearing-House may be directed to the Secretariat of the Convention on Biological Diversity.
 
