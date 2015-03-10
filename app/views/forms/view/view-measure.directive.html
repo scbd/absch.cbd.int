@@ -135,7 +135,17 @@
 		</div>
 		<div ng-show="linkedMeasures">
 			<label>Related measures</label>
-			<div class="reference-select">
+			<div  class="km-value">
+				<ul>
+					<li ng-repeat="item in linkedMeasures" >
+						<a target="_new_win" href="/database/{{item.document.type}}/{{item.document.documentID}}"><strong>{{item.document.title | lstring}}</strong></a>
+						<span ng-bind-html="item.document.summary | lstring"></span>
+					</li>
+				</ul>
+			</div>
+
+
+			<!-- <div class="reference-select">
 				<table class="table table-hover table-striped">
 					<tr ng-repeat="item in registeredMeasures"  ng-hide="item.errorCode">
 						<td>
@@ -145,7 +155,7 @@
 						</td>
 					</tr>
 				</table>
-			</div>
+			</div> -->
 			<!-- <div class="km-value" >
 				<ul>
 					<li ng-repeat="item in linkedMeasures">
@@ -170,7 +180,16 @@
 
 			<div ng-show="amendedMeasures">
 				<label>Amended regulations</label>
-				<div class="reference-select">
+
+				<div  class="km-value">
+				<ul>
+					<li ng-repeat="item in amendedMeasures" >
+						<a target="_new_win" href="/database/{{item.document.type}}/{{item.document.documentID}}"><strong>{{item.document.title | lstring}}</strong></a>
+						<span ng-bind-html="item.document.summary | lstring"></span>
+					</li>
+				</ul>
+				</div>
+				<!-- <div class="reference-select">
 					<table class="table table-hover table-striped">
 						<tr ng-repeat="item in amendedMeasures" >
 							<td>
@@ -179,7 +198,7 @@
 							</td>
 						</tr>
 					</table>
-				</div>
+				</div> -->
 			</div>
 		</div>
 
