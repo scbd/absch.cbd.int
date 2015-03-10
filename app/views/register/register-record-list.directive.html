@@ -46,6 +46,9 @@
   .toggleUpdated{
        background-color: #eeefff;
   }
+  .km-value{
+background-color:#eee!important;      
+  }
 </style>
 
 
@@ -72,7 +75,7 @@
     <tbody ng-repeat="record in (filteredRecords = (records | filter:schemaFilter | filter:statusFilter | filter:keywords | orderBy:orderBy))">
 
 
-    <tr id="record{{record.identifier}}" >
+    <tr id="record{{record.identifier}}" ng-class="{'bg-grey': displayDetails||displayRequest}" >
 
         <td>
 
@@ -146,7 +149,7 @@
     </tr>
      <tr ng-show="displayDetails || displayRequest" style="border:0!important;background-color:inherit!important;" >
         <!-- <td style="border:0;background-color:inherit!important;">&nbsp;</td> -->
-        <td colspan="5" style="border:0!important;background-color:inherit!important;">
+        <td colspan="5" style="border:0!important;" ng-class="{'bg-grey': displayDetails||displayRequest}">
 
             <div class="pull-right" style="z-index:100;padding-top:18px;padding-right:20px;cursor:pointer;">
                 <i class="glyphicon glyphicon-remove-circle" style="font-size:20px;" ng-click="displayDetails=false;displayRequest=false;"></i>
