@@ -16,7 +16,7 @@ app.directive("viewContactReference", [function () {
 			$scope.isPerson = function() {
 
 				var doc = $scope.document;
-	
+
 				if(!doc)
 					return false;
 
