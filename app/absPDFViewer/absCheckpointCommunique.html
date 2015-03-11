@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="ico/favicon.png">
 
     <!-- Bootstrap core CSS -->
-    <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="../libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="../css/communiquePDF.css" rel="stylesheet">
     <link rel="stylesheet" href="../libs/font-awesome/css/font-awesome.min.css">
@@ -143,7 +143,7 @@
                         <div ng-show="document.permitNotAvailable==false || document.permit">
                             <ul>
                                 <li ng-repeat="permit in document.permit" class="ng-scope">
-                                    <a href="https://absch.cbd.int/database/record/{{permit.document.header | uniqueID}}" >
+                                    <a href="https://absch.cbd.int/database/{{permit.document.header | uniqueID}}" >
                                         {{permit.document.header | uniqueID}}
                                     </a>
                                 </li>
@@ -276,7 +276,7 @@
                 </div>
             </div>
 
-            <div ng-repeat="permit  in document.permit">
+            <div ng-repeat="permit  in document.permit" style="page-break-before:always">
                 <div permit document-id="permit.identifier"></div>
             </div>
 
