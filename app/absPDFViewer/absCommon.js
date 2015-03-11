@@ -1,3 +1,4 @@
+var app = angular.module('appCommon',[]);
 
 app.directive("viewContact", [function () {
 	return {
@@ -53,7 +54,7 @@ app.directive("viewContactReference", [function () {
 }]);
 
 app.filter("lstring", function() {
-		return lstring;
+	return lstring;
 });
 
 app.filter("yesno", function(){
@@ -85,7 +86,7 @@ app.filter("term", ["$http", function($http) {
 			if(!term)
 				return "";
 
-			if(term && app.isString(term))
+			if(term && angular.isString(term))
 				term = { identifier : term };
 
 			locale = locale||"en";
@@ -113,34 +114,60 @@ app.filter("term", ["$http", function($http) {
 }]);
 
 
+//============================================================
+//
+//
+//
+//============================================================
+app.filter("formatDate", function(){
+	return function(date,formart){
+		if(formart== undefined)
+			formart = 'DD MMM YYYY';
+		return moment(date).format(formart);
+	}
+});
+
+//============================================================
+//
+//
+//
+//============================================================
+app.filter("formatDateWithTime", function(){
+	return function(date,formart){
+		if(formart== undefined)
+			formart = 'MM/DD/YYYY hh:mm';
+		return moment(date).format(formart);
+	}
+});
+
 
 function lstring(ltext, locale)
-	{
-		if(!ltext)
-			return "";
+{
+	if(!ltext)
+		return "";
 
-		if(app.isString(ltext))
-			return ltext;
+	if(angular.isString(ltext))
+		return ltext;
 
-		var sText;
+	var sText;
 
-		if(!sText && locale)
-			sText = ltext[locale];
+	if(!sText && locale)
+		sText = ltext[locale];
 
-		if(!sText)
-			sText = ltext.en;
+	if(!sText)
+		sText = ltext.en;
 
-		if(!sText) {
-			for(var key in ltext) {
-				sText = ltext[key];
-				if(sText)
-					break;
-			}
+	if(!sText) {
+		for(var key in ltext) {
+			sText = ltext[key];
+			if(sText)
+				break;
 		}
-
-		return sText||"";
-
 	}
+
+	return sText||"";
+
+}
 	//============================================================
 	//
 	//
@@ -167,132 +194,144 @@ function lstring(ltext, locale)
 		}
 	});
 
+app.filter("uniqueID", ['$filter', '$q','$http', function( $filter, $q, $http) {
+		var cacheMap = {};
 
-	function lstring(ltext, locale)
-		{
-			if(!ltext)
+		return function(term) {
+
+			if(!term)
 				return "";
 
-			if(angular.isString(ltext))
-				return ltext;
+			var document;
 
-			var sText;
+			if(term ){
+				if(cacheMap[term.identifier])
+					return cacheMap[term.identifier] ;
 
-			if(!sText && locale)
-				sText = ltext[locale];
+				document = $http.get('/api/v2013/documents/' +  term.identifier +'?info=true');
+			}
 
-			if(!sText)
-				sText = ltext.en;
 
-			if(!sText) {
-				for(var key in ltext) {
-					sText = ltext[key];
-					if(sText)
-						break;
+			if(!document)
+				return;
+
+			cacheMap[term.identifier] = $q.when(document).then(function(document) {
+
+				document = document.data;
+
+				var government = ''
+				if(document.government)
+					government = document.government.identifier;
+				else if(document.metadata && document.metadata.government)
+					government = document.metadata.government;
+				else if(document.body && document.body.government)
+					government = document.body.government.identifier;
+
+				var unique = 'ABSCH-' + $filter("schemaShortName")($filter("lowercase")(document.type)) +
+						(government != '' ? '-' + $filter("uppercase")(government) : '') +
+						'-' + document.documentID;
+				cacheMap[term.identifier] = unique;
+
+				return unique;
+
+			}).catch(function(){
+
+				cacheMap[term.identifier] = term.identifier;
+
+				return term.identifier;
+
+			});
+		};
+	}]);
+
+
+app.filter("schemaShortName", [function() {
+
+	return function( schame ) {
+
+		if(schame.toLowerCase() =="focalpoint"				) return "FP";
+		if(schame.toLowerCase() =="authority"				) return "CNA";
+		if(schame.toLowerCase() =="contact"					) return "CON";
+		if(schame.toLowerCase() =="database"				) return "NDB";
+		if(schame.toLowerCase() =="resource"				) return "VLR";
+		if(schame.toLowerCase() =="organization"			) return "ORG";
+		if(schame.toLowerCase() =="measure" 				) return "MSR";
+		if(schame.toLowerCase() =="abscheckpoint"			) return "CP";
+		if(schame.toLowerCase() =="abscheckpointcommunique"	) return "CPC";
+		if(schame.toLowerCase() =="abspermit"				) return "IRCC";
+		if(schame.toLowerCase() =="statement"				) return "ST";
+		if(schame.toLowerCase() =="notification"			) return "NT";
+		if(schame.toLowerCase() =="meeting"					) return "MT";
+		if(schame.toLowerCase() =="pressrelease"			) return "PR";
+		if(schame.toLowerCase() =="meetingdocument"    		) return "MTD";
+
+
+		return schame;
+	};
+}]);
+
+
+
+app.directive("permit", [function () {
+	return {
+			restrict   : "EAC",
+			templateUrl: "absPermit-directive.html",
+			scope: {
+				documentId: "="
+			},
+			controller: ['$scope','$http','$location','$filter',
+				function($scope,$http,$location, $filter) {
+
+				var sLocale      = "en";
+				$scope.locale = sLocale;
+
+				$scope.load = function(){
+					$http.get('/api/v2013/documents/' +  $scope.documentId, { }).success(function(data){
+
+							$scope.document = data;
+							var usageDetails = []
+
+							if($scope.document.usage){
+								$scope.document.usage.forEach(function(usage){
+
+									$scope.getTerm(usage.identifier).success(function(data){
+															usageDetails.push( data);
+														});
+								});
+							}
+							$scope.document.usage = usageDetails;
+							$scope.getTerm($scope.document.government.identifier)
+								.success(function(data){
+										$scope.document.government = data;
+									});
+					});
+
+					$http.get('/api/v2013/documents/'+$scope.documentId+'/versions?body=true&cache=true')
+								.success(function(data){
+										$scope.versions  = data.Items;
+										console.log(data);
+					});
+
+					$http.get('/api/v2013/documents/' +  $scope.documentId + '?info', { }).success(function(data){
+							$scope.documentInfo = data;
+					});
 				}
-			}
+				$scope.renderHtml = function(html_code)
+				{
+					//console.log(($filter("lstring")(html_code,$scope.locale)))
+					return ($filter("lstring")(html_code,$scope.locale));
+				};
 
-			return sText||"";
+				$scope.$watch('documentId', function(newVal,oldVal){
+					if(newVal)
+						$scope.load();
+				})
 
-		}
-		//============================================================
-		//
-		//
-		//
-		//============================================================
-		app.filter("formatDate", function(){
-			return function(date,formart){
-				if(formart== undefined)
-					formart = 'DD MMM YYYY';
-				return moment(date).format(formart);
-			}
-		});
-
-		//============================================================
-		//
-		//
-		//
-		//============================================================
-		app.filter("formatDateWithTime", function(){
-			return function(date,formart){
-				if(formart== undefined)
-					formart = 'MM/DD/YYYY hh:mm';
-				return moment(date).format(formart);
-			}
-		});
-
-	app.filter("uniqueID", ['$filter', '$q','$http', function( $filter, $q, $http) {
-			var cacheMap = {};
-
-			return function(term) {
-
-				if(!term)
-					return "";
-
-				var document;
-
-				if(term ){
-					if(cacheMap[term.identifier])
-						return cacheMap[term.identifier] ;
-
-					document = $http.get('/api/v2013/documents/' +  term.identifier +'?info=true');
+				$scope.getTerm = function(identifier)
+				{
+					return	 $http.get('/api/v2013/thesaurus/terms/' +  identifier, { });
 				}
 
-
-				if(!document)
-					return;
-
-				cacheMap[term.identifier] = $q.when(document).then(function(document) {
-
-					document = document.data;
-
-					var government = ''
-					if(document.government)
-						government = document.government.identifier;
-					else if(document.metadata && document.metadata.government)
-						government = document.metadata.government;
-					else if(document.body && document.body.government)
-						government = document.body.government.identifier;
-
-					var unique = 'ABSCH-' + $filter("schemaShortName")($filter("lowercase")(document.type)) +
-							(government != '' ? '-' + $filter("uppercase")(government) : '') +
-							'-' + document.documentID;
-					cacheMap[term.identifier] = unique;
-
-					return unique;
-
-				}).catch(function(){
-
-					cacheMap[term.identifier] = term.identifier;
-
-					return term.identifier;
-
-				});
-			};
-		}]);
-
-
-			app.filter("schemaShortName", [function() {
-
-			return function( schame ) {
-
-				if(schame.toLowerCase() =="focalpoint"				) return "FP";
-				if(schame.toLowerCase() =="authority"				) return "CNA";
-				if(schame.toLowerCase() =="contact"					) return "CON";
-				if(schame.toLowerCase() =="database"				) return "NDB";
-				if(schame.toLowerCase() =="resource"				) return "VLR";
-				if(schame.toLowerCase() =="organization"			) return "ORG";
-				if(schame.toLowerCase() =="measure" 				) return "MSR";
-				if(schame.toLowerCase() =="abscheckpoint"			) return "CP";
-				if(schame.toLowerCase() =="abscheckpointcommunique"	) return "CPC";
-				if(schame.toLowerCase() =="abspermit"				) return "IRCC";
-				if(schame.toLowerCase() =="statement"				) return "ST";
-				if(schame.toLowerCase() =="notification"			) return "NT";
-				if(schame.toLowerCase() =="meeting"					) return "MT";
-				if(schame.toLowerCase() =="pressrelease"			) return "PR";
-				if(schame.toLowerCase() =="meetingdocument"    		) return "MTD";
-
-
-				return schame;
-			};
-		}]);
+			}]
+		};
+	}]);

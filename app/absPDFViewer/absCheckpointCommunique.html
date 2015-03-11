@@ -17,8 +17,9 @@
     <script src="../libs/barcode-39.js/barcode-39.min.js"></script>
 
     <script src="../libs/angular/angular.min.js"></script>
+	<script src="../libs/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="absCheckpointCommunique.html.js"></script>
-    <!-- <script src="absCommon.js"></script>-->
+    <script src="absCommon.js"></script>
 
     <style type="text/css">
         #watermark {
@@ -39,7 +40,6 @@
 <body>
     <div ng-app="ngapp" class="main-nav">
         <div ng-controller="printPermit" style="width:1000px;">
-
             <div class="row" style="padding-bottom:30px;">
                 <div class="col-xs-1">
                 </div>
@@ -276,8 +276,13 @@
                 </div>
             </div>
 
+            <div ng-repeat="permit  in document.permit">
+                <div permit document-id="permit.identifier"></div>
+            </div>
+
         </div>
+
     </div>
-</body>
+    </body>
 
 </html>
