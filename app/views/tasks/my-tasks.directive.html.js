@@ -55,7 +55,7 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
 			$scope.tasks = null;
 			$scope.load = load;
 
-			$scope.sortTerm = 'activity.createdOn';
+			$scope.sortTerm = 'workflow.createdOn';
 			$scope.orderList = true;
 	       	 //==================================
 	       	 $scope.sortTable = function (term) {
