@@ -1,4 +1,4 @@
-define(['app','angular-form-controls'], function (app) {
+define(['app','angular-form-controls','/app/views/directives/workflow-history-directive.html.js'], function (app) {
 
     app.directive('workflowStdButtons',["$q", "$timeout","underscore",
      function($q, $timeout, _){
@@ -154,6 +154,8 @@ define(['app','angular-form-controls'], function (app) {
 								$scope.security.canSaveDraft = allowed
 							});
 						})
+
+                        $scope.documentUID = document.header.identifier;
 
 						return $q.all([a,b]);
 
@@ -481,17 +483,7 @@ define(['app','angular-form-controls'], function (app) {
 
                 }
 
-                $scope.showPreviousHistory = function(){
-                    $scope.showHistory = true;
-                    IWorkflows.query({"data.identifier": $scope.getDocumentFn().header.identifier})
-                    .then(function(data){
-                        $scope.workflowHistory = data;
-                    });
-                }
 
-                $scope.formatWID = function (workflowID) {
-                    return workflowID ? workflowID.replace(/(?:.*)(.{3})(.{4})$/g, "W$1-$2") : "";
-                };
 
 			}]
     	};
