@@ -274,11 +274,14 @@
                                     <div class="row fullBorder " ng-show="showIRCC">
                                         <div class="col-xs-12">
                                             <div class="row table-msr">
-                                                <div class="col-lg-3 col-md-3 col-xs-3 tableheader" ng-click="sortPermit='title_t';reversePermit=!reversePermit">name
+                                                <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortPermit='title_t';reversePermit=!reversePermit">name
                                                     <i class="fa" ng-class="{'fa-caret-up':(sortPermit=='title_t' && reversePermit),'fa-caret-down':(sortPermit=='title_t' && !reversePermit)}"></i>
                                                 </div>
-                                                <div class="col-lg-3 col-md-3 col-xs-3 tableheader" ng-click="sortPermit='informedConsents_CEN_ss';reversePermit=!reversePermit">issued to
+                                                <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortPermit='informedConsents_CEN_ss';reversePermit=!reversePermit">issued to
                                                     <i class="fa" ng-class="{'fa-caret-up':(sortPermit=='informedConsents_CEN_ss' && reversePermit),'fa-caret-down':(sortPermit=='informedConsents_CEN_ss' && !reversePermit)}"></i>
+                                                </div>
+                                                <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortPermit='authority_s';reversePermit=!reversePermit">CNA
+                                                    <i class="fa" ng-class="{'fa-caret-up':(sortPermit=='authority_s' && reversePermit),'fa-caret-down':(sortPermit=='authority_s' && !reversePermit)}"></i>
                                                 </div>
                                                 <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortPermit='keywords_CEN_ss';reversePermit=!reversePermit">subject matter
                                                     <i class="fa" ng-class="{'fa-caret-up':(sortPermit=='keywords_CEN_ss' && reversePermit),'fa-caret-down':(sortPermit=='keywords_CEN_ss' && !reversePermit)}"></i>
@@ -293,13 +296,16 @@
                                             <div class="row table-hover table-msr" ng-repeat="permit in absPermit = (absch_nfp|filter:isPermit|orderBy:sortPermit:reversePermit)">
                                                 <div class="row border">
                                                     <div ng-click="displayDetails=!displayDetails;showDetails(permit)" class="row table-row">
-                                                        <div class="col-lg-3 col-md-3 col-xs-3">
+                                                        <div class="col-lg-2 col-md-2 col-xs-2">
                                                             {{permit.title_t}}
                                                             <i class="fa fa-refresh fa-spin" ng-show="displayDetails&& !permit.data" />
                                                         </div>
-                                                        <div class="col-lg-3 col-md-3 col-xs-3">
+                                                        <div class="col-lg-2 col-md-2 col-xs-2">
                                                             <div class="confidential" ng-show="!permit.informedConsents_CEN_ss">Confidential information</div>
                                                             {{permit.informedConsents_CEN_ss}}
+                                                        </div>
+                                                        <div class="col-lg-2 col-md-2 col-xs-2">
+                                                            {{parseJSON(permit.authority_s).firstName + ' ' + parseJSON(permit.authority_s).lastName}}
                                                         </div>
                                                         <div class="col-lg-2 col-md-2 col-xs-2">
                                                             <div class="confidential" ng-show="!permit.keywords_CEN_ss">Confidential information</div>
