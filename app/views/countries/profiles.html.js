@@ -1,4 +1,4 @@
- define(['app','underscore',
+ define(['app','underscore','linqjs',
    '/app/views/forms/view/record-loader.directive.html.js',
    '/app/views/directives/document-list.partial.html.js',
    '/app/views/forms/view/view-abs-checkpoint.directive.js',
@@ -17,21 +17,34 @@
    '/app/js/common.js', 'jqvmap', 'jqvmapworld',
    '/app/views/countries/country-map-list-directive.html.js',
    './countries-commonJS.js'
- ], function(app,_) {
+ ], function(app, _, linqjs) {
 
    app.controller("ProfileController", ["$scope", "authHttp", "$routeParams", "linqjs", "$filter", "realm",
                 "commonjs", "$q", '$element', '$timeout','countriescommonjs','IStorage',
      function($scope, $http, $routeParams, linqjs, $filter, realm, commonjs, $q,
                 $element, $timeout, countriescommonjs, IStorage) {
 
+
        function resetList(){
-           $scope.showCPCSent = true;
-           $scope.showIRCC = true;
-           $scope.showMSR = true;
-           $scope.showContacts = true;
-           $scope.showCPCRecv = true;
+            $scope.showCPCSent = true;
+            $scope.showIRCC = true;
+            $scope.showMSR = true;
+            $scope.showContacts = true;
+            $scope.showCPCRecv = true;
+
+            $scope.sortMeasure='title_t';
+            $scope.reverseMeasure=false;
+            $scope.sortPermit='title_t';
+            $scope.reversePermit=false;
+            $scope.sortCPC='title_t';
+            $scope.reverseCPC=false;
+            $scope.sortCPCReceived='title_t'
+            $scope.reverseCPCReceived=false;
+            $scope.filterSchema=null;
        }
+
        resetList();
+
        $scope.show = function(type) {
          if (type=='map' || type=='list') {
            $element.find('#countryDetails').slideUp('slow');
@@ -95,7 +108,7 @@
             .then(function(results) {
              $scope.absch_nfp = results[0].data.response.docs;
              $scope.cpcReceived = results[1].data.response.docs;
-              console.log($scope.absch_nfp);
+              //console.log($scope.absch_nfp);
               $scope.absch_nfp.forEach(function(document){
 
                   if(document.schema_s == "focalPoint" ){
@@ -147,7 +160,7 @@
                     document.geneticRessourceUsers = $scope.parseJSON(document.geneticRessourceUsers_s);
                   }
               });
-
+              $scope.getFacets($scope.absch_nfp);
 
            });
          }
@@ -223,7 +236,7 @@
 
             $scope.type = type;
             if(type=='ratified')
-                $scope.searchFilter=countriescommonjs.isRatified;
+                $scope.searchFilter=(countriescommonjs.isNPParty);
             else if(type=='inbetweenParty')
                 $scope.searchFilter=countriescommonjs.isInbetweenParty;
             else if(type=='signatory')
@@ -266,6 +279,23 @@
       $scope.isCheckpointCommuniqueReceived = function(entity){
           return entity && entity.schema_s == "absCheckpointCommunique"
           && (entity.originCountries_ss==$scope.code  || entity.permitSourceCountry_ss==$scope.code);
+      }
+
+      $scope.isCheckpoint = function(entity){
+
+          return entity && entity.schema_s == "absCheckpoint";
+      }
+      $scope.isFocalpoint = function(entity){
+
+          return entity && entity.schema_s == "focalPoint";
+      }
+      $scope.isDatabase = function(entity){
+
+          return entity && entity.schema_s == "database";
+      }
+      $scope.isCNA = function(entity){
+
+          return entity && entity.schema_s == "authority";
       }
 
        $scope.showDetails = function(document){

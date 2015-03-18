@@ -11,10 +11,11 @@ define(['app'], function(app) {
 
         isInbetweenParty :function(entity) {
           //$scope.selected_circle = "inbetweenParties";
-        //   console.log(entity);
-          return entity && (entity.isInbetweenParty ||
-              ( entity.treaties
-                && moment().diff(moment(entity.treaties.XXVII8b.deposit), 'days') < 90));
+           console.log(entity && (entity.isInbetweenParty ));
+          return entity && (entity.isInbetweenParty );
+        //   ||
+        //       ( entity.treaties
+        //         && moment().diff(moment(entity.treaties.XXVII8b.deposit), 'days') < 90));
       },
 
         isSignatory : function(entity) {
@@ -34,6 +35,12 @@ define(['app'], function(app) {
           return !(entity && (entity.treaties.XXVII8b.instrument == "ratification" ||
             entity.treaties.XXVII8b.instrument == "accession" ||
             entity.treaties.XXVII8b.instrument == "acceptance" || entity.treaties.XXVII8b.instrument == "approval"));
+        },
+
+        isNPParty : function(entity) {
+          return entity && !entity.isInbetweenParty && (entity.treaties.XXVII8b.instrument == "ratification" ||
+            entity.treaties.XXVII8b.instrument == "accession" ||
+            entity.treaties.XXVII8b.instrument == "acceptance" || entity.treaties.XXVII8b.instrument == "approval");
         }
       }
     }
