@@ -13,11 +13,12 @@ define(['app','./countries-commonJS.js'], function(app) {
 
             $scope.lastAction = 'party';
             if (!$scope.countries) {
+                var schema = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database"]
 
               //*******************************************************
               var queryFacetsParameters = {
 
-                'q': '(realm_ss:' + realm.value.toLowerCase() + ' or realm_ss:absch) AND NOT version_s:*',
+                'q': '(realm_ss:' + realm.value.toLowerCase() + ' or realm_ss:absch) AND NOT version_s:* AND ((schema_s:' + schema.join(' OR schema_s:') + ') OR (schema_s:focalPoint AND (type_ss:ABS-IC OR type_ss:NP-FP)))',
                 'fl': '', //fields for results.
                 'wt': 'json',
                 'rows': 0, //limit
@@ -76,6 +77,8 @@ define(['app','./countries-commonJS.js'], function(app) {
                     $scope.inbetweenParties++;
                     countryColors[$scope.countries[i].code.toUpperCase()] = "#5cb85c";
                   }
+                  else
+                    $scope.countries[i].isInbetweenParty = false;
                   //
                 }
 
@@ -116,17 +119,17 @@ define(['app','./countries-commonJS.js'], function(app) {
                 })
                 //$scope.showMap(true);
                 if ($routeParams.code && $routeParams.code.toUpperCase()=='RAT') {
-                  $scope.searchFilter = countriescommonjs.isRatified;
+                  $scope.searchFilter = countriescommonjs.isNPParty;
                   $scope.updateMap('ratified');
                 }
 
-                var mapDetails = {"ratifications":$scope.ratifications,"signatures":$scope.signatures,"parties":$scope.parties,"inbetweenParties":$scope.inbetweenParties};
+                var mapDetails = {"ratifications":($scope.ratifications-$scope.inbetweenParties||0),"signatures":$scope.signatures,"parties":$scope.parties,"inbetweenParties":$scope.inbetweenParties};
 
                 $scope.$emit('mapDetailsLoad', {"mapDetails" : mapDetails});
 
-                $timeout(function() {
-                  $element.find('[data-toggle="tooltip"]').tooltip();
-                }, 1000)
+                // $timeout(function() {
+                //   $element.find('[data-toggle="tooltip"]').tooltip();
+                // }, 1000)
               });
 
             }
@@ -279,14 +282,14 @@ define(['app','./countries-commonJS.js'], function(app) {
 
               _.each($scope.countries, function(country) {
 
-                if ((action == 'party' || action == 'ratified' || action == 'inbetweenParty') && country.isInbetweenParty) {
+                if ((action == 'party' ||  action == 'inbetweenParty') && country.isInbetweenParty) {//action == 'ratified' ||
                   $("#jqvmap" + getMapIndex() + "_" + country.code.toUpperCase()).attr("fill", "#5cb85c");
 
-                } else if ((action == 'party' || action == 'ratified') && country.isRatified) {
+                } else if ((action == 'party' || action == 'ratified') && country.isRatified && !country.isInbetweenParty) {
                   $("#jqvmap" + getMapIndex() + "_" + country.code.toUpperCase()).attr("fill", "#428bca");
                   $("#jqvmap" + getMapIndex() + "_" + greenland).attr("fill", "#428bca");
 
-              } else if ((action == 'nonParties' && !country.isRatified && country.isSignatory) || (action == 'party' || action == 'signatory') && country.isSignatory) {
+                } else if ((action == 'nonParties' && !country.isRatified && country.isSignatory) || (action == 'party' || action == 'signatory') && country.isSignatory) {
                   $("#jqvmap" + getMapIndex() + "_" + country.code.toUpperCase()).attr("fill", "#5bc0de");
 
                 } else if ((action == 'nonParties' && !country.isRatified && country.isParty) || (action == 'party' && country.isParty)) {
