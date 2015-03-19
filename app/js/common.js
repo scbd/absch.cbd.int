@@ -127,13 +127,13 @@ define(['app','underscore'], function(app,underscore){
                 if(!cdgList)
                     return;
                 if(underscore.indexOf(cdgList, 'NP-FP')>= 0 && (underscore.indexOf(cdgList, 'CBD-FP1')>= 0 || underscore.indexOf(cdgList, 'CBD-FP2')>= 0))
-                    return "Nagoya Protocol/CBD Focal Point";
+                    return "ABS/CBD Focal Point";
                 else if(underscore.indexOf(cdgList, 'ABS-IC')>= 0 && (underscore.indexOf(cdgList, 'CBD-FP1')>= 0 || underscore.indexOf(cdgList, 'CBD-FP2')>= 0))
                     return "ICNP/CBD Focal Point";
                 if(underscore.indexOf(cdgList, 'NP-FP')>= 0)
-                    return "Nagoya Protocol Focal Point";
+                    return "ABS National Focal Point";
                 else if(underscore.indexOf(cdgList, 'ABS-IC')>= 0)
-                    return "ICNP Focal Point";
+                    return "ABS ICNP Focal Point";
                 else if(underscore.indexOf(cdgList, 'CBD-FP1')>= 0)
                     return "CBD Primary Focal Point";
                 else if(underscore.indexOf(cdgList, 'CBD-FP2')>= 0)
