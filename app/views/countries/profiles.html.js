@@ -161,7 +161,7 @@
                   }
               });
               $scope.getFacets($scope.absch_nfp);
-
+              $('[data-toggle="tooltip"]').tooltip()
            });
          }
        }
@@ -244,7 +244,7 @@
             else if(type=='nonParties')
                 $scope.searchFilter=countriescommonjs.isNonParties;
             else if(type=='party')
-                $scope.searchFilter=countriescommonjs.isPartyToCBD;
+                $scope.searchFilter=countriescommonjs.showAll;
 
             $scope.$broadcast('updateMap', {data:{'type':type,'searchFilter':$scope.searchFilter}});
 
@@ -316,9 +316,9 @@
            if(schema == 'focalPoint'){
 
                 if(_.contains(type,'NP-FP'))
-                    return 'Nagoya Protocol Focal Point';
+                    return 'ABS National Focal Point';
                 else if(_.contains(type,'ABS-IC'))
-                    return 'Nagoya Protocol ICNP Focal Point';
+                    return 'ABS ICNP Focal Point';
                 else if(_.contains(type,'CBD-FP1') ||  _.contains(type,'CBD-FP2'))
                     return 'CBD National Focal Point';
                 else

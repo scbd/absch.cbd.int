@@ -43,6 +43,7 @@ define(['app','./countries-commonJS.js'], function(app) {
                 $scope.parties = 0;
                 $scope.countriesforAutocomplete = [];
                 $scope.inbetweenParties = 0;
+                $scope.nonCBDParties=0
 
                 for (var i = 0; i < $scope.countries.length; i++) {
 
@@ -65,6 +66,11 @@ define(['app','./countries-commonJS.js'], function(app) {
                     if (!countryColors[$scope.countries[i].code.toUpperCase()])
                       countryColors[$scope.countries[i].code.toUpperCase()] = "#808080";
                   }
+                  else{
+                      $scope.nonCBDParties++;
+                      $scope.countries[i].isParty = false;
+                      console.log('Non party', $scope.countries[i])
+                  }
 
                   if ($scope.countries[i].isParty)
                     $scope.countriesforAutocomplete.push({
@@ -75,7 +81,7 @@ define(['app','./countries-commonJS.js'], function(app) {
                   if (moment().diff(moment($scope.countries[i].treaties.XXVII8b.deposit), 'days') < 90) {
                     $scope.countries[i].isInbetweenParty = true;
                     $scope.inbetweenParties++;
-                    countryColors[$scope.countries[i].code.toUpperCase()] = "#5cb85c";
+                    countryColors[$scope.countries[i].code.toUpperCase()] = "#5bc0de";//#5cb85c
                   }
                   else
                     $scope.countries[i].isInbetweenParty = false;
@@ -123,7 +129,7 @@ define(['app','./countries-commonJS.js'], function(app) {
                   $scope.updateMap('ratified');
                 }
 
-                var mapDetails = {"ratifications":($scope.ratifications-$scope.inbetweenParties||0),"signatures":$scope.signatures,"parties":$scope.parties,"inbetweenParties":$scope.inbetweenParties};
+                var mapDetails = {"ratifications":($scope.ratifications-$scope.inbetweenParties||0),"signatures":$scope.signatures,"parties":$scope.parties,"inbetweenParties":$scope.inbetweenParties, "nonCBDParties":$scope.nonCBDParties};
 
                 $scope.$emit('mapDetailsLoad', {"mapDetails" : mapDetails});
 
@@ -233,8 +239,8 @@ define(['app','./countries-commonJS.js'], function(app) {
               if (countriescommonjs.isRatified(country[0])) {
                 headerClass = "panel-primary"
                 if (countriescommonjs.isInbetweenParty(country[0])) {
-
-                  cfHtml += '<li class="list-group-item"><span class="label label-primary">Ratified</span>&nbsp;<span class="label label-success">in-between Party</span>' +
+                    headerClass = "panel-default"
+                  cfHtml += '<li class="list-group-item"><span class="label label-default">Ratified</span>' + //&nbsp;<span class="label label-success">in-between Party</span>
                     '</br><span class="label label-success">entry into force on ' + moment(country[0].treaties.XXVII8b.deposit).add(90, 'day').format('YYYY-MM-DD') + '</span></li>'
                 } else
                   cfHtml += '<li class="list-group-item"><span class="label label-primary">Ratified</span></li>'
@@ -283,7 +289,7 @@ define(['app','./countries-commonJS.js'], function(app) {
               _.each($scope.countries, function(country) {
 
                 if ((action == 'party' ||  action == 'inbetweenParty') && country.isInbetweenParty) {//action == 'ratified' ||
-                  $("#jqvmap" + getMapIndex() + "_" + country.code.toUpperCase()).attr("fill", "#5cb85c");
+                  $("#jqvmap" + getMapIndex() + "_" + country.code.toUpperCase()).attr("fill", "#5bc0de");//"#5cb85c"
 
                 } else if ((action == 'party' || action == 'ratified') && country.isRatified && !country.isInbetweenParty) {
                   $("#jqvmap" + getMapIndex() + "_" + country.code.toUpperCase()).attr("fill", "#428bca");

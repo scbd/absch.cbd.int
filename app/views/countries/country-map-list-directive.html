@@ -98,9 +98,8 @@
             <td>{{$index + 1}}</td>
             <td><a ng-href="#" ng-click="navigateCountry('',country.code,'')" class="country-list-name label"
                 ng-class="{'label-info':country.isSignatory && !country.isRatified,
-                'label-primary':country.isRatified,
-                'label-default':!country.isRatified && !country.isSignatory,
-                'label-success' : country.isInbetweenParty}">
+                'label-primary':country.isRatified && !country.isInbetweenParty,
+                'label-default':(!country.isRatified && !country.isSignatory) || country.isInbetweenParty}">
                 {{country.name.en}}</a>
               &nbsp;
               <span class="label label-success" ng-show={{country.isInbetweenParty}}>entry into force on {{addDate(country.treaties.XXVII8b.deposit)| formatDate}}</span>
