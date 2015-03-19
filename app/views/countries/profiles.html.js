@@ -80,7 +80,8 @@
              $scope.country = response.data;
              $scope.searchText = '';
              $scope.autocompleteData = [];
-             $scope.entryIntoForceDate = moment($scope.country.treaties.XXVII8b.deposit).add(90, 'days');
+             if($scope.country)
+                $scope.entryIntoForceDate = moment($scope.country.treaties.XXVII8b.deposit).add(90, 'days');
            });
            //*******************************************************
            var schema = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database"]

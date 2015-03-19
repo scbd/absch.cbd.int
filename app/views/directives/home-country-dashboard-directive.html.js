@@ -106,11 +106,11 @@ define(['app'], function (app) {
 
 						var ratificationCount=0;
 						_.each( results[2].data, function(country){
-							if (   country.treaties.XXVII8b.instrument == "ratification"
+							if (  (country.treaties.XXVII8b.instrument == "ratification"
 			                	|| country.treaties.XXVII8b.instrument == "accession"
 			                	|| country.treaties.XXVII8b.instrument == "acceptance"
 			                  	|| country.treaties.XXVII8b.instrument == "approval"
-			                  	|| country.code == 'EU') {
+			                  	|| country.code == 'EU') && moment().diff(moment(country.treaties.XXVII8b.deposit),'days')>=90) {
 
 			                    	ratificationCount++;
 			                }

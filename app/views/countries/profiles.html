@@ -137,7 +137,7 @@
                                                 <span style="vertical-align:top;margin-right:5px" class="label label-default" ng-show="!countriescommonjs.isRatified(country) || countriescommonjs.isInbetweenParty(country)">Non-Party</span>
                                                 <span style="vertical-align:top;margin-right:5px" class="label label-primary" ng-show="countriescommonjs.isRatified(country) && !countriescommonjs.isInbetweenParty(country)">Party</span>
                                                 <span style="vertical-align:top;margin-right:5px" class="label label-info" ng-show="countriescommonjs.isSignatory(country) && !countriescommonjs.isRatified(country)">Signatory</span>
-                                                <span style="vertical-align:top;margin-right:5px" class="label label-primary" ng-show="countriescommonjs.isRatified(country)">Date of ratification {{(country.treaties.XXVII8b.deposit ? country.treaties.XXVII8b.deposit : '- - - - - -') | formatDate}} </span>
+                                                <span style="vertical-align:top;margin-right:5px" class="label label-primary" ng-show="countriescommonjs.isRatified(country)">Date of {{country.treaties.XXVII8b.instrument}} {{(country.treaties.XXVII8b.deposit ? country.treaties.XXVII8b.deposit : '- - - - - -') | formatDate}} </span>
                                                 <span style="vertical-align:top;margin-right:5px" class="label label-success" ng-show="countriescommonjs.isRatified(country)">Date of Entry into force on {{country.treaties.XXVII8b.party| formatDate}}</span>
                                             </h3>
                                         </td>
