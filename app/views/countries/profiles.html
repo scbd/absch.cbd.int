@@ -163,7 +163,7 @@
                                         <div class="row" style="padding-left:20px;">
                                             <div class="col-lg-12 col-sm-12 col-xs-12">
                                                 <button class="btn btn-primary" ng-click="filterSchema=null">
-                                                    <i class="mdi-action-verified-user"></i> All
+                                                    <i class="fa fa-th-list"></i> All
                                                     <span class="badge">{{absCheckpoint + nfpCount + database + nationalAuthority}}</span>
                                                 </button>
                                                 <button class="btn btn-panel-warning" ng-click="filterSchema=isCheckpoint">
@@ -207,9 +207,8 @@
                                                             <li ng-repeat="item in contact.telephones"><i class="fa fa-phone-square" /> {{item}}</li>
                                                             <li ng-repeat="item in contact.fax_ss"><i class="fa fa-fax" /> {{item}}</li>
                                                         </ul>
-
-                                                        <ul ng-show="contact.emails" style="list-style-type: none;padding:0;margin:0;">
-                                                            <li ng-repeat="item in contact.emails"><a ng-href="mailto:{{item}}"><i class="fa fa-envelope-o"></i> {{item}}</a>
+                                                        <ul ng-show="contact.emails || contact.email_ss" style="list-style-type: none;padding:0;margin:0;">
+                                                            <li ng-repeat="item in contact.emails || contact.email_ss"><a ng-href="mailto:{{item}}"><i class="fa fa-envelope-o"></i> {{item}}</a>
                                                             </li>
                                                         </ul>
                                                     </div>
