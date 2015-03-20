@@ -108,9 +108,11 @@ define(['app',
         //
         //============================================================
         $scope.actionSignOut = function () {
+			$rootScope.user = undefined;
             document.cookie = "authenticationToken=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT";
             var redirect_uri = encodeURIComponent($location.protocol()+'://'+$location.host()+':'+$location.port()+'/');
-            $window.location.href = 'https://accounts.cbd.int/signout?redirect_uri='+redirect_uri;
+
+			$window.location.href = 'https://accounts.cbd.int/signout?redirect_uri='+redirect_uri;
         };
 
         //============================================================
@@ -141,6 +143,10 @@ define(['app',
 
         };
 
+		$scope.closePopup = function(){
+			$('#loginDialog').modal('hide')
+		}
+
         //============================================================
         //
         //
@@ -158,19 +164,27 @@ define(['app',
             if(message.type=='authenticationToken') {
                 if(message.authenticationToken && !$browser.cookies().authenticationToken) {
                     setCookie('authenticationToken', message.authenticationToken, 7, '/');
-                    $window.location.href = window.location.href;
+					// window.setTimeout(function(){
+						$window.location.href = window.location.href;
+					// },1000)
+
                 }
                 if(!message.authenticationToken && $browser.cookies().authenticationToken) {
-                    authentication.signOut();
-                    $window.location.href = $window.location.href;
+
+					//window.setTimeout(function(){
+						authentication.signOut();
+
+						$window.location.href = $window.location.href;
+					// },1000)
                 }
             }
         }
 
         window.addEventListener('message', receiveMessage, false);
 
-        var iframe = angular.element(document.querySelector('#authenticationFrame'))[0];
-        iframe.contentWindow.postMessage('{"type":"getAuthenticationToken"}', 'https://accounts.cbd.int');
+    	var iframe = angular.element(document.querySelector('#authenticationFrame'))[0];
+		iframe.contentWindow.postMessage('{"type":"getAuthenticationToken"}', 'https://accounts.cbd.int');
+
     }]);
 
     function _loadCss(url) {

@@ -10,7 +10,10 @@ define(['app'], function (app) {
 	    //
 	    //
 	    //============================================================
-		function getUser () {
+		function getUser (refetch) {
+
+			if(refetch)
+				currentUser = null;
 
 			if(currentUser) return currentUser;
 

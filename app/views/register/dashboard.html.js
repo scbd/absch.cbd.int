@@ -94,10 +94,10 @@ app.controller("DashboardController",
 			for(var i=0; i < data.length; i++){
 				for(var j=0; j < data[i].activities.length; j++){
 
-					if(data[i].activities[j].result.action == 'reject')
+					if(data[i].activities[j].result && data[i].activities[j].result.action == 'reject')
 						$scope.rejectedRequests++;
 
-					if(data[i].activities[j].result.action == 'approve')
+					if(data[i].activities[j].result && data[i].activities[j].result.action == 'approve')
 							$scope.approvedRequests++;
 				}
 			}
