@@ -48,7 +48,7 @@ app.controller("DashboardController",
 //============================================================
 	$scope.PAroles= [$scope.$root.getRoleName('AbsPublishingAuthorities'), $scope.$root.getRoleName('AbsNationalFocalPoint'),
 					$scope.$root.getRoleName('AbsAdministrator'),$scope.$root.getRoleName('Administrator')];
-	console.log($scope.PAroles);
+	//console.log($scope.PAroles);
 	 $scope.compareRoles = function(array1, array2) {
 
 		if(!array1) return false;
@@ -79,53 +79,53 @@ app.controller("DashboardController",
  	}
 
 	if($rootScope.user.isAuthenticated){
-	    var myUserID = $scope.$root.user.userID;
-	    var query    = {
-	                $and : [
-	                    { "createdBy" : myUserID },
-	                    { closedOn : { $exists : true } },
-	                    { "data.realm" : realm.value }
-	                ]
-	            };
-	    $q.when(workflows.query(query), function(data){
-
-			$scope.completedRequests = data;
-
-			for(var i=0; i < data.length; i++){
-				for(var j=0; j < data[i].activities.length; j++){
-
-					if(data[i].activities[j].result && data[i].activities[j].result.action == 'reject')
-						$scope.rejectedRequests++;
-
-					if(data[i].activities[j].result && data[i].activities[j].result.action == 'approve')
-							$scope.approvedRequests++;
-				}
-			}
-
-
-	    });
-
-		query    = {
-					$and : [
-						{ "createdBy" : myUserID } ,
-						{ closedOn : { $exists : false } },
-						{ "data.realm" : realm.value }
-					]
-				};
-	    $q.when(workflows.query(query), function(data){
-		    $scope.pendingCount  = data.length;
-	    });
-
-		query    = {
-				$and : [
-					{ "activities.assignedTo" : myUserID },
-					{ closedOn : { $exists : false } },
-					{ "data.realm" : realm.value }
-				]
-			};
-	    $q.when(workflows.query(query), function(data){
-			$scope.urgentAttentionCount = data.length;
-	    });
+	    // var myUserID = $scope.$root.user.userID;
+	    // var query    = {
+	    //             $and : [
+	    //                 { "createdBy" : myUserID },
+	    //                 { closedOn : { $exists : true } },
+	    //                 { "data.realm" : realm.value }
+	    //             ]
+	    //         };
+	    // $q.when(workflows.query(query), function(data){
+		//
+		// 	$scope.completedRequests = data;
+		//
+		// 	for(var i=0; i < data.length; i++){
+		// 		for(var j=0; j < data[i].activities.length; j++){
+		//
+		// 			if(data[i].activities[j].result && data[i].activities[j].result.action == 'reject')
+		// 				$scope.rejectedRequests++;
+		//
+		// 			if(data[i].activities[j].result && data[i].activities[j].result.action == 'approve')
+		// 					$scope.approvedRequests++;
+		// 		}
+		// 	}
+		//
+		//
+	    // });
+		//
+		// query    = {
+		// 			$and : [
+		// 				{ "createdBy" : myUserID } ,
+		// 				{ closedOn : { $exists : false } },
+		// 				{ "data.realm" : realm.value }
+		// 			]
+		// 		};
+	    // $q.when(workflows.query(query), function(data){
+		//     $scope.pendingCount  = data.length;
+	    // });
+		//
+		// query    = {
+		// 		$and : [
+		// 			{ "activities.assignedTo" : myUserID },
+		// 			{ closedOn : { $exists : false } },
+		// 			{ "data.realm" : realm.value }
+		// 		]
+		// 	};
+	    // $q.when(workflows.query(query), function(data){
+		// 	$scope.urgentAttentionCount = data.length;
+	    // });
 
 		$scope.$emit('loadActivities','dashboard');
 	}
