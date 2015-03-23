@@ -3,8 +3,8 @@
 		<div class="row">
 		 <div class="col-xs-12">
 
-			<div ng-show="document.info.createdBy">
-				<label class="record-metadata-label">Published by:</label>
+			<div ng-show="document.info.createdBy && document.info.createdBy != document.info.updatedBy">
+				<label class="record-metadata-label">Created by:</label>
 				<span class="record-metadata-text">
 					<a href="mailto:{{document.info.createdBy.email}}"><i class="fa fa-envelope"></i>
 						{{document.info.createdBy.firstName}} {{document.info.createdBy.lastName}}
@@ -25,8 +25,8 @@
 				</span>
 			</div>
 
-			<div ng-show="document.info.updatedBy && document.info.updatedOn != document.info.createdOn">
-				<label class="record-metadata-label">Last udpated by:</label>
+			<div ng-show="document.info.updatedBy">
+				<label class="record-metadata-label">Published by:</label>
 				<span class="record-metadata-text">
 					<a href="mailto:{{document.info.updatedBy.email}}"><i class="fa fa-envelope"></i>
 						{{document.info.updatedBy.firstName}} {{document.info.updatedBy.lastName}}
