@@ -1,14 +1,14 @@
 
 	<div>
 
-		<a ng-href="#" ng-click="showHistory = !showHistory" >
+		<a ng-href="#" ng-click="load(documentID);showHistory = !showHistory" >
 			<div ng-show="!showHistory" class="label label-default bg-green" style="width:100%;padding:3px;font-size:12px;"><i class="fa fa-chevron-circle-up"></i> VIEW RECORD HISTORY</div>
 			<div ng-show="showHistory" class="label label-default bg-green" style="width:100%;padding:3px;font-size:12px;"><i class="fa fa-chevron-circle-down"></i> HIDE RECORD HISTORY</div>
 		</a>
 
-<div ng-show="showHistory">
-
-			<div class="row"  ng-show="showFile"  >
+<div ng-show="showHistory ">
+			<span ng-show="loading">loading... <i class="fa fa-spin" /></span>
+			<div class="row"  ng-show="showFile && documents"  >
 				<div class="col-xs-12 col-lg-12" >
 						<div class="alert alert-info" width >NOTE: THE ABS-CH DOES NOT GUARANTEE THAT THE EMAIL HAS BEEN RECEIVED.
 						</div>
