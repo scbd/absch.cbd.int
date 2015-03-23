@@ -77,23 +77,25 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
 
                 <section>
                 <legend>Details of the internationally recognized certificate of compliance</legend>
-                <div class="row">
+                <div class="row" style="padding-bottom:20px;">
                     <div class="col-xs-12">
-                        <div class="control-group confidential-box" ng-class="{'alert alert-warning':document.permitNotAvailable}">
+                        <div class="control-group thin-border" style="padding:10px;" ng-class="{'disable':document.permitNotAvailable}">
 
-                            <span class="pull-right confidential-text" style="color:#418bca;">
+                            <span class="pull-right confidential-text label label-warning color-black" >
                                 <input type="checkbox" name="permitNotAvailable" ng-model="document.permitNotAvailable" watch-items> This information is not available </input>
                             </span>
 
                             <div class="km-control-group" name="permit" required caption="Links to internationally recognized certificates of compliance (IRCC) that relate to this communiqué">
-
                                 <!-- <div ng-disabled="isPermitNotAvailable()" km-select required multiple name="permit" ng-model="document.permit"items="options.permits()" placeholder="Please select ..."></div>  -->
                                 <div existing-permit ng-model="document.permit" ng-disabled="isPermitNotAvailable()">
                             </div>
                         </div>
                     </div>
                 </div>
-                <div ng-show="isPermitNotAvailable()" class="enable well">
+                </div>
+
+                <div class="clearfix"></div>
+                <div ng-class="{'disable':!isPermitNotAvailable()}" class="well no-shadow thin-border"  >
                     <div class="row">
                         <div class="col-xs-12">
                             <LEGEND>Information to be collected or received when the internationally recognized certificate of compliance is not available.</LEGEND>

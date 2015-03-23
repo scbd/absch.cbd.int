@@ -30,10 +30,10 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
               </div>
             </div>
 
-            <div class="row well" ng-class="{disable:!document.isAmendment, enable:document.isAmendment}" style="margin:10px;">
+            <div class="row well no-shadow" ng-class="{disable:!document.isAmendment, enable:document.isAmendment}" style="margin:10px;">
                 <!-- IF NO SECTION -->
               <div class="col-xs-12">
-                <strong ng-show="document.isAmendment==null">
+                <strong ng-show="document.isAmendment==null" style="color:black!important;">
                   If no, the following information is not required.
                 </strong>
                 <strong ng-show="document.isAmendment==false" style="color:black!important;">
