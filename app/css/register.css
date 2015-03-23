@@ -77,7 +77,7 @@ section {
     color:#666;
 }
 
-.disable  button {
+/*.disable  button {
 	background-color:#ccc!important;
 	border-color:#666;
 }
@@ -100,10 +100,17 @@ section {
 .disable div{
 	background-color:#ccc!important;
 	border-color:#666;
+}*/
+
+.disable *{
+	color:#999!important;
+	border-color:#999!important;
+	background-color:#ccc!important;
 }
 
+
 .enable {
-    background-color:#ddd;
+    background-color:#F5F5F5;
 }
 
 legend{
