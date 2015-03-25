@@ -18,7 +18,7 @@ define(['app','./countries-commonJS.js'], function(app) {
               //*******************************************************
               var queryFacetsParameters = {
 
-                'q': '(realm_ss:' + realm.value.toLowerCase() + ' or realm_ss:absch) AND NOT version_s:* AND ((schema_s:' + schema.join(' OR schema_s:') + ') OR (schema_s:focalPoint AND (type_ss:ABS-IC OR type_ss:NP-FP)))',
+                'q': '(realm_ss:' + realm.value.toLowerCase() + ' or realm_ss:absch) AND NOT version_s:* AND ((schema_s:' + schema.join(' OR schema_s:') + ') OR (schema_s:focalPoint AND (type_ss:ABS-IC OR type_ss:NP-FP OR type_ss:ABS-FP)))',
                 'fl': '', //fields for results.
                 'wt': 'json',
                 'rows': 0, //limit

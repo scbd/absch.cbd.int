@@ -138,7 +138,7 @@
                                                 <span style="vertical-align:top;margin-right:5px" class="label label-primary" ng-show="countriescommonjs.isRatified(country) && !countriescommonjs.isInbetweenParty(country)">Party</span>
                                                 <span style="vertical-align:top;margin-right:5px" class="label label-info" ng-show="countriescommonjs.isSignatory(country) && !countriescommonjs.isRatified(country)">Signatory</span>
                                                 <span style="vertical-align:top;margin-right:5px" class="label label-primary" ng-show="countriescommonjs.isRatified(country)">Date of {{country.treaties.XXVII8b.instrument}} {{(country.treaties.XXVII8b.deposit ? country.treaties.XXVII8b.deposit : '- - - - - -') | formatDate}} </span>
-                                                <span style="vertical-align:top;margin-right:5px" class="label label-success" ng-show="countriescommonjs.isRatified(country)">Date of Entry into force on {{country.treaties.XXVII8b.party| formatDate}}</span>
+                                                <span style="vertical-align:top;margin-right:5px" class="label label-success" ng-show="countriescommonjs.isRatified(country)">Date of Entry into force {{country.treaties.XXVII8b.party| formatDate}}</span>
                                             </h3>
                                         </td>
                                     </tr>
@@ -188,7 +188,7 @@
                                         <div ng-repeat="contact in absch_nfp|filter:isContactInformation|filter:filterSchema|orderBy:'schema_s':false">
                                             <div ng-class="{'row': ($index)%3==0}"> </div>
                                             <div class="col-xs-4">
-                                                <div class="panel panel-default" ng-class="{'panel-success':(contact.type_ss.indexOf('ABS-IC')>=0 || contact.type_ss.indexOf('NP-FP')>=0),
+                                                <div class="panel panel-default" ng-class="{'panel-success':(contact.type_ss.indexOf('ABS-IC')>=0 || contact.type_ss.indexOf('NP-FP')>=0 || contact.type_ss.indexOf('ABS-FP')>=0),
                                                                                             'panel-warning':contact.schema_s=='absCheckpoint',
                                                                                             'panel-info':contact.schema_s=='authority'||contact.schema_s=='database'}">
                                                     <div class="panel-heading">
