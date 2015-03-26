@@ -95,7 +95,7 @@
                 <div  id="taskList">
 
                     <div ng-repeat="task  in tasks|filter:keywords|filter:filterByType|filter:filterByStatus|orderBy:sortTerm:orderList" >
-                    <div  class="row" ng-class="{'bg-danger':task.state!='completed'}" style="padding:10px;margin-bottom:10px;">
+                    <div  class="row" ng-class="{'bg-grey':task.workflow.state=='completed','bg-danger':task.workflow.state!='completed'}" style="padding:10px;margin-bottom:10px;">
                         <!-- ng-repeat="task in grpTask|orderBy:createdOn:true|limitTo:1" -->
                         <div class="row">
                             <div class="col-xs-3">
