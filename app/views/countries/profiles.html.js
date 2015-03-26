@@ -111,16 +111,17 @@
              $scope.cpcReceived = results[1].data.response.docs;
               //console.log($scope.absch_nfp);
               $scope.absch_nfp.forEach(function(document){
-
+                  document.identifier = document.identifier_s
                   if(document.schema_s == "focalPoint" ){
                       document.description_t = document.description_t.replace(/\n/g, '<br/>');
+                      document.documentId = commonjs.hexToInteger(document.identifier_s);
                   }
                   else if(document.schema_s == "authority" || document.schema_s == "database" ||
                      document.schema_s == "absCheckpoint"){
                          document.description_t = '';
-                         $q.when(IStorage.documents.get(document.identifier_s))
+                         $q.when(IStorage.documents.get(document.identifier_s,{info:true}))
                          .then(function(data) {
-                             var doc = data.data
+                             var doc = data.data.body
                              var details = '';
                             if(doc.address)
                                 details += $filter("lstring")(doc.address) + '<br/>';
@@ -132,9 +133,9 @@
                                 details += $filter("lstring")(JSON.parse(document.government_CEN_s));
 
                             document.description_t = details;
-                            document.telephones = doc.phones
-                            document.emails = doc.emails
-
+                            document.telephones = doc.phones;
+                            document.emails = doc.emails;
+                            document.doc = data.data;
                          });
                   }
                   else if(document.schema_s=="absCheckpointCommunique"){

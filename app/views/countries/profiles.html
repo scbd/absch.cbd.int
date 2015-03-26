@@ -199,7 +199,10 @@
                                                         </h4>
                                                     </div>
                                                     <div class="panel-body">
-                                                        <strong>{{contact.title_t}}</strong>
+                                                        <strong>
+                                                            <a ng-show="contact.schema_s!='focalPoint'" ng-href="/database/{{contact.doc|uniqueIDWithoutRevision}}">{{contact.title_t}}</a>
+                                                            <a ng-show="contact.schema_s=='focalPoint'" ng-href="/database/focalPoint/{{contact.documentId}}">{{contact.title_t}}</a>
+                                                        </strong>
                                                         <div ng-show="contact.description_t" ng-bind-html="contact.description_t"></div>
 
                                                         <ul ng-show="contact.telephones || contact.telephone_s || contact.fax_ss" style="list-style-type: none;padding:0;margin:0;">
