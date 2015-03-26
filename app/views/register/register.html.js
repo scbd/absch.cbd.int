@@ -527,7 +527,7 @@ define(['app',
       $scope.editing = false;
 
 	  $scope.showingFeedback = true;
-	  bootbox.alert('Record published. The record will be now publicly accessable on ABSCH.', function(){
+	  bootbox.alert('Record published. The record will be now publicly accessible on ABSCH.', function(){
 		    $scope.showingFeedback = false;
 			$timeout(function(){$location.path('/register/'+$filter("mapSchema")($scope.document_type));},1);
 	  });
