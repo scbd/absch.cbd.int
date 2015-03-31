@@ -23,7 +23,7 @@ define(['app',
         documentCount: '='
       },
       controller: ['$scope', '$sce', "underscore", "commonjs", "authentication", '$q', "$filter", "$compile", "$element", "$timeout",
-        function($scope, $sce, underscore, commonjs, authentication, $q, $filter, $compile, $element, $timeout) {
+        function($scope, $sce, _, commonjs, authentication, $q, $filter, $compile, $element, $timeout) {
 
           $scope.getDocumentId = function(document) {
 
@@ -71,14 +71,16 @@ define(['app',
                 item.data = data.data;
               });
             } else {
-              $http.get("/api/v2013/documents/" + item.identifier_s).then(function(result) {
-                item.data = result.data;
-
+            //   $http.get("/api/v2013/documents/" + item.identifier_s).then(function(result) {
+            //     item.data = result.data;
+              //
                 $http.get("/api/v2013/documents/" + item.identifier_s + "?info").then(function(result) {
+                  item.data = angular.copy(result.data.body);
                   item.data.info = result.data;
+                  delete item.data.info.body;
                 });
-
-              });
+              //
+            //   });
             }
           }
 

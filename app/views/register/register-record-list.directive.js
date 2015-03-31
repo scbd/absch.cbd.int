@@ -207,17 +207,19 @@ app.directive("registerRecordList", ["$timeout", "commonjs","bootbox", "authHttp
 					return;
 
 		        item.data = {'schema':item.type, 'url_ss': '', 'data': []};
-		        $http.get("/api/v2013/documents/"+item.identifier).then(function (result) {
-		            item.data = result.data;
-
-		            $http.get("/api/v2013/documents/"+item.identifier + "?info").then(function (result) {
-		                item.data.info = result.data;
+		        // $http.get("/api/v2013/documents/"+item.identifier).then(function (result) {
+		        //     item.data = result.data;
+				//
+		            $http.get("/api/v2013/documents/"+item.identifier + "?info").then(function (result) {		                
+						item.data = angular.copy(result.data.body);
+						item.data.info = result.data;
+						delete item.data.info.body;
 		            });
-					// if(item.type='absPermit'){
-					// 	console.log($scope.records);
-					// }
-
-		        });
+				// 	// if(item.type='absPermit'){
+				// 	// 	console.log($scope.records);
+				// 	// }
+				//
+		        // });
 				//href="/database/record?documentID={{record.documentID}}"
 			}
 
