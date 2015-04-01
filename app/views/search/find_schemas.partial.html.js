@@ -299,7 +299,6 @@ app.directive('searchFilterSchemas', function ($http) {
 
             $scope.focalPoint              = { identifier: 'focalPoint',               title: 'National Focal Points',
                                                 subFilters : [
-                                                                { name: 'focalPointICNP',       type: 'checkbox' , field: 'type_ss', value : 'ABS-IC' },
                                                                 { name: 'focalPointNP',         type: 'checkbox',  field: 'type_ss', value : 'NP-FP OR schema_s:ABS-FP' },
                                                                 { name: 'focalPointCBD'  ,      type: 'checkbox' , field: 'type_ss', value : ['CBD-FP1', 'CBD-FP1']}
                                                 ]
@@ -453,9 +452,6 @@ app.directive('searchFilterSchemas', function ($http) {
             function buildFocalPointQuery(){
                 var query = [];
                 if($scope.focalPoint.selected){
-
-                    if($scope.focalPointICNP)
-                        query.push('ABS-IC');
 
                     if($scope.focalPointNP){
                         query.push('NP-FP');
