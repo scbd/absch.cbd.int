@@ -210,7 +210,7 @@ app.directive("registerRecordList", ["$timeout", "commonjs","bootbox", "authHttp
 		        // $http.get("/api/v2013/documents/"+item.identifier).then(function (result) {
 		        //     item.data = result.data;
 				//
-		            $http.get("/api/v2013/documents/"+item.identifier + "?info").then(function (result) {		                
+		            $http.get("/api/v2013/documents/"+item.identifier + "?info").then(function (result) {
 						item.data = angular.copy(result.data.body);
 						item.data.info = result.data;
 						delete item.data.info.body;
@@ -325,6 +325,11 @@ app.directive("registerRecordList", ["$timeout", "commonjs","bootbox", "authHttp
 
 
 			}
+
+			$scope.loading=true;
+			$scope.$on('finishedLoadingRecords',function(){
+				$scope.loading=false;
+			});
 		}]
 	};
 }]);

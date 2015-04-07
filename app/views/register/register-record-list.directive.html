@@ -70,8 +70,8 @@ background-color:#eee!important;
         <th style="width:100px;">{{filteredRecords.length}} record(s)</th>
     </tr>
     </thead>
-
-    <tr ng-cloak ng-show="filteredRecords.length <= 0" ><td colspan="5" style="text-align:center;padding:60px;">no records</td></tr>
+    <tr ng-cloak ng-show="loading" ><td colspan="5" style="text-align:center;padding:60px;"><i class="fa fa-spin fa-cog" /> loading...</td></tr>
+    <tr ng-cloak ng-show="!loading && filteredRecords.length <= 0" ><td colspan="5" style="text-align:center;padding:60px;">no records</td></tr>
 
     <tbody ng-repeat="record in (filteredRecords = (records | filter:schemaFilter | filter:statusFilter | filter:keywords | orderBy:orderBy))">
 

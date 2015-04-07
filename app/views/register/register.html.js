@@ -333,7 +333,10 @@ define(['app',
         $("a[role*='button']").toggleClass('ui-disabled');
 		flipFacets();
         return $scope.records;
-      });
+      })
+	  .finally(function(){
+		$scope.$broadcast('finishedLoadingRecords',{});
+	  });
     }
     //TODO: this is a scoping disaster. Needed for contacts, fix later.
     $rootScope.loadRecords = loadRecords;
