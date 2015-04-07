@@ -64,7 +64,7 @@ background-color:#eee!important;
     <tr>
         <th style="width:70px;">&nbsp;</th>
         <th ng-click="toggleOrderBy('title|lstring')" id="titleHeader">Title</th>
-        <th style="width:200px;"ng-click="toggleOrderBy('createdOn')" id="updatedOnHeader">Created by</th>
+        <th style="width:200px;"ng-click="toggleOrderBy('createdOn')" id="createdOnHeader">Created by</th>
         <th style="width:200px;"ng-click="toggleOrderBy('updatedOn')" id="updatedOnHeader">Last updated</th>
         <th style="width:150px;" ng-click="toggleOrderBy('status')" id="statusHeader">Status</th>
         <th style="width:100px;">{{filteredRecords.length}} record(s)</th>
@@ -125,7 +125,7 @@ background-color:#eee!important;
               <a style="color:#666" href="mailto:{{record.createdBy.email}}"><strong>
                   {{record.createdBy.firstName}} {{record.createdBy.lastName}}</strong>
               </a></br>
-              <span style="font-size:10px;white-space:nowrap;">{{record.createddOn | formatDateWithTime }}</span>
+              <span style="font-size:10px;white-space:nowrap;">{{record.createdOn | formatDateWithTime }}</span>
              </div>
         </td>
         <td>
