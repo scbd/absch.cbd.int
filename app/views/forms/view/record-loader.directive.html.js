@@ -78,9 +78,9 @@ app.directive('recordLoader', [function () {
 					if(docNum.length ==5){
 						documentID = documentID.toLowerCase();//.replace('absch','ABSCH');
 						$scope.documentUID = documentID.toUpperCase();
-						$scope.documentUrl = "https://s3.amazonaws.com/absch.documents/" + documentID + '.pdf';
+						$scope.documentUrl = "https://s3.amazonaws.com/absch.documents/" + documentID + '.pdf?id=' + new Date();
 
-						$httpAWS.head($scope.documentUrl).then(function(success){
+						$httpAWS.head($scope.documentUrl,{cache:false}).then(function(success){
 							$scope.documentSuccess = true;
 							window.location.href = $scope.documentUrl;
 							closeWindow();
