@@ -330,6 +330,9 @@ app.directive("registerRecordList", ["$timeout", "commonjs","bootbox", "authHttp
 			$scope.$on('finishedLoadingRecords',function(){
 				$scope.loading=false;
 			});
+			$scope.updateList = function(){
+				$scope.$emit('loadActivities',$scope.schema);
+			}
 		}]
 	};
 }]);

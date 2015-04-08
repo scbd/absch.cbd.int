@@ -71,7 +71,7 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
 			//==============================
 			//
 			//==============================
-			function load() {
+			function load(taskGroupBy) {
 
 				var query = queryMyTasks;
 
@@ -82,7 +82,7 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
 					IWorkflows.query(query).then(function(workflows){
 
 						var tasks  = [];
-
+                        $scope.taskLists = [];
 						workflows.forEach(function(workflow) {
 
 							workflow.activities.forEach(function(activity){
@@ -93,7 +93,10 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
 							});
 						});
 						$scope.taskLists = $filter("orderBy")(tasks,'workflow.createdOn',true);
-						$scope.taskGroupBy = 'workflow._id';
+                        if(taskGroupBy)
+                            $scope.taskGroupBy = taskGroupBy;
+                        else
+						    $scope.taskGroupBy = 'workflow._id';
 						//nextLoad = $timeout(load, 15*1000);
 					});
 			}
@@ -154,10 +157,10 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
 				//return entity && _.contains($scope.filterStatus, entity.workflow.data.metadata.schema);
 			}
 
-			$scope.$on("updateWorkflowList", function(evt,data){
-
-				$timeout(function(){ load(); }, 8000);
-			});
+			$scope.updateWorkflowList = function(){
+                $scope.load($scope.taskGroupBy);
+                $scope.taskGroupBy = '';
+			};
 
 			$scope.getGroupTaskDetails = function(tasks){
 				// console.log($filter("orderBy")(tasks,'createdOn'));

@@ -9,7 +9,7 @@ app.directive('taskId', function () {
             scope: {
                 loadTaskData : '=',
                 workflowTaskId : '@',
-                parentWatcher : '@', //used in case if the directive parent needs to be refreshed else the workflow details will be fetched.
+                onActivityUpdate : '&', //used in case if the directive parent needs to be refreshed else the workflow details will be fetched.
             },
             controller: [ "$scope", "$timeout", "authHttp", "$route", "IStorage", "IWorkflows", "authentication", "underscore",'$element',
 					 function ($scope, $timeout, $http, $route, IStorage, IWorkflows, authentication, _, $element)
@@ -23,12 +23,9 @@ app.directive('taskId', function () {
 								var activityName = $route.current.params.activity;
 								if($scope.workflowTaskId != undefined && $scope.loadTaskData != undefined)
 								{
-									//console.log	($scope.workflowTaskId + '-' + $scope.loadTaskData)
 									IWorkflows.get($scope.workflowTaskId).then(function(workflow){
 
 										$scope.workflow = workflow;
-										// $scope.activity = _.findWhere(workflow.activities[0], {name : activityName });
-// console.log(workflow.activities);
 										if(workflow.data.identifier && !workflow.closedOn) {
 
 											IStorage.drafts.get(workflow.data.identifier).then(function(result){
@@ -37,11 +34,7 @@ app.directive('taskId', function () {
 										}
 
 									});
-
 								}
-
-
-
 						}
 
 
@@ -58,29 +51,33 @@ app.directive('taskId', function () {
 									// if($scope.$parentWatcher){
 									console.log(resultData);
 										var msg = "";
-										if(resultData.action == 'approve'){
+										if(resultData.result.action == 'approve'){
 											msg = "Record approved successfully";
 										}
 										else{
 											msg = "Record rejected successfully";
 										}
-                                        $scope.$emit('taskAction',$scope.document, resultData);
-										
-										//TODO: call proper event on parent instead going by parent object.
-										if($scope.parentWatcher=="dashboard")
-											$scope.$emit("updateWorkflowList");//.$parent.load();
-										else if($scope.parentWatcher=="documents")
-											$scope.$parent.$parent.$parent.refreshRecords(msg);
-										else
+
+
+										if(typeof $scope.onActivityUpdate == 'function')
+											$timeout(function(){
+												$scope.onActivityUpdate();
+												$scope.$emit('taskAction',{document:$scope.document, workflowAction:resultData});
+												$scope.isUpdating = false;
+											}, 5000);
+										else{
 											load();
+											$scope.isUpdating = false;
+										}
 
 							}).catch(function(error) {
 								alert(error);
+								$scope.isUpdating = false;
 								$element.find('.overlayDiv').removeClass('overlayDiv');
 								$element.find('#spiner').css('display', 'none');
 								$scope.isUpdating = false;
 							}).finally(function(){
-								$scope.isUpdating = false;
+
 							});
 						};
 						$scope.user = function() {

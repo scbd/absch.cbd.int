@@ -12,7 +12,7 @@
           <span class="special-font color-grey" style="position:relative;top:3px;font-size:22px;">FILTER</span>
           <button type="button" ng-click="statusFilter=null" class="btn btn-info">
           <i ng-hide="statusFilter" class="glyphicon glyphicon-ok"></i> All <span class="badge badge-default">
-          {{(records | filter:schemaFilter).length}}</span></button>
+          {{(records||[]).length}}</span></button>
           <button type="button"  ng-click="statusFilter=isRequest" class="btn btn-danger">
           <i ng-show="statusFilter==isRequest" class="glyphicon glyphicon-ok"></i> Requests <span class="badge badge-default">{{(records | filter:schemaFilter | filter:isRequest).length}}</span></button>
           <button type="button"    ng-click="statusFilter=isPublished" class="btn btn-success">
@@ -86,7 +86,7 @@ background-color:#eee!important;
             <i ng-class="{'mdi-action-stars':record.metadata.schema=='measure', 'color-published-green':isPublished(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
             <i ng-class="{'mdi-action-bookmark':record.metadata.schema=='absPermit', 'color-published-green':isPublished(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
             <i ng-class="{'mdi-communication-message':record.metadata.schema=='absCheckpointCommunique', 'color-published-green':isPublished(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
-            <i ng-class="{'mdi-file-folder':drecord.metadata.schema=='NDB', 'color-published-green':isPublished(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
+            <i ng-class="{'mdi-file-folder':record.metadata.schema=='database', 'color-published-green':isPublished(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
             <i ng-class="{'mdi-editor-insert-drive-file':record.metadata.schema=='resource', 'color-published-green':isPublished(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
         </span>
         <span ng-show="(isDraft(record) || isRequest(record))">
@@ -95,14 +95,14 @@ background-color:#eee!important;
             <i ng-class="{'mdi-action-stars':record.metadata.schema=='measure', 'color-litegrey':(isDraft(record) && !isRequest(record)), 'color-red':isRequest(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
             <i ng-class="{'mdi-action-bookmark':record.metadata.schema=='absPermit', 'color-litegrey':isDraft(record) && !isRequest(record), 'color-red':isRequest(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
             <i ng-class="{'mdi-communication-message':record.metadata.schema=='absCheckpointCommunique', 'color-litegrey':isDraft(record) && !isRequest(record), 'color-red':isRequest(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
-            <i ng-class="{'mdi-file-folder':record.metadata.schema=='NDB', 'color-litegrey':isDraft(record) && !isRequest(record), 'color-red':isRequest(record) }" style="font-size:16pt;position:relative;top:3px;"></i>
+            <i ng-class="{'mdi-file-folder':record.metadata.schema=='database', 'color-litegrey':isDraft(record) && !isRequest(record), 'color-red':isRequest(record) }" style="font-size:16pt;position:relative;top:3px;"></i>
             <i ng-class="{'mdi-editor-insert-drive-file':record.metadata.schema=='resource', 'color-litegrey':isDraft(record) && !isRequest(record), 'color-red':isRequest(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
         </span>
 
 
         </td>
         <td style="width:40%">
-            <span ng-show="isPublished(record)">
+            <span ng-show="isPublished(record) && !isRequest(record)">
                 <a href=""  ng-click="loadDocument(record); displayDetails=!displayDetails" ng-show="record.documentID">
                     {{(record.workingDocumentTitle||record.title)|lstring}}
                 </a>
@@ -167,7 +167,7 @@ background-color:#eee!important;
               </div>
 
                <div ng-show="displayRequest" >
-                  <div task-id class="record-body" load-task-data='formLoading' workflow-task-id="{{getWorkflowID(record)}}" parent-watcher="documents"  ></div>
+                  <div task-id class="record-body" load-task-data='formLoading' workflow-task-id="{{getWorkflowID(record)}}" on-activity-update="updateList()"  ></div>
               </div>
 
         </td>

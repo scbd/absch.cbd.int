@@ -247,7 +247,7 @@ define(['app',
       var qDrafts    = storage.drafts   .query(qAnd.join(" and ")||undefined,draftParams);
 
       $q.all([qDocuments, qDrafts]).then(function(results) {
-
+		$scope.records = [];
         var documents = results[0].data.Items;
         var drafts    = results[1].data.Items;
 
@@ -431,8 +431,16 @@ define(['app',
     //
     //============================================================
     $scope.$on("loadActivities", function(evt, schema){
+
 		  if(schema=='dashboard')
 			loadRecords();
+		  else{
+			if(_.contains($scope.isLoaded, schema)){
+				$scope.isLoaded.splice(_.indexOf(schema), 1)
+			}
+
+			loadRecords(schema);
+		  }
     });
     //So this is like a request for info... I don't like the idea of using JS as an message driven language. KISS
     $scope.$on("getDocumentInfo", function(evt) {
@@ -576,18 +584,18 @@ define(['app',
     // Occurs when there is a action on tasks
     //
     //============================================================
-    $scope.$on("taskAction", function(evt, doc, workflowAction){
+    $scope.$on("taskAction", function(evt, data ){
 
 	  	var schemaCount = _.where($scope.schemaTypesFacets,{"schema":"urgentTasks"});
 	  	schemaCount[0].requestCount--;
 
-	    schemaCount = _.where($scope.schemaTypesFacets,{"schema":doc.header.schema});
-		if(workflowAction.action == 'approve'){
+	    schemaCount = _.where($scope.schemaTypesFacets,{"schema":data.document.header.schema});
+		if(data.workflowAction.result.action == 'approve'){
 			schemaCount[0].publishCount++;
 			schemaCount[0].draftCount--;
 			schemaCount[0].requestCount--;
 		}
-		else if(workflowAction.action == 'reject'){
+		else if(data.workflowAction.result.action == 'reject'){
 			schemaCount[0].requestCount--;
 		}
 	  flipFacets();
