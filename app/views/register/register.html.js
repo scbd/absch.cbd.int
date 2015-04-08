@@ -475,10 +475,10 @@ define(['app',
         if($rootScope.next_url){
 		   var url = $rootScope.next_url.replace($location.$$protocol + '://' +
 		             $location.$$host + ($location.$$host != 'absch.cbd.int' ? ':' + $location.$$port : '') + '/', '')
-          $timeout(function(){$location.path(url);},1)}
+          $timeout(function(){$location.path(url);},100)}
         else{
           $timeout(function(){$location.path('/register/'+
-		                      $filter("mapSchema")($scope.document_type));},1);}
+		                      $filter("mapSchema")($scope.document_type));},100);}
       }, 500);
 
     });
@@ -519,7 +519,7 @@ define(['app',
 	  $scope.showingFeedback = true;
 	  bootbox.alert('Record saved. A publishing request has been sent to your Publishing Authority.', function(){
 		    $scope.showingFeedback = false;
-			$timeout(function(){$location.path('/register/'+$filter("mapSchema")($scope.document_type));},1);
+			$timeout(function(){$location.path('/register/'+$filter("mapSchema")($scope.document_type));},100);
 	  });
 	  $rootScope.updatedRecord = workflowInfo;
       //$timeout(function() { $location.path('/register/'+$scope.document_type); }, 500);
@@ -540,7 +540,7 @@ define(['app',
 	  $scope.showingFeedback = true;
 	  bootbox.alert('Record published. The record will be now publicly accessible on ABSCH.', function(){
 		    $scope.showingFeedback = false;
-			$timeout(function(){$location.path('/register/'+$filter("mapSchema")($scope.document_type));},1);
+			$timeout(function(){$location.path('/register/'+$filter("mapSchema")($scope.document_type));},100);
 	  });
 	  $rootScope.updatedRecord = documentInfo;
       //$timeout(function() { $location.path('/register/'+$scope.document_type); }, 500);
