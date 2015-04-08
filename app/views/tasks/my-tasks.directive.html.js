@@ -13,7 +13,7 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
 							types.push({'identifier':'absPermit', 				'name':'Internationally Recognized Certificate of Compliance'});
 							types.push({'identifier':'absCheckpoint', 			'name':'Checkpoints'});
 							types.push({'identifier':'absCheckpointCommunique', 'name':'Checkpoint Communiqués'});
-
+                            types.push({'identifier':'resource', 			    'name':'Virtual Library Record'});
 							return types;
 					},
 					filterStatus : function(){
