@@ -64,7 +64,7 @@ app.directive('taskId', function () {
 												$scope.onActivityUpdate();
 												$scope.$emit('taskAction',{document:$scope.document, workflowAction:resultData});
 												$scope.isUpdating = false;
-											}, 5000);
+											}, 8000);
 										else{
 											load();
 											$scope.isUpdating = false;
