@@ -130,6 +130,7 @@
                                             <span ng-show="task.activity" ng-switch="task.activity.result.action">
                                                 <span ng-switch-when="approve"><i class="glyphicon glyphicon-ok"></i> Approved</span>
                                                 <span ng-switch-when="reject"><i class="glyphicon glyphicon-remove"></i> Rejected</span>
+                                                <span ng-show="task.activity.result.reason"><STRONG> for {{task.activity.result.reason | limitTo:50}} </STRONG></span>
                                             </span>
                                             {{task.workflow.activities.name}}
                                         </div>
@@ -184,6 +185,7 @@
                                                 <span ng-show="history.activity" ng-switch="history.activity.result.action">
                                                     <span ng-switch-when="approve"><i class="glyphicon glyphicon-ok"></i> Approved</span>
                                                     <span ng-switch-when="reject"><i class="glyphicon glyphicon-remove"></i> Rejected</span>
+                                                    <span ng-show="history.activity.result.reason"><STRONG> for {{history.activity.result.reason | limitTo:50}} </STRONG></span>
                                                 </span>
                                                 {{history.workflow.activities.name}}
                                             </div>

@@ -64,6 +64,7 @@
 							<div ng-switch="activity.name+'-'+activity.result.action">
 								<span ng-switch-when="publishRecord-approve"><i class="glyphicon glyphicon-ok"></i> Approved</span>
 								<span ng-switch-when="publishRecord-reject"> <i class="glyphicon glyphicon-remove"></i> Rejected</span>
+								<span ng-show="activity.result.reason"><STRONG> for {{activity.result.reason | limitTo:50}} </STRONG></span>
 								<span ng-switch-when="null-null"> <i class="glyphicon glyphicon-cog"></i> Pending</span>
 								<span ng-switch-default>*{{activity.name+'-'+activity.result.action}}*</span>
 							</div>

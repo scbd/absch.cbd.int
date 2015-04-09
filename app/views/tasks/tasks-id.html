@@ -144,7 +144,8 @@
 
 						<span ng-switch="activity.name+'-'+activity.result.action">
 							<span ng-switch-when="publishRecord-approve"><i class="glyphicon glyphicon-ok"></i> Approved</span>
-							<span ng-switch-when="publishRecord-reject"><i class="glyphicon glyphicon-remove"></i> Rejected</span>
+							<span ng-switch-when="publishRecord-reject"><i class="glyphicon glyphicon-remove"></i> Rejected
+                                {{(activity.result.reason)}}</span>
 							<span ng-switch-default>{{activity.name+'-'+activity.result.action}}*</span>
 							<span ng-show="activity.result.reason"><STRONG> for {{activity.result.reason}} </STRONG></span>
 						</span>
