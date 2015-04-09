@@ -137,9 +137,14 @@
                                 </div>
                                 <div ng-show="task.workflow.state!='completed'">
 
-                                    <div ng-show="task.activity.name='publishRecord'">
+                                    <div ng-show="task.activity.name='publishRecord' && !task.activity.isUpdating">
                                         <a class="btn btn-danger" type="button" ng-click="tasksDisplay=!tasksDisplay; formLoading=false;" style="padding:4px;">
                                             <strong><i ng-class="{'glyphicon glyphicon-plus-sign': !tasksDisplay, 'glyphicon glyphicon-minus-sign': tasksDisplay}"></i> Awaiting approval</strong>
+                                        </a>
+                                    </div>
+                                    <div ng-show="task.activity.name='publishRecord' && task.activity.isUpdating">
+                                        <a class="btn btn-info" type="button" ng-click="return" style="padding:4px;">
+                                            <strong><i class="fa fa-spin fa-cog"></i> Processing approval</strong>
                                         </a>
                                     </div>
 
@@ -148,7 +153,7 @@
                                 </div>
                             </div>
                             <div ng-show="tasksDisplay" class="col-xs-12" ng-show="tasksDisplay" style="padding:20px 20px 0 20px;">
-                                <div task-id class="record-body" load-task-data='formLoading' workflow-task-id="{{task.workflow._id}}" on-activity-update="updateWorkflowList()"></div>
+                                <div task-id class="record-body" load-task-data='formLoading' workflow-task-id="{{task.workflow._id}}" on-activity-update="updateWorkflowList(document, workflowInfo)"></div>
                             </div>
                         </div>
                         <div class="row" ng-repeat="history in task.workflowHistory|orderBy:createdOn:true" ng-show="showHistory">

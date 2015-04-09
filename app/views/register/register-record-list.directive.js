@@ -1,7 +1,8 @@
 define(['app', '/app/js/common.js'], function (app) {
 "use strict";
 
-app.directive("registerRecordList", ["$timeout", "commonjs","bootbox", "authHttp", function ($timeout,commonjs,bootbox, $http) {
+app.directive("registerRecordList", ["$timeout", "commonjs","bootbox", "authHttp","IWorkflows", "IStorage",
+ 			function ($timeout,commonjs,bootbox, $http, IWorkflows, IStorage) {
 
 	return {
 		restrict   : "EA",
@@ -330,9 +331,54 @@ app.directive("registerRecordList", ["$timeout", "commonjs","bootbox", "authHttp
 			$scope.$on('finishedLoadingRecords',function(){
 				$scope.loading=false;
 			});
-			$scope.updateList = function(){
-				$scope.$emit('loadActivities',$scope.schema);
+
+
+			$scope.updateWorkflowList = function(document, workflowInfo){
+
+				var currentDocument = _.first(_.filter($scope.records, function(doc){
+					return doc.identifier == document.header.identifier;
+				}));
+
+				if(currentDocument)
+					currentDocument.isUpdating = true;
+
+				$scope.refreshworkflowRecord(document, workflowInfo)
 			}
+
+			$scope.refreshworkflowRecord = function(document, workflowInfo){
+				if(workflowInfo.workflowId){
+					IWorkflows.get(workflowInfo.workflowId).then(function(data){
+						if(data.state =='completed'){
+							var currentDocument = _.first(_.filter($scope.records, function(doc){
+								return doc.identifier == document.header.identifier;
+							}));
+							IStorage.documents.get(document.header.identifier,{'info':true}).then(function(data){
+
+								currentDocument.revision = data.data.revision;
+								currentDocument.updatedBy = data.data.updatedBy;
+								currentDocument.updatedOn = data.data.updatedOn;
+								currentDocument.workingDocumentBody = data.data.workingDocumentBody;
+								currentDocument.workingDocumentCreatedBy = data.data.workingDocumentCreatedBy;
+								currentDocument.workingDocumentCreatedOn = data.data.workingDocumentCreatedOn;
+								currentDocument.workingDocumentID = data.data.workingDocumentID;
+								currentDocument.workingDocumentLock = data.data.workingDocumentLock;
+								currentDocument.workingDocumentMetadata = data.data.workingDocumentMetadata;
+								currentDocument.workingDocumentOwner = data.data.workingDocumentOwner;
+								currentDocument.workingDocumentSize = data.data.workingDocumentSize;
+								currentDocument.workingDocumentSummary = data.data.workingDocumentSummary;
+								currentDocument.workingDocumentTitle = data.data.workingDocumentTitle;
+								currentDocument.workingDocumentUpdatedBy = data.data.workingDocumentUpdatedBy;
+								currentDocument.workingDocumentUpdatedOn = data.data.workingDocumentUpdatedOn;
+								$scope.$emit('taskAction',{document:document, workflowAction:workflowInfo.activity});
+							});
+						}
+						else{
+							$timeout(function(){$scope.refreshworkflowRecord(document,workflowInfo);},2000);
+						}
+					});
+				}
+			}
+
 		}]
 	};
 }]);

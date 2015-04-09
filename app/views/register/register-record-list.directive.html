@@ -102,7 +102,7 @@ background-color:#eee!important;
 
         </td>
         <td style="width:40%">
-            <span ng-show="isPublished(record) && !isRequest(record)">
+            <span ng-show="isPublished(record)">
                 <a href=""  ng-click="loadDocument(record); displayDetails=!displayDetails" ng-show="record.documentID">
                     {{(record.workingDocumentTitle||record.title)|lstring}}
                 </a>
@@ -142,8 +142,12 @@ background-color:#eee!important;
 
             <div ng-show="isPublished(record) && !isRequest(record)" class="color-published-green"> Published </div>
             <div ng-show="isDraft(record) && !isRequest(record)" class="color-litegrey"> Draft </div>
-            <div ng-show="isRequest(record)" class="color-red"> Pending approval </div>
-
+            <div ng-show="isRequest(record) && !record.isUpdating" class="color-red"> Pending approval </div>
+            <div ng-show="isRequest(record) && record.isUpdating">
+                <a class="btn btn-info" type="button" ng-click="return" style="padding:4px;">
+                    <strong><i class="fa fa-spin fa-cog"></i> Processing approval</strong>
+                </a>
+            </div>
         </td>
         <td>
             <div class="btn-group document_buttons btn-group-sm" style="width:100px;">
@@ -154,9 +158,10 @@ background-color:#eee!important;
             </div>
         </td>
     </tr>
-     <tr ng-show="displayDetails || displayRequest" style="border:0!important;background-color:inherit!important;" >
+     <tr ng-show="displayDetails || (displayRequest && !record.isUpdating)" style="border:0!important;background-color:inherit!important;"
+                ng-class="{'bg-grey': displayDetails||displayRequest}">
         <!-- <td style="border:0;background-color:inherit!important;">&nbsp;</td> -->
-        <td colspan="5" style="border:0!important;" ng-class="{'bg-grey': displayDetails||displayRequest}">
+        <td colspan="5" style="border:0!important;" >
 
             <div class="pull-right" style="z-index:100;padding-top:18px;padding-right:20px;cursor:pointer;">
                 <i class="glyphicon glyphicon-remove-circle" style="font-size:20px;" ng-click="displayDetails=false;displayRequest=false;"></i>
@@ -166,8 +171,8 @@ background-color:#eee!important;
                   <div record-loader document="record.data" hide="header;title;libraries" class="record-body" ></div>
               </div>
 
-               <div ng-show="displayRequest" >
-                  <div task-id class="record-body" load-task-data='formLoading' workflow-task-id="{{getWorkflowID(record)}}" on-activity-update="updateList()"  ></div>
+               <div ng-show="displayRequest">
+                  <div task-id class="record-body" load-task-data='formLoading' workflow-task-id="{{getWorkflowID(record)}}" on-activity-update="updateWorkflowList(document, workflowInfo)"  ></div>
               </div>
 
         </td>

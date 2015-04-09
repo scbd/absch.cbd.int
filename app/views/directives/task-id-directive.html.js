@@ -47,24 +47,27 @@ app.directive('taskId', function () {
 
 							$element.find('#spinner').css('display', 'block');
 							$scope.isUpdating = true;
-							IWorkflows.updateActivity($scope.workflowTaskId, $scope.workflow.activities[0].name, resultData).then(function(resultData){
+							IWorkflows.updateActivity($scope.workflowTaskId, $scope.workflow.activities[0].name, resultData).then(function(result){
 									// if($scope.$parentWatcher){
-									console.log(resultData);
+									console.log(result);
 										var msg = "";
-										if(resultData.result.action == 'approve'){
+										if(result.result.action == 'approve'){
 											msg = "Record approved successfully";
 										}
 										else{
 											msg = "Record rejected successfully";
 										}
 
+										var workflowInfo = {workflowId:$scope.workflowTaskId, activity:result}
 
-										if(typeof $scope.onActivityUpdate == 'function')
-											$timeout(function(){
-												$scope.onActivityUpdate();
-												$scope.$emit('taskAction',{document:$scope.document, workflowAction:resultData});
-												$scope.isUpdating = false;
-											}, 8000);
+										if(typeof $scope.onActivityUpdate == 'function'){
+											// $timeout(function(){
+											 	$scope.onActivityUpdate({document:$scope.document, workflowInfo:workflowInfo});
+												$scope.hideEverything=true;
+											// $scope.$emit('taskAction',{document:$scope.document, workflowAction:resultData});
+											// 	$scope.isUpdating = false;
+											// }, 8000);
+										}
 										else{
 											load();
 											$scope.isUpdating = false;

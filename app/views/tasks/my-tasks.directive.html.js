@@ -157,11 +157,36 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
 				//return entity && _.contains($scope.filterStatus, entity.workflow.data.metadata.schema);
 			}
 
-			$scope.updateWorkflowList = function(){
-                $scope.load($scope.taskGroupBy);
-                $scope.taskGroupBy = '';
-			};
+            $scope.updateWorkflowList = function(document, workflowInfo){
 
+                var currentTask = _.first(_.filter($scope.tasks, function(task){
+                    return task.workflow._id == workflowInfo.workflowId;
+                }));
+
+                if(currentTask)
+                    currentTask.activity.isUpdating = true;
+
+                $scope.refreshworkflowRecord(document, workflowInfo)
+            }
+
+            $scope.refreshworkflowRecord = function(document, workflowInfo){
+                if(workflowInfo.workflowId){
+                    IWorkflows.get(workflowInfo.workflowId).then(function(data){
+                        if(data.state =='completed'){
+                            var currentTask = _.first(_.filter($scope.tasks, function(task){
+                                return task.workflow._id == workflowInfo.workflowId;
+                            }));
+                            currentTask.activity = data.activities[0];
+                            currentTask.workflow = data;
+                            $scope.$emit('taskAction',{document:document, workflowAction:workflowInfo.activity});
+                        }
+                        else{
+                            $timeout(function(){$scope.refreshworkflowRecord(document,workflowInfo);},2000);
+                        }
+                    });
+                }
+            }
+            
 			$scope.getGroupTaskDetails = function(tasks){
 				// console.log($filter("orderBy")(tasks,'createdOn'));
 				 //console.log(_.last(_.sortBy(tasks,'createdOn')));
