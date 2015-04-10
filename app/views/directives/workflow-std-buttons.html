@@ -84,6 +84,19 @@
         </div>
     </div>
 
+    <div class="row" style="display:none" id="divShowError" ng-show="showError">
+        <div class="col-xs-12">
+            <div class="alert alert-danger" role="alert">
+                <button type="button" class="close" ng-click="showError=false">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                {{errorMessage}}
+            </div>
+
+        </div>
+    </div>
+
 
     <div id="dialogCancel" class="modal fade" data-backdrop="static">
         <div class="modal-dialog">

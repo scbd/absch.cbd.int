@@ -483,7 +483,27 @@ define(['app','angular-form-controls','/app/views/directives/workflow-history-di
 
                 }
 
+                $scope.$on("documentError",function(evt, data){
 
+                    if(data){
+                        $scope.showError = true;
+                        $scope.errorMessage = 'Your action ';
+                        if(data.action=='saveDraft')
+                            $scope.errorMessage += 'save draft ';
+                        else if(data.action=='publish')
+                            $scope.errorMessage += 'publish ';
+                        else if(data.action=='publishRequest')
+                            $scope.errorMessage += 'request publication ';
+
+                        $scope.errorMessage += 'was not successful. ';
+
+                        $('#divShowError').show('slow');
+
+                        if(data.error && data.error.data.Message)
+                            $scope.errorMessage += data.error.data.Message;
+
+                    }
+                });
 
 			}]
     	};
