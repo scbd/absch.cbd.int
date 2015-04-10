@@ -133,9 +133,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                     <div class="row">
                         <div class="col-xs-12" style="padding-top:10px;">
                             <div ng-class="{'alert alert-danger':document.providerConfidential}" class="confidential-box">
-                                <span class="pull-right confidential-text">
-                                    <input type="checkbox" name="providerConfidential" ng-model="document.providerConfidential" watch-items>Confidential</input>
-                                </span>
+
 
                                 <div class="km-control-group " name="providers" required caption="The provider">
                                     <span class="help-block">Please provide the name and contact details of the person or entity that holds the right to grant access to the genetic resources in accordance with domestic legislation.</span>
@@ -144,6 +142,9 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <field-embed-contact multiple ng-model="document.providers" locales="$parent.document.header.languages" caption="Add an organisation or a contact »"></field-embed-contact>
                                     </div>
                                 </div>
+                                <span class="confidential-text">
+                                    <input type="checkbox" name="providerConfidential" ng-model="document.providerConfidential" watch-items> Confidential</input>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -179,15 +180,16 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                     <div class="row" style="padding-top:20px;">
                         <div class="col-xs-12">
                             <div ng-class="{'alert alert-danger':document.informedConsentConfidential}" class="confidential-box">
-                                <span class="pull-right confidential-text">
-                                    <input type="checkbox" name="informedConsentConfidential" ng-model="document.informedConsentConfidential" watch-items>Confidential</input>
-                                </span>
+
                                 <div class="km-control-group" name="informedConsents" required caption="Person or entity to whom prior informed consent (PIC) was granted">
 
                                     <div ng-show="!document.informedConsentConfidential">
                                         <field-embed-contact multiple ng-model="document.informedConsents" locales="$parent.document.header.languages" caption="Add an organisation or a contact »"></field-embed-contact>
                                     </div>
                                     <span class="help-block" ng-show="document.informedConsentConfidential">Please note that the ABS-CH wont be able to send a courtersy copy of the IRCC</span>
+                                    <span class="confidential-text">
+                                        <input type="checkbox" name="informedConsentConfidential" ng-model="document.informedConsentConfidential" watch-items>Confidential</input>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -323,9 +325,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                     <div class="row">
                         <div class="col-xs-12">
                             <div ng-class="{'alert alert-danger':document.usageConfidential}" class="confidential-box">
-                                <span class="pull-right confidential-text">
-                                    <input type="checkbox" name="usageConfidential" ng-model="document.usageConfidential" watch-items>Confidential</input>
-                                </span>
+
                                 <div class="control-group">
                                     <div class="km-control-group" required name="usage" caption="Indicate if the permit or its equivalent covers commercial and/or non-commercial use">
 
@@ -333,6 +333,9 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                             <div km-select multiple required name="usage" ng-model="document.usage" items="options.usage()"></div>
                                         </div>
                                     </div>
+                                    <span class="confidential-text">
+                                        <input type="checkbox" name="usageConfidential" ng-model="document.usageConfidential" watch-items>Confidential</input>
+                                    </span>
                                 </div>
                             </div>
                         </div>
