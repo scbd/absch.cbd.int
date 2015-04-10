@@ -115,7 +115,7 @@
         </div>
 
         <div class="clearfix"></div>
-        <div class="col-xs-12" ng-show="document.consentInformation">
+        <div class="col-xs-12" >
             <label>Additional PIC information: </label>
             <div class="text">
                 <span ng-bind-html="renderHtml(document.consentInformation)"></span>
@@ -200,18 +200,18 @@
     <div class="row top-border bg-litegreen">
 
         <div class="col-xs-12">
-            <label>Specific uses covered by the permit or its equivalent or use restrictions:</label>
-            <div class="text">
-                <span ng-bind-html="renderHtml(document.usageDescription)"></span>
+            <label>Type of use allowed by the permit or its equivalent</label>
+            <div class="text" ng-class="{'confidential':document.usageConfidential}">
+                <span ng-show="!document.usageConfidential" ng-repeat="term in document.usage">{{term|term}}{{$last ? '' : ' and '}}</span>
+                <span ng-show="document.usageConfidential" class="confidential-text">Confidential information</span>
             </div>
         </div>
 
         <div class="clearfix"></div>
         <div class="col-xs-12">
-            <label>Utilization type</label>
-            <div class="text" ng-class="{'confidential':document.usageConfidential}">
-                <span ng-show="!document.usageConfidential" ng-repeat="term in document.usage">{{term|term}}{{$last ? '' : ' and '}}</span>
-                <span ng-show="document.usageConfidential" class="confidential-text">Confidential information</span>
+            <label>Specific uses covered by the permit or its equivalent or use restrictions:</label>
+            <div class="text">
+                <span ng-bind-html="renderHtml(document.usageDescription)"></span>
             </div>
         </div>
 
