@@ -199,22 +199,49 @@ define(['app','angular-form-controls','/app/views/directives/workflow-history-di
 
 							$scope.$emit("documentInvalid", validationReport);
 						}
-						else return $q.when(editFormUtility.publish(document)).then(function(documentInfo) {
+						else {
 
+                            var processRequest;
                             if($route.current.params.workflow){
-                                IWorkflows.updateActivity($route.current.params.workflow, 'publishRecord', { action : 'approve' })
+                                var metadata = {};
+                                processRequest =  storage.drafts.security.canUpdate(document.header.identifier, document.header.schema, metadata)
+                                                    .then(function(edit){
+                                                        return storage.drafts.locks.get(document.header.identifier,{lockID:''})
+                                                    })
+                                                    .then(function(lockInfo){
+                                                        return storage.drafts.locks.delete(document.header.identifier, lockInfo.data[0].lockID)
+                                                                .then(function(){
+                                                                    return storage.drafts.put(document.header.identifier, document);
+                                                                })
+                                                                .then(function(draftInfo){
+                                                                    return storage.drafts.locks.put(document.header.identifier, {lockID:lockInfo.data[0].lockID});
+                                                                })
+                                                    })
+                                                    .then(function(data){
+                                                        return IWorkflows.updateActivity($route.current.params.workflow, 'publishRecord', { action : 'approve' })
+                                                    });
+                            }
+                            else{
+                                processRequest = editFormUtility.publish(document);
                             }
 
-							if(documentInfo.type=='authority'){
-								//in case of authority save the CNA as a contact in drafts
-								saveAuthorityInContacts(documentInfo);
-							}
-                            $('form').filter('.dirty').removeClass('dirty');
-							$scope.$emit("documentPublished", documentInfo, document);
-                            $scope.$emit("updateOrignalDocument", document);
-							return documentInfo;
+                            return $q.when(processRequest).then(function(documentInfo) {
 
-						});
+                                // if($route.current.params.workflow){
+                                //     IWorkflows.updateActivity($route.current.params.workflow, 'publishRecord', { action : 'approve' })
+                                // }
+
+    							if(documentInfo.type=='authority'){
+    								//in case of authority save the CNA as a contact in drafts
+    								saveAuthorityInContacts(documentInfo);
+    							}
+                                $('form').filter('.dirty').removeClass('dirty');
+    							$scope.$emit("documentPublished", documentInfo, document);
+                                $scope.$emit("updateOrignalDocument", document);
+    							return documentInfo;
+
+    						});
+                        }
 					}).catch(function(error){
 
 						$scope.$emit("documentError", { action: "publish", error: error })

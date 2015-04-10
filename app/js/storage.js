@@ -298,6 +298,70 @@ define(["app", "authentication"], function (app) {
 
 					//===========================
 					//
+					//===========================
+					"get" : function(identifier, params)
+					{
+						params            = clone(params||{});
+						params.identifier = identifier;
+
+						var useCache = !!params.cache;
+
+						if(!params.cache)
+							params.cache = true;
+
+
+						var oTrans = transformPath(serviceUrls.draftLockUrl(), params);
+
+						return $http.get(oTrans.url, { params : oTrans.params, cache:useCache });
+
+						//TODO: return result.data;
+
+					},
+					//===========================
+					//
+					//===========================
+					"exists" : function(identifier, params)
+					{
+						params            = clone(params||{});
+						params.identifier = identifier;
+
+						var useCache = !!params.cache;
+
+						if(!params.cache)
+							params.cache = true;
+
+						var oTrans = transformPath(serviceUrls.draftLockUrl(), params);
+
+						return $http.head(oTrans.url, {  params : oTrans.params, cache:useCache }).then(function() {
+
+							return true;
+
+						}).catch(function(error) {
+
+							if(error.status!="404")
+								throw "Error";
+
+							return false;
+						});
+					},
+
+					//===========================
+					//
+					//===========================
+					"put" : function(identifier, params)
+					{
+						params            = clone(params||{});
+						params.identifier = identifier;
+
+						var oTrans = transformPath(serviceUrls.draftLockUrl(), params);
+						var data = null;
+						return $http.put(oTrans.url,data, { "params" : oTrans.params }).then(function(result){
+							return result.data;
+						});
+					},
+
+					//===========================
+					//
 					// Not tested
 					//
 					//===========================
