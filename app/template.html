@@ -45,6 +45,12 @@
 
     <iframe id="authenticationFrame" src="https://accounts.cbd.int/app/authorize.html" style="display:none"></iframe>
 
+    <div class="alert alert-info alert-dismissable" ng-hide="hideDisclaimer" style="margin-bottom: 0px; text-align: center">
+        <button type="button" ng-click="hideDisclaimer=true" class="close" style="opacity: 1;" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>Please note that althought the ABSCH is currently live and operational the user interface may change based on feedback received.</strong>
+        <span class="color-black"><br>If you have a comment or suggestion on how we can improve please email <a href="mailto:absch@cbd.int">absch@cbd.int</a>.</span>
+    </div>
+
     <div class="disclaimer">
         <div class="promo" ng-class="{'bg-darkgrey': development_env==true,'bg-blue': training_env==true}" href="/about/">
             <div class="container">
