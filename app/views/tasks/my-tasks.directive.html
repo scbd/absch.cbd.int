@@ -109,7 +109,7 @@
                             </div>
                             <div class="col-xs-5">
                                 <!-- Description -->
-                                <strong ng-show="task.workflow.result.documentID||task.workflow.data.documentID"><a ng-href="/database/record/{{task.workflow.result.documentID||task.workflow.data.documentID}}">{{task.workflow.data.title | lstring}}</a>
+                                <strong ng-show="task.workflow.result.documentID||task.workflow.data.documentID"><a ng-href="/database/record/{{task.workflow.result.documentID||task.workflow.data.documentID}}" target="_new_">{{task.workflow.data.title | lstring}}</a>
                                 </strong>
                                 <strong ng-hide="task.workflow.result.documentID||task.workflow.data.documentID"><a href="#" ng-click="tasksDisplay=!tasksDisplay; formLoading=false;">{{task.workflow.data.title | lstring}}</a>
                                 </strong>
