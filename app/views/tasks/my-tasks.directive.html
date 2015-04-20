@@ -100,7 +100,7 @@
                         <div class="row">
                             <div class="col-xs-3">
                                 <!-- schema -->
-                                <i class="{{task.workflow.data.metadata.schema|schemaIcon}}" ng-class="{'color-red':task.workflow.state!='completed', 'color-green':task.workflow.state=='completed', 'color-grey':task.workflow.state=='completed' && task.activity.result.action=='reject' }"
+                                <i class="{{task.workflow.data.metadata.schema|schemaIcon}}" ng-class="{'color-red':task.workflow.state!='completed', 'color-green':(task.workflow.state=='completed' && task.activity.result.action=='approve'), 'color-grey': (task.workflow.state=='completed' && task.activity.result.action=='reject') }"
                                 style="font-size:16pt;position:relative;top:3px;"></i> {{task.workflow.data.metadata.schema|schemaName}}
                                 <a ng-href="#" ng-click="showHistory = !showHistory" ng-show="task.workflowHistory.length>1">
                                     <i class="fa fa-chevron-circle-up" ng-show="showHistory"></i>
@@ -109,7 +109,7 @@
                             </div>
                             <div class="col-xs-5">
                                 <!-- Description -->
-                                <strong ng-show="task.workflow.result.documentID||task.workflow.data.documentID"><a ng-href="/database/record/{{task.workflow.result.documentID||task.workflow.data.documentID}}">{{task.workflow.data.title | lstring}}</a>
+                                <strong ng-show="task.workflow.result.documentID||task.workflow.data.documentID"><a ng-href="/database/record/{{task.workflow.result.documentID||task.workflow.data.documentID}}" target="_new_">{{task.workflow.data.title | lstring}}</a>
                                 </strong>
                                 <strong ng-hide="task.workflow.result.documentID||task.workflow.data.documentID"><a href="#" ng-click="tasksDisplay=!tasksDisplay; formLoading=false;">{{task.workflow.data.title | lstring}}</a>
                                 </strong>
