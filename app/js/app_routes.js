@@ -1,6 +1,6 @@
 'use strict';
 
-define(['app', 'extended-route-provider','authentication', 'services', 'filters', 'storage', 'workflows', 'realm-configuration'], function (app) {
+define(['app', 'extended-route-provider','authentication', 'services', 'filters', 'storage', 'workflows', 'realm-configuration', 'notifications'], function (app) {
 
      app.value("realm", {value:"ABS"});
     app.value("schemaTypes", [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "resource" ]);
@@ -152,7 +152,13 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
                 subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',
                 type : 'all'
             }).
-
+            when('/register/requests/:workflowId', {
+                templateUrl: '/app/views/register/register.html',
+                resolveController: true,
+                resolveUser: true,
+                subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',
+                type : 'all'
+            }).
             when('/register/requests/:type/:status', {
                 templateUrl: '/app/views/register/register.html',
                 resolveController: true,

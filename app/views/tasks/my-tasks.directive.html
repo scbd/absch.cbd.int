@@ -94,7 +94,7 @@
                 </div>
                 <div  id="taskList">
 
-                    <div ng-repeat="task  in tasks|filter:keywords|filter:filterByType|filter:filterByStatus|orderBy:sortTerm:orderList" >
+                    <div ng-repeat="task  in tasks|filter:keywords|filter:filterByType|filter:filterByStatus|orderBy:sortTerm:orderList"  id="{{task.workflow._id}}">
                     <div  class="row" ng-class="{'bg-grey':task.workflow.state=='completed','bg-danger':task.workflow.state!='completed'}" style="padding:10px;margin-bottom:10px;">
                         <!-- ng-repeat="task in grpTask|orderBy:createdOn:true|limitTo:1" -->
                         <div class="row">
@@ -139,7 +139,7 @@
                                 <div ng-show="task.workflow.state!='completed'">
 
                                     <div ng-show="task.activity.name='publishRecord' && !task.activity.isUpdating">
-                                        <a class="btn btn-danger" type="button" ng-click="tasksDisplay=!tasksDisplay; formLoading=false;" style="padding:4px;">
+                                        <a class="btn btn-danger" type="button" ng-click="tasksDisplay=!tasksDisplay; formLoading=false;task.isActive=false;" style="padding:4px;">
                                             <strong><i ng-class="{'glyphicon glyphicon-plus-sign': !tasksDisplay, 'glyphicon glyphicon-minus-sign': tasksDisplay}"></i> Awaiting approval</strong>
                                         </a>
                                     </div>
@@ -150,10 +150,10 @@
                                     </div>
 
                                     <div ng-hide="ask.activity.name='publishRecord'">{{activity.name}}*</div>
-
+                                    <span ng-hide="true">{{ formLoading = task.isActive ? false : (tasksDisplay ? true :undefined)}}<span>
                                 </div>
                             </div>
-                            <div ng-show="tasksDisplay" class="col-xs-12" ng-show="tasksDisplay" style="padding:20px 20px 0 20px;">
+                            <div ng-show="tasksDisplay || task.isActive" class="col-xs-12" style="padding:20px 20px 0 20px;">
                                 <div task-id class="record-body" load-task-data='formLoading' workflow-task-id="{{task.workflow._id}}" on-activity-update="updateWorkflowList(document, workflowInfo)"></div>
                             </div>
                         </div>

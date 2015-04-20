@@ -1,7 +1,7 @@
 ﻿define(['app','underscore','/app/js/common.js'], function (app,_) {
 
-app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm", "$route","$filter","commonjs",'$parse','$element',
- 	function ($scope, $timeout, IWorkflows, realm, $route, $filter,commonjs,$parse,$element)
+app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm", "$route","$filter","commonjs",'$parse','$element','$routeParams',
+ 	function ($scope, $timeout, IWorkflows, realm, $route, $filter,commonjs,$parse,$element, $routeParams)
 		{
 
 			$scope.options = {
@@ -26,7 +26,7 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
 					}
 			};
 
-			var nextLoad  = null
+			var nextLoad  = null;
 			var myUserID = $scope.$root.user.userID;
 			var queryAllTasks    = {
 				$or : [
@@ -38,10 +38,9 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
 									] },
 							{ $and : [	{ "createdBy" : myUserID },
 								{ closedOn : { $exists : true } },{ "data.realm" : realm.value }
-								] }
-								,
-								{ $and : [	{ "activities.completedBy" : myUserID },{ "data.realm" : realm.value }
-								] }
+								] },
+							{ $and : [	{ "activities.completedBy" : myUserID },{ "data.realm" : realm.value }
+							] }
 					   ]
 			};
 			var queryMyTasks = {
@@ -67,7 +66,7 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
 	       	         $scope.sortTerm = term;
 	       	         $scope.orderList = true;
 	       	     }
-	       	 }
+	       	 };
 			//==============================
 			//
 			//==============================
@@ -86,29 +85,42 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
 						workflows.forEach(function(workflow) {
 
 							workflow.activities.forEach(function(activity){
-
-								//if(isAssignedToMe(activity)) {
-									tasks.push({ workflow : workflow, activity : activity, identifier: workflow.data.identifier});
-							//	}
-							});
+									tasks.push({ workflow : workflow, activity : activity,
+                                                identifier: workflow.data.identifier,
+                                                isActive : $routeParams.workflowId && workflow._id==$routeParams.workflowId ? true : false});
+                            });
 						});
 						$scope.taskLists = $filter("orderBy")(tasks,'workflow.createdOn',true);
                         if(taskGroupBy)
                             $scope.taskGroupBy = taskGroupBy;
                         else
 						    $scope.taskGroupBy = 'workflow._id';
-						//nextLoad = $timeout(load, 15*1000);
+
+                        if($routeParams.workflowId ){
+                            scrollToDocument($routeParams.workflowId);
+                        }
+
 					});
 			}
 
+            function scrollToDocument(workflowId){
+                var element = $element.find('#'+$routeParams.workflowId);
+                if(element.length === 0){
+                    $timeout(function(){ scrollToDocument(workflowId); },2000);
+                    return;
+                }
+                $('html, body').animate({scrollTop:element.offset().top});
+            }
+    
+
 			if($scope.$root.user.isAuthenticated)
 				load();
+
 
 			//==============================
 			//
 			//==============================
 			function isAssignedToMe(activity) {
-
 				return _.contains(activity.assignedTo||[], $scope.$root.user.userID||-1);
 			}
 
@@ -138,7 +150,7 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
 					return true;
 
 				return entity && $scope.filterType == entity.workflow.data.metadata.schema;
-			}
+			};
 
 			$scope.filterByStatus = function(task){
 
@@ -155,7 +167,7 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
 					return task && task.workflow.state=='completed' &&  task.activity.result.action=='reject';
 				}
 				//return entity && _.contains($scope.filterStatus, entity.workflow.data.metadata.schema);
-			}
+			};
 
             $scope.updateWorkflowList = function(document, workflowInfo){
 
@@ -166,8 +178,8 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
                 if(currentTask)
                     currentTask.activity.isUpdating = true;
 
-                $scope.refreshworkflowRecord(document, workflowInfo)
-            }
+                $scope.refreshworkflowRecord(document, workflowInfo);
+            };
 
             $scope.refreshworkflowRecord = function(document, workflowInfo){
                 if(workflowInfo.workflowId){
@@ -185,8 +197,8 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
                         }
                     });
                 }
-            }
-            
+            };
+
 			$scope.getGroupTaskDetails = function(tasks){
 				// console.log($filter("orderBy")(tasks,'createdOn'));
 				 //console.log(_.last(_.sortBy(tasks,'createdOn')));
@@ -194,7 +206,7 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
 				if(tasks)
 					return _.last(_.sortBy(tasks,'createdOn'));
 				return '';
-			}
+			};
 
 			$scope.$watch('taskGroupBy', function(newVal,oldVal){
 
@@ -204,18 +216,18 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
                         $scope.tasks = [];
                         if(newVal=='workflow.data.identifier'){
                             if(!$scope.tasksGroup){
-                                $scope.tasksGroup=[]
+                                $scope.tasksGroup=[];
                                 var taskList = angular.copy($scope.taskLists);
                                 _.each(taskList, function(item){
                                     var task = _.find($scope.tasksGroup, {identifier : item.workflow.data.identifier});
-                                    if(!task || task.length==0){
+                                    if(!task || task.length===0){
                                         $scope.tasksGroup.push(item);
                                     }
                                     else{
                                         if(!task.workflowHistory){
                                             task.workflowHistory=[];
                                         }
-                                        task.workflowHistory.push(item)
+                                        task.workflowHistory.push(item);
                                     }
                                 });
                             }
@@ -232,7 +244,7 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
 					// });
 					$element.find('#taskList').fadeIn();
 				}
-			})
+			});
 
 		}]);
 });
