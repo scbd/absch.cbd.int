@@ -43,7 +43,7 @@ app.directive('taskId', function () {
 						//
 						//==================================================
 						$scope.updateActivity = function(resultData) {
-							$('#buttonsDiv').wrap("<div class='overlayDiv'> </div>")
+							$element.find('#buttonsDiv').wrap("<div class='overlayDiv'> </div>")
 
 							$element.find('#spinner').css('display', 'block');
 							$scope.isUpdating = true;

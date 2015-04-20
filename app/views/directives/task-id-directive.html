@@ -1,70 +1,5 @@
 <div ng-hide="hideEverything">
-  <!-- <h4>Request information and status</h4> -->
 
-  <!-- <div> -->
-  <!-- <table class="table table-striped">
-
-			  <tr>
-			  	<td style="width:40%">Request ID</td>
-			  	<td style="text-transform:uppercase;white-space:nowrap;">
-			  		{{formatWID(workflow._id)}}
-				</td>
-			  </tr>
-			  <tr>
-			  	<td>Request Type</td>
-			  	<td>
-			  		<div ng-switch="workflow.type.name">
-						<span ng-switch-when="publishNationalRecord">Publishing request</span>
-						<span ng-switch-when="publishReferenceRecord">Publishing request</span>
-						<span ng-switch-default>*{{workflow.type.name|uppercase}}</span>
-					</div>
-				</td>
-			  </tr>
-			  <tr>
-			  	<td>Record ID</td>
-			  	<td>
-			  		<a    ng-show="workflow.result.documentID||workflow.data.documentID" ng-href="/database/record?documentID={{workflow.result.documentID||workflow.data.documentID}}">{{workflow.result.documentID||workflow.data.documentID}}</a>
-			  		<span ng-hide="workflow.result.documentID||workflow.data.documentID">[new]</span>
-			  		<span ng-show="workflow.result.revision">(rev. {{workflow.result.revision}})</span>
-				</td>
-			  </tr>
-			  <tr>
-			  	<td>Description</td>
-			  	<td>
-					<strong>{{workflow.data.metadata.schema|schemaName}}</strong>
-					-
-					<span>{{workflow.data.title | lstring}}</span>
-
-				</td>
-			  </tr>
-			  <tr>
-			  	<td>Status</td>
-			  	<td>
-			  		<span ng-switch="workflow.state">
-			  			<span ng-switch-when="running"><i class="glyphicon glyphicon-cog"></i> Pending</span>
-			  			<span ng-switch-when="completed">Completed on {{workflow.closedOn|date:'short'}}</span>
-			  			<span ng-switch-when="canceled"><i class="glyphicon glyphicon-remove-circle"></i> Canceled on {{workflow.closedOn|date:'short'}}</span>
-			  			<span ng-switch-when=""><i class="glyphicon glyphicon-exclamation-sign"></i> Failed on {{workflow.closedOn|date:'short'}}</span>
-			  			<span ng-switch-default>*{{workflow.state|uppercase}}</span>
-					</span>
-				</td>
-			  </tr>
-
-			  <tr ng-show="workflow.createdOn">
-			  	<td>Created on</td>
-			  	<td>{{workflow.createdOn|date:'short'}} by {{workflow.createdBy_info.firstName}} {{workflow.createdBy_info.lastName}} ({{workflow.createdBy_info.email}})</td>
-			  </tr>
-		</table> -->
-
-  <!-- Pending activity(ies) -->
-
-
-  <!-- <div >
-			<a type="button" class="btn btn-primary"
-			ng-href="/register/{{workflow.data.metadata.schema | schemaShortName}}/{{activity.input.identifier}}/edit?workflow={{workflowTaskId}}"><i class="glyphicon glyphicon-edit"></i> </a>
-			<button type="button" class="btn btn-primary" ng-click="updateActivity({ action : 'approve' })"><i class="glyphicon glyphicon-ok"></i> </button>
-			<button type="button" class="btn btn-warning"  data-toggle="modal" data-target="#rejectModal"><i class="glyphicon glyphicon-remove"></i> </button>
-		</div> -->
 <style>
 .overlayDiv{
 		opacity:0.2;
@@ -96,7 +31,7 @@
       </div>
 
       <div class="col-xs-4">
-        <button type="button" class="btn btn-lg btn-warning" style="width:140px;" data-toggle="modal" data-target="#rejectModal" ng-disabled="isUpdating">
+        <button type="button" class="btn btn-lg btn-warning" style="width:140px;" data-toggle="modal" data-target="#rejectModal{{workflowTaskId}}" ng-disabled="isUpdating">
           <i class="glyphicon glyphicon-remove"></i>
           <br>REJECT
         </button>
@@ -106,7 +41,7 @@
     </div>
 
     <form name="rejectForm" role="form">
-      <div class="modal fade" id="rejectModal">
+      <div class="modal fade" id="rejectModal{{workflowTaskId}}">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
