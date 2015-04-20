@@ -17,29 +17,18 @@
     <script src="../libs/barcode-39.js/barcode-39.min.js"></script>
 
     <script src="../libs/angular/angular.min.js"></script>
-	<script src="../libs/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="../libs/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="absCheckpointCommunique.html.js"></script>
     <script src="absCommon.js"></script>
 
     <style type="text/css">
-        #watermark {
-            color: black;
-            padding-left: 250px;
-        }
-        #watermark p {
-            color: black;
-            font-weight: bolder;
-            font-size: xx-large;
-        }
-        a[href]:after {
-            content: '';
-        };
+
     </style>
 </head>
 
 <body>
     <div ng-app="ngapp" class="main-nav">
-        <div ng-controller="printPermit" style="width:1000px;">
+        <div ng-controller="printPermit" style="width:1000px;"   ng-class="{'watermark' : documentInfo.Realm!= 'abs'}">
             <div class="row" style="padding-bottom:30px;">
                 <div class="col-xs-1">
                 </div>
@@ -67,7 +56,7 @@
 
             <p style="margin-bottom:30px;">
                 On the basis of the information collected or received by the checkpoint and provided to the ABS Clearing-House pursuant to Article 17 of the Nagoya Protocol, a courtesy copy of the report of the records on the communique has been automatically sent by
-                electronic means to the designated national authorities, the national focal point of the country and the competent national authorities providing prior informed consent (PIC), as appropriate.
+                electronic means to the designated national authorities, the national focal point and the competent national authority of the country providing prior informed consent (PIC), as appropriate.
             </p>
 
             <!--
@@ -108,15 +97,18 @@
                 <span ng-repeat="cp in document.checkpoint">
                     <div class="col-xs-6">
                         <div class="text">
-							{{cp.name|lstring}}<br/>
-							<span ng-show="cp.jurisidction">{{cp.jurisidction|term}}<br/></span>
-							<span ng-bind-html="renderHtml(cp.relevantInformation)"/></span>
-							<!-- <span>https://absch.cbd.int/database/{{cp.header|uniqueID:false}}</span> -->
-						</div>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="text" ng-bind-html="renderHtml(cp.responsibilities)"></div>
-                    </div>
+                            {{cp.name|lstring}}
+                            <br/>
+                            <span ng-show="cp.jurisidction">{{cp.jurisidction|term}}
+                                <br/>
+                            </span>
+                            <span ng-bind-html="renderHtml(cp.relevantInformation)" /></span>
+                <!-- <span>https://absch.cbd.int/database/{{cp.header|uniqueID:false}}</span> -->
+                </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="text" ng-bind-html="renderHtml(cp.responsibilities)"></div>
+                </div>
                 </span>
             </div>
 
@@ -124,9 +116,11 @@
             <legend>Recipients of the Checkpoint Communiqué</legend>
             <div class="row top-border bg-lightblue">
                 <div ng-repeat="contact in emailList">
-                    <div ng-class="{'row': ($index+1)%4==0}">    </div>
-                    <div class="col-xs-4" >
-                        <div class="text"><div view-contact-reference ng-model="contact" locale="locale"></div></div>
+                    <div ng-class="{'row': ($index+1)%4==0}"> </div>
+                    <div class="col-xs-4">
+                        <div class="text">
+                            <div view-contact-reference ng-model="contact" locale="locale"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -143,7 +137,7 @@
                         <div ng-show="!document.permitNotAvailable || document.permit">
                             <ul>
                                 <li ng-repeat="permit in document.permit" class="ng-scope">
-                                    <a href="https://absch.cbd.int/database/{{permit.document.header | uniqueID}}" >
+                                    <a href="https://absch.cbd.int/database/{{permit.document.header | uniqueID}}">
                                         {{permit.document.header | uniqueID}}
                                     </a>
                                 </li>
@@ -163,7 +157,7 @@
 
                     <div class="clearfix"></div>
                     <div class="col-xs-6">
-                        <label>Source Country</label>
+                        <label>Source country of the genetic resource</label>
                         <div class="text">
                             <ul>
                                 <li ng-repeat="country in document.originCountries">{{country|term}}</li>
@@ -171,7 +165,7 @@
                         </div>
                     </div>
                     <div class="col-xs-6">
-                        <label>Subject Matter</label>
+                        <label>Keywords</label>
                         <div class="text">
                             <ul>
                                 <li ng-repeat="keyword in document.keywords">{{keyword|term}}</li>
@@ -222,32 +216,34 @@
                 </div>
 
                 <div class="clearfix"></div>
-				<div class="col-xs-12">
-					<label>People or entities utilizing the genetic resource at the checkpoint</label>
-				</div>
-				<div class="col-xs-12">
-					<div class="col-xs-4" ng-repeat="user in document.geneticRessourceUsers" style="padding-left:0px;">
-						<div class="text"><div view-contact-reference ng-model="user" locale="locale"></div></div>
-					</div>
-				</div>
+                <div class="col-xs-12">
+                    <label>People or entities utilizing the genetic resource at the checkpoint</label>
+                </div>
+                <div class="col-xs-12">
+                    <div class="col-xs-4" ng-repeat="user in document.geneticRessourceUsers" style="padding-left:0px;">
+                        <div class="text">
+                            <div view-contact-reference ng-model="user" locale="locale"></div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="clearfix"></div>
             </div>
-			<legend>Additional Information</legend>
-			<div class="row top-border bg-lightblue">
-				<div class="col-xs-12">
-					<label>Additional Information</label>
-					<div class="text">
-						<div ng-bind-html="renderHtml(document.relevantInformation)"></div>
-					</div>
-				</div>
+            <legend>Additional Information</legend>
+            <div class="row top-border bg-lightblue">
+                <div class="col-xs-12">
+                    <label>Additional Information</label>
+                    <div class="text">
+                        <div ng-bind-html="renderHtml(document.relevantInformation)"></div>
+                    </div>
+                </div>
 
-				<div class="clearfix"></div>
-				<div class="col-xs-12">
-					<label>Attached documents</label>
-					<ul style="list-style-type: none;" class="text" >
-						<li ng-repeat="item in document.informationDocuments">
-							<strong><a ng-href="http://absch.cbd.int/{{item.url}}" >{{item.name}}</strong>
+                <div class="clearfix"></div>
+                <div class="col-xs-12">
+                    <label>Attached documents</label>
+                    <ul style="list-style-type: none;" class="text">
+                        <li ng-repeat="item in document.informationDocuments">
+                            <strong><a ng-href="http://absch.cbd.int/{{item.url}}">{{item.name}}</strong>
 						</li>
 						<li ng-repeat="item in document.relevantDocuments">
 							<strong><a ng-href="http://absch.cbd.int/{{item.url}}" >{{item.name}}</strong>
@@ -262,8 +258,8 @@
                 <div class="col-xs-8" style="font-size:12px;">
                     Questions about the checkpoint communique should be addressed to the issuing authority. Additional information about this checkpoint communique may be available in the Access and Benefit-Sharing Clearing House (<a href="http://absch.cbd.int/"
                     >http://absch.cbd.int/</a>).
-                    <br>
-                    <br> Questions about the Nagoya Protocol on Access and Benefit-sharing or the operation of the Access and Benefit-sharing Clearing-House may be directed to the Secretariat of the Convention on Biological Diversity.
+                                <br>
+                                <br> Questions about the Nagoya Protocol on Access and Benefit-sharing or the operation of the Access and Benefit-sharing Clearing-House may be directed to the Secretariat of the Convention on Biological Diversity.
 
                 </div>
                 <div class="col-xs-4" style="font-size:12px;">
@@ -283,6 +279,6 @@
         </div>
 
     </div>
-    </body>
+</body>
 
 </html>

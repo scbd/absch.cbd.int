@@ -102,3 +102,12 @@ label{
     font-weight:bold;
     background-color: #C7532C!important;
 }
+.watermark{
+background-image: url(../img/testwatermark.png);
+background-repeat: repeat;
+background-attachment: fixed;
+background-size: 150px;
+}
+a[href]:after {
+    content: '';
+};

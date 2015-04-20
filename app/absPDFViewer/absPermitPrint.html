@@ -39,7 +39,7 @@
 
 <body>
     <div ng-app="ngapp" class="main-nav">
-        <div ng-controller="printPermit" style="width:1000px;">
+        <div ng-controller="printPermit" style="width:1000px;"  ng-class="{'watermark' : documentInfo.Realm!= 'abs'}">
 
 			<div permit document-id="identifier"></div>
 
