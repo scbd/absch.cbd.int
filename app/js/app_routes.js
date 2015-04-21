@@ -1,6 +1,6 @@
 'use strict';
 
-define(['app', 'extended-route-provider','authentication', 'services', 'filters', 'storage', 'workflows', 'realm-configuration', 'notifications'], function (app) {
+define(['app', 'extended-route-provider','authentication', 'services', 'filters', 'storage', 'workflows', 'realm-configuration', 'user-notifications'], function (app) {
 
      app.value("realm", {value:"ABS"});
     app.value("schemaTypes", [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "resource" ]);
