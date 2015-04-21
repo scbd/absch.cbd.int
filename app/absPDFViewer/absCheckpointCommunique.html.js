@@ -22,6 +22,7 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q
 		 	$scope.document = result[0].data;
 			$scope.documentInfo = result[1].data;
 			$scope.documentVersion = result[2].data;
+			$scope.realm = $scope.documentInfo.Realm;
 
 			if($scope.document.permit){
 				$scope.document.permit.forEach(function(item){
@@ -57,12 +58,12 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q
 		else if(document.originCountries){
 
 			var country = _.map(document.originCountries, function(country){ return country.identifier })
-			var query = "http://absch.cbd.int/api/v2013/index/select?cb=1412881121649&fl=id,identifier_s&q=(realm_ss:" + realm.toLowerCase() +
+			var query = "/api/v2013/index/select?cb=1412881121649&fl=id,identifier_s&q=(realm_ss:" + $scope.realm.toLowerCase() +
 			"+AND+NOT+version_s:*+AND+schema_s:authority+AND+(government_s:" + country.join('+OR government_s:') + "))&rows=50"
 
 			$http.get(query).success(function(res) {
 				var cnaQuery=[]
-				angular.forEach(res.body.response.docs, function(cna){
+				angular.forEach(res.response.docs, function(cna){
 					cnaQuery.push($http.get('/api/v2013/documents/' + cna.identifier_s, {}));
 				});
 				$q.all(cnaQuery).then(function(data){
@@ -80,6 +81,27 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q
 					});
 			});
 		}
+		var government =  document.government.identifier;
+		var query = "/api/v2013/index/select?fl=id,identifier_s,schema_s,title_t,department_EN_t,description_EN_t,email_ss,"+
+		"+organization_EN_t,telephone_s,type_ss,fax_ss,government_CEN_s,addressCountry_s&q=(realm_ss:" + $scope.realm.toLowerCase() +
+		"+AND+NOT+version_s:*+AND+schema_s:focalPoint+AND+(type_ss:NP-FP+OR+type_ss:ABS-FP)+AND+(government_s:" + government + "))&rows=50";
+
+		$http.get(query).success(function(res) {
+			angular.forEach(res.response.docs, function(nfp){
+				console.log(nfp);
+					$scope.emailList.push(
+							{
+								type:'person',
+								firstName:nfp.title_t,
+								addressHTML:{en:nfp.description_EN_t.replace(/\n/g, '<br/>')},
+								country: nfp.addressCountry_s,
+								phones:[nfp.telephone_s],
+								faxes:nfp.fax_ss,
+								emails:nfp.email_ss
+							});
+			});
+			console.log(	$scope.emailList);
+		});
 	}
 
 
