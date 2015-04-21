@@ -1,4 +1,4 @@
-﻿define(['app','underscore','/app/js/common.js'], function (app,_) {
+﻿define(['app','underscore','/app/js/common.js','/app/views/directives/infinite-scroll-directive.js'], function (app,_) {
 
 app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm", "$route","$filter","commonjs",'$parse','$element','$routeParams',
  	function ($scope, $timeout, IWorkflows, realm, $route, $filter,commonjs,$parse,$element, $routeParams)
@@ -56,6 +56,11 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
 
 			$scope.sortTerm = 'workflow.createdOn';
 			$scope.orderList = true;
+
+            $scope.length = 25;
+            $scope.skip = 0;
+            $scope.sort = {createdOn:-1};
+
 	       	 //==================================
 	       	 $scope.sortTable = function (term) {
 
@@ -78,29 +83,41 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
 					query = queryAllTasks;
 				}
 
-					IWorkflows.query(query).then(function(workflows){
+                    if($scope.recordCount >0){
 
-						var tasks  = [];
-                        $scope.taskLists = [];
-						workflows.forEach(function(workflow) {
+                        $scope.loadingTasks=true;
+        				IWorkflows.query(query,null,$scope.length, $scope.skip==0 ? 0 : $scope.length * $scope.skip).then(function(workflows){
+                            $scope.skip++;
+        					var tasks  = [];
+                            //tasks = _.clone($scope.taskLists||[]);
+        					workflows.forEach(function(workflow) {
 
-							workflow.activities.forEach(function(activity){
-									tasks.push({ workflow : workflow, activity : activity,
-                                                identifier: workflow.data.identifier,
-                                                isActive : $routeParams.workflowId && workflow._id==$routeParams.workflowId ? true : false});
-                            });
-						});
-						$scope.taskLists = $filter("orderBy")(tasks,'workflow.createdOn',true);
-                        if(taskGroupBy)
-                            $scope.taskGroupBy = taskGroupBy;
-                        else
-						    $scope.taskGroupBy = 'workflow._id';
+        						workflow.activities.forEach(function(activity){
+        								tasks.push({ workflow : workflow, activity : activity,
+                                                    identifier: workflow.data.identifier,
+                                                    isActive : $routeParams.workflowId && workflow._id==$routeParams.workflowId ? true : false});
+                                });
+        					});
 
-                        if($routeParams.workflowId ){
-                            scrollToDocument($routeParams.workflowId);
-                        }
+        					$scope.taskLists = _.union(tasks, $scope.taskLists);//$filter("orderBy")(tasks,'workflow.createdOn',true);
+                            if(taskGroupBy)
+                                $scope.taskGroupBy = taskGroupBy;
+                            else
+        					{
+                                $scope.taskGroupBy = 'workflow._id';
+                                $scope.tasks = [];
+                                $scope.tasks = $scope.taskLists;
+                            }
 
-					});
+                            if($routeParams.workflowId ){
+                                scrollToDocument($routeParams.workflowId);
+                            }
+
+        				}).finally(function(){
+                            $scope.loadingTasks=false;
+                        });
+                    }
+
 			}
 
             function scrollToDocument(workflowId){
@@ -111,11 +128,30 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
                 }
                 $('html, body').animate({scrollTop:element.offset().top});
             }
-    
 
-			if($scope.$root.user.isAuthenticated)
-				load();
+            $scope.loadTasks = function(){
+                console.log($scope.loadingTasks)
+                if($scope.loadingTasks || $scope.skip > Math.ceil($scope.recordCount/$scope.length))
+                    return;
 
+                var query = queryMyTasks;
+
+                if($route.current.$$route.type == 'all'){
+                    query = queryAllTasks;
+                }
+                $scope.loadingTasks=true;
+                //get record count
+                if(!$scope.recordCount )
+                    IWorkflows.query(query,1).then(function(recordCount){
+                        $scope.recordCount = recordCount.count;
+                        load();
+                    });
+                else
+                    load();
+            }
+
+            // if($scope.$root.user.isAuthenticated)
+            //     $scope.loadTasks();
 
 			//==============================
 			//

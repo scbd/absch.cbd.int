@@ -53,8 +53,8 @@ define(["app", "authentication"], function (app) {
 			//===========================
 			//
 			//===========================
-			this.query  = function(query) {
-				return $http.get("/api/v2013/workflows/", { params : { q : JSON.stringify(query) } }).then(function(resp){
+			this.query  = function(query, count, length, skip, sort) {
+				return $http.get("/api/v2013/workflows/", { params : { q : JSON.stringify(query), l:length, s:sort, sk:skip, c:count } }).then(function(resp){
 					return resp.data;
 				});
 			};

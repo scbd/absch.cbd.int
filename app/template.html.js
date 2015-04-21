@@ -3,8 +3,8 @@ define(['app',
 ], function(app) {
     'use strict';
 
-    app.controller('TemplateController', ['$scope', '$rootScope', '$window', '$location', 'authentication', '$browser', 'realmConfiguration', 'underscore', 'INotifications', '$timeout','$filter',
-        function($scope, $rootScope, $window, $location, authentication, $browser, realmConfiguration, _, notifications, $timeout, $filter) {
+    app.controller('TemplateController', ['$scope', '$rootScope', '$window', '$location', 'authentication', '$browser', 'realmConfiguration', 'underscore', 'IUserNotifications', '$timeout','$filter',
+        function($scope, $rootScope, $window, $location, authentication, $browser, realmConfiguration, _, userNotifications, $timeout, $filter) {
 
             $scope.controller = "TemplateController";
 
@@ -18,14 +18,14 @@ define(['app',
 						canQuery = false;
 	                    if ($scope.notifications) {
 	                        var notification = _.first($scope.notifications);
-	                        if (notifications)
+	                        if (notification)
 	                            queryMyNotifications = {
 									$and : [{ "createdOn" : { "$gt" : new Date(notification.createdOn).toISOString() } }]
 	                            };
 	                    }
 	                    //$and: [{"_id": {"$gt": notification._id}}]
 
-	                    notifications.query(queryMyNotifications, pageNumber, pageLength)
+                        userNotifications.query(queryMyNotifications, pageNumber, pageLength)
 	                        .then(function(data) {
 	                            if (!data || data.length === 0)
 	                                return;
@@ -53,7 +53,7 @@ define(['app',
 
 			$scope.updateStatus = function(notification){
 				if(notification && notification.state=='unread'){
-					notifications.update(notification._id,{'state':'read'})
+                    userNotifications.update(notification._id,{'state':'read'})
 					.then(function(){
 						notification.state = 'read';
 					});

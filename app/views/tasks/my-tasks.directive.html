@@ -92,13 +92,13 @@
                     </div>
 
                 </div>
-                <div  id="taskList">
+                <div  id="taskList" infinite-scroll="loadTasks()" infinite-scroll-busy="loadingTasks" infinite-scroll-distance="100" >
 
                     <div ng-repeat="task  in tasks|filter:keywords|filter:filterByType|filter:filterByStatus|orderBy:sortTerm:orderList"  id="{{task.workflow._id}}">
                     <div  class="row" ng-class="{'bg-grey':task.workflow.state=='completed','bg-danger':task.workflow.state!='completed'}" style="padding:10px;margin-bottom:10px;">
                         <!-- ng-repeat="task in grpTask|orderBy:createdOn:true|limitTo:1" -->
                         <div class="row">
-                            <div class="col-xs-3">
+                            <div class="col-xs-3">{{$index}}
                                 <!-- schema -->
                                 <i class="{{task.workflow.data.metadata.schema|schemaIcon}}" ng-class="{'color-red':task.workflow.state!='completed', 'color-green':(task.workflow.state=='completed' && task.activity.result.action=='approve'), 'color-grey': (task.workflow.state=='completed' && task.activity.result.action=='reject') }"
                                 style="font-size:16pt;position:relative;top:3px;"></i> {{task.workflow.data.metadata.schema|schemaName}}
@@ -200,7 +200,8 @@
                         </div>
 
                     </div>
-                </div>
+                    </div>
+                    <span ng-show="loadingTasks"> <i class="fa fa-cog fa-spin fa-lg"/> Loading...</span>
                 </div>
             </div>
             <div class="alert alert-success" ng-show="tasks.length==0">

@@ -1,7 +1,7 @@
 
 define(["app", "authentication"], function (app) {
 
-    app.factory("INotifications", ["authHttp", function($http) {
+    app.factory("IUserNotifications", ["authHttp", function($http) {
         return new function()
         {
             //===========================
@@ -15,7 +15,7 @@ define(["app", "authentication"], function (app) {
                     data    : data
                 };
 
-                return $http.post("/api/v2015/usernotifications", body).then(function(resp) {
+                return $http.post("/api/v2015/user-notifications", body).then(function(resp) {
                     return resp.data;
                 });
             };
@@ -24,7 +24,7 @@ define(["app", "authentication"], function (app) {
             //
             //===========================
             this.get = function(id) {
-                return $http.get("/api/v2015/usernotifications/"+id).then(
+                return $http.get("/api/v2015/user-notifications/"+id).then(
                     function(resp){
                         return resp.data;
                     });
@@ -34,7 +34,7 @@ define(["app", "authentication"], function (app) {
             //
             //===========================
             this.update = function(id, data) {
-                return $http.put("/api/v2015/usernotifications/"+id, data).then(
+                return $http.put("/api/v2015/user-notifications/"+id, data).then(
                     function(resp){
                         return resp.data;
                     });
@@ -44,7 +44,7 @@ define(["app", "authentication"], function (app) {
             //
             //===========================
             this.delete = function(id) {
-                return $http.delete("/api/v2015/usernotifications/"+id).then(
+                return $http.delete("/api/v2015/user-notifications/"+id).then(
                     function(resp){
                         return resp.data;
                     });
@@ -54,7 +54,7 @@ define(["app", "authentication"], function (app) {
             //
             //===========================
             this.query  = function(query, pageNumber, pageLength) {
-                return $http.get("/api/v2015/usernotifications/", { params : { q : JSON.stringify(query), sk: pageNumber, l: pageLength }, cache:false }).then(function(resp){
+                return $http.get("/api/v2015/user-notifications/", { params : { q : JSON.stringify(query), sk: pageNumber, l: pageLength }, cache:false }).then(function(resp){
                     return resp.data;
                 });
             };
