@@ -22,13 +22,23 @@
     <script src="absCommon.js"></script>
 
     <style type="text/css">
-
+    .alert-danger{
+        color:#FFF!important;
+        text-transform: uppercase;
+        font-weight:bold;
+        background-color: #C7532C!important;
+    }
     </style>
 </head>
 
 <body>
     <div ng-app="ngapp" class="main-nav">
         <div ng-controller="printPermit" style="width:1000px;"   ng-class="{'watermark' : documentInfo.Realm!= 'abs'}">
+            <div class="col-xs-12 alert alert-danger" ng-show="documentInfo.Realm!= 'abs'">
+                <h4>Warning!</h4>
+                <p>this pdf was generated from ABS-CH test website.<p>
+            </div>
+
             <div class="row" style="padding-bottom:30px;">
                 <div class="col-xs-1">
                 </div>

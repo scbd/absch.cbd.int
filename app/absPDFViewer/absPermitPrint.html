@@ -34,12 +34,21 @@
         a[href]:after {
             content: '';
         }
+
+        .watermark{
+        background-image: url(../img/testwatermark.png);
+        background-repeat: repeat;
+        background-attachment: fixed;
+        background-size: 150px;
+        }
     </style>
 </head>
 
 <body>
+
     <div ng-app="ngapp" class="main-nav">
-        <div ng-controller="printPermit" style="width:1000px;"  ng-class="{'watermark' : documentInfo.Realm!= 'abs'}">
+
+        <div ng-controller="printPermit" style="width:1000px;">
 
 			<div permit document-id="identifier"></div>
 

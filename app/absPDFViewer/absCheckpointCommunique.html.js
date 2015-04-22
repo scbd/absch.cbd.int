@@ -23,7 +23,7 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q
 			$scope.documentInfo = result[1].data;
 			$scope.documentVersion = result[2].data;
 			$scope.realm = $scope.documentInfo.Realm;
-
+			
 			if($scope.document.permit){
 				$scope.document.permit.forEach(function(item){
 					$http.get('/api/v2013/documents/' +  item.identifier, { info:true})

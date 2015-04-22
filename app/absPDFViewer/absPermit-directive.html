@@ -1,6 +1,10 @@
-<div>
+<div ng-class="{'watermark' : documentInfo.Realm!= 'abs'}">
 
     <link href="../css/permitPDF.css" rel="stylesheet">
+    <div class="col-xs-12 alert alert-danger" ng-show="documentInfo.Realm!= 'abs'">
+        <h4>Warning!</h4>
+        <p>this pdf was generated from ABS-CH test website.<p>
+    </div>
     <div class="row" style="padding-bottom:30px;">
         <div class="col-xs-1">
         </div>
