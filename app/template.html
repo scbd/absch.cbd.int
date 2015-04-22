@@ -40,9 +40,9 @@
         .ng-cloak {
             display: none !important;
         }
-        #dropdownNotification a:focus {
+        /*#dropdownNotification a:focus {
             background-color: white;
-        }
+        }*/
         .fa-bell {
             font-size: 1.5rem;
         }
@@ -85,8 +85,15 @@
         .notification-read {
             background: #fff;
         }
+
         .nav .open > a, .nav .open > a:hover, .nav .open > a:focus, .nav .dropdown > a:hover {
+            background-color: #fa6938;
+         }
+        .bg-darkgrey .nav .open > a, .bg-darkgrey .nav .open > a:hover, .bg-darkgrey .nav .open > a:focus, .bg-darkgrey .nav .dropdown > a:hover {
           background-color: #666!important;
+         }
+         .bg-blue .nav .open > a, .bg-blue .nav .open > a:hover, .bg-blue .nav .open > a:focus, .bg-blue .nav .dropdown > a:hover {
+            background-color:#428bca!important;
          }
          .nav > li > a {
              padding-top:6px;
@@ -189,7 +196,7 @@
                             </li>
                             <li class="dropdown pull-right">
                                 <a href="#" data-toggle="dropdown" class="dropdown-toggle" style="max-height:30px;">
-                                    <i class="fa fa-chevron-down" style="font-size:15px"></i> {{user.name}}
+                                    <i class="fa fa-chevron-down" style="font-size:15px"></i> <span>{{user.name}}</span>
                                     <span ng-show="user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) != -1">(PA)</span>
                                     <span ng-show="user.roles.indexOf(getRoleName('abschiac')) != -1">(IAC)</span>
                                     <span ng-show="user.roles.indexOf(getRoleName('AbsNationalAuthorizedUser')) != -1">(NAU)</span>
