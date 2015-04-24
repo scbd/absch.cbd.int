@@ -61,10 +61,7 @@
         .glyphicon-circle-arrow-right {
             margin-left: 10px;
         }
-        .notification-heading,
-        .notification-footer {
-            padding: 2px 10px;
-        }
+
         .dropdown-menu.divider {
             margin: 5px 0;
         }
@@ -72,19 +69,29 @@
             font-size: 1.3rem;
             color: #000;
         }
-        .notifications a.content {
-            text-decoration: none;
-            background: #ccc;
+        .panel{
+            color:#333;
         }
         .notification-item {
-            padding: 10px;
-            margin: 0px 5px 0px 5px;
-            background: #ccc;
-            border-bottom:1px solid #e5e5e5;;
+            padding: 0 5px;
+            padding-bottom:10px;
+            margin: 5px 5px;
+            /*background: #ccc;*/
+            border-bottom:1px solid #e5e5e5;
         }
-        .notification-read {
-            background: #fff;
+        .notification-read  i, .notification-read  span, .notification-read div, .notification-read td, .notification-read strong, .notification-read a {
+            color:#ccc !important;
         }
+
+
+        .notification-unread  i, .notification-unread strong{
+            color:#428bca !important;
+        }
+
+        .notification-unread  span , .notification-unread  div, .notification-unread  td  {
+            color:#333 !important;
+        }
+
 
         .nav .open > a, .nav .open > a:hover, .nav .open > a:focus, .nav .dropdown > a:hover {
             background-color: #fa6938;
@@ -143,73 +150,76 @@
                  <a href="skype:abs-ch?chat"  class="pull-right" style="cursor:pointer;padding-left:20px;color:#fff;position:relative;top:-2px;font-size:18px;"><i class="fa fa-skype"></i></a> -->
 
                     <!-- ng-click="actionSignin()" -->
-                    <div ng-cloak ng-show="user && !user.isAuthenticated" class="account-signin pull-right" style="position:relative;top:-2px;">
+                    <div ng-cloak ng-show="user && !user.isAuthenticated" class="account-signin pull-right" >
                         <a class="signin" href="#" data-slug="signin" data-toggle="modal" data-target="#loginDialog">
                             <i class="fa fa-power-off"></i>
                             <strong>sign in</strong>
                         </a>
                     </div>
-                    <div class="dropdown">
 
-
-
-                    </div>
-                    <div ng-cloak id="dropdownNotification" class="account-name" ng-show="user && user.isAuthenticated">
-                        <ul class="nav pull-right" >
-                            <li class="dropdown pull-right">
-                                    <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" ng-href="#" style="max-height:30px;">
-                                        <i class="fa fa-bell"></i>
-                                        <span class="badge badge-notify">{{(notifications|filter:isUnread).length}}</span>
+                    <div ng-cloak id="dropdownNotification" class="account-name" ng-show="user && user.isAuthenticated" style="padding:0;margin:0;" >
+                        <ul class="nav pull-right" style="padding:0;margin:0;"  >
+                            <li class="dropdown pull-right" style="padding:0;margin:0;" >
+                                    <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" ng-href="#" style="max-height:30px;" class="notification-btn">
+                                        <span ng-show="(notifications|filter:isUnread).length > 0 " >
+                                            <i class="fa fa-bell" class="color-red"></i>
+                                            <span class="label label-danger">{{(notifications|filter:isUnread).length}}</span>
+                                        </span>
+                                        <span ng-show="(notifications|filter:isUnread).length==0">
+                                            <i class="fa fa-bell-o" class="bg-grey"></i>
+                                        </span>
                                     </a>
 
-
-
-                                <ul class="dropdown-menu notifications"  role="menu" aria-labelledby="dLabel">
-
-
-                                    <div >
-                                        <div class="notification-heading">
-                                            <h4 class="menu-title">Notifications</h4>
-                                            <a ng-href="/register/requests">
-                                                <h4 class="menu-title">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4>
-                                            </a>
+                                <div class="dropdown-menu" style="padding:0;margin:0;" role="menu" aria-labelledby="dLabel">
+                                    <div class="panel panel-danger" style="width:500px;padding:0;margin:0;">
+                                        <div class="panel-heading">
+                                            <h4>Notifications</h4>
                                         </div>
-                                        <li class="divider"></li>
-                                        <div class="notifications-wrapper" >
+
+                                        <div class="panel-body" >
 
 
-                                            <a class="content" href="/register/requests/{{notification.data.workflowId}}" ng-repeat="notification in notifications" ng-click="updateStatus(notification);">
+                                                <div class="notification-item" ng-repeat="notification in notifications"  ng-class="{'notification-read':notification.state=='read','notification-unread':notification.state=='unread' }">
+                                                    <table>
+                                                        <tr>
+                                                            <td ng-class="{'notification-read':notification.state=='read','notification-unread':notification.state=='unread' }">
 
-                                                {{notification.state}}
-                                                <div class="notification-item" ng-class="{'notification-read':notification.state=='read'}">
-                                                    <!-- <h4 class="item-title">Evaluation Deadline 1 · day ago</h4>
-                                                    <p class="item-info">Marketing 101, Video Assignment</p> -->
-                                                    <i class="{{notification.data.documentInfo.metadata.schema|schemaIcon}}"
-                                                    ng-class="{'color-red':notification.data.action!='approved', 'color-green':notification.data.action=='completed', 'color-grey':notification.data.action=='rejected'}"
-                                                    style="font-size:16pt;position:relative;top:3px;"></i>{{notification.createdBy_info.firstName + ' ' + notification.createdBy_info.lastName}}
-                                                    <span style="color:black" ng-show="notification.data.action=='request'"> has sent you a request for validating </span>
-                                                    <span ng-show="notification.data.action=='approved'"> has approved your request for validating </span>
-                                                    <span ng-show="notification.data.action=='rejected'"> has rejected you document </span>
-                                                    {{notification.data.documentInfo.metadata.schema|schemaName}} {{notification.data.documentInfo.title|lstring}}
+                                                                <a href="#" href="/register/requests/{{notification.data.workflowId}}" ng-click="markAsRead(notification);">
+                                                                    <i class="{{notification.data.documentInfo.metadata.schema|schemaIcon}}"
+                                                                    ng-class="{'color-green':notification.data.action!='approved', 'color-green':notification.data.action=='completed', 'color-grey':notification.data.action=='rejected'}"
+                                                                    style="font-size:16pt;position:relative;top:3px;"></i>
+
+                                                                    <i ng-class="{'color-blue':notification.state=='unread'}" >{{notification.createdBy_info.firstName + ' ' + notification.createdBy_info.lastName}}</i>
+
+                                                                    <span  ng-show="notification.data.action=='request'"> has sent you a request for publishing </span>
+                                                                    <span  ng-show="notification.data.action=='approved'"> has approved your publishing request </span>
+                                                                    <span  ng-show="notification.data.action=='rejected'"> has rejected your publishing request  </span>
+
+                                                                    <strong>{{notification.data.documentInfo.metadata.schema|schemaName}} </strong>
+                                                                    <i ng-class="{'color-blue':notification.state=='unread'}" >{{notification.data.documentInfo.title|lstring}}</i>
+                                                                </a>
+                                                            </td>
+                                                            <td style="width:20px;">
+                                                                <a href="#" ng-show="notification.state=='unread'" class="pull-right" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
+                                                                <a href="#" ng-show="notification.state=='read'" class="pull-right" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+
+
                                                 </div>
-
-                                                <div > <a href="#" ng-click="updateStatus(notification);">mark as read</a></div>
-                                            </a>
                                         </div>
-                                        <li class="divider"></li>
-                                        <div class="notification-footer">
+                                        <div class="panel-footer">
                                             <a ng-href="/register/requests">
                                                 <h4 class="menu-title">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4>
                                             </a>
                                         </div>
                                     </div>
-
-                                </ul>
-
+                                </div>
                             </li>
-                            <li class="dropdown pull-right">
+                            <li class="dropdown pull-right" >
                                 <a href="#" data-toggle="dropdown" class="dropdown-toggle" style="max-height:30px;">
-                                    <i class="fa fa-chevron-down" style="font-size:15px"></i> <span>{{user.name}}</span>
+                                    <i class="fa fa-chevron-down" style="font-size:15px;color:white;"></i> <span>{{user.name}}</span>
                                     <span ng-show="user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) != -1">(PA)</span>
                                     <span ng-show="user.roles.indexOf(getRoleName('abschiac')) != -1">(IAC)</span>
                                     <span ng-show="user.roles.indexOf(getRoleName('AbsNationalAuthorizedUser')) != -1">(NAU)</span>
@@ -217,7 +227,7 @@
                                     <span ng-show="user.roles.indexOf(getRoleName('AbsAdministrator')) != -1">(ABS ADMIN)</span>
                                     <span ng-show="user.roles.indexOf(getRoleName('Administrator')) != -1">(ADMIN)</span>
                                 </a>
-                                <ul class="dropdown-menu" role="menu">
+                                <ul class="dropdown-menu" role="menu" style="position:relative;left:-5px;">
                                     <li>
                                         <a href="#" ng-click="actionProfile()">
                                             <i class="fa fa-user" style="font-size:15px"></i>&nbsp; Profile</a>

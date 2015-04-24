@@ -53,12 +53,28 @@ define(['app',
 
 			$scope.updateStatus = function(notification){
 				if(notification && notification.state=='unread'){
-                    userNotifications.update(notification._id,{'state':'read'})
+                    userNotifications.update(notification.id,{'state':'read'})
 					.then(function(){
 						notification.state = 'read';
 					});
 				}
+                if(notification && notification.state=='read'){
+                    userNotifications.update(notification.id,{'state':'unread'})
+                    .then(function(){
+                        notification.state = 'unread';
+                    });
+                }
 			};
+
+
+            $scope.markAsRead = function(notification){
+                if(notification){
+                    userNotifications.update(notification.id,{'state':'read'})
+                    .then(function(){
+                        notification.state = 'read';
+                    });
+                }
+            };
 
             $scope.isUnread = function(notification) {
 
