@@ -114,7 +114,7 @@
 
     <div class="alert alert-info alert-dismissable" ng-hide="hideDisclaimer" style="margin-bottom: 0px; text-align: center">
         <button type="button" ng-click="hideDisclaimer=true" class="close" style="opacity: 1;" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <strong>Please note that althought the ABSCH is currently live and operational the user interface may change based on feedback received.</strong>
+        <strong>Please note that although the ABSCH is currently live and operational the user interface may change based on feedback received.</strong>
         <span class="color-black"><br>If you have a comment or suggestion on how we can improve please email <a href="mailto:absch@cbd.int" style="color:#111!important;">absch@cbd.int</a>.</span>
     </div>
 
@@ -155,42 +155,55 @@
 
                     </div>
                     <div ng-cloak id="dropdownNotification" class="account-name" ng-show="user && user.isAuthenticated">
-                        <ul class="nav pull-right">
+                        <ul class="nav pull-right" >
                             <li class="dropdown pull-right">
                                     <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" ng-href="#" style="max-height:30px;">
                                         <i class="fa fa-bell"></i>
                                         <span class="badge badge-notify">{{(notifications|filter:isUnread).length}}</span>
                                     </a>
-                                <ul class="dropdown-menu notifications" role="menu" aria-labelledby="dLabel">
 
-                                    <div class="notification-heading">
-                                        <h4 class="menu-title">Notifications</h4>
-                                        <a ng-href="/register/requests">
-                                            <h4 class="menu-title">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4>
-                                        </a>
+
+
+                                <ul class="dropdown-menu notifications"  role="menu" aria-labelledby="dLabel">
+
+
+                                    <div >
+                                        <div class="notification-heading">
+                                            <h4 class="menu-title">Notifications</h4>
+                                            <a ng-href="/register/requests">
+                                                <h4 class="menu-title">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4>
+                                            </a>
+                                        </div>
+                                        <li class="divider"></li>
+                                        <div class="notifications-wrapper" >
+
+
+                                            <a class="content" href="/register/requests/{{notification.data.workflowId}}" ng-repeat="notification in notifications" ng-click="updateStatus(notification);">
+
+                                                {{notification.state}}
+                                                <div class="notification-item" ng-class="{'notification-read':notification.state=='read'}">
+                                                    <!-- <h4 class="item-title">Evaluation Deadline 1 · day ago</h4>
+                                                    <p class="item-info">Marketing 101, Video Assignment</p> -->
+                                                    <i class="{{notification.data.documentInfo.metadata.schema|schemaIcon}}"
+                                                    ng-class="{'color-red':notification.data.action!='approved', 'color-green':notification.data.action=='completed', 'color-grey':notification.data.action=='rejected'}"
+                                                    style="font-size:16pt;position:relative;top:3px;"></i>{{notification.createdBy_info.firstName + ' ' + notification.createdBy_info.lastName}}
+                                                    <span style="color:black" ng-show="notification.data.action=='request'"> has sent you a request for validating </span>
+                                                    <span ng-show="notification.data.action=='approved'"> has approved your request for validating </span>
+                                                    <span ng-show="notification.data.action=='rejected'"> has rejected you document </span>
+                                                    {{notification.data.documentInfo.metadata.schema|schemaName}} {{notification.data.documentInfo.title|lstring}}
+                                                </div>
+
+                                                <div > <a href="#" ng-click="updateStatus(notification);">mark as read</a></div>
+                                            </a>
+                                        </div>
+                                        <li class="divider"></li>
+                                        <div class="notification-footer">
+                                            <a ng-href="/register/requests">
+                                                <h4 class="menu-title">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4>
+                                            </a>
+                                        </div>
                                     </div>
-                                    <li class="divider"></li>
-                                    <div class="notifications-wrapper" >
-                                        <a class="content" href="/register/requests/{{notification.data.workflowId}}" ng-repeat="notification in notifications" ng-click="updateStatus(notification);">
-                                            <div class="notification-item" ng-class="{'notification-read':notification.state=='read'}">
-                                                <!-- <h4 class="item-title">Evaluation Deadline 1 · day ago</h4>
-                                                <p class="item-info">Marketing 101, Video Assignment</p> -->
-                                                <i class="{{notification.data.documentInfo.metadata.schema|schemaIcon}}"
-                                                ng-class="{'color-red':notification.data.action!='approved', 'color-green':notification.data.action=='completed', 'color-grey':notification.data.action=='rejected'}"
-                                                style="font-size:16pt;position:relative;top:3px;"></i>{{notification.createdBy_info.firstName + ' ' + notification.createdBy_info.lastName}}
-                                                <span style="color:black" ng-show="notification.data.action=='request'"> has sent you a request for validating </span>
-                                                <span ng-show="notification.data.action=='approved'"> has approved your request for validating </span>
-                                                <span ng-show="notification.data.action=='rejected'"> has rejected you document </span>
-                                                {{notification.data.documentInfo.metadata.schema|schemaName}} {{notification.data.documentInfo.title|lstring}}
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <li class="divider"></li>
-                                    <div class="notification-footer">
-                                        <a ng-href="/register/requests">
-                                            <h4 class="menu-title">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4>
-                                        </a>
-                                    </div>
+
                                 </ul>
 
                             </li>
