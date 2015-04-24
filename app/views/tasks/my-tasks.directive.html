@@ -108,11 +108,24 @@
                                 </a>
                             </div>
                             <div class="col-xs-5">
-                                <!-- Description -->
-                                <strong ng-show="task.workflow.result.documentID||task.workflow.data.documentID"><a ng-href="/database/record/{{task.workflow.result.documentID||task.workflow.data.documentID}}" target="_new_">{{task.workflow.data.title | lstring}}</a>
+                                <!-- TITLE -->
+
+                                <div ng-switch="task.workflow.state">
+                                    <div ng-switch-when="completed">
+                                        <div ng-show="task.activity.completedOn">
+                                            <span ng-show="task.activity" ng-switch="task.activity.result.action">
+                                                <span ng-switch-when="approve"><a ng-href="/database/record/{{task.workflow.result.documentID||task.workflow.data.documentID}}" target="_new_">{{task.workflow.data.title | lstring}}</a></span>
+                                                <span ng-switch-when="reject"><a ng-href="/register/{{task.workflow.data.metadata.schema | schemaShortName}}/{{task.workflow.result.identifier}}/edit" target="_new_">{{task.workflow.data.title | lstring}}</a></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div ng-switch-default><a href="#" class="color-grey" ng-click="tasksDisplay=!tasksDisplay; formLoading=false;">{{task.workflow.data.title | lstring}}</a></div>
+                                </div>
+
+                                <!-- <strong ng-show="task.workflow.result.documentID||task.workflow.data.documentID"><a ng-href="/database/record/{{task.workflow.result.documentID||task.workflow.data.documentID}}" target="_new_">{{task.workflow.data.title | lstring}}</a>
                                 </strong>
                                 <strong ng-hide="task.workflow.result.documentID||task.workflow.data.documentID"><a href="#" ng-click="tasksDisplay=!tasksDisplay; formLoading=false;">{{task.workflow.data.title | lstring}}</a>
-                                </strong>
+                                </strong> -->
                                 <span ng-show="task.workflow.data.additionalInfo">(additional info:-{{task.workflow.data.additionalInfo}})
                             </div>
                             <div class="col-xs-2">
