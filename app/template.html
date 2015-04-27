@@ -49,7 +49,7 @@
     </div>
 
     <div class="disclaimer">
-        <div class="promo" ng-class="{'bg-darkgrey': development_env==true,'bg-blue': training_env==true}" href="/about/">
+        <div class="promo" href="/about/" ng-class="{'bg-darkgrey': development_env==true,'bg-blue': training_env==true}"  >
             <div class="container">
                 <!-- <div class="title" class="text-center" style="padding-top:5px;white-space:nowrap;width:170px;">
                     <span class="text-center">{{env_name}}</span>
@@ -84,10 +84,12 @@
                         <ul class="nav pull-right" style="padding:0;margin:0;"  >
                             <li class="dropdown pull-right" style="padding:0;margin:0;" >
                                     <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" ng-href="#" style="max-height:30px;" class="notification-btn">
+
                                         <span ng-show="(notifications|filter:isUnread).length > 0 " >
                                             <i class="fa fa-bell" class="color-red"></i>
                                             <span class="label label-danger">{{(notifications|filter:isUnread).length}}</span>
                                         </span>
+
                                         <span ng-show="(notifications|filter:isUnread).length==0">
                                             <i class="fa fa-bell-o" class="bg-grey"></i>
                                         </span>

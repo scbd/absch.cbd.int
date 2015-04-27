@@ -6,9 +6,10 @@
         </tr>
         <tr ng-repeat="notification in notifications" class="notification-item" ng-class="{'notification-read':notification.state=='read','notification-unread':notification.state=='unread' }">
 
-            <td style="padding-top:5px;padding-right:3px;"><i class="{{notification.data.documentInfo.metadata.schema|schemaIcon}}" ng-class="{'color-green':notification.data.action!='approved', 'color-green':notification.data.action=='completed', 'color-grey':notification.data.action=='rejected'}"
-                style="font-size:16pt;position:relative;top:3px;"></i></td>
-            <td ng-class="{'notification-read':notification.state=='read','notification-unread':notification.state=='unread' }" style="padding:10px 0;">
+            <td>
+                <div style="margin-top:3px;padding-right:3px;"><i class="{{notification.data.documentInfo.metadata.schema|schemaIcon}}" ng-class="{'color-green':notification.data.action!='approved', 'color-green':notification.data.action=='completed', 'color-grey':notification.data.action=='rejected'}"
+                style="font-size:16pt;position:relative;top:3px;"></i></div></td>
+            <td ng-class="{'notification-read':notification.state=='read','notification-unread':notification.state=='unread' }" style="padding:10px 0;cursor:pointer;"
 
                 <a ng-href="/register/requests/{{notification.data.workflowId}}" ng-click="markAsRead(notification);">
 
@@ -22,6 +23,14 @@
                     <span> ({{notification.data.documentInfo.metadata.schema|schemaName}})</span>
                 </a>
                 <br>{{timePassed(notification.createdOn)}} ago
+                from
+                <span class="label label-default" ng-show="notification.data.documentInfo.realm == 'ABS'">ABSCH</span>
+                <span class="label label-default" ng-show="notification.data.documentInfo.realm == 'ABS-TRG'">ABSCH TRAINING</span>
+                <span class="label label-default" ng-show="notification.data.documentInfo.realm == 'ABS-DEV'">ABSCH DEVELOPMENT</span>
+                <span class="label label-default" ng-show="notification.data.documentInfo.realm == 'CHM'">CHM</span>
+                <span class="label label-default" ng-show="notification.data.documentInfo.realm == 'BCH'">BCH</span>
+
+
             </td>
             <td style="width:20px;vertical-align:middle;">
                 <a href="#" ng-show="notification.state=='unread'" class="pull-right" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
