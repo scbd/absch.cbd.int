@@ -1,0 +1,35 @@
+<div>
+
+
+
+            <div class="notification-item" ng-repeat="notification in notifications"  ng-class="{'notification-read':notification.state=='read','notification-unread':notification.state=='unread' }">
+                <table style="width:100%">
+                    <tr>
+                        <td ng-class="{'notification-read':notification.state=='read','notification-unread':notification.state=='unread' }">
+
+                            <a href="#" href="/register/requests/{{notification.data.workflowId}}" ng-click="markAsRead(notification);">
+                                <i class="{{notification.data.documentInfo.metadata.schema|schemaIcon}}"
+                                ng-class="{'color-green':notification.data.action!='approved', 'color-green':notification.data.action=='completed', 'color-grey':notification.data.action=='rejected'}"
+                                style="font-size:16pt;position:relative;top:3px;"></i>
+
+                                <i ng-class="{'color-blue':notification.state=='unread'}" >{{notification.createdBy_info.firstName + ' ' + notification.createdBy_info.lastName}}</i>
+
+                                <span  ng-show="notification.data.action=='request'"> has sent you a request for publishing </span>
+                                <span  ng-show="notification.data.action=='approved'"> has approved your publishing request </span>
+                                <span  ng-show="notification.data.action=='rejected'"> has rejected your publishing request  </span>
+
+                                <strong>{{notification.data.documentInfo.metadata.schema|schemaName}} </strong>
+                                <i ng-class="{'color-blue':notification.state=='unread'}" >{{notification.data.documentInfo.title|lstring}}</i>
+                            </a>
+                        </td>
+                        <td style="width:20px;">
+                            <a href="#" ng-show="notification.state=='unread'" class="pull-right" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
+                            <a href="#" ng-show="notification.state=='read'" class="pull-right" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
+                        </td>
+                    </tr>
+                </table>
+
+
+            </div>
+
+</div>

@@ -1,5 +1,6 @@
 define(['app',
-    '/app/views/directives/login.directive.html.js'
+    '/app/views/directives/login.directive.html.js',
+    '/app/views/directives/xuser-notifications.js'
 ], function(app) {
     'use strict';
 

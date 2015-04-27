@@ -19,7 +19,6 @@
       </h2>
     </div>
 
-
     <!-- <div class="row" style="margin-bottom:20px;">
         <div class="col-xs-12">
             <div style="font-weight:bold;">The dashboard gives an overview of your draft and published ABS records and publishing requests.
@@ -28,10 +27,9 @@
     </div> -->
 
 
-
 <div class="row row-same-height" style="margin-bottom:20px;">
     <div class="col-xs-6 col-xs-height col-top" >
-                <h1 style="color:#555;">Welcome. You are signed in!</h1>
+                <h1>Welcome. You are signed in!</h1>
                 <dl class="dl-horizontal" style="padding-top:20px;">
                 <dt style="text-align:left">Name</dt><dd>{{user.name}}</dd>
                 <!-- <dt style="text-align:left">Role(s)</dt>
@@ -106,218 +104,19 @@
             Reference records are validated by the SCBD Secretariat before they are published in the ABSCH.
             </span>
         </div>
+
+
     </div>
 </div>
 
 
 
+      <h1 style="padding-bottom:10px;">Recent Notifications</h1>
 
-
-
-<!-- <div class="row">
-    <div class="col-xs-12">
-        <div class="panel panel-default">
-        <div class="panel-heading clearfix">
-            <h1 class="panel-title" style="font-size:16px;font-weight:bold;">Your Publishing Requests
-                <a href="/register/requests" class="btn btn-default btn-small pull-right">view all requests</a>
-            </h1>
-        </div>
-        <div class="panel-body" style="padding:0;margin:0;">
-
-
-            <div class="row" style="padding:10px;">
-                <div class="col-xs-3" ng-show="user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) != -1">
-                    <div class="btn btn-danger" style="width:100%;">
-                        <a href="/register/requests/all/urgent"  href="#" role="button" style="color:white;text-align:center;">
-                            <span  class="badge" style="color:#666;background-color:white;position:relative;top:-1px;font-weight:bold;">{{urgentAttentionCount}}</span>
-                             Awaiting your approval
-                        </a>
-                    </div>
-                </div>
-                <div ng-class="{'col-xs-3': user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) != -1, 'col-xs-4': user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) == -1}">
-                    <div class="btn btn-warning" style="width:100%;">
-                        <a href="/register/requests/all/pending"  href="#" role="button"  style="color:white;text-align:center;">
-                            <span  class="badge" style="color:#666;background-color:white;position:relative;top:-1px;font-weight:bold;">{{pendingCount}}</span>
-                            Pending approval
-                        </a>
-                    </div>
-                </div>
-                <div ng-class="{'col-xs-3': user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) != -1, 'col-xs-4': user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) == -1}">
-                    <div class="btn btn-success" style="width:100%;">
-                        <a href="/register/requests/all/approved"  href="#" role="button" style="color:white;text-align:center;">
-                            <span  class="badge" style="color:#666;background-color:white;position:relative;top:-1px;font-weight:bold;">{{approvedRequests}}</span>
-                            Approved
-                        </a>
-                    </div>
-                </div>
-                <div ng-class="{'col-xs-3': user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) != -1, 'col-xs-4': user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) == -1}">
-                    <div class="btn btn-default bg-darkgrey" style="width:100%;">
-                        <a href="/register/requests/all/rejected"  href="#" role="button" style="color:white;text-align:center;">
-                            <span  class="badge" style="color:#666;background-color:white;position:relative;top:-1px;font-weight:bold;">{{rejectedRequests}}</span>
-                            <span>Rejected
-                            </a>
-                    </div>
-                </div>
-            </div>
-
-            </div>
-        </div>
-    </div>
-
-
-</div> -->
+      <div xuser-notifications></div>
 
 
 
 
-    <!-- <div>
-      <div ng-show="msg" class="alert alert-success alert-dismissable">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="msg=''">&times;</button>
-        <strong>{{msg}}</strong>
-      </div> -->
-
-
-
-
-
-
-
-
-      <!-- <div class="alert alert-info" ng-show="user.isAuthenticated">
-        <p>You are signed in as: <strong>{{user.name}}</strong>
-
-        </p>
-      </div> -->
-
-
-
-
-
-
-
-
-      <!-- <div ng-hide="user.isAuthenticated">
-        <a ng-show="!user.isAuthenticated" ng-click="signIn('dashboard')" class="btn btn-info">
-          <i class="glyphicon glyphicon-off"></i> SIGN IN
-        </a>
-      </div> -->
-
-
-
-
-
-      <!-- <div class="row" id="dashboard_panels">
-
-           <div class="col-lg-4" ng-show="compareRoles(user.roles, PAroles)" >
-            <div class="panel shadow-z-2" ng-class="{'greyout': !urgentAttentionCount,  'panel-danger': urgentAttentionCount  }">
-              <div class="panel-heading">
-                <div class="row">
-                  <div class="col-xs-4">
-                    <i class="fa fa-exclamation-circle fa-5x"></i>
-                  </div>
-                  <div class="col-xs-8">
-                    <h2 style="padding-top:7px;">New requests</h2>
-                  </div>
-                </div>
-              </div>
-              <a href="/dashboard/pending">
-                <div class="panel-footer announcement-bottom">
-                  <div class="row">
-                    <div class="col-xs-6" style="white-space:nowrap;">
-                      View new requests
-                    </div>
-                    <div class="col-xs-6 text-right">
-                      <span class="label label-danger" ng-show="urgentAttentionCount">{{urgentAttentionCount}}</span>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-4" >
-            <div class="panel shadow-z-2" ng-class="{'greyout': !pendingCount,  'panel-warning': pendingCount  }">
-              <div class="panel-heading">
-                <div class="row">
-                  <div class="col-xs-4">
-                    <i class="fa fa-clock-o  fa-5x"></i>
-                  </div>
-                  <div class="col-xs-8">
-                    <h2 style="padding-top:7px;">Pending requests</h2>
-                  </div>
-                </div>
-              </div>
-              <a href="/dashboard/mytasks">
-                <div class="panel-footer announcement-bottom">
-                  <div class="row">
-                    <div class="col-xs-10">
-                      View pending requests
-                    </div>
-                    <div class="col-xs-2 text-right">
-                      <span class="label label-warning" ng-show="pendingCount">{{pendingCount}}</span>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-4">
-            <div class="panel shadow-z-2"  ng-class="{'greyout': !completedRequestCount,  'panel-success': completedRequestCount  }">
-              <div class="panel-heading">
-                <div class="row">
-                  <div class="col-xs-4">
-                    <i class="fa fa-check-square fa-5x"></i>
-                  </div>
-                  <div class="col-xs-8">
-                    <h2  style="padding-top:7px;">Completed requests</h2>
-                  </div>
-                </div>
-              </div>
-              <a href="/dashboard/completed">
-                <div class="panel-footer announcement-bottom">
-                  <div class="row">
-                    <div class="col-xs-10">
-                      View completed requests
-                    </div>
-                    <div class="col-xs-2 text-right">
-                      <span class="label label-warning" ng-show="completedRequestCount">{{completedRequestCount}}</span>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-      </div> -->
-
-
-      <!-- <div class="row" ng-show="userActivities.length > 0" >
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="panel panel-default">
-            <div class="panel-heading clearfix">
-              <h1 class="panel-title" style="font-size:16px;font-weight:bold;">Activity Feed</1>
-            </div>
-            <div class="panel-body" style="padding:0;margin:0;">
-
-              <div id="myTabContent" class="tab-content">
-                <div class="tab-pane fade active in" id="activites">
-                  <div id="scrollbar">
-                    <div class="scrollbar" style="height: 280px;overflow-y:scroll">
-                           <ul class="list-group " rel="scrollcontent1">
-                            <li ng-repeat="item in userActivities|orderBy:'date':true|limitTo:30" class="list-group-item">
-                              <span ng-bind-html="item.title"> </span>
-                            </li>
-                          </ul>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
-      <!-- row: 2nd isAuthenticated -->
-    </div> <!-- registerpage-content -->
   </div> <!-- col-xs-9 -->
 </div> <!-- controller -->

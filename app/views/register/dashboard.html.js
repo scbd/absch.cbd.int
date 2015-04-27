@@ -1,4 +1,4 @@
-define(['app',], function (app) {
+define(['app', '/app/views/directives/xuser-notifications.js'], function (app) {
 // ,
 //     './tasks/my-completed-tasks.directive.html.js',
 //     './tasks/my-pending-tasks.directive.js',
