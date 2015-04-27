@@ -167,6 +167,7 @@ define(['app',
             output.createdDateOn = document.createdDate_dt;
             output.metadata = [];
             output.amendmentIntent = 'none';
+
             if (!document.identifier_s) {
               output.identifier_s = output.id;
             }
@@ -261,17 +262,31 @@ define(['app',
 
             } else if (document.schema_s == 'authority') {
               output.responsibleForAll = document.absResposibleForAll_b;
-              output.jusrisdiction = document.jurisdiction_EN_t;
-              output.grType = (document.geneticResourceTypes_ss);
+              output.jurisdiction = document.absJurisdiction_EN_t;
+              //output.cnaScope = document.thematicAreas_CEN_ss;
+
+
+              if(document.thematicAreas_CEN_ss){
+                  output.thematicAreas_CEN_ss = document.thematicAreas_CEN_ss;
+                  output.cnaScope="";
+                  output.thematicAreas_CEN_ss.forEach(function(item) {
+                      output.cnaScope += (output.cnaScope.length > 0 ? ", " : "") + JSON.parse(item).en;
+                  });
+              }
+
               output.recordtype = "nationalRecord";
 
-              if (output.responsibleForAll)
+              if (output.responsibleForAll){
                 output.description = "This CNA is responsible for all functions under the Nagoya Protocol.";
-              else {
-                // TODO: output.description should be the summary of responsibilities
-                if (output.jusrisdiction) output.metadata.push(output.jusrisdiction);
-                if (output.grType) output.metadata.push(output.grType);
               }
+              else {
+                output.description = document.description_t;
+                if (output.jurisdiction)
+                    output.metadata.push(output.jurisdiction);
+                if (output.cnaScope)
+                     output.metadata.push(output.cnaScope);
+              }
+
             } else if (document.schema_s == 'absCheckpoint') {
               output.jusrisdiction = document.jurisdiction_EN_t;
               output.informAllAuthorities = (document.informAllAuthorities_b);
@@ -285,7 +300,7 @@ define(['app',
               if (document.usage_CEN_ss) {
                 output.usage = '';
                 document.usage_CEN_ss.forEach(function(usage) {
-                  output.usage += (output.usage.length > 0 ? "," : "") + JSON.parse(usage).en;
+                  output.usage += (output.usage.length > 0 ? ", " : "") + JSON.parse(usage).en;
                 });
               }
               // console.log(output.usage);
@@ -313,6 +328,8 @@ define(['app',
 
             } else if (document.schema_s == 'database') {
               output.recordtype = "nationalRecord";
+              output.description = document.description_t;
+              output.metadata.push(document.website);
               //TODO: output.description should be the description
               //TODO: metadata should be the url opening to a new window
             } else if (document.schema_s == 'measure') {
