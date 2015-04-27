@@ -42,7 +42,7 @@ background-color: white;
     padding-bottom:10px;
     margin: 5px 5px;
     /*background: #ccc;*/
-    border-bottom:1px solid #e5e5e5;
+    border-bottom:1px solid #ddd;
 }
 .notification-read  i, .notification-read  span, .notification-read div, .notification-read td, .notification-read strong, .notification-read a {
     color:#bbb !important;
