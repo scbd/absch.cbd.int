@@ -5,13 +5,28 @@ define(['app'], function (app) {
             replace: true,
             templateUrl: '/app/views/directives/xuser-notifications.html',
             controller: [ '$scope', '$rootScope', 'IUserNotifications', '$timeout','$filter',
-            function($scope, $rootScope, userNotifications, $timeout, $filter) 
+            function($scope, $rootScope, userNotifications, $timeout, $filter)
             {
 
 
                 var pageNumber = 0;
                 var pageLength = 10;
                 var canQuery = true;
+
+
+                //============================================================
+                //
+                //
+                //============================================================
+                $scope.timePassed = function(createdOn) {
+                    var timespan= moment(createdOn);
+                    return timespan.startOf('hours').fromNow(true);
+                }
+
+                //============================================================
+                //
+                //
+                //============================================================
                 $scope.getNotification = function() {
                     if ($rootScope.user && $rootScope.user.userID !=1) {
                         if(canQuery){
@@ -51,38 +66,47 @@ define(['app'], function (app) {
                                     $scope.getNotification();
                                 }, 10000);
                             };
+                //============================================================
+                //
+                //
+                //============================================================
+                $scope.updateStatus = function(notification){
+                    if(notification && notification.state=='unread'){
+                        userNotifications.update(notification.id,{'state':'read'})
+                        .then(function(){
+                            notification.state = 'read';
+                        });
+                    }
+                    if(notification && notification.state=='read'){
+                        userNotifications.update(notification.id,{'state':'unread'})
+                        .then(function(){
+                            notification.state = 'unread';
+                        });
+                    }
+                };
 
-                            $scope.updateStatus = function(notification){
-                                if(notification && notification.state=='unread'){
-                                    userNotifications.update(notification.id,{'state':'read'})
-                                    .then(function(){
-                                        notification.state = 'read';
-                                    });
-                                }
-                                if(notification && notification.state=='read'){
-                                    userNotifications.update(notification.id,{'state':'unread'})
-                                    .then(function(){
-                                        notification.state = 'unread';
-                                    });
-                                }
-                            };
+                //============================================================
+                //
+                //
+                //============================================================
+                $scope.markAsRead = function(notification){
+                    if(notification){
+                        userNotifications.update(notification.id,{'state':'read'})
+                        .then(function(){
+                            notification.state = 'read';
+                        });
+                    }
+                };
+                //============================================================
+                //
+                //
+                //============================================================
+                $scope.isUnread = function(notification) {
 
+                    return notification && notification.state == 'unread';
+                };
 
-                            $scope.markAsRead = function(notification){
-                                if(notification){
-                                    userNotifications.update(notification.id,{'state':'read'})
-                                    .then(function(){
-                                        notification.state = 'read';
-                                    });
-                                }
-                            };
-
-                            $scope.isUnread = function(notification) {
-
-                                return notification && notification.state == 'unread';
-                            };
-
-                            $scope.getNotification();
+                $scope.getNotification();
 
 
 
