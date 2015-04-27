@@ -10,7 +10,10 @@ define(['app','./countries-commonJS.js'], function(app) {
       },
       controller: ['$scope', 'authHttp','realm','$q', '$filter','$routeParams', '$timeout','$element','countriescommonjs',
         function($scope, $http, realm, $q, $filter, $routeParams, $timeout, $element ,countriescommonjs) {
-
+            var taiwan = "TW"
+            var china = "CN"
+            var denmark = "DK"
+            var greenland = "GL"
             $scope.lastAction = 'party';
             if (!$scope.countries) {
                 var schema = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database"]
@@ -71,7 +74,7 @@ define(['app','./countries-commonJS.js'], function(app) {
                       $scope.countries[i].isParty = false;
                       console.log('Non party', $scope.countries[i])
                   }
-
+                  countryColors[greenland.toUpperCase()] = "#808080";
                   if ($scope.countries[i].isParty)
                     $scope.countriesforAutocomplete.push({
                       name: $scope.countries[i].name.en
@@ -89,7 +92,7 @@ define(['app','./countries-commonJS.js'], function(app) {
                 }
 
                 countryColors[taiwan] = "#808080";
-                countryColors[greenland] = "#428bca";
+                //countryColors[greenland] = "#428bca";
 
                 loadMap(countryColors);
                 $scope.slideMap('#mapDiv', '#listDiv');
@@ -220,8 +223,8 @@ define(['app','./countries-commonJS.js'], function(app) {
             //tiwan should be shown as China
             if (code == taiwan)
               code = china
-            if (code == greenland) //greenland  as denmark
-              code = denmark
+            // if (code == greenland) //greenland  as denmark
+            //   code = denmark
               // console.log(code,$scope.countries);
             var country = _.where($scope.countries, {
               code: code.toUpperCase()
@@ -286,6 +289,10 @@ define(['app','./countries-commonJS.js'], function(app) {
               else
                 $('#jqvmap1_EUR1').show('slow');
 
+                if(action == 'party' || action == 'nonParties'){
+                    $("#jqvmap" + getMapIndex() + "_" + greenland).attr("fill", "#808080");
+                }
+
               _.each($scope.countries, function(country) {
 
                 if ((action == 'party' ||  action == 'inbetweenParty') && country.isInbetweenParty) {//action == 'ratified' ||
@@ -293,7 +300,6 @@ define(['app','./countries-commonJS.js'], function(app) {
 
                 } else if ((action == 'party' || action == 'ratified') && country.isRatified && !country.isInbetweenParty) {
                   $("#jqvmap" + getMapIndex() + "_" + country.code.toUpperCase()).attr("fill", "#428bca");
-                  $("#jqvmap" + getMapIndex() + "_" + greenland).attr("fill", "#428bca");
 
                 } else if ((action == 'nonParties' && !country.isRatified && country.isSignatory) || (action == 'party' || action == 'signatory') && country.isSignatory) {
                   $("#jqvmap" + getMapIndex() + "_" + country.code.toUpperCase()).attr("fill", "#5bc0de");
@@ -304,6 +310,7 @@ define(['app','./countries-commonJS.js'], function(app) {
                 }
               });
             } else {
+
               $scope.searchFilter = $scope.hasFacets;
               $('#jqvmap1_EUR1').hide('slow');
               _.each($scope.countryFacets['government_s,schema_s'], function(data) {
@@ -322,17 +329,14 @@ define(['app','./countries-commonJS.js'], function(app) {
                   if (data.value.toUpperCase() == china)
                     $("#jqvmap" + getMapIndex() + "_" + taiwan).attr("fill", "#808080");
 
-                  if (data.value.toUpperCase() == denmark)
-                    $("#jqvmap" + getMapIndex() + "_" + greenland).attr("fill", "#428bca");
+                //   if (data.value.toUpperCase() == denmark)
+                //     $("#jqvmap" + getMapIndex() + "_" + greenland).attr("fill", "#428bca");
                 }
               });
             }
           }
 
-          var taiwan = "TW"
-          var china = "CN"
-          var denmark = "DK"
-          var greenland = "GL"
+
 
           $scope.isSelected = function(facet) {
             return facet == $scope.selected_facet;
@@ -341,8 +345,8 @@ define(['app','./countries-commonJS.js'], function(app) {
           function getMapIndex(id) {
             if (!id)
               id = 1;
-            if ($("#jqvmap" + id + "_" + greenland).length == 0)
-              return getMapIndex(id + 1)
+            // if ($("#jqvmap" + id + "_" + greenland).length == 0)
+            //   return getMapIndex(id + 1)
 
             return id;
           }
