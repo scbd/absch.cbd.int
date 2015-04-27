@@ -49,11 +49,17 @@
          }
 
   </style>
-  <script type="text/javascript">
-
-  </script>
   <div class="clearfix"></div>
-  <br>
+  <div class="row pull-right">
+      <div class="col-lg-12">Order By:
+            <select ng-model="orderByField">
+                <option value="createdDate_dt">Created On</option>
+                <option value="title_s">Title</option>
+                <option value="government_s">Government</option>
+            </select>
+            <input type="checkbox" ng-model="reverse"> Reverse
+      </div>
+  </div><br/>
   <div ng-repeat="document in transformedDocuments | filter:advanceFilter | filter:filterCategory "  style="border-top:1px solid #ddd;border-bottom:1px solid #ddd;border-right:1px solid #ddd;">
      <!-- {{document}} -->
     <div id="Result">
@@ -61,7 +67,7 @@
 
         <div class="{{document.recordtype}}" id="help-record-type" style="cursor:pointer;" ng-class="{'bg-grey': displayDetails}">
                 <div class="" style="padding:20px 20px 10px 20px;" >
-
+                    {{document.id}}
                     <div>
                         <div style="padding:0px 0 0px 0px; ">
                             <span class="label label-party" id="help-record-country" ng-class="{'label-default':!document.isRatified, 'label-primary':document.isRatified}"
@@ -79,11 +85,11 @@
                                 </a>
                             </span>
 
-                            <span class="pubDate pull-right">{{document.createdDateOn | formatDate}}</span>
+                            <span class="pubDate pull-right" ng-show="document.createdDateOn">{{document.createdDateOn | formatDate}}</span>
                         </div>
                     </div>
 
-            
+
 
                     <div class="row textDescription" style="padding:10px;">
                         <div class="col-xs-12">

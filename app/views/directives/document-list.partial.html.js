@@ -8,19 +8,14 @@ define(['app',
       restrict: 'EAC',
       templateUrl: '/app/views/directives/document-list.partial.html',
       replace: true,
-      // require : "?ngModel",
       scope: {
-        // placeholder: '@',
-        // ngDisabledFn : '&ngDisabled',
-        // binding    : '=ngModel',
-        // locales    : '=',
-        // required   : "@"
         documents: '=',
         filter: '@',
         advanceFilter: '=',
         showPagination: '@',
         currentPage: '=',
-        documentCount: '='
+        documentCount: '=',
+        orderBy: '='
       },
       controller: ['$scope', '$sce', "underscore", "commonjs", "authentication", '$q', "$filter", "$compile", "$element", "$timeout",
         function($scope, $sce, _, commonjs, authentication, $q, $filter, $compile, $element, $timeout) {
@@ -36,9 +31,9 @@ define(['app',
             }
           }
 
-          $scope.formatDate = function formatDate(date) {
-            return moment(date).format('MMMM Do YYYY');
-          };
+        //   $scope.formatDate = function formatDate(date) {
+        //     return moment(date).format('MMMM Do YYYY');
+        //   };
           //console.log($scope.advanceFilter) ;
           if ($scope.advanceFilter && $scope.advanceFilter.$ == null) {
             $scope.advanceFilter.$ = '';
@@ -374,6 +369,17 @@ define(['app',
           //
           //==================================
           $scope.user = null;
+          $scope.orderByField = 'createdDate_dt';
+          $scope.reverse = true;
+          $scope.$watch('orderByField', function(newVal, oldVal){
+
+              if(oldVal && newVal)
+                $scope.orderBy = newVal + ($scope.reverse ? ' desc' : '  asc')
+          });
+          $scope.$watch('reverse', function(newVal, oldVal){
+              if(oldVal!=undefined)
+                $scope.orderBy = $scope.orderByField + (newVal ? ' desc' : '  asc')
+          });
 
           function canUserEdit(document) {
 
