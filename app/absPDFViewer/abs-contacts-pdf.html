@@ -1,0 +1,121 @@
+<html>
+
+<head>
+    <title>Access and Benefit-Sharing Clearing-House</title>
+    <meta name="description" content="Access and Benefit-Sharing Clearing-House">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="ico/favicon.png">
+
+    <!-- Bootstrap core CSS -->
+    <link href="../libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+
+    <link href="/app/css/profile-map.css" rel="stylesheet">
+
+    <script src="../libs/underscore/underscore.js"></script>
+    <script src="../libs/angular/angular.min.js"></script>
+    <script src="../libs/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="abs-contacts-pdf.html.js"></script>
+    <script src="absCommon.js"></script>
+    <style>
+        a[href]:after {
+            content: '';
+        }
+    </style>
+</head>
+
+<body>
+    <div ng-app="ngapp" class="main-nav">
+        <div ng-controller="printContacts" style="width:1000px;">
+
+            <div class="row" >
+                <div class="col-xs-1">
+                </div>
+
+                <div class="col-xs-3" style="text-align:center;">
+                    <img style="width:60px;" src="../img/UNEP_logo.svg" />
+                </div>
+                <div class="col-xs-4" style="text-align:center;padding-top:5px;">
+                    <img src="../img/cbd-logo-print-black-en.png" />
+                </div>
+                <div class="col-xs-3" style="text-align:center;">
+                    <img style="width:70px;padding-top:5px;" src="../img/Emblem_of_the_United_Nations.svg" />
+                </div>
+
+                <div class="col-xs-1">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12"  style="margin:auto;text-align:center;">
+                    <h1>
+                        <span class="color-lightblue">{{title(schema)}}</span>
+                    </h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2"></div>
+                <div class="col-xs-10">
+                    For more information, please contact the Secretariat of the Convention at:<br/>
+                    413, St. Jacques Street, Suite 800<br/>
+                    H2Y 1N9 Montreal, Quebec, Canada<br/>
+                    Tel.: (1-514) 288-2220<br/>
+                    Fax: (1-514) 288-6588<br/>
+                    E-mail: secretariat@cbd.int<br/>
+                    Web: www.cbd.int<br/>
+                </div>
+            </div>
+            <hr />
+            <div class="col-xs-12">
+                <!-- <div ng-repeat="country in countries">
+                    <div class="row">
+                        <div class="col-xs-12">
+                        <strong>{{country}}</strong><br/> getCountryRecords(country)-->
+                <div ng-repeat="contact in absch_nfp|orderBy:'government_EN_t'">
+                    <div ng-class="{'row': ($index)%3==0}"> </div>
+                    <div class="col-xs-4">
+                        <div class="panel panel-default" ng-class="{'panel-success':(contact.type_ss.indexOf('NP-FP')>=0 || contact.type_ss.indexOf('ABS-FP')>=0),
+                                                                    'panel-warning':contact.schema_s=='absCheckpoint',
+                                                                    'panel-info':contact.schema_s=='authority'||contact.schema_s=='database'}">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <!-- <i ng-class="{'fa fa-user':(contact.schema_s=='focalPoint'||contact.schema_s=='authority'),
+                                     'mdi-action-verified-user':contact.schema_s=='absCheckpoint',
+                                     'mdi-file-folder':contact.schema_s=='database'}"></i> -->
+                                    <!-- {{getTitle(contact.schema_s,contact.type_ss,contact.schema_EN_t)}} -->
+                                    <!-- <strong> -->
+                                    <!-- <a ng-show="contact.schema_s!='focalPoint'" ng-href="/database/{{contact.doc|uniqueIDWithoutRevision}}">{{contact.title_t}}</a> -->
+                                    {{contact.government_EN_t}}
+                                    <!-- </strong> -->
+                                </h4>
+                            </div>
+                            <div class="panel-body">
+                                <a ng-href="/database/{{schema}}/{{contact.documentId}}">{{contact.title_t}}</a>
+                                <div ng-show="contact.description_t" ng-bind-html="contact.description_t"></div>
+                                <ul ng-show="contact.telephones || contact.telephone_s || contact.fax_ss" style="list-style-type: none;padding:0;margin:0;">
+                                    <!-- <i class="fa fa-phone-square"></i><i class="fa fa-phone-square"></i><i class="fa fa-fax"></i>
+                                            <i class="fa fa-envelope-o"></i> -->
+                                    <li ng-show="contact.telephone_s"> {{contact.telephone_s}}</li>
+                                    <li ng-show="contact.telephones" ng-repeat="item in contact.telephones"> {{item}}</li>
+                                    <li ng-show="contact.fax_ss" ng-repeat="item in contact.fax_ss"> {{item}}</li>
+                                </ul>
+                                <ul ng-show="contact.emails || contact.email_ss" style="list-style-type: none;padding:0;margin:0;">
+                                    <li ng-repeat="item in contact.emails || contact.email_ss"><a ng-href="mailto:{{item}}"> {{item}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- </div>
+                    </div>
+                </div> -->
+            </div>
+
+
+        </div>
+
+    </div>
+</body>
+
+</html>

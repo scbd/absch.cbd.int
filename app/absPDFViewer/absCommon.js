@@ -204,7 +204,7 @@ app.filter("uniqueID", ['$filter', '$q','$http', function( $filter, $q, $http) {
 
 			var document;
 
-			if(term ){
+			if(term && term.identifier){
 				if(cacheMap[term.identifier])
 					return cacheMap[term.identifier] ;
 
