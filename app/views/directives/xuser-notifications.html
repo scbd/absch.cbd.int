@@ -13,15 +13,14 @@
 
                     <a ng-href="/register/requests/{{notification.data.workflowId}}" ng-click="markAsRead(notification);">
 
-
                         <i ng-class="{'color-blue':notification.state=='unread'}" >{{notification.createdBy_info.firstName + ' ' + notification.createdBy_info.lastName}}</i>
 
-                        <span  ng-show="notification.data.action=='request'"> has sent you a request for publishing </span>
-                        <span  ng-show="notification.data.action=='approved'"> has approved your publishing request </span>
-                        <span  ng-show="notification.data.action=='rejected'"> has rejected your publishing request  </span>
+                        <span  ng-show="notification.data.action=='request'"> has sent you a request for publishing for</span>
+                        <span  ng-show="notification.data.action=='approved'"> has approved your publishing request for</span>
+                        <span  ng-show="notification.data.action=='rejected'"> has rejected your publishing request  for</span>
 
-                        <strong>{{notification.data.documentInfo.metadata.schema|schemaName}} </strong>
-                        <i ng-class="{'color-blue':notification.state=='unread'}" >{{notification.data.documentInfo.title|lstring}}</i>
+                        <strong><i ng-class="{'color-blue':notification.state=='unread'}" >{{notification.data.documentInfo.title|lstring}}</i></strong>
+                        <span> ({{notification.data.documentInfo.metadata.schema|schemaName}})</span>
                     </a>
                     <br>{{timePassed(notification.createdOn)}} ago
                 </td>
