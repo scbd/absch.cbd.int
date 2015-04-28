@@ -230,10 +230,10 @@
                 <div ng-repeat="doc in rawRefDocs">
                     <div class="latest" ng-class="{'latest-even-row':$even}">
                         <a  href="/database/{{doc.schema_s == 'resource' ? '' : doc.schema_EN_t + '/'}}{{getDocumentId(doc)}}" class="latest-link">
-                        <span class="latest-date"> {{doc.createdDate_dt | formatDate}} </span> |
-                            <span class="latest-schema"> {{doc.schema_s | schemaName}} </span> |
-                        <span class="latest-schema">{{getResourceType(doc.resourceTypes_CEN_ss)}}</span>
-                        <div class="latest-title color-orange">{{doc.title_t}} </div>
+                            <span class="latest-date"> {{doc.createdDate_dt | formatDate}}</span>
+                            <span class="latest-schema">  |{{doc.schema_s | schemaName}}</span>
+                            <span class="latest-schema" ng-show="doc.resourceTypes_CEN_ss">  |{{getResourceType(doc.resourceTypes_CEN_ss)}}</span>
+                            <div class="latest-title color-orange">{{doc.title_t}} </div>
                      </a>
                  </div>
                 </div>
