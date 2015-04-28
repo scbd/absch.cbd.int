@@ -24,7 +24,7 @@ define(["app", "authentication"], function (app) {
             //
             //===========================
             this.get = function(id) {
-                return $http.get("/api/v2015/user-notifications/"+id).then(
+                return $http.get("/api/v2015/user-notifications/"+id,{ignoreLoadingBar: true}).then(
                     function(resp){
                         return resp.data;
                     });
@@ -54,7 +54,7 @@ define(["app", "authentication"], function (app) {
             //
             //===========================
             this.query  = function(query, pageNumber, pageLength) {
-                return $http.get("/api/v2015/user-notifications/", { params : { q : JSON.stringify(query), sk: pageNumber, l: pageLength }, cache:false }).then(function(resp){
+                return $http.get("/api/v2015/user-notifications/", { params : { q : JSON.stringify(query), sk: pageNumber, l: pageLength }, cache:false,ignoreLoadingBar: true }).then(function(resp){
                     return resp.data;
                 });
             };
