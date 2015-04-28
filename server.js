@@ -25,6 +25,7 @@ app.configure(function() {
 
 var proxy = httpProxy.createProxyServer({});
 
+
 app.get   ('/app/absPDFViewer/*'   , function(req, res) {
 	fs.readFile(__dirname + '/app/absPDFViewer/absPermitPrint.html', 'utf8', function (error, text) {
 		res.send(text);
@@ -35,9 +36,9 @@ app.get   ('/public/*', function(req, res) { res.send('404', 404); } );
 
 // var targetURL = 'http://localhost';
 var targetURL = 'https://api.cbd.int';
-
+//console.log(req.headers['x-forwarded-for'], req.connection.remoteAddress);
 app.all('/api/v2013/documents/*', function(req, res) { proxy.web(req, res, { target: targetURL, secure: false } ); } );
-app.get   ('/api/*', function(req, res) { proxy.web(req, res, { target: targetURL, secure: false } ); } );
+app.get   ('/api/*', function(req, res) { proxy.web(req, res, { target: targetURL, secure: false } );  } );
 app.put   ('/api/*', function(req, res) { proxy.web(req, res, { target: targetURL, secure: false } ); } );
 app.post  ('/api/*', function(req, res) { proxy.web(req, res, { target: targetURL, secure: false } ); } );
 app.delete('/api/*', function(req, res) { proxy.web(req, res, { target: targetURL, secure: false } ); } );
@@ -50,6 +51,9 @@ app.get('/*', function(req, res) {
 	});
 });
 
+proxy.on('error',function (err,req) {
+  console.error(err, req.url);
+});
 // Start server
 
 console.log('Server listening on port ' + app.get('port'));
