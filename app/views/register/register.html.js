@@ -392,9 +392,9 @@ define(['app',
 	                ]
 	            };
 
-	    $q.when(workflows.query(query), function(data){
+	    $q.when(workflows.query(query,true), function(data){
 			var schemaCount = _.where($scope.schemaTypesFacets,{"schema":"completedTasks"});
-	        schemaCount[0].requestCount = data.length;
+	        schemaCount[0].requestCount = data.count;
 
 	    });
 
@@ -405,9 +405,9 @@ define(['app',
 					{ "data.realm" : realm.value }
 				]
 			};
-	    $q.when(workflows.query(query), function(data){
+	    $q.when(workflows.query(query,true), function(data){
 			var schemaCount = _.where($scope.schemaTypesFacets,{"schema":"pendingTasks"});
-	        schemaCount[0].requestCount = data.length;
+	        schemaCount[0].requestCount = data.count;
 	    });
 
 		query    = {
@@ -417,9 +417,9 @@ define(['app',
 					{ "data.realm" : realm.value }
 				]
 			};
-	    $q.when(workflows.query(query), function(data){
+	    $q.when(workflows.query(query,true), function(data){
 			var schemaCount = _.where($scope.schemaTypesFacets,{"schema":"urgentTasks"});
-	        schemaCount[0].requestCount = data.length;
+	        schemaCount[0].requestCount = data.count;
 	    });
 
 	 // flipFacets();
