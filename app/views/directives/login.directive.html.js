@@ -43,7 +43,12 @@ app.directive('login', function ($http) {
                             if(typeof $scope.onAuthorization =='function'){
                                 $scope.onAuthorization();
                             }
-                            return $rootScope.user = user;
+                            $rootScope.user = user;
+                            $rootScope.$broadcast('signIn', user);
+                            return $rootScope.user;
+                        })
+                        .finally(function(){
+                            $scope.waiting      = false;
                         });
                         //$location.path($window.location.href);
                       //$window.location.href = $window.location.href;

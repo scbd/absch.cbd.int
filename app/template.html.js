@@ -164,8 +164,12 @@ define(['app',
                 if (message.type == 'authenticationToken') {
                     if (message.authenticationToken && !$browser.cookies().authenticationToken) {
                         setCookie('authenticationToken', message.authenticationToken, 7, '/');
+
+                        authentication.getUser(true).then(function(user){
+                            $rootScope.$broadcast('signIn', user);
+                        })
                         // window.setTimeout(function(){
-                        $window.location.href = window.location.href;
+                        //$window.location.href = window.location.href;
                         // },1000)
 
                     }
@@ -174,7 +178,7 @@ define(['app',
                         //window.setTimeout(function(){
                         authentication.signOut();
 
-                        $window.location.href = $window.location.href;
+                        // $window.location.href = $window.location.href;
                         // },1000)
                     }
                 }
