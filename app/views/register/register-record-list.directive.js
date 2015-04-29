@@ -296,7 +296,7 @@ define(['app', '/app/js/common.js'], function(app) {
 
                         }).catch(function(error) {
                             if (error.error.indexOf('Not authorized to save draft') >= 0) {
-                                bootbox.alert('Yur are not authorized to create duplicate records.')
+                                bootbox.alert('You are not authorized to create duplicate records.')
                             }
                             $scope.$emit("documentError", {
                                 action: "duplicate",
