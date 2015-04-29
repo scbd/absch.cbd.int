@@ -1,6 +1,6 @@
-define(['app',
-    '/app/views/forms/view/record-loader.directive.html.js',
-    '/app/views/directives/document-list.partial.html.js',
+define(['app','/app/js/common.js',
+    // '/app/views/forms/view/record-loader.directive.html.js',
+    // '/app/views/directives/document-list.partial.html.js',
     '/app/views/directives/home-country-dashboard-directive.html.js'], function (app) {
     app.controller('IndexController', ['$scope', 'authHttp', '$window', '$cookies','realm', '$filter','$rootScope','commonjs',
     function ($scope, $http, $window, $cookies, realm, $filter, $rootScope, commonjs) {
@@ -14,7 +14,8 @@ define(['app',
         //         $scope.feeds=data.responseData.feed.entries;
         //     });
 
-        $http.get("/api/v2013/index/select?cb=1394824945962&fl=id,identifier_s,title_t,description_t,url_ss,schema_EN_t,date_dt,government_EN_t,schema_s,number_d,aichiTarget_ss,reference_s,sender_s,meeting_ss,recipient_ss,symbol_s,eventCity_EN_t,eventCountry_EN_t,startDate_s,endDate_s,body_s,code_s,meeting_s,group_s,function_t,department_t,organization_t,summary_EN_t,reportType_EN_t,completion_EN_t,jurisdiction_EN_t,development_EN_t&q=(realm_ss:" + realm.value + ")+AND+schema_s:*+AND+((+schema_s:meeting+))+AND+(*:*)+AND+(*:*)&rows=4&sort=createdDate_dt+desc,+title_t+asc&start=0&wt=json").then(function (result) {
+        $http.get("/api/v2013/index/select?cb=1394824945962&fl=id,identifier_s,title_t,description_t,url_ss,schema_EN_t,date_dt,government_EN_t,schema_s,number_d,aichiTarget_ss,reference_s,sender_s,meeting_ss,recipient_ss,symbol_s,eventCity_EN_t,eventCountry_EN_t,startDate_s,endDate_s,body_s,code_s,meeting_s,group_s,function_t,department_t,organization_t,summary_EN_t,reportType_EN_t,completion_EN_t,jurisdiction_EN_t,development_EN_t&q=(realm_ss:" + realm.value + ")+AND+schema_s:*+AND+((+schema_s:meeting+))+AND+(*:*)+AND+(*:*)&rows=4&sort=createdDate_dt+desc,+title_t+asc&start=0&wt=json")
+        .then(function (result) {
                 $scope.meetings = result.data;
         });
         $scope.locale = 'en';
@@ -116,7 +117,7 @@ define(['app',
                     document.schema_s == 'absCheckpointCommunique' || document.schema_s == 'authority' ||
                     document.schema_s == 'measure' || document.schema_s == 'database' ||
                     document.schema_s == 'resource')){
-                return $filter("uniqueIDWithoutRevision")(document.identifier_s);
+                return $filter("uniqueIDWithoutRevision")(document);
               }
               else {
                   return commonjs.hexToInteger(document.id || document.identifier_s);
