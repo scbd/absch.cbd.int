@@ -1,0 +1,121 @@
+/* colors */
+.color-red{
+    color:#C7532C!important;
+}
+.color-orange{
+    color:#fa6938!important;
+}
+.color-blue{
+    color:#428bca!important;
+}
+.color-green{
+    color:#1FA65D!important;
+    #5cb85c
+}
+.color-published-green{
+    color:#5cb85c!important;
+}
+.color-grey{
+    color:#555;
+}
+.color-cbdgreen{
+    color:#009b48!important;
+}
+
+.color-darkgrey{
+    color:#333;
+}
+.color-litegrey{
+    color:#999;
+}
+.color-black{
+    color:#111;
+}
+.color-white{
+    color:#FFF;
+}
+.color-yellow{
+    color:#FFD801;
+}
+
+.bg-white-to-red{
+    background-color:#fff;
+    -webkit-transition: #C7532C 0.4s ease;
+    -moz-transition: #C7532C 0.4s ease;
+    -o-transition: #C7532C 0.4s ease;
+    transition: #C7532C 0.4s ease;
+}
+
+.bg-yellow{
+    background-color:#FFD801!important;
+    color:#fff;
+}
+
+.bg-cbdgreen{
+    background-color:#009b48!important;
+    color:#fff!important;
+}
+
+.highlight{
+    background-color:#FCEBBD!important;
+    color:#000;
+    font-weight:bold;
+
+}
+
+
+.bg-none{
+    background-color:inherit!important;
+}
+
+.bg-orange{
+    background-color:#fa6938!important;
+    color:white!important;
+}
+.bg-white{
+    background-color:#FFF!important;
+    color:#555;
+}
+.bg-grey{
+    background-color:#EEE!important;
+    color:#555;
+}
+.bg-red{
+    background-color:#C7532C!important;
+    color:white;
+}
+
+.bg-blue{
+    background-color:#428bca!important;
+    color:white!important;
+}
+
+.bg-green{
+    background-color:#1FA65D!important;
+
+}
+
+.bg-black{
+    background-color:#111!important;
+    color:white!important;
+}
+
+.bg-litegrey{
+    background-color:#EEE!important;
+
+}
+
+.bg-darkgrey{
+    background-color:#666!important;
+
+}
+
+.bg-texture-green{
+    background:#1FA65D url('../img/feature-bkg.png')!important;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, .5) 0%, rgba(0, 0, 0, .0001) 100%);
+}
+
+.bg-texture-litegrey{
+    background:#EEE url('../img/feature-bkg.png')!important;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, .5) 0%, rgba(0, 0, 0, .0001) 100%);
+}
