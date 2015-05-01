@@ -144,19 +144,20 @@ define(['app',
                     event.source.postMessage('{"type":"getAuthenticationToken"}', event.origin);
 
                 if (message.type == 'authenticationToken') {
-                    if (message.authenticationToken && !$browser.cookies().authenticationToken) {
-                        setCookie('authenticationToken', message.authenticationToken, 7, '/');
-
+                    //console.log($browser.cookies().authenticationToken);
+                    if (message.authenticationToken && (!$browser.cookies().authenticationToken 
+                                                    || $browser.cookies().authenticationToken== "undefined" || $browser.cookies().authenticationToken== "null")) {
+                       // setCookie('authenticationToken', message.authenticationToken, 7, '/');
+//                        console.log('token from accounts', message.authenticationToken);
+                        $browser.cookies().authenticationToken = message.authenticationToken;
                         authentication.getUser(true).then(function(user){
+//                            console.log('token from accounts', user);
                             $rootScope.$broadcast('signIn', user);
                         })
-                        // window.setTimeout(function(){
-                        //$window.location.href = window.location.href;
-                        // },1000)
 
                     }
                     if (!message.authenticationToken && $browser.cookies().authenticationToken) {
-
+//console.log('signout');
                         //window.setTimeout(function(){
                         authentication.signOut();
 

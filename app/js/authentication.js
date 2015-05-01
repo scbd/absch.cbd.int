@@ -18,16 +18,17 @@ define(['app'], function (app) {
 			if(currentUser) return currentUser;
 
 			var headers = {}
-			//if($browser.cookies().authenticationToken)
+			//console.log($browser.cookies().authenticationToken);
 				headers = { Authorization: "Ticket " + $browser.cookies().authenticationToken };
 
 			currentUser = $http.get('/api/v2013/authentication/user', { headers: headers}).then(function onsuccess (response) {
 				$rootScope.user = response.data;
+				
 				return response.data;
 			}, function onerror (error) {
 				return { userID: 1, name: 'anonymous', email: 'anonymous@domain', government: null, userGroups: null, isAuthenticated: false, isOffline: true, roles: [] };
 			});
-
+		
 			return currentUser;
 		}
 
@@ -36,10 +37,11 @@ define(['app'], function (app) {
 	    //
 	    //============================================================
 		function signOut () {
-			
+			//console.log('signnnnouttttttt');
 			var response = { type: 'setAuthenticationToken', authenticationToken: null, setAuthenticationEmail: $browser.cookies().email||'' };
-			
-			document.cookie = "authenticationToken=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT";
+			//console.log($browser.cookies().authenticationToken)
+			$browser.cookies().authenticationToken = '';
+//			document.cookie = "authenticationToken=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT";
 			reset();
 			
 			var authenticationFrame = angular.element(document.querySelector('#authenticationFrame'))[0];

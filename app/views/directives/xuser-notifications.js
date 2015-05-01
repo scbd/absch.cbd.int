@@ -62,6 +62,7 @@ define(['app'], function(app) {
                                 })
                                 .catch(function(error){
                                     if(error.data.statusCode==401){
+                                        console.log('calling get fetch from notifications' );
                                         authentication.getUser(true);
                                     }
                                 })
@@ -121,7 +122,9 @@ define(['app'], function(app) {
                     };
 
                     $scope.$on('signIn', function(evt,user){
-                        getNotification();
+                        $timeout(function(){
+                            getNotification();
+                            },5000);
                     });
 
                     getNotification();
