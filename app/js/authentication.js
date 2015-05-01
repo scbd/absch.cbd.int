@@ -18,7 +18,7 @@ define(['app'], function (app) {
 			if(currentUser) return currentUser;
 
 			var headers = {}
-			if($browser.cookies().authenticationToken)
+			//if($browser.cookies().authenticationToken)
 				headers = { Authorization: "Ticket " + $browser.cookies().authenticationToken };
 
 			currentUser = $http.get('/api/v2013/authentication/user', { headers: headers}).then(function onsuccess (response) {
@@ -36,9 +36,14 @@ define(['app'], function (app) {
 	    //
 	    //============================================================
 		function signOut () {
-			$rootScope.user = undefined;
+			
+			var response = { type: 'setAuthenticationToken', authenticationToken: null, setAuthenticationEmail: $browser.cookies().email||'' };
+			
 			document.cookie = "authenticationToken=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT";
 			reset();
+			
+			var authenticationFrame = angular.element(document.querySelector('#authenticationFrame'))[0];
+			authenticationFrame.contentWindow.postMessage(JSON.stringify(response), 'https://accounts.cbd.int');
 		}
 
 		//============================================================
@@ -48,6 +53,7 @@ define(['app'], function (app) {
 		function reset () {
 
 			currentUser = undefined;
+			$rootScope.user = undefined;
 		}
 
 		return { getUser: getUser, signOut: signOut, reset: reset };

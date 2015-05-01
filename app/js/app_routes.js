@@ -221,12 +221,6 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
               subTemplateUrl: '/app/views/forms/edit/edit--', //filled in through controller
             }).
 
-             when('/forum', {
-              templateUrl: '/app/views/forum.html',
-              resolveController: true,
-              resolveUser: true,
-            }).
-
             when('/searchforum.shtml',           { redirectTo:'/about/portal10' }).
 
             when('/commonformat',           { redirectTo:'/about/common-formats' }).
