@@ -88,32 +88,14 @@ define(['app',
 
                 document.cookie = cookieString
             };
-
-
-            //_loadCss('/app/libs/font-awesome/css/font-awesome.css');
-            //_loadCss('//fast.fonts.net/cssapi/ab363dc0-d9f9-4148-a52d-4dca15df47ba.css');
-
-            //============================================================
-            //
-            //
-            //============================================================
-            $scope.actionSignin = function() {
-
-                var client_id = encodeURIComponent('fbbb279e53ff814f4c23878e712dfe23ee66bd73a1cfc42b1842e2ab58c440fe');
-                var redirect_uri = encodeURIComponent($location.protocol() + '://' + $location.host() + ':' + $location.port() + '/oauth2/callback');
-                $window.location.href = 'https://accounts.cbd.int/oauth2/authorize?client_id=' + client_id + '&redirect_uri=' + redirect_uri + '&scope=all';
-            }
+           
 
             //============================================================
             //
             //
             //============================================================
             $scope.actionSignOut = function() {
-                $rootScope.user = undefined;
-                document.cookie = "authenticationToken=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT";
-                var redirect_uri = encodeURIComponent($location.protocol() + '://' + $location.host() + ':' + $location.port() + '/');
-
-                $window.location.href = 'https://accounts.cbd.int/signout?redirect_uri=' + redirect_uri;
+                authentication.signOut();
             };
 
             //============================================================
