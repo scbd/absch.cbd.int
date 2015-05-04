@@ -45,7 +45,10 @@ define(['app','underscore'], function(app,underscore){
 			}
 
 			this.isUserInRole = function(role){
-
+				
+				if(!$rootScope.user)
+					return false;
+				
 				var userRoles = $rootScope.user.roles;
 				if(!role)
 					return false;

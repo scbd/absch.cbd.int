@@ -27,7 +27,7 @@ define(['app',
             }
             else {
                 //console.log(document)
-              return $filter("uniqueIDWithoutRevision")(document.doc.identifier_s);
+              return $filter("uniqueIDWithoutRevision")(document.doc);
             }
           }
 

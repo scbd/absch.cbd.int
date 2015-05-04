@@ -88,32 +88,14 @@ define(['app',
 
                 document.cookie = cookieString
             };
-
-
-            //_loadCss('/app/libs/font-awesome/css/font-awesome.css');
-            //_loadCss('//fast.fonts.net/cssapi/ab363dc0-d9f9-4148-a52d-4dca15df47ba.css');
-
-            //============================================================
-            //
-            //
-            //============================================================
-            $scope.actionSignin = function() {
-
-                var client_id = encodeURIComponent('fbbb279e53ff814f4c23878e712dfe23ee66bd73a1cfc42b1842e2ab58c440fe');
-                var redirect_uri = encodeURIComponent($location.protocol() + '://' + $location.host() + ':' + $location.port() + '/oauth2/callback');
-                $window.location.href = 'https://accounts.cbd.int/oauth2/authorize?client_id=' + client_id + '&redirect_uri=' + redirect_uri + '&scope=all';
-            }
+           
 
             //============================================================
             //
             //
             //============================================================
             $scope.actionSignOut = function() {
-                $rootScope.user = undefined;
-                document.cookie = "authenticationToken=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT";
-                var redirect_uri = encodeURIComponent($location.protocol() + '://' + $location.host() + ':' + $location.port() + '/');
-
-                $window.location.href = 'https://accounts.cbd.int/signout?redirect_uri=' + redirect_uri;
+                authentication.signOut();
             };
 
             //============================================================
@@ -162,19 +144,24 @@ define(['app',
                     event.source.postMessage('{"type":"getAuthenticationToken"}', event.origin);
 
                 if (message.type == 'authenticationToken') {
-                    if (message.authenticationToken && !$browser.cookies().authenticationToken) {
-                        setCookie('authenticationToken', message.authenticationToken, 7, '/');
-                        // window.setTimeout(function(){
-                        $window.location.href = window.location.href;
-                        // },1000)
+                    //console.log($browser.cookies().authenticationToken);
+                    if (message.authenticationToken && (!$browser.cookies().authenticationToken 
+                                                    || $browser.cookies().authenticationToken== "undefined" || $browser.cookies().authenticationToken== "null")) {
+                       // setCookie('authenticationToken', message.authenticationToken, 7, '/');
+//                        console.log('token from accounts', message.authenticationToken);
+                        $browser.cookies().authenticationToken = message.authenticationToken;
+                        authentication.getUser(true).then(function(user){
+//                            console.log('token from accounts', user);
+                            $rootScope.$broadcast('signIn', user);
+                        })
 
                     }
                     if (!message.authenticationToken && $browser.cookies().authenticationToken) {
-
+//console.log('signout');
                         //window.setTimeout(function(){
                         authentication.signOut();
 
-                        $window.location.href = $window.location.href;
+                        // $window.location.href = $window.location.href;
                         // },1000)
                     }
                 }

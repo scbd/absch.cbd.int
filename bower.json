@@ -32,7 +32,7 @@
     "textAngular": "~1.2.2",
     "jvectormap": "~2.0.0",
     "bootstrap-material-design": "~0.1.5",
-    "cbd-forums": "~1.2.3"
+    "cbd-forums": "~1.2.5"
   },
   "resolutions": {
     "angular": "1.2.18",

@@ -4,11 +4,7 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
 
      app.value("realm", {value:"ABS"});
     app.value("schemaTypes", [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "resource" ]);
-    // console.log(app['realm']);
-	// var resolveUser = ['$rootScope', 'authentication', function($rootScope, authentication) {
-	// 	return authentication.getUser().then(function (user) { $rootScope.user = user; return user; });
-	// }];
-
+    
     app.config(['extendedRouteProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
           $locationProvider.html5Mode(true);
         $locationProvider.hashPrefix('!');
@@ -219,12 +215,6 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
               resolveController: true,
               resolveUser: true,
               subTemplateUrl: '/app/views/forms/edit/edit--', //filled in through controller
-            }).
-
-             when('/forum', {
-              templateUrl: '/app/views/forum.html',
-              resolveController: true,
-              resolveUser: true,
             }).
 
             when('/searchforum.shtml',           { redirectTo:'/about/portal10' }).

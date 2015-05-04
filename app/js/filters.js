@@ -1,5 +1,5 @@
 ﻿
-define(["app"], function (app) {
+define(["app",'/app/js/common.js'], function (app) {
 
 
 	//============================================================
@@ -92,7 +92,7 @@ define(["app"], function (app) {
       };
     });
 
-    app.filter("uniqueID", ["IStorage", '$filter', '$q', function(storage, $filter, $q) {
+    app.filter("uniqueID", ["IStorage", '$filter', '$q','commonjs', function(storage, $filter, $q, commonjs) {
 		var cacheMap = {};
 
 		return function(term) {
@@ -156,16 +156,25 @@ define(["app"], function (app) {
                     }
 
                 var government = ''
-                if(document.government)
+				var documentId;
+
+				if(document.documentID)
+					documentId = document.documentID;
+				else if(document.id)
+					documentId = commonjs.hexToInteger(document.id);
+
+				if(document.government_s)
+                    government = document.government_s;
+                else if(document.government)
                     government = document.government.identifier;
                 else if(document.metadata && document.metadata.government)
                     government = document.metadata.government;
                 else if(document.body && document.body.government)
                     government = document.body.government.identifier;
 
-                var unique = 'ABSCH-' + $filter("schemaShortName")($filter("lowercase")(document.type)) +
+                var unique = 'ABSCH-' + $filter("schemaShortName")($filter("lowercase")(document.type||document.schema_s)) +
                         (government != '' ? '-' + $filter("uppercase")(government) : '') +
-                        '-' + document.documentID + '-' + document.revision;
+                        '-' + documentId + '-' + document.revision;
 				cacheMap[term.identifier] = unique;
 
 				return unique;
