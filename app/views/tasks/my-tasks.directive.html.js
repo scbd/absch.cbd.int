@@ -1,4 +1,4 @@
-﻿define(['app','underscore','/app/js/common.js','/app/views/directives/infinite-scroll-directive.js'], function (app,_) {
+﻿define(['app','underscore','/app/js/common.js','/app/views/directives/infinite-scroll-directive.js','moment'], function (app,_) {
 
 app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm", "$route","$filter","commonjs",'$parse','$element','$routeParams',
  	function ($scope, $timeout, IWorkflows, realm, $route, $filter,commonjs,$parse,$element, $routeParams)

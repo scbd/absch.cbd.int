@@ -151,18 +151,18 @@
                                 </div>
                                 <div ng-show="task.workflow.state!='completed'">
 
-                                    <div ng-show="task.activity.name='publishRecord' && !task.activity.isUpdating">
+                                    <div ng-show="task.activity.name=='publishRecord' && !task.activity.isUpdating">
                                         <a class="btn btn-danger" type="button" ng-click="tasksDisplay=!tasksDisplay; formLoading=false;task.isActive=false;" style="padding:4px;">
                                             <strong><i ng-class="{'glyphicon glyphicon-plus-sign': !tasksDisplay, 'glyphicon glyphicon-minus-sign': tasksDisplay}"></i> Awaiting approval</strong>
                                         </a>
                                     </div>
-                                    <div ng-show="task.activity.name='publishRecord' && task.activity.isUpdating">
+                                    <div ng-show="task.activity.name=='publishRecord' && task.activity.isUpdating">
                                         <a class="btn btn-info" type="button" ng-click="return" style="padding:4px;">
                                             <strong><i class="fa fa-spin fa-cog"></i> Processing...</strong>
                                         </a>
                                     </div>
 
-                                    <div ng-hide="ask.activity.name='publishRecord'">{{activity.name}}*</div>
+                                    <div ng-hide="task.activity.name=='publishRecord'">{{task.activity.name}}*</div>
                                     <span ng-hide="true">{{ formLoading = task.isActive ? false : (tasksDisplay ? true :undefined)}}<span>
                                 </div>
                             </div>
