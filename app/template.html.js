@@ -4,8 +4,8 @@ define(['app',
 ], function(app) {
     'use strict';
 
-    app.controller('TemplateController', ['$scope', '$rootScope', '$window', '$location', 'authentication', '$browser', 'realmConfiguration', 'underscore', 'IUserNotifications', '$timeout','$filter',
-        function($scope, $rootScope, $window, $location, authentication, $browser, realmConfiguration, _, userNotifications, $timeout, $filter) {
+    app.controller('TemplateController', ['$scope', '$rootScope', '$window', '$location', 'authentication', '$browser', 'realmConfiguration', 'underscore', 'IUserNotifications', '$timeout','$filter','localStorageService',
+        function($scope, $rootScope, $window, $location, authentication, $browser, realmConfiguration, _, userNotifications, $timeout, $filter,localStorageService) {
 
             $scope.controller = "TemplateController";
 
@@ -28,6 +28,11 @@ define(['app',
                 }
             };
 
+            $scope.updateStorage = function(){
+                localStorageService.set('hideDisclaimer', true);
+                $scope.hideDisclaimer=true;
+            };
+    	    $scope.hideDisclaimer = localStorageService.get('hideDisclaimer');
             //============================================================
             //
             //
@@ -61,34 +66,6 @@ define(['app',
                 $scope.production_env = false;
                 $scope.env_name = "TRAINING";
             }
-
-
-            //============================================================
-            //
-            //
-            //============================================================
-            function setCookie(name, value, days, path) {
-
-                var cookieString = escape(name) + "=";
-
-                if (value) cookieString += escape(value);
-                else days = -1;
-
-                if (path)
-                    cookieString += "; path=" + path;
-
-                if (days || days == 0) {
-
-                    var expirationDate = new Date();
-
-                    expirationDate.setDate(expirationDate.getDate() + days);
-
-                    cookieString += "; expires=" + expirationDate.toUTCString();
-                }
-
-                document.cookie = cookieString
-            };
-           
 
             //============================================================
             //
@@ -128,58 +105,8 @@ define(['app',
 
             $scope.closePopup = function() {
                 $('#loginDialog').modal('hide')
-            }
-
-            //============================================================
-            //
-            //
-            //============================================================
-            function receiveMessage(event) {
-                if (event.origin != 'https://accounts.cbd.int')
-                    return;
-
-                var message = JSON.parse(event.data);
-
-                if (message.type == 'ready')
-                    event.source.postMessage('{"type":"getAuthenticationToken"}', event.origin);
-
-                if (message.type == 'authenticationToken') {
-                    //console.log($browser.cookies().authenticationToken);
-                    if (message.authenticationToken && (!$browser.cookies().authenticationToken 
-                                                    || $browser.cookies().authenticationToken== "undefined" || $browser.cookies().authenticationToken== "null")) {
-                       // setCookie('authenticationToken', message.authenticationToken, 7, '/');
-//                        console.log('token from accounts', message.authenticationToken);
-                        $browser.cookies().authenticationToken = message.authenticationToken;
-                        authentication.getUser(true).then(function(user){
-//                            console.log('token from accounts', user);
-                            $rootScope.$broadcast('signIn', user);
-                        })
-
-                    }
-                    if (!message.authenticationToken && $browser.cookies().authenticationToken) {
-//console.log('signout');
-                        //window.setTimeout(function(){
-                        authentication.signOut();
-
-                        // $window.location.href = $window.location.href;
-                        // },1000)
-                    }
-                }
-            }
-
-            window.addEventListener('message', receiveMessage, false);
-
-            var iframe = angular.element(document.querySelector('#authenticationFrame'))[0];
-            iframe.contentWindow.postMessage('{"type":"getAuthenticationToken"}', 'https://accounts.cbd.int');
+            };
 
         }
     ]);
-
-    function _loadCss(url) {
-        var link = document.createElement("link");
-        link.type = "text/css";
-        link.rel = "stylesheet";
-        link.href = url;
-        document.getElementsByTagName("head")[0].appendChild(link);
-    }
 });
