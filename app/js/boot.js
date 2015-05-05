@@ -28,7 +28,9 @@ require.config({
         'jqvmapworld'           : '../js/jquery.vmap.world_update',
         'text-angular-sanitize' : '../libs/textAngular/dist/textAngular-sanitize.min',
         'text-angular'          : '../libs/textAngular/dist/textAngular.min',
-        'cbd-forums'            : '../libs/cbd-forums/cbd-forums'
+        'cbd-forums'            : '../libs/cbd-forums/cbd-forums',
+        'angular-storage'       : '../libs/angular-local-storage/dist/angular-local-storage.min',
+        'angular-flex'          : '../libs/angular-flex/angular-flex'
     },
     'shim': {
         'angular'                       : { 'deps': ['jquery'], 'exports': 'angular' },
@@ -50,15 +52,16 @@ require.config({
         'text-angular'                  : { 'deps': ['text-angular-sanitize', 'angular'] },
         'text-angular-sanitize'         : { 'deps': ['angular', 'angular-sanitize']},
         'cbd-forums'                    : { 'deps': ['angular', 'bootstrap']},
+        'angular-storage'               : { 'deps': ['angular'] },
+        'angular-flex'                  : { 'deps': ['angular'] }
     }
 });
 
-require(['angular', 'angular-route', 'angular-cookies', 'angular-sanitize', 'bootstrap', 'domReady',
-    'bootstrap-datepicker','angular-loading-bar', 'angular-animate',
-    'moment', 'introjs', 'angular-form-controls', 'text-angular', 'cbd-forums'/*, 'main'*/], function (ng) {
+require(['angular-flex', 'angular-route', 'angular-cookies',  'bootstrap', 'domReady',
+    /*, 'main'*/], function (ng) {
     // NOTE: place operations that need to initialize prior to app start here using the `run` function on the top-level module
-
-    require(['domReady!', 'main', 'angular-introjs'], function (document) {
+    	
+    require(['domReady!', 'main'], function (document) {
         ng.bootstrap(document, ['app']);
         try {
         ng.resumeBootstrap();

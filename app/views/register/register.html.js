@@ -3,7 +3,8 @@ define(['app',
 	'/app/views/register/register-record-list.directive.js',
 	'/app/views/directives/task-id-directive.html.js',
 	'/app/views/directives/user-details.directive.html.js',
-  '/app/views/directives/ngxLazy.directive.js','bootbox'], function (app) {
+  '/app/views/directives/ngxLazy.directive.js',
+  'bootstrap-datepicker','moment',  'text-angular', 'bootbox','angular-introjs', 'introjs'], function (app) {
 
   "use strict";
 // angular.module([]);

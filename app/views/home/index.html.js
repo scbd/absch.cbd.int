@@ -1,4 +1,4 @@
-define(['app','/app/js/common.js',
+define(['app','/app/js/common.js','moment',
     // '/app/views/forms/view/record-loader.directive.html.js',
     // '/app/views/directives/document-list.partial.html.js',
     '/app/views/directives/home-country-dashboard-directive.html.js'], function (app) {

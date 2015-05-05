@@ -7,7 +7,7 @@ define(['app','underscore',
     '/app/views/search/find_facets.partial.html.js',
     '/app/views/search/find_themes.partial.html.js',
     '/app/views/directives/search-filter-dates.partial.html.js',
-    '/app/views/directives/document-list.partial.html.js'], function (app,_) {
+    '/app/views/directives/document-list.partial.html.js', 'bootstrap-datepicker','moment'], function (app,_) {
 
     app.controller('FindController', ['$scope', '$rootScope', 'authHttp', '$timeout', '$q','realm', '$routeParams','$location',
         function ($scope, $rootScope, $http, $timeout, $q, realm, $routeParams,$location) {
