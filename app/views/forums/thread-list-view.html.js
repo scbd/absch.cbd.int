@@ -15,7 +15,15 @@ define(['app', 'cbd-forums',
 
             $scope.forumId = $route.current.$$route.forumId;
 			$scope.forum = $route.current.$$route.text;
+    	   
+            if ($location.search().forumid && $location.search().threadid) {
+//                   $scope.forumId = $location.search().forumid;
+//                   $scope.threadId = $location.search().threadid;
+                    $location.path($scope.postUrl + '/' + $location.search().threadid);
+                    return;
+            }
 
+           
 			$scope.isAdmin = function(){
 				return commonjs.isUserInRole($rootScope.getRoleName('AbsAdministrator')) ||
 				commonjs.isUserInRole($rootScope.getRoleName('Administrator'))

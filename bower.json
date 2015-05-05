@@ -32,7 +32,9 @@
     "textAngular": "~1.2.2",
     "jvectormap": "~2.0.0",
     "bootstrap-material-design": "~0.1.5",
-    "cbd-forums": "~1.2.5"
+    "cbd-forums": "~1.2.6",
+    "angular-local-storage": "~0.1.5",
+    "angular-flex": "https://github.com/scbd/angular-flex.git"
   },
   "resolutions": {
     "angular": "1.2.18",
