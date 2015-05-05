@@ -64,8 +64,8 @@
 }
 @media (min-width: 500px) and (max-width: 767px) {
     .europeanUnion {
-      top: 43%;
-      left: 34%;
+      top: 36%;
+      left: 36%;
       width:30px;
       height:30px;
     }
@@ -88,24 +88,24 @@
 }
 @media (min-width: 992px) and (max-width: 1199px) {
     .europeanUnion {
-      top: 35%;
+      top: 30%;
       left: 34%;
       width:50px;
       height:80px;
     }
 }
-@media (min-width: 1200px) and (max-width: 1399px) {
+@media (min-width: 1200px) and (max-width: 1399px) {/*done*/
     .europeanUnion {
-      top: 30%;
-      left: 34%;
+      top: 26%;
+      left: 35%;
       width:50px;
       height:80px
     }
 }
 @media (min-width: 1400px) {
     .europeanUnion {
-      top: 30%;
-      left: 34%;
+      top: 25%;
+      left: 40%;
       width:50px;
       height:80px
     }
