@@ -1,4 +1,4 @@
-define(['app'], function(app) {
+define(['app','underscore'], function(app,_) {
     app.directive('xuserNotifications', function() {
         return {
             restrict: 'EAC',
@@ -21,7 +21,7 @@ define(['app'], function(app) {
                         var timespan = moment(createdOn);
                         return timespan.startOf('hours').fromNow(true);
                     }
-
+    	           var notificationTimer;
                     //============================================================
                     //
                     //
@@ -62,14 +62,17 @@ define(['app'], function(app) {
                                 })
                                 .catch(function(error){
                                     if(error.data.statusCode==401){
-                                        console.log('calling get fetch from notifications' );
+                                       // console.log('calling get fetch from notifications' );
                                         authentication.getUser(true);
                                     }
                                 })
                                 .finally(function() {
-                                    $timeout(function() {
-                                        getNotification();
-                                    }, 10000);
+                                   notificationTimer =  $timeout(function() { getNotification();}, 10000);
+                                   notificationTimer.then(function(){
+                                        //console.log('finished with timer');
+                                    }).catch(function(){
+                                        //console.log('rejected timer');
+                                    });
                                 });
                             //}
                         }
@@ -120,18 +123,33 @@ define(['app'], function(app) {
 
                         return notification && notification.state == 'unread';
                     };
-
-                    $scope.$on('signIn', function(evt,user){
-                        $timeout(function(){
-                            getNotification();
-                            },5000);
+    	           
+                    $scope.$on('$destroy', function(evt){
+                        //console.log('$destroy');
+                        $timeout.cancel(notificationTimer);    
                     });
-
+                    
+//                    $scope.$on('signIn', function(evt,user){
+//                        $timeout(function(){
+//                            console.log('notification after signin')
+//                            getNotification();
+//                            },5000);
+//                    });
+    	           $scope.$on('signOut', function(evt,user){
+                             //console.log('notification timer signout')
+                       $timeout.cancel(notificationTimer);
+                    });
                     getNotification();
-
-
-
-
+    	            
+                    $rootScope.$watch('user', function(newVla,oldVal){
+                        //console.log(newVla,oldVal)
+                        if(newVla && newVla!=oldVal){
+                            console.log('user changed');
+                            $timeout.cancel(notificationTimer);
+                            getNotification();   
+                        }                        
+                    });
+                    
                 }
             ]
 
