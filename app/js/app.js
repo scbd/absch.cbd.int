@@ -1,14 +1,17 @@
 'use strict';
 
-define([/*'angular', 'angular-route', 'angular-cookies', */], function () {
+define(['angular','angular-sanitize','angular-loading-bar', 'angular-animate','angular-form-controls', 'text-angular','angular-storage',
+/*, 'angular-route', 'angular-cookies', */], function (angular) {
 
   //TODO: reevaluate what is actually needed. Ie. I don't think we still need drag and drop here.
-	var app = require('angular').module('app',
-		['ngRoute', 'ngCookies','chieffancypants.loadingBar', 'ngAnimate', 'ngSanitize', 'angular-intro', 'formControls',
-		 'textAngular', 'cbd-forums']);
 
-	app.config(['$controllerProvider', '$compileProvider', '$provide', '$filterProvider',
-		function($controllerProvider, $compileProvider, $provide, $filterProvider) {
+	var dependencies = ['ngRoute', 'ngCookies','chieffancypants.loadingBar', 'ngAnimate', 'ngSanitize', 'angular-intro', 'formControls',
+		 				'textAngular', 'cbd-forums','LocalStorageModule'];
+	angular.defineModules(dependencies);
+	var app =  angular.module('app', dependencies);
+
+	app.config(['$controllerProvider', '$compileProvider', '$provide', '$filterProvider','$httpProvider',
+		function($controllerProvider, $compileProvider, $provide, $filterProvider,$httpProvider) {
 		 // console.log($routeProvider);
 		//app.controllerProvider = $controllerProvider;
 		//app.routeProvider      = $routeProvider;
@@ -38,7 +41,8 @@ define([/*'angular', 'angular-route', 'angular-cookies', */], function () {
 					toCache  ('directive', name, $compileProvider.directive(name, param1, param2, param3, param4))).data;
 		};
 
-
+		$httpProvider.interceptors.push('authenticationHttpIntercepter');
+		
 		//==========================================
 		//==========================================
 		//==========================================
