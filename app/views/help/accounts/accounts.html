@@ -2,28 +2,12 @@
 
 <div ng-controller="AccountsController"  >
 
-
-    <div class="container" style="padding:10px;">
-        <a href="/help" class="color-orange"><i class="fa fa-question-circle" ></i> HELP</a>
-        &nbsp;&nbsp;&nbsp;<i class="fa fa-caret-right color-litegrey" ></i>&nbsp;&nbsp;&nbsp;
-
-
-        <span class="dropdown">
-            <a class="dropdown-toggle"  data-toggle="dropdown" href="#"><i class="fa fa-user" ></i> YOUR CBD ACCOUNT</a>
-            <div class="dropdown-menu" role="menu" >
-                <ng-include   src="'/app/views/help/links/accounts.html'"></ng-inlcude>
-            </div>
-        </span>
-
-    </div>
-
-
-    <div style="background-color:white;padding-top:20px;padding-bottom:30px;border-top:2px solid #ddd;">
+    <div>
 
         <div class="container">
             <div  class="row">
 
-              <div  class="col-xs-9 main-content help_content" >
+              <div  class="col-xs-7 main-content help_content" >
 
                   <!-- ABOUT -->
                   <div ng-show="question=='register'">
@@ -110,7 +94,7 @@
               </div>
 
 
-              <div class="col-xs-3"  >
+              <div class="col-xs-5"  >
                   <ng-include  src="'/app/views/help/links/accounts.html'"></ng-inlcude>
               </div>
 
