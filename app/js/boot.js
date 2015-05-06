@@ -30,7 +30,8 @@ require.config({
         'text-angular'          : '../libs/textAngular/dist/textAngular.min',
         'cbd-forums'            : '../libs/cbd-forums/cbd-forums',
         'angular-storage'       : '../libs/angular-local-storage/dist/angular-local-storage.min',
-        'angular-flex'          : '../libs/angular-flex/angular-flex'
+        'angular-flex'          : '../libs/angular-flex/angular-flex',
+        'ng-breadcrumbs'        : '../libs/ng-breadcrumbs/dist/ng-breadcrumbs'
     },
     'shim': {
         'angular'                       : { 'deps': ['jquery'], 'exports': 'angular' },
@@ -53,14 +54,15 @@ require.config({
         'text-angular-sanitize'         : { 'deps': ['angular', 'angular-sanitize']},
         'cbd-forums'                    : { 'deps': ['angular', 'bootstrap']},
         'angular-storage'               : { 'deps': ['angular'] },
-        'angular-flex'                  : { 'deps': ['angular'] }
+        'angular-flex'                  : { 'deps': ['angular'] },
+        'ng-breadcrumbs'                : { 'deps': ['angular'] },
     }
 });
 
 require(['angular-flex', 'angular-route', 'angular-cookies',  'bootstrap', 'domReady',
     /*, 'main'*/], function (ng) {
     // NOTE: place operations that need to initialize prior to app start here using the `run` function on the top-level module
-    	
+
     require(['domReady!', 'main'], function (document) {
         ng.bootstrap(document, ['app']);
         try {
