@@ -1,14 +1,36 @@
-define(['app',
+define(['app','ng-breadcrumbs',
     '/app/views/directives/login.directive.html.js',
     '/app/views/directives/xuser-notifications.js'
 ], function(app) {
     'use strict';
 
     app.controller('TemplateController', ['$scope', '$rootScope', '$window', '$location', 'authentication', '$browser', 'realmConfiguration', 'underscore', 'IUserNotifications', '$timeout','$filter','localStorageService',
-        function($scope, $rootScope, $window, $location, authentication, $browser, realmConfiguration, _, userNotifications, $timeout, $filter,localStorageService) {
+     '$anchorScroll','breadcrumbs',
+        function($scope, $rootScope, $window, $location, authentication, $browser, realmConfiguration, _, userNotifications, $timeout, $filter,localStorageService,$anchorScroll,breadcrumbs) {
 
             $scope.controller = "TemplateController";
+            $scope.breadcrumbs     = breadcrumbs;
+        $scope.$root.pageTitle = { text: "" };
+        // $scope.goHome               = function() { $location.path('/'); };
+        // $scope.currentPath          = function() { return $location.path(); };.
 
+        //============================================================
+        //
+        //
+        //============================================================
+        $scope.gotoAnchor = function(x) {
+          var newHash = 'anchor' + x;
+          if ($location.hash() !== newHash) {
+            // set the $location.hash to `newHash` and
+            // $anchorScroll will automatically scroll to it
+            $location.hash('anchor' + x);
+          } else {
+            // call $anchorScroll() explicitly,
+            // since $location.hash hasn't changed
+            $anchorScroll();
+          }
+        };
+        
             $scope.$root.getRoleName = function(roleName) {
                 if (roleName) {
                     var realmConfig = _.where(realmConfiguration, {

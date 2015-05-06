@@ -17,6 +17,8 @@
     <!-- Custom styles for this template -->
     <link href="/app/css/template.css" rel="stylesheet">
     <link href="/app/css/material.css" rel="stylesheet">
+    <link href="/app/css/chm.css" rel="stylesheet">
+    <link href="/app/css/colors.css" rel="stylesheet">
 
     <link rel="stylesheet" href="/app/libs/font-awesome/css/font-awesome.min.css">
     <link href="/app/libs/bootstrap-datepicker/css/datepicker.css" rel="stylesheet">
@@ -34,205 +36,187 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
-
-
 </head>
 
 <body ng-controller="TemplateController" ng-cloak>
 
     <iframe id="authenticationFrame" src="https://accounts.cbd.int/app/authorize.html" style="display:none"></iframe>
 
-    <div class="alert alert-info alert-dismissable" ng-hide="hideDisclaimer" style="margin-bottom: 0px; text-align: center">
-        <button type="button" ng-click="updateStorage()" class="close" style="opacity: 1;" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <strong>Please note that although the ABSCH is currently live and operational the user interface may change based on feedback received.</strong>
-        <span class="color-black"><br>If you have a comment or suggestion on how we can improve please email <a href="mailto:absch@cbd.int" style="color:#111!important;">absch@cbd.int</a>.</span>
-    </div>
+    <nav class="navbar navbar-cbd navbar-default bg-cbdgreen navbar-static-top" id="anchorTop">
+      <div class="container container-cbd">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <a href="http://www.cbd.int"><img src="/app/img/cbd-logo-spine-white.png" style="height:24px;position:relative;top:-2px;padding:0;margin:0 5px;"></a>
+          <a class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1"><i class="fa fa-bars"></i></a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbar-collapse-1" >
+          <ul class="nav navbar-nav">
+            <li><a href="http://www.cbd.int/convention/">The Convention</a></li>
+            <li><a href="http://bch.cbd.int/protocol">Cartagena Protocol</a></li>
+            <li><a href="http://www.cbd.int/abs/">Nagoya Protocol<a></li>
+            <li><a href="http://www.cbd.int/programmes/">Programmes</a></li>
+            <li><a href="http://www.cbd.int/information/">Information</a></li>
+            <li><a href="http://www.cbd.int/secretariat/">Secretariat</a></li>
 
-    <div class="disclaimer">
-        <div class="promo" href="/about/" ng-class="{'bg-darkgrey': development_env==true,'bg-blue': training_env==true}"  >
-            <div class="container">
-                <!-- <div class="title" class="text-center" style="padding-top:5px;white-space:nowrap;width:170px;">
-                    <span class="text-center">{{env_name}}</span>
-                </div> -->
-                <div class="content">
-                    <span style="position:relative;left:-40px;">
-                        <span id="HelpLinksSmall">
-                            <ng-include src="'/app/views/help/links/helplinks.html'"></ng-include>
-                        </span>
-                    </span>
-
-
-                    <!-- <a href="/help" class="pull-right" style="padding-left:10px;font-size:18px;color:#fff;position:relative;top:-2px;">
-                        <i class="fa fa-question-circle"></i>
-                    </a> -->
-
-                    <!-- <a href="mailto:absch@cbd.int" class="pull-right" style="padding-left:10px;">
-                        <span class="glyphicon glyphicon-envelope"></span>
+    <!--       languages-->
+            <li class="navbar-right">
+                    <a class="pull-right set-languages" data-toggle="dropdown" href="#">
+                        <span class="badge badge-default bg-white">en</span>
                     </a>
+                    <ul class="dropdown-menu bg-darkgrey" role="menu">
+                        <li class="disabled" style="font-weight:bold;color:#BBB;">LANGUAGES</li>
+                        <hr style="padding;0;margin:0;">
+                        <li class="disabled"><a>لعربية</a></li>
+                        <li class="disabled"><a>中文</a></li>
+                        <li><a href="#"><strong>English</strong></a></li>
+                        <li class="disabled"><a>Español</a></li>
+                        <li class="disabled"><a>Français</a></li>
+                        <li class="disabled"><a>Русский</a></li>
+                    </ul>
+            </li>
 
-                 <a href="skype:abs-ch?chat"  class="pull-right" style="cursor:pointer;padding-left:20px;color:#fff;position:relative;top:-2px;font-size:18px;"><i class="fa fa-skype"></i></a> -->
+    <!--        notifications-->
+            <li class="navbar-right">
+                <div ng-cloak id="dropdownNotification" ng-show="user && user.isAuthenticated"  >
 
-                    <!-- ng-click="actionSignin()" -->
-                    <div ng-cloak ng-show="user && !user.isAuthenticated" class="account-signin pull-right" >
-                        <a class="signin" href="#" data-slug="signin" data-toggle="modal" data-target="#loginDialog">
-                            <i class="fa fa-power-off"></i>
-                            <strong>sign in</strong>
-                        </a>
-                    </div>
+                                <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" ng-href="#" class="notification-btn">
 
-                    <div ng-cloak id="dropdownNotification" class="account-name" ng-show="user && user.isAuthenticated" style="padding:0;margin:0;" >
-                        <ul class="nav pull-right" style="padding:0;margin:0;"  >
-                            <li class="dropdown pull-right" style="padding:0;margin:0;" >
-                                    <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" ng-href="#" style="max-height:30px;" class="notification-btn">
+                                    <span ng-show="(notifications|filter:isUnread).length > 0 " >
+                                        <i class="fa fa-bell"></i>
+                                        <span class="label label-default">{{(notifications|filter:isUnread).length}}</span>
+                                    </span>
 
-                                        <span ng-show="(notifications|filter:isUnread).length > 0 " >
-                                            <i class="fa fa-bell" class="color-red"></i>
-                                            <span class="label label-danger">{{(notifications|filter:isUnread).length}}</span>
-                                        </span>
+                                    <span ng-show="(notifications|filter:isUnread).length==0">
+                                        <i class="fa fa-bell-o" class="bg-grey"></i>
+                                    </span>
+                                </a>
 
-                                        <span ng-show="(notifications|filter:isUnread).length==0">
-                                            <i class="fa fa-bell-o" class="bg-grey"></i>
-                                        </span>
-                                    </a>
+                            <div class="dropdown-menu" style="padding:0;margin:0;" role="menu" aria-labelledby="dLabel">
+                                <div class="panel panel-danger" style="width:500px;padding:0;margin:0;">
+                                    <div class="panel-heading">
+                                        <h4>User Notifications and Recent Activity</h4>
+                                    </div>
 
-                                <div class="dropdown-menu" style="padding:0;margin:0;" role="menu" aria-labelledby="dLabel">
-                                    <div class="panel panel-danger" style="width:500px;padding:0;margin:0;">
-                                        <div class="panel-heading">
-                                            <h4>User Notifications and Recent Activity</h4>
-                                        </div>
-
-                                        <div class="panel-body" >
-                                            <div xuser-notifications></div>
-                                        </div>
-                                        <div class="panel-footer">
-                                            <a ng-href="/dashboard">
-                                                <h4 class="menu-title">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4>
-                                            </a>
-                                        </div>
+                                    <div class="panel-body" >
+                                        <div xuser-notifications></div>
+                                    </div>
+                                    <div class="panel-footer">
+                                        <a ng-href="/dashboard">
+                                            <h4 class="menu-title">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4>
+                                        </a>
                                     </div>
                                 </div>
-                            </li>
-                            <li class="dropdown pull-right" >
-                                <a href="#" data-toggle="dropdown" class="dropdown-toggle" style="max-height:30px;">
-                                    <i class="fa fa-chevron-down" style="font-size:15px;color:white;"></i> <span>{{user.name}}</span>
-                                    <span ng-show="user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) != -1">(PA)</span>
-                                    <span ng-show="user.roles.indexOf(getRoleName('abschiac')) != -1">(IAC)</span>
-                                    <span ng-show="user.roles.indexOf(getRoleName('AbsNationalAuthorizedUser')) != -1">(NAU)</span>
-                                    <span ng-show="user.roles.indexOf(getRoleName('AbsNationalFocalPoint')) != -1">(FP)</span>
-                                    <span ng-show="user.roles.indexOf(getRoleName('AbsAdministrator')) != -1">(ABS ADMIN)</span>
-                                    <span ng-show="user.roles.indexOf(getRoleName('Administrator')) != -1">(ADMIN)</span>
-                                </a>
-                                <ul class="dropdown-menu" role="menu" style="position:relative;left:-5px;">
-                                    <li>
-                                        <a href="#" ng-click="actionProfile()">
-                                            <i class="fa fa-user" style="font-size:15px"></i>&nbsp; Profile</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" ng-click="actionPassword()">
-                                            <i class="fa fa-user" style="font-size:15px"></i>&nbsp; Password</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" ng-click="actionSignOut()">
-                                            <i class="fa fa-sign-out" style="font-size:15px"></i>&nbsp; Sign-out</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
+                            </div>
                     </div>
 
-                    <!-- <div ng-cloak class="dropdown" ng-show="user && user.isAuthenticated">
-                        <a data-toggle="dropdown" href="#" class="account-name pull-right">
-                            <i class="fa fa-chevron-down" style="font-size:15px"></i> {{user.name}}
-                           <span ng-show="user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) != -1">(PA)</span>
-                            <span ng-show="user.roles.indexOf(getRoleName('abschiac')) != -1">(IAC)</span>
-                            <span ng-show="user.roles.indexOf(getRoleName('AbsNationalAuthorizedUser')) != -1">(NAU)</span>
-                            <span ng-show="user.roles.indexOf(getRoleName('AbsNationalFocalPoint')) != -1">(FP)</span>
-                            <span ng-show="user.roles.indexOf(getRoleName('AbsAdministrator')) != -1">(ABS ADMIN)</span>
-                            <span ng-show="user.roles.indexOf(getRoleName('Administrator')) != -1">(ADMIN)</span>
-                        </a>
-                        <ul class="dropdown-menu pull-right" role="menu" style="position:relative;top:3px;left:140px;">
-                            <li>
-                                <a href="#" ng-click="actionProfile()">
-                                    <i class="fa fa-user" style="font-size:15px"></i>&nbsp; Profile</a>
-                            </li>
-                            <li>
-                                <a href="#" ng-click="actionPassword()">
-                                    <i class="fa fa-user" style="font-size:15px"></i>&nbsp; Password</a>
-                            </li>
-                            <li>
-                                <a href="#" ng-click="actionSignOut()">
-                                    <i class="fa fa-sign-out" style="font-size:15px"></i>&nbsp; Sign-out</a>
-                            </li>
-                        </ul>
-                    </div> -->
+            </li>
+    <!--        signin-->
+            <li  class="navbar-right">
 
+                 <a ng-hide="user && user.isAuthenticated"  class="signin" href="#" data-slug="signin" data-toggle="modal" data-target="#loginDialog">
+                     <i class="fa fa-power-off"></i> <span style="text-transform:uppercase;"> <strong> sign in</strong></span>
+                 </a>
 
-                    <!--
-                            <a class="pull-right set-languages" data-toggle="dropdown" href="#">
-                               Language: <span style="font-weight:bold;"> EN </span></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li class="disabled"><a>لعربية</a></li>
-                                    <li class="disabled"><a>中文</a></li>
-                                    <li><a href="#"><strong>English</strong></a></li>
-                                    <li class="disabled"><a>Español</a></li>
-                                    <li class="disabled"><a>Français</a></li>
-                                    <li class="disabled"><a>Русский</a></li>
-                                </ul>
-                      -->
+                 <a ng-show="user && user.isAuthenticated"  href="#" data-toggle="dropdown">
+                     <i class="fa fa-chevron-down"></i> <span> {{user.name}}</span>
+                 </a>
+                    <ul class="dropdown-menu bg-darkgrey" role="menu" >
+                        <li>
+                            <a href="#" ng-click="actionProfile()">
+                                <i class="fa fa-user" style="font-size:15px"></i>&nbsp; Profile</a>
+                        </li>
+                        <li>
+                            <a href="#" ng-click="actionPassword()">
+                                <i class="fa fa-user" style="font-size:15px"></i>&nbsp; Password</a>
+                        </li>
+                        <li>
+                            <a href="#" ng-click="actionSignOut()">
+                                <i class="fa fa-sign-out" style="font-size:15px"></i>&nbsp; Sign-out</a>
+                        </li>
+                    </ul>
+
+           </li> <!--  end sign in-->
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <!-- PORTAL BRANDING -->
+    <nav class="navbar navbar-portal navbar-default navbar-static-top bg-white" ng-class="{'training-bg': !production_env}">
+        <div class="container container-portal">
+
+            <div class="row">
+                <div class="col-xs-9">
+                    <a href="/" class="color-cbdgreen">
+                        <h1 style="font-size:60px;">
+                            <span>ABSCH</span>
+                            <span ng-show="development_env" class="color-orange"> DEVELOPMENT</span>
+                            <span ng-show="training_env" class="color-orange"> TRAINING</span>
+                            <span class="color-grey" style="text-transform:uppercase;font-size:20px;">
+                                THE ACCESS AND BENEFIT-SHARING CLEARING-HOUSE
+                        </h1>
+                    </a>
+                </div>
+                <div class="col-xs-3" style="vertical-align:middle;">
+
+                    <img src="/app/img/cbd-logo-print-black-en.png" class="pull-right" style="opacity:0.2;padding: 0; margin:10px 0 0 0;height:80px;" /><br>
 
                 </div>
             </div>
+
         </div>
-    </div>
+    </nav>
 
 
-    <!-- <div class="bg-orange">
-    <div class="container" >
-        <div class="col-xs-2 pilotphase bg-red">
-                <div>ABS-CH PILOT PHASE</div>
+    <!-- PORTAL LINKS-->
+    <nav class="navbar navbar-links navbar-default navbar-static-top bg-orange">
+        <div class="container container-links">
+                <div style="display:inline">
+                    <a href="/"><i class="fa fa-home" ></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="/find" ng-class="{'link-active' : getClass('/find')}">Search</a>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="/register" ng-class="{'link-active' : getClass('/register')}">Submit</a>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="/countries" ng-class="{'link-active' : getClass('/countries')}">Country Information</a>
+                </div>
+                <div class="pull-right" style="display:inline;">
+                    <a href="/help" ng-class="{'link-active' : getClass('/help')}"><i class="fa fa-question-circle" class="bg-grey"></i> Help</a>
+                </div>
+
         </div>
-        <div class="col-xs-4" style="padding-top:5px;">
-                <span style="margin-left: 5px;">All information is for testing purposes only</span>
+    </nav>
+
+    <!-- PORTAL BREAD CRUMBS-->
+    <nav class="navbar navbar-breadcrumbs navbar-default navbar-static-top"  >
+        <div class="container container-breadcrumbs">
+            <div class="color-litegrey">
+                    <a href="http://www.cbd.int" class="margin-right-xs">CBD</a>
+                    <span ng-repeat="breadcrumb in breadcrumbs.get() track by breadcrumb.path" ng-class="{ active: $last }">
+                        &nbsp;&nbsp;<i class="fa fa-chevron-right color-litegrey"></i>&nbsp;&nbsp;
+
+                        <span ng-if="!breadcrumb.param">
+                            <a ng-if="!$last" ng-href="{{ breadcrumb.path }}" ng-bind="breadcrumb.label" class="margin-right-xs"></a>
+                            <span ng-if="$last" ng-bind="breadcrumb.label"></span>
+                        </span>
+
+                        <span ng-if="breadcrumb.param && breadcrumb.label == 'Country Profile'">
+
+
+                                <!-- <div class="dropdown"> -->
+
+                                  <a  ng-bind="breadcrumbsParam" data-toggle="dropdown" href="#"></a>
+
+                                  <!-- <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                    <li>asdasd</li>
+                                  </ul>
+                                </div> -->
+                        </span>
+
+                    </span>
+            </div>
         </div>
+    </nav>
 
-        <div class="col-xs-6 pull-right">
-                    <div ng-cloak ng-show="user && !user.isAuthenticated" class="account-signin pull-right">
-                        <a class="signin" href="#" ng-click="actionSignin()" data-slug="signin">
-                            <i class="fa fa-power-off"></i>
-                            <strong>sign in</strong>
-                        </a>
-                    </div>
 
-                    <div ng-cloak class="dropdown" ng-show="user && user.isAuthenticated">
-                        <a data-toggle="dropdown" href="#" class="account-name pull-right">
-                            <i class="fa fa-chevron-down" style="font-size:15px"></i> {{user.name}}
-                           <span ng-show="user.roles.indexOf('AbsPublishingAuthorities') != -1">(PA)</span>
-                            <span ng-show="user.roles.indexOf('abschiac') != -1">(IAC)</span>
-                            <span ng-show="user.roles.indexOf('AbsNationalAuthorizedUser') != -1">(NAU)</span>
-                            <span ng-show="user.roles.indexOf('AbsNationalFocalPoint') != -1">(FP)</span>
-                            <span ng-show="user.roles.indexOf('AbsAdministrator') != -1">(ABS ADMIN)</span>
-                            <span ng-show="user.roles.indexOf('Administrator') != -1">(ADMIN)</span>
-                        </a>
-                        <ul class="dropdown-menu pull-right" role="menu" style="position:relative;top:3px;left:140px;">
-                            <li>
-                                <a href="#" ng-click="actionProfile()">
-                                    <i class="fa fa-user" style="font-size:15px"></i>&nbsp; Profile</a>
-                            </li>
-                            <li>
-                                <a href="#" ng-click="actionPassword()">
-                                    <i class="fa fa-user" style="font-size:15px"></i>&nbsp; Password</a>
-                            </li>
-                            <li>
-                                <a href="#" ng-click="actionSignOut()">
-                                    <i class="fa fa-sign-out" style="font-size:15px"></i>&nbsp; Sign-out</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <span id="HelpLinksSmall" ><ng-include src="'/app/views/help/links/helplinks.html'"></ng-include></span>
-        </div>
-    </div>
-</div> -->
 
 
     <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="loginDialog">
@@ -265,181 +249,121 @@
         </div>
     </div>
 
-    <!-- Static MAIN NAV BAR -->
-    <div class="main-nav">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-3 brand">
-                    <a href="/">
-                        <h1>
-                            <img src="/app/img/cbd-spine.png">
-                            <span ng-show="production_env">ABS-CH</span>
-                            <span ng-show="development_env" class="color-orange">DEVELOPMENT</span>
-                            <span ng-show="training_env" class="color-orange">TRAINING</span>
-                        </h1>
-                    </a>
-                    <div class="hidden-xs hidden-sm">Access and Benefit-Sharing Clearing-House</div>
-                </div>
-                <div class="main-link col-xs-3 ">
-                    <a href="/search">
-                        <div class="text-center" ng-class="{'link-active' : getClass('/find')}">
-                            <span class="glyphicon glyphicon-search" style="position:relative;top:3px;"></span> Search
-                            <br/>
-                            <span class="hidden-xs hidden-sm">Information</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="main-link col-xs-3">
-                    <a href="/dashboard">
-                        <div class="text-center" ng-class="{'link-active' : getClass('/dashboard') || getClass('/register') }">
-                            <span class="glyphicon glyphicon-edit" style="position:relative;top:3px;"></span> Register
-                            <br/>
-                            <span class="hidden-xs hidden-sm">Information</span>
-                        </div>
-
-                    </a>
-                </div>
-                <div class="main-link col-xs-3">
-                    <a href="/countries">
-                        <div class="text-center" ng-class="{'link-active' : getClass('/countries') }">
-                            <span class="glyphicon glyphicon-globe" style="position:relative;top:3px;"></span> Country
-                            <br/>
-                            <span class="hidden-xs hidden-sm">Information</span>
-                        </div>
-                    </a>
-                </div>
-                <!--          <div class="col-xs-2 main-side-link main-link text-center">
-
-                    <a href="mailto:absch@cbd.int">
-
-                    <i class="glyphicon glyphicon-envelope" style="position:relative;top:3px;"></i>
-                       About the ABSCH
-                    </a>
-                </div> -->
-
-            </div>
-
-
-        </div>
-        <!-- end container -->
-    </div>
-
     <div class="container-full page-content">
         <ng-view></ng-view>
     </div>
 
+    <!-- FOOTER -->
+        <div class="footer">
 
-
-
-    <!--FOOTER *************************** -->
-    <footer class="footer">
-        <div class="container" id="footer">
-            <div class="row" style="padding-bottom: 20px;">
-                <div class="col-sm-3">
-                    <h5 class="footer-title">ABS Clearing-House</h5>
-                    <h4>
-                        <a href="/search">
-                            <span class="glyphicon glyphicon-search"></span>
-                            Search</a>
-                    </h4>
-                    <h4>
-                        <a href="/register">
-                            <span class="glyphicon glyphicon-edit"></span>
-                            Register</a>
-                    </h4>
-                    <h4>
-                        <a href="/countries">
-                            <span class="glyphicon glyphicon-globe"></span>
-                            Country Profiles</a>
-                    </h4>
-                    <h4>
-                        <a href="mailto:absch@cbd.int">
-                            <span class="glyphicon glyphicon-envelope"></span>
-                            absch@cbd.int</a>
-                    </h4>
-                    <h4>
-                        <a href="skype:abs-ch?chat" style="cursor:pointer;color:#fff;"><i class="fa fa-skype"></i> abs-ch</a>
-
-                    </h4>
-
-                    <h4>
-                        <a href="/help">
-                            <span class="fa fa-question-circle"></span>
-                            Help</a>
-                    </h4>
+            <div class="footer-page" >
+                <div class="container footer-page-container  text-right ">
+                    <a href="#top" ng-click="gotoAnchor('Top')" class="color-darkgrey"><i class="fa fa-arrow-circle-up"></i> back to top</a>
                 </div>
-                <div class="col-sm-3">
-                    <h5 class="footer-title">About the ABS-CH</h5>
-                    <ul class="footer-links">
-                        <li><a href="/about/about">About the ABS-CH</a>
-                        </li>
-                        <!-- <li><a href="/about#overview">Overview</a></li> -->
-                        <!-- <li><a href="#policies">Policies</a></li> -->
-                        <li><a href="/about/modalities">Modalities of operation</a>
-                        </li>
-                        <!--  <li><a href="#awareness">Awareness-raising material</a></li> -->
-                        <li><a href="/about/development">Development</a>
-                        </li>
-                        <li><a href="/about/portal10">Article 10 forum</a>
-                        </li>
-                        <li><a href="/about/iac" >ABS-CH IAC forum</a>
-                        </li>
-                        <li><a href="/about/obligations">Information-sharing obligations</a>
-                        </li>
-                        <li><a href="/about/pilotphase">Pilot phase</a>
-                        </li>
-                        <!-- <li><a href="#status">Status of Protocol</a></li> -->
-                        <li><a href="/about/contactus">Contact us</a>
-                        </li>
-                    </ul>
-                </div>
-
-
-                <div class="col-sm-3">
-                    <h5 class="footer-title">Nagoya Protocol</h5>
-                    <ul class="footer-links">
-                        <li><a href="/search/meeting">Documents and meetings</a>
-                        </li>
-                        <li><a href="/search/notification">Notifications</a>
-                        </li>
-                        <li><a href="search/statement" >Statements</a>
-                        </li>
-                        <li><a href="search/pressRelease">Press releases</a>
-                        </li>
-                        <li><a href="http://www.cbd.int/abs/about/default.shtml" target="_new"> About the Nagoya Protocol</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="col-sm-3">
-                    <h5 clas="footer-title">CBD</h5>
-                    <ul class="footer-links">
-                        <li><a href="http://www.cbd.int/">CBD home</a>
-                        </li>
-                        <li><a href="http://www.cbd.int/meetings">Meetings</a>
-                        </li>
-                        <li><a href="http://www.cbd.int/decisions">Decisions and Recommendations</a>
-                        </li>
-                        <li><a href="http://www.cbd.int/news">News</a>
-                        </li>
-                        <li><a href="http://www.cbd.int/notifications">Notifications</a>
-                        </li>
-                    </ul>
-                </div>
-
             </div>
-            <div class="row copyright">
-                <div class="col-lg-6 col-md-6 col-sm-6 logorow">
-                    <p style="margin-top: -8px">© 2013 SCBD | <a href="http://www.cbd.int/privacy">Privacy Policy</a> | <a href="http://www.cbd.int/terms">Terms of Use</a>
-                    </p>
 
+            <div class="footer-portal" >
+                <div class="container footer-portal-container color-white">
+                    <div class="row" style="padding-bottom: 20px;">
+                        <div class="col-sm-3">
+                            <h5 class="footer-title">ABS Clearing-House</h5>
+                            <ul class="footer-links">
+                                <li><a href="/search">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                    Search</a>
+                                </li>
+
+                                <li><a href="/register">
+                                    <span class="glyphicon glyphicon-edit"></span>
+                                    Submit</a>
+                                </li>
+
+                                <li>    <a href="/countries">
+                                        <span class="glyphicon glyphicon-globe"></span>
+                                        Country Information</a>
+                                </li>
+                                <li>    <a href="mailto:absch@cbd.int">
+                                        <span class="glyphicon glyphicon-envelope"></span>
+                                        absch@cbd.int</a>
+                                </li>
+                                <li><a href="skype:abs-ch?chat" style="cursor:pointer;"><i class="fa fa-skype"></i> abs-ch</a>
+                                </li>
+                                <li>    <a href="/help">
+                                        <span class="fa fa-question-circle"></span>
+                                        Help</a>
+                                </li>
+
+                            </ul>
+
+
+
+                        </div>
+                        <div class="col-sm-3">
+                            <h5 class="footer-title">About the ABS-CH</h5>
+                            <ul class="footer-links">
+                                <li><a href="/help/about?question=absch">About the ABS-CH</a>
+                                </li>
+                                <li><a href="/help/about?question=obligations">Information-sharing obligations</a>
+                                </li>
+                                <li><a href="/help/about?question=portal10">Article 10 forum</a>
+                                </li>
+                                <li><a href="/help/about?question=iac" >ABS-CH IAC forum</a>
+                                </li>
+                                <li><a href="/help">Contact us</a>
+                                </li>
+                            </ul>
+                        </div>
+
+
+                        <div class="col-sm-3">
+                            <h5 class="footer-title">Nagoya Protocol</h5>
+                            <ul class="footer-links">
+                                <li><a href="/search/meeting">Documents and meetings</a>
+                                </li>
+                                <li><a href="/search/notification">Notifications</a>
+                                </li>
+                                <li><a href="search/statement" >Statements</a>
+                                </li>
+                                <li><a href="search/pressRelease">Press releases</a>
+                                </li>
+                                <li><a href="http://www.cbd.int/abs/about/default.shtml" target="_new"> About the Nagoya Protocol</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <h5 class="footer-title">CBD</h5>
+                            <ul class="footer-links">
+                                <li><a href="http://www.cbd.int/">CBD home</a>
+                                </li>
+                                <li><a href="http://www.cbd.int/meetings">Meetings</a>
+                                </li>
+                                <li><a href="http://www.cbd.int/decisions">Decisions and Recommendations</a>
+                                </li>
+                                <li><a href="http://www.cbd.int/news">News</a>
+                                </li>
+                                <li><a href="http://www.cbd.int/notifications">Notifications</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <img src="/app/img/cbd-logo-white-en.svg" class="pull-right" style="padding: 0; margin: 0; width:200px;" />
+            </div>
+            <div class="footer-cbd">
+                <div class="container footer-cbd-container">
+                    <div class="row copyright">
+                        <div class="col-xs-12">
+                            <!-- <img src="/app/img/unep-logo1.png" class="pull-right" style="padding:0 20px 0 0; margin:17px 0 0 0; height:60px;" /> -->
+                            <a href="http://www.cbd.int"><img src="/app/img/cbd-logo-white-en.svg" style="padding: 0 0 14px 0; margin: 0; width:200px;" /></a>
+                            <p style="font-size:10px;"><a href="http://www.cbd.int">© 2013 SCBD</a> | <a href="http://www.cbd.int/privacy">Privacy Policy</a> | <a href="http://www.cbd.int/terms">Terms of Use</a></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </footer>
+
+
+
 
 
     <!-- Bootstrap core JavaScript

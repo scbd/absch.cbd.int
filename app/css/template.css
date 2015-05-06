@@ -5,6 +5,16 @@
 .ng-cloak {
     display: none !important;
 }
+
+.training-bg{
+    background: url('/app/img/testwatermark.png');
+    background-size: 50px;
+}
+.dropdown-menu > li > a:hover{
+    color:#666!important;
+}
+
+
 /*#dropdownNotification a:focus {
 background-color: white;
 }*/
