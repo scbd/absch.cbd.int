@@ -4,57 +4,49 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
 
      app.value("realm", {value:"ABS"});
     app.value("schemaTypes", [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "resource" ]);
-    
+
     app.config(['extendedRouteProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
           $locationProvider.html5Mode(true);
         $locationProvider.hashPrefix('!');
 
         $routeProvider.
-            when('/',                            { templateUrl: '/app/views/home/index.html'                     ,resolveController: true, resolveUser: true}).
-            when('/commonformat',                { templateUrl: '/app/views/common-formats.html'            ,resolveController: true, resolveUser: true}).
-            //when('/presentation',                { templateUrl: '/app/views/help/presentation.html'            ,resolveController: true, resolveUser: true}).
-            when('/about',                       { templateUrl: '/app/views/about/about.html'                     ,resolveController: true, resolveUser: true}).
-            when('/help',                        { templateUrl: '/app/views/help/help.html'                      ,resolveController: true, resolveUser: true}).
-            when('/help/presentations/',         { templateUrl: '/app/views/help/presentations/home.html'                      ,resolveController: true, resolveUser: true}).
-            when('/help/accounts',              { templateUrl: '/app/views/help/accounts/accounts.html'                      ,resolveController: true, resolveUser: true}).
-            // when('/help/accounts/:question',              { templateUrl: '/app/views/help/accounts/accounts.html'                      ,resolveController: true, resolveUser: true}).
+            when('/',                            { templateUrl: '/app/views/home/index.html',                       label:'ABSCH',                              resolveController: true, resolveUser: true}).
+            when('/commonformat',                { templateUrl: '/app/views/common-formats.html',                   label:'Common Formats',                     resolveController: true, resolveUser: true}).
+            when('/help',                        { templateUrl: '/app/views/help/help.html',                        label:'Help',                               resolveController: true, resolveUser: true}).
+            when('/help/about',                  { templateUrl: '/app/views/help/about/about.html',                 label:'About the ABSCH',                    resolveController: true, resolveUser: true}).
+            when('/help/presentations/',         { templateUrl: '/app/views/help/presentations/home.html',          label:'Presentations',                      resolveController: true, resolveUser: true}).
+            when('/help/accounts',               { templateUrl: '/app/views/help/accounts/accounts.html',           label:'CBD Accounts',                       resolveController: true, resolveUser: true}).
+            when('/help/search',                 { templateUrl: '/app/views/help/search/search.html',               label:'Finding Information',                resolveController: true, resolveUser: true}).
+            when('/help/tours',                  { templateUrl: '/app/views/help/tours/tours.html',                 label:'Tours',                              resolveController: true, resolveUser: true}).
+            when('/help/register',               { templateUrl: '/app/views/help/register/register.html',           label:'Submitting Information',             resolveController: true, resolveUser: true}).
 
-            when('/forums',                  { templateUrl: '/app/views/forums/forum-list-view.html'    ,resolveController: true, resolveUser: true }).
+            when('/forums',                        { templateUrl: '/app/views/forums/forum-list-view.html',         label:'Forums',       resolveController: true, resolveUser: true }).
             when('/forums/iac',              { templateUrl: '/app/views/forums/thread-list-view.html'   ,resolveController: true, resolveUser: true, forumId:17415, postUrl:'/forums/iac', text:'IAC' }).
             when('/forums/iac/:threadId',    { templateUrl: '/app/views/forums/post-list-view.html'     ,resolveController: true, resolveUser: true, forumId:17415, forumListUrl:'/forums/iac/', text:'IAC'}).
-            when('/forums/vlr',              { templateUrl: '/app/views/forums/thread-list-view.html'   ,resolveController: true, resolveUser: true, forumId:17384, postUrl:'/forums/vlr', text:'VLR' }).
-            when('/forums/vlr/:threadId',    { templateUrl: '/app/views/forums/post-list-view.html'     ,resolveController: true, resolveUser: true, forumId:17384, forumListUrl:'/forums/vlr/', text:'VLR'}).
+            when('/forums/vlr',                    { templateUrl: '/app/views/forums/thread-list-view.html'   ,resolveController: true, resolveUser: true, forumId:17384, postUrl:'/forums/vlr', text:'VLR' }).
+            when('/forums/vlr/:threadId',          { templateUrl: '/app/views/forums/post-list-view.html'     ,resolveController: true, resolveUser: true, forumId:17384, forumListUrl:'/forums/vlr/', text:'VLR'}).
             when('/forums/caribbean',              { templateUrl: '/app/views/forums/thread-list-view.html'   ,resolveController: true, resolveUser: true, forumId:17378, postUrl:'/forums/caribbean', text:'Caribbean Region Forum' }).
             when('/forums/caribbean/:threadId',    { templateUrl: '/app/views/forums/post-list-view.html'     ,resolveController: true, resolveUser: true, forumId:17378, forumListUrl:'/forums/caribbean/', text:'Caribbean Region Forum'}).
-
-            // when('/forums/caribbean region',              { templateUrl: '/app/views/forums/thread-list-view.html'   ,resolveController: true, resolveUser: true, forumId:17378, postUrl:'/forums/caribbean region' }).
-            // when('/forums/caribbean region/:threadId',    { templateUrl: '/app/views/forums/post-list-view.html'     ,resolveController: true, resolveUser: true, forumId:17378, forumListUrl:'/forums/caribbean region/'}).
-
+            //when('/forums/caribbean region',              { templateUrl: '/app/views/forums/thread-list-view.html'   ,resolveController: true, resolveUser: true, forumId:17378, postUrl:'/forums/caribbean region' }).
+            //when('/forums/caribbean region/:threadId',    { templateUrl: '/app/views/forums/post-list-view.html'     ,resolveController: true, resolveUser: true, forumId:17378, forumListUrl:'/forums/caribbean region/'}).
             when('/forums/art10_groups',              { templateUrl: '/app/views/forums/thread-list-view.html'   ,resolveController: true, resolveUser: true, forumId:17316, postUrl:'/forums/art10_groups', text:'Forum on Article 10' }).
             when('/forums/art10_groups/:threadId',    { templateUrl: '/app/views/forums/post-list-view.html'     ,resolveController: true, resolveUser: true, forumId:17316, forumListUrl:'/forums/art10_groups/', text:'Forum on Article 10' }).
 
 
-            when('/help/search',              { templateUrl: '/app/views/help/search/search.html'                      ,resolveController: true, resolveUser: true}).
-            // when('/help/search/:question',              { templateUrl: '/app/views/help/search/search.html'                      ,resolveController: true, resolveUser: true}).
-            when('/help/tours',              { templateUrl: '/app/views/help/tours/tours.html'                      ,resolveController: true, resolveUser: true}).
+            when('/search',                                 { templateUrl: '/app/views/search/find.html',   label:'Search',         resolveController: true, resolveUser: true}).
+            when('/search/:documentSchema',                 { templateUrl: '/app/views/search/find.html',   label:'Search',         resolveController: true, resolveUser: true}).
+            when('/search/:documentSchema/:countryCode',    { templateUrl: '/app/views/search/find.html',   label:'Search',         resolveController: true, resolveUser: true}).
+            when('/find/simple',                            { templateUrl: '/app/views/find/simple.html',   label:'Simple Search',  resolveController: true, resolveUser: true}).
+            when('/find',                                   { redirectTo:'/search'}).
 
-            when('/help/register',              { templateUrl: '/app/views/help/register/register.html'                      ,resolveController: true, resolveUser: true}).
-            // when('/help/register/:question',              { templateUrl: '/app/views/help/register/register.html'                      ,resolveController: true, resolveUser: true}).
-
-            when('/search',                         { templateUrl: '/app/views/search/find.html'                      ,resolveController: true, resolveUser: true}).
-            //when('/search/',                                      { templateUrl: '/app/views/search/find.html'              ,resolveController: true, resolveUser: true}).
-            when('/search/:documentSchema',                       { templateUrl: '/app/views/search/find.html'              ,resolveController: true, resolveUser: true}).
-            when('/search/:documentSchema/:countryCode',              { templateUrl: '/app/views/search/find.html'              ,resolveController: true, resolveUser: true}).
-
-            when('/find',                           { redirectTo:'/search'}).
-            when('/find/simple',                    { templateUrl: '/app/views/find/simple.html'     ,resolveController: true, resolveUser: true}).
-
-            when('/countries',                   { templateUrl: '/app/views/countries/profiles.html'                 ,resolveController: true, resolveUser: true}).
-            when('/countries/:code',             { templateUrl: '/app/views/countries/profiles.html'                  ,resolveController: true, resolveUser: true}).
+            when('/countries',                   { templateUrl: '/app/views/countries/profiles.html',       label:'Country Information',      resolveController: true, resolveUser: true}).
+            when('/countries/:code',             { templateUrl: '/app/views/countries/profiles.html',       label:'Country Profile', param:'true',      resolveController: true, resolveUser: true}).
 
             // when('/database/record',             { templateUrl: '/app/views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
             // when('/database/record/:documentID',  { templateUrl: '/app/views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
             // when('/database/record/:documentID/:revision', { templateUrl: '/app/views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
+
+
             when('/database/:documentID',                           { templateUrl: '/app/views/forms/view/records-id.html'    ,resolveController: true, resolveUser: true}).
             when('/database/:documentSchema/:documentID',           { templateUrl: '/app/views/forms/view/records-id.html'    ,resolveController: true, resolveUser: true}).
             when('/database/:documentSchema/:documentID/:revision', { templateUrl: '/app/views/forms/view/records-id.html'    ,resolveController: true, resolveUser: true}).
@@ -90,14 +82,7 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
 
 
 
-            when('/about/:document_type', {
-              templateUrl: '/app/views/about/about.html',
-              resolveController: true,
-              resolveUser: true,
-              subTemplateUrl: '/app/views/about/-',
-              ignoreSubController: true,
-            }).
-            when('/about', { redirectTo: '/about/absch' }).
+
 
             when('/dashboard', {
               templateUrl: '/app/views/register/register.html',
