@@ -342,7 +342,7 @@ font-size: 38px;
 
 body{
   min-height:800px;
-  font-family: Trebuchet MS, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family:  "Helvetica Neue", Helvetica, sans-serif, Trebuchet MS;
   text-rendering: optimizeLegibility;
   font-size:14px;
 background-color:#eee;
@@ -351,19 +351,19 @@ position:relative;
 }
 
 h4, h5, h6 {
-      font-family:Tahoma, Trebuchet MS, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /*font-family:Tahoma, Trebuchet MS, "Helvetica Neue", Helvetica, Arial, sans-serif;*/
   text-rendering: optimizeLegibility;
 }
 h1 {
      /*font-family: 'alternategotno3dotregular';*/
-     font-family:Tahoma, Trebuchet MS, "Helvetica Neue", Helvetica, Arial, sans-serif;
+     /*font-family:Tahoma, Trebuchet MS, "Helvetica Neue", Helvetica, Arial, sans-serif;*/
      text-rendering: optimizeLegibility;
      font-size: 26px;
 
 }
 h2{
      /*font-family: 'alternategotno3dotregular';*/
-     font-family:Tahoma, Trebuchet MS, "Helvetica Neue", Helvetica, Arial, sans-serif;
+     /*font-family:Tahoma, Trebuchet MS, "Helvetica Neue", Helvetica, Arial, sans-serif;*/
      text-rendering: optimizeLegibility;
      font-size: 24px;
      font-weight: bold;
@@ -371,7 +371,7 @@ h2{
 }
 h3 {
      /*font-family: 'alternategotno3dotregular';*/
-     font-family:Tahoma, Trebuchet MS, "Helvetica Neue", Helvetica, Arial, sans-serif;
+     /*font-family:Tahoma, Trebuchet MS, "Helvetica Neue", Helvetica, Arial, sans-serif;*/
      text-rendering: optimizeLegibility;
      font-size: 20px;
 
@@ -519,7 +519,7 @@ padding:3px;
 .account-signin a:hover, a:focus{
 	color:#fff;
 }
-.set-languages {
+/*.set-languages {
 	/*color:#287FCB!important;*/
 	color:#333;
 	font-size: 12px;
@@ -528,7 +528,7 @@ padding:3px;
     padding-top: 3px;
 	list-style: none;
 	font-family: 'alternategotno3dotregular';
-}
+}*/
 .account-name{
 	position: relative;
 	top:-30px;
@@ -565,7 +565,7 @@ padding:3px;
 }
 
 
-.footer{
+/*.footer{
 	background: #1FA65D url('../img/feature-bkg.png');
 	border-top:#333 solid 3px;
 	padding:0;
@@ -574,8 +574,12 @@ padding:3px;
     clear: both;
     padding-top: 10px;
     color:#333;
-}
+}*/
+.footer-title{
 
+    font-size:18px;
+
+}
 
 @media (max-width: 992px) {
 
