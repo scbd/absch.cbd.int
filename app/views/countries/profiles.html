@@ -81,19 +81,19 @@
                 <div class="well" ng-show="true">
                     <div style="padding-bottom:10px;">
                         <div style="font-size:16;font-weight:bold;">Nagoya Protocol Party status</div>
-                        <div ng-click="updateMap('ratified')" ng-class="{'myWell-on':type=='ratified'}" style="cursor:pointer;">
+                        <div ng-click="updateMap('ratified')" ng-class="{'color-blue':type=='ratified'}" style="cursor:pointer;">
                             <span class="label label-primary">&nbsp;</span> Party ({{mapDetails.ratifications}})</div>
                         <!-- <div style="cursor:pointer" ng-click="updateMap('inbetweenParty')" ng-class="{'myWell-on':type=='inbetweenParties'}">
                             <span class="label label-success">&nbsp;</span> Inbetween Party ({{mapDetails.inbetweenParties}})
                             <i class="fa fa-info-circle" data-toggle="tooltip" title="A country which has ratified Nagoya protocol and is still to enter into force which is on the 90th day from the date of deposit"></i>
                         </div> -->
 
-                        <div style="cursor:pointer;" ng-click="updateMap('signatory')" ng-class="{'myWell-on':type=='signatory'}">
+                        <div style="cursor:pointer;" ng-click="updateMap('signatory')" ng-class="{'color-blue':type=='signatory'}">
                             <span class="label label-info">&nbsp;</span> Signatory ({{mapDetails.signatures}})</div>
 
-                        <div style="cursor:pointer" ng-click="updateMap('nonParties')" ng-class="{'myWell-on':type=='nonParties'}">
+                        <div style="cursor:pointer" ng-click="updateMap('nonParties')" ng-class="{'color-blue':type=='nonParties'}">
                             <span class="label label-default">&nbsp;</span> Non-Party ({{mapDetails.nonCBDParties + mapDetails.parties-mapDetails.ratifications}})</div>
-                        <div style="cursor:pointer" ng-click="updateMap('party')" ng-class="{'myWell-on':type=='party'}">
+                        <div style="cursor:pointer" ng-click="updateMap('party')" ng-class="{'color-blue':type=='party'}">
                             <span class="label">&nbsp;</span> All ({{mapDetails.parties + mapDetails.nonCBDParties}})</div>
                     </div>
                     <div>
