@@ -198,18 +198,19 @@ h3 {
 
 
 		.stats-count-rec{
-			font-size:18px;
-			text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+			font-size:12px;
+			/*text-shadow: 0 1px 2px rgba(0, 0, 0, .6);*/
 		    padding-top:5px;
-		    color: #333;
+		    color: #777;
+			font-weight:bold;
 		}
 		.stats-schema-rec{
 			text-rendering: optimizeLegibility;
 			height:22px;
-			line-height:12px!important;
+			line-height:10px!important;
 			text-transform: uppercase;
 			font-size:10px;
-		    color: #666;
+		    color: #777;
 		}
 
 		.stats-bottom{

@@ -1,7 +1,7 @@
 define(['app', 'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], function(app, angucomplete, jqv, jqvmap) {
 
-  app.controller("CountriesController", ["$scope", "authHttp", "underscore", "$q", "$filter", "$timeout", "$location", "realm", "$routeParams",
-    function($scope, $http, _, $q, $filter, $timeout, $location, realm, $routeParams) {
+  app.controller("CountriesController", ["$scope","$rootScope", "authHttp", "underscore", "$q", "$filter", "$timeout", "$location", "realm", "$routeParams",
+    function($scope, $rootScope, $http, _, $q, $filter, $timeout, $location, realm, $routeParams) {
 
 
       //*******************************************************

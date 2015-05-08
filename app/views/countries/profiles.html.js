@@ -19,12 +19,14 @@
    './countries-commonJS.js'
  ], function(app, _, linqjs) {
 
-   app.controller("ProfileController", ["$scope", "authHttp", "$routeParams", "linqjs", "$filter", "realm",
+   app.controller("ProfileController", ["$scope","$rootScope", "authHttp", "$routeParams", "linqjs", "$filter", "realm",
                 "commonjs", "$q", '$element', '$timeout','countriescommonjs','IStorage',
-     function($scope, $http, $routeParams, linqjs, $filter, realm, commonjs, $q,
+     function($scope, $rootScope, $http, $routeParams, linqjs, $filter, realm, commonjs, $q,
                 $element, $timeout, countriescommonjs, IStorage) {
 
-
+        //===================================================
+        //
+        //===================================================
        function resetList(){
             $scope.showCPCSent = true;
             $scope.showIRCC = true;
@@ -45,6 +47,10 @@
 
        resetList();
 
+
+       //===================================================
+       //
+       //===================================================
        $scope.show = function(type) {
          if (type=='map' || type=='list') {
            $element.find('#countryDetails').slideUp('slow');
@@ -59,6 +65,18 @@
          $scope.$broadcast('showDetails', {data:type});
        }
 
+
+       //===================================================
+       //
+       //===================================================
+       $scope.$watch('country.name.en', function(value) {
+           if (!value) return;
+           $rootScope.breadcrumbsParam = value;
+       });
+
+       //===================================================
+       //
+       //===================================================
        $scope.loadCountryDetails = function(countryCode) {
 
          $scope.code = countryCode || $routeParams.code;
@@ -78,6 +96,10 @@
              cache: true
            }).then(function(response) {
              $scope.country = response.data;
+
+
+             $rootScope.breadcrumbsParam = $scope.country.name.en;
+
              $scope.searchText = '';
              $scope.autocompleteData = [];
              if($scope.country)
@@ -167,8 +189,15 @@
            });
          }
        }
+
+       //===================================================
+       //
+       //===================================================
        $scope.loadCountryDetails();
 
+       //===================================================
+       //
+       //===================================================
        $scope.$watch('absch_nfp', function(value) {
 
          if (!value) return;
@@ -178,6 +207,9 @@
 
        });
 
+       //===================================================
+       //
+       //===================================================
        $scope.getFacets = function(data) {
 
          var linqObj = linqjs.from(data);
@@ -215,6 +247,10 @@
          });
        }
 
+
+       //===================================================
+       //
+       //===================================================
        $scope.$watch('searchText.$', function(value) {
 
          if (undefined == value || value == null || $scope.absch_nfp == null) return;
@@ -223,7 +259,15 @@
 
        });
 
+       //===================================================
+       //
+       //===================================================
        $scope.showlist = false;
+
+
+       //===================================================
+       //
+       //===================================================
 
        $scope.$on('mapDetailsLoad', function(evt, data){
            $scope.mapDetails = data.mapDetails;
@@ -234,6 +278,10 @@
             $scope.show('map');
        })
 
+
+       //===================================================
+       //
+       //===================================================
        $scope.updateMap = function(type){
 
             $scope.type = type;
@@ -256,50 +304,86 @@
            $scope.loadCountryDetails(evtData.data.countryCode);
        })
 
-
+       //===================================================
+       //
+       //===================================================
        $scope.isContactInformation = function(entity){
 
            return entity && (entity.schema_s == "focalPoint" ||
                     entity.schema_s == "authority" || entity.schema_s == "database" ||
                     entity.schema_s == "absCheckpoint")
        }
-
+       //===================================================
+       //
+       //===================================================
        $scope.isMeasure = function(entity){
 
            return entity && entity.schema_s == "measure";
        }
+
+       //===================================================
+       //
+       //===================================================
        $scope.isCheckpointCommunique = function(entity){
 
            return entity && entity.schema_s == "absCheckpointCommunique";
        }
 
-      $scope.isPermit = function(entity){
+
+       //===================================================
+       //
+       //===================================================
+       $scope.isPermit = function(entity){
 
           return entity && entity.schema_s == "absPermit";
-      }
+        }
 
+
+        //===================================================
+        //
+        //===================================================
       $scope.isCheckpointCommuniqueReceived = function(entity){
           return entity && entity.schema_s == "absCheckpointCommunique"
           && (entity.originCountries_ss==$scope.code  || entity.permitSourceCountry_ss==$scope.code);
       }
 
+
+      //===================================================
+      //
+      //===================================================
       $scope.isCheckpoint = function(entity){
 
           return entity && entity.schema_s == "absCheckpoint";
       }
+
+      //===================================================
+      //
+      //===================================================
       $scope.isFocalpoint = function(entity){
 
           return entity && entity.schema_s == "focalPoint";
       }
+
+
+      //===================================================
+      //
+      //===================================================
       $scope.isDatabase = function(entity){
 
           return entity && entity.schema_s == "database";
       }
+
+      //===================================================
+      //
+      //===================================================
       $scope.isCNA = function(entity){
 
           return entity && entity.schema_s == "authority";
       }
 
+      //===================================================
+      //
+      //===================================================
        $scope.showDetails = function(document){
            //$scope.currentDocument = documentId;
            if(!document.data){
@@ -313,7 +397,9 @@
             }
        };
 
-
+       //===================================================
+       //
+       //===================================================
        $scope.getTitle = function(schema,type, schemaFull){
            if(schema == 'focalPoint'){
 
@@ -331,6 +417,9 @@
 
        }
 
+       //===================================================
+       //
+       //===================================================
        $scope.parseJSON = function(value){
            if(value)
             return JSON.parse(value);

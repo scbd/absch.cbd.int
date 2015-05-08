@@ -416,7 +416,6 @@ define(["app",'/app/js/common.js'], function (app) {
         	if(schame.toUpperCase()=="MT"				        ) return "meeting";
         	if(schame.toUpperCase()=="PR"			            ) return "pressRelease";
 
-
 			return schame;
 		};
 	}]);

@@ -16,7 +16,7 @@ define(['app',
       schemaTypes, $timeout, $filter, $routeParams, $cookies,bootbox,realm,workflows) {
 
 
-
+	$rootScope.breadcrumbsParam = "asdasd";
 
 
     //TODO: stop using so many globals =P I should inherit the controller scope or something.

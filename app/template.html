@@ -171,17 +171,17 @@
 
     <!-- PORTAL LINKS-->
     <nav class="navbar navbar-links navbar-default navbar-static-top bg-orange">
-        <div class="container container-links">
+        <div class="container container-links color-grey">
                 <div style="display:inline">
                     <a href="/"><i class="fa fa-home" ></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="/find" ng-class="{'link-active' : getClass('/find')}">Search</a>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="/register" ng-class="{'link-active' : getClass('/register')}">Submit</a>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="/countries" ng-class="{'link-active' : getClass('/countries')}">Country Information</a>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="/find" ng-class="{'link-active' : getClass('/find')}"><i class="fa fa-search"></i> Search</a>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="/register" ng-class="{'link-active' : getClass('/register')}"><i class="fa fa-pencil-square-o"></i> Submit</a>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="/countries" ng-class="{'link-active' : getClass('/countries')}"><i class="fa fa-globe"></i> Country Information</a>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                 </div>
 
                 <div class="pull-right" style="display:inline;">
-                    <a href="/forums/iac" ng-class="{'link-active' : getClass('/forums')}">IAC Forum</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    <a href="/forums/iac" ng-class="{'link-active' : getClass('/forums')}"><i class="fa fa-comments"></i> IAC Forum</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <a href="/help" ng-class="{'link-active' : getClass('/help')}"><i class="fa fa-question-circle" class="bg-grey"></i> Help</a>
                 </div>
 
@@ -194,6 +194,7 @@
             <div class="color-litegrey">
                     <a href="http://www.cbd.int" class="margin-right-xs">CBD</a>
                     <span ng-repeat="breadcrumb in breadcrumbs.get() track by breadcrumb.path" ng-class="{ active: $last }">
+
                         &nbsp;&nbsp;<i class="fa fa-chevron-right color-litegrey"></i>&nbsp;&nbsp;
 
                         <span ng-if="!breadcrumb.param">
@@ -201,17 +202,12 @@
                             <span ng-if="$last" ng-bind="breadcrumb.label"></span>
                         </span>
 
-                        <span ng-if="breadcrumb.param && breadcrumb.label == 'Country Profile'">
+                        <span ng-if="breadcrumb.param && breadcrumb.label == 'Country Information'">
+                            <span  ng-show="breadcrumbsParam" ng-bind="breadcrumbsParam" ></span>
+                        </span>
 
-
-                                <!-- <div class="dropdown"> -->
-
-                                  <a  ng-bind="breadcrumbsParam" data-toggle="dropdown" href="#"></a>
-
-                                  <!-- <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                    <li>asdasd</li>
-                                  </ul>
-                                </div> -->
+                        <span ng-if="breadcrumb.param && breadcrumb.label == 'Submit'">
+                            <span  ng-show="breadcrumb.param" >{{breadcrumb.param|lowercase|mapSchema|schemaName}}</span>
                         </span>
 
                     </span>
