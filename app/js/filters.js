@@ -284,6 +284,35 @@ define(["app",'/app/js/common.js'], function (app) {
 	//
 	//
 	//============================================================
+	app.filter("schemaNamePlural", [function() {
+
+		return function( schame ) {
+			if(!schame)
+				return schame;
+			if(schame.toLowerCase()=="focalpoint"				) return "Focal Points";
+			if(schame.toLowerCase()=="authority"				) return "Competent National Authorities";
+			if(schame.toLowerCase()=="contact"				) return "Contact";
+			if(schame.toLowerCase()=="database"				) return "National Websites or Databases";
+			if(schame.toLowerCase()=="resource"				) return "Virtual Library Resources";
+			if(schame.toLowerCase()=="organization"			) return "Organizations";
+			if(schame.toLowerCase()=="measure" 				) return "Legislative, Administrative or Policy Measures";
+			if(schame.toLowerCase()=="abscheckpoint"			) return "Checkpoints";
+			if(schame.toLowerCase()=="abscheckpointcommunique") return "Checkpoint Communiqués";
+			if(schame.toLowerCase()=="abspermit"				) return "Internationally Recognized Certificates of Compliance";
+            if(schame.toLowerCase()=="meetingdocument"		) return "Meeting Documents";
+            if(schame.toLowerCase()=="pressrelease"			) return "Press Releases";
+			if(schame.toLowerCase()=="news"					) return "News";
+
+
+			return schame;
+		};
+	}]);
+
+	//============================================================
+	//
+	//
+	//
+	//============================================================
 	app.filter("schemaIcon", [function() {
 
 		return function( schame ) {

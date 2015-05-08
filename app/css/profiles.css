@@ -138,8 +138,7 @@
 		background-color: #1FA65D;
 	}
 	.myWell-on {
-		/*background-color:#428bca!important;*/
-		color: #428bca!important;
+		background-color:#428bca!important;
 	}
 	.europeanUnion {
 		top: 25%;
@@ -199,3 +198,4 @@
 	.nopadding{
 		padding:0px!important;
 	}
+	
