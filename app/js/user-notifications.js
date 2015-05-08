@@ -7,11 +7,11 @@ define(["app", "authentication"], function (app) {
             //===========================
             //
             //===========================
-            this.create = function(type, version, data) {
+            this.create = function(type,assignedTo,  data) {
 
                 var body = {
                     type    : type,
-                    version : version,
+                    assignedTo : assignedTo,
                     data    : data
                 };
 

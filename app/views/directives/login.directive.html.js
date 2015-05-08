@@ -36,6 +36,8 @@ app.directive('login', function ($http) {
                         $scope.password     = "";
                         $scope.errorInvalid = error.status == 403;
                         $scope.errorTimeout = error.status != 403;
+                    })
+                    .finally(function(){
                         $scope.waiting      = false;
                     });
               };

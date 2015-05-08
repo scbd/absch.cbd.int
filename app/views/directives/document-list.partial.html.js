@@ -328,6 +328,8 @@ define(['app',
               //TODO: output.description should be the description
               //TODO: metadata should be the url opening to a new window
             } else if (document.schema_s == 'measure') {
+               output.metadata.push('Adopted on ' + $filter('formatDate')(document.adoption_dt));
+              output.adoption = document.adoption_dt;
               output.recordtype = "nationalRecord";
 
               output.jusrisdiction = document.jurisdiction_EN_t;

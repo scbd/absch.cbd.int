@@ -130,7 +130,8 @@ define(['app','underscore',
             var schema = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "resource", "meeting", "notification","pressRelease","statement" ,"focalPoint", "news"]
 
 //realm_ss:absch OR realm_ss:ABS
-            var q = '(realm_ss:' + realm.value.toLowerCase() + ' or realm_ss:absch) AND NOT version_s:*';//' AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryTheme + ' AND ' + $scope.queryTargets +' AND ' + $scope.queryDate + ' AND ' + $scope.queryKeywords;
+            var q = '(realm_ss:' + realm.value.toLowerCase() + ' or realm_ss:absch) AND NOT version_s:*';
+            //' AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryTheme + ' AND ' + $scope.queryTargets +' AND ' + $scope.queryDate + ' AND ' + $scope.queryKeywords;
 
             var keywordQuery = '';
 
