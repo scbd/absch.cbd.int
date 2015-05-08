@@ -126,12 +126,6 @@
                             <a href="#" ng-click="actionProfile()">
                                 <i class="fa fa-user" style="font-size:15px"></i>&nbsp; Profile</a>
                         </li>
-                        <li class="dropdown-submenu">
-                            <a tabindex="-1" href="#"><i class="fa fa-lock" style="font-size:15px"></i>&nbsp; My Roles</a>
-                            <ul class="dropdown-menu bg-darkgrey" role="menu" style="min-width:200px">
-                              <li ng-repeat="role in user.roles|orderBy:'toString()'"><a tabindex="-1" href="#">{{role}}</a></li>
-                            </ul>
-                        </li>
                         <li>
                             <a href="#" ng-click="actionPassword()">
                                 <i class="fa fa-user" style="font-size:15px"></i>&nbsp; Password</a>
