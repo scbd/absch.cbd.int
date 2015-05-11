@@ -1,6 +1,5 @@
  define(['app','underscore','linqjs',
    '/app/views/forms/view/record-loader.directive.html.js',
-   '/app/views/directives/document-list.partial.html.js',
    '/app/views/forms/view/view-abs-checkpoint.directive.js',
    '/app/views/forms/view/view-abs-checkpoint-communique.directive.js',
    '/app/views/forms/view/view-abs-permit.directive.js',
@@ -14,13 +13,12 @@
    '/app/views/forms/view/view-organization-reference.directive.js',
    '/app/views/forms/view/view-resource.directive.js',
    '/app/js/directives/angucomplete-extended.js',
-   '/app/js/common.js', 'jqvmap', 'jqvmapworld',
-   '/app/views/countries/country-map-list-directive.html.js',
-   './countries-commonJS.js'
+   '/app/views/countries/countries-left-menu-directive.html.js',
+   '/app/js/common.js'
  ], function(app, _, linqjs) {
 
    app.controller("ProfileController", ["$scope", "authHttp", "$routeParams", "linqjs", "$filter", "realm",
-                "commonjs", "$q", '$element', '$timeout','countriescommonjs','IStorage',
+                "commonjs", "$q", '$element', '$timeout','commonjs','IStorage',
      function($scope, $http, $routeParams, linqjs, $filter, realm, commonjs, $q,
                 $element, $timeout, countriescommonjs, IStorage) {
 
@@ -45,19 +43,19 @@
 
        resetList();
 
-       $scope.show = function(type) {
-         if (type=='map' || type=='list') {
-           $element.find('#countryDetails').slideUp('slow');
-           $element.find('#worldMap').slideDown('slow');
-
-         } else {
-           $element.find('#worldMap').slideUp('slow');
-           $element.find('#countryDetails').slideDown('slow');
-           resetList()
-         }
-
-         $scope.$broadcast('showDetails', {data:type});
-       }
+    //    $scope.show = function(type) {
+    //      if (type=='map' || type=='list') {
+    //        $element.find('#countryDetails').slideUp('slow');
+    //        $element.find('#worldMap').slideDown('slow');
+       //
+    //      } else {
+    //        $element.find('#worldMap').slideUp('slow');
+    //        $element.find('#countryDetails').slideDown('slow');
+    //        resetList()
+    //      }
+       //
+    //      $scope.$broadcast('showDetails', {data:type});
+    //    }
 
        $scope.loadCountryDetails = function(countryCode) {
 
@@ -73,7 +71,7 @@
          //fix for EU
          if($scope.code.toLowerCase() == 'eu')
             $scope.code = 'eur';
-           $scope.show('profile');
+          // $scope.show('profile');
            $http.get('/api/v2013/countries/' + $scope.code.toUpperCase(), {
              cache: true
            }).then(function(response) {
@@ -215,42 +213,26 @@
          });
        }
 
-       $scope.$watch('searchText.$', function(value) {
-
-         if (undefined == value || value == null || $scope.absch_nfp == null) return;
-         $scope.getFacets($filter('filter')($scope.absch_nfp.response.docs, value));
-
-
-       });
+    //    $scope.$watch('searchText.$', function(value) {
+       //
+    //      if (undefined == value || value == null || $scope.absch_nfp == null) return;
+    //      $scope.getFacets($filter('filter')($scope.absch_nfp.response.docs, value));
+       //
+       //
+    //    });
 
        $scope.showlist = false;
 
-       $scope.$on('mapDetailsLoad', function(evt, data){
-           $scope.mapDetails = data.mapDetails;
-           $scope.type = 'party';
-          if ($routeParams.code && $routeParams.code.toUpperCase() != 'RAT')
-            $scope.show('profile');
-          else
-            $scope.show('map');
-       })
+    //    $scope.$on('mapDetailsLoad', function(evt, data){
+    //        $scope.mapDetails = data.mapDetails;
+    //        $scope.type = 'party';
+    //       if ($routeParams.code && $routeParams.code.toUpperCase() != 'RAT')
+    //         $scope.show('profile');
+    //       else
+    //         $scope.show('map');
+    //    })
 
-       $scope.updateMap = function(type){
 
-            $scope.type = type;
-            if(type=='ratified')
-                $scope.searchFilter=(countriescommonjs.isNPParty);
-            else if(type=='inbetweenParty')
-                $scope.searchFilter=countriescommonjs.isInbetweenParty;
-            else if(type=='signatory')
-                $scope.searchFilter=countriescommonjs.isSignatory;
-            else if(type=='nonParties')
-                $scope.searchFilter=countriescommonjs.isNonParties;
-            else if(type=='party')
-                $scope.searchFilter=countriescommonjs.showAll;
-
-            $scope.$broadcast('updateMap', {data:{'type':type,'searchFilter':$scope.searchFilter}});
-
-       }
        $scope.countriescommonjs = countriescommonjs;
        $scope.$on('loadCountryProfile', function(evt, evtData){
            $scope.loadCountryDetails(evtData.data.countryCode);

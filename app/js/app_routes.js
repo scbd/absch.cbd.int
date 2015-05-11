@@ -32,6 +32,7 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
             when('/forums/art10_groups',              { templateUrl: '/app/views/forums/thread-list-view.html'   ,resolveController: true, resolveUser: true, forumId:17316, postUrl:'/forums/art10_groups', text:'Forum on Article 10' }).
             when('/forums/art10_groups/:threadId',    { templateUrl: '/app/views/forums/post-list-view.html'     ,resolveController: true, resolveUser: true, forumId:17316, forumListUrl:'/forums/art10_groups/', text:'Forum on Article 10' }).
 
+            when('/mailbox',                        { templateUrl: '/app/views/mailbox/inbox.html',         label:'Mailbox',       resolveController: true, resolveUser: true }).
 
             when('/search',                                 { templateUrl: '/app/views/search/find.html',   label:'Search',         resolveController: true, resolveUser: true}).
             when('/search/:documentSchema',                 { templateUrl: '/app/views/search/find.html',   label:'Search',         resolveController: true, resolveUser: true}).
@@ -39,7 +40,7 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
             when('/find/simple',                            { templateUrl: '/app/views/find/simple.html',   label:'Simple Search',  resolveController: true, resolveUser: true}).
             when('/find',                                   { redirectTo:'/search'}).
 
-            when('/countries',                   { templateUrl: '/app/views/countries/profiles.html',       label:'Country Information',      resolveController: true, resolveUser: true}).
+            when('/countries',                   { templateUrl: '/app/views/countries/countries-map.html',       label:'Country Information',      resolveController: true, resolveUser: true}).
             when('/countries/:code',             { templateUrl: '/app/views/countries/profiles.html',       label:'Country Profile', param:'true',      resolveController: true, resolveUser: true}).
 
             // when('/database/record',             { templateUrl: '/app/views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).

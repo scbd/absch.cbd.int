@@ -1,0 +1,52 @@
+<div>
+
+    <h1 class="special-font">Country Information</h1>
+
+    <!-- <div style="padding-bottom:10px;">
+        <label class="btn btn-default">
+            <span class="fa fa-globe fa-lg" ng-click="show('map');" style="cursor:pointer">&nbsp;Map</span>
+        </label>
+        <label class="btn btn-default">
+            <span class="fa fa-align-justify fa-lg" ng-click="show('list');" style="cursor:pointer">&nbsp;List</span>
+        </label>
+    </div> -->
+
+
+    <div class="well" ng-show="true">
+        <div style="padding-bottom:10px;">
+            <div style="font-size:16;font-weight:bold;">Nagoya Protocol Party status</div>
+            <div ng-click="updateMap('party')" ng-class="{'color-blue':type=='party'}" style="cursor:pointer;">
+                <span class="label label-primary">&nbsp;</span> Party ({{npParty}})</div>
+            <div style="cursor:pointer;" ng-click="updateMap('signatory')" ng-class="{'color-blue':type=='signatory'}">
+                <span class="label label-info">&nbsp;</span> Signatory ({{npSignatory}})</div>
+
+            <div style="cursor:pointer" ng-click="updateMap('nonParties')" ng-class="{'color-blue':type=='nonParties'}">
+                <span class="label label-default">&nbsp;</span> Non-Party ({{nonParty}})</div>
+            <div style="cursor:pointer" ng-click="updateMap('all')" ng-class="{'color-blue':type=='all'}">
+                <span class="label">&nbsp;</span> All ({{countries.length}})</div>
+        </div>
+        <div>
+            <strong>Select a country</strong>
+            <input type="textbox" ng-model="countryFilter" placeholder="filter by country name" class="form-control form-control-small">
+
+            <div class="clearfix"></div>
+
+            <div style="max-height:500px;overflow:scroll; cursor:pointer;padding:5px;">
+                <ul class="list-group">
+                    <li class="row list-group-item" style="min-width:300px;" ng-click="navigateCountry(country.code)"
+                    ng-repeat="country in countries | filter:countryFilter | filter:searchFilter | orderBy:'name.en'"
+                    ng-class="{'list-group-item-info':country.isNPSignatory && !country.isNPParty,
+                            'list-group-item-primary':country.isNPParty,
+                            'list-group-item-default':!country.isNPParty && !country.isNPSignatory}">
+
+                        <div class="col-xs-12">{{country.name |lstring}}</div>
+                    </li>
+                </ul>
+            </div>
+
+
+        </div>
+    </div>
+
+
+</div>

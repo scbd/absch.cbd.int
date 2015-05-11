@@ -3,8 +3,6 @@
 <link href="/app/css/find.css" rel="stylesheet">
 <link href="/app/css/record.css" rel="stylesheet">
 <link href="/app/libs/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
-<link href="/app/libs/angucomplete/angucomplete.css" rel="stylesheet">
-<link href="/app/libs/jqvmap/jqvmap/jqvmap.css" rel="stylesheet">
 <link href="/app/css/profile-map.css" rel="stylesheet">
 
 <div ng-controller="ProfileController">
@@ -66,64 +64,13 @@
         <div class="row">
 
             <div class="col-xs-3" style="padding-top:5px;">
-                <h1 class="special-font">Country Information</h1>
-
-                <div style="padding-bottom:10px;">
-                    <label class="btn btn-default">
-                        <span class="fa fa-globe fa-lg" ng-click="show('map');" style="cursor:pointer">&nbsp;Map</span>
-                    </label>
-                    <label class="btn btn-default">
-                        <span class="fa fa-align-justify fa-lg" ng-click="show('list');" style="cursor:pointer">&nbsp;List</span>
-                    </label>
-                </div>
-
-
-                <div class="well" ng-show="true">
-                    <div style="padding-bottom:10px;">
-                        <div style="font-size:16;font-weight:bold;">Nagoya Protocol Party status</div>
-                        <div ng-click="updateMap('ratified')" ng-class="{'color-blue':type=='ratified'}" style="cursor:pointer;">
-                            <span class="label label-primary">&nbsp;</span> Party ({{mapDetails.ratifications}})</div>
-                        <!-- <div style="cursor:pointer" ng-click="updateMap('inbetweenParty')" ng-class="{'myWell-on':type=='inbetweenParties'}">
-                            <span class="label label-success">&nbsp;</span> Inbetween Party ({{mapDetails.inbetweenParties}})
-                            <i class="fa fa-info-circle" data-toggle="tooltip" title="A country which has ratified Nagoya protocol and is still to enter into force which is on the 90th day from the date of deposit"></i>
-                        </div> -->
-
-                        <div style="cursor:pointer;" ng-click="updateMap('signatory')" ng-class="{'color-blue':type=='signatory'}">
-                            <span class="label label-info">&nbsp;</span> Signatory ({{mapDetails.signatures}})</div>
-
-                        <div style="cursor:pointer" ng-click="updateMap('nonParties')" ng-class="{'color-blue':type=='nonParties'}">
-                            <span class="label label-default">&nbsp;</span> Non-Party ({{mapDetails.nonCBDParties + mapDetails.parties-mapDetails.ratifications}})</div>
-                        <div style="cursor:pointer" ng-click="updateMap('party')" ng-class="{'color-blue':type=='party'}">
-                            <span class="label">&nbsp;</span> All ({{mapDetails.parties + mapDetails.nonCBDParties}})</div>
-                    </div>
-                    <div>
-                        <strong>Select a country</strong>
-                        <input type="textbox" ng-model="countryFilter" placeholder="filter by country name" class="form-control form-control-small">
-
-                        <div class="clearfix"></div>
-
-                        <div style="max-height:500px;overflow:scroll; cursor:pointer;padding:5px;">
-                            <ul class="list-group">
-                                <li class="row list-group-item" style="min-width:300px;" ng-click="loadCountryDetails(country.code)" ng-repeat="country in countries | filter:countryFilter | filter:searchFilter"
-                                ng-class="{'list-group-item-info':country.isSignatory && !country.isRatified,
-                                        'list-group-item-primary':country.isRatified && !country.isInbetweenParty,
-                                        'list-group-item-default':(!country.isRatified && !country.isSignatory) || country.isInbetweenParty}">
-
-                                    <div class="col-xs-12">{{country.name |lstring}}</div>
-                                </li>
-                            </ul>
-                        </div>
-
-
-                    </div>
-                </div>
+                <span countries-left-menu finish-loading-countries="finishLoading()" on-status-click="statusFilter(data);">
             </div>
             <!-- <div ng-class="{'col-xs-12' : !showlist, 'col-xs-9':showlist}" > -->
             <div class="col-xs-9" style="padding-top:20px;">
 
                 <div id="page-content-wrapper">
                     <div class="page-content inset ">
-                        <div country-map-list countries="countries" />
                         <div class="panel panel-default ng-scope" style="background-color:white;min-height:800px;" id="countryDetails">
                             <div class="panel-heading" style="marign-bottom:30px;">
                                 <table>
@@ -134,11 +81,11 @@
                                         <td>
                                             <span class="country-name" style="font-size:300%;">{{country.name.en}}</span>
                                             <h3 style="margin:0;padding:0;padding-top:5px;">
-                                                <span style="vertical-align:top;margin-right:5px" class="label label-default" ng-show="!countriescommonjs.isRatified(country) || countriescommonjs.isInbetweenParty(country)">Non-Party</span>
-                                                <span style="vertical-align:top;margin-right:5px" class="label label-primary" ng-show="countriescommonjs.isRatified(country) && !countriescommonjs.isInbetweenParty(country)">Party</span>
-                                                <span style="vertical-align:top;margin-right:5px" class="label label-info" ng-show="countriescommonjs.isSignatory(country) && !countriescommonjs.isRatified(country)">Signatory</span>
-                                                <span style="vertical-align:top;margin-right:5px" class="label label-primary" ng-show="countriescommonjs.isRatified(country)">Date of {{country.treaties.XXVII8b.instrument}} {{(country.treaties.XXVII8b.deposit ? country.treaties.XXVII8b.deposit : '- - - - - -') | formatDate}} </span>
-                                                <span style="vertical-align:top;margin-right:5px" class="label label-success" ng-show="countriescommonjs.isRatified(country)">Date of Entry into force {{country.treaties.XXVII8b.party| formatDate}}</span>
+                                                <span style="vertical-align:top;margin-right:5px" class="label label-default" ng-show="!countriescommonjs.isNpParty(country)">Non-Party</span>
+                                                <span style="vertical-align:top;margin-right:5px" class="label label-primary" ng-show="countriescommonjs.isNpParty(country)">Party</span>
+                                                <span style="vertical-align:top;margin-right:5px" class="label label-info" ng-show="countriescommonjs.isNPSignatory(country) && !countriescommonjs.isNPParty(country)">Signatory</span>
+                                                <span style="vertical-align:top;margin-right:5px" class="label label-primary" ng-show="countriescommonjs.isNPParty(country)">Date of {{country.treaties.XXVII8b.instrument}} {{(country.treaties.XXVII8b.deposit ? country.treaties.XXVII8b.deposit : '- - - - - -') | formatDate}} </span>
+                                                <span style="vertical-align:top;margin-right:5px" class="label label-success" ng-show="countriescommonjs.isNPParty(country)">Date of Entry into force {{country.treaties.XXVII8b.party| formatDate}}</span>
                                             </h3>
                                         </td>
                                     </tr>

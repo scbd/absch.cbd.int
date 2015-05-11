@@ -79,7 +79,7 @@
 		background-color: #428bca;
 	}
 	.list-group-item-info {
-		color: #fff;
+		color: #fff !important;
 		background-color: #5bc0de;
 	}
 	.list-group-item-success {
@@ -198,4 +198,3 @@
 	.nopadding{
 		padding:0px!important;
 	}
-	

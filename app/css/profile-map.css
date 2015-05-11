@@ -55,58 +55,58 @@
 }*/
 @media (max-width:499px){
     .europeanUnion {
-      top: 45%;
-      left: 34%;
-      width:20px;
-      height:20px;
+        top: 43%;
+        left: 39%;
+        width: 8px;
+        height: 7px;
     }
 }
 @media (min-width: 500px) and (max-width: 767px) {
     .europeanUnion {
-      top: 36%;
-      left: 36%;
-      width:30px;
-      height:30px;
+        top: 39.5%;
+        left: 40%;
+        width: 15px;
+        height: 7px;
     }
 }
 @media (min-width: 768px) and (max-width: 880px) {
     .europeanUnion {
-      top: 39%;
-      left: 32%;
-      width:40px;
-      height:40px;
+        top: 37%;
+        left: 40%;
+        width: 18px;
+        height: 8px;
     }
 }
 @media (min-width: 881px) and (max-width: 991px) {
     .europeanUnion {
-      top: 34%;
-      left: 35%;
-      width:40px;
-      height:40px;
+      top: 35%;
+      left: 39%;
+      width:20px;
+      height:10px;
     }
 }
 @media (min-width: 992px) and (max-width: 1199px) {
     .europeanUnion {
       top: 30%;
       left: 34%;
-      width:50px;
-      height:80px;
+      width:20px;
+      height:40px;
     }
 }
 @media (min-width: 1200px) and (max-width: 1399px) {/*done*/
     .europeanUnion {
-      top: 26%;
-      left: 35%;
-      width:50px;
-      height:80px
+        top: 27.5%;
+        left: 40%;
+        width: 20px;
+        height: 40px;
     }
 }
 @media (min-width: 1400px) {
     .europeanUnion {
       top: 25%;
-      left: 40%;
-      width:50px;
-      height:80px
+      left: 43%;
+      width:20px;
+      height:40px
     }
 }
 .flag-icon-background {

@@ -1,0 +1,61 @@
+define(['app','underscore', '/app/js/common.js'], function(app,_) {
+
+    app.directive('countriesLeftMenu', function() {
+        return {
+            restrict: 'EAC',
+            templateUrl: '/app/views/countries/countries-left-menu-directive.html',
+            replace: true,
+            scope: {
+                finishLoadingCountries: '&',
+                onStatusClick: '&',
+                onCountryClick: '&',
+            },
+            controller: ['$scope', 'authHttp', '$q', '$filter', 'commonjs','$location',
+                function($scope, $http, $q, $filter, commonjs, $location) {
+
+                    $scope.lastAction = 'party';
+
+                    commonjs.getCountries()
+                    .then(function(countries){
+                        if($scope.finishLoadingCountries)
+                            $scope.finishLoadingCountries({data:countries});
+
+                        $scope.countries = countries;
+
+                        $scope.npParty = _.where($scope.countries,{isNPParty:true}).length;
+                        $scope.npSignatory = _.where($scope.countries,{isNPSignatory:true}).length;
+                        $scope.nonParty = _.where($scope.countries,{isNPParty:false}).length;
+
+                    });
+
+                    $scope.updateMap = function(type){
+
+                         $scope.type = type;
+                         if(type=='party')
+                             $scope.searchFilter=commonjs.isNPParty;
+                         else if(type=='signatory')
+                             $scope.searchFilter=commonjs.isSignatory;
+                         else if(type=='nonParties')
+                             $scope.searchFilter=function(entity){ return !commonjs.isNPParty(entity) && !commonjs.isSignatory(entity);};
+                         else if(type=='all')
+                             $scope.searchFilter=function(entity){return entity;};
+
+                        var mapData = {'type':type,'searchFilter':$scope.searchFilter};
+                        if($scope.onStatusClick)
+                            $scope.onStatusClick({data:mapData});
+
+                        // $scope.$broadcast('updateMap', {data:{'type':type,'searchFilter':$scope.searchFilter}});
+
+                    }
+
+                    $scope.navigateCountry = function(code){
+                        $location.path('/countries/' + code);
+                    }
+
+
+                }
+            ]
+
+        };
+    });
+});
