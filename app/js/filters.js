@@ -262,17 +262,18 @@ define(["app",'/app/js/common.js'], function (app) {
 				return schame;
 			if(schame.toLowerCase()=="focalpoint"				) return "Focal Point";
 			if(schame.toLowerCase()=="authority"				) return "Competent National Authority";
-			if(schame.toLowerCase()=="contact"				) return "Contact";
-			if(schame.toLowerCase()=="database"				) return "National Website or Database";
-			if(schame.toLowerCase()=="resource"				) return "Virtual Library Resource";
-			if(schame.toLowerCase()=="organization"			) return "Organization";
-			if(schame.toLowerCase()=="measure" 				) return "Legislative, Administrative or Policy Measures";
+			if(schame.toLowerCase()=="contact"					) return "Contact";
+			if(schame.toLowerCase()=="database"					) return "National Website or Database";
+			if(schame.toLowerCase()=="resource"					) return "Virtual Library Resource";
+			if(schame.toLowerCase()=="organization"				) return "Organization";
+			if(schame.toLowerCase()=="measure" 					) return "Legislative, Administrative or Policy Measures";
 			if(schame.toLowerCase()=="abscheckpoint"			) return "Checkpoint";
-			if(schame.toLowerCase()=="abscheckpointcommunique") return "Checkpoint Communiqué";
+			if(schame.toLowerCase()=="abscheckpointcommunique"	) return "Checkpoint Communiqué";
 			if(schame.toLowerCase()=="abspermit"				) return "Internationally Recognized Certificate of Compliance";
-            if(schame.toLowerCase()=="meetingdocument"		) return "Meeting Document";
-            if(schame.toLowerCase()=="pressrelease"			) return "Press Release";
-			if(schame.toLowerCase()=="news"					) return "News";
+            if(schame.toLowerCase()=="meetingdocument"			) return "Meeting Document";
+            if(schame.toLowerCase()=="pressrelease"				) return "Press Release";
+			if(schame.toLowerCase()=="news"						) return "News";
+			if(schame.toLowerCase()=="absnationalreport"		) return "National Report";
 
 
 			return schame;
@@ -291,17 +292,19 @@ define(["app",'/app/js/common.js'], function (app) {
 				return schame;
 			if(schame.toLowerCase()=="focalpoint"				) return "Focal Points";
 			if(schame.toLowerCase()=="authority"				) return "Competent National Authorities";
-			if(schame.toLowerCase()=="contact"				) return "Contact";
-			if(schame.toLowerCase()=="database"				) return "National Websites or Databases";
-			if(schame.toLowerCase()=="resource"				) return "Virtual Library Resources";
-			if(schame.toLowerCase()=="organization"			) return "Organizations";
-			if(schame.toLowerCase()=="measure" 				) return "Legislative, Administrative or Policy Measures";
+			if(schame.toLowerCase()=="contact"					) return "Contact";
+			if(schame.toLowerCase()=="database"					) return "National Websites or Databases";
+			if(schame.toLowerCase()=="resource"					) return "Virtual Library Resources";
+			if(schame.toLowerCase()=="organization"				) return "Organizations";
+			if(schame.toLowerCase()=="measure" 					) return "Legislative, Administrative or Policy Measures";
 			if(schame.toLowerCase()=="abscheckpoint"			) return "Checkpoints";
-			if(schame.toLowerCase()=="abscheckpointcommunique") return "Checkpoint Communiqués";
+			if(schame.toLowerCase()=="abscheckpointcommunique"	) return "Checkpoint Communiqués";
 			if(schame.toLowerCase()=="abspermit"				) return "Internationally Recognized Certificates of Compliance";
-            if(schame.toLowerCase()=="meetingdocument"		) return "Meeting Documents";
-            if(schame.toLowerCase()=="pressrelease"			) return "Press Releases";
-			if(schame.toLowerCase()=="news"					) return "News";
+            if(schame.toLowerCase()=="meetingdocument"			) return "Meeting Documents";
+            if(schame.toLowerCase()=="pressrelease"				) return "Press Releases";
+			if(schame.toLowerCase()=="news"						) return "News";
+			if(schame.toLowerCase()=="absnationalreport"		) return "National Reports";
+
 
 
 			return schame;
@@ -322,13 +325,14 @@ define(["app",'/app/js/common.js'], function (app) {
 			//if(schame.toLowerCase()=="focalpoint"				) return "ABS National Focal Point";
 			if(schame.toLowerCase()=="authority"				) return "mdi-action-account-box";
 			//if(schame.toLowerCase()=="contact"				) return "Contact";
-			if(schame.toLowerCase()=="database"				) return "mdi-file-folder";
-			if(schame.toLowerCase()=="resource"				) return "mdi-editor-insert-drive-file";
+			if(schame.toLowerCase()=="database"					) return "mdi-file-folder";
+			if(schame.toLowerCase()=="resource"					) return "mdi-editor-insert-drive-file";
 			//if(schame.toLowerCase()=="organization"			) return "Organization";
-			if(schame.toLowerCase()=="measure" 				) return "mdi-action-stars";
+			if(schame.toLowerCase()=="measure" 					) return "mdi-action-stars";
 			if(schame.toLowerCase()=="abscheckpoint"			) return "mdi-action-verified-user";
-			if(schame.toLowerCase()=="abscheckpointcommunique") return "mdi-communication-message";
+			if(schame.toLowerCase()=="abscheckpointcommunique"	) return "mdi-communication-message";
 			if(schame.toLowerCase()=="abspermit"				) return "mdi-action-bookmark";
+			if(schame.toLowerCase()=="absnationalreport"		) return "mdi-file-folder";
 			//if(schame.toLowerCase()=="meetingdocument"		) return "Meeting Document";
 			//if(schame.toLowerCase()=="pressrelease"			) return "Press Release";
 			//if(schame.toLowerCase()=="news"					) return "News";
@@ -366,6 +370,7 @@ define(["app",'/app/js/common.js'], function (app) {
         	if(schame.toLowerCase() =="pressrelease"			) return "PR";
             if(schame.toLowerCase() =="meetingdocument"    		) return "MTD";
 			if(schame.toLowerCase() =="news"					) return "NWS";
+			if(schame.toLowerCase() =="absnationalreport"		) return "NR";
 
 
 			return schame;
@@ -384,37 +389,39 @@ define(["app",'/app/js/common.js'], function (app) {
 			if(!schame)
 				return schame;
 
-			if(schame.toLowerCase()=="focalpoint"				    ) return "FP";
-			if(schame.toLowerCase()=="authority"				    ) return "CNA";
-			if(schame.toLowerCase()=="contact"				        ) return "CON";
-			if(schame.toLowerCase()=="database"				        ) return "NDB";
-			if(schame.toLowerCase()=="resource"				        ) return "VLR";
-			if(schame.toLowerCase()=="organization"			        ) return "ORG";
-			if(schame.toLowerCase()=="measure" 				        ) return "MSR";
-			if(schame.toLowerCase()=="abscheckpoint"			    ) return "CP";
-			if(schame.toLowerCase()=="abscheckpointcommunique"      ) return "CPC";
-			if(schame.toLowerCase()=="abspermit"				    ) return "IRCC";
-            if(schame.toLowerCase()=="statement"				    ) return "ST";
-        	if(schame.toLowerCase()=="notification"			        ) return "NT";
-        	if(schame.toLowerCase()=="meeting"				) return "MT";
-        	if(schame.toLowerCase()=="pressrelease"			) return "PR";
-			if(schame.toLowerCase() =="news"					) return "NWS";
+			if(schame.toLowerCase()=="focalpoint"				) return "FP";
+			if(schame.toLowerCase()=="authority"				) return "CNA";
+			if(schame.toLowerCase()=="contact"				   	) return "CON";
+			if(schame.toLowerCase()=="database"				   	) return "NDB";
+			if(schame.toLowerCase()=="resource"				   	) return "VLR";
+			if(schame.toLowerCase()=="organization"			   	) return "ORG";
+			if(schame.toLowerCase()=="measure" 				   	) return "MSR";
+			if(schame.toLowerCase()=="abscheckpoint"			) return "CP";
+			if(schame.toLowerCase()=="abscheckpointcommunique" 	) return "CPC";
+			if(schame.toLowerCase()=="abspermit"				) return "IRCC";
+            if(schame.toLowerCase()=="statement"				) return "ST";
+        	if(schame.toLowerCase()=="notification"			   	) return "NT";
+        	if(schame.toLowerCase()=="meeting"					) return "MT";
+        	if(schame.toLowerCase()=="pressrelease"				) return "PR";
+			if(schame.toLowerCase()=="news"						) return "NWS";
+			if(schame.toLowerCase()=="absnationalreport"		) return "NR";
 
 			if(schame.toUpperCase()=="NWS"				        ) return "news";
             if(schame.toUpperCase()=="FP"				        ) return "focalPoint";
-			if(schame.toUpperCase()=="CNA"				    ) return "authority";
-			if(schame.toUpperCase()=="CON"				    ) return "contact";
-			if(schame.toUpperCase()=="NDB"				    ) return "database";
-			if(schame.toUpperCase()=="VLR"				    ) return "resource";
-			if(schame.toUpperCase()=="ORG"			        ) return "organization";
-			if(schame.toUpperCase()=="MSR" 				    ) return "measure";
-			if(schame.toUpperCase()=="CP"			            ) return "absCheckpoint";
-			if(schame.toUpperCase()=="CPC"                    ) return "absCheckpointCommunique";
-			if(schame.toUpperCase()=="IRCC"				    ) return "absPermit";
+			if(schame.toUpperCase()=="CNA"				    	) return "authority";
+			if(schame.toUpperCase()=="CON"				    	) return "contact";
+			if(schame.toUpperCase()=="NDB"				    	) return "database";
+			if(schame.toUpperCase()=="VLR"				    	) return "resource";
+			if(schame.toUpperCase()=="ORG"			        	) return "organization";
+			if(schame.toUpperCase()=="MSR" 				    	) return "measure";
+			if(schame.toUpperCase()=="CP"			           	) return "absCheckpoint";
+			if(schame.toUpperCase()=="CPC"                    	) return "absCheckpointCommunique";
+			if(schame.toUpperCase()=="IRCC"				    	) return "absPermit";
             if(schame.toUpperCase()=="ST"				        ) return "statement";
         	if(schame.toUpperCase()=="NT"			            ) return "notification";
         	if(schame.toUpperCase()=="MT"				        ) return "meeting";
         	if(schame.toUpperCase()=="PR"			            ) return "pressRelease";
+			if(schame.toUpperCase()=="NR"						) return "absNationalReport";
 
 			return schame;
 		};

@@ -81,6 +81,7 @@ background-color:#eee!important;
         <td>
 
         <span ng-show="isPublished(record)">
+            <i ng-class="{'mdi-action-account-box':record.metadata.schema=='absNationalReport', 'color-published-green':isPublished(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
             <i ng-class="{'mdi-action-account-box':record.metadata.schema=='authority', 'color-published-green':isPublished(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
             <i ng-class="{'mdi-action-verified-user':record.metadata.schema=='absCheckpoint', 'color-published-green':isPublished(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
             <i ng-class="{'mdi-action-stars':record.metadata.schema=='measure', 'color-published-green':isPublished(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
@@ -90,6 +91,7 @@ background-color:#eee!important;
             <i ng-class="{'mdi-editor-insert-drive-file':record.metadata.schema=='resource', 'color-published-green':isPublished(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
         </span>
         <span ng-show="(isDraft(record) || isRequest(record))">
+            <i ng-class="{'mdi-action-account-box':record.metadata.schema=='absNationalReport', 'color-litegrey':isDraft(record) && !isRequest(record), 'color-red':isRequest(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
             <i ng-class="{'mdi-action-account-box':record.metadata.schema=='authority', 'color-litegrey':isDraft(record) && !isRequest(record), 'color-red':isRequest(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
             <i ng-class="{'mdi-action-verified-user':record.metadata.schema=='absCheckpoint', 'color-litegrey':isDraft(record) && !isRequest(record), 'color-red':isRequest(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
             <i ng-class="{'mdi-action-stars':record.metadata.schema=='measure', 'color-litegrey':(isDraft(record) && !isRequest(record)), 'color-red':isRequest(record)}" style="font-size:16pt;position:relative;top:3px;"></i>

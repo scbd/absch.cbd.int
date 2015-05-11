@@ -139,6 +139,7 @@
                         <div class="btn-commonformat well" ng-class="{ 'btn-commonformat-selected' : document_type==type ,'btn-commonformat-reference-selected' : document_type=='resource' && document_type==type}">
                           <div class="btn-commonformat-national" ng-class="{'btn-commonformat-reference':document_types[type].abbreviation=='VLR'}">
 
+                              <i ng-class="{'mdi-file-folder':document_types[type].abbreviation=='NR'}" style="font-size:16pt;position:relative;top:3px;"></i>
                               <i ng-class="{'mdi-action-account-box':document_types[type].abbreviation=='CNA'}" style="font-size:16pt;position:relative;top:3px;"></i>
                               <i ng-class="{'mdi-action-verified-user':document_types[type].abbreviation=='CP'}" style="font-size:16pt;position:relative;top:3px;"></i>
                               <i ng-class="{'mdi-action-stars':document_types[type].abbreviation=='MSR'}" style="font-size:16pt;position:relative;top:3px;"></i>

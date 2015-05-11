@@ -3,7 +3,7 @@
 define(['app', 'extended-route-provider','authentication', 'services', 'filters', 'storage', 'workflows', 'realm-configuration', 'user-notifications'], function (app) {
 
      app.value("realm", {value:"ABS"});
-    app.value("schemaTypes", [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "resource" ]);
+    app.value("schemaTypes", [ "absNationalReport", "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "resource" ]);
 
     app.config(['extendedRouteProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
           $locationProvider.html5Mode(true);
