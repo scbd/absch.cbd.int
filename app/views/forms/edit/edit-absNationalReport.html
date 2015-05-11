@@ -1,0 +1,1113 @@
+﻿<div class="well no-shadow thin-border" style="margin-top:20px;" ng-controller="editAbsNationalReport"
+ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart="startTour">
+
+  <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
+
+  <div class="registerpage-content">
+
+    <div ng-show="msg" class="alert alert-success alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="msg=''">&times;</button>
+      <strong>{{msg}}</strong>
+    </div>
+
+    <div class="alert alert-error" ng-show="hasError()">
+      <strong>Error as occured...</strong>
+      <div>{{error}}</div>
+    </div>
+
+    <div ng-show="isLoading()">
+        <i class="fa fa-spinner fa-spin"></i> Loading...
+    </div>
+
+    <div ng-show="!isLoading() && status!='hidden'">
+    <div workflow-std-buttons document="getCleanDocument()" languages="document.header.languages"  hide-timer="false"/>
+
+    <div class="col-lg-10 col-md-8 col-sm-7 col-xs-12">
+        <ul class="pagination">
+            <li ng-class="{ disabled: tab=='edit'}"><a href="" ng-click="tab=prevTab">&laquo;  </a></li>
+            <li ng-class="{ active  : tab=='edit'}"><a href="" ng-click="tab='edit'">Part 1</a></li>
+            <li ng-class="{ active  : tab=='part2'}"><a href="" ng-click="tab='part2'">Part 2</a></li>
+            <li ng-class="{ active  : tab=='part3'}"><a href="" ng-click="tab='part3'">Part 3</a></li>
+            <li ng-class="{ active  : tab=='part4'}"><a href="" ng-click="tab='part4'">Part 4</a></li>
+            <li ng-class="{ active  : tab=='part5'}"><a href="" ng-click="tab='part5'">Part 5</a></li>
+            <li ng-class="{ active  : tab=='part6'}"><a href="" ng-click="tab='part6'">Part 6</a></li>
+            <li ng-class="{ active  : tab=='part7'}"><a href="" ng-click="tab='part7'">Part 7</a></li>
+            <li ng-class="{ active  : tab=='part8'}"><a href="" ng-click="tab='part8'">Part 8</a></li>
+            <li ng-class="{ active  : tab=='part9'}"><a href="" ng-click="tab='part9'">Part 9</a></li>
+            <li ng-class="{ active  : tab=='part10'}"><a href="" ng-click="tab='part10'">Part 10</a></li>
+            <li ng-class="{ active  : tab=='part11'}"><a href="" ng-click="tab='part11'">Part 11</a></li>
+            <li ng-class="{ active  : tab=='part12'}"><a href="" ng-click="tab='part12'">Part 12</a></li>
+            <li ng-class="{ active  : tab=='part13'}"><a href="" ng-click="tab='part13'">Part 13</a></li>
+            <li ng-class="{ active  : tab=='part14'}"><a href="" ng-click="tab='part14'">Part 14</a></li>
+            <li ng-class="{ disabled: tab=='part14'}"><a href="" ng-click="tab=nextTab">&raquo;</a></li>
+        </ul>
+    </div>
+
+
+		<form name="editForm" class="editForm" style="margin-top:10px">
+			<!-- <div xng-show="tab=='edit'" xkm-tab="edit"> -->
+
+
+				<div ng-show="tab=='edit'" km-tab="edit">
+    				<legend>General Information</legend>
+    				<div class="row">
+    					<div class="col-xs-12">
+    						<div class="km-control-group" name="government" required caption="1. Country">
+                                <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
+    						</div>
+                            <button ng-click="logDocument()">Test</button>
+    					</div>
+    				</div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" name="contact" caption="2. Contact person">
+                                <field-embed-contact ng-model="document.contact" locales="$parent.document.header.languages" name="contact" caption="Select or add a contact »"></field-embed-contact>
+                            </div>
+                        </div>
+                    </div>
+
+				</div>
+
+                <div km-tab="part2">
+    				<legend>Institutional structures for the implementation of the Protocol</legend>
+    				<div class="row">
+    					<div class="col-xs-12">
+                            <div class="km-control-group" required name="question3" caption="3. Has your country made the information available to the ABS Clearing-House as provided in Article 14.2?">
+                                <div class="km-yes-no" name="question3" ng-model="document.question3.answer"></div>
+                            </div>
+                            <div class="km-control-group" name="question3Challenges" caption="">
+                                <div ng-show="!isQ3Yes(document.question3.answer)">
+                                    <strong>Please provide a summary of the main difficulties and challenges encountered and answer all the following questions.</strong>
+                                    <div km-textbox-ml rows=4 name="question3Challenges" ng-model="document.question3.challenges" locales="document.header.languages" placeholder=""></div>
+                                </div>
+                            </div>
+    					</div>
+    				</div>
+
+                    <div class="row">
+    					<div class="col-xs-12">
+                            <div class="km-control-group" required name="question4" caption="4. Has your country taken legislative, administrative and policy measures on ABS?">
+                                <div ng-disabled="isQ3Yes(document.question3.answer)" class="km-yes-no" name="question4" ng-model="document.question4.answer" ng-click="isQ4Yes(document.question4.answer)"></div>
+                            </div>
+                            <div ng-show="document.question4.answer" class="km-control-group" name="question4AdditionalInfo" caption="">
+                                <strong>Please provide additional information.</strong>
+                                <div km-textbox-ml rows=4 name="question4AdditionalInfo" ng-model="document.question4.additionalInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+
+                            <div class="km-control-group" name="question4Challenges" caption="">
+                                <strong>Please provide a summary of the main difficulties and challenges encountered and answer all the following questions.</strong>
+                                <div km-textbox-ml rows=4 name="question4Challenges" ng-model="document.question4.challenges" locales="document.header.languages" placeholder=""></div>
+                            </div>
+    					</div>
+    				</div>
+
+                    <div class="row">
+    					<div class="col-xs-12">
+                            <div class="km-control-group" required name="question5" caption="5. Has your country designated a national focal point as provided in Article 13?">
+                                <div ng-disabled="isQ3Yes(document.question3.answer)" class="km-yes-no" name="question5" ng-model="document.question5.answer"></div>
+                            </div>
+                            <div class="km-control-group" name="question5Challenges" caption="">
+                                <strong>Please provide a summary of the main difficulties and challenges encountered and answer all the following questions.</strong>
+                                <div km-textbox-ml rows=4 name="question5Challenges" ng-model="document.question5.challenges" locales="document.header.languages" placeholder=""></div>
+                            </div>
+
+                            <div ng-show="!isQ3Yes(document.question3.answer)" class="km-control-group" name="question5FurtherInfo" caption="">
+                                <strong>Please provide further information.</strong>
+                                <div km-textbox-ml rows=4 name="question5FurtherInfo" ng-model="document.question5.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+    					</div>
+    				</div>
+
+                    <div class="row">
+    					<div class="col-xs-12">
+                            <div class="km-control-group" required name="question6" caption="6. Has your country designated one or more competent national authorities as provided in Article 13?">
+                                <div ng-disabled="isQ3Yes(document.question3.answer)" class="km-yes-no" name="question5" ng-model="document.question6.answer"></div>
+                            </div>
+                            <div class="km-control-group" name="question6Challenges" caption="">
+                                <strong>Please provide a summary of the main difficulties and challenges encountered and answer all the following questions.</strong>
+                                <div km-textbox-ml rows=4 name="question6Challenges" ng-model="document.question6.challenges" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                            <div  ng-show="!isQ3Yes(document.question3.answer)" class="km-control-group" name="question6FurtherInfo" caption="">
+                                <strong>Please provide further information.</strong>
+                                <div km-textbox-ml rows=4 name="question6FurtherInfo" ng-model="document.question6.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+    					</div>
+    				</div>
+
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question7" caption="7. Has your country made available to the ABS Clearing-House permits or their equivalent issued at the time of access as evidence of the decision to grant prior informed consent (PIC) and of the establishment of mutually agreed terms (MAT)?">
+                                <div class="checkbox">
+                                    <label>
+                                      <input ng-disabled="isQ3Yes(document.question3.answer)" type="checkbox" ng-model="document.question7.notApplicable" ng-change="Q7YesNoClear()">Not applicable, since no access requirement are in place
+                                    </label>
+                                </div>
+                                <div ng-disabled="isQ3Yes(document.question3.answer) || document.question7.notApplicable" class="km-yes-no" name="question7" ng-model="document.question7.answer"></div>
+                            </div>
+                            <div class="km-control-group" name="question7Challenges" caption="">
+                                <strong>Please provide a summary of the main difficulties and challenges encountered and answer all the following questions.</strong>
+                                <div km-textbox-ml rows=4 name="question7Challenges" ng-model="document.question7.challenges" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                            <div  ng-show="!isQ3Yes(document.question3.answer)" class="km-control-group" name="question7FurtherInfo" caption="">
+                                <strong>Please provide further information.</strong>
+                                <div km-textbox-ml rows=4 name="question7FurtherInfo" ng-model="document.question7.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question8" caption="8.	Has your country made available to the ABS Clearing-House permits or their equivalent for the constitution of an internationally recognized certificate of compliance in accordance with Article 17.2?">
+                                <div class="checkbox">
+                                    <label><input type="checkbox" ng-model="document.question8.notApplicable">Not applicable, since no access requirement are in place</label>
+                                </div>
+                                <div ng-disabled="Q8YesNoClear()" class="km-yes-no" name="question8" ng-model="document.question8.answer"></div>
+                            </div>
+                            <div class="km-control-group" name="question8FurtherInfo" caption="">
+                                <strong>Please provide further information.</strong>
+                                <div km-textbox-ml rows=4 name="question8FurtherInfo" ng-model="document.question8.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question9" caption="9. Has your country designated one or more checkpoints as provided in Article 17?">
+                                <div class="km-yes-no" name="question9" ng-model="document.question9.answer"></div>
+                            </div>
+                            <div class="km-control-group" name="question9Challenges" caption="">
+                                <strong>Please provide a summary of the main difficulties and challenges encountered and answer all the following questions.</strong>
+                                <div km-textbox-ml rows=4 name="question9Challenges" ng-model="document.question9.challenges" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                            <div class="km-control-group" name="question9FurtherInfo" caption="">
+                                <strong>Please provide further information.</strong>
+                                <div km-textbox-ml rows=4 name="question9FurtherInfo" ng-model="document.question9.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" name="question10" caption="10. Additional information">
+                                <strong>Please provide a summary of the main difficulties and challenges encountered and answer all the following questions.</strong>
+                                <div km-textbox-ml rows=4 name="question10" ng-model="document.question10.challenges" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                            <div class="km-control-group" name="question10RelevantDocuments" caption="Any other relevant documents">
+                                <div km-link name="question10RelevantDocuments" ng-model="document.question10.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div km-tab="part3">
+                    <legend>Legislative, administrative or policy measures on access and benefit-sharing (ABS measures)</legend>
+                    <legend>Access to genetic resources (Article 6)</legend>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question11" caption="11. Is access to genetic resources subject to PIC as provided in Article 6.1?">
+                                <div class="km-yes-no" name="question11" ng-model="document.question11.answer"></div>
+                            </div>
+
+                            <div class="km-control-group" name="question11Challenges" caption="">
+                                <div ng-show="!isQ11Yes(document.question11.answer)">
+                                    <strong>Please provide further information including indicating if there is any other system in place in relation to access to genetic resources.</strong>
+                                    <div km-textbox-ml rows=4 name="question11Challenges" ng-model="document.question11.challenges" locales="document.header.languages" placeholder=""></div>
+                                </div>
+                            </div>
+
+                            <div class="km-control-group" name="question11FurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div km-textbox-ml rows=4 name="question11FurtherInfo" ng-model="document.question11.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question12" caption="12. Does your country have fair and non-arbitrary rules and procedures on accessing genetic resources as provided in Article 6.3 (b)?">
+                                <div ng-disabled="!isQ11Yes(document.question11.answer)" class="km-yes-no" name="question12" ng-model="document.question12.answer"></div>
+                            </div>
+                            <div class="km-control-group" name="question12FurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div ng-disabled="!isQ11Yes(document.question11.answer)" km-textbox-ml rows=4 name="question11FurtherInfo" ng-model="document.question12.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question13" caption="13. Does your country provide information on how to apply for PIC as provided in Article 6.3(c)?">
+                                <div ng-disabled="!isQ11Yes(document.question11.answer)" class="km-yes-no" name="question13" ng-model="document.question13.answer"></div>
+                            </div>
+                            <div class="km-control-group" name="question13FurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div ng-disabled="!isQ11Yes(document.question11.answer)" km-textbox-ml rows=4 name="question13FurtherInfo" ng-model="document.question13.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question14" caption="14. Does your country provide for a clear and transparent written decision by a competent national authority as provided in Article 6.3 (d)?">
+                                <div ng-disabled="!isQ11Yes(document.question11.answer)" class="km-yes-no" name="question14" ng-model="document.question14.answer"></div>
+                            </div>
+                            <div class="km-control-group" name="question14FurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div ng-disabled="!isQ11Yes(document.question11.answer)" km-textbox-ml rows=4 name="question14FurtherInfo" ng-model="document.question14.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question15" caption="15. Does your country provide for the issuance at the time of access of a permit or its equivalent as provided in Article 6.3 (e)?">
+                                <div ng-disabled="!isQ11Yes(document.question11.answer)" class="km-yes-no" name="question15" ng-model="document.question15.answer"></div>
+                            </div>
+                            <div class="km-control-group" name="question15FurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div ng-disabled="!isQ11Yes(document.question11.answer)" km-textbox-ml rows=4 name="question15FurtherInfo" ng-model="document.question15.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question16" caption="16. Please provide the number of permits or their equivalents made available through the ABS-Clearing-House since the entry into force of the Protocol for your country.">
+
+                             <div class="input-group col-xs-4"  name="question16.permitsOnAbsChCount">
+                                <input ng-disabled="!isQ11Yes(document.question11.answer)" type="number" name="permitsOnAbsChCount" class="form-control text-right" ng-model="document.queston16.permitsOnAbsChCount">
+                            </div>
+
+                            </div>
+                            <div class="km-control-group" name="question16FurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div ng-disabled="!isQ11Yes(document.question11.answer)" km-textbox-ml rows=4 name="question16FurtherInfo" ng-model="document.question16.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question17" caption="17. Does your country have rules and procedures for requiring and establishing MAT as provided in Article 6.3 (g)?">
+                                <div ng-disabled="!isQ11Yes(document.question11.answer)" class="km-yes-no" name="question17" ng-model="document.question17.answer"></div>
+                            </div>
+                            <div class="km-control-group" name="question17FurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div ng-disabled="!isQ11Yes(document.question11.answer)" km-textbox-ml rows=4 name="question17FurtherInfo" ng-model="document.question17.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question18" caption="18. Benefits received since entry into force of the Protocol for your country from the utilization of:">
+
+                                <div class="checkbox">
+                                    <label><input type="checkbox" ng-model="document.question18.geneticResources.answer" ng-change="Q18Clear()">Genetic resources</label>
+
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" ng-model="document.question18.geneticResources.monetary" ng-change="Q18GeneticResources(document.question18.geneticResources.monetary); Q18ClearInfo()">Monetary benefits</label>
+                                        <div ng-show="document.question18.geneticResources.monetary" km-textbox-ml rows=2 name="" ng-model="document.question18.geneticResources.monetaryInfo" locales="document.header.languages" placeholder=""></div>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" ng-model="document.question18.geneticResources.nonMonetary" ng-change="Q18GeneticResources(document.question18.geneticResources.nonMonetary); Q18ClearInfo()">Non-monetary benefits</label>
+                                        <div ng-show="document.question18.geneticResources.nonMonetary" km-textbox-ml rows=2 name="" ng-model="document.question18.geneticResources.nonMonetaryInfo" locales="document.header.languages" placeholder=""></div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="checkbox">
+                                    <label><input type="checkbox" ng-model="document.question18.tk.answer" ng-change="Q18Clear()">Traditional knowledge associated with genetic resources</label>
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" ng-model="document.question18.tk.monetary" ng-change="Q18TraditionalKnowledge(document.question18.tk.monetary); Q18ClearInfo()">Monetary benefits</label>
+                                        <div ng-show="document.question18.tk.monetary" km-textbox-ml rows=2 name="question18FurtherInfo" ng-model="document.question18.tk.monetaryInfo" locales="document.header.languages" placeholder=""></div>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" ng-model="document.question18.tk.nonMonetary" ng-change="Q18TraditionalKnowledge(document.question18.tk.nonMonetary); Q18ClearInfo()">Non-monetary benefits</label>
+                                        <div ng-show="document.question18.tk.nonMonetary" km-textbox-ml rows=2 name="question18FurtherInfo" ng-model="document.question18.tk.nonMonetaryInfo" locales="document.header.languages" placeholder=""></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="km-control-group" name="question18FurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div km-textbox-ml rows=4 name="question18FurtherInfo" ng-model="document.question18.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" name="question19" caption="19. Additional information">
+                                <strong>Please provide a summary of the main difficulties and challenges encountered and answer all the following questions.</strong>
+                                <div km-textbox-ml rows=4 name="question19" ng-model="document.question19.challenges" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                            <div class="km-control-group" name="question19RelevantDocuments" caption="Any other relevant documents">
+                                <div km-link name="question19RelevantDocuments" ng-model="document.question19.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div km-tab="part4">
+                    <legend>Fair and equitable benefit-sharing (Article 5)</legend>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question20" caption="20. Has your country taken legislative, administrative or policy measures to implement Article 5.1 that provides that benefits arising from the utilization of genetic resources as well as subsequent applications and commercialization are shared with the Party providing such resources that is the country of origin of such resources or a Party that has acquired the genetic resources in accordance with the Convention as provided in Article 5.3?">
+                                <div class="km-yes-no" name="question20" ng-model="document.question20.answer"></div>
+                            </div>
+                            <div class="km-control-group" name="question20FurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div km-textbox-ml rows=4 name="question20FurtherInfo" ng-model="document.question20.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question21" caption="21. Has your country taken legislative, administrative or policy measures with the aim of ensuring that the benefits from the utilization of genetic resources held by indigenous and local communities, in accordance with domestic legislation regarding the established rights of these indigenous and local communities over these genetic resources, are shared with the indigenous and local communities concerned as provided in Article 5.2?">
+                                <div class="km-yes-no" name="question21" ng-model="document.question21.answer"></div>
+                            </div>
+                            <div class="km-control-group" name="question21FurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div km-textbox-ml rows=4 name="question21FurtherInfo" ng-model="document.question21.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question22" caption="22. Has your country taken legislative, administrative or policy measures in order that benefits arising from the utilization of traditional knowledge associated with genetic resources are shared with indigenous and local communities holding such knowledge as provided in Article 5.5?">
+                                <div class="km-yes-no" name="question22" ng-model="document.question22.answer"></div>
+                            </div>
+                            <div class="km-control-group" name="question22FurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div km-textbox-ml rows=4 name="question22FurtherInfo" ng-model="document.question22.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" name="question23" caption="23. Additional information">
+                                <strong>Please provide a summary of the main difficulties and challenges encountered and answer all the following questions.</strong>
+                                <div km-textbox-ml rows=4 name="question23" ng-model="document.question23.challenges" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                            <div class="km-control-group" name="question23RelevantDocuments" caption="Any other relevant documents">
+                                <div km-link name="question23RelevantDocuments" ng-model="document.question23.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div km-tab="part5">
+                    <legend>Compliance with domestic legislation or regulatory requirements on ABS (Article 15 and Article 16) and monitoring the utilization of genetic resources (Article 17)</legend>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question24" caption="24. Has your country taken legislative, administrative or policy measures in order that benefits arising from the utilization of traditional knowledge associated with genetic resources are shared with indigenous and local communities holding such knowledge as provided in Article 5.5?">
+                                <div class="km-yes-no" name="question24" ng-model="document.question24.answer" ng-click="Q24Clear()"></div>
+                            </div>
+                            <div ng-show="document.question24.answer" class="row">
+                                <div class="col-xs-10 col-xs-offset-1">
+                                    <div class="km-control-group" name="question24_measures" caption="Please indicate whether your country has taken measures to address situations of non-compliance with those measures as provided in Article 15.2?">
+                                        <div class="km-yes-no" name="question24_measures" ng-model="document.question24.measures.answer" ng-click="Q24MeasuresClear(document.question24.measures.answer)"></div>
+                                    </div>
+                                    <div ng-show="document.question24.measures.answer" class="km-control-group" name="question24_measures_FurtherInfo" caption="">
+                                        <strong>Please provide further information on the measures taken, including when they entered into force.</strong>
+                                        <div km-textbox-ml rows=4 name="question24_measures_FurtherInfo" ng-model="document.question24.measures.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                                    </div>
+                                    <div ng-show="document.question24.measures.answer" class="km-control-group" name="question24_measures_complianceInfo" caption="">
+                                        <strong>Please provide further information on cases of non-compliance</strong>
+                                        <div km-textbox-ml rows=4 name="question24_measures_complianceInfo" ng-model="document.question24.measures.complianceInfo" locales="document.header.languages" placeholder=""></div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-10 col-xs-offset-1">
+                                    <div class="km-control-group" name="question24_violation" caption="Have there been specific cases in which your country cooperated with other Parties in cases of alleged violation of ABS measures as provided in Article 15.3?">
+                                        <div class="km-yes-no" name="question24_violation" ng-model="document.question24.violation.answer" ng-click="Q24ViolationClear(document.question24.violation.answer)"></div>
+                                    </div>
+                                    <div ng-show="document.question24.violation.answer" class="km-control-group" name="question24FurtherInfo" caption="">
+                                        <strong>Please provide further information</strong>
+                                        <div km-textbox-ml rows=4 name="question24FurtherInfo" ng-model="document.question24.violation.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="km-control-group" name="question24FurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div km-textbox-ml rows=4 name="question24FurtherInfo" ng-model="document.question24.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question25" caption="25. Has your country taken appropriate, effective and proportionate legislative, administrative or policy measures to provide that traditional knowledge associated with genetic resources utilized within your jurisdiction has been accessed in accordance with PIC or approval and involvement of indigenous and local communities and that MAT have been established as required by the domestic ABS legislation or regulatory requirements of the other Party where such indigenous and local communities are located as provided in Article 16.1?">
+                                <div class="km-yes-no" name="question25" ng-model="document.question25.answer" ng-click="Q25Clear(document.question25.answer)"></div>
+                            </div>
+                            <div ng-show="document.question25.answer" class="row">
+                                <div class="col-xs-10 col-xs-offset-1">
+                                    <div class="km-control-group" required name="question25_measures" caption="Please indicate whether your country has taken measures to address situations of non-compliance with those measures as provided in Article 16.2?">
+                                        <div class="km-yes-no" name="question25_measures" ng-model="document.question25.measures.answer"></div>
+                                    </div>
+                                    <div class="km-control-group" required name="question25_violation" caption="Has your country cooperated in specific cases of alleged violation of ABS measures as provided in Article 16.3?">
+                                        <div class="km-yes-no" name="question25_violation" ng-model="document.question25.violation.answer"></div>
+                                        <strong>Please provide further information</strong>
+                                        <div km-textbox-ml rows=2 name="question25violationFurtherInfo" ng-model="document.question25.violation.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="km-control-group" name="question25FurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div km-textbox-ml rows=4 name="question25FurtherInfo" ng-model="document.question25.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question26" caption="26. Does your country require users of genetic resources to provide information related to PIC, to the source of the genetic resource, to the establishment of MAT and/or utilization of genetic resources at a designated checkpoint, as appropriate, as provided in Article 17.1 (a)(i) and (ii))?">
+                                <div class="km-yes-no" name="question26" ng-model="document.question26.answer" ng-click="Q26Clear(document.question26.answer)"></div>
+                            </div>
+                            <div ng-show="document.question26.answer" class="row">
+                                <div class="col-xs-10 col-xs-offset-1">
+                                    <strong>Please provide further information</strong>
+                                    <div km-textbox-ml rows=2 name="question26additionalInfo" ng-model="document.question26.additionalInfo" locales="document.header.languages" placeholder=""></div>
+
+                                    <div class="km-control-group" name="question26_measures" caption="Has your country taken measures to address situations of non-compliance?">
+                                        <div class="km-yes-no" name="question26_measures" ng-model="document.question26.measures.answer" ng-click="Q26MeasuresClear(document.question26.measures.answer)"></div>
+
+                                        <div ng-show="document.question26.measures.answer">
+                                            <strong>Please provide further information</strong>
+                                            <div km-textbox-ml rows=2 name="question26additionalInfo" ng-model="document.question26.violation.additionalInfo" locales="document.header.languages" placeholder=""></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="km-control-group" name="question26FurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div km-textbox-ml rows=4 name="question26FurtherInfo" ng-model="document.question26.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question27" caption="27. Has your country provided the information referred to in Article 17.1 (a)(i) to relevant national authorities, to the Party providing PIC and to the ABS Clearing-House as provided in Article 17.1 (a)(iii)?">
+                                <div class="km-yes-no" name="question27" ng-model="document.question27.answer" ng-click="Q27Clear(document.question27.answer)"></div>
+                            </div>
+                            <div ng-show="document.question27.answer" class="row">
+                                <div class="col-xs-10 col-xs-offset-1">
+                                    <div class="km-control-group" name="question27_cc" caption="Has your country made use of the checkpoint communique?">
+                                        <label class="radio-inline"><input type="radio" ng-model="document.question27.cc.option" name="q27Options" id="q27Option1" value="true">Yes</label>
+                                        <label class="radio-inline"><input type="radio" ng-model="document.question27.cc.option" name="q27Options" id="q27Option2" value="false">No</label>
+                                        <label class="radio-inline"><input type="radio" ng-model="document.question27.cc.option" name="q27Options" id="q27Option3" value="other">Other</label>
+                                    </div>
+                                    <div class="km-control-group" name="question27_ccFurtherInfo">
+                                        <strong>Please provide further information</strong>
+                                        <div km-textbox-ml rows=2 name="question27_ccFurtherInfo" ng-model="document.question27.cc.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="km-control-group" name="question27Challenges" caption="">
+                                <strong>Please provide a summary of the main difficulties and challenges</strong>
+                                <div km-textbox-ml rows=4 name="question27Challenges" ng-model="document.question27.challenges" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                            <div class="km-control-group row" name="question27_ccsOnAbsChCount" caption="Number of checkpoint communiques available in the ABS Clearing-House">
+                                <input class="col-xs-2" type="number" name="ccsOnAbsChCount" class="form-control text-right" ng-model="document.queston27.ccsOnAbsChCount">
+                            </div>
+
+                            <div class="km-control-group" name="q27relevantDocuments" caption="Any other relevant documents">
+                                <div km-link name="q27relevantDocuments" ng-model="document.question27.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question28" caption="28. Has your country taken measures to encourage users and providers to include provisions in MAT to share information on the implementation of such terms as provided in Article 17.1(b)?">
+                                <div class="km-yes-no" name="question28" ng-model="document.question28.answer"></div>
+                            </div>
+                            <div class="km-control-group" name="question28FurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div km-textbox-ml rows=4 name="question28FurtherInfo" ng-model="document.question28.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question29" caption="29. Is your country encouraging the use of cost-effective communication tools and systems as provided in Article 17.1 (c)?">
+                                <div class="km-yes-no" name="question29" ng-model="document.question29.answer" ng-click="Q29Clear(ocument.question29.answer)"></div>
+                            </div>
+                            <div ng-show="document.question29.answer" class="km-control-group" name="question29AdditionalInfo" caption="">
+                                <strong>Please provide further information on how your country is encouraging the use of cost-effective communication tools and systems.</strong>
+                                <div km-textbox-ml rows=2 name="question29AdditionalInfo" ng-model="document.question29.additionalInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+
+                            <div class="km-control-group" name="question29FurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div km-textbox-ml rows=4 name="question29FurtherInfo" ng-model="document.question29furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" name="question30" caption="30. Additional information">
+                                <strong>Please provide a summary of the main difficulties and challenges for putting measures in place:</strong>
+                                <div km-textbox-ml rows=4 name="question30" ng-model="document.question30.challenges" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                            <div class="km-control-group" name="question30RelevantDocuments" caption="Any other relevant documents">
+                                <div km-link name="question30RelevantDocuments" ng-model="document.question30.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div km-tab="part6">
+                    <legend>Compliance with mutually agreed terms (Article 18)</legend>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question31" caption="31. Is your country encouraging the inclusion of provisions in MAT to cover dispute resolution as provided in Article 18.1 (a) (b) and (c)?">
+                                <div class="checkbox">
+                                    <label><input type="checkbox" ng-model="document.question31.notApplicable" ng-change="Q31YesNoClear()">Not applicable, since no access requirement are in place</label>
+                                </div>
+                                <div ng-disabled="document.question31.notApplicable" class="km-yes-no" name="question31" ng-model="document.question31.answer"></div>
+                            </div>
+                            <div class="km-control-group" name="question31FurtherInfo" caption="">
+                                <strong>Please provide further information.</strong>
+                                <div km-textbox-ml rows=4 name="question31FurtherInfo" ng-model="document.question31.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question32" caption="32. Does your country ensure that opportunity to seek recourse is available under your legal systems in cases of disputes arising from MAT as provided in Article 18.2?">
+                                <div class="km-yes-no" name="question32" ng-model="document.question32.answer"></div>
+                            </div>
+                            <div class="km-control-group" name="question32FurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div km-textbox-ml rows=4 name="question32FurtherInfo" ng-model="document.question32.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question33" caption="33. Has your country taken measures regarding the following points as provided in Article 18.3?"></div>
+                            <div class="km-control-group" name="question33Justice" caption="Access to justice?">
+                                <div class="km-yes-no" name="question33.justice" ng-model="document.question33.justice.answer"></div>
+                            </div>
+                            <div class="km-control-group" name="question33JusticeFurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div km-textbox-ml rows=4 name="question33JusticeFurtherInfo" ng-model="document.question33.justice.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                            <div class="km-control-group" name="question33Mechanisms" caption="Utilization of mechanisms regarding mutual recognition and enforcement of foreign judgements and arbitral awards?">
+                                <div class="km-yes-no" name="question33.mechanisms" ng-model="document.question33.mechanisms.answer"></div>
+                            </div>
+                            <div class="km-control-group" name="question33MechanismsFurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div km-textbox-ml rows=4 name="question33MechanismsFurtherInfo" ng-model="document.question33.mechanisms.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                       </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" name="question34" caption="34. Additional information">
+                                <strong>Please provide a summary of the main difficulties and challenges.</strong>
+                                <div km-textbox-ml rows=4 name="question34" ng-model="document.question34.challenges" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                            <div class="km-control-group" name="question34RelevantDocuments" caption="Any other relevant documents">
+                                <div km-link name="question34RelevantDocuments" ng-model="document.question34.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div km-tab="part7">
+                    <legend>Special considerations (Article 8)</legend>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question35" caption="35. In the development and implementation of ABS legislation or regulatory requirements has your country:"></div>
+                            <div class="km-control-group" name="question35Research" caption="Created conditions to promote and encourage research which contributes to the conservation and sustainable use of biodiversity including through simplified measures on access for non-commercial research purposes, taking into account the need to address a change of intent for such research as provided in Article 8(a)?">
+                                <div class="km-yes-no" name="question35.research" ng-model="document.question35.research.answer"></div>
+                            </div>
+                            <div class="km-control-group" name="question33ResearchFurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div km-textbox-ml rows=4 name="question33ResearchFurtherInfo" ng-model="document.question35.research.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+
+                            <div class="km-control-group" name="question35Emergencies" caption="Paid due regard to cases of present or imminent emergencies that threaten or damage human, animal or plant health as provided in Article 8(b)?">
+                                <div class="km-yes-no" name="question35.emergencies" ng-model="document.question35.emergencies.answer"></div>
+                            </div>
+                            <div class="km-control-group" name="question35EmergenciesFurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div km-textbox-ml rows=4 name="question35EmergenciesFurtherInfo" ng-model="document.question35.emergencies.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                            <div class="km-control-group" name="question35Access" caption="Taken into consideration the need for expeditious access to genetic resources and expeditious fair and equitable sharing of benefits arising out of the use of such genetic resources, including access to affordable treatments by those in need, especially, in developing countries as provided in Article 8(b)?">
+                                <div class="km-yes-no" name="question35.access" ng-model="document.question35.access.answer"></div>
+                            </div>
+                            <div class="km-control-group" name="question35AccessFurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div km-textbox-ml rows=4 name="question35AccessFurtherInfo" ng-model="document.question35.access.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                            <div class="km-control-group" name="question35Importance" caption="Considered the importance of genetic resources for food and agriculture and their special role for food security as provided in Article 8 (c)?">
+                                <div class="km-yes-no" name="question35.importance" ng-model="document.question35.importance.answer"></div>
+                            </div>
+                            <div class="km-control-group" name="question35ImportanceFurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div km-textbox-ml rows=4 name="question35ImportanceFurtherInfo" ng-model="document.question35.importance.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                       </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" name="question36" caption="36. Additional information">
+                                <strong>Please provide a summary of the main difficulties and challenges for putting measures in place.</strong>
+                                <div km-textbox-ml rows=4 name="question36" ng-model="document.question36.challenges" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                            <div class="km-control-group" name="question36RelevantDocuments" caption="Any other relevant documents">
+                                <div km-link name="question36RelevantDocuments" ng-model="document.question36.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div km-tab="part8">
+                    <legend>Provisions related to indigenous and local communities (Articles 6, 7 and 12)</legend>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question37" caption="37. Does your country have indigenous and local communities?">
+                                <div class="km-yes-no" name="question37" ng-model="document.question37.answer" ng-click="Q37Clear()"></div>
+                            </div>
+                            <div class="km-control-group" name="question37FurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div km-textbox-ml rows=4 name="question37FurtherInfo" ng-model="document.question37.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question38" caption="38. Do indigenous and local communities have the established right to grant access to genetic resources according to your domestic law? (Article 6.2)">
+                                <div ng-disabled="!document.question37.answer" class="km-yes-no" name="question38" ng-model="document.question38.answer"></div>
+                            </div>
+                            <div class="row" ng-show="document.question38.answer">
+                                <div class="col-xs-10 col-xs-offset-1">
+                                    <div class="km-control-group" name="question38AdditionalInfo" caption="">
+                                        <strong>Please provide further information and reference to the domestic law establishing rights of indigenous and local communities to grant access to genetic resources</strong>
+                                        <div km-textbox-ml rows=2 name="question38AdditionalInfo" ng-model="document.question38.additionalInfo" locales="document.header.languages" placeholder=""></div>
+                                    </div>
+                                    <div class="km-control-group" name="question38Measures" caption="Does your country have measures in place with the aim of ensuring that the prior informed consent or approval and involvement of indigenous and local communities is obtained as provided in Article 6.2?">
+                                        <div class="km-yes-no" name="question38Measures" ng-model="document.question38.measures.answer"></div>
+                                    </div>
+
+                                    <div class="km-control-group" name="question38AdditionalInfo" caption="">
+                                        <strong>Please provide further information<strong>
+                                        <div km-textbox-ml rows=2 name="question38MeasuresFurtherInfo" ng-model="document.question38.measures.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                                    </div>
+
+                                    <div class="km-control-group" name="question38PIC" caption="Has your country set out criteria and/or process for obtaining prior informed consent or approval and involvement of indigenous and local communities for access to genetic resources in Article 6.3(f)?">
+                                        <div class="km-yes-no" name="question38PIC" ng-model="document.question38.pic.answer"></div>
+                                    </div>
+
+                                    <div class="km-control-group" name="question38AdditionalInfo" caption="">
+                                        <strong>Please provide further information<strong>
+                                        <div km-textbox-ml rows=2 name="question38PICFurtherInfo" ng-model="document.question38.pic.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="km-control-group" name="question38FurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div ng-disabled="!document.question37.answer" km-textbox-ml rows=4 name="question38FurtherInfo" ng-model="document.question38.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question39" caption="39. In accordance with domestic law has your country taken measures with the aim of ensuring that traditional knowledge associated with genetic resources that is held by indigenous and local communities within your country is accessed with the PIC or approval and involvement of these indigenous and local communities and that MAT have been established as provided in Article 7?">
+                                <div ng-disabled="!document.question37.answer" class="km-yes-no" name="question39" ng-model="document.question39.answer"></div>
+                            </div>
+                            <div class="km-control-group" name="question39FurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div ng-disabled="!document.question37.answer" km-textbox-ml rows=4 name="question39FurtherInfo" ng-model="document.question39.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question40" caption="40. In implementing the Protocol and in accordance with your domestic law, is your country taking into consideration indigenous and local communities’ customary laws, community protocols and procedures with respect to traditional knowledge associated with genetic resources as provided in Article 12.1?">
+                                <div ng-disabled="!document.question37.answer" class="km-yes-no" name="question40" ng-model="document.question40.answer"></div>
+                            </div>
+                            <div class="km-control-group" name="question40FurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div ng-disabled="!document.question37.answer" km-textbox-ml rows=4 name="question40FurtherInfo" ng-model="document.question40.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question41" caption="41. Has your country established mechanisms to inform potential users of traditional knowledge associated with genetic resources about their obligations as provided in Article 12.2?">
+                                <div ng-disabled="!document.question37.answer" class="km-yes-no" name="question41" ng-model="document.question41.answer"></div>
+                            </div>
+                            <div class="km-control-group" name="question41FurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div ng-disabled="!document.question37.answer" km-textbox-ml rows=4 name="question41FurtherInfo" ng-model="document.question41.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question42" caption="42. Is your country supporting the development by indigenous and local communities of the following tools as provided in Article 12.3?">
+                                <div class="checkbox">
+                                    <label><input ng-disabled="!document.question37.answer" type="checkbox" ng-model="document.question42.community.answer"><strong>Community protocols</strong></label>
+                                </div>
+                                <div ng-show="document.question42.community.answer" class="km-control-group" name="question42CommunityFurtherInfo" caption="">
+                                    <strong>Please provide further information on how your country is supporting the development of community protocols.</strong>
+                                    <div km-textbox-ml rows=3 name="question42CommunityFurtherInfo" ng-model="document.question42.community.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                                </div>
+
+                                <div class="checkbox">
+                                    <label><input ng-disabled="!document.question37.answer" type="checkbox" ng-model="document.question42.mat.answer"><strong>Minimum requirements for mutually agreed terms</strong></label>
+                                </div>
+                                <div ng-show="document.question42.mat.answer" class="km-control-group" name="question42MATFurtherInfo" caption="">
+                                    <strong>Please provide further information on how your country is supporting the development of minimum requirements mutually agreed terms.</strong>
+                                    <div km-textbox-ml rows=3 name="question42MATFurtherInfo" ng-model="document.question42.mat.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                                </div>
+
+                                <div class="checkbox">
+                                    <label><input ng-disabled="!document.question37.answer" type="checkbox" ng-model="document.question42.mcc.answer"><strong>Model contractual clauses</strong></label>
+                                </div>
+                                <div ng-show="document.question42.mcc.answer" class="km-control-group" name="question42MCCFurtherInfo" caption="">
+                                    <strong>Please provide further information on how your country is supporting the development of model contractual clauses</strong>
+                                    <div km-textbox-ml rows=3 name="question42MCCFurtherInfo" ng-model="document.question42.mcc.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question43" caption="43. Has your country endeavoured not to restrict the customary use and exchange of genetic resources and associated traditional knowledge within and among indigenous and local communities as provided in Article 12.4?">
+                                <div ng-disabled="!document.question37.answer" class="km-yes-no" name="question43" ng-model="document.question43.answer"></div>
+                            </div>
+                            <div class="km-control-group" name="question43FurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div ng-disabled="!document.question37.answer" km-textbox-ml rows=4 name="question43FurtherInfo" ng-model="document.question43.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" name="question44" caption="44. Additional information">
+                                <strong>Please provide a summary of the main difficulties and challenges for putting measures in place in relation to traditional knowledge associated with genetic resources:</strong>
+                                <div ng-disabled="!document.question37.answer" km-textbox-ml rows=4 name="question44" ng-model="document.question44.challenges" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                            <div ng-show="document.question37.answer" class="km-control-group" name="question44RelevantDocuments" caption="Any other relevant documents">
+                                <div km-link name="question44RelevantDocuments" ng-model="document.question44.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div km-tab="part9">
+                    <legend>Contribution to conservation and sustainable use (Article 9)</legend>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question45" caption="45. Has your country endeavoured not to restrict the customary use and exchange of genetic resources and associated traditional knowledge within and among indigenous and local communities as provided in Article 12.4?">
+                                <div class="km-yes-no" name="question45" ng-model="document.question45.answer"></div>
+                            </div>
+                            <div class="km-control-group" name="question45FurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div km-textbox-ml rows=4 name="question45FurtherInfo" ng-model="document.question45.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" name="question46" caption="46. Please indicate how the implementation of the Nagoya Protocol has contributed to conservation and sustainable use of biodiversity in your country:">
+                                <div km-textbox-ml rows=4 name="question46" ng-model="document.question46.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" name="question47" caption="47. Additional information">
+                                <strong>Please provide a summary of the main difficulties and challenges:</strong>
+                                <div km-textbox-ml rows=4 name="question47" ng-model="document.question47.challenges" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                            <div class="km-control-group" name="question47RelevantDocuments" caption="Any other relevant documents">
+                                <div km-link name="question47RelevantDocuments" ng-model="document.question47.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div km-tab="part10">
+                    <legend>Transboundary cooperation (Article 11)</legend>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question48" caption="48. Is your country endeavouring to cooperate, with the involvement of indigenous and local communities concerned, with a view to implementing the Protocol in instances where the same genetic resources are found in situ within the territory of more than one Party as provided in Article 11.1?">
+                                <div class="km-yes-no" name="question48" ng-model="document.question48.answer"></div>
+                            </div>
+                            <div class="km-control-group" name="question48ILCInfo" caption="">
+                                <strong>If your country has indigenous and local communities, please provide further detail their involvement.</strong>
+                                <div km-textbox-ml rows=3 name="question48ILCInfo" ng-model="document.question48.ilcInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                            <div class="km-control-group" name="question48FurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div km-textbox-ml rows=4 name="question48FurtherInfo" ng-model="document.question48.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question49" caption="49. Is your country endeavouring to cooperate with a view to implementing the Protocol in instances where the same traditional knowledge associated with genetic resources is shared by one or more indigenous and local communities in several Parties as provided in Article 11.2?">
+                                <div class="checkbox">
+                                    <label><input type="checkbox" ng-model="document.question49.notApplicable" ng-change="Q49Clear()">Not applicable, since there are no indigenous and local communities in my country</label>
+                                </div>
+                                <div ng-disabled="document.question49.notApplicable" class="km-yes-no" name="question49" ng-model="document.question49.answer"></div>
+                            </div>
+                            <div class="km-control-group" name="question49FurtherInfo" caption="">
+                                <strong>Please provide further information.</strong>
+                                <div km-textbox-ml rows=4 name="question49FurtherInfo" ng-model="document.question49.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" name="question50" caption="50. Additional information">
+                                <strong>Please provide a summary of the main difficulties and challenges:</strong>
+                                <div km-textbox-ml rows=4 name="question50" ng-model="document.question50.challenges" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                            <div class="km-control-group" name="question50RelevantDocuments" caption="Any other relevant documents">
+                                <div km-link name="question50RelevantDocuments" ng-model="document.question50.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div km-tab="part11">
+                    <legend>Model contractual clauses, codes of conduct, guidelines and best practices and/or standards (Article 19 and 20)</legend>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question51" caption="51. Is your country encouraging the development, update and use of model contractual clauses for MAT as provided in Article 19?">
+                                <div class="km-yes-no" name="question51" ng-model="document.question51.answer"></div>
+                            </div>
+                            <div class="km-control-group" name="question51FurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div km-textbox-ml rows=4 name="question51FurtherInfo" ng-model="document.question51.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question52" caption="52. Is your country encouraging the development, update and use of codes of conduct, guidelines and best practices or standards as provided in Article 20?">
+                                <div class="km-yes-no" name="question52" ng-model="document.question52.answer"></div>
+                            </div>
+                            <div class="km-control-group" name="question52FurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div km-textbox-ml rows=4 name="question52FurtherInfo" ng-model="document.question52.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" name="question53" caption="53. Additional information">
+                                <strong>Please provide a summary of the main difficulties and challenges:</strong>
+                                <div km-textbox-ml rows=4 name="question53" ng-model="document.question53.challenges" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                            <div class="km-control-group" name="question53RelevantDocuments" caption="Any other relevant documents">
+                                <div km-link name="question53RelevantDocuments" ng-model="document.question53.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div km-tab="part12">
+    				<legend>Awareness-raising and capacity (Article 21 and 22)</legend>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question54" ng-click="Q54Clear()" caption="54. Has your country taken measures to raise awareness of the importance of genetic resources and traditional knowledge associated with genetic resources and related access and benefit-sharing issues as provided in Article 21?">
+                                <div class="km-yes-no" name="question54" ng-model="document.question54.answer"></div>
+                            </div>
+                            <div class="row" ng-show="document.question54.answer">
+                                <div class="col-xs-10 col-xs-offset-1">
+                                    <div class="km-control-group" name="question54Measures" caption="Has your country taken measures to implement the awareness-raising strategy for the Nagoya Protocol on ABS?">
+                                        <div class="km-yes-no" name="question54Measures" ng-click="Q54Clear()" ng-model="document.question54.measures.answer"></div>
+                                    </div>
+                                    <div ng-show="document.question54.measures.answer" class="km-control-group" name="question54MeasuresFurtherInfo" caption="">
+                                        <strong>PPlease provide a summary of the measures taken.</strong>
+                                        <div km-textbox-ml rows=2 name="question54MeasuresFurtherInfo" ng-model="document.question54.measures.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="km-control-group" name="question54FurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div km-textbox-ml rows=4 name="question54FurtherInfo" ng-model="document.question54.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question55"  caption="55. Has your country taken measures to build and develop capacity and strengthening of human resources and institutional capacities to effectively implement the Protocol as provided in Article 22?">
+                                <div class="km-yes-no" name="question55" ng-click="Q55Clear()" ng-model="document.question55.answer"></div>
+                            </div>
+                            <div class="row" ng-show="document.question55.answer">
+                                <div class="col-xs-10 col-xs-offset-1">
+                                    <div class="km-control-group" name="question55Measures" caption="Has your country taken measures to implement the awareness-raising strategy for the Nagoya Protocol on ABS?">
+                                        <div class="km-yes-no" name="question55Measures" ng-click="Q55Clear()" ng-model="document.question55.measures.answer"></div>
+                                    </div>
+                                    <div ng-show="document.question55.measures.answer" class="km-control-group" name="question55MeasuresFurtherInfo" caption="">
+                                        <strong>Please provide a summary of the measures taken.</strong>
+                                        <div km-textbox-ml rows=2 name="question55MeasuresFurtherInfo" ng-model="document.question55.measures.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="km-control-group" name="question55FurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div km-textbox-ml rows=4 name="question55FurtherInfo" ng-model="document.question55.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question56" caption="56. Has your country received external support for building and developing capacity for the implementation of the Nagoya Protocol?">
+                                <div class="km-yes-no" name="question56" ng-model="document.question56.answer"></div>
+                            </div>
+                            <div class="km-control-group" name="question56FurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div km-textbox-ml rows=4 name="question56FurtherInfo" ng-model="document.question56.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" required name="question57" caption="57. Has your country provided external support for building and developing capacity for the implementation of the Nagoya Protocol?">
+                                <div class="km-yes-no" name="question57" ng-model="document.question57.answer"></div>
+                            </div>
+                            <div class="km-control-group" name="question57FurtherInfo" caption="">
+                                <strong>Please provide further information</strong>
+                                <div km-textbox-ml rows=4 name="question57FurtherInfo" ng-model="document.question57.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" name="question58" caption="58. Additional information">
+                                <strong>Please provide a summary of the main difficulties and challenges:</strong>
+                                <div km-textbox-ml rows=4 name="question58" ng-model="document.question58.challenges" locales="document.header.languages" placeholder=""></div>
+                            </div>
+                            <div class="km-control-group" name="question58RelevantDocuments" caption="Any other relevant documents">
+                                <div km-link name="question58RelevantDocuments" ng-model="document.question58.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+
+
+            <!-- ****************** -->
+            <!-- ****************** -->
+            <!-- ****************** -->
+            <!-- ****************** -->
+            <!-- ****************** -->
+            <!-- ****************** -->
+
+				<div km-tab="ddd">
+    				<legend>Additional information</legend>
+
+    				<div class="row">
+    					<div class="col-xs-12">
+    						<div class="km-control-group" name="address" caption="Any other relevant information">
+    							<div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
+    							<div km-rich-textbox ng-model="document.relevantInformation" rows="2" placeholder="" locales="document.header.languages"></div>
+    						</div>
+    					</div>
+    				</div>
+
+    				<div class="row">
+    					<div class="col-xs-12">
+    						<div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
+    							<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+    						</div>
+    					</div>
+    				</div>
+
+
+    				<legend>Notes</legend>
+    				<div class="row">
+    					<div class="col-xs-12">
+    						<div class="km-control-group" name="notes">
+    							<div class="help-block">The field “Notes” is for personal reference and can be seen only when the record is being edited</div>
+    							<textarea class="form-control" name="notes" ng-model="document.notes" rows="4"></textarea>
+    						</div>
+    					</div>
+    				</div>
+				</div>
+
+			<!-- </div> -->
+		</form>
+
+		<div ng-show="tab=='review'" km-tab="review">
+
+            <div km-document-validation ng-model="validationReport"></div>
+
+            <div class="btn-group" ng-show="reviewDocument.header.languages.length>1">
+                <input type="button" class="btn" ng-class="{'active' : review.locale==locale, 'btn-info' : review.locale==locale}" ng-repeat="locale in document.header.languages" ng-click="$parent.review.locale = locale" value="{{locale | uppercase}}" />
+            </div>
+
+            <div view-database ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></div>
+
+		</div>
+
+        <hr style="margin-top:20px;">
+
+        <div class="row" style="padding-top:20px;">
+            <div class="col-xs-12">
+
+                <div workflow-std-buttons document="getCleanDocument()" languages="document.header.languages" hide-timer="true"/>
+
+                <a ng-click="scrollToTop()" style="padding-top:20px;" class="pull-right">
+                    <i class="glyphicon glyphicon-circle-arrow-up"></i> back to top</a>
+            </div>
+        </div>
+
+
+    </div>
+  </div>
+</div>

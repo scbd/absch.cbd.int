@@ -16,7 +16,7 @@ define(['app',
       schemaTypes, $timeout, $filter, $routeParams, $cookies,bootbox,realm,workflows) {
 
 
-
+	$rootScope.breadcrumbsParam = "asdasd";
 
 
     //TODO: stop using so many globals =P I should inherit the controller scope or something.
@@ -43,6 +43,18 @@ define(['app',
     };
 
     $rootScope.document_types = {
+	  	absNationalReport: {
+			abbreviation: 'NR',
+			title: 'Interim national report on the implementation of the Nagoya Protocol',
+			help: 'This common format is to be used for the Interim national report on the implementation of the Nagoya Protocol.'
+					+ '<br><div class="alert alert-warning" ng-show="help">'
+					+ '  Guidelines for the Interim National Report on the Implementation of the Nagoya Protocol '
+					+ '</div>',
+			tips: [
+				'Remember to upload the document text in its <strong>original language</strong>.',
+				'Please upload <strong>courtesy or official translations</strong> of the measure if available.',
+				],
+		},
       measure: {
         abbreviation: 'MSR',
         title: 'Legislative, administrative or policy measures on access and benefit-sharing',

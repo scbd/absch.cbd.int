@@ -3,7 +3,7 @@
 define(['app', 'extended-route-provider','authentication', 'services', 'filters', 'storage', 'workflows', 'realm-configuration', 'user-notifications'], function (app) {
 
      app.value("realm", {value:"ABS"});
-    app.value("schemaTypes", [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "resource" ]);
+    app.value("schemaTypes", [ "absNationalReport", "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "resource" ]);
 
     app.config(['extendedRouteProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
           $locationProvider.html5Mode(true);
@@ -14,6 +14,7 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
             when('/commonformat',                { templateUrl: '/app/views/common-formats.html',                   label:'Common Formats',                     resolveController: true, resolveUser: true}).
             when('/help',                        { templateUrl: '/app/views/help/help.html',                        label:'Help',                               resolveController: true, resolveUser: true}).
             when('/help/about',                  { templateUrl: '/app/views/help/about/about.html',                 label:'About the ABSCH',                    resolveController: true, resolveUser: true}).
+            when('/about', { redirectTo: '/help/about/absch' }).
             when('/help/presentations/',         { templateUrl: '/app/views/help/presentations/home.html',          label:'Presentations',                      resolveController: true, resolveUser: true}).
             when('/help/accounts',               { templateUrl: '/app/views/help/accounts/accounts.html',           label:'CBD Accounts',                       resolveController: true, resolveUser: true}).
             when('/help/search',                 { templateUrl: '/app/views/help/search/search.html',               label:'Finding Information',                resolveController: true, resolveUser: true}).
@@ -40,173 +41,56 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
             when('/find/simple',                            { templateUrl: '/app/views/find/simple.html',   label:'Simple Search',  resolveController: true, resolveUser: true}).
             when('/find',                                   { redirectTo:'/search'}).
 
+<<<<<<< HEAD
             when('/countries',                   { templateUrl: '/app/views/countries/countries-map.html',       label:'Country Information',      resolveController: true, resolveUser: true}).
             when('/countries/:code',             { templateUrl: '/app/views/countries/profiles.html',       label:'Country Profile', param:'true',      resolveController: true, resolveUser: true}).
+=======
+            when('/countries',                   { templateUrl: '/app/views/countries/profiles.html',       label:'Country Information',                       resolveController: true, resolveUser: true}).
+            when('/countries/:code',             { templateUrl: '/app/views/countries/profiles.html',       label:'Country Information',        param:'true',      resolveController: true, resolveUser: true}).
+>>>>>>> 70e4cb251854d9263717315905b31695d08eadc8
 
             // when('/database/record',             { templateUrl: '/app/views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
             // when('/database/record/:documentID',  { templateUrl: '/app/views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
             // when('/database/record/:documentID/:revision', { templateUrl: '/app/views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
 
 
-            when('/database/:documentID',                           { templateUrl: '/app/views/forms/view/records-id.html'    ,resolveController: true, resolveUser: true}).
-            when('/database/:documentSchema/:documentID',           { templateUrl: '/app/views/forms/view/records-id.html'    ,resolveController: true, resolveUser: true}).
-            when('/database/:documentSchema/:documentID/:revision', { templateUrl: '/app/views/forms/view/records-id.html'    ,resolveController: true, resolveUser: true}).
+            when('/database/:documentID',                           { templateUrl: '/app/views/forms/view/records-id.html', label:'Record',  param:'true',  resolveController: true, resolveUser: true}).
+            when('/database/:documentSchema/:documentID',           { templateUrl: '/app/views/forms/view/records-id.html', label:'Record',  param:'true',  resolveController: true, resolveUser: true}).
+            when('/database/:documentSchema/:documentID/:revision', { templateUrl: '/app/views/forms/view/records-id.html', label:'Record',  param:'true',  resolveController: true, resolveUser: true}).
 
-            when('/register',                    { templateUrl: '/app/views/register.html'                  ,resolveController: true, resolveUser: true}).
-            when('/register/tasks/:id',          { templateUrl: '/app/views/tasks/tasks-id.html'            ,resolveController: true, resolveUser: true}).
-            when('/register/tasks/:id/:activity',{ templateUrl: '/app/views/tasks/tasks-id-activity.html'   ,resolveController: true, resolveUser: true}).
-            when('/oauth2/callback',             { templateUrl: '/app/views/oauth2/callback.html'           ,resolveController: true, resolveUser: true}).
-            when('/workshops/lac',               { templateUrl: '/app/views/workshops/lac.html'             ,resolveController: true, resolveUser: true}).
-            when('/workshops/caribbean',         { templateUrl: '/app/views/workshops/caribbean.html'       ,resolveController: true, resolveUser: true}).
+            when('/register',                                           {templateUrl: '/app/views/register.html',                   label:'Submit',  param:'true', resolveController: true, resolveUser: true}).
+            when('/register/tasks/:id',                                 {templateUrl: '/app/views/tasks/tasks-id.html',             label:'Submit',  param:'true', resolveController: true, resolveUser: true}).
+            when('/register/tasks/:id/:activity',                       {templateUrl: '/app/views/tasks/tasks-id-activity.html',    label:'Submit',  param:'true', resolveController: true, resolveUser: true}).
+            when('/register/dashboard',                                 {templateUrl: '/app/views/register/register.html',          label:'Dashboard',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/register/dashboard.html',}).
+            when('/register',                                           {templateUrl: '/app/views/register/register.html',          label:'Submit',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/register/dashboard.html',}).
+            when('/register/requests',                                  {templateUrl: '/app/views/register/register.html',          label:'Requests',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',    type : 'all'}).
+            when('/register/requests/:workflowId',                      {templateUrl: '/app/views/register/register.html',          label:'Requests',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',type : 'all'}).
+            when('/register/requests/:type/:status',                    {templateUrl: '/app/views/register/register.html',          label:'Requests',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',}).
+            when('/register/:document_type',                            {templateUrl: '/app/views/register/register.html',          label:'Submit',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/register/type_document_list.html',}).
+            when('/register/:document_type/new',                        {templateUrl: '/app/views/register/register.html',          label:'New',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/forms/edit/edit--', }).
+            when('/register/:document_type/help',                       {templateUrl: '/app/views/register/register.html',          label:'Submit',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/register/type_document_list.html',}).
+            when('/register/:document_type/:identifier/edit',           {templateUrl: '/app/views/register/register.html',          label:'Edit',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/forms/edit/edit--', }).
+            when('/register/:document_type/:identifier/edit/:tour',     {templateUrl: '/app/views/register/register.html',          label:'Edit',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/forms/edit/edit--',  }).
+            when('/dashboard',                                          {templateUrl: '/app/views/register/register.html',          label:'Submit',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/register/dashboard.html',}).
+
+            when('/workshops/lac',               { templateUrl: '/app/views/workshops/lac.html',            label:'Workshops',            resolveController: true, resolveUser: true}).
+            when('/workshops/caribbean',         { templateUrl: '/app/views/workshops/caribbean.html',      label:'Workshops',        resolveController: true, resolveUser: true}).
+
             //when('/searchforum.shtml',           { templateUrl:'/app/views/about.html#iac'}).
+            when('/oauth2/callback',             { templateUrl: '/app/views/oauth2/callback.html',          resolveController: true, resolveUser: true}).
+            when('/certificate/:documentNumber', { templateUrl: '/app/views/forms/view/records-id.html',    resolveController: true, resolveUser: true}).
 
-            when('/certificate/:documentNumber',{ templateUrl: '/app/views/forms/view/records-id.html'       ,resolveController: true, resolveUser: true}).
-
-            //TODO: rename document_type to something more generic... or make this feature more flexible
-                when('/commonformat', {
-              templateUrl: '/app/views/about/about.html',
-              resolveController: true,
-              resolveUser: true,
-              subTemplateUrl: '/app/views/about/common-formats.html',
-              ignoreSubController: true,
-            }).
-            when('/about', { redirectTo: '/about/absch' }).
-
-            when('/help/presentations/:folder/:document_type', {
-              templateUrl: '/app/views/help/presentations/presentation.html',
-              resolveController: true,
-              resolveUser: true,
-              subTemplateUrl: '/app/views/help/presentations/:folder/-',
-              ignoreSubController: true,
-            }).
-            when('/help/presentations/:folder', { redirectTo: '/help/presentations/:folder/start' }).
-
-
-
-
-
-            when('/dashboard', {
-              templateUrl: '/app/views/register/register.html',
-              resolveController: true,
-              resolveUser: true,
-              subTemplateUrl: '/app/views/register/dashboard.html',
-            }).
-
-            when('/register/dashboard', {
-                templateUrl: '/app/views/register/register.html',
-                resolveController: true,
-                resolveUser: true,
-                subTemplateUrl: '/app/views/register/dashboard.html',
-            }).
-
-            when('/register', {
-              templateUrl: '/app/views/register/register.html',
-              resolveController: true,
-              resolveUser: true,
-              subTemplateUrl: '/app/views/register/dashboard.html',
-            }).
-            // when('/dashboard/:tour', {
-            //   templateUrl: '/app/views/register.html',
-            //   resolveController: true,
-            //   resolveUser: true,
-            //   subTemplateUrl: '/app/views/dashboard.html',
-            // }).
-
-            //  when('/dashboard/completed', {
-            //   templateUrl: '/app/views/register/register.html',
-            //   resolveController: true,
-            //   resolveUser: true,
-            //   subTemplateUrl: '/app/views/tasks/my-completed-tasks.directive.html',
-            // }).
-            //  when('/dashboard/pending', {
-            //   templateUrl: '/app/views/register/register.html',
-            //   resolveController: true,
-            //   resolveUser: true,
-            //   subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',
-            //   type : 'my'
-            // }).
-            // when('/dashboard/mytasks', {
-            //     templateUrl: '/app/views/register/register.html',
-            //     resolveController: true,
-            //     resolveUser: true,
-            //     subTemplateUrl: '/app/views/tasks/my-pending-tasks.directive.html',
-            // }).
-            //
-
-
-            when('/register/requests', {
-                templateUrl: '/app/views/register/register.html',
-                resolveController: true,
-                resolveUser: true,
-                subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',
-                type : 'all'
-            }).
-            when('/register/requests/:workflowId', {
-                templateUrl: '/app/views/register/register.html',
-                resolveController: true,
-                resolveUser: true,
-                subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',
-                type : 'all'
-            }).
-            when('/register/requests/:type/:status', {
-                templateUrl: '/app/views/register/register.html',
-                resolveController: true,
-                resolveUser: true,
-                subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',
-            }).
-
-
-
-
-
-
-
-            when('/contacts', {
-              templateUrl: '/app/views/register/register.html',
-              resolveController: true,
-              resolveUser: true,
-              subTemplateUrl: '/app/views/register/contacts.html',
-            }).
-
-            when('/register/:document_type', {
-              templateUrl: '/app/views/register/register.html',
-              resolveController: true,
-              resolveUser: true,
-              subTemplateUrl: '/app/views/register/type_document_list.html',
-            }).
-
-            when('/register/:document_type/new', {
-              templateUrl: '/app/views/register/register.html',
-              resolveController: true,
-              resolveUser: true,
-              subTemplateUrl: '/app/views/forms/edit/edit--', //filled in through controller
-            }).
-
-            when('/register/:document_type/help', {
-              templateUrl: '/app/views/register/register.html',
-              resolveController: true,
-              resolveUser: true,
-              subTemplateUrl: '/app/views/register/type_document_list.html',
-            }).
-
-             when('/register/:document_type/:identifier/edit', {
-              templateUrl: '/app/views/register/register.html',
-              resolveController: true,
-              resolveUser: true,
-              subTemplateUrl: '/app/views/forms/edit/edit--', //filled in through controller
-            }).
-
-             when('/register/:document_type/:identifier/edit/:tour', {
-              templateUrl: '/app/views/register/register.html',
-              resolveController: true,
-              resolveUser: true,
-              subTemplateUrl: '/app/views/forms/edit/edit--', //filled in through controller
-            }).
-
-            when('/searchforum.shtml',           { redirectTo:'/about/portal10' }).
-
+            when('/commonformat', {templateUrl: '/app/views/about/about.html',resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/about/common-formats.html',ignoreSubController: true,}).
             when('/commonformat',           { redirectTo:'/about/common-formats' }).
 
-            otherwise({redirectTo:'/help/404'});
+            when('/help/presentations/:folder/:document_type', {templateUrl: '/app/views/help/presentations/presentation.html',resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/help/presentations/:folder/-',ignoreSubController: true,}).
+            when('/help/presentations/:folder', { redirectTo: '/help/presentations/:folder/start' }).
+
+            when('/contacts', {templateUrl: '/app/views/register/register.html',resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/register/contacts.html',}).
+
+            when('/searchforum.shtml',      { redirectTo:'/about/portal10' }).
+            when('/commonformat',           { redirectTo:'/about/common-formats' }).
+
+            otherwise({templateUrl: '/app/404.html', label:'404 Error'});
     }]);
 });

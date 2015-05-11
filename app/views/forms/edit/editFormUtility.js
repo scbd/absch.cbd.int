@@ -10,6 +10,7 @@ app.factory("editFormUtility", ["IStorage", "IWorkflows", "$q", "realm","commonj
 		"authority"					: { name : "publishNationalRecord", version : "0.4" },
 		"measure"					: { name : "publishNationalRecord", version : "0.4" },
 		"database"					: { name : "publishNationalRecord", version : "0.4" },
+		"absNationalReport" 		: { name : "publishNationalRecord", version : "0.4" },
 
 		"resource"					: { name : "publishReferenceRecord", version : undefined }
 	};
