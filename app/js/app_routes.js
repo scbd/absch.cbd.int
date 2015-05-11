@@ -41,13 +41,8 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
             when('/find/simple',                            { templateUrl: '/app/views/find/simple.html',   label:'Simple Search',  resolveController: true, resolveUser: true}).
             when('/find',                                   { redirectTo:'/search'}).
 
-<<<<<<< HEAD
             when('/countries',                   { templateUrl: '/app/views/countries/countries-map.html',       label:'Country Information',      resolveController: true, resolveUser: true}).
             when('/countries/:code',             { templateUrl: '/app/views/countries/profiles.html',       label:'Country Profile', param:'true',      resolveController: true, resolveUser: true}).
-=======
-            when('/countries',                   { templateUrl: '/app/views/countries/profiles.html',       label:'Country Information',                       resolveController: true, resolveUser: true}).
-            when('/countries/:code',             { templateUrl: '/app/views/countries/profiles.html',       label:'Country Information',        param:'true',      resolveController: true, resolveUser: true}).
->>>>>>> 70e4cb251854d9263717315905b31695d08eadc8
 
             // when('/database/record',             { templateUrl: '/app/views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
             // when('/database/record/:documentID',  { templateUrl: '/app/views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
