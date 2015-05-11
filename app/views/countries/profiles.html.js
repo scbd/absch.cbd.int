@@ -18,9 +18,9 @@
  ], function(app, _, linqjs) {
 
    app.controller("ProfileController", ["$scope", "authHttp", "$routeParams", "linqjs", "$filter", "realm",
-                "commonjs", "$q", '$element', '$timeout','commonjs','IStorage',
+                "commonjs", "$q", '$element', '$timeout','commonjs','IStorage','$rootScope',
      function($scope, $http, $routeParams, linqjs, $filter, realm, commonjs, $q,
-                $element, $timeout, countriescommonjs, IStorage) {
+                $element, $timeout, countriescommonjs, IStorage,$rootScope) {
 
 
        function resetList(){
@@ -76,6 +76,7 @@
              cache: true
            }).then(function(response) {
              $scope.country = response.data;
+             $rootScope.breadcrumbsParam = $scope.country.name.en;
              $scope.searchText = '';
              $scope.autocompleteData = [];
              if($scope.country)

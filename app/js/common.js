@@ -176,7 +176,7 @@ define(['app', 'underscore'], function(app, underscore) {
 
 			function isNPParty(entity) {
 
-				if(entity.isNPParty!= undefined)
+				if(entity && entity.isNPParty!= undefined)
 					return entity.isNPParty;
 
 				return entity && (!entity.isNPInbetweenParty && (entity.treaties.XXVII8b.instrument == "ratification" ||

@@ -8,8 +8,8 @@ define(['app'], function(app) {
             scope: {
                 //countries: '=countries',
             },
-            controller: ['$scope', 'authHttp', 'realm', '$q', '$filter', '$routeParams', '$timeout', '$element', 'commonjs', '$route',
-                function($scope, $http, realm, $q, $filter, $routeParams, $timeout, $element, commonjs, $route) {
+            controller: ['$scope', 'authHttp', 'realm', '$q', '$filter', '$routeParams', '$timeout', '$element', 'commonjs', '$route','$location',
+                function($scope, $http, realm, $q, $filter, $routeParams, $timeout, $element, commonjs, $route, $location) {
                     var taiwan = "TW";
                     var china = "CN";
                     var denmark = "DK";
@@ -190,14 +190,14 @@ define(['app'], function(app) {
                             code = china
                         if (code == greenland) //greenland  as denmark
                             code = denmark
-
-                        $scope.$emit('loadCountryProfile', {
-                            'data': {
-                                countryCode: code,
-                                lastAction: $scope.lastAction,
-                                searchFilter: $scope.searchFilter
-                            }
-                        });
+                            $timeout(function(){$location.path('/countries/' + code)},1);
+                        // $scope.$emit('loadCountryProfile', {
+                        //     'data': {
+                        //         countryCode: code,
+                        //         lastAction: $scope.lastAction,
+                        //         searchFilter: $scope.searchFilter
+                        //     }
+                        // });
                     }
 
                     function showCountryDetails(event, label, code) {
@@ -324,8 +324,11 @@ define(['app'], function(app) {
                     function getMapIndex(id) {
                         if (!id)
                             id = 1;
-                        // if ($("#jqvmap" + id + "_" + greenland).length == 0)
-                        //   return getMapIndex(id + 1)
+                        //the jvqmap increase its index when map is visisted multiple times
+                        //hence get the index of any country and use it for all others
+                        //TODO: check why
+                        if ($("#jqvmap" + id + "_" + greenland).length == 0)
+                          return getMapIndex(id + 1)
 
                         return id;
                     }
