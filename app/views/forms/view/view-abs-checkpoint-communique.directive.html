@@ -6,7 +6,7 @@
 	</div>
 	<div class="record-body panel-body">
 			<div class="pull-right">
-				<a class="btn btn-primary" ng-href="/database/record/{{document | uniqueID}}"><i class="fa fa-file-pdf-o"></i> Download</a>
+				<a class="btn btn-primary" target="_blank" ng-href="/database/record/{{document | uniqueID}}"><i class="fa fa-file-pdf-o"></i> Download</a>
 			</div>
     	   	<div ng-show="document.government || document.checkpoint">
 				<legend>General information</legend>
@@ -35,7 +35,7 @@
 					</ul>
 				</div>
 			</div>
-			
+
 			<legend>Recipients of the Checkpoint Communiqué</legend>
 			<div class="row"  ng-show="emailList"  >
 				<div class="col-xs-12 col-lg-12" >
@@ -48,7 +48,7 @@
 	                <div ng-repeat="contact in emailList" class="">
 	                    <div ng-class="{'row': ($index+1)%4==0}"> </div>
 	                    <div class="col-xs-4">
-	                        <div class="text km-value">
+	                        <div class="km-value">
 	                            <div view-contact-reference ng-model="contact" locale="locale"></div>
 	                        </div>
 	                    </div>
