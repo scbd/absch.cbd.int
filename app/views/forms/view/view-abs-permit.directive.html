@@ -5,9 +5,10 @@
 		</h4> </div>
 	<div class="record-body panel-body">
 
-			<!-- <a type="button" ng-show="showPdf" target="_blank" class="btn btn-info pull-right" ng-href="https://s3.amazonaws.com/absch.documents/ABSCH-{{document.government.identifier}}-{{document.info.documentID}}-{{document.info.revision}}.pdf">Download the Compliance Certificate</a> -->
-
-
+			<div class="pull-right">
+				<a class="btn btn-primary" ng-href="/database/record/{{document | uniqueID}}"><i class="fa fa-file-pdf-o"></i> Download</a>
+			</div>
+			<br/>
 			<div ng-show="document.title">
 			 	<label>Title</label>
 			 	<div class="km-value">

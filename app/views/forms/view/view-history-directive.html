@@ -8,12 +8,12 @@
 
 <div ng-show="showHistory ">
 			<span ng-show="loading">loading... <i class="fa fa-spin" /></span>
-			<div class="row"  ng-show="showFile && documents"  >
+			<!-- <div class="row"  ng-show="showFile && documents"  >
 				<div class="col-xs-12 col-lg-12" >
 						<div class="alert alert-info" width >NOTE: THE ABS-CH DOES NOT GUARANTEE THAT THE EMAIL HAS BEEN RECEIVED.
 						</div>
 				</div>
-			</div>
+			</div> -->
 
 			<div ng-show="documents">
                 <div class="row-fluid" ng-class='{ tioBorder : showFile}'>
@@ -86,13 +86,12 @@
 					  			</span>
 
                             </div>
-							<div class="col-xs-12 " style="padding-top:10px; color:#999" ng-show="(document.body.responsibleAuthorities ||
+							<!-- <div class="col-xs-12 " style="padding-top:10px; color:#999" ng-show="(document.body.responsibleAuthorities ||
 								document.body.personeToWhomGranted || document.body.geneticRessourceUsers ||
 								document.body.providers || document.body.informedConsents ||
 								document.body.authority) && showFile">
 	                                <span style="font-weight:bold;text-transform:uppercase;"> AN EMAIL HAS BEEN AUTOMATICALLY SENT TO THE FOLLOWING ADDRESS: </span>
-							  		<!-- TODO: need to comma delimit the below list of emails -->
-									<span>
+							  		<span>
 										{{formatEmails(document.body.responsibleAuthorities||[])}}
 										{{formatEmails(document.body.personeToWhomGranted||[])}}
 										{{formatEmails(document.body.geneticRessourceUsers||[])}}
@@ -100,7 +99,7 @@
 									 	{{formatEmails(document.body.informedConsents||[])}}
 										{{formatEmails(document.body.authority||[])}}
 					  				</span>
-                            </div>
+                            </div> -->
                         </div>
 
 				</div>

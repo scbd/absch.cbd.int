@@ -17,22 +17,6 @@ define(['app'], function(app) {
             controller: ['$scope', 'IStorage', "$q", "$route", "$filter", "$timeout",
                 function($scope, storage, $q, $route, $filter, $timeout) {
 
-                    //$scope.$watch('documentID', function(value) {
-                        // if (value && !$scope.documents) {
-                        //     $scope.load(value);
-                        // } else
-                        //     $scope.loading = false;
-                    //});
-
-                    // $scope.$watch('loadDocuments', function(value){
-                    // 	if(value && !$scope.documents){
-                    // 		$scope.load($scope.documentID);
-                    // 	}
-                    // 	else
-                    // 		$scope.loading=false;
-                    // });
-
-
                     //==================================
                     //
                     //==================================

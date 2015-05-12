@@ -18,7 +18,7 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 		{
 			$scope.showPdf = $attr.showPdf === undefined || $attr.showPdf != "false";
 		},
-		controller: ["$scope", "IStorage", "authHttp", "$q","underscore", function ($scope, storage, $http, $q, _)
+		controller: ["$scope", "IStorage", "authHttp", "$q","underscore","realm", function ($scope, storage, $http, $q, _, realm)
 		{
 			$scope.contacts = undefined;
 			$scope.gisMapLayers = null;
@@ -160,6 +160,80 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 						});
 				});
 			};
+
+			$scope.$watch("document", function (oldVal,newVal) {
+				//if (oldVal && oldVal!=oldVal) {
+					getContacts(newVal);
+				//}
+			});
+
+			function getContacts(document){
+				if($scope.emailList)
+					return;
+
+				$scope.emailList = [];
+				if(document.permit){
+						angular.forEach(document.permit, function(permit){
+							$http.get('/api/v2013/documents/' +  permit.identifier, { info:true})
+							.success(function(result){
+								if(result.authority && (result.authority.title_t || result.authority.firstName))
+									$scope.emailList.push(result.authority);
+
+							});
+						});
+				}
+				else if(document.responsibleAuthorities){
+					$scope.emailList.push(document.personeToWhomGranted);
+				}
+				else if(document.originCountries){
+
+					var country = _.map(document.originCountries, function(country){ return country.identifier });
+					var query = "/api/v2013/index/select?fl=id,identifier_s&q=(realm_ss:" + realm.value.toLowerCase() +
+					"+AND+NOT+version_s:*+AND+schema_s:authority+AND+(government_s:" + country.join('+OR government_s:') + "))&rows=50"
+
+					$http.get(query).success(function(res) {
+						var cnaQuery=[]
+						angular.forEach(res.response.docs, function(cna){
+							cnaQuery.push($http.get('/api/v2013/documents/' + cna.identifier_s, {}));
+						});
+						$q.all(cnaQuery).then(function(data){
+							angular.forEach(data, function(document){
+								$scope.emailList.push(document);
+							});
+						})
+					});
+				}
+				if(document.checkpoint){
+					angular.forEach(document.checkpoint, function(checkpoint){
+						if(checkpoint.contactsToInform)
+							angular.forEach(checkpoint.contactsToInform, function(contact){
+								$scope.emailList.push(contact);
+							});
+					});
+				}
+				var government =  document.government.identifier;
+				var query = "/api/v2013/index/select?fl=id,identifier_s,schema_s,title_t,department_EN_t,description_EN_t,email_ss,"+
+				"+organization_EN_t,telephone_s,type_ss,fax_ss,government_CEN_s,addressCountry_s&q=(realm_ss:" + realm.value.toLowerCase() +
+				"+AND+NOT+version_s:*+AND+schema_s:focalPoint+AND+(type_ss:NP-FP+OR+type_ss:ABS-FP)+AND+(government_s:" + government + "))&rows=50";
+
+				$http.get(query).success(function(res) {
+					angular.forEach(res.response.docs, function(nfp){
+							$scope.emailList.push(
+									{
+										type:'person',
+										firstName:nfp.title_t,
+										addressHTML:{en:nfp.description_EN_t.replace(/\n/g, '<br/>')},
+										country: nfp.addressCountry_s,
+										phones:[nfp.telephone_s],
+										faxes:nfp.fax_ss,
+										emails:nfp.email_ss
+									});
+					});
+					console.log(	$scope.emailList);
+				});
+			}
+
+
 		}]
 	};
 }]);

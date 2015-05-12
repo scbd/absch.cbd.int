@@ -31,7 +31,8 @@
 	</div>
 
 	<address style="margin-top: 5px; margin-bottom: 5px">
-		<div class="km-pre">
+		<div >
+			<!-- class="km-pre" -->
 			<span ng-show="document.addressHTML" ng-bind-html="document.addressHTML | lstring:locale"></span>
 			{{document.address | lstring:locale}}</div>
 		{{document.city | lstring:locale}}<span ng-show="document.city && document.state">, </span>
