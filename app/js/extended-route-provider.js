@@ -79,7 +79,10 @@ define(['app', 'angular', 'authentication'], function(app, angular) {
 
                     var realmConfig = _.where(realmConfiguration,{host:$location.$$host});
                     //console.log(realmConfig)
-    				realm.value = realmConfig[0].realm;
+                    if(!realmConfig)
+    				     realm.value = realmConfig[0].realm;
+                    else
+                        realm.value = 'ABS-DEV';
     			}
 
                 var deferred = $q.defer();
