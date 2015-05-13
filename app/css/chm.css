@@ -76,7 +76,7 @@
 }
 
 .container-portal{
-    background: rgba(25, 25, 25, .05);
+    /*background: rgba(25, 25, 25, .05);*/
     min-height:100px;
     color:white;
     padding-top:5px;
