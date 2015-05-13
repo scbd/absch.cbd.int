@@ -19,7 +19,8 @@ define(['app',
 	'./view-history-directive.html.js',
     '/app/js/common.js',
     '/app/views/directives/document-metadata-directive.html.js',
-	'/app/views/forms/view/view-news.directive.html.js'
+	'/app/views/forms/view/view-news.directive.html.js',
+	'/app/views/forms/view/view-abs-national-report.directive.js'
     ], function (app) {
 app.directive('recordLoader', [function () {
 	return {

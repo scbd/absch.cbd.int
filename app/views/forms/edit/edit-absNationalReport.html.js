@@ -1,4 +1,4 @@
-define(['app', '/app/views/forms/edit/edit.js'], function (app) {
+define(['app', '/app/views/forms/edit/edit.js', '/app/views/forms/edit/document-selection-directive.html.js'], function (app) {
 
   app.controller("editAbsNationalReport", ["$scope", "authHttp", "$filter", "$controller", "$location", function ($scope, $http, $filter, $controller,$location) {
     $controller('editController', {$scope: $scope});

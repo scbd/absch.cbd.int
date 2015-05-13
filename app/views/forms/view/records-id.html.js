@@ -1,5 +1,6 @@
 define(['app',
 	'./view-abs-checkpoint.directive.js',
+	'./view-abs-national-report.directive.js',
   './view-abs-checkpoint-communique.directive.js',
   './view-abs-permit.directive.js',
   './view-authority.directive.js',

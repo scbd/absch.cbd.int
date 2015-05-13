@@ -79,6 +79,8 @@
 
 			<div view-news ng-switch-when="news" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
 
+			<div view-abs-national-report ng-switch-when="absNationalReport" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}  hide={{hide}}></div>
+
 			<div ng-switch-default>
 				<div class="text-center"><h1 style="color:#fa6938"><i class="fa fa-spinner fa-spin"></i></h1></div>
 			</div>

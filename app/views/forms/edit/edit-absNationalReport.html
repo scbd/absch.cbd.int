@@ -82,6 +82,11 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                     <div km-textbox-ml rows=4 name="question3Challenges" ng-model="document.question3.challenges" locales="document.header.languages" placeholder=""></div>
                                 </div>
                             </div>
+
+                            <div class="km-control-group" style="margin-bottom:20px;" name="permit" required caption="Links to related documents">
+                                <div document-selection ng-model="document.question3.documentReferenceIDs" government="document.government">
+                            </div>
+
     					</div>
     				</div>
 
@@ -1091,7 +1096,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                 <input type="button" class="btn" ng-class="{'active' : review.locale==locale, 'btn-info' : review.locale==locale}" ng-repeat="locale in document.header.languages" ng-click="$parent.review.locale = locale" value="{{locale | uppercase}}" />
             </div>
 
-            <div view-database ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></div>
+            <div view-abs-national-report ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></div>
 
 		</div>
 
