@@ -173,7 +173,7 @@ define(['app',
                   code: document.government_s.substring(0, 2).toUpperCase()
                 })
                 if (cd.length > 0) {
-                  output.isParty = cd[0].isParty;
+                  output.isNPParty = cd[0].isNPParty;
                   output.isSignatory = cd[0].isSignatory;
                   output.isRatified = cd[0].isRatified;
                   output.isInbetweenParty = cd[0].isInbetweenParty;
