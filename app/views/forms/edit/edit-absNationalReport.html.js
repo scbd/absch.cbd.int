@@ -1,4 +1,4 @@
-define(['app', '/app/views/forms/edit/edit.js', '/app/views/forms/edit/document-selection-directive.html.js'], function (app) {
+define(['app', '/app/views/forms/edit/edit.js' /*, '/app/views/forms/edit/document-selection-directive.html.js' */], function (app) {
 
   app.controller("editAbsNationalReport", ["$scope", "authHttp", "$filter", "$controller", "$location", function ($scope, $http, $filter, $controller,$location) {
     $controller('editController', {$scope: $scope});
@@ -282,6 +282,15 @@ define(['app', '/app/views/forms/edit/edit.js', '/app/views/forms/edit/document-
     //==================================
     //
     //==================================
+    $scope.Q49Clear = function () {
+        if($scope.document && $scope.document.question49 && $scope.document.question49.notApplicable){
+            $scope.document.question49.answer = undefined;
+        }
+    };
+
+    //==================================
+    //
+    //==================================
     $scope.Q54Clear = function () {
         if($scope.document && $scope.document.question54 && !$scope.document.question54.answer){
             $scope.document.question54.measures.answer      = undefined;
@@ -308,20 +317,85 @@ define(['app', '/app/views/forms/edit/edit.js', '/app/views/forms/edit/document-
     };
 
 
+   
+    //==================================
+    //
+    //==================================
+    $scope.Q59Clear = function () {
+        if($scope.document && $scope.document.question59 && !$scope.document.question59.answer){
+            $scope.document.question59.additionalInfo = undefined;
+        }
+    };
 
+    //==================================
+    //
+    //==================================
+    $scope.Q61Clear = function () {
+        if($scope.document && $scope.document.question61 && !$scope.document.question61.answer){
+            $scope.document.question61.additionalInfo = undefined;
+        }
+    };
 
+    //==================================
+    //when NO becomes selected, clear both yes
+    //==================================
+    $scope.Q62Clear = function () {
+        if($scope.document && $scope.document.question62 && $scope.document.question62.no){
+            $scope.document.question62.donor = undefined;
+            $scope.document.question62.receiver = undefined;
+        }
+        //if($scope.document && $scope.document.question62 && ($scope.document.question62.donor || $scope.document.question62.receiver)){
+       //     $scope.document.question62.no = undefined;
+        //}
+    };
 
+    //==================================
+    //when donnor becomes unselected, clear the text box
+    //==================================
+    $scope.Q62ClearDonor = function () {
+        if($scope.document && $scope.document.question62 && !$scope.document.question62.donor.answer){
+            $scope.document.question62.donor.additionalInfo = undefined;
+        }
+    };
 
+    //==================================
+    //where receiver becomes unselected, clear all the selection and text
+    //==================================
+    $scope.Q62ClearReceiver = function () {
+        if($scope.document && $scope.document.question62 && !$scope.document.question62.receiver.answer){
+            $scope.document.question62.receiver.fromParty = undefined;
+            $scope.document.question62.receiver.fromInstitution = undefined;
+        }
+    };
 
+    //==================================
+    //when from other party becomes unselected, clear textbox
+    //==================================
+    $scope.Q62ClearReceiverFromParty = function () {
+        if($scope.document && $scope.document.question62 && $scope.document.question62.receiver && $scope.document.question62.receiver.fromParty && !$scope.document.question62.receiver.fromParty.answer){
+            $scope.document.question62.receiver.fromParty.additionalInfo = undefined;
+        }
+    };
 
+    //==================================
+    //where from institition becomes unselected, clear all the sub-selections and textbox
+    //==================================
+    $scope.Q62ClearReceiverFromInstitution = function () {
+        if($scope.document && $scope.document.question62 && $scope.document.question62.receiver && $scope.document.question62.receiver.fromInstitution && !$scope.document.question62.receiver.fromInstitution.answer){
+            $scope.document.question62.receiver.fromInstitution = undefined;
+        }
+        if($scope.document && $scope.document.question62 && $scope.document.question62.receiver && $scope.document.question62.receiver.fromInstitution && !$scope.document.question62.receiver.fromInstition.other){
+            $scope.document.question62.receiver.fromInstition.otherInfo = undefined;
+        }
+    };
 
 
     //==================================
     //
     //==================================
-    $scope.Q49Clear = function () {
-        if($scope.document && $scope.document.question49 && $scope.document.question49.notApplicable){
-            $scope.document.question49.answer = undefined;
+    $scope.Q63Clear = function () {
+        if($scope.document && $scope.document.question63 && !$scope.document.question63.answer){
+            $scope.document.question63.howmany = undefined;
         }
     };
 
