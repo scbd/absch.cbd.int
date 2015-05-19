@@ -53,8 +53,8 @@ define(["app", "authentication"], function (app) {
             //===========================
             //
             //===========================
-            this.query  = function(query, pageNumber, pageLength) {
-                return $http.get("/api/v2015/user-notifications/", { params : { q : JSON.stringify(query), sk: pageNumber, l: pageLength }, cache:false,ignoreLoadingBar: true }).then(function(resp){
+            this.query  = function(query, pageNumber, pageLength, count) {
+                return $http.get("/api/v2015/user-notifications/", { params : { q : JSON.stringify(query), sk: pageNumber, l: pageLength, c:count }, cache:false,ignoreLoadingBar: true }).then(function(resp){
                     return resp.data;
                 });
             };

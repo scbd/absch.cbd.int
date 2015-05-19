@@ -10,16 +10,16 @@
          </div>-->
        </div>
        <div class="box-body no-padding">
-         <div class="mailbox-controls">           
+         <div class="mailbox-controls">
            <button class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i></button>
            <div class="btn-group">
-             <button class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+             <button class="btn btn-default btn-sm" ng-click="deleteMail()"><i class="fa fa-trash-o"></i></button>
              <button class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
              <button class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
            </div>
            <button class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
            <div class="pull-right">
-             1-50/200
+               {{pageNumber+1}}-{{pageLength * (pageNumber+1)}}/{{mailCount}}
              <div class="btn-group">
                <button class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
                <button class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
@@ -30,15 +30,15 @@
             <div class="alert alert-danger" role="alert" ng-show="errorMessage">
              {{errorMessage}}
           </div>
-           <p ng-if="!(mails).length && !erroMessage" class="lead text-center">No mails here</p>                  
+           <p ng-if="!(mails).length && !erroMessage" class="lead text-center">No mails here</p>
            <table class="table table-hover table-striped" ng-if="(mails).length">
              <tbody>
-               <tr ng-repeat="mail in mails" >
+               <tr ng-repeat="mail in mails" class="notification-item" ng-class="{'notification-read':mail.state=='read','notification-unread':mail.state=='unread' }">
    <!--                           ng-class="{'active': mail.state == 'unread'}"-->
-                 <td><input type="checkbox" /></td>
+                 <td><input type="checkbox" ng-model="mail.mailSelected"/></td>
                  <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
                  <td class="mailbox-name"><a ng-click="messageSelection('mailMessage', mail)">{{mail.createdBy_info.firstName+ ' ' + mail.createdBy_info.lastName}}</a></td>
-                 <td class="mailbox-subject"><b>{{mail.data.subject}}</b> - {{mail.data.message | limitTo:100}}...</td>                          
+                 <td class="mailbox-subject"><b>{{mail.data.subject}}</b> - {{mail.data.message | limitTo:100}}...</td>
                  <td class="mailbox-date">{{mail.createdOn|formatDate}}</td>
                </tr>
              </tbody>
