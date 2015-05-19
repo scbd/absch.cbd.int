@@ -31,7 +31,8 @@ require.config({
         'cbd-forums'            : '../libs/cbd-forums/cbd-forums',
         'angular-storage'       : '../libs/angular-local-storage/dist/angular-local-storage.min',
         'angular-flex'          : '../libs/angular-flex/angular-flex',
-        'ng-breadcrumbs'        : '../libs/ng-breadcrumbs/dist/ng-breadcrumbs'
+        'ng-breadcrumbs'        : '../libs/ng-breadcrumbs/dist/ng-breadcrumbs',
+        'ionsound'              : '../libs/ionsound/js/ion.sound'
     },
     'shim': {
         'angular'                       : { 'deps': ['jquery'], 'exports': 'angular' },

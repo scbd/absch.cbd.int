@@ -1,4 +1,4 @@
-define(['app','underscore'], function(app,_) {
+define(['app','underscore','ionsound'], function(app,_) {
     app.directive('xuserNotifications', function() {
         return {
             restrict: 'EAC',
@@ -30,7 +30,7 @@ define(['app','underscore'], function(app,_) {
                         if ($rootScope.user && $rootScope.user.isAuthenticated) {
                             // if (canQuery) {
                             var queryMyNotifications;
-                            // canQuery = false;
+                            queryMyNotifications = {$or:[{'state': 'read'},{'state': 'unread'}]};
                             if ($scope.notifications) {
                                 var notification = _.first($scope.notifications);
                                 if (notification)
@@ -38,7 +38,8 @@ define(['app','underscore'], function(app,_) {
                                         $and: [{
                                             "createdOn": {
                                                 "$gt": new Date(notification.createdOn).toISOString()
-                                            }
+                                            },
+                                            $or:[{'state': 'read'},{'state': 'unread'}]
                                         }]
                                     };
                             }
@@ -54,6 +55,9 @@ define(['app','underscore'], function(app,_) {
                                         _.each(data, function(message) {
                                             localNotifications.push(message);
                                         });
+
+                                        if(ion)
+                                            ion.sound.play("bell_ring");
                                     } else {
                                         localNotifications = data;
                                     }
@@ -106,7 +110,7 @@ define(['app','underscore'], function(app,_) {
                     //
                     //============================================================
                     $scope.markAsRead = function(notification) {
-                        if (notification) {
+                        if (notification && notification.state =='unread') {
                             userNotifications.update(notification.id, {
                                     'state': 'read'
                                 })
@@ -123,12 +127,12 @@ define(['app','underscore'], function(app,_) {
 
                         return notification && notification.state == 'unread';
                     };
-    	           
+
                     $scope.$on('$destroy', function(evt){
                         //console.log('$destroy');
-                        $timeout.cancel(notificationTimer);    
+                        $timeout.cancel(notificationTimer);
                     });
-                    
+
 //                    $scope.$on('signIn', function(evt,user){
 //                        $timeout(function(){
 //                            console.log('notification after signin')
@@ -140,16 +144,45 @@ define(['app','underscore'], function(app,_) {
                        $timeout.cancel(notificationTimer);
                     });
                     getNotification();
-    	            
+
                     $rootScope.$watch('user', function(newVla,oldVal){
                         //console.log(newVla,oldVal)
                         if(newVla && newVla!=oldVal){
                             console.log('user changed');
                             $timeout.cancel(notificationTimer);
-                            getNotification();   
-                        }                        
+                            getNotification();
+                        }
                     });
-                    
+
+                    $scope.getURL = function(notification){
+                        //console.log(notification)
+                        if(notification.type=='documentNotification')
+                            return '/register/requests/' + notification.data.workflowId;
+                        else
+                            return '/mailbox/' + notification.id;
+                    }
+
+                    $rootScope.$on('onNotificationStatusChanged', function(evt,data){
+                        console.log('onNotificationStatusChanged',data)
+                        var notification = _.first(_.where($scope.notifications, {id:data.id}));
+
+                        if(notification){
+                            notification.state = 'read';
+                        }
+
+                    });
+
+                    ion.sound({
+                        sounds: [
+                            {
+                                name: "bell_ring"
+                            }
+                        ],
+                        volume: 0.5,
+                        path: "/app/libs/ionsound/sounds/",
+                        preload: true
+                    });
+
                 }
             ]
 

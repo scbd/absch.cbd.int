@@ -39,7 +39,15 @@ define(["app", "authentication"], function (app) {
 						return resp.data;
 					});
 			};
-
+			//===========================
+			//
+			//===========================
+			this.cancel = function(id, data) {
+				return $http.delete("/api/v2013/workflows/"+id,{ params : data}).then(
+					function(resp){
+						return resp.data;
+					});
+			};
 			//===========================
 			//
 			//===========================
