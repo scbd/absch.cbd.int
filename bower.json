@@ -35,7 +35,8 @@
     "cbd-forums": "~1.2.6",
     "angular-local-storage": "~0.1.5",
     "angular-flex": "https://github.com/scbd/angular-flex.git",
-    "ng-breadcrumbs": "~0.4.1"
+    "ng-breadcrumbs": "~0.4.1",
+    "ionsound": "~3.0.0"
   },
   "resolutions": {
     "angular": "1.2.18",
