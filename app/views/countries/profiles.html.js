@@ -79,8 +79,18 @@
              $rootScope.breadcrumbsParam = $scope.country.name.en;
              $scope.searchText = '';
              $scope.autocompleteData = [];
-             if($scope.country)
-                $scope.entryIntoForceDate = moment($scope.country.treaties.XXVII8b.deposit).add(90, 'days');
+            
+            $scope.country.isCBDParty = countriescommonjs.isPartyToCBD($scope.country ) || $scope.country.code == 'EU';
+            $scope.country.isNPParty = countriescommonjs.isNPParty($scope.country ) || $scope.country.code == 'EU';
+            $scope.country.isNPSignatory = countriescommonjs.isSignatory($scope.country ) || $scope.country.code == 'EU';
+            $scope.country.isNPRatified = countriescommonjs.isRatified($scope.country ) || $scope.country.code == 'EU';
+            $scope.country.isNPInbetweenParty = moment().diff(moment($scope.country.treaties.XXVII8b.deposit), 'days') < 90;
+
+            if ($scope.country.isNPInbetweenParty)
+                $scope.country.entryIntoForceDate = moment($scope.country.treaties.XXVII8b.deposit).add(90, 'day');
+            else if ($scope.country.isNPParty)
+                $scope.country.entryIntoForceDate = $scope.country.treaties.XXVII8b.deposit;
+             
            });
            //*******************************************************
            var schema = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database"]
