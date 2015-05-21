@@ -1,249 +1,300 @@
 <div>
 
-<style>
-  .red{background-color:#ccc!important;}
-</style>
+    <style>
+        .red {
+            background-color: #ccc!important;
+        }
+    </style>
 
-<link href="/app/css/record.css" rel="stylesheet">
+    <link href="/app/css/record.css" rel="stylesheet">
 
-  <div class="row">
-      <div class="col-xs-10 " id="filter_buttons">
-        <div class="btn-group-sm">
-          <span class="special-font color-grey" style="position:relative;top:3px;font-size:22px;">FILTER</span>
-          <button type="button" ng-click="statusFilter=null" class="btn btn-info">
-          <i ng-hide="statusFilter" class="glyphicon glyphicon-ok"></i> All <span class="badge badge-default">
-          {{(records||[]).length}}</span></button>
-          <button type="button"  ng-click="statusFilter=isRequest" class="btn btn-danger">
-          <i ng-show="statusFilter==isRequest" class="glyphicon glyphicon-ok"></i> Requests <span class="badge badge-default">{{(records | filter:schemaFilter | filter:isRequest).length}}</span></button>
-          <button type="button"    ng-click="statusFilter=isPublished" class="btn btn-success">
-          <i ng-show="statusFilter==isPublished" class="glyphicon glyphicon-ok"></i> Published  <span class="badge badge-default">{{(records | filter:schemaFilter | filter:isPublished).length}}</span></button>
-          <button type="button" ng-click="statusFilter=isDraft" class="btn btn-default btn-draft" style="color:#fff">
-          <i ng-show="statusFilter==isDraft" class="glyphicon glyphicon-ok"></i> Draft  <span class="badge badge-default" style="color:#999;background-color:white;">{{(records | filter:schemaFilter | filter:isDraft).length}}</span></button>
-
-
-          <input type="text" ng-model="keywords" placeholder=" Keyword " class="form-control keyword input-group" style="width:160px;display:inline;font-size:12px;height:31px;">
-          </div>
-
-      </div>
-      <div class="col-xs-2 pull-right" ng-show="showAddButton()">
-        <span style="font-size: 16px; color: white;margin:0;padding:0;float:right;">
-          <a href="/register/{{schema|mapSchema}}/new" class="btn btn-sm btn-primary" id="new_button"><span class="glyphicon glyphicon-plus-sign"></span> Add New</a></span>
-      </div>
-  </div>
-
-  <p></p>
-<style type="text/css">
-
-  .odd {
-      background-color: #efefef;
-  }
-  .even {
-      background-color: #fff;
-  }
-  .odd:hover,.even:hover{
-      background-color: #eeefff;
-  }
-  .toggleUpdated{
-       background-color: #eeefff;
-  }
-  .km-value{
-background-color:#eee!important;
-  }
-</style>
+    <div class="row">
+        <div class="col-xs-10 " id="filter_buttons">
+            <div class="btn-group-sm">
+                <span class="special-font color-grey" style="position:relative;top:3px;font-size:22px;">FILTER</span>
+                <button type="button" ng-click="statusFilter=null" class="btn btn-info">
+                    <i ng-hide="statusFilter" class="glyphicon glyphicon-ok"></i> All
+                    <span class="badge badge-default">
+                        {{(records||[]).length}}</span>
+                </button>
+                <button type="button" ng-click="statusFilter=isRequest" class="btn btn-danger">
+                    <i ng-show="statusFilter==isRequest" class="glyphicon glyphicon-ok"></i> Requests
+                    <span class="badge badge-default">{{(records | filter:schemaFilter | filter:isRequest).length}}</span>
+                </button>
+                <button type="button" ng-click="statusFilter=isPublished" class="btn btn-success">
+                    <i ng-show="statusFilter==isPublished" class="glyphicon glyphicon-ok"></i> Published
+                    <span class="badge badge-default">{{(records | filter:schemaFilter | filter:isPublished).length}}</span>
+                </button>
+                <button type="button" ng-click="statusFilter=isDraft" class="btn btn-default btn-draft" style="color:#fff">
+                    <i ng-show="statusFilter==isDraft" class="glyphicon glyphicon-ok"></i> Draft
+                    <span class="badge badge-default" style="color:#999;background-color:white;">{{(records | filter:schemaFilter | filter:isDraft).length}}</span>
+                </button>
 
 
-<br/>
-<style>
-    th{
-        border-bottom:2px solid #000!important;
-    }
-</style>
+                <input type="text" ng-model="keywords" placeholder=" Keyword " class="form-control keyword input-group" style="width:160px;display:inline;font-size:12px;height:31px;">
+            </div>
 
-<table class="table table-hover" style="width:100%;">
-    <thead>
-    <tr>
-        <th style="width:70px;">&nbsp;</th>
-        <th ng-click="toggleOrderBy('title|lstring')" id="titleHeader">Title</th>
-        <th style="width:200px;"ng-click="toggleOrderBy('createdOn')" id="createdOnHeader">Created by</th>
-        <th style="width:200px;"ng-click="toggleOrderBy('updatedOn')" id="updatedOnHeader">Last updated</th>
-        <th style="width:150px;" ng-click="toggleOrderBy('status')" id="statusHeader">Status</th>
-        <th style="width:100px;">{{filteredRecords.length}} record(s)</th>
-    </tr>
-    </thead>
-    <tr ng-cloak ng-show="loading" ><td colspan="5" style="text-align:center;padding:60px;"><i class="fa fa-spin fa-cog" /> loading...</td></tr>
-    <tr ng-cloak ng-show="!loading && filteredRecords.length <= 0" ><td colspan="5" style="text-align:center;padding:60px;">no records</td></tr>
+        </div>
+        <div class="col-xs-2 pull-right" ng-show="showAddButton()">
+            <span style="font-size: 16px; color: white;margin:0;padding:0;float:right;">
+                <a href="/register/{{schema|mapSchema}}/new" class="btn btn-sm btn-primary" id="new_button">
+                    <span class="glyphicon glyphicon-plus-sign"></span> Add New</a>
+            </span>
+        </div>
+    </div>
 
-    <tbody ng-repeat="record in (filteredRecords = (records | filter:schemaFilter | filter:statusFilter | filter:keywords | orderBy:orderBy))">
+    <p></p>
+    <style type="text/css">
+        .odd {
+            background-color: #efefef;
+        }
 
+        .even {
+            background-color: #fff;
+        }
 
-    <tr id="record{{record.identifier}}" ng-class="{'bg-grey': displayDetails||displayRequest}" >
+        .odd:hover,
+        .even:hover {
+            background-color: #eeefff;
+        }
 
-        <td>
+        .toggleUpdated {
+            background-color: #eeefff;
+        }
 
-        <span ng-show="isPublished(record)">
-            <i ng-class="{'mdi-action-account-box':record.metadata.schema=='absNationalReport', 'color-published-green':isPublished(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
-            <i ng-class="{'mdi-action-account-box':record.metadata.schema=='authority', 'color-published-green':isPublished(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
-            <i ng-class="{'mdi-action-verified-user':record.metadata.schema=='absCheckpoint', 'color-published-green':isPublished(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
-            <i ng-class="{'mdi-action-stars':record.metadata.schema=='measure', 'color-published-green':isPublished(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
-            <i ng-class="{'mdi-action-bookmark':record.metadata.schema=='absPermit', 'color-published-green':isPublished(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
-            <i ng-class="{'mdi-communication-message':record.metadata.schema=='absCheckpointCommunique', 'color-published-green':isPublished(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
-            <i ng-class="{'mdi-file-folder':record.metadata.schema=='database', 'color-published-green':isPublished(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
-            <i ng-class="{'mdi-editor-insert-drive-file':record.metadata.schema=='resource', 'color-published-green':isPublished(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
-        </span>
-        <span ng-show="(isDraft(record) || isRequest(record))">
-            <i ng-class="{'mdi-action-account-box':record.metadata.schema=='absNationalReport', 'color-litegrey':isDraft(record) && !isRequest(record), 'color-red':isRequest(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
-            <i ng-class="{'mdi-action-account-box':record.metadata.schema=='authority', 'color-litegrey':isDraft(record) && !isRequest(record), 'color-red':isRequest(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
-            <i ng-class="{'mdi-action-verified-user':record.metadata.schema=='absCheckpoint', 'color-litegrey':isDraft(record) && !isRequest(record), 'color-red':isRequest(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
-            <i ng-class="{'mdi-action-stars':record.metadata.schema=='measure', 'color-litegrey':(isDraft(record) && !isRequest(record)), 'color-red':isRequest(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
-            <i ng-class="{'mdi-action-bookmark':record.metadata.schema=='absPermit', 'color-litegrey':isDraft(record) && !isRequest(record), 'color-red':isRequest(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
-            <i ng-class="{'mdi-communication-message':record.metadata.schema=='absCheckpointCommunique', 'color-litegrey':isDraft(record) && !isRequest(record), 'color-red':isRequest(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
-            <i ng-class="{'mdi-file-folder':record.metadata.schema=='database', 'color-litegrey':isDraft(record) && !isRequest(record), 'color-red':isRequest(record) }" style="font-size:16pt;position:relative;top:3px;"></i>
-            <i ng-class="{'mdi-editor-insert-drive-file':record.metadata.schema=='resource', 'color-litegrey':isDraft(record) && !isRequest(record), 'color-red':isRequest(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
-        </span>
+        .km-value {
+            background-color: #eee!important;
+        }
+    </style>
 
 
-        </td>
-        <td style="width:40%">
-            <span ng-show="isPublished(record)">
-                <a href=""  ng-click="loadDocument(record); displayDetails=!displayDetails" ng-show="record.documentID">
+    <br/>
+    <style>
+        th {
+            border-bottom: 2px solid #000!important;
+        }
+    </style>
+
+    <table class="table table-hover" style="width:100%;">
+        <thead>
+            <tr>
+                <th style="width:70px;">&nbsp;</th>
+                <th ng-click="toggleOrderBy('title|lstring')" id="titleHeader">Title</th>
+                <th style="width:200px;" ng-click="toggleOrderBy('createdOn')" id="createdOnHeader">Created by</th>
+                <th style="width:200px;" ng-click="toggleOrderBy('updatedOn')" id="updatedOnHeader">Last updated</th>
+                <th style="width:150px;" ng-click="toggleOrderBy('status')" id="statusHeader">Status</th>
+                <th style="width:100px;">{{filteredRecords.length}} record(s)</th>
+            </tr>
+        </thead>
+        <tr ng-cloak ng-show="loading">
+            <td colspan="5" style="text-align:center;padding:60px;"><i class="fa fa-spin fa-cog" /> loading...</td>
+        </tr>
+        <tr ng-cloak ng-show="!loading && filteredRecords.length <= 0">
+            <td colspan="5" style="text-align:center;padding:60px;">no records</td>
+        </tr>
+
+        <tbody ng-repeat="record in (filteredRecords = (records | filter:schemaFilter | filter:statusFilter | filter:keywords | orderBy:orderBy))">
+
+
+            <tr id="record{{record.identifier}}" ng-class="{'bg-grey': displayDetails||displayRequest}">
+
+                <td>
+
+                    <span ng-show="isPublished(record)">
+                        <i ng-class="{'mdi-action-account-box':record.metadata.schema=='absNationalReport', 'color-published-green':isPublished(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
+                        <i ng-class="{'mdi-action-account-box':record.metadata.schema=='authority', 'color-published-green':isPublished(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
+                        <i ng-class="{'mdi-action-verified-user':record.metadata.schema=='absCheckpoint', 'color-published-green':isPublished(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
+                        <i ng-class="{'mdi-action-stars':record.metadata.schema=='measure', 'color-published-green':isPublished(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
+                        <i ng-class="{'mdi-action-bookmark':record.metadata.schema=='absPermit', 'color-published-green':isPublished(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
+                        <i ng-class="{'mdi-communication-message':record.metadata.schema=='absCheckpointCommunique', 'color-published-green':isPublished(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
+                        <i ng-class="{'mdi-file-folder':record.metadata.schema=='database', 'color-published-green':isPublished(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
+                        <i ng-class="{'mdi-editor-insert-drive-file':record.metadata.schema=='resource', 'color-published-green':isPublished(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
+                    </span>
+                    <span ng-show="(isDraft(record) || isRequest(record))">
+                        <i ng-class="{'mdi-action-account-box':record.metadata.schema=='absNationalReport', 'color-litegrey':isDraft(record) && !isRequest(record), 'color-red':isRequest(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
+                        <i ng-class="{'mdi-action-account-box':record.metadata.schema=='authority', 'color-litegrey':isDraft(record) && !isRequest(record), 'color-red':isRequest(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
+                        <i ng-class="{'mdi-action-verified-user':record.metadata.schema=='absCheckpoint', 'color-litegrey':isDraft(record) && !isRequest(record), 'color-red':isRequest(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
+                        <i ng-class="{'mdi-action-stars':record.metadata.schema=='measure', 'color-litegrey':(isDraft(record) && !isRequest(record)), 'color-red':isRequest(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
+                        <i ng-class="{'mdi-action-bookmark':record.metadata.schema=='absPermit', 'color-litegrey':isDraft(record) && !isRequest(record), 'color-red':isRequest(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
+                        <i ng-class="{'mdi-communication-message':record.metadata.schema=='absCheckpointCommunique', 'color-litegrey':isDraft(record) && !isRequest(record), 'color-red':isRequest(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
+                        <i ng-class="{'mdi-file-folder':record.metadata.schema=='database', 'color-litegrey':isDraft(record) && !isRequest(record), 'color-red':isRequest(record) }" style="font-size:16pt;position:relative;top:3px;"></i>
+                        <i ng-class="{'mdi-editor-insert-drive-file':record.metadata.schema=='resource', 'color-litegrey':isDraft(record) && !isRequest(record), 'color-red':isRequest(record)}" style="font-size:16pt;position:relative;top:3px;"></i>
+                    </span>
+
+
+                </td>
+                <td style="width:40%">
+                    <span ng-show="isPublished(record)">
+                        <a href="" ng-click="loadDocument(record); displayDetails=!displayDetails" ng-show="record.documentID">
                     {{(record.workingDocumentTitle||record.title)|lstring}}
                 </a>
-            </span>
+                    </span>
 
-            <span ng-show="isRequest(record)">
-                <a href="" ng-click="displayDetails=false; displayRequest = !displayRequest; formLoading=false">
+                    <span ng-show="isRequest(record)">
+                        <a href="" ng-click="displayDetails=false; displayRequest = !displayRequest; formLoading=false">
                     {{(record.workingDocumentTitle||record.title)|lstring}}
                 </a>
-            </span>
+                    </span>
 
-            <span ng-show="isDraft(record) && !isPublished(record) && !isRequest(record)" >
-                <a href="/register/{{record.type|mapSchema}}/{{record.identifier}}/edit">
+                    <span ng-show="isDraft(record) && !isPublished(record) && !isRequest(record)">
+                        <a href="/register/{{record.type|mapSchema}}/{{record.identifier}}/edit">
                 {{(record.workingDocumentTitle||record.title)|lstring}}
                 </a>
-            </span>
-        </td>
-        <td>
-            <div ng-show="record.createdBy">
-              <a style="color:#666" href="mailto:{{record.createdBy.email}}"><strong>
-                  {{record.createdBy.firstName}} {{record.createdBy.lastName}}</strong>
-              </a></br>
-              <span style="font-size:10px;white-space:nowrap;">{{record.createdOn | formatDateWithTime }}</span>
-             </div>
-        </td>
-        <td>
-            <div ng-show="record.updatedBy">
-              <a style="color:#666" href="mailto:{{record.updatedBy.email}}"><strong>{{record.updatedBy.firstName}} {{record.updatedBy.lastName}}</strong> </a></br>
-              <span style="font-size:10px;white-space:nowrap;">{{record.updatedOn | formatDateWithTime }}</span>
-             </div>
-             <div ng-show="record.createdBy && !record.updatedBy">
-              <a style="color:#666" href="mailto:{{record.createdBy.email}}"><strong>{{record.createdBy.firstName}} {{record.createdBy.lastName}}</strong></a></br>
-              <span style="font-size:10px;white-space:nowrap;">{{record.createdOn | formatDateWithTime }}</span>
+                    </span>
+                </td>
+                <td>
+                    <div ng-show="record.createdBy">
+                        <a style="color:#666" href="mailto:{{record.createdBy.email}}">
+                            <strong>
+                                {{record.createdBy.firstName}} {{record.createdBy.lastName}}</strong>
+                        </a>
+                        </br>
+                        <span style="font-size:10px;white-space:nowrap;">{{record.createdOn | formatDateWithTime }}</span>
+                    </div>
+                </td>
+                <td>
+                    <div ng-show="record.updatedBy">
+                        <a style="color:#666" href="mailto:{{record.updatedBy.email}}">
+                            <strong>{{record.updatedBy.firstName}} {{record.updatedBy.lastName}}</strong>
+                        </a>
+                        </br>
+                        <span style="font-size:10px;white-space:nowrap;">{{record.updatedOn | formatDateWithTime }}</span>
+                    </div>
+                    <div ng-show="record.createdBy && !record.updatedBy">
+                        <a style="color:#666" href="mailto:{{record.createdBy.email}}">
+                            <strong>{{record.createdBy.firstName}} {{record.createdBy.lastName}}</strong>
+                        </a>
+                        </br>
+                        <span style="font-size:10px;white-space:nowrap;">{{record.createdOn | formatDateWithTime }}</span>
+                    </div>
+                </td>
+                <td>
+
+                    <div ng-show="isPublished(record) && !isRequest(record)" class="color-published-green"> Published </div>
+                    <div ng-show="isDraft(record) && !isRequest(record)" class="color-litegrey"> Draft </div>
+                    <div ng-show="isRequest(record) && !record.isUpdating" class="color-red"> Pending approval </div>
+                    <div ng-show="isRequest(record) && record.isUpdating">
+                        <a class="btn btn-info" type="button" ng-click="return" style="padding:4px;">
+                            <strong><i class="fa fa-spin fa-cog"></i> Processing...</strong>
+                        </a>
+                    </div>
+                </td>
+                <td>
+                    <div class="btn-group document_buttons btn-group-sm" style="width:100px;">
+                        <button ng-show="showAddButton()" title="Duplicate" type="button" class="btn btn-default" ng-click="askDuplicate(record)"><i class="fa fa-files-o"></i></button>
+                        <button title="Locked for edit" ng-show="isRequest(record) && showAddButton()" type="button" class="btn btn-default"><i class="glyphicon glyphicon-lock"></i></button>
+                        <button title="Delete request" ng-show="isRequest(record) && showAddButton()" type="button" class="btn btn-default" ng-click="askDeleteWorkflowRequest(record)"><i class="fa fa-undo"></i></button>
+                        <a title="Edit" ng-show="!isRequest(record) && showAddButton()" type="button" class="btn btn-default" href="/register/{{record.type|mapSchema}}/{{record.identifier}}/edit"><i class="fa fa-edit"></i></a>
+                        <button title="Delete" ng-show="!isRequest(record) && showAddButton()" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
+                    </div>
+                </td>
+            </tr>
+            <tr ng-show="displayDetails || (displayRequest && !record.isUpdating)" style="border:0!important;background-color:inherit!important;" ng-class="{'bg-grey': displayDetails||displayRequest}">
+                <!-- <td style="border:0;background-color:inherit!important;">&nbsp;</td> -->
+                <td colspan="5" style="border:0!important;">
+
+                    <div class="pull-right" style="z-index:100;padding-top:18px;padding-right:20px;cursor:pointer;">
+                        <i class="glyphicon glyphicon-remove-circle" style="font-size:20px;" ng-click="displayDetails=false;displayRequest=false;"></i>
+                    </div>
+
+                    <div ng-show="displayDetails">
+                        <div record-loader document="record.data" hide="header;title;libraries" class="record-body"></div>
+                    </div>
+
+                    <div ng-show="displayRequest">
+                        <div task-id class="record-body" load-task-data='formLoading' workflow-task-id="{{getWorkflowID(record)}}" on-activity-update="updateWorkflowList(document, workflowInfo)"></div>
+                    </div>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+
+    <div id="deleteRecordModel" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">What do you want to delete? <i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
+                </div>
+                <div class="modal-body" ng-hide="cantDelete || iacCantDelete">
+
+                    <div ng-show="isDraft(recordToDelete)" class="well">
+                        <button type="button" class="btn btn-warning pull-right" ng-disabled="loading" ng-click="deleteDraft(recordToDelete)">Delete the draft</button>
+                        <em>Draft {{recordToDelete.documentID||'[new]'}}</em>
+                        <p><b>{{recordToDelete.workingDocumentTitle|lstring}}</b></p>
+                        <p ng-bind-html="recordToDelete.workingDocumentSummary|lstring"></p>
+                    </div>
+
+                    <div ng-show="isPublished(recordToDelete)" class="well">
+                        <button type="button" class="btn btn-danger pull-right" ng-disabled="loading" ng-click="deleteRecord(recordToDelete)" data-toggle="tooltip" data-placement="top" title="Note: Any pending draft will also be deleted">
+                            Unpublish and delete the record</button>
+                        <em>Published record {{recordToDelete.documentID}}</em>
+                        <p><b>{{recordToDelete.title|lstring}}</b></p>
+                        <p ng-bind-html="recordToDelete.summary|lstring"></p>
+                    </div>
+
+                </div>
+                <div class="modal-body" ng-show="cantDelete || pilotDelete">
+
+                    Not allowed to delete published ABSCH-IRCC records. You can only amend them.
+                    <!-- <span class="label label-danger">The delete button is only enabled for pilot phase.</span> -->
+                </div>
+                <div class="modal-body" ng-show="iacCantDelete">
+
+                    You don not have sufficient privileges to delete document
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </div>
-        </td>
-        <td>
-
-            <div ng-show="isPublished(record) && !isRequest(record)" class="color-published-green"> Published </div>
-            <div ng-show="isDraft(record) && !isRequest(record)" class="color-litegrey"> Draft </div>
-            <div ng-show="isRequest(record) && !record.isUpdating" class="color-red"> Pending approval </div>
-            <div ng-show="isRequest(record) && record.isUpdating">
-                <a class="btn btn-info" type="button" ng-click="return" style="padding:4px;">
-                    <strong><i class="fa fa-spin fa-cog"></i> Processing...</strong>
-                </a>
-            </div>
-        </td>
-        <td>
-            <div class="btn-group document_buttons btn-group-sm" style="width:100px;">
-                <button ng-show="showAddButton()" title="Duplicate" type="button" class="btn btn-default" ng-click="askDuplicate(record)"><i class="fa fa-files-o"></i></button>
-                <button title="Locked for edit" ng-show="isRequest(record) && showAddButton()" type="button" class="btn btn-default"><i class="glyphicon glyphicon-lock"></i></button>
-                <a title="Edit" ng-show="!isRequest(record) && showAddButton()" type="button" class="btn btn-default" href="/register/{{record.type|mapSchema}}/{{record.identifier}}/edit"><i class="fa fa-edit"></i></a>
-                <button title="Delete"  ng-show="!isRequest(record) && showAddButton()"ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
-            </div>
-        </td>
-    </tr>
-     <tr ng-show="displayDetails || (displayRequest && !record.isUpdating)" style="border:0!important;background-color:inherit!important;"
-                ng-class="{'bg-grey': displayDetails||displayRequest}">
-        <!-- <td style="border:0;background-color:inherit!important;">&nbsp;</td> -->
-        <td colspan="5" style="border:0!important;" >
-
-            <div class="pull-right" style="z-index:100;padding-top:18px;padding-right:20px;cursor:pointer;">
-                <i class="glyphicon glyphicon-remove-circle" style="font-size:20px;" ng-click="displayDetails=false;displayRequest=false;"></i>
-            </div>
-
-              <div ng-show="displayDetails" >
-                  <div record-loader document="record.data" hide="header;title;libraries" class="record-body" ></div>
-              </div>
-
-               <div ng-show="displayRequest">
-                  <div task-id class="record-body" load-task-data='formLoading' workflow-task-id="{{getWorkflowID(record)}}" on-activity-update="updateWorkflowList(document, workflowInfo)"  ></div>
-              </div>
-
-        </td>
-    </tr>
-    </tbody>
-</table>
-
-
-
-
-  <div id="deleteRecordModel" class="modal fade">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">What do you want to delete? <i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
+            <!-- /.modal-content -->
         </div>
-        <div class="modal-body" ng-hide="cantDelete || iacCantDelete">
-
-          <div ng-show="isDraft(recordToDelete)" class="well">
-            <button type="button" class="btn btn-warning pull-right" ng-disabled="loading" ng-click="deleteDraft(recordToDelete)">Delete the draft</button>
-            <em>Draft {{recordToDelete.documentID||'[new]'}}</em>
-            <p><b>{{recordToDelete.workingDocumentTitle|lstring}}</b></p>
-            <p ng-bind-html="recordToDelete.workingDocumentSummary|lstring"></p>
-          </div>
-
-          <div ng-show="isPublished(recordToDelete)" class="well">
-            <button type="button" class="btn btn-danger pull-right" ng-disabled="loading" ng-click="deleteRecord(recordToDelete)" data-toggle="tooltip" data-placement="top" title="Note: Any pending draft will also be deleted">
-                Unpublish and delete the record</button>
-            <em>Published record {{recordToDelete.documentID}}</em>
-            <p><b>{{recordToDelete.title|lstring}}</b></p>
-            <p ng-bind-html="recordToDelete.summary|lstring"></p>
-          </div>
-
-        </div>
-        <div class="modal-body" ng-show="cantDelete || pilotDelete">
-
-          Not allowed to delete published ABSCH-IRCC records. You can only amend them.
-          <!-- <span class="label label-danger">The delete button is only enabled for pilot phase.</span> -->
-        </div>
-        <div class="modal-body" ng-show="iacCantDelete">
-
-             You don not have sufficient privileges to delete document
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-
-<div id="duplicateRecordModel" class="modal fade" data-backdrop="static">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4>Duplicate record<i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
-        </div>
-        <div class="modal-body">
-
-          <p>Are you sure you want to duplicate this record, this will create a new draft record with same details?</p>
-        </div>
-        <div class="modal-footer" style="margin-top:0">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          <button ng-disabled="loading" type="button"  ng-click="duplicate(recordToDuplicate)" class="btn btn-primary" >Yes</button>
-
-        </div>
-      </div>
+        <!-- /.modal-dialog -->
     </div>
-  </div>
-<!-- </div> -->
+    <!-- /.modal -->
+
+    <div id="duplicateRecordModel" class="modal fade" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4>Duplicate record<i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
+                </div>
+                <div class="modal-body">
+
+                    <p>Are you sure you want to duplicate this record, this will create a new draft record with same details?</p>
+                </div>
+                <div class="modal-footer" style="margin-top:0">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button ng-disabled="loading" type="button" ng-click="duplicate(recordToDuplicate)" class="btn btn-primary">Yes</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="deleteWorkflowRequestModal" class="modal fade" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4>Delete request<i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
+                </div>
+                <div class="modal-body">
+
+                    <p>Are you sure you want to delete this request?</p>
+                </div>
+                <div class="modal-footer" style="margin-top:0">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button ng-disabled="loading" type="button" ng-click="deleteWorkflowRequest(recordForDeleteWorkflowRequest)" class="btn btn-primary">Yes</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

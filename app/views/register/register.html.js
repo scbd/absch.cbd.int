@@ -579,7 +579,7 @@ define(['app',
 
     });
 
-	//============================================================
+	 	//============================================================
     //
     // Occurs when record-list duplicate a record or a draft
     //
@@ -591,7 +591,27 @@ define(['app',
       $scope.editing = false;
 
     });
+    
+    //============================================================
+    //
+    // Occurs when record-list workflow request is deleted.
+    //
+    //============================================================
+    $scope.$on("documentWorkflowRequestDeleted", function(evt, doc){
+      bootbox.alert('<h1>Workflow request deleted.</h1>');
+      $scope.msg = "Workflow request deleted.";
+	  //update request count
+    updateFacets(doc, false);
+    var document = _.first(_.where($scope.records, {identifier:doc.identifier}));
+    if(document)
+      document.workingDocumentLock = null;
+	  //update draft count
+    updateFacets(document, true);
+    evt.stopPropagation();
+    $scope.editing = false;
 
+    });
+    
 	//============================================================
     //
     // Occurs when there is a action on tasks
