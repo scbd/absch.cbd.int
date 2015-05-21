@@ -109,7 +109,7 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
                                 $scope.tasks = $scope.taskLists;
                             }
 
-                            if($routeParams.workflowId ){
+                            if($routeParams.workflowId && $scope.skip ==1){
                                 scrollToDocument($routeParams.workflowId);
                             }
 
@@ -130,7 +130,7 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
             }
 
             $scope.loadTasks = function(){
-                console.log($scope.loadingTasks)
+                //console.log($scope.loadingTasks)
                 if($scope.loadingTasks || $scope.skip > Math.ceil($scope.recordCount/$scope.length))
                     return;
 
