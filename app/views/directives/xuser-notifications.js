@@ -44,7 +44,7 @@ define(['app','underscore','ionsound'], function(app,_) {
                                     };
                             }
                             //$and: [{"_id": {"$gt": notification._id}}]
-
+                            var continueNotification = true;
                             userNotifications.query(queryMyNotifications, pageNumber, pageLength)
                                 .then(function(data) {
                                     if (!data || data.length === 0)
@@ -67,16 +67,18 @@ define(['app','underscore','ionsound'], function(app,_) {
                                 .catch(function(error){
                                     if(error.data.statusCode==401){
                                        // console.log('calling get fetch from notifications' );
-                                        authentication.getUser(true);
+                                        //authentication.getUser(true);
+                                         continueNotification = false;
                                     }
                                 })
                                 .finally(function() {
-                                   notificationTimer =  $timeout(function() { getNotification();}, 10000);
-                                   notificationTimer.then(function(){
-                                        //console.log('finished with timer');
-                                    }).catch(function(){
-                                        //console.log('rejected timer');
-                                    });
+                                    if(continueNotification)
+                                        notificationTimer =  $timeout(function() { getNotification();}, 10000);
+//                                   notificationTimer.then(function(){
+//                                        //console.log('finished with timer');
+//                                    }).catch(function(){
+//                                        //console.log('rejected timer');
+//                                    });
                                 });
                             //}
                         }

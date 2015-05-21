@@ -7,7 +7,9 @@
         <tr ng-repeat="notification in notifications" class="notification-item" ng-class="{'notification-read':notification.state=='read','notification-unread':notification.state=='unread' }">
 
             <td>
-                <div style="margin-top:3px;padding-right:3px;"><i class="{{notification.data.documentInfo.metadata.schema|schemaIcon}}" ng-class="{'color-green':notification.data.action!='approved', 'color-green':notification.data.action=='completed', 'color-grey':notification.data.action=='rejected'}"
+                <div style="margin-top:3px;padding-right:3px;">
+                    <i class="{{notification.data.documentInfo.metadata.schema|schemaIcon}}"
+                     ng-class="{'color-green':(notification.data.action!='approved'||notification.data.action=='completed'||notification.data.action=='recalled'), 'color-grey':notification.data.action=='rejected'}"
                 style="font-size:16pt;position:relative;top:3px;"></i></div></td>
             <td ng-class="{'notification-read':notification.state=='read','notification-unread':notification.state=='unread' }" style="padding:10px 0;cursor:pointer;">
 
@@ -21,6 +23,7 @@
                     <span ng-show="notification.data.action=='request'"> has sent you a request for publishing for</span>
                     <span ng-show="notification.data.action=='approved'"> has approved your publishing request for</span>
                     <span ng-show="notification.data.action=='rejected'"> has rejected your publishing request for</span>
+                    <span ng-show="notification.data.action=='recalled'"> has recalled publishing request for</span>
 
                     <strong><i ng-class="{'color-blue':notification.state=='unread'}">
                         {{(notification.data.documentInfo.title||notification.data.subject)|lstring}}
