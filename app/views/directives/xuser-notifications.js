@@ -152,7 +152,8 @@ define(['app','underscore','ionsound'], function(app,_) {
                         if(newVla && newVla!=oldVal){
                             console.log('user changed');
                             $timeout.cancel(notificationTimer);
-                            getNotification();
+                            if(newVla.isAuthenticated)
+                                getNotification();
                         }
                     });
 
