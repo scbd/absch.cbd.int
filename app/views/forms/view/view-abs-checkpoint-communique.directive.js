@@ -174,7 +174,7 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 				$scope.emailList = [];
 				if(document.permit){
 						angular.forEach(document.permit, function(permit){
-							$http.get('/api/v2013/documents/' +  permit.identifier, { info:true})
+							$http.get('/api/v2013/documents/' +  permit.identifier, { info:""})
 							.success(function(result){
 								if(result.authority && (result.authority.title_t || result.authority.firstName))
 									$scope.emailList.push(result.authority);

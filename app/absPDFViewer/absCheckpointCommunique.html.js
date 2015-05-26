@@ -26,7 +26,7 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q
 
 			if($scope.document.permit){
 				$scope.document.permit.forEach(function(item){
-					$http.get('/api/v2013/documents/' +  item.identifier, { info:true})
+					$http.get('/api/v2013/documents/' +  item.identifier, { info:""})
 					.success(function(result){
 						item.document = result;
 					}).finally(function(){

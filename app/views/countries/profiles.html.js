@@ -128,9 +128,9 @@
                   else if(document.schema_s == "authority" || document.schema_s == "database" ||
                      document.schema_s == "absCheckpoint"){
                          document.description_t = '';
-                         $q.when(IStorage.documents.get(document.identifier_s,{info:true}))
+                         $q.when(IStorage.documents.get(document.identifier_s,{info:''}))
                          .then(function(data) {
-                             var doc = data.data;
+                             var doc = data.data.body;
                              var details = '';
                             if(doc.address)
                                 details += $filter("lstring")(doc.address) + '<br/>';
