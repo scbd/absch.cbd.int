@@ -130,7 +130,7 @@
                          document.description_t = '';
                          $q.when(IStorage.documents.get(document.identifier_s,{info:true}))
                          .then(function(data) {
-                             var doc = data.data.body
+                             var doc = data.data;
                              var details = '';
                             if(doc.address)
                                 details += $filter("lstring")(doc.address) + '<br/>';
