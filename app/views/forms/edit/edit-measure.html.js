@@ -119,7 +119,11 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
         return undefined;
 
       document = angular.fromJson(angular.toJson(document));
-
+	
+	  if(!document.isAmendment){
+		  document.amendedMeasures = undefined;
+		  document.amendmentsDescriptio = undefined;
+	  }
       if(document.expires!==undefined)
         delete document.expires;
 
@@ -190,7 +194,8 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 				locales     : "=",
 				termsFn     : "&terms",
 				required    : "@",
-				layout      : "@"
+				layout      : "@",
+				document    : "=document"
 			},
 			link: function ($scope, $element, $attr, ngModelController)
 			{
