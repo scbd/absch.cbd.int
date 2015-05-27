@@ -108,7 +108,7 @@ define(["app",'/app/js/common.js'], function (app) {
     		    if(cacheMap[term.identifier])
     			     return cacheMap[term.identifier] ;
 
-                document = storage.documents.get(term.identifier, {info:true})
+                document = storage.documents.get(term.identifier, {info:""});
 
             }
             else if(term && angular.isObject(term)){
