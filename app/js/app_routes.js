@@ -34,7 +34,11 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
             when('/forums/art10_groups/:threadId',    { templateUrl: '/app/views/forums/post-list-view.html'     ,resolveController: true, resolveUser: true, forumId:17316, forumListUrl:'/forums/art10_groups/', text:'Forum on Article 10' }).
 
             when('/mailbox',                        { templateUrl: '/app/views/mailbox/inbox.html',         label:'Mailbox',       resolveController: true, resolveUser: true }).
-
+            when('/mailbox/:mailId',                { templateUrl: '/app/views/mailbox/inbox.html',         label:'Mailbox',       resolveController: true, resolveUser: true }).
+            
+            when('/search/new',                             { templateUrl: '/app/views/search/search.html',   label:'Search',         resolveController: true, resolveUser: true}).
+            when('/search/new/measurematrix',               { templateUrl: '/app/views/search/measure-matrix.html',   label:'Search',         resolveController: true, resolveUser: true}).
+            
             when('/search',                                 { templateUrl: '/app/views/search/find.html',   label:'Search',         resolveController: true, resolveUser: true}).
             when('/search/:documentSchema',                 { templateUrl: '/app/views/search/find.html',   label:'Search',         resolveController: true, resolveUser: true}).
             when('/search/:documentSchema/:countryCode',    { templateUrl: '/app/views/search/find.html',   label:'Search',         resolveController: true, resolveUser: true}).
