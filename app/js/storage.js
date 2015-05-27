@@ -40,8 +40,8 @@ define(["app", "authentication"], function (app) {
 						params.collection = "my";
 
 					var useCache = !!params.cache;
-					if(!params.cache)
-						params.cache = true;
+//					if(!params.cache)
+//						params.cache = true;
 
 					var oTrans = transformPath(serviceUrls.documentQueryUrl(), params);
 
@@ -60,8 +60,8 @@ define(["app", "authentication"], function (app) {
 
 					var useCache = !!params.cache;
 
-					if(!params.cache)
-						params.cache = true;
+//					if(!params.cache)
+//						params.cache = true;
 
 
 					var oTrans = transformPath(serviceUrls.documentUrl(), params);
@@ -82,8 +82,8 @@ define(["app", "authentication"], function (app) {
 
 					var useCache = !!params.cache;
 
-					if(!params.cache)
-						params.cache = true;
+//					if(!params.cache)
+//						params.cache = true;
 
 
 					var oTrans = transformPath(serviceUrls.documentUrl(), params);
@@ -185,8 +185,8 @@ define(["app", "authentication"], function (app) {
 
 					var useCache = !!params.cache;
 
-					if(!params.cache)
-						params.cache = true;
+//					if(!params.cache)
+//						params.cache = true;
 
 					var oTrans = transformPath(serviceUrls.documentQueryUrl(), params);
 
@@ -226,8 +226,8 @@ define(["app", "authentication"], function (app) {
 
 					var useCache = !!params.cache;
 
-					if(!params.cache)
-						params.cache = true;
+//					if(!params.cache)
+//						params.cache = true;
 
 					var oTrans = transformPath(serviceUrls.draftUrl(), params);
 
@@ -306,8 +306,8 @@ define(["app", "authentication"], function (app) {
 
 						var useCache = !!params.cache;
 
-						if(!params.cache)
-							params.cache = true;
+//						if(!params.cache)
+//							params.cache = true;
 
 
 						var oTrans = transformPath(serviceUrls.draftLockUrl(), params);
@@ -327,8 +327,8 @@ define(["app", "authentication"], function (app) {
 
 						var useCache = !!params.cache;
 
-						if(!params.cache)
-							params.cache = true;
+//						if(!params.cache)
+//							params.cache = true;
 
 						var oTrans = transformPath(serviceUrls.draftLockUrl(), params);
 
@@ -436,8 +436,8 @@ define(["app", "authentication"], function (app) {
 
 					var useCache = !!params.cache;
 
-					if(!params.cache)
-						params.cache = true;
+//					if(!params.cache)
+//						params.cache = true;
 
 
 					var oTrans = transformPath(serviceUrls.documentVersionUrl(), params);
@@ -466,8 +466,8 @@ define(["app", "authentication"], function (app) {
 				  params.$filter    = filter;
 
 				  var useCache = !!params.cache;
-				  if(!params.cache)
-				    params.cache = true;
+//				  if(!params.cache)
+//				    params.cache = true;
 
 				  var oTrans = transformPath(serviceUrls.documentBodyQueryUrl(), params);
 
@@ -485,8 +485,8 @@ define(["app", "authentication"], function (app) {
 				  params.$filter    = filter;
 
 				  var useCache = !!params.cache;
-				  if(!params.cache)
-				    params.cache = true;
+//				  if(!params.cache)
+//				    params.cache = true;
 
 				  var oTrans = transformPath(serviceUrls.documentFacetsQueryUrl(), params);
 
