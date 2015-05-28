@@ -89,7 +89,7 @@
             if ($scope.country.isNPInbetweenParty)
                 $scope.country.entryIntoForceDate = moment($scope.country.treaties.XXVII8b.deposit).add(90, 'day');
             else if ($scope.country.isNPParty)
-                $scope.country.entryIntoForceDate = $scope.country.treaties.XXVII8b.deposit;
+                $scope.country.entryIntoForceDate = $scope.country.treaties.XXVII8b.party;
              
            });
            //*******************************************************
