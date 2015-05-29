@@ -153,6 +153,10 @@ define([
     $scope.$on("documentInvalid", function(){
       $scope.tab = "review";
     });
+    
+    $scope.$on("clearDocumentErrors", function(){
+      $scope.validationReport = {clearErrors:[]};
+    });
 
     //==================================
     //

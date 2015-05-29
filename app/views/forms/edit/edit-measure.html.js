@@ -1,4 +1,4 @@
-define(['app', '/app/views/forms/edit/edit.js'], function (app) {
+define(['app','underscore', '/app/views/forms/edit/edit.js'], function (app,_) {
 
   app.controller("editMeasure", ["$scope", "authHttp", "$filter", "$q", "Enumerable", "$controller", "$location", function ($scope, $http, $filter, $q, Enumerable, $controller, $location) {
     $controller('editController', {$scope: $scope});
@@ -155,8 +155,11 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 
       if (document.limitedApplication =='')
         document.limitedApplication = undefined;
+		
+	  if(document.absMeasures && !_.findWhere(document.absMeasures,{identifier:'5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'}))
+		document.otherAbsMeasure = undefined;
 
-      return document
+      return document;
     };
 
     $scope.setDocument({libraries: [{ identifier: "cbdLibrary:abs-ch" }]});

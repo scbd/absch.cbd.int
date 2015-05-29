@@ -498,7 +498,7 @@ define(['app',
 
     $scope.$on("documentInvalid", function(evt, invalidDocument) {
 
-	  $scope.documentInvalid = true;
+	   	$scope.documentInvalid = true;
     });
 
     //============================================================
