@@ -80,6 +80,19 @@
     background-color:#EEE!important;
     color:#555;
 }
+.bg-grey1{
+    background-color:#DDD!important;
+    color:#555;
+}
+.bg-grey2{
+    background-color:#ccc!important;
+    color:#555;
+}
+.bg-grey3{
+    background-color:#bbb!important;
+    color:#FFF;
+}
+
 .bg-red{
     background-color:#C7532C!important;
     color:white;
