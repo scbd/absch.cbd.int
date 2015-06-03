@@ -106,7 +106,7 @@ app.controller('printCountryProfile', ['$scope', '$http', '$location', '$sce', '
             $scope.title = function(schema) {
 
                 if (schema == 'authority')
-                    return 'Competant National Authority';
+                    return 'Competent National Authority';
                 if (schema == 'focalPoint')
                     return 'ABS National Focal Points';
                 if (schema == 'absCheckpoint')

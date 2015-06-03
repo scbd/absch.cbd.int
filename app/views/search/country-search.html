@@ -1,0 +1,81 @@
+<div id="submit"  ng-controller="searchByCountryController">
+
+
+    <link href="/app/libs/jqvmap/jqvmap/jqvmap.css" rel="stylesheet">
+
+            <div class="container" style="padding:20px 0 20px 0;" >
+
+                <h3 style="padding-bottom:30px;"><i class="fa fa-search"></i> Online Reporting Search   <i ng-show="loading" class="fa fa-spinner fa-spin"></i></h3>
+
+                <div class="row">
+                    <div class="col-sm-12">
+<!--                        <div id="vmap" style="width: 100%; min-height:400px;background-color:#EEE!important;"></div>-->
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top:20px;">
+                    <div class="col-md-12">
+                        <div km-select required name="government" multiple ng-model="government" placeholder="Select a country" watch-items items="options.countries"></div>
+                        <div km-select required name="schema" multiple ng-model="schema" placeholder="Select record type" watch-items items="nationalRecords"></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <strong>Country(s): <span class="color-grey">{{records.length}}</span></strong>
+                </div>
+            </div>
+
+
+    <div ng-repeat="group in records" style="margin-top:30px;">
+        <div>
+            <h3 class="container-fluid color-medgrey" style="border-top:1px solid #DDD;padding-top:0;margin-top:3px;"><i class="fa fa-chevron-circle-down"></i> {{group.doclist.docs[0].government_EN_t}} </h3>
+            <div class="container">
+                <div class="row" >
+
+                   <div ng-repeat="doc in group.doclist.docs | filter:{'schema_s':'focalPoint'} | orderBy:'startDate_s':'asc'">
+                        <h4 ng-show="$index===0" class="bg-grey3" style="padding:3px;margin-top:10px;" >ABS Focal Points</h4>
+                        <i class="fa fa-file-o"></i> {{doc.schema_EN_t}} - <a href="{{doc.url_ss[0]}}" target="_new">{{doc.title_t}}</a>
+                    </div>                   
+                   
+                    <div ng-repeat="doc in group.doclist.docs | filter:{'schema_s':'authority'} | orderBy:'startDate_s':'asc'">
+                        <h4 ng-show="$index===0" class="bg-grey3" style="padding:3px;margin-top:30px;" >Competent National Authority</h4>
+                        <i class="fa fa-file-o"></i> {{doc.schema_EN_t}} - <a href="{{doc.url_ss[0]}}" target="_new">{{doc.title_t}}</a>
+                    </div>
+                    
+                    <div ng-repeat="doc in group.doclist.docs | filter:{'schema_s':'database'} | orderBy:'startDate_s':'asc'">
+                        <h4 ng-show="$index===0" class="bg-grey3" style="padding:3px;margin-top:30px;" >National Website or Database</h4>
+                        <i class="fa fa-file-o"></i> {{doc.schema_EN_t}} - <a href="{{doc.url_ss[0]}}" target="_new">{{doc.title_t}}</a>
+                    </div>
+
+                    <div ng-repeat="doc in group.doclist.docs | filter:{'schema_s':'measure'} | orderBy:'startDate_s':'asc'">
+                        <h4 ng-show="$index===0" class="bg-grey3" style="padding:3px;margin-top:30px;" >National Measure</h4>
+                        <i class="fa fa-file-o"></i> {{doc.schema_EN_t}} - <a href="{{doc.url_ss[0]}}" target="_new">{{doc.title_t}}</a>
+                    </div>
+             
+                     <div ng-repeat="doc in group.doclist.docs | filter:{'schema_s':'absCheckpoint'} | orderBy:'startDate_s':'asc'">
+                        <h4 ng-show="$index===0" class="bg-grey3" style="padding:3px;margin-top:30px;" >ABS Checkpoint</h4>
+                        <i class="fa fa-file-o"></i> {{doc.schema_EN_t}} - <a href="{{doc.url_ss[0]}}" target="_new">{{doc.title_t}}</a>
+                    </div>
+                    
+                    <div ng-repeat="doc in group.doclist.docs | filter:{'schema_s':'absPermit'} | orderBy:'startDate_s':'asc'">
+                        <h4 ng-show="$index===0" class="bg-grey3" style="padding:3px;margin-top:30px;" >IRCC</h4>
+                        <i class="fa fa-file-o"></i> {{doc.schema_EN_t}} - <a href="{{doc.url_ss[0]}}" target="_new">{{doc.title_t}}</a>
+                    </div>
+
+                    <div ng-repeat="doc in group.doclist.docs | filter:{'schema_s':'absCheckpointCommunique'} | orderBy:'startDate_s':'asc'">
+                        <h4 ng-show="$index===0" class="bg-grey3" style="padding:3px;margin-top:30px;" >CPC</h4>
+                        <i class="fa fa-file-o"></i> {{doc.schema_EN_t}} - <a href="{{doc.url_ss[0]}}" target="_new">{{doc.title_t}}</a>
+                    </div>
+
+                    <br><br>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
