@@ -10,7 +10,7 @@ define(['app','underscore', '/app/js/common.js'], function(app,_) {
                 onStatusClick: '&',
                 onCountryClick: '&',
             },
-            controller: ['$scope', 'authHttp', '$q', '$filter', 'commonjs','$location',
+            controller: ['$scope', '$http', '$q', '$filter', 'commonjs','$location',
                 function($scope, $http, $q, $filter, commonjs, $location) {
 
                     $scope.lastAction = 'party';

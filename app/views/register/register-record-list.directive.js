@@ -1,7 +1,7 @@
 define(['app', '/app/js/common.js'], function(app) {
     "use strict";
 
-    app.directive("registerRecordList", ["$timeout", "commonjs", "bootbox", "authHttp", "IWorkflows", "IStorage",
+    app.directive("registerRecordList", ["$timeout", "commonjs", "bootbox", "$http", "IWorkflows", "IStorage",
         function($timeout, commonjs, bootbox, $http, IWorkflows, IStorage) {
 
             return {

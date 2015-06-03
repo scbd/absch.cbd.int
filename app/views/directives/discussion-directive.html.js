@@ -11,7 +11,7 @@ define(['app', 'cbd-forums'], function(app) {
                 exampleMsg: '&',
                 tagIdentifier:'@'
             },
-            controller: ['$q', '$scope','authHttp', function($q, $scope, $http) {
+            controller: ['$q', '$scope','$http', function($q, $scope, $http) {
                 
                 $scope.post = function() {
 

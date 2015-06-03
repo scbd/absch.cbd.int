@@ -8,7 +8,7 @@ app.directive("editContact", [ function () {
 		replace    : true,
 		transclude : false,
 		scope      : {},
-		controller : ["$scope", "$q", "authHttp", "underscore", "Enumerable", "$filter", "guid", "IStorage", "authentication", "editFormUtility", function ($scope, $q, $http, _, Enumerable, $filter, guid, storage, authentication, editFormUtility)
+		controller : ["$scope", "$q", "$http", "underscore", "Enumerable", "$filter", "guid", "IStorage", "authentication", "editFormUtility", function ($scope, $q, $http, _, Enumerable, $filter, guid, storage, authentication, editFormUtility)
 		{
 			$scope.status   = "";
 			$scope.error    = null;

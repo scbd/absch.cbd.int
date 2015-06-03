@@ -49,8 +49,8 @@ app.directive('recordLoader', [function () {
 			if(!$scope.document)
 				$scope.init();
 		},
-		controller: ['$scope', "$route", 'IStorage', "authentication", "localization", "$q", "$location", "commonjs","$timeout","$filter","authHttp","$http","realm",
-			function ($scope, $route, storage, authentication, localization, $q, $location,commonjs,$timeout, $filter, $http, $httpAWS, realm) {
+		controller: ['$scope', "$route", 'IStorage', "authentication", "$q", "$location", "commonjs","$timeout","$filter","$http","$http","realm",
+			function ($scope, $route, storage, authentication, $q, $location,commonjs,$timeout, $filter, $http, $httpAWS, realm) {
 
 			//==================================
 			//

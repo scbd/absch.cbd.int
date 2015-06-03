@@ -1,6 +1,6 @@
 define(['app', 'underscore'], function(app, underscore) {
 
-    app.factory('commonjs', ['authHttp', '$rootScope', function($http, $rootScope) {
+    app.factory('commonjs', ['$http', '$rootScope', function($http, $rootScope) {
         return new function() {
 
             this.getReferenceRecordIndex = function(schema, documentId) {

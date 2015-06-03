@@ -1,12 +1,13 @@
 'use strict';
 
-define(['app', 'extended-route-provider','authentication', 'services', 'filters', 'storage', 'workflows', 'realm-configuration', 'user-notifications'], function (app) {
+define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 'filters', 'realm-configuration'], function (app) {
 
-     app.value("realm", {value:"ABS"});
+    app.value("realm", {value:"ABS"});
     app.value("schemaTypes", [ "absNationalReport", "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "resource" ]);
 
     app.config(['extendedRouteProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
-          $locationProvider.html5Mode(true);
+
+        $locationProvider.html5Mode(true);
         $locationProvider.hashPrefix('!');
 
         $routeProvider.
@@ -35,11 +36,12 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
 
             when('/mailbox',                        { templateUrl: '/app/views/mailbox/inbox.html',         label:'Mailbox',       resolveController: true, resolveUser: true }).
             when('/mailbox/:mailId',                { templateUrl: '/app/views/mailbox/inbox.html',         label:'Mailbox',       resolveController: true, resolveUser: true }).
-           
-            when('/search/new',                             { templateUrl: '/app/views/search/search.html',   label:'Search',         resolveController: true, resolveUser: true}). 
+
+            when('/search/new',                             { templateUrl: '/app/views/search/search.html',   label:'Search',         resolveController: true, resolveUser: true}).
             when('/search/new/byCountry',                   { templateUrl: '/app/views/search/country-search.html',   label:'Search',         resolveController: true, resolveUser: true}).
+
             when('/search/new/measurematrix',               { templateUrl: '/app/views/search/measure-matrix.html',   label:'Search',         resolveController: true, resolveUser: true}).
-            
+
             when('/search',                                 { templateUrl: '/app/views/search/find.html',   label:'Search',         resolveController: true, resolveUser: true}).
             when('/search/:documentSchema',                 { templateUrl: '/app/views/search/find.html',   label:'Search',         resolveController: true, resolveUser: true}).
             when('/search/:documentSchema/:countryCode',    { templateUrl: '/app/views/search/find.html',   label:'Search',         resolveController: true, resolveUser: true}).
@@ -92,5 +94,6 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
             when('/commonformat',           { redirectTo:'/about/common-formats' }).
 
             otherwise({templateUrl: '/app/404.html', label:'404 Error'});
+
     }]);
 });

@@ -1,12 +1,12 @@
-define(['app','ng-breadcrumbs',
+define(['app','ng-breadcrumbs','angular-localizer','scbd-angularjs-services','scbd-angularjs-filters',
     '/app/views/directives/login.directive.html.js',
     '/app/views/directives/xuser-notifications.js'
 ], function(app) {
     'use strict';
 
-    app.controller('TemplateController', ['$scope', '$rootScope', '$window', '$location', 'authentication', '$browser', 'realmConfiguration', 'underscore', 'IUserNotifications', '$timeout','$filter','localStorageService',
-     '$anchorScroll','breadcrumbs',
-        function($scope, $rootScope, $window, $location, authentication, $browser, realmConfiguration, _, userNotifications, $timeout, $filter,localStorageService,$anchorScroll,breadcrumbs) {
+    app.controller('TemplateController', ['$scope', '$rootScope', '$window', '$location', 'authentication', '$browser', 'realmConfiguration', 'underscore', 'IUserNotifications', '$timeout','$filter',
+     '$anchorScroll','breadcrumbs',//'localStorageService',localStorageService,
+        function($scope, $rootScope, $window, $location, authentication, $browser, realmConfiguration, _, userNotifications, $timeout, $filter,$anchorScroll,breadcrumbs) {
 
             $scope.controller = "TemplateController";
             $scope.breadcrumbs     = breadcrumbs;
@@ -30,7 +30,7 @@ define(['app','ng-breadcrumbs',
             $anchorScroll();
           }
         };
-        
+
             $scope.$root.getRoleName = function(roleName) {
                 if (roleName) {
                     var realmConfig = _.where(realmConfiguration, {
@@ -50,11 +50,11 @@ define(['app','ng-breadcrumbs',
                 }
             };
 
-            $scope.updateStorage = function(){
-                localStorageService.set('hideDisclaimer', true);
-                $scope.hideDisclaimer=true;
-            };
-    	    $scope.hideDisclaimer = localStorageService.get('hideDisclaimer');
+//            $scope.updateStorage = function(){
+//                localStorageService.set('hideDisclaimer', true);
+//                $scope.hideDisclaimer=true;
+//            };
+//    	    $scope.hideDisclaimer = localStorageService.get('hideDisclaimer');
             //============================================================
             //
             //

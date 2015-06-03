@@ -1,6 +1,6 @@
 define(['app','underscore'], function (app, _) {
 
-    app.controller('matrixController', ['$scope', 'authHttp','realm','$q','$filter',
+    app.controller('matrixController', ['$scope', '$http','realm','$q','$filter',
         function ($scope, $http, realm, $q, $filter) {
 			
 		var scopeOfMeasures = [

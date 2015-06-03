@@ -22,7 +22,6 @@ require.config({
         'view-abs-checkpoint'   :'../views/forms/view/view-abs-checkpoint.directive',
         'introjs'               : '../libs/intro.js/intro',
         'angular-introjs'       : '../js/directives/angular-intro',
-        'angular-form-controls' : '../libs/angular_form_controls/form-controls',
         'bootbox'               : '../libs/bootbox/bootbox',
         'jqvmap'                : '../libs/jqvmap/jqvmap/jquery.vmap.min',
         'jqvmapworld'           : '../js/jquery.vmap.world_update',
@@ -32,7 +31,10 @@ require.config({
         'angular-storage'       : '../libs/angular-local-storage/dist/angular-local-storage.min',
         'angular-flex'          : '../libs/angular-flex/angular-flex',
         'ng-breadcrumbs'        : '../libs/ng-breadcrumbs/dist/ng-breadcrumbs',
-        'ionsound'              : '../libs/ionsound/js/ion.sound'
+        'ionsound'              : '../libs/ionsound/js/ion.sound',
+        'scbd-angularjs-services'         : '../libs/scbd-angularjs-services/scbd-services',
+        'scbd-angularjs-filters'          : '../libs/scbd-angularjs-services/scbd-filters',
+        'scbd-angularjs-controls'         : '../libs/scbd-angularjs-controls/scbd-controls'
     },
     'shim': {
         'angular'                       : { 'deps': ['jquery'], 'exports': 'angular' },
@@ -47,7 +49,6 @@ require.config({
         'introjs'                       : { 'exports': 'introJs'},
         'angular-introjs'               : { 'deps':['angular', 'introjs']},
         'angular-localizer'             : { 'deps':['angular']},
-        'angular-form-controls'         : { 'deps': ['angular', 'angular-sanitize', 'angular-localizer']},
         'bootbox'                       : { 'deps':['bootstrap', 'jquery']},
         'jqvmap'                        : { 'deps': ['jquery'] },
         'jqvmapworld'                   : { 'deps': ['jqvmap'] },
@@ -57,6 +58,9 @@ require.config({
         'angular-storage'               : { 'deps': ['angular'] },
         'angular-flex'                  : { 'deps': ['angular'] },
         'ng-breadcrumbs'                : { 'deps': ['angular'] },
+        'scbd-angularjs-services'       : { 'deps': ['angular']},
+        'scbd-angularjs-filters'        : { 'deps': ['angular']},
+        'scbd-angularjs-controls'       : { 'deps': ['angular', 'angular-sanitize', 'angular-localizer']},
     }
 });
 

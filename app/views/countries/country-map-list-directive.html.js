@@ -8,7 +8,7 @@ define(['app'], function(app) {
             scope: {
                 //countries: '=countries',
             },
-            controller: ['$scope', 'authHttp', 'realm', '$q', '$filter', '$routeParams', '$timeout', '$element', 'commonjs', '$route','$location',
+            controller: ['$scope', '$http', 'realm', '$q', '$filter', '$routeParams', '$timeout', '$element', 'commonjs', '$route','$location',
                 function($scope, $http, realm, $q, $filter, $routeParams, $timeout, $element, commonjs, $route, $location) {
                     var taiwan = "TW";
                     var china = "CN";

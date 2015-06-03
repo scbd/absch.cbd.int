@@ -9,7 +9,7 @@ define(['app','underscore',
     '/app/views/directives/search-filter-dates.partial.html.js',
     '/app/views/directives/document-list.partial.html.js', 'bootstrap-datepicker','moment'], function (app,_) {
 
-    app.controller('FindController', ['$scope', '$rootScope', 'authHttp', '$timeout', '$q','realm', '$routeParams','$location',
+    app.controller('FindController', ['$scope', '$rootScope', '$http', '$timeout', '$q','realm', '$routeParams','$location',
         function ($scope, $rootScope, $http, $timeout, $q, realm, $routeParams,$location) {
 
 

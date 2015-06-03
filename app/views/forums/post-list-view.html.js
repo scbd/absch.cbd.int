@@ -1,7 +1,7 @@
 define(['app', 'underscore', 'cbd-forums',
         '/app/js/common.js'], function(app, _) {
 
-    return ["$scope", "authHttp", "$q", "$route", "$routeParams","commonjs","$rootScope",'$route',
+    return ["$scope", "$http", "$q", "$route", "$routeParams","commonjs","$rootScope",'$route',
      function($scope, $http, $q, $route, $routeParams, commonjs, $rootScope, $route) {
 
         if (!$route.current.$$route.forumListUrl) {

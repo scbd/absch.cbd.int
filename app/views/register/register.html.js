@@ -1,10 +1,11 @@
-define(['app',
+define(['app','linqjs', 'angular-localizer',
 	'/app/views/directives/login.directive.html.js',
 	'/app/views/register/register-record-list.directive.js',
 	'/app/views/directives/task-id-directive.html.js',
 	'/app/views/directives/user-details.directive.html.js',
   '/app/views/directives/ngxLazy.directive.js',
-  'bootstrap-datepicker','moment',  'text-angular', 'bootbox','angular-introjs', 'introjs'], function (app) {
+  'bootstrap-datepicker','moment',  'text-angular', 'bootbox','angular-introjs',
+   'introjs','scbd-angularjs-services','scbd-angularjs-filters','scbd-angularjs-controls'], function (app) {
 
   "use strict";
 // angular.module([]);
@@ -12,6 +13,7 @@ define(['app',
   app.controller("RegisterController",
     ["$rootScope", "$location" , "$scope", "$q", "$window", "IStorage", "underscore",
      "schemaTypes", "$timeout","$filter", "$routeParams", "$cookies","bootbox","realm","IWorkflows",
+
 	  function ($rootScope, $location, $scope, $q, $window, storage, _,
       schemaTypes, $timeout, $filter, $routeParams, $cookies,bootbox,realm,workflows) {
 
@@ -591,7 +593,7 @@ define(['app',
       $scope.editing = false;
 
     });
-    
+
     //============================================================
     //
     // Occurs when record-list workflow request is deleted.
@@ -611,7 +613,7 @@ define(['app',
     $scope.editing = false;
 
     });
-    
+
 	//============================================================
     //
     // Occurs when there is a action on tasks

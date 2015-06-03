@@ -12,7 +12,7 @@ app.directive("editContactBase", [ function () {
 			locales : "=locales",
 			form : "=form"
 		},
-		controller : ["$scope", "authHttp", "$filter", "underscore", "$q", function ($scope, $http, $filter, _, $q)
+		controller : ["$scope", "$http", "$filter", "underscore", "$q", function ($scope, $http, $filter, _, $q)
 		{
 			$scope._urls = [];
 
