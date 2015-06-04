@@ -4,7 +4,7 @@ define(['app','underscore'], function (app, _) {
             
         $scope.countries=[];
         $scope.colors={};
-        $scope.loading=true;
+       // $scope.loading=true;
 
         $http.get("/api/v2013/thesaurus/domains/countries/terms",{ cache: true }).then(function (o) {$scope.countries = $filter('orderBy')(o.data, 'name');});
 
@@ -67,7 +67,8 @@ define(['app','underscore'], function (app, _) {
                 }
 
                 if(!$scope.documents) {
-                    $scope.runSearch();
+                    //$scope.runSearch();
+                    return;
                 }
 
                 var recs = [];
@@ -107,7 +108,7 @@ define(['app','underscore'], function (app, _) {
         function buildQuery (fitler, field) {
 
             if(!fitler) return '*:*';
-            if(!fitler.length===0) return '*:*';
+            if(fitler.length != 0) return '*:*';
 
             var conditions = [];
 
@@ -241,10 +242,10 @@ define(['app','underscore'], function (app, _) {
 
         //================================================
         $scope.runSearch= function() {
-            $scope.loading = true;
+           // $scope.loading = true;
             $scope.query();
            // $scope.updateMap($scope.records, $scope.documents, "#428bca");
-            delete $scope.loading;
+           // delete $scope.loading;
         }
 
         //================================================

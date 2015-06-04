@@ -43,8 +43,6 @@
                        <i class="{{doc.schema_s | schemaIcon }}" style="font-size:16pt;position:relative;top:3px;"></i> 
                            {{doc.schema_EN_t}} 
                            - <a href="" ng-click="displayDetails=!displayDetails" target="_new">{{doc.title_t}}</a>
-                               
-                            <div class="details" ng-show="displayDetails" record-loader document="doc"></div>
                     </div>
                     
                     <div ng-repeat="doc in group.doclist.docs | filter:{'schema_s':'database'} | orderBy:'startDate_s':'asc'">
