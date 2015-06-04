@@ -1,5 +1,5 @@
 define(['app','underscore'], function (app, _) {
-    app.controller('searchByCountryController', ['$scope', 'authHttp','realm','$q','$filter',
+    app.controller('searchByCountryController', ['$scope', '$http', 'realm','$q','$filter',
         function ($scope, $http, realm, $q, $filter) {
             
         $scope.countries=[];
