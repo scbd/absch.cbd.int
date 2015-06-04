@@ -16,7 +16,7 @@ app.configure(function() {
     app.use(express.logger('dev'));
     app.use(express.compress());
     app.use('/app', express.static(__dirname + '/app'));
-    app.use('/afc_template', express.static(__dirname + '/app/libs/angular_form_controls/afc_template'));
+    app.use('/scbd-templates', express.static(__dirname + '/app/libs/scbd-angularjs-controls/scbd-templates'));
     app.use('/cbd-forums',   express.static(__dirname + '/app/libs/cbd-forums'));
     app.use('/favicon.ico', express.static(__dirname + '/favicon.ico', { maxAge: oneDay }));
 });
