@@ -252,27 +252,27 @@ define(["app",'/app/js/common.js'], function (app) {
 	//============================================================
 	app.filter("schemaIcon", [function() {
 
-		return function( schame ) {
+		return function( schema ) {
 
-			if(!schame)
-				return schame;
-			//if(schame.toLowerCase()=="focalpoint"				) return "ABS National Focal Point";
-			if(schame.toLowerCase()=="authority"				) return "mdi-action-account-box";
-			//if(schame.toLowerCase()=="contact"				) return "Contact";
-			if(schame.toLowerCase()=="database"					) return "mdi-file-folder";
-			if(schame.toLowerCase()=="resource"					) return "mdi-editor-insert-drive-file";
-			//if(schame.toLowerCase()=="organization"			) return "Organization";
-			if(schame.toLowerCase()=="measure" 					) return "mdi-action-stars";
-			if(schame.toLowerCase()=="abscheckpoint"			) return "mdi-action-verified-user";
-			if(schame.toLowerCase()=="abscheckpointcommunique"	) return "mdi-communication-message";
-			if(schame.toLowerCase()=="abspermit"				) return "mdi-action-bookmark";
-			if(schame.toLowerCase()=="absnationalreport"		) return "mdi-file-folder";
-			//if(schame.toLowerCase()=="meetingdocument"		) return "Meeting Document";
-			//if(schame.toLowerCase()=="pressrelease"			) return "Press Release";
-			//if(schame.toLowerCase()=="news"					) return "News";
+			if(!schema)
+				return schema;
+				
+			if(schema.toLowerCase()=="focalpoint" 				||	schema.toLowerCase()=="nfp"	) return "mdi-action-account-box";
+			if(schema.toLowerCase()=="authority"  				||	schema.toLowerCase()=="cna"	) return "mdi-action-account-box";
+			//if(schema.toLowerCase()=="contact"  				||	schema.toLowerCase()=="con"	) return "Contact";
+			if(schema.toLowerCase()=="database"	 				||	schema.toLowerCase()=="ndb"	) return "mdi-file-folder";
+			if(schema.toLowerCase()=="resource"	  				||	schema.toLowerCase()=="vlr"	) return "mdi-editor-insert-drive-file";
+			//if(schema.toLowerCase()=="organization"  			||	schema.toLowerCase()=="org"	) return "Organization";
+			if(schema.toLowerCase()=="measure" 	  				||	schema.toLowerCase()=="msr"	) return "mdi-action-stars";
+			if(schema.toLowerCase()=="abscheckpoint" 			||	schema.toLowerCase()=="cp"	) return "mdi-action-verified-user";
+			if(schema.toLowerCase()=="abscheckpointcommunique"  ||	schema.toLowerCase()=="cpc"	) return "mdi-communication-message";
+			if(schema.toLowerCase()=="abspermit"  				||	schema.toLowerCase()=="ircc") return "mdi-action-bookmark";
+			if(schema.toLowerCase()=="absnationalreport" 		||	schema.toLowerCase()=="nr"	) return "mdi-file-folder";
+			//if(schema.toLowerCase()=="meetingdocument" 		||	schema.toLowerCase()=="nfp"	) return "Meeting Document";
+			//if(schema.toLowerCase()=="pressrelease"	 		||	schema.toLowerCase()=="nfp"	) return "Press Release";
+			//if(schema.toLowerCase()=="news"		 			||	schema.toLowerCase()=="nfp"	) return "News";
 
-
-			return schame;
+			return schema;
 		};
 	}]);
 

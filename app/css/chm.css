@@ -104,9 +104,9 @@
 .container-breadcrumbs a{
     color:#999;
 }
+.container-full{padding-bottom:20px;}
 
-
-.footer{margin-top:14px;}
+.footer{}
 
 .footer-page{
     min-height:30px;

@@ -4,6 +4,7 @@ define(['app','underscore'], function (app, _) {
             
         $scope.countries=[];
         $scope.colors={};
+        $scope.loading=true;
 
         $http.get("/api/v2013/thesaurus/domains/countries/terms",{ cache: true }).then(function (o) {$scope.countries = $filter('orderBy')(o.data, 'name');});
 
@@ -35,8 +36,8 @@ define(['app','underscore'], function (app, _) {
 
             var queryParameters = {
                 'q': q,
-                'sort': 'createdDate_dt desc, title_t asc',
-                'fl': 'id,title_t,description_t,url_ss,schema_EN_t,date_dt,government_EN_t,schema_s,number_d,aichiTarget_ss,reference_s,sender_s,meeting_ss,recipient_ss,symbol_s,eventCity_EN_t,eventCountry_EN_t,startDate_s,endDate_s,body_s,code_s,meeting_s,group_s,function_t,department_t,organization_t,summary_EN_t,reportType_EN_t,completion_EN_t,jurisdiction_EN_t,development_EN_t',
+                'sort': 'government_EN_t asc, createdDate_dt desc, title_t asc',
+                'fl': 'id,title_t,description_t,url_ss,schema_EN_t,date_dt,government_EN_t,schema_s,summary_EN_t,jurisdiction_EN_t, type_ss, uniqueIdentifier_s',
                 'wt': 'json',
                 'start': 0,
                 'rows': 1000,
@@ -48,7 +49,7 @@ define(['app','underscore'], function (app, _) {
             };
 
             $http.get('/api/v2013/index/select', { params: queryParameters}).success(function (data) {
-
+                
                 //$scope.count = data.response.numFound;
                 $scope.documents = data.grouped.government_s.groups;
                 $scope.records = $scope.documents;
