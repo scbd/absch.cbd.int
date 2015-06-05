@@ -1,4 +1,5 @@
-define(['app','underscore'], function (app, _) {
+define(['app','underscore','angular-localizer','scbd-angularjs-services','scbd-angularjs-filters','scbd-angularjs-controls'], function (app, _) {
+   
     app.controller('searchByCountryController', ['$scope', '$http', 'realm','$q','$filter',
         function ($scope, $http, realm, $q, $filter) {
             
