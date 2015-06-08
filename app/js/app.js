@@ -45,8 +45,7 @@ define(['angular', 'angular-sanitize', 'angular-loading-bar', 'angular-animate',
                         toCache('directive', name, $compileProvider.directive(name, param1, param2, param3, param4))).data;
                 };
 
-                $httpProvider.interceptors.push('authenticationHttpIntercepter');
-                $httpProvider.interceptors.push('realmHttpIntercepter');
+
 
                 //==========================================
                 //==========================================
