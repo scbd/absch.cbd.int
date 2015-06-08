@@ -24,6 +24,8 @@ define(['app','underscore','angular-localizer','scbd-angularjs-services','scbd-a
             { identifier: 'absPermit'                   , title: 'IRCC' },
             { identifier: 'absCheckpointCommunique'     , title: 'CPC' },
         ];
+        
+          $scope.showSchemas = ["authority","measure","absCheckpoint","database","focalPoint","absPermit","absCheckpointCommunique"];
 
         $scope.querySchema     = " ( schema_s: authority OR schema_s: measure OR schema_s: absCheckpoint OR schema_s: database OR schema_s: focalPoint OR schema_s: absPermit OR schema_s: absCheckpointCommunique) ";
         $scope.queryGovernment = '*:*';
@@ -33,7 +35,7 @@ define(['app','underscore','angular-localizer','scbd-angularjs-services','scbd-a
         $scope.query = function () {
 
             // NOT version_s:* remove non-public records from resultset
-            var q = 'NOT version_s:* AND realm_ss: '+ realm.value.toLowerCase() +' AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryKeywords;
+            var q = 'NOT version_s:* AND realm_ss: '+ realm.value.toLowerCase() + ' AND ' + $scope.querySchema  + ' AND ' + $scope.queryGovernment;
 
             var queryParameters = {
                 'q': q,
@@ -51,40 +53,25 @@ define(['app','underscore','angular-localizer','scbd-angularjs-services','scbd-a
 
             $http.get('/api/v2013/index/select', { params: queryParameters}).success(function (data) {
                 
-                //$scope.count = data.response.numFound;
                 $scope.documents = data.grouped.government_s.groups;
                 $scope.records = $scope.documents;
-
+                
             }).error(function (error) { console.log('onerror'); console.log(error); });
         };
 
 
+        
 
         //================================================
         $scope.$watch('government', function() {
 
-                if(!$scope.government) {
-                    $scope.records = $scope.documents;
+                  if(!$scope.government) {
+                     $scope.queryGovernment = "*:*";
+                     $scope.runSearch();
                 }
-
-                if(!$scope.documents) {
-                    //$scope.runSearch();
-                    return;
-                }
-
-                var recs = [];
-                var docs = $scope.documents;
-                var gov = $scope.government;
-
-                for(var i=0; i < docs.length;i++){
-                    for(var j=0; j < gov.length;j++){
-                        if(docs[i].groupValue == gov[j].identifier){
-                            recs.push(docs[i]);
-                        }
-                    }
-                }
-
-                $scope.records = recs;
+  
+                $scope.queryGovernment = buildQuery($scope.government, "government_s"); 
+                $scope.runSearch();
                 //updateMap(recs, $scope.documents, "#666666");
 
                 return;
@@ -93,27 +80,31 @@ define(['app','underscore','angular-localizer','scbd-angularjs-services','scbd-a
         //================================================
         $scope.$watch('schema', function() {
 
-                if(!$scope.schema) {
-                    return;
-                }
-                if(!$scope.documents) {
-                    return;
+                 if(!$scope.schema) {
+                     $scope.querySchema = " ( schema_s: authority OR schema_s: measure OR schema_s: absCheckpoint OR schema_s: database OR schema_s: focalPoint OR schema_s: absPermit OR schema_s: absCheckpointCommunique) ";
+                     $scope.runSearch();
                 }
 
-                $scope.querySchema = buildQuery($scope.schema, 'schema_s');
+             
+                $scope.querySchema = buildQuery($scope.schema, "schema_s"); 
                 $scope.runSearch();
+                //updateMap(recs, $scope.documents, "#666666");
+
+                return;
         });
 
 
         //================================================
-        function buildQuery (fitler, field) {
+        function buildQuery (filter, field) {
 
-            if(!fitler) return '*:*';
-            if(fitler.length != 0) return '*:*';
+            if(!filter) return '*:*';
+            if(!filter.length === 0) return '*:*';
+            
+            console.log("building query");
 
             var conditions = [];
 
-            fitler.forEach(function (item) {
+            filter.forEach(function (item) {
                 if(item)
                     conditions.push(field+':'+item.identifier);
             });
