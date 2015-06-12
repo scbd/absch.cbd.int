@@ -211,9 +211,10 @@ define(['app','underscore',
                  else {
                      if(!$scope.rawDocs)
                         $scope.rawDocs = [];
-                    data.grouped.government_s.groups.forEach(function(doc){
-                        $scope.rawDocs.push(doc);
-                    });
+                     $scope.rawDocs = data.grouped.government_s.groups;
+                    // data.grouped.government_s.groups.forEach(function(doc){
+                    //     $scope.rawDocs.push(doc);
+                    // });
                     //$scope.rawDocs = data.grouped.government_s.groups;
                     $scope.documentCount = data.grouped.government_s.ngroups;
                  }
