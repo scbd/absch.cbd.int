@@ -19,6 +19,8 @@
                 <h1 style="padding-bottom:34px;">
                     <!-- <a class="color-orange fa-11"  ng-click="startIntro()"> <i class="fa fa-youtube-play"></i></a> -->
                     <span class="special-font">Search&nbsp;Information</span>
+                    <a ng-href="#" ng-click="previewType='list'"><i class="fa fa-list"/></a>
+                    <a ng-href="#" ng-click="previewType='group'"><i class="fa fa-list"/></a>
                 </h1>
 
                 <div class="well">
@@ -53,8 +55,9 @@
             </div>
 
             <div class="col-xs-9 pull-right" id="search-results">
-                <div document-list documents='rawDocs' filter='*' show-pagination='true' current-page='currentPage' document-Count='documentCount' order-by="orderBy">
+                <div preview-type="previewType" document-list documents='rawDocs' filter='*' show-pagination='true' current-page='currentPage' document-Count='documentCount' order-by="orderBy">
                 </div>
+                <!-- <div ng-show="previewType=='group'" document-group documents="rawDocs"> -->
             </div>
         </div>
     </div>

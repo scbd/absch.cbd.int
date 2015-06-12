@@ -159,17 +159,37 @@ define(['app','underscore',
             else
                 orderByFields = $scope.orderBy;
 
-            var queryParameters = {
-                'q': q,
-                'sort': orderByFields,
-                'fl': 'id,identifier_s,title_t,createdDate_dt,description_t,url_ss,schema_EN_t,date_dt,government_EN_t,schema_s,number_d,aichiTarget_ss,reference_s,sender_s,meeting_ss,recipient_ss,symbol_s,eventCity_EN_t,eventCountry_EN_t,startDate_s,endDate_s,body_s,code_s,meeting_s,group_s,function_t,department_t,organization_t,summary_EN_t,reportType_EN_t,completion_EN_t,jurisdiction_EN_t,development_EN_t,' +
-                        'government_s,publicationYear_is,resourceTypes_CEN_ss,regions_CEN_ss,languages_CEN_ss,absResposibleForAll_b,absJurisdiction_EN_t,jurisdiction_CEN_s,geneticResourceTypes_CEN_ss,thematicAreas_CEN_ss,usage_CEN_ss,keywords_CEN_ss,informAllAuthorities_b,originCountries_CEN_ss,orgperson_s,status_EN_t,type_EN_t,endDate_dt,startDate_dt,amendmentIntent_i,' +
-                        'resourceLinksLanguage_ss,type_ss',
-                'wt': 'json',
-                'start': $scope.currentPage * $scope.itemsPerPage,
-                'rows': $scope.itemsPerPage,
-                'cb': new Date().getTime()
-            };
+            var queryParameters
+            if($scope.previewType == 'list'){
+                queryParameters = {
+                    'q': q,
+                    'sort': orderByFields,
+                    'fl': 'id,identifier_s,title_t,createdDate_dt,description_t,url_ss,schema_EN_t,date_dt,government_EN_t,schema_s,number_d,aichiTarget_ss,reference_s,sender_s,meeting_ss,recipient_ss,symbol_s,eventCity_EN_t,eventCountry_EN_t,startDate_s,endDate_s,body_s,code_s,meeting_s,group_s,function_t,department_t,organization_t,summary_EN_t,reportType_EN_t,completion_EN_t,jurisdiction_EN_t,development_EN_t,' +
+                            'government_s,publicationYear_is,resourceTypes_CEN_ss,regions_CEN_ss,languages_CEN_ss,absResposibleForAll_b,absJurisdiction_EN_t,jurisdiction_CEN_s,geneticResourceTypes_CEN_ss,thematicAreas_CEN_ss,usage_CEN_ss,keywords_CEN_ss,informAllAuthorities_b,originCountries_CEN_ss,orgperson_s,status_EN_t,type_EN_t,endDate_dt,startDate_dt,amendmentIntent_i,' +
+                            'resourceLinksLanguage_ss,type_ss',
+                    'wt': 'json',
+                    'start': $scope.currentPage * $scope.itemsPerPage,
+                    'rows': $scope.itemsPerPage,
+                    'cb': new Date().getTime()
+                };
+            }
+            else if($scope.previewType == 'group'){
+                queryParameters = {
+                    'q': q + ' AND government_s:*',
+                    'sort': 'government_EN_t asc, createdDate_dt desc, title_t asc',
+                    'fl': 'id,title_t,description_t,url_ss,schema_EN_t,date_dt,government_EN_t,schema_s,summary_EN_t,jurisdiction_EN_t, type_ss, uniqueIdentifier_s',
+                    'wt': 'json',
+                    'start': $scope.currentPage * $scope.itemsPerPage,
+                    'rows': $scope.itemsPerPage,
+                    'cb': new Date().getTime(),
+                    'group': true,
+                    'group.ngroups' : true,
+                    'group.field': 'government_s',
+                    'group.limit': 1000,
+                    'group.sort': 'government_EN_t asc'
+                };
+            }
+
             if($scope.sortBy)
               queryParameters.sort = $scope.sortBy + ' desc, ' + queryParameters.sort;
 
@@ -179,14 +199,24 @@ define(['app','underscore',
             }
 
             queryCanceler = $q.defer();
-
             $http.get('/api/v2013/index/select', { params: queryParameters, timeout: queryCanceler }).success(function (data) {
 
                 queryCanceler = null;
 
-                 $scope.rawDocs = [];
-                 $scope.rawDocs = data.response.docs;
-                 $scope.documentCount   = data.response.numFound;
+
+                 if($scope.previewType=='list'){
+                    $scope.rawDocs = data.response.docs;
+                    $scope.documentCount   = data.response.numFound;
+                 }
+                 else {
+                     if(!$scope.rawDocs)
+                        $scope.rawDocs = [];
+                    data.grouped.government_s.groups.forEach(function(doc){
+                        $scope.rawDocs.push(doc);
+                    });
+                    //$scope.rawDocs = data.grouped.government_s.groups;
+                    $scope.documentCount = data.grouped.government_s.ngroups;
+                 }
 
                 if(!$scope.schemas) {
                     var queryFacetsParameters = {
@@ -214,7 +244,41 @@ define(['app','underscore',
                 }
             }).error(function (error) { console.log('onerror'); console.log(error); });
         };
-
+        // $scope.query = function() {
+        //
+        //     // NOT version_s:* remove non-public records from resultset
+        //     var q = 'NOT version_s:* AND realm_ss: ' + realm.value.toLowerCase() + ' AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment;
+        //
+        //     var queryParameters = {
+        //         'q': q + ' AND government_s:*',
+        //         'sort': 'government_EN_t asc, createdDate_dt desc, title_t asc',
+        //         'fl': 'id,title_t,description_t,url_ss,schema_EN_t,date_dt,government_EN_t,schema_s,summary_EN_t,jurisdiction_EN_t, type_ss, uniqueIdentifier_s',
+        //         'wt': 'json',
+        //         'start': 0,
+        //         'rows': 1000,
+        //         'cb': new Date().getTime(),
+        //         'group': true,
+        //         'group.field': 'government_s',
+        //         'group.limit': 1000,
+        //         'group.sort': 'government_EN_t asc'
+        //     };
+        //
+        //     $http.get('/api/v2013/index/select', {
+        //         params: queryParameters
+        //     }).success(function(data) {
+        //
+        //         $scope.documents = data.grouped.government_s.groups;
+        //         $scope.records = $scope.documents;
+        //
+        //
+        //         $scope.updateMap($scope.records, $scope.documents, "#428bca");
+        //         //console.log($scope.documents)
+        //
+        //     }).error(function(error) {
+        //         console.log('onerror');
+        //         console.log(error);
+        //     });
+        // };
 
         //============================================================
         //
@@ -296,15 +360,23 @@ define(['app','underscore',
         });
 
 
-        $scope.$watch('currentPage',     refresh);
-        $scope.$watch('querySchema',     function() { $scope.currentPage=0; refresh(); affix(); });
-        $scope.$watch('queryGovernment', function() { $scope.currentPage=0; refresh(); affix();  });
-        $scope.$watch('queryTargets',    function() { $scope.currentPage=0; refresh(); affix();  });
-        $scope.$watch('queryTheme',      function() { $scope.currentPage=0; refresh(); affix();  });
-        $scope.$watch('queryRegion',      function() { $scope.currentPage=0; refresh(); affix();  });
-        $scope.$watch('queryDate',       function() { $scope.currentPage=0; refresh(); affix();  });
+        $scope.$watch('currentPage',     function() { $scope.previewType == 'list' ? refresh() : query(); });
+        $scope.$watch('querySchema',     function() { $scope.currentPage=0; refresh(); });
+        $scope.$watch('queryGovernment', function() { $scope.currentPage=0; refresh(); });
+        $scope.$watch('queryTargets',    function() { $scope.currentPage=0; refresh(); });
+        $scope.$watch('queryTheme',      function() { $scope.currentPage=0; refresh(); });
+        $scope.$watch('queryRegion',     function() { $scope.currentPage=0; refresh(); });
+        $scope.$watch('queryDate',       function() { $scope.currentPage=0; refresh(); });
         $scope.$watch('keyword',         function() { $scope.currentPage=0; refresh(); });
         $scope.$watch('orderBy',         function() { $scope.currentPage=0; refresh(); });
+        $scope.$watch('previewType',     function(newValue, oldValue) {
+            if(newValue && oldValue){
+                $scope.rawDocs = undefined;
+                $scope.currentPage=0;
+                refresh();
+            }
+        });
+        $scope.previewType = 'list';
 
         $scope.$on('externalFilter', function(evt, data){
             $timeout(function(){

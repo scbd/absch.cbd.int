@@ -389,7 +389,7 @@ define(['app','linqjs', 'angular-localizer',
 		  //
 
         }).then(null, function(error) {
-          $scope.error = "error loading permit releated checkpoint communiqué.";
+          $scope.error = "error loading permit related checkpoint communiqué.";
            console.log(error );
         })
 

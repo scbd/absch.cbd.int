@@ -1,162 +1,254 @@
-<div style="padding: 0px; margin: 0;">
+<div style="padding: 0px; margin: 0;" >
 
-<link rel="stylesheet" href="/app/css/result.css">
+    <div ng-show="previewType=='list'">
+        <link rel="stylesheet" href="/app/css/result.css">
 
-  <ul class="pagination pull-right" ng-show='showPagination'>
-     <li class="disabled" >
-      <a href>  Found {{documentCount}}</a>
-    </li>
-    <li class="disabled" >
-      <a href>  {{pageCount==0 ? 0 : currentPage+1 }} of {{pageCount}}</a>
-    </li>
-    <li ng-class="{disabled: currentPage == 0}">
-      <a href ng-click="actionSetPage(0)">First »</a>
-    </li>
-    <li ng-class="{disabled: currentPage == 0}">
-      <a href ng-click="actionSetPage(currentPage-1)">« Prev</a>
-    </li>
-    <li ng-repeat="n in range(pageCount)" ng-class="{active: n == currentPage}" ng-click="actionSetPage(n)">
-      <a href>{{n+1}}</a>
-    </li>
-    <li ng-class="{disabled: currentPage >= pageCount - 1}">
-      <a href ng-click="actionSetPage(currentPage+1)">Next »</a>
-    </li>
-    <li ng-class="{disabled: currentPage == pageCount - 1 || pageCount ==0}">
-      <a href ng-click="actionSetPage(pageCount - 1)">Last »</a>
-    </li>
-  </ul>
-  <style type="text/css">
-        ::selection{
-          background: SeaGreen;
-          color: White;
-        }
-        ::-moz-selection{
-          background: SeaGreen;
-          color: White;
-        }
+        <ul class="pagination pull-right" ng-show='showPagination'>
+            <li class="disabled">
+                <a href>  Found {{documentCount}}</a>
+            </li>
+            <li class="disabled">
+                <a href>  {{pageCount==0 ? 0 : currentPage+1 }} of {{pageCount}}</a>
+            </li>
+            <li ng-class="{disabled: currentPage == 0}">
+                <a href ng-click="actionSetPage(0)">First »</a>
+            </li>
+            <li ng-class="{disabled: currentPage == 0}">
+                <a href ng-click="actionSetPage(currentPage-1)">« Prev</a>
+            </li>
+            <li ng-repeat="n in range(pageCount)" ng-class="{active: n == currentPage}" ng-click="actionSetPage(n)">
+                <a href>{{n+1}}</a>
+            </li>
+            <li ng-class="{disabled: currentPage >= pageCount - 1}">
+                <a href ng-click="actionSetPage(currentPage+1)">Next »</a>
+            </li>
+            <li ng-class="{disabled: currentPage == pageCount - 1 || pageCount ==0}">
+                <a href ng-click="actionSetPage(pageCount - 1)">Last »</a>
+            </li>
+        </ul>
+        <style type="text/css">
+            ::selection {
+                background: SeaGreen;
+                color: White;
+            }
 
-         .selectedText{
-          position: relative;
-          background-color: SeaGreen; color:#fff; line-height: 1.2em;
-         }
-         .popDiv{
-          background: ForestGreen; color: white; padding: 6px; max-width: 250px;min-width:100px;
-          position: absolute; top: 18px; left: 0;
-          border-radius: 4px; box-shadow: 2px 3px 4px #444;
+            ::-moz-selection {
+                background: SeaGreen;
+                color: White;
+            }
 
-          -webkit-animation: slideIn .5s;
-          animation: slideIn .5s;
-         }
+            .selectedText {
+                position: relative;
+                background-color: SeaGreen;
+                color: #fff;
+                line-height: 1.2em;
+            }
 
-  </style>
-  <div class="clearfix"></div>
-  <div class="row pull-right">
-      <div class="col-lg-12">Order By:
-            <select ng-model="orderByField">
-                <option value="createdDate_dt">Created On</option>
-                <option value="title_s">Title</option>
-                <option value="government_EN_t">Government</option>
-            </select>
-            <input type="checkbox" ng-model="reverse"> Reverse
-      </div>
-  </div><br/>
-  <div ng-repeat="document in transformedDocuments | filter:advanceFilter | filter:filterCategory "  style="border-top:1px solid #ddd;border-bottom:1px solid #ddd;border-right:1px solid #ddd;">
-     <!-- {{document}} -->
-    <div id="Result">
-
-
-        <div class="{{document.recordtype}}" id="help-record-type" style="cursor:pointer;" ng-class="{'bg-grey': displayDetails}">
-                <div class="" style="padding:20px 20px 10px 20px;" >
-
-                    <div>
-                        <div style="padding:0px 0 0px 0px; ">
-                            <a class="label label-party" id="help-record-country" ng-class="{'label-default':!document.isNPParty, 'label-primary':document.isNPParty}"
-                                ng-href="/countries/{{document.doc.government_s}}"    data-popover="true" data-html="true" type="country" data-value="{{document.doc.government_s}}" >{{document.source}}</a>
-                            <small ng-show="document.isInbetweenParty" >(entry into force on {{document.entryIntoForce | formatDate}})</small>
-
-                            <span ng-click="displayDetails = !displayDetails;load(document,displayDetails);" ng-hide="document.schema=='focalpoint'" class="schema">{{document.schema | schemaName}}</span>
-
-                            <span ng-click="displayDetails = !displayDetails;load(document,displayDetails);" ng-show="document.schema=='focalpoint'" class="schema">{{getNFPText(document.typeList)}}</span>
-
-
-                            <span>
-                                <a href="/database/{{document.schema}}/{{getDocumentId(document)}}"
-                                    target="_new" class="pull-right"style="padding:0px 3px;color:#999;"><i class="glyphicon glyphicon-new-window" id="help-record-newwindow"></i>
-                                </a>
-                            </span>
-
-                            <span class="pubDate pull-right" ng-show="document.createdDateOn">{{document.createdDateOn | formatDate}}</span>
-                        </div>
-                    </div>
+            .popDiv {
+                background: ForestGreen;
+                color: white;
+                padding: 6px;
+                max-width: 250px;
+                min-width: 100px;
+                position: absolute;
+                top: 18px;
+                left: 0;
+                border-radius: 4px;
+                box-shadow: 2px 3px 4px #444;
+                -webkit-animation: slideIn .5s;
+                animation: slideIn .5s;
+            }
+        </style>
+        <div class="clearfix"></div>
+        <div class="row pull-right">
+            <div class="col-lg-12">Order By:
+                <select ng-model="orderByField">
+                    <option value="createdDate_dt">Created On</option>
+                    <option value="title_s">Title</option>
+                    <option value="government_EN_t">Government</option>
+                </select>
+                <input type="checkbox" ng-model="reverse"> Reverse
+            </div>
+        </div>
+        <br/>
+        <div ng-show="!documents" style="padding-left:50%">
+            <i class="fa fa-spin fa-spinner fa-5x" style="margin:auto" />
+        </div>
+        <div ng-repeat="document in transformedDocuments | filter:advanceFilter | filter:filterCategory " style="border-top:1px solid #ddd;border-bottom:1px solid #ddd;border-right:1px solid #ddd;">
+            <!-- {{document}} -->
+            <div id="Result">
 
 
+                <div class="{{document.recordtype}}" id="help-record-type" style="cursor:pointer;" ng-class="{'bg-grey': displayDetails}">
+                    <div class="" style="padding:20px 20px 10px 20px;">
 
-                    <div class="row textDescription" style="padding:10px;">
-                        <div class="col-xs-12">
-                            <div ng-click="displayDetails = !displayDetails;load(document,displayDetails);">
-                                <i class="fa" ng-class="{'fa-caret-down':displayDetails, 'fa-caret-right':!displayDetails}"
-                                style="font-size:11px;color:#999;position:relative; top:-1px;font-size:14px;"></i>
+                        <div>
+                            <div style="padding:0px 0 0px 0px; ">
+                                <a class="label label-party" id="help-record-country" ng-class="{'label-default':!document.isNPParty, 'label-primary':document.isNPParty}" ng-href="/countries/{{document.doc.government_s}}" data-popover="true" data-html="true" type="country" data-value="{{document.doc.government_s}}">{{document.source}}</a>
+                                <small ng-show="document.isInbetweenParty">(entry into force on {{document.entryIntoForce | formatDate}})</small>
+
+                                <span ng-click="displayDetails = !displayDetails;load(document,displayDetails);" ng-hide="document.schema=='focalpoint'" class="schema">{{document.schema | schemaName}}</span>
+
+                                <span ng-click="displayDetails = !displayDetails;load(document,displayDetails);" ng-show="document.schema=='focalpoint'" class="schema">{{getNFPText(document.typeList)}}</span>
 
 
-                                  <span class="title text" id="help-record-title">{{document.title}} </span>
-                              </div>
+                                <span>
+                                    <a href="/database/{{document.schema}}/{{getDocumentId(document)}}" target="_new" class="pull-right" style="padding:0px 3px;color:#999;"><i class="glyphicon glyphicon-new-window" id="help-record-newwindow"></i>
+                                    </a>
+                                </span>
 
-                          <div class="description" ng-hide="displayDetails" ng-click="displayDetails = !displayDetails;load(document,displayDetails);" >
-                          {{document.description | truncate:700:' ... more'}}
-
-                          </div>
-                          <div class="metadetails" ng-hide="displayDetails" >
-
-                            <span ng-repeat="m in document.metadata">
-                             <span ng-bind-html="m"></span> {{$last ? '' : ' &nbsp;|&nbsp; '}}
-                            <span>
-                            <span ng-show="document.Languages && document.metadata"> | </span>
-                            <span ng-repeat="b in document.Languages">
-                                {{b | term}} {{$last ? '' : ', '}}
-                            </span>
-                          </div>
-
-                            <div class="pull-right" ng-show="displayDetails" ng-click="displayDetails = !displayDetails;load(document,displayDetails);" style="z-index:100;padding-top:30px;padding-right:20px;cursor:pointer;">
-                                <i class="glyphicon glyphicon-remove-circle" style="font-size:20px;color:white;" ></i>
+                                <span class="pubDate pull-right" ng-show="document.createdDateOn">{{document.createdDateOn | formatDate}}</span>
                             </div>
-                        <div class="details" ng-show="displayDetails" record-loader document="document.data"
-                        hide="title;header;libraries" ></div>
-
                         </div>
+
+
+
+                        <div class="row textDescription" style="padding:10px;">
+                            <div class="col-xs-12">
+                                <div ng-click="displayDetails = !displayDetails;load(document,displayDetails);">
+                                    <i class="fa" ng-class="{'fa-caret-down':displayDetails, 'fa-caret-right':!displayDetails}" style="font-size:11px;color:#999;position:relative; top:-1px;font-size:14px;"></i>
+
+
+                                    <span class="title text" id="help-record-title">{{document.title}} </span>
+                                </div>
+
+                                <div class="description" ng-hide="displayDetails" ng-click="displayDetails = !displayDetails;load(document,displayDetails);">
+                                    {{document.description | truncate:700:' ... more'}}
+
+                                </div>
+                                <div class="metadetails" ng-hide="displayDetails">
+
+                                    <span ng-repeat="m in document.metadata">
+                                        <span ng-bind-html="m"></span> {{$last ? '' : ' &nbsp;|&nbsp; '}}
+                                        <span>
+                                            <span ng-show="document.Languages && document.metadata"> | </span>
+                                            <span ng-repeat="b in document.Languages">
+                                                {{b | term}} {{$last ? '' : ', '}}
+                                            </span>
+                                </div>
+
+                                <div class="pull-right" ng-show="displayDetails" ng-click="displayDetails = !displayDetails;load(document,displayDetails);" style="z-index:100;padding-top:30px;padding-right:20px;cursor:pointer;">
+                                    <i class="glyphicon glyphicon-remove-circle" style="font-size:20px;color:white;"></i>
+                                </div>
+                                <div class="details" ng-show="displayDetails" record-loader document="document.data" hide="title;header;libraries"></div>
+
+                            </div>
+                        </div>
+
                     </div>
-
-                </div><!--  end result col -->
-            </div> <!-- end row -->
-
-
+                    <!--  end result col -->
+                </div>
+                <!-- end row -->
 
 
-      </div> <!-- end switch -->
-      <div class="clearfix"></div>
+
+
+            </div>
+            <!-- end switch -->
+            <div class="clearfix"></div>
+        </div>
+
+
+        <!---Bottom pager-->
+        <div class="clearfix"></div>
+        <ul class="pagination pull-right" ng-show='showPagination'>
+            <li ng-class="disabled">
+                <a href>  {{pageCount==0 ? 0 : currentPage+1 }} of {{pageCount}}</a>
+            </li>
+            <li ng-class="{disabled: currentPage == 0}">
+                <a href ng-click="actionSetPage(0)">First »</a>
+            </li>
+            <li ng-class="{disabled: currentPage == 0}">
+                <a href ng-click="actionSetPage(currentPage-1)">« Prev</a>
+            </li>
+            <li ng-repeat="n in range(pageCount)" ng-class="{active: n == currentPage}" ng-click="actionSetPage(n)">
+                <a href>{{n+1}}</a>
+            </li>
+            <li ng-class="{disabled: currentPage >= pageCount - 1}">
+                <a href ng-click="actionSetPage(currentPage+1)">Next »</a>
+            </li>
+            <li ng-class="{disabled: currentPage == pageCount - 1 || pageCount ==0}">
+                <a href ng-click="actionSetPage(pageCount - 1)">Last »</a>
+            </li>
+        </ul>
+
+        <!-- </div> -->
     </div>
 
+    <div ng-show="previewType=='group'" infinite-scroll="updateScrollPage()" infinite-scroll-busy="loading" infinite-scroll-distance="500" >
+    <style>
+         .container-full{background-color: #FFF;}
+    </style>
+        <div >
+            <div class="row">
+                <strong>Country(s):
+                    <span class="color-grey">{{documents.length}}</span>
+                </strong>
+                <div ng-show="!documents" style="padding-left:50%">
+                    <i class="fa fa-spin fa-spinner fa-5x" style="margin:auto" />
+                </div>
+            </div>
+        </div>
 
-    <!---Bottom pager-->
-    <div class="clearfix"></div>
-    <ul class="pagination pull-right" ng-show='showPagination'>
-        <li ng-class="disabled" >
-          <a href>  {{pageCount==0 ? 0 : currentPage+1 }} of {{pageCount}}</a>
-        </li>
-        <li ng-class="{disabled: currentPage == 0}">
-          <a href ng-click="actionSetPage(0)">First »</a>
-        </li>
-        <li ng-class="{disabled: currentPage == 0}">
-          <a href ng-click="actionSetPage(currentPage-1)">« Prev</a>
-        </li>
-        <li ng-repeat="n in range(pageCount)" ng-class="{active: n == currentPage}" ng-click="actionSetPage(n)">
-          <a href>{{n+1}}</a>
-        </li>
-        <li ng-class="{disabled: currentPage >= pageCount - 1}">
-          <a href ng-click="actionSetPage(currentPage+1)">Next »</a>
-        </li>
-        <li ng-class="{disabled: currentPage == pageCount - 1 || pageCount ==0}">
-          <a href ng-click="actionSetPage(pageCount - 1)">Last »</a>
-        </li>
-    </ul>
+        <div class="row" ng-repeat="group in documents" style="margin-top:30px;margin-bottom:10px;">
+            <div class="col-lg-12">
+                <!-- ng-if="group.doclist.docs.length>0 " -->
+                <h3 class="color-medgrey" style="border-top:1px solid #DDD;padding-top:0;margin-top:3px;">
+                    .<i class="fa fa-chevron-circle-down"></i>{{$index}} {{group.doclist.docs[0].government_EN_t}} </h3>
+                <div class="">
+                    <div class="row">
 
-  </div>
+
+                        <div ng-repeat="doc in group.doclist.docs | filter:{'schema_s':'focalPoint'} | orderBy:'startDate_s':'asc'">
+                            <h4 ng-show="$index===0" class="bg-grey3" style="padding:3px;margin-top:10px;"> National Focal Points </h4>
+                            <i class="{{doc.schema_s | schemaIcon }}" style="font-size:16pt;position:relative;top:3px;"></i>
+                            <span ng-show="doc.type_ss.indexOf('ABS-FP') >= 0 ">ABS Focal Point</span>
+                            <span ng-show="doc.type_ss.indexOf('ABS-FP') < 0 "> CBD Focal Point</span>
+                            - <a href="{{doc.url_ss[0]}}" target="_new">{{doc.title_t}}</a>
+                        </div>
+
+                        <div ng-repeat="doc in group.doclist.docs | filter:{'schema_s':'authority'} | orderBy:'startDate_s':'asc'">
+                            <h4 ng-show="$index===0" class="bg-grey3" style="padding:3px;margin-top:30px;"> Competent National Authority </h4>
+                            <i class="{{doc.schema_s | schemaIcon }}" style="font-size:16pt;position:relative;top:3px;"></i> {{doc.schema_EN_t}} - <a href="" ng-click="displayDetails=!displayDetails" target="_new">{{doc.title_t}}</a>
+                        </div>
+
+                        <div ng-repeat="doc in group.doclist.docs | filter:{'schema_s':'database'} | orderBy:'startDate_s':'asc'">
+                            <h4 ng-show="$index===0" class="bg-grey3" style="padding:3px;margin-top:30px;"> National Website or Database</h4>
+                            <i class="{{doc.schema_s | schemaIcon }}" style="font-size:16pt;position:relative;top:3px;"></i> National Website or Database - <a href="{{doc.url_ss[0]}}" target="_new">{{doc.title_t}}</a>
+                        </div>
+
+                        <div ng-repeat="doc in group.doclist.docs | filter:{'schema_s':'measure'} | orderBy:'startDate_s':'asc'">
+                            <h4 ng-show="$index===0" class="bg-grey3" style="padding:3px;margin-top:30px;"> Legislative, administrative or policy measures </h4>
+                            <i class="{{doc.schema_s | schemaIcon }}" style="font-size:16pt;position:relative;top:3px;"></i> {{doc.schema_EN_t}} - <a href="{{doc.url_ss[0]}}" target="_new">{{doc.title_t}}</a>
+                        </div>
+
+                        <div ng-repeat="doc in group.doclist.docs | filter:{'uniqueIdentifier_s':'absch-cp-'} | orderBy:'startDate_s':'asc'">
+                            <h4 ng-show="$index===0" class="bg-grey3" style="padding:3px;margin-top:30px;"> Checkpoint</h4>
+                            <i class="{{doc.schema_s | schemaIcon }}" style="font-size:16pt;position:relative;top:3px;"></i> {{doc.schema_EN_t}} - <a href="{{doc.url_ss[0]}}" target="_new">{{doc.title_t}}</a>
+
+                        </div>
+
+                        <div ng-repeat="doc in group.doclist.docs | filter:{'schema_s':'absCheckpointCommunique'} | orderBy:'startDate_s':'asc'">
+                            <h4 ng-show="$index===0" class="bg-grey3" style="padding:3px;margin-top:30px;"> Checkpoint Communiqué</h4>
+                            <i class="{{doc.schema_s | schemaIcon }}" style="font-size:16pt;position:relative;top:3px;"></i> {{doc.schema_EN_t}} -
+                            <a href="{{doc.url_ss[0]}}" target="_new">
+                                <span style="text-transform:uppercase;">{{doc.uniqueIdentifier_s}}</span> | {{doc.title_t}}</a>
+                        </div>
+
+                        <div ng-repeat="doc in group.doclist.docs | filter:{'schema_s':'absPermit'} | orderBy:'startDate_s':'asc'">
+                            <h4 ng-show="$index===0" class="bg-grey3" style="padding:3px;margin-top:30px;"> Internationally Recognized Certificate of Compliance </h4>
+                            <i class="{{doc.schema_s | schemaIcon }}" style="font-size:16pt;position:relative;top:3px;"></i> {{doc.schema_EN_t}} - <a href="{{doc.url_ss[0]}}" target="_new">{{doc.title_t}}</a>
+                        </div>
+
+
+
+                        <br>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
