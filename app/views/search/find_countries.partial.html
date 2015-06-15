@@ -11,8 +11,8 @@
 
             <div class="checkbox" style="margin-top:2px;margin-bottom:2px;padding:0 0 0 5px;">&nbsp;
                 <!-- <div class="glyphicon glyphicon-remove"></div>  -->
-                <label class="label label-party" ng-class="{'label-info':item.isSignatory && !item.isRatified,
-                'label-primary':item.isRatified && !item.isInbetween, 'label-default':(!item.isRatified && !item.isSignatory) || item.isInbetween}">
+                <label class="label label-party" ng-class="{'label-info':item.isNPSignatory && !item.isNPParty,
+                'label-primary':item.isNPParty, 'label-default':!item.isNPParty}">
                     <input type="checkbox" ng-model="item.selected" ng-change="refresh()">{{item.name.en}} ({{item.count}})</label>
             </div>
 
@@ -48,9 +48,9 @@
 
                             <span style="font-weight:bold;font-size:16px;" >
                                 <a ng-href="#" ng-click="typeFilter = 'All'"><span class="label label-warning bg-white" style="border-color:#111;" ng-class="{'letter-active' : typeFilter == 'All'}"><strong>All ({{terms.length}})</strong></span></a>
-                                <a ng-href="#" ng-click="typeFilter = 'isPartyToCBD'"><span class="label label-default" ng-class="{'letter-active' : typeFilter == 'isPartyToCBD'}">Non Party ({{nonRatifiedCount}})</span></a>
-                                <a ng-href="#" ng-click="typeFilter = 'isRatified'"><span class="label label-primary" ng-class="{'letter-active' : typeFilter == 'isRatified'}">Ratified ({{ratifiedCount}})</span></a>
-                                <a ng-href="#" ng-click="typeFilter = 'isSignatory'"><span class="label label-info" ng-class="{'letter-active' : typeFilter == 'isSignatory'}">Signatory ({{signatoryCount}})</span></a>
+                                <a ng-href="#" ng-click="typeFilter = '!isNPParty'"><span class="label label-default" ng-class="{'letter-active' : typeFilter == '!isNPParty'}">Non Party ({{nonPartyCount}})</span></a>
+                                <a ng-href="#" ng-click="typeFilter = 'isNPParty'"><span class="label label-primary" ng-class="{'letter-active' : typeFilter == 'isNPParty'}">Ratified ({{partyCount}})</span></a>
+                                <!-- <a ng-href="#" ng-click="typeFilter = 'isNPSignatory'"><span class="label label-info" ng-class="{'letter-active' : typeFilter == 'isNPSignatory'}">Signatory ({{signatoryCount}})</span></a> -->
                                 <!-- <a ng-href="#" ng-click="typeFilter = 'isInbetween'"><span class="label label-success" ng-class="{'letter-active' : typeFilter == 'isInbetween'}">Inbetween ({{inbetweenCount}})</span></a> -->
                             </span>
 
@@ -75,8 +75,8 @@
                                 </div>
                                 <div class="col-xs-12" style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;padding-left:5px;padding-right:5px;"
                                 ng-repeat="item in (terms | filter: filterCountries | filter:filterByType |orderBy:'name.en')"
-                                 ng-class="{'label-info':item.isSignatory && !item.isRatified, 'label-primary':item.isRatified && !item.isInbetween,
-                                'label-default':(!item.isRatified && !item.isSignatory) || item.isInbetween}">
+                                 ng-class="{'label-primary':item.isNPParty,
+                                'label-default':!item.isNPParty}">
                                     <div class="checkbox" style="margin-top:2px;margin-bottom:2px" >
                                         &nbsp;
                                             <label class="label label-party" style="font-size:18px;font-weight:bold;white-space:normal;"

@@ -1,10 +1,11 @@
-define(['app',
+define(['app','linqjs', 'angular-localizer',
 	'/app/views/directives/login.directive.html.js',
 	'/app/views/register/register-record-list.directive.js',
 	'/app/views/directives/task-id-directive.html.js',
 	'/app/views/directives/user-details.directive.html.js',
   '/app/views/directives/ngxLazy.directive.js',
-  'bootstrap-datepicker','moment',  'text-angular', 'bootbox','angular-introjs', 'introjs'], function (app) {
+  'bootstrap-datepicker','moment',  'text-angular', 'bootbox','angular-introjs',
+   'introjs','scbd-angularjs-services','scbd-angularjs-filters','scbd-angularjs-controls'], function (app) {
 
   "use strict";
 // angular.module([]);
@@ -12,6 +13,7 @@ define(['app',
   app.controller("RegisterController",
     ["$rootScope", "$location" , "$scope", "$q", "$window", "IStorage", "underscore",
      "schemaTypes", "$timeout","$filter", "$routeParams", "$cookies","bootbox","realm","IWorkflows",
+
 	  function ($rootScope, $location, $scope, $q, $window, storage, _,
       schemaTypes, $timeout, $filter, $routeParams, $cookies,bootbox,realm,workflows) {
 
@@ -387,7 +389,7 @@ define(['app',
 		  //
 
         }).then(null, function(error) {
-          $scope.error = "error loading permit releated checkpoint communiqué.";
+          $scope.error = "error loading permit related checkpoint communiqué.";
            console.log(error );
         })
 
@@ -498,7 +500,7 @@ define(['app',
 
     $scope.$on("documentInvalid", function(evt, invalidDocument) {
 
-	  $scope.documentInvalid = true;
+	   	$scope.documentInvalid = true;
     });
 
     //============================================================
@@ -579,7 +581,7 @@ define(['app',
 
     });
 
-	//============================================================
+	 	//============================================================
     //
     // Occurs when record-list duplicate a record or a draft
     //
@@ -589,6 +591,26 @@ define(['app',
 	  updateFacets(doc, true);
       evt.stopPropagation();
       $scope.editing = false;
+
+    });
+
+    //============================================================
+    //
+    // Occurs when record-list workflow request is deleted.
+    //
+    //============================================================
+    $scope.$on("documentWorkflowRequestDeleted", function(evt, doc){
+      bootbox.alert('<h1>Workflow request deleted.</h1>');
+      $scope.msg = "Workflow request deleted.";
+	  //update request count
+    updateFacets(doc, false);
+    var document = _.first(_.where($scope.records, {identifier:doc.identifier}));
+    if(document)
+      document.workingDocumentLock = null;
+	  //update draft count
+    updateFacets(document, true);
+    evt.stopPropagation();
+    $scope.editing = false;
 
     });
 

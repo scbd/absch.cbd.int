@@ -4,7 +4,7 @@ define(['app','underscore',
   '/app/views/countries/country-map-list-directive.html.js',
 ], function(app, _) {
 
-  app.controller("CountriesMapController", ["$scope", "authHttp", "$filter", "commonjs", "$q",
+  app.controller("CountriesMapController", ["$scope", "$http", "$filter", "commonjs", "$q",
     function($scope, $http, $filter, commonjs, $q) {
 
 

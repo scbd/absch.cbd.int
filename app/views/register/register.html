@@ -8,7 +8,7 @@
 
 
     <div id="document_type_links" ng-show="user.isAuthenticated">
-        <h1 class="special-font">Register Information</h1>
+        <h1 class="special-font">Management Center</h1>
 
     <div class="box bg-none" style="margin-bottom:20px;">
                     <!-- <div style="font-size:16;font-weight:bold;">Legend</div> -->
@@ -139,15 +139,9 @@
                         <div class="btn-commonformat well" ng-class="{ 'btn-commonformat-selected' : document_type==type ,'btn-commonformat-reference-selected' : document_type=='resource' && document_type==type}">
                           <div class="btn-commonformat-national" ng-class="{'btn-commonformat-reference':document_types[type].abbreviation=='VLR'}">
 
-                              <i ng-class="{'mdi-file-folder':document_types[type].abbreviation=='NR'}" style="font-size:16pt;position:relative;top:3px;"></i>
-                              <i ng-class="{'mdi-action-account-box':document_types[type].abbreviation=='CNA'}" style="font-size:16pt;position:relative;top:3px;"></i>
-                              <i ng-class="{'mdi-action-verified-user':document_types[type].abbreviation=='CP'}" style="font-size:16pt;position:relative;top:3px;"></i>
-                              <i ng-class="{'mdi-action-stars':document_types[type].abbreviation=='MSR'}" style="font-size:16pt;position:relative;top:3px;"></i>
-                              <i ng-class="{'mdi-action-bookmark':document_types[type].abbreviation=='IRCC'}" style="font-size:16pt;position:relative;top:3px;"></i>
-                              <i ng-class="{'mdi-communication-message':document_types[type].abbreviation=='CPC'}" style="font-size:16pt;position:relative;top:3px;"></i>
-                              <i ng-class="{'mdi-file-folder':document_types[type].abbreviation=='NDB'}" style="font-size:16pt;position:relative;top:3px;"></i>
-                              <i ng-class="{'mdi-editor-insert-drive-file':document_types[type].abbreviation=='VLR'}" style="font-size:16pt;position:relative;top:3px;"></i>
-                              {{document_types[type].abbreviation}}
+  
+                               <i class="{{type | schemaIcon }}" style="font-size:16pt;position:relative;top:3px;"></i>
+                                {{document_types[type].abbreviation}}
 
                             <div style="padding-right:10px;position:relative;top:-15px;">
                             <div class="flip pull-right" ng-show="facets(type,'draft') > 0">

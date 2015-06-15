@@ -131,10 +131,9 @@ define(['app', 'underscore', '/app/js/common.js'], function(app, _) {
 
           $scope.filterByType = function(entity) {
             return $scope.typeFilter == 'All' ||
-            $scope.typeFilter == 'isPartyToCBD' && ((!entity.isSignatory && !entity.isRatified) || entity.isInbetween)||
-            $scope.typeFilter == 'isSignatory' && entity.isSignatory ||
-            $scope.typeFilter == 'isRatified' && entity.isRatified && !entity.isInbetween || 
-            $scope.typeFilter == 'isInbetween' && entity.isInbetween;
+            ($scope.typeFilter == '!isNPParty' && !entity.isNPParty)||
+            ($scope.typeFilter == 'isNPSignatory' && entity.isNPSignatory && !entity.isNPParty) ||
+            ($scope.typeFilter == 'isNPParty' && entity.isNPParty);
 
           };
           $scope.selectedCount = function() {
@@ -201,54 +200,11 @@ define(['app', 'underscore', '/app/js/common.js'], function(app, _) {
                 $scope.termsx = dictionarize($scope.terms);
                 onWatch_items($scope.items);
 
-                $scope.signatoryCount = 0;
-                $scope.nonRatifiedCount = 0;
-                $scope.ratifiedCount = 0;
-                $scope.inbetweenCount = 0;
+                $scope.signatoryCount   = _.where($scope.terms, {isNPSignatory:true}).length;
+                $scope.nonPartyCount    = _.where($scope.terms, {isNPParty:false}).length;
+                $scope.partyCount       = _.where($scope.terms, {isNPParty:true}).length;
+                //$scope.inbetweenCount = _.where($scope.terms, {isNPParty:true}).length;
 
-                // $q.when(commonjs.getCountries(), function(countries) {
-                //
-                  $scope.terms.forEach(function(country) {
-                    // var cd = _.where(countries, {
-                    //   code: country.identifier.substring(0, 2).toUpperCase()
-                    // })
-                    // if (cd.length > 0) {
-                      country.isParty =country.isParty;
-                      country.isSignatory = country.isSignatory;
-                      country.isRatified = country.isRatified;
-                      country.isInbetween = country.isInbetweenParty;
-
-                      if (country.isSignatory)
-                        $scope.signatoryCount++;
-
-                      if (country.isInbetween || !country.isRatified)
-                        $scope.nonRatifiedCount++;
-
-                      if (country.isRatified && !country.isInbetween)
-                        $scope.ratifiedCount++;
-
-                      if (country.isInbetween)
-                        $scope.inbetweenCount++;
-                    // }
-
-                  });
-                //
-                //  var cout =
-                //   _.reject(countries, function(country){
-                //       var cd = _.find($scope.terms, function(cot){
-                //           return cot.identifier.toUpperCase() == country.code.toUpperCase();
-                //         }                      )
-                //         if(!cd)
-                //         console.log(cd,country)
-                //         if(cd && cd.length>0)
-                //             return cd[0];
-                //
-                //   })
-                //   console.log(cout);
-                //
-                //   console.log($scope.terms)
-                //
-                // });
               });
           }
 

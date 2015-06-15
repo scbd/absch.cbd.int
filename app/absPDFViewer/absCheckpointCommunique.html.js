@@ -23,10 +23,10 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q
 			$scope.documentInfo = result[1].data;
 			$scope.documentVersion = result[2].data;
 			$scope.realm = $scope.documentInfo.Realm;
-			
+
 			if($scope.document.permit){
 				$scope.document.permit.forEach(function(item){
-					$http.get('/api/v2013/documents/' +  item.identifier, { info:true})
+					$http.get('/api/v2013/documents/' +  item.identifier, { info:""})
 					.success(function(result){
 						item.document = result;
 					}).finally(function(){
@@ -48,7 +48,7 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q
 		$scope.emailList = [];
 		if(document.permit){
 				angular.forEach(document.permit, function(permit){
-					if(permit.document.authority)
+					if(permit.document.authority  && (permit.document.authority.title_t || permit.document.authority.firstName))
 						$scope.emailList.push(permit.document.authority);
 				})
 		}

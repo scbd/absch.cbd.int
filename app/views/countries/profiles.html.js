@@ -17,7 +17,7 @@
    '/app/js/common.js'
  ], function(app, _, linqjs) {
 
-   app.controller("ProfileController", ["$scope", "authHttp", "$routeParams", "linqjs", "$filter", "realm",
+   app.controller("ProfileController", ["$scope", "$http", "$routeParams", "linqjs", "$filter", "realm",
                 "commonjs", "$q", '$element', '$timeout','commonjs','IStorage','$rootScope',
      function($scope, $http, $routeParams, linqjs, $filter, realm, commonjs, $q,
                 $element, $timeout, countriescommonjs, IStorage,$rootScope) {
@@ -79,8 +79,18 @@
              $rootScope.breadcrumbsParam = $scope.country.name.en;
              $scope.searchText = '';
              $scope.autocompleteData = [];
-             if($scope.country)
-                $scope.entryIntoForceDate = moment($scope.country.treaties.XXVII8b.deposit).add(90, 'days');
+            
+            $scope.country.isCBDParty = countriescommonjs.isPartyToCBD($scope.country ) || $scope.country.code == 'EU';
+            $scope.country.isNPParty = countriescommonjs.isNPParty($scope.country ) || $scope.country.code == 'EU';
+            $scope.country.isNPSignatory = countriescommonjs.isSignatory($scope.country ) || $scope.country.code == 'EU';
+            $scope.country.isNPRatified = countriescommonjs.isRatified($scope.country ) || $scope.country.code == 'EU';
+            $scope.country.isNPInbetweenParty = moment().diff(moment($scope.country.treaties.XXVII8b.deposit), 'days') < 90;
+
+            if ($scope.country.isNPInbetweenParty)
+                $scope.country.entryIntoForceDate = moment($scope.country.treaties.XXVII8b.deposit).add(90, 'day');
+            else if ($scope.country.isNPParty)
+                $scope.country.entryIntoForceDate = $scope.country.treaties.XXVII8b.party;
+             
            });
            //*******************************************************
            var schema = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database"]
@@ -118,9 +128,9 @@
                   else if(document.schema_s == "authority" || document.schema_s == "database" ||
                      document.schema_s == "absCheckpoint"){
                          document.description_t = '';
-                         $q.when(IStorage.documents.get(document.identifier_s,{info:true}))
+                         $q.when(IStorage.documents.get(document.identifier_s,{info:""}))
                          .then(function(data) {
-                             var doc = data.data.body
+                             var doc = data.data.body;
                              var details = '';
                             if(doc.address)
                                 details += $filter("lstring")(doc.address) + '<br/>';

@@ -35,7 +35,7 @@ app.directive("fieldEmbedContact", [ function () {
 
 
         },
-		controller : ["$scope", "authHttp", "$window", "$filter", "underscore", "guid", "editFormUtility", "$q","IStorage","commonjs",
+		controller : ["$scope", "$http", "$window", "$filter", "underscore", "guid", "editFormUtility", "$q","IStorage","commonjs",
 		 function ($scope, $http, $window, $filter, _, guid, editFormUtility, $q, storage,commonjs)
 		{
 			var workingContacts = null;

@@ -1,6 +1,6 @@
 define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], function (app,angucomplete, jqv, jqvmap) {
 
-    app.controller("SimpleSearchController", ["$scope", "authHttp","underscore","$q","$filter","$timeout", "$location","realm","$routeParams",
+    app.controller("SimpleSearchController", ["$scope", "$http","underscore","$q","$filter","$timeout", "$location","realm","$routeParams",
      function ($scope, $http, _, $q,$filter,$timeout, $location, realm, $routeParams) {
 
     $scope.options  = {

@@ -1,6 +1,6 @@
 define(['app', '/app/views/forms/edit/edit.js'], function (app) {
 
-  app.controller("editResource", ["$scope", "authHttp", "$filter", "Thesaurus", "$q", "Enumerable", "$controller", "IStorage", "$location",
+  app.controller("editResource", ["$scope", "$http", "$filter", "Thesaurus", "$q", "Enumerable", "$controller", "IStorage", "$location",
                 function ($scope, $http, $filter, Thesaurus, $q, Enumerable, $controller, storage, $location) {
 
 

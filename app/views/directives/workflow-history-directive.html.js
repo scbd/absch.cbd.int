@@ -1,4 +1,4 @@
-define(['app', 'angular-form-controls'], function(app) {
+define(['app'], function(app) {
 
     app.directive('workflowHistory', ["$q", "$timeout", "underscore",
         function($q, $timeout, _) {

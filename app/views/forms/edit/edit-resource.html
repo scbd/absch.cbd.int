@@ -22,6 +22,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
     <div ng-show="!isLoading() && status!='hidden'">
         <div workflow-std-buttons document="getCleanDocument()" languages="document.header.languages"  hide-timer="false"/>
 
+            <div km-document-validation ng-model="validationReport"></div>
 		<form name="editForm" class="editForm" style="margin-top:10px">
 
 			<div ng-show="tab=='edit'" km-tab="edit">
@@ -265,7 +266,6 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
 		</form>
 
 		  <div ng-show="tab=='review'" km-tab="review">
-            <div km-document-validation ng-model="validationReport"></div>
 
             <div class="btn-group" ng-show="reviewDocument.header.languages.length>1">
                 <input type="button" class="btn" ng-class="{'active' : review.locale==locale, 'btn-info' : review.locale==locale}" ng-repeat="locale in document.header.languages" ng-click="$parent.review.locale = locale" value="{{locale | uppercase}}" />

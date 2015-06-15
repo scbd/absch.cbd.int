@@ -47,7 +47,7 @@ app.controller('printContacts', ['$scope', '$http', '$location', '$sce', '$filte
 				else if(document.schema_s == "authority" || document.schema_s == "database" ||
 				document.schema_s == "absCheckpoint"){
 					document.description_t = '';
-					$q.when($http.get('/api/v2013/documents/' +  document.identifier_s, { info:true}))
+					$q.when($http.get('/api/v2013/documents/' +  document.identifier_s, { info:""}))
 					.then(function(data) {
 						var doc = data.data
 						var details = '';
@@ -74,7 +74,7 @@ app.controller('printContacts', ['$scope', '$http', '$location', '$sce', '$filte
     $scope.title = function(schema){
 
         if(schema=='authority')
-            return 'Competant National Authority';
+            return 'Competent National Authority';
         if(schema=='focalPoint')
             return 'ABS National Focal Points';
         if(schema=='absCheckpoint')

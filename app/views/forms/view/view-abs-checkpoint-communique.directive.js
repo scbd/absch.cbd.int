@@ -18,7 +18,7 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 		{
 			$scope.showPdf = $attr.showPdf === undefined || $attr.showPdf != "false";
 		},
-		controller: ["$scope", "IStorage", "authHttp", "$q","underscore","realm", function ($scope, storage, $http, $q, _, realm)
+		controller: ["$scope", "IStorage", "$http", "$q","underscore","realm", function ($scope, storage, $http, $q, _, realm)
 		{
 			$scope.contacts = undefined;
 			$scope.gisMapLayers = null;
@@ -174,7 +174,7 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 				$scope.emailList = [];
 				if(document.permit){
 						angular.forEach(document.permit, function(permit){
-							$http.get('/api/v2013/documents/' +  permit.identifier, { info:true})
+							$http.get('/api/v2013/documents/' +  permit.identifier, { info:""})
 							.success(function(result){
 								if(result.authority && (result.authority.title_t || result.authority.firstName))
 									$scope.emailList.push(result.authority);

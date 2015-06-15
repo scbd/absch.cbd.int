@@ -11,7 +11,7 @@ app.directive('taskId', function () {
                 workflowTaskId : '@',
                 onActivityUpdate : '&', //used in case if the directive parent needs to be refreshed else the workflow details will be fetched.
             },
-            controller: [ "$scope", "$timeout", "authHttp", "$route", "IStorage", "IWorkflows", "authentication", "underscore",'$element',
+            controller: [ "$scope", "$timeout", "$http", "$route", "IStorage", "IWorkflows", "authentication", "underscore",'$element',
 					 function ($scope, $timeout, $http, $route, IStorage, IWorkflows, authentication, _, $element)
 					{
 						//==================================================

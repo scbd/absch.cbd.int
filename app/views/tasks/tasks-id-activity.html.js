@@ -14,7 +14,7 @@
 	'../forms/view/record-loader.directive.html.js'
 ], function (app) {
 
-app.controller("TaskIdActivityController", [ "$scope", "$timeout", "authHttp", "$route", "$location", "IStorage", "IWorkflows", "authentication", "underscore", function ($scope, $timeout, $http, $route, $location, IStorage, IWorkflows, authentication, _) 
+app.controller("TaskIdActivityController", [ "$scope", "$timeout", "$http", "$route", "$location", "IStorage", "IWorkflows", "authentication", "underscore", function ($scope, $timeout, $http, $route, $location, IStorage, IWorkflows, authentication, _) 
 {
 	//==================================================
 	//

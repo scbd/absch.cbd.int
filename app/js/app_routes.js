@@ -1,12 +1,13 @@
 'use strict';
 
-define(['app', 'extended-route-provider','authentication', 'services', 'filters', 'storage', 'workflows', 'realm-configuration', 'user-notifications'], function (app) {
+define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 'filters', 'realm-configuration'], function (app) {
 
-     app.value("realm", {value:"ABS"});
+    app.value("realm", {value:"ABS"});
     app.value("schemaTypes", [ "absNationalReport", "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "resource" ]);
 
     app.config(['extendedRouteProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
-          $locationProvider.html5Mode(true);
+
+        $locationProvider.html5Mode(true);
         $locationProvider.hashPrefix('!');
 
         $routeProvider.
@@ -34,6 +35,14 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
             when('/forums/art10_groups/:threadId',    { templateUrl: '/app/views/forums/post-list-view.html'     ,resolveController: true, resolveUser: true, forumId:17316, forumListUrl:'/forums/art10_groups/', text:'Forum on Article 10' }).
 
             when('/mailbox',                        { templateUrl: '/app/views/mailbox/inbox.html',         label:'Mailbox',       resolveController: true, resolveUser: true }).
+            when('/mailbox/:mailId',                { templateUrl: '/app/views/mailbox/inbox.html',         label:'Mailbox',       resolveController: true, resolveUser: true }).
+
+            when('/search/new',                             { templateUrl: '/app/views/search/search.html',   label:'Search',         resolveController: true, resolveUser: true}).
+            when('/search/new/byCountry',                   { templateUrl: '/app/views/search/country-search.html',   label:'Search',         resolveController: true, resolveUser: true}).
+
+            when('/search/new/measurematrix',                   { templateUrl: '/app/views/search/measure-matrix.html',   label:'Matrix',         resolveController: true, resolveUser: true}).
+            when('/search/new/measurematrix/:uniqueId',         { templateUrl: '/app/views/search/measure-matrix.html',   label:'Matrix',         resolveController: true, resolveUser: true}).
+            when('/search/new/measurematrix/countries/:code',   { templateUrl: '/app/views/search/measure-matrix-countries.html',   label:'Matrix',         resolveController: true, resolveUser: true}).
 
             when('/search',                                 { templateUrl: '/app/views/search/find.html',   label:'Search',         resolveController: true, resolveUser: true}).
             when('/search/:documentSchema',                 { templateUrl: '/app/views/search/find.html',   label:'Search',         resolveController: true, resolveUser: true}).
@@ -44,11 +53,9 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
             when('/countries',                   { templateUrl: '/app/views/countries/countries-map.html',       label:'Country Information',      resolveController: true, resolveUser: true}).
             when('/countries/:code',             { templateUrl: '/app/views/countries/profiles.html',       label:'Country Profile', param:'true',      resolveController: true, resolveUser: true}).
 
-            // when('/database/record',             { templateUrl: '/app/views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
-            // when('/database/record/:documentID',  { templateUrl: '/app/views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
-            // when('/database/record/:documentID/:revision', { templateUrl: '/app/views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
-
-
+            when('/database/record',             { templateUrl: '/app/views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
+            when('/database/record/:documentID',  { templateUrl: '/app/views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
+            when('/database/record/:documentID/:revision', { templateUrl: '/app/views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
             when('/database/:documentID',                           { templateUrl: '/app/views/forms/view/records-id.html', label:'Record',  param:'true',  resolveController: true, resolveUser: true}).
             when('/database/:documentSchema/:documentID',           { templateUrl: '/app/views/forms/view/records-id.html', label:'Record',  param:'true',  resolveController: true, resolveUser: true}).
             when('/database/:documentSchema/:documentID/:revision', { templateUrl: '/app/views/forms/view/records-id.html', label:'Record',  param:'true',  resolveController: true, resolveUser: true}).
@@ -87,5 +94,6 @@ define(['app', 'extended-route-provider','authentication', 'services', 'filters'
             when('/commonformat',           { redirectTo:'/about/common-formats' }).
 
             otherwise({templateUrl: '/app/404.html', label:'404 Error'});
+
     }]);
 });

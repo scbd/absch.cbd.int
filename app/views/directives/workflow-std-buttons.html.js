@@ -1,4 +1,4 @@
-define(['app','angular-form-controls','/app/views/directives/workflow-history-directive.html.js'], function (app) {
+define(['app','/app/views/directives/workflow-history-directive.html.js'], function (app) {
 
     app.directive('workflowStdButtons',["$q", "$timeout","underscore",
      function($q, $timeout, _){
@@ -182,7 +182,7 @@ define(['app','angular-form-controls','/app/views/directives/workflow-history-di
 				$scope.publish = function()
 				{
 					$scope.loading = true;
-
+					$scope.$emit("clearDocumentErrors");
 					var qDocument = $scope.getDocumentFn();
 					var qReport   = validate(qDocument);
 
@@ -260,7 +260,7 @@ define(['app','angular-form-controls','/app/views/directives/workflow-history-di
 				$scope.publishRequest = function()
 				{
 					$scope.loading = true;
-
+					$scope.$emit("clearDocumentErrors");
 					var qDocument = $scope.getDocumentFn();
 					var qReport   = validate(qDocument);
 
@@ -325,7 +325,7 @@ define(['app','angular-form-controls','/app/views/directives/workflow-history-di
 				$scope.saveDraft = function()
 				{
 					$scope.loading = true;
-
+					$scope.$emit("clearDocumentErrors");
 					return $q.when($scope.getDocumentFn()).then(function(document)
 					{
 						if(!document)

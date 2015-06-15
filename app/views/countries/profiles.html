@@ -74,19 +74,23 @@
                     <div class="page-content inset ">
                         <div class="panel panel-default ng-scope" style="background-color:white;min-height:800px;" id="countryDetails">
                             <div class="panel-heading" style="marign-bottom:30px;">
-                                <table>
+                                <table style="width:100%">
                                     <tr>
                                         <td style="width:120px;padding-right:20px;">
                                             <div style="height:100px;" class="flag-icon-background  flag-icon-{{code.toLowerCase()}}"></div>
                                         </td>
-                                        <td>
-                                            <span class="country-name" style="font-size:300%;">{{country.name.en}}</span>
-                                            <h3 style="margin:0;padding:0;padding-top:5px;">
-                                                <span style="vertical-align:top;margin-right:5px" class="label label-default" ng-show="!countriescommonjs.isNpParty(country)">Non-Party</span>
-                                                <span style="vertical-align:top;margin-right:5px" class="label label-primary" ng-show="countriescommonjs.isNpParty(country)">Party</span>
-                                                <span style="vertical-align:top;margin-right:5px" class="label label-info" ng-show="countriescommonjs.isNPSignatory(country) && !countriescommonjs.isNPParty(country)">Signatory</span>
-                                                <span style="vertical-align:top;margin-right:5px" class="label label-primary" ng-show="countriescommonjs.isNPParty(country)">Date of {{country.treaties.XXVII8b.instrument}} {{(country.treaties.XXVII8b.deposit ? country.treaties.XXVII8b.deposit : '- - - - - -') | formatDate}} </span>
-                                                <span style="vertical-align:top;margin-right:5px" class="label label-success" ng-show="countriescommonjs.isNPParty(country)">Date of Entry into force {{country.treaties.XXVII8b.party| formatDate}}</span>
+                                        <td >
+                                            <span class="country-name" style="font-size:300%;">{{country.name.en}}</span> 
+                                            <h3 style="margin:0;padding:0;padding-top:5px;">                                            
+                                                <label  class="label label-default" ng-show="!country.isNPParty">Non-Party</label>
+                                                <label class="label label-primary" ng-show="country.isNPParty">Party</label>
+                                                <label  class="label label-info" ng-show="country.isNPSignatory && !country.isNPParty">Signatory</label>
+                                                <label  class="label" ng-show="country.isNPParty||country.isNPInbetweenParty" 
+                                                      ng-class="{'label-primary':country.isNPParty, 'label-default':country.isNPInbetweenParty && !country.isNPParty}">
+                                                    Date of {{country.treaties.XXVII8b.instrument}} {{country.treaties.XXVII8b.deposit | formatDate}}
+                                                </label>
+                                                <label  class="label label-success" ng-show="country.isNPInbetweenParty || country.isNPParty">
+                                                     Date of Entry into force {{country.entryIntoForceDate| formatDate}}</label>
                                             </h3>
                                         </td>
                                     </tr>

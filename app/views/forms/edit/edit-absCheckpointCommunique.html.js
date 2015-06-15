@@ -1,7 +1,7 @@
 define(['app', '/app/views/forms/edit/edit.js',
         '/app/views/forms/edit/permit-selection-directive.html.js'], function (app) {
 
-  app.controller("editCheckpointCommunique", ["$scope", "authHttp", "$filter", "$q", "$controller", "IStorage","underscore","Thesaurus","Enumerable","$location",
+  app.controller("editCheckpointCommunique", ["$scope", "$http", "$filter", "$q", "$controller", "IStorage","underscore","Thesaurus","Enumerable","$location",
    function ($scope, $http, $filter, $q, $controller, storage, _, Thesaurus, Enumerable,$location) {
     $controller('editController', {$scope: $scope});
 

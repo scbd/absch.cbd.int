@@ -20,7 +20,7 @@ app.directive("viewAbsPermit", [function () {
 			$scope.contacts = undefined;
 			$scope.showPdf = $attr.showPdf === undefined || $attr.showPdf != "false";
 		},
-		controller: ["$scope", "IStorage", "authHttp", "$q","underscore", function ($scope, storage, $http, $q, _)
+		controller: ["$scope", "IStorage", "$http", "$q","underscore", function ($scope, storage, $http, $q, _)
 		{
 
 			$scope.gisMapLayers = null;

@@ -1,6 +1,7 @@
 define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document-selection-directive.html.js'], function (app) {
 
-  app.controller("editAbsNationalReport", ["$scope", "authHttp", "$filter", "$controller", "$location", "$q", "realm", "underscore", function ($scope, $http, $filter, $controller,$location, $q, realm, _) {
+  app.controller("editAbsNationalReport", ["$scope", "$http", "$filter", "$controller", "$location", "$q", "realm", function ($scope, $http, $filter, $controller,$location, $q, realm) {
+
     $controller('editController', {$scope: $scope});
 
     $scope.setTab = function () {

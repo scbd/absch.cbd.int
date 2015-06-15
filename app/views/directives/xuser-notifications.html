@@ -7,28 +7,36 @@
         <tr ng-repeat="notification in notifications" class="notification-item" ng-class="{'notification-read':notification.state=='read','notification-unread':notification.state=='unread' }">
 
             <td>
-                <div style="margin-top:3px;padding-right:3px;"><i class="{{notification.data.documentInfo.metadata.schema|schemaIcon}}" ng-class="{'color-green':notification.data.action!='approved', 'color-green':notification.data.action=='completed', 'color-grey':notification.data.action=='rejected'}"
+                <div style="margin-top:3px;padding-right:3px;">
+                    <i class="{{notification.data.documentInfo.metadata.schema|schemaIcon}}"
+                     ng-class="{'color-green':(notification.data.action!='approved'||notification.data.action=='completed'||notification.data.action=='recalled'), 'color-grey':notification.data.action=='rejected'}"
                 style="font-size:16pt;position:relative;top:3px;"></i></div></td>
-            <td ng-class="{'notification-read':notification.state=='read','notification-unread':notification.state=='unread' }" style="padding:10px 0;cursor:pointer;"
+            <td ng-class="{'notification-read':notification.state=='read','notification-unread':notification.state=='unread' }" style="padding:10px 0;cursor:pointer;">
 
-                <a ng-href="/register/requests/{{notification.data.workflowId}}" ng-click="markAsRead(notification);">
+                <a ng-href="{{getURL(notification)}}" ng-click="markAsRead(notification);">
 
-                    <i ng-class="{'color-blue':notification.state=='unread'}">{{notification.createdBy_info.firstName + ' ' + notification.createdBy_info.lastName}}</i>
-
+                    <i ng-class="{'color-blue':notification.state=='unread'}">
+                        <i class="fa fa-envelope" style="font-size:15px" ng-show="notification.type=='message'"></i>
+                        <i class="fa fa-bell" style="font-size:15px" ng-show="notification.type=='documentNotification'"></i>
+                        {{notification.createdBy_info.firstName + ' ' + notification.createdBy_info.lastName}}</i>
+                    <span ng-show="notification.type=='message'"> has sent you a message</span>
                     <span ng-show="notification.data.action=='request'"> has sent you a request for publishing for</span>
                     <span ng-show="notification.data.action=='approved'"> has approved your publishing request for</span>
                     <span ng-show="notification.data.action=='rejected'"> has rejected your publishing request for</span>
+                    <span ng-show="notification.data.action=='recalled'"> has recalled publishing request for</span>
 
-                    <strong><i ng-class="{'color-blue':notification.state=='unread'}">{{notification.data.documentInfo.title|lstring}}</i></strong>
-                    <span> ({{notification.data.documentInfo.metadata.schema|schemaName}})</span>
+                    <strong><i ng-class="{'color-blue':notification.state=='unread'}">
+                        {{(notification.data.documentInfo.title||notification.data.subject)|lstring}}
+                    </i></strong>
+                    <span ng-show="notification.type=='documentNotification'"> ({{notification.data.documentInfo.metadata.schema|schemaName}})</span>
                 </a>
                 <br>{{timePassed(notification.createdOn)}} ago
-                from
-                <span class="label label-default" ng-show="notification.data.documentInfo.realm == 'ABS'">ABSCH</span>
-                <span class="label label-default" ng-show="notification.data.documentInfo.realm == 'ABS-TRG'">ABSCH TRAINING</span>
-                <span class="label label-default" ng-show="notification.data.documentInfo.realm == 'ABS-DEV'">ABSCH DEVELOPMENT</span>
-                <span class="label label-default" ng-show="notification.data.documentInfo.realm == 'CHM'">CHM</span>
-                <span class="label label-default" ng-show="notification.data.documentInfo.realm == 'BCH'">BCH</span>
+
+                <span class="label label-default" ng-show="notification.data.documentInfo.realm == 'ABS'">from ABSCH</span>
+                <span class="label label-default" ng-show="notification.data.documentInfo.realm == 'ABS-TRG'">from ABSCH TRAINING</span>
+                <span class="label label-default" ng-show="notification.data.documentInfo.realm == 'ABS-DEV'">from ABSCH DEVELOPMENT</span>
+                <span class="label label-default" ng-show="notification.data.documentInfo.realm == 'CHM'">from CHM</span>
+                <span class="label label-default" ng-show="notification.data.documentInfo.realm == 'BCH'">from BCH</span>
 
 
             </td>

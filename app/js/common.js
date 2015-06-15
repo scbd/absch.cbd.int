@@ -1,6 +1,6 @@
 define(['app', 'underscore'], function(app, underscore) {
 
-    app.factory('commonjs', ['authHttp', '$rootScope', function($http, $rootScope) {
+    app.factory('commonjs', ['$http', '$rootScope', function($http, $rootScope) {
         return new function() {
 
             this.getReferenceRecordIndex = function(schema, documentId) {
@@ -178,10 +178,13 @@ define(['app', 'underscore'], function(app, underscore) {
 
 				if(entity && entity.isNPParty!= undefined)
 					return entity.isNPParty;
+                    
+                if(entity && entity.isNPInbetweenParty!= undefined)
+					return entity.isNPInbetweenParty;
 
-				return entity && (!entity.isNPInbetweenParty && (entity.treaties.XXVII8b.instrument == "ratification" ||
+				return entity && (moment().diff(moment(entity.treaties.XXVII8b.deposit), 'days') >= 90) && (entity.treaties.XXVII8b.instrument == "ratification" ||
 					entity.treaties.XXVII8b.instrument == "accession" ||
-					entity.treaties.XXVII8b.instrument == "acceptance" || entity.treaties.XXVII8b.instrument == "approval"));
+					entity.treaties.XXVII8b.instrument == "acceptance" || entity.treaties.XXVII8b.instrument == "approval");
 			}
 
             function isPartyToCBD(entity) {

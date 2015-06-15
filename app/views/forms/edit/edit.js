@@ -13,7 +13,7 @@ define([
     '/app/views/directives/workflow-std-buttons.html.js'
   ], function (app) {
 
-  app.controller("editController", ["$rootScope", "$scope", "authHttp", "$window", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage",
+  app.controller("editController", ["$rootScope", "$scope", "$http", "$window", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage",
                                    "authentication", "Enumerable", "editFormUtility", "$routeParams", "$timeout","$filter",
                                     function ($rootScope, $scope, $http, $window, guid, $filter, thesaurus, $q, $location, storage,
                                               authentication, Enumerable, editFormUtility, $routeParams, $timeout, $filter) {
@@ -152,6 +152,10 @@ define([
     //==================================
     $scope.$on("documentInvalid", function(){
       $scope.tab = "review";
+    });
+    
+    $scope.$on("clearDocumentErrors", function(){
+      $scope.validationReport = {clearErrors:[]};
     });
 
     //==================================

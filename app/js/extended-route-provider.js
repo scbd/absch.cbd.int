@@ -1,6 +1,6 @@
 'use strict';
 
-define(['app', 'angular', 'authentication'], function(app, angular) {
+define(['app', 'angular'], function(app, angular) {
 
     app.provider('extendedRoute', ["$routeProvider", function($routeProvider) {
 
@@ -79,7 +79,7 @@ define(['app', 'angular', 'authentication'], function(app, angular) {
 
                     var realmConfig = _.where(realmConfiguration,{host:$location.$$host});
                     //console.log(realmConfig)
-                    if(!realmConfig)
+                    if(realmConfig && realmConfig.length>0)
     				     realm.value = realmConfig[0].realm;
                     else
                         realm.value = 'ABS-DEV';

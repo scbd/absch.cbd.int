@@ -1,11 +1,5 @@
 define(['app', '/app/views/directives/xuser-notifications.js'], function (app) {
-// ,
-//     './tasks/my-completed-tasks.directive.html.js',
-//     './tasks/my-pending-tasks.directive.js',
-//     './tasks/my-tasks.directive.js'
 "use strict";
-//require("app", "dragAndDrop")
-
 app.controller("DashboardController",
 	["$rootScope", "$scope", "underscore", "lstringFilter","IWorkflows","realm","$q","$routeParams",'$location',
 	function ($rootScope, $scope, _, lstringFilter,workflows,realm,$q,$routeParams, $location) {

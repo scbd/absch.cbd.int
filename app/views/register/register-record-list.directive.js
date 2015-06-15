@@ -1,8 +1,8 @@
 define(['app', '/app/js/common.js'], function(app) {
     "use strict";
 
-    app.directive("registerRecordList", ["$timeout", "commonjs", "bootbox", "authHttp", "IWorkflows", "IStorage",
-        function($timeout, commonjs, bootbox, $http, IWorkflows, IStorage) {
+    app.directive("registerRecordList", ["$timeout", "commonjs", "bootbox", "$http", "IWorkflows", "IStorage",'$rootScope',
+        function($timeout, commonjs, bootbox, $http, IWorkflows, IStorage, $rootScope) {
 
             return {
                 restrict: "EA",
@@ -17,6 +17,7 @@ define(['app', '/app/js/common.js'], function(app) {
 
                     var deleteRecordModel = $element.find("#deleteRecordModel");
                     var duplicateRecordModel = $element.find("#duplicateRecordModel");
+                    var deleteWorkflowRequestMadal = $element.find("#deleteWorkflowRequestModal");
 
                     $element.find("[data-toggle='tooltip']").tooltip({
                         trigger: 'hover'
@@ -24,8 +25,6 @@ define(['app', '/app/js/common.js'], function(app) {
 
 
                     $scope.$watch("recordToDelete", function(val) {
-
-
                         if (val && !deleteRecordModel.is(":visible")) {
                             deleteRecordModel.modal("show");
                         }
@@ -35,13 +34,19 @@ define(['app', '/app/js/common.js'], function(app) {
                     });
 
                     $scope.$watch("recordToDuplicate", function(val) {
-
-
                         if (val && !duplicateRecordModel.is(":visible")) {
                             duplicateRecordModel.modal("show");
                         }
                         if (!val && duplicateRecordModel.is(":visible")) {
                             duplicateRecordModel.modal("hide");
+                        }
+                    });
+                    $scope.$watch("recordForDeleteWorkflowRequest", function(val) {
+                        if (val && !deleteWorkflowRequestMadal.is(":visible")) {
+                            deleteWorkflowRequestMadal.modal("show");
+                        }
+                        if (!val && deleteWorkflowRequestMadal.is(":visible")) {
+                            deleteWorkflowRequestMadal.modal("hide");
                         }
                     });
 
@@ -54,6 +59,11 @@ define(['app', '/app/js/common.js'], function(app) {
                     duplicateRecordModel.on("hidden.bs.modal", function() {
                         $timeout(function() {
                             $scope.recordToDuplicate = null; //clear on backdrop click
+                        });
+                    });
+                    deleteWorkflowRequestMadal.on("hidden.bs.modal", function() {
+                        $timeout(function() {
+                            $scope.recordForDeleteWorkflowRequest = null; //clear on backdrop click
                         });
                     });
                 },
@@ -239,18 +249,18 @@ define(['app', '/app/js/common.js'], function(app) {
 
                     $scope.showAddButton = function() {
 
-                        return commonjs.isUserInRole('AbsPublishingAuthorities') ||
-                            commonjs.isUserInRole('AbsNationalAuthorizedUser') ||
-                            commonjs.isUserInRole('AbsNationalFocalPoint') ||
-                            commonjs.isUserInRole('abschiac') ||
-                            commonjs.isUserInRole('AbsAdministrator') ||
-                            commonjs.isUserInRole('Administrator') ||
+                        return commonjs.isUserInRole($rootScope.getRoleName('AbsPublishingAuthorities')) ||
+                            commonjs.isUserInRole($rootScope.getRoleName('AbsNationalAuthorizedUser')) ||
+                            commonjs.isUserInRole($rootScope.getRoleName('AbsNationalFocalPoint')) ||
+                            commonjs.isUserInRole($rootScope.getRoleName('abschiac')) ||
+                            commonjs.isUserInRole($rootScope.getRoleName('AbsAdministrator')) ||
+                            commonjs.isUserInRole($rootScope.getRoleName('Administrator')) ||
                             $scope.schema == 'resource';
 
                     }
 
                     $scope.isIAC = function() {
-                        return commonjs.isUserInRole('abschiac');
+                        return commonjs.isUserInRole($rootScope.getRoleName('abschiac'));
                     }
 
                     //============================================================
@@ -364,7 +374,27 @@ define(['app', '/app/js/common.js'], function(app) {
                             currentDocument.isUpdating = true;
 
                         $scope.refreshworkflowRecord(document, workflowInfo)
-                    }
+                    };
+
+                    $scope.askDeleteWorkflowRequest = function(record){
+                        $scope.recordForDeleteWorkflowRequest = record;
+                    };
+
+                    $scope.deleteWorkflowRequest = function(record){
+                        console.log(record);
+    	                $scope.loading = true;
+                        IWorkflows.cancel(record.workingDocumentLock.lockID.replace('workflow-',''), {'action':'cancel'})
+                        .then(function(data){
+                            $scope.$emit("documentWorkflowRequestDeleted", record);
+                            $timeout(function() {
+                                highlight("#record" + record.identifier);
+                            }, 500);
+                            $scope.recordForDeleteWorkflowRequest = null;
+                        })
+                        .finally(function(){
+                          $scope.loading = false;
+                        });
+                    };
 
                     $scope.refreshworkflowRecord = function(document, workflowInfo) {
                         if (workflowInfo.workflowId) {

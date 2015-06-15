@@ -1,6 +1,6 @@
 define(['app', '/app/js/common.js', '/app/views/directives/search-filter-dates.partial.html.js'], function (app, commonjs) {
 
-app.directive("documentSelection", ["authHttp", "Thesaurus", "$filter", "underscore", "guid",  "$timeout", "$q","IStorage","commonjs","realm", function ($http, Thesaurus, $filter, _, guid, $timeout, $q, storage, commonjs, realm) {
+app.directive("documentSelection", ["$http", "Thesaurus", "$filter", "underscore", "guid",  "$timeout", "$q","IStorage","commonjs","realm", function ($http, Thesaurus, $filter, _, guid, $timeout, $q, storage, commonjs, realm) {
 
 	return {
 		restrict   : "EA",

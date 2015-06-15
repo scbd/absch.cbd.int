@@ -18,7 +18,7 @@ app.directive("existingPermit", [ function () {
 		link : function($scope, $element, $attrs) {
 
         },
-		controller : ["$scope", "authHttp", "Thesaurus", "$filter", "underscore", "guid",
+		controller : ["$scope", "$http", "Thesaurus", "$filter", "underscore", "guid",
                     "$timeout", "$q","IStorage","commonjs","realm",
 		 function ($scope, $http, Thesaurus, $filter, _, guid, $timeout, $q,
                 storage,commonjs, realm)

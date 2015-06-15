@@ -1,5 +1,5 @@
 define(['app', 'cbd-forums'], function(app) {
-    return["$scope", "authHttp", "$q", "$filter", "$timeout", "$location", "$route",
+    return["$scope", "$http", "$q", "$filter", "$timeout", "$location", "$route",
         function($scope, $http, $q, $filter, $timeout, $location, $route) {
 
             //TODO : need a API to get facets

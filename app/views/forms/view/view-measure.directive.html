@@ -213,7 +213,11 @@
 			<label>Elements of the measure</label>
 				<div class="km-value" >
 					<ul>
-						<li ng-repeat="term in document.absMeasures">{{term|term:locale}} <i ng-show="term.section">({{term.section | lstring:locale}})</i>
+						<li ng-repeat="term in document.absMeasures">{{term|term:locale}}
+							<span ng-show="term.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">
+								: {{document.otherAbsMeasure| lstring:locale}}
+							</span> 
+							<i ng-show="term.section">({{term.section | lstring:locale}})</i>
 					</ul>
 				</div>
 		</div>

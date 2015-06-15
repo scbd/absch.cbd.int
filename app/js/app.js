@@ -1,87 +1,94 @@
-		'use strict';
+'use strict';
 
-		define(['angular','angular-sanitize','angular-loading-bar', 'angular-animate','angular-form-controls', 'text-angular','angular-storage'
-		/*, 'angular-route', 'angular-cookies', */], function (angular) {
+define(['angular', 'angular-sanitize', 'angular-loading-bar', 'angular-animate',
+        'text-angular'
+        /*,'angular-form-controls','angular-storage', 'angular-route', 'angular-cookies', */
+    ],
+    function(angular) {
 
-		  //TODO: reevaluate what is actually needed. Ie. I don't think we still need drag and drop here.
+        var dependencies = ['ngRoute', 'ngCookies', 'chieffancypants.loadingBar', 'ngAnimate',
+            'ngSanitize', 'angular-intro', 'scbdControls', 'ngLocalizer',
+            'textAngular', 'cbd-forums', 'LocalStorageModule',
+            'ng-breadcrumbs', 'scbdServices', 'scbdFilters'
+        ];
+        angular.defineModules(dependencies);
+        var app = angular.module('app', dependencies);
 
-			var dependencies = ['ngRoute', 'ngCookies','chieffancypants.loadingBar', 'ngAnimate', 'ngSanitize', 'angular-intro', 'formControls',
-				 				'textAngular', 'cbd-forums','LocalStorageModule','ng-breadcrumbs'];
-			angular.defineModules(dependencies);
-			var app =  angular.module('app', dependencies);
+        app.config(['$controllerProvider', '$compileProvider', '$provide', '$filterProvider', '$httpProvider',
+            function($controllerProvider, $compileProvider, $provide, $filterProvider, $httpProvider) {
+                // console.log($routeProvider);
+                //app.controllerProvider = $controllerProvider;
+                //app.routeProvider      = $routeProvider;
+                //app.compileProvider    = $compileProvider;
+                app.filter = function(name, param1, param2, param3, param4) {
+                    return (fromCache('filter', name) ||
+                        toCache('filter', name, $filterProvider.register(name, param1, param2, param3, param4))).data;
+                };
 
-			app.config(['$controllerProvider', '$compileProvider', '$provide', '$filterProvider','$httpProvider',
-				function($controllerProvider, $compileProvider, $provide, $filterProvider,$httpProvider) {
-				 // console.log($routeProvider);
-				//app.controllerProvider = $controllerProvider;
-				//app.routeProvider      = $routeProvider;
-				//app.compileProvider    = $compileProvider;
-				app.filter = function(name, param1, param2, param3, param4) {
-					return (fromCache('filter', name) ||
-							toCache  ('filter', name, $filterProvider.register(name, param1, param2, param3, param4))).data;
-				};
+                app.factory = function(name, param1, param2, param3, param4) {
+                    return (fromCache('factory', name) ||
+                        toCache('factory', name, $provide.factory(name, param1, param2, param3, param4))).data;
+                };
 
-				app.factory = function(name, param1, param2, param3, param4) {
-					return (fromCache('factory', name) ||
-							toCache  ('factory', name, $provide.factory(name, param1, param2, param3, param4))).data;
-				};
+                app.value = function(name, param1, param2, param3, param4) {
+                    return (fromCache('value', name) ||
+                        toCache('value', name, $provide.value(name, param1, param2, param3, param4))).data;
+                };
 
-				app.value = function(name, param1, param2, param3, param4) {
-					return (fromCache('value', name) ||
-							toCache  ('value', name, $provide.value(name, param1, param2, param3, param4))).data;
-				};
+                app.controller = function(name, param1, param2, param3, param4) {
+                    return (fromCache('controller', name) ||
+                        toCache('controller', name, $controllerProvider.register(name, param1, param2, param3, param4))).data;
+                };
 
-				app.controller = function(name, param1, param2, param3, param4) {
-					return (fromCache('controller', name) ||
-							toCache  ('controller', name, $controllerProvider.register(name, param1, param2, param3, param4))).data;
-				};
+                app.directive = function(name, param1, param2, param3, param4) {
+                    return (fromCache('directive', name) ||
+                        toCache('directive', name, $compileProvider.directive(name, param1, param2, param3, param4))).data;
+                };
 
-				app.directive = function(name, param1, param2, param3, param4) {
-					return (fromCache('directive', name) ||
-							toCache  ('directive', name, $compileProvider.directive(name, param1, param2, param3, param4))).data;
-				};
 
-				$httpProvider.interceptors.push('authenticationHttpIntercepter');
 
-				//==========================================
-				//==========================================
-				//==========================================
-				//==========================================
+                //==========================================
+                //==========================================
+                //==========================================
+                //==========================================
 
-				var lazyCache = {};
+                var lazyCache = {};
 
-				function fromCache(type, name) {
+                function fromCache(type, name) {
 
-					var key = type+':'+name;
+                    var key = type + ':' + name;
 
-					if(lazyCache[key])
-						console.log('Already defined: '+key);
+                    if (lazyCache[key])
+                        console.log('Already defined: ' + key);
 
-					return lazyCache[key];
-				}
+                    return lazyCache[key];
+                }
 
-				function toCache(type, name, data) {
+                function toCache(type, name, data) {
 
-					var key = type+':'+name;
+                    var key = type + ':' + name;
 
-					if(lazyCache[key])
-						throw 'Cannot cache: Already defined: '+key;
+                    if (lazyCache[key])
+                        throw 'Cannot cache: Already defined: ' + key;
 
-					lazyCache[key] = { data : data };
+                    lazyCache[key] = {
+                        data: data
+                    };
 
-					return lazyCache[key];
-				}
+                    return lazyCache[key];
+                }
 
-			}]);
+            }
+        ]);
 
-		  app.run(function($rootScope, $location) {
-		    $rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
-		      //padding route attributes to the rootscope
-		      if(current.$$route && current.$$route.subTemplateUrl)
-		        $rootScope.subTemplateUrl = current.$$route.subTemplateUrlFull;
-		    });
+        app.run(function($rootScope, $location) {
+            $rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
+                //padding route attributes to the rootscope
+                if (current.$$route && current.$$route.subTemplateUrl)
+                    $rootScope.subTemplateUrl = current.$$route.subTemplateUrlFull;
+            });
 
-		  });
+        });
 
-			return app;
-		});
+        return app;
+    });
