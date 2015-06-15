@@ -51,6 +51,12 @@
 			.cover55{
 				width: 55%;
 			}
+			.paddingleft6{
+				padding-left: 6%!important;
+			}
+			.paddingleft9{
+				padding-left: 9%!important;
+			}
         </style>
         <div class="row">
             <div class="col-sm-12 well">
@@ -96,8 +102,68 @@
                                </tr>
                             </table>
                        </div>
+						<div class="row">
+							<div class="col-sm-12">
+								<script type="text/ng-template"  id="/app/views/search/matrix/measure-matrix.directive/abs">
+									<table class="table table-bordered matrixTable">
+										<tr ng:repeat="term in rootTerms" >
+											<td class="tableCell" ng-include="'/app/views/search/matrix/measure-matrix.directive/abs/inner'"></td>
+										</tr>
+									</table>
+								</script>
+								<script type="text/ng-template"  id="/app/views/search/matrix/measure-matrix.directive/abs/inner">
+									<table class="table">
+										<tr>
+											<td  class="matrixheaderColumn rightBorder ">
+												<strong ng-show="!term.broaderTerms">{{term.title||term.name | lstring:locale}}</strong>
+												<span ng-show="term.broaderTerms"  class="paddingleft3" ng:class="{'paddingleft6':isMeasure}">{{term.title||term.name | lstring:locale}}</span>
+											</td>
+											<td style="width:48.99%">
+												<strong ng-show="!term.broaderTerms" >{{sections[term.identifier] | lstring:locale}}</strong>
+												<span ng-show="term.broaderTerms" class="paddingleft3" ng:class="{'paddingleft6':!isMeasure,'paddingleft9':isMeasure}">{{sections[term.identifier] | lstring:locale}}</span>
+											</td>
+										</tr>
+										<tr ng:if="term.narrowerTerms && term.narrowerTerms.length > 0">
+											<td class="matrixheaderColumn rightBorder subList1 cover50 noBottomBorder noTopBorder" colspan="2" style="padding-top:0px">
+												<table class="table matrixTable" ng:class="{'table-bordered':!isMeasure}" >
+													<tr ng:repeat="term in term.narrowerTerms" ng:if="sections[term.identifier]">
+														<td class="tableCell" ng-include="'/app/views/search/matrix/measure-matrix.directive/abs/inner'"></td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+									</table>
 
-                        <div class="col-sm-12">
+								</script>
+							</div>
+							<div class="row">
+								<div class="col-sm-12">
+									<div measure-matrix-abs name="absMeasures" ng-model="measure.document.absMeasures" locales="measure.document.header.languages" terms="measureElements()" document="measure.document"></div>
+
+									<!-- <table class="table table-bordered matrixTable" style="width:100%" cellspacing="0" cellpadding="0">
+
+										<tr>
+											<td class="tableCell" >
+												{{term.title||term.name | lstring:locale}}
+											</td>
+											<td>
+												{{term.section}}
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2">
+												<table class="table" >
+													<tr ng:repeat="term in term.narrowerTerms" >
+														<td class="tableCell" ng-include="'/app/views/search/matrix/measure-matrix.directive/abs/inner'"></td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+									</table> -->
+								</div>
+							</div>
+						</div>
+                        <div class="col-sm-12" ng-hide="true">
                             <table class="table table-bordered matrixTable">
                                 <tr>
                                     <!-- <th class="headerColumn whiteBackground noRightBorder"></th> -->
@@ -121,7 +187,10 @@
                                         </table>
                                     </th>
                                 </tr>
-
+								<!-- <tr ng-repeat="element in absMeasures">
+									<td class="tableCell">
+									</td>
+								</tr> -->
                                 <tr ng-repeat="scope in measure.document.scopeOfElements">
 
                                     <!-- <td class="headerColumn"><b>{{scope.name}}<b></td> -->
