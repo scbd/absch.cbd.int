@@ -34,7 +34,9 @@ require.config({
         'ionsound'              : '../libs/ionsound/js/ion.sound',
         'scbd-angularjs-services'         : '../libs/scbd-angularjs-services/scbd-services',
         'scbd-angularjs-filters'          : '../libs/scbd-angularjs-services/scbd-filters',
-        'scbd-angularjs-controls'         : '../libs/scbd-angularjs-controls/scbd-controls'
+        'scbd-angularjs-controls'         : '../libs/scbd-angularjs-controls/scbd-controls',
+        'ngAria'                : '../libs/angular-aria/angular-aria',
+        'ngMaterial'            : '../libs/angular-material/angular-material',
     },
     'shim': {
         'angular'                       : { 'deps': ['jquery'], 'exports': 'angular' },
@@ -61,6 +63,8 @@ require.config({
         'scbd-angularjs-services'       : { 'deps': ['angular']},
         'scbd-angularjs-filters'        : { 'deps': ['angular']},
         'scbd-angularjs-controls'       : { 'deps': ['angular', 'angular-sanitize', 'angular-localizer']},
+        'ngAria'                        : { 'deps': ['angular'] },
+        'ngMaterial'                    : { 'deps': ['angular', 'angular-animate', 'ngAria'] },
     }
 });
 

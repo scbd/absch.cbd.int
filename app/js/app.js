@@ -1,12 +1,12 @@
 'use strict';
 
-define(['angular', 'angular-sanitize', 'angular-loading-bar', 'angular-animate',
+define(['angular', 'angular-sanitize', 'angular-loading-bar', 'angular-animate','ngAria' ,'ngMaterial',
         'text-angular'
         /*,'angular-form-controls','angular-storage', 'angular-route', 'angular-cookies', */
     ],
     function(angular) {
 
-        var dependencies = ['ngRoute', 'ngCookies', 'chieffancypants.loadingBar', 'ngAnimate',
+        var dependencies = ['ngRoute', 'ngCookies', 'chieffancypants.loadingBar', 'ngAnimate', 'angular-animate', 'ngAria' ,'ngMaterial',
             'ngSanitize', 'angular-intro', 'scbdControls', 'ngLocalizer',
             'textAngular', 'cbd-forums', 'LocalStorageModule',
             'ng-breadcrumbs', 'scbdServices', 'scbdFilters'
