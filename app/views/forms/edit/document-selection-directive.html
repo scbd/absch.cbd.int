@@ -1,0 +1,86 @@
+<div>
+    <!-- existing documents display -->
+    <div class="row">
+        <div class="col-lg-12" >
+            <span><i>There <span ng-show="model.length==1">is</span><span ng-show="model.length>1">are</span> <b>{{model.length || 0}}</b> related <span ng-show="model.length==1">document</span><span ng-show="model.length>1">documents</span> found.</i></span>
+            <button class="btn btn-default btn-sm" ng-click="openAddDialog();" ng-disabled="disabled" ><i class="fa fa-plus"></i> {{caption||'Add document(s)'}}</button>
+            <button  type="button" ng-click="showRecords(); showrecords = true" ng-show="!showrecords && model" name="showRecords" class="btn btn-primary btn-sm">Display documents</button>
+            <button  type="button" name="hideRecords" ng-click="showrecords=false" ng-show="showrecords" class="btn btn-primary btn-sm">Hide documents</button>
+        </div>
+    </div>
+    <div class="row" ng-show="showrecords">
+        <div class="col-lg-12" >
+            <br />
+            <table class="table table-hover"  style="padding-bottom:3px;background-color:#fff">
+				<tr ng-repeat="doc in selectedDocuments | orderBy:['schema_s', 'title_t']">{{doc}}
+					<td>
+						<span class="latest-date"> {{doc.createdDate_dt | formatDate}} </span> |
+                        <span class="latest-country"> {{doc.government_s | term:locale}} </span> |
+                        <span>{{doc.identifier_s | uniqueID}}</span>
+                        <div class="latest-title">{{doc.title_t}} </div>
+					</td>
+                    <td>
+                        <span style="font-size: 16px; color: white;margin:0;padding:0;float:right;">
+                            <a ng-click="removeDocument(doc)" class="btn btn-warning">
+                                <span class="glyphicon glyphicon-remove"></span>&nbsp;remove</a>
+                        </span>
+                    </td>
+				</tr>
+			</table>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade rounded" id="{{question}}" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-grey">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h1>Please select document(s) below</h1>
+                    <div>
+                        <div ng-show="!schema" km-select name="selectedSchema" ng-model="selectedSchema" items="options.nationalSchemas()" placeholder="Select document type..."></div>
+                    </div>
+                </div>
+                <div class="modal-body">
+
+                    <div style="max-height:400px;overflow-y:auto">
+                    	<table class="table table-hover table-responsive" style="padding:0;margin:0">
+    						<tr ng-show="!isLoading" ng-repeat="doc in filteredDocuments = (rawDocuments |  filter:{schema_s:selectedSchema.identifier})">
+    							<td>
+    								<input type="checkbox" ng-model="doc.__checked" />
+    							</td>
+    							<td>
+    								<span class="latest-date"> {{doc.createdDate_dt | formatDate}} </span> |
+                                    <span class="latest-country"> {{doc.government_s | term:locale}} </span> |
+                                    <span>{{doc.identifier_s | uniqueID}}</span>
+                                    <div class="latest-title">{{doc.title_t}} </div>
+    							</td>
+                                <td>
+                                    <a ng-href="/database/{{doc.schema_s}}/{{getDocumentId(doc)}}" target="_new" class="pull-right"style="padding:0px 3px;color:#999;">
+                                        <i class="glyphicon glyphicon-new-window" id="help-record-newwindow"></i>
+                                    </a>
+                                </td>
+    						</tr>
+
+    						<tr ng-show="filteredDocuments.length==0 && !isLoading">
+    							<td colspan="3">No records.</td>
+    						</tr>
+
+    						<tr ng-show="isLoading">
+    							<td colspan="3">
+    								Loading...
+    							</td>
+    						</tr>
+    					</table>
+                    </div>
+                </div>
+
+                <div class="modal-footer bg-grey">
+                    <div class="row">
+                        <a type="button" class="btn btn-primary" ng-click="saveDocuments()">Save</a>
+                        <a type="button" class="btn btn-default" data-dismiss="modal">Close</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,11 +1,21 @@
-define(['app', '/app/views/forms/edit/edit.js' /*, '/app/views/forms/edit/document-selection-directive.html.js' */], function (app) {
+define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document-selection-directive.html.js'], function (app) {
 
-  app.controller("editAbsNationalReport", ["$scope", "authHttp", "$filter", "$controller", "$location", function ($scope, $http, $filter, $controller,$location) {
+  app.controller("editAbsNationalReport", ["$scope", "authHttp", "$filter", "$controller", "$location", "$q", "realm", "underscore", function ($scope, $http, $filter, $controller,$location, $q, realm, _) {
     $controller('editController', {$scope: $scope});
 
+    $scope.setTab = function () {
+        $scope.tab = 'edit';
+    };
 
-    $scope.tab      = 'part6';
+    $scope.$watch('tab', function(newValue){
 
+        if(newValue != 'edit'){
+            $("#nrTabs > li").removeClass("active");
+        }
+        if(newValue =='edit')
+            $('#nrTabs a:first').tab('show');
+
+    });
 
     //==================================
     //
@@ -29,6 +39,16 @@ define(['app', '/app/views/forms/edit/edit.js' /*, '/app/views/forms/edit/docume
     };
 
     $scope.setDocument({libraries: [{ identifier: "cbdLibrary:abs-ch" }]});
+
+
+    //==================================
+    //
+    //==================================
+    $scope.Q3HasAnswer = function (answer) {
+        return hasValue(answer);
+    };
+
+
 
     //==================================
     //
@@ -242,7 +262,7 @@ define(['app', '/app/views/forms/edit/edit.js' /*, '/app/views/forms/edit/docume
     //==================================
     $scope.Q27Clear = function (answer) {
         if(!answer && $scope.document && $scope.document.question27){
-            $scope.document.question27.cc = undefined;
+            $scope.document.question27.cpc = undefined;
         }
     };
 
@@ -316,8 +336,6 @@ define(['app', '/app/views/forms/edit/edit.js' /*, '/app/views/forms/edit/docume
         }
     };
 
-
-   
     //==================================
     //
     //==================================
@@ -337,20 +355,17 @@ define(['app', '/app/views/forms/edit/edit.js' /*, '/app/views/forms/edit/docume
     };
 
     //==================================
-    //when NO becomes selected, clear both yes
+    //
     //==================================
     $scope.Q62Clear = function () {
         if($scope.document && $scope.document.question62 && $scope.document.question62.no){
             $scope.document.question62.donor = undefined;
             $scope.document.question62.receiver = undefined;
         }
-        //if($scope.document && $scope.document.question62 && ($scope.document.question62.donor || $scope.document.question62.receiver)){
-       //     $scope.document.question62.no = undefined;
-        //}
     };
 
     //==================================
-    //when donnor becomes unselected, clear the text box
+    //
     //==================================
     $scope.Q62ClearDonor = function () {
         if($scope.document && $scope.document.question62 && !$scope.document.question62.donor.answer){
@@ -359,7 +374,7 @@ define(['app', '/app/views/forms/edit/edit.js' /*, '/app/views/forms/edit/docume
     };
 
     //==================================
-    //where receiver becomes unselected, clear all the selection and text
+    //
     //==================================
     $scope.Q62ClearReceiver = function () {
         if($scope.document && $scope.document.question62 && !$scope.document.question62.receiver.answer){
@@ -369,7 +384,7 @@ define(['app', '/app/views/forms/edit/edit.js' /*, '/app/views/forms/edit/docume
     };
 
     //==================================
-    //when from other party becomes unselected, clear textbox
+    //
     //==================================
     $scope.Q62ClearReceiverFromParty = function () {
         if($scope.document && $scope.document.question62 && $scope.document.question62.receiver && $scope.document.question62.receiver.fromParty && !$scope.document.question62.receiver.fromParty.answer){
@@ -378,7 +393,7 @@ define(['app', '/app/views/forms/edit/edit.js' /*, '/app/views/forms/edit/docume
     };
 
     //==================================
-    //where from institition becomes unselected, clear all the sub-selections and textbox
+    //
     //==================================
     $scope.Q62ClearReceiverFromInstitution = function () {
         if($scope.document && $scope.document.question62 && $scope.document.question62.receiver && $scope.document.question62.receiver.fromInstitution && !$scope.document.question62.receiver.fromInstitution.answer){
@@ -416,6 +431,71 @@ define(['app', '/app/views/forms/edit/edit.js' /*, '/app/views/forms/edit/docume
         return false;
     }
 
+    //==================================
+    //
+    //==================================
+    $scope.$watch('document.government', function(newValue, oldValue){
+
+        if(newValue != oldValue){
+            updateRecords(newValue);
+        }
+    });
+
+    //==================================
+    //
+    //==================================
+    function updateRecords(government) {
+
+        $scope.absDocuments = [];
+
+        if(government){
+            $q.when(getAbsDocuments(government)).then(function (data) {
+                $scope.absDocuments = data;
+                console.info(data.length);
+            });
+        }
+    }
+
+
+    $q.when($http.get("/api/v2013/thesaurus/domains/countries/terms", { cache: true })).then(function(o){
+        $scope.governments = o.data;
+    });
+
+    //==================================
+    //
+    //==================================
+    $scope.loadDocuments = function () {
+        updateRecords();
+    };
+
+
+    //==================================
+    //
+    //==================================
+    function getAbsDocuments (government) {
+
+        var q  = '(realm_ss:' + realm.value.toLowerCase() + ' ) AND NOT version_s:* AND government_s:'+ government.identifier;
+
+        var queryParameters = {
+            'q'    : q,
+            'sort' : 'createdDate_dt desc, title_t asc',
+            'fl'   : 'id,identifier_s,title_t,createdDate_dt,government_s,amendmentIntent_i,resourceLinksLanguage_ss, schema_s',
+            'wt'   : 'json',
+            'start': 0,
+            'rows' : 100,
+            'cb'   : new Date().getTime()
+        };
+
+        var deferred = $q.defer();
+
+        $http.get('/api/v2013/index/select', { params: queryParameters }).success(function (data) {
+             deferred.resolve(data.response.docs);
+        }).error(function (error) {
+            console.log('onerror'); console.log(error);
+        });
+
+        return deferred.promise;
+    }
 
 
   }]);
