@@ -1,0 +1,33 @@
+<div>
+
+    <table class="table table-bordered matrixTable">
+        <tr ng:repeat="term in rootTerms">
+            <td class="tableCell" ng-include="'/app/views/search/matrix/measure-matrix.directive/abs/inner'"></td>
+        </tr>
+    </table>
+    <script type="text/ng-template" id="/app/views/search/matrix/measure-matrix.directive/abs/inner">
+        <table class="table">
+            <tr ng:class="{'elementMeasure':term.isMeasure, 'whiteTopBorder':term.hasMeasure}"
+            ng:if="term.narrowerTerms.length > 0 || sections[term.identifier]">
+                <td class="matrixheaderColumn rightBorder " ng:class="{'paddingleft3':term.level==2 , 'paddingleft6':term.level==3, 'paddingleft9':term.level==4}">
+                    <strong ng-show="!term.broaderTerms">{{term.title||term.name | lstring:locale}}</strong>
+                    <span ng-show="term.broaderTerms">{{term.title||term.name | lstring:locale}}</span>
+                </td>
+                <td style="width:48.99%" ng:class="{'paddingleft6':term.level==2 , 'paddingleft9':term.level==3, 'paddingleft12':term.level==4}">
+                    <strong ng-show="!term.broaderTerms">{{sections[term.identifier] | lstring:locale}}</strong>
+                    <span ng-show="term.broaderTerms">{{sections[term.identifier] | lstring:locale}}</span>
+                </td>
+            </tr>
+            <tr ng:if="term.narrowerTerms && term.narrowerTerms.length > 0">
+                <td class="matrixheaderColumn rightBorder subList1 cover50 noBottomBorder noTopBorder"
+                colspan="2" style="padding-top:0px;padding-bottom:0px">{{term.narrowerTerms}}
+                    <table class="table matrixTable" ng:class="{'table-bordered':!term.isMeasure}">
+                        <tr ng:repeat="term in term.narrowerTerms" >
+                            <td class="tableCell" ng:class="{'noBorder':isMeasure}" ng-include="'/app/views/search/matrix/measure-matrix.directive/abs/inner'"></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </script>
+</div>

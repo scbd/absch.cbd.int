@@ -1,4 +1,6 @@
-define(['app','underscore'], function (app, _) {
+define(['app','underscore',
+        '/app/views/search/measure-matrix-elements-derective.html.js']
+    , function (app, _) {
 
     app.controller('matrixController', ['$scope', '$http','realm','$q','$filter','$routeParams','Thesaurus','$timeout',
         function ($scope, $http, realm, $q, $filter, $routeParams, thesaurus, $timeout) {
@@ -104,94 +106,148 @@ define(['app','underscore'], function (app, _) {
 
         }).error(function (error) {
             console.log('onerror'); console.log(error);
-         });
+        });
 
-         $scope.loadMatrix = function(measure){
-             measure.showDocument = !measure.showDocument;
-             if(measure && !measure.document){
-                 measure.isLoading = true;
+         $scope.loadMatrix = function(measure) {
 
-                 $http.get('/api/v2013/documents/' + measure.identifier_s)
-    			 .success(function (data) {
+             if(measure.document){
+                 measure.showDocument = !measure.showDocument;
+                return;
+            }
+             measure.showDocument = false;
+             return $q.when($http.get('/api/v2013/documents/' + measure.identifier_s))
+                 .then(function(document) {
+                     //measure.document = [document.data];
+                     console.log('measure');
 
-                     measure.document = data;
-                    //                      measure.document.newMeasure = thesaurus.buildTree(measureElements);
-                     //to avoid diff filters sort this after loads
-                     if(measure.document.absMeasures){
-                         var elements = angular.copy(scopeElements);
-                         measure.document.scopeOfElements = elements;
-
-                         _.map(measure.document.absMeasures, function(measureScope){
-                             var element;
-                             var parentElement;
-                            if(_.findWhere(scopeElements,{'identifier':measureScope.identifier})){
-                                parentElement = _.findWhere( measure.document.scopeOfElements ,{'identifier':measureScope.identifier});
-                               parentElement.reference = measureScope.section;
-                            }
-                            else if(_.findWhere(scopeOfMeasures,{'identifier':measureScope.identifier})){
-                                element = _.findWhere( scopeOfMeasures ,{'identifier':measureScope.identifier});
-                                parentElement = _.findWhere(measure.document.scopeOfElements ,{'identifier':element.parent});
-                                parentElement.elements.push(measureScope);
-                            }
-                            else if(_.findWhere(relations,{'identifier':measureScope.identifier})){
-                                element = _.findWhere(relations ,{'identifier':measureScope.identifier});
-                                parentElement = _.findWhere( measure.document.scopeOfElements ,{'identifier':element.parent});
-                                parentElement.elements.push(measureScope);
-                            }
-                            else if(_.findWhere(informedConsent,{'identifier':measureScope.identifier})){
-                                element = _.findWhere( informedConsent ,{'identifier':measureScope.identifier});
-                                parentElement = _.findWhere( measure.document.scopeOfElements ,{'identifier':element.parent});
-                                parentElement.elements.push(measureScope);
-                            }
-                            else if(_.findWhere(traditionalKnowledge,{'identifier':measureScope.identifier})){
-                                element = _.findWhere( traditionalKnowledge ,{'identifier':measureScope.identifier});
-                                parentElement = _.findWhere( measure.document.scopeOfElements ,{'identifier':element.parent});
-                                parentElement.elements.push(measureScope);
-                            }
-                            else if(_.findWhere(benefitsAgreedTerms,{'identifier':measureScope.identifier})){
-                                element = _.findWhere( benefitsAgreedTerms ,{'identifier':measureScope.identifier});
-                                parentElement = _.findWhere( measure.document.scopeOfElements ,{'identifier':element.parent});
-                                parentElement.elements.push(measureScope);
-                            }
-                            else if(_.findWhere(compliance,{'identifier':measureScope.identifier})){
-                                element = _.findWhere( compliance ,{'identifier':measureScope.identifier});
-                                parentElement = _.findWhere( measure.document.scopeOfElements ,{'identifier':element.parent});
-                                parentElement.elements.push(measureScope);
-                            }
-                            else if(_.findWhere(monitoringUtilization,{'identifier':measureScope.identifier})){
-                                element = _.findWhere(monitoringUtilization ,{'identifier':measureScope.identifier});
-                                parentElement = _.findWhere( measure.document.scopeOfElements ,{'identifier':element.parent});
-                                parentElement.elements.push(measureScope);
-                            }
-                         });
-
-                         _.each(measure.document.amendedMeasures, function(amended){
-                             $http.get('/api/v2013/documents/' + amended.identifier)
-    			             .success(function (data) {
-                                 amended.measure = data;
-                                 relatedElement(measure.document, amended.measure);
+                     var amendedMeasuresQuery = _.map(document.data.amendedMeasures, function(amended) {
+                         return $http.get('/api/v2013/documents/' + amended.identifier);
+                     });
+                     return $q.all(amendedMeasuresQuery)
+                         .then(function(amendedMeasures) {
+                             amendedMeasures.forEach(function(amendedMeasureData) {
+                                 var amended = _.findWhere(document.data.amendedMeasures, {
+                                     identifier: amendedMeasureData.data.header.identifier
+                                 });
+                                 amended.measure = amendedMeasureData.data;
+                                //  relatedElement($scope.scopeElements, amendedMeasureData.data, 'amended');
                              });
+                             return document.data;
                          });
-
-                         _.each(measure.document.linkedMeasures, function(amended){
-                             $http.get('/api/v2013/documents/' + amended.identifier)
-    			             .success(function (data) {
-                                 amended.measure = data;
-                                 relatedElement(measure.document, amended.measure);
-                             });
-                         });
-
-                     }
-                      console.log(scopeElements);
-                 }).error(function (error) {
-                    console.log('onerror'); console.log(error);
                  })
-                 .finally(function(){
-                     measure.isLoading=false;
-                 });;
-             }
+                 .then(function(data) {
 
+                     var linkedMeasuresQuery = _.map(data.linkedMeasures, function(linked) {
+                         return $http.get('/api/v2013/documents/' + linked.identifier);
+                     });
+                     return $q.all(linkedMeasuresQuery)
+                         .then(function(linkedMeasures) {
+                             linkedMeasures.forEach(function(linkedMeasureData) {
+                                 var amended = _.findWhere(data.linkedMeasures, {
+                                     identifier: linkedMeasureData.data.header.identifier
+                                 });
+                                 amended.measure = linkedMeasureData.data;
+                                //  relatedElement($scope.scopeElements, linkedMeasureData.data, 'amended');
+                             });
+
+                             measure.document = [data];
+                             measure.showDocument = true;
+                             return data;
+                         });
+                 })
+                 .catch(function(error) {
+                     console.log('onerror');
+                     console.log(error);
+                 })
+                 .finally(function() {
+                     measure.isLoading = false;
+                 });
          };
+
+        //  $scope.loadMatrix = function(measure){
+        //      measure.showDocument = !measure.showDocument;
+        //      if(measure && !measure.document){
+        //          measure.isLoading = true;
+         //
+        //          $http.get('/api/v2013/documents/' + measure.identifier_s)
+    	// 		 .success(function (data) {
+         //
+        //              measure.document = data;
+        //             //                      measure.document.newMeasure = thesaurus.buildTree(measureElements);
+        //              //to avoid diff filters sort this after loads
+        //             //  if(measure.document.absMeasures){
+        //             //      var elements = angular.copy(scopeElements);
+        //             //      measure.document.scopeOfElements = elements;
+        //              //
+        //             //      _.map(measure.document.absMeasures, function(measureScope){
+        //             //          var element;
+        //             //          var parentElement;
+        //             //         if(_.findWhere(scopeElements,{'identifier':measureScope.identifier})){
+        //             //             parentElement = _.findWhere( measure.document.scopeOfElements ,{'identifier':measureScope.identifier});
+        //             //            parentElement.reference = measureScope.section;
+        //             //         }
+        //             //         else if(_.findWhere(scopeOfMeasures,{'identifier':measureScope.identifier})){
+        //             //             element = _.findWhere( scopeOfMeasures ,{'identifier':measureScope.identifier});
+        //             //             parentElement = _.findWhere(measure.document.scopeOfElements ,{'identifier':element.parent});
+        //             //             parentElement.elements.push(measureScope);
+        //             //         }
+        //             //         else if(_.findWhere(relations,{'identifier':measureScope.identifier})){
+        //             //             element = _.findWhere(relations ,{'identifier':measureScope.identifier});
+        //             //             parentElement = _.findWhere( measure.document.scopeOfElements ,{'identifier':element.parent});
+        //             //             parentElement.elements.push(measureScope);
+        //             //         }
+        //             //         else if(_.findWhere(informedConsent,{'identifier':measureScope.identifier})){
+        //             //             element = _.findWhere( informedConsent ,{'identifier':measureScope.identifier});
+        //             //             parentElement = _.findWhere( measure.document.scopeOfElements ,{'identifier':element.parent});
+        //             //             parentElement.elements.push(measureScope);
+        //             //         }
+        //             //         else if(_.findWhere(traditionalKnowledge,{'identifier':measureScope.identifier})){
+        //             //             element = _.findWhere( traditionalKnowledge ,{'identifier':measureScope.identifier});
+        //             //             parentElement = _.findWhere( measure.document.scopeOfElements ,{'identifier':element.parent});
+        //             //             parentElement.elements.push(measureScope);
+        //             //         }
+        //             //         else if(_.findWhere(benefitsAgreedTerms,{'identifier':measureScope.identifier})){
+        //             //             element = _.findWhere( benefitsAgreedTerms ,{'identifier':measureScope.identifier});
+        //             //             parentElement = _.findWhere( measure.document.scopeOfElements ,{'identifier':element.parent});
+        //             //             parentElement.elements.push(measureScope);
+        //             //         }
+        //             //         else if(_.findWhere(compliance,{'identifier':measureScope.identifier})){
+        //             //             element = _.findWhere( compliance ,{'identifier':measureScope.identifier});
+        //             //             parentElement = _.findWhere( measure.document.scopeOfElements ,{'identifier':element.parent});
+        //             //             parentElement.elements.push(measureScope);
+        //             //         }
+        //             //         else if(_.findWhere(monitoringUtilization,{'identifier':measureScope.identifier})){
+        //             //             element = _.findWhere(monitoringUtilization ,{'identifier':measureScope.identifier});
+        //             //             parentElement = _.findWhere( measure.document.scopeOfElements ,{'identifier':element.parent});
+        //             //             parentElement.elements.push(measureScope);
+        //             //         }
+        //             //      });
+        //              //
+        //                  _.each(measure.document.amendedMeasures, function(amended){
+        //                      $http.get('/api/v2013/documents/' + amended.identifier)
+    	// 		             .success(function (data) {
+        //                          amended.measure = data;
+        //                      });
+        //                  });
+         //
+        //                  _.each(measure.document.linkedMeasures, function(amended){
+        //                      $http.get('/api/v2013/documents/' + amended.identifier)
+    	// 		             .success(function (data) {
+        //                          amended.measure = data;
+        //                      });
+        //                  });
+        //              //
+        //             //  }
+        //             //   console.log(scopeElements);
+        //          }).error(function (error) {
+        //             console.log('onerror'); console.log(error);
+        //          })
+        //          .finally(function(){
+        //              measure.isLoading=false;
+        //          });;
+        //      }
+         //
+        //  };
 
          function relatedElement(measure, searchMeasure){
 
@@ -970,196 +1026,4 @@ define(['app','underscore'], function (app, _) {
 // console.log(JSON.stringify(thesaurus.buildTree(measureElements)))
 
     	}]);
-
-        app.directive("measureMatrixAbs", function () {
-    		return {
-    			restrict: "EAC",
-    			templateUrl: "/app/views/search/matrix/measure-matrix.directive/abs",
-    			replace: true,
-    			transclude: false,
-    			require : "?ngModel",
-    			scope: {
-    				binding     : "=ngModel",
-    				locales     : "=",
-    				termsFn     : "&terms",
-    				required    : "@",
-    				layout      : "@",
-    				document    : "=document"
-    			},
-    			link: function ($scope, $element, $attr, ngModelController)
-    			{
-    				$scope.identifiers = null;
-    				$scope.sections    = null;
-    				$scope.terms       = null;
-    				$scope.rootTerms   = [];
-
-    				$scope.$watch("document",        $scope.onTerms);
-    				$scope.$watch("binding",      $scope.load);
-    				$scope.$watch("binding", function() {
-    					ngModelController.$setViewValue($scope.binding);
-    				});
-
-    				$scope.$watch(function(){return angular.toJson($scope.identifiers) }, $scope.save); //use tojson to detect changes
-    				$scope.$watch(function(){return angular.toJson($scope.sections   ) }, $scope.save);
-
-    				$scope.init();
-
-    				if(!$attr["class"])
-    					$element.addClass("list-unstyled");
-
-    			},
-    			controller: ["$scope", "$q", "Thesaurus", "Enumerable","$http","guid", function ($scope, $q, thesaurus, Enumerable, $http, guid)
-    			{
-    				//==============================
-    				//
-    				//==============================
-    				$scope.init = function() {
-    					$scope.setError(null);
-    					$scope.__loading = true;
-
-    					$q.when($scope.termsFn(),
-    						function(data) { // on success
-    							$scope.__loading = false;
-    							$scope.terms     = data;
-    						}, function(error) { // on error
-    							$scope.__loading = false;
-    							$scope.setError(error);
-    						});
-    				}
-
-    				//==============================
-    				//
-    				//==============================
-    				$scope.load = function()
-    				{
-    					if (!$scope.terms) // Not initialized
-    						return;
-
-    					var oNewIdentifiers = {};
-    					var oNewSections    = {};
-
-    					if(!$.isArray($scope.terms))
-    						throw "Type must be array";
-
-    					if($scope.binding) {
-
-    						if(!$.isArray($scope.binding))
-    							throw "Type must be array";
-
-    						for(var i=0; i<$scope.binding.length; ++i)
-    						{
-    							oNewIdentifiers[$scope.binding[i].identifier] = true;
-    							oNewSections   [$scope.binding[i].identifier] = $scope.binding[i].section
-    						}
-    					}
-
-    					if (!angular.equals(oNewIdentifiers,  $scope.identifiers)) $scope.identifiers = oNewIdentifiers;
-    					if (!angular.equals(oNewSections,     $scope.sections   )) $scope.sections    = oNewSections;
-    				}
-
-
-    				//==============================
-    				//
-    				//==============================
-    				$scope.onTerms = function(refTerms) {
-
-    					$scope.rootTerms = [];
-
-    					if(refTerms)
-    					{
-
-                            $scope.load();
-                            if($scope.document.amendedMeasures || $scope.document.linkedMeasures){
-                                var measures = _.union(($scope.document.amendedMeasures ||[]), ($scope.document.linkedMeasures||[]));
-                                var amendedMeasures = _.map(measures, function(item){ return $http.get('/api/v2013/documents/' + item.identifier)})
-                                  $q.all(amendedMeasures)
-                                    .then(function (data) {
-                                        console.log(data)
-                                        data.forEach(function(measure){
-                                            appendElementMeasure(measure.data,$scope.terms);
-                                            return;
-                                        });
-                                    })
-                                    .then(function (data) {
-                                        buildTree();
-                                    });
-                            }
-                            else{
-                                buildTree();
-                            }
-
-    					}
-    				}
-                    function buildTree(){
-                        if (($scope.layout||"tree") == "tree") //Default layout
-                            $scope.rootTerms = thesaurus.buildTree($scope.terms);
-                        else
-                            $scope.rootTerms = Enumerable.from($scope.terms).Select("o=>{identifier : o.identifier, name : o.name, title : o.title, description : o.description}").ToArray();
-                    }
-    				//==============================
-    				//
-    				//==============================
-    				$scope.setError = function(error) {
-    					if (!error) {
-    						$scope.error = null;
-    						return;
-    					}
-
-    					if (error.status == 404) $scope.error = "Terms not found";
-    					else                     $scope.error = error.data || "unkown error";
-    				}
-
-                    function getRleatedMeasures (){
-
-                        _.each(document.amendedMeasures, function(amended){
-                            $http.get('/api/v2013/documents/' + amended.identifier)
-                            .success(function (data) {
-                                appendElementMeasure(amended);
-                                // amended.measure = data;
-                                // relatedElement(measure.document, amended.measure);
-
-                            });
-                        });
-
-                        // {
-                        //   "identifier": "DOC-GUID",
-                        //   "title": "DOC-TITLE",
-                        //   "broaderTerms": [
-                        //     "4E2974DF-216E-46C8-8797-8E3A33D6A048"
-                        //   ]
-                        // }
-                    }
-
-                    function appendElementMeasure(measure, terms){
-
-                           _.forEach(measure.absMeasures, function(measureElement){
-                               var element = _.findWhere(terms, {'identifier':measureElement.identifier});
-                               if(element){
-                                  var elementMeasure = {};
-                                  elementMeasure.identifier = guid();
-                                  elementMeasure.measureIdentifier = measure.header.identifier;
-                                  elementMeasure.name = elementMeasure.identifier;
-                                  elementMeasure.title = measure.title;
-                                  elementMeasure.broaderTerms = [];
-                                  elementMeasure.broaderTerms.push(element.identifier);
-                                  element.narrowerTerms.push(elementMeasure.identifier);
-
-                                  terms.push(elementMeasure);
-
-                                  $scope.identifiers[elementMeasure.identifier] = true;
-                                  $scope.sections[elementMeasure.identifier]    = measureElement.section;
-                               }
-                           });
-                           console.log(terms);
-                    }
-
-                    $scope.isMeasure = function(entity){
-                        console.log( _.findWhere($scope.terms , {identifier:entity.identifier}).measureIdentifier);
-                        return entity && _.findWhere($scope.terms , {identifier:entity.identifier}).measureIdentifier;
-                    }
-
-    			}]
-    		}
-    	});
-
 });
