@@ -47,9 +47,14 @@ app.directive("documentSelection", ["$http", "Thesaurus", "$filter", "underscore
             //==================================
             //
             //==================================
-            $scope.hideRecords = function(){
-                //loadDocuments();
-                console.info('hideRecords');
+            $scope.getGovernmentName = function(code){
+				return $filter('uppercase')($filter('term', 'locale')(code));
+            };
+			//==================================
+            //
+            //==================================
+            $scope.getUniqueId = function(identifier){
+				return $filter("uniqueID")(identifier);
             };
 
             //==================================
@@ -166,6 +171,15 @@ app.directive("documentSelection", ["$http", "Thesaurus", "$filter", "underscore
                     $scope.rawDocuments  = $scope.countryDocuments;
             };
 
+			//==================================
+		    //
+		    //==================================
+		    $scope.$watch('government', function(newValue, oldValue){
+
+		        if(newValue != oldValue){
+					$scope.rawDocuments = [];
+		        }
+		    });
 
 
 		}

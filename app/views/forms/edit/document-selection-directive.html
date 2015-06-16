@@ -16,7 +16,7 @@
 					<td>
 						<span class="latest-date"> {{doc.createdDate_dt | formatDate}} </span> |
                         <span class="latest-country"> {{doc.government_s | term:locale}} </span> |
-                        <span>{{doc.identifier_s | uniqueID}}</span>
+                        <span>{{getUniqueId(doc.identifier_s)}}</span>
                         <div class="latest-title">{{doc.title_t}} </div>
 					</td>
                     <td>
@@ -50,8 +50,8 @@
     							</td>
     							<td>
     								<span class="latest-date"> {{doc.createdDate_dt | formatDate}} </span> |
-                                    <span class="latest-country"> {{doc.government_s | term:locale}} </span> |
-                                    <span>{{doc.identifier_s | uniqueID}}</span>
+                                    <span class="latest-country"> {{getGovernmentName(doc.government_s)}} </span> |
+                                    <span>{{getUniqueId(doc.identifier_s)}}</span>
                                     <div class="latest-title">{{doc.title_t}} </div>
     							</td>
                                 <td>
