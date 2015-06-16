@@ -1,6 +1,6 @@
-define(['app', '/app/js/common.js', '/app/views/directives/search-filter-dates.partial.html.js'], function (app, commonjs) {
+define(['app', '/app/js/common.js', '/app/views/directives/search-filter-dates.partial.html.js'], function (app, commonjs) { // jshint ignore:line
 
-app.directive("documentSelection", ["$http", "Thesaurus", "$filter", "underscore", "guid",  "$timeout", "$q","IStorage","commonjs","realm", function ($http, Thesaurus, $filter, _, guid, $timeout, $q, storage, commonjs, realm) {
+app.directive("documentSelection", ["$http", "Thesaurus", "$filter", "underscore", "guid",  "$timeout", "$q","IStorage","commonjs", function ($http, Thesaurus, $filter, _, guid, $timeout, $q, storage, commonjs) {
 
 	return {
 		restrict   : "EA",
@@ -12,17 +12,16 @@ app.directive("documentSelection", ["$http", "Thesaurus", "$filter", "underscore
 			locales   : "=locales",
 			caption   : "@caption",
 			disabled  : "=ngDisabled",
-            government: "=government", // not used
+            government: "=government",
             question  : "@question",
-            schema    : "@schema",  // not used ??
+            schema    : "@schema",
             countryDocuments: "=countryDocuments",
-            //documents: "&countryDocuments"
+
 		},
 		link : function($scope) {
 
-            //$scope.rawDocuments      = [];
             $scope.selectedDocuments = [];
-			$scope.showrecords = false;
+			$scope.areVisible = false;
 
             var schemaTypes = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "focalPoint"];
 
@@ -50,6 +49,7 @@ app.directive("documentSelection", ["$http", "Thesaurus", "$filter", "underscore
             $scope.getGovernmentName = function(code){
 				return $filter('uppercase')($filter('term', 'locale')(code));
             };
+
 			//==================================
             //
             //==================================
@@ -133,7 +133,7 @@ app.directive("documentSelection", ["$http", "Thesaurus", "$filter", "underscore
                 loadDocuments();
 
 				$('#'+$scope.question).modal('hide');
-				$scope.showrecords = true;
+				$scope.areVisible = true;
 			};
 
             //==================================
