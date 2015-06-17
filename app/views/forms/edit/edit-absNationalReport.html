@@ -148,7 +148,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                             <div class="row">
             					<div class="col-xs-12">
                                     <div class="km-control-group" required name="question6" caption="6. Has your country designated one or more competent national authorities as provided in Article 13?">
-                                        <div ng-disabled="isQ3Yes(document.question3.answer)" class="km-yes-no" name="question5" ng-model="document.question6.answer"></div>
+                                        <div ng-disabled="isQ3Yes(document.question3.answer)" class="km-yes-no" name="question6" ng-model="document.question6.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question6Challenges" caption="">
                                         <strong>Please provide a summary of the main difficulties and challenges encountered and answer all the following questions.</strong>
@@ -372,7 +372,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
 
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div class="km-control-group" required name="question16" caption="16. Please provide the number of permits or their equivalents made available through the ABS-Clearing-House since the entry into force of the Protocol for your country.">
+                                    <div class="km-control-group" name="question16" caption="16. Please provide the number of permits or their equivalents made available through the ABS-Clearing-House since the entry into force of the Protocol for your country.">
 
                                      <div class="input-group col-xs-4"  name="question16.permitsOnAbsCh">
                                         <input ng-disabled="!isQ11Yes(document.question11.answer)" type="number" name="permitsOnAbsCh" class="form-control text-right" ng-model="document.question16.permitsOnAbsCh">
@@ -1564,10 +1564,10 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div class="checkbox" ng-show="document.question62.receiver.answer">
                                             <label><input type="checkbox" ng-model="document.question62.receiver.fromInstitution.answer" ng-change="Q62ClearReceiverFromInstitution()">From financial institutions</label>
                                             <div class="checkbox" ng-show="document.question62.receiver.fromInstitution.answer">
-                                                <label><input type="checkbox" ng-model="document.question62.receiver.fromInstitution.GEF" ">From the Global Environmental Facility </label>
+                                                <label><input type="checkbox" ng-model="document.question62.receiver.fromInstitution.GEF">From the Global Environmental Facility</label>
                                             </div>
                                             <div class="checkbox" ng-show="document.question62.receiver.fromInstitution.answer">
-                                                <label><input type="checkbox" ng-model="document.question62.receiver.fromInstitution.NPF" ">From the Nagoya Protocol Implementation Fund </label>
+                                                <label><input type="checkbox" ng-model="document.question62.receiver.fromInstitution.NPF">From the Nagoya Protocol Implementation Fund </label>
                                             </div>
                                             <div class="checkbox" ng-show="document.question62.receiver.fromInstitution.answer">
                                                 <label><input type="checkbox" ng-model="document.question62.receiver.fromInstitution.other" ng-change="Q62ClearReceiverFromInstitution()">From other sources</label>
