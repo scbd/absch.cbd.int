@@ -24,8 +24,48 @@ app.directive("viewAbsNationalReport", [function () {
 
 				return( $scope.hide.indexOf(field) >= 0 ? false : true);
 			}
+
+
+			//==================================
+		    //
+		    //==================================
+		    $scope.booleanToText = function(item) {
+		        if (item===undefined)
+		        	return "No answer provided";
+		        
+				return item ? "Yes" :  "No";
+			}
+
+			//==================================
+		    //
+		    //==================================
+		    $scope.conditionalBooleanToText = function(condition, item) {
+		    	if(condition)
+		    		return "Not applicable";
+		    	if(!condition)
+		    	{
+		    		if (item===undefined)
+		        		return "No answer provided";
+		        
+					return item ? "Yes" :  "No";
+				}
+		    }
+
+
+			//==================================
+		    //
+		    //==================================
+		    $scope.text = function(input) {
+		        if (input===undefined)
+		        	return "No information provided";
+		        
+				return input;
+			}
+
 		}]
 	};
 }]);
 
 });
+
+

@@ -92,9 +92,17 @@
     background-color:#bbb!important;
     color:#FFF;
 }
-
+.bg-grey4{
+    background-color:#999!important;
+    color:#FFF;
+}
 .bg-medgrey{
     background-color:#666!important;
+    color:#FFF;
+}
+
+.bg-medgrey1{
+    background-color:#333!important;
     color:#FFF;
 }
 
