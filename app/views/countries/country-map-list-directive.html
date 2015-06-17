@@ -1,12 +1,12 @@
 <div>
     <!-- Country Map and Other -->
-    <div class="container1 ng-scope" style="min-height:800px;" id="worldMap">
-        <div class="row row-centered" ng-hide="loadingFacets">
+    <div class="container-fluid ng-scope" style="min-height:800px;" id="worldMap">
+        <!-- <div class="row row-centered" ng-hide="loadingFacets">
 
             <div class="col-xs-12 row-centered">
 
 
-                <a ng-href="#" ng-click="searchFilter=isPartyToCBD;updateMap('party')">
+              <a ng-href="#" ng-click="searchFilter=isPartyToCBD;updateMap('party')">
                     <div class="col-xs-8ths" id="myWell">
                         <div class="box-0 text-center" style="vertical-align:middle;height:165px;">
                             <br>
@@ -21,6 +21,7 @@
                 <a ng-click="selected_facet=facet[0];updateMap(facet[0]);" ng-repeat="facet in commonFormatFacets" style="display:inline;cursor:pointer">
 
                     <div class="col-xs-8ths" id="myWell">
+                        {{facet[0]}}
                         <div class="box-0 text-center" style="padding-bottom:14px;" ng-class="{'myWell-on': isSelected(facet[0])}">
 
                             <div ng-show="facet[0]== 'RAT'">
@@ -66,109 +67,142 @@
                     </div>
                 </a>
             </div>
-        </div>
+        </div> -->
 
-        <ul class="nav nav-tabs" role="tablist" id="mapTabs">
-            <li role="presentation" class="active"><a href="#map" aria-controls="map" role="tab" data-toggle="tab">
-                <i class="fa fa-globe fa-lg"/> Map</a></li>
-            <li role="presentation"><a href="#list" aria-controls="list" role="tab" data-toggle="tab">
-                <i class="fa fa-align-justify fa-lg"/> List</a></li>
-        </ul>
 
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="map">
                 <div class="row" id="divMap" style="padding-top:20px;">
                     <div class="col-lg-12 col-md-12 col-xs-12">
-                        <div id="vmap" style="width: 100%; min-height: 600px;background-color:#EEE!important;"></div>
-                        <div class="alert alert-info">
+                        <div id="vmap" style="width: 100%; min-height: 500px;background-color:#EEE!important;"></div>
+                        <div>
                             <strong>Disclaimer:</strong>
-                            <br/> The designations employed and the presentation of material on this map do not imply the expression of any opinion whatsoever on the part of the Secretariat of the Convention on Biological Diversity or the United Nations concerning
+                            The designations employed and the presentation of material on this map do not imply the expression of any opinion whatsoever on the part of the Secretariat of the Convention on Biological Diversity or the United Nations concerning
                             the legal status of any country, territory, city or area or of its authorities, or concerning the delimitation of its frontiers or boundaries.
                         </div>
                     </div>
-                    <div class="col-lg-12 col-md-12 col-xs-12">
-                    </div>
                 </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="list">
-                <div class="row" id="divList">
-                    <div class="span12">
+
+                <div class="row" id="divList" style="padding-top:30px;">
+                    <div class="col-lg-12 col-md-12 col-xs-12">
                         <table class="table table-countries table-striped">
                             <tr>
-                                <td colspan="10">
-                                    <div class="pull-right" style="width:30%">
-                                        <div angucomplete id="ex1" placeholder="Search countries" pause="100" localdata="countriesforAutocomplete" minlength="1" inputclass="form-control form-control-small" searchfields="name" selectedObject="selectedCountry" searchStr="countryFilter" titlefield="name"
-                                        />
-                                    </div>
-                                </td>
+                                <th colspan="2">
+                                    <span class="color-litegrey" style="padding-left:10px;">Country</span>
+                                </th>
+                                <th>
+                                    <span class="color-litegrey">Status</span>
+                                </th>
+                                <th colspan="7"><span class="color-litegrey">National Records</span></th>
                             </tr>
                             <tr>
-                                <th>#</th>
-                                <th style="white-space:nowrap;">
-                                    <span style="cursor:pointer;" ng-click="sortTable('name.en')">Country
-                                        <i ng-show="sortTerm=='name.en'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span>
+                                <th colspan="2">
+
+                                    <md-button class="md-raised md-mini bg-medgrey" aria-label="all" ng-click="listAll();selected_facet='all';updateMap('all');sortTable('name.en', 'ASC')">
+                                            <span class="color-white">List all countries ({{countries.length}})</span>
+                                    </md-button>
+
+                                    <md-button class="md-fab md-mini bg-medgrey" aria-label="a to z" ng-click="sortTable('name.en', 'ASC')">
+                                        <i class=" fa fa-sort-alpha-asc" ></i>
+                                    </md-button>
+
+                                    <md-button class="md-fab md-mini bg-medgrey" aria-label="z to a" ng-click="sortTable('name.en', 'DESC')">
+                                        <i class=" fa fa-sort-alpha-desc" ></i>
+                                    </md-button>
+
+
                                 </th>
-                                <th style="white-space:nowrap;">
-                                    <span style="cursor:pointer;" ng-click="sortTable('treaties.XXVII8b.deposit')">Deposit
-                                        <i ng-show="sortTerm=='treaties.XXVII8b.deposit'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span>
+                                <th>
+                                    <md-button class="md-fab md-mini bg-blue" aria-label="Eat cake" ng-click="sortTable('treaties.XXVII8b.deposit', 'DESC')">
+                                            {{totalParties}}
+                                    </md-button>
+
+                                    <md-button class="md-fab md-mini bg-medgrey" aria-label="Eat cake" ng-click="sortTable('treaties.XXVII8b.deposit', 'ASC')">
+                                            {{totalNonParties}}
+                                    </md-button>
                                 </th>
-                                <th style="white-space:nowrap;">
-                                    <span style="cursor:pointer;" ng-click="sortTable('CNA')">CNA
-                                        <i ng-show="sortTerm=='CNA'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span>
+                                <th> &nbsp; <md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake" ng-click="selected_facet='focalPoint';updateMap('focalPoint');sortTable('FP');" data-toggle="tooltip" data-placement="top" title=" National Focal Points ">{{commonFormatFacets[6][1].facetCount}}</md-button></th>
+                                <th> &nbsp; <md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake" ng-click="selected_facet='database';updateMap('database');sortTable('NDB');"    data-toggle="tooltip" data-placement="top" title=" National Websites and Databases ">{{commonFormatFacets[5][1].facetCount}}</md-button></th>
+                                <th> &nbsp; <md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake" ng-click="selected_facet='authority';updateMap('authority');sortTable('CNA');"  data-toggle="tooltip" data-placement="top" title=" Competent National Authorities ">{{commonFormatFacets[0][1].facetCount}}</md-button></th>
+                                <th> &nbsp; <md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake" ng-click="selected_facet='measure';updateMap('measure');sortTable('MSR');"      data-toggle="tooltip" data-placement="top" title=" Legislative, administrative or policy measures ">{{commonFormatFacets[4][1].facetCount}}</md-button></th>
+                                <th> &nbsp; <md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake" ng-click="selected_facet='absPermit';updateMap('absPermit');sortTable('IRCC');" data-toggle="tooltip" data-placement="top" title=" Internationally Recognized Certificate of Compliance">{{commonFormatFacets[3][1].facetCount}}</md-button></th>
+                                <th> &nbsp; <md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake" ng-click="selected_facet='absCheckpoint';updateMap('absCheckpoint');sortTable('CP');"  data-toggle="tooltip" data-placement="top" title=" Checkpoints ">{{commonFormatFacets[1][1].facetCount}}</md-button></th>
+                                <th> &nbsp; <md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake" ng-click="selected_facet='absCheckpointCommunique';updateMap('absCheckpointCommunique');sortTable('CPC');"   data-toggle="tooltip" data-placement="top" title= "Checkpoint Communiqués ">{{commonFormatFacets[2][1].facetCount}}</md-button></th>
+                            </tr>
+                            <tr>
+                               <th  style="white-space:nowrap;font-size:14px;">#</th>
+                                <th style="white-space:nowrap;font-size:14px;">
+                                    <span style="cursor:pointer;" ng-click="sortTable('name.en')">Click country name to navigate to a profile
+                                        <!-- <i ng-show="sortTerm=='name.en'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i> -->
+                                        </span>
                                 </th>
-                                <th style="white-space:nowrap;">
-                                    <span style="cursor:pointer;" ng-click="sortTable('CP')">CP
-                                        <i ng-show="sortTerm=='CP'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span>
-                                </th>
-                                <th style="white-space:nowrap;">
-                                    <span style="cursor:pointer;" ng-click="sortTable('CPC')">CPC
-                                        <i ng-show="sortTerm=='CPC'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span>
-                                </th>
-                                <th style="white-space:nowrap;">
-                                    <span style="cursor:pointer;" ng-click="sortTable('IRCC')">IRCC
-                                        <i ng-show="sortTerm=='IRCC'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span>
-                                </th>
-                                <th style="white-space:nowrap;">
-                                    <span style="cursor:pointer;" ng-click="sortTable('MSR')">MSR
-                                        <i ng-show="sortTerm=='MSR'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span>
-                                </th>
-                                <th style="white-space:nowrap;">
-                                    <span style="cursor:pointer;" ng-click="sortTable('NDB')">NDB
-                                        <i ng-show="sortTerm=='NDB'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span>
-                                </th>
-                                <th style="white-space:nowrap;">
-                                    <span style="cursor:pointer;" ng-click="sortTable('FP')">FP
-                                        <i ng-show="sortTerm=='FP'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></span>
+                                  <th style="white-space:nowrap;font-size:14px;">
+                                    <span style="cursor:pointer;" ng-click="sortTable('treaties.XXVII8b.deposit')">Parties / Non-Parties
+                                        <!-- <i ng-show="sortTerm=='treaties.XXVII8b.deposit'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i> -->
+                                        </span>
                                 </th>
 
+                                <th style="white-space:nowrap;font-size:14px;text-align:center;">
+                                    <span style="cursor:pointer;" ng-click="sortTable('FP')" data-toggle="tooltip" data-placement="top" title=" National Focal Points ">
+                                        NFP
+                                        <!-- <i ng-show="sortTerm=='FP'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i> -->
+                                    </span>
+                                </th>
+                                <th style="white-space:nowrap;font-size:14px;text-align:center;">
+                                    <span style="cursor:pointer;" ng-click="sortTable('NDB')" data-toggle="tooltip" data-placement="top" title=" National Websites and Databases ">
+                                        NDB
+                                        <!-- <i ng-show="sortTerm=='NDB'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i> -->
+                                        </span>
+                                </th>
+                                <th style="white-space:nowrap;font-size:14px;text-align:center;">
+                                    <span style="cursor:pointer;" ng-click="sortTable('CNA')"  data-toggle="tooltip" data-placement="top" title=" Competent National Authorities ">CNA
+                                        <!-- <i ng-show="sortTerm=='CNA'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i> -->
+                                        </span>
+                                </th>
+                                 <th style="white-space:nowrap;font-size:14px;text-align:center;">
+                                    <span style="cursor:pointer;" ng-click="sortTable('MSR')" data-toggle="tooltip" data-placement="top" title=" Legislative, administrative or policy measures ">MSR
+                                        <!-- <i ng-show="sortTerm=='MSR'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i> -->
+                                        </span>
+                                </th>
+                                 <th style="white-space:nowrap;font-size:14px;text-align:center;">
+                                    <span style="cursor:pointer;" ng-click="sortTable('IRCC')" data-toggle="tooltip" data-placement="top" title=" Internationally Recognized Certificate of Compliance">IRCC
+                                        <!-- <i ng-show="sortTerm=='IRCC'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i> -->
+                                        </span>
+                                </th>
+                                <th style="white-space:nowrap;font-size:14px;text-align:center;">
+                                    <span style="cursor:pointer;" ng-click="sortTable('CP')" data-toggle="tooltip" data-placement="top" title=" Checkpoints ">CP
+                                        <!-- <i ng-show="sortTerm=='CP'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i> -->
+                                        </span>
+                                </th>
+                                <th style="white-space:nowrap;font-size:14px;text-align:center;">
+                                    <span style="cursor:pointer;" ng-click="sortTable('CPC')" data-toggle="tooltip" data-placement="top" title= "Checkpoint Communiqués ">CPC
+                                        <!-- <i ng-show="sortTerm=='CPC'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i> -->
+                                        </span>
+                                </th>
                             </tr>
-                            <tr ng-repeat="country in (countries | filter:countryFilter | filter: searchFilter | orderBy:sortTermFilter:orderList)" ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
-                                <td>{{$index + 1}}</td>
-                                <td><a ng-href="#" ng-click="navigateCountry('',country.code,'')" class="country-list-name label"
-                                    ng-class="{'list-group-item-info':country.isNPSignatory && !country.isNPParty,
-                                            'list-group-item-primary':country.isNPParty,
-                                            'list-group-item-default':!country.isNPParty && !country.isNPSignatory}"> {{country.name.en}}</a> &nbsp;
-                                    <span class="label label-success"
-                                    ng-show={{country.isInbetweenParty}}>entry into force on
-                                    {{addDate(country.entryIntoForce)| formatDate}}</span>
+                            <tr ng-repeat="country in (countries | filter:countryFilter | filter: searchFilter | orderBy:sortTermFilter:orderList) " ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
+                               <td>{{$index + 1}}</td>
+                                <td><a ng-href="#" ng-click="navigateCountry('',country.code,'')" class="country-list-name"
+                                    ng-class="{'list-group-item-primary':country.isNPParty,'list-group-item-default':!country.isNPParty }"> {{country.name.en}}</a> &nbsp;
                                 </td>
-                                <td>{{country.entryIntoForce}}</td>
-                                <td>{{country.CNA}}</td>
-                                <td>{{country.CP}}</td>
-                                <td>{{country.CPC}}</td>
-                                <td>{{country.IRCC}}</td>
-                                <td>{{country.MSR}}</td>
-                                <td>{{country.NDB}}</td>
-                                <td>{{country.FP}}</td>
+                                <td>
+                                    <span ng-show="country.isNPParty" style="font-weight:bold;">Party</span>
+                                    <span ng-show="!country.isNPParty" >Non-Party</span>
+                                    <span ng-show="country.isNPInbetweenParty" ><br>(entry into force on: {{addDate(country.entryIntoForce)| formatDate}})</span>
+                                </td>
+                                <td style="text-align:center;"><span class="badge bg-grey4">{{country.FP}}</span></td>
+                                <td style="text-align:center;"><span class="badge bg-grey4">{{country.NDB}}</span></td>
+                                <td style="text-align:center;"><span class="badge bg-grey4">{{country.CNA}}</span></td>
+                                <td style="text-align:center;"><span class="badge bg-grey4">{{country.MSR}}</span></td>
+                                <td style="text-align:center;"><span class="badge bg-grey4">{{country.IRCC}}</span></td>
+                                <td style="text-align:center;"><span class="badge bg-grey4">{{country.CP}}</span></td>
+                                <td style="text-align:center;"><span class="badge bg-grey4">{{country.CPC}}</span></td>
                             </tr>
                         </table>
-                        <div class="alert alert-info col-lg-10 col-md-10 col-xs-10">
+                        <div class="alert alert-info col-xs-12">
                             For declarations and other notes, you may visit the <a ng-href="https://treaties.un.org/pages/ViewDetails.aspx?src=TREATY&mtdsg_no=XXVII-8-b&chapter=27&lang=en">
                             United Nation Treaty Collection web site</a>.
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+
     </div>
 </div>

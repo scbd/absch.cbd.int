@@ -16,7 +16,7 @@ define(['app'], function(app) {
                     var greenland = "GL";
                     $scope.lastAction = 'party';
 
-
+                    //====================================================
                     function loadCountryMapDetails() {
                         if (!$scope.countries) {
                             var schema = ["absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database"];
@@ -49,6 +49,7 @@ define(['app'], function(app) {
                         }
                     }
 
+                    //====================================================
                     function loadCountries() {
 
                         commonjs.getCountries()
@@ -62,19 +63,25 @@ define(['app'], function(app) {
                                 $scope.nonCBDParties = 0
                                 var countryColors = {};
                                 $scope.countries = countries;
+                                $scope.totalParties=0;
+                                $scope.totalNonParties=0;
 
                                 _.each($scope.countries, function(country) {
 
                                     if (country.isNPParty) {
                                         if (country.code == 'EU')
                                             country.code = 'EUR';
+                                        $scope.totalParties++;
                                         countryColors[country.code.toUpperCase()] = "#428bca";
-                                    } else if (country.isNPSignatory) {
-                                        countryColors[country.code.toUpperCase()] = "#5bc0de";
+                                    // } else if (country.isNPSignatory) {
+                                    //     countryColors[country.code.toUpperCase()] = "#5bc0de";
                                     } else if (country.isCBDParty) {
-                                        countryColors[country.code.toUpperCase()] = "#808080";
+                                        countryColors[country.code.toUpperCase()] = "#666";
+                                        $scope.totalNonParties++;
                                     } else {
+                                        countryColors[country.code.toUpperCase()] = "#666";
                                         console.log('nonparty country', country);
+                                        //$scope.totalNonParties++;
                                     }
 
                                     $scope.countriesforAutocomplete.push({
@@ -83,8 +90,8 @@ define(['app'], function(app) {
 
                                 });
 
-                                countryColors[greenland.toUpperCase()] = "#808080";
-                                countryColors[taiwan] = "#808080";
+                                countryColors[greenland.toUpperCase()] = "#666";
+                                countryColors[taiwan] = "#666";
 
                                 loadMap(countryColors);
                                 addEUMapEvents();
@@ -93,6 +100,8 @@ define(['app'], function(app) {
                         //$scope.countries = $filter("orderBy")(response[1].data, "name.en");
                     }
 
+
+                    //====================================================
                     function addEUMapEvents() {
 
                         $("#vmap").append("<div id=\"jqvmap1_EUR1\" class=\"europeanUnion jqvmap-zoomout flag-icon-background flag-icon-eur\" style=\"max-height:50px;max-width:100px;background-color:#eee\"></div>");
@@ -129,22 +138,32 @@ define(['app'], function(app) {
 
                     //   }
 
-                    $scope.orderList = true;
-                    $scope.sortTerm = 'treaties.XXVII8b.deposit';
+                    $scope.orderList = false;
+                    $scope.sortTerm = 'name.en';
 
-                    //==================================
-                    $scope.sortTable = function(term) {
+                    //====================================================
+                    $scope.sortTable = function(term, order) {
 
-                        if ($scope.sortTerm == term) {
-                            $scope.orderList = !$scope.orderList;
-                        } else {
-                            $scope.sortTerm = term;
-                            $scope.orderList = true;
-                        }
+
+                            if ($scope.sortTerm == term) {
+                                $scope.orderList = !$scope.orderList;
+                            } else {
+                                $scope.sortTerm = term;
+                                $scope.orderList = true;
+                            }
+
+
+                            if(order == "ASC")
+                                $scope.orderList = false;
+
+                            if(order == "DESC")
+                                $scope.orderList = true;
+
+
                     };
 
 
-
+                    //====================================================
                     $scope.hasFacets = function(entity) {
 
                         for (var i = 0; i < $scope.commonFormatFacets.length; i++) {
@@ -158,6 +177,7 @@ define(['app'], function(app) {
                         return false;
                     }
 
+                    //====================================================
                     function loadMap(colors) {
 
                         if (!colors)
@@ -182,6 +202,7 @@ define(['app'], function(app) {
                         $('.jqvmap-zoomout').html('<i class="glyphicon glyphicon-minus"/>')
                     }
 
+                    //====================================================
                     $scope.navigateCountry = function(event, code, region) {
                         $('.jqvmap-label').html('');
                         code = code.toUpperCase();
@@ -200,6 +221,7 @@ define(['app'], function(app) {
                         // });
                     }
 
+                    //====================================================
                     function showCountryDetails(event, label, code) {
                         code = code.toUpperCase();
                         //tiwan should be shown as China
@@ -251,22 +273,23 @@ define(['app'], function(app) {
 
                         );
                     }
-
+                    //====================================================
                     $scope.updateMap = function(action) {
 
                         $scope.selected_facet = action
 
                         _.each($scope.countries, function(country) {
-                            $("#jqvmap" + getMapIndex() + "_" + country.code.toUpperCase()).attr("fill", "#fff");
+                            $("#jqvmap" + getMapIndex() + "_" + country.code.toUpperCase()).attr("fill", "#FFF");
                         });
+
                         //fix for taiwan
-                        $("#jqvmap" + getMapIndex() + "_" + taiwan).attr("fill", "#fff");
-                        $("#jqvmap" + getMapIndex() + "_" + greenland).attr("fill", "#fff");
+                        $("#jqvmap" + getMapIndex() + "_" + taiwan).attr("fill", "#FFF");
+                        $("#jqvmap" + getMapIndex() + "_" + greenland).attr("fill", "#FFF");
+
                         if (action == 'signatory' || action == 'party' || action == 'nonParties' || action == 'all') {
 
-
                             if (action == 'all' || action == 'nonParties') {
-                                $("#jqvmap" + getMapIndex() + "_" + greenland).attr("fill", "#808080");
+                                $("#jqvmap" + getMapIndex() + "_" + greenland).attr("fill", "#666");
                             }
 
                             _.each($scope.countries, function(country) {
@@ -274,23 +297,24 @@ define(['app'], function(app) {
                                 if ((action == 'party' || action == 'signatory' || action == 'all') && country.isNPParty) {
                                     $("#jqvmap" + getMapIndex() + "_" + country.code.toUpperCase()).attr("fill", "#428bca");
                                 }
-                                else if ((action == 'signatory' || action == 'all' || action == 'nonParties') &&
-                                         !country.isNPParty && country.isNPSignatory) {
-                                    $("#jqvmap" + getMapIndex() + "_" + country.code.toUpperCase()).attr("fill", "#5bc0de");
-                                }
+                                // else if ((action == 'signatory' || action == 'all' || action == 'nonParties') &&
+                                //          !country.isNPParty && country.isNPSignatory) {
+                                //     $("#jqvmap" + getMapIndex() + "_" + country.code.toUpperCase()).attr("fill", "#FF4081");
+                                // }
                                 else if ((action == 'nonParties' || action == 'all') && !country.isNPParty) {
-                                    $("#jqvmap" + getMapIndex() + "_" + country.code.toUpperCase()).attr("fill", "#808080");
-                                    $("#jqvmap" + getMapIndex() + "_" + taiwan).attr("fill", "#808080");
+                                    $("#jqvmap" + getMapIndex() + "_" + country.code.toUpperCase()).attr("fill", "#666");
+                                    $("#jqvmap" + getMapIndex() + "_" + taiwan).attr("fill", "#666");
                                 }
                                 //for non CBD parties only
                                 if(!country.isCBDParty && action == 'all'){
-                                    $("#jqvmap" + getMapIndex() + "_" + country.code.toUpperCase()).attr("fill", "#fff");
+                                    $("#jqvmap" + getMapIndex() + "_" + country.code.toUpperCase()).attr("fill", "#666");
                                 }
 
                             });
                         } else {
 
                             $scope.searchFilter = $scope.hasFacets;
+
                             $('#jqvmap1_EUR1').hide('slow');
                             _.each($scope.countryFacets['government_s,schema_s'], function(data) {
                                 //console.log(("#jqvmap" + getMapIndex() + "_"+taiwan));
@@ -303,10 +327,10 @@ define(['app'], function(app) {
                                     if (data.value.toUpperCase() == 'EUR')
                                         $('#jqvmap1_EUR1').show('slow');
 
-                                    $("#jqvmap" + getMapIndex() + "_" + data.value.toUpperCase()).attr("fill", "#428bca");
+                                    $("#jqvmap" + getMapIndex() + "_" + data.value.toUpperCase()).attr("fill", "#333");
                                     //fix for taiwan
                                     if (data.value.toUpperCase() == china)
-                                        $("#jqvmap" + getMapIndex() + "_" + taiwan).attr("fill", "#808080");
+                                        $("#jqvmap" + getMapIndex() + "_" + taiwan).attr("fill", "#333");
 
                                     //   if (data.value.toUpperCase() == denmark)
                                     //     $("#jqvmap" + getMapIndex() + "_" + greenland).attr("fill", "#428bca");
@@ -315,12 +339,19 @@ define(['app'], function(app) {
                         }
                     }
 
-
-
+                    //====================================================
                     $scope.isSelected = function(facet) {
                         return facet == $scope.selected_facet;
                     }
+                    //====================================================
+                    $scope.listAll = function() {
+                        $scope.searchFilter = '';
+                        $scope.countryFilter = '';
+                    }
 
+
+
+                    //====================================================
                     function getMapIndex(id) {
                         if (!id)
                             id = 1;
@@ -333,6 +364,7 @@ define(['app'], function(app) {
                         return id;
                     }
 
+                    //====================================================
                     function CalculateFacets() {
                         var tempFacets = {};
                         // console.log($scope.countryFacets['government_s,schema_s'])
@@ -363,6 +395,7 @@ define(['app'], function(app) {
                         // console.log($scope.commonFormatFacets)
                     }
 
+                    //====================================================
                     $scope.slideMap = function(divShow, divHide) {
 
                         $(divHide).slideUp("slow");
@@ -370,6 +403,7 @@ define(['app'], function(app) {
 
                     }
 
+                    //====================================================
                     function calculateListViewFacets() {
 
                         _.each($scope.countries, function(country) {
@@ -389,6 +423,7 @@ define(['app'], function(app) {
 
                     }
 
+                    //====================================================
                     $scope.sortTermFilter = function(data) {
                          //console.log(data);
                         if ($scope.sortTerm == "treaties.XXVII8b.deposit")
@@ -412,10 +447,12 @@ define(['app'], function(app) {
                         }
                     }
 
+                    //====================================================
                     $scope.addDate = function(date) {
                         return moment(date).add(90, 'day');
                     }
 
+                    //====================================================
                     $scope.$on('showDetails', function(evt, data) {
                         if (data.data == 'map') {
                             $element.find('#divList').slideUp('slow');
@@ -427,12 +464,15 @@ define(['app'], function(app) {
                         //$scope.updateMap($scope.lastAction);
                     });
 
+                    //====================================================
                     $scope.$on('updateMap', function(evt, eventData) {
 
                         $scope.updateMap(eventData.data.type);
                         $scope.searchFilter = eventData.data.searchFilter;
 
                     });
+
+
                     loadCountries();
                     loadCountryMapDetails();
                 }

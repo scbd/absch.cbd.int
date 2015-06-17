@@ -1,108 +1,20 @@
-<link href="/app/css/country.css" rel="stylesheet">
-<link href="/app/css/profiles.css" rel="stylesheet">
-<link href="/app/css/find.css" rel="stylesheet">
-<link href="/app/css/record.css" rel="stylesheet">
-<link href="/app/libs/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
-<link href="/app/css/profile-map.css" rel="stylesheet">
 
-<div ng-controller="ProfileController" >
+<div>
 
-    <style>
-    .page-content{background-color: #eee;}
+    <div class="container-fluid" id="wrapper">
+        <div class="row">
 
-        .ng-hide-add-active,
-        .ng-hide-remove {
-            display: inline!important;
-        }
-        .table-hover:hover {
-            background-color: #f5f5f5;
-        }
-        .table-row{
-            cursor: pointer;
-        }
-        .border {
-            border-bottom: 1px solid #eee;
-            padding: 10px 0px 00px 00px;
-        }
-        .confidential {
-            color: #a94442!important;
-        }
-        .tableheader {
-            padding-top: 10px;
-            padding-bottom: 10px;
-            padding-right: 0px;
-            padding-left:0;
-            text-align: left;
-            cursor: pointer
-            color:#111;
-        }
-        .table-msr {
-            border-bottom: 1px solid #eee;
-            padding-left: 20px;
-            padding-right: 20px;
-        }
-        .fullBorder {
-            border: 1px solid #eee;
-        }
-        .sectionHeader {
-            border: 1px solid #eee;
-            padding: 10px;
-            margin-top: 50px;
-        }
-        .btn-panel-warning {
-            color: #8a6d3b;
-            background-color: #fcf8e3;
-            border-color: #faebcc;
-        }
-        .btn-panel-info {
-            color: #31708f;
-            background-color: #d9edf7;
-            border-color: #bce8f1;
-        }
-        .btn-panel-success {
-            color: #3c763d;
-            background-color: #dff0d8;
-            border-color: #d6e9c6;
-        }
-    </style>
-
-
-
-<section layout="row" style="position:relative; top:20px;" flex>
-
-
-       <md-sidenav class="md-sidenav-left md-whiteframe-z2 " md-component-id="left" md-is-locked-open="$mdMedia('min-width: 1200px')"
-       style="height:818px;-webkit-border-top-right-radius: 3px;-moz-border-radius-topright: 3px;border-top-right-radius: 3px;border-bottom-right-radius: 3px;-webkit-border-bottom-right-radius: 3px;-moz-border-radius-bottomright: 3px;" >
-
-
-         <md-toolbar class="bg-medgrey special-font" >
-           <h1 class="md-toolbar-tools">Select a country</h1>
-         </md-toolbar>
-
-         <md-content layout-padding layout-margin>
-
-             <div ng-repeat="country in countries | orderBy:'name.en' ">
-                <div><a href="countries/{{country.code}}" ng-class="{'color-blue bold': country.isNPParty, 'color-grey':!country.isNPParty}">{{country.name.en}}</a></div>
+            <div class="col-xs-3" style="padding-top:5px;">
+                <span countries-left-menu finish-loading-countries="finishLoading()" on-status-click="statusFilter(data);">
             </div>
-         </md-content>
+            <!-- <div ng-class="{'col-xs-12' : !showlist, 'col-xs-9':showlist}" > -->
+            <div class="col-xs-9" style="padding-top:20px;">
 
-     </md-sidenav>
-
-
-
-
-     <md-content flex layout-margin style="margin:0 30px 30px 30px;padding:0;background-color:transparent;"  >
-           <div layout="column" layout-align="top center"  >
-
-                <md-button ng-click="toggleLeft()" class="md-primary md-raised bg-medgrey" hide-gt-lg  style="margin: 0  0 10px 0;">
-                        <i class="fa fa-chevron-circle-left "></i> select a country
-                    </md-button>
-
-
-
-                        <div class="panel md-whiteframe-z2" style="margin:0;padding:0; min-height:818px;"  >
-                            <div class="panel-heading bg-grey2" style="padding:2px 15px;">
-
+                <div id="page-content-wrapper">
+                    <div class="page-content inset ">
+                        <div class="panel panel-default ng-scope" style="background-color:white;min-height:800px;" id="countryDetails">
+                            <div class="panel-heading bg-grey1" style="marign-bottom:30px;">
+                    
                                 <table style="width:100%">
                                     <tr>
                                         <td style="width:80px;padding-right:20px;">
@@ -110,7 +22,7 @@
                                         </td>
                                         <td style="padding-top:10px;">
                                             <h3 style="margin:0;padding:0;display:inline;">
-                                                <span class="country-name" style="font-size:3vw;" ng-class="{'color-blue': country.isNPParty,'color-grey': !country.isNPParty }">{{country.name.en}}</span>
+                                                <span class="country-name" style="font-size:3vw;" ng-class="{'color-blue': country.isNPParty,'color-grey': !country.isNPParty }">{{country.name.en}}</span>                                         
                                              </h3>
                                             <h3  style="margin:0;padding:0;display:inline;position:relative;top:-5px;">
                                                 <label class="label label-default" ng-show="!country.isNPParty">Non-Party</label>
@@ -122,11 +34,11 @@
                                                 <div ng-show="country.isNPSignatory && !country.isNPParty"><label  class="pull-right" >
                                                     <span style="color: #5bc0de;">Signatory</span>
                                                 </label></div>
-
+                                                
                                                 <div ng-show="country.isNPParty||country.isNPInbetweenParty" ><label  class="pull-right" >
                                                     <span style="font-size:12px;text-transform:uppercase;color:#999;" >Date of {{country.treaties.XXVII8b.instrument}}: </span> {{country.treaties.XXVII8b.deposit | formatDate}}
                                                 </label></div>
-
+                                                
                                                <div ng-show="country.isNPInbetweenParty || country.isNPParty"> <label  class="pull-right" >
                                                       <span style="font-size:12px;text-transform:uppercase;color:#999;">Date of entry into force: </span> {{country.entryIntoForceDate| formatDate}}
                                                 </label></div>
@@ -135,26 +47,25 @@
                                     </tr>
                                 </table>
                             </div>
-
-
-
-
+                            
+                            
+                            
+                            
                           <div class="panel-body">
                             <div class="col-xs-12">
 
                                 <div class="row bg-grey1" style="padding:3px; border-radius: 3px;"">
                                     <h5 style="padding:0;margin:0;font-size:15px;" >
                                         <a href="" ng-click="showNFP = !showNFP">
-                                            <span class="badge" ng-class="{'bg-grey': nfpCount==0, 'bg-black': nfpCount > 0}">{{nfpCount}}</span>
-                                            <span style="position:relative;top:1px;" ng-class="{'color-grey': nfpCount==0, 'color-black': nfpCount > 0}"> National Focal Points (NFP)</span>
+                                            <span class="badge  bg-black">{{nfpCount}}</span>
+                                            <span style="position:relative;top:1px;" class="color-black"> National Focal points (NFP)</span>
                                             <i class="fa fa-chevron-circle-up pull-right" ng-show="showNFP"></i>
-                                            <i class="fa fa-chevron-circle-down pull-right" ng-show="!showNFP"></i>
+                                            <i class="fa fa-chevron-circle-down pull-right" ng-show="!showNFP"></i>  
                                         </a>
                                     </h5>
                                 </div>
-
-                                <div class="row" ng-show="showNFP" style="padding:0;margin:0;">
-                                    <div style="padding:0;margin:10px 0px;">
+                                
+                                <div class="row" ng-show="showNFP" style="padding:10px;">
                                     <div ng-repeat="contact in absch_nfp | filter:{'schema_s':'focalPoint'}">
                                             <div ng-class="{'row': ($index)%3==0}"> </div>
                                                 <div class="col-md-4"  style="margin:0;">
@@ -172,7 +83,7 @@
                                                                 <a ng-show="contact.schema_s=='focalPoint'" ng-href="/database/focalPoint/{{contact.documentId}}">{{contact.title_t}}</a>
                                                             </strong>
                                                             <div ng-show="contact.description_t" ng-bind-html="contact.description_t"></div>
-
+    
                                                             <ul ng-show="contact.telephones || contact.telephone_s || contact.fax_ss" style="list-style-type: none;padding:0;margin:0;">
                                                                 <li ng-show="contact.telephone_s"><i class="fa fa-phone-square" /> {{contact.telephone_s}}</li>
                                                                 <li ng-repeat="item in contact.telephones"><i class="fa fa-phone-square" /> {{item}}</li>
@@ -186,16 +97,15 @@
                                                     </div>
                                                 </div>
                                         </div>
-                                    </div>
                                 </div>
                          </div>
                         </div> <!--  end panel body-->
-
-
-
-
-
-
+                        
+                        
+                        
+                        
+                        
+                        
                         <div class="panel-body">
                             <div class="col-xs-12">
 
@@ -203,17 +113,16 @@
                                     <h5 style="padding:0;margin:0;font-size:15px;" >
 
                                          <a href="" ng-click="showNDB = !showNDB">
-                                            <span class="badge" ng-class="{'bg-grey': database==0, 'bg-black': database > 0}">{{database}}</span>
-                                            <span style="position:relative;top:1px;" ng-class="{'color-grey': database==0, 'color-black': database > 0}"> National Databases and Websites (NDB)</span>
+                                            <span class="badge  bg-black">{{database}}</span>
+                                            <span style="position:relative;top:1px;" class="color-black"> National Databases and Websites (NDB)</span>
                                             <i class="fa fa-chevron-circle-up pull-right" ng-show="showNDB"></i>
-                                            <i class="fa fa-chevron-circle-down pull-right" ng-show="!showNDB"></i>
-                                        </a>
-
+                                            <i class="fa fa-chevron-circle-down pull-right" ng-show="!showNDB"></i>  
+                                        </a>   
+   
                                     </h5>
                                 </div>
-
-                                <div class="row" ng-show="showNDB">
-                                    <div  style="padding:10px;">
+                                
+                                <div class="row" ng-show="showNDB" style="padding:10px;">
                                     <div ng-repeat="contact in absch_nfp | filter:{'schema_s':'database'}" >
                                             <div ng-class="{'row': ($index)%3==0}"> </div>
                                                 <div class="col-md-4"  style="margin:0;">
@@ -231,7 +140,7 @@
                                                                 <a ng-show="contact.schema_s=='focalPoint'" ng-href="/database/focalPoint/{{contact.documentId}}">{{contact.title_t}}</a>
                                                             </strong>
                                                             <div ng-show="contact.description_t" ng-bind-html="contact.description_t"></div>
-
+    
                                                             <ul ng-show="contact.telephones || contact.telephone_s || contact.fax_ss" style="list-style-type: none;padding:0;margin:0;">
                                                                 <li ng-show="contact.telephone_s"><i class="fa fa-phone-square" /> {{contact.telephone_s}}</li>
                                                                 <li ng-repeat="item in contact.telephones"><i class="fa fa-phone-square" /> {{item}}</li>
@@ -245,36 +154,34 @@
                                                     </div>
                                                 </div>
                                         </div>
-                                    </div>
                                 </div>
-                            </div>
+                         </div>
                         </div> <!--  end panel body-->
-
-
-
-
-
-
+                        
+                        
+                        
+                        
+                        
+                        
                         <div class="panel-body">
                             <div class="col-xs-12">
 
                                 <div class="row bg-grey1" style="padding:3px; border-radius: 3px;">
                                     <h5 style="padding:0;margin:0;font-size:15px;" >
-
+                     
                                          <a href="" ng-click="showCNA = !showCNA">
-                                            <span class="badge" ng-class="{'bg-grey': nationalAuthority==0, 'bg-black': nationalAuthority > 0}">{{nationalAuthority}}</span>
-                                            <span style="position:relative;top:1px;"  ng-class="{'color-grey': nationalAuthority==0, 'color-black': nationalAuthority > 0}">
+                                            <span class="badge  bg-black">{{nationalAuthority}}</span>
+                                            <span style="position:relative;top:1px;" class="color-black"> 
                                                Competent National Authorities (CNA)
                                             </span>
                                             <i class="fa fa-chevron-circle-up pull-right" ng-show="showCNA"></i>
-                                            <i class="fa fa-chevron-circle-down pull-right" ng-show="!showCNA"></i>
-                                        </a>
+                                            <i class="fa fa-chevron-circle-down pull-right" ng-show="!showCNA"></i>  
+                                        </a>   
                                     </h5>
                                 </div>
-
-                                <div class="row" ng-show="showCNA">
-                                    <div  style="padding:10px;">
-                                     <div ng-repeat="contact in absch_nfp  | filter:{'schema_s':'authority'}" >
+                                
+                                <div class="row" ng-show="showCNA"  style="padding:10px;">
+                                     <div ng-repeat="contact in absch_nfp  | filter:{'schema_s':'authority'}">
                                             <div ng-class="{'row': ($index)%3==0}"> </div>
                                                 <div class="col-md-4"  style="margin:0;">
                                                     <div class="panel panel-default" >
@@ -291,7 +198,7 @@
                                                                 <a ng-show="contact.schema_s=='focalPoint'" ng-href="/database/focalPoint/{{contact.documentId}}">{{contact.title_t}}</a>
                                                             </strong>
                                                             <div ng-show="contact.description_t" ng-bind-html="contact.description_t"></div>
-
+    
                                                             <ul ng-show="contact.telephones || contact.telephone_s || contact.fax_ss" style="list-style-type: none;padding:0;margin:0;">
                                                                 <li ng-show="contact.telephone_s"><i class="fa fa-phone-square" /> {{contact.telephone_s}}</li>
                                                                 <li ng-repeat="item in contact.telephones"><i class="fa fa-phone-square" /> {{item}}</li>
@@ -305,40 +212,40 @@
                                                     </div>
                                                 </div>
                                         </div>
-
-                                    </div>
+                                    
+                                    
                                 </div>
                          </div>
                         </div> <!--  end panel body-->
-
-
-
-
-
-
-
-
+                        
+                        
+                        
+                            
+                            
+                            
+                            
+                            
                             <div class="panel-body">
                             <div class="col-xs-12">
 
                                 <div class="row bg-grey1" style="padding:3px; border-radius: 3px;">
                                     <h5 style="padding:0;margin:0;font-size:15px;" >
-
+  
                                         <a href="" ng-click="showMSR = !showMSR">
-                                            <span class="badge" ng-class="{'bg-grey': nationalMeasure==0, 'bg-black': nationalMeasure > 0}">{{nationalMeasure}}</span>
-                                            <span style="position:relative;top:1px;"  ng-class="{'color-grey': nationalMeasure==0, 'color-black': nationalMeasure > 0}">
+                                            <span class="badge  bg-black">{{nationalMeasure}}</span>
+                                            <span style="position:relative;top:1px;" class="color-black"> 
                                                Legislative, administrative or policy measures on access and benefit-sharing (MSR)
                                             </span>
                                             <i class="fa fa-chevron-circle-up pull-right" ng-show="showMSR"></i>
-                                            <i class="fa fa-chevron-circle-down pull-right" ng-show="!showMSR"></i>
-                                        </a>
-
+                                            <i class="fa fa-chevron-circle-down pull-right" ng-show="!showMSR"></i>  
+                                        </a>       
+                                            
                                     </h5>
                                 </div>
-
-                                <div class="row" ng-show="showMSR" >
-
-                                    <div  style="padding:10px; margin:0 20px;">
+                                
+                                <div class="row" ng-show="showMSR"  style="padding:10px;">
+                                    
+                                    
                                     <div class="row table-hover table-msr">
                                         <div class="col-lg-3 col-md-3 col-xs-3 tableheader" ng-click="sortMeasure='title_t';reverseMeasure=!reverseMeasure">name
                                             <i class="fa" ng-class="{'fa-caret-up':(sortMeasure=='title_t' && reverseMeasure),'fa-caret-down':(sortMeasure=='title_t' && !reverseMeasure)}"></i>
@@ -373,34 +280,34 @@
                                     <div class="row" ng-show="absMeasure.length==0">
                                         <div class="col-lg-10 col-md-12 col-xs-12 tableheader color-orange">No Legislative, administrative or policy measures on access and benefit-sharing (MSR) available</div>
                                     </div>
-
-                                    </div>
+                                    
+                                    
                                 </div>
                          </div>
                         </div> <!--  end panel body-->
-
-
-
+                            
+                            
+                            
                         <div class="panel-body">
                             <div class="col-xs-12">
 
                                 <div class="row bg-grey1" style="padding:3px; border-radius: 3px;">
-                                    <h5 style="padding:0;margin:0;font-size:15px;" >
-
+                                    <h5 style="padding:0;margin:0;font-size:15px;" >                      
+                                        
                                         <a href="" ng-click="showIRCC = !showIRCC">
-                                            <span class="badge" ng-class="{'bg-grey': Permit==0, 'bg-black': Permit > 0}">{{Permit}}</span>
-                                            <span style="position:relative;top:1px;"  ng-class="{'color-grey': Permit==0, 'color-black': Permit > 0}">
+                                            <span class="badge  bg-black">{{Permit}}</span>
+                                            <span style="position:relative;top:1px;" class="color-black"> 
                                                Internationally Recognized Certificates of Compliance (IRCC)
                                             </span>
                                             <i class="fa fa-chevron-circle-up pull-right" ng-show="showIRCC"></i>
-                                            <i class="fa fa-chevron-circle-down pull-right" ng-show="!showIRCC"></i>
-                                        </a>
-
+                                            <i class="fa fa-chevron-circle-down pull-right" ng-show="!showIRCC"></i>  
+                                        </a>       
+ 
                                     </h5>
                                 </div>
-
-                                <div class="row" ng-show="showIRCC" >
-                                    <div  style="padding:10px; margin:0 20px;">
+                                
+                                <div class="row" ng-show="showIRCC"  style="padding:10px;">
+                                    
                                                  <div class="row table-msr">
                                                 <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortPermit='title_t';reversePermit=!reversePermit">name
                                                     <i class="fa" ng-class="{'fa-caret-up':(sortPermit=='title_t' && reversePermit),'fa-caret-down':(sortPermit=='title_t' && !reversePermit)}"></i>
@@ -455,32 +362,32 @@
                                             <div class="row" ng-show="absMeasure.length==0">
                                                 <div class="col-lg-10 col-md-12 col-xs-12 tableheader color-orange">No Internationally Recognized Certificates of Compliance (IRCC)</div>
                                             </div>
-                                        </div>
+                                    
                                 </div>
                          </div>
-                        </div> <!--  end panel body-->
-
-
-
-
+                        </div> <!--  end panel body-->    
+                            
+                            
+                            
+                            
                          <div class="panel-body">
                             <div class="col-xs-12">
                                 <div class="row bg-grey1" style="padding:3px; border-radius: 3px;">
                                     <h5 style="padding:0;margin:0;font-size:15px;" >
-
+                            
                                          <a href="" ng-click="showCP = !showCP">
-                                            <span class="badge" ng-class="{'bg-grey': absCheckpoint==0, 'bg-black': absCheckpoint > 0}">{{absCheckpoint}}</span>
-                                            <span style="position:relative;top:1px;"  ng-class="{'color-grey': absCheckpoint==0, 'color-black': absCheckpoint > 0}">
+                                            <span class="badge  bg-black">{{absCheckpoint}}</span>
+                                            <span style="position:relative;top:1px;" class="color-black"> 
                                                Checkpoints (CP)
                                             </span>
                                             <i class="fa fa-chevron-circle-up pull-right" ng-show="showCP"></i>
-                                            <i class="fa fa-chevron-circle-down pull-right" ng-show="!showCP"></i>
-                                        </a>
+                                            <i class="fa fa-chevron-circle-down pull-right" ng-show="!showCP"></i>  
+                                        </a>    
                                     </h5>
                                 </div>
-
-                                <div class="row" ng-show="showCP">
-                                    <div   style="padding:10px;">
+                                
+                                <div class="row" ng-show="showCP"  style="padding:10px;">
+                                    
                                    <div ng-repeat="contact in absch_nfp | filter:{'schema_s':'absCheckpoint'} |  filter:!{'schema_s':'absCheckpointCommunique'}" >
                                             <div ng-class="{'row': ($index)%3==0}"> </div>
                                                 <div class="col-md-4"  style="margin:0;">
@@ -498,7 +405,7 @@
                                                                 <a ng-show="contact.schema_s=='focalPoint'" ng-href="/database/focalPoint/{{contact.documentId}}">{{contact.title_t}}</a>
                                                             </strong>
                                                             <div ng-show="contact.description_t" ng-bind-html="contact.description_t"></div>
-
+    
                                                             <ul ng-show="contact.telephones || contact.telephone_s || contact.fax_ss" style="list-style-type: none;padding:0;margin:0;">
                                                                 <li ng-show="contact.telephone_s"><i class="fa fa-phone-square" /> {{contact.telephone_s}}</li>
                                                                 <li ng-repeat="item in contact.telephones"><i class="fa fa-phone-square" /> {{item}}</li>
@@ -512,37 +419,36 @@
                                                     </div>
                                                 </div>
                                         </div>
-
-                                    </div>
+                                    
+                                    
                                 </div>
                             </div>
                         </div> <!--  end panel body-->
-
-
-
-
-
-
-
-
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
                          <div class="panel-body">
                             <div class="col-xs-12">
                                 <div class="row bg-grey1" style="padding:3px; border-radius: 3px;">
                                     <h5 style="padding:0;margin:0;font-size:15px;" >
-
+    
                                          <a href="" ng-click="showCPC = !showCPC">
-                                            <span class="badge" ng-class="{'bg-grey': absCheckpointCommunique==0, 'bg-black': absCheckpointCommunique > 0}">{{absCheckpointCommunique}}</span>
-                                            <span style="position:relative;top:1px;"  ng-class="{'color-grey': absCheckpointCommunique==0, 'color-black': absCheckpointCommunique > 0}">
+                                            <span class="badge  bg-black">{{absCheckpointCommunique}}</span>
+                                            <span style="position:relative;top:1px;" class="color-black"> 
                                                Checkpoint Communiqués (CPC) SENT
                                             </span>
                                             <i class="fa fa-chevron-circle-up pull-right" ng-show="showCPC"></i>
-                                            <i class="fa fa-chevron-circle-down pull-right" ng-show="!showCPC"></i>
+                                            <i class="fa fa-chevron-circle-down pull-right" ng-show="!showCPC"></i>  
                                         </a>
                                     </h5>
                                 </div>
-
-                                <div class="row" ng-show="showCPC" >
-                                        <div  style="padding:10px; margin:0 20px;">
+                                
+                                <div class="row" ng-show="showCPC"  style="padding:10px;">
                                         <div class="row table-msr">
                                     	       <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPC='checkpoint_CEN_ss';reverseCPC=!reverseCPC">checkpoint
                                                     <i class="fa" ng-class="{'fa-caret-up':(sortCPC=='checkpoint_CEN_ss' && reverseCPC),'fa-caret-down':(sortCPC=='checkpoint_CEN_ss' && !reverseCPC)}"></i>
@@ -612,35 +518,35 @@
                                             <div class="row" ng-show="absCommunique.length==0">
                                                 <div class="col-lg-10 col-md-12 col-xs-12 tableheader color-orange">No Checkpoint Communiqués (CPC) sent</div>
                                             </div>
-
-                                        </div>
+                               
+                                    
                                 </div>
                             </div>
                         </div> <!--  end panel body-->
-
-
-
-
-
-
+                            
+                            
+                            
+                            
+                            
+                            
                              <div class="panel-body">
                             <div class="col-xs-12">
                                 <div class="row bg-grey1" style="padding:3px; border-radius: 3px;">
-                                    <h5 style="padding:0;margin:0;font-size:15px;" >
+                                    <h5 style="padding:0;margin:0;font-size:15px;" > 
                                          <a href="" ng-click="showCPCRecv = !showCPCRecv">
-                                            <span class="badge" ng-class="{'bg-grey': cpcReceivedCount==0, 'bg-black': cpcReceivedCount > 0}">{{cpcReceivedCount}}</span>
-                                            <span style="position:relative;top:1px;"  ng-class="{'color-grey': cpcReceivedCount==0, 'color-black': cpcReceivedCount > 0}">
+                                            <span class="badge  bg-black">{{cpcReceivedCount}}</span>
+                                            <span style="position:relative;top:1px;" class="color-black"> 
                                               Checkpoint Communiqués (CPC) RECEIVED
                                             </span>
                                             <i class="fa fa-chevron-circle-up pull-right" ng-show="showCPCRecv"></i>
-                                            <i class="fa fa-chevron-circle-down pull-right" ng-show="!showCPCRecv"></i>
-                                        </a>
-
+                                            <i class="fa fa-chevron-circle-down pull-right" ng-show="!showCPCRecv"></i>  
+                                        </a>    
+                                            
                                     </h5>
                                 </div>
-
-                                <div class="row" ng-show="showCPCRecv">
-                                <div   style="padding:10px;margin:0 20px;">
+                                
+                                <div class="row" ng-show="showCPCRecv"  style="padding:10px;">
+                                    
                                   <div class="row table-msr">
                                                 <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPCReceived='government_s';reverseCPCReceived=!reverseCPCReceived">issuing country
                                                     <i class="fa" ng-class="{'fa-caret-up':(sortCPCReceived=='government_s' && reverseCPCReceived),'fa-caret-down':(sortCPCReceived=='government_s' && !reverseCPCReceived)}"></i>
@@ -701,7 +607,7 @@
                                                     </div>
                                                     <div class="row">
                                                         <i ng-show="displayDetails" class="glyphicon glyphicon-remove-circle circle pull-right" style="position:relative;top:{{40 + (communique.permit_ss ? communique.permit_ss.length*10 :0  )}}px;z-index:100;font-size:20px;color:white;" ng-click="displayDetails=!displayDetails;"></i>
-                                                        <div class="col-xs-12 details document-show-hide" ng-show="displayDetails" record-loader document="communique.data" ></div>
+                                                        <div class="col-xs-12 details document-show-hide" ng-show="displayDetails" record-loader document="communique.data"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -709,17 +615,30 @@
                                             <div class="row" ng-show="cpcReceived.length==0">
                                                 <div class="col-lg-10 col-md-12 col-xs-12 tableheader color-orange">No Checkpoint Communiqués (CPC) received</div>
                                             </div>
-
-                                        </div>
+                                    
+                                    
                                 </div>
                             </div>
-
-
                         </div> <!--  end panel body-->
-                    </div> <!-- end panel -->
-        </div><!-- end col-xs-12 -->
-    </div><!-- end row -->
+                            
+                            
+                            
 
-</section>
+                        
+                        </div>
+                        <!-- end row -->
 
+
+
+                    </div>
+                    <!-- end container -->
+
+
+                </div>
+            </div>
+        </div>
+
+        <!-- end controller -->
+    </div>
+</div>
 </div>

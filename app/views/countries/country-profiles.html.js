@@ -1,4 +1,4 @@
- define(['app','underscore','linqjs', 'ngMaterial','ngAria','angular-animate',
+ define(['app','underscore','linqjs',
    '/app/views/forms/view/record-loader.directive.html.js',
    '/app/views/forms/view/view-abs-checkpoint.directive.js',
    '/app/views/forms/view/view-abs-checkpoint-communique.directive.js',
@@ -17,90 +17,21 @@
    '/app/js/common.js'
  ], function(app, _, linqjs) {
 
-   app.controller("ProfileController", ["$scope", "$http", "$routeParams", "linqjs", "$filter", "realm",
-                "commonjs", "$q", '$element', '$timeout','commonjs','IStorage','$rootScope','$mdSidenav', '$mdUtil', '$mdMedia',
+
+    app.directive('countryProfiles', function() {
+        return {
+            restrict: 'EAC',
+            templateUrl: '/app/views/countries/country-profiles.html',
+            replace: true,
+            scope: {
+                //countries: '=countries',
+            },
+            controller: ["$scope", "$http", "$routeParams", "linqjs", "$filter", "realm",
+                "commonjs", "$q", '$element', '$timeout','commonjs','IStorage','$rootScope',
      function($scope, $http, $routeParams, linqjs, $filter, realm, commonjs, $q,
-                $element, $timeout, countriescommonjs, IStorage,$rootScope, $mdSidenav, $mdUtil, $mdMedia) {
+                $element, $timeout, countriescommonjs, IStorage,$rootScope) {
 
-
-    $scope.toggleLeft = buildToggler('left');
-    $scope.toggleRight = buildToggler('right');
-    //**********************************************************
-    $scope.close = function () {
-          $mdSidenav('left').close()
-            .then(function () {
-              $log.debug("close LEFT is done");
-            });
-        };
-
-    //**********************************************************
-    function buildToggler(navID) {
-      var debounceFn =  $mdUtil.debounce(function(){
-            $mdSidenav(navID)
-              .toggle()
-              .then(function () {
-                $log.debug("toggle " + navID + " is done");
-              });
-          },300);
-      return debounceFn;
-    }
-
-
-
-
-    //**********************************************************
-    function loadCountries() {
-
-        commonjs.getCountries()
-            .then(function(countries) {
-
-                $scope.ratifications = 0;
-                $scope.signatures = 0;
-                $scope.parties = 0;
-                $scope.countriesforAutocomplete = [];
-                $scope.inbetweenParties = 0;
-                $scope.nonCBDParties = 0
-                var countryColors = {};
-                $scope.countries = countries;
-
-                _.each($scope.countries, function(country) {
-
-                    if (country.isNPParty) {
-                        if (country.code == 'EU')
-                            country.code = 'EUR';
-                        countryColors[country.code.toUpperCase()] = "#428bca";
-                    } else if (country.isNPSignatory) {
-                        countryColors[country.code.toUpperCase()] = "#5bc0de";
-                    } else if (country.isCBDParty) {
-                        countryColors[country.code.toUpperCase()] = "#808080";
-                    } else {
-                        console.log('nonparty country', country);
-                    }
-
-                    $scope.countriesforAutocomplete.push({
-                        name: country.name.en
-                    });
-
-                });
-
-                countryColors[greenland.toUpperCase()] = "#808080";
-                countryColors[taiwan] = "#808080";
-
-                loadMap(countryColors);
-                addEUMapEvents();
-
-            });
-        //$scope.countries = $filter("orderBy")(response[1].data, "name.en");
-    }
-    loadCountries();
-
-
-
-
-
-
-    //**********************************************************
-    function resetList(){
+       function resetList(){
             $scope.showCPC = false;
             $scope.showIRCC = false;
             $scope.showMSR = false;
@@ -123,7 +54,21 @@
 
        resetList();
 
-        //facet counts
+    //    $scope.show = function(type) {
+    //      if (type=='map' || type=='list') {
+    //        $element.find('#countryDetails').slideUp('slow');
+    //        $element.find('#worldMap').slideDown('slow');
+       //
+    //      } else {
+    //        $element.find('#worldMap').slideUp('slow');
+    //        $element.find('#countryDetails').slideDown('slow');
+    //        resetList()
+    //      }
+       //
+    //      $scope.$broadcast('showDetails', {data:type});
+    //    }
+
+    	  //facet counts
          $scope.cpcReceivedCount = 0;
          $scope.nfpCount= 0;
          $scope.nationalMeasure= 0;
@@ -133,8 +78,9 @@
          $scope.database= 0;
 
 
-         //**********************************************************
-       $scope.loadCountryDetails = function(countryCode) {
+
+
+         $scope.loadCountryDetails = function(countryCode) {
 
          $scope.code = countryCode || $routeParams.code;
 
@@ -143,7 +89,7 @@
          $scope.searchText = '';
          $scope.autocompleteData = [];
          $scope.absch_nfp = null;
-
+         //*******************************************************
          if ($scope.code) {
          //fix for EU
          if($scope.code.toLowerCase() == 'eu')
@@ -153,9 +99,6 @@
              cache: true
            }).then(function(response) {
              $scope.country = response.data;
-
-
-
              $rootScope.breadcrumbsParam = $scope.country.name.en;
              $scope.searchText = '';
              $scope.autocompleteData = [];
@@ -250,7 +193,8 @@
                   if(document.geneticRessourceUsers_s){
                     document.geneticRessourceUsers = $scope.parseJSON(document.geneticRessourceUsers_s);
                   }
-                  $scope.cpcReceivedCount++;
+
+                   $scope.cpcReceivedCount++;
               });
               $scope.getFacets($scope.absch_nfp);
               $('[data-toggle="tooltip"]').tooltip()
@@ -260,7 +204,9 @@
        $scope.loadCountryDetails();
 
 
-       //**********************************************************
+
+
+
        $scope.$watch('absch_nfp', function(value) {
 
          if (!value) return;
@@ -270,8 +216,6 @@
 
        });
 
-
-       //**********************************************************
        $scope.getFacets = function(data) {
 
          var linqObj = linqjs.from(data);
@@ -328,7 +272,7 @@
     //         $scope.show('map');
     //    })
 
-    //**********************************************************
+
        $scope.countriescommonjs = countriescommonjs;
        $scope.$on('loadCountryProfile', function(evt, evtData){
            $scope.loadCountryDetails(evtData.data.countryCode);
@@ -391,7 +335,7 @@
             }
        };
 
-       //**********************************************************
+
        $scope.getTitle = function(schema,type, schemaFull){
            if(schema == 'focalPoint'){
 
@@ -409,7 +353,6 @@
 
        }
 
-       //**********************************************************
        $scope.parseJSON = function(value){
            if(value)
             return JSON.parse(value);
