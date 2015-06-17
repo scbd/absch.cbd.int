@@ -403,11 +403,11 @@ define(['app',
 
                     $scope.updateScrollPage = function() {
                         console.log($scope.currentPage);
-                        $scope.loading = true;
-                        if (!$scope.currentPage)
-                            $scope.currentPage = 1;
-                        else
-                            $scope.currentPage++;
+                        // $scope.loading = true;
+                        // if (!$scope.currentPage)
+                        //     $scope.currentPage = 1;
+                        // else
+                        //     $scope.currentPage++;
                     }
 
                     function canUserEdit(document) {
