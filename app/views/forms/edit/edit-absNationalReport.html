@@ -42,7 +42,6 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
             </div>
         </div>
 
-
     	<form name="editForm" class="editForm" style="margin-top:10px">
     		<div ng-show="tab=='edit'" km-tab="edit">
 
@@ -56,7 +55,6 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
             						<div class="km-control-group" name="government" required caption="1. Country">
                                         <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
             						</div>
-                                    <button ng-click="logDocument()">Test</button>
             					</div>
             				</div>
 
@@ -87,6 +85,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question3.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question3"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -113,6 +112,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question4.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question4"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -139,6 +139,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question5.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question5"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -163,6 +164,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question6.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question6"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -193,6 +195,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question7.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question7"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -232,6 +235,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question9.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question9"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -252,6 +256,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question10.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question10"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -284,6 +289,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question11.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question11"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -304,6 +310,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question12.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question12"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -324,6 +331,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question13.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question13"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -344,6 +352,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question14.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question14"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -364,6 +373,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question15.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question15"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -388,6 +398,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question16.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question16"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -408,6 +419,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question17.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question17"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -455,6 +467,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question18.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question18"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -475,6 +488,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question19.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question19"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -498,6 +512,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question20.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question20"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -518,6 +533,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question21.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question21"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -538,6 +554,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question22.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question22"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -558,6 +575,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question23.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question23"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -607,6 +625,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question24.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question24"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -640,6 +659,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question25.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question25"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -675,6 +695,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question26.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question26"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -727,6 +748,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question28.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question28"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -752,6 +774,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question29.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question29"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -772,6 +795,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question30.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question30"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -798,6 +822,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question31.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question31"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -818,6 +843,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question32.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question32"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -846,6 +872,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question33.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question33"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -866,6 +893,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question34.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question34"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -912,6 +940,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question35.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question35"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -933,6 +962,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                     <div document-selection ng-model="document.question36.documentReferenceIDs"
                                                             ng-disabled="!document.government"
                                                             question="question36"
+                                                            government="document.government"
                                                             country-documents="absDocuments">
                                     </div>
                                 </div>
@@ -955,6 +985,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question37.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question37"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -1001,6 +1032,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question38.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question38"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -1021,6 +1053,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question39.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question39"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -1041,6 +1074,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question40.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question40"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -1061,6 +1095,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question41.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question41"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -1099,6 +1134,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question42.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question42"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -1120,6 +1156,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                     <div document-selection ng-model="document.question43.documentReferenceIDs"
                                                             ng-disabled="!document.government"
                                                             question="question43"
+                                                            government="document.government"
                                                             country-documents="absDocuments">
                                     </div>
                                 </div>
@@ -1139,6 +1176,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question44.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question44"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -1164,6 +1202,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question45.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question45"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -1180,6 +1219,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question46.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question46"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -1200,6 +1240,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question47.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question47"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -1230,6 +1271,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question48.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question48"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -1252,6 +1294,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question49.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question49"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -1272,6 +1315,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question50.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question50"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -1297,6 +1341,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question51.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question51"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -1317,6 +1362,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question52.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question52"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -1337,6 +1383,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question53.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question53"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -1372,6 +1419,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question54.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question54"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -1403,6 +1451,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question55.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question55"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -1423,6 +1472,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question56.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question56"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -1443,6 +1493,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question57.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question57"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -1463,6 +1514,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question58.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question58"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -1491,6 +1543,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question59.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question59"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -1511,6 +1564,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question60.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question60"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -1539,6 +1593,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question61.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question61"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -1590,6 +1645,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question62.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question62"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -1621,6 +1677,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question63.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question63"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
@@ -1638,6 +1695,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
                                         <div document-selection ng-model="document.question64.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question64"
+                                                                government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>

@@ -19,7 +19,6 @@
 	}
 
 	.country-name{
-		color: #111;
 		font-weight: bold;
 		font-size:48px;
 		font-family: 'alternategotno3dotregular';
@@ -70,21 +69,24 @@
 	.dl-horizontal dd {
 		text-align: left;
 	}
+	.list-group-item{
+
+		font-weight: bold;
+		background-color: #EEE;
+		text-transform: uppercase;
+
+	}
 	.list-group-item-default {
-		color: #fff;
-		background-color: #999;
+		color: #666;
 	}
 	.list-group-item-primary {
-		color: #fff;
-		background-color: #428bca;
+		color:#428bca;
 	}
 	.list-group-item-info {
-		color: #fff !important;
-		background-color: #5bc0de;
+		color: #5bc0de;
 	}
 	.list-group-item-success {
-		color: #fff;
-		background-color: #5cb85c;
+		color:  #5cb85c;
 	}
 	.list-flag {
 		background-position: 0%;

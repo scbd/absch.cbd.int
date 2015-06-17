@@ -191,14 +191,14 @@
             </tr>
             <tr ng-show="displayDetails || (displayRequest && !record.isUpdating)" style="border:0!important;background-color:inherit!important;" ng-class="{'bg-grey': displayDetails||displayRequest}">
                 <!-- <td style="border:0;background-color:inherit!important;">&nbsp;</td> -->
-                <td colspan="5" style="border:0!important;">
+                <td colspan="6" style="border:0!important;">
 
                     <div class="pull-right" style="z-index:100;padding-top:18px;padding-right:20px;cursor:pointer;">
                         <i class="glyphicon glyphicon-remove-circle" style="font-size:20px;" ng-click="displayDetails=false;displayRequest=false;"></i>
                     </div>
 
                     <div ng-show="displayDetails">
-                        <div record-loader document="record.data" hide="header;title;libraries" class="record-body"></div>
+                        <div record-loader document="record.data"  class="record-body"></div>
                     </div>
 
                     <div ng-show="displayRequest">

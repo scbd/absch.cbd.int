@@ -2,13 +2,16 @@
     <!-- existing documents display -->
     <div class="row">
         <div class="col-lg-12" >
-            <span><i>There <span ng-show="model.length==1">is</span><span ng-show="model.length>1">are</span> <b>{{model.length || 0}}</b> related <span ng-show="model.length==1">document</span><span ng-show="model.length>1">documents</span> found.</i></span>
+            <span ng-show="model.length==0 || !model"><i>There are no linked documents found.</i></span>
+            <span ng-show="model.length==1"><i>There is <b>{{model.length}}</b> linked document.</i></span>
+            <span ng-show="model.length>1"><i>There are <b>{{model.length}}</b> linked documents.</i></span>
+
             <button class="btn btn-default btn-sm" ng-click="openAddDialog();" ng-disabled="disabled" ><i class="fa fa-plus"></i> {{caption||'Add document(s)'}}</button>
-            <button  type="button" ng-click="showRecords(); showrecords = true" ng-show="!showrecords && model" name="showRecords" class="btn btn-primary btn-sm">Display documents</button>
-            <button  type="button" name="hideRecords" ng-click="showrecords=false" ng-show="showrecords" class="btn btn-primary btn-sm">Hide documents</button>
+            <button  type="button" ng-click="showRecords(); areVisible = true" ng-show="!areVisible && model.length>0" name="showRecords" class="btn btn-primary btn-sm">Display documents</button>
+            <button  type="button" name="hideRecords" ng-click="areVisible=false" ng-show="areVisible && model.length>0" class="btn btn-primary btn-sm">Hide documents</button>
         </div>
     </div>
-    <div class="row" ng-show="showrecords">
+    <div class="row" ng-show="areVisible">
         <div class="col-lg-12" >
             <br />
             <table class="table table-hover"  style="padding-bottom:3px;background-color:#fff">
@@ -16,7 +19,7 @@
 					<td>
 						<span class="latest-date"> {{doc.createdDate_dt | formatDate}} </span> |
                         <span class="latest-country"> {{doc.government_s | term:locale}} </span> |
-                        <span>{{doc.identifier_s | uniqueID}}</span>
+                        <span>{{getUniqueId(doc.identifier_s)}}</span>
                         <div class="latest-title">{{doc.title_t}} </div>
 					</td>
                     <td>
@@ -50,8 +53,8 @@
     							</td>
     							<td>
     								<span class="latest-date"> {{doc.createdDate_dt | formatDate}} </span> |
-                                    <span class="latest-country"> {{doc.government_s | term:locale}} </span> |
-                                    <span>{{doc.identifier_s | uniqueID}}</span>
+                                    <span class="latest-country"> {{getGovernmentName(doc.government_s)}} </span> |
+                                    <span>{{getUniqueId(doc.identifier_s)}}</span>
                                     <div class="latest-title">{{doc.title_t}} </div>
     							</td>
                                 <td>

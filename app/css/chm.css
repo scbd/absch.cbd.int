@@ -69,7 +69,7 @@
 
 
 .container-cbd{
-    background: rgba(25, 25, 25, .05);
+    /*background: rgba(25, 25, 25, .05);*/
     min-height:30px;
     color:white;
     padding-top:5px;
@@ -86,7 +86,7 @@
 .container-portal a{text-decoration:none;}
 
 .container-links{
-    background: rgba(25, 25, 25, .05);
+    /*background: rgba(25, 25, 25, .05);*/
     min-height:30px;
     color:white;
     padding-top:5px;
@@ -95,7 +95,7 @@
     color:white;
 }
 .container-breadcrumbs{
-    background: rgba(25, 25, 25, .05);
+    /*background: rgba(25, 25, 25, .05);*/
     min-height:30px;
     color:white;
     padding-top:7px;
@@ -103,6 +103,7 @@
 }
 .container-breadcrumbs a{
     color:#999;
+    font-weight: bold;
 }
 .container-full{padding-bottom:20px;}
 
@@ -124,18 +125,18 @@
 }
 
 .footer-page-container{
-    background: rgba(25, 25, 25, .05);
+    /*background: rgba(25, 25, 25, .05);*/
     min-height:30px;
     padding-top:5px;
 }
 .footer-portal-container{
-    background: rgba(25, 25, 25, .05);
+    /*background: rgba(25, 25, 25, .05);*/
     min-height:30px;
     color:white;
     padding-top:5px;
 }
 .footer-cbd-container{
-    background: rgba(25, 25, 25, .05);
+    /*background: rgba(25, 25, 25, .05);*/
     /*min-height:200px;*/
     color:white;
     padding:20px;

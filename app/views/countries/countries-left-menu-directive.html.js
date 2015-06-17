@@ -12,8 +12,11 @@ define(['app','underscore', '/app/js/common.js'], function(app,_) {
             },
             controller: ['$scope', '$http', '$q', '$filter', 'commonjs','$location',
                 function($scope, $http, $q, $filter, commonjs, $location) {
-
-                    $scope.lastAction = 'party';
+                    
+                    $scope.type = 'all';
+                    $scope.lastAction = 'party';   
+                    $scope.commonFormatFacets = $scope.$parent.commonFormatFacets;
+                    $scope.selected_facet = 'all';
 
                     commonjs.getCountries()
                     .then(function(countries){

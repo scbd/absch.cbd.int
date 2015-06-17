@@ -44,14 +44,14 @@
     <iframe id="authenticationFrame" src="https://accounts.cbd.int/app/authorize.html" style="display:none"></iframe>
 
     <nav class="navbar navbar-cbd navbar-default bg-cbdgreen navbar-static-top" id="anchorTop">
-      <div class="container container-cbd">
+      <div class="container-fluid container-cbd">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
           <a href="http://www.cbd.int"><img src="/app/img/cbd-logo-spine-white.png" style="height:24px;position:relative;top:-2px;padding:0;margin:0 5px;"></a>
           <a class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1"><i class="fa fa-bars"></i></a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="navbar-collapse-1" >
+        <div class="collapse navbar-collapse " id="navbar-collapse-1" >
           <ul class="nav navbar-nav">
             <li><a href="http://www.cbd.int/convention/">The Convention</a></li>
             <li><a href="http://bch.cbd.int/protocol">Cartagena Protocol</a></li>
@@ -156,7 +156,7 @@
     <!-- PORTAL BRANDING -->
     <nav class="navbar navbar-portal navbar-default navbar-static-top bg-white">
          <!-- ng-class="{'training-bg': !production_env}"> -->
-        <div class="container container-portal">
+        <div class="container-fluid container-portal">
 
             <div class="row">
                 <div class="col-xs-9">
@@ -165,12 +165,12 @@
                             <span>ABSCH</span>
                             <span ng-show="development_env" class="color-orange"> DEVELOPMENT</span>
                             <span ng-show="training_env" class="color-orange"> TRAINING</span>
-                            <span class="color-grey" style="text-transform:uppercase;font-size:20px;">
+                            <span class="color-grey hidden-xs hidden-sm hidden-md" style="text-transform:uppercase;font-size:20px;">
                                 THE ACCESS AND BENEFIT-SHARING CLEARING-HOUSE </span>
                         </h1>
                     </a>
                 </div>
-                <div class="col-xs-3" style="vertical-align:middle;">
+                <div class="col-xs-3 hidden-xs hidden-sm" style="vertical-align:middle;">
 
                     <img src="/app/img/cbd-logo-en-green.png" class="pull-right" style="padding: 0; margin:10px 0 0 0;height:70px;" /><br>
 
@@ -183,9 +183,9 @@
 
     <!-- PORTAL LINKS-->
     <nav class="navbar navbar-links navbar-default navbar-static-top bg-orange">
-        <div class="container container-links color-grey">
+        <div class="container-fluid container-links color-grey">
                 <div style="display:inline">
-                    <a href="/"><i class="fa fa-home" ></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="/"><i class="fa fa-home" ></i> Home</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <a href="/find" ng-class="{'link-active' : getClass('/find')}"><i class="fa fa-search"></i> Search</a>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <a href="/register" ng-class="{'link-active' : getClass('/register')}"><i class="fa fa-pencil-square-o"></i> Submit</a>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <a href="/countries" ng-class="{'link-active' : getClass('/countries')}"><i class="fa fa-globe"></i> Country Information</a>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -202,7 +202,7 @@
 
     <!-- PORTAL BREAD CRUMBS-->
     <nav class="navbar navbar-breadcrumbs navbar-default navbar-static-top"  >
-        <div class="container container-breadcrumbs">
+        <div class="container-fluid container-breadcrumbs">
             <div class="color-litegrey">
                     <a href="http://www.cbd.int" class="margin-right-xs">CBD</a>
                     <span ng-repeat="breadcrumb in breadcrumbs.get() track by breadcrumb.path" ng-class="{ active: $last }">
@@ -214,7 +214,7 @@
                             <span ng-if="$last" ng-bind="breadcrumb.label"></span>
                         </span>
 
-                        <span ng-if="breadcrumb.param && breadcrumb.label == 'Country Information'">
+                        <span ng-if="breadcrumb.param && breadcrumb.label == 'Country Profile'">
                             <span  ng-show="breadcrumbsParam" ng-bind="breadcrumbsParam" ></span>
                         </span>
 
@@ -227,11 +227,11 @@
         </div>
     </nav>
 
- <nav class="navbar navbar-links navbar-default navbar-static-top bg-orange" ng-show="development_env || training_env">
+ <!-- <nav class="navbar navbar-links navbar-default navbar-static-top bg-orange" ng-show="development_env || training_env">
         <div class="container container-links" style="padding-left:15%">
                THIS IS ABS-CH {{env_name}} WEBSITE.
         </div>
-    </nav>
+    </nav> -->
 
 
     <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="loginDialog">
@@ -272,13 +272,13 @@
         <div class="footer">
 
             <div class="footer-page" >
-                <div class="container footer-page-container  text-right ">
+                <div class="container-fluid footer-page-container  text-right ">
                     <a href="#top" ng-click="gotoAnchor('Top')" class="color-darkgrey"><i class="fa fa-arrow-circle-up"></i> back to top</a>
                 </div>
             </div>
 
             <div class="footer-portal" >
-                <div class="container footer-portal-container color-white">
+                <div class="container-fluid footer-portal-container color-white">
                     <div class="row" style="padding-bottom: 20px;">
                         <div class="col-sm-3">
                             <h5 class="footer-title">ABS Clearing-House</h5>
@@ -365,7 +365,7 @@
                 </div>
             </div>
             <div class="footer-cbd">
-                <div class="container footer-cbd-container">
+                <div class="container-fluid footer-cbd-container">
                     <div class="row copyright">
                         <div class="col-xs-12">
                             <!-- <img src="/app/img/unep-logo1.png" class="pull-right" style="padding:0 20px 0 0; margin:17px 0 0 0; height:60px;" /> -->
