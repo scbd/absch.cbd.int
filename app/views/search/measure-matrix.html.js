@@ -11,7 +11,12 @@ define(['app','underscore',
         $scope.itemsPerPage = 250;
         var uniqueIdQuery;
         if($routeParams.uniqueId){
-            uniqueIdQuery = ' AND uniqueIdentifier_s:' + $routeParams.uniqueId.toLowerCase();
+            //hack in case if uniqueId contains country code (3 in case EUR)
+            if($routeParams.uniqueId.length<=3){
+                uniqueIdQuery = ' AND government_s:' + $routeParams.uniqueId.toLowerCase();
+            }
+            else
+                uniqueIdQuery = ' AND uniqueIdentifier_s:' + $routeParams.uniqueId.toLowerCase();
         }
 
     	var queryParameters = {
