@@ -72,16 +72,12 @@
 
                 <div class="row" id="divMap" style="padding-top:20px;">
                     <div class="col-lg-12 col-md-12 col-xs-12">
+
                         <div id="vmap" style="width: 100%; min-height: 500px;background-color:#EEE!important;"></div>
-                        <div>
-                            <strong>Disclaimer:</strong>
-                            The designations employed and the presentation of material on this map do not imply the expression of any opinion whatsoever on the part of the Secretariat of the Convention on Biological Diversity or the United Nations concerning
-                            the legal status of any country, territory, city or area or of its authorities, or concerning the delimitation of its frontiers or boundaries.
-                        </div>
                     </div>
                 </div>
 
-                <div class="row" id="divList" style="padding-top:30px;">
+                <div class="row" id="divList" style="padding-top:0px;">
                     <div class="col-lg-12 col-md-12 col-xs-12">
                         <table class="table table-countries table-striped">
                             <tr>
@@ -97,7 +93,7 @@
                                 <th colspan="2">
 
                                     <md-button class="md-raised md-mini bg-medgrey" aria-label="all" ng-click="listAll();selected_facet='all';updateMap('all');sortTable('name.en', 'ASC')">
-                                            <span class="color-white">List all countries ({{countries.length}})</span>
+                                            <span class="color-white">All countries ({{countries.length}})</span>
                                     </md-button>
 
                                     <md-button class="md-fab md-mini bg-medgrey" aria-label="a to z" ng-click="sortTable('name.en', 'ASC')">
@@ -198,8 +194,18 @@
                             </tr>
                         </table>
                         <div class="alert alert-info col-xs-12">
+
+                            <div>
+                                <strong>Disclaimer:</strong>
+                                The designations employed and the presentation of material on this map do not imply the expression of any opinion whatsoever on the part of the Secretariat of the Convention on Biological Diversity or the United Nations concerning
+                                the legal status of any country, territory, city or area or of its authorities, or concerning the delimitation of its frontiers or boundaries.
+                            </div>
+                            <br>
+                            <div>
                             For declarations and other notes, you may visit the <a ng-href="https://treaties.un.org/pages/ViewDetails.aspx?src=TREATY&mtdsg_no=XXVII-8-b&chapter=27&lang=en">
                             United Nation Treaty Collection web site</a>.
+                            <div>
+
                         </div>
                     </div>
                 </div>
