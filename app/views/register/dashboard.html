@@ -31,22 +31,18 @@
     <div class="col-xs-6 col-xs-height col-top" >
                 <h1>Welcome. You are signed in!</h1>
                 <dl class="dl-horizontal" style="padding-top:20px;">
-                <dt style="text-align:left">Name</dt><dd>{{user.name}}</dd>
-                <!-- <dt style="text-align:left">Role(s)</dt>
-                <dd><strong>
-                    <div ng-show="user.roles.indexOf(getRoleName('User')) != -1">Registered User</div>
-                    <div ng-show="user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) != -1">Publishing Authority(PA)</div>
-                    <div ng-show="user.roles.indexOf(getRoleName('abschiac')) != -1">Informal Advisory Committee(IAC)</div>
-                    <div ng-show="user.roles.indexOf(getRoleName('AbsNationalAuthorizedUser')) != -1">National Authorized User(NAU)</div>
-                    <div ng-show="user.roles.indexOf(getRoleName('AbsNationalFocalPoint')) != -1">Focal Point(FP)</div>
-                    <div ng-show="user.roles.indexOf(getRoleName('AbsAdministrator')) != -1">ABSCH Administrator(ABS ADMIN)</div>
-                    <div ng-show="user.roles.indexOf(getRoleName('Administrator')) != -1">Administrator(ADMIN)</div></strong>
-                </dd> -->
-                <dt style="text-align:left;white-space:nowrap;">Primary email</dt><dd><strong>{{user.email}}</strong></dd>
-                <dt style="text-align:left;white-space:nowrap;" ng-show="user.government">Country</dt><dd style="text-transform:uppercase;">
-                    <a href="/countries/{{user.government | uppercase}}"><strong>{{user.government | term}}</strong></a></dd>
+                    <dt style="text-align:left">Name</dt><dd>{{user.name}}</dd>
+                    <dt style="text-align:left;white-space:nowrap;">Primary email</dt><dd><strong>{{user.email}}</strong></dd>
+                    <dt style="text-align:left;white-space:nowrap;" ng-show="user.government">Country</dt>
+                        <dd style="text-transform:uppercase;">
+                        <a href="/countries/{{user.government | uppercase}}"><strong>{{user.government | term}}</strong></a></dd>
+                    <dt ng-if="user.roles.indexOf(getRoleName('AbsAdministrator'))>=0" style="text-align:left;white-space:nowrap;">
+                        Current Realm
+                    </dt>
+                    <dd ng-if="user.roles.indexOf(getRoleName('AbsAdministrator'))>=0">
+                        <span switch-realm></span>
+                    </dd>
                 </dl>
-
                 <div class="no-shadow thin-border" style="padding:10px;">
                     <h4 style="padding-top;0;margin-top:0;">Manage your account with <a href="http://accounts.cbd.int" class="color-green bold">accounts.cbd.int</a></h4>
                     <ul>

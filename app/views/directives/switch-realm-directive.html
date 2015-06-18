@@ -1,0 +1,54 @@
+<div> {{currentRealmMessage()}}
+    <button class="btn btn-default" data-toggle="modal" data-target="#editSwitchRealm">
+	  Switch Realm
+	</button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="editSwitchRealm"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        SWITCH REALM
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="well2">
+                                    <div class="alert alert-danger col-xs-12">
+                                        The switch realm functionality should only be used to view records from other realms and not for adding or editing.
+                                    </div>
+
+                                    <div>
+                                        <div class="alert alert-info col-xs-12">
+                                            You are currently on {{currentRealmMessage()}}
+                                            <br/>
+                                            <select ng-model="selectedRealm">
+                                                <option  ng-repeat="realm in realmList" value="{{realm.identifier}}">
+                                                    {{realm.message}}
+                                                </option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" ng-click="switchRealm()" data-dismiss="modal" aria-label="Close">
+                                <i class="glyphicon glyphicon-thumbs-up"></i> Switch
+                            </button>
+                                <a type="button" class="btn btn-default"data-dismiss="modal" aria-label="Close">Close</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
