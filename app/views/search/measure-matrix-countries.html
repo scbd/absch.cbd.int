@@ -79,6 +79,21 @@
 				font-weight: bold;
 				background-color: #fff!important;
 			}
+			.paddingleft12 {
+				padding-left: 12%!important;
+			}
+
+			.elementMeasure {
+				padding-bottom: : 0px!important;
+			}
+
+			.whiteTopBorder {
+				border-bottom: 1px solid #fff;
+			}
+
+			.table > tbody > tr > td {
+				border-top: none!important;
+			}
 		</style>
 		<div class="row">
 			<div class="col-sm-12 well">
@@ -117,20 +132,19 @@
 									<table class="table">
 										<tr>
 											<th class="matrixheaderColumn rightBorder ">Element of the measure</th>
-											<th style="padding:0px">
-												<table class="table">
-													<tr>
-														<th class="cover45 rightBorder" >Title of the measure</th>
-														<th>Covered by the following articles and sections</th>
+											<th style="width:48.99%">
+														Covered by the following articles and sections
 												</table>
 											</th>
 										</tr>
 									</table>
 								</th>
 							</tr>
-							<tr ng-repeat="scope in scopeElements">
+							<tr>
 								<td class="tableCell">
-									<table class="table">
+										<div measure-matrix-elements name="absMeasures" type="multiple" ng-model="noModel" locales="measures[0].documentheader.languages" document="measures"></div>
+									<!-- </div> -->
+									<!-- <table class="table">
 										<tr ng-if="!scope.parent || scope.measures.length>0 || scope.relatedElements.length>0">
 											<td class="matrixheaderColumn rightBorder "
 											ng-class="{'paddingleft3':scope.parent, 'highlight':!scope.parent}">
@@ -157,7 +171,7 @@
 												</table>
 											</td>
 										</tr>
-									</table>
+									</table> -->
 								</td>
 							</tr>
 					</div>
