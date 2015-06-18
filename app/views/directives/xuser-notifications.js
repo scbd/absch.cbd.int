@@ -65,7 +65,7 @@ define(['app','underscore','ionsound'], function(app,_) {
                                     $scope.notifications = $filter("orderBy")(localNotifications, 'createdOn', true);
                                 })
                                 .catch(function(error){
-                                    if(error.data.statusCode==401){
+                                    if(error.data && error.data.statusCode==401){
                                        // console.log('calling get fetch from notifications' );
                                         //authentication.getUser(true);
                                          continueNotification = false;
