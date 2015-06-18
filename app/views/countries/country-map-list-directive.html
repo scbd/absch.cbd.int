@@ -81,8 +81,12 @@
                     <div class="col-lg-12 col-md-12 col-xs-12">
                         <table class="table table-countries table-striped">
                             <tr>
-                                <th colspan="2">
-                                    <span class="color-litegrey" style="padding-left:10px;">Country</span>
+                                <th></th>
+                                <th>
+                                    <span class="color-litegrey" style="padding-left:10px;">Country
+
+                                        <span class="color-litegrey hidden-xs hidden-sm" style="font-size:12px;">Click country name to navigate to a profile</span>
+                                    </span>
                                 </th>
                                 <th>
                                     <span class="color-litegrey">Status</span>
@@ -90,28 +94,24 @@
                                 <th colspan="7"><span class="color-litegrey">National Records</span></th>
                             </tr>
                             <tr>
-                                <th colspan="2">
+                                <th>
+                                    <span style="font-size:14px;font-weight:bold;text-transform:uppercase;" class="color-litegrey">FILTER</span>
+                                </th>
+                                <th>
 
                                     <md-button class="md-raised md-mini bg-medgrey" aria-label="all" ng-click="listAll();selected_facet='all';updateMap('all');sortTable('name.en', 'ASC')">
                                             <span class="color-white">All countries ({{countries.length}})</span>
                                     </md-button>
 
-                                    <md-button class="md-fab md-mini bg-medgrey" aria-label="a to z" ng-click="sortTable('name.en', 'ASC')">
-                                        <i class=" fa fa-sort-alpha-asc" ></i>
-                                    </md-button>
-
-                                    <md-button class="md-fab md-mini bg-medgrey" aria-label="z to a" ng-click="sortTable('name.en', 'DESC')">
-                                        <i class=" fa fa-sort-alpha-desc" ></i>
-                                    </md-button>
 
 
                                 </th>
                                 <th>
-                                    <md-button class="md-fab md-mini bg-blue" aria-label="Eat cake" ng-click="sortTable('treaties.XXVII8b.deposit', 'DESC')">
+                                    <md-button class="md-fab md-mini bg-blue" aria-label="Eat cake" ng-click="listAll();selected_facet='all';updateMap('all');sortTable('treaties.XXVII8b.deposit', 'DESC')">
                                             {{totalParties}}
                                     </md-button>
 
-                                    <md-button class="md-fab md-mini bg-medgrey" aria-label="Eat cake" ng-click="sortTable('treaties.XXVII8b.deposit', 'ASC')">
+                                    <md-button class="md-fab md-mini bg-medgrey" aria-label="Eat cake" ng-click="listAll();selected_facet='all';updateMap('all');sortTable('treaties.XXVII8b.deposit', 'ASC')">
                                             {{totalNonParties}}
                                     </md-button>
                                 </th>
@@ -124,14 +124,18 @@
                                 <th> &nbsp; <md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake" ng-click="selected_facet='absCheckpointCommunique';updateMap('absCheckpointCommunique');sortTable('CPC');"   data-toggle="tooltip" data-placement="top" title= "Checkpoint Communiqués ">{{commonFormatFacets[2][1].facetCount}}</md-button></th>
                             </tr>
                             <tr>
-                               <th  style="white-space:nowrap;font-size:14px;">#</th>
-                                <th style="white-space:nowrap;font-size:14px;">
-                                    <span style="cursor:pointer;" ng-click="sortTable('name.en')">Click country name to navigate to a profile
-                                        <!-- <i ng-show="sortTerm=='name.en'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i> -->
-                                        </span>
+                               <th  style="white-space:nowrap;font-size:14px;"><span style="font-size:14px;font-weight:bold;text-transform:uppercase;" class="color-litegrey">SORT</span></th>
+                                <th style="white-space:nowrap;font-size:16px;">
+                                    <a href="" class="label label-default  bg-darkgrey1" ng-click="sortTable('name.en', 'ASC')">
+                                        <i class=" fa fa-sort-alpha-asc" ></i>
+                                    </a>
+                                    &nbsp; &nbsp;
+                                    <a href="" class="label label-default bg-darkgrey1" ng-click="sortTable('name.en', 'DESC')">
+                                        <i class=" fa fa-sort-alpha-desc" ></i>
+                                    </a>
                                 </th>
                                   <th style="white-space:nowrap;font-size:14px;">
-                                    <span style="cursor:pointer;" ng-click="sortTable('treaties.XXVII8b.deposit')">Parties / Non-Parties
+                                    <span style="cursor:pointer;" ng-click="sortTable('treaties.XXVII8b.deposit')"><span ng-click="sortTable('treaties.XXVII8b.deposit', 'ASC')">Parties</span> / <span ng-click="sortTable('treaties.XXVII8b.deposit', 'DESC')">Non-Parties</span>
                                         <!-- <i ng-show="sortTerm=='treaties.XXVII8b.deposit'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i> -->
                                         </span>
                                 </th>
@@ -175,7 +179,7 @@
                                 </th>
                             </tr>
                             <tr ng-repeat="country in (countries | filter:countryFilter | filter: searchFilter | orderBy:sortTermFilter:orderList) " ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
-                               <td>{{$index + 1}}</td>
+                               <td class="text-right">{{$index + 1}}</td>
                                 <td><a ng-href="#" ng-click="navigateCountry('',country.code,'')" class="country-list-name"
                                     ng-class="{'list-group-item-primary':country.isNPParty,'list-group-item-default':!country.isNPParty }"> {{country.name.en}}</a> &nbsp;
                                 </td>
