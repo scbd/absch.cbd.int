@@ -1,4 +1,4 @@
-define(['app',
+define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
     './document-metadata-directive.html.js',
     '/app/js/common.js',
     //'/app/views/directives/infinite-scroll-directive.js'
@@ -19,9 +19,11 @@ define(['app',
                 orderBy: '=',
                 previewType: '='
             },
-            controller: ['$scope', '$sce', "underscore", "commonjs", "authentication", '$q', "$filter", "$compile", "$element", "$timeout",
-                function($scope, $sce, _, commonjs, authentication, $q, $filter, $compile, $element, $timeout) {
+            controller: ['$scope', '$sce', "underscore", "commonjs", "authentication", '$q', "$filter", "$compile", "$element", "$timeout", 'schemaTypes',
+                function($scope, $sce, _, commonjs, authentication, $q, $filter, $compile, $element, $timeout, schemaTypes) {
 
+                    $scope.schemaTypes = schemaTypes;
+                    $scope.schemaTypes.push('focalPoint');
                     $scope.getDocumentId = function(document) {
 
                         if ((document.recordtype == "referenceRecord" && document.schema != "resource") || document.schema.toLowerCase() == "focalpoint") {
@@ -53,11 +55,14 @@ define(['app',
                         //occours when a user actions collapses the detail section.
                         if (!displayDetails)
                             return;
-
+                        if (item.data)
+                            return;
+                        if (!item.schema && item.schema_s)
+                            item.schema = item.schema_s;
                         item.data = {
-                            'schema': item.schema,
+                            'schema': item.schema || item.schema_s,
                             'url_ss': item.url_ss,
-                            'data': item
+                            //'data': item
                         };
                         //console.log(item.schema);
                         if (item.schema && (item.schema.toUpperCase() == "FOCALPOINT" ||
@@ -128,6 +133,7 @@ define(['app',
                         }
                     });
 
+                    var countryList;
                     $scope.$watch('documents', function(newValue, oldValue) {
 
                         if (newValue && newValue != oldValue) {
@@ -139,9 +145,52 @@ define(['app',
                                 $scope.documents.forEach(function(doc) {
                                     $scope.transformedDocuments.push(transformDocument(doc));
                                 });
+                            } else if ($scope.previewType == 'group') {
+
+                                $scope.transformedGroupDocuments = [];
+                                getCountries()
+                                    .then(function(countries) {
+
+                                        $scope.documents.forEach(function(doc) {
+                                            var country = _.find(countries, {
+                                                code: doc.groupValue == 'eur' ? 'EU' : doc.groupValue.toUpperCase()
+                                            })
+                                            // var country = {};
+                                            // country.code = doc.groupValue;
+
+                                            country.schemaList = {};
+                                            if (doc.doclist.docs.length > 0) {
+                                                _.each(doc.doclist.docs, function(document) {
+                                                    if (!country.schemaList[document.schema_s])
+                                                        country.schemaList[document.schema_s] = [];
+
+                                                    country.schemaList[document.schema_s].push({
+                                                        id          :   document.id,
+                                                        identifier_s:   document.identifier_s,
+                                                        title       :   document.title_t,
+                                                        schema      :   document.schema_s,
+                                                        type        :   document.type_ss
+                                                    });
+                                                });
+                                            }
+                                            $scope.transformedGroupDocuments.push(country);
+                                        });
+                                        console.log($scope.transformedGroupDocuments);
+                                    });
                             }
                         }
                     });
+
+                    function getCountries() {
+
+                        if (!countryList)
+                            return commonjs.getCountries();
+
+                        var promise = $q.defer();
+                        promise.resolve(countriesList);
+
+                        return promise;
+                    }
 
                     function transformDocument(document) {
 
@@ -169,7 +218,8 @@ define(['app',
                         }
 
                         if (document.government_s) {
-                            $q.when(commonjs.getCountries(), function(countries) {
+                            getCountries()
+                            .then(function(countries) {
                                 var cd = _.where(countries, {
                                     code: document.government_s.substring(0, 2).toUpperCase()
                                 })
@@ -328,7 +378,8 @@ define(['app',
                             //TODO: output.description should be the description
                             //TODO: metadata should be the url opening to a new window
                         } else if (document.schema_s == 'measure') {
-                            output.metadata.push('Adopted on ' + $filter('formatDate')(document.adoption_dt));
+                            if (document.adoption_dt)
+                                output.metadata.push('Adopted on ' + $filter('formatDate')(document.adoption_dt));
                             output.adoption = document.adoption_dt;
                             output.recordtype = "nationalRecord";
 
@@ -433,6 +484,8 @@ define(['app',
                                 document.schema_s == 'resource');
                         });
                     }
+
+
 
                     //           var originalLeave = $.fn.popover.Constructor.prototype.leave;
                     //           $.fn.popover.Constructor.prototype.leave = function(obj) {

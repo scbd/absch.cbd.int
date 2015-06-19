@@ -177,7 +177,7 @@ define(['app','underscore',
                 queryParameters = {
                     'q': q + ' AND government_s:*',
                     'sort': 'government_EN_t asc, createdDate_dt desc, title_t asc',
-                    'fl': 'id,title_t,description_t,url_ss,schema_EN_t,date_dt,government_EN_t,schema_s,summary_EN_t,jurisdiction_EN_t, type_ss, uniqueIdentifier_s',
+                    'fl': 'id,identifier_s,title_t,description_t,url_ss,schema_EN_t,date_dt,government_s,government_EN_t,schema_s,summary_EN_t,jurisdiction_EN_t, type_ss, uniqueIdentifier_s',
                     'wt': 'json',
                     'start': 0,//$scope.currentPage * $scope.itemsPerPage,
                     'rows': 1000,//$scope.itemsPerPage,
