@@ -115,13 +115,57 @@
                                             {{totalNonParties}}
                                     </md-button>
                                 </th>
-                                <th> &nbsp; <md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake" ng-click="selected_facet='focalPoint';updateMap('focalPoint');sortTable('FP');" data-toggle="tooltip" data-placement="top" title=" National Focal Points ">{{commonFormatFacets[6][1].facetCount}}</md-button></th>
-                                <th> &nbsp; <md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake" ng-click="selected_facet='database';updateMap('database');sortTable('NDB');"    data-toggle="tooltip" data-placement="top" title=" National Websites and Databases ">{{commonFormatFacets[5][1].facetCount}}</md-button></th>
-                                <th> &nbsp; <md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake" ng-click="selected_facet='authority';updateMap('authority');sortTable('CNA');"  data-toggle="tooltip" data-placement="top" title=" Competent National Authorities ">{{commonFormatFacets[0][1].facetCount}}</md-button></th>
-                                <th> &nbsp; <md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake" ng-click="selected_facet='measure';updateMap('measure');sortTable('MSR');"      data-toggle="tooltip" data-placement="top" title=" Legislative, administrative or policy measures ">{{commonFormatFacets[4][1].facetCount}}</md-button></th>
-                                <th> &nbsp; <md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake" ng-click="selected_facet='absPermit';updateMap('absPermit');sortTable('IRCC');" data-toggle="tooltip" data-placement="top" title=" Internationally Recognized Certificate of Compliance">{{commonFormatFacets[3][1].facetCount}}</md-button></th>
-                                <th> &nbsp; <md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake" ng-click="selected_facet='absCheckpoint';updateMap('absCheckpoint');sortTable('CP');"  data-toggle="tooltip" data-placement="top" title=" Checkpoints ">{{commonFormatFacets[1][1].facetCount}}</md-button></th>
-                                <th> &nbsp; <md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake" ng-click="selected_facet='absCheckpointCommunique';updateMap('absCheckpointCommunique');sortTable('CPC');"   data-toggle="tooltip" data-placement="top" title= "Checkpoint Communiqués ">{{commonFormatFacets[2][1].facetCount}}</md-button></th>
+                                <th> &nbsp; <md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake"
+                                                ng-click="selected_facet='focalPoint';updateMap('focalPoint');sortTable('FP');">
+                                                <md-tooltip>
+                                                    National Focal Points
+                                                </md-tooltip>
+                                                {{commonFormatFacets[6][1].facetCount}}
+                                            </md-button></th>
+                                <th> &nbsp; <md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake"
+                                                ng-click="selected_facet='database';updateMap('database');sortTable('NDB');" >
+                                                <md-tooltip>
+                                                    National Websites and Databases
+                                                </md-tooltip>{{commonFormatFacets[5][1].facetCount}}
+                                            </md-button></th>
+                                <th> &nbsp; <md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake"
+                                                ng-click="selected_facet='authority';updateMap('authority');sortTable('CNA');">
+                                                <md-tooltip>
+                                                    Competent National Authorities
+                                                </md-tooltip>
+                                                {{commonFormatFacets[0][1].facetCount}}
+                                            </md-button>
+                                </th>
+                                <th> &nbsp; <md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake"
+                                                ng-click="selected_facet='measure';updateMap('measure');sortTable('MSR');">
+                                                <md-tooltip>
+                                                    Legislative, administrative or policy measures
+                                                </md-tooltip>
+                                               {{commonFormatFacets[4][1].facetCount}}
+                                            </md-button></th>
+                                <th> &nbsp; <md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake"
+                                                ng-click="selected_facet='absPermit';updateMap('absPermit');sortTable('IRCC');">
+                                                 <md-tooltip>
+                                                     Internationally Recognized Certificate of Compliance
+                                                 </md-tooltip>
+                                                 {{commonFormatFacets[3][1].facetCount}}
+                                            </md-button></th>
+                                <th> &nbsp; <md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake"
+                                                ng-click="selected_facet='absCheckpoint';updateMap('absCheckpoint');sortTable('CP');">
+                                                <md-tooltip>
+                                                    Checkpoints
+                                                </md-tooltip>
+                                                {{commonFormatFacets[1][1].facetCount}}
+                                            </md-button>
+                                </th>
+                                <th> &nbsp; <md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake"
+                                                ng-click="selected_facet='absCheckpointCommunique';updateMap('absCheckpointCommunique');sortTable('CPC');">
+                                                 <md-tooltip>
+                                                     Checkpoint Communiqués
+                                                 </md-tooltip>
+                                                 {{commonFormatFacets[2][1].facetCount}}
+                                             </md-button>
+                                </th>
                             </tr>
                             <tr>
                                <th  style="white-space:nowrap;font-size:14px;"><span style="font-size:14px;font-weight:bold;text-transform:uppercase;" class="color-litegrey">SORT</span></th>
@@ -141,40 +185,54 @@
                                 </th>
 
                                 <th style="white-space:nowrap;font-size:14px;text-align:center;">
-                                    <span style="cursor:pointer;" ng-click="sortTable('FP')" data-toggle="tooltip" data-placement="top" title=" National Focal Points ">
+                                    <span style="cursor:pointer;" ng-click="sortTable('FP')" >
                                         NFP
-                                        <!-- <i ng-show="sortTerm=='FP'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i> -->
+                                        <md-tooltip>
+                                            National Focal Points
+                                        </md-tooltip>
                                     </span>
                                 </th>
                                 <th style="white-space:nowrap;font-size:14px;text-align:center;">
-                                    <span style="cursor:pointer;" ng-click="sortTable('NDB')" data-toggle="tooltip" data-placement="top" title=" National Websites and Databases ">
+                                    <span style="cursor:pointer;" ng-click="sortTable('NDB')" >
                                         NDB
-                                        <!-- <i ng-show="sortTerm=='NDB'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i> -->
+                                        <md-tooltip>
+                                            National Websites and Databases
+                                        </md-tooltip>
                                         </span>
                                 </th>
                                 <th style="white-space:nowrap;font-size:14px;text-align:center;">
-                                    <span style="cursor:pointer;" ng-click="sortTable('CNA')"  data-toggle="tooltip" data-placement="top" title=" Competent National Authorities ">CNA
-                                        <!-- <i ng-show="sortTerm=='CNA'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i> -->
+                                    <span style="cursor:pointer;" ng-click="sortTable('CNA')"  >CNA
+                                        <md-tooltip>
+                                            Competent National Authorities
+                                        </md-tooltip>
                                         </span>
                                 </th>
                                  <th style="white-space:nowrap;font-size:14px;text-align:center;">
-                                    <span style="cursor:pointer;" ng-click="sortTable('MSR')" data-toggle="tooltip" data-placement="top" title=" Legislative, administrative or policy measures ">MSR
-                                        <!-- <i ng-show="sortTerm=='MSR'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i> -->
+                                    <span style="cursor:pointer;" ng-click="sortTable('MSR')" >MSR
+                                        <md-tooltip>
+                                            Legislative, administrative or policy measures
+                                        </md-tooltip>
                                         </span>
                                 </th>
                                  <th style="white-space:nowrap;font-size:14px;text-align:center;">
-                                    <span style="cursor:pointer;" ng-click="sortTable('IRCC')" data-toggle="tooltip" data-placement="top" title=" Internationally Recognized Certificate of Compliance">IRCC
-                                        <!-- <i ng-show="sortTerm=='IRCC'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i> -->
+                                    <span style="cursor:pointer;" ng-click="sortTable('IRCC')" >IRCC
+                                        <md-tooltip>
+                                            Internationally Recognized Certificate of Compliance
+                                        </md-tooltip>
                                         </span>
                                 </th>
                                 <th style="white-space:nowrap;font-size:14px;text-align:center;">
-                                    <span style="cursor:pointer;" ng-click="sortTable('CP')" data-toggle="tooltip" data-placement="top" title=" Checkpoints ">CP
-                                        <!-- <i ng-show="sortTerm=='CP'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i> -->
+                                    <span style="cursor:pointer;" ng-click="sortTable('CP')" >CP
+                                        <md-tooltip>
+                                            Checkpoints
+                                        </md-tooltip>
                                         </span>
                                 </th>
                                 <th style="white-space:nowrap;font-size:14px;text-align:center;">
-                                    <span style="cursor:pointer;" ng-click="sortTable('CPC')" data-toggle="tooltip" data-placement="top" title= "Checkpoint Communiqués ">CPC
-                                        <!-- <i ng-show="sortTerm=='CPC'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i> -->
+                                    <span style="cursor:pointer;" ng-click="sortTable('CPC')">CPC
+                                        <md-tooltip>
+                                            Checkpoint Communiqués
+                                        </md-tooltip>
                                         </span>
                                 </th>
                             </tr>
