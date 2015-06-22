@@ -337,9 +337,12 @@ define(['app'], function(app) {
                                             !entity.isNPParty && 'nonParties' == $scope.selected_facet);
                     }
                     //====================================================
-                    $scope.listAll = function() {
+                    $scope.listAll = function(status) {
                         $scope.searchFilter = '';
                         $scope.countryFilter = '';
+
+                        partyFilter = true
+
                     }
 
 
