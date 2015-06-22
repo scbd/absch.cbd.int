@@ -18,9 +18,9 @@
  ], function(app, _, linqjs) {
 
    app.controller("ProfileController", ["$scope", "$http", "$routeParams", "linqjs", "$filter", "realm",
-                "commonjs", "$q", '$element', '$timeout','commonjs','IStorage','$rootScope','$mdSidenav', '$mdUtil', '$mdMedia',
+                "commonjs", "$q", '$element', '$timeout','commonjs','IStorage','$rootScope','$mdSidenav', '$mdUtil', '$mdMedia','schemaTypes',
      function($scope, $http, $routeParams, linqjs, $filter, realm, commonjs, $q,
-                $element, $timeout, countriescommonjs, IStorage,$rootScope, $mdSidenav, $mdUtil, $mdMedia) {
+                $element, $timeout, countriescommonjs, IStorage,$rootScope, $mdSidenav, $mdUtil, $mdMedia, schemaTypes) {
 
 
     $scope.toggleLeft = buildToggler('left');
@@ -63,31 +63,7 @@
                 var countryColors = {};
                 $scope.countries = countries;
 
-                _.each($scope.countries, function(country) {
-
-                    if (country.isNPParty) {
-                        if (country.code == 'EU')
-                            country.code = 'EUR';
-                        countryColors[country.code.toUpperCase()] = "#428bca";
-                    } else if (country.isNPSignatory) {
-                        countryColors[country.code.toUpperCase()] = "#5bc0de";
-                    } else if (country.isCBDParty) {
-                        countryColors[country.code.toUpperCase()] = "#808080";
-                    } else {
-                        console.log('nonparty country', country);
-                    }
-
-                    $scope.countriesforAutocomplete.push({
-                        name: country.name.en
-                    });
-
-                });
-
-                countryColors[greenland.toUpperCase()] = "#808080";
-                countryColors[taiwan] = "#808080";
-
-                loadMap(countryColors);
-                addEUMapEvents();
+                getCountriesFacets();
 
             });
         //$scope.countries = $filter("orderBy")(response[1].data, "name.en");
@@ -414,7 +390,40 @@
            if(value)
             return JSON.parse(value);
        }
+
+       function getCountriesFacets(){
+           var schema = _.clone(schemaTypes);
+           schema.push('focalPoint');
+               var queryFacetsParameters = {
+                   'q': 'realm_ss:' + realm.value.toLowerCase() + ' AND NOT version_s:* AND schema_s:(' + schema.toString().replace(/,/g, ' ') + ')',
+                   'fl': '', 		//fields for results.
+                   'wt': 'json',
+                   'rows': 0,		//limit
+                   'facet': true,	//get counts back
+                   'facet.field': ['government_s'],
+                   'facet.mincount':1,
+                   'facet.limit': 512
+               };
+
+               $http.get('/api/v2013/index/select', { params: queryFacetsParameters }).success(function (data) {
+                  var solrArray = data.facet_counts.facet_fields.government_s;
+                  for (var i = 0; i < solrArray.length; i += 2) {
+                      var country = _.findWhere($scope.countries, {code:solrArray[i].toUpperCase()});
+                      if(country){
+                        country.facetCount =  solrArray[i + 1];
+                      }
+                      else {
+                            console.log(solrArray[i]);
+                        }
+
+                  }
+
+               }).error(function (error) {
+                   console.log('onerror');
+                   console.log(error);
+               });
+       }
      }
    ]);
 
- })
+ });
