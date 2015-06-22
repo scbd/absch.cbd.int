@@ -344,9 +344,12 @@ define(['app'], function(app) {
                         return facet == $scope.selected_facet;
                     }
                     //====================================================
-                    $scope.listAll = function() {
+                    $scope.listAll = function(status) {
                         $scope.searchFilter = '';
                         $scope.countryFilter = '';
+
+                        partyFilter = true
+
                     }
 
 
