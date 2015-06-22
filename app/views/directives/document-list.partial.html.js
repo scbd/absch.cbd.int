@@ -175,7 +175,7 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                                             }
                                             $scope.transformedGroupDocuments.push(country);
                                         });
-                                        console.log($scope.transformedGroupDocuments);
+                                        //console.log($scope.transformedGroupDocuments);
                                     });
                             }
                         }
