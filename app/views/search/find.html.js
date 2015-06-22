@@ -1,5 +1,5 @@
 define(['app','underscore',
-    'introjs',
+    'introjs','scbd-angularjs-services', 'scbd-angularjs-filters', 'scbd-angularjs-controls',
     '/app/views/forms/view/record-loader.directive.html.js',
     '/app/views/search/find_schemas.partial.html.js',
     '/app/views/search/find_countries.partial.html.js',
