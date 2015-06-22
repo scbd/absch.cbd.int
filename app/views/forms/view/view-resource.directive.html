@@ -94,7 +94,7 @@
 				<ul>
 					<li ng-repeat="link in document.covers">
 						<a  ng-href="{{link.url}}" target="_blank">
-							<img class="img-polaroid" ng-src="{{link.url}}" alt="{{link.name}}" style="max-height: 150px; max-width: 150px" />
+							<img class="img-polaroid" ng-src="{{link.url.replace('attachments/','attachments/thumbnail/')}}" alt="{{link.name}}" style="max-height: 150px; max-width: 150px" />
 						</a>
 					</li>
 				</ul>
@@ -247,7 +247,7 @@
 		</div>
         <div class="row" style="padding-top:10px;" ng-show="document.info.revision">
             <div class="col-xs-12">
-                
+
                 <div view-history document-id="document.header.identifier" load-documents="true"
                 government="document.government.identifier"></div>
             </div>
