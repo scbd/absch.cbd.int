@@ -1,75 +1,6 @@
 <div>
     <!-- Country Map and Other -->
     <div class="container-fluid ng-scope" style="min-height:800px;" id="worldMap">
-        <!-- <div class="row row-centered" ng-hide="loadingFacets">
-
-            <div class="col-xs-12 row-centered">
-
-
-              <a ng-href="#" ng-click="searchFilter=isPartyToCBD;updateMap('party')">
-                    <div class="col-xs-8ths" id="myWell">
-                        <div class="box-0 text-center" style="vertical-align:middle;height:165px;">
-                            <br>
-                            <br>
-                            <br>
-                            <span class="stats-count">ALL</span>
-                        </div>
-                    </div>
-                </a>
-
-
-                <a ng-click="selected_facet=facet[0];updateMap(facet[0]);" ng-repeat="facet in commonFormatFacets" style="display:inline;cursor:pointer">
-
-                    <div class="col-xs-8ths" id="myWell">
-                        {{facet[0]}}
-                        <div class="box-0 text-center" style="padding-bottom:14px;" ng-class="{'myWell-on': isSelected(facet[0])}">
-
-                            <div ng-show="facet[0]== 'RAT'">
-                                <div class="stats-count">{{facet[1].facetCount}} </div>
-                                <div class="stats-country">Parties to the Nagoya Protocol</div>
-                            </div>
-
-                            <div ng-show="facet[0] != 'RAT' && facet[0] != 'resource'">
-
-                                <div class="stats-top">
-                                    <div class="stats-count">
-                                        {{facet[1].countryCount}}
-                                    </div>
-
-                                    <div class="stats-country">
-                                        <span ng-show="facet[1].countryCount">Countries </span>
-                                    </div>
-                                </div>
-
-                                <div class="text-center">
-                                    <hr style="padding:0;margin:5px 0;border:dashed 1px #ccc!important;" />
-                                    <span class="stats-hr" ng-class="{'myWell-on': isSelected(facet[0])}" style="position:relative;top:-18px;background-color:#fff;" ng-show="facet[0]!= 'RAT'">have submitted</span>
-                                </div>
-
-                                <div class="stats-bottom">
-                                    <div class="stats-bottom" style="position:relative;top:-18px;">
-                                        <div class="stats-count-rec">{{facet[1].facetCount}}</div>
-                                        <div class="stats-schema-rec">{{facet[0]|lowercase|schemaNamePlural}}</div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-
-                            <div ng-show="facet[0]== 'resource'">
-                                <div class="stats-count">{{facet[1].facetCount}} </div>
-                                <div class="stats-country">{{facet[0]|lowercase|schemaNamePlural}}</div>
-                            </div>
-
-
-                        </div>
-
-                    </div>
-                </a>
-            </div>
-        </div> -->
-
-
                 <div class="row" id="divMap" style="padding-top:20px;">
                     <div class="col-lg-12 col-md-12 col-xs-12">
 
@@ -99,7 +30,7 @@
                                 </th>
                                 <th>
 
-                                    <md-button class="md-raised md-mini bg-medgrey" aria-label="all" ng-click="listAll();selected_facet='all';updateMap('all');sortTable('name.en', 'ASC')">
+                                    <md-button class="md-raised md-mini bg-medgrey" aria-label="all" ng-click="selected_facet='all';updateMap('all');sortTable('name.en', 'ASC')">
                                             <span class="color-white">All countries ({{countries.length}})</span>
                                     </md-button>
 
@@ -107,28 +38,34 @@
 
                                 </th>
                                 <th>
-                                    <md-button class="md-fab md-mini bg-blue" aria-label="Eat cake" ng-click="listAll();selected_facet='all';updateMap('all');sortTable('treaties.XXVII8b.deposit', 'DESC')">
+                                    <md-button class="md-fab md-mini bg-blue" aria-label="Parties" ng-click="selected_facet='party';updateMap('party');sortTable('name.en', 'ASC')">
                                             {{totalParties}}
+                                            <md-tooltip>
+                                                Nagoya Protocol Parties
+                                            </md-tooltip>
                                     </md-button>
 
-                                    <md-button class="md-fab md-mini bg-medgrey" aria-label="Eat cake" ng-click="listAll();selected_facet='all';updateMap('all');sortTable('treaties.XXVII8b.deposit', 'ASC')">
+                                    <md-button class="md-fab md-mini bg-medgrey" aria-label="Non Parties" ng-click="selected_facet='nonParties';updateMap('nonParties');sortTable('name.en', 'ASC')">
                                             {{totalNonParties}}
+                                            <md-tooltip>
+                                                Nagoya Protocol Non Parties
+                                            </md-tooltip>
                                     </md-button>
                                 </th>
-                                <th> &nbsp; <md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake"
+                                <th><md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake"
                                                 ng-click="selected_facet='focalPoint';updateMap('focalPoint');sortTable('FP');">
                                                 <md-tooltip>
                                                     National Focal Points
                                                 </md-tooltip>
                                                 {{commonFormatFacets[6][1].facetCount}}
                                             </md-button></th>
-                                <th> &nbsp; <md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake"
+                                <th><md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake"
                                                 ng-click="selected_facet='database';updateMap('database');sortTable('NDB');" >
                                                 <md-tooltip>
                                                     National Websites and Databases
                                                 </md-tooltip>{{commonFormatFacets[5][1].facetCount}}
                                             </md-button></th>
-                                <th> &nbsp; <md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake"
+                                <th><md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake"
                                                 ng-click="selected_facet='authority';updateMap('authority');sortTable('CNA');">
                                                 <md-tooltip>
                                                     Competent National Authorities
@@ -136,21 +73,21 @@
                                                 {{commonFormatFacets[0][1].facetCount}}
                                             </md-button>
                                 </th>
-                                <th> &nbsp; <md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake"
+                                <th><md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake"
                                                 ng-click="selected_facet='measure';updateMap('measure');sortTable('MSR');">
                                                 <md-tooltip>
                                                     Legislative, administrative or policy measures
                                                 </md-tooltip>
                                                {{commonFormatFacets[4][1].facetCount}}
                                             </md-button></th>
-                                <th> &nbsp; <md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake"
+                                <th><md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake"
                                                 ng-click="selected_facet='absPermit';updateMap('absPermit');sortTable('IRCC');">
                                                  <md-tooltip>
                                                      Internationally Recognized Certificate of Compliance
                                                  </md-tooltip>
                                                  {{commonFormatFacets[3][1].facetCount}}
                                             </md-button></th>
-                                <th> &nbsp; <md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake"
+                                <th>  <md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake"
                                                 ng-click="selected_facet='absCheckpoint';updateMap('absCheckpoint');sortTable('CP');">
                                                 <md-tooltip>
                                                     Checkpoints
@@ -158,7 +95,7 @@
                                                 {{commonFormatFacets[1][1].facetCount}}
                                             </md-button>
                                 </th>
-                                <th> &nbsp; <md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake"
+                                <th>  <md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake"
                                                 ng-click="selected_facet='absCheckpointCommunique';updateMap('absCheckpointCommunique');sortTable('CPC');">
                                                  <md-tooltip>
                                                      Checkpoint Communiqués
@@ -236,7 +173,8 @@
                                         </span>
                                 </th>
                             </tr>
-                            <tr ng-repeat="country in (countries | filter:countryFilter | filter: searchFilter | orderBy:sortTermFilter:orderList) " ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
+                            <tr ng-repeat="country in (countries | filter: searchFilter | orderBy:sortTermFilter:orderList) "
+                            ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
                                <td class="text-right">{{$index + 1}}</td>
                                 <td><a ng-href="#" ng-click="navigateCountry('',country.code,'')" class="country-list-name"
                                     ng-class="{'list-group-item-primary':country.isNPParty,'list-group-item-default':!country.isNPParty }"> {{country.name.en}}</a> &nbsp;

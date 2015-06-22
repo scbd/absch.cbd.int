@@ -16,6 +16,9 @@ define(['app'], function(app) {
                     var greenland = "GL";
                     $scope.lastAction = 'party';
 
+                    $scope.orderList = false;
+                    $scope.sortTerm = 'name.en';
+
                     //====================================================
                     function loadCountryMapDetails() {
                         if (!$scope.countries) {
@@ -132,14 +135,6 @@ define(['app'], function(app) {
                             });
                         });
                     }
-
-
-                    //   if(!$routeParams.code){
-
-                    //   }
-
-                    $scope.orderList = false;
-                    $scope.sortTerm = 'name.en';
 
                     //====================================================
                     $scope.sortTable = function(term, order) {
@@ -276,7 +271,6 @@ define(['app'], function(app) {
                     //====================================================
                     $scope.updateMap = function(action) {
 
-                        $scope.selected_facet = action
 
                         _.each($scope.countries, function(country) {
                             $("#jqvmap" + getMapIndex() + "_" + country.code.toUpperCase()).attr("fill", "#FFF");
@@ -288,6 +282,7 @@ define(['app'], function(app) {
 
                         if (action == 'signatory' || action == 'party' || action == 'nonParties' || action == 'all') {
 
+                            $scope.searchFilter = $scope.hasStatus;
                             if (action == 'all' || action == 'nonParties') {
                                 $("#jqvmap" + getMapIndex() + "_" + greenland).attr("fill", "#666");
                             }
@@ -297,10 +292,6 @@ define(['app'], function(app) {
                                 if ((action == 'party' || action == 'signatory' || action == 'all') && country.isNPParty) {
                                     $("#jqvmap" + getMapIndex() + "_" + country.code.toUpperCase()).attr("fill", "#428bca");
                                 }
-                                // else if ((action == 'signatory' || action == 'all' || action == 'nonParties') &&
-                                //          !country.isNPParty && country.isNPSignatory) {
-                                //     $("#jqvmap" + getMapIndex() + "_" + country.code.toUpperCase()).attr("fill", "#FF4081");
-                                // }
                                 else if ((action == 'nonParties' || action == 'all') && !country.isNPParty) {
                                     $("#jqvmap" + getMapIndex() + "_" + country.code.toUpperCase()).attr("fill", "#666");
                                     $("#jqvmap" + getMapIndex() + "_" + taiwan).attr("fill", "#666");
@@ -340,8 +331,10 @@ define(['app'], function(app) {
                     }
 
                     //====================================================
-                    $scope.isSelected = function(facet) {
-                        return facet == $scope.selected_facet;
+                    $scope.hasStatus = function(entity) {
+                        return entity && ($scope.selected_facet == 'all' ||
+                                            (entity.isNPParty && 'party' == $scope.selected_facet)||
+                                            !entity.isNPParty && 'nonParties' == $scope.selected_facet);
                     }
                     //====================================================
                     $scope.listAll = function() {
