@@ -129,7 +129,6 @@ define(['app','underscore',
 
             var schema = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "resource", "meeting", "notification","pressRelease","statement" ,"focalPoint", "news"]
 
-//realm_ss:absch OR realm_ss:ABS
             var q = '(realm_ss:' + realm.value.toLowerCase() + ' or realm_ss:absch) AND NOT version_s:*';
             //' AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryTheme + ' AND ' + $scope.queryTargets +' AND ' + $scope.queryDate + ' AND ' + $scope.queryKeywords;
 
@@ -161,6 +160,7 @@ define(['app','underscore',
 
             var queryParameters
             if($scope.previewType == 'list'){
+                $scope.rawDocs = undefined;
                 queryParameters = {
                     'q': q,
                     'sort': orderByFields,
@@ -179,8 +179,8 @@ define(['app','underscore',
                     'sort': 'government_EN_t asc, createdDate_dt desc, title_t asc',
                     'fl': 'id,identifier_s,title_t,description_t,url_ss,schema_EN_t,date_dt,government_s,government_EN_t,schema_s,summary_EN_t,jurisdiction_EN_t, type_ss, uniqueIdentifier_s',
                     'wt': 'json',
-                    'start': 0,//$scope.currentPage * $scope.itemsPerPage,
-                    'rows': 1000,//$scope.itemsPerPage,
+                    'start': $scope.currentPage * $scope.itemsPerPage,
+                    'rows': $scope.itemsPerPage,
                     'cb': new Date().getTime(),
                     'group': true,
                     'group.ngroups' : true,
@@ -209,12 +209,19 @@ define(['app','underscore',
                     $scope.documentCount   = data.response.numFound;
                  }
                  else {
-                     if(!$scope.rawDocs)
-                        $scope.rawDocs = [];
-                     $scope.rawDocs = data.grouped.government_s.groups;
-                    // data.grouped.government_s.groups.forEach(function(doc){
-                    //     $scope.rawDocs.push(doc);
-                    // });
+                     var lRawDocs = [];
+                     if($scope.rawDocs)
+                        lRawDocs = _.clone($scope.rawDocs);
+
+                    _.map(lRawDocs, function(doc){doc.newRecord = false;});
+                     //$scope.rawDocs = data.grouped.government_s.groups;
+                    data.grouped.government_s.groups.forEach(function(doc){
+                        //$timeout(function(){
+                                doc.newRecord = true;
+                                lRawDocs.push(doc);
+                            //},1);
+                    });
+                    $scope.rawDocs = lRawDocs;
                     //$scope.rawDocs = data.grouped.government_s.groups;
                     $scope.documentCount = data.grouped.government_s.ngroups;
                  }
@@ -333,35 +340,7 @@ define(['app','underscore',
             refreshTimeout = $timeout(function () { query(); }, 200);
         }
 
-        function affix(){
-            // console.log($('.container-fluid').offsetTop)
-            //
-            // $("#search_controls").affix({
-            //     offset: {
-            //         top: function () {
-            //           return (this.top = $('.container-fluid').offsetTop-100)
-            //         },
-            //         bottom:function () {
-            //           return (this.bottom = $('#searchBox').outerHeight(true)+100)
-            //         }
-            //     }
-            // });
-        }
-// $("#search_controls").attr( "style", "top:10px !important" );
-        $("#search_controls").on('affixed.bs.affix', function(){
-            //$("#search-results").addClass( "col-xs-offset-3" );
-            //console.log($("#search_controls").css( "top"))
-            // $("#search_controls").attr( "style", "top:10px !important" );
-// $("#search_controls").attr( "style", "top:10px !important" );
-        });
-
-        $("#search_controls").on('affix-top.bs.affix', function(){
-            //$("#search-results").removeClass( "col-xs-offset-3" );
-
-        });
-
-
-        $scope.$watch('currentPage',     function() { $scope.previewType == 'list' ? refresh() : query(); });
+        $scope.$watch('currentPage',     function() { refresh() });
         $scope.$watch('querySchema',     function() { $scope.currentPage=0; refresh(); });
         $scope.$watch('queryGovernment', function() { $scope.currentPage=0; refresh(); });
         $scope.$watch('queryTargets',    function() { $scope.currentPage=0; refresh(); });
@@ -374,10 +353,15 @@ define(['app','underscore',
             if(newValue && oldValue){
                 $scope.rawDocs = undefined;
                 $scope.currentPage=0;
-                refresh();
+                $scope.documentCount = 0;
+                //refresh();
             }
         });
-        $scope.previewType = 'list';
+        $scope.previewType = 'group';
+
+        function resetPreview(){
+            $scope.rawDocs = undefined;
+        }
 
         $scope.$on('externalFilter', function(evt, data){
             $timeout(function(){

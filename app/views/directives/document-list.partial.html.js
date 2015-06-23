@@ -1,7 +1,7 @@
 define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
     './document-metadata-directive.html.js',
     '/app/js/common.js',
-    //'/app/views/directives/infinite-scroll-directive.js'
+    '/app/views/directives/infinite-scroll-directive.js'
 ], function(app) {
 
     app.directive('documentList', function($http, $filter) {
@@ -24,6 +24,8 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
 
                     $scope.schemaTypes = schemaTypes;
                     $scope.schemaTypes.push('focalPoint');
+                    $scope.loading = true;
+
                     $scope.getDocumentId = function(document) {
 
                         if ((document.recordtype == "referenceRecord" && document.schema != "resource") || document.schema.toLowerCase() == "focalpoint") {
@@ -136,8 +138,10 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                     var countryList;
                     $scope.$watch('documents', function(newValue, oldValue) {
 
+                        // if (!newValue && oldValue) {
+                        //     $scope.transformedGroupDocuments = [];
+                        // }
                         if (newValue && newValue != oldValue) {
-                            $scope.loading = false;
                             $scope.pageCount = Math.ceil($scope.documentCount / $scope.itemsPerPage);
                             $scope.transformedDocuments = [];
 
@@ -145,36 +149,48 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                                 $scope.documents.forEach(function(doc) {
                                     $scope.transformedDocuments.push(transformDocument(doc));
                                 });
+                                $scope.loading = false;
+
                             } else if ($scope.previewType == 'group') {
 
-                                $scope.transformedGroupDocuments = [];
+                                if(!$scope.transformedGroupDocuments || $scope.currentPage == 0)
+                                    $scope.transformedGroupDocuments = [];
+
                                 getCountries()
                                     .then(function(countries) {
 
                                         $scope.documents.forEach(function(doc) {
-                                            var country = _.find(countries, {
-                                                code: doc.groupValue == 'eur' ? 'EU' : doc.groupValue.toUpperCase()
-                                            })
-                                            // var country = {};
-                                            // country.code = doc.groupValue;
 
-                                            country.schemaList = {};
-                                            if (doc.doclist.docs.length > 0) {
-                                                _.each(doc.doclist.docs, function(document) {
-                                                    if (!country.schemaList[document.schema_s])
-                                                        country.schemaList[document.schema_s] = [];
+                                            var existingDocument = _.find($scope.transformedGroupDocuments, {code: doc.groupValue == 'eur' ? 'EU' : doc.groupValue.toUpperCase()});
+                                            if(existingDocument)
+                                                return;
 
-                                                    country.schemaList[document.schema_s].push({
-                                                        id          :   document.id,
-                                                        identifier_s:   document.identifier_s,
-                                                        title       :   document.title_t,
-                                                        schema      :   document.schema_s,
-                                                        type        :   document.type_ss
+                                            if(doc.newRecord){
+
+                                                var country = _.clone(_.find(countries, {
+                                                                        code: doc.groupValue == 'eur' ? 'EU' : doc.groupValue.toUpperCase()
+                                                                    }));
+
+                                                country.schemaList = {};
+                                                if (doc.doclist.docs.length > 0) {
+                                                    _.each(doc.doclist.docs, function(document) {
+                                                        if (!country.schemaList[document.schema_s])
+                                                            country.schemaList[document.schema_s] = [];
+
+                                                        country.schemaList[document.schema_s].push({
+                                                            id          :   document.id,
+                                                            identifier_s:   document.identifier_s,
+                                                            title       :   document.title_t,
+                                                            schema      :   document.schema_s,
+                                                            type        :   document.type_ss,
+                                                            government  :   {identifier:country.code}
+                                                        });
                                                     });
-                                                });
+                                                }
+                                                $scope.transformedGroupDocuments.push(country);
                                             }
-                                            $scope.transformedGroupDocuments.push(country);
                                         });
+                                        $scope.loading = false;
                                         //console.log($scope.transformedGroupDocuments);
                                     });
                             }
@@ -454,11 +470,11 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
 
                     $scope.updateScrollPage = function() {
                         console.log($scope.currentPage);
-                        // $scope.loading = true;
+                        $scope.loading = true;
                         // if (!$scope.currentPage)
                         //     $scope.currentPage = 1;
                         // else
-                        //     $scope.currentPage++;
+                            $scope.currentPage = $scope.currentPage + 1;
                     }
 
                     function canUserEdit(document) {

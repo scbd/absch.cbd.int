@@ -175,7 +175,7 @@
         <!-- </div> -->
     </div>
 
-    <div ng-if="previewType=='group'" infinite-scroll="updateScrollPage()" infinite-scroll-busy="loading" infinite-scroll-distance="500">
+    <div ng-if="previewType=='group'" >
         <style>
             .container-full {
                 background-color: #FFF;
@@ -185,11 +185,9 @@
         <div>
             <div class="row">
                 <strong>Country(s):
-                    <span class="color-grey">{{documents.length}}</span>
+                    <span class="color-grey">{{documentCount}}</span>
                 </strong>
-                <div ng-show="!documents" style="padding-left:50%">
-                    <i class="fa fa-spin fa-spinner fa-5x" style="margin:auto" />
-                </div>
+
             </div>
         </div>
         <style>
@@ -269,167 +267,106 @@
         </style>
 
         <link href="/app/libs/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
-        <!-- <div class="row well" ng-repeat="group in documents" style="margin-top:30px;margin-bottom:10px;">
-            <div class="col-lg-12">
-                <div class="row">
-                    <div class="col-lg-1" style="padding:0px">
-                        <div style="height:60px;" class="flag-icon-background
-                         flag-icon-{{group.doclist.docs[0].government_s.toLowerCase()}}">
-                        </div>
-                    </div>
-                    <div class="col-lg-11">
-                        <h3 class="color-medgrey" style="padding-top:0;margin-top:3px;">
-                            {{group.doclist.docs[0].government_EN_t}}
+        <div infinite-scroll="updateScrollPage()" infinite-scroll-disabled="loading" infinite-scroll-distance="1">
+            <md-content ng-repeat="country in transformedGroupDocuments" flex layout-margin style="margin:0 30px 30px 30px;padding:0;background-color:transparent;">
+                <div layout="column" layout-align="top center">
 
-                            <label class="label label-default" ng-show="!country.isNPParty">Non-Party</label>
-                            <label class="label label-primary" ng-show="country.isNPParty">Party</label>
-                        </h3>
-                    </div>
-                </div>
-                <div class="">
-                    <div class="row">
+                    <div class="panel md-whiteframe-z2" style="margin:0;padding:0;">
+                        <div class="panel-heading bg-grey2" style="padding:2px 15px;">
 
+                            <table style="width:100%">
+                                <tr>
+                                    <td style="width:80px;padding-right:20px;">
+                                        <div style="height:60px;" class="flag-icon-background  flag-icon-{{country.code.toLowerCase()}}"></div>
+                                    </td>
+                                    <td style="padding-top:10px;">
+                                        <h3 style="margin:0;padding:0;display:inline;">
+                                            <span class="country-name" style="font-size:3vw;" ng-class="{'color-blue': country.isNPParty,'color-grey': !country.isNPParty }">{{country.name|lstring}}</span>
+                                        </h3>
+                                        <h3 style="margin:0;padding:0;display:inline;position:relative;top:-5px;">
+                                            <label class="label label-default" ng-show="!country.isNPParty">Non-Party</label>
+                                            <label class="label label-primary" ng-show="country.isNPParty">Party</label>
+                                        </h3>
+                                    </td>
+                                    <td class="pull-right">
+                                        <div>
+                                            <div ng-show="country.isNPSignatory && !country.isNPParty">
+                                                <label class="pull-right">
+                                                    <span style="color: #5bc0de;">Signatory</span>
+                                                </label>
+                                            </div>
 
-                        <div ng-repeat="doc in group.doclist.docs | filter:{'schema_s':'focalPoint'} | orderBy:'startDate_s':'asc'">
-                            <h4 ng-if="$index===0" class="bg-grey3" style="padding:3px;margin-top:10px;"> National Focal Points </h4>
-                            <i class="{{doc.schema_s | schemaIcon }}" style="font-size:16pt;position:relative;top:3px;"></i>
-                            <span ng-if="doc.type_ss.indexOf('ABS-FP') >= 0 ">ABS Focal Point</span>
-                            <span ng-if="doc.type_ss.indexOf('ABS-FP') < 0 "> CBD Focal Point</span>
-                            - <a ng-click="displayDetails = !displayDetails;load(doc,displayDetails)">{{doc.title_t}}</a>
-                            <div class="details" ng-if="displayDetails" record-loader document="doc.data"></div>
-                        </div>
+                                            <div ng-show="country.isNPParty||country.isNPInbetweenParty">
+                                                <label class="pull-right">
+                                                    <span style="font-size:12px;text-transform:uppercase;color:#999;">Date of {{country.treaties.XXVII8b.instrument}}: </span> {{country.treaties.XXVII8b.deposit | formatDate}}
+                                                </label>
+                                            </div>
 
-                        <div ng-repeat="doc in group.doclist.docs | filter:{'schema_s':'authority'} | orderBy:'startDate_s':'asc'">
-                            <h4 ng-show="$index===0" class="bg-grey3" style="padding:3px;margin-top:30px;"> Competent National Authority </h4>
-                            <i class="{{doc.schema_s | schemaIcon }}" style="font-size:16pt;position:relative;top:3px;"></i> {{doc.schema_EN_t}} - <a href="" ng-click="displayDetails=!displayDetails" target="_new">{{doc.title_t}}</a>
-                        </div>
-
-                        <div ng-repeat="doc in group.doclist.docs | filter:{'schema_s':'database'} | orderBy:'startDate_s':'asc'">
-                            <h4 ng-show="$index===0" class="bg-grey3" style="padding:3px;margin-top:30px;"> National Website or Database</h4>
-                            <i class="{{doc.schema_s | schemaIcon }}" style="font-size:16pt;position:relative;top:3px;"></i> National Website or Database - <a href="{{doc.url_ss[0]}}" target="_new">{{doc.title_t}}</a>
-                        </div>
-
-                        <div ng-repeat="doc in group.doclist.docs | filter:{'schema_s':'measure'} | orderBy:'startDate_s':'asc'">
-                            <h4 ng-show="$index===0" class="bg-grey3" style="padding:3px;margin-top:30px;"> Legislative, administrative or policy measures </h4>
-                            <i class="{{doc.schema_s | schemaIcon }}" style="font-size:16pt;position:relative;top:3px;"></i> {{doc.schema_EN_t}} - <a href="{{doc.url_ss[0]}}" target="_new">{{doc.title_t}}</a>
-                        </div>
-
-                        <div ng-repeat="doc in group.doclist.docs | filter:{'uniqueIdentifier_s':'absch-cp-'} | orderBy:'startDate_s':'asc'">
-                            <h4 ng-show="$index===0" class="bg-grey3" style="padding:3px;margin-top:30px;"> Checkpoint</h4>
-                            <i class="{{doc.schema_s | schemaIcon }}" style="font-size:16pt;position:relative;top:3px;"></i> {{doc.schema_EN_t}} - <a href="{{doc.url_ss[0]}}" target="_new">{{doc.title_t}}</a>
-
-                        </div>
-
-                        <div ng-repeat="doc in group.doclist.docs | filter:{'schema_s':'absCheckpointCommunique'} | orderBy:'startDate_s':'asc'">
-                            <h4 ng-show="$index===0" class="bg-grey3" style="padding:3px;margin-top:30px;"> Checkpoint Communiqué</h4>
-                            <i class="{{doc.schema_s | schemaIcon }}" style="font-size:16pt;position:relative;top:3px;"></i> {{doc.schema_EN_t}} -
-                            <a href="{{doc.url_ss[0]}}" target="_new">
-                                <span style="text-transform:uppercase;">{{doc.uniqueIdentifier_s}}</span> | {{doc.title_t}}</a>
-                        </div>
-
-                        <div ng-repeat="doc in group.doclist.docs | filter:{'schema_s':'absPermit'} | orderBy:'startDate_s':'asc'">
-                            <h4 ng-show="$index===0" class="bg-grey3" style="padding:3px;margin-top:30px;"> Internationally Recognized Certificate of Compliance </h4>
-                            <i class="{{doc.schema_s | schemaIcon }}" style="font-size:16pt;position:relative;top:3px;"></i> {{doc.schema_EN_t}} - <a href="{{doc.url_ss[0]}}" target="_new">{{doc.title_t}}</a>
-                        </div>
-
-
-
-                        <br>
-                        <br>
-                    </div>
-                </div>
-
-            </div>
-        </div> -->
-
-        <md-content ng-repeat="country in transformedGroupDocuments" flex layout-margin style="margin:0 30px 30px 30px;padding:0;background-color:transparent;">
-            <div layout="column" layout-align="top center">
-
-                <div class="panel md-whiteframe-z2" style="margin:0;padding:0;">
-                    <div class="panel-heading bg-grey2" style="padding:2px 15px;">
-
-                        <table style="width:100%">
-                            <tr>
-                                <td style="width:80px;padding-right:20px;">
-                                    <div style="height:60px;" class="flag-icon-background  flag-icon-{{country.code.toLowerCase()}}"></div>
-                                </td>
-                                <td style="padding-top:10px;">
-                                    <h3 style="margin:0;padding:0;display:inline;">
-                                        <span class="country-name" style="font-size:3vw;" ng-class="{'color-blue': country.isNPParty,'color-grey': !country.isNPParty }">{{country.name|lstring}}</span>
-                                    </h3>
-                                    <h3 style="margin:0;padding:0;display:inline;position:relative;top:-5px;">
-                                        <label class="label label-default" ng-show="!country.isNPParty">Non-Party</label>
-                                        <label class="label label-primary" ng-show="country.isNPParty">Party</label>
-                                    </h3>
-                                </td>
-                                <td class="pull-right">
-                                    <div>
-                                        <div ng-show="country.isNPSignatory && !country.isNPParty">
-                                            <label class="pull-right">
-                                                <span style="color: #5bc0de;">Signatory</span>
-                                            </label>
+                                            <div ng-show="country.isNPInbetweenParty || country.isNPParty">
+                                                <label class="pull-right">
+                                                    <span style="font-size:12px;text-transform:uppercase;color:#999;">Date of entry into force: </span> {{country.entryIntoForce| formatDate}}
+                                                </label>
+                                            </div>
                                         </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="panel-body" ng-repeat="(key,schema) in country.schemaList" >
+                            <div class="col-xs-12">
+                                <div class="row bg-grey1" style="padding:3px; border-radius: 3px;">
+                                    <h5 style="padding:0;margin:0;font-size:15px;">
 
-                                        <div ng-show="country.isNPParty||country.isNPInbetweenParty">
-                                            <label class="pull-right">
-                                                <span style="font-size:12px;text-transform:uppercase;color:#999;">Date of {{country.treaties.XXVII8b.instrument}}: </span> {{country.treaties.XXVII8b.deposit | formatDate}}
-                                            </label>
-                                        </div>
+                                         <a href="#" style="cursor:pointer">
+                                            <span class="badge bg-black">{{schema.length}}</span>
+                                            <span style="position:relative;top:1px;"
+                                            ng-class="{'color-grey': Permit==0, 'color-black': Permit > 0}">
+                                                {{key|schemaNamePlural}}
+                                            </span>
+                                        </a>
+                                        <a ng-if="key=='measure'" href="/search/new/measurematrix/countries/{{country.code}}" class=""><i class="fa fa-bar-chart pull-right"></i></a>
+                                    </h5>
+                                </div>
 
-                                        <div ng-show="country.isNPInbetweenParty || country.isNPParty">
-                                            <label class="pull-right">
-                                                <span style="font-size:12px;text-transform:uppercase;color:#999;">Date of entry into force: </span> {{country.entryIntoForceDate| formatDate}}
-                                            </label>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="panel-body" ng-repeat="(key,schema) in country.schemaList" >
-                        <div class="col-xs-12">
-                            <div class="row bg-grey1" style="padding:3px; border-radius: 3px;">
-                                <h5 style="padding:0;margin:0;font-size:15px;">
+                                <div class="row">
+                                    <div style="padding:10px; margin:0 20px;">
+                                        <div class="row table-hover table-msr" ng-repeat="doc in schema">
+                                            <div class="row border">
+                                                <!-- <a nhref="/search/new/measurematrix/countries/{{country.code}}" class="">
+                                                    <i class="fa fa-bar-chart"></i>
+                                                </a> -->
+                                                <a ng-if="key=='measure'" href="/search/new/measurematrix/{{doc|uniqueIDWithoutRevision}}" class="pull-left"><i class="fa fa-bar-chart"></i>&nbsp;</a>
+                                                <div ng-click="displayDetails = !displayDetails;load(doc,displayDetails)" style="cursor:pointer">
+                                                    <!-- <i class="{{key | schemaIcon }}"
+                                                    style="font-size:16pt;position:relative;top:3px;"></i> -->
+                                                    <span ng-if="doc.type.indexOf('ABS-FP') >= 0 ">ABS Focal Point</span>
+                                                    <span ng-if="doc.type.indexOf('ABS-FP') < 0 "> CBD Focal Point</span>
+                                                    <span ng-if="key!= 'focalPoint' ">{{key|schemaShortName}}</span>
+                                                    <span>{{doc.title}}</span>
+                                                    <i class="fa fa-chevron-circle-up pull-right" ng-show="displayDetails"></i>
+                                                    <i class="fa fa-chevron-circle-down pull-right" ng-show="!displayDetails"></i>
 
-                                     <a href="#" style="cursor:pointer">
-                                        <span class="badge bg-black">{{schema.length}}</span>
-                                        <span style="position:relative;top:1px;"
-                                        ng-class="{'color-grey': Permit==0, 'color-black': Permit > 0}">
-                                            {{key|schemaNamePlural}}
-                                        </span>
-                                    </a>
-                                </h5>
-                            </div>
-
-                            <div class="row">
-                                <div style="padding:10px; margin:0 20px;">
-                                    <div class="row table-hover table-msr" ng-repeat="doc in schema">
-                                        <div class="row border" style="cursor:pointer"
-                                        ng-click="displayDetails = !displayDetails;load(doc,displayDetails)">
-                                            <!-- <i class="{{key | schemaIcon }}"
-                                            style="font-size:16pt;position:relative;top:3px;"></i> -->
-                                            <span ng-if="doc.type.indexOf('ABS-FP') >= 0 ">ABS Focal Point</span>
-                                            <span ng-if="doc.type.indexOf('ABS-FP') < 0 "> CBD Focal Point</span>
-                                            <span ng-if="key!= 'focalPoint' ">{{key|schemaShortName}}</span>
-                                            <span>{{doc.title}}</span>
-                                            <i class="fa fa-chevron-circle-up pull-right" ng-show="displayDetails"></i>
-                                            <i class="fa fa-chevron-circle-down pull-right" ng-show="!displayDetails"></i>
-
-                                        </div>
-                                        <div class="row" ng-if="displayDetails">
-                                            <i class="glyphicon glyphicon-remove-circle circle pull-right" style="position:relative;top:40px;z-index:100;font-size:20px;color:white;" ng-click="displayDetails=!displayDetails;"></i>
-                                            <div class="col-xs-12 details document-show-hide" ng-show="displayDetails" record-loader document="doc.data"></div>
+                                                </div>
+                                                <div class="row" ng-if="displayDetails">
+                                                    <i class="glyphicon glyphicon-remove-circle circle pull-right" style="position:relative;top:40px;z-index:100;font-size:20px;color:white;" ng-click="displayDetails=!displayDetails;"></i>
+                                                    <div class="col-xs-12 details document-show-hide" ng-show="displayDetails" record-loader document="doc.data"></div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
 
                 </div>
+            </md-content>
 
+            <div ng-show="!documents || loading" style="padding-left:50%">
+                <i class="fa fa-spin fa-spinner fa-5x" style="margin:auto" />
             </div>
-        </md-content>
+        </div>
     </div>
 
 </div>

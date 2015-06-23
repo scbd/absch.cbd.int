@@ -106,7 +106,7 @@ define(["app",'/app/js/common.js'], function (app) {
                 else if(document.body && document.body.government)
                     government = document.body.government.identifier;
 
-                var unique = 'ABSCH-' + $filter("schemaShortName")($filter("lowercase")(document.type||document.schema_s)) +
+                var unique = 'ABSCH-' + $filter("schemaShortName")($filter("lowercase")(document.type||document.schema_s||document.schema)) +
                         (government != '' ? '-' + $filter("uppercase")(government) : '') +
                         '-' + documentId + '-' + document.revision;
 				cacheMap[term.identifier] = unique;
@@ -256,7 +256,7 @@ define(["app",'/app/js/common.js'], function (app) {
 
 			if(!schema)
 				return schema;
-				
+
 			if(schema.toLowerCase()=="focalpoint" 				||	schema.toLowerCase()=="nfp"	) return "mdi-action-account-box";
 			if(schema.toLowerCase()=="authority"  				||	schema.toLowerCase()=="cna"	) return "mdi-action-account-box";
 			//if(schema.toLowerCase()=="contact"  				||	schema.toLowerCase()=="con"	) return "Contact";
@@ -361,5 +361,5 @@ define(["app",'/app/js/common.js'], function (app) {
 		};
 	}]);
 
-    
+
 });
