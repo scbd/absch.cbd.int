@@ -268,7 +268,8 @@
 
         <link href="/app/libs/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
         <div infinite-scroll="updateScrollPage()" infinite-scroll-disabled="loading" infinite-scroll-distance="1">
-            <md-content ng-repeat="country in transformedGroupDocuments" flex layout-margin style="margin:0 30px 30px 30px;padding:0;background-color:transparent;">
+            <md-content ng-repeat="country in transformedGroupDocuments| orderBy:'name.en'"
+            flex layout-margin style="margin:0 30px 30px 30px;padding:0;background-color:transparent;">
                 <div layout="column" layout-align="top center">
 
                     <div class="panel md-whiteframe-z2" style="margin:0;padding:0;">
@@ -277,16 +278,18 @@
                             <table style="width:100%">
                                 <tr>
                                     <td style="width:80px;padding-right:20px;">
-                                        <div style="height:60px;" class="flag-icon-background  flag-icon-{{country.code.toLowerCase()}}"></div>
+                                        <div style="height:40px;" class="flag-icon-background  flag-icon-{{country.code.toLowerCase()}}"></div>
                                     </td>
                                     <td style="padding-top:10px;">
                                         <h3 style="margin:0;padding:0;display:inline;">
-                                            <span class="country-name" style="font-size:3vw;" ng-class="{'color-blue': country.isNPParty,'color-grey': !country.isNPParty }">{{country.name|lstring}}</span>
+                                            <a ng-href="countries/{{country.code}}">
+                                                <span class="country-name" style="font-size:2vw;" ng-class="{'color-blue': country.isNPParty,'color-grey': !country.isNPParty }">{{country.name|lstring}}</span>
+                                            </a>
                                         </h3>
-                                        <h3 style="margin:0;padding:0;display:inline;position:relative;top:-5px;">
+                                        <!-- <span style="margin:0;padding:0;display:inline;position:relative;top:-5px;"> -->
                                             <label class="label label-default" ng-show="!country.isNPParty">Non-Party</label>
                                             <label class="label label-primary" ng-show="country.isNPParty">Party</label>
-                                        </h3>
+                                        <!-- </h3> -->
                                     </td>
                                     <td class="pull-right">
                                         <div>
@@ -312,7 +315,7 @@
                                 </tr>
                             </table>
                         </div>
-                        <div class="panel-body" ng-repeat="(key,schema) in country.schemaList" >
+                        <div class="panel-body" ng-repeat="(key,schema) in country.schemaList " >
                             <div class="col-xs-12">
                                 <div class="row bg-grey1" style="padding:3px; border-radius: 3px;">
                                     <h5 style="padding:0;margin:0;font-size:15px;">
