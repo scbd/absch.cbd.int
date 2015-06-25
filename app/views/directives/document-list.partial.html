@@ -182,14 +182,15 @@
             }
         </style>
 
-        <div>
+        <!-- <div>
             <div class="row">
-                <strong>Country(s):
-                    <span class="color-grey">{{documentCount}}</span>
+                <div class="col-xs-12" style="padding-top:10px;">
+                <strong class="pull-right">Country(s):
+                    <span class="color-grey badge color-white">{{documentCount}}</span>
                 </strong>
-
+                </div>
             </div>
-        </div>
+        </div> -->
         <style>
             .page-content {
                 background-color: #eee;
@@ -268,31 +269,42 @@
 
         <link href="/app/libs/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
         <div infinite-scroll="updateScrollPage()" infinite-scroll-disabled="loading" infinite-scroll-distance="1">
-            <md-content ng-repeat="country in transformedGroupDocuments| orderBy:'name.en'"
-            flex layout-margin style="margin:0 30px 30px 30px;padding:0;background-color:transparent;">
-                <div layout="column" layout-align="top center">
+            <md-content
+            flex layout-margin style="margin:0 30px 30px 30px;padding:30px 0 0 0;background-color:transparent;">
 
-                    <div class="panel md-whiteframe-z2" style="margin:0;padding:0;">
+            <div>
+                <strong class="pull-right">Country(s):
+                    <span class="color-grey badge color-white">{{documentCount}}</span>
+                </strong>
+            </div>
+            <br><br>
+
+                <div layout="column" layout-align="top center" ng-repeat="country in transformedGroupDocuments| orderBy:'name.en'">
+
+                    <div class="panel md-whiteframe-z2" >
                         <div class="panel-heading bg-grey2" style="padding:2px 15px;">
 
                             <table style="width:100%">
                                 <tr>
-                                    <td style="width:80px;padding-right:20px;">
-                                        <div style="height:40px;" class="flag-icon-background  flag-icon-{{country.code.toLowerCase()}}"></div>
+                                    <td style="width:40px;padding-right:10px;">
+                                        <div style="height:30px;" class="flag-icon-background  flag-icon-{{country.code.toLowerCase()}}"></div>
                                     </td>
-                                    <td style="padding-top:10px;">
-                                        <h3 style="margin:0;padding:0;display:inline;">
+                                    <td style="">
+                                        <h3 style="display:inline;">
                                             <a ng-href="countries/{{country.code}}">
-                                                <span class="country-name" style="font-size:2vw;" ng-class="{'color-blue': country.isNPParty,'color-grey': !country.isNPParty }">{{country.name|lstring}}</span>
+                                                <span class="country-name" style="font-size:1.5vw;" ng-class="{'color-blue': country.isNPParty,'color-grey': !country.isNPParty }">
+                                                    {{country.name|lstring}}</span>
                                             </a>
                                         </h3>
                                         <!-- <span style="margin:0;padding:0;display:inline;position:relative;top:-5px;"> -->
-                                            <label class="label label-default" ng-show="!country.isNPParty">Non-Party</label>
-                                            <label class="label label-primary" ng-show="country.isNPParty">Party</label>
-                                        <!-- </h3> -->
+
                                     </td>
-                                    <td class="pull-right">
-                                        <div>
+                                    <td class="pull-right" style="padding-top:5px;">
+
+                                        <label class="label label-default" ng-show="!country.isNPParty">Non-Party</label>
+                                        <label class="label label-primary" ng-show="country.isNPParty">Party</label>
+                                    <!-- </h3> -->
+                                        <!-- <div style="font-size:10px;">
                                             <div ng-show="country.isNPSignatory && !country.isNPParty">
                                                 <label class="pull-right">
                                                     <span style="color: #5bc0de;">Signatory</span>
@@ -310,23 +322,23 @@
                                                     <span style="font-size:12px;text-transform:uppercase;color:#999;">Date of entry into force: </span> {{country.entryIntoForce| formatDate}}
                                                 </label>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </td>
                                 </tr>
                             </table>
                         </div>
                         <div class="panel-body" ng-repeat="(key,schema) in country.schemaList " >
                             <div class="col-xs-12">
-                                <div class="row bg-grey1" style="padding:3px; border-radius: 3px;">
+                                <div class="row bg-grey" style="padding:3px; border-radius: 3px;">
                                     <h5 style="padding:0;margin:0;font-size:15px;">
 
-                                         <a href="#" style="cursor:pointer">
-                                            <span class="badge bg-black">{{schema.length}}</span>
+
+                                            <span class="badge bg-darkgrey">{{schema.length}}</span>
                                             <span style="position:relative;top:1px;"
-                                            ng-class="{'color-grey': Permit==0, 'color-black': Permit > 0}">
+                                             ng-class="{'color-grey': Permit==0, 'color-black': Permit > 0}">
                                                 {{key|schemaNamePlural}}
                                             </span>
-                                        </a>
+
                                         <a ng-if="key=='measure'" href="/search/new/measurematrix/countries/{{country.code}}" class=""><i class="fa fa-bar-chart pull-right"></i></a>
                                     </h5>
                                 </div>
