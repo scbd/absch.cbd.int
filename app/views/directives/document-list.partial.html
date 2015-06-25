@@ -336,7 +336,7 @@
                                             <span class="badge bg-darkgrey">{{schema.length}}</span>
                                             <span style="position:relative;top:1px;"
                                              ng-class="{'color-grey': Permit==0, 'color-black': Permit > 0}">
-                                                {{key|schemaNamePlural}}
+                                                {{key|schemaNamePlural}} ({{key|schemaShortName}})
                                             </span>
 
                                         <a ng-if="key=='measure'" href="/search/new/measurematrix/countries/{{country.code}}" class=""><i class="fa fa-bar-chart pull-right"></i></a>
@@ -354,9 +354,10 @@
                                                 <div ng-click="displayDetails = !displayDetails;load(doc,displayDetails)" style="cursor:pointer">
                                                     <!-- <i class="{{key | schemaIcon }}"
                                                     style="font-size:16pt;position:relative;top:3px;"></i> -->
-                                                    <span ng-if="doc.type.indexOf('ABS-FP') >= 0 ">ABS Focal Point</span>
-                                                    <span ng-if="doc.type.indexOf('ABS-FP') < 0 "> CBD Focal Point</span>
-                                                    <span ng-if="key!= 'focalPoint' ">{{key|schemaShortName}}</span>
+                                                    <span class="bold color-litegrey" ng-if="doc.type.indexOf('ABS-FP') >= 0 ">ABS FP</span>
+                                                    <span class="bold color-litegrey" ng-if="doc.type.indexOf('ABS-FP') < 0 "> CBD FP</span>
+                                                    <!-- <span class="bold color-litegrey" ng-if="key!= 'focalPoint' ">{{key|schemaShortName}}</span> -->
+
                                                     <span>{{doc.title}}</span>
                                                     <i class="fa fa-chevron-circle-up pull-right" ng-show="displayDetails"></i>
                                                     <i class="fa fa-chevron-circle-down pull-right" ng-show="!displayDetails"></i>
