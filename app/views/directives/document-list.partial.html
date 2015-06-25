@@ -84,7 +84,10 @@
 
                         <div>
                             <div style="padding:0px 0 0px 0px; ">
-                                <a class="label label-party" id="help-record-country" ng-class="{'label-default':!document.isNPParty, 'label-primary':document.isNPParty}" ng-href="/countries/{{document.doc.government_s}}" data-popover="true" data-html="true" type="country" data-value="{{document.doc.government_s}}">{{document.source}}</a>
+                                <a class="label label-party" id="help-record-country"
+                                ng-class="{'label-default':!document.isNPParty, 'label-primary':document.isNPParty}"
+                                ng-href="/countries/{{document.doc.government_s}}" data-popover="true" data-html="true"
+                                type="country" data-value="{{document.doc.government_s}}">{{document.source}}</a>
                                 <small ng-show="document.isInbetweenParty">(entry into force on {{document.entryIntoForce | formatDate}})</small>
 
                                 <span ng-click="displayDetails = !displayDetails;load(document,displayDetails);" ng-hide="document.schema=='focalpoint'" class="schema">{{document.schema | schemaName}}</span>
@@ -283,7 +286,8 @@
                                     <td style="padding-top:10px;">
                                         <h3 style="margin:0;padding:0;display:inline;">
                                             <a ng-href="countries/{{country.code}}">
-                                                <span class="country-name" style="font-size:2vw;" ng-class="{'color-blue': country.isNPParty,'color-grey': !country.isNPParty }">{{country.name|lstring}}</span>
+                                                <span class="country-name" style="font-size:1.5vw;"
+                                                ng-class="{'color-blue': country.isNPParty,'color-grey': !country.isNPParty }">{{country.name|lstring}}</span>
                                             </a>
                                         </h3>
                                         <!-- <span style="margin:0;padding:0;display:inline;position:relative;top:-5px;"> -->
@@ -315,7 +319,8 @@
                                 </tr>
                             </table>
                         </div>
-                        <div class="panel-body" ng-repeat="(key,schema) in country.schemaList " >
+                        <div class="panel-body" ng-repeat="(key,schema) in country.schemaList" >
+
                             <div class="col-xs-12">
                                 <div class="row bg-grey1" style="padding:3px; border-radius: 3px;">
                                     <h5 style="padding:0;margin:0;font-size:15px;">
@@ -324,7 +329,7 @@
                                             <span class="badge bg-black">{{schema.length}}</span>
                                             <span style="position:relative;top:1px;"
                                             ng-class="{'color-grey': Permit==0, 'color-black': Permit > 0}">
-                                                {{key|schemaNamePlural}}
+                                                {{key|schemaNamePlural}} {{schema.orderKey}}
                                             </span>
                                         </a>
                                         <a ng-if="key=='measure'" href="/search/new/measurematrix/countries/{{country.code}}" class=""><i class="fa fa-bar-chart pull-right"></i></a>

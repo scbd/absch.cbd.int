@@ -8,7 +8,8 @@ app.directive('searchFilterSchemas', function ($http) {
               title: '@title',
               items: '=ngModel',
               field: '@field',
-              query: '=query'
+              query: '=query',
+              previewType: '=previewType'
         },
         link: function ($scope, element, attrs, ngModelController)
         {
@@ -171,7 +172,7 @@ app.directive('searchFilterSchemas', function ($http) {
             function buildConditions (conditions, items) {
                 items.forEach(function (item) {
 
-                    if(item.selected){
+                    if(item.selected && !($scope.previewType == 'group' && item.type=='reference')){
 
                         var subFilterQuery = '(' + $scope.field+':'+item.identifier;
                         if(item.subFilters){
@@ -345,7 +346,7 @@ app.directive('searchFilterSchemas', function ($http) {
                                                             ]
                                                };
 
-            $scope.resource                = { identifier: 'resource',                 title: 'Virtual Library Record' ,
+            $scope.resource                = { identifier: 'resource',                 title: 'Virtual Library Record' , type:'reference',
                                                subFilters : [
                                                                 { name: 'vlrpublicationYear', type: 'multiselect', field: 'publicationYear_is'},
                                                                 { name: 'vlrresourceTypes',   type: 'multiselect' , field: 'resourceTypes_ss'},
@@ -353,16 +354,16 @@ app.directive('searchFilterSchemas', function ($http) {
                                                                 { name: 'vlrLanguages',       type: 'multiselect', field: 'resourceLinksLanguage_ss' }
                                                             ]
                                                };
-            $scope.organization            = { identifier: 'organization',             title: 'ABS Related Organizations' };
-            $scope.meeting                 = { identifier: 'meeting',                  title: 'Meetings &amp; Meeting Outcomes ({{meeting.count}})',
+            $scope.organization            = { identifier: 'organization',             title: 'ABS Related Organizations', type:'reference' };
+            $scope.meeting                 = { identifier: 'meeting',                  title: 'Meetings &amp; Meeting Outcomes ({{meeting.count}})', type:'reference',
                                                subFilters : [
                                                                 { name: 'mtgRange', type: 'select', field: 'startDate_dt'},
                                                             ]
                                              };
-            $scope.notification            = { identifier: 'notification',             title: 'Notifications' };
-            $scope.pressRelease            = { identifier: 'pressRelease',             title: 'Press Releases' };
-            $scope.statement               = { identifier: 'statement',                title: 'Statements' };
-            $scope.news                    = { identifier: 'news',                     title: 'News' };
+            $scope.notification            = { identifier: 'notification',             title: 'Notifications', type:'reference' };
+            $scope.pressRelease            = { identifier: 'pressRelease',             title: 'Press Releases', type:'reference' };
+            $scope.statement               = { identifier: 'statement',                title: 'Statements' , type:'reference'};
+            $scope.news                    = { identifier: 'news',                     title: 'News', type:'reference' };
 
             $scope.terms  = [ $scope.focalPoint, $scope.authority, $scope.database, $scope.measure, $scope.absPermit, $scope.absCheckpoint,
                               $scope.absCheckpointCommunique, $scope.resource, $scope.organization, $scope.meeting, $scope.notification, $scope.pressRelease, $scope.statement, $scope.news ];
@@ -387,6 +388,8 @@ app.directive('searchFilterSchemas', function ($http) {
             }
 
             $scope.$watch('items', onWatch_items);
+
+            $scope.$watch('previewType', $scope.buildQuery);
 
             $scope.refresh = function(selected, schema){
 

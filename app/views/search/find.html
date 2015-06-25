@@ -6,6 +6,14 @@
     /*position: absolute;*/
 }
 
+.not-active{
+    color:rgb(119, 119, 119)!important;
+}
+.active{
+    color:#2a6496!important;
+}
+
+
 </style>
 
 <div ng-controller="FindController" ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart="startTour">
@@ -19,8 +27,17 @@
                 <h1 style="padding-bottom:34px;">
                     <!-- <a class="color-orange fa-11"  ng-click="startIntro()"> <i class="fa fa-youtube-play"></i></a> -->
                     <span class="special-font">Search&nbsp;Information</span>
-                    <a ng-href="#" ng-click="previewType='list'"><i class="fa fa-list"/></a>
-                    <a ng-href="#" ng-click="previewType='group'"><i class="fa fa-th-large"/></a>
+                    <a ng-href="#" ng-click="previewType='list'" class="not-active" ng-class="{'active':previewType=='list'}"><i class="fa fa-list"/>
+                        <md-tooltip>
+                            View result set in list view ordered by creation date
+                        </md-tooltip>
+                    </a>
+                    <a ng-href="#" ng-click="previewType='group'" class="not-active" ng-class="{'active':previewType=='group'}">
+                        <i class="fa fa-th-large"/>
+                        <md-tooltip>
+                            View result set grouped by country
+                        </md-tooltip>
+                    </a>
                 </h1>
 
                 <div class="well">
@@ -40,7 +57,7 @@
                     <input type="text" ng-model="keyword" placeholder=" Keyword " class="form-control keyword" style="margin-bottom:10px;">
 
                     <div id="filterCheckboxes">
-                        <search-filter-schemas  ng-model='schemas' field='schema_s' query='querySchema'></search-filter-schemas>
+                        <search-filter-schemas  ng-model='schemas' field='schema_s' query='querySchema' preview-type="previewType"></search-filter-schemas>
                         <search-filter-themes title='Thematic Areas' ng-model='thematicAreas' field='thematicAreas_ss' query='queryTheme'></search-filter-themes>
 
                         <search-filter-countries title='Countries' ng-model='governments' field='government_s' query='queryGovernment' external-filter="countryResultFilter"></search-filter-countries>

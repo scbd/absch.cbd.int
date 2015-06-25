@@ -184,61 +184,69 @@ label{width:100%;}
 
 
     <h3>
-        <a ng-click="showReferenceFilters=!showReferenceFilters" ng-href="#" style="color:#FA6938"><i class="fa" ng-class="{'fa-caret-right':!showReferenceFilters, 'fa-caret-down':showReferenceFilters}"></i> &nbsp; Reference Records</a>
+        <a ng-click="showReferenceFilters=!showReferenceFilters" ng-href="#" style="color:#FA6938">
+            <i class="fa" ng-class="{'fa-caret-right':!showReferenceFilters, 'fa-caret-down':showReferenceFilters}"></i> &nbsp;
+            Reference Records
+        </a>
+        <div class="alert alert-info col-xs-12" ng-if="previewType=='group'">
+            Reference record filter is only avilable in list preview. please click List icon at top to switch to list preview
+        </div>
     </h3>
-    <div class="main_filter" ng-show="showReferenceFilters || resource.selected" ng-class="{'check_active': resource.selected}">
-        <label>
-            <span class="badge badge-white pull-right">{{resource.count}}</span>
-            <input type="checkbox" ng-model="resource.selected" bind-indeterminate="resource.indeterminate" ng-change="refresh(resource.selected,'resource')">
-            <span class="filter-text">Virtual Library Records   </span>
-        </label>
-        <div ng-show="resource.selected" class="subfilters-section">
-            <div km-select multiple name="vlrresourceTypes" binding-type="string" ng-model="vlrresourceTypes" items="options.resourceTypes()" placeholder="Type of resource"></div></br>
-            <!-- <input type="number" required name="vlrpublicationYear" ng-model="vlrpublicationYear" placeholder="Publication year" /> -->
-            <div km-select multiple name= "vlrLanguages" binding-type="string" ng-model="vlrLanguages" items="options.languages()" placeholder="Available Languages"></div>
+    <div ng-show="previewType=='list'">
+        <div class="main_filter" ng-show="(showReferenceFilters || resource.selected)" ng-class="{'check_active': resource.selected}">
+            <label>
+                <span class="badge badge-white pull-right">{{resource.count}}</span>
+                <input type="checkbox" ng-model="resource.selected" bind-indeterminate="resource.indeterminate" ng-change="refresh(resource.selected,'resource')">
+                <span class="filter-text">Virtual Library Records   </span>
+            </label>
+            <div ng-show="resource.selected" class="subfilters-section">
+                <div km-select multiple name="vlrresourceTypes" binding-type="string" ng-model="vlrresourceTypes" items="options.resourceTypes()" placeholder="Type of resource"></div></br>
+                <!-- <input type="number" required name="vlrpublicationYear" ng-model="vlrpublicationYear" placeholder="Publication year" /> -->
+                <div km-select multiple name= "vlrLanguages" binding-type="string" ng-model="vlrLanguages" items="options.languages()" placeholder="Available Languages"></div>
+            </div>
         </div>
-    </div>
 
-    <div class="main_filter" ng-show="showReferenceFilters || meeting.selected" ng-class="{'check_active': meeting.selected}">
-        <label>
-            <span class="badge badge-white pull-right">{{meeting.count}}</span>
-            <input type="checkbox" ng-model="meeting.selected" bind-indeterminate="meeting.indeterminate" ng-change="refresh(meeting.selected,'meeting')">
-            <span class="filter-text">Meetings &amp; Meeting Outcomes </span>
-        </label>
-        <div ng-show="meeting.selected" class="subfilters-section">
-            <div km-select ng-model="mtgRange" binding-type="string" placeholder="Meeting year" items="options.meetingYear()"></div>
+        <div class="main_filter" ng-show="showReferenceFilters || meeting.selected" ng-class="{'check_active': meeting.selected}">
+            <label>
+                <span class="badge badge-white pull-right">{{meeting.count}}</span>
+                <input type="checkbox" ng-model="meeting.selected" bind-indeterminate="meeting.indeterminate" ng-change="refresh(meeting.selected,'meeting')">
+                <span class="filter-text">Meetings &amp; Meeting Outcomes </span>
+            </label>
+            <div ng-show="meeting.selected" class="subfilters-section">
+                <div km-select ng-model="mtgRange" binding-type="string" placeholder="Meeting year" items="options.meetingYear()"></div>
+            </div>
         </div>
-    </div>
 
-    <div class="main_filter" ng-show="showReferenceFilters || notification.selected" ng-class="{'check_active': notification.selected}">
-        <label>
-             <span class="badge badge-white pull-right">{{notification.count}}</span>
-            <input type="checkbox" ng-model="notification.selected" bind-indeterminate="notification.indeterminate" ng-change="refresh(notification.selected,'notification')">
-            <span class="filter-text">Notifications</span>
-        </label>
-    </div>
+        <div class="main_filter" ng-show="showReferenceFilters || notification.selected" ng-class="{'check_active': notification.selected}">
+            <label>
+                 <span class="badge badge-white pull-right">{{notification.count}}</span>
+                <input type="checkbox" ng-model="notification.selected" bind-indeterminate="notification.indeterminate" ng-change="refresh(notification.selected,'notification')">
+                <span class="filter-text">Notifications</span>
+            </label>
+        </div>
 
-    <div class="main_filter" ng-show="showReferenceFilters || pressRelease.selected" ng-class="{'check_active': pressRelease.selected}">
-        <label>
-            <span class="badge badge-white pull-right">{{pressRelease.count}}</span>
-            <input type="checkbox" ng-model="pressRelease.selected" bind-indeterminate="pressRelease.indeterminate" ng-change="refresh(pressRelease.selected,'pressRelease')">
-            <span class="filter-text">Press Releases </span>
-        </label>
-    </div>
+        <div class="main_filter" ng-show="showReferenceFilters || pressRelease.selected" ng-class="{'check_active': pressRelease.selected}">
+            <label>
+                <span class="badge badge-white pull-right">{{pressRelease.count}}</span>
+                <input type="checkbox" ng-model="pressRelease.selected" bind-indeterminate="pressRelease.indeterminate" ng-change="refresh(pressRelease.selected,'pressRelease')">
+                <span class="filter-text">Press Releases </span>
+            </label>
+        </div>
 
-    <div class="main_filter" ng-show="showReferenceFilters || statement.selected" ng-class="{'check_active': statement.selected}">
-        <label>
-            <span class="badge badge-white pull-right">{{statement.count}}</span>
-            <input type="checkbox" ng-model="statement.selected" bind-indeterminate="statement.indeterminate" ng-change="refresh(statement.selected,'statement')">
-            <span class="filter-text">Statements </span>
-        </label>
-    </div>
+        <div class="main_filter" ng-show="showReferenceFilters || statement.selected" ng-class="{'check_active': statement.selected}">
+            <label>
+                <span class="badge badge-white pull-right">{{statement.count}}</span>
+                <input type="checkbox" ng-model="statement.selected" bind-indeterminate="statement.indeterminate" ng-change="refresh(statement.selected,'statement')">
+                <span class="filter-text">Statements </span>
+            </label>
+        </div>
 
-    <div class="main_filter" ng-show="showReferenceFilters || news.selected" ng-class="{'check_active': news.selected}">
-        <label>
-            <span class="badge badge-white pull-right">{{news.count}}</span>
-            <input type="checkbox" ng-model="news.selected" bind-indeterminate="news.indeterminate" ng-change="refresh(news.selected,'news')">
-            <span class="filter-text">News</span>
-        </label>
+        <div class="main_filter" ng-show="showReferenceFilters || news.selected" ng-class="{'check_active': news.selected}">
+            <label>
+                <span class="badge badge-white pull-right">{{news.count}}</span>
+                <input type="checkbox" ng-model="news.selected" bind-indeterminate="news.indeterminate" ng-change="refresh(news.selected,'news')">
+                <span class="filter-text">News</span>
+            </label>
+        </div>
     </div>
 </div>

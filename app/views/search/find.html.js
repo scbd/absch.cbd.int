@@ -352,9 +352,12 @@ define(['app','underscore',
         $scope.$watch('previewType',     function(newValue, oldValue) {
             if(newValue && oldValue){
                 $scope.rawDocs = undefined;
-                $scope.currentPage=0;
                 $scope.documentCount = 0;
-                //refresh();
+                
+                if($scope.currentPage>0)
+                    $scope.currentPage=0;
+                else
+                    refresh();
             }
         });
         $scope.previewType = 'group';

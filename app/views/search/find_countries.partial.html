@@ -11,9 +11,10 @@
 
             <div class="checkbox" style="margin-top:2px;margin-bottom:2px;padding:0 0 0 5px;">&nbsp;
                 <!-- <div class="glyphicon glyphicon-remove"></div>  -->
-                <label class="label" <label class="label" style="font-size:11px;font-weight:bold;white-space:normal;"
+                <label class="label" <label class="label" style="font-size:13px;font-weight:bold;white-space:normal;"
                 ng-class="{'color-blue bold': item.isNPParty, 'color-grey':!item.isNPParty}">
-                    <input type="checkbox" ng-model="item.selected" ng-change="refresh()">{{item.name.en}} ({{item.count}})</label>
+                    <input type="checkbox" ng-model="item.selected" ng-change="refresh()">{{item.name.en}}</label>
+                <span class="badge pull-right">{{item.count}}</span>
             </div>
 
             <!-- <div class="filter-selected truncate" style="cursor:pointer">
@@ -65,7 +66,7 @@
                     </div>
                     <div class="modal-body">
                         <section layout="row" style="position:relative; top:20px;" flex>
-                            <div class="filter-options">
+                            <div class="filter-options" style="width:100%">
                                 <div ng-class="{'section1':terms.length>0}">
                                     <div class="progress progress-striped active" ng-show="showSelect && terms.length<=0">
                                           <div class="progress-bar"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
@@ -75,7 +76,7 @@
                                     <div style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;padding-left:5px;padding-right:5px;"
                                     ng-repeat="item in (terms | filter: filterCountries | filter:filterByType |orderBy:'name.en')" >
                                         <div class="checkbox" style="margin-top:2px;margin-bottom:2px">&nbsp;
-                                            <label class="label" style="font-size:11px;font-weight:bold;white-space:normal;"
+                                            <label class="label" style="font-size:15px;font-weight:bold;white-space:normal;"
                                             ng-class="{'color-blue bold': item.isNPParty, 'color-grey':!item.isNPParty}">
                                                     <input type="checkbox" ng-model="item.selected" ng-change="refresh()">
                                                     {{item.name.en}}

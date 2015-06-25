@@ -173,10 +173,15 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
 
                                                 country.schemaList = {};
                                                 if (doc.doclist.docs.length > 0) {
+                                                    //addSchema(country);
                                                     _.each(doc.doclist.docs, function(document) {
-                                                        if (!country.schemaList[document.schema_s])
-                                                            country.schemaList[document.schema_s] = [];
 
+
+                                                        if (!country.schemaList[document.schema_s]){
+                                                            // country.schemaList[document.schema_s] = {};
+                                                            // country.schemaList[document.schema_s].orderKey = getSortOrderKey(document.schema_s);
+                                                            country.schemaList[document.schema_s]  = [];
+                                                        }
                                                         country.schemaList[document.schema_s].push({
                                                             id          :   document.id,
                                                             identifier_s:   document.identifier_s,
@@ -186,16 +191,55 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                                                             government  :   {identifier:country.code}
                                                         });
                                                     });
+                                                    //removeEmptySchema(country);
+                                                    // var sorted =  _.sortBy(country.schemaList, function (a, b) {
+                                                    //                                     	      return (a['orderKey'] > b['orderKey'] ? 1 : -1);
+                                                    //                                     	    });
+                                                    // country.schemaList = sorted;
                                                 }
                                                 $scope.transformedGroupDocuments.push(country);
                                             }
                                         });
                                         $scope.loading = false;
-                                        //console.log($scope.transformedGroupDocuments);
+                                        console.log($scope.transformedGroupDocuments);
                                     });
                             }
                         }
                     });
+                    function removeEmptySchema(country){
+                        _.each(country.schemaList, function(schema){
+                            if(schema.length==0)
+                                schema = undefined;
+                        })
+                    }
+                    function addSchema(country){
+                        //country.schemaList
+                        country.schemaList['focalPoint'] = [];
+                        country.schemaList['authority'] = [];
+                        country.schemaList['measure'] = [];
+                        country.schemaList['absPermit'] = [];
+                        country.schemaList['absCheckpoint'] = [];
+                        country.schemaList['absCheckpointCommunique'] = [];
+                    }
+
+                    function getSortOrderKey(schema){
+                            switch (schema) {
+                                case 'focalPoint':
+                                    return 1;
+                                case 'authority':
+                                    return 2;
+                                case 'measure':
+                                    return 3;
+                                case 'absPermit':
+                                    return 4;
+                                case 'absCheckpoint':
+                                    return 5;
+                                case 'absCheckpointCommunique':
+                                    return 6;
+                                default : 10;
+
+                            }
+                    }
 
                     function getCountries() {
 
@@ -500,7 +544,6 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                                 document.schema_s == 'resource');
                         });
                     }
-
 
 
                     //           var originalLeave = $.fn.popover.Constructor.prototype.leave;

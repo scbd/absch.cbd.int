@@ -147,16 +147,16 @@ app.directive('searchFilterThemes', function ($http) {
                 });
             }
 
-            $scope.onclick = function (scope, evt) {
-                scope.item.selected = !scope.item.selected;
-                $scope.ts(scope, evt);
+            $scope.onclick = function (item, evt) {
+                scope.item.selected = !item.item.selected;
+                $scope.ts(item, evt);
             }
 
-            $scope.ts = function (scope, evt) {
+            $scope.ts = function (item, evt) {
 
 //console.log(scope.item);
-                var term = scope.item;
-                term.selected = !scope.item.selected;
+                var term = item.item;
+                term.selected = !item.item.selected;
                 term.indeterminate = !term.selected && (term.indeterminateCounterA + term.indeterminateCounterB) > 0;
 
                 setBroaders(term.broaderTerms, term.selected);
