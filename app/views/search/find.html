@@ -40,6 +40,24 @@
                         </a>
                     </spam>
                 </h1>
+                <div class="col-xs-12 pull-right">
+                    Current Filters :
+                    <label style="cursor:pointer" ng-click="queryStatus()" ng-show="queryPartyStatus && queryPartyStatus.length>0" class="label label-primary">
+                        Party Status &nbsp;<span aria-hidden="true">&times;</span>
+                    </label>
+                    &nbsp;<label style="cursor:pointer"  ng-show="querySchema && querySchema.length>0 && querySchema!='*:*'" class="label label-primary">
+                        Schemas&nbsp;<span aria-hidden="true">&times;</span>
+                    </label>
+                    &nbsp;<label style="cursor:pointer" ng-show="queryGovernment && queryGovernment.length>0 && queryGovernment!='*:*'" class="label label-primary">
+                        Government &nbsp;<span aria-hidden="true">&times;</span>
+                    </label>
+                    &nbsp;<label style="cursor:pointer" ng-show="queryTheme && queryTheme.length>0 && queryTheme!='*:*'" class="label label-primary">
+                        Theamatic Areas &nbsp;<span aria-hidden="true">&times;</span>
+                    </label>
+                    &nbsp;<label style="cursor:pointer" ng-show="queryRegion && queryRegion.length>0 && queryRegion!='*:*'" class="label label-primary">
+                        Regions &nbsp;<span aria-hidden="true">&times;</span>
+                    </label>
+                </div>
 
             </div>
         </div>
@@ -48,10 +66,13 @@
             <div class="col-xs-3" id="leftMenu" >
                 <div class="well">
                     <div style="font-size:16;font-weight:bold;">Party status</div>
-                    <span class="label label-primary">&nbsp;</span> Party to the Nagoya Protocol <br>
-                    <!-- <span class="label label-success">&nbsp;</span> Inbetween party to the Nagoya Protocol <br>
-                    <span class="label label-info">&nbsp;</span> Signatory to the Nagoya Protocol<br> -->
-                    <span class="label label-default">&nbsp;</span> Non-Party
+                    <a ng-click="queryStatus('party')">
+                        <span class="label label-primary" >&nbsp;</span> Party to the Nagoya Protocol
+                    </a>
+                    <br>
+                    <a ng-click="queryStatus('nonParty')">
+                        <span class="label label-default">&nbsp;</span> Non-Party
+                    </a>
                 </div>
                 <div class="well">
 
