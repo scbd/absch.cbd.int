@@ -148,15 +148,13 @@ app.directive('searchFilterThemes', function ($http) {
             }
 
             $scope.onclick = function (item, evt) {
-                scope.item.selected = !item.item.selected;
+                item.selected = !item.selected;
                 $scope.ts(item, evt);
             }
 
             $scope.ts = function (item, evt) {
 
-//console.log(scope.item);
-                var term = item.item;
-                term.selected = !item.item.selected;
+                var term = item.item||item;
                 term.indeterminate = !term.selected && (term.indeterminateCounterA + term.indeterminateCounterB) > 0;
 
                 setBroaders(term.broaderTerms, term.selected);
@@ -219,7 +217,8 @@ app.directive('searchFilterThemes', function ($http) {
                     if(value && $scope.terms.length==0){
 
                         $http.get('/api/v2013/thesaurus/domains/CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924/terms').success(function (data) {
-                            $scope.terms = thesaurus.buildTree(data);
+                            $scope.termsArray = data;
+                            $scope.terms = thesaurus.buildTree($scope.termsArray);
 
                             $scope.termsMap   = flatten($scope.terms, {});
                             $scope.termsArray = _.values($scope.termsMap);

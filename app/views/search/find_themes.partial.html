@@ -5,100 +5,131 @@
             {{title | lstring:locale}}</a>
     </h3>
 
-    <div class="list-group-item-expand">
+    <!-- <div class="list-group-item-expand">
         <div ng-repeat="item in terms | orderBy:'title' | filter:showSelected" ng-class="ccc(item)" ng-click="ts(this, $event)">
-        		<label><!-- <div class="glyphicon glyphicon-remove"></div>  -->
-                    <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">
-                    <strong>&nbsp;{{item.title.en}} ({{item.count ? item.count : 0}})</strong>
-                </label>
+            <label>
+                <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">
+                <strong>&nbsp;{{item.title.en}} ({{item.count ? item.count : 0}})</strong>
+            </label>
+            <div class="checkbox" ng-repeat="item in item.narrowerTerms | filter:showSelected" style="padding-left:20px">
+                <label>
+                    <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">&nbsp;{{item.title.en}} ({{item.count ? item.count : 0}})</label>
                 <div class="checkbox" ng-repeat="item in item.narrowerTerms | filter:showSelected" style="padding-left:20px">
-                    <label><!-- <div class="glyphicon glyphicon-remove"></div>  -->
+                    <label>
                         <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">&nbsp;{{item.title.en}} ({{item.count ? item.count : 0}})</label>
-                    <div class="checkbox" ng-repeat="item in item.narrowerTerms | filter:showSelected" style="padding-left:20px">
-                        <label><!-- <div class="glyphicon glyphicon-remove"></div>  -->
+                    <div class="checkbox" ng-repeat="item in item.narrowerTerms" style="padding-left:20px">
+                        <label>
                             <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">&nbsp;{{item.title.en}} ({{item.count ? item.count : 0}})</label>
-                        <div class="checkbox" ng-repeat="item in item.narrowerTerms" style="padding-left:20px">
-                            <label><!-- <div class="glyphicon glyphicon-remove"></div>  -->
+                        <div class="checkbox" ng-repeat="item in item.narrowerTerms | filter:showSelected" style="padding-left:20px">
+                            <label>
                                 <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">&nbsp;{{item.title.en}} ({{item.count ? item.count : 0}})</label>
-                            <div class="checkbox" ng-repeat="item in item.narrowerTerms | filter:showSelected" style="padding-left:20px">
-                                <label><!-- <div class="glyphicon glyphicon-remove"></div>  -->
+                            <div class="checkbox" ng-repeat="item in item.narrowerTerms | filter:showSelected" style="background-color:red;padding-left:20px">
+                                <label>
                                     <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">&nbsp;{{item.title.en}} ({{item.count ? item.count : 0}})</label>
-                                <div class="checkbox" ng-repeat="item in item.narrowerTerms | filter:showSelected" style="background-color:red;padding-left:20px">
-                                    <label><!-- <div class="glyphicon glyphicon-remove"></div>  -->
-                                        <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">&nbsp;{{item.title.en}} ({{item.count ? item.count : 0}})</label>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
         </div>
-    </div>
+    </div> -->
+    <div class="list-group-item-expand" style="position:relative;cursor:pointer">
+		<div ng-repeat="item in termsArray | filter:{selected:true}" ng-click="onclick(item, $event)">
+			<div class="label label-selected-facet">
+				<div class="truncate">
+					{{item.title|lstring}} ({{item.count}})
+				</div>
+                <div style="position:absolute;right:6px;top:6px" class="fa fa-remove"></div>
+			</div>
+		</div>
+	<div>
 
     <style>
-    .list-group-item .not:before {
-        content:"\f054";
-        font-family: FontAwesome;
-        font-style: normal;
-        font-weight: normal;
-        text-decoration: inherit;
-        color: #000;
-        font-size: 18px;
-        padding-right: 0.5em;
-        position: absolute;
-        top: 10px;
-        right: 0;
-    }
-    .section{
-        height:400px;
-        overflow-y:auto
-    }
+        .list-group-item .not:before {
+            content: "\f054";
+            font-family: FontAwesome;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: inherit;
+            color: #000;
+            font-size: 18px;
+            padding-right: 0.5em;
+            position: absolute;
+            top: 10px;
+            right: 0;
+        }
 
-.localBtn{
-    padding: 6px 12px;
-    font-size: 14px;
-    border: 1px solid transparent;
-    background-color: #3276b1;
-}
+        .section {
+            height: 400px;
+            overflow-y: auto
+        }
 
+        .localBtn {
+            padding: 6px 12px;
+            font-size: 14px;
+            border: 1px solid transparent;
+            background-color: #3276b1;
+        }
+        .label-selected-facet {
+          position: relative;
+          display: block;
+          background-color: #12496B;
+          margin: 4px 0;
+          padding-right: 20px;
+          text-align: left;
+          height: 23px;
+          padding-top: 6px;
+          border-radius: 3px;
+        }
+        .truncate {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
     </style>
 
-<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="themeModal">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="myModalLabel"> {{title | lstring:locale}}</h4>
-            </div>
-            <div class="modal-body">
-                <div class="filter-options subfilters-section">
-                <div ng-class="{'section':terms.length>0}">
-                    <div class="progress progress-striped active" ng-show="showSelect && terms.length<=0">
-                          <div class="progress-bar"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
-                            <span class="sr-only">45% Complete</span>
-                          </div>
-                    </div>
-                    <div ng-repeat="item in terms" class="checkbox" id="chkboxList">
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="themeModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel"> {{title | lstring:locale}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="filter-options subfilters-section">
+                        <div ng-class="{'section':terms.length>0}">
+                            <div class="progress progress-striped active" ng-show="showSelect && terms.length<=0">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                    <span class="sr-only">45% Complete</span>
+                                </div>
+                            </div>
+                            <div ng-repeat="item in terms" class="checkbox" id="chkboxList">
 
-                        <label>
-                            <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">
-                            <strong>&nbsp;{{item.title.en}} ({{item.count ? item.count : 0}})</strong>
-                        </label>
-                        <div class="checkbox" ng-repeat="item in item.narrowerTerms" style="padding-left:20px">
-                            <label>
-                                <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">&nbsp;{{item.title.en}} ({{item.count ? item.count : 0}})</label>
-                            <div class="checkbox" ng-repeat="item in item.narrowerTerms" style="padding-left:20px">
                                 <label>
-                                    <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">&nbsp;{{item.title.en}} ({{item.count ? item.count : 0}})</label>
+                                    <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">
+                                    <strong>&nbsp;{{item.title.en}} ({{item.count ? item.count : 0}})</strong>
+                                </label>
                                 <div class="checkbox" ng-repeat="item in item.narrowerTerms" style="padding-left:20px">
                                     <label>
                                         <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">&nbsp;{{item.title.en}} ({{item.count ? item.count : 0}})</label>
                                     <div class="checkbox" ng-repeat="item in item.narrowerTerms" style="padding-left:20px">
                                         <label>
                                             <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">&nbsp;{{item.title.en}} ({{item.count ? item.count : 0}})</label>
-                                        <div class="checkbox" ng-repeat="item in item.narrowerTerms" style="background-color:red;padding-left:20px">
+                                        <div class="checkbox" ng-repeat="item in item.narrowerTerms" style="padding-left:20px">
                                             <label>
                                                 <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">&nbsp;{{item.title.en}} ({{item.count ? item.count : 0}})</label>
+                                            <div class="checkbox" ng-repeat="item in item.narrowerTerms" style="padding-left:20px">
+                                                <label>
+                                                    <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">&nbsp;{{item.title.en}} ({{item.count ? item.count : 0}})</label>
+                                                <div class="checkbox" ng-repeat="item in item.narrowerTerms" style="background-color:red;padding-left:20px">
+                                                    <label>
+                                                        <input type="checkbox" ng-model="item.selected" bind-indeterminate="item.indeterminate" ng-click="ts(this, $event)">&nbsp;{{item.title.en}} ({{item.count ? item.count : 0}})</label>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -106,14 +137,12 @@
                         </div>
                     </div>
                 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn localBtn btn-primary" data-dismiss="modal">Close</button>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn localBtn btn-primary" data-dismiss="modal">Close</button>
-          </div>
         </div>
     </div>
-</div>
 
 
 </div>
