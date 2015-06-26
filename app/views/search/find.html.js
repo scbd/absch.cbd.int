@@ -9,8 +9,8 @@ define(['app','underscore',
     '/app/views/directives/search-filter-dates.partial.html.js',
     '/app/views/directives/document-list.partial.html.js', 'bootstrap-datepicker','moment'], function (app,_) {
 
-    app.controller('FindController', ['$scope', '$rootScope', '$http', '$timeout', '$q','realm', '$routeParams','$location',
-        function ($scope, $rootScope, $http, $timeout, $q, realm, $routeParams,$location) {
+    app.controller('FindController', ['$scope', '$rootScope', '$http', '$timeout', '$q','realm', '$routeParams','$location','$element',
+        function ($scope, $rootScope, $http, $timeout, $q, realm, $routeParams,$location, $element) {
 
 
         $scope.startTour=false;
@@ -353,7 +353,7 @@ define(['app','underscore',
             if(newValue && oldValue){
                 $scope.rawDocs = undefined;
                 $scope.documentCount = 0;
-                
+
                 if($scope.currentPage>0)
                     $scope.currentPage=0;
                 else
@@ -380,6 +380,23 @@ define(['app','underscore',
             },100);
             //console.log(data,    $scope.keyword );
         })
+
+        $element.find('[data-toggle="tooltip"]').tooltip()
+        var isMenuVisisble = true;
+        $('#toggleMenu').click(function() {
+            isMenuVisisble = !isMenuVisisble;
+
+            $( "#leftMenu" ).toggle( "slide" );
+            if(!isMenuVisisble){
+                $('#search-results').removeClass('col-xs-9');
+                //$('#search-results').addClass('col-xs-12');
+            }
+            else {
+                //$('#search-results').removeClass('col-xs-12');
+                $('#search-results').addClass('col-xs-9');
+            }
+        });
+
     }]);
 
 });
