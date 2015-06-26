@@ -191,17 +191,12 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                                                             government  :   {identifier:country.code}
                                                         });
                                                     });
-                                                    //removeEmptySchema(country);
-                                                    // var sorted =  _.sortBy(country.schemaList, function (a, b) {
-                                                    //                                     	      return (a['orderKey'] > b['orderKey'] ? 1 : -1);
-                                                    //                                     	    });
-                                                    // country.schemaList = sorted;
                                                 }
                                                 $scope.transformedGroupDocuments.push(country);
                                             }
                                         });
                                         $scope.loading = false;
-                                        console.log($scope.transformedGroupDocuments);
+                                        //console.log($scope.transformedGroupDocuments);
                                     });
                             }
                         }
@@ -513,12 +508,12 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                     });
 
                     $scope.updateScrollPage = function() {
-                        console.log($scope.currentPage);
+
+                        if($scope.transformedGroupDocuments.length == $scope.documentCount)
+                            return
+
                         $scope.loading = true;
-                        // if (!$scope.currentPage)
-                        //     $scope.currentPage = 1;
-                        // else
-                            $scope.currentPage = $scope.currentPage + 1;
+                        $scope.currentPage = $scope.currentPage + 1;
                     }
 
                     function canUserEdit(document) {

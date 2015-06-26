@@ -1,4 +1,4 @@
-define(['app','underscore',
+define(['app','underscore','/app/js/common.js',
     'introjs','scbd-angularjs-services', 'scbd-angularjs-filters', 'scbd-angularjs-controls',
     '/app/views/forms/view/record-loader.directive.html.js',
     '/app/views/search/find_schemas.partial.html.js',
@@ -7,10 +7,11 @@ define(['app','underscore',
     '/app/views/search/find_facets.partial.html.js',
     '/app/views/search/find_themes.partial.html.js',
     '/app/views/directives/search-filter-dates.partial.html.js',
-    '/app/views/directives/document-list.partial.html.js', 'bootstrap-datepicker','moment'], function (app,_) {
+    '/app/views/directives/document-list.partial.html.js', 'bootstrap-datepicker','moment'],
+     function (app,_) {
 
-    app.controller('FindController', ['$scope', '$rootScope', '$http', '$timeout', '$q','realm', '$routeParams','$location',
-        function ($scope, $rootScope, $http, $timeout, $q, realm, $routeParams,$location) {
+    app.controller('FindController', ['$scope', '$rootScope', '$http', '$timeout', '$q','realm', '$routeParams','$location','$element','commonjs',
+        function ($scope, $rootScope, $http, $timeout, $q, realm, $routeParams,$location, $element, commonjs) {
 
 
         $scope.startTour=false;
@@ -85,6 +86,7 @@ define(['app','underscore',
         $scope.queryKeywords   = '*:*';
         $scope.displayDetails = false;
         $scope.countryResultFilter = [];
+        $scope.queryPartyStatus = '';
 
 		    $scope.sortBy = '';
 		    $scope.sortOptions = [
@@ -150,7 +152,7 @@ define(['app','underscore',
             if($scope.queryTheme)      q += ' AND (' + $scope.queryTheme + ')';
               //console.log('region: ', q);
             if($scope.queryRegion)      q += ' AND (' + $scope.queryRegion + ')';
-
+            if($scope.queryPartyStatus) q += ' AND (' + $scope.queryPartyStatus + ')';
             var orderByFields;
 
             if(!$scope.orderBy)
@@ -325,6 +327,7 @@ define(['app','underscore',
         $scope.clearFilter = function(){
 
             $scope.keyword = "";
+            $scope.queryPartyStatus = "";
             $scope.$broadcast("clearFilter",{});
         }
 
@@ -353,7 +356,7 @@ define(['app','underscore',
             if(newValue && oldValue){
                 $scope.rawDocs = undefined;
                 $scope.documentCount = 0;
-                
+
                 if($scope.currentPage>0)
                     $scope.currentPage=0;
                 else
@@ -380,6 +383,40 @@ define(['app','underscore',
             },100);
             //console.log(data,    $scope.keyword );
         })
+
+        $element.find('[data-toggle="tooltip"]').tooltip()
+        var isMenuVisisble = true;
+        $('#toggleMenu').click(function() {
+            isMenuVisisble = !isMenuVisisble;
+
+            $( "#leftMenu" ).toggle( "slide" );
+            if(!isMenuVisisble){
+                $('#search-results').removeClass('col-xs-9');
+                //$('#search-results').addClass('col-xs-12');
+            }
+            else {
+                //$('#search-results').removeClass('col-xs-12');
+                $('#search-results').addClass('col-xs-9');
+            }
+        });
+
+        $scope.queryStatus = function(type){
+
+            commonjs.getCountries()
+            .then(function(data){
+
+                var npParties = _.where(data, {isNPParty:true});
+                if(type=='party' || type == 'nonParty'){
+                    $scope.queryPartyStatus = (type =='nonParty' ? '-' : '') +
+                                        ('government_s:(' + _.pluck(npParties, 'code') +
+                                        ')').toLowerCase().replace(/,/g, ' ');
+                }
+                else {
+                    $scope.queryPartyStatus = '';
+                }
+                $scope.currentPage=0; refresh();
+            });
+        }
     }]);
 
 });
