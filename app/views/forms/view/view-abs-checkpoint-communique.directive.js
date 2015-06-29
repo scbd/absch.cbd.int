@@ -168,7 +168,7 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 			});
 
 			function getContacts(document){
-				if($scope.emailList)
+				if(!document || $scope.emailList)
 					return;
 
 				$scope.emailList = [];
