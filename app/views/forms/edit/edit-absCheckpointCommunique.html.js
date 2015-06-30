@@ -28,14 +28,18 @@ define(['app', '/app/views/forms/edit/edit.js',
                                         }); },
       checkpoints         : function () {
             var checkpoint = storage.documents.query("(type eq 'absCheckpoint')",undefined,{body:true,cache:false});
-            return $q.all(checkpoint).then(function(o){
-                 var checkpoints =  [];
-                  o.data.Items.forEach(function(checkpoint){
-                    checkpoints.push({"title": checkpoint.title.en,"identifier": checkpoint.identifier, "body": checkpoint.body});
-                  });
-                  $scope.checkpointList = checkpoints;
-                  return checkpoints;
-            });
+            return $q.when(checkpoint)
+                    .then(function(o){
+                         var checkpoints =  [];
+                          o.data.Items.forEach(function(checkpoint){
+                            checkpoints.push({"title": checkpoint.title.en,"identifier": checkpoint.identifier, "body": checkpoint.body});
+                          });
+                          $scope.checkpointList = checkpoints;
+                          return checkpoints;
+                    })
+                    .catch(function(error){
+                        console.log(error);
+                    });
         }
     });
 

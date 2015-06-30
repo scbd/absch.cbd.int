@@ -9,7 +9,8 @@ app.directive('searchFilterSchemas', function ($http) {
               items: '=ngModel',
               field: '@field',
               query: '=query',
-              previewType: '=previewType'
+              previewType: '=previewType',
+              selectedFilters : '=selectedFilters'
         },
         link: function ($scope, element, attrs, ngModelController)
         {
@@ -32,6 +33,9 @@ app.directive('searchFilterSchemas', function ($http) {
             $scope.permitIssuanceDate= '*:*'
             $scope.permitExpiryDate= '*:*'
             $scope.focalPointQuery = '';
+
+            if(!$scope.selectedFilters)
+                $scope.selectedFilters = [];
 
             $scope.options  = {
                jurisdiction             : function () { return $http.get("/api/v2013/thesaurus/domains/7A56954F-7430-4B8B-B733-54B8A5E7FF40/terms",  { cache: true })
@@ -170,37 +174,46 @@ app.directive('searchFilterSchemas', function ($http) {
             }
 
             function buildConditions (conditions, items) {
+                $scope.selectedFilters=[];
                 items.forEach(function (item) {
 
                     if(item.selected && !($scope.previewType == 'group' && item.type=='reference')){
 
+                        $scope.selectedFilters.push({type:'schema', identifier:item.identifier, value:item.title, count:item.count});
+
                         var subFilterQuery = '(' + $scope.field+':'+item.identifier;
                         if(item.subFilters){
                             item.subFilters.forEach(function(filter){
-                                if(filter.type=='select'){
+                                if(filter.type=='select' || filter.type=='multiselect'){
                                     if( $scope[filter.name] && $scope[filter.name].length > 0){
+
 
                                         var selectedValues = $scope[filter.name];
                                         if(typeof selectedValues[0]== "object" )
                                             selectedValues = _.pluck(selectedValues, "identifier");
 
-                                        subFilterQuery = subFilterQuery + ' AND (' + filter.field +':'+ selectedValues + ')';
-                                    }
-                                }
-                                else if(filter.type=='multiselect'){
-                                    if( $scope[filter.name] && $scope[filter.name].length > 0){
+                                        if(filter.type=='select' && !_.isArray(selectedValues))
+                                            selectedValues = [selectedValues];
 
-                                        var selectedValues = $scope[filter.name];
-                                        if(typeof selectedValues[0]== "object" )
-                                            selectedValues = _.pluck(selectedValues, "identifier");
+                                        subFilterQuery = subFilterQuery + ' AND (' + filter.field +':('+ selectedValues.join(' ') + '))';
 
-                                        subFilterQuery = subFilterQuery + ' AND (' + filter.field +':'+ selectedValues.join(' OR ' + filter.field + ': ') + ')';
+                                        _.each(selectedValues, function(value){
+                                            var selectedItem = $scope[filter.name + 'Api'].getItem(value);
+                                            $scope.selectedFilters.push({
+                                                        type:'subFilter', schema:item.identifier, value:value, identifier:filter.name,
+                                                        count: selectedItem && selectedItem.metadata ? selectedItem.metadata.facet : undefined,
+                                                        isTerm : true
+                                                    });
+                                        })
                                     }
                                 }
                                 else if(filter.type=='calendar'){
                                         var selectedValues = $scope[filter.name];
                                         if(selectedValues != '*:*'){
                                             subFilterQuery = subFilterQuery + ' AND ' + selectedValues;
+                                            $scope.selectedFilters.push({
+                                                        type:'subFilter', schema:item.identifier, value:filter.name + '(' + selectedValues + ')', identifier:filter.name
+                                                    });
                                         }
                                 }
                                 else if(filter.type=='radio'){
@@ -209,8 +222,12 @@ app.directive('searchFilterSchemas', function ($http) {
                                     if(selectedValues!=undefined && parseInt(selectedValues) != -2){//skipp All option
                                         if(parseInt(selectedValues) == -1)
                                             subFilterQuery = subFilterQuery + ' AND NOT ' + filter.field + ':*';
-                                        else
+                                        else{
                                             subFilterQuery = subFilterQuery + ' AND (' + filter.field +':'+ selectedValues + ')';
+                                            $scope.selectedFilters.push({
+                                                        type:'subFilter', schema:item.identifier, value:filter.name + '(' + selectedValues + ')', identifier:filter.name
+                                                    });
+                                        }
                                     }
                                 }
                                 else if(filter.type=='checkbox'){
@@ -222,8 +239,12 @@ app.directive('searchFilterSchemas', function ($http) {
                                     }
                                 }
                                 else {
-                                    if($scope[filter.name]!=null)
+                                    if($scope[filter.name]!=null){
                                         subFilterQuery = subFilterQuery + ' AND ('  + filter.field +':'+  $scope[filter.name] + ')';
+                                        $scope.selectedFilters.push({
+                                                    type:'subFilter', schema:item.identifier, value:filter.name + '(' + $scope[filter.name] + ')', identifier:filter.name
+                                                });
+                                    }
                                 }
                             });
                         }
@@ -247,6 +268,7 @@ app.directive('searchFilterSchemas', function ($http) {
                    var item =  _.where(data,{identifier:facets[i]});
 
                    if(item.length>0){
+                       item[0].metadata = {facet : facets[i+1]};
                         item[0].title.en += ' (' + facets[i+1] + ')';
                     }
                 };
@@ -474,7 +496,7 @@ app.directive('searchFilterSchemas', function ($http) {
 
             $scope.$on("clearFilter", function(evt, info){
 
-                $scope.$emit('clearSelectSelection');
+                $scope.$broadcast('clearSelectSelection');
                 $scope.terms.forEach(function(data){
                     if(data.selected){
                         data.selected = false;
@@ -492,6 +514,34 @@ app.directive('searchFilterSchemas', function ($http) {
                 $scope.buildQuery();
 
             });
+
+            $scope.$on("removeFilter", function(evt, info){
+
+                //if schema clear all subFilters
+                if(info.data.type == "schema"){
+                    var schema = $scope[info.data.identifier];
+                    if(schema){
+                        schema.selected = false;
+                        _.each(schema.subFilters, function(filter){
+                            if(filter.type=='select' || filter.type=='multiselect'){
+                                if($scope[filter.name + 'Api']){
+                                    $scope[filter.name + 'Api'].unSelectAll();
+                                }
+                            }
+                        });
+                    }
+                }
+                else if(info.data.type == "subFilter"){
+                    if($scope[info.data.identifier + 'Api']){
+                        $scope[info.data.identifier + 'Api'].unSelectItem({identifier:info.data.value});
+                    }
+                }
+
+                $scope.buildQuery();
+
+            });
+
+
             // $('.dropdownCheck').on("click", "*", function (e) {
             //     e.stopPropagation();
             // });
