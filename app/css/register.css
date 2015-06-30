@@ -1,3 +1,10 @@
+.container-full{
+	background-color:#eee;
+	padding-bottom:0;
+}
+
+
+
 .table {
 	margin-bottom:0;
 	width:auto;
@@ -140,7 +147,7 @@ legend{
 	color:#666;
 	margin-top:5px;
 	padding-top:3px;
-	//border-top:1px solid #fefefe;
+	/*//border-top:1px solid #fefefe;*/
 
 }
 .btn-commonformat-header-national {
@@ -167,39 +174,61 @@ legend{
     margin-bottom: 20px;
     font-size:14px;
     text-decoration: none;
- 	background-color: #ddd;
+ 	background-color: #ccc;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
+	border-color:#ccc;
 }
 
 .btn-commonformat:hover {
- 	background-color: #fff;
+	border: 0;
+	border-left:#418BCA solid 5px;
+	box-shadow: 1px 1px 1px rgba(0, 0, 0, .3);
+
+	color:#111;
+	text-decoration: none;
+	padding-left:10px;
+	padding-right:10px;
+	background-color: #fff!important;
+	padding:5px;
+
+
+	-webkit-border-radius: 3px;
+	-webkit-border-top-left-radius: 0px;
+	-webkit-border-bottom-left-radius: 0px;
+	-moz-border-radius: 3px;
+	-moz-border-radius-topleft: 0px;
+	-moz-border-radius-bottomleft: 0px;
+	border-radius: 3px;
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
 }
 
 
 
  .btn-commonformat-selected {
-  	border:0;
-	border-left:#418BCA solid 3px;
+	border: 0;
+	border-left:#418BCA solid 5px;
+	box-shadow: 1px 1px 1px rgba(0, 0, 0, .3);
 
-   color:#111;
-   text-decoration: none;
-   padding-left:10px;
-   padding-right:10px;
-   background-color: #FFF!important;
-   padding:5px;
+	color:#111;
+	text-decoration: none;
+	padding-left:10px;
+	padding-right:10px;
+	background-color: #fff!important;
+	padding:5px;
 
 
--webkit-border-radius: 3px;
--webkit-border-top-left-radius: 0px;
--webkit-border-bottom-left-radius: 0px;
--moz-border-radius: 3px;
--moz-border-radius-topleft: 0px;
--moz-border-radius-bottomleft: 0px;
-border-radius: 3px;
-border-top-left-radius: 0px;
-border-bottom-left-radius: 0px;
+	-webkit-border-radius: 3px;
+	-webkit-border-top-left-radius: 0px;
+	-webkit-border-bottom-left-radius: 0px;
+	-moz-border-radius: 3px;
+	-moz-border-radius-topleft: 0px;
+	-moz-border-radius-bottomleft: 0px;
+	border-radius: 3px;
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
   }
 
  .btn-commonformat-reference-selected {

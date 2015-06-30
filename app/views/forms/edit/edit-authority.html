@@ -1,4 +1,4 @@
-﻿<div class="well no-shadow thin-border" style="margin-top:20px;" ng-controller="editAuthority"
+﻿<div class="well no-shadow thin-border" style="margin-top:0px;" ng-controller="editAuthority"
 ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart="startTour">
 
   <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
@@ -254,7 +254,7 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
 
 
         <div ng-show="tab=='review'" km-tab="review">
-            
+
 
             <div class="btn-group" ng-show="reviewDocument.header.languages.length>1">
                 <input type="button" class="btn" ng-class="{'active' : review.locale==locale, 'btn-info' : review.locale==locale}" ng-repeat="locale in document.header.languages" ng-click="$parent.review.locale = locale" value="{{locale | uppercase}}" />

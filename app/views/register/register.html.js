@@ -12,10 +12,10 @@ define(['app','linqjs', 'angular-localizer',
 
   app.controller("RegisterController",
     ["$rootScope", "$location" , "$scope", "$q", "$window", "IStorage", "underscore",
-     "schemaTypes", "$timeout","$filter", "$routeParams", "$cookies","bootbox","realm","IWorkflows",
+     "schemaTypes", "$timeout","$filter", "$routeParams", "$cookies","bootbox","realm","IWorkflows", '$element',
 
 	  function ($rootScope, $location, $scope, $q, $window, storage, _,
-      schemaTypes, $timeout, $filter, $routeParams, $cookies,bootbox,realm,workflows) {
+      schemaTypes, $timeout, $filter, $routeParams, $cookies,bootbox,realm,workflows, $element) {
 
 
 	$rootScope.breadcrumbsParam = "asdasd";
@@ -686,6 +686,28 @@ define(['app','linqjs', 'angular-localizer',
         }, 10000);
       }
     });
+
+
+
+	$element.find('[data-toggle="tooltip"]').tooltip()
+
+	var isMenuVisisble = true;
+	$scope.isMenuVisisble = true;
+
+	$('#toggleMenu').click(function() {
+		isMenuVisisble = !isMenuVisisble;
+
+		$( "#leftMenu" ).toggle( "slide" );
+		if(!isMenuVisisble){
+			$('#main').removeClass('col-xs-9');
+			$('#main').addClass('col-xs-12');
+		}
+		else {
+			$('#main').removeClass('col-xs-12');
+			$('#main').addClass('col-xs-9');
+		}
+	});
+
 
   }]);
 });

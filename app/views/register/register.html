@@ -2,13 +2,46 @@
 
 <div ng-cloak ng-controller="RegisterController" >
 
-<div class="container-fluid">
+<div class="container-fluid" >
+
+
+
+<style>
+.sidebar-title{
+
+    padding:5px 5px 5px 10px;
+    margin:0;
+    font-size:18px;
+
+}
+</style>
+
+<div class="row">
+  <div class="col-xs-3 sidebar" style="position:relative;left:0;margin-left:-15px;">
+<div class="sidebar-title" ng-class="{'bg-grey': !isMenuVisisble, 'bg-medgrey':isMenuVisisble}" >
+
+    <div class="special-font" id="toggleMenu" ng-click="isMenuVisisble=!isMenuVisisble">
+        <a  ng-hide="isMenuVisisble" id="toggleMenu" href="#" class="material-icons pull-left">menu</i></a>
+        Management Center
+        <a ng-hide="!isMenuVisisble"  href="#"  class="color-white material-icons pull-right">clear</i></a>
+    </div>
+
+</div>
+</div>
+</div>
+
       <div class="row">
-        <div class="col-xs-3 sidebar">
+        <div class="col-xs-3 " style="position:relative;left:0;margin-left:-15px;">
+
+
+
+            <md-content layout-padding style="background-color:#f5f5f5;" id="leftMenu">
+
+
+
 
 
     <div id="document_type_links" ng-show="user.isAuthenticated">
-        <h1 class="special-font">Management Center</h1>
 
     <div class="box bg-none" style="margin-bottom:20px;">
                     <!-- <div style="font-size:16;font-weight:bold;">Legend</div> -->
@@ -139,7 +172,7 @@
                         <div class="btn-commonformat well" ng-class="{ 'btn-commonformat-selected' : document_type==type ,'btn-commonformat-reference-selected' : document_type=='resource' && document_type==type}">
                           <div class="btn-commonformat-national" ng-class="{'btn-commonformat-reference':document_types[type].abbreviation=='VLR'}">
 
-  
+
                                <i class="{{type | schemaIcon }}" style="font-size:16pt;position:relative;top:3px;"></i>
                                 {{document_types[type].abbreviation}}
 
@@ -177,11 +210,11 @@
         </div>
       </div>
 
-
+  </md-content>
 
 
         </div>
-        <div class="col-xs-9  main">
+        <div class="col-xs-9" id="main" >
 
                 <ng-include src="subTemplateUrl"  ng-show="user.isAuthenticated"></ng-include>
 
