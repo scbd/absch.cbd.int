@@ -145,7 +145,7 @@ define(['app','underscore','/app/js/common.js',
             }
             else
             {
-                 q += ' AND (schema_s:' + schema.join(' OR schema_s:') + ')';
+                 q += ' AND (schema_s:(' + schema.join(' ') + '))';
                  //console.log(q);
             }
             if($scope.queryGovernment) q += ' AND (' + $scope.queryGovernment + ')';
@@ -230,7 +230,7 @@ define(['app','underscore','/app/js/common.js',
 
                 if(!$scope.schemas) {
                     var queryFacetsParameters = {
-                        'q': '(realm_ss:' + realm.value.toLowerCase() + ' or realm_ss:absch) AND NOT version_s:* AND (schema_s:' + schema.join(' OR schema_s:') + ')',
+                        'q': '(realm_ss:' + realm.value.toLowerCase() + ' or realm_ss:absch) AND NOT version_s:* AND (schema_s:(' + schema.join(' ') + '))',
                         'fl': '', 		//fields for results.
                         'wt': 'json',
                         'rows': 0,		//limit
@@ -254,41 +254,6 @@ define(['app','underscore','/app/js/common.js',
                 }
             }).error(function (error) { console.log('onerror'); console.log(error); });
         };
-        // $scope.query = function() {
-        //
-        //     // NOT version_s:* remove non-public records from resultset
-        //     var q = 'NOT version_s:* AND realm_ss: ' + realm.value.toLowerCase() + ' AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment;
-        //
-        //     var queryParameters = {
-        //         'q': q + ' AND government_s:*',
-        //         'sort': 'government_EN_t asc, createdDate_dt desc, title_t asc',
-        //         'fl': 'id,title_t,description_t,url_ss,schema_EN_t,date_dt,government_EN_t,schema_s,summary_EN_t,jurisdiction_EN_t, type_ss, uniqueIdentifier_s',
-        //         'wt': 'json',
-        //         'start': 0,
-        //         'rows': 1000,
-        //         'cb': new Date().getTime(),
-        //         'group': true,
-        //         'group.field': 'government_s',
-        //         'group.limit': 1000,
-        //         'group.sort': 'government_EN_t asc'
-        //     };
-        //
-        //     $http.get('/api/v2013/index/select', {
-        //         params: queryParameters
-        //     }).success(function(data) {
-        //
-        //         $scope.documents = data.grouped.government_s.groups;
-        //         $scope.records = $scope.documents;
-        //
-        //
-        //         $scope.updateMap($scope.records, $scope.documents, "#428bca");
-        //         //console.log($scope.documents)
-        //
-        //     }).error(function(error) {
-        //         console.log('onerror');
-        //         console.log(error);
-        //     });
-        // };
 
         //============================================================
         //
@@ -405,10 +370,18 @@ define(['app','underscore','/app/js/common.js',
             commonjs.getCountries()
             .then(function(data){
 
-                var npParties = _.where(data, {isNPParty:true});
+                var npParties
+
                 if(type=='party' || type == 'nonParty'){
-                    $scope.queryPartyStatus = (type =='nonParty' ? '-' : '') +
-                                        ('government_s:(' + _.pluck(npParties, 'code') +
+
+                    if(type=='party')
+                        npParties = _.where(data, {isNPParty:true});
+                    else {
+                        npParties = _.where(data, {isNPParty:false});
+                    }
+                    $scope.queryPartyStatus =
+                                        ('government_s:(' +
+                                        _.pluck(npParties, 'code') +
                                         ')').toLowerCase().replace(/,/g, ' ');
                 }
                 else {
@@ -417,6 +390,11 @@ define(['app','underscore','/app/js/common.js',
                 $scope.currentPage=0; refresh();
             });
         }
+
+        $scope.removeFilter = function(filter){
+            $scope.$broadcast('removeFilter',{data:filter});
+        }
+
     }]);
 
 });

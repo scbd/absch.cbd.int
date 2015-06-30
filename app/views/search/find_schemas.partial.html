@@ -15,11 +15,11 @@ label{width:100%;}
         </label>
 
         <div ng-show="measure.selected" class="subfilters-section">
-            <div km-select multiple ng-model="msrJurisdiction" binding-type="string" placeholder="Jurisdictions" items="options.jurisdiction()"></div>
+            <div km-select multiple api="msrJurisdictionApi" ng-model="msrJurisdiction" binding-type="string" placeholder="Jurisdictions" items="options.jurisdiction()"></div>
             <br>
-            <div km-select multiple ng-model="msrStatus" binding-type="string" placeholder="Status" items="options.status()"></div>
+            <div km-select multiple api="msrStatusApi" ng-model="msrStatus" binding-type="string" placeholder="Status" items="options.status()"></div>
             <br>
-            <div km-select multiple ng-model="msrType" binding-type="string" placeholder="Types" items="options.typeOfDocuments()"></div>
+            <div km-select multiple api="msrTypeApi" ng-model="msrType" binding-type="string" placeholder="Types" items="options.typeOfDocuments()"></div>
             <!-- <br>
             <div search-filter-dates title='Date of Adoption' query='msrAdoptionDate' field="adoption_s"></div>
             <br>
@@ -61,28 +61,28 @@ label{width:100%;}
                 </button>
                 <ul class="dropdown-menu" style="max-height:400px;overflow-y:auto;text-align:left">
                     <li >
-                        <a style="color:#999;" href ng-click="cnaResponsibleForAll=null;buildQuery()" value="null"
+                        <a style="color:#999;" ng-href="#" ng-click="cnaResponsibleForAll=null;buildQuery()" value="null"
                         ng-model="cnaResponsibleForAll" name="cnaResponsibleForAll">clear selection</a>
                     </li>
                     <li>
-                        <a href ng-click="cnaResponsibleForAll=true;buildQuery()" value="true"  ng-model="cnaResponsibleForAll" name="cnaResponsibleForAll">
+                        <a ng-href="#" ng-click="cnaResponsibleForAll=true;buildQuery()" value="true"  ng-model="cnaResponsibleForAll" name="cnaResponsibleForAll">
                         <span ng-show="cnaResponsibleForAll==true" class="glyphicon glyphicon-ok"></span>Responsible for all functions </a>
                     </li>
                     <li>
-                        <a href ng-click="cnaResponsibleForAll=false;buildQuery()" value="false"  ng-model="cnaResponsibleForAll" name="cnaResponsibleForAll">
+                        <a ng-href="#" ng-click="cnaResponsibleForAll=false;buildQuery()" value="false"  ng-model="cnaResponsibleForAll" name="cnaResponsibleForAll">
                         <span ng-show="cnaResponsibleForAll==false" class="glyphicon glyphicon-ok"></span>Not responsible for all functions </a>
                     </li>
                     <li >
-                        <a href ng-click="cnaResponsibleForAll=null;buildQuery()" value="null"  ng-model="cnaResponsibleForAll" name="cnaResponsibleForAll">
+                        <a ng-href="#" ng-click="cnaResponsibleForAll=null;buildQuery()" value="null"  ng-model="cnaResponsibleForAll" name="cnaResponsibleForAll">
                         <span ng-show="cnaResponsibleForAll==null" class="glyphicon glyphicon-ok"></span>Both responsible and not</a>
                     </li>
 
                 </ul>
             </div>
             <br>
-            <div km-select multiple ng-model="cnaJurisdiction" binding-type="string" placeholder="Jurisdictions" items="options.cnaJurisdictions()"></div>
+            <div km-select multiple api="cnaJurisdictionApi" ng-model="cnaJurisdiction" binding-type="string" placeholder="Jurisdictions" items="options.cnaJurisdictions()"></div>
             <br>
-            <div km-select multiple ng-model="cnaGeneticResourceTypes" binding-type="string" placeholder="Scope of Responsibilities" items="options.absGeneticResourceTypes()"></div>
+            <div km-select multiple api="cnaGeneticResourceTypesApi" ng-model="cnaGeneticResourceTypes" binding-type="string" placeholder="Scope of Responsibilities" items="options.absGeneticResourceTypes()"></div>
         </div>
     </div>
 
@@ -103,9 +103,9 @@ label{width:100%;}
             <span class="filter-text">Internationally Recognized Certificate of Compliance </span>
         </label>
         <div ng-show="absPermit.selected" class="subfilters-section">
-            <div km-select multiple required name="permitusage" ng-model="permitusage" items="options.usage()" placeholder="Intent"></div>
+            <div km-select multiple api="permitusageApi" name="permitusage" ng-model="permitusage" items="options.usage()" placeholder="Intent"></div>
             <br>
-            <div km-select multiple required name="permitkeywords" ng-model="permitkeywords" items="options.keywords()" placeholder="Keywords"></div>
+            <div km-select multiple api="permitkeywordsApi" name="permitkeywords" ng-model="permitkeywords" items="options.keywords()" placeholder="Keywords"></div>
             <br>
             <span search-filter-dates title='Date of issuance of the permit' query='permitIssuanceDate' field="expiration_s"></span>
             <br>
@@ -121,39 +121,24 @@ label{width:100%;}
             </button>
             <ul class="dropdown-menu" style="max-height:400px;overflow-y:auto;text-align:left">
                 <li >
-                    <a style="color:#999;" href ng-click="amendmentIntent=-2;buildQuery()" value="undefined"  ng-model="amendmentIntent" name="amendmentIntent">clear selection</a>
+                    <a style="color:#999;" ng-href="#" ng-click="amendmentIntent=-2;buildQuery()" value="undefined"  ng-model="amendmentIntent" name="amendmentIntent">clear selection</a>
                 </li>
                 <li>
-                    <a href ng-click="amendmentIntent=-1;buildQuery()" value="-1"  ng-model="amendmentIntent" name="amendmentIntent">
+                    <a ng-href="#" ng-click="amendmentIntent=-1;buildQuery()" value="-1"  ng-model="amendmentIntent" name="amendmentIntent">
                     <span ng-show="amendmentIntent==-1" class="glyphicon glyphicon-ok"></span> none</a>
                 </li>
                 <li>
-                    <a href ng-click="amendmentIntent=0;buildQuery()" value="0"  ng-model="amendmentIntent" name="amendmentIntent">
+                    <a ng-href="#" ng-click="amendmentIntent=0;buildQuery()" value="0"  ng-model="amendmentIntent" name="amendmentIntent">
                     <span ng-show="amendmentIntent==0" class="glyphicon glyphicon-ok"></span> amended</a>
                 </li>
                 <li >
-                    <a href ng-click="amendmentIntent=1;buildQuery()" value="1"  ng-model="amendmentIntent" name="amendmentIntent">
+                    <a ng-href="#" ng-click="amendmentIntent=1;buildQuery()" value="1"  ng-model="amendmentIntent" name="amendmentIntent">
                     <span ng-show="amendmentIntent==1" class="glyphicon glyphicon-ok"></span> revoked</a>
                 </li>
 
             </ul>
         </div>
 
-           <!--  <div class="btn-group" style="padding:2px 0px 2px 2px" data-toggle="buttons">
-                <label class="btn btn-default btnExt"  ng-click="amendmentIntent=-2;buildQuery()">
-                    <input type="radio" value="-1"  ng-model="amendmentIntent" name="amendmentIntent">All</button>
-                </label>
-                <label class="btn btnExt btn-success" ng-click="amendmentIntent=-1;buildQuery()">
-                    <input type="radio" value="1"  ng-model="amendmentIntent" name="amendmentIntent">Unchanged</button>
-                </label>
-                <label class="btn btn-primary btnExt" ng-click="amendmentIntent=0;buildQuery()">
-                    <input type="radio" value="0" ng-model="amendmentIntent" name="amendmentIntent" >Amended {{getAmendmentFacets(0)}}</button>
-                </label>
-                <label class="btn btn-danger btnExt" ng-click="amendmentIntent=1;buildQuery()">
-                    <input type="radio" value="1" ng-model="amendmentIntent" name="amendmentIntent">Revoked {{getAmendmentFacets(1)}}</button>
-                </label>
-            </div> -->
-            <!-- <span search-filter-dates title='Date of expiry of the permit' query='permitExpiryDate'></span> -->
         </div>
     </div>
 
@@ -166,7 +151,7 @@ label{width:100%;}
         <div ng-show="absCheckpoint.selected" class="subfilters-section">
             <!-- <span km-toggle placeholder="Inform all authorities" ng-model="cpInformAllAuthorities"></span>
             <br> -->
-            <span km-select multiple ng-model="cpJurisdiction" binding-type="string" placeholder="Jurisdictions" items="options.cpJurisdictions()"></span>
+            <span km-select multiple api="cpJurisdictionApi" ng-model="cpJurisdiction" binding-type="string" placeholder="Jurisdictions" items="options.cpJurisdictions()"></span>
         </div>
     </div>
 
@@ -200,9 +185,9 @@ label{width:100%;}
                 <span class="filter-text">Virtual Library Records   </span>
             </label>
             <div ng-show="resource.selected" class="subfilters-section">
-                <div km-select multiple name="vlrresourceTypes" binding-type="string" ng-model="vlrresourceTypes" items="options.resourceTypes()" placeholder="Type of resource"></div></br>
+                <div km-select multiple api="vlrresourceTypesApi" name="vlrresourceTypes" binding-type="string" ng-model="vlrresourceTypes" items="options.resourceTypes()" placeholder="Type of resource"></div></br>
                 <!-- <input type="number" required name="vlrpublicationYear" ng-model="vlrpublicationYear" placeholder="Publication year" /> -->
-                <div km-select multiple name= "vlrLanguages" binding-type="string" ng-model="vlrLanguages" items="options.languages()" placeholder="Available Languages"></div>
+                <div km-select multiple api="vlrLanguagesApi" name= "vlrLanguages" binding-type="string" ng-model="vlrLanguages" items="options.languages()" placeholder="Available Languages"></div>
             </div>
         </div>
 
@@ -213,7 +198,7 @@ label{width:100%;}
                 <span class="filter-text">Meetings &amp; Meeting Outcomes </span>
             </label>
             <div ng-show="meeting.selected" class="subfilters-section">
-                <div km-select ng-model="mtgRange" binding-type="string" placeholder="Meeting year" items="options.meetingYear()"></div>
+                <div km-select api="mtgRangeApi" ng-model="mtgRange" binding-type="string" placeholder="Meeting year" items="options.meetingYear()"></div>
             </div>
         </div>
 
