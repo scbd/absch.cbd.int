@@ -1,335 +1,153 @@
 <link href="/app/css/register.css" rel="stylesheet">
 
+
+
+
 <div ng-cloak ng-controller="RegisterController" >
 
-<div class="container-fluid" >
+
+
+<section layout="row" style="position:relative; top:20px;" flex  ng-hide="!user.isAuthenticated" >
+
+
+       <md-sidenav class="md-sidenav-left md-whiteframe-z2 " md-component-id="left" md-is-locked-open="$mdMedia('min-width: 1200px')"
+       style="height:1000px; margin-bottom:50px;-webkit-border-top-right-radius: 3px;-moz-border-radius-topright: 3px;border-top-right-radius: 3px;border-bottom-right-radius: 3px;-webkit-border-bottom-right-radius: 3px;-moz-border-radius-bottomright: 3px;" >
+
+
+         <md-toolbar class="bg-medgrey special-font" >
+           <h1 class="md-toolbar-tools">Management Center</h1>
+         </md-toolbar>
+
+         <md-content layout-padding layout-margin>
+
+             <div id="document_type_links" ng-show="user.isAuthenticated">
+
+             <div class="box bg-none" style="margin-bottom:20px;">
+                             <!-- <div style="font-size:16;font-weight:bold;">Legend</div> -->
+                             <span class="label label-success">&nbsp;</span> Published records <br>
+                                 <span class="label label-default">&nbsp;</span> Draft records<br>
+                                     <span class="label label-danger">&nbsp;</span> Records waiting approval
+
+                         </div>
+
+                 <div>
+                     <a href="/dashboard" role="button" >
+                     <div  class="well btn-commonformat" ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/register/dashboard.html'}" style="cursor:pointer;">
+
+
+                       <div class="btn-commonformat-national" style="text-transform:uppercase;">
+                           <span class="color-grey"><i class="mdi-action-assignment" style="font-size:16pt;position:relative;top:3px;"></i>&nbsp;Dashboard</span></div>
+                       <div style="padding-top:5px;"class="color-grey">
+                       <!-- Check the status of your work -->
+                       </div>
 
 
 
-<style>
-.sidebar-title{
+                 </div></a>
 
-    padding:5px 5px 5px 10px;
-    margin:0;
-    font-size:18px;
-
-}
-</style>
-
-<div class="row">
-  <div class="col-xs-3 sidebar" style="position:relative;left:0;margin-left:-15px;">
-<div class="sidebar-title" ng-class="{'bg-grey': !isMenuVisisble, 'bg-medgrey':isMenuVisisble}" >
-
-    <div class="special-font" id="toggleMenu" ng-click="isMenuVisisble=!isMenuVisisble">
-        <a  ng-hide="isMenuVisisble" id="toggleMenu" href="#" class="material-icons pull-left">menu</i></a>
-        Management Center
-        <a ng-hide="!isMenuVisisble"  href="#"  class="color-white material-icons pull-right">clear</i></a>
-    </div>
-
-</div>
-</div>
-</div>
-
-      <div class="row">
-        <div class="col-xs-3 " style="position:relative;left:0;margin-left:-15px;">
+                 <a href="/register/requests" role="button" >
+                     <div  class="well btn-commonformat" ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-tasks.directive.html'}" style="cursor:pointer;">
 
 
+                         <div class="btn-commonformat-national" style="text-transform:uppercase;">
+                             <span class="color-grey">
+                             <i class="fa fa-retweet" style="font-size:16pt;position:relative;top:3px;"></i>&nbsp;Requests</span></div>
+                             <div style="padding-top:5px;"class="color-grey">Records submitted for publishing</div>
 
-            <md-content layout-padding style="background-color:#f5f5f5;" id="leftMenu">
+
+                             <hr style="padding-top:5px;"  ng-show="facets('urgentTasks','request')">
+                             <div class="bg-red" style="color:white;padding:3px;"  ng-show="facets('urgentTasks','request')">
+                                 <a href="/register/requests/"  href="#" role="button" style="color:white;">
+                                     <span  class="badge" style="position:relative;top:-1px;">{{facets('urgentTasks','request')}}</span>
+                                     Request(s) awaiting your approval
+                                 </a>
+                             </div>
+
+
+                         </div></a>
 
 
 
 
+                         <div ng-repeat="heading in subheadings" >
 
-    <div id="document_type_links" ng-show="user.isAuthenticated">
-
-    <div class="box bg-none" style="margin-bottom:20px;">
-                    <!-- <div style="font-size:16;font-weight:bold;">Legend</div> -->
-                    <span class="label label-success">&nbsp;</span> Published records <br>
-                        <span class="label label-default">&nbsp;</span> Draft records<br>
-                            <span class="label label-danger">&nbsp;</span> Records waiting approval
-
-                </div>
-
-        <div>
-            <a href="/dashboard" role="button" >
-            <div  class="well btn-commonformat" ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/register/dashboard.html'}" style="cursor:pointer;">
-
-              <!-- <i class="glyphicon glyphicon-list-alt" style="position:relative;top:2px;"></i> -->
+                         <div ng-show="compareRoles(user.roles, heading.roles)" >
+                             <h3 class="special-font" ng-class="{'btn-commonformat-header-national':heading.title!='Reference Records', 'btn-commonformat-header-reference': heading.title=='Reference Records'}">{{heading.title}}
+                                 <!-- <span style="font-size:12px;font-weight:normal;" class="label label-danger pull-right">REQUEST</span>
+                                 <span style="margin-right:2px;font-size:12px;font-weight:normal;" class="label label-default pull-right">DRAFT</span>
+                                 <span style="margin-right:2px;font-size:12px;font-weight:normal;" class="label label-success  pull-right">PUBLISHED</span> -->
+                             </h3>
+                               <a ng-repeat="type in heading.formats" ng-href="{{type!='contacts' ? '/register' : ''}}/{{type | mapSchema}}" role="button">
+                                 <div class="btn-commonformat well" ng-class="{ 'btn-commonformat-selected' : document_type==type ,'btn-commonformat-reference-selected' : document_type=='resource' && document_type==type}">
+                                   <div class="btn-commonformat-national" ng-class="{'btn-commonformat-reference':document_types[type].abbreviation=='VLR'}">
 
 
-              <div class="btn-commonformat-national" style="text-transform:uppercase;">
-                  <span class="color-grey"><i class="mdi-action-assignment" style="font-size:16pt;position:relative;top:3px;"></i>&nbsp;Dashboard</span></div>
-              <div style="padding-top:5px;"class="color-grey">
-              <!-- Check the status of your work -->
-              </div>
+                                        <i class="{{type | schemaIcon }}" style="font-size:16pt;position:relative;top:3px;"></i>
+                                         {{document_types[type].abbreviation}}
+
+                                     <div style="padding-right:10px;position:relative;top:-15px;">
+                                     <div class="flip pull-right" ng-show="facets(type,'draft') > 0">
+                                         <div class="card" ng-class="{cardMargin:facets(type,'publish')>9}">
+                                             <div class="face front">
+                                                 <div ng-show="facets(type,'draft') > 0" class="label label-default">{{facets(type,'draft')}}</div>
+                                           </div>
+                                         </div>
+                                     </div>
+                                     <div class="flip pull-right" ng-show="facets(type,'publish') > 0">
+                                         <div class="card" ng-class="{cardMargin:facets(type,'request')>9}">
+                                             <div class="face front">
+                                                 <div ng-show="facets(type,'publish') > 0" class="label label-success">{{facets(type,'publish')}}</div>
+                                           </div>
+                                         </div>
+                                     </div>
+                                     <div class="flip pull-right"   ng-show="facets(type,'request') > 0">
+                                         <div class="card" >
+                                             <div class="face front">
+                                                 <div ng-show="facets(type,'request') > 0" class="label label-danger">{{facets(type,'request')}}</div>
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </div>
+                                   </div>
+                                   <div class="btn-commonformat-name" >{{document_types[type].title}}</div>
+                                 </div>
+                             </a>
+                         </div>
+
+                       </div>
+
+                 </div>
+               </div>
+
+         </md-content>
+
+     </md-sidenav>
 
 
 
-            <!-- <hr style="padding-top:5px;"  ng-show="facets('urgentTasks','request')">
-                <div class="bg-red" style="color:white;padding:3px;"  ng-show="facets('urgentTasks','request')">
-                 <a href="/dashboard/alltasks"  href="#" role="button" style="color:white;">
-                     <span  class="badge" style="position:relative;top:-1px;">{{facets('urgentTasks','request')}}</span>
-                     Request(s) awaiting your approval
-                    </a>
-                </div> -->
-                <!-- <div><a href="/dashboard/mytasks"  href="#" role="button">Your pending requests
-                        <span class="flip pull-right ">
-                          <span class=" card" >
-                            <span class="face front">
-                                <span  class="label label-default" ng-show="facets('pendingTasks','request')>0"   style="position:relative;top:-1px;">{{facets('pendingTasks','request')}}</span>
-                            </span>
-                        </span>
-                      </span>
-                    </a>
-                </div>
-                <div><a href="/dashboard/completed" href="#" role="button">Your completed requests
-                        <span class="flip pull-right ">
-                          <span class=" card" >
-                            <span class="face front">
-                                <span  class="label label-success" ng-show="facets('completedTasks','request')>0"  style="position:relative;top:-1px;">{{facets('completedTasks','request')}}</span>
-                            </span>
-                            </span>
-                        </span>
-                    </a>
-                </div> -->
 
+     <md-content flex layout-margin style="margin:0 30px 30px 30px;padding:0;background-color:transparent;"  >
+           <div layout="column" layout-align="top center"  >
 
-        </div></a>
+                <md-button ng-click="toggleLeft()" class="md-primary md-raised bg-medgrey" hide-gt-lg  style="margin: 0  0 10px 0;">
+                        <i class="fa fa-chevron-circle-left "></i> Management Center
+                </md-button>
 
-        <a href="/register/requests" role="button" >
-            <div  class="well btn-commonformat" ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-tasks.directive.html'}" style="cursor:pointer;">
-
-                <!-- <i class="glyphicon glyphicon-list-alt" style="position:relative;top:2px;"></i> -->
-
-
-                <div class="btn-commonformat-national" style="text-transform:uppercase;">
-                    <span class="color-grey">
-                    <i class="fa fa-retweet" style="font-size:16pt;position:relative;top:3px;"></i>&nbsp;Requests</span></div>
-                    <div style="padding-top:5px;"class="color-grey">Records submitted for publishing</div>
-
-
-                    <hr style="padding-top:5px;"  ng-show="facets('urgentTasks','request')">
-                    <div class="bg-red" style="color:white;padding:3px;"  ng-show="facets('urgentTasks','request')">
-                        <a href="/register/requests/"  href="#" role="button" style="color:white;">
-                            <span  class="badge" style="position:relative;top:-1px;">{{facets('urgentTasks','request')}}</span>
-                            Request(s) awaiting your approval
-                        </a>
-                    </div>
-
-
-                </div></a>
-
-          <!-- <h3>Requests</h3>
-
-
-            <span ng-show="compareRoles(user.roles, PAroles)" >
-                <div class="btn-commonformat well"  ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-tasks.directive.html'}" style="padding:5px;margin:3px!important;">
-                <a href="/dashboard/pending"  href="#" role="button">
-                    Requests for your approval
-                    <span class="flip pull-right">
-                        <span class=" card" >
-                            <span class="face front">
-                                <span  class="label label-danger" ng-show="facets('urgentTasks','request')>0"  style="position:relative;top:-1px;">{{facets('urgentTasks','request')}}</span>
-                            </span>
-                        </span>
-                    </span>
-                </a></div>
-            </span>
-            <div class="btn-commonformat well"  ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-pending-tasks.directive.html'}" style="padding:5px;margin:3px!important; ">
-            <a href="/dashboard/mytasks"  href="#" role="button">
-              Your pending requests
-                    <span class="flip pull-right ">
-                      <span class=" card" >
-                        <span class="face front">
-                            <span  class="label label-default" ng-show="facets('pendingTasks','request')>0"   style="position:relative;top:-1px;">{{facets('pendingTasks','request')}}</span>
-                        </span>
-                    </span>
-                  </span>
-            </a></div>
-            <div class="btn-commonformat well"  ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-completed-tasks.directive.html'}" style="padding:5px;margin:3px!important; ">
-             <a href="/dashboard/completed" href="#" role="button">
-              Your completed requests
-                    <span class="flip pull-right ">
-                      <span class=" card" >
-                        <span class="face front">
-                            <span  class="label label-success" ng-show="facets('completedTasks','request')>0"  style="position:relative;top:-1px;">{{facets('completedTasks','request')}}</span>
-                        </span>
-                        </span>
-                    </span>
-            </a></div> -->
-
-
-                <div ng-repeat="heading in subheadings" >
-
-                <div ng-show="compareRoles(user.roles, heading.roles)" >
-                    <h3 class="special-font" ng-class="{'btn-commonformat-header-national':heading.title!='Reference Records', 'btn-commonformat-header-reference': heading.title=='Reference Records'}">{{heading.title}}
-                        <!-- <span style="font-size:12px;font-weight:normal;" class="label label-danger pull-right">REQUEST</span>
-                        <span style="margin-right:2px;font-size:12px;font-weight:normal;" class="label label-default pull-right">DRAFT</span>
-                        <span style="margin-right:2px;font-size:12px;font-weight:normal;" class="label label-success  pull-right">PUBLISHED</span> -->
-                    </h3>
-                      <a ng-repeat="type in heading.formats" ng-href="{{type!='contacts' ? '/register' : ''}}/{{type | mapSchema}}" role="button">
-                        <div class="btn-commonformat well" ng-class="{ 'btn-commonformat-selected' : document_type==type ,'btn-commonformat-reference-selected' : document_type=='resource' && document_type==type}">
-                          <div class="btn-commonformat-national" ng-class="{'btn-commonformat-reference':document_types[type].abbreviation=='VLR'}">
-
-
-                               <i class="{{type | schemaIcon }}" style="font-size:16pt;position:relative;top:3px;"></i>
-                                {{document_types[type].abbreviation}}
-
-                            <div style="padding-right:10px;position:relative;top:-15px;">
-                            <div class="flip pull-right" ng-show="facets(type,'draft') > 0">
-                                <div class="card" ng-class="{cardMargin:facets(type,'publish')>9}">
-                                    <div class="face front">
-                                        <div ng-show="facets(type,'draft') > 0" class="label label-default">{{facets(type,'draft')}}</div>
-                                  </div>
-                                </div>
-                            </div>
-                            <div class="flip pull-right" ng-show="facets(type,'publish') > 0">
-                                <div class="card" ng-class="{cardMargin:facets(type,'request')>9}">
-                                    <div class="face front">
-                                        <div ng-show="facets(type,'publish') > 0" class="label label-success">{{facets(type,'publish')}}</div>
-                                  </div>
-                                </div>
-                            </div>
-                            <div class="flip pull-right"   ng-show="facets(type,'request') > 0">
-                                <div class="card" >
-                                    <div class="face front">
-                                        <div ng-show="facets(type,'request') > 0" class="label label-danger">{{facets(type,'request')}}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                          </div>
-                          <div class="btn-commonformat-name" >{{document_types[type].title}}</div>
-                        </div>
-                    </a>
-                </div>
-
-              </div>
-
-        </div>
-      </div>
-
-  </md-content>
+                <ng-include src="subTemplateUrl" style="min-height:980px;"  ng-show="user.isAuthenticated"></ng-include>
 
 
         </div>
-        <div class="col-xs-9" id="main" >
+    </md-content>
 
-                <ng-include src="subTemplateUrl"  ng-show="user.isAuthenticated"></ng-include>
-
-        </div>
-      </div>
-    </div>
+</section>
 
 
 
 
 
-  <!-- <div class="container">
-    <div class="row">
-      <div class="col-xs-3" id="document_type_links" ng-show="user.isAuthenticated">
-        <h1>Register Information</h1><br>
-        <div>
-          <h3 class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/dashboard.html'}"  style="padding:5px; margin:0!important;">
-            <a href="/dashboard"  href="#" role="button">
-              <i class="glyphicon glyphicon-list-alt" style="position:relative;top:2px;"></i> My Dashboard
-            </a>
-          </h3>
-
-          <h3>Requests</h3>
-
-
-            <span ng-show="compareRoles(user.roles, PAroles)" >
-                <div class="btn-commonformat "  ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-tasks.directive.html'}" style="padding:5px;margin:3px!important;">
-                <a href="/dashboard/pending"  href="#" role="button">
-                    Requests for your approval
-                    <span class="flip pull-right">
-                        <span class=" card" >
-                            <span class="face front">
-                                <span  class="label label-danger" ng-show="facets('urgentTasks','request')>0"  style="position:relative;top:-1px;">{{facets('urgentTasks','request')}}</span>
-                            </span>
-                        </span>
-                    </span>
-                </a></div>
-            </span>
-            <div class="btn-commonformat "  ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-pending-tasks.directive.html'}" style="padding:5px;margin:3px!important; ">
-            <a href="/dashboard/mytasks"  href="#" role="button">
-              Your pending requests
-                    <span class="flip pull-right ">
-                      <span class=" card" >
-                        <span class="face front">
-                            <span  class="label label-default" ng-show="facets('pendingTasks','request')>0"   style="position:relative;top:-1px;">{{facets('pendingTasks','request')}}</span>
-                        </span>
-                    </span>
-                  </span>
-            </a></div>
-            <div class="btn-commonformat "  ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-completed-tasks.directive.html'}" style="padding:5px;margin:3px!important; ">
-             <a href="/dashboard/completed" href="#" role="button">
-              Your completed requests
-                    <span class="flip pull-right ">
-                      <span class=" card" >
-                        <span class="face front">
-                            <span  class="label label-success" ng-show="facets('completedTasks','request')>0"  style="position:relative;top:-1px;">{{facets('completedTasks','request')}}</span>
-                        </span>
-                        </span>
-                    </span>
-            </a></div>
-
-
-                <div ng-repeat="heading in subheadings" >
-
-                <div ng-show="compareRoles(user.roles, heading.roles)" >
-                    <h3 ng-class="{'btn-commonformat-header-national':heading.title!='Reference Records', 'btn-commonformat-header-reference': heading.title=='Reference Records'}">{{heading.title}}</h3>
-                      <a ng-repeat="type in heading.formats" ng-href="{{type!='contacts' ? '/register' : ''}}/{{type | mapSchema}}" role="button">
-                        <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : document_type==type ,'btn-commonformat-reference-selected' : document_type=='resource' && document_type==type}">
-                          <div class="btn-commonformat-national" ng-class="{'btn-commonformat-reference':document_types[type].abbreviation=='VLR'}">{{document_types[type].abbreviation}}
-
-                            <div style="padding-right:10px;position:relative;top:-15px;">
-                            <div class="flip pull-right" ng-show="facets(type,'draft') > 0">
-                                <div class="card" ng-class="{cardMargin:facets(type,'publish')>9}">
-                                    <div class="face front">
-                                        <div ng-show="facets(type,'draft') > 0" class="label label-default">{{facets(type,'draft')}}</div>
-                                  </div>
-                                </div>
-                            </div>
-                            <div class="flip pull-right" ng-show="facets(type,'publish') > 0">
-                                <div class="card" ng-class="{cardMargin:facets(type,'request')>9}">
-                                    <div class="face front">
-                                        <div ng-show="facets(type,'publish') > 0" class="label label-success">{{facets(type,'publish')}}</div>
-                                  </div>
-                                </div>
-                            </div>
-                            <div class="flip pull-right"   ng-show="facets(type,'request') > 0">
-                                <div class="card" >
-                                    <div class="face front">
-                                        <div ng-show="facets(type,'request') > 0" class="label label-danger">{{facets(type,'request')}}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                          </div>
-                          <div class="btn-commonformat-name" >{{document_types[type].title}}</div>
-                        </div>
-                    </a>
-                </div>
-
-              </div>
-
-        </div>
-      </div>
-
-
-    <ng-include src="subTemplateUrl"  ng-show="user.isAuthenticated"></ng-include>
-
-  </div>
-
- </div> -->
-
-      <!-- TODO: if not authenticated, should be handled by the router, which redirects the user to login, NOT by a hidden div -->
 
 <div  ng-hide="user.isAuthenticated" class="bg-texture-litegrey">
-<div class="container">
+    <div class="container">
 
       <div class="col-xs-12" ng-hide="user.isAuthenticated" style="padding-top:20px;">
 
@@ -358,9 +176,6 @@
       </div>
 
   </div>
-
-
-
 </div>
 
 </div>

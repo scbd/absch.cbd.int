@@ -12,13 +12,36 @@ define(['app','linqjs', 'angular-localizer',
 
   app.controller("RegisterController",
     ["$rootScope", "$location" , "$scope", "$q", "$window", "IStorage", "underscore",
-     "schemaTypes", "$timeout","$filter", "$routeParams", "$cookies","bootbox","realm","IWorkflows", '$element',
+     "schemaTypes", "$timeout","$filter", "$routeParams", "$cookies","bootbox","realm","IWorkflows", '$element','$mdSidenav', '$mdUtil', '$mdMedia',
 
 	  function ($rootScope, $location, $scope, $q, $window, storage, _,
-      schemaTypes, $timeout, $filter, $routeParams, $cookies,bootbox,realm,workflows, $element) {
+      schemaTypes, $timeout, $filter, $routeParams, $cookies,bootbox,realm,workflows, $element, $mdSidenav, $mdUtil, $mdMedia) {
 
 
 	$rootScope.breadcrumbsParam = "asdasd";
+
+	$scope.toggleLeft = buildToggler('left');
+    $scope.toggleRight = buildToggler('right');
+    //**********************************************************
+    $scope.close = function () {
+          $mdSidenav('left').close()
+            .then(function () {
+              $log.debug("close LEFT is done");
+            });
+        };
+
+    //**********************************************************
+    function buildToggler(navID) {
+      var debounceFn =  $mdUtil.debounce(function(){
+            $mdSidenav(navID)
+              .toggle()
+              .then(function () {
+                $log.debug("toggle " + navID + " is done");
+              });
+          },300);
+      return debounceFn;
+    }
+
 
 
     //TODO: stop using so many globals =P I should inherit the controller scope or something.
