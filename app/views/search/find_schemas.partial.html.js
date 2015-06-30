@@ -524,8 +524,8 @@ app.directive('searchFilterSchemas', function ($http) {
                         schema.selected = false;
                         _.each(schema.subFilters, function(filter){
                             if(filter.type=='select' || filter.type=='multiselect'){
-                                if($scope[filter.identifier + 'Api']){
-                                    $scope[filter.identifier + 'Api'].unSelectAll();
+                                if($scope[filter.name + 'Api']){
+                                    $scope[filter.name + 'Api'].unSelectAll();
                                 }
                             }
                         });
