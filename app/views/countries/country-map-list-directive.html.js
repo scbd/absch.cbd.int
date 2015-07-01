@@ -1,4 +1,4 @@
-define(['app'], function(app) {
+define(['app',  'scbd-angularjs-controls'], function(app) {
 
     app.directive('countryMapList', function() {
         return {
@@ -51,6 +51,101 @@ define(['app'], function(app) {
 
                         }
                     }
+
+
+
+                    //====================================================
+                    $scope.nationalRecords = [{
+                        identifier: 'authority',
+                        title: 'Competent National Authority'
+                    }, {
+                        identifier: 'measure',
+                        title: 'Legislative, administrative or policy measures'
+                    }, {
+                        identifier: 'absCheckpoint',
+                        title: 'ABS Checkpoint'
+                    }, {
+                        identifier: 'database',
+                        title: 'National Website or Database'
+                    }, {
+                        identifier: 'focalPoint',
+                        title: 'ABS Focal Point'
+                    }, {
+                        identifier: 'absPermit',
+                        title: 'Internationally Recognized Certificate of Compliance'
+                    }, {
+                        identifier: 'absCheckpointCommunique',
+                        title: 'Checkpoint Communiqués '
+                    }, ];
+
+                    //====================================================
+                    $scope.$watch("filterSchema", function(val) {
+
+                        if(!val){
+                            $scope.selected_facet='all';
+                            $scope.updateMap('all');
+                            $scope.sortTable('name.en', 'ASC')
+                            return;
+                        }
+
+
+                        if(val == 'authority'){
+                            $scope.selected_facet='authority';
+                            $scope.updateMap('authority');
+                            $scope.sortTable('CNA');
+                            return;
+                        }
+
+                        if(val == 'measure'){
+                            $scope.selected_facet='measure';
+                            $scope.updateMap('measure');
+                            $scope.sortTable('MSR');
+                            return;
+                        }
+
+
+                        if(val == 'absCheckpoint'){
+                            $scope.selected_facet='absCheckpoint';
+                            $scope.updateMap('absCheckpoint');
+                            $scope.sortTable('CP');
+                            return;
+                        }
+
+
+                        if(val == 'database'){
+                            $scope.selected_facet='database';
+                            $scope.updateMap('database');
+                            $scope.sortTable('NDB');
+                            return;
+                        }
+
+
+                        if(val == 'focalPoint'){
+                            $scope.selected_facet='focalPoint';
+                            $scope.updateMap('focalPoint');
+                            $scope.sortTable('NFP');
+                            return;
+                        }
+
+                        if(val == 'absPermit'){
+                            $scope.selected_facet='absPermit';
+                            $scope.updateMap('absPermit');
+                            $scope.sortTable('IRCC');
+                            return;
+                        }
+
+                        if(val == 'absCheckpointCommunique'){
+                            $scope.selected_facet='absCheckpointCommunique';
+                            $scope.updateMap('absCheckpointCommunique');
+                            $scope.sortTable('CPC');
+                            return;
+                        }
+
+                    });
+
+
+
+
 
                     //====================================================
                     function loadCountries() {
@@ -196,6 +291,10 @@ define(['app'], function(app) {
                         $('.jqvmap-zoomin').html('<i class="glyphicon glyphicon-plus"/>')
                         $('.jqvmap-zoomout').html('<i class="glyphicon glyphicon-minus"/>')
                     }
+
+
+
+
 
                     //====================================================
                     $scope.navigateCountry = function(event, code, region) {

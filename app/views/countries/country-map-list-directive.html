@@ -1,17 +1,12 @@
 <div>
     <!-- Country Map and Other -->
     <div class="container-fluid ng-scope" style="min-height:800px;" id="worldMap">
-                <div class="row" id="divMap" style="padding-top:20px;">
-                    <div class="col-lg-12 col-md-12 col-xs-12">
 
-                        <div id="vmap" style="width: 100%; min-height: 500px;background-color:#EEE!important;"></div>
-                    </div>
-                </div>
 
-                <div class="row" id="divList" style="padding-top:0px;">
+                <div class="row" id="divList" style="padding-top:30px;">
                     <div class="col-lg-12 col-md-12 col-xs-12">
                         <table class="table table-countries table-striped">
-                            <tr>
+                            <!-- <tr>
                                 <th></th>
                                 <th>
                                     <span class="color-litegrey" style="padding-left:10px;">Country
@@ -23,28 +18,62 @@
                                     <span class="color-litegrey">Status</span>
                                 </th>
                                 <th colspan="7"><span class="color-litegrey">National Records</span></th>
-                            </tr>
+                            </tr> -->
+
                             <tr>
+                                <th style="width:60px;">
+                                    <span style="font-size:14px;font-weight:bold;text-transform:uppercase;" class="color-black">FILTERS</span>
+                                </th>
+                                <td colspan="9">
+
+                                    <button type="button" ng-class="{'bg-liteblue':selected_facet=='all' }" ng-click="filterSchema=0;selected_facet='all';updateMap('all');sortTable('name.en', 'ASC')" class="btn btn-default">
+                                        <!-- <i ng-show="statusFilter==isRequest" class="glyphicon glyphicon-ok"></i>  -->
+                                        All Countries <span class="badge badge-primary bg-grey">{{countries.length}}<span>
+                                    </button>
+
+                                    <button type="button" ng-class="{'bg-liteblue':selected_facet=='party' }" ng-click="filterSchema=0;selected_facet='party';updateMap('party');sortTable('name.en', 'ASC')" class="btn btn-default">
+                                        <!-- <i ng-show="statusFilter==isRequest" class="glyphicon glyphicon-ok"></i>  -->
+                                        Parties <span class="badge badge-primary bg-blue">{{totalParties}}<span>
+                                    </button>
+
+                                    <button type="button" ng-class="{'bg-liteblue':selected_facet=='nonParties' }" ng-click="filterSchema=0;selected_facet='nonParties';updateMap('nonParties');sortTable('name.en', 'ASC')" class="btn btn-default">
+                                        <!-- <i ng-show="statusFilter==isRequest" class="glyphicon glyphicon-ok"></i>  -->
+                                        Non-Parties <span class="badge badge-primary bg-medgrey">{{totalNonParties}}<span>
+                                    </button>
+
+                                    &nbsp;&nbsp;&nbsp;
+
+                                    <div km-select ng-model="filterSchema" binding-type="string" placeholder="National Record Type" items="nationalRecords"></div>
+
+                                    &nbsp;&nbsp;&nbsp;
+
+                                    <div class="btn-group" role="group">
+                                      <button type="button" class="btn btn-default"  ng-class="{'bg-liteblue':showList }"   ng-click="showList = true;">List</button>
+                                      <button type="button" class="btn btn-default"  ng-class="{'bg-liteblue': !showList }" ng-click="showList = false;">Map</button>
+                                    </div>
+
+                                </td>
+                            </tr>
+
+
+                            <!-- <tr>
                                 <th>
                                     <span style="font-size:14px;font-weight:bold;text-transform:uppercase;" class="color-litegrey">FILTER</span>
                                 </th>
                                 <th>
-
                                     <md-button class="md-raised md-mini bg-medgrey" aria-label="all" ng-click="selected_facet='all';updateMap('all');sortTable('name.en', 'ASC')">
-
                                             <span class="color-white">All countries ({{countries.length}})</span>
                                     </md-button>
-
-
-
                                 </th>
                                 <th>
+
                                     <md-button class="md-fab md-mini bg-blue" aria-label="Parties" ng-click="selected_facet='party';updateMap('party');sortTable('name.en', 'ASC')">
                                             {{totalParties}}
                                             <md-tooltip>
                                                 Nagoya Protocol Parties
                                             </md-tooltip>
                                     </md-button>
+
 
                                     <md-button class="md-fab md-mini bg-medgrey" aria-label="Non Parties" ng-click="selected_facet='nonParties';updateMap('nonParties');sortTable('name.en', 'ASC')">
                                             {{totalNonParties}}
@@ -104,9 +133,26 @@
                                                  {{commonFormatFacets[2][1].facetCount}}
                                              </md-button>
                                 </th>
+                            </tr> -->
+                            <tr ng-show="!showList" >
+                                <td colspan="10" style="background-color:#f5f5f5;padding-top:80px;"><div id="vmap" style="width: 100%; min-height: 500px;background-color:#EEE!important;"></div></td>
                             </tr>
-                            <tr>
-                               <th  style="white-space:nowrap;font-size:14px;"><span style="font-size:14px;font-weight:bold;text-transform:uppercase;" class="color-litegrey">SORT</span></th>
+
+                            <tr ng-show="showList">
+                                <th></th>
+                                <th>
+                                    <span class="color-litegrey" >Country
+                                        <span class="color-litegrey hidden-xs hidden-sm" style="font-size:12px;">Click country name to navigate to a profile</span>
+                                    </span>
+                                </th>
+                                <th>
+                                    <span class="color-litegrey">Status</span>
+                                </th>
+                                <th colspan="7"><span class="color-litegrey">National Records</span></th>
+                            </tr>
+
+                            <tr ng-show="showList">
+                               <th  style="white-space:nowrap;font-size:14px;"><span style="font-size:14px;font-weight:bold;text-transform:uppercase;" class="color-black">SORT</span></th>
                                 <th style="white-space:nowrap;font-size:16px;">
                                     <a href="" class="label label-default  bg-darkgrey1" ng-click="sortTable('name.en', 'ASC')">
                                         <i class=" fa fa-sort-alpha-asc" ></i>
@@ -174,8 +220,10 @@
                                         </span>
                                 </th>
                             </tr>
-                            <tr ng-repeat="country in (countries | filter: searchFilter | orderBy:sortTermFilter:orderList) "
-                            ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
+
+
+                            <tr ng-show="showList" ng-repeat="country in (countries | filter:countryFilter | filter: searchFilter | orderBy:sortTermFilter:orderList) " ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
+
                                <td class="text-right">{{$index + 1}}</td>
                                 <td><a ng-href="#" ng-click="navigateCountry('',country.code,'')" class="country-list-name"
                                     ng-class="{'list-group-item-primary':country.isNPParty,'list-group-item-default':!country.isNPParty }"> {{country.name.en}}</a> &nbsp;

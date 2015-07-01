@@ -78,7 +78,7 @@
 }
 .bg-grey{
     background-color:#EEE!important;
-    color:#555;
+    color:#555!important;
 }
 .bg-grey1{
     background-color:#DDD!important;
@@ -115,6 +115,11 @@
     background-color:#428bca!important;
     color:white!important;
 }
+.bg-liteblue{
+    background-color:#5BC0DE!important;
+    color:white!important;
+}
+
 
 .bg-green{
     background-color:#1FA65D!important;

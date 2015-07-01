@@ -1,11 +1,11 @@
-﻿<div class="well no-shadow thin-border" style="margin-top:0px;" ng-controller="editAuthority"
-ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart="startTour">
+﻿<div ng-controller="editAuthority" class="md-whiteframe-z1" >
 
-  <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
+    <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
+
+    <md-content layout-padding style="padding: 24px;background-color:#f5f5f5;">
 
   <div class="registerpage-content">
 
-<div ng-intro-options="IntroOptions" ng-intro-method="CallMe" ng-intro-oncomplete="CompletedEvent" ng-intro-onexit="ExitEvent" ng-intro-onchange="ChangeEvent" ng-intro-onbeforechange="BeforeChangeEvent">
 
     <div class="alert alert-error" ng-show="hasError()">
         <strong>Error as occured...</strong>
@@ -271,13 +271,18 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
 
                 <div workflow-std-buttons document="getCleanDocument()" languages="document.header.languages" hide-timer="true"/>
 
-                <a ng-click="scrollToTop()" style="padding-top:20px;" class="pull-right">
-                    <i class="glyphicon glyphicon-circle-arrow-up"></i> back to top</a>
             </div>
         </div>
 
     </div>
+
+
+
 </div>
 
   </div>
+</div>
+</div>
+
+</md-content>
 </div>

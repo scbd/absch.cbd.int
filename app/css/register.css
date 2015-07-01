@@ -1,8 +1,12 @@
 .container-full{
 	background-color:#eee;
-	padding-bottom:0;
+	padding-bottom:30px;
 }
+.dash-header{
 
+	height:62px;
+
+}
 
 
 .table {

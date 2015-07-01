@@ -10,8 +10,32 @@ define(['app','underscore','/app/js/common.js',
     '/app/views/directives/document-list.partial.html.js', 'bootstrap-datepicker','moment'],
      function (app,_) {
 
-    app.controller('FindController', ['$scope', '$rootScope', '$http', '$timeout', '$q','realm', '$routeParams','$location','$element','commonjs',
-        function ($scope, $rootScope, $http, $timeout, $q, realm, $routeParams,$location, $element, commonjs) {
+    app.controller('FindController', ['$scope', '$rootScope', '$http', '$timeout', '$q','realm', '$routeParams','$location','$element','commonjs','$mdSidenav', '$mdUtil', '$mdMedia',
+        function ($scope, $rootScope, $http, $timeout, $q, realm, $routeParams,$location, $element, commonjs, $mdSidenav, $mdUtil, $mdMedia) {
+
+
+            $scope.toggleLeft = buildToggler('left');
+            $scope.toggleRight = buildToggler('right');
+            //**********************************************************
+            $scope.close = function () {
+                  $mdSidenav('left').close()
+                    .then(function () {
+                      $log.debug("close LEFT is done");
+                    });
+                };
+
+            //**********************************************************
+            function buildToggler(navID) {
+              var debounceFn =  $mdUtil.debounce(function(){
+                    $mdSidenav(navID)
+                      .toggle()
+                      .then(function () {
+                        $log.debug("toggle " + navID + " is done");
+                      });
+                  },300);
+              return debounceFn;
+            }
+
 
 
         $scope.startTour=false;

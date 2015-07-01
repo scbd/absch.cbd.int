@@ -1,7 +1,9 @@
-﻿<div class="well no-shadow thin-border" style="margin-top:0px;" ng-controller="editCheckpointCommunique"
-ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart="startTour">
+﻿<div ng-controller="editCheckpointCommunique" class="md-whiteframe-z1" >
 
-  <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
+    <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
+
+    <md-content layout-padding style="padding: 24px;background-color:#f5f5f5;">
+
 
   <div class="registerpage-content">
 
@@ -367,11 +369,14 @@ ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart=
 
                 <div workflow-std-buttons document="getCleanDocument()" languages="document.header.languages" hide-timer="true"/>
 
-                <a ng-click="scrollToTop()" style="padding-top:20px;" class="pull-right">
-                    <i class="glyphicon glyphicon-circle-arrow-up"></i> back to top</a>
             </div>
         </div>
 
     </div>
   </div>
+</div>
+
+</div>
+
+</md-content>
 </div>
