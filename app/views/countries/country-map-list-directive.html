@@ -52,6 +52,11 @@
                                       <button type="button" class="btn btn-default"  ng-class="{'bg-liteblue': !showList }" ng-click="showList = false;">Map</button>
                                     </div>
 
+                                    <button type="button"  ng-click="filterSchema=0;selected_facet='all';updateMap('all');sortTable('name.en', 'ASC')" class="btn btn-default pull-right">
+
+                                        Clear filters
+                                    </button>
+
                                 </td>
                             </tr>
 
