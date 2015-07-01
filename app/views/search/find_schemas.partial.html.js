@@ -463,6 +463,9 @@ app.directive('searchFilterSchemas', function ($http) {
                             $scope[schemaN].selected = true;
                     }
                 }
+                if(documentSchema.toLowerCase() == 'focalpoint' || documentSchema.toLowerCase() == 'fp' ){
+                    $scope.focalPointNP = true;
+                }
             }
             $scope.buildQuery();
 
@@ -488,16 +491,18 @@ app.directive('searchFilterSchemas', function ($http) {
                     if($scope.focalPointNP){
                         query.push('NP-FP');
                         query.push('ABS-FP');
-                        $scope.selectedFilters.push({
-                                    type:'subFilter', schema:'focalPoint', value:'ABS National Focal Points', identifier:'focalPointNP'
-                                });
+                        if(!_.find($scope.selectedFilters,{identifier:'focalPointNP'}))
+                            $scope.selectedFilters.push({
+                                        type:'subFilter', schema:'focalPoint', value:'ABS National Focal Points', identifier:'focalPointNP'
+                                    });
                     }
                     if($scope.focalPointCBD){
                         query.push('CBD-FP1');
                         query.push('CBD-FP2');
-                        $scope.selectedFilters.push({
-                                    type:'subFilter', schema:'focalPoint', value:'CBD Focal Points', identifier:'focalPointCBD'
-                                });
+                        if(!_.find($scope.selectedFilters,{identifier:'focalPointCBD'}))
+                            $scope.selectedFilters.push({
+                                        type:'subFilter', schema:'focalPoint', value:'CBD Focal Points', identifier:'focalPointCBD'
+                                    });
                     }
                 }
                 if(query.length >0)

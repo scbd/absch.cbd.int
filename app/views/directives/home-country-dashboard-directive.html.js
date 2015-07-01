@@ -45,7 +45,7 @@ define(['app'], function (app) {
                 })
 
 				schemas = _.clone(schemaTypes);
-				schemas.push('focalPoint');
+				//schemas.push('focalPoint');
 
     			$scope.loadFacets = function(country){
 
@@ -69,8 +69,8 @@ define(['app'], function (app) {
                     var queryFacetsVLR = $http.get('/api/v2013/index/select', { params: queryFacetsVLRParameters })
 
     				var queryFacetsParameters = {
-                        'q': '(realm_ss:' + realm.value.toLowerCase() + ' or realm_ss:absch) AND NOT version_s:* AND (schema_s:'
-                                          + schemas.join(' OR schema_s:') + ') '+ countryQuery ,
+                        'q': '(realm_ss:' + realm.value.toLowerCase() + ' or realm_ss:absch) AND NOT version_s:* AND ((schema_s:'
+                                          + schemas.join(' OR schema_s:') + ') OR (schema_s:focalPoint AND type_ss:ABS-FP)) '+ countryQuery ,
                         'fl': '', 		//fields for results.
                         'wt': 'json',
                         'rows': 0,		//limit
@@ -83,7 +83,7 @@ define(['app'], function (app) {
 					var countries = $http.get('/api/v2013/countries');
 
 					$q.all([queryFacets, queryFacetsVLR, countries]).then(function (results) {
-						//console.log(results)
+						console.log(results)
                         var tempFacets = {};
 						tempFacets['absPermit'] = {"facetCount" :0,"countryCount" :0,"id": getSequence('absPermit')};
 						tempFacets['absCheckpointCommunique'] = {"facetCount" :0,"countryCount" :0,"id": getSequence('absPermit')};
