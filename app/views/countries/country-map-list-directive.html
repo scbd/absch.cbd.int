@@ -26,17 +26,17 @@
                                 </th>
                                 <td colspan="9">
 
-                                    <button type="button" ng-class="{'bg-liteblue':selected_facet=='all' }" ng-click="selected_facet='all';updateMap('all');sortTable('name.en', 'ASC')" class="btn btn-default">
+                                    <button type="button" ng-class="{'bg-liteblue':selected_facet=='all' }" ng-click="filterSchema=0;selected_facet='all';updateMap('all');sortTable('name.en', 'ASC')" class="btn btn-default">
                                         <!-- <i ng-show="statusFilter==isRequest" class="glyphicon glyphicon-ok"></i>  -->
-                                        All Countries <span class="badge badge-primary bg-black">{{countries.length}}<span>
+                                        All Countries <span class="badge badge-primary bg-grey">{{countries.length}}<span>
                                     </button>
 
-                                    <button type="button" ng-class="{'bg-liteblue':selected_facet=='party' }" ng-click="selected_facet='party';updateMap('party');sortTable('name.en', 'ASC')" class="btn btn-default">
+                                    <button type="button" ng-class="{'bg-liteblue':selected_facet=='party' }" ng-click="filterSchema=0;selected_facet='party';updateMap('party');sortTable('name.en', 'ASC')" class="btn btn-default">
                                         <!-- <i ng-show="statusFilter==isRequest" class="glyphicon glyphicon-ok"></i>  -->
                                         Parties <span class="badge badge-primary bg-blue">{{totalParties}}<span>
                                     </button>
 
-                                    <button type="button" ng-class="{'bg-liteblue':selected_facet=='nonParties' }" ng-click="selected_facet='nonParties';updateMap('nonParties');sortTable('name.en', 'ASC')" class="btn btn-default">
+                                    <button type="button" ng-class="{'bg-liteblue':selected_facet=='nonParties' }" ng-click="filterSchema=0;selected_facet='nonParties';updateMap('nonParties');sortTable('name.en', 'ASC')" class="btn btn-default">
                                         <!-- <i ng-show="statusFilter==isRequest" class="glyphicon glyphicon-ok"></i>  -->
                                         Non-Parties <span class="badge badge-primary bg-medgrey">{{totalNonParties}}<span>
                                     </button>
