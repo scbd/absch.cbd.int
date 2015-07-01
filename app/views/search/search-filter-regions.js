@@ -137,6 +137,12 @@ define(['app'], function(app) {
             });
 
             $scope.terms = [];
+
+            $scope.$watch('$parent.loadRegions', function (value) {
+                $scope.showSelect = value;
+            });
+
+
             $scope.$watch('showSelect', function(value){
                     if(value && $scope.terms.length==0){
                         $http.get('/api/v2013/thesaurus/domains/regions/terms').then(function (response) {

@@ -1,9 +1,9 @@
 <div>
-  <h3>
+  <!-- <h3>
     <a ng-click="showSelect=!showSelect" ng-href="#" data-toggle="modal" data-target="#regionModal">
       <span>{{title | lstring:locale}}</span>
     </a>
-  </h3>
+  </h3> -->
   <div class="list-group-item-expand">
     <div ng-animate="'animate'" ng-repeat="item in allTerms | orderBy:'title' | filter:{selected:true}" ng-click="onclick(this, $event)">
         <div class="truncate" style="cursor:pointer">

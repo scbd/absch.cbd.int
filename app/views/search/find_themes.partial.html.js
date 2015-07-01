@@ -224,6 +224,9 @@ app.directive('searchFilterThemes', function ($http) {
             }
 
 
+            $scope.$watch('$parent.loadThemes', function (value) {
+                $scope.showSelect = value;
+            });
 
             $scope.$watch('items', function (values) {
 
