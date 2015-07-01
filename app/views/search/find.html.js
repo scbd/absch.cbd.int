@@ -394,6 +394,9 @@ define(['app','underscore','/app/js/common.js',
         $scope.removeFilter = function(filter){
             $scope.$broadcast('removeFilter',{data:filter});
         }
+        $scope.removeCountryFilter = function(filter){
+            $scope.countryApi.unSelectItem(filter.code);
+        }
 
     }]);
 
