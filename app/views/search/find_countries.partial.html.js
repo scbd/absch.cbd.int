@@ -10,13 +10,37 @@ define(['app', 'underscore', '/app/js/common.js'], function(app, _) {
         items: '=ngModel',
         field: '@field',
         query: '=query',
-        externalFilter: '=externalFilter'
+        externalFilter: '=externalFilter',
+        api             : '=?'
       },
       link: function($scope, element, attrs, ngModelController) {},
       controller: ['$scope', '$element', '$location', 'commonjs', '$q','$routeParams','$timeout',
         function($scope, $element, $location, commonjs, $q, $routeParams, $timeout) {
-          $scope.alphabet = ['All', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
-            'W', 'X', 'Y', 'Z'
+
+          $scope.api = {
+              getSelected   : function(){return _.where($scope.terms, {selected: true});},
+              unSelectItem  : unSelectItem,
+              unSelectAll   : unSelectAll,
+          }
+          function unSelectItem(identifier){
+              if(identifier){
+                  var selectedItem = _.find($scope.terms, {code:identifier})
+                  if(selectedItem){
+                      $scope.onclick({item:selectedItem});
+                  }
+              }
+          }
+
+          function unSelectAll(){
+              getSelected().forEach(function(data) {
+                if (data.selected)
+                  data.selected = false;
+              })
+              buildQuery();
+          }
+
+          $scope.alphabet = ['All', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+                             'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
           ];
           $scope.expanded = false;
           $scope.selectedItems = [];
@@ -211,14 +235,7 @@ define(['app', 'underscore', '/app/js/common.js'], function(app, _) {
           $scope.$on("clearFilter", function(evt, info) {
             if (!$scope.terms)
               return;
-
-            $scope.terms.forEach(function(data) {
-              if (data.selected)
-                data.selected = false;
-            })
-            $scope.externalFilter = [];
-            buildQuery();
-
+            unSelectAll();
           });
 
 

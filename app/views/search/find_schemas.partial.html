@@ -39,8 +39,8 @@ label{width:100%;}
             <span class="filter-text">National Focal Points </span>
         </label>
         <div ng-show="focalPoint.selected" class="subfilters-section" style="padding-left:20px;">
-            <input type="checkbox" ng-model="focalPointNP" ng-change="refresh(focalPointNP.selected,'focalPoint')" > <span class="filter-text">ABS National Focal Points</span></br>
-            <input type="checkbox" ng-model="focalPointCBD" ng-change="refresh(focalPointCBD.selected,'focalPoint')" > <span class="filter-text">CBD Focal Points</span></br>
+            <input type="checkbox" ng-model="focalPointNP" ng-change="refresh(focalPointNP.selected,'focalPoint')" id="ckfocalPointNP" > <span class="filter-text">ABS National Focal Points</span></br>
+            <input type="checkbox" ng-model="focalPointCBD" ng-change="refresh(focalPointCBD.selected,'focalPoint')" id="ckfocalPointCBD"> <span class="filter-text">CBD Focal Points</span></br>
         </div>
     </div>
 
@@ -53,8 +53,8 @@ label{width:100%;}
         <div ng-show="authority.selected" class="subfilters-section">
             <!-- <div km-toggle placeholder="Responsible for all functions" ng-model="cnaResponsibleForAll"></div> -->
             <div class="btn-group" >
-                <button style="button" class="btn btn-default dropdown-toggle"  data-toggle="dropdown">
-                    <span ng-show="cnaResponsibleForAll"  style="color:#428BCA">Responsible for all functions </span>
+                <button style="button" class="btn btn-default dropdown-toggle"  data-toggle="dropdown" id="btncnaResponsibleForAll">
+                    <span ng-show="cnaResponsibleForAll"  style="color:#428BCA" ng-class="">Responsible for all functions </span>
                     <span ng-show="!cnaResponsibleForAll && cnaResponsibleForAll!=null"  style="color:#428BCA">Not responsible for all functions </span>
                     <span ng-show="cnaResponsibleForAll==null" style="color:#428BCA">Both responsible and not</span>
                     <span class="caret"></span>
@@ -107,12 +107,12 @@ label{width:100%;}
             <br>
             <div km-select multiple api="permitkeywordsApi" name="permitkeywords" ng-model="permitkeywords" items="options.keywords()" placeholder="Keywords"></div>
             <br>
-            <span search-filter-dates title='Date of issuance of the permit' query='permitIssuanceDate' field="expiration_s"></span>
+            <span search-filter-dates api="permitIssuanceDateApi" title='Date of issuance of the permit' query='permitIssuanceDate' field="expiration_s"></span>
             <br>
 
 
             <div class="btn-group" >
-            <button style="button" class="btn btn-default dropdown-toggle"  data-toggle="dropdown">
+            <button style="button" class="btn btn-default dropdown-toggle"  data-toggle="dropdown" id="btnamendmentIntent">
                 <span>Amendments</span>
                 <span ng-show="amendmentIntent==0"  style="color:#428BCA">: Amended </span>
                 <span ng-show="amendmentIntent==1"  style="color:#428BCA">: Revoked </span>

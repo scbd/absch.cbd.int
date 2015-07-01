@@ -211,8 +211,9 @@ app.directive('searchFilterSchemas', function ($http) {
                                         var selectedValues = $scope[filter.name];
                                         if(selectedValues != '*:*'){
                                             subFilterQuery = subFilterQuery + ' AND ' + selectedValues;
+                                            var dateString = $scope[filter.name + 'Api'].getDateString();
                                             $scope.selectedFilters.push({
-                                                        type:'subFilter', schema:item.identifier, value:filter.name + '(' + selectedValues + ')', identifier:filter.name
+                                                        type:'subFilter', schema:item.identifier, value:dateString, identifier:filter.name
                                                     });
                                         }
                                 }
@@ -223,9 +224,14 @@ app.directive('searchFilterSchemas', function ($http) {
                                         if(parseInt(selectedValues) == -1)
                                             subFilterQuery = subFilterQuery + ' AND NOT ' + filter.field + ':*';
                                         else{
+                                            var selectedText = selectedValues;
+                                            var selectedField = $('#btn' + filter.name + ' span:visible');
+                                            if(selectedField)
+                                                selectedText = selectedField.text();
+
                                             subFilterQuery = subFilterQuery + ' AND (' + filter.field +':'+ selectedValues + ')';
                                             $scope.selectedFilters.push({
-                                                        type:'subFilter', schema:item.identifier, value:filter.name + '(' + selectedValues + ')', identifier:filter.name
+                                                        type:'subFilter', schema:item.identifier, value:selectedText, identifier:filter.name
                                                     });
                                         }
                                     }
@@ -233,7 +239,7 @@ app.directive('searchFilterSchemas', function ($http) {
                                 else if(filter.type=='checkbox'){
                                     var selectedValues = $scope[filter.name];
                                     var query = buildFocalPointQuery();
-                                    // console.log(subFilterQuery, conditions, subFilterQuery.indexOf(query));
+
                                     if(selectedValues && query!='' && subFilterQuery.indexOf(query) ==-1){
                                         subFilterQuery = subFilterQuery + ' AND ' +  query;
                                     }
@@ -241,6 +247,7 @@ app.directive('searchFilterSchemas', function ($http) {
                                 else {
                                     if($scope[filter.name]!=null){
                                         subFilterQuery = subFilterQuery + ' AND ('  + filter.field +':'+  $scope[filter.name] + ')';
+
                                         $scope.selectedFilters.push({
                                                     type:'subFilter', schema:item.identifier, value:filter.name + '(' + $scope[filter.name] + ')', identifier:filter.name
                                                 });
@@ -328,7 +335,7 @@ app.directive('searchFilterSchemas', function ($http) {
                                              };
             $scope.authority               = { identifier: 'authority',                title: 'Competent National Authorities' ,
                                                subFilters : [
-                                                                { name: 'cnaResponsibleForAll',     type: 'yesno' , field: 'absResposibleForAll_b'},
+                                                                { name: 'cnaResponsibleForAll',     type: 'radio' , field: 'absResposibleForAll_b'},
                                                                 { name: 'cnaJurisdiction',          type: 'multiselect', field: 'jurisdiction_s' },
                                                                 { name: 'cnaGeneticResourceTypes',  type: 'multiselect' , field: 'absGeneticResourceTypes_ss'}
                                                             ]
@@ -481,10 +488,16 @@ app.directive('searchFilterSchemas', function ($http) {
                     if($scope.focalPointNP){
                         query.push('NP-FP');
                         query.push('ABS-FP');
+                        $scope.selectedFilters.push({
+                                    type:'subFilter', schema:'focalPoint', value:'ABS National Focal Points', identifier:'focalPointNP'
+                                });
                     }
                     if($scope.focalPointCBD){
                         query.push('CBD-FP1');
                         query.push('CBD-FP2');
+                        $scope.selectedFilters.push({
+                                    type:'subFilter', schema:'focalPoint', value:'CBD Focal Points', identifier:'focalPointCBD'
+                                });
                     }
                 }
                 if(query.length >0)
@@ -528,12 +541,31 @@ app.directive('searchFilterSchemas', function ($http) {
                                     $scope[filter.name + 'Api'].unSelectAll();
                                 }
                             }
+                            else if(filter.type=='calendar'){
+                                if($scope[filter.name + 'Api'])
+                                    $scope[filter.name + 'Api'].clearSelection();
+                            }
+                            else if(filter.type=='radio'){
+                                $scope[filter.name]=-1;
+                            }
+                            else {
+                                $scope[filter.name] = undefined;
+                            }
                         });
                     }
                 }
                 else if(info.data.type == "subFilter"){
                     if($scope[info.data.identifier + 'Api']){
-                        $scope[info.data.identifier + 'Api'].unSelectItem({identifier:info.data.value});
+
+                        if($scope[info.data.identifier + 'Api'].unSelectItem){
+                            $scope[info.data.identifier + 'Api'].unSelectItem({identifier:info.data.value});
+                        }
+                        else if($scope[info.data.identifier + 'Api'].clearSelection){
+                            $scope[info.data.identifier + 'Api'].clearSelection();
+                        }
+                        else {
+                            $scope[filter.name] = -2;
+                        }
                     }
                 }
 
@@ -541,17 +573,6 @@ app.directive('searchFilterSchemas', function ($http) {
 
             });
 
-
-            // $('.dropdownCheck').on("click", "*", function (e) {
-            //     e.stopPropagation();
-            // });
-
-            // // $('.date-filter').on("click", "ul li *", function (e) {
-            // //     e.stopPropagation();
-            // // });
-            // $(document).on('click', 'blaise.ul', function (e) {
-            //     e.stopPropagation();
-            // });
 
 
         }]

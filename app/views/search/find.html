@@ -42,35 +42,6 @@
                 </h1>
             </div>
 
-            <div class="col-xs-12" style="max-width:100%">
-                Current Filters :
-
-                <span style="cursor:pointer" ng-click="queryStatus()" ng-show="queryPartyStatus && queryPartyStatus.length>0" class="label label-primary">
-                    Party Status &nbsp;<span aria-hidden="true">&times;</span>
-                </span>
-                &nbsp;
-                <button class="btn btn-primary" type="button" ng-repeat="filter in selectedSchemaFilters" ng-click="removeFilter(filter)"
-                        style="margin-right:2px;margin-bottom:2px">
-                    {{filter.isTerm ? (filter.value|term) : filter.value}}
-                     <span class="badge" >{{filter.count}}</span>
-                     &nbsp;<span aria-hidden="true">&times;</span>
-                </button>
-                <!-- <span style="cursor:pointer;margin-right:2px"  ng-repeat="filter in selectedSchemaFilters" class="label label-primary"
-                ng-click="removeFilter(filter)">
-                    {{filter.type=='schema' ? filter.value : (filter.value|term)}}
-                    &nbsp;<span class="badge">{{filter.count}}</span>
-                    &nbsp;<span aria-hidden="true">&times;</span>
-                </span> -->
-                &nbsp;<span style="cursor:pointer" ng-show="queryGovernment && queryGovernment.length>0 && queryGovernment!='*:*'" class="label label-primary">
-                    Government &nbsp;<span aria-hidden="true">&times;</span>
-                </span>
-                &nbsp;<span style="cursor:pointer" ng-show="queryTheme && queryTheme.length>0 && queryTheme!='*:*'" class="label label-primary">
-                    Theamatic Areas &nbsp;<span aria-hidden="true">&times;</span>
-                </span>
-                &nbsp;<span style="cursor:pointer" ng-show="queryRegion && queryRegion.length>0 && queryRegion!='*:*'" class="label label-primary">
-                    Regions &nbsp;<span aria-hidden="true">&times;</span>
-                </span>
-            </div>
 
         </div>
 
@@ -95,8 +66,7 @@
                     <div id="filterCheckboxes">
                         <search-filter-schemas  ng-model='schemas' field='schema_s' query='querySchema' preview-type="previewType" selected-filters="selectedSchemaFilters"></search-filter-schemas>
                         <search-filter-themes title='Thematic Areas' ng-model='thematicAreas' field='thematicAreas_ss' query='queryTheme'></search-filter-themes>
-
-                        <search-filter-countries title='Countries' ng-model='governments' field='government_s' query='queryGovernment' external-filter="countryResultFilter"></search-filter-countries>
+                        <search-filter-countries api="countryApi" title='Countries' ng-model='governments' field='government_s' query='queryGovernment' external-filter="countryResultFilter"></search-filter-countries>
                         <search-filter-regions title="Regions" ng-model="regions" field="government_REL_ss" query="queryRegion" facets="regionFacets"></search-filter-regions>
                     </div>
                      <!-- <div class="form-group">
@@ -108,6 +78,46 @@
             </div>
 
             <div class="col-xs-9" id="search-results">
+                <div class="row" style="max-width:100%">
+                    Current Filters :
+
+                    <span style="cursor:pointer" ng-click="queryStatus()" ng-show="queryPartyStatus && queryPartyStatus.length>0" class="label label-primary">
+                        Party Status &nbsp;<span aria-hidden="true">&times;</span>
+                    </span>
+                    &nbsp;
+                    <button class="btn btn-primary" type="button" ng-repeat="filter in selectedSchemaFilters" ng-click="removeFilter(filter)"
+                            style="margin-right:2px;margin-bottom:2px">
+                        {{filter.isTerm ? (filter.value|term) : filter.value}}
+                         <span class="badge" >{{filter.count}}</span>
+                         &nbsp;<span aria-hidden="true">&times;</span>
+                    </button>
+                    <!-- <span style="cursor:pointer;margin-right:2px"  ng-repeat="filter in selectedSchemaFilters" class="label label-primary"
+                    ng-click="removeFilter(filter)">
+                        {{filter.type=='schema' ? filter.value : (filter.value|term)}}
+                        &nbsp;<span class="badge">{{filter.count}}</span>
+                        &nbsp;<span aria-hidden="true">&times;</span>
+                    </span> -->
+                    &nbsp;
+
+                    <button class="btn btn-primary" type="button"
+                     ng-repeat="filter in countryApi.getSelected()"
+                     ng-click="removeCountryFilter(filter)"
+                            style="margin-right:2px;margin-bottom:2px">
+                        {{filter.name|lstring}}
+                         <span class="badge" >{{filter.count}}</span>
+                         &nbsp;<span aria-hidden="true">&times;</span>
+                    </button>
+                    <!-- <span style="cursor:pointer" ng-show="queryGovernment && queryGovernment.length>0 && queryGovernment!='*:*'" class="label label-primary">
+                        Government &nbsp;<span aria-hidden="true">&times;</span>
+                    </span> -->
+                    &nbsp;<span style="cursor:pointer" ng-show="queryTheme && queryTheme.length>0 && queryTheme!='*:*'" class="label label-primary">
+                        Theamatic Areas &nbsp;<span aria-hidden="true">&times;</span>
+                    </span>
+                    &nbsp;<span style="cursor:pointer" ng-show="queryRegion && queryRegion.length>0 && queryRegion!='*:*'" class="label label-primary">
+                        Regions &nbsp;<span aria-hidden="true">&times;</span>
+                    </span>
+                </div>
+
                 <div preview-type="previewType" document-list documents='rawDocs' filter='*' show-pagination='true' current-page='currentPage' document-Count='documentCount' order-by="orderBy">
                 </div>
             </div>
