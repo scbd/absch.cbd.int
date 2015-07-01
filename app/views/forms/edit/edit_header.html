@@ -1,82 +1,8 @@
-<!--
 
-
-  <div class="nat-header" ng-class="{'bg-blue': type.abbreviation != 'VLR','bg-orange': type.abbreviation == 'VLR'}" >
-
-    <h2>
-     <a class="color-white fa-11 pull-right" style="margin-right:10px;position:relative;top:2px;" ng-click="startIntro()"> <i class="fa fa-youtube-play"></i></a>
-
-
-          <i ng-class="{'mdi-action-account-box':type.abbreviation=='CNA'}" style="font-size:20pt;position:relative;top:3px;"></i>
-          <i ng-class="{'mdi-action-verified-user':type.abbreviation=='CP'}" style="font-size:20pt;position:relative;top:3px;"></i>
-          <i ng-class="{'mdi-action-stars':type.abbreviation=='MSR'}" style="font-size:20pt;position:relative;top:3px;"></i>
-          <i ng-class="{'mdi-action-bookmark':type.abbreviation=='IRCC'}" style="font-size:20pt;position:relative;top:3px;"></i>
-          <i ng-class="{'mdi-communication-message':type.abbreviation=='CPC'}" style="font-size:20pt;position:relative;top:3px;"></i>
-          <i ng-class="{'mdi-file-folder':type.abbreviation=='NDB'}" style="font-size:20pt;position:relative;top:3px;"></i>
-          <i ng-class="{'mdi-editor-insert-drive-file':type.abbreviation=='VLR'}" style="font-size:20pt;position:relative;top:3px;"></i>
-          <span class="title dropshadow ">{{type.title}} <span style="font-weight:bold;" class="color-black">({{type.abbreviation}})</span></span>
-    </h2>
-
-
-    <style>
-    .nav-underline
-    {
-            position:relative;
-    }
-
-    .nav-underline a{
-            color:#ddd;
-            font-size:14px;
-            /*font-family: 'alternategotno3dotregular';*/
-            text-transform:uppercase;
-            text-rendering: optimizeLegibility;
-            /*letter-spacing: 1px;*/
-            text-shadow: 0 1px 2px rgba(0, 0, 0, .6)!important;
-            margin-right:30px;
-
-    }
-    .nav-underline > li > a:hover
-    {
-            background-color:transparent!important;
-            border-bottom:5px solid #FFEB3B;
-            margin-bottom:0;
-            padding-bottom:0;
-            color:white;
-    }
-
-    .nav-underline > li > a.active
-    {
-            background-color:transparent!important;
-            border-bottom:5px solid #FFEB3B;
-            margin-bottom:0;
-            padding-bottom:0;
-            color:white;
-    }
-
-    </style>
-
-    <ul class="nav navbar-nav nav-underline">
-        <li><a href="/register/{{type.abbreviation}}"      ng-class="{'active':path==('/register/'+type.abbreviation)}"><i class="glyphicon glyphicon-align-justify"></i> Exisiting records</a></li>
-        <li><a href="/register/{{type.abbreviation}}/new"  ng-class="{'active':path==('/register/'+type.abbreviation+'/new')|| path.indexOf('edit') > 0}"><i class="glyphicon glyphicon-plus-sign"></i> Add/edit a record</a></li>
-        <li><a href="/register/{{type.abbreviation}}/help" ng-class="{'active':path==('/register/'+type.abbreviation+'/help')}"><i class="glyphicon glyphicon-question-sign"></i> Help and information</a></li>
-    </ul>
-
-
-
-  </div> -->
-
-
-      <div class="nat-header" ng-class="{'bg-blue': type.abbreviation != 'VLR','bg-orange': type.abbreviation == 'VLR'}" >
-
-          <h2>
-              <!-- <a class="color-white fa-11 pull-right" style="margin-right:10px;position:relative;top:2px;" ng-click="startIntro()"> <i class="fa fa-youtube-play"></i></a> -->
-              <i ng-class="{'mdi-action-account-box':type.abbreviation=='CNA'}" style="font-size:20pt;position:relative;top:3px;"></i>
-              <i ng-class="{'mdi-action-verified-user':type.abbreviation=='CP'}" style="font-size:20pt;position:relative;top:3px;"></i>
-              <i ng-class="{'mdi-action-stars':type.abbreviation=='MSR'}" style="font-size:20pt;position:relative;top:3px;"></i>
-              <i ng-class="{'mdi-action-bookmark':type.abbreviation=='IRCC'}" style="font-size:20pt;position:relative;top:3px;"></i>
-              <i ng-class="{'mdi-communication-message':type.abbreviation=='CPC'}" style="font-size:20pt;position:relative;top:3px;"></i>
-              <i ng-class="{'mdi-file-folder':type.abbreviation=='NDB'}" style="font-size:20pt;position:relative;top:3px;"></i>
-              <i ng-class="{'mdi-editor-insert-drive-file':type.abbreviation=='VLR'}" style="font-size:20pt;position:relative;top:3px;"></i>
-              <span class="title dropshadow">{{type.title}} <span class="color-darkgrey">({{type.abbreviation}})</span></span>
-          </h2>
-      </div>
+<md-toolbar  ng-class="{'bg-blue': type.abbreviation != 'VLR','bg-orange': type.abbreviation == 'VLR'}">
+<div class="md-toolbar-tools">
+  <h2 class="md-flex">
+      <span >{{type.title}} <span class="color-darkgrey">({{type.abbreviation}})</span></span>
+  </h2>
+</div>
+</md-toolbar>

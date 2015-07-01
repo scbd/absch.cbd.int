@@ -1,6 +1,4 @@
-<div ng-controller="DashboardController"
- >
- <!-- ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart="startTour" -->
+<div ng-controller="DashboardController">
 
     <style>
     dt{color:#888;padding-top:10px;}
@@ -8,109 +6,103 @@
     </style>
 
 
-  <div style="background-color:white;" class="well no-shadow thin-border ">
-
-     <div class="dash-header bg-darkgrey" >
-      <h2>
-          <!-- <a class="color-white fa-11 pull-right" style="position:relative;top:2px;margin-right:10px;" ng-click="startIntro()"> <i class="fa fa-youtube-play"></i></a> -->
-
-           <i class="mdi-action-assignment" style="font-size:20pt;position:relative;top:3px;"></i>&nbsp;
-           <span class="title dropshadow">DASHBOARD</span>
-      </h2>
+<div class="md-whiteframe-z1">
+    <md-toolbar class="bg-medgrey">
+    <div class="md-toolbar-tools">
+      <h2 class="md-flex">Dashboard</h2>
     </div>
-
-    <!-- <div class="row" style="margin-bottom:20px;">
-        <div class="col-xs-12">
-            <div style="font-weight:bold;">The dashboard gives an overview of your draft and published ABS records and publishing requests.
-                The content of the dashboard will differ depending on the role assigned in the ABSCH.</div>
-        </div>
-    </div> -->
+  </md-toolbar>
+  <md-content layout-padding style="padding: 24px;">
 
 
-<div class="row row-same-height" style="margin-bottom:20px;">
-    <div class="col-xs-6 col-xs-height col-top" >
-                <h1>Welcome. You are signed in!</h1>
-                <dl class="dl-horizontal" style="padding-top:20px;">
-                    <dt style="text-align:left">Name</dt><dd>{{user.name}}</dd>
-                    <dt style="text-align:left;white-space:nowrap;">Primary email</dt><dd><strong>{{user.email}}</strong></dd>
-                    <dt style="text-align:left;white-space:nowrap;" ng-show="user.government">Country</dt>
-                        <dd style="text-transform:uppercase;">
-                        <a href="/countries/{{user.government | uppercase}}"><strong>{{user.government | term}}</strong></a></dd>
-                    <dt ng-if="user.roles.indexOf(getRoleName('AbsAdministrator'))>=0" style="text-align:left;white-space:nowrap;">
-                        Current Realm
-                    </dt>
-                    <dd ng-if="user.roles.indexOf(getRoleName('AbsAdministrator'))>=0">
-                        <span switch-realm></span>
-                    </dd>
-                </dl>
-                <div class="no-shadow thin-border" style="padding:10px;">
-                    <h4 style="padding-top;0;margin-top:0;">Manage your account with <a href="http://accounts.cbd.int" class="color-green bold">accounts.cbd.int</a></h4>
-                    <ul>
-                            <li><a href="#" ng-click="actionProfile()">update your profile</a></li>
-                            <li><a href="#" ng-click="actionPassword()" >change your password</a></li>
-                            <li>Contact us: <a href="mailto:absch@cbd.int" class="color-blue">absch@cbd.int</a></li>
-                            <li><a href="#" ng-click="actionSignOut()" style="text-transform:uppercase;">sign out</a></li>
+      <div class="row row-same-height" style="margin-bottom:20px;">
+          <div class="col-xs-6 col-xs-height col-top" >
+                      <h1>Welcome. You are signed in!</h1>
+                      <dl class="dl-horizontal" style="padding-top:20px;">
+                          <dt style="text-align:left">Name</dt><dd>{{user.name}}</dd>
+                          <dt style="text-align:left;white-space:nowrap;">Primary email</dt><dd><strong>{{user.email}}</strong></dd>
+                          <dt style="text-align:left;white-space:nowrap;" ng-show="user.government">Country</dt>
+                              <dd style="text-transform:uppercase;">
+                              <a href="/countries/{{user.government | uppercase}}"><strong>{{user.government | term}}</strong></a></dd>
+                          <dt ng-if="user.roles.indexOf(getRoleName('AbsAdministrator'))>=0" style="text-align:left;white-space:nowrap;">
+                              Current Realm
+                          </dt>
+                          <dd ng-if="user.roles.indexOf(getRoleName('AbsAdministrator'))>=0">
+                              <span switch-realm></span>
+                          </dd>
+                      </dl>
+                      <div class="no-shadow thin-border" style="padding:10px;">
+                          <h4 style="padding-top;0;margin-top:0;">Manage your account with <a href="http://accounts.cbd.int" class="color-green bold">accounts.cbd.int</a></h4>
+                          <ul>
+                                  <li><a href="#" ng-click="actionProfile()">update your profile</a></li>
+                                  <li><a href="#" ng-click="actionPassword()" >change your password</a></li>
+                                  <li>Contact us: <a href="mailto:absch@cbd.int" class="color-blue">absch@cbd.int</a></li>
+                                  <li><a href="#" ng-click="actionSignOut()" style="text-transform:uppercase;">sign out</a></li>
 
-                    </ul>
-                </div>
-    </div>
+                          </ul>
+                      </div>
+          </div>
 
-    <div class="col-xs-6 bg-white col-xs-height col-top" style="border-left:3px solid #999;">
-    <!-- TODO: add training roles -->
-
-
-        <!-- <div style="padding-bottom:10px;" ng-show="user.roles.indexOf(getRoleName('Administrator')) != -1">
-            <span class="label label-warning" style="text-transform:uppercase;">ADMIN</span>
-        </div>
-
-        <div style="padding-bottom:10px;" ng-show="user.roles.indexOf(getRoleName('AbsAdministrator')) != -1">
-            <span class="label label-warning" style="text-transform:uppercase;">ABSCH ADMIN</span>
-        </div> -->
-
-        <div style="padding-bottom:10px;" ng-show="user.roles.indexOf(getRoleName('AbsNationalFocalPoint')) != -1">
-            <span ng-show="user.roles.indexOf(getRoleName('AbsNationalFocalPoint')) != -1" class="label label-primary" style="text-transform:uppercase;"><i class="fa fa-check-square"></i> You are a Focal Points (ABS-FP)</span>
-            <span ng-hide="user.roles.indexOf(getRoleName('AbsNationalFocalPoint')) != -1" class="label label-default" style="text-transform:uppercase;"><i class="fa fa-times-circle"></i> Focal Points (ABS-FP)</span>
-
-            CBD Primary Focal Points or Nagoya Focal Points have the responsiblity to designate themselves or another user as the Publishing Authority (PA). A Focal Point can complete <a href="http://www.cbd.int/abs/doc/commonformats/ABSCH-PA-NAU.doc">this offline form</a> and email it to <a href="mailto:absch@cbd.int" class="color-blue">absch@cbd.int</a> to designate or change a PA.
-            For more information, please see <a href="http://www.cbd.int/abs/text/articles/default.shtml?sec=abs-13">Article 13</a> of the Nagoya Protocol.
-        </div>
-
-        <div>
-            <span ng-show="user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) != -1" class="label label-primary" style="text-transform:uppercase;"><i class="fa fa-check-square"></i> YOU ARE THE PUBLISHING AUTHORITY (PA)</span>
-            <span ng-hide="user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) != -1" class="label label-default" style="text-transform:uppercase;"><i class="fa fa-times-circle"></i> Publishing Authority (PA)</span>
-            <span ng-class="{'color-litegrey':user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) == -1}">
-            Each country can designate only one PA. The PA's job to ensure all records are validated before they are published and become publically available on the ABS-CH. PAs can also designate National Authorized Users (NAUs) who are allowed to submit draft records for your country.
-            To designated or change a NAU, the PA should send an email to <a href="mailto:absch@cbd.int" class="color-blue">absch@cbd.int</a> indicating the change, name and email of the NAU.
-            </span>
-        </div>
-
-        <div style="padding-top:10px;">
-            <span ng-show="user.roles.indexOf(getRoleName('AbsNationalAuthorizedUser')) != -1" class="label label-primary" style="text-transform:uppercase;"><i class="fa fa-check-square"></i> You are a National Authorized User (NAU)</span>
-            <span ng-hide="user.roles.indexOf(getRoleName('AbsNationalAuthorizedUser')) != -1" class="label label-default" style="text-transform:uppercase;"><i class="fa fa-times-circle"></i> National Authorized Users (NAU)</span>
-            <span ng-class="{'color-litegrey':user.roles.indexOf(getRoleName('AbsNationalAuthorizedUser')) == -1}">
-            NAUs can save draft national records and request national records to be published by the Publishing Authority (PA).
-            </span>
-        </div>
-
-        <div style="padding-top:10px;">
-            <span ng-show="user.roles.indexOf(getRoleName('User')) != -1" class="label label-primary" style="text-transform:uppercase;"><i class="fa fa-check-square"></i> YOU ARE A REGISTERED USER</span>
-            <span ng-hide="user.roles.indexOf(getRoleName('User')) != -1" class="label label-default" style="text-transform:uppercase;"><i class="fa fa-times-circle"></i> REGISTERED USERS</span>
-            <span ng-class="{'color-litegrey':user.roles.indexOf(getRoleName('User')) == -1}">
-            Registered Users can save draft reference records and request reference records to be published in the Virtual Library.
-            Reference records are validated by the SCBD Secretariat before they are published in the ABSCH.
-            </span>
-        </div>
+          <div class="col-xs-6 bg-white col-xs-height col-top" style="border-left:3px solid #999;">
+          <!-- TODO: add training roles -->
 
 
-    </div>
-</div>
+              <!-- <div style="padding-bottom:10px;" ng-show="user.roles.indexOf(getRoleName('Administrator')) != -1">
+                  <span class="label label-warning" style="text-transform:uppercase;">ADMIN</span>
+              </div>
+
+              <div style="padding-bottom:10px;" ng-show="user.roles.indexOf(getRoleName('AbsAdministrator')) != -1">
+                  <span class="label label-warning" style="text-transform:uppercase;">ABSCH ADMIN</span>
+              </div> -->
+
+              <div style="padding-bottom:10px;" ng-show="user.roles.indexOf(getRoleName('AbsNationalFocalPoint')) != -1">
+                  <span ng-show="user.roles.indexOf(getRoleName('AbsNationalFocalPoint')) != -1" class="label label-primary" style="text-transform:uppercase;"><i class="fa fa-check-square"></i> You are a Focal Points (ABS-FP)</span>
+                  <span ng-hide="user.roles.indexOf(getRoleName('AbsNationalFocalPoint')) != -1" class="label label-default" style="text-transform:uppercase;"><i class="fa fa-times-circle"></i> Focal Points (ABS-FP)</span>
+
+                  CBD Primary Focal Points or Nagoya Focal Points have the responsiblity to designate themselves or another user as the Publishing Authority (PA). A Focal Point can complete <a href="http://www.cbd.int/abs/doc/commonformats/ABSCH-PA-NAU.doc">this offline form</a> and email it to <a href="mailto:absch@cbd.int" class="color-blue">absch@cbd.int</a> to designate or change a PA.
+                  For more information, please see <a href="http://www.cbd.int/abs/text/articles/default.shtml?sec=abs-13">Article 13</a> of the Nagoya Protocol.
+              </div>
+
+              <div>
+                  <span ng-show="user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) != -1" class="label label-primary" style="text-transform:uppercase;"><i class="fa fa-check-square"></i> YOU ARE THE PUBLISHING AUTHORITY (PA)</span>
+                  <span ng-hide="user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) != -1" class="label label-default" style="text-transform:uppercase;"><i class="fa fa-times-circle"></i> Publishing Authority (PA)</span>
+                  <span ng-class="{'color-litegrey':user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) == -1}">
+                  Each country can designate only one PA. The PA's job to ensure all records are validated before they are published and become publically available on the ABS-CH. PAs can also designate National Authorized Users (NAUs) who are allowed to submit draft records for your country.
+                  To designated or change a NAU, the PA should send an email to <a href="mailto:absch@cbd.int" class="color-blue">absch@cbd.int</a> indicating the change, name and email of the NAU.
+                  </span>
+              </div>
+
+              <div style="padding-top:10px;">
+                  <span ng-show="user.roles.indexOf(getRoleName('AbsNationalAuthorizedUser')) != -1" class="label label-primary" style="text-transform:uppercase;"><i class="fa fa-check-square"></i> You are a National Authorized User (NAU)</span>
+                  <span ng-hide="user.roles.indexOf(getRoleName('AbsNationalAuthorizedUser')) != -1" class="label label-default" style="text-transform:uppercase;"><i class="fa fa-times-circle"></i> National Authorized Users (NAU)</span>
+                  <span ng-class="{'color-litegrey':user.roles.indexOf(getRoleName('AbsNationalAuthorizedUser')) == -1}">
+                  NAUs can save draft national records and request national records to be published by the Publishing Authority (PA).
+                  </span>
+              </div>
+
+              <div style="padding-top:10px;">
+                  <span ng-show="user.roles.indexOf(getRoleName('User')) != -1" class="label label-primary" style="text-transform:uppercase;"><i class="fa fa-check-square"></i> YOU ARE A REGISTERED USER</span>
+                  <span ng-hide="user.roles.indexOf(getRoleName('User')) != -1" class="label label-default" style="text-transform:uppercase;"><i class="fa fa-times-circle"></i> REGISTERED USERS</span>
+                  <span ng-class="{'color-litegrey':user.roles.indexOf(getRoleName('User')) == -1}">
+                  Registered Users can save draft reference records and request reference records to be published in the Virtual Library.
+                  Reference records are validated by the SCBD Secretariat before they are published in the ABSCH.
+                  </span>
+              </div>
 
 
+          </div>
+      </div>
 
       <h1>User Notifications and Recent Activity</h1>
         <div style="background-color:#F7F7F9; padding:10px;">
             <div xuser-notifications></div>
         </div>
 
-  </div> <!-- col-xs-9 -->
+
+
+
+
+  </md-content>
+</div>
+
 </div> <!-- controller -->
