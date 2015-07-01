@@ -65,9 +65,9 @@
 
                     <div id="filterCheckboxes">
                         <search-filter-schemas  ng-model='schemas' field='schema_s' query='querySchema' preview-type="previewType" selected-filters="selectedSchemaFilters"></search-filter-schemas>
-                        <search-filter-themes title='Thematic Areas' ng-model='thematicAreas' field='thematicAreas_ss' query='queryTheme'></search-filter-themes>
+                        <search-filter-themes api="thematicAreaApi" title='Thematic Areas' ng-model='thematicAreas' field='thematicAreas_ss' query='queryTheme'></search-filter-themes>
                         <search-filter-countries api="countryApi" title='Countries' ng-model='governments' field='government_s' query='queryGovernment' external-filter="countryResultFilter"></search-filter-countries>
-                        <search-filter-regions title="Regions" ng-model="regions" field="government_REL_ss" query="queryRegion" facets="regionFacets"></search-filter-regions>
+                        <search-filter-regions api="regionsApi" title="Regions" ng-model="regions" field="government_REL_ss" query="queryRegion" facets="regionFacets"></search-filter-regions>
                     </div>
                      <!-- <div class="form-group">
                       <label for="sortby">Sort By</label>
@@ -91,12 +91,6 @@
                          <span class="badge" >{{filter.count}}</span>
                          &nbsp;<span aria-hidden="true">&times;</span>
                     </button>
-                    <!-- <span style="cursor:pointer;margin-right:2px"  ng-repeat="filter in selectedSchemaFilters" class="label label-primary"
-                    ng-click="removeFilter(filter)">
-                        {{filter.type=='schema' ? filter.value : (filter.value|term)}}
-                        &nbsp;<span class="badge">{{filter.count}}</span>
-                        &nbsp;<span aria-hidden="true">&times;</span>
-                    </span> -->
                     &nbsp;
 
                     <button class="btn btn-primary" type="button"
@@ -107,15 +101,24 @@
                          <span class="badge" >{{filter.count}}</span>
                          &nbsp;<span aria-hidden="true">&times;</span>
                     </button>
-                    <!-- <span style="cursor:pointer" ng-show="queryGovernment && queryGovernment.length>0 && queryGovernment!='*:*'" class="label label-primary">
-                        Government &nbsp;<span aria-hidden="true">&times;</span>
-                    </span> -->
-                    &nbsp;<span style="cursor:pointer" ng-show="queryTheme && queryTheme.length>0 && queryTheme!='*:*'" class="label label-primary">
-                        Theamatic Areas &nbsp;<span aria-hidden="true">&times;</span>
-                    </span>
-                    &nbsp;<span style="cursor:pointer" ng-show="queryRegion && queryRegion.length>0 && queryRegion!='*:*'" class="label label-primary">
-                        Regions &nbsp;<span aria-hidden="true">&times;</span>
-                    </span>
+                    &nbsp;
+                    <button class="btn btn-primary" type="button"
+                     ng-repeat="filter in thematicAreaApi.getSelected()"
+                     ng-click="removeThematicAreaFilter(filter)"
+                            style="margin-right:2px;margin-bottom:2px">
+                        {{filter.title|lstring}}
+                         <span class="badge" >{{filter.count}}</span>
+                         &nbsp;<span aria-hidden="true">&times;</span>
+                    </button>
+                    &nbsp;
+                    <button class="btn btn-primary" type="button"
+                     ng-repeat="filter in regionsApi.getSelected()"
+                     ng-click="removeRegionFilter(filter)"
+                            style="margin-right:2px;margin-bottom:2px">
+                        {{filter.title|lstring}}
+                         <span class="badge" >{{filter.count}}</span>
+                         &nbsp;<span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
 
                 <div preview-type="previewType" document-list documents='rawDocs' filter='*' show-pagination='true' current-page='currentPage' document-Count='documentCount' order-by="orderBy">
@@ -123,7 +126,7 @@
             </div>
         </div>
     </div>
-    
+
 
 
 </div>

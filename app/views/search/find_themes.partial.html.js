@@ -12,6 +12,7 @@ app.directive('searchFilterThemes', function ($http) {
               items: '=ngModel',
               field: '@field',
               query: '=query',
+              api             : '=?',
               // locales    : '=',
               // rows       : '=',
               // required   : "@"
@@ -21,6 +22,28 @@ app.directive('searchFilterThemes', function ($http) {
         },
         controller : ['$scope', '$element', '$location', 'Thesaurus', 'underscore', function ($scope, $element, $location, thesaurus, _)
         {
+            $scope.api = {
+                getSelected   : function(){return _.where($scope.termsArray, {selected: true});},
+                unSelectItem  : unSelectItem,
+                unSelectAll   : unSelectAll,
+            };
+            function unSelectItem(identifier){
+                if(identifier){
+                    var selectedItem = _.find($scope.termsArray, {identifier:identifier});
+                    if(selectedItem){
+                        $scope.onclick(selectedItem);
+                    }
+                }
+            }
+
+            function unSelectAll(){
+                getSelected().forEach(function(data) {
+                  if (data.selected)
+                    data.selected = false;
+                })
+                buildQuery();
+            }
+
             $scope.expanded = false;
             $scope.selectedItems = [];
             $scope.facet = $scope.field.replace('_s', ''); // TODO: replace @field by @facet

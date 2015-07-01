@@ -11,13 +11,35 @@ define(['app'], function(app) {
               items: '=ngModel',
               field: '@field',
               query: '=query',
-              facets: '=facets'
+              facets: '=facets',
+              api             : '=?'
         },
         link: function ($scope, element, attrs, ngModelController)
         {
         },
         controller : ['$scope', '$element', '$location', 'Thesaurus', function ($scope, $element, $location, thesaurus)
         {
+            $scope.api = {
+                getSelected   : function(){return _.where(self.termsMap, {selected: true});},
+                unSelectItem  : unSelectItem,
+                unSelectAll   : unSelectAll,
+            }
+            function unSelectItem(identifier){
+                if(identifier){
+                    var selectedItem = _.find(self.termsMap, {identifier:identifier})
+                    if(selectedItem){
+                        $scope.onclick({item:selectedItem});
+                    }
+                }
+            }
+
+            function unSelectAll(){
+                getSelected().forEach(function(data) {
+                  if (data.selected)
+                    data.selected = false;
+                })
+                buildQuery();
+            }
             var self = this;
             self.termsMap = [];
 

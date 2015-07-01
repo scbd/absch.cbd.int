@@ -421,7 +421,12 @@ define(['app','underscore','/app/js/common.js',
         $scope.removeCountryFilter = function(filter){
             $scope.countryApi.unSelectItem(filter.code);
         }
-
+        $scope.removeRegionFilter = function(filter){
+            $scope.regionsApi.unSelectItem(filter.identifier);
+        }
+        $scope.removeThematicAreaFilter = function(filter){
+            $scope.thematicAreaApi.unSelectItem(filter.identifier);
+        }
     }]);
 
 });
