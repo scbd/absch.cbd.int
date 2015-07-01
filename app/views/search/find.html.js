@@ -317,6 +317,7 @@ define(['app','underscore','/app/js/common.js',
 
             $scope.keyword = "";
             $scope.queryPartyStatus = "";
+            $scope.partyStatusString = undefined;
             $scope.$broadcast("clearFilter",{});
         }
 
@@ -393,15 +394,20 @@ define(['app','underscore','/app/js/common.js',
 
             commonjs.getCountries()
             .then(function(data){
-
+                $scope.partyStatusString = undefined;
                 var npParties
 
                 if(type=='party' || type == 'nonParty'){
 
-                    if(type=='party')
+                    if(type=='party'){
                         npParties = _.where(data, {isNPParty:true});
+                        $scope.partiesCount = npParties.length;
+                        $scope.partyStatusString = 'Party to the Nagoya Protocol';
+                    }
                     else {
                         npParties = _.where(data, {isNPParty:false});
+                        $scope.nonPartiesCount = npParties.length;
+                        $scope.partyStatusString = 'Non parties';
                     }
                     $scope.queryPartyStatus =
                                         ('government_s:(' +

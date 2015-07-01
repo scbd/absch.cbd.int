@@ -551,7 +551,7 @@ app.directive('searchFilterSchemas', function ($http) {
                                     $scope[filter.name + 'Api'].clearSelection();
                             }
                             else if(filter.type=='radio'){
-                                $scope[filter.name]=-1;
+                                $scope[filter.name]=null;
                             }
                             else {
                                 $scope[filter.name] = undefined;
@@ -569,8 +569,11 @@ app.directive('searchFilterSchemas', function ($http) {
                             $scope[info.data.identifier + 'Api'].clearSelection();
                         }
                         else {
-                            $scope[filter.name] = -2;
+                            $scope[info.data.identifier] = null;
                         }
+                    }
+                    else {
+                        $scope[info.data.identifier] = null;
                     }
                 }
 
