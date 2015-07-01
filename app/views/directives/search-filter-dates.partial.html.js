@@ -8,13 +8,34 @@ app.directive('searchFilterDates', function ($http) {
         scope: {
               title: '@title',
               query: '=query',
-              field: '@field'
+              field: '@field',
+              api   : '=?'
               //since: '=since',
               //until: '=until'
         },
         link: function ($scope, element, attrs, ngModelController) {
         },
-        controller : ["$scope", function ($scope) {
+        controller : ["$scope", "$filter", function ($scope, $filter) {
+
+            $scope.api = {
+                getDateString : getDateString,
+                clearSelection  : clearSelection
+            };
+
+            function clearSelection(){
+                $scope.since = null;
+                $scope.until = null;
+                $scope.selectedDate = '';
+            }
+            function getDateString(){
+                if($scope.since || $scope.until) {
+                    var since = $scope.since ? 'since ' +  $filter("formatDate")($scope.since)  : '';
+                    var until = $scope.until ? ' until ' +  $filter("formatDate")($scope.until)  : '';
+
+                    return since + until;
+                }
+                return '';
+            }
 
             var now = new Date();
 
@@ -64,14 +85,8 @@ app.directive('searchFilterDates', function ($http) {
                 e.stopPropagation();
             });
 
-            $scope.clearSelection = function(){
-                $scope.since = null;
-                $scope.until = null;
-                $scope.selectedDate = '';
-            }
-
 			$scope.$parent.$on('clearSelectSelection', function(){
-				 $scope.clearSelection();
+				 clearSelection();
 			})
 
             $scope.hasSelectedItems = function(){
