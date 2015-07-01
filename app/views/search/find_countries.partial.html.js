@@ -32,7 +32,7 @@ define(['app', 'underscore', '/app/js/common.js'], function(app, _) {
           }
 
           function unSelectAll(){
-              getSelected().forEach(function(data) {
+              $scope.api.getSelected().forEach(function(data) {
                 if (data.selected)
                   data.selected = false;
               })

@@ -94,10 +94,9 @@
                          <i class="fa fa-chevron-circle-left "></i> Search Filters
                  </md-button>
 
-                 <search-filter-themes title='Thematic Areas' ng-model='thematicAreas' field='thematicAreas_ss' query='queryTheme'></search-filter-themes>
-                 <search-filter-countries title='Countries' ng-model='governments' field='government_s' query='queryGovernment' external-filter="countryResultFilter"></search-filter-countries>
-                 <search-filter-regions title="Regions" ng-model="regions" field="government_REL_ss" query="queryRegion" facets="regionFacets"></search-filter-regions>
-
+                 <search-filter-themes api="thematicAreaApi" title='Thematic Areas' ng-model='thematicAreas' field='thematicAreas_ss' query='queryTheme'></search-filter-themes>
+                 <search-filter-countries api="countryApi" title='Countries' ng-model='governments' field='government_s' query='queryGovernment' external-filter="countryResultFilter"></search-filter-countries>
+                 <search-filter-regions api="regionsApi" title="Regions" ng-model="regions" field="government_REL_ss" query="queryRegion" facets="regionFacets"></search-filter-regions>
 
 
                  <div style="max-width:100%">
@@ -111,15 +110,6 @@
                           <span class="badge" >{{filter.count}}</span>
                           &nbsp;<span aria-hidden="true">&times;</span>
                      </button>
-                     <span style="cursor:pointer;margin-right:2px"  ng-repeat="filter in selectedSchemaFilters" class="label label-primary"
-                     ng-click="removeFilter(filter)">
-                         {{filter.type=='schema' ? filter.value : (filter.value|term)}}
-                         &nbsp;<span class="badge">{{filter.count}}</span>
-
-                         &nbsp;<span aria-hidden="true">&times;</span>
-                    </button>
-                    &nbsp;
-
                     <button class="btn btn-primary" type="button"
                      ng-repeat="filter in countryApi.getSelected()"
                      ng-click="removeCountryFilter(filter)"
@@ -128,7 +118,6 @@
                          <span class="badge" >{{filter.count}}</span>
                          &nbsp;<span aria-hidden="true">&times;</span>
                     </button>
-                    &nbsp;
                     <button class="btn btn-primary" type="button"
                      ng-repeat="filter in thematicAreaApi.getSelected()"
                      ng-click="removeThematicAreaFilter(filter)"
@@ -137,7 +126,6 @@
                          <span class="badge" >{{filter.count}}</span>
                          &nbsp;<span aria-hidden="true">&times;</span>
                     </button>
-                    &nbsp;
                     <button class="btn btn-primary" type="button"
                      ng-repeat="filter in regionsApi.getSelected()"
                      ng-click="removeRegionFilter(filter)"

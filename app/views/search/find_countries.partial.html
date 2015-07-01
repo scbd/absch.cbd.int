@@ -5,22 +5,17 @@
      {{title | lstring:locale}}</a>
     </h3> -->
 
-    <div class="list-group-item-expand"  ng-class="{'scroll':selectedCount()>0}">
+    <!-- <div class="list-group-item-expand"  ng-class="{'scroll':selectedCount()>0}">
         <div class="col-xs-12" style="white-space:nowrap;text-overflow:ellipsis;"  ng-repeat="item in terms | orderBy:'name.en' | filter:{selected:true}" ng-class="ccc(item)" ng-click="onclick(this, $event)">
 
             <div class="checkbox" style="margin-top:2px;margin-bottom:2px;padding:0 0 0 5px;">&nbsp;
-                <!-- <div class="glyphicon glyphicon-remove"></div>  -->
                 <label class="label" <label class="label" style="font-size:13px;font-weight:bold;white-space:normal;"
                 ng-class="{'color-blue bold': item.isNPParty, 'color-grey':!item.isNPParty}">
                     <input type="checkbox" ng-model="item.selected" ng-change="refresh()">{{item.name.en}}</label>
                 <span class="badge pull-right">{{item.count}}</span>
             </div>
-
-            <!-- <div class="filter-selected truncate" style="cursor:pointer">
-                <i class="glyphicon glyphicon-remove-circle"></i> {{item.title | lstring:locale}} ({{item.count}})
-            </div> -->
         </div>
-     </div>
+     </div> -->
         <style type="text/css" media="screen">
             .letter-active{font-weight: bold; color:#111;text-decoration: underline;}
             .letter{ }

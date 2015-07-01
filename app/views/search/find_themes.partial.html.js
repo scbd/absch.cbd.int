@@ -37,7 +37,7 @@ app.directive('searchFilterThemes', function ($http) {
             }
 
             function unSelectAll(){
-                getSelected().forEach(function(data) {
+                $scope.api.getSelected().forEach(function(data) {
                   if (data.selected)
                     data.selected = false;
                 })
