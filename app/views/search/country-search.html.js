@@ -67,7 +67,7 @@ define(['app', 'underscore', 'angular-localizer', 'scbd-angularjs-services', 'sc
                     'wt': 'json',
                     'start': 0,
                     'rows': 1000,
-                    'cb': new Date().getTime(),
+                    // 'cb': new Date().getTime(),
                     'group': true,
                     'group.field': 'government_s',
                     'group.limit': 1000,

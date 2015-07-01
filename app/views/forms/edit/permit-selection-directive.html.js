@@ -78,7 +78,7 @@ app.directive("existingPermit", [ function () {
                         'wt': 'json',
                         'start': 0,
                         'rows': 25,
-                        'cb': new Date().getTime()
+                        // 'cb': new Date().getTime()
                     };
 
                     if (queryCanceler) {
@@ -183,7 +183,7 @@ app.directive("existingPermit", [ function () {
                         'wt': 'json',
                         'start': 0,
                         'rows': 25,
-                        'cb': new Date().getTime()
+                        // 'cb': new Date().getTime()
 	                    };
 
 

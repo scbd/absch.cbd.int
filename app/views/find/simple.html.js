@@ -231,7 +231,7 @@ define(['app',  'directives/angucomplete-extended', 'jqvmap', 'jqvmapworld'], fu
                 'wt': 'json',
                 'start': 0,
                 'rows': 100,
-                'cb': new Date().getTime()
+                //'cb': new Date().getTime()
             };
             if($scope.sortBy)
               queryParameters.sort = $scope.sortBy + ' desc, ' + queryParameters.sort;

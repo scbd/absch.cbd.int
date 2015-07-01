@@ -196,7 +196,7 @@ define(['app','underscore','/app/js/common.js',
                     'wt': 'json',
                     'start': $scope.currentPage * $scope.itemsPerPage,
                     'rows': $scope.itemsPerPage,
-                    'cb': new Date().getTime()
+                    //'cb': new Date().getTime()
                 };
             }
             else if($scope.previewType == 'group'){
@@ -207,7 +207,7 @@ define(['app','underscore','/app/js/common.js',
                     'wt': 'json',
                     'start': $scope.currentPage * $scope.itemsPerPage,
                     'rows': $scope.itemsPerPage,
-                    'cb': new Date().getTime(),
+                    // 'cb': new Date().getTime(),
                     'group': true,
                     'group.ngroups' : true,
                     'group.field': 'government_s',

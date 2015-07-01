@@ -58,7 +58,7 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q
 		else if(document.originCountries){
 
 			var country = _.map(document.originCountries, function(country){ return country.identifier })
-			var query = "/api/v2013/index/select?cb=1412881121649&fl=id,identifier_s&q=(realm_ss:" + $scope.realm.toLowerCase() +
+			var query = "/api/v2013/index/select?fl=id,identifier_s&q=(realm_ss:" + $scope.realm.toLowerCase() +
 			"+AND+NOT+version_s:*+AND+schema_s:authority+AND+(government_s:" + country.join('+OR government_s:') + "))&rows=50"
 
 			$http.get(query).success(function(res) {

@@ -484,7 +484,7 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
             'wt'   : 'json',
             'start': 0,
             'rows' : 100,
-            'cb'   : new Date().getTime()
+            // 'cb'   : new Date().getTime()
         };
 
         var deferred = $q.defer();
