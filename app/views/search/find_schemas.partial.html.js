@@ -336,7 +336,7 @@ app.directive('searchFilterSchemas', function ($http) {
             $scope.authority               = { identifier: 'authority',                title: 'Competent National Authorities' ,
                                                subFilters : [
                                                                 { name: 'cnaResponsibleForAll',     type: 'radio' , field: 'absResposibleForAll_b'},
-                                                                { name: 'cnaJurisdiction',          type: 'multiselect', field: 'jurisdiction_s' },
+                                                                { name: 'cnaJurisdiction',          type: 'multiselect', field: 'absJurisdiction_s' },
                                                                 { name: 'cnaGeneticResourceTypes',  type: 'multiselect' , field: 'absGeneticResourceTypes_ss'}
                                                             ]
                                              };
