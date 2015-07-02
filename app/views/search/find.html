@@ -29,38 +29,14 @@
              <md-toolbar class="bg-medgrey" >
                <h1 class="md-toolbar-tools">
 
-                   Search &nbsp;&nbsp;&nbsp;
+                   Search Filters
 
-                   <!-- <span class="pull-right">
-                       <a ng-href="#" ng-click="previewType='list'" class="not-active"
-                         data-toggle="tooltip" title="View result set in list view ordered by creation date"
-                         ng-class="{'active':previewType=='list'}"><i class="fa fa-list"/>
-                       </a>
-                       <a ng-href="#" ng-click="previewType='group'" class="not-active "
-                           data-toggle="tooltip" title="View result set grouped by country"
-                           ng-class="{'active':previewType=='group'}">
-                           <i class="fa fa-th-large"/>
-                       </a>
-                   </span> -->
-
-
-
+                   <button style="position:relative;left:70px;" class="btn btn-xs btn-default" ng-click="clearFilter()" class=" ">Clear filters</button>
 
                </h1>
              </md-toolbar>
 
              <md-content layout-padding layout-margin>
-
-                 <h3 style="padding-top:0;margin-top:0;"> Display </h3>
-                 <div class="btn-group" role="group">
-                   <button type="button" class="btn btn-default"  ng-class="{'bg-medgrey':previewType=='list' }"   ng-click="previewType='list'"><i class="fa fa-list"/> List records </button>
-                   <button type="button" class="btn btn-default"  ng-class="{'bg-medgrey': previewType=='group' }" ng-click="previewType='group'" ><i class="fa fa-th-large"/> Group by country</button>
-                 </div>
-                <br><br>
-
-                <h3> Search Filters    <button class="btn btn-default pull-right" ng-click="clearFilter()" class=" ">Clear filters</button></h3>
-                <br>
-
 
 
                          <input type="text" ng-model="keyword" placeholder=" Keyword " class="form-control keyword" style="margin-bottom:10px;">
@@ -105,58 +81,74 @@
 
 
          <md-content flex layout-margin style="margin:0 30px 30px 30px;padding:0;background-color:transparent;"  >
+
+
+
+
+
+
              <div layout="column" layout-align="top center"  >
 
-                 <md-button ng-click="toggleLeft()" class="md-primary md-raised bg-medgrey" hide-gt-lg  style="margin: 0  0 10px 0;">
+                 <md-button ng-click="toggleLeft()" class="md-primary md-raised bg-medgrey" hide-gt-lg  style="width:100%;margin: 0  0 10px 0;">
                      <i class="material-icons" style="position:relative;top:6px;">menu</i> Search Filters
                  </md-button>
+
+                  <div layout="row" layout-align="top center"  >
+
+                    <div flex="66">
+                        <button class="btn btn-primary" type="button" ng-show="partyStatusString"
+                         ng-click="queryStatus()"
+                                style="margin-right:2px;margin-bottom:2px">
+                                {{partyStatusString}}
+                             <span class="badge" >{{partyStatusString=="Non parties" ? nonPartiesCount : partiesCount}}</span>
+                             &nbsp;<span aria-hidden="true">&times;</span>
+                        </button>
+
+                        <button class="btn btn-primary" type="button" ng-repeat="filter in selectedSchemaFilters" ng-click="removeFilter(filter)"
+                                style="margin-right:2px;margin-bottom:2px">
+                            {{filter.isTerm ? (filter.value|term) : filter.value}}
+                             <span class="badge" >{{filter.count}}</span>
+                             &nbsp;<span aria-hidden="true">&times;</span>
+                        </button>
+                       <button class="btn btn-primary" type="button"
+                        ng-repeat="filter in countryApi.getSelected()"
+                        ng-click="removeCountryFilter(filter)"
+                               style="margin-right:2px;margin-bottom:2px">
+                           {{filter.name|lstring}}
+                            <span class="badge" >{{filter.count}}</span>
+                            &nbsp;<span aria-hidden="true">&times;</span>
+                       </button>
+                       <button class="btn btn-primary" type="button"
+                        ng-repeat="filter in thematicAreaApi.getSelected()"
+                        ng-click="removeThematicAreaFilter(filter)"
+                               style="margin-right:2px;margin-bottom:2px">
+                           {{filter.title|lstring}}
+                            <span class="badge" >{{filter.count}}</span>
+                            &nbsp;<span aria-hidden="true">&times;</span>
+                       </button>
+                       <button class="btn btn-primary" type="button"
+                        ng-repeat="filter in regionsApi.getSelected()"
+                        ng-click="removeRegionFilter(filter)"
+                               style="margin-right:2px;margin-bottom:2px">
+                           {{filter.title|lstring}}
+                            <span class="badge" >{{filter.count}}</span>
+                            &nbsp;<span aria-hidden="true">&times;</span>
+                       </button>
+                    </div>
+
+                    <div flex="33" class="text-right">
+                        <div class="btn-group" role="group">
+                          <button type="button" class="btn btn-default"  ng-class="{'bg-blue':previewType=='list' }"   ng-click="previewType='list'"><i class="fa fa-list"/> List records </button>
+                          <button type="button" class="btn btn-default"  ng-class="{'bg-blue': previewType=='group' }" ng-click="previewType='group'" ><i class="fa fa-th-large"/> Group by country</button>
+                        </div>
+                    </div>
+
+                  </div>
 
                  <search-filter-themes api="thematicAreaApi" title='Thematic Areas' ng-model='thematicAreas' field='thematicAreas_ss' query='queryTheme'></search-filter-themes>
                  <search-filter-countries api="countryApi" title='Countries' ng-model='governments' field='government_s' query='queryGovernment' external-filter="countryResultFilter"></search-filter-countries>
                  <search-filter-regions api="regionsApi" title="Regions" ng-model="regions" field="government_REL_ss" query="queryRegion" facets="regionFacets"></search-filter-regions>
 
-
-                 <div style="max-width:100%">
-
-                     <button class="btn btn-primary" type="button" ng-show="partyStatusString"
-                      ng-click="queryStatus()"
-                             style="margin-right:2px;margin-bottom:2px">
-                             {{partyStatusString}}
-                          <span class="badge" >{{partyStatusString=="Non parties" ? nonPartiesCount : partiesCount}}</span>
-                          &nbsp;<span aria-hidden="true">&times;</span>
-                     </button>
-                     &nbsp;
-                     <button class="btn btn-primary" type="button" ng-repeat="filter in selectedSchemaFilters" ng-click="removeFilter(filter)"
-                             style="margin-right:2px;margin-bottom:2px">
-                         {{filter.isTerm ? (filter.value|term) : filter.value}}
-                          <span class="badge" >{{filter.count}}</span>
-                          &nbsp;<span aria-hidden="true">&times;</span>
-                     </button>
-                    <button class="btn btn-primary" type="button"
-                     ng-repeat="filter in countryApi.getSelected()"
-                     ng-click="removeCountryFilter(filter)"
-                            style="margin-right:2px;margin-bottom:2px">
-                        {{filter.name|lstring}}
-                         <span class="badge" >{{filter.count}}</span>
-                         &nbsp;<span aria-hidden="true">&times;</span>
-                    </button>
-                    <button class="btn btn-primary" type="button"
-                     ng-repeat="filter in thematicAreaApi.getSelected()"
-                     ng-click="removeThematicAreaFilter(filter)"
-                            style="margin-right:2px;margin-bottom:2px">
-                        {{filter.title|lstring}}
-                         <span class="badge" >{{filter.count}}</span>
-                         &nbsp;<span aria-hidden="true">&times;</span>
-                    </button>
-                    <button class="btn btn-primary" type="button"
-                     ng-repeat="filter in regionsApi.getSelected()"
-                     ng-click="removeRegionFilter(filter)"
-                            style="margin-right:2px;margin-bottom:2px">
-                        {{filter.title|lstring}}
-                         <span class="badge" >{{filter.count}}</span>
-                         &nbsp;<span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
 
                 <div preview-type="previewType" document-list documents='rawDocs' filter='*' show-pagination='true' current-page='currentPage' document-Count='documentCount' order-by="orderBy">
                 </div>
