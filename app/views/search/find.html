@@ -23,55 +23,71 @@
 
 
            <md-sidenav class="md-sidenav-left md-whiteframe-z1" md-component-id="left" md-is-locked-open="$mdMedia('min-width: 1200px')"
-           style="height:1200px;" >
+           style="height:1150px;" >
 
 
              <md-toolbar class="bg-medgrey" >
                <h1 class="md-toolbar-tools">
 
-                   Search Information &nbsp;&nbsp;&nbsp;
+                   Search &nbsp;&nbsp;&nbsp;
 
-               <span class="pull-right">
-                   <a ng-href="#" ng-click="previewType='list'" class="not-active"
-                     data-toggle="tooltip" title="View result set in list view ordered by creation date"
-                     ng-class="{'active':previewType=='list'}"><i class="fa fa-list"/>
-                   </a>
-                   <a ng-href="#" ng-click="previewType='group'" class="not-active "
-                       data-toggle="tooltip" title="View result set grouped by country"
-                       ng-class="{'active':previewType=='group'}">
-                       <i class="fa fa-th-large"/>
-                   </a>
-               </span>
+                   <!-- <span class="pull-right">
+                       <a ng-href="#" ng-click="previewType='list'" class="not-active"
+                         data-toggle="tooltip" title="View result set in list view ordered by creation date"
+                         ng-class="{'active':previewType=='list'}"><i class="fa fa-list"/>
+                       </a>
+                       <a ng-href="#" ng-click="previewType='group'" class="not-active "
+                           data-toggle="tooltip" title="View result set grouped by country"
+                           ng-class="{'active':previewType=='group'}">
+                           <i class="fa fa-th-large"/>
+                       </a>
+                   </span> -->
+
+
+
+
                </h1>
              </md-toolbar>
 
              <md-content layout-padding layout-margin>
 
+                 <h3 style="padding-top:0;margin-top:0;"> Display </h3>
+                 <div class="btn-group" role="group">
+                   <button type="button" class="btn btn-default"  ng-class="{'bg-medgrey':previewType=='list' }"   ng-click="previewType='list'"><i class="fa fa-list"/> List records </button>
+                   <button type="button" class="btn btn-default"  ng-class="{'bg-medgrey': previewType=='group' }" ng-click="previewType='group'" ><i class="fa fa-th-large"/> Group by country</button>
+                 </div>
+                <br><br>
 
-                    <div>
-                         <div style="font-size:16;font-weight:bold;">Party status</div>
-                         <a ng-click="queryStatus('party')">
-                             <span class="label label-primary" >&nbsp; 
-                             </span> Party to the Nagoya Protocol
-                             <span class="badge" >{{partiesCount}}</span>
-                         </a>
-                         <br>
-                         <a ng-click="queryStatus('nonParty')">
-                             <span class="label label-default">&nbsp;</span> Non-Party
-                             <span class="badge" >{{nonPartiesCount}}</span>
-                         </a>
-                     </div>
+                <h3> Search Filters    <button class="btn btn-default pull-right" ng-click="clearFilter()" class=" ">Clear filters</button></h3>
+                <br>
 
-                         <strong>SEARCH FILTERS</strong> <a ng-href="#" ng-click="clearFilter()" class="btn btn-info btn-xs pull-right " style="text-transform:uppercase;margin-bottom:10px;">Clear all filters</a>
+
 
                          <input type="text" ng-model="keyword" placeholder=" Keyword " class="form-control keyword" style="margin-bottom:10px;">
+
+
+
+                         <div style="padding: 10px 0;">
+                              <h4 ng-click="showNPStatus=!showNPStatus"><i class="fa" ng-class="{'fa-caret-right':showNPStatus, 'fa-caret-down':!showNPStatus}"></i> &nbsp; Nagoya Protocol Party Status</h4>
+                              <div ng-show="!showNPStatus">
+                              <a ng-click="queryStatus('party')" class="color-grey" ng-href="#">
+                                  <span class="label label-primary" >&nbsp;</span> Party
+                              </a>
+                              <br>
+                              <a ng-click="queryStatus('nonParty')" class="color-grey" ng-href="#">
+                                  <span class="label label-default">&nbsp;</span> Non-Party
+                              </a>
+                          </div>
+                          </div>
+
+
 
                          <div id="filterCheckboxes">
                              <search-filter-schemas  ng-model='schemas' field='schema_s' query='querySchema' preview-type="previewType" selected-filters="selectedSchemaFilters"></search-filter-schemas>
 
-                             <a href="" ng-click="loadThemes=true;" data-toggle="modal" data-target="#themeModal" class="color-black"><h3>Thematic Areas</h3></a>
-                             <a href="" data-toggle="modal" data-target="#countryModal" class="color-black"><h3>Countries</h3></a>
-                             <a href="" ng-click="loadRegions=true;"data-toggle="modal" data-target="#regionModal" class="color-black"><h3>Regions</h3></a>
+                             <a href="" ng-click="loadThemes=true;" data-toggle="modal" data-target="#themeModal" class="color-black"><h4>Thematic Areas</h4></a>
+                             <a href="" data-toggle="modal" data-target="#countryModal" class="color-black"><h4>Countries</h4></a>
+                             <a href="" ng-click="loadRegions=true;"data-toggle="modal" data-target="#regionModal" class="color-black"><h4>Regions</h4></a>
 
 
                          </div>
@@ -90,7 +106,6 @@
 
          <md-content flex layout-margin style="margin:0 30px 30px 30px;padding:0;background-color:transparent;"  >
              <div layout="column" layout-align="top center"  >
-
 
                  <md-button ng-click="toggleLeft()" class="md-primary md-raised bg-medgrey" hide-gt-lg  style="margin: 0  0 10px 0;">
                          <i class="fa fa-chevron-circle-left "></i> Search Filters
