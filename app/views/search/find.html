@@ -62,6 +62,7 @@
                 <br>
 
 
+
                          <input type="text" ng-model="keyword" placeholder=" Keyword " class="form-control keyword" style="margin-bottom:10px;">
 
 
@@ -69,11 +70,11 @@
                          <div style="padding: 10px 0;">
                               <h4 ng-click="showNPStatus=!showNPStatus"><i class="fa" ng-class="{'fa-caret-right':showNPStatus, 'fa-caret-down':!showNPStatus}"></i> &nbsp; Nagoya Protocol Party Status</h4>
                               <div ng-show="!showNPStatus">
-                              <a ng-click="queryStatus('party')" class="color-grey">
+                              <a ng-click="queryStatus('party')" class="color-grey" ng-href="#">
                                   <span class="label label-primary" >&nbsp;</span> Party
                               </a>
                               <br>
-                              <a ng-click="queryStatus('nonParty')" class="color-grey">
+                              <a ng-click="queryStatus('nonParty')" class="color-grey" ng-href="#">
                                   <span class="label label-default">&nbsp;</span> Non-Party
                               </a>
                           </div>
@@ -116,9 +117,14 @@
 
 
                  <div style="max-width:100%">
-                     <span style="cursor:pointer" ng-click="queryStatus()" ng-show="queryPartyStatus && queryPartyStatus.length>0" class="label label-primary">
-                         Party Status &nbsp;<span aria-hidden="true">&times;</span>
-                     </span>
+
+                     <button class="btn btn-primary" type="button" ng-show="partyStatusString"
+                      ng-click="queryStatus()"
+                             style="margin-right:2px;margin-bottom:2px">
+                             {{partyStatusString}}
+                          <span class="badge" >{{partyStatusString=="Non parties" ? nonPartiesCount : partiesCount}}</span>
+                          &nbsp;<span aria-hidden="true">&times;</span>
+                     </button>
                      &nbsp;
                      <button class="btn btn-primary" type="button" ng-repeat="filter in selectedSchemaFilters" ng-click="removeFilter(filter)"
                              style="margin-right:2px;margin-bottom:2px">
