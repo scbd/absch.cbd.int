@@ -1,7 +1,7 @@
 <div id="Filters">
-    <h3>
+    <h4>
         <a ng-click="showNationalFilters=!showNationalFilters" ng-href="#" style="color:#287fcb"><i class="fa" ng-class="{'fa-caret-right':!showNationalFilters, 'fa-caret-down':showNationalFilters}"></i> &nbsp; National Records</a>
-    </h3>
+    </h4>
 <style>
 label{width:100%;}
 </style>
@@ -168,7 +168,7 @@ label{width:100%;}
 
 
 
-    <h3>
+    <h4>
         <a ng-click="showReferenceFilters=!showReferenceFilters" ng-href="#" ng-class="{'color-orange': previewType!='group','color-litegrey': previewType=='group'}">
             <i ng-if="previewType!='group'" class="fa" ng-class="{'fa-caret-right':!showReferenceFilters, 'fa-caret-down':showReferenceFilters}"></i> &nbsp;
             <i class="fa fa-ban" ng-if="previewType=='group'" ></i>  Reference Records
@@ -176,7 +176,7 @@ label{width:100%;}
         <div class="alert alert-info col-xs-12" ng-if="previewType=='group'" style="font-size:12px;">
             The Reference Record filter is not available when records are grouped by country. Please click the list icon <i class="fa fa-list"></i> at the top to switch to the list view.
         </div>
-    </h3>
+    </h4>
     <div ng-show="previewType=='list'">
         <div class="main_filter" ng-show="(showReferenceFilters || resource.selected)" ng-class="{'check_active': resource.selected}">
             <label>
