@@ -32,7 +32,7 @@
 
                  <div>
                      <a href="/dashboard" role="button" >
-                     <div  class="well btn-commonformat" ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/register/dashboard.html'}" style="cursor:pointer;">
+                     <div  class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/register/dashboard.html'}" style="cursor:pointer;">
 
 
                        <div class="btn-commonformat-national" style="text-transform:uppercase;">
@@ -46,7 +46,7 @@
                  </div></a>
 
                  <a href="/register/requests" role="button" >
-                     <div  class="well btn-commonformat" ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-tasks.directive.html'}" style="cursor:pointer;">
+                     <div  class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-tasks.directive.html'}" style="cursor:pointer;">
 
 
                          <div class="btn-commonformat-national" style="text-transform:uppercase;">
@@ -78,7 +78,7 @@
                                  <span style="margin-right:2px;font-size:12px;font-weight:normal;" class="label label-success  pull-right">PUBLISHED</span> -->
                              </h3>
                                <a ng-repeat="type in heading.formats" ng-href="{{type!='contacts' ? '/register' : ''}}/{{type | mapSchema}}" role="button">
-                                 <div class="btn-commonformat well" ng-class="{ 'btn-commonformat-selected' : document_type==type ,'btn-commonformat-reference-selected' : document_type=='resource' && document_type==type}">
+                                 <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : document_type==type ,'btn-commonformat-reference-selected' : document_type=='resource' && document_type==type}">
                                    <div class="btn-commonformat-national" ng-class="{'btn-commonformat-reference':document_types[type].abbreviation=='VLR'}">
 
 
@@ -130,7 +130,7 @@
            <div layout="column" layout-align="top center"  >
 
                 <md-button ng-click="toggleLeft()" class="md-primary md-raised bg-medgrey" hide-gt-lg  style="margin: 0  0 10px 0;">
-                        <i class="fa fa-chevron-circle-left "></i> Management Center
+                    <i class="material-icons" style="position:relative;top:6px;">menu</i> Management Center
                 </md-button>
 
                 <ng-include src="subTemplateUrl" style="min-height:980px;"  ng-show="user.isAuthenticated"></ng-include>
