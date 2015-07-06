@@ -193,6 +193,7 @@ define(['app',  'scbd-angularjs-controls'], function(app) {
 
                                 loadMap(countryColors);
                                 addEUMapEvents();
+                                $element.find('[data-toggle="tooltip"]').tooltip();
 
                             });
                         //$scope.countries = $filter("orderBy")(response[1].data, "name.en");
@@ -578,6 +579,7 @@ define(['app',  'scbd-angularjs-controls'], function(app) {
 
                     loadCountries();
                     loadCountryMapDetails();
+
                 }
             ]
 
