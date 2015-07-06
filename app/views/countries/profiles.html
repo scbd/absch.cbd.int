@@ -472,7 +472,7 @@
 
                                            <div class="row" ng-show="showCP">
                                                <div   style="padding:10px;">
-                                              <div ng-repeat="contact in absch_nfp | filter:{'schema_s':'absCheckpoint'} |  filter:!{'schema_s':'absCheckpointCommunique'}" >
+                                              <div ng-repeat="contact in absch_nfp | filter:isCheckpoint" >
                                                        <div ng-class="{'row': ($index)%3==0}"> </div>
                                                            <div class="col-md-4"  style="margin:0;">
                                                                <div class="panel panel-default" >
