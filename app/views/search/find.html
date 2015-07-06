@@ -2,9 +2,6 @@
 <link href="/app/css/record.css" rel="stylesheet">
 <style>
 
-#search_controls.affix-bottom {
-    /*position: absolute;*/
-}
 
 .not-active{
     color:rgb(119, 119, 119)!important;
@@ -38,10 +35,7 @@
 
              <md-content layout-padding layout-margin>
 
-
                          <input type="text" ng-model="keyword" placeholder=" Keyword " class="form-control keyword" style="margin-bottom:10px;">
-
-
 
                          <div style="padding: 10px 0;">
                               <h4 ng-click="showNPStatus=!showNPStatus"><i class="fa" ng-class="{'fa-caret-right':showNPStatus, 'fa-caret-down':!showNPStatus}"></i> &nbsp; Nagoya Protocol Party Status</h4>
@@ -56,8 +50,6 @@
                           </div>
                           </div>
 
-
-
                          <div id="filterCheckboxes">
                              <search-filter-schemas  ng-model='schemas' field='schema_s' query='querySchema' preview-type="previewType" selected-filters="selectedSchemaFilters"></search-filter-schemas>
 
@@ -65,15 +57,7 @@
                              <a href="" data-toggle="modal" data-target="#countryModal" class="color-black"><h4>Countries</h4></a>
                              <a href="" ng-click="loadRegions=true;"data-toggle="modal" data-target="#regionModal" class="color-black"><h4>Regions</h4></a>
 
-
                          </div>
-                          <!-- <div class="form-group">
-                           <label for="sortby">Sort By</label>
-                           <select ng-options="obj.value as obj.label for obj in sortOptions" ng-model="sortBy" class="form-control" ng-change="sortResults()" id="sortby"></select>
-                         </div> -->
-
-
-
 
              </md-content>
 
@@ -81,11 +65,6 @@
 
 
          <md-content flex layout-margin style="margin:0 30px 30px 30px;padding:0;background-color:transparent;"  >
-
-
-
-
-
 
              <div layout="column" layout-align="top center"  >
 
@@ -100,39 +79,39 @@
                          ng-click="queryStatus()"
                                 style="margin-right:2px;margin-bottom:2px">
                                 {{partyStatusString}}
-                             <span class="badge" >{{partyStatusString=="Non parties" ? nonPartiesCount : partiesCount}}</span>
-                             &nbsp;<span aria-hidden="true">&times;</span>
+                             <!-- <span class="badge" >{{partyStatusString=="Non parties" ? nonPartiesCount : partiesCount}}</span> -->
+                             &nbsp; <span aria-hidden="true">&times;</span>
                         </button>
 
                         <button class="btn btn-primary" type="button" ng-repeat="filter in selectedSchemaFilters" ng-click="removeFilter(filter)"
                                 style="margin-right:2px;margin-bottom:2px">
                             {{filter.isTerm ? (filter.value|term) : filter.value}}
-                             <span class="badge" >{{filter.count}}</span>
-                             &nbsp;<span aria-hidden="true">&times;</span>
+                             <!-- <span class="badge" >{{filter.count}}</span> -->
+                             &nbsp; <span aria-hidden="true">&times;</span>
                         </button>
                        <button class="btn btn-primary" type="button"
                         ng-repeat="filter in countryApi.getSelected()"
                         ng-click="removeCountryFilter(filter)"
                                style="margin-right:2px;margin-bottom:2px">
                            {{filter.name|lstring}}
-                            <span class="badge" >{{filter.count}}</span>
-                            &nbsp;<span aria-hidden="true">&times;</span>
+                            <!-- <span class="badge" >{{filter.count}}</span> -->
+                            &nbsp; <i class="material-icons">close</i>
                        </button>
                        <button class="btn btn-primary" type="button"
                         ng-repeat="filter in thematicAreaApi.getSelected()"
                         ng-click="removeThematicAreaFilter(filter)"
                                style="margin-right:2px;margin-bottom:2px">
                            {{filter.title|lstring}}
-                            <span class="badge" >{{filter.count}}</span>
-                            &nbsp;<span aria-hidden="true">&times;</span>
+                            <!-- <span class="badge" >{{filter.count}}</span> -->
+                            &nbsp; <span aria-hidden="true">&times;</span>
                        </button>
                        <button class="btn btn-primary" type="button"
                         ng-repeat="filter in regionsApi.getSelected()"
                         ng-click="removeRegionFilter(filter)"
                                style="margin-right:2px;margin-bottom:2px">
                            {{filter.title|lstring}}
-                            <span class="badge" >{{filter.count}}</span>
-                            &nbsp;<span aria-hidden="true">&times;</span>
+                            <!-- <span class="badge" >{{filter.count}}</span> -->
+                            &nbsp; <span aria-hidden="true">&times;</span>
                        </button>
                     </div>
 
