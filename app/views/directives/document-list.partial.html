@@ -299,10 +299,11 @@
                             <div class="col-xs-12">
                                 <div class="row bg-grey" style="padding:3px; border-radius: 3px;">
                                     <h5 style="padding:0;margin:0;font-size:15px;">
-
-
                                         <span class="badge bg-darkgrey">{{schema.length}}</span>
                                         <span style="position:relative;top:1px;" ng-class="{'color-grey': Permit==0, 'color-black': Permit > 0}">
+                                            <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
+                                                {{key | schemaIcon}}
+                                            </i>
                                             {{key|schemaNamePlural}} ({{key|schemaShortName}})
                                         </span>
 
@@ -320,8 +321,7 @@
                                                 </a> -->
                                                 <!-- <a ng-if="key=='measure'" href="/search/new/measurematrix/{{doc|uniqueIDWithoutRevision}}" class="pull-left"><i class="fa fa-bar-chart"></i>&nbsp;</a> -->
                                                 <div ng-click="doc.displayDetails = !doc.displayDetails;load(doc,doc.displayDetails)" style="cursor:pointer">
-                                                    <!-- <i class="{{key | schemaIcon }}"
-                                                    style="font-size:16pt;position:relative;top:3px;"></i> -->
+
                                                     <span class="bold color-litegrey" ng-if="doc.type.indexOf('ABS-FP') >= 0 ">ABS FP</span>
                                                     <span class="bold color-litegrey" ng-if="doc.type.indexOf('ABS-FP') < 0 "> CBD FP</span>
                                                     <!-- <span class="bold color-litegrey" ng-if="key!= 'focalPoint' ">{{key|schemaShortName}}</span> -->

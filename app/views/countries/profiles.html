@@ -5,60 +5,72 @@
 <link href="/app/libs/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
 <link href="/app/css/profile-map.css" rel="stylesheet">
 
-<div ng-controller="ProfileController" >
+<div ng-controller="ProfileController">
 
     <style>
-    .page-content{background-color: #eee;}
+        .page-content {
+            background-color: #eee;
+        }
 
         .ng-hide-add-active,
         .ng-hide-remove {
             display: inline!important;
         }
+
         .table-hover:hover {
             background-color: #f5f5f5;
         }
-        .table-row{
+
+        .table-row {
             cursor: pointer;
         }
+
         .border {
             border-bottom: 1px solid #eee;
             padding: 10px 0px 00px 00px;
         }
+
         .confidential {
             color: #a94442!important;
         }
+
         .tableheader {
             padding-top: 10px;
             padding-bottom: 10px;
             padding-right: 0px;
-            padding-left:0;
+            padding-left: 0;
             text-align: left;
-            cursor: pointer
-            color:#111;
+            cursor: pointer color: #111;
         }
+
         .table-msr {
             border-bottom: 1px solid #eee;
             padding-left: 20px;
             padding-right: 20px;
         }
+
         .fullBorder {
             border: 1px solid #eee;
         }
+
         .sectionHeader {
             border: 1px solid #eee;
             padding: 10px;
             margin-top: 50px;
         }
+
         .btn-panel-warning {
             color: #8a6d3b;
             background-color: #fcf8e3;
             border-color: #faebcc;
         }
+
         .btn-panel-info {
             color: #31708f;
             background-color: #d9edf7;
             border-color: #bce8f1;
         }
+
         .btn-panel-success {
             color: #3c763d;
             background-color: #dff0d8;
@@ -66,549 +78,575 @@
         }
 
         .flag-icon-eur {
-          background-image: url('/app/img/EUFlag.png');
-          width: : 165px;
+            background-image: url('/app/img/EUFlag.png');
+            width: : 165px;
         }
-
+        .pad-left{
+            margin-right: 5px;
+        }
+        *:focus {
+            outline: none;
+        }
     </style>
 
 
 
-<section layout="row" style="position:relative; top:20px; padding-bottom:30px;" flex>
+    <section layout="row" style="position:relative; top:20px; padding-bottom:30px;" flex>
 
 
-       <md-sidenav class="md-sidenav-left md-whiteframe-z1" md-component-id="left" md-is-locked-open="$mdMedia('min-width: 1200px')"
-       style="height:818px;" >
+        <md-sidenav class="md-sidenav-left md-whiteframe-z1" md-component-id="left" md-is-locked-open="$mdMedia('min-width: 1200px')" style="height:818px;">
 
 
-         <md-toolbar class="bg-medgrey" >
-           <h1 class="md-toolbar-tools">Select a country</h1>
-         </md-toolbar>
+            <md-toolbar class="bg-medgrey">
+                <h1 class="md-toolbar-tools">Select a country</h1>
+            </md-toolbar>
 
-         <md-content layout-padding layout-margin>
+            <md-content layout-padding layout-margin>
 
-             <div ng-repeat="country in countries | orderBy:'name.en' ">
-                <div>
-                    <a href="countries/{{country.code}}"
-                        ng-class="{'color-blue bold': country.isNPParty, 'color-grey':!country.isNPParty}">
+                <div ng-repeat="country in countries | orderBy:'name.en' ">
+                    <div>
+                        <a href="countries/{{country.code}}" ng-class="{'color-blue bold': country.isNPParty, 'color-grey':!country.isNPParty}">
                         {{country.name.en}}
                         <span class="badge pull-right">{{country.facetCount}}</span>
                     </a>
+                    </div>
                 </div>
-            </div>
-         </md-content>
+            </md-content>
 
-     </md-sidenav>
-
-
-     <md-content flex layout-margin style="margin:0 30px 30px 30px;padding:0;background-color:transparent;"  >
-         <div layout="column" layout-align="top center"  >
+        </md-sidenav>
 
 
-
-         <md-button ng-click="toggleLeft()" class="md-primary md-raised bg-medgrey" hide-gt-lg  style="margin: 0  0 10px 0;">
-             <i class="material-icons" style="position:relative;top:6px;">menu</i> Select a country
-         </md-button>
-
-     <div class="md-whiteframe-z1">
-         <md-toolbar ng-class="{'bg-blue': country.isNPParty,'bg-medgrey': !country.isNPParty }">
-         <div class="md-toolbar-tools">
-
-             <table style="width:100%">
-                 <tr>
-                     <td style="width:80px;padding-right:20px;">
-                         <div style="height:60px;" class="flag-icon-background  flag-icon-{{code.toLowerCase()}}"></div>
-                     </td>
-                     <td style="padding-top:10px;">
-                         <h3 style="margin:0;padding:0;display:inline;">
-                             <span class="country-name color-white" style="font-size:3vw;" >{{country.name.en}}</span>
-                          </h3>
-                         <h3  style="margin:0;padding:0;display:inline;position:relative;top:-5px;">
-                             <label class="label label-default" ng-show="!country.isNPParty">Non-Party</label>
-                             <label class="label label-info" ng-show="country.isNPParty">Party</label>
-                          </h3>
-                     </td>
-                     <td class="pull-right" style="padding-top:5px;">
-                           <div >
-                             <div ng-show="country.isNPSignatory && !country.isNPParty"><label  class="pull-right" >
-                                 <span style="color: #5bc0de;">Signatory</span>
-                             </label></div>
-
-                             <div ng-show="country.isNPParty||country.isNPInbetweenParty" ><label  class="pull-right" style="font-size:12px;text-transform:uppercase;" >
-                                 <span style="font-size:12px;text-transform:uppercase;color:#999;" >Date of {{country.treaties.XXVII8b.instrument}}: </span> {{country.treaties.XXVII8b.deposit | formatDate}}
-                             </label></div>
-
-                            <div ng-show="country.isNPInbetweenParty || country.isNPParty"> <label  class="pull-right" style="font-size:12px;text-transform:uppercase;">
-                                   <span style="font-size:12px;text-transform:uppercase;color:#999;">Date of entry into force: </span> {{country.entryIntoForceDate| formatDate}}
-                             </label></div>
-                         </div>
-                     </td>
-                 </tr>
-             </table>
-
-         </div>
-       </md-toolbar>
-       <md-content layout-padding style="padding: 24px;">
+        <md-content flex layout-margin style="margin:0 30px 30px 30px;padding:0;background-color:transparent;">
+            <div layout="column" layout-align="top center">
 
 
-                                           <div class="row bg-grey1" style="padding:3px;">
-                                               <h5 style="padding:0;margin:0;font-size:15px;" >
-                                                   <a href="" ng-click="showNFP = !showNFP">
-                                                       <span class="badge" ng-class="{'bg-grey': nfpCount==0, 'bg-black': nfpCount > 0}">{{nfpCount}}</span>
-                                                       <span style="position:relative;top:1px;" ng-class="{'color-grey': nfpCount==0, 'color-black': nfpCount > 0}"> National Focal Points (NFP)</span>
+
+                <md-button ng-click="toggleLeft()" class="md-primary md-raised bg-medgrey" hide-gt-lg style="margin: 0  0 10px 0;">
+                    <i class="material-icons" style="position:relative;top:6px;">menu</i> Select a country
+                </md-button>
+
+                <div class="md-whiteframe-z1">
+                    <md-toolbar ng-class="{'bg-blue': country.isNPParty,'bg-medgrey': !country.isNPParty }">
+                        <div class="md-toolbar-tools">
+
+                            <table style="width:100%">
+                                <tr>
+                                    <td style="width:80px;padding-right:20px;">
+                                        <div style="height:60px;" class="flag-icon-background  flag-icon-{{code.toLowerCase()}}"></div>
+                                    </td>
+                                    <td style="padding-top:10px;">
+                                        <h3 style="margin:0;padding:0;display:inline;">
+                                            <span class="country-name color-white" style="font-size:3vw;">{{country.name.en}}</span>
+                                        </h3>
+                                        <h3 style="margin:0;padding:0;display:inline;position:relative;top:-5px;">
+                                            <label class="label label-default" ng-show="!country.isNPParty">Non-Party</label>
+                                            <label class="label label-info" ng-show="country.isNPParty">Party</label>
+                                        </h3>
+                                    </td>
+                                    <td class="pull-right" style="padding-top:5px;">
+                                        <div>
+                                            <div ng-show="country.isNPSignatory && !country.isNPParty">
+                                                <label class="pull-right">
+                                                    <span style="color: #5bc0de;">Signatory</span>
+                                                </label>
+                                            </div>
+
+                                            <div ng-show="country.isNPParty||country.isNPInbetweenParty">
+                                                <label class="pull-right" style="font-size:12px;text-transform:uppercase;">
+                                                    <span style="font-size:12px;text-transform:uppercase;color:#999;">Date of {{country.treaties.XXVII8b.instrument}}: </span> {{country.treaties.XXVII8b.deposit | formatDate}}
+                                                </label>
+                                            </div>
+
+                                            <div ng-show="country.isNPInbetweenParty || country.isNPParty">
+                                                <label class="pull-right" style="font-size:12px;text-transform:uppercase;">
+                                                    <span style="font-size:12px;text-transform:uppercase;color:#999;">Date of entry into force: </span> {{country.entryIntoForceDate| formatDate}}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div>
+                    </md-toolbar>
+                    <md-content layout-padding style="padding: 24px;">
+
+
+                        <div class="row bg-grey1" style="padding:3px;">
+                            <h5 style="padding:0;margin:0;font-size:15px;">
+                                <a href="" ng-click="showNFP = !showNFP">
+                                                       <span class="badge pad-left" ng-class="{'bg-grey': nfpCount==0, 'bg-black': nfpCount > 0}">{{nfpCount}}</span>
+                                                       <span style="position:relative;top:1px;" ng-class="{'color-grey': nfpCount==0, 'color-black': nfpCount > 0}">
+                                                           <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
+                                                              {{'focalpoint' | schemaIcon}}
+                                                          </i>
+                                                           National Focal Points (NFP)</span>
                                                        <i class="fa fa-chevron-circle-up pull-right" ng-show="showNFP"></i>
                                                        <i class="fa fa-chevron-circle-down pull-right" ng-show="!showNFP"></i>
                                                    </a>
-                                               </h5>
-                                           </div>
+                            </h5>
+                        </div>
 
-                                           <div class="row" ng-show="showNFP" style="padding:0;margin:0;">
-                                               <div style="padding:0;margin:10px 0px;">
-                                               <div ng-repeat="contact in absch_nfp | filter:{'schema_s':'focalPoint'}">
-                                                       <div ng-class="{'row': ($index)%3==0}"> </div>
-                                                           <div class="col-md-4"  style="margin:0;">
-                                                               <div class="panel panel-default" >
-                                                                   <div class="panel-heading">
-                                                                       <h5 class="panel-title">
-                                                                           <i ng-class="{'fa fa-user':(contact.schema_s=='focalPoint'||contact.schema_s=='authority'),
-                                                                            'mdi-action-verified-user':contact.schema_s=='absCheckpoint',
-                                                                            'mdi-file-folder':contact.schema_s=='database'}"></i> {{getTitle(contact.schema_s,contact.type_ss,contact.schema_EN_t)}}
-                                                                       </h5>
-                                                                   </div>
-                                                                   <div class="panel-body">
-                                                                       <strong>
-                                                                           <a ng-show="contact.schema_s!='focalPoint'" ng-href="/database/{{contact.doc|uniqueIDWithoutRevision}}">{{contact.title_t}}</a>
-                                                                           <a ng-show="contact.schema_s=='focalPoint'" ng-href="/database/focalPoint/{{contact.documentId}}">{{contact.title_t}}</a>
-                                                                       </strong>
-                                                                       <div ng-show="contact.description_t" ng-bind-html="contact.description_t"></div>
+                        <div class="row" ng-show="showNFP" style="padding:0;margin:0;">
+                            <div style="padding:0;margin:10px 0px;">
+                                <div ng-repeat="contact in absch_nfp | filter:{'schema_s':'focalPoint'}">
+                                    <div ng-class="{'row': ($index)%3==0}"> </div>
+                                    <div class="col-md-4" style="margin:0;">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h5 class="panel-title">
+                                                     {{getTitle(contact.schema_s,contact.type_ss,contact.schema_EN_t)}}
+                                                </h5>
+                                            </div>
+                                            <div class="panel-body">
+                                                <strong>
+                                                    <a ng-show="contact.schema_s!='focalPoint'" ng-href="/database/{{contact.doc|uniqueIDWithoutRevision}}">{{contact.title_t}}</a>
+                                                    <a ng-show="contact.schema_s=='focalPoint'" ng-href="/database/focalPoint/{{contact.documentId}}">{{contact.title_t}}</a>
+                                                </strong>
+                                                <div ng-show="contact.description_t" ng-bind-html="contact.description_t"></div>
 
-                                                                       <ul ng-show="contact.telephones || contact.telephone_s || contact.fax_ss" style="list-style-type: none;padding:0;margin:0;">
-                                                                           <li ng-show="contact.telephone_s"><i class="fa fa-phone-square" /> {{contact.telephone_s}}</li>
-                                                                           <li ng-repeat="item in contact.telephones"><i class="fa fa-phone-square" /> {{item}}</li>
-                                                                           <li ng-repeat="item in contact.fax_ss"><i class="fa fa-fax" /> {{item}}</li>
-                                                                       </ul>
-                                                                       <ul ng-show="contact.emails || contact.email_ss" style="list-style-type: none;padding:0;margin:0;">
-                                                                           <li ng-repeat="item in contact.emails || contact.email_ss"><a ng-href="mailto:{{item}}"><i class="fa fa-envelope-o"></i> {{item}}</a>
-                                                                           </li>
-                                                                       </ul>
-                                                                   </div>
-                                                               </div>
-                                                           </div>
-                                                   </div>
-                                               </div>
-                                           </div>
+                                                <ul ng-show="contact.telephones || contact.telephone_s || contact.fax_ss" style="list-style-type: none;padding:0;margin:0;">
+                                                    <li ng-show="contact.telephone_s"><i class="fa fa-phone-square" /> {{contact.telephone_s}}</li>
+                                                    <li ng-repeat="item in contact.telephones"><i class="fa fa-phone-square" /> {{item}}</li>
+                                                    <li ng-repeat="item in contact.fax_ss"><i class="fa fa-fax" /> {{item}}</li>
+                                                </ul>
+                                                <ul ng-show="contact.emails || contact.email_ss" style="list-style-type: none;padding:0;margin:0;">
+                                                    <li ng-repeat="item in contact.emails || contact.email_ss"><a ng-href="mailto:{{item}}"><i class="fa fa-envelope-o"></i> {{item}}</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
 
 
 
 
 
-                                           <div class="row bg-grey1" style="padding:3px;">
-                                               <h5 style="padding:0;margin:0;font-size:15px;" >
+                        <div class="row bg-grey1" style="padding:3px;">
+                            <h5 style="padding:0;margin:0;font-size:15px;">
 
-                                                    <a href="" ng-click="showNDB = !showNDB">
-                                                       <span class="badge" ng-class="{'bg-grey': database==0, 'bg-black': database > 0}">{{database}}</span>
-                                                       <span style="position:relative;top:1px;" ng-class="{'color-grey': database==0, 'color-black': database > 0}"> National Databases and Websites (NDB)</span>
+                                <a href="" ng-click="showNDB = !showNDB">
+                                                       <span class="badge pad-left" ng-class="{'bg-grey': database==0, 'bg-black': database > 0}">{{database}}</span>
+                                                       <span style="position:relative;top:1px;" ng-class="{'color-grey': database==0, 'color-black': database > 0}">
+                                                           <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
+                                                              {{'ndb' | schemaIcon}}
+                                                          </i>
+                                                          National Databases and Websites (NDB)</span>
                                                        <i class="fa fa-chevron-circle-up pull-right" ng-show="showNDB"></i>
                                                        <i class="fa fa-chevron-circle-down pull-right" ng-show="!showNDB"></i>
                                                    </a>
 
-                                               </h5>
-                                           </div>
+                            </h5>
+                        </div>
 
-                                           <div class="row" ng-show="showNDB">
-                                               <div  style="padding:10px;">
-                                               <div ng-repeat="contact in absch_nfp | filter:{'schema_s':'database'}" >
-                                                       <div ng-class="{'row': ($index)%3==0}"> </div>
-                                                           <div class="col-md-4"  style="margin:0;">
-                                                               <div class="panel panel-default" >
-                                                                   <div class="panel-heading">
-                                                                       <h5 class="panel-title">
-                                                                           <i ng-class="{'fa fa-user':(contact.schema_s=='focalPoint'||contact.schema_s=='authority'),
-                                                                            'mdi-action-verified-user':contact.schema_s=='absCheckpoint',
-                                                                            'mdi-file-folder':contact.schema_s=='database'}"></i> {{getTitle(contact.schema_s,contact.type_ss,contact.schema_EN_t)}}
-                                                                       </h5>
-                                                                   </div>
-                                                                   <div class="panel-body">
-                                                                       <strong>
-                                                                           <a ng-show="contact.schema_s!='focalPoint'" ng-href="/database/{{contact.doc|uniqueIDWithoutRevision}}">{{contact.title_t}}</a>
-                                                                           <a ng-show="contact.schema_s=='focalPoint'" ng-href="/database/focalPoint/{{contact.documentId}}">{{contact.title_t}}</a>
-                                                                       </strong>
-                                                                       <div ng-show="contact.description_t" ng-bind-html="contact.description_t"></div>
+                        <div class="row" ng-show="showNDB">
+                            <div style="padding:10px;">
+                                <div ng-repeat="contact in absch_nfp | filter:{'schema_s':'database'}">
+                                    <div ng-class="{'row': ($index)%3==0}"> </div>
+                                    <div class="col-md-4" style="margin:0;">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h5 class="panel-title">
+                                                    {{getTitle(contact.schema_s,contact.type_ss,contact.schema_EN_t)}}
+                                                </h5>
+                                            </div>
+                                            <div class="panel-body">
+                                                <strong>
+                                                    <a ng-show="contact.schema_s!='focalPoint'" ng-href="/database/{{contact.doc|uniqueIDWithoutRevision}}">{{contact.title_t}}</a>
+                                                    <a ng-show="contact.schema_s=='focalPoint'" ng-href="/database/focalPoint/{{contact.documentId}}">{{contact.title_t}}</a>
+                                                </strong>
+                                                <div ng-show="contact.description_t" ng-bind-html="contact.description_t"></div>
 
-                                                                       <ul ng-show="contact.telephones || contact.telephone_s || contact.fax_ss" style="list-style-type: none;padding:0;margin:0;">
-                                                                           <li ng-show="contact.telephone_s"><i class="fa fa-phone-square" /> {{contact.telephone_s}}</li>
-                                                                           <li ng-repeat="item in contact.telephones"><i class="fa fa-phone-square" /> {{item}}</li>
-                                                                           <li ng-repeat="item in contact.fax_ss"><i class="fa fa-fax" /> {{item}}</li>
-                                                                       </ul>
-                                                                       <ul ng-show="contact.emails || contact.email_ss" style="list-style-type: none;padding:0;margin:0;">
-                                                                           <li ng-repeat="item in contact.emails || contact.email_ss"><a ng-href="mailto:{{item}}"><i class="fa fa-envelope-o"></i> {{item}}</a>
-                                                                           </li>
-                                                                       </ul>
-                                                                   </div>
-                                                               </div>
-                                                           </div>
-                                                   </div>
-                                               </div>
-                                           </div>
+                                                <ul ng-show="contact.telephones || contact.telephone_s || contact.fax_ss" style="list-style-type: none;padding:0;margin:0;">
+                                                    <li ng-show="contact.telephone_s"><i class="fa fa-phone-square" /> {{contact.telephone_s}}</li>
+                                                    <li ng-repeat="item in contact.telephones"><i class="fa fa-phone-square" /> {{item}}</li>
+                                                    <li ng-repeat="item in contact.fax_ss"><i class="fa fa-fax" /> {{item}}</li>
+                                                </ul>
+                                                <ul ng-show="contact.emails || contact.email_ss" style="list-style-type: none;padding:0;margin:0;">
+                                                    <li ng-repeat="item in contact.emails || contact.email_ss"><a ng-href="mailto:{{item}}"><i class="fa fa-envelope-o"></i> {{item}}</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
 
 
 
 
 
-                                           <div class="row bg-grey1" style="padding:3px;">
-                                               <h5 style="padding:0;margin:0;font-size:15px;" >
+                        <div class="row bg-grey1" style="padding:3px;">
+                            <h5 style="padding:0;margin:0;font-size:15px;">
 
-                                                    <a href="" ng-click="showCNA = !showCNA">
-                                                       <span class="badge" ng-class="{'bg-grey': nationalAuthority==0, 'bg-black': nationalAuthority > 0}">{{nationalAuthority}}</span>
+                                <a href="" ng-click="showCNA = !showCNA">
+                                                       <span class="badge pad-left" ng-class="{'bg-grey': nationalAuthority==0, 'bg-black': nationalAuthority > 0}">{{nationalAuthority}}</span>
                                                        <span style="position:relative;top:1px;"  ng-class="{'color-grey': nationalAuthority==0, 'color-black': nationalAuthority > 0}">
-                                                          Competent National Authorities (CNA)
+                                                           <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
+                                                                 {{'cna' | schemaIcon}}
+                                                             </i>
+                                                            Competent National Authorities (CNA)
                                                        </span>
                                                        <i class="fa fa-chevron-circle-up pull-right" ng-show="showCNA"></i>
                                                        <i class="fa fa-chevron-circle-down pull-right" ng-show="!showCNA"></i>
                                                    </a>
-                                               </h5>
-                                           </div>
+                            </h5>
+                        </div>
 
-                                           <div class="row" ng-show="showCNA">
-                                               <div  style="padding:10px;">
-                                                <div ng-repeat="contact in absch_nfp  | filter:{'schema_s':'authority'}" >
-                                                       <div ng-class="{'row': ($index)%3==0}"> </div>
-                                                           <div class="col-md-4"  style="margin:0;">
-                                                               <div class="panel panel-default" >
-                                                                   <div class="panel-heading">
-                                                                       <h5 class="panel-title">
-                                                                           <i ng-class="{'fa fa-user':(contact.schema_s=='focalPoint'||contact.schema_s=='authority'),
-                                                                            'mdi-action-verified-user':contact.schema_s=='absCheckpoint',
-                                                                            'mdi-file-folder':contact.schema_s=='database'}"></i> {{getTitle(contact.schema_s,contact.type_ss,contact.schema_EN_t)}}
-                                                                       </h5>
-                                                                   </div>
-                                                                   <div class="panel-body">
-                                                                       <strong>
-                                                                           <a ng-show="contact.schema_s!='focalPoint'" ng-href="/database/{{contact.doc|uniqueIDWithoutRevision}}">{{contact.title_t}}</a>
-                                                                           <a ng-show="contact.schema_s=='focalPoint'" ng-href="/database/focalPoint/{{contact.documentId}}">{{contact.title_t}}</a>
-                                                                       </strong>
-                                                                       <div ng-show="contact.description_t" ng-bind-html="contact.description_t"></div>
+                        <div class="row" ng-show="showCNA">
+                            <div style="padding:10px;">
+                                <div ng-repeat="contact in absch_nfp  | filter:{'schema_s':'authority'}">
+                                    <div ng-class="{'row': ($index)%3==0}"> </div>
+                                    <div class="col-md-4" style="margin:0;">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h5 class="panel-title">
+                                                    {{getTitle(contact.schema_s,contact.type_ss,contact.schema_EN_t)}}
+                                                </h5>
+                                            </div>
+                                            <div class="panel-body">
+                                                <strong>
+                                                    <a ng-show="contact.schema_s!='focalPoint'" ng-href="/database/{{contact.doc|uniqueIDWithoutRevision}}">{{contact.title_t}}</a>
+                                                    <a ng-show="contact.schema_s=='focalPoint'" ng-href="/database/focalPoint/{{contact.documentId}}">{{contact.title_t}}</a>
+                                                </strong>
+                                                <div ng-show="contact.description_t" ng-bind-html="contact.description_t"></div>
 
-                                                                       <ul ng-show="contact.telephones || contact.telephone_s || contact.fax_ss" style="list-style-type: none;padding:0;margin:0;">
-                                                                           <li ng-show="contact.telephone_s"><i class="fa fa-phone-square" /> {{contact.telephone_s}}</li>
-                                                                           <li ng-repeat="item in contact.telephones"><i class="fa fa-phone-square" /> {{item}}</li>
-                                                                           <li ng-repeat="item in contact.fax_ss"><i class="fa fa-fax" /> {{item}}</li>
-                                                                       </ul>
-                                                                       <ul ng-show="contact.emails || contact.email_ss" style="list-style-type: none;padding:0;margin:0;">
-                                                                           <li ng-repeat="item in contact.emails || contact.email_ss"><a ng-href="mailto:{{item}}"><i class="fa fa-envelope-o"></i> {{item}}</a>
-                                                                           </li>
-                                                                       </ul>
-                                                                   </div>
-                                                               </div>
-                                                           </div>
-                                                   </div>
+                                                <ul ng-show="contact.telephones || contact.telephone_s || contact.fax_ss" style="list-style-type: none;padding:0;margin:0;">
+                                                    <li ng-show="contact.telephone_s"><i class="fa fa-phone-square" /> {{contact.telephone_s}}</li>
+                                                    <li ng-repeat="item in contact.telephones"><i class="fa fa-phone-square" /> {{item}}</li>
+                                                    <li ng-repeat="item in contact.fax_ss"><i class="fa fa-fax" /> {{item}}</li>
+                                                </ul>
+                                                <ul ng-show="contact.emails || contact.email_ss" style="list-style-type: none;padding:0;margin:0;">
+                                                    <li ng-repeat="item in contact.emails || contact.email_ss"><a ng-href="mailto:{{item}}"><i class="fa fa-envelope-o"></i> {{item}}</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                               </div>
-                                           </div>
+                            </div>
+                        </div>
 
 
 
 
 
-                                           <div class="row bg-grey1" style="padding:3px;">
-                                               <h5 style="padding:0;margin:0;font-size:15px;" >
+                        <div class="row bg-grey1" style="padding:3px;">
+                            <h5 style="padding:0;margin:0;font-size:15px;">
 
-                                                   <a href="" ng-click="showMSR = !showMSR">
-                                                       <span class="badge" ng-class="{'bg-grey': nationalMeasure==0, 'bg-black': nationalMeasure > 0}">{{nationalMeasure}}</span>
+                                <a href="" ng-click="showMSR = !showMSR">
+                                                       <span class="badge pad-left" ng-class="{'bg-grey': nationalMeasure==0, 'bg-black': nationalMeasure > 0}">{{nationalMeasure}}</span>
                                                        <span style="position:relative;top:1px;"  ng-class="{'color-grey': nationalMeasure==0, 'color-black': nationalMeasure > 0}">
-                                                          Legislative, administrative or policy measures on access and benefit-sharing (MSR)
+                                                             <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
+                                                                 {{'msr' | schemaIcon}}
+                                                             </i>
+                                                               Legislative, administrative or policy measures on access and benefit-sharing (MSR)
                                                        </span>
                                                        <i class="fa fa-chevron-circle-up pull-right" ng-show="showMSR"></i>
                                                        <i class="fa fa-chevron-circle-down pull-right" ng-show="!showMSR"></i>
                                                    </a>
 
-                                               </h5>
-                                           </div>
+                            </h5>
+                        </div>
 
-                                           <div class="row" ng-show="showMSR" >
-                                               <div  style="padding:10px; margin:0 20px;">
-                                               <div class="row table-hover table-msr">
-                                                   <div class="col-lg-3 col-md-3 col-xs-3 tableheader" ng-click="sortMeasure='title_t';reverseMeasure=!reverseMeasure">name
-                                                       <i class="fa" ng-class="{'fa-caret-up':(sortMeasure=='title_t' && reverseMeasure),'fa-caret-down':(sortMeasure=='title_t' && !reverseMeasure)}"></i>
-                                                   </div>
-                                                   <div class="col-lg-3 col-md-3 col-xs-3 tableheader" ng-click="sortMeasure='type_EN_t';reverseMeasure=!reverseMeasure">type <i class="fa" ng-class="{'fa-caret-up':sortMeasure=='type_EN_t' && reverseMeasure,'fa-caret-down':sortMeasure=='type_EN_t' && !reverseMeasure}" />
-                                                   </div>
-                                                   <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortMeasure='status_EN_t';reverseMeasure=!reverseMeasure">status <i class="fa" ng-class="{'fa-caret-up':sortMeasure=='status_EN_t' && reverseMeasure,'fa-caret-down':sortMeasure=='status_EN_t' && !reverseMeasure}" />
-                                                   </div>
-                                                   <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortMeasure='jurisdiction_EN_t';reverseMeasure=!reverseMeasure">jurisdiction <i class="fa" ng-class="{'fa-caret-up':sortMeasure=='jurisdiction_EN_t' && reverseMeasure,'fa-caret-down':sortMeasure=='jurisdiction_EN_t' && !reverseMeasure}" />
-                                                   </div>
-                                                   <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortMeasure='entryIntoForce_dt';reverseMeasure=!reverseMeasure">date <i class="fa" ng-class="{'fa-caret-up':sortMeasure=='entryIntoForce_dt' && reverseMeasure,'fa-caret-down':sortMeasure=='entryIntoForce_dt' && !reverseMeasure}" />
-                                                   </div>
-                                               </div>
-                                               <div class="row table-hover table-msr" ng-repeat="measure in absMeasure = (absch_nfp|filter:isMeasure|orderBy:sortMeasure:reverseMeasure)">
-                                                   <div class="row border">
-                                                       <div class="row table-row">
+                        <div class="row" ng-show="showMSR">
+                            <div style="padding:10px; margin:0 20px;">
+                                <div class="row table-hover table-msr">
+                                    <div class="col-lg-3 col-md-3 col-xs-3 tableheader" ng-click="sortMeasure='title_t';reverseMeasure=!reverseMeasure">name
+                                        <i class="fa" ng-class="{'fa-caret-up':(sortMeasure=='title_t' && reverseMeasure),'fa-caret-down':(sortMeasure=='title_t' && !reverseMeasure)}"></i>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-xs-3 tableheader" ng-click="sortMeasure='type_EN_t';reverseMeasure=!reverseMeasure">type <i class="fa" ng-class="{'fa-caret-up':sortMeasure=='type_EN_t' && reverseMeasure,'fa-caret-down':sortMeasure=='type_EN_t' && !reverseMeasure}" />
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortMeasure='status_EN_t';reverseMeasure=!reverseMeasure">status <i class="fa" ng-class="{'fa-caret-up':sortMeasure=='status_EN_t' && reverseMeasure,'fa-caret-down':sortMeasure=='status_EN_t' && !reverseMeasure}" />
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortMeasure='jurisdiction_EN_t';reverseMeasure=!reverseMeasure">jurisdiction <i class="fa" ng-class="{'fa-caret-up':sortMeasure=='jurisdiction_EN_t' && reverseMeasure,'fa-caret-down':sortMeasure=='jurisdiction_EN_t' && !reverseMeasure}" />
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortMeasure='entryIntoForce_dt';reverseMeasure=!reverseMeasure">date <i class="fa" ng-class="{'fa-caret-up':sortMeasure=='entryIntoForce_dt' && reverseMeasure,'fa-caret-down':sortMeasure=='entryIntoForce_dt' && !reverseMeasure}" />
+                                    </div>
+                                </div>
+                                <div class="row table-hover table-msr" ng-repeat="measure in absMeasure = (absch_nfp|filter:isMeasure|orderBy:sortMeasure:reverseMeasure)">
+                                    <div class="row border">
+                                        <div class="row table-row">
 
-                                                           <div  ng-click="displayDetails=!displayDetails;showDetails(measure)">
-                                                               <div class="col-lg-3 col-md-3 col-xs-3">
+                                            <div ng-click="displayDetails=!displayDetails;showDetails(measure)">
+                                                <div class="col-lg-3 col-md-3 col-xs-3">
 
-                                                                   <!-- <a href="/search/new/measurematrix/{{measure|uniqueIDWithoutRevision}}"><i class="fa fa-bar-chart"></i></a> -->
+                                                    <!-- <a href="/search/new/measurematrix/{{measure|uniqueIDWithoutRevision}}"><i class="fa fa-bar-chart"></i></a> -->
 
-                                                                   {{measure.title_t}}
-                                                                   <i class="fa fa-refresh fa-spin" ng-show="displayDetails&& !measure.data" />
-                                                               </div>
-                                                               <div class="col-lg-3 col-md-3 col-xs-3">{{measure.type_EN_t}}</div>
-                                                               <div class="col-lg-2 col-md-2 col-xs-2">{{measure.status_EN_t}}</div>
-                                                               <div class="col-lg-2 col-md-2 col-xs-2">{{measure.jurisdiction_EN_t}}</div>
-                                                               <div class="col-lg-2 col-md-2 col-xs-2">{{measure.entryIntoForce_dt|formatDate}}</div>
-                                                           </div>
-                                                       </div>
-                                                       <div class="row">
-                                                           <i class="glyphicon glyphicon-remove-circle circle pull-right" style="position:relative;top:40px;z-index:100;font-size:20px;color:white;" ng-click="displayDetails=!displayDetails;"></i>
-                                                           <div class="col-xs-12 details document-show-hide" ng-show="displayDetails" record-loader document="measure.data" ></div>
-                                                       </div>
-                                                   </div>
-                                               </div>
-                                               <div class="row" ng-show="absMeasure.length==0">
-                                                   <div class="col-lg-10 col-md-12 col-xs-12 tableheader color-orange">No Legislative, administrative or policy measures on access and benefit-sharing (MSR) available</div>
-                                               </div>
+                                                    {{measure.title_t}}
+                                                    <i class="fa fa-refresh fa-spin" ng-show="displayDetails&& !measure.data" />
+                                                </div>
+                                                <div class="col-lg-3 col-md-3 col-xs-3">{{measure.type_EN_t}}</div>
+                                                <div class="col-lg-2 col-md-2 col-xs-2">{{measure.status_EN_t}}</div>
+                                                <div class="col-lg-2 col-md-2 col-xs-2">{{measure.jurisdiction_EN_t}}</div>
+                                                <div class="col-lg-2 col-md-2 col-xs-2">{{measure.entryIntoForce_dt|formatDate}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <i class="glyphicon glyphicon-remove-circle circle pull-right" style="position:relative;top:40px;z-index:100;font-size:20px;color:white;" ng-click="displayDetails=!displayDetails;"></i>
+                                            <div class="col-xs-12 details document-show-hide" ng-show="displayDetails" record-loader document="measure.data"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" ng-show="absMeasure.length==0">
+                                    <div class="col-lg-10 col-md-12 col-xs-12 tableheader color-orange">No Legislative, administrative or policy measures on access and benefit-sharing (MSR) available</div>
+                                </div>
 
-                                               </div>
-                                           </div>
-
-
+                            </div>
+                        </div>
 
 
 
 
-                                           <div class="row bg-grey1" style="padding:3px;">
-                                               <h5 style="padding:0;margin:0;font-size:15px;" >
 
-                                                   <a href="" ng-click="showIRCC = !showIRCC">
-                                                       <span class="badge" ng-class="{'bg-grey': Permit==0, 'bg-black': Permit > 0}">{{Permit}}</span>
+
+                        <div class="row bg-grey1" style="padding:3px;">
+                            <h5 style="padding:0;margin:0;font-size:15px;">
+
+                                <a href="" ng-click="showIRCC = !showIRCC">
+                                                       <span class="badge pad-left" ng-class="{'bg-grey': Permit==0, 'bg-black': Permit > 0}">{{Permit}}</span>
                                                        <span style="position:relative;top:1px;"  ng-class="{'color-grey': Permit==0, 'color-black': Permit > 0}">
-                                                          Internationally Recognized Certificates of Compliance (IRCC)
+                                                           <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
+                                                               {{'ircc' | schemaIcon}}
+                                                           </i>
+                                                            Internationally Recognized Certificates of Compliance (IRCC)
                                                        </span>
                                                        <i class="fa fa-chevron-circle-up pull-right" ng-show="showIRCC"></i>
                                                        <i class="fa fa-chevron-circle-down pull-right" ng-show="!showIRCC"></i>
                                                    </a>
 
-                                               </h5>
-                                           </div>
+                            </h5>
+                        </div>
 
-                                           <div class="row" ng-show="showIRCC" >
-                                               <div  style="padding:10px; margin:0 20px;">
-                                                            <div class="row table-msr">
-                                                           <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortPermit='title_t';reversePermit=!reversePermit">name
-                                                               <i class="fa" ng-class="{'fa-caret-up':(sortPermit=='title_t' && reversePermit),'fa-caret-down':(sortPermit=='title_t' && !reversePermit)}"></i>
-                                                           </div>
-                                                           <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortPermit='informedConsents_CEN_ss';reversePermit=!reversePermit">issued to
-                                                               <i class="fa" ng-class="{'fa-caret-up':(sortPermit=='informedConsents_CEN_ss' && reversePermit),'fa-caret-down':(sortPermit=='informedConsents_CEN_ss' && !reversePermit)}"></i>
-                                                           </div>
-                                                           <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortPermit='authority_s';reversePermit=!reversePermit">CNA
-                                                               <i class="fa" ng-class="{'fa-caret-up':(sortPermit=='authority_s' && reversePermit),'fa-caret-down':(sortPermit=='authority_s' && !reversePermit)}"></i>
-                                                           </div>
-                                                           <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortPermit='keywords_CEN_ss';reversePermit=!reversePermit">subject matter
-                                                               <i class="fa" ng-class="{'fa-caret-up':(sortPermit=='keywords_CEN_ss' && reversePermit),'fa-caret-down':(sortPermit=='keywords_CEN_ss' && !reversePermit)}"></i>
-                                                           </div>
-                                                           <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortPermit='usage_CEN_ss';reversePermit=!reversePermit">use
-                                                               <i class="fa" ng-class="{'fa-caret-up':(sortPermit=='usage_CEN_ss' && reversePermit),'fa-caret-down':(sortPermit=='usage_CEN_ss' && !reversePermit)}"></i>
-                                                           </div>
-                                                           <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortPermit='date_dt';reversePermit=!reversePermit">date of issue
-                                                               <i class="fa" ng-class="{'fa-caret-up':(sortPermit=='date_dt' && reversePermit),'fa-caret-down':(sortPermit=='date_dt' && !reversePermit)}"></i>
-                                                           </div>
-                                                       </div>
-                                                       <div class="row table-hover table-msr" ng-repeat="permit in absPermit = (absch_nfp|filter:isPermit|orderBy:sortPermit:reversePermit)">
-                                                           <div class="row border">
-                                                               <div ng-click="displayDetails=!displayDetails;showDetails(permit)" class="row table-row">
-                                                                   <div class="col-lg-2 col-md-2 col-xs-2">
-                                                                       {{permit.title_t}}
-                                                                       <i class="fa fa-refresh fa-spin" ng-show="displayDetails&& !permit.data" />
-                                                                   </div>
-                                                                   <div class="col-lg-2 col-md-2 col-xs-2">
-                                                                       <div class="confidential" ng-show="!permit.informedConsents_CEN_ss">Confidential information</div>
-                                                                       {{permit.informedConsents_CEN_ss}}
-                                                                   </div>
-                                                                   <div class="col-lg-2 col-md-2 col-xs-2">
-                                                                       {{parseJSON(permit.authority_s).firstName + ' ' + parseJSON(permit.authority_s).lastName}}
-                                                                   </div>
-                                                                   <div class="col-lg-2 col-md-2 col-xs-2">
-                                                                       <div class="confidential" ng-show="!permit.keywords_CEN_ss">Confidential information</div>
-                                                                       <span ng-repeat="keyword in permit.keywords_CEN_ss">{{parseJSON(keyword)|lstring}}{{$last ? '':', '}}</span>
-                                                                   </div>
-                                                                   <div class="col-lg-2 col-md-2 col-xs-2">
-                                                                       <span ng-repeat="usage in permit.usage_CEN_ss">{{parseJSON(usage)|lstring}}{{$last ? '':', '}}
-                                                                           <br/>
-                                                                       </span>
-                                                                   </div>
-                                                                   <div class="col-lg-2 col-md-2 col-xs-2">{{permit.date_dt|formatDate}}</div>
-                                                               </div>
-                                                               <div class="row">
-                                                                   <i class="glyphicon glyphicon-remove-circle circle pull-right" style="position:relative;top:40px;z-index:100;font-size:20px;color:white;" ng-click="displayDetails=!displayDetails;"></i>
-                                                                   <div class="col-xs-12 details document-show-hide" ng-show="displayDetails" record-loader document="permit.data" ></div>
-                                                               </div>
-                                                           </div>
-                                                       </div>
-                                                       <div class="row" ng-show="absMeasure.length==0">
-                                                           <div class="col-lg-10 col-md-12 col-xs-12 tableheader color-orange">No Internationally Recognized Certificates of Compliance (IRCC)</div>
-                                                       </div>
-                                                   </div>
-                                           </div>
-
-
+                        <div class="row" ng-show="showIRCC">
+                            <div style="padding:10px; margin:0 20px;">
+                                <div class="row table-msr">
+                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortPermit='title_t';reversePermit=!reversePermit">name
+                                        <i class="fa" ng-class="{'fa-caret-up':(sortPermit=='title_t' && reversePermit),'fa-caret-down':(sortPermit=='title_t' && !reversePermit)}"></i>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortPermit='informedConsents_CEN_ss';reversePermit=!reversePermit">issued to
+                                        <i class="fa" ng-class="{'fa-caret-up':(sortPermit=='informedConsents_CEN_ss' && reversePermit),'fa-caret-down':(sortPermit=='informedConsents_CEN_ss' && !reversePermit)}"></i>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortPermit='authority_s';reversePermit=!reversePermit">CNA
+                                        <i class="fa" ng-class="{'fa-caret-up':(sortPermit=='authority_s' && reversePermit),'fa-caret-down':(sortPermit=='authority_s' && !reversePermit)}"></i>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortPermit='keywords_CEN_ss';reversePermit=!reversePermit">subject matter
+                                        <i class="fa" ng-class="{'fa-caret-up':(sortPermit=='keywords_CEN_ss' && reversePermit),'fa-caret-down':(sortPermit=='keywords_CEN_ss' && !reversePermit)}"></i>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortPermit='usage_CEN_ss';reversePermit=!reversePermit">use
+                                        <i class="fa" ng-class="{'fa-caret-up':(sortPermit=='usage_CEN_ss' && reversePermit),'fa-caret-down':(sortPermit=='usage_CEN_ss' && !reversePermit)}"></i>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortPermit='date_dt';reversePermit=!reversePermit">date of issue
+                                        <i class="fa" ng-class="{'fa-caret-up':(sortPermit=='date_dt' && reversePermit),'fa-caret-down':(sortPermit=='date_dt' && !reversePermit)}"></i>
+                                    </div>
+                                </div>
+                                <div class="row table-hover table-msr" ng-repeat="permit in absPermit = (absch_nfp|filter:isPermit|orderBy:sortPermit:reversePermit)">
+                                    <div class="row border">
+                                        <div ng-click="displayDetails=!displayDetails;showDetails(permit)" class="row table-row">
+                                            <div class="col-lg-2 col-md-2 col-xs-2">
+                                                {{permit.title_t}}
+                                                <i class="fa fa-refresh fa-spin" ng-show="displayDetails&& !permit.data" />
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-xs-2">
+                                                <div class="confidential" ng-show="!permit.informedConsents_CEN_ss">Confidential information</div>
+                                                {{permit.informedConsents_CEN_ss}}
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-xs-2">
+                                                {{parseJSON(permit.authority_s).firstName + ' ' + parseJSON(permit.authority_s).lastName}}
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-xs-2">
+                                                <div class="confidential" ng-show="!permit.keywords_CEN_ss">Confidential information</div>
+                                                <span ng-repeat="keyword in permit.keywords_CEN_ss">{{parseJSON(keyword)|lstring}}{{$last ? '':', '}}</span>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-xs-2">
+                                                <span ng-repeat="usage in permit.usage_CEN_ss">{{parseJSON(usage)|lstring}}{{$last ? '':', '}}
+                                                    <br/>
+                                                </span>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-xs-2">{{permit.date_dt|formatDate}}</div>
+                                        </div>
+                                        <div class="row">
+                                            <i class="glyphicon glyphicon-remove-circle circle pull-right" style="position:relative;top:40px;z-index:100;font-size:20px;color:white;" ng-click="displayDetails=!displayDetails;"></i>
+                                            <div class="col-xs-12 details document-show-hide" ng-show="displayDetails" record-loader document="permit.data"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" ng-show="absMeasure.length==0">
+                                    <div class="col-lg-10 col-md-12 col-xs-12 tableheader color-orange">No Internationally Recognized Certificates of Compliance (IRCC)</div>
+                                </div>
+                            </div>
+                        </div>
 
 
 
-                                           <div class="row bg-grey1" style="padding:3px;">
-                                               <h5 style="padding:0;margin:0;font-size:15px;" >
 
-                                                    <a href="" ng-click="showCP = !showCP">
-                                                       <span class="badge" ng-class="{'bg-grey': absCheckpoint==0, 'bg-black': absCheckpoint > 0}">{{absCheckpoint}}</span>
+
+                        <div class="row bg-grey1" style="padding:3px;">
+                            <h5 style="padding:0;margin:0;font-size:15px;">
+
+                                <a href="" ng-click="showCP = !showCP">
+                                                       <span class="badge pad-left" ng-class="{'bg-grey': absCheckpoint==0, 'bg-black': absCheckpoint > 0}">{{absCheckpoint}}</span>
                                                        <span style="position:relative;top:1px;"  ng-class="{'color-grey': absCheckpoint==0, 'color-black': absCheckpoint > 0}">
-                                                          Checkpoints (CP)
+                                                           <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
+                                                               {{'cp' | schemaIcon}}
+                                                           </i>
+                                                           Checkpoints (CP)
                                                        </span>
                                                        <i class="fa fa-chevron-circle-up pull-right" ng-show="showCP"></i>
                                                        <i class="fa fa-chevron-circle-down pull-right" ng-show="!showCP"></i>
                                                    </a>
-                                               </h5>
-                                           </div>
+                            </h5>
+                        </div>
 
-                                           <div class="row" ng-show="showCP">
-                                               <div   style="padding:10px;">
-                                              <div ng-repeat="contact in absch_nfp | filter:{'schema_s':'absCheckpoint'} |  filter:!{'schema_s':'absCheckpointCommunique'}" >
-                                                       <div ng-class="{'row': ($index)%3==0}"> </div>
-                                                           <div class="col-md-4"  style="margin:0;">
-                                                               <div class="panel panel-default" >
-                                                                   <div class="panel-heading">
-                                                                       <h5 class="panel-title">
-                                                                           <i ng-class="{'fa fa-user':(contact.schema_s=='focalPoint'||contact.schema_s=='authority'),
+                        <div class="row" ng-show="showCP">
+                            <div style="padding:10px;">
+                                <div ng-repeat="contact in absch_nfp | filter:isCheckpoint">
+                                    <div ng-class="{'row': ($index)%3==0}"> </div>
+                                    <div class="col-md-4" style="margin:0;">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h5 class="panel-title">
+                                                    <i ng-class="{'fa fa-user':(contact.schema_s=='focalPoint'||contact.schema_s=='authority'),
                                                                             'mdi-action-verified-user':contact.schema_s=='absCheckpoint',
                                                                             'mdi-file-folder':contact.schema_s=='database'}"></i> {{getTitle(contact.schema_s,contact.type_ss,contact.schema_EN_t)}}
-                                                                       </h5>
-                                                                   </div>
-                                                                   <div class="panel-body">
-                                                                       <strong>
-                                                                           <a ng-show="contact.schema_s!='focalPoint'" ng-href="/database/{{contact.doc|uniqueIDWithoutRevision}}">{{contact.title_t}}</a>
-                                                                           <a ng-show="contact.schema_s=='focalPoint'" ng-href="/database/focalPoint/{{contact.documentId}}">{{contact.title_t}}</a>
-                                                                       </strong>
-                                                                       <div ng-show="contact.description_t" ng-bind-html="contact.description_t"></div>
+                                                </h5>
+                                            </div>
+                                            <div class="panel-body">
+                                                <strong>
+                                                    <a ng-show="contact.schema_s!='focalPoint'" ng-href="/database/{{contact.doc|uniqueIDWithoutRevision}}">{{contact.title_t}}</a>
+                                                    <a ng-show="contact.schema_s=='focalPoint'" ng-href="/database/focalPoint/{{contact.documentId}}">{{contact.title_t}}</a>
+                                                </strong>
+                                                <div ng-show="contact.description_t" ng-bind-html="contact.description_t"></div>
 
-                                                                       <ul ng-show="contact.telephones || contact.telephone_s || contact.fax_ss" style="list-style-type: none;padding:0;margin:0;">
-                                                                           <li ng-show="contact.telephone_s"><i class="fa fa-phone-square" /> {{contact.telephone_s}}</li>
-                                                                           <li ng-repeat="item in contact.telephones"><i class="fa fa-phone-square" /> {{item}}</li>
-                                                                           <li ng-repeat="item in contact.fax_ss"><i class="fa fa-fax" /> {{item}}</li>
-                                                                       </ul>
-                                                                       <ul ng-show="contact.emails || contact.email_ss" style="list-style-type: none;padding:0;margin:0;">
-                                                                           <li ng-repeat="item in contact.emails || contact.email_ss"><a ng-href="mailto:{{item}}"><i class="fa fa-envelope-o"></i> {{item}}</a>
-                                                                           </li>
-                                                                       </ul>
-                                                                   </div>
-                                                               </div>
-                                                           </div>
-                                                   </div>
+                                                <ul ng-show="contact.telephones || contact.telephone_s || contact.fax_ss" style="list-style-type: none;padding:0;margin:0;">
+                                                    <li ng-show="contact.telephone_s"><i class="fa fa-phone-square" /> {{contact.telephone_s}}</li>
+                                                    <li ng-repeat="item in contact.telephones"><i class="fa fa-phone-square" /> {{item}}</li>
+                                                    <li ng-repeat="item in contact.fax_ss"><i class="fa fa-fax" /> {{item}}</li>
+                                                </ul>
+                                                <ul ng-show="contact.emails || contact.email_ss" style="list-style-type: none;padding:0;margin:0;">
+                                                    <li ng-repeat="item in contact.emails || contact.email_ss"><a ng-href="mailto:{{item}}"><i class="fa fa-envelope-o"></i> {{item}}</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                               </div>
-                                           </div>
-
-
+                            </div>
+                        </div>
 
 
 
 
-                                           <div class="row bg-grey1" style="padding:3px; border-radius: 3px;">
-                                               <h5 style="padding:0;margin:0;font-size:15px;" >
 
-                                                    <a href="" ng-click="showCPC = !showCPC">
-                                                       <span class="badge" ng-class="{'bg-grey': absCheckpointCommunique==0, 'bg-black': absCheckpointCommunique > 0}">{{absCheckpointCommunique}}</span>
+
+                        <div class="row bg-grey1" style="padding:3px; border-radius: 3px;">
+                            <h5 style="padding:0;margin:0;font-size:15px;">
+
+                                <a href="" ng-click="showCPC = !showCPC">
+                                                       <span class="badge pad-left" ng-class="{'bg-grey': absCheckpointCommunique==0, 'bg-black': absCheckpointCommunique > 0}">{{absCheckpointCommunique}}</span>
                                                        <span style="position:relative;top:1px;"  ng-class="{'color-grey': absCheckpointCommunique==0, 'color-black': absCheckpointCommunique > 0}">
-                                                          Checkpoint Communiqués (CPC) SENT
+                                                           <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
+                                                               {{'cpc' | schemaIcon}}
+                                                           </i>
+                                                           Checkpoint Communiqués (CPC) SENT
                                                        </span>
                                                        <i class="fa fa-chevron-circle-up pull-right" ng-show="showCPC"></i>
                                                        <i class="fa fa-chevron-circle-down pull-right" ng-show="!showCPC"></i>
                                                    </a>
-                                               </h5>
-                                           </div>
+                            </h5>
+                        </div>
 
-                                           <div class="row" ng-show="showCPC" >
-                                                   <div  style="padding:10px; margin:0 20px;">
-                                                   <div class="row table-msr">
-                                               	       <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPC='checkpoint_CEN_ss';reverseCPC=!reverseCPC">checkpoint
-                                                               <i class="fa" ng-class="{'fa-caret-up':(sortCPC=='checkpoint_CEN_ss' && reverseCPC),'fa-caret-down':(sortCPC=='checkpoint_CEN_ss' && !reverseCPC)}"></i>
-                                                           </div>
-                                                           <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPC='title_t';reverseCPC=!reverseCPC">title
-                                                               <i class="fa" ng-class="{'fa-caret-up':(sortCPC=='title_t' && reverseCPC),'fa-caret-down':(sortCPC=='title_t' && !reverseCPC)}"></i>
-                                                           </div>
-                                                           <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPC='originCountries_CEN_ss';reverseCPC=!reverseCPC">source country
-                                                               <i class="fa" ng-class="{'fa-caret-up':(sortCPC=='originCountries_CEN_ss' && reverseCPC),'fa-caret-down':(sortCPC=='originCountries_CEN_ss' && !reverseCPC)}"></i>
-                                                           </div>
-                                                           <div class="col-lg-1 col-md-1 col-xs-1 tableheader" ng-click="sortCPC='geneticRessourceUsers';reverseCPC=!reverseCPC">user
-                                                               <i class="fa" ng-class="{'fa-caret-up':(sortCPC=='geneticRessourceUsers' && reverseCPC),'fa-caret-down':(sortCPC=='geneticRessourceUsers' && !reverseCPC)}"></i>
-                                                           </div>
-                                                           <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPC='keywords_CEN_ss';reverseCPC=!reverseCPC">subject matter
-                                                               <i class="fa" ng-class="{'fa-caret-up':(sortCPC=='keywords_CEN_ss' && reverseCPC),'fa-caret-down':(sortCPC=='keywords_CEN_ss' && !reverseCPC)}"></i>
-                                                           </div>
-                                                           <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPC='permit_ss';reverseCPC=!reverseCPC">IRCC
-                                                               <i class="fa" ng-class="{'fa-caret-up':(sortCPC=='permit_ss' && reverseCPC),'fa-caret-down':(sortCPC=='permit_ss' && !reverseCPC)}"></i>
-                                                           </div>
-                                                           <div class="col-lg-1 col-md-1 col-xs-1 tableheader" ng-click="sortCPC='createdDate_dt';reverseCPC=!reverseCPC">sent
-                                                               <i class="fa" ng-class="{'fa-caret-up':(sortCPC=='createdDate_dt' && reverseCPC),'fa-caret-down':(sortCPC=='createdDate_dt' && !reverseCPC)}"></i>
-                                                           </div>
-                                                       </div>
-                                                       <div class="row table-hover table-msr" ng-repeat="communique in absCommunique = (absch_nfp|filter:isCheckpointCommunique|orderBy:sortCPC:reverseCPC)">
-                                                           <div class="row border" style="padding-top: 10px;padding-bottom: 10px;">
-                                                               <div ng-click="displayDetails=!displayDetails;showDetails(communique)" class="row table-row">
-                                                                   <div class="col-lg-2 col-md-2 col-xs-2">
-                                                                       <span ng-repeat="checkpoint in communique.checkpoint_CEN_ss">
-                                                                           {{parseJSON(checkpoint)|lstring}}
-                                                                           <br/>
-                                                                       </span>
-                                                                   </div>
-                                                                   <div class="col-lg-2 col-md-2 col-xs-2">
-                                                                       {{communique.title_t}}
-                                                                       <i class="fa fa-refresh fa-spin" ng-show="displayDetails && !communique.data" />
-                                                                   </div>
-                                                                   <div class="col-lg-2 col-md-2 col-xs-2">
-                                                                       <span ng-repeat="country in communique.originCountries_CEN_ss">{{parseJSON(country)|lstring}}
-                                                                           <br/>
-                                                                       </span>
-                                                                   </div>
-                                                                   <div class="col-lg-1 col-md-1 col-xs-1">
-                                                                       <span ng-repeat="user in communique.geneticRessourceUsers">{{user.organization|lstring}}
-                                                                           <br/>
-                                                                       </span>
-                                                                   </div>
-                                                                   <div class="col-lg-2 col-md-2 col-xs-2">
-                                                                       <span ng-repeat="keyword in communique.keywords_CEN_ss">{{parseJSON(keyword)|lstring}}{{$last ? '':', '}}</span>
-                                                                   </div>
-                                                                   <div class="col-lg-2 col-md-2 col-xs-2">
-                                                                       <span ng-show="!communique.permit_ss">Not available</span>
-                                                                       <span ng-repeat="permit in communique.permit_ss">
-                                                                           <a ng-href="/database/{{permit|uniqueIDWithoutRevision}}" target="_new">{{permit|uniqueIDWithoutRevision}}</a>
-                                                                           <br/>
-                                                                       </span>
-                                                                   </div>
-                                                                   <div class="col-lg-1 col-md-1 col-xs-1">{{communique.createdDate_dt|formatDate}}</div>
-                                                               </div>
+                        <div class="row" ng-show="showCPC">
+                            <div style="padding:10px; margin:0 20px;">
+                                <div class="row table-msr">
+                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPC='checkpoint_CEN_ss';reverseCPC=!reverseCPC">checkpoint
+                                        <i class="fa" ng-class="{'fa-caret-up':(sortCPC=='checkpoint_CEN_ss' && reverseCPC),'fa-caret-down':(sortCPC=='checkpoint_CEN_ss' && !reverseCPC)}"></i>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPC='title_t';reverseCPC=!reverseCPC">title
+                                        <i class="fa" ng-class="{'fa-caret-up':(sortCPC=='title_t' && reverseCPC),'fa-caret-down':(sortCPC=='title_t' && !reverseCPC)}"></i>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPC='originCountries_CEN_ss';reverseCPC=!reverseCPC">source country
+                                        <i class="fa" ng-class="{'fa-caret-up':(sortCPC=='originCountries_CEN_ss' && reverseCPC),'fa-caret-down':(sortCPC=='originCountries_CEN_ss' && !reverseCPC)}"></i>
+                                    </div>
+                                    <div class="col-lg-1 col-md-1 col-xs-1 tableheader" ng-click="sortCPC='geneticRessourceUsers';reverseCPC=!reverseCPC">user
+                                        <i class="fa" ng-class="{'fa-caret-up':(sortCPC=='geneticRessourceUsers' && reverseCPC),'fa-caret-down':(sortCPC=='geneticRessourceUsers' && !reverseCPC)}"></i>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPC='keywords_CEN_ss';reverseCPC=!reverseCPC">subject matter
+                                        <i class="fa" ng-class="{'fa-caret-up':(sortCPC=='keywords_CEN_ss' && reverseCPC),'fa-caret-down':(sortCPC=='keywords_CEN_ss' && !reverseCPC)}"></i>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPC='permit_ss';reverseCPC=!reverseCPC">IRCC
+                                        <i class="fa" ng-class="{'fa-caret-up':(sortCPC=='permit_ss' && reverseCPC),'fa-caret-down':(sortCPC=='permit_ss' && !reverseCPC)}"></i>
+                                    </div>
+                                    <div class="col-lg-1 col-md-1 col-xs-1 tableheader" ng-click="sortCPC='createdDate_dt';reverseCPC=!reverseCPC">sent
+                                        <i class="fa" ng-class="{'fa-caret-up':(sortCPC=='createdDate_dt' && reverseCPC),'fa-caret-down':(sortCPC=='createdDate_dt' && !reverseCPC)}"></i>
+                                    </div>
+                                </div>
+                                <div class="row table-hover table-msr" ng-repeat="communique in absCommunique = (absch_nfp|filter:isCheckpointCommunique|orderBy:sortCPC:reverseCPC)">
+                                    <div class="row border" style="padding-top: 10px;padding-bottom: 10px;">
+                                        <div ng-click="displayDetails=!displayDetails;showDetails(communique)" class="row table-row">
+                                            <div class="col-lg-2 col-md-2 col-xs-2">
+                                                <span ng-repeat="checkpoint in communique.checkpoint_CEN_ss">
+                                                    {{parseJSON(checkpoint)|lstring}}
+                                                    <br/>
+                                                </span>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-xs-2">
+                                                {{communique.title_t}}
+                                                <i class="fa fa-refresh fa-spin" ng-show="displayDetails && !communique.data" />
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-xs-2">
+                                                <span ng-repeat="country in communique.originCountries_CEN_ss">{{parseJSON(country)|lstring}}
+                                                    <br/>
+                                                </span>
+                                            </div>
+                                            <div class="col-lg-1 col-md-1 col-xs-1">
+                                                <span ng-repeat="user in communique.geneticRessourceUsers">{{user.organization|lstring}}
+                                                    <br/>
+                                                </span>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-xs-2">
+                                                <span ng-repeat="keyword in communique.keywords_CEN_ss">{{parseJSON(keyword)|lstring}}{{$last ? '':', '}}</span>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-xs-2">
+                                                <span ng-show="!communique.permit_ss">Not available</span>
+                                                <span ng-repeat="permit in communique.permit_ss">
+                                                    <a ng-href="/database/{{permit|uniqueIDWithoutRevision}}" target="_new">{{permit|uniqueIDWithoutRevision}}</a>
+                                                    <br/>
+                                                </span>
+                                            </div>
+                                            <div class="col-lg-1 col-md-1 col-xs-1">{{communique.createdDate_dt|formatDate}}</div>
+                                        </div>
 
-                                                               <div class="row">
-                                                                   <i ng-show="displayDetails" class="glyphicon glyphicon-remove-circle circle pull-right" style="position:relative;top:{{40 + (communique.permit_ss ? communique.permit_ss.length*10 :0  )}}px;z-index:100;font-size:20px;color:white;" ng-click="displayDetails=!displayDetails;"></i>
-                                                                   <div class="col-xs-12 details document-show-hide" ng-show="displayDetails" record-loader document="communique.data" ></div>
-                                                               </div>
-                                                           </div>
-                                                       </div>
+                                        <div class="row">
+                                            <i ng-show="displayDetails" class="glyphicon glyphicon-remove-circle circle pull-right" style="position:relative;top:{{40 + (communique.permit_ss ? communique.permit_ss.length*10 :0  )}}px;z-index:100;font-size:20px;color:white;" ng-click="displayDetails=!displayDetails;"></i>
+                                            <div class="col-xs-12 details document-show-hide" ng-show="displayDetails" record-loader document="communique.data"></div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                                       <div class="row" ng-show="absCommunique.length==0">
-                                                           <div class="col-lg-10 col-md-12 col-xs-12 tableheader color-orange">No Checkpoint Communiqués (CPC) sent</div>
-                                                       </div>
+                                <div class="row" ng-show="absCommunique.length==0">
+                                    <div class="col-lg-10 col-md-12 col-xs-12 tableheader color-orange">No Checkpoint Communiqués (CPC) sent</div>
+                                </div>
 
-                                                   </div>
-                                           </div>
-
-
+                            </div>
+                        </div>
 
 
 
-                                           <div class="row bg-grey1" style="padding:3px;">
-                                               <h5 style="padding:0;margin:0;font-size:15px;" >
-                                                    <a href="" ng-click="showCPCRecv = !showCPCRecv">
-                                                       <span class="badge" ng-class="{'bg-grey': cpcReceivedCount==0, 'bg-black': cpcReceivedCount > 0}">{{cpcReceivedCount}}</span>
+
+
+                        <div class="row bg-grey1" style="padding:3px;">
+                            <h5 style="padding:0;margin:0;font-size:15px;">
+                                <a href="" ng-click="showCPCRecv = !showCPCRecv">
+                                                       <span class="badge pad-left" ng-class="{'bg-grey': cpcReceivedCount==0, 'bg-black': cpcReceivedCount > 0}">{{cpcReceivedCount}}</span>
                                                        <span style="position:relative;top:1px;"  ng-class="{'color-grey': cpcReceivedCount==0, 'color-black': cpcReceivedCount > 0}">
                                                          Checkpoint Communiqués (CPC) RECEIVED
                                                        </span>
@@ -616,90 +654,90 @@
                                                        <i class="fa fa-chevron-circle-down pull-right" ng-show="!showCPCRecv"></i>
                                                    </a>
 
-                                               </h5>
-                                           </div>
+                            </h5>
+                        </div>
 
-                                           <div class="row" ng-show="showCPCRecv">
-                                           <div   style="padding:10px;margin:0 20px;">
-                                             <div class="row table-msr">
-                                                           <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPCReceived='government_s';reverseCPCReceived=!reverseCPCReceived">issuing country
-                                                               <i class="fa" ng-class="{'fa-caret-up':(sortCPCReceived=='government_s' && reverseCPCReceived),'fa-caret-down':(sortCPCReceived=='government_s' && !reverseCPCReceived)}"></i>
-                                                           </div>
-                                                           <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPCReceived='checkpoint_CEN_ss';reverseCPCReceived=!reverseCPCReceived">checkpoint
-                                                               <i class="fa" ng-class="{'fa-caret-up':(sortCPCReceived=='checkpoint_CEN_ss' && reverseCPCReceived),'fa-caret-down':(sortCPCReceived=='checkpoint_CEN_ss' && !reverseCPCReceived)}"></i>
-                                                           </div>
-                                                           <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPCReceived='title_t';reverseCPCReceived=!reverseCPCReceived">title
-                                                               <i class="fa" ng-class="{'fa-caret-up':(sortCPCReceived=='title_t' && reverseCPCReceived),'fa-caret-down':(sortCPCReceived=='title_t' && !reverseCPCReceived)}"></i>
-                                                           </div>
-                                                           <div class="col-lg-1 col-md-1 col-xs-1 tableheader" ng-click="sortCPCReceived='geneticRessourceUsers';reverseCPCReceived=!reverseCPCReceived">user
-                                                               <i class="fa" ng-class="{'fa-caret-up':(sortCPCReceived=='geneticRessourceUsers' && reverseCPCReceived),'fa-caret-down':(sortCPCReceived=='geneticRessourceUsers' && !reverseCPCReceived)}"></i>
-                                                           </div>
-                                                           <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPCReceived='keywords_CEN_ss';reverseCPCReceived=!reverseCPCReceived">subject matter
-                                                               <i class="fa" ng-class="{'fa-caret-up':(sortCPCReceived=='keywords_CEN_ss' && reverseCPCReceived),'fa-caret-down':(sortCPCReceived=='keywords_CEN_ss' && !reverseCPCReceived)}"></i>
-                                                           </div>
-                                                           <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPCReceived='permit_ss';reverseCPCReceived=!reverseCPCReceived">IRCC
-                                                               <i class="fa" ng-class="{'fa-caret-up':(sortCPCReceived=='permit_ss' && reverseCPCReceived),'fa-caret-down':(sortCPCReceived=='permit_ss' && !reverseCPCReceived)}"></i>
-                                                           </div>
-                                                           <div class="col-lg-1 col-md-1 col-xs-1 tableheader" ng-click="sortCPCReceived='createdDate_dt';reverseCPCReceived=!reverseCPCReceived">sent
-                                                               <i class="fa" ng-class="{'fa-caret-up':(sortCPCReceived=='createdDate_dt' && reverseCPCReceived),'fa-caret-down':(sortCPCReceived=='createdDate_dt' && !reverseCPCReceived)}"></i>
-                                                           </div>
-                                                       </div>
-                                                       <div class="row table-hover table-msr" ng-repeat="communique in cpcReceived|orderBy:sortCPCReceived:reverseCPCReceived">
-                                                           <div class="row border" style="padding-top: 10px;padding-bottom: 10px;">
-                                                               <div ng-click="displayDetails=!displayDetails;showDetails(communique)" class="row table-row">
-                                                                   <div class="col-lg-2 col-md-2 col-xs-2">
-                                                                       <span>{{communique.government_s|term}}
-                                                                           <br/>
-                                                                       </span>
-                                                                   </div>
-                                                                   <div class="col-lg-2 col-md-2 col-xs-2">
-                                                                       <span ng-repeat="checkpoint in communique.checkpoint_CEN_ss">
-                                                                           {{parseJSON(checkpoint)|lstring}}
-                                                                           <br/>
-                                                                       </span>
-                                                                   </div>
-                                                                   <div class="col-lg-2 col-md-2 col-xs-2">
-                                                                       {{communique.title_t}}
-                                                                       <i class="fa fa-refresh fa-spin" ng-show="displayDetails && !communique.data" />
-                                                                   </div>
-                                                                   <div class="col-lg-1 col-md-1 col-xs-1">
-                                                                       <span ng-repeat="user in communique.geneticRessourceUsers">{{user.organization|lstring}}
-                                                                           <br/>
-                                                                       </span>
-                                                                   </div>
-                                                                   <div class="col-lg-2 col-md-2 col-xs-2">
-                                                                       <span ng-repeat="keyword in communique.keywords_CEN_ss">{{parseJSON(keyword)|lstring}}{{$last ? '':', '}}</span>
-                                                                   </div>
-                                                                   <div class="col-lg-2 col-md-2 col-xs-2">
-                                                                       <span ng-show="!communique.permit_ss">Not available</span>
-                                                                       <span ng-repeat="permit in communique.permit_ss">
-                                                                           <a ng-href="/database/{{permit|uniqueIDWithoutRevision}}" target="_new">{{permit|uniqueIDWithoutRevision}}</a>
-                                                                           <br/>
-                                                                       </span>
-                                                                   </div>
-                                                                   <div class="col-lg-1 col-md-1 col-xs-1">{{communique.createdDate_dt|formatDate}}</div>
-                                                               </div>
-                                                               <div class="row">
-                                                                   <i ng-show="displayDetails" class="glyphicon glyphicon-remove-circle circle pull-right" style="position:relative;top:{{40 + (communique.permit_ss ? communique.permit_ss.length*10 :0  )}}px;z-index:100;font-size:20px;color:white;" ng-click="displayDetails=!displayDetails;"></i>
-                                                                   <div class="col-xs-12 details document-show-hide" ng-show="displayDetails" record-loader document="communique.data" ></div>
-                                                               </div>
-                                                           </div>
-                                                       </div>
+                        <div class="row" ng-show="showCPCRecv">
+                            <div style="padding:10px;margin:0 20px;">
+                                <div class="row table-msr">
+                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPCReceived='government_s';reverseCPCReceived=!reverseCPCReceived">issuing country
+                                        <i class="fa" ng-class="{'fa-caret-up':(sortCPCReceived=='government_s' && reverseCPCReceived),'fa-caret-down':(sortCPCReceived=='government_s' && !reverseCPCReceived)}"></i>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPCReceived='checkpoint_CEN_ss';reverseCPCReceived=!reverseCPCReceived">checkpoint
+                                        <i class="fa" ng-class="{'fa-caret-up':(sortCPCReceived=='checkpoint_CEN_ss' && reverseCPCReceived),'fa-caret-down':(sortCPCReceived=='checkpoint_CEN_ss' && !reverseCPCReceived)}"></i>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPCReceived='title_t';reverseCPCReceived=!reverseCPCReceived">title
+                                        <i class="fa" ng-class="{'fa-caret-up':(sortCPCReceived=='title_t' && reverseCPCReceived),'fa-caret-down':(sortCPCReceived=='title_t' && !reverseCPCReceived)}"></i>
+                                    </div>
+                                    <div class="col-lg-1 col-md-1 col-xs-1 tableheader" ng-click="sortCPCReceived='geneticRessourceUsers';reverseCPCReceived=!reverseCPCReceived">user
+                                        <i class="fa" ng-class="{'fa-caret-up':(sortCPCReceived=='geneticRessourceUsers' && reverseCPCReceived),'fa-caret-down':(sortCPCReceived=='geneticRessourceUsers' && !reverseCPCReceived)}"></i>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPCReceived='keywords_CEN_ss';reverseCPCReceived=!reverseCPCReceived">subject matter
+                                        <i class="fa" ng-class="{'fa-caret-up':(sortCPCReceived=='keywords_CEN_ss' && reverseCPCReceived),'fa-caret-down':(sortCPCReceived=='keywords_CEN_ss' && !reverseCPCReceived)}"></i>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPCReceived='permit_ss';reverseCPCReceived=!reverseCPCReceived">IRCC
+                                        <i class="fa" ng-class="{'fa-caret-up':(sortCPCReceived=='permit_ss' && reverseCPCReceived),'fa-caret-down':(sortCPCReceived=='permit_ss' && !reverseCPCReceived)}"></i>
+                                    </div>
+                                    <div class="col-lg-1 col-md-1 col-xs-1 tableheader" ng-click="sortCPCReceived='createdDate_dt';reverseCPCReceived=!reverseCPCReceived">sent
+                                        <i class="fa" ng-class="{'fa-caret-up':(sortCPCReceived=='createdDate_dt' && reverseCPCReceived),'fa-caret-down':(sortCPCReceived=='createdDate_dt' && !reverseCPCReceived)}"></i>
+                                    </div>
+                                </div>
+                                <div class="row table-hover table-msr" ng-repeat="communique in cpcReceived|orderBy:sortCPCReceived:reverseCPCReceived">
+                                    <div class="row border" style="padding-top: 10px;padding-bottom: 10px;">
+                                        <div ng-click="displayDetails=!displayDetails;showDetails(communique)" class="row table-row">
+                                            <div class="col-lg-2 col-md-2 col-xs-2">
+                                                <span>{{communique.government_s|term}}
+                                                    <br/>
+                                                </span>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-xs-2">
+                                                <span ng-repeat="checkpoint in communique.checkpoint_CEN_ss">
+                                                    {{parseJSON(checkpoint)|lstring}}
+                                                    <br/>
+                                                </span>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-xs-2">
+                                                {{communique.title_t}}
+                                                <i class="fa fa-refresh fa-spin" ng-show="displayDetails && !communique.data" />
+                                            </div>
+                                            <div class="col-lg-1 col-md-1 col-xs-1">
+                                                <span ng-repeat="user in communique.geneticRessourceUsers">{{user.organization|lstring}}
+                                                    <br/>
+                                                </span>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-xs-2">
+                                                <span ng-repeat="keyword in communique.keywords_CEN_ss">{{parseJSON(keyword)|lstring}}{{$last ? '':', '}}</span>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-xs-2">
+                                                <span ng-show="!communique.permit_ss">Not available</span>
+                                                <span ng-repeat="permit in communique.permit_ss">
+                                                    <a ng-href="/database/{{permit|uniqueIDWithoutRevision}}" target="_new">{{permit|uniqueIDWithoutRevision}}</a>
+                                                    <br/>
+                                                </span>
+                                            </div>
+                                            <div class="col-lg-1 col-md-1 col-xs-1">{{communique.createdDate_dt|formatDate}}</div>
+                                        </div>
+                                        <div class="row">
+                                            <i ng-show="displayDetails" class="glyphicon glyphicon-remove-circle circle pull-right" style="position:relative;top:{{40 + (communique.permit_ss ? communique.permit_ss.length*10 :0  )}}px;z-index:100;font-size:20px;color:white;" ng-click="displayDetails=!displayDetails;"></i>
+                                            <div class="col-xs-12 details document-show-hide" ng-show="displayDetails" record-loader document="communique.data"></div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                                       <div class="row" ng-show="cpcReceived.length==0">
-                                                           <div class="col-lg-10 col-md-12 col-xs-12 tableheader color-orange">No Checkpoint Communiqués (CPC) received</div>
-                                                       </div>
+                                <div class="row" ng-show="cpcReceived.length==0">
+                                    <div class="col-lg-10 col-md-12 col-xs-12 tableheader color-orange">No Checkpoint Communiqués (CPC) received</div>
+                                </div>
 
-                                                   </div>
-                                           </div>
+                            </div>
+                        </div>
 
-                                       </div>
-       </md-content>
-   </div>
+                </div>
+                </md-content>
+            </div>
 
 
 
-</md-content>
-</section>
+        </md-content>
+    </section>
 
 </div>

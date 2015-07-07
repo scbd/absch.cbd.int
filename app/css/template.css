@@ -690,3 +690,7 @@ footer .logo {
 *:focus {
     outline: none;
 }
+.flag-icon-eur, .flag-icon-eu {
+    background-image: url('/app/img/EUFlag.png');
+  width: : 165px;
+}

@@ -193,6 +193,7 @@ define(['app',  'scbd-angularjs-controls'], function(app) {
 
                                 loadMap(countryColors);
                                 addEUMapEvents();
+                                $element.find('[data-toggle="tooltip"]').tooltip();
 
                             });
                         //$scope.countries = $filter("orderBy")(response[1].data, "name.en");
@@ -450,6 +451,8 @@ define(['app',  'scbd-angularjs-controls'], function(app) {
                     function getMapIndex(id) {
                         if (!id)
                             id = 1;
+
+                            return id;
                         //the jvqmap increase its index when map is visisted multiple times
                         //hence get the index of any country and use it for all others
                         //TODO: check why
@@ -567,9 +570,16 @@ define(['app',  'scbd-angularjs-controls'], function(app) {
 
                     });
 
+                    $scope.clear = function(){
+
+                        $scope.filterSchemaApi.unSelectItem({identifier:$scope.filterSchema});
+                        $scope.selected_facet='all';
+
+                    }
 
                     loadCountries();
                     loadCountryMapDetails();
+
                 }
             ]
 
