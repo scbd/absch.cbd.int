@@ -117,15 +117,17 @@
 
 
         <md-content flex layout-margin style="margin:0 30px 30px 30px;padding:0;background-color:transparent;">
-            <div layout="column" layout-align="top center">
-
-
+            <div layout="column" layout-align="top center" >
 
                 <md-button ng-click="toggleLeft()" class="md-primary md-raised bg-medgrey" hide-gt-lg style="margin: 0  0 10px 0;">
                     <i class="material-icons" style="position:relative;top:6px;">menu</i> Select a country
                 </md-button>
 
-                <div class="md-whiteframe-z1">
+                <div ng-show="!country" style="padding-left:50%">
+                    <i class="fa fa-spin fa-spinner fa-5x" style="margin:auto"/>
+                </div>
+
+                <div class="md-whiteframe-z1" ng-show="country">
                     <md-toolbar ng-class="{'bg-blue': country.isNPParty,'bg-medgrey': !country.isNPParty }">
                         <div class="md-toolbar-tools">
 
@@ -177,9 +179,6 @@
                                 <a href="" ng-click="showNFP = !showNFP">
                                                        <span class="badge pad-left" ng-class="{'bg-grey': nfpCount==0, 'bg-black': nfpCount > 0}">{{nfpCount}}</span>
                                                        <span style="position:relative;top:1px;" ng-class="{'color-grey': nfpCount==0, 'color-black': nfpCount > 0}">
-                                                           <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
-                                                              {{'focalpoint' | schemaIcon}}
-                                                          </i>
                                                            National Focal Points (NFP)</span>
                                                        <i class="fa fa-chevron-circle-up pull-right" ng-show="showNFP"></i>
                                                        <i class="fa fa-chevron-circle-down pull-right" ng-show="!showNFP"></i>
@@ -195,6 +194,9 @@
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
                                                 <h5 class="panel-title">
+                                                    <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
+                                                       {{'focalpoint' | schemaIcon}}
+                                                   </i>
                                                      {{getTitle(contact.schema_s,contact.type_ss,contact.schema_EN_t)}}
                                                 </h5>
                                             </div>
@@ -232,9 +234,7 @@
                                 <a href="" ng-click="showNDB = !showNDB">
                                                        <span class="badge pad-left" ng-class="{'bg-grey': database==0, 'bg-black': database > 0}">{{database}}</span>
                                                        <span style="position:relative;top:1px;" ng-class="{'color-grey': database==0, 'color-black': database > 0}">
-                                                           <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
-                                                              {{'ndb' | schemaIcon}}
-                                                          </i>
+
                                                           National Databases and Websites (NDB)</span>
                                                        <i class="fa fa-chevron-circle-up pull-right" ng-show="showNDB"></i>
                                                        <i class="fa fa-chevron-circle-down pull-right" ng-show="!showNDB"></i>
@@ -251,6 +251,9 @@
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
                                                 <h5 class="panel-title">
+                                                    <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
+                                                       {{'ndb' | schemaIcon}}
+                                                   </i>
                                                     {{getTitle(contact.schema_s,contact.type_ss,contact.schema_EN_t)}}
                                                 </h5>
                                             </div>
@@ -288,9 +291,7 @@
                                 <a href="" ng-click="showCNA = !showCNA">
                                                        <span class="badge pad-left" ng-class="{'bg-grey': nationalAuthority==0, 'bg-black': nationalAuthority > 0}">{{nationalAuthority}}</span>
                                                        <span style="position:relative;top:1px;"  ng-class="{'color-grey': nationalAuthority==0, 'color-black': nationalAuthority > 0}">
-                                                           <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
-                                                                 {{'cna' | schemaIcon}}
-                                                             </i>
+
                                                             Competent National Authorities (CNA)
                                                        </span>
                                                        <i class="fa fa-chevron-circle-up pull-right" ng-show="showCNA"></i>
@@ -307,6 +308,9 @@
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
                                                 <h5 class="panel-title">
+                                                    <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
+                                                          {{'cna' | schemaIcon}}
+                                                      </i>
                                                     {{getTitle(contact.schema_s,contact.type_ss,contact.schema_EN_t)}}
                                                 </h5>
                                             </div>
@@ -344,9 +348,7 @@
                                 <a href="" ng-click="showMSR = !showMSR">
                                                        <span class="badge pad-left" ng-class="{'bg-grey': nationalMeasure==0, 'bg-black': nationalMeasure > 0}">{{nationalMeasure}}</span>
                                                        <span style="position:relative;top:1px;"  ng-class="{'color-grey': nationalMeasure==0, 'color-black': nationalMeasure > 0}">
-                                                             <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
-                                                                 {{'msr' | schemaIcon}}
-                                                             </i>
+
                                                                Legislative, administrative or policy measures on access and benefit-sharing (MSR)
                                                        </span>
                                                        <i class="fa fa-chevron-circle-up pull-right" ng-show="showMSR"></i>
@@ -379,7 +381,9 @@
                                                 <div class="col-lg-3 col-md-3 col-xs-3">
 
                                                     <!-- <a href="/search/new/measurematrix/{{measure|uniqueIDWithoutRevision}}"><i class="fa fa-bar-chart"></i></a> -->
-
+                                                    <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
+                                                        {{'msr' | schemaIcon}}
+                                                    </i>
                                                     {{measure.title_t}}
                                                     <i class="fa fa-refresh fa-spin" ng-show="displayDetails&& !measure.data" />
                                                 </div>
@@ -413,9 +417,7 @@
                                 <a href="" ng-click="showIRCC = !showIRCC">
                                                        <span class="badge pad-left" ng-class="{'bg-grey': Permit==0, 'bg-black': Permit > 0}">{{Permit}}</span>
                                                        <span style="position:relative;top:1px;"  ng-class="{'color-grey': Permit==0, 'color-black': Permit > 0}">
-                                                           <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
-                                                               {{'ircc' | schemaIcon}}
-                                                           </i>
+
                                                             Internationally Recognized Certificates of Compliance (IRCC)
                                                        </span>
                                                        <i class="fa fa-chevron-circle-up pull-right" ng-show="showIRCC"></i>
@@ -451,7 +453,9 @@
                                     <div class="row border">
                                         <div ng-click="displayDetails=!displayDetails;showDetails(permit)" class="row table-row">
                                             <div class="col-lg-2 col-md-2 col-xs-2">
-                                                {{permit.title_t}}
+                                                <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
+                                                    {{'ircc' | schemaIcon}}
+                                                </i> {{permit.title_t}}
                                                 <i class="fa fa-refresh fa-spin" ng-show="displayDetails&& !permit.data" />
                                             </div>
                                             <div class="col-lg-2 col-md-2 col-xs-2">
@@ -494,9 +498,7 @@
                                 <a href="" ng-click="showCP = !showCP">
                                                        <span class="badge pad-left" ng-class="{'bg-grey': absCheckpoint==0, 'bg-black': absCheckpoint > 0}">{{absCheckpoint}}</span>
                                                        <span style="position:relative;top:1px;"  ng-class="{'color-grey': absCheckpoint==0, 'color-black': absCheckpoint > 0}">
-                                                           <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
-                                                               {{'cp' | schemaIcon}}
-                                                           </i>
+
                                                            Checkpoints (CP)
                                                        </span>
                                                        <i class="fa fa-chevron-circle-up pull-right" ng-show="showCP"></i>
@@ -513,9 +515,12 @@
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
                                                 <h5 class="panel-title">
-                                                    <i ng-class="{'fa fa-user':(contact.schema_s=='focalPoint'||contact.schema_s=='authority'),
-                                                                            'mdi-action-verified-user':contact.schema_s=='absCheckpoint',
-                                                                            'mdi-file-folder':contact.schema_s=='database'}"></i> {{getTitle(contact.schema_s,contact.type_ss,contact.schema_EN_t)}}
+
+                                                    <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
+                                                        {{'cp' | schemaIcon}}
+                                                    </i>
+
+                                                    {{getTitle(contact.schema_s,contact.type_ss,contact.schema_EN_t)}}
                                                 </h5>
                                             </div>
                                             <div class="panel-body">
@@ -553,9 +558,7 @@
                                 <a href="" ng-click="showCPC = !showCPC">
                                                        <span class="badge pad-left" ng-class="{'bg-grey': absCheckpointCommunique==0, 'bg-black': absCheckpointCommunique > 0}">{{absCheckpointCommunique}}</span>
                                                        <span style="position:relative;top:1px;"  ng-class="{'color-grey': absCheckpointCommunique==0, 'color-black': absCheckpointCommunique > 0}">
-                                                           <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
-                                                               {{'cpc' | schemaIcon}}
-                                                           </i>
+
                                                            Checkpoint Communiqués (CPC) SENT
                                                        </span>
                                                        <i class="fa fa-chevron-circle-up pull-right" ng-show="showCPC"></i>
@@ -594,7 +597,9 @@
                                         <div ng-click="displayDetails=!displayDetails;showDetails(communique)" class="row table-row">
                                             <div class="col-lg-2 col-md-2 col-xs-2">
                                                 <span ng-repeat="checkpoint in communique.checkpoint_CEN_ss">
-                                                    {{parseJSON(checkpoint)|lstring}}
+                                                    <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
+                                                        {{'cpc' | schemaIcon}}
+                                                    </i> {{parseJSON(checkpoint)|lstring}}
                                                     <br/>
                                                 </span>
                                             </div>
