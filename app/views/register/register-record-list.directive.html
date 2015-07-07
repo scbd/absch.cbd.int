@@ -42,7 +42,7 @@
         </div>
     </div>
 
-    <p></p>
+
     <style type="text/css">
         .odd {
             background-color: #efefef;
@@ -64,21 +64,19 @@
         .km-value {
             background-color: #eee!important;
         }
-    </style>
 
-
-    <br/>
-    <style>
         th {
             border-bottom: 2px solid #000!important;
         }
+
+        td{border-bottom: 1px solid #DDD!important;padding:10px 0;}
     </style>
 
-    <table class="table table-hover" style="width:100%;">
+    <table class="table table-hover table-striped" style="width:100%;margin-top:20px;">
         <thead>
             <tr>
-                <th style="width:70px;">&nbsp;</th>
-                <th ng-click="toggleOrderBy('title|lstring')" id="titleHeader">Title</th>
+                <!-- <th style="width:50px;">&nbsp;</th> -->
+                <th colspan="2" ng-click="toggleOrderBy('title|lstring')" id="titleHeader">Title</th>
                 <th style="width:200px;" ng-click="toggleOrderBy('createdOn')" id="createdOnHeader">Created by</th>
                 <th style="width:200px;" ng-click="toggleOrderBy('updatedOn')" id="updatedOnHeader">Last updated</th>
                 <th style="width:150px;" ng-click="toggleOrderBy('status')" id="statusHeader">Status</th>
@@ -86,10 +84,10 @@
             </tr>
         </thead>
         <tr ng-cloak ng-show="loading">
-            <td colspan="5" style="text-align:center;padding:60px;"><i class="fa fa-spin fa-cog" /> loading...</td>
+            <td colspan="6" style="text-align:center;padding:60px;"><i class="fa fa-spin fa-cog" /> loading...</td>
         </tr>
         <tr ng-cloak ng-show="!loading && filteredRecords.length <= 0">
-            <td colspan="5" style="text-align:center;padding:60px;">no records</td>
+            <td colspan="6" style="text-align:center;padding:60px;"> No records found. You have not yet created any records of this type. Click on "add new" to create a new record.</td>
         </tr>
 
         <tbody ng-repeat="record in (filteredRecords = (records | filter:schemaFilter | filter:statusFilter | filter:keywords | orderBy:orderBy))">
@@ -97,15 +95,15 @@
 
             <tr id="record{{record.identifier}}" ng-class="{'bg-grey': displayDetails||displayRequest}">
 
-                <td>
+                <td style="width:20px;">
                     <i class="material-icons" ng-if="isPublished(record)"
                     ng-class="{'color-published-green':isPublished(record)}"
-                    style="font-size:16pt;position:relative;top:3px;">{{record.metadata.schema | schemaIcon}}</i>
+                    style="font-size:16pt;position:relative;">{{record.metadata.schema | schemaIcon}}</i>
 
                     <i class="material-icons" ng-if="(isDraft(record) || isRequest(record))"
                     ng-class="{'color-litegrey':isDraft(record) && !isRequest(record),'color-red':isRequest(record)}"
-                    style="font-size:16pt;position:relative;top:3px;">{{record.metadata.schema | schemaIcon}}</i>
-                    
+                    style="font-size:16pt;position:relative;">{{record.metadata.schema | schemaIcon}}</i>
+
                 </td>
                 <td style="width:40%">
                     <span ng-show="isPublished(record)">
