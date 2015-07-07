@@ -40,6 +40,7 @@ require.config({
         'scbd-angularjs-controls'         : '../libs/scbd-angularjs-controls/scbd-controls',
         'ngAria'                : '../libs/angular-aria/angular-aria.min',
         'ngMaterial'            : '../libs/angular-material/angular-material.min',
+        'ngSmoothScroll'        : '../libs/ngSmoothScroll/angular-smooth-scroll.min',
     },
     'shim': {
         'angular'                       : { 'deps': ['jquery'], 'exports': 'angular' },

@@ -1,7 +1,8 @@
 define(['app','ng-breadcrumbs','angular-localizer','scbd-angularjs-services','scbd-angularjs-filters',
     '/app/views/directives/login.directive.html.js',
-    '/app/views/directives/xuser-notifications.js'
-], function(app) {
+    '/app/views/directives/xuser-notifications.js',
+    'ngSmoothScroll'
+], function(app, ngSmoothScroll) {
     'use strict';
 
     app.controller('TemplateController', ['$scope', '$rootScope', '$window', '$location', 'authentication', '$browser', 'realmConfiguration', 'underscore', 'IUserNotifications', '$timeout','$filter',
