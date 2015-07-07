@@ -42,9 +42,10 @@
                             <br>
 
                             <span style="font-weight:bold;font-size:16px;" >
-                                <a ng-href="#" ng-click="typeFilter = 'All'"><span class="label label-warning bg-white" style="border-color:#111;" ng-class="{'letter-active' : typeFilter == 'All'}"><strong>All ({{terms.length}})</strong></span></a>
-                                <a ng-href="#" ng-click="typeFilter = '!isNPParty'"><span class="label label-default" ng-class="{'letter-active' : typeFilter == '!isNPParty'}">Non Party ({{nonPartyCount}})</span></a>
-                                <a ng-href="#" ng-click="typeFilter = 'isNPParty'"><span class="label label-primary" ng-class="{'letter-active' : typeFilter == 'isNPParty'}">Ratified ({{partyCount}})</span></a>
+                                <a ng-href="#" ng-click="typeFilter = 'All'"><span class="label label-default" style="border-color:#111;" ng-class="{'letter-active' : typeFilter == 'All'}"><strong>All ({{terms.length}})</strong></span></a>
+                                <a ng-href="#" ng-click="typeFilter = 'isNPParty'"><span class="label label-primary" ng-class="{'letter-active' : typeFilter == 'isNPParty'}">Party to the Nagoya Protocol ({{partyCount}})</span></a>
+                                <a ng-href="#" ng-click="typeFilter = '!isNPParty'"><span class="label label-default" ng-class="{'letter-active' : typeFilter == '!isNPParty'}">Non-Party ({{nonPartyCount}})</span></a>
+
                                 <!-- <a ng-href="#" ng-click="typeFilter = 'isNPSignatory'"><span class="label label-info" ng-class="{'letter-active' : typeFilter == 'isNPSignatory'}">Signatory ({{signatoryCount}})</span></a> -->
                                 <!-- <a ng-href="#" ng-click="typeFilter = 'isInbetween'"><span class="label label-success" ng-class="{'letter-active' : typeFilter == 'isInbetween'}">Inbetween ({{inbetweenCount}})</span></a> -->
                             </span>
