@@ -129,9 +129,9 @@ define(['app','ng-breadcrumbs','angular-localizer','scbd-angularjs-services','sc
                 $('#loginDialog').modal('hide')
             };
 
-            $rootScope.$on("$locationChangeSuccess", function() {
-                $anchorScroll();
-            });
+            // $rootScope.$on("$locationChangeSuccess", function() {
+            //     $anchorScroll();
+            // });
         }
     ]);
 });
