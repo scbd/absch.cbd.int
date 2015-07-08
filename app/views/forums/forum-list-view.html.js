@@ -7,14 +7,18 @@ define(['app', 'cbd-forums'], function(app) {
             var vlr = $http.get('/api/v2014/discussions/forums/17384/threads');
             var car = $http.get('/api/v2014/discussions/forums/17378/threads');
             var art13 = $http.get('/api/v2014/discussions/forums/17316/threads');
-            
+
+            //
+            if($scope.training_env)
+                iac = $http.get('/api/v2014/discussions/forums/17433/threads');
+
     	     $q.when(iac).then(function(response) {
                  $scope.iacThreads = response.data.length;
              })
              .catch(function(error){
                 console.log(error);
             });
-            
+
             $q.when(vlr).then(function(response) {
                  $scope.vlrThreads = response.data.length;
              })
@@ -26,8 +30,8 @@ define(['app', 'cbd-forums'], function(app) {
             })
             .catch(function(error){
                 console.log(error);
-            });        
-            
+            });
+
             $q.all(art13).then(function(response) {
                 $scope.art10Threads = response.data.length;
             })
