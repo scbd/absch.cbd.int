@@ -31,7 +31,7 @@ app.directive("viewAbsNationalReport", [function () {
 		    //==================================
 		    $scope.booleanToText = function(item) {
 		        if (item===undefined)
-		        	return "No answer provided";
+		        	return "No selection made";
 		        
 				return item ? "Yes" :  "No";
 			}
@@ -45,7 +45,7 @@ app.directive("viewAbsNationalReport", [function () {
 		    	if(!condition)
 		    	{
 		    		if (item===undefined)
-		        		return "No answer provided";
+		        		return "No selection made";
 		        
 					return item ? "Yes" :  "No";
 				}
