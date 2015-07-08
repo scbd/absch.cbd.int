@@ -678,9 +678,9 @@
                                             <div km-textbox-ml rows=2 name="question26additionalInfo" ng-model="document.question26.additionalInfo" locales="document.header.languages" placeholder=""></div>
 
                                             <div class="km-control-group" name="question26_measures" caption="Has your country taken measures to address situations of non-compliance?">
-                                                <div class="km-yes-no" name="question26_measures" ng-model="document.question26.measures.answer" ng-click="Q26MeasuresClear(document.question26.measures.answer)"></div>
+                                                <div class="km-yes-no" name="question26_measures" ng-model="document.question26.violation.answer" ng-click="Q26MeasuresClear(document.question26.violation.answer)"></div>
 
-                                                <div ng-show="document.question26.measures.answer">
+                                                <div ng-show="document.question26.violation.answer">
                                                     <strong>Please provide further information</strong>
                                                     <div km-textbox-ml rows=2 name="question26additionalInfo" ng-model="document.question26.violation.additionalInfo" locales="document.header.languages" placeholder=""></div>
                                                 </div>
@@ -727,7 +727,7 @@
                                         <div km-textbox-ml rows=4 name="question27Challenges" ng-model="document.question27.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
                                     <div class="km-control-group row" name="question27_ccsOnAbsCh" caption="Number of checkpoint communiques available in the ABS Clearing-House">
-                                        <input class="col-xs-2" type="number" name="ccsOnAbsCh" class="form-control text-right" ng-model="document.question27.cpcsOnAbsCh">
+                                        <input class="col-xs-2" type="number" name="ccsOnAbsCh" class="form-control text-right" ng-model="document.question27.cpcsOnAbsChCount">
                                     </div>
 
                                     <div class="km-control-group" name="q27relevantDocuments" caption="Any other relevant documents">
@@ -1658,11 +1658,11 @@
                                     <div class="km-control-group"  name="question63" caption="63. Does your country have specific staff to administer functions directly related to the implementation of the Nagoya Protocol? ">
                                         <div class="km-yes-no" name="question63" ng-model="document.question63.answer" ng-click="Q63Clear()"></div>
                                     </div>
-                                        <div ng-show="document.question63.answer" class="km-control-group" name="question63HowMany" caption="Please indicate how many">
-                                            <label><input type="radio" name="question63HowMany" ng-model="document.question63.howmany" value="One"> One</label><br />
-                                            <label><input type="radio" name="amendmentIntent" ng-model="document.question63.howmany" value="Less than 5"> Less than 5</label><br />
-                                            <label><input type="radio" name="question63HowMany" ng-model="document.question63.howmany" value="Less than 10"> Less than 10</label><br />
-                                            <label><input type="radio" name="amendmentIntent" ng-model="document.question63.howmany" value="10 or more"> 10 or more</label>
+                                        <div ng-show="document.question63.answer" class="km-control-group" name="question63NumberOfStaff" caption="Please indicate how many">
+                                            <label><input type="radio" name="question63NumberOfStaff" ng-model="document.question63.numberOfStaff" value="One"> One</label><br />
+                                            <label><input type="radio" name="amendmentIntent" ng-model="document.question63.numberOfStaff" value="Less than 5"> Less than 5</label><br />
+                                            <label><input type="radio" name="question63NumberOfStaff" ng-model="document.question63.numberOfStaff" value="Less than 10"> Less than 10</label><br />
+                                            <label><input type="radio" name="amendmentIntent" ng-model="document.question63.numberOfStaff" value="10 or more"> 10 or more</label>
                                         </div>
 
                                     <div class="km-control-group" name="question63Challenges" caption="">
@@ -1706,7 +1706,7 @@
                             <div class="row">
                                     <div class="col-xs-12">
                                         <div class="km-control-group" name="question65" caption="65. Notes:">
-                                            <div km-textbox-ml rows=4 name="question65FurtherInfo" ng-model="document.question65furtherInfo" locales="document.header.languages" placeholder="">
+                                            <div km-textbox-ml rows=4 name="question65FurtherInfo" ng-model="document.question65" locales="document.header.languages" placeholder="">
                                             </div>
                                         </div>
                                     </div>
@@ -1718,7 +1718,7 @@
                             <div class="row">
                                     <div class="col-xs-12">
                                         <div class="km-control-group" name="question66" caption="66. Please provide any comment that you may have regarding the format of  this report:">
-                                            <div km-textbox-ml rows=4 name="question66FurtherInfo" ng-model="document.question66furtherInfo" locales="document.header.languages" placeholder="">
+                                            <div km-textbox-ml rows=4 name="question66FurtherInfo" ng-model="document.question66" locales="document.header.languages" placeholder="">
                                             </div>
                                         </div>
                                     </div>
