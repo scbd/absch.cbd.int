@@ -76,6 +76,11 @@
             <div ng-show="!documents" style="padding-left:50%">
                 <i class="fa fa-spin fa-spinner fa-5x" style="margin:auto" />
             </div>
+
+            <div class="well" ng-show="documents.length == 0" style="margin:30px 0;">
+                <h1>No records found.</h1>
+            </div>
+
             <div ng-repeat="document in transformedDocuments | filter:advanceFilter | filter:filterCategory "
              style="border-top:1px solid #ddd;border-bottom:1px solid #ddd;border-right:1px solid #ddd;">
 
