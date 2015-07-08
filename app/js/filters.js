@@ -257,17 +257,17 @@ define(["app",'/app/js/common.js'], function (app) {
 			if(!schema)
 				return schema;
 
-			if(schema.toLowerCase()=="focalpoint" 				||	schema.toLowerCase()=="nfp"	) return "mdi-action-account-box";
-			if(schema.toLowerCase()=="authority"  				||	schema.toLowerCase()=="cna"	) return "mdi-action-account-box";
+			if(schema.toLowerCase()=="focalpoint" 				||	schema.toLowerCase()=="nfp"	) return "account_box";
+			if(schema.toLowerCase()=="authority"  				||	schema.toLowerCase()=="cna"	) return "account_box";
 			//if(schema.toLowerCase()=="contact"  				||	schema.toLowerCase()=="con"	) return "Contact";
-			if(schema.toLowerCase()=="database"	 				||	schema.toLowerCase()=="ndb"	) return "mdi-file-folder";
-			if(schema.toLowerCase()=="resource"	  				||	schema.toLowerCase()=="vlr"	) return "mdi-editor-insert-drive-file";
+			if(schema.toLowerCase()=="database"	 				||	schema.toLowerCase()=="ndb"	) return "folder";
+			if(schema.toLowerCase()=="resource"	  				||	schema.toLowerCase()=="vlr"	) return "insert_drive_file";
 			//if(schema.toLowerCase()=="organization"  			||	schema.toLowerCase()=="org"	) return "Organization";
-			if(schema.toLowerCase()=="measure" 	  				||	schema.toLowerCase()=="msr"	) return "mdi-action-stars";
-			if(schema.toLowerCase()=="abscheckpoint" 			||	schema.toLowerCase()=="cp"	) return "mdi-action-verified-user";
-			if(schema.toLowerCase()=="abscheckpointcommunique"  ||	schema.toLowerCase()=="cpc"	) return "mdi-communication-message";
-			if(schema.toLowerCase()=="abspermit"  				||	schema.toLowerCase()=="ircc") return "mdi-action-bookmark";
-			if(schema.toLowerCase()=="absnationalreport" 		||	schema.toLowerCase()=="nr"	) return "mdi-file-folder";
+			if(schema.toLowerCase()=="measure" 	  				||	schema.toLowerCase()=="msr"	) return "stars";
+			if(schema.toLowerCase()=="abscheckpoint" 			||	schema.toLowerCase()=="cp"	) return "verified_user";
+			if(schema.toLowerCase()=="abscheckpointcommunique"  ||	schema.toLowerCase()=="cpc"	) return "message";
+			if(schema.toLowerCase()=="abspermit"  				||	schema.toLowerCase()=="ircc") return "bookmark";
+			if(schema.toLowerCase()=="absnationalreport" 		||	schema.toLowerCase()=="nr"	) return "folder";
 			//if(schema.toLowerCase()=="meetingdocument" 		||	schema.toLowerCase()=="nfp"	) return "Meeting Document";
 			//if(schema.toLowerCase()=="pressrelease"	 		||	schema.toLowerCase()=="nfp"	) return "Press Release";
 			//if(schema.toLowerCase()=="news"		 			||	schema.toLowerCase()=="nfp"	) return "News";

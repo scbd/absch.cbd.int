@@ -1,17 +1,15 @@
 <link href="/app/css/register.css" rel="stylesheet">
 
-
-
-
 <div ng-cloak ng-controller="RegisterController" >
 
+    <div smooth-scroll duration="100" offset="200" ></div>
 
 
 <section layout="row" style="position:relative; top:20px;" flex  ng-hide="!user.isAuthenticated" >
 
 
        <md-sidenav class="md-sidenav-left md-whiteframe-z1" md-component-id="left" md-is-locked-open="$mdMedia('min-width: 1200px')"
-       style="height:1000px; margin-bottom:50px;" >
+       style="max-height:1200px; margin-bottom:50px;" >
 
 
          <md-toolbar class="bg-medgrey" >
@@ -77,14 +75,11 @@
                                  <span style="margin-right:2px;font-size:12px;font-weight:normal;" class="label label-default pull-right">DRAFT</span>
                                  <span style="margin-right:2px;font-size:12px;font-weight:normal;" class="label label-success  pull-right">PUBLISHED</span> -->
                              </h3>
-                               <a ng-repeat="type in heading.formats" ng-href="{{type!='contacts' ? '/register' : ''}}/{{type | mapSchema}}" role="button">
+                               <a ng-repeat="type in heading.formats" ng-href="{{type!='contacts' ? '/register' : ''}}/{{type | mapSchema}}" role="button"  >
                                  <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : document_type==type ,'btn-commonformat-reference-selected' : document_type=='resource' && document_type==type}">
                                    <div class="btn-commonformat-national" ng-class="{'btn-commonformat-reference':document_types[type].abbreviation=='VLR'}">
-
-
-                                        <i class="{{type | schemaIcon }}" style="font-size:16pt;position:relative;top:3px;"></i>
+                                        <i class="material-icons" style="font-size:16pt;position:relative;top:3px;">{{type | schemaIcon }}</i>
                                          {{document_types[type].abbreviation}}
-
                                      <div style="padding-right:10px;position:relative;top:-15px;">
                                      <div class="flip pull-right" ng-show="facets(type,'draft') > 0">
                                          <div class="card" ng-class="{cardMargin:facets(type,'publish')>9}">

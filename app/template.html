@@ -184,7 +184,7 @@
 
 
     <!-- PORTAL LINKS-->
-    <nav class="navbar navbar-links navbar-default navbar-static-top bg-orange">
+    <nav class="navbar navbar-links navbar-default navbar-static-top bg-darkgrey">
         <div class="container-fluid container-links color-grey">
                 <div style="display:inline">
                     <a href="/"><i class="fa fa-home" ></i> Home</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -195,7 +195,7 @@
                 </div>
 
                 <div class="pull-right" style="display:inline;">
-                    <a href="/forums/iac" ng-class="{'link-active' : getClass('/forums')}"><i class="fa fa-comments"></i> IAC Forum</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="/forums/iac{{training_env ? '-trg':''}}" ng-class="{'link-active' : getClass('/forums')}"><i class="fa fa-comments"></i> IAC{{training_env ? '-TRG':''}} Forum</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <a href="/help" ng-class="{'link-active' : getClass('/help')}"><i class="fa fa-question-circle" class="bg-grey"></i> Help</a>
                 </div>
 
@@ -275,7 +275,7 @@
 
             <div class="footer-page" >
                 <div class="container-fluid footer-page-container  text-right ">
-                    <a href="#top" ng-click="gotoAnchor('Top')" class="color-darkgrey"><i class="fa fa-arrow-circle-up"></i> back to top</a>
+                    <a href="#"  scroll-to="anchorTop" class="color-darkgrey"><i class="fa fa-arrow-circle-up"></i> back to top</a>
                 </div>
             </div>
 

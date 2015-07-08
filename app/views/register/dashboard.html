@@ -61,8 +61,8 @@
               <span ng-show="user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) != -1" class="label label-primary" style="text-transform:uppercase;"><i class="fa fa-check-square"></i> YOU ARE THE PUBLISHING AUTHORITY (PA)</span>
               <span ng-hide="user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) != -1" class="label label-default" style="text-transform:uppercase;"><i class="fa fa-times-circle"></i> Publishing Authority (PA)</span>
               <span ng-class="{'color-litegrey':user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) == -1}">
-              Each country can designate only one PA. The PA's job to ensure all records are validated before they are published and become publically available on the ABS-CH. PAs can also designate National Authorized Users (NAUs) who are allowed to submit draft records for your country.
-              To designated or change a NAU, the PA should send an email to <a href="mailto:absch@cbd.int" class="color-blue">absch@cbd.int</a> indicating the change, name and email of the NAU.
+              Each country can designate only one PA. The PA's job is to ensure all records are validated before they are published and become publically available on the ABS-CH. PAs can also designate National Authorized Users (NAUs) who are allowed to submit draft records for their country.
+              To designate or change NAUs, the PA can send an email to <a href="mailto:absch@cbd.int" class="color-blue">absch@cbd.int</a> indicating the change, name and email of the NAUs.
               </span>
           </div>
 
@@ -79,7 +79,7 @@
               <span ng-hide="user.roles.indexOf(getRoleName('User')) != -1" class="label label-default" style="text-transform:uppercase;"><i class="fa fa-times-circle"></i> REGISTERED USERS</span>
               <span ng-class="{'color-litegrey':user.roles.indexOf(getRoleName('User')) == -1}">
               Registered Users can save draft reference records and request reference records to be published in the Virtual Library.
-              Reference records are validated by the SCBD Secretariat before they are published in the ABSCH.
+              Reference records are validated by the SCBD before they are published in the ABSCH.
               </span>
           </div>
       </div>

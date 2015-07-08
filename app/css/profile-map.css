@@ -114,7 +114,7 @@
   background-position: 50%;
   background-repeat: no-repeat;
 }
-.flag-icon-eur {
+.flag-icon-eur, .flag-icon-eu {
   background-image: url('/app/img/EU.png');
   width: : 165px;
 }

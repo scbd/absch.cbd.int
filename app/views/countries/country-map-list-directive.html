@@ -40,10 +40,8 @@
                                         <!-- <i ng-show="statusFilter==isRequest" class="glyphicon glyphicon-ok"></i>  -->
                                         Non-Parties <span class="badge badge-primary bg-medgrey">{{totalNonParties}}<span>
                                     </button>
-
                                     &nbsp;&nbsp;&nbsp;
-
-                                    <div km-select ng-model="filterSchema" binding-type="string" placeholder="National Record Type" items="nationalRecords"></div>
+                                    <div km-select ng-model="filterSchema" api="filterSchemaApi" binding-type="string" placeholder="National Record Type" items="nationalRecords"></div>
 
                                     &nbsp;&nbsp;&nbsp;
 
@@ -52,7 +50,7 @@
                                       <button type="button" class="btn btn-default"  ng-class="{'bg-liteblue': !showList }" ng-click="showList = false;">Map</button>
                                     </div>
 
-                                    <button type="button"  ng-click="filterSchema=0;selected_facet='all';updateMap('all');sortTable('name.en', 'ASC')" class="btn btn-default pull-right">
+                                    <button type="button"  ng-click="clear();updateMap('all');sortTable('name.en', 'ASC')" class="btn btn-default pull-right">
 
                                         Clear filters
                                     </button>
@@ -174,54 +172,58 @@
                                 </th>
 
                                 <th style="white-space:nowrap;font-size:14px;text-align:center;">
-                                    <span style="cursor:pointer;" ng-click="sortTable('FP')" >
-                                        NFP
-                                        <md-tooltip>
-                                            National Focal Points
-                                        </md-tooltip>
+                                    <span style="cursor:pointer;" ng-click="sortTable('FP')" data-toggle="tooltip" title="National Focal Points"data-container="body">
+                                        <i class="material-icons color-blue" style="font-size:16pt;position:relative;top:3px;">
+                                           {{'nfp' | schemaIcon}}
+                                       </i> NFP
                                     </span>
                                 </th>
                                 <th style="white-space:nowrap;font-size:14px;text-align:center;">
-                                    <span style="cursor:pointer;" ng-click="sortTable('NDB')" >
-                                        NDB
-                                        <md-tooltip>
-                                            National Websites and Databases
-                                        </md-tooltip>
-                                        </span>
+                                    <span style="cursor:pointer;" ng-click="sortTable('NDB')" data-toggle="tooltip" title="National Websites and Databases"data-container="body">
+                                        <i class="material-icons color-blue" style="font-size:16pt;position:relative;top:3px;">
+                                           {{'ndb' | schemaIcon}}
+                                       </i> NDB
+                                    </span>
                                 </th>
                                 <th style="white-space:nowrap;font-size:14px;text-align:center;">
-                                    <span style="cursor:pointer;" ng-click="sortTable('CNA')"  >CNA
-                                        <md-tooltip>
-                                            Competent National Authorities
-                                        </md-tooltip>
-                                        </span>
+                                    <span style="cursor:pointer;" ng-click="sortTable('CNA')"  data-toggle="tooltip" title="Competent National Authorities"data-container="body">
+                                        <i class="material-icons color-blue" style="font-size:16pt;position:relative;top:3px;">
+                                           {{'cna' | schemaIcon}}
+                                       </i>
+                                        CNA
+                                    </span>
                                 </th>
                                  <th style="white-space:nowrap;font-size:14px;text-align:center;">
-                                    <span style="cursor:pointer;" ng-click="sortTable('MSR')" >MSR
-                                        <md-tooltip>
-                                            Legislative, administrative or policy measures
-                                        </md-tooltip>
-                                        </span>
+                                    <span style="cursor:pointer;" ng-click="sortTable('MSR')" data-toggle="tooltip" title="Legislative, administrative or policy measures"data-container="body">
+                                        <i class="material-icons color-blue" style="font-size:16pt;position:relative;top:3px;">
+                                           {{'msr' | schemaIcon}}
+                                       </i>
+                                        MSR
+                                    </span>
                                 </th>
                                  <th style="white-space:nowrap;font-size:14px;text-align:center;">
-                                    <span style="cursor:pointer;" ng-click="sortTable('IRCC')" >IRCC
-                                        <md-tooltip>
-                                            Internationally Recognized Certificate of Compliance
-                                        </md-tooltip>
+                                    <span style="cursor:pointer;" ng-click="sortTable('IRCC')" data-toggle="tooltip" title="Internationally Recognized Certificate of Compliance"data-container="body">
+                                        <i class="material-icons color-blue" style="font-size:16pt;position:relative;top:3px;">
+                                           {{'ircc' | schemaIcon}}
+                                       </i>
+                                        IRCC
+                                    </span>
+                                </th>
+                                <th style="white-space:nowrap;font-size:14px;text-align:center;">
+                                    <span style="cursor:pointer;" ng-click="sortTable('CP')" data-toggle="tooltip" title="Checkpoints"data-container="body">
+                                        <i class="material-icons color-blue" style="font-size:16pt;position:relative;top:3px;">
+                                           {{'cp' | schemaIcon}}
+                                       </i>
+                                        CP
                                         </span>
                                 </th>
                                 <th style="white-space:nowrap;font-size:14px;text-align:center;">
-                                    <span style="cursor:pointer;" ng-click="sortTable('CP')" >CP
-                                        <md-tooltip>
-                                            Checkpoints
-                                        </md-tooltip>
-                                        </span>
-                                </th>
-                                <th style="white-space:nowrap;font-size:14px;text-align:center;">
-                                    <span style="cursor:pointer;" ng-click="sortTable('CPC')">CPC
-                                        <md-tooltip>
-                                            Checkpoint Communiqués
-                                        </md-tooltip>
+                                    <span style="cursor:pointer;" ng-click="sortTable('CPC')" data-toggle="tooltip" title="Checkpoint Communiqués"data-container="body">
+
+                                        <i class="material-icons color-blue" style="font-size:16pt;position:relative;top:3px;">
+                                           {{'cpc' | schemaIcon}}
+                                       </i>
+                                       CPC
                                         </span>
                                 </th>
                             </tr>

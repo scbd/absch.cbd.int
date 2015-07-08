@@ -407,7 +407,7 @@ define(['app','underscore','/app/js/common.js',
                     else {
                         npParties = _.where(data, {isNPParty:false});
                         $scope.nonPartiesCount = npParties.length;
-                        $scope.partyStatusString = 'Non parties';
+                        $scope.partyStatusString = 'Non-Party';
                     }
                     $scope.queryPartyStatus =
                                         ('government_s:(' +
