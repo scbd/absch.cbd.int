@@ -20,16 +20,18 @@ define(['app', 'underscore'], function(app, _) {
                 $scope.terms = null;
                 $scope.rootTerms = [];
 
+                $scope.init();
                 $scope.$watch("document", $scope.onTerms);
                 $scope.$watch("binding", $scope.load);
                 $scope.$watch("binding", function() {
                     ngModelController.$setViewValue($scope.binding);
                 });
-                $scope.init();
 
 
             },
-            controller: ["$scope", "$q", "Thesaurus", "Enumerable", "$http", "guid", function($scope, $q, thesaurus, Enumerable, $http, guid) {
+            controller: ["$scope", "$q", "Thesaurus", "Enumerable", "$http", "guid",
+            function($scope, $q, thesaurus, Enumerable, $http, guid) {
+
                 $scope.termsFn = function(){  return  [
                        {
                          "identifier": "1D2710D3-75C8-475D-8634-F912F06DAF25",
@@ -774,21 +776,16 @@ define(['app', 'underscore'], function(app, _) {
                      ]
                  };
 
+
+
                 //==============================
                 //
                 //==============================
                 $scope.init = function() {
-                    $scope.setError(null);
-                    $scope.__loading = true;
 
-                    $q.when($scope.termsFn(),
+                    return $q.when($scope.terms||$scope.termsFn(),
                         function(data) { // on success
-                            $scope.__loading = false;
                             $scope.terms = data;
-                        },
-                        function(error) { // on error
-                            $scope.__loading = false;
-                            $scope.setError(error);
                         });
                 }
 
@@ -796,14 +793,15 @@ define(['app', 'underscore'], function(app, _) {
                 //
                 //==============================
                 $scope.load = function() {
-                    if (!$scope.terms) // Not initialized
-                        return;
 
+                    // if (!$scope.terms) // Not initialized
+                    //     return;
+                    $scope.init();
                     var oNewIdentifiers = {};
                     var oNewSections = {};
 
-                    if (!$.isArray($scope.terms))
-                        throw "Type must be array";
+                    // if (!$.isArray($scope.terms))
+                    //     throw "Type must be array";
 
                     if ($scope.binding) {
 
@@ -812,12 +810,13 @@ define(['app', 'underscore'], function(app, _) {
 
                         for (var i = 0; i < $scope.binding.length; ++i) {
                             oNewIdentifiers[$scope.binding[i].identifier] = true;
-                            oNewSections[$scope.binding[i].identifier] = $scope.binding[i].section
+                            oNewSections[$scope.binding[i].identifier] = $scope.binding[i].section||{};
                         }
                     }
 
                     if (!angular.equals(oNewIdentifiers, $scope.identifiers)) $scope.identifiers = oNewIdentifiers;
                     if (!angular.equals(oNewSections, $scope.sections)) $scope.sections = oNewSections;
+                // })
                 }
 
 
@@ -831,14 +830,13 @@ define(['app', 'underscore'], function(app, _) {
                     if (refTerms) {
                         $scope.load();
                         if (!$.isArray($scope.document)){
-                            if ($scope.document.amendedMeasures || $scope.document.linkedMeasures) {
-                                var measures = _.union(($scope.document.amendedMeasures || []), ($scope.document.linkedMeasures || []));
-                                var amendedMeasures = _.map(measures, function(item) {
+                            if ($scope.document.amendedMeasures) {
+
+                                var amendedMeasures = _.map($scope.document.amendedMeasures, function(item) {
                                     return $http.get('/api/v2013/documents/' + item.identifier)
                                 })
                                 $q.all(amendedMeasures)
                                     .then(function(data) {
-                                        console.log(data)
                                         data.forEach(function(measure) {
                                             appendElementMeasure(measure.data, $scope.terms);
                                             return;
@@ -849,15 +847,19 @@ define(['app', 'underscore'], function(app, _) {
                                         updateProperties($scope.rootTerms, 1)
                                     });
                             } else {
-                                buildTree();
+                                $.when($scope.init())
+                                .then(function(){
+                                    buildTree();
+                                });
                             }
                         }
                         else if ($.isArray($scope.document)){
 
                             _.each($scope.document, function(measure){
                                 addMeasureToElements(measure.document ? measure.document : measure);
-                                buildTree();
-                                updateProperties($scope.rootTerms, 1);
+
+                                    buildTree();
+                                    updateProperties($scope.rootTerms, 1);
 
                             });
                             console.log($scope.terms, $scope.rootTerms,existing);
@@ -867,6 +869,7 @@ define(['app', 'underscore'], function(app, _) {
                 }
 
                 function buildTree() {
+
                     if (($scope.layout || "tree") == "tree") //Default layout
                         $scope.rootTerms = thesaurus.buildTree($scope.terms);
                     else
@@ -920,12 +923,12 @@ define(['app', 'underscore'], function(app, _) {
                             });
 
                     });
-                    _.forEach(measure.relatedMeasures, function(measureElement) {
-                        if(measureElement.measure)
-                            _.forEach(measureElement.measure.absMeasures, function(element) {
-                                newElement(element, measureElement.measure, 'amended', measure.header.identifier);
-                            });
-                    });
+                    // _.forEach(measure.relatedMeasures, function(measureElement) {
+                    //     if(measureElement.measure)
+                    //         _.forEach(measureElement.measure.absMeasures, function(element) {
+                    //             newElement(element, measureElement.measure, 'amended', measure.header.identifier);
+                    //         });
+                    // });
                 }
                 var existing = [];
                 function newElement(measureElement, measure, type, parentMeasure){
@@ -969,7 +972,7 @@ define(['app', 'underscore'], function(app, _) {
 
                         $scope.identifiers[elementMeasure.identifier] = true;
                         if(measureElement.section)
-                            $scope.sections[elementMeasure.identifier] = measureElement.section;
+                            $scope.sections[elementMeasure.identifier] = measureElement.section||{};
 
                         existing.push({measureId:measure.header.identifier, elementId:element.identifier, type:type});
                     }
@@ -997,7 +1000,7 @@ define(['app', 'underscore'], function(app, _) {
                             terms.push(elementMeasure);
 
                             $scope.identifiers[elementMeasure.identifier] = true;
-                            $scope.sections[elementMeasure.identifier] = measureElement.section;
+                            $scope.sections[elementMeasure.identifier] = measureElement.section||{};
                         }
                     });
                     console.log(terms);
@@ -1048,11 +1051,22 @@ define(['app', 'underscore'], function(app, _) {
                         }
 
                         if (term.narrowerTerms) {
-                            updateProperties(term.narrowerTerms, level + 1);
+                            term.isChildSelected = updateProperties(term.narrowerTerms, level + 1);
+                        }
+                        else {
+                            if($scope.sections[term.identifier])
+                                term.isChildSelected = true;
+                        }
+                        if(term.isChildSelected){
+                            _.map(term.broaderTerms, function(brTerm) {
+                                brTerm.isChildSelected = true;
+                            });
                         }
 
                     });
-
+                    return _.some(terms, function(term){
+                        return $scope.sections[term.identifier];
+                    });
                 }
 
 

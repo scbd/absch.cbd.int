@@ -1,4 +1,5 @@
-define(['app'], function (app) {
+define(['app',
+        '/app/views/search/measure-matrix-elements-derective.html.js'], function (app) {
 
 app.directive("viewMeasure", [function () {
 	return {

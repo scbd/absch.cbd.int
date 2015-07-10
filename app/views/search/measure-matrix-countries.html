@@ -102,7 +102,7 @@
 
 			<!-- {{compliance}} {{monitoringUtilization}} -->
 			<div class="well col-sm-12">
-				<div ng-repeat="measure in measures">
+				<!-- <div ng-repeat="measure in measures">
 					<strong>{{measure.government_EN_t}}</strong> |
 					<strong>{{measure.title_t}}</strong>
 					| {{measure.status_EN_t}} | {{measure.type_EN_t}} | {{measure.jurisdiction_EN_t}} |
@@ -122,7 +122,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 
 				<div class="table">
 					<div class="col-sm-12">
@@ -142,38 +142,10 @@
 							</tr>
 							<tr>
 								<td class="tableCell">
-										<div measure-matrix-elements name="absMeasures" type="multiple" ng-model="noModel" locales="measures[0].documentheader.languages" document="measures"></div>
-									<!-- </div> -->
-									<!-- <table class="table">
-										<tr ng-if="!scope.parent || scope.measures.length>0 || scope.relatedElements.length>0">
-											<td class="matrixheaderColumn rightBorder "
-											ng-class="{'paddingleft3':scope.parent, 'highlight':!scope.parent}">
-												{{scope.name| lstring:locale}}
-											</td>
-											<td style="padding:0px;">
-												<table class="table table-bordered">
-													<tr ng-repeat="measureScope in scope.measures" >
-														<td  class=" cover45" ng-class="{'paddingleft6':scope.parent}">
-															{{measureScope.title| lstring:locale}}
-														</td>
-														<td ng-class="{'paddingleft6':scope.parent}">
-															<strong>{{measureScope.section| lstring:locale}}</strong>
-														</td>
-													</tr>
-													<tr ng-repeat="measureScope in scope.relatedElements" >
-														<td class=" matrixheaderColumn cover45 paddingleft9">
-															<b>{{measureScope.type}} </b>{{measureScope.title| lstring:locale}}
-														</td>
-														<td class="paddingleft9">
-															<strong>{{measureScope.section| lstring:locale}}</strong>
-														</td>
-													</tr>
-												</table>
-											</td>
-										</tr>
-									</table> -->
+									<div measure-matrix-elements name="absMeasures" type="multiple" ng-model="noModel" locales="measures[0].documentheader.languages" document="measures"></div>
 								</td>
 							</tr>
+						</table>
 					</div>
 				</div>
 			</div>
