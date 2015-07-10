@@ -195,7 +195,7 @@
                 </div>
 
                 <div class="pull-right" style="display:inline;">
-                    <a href="/forums/iac{{training_env ? '-trg':''}}" ng-class="{'link-active' : getClass('/forums')}"><i class="fa fa-comments"></i> IAC{{training_env ? '-TRG':''}} Forum</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="/forums/iac{{training_env||development_env ? '-trg':''}}" ng-class="{'link-active' : getClass('/forums')}"><i class="fa fa-comments"></i> IAC{{training_env||development_env ? '-TRG':''}} Forum</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <a href="/help" ng-class="{'link-active' : getClass('/help')}"><i class="fa fa-question-circle" class="bg-grey"></i> Help</a>
                 </div>
 

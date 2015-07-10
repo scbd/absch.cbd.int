@@ -9,7 +9,7 @@ define(['app', 'cbd-forums'], function(app) {
             var art13 = $http.get('/api/v2014/discussions/forums/17316/threads');
 
             //
-            if($scope.training_env)
+            if($scope.training_env || $scope.development_env)
                 iac = $http.get('/api/v2014/discussions/forums/17433/threads');
 
     	     $q.when(iac).then(function(response) {
@@ -25,14 +25,14 @@ define(['app', 'cbd-forums'], function(app) {
              .catch(function(error){
                 console.log(error);
             });
-            $q.all(car).then(function(response) {
+            $q.when(car).then(function(response) {
                 $scope.carThreads = response.data.length;
             })
             .catch(function(error){
                 console.log(error);
             });
 
-            $q.all(art13).then(function(response) {
+            $q.when(art13).then(function(response) {
                 $scope.art10Threads = response.data.length;
             })
             .catch(function(error){
