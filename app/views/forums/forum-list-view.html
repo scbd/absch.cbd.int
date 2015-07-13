@@ -22,14 +22,14 @@
                     <div class="list-group">
                         <div class="list-group-item activeHeader">
                             <h4 class="list-group-item-heading" style="padding-left:40%">
-                                <a ng-href="/forums/iac">
+                                <a ng-href="/forums/iac{{training_env||development_env ? '-trg':''}}">
                                     <i class="fa fa-rss fa-3x"></i>
                                 </a>
                             </h4>
                         </div>
                         <div class="list-group-item list-group-item-default">
                             <h3>
-                                <a ng-href="/forums/iac">
+                                <a ng-href="/forums/iac{{training_env||development_env ? '-trg':''}}">
                                     Informal Advisory Committee (IAC)</a>
                             </h3>
                             <p>You must be an IAC member to participate in this forum. </p>

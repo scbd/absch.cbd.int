@@ -1,17 +1,109 @@
 <div>
+<style>
+    .matrixTable tr .headerColumn {
+        width: 30%;
+        font-weight: bold;
+    }
 
+    .matrixheaderColumn {
+        width: 40%;
+    }
+
+    .tableCell {
+        padding: 0px!important;
+    }
+
+    .tableCell table {
+        border: none;
+        margin: 0px;
+    }
+
+    .noBorder {
+        border: none!important;
+    }
+
+    .noLeftBorder {
+        border-left: none!important;
+    }
+
+    .noRightBorder {
+        border-right: none!important;
+    }
+
+    .noTopBorder {
+        border-top: none!important;
+    }
+
+    .noBottomBorder {
+        border-bottom: none!important;
+    }
+
+    .whiteBackground {
+        background-color: #fff!important;
+    }
+
+    .rightBorder {
+        border-right: 1px solid #ddd;
+    }
+
+    .subList {
+        padding-left: 5%!important;
+    }
+
+    .cover50 {
+        width: 50%;
+    }
+
+    .cover45 {
+        width: 45%;
+    }
+
+    .cover45_1 {
+        width: 45.1%;
+    }
+
+    .cover55 {
+        width: 55%;
+    }
+
+    .paddingleft6 {
+        padding-left: 6%!important;
+    }
+
+    .paddingleft9 {
+        padding-left: 9%!important;
+    }
+
+    .paddingleft12 {
+        padding-left: 12%!important;
+    }
+
+    .elementMeasure {
+        padding-bottom: : 0px!important;
+    }
+
+    .whiteTopBorder {
+        border-bottom: 1px solid #fff;
+    }
+
+    .table > tbody > tr > td {
+        border-top: none!important;
+    }
+</style>
     <table class="table table-bordered matrixTable">
         <tr ng:repeat="term in rootTerms">
             <td class="tableCell" ng-include="'/app/views/search/matrix/measure-matrix.directive/abs/inner'"></td>
         </tr>
     </table>
     <script type="text/ng-template" id="/app/views/search/matrix/measure-matrix.directive/abs/inner">
-        <table class="table">
-            <tr ng:class="{'elementMeasure':term.isMeasure, 'whiteTopBorder':term.hasMeasure}">
+        <table class="table" ng:if="term.isChildSelected">
+            <tr ng:class="{'elementMeasure':term.isMeasure, 'whiteTopBorder':term.hasMeasure}" >
                 <td class="matrixheaderColumn rightBorder " ng:class="{'paddingleft3':term.level==2 , 'paddingleft6':term.level==3, 'paddingleft9':term.level==4}">
                     <strong ng-show="!term.broaderTerms">{{term.title||term.name | lstring:locale|uppercase}}</strong>
                     <strong ng-show="term.broaderTerms && !term.isMeasure">{{term.title||term.name | lstring:locale}}</strong>
                     <span ng-show="term.broaderTerms && term.isMeasure">{{term.title||term.name | lstring:locale}}</span>
+                    <i class="fa fa-chevron-circle-up pull-right" ng-show="showNode" ng:if="term.level<2"></i>
+                    <i class="fa fa-chevron-circle-down pull-right" ng-show="!showNode" ng:if="term.level<2"></i>
                 </td>
                 <td style="width:48.99%" ng:class="{'paddingleft6':term.level==2 , 'paddingleft9':term.level==3, 'paddingleft12':term.level==4}">
                     <strong ng-show="!term.broaderTerms">{{sections[term.identifier] | lstring:locale}}</strong>
@@ -21,7 +113,7 @@
             <tr ng:if="term.narrowerTerms && term.narrowerTerms.length > 0">
                 <td class="matrixheaderColumn rightBorder subList1 cover50 noBottomBorder noTopBorder"
                 colspan="2" style="padding-top:0px;padding-bottom:0px">
-                    <table class="table matrixTable" ng:class="{'table-bordered':!term.isMeasure}">
+                    <table class="table matrixTable" ng:class="{'table-bordered':!term.level>1}">
                         <tr ng:repeat="term in term.narrowerTerms|orderBy:isMeasure:desc" >
                             <td class="tableCell" ng:class="{'noBorder':term.isMeasure}" ng-include="'/app/views/search/matrix/measure-matrix.directive/abs/inner'"></td>
                         </tr>
