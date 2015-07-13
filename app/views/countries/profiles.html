@@ -84,7 +84,7 @@
             width: : 165px;
         }
         .pad-left{
-            margin-right: 5px;
+            margin: 0 5px;
         }
         *:focus {
             outline: none;
@@ -178,13 +178,13 @@
 
                         <div class="row bg-grey1" style="padding:3px;">
                             <h5 style="padding:0;margin:0;font-size:15px;">
-                                <a href="" ng-click="showNFP = !showNFP">
-                                                       <span class="badge pad-left" ng-class="{'bg-grey': nfpCount==0, 'bg-black': nfpCount > 0}">{{nfpCount}}</span>
-                                                       <span style="position:relative;top:1px;" ng-class="{'color-grey': nfpCount==0, 'color-black': nfpCount > 0}">
-                                                           National Focal Points (NFP)</span>
-                                                       <i class="fa fa-chevron-circle-up pull-right" ng-show="showNFP"></i>
-                                                       <i class="fa fa-chevron-circle-down pull-right" ng-show="!showNFP"></i>
-                                                   </a>
+                                <a href="" ng-click="showNFP = !showNFP"> 
+                                    <i class="fa fa-chevron-circle-up  pad-left" ng-show="showNFP"></i>
+                                    <i class="fa fa-chevron-circle-down pad-left" ng-show="!showNFP"></i>                    
+                                    <span style="position:relative;top:1px;" ng-class="{'color-grey': nfpCount==0, 'color-black': nfpCount > 0}">
+                                       National Focal Points (NFP)</span>
+                                    <span class="badge pull-right" ng-class="{'bg-grey': nfpCount==0, 'bg-black': nfpCount > 0}">{{nfpCount}}</span>
+                                 </a>
                             </h5>
                         </div>
 
@@ -232,16 +232,13 @@
 
                         <div class="row bg-grey1" style="padding:3px;">
                             <h5 style="padding:0;margin:0;font-size:15px;">
-
                                 <a href="" ng-click="showNDB = !showNDB">
-                                                       <span class="badge pad-left" ng-class="{'bg-grey': database==0, 'bg-black': database > 0}">{{database}}</span>
-                                                       <span style="position:relative;top:1px;" ng-class="{'color-grey': database==0, 'color-black': database > 0}">
-
-                                                          National Databases and Websites (NDB)</span>
-                                                       <i class="fa fa-chevron-circle-up pull-right" ng-show="showNDB"></i>
-                                                       <i class="fa fa-chevron-circle-down pull-right" ng-show="!showNDB"></i>
-                                                   </a>
-
+                                   <i class="fa fa-chevron-circle-up pad-left" ng-show="showNDB"></i>
+                                   <i class="fa fa-chevron-circle-down pad-left" ng-show="!showNDB"></i>
+                                   <span style="position:relative;top:1px;" ng-class="{'color-grey': database==0, 'color-black': database > 0}">
+                                      National Databases and Websites (NDB)</span>
+                                    <span class="badge pull-right" ng-class="{'bg-grey': database==0, 'bg-black': database > 0}">{{database}}</span>
+                               </a>
                             </h5>
                         </div>
 
@@ -289,16 +286,14 @@
 
                         <div class="row bg-grey1" style="padding:3px;">
                             <h5 style="padding:0;margin:0;font-size:15px;">
-
                                 <a href="" ng-click="showCNA = !showCNA">
-                                                       <span class="badge pad-left" ng-class="{'bg-grey': nationalAuthority==0, 'bg-black': nationalAuthority > 0}">{{nationalAuthority}}</span>
-                                                       <span style="position:relative;top:1px;"  ng-class="{'color-grey': nationalAuthority==0, 'color-black': nationalAuthority > 0}">
-
-                                                            Competent National Authorities (CNA)
-                                                       </span>
-                                                       <i class="fa fa-chevron-circle-up pull-right" ng-show="showCNA"></i>
-                                                       <i class="fa fa-chevron-circle-down pull-right" ng-show="!showCNA"></i>
-                                                   </a>
+                                   <i class="fa fa-chevron-circle-up pad-left" ng-show="showCNA"></i>
+                                   <i class="fa fa-chevron-circle-down pad-left" ng-show="!showCNA"></i>
+                                   <span style="position:relative;top:1px;"  ng-class="{'color-grey': nationalAuthority==0, 'color-black': nationalAuthority > 0}">
+                                        Competent National Authorities (CNA)
+                                   </span>
+                                   <span class="badge pull-right" ng-class="{'bg-grey': nationalAuthority==0, 'bg-black': nationalAuthority > 0}">{{nationalAuthority}}</span>
+                               </a>
                             </h5>
                         </div>
 
@@ -348,14 +343,13 @@
                             <h5 style="padding:0;margin:0;font-size:15px;">
 
                                 <a href="" ng-click="showMSR = !showMSR">
-                                                       <span class="badge pad-left" ng-class="{'bg-grey': nationalMeasure==0, 'bg-black': nationalMeasure > 0}">{{nationalMeasure}}</span>
-                                                       <span style="position:relative;top:1px;"  ng-class="{'color-grey': nationalMeasure==0, 'color-black': nationalMeasure > 0}">
-
-                                                               Legislative, administrative or policy measures on access and benefit-sharing (MSR)
-                                                       </span>
-                                                       <i class="fa fa-chevron-circle-up pull-right" ng-show="showMSR"></i>
-                                                       <i class="fa fa-chevron-circle-down pull-right" ng-show="!showMSR"></i>
-                                                   </a>
+                                   <i class="fa fa-chevron-circle-up pad-left" ng-show="showMSR"></i>
+                                   <i class="fa fa-chevron-circle-down pad-left" ng-show="!showMSR"></i>
+                                   <span style="position:relative;top:1px;"  ng-class="{'color-grey': nationalMeasure==0, 'color-black': nationalMeasure > 0}">
+                                           Legislative, administrative or policy measures on access and benefit-sharing (MSR)
+                                   </span>
+                                   <span class="badge pull-right" ng-class="{'bg-grey': nationalMeasure==0, 'bg-black': nationalMeasure > 0}">{{nationalMeasure}}</span>
+                               </a>
 
                             </h5>
                         </div>
@@ -415,17 +409,15 @@
 
                         <div class="row bg-grey1" style="padding:3px;">
                             <h5 style="padding:0;margin:0;font-size:15px;">
-
                                 <a href="" ng-click="showIRCC = !showIRCC">
-                                                       <span class="badge pad-left" ng-class="{'bg-grey': Permit==0, 'bg-black': Permit > 0}">{{Permit}}</span>
-                                                       <span style="position:relative;top:1px;"  ng-class="{'color-grey': Permit==0, 'color-black': Permit > 0}">
+                                   <i class="fa fa-chevron-circle-up pad-left" ng-show="showIRCC"></i>
+                                   <i class="fa fa-chevron-circle-down pad-left" ng-show="!showIRCC"></i>
+                                   <span style="position:relative;top:1px;"  ng-class="{'color-grey': Permit==0, 'color-black': Permit > 0}">
 
-                                                            Internationally Recognized Certificates of Compliance (IRCC)
-                                                       </span>
-                                                       <i class="fa fa-chevron-circle-up pull-right" ng-show="showIRCC"></i>
-                                                       <i class="fa fa-chevron-circle-down pull-right" ng-show="!showIRCC"></i>
-                                                   </a>
-
+                                        Internationally Recognized Certificates of Compliance (IRCC)
+                                   </span>
+                                   <span class="badge pull-right" ng-class="{'bg-grey': Permit==0, 'bg-black': Permit > 0}">{{Permit}}</span>
+                               </a>
                             </h5>
                         </div>
 
@@ -496,16 +488,14 @@
 
                         <div class="row bg-grey1" style="padding:3px;">
                             <h5 style="padding:0;margin:0;font-size:15px;">
-
                                 <a href="" ng-click="showCP = !showCP">
-                                                       <span class="badge pad-left" ng-class="{'bg-grey': absCheckpoint==0, 'bg-black': absCheckpoint > 0}">{{absCheckpoint}}</span>
-                                                       <span style="position:relative;top:1px;"  ng-class="{'color-grey': absCheckpoint==0, 'color-black': absCheckpoint > 0}">
-
-                                                           Checkpoints (CP)
-                                                       </span>
-                                                       <i class="fa fa-chevron-circle-up pull-right" ng-show="showCP"></i>
-                                                       <i class="fa fa-chevron-circle-down pull-right" ng-show="!showCP"></i>
-                                                   </a>
+                                   <i class="fa fa-chevron-circle-up pad-left" ng-show="showCP"></i>
+                                   <i class="fa fa-chevron-circle-down pad-left" ng-show="!showCP"></i>
+                                   <span style="position:relative;top:1px;"  ng-class="{'color-grey': absCheckpoint==0, 'color-black': absCheckpoint > 0}">
+                                       Checkpoints (CP)
+                                   </span>
+                                   <span class="badge pull-right" ng-class="{'bg-grey': absCheckpoint==0, 'bg-black': absCheckpoint > 0}">{{absCheckpoint}}</span>
+                               </a>
                             </h5>
                         </div>
 
@@ -556,16 +546,14 @@
 
                         <div class="row bg-grey1" style="padding:3px; border-radius: 3px;">
                             <h5 style="padding:0;margin:0;font-size:15px;">
-
                                 <a href="" ng-click="showCPC = !showCPC">
-                                                       <span class="badge pad-left" ng-class="{'bg-grey': absCheckpointCommunique==0, 'bg-black': absCheckpointCommunique > 0}">{{absCheckpointCommunique}}</span>
-                                                       <span style="position:relative;top:1px;"  ng-class="{'color-grey': absCheckpointCommunique==0, 'color-black': absCheckpointCommunique > 0}">
-
-                                                           Checkpoint Communiqués (CPC) SENT
-                                                       </span>
-                                                       <i class="fa fa-chevron-circle-up pull-right" ng-show="showCPC"></i>
-                                                       <i class="fa fa-chevron-circle-down pull-right" ng-show="!showCPC"></i>
-                                                   </a>
+                                   <i class="fa fa-chevron-circle-up pad-left" ng-show="showCPC"></i>
+                                   <i class="fa fa-chevron-circle-down pad-left" ng-show="!showCPC"></i>
+                                   <span style="position:relative;top:1px;"  ng-class="{'color-grey': absCheckpointCommunique==0, 'color-black': absCheckpointCommunique > 0}">
+                                       Checkpoint Communiqués (CPC) SENT
+                                   </span>
+                                   <span class="badge pull-right" ng-class="{'bg-grey': absCheckpointCommunique==0, 'bg-black': absCheckpointCommunique > 0}">{{absCheckpointCommunique}}</span>
+                               </a>
                             </h5>
                         </div>
 
@@ -653,14 +641,13 @@
                         <div class="row bg-grey1" style="padding:3px;">
                             <h5 style="padding:0;margin:0;font-size:15px;">
                                 <a href="" ng-click="showCPCRecv = !showCPCRecv">
-                                                       <span class="badge pad-left" ng-class="{'bg-grey': cpcReceivedCount==0, 'bg-black': cpcReceivedCount > 0}">{{cpcReceivedCount}}</span>
-                                                       <span style="position:relative;top:1px;"  ng-class="{'color-grey': cpcReceivedCount==0, 'color-black': cpcReceivedCount > 0}">
-                                                         Checkpoint Communiqués (CPC) RECEIVED
-                                                       </span>
-                                                       <i class="fa fa-chevron-circle-up pull-right" ng-show="showCPCRecv"></i>
-                                                       <i class="fa fa-chevron-circle-down pull-right" ng-show="!showCPCRecv"></i>
-                                                   </a>
-
+                                   <i class="fa fa-chevron-circle-up pad-left" ng-show="showCPCRecv"></i>
+                                   <i class="fa fa-chevron-circle-down pad-left" ng-show="!showCPCRecv"></i>
+                                   <span style="position:relative;top:1px;"  ng-class="{'color-grey': cpcReceivedCount==0, 'color-black': cpcReceivedCount > 0}">
+                                     Checkpoint Communiqués (CPC) RECEIVED
+                                   </span>
+                                   <span class="badge pull-right" ng-class="{'bg-grey': cpcReceivedCount==0, 'bg-black': cpcReceivedCount > 0}">{{cpcReceivedCount}}</span>
+                               </a>
                             </h5>
                         </div>
 
