@@ -361,7 +361,7 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
     $scope.Q62Clear = function () {
         if($scope.document && $scope.document.question62 && $scope.document.question62.no){
             $scope.document.question62.donor = undefined;
-            $scope.document.question62.receiver = undefined;
+            $scope.document.question62.recipient = undefined;
         }
     };
 
@@ -377,31 +377,37 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
     //==================================
     //
     //==================================
-    $scope.Q62ClearReceiver = function () {
-        if($scope.document && $scope.document.question62 && !$scope.document.question62.receiver.answer){
-            $scope.document.question62.receiver.fromParty = undefined;
-            $scope.document.question62.receiver.fromInstitution = undefined;
+    $scope.Q62ClearRecipient = function () {
+        if($scope.document && $scope.document.question62 && !$scope.document.question62.recipient.answer){
+            $scope.document.question62.recipient.parties = undefined;
+            $scope.document.question62.recipient.partiesInfo = undefined;
+            $scope.document.question62.recipient.financialInstitutions = undefined;
+            $scope.document.question62.recipient.gef = undefined;
+            $scope.document.question62.recipient.npImplementationFund = undefined;
+            $scope.document.question62.recipient.otherSources = undefined;
+            $scope.document.question62.recipient.otherSourcesInfo = undefined;
         }
     };
 
     //==================================
     //
     //==================================
-    $scope.Q62ClearReceiverFromParty = function () {
-        if($scope.document && $scope.document.question62 && $scope.document.question62.receiver && $scope.document.question62.receiver.fromParty && !$scope.document.question62.receiver.fromParty.answer){
-            $scope.document.question62.receiver.fromParty.additionalInfo = undefined;
+    $scope.Q62ClearRecipientFromParty = function () {
+        if($scope.document && $scope.document.question62 && $scope.document.question62.recipient && !$scope.document.question62.recipient.parties){
+            $scope.document.question62.recipient.partiesInfo = undefined;
         }
     };
 
     //==================================
     //
     //==================================
-    $scope.Q62ClearReceiverFromInstitution = function () {
-        if($scope.document && $scope.document.question62 && $scope.document.question62.receiver && $scope.document.question62.receiver.fromInstitution && !$scope.document.question62.receiver.fromInstitution.answer){
-            $scope.document.question62.receiver.fromInstitution = undefined;
-        }
-        if($scope.document && $scope.document.question62 && $scope.document.question62.receiver && $scope.document.question62.receiver.fromInstitution && !$scope.document.question62.receiver.fromInstition.other){
-            $scope.document.question62.receiver.fromInstition.otherInfo = undefined;
+    $scope.Q62ClearRecipientFromInstitution = function () {
+        if($scope.document && $scope.document.question62 && $scope.document.question62.recipient && !$scope.document.question62.recipient.financialInstitutions){
+            $scope.document.question62.recipient.financialInstitutions = undefined;
+            $scope.document.question62.recipient.gef = undefined;
+            $scope.document.question62.recipient.npImplementationFund = undefined;
+            $scope.document.question62.recipient.otherSources = undefined;
+            $scope.document.question62.recipient.otherSourcesInfo = undefined;
         }
     };
 

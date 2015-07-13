@@ -1000,11 +1000,20 @@
                                     </div>
                                     <div class="row" ng-show="document.question38.answer">
                                         <div class="col-xs-10 col-xs-offset-1">
-                                            <div class="km-control-group" name="question38AdditionalInfo" caption="">
+                                            <div class="km-control-group" name="question38Law" caption="">
                                                 <strong>Please provide further information and reference to the domestic law establishing rights of indigenous and local communities to grant access to genetic resources</strong>
-                                                <div km-textbox-ml rows=2 name="question38AdditionalInfo" ng-model="document.question38.additionalInfo" locales="document.header.languages" placeholder=""></div>
+                                                <div km-textbox-ml rows=2 name="question38LawFurtherInfo" ng-model="document.question38.law.furtherInfo" locales="document.header.languages" placeholder=""></div>
+
+                                                <div class="km-control-group" style="margin-bottom:20px;" name="q38LawDocRefs" caption="Links to related documents">
+                                                    <div document-selection ng-model="document.question38.law.documentReferenceIDs"
+                                                                            ng-disabled="!document.government"
+                                                                            question="question38Law"
+                                                                            government="document.government"
+                                                                            country-documents="absDocuments">
+                                                    </div>
+                                                </div>
                                             </div>
-                                                <div class="km-control-group" name="question38Measures" caption="Does your country have measures in place with the aim of ensuring that the prior informed consent or approval and involvement of indigenous and local communities is obtained as provided in Article 6.2?">
+                                            <div class="km-control-group" name="question38Measures" caption="Does your country have measures in place with the aim of ensuring that the prior informed consent or approval and involvement of indigenous and local communities is obtained as provided in Article 6.2?">
                                                 <div class="km-yes-no" name="question38Measures" ng-model="document.question38.measures.answer"></div>
                                             </div>
 
@@ -1611,23 +1620,23 @@
                                     </div>
 
                                     <div class="checkbox">
-                                        <label><input type="checkbox" ng-model="document.question62.receiver.answer" ng-change="Q62Clear(); Q62ClearReceiver()">Yes, financial resources have been received</label>
-                                        <div class="checkbox" ng-show="document.question62.receiver.answer">
-                                            <label><input type="checkbox" ng-model="document.question62.receiver.fromParty.answer" ng-change="Q62ClearReceiverFromParty()">From other Parties</label>
-                                                <div ng-show="document.question62.receiver.fromParty.answer" km-textbox-ml rows=2 name="" ng-model="document.question62.receiver.fromParty.additionalInfo" locales="document.header.languages" placeholder="">
+                                        <label><input type="checkbox" ng-model="document.question62.recipient.answer" ng-change="Q62Clear(); Q62ClearRecipient()">Yes, financial resources have been received</label>
+                                        <div class="checkbox" ng-show="document.question62.recipient.answer">
+                                            <label><input type="checkbox" ng-model="document.question62.recipient.parties" ng-change="Q62ClearRecipientFromParty()">From other Parties</label>
+                                                <div ng-show="document.question62.recipient.parties" km-textbox-ml rows=2 name="" ng-model="document.question62.recipient.partiesInfo" locales="document.header.languages" placeholder="">
                                                 </div>
                                         </div>
-                                        <div class="checkbox" ng-show="document.question62.receiver.answer">
-                                            <label><input type="checkbox" ng-model="document.question62.receiver.fromInstitution.answer" ng-change="Q62ClearReceiverFromInstitution()">From financial institutions</label>
-                                            <div class="checkbox" ng-show="document.question62.receiver.fromInstitution.answer">
-                                                <label><input type="checkbox" ng-model="document.question62.receiver.fromInstitution.GEF">From the Global Environmental Facility</label>
+                                        <div class="checkbox" ng-show="document.question62.recipient.answer">
+                                            <label><input type="checkbox" ng-model="document.question62.recipient.financialInstitutions" ng-change="Q62ClearRecipientFromInstitution()">From financial institutions</label>
+                                            <div class="checkbox" ng-show="document.question62.recipient.financialInstitutions">
+                                                <label><input type="checkbox" ng-model="document.question62.recipient.gef" ng-change="Q62ClearRecipientFromInstitution()">From the Global Environmental Facility</label>
                                             </div>
-                                            <div class="checkbox" ng-show="document.question62.receiver.fromInstitution.answer">
-                                                <label><input type="checkbox" ng-model="document.question62.receiver.fromInstitution.NPF">From the Nagoya Protocol Implementation Fund </label>
+                                            <div class="checkbox" ng-show="document.question62.recipient.financialInstitutions">
+                                                <label><input type="checkbox" ng-model="document.question62.recipient.npImplementationFund" ng-change="Q62ClearRecipientFromInstitution()">From the Nagoya Protocol Implementation Fund </label>
                                             </div>
-                                            <div class="checkbox" ng-show="document.question62.receiver.fromInstitution.answer">
-                                                <label><input type="checkbox" ng-model="document.question62.receiver.fromInstitution.other" ng-change="Q62ClearReceiverFromInstitution()">From other sources</label>
-                                                    <div ng-show="document.question62.receiver.fromInstitution.other" km-textbox-ml rows=2 name="question62ReceiverFromInstitionOthFurtherInfo" ng-model="document.question62.receiver.fromInstition.otherInfo" locales="document.header.languages" placeholder=""></div>
+                                            <div class="checkbox" ng-show="document.question62.recipient.financialInstitutions">
+                                                <label><input type="checkbox" ng-model="document.question62.recipient.otherSources" ng-change="Q62ClearRecipientFromInstitution()">From other sources</label>
+                                                    <div ng-show="document.question62.recipient.otherSources" km-textbox-ml rows=2 name="question62ReceiverotherSourcesInfo" ng-model="document.question62.recipient.otherSourcesInfo" locales="document.header.languages" placeholder=""></div>
                                             </div>
                                         </div>
                                     </div>

@@ -1081,9 +1081,22 @@
 						<div class="km-value km-pre">{{booleanToText(document.question38.answer)}}</div>
 						<div style="margin: 0 0 0 20px;" ng-show="document.question38.answer">
 							<div style="margin: 0 0 0 20px;" >
-								<div ng-show="document.question38.additionalInfo">
-									<label>Please provide further information and reference to the domestic law establishing rights of indigenous and local communities to grant access to genetic resources</label>
-									<div class="km-value">{{document.question38.additionalInfo | lstring:locale}}</div>
+								<div>
+									<div ng-show="document.question38.law.furtherInfo">
+										<label>Please provide further information and reference to the domestic law establishing rights of indigenous and local communities to grant access to genetic resources</label>
+										<div class="km-value">{{document.question38.law.furtherInfo | lstring:locale}}</div>
+									</div>
+									<div ng-show="document.question38.law.documentReferenceIDs">
+			                			<label>Links to related information</label>
+										<div class="km-value">
+											<ul>
+												<li ng-repeat="reference in document.question38.law.documentReferenceIDs">
+													<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+												</li>
+											</ul>
+
+										</div>
+									</div>									
 								</div>
 
 								<div>
@@ -1748,35 +1761,35 @@
 
 						<label>Financial resources have been received</label>
 						<ul>
-							<div class="km-value km-pre">{{booleanToText(document.question62.receiver.answer)}}</div>
+							<div class="km-value km-pre">{{booleanToText(document.question62.recipient.answer)}}</div>
 							<ul>
 								<label>From other Parties</label>
 								<ul>
-									<div class="km-value km-pre">{{booleanToText(document.question62.receiver.fromParty.answer)}}</div>
-									<div ng-show="document.question62.receiver.fromParty.additionalInfo">
-										<div class="km-value">{{document.question62.receiver.fromParty.additionalInfo | lstring:locale}}</div>
+									<div class="km-value km-pre">{{booleanToText(document.question62.recipient.parties)}}</div>
+									<div ng-show="document.question62.recipient.partiesInfo">
+										<div class="km-value">{{document.question62.recipient.partiesInfo | lstring:locale}}</div>
 									</div>
 								</ul>
 
 								<label>From financial institutions</label>
 								<ul>
-									<div class="km-value km-pre">{{booleanToText(document.question62.receiver.fromInstitution.answer)}}</div>
+									<div class="km-value km-pre">{{booleanToText(document.question62.recipient.financialInstitutions)}}</div>
 									<ul>
 										<label>From the Global Environmental Facility</label>
 										<ul>
-											<div class="km-value km-pre">{{booleanToText(document.question62.receiver.fromInstitution.GEF)}}</div>
+											<div class="km-value km-pre">{{booleanToText(document.question62.recipient.gef)}}</div>
 										</ul>
 
 										<label>From the Nagoya Protocol Implementation Fund</label>
 										<ul>
-											<div class="km-value km-pre">{{booleanToText(document.question62.receiver.fromInstitution.NPF)}}</div>
+											<div class="km-value km-pre">{{booleanToText(document.question62.recipient.npImplementationFund)}}</div>
 										</ul>
 
 										<label>From other sources</label>
 										<ul>
-											<div class="km-value km-pre">{{booleanToText(document.question62.receiver.fromInstitution.other)}}</div>
-											<div ng-show="document.question62.receiver.fromInstition.otherInfo">
-												<div class="km-value">{{document.question62.receiver.fromInstition.otherInfo | lstring:locale}}</div>
+											<div class="km-value km-pre">{{booleanToText(document.question62.recipient.otherSources)}}</div>
+											<div ng-show="document.question62.recipient.otherSourcesInfo">
+												<div class="km-value">{{document.question62.recipient.otherSourcesInfo | lstring:locale}}</div>
 											</div>
 										</ul>
 									</ul>
