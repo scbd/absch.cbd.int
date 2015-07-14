@@ -75,41 +75,41 @@
             </li>
             <li class="pull-right" ng-cloak id="dropdownNotification" ng-show="user && user.isAuthenticated"  >
 
-                            <a id="dLabel" ng-href="/register#notifications" class="notification-btn hidden-sm hidden-md hidden-lg">
-                                    <span ng-show="(notifications|filter:isUnread).length > 0 " >
-                                        <i class="fa fa-bell"></i>
-                                        <span class="label label-default">{{(notifications|filter:isUnread).length}}</span>
-                                    </span>
-                                    <span ng-show="(notifications|filter:isUnread).length =< 0">
-                                        <i class="fa fa-bell-o" class="bg-grey"></i>
-                                    </span>
-                                </a>
-                            
-                            <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" ng-href="#" class="notification-btn hidden-xs">
-                                <span ng-show="(notifications|filter:isUnread).length > 0 " >
-                                    <i class="fa fa-bell"></i>
-                                    <span class="label label-default">{{(notifications|filter:isUnread).length}}</span>
-                                </span>
-                                <span ng-show="(notifications|filter:isUnread).length=<0">
-                                    <i class="fa fa-bell-o" class="bg-grey"></i>
-                                </span>
-                            </a>
+                   <a id="dLabel" ng-href="/register#notifications" class="notification-btn hidden-sm hidden-md hidden-lg">
+                        <span ng-show="(notifications|filter:isUnread).length > 0 " >
+                            <i class="fa fa-bell"></i>
+                            <span class="label label-default">{{(notifications|filter:isUnread).length}}</span>
+                        </span>
+                        <span ng-show="(notifications|filter:isUnread).length <= 0">
+                            <i class="fa fa-bell-o" class="bg-grey"></i>
+                        </span>
+                    </a>
+                    
+                    <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" ng-href="#" class="notification-btn hidden-xs">
+                        <span ng-show="(notifications|filter:isUnread).length > 0 " >
+                            <i class="fa fa-bell"></i>
+                            <span class="label label-default">{{(notifications|filter:isUnread).length}}</span>
+                        </span>
+                        <span ng-show="(notifications|filter:isUnread).length <= 0">
+                            <i class="fa fa-bell-o" class="bg-grey"></i>
+                        </span>
+                    </a>
 
-                            <div class="dropdown-menu hidden-xs" role="menu" aria-labelledby="dLabel">
-                                <div class="panel panel-danger" style="width:500px;padding:0;margin:0;">
-                                    <div class="panel-heading">
-                                        <h4>User Notifications and Recent Activity</h4>
-                                    </div>
-                                    <div class="panel-body" >
-                                        <div xuser-notifications></div>
-                                    </div>
-                                    <div class="panel-footer">
-                                        <a ng-href="/dashboard">
-                                            <h4 class="menu-title">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4>
-                                        </a>
-                                    </div>
-                                </div>
+                    <div class="dropdown-menu hidden-xs" role="menu" aria-labelledby="dLabel">
+                        <div class="panel panel-danger" style="width:500px;padding:0;margin:0;">
+                            <div class="panel-heading">
+                                <h4>User Notifications and Recent Activity</h4>
                             </div>
+                            <div class="panel-body" >
+                                <div xuser-notifications></div>
+                            </div>
+                            <div class="panel-footer">
+                                <a ng-href="/dashboard">
+                                    <h4 class="menu-title">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
             </li>
 
             <li class="pull-right">
@@ -223,7 +223,7 @@
                                     <i class="fa fa-bell"></i>
                                     <span class="label label-default">{{(notifications|filter:isUnread).length}}</span>
                                 </span>
-                                <span ng-show="(notifications|filter:isUnread).length =< 0">
+                                <span ng-show="(notifications|filter:isUnread).length <= 0">
                                     <i class="fa fa-bell-o" class="bg-grey"></i>
                                 </span>
                             </a>
@@ -233,7 +233,7 @@
                                     <i class="fa fa-bell"></i>
                                     <span class="label label-default">{{(notifications|filter:isUnread).length}}</span>
                                 </span>
-                                <span ng-show="(notifications|filter:isUnread).length=<0">
+                                <span ng-show="(notifications|filter:isUnread).length <= 0">
                                     <i class="fa fa-bell-o" class="bg-grey"></i>
                                 </span>
                             </a>

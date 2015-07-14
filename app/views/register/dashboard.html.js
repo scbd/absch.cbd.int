@@ -1,9 +1,13 @@
-define(['app', '/app/views/directives/xuser-notifications.js',
+define(['app', '/app/views/directives/xuser-notifications.js','scbd-angularjs-services','scbd-angularjs-filters',
 '/app/views/directives/switch-realm-directive.html.js'], function (app) {
 "use strict";
 app.controller("DashboardController",
-	["$rootScope", "$scope", "underscore", "lstringFilter","IWorkflows","realm","$q","$routeParams",'$location',
-	function ($rootScope, $scope, _, lstringFilter,workflows,realm,$q,$routeParams, $location) {
+	["$rootScope", "$scope", "underscore", "lstringFilter","IWorkflows","realm","$q","$routeParams",'$location',"$filter",
+	function ($rootScope, $scope, _, lstringFilter,workflows,realm,$q,$routeParams, $location, $filter) {
+
+
+		console.log($filter("term")("ca"));
+
 
     //intro.js configurations
 	$scope.startTour=false;
