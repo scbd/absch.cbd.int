@@ -302,17 +302,16 @@
                         <div class="panel-body" ng-repeat="(key,schema) in country.schemaList">
 
                             <div class="col-xs-12">
-                                <div class="row bg-grey" style="padding:3px; border-radius: 3px;">
-                                    <h5 style="padding:0;margin:0;font-size:15px;">
-                                        <span class="badge bg-darkgrey">{{schema.length}}</span>
-                                        <span style="position:relative;top:1px;" ng-class="{'color-grey': Permit==0, 'color-black': Permit > 0}">
-
-                                            {{key|schemaNamePlural}} ({{key|schemaShortName}})
+                                <div class="row bg-grey" style="padding:8px 8px 0px 8px; border-radius: 3px;">
+                              
+                                        <span  ng-class="{'color-grey': Permit==0, 'color-black': Permit > 0}">
+                                             <i class="material-icons color-grey" style="font-size:15pt;padding:0;margin:0;">
+                                                 {{key | schemaIcon}}
+                                            </i>
+                                            <span style="font-weight:bold;padding:0;margin:0;position:relative;top:-5px;">{{key|schemaNamePlural}} ({{key|schemaShortName}})</span>
                                         </span>
-
-                                        <!-- <a ng-if="key=='measure'" href="/search/new/measurematrix/countries/{{country.code}}" class="">
-                                            <i class="fa fa-bar-chart pull-right"></i></a> -->
-                                    </h5>
+                                         <span class="pull-right badge bg-darkgrey">{{schema.length}}</span>
+                                   
                                 </div>
 
                                 <div class="row">
@@ -324,9 +323,7 @@
                                                 </a> -->
                                                 <!-- <a ng-if="key=='measure'" href="/search/new/measurematrix/{{doc|uniqueIDWithoutRevision}}" class="pull-left"><i class="fa fa-bar-chart"></i>&nbsp;</a> -->
                                                 <div ng-click="doc.displayDetails = !doc.displayDetails;load(doc,doc.displayDetails)" style="cursor:pointer">
-                                                    <i class="material-icons color-grey" style="font-size:16pt;position:relative;top:3px;">
-                                                        {{key | schemaIcon}}
-                                                    </i>
+                                                   
                                                     <span class="bold color-litegrey" ng-if="doc.type.indexOf('ABS-FP') >= 0 ">ABS FP</span>
                                                     <span class="bold color-litegrey" ng-if="doc.type.indexOf('ABS-FP') < 0 "> CBD FP</span>
                                                     <!-- <span class="bold color-litegrey" ng-if="key!= 'focalPoint' ">{{key|schemaShortName}}</span> -->

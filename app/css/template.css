@@ -1,10 +1,11 @@
 @import url("ngmaterial.css");
 /*notifications*/
 
-a:focus {
+*:focus {
   outline: none!important;
 }
 
+a:hover{color: #000;}
 
 
 [ng\:cloak],
@@ -620,7 +621,7 @@ padding:3px;
 	padding:0;
 	margin:0;
 }
-.copyright a, a:hover, a:focus{
+.copyright a, .copyright a:hover, .copyright a:focus{
 	color:#FFF;
 }
 
