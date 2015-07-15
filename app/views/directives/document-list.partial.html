@@ -277,7 +277,6 @@
 
                     <div class="panel md-whiteframe-z2">
                         <div class="panel-heading " ng-class="{'bg-blue': country.isNPParty, 'bg-grey2': !country.isNPParty}" style="padding:2px 15px;">
-
                             <table style="width:100%">
                                 <tr>
                                     <td style="width:40px;padding-right:10px;">
@@ -292,7 +291,6 @@
                                         </h3>
                                     </td>
                                     <td class="pull-right" style="padding-top:5px;">
-
                                         <label class="label label-default" ng-show="!country.isNPParty">Non-Party</label>
                                         <label class="label label-primary bg-white" ng-show="country.isNPParty">Party</label>
                                     </td>
@@ -300,10 +298,8 @@
                             </table>
                         </div>
                         <div class="panel-body" ng-repeat="(key,schema) in country.schemaList">
-
                             <div class="col-xs-12">
                                 <div class="row bg-grey" style="padding:8px 8px 0px 8px; border-radius: 3px;">
-                              
                                         <span  ng-class="{'color-grey': Permit==0, 'color-black': Permit > 0}">
                                              <i class="material-icons color-grey" style="font-size:15pt;padding:0;margin:0;">
                                                  {{key | schemaIcon}}
@@ -311,11 +307,9 @@
                                             <span style="font-weight:bold;padding:0;margin:0;position:relative;top:-5px;">{{key|schemaNamePlural}} ({{key|schemaShortName}})</span>
                                         </span>
                                          <span class="pull-right badge bg-darkgrey">{{schema.length}}</span>
-                                   
                                 </div>
-
                                 <div class="row">
-                                    <div style="padding:10px; margin:0 20px;">
+                                    <div style="padding:10px; margin:0 10px;">
                                         <div class="row table-hover table-msr" ng-repeat="doc in schema">
                                             <div class="row border">
                                                 <!-- <a nhref="/search/new/measurematrix/countries/{{country.code}}" class="">
@@ -323,15 +317,14 @@
                                                 </a> -->
                                                 <!-- <a ng-if="key=='measure'" href="/search/new/measurematrix/{{doc|uniqueIDWithoutRevision}}" class="pull-left"><i class="fa fa-bar-chart"></i>&nbsp;</a> -->
                                                 <div ng-click="doc.displayDetails = !doc.displayDetails;load(doc,doc.displayDetails)" style="cursor:pointer">
-                                                   
+                                                     <i class="fa fa-chevron-circle-up" ng-show="doc.displayDetails"></i>
+                                                    <i class="fa fa-chevron-circle-down" ng-show="!doc.displayDetails"></i>
+                                                    &nbsp; 
                                                     <span class="bold color-litegrey" ng-if="doc.type.indexOf('ABS-FP') >= 0 ">ABS FP</span>
                                                     <span class="bold color-litegrey" ng-if="doc.type.indexOf('ABS-FP') < 0 "> CBD FP</span>
                                                     <!-- <span class="bold color-litegrey" ng-if="key!= 'focalPoint' ">{{key|schemaShortName}}</span> -->
-
                                                     <span>{{doc.title}}</span>
-                                                    <i class="fa fa-chevron-circle-up pull-right" ng-show="doc.displayDetails"></i>
-                                                    <i class="fa fa-chevron-circle-down pull-right" ng-show="!doc.displayDetails"></i>
-
+                                                   
                                                 </div>
                                                 <div class="row" ng-if="doc.displayDetails">
                                                     <i class="glyphicon glyphicon-remove-circle circle pull-right" style="position:relative;top:35px;z-index:100;font-size:20px;color:white;padding-right:20px!important;cursor:pointer" ng-click="doc.displayDetails=!doc.displayDetails;" ng-show="doc.displayDetails"></i>
