@@ -303,6 +303,44 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
     //==================================
     //
     //==================================
+    $scope.Q37IsYes = function () {
+        if($scope.document && $scope.document.question37 && $scope.document.question37.answer){
+            return true;
+        }
+        return false;
+    };
+
+    //==================================
+    //
+    //==================================
+    $scope.Q38Clear = function () {
+        if($scope.document && $scope.document.question38 && !$scope.document.question38.answer){
+            $scope.document.question38.law      = undefined;
+            $scope.document.question38.pic      = undefined;
+            $scope.document.question38.measures = undefined;
+        }
+    };
+
+    //==================================
+    //
+    //==================================
+    $scope.Q42Clear = function () {
+        if($scope.document && $scope.document.question42){
+
+            if($scope.document.question42.mat && !$scope.document.question42.mat.answer)
+                $scope.document.question42.mat.furtherInfo = undefined;
+
+            if($scope.document.question42.community && !$scope.document.question42.community.answer)
+                $scope.document.question42.community.furtherInfo = undefined;
+
+            if($scope.document.question42.mcc && !$scope.document.question42.mcc.answer)
+                $scope.document.question42.mcc.furtherInfo = undefined;
+        }
+    };
+
+    //==================================
+    //
+    //==================================
     $scope.Q49Clear = function () {
         if($scope.document && $scope.document.question49 && $scope.document.question49.notApplicable){
             $scope.document.question49.answer = undefined;

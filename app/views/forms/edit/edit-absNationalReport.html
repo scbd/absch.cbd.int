@@ -1035,8 +1035,8 @@
 
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div class="km-control-group" required="document.question37.answer" name="question38" caption="38. Do indigenous and local communities have the established right to grant access to genetic resources according to your domestic law? (Article 6.2)">
-                                        <div ng-disabled="!document.question37.answer" required="document.question37.answer" class="km-yes-no" name="question38" ng-model="document.question38.answer"></div>
+                                    <div class="km-control-group" ng-required="Q37IsYes()" name="question38" caption="38. Do indigenous and local communities have the established right to grant access to genetic resources according to your domestic law? (Article 6.2)">
+                                        <div ng-disabled="!document.question37.answer" ng-required="Q37IsYes()" class="km-yes-no" name="question38" ng-model="document.question38.answer" ng-click="Q38Clear()"></div>
                                     </div>
                                     <div class="row" ng-show="document.question38.answer">
                                         <div class="col-xs-10 col-xs-offset-1">
@@ -1081,7 +1081,7 @@
 
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q38MeasuresDocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question38.measures.documentReferenceIDs"
-                                                                ng-disabled="!document.government"
+                                                                ng-disabled="!document.government || !Q37IsYes()"
                                                                 question="question38Measures"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
@@ -1092,8 +1092,8 @@
 
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div class="km-control-group" required name="question39" caption="39. In accordance with domestic law has your country taken measures with the aim of ensuring that traditional knowledge associated with genetic resources that is held by indigenous and local communities within your country is accessed with the PIC or approval and involvement of these indigenous and local communities and that MAT have been established as provided in Article 7?">
-                                        <div ng-disabled="!document.question37.answer" class="km-yes-no" name="question39" ng-model="document.question39.answer"></div>
+                                    <div class="km-control-group" ng-required="Q37IsYes()" name="question39" caption="39. In accordance with domestic law has your country taken measures with the aim of ensuring that traditional knowledge associated with genetic resources that is held by indigenous and local communities within your country is accessed with the PIC or approval and involvement of these indigenous and local communities and that MAT have been established as provided in Article 7?">
+                                        <div ng-disabled="!document.question37.answer" ng-required="Q37IsYes()" class="km-yes-no" name="question39" ng-model="document.question39.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question39FurtherInfo" caption="">
                                         <strong>Please provide further information</strong>
@@ -1102,7 +1102,7 @@
 
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q39DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question39.documentReferenceIDs"
-                                                                ng-disabled="!document.government"
+                                                                ng-disabled="!document.government || !Q37IsYes()"
                                                                 question="question39"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
@@ -1113,8 +1113,8 @@
 
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div class="km-control-group" required name="question40" caption="40. In implementing the Protocol and in accordance with your domestic law, is your country taking into consideration indigenous and local communities’ customary laws, community protocols and procedures with respect to traditional knowledge associated with genetic resources as provided in Article 12.1?">
-                                        <div ng-disabled="!document.question37.answer" class="km-yes-no" name="question40" ng-model="document.question40.answer"></div>
+                                    <div class="km-control-group" ng-required="Q37IsYes()" name="question40" caption="40. In implementing the Protocol and in accordance with your domestic law, is your country taking into consideration indigenous and local communities’ customary laws, community protocols and procedures with respect to traditional knowledge associated with genetic resources as provided in Article 12.1?">
+                                        <div ng-disabled="!document.question37.answer" ng-required="Q37IsYes()" class="km-yes-no" name="question40" ng-model="document.question40.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question40FurtherInfo" caption="">
                                         <strong>Please provide further information</strong>
@@ -1123,7 +1123,7 @@
 
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q40DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question40.documentReferenceIDs"
-                                                                ng-disabled="!document.government"
+                                                                ng-disabled="!document.government || !Q37IsYes()"
                                                                 question="question40"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
@@ -1134,8 +1134,8 @@
 
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div class="km-control-group" required name="question41" caption="41. Has your country established mechanisms to inform potential users of traditional knowledge associated with genetic resources about their obligations as provided in Article 12.2?">
-                                        <div ng-disabled="!document.question37.answer" class="km-yes-no" name="question41" ng-model="document.question41.answer"></div>
+                                    <div class="km-control-group" ng-required="Q37IsYes()" name="question41" caption="41. Has your country established mechanisms to inform potential users of traditional knowledge associated with genetic resources about their obligations as provided in Article 12.2?">
+                                        <div ng-disabled="!document.question37.answer" ng-required="Q37IsYes()" class="km-yes-no" name="question41" ng-model="document.question41.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question41FurtherInfo" caption="">
                                         <strong>Please provide further information</strong>
@@ -1144,7 +1144,7 @@
 
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q41DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question41.documentReferenceIDs"
-                                                                ng-disabled="!document.government"
+                                                                ng-disabled="!document.government || !Q37IsYes()"
                                                                 question="question41"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
@@ -1155,10 +1155,10 @@
 
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div class="km-control-group" required name="question42" caption="42. Is your country supporting the development by indigenous and local communities of the following tools as provided in Article 12.3?"></div>
+                                    <div class="km-control-group" ng-required="Q37IsYes()" name="question42" caption="42. Is your country supporting the development by indigenous and local communities of the following tools as provided in Article 12.3?"></div>
 
                                     <div class="checkbox">
-                                        <label><input ng-disabled="!document.question37.answer" type="checkbox" ng-model="document.question42.community.answer"><strong>Community protocols</strong></label>
+                                        <label><input ng-disabled="!document.question37.answer" type="checkbox" ng-change="Q42Clear()" ng-model="document.question42.community.answer"><strong>Community protocols</strong></label>
                                     </div>
                                     <div ng-show="document.question42.community.answer" class="km-control-group" name="question42CommunityFurtherInfo" caption="">
                                         <strong>Please provide further information on how your country is supporting the development of community protocols.</strong>
@@ -1166,7 +1166,7 @@
                                     </div>
 
                                     <div class="checkbox">
-                                        <label><input ng-disabled="!document.question37.answer" type="checkbox" ng-model="document.question42.mat.answer"><strong>Minimum requirements for mutually agreed terms</strong></label>
+                                        <label><input ng-disabled="!document.question37.answer" ng-change="Q42Clear()" type="checkbox" ng-model="document.question42.mat.answer"><strong>Minimum requirements for mutually agreed terms</strong></label>
                                     </div>
                                     <div ng-show="document.question42.mat.answer" class="km-control-group" name="question42MATFurtherInfo" caption="">
                                         <strong>Please provide further information on how your country is supporting the development of minimum requirements mutually agreed terms.</strong>
@@ -1174,16 +1174,16 @@
                                     </div>
 
                                     <div class="checkbox">
-                                        <label><input ng-disabled="!document.question37.answer" type="checkbox" ng-model="document.question42.mcc.answer"><strong>Model contractual clauses</strong></label>
+                                        <label><input ng-disabled="!document.question37.answer" type="checkbox" ng-change="Q42Clear()" ng-model="document.question42.mcc.answer"><strong>Model contractual clauses</strong></label>
                                     </div>
                                     <div ng-show="document.question42.mcc.answer" class="km-control-group" name="question42MCCFurtherInfo" caption="">
                                         <strong>Please provide further information on how your country is supporting the development of model contractual clauses</strong>
                                         <div km-textbox-ml rows=3 name="question42MCCFurtherInfo" ng-model="document.question42.mcc.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q40DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q40DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question42.documentReferenceIDs"
-                                                                ng-disabled="!document.government"
+                                                                ng-disabled="!document.government || !Q37IsYes()"
                                                                 question="question42"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
@@ -1194,21 +1194,21 @@
 
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div class="km-control-group" required name="question43" caption="43. Has your country endeavoured not to restrict the customary use and exchange of genetic resources and associated traditional knowledge within and among indigenous and local communities as provided in Article 12.4?">
-                                        <div ng-disabled="!document.question37.answer" class="km-yes-no" name="question43" ng-model="document.question43.answer"></div>
+                                    <div class="km-control-group" ng-required="Q37IsYes()" name="question43" caption="43. Has your country endeavoured not to restrict the customary use and exchange of genetic resources and associated traditional knowledge within and among indigenous and local communities as provided in Article 12.4?">
+                                        <div ng-disabled="!document.question37.answer" ng-required="Q37IsYes()" class="km-yes-no" name="question43" ng-model="document.question43.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question43FurtherInfo" caption="">
                                         <strong>Please provide further information</strong>
                                         <div ng-disabled="!document.question37.answer" km-textbox-ml rows=4 name="question43FurtherInfo" ng-model="document.question43.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
-                                </div>
 
-                                <div class="km-control-group" style="margin-bottom:20px;" name="q43DocRefs" caption="Please select the clearing-house record number containing relevant information">
-                                    <div document-selection ng-model="document.question43.documentReferenceIDs"
-                                                            ng-disabled="!document.government"
-                                                            question="question43"
-                                                            government="document.government"
-                                                            country-documents="absDocuments">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q43DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                        <div document-selection ng-model="document.question43.documentReferenceIDs"
+                                                                ng-disabled="!document.government || !Q37IsYes()"
+                                                                question="question43"
+                                                                government="document.government"
+                                                                country-documents="absDocuments">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1225,7 +1225,7 @@
 
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q44DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question44.documentReferenceIDs"
-                                                                ng-disabled="!document.government"
+                                                                ng-disabled="!document.government || !Q37IsYes()"
                                                                 question="question44"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
