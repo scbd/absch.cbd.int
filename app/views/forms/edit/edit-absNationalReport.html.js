@@ -314,12 +314,12 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
     //==================================
     $scope.Q54Clear = function () {
         if($scope.document && $scope.document.question54 && !$scope.document.question54.answer){
-            $scope.document.question54.measures.answer      = undefined;
-            $scope.document.question54.measures.answer      = undefined;
-            $scope.document.question54.measures.furtherInfo = undefined;
+            $scope.document.question54.measures  = undefined;
         }
-        if($scope.document && $scope.document.question54 && $scope.document.question54.answer && !$scope.document.question54.measures.answer){
-            $scope.document.question54.measures.furtherInfo = undefined;
+        if($scope.document && $scope.document.question54 && $scope.document.question54.answer &&
+           $scope.document.question54.measures && !$scope.document.question54.measures.answer){
+            $scope.document.question54.measures.furtherInfo          = undefined;
+            $scope.document.question54.measures.documentReferenceIDs = undefined;
         }
     };
 
@@ -328,12 +328,13 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
     //==================================
     $scope.Q55Clear = function () {
         if($scope.document && $scope.document.question55 && !$scope.document.question55.answer){
-            $scope.document.question55.measures.answer      = undefined;
-            $scope.document.question55.measures.answer      = undefined;
-            $scope.document.question55.measures.furtherInfo = undefined;
+             $scope.document.question55.measures = undefined;
         }
-        if($scope.document && $scope.document.question55 && $scope.document.question55.answer && !$scope.document.question55.measures.answer){
-            $scope.document.question55.measures.furtherInfo = undefined;
+
+        if($scope.document && $scope.document.question55 && $scope.document.question55.answer &&
+           $scope.document.question55.measures && !$scope.document.question55.measures.answer){
+               $scope.document.question55.measures.furtherInfo          = undefined;
+               $scope.document.question55.measures.documentReferenceIDs = undefined;
         }
     };
 

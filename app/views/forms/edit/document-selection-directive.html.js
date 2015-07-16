@@ -175,12 +175,16 @@ app.directive("documentSelection", ["$http", "Thesaurus", "$filter", "underscore
 		    //
 		    //==================================
 		    $scope.$watch('government', function(newValue, oldValue){
-
 		        if(newValue != oldValue){
 					$scope.rawDocuments = [];
 		        }
 		    });
 
+			$scope.$watch('model', function(newValue, oldValue){
+				if(newValue != oldValue){
+					loadDocuments();
+				}
+			});
 
 		}
 	};
