@@ -41,43 +41,41 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
 
     $scope.setDocument({libraries: [{ identifier: "cbdLibrary:abs-ch" }]});
 
-
-    //==================================
-    //
-    //==================================
-    $scope.Q3HasAnswer = function (answer) {
-        return hasValue(answer);
-    };
-
-
-
     //==================================
     //
     //==================================
     $scope.isQ3Yes = function (answer) {
         if(answer === true || answer === undefined){
 
-            if($scope.document.question4 && hasValue($scope.document.question4.answer)){
-                $scope.document.question4.answer         = undefined;
-                $scope.document.question4.furtherInfo    = undefined;
-                $scope.document.question4.additionalInfo = undefined;
+            if($scope.document && $scope.document.question3){
+                $scope.document.question3.challengesInfo       = undefined;
+                $scope.document.question3.documentReferenceIDs = undefined;
             }
 
-            if($scope.document.question5 && hasValue($scope.document.question5.answer)){
-                $scope.document.question5.answer      = undefined;
-                $scope.document.question5.furtherInfo = undefined;
+            if($scope.document && $scope.document.question4 && hasValue($scope.document.question4.answer)){
+                $scope.document.question4.answer               = undefined;
+                $scope.document.question4.furtherInfo          = undefined;
+                $scope.document.question4.additionalInfo       = undefined;
+                $scope.document.question4.documentReferenceIDs = undefined;
             }
 
-            if($scope.document.question6 && hasValue($scope.document.question6.answer)){
-                $scope.document.question6.answer      = undefined;
-                $scope.document.question6.furtherInfo = undefined;
+            if($scope.document && $scope.document.question5 && hasValue($scope.document.question5.answer)){
+                $scope.document.question5.answer               = undefined;
+                $scope.document.question5.furtherInfo          = undefined;
+                $scope.document.question5.documentReferenceIDs = undefined;
             }
 
-            if($scope.document.question7 && hasValue($scope.document.question7.answer)){
-                $scope.document.question7.answer      = undefined;
-                $scope.document.question7.furtherInfo = undefined;
+            if($scope.document && $scope.document.question6 && hasValue($scope.document.question6.answer)){
+                $scope.document.question6.answer               = undefined;
+                $scope.document.question6.furtherInfo          = undefined;
+                $scope.document.question6.documentReferenceIDs = undefined;
             }
 
+            if($scope.document && $scope.document.question7 && hasValue($scope.document.question7.answer)){
+                $scope.document.question7.answer               = undefined;
+                $scope.document.question7.furtherInfo          = undefined;
+                $scope.document.question7.documentReferenceIDs = undefined;
+            }
             return true;
         }
 
@@ -88,8 +86,9 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
     //
     //==================================
     $scope.isQ4Yes = function (answer) {
-        if(!answer && $scope.document.question4 && hasValue($scope.document.question4.answer)){
+        if(!answer && $scope.document && $scope.document.question4 && hasValue($scope.document.question4.answer)){
             $scope.document.question4.additionalInfo = undefined;
+            $scope.document.question7.documentReferenceIDs = undefined;
         }
     };
 
@@ -118,7 +117,7 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
     $scope.isQ11Yes = function (answer) {
         if(answer === true || answer === undefined){
 
-            if($scope.document.question11 && $scope.document.question11.challenges)
+            if($scope.document && $scope.document.question11)
                 $scope.document.question11.challenges = undefined;
 
             return true;
@@ -303,6 +302,44 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
     //==================================
     //
     //==================================
+    $scope.Q37IsYes = function () {
+        if($scope.document && $scope.document.question37 && $scope.document.question37.answer){
+            return true;
+        }
+        return false;
+    };
+
+    //==================================
+    //
+    //==================================
+    $scope.Q38Clear = function () {
+        if($scope.document && $scope.document.question38 && !$scope.document.question38.answer){
+            $scope.document.question38.law      = undefined;
+            $scope.document.question38.pic      = undefined;
+            $scope.document.question38.measures = undefined;
+        }
+    };
+
+    //==================================
+    //
+    //==================================
+    $scope.Q42Clear = function () {
+        if($scope.document && $scope.document.question42){
+
+            if($scope.document.question42.mat && !$scope.document.question42.mat.answer)
+                $scope.document.question42.mat.furtherInfo = undefined;
+
+            if($scope.document.question42.community && !$scope.document.question42.community.answer)
+                $scope.document.question42.community.furtherInfo = undefined;
+
+            if($scope.document.question42.mcc && !$scope.document.question42.mcc.answer)
+                $scope.document.question42.mcc.furtherInfo = undefined;
+        }
+    };
+
+    //==================================
+    //
+    //==================================
     $scope.Q49Clear = function () {
         if($scope.document && $scope.document.question49 && $scope.document.question49.notApplicable){
             $scope.document.question49.answer = undefined;
@@ -314,12 +351,12 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
     //==================================
     $scope.Q54Clear = function () {
         if($scope.document && $scope.document.question54 && !$scope.document.question54.answer){
-            $scope.document.question54.measures.answer      = undefined;
-            $scope.document.question54.measures.answer      = undefined;
-            $scope.document.question54.measures.furtherInfo = undefined;
+            $scope.document.question54.measures  = undefined;
         }
-        if($scope.document && $scope.document.question54 && $scope.document.question54.answer && !$scope.document.question54.measures.answer){
-            $scope.document.question54.measures.furtherInfo = undefined;
+        if($scope.document && $scope.document.question54 && $scope.document.question54.answer &&
+           $scope.document.question54.measures && !$scope.document.question54.measures.answer){
+            $scope.document.question54.measures.furtherInfo          = undefined;
+            $scope.document.question54.measures.documentReferenceIDs = undefined;
         }
     };
 
@@ -328,12 +365,13 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
     //==================================
     $scope.Q55Clear = function () {
         if($scope.document && $scope.document.question55 && !$scope.document.question55.answer){
-            $scope.document.question55.measures.answer      = undefined;
-            $scope.document.question55.measures.answer      = undefined;
-            $scope.document.question55.measures.furtherInfo = undefined;
+             $scope.document.question55.measures = undefined;
         }
-        if($scope.document && $scope.document.question55 && $scope.document.question55.answer && !$scope.document.question55.measures.answer){
-            $scope.document.question55.measures.furtherInfo = undefined;
+
+        if($scope.document && $scope.document.question55 && $scope.document.question55.answer &&
+           $scope.document.question55.measures && !$scope.document.question55.measures.answer){
+               $scope.document.question55.measures.furtherInfo          = undefined;
+               $scope.document.question55.measures.documentReferenceIDs = undefined;
         }
     };
 
@@ -360,7 +398,7 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
     //==================================
     $scope.Q62Clear = function () {
         if($scope.document && $scope.document.question62 && $scope.document.question62.no){
-            $scope.document.question62.donor = undefined;
+            $scope.document.question62.donor     = undefined;
             $scope.document.question62.recipient = undefined;
         }
     };
@@ -369,24 +407,22 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
     //
     //==================================
     $scope.Q62ClearDonor = function () {
-        if($scope.document && $scope.document.question62 && !$scope.document.question62.donor.answer){
+        if($scope.document && $scope.document.question62 && $scope.document.question62.no)
+            $scope.document.question62.no = undefined
+
+        if($scope.document && $scope.document.question62 && !$scope.document.question62.donor.answer)
             $scope.document.question62.donor.additionalInfo = undefined;
-        }
     };
 
     //==================================
     //
     //==================================
     $scope.Q62ClearRecipient = function () {
-        if($scope.document && $scope.document.question62 && !$scope.document.question62.recipient.answer){
-            $scope.document.question62.recipient.parties = undefined;
-            $scope.document.question62.recipient.partiesInfo = undefined;
-            $scope.document.question62.recipient.financialInstitutions = undefined;
-            $scope.document.question62.recipient.gef = undefined;
-            $scope.document.question62.recipient.npImplementationFund = undefined;
-            $scope.document.question62.recipient.otherSources = undefined;
-            $scope.document.question62.recipient.otherSourcesInfo = undefined;
-        }
+        if($scope.document && $scope.document.question62 && $scope.document.question62.no)
+            $scope.document.question62.no = undefined
+
+        if($scope.document && $scope.document.question62 && !$scope.document.question62.recipient.answer)
+            $scope.document.question62.recipient = undefined;
     };
 
     //==================================
@@ -404,20 +440,27 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
     $scope.Q62ClearRecipientFromInstitution = function () {
         if($scope.document && $scope.document.question62 && $scope.document.question62.recipient && !$scope.document.question62.recipient.financialInstitutions){
             $scope.document.question62.recipient.financialInstitutions = undefined;
-            $scope.document.question62.recipient.gef = undefined;
-            $scope.document.question62.recipient.npImplementationFund = undefined;
-            $scope.document.question62.recipient.otherSources = undefined;
-            $scope.document.question62.recipient.otherSourcesInfo = undefined;
+            $scope.document.question62.recipient.gef                   = undefined;
+            $scope.document.question62.recipient.npImplementationFund  = undefined;
+            $scope.document.question62.recipient.otherSources          = undefined;
+            $scope.document.question62.recipient.otherSourcesInfo      = undefined;
         }
     };
 
-
+    //==================================
+    //
+    //==================================
+    $scope.Q62ClearRecipientFromOtherSources = function () {
+        if($scope.document && $scope.document.question62 && $scope.document.question62.recipient && !$scope.document.question62.recipient.otherSources){
+            $scope.document.question62.recipient.otherSourcesInfo = undefined;
+        }
+    };
     //==================================
     //
     //==================================
     $scope.Q63Clear = function () {
         if($scope.document && $scope.document.question63 && !$scope.document.question63.answer){
-            $scope.document.question63.howmany = undefined;
+            $scope.document.question63.numberOfStaff = undefined;
         }
     };
 
@@ -458,7 +501,7 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
         if(government){
             $q.when(getAbsDocuments(government)).then(function (data) {
                 $scope.absDocuments = data;
-                console.info(data.length);
+                //console.info(data.length);
             });
         }
     }

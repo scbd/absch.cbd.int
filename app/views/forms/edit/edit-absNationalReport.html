@@ -43,7 +43,9 @@
             </div>
         </div>
 
-    	<form name="editForm" class="editForm" style="margin-top:10px">
+        <!-- <button type="button" name="button" ng-click="logDocument()">Console.Info(document)</button> -->
+
+    	<form name="editForm" class="editForm" style="margin-top:10px" novalidate>
     		<div ng-show="tab=='edit'" km-tab="edit">
 
             <div class="row">
@@ -61,8 +63,8 @@
 
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div class="km-control-group" name="contact" caption="2. Contact person">
-                                        <field-embed-contact ng-model="document.contact" locales="$parent.document.header.languages" name="contact" caption="Select or add a contact »"></field-embed-contact>
+                                    <div class="km-control-group" required name="contact" caption="2. Contact person">
+                                        <field-embed-contact required ng-model="document.contact" locales="$parent.document.header.languages" name="contact" caption="Select or add a contact »"></field-embed-contact>
                                     </div>
                                 </div>
                             </div>
@@ -73,7 +75,7 @@
             				<div class="row">
             					<div class="col-xs-12">
                                     <div class="km-control-group" required name="question3" caption="3. Has your country made the information available to the ABS Clearing-House as provided in Article 14.2?">
-                                        <div class="km-yes-no" name="question3" ng-model="document.question3.answer"></div>
+                                        <div class="km-yes-no" required name="question3" ng-model="document.question3.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question3Challenges" caption="">
                                         <div ng-show="!isQ3Yes(document.question3.answer)">
@@ -82,9 +84,9 @@
                                         </div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q3DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q3DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question3.documentReferenceIDs"
-                                                                ng-disabled="!document.government"
+                                                                ng-disabled="!document.government || !document.question3.answer"
                                                                 question="question3"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
@@ -97,7 +99,7 @@
                             <div class="row">
             					<div class="col-xs-12">
                                     <div class="km-control-group" required name="question4" caption="4. Has your country taken legislative, administrative and policy measures on ABS?">
-                                        <div ng-disabled="isQ3Yes(document.question3.answer)" class="km-yes-no" name="question4" ng-model="document.question4.answer" ng-click="isQ4Yes(document.question4.answer)"></div>
+                                        <div ng-disabled="isQ3Yes(document.question3.answer)" class="km-yes-no" required name="question4" ng-model="document.question4.answer" ng-click="isQ4Yes(document.question4.answer)"></div>
                                     </div>
                                     <div ng-show="document.question4.answer" class="km-control-group" name="question4AdditionalInfo" caption="">
                                         <strong>Please provide additional information.</strong>
@@ -109,9 +111,9 @@
                                         <div km-textbox-ml rows=4 name="question4Challenges" ng-model="document.question4.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q4DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q4DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question4.documentReferenceIDs"
-                                                                ng-disabled="!document.government"
+                                                                ng-disabled="!document.government || !document.question3.answer"
                                                                 question="question4"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
@@ -124,7 +126,7 @@
                             <div class="row">
             					<div class="col-xs-12">
                                     <div class="km-control-group" required name="question5" caption="5. Has your country designated a national focal point as provided in Article 13?">
-                                        <div ng-disabled="isQ3Yes(document.question3.answer)" class="km-yes-no" name="question5" ng-model="document.question5.answer"></div>
+                                        <div ng-disabled="isQ3Yes(document.question3.answer)" class="km-yes-no" required name="question5" ng-model="document.question5.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question5Challenges" caption="">
                                         <strong>Please provide a summary of the main difficulties and challenges encountered and answer all the following questions.</strong>
@@ -136,9 +138,9 @@
                                         <div km-textbox-ml rows=4 name="question5FurtherInfo" ng-model="document.question5.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q5DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q5DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question5.documentReferenceIDs"
-                                                                ng-disabled="!document.government"
+                                                                ng-disabled="!document.government || !document.question3.answer"
                                                                 question="question5"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
@@ -150,7 +152,7 @@
                             <div class="row">
             					<div class="col-xs-12">
                                     <div class="km-control-group" required name="question6" caption="6. Has your country designated one or more competent national authorities as provided in Article 13?">
-                                        <div ng-disabled="isQ3Yes(document.question3.answer)" class="km-yes-no" name="question6" ng-model="document.question6.answer"></div>
+                                        <div ng-disabled="isQ3Yes(document.question3.answer)" class="km-yes-no" required name="question6" ng-model="document.question6.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question6Challenges" caption="">
                                         <strong>Please provide a summary of the main difficulties and challenges encountered and answer all the following questions.</strong>
@@ -161,9 +163,9 @@
                                         <div km-textbox-ml rows=4 name="question6FurtherInfo" ng-model="document.question6.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q6DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q6DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question6.documentReferenceIDs"
-                                                                ng-disabled="!document.government"
+                                                                ng-disabled="!document.government || !document.question3.answer"
                                                                 question="question6"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
@@ -178,10 +180,10 @@
                                     <div class="km-control-group" required name="question7" caption="7. Has your country made available to the ABS Clearing-House permits or their equivalent issued at the time of access as evidence of the decision to grant prior informed consent (PIC) and of the establishment of mutually agreed terms (MAT)?">
                                         <div class="checkbox">
                                             <label>
-                                              <input ng-disabled="isQ3Yes(document.question3.answer)" type="checkbox" ng-model="document.question7.notApplicable" ng-change="Q7YesNoClear()">Not applicable, since no access requirement are in place
+                                              <input ng-disabled="isQ3Yes(document.question3.answer)" required="!hasValue(document.question7.answer)" type="checkbox" ng-model="document.question7.notApplicable" ng-change="Q7YesNoClear()">Not applicable, since no access requirement are in place
                                             </label>
                                         </div>
-                                        <div ng-disabled="isQ3Yes(document.question3.answer) || document.question7.notApplicable" class="km-yes-no" name="question7" ng-model="document.question7.answer"></div>
+                                        <div ng-disabled="isQ3Yes(document.question3.answer) || document.question7.notApplicable" required="!document.question7.notApplicable" class="km-yes-no" name="question7" ng-model="document.question7.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question7Challenges" caption="">
                                         <strong>Please provide a summary of the main difficulties and challenges encountered and answer all the following questions.</strong>
@@ -192,9 +194,9 @@
                                         <div km-textbox-ml rows=4 name="question7FurtherInfo" ng-model="document.question7.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q7DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q7DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question7.documentReferenceIDs"
-                                                                ng-disabled="!document.government"
+                                                                ng-disabled="!document.government || !document.question3.answer"
                                                                 question="question7"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
@@ -205,11 +207,11 @@
 
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div class="km-control-group" required name="question8" caption="8.	Has your country made available to the ABS Clearing-House permits or their equivalent for the constitution of an internationally recognized certificate of compliance in accordance with Article 17.2?">
+                                    <div class="km-control-group" name="question8" caption="8.	Has your country made available to the ABS Clearing-House permits or their equivalent for the constitution of an internationally recognized certificate of compliance in accordance with Article 17.2?">
                                         <div class="checkbox">
-                                            <label><input type="checkbox" ng-model="document.question8.notApplicable">Not applicable, since no access requirement are in place</label>
+                                            <label><input type="checkbox" ng-model="document.question8.notApplicable" ng-change="Q8YesNoClear()">Not applicable, since no access requirement are in place</label>
                                         </div>
-                                        <div ng-disabled="Q8YesNoClear()" class="km-yes-no" name="question8" ng-model="document.question8.answer"></div>
+                                        <div ng-disabled="document.question8.notApplicable" class="km-yes-no" name="question8" ng-model="document.question8.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question8FurtherInfo" caption="">
                                         <strong>Please provide further information.</strong>
@@ -221,7 +223,7 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" required name="question9" caption="9. Has your country designated one or more checkpoints as provided in Article 17?">
-                                        <div class="km-yes-no" name="question9" ng-model="document.question9.answer"></div>
+                                        <div class="km-yes-no" required name="question9" ng-model="document.question9.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question9Challenges" caption="">
                                         <strong>Please provide a summary of the main difficulties and challenges encountered and answer all the following questions.</strong>
@@ -232,7 +234,7 @@
                                         <div km-textbox-ml rows=4 name="question9FurtherInfo" ng-model="document.question9.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q9DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q9DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question9.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question9"
@@ -253,7 +255,7 @@
                                         <div km-link name="question10RelevantDocuments" ng-model="document.question10.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q10DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q10DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question10.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question10"
@@ -271,7 +273,7 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" required name="question11" caption="11. Is access to genetic resources subject to PIC as provided in Article 6.1?">
-                                        <div class="km-yes-no" name="question11" ng-model="document.question11.answer"></div>
+                                        <div class="km-yes-no" required name="question11" ng-model="document.question11.answer"></div>
                                     </div>
 
                                     <div class="km-control-group" name="question11Challenges" caption="">
@@ -286,7 +288,7 @@
                                         <div km-textbox-ml rows=4 name="question11FurtherInfo" ng-model="document.question11.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q11DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q11DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question11.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question11"
@@ -307,7 +309,7 @@
                                         <div ng-disabled="!isQ11Yes(document.question11.answer)" km-textbox-ml rows=4 name="question11FurtherInfo" ng-model="document.question12.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q12DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q12DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question12.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question12"
@@ -321,14 +323,14 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" required name="question13" caption="13. Does your country provide information on how to apply for PIC as provided in Article 6.3(c)?">
-                                        <div ng-disabled="!isQ11Yes(document.question11.answer)" class="km-yes-no" name="question13" ng-model="document.question13.answer"></div>
+                                        <div ng-disabled="!isQ11Yes(document.question11.answer)" class="km-yes-no" required name="question13" ng-model="document.question13.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question13FurtherInfo" caption="">
                                         <strong>Please provide further information</strong>
                                         <div ng-disabled="!isQ11Yes(document.question11.answer)" km-textbox-ml rows=4 name="question13FurtherInfo" ng-model="document.question13.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q13DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q13DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question13.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question13"
@@ -342,14 +344,14 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" required name="question14" caption="14. Does your country provide for a clear and transparent written decision by a competent national authority as provided in Article 6.3 (d)?">
-                                        <div ng-disabled="!isQ11Yes(document.question11.answer)" class="km-yes-no" name="question14" ng-model="document.question14.answer"></div>
+                                        <div ng-disabled="!isQ11Yes(document.question11.answer)" class="km-yes-no" required name="question14" ng-model="document.question14.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question14FurtherInfo" caption="">
                                         <strong>Please provide further information</strong>
                                         <div ng-disabled="!isQ11Yes(document.question11.answer)" km-textbox-ml rows=4 name="question14FurtherInfo" ng-model="document.question14.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q14DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q14DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question14.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question14"
@@ -363,14 +365,14 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" required name="question15" caption="15. Does your country provide for the issuance at the time of access of a permit or its equivalent as provided in Article 6.3 (e)?">
-                                        <div ng-disabled="!isQ11Yes(document.question11.answer)" class="km-yes-no" name="question15" ng-model="document.question15.answer"></div>
+                                        <div ng-disabled="!isQ11Yes(document.question11.answer)" class="km-yes-no" required name="question15" ng-model="document.question15.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question15FurtherInfo" caption="">
                                         <strong>Please provide further information</strong>
                                         <div ng-disabled="!isQ11Yes(document.question11.answer)" km-textbox-ml rows=4 name="question15FurtherInfo" ng-model="document.question15.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q15DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q15DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question15.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question15"
@@ -395,7 +397,7 @@
                                         <div ng-disabled="!isQ11Yes(document.question11.answer)" km-textbox-ml rows=4 name="question16FurtherInfo" ng-model="document.question16.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q16DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q16DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question16.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question16"
@@ -409,14 +411,14 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" required name="question17" caption="17. Does your country have rules and procedures for requiring and establishing MAT as provided in Article 6.3 (g)?">
-                                        <div ng-disabled="!isQ11Yes(document.question11.answer)" class="km-yes-no" name="question17" ng-model="document.question17.answer"></div>
+                                        <div ng-disabled="!isQ11Yes(document.question11.answer)" class="km-yes-no" required name="question17" ng-model="document.question17.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question17FurtherInfo" caption="">
                                         <strong>Please provide further information</strong>
                                         <div ng-disabled="!isQ11Yes(document.question11.answer)" km-textbox-ml rows=4 name="question17FurtherInfo" ng-model="document.question17.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q17DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q17DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question17.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question17"
@@ -436,11 +438,11 @@
 
                                             <div class="checkbox" ng-show="document.question18.geneticResources.answer">
                                                 <label><input type="checkbox" ng-model="document.question18.geneticResources.monetary" ng-change="Q18GeneticResources(document.question18.geneticResources.monetary); Q18ClearInfo()">Monetary benefits</label>
-                                                <div ng-show="document.question18.geneticResources.monetary" km-textbox-ml rows=2 name="" ng-model="document.question18.geneticResources.monetaryInfo" locales="document.header.languages" placeholder=""></div>
+                                                <div ng-show="document.question18.geneticResources.monetary" km-textbox-ml rows=2 ng-model="document.question18.geneticResources.monetaryInfo" locales="document.header.languages" placeholder=""></div>
                                             </div>
                                             <div class="checkbox" ng-show="document.question18.geneticResources.answer">
                                                 <label><input type="checkbox" ng-model="document.question18.geneticResources.nonMonetary" ng-change="Q18GeneticResources(document.question18.geneticResources.nonMonetary); Q18ClearInfo()">Non-monetary benefits</label>
-                                                <div ng-show="document.question18.geneticResources.nonMonetary" km-textbox-ml rows=2 name="" ng-model="document.question18.geneticResources.nonMonetaryInfo" locales="document.header.languages" placeholder=""></div>
+                                                <div ng-show="document.question18.geneticResources.nonMonetary" km-textbox-ml rows=2 ng-model="document.question18.geneticResources.nonMonetaryInfo" locales="document.header.languages" placeholder=""></div>
                                             </div>
                                         </div>
 
@@ -464,7 +466,7 @@
                                         <div km-textbox-ml rows=4 name="question18FurtherInfo" ng-model="document.question18.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q18DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q18DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question18.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question18"
@@ -485,7 +487,7 @@
                                         <div km-link name="question19RelevantDocuments" ng-model="document.question19.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q19DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q19DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question19.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question19"
@@ -502,14 +504,14 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" required name="question20" caption="20. Has your country taken legislative, administrative or policy measures to implement Article 5.1 that provides that benefits arising from the utilization of genetic resources as well as subsequent applications and commercialization are shared with the Party providing such resources that is the country of origin of such resources or a Party that has acquired the genetic resources in accordance with the Convention as provided in Article 5.3?">
-                                        <div class="km-yes-no" name="question20" ng-model="document.question20.answer"></div>
+                                        <div class="km-yes-no" required name="question20" ng-model="document.question20.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question20FurtherInfo" caption="">
                                         <strong>Please provide further information</strong>
                                         <div km-textbox-ml rows=4 name="question20FurtherInfo" ng-model="document.question20.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q20DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q20DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question20.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question20"
@@ -523,14 +525,14 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" required name="question21" caption="21. Has your country taken legislative, administrative or policy measures with the aim of ensuring that the benefits from the utilization of genetic resources held by indigenous and local communities, in accordance with domestic legislation regarding the established rights of these indigenous and local communities over these genetic resources, are shared with the indigenous and local communities concerned as provided in Article 5.2?">
-                                        <div class="km-yes-no" name="question21" ng-model="document.question21.answer"></div>
+                                        <div class="km-yes-no" required name="question21" ng-model="document.question21.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question21FurtherInfo" caption="">
                                         <strong>Please provide further information</strong>
                                         <div km-textbox-ml rows=4 name="question21FurtherInfo" ng-model="document.question21.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q21DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q21DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question21.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question21"
@@ -544,14 +546,14 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" required name="question22" caption="22. Has your country taken legislative, administrative or policy measures in order that benefits arising from the utilization of traditional knowledge associated with genetic resources are shared with indigenous and local communities holding such knowledge as provided in Article 5.5?">
-                                        <div class="km-yes-no" name="question22" ng-model="document.question22.answer"></div>
+                                        <div class="km-yes-no" required name="question22" ng-model="document.question22.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question22FurtherInfo" caption="">
                                         <strong>Please provide further information</strong>
                                         <div km-textbox-ml rows=4 name="question22FurtherInfo" ng-model="document.question22.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q22DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q22DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question22.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question22"
@@ -572,7 +574,7 @@
                                         <div km-link name="question23RelevantDocuments" ng-model="document.question23.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q23DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q23DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question23.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question23"
@@ -589,12 +591,12 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" required name="question24" caption="24. Has your country taken legislative, administrative or policy measures in order that benefits arising from the utilization of traditional knowledge associated with genetic resources are shared with indigenous and local communities holding such knowledge as provided in Article 5.5?">
-                                        <div class="km-yes-no" name="question24" ng-model="document.question24.answer" ng-click="Q24Clear()"></div>
+                                        <div class="km-yes-no" required name="question24" ng-model="document.question24.answer" ng-click="Q24Clear()"></div>
                                     </div>
                                     <div ng-show="document.question24.answer" class="row">
                                         <div class="col-xs-10 col-xs-offset-1">
-                                            <div class="km-control-group" name="question24_measures" caption="Please indicate whether your country has taken measures to address situations of non-compliance with those measures as provided in Article 15.2?">
-                                                <div class="km-yes-no" name="question24_measures" ng-model="document.question24.measures.answer" ng-click="Q24MeasuresClear(document.question24.measures.answer)"></div>
+                                            <div class="km-control-group" required="document.question24.answer" name="question24_measures" caption="Please indicate whether your country has taken measures to address situations of non-compliance with those measures as provided in Article 15.2?">
+                                                <div class="km-yes-no" required="document.question24.answer" name="question24_measures" ng-model="document.question24.measures.answer" ng-click="Q24MeasuresClear(document.question24.measures.answer)"></div>
                                             </div>
                                             <div ng-show="document.question24.measures.answer" class="km-control-group" name="question24_measures_FurtherInfo" caption="">
                                                 <strong>Please provide further information on the measures taken, including when they entered into force.</strong>
@@ -606,8 +608,8 @@
                                             </div>
                                         </div>
                                         <div class="col-xs-10 col-xs-offset-1">
-                                            <div class="km-control-group" name="question24_violation" caption="Have there been specific cases in which your country cooperated with other Parties in cases of alleged violation of ABS measures as provided in Article 15.3?">
-                                                <div class="km-yes-no" name="question24_violation" ng-model="document.question24.violation.answer" ng-click="Q24ViolationClear(document.question24.violation.answer)"></div>
+                                            <div class="km-control-group" required="document.question24.answer" name="question24_violation" caption="Have there been specific cases in which your country cooperated with other Parties in cases of alleged violation of ABS measures as provided in Article 15.3?">
+                                                <div class="km-yes-no" required="document.question24.answer" name="question24_violation" ng-model="document.question24.violation.answer" ng-click="Q24ViolationClear(document.question24.violation.answer)"></div>
                                             </div>
                                             <div ng-show="document.question24.violation.answer" class="km-control-group" name="question24FurtherInfo" caption="">
                                                 <strong>Please provide further information</strong>
@@ -622,7 +624,7 @@
                                         <div km-textbox-ml rows=4 name="question24FurtherInfo" ng-model="document.question24.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q24DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q24DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question24.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question24"
@@ -637,15 +639,15 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" required name="question25" caption="25. Has your country taken appropriate, effective and proportionate legislative, administrative or policy measures to provide that traditional knowledge associated with genetic resources utilized within your jurisdiction has been accessed in accordance with PIC or approval and involvement of indigenous and local communities and that MAT have been established as required by the domestic ABS legislation or regulatory requirements of the other Party where such indigenous and local communities are located as provided in Article 16.1?">
-                                        <div class="km-yes-no" name="question25" ng-model="document.question25.answer" ng-click="Q25Clear(document.question25.answer)"></div>
+                                        <div class="km-yes-no" required name="question25" ng-model="document.question25.answer" ng-click="Q25Clear(document.question25.answer)"></div>
                                     </div>
                                     <div ng-show="document.question25.answer" class="row">
                                         <div class="col-xs-10 col-xs-offset-1">
-                                            <div class="km-control-group" required name="question25_measures" caption="Please indicate whether your country has taken measures to address situations of non-compliance with those measures as provided in Article 16.2?">
-                                                <div class="km-yes-no" name="question25_measures" ng-model="document.question25.hasMeasures"></div>
+                                            <div class="km-control-group" required="document.question25.answer" name="question25_measures" caption="Please indicate whether your country has taken measures to address situations of non-compliance with those measures as provided in Article 16.2?">
+                                                <div class="km-yes-no" required="document.question25.answer" name="question25_measures" ng-model="document.question25.hasMeasures"></div>
                                             </div>
-                                            <div class="km-control-group" required name="question25_violation" caption="Has your country cooperated in specific cases of alleged violation of ABS measures as provided in Article 16.3?">
-                                                <div class="km-yes-no" name="question25_violation" ng-model="document.question25.violation.answer"></div>
+                                            <div class="km-control-group" required="document.question25.answer" name="question25_violation" caption="Has your country cooperated in specific cases of alleged violation of ABS measures as provided in Article 16.3?">
+                                                <div class="km-yes-no" required="document.question25.answer" name="question25_violation" ng-model="document.question25.violation.answer"></div>
                                                 <strong>Please provide further information</strong>
                                                 <div km-textbox-ml rows=2 name="question25violationFurtherInfo" ng-model="document.question25.violation.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                             </div>
@@ -656,7 +658,7 @@
                                         <div km-textbox-ml rows=4 name="question25FurtherInfo" ng-model="document.question25.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q25DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q25DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question25.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question25"
@@ -670,15 +672,15 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" required name="question26" caption="26. Does your country require users of genetic resources to provide information related to PIC, to the source of the genetic resource, to the establishment of MAT and/or utilization of genetic resources at a designated checkpoint, as appropriate, as provided in Article 17.1 (a)(i) and (ii))?">
-                                        <div class="km-yes-no" name="question26" ng-model="document.question26.answer" ng-click="Q26Clear(document.question26.answer)"></div>
+                                        <div class="km-yes-no" required name="question26" ng-model="document.question26.answer" ng-click="Q26Clear(document.question26.answer)"></div>
                                     </div>
                                     <div ng-show="document.question26.answer" class="row">
                                         <div class="col-xs-10 col-xs-offset-1">
                                             <strong>Please provide further information</strong>
                                             <div km-textbox-ml rows=2 name="question26additionalInfo" ng-model="document.question26.additionalInfo" locales="document.header.languages" placeholder=""></div>
 
-                                            <div class="km-control-group" name="question26_measures" caption="Has your country taken measures to address situations of non-compliance?">
-                                                <div class="km-yes-no" name="question26_measures" ng-model="document.question26.violation.answer" ng-click="Q26MeasuresClear(document.question26.violation.answer)"></div>
+                                            <div class="km-control-group" required="document.question26.answer" name="question26_measures" caption="Has your country taken measures to address situations of non-compliance?">
+                                                <div class="km-yes-no" required="document.question26.answer" name="question26_measures" ng-model="document.question26.measures.answer" ng-click="Q26MeasuresClear(document.question26.measures.answer)"></div>
 
                                                 <div ng-show="document.question26.violation.answer">
                                                     <strong>Please provide further information</strong>
@@ -692,7 +694,7 @@
                                         <div km-textbox-ml rows=4 name="question26FurtherInfo" ng-model="document.question26.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q26DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q26DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question26.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question26"
@@ -738,14 +740,14 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" required name="question28" caption="28. Has your country taken measures to encourage users and providers to include provisions in MAT to share information on the implementation of such terms as provided in Article 17.1(b)?">
-                                        <div class="km-yes-no" name="question28" ng-model="document.question28.answer"></div>
+                                        <div class="km-yes-no" required name="question28" ng-model="document.question28.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question28FurtherInfo" caption="">
                                         <strong>Please provide further information</strong>
                                         <div km-textbox-ml rows=4 name="question28FurtherInfo" ng-model="document.question28.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q28DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q28DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question28.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question28"
@@ -759,7 +761,7 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" required name="question29" caption="29. Is your country encouraging the use of cost-effective communication tools and systems as provided in Article 17.1 (c)?">
-                                        <div class="km-yes-no" name="question29" ng-model="document.question29.answer" ng-click="Q29Clear(ocument.question29.answer)"></div>
+                                        <div class="km-yes-no" required name="question29" ng-model="document.question29.answer" ng-click="Q29Clear(ocument.question29.answer)"></div>
                                     </div>
                                     <div ng-show="document.question29.answer" class="km-control-group" name="question29AdditionalInfo" caption="">
                                         <strong>Please provide further information on how your country is encouraging the use of cost-effective communication tools and systems.</strong>
@@ -771,7 +773,7 @@
                                         <div km-textbox-ml rows=4 name="question29FurtherInfo" ng-model="document.question29.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q29DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q29DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question29.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question29"
@@ -792,7 +794,7 @@
                                         <div km-link name="question30RelevantDocuments" ng-model="document.question30.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q30DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q30DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question30.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question30"
@@ -810,16 +812,16 @@
                                 <div class="col-xs-12">
                                     <div class="km-control-group" required name="question31" caption="31. Is your country encouraging the inclusion of provisions in MAT to cover dispute resolution as provided in Article 18.1 (a) (b) and (c)?">
                                         <div class="checkbox">
-                                            <label><input type="checkbox" ng-model="document.question31.notApplicable" ng-change="Q31YesNoClear()">Not applicable, since no access requirement are in place</label>
+                                            <label><input type="checkbox" ng-required="!hasValue(document.question31.answer)" ng-model="document.question31.notApplicable" ng-change="Q31YesNoClear()">Not applicable, since no access requirement are in place</label>
                                         </div>
-                                        <div ng-disabled="document.question31.notApplicable" class="km-yes-no" name="question31" ng-model="document.question31.answer"></div>
+                                        <div ng-disabled="document.question31.notApplicable" class="km-yes-no" ng-required="!document.question31.notApplicable" name="question31" ng-model="document.question31.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question31FurtherInfo" caption="">
                                         <strong>Please provide further information.</strong>
                                         <div km-textbox-ml rows=4 name="question31FurtherInfo" ng-model="document.question31.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q31DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q31DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question31.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question31"
@@ -833,14 +835,14 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" required name="question32" caption="32. Does your country ensure that opportunity to seek recourse is available under your legal systems in cases of disputes arising from MAT as provided in Article 18.2?">
-                                        <div class="km-yes-no" name="question32" ng-model="document.question32.answer"></div>
+                                        <div class="km-yes-no" required name="question32" ng-model="document.question32.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question32FurtherInfo" caption="">
                                         <strong>Please provide further information</strong>
                                         <div km-textbox-ml rows=4 name="question32FurtherInfo" ng-model="document.question32.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q32DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q32DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question32.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question32"
@@ -854,22 +856,22 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" required name="question33" caption="33. Has your country taken measures regarding the following points as provided in Article 18.3?"></div>
-                                    <div class="km-control-group" name="question33Justice" caption="Access to justice?">
-                                        <div class="km-yes-no" name="question33.justice" ng-model="document.question33.justice.answer"></div>
+                                    <div class="km-control-group" required name="question33Justice" caption="Access to justice?">
+                                        <div class="km-yes-no" required name="question33.justice" ng-model="document.question33.justice.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question33JusticeFurtherInfo" caption="">
                                         <strong>Please provide further information</strong>
                                         <div km-textbox-ml rows=4 name="question33JusticeFurtherInfo" ng-model="document.question33.justice.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
-                                    <div class="km-control-group" name="question33Mechanisms" caption="Utilization of mechanisms regarding mutual recognition and enforcement of foreign judgements and arbitral awards?">
-                                        <div class="km-yes-no" name="question33.mechanisms" ng-model="document.question33.mechanisms.answer"></div>
+                                    <div class="km-control-group" required name="question33Mechanisms" caption="Utilization of mechanisms regarding mutual recognition and enforcement of foreign judgements and arbitral awards?">
+                                        <div class="km-yes-no" required name="question33.mechanisms" ng-model="document.question33.mechanisms.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question33MechanismsFurtherInfo" caption="">
                                         <strong>Please provide further information</strong>
                                         <div km-textbox-ml rows=4 name="question33MechanismsFurtherInfo" ng-model="document.question33.mechanisms.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q33DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q33DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question33.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question33"
@@ -886,11 +888,8 @@
                                         <strong>Please provide a summary of the main difficulties and challenges.</strong>
                                         <div km-textbox-ml rows=4 name="question34" ng-model="document.question34.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
-                                    <div class="km-control-group" name="question34RelevantDocuments" caption="Any other relevant documents">
-                                        <div km-link name="question34RelevantDocuments" ng-model="document.question34.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
-                                    </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q34DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q34DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question34.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question34"
@@ -898,6 +897,11 @@
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
+
+                                    <div class="km-control-group" name="question34RelevantDocuments" caption="Any other relevant documents">
+                                        <div km-link name="question34RelevantDocuments" ng-model="document.question34.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -907,44 +911,82 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" required name="question35" caption="35. In the development and implementation of ABS legislation or regulatory requirements has your country:"></div>
-                                    <div class="km-control-group" name="question35Research" caption="Created conditions to promote and encourage research which contributes to the conservation and sustainable use of biodiversity including through simplified measures on access for non-commercial research purposes, taking into account the need to address a change of intent for such research as provided in Article 8(a)?">
+                                    <div class="km-control-group" required name="question35Research" caption="Created conditions to promote and encourage research which contributes to the conservation and sustainable use of biodiversity including through simplified measures on access for non-commercial research purposes, taking into account the need to address a change of intent for such research as provided in Article 8(a)?">
                                         <div class="km-yes-no" name="question35.research" ng-model="document.question35.research.answer"></div>
                                     </div>
-                                    <div class="km-control-group" name="question33ResearchFurtherInfo" caption="">
+                                    <div class="km-control-group" name="question35ResearchFurtherInfo" caption="">
                                         <strong>Please provide further information</strong>
-                                        <div km-textbox-ml rows=4 name="question33ResearchFurtherInfo" ng-model="document.question35.research.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                                        <div km-textbox-ml rows=4 name="question35ResearchFurtherInfo" ng-model="document.question35.research.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" name="question35Emergencies" caption="Paid due regard to cases of present or imminent emergencies that threaten or damage human, animal or plant health as provided in Article 8(b)?">
-                                        <div class="km-yes-no" name="question35.emergencies" ng-model="document.question35.emergencies.answer"></div>
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q35ResearchDocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                        <div document-selection ng-model="document.question35.research.documentReferenceIDs"
+                                                                ng-disabled="!document.government"
+                                                                question="question35Research"
+                                                                government="document.government"
+                                                                country-documents="absDocuments">
+                                        </div>
+                                    </div>
+
+                                    <div class="km-control-group" required name="question35Emergencies" caption="Paid due regard to cases of present or imminent emergencies that threaten or damage human, animal or plant health as provided in Article 8(b)?">
+                                        <div class="km-yes-no" required name="question35.emergencies" ng-model="document.question35.emergencies.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question35EmergenciesFurtherInfo" caption="">
                                         <strong>Please provide further information</strong>
                                         <div km-textbox-ml rows=4 name="question35EmergenciesFurtherInfo" ng-model="document.question35.emergencies.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
-                                    <div class="km-control-group" name="question35Access" caption="Taken into consideration the need for expeditious access to genetic resources and expeditious fair and equitable sharing of benefits arising out of the use of such genetic resources, including access to affordable treatments by those in need, especially, in developing countries as provided in Article 8(b)?">
-                                        <div class="km-yes-no" name="question35.access" ng-model="document.question35.access.answer"></div>
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q35EmergenciesDocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                        <div document-selection ng-model="document.question35.emergencies.documentReferenceIDs"
+                                                                ng-disabled="!document.government"
+                                                                question="question35Emergencies"
+                                                                government="document.government"
+                                                                country-documents="absDocuments">
+                                        </div>
+                                    </div>
+
+                                    <div class="km-control-group" required name="question35Access" caption="Taken into consideration the need for expeditious access to genetic resources and expeditious fair and equitable sharing of benefits arising out of the use of such genetic resources, including access to affordable treatments by those in need, especially, in developing countries as provided in Article 8(b)?">
+                                        <div class="km-yes-no" required name="question35.access" ng-model="document.question35.access.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question35AccessFurtherInfo" caption="">
                                         <strong>Please provide further information</strong>
                                         <div km-textbox-ml rows=4 name="question35AccessFurtherInfo" ng-model="document.question35.access.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
-                                    <div class="km-control-group" name="question35Importance" caption="Considered the importance of genetic resources for food and agriculture and their special role for food security as provided in Article 8 (c)?">
-                                        <div class="km-yes-no" name="question35.importance" ng-model="document.question35.importance.answer"></div>
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q35AccessDocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                        <div document-selection ng-model="document.question35.access.documentReferenceIDs"
+                                                                ng-disabled="!document.government"
+                                                                question="question35Access"
+                                                                government="document.government"
+                                                                country-documents="absDocuments">
+                                        </div>
                                     </div>
+
+                                    <div class="km-control-group" required name="question35Importance" caption="Considered the importance of genetic resources for food and agriculture and their special role for food security as provided in Article 8 (c)?">
+                                        <div class="km-yes-no" required name="question35.importance" ng-model="document.question35.importance.answer"></div>
+                                    </div>
+
                                     <div class="km-control-group" name="question35ImportanceFurtherInfo" caption="">
                                         <strong>Please provide further information</strong>
                                         <div km-textbox-ml rows=4 name="question35ImportanceFurtherInfo" ng-model="document.question35.importance.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q35DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q35ImportanceDocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                        <div document-selection ng-model="document.question35.importance.documentReferenceIDs"
+                                                                ng-disabled="!document.government"
+                                                                question="question35Importance"
+                                                                government="document.government"
+                                                                country-documents="absDocuments">
+                                        </div>
+                                    </div>
+
+
+                                    <!-- <div class="km-control-group" style="margin-bottom:20px;" name="q35DocRefs" caption="Links to related documents">
                                         <div document-selection ng-model="document.question35.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question35"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
-                                    </div>
+                                    </div> -->
                                </div>
                             </div>
 
@@ -959,7 +1001,7 @@
                                     </div>
                                 </div>
 
-                                <div class="km-control-group" style="margin-bottom:20px;" name="q36DocRefs" caption="Links to related documents">
+                                <div class="km-control-group" style="margin-bottom:20px;" name="q36DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                     <div document-selection ng-model="document.question36.documentReferenceIDs"
                                                             ng-disabled="!document.government"
                                                             question="question36"
@@ -975,14 +1017,14 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" required name="question37" caption="37. Does your country have indigenous and local communities?">
-                                        <div class="km-yes-no" name="question37" ng-model="document.question37.answer" ng-click="Q37Clear()"></div>
+                                        <div class="km-yes-no" required name="question37" ng-model="document.question37.answer" ng-click="Q37Clear()"></div>
                                     </div>
                                     <div class="km-control-group" name="question37FurtherInfo" caption="">
                                         <strong>Please provide further information</strong>
                                         <div km-textbox-ml rows=4 name="question37FurtherInfo" ng-model="document.question37.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q37DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q37DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question37.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question37"
@@ -995,8 +1037,8 @@
 
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div class="km-control-group" required name="question38" caption="38. Do indigenous and local communities have the established right to grant access to genetic resources according to your domestic law? (Article 6.2)">
-                                        <div ng-disabled="!document.question37.answer" class="km-yes-no" name="question38" ng-model="document.question38.answer"></div>
+                                    <div class="km-control-group" ng-required="Q37IsYes()" name="question38" caption="38. Do indigenous and local communities have the established right to grant access to genetic resources according to your domestic law? (Article 6.2)">
+                                        <div ng-disabled="!document.question37.answer" ng-required="Q37IsYes()" class="km-yes-no" name="question38" ng-model="document.question38.answer" ng-click="Q38Clear()"></div>
                                     </div>
                                     <div class="row" ng-show="document.question38.answer">
                                         <div class="col-xs-10 col-xs-offset-1">
@@ -1004,7 +1046,7 @@
                                                 <strong>Please provide further information and reference to the domestic law establishing rights of indigenous and local communities to grant access to genetic resources</strong>
                                                 <div km-textbox-ml rows=2 name="question38LawFurtherInfo" ng-model="document.question38.law.furtherInfo" locales="document.header.languages" placeholder=""></div>
 
-                                                <div class="km-control-group" style="margin-bottom:20px;" name="q38LawDocRefs" caption="Links to related documents">
+                                                <div class="km-control-group" style="margin-bottom:20px;" name="q38LawDocRefs" caption="Please select the clearing-house record number containing relevant information">
                                                     <div document-selection ng-model="document.question38.law.documentReferenceIDs"
                                                                             ng-disabled="!document.government"
                                                                             question="question38Law"
@@ -1012,9 +1054,10 @@
                                                                             country-documents="absDocuments">
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="km-control-group" name="question38Measures" caption="Does your country have measures in place with the aim of ensuring that the prior informed consent or approval and involvement of indigenous and local communities is obtained as provided in Article 6.2?">
-                                                <div class="km-yes-no" name="question38Measures" ng-model="document.question38.measures.answer"></div>
+
+                                                <div class="km-control-group" name="question38Measures" caption="Does your country have measures in place with the aim of ensuring that the prior informed consent or approval and involvement of indigenous and local communities is obtained as provided in Article 6.2?">
+                                                    <div class="km-yes-no" name="question38Measures" ng-model="document.question38.measures.answer"></div>
+                                                </div>
                                             </div>
 
                                             <div class="km-control-group" name="question38AdditionalInfo" caption="">
@@ -1038,10 +1081,10 @@
                                         <div ng-disabled="!document.question37.answer" km-textbox-ml rows=4 name="question38FurtherInfo" ng-model="document.question38.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q38DocRefs" caption="Links to related documents">
-                                        <div document-selection ng-model="document.question38.documentReferenceIDs"
-                                                                ng-disabled="!document.government"
-                                                                question="question38"
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q38MeasuresDocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                        <div document-selection ng-model="document.question38.measures.documentReferenceIDs"
+                                                                ng-disabled="!document.government || !Q37IsYes()"
+                                                                question="question38Measures"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
@@ -1051,17 +1094,17 @@
 
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div class="km-control-group" required name="question39" caption="39. In accordance with domestic law has your country taken measures with the aim of ensuring that traditional knowledge associated with genetic resources that is held by indigenous and local communities within your country is accessed with the PIC or approval and involvement of these indigenous and local communities and that MAT have been established as provided in Article 7?">
-                                        <div ng-disabled="!document.question37.answer" class="km-yes-no" name="question39" ng-model="document.question39.answer"></div>
+                                    <div class="km-control-group" ng-required="Q37IsYes()" name="question39" caption="39. In accordance with domestic law has your country taken measures with the aim of ensuring that traditional knowledge associated with genetic resources that is held by indigenous and local communities within your country is accessed with the PIC or approval and involvement of these indigenous and local communities and that MAT have been established as provided in Article 7?">
+                                        <div ng-disabled="!document.question37.answer" ng-required="Q37IsYes()" class="km-yes-no" name="question39" ng-model="document.question39.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question39FurtherInfo" caption="">
                                         <strong>Please provide further information</strong>
                                         <div ng-disabled="!document.question37.answer" km-textbox-ml rows=4 name="question39FurtherInfo" ng-model="document.question39.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q39DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q39DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question39.documentReferenceIDs"
-                                                                ng-disabled="!document.government"
+                                                                ng-disabled="!document.government || !Q37IsYes()"
                                                                 question="question39"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
@@ -1072,17 +1115,17 @@
 
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div class="km-control-group" required name="question40" caption="40. In implementing the Protocol and in accordance with your domestic law, is your country taking into consideration indigenous and local communities’ customary laws, community protocols and procedures with respect to traditional knowledge associated with genetic resources as provided in Article 12.1?">
-                                        <div ng-disabled="!document.question37.answer" class="km-yes-no" name="question40" ng-model="document.question40.answer"></div>
+                                    <div class="km-control-group" ng-required="Q37IsYes()" name="question40" caption="40. In implementing the Protocol and in accordance with your domestic law, is your country taking into consideration indigenous and local communities’ customary laws, community protocols and procedures with respect to traditional knowledge associated with genetic resources as provided in Article 12.1?">
+                                        <div ng-disabled="!document.question37.answer" ng-required="Q37IsYes()" class="km-yes-no" name="question40" ng-model="document.question40.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question40FurtherInfo" caption="">
                                         <strong>Please provide further information</strong>
                                         <div ng-disabled="!document.question37.answer" km-textbox-ml rows=4 name="question40FurtherInfo" ng-model="document.question40.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q40DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q40DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question40.documentReferenceIDs"
-                                                                ng-disabled="!document.government"
+                                                                ng-disabled="!document.government || !Q37IsYes()"
                                                                 question="question40"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
@@ -1093,17 +1136,17 @@
 
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div class="km-control-group" required name="question41" caption="41. Has your country established mechanisms to inform potential users of traditional knowledge associated with genetic resources about their obligations as provided in Article 12.2?">
-                                        <div ng-disabled="!document.question37.answer" class="km-yes-no" name="question41" ng-model="document.question41.answer"></div>
+                                    <div class="km-control-group" ng-required="Q37IsYes()" name="question41" caption="41. Has your country established mechanisms to inform potential users of traditional knowledge associated with genetic resources about their obligations as provided in Article 12.2?">
+                                        <div ng-disabled="!document.question37.answer" ng-required="Q37IsYes()" class="km-yes-no" name="question41" ng-model="document.question41.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question41FurtherInfo" caption="">
                                         <strong>Please provide further information</strong>
                                         <div ng-disabled="!document.question37.answer" km-textbox-ml rows=4 name="question41FurtherInfo" ng-model="document.question41.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q41DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q41DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question41.documentReferenceIDs"
-                                                                ng-disabled="!document.government"
+                                                                ng-disabled="!document.government || !Q37IsYes()"
                                                                 question="question41"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
@@ -1114,10 +1157,10 @@
 
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div class="km-control-group" required name="question42" caption="42. Is your country supporting the development by indigenous and local communities of the following tools as provided in Article 12.3?"></div>
+                                    <div class="km-control-group" ng-required="Q37IsYes()" name="question42" caption="42. Is your country supporting the development by indigenous and local communities of the following tools as provided in Article 12.3?"></div>
 
                                     <div class="checkbox">
-                                        <label><input ng-disabled="!document.question37.answer" type="checkbox" ng-model="document.question42.community.answer"><strong>Community protocols</strong></label>
+                                        <label><input ng-disabled="!document.question37.answer" type="checkbox" ng-change="Q42Clear()" ng-model="document.question42.community.answer"><strong>Community protocols</strong></label>
                                     </div>
                                     <div ng-show="document.question42.community.answer" class="km-control-group" name="question42CommunityFurtherInfo" caption="">
                                         <strong>Please provide further information on how your country is supporting the development of community protocols.</strong>
@@ -1125,7 +1168,7 @@
                                     </div>
 
                                     <div class="checkbox">
-                                        <label><input ng-disabled="!document.question37.answer" type="checkbox" ng-model="document.question42.mat.answer"><strong>Minimum requirements for mutually agreed terms</strong></label>
+                                        <label><input ng-disabled="!document.question37.answer" ng-change="Q42Clear()" type="checkbox" ng-model="document.question42.mat.answer"><strong>Minimum requirements for mutually agreed terms</strong></label>
                                     </div>
                                     <div ng-show="document.question42.mat.answer" class="km-control-group" name="question42MATFurtherInfo" caption="">
                                         <strong>Please provide further information on how your country is supporting the development of minimum requirements mutually agreed terms.</strong>
@@ -1133,16 +1176,16 @@
                                     </div>
 
                                     <div class="checkbox">
-                                        <label><input ng-disabled="!document.question37.answer" type="checkbox" ng-model="document.question42.mcc.answer"><strong>Model contractual clauses</strong></label>
+                                        <label><input ng-disabled="!document.question37.answer" type="checkbox" ng-change="Q42Clear()" ng-model="document.question42.mcc.answer"><strong>Model contractual clauses</strong></label>
                                     </div>
                                     <div ng-show="document.question42.mcc.answer" class="km-control-group" name="question42MCCFurtherInfo" caption="">
                                         <strong>Please provide further information on how your country is supporting the development of model contractual clauses</strong>
                                         <div km-textbox-ml rows=3 name="question42MCCFurtherInfo" ng-model="document.question42.mcc.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q40DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q40DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question42.documentReferenceIDs"
-                                                                ng-disabled="!document.government"
+                                                                ng-disabled="!document.government || !Q37IsYes()"
                                                                 question="question42"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
@@ -1153,21 +1196,21 @@
 
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div class="km-control-group" required name="question43" caption="43. Has your country endeavoured not to restrict the customary use and exchange of genetic resources and associated traditional knowledge within and among indigenous and local communities as provided in Article 12.4?">
-                                        <div ng-disabled="!document.question37.answer" class="km-yes-no" name="question43" ng-model="document.question43.answer"></div>
+                                    <div class="km-control-group" ng-required="Q37IsYes()" name="question43" caption="43. Has your country endeavoured not to restrict the customary use and exchange of genetic resources and associated traditional knowledge within and among indigenous and local communities as provided in Article 12.4?">
+                                        <div ng-disabled="!document.question37.answer" ng-required="Q37IsYes()" class="km-yes-no" name="question43" ng-model="document.question43.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question43FurtherInfo" caption="">
                                         <strong>Please provide further information</strong>
                                         <div ng-disabled="!document.question37.answer" km-textbox-ml rows=4 name="question43FurtherInfo" ng-model="document.question43.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
-                                </div>
 
-                                <div class="km-control-group" style="margin-bottom:20px;" name="q43DocRefs" caption="Links to related documents">
-                                    <div document-selection ng-model="document.question43.documentReferenceIDs"
-                                                            ng-disabled="!document.government"
-                                                            question="question43"
-                                                            government="document.government"
-                                                            country-documents="absDocuments">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q43DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                        <div document-selection ng-model="document.question43.documentReferenceIDs"
+                                                                ng-disabled="!document.government || !Q37IsYes()"
+                                                                question="question43"
+                                                                government="document.government"
+                                                                country-documents="absDocuments">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1182,9 +1225,9 @@
                                         <div km-link name="question44RelevantDocuments" ng-model="document.question44.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q44DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q44DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question44.documentReferenceIDs"
-                                                                ng-disabled="!document.government"
+                                                                ng-disabled="!document.government || !Q37IsYes()"
                                                                 question="question44"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
@@ -1201,14 +1244,14 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" required name="question45" caption="45. Has your country endeavoured not to restrict the customary use and exchange of genetic resources and associated traditional knowledge within and among indigenous and local communities as provided in Article 12.4?">
-                                        <div class="km-yes-no" name="question45" ng-model="document.question45.answer"></div>
+                                        <div class="km-yes-no" required name="question45" ng-model="document.question45.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question45FurtherInfo" caption="">
                                         <strong>Please provide further information</strong>
                                         <div km-textbox-ml rows=4 name="question45FurtherInfo" ng-model="document.question45.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q45DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q45DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question45.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question45"
@@ -1225,7 +1268,7 @@
                                         <div km-textbox-ml rows=4 name="question46" ng-model="document.question46.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q46DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q46DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question46.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question46"
@@ -1246,7 +1289,7 @@
                                         <div km-link name="question47RelevantDocuments" ng-model="document.question47.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q47DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q47DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question47.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question47"
@@ -1266,7 +1309,7 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" required name="question48" caption="48. Is your country endeavouring to cooperate, with the involvement of indigenous and local communities concerned, with a view to implementing the Protocol in instances where the same genetic resources are found in situ within the territory of more than one Party as provided in Article 11.1?">
-                                        <div class="km-yes-no" name="question48" ng-model="document.question48.answer"></div>
+                                        <div class="km-yes-no" required name="question48" ng-model="document.question48.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question48ILCInfo" caption="">
                                         <strong>If your country has indigenous and local communities, please provide further detail their involvement.</strong>
@@ -1277,7 +1320,7 @@
                                         <div km-textbox-ml rows=4 name="question48FurtherInfo" ng-model="document.question48.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q48DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q48DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question48.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question48"
@@ -1300,7 +1343,7 @@
                                         <strong>Please provide further information.</strong>
                                         <div km-textbox-ml rows=4 name="question49FurtherInfo" ng-model="document.question49.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q49DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q49DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question49.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question49"
@@ -1321,7 +1364,7 @@
                                         <div km-link name="question50RelevantDocuments" ng-model="document.question50.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q50DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q50DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question50.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question50"
@@ -1340,14 +1383,14 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" required name="question51" caption="51. Is your country encouraging the development, update and use of model contractual clauses for MAT as provided in Article 19?">
-                                        <div class="km-yes-no" name="question51" ng-model="document.question51.answer"></div>
+                                        <div class="km-yes-no" required name="question51" ng-model="document.question51.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question51FurtherInfo" caption="">
                                         <strong>Please provide further information</strong>
                                         <div km-textbox-ml rows=4 name="question51FurtherInfo" ng-model="document.question51.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q51DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q51DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question51.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question51"
@@ -1361,14 +1404,14 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" required name="question52" caption="52. Is your country encouraging the development, update and use of codes of conduct, guidelines and best practices or standards as provided in Article 20?">
-                                        <div class="km-yes-no" name="question52" ng-model="document.question52.answer"></div>
+                                        <div class="km-yes-no" required name="question52" ng-model="document.question52.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question52FurtherInfo" caption="">
                                         <strong>Please provide further information</strong>
                                         <div km-textbox-ml rows=4 name="question52FurtherInfo" ng-model="document.question52.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q52DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q52DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question52.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question52"
@@ -1389,7 +1432,7 @@
                                         <div km-link name="question53RelevantDocuments" ng-model="document.question53.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q53DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q53DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question53.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question53"
@@ -1407,7 +1450,7 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" required name="question54" ng-click="Q54Clear()" caption="54. Has your country taken measures to raise awareness of the importance of genetic resources and traditional knowledge associated with genetic resources and related access and benefit-sharing issues as provided in Article 21?">
-                                        <div class="km-yes-no" name="question54" ng-model="document.question54.answer"></div>
+                                        <div class="km-yes-no" required name="question54" ng-model="document.question54.answer"></div>
                                     </div>
                                     <div class="row" ng-show="document.question54.answer">
                                         <div class="col-xs-10 col-xs-offset-1">
@@ -1418,6 +1461,15 @@
                                                 <strong>Please provide a summary of the measures taken.</strong>
                                                 <div km-textbox-ml rows=2 name="question54MeasuresFurtherInfo" ng-model="document.question54.measures.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                             </div>
+
+                                            <div ng-show="document.question54.measures.answer" class="km-control-group" style="margin-bottom:20px;" name="q54DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                                <div document-selection ng-model="document.question54.measures.documentReferenceIDs"
+                                                                        ng-disabled="!document.government"
+                                                                        question="question54measures"
+                                                                        government="document.government"
+                                                                        country-documents="absDocuments">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="km-control-group" name="question54FurtherInfo" caption="">
@@ -1425,7 +1477,7 @@
                                         <div km-textbox-ml rows=4 name="question54FurtherInfo" ng-model="document.question54.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q54DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q54DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question54.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question54"
@@ -1439,7 +1491,7 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" required name="question55"  caption="55. Has your country taken measures to build and develop capacity and strengthening of human resources and institutional capacities to effectively implement the Protocol as provided in Article 22?">
-                                        <div class="km-yes-no" name="question55" ng-click="Q55Clear()" ng-model="document.question55.answer"></div>
+                                        <div class="km-yes-no" required name="question55" ng-click="Q55Clear()" ng-model="document.question55.answer"></div>
                                     </div>
                                     <div class="row" ng-show="document.question55.answer">
                                         <div class="col-xs-10 col-xs-offset-1">
@@ -1450,6 +1502,16 @@
                                                 <strong>Please provide a summary of the measures taken.</strong>
                                                 <div km-textbox-ml rows=2 name="question55MeasuresFurtherInfo" ng-model="document.question55.measures.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                             </div>
+
+                                            <div ng-show="document.question55.measures.answer" class="km-control-group" style="margin-bottom:20px;" name="q55DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                                <div document-selection ng-model="document.question55.measures.documentReferenceIDs"
+                                                                        ng-disabled="!document.government"
+                                                                        question="question55measures"
+                                                                        government="document.government"
+                                                                        country-documents="absDocuments">
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
                                     <div class="km-control-group" name="question55FurtherInfo" caption="">
@@ -1457,7 +1519,7 @@
                                         <div km-textbox-ml rows=4 name="question55FurtherInfo" ng-model="document.question55.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q55DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q55DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question55.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question55"
@@ -1470,7 +1532,7 @@
 
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div class="km-control-group" required name="question56" caption="56. Has your country received external support for building and developing capacity for the implementation of the Nagoya Protocol?">
+                                    <div class="km-control-group" name="question56" caption="56. Has your country received external support for building and developing capacity for the implementation of the Nagoya Protocol?">
                                         <div class="km-yes-no" name="question56" ng-model="document.question56.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question56FurtherInfo" caption="">
@@ -1478,7 +1540,7 @@
                                         <div km-textbox-ml rows=4 name="question56FurtherInfo" ng-model="document.question56.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q56DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q56DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question56.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question56"
@@ -1491,7 +1553,7 @@
 
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div class="km-control-group" required name="question57" caption="57. Has your country provided external support for building and developing capacity for the implementation of the Nagoya Protocol?">
+                                    <div class="km-control-group" name="question57" caption="57. Has your country provided external support for building and developing capacity for the implementation of the Nagoya Protocol?">
                                         <div class="km-yes-no" name="question57" ng-model="document.question57.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question57FurtherInfo" caption="">
@@ -1499,7 +1561,7 @@
                                         <div km-textbox-ml rows=4 name="question57FurtherInfo" ng-model="document.question57.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q57DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q57DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question57.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question57"
@@ -1516,17 +1578,17 @@
                                         <strong>Please provide a summary of the main difficulties and challenges:</strong>
                                         <div km-textbox-ml rows=4 name="question58" ng-model="document.question58.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
-                                    <div class="km-control-group" name="question58RelevantDocuments" caption="Any other relevant documents">
-                                        <div km-link name="question58RelevantDocuments" ng-model="document.question58.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
-                                    </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q58DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q58DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question58.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question58"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
+                                    </div>
+                                    <div class="km-control-group" name="question58RelevantDocuments" caption="Any other relevant documents">
+                                        <div km-link name="question58RelevantDocuments" ng-model="document.question58.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                     </div>
                                 </div>
                             </div>
@@ -1537,7 +1599,7 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" required name="question59" caption="59. Is your country collaborating and cooperating in technical and scientific research and development programmes as a means to achieve the objective of the Protocol as provided in Article 23?">
-                                        <div class="km-yes-no" name="question59" ng-model="document.question59.answer" ng-click="Q59Clear()"></div>
+                                        <div class="km-yes-no" required name="question59" ng-model="document.question59.answer" ng-click="Q59Clear()"></div>
                                     </div>
                                     <div ng-show="document.question59.answer" class="km-control-group" name="question59AdditionalInfo" caption="">
                                         <strong>Please provide a summary of the measures taken.</strong>
@@ -1549,7 +1611,7 @@
                                         <div km-textbox-ml rows=4 name="question59FurtherInfo" ng-model="document.question59.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q59DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q59DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question59.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question59"
@@ -1566,11 +1628,11 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" name="question60" caption="60. Please provide a summary of the main difficulties and challenges encountered for becoming a Party to the Nagoya Protocol.">
-                                        <div km-textbox-ml rows=4 name="question60FurtherInfo" ng-model="document.question60.furtherInfo" locales="document.header.languages" placeholder="">
+                                        <div km-textbox-ml rows=4 name="question60FurtherInfo" ng-model="document.question60.challengesInfo" locales="document.header.languages" placeholder="">
                                         </div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q60DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q60DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question60.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question60"
@@ -1599,7 +1661,7 @@
                                         <div km-textbox-ml rows=4 name="question61FurtherInfo" ng-model="document.question61.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q61DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q61DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question61.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question61"
@@ -1615,27 +1677,27 @@
                                     <div class="km-control-group" name="question62" caption="62. Has your country made financial resources available to other Parties or received financial resources from other Parties or financial institutions for the purposes of implementation of the Protocol as provided in Article 25"></div>
 
                                     <div class="checkbox">
-                                        <label><input type="checkbox" ng-model="document.question62.donor.answer" ng-change="Q62Clear(); Q62ClearDonor()">Yes, financial resources have been made available</label>
-                                        <div ng-show="document.question62.donor.answer" km-textbox-ml rows=2 name="" ng-model="document.question62.donor.additionalInfo" locales="document.header.languages" placeholder=""></div>
+                                        <label><input type="checkbox" ng-model="document.question62.donor.answer" ng-change="Q62ClearDonor()">Yes, financial resources have been made available</label>
+                                        <div ng-show="document.question62.donor.answer" km-textbox-ml rows=2 ng-model="document.question62.donor.additionalInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
                                     <div class="checkbox">
-                                        <label><input type="checkbox" ng-model="document.question62.recipient.answer" ng-change="Q62Clear(); Q62ClearRecipient()">Yes, financial resources have been received</label>
+                                        <label><input type="checkbox" ng-model="document.question62.recipient.answer" ng-change="Q62ClearRecipient()">Yes, financial resources have been received</label>
                                         <div class="checkbox" ng-show="document.question62.recipient.answer">
                                             <label><input type="checkbox" ng-model="document.question62.recipient.parties" ng-change="Q62ClearRecipientFromParty()">From other Parties</label>
-                                                <div ng-show="document.question62.recipient.parties" km-textbox-ml rows=2 name="" ng-model="document.question62.recipient.partiesInfo" locales="document.header.languages" placeholder="">
+                                                <div ng-show="document.question62.recipient.parties" km-textbox-ml rows=2 ng-model="document.question62.recipient.partiesInfo" locales="document.header.languages" placeholder="">
                                                 </div>
                                         </div>
                                         <div class="checkbox" ng-show="document.question62.recipient.answer">
                                             <label><input type="checkbox" ng-model="document.question62.recipient.financialInstitutions" ng-change="Q62ClearRecipientFromInstitution()">From financial institutions</label>
                                             <div class="checkbox" ng-show="document.question62.recipient.financialInstitutions">
-                                                <label><input type="checkbox" ng-model="document.question62.recipient.gef" ng-change="Q62ClearRecipientFromInstitution()">From the Global Environmental Facility</label>
+                                                <label><input type="checkbox" ng-model="document.question62.recipient.gef">From the Global Environmental Facility</label>
                                             </div>
                                             <div class="checkbox" ng-show="document.question62.recipient.financialInstitutions">
-                                                <label><input type="checkbox" ng-model="document.question62.recipient.npImplementationFund" ng-change="Q62ClearRecipientFromInstitution()">From the Nagoya Protocol Implementation Fund </label>
+                                                <label><input type="checkbox" ng-model="document.question62.recipient.npImplementationFund">From the Nagoya Protocol Implementation Fund </label>
                                             </div>
                                             <div class="checkbox" ng-show="document.question62.recipient.financialInstitutions">
-                                                <label><input type="checkbox" ng-model="document.question62.recipient.otherSources" ng-change="Q62ClearRecipientFromInstitution()">From other sources</label>
+                                                <label><input type="checkbox" ng-model="document.question62.recipient.otherSources" ng-change="Q62ClearRecipientFromOtherSources()">From other sources</label>
                                                     <div ng-show="document.question62.recipient.otherSources" km-textbox-ml rows=2 name="question62ReceiverotherSourcesInfo" ng-model="document.question62.recipient.otherSourcesInfo" locales="document.header.languages" placeholder=""></div>
                                             </div>
                                         </div>
@@ -1651,7 +1713,7 @@
                                         <div km-textbox-ml rows=4 name="question62FurtherInfo" ng-model="document.question62.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q62DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q62DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question62.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question62"
@@ -1667,23 +1729,25 @@
                                     <div class="km-control-group"  name="question63" caption="63. Does your country have specific staff to administer functions directly related to the implementation of the Nagoya Protocol? ">
                                         <div class="km-yes-no" name="question63" ng-model="document.question63.answer" ng-click="Q63Clear()"></div>
                                     </div>
-                                        <div ng-show="document.question63.answer" class="km-control-group" name="question63NumberOfStaff" caption="Please indicate how many">
-                                            <label><input type="radio" name="question63NumberOfStaff" ng-model="document.question63.numberOfStaff" value="One"> One</label><br />
-                                            <label><input type="radio" name="amendmentIntent" ng-model="document.question63.numberOfStaff" value="Less than 5"> Less than 5</label><br />
-                                            <label><input type="radio" name="question63NumberOfStaff" ng-model="document.question63.numberOfStaff" value="Less than 10"> Less than 10</label><br />
-                                            <label><input type="radio" name="amendmentIntent" ng-model="document.question63.numberOfStaff" value="10 or more"> 10 or more</label>
-                                        </div>
+
+                                    <div ng-show="document.question63.answer" class="km-control-group" name="question63NumberOfStaff" caption="Please indicate how many">
+                                        <label><input type="radio" name="question63NumberOfStaff" ng-model="document.question63.numberOfStaff" value="One"> One</label><br />
+                                        <label><input type="radio" name="amendmentIntent"         ng-model="document.question63.numberOfStaff" value="Less than 5"> Less than 5</label><br />
+                                        <label><input type="radio" name="question63NumberOfStaff" ng-model="document.question63.numberOfStaff" value="Less than 10"> Less than 10</label><br />
+                                        <label><input type="radio" name="amendmentIntent"         ng-model="document.question63.numberOfStaff" value="10 or more"> 10 or more</label>
+                                    </div>
 
                                     <div class="km-control-group" name="question63Challenges" caption="">
                                         <strong>Please provide a summary of the main difficulties and challenges encountered.</strong>
                                         <div km-textbox-ml rows=4 name="question63Challenges" ng-model="document.question63.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
+
                                     <div class="km-control-group" name="question63FurtherInfo" caption="">
                                         <strong>Use the text entry to provide further information.</strong>
                                         <div km-textbox-ml rows=4 name="question63FurtherInfo" ng-model="document.question63furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q63DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q63DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question63.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question63"
@@ -1701,7 +1765,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q64DocRefs" caption="Links to related documents">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q64DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question64.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question64"
@@ -1709,17 +1773,28 @@
                                                                 country-documents="absDocuments">
                                         </div>
                                     </div>
+
+                                    <div class="km-control-group" name="question64RelevantDocuments" caption="Any other relevant documents">
+                                        <div km-link name="question64RelevantDocuments" ng-model="document.question64.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="row">
                                     <div class="col-xs-12">
                                         <div class="km-control-group" name="question65" caption="65. Notes:">
-                                            <div km-textbox-ml rows=4 name="question65FurtherInfo" ng-model="document.question65" locales="document.header.languages" placeholder="">
-                                            </div>
+                                            <!-- <div km-textbox-ml rows=4 name="question65FurtherInfo" ng-model="document.question65" locales="document.header.languages" placeholder="">
+                                            </div> -->
+                                            <span class="help-block">
+                                                The field “Notes” is for personal reference and can be seen only when the record is being edited.
+                                            </span>
+                                            <div km-notes name="notes" ng-model="document.question65"></div>
                                         </div>
                                     </div>
                             </div>
+
+
+
                         <!-- </div>
 
                         <div class="tab-pane" id="part15"> -->

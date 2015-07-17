@@ -389,7 +389,7 @@
                                                 <div class="col-lg-2 col-md-2 col-xs-2">{{measure.entryIntoForce_dt|formatDate}}</div>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row" ng-show="displayDetails">
                                             <i class="glyphicon glyphicon-remove-circle circle pull-right" style="position:relative;top:40px;z-index:100;font-size:20px;color:white;" ng-click="displayDetails=!displayDetails;"></i>
                                             <div class="col-xs-12 details document-show-hide" ng-show="displayDetails" record-loader document="measure.data"></div>
                                         </div>
@@ -470,7 +470,7 @@
                                             </div>
                                             <div class="col-lg-2 col-md-2 col-xs-2">{{permit.date_dt|formatDate}}</div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row" ng-show="displayDetails">
                                             <i class="glyphicon glyphicon-remove-circle circle pull-right" style="position:relative;top:40px;z-index:100;font-size:20px;color:white;" ng-click="displayDetails=!displayDetails;"></i>
                                             <div class="col-xs-12 details document-show-hide" ng-show="displayDetails" record-loader document="permit.data"></div>
                                         </div>
@@ -620,8 +620,8 @@
                                             <div class="col-lg-1 col-md-1 col-xs-1">{{communique.createdDate_dt|formatDate}}</div>
                                         </div>
 
-                                        <div class="row">
-                                            <i ng-show="displayDetails" class="glyphicon glyphicon-remove-circle circle pull-right" style="position:relative;top:{{40 + (communique.permit_ss ? communique.permit_ss.length*10 :0  )}}px;z-index:100;font-size:20px;color:white;" ng-click="displayDetails=!displayDetails;"></i>
+                                        <div class="row" ng-show="displayDetails">
+                                            <i ng-show="displayDetails" class="glyphicon glyphicon-remove-circle circle pull-right" style="position:relative;top:40px;z-index:100;font-size:20px;color:white;" ng-click="displayDetails=!displayDetails;"></i>
                                             <div class="col-xs-12 details document-show-hide" ng-show="displayDetails" record-loader document="communique.data"></div>
                                         </div>
                                     </div>
@@ -711,8 +711,8 @@
                                             </div>
                                             <div class="col-lg-1 col-md-1 col-xs-1">{{communique.createdDate_dt|formatDate}}</div>
                                         </div>
-                                        <div class="row">
-                                            <i ng-show="displayDetails" class="glyphicon glyphicon-remove-circle circle pull-right" style="position:relative;top:{{40 + (communique.permit_ss ? communique.permit_ss.length*10 :0  )}}px;z-index:100;font-size:20px;color:white;" ng-click="displayDetails=!displayDetails;"></i>
+                                        <div class="row" ng-show="displayDetails">
+                                            <i ng-show="displayDetails" class="glyphicon glyphicon-remove-circle circle pull-right" style="position:relative;top:40px;z-index:100;font-size:20px;color:white;" ng-click="displayDetails=!displayDetails;"></i>
                                             <div class="col-xs-12 details document-show-hide" ng-show="displayDetails" record-loader document="communique.data"></div>
                                         </div>
                                     </div>
