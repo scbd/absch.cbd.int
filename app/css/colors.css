@@ -126,6 +126,22 @@
 
 }
 
+
+.bg-published{
+    background-color:#1FA65D!important;
+    color:white!important;
+}
+.bg-draft{
+    background-color:#bbb!important;
+    color:white!important;
+}
+.bg-request{
+    background-color:#C7532C!important;
+    color:white!important;
+}
+
+
+
 .bg-black{
     background-color:#111!important;
     color:white!important;
