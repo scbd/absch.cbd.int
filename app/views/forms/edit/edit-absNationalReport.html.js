@@ -41,43 +41,41 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
 
     $scope.setDocument({libraries: [{ identifier: "cbdLibrary:abs-ch" }]});
 
-
-    //==================================
-    //
-    //==================================
-    $scope.Q3HasAnswer = function (answer) {
-        return hasValue(answer);
-    };
-
-
-
     //==================================
     //
     //==================================
     $scope.isQ3Yes = function (answer) {
         if(answer === true || answer === undefined){
 
-            if($scope.document.question4 && hasValue($scope.document.question4.answer)){
-                $scope.document.question4.answer         = undefined;
-                $scope.document.question4.furtherInfo    = undefined;
-                $scope.document.question4.additionalInfo = undefined;
+            if($scope.document && $scope.document.question3){
+                $scope.document.question3.challengesInfo       = undefined;
+                $scope.document.question3.documentReferenceIDs = undefined;
             }
 
-            if($scope.document.question5 && hasValue($scope.document.question5.answer)){
-                $scope.document.question5.answer      = undefined;
-                $scope.document.question5.furtherInfo = undefined;
+            if($scope.document && $scope.document.question4 && hasValue($scope.document.question4.answer)){
+                $scope.document.question4.answer               = undefined;
+                $scope.document.question4.furtherInfo          = undefined;
+                $scope.document.question4.additionalInfo       = undefined;
+                $scope.document.question4.documentReferenceIDs = undefined;
             }
 
-            if($scope.document.question6 && hasValue($scope.document.question6.answer)){
-                $scope.document.question6.answer      = undefined;
-                $scope.document.question6.furtherInfo = undefined;
+            if($scope.document && $scope.document.question5 && hasValue($scope.document.question5.answer)){
+                $scope.document.question5.answer               = undefined;
+                $scope.document.question5.furtherInfo          = undefined;
+                $scope.document.question5.documentReferenceIDs = undefined;
             }
 
-            if($scope.document.question7 && hasValue($scope.document.question7.answer)){
-                $scope.document.question7.answer      = undefined;
-                $scope.document.question7.furtherInfo = undefined;
+            if($scope.document && $scope.document.question6 && hasValue($scope.document.question6.answer)){
+                $scope.document.question6.answer               = undefined;
+                $scope.document.question6.furtherInfo          = undefined;
+                $scope.document.question6.documentReferenceIDs = undefined;
             }
 
+            if($scope.document && $scope.document.question7 && hasValue($scope.document.question7.answer)){
+                $scope.document.question7.answer               = undefined;
+                $scope.document.question7.furtherInfo          = undefined;
+                $scope.document.question7.documentReferenceIDs = undefined;
+            }
             return true;
         }
 
@@ -88,8 +86,9 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
     //
     //==================================
     $scope.isQ4Yes = function (answer) {
-        if(!answer && $scope.document.question4 && hasValue($scope.document.question4.answer)){
+        if(!answer && $scope.document && $scope.document.question4 && hasValue($scope.document.question4.answer)){
             $scope.document.question4.additionalInfo = undefined;
+            $scope.document.question7.documentReferenceIDs = undefined;
         }
     };
 
@@ -118,7 +117,7 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
     $scope.isQ11Yes = function (answer) {
         if(answer === true || answer === undefined){
 
-            if($scope.document.question11 && $scope.document.question11.challenges)
+            if($scope.document && $scope.document.question11)
                 $scope.document.question11.challenges = undefined;
 
             return true;
@@ -502,7 +501,7 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
         if(government){
             $q.when(getAbsDocuments(government)).then(function (data) {
                 $scope.absDocuments = data;
-                console.info(data.length);
+                //console.info(data.length);
             });
         }
     }
