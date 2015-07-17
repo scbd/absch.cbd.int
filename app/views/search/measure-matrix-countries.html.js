@@ -1,8 +1,8 @@
 define(['app', 'underscore',
         '/app/views/search/measure-matrix-elements-derective.html.js'], function(app, _) {
 
-    app.controller('countryMatrixController', ['$scope', '$http', 'realm', '$q', '$filter', '$routeParams',
-        function($scope, $http, realm, $q, $filter, $routeParams) {
+    app.controller('countryMatrixController', ['$scope', '$http', 'realm', '$q', '$filter', '$routeParams','$filter',
+        function($scope, $http, realm, $q, $filter, $routeParams, $filter) {
 
 
 
@@ -35,6 +35,19 @@ define(['app', 'underscore',
                                 //measure.isLoading=false;
                                 console.log('done');
                                 $scope.measures = measuresData;
+
+                                var grpMeasures = _.groupBy($scope.measures, function(measure){
+                                    return measure.document.jurisdiction.identifier +  (measure.document.jurisdictionName ? '#' + $filter('lstring')(measure.document.jurisdictionName) : '');
+                                });
+                                $scope.groupedMeasures = _.map(grpMeasures, function(group,key){
+                                    //console.log(key);
+                                    return {
+                                            jurisdiction:key,
+                                            measures:group
+                                            };
+                                });
+                                console.log(($scope.groupedMeasures));
+
                             });
 
                     }).error(function(error) {
@@ -66,22 +79,10 @@ define(['app', 'underscore',
                                 return measure.document;
                             });
                     })
-                    .then(function(data) {
-
-                        var linkedMeasuresQuery = _.map(data.linkedMeasures, function(linked) {
-                            return $http.get('/api/v2013/documents/' + linked.identifier,{cache:true});
-                        });
-                        return $q.all(linkedMeasuresQuery)
-                            .then(function(linkedMeasures) {
-                                linkedMeasures.forEach(function(linkedMeasureData) {
-                                    var amended = _.findWhere(data.linkedMeasures, {
-                                        identifier: linkedMeasureData.data.header.identifier
-                                    });
-                                    amended.measure = linkedMeasureData.data;
-                                });
-                                return data;
-                            });
-                    })
+                    // .then(function(data) {
+                    //
+                    //
+                    // })
                     .catch(function(error) {
                         console.log('onerror');
                         console.log(error);
@@ -105,7 +106,32 @@ define(['app', 'underscore',
 
             }
 
+            function  jurisdictions() {
+                return $q.all([
+                  $http.get("/api/v2013/thesaurus/domains/7A56954F-7430-4B8B-B733-54B8A5E7FF40/terms", { cache: true }),
+                  $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })
+                ]).then(function(o) {
+                  $scope.jurisdictions = o[0].data;
+                  $scope.jurisdictions.push(o[1].data);
+                  return jurisdictions;
+                });
+            }
+            jurisdictions();
         }
     ]);
 
 });
+
+// var linkedMeasuresQuery = _.map(data.linkedMeasures, function(linked) {
+//     return $http.get('/api/v2013/documents/' + linked.identifier,{cache:true});
+// });
+// return $q.all(linkedMeasuresQuery)
+//     .then(function(linkedMeasures) {
+//         linkedMeasures.forEach(function(linkedMeasureData) {
+//             var amended = _.findWhere(data.linkedMeasures, {
+//                 identifier: linkedMeasureData.data.header.identifier
+//             });
+//             amended.measure = linkedMeasureData.data;
+//         });
+//         return data;
+//     });
