@@ -24,8 +24,7 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
 
             when('/forums',                        { templateUrl: '/app/views/forums/forum-list-view.html',         label:'Forums',       resolveController: true, resolveUser: true }).
 
-            // when('/forums/iac',              { templateUrl: '/app/views/forums/thread-list-view.html'   ,resolveController: true, resolveUser: true, forumId:17415, postUrl:'/forums/iac', text:'IAC' }).
-            // when('/forums/iac/:threadId',    { templateUrl: '/app/views/forums/post-list-view.html'     ,resolveController: true, resolveUser: true, forumId:17415, forumListUrl:'/forums/iac/', text:'IAC'}).
+            when('/forums/iac-trg',          { redirectTo:'/forums/iac'}).
             when('/forums/iac',              { templateUrl: '/app/views/forums/thread-list-view.html'   ,label:'IAC', resolveController: true, resolveUser: true, forumId:17433, postUrl:'/forums/iac', text:'IAC' }).
             when('/forums/iac/:threadId',    { templateUrl: '/app/views/forums/post-list-view.html'     ,label:'Thread-Subject', resolveController: true, resolveUser: true, forumId:17433, forumListUrl:'/forums/iac/', text:'IAC'}).
 
