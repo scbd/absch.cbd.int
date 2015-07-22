@@ -268,7 +268,8 @@
         <div class="container-fluid container-breadcrumbs">
             <div class="color-litegrey">
                     <a href="http://www.cbd.int" class="margin-right-xs">CBD</a>
-                    <span ng-repeat="breadcrumb in breadcrumbs.get() track by breadcrumb.path" >
+
+                    <span ng-repeat="breadcrumb in breadcrumbs.get()" >
 
                         &nbsp;&nbsp;<i class="fa fa-chevron-right color-litegrey"></i>&nbsp;&nbsp;
 
@@ -276,13 +277,9 @@
                             <a ng-if="!$last" ng-href="{{ breadcrumb.path }}" ng-bind="breadcrumb.label" class="margin-right-xs"></a>
                             <span ng-if="$last" ng-bind="breadcrumb.label"></span>
                         </span>
-
-                        <span ng-if="breadcrumb.param && breadcrumb.label == 'Country Profile'">
-                            <span  ng-show="breadcrumbsParam" ng-bind="breadcrumbsParam" ></span>
-                        </span>
-
-                        <span ng-if="breadcrumb.param && breadcrumb.label == 'Submit'">
-                            <span  ng-show="breadcrumb.param" >{{breadcrumb.param|lowercase|mapSchema|schemaName}}</span>
+                        <span ng-if="breadcrumb.param">
+                            <a ng-if="!$last" ng-href="{{ breadcrumb.path }}" ng-bind="breadcrumb.label" class="margin-right-xs"></a>
+                            <span ng-if="$last" ng-bind="breadcrumb.label"></span>
                         </span>
 
                     </span>

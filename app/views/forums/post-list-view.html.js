@@ -1,8 +1,8 @@
-define(['app', 'underscore', 'cbd-forums',
+define(['app', 'underscore','ng-breadcrumbs', 'cbd-forums',
         '/app/js/common.js'], function(app, _) {
 
-    return ["$scope", "$http", "$q", "$route", "$routeParams","commonjs","$rootScope",'$route',
-     function($scope, $http, $q, $route, $routeParams, commonjs, $rootScope, $route) {
+    return ["$scope", "$http", "$q", "$route", "$routeParams","commonjs","$rootScope",'$route','breadcrumbs',
+     function($scope, $http, $q, $route, $routeParams, commonjs, $rootScope, $route, breadcrumbs) {
 
         if (!$route.current.$$route.forumListUrl) {
             throw 'Forum list URL not specified in route, please forumListUrl attribute in routes'
@@ -19,6 +19,10 @@ define(['app', 'underscore', 'cbd-forums',
 
             $scope.threadSubject = response.data.subject;
 
+            console.log(breadcrumbs);
+
+            breadcrumbs.options = {'Thread-Subject': response.data.subject};
+
         });
 
         $scope.isAdmin = function(){
@@ -26,10 +30,10 @@ define(['app', 'underscore', 'cbd-forums',
             commonjs.isUserInRole($rootScope.getRoleName('Administrator'))
 
         }
-        
+
         $scope.$on('signIn', function(evt, user){
-           $route.reload(); 
+           $route.reload();
         });
-        
+
     }];
 });
