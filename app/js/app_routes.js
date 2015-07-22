@@ -24,10 +24,10 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
 
             when('/forums',                        { templateUrl: '/app/views/forums/forum-list-view.html',         label:'Forums',       resolveController: true, resolveUser: true }).
 
-            when('/forums/iac',              { templateUrl: '/app/views/forums/thread-list-view.html'   ,resolveController: true, resolveUser: true, forumId:17415, postUrl:'/forums/iac', text:'IAC' }).
-            when('/forums/iac/:threadId',    { templateUrl: '/app/views/forums/post-list-view.html'     ,resolveController: true, resolveUser: true, forumId:17415, forumListUrl:'/forums/iac/', text:'IAC'}).
-            when('/forums/iac-trg',              { templateUrl: '/app/views/forums/thread-list-view.html'   ,resolveController: true, resolveUser: true, forumId:17433, postUrl:'/forums/iac-trg', text:'IAC-TRG' }).
-            when('/forums/iac-trg/:threadId',    { templateUrl: '/app/views/forums/post-list-view.html'     ,resolveController: true, resolveUser: true, forumId:17433, forumListUrl:'/forums/iac-trg/', text:'IAC-TRG'}).
+            // when('/forums/iac',              { templateUrl: '/app/views/forums/thread-list-view.html'   ,resolveController: true, resolveUser: true, forumId:17415, postUrl:'/forums/iac', text:'IAC' }).
+            // when('/forums/iac/:threadId',    { templateUrl: '/app/views/forums/post-list-view.html'     ,resolveController: true, resolveUser: true, forumId:17415, forumListUrl:'/forums/iac/', text:'IAC'}).
+            when('/forums/iac',              { templateUrl: '/app/views/forums/thread-list-view.html'   ,resolveController: true, resolveUser: true, forumId:17433, postUrl:'/forums/iac', text:'IAC' }).
+            when('/forums/iac/:threadId',    { templateUrl: '/app/views/forums/post-list-view.html'     ,resolveController: true, resolveUser: true, forumId:17433, forumListUrl:'/forums/iac/', text:'IAC'}).
 
             when('/forums/vlr',                    { templateUrl: '/app/views/forums/thread-list-view.html'   ,resolveController: true, resolveUser: true, forumId:17384, postUrl:'/forums/vlr', text:'VLR' }).
             when('/forums/vlr/:threadId',          { templateUrl: '/app/views/forums/post-list-view.html'     ,resolveController: true, resolveUser: true, forumId:17384, forumListUrl:'/forums/vlr/', text:'VLR'}).

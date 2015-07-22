@@ -48,7 +48,7 @@
     <nav class="navbar navbar-cbd navbar-default bg-cbdgreen navbar-static-top" id="anchorTop">
       <div class="container-fluid container-cbd">
           <ul class="navbar-left navlist">
-            <li><a href="http://www.cbd.int"><img src="/app/img/cbd-logo-spine-white.png" style="height:22px;position:relative;top:-2px;padding:0 5px 0 0;margin:0;"> <span class="hidden-md hidden-lg"><strong>The Convention on Biological Diversity</strong></span></a></li>            
+            <li><a href="http://www.cbd.int"><img src="/app/img/cbd-logo-spine-white.png" style="height:22px;position:relative;top:-2px;padding:0 5px 0 0;margin:0;"> <span class="hidden-md hidden-lg"><strong>The Convention on Biological Diversity</strong></span></a></li>
             <li class="hidden-xs hidden-sm"><a href="http://www.cbd.int/convention/">The Convention</a></li>
             <li class="hidden-xs hidden-sm"><a href="http://bch.cbd.int/protocol">Cartagena Protocol</a></li>
             <li class="hidden-xs hidden-sm"><a href="http://www.cbd.int/abs/">Nagoya Protocol<a></li>
@@ -56,7 +56,7 @@
             <li class="hidden-xs hidden-sm"><a href="http://www.cbd.int/information/">Information</a></li>
             <li class="hidden-xs hidden-sm"><a href="http://www.cbd.int/secretariat/">Secretariat</a></li>
            </ul>
-           
+
            <ul class="navlist navbar-right">
             <li class="pull-right" style="margin-right:0;padding-right:0;">
                     <a class="set-languages" data-toggle="dropdown" href="#">
@@ -84,7 +84,7 @@
                             <i class="fa fa-bell-o" class="bg-grey"></i>
                         </span>
                     </a>
-                    
+
                     <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" ng-href="#" class="notification-btn hidden-xs">
                         <span ng-show="(notifications|filter:isUnread).length > 0 " >
                             <i class="fa fa-bell"></i>
@@ -120,7 +120,7 @@
                  <a ng-show="user && user.isAuthenticated"  href="#" data-toggle="dropdown">
                      <span class="hidden-sm hidden-xs"><i class="fa fa-chevron-down"></i>  {{user.name}}</span>
                      <span class="hidden-md hidden-lg"><i class="fa fa-user"></i></span>
-                     
+
                  </a>
                     <ul class="dropdown-menu" role="menu" >
                         <li>
@@ -148,8 +148,8 @@
                     </ul>
            </li> <!--  end sign in-->
           </ul>
-          
-        
+
+
       </div><!-- /.container-fluid -->
     </nav>
 
@@ -179,8 +179,8 @@
 
         </div>
     </nav>
-    
-    
+
+
      <!-- PORTAL LINKS-->
     <nav class="navbar navbar-links navbar-default navbar-static-top bg-darkgrey ">
         <div class="container-fluid container-links color-grey">
@@ -193,8 +193,8 @@
                     <li><a href="/countries" ng-class="{'link-active' : getClass('/countries')}"><i class="fa fa-globe"></i> <span class="hidden-xs hidden-sm">&nbsp;Country Information</span></a></li>
                 </ul>
                  <ul class="navbar-right navlist">
-                    <li class="pull-right" style="padding-right:0;"><a href="/help" ng-class="{'link-active' : getClass('/help')}"><i class="fa fa-question-circle" class="bg-grey"></i><span class="hidden-xs hidden-sm">&nbsp;Help</span></a></li>                    
-                    <li class="pull-right" ><a href="/forums/iac{{training_env||development_env ? '-trg':''}}" ng-class="{'link-active' : getClass('/forums')}"><i class="fa fa-comments"></i><span class="hidden-xs hidden-sm">&nbsp;IAC{{training_env||development_env ? '-TRAINING':''}}&nbsp;Forum</span></a></li>
+                    <li class="pull-right" style="padding-right:0;"><a href="/help" ng-class="{'link-active' : getClass('/help')}"><i class="fa fa-question-circle" class="bg-grey"></i><span class="hidden-xs hidden-sm">&nbsp;Help</span></a></li>
+                    <li class="pull-right" ng-if="training_env||development_env"><a href="/forums/iac" ng-class="{'link-active' : getClass('/forums')}"><i class="fa fa-comments"></i><span class="hidden-xs hidden-sm">&nbsp;IAC&nbsp;Forum</span></a></li>
                 </ul>
         </div>
     </nav>
@@ -215,8 +215,8 @@
                         <a ng-hide="user && user.isAuthenticated"  class="signin" href="#" data-slug="signin" data-toggle="modal" data-target="#loginDialog"><i class="fa fa-power-off"></i><span class="hidden-xs hidden-sm">&nbsp;Sign-in</span></a>
                         <a href="#" ng-click="actionSignOut()" ng-show="user && user.isAuthenticated" ><i class="fa fa-sign-out" style="font-size:15px"></i><span class="hidden-xs hidden-sm">&nbsp;Sign-out</span></a>
                     </li>
-                     
-                     
+
+
                      <li class="pull-right" ng-cloak id="dropdownNotification" ng-show="user && user.isAuthenticated"  >
                              <a id="dLabel" ng-href="/register#notifications" class="notification-btn hidden-sm hidden-md hidden-lg">
                                 <span ng-show="(notifications|filter:isUnread).length > 0 " >
@@ -227,7 +227,7 @@
                                     <i class="fa fa-bell-o" class="bg-grey"></i>
                                 </span>
                             </a>
-                            
+
                             <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" ng-href="#" class="notification-btn hidden-xs">
                                 <span ng-show="(notifications|filter:isUnread).length > 0 " >
                                     <i class="fa fa-bell"></i>
@@ -254,11 +254,11 @@
                                 </div>
                             </div>
                     </li>
-                    
-                     
+
+
                     <li class="pull-right"> <a href="/forums/iac{{training_env||development_env ? '-trg':''}}" ng-class="{'link-active' : getClass('/forums')}"><i class="fa fa-comments"></i><span class="hidden-xs hidden-sm">&nbsp;IAC{{training_env||development_env ? '-TRAINING':''}}&nbsp;Forum</span></a></li>
                     <li class="pull-right"><a href="/help" ng-class="{'link-active' : getClass('/help')}"><i class="fa fa-question-circle" class="bg-grey"></i><span class="hidden-xs hidden-sm">&nbsp;Help</span></a></li>
-                    
+
                 </ul>
         </div>
     </nav>
