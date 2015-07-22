@@ -256,7 +256,9 @@
                     </li>
 
 
-                    <li class="pull-right"> <a href="/forums/iac{{training_env||development_env ? '-trg':''}}" ng-class="{'link-active' : getClass('/forums')}"><i class="fa fa-comments"></i><span class="hidden-xs hidden-sm">&nbsp;IAC{{training_env||development_env ? '-TRAINING':''}}&nbsp;Forum</span></a></li>
+                    <li class="pull-right" ng-show="development_env || training_env"> <a href="/forums/iac" ng-class="{'link-active' : getClass('/forums')}"><i class="fa fa-comments"></i><span class="hidden-xs hidden-sm">&nbsp;IAC Forum</span></a></li>
+                    
+                    
                     <li class="pull-right"><a href="/help" ng-class="{'link-active' : getClass('/help')}"><i class="fa fa-question-circle" class="bg-grey"></i><span class="hidden-xs hidden-sm">&nbsp;Help</span></a></li>
 
                 </ul>
@@ -286,6 +288,31 @@
             </div>
         </div>
     </nav>
+    
+    <!-- PORTAL BREAD CRUMBS-->
+    <nav class="navbar navbar-breadcrumbs navbar-default navbar-static-top navbar-fixed-top" style="top:30px;" >
+        <div class="container-fluid container-breadcrumbs">
+            <div class="color-litegrey">
+                    <a href="http://www.cbd.int" class="margin-right-xs">CBD</a>
+
+                    <span ng-repeat="breadcrumb in breadcrumbs.get()" >
+
+                        &nbsp;&nbsp;<i class="fa fa-chevron-right color-litegrey"></i>&nbsp;&nbsp;
+
+                        <span ng-if="!breadcrumb.param">
+                            <a ng-if="!$last" ng-href="{{ breadcrumb.path }}" ng-bind="breadcrumb.label" class="margin-right-xs"></a>
+                            <span ng-if="$last" ng-bind="breadcrumb.label"></span>
+                        </span>
+                        <span ng-if="breadcrumb.param">
+                            <a ng-if="!$last" ng-href="{{ breadcrumb.path }}" ng-bind="breadcrumb.label" class="margin-right-xs"></a>
+                            <span ng-if="$last" ng-bind="breadcrumb.label"></span>
+                        </span>
+
+                    </span>
+            </div>
+        </div>
+    </nav>
+    
 
  <!-- <nav class="navbar navbar-links navbar-default navbar-static-top bg-orange" ng-show="development_env || training_env">
         <div class="container container-links" style="padding-left:15%">
