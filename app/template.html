@@ -156,7 +156,7 @@
     <!-- PORTAL BRANDING -->
     <nav class="navbar navbar-portal navbar-default navbar-static-top bg-white hidden-xs hidden-sm">
          <!-- ng-class="{'training-bg': !production_env}"> -->
-        <div class="container-fluid container-portal">
+        <div class="container-fluid container-portal" ng-class="{'training-bg': !production_env}">
 
             <div class="row">
                 <div class="col-xs-9">
@@ -185,8 +185,16 @@
     <nav class="navbar navbar-links navbar-default navbar-static-top bg-darkgrey ">
         <div class="container-fluid container-links color-grey">
                <ul class="navbar-left navlist" >
-                   <li class="bold color-orange hidden-sm hidden-md hidden-lg">ABS-CH</li>
-                    <li class="bold color-orange hidden-xs hidden-md hidden-lg">ABS Clearing-House</li>
+                   <li class="bold color-orange hidden-sm hidden-md hidden-lg">
+                       <span ng-show="production_env" > ABS-CH</span>
+                       <span ng-show="development_env" > DEVELOPMENT</span>
+                       <span ng-show="training_env" > TRAINING</span>
+                   </li>
+                    <li class="bold color-orange hidden-xs hidden-md hidden-lg">
+                        <span ng-show="production_env" > ABS Clearing-House</span>
+                       <span ng-show="development_env" > DEVELOPMENT</span>
+                       <span ng-show="training_env" > TRAINING</span>
+                    </li>
                     <li><a href="/"><i class="fa fa-home" ></i> <span class="hidden-xs hidden-sm">&nbsp;Home</span></a></li>
                     <li><a href="/search" ng-class="{'link-active' : getClass('/find')}"><i class="fa fa-search"></i> <span class="hidden-xs hidden-sm">&nbsp;Search</span></a></li>
                     <li><a href="/register" ng-class="{'link-active' : getClass('/register')}"><i class="fa fa-pencil-square-o"></i> <span class="hidden-xs hidden-sm">&nbsp;Submit</span></a></li>
@@ -204,7 +212,12 @@
     <nav class="navbar navbar-links navbar-default navbar-static-top bg-darkgrey navbar-fixed-top">
         <div class="container-fluid container-links color-grey">
                 <ul class="navbar-left navlist" >
-                    <li class="bold color-orange">ABS-CH</li>
+                    <li class="bold color-orange">
+                        <span ng-show="production_env" > ABS-CH</span>
+                       <span ng-show="development_env" > DEVELOPMENT</span>
+                       <span ng-show="training_env" > TRAINING</span>
+                        
+                    </li>
                     <li><a href="/"><i class="fa fa-home" ></i><span class="hidden-xs hidden-sm">&nbsp;Home</span></a></li>
                     <li><a href="/search" ng-class="{'link-active' : getClass('/find')}"><i class="fa fa-search"></i><span class="hidden-xs hidden-sm">&nbsp;Search</span></a></li>
                     <li><a href="/register" ng-class="{'link-active' : getClass('/register')}"><i class="fa fa-pencil-square-o"></i><span class="hidden-xs hidden-sm">&nbsp;Submit</span></a></li>
