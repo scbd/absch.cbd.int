@@ -24,19 +24,18 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
 
             when('/forums',                        { templateUrl: '/app/views/forums/forum-list-view.html',         label:'Forums',       resolveController: true, resolveUser: true }).
 
-            when('/forums/iac',              { templateUrl: '/app/views/forums/thread-list-view.html'   ,resolveController: true, resolveUser: true, forumId:17415, postUrl:'/forums/iac', text:'IAC' }).
-            when('/forums/iac/:threadId',    { templateUrl: '/app/views/forums/post-list-view.html'     ,resolveController: true, resolveUser: true, forumId:17415, forumListUrl:'/forums/iac/', text:'IAC'}).
-            when('/forums/iac-trg',              { templateUrl: '/app/views/forums/thread-list-view.html'   ,resolveController: true, resolveUser: true, forumId:17433, postUrl:'/forums/iac-trg', text:'IAC-TRG' }).
-            when('/forums/iac-trg/:threadId',    { templateUrl: '/app/views/forums/post-list-view.html'     ,resolveController: true, resolveUser: true, forumId:17433, forumListUrl:'/forums/iac-trg/', text:'IAC-TRG'}).
+            when('/forums/iac-trg',          { redirectTo:'/forums/iac'}).
+            when('/forums/iac',              { templateUrl: '/app/views/forums/thread-list-view.html'   ,label:'IAC', resolveController: true, resolveUser: true, forumId:17433, postUrl:'/forums/iac', text:'IAC' }).
+            when('/forums/iac/:threadId',    { templateUrl: '/app/views/forums/post-list-view.html'     ,label:'Thread-Subject', resolveController: true, resolveUser: true, forumId:17433, forumListUrl:'/forums/iac/', text:'IAC'}).
 
-            when('/forums/vlr',                    { templateUrl: '/app/views/forums/thread-list-view.html'   ,resolveController: true, resolveUser: true, forumId:17384, postUrl:'/forums/vlr', text:'VLR' }).
-            when('/forums/vlr/:threadId',          { templateUrl: '/app/views/forums/post-list-view.html'     ,resolveController: true, resolveUser: true, forumId:17384, forumListUrl:'/forums/vlr/', text:'VLR'}).
-            when('/forums/caribbean',              { templateUrl: '/app/views/forums/thread-list-view.html'   ,resolveController: true, resolveUser: true, forumId:17378, postUrl:'/forums/caribbean', text:'Caribbean Region Forum' }).
-            when('/forums/caribbean/:threadId',    { templateUrl: '/app/views/forums/post-list-view.html'     ,resolveController: true, resolveUser: true, forumId:17378, forumListUrl:'/forums/caribbean/', text:'Caribbean Region Forum'}).
+            when('/forums/vlr',                    { templateUrl: '/app/views/forums/thread-list-view.html'  ,label:'VLR'  ,resolveController: true, resolveUser: true, forumId:17384, postUrl:'/forums/vlr', text:'VLR' }).
+            when('/forums/vlr/:threadId',          { templateUrl: '/app/views/forums/post-list-view.html'    ,label:'Thread-Subject'  ,resolveController: true, resolveUser: true, forumId:17384, forumListUrl:'/forums/vlr/', text:'VLR'}).
+            when('/forums/caribbean',              { templateUrl: '/app/views/forums/thread-list-view.html'  ,label:'Caribbean'  ,resolveController: true, resolveUser: true, forumId:17378, postUrl:'/forums/caribbean', text:'Caribbean Region Forum' }).
+            when('/forums/caribbean/:threadId',    { templateUrl: '/app/views/forums/post-list-view.html'    ,label:'Thread-Subject'  ,resolveController: true, resolveUser: true, forumId:17378, forumListUrl:'/forums/caribbean/', text:'Caribbean Region Forum'}).
             //when('/forums/caribbean region',              { templateUrl: '/app/views/forums/thread-list-view.html'   ,resolveController: true, resolveUser: true, forumId:17378, postUrl:'/forums/caribbean region' }).
             //when('/forums/caribbean region/:threadId',    { templateUrl: '/app/views/forums/post-list-view.html'     ,resolveController: true, resolveUser: true, forumId:17378, forumListUrl:'/forums/caribbean region/'}).
-            when('/forums/art10_groups',              { templateUrl: '/app/views/forums/thread-list-view.html'   ,resolveController: true, resolveUser: true, forumId:17316, postUrl:'/forums/art10_groups', text:'Forum on Article 10' }).
-            when('/forums/art10_groups/:threadId',    { templateUrl: '/app/views/forums/post-list-view.html'     ,resolveController: true, resolveUser: true, forumId:17316, forumListUrl:'/forums/art10_groups/', text:'Forum on Article 10' }).
+            when('/forums/art10_groups',              { templateUrl: '/app/views/forums/thread-list-view.html' ,label:'Art 10 Groups'  ,resolveController: true, resolveUser: true, forumId:17316, postUrl:'/forums/art10_groups', text:'Forum on Article 10' }).
+            when('/forums/art10_groups/:threadId',    { templateUrl: '/app/views/forums/post-list-view.html'   ,label:'Thread-Subject'  ,resolveController: true, resolveUser: true, forumId:17316, forumListUrl:'/forums/art10_groups/', text:'Forum on Article 10' }).
 
             when('/mailbox',                        { templateUrl: '/app/views/mailbox/inbox.html',         label:'Mailbox',       resolveController: true, resolveUser: true }).
             when('/mailbox/:mailId',                { templateUrl: '/app/views/mailbox/inbox.html',         label:'Mailbox',       resolveController: true, resolveUser: true }).
@@ -64,20 +63,20 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
             when('/database/:documentSchema/:documentID',           { templateUrl: '/app/views/forms/view/records-id.html', label:'Record',  param:'true',  resolveController: true, resolveUser: true}).
             when('/database/:documentSchema/:documentID/:revision', { templateUrl: '/app/views/forms/view/records-id.html', label:'Record',  param:'true',  resolveController: true, resolveUser: true}).
 
-            when('/register',                                           {templateUrl: '/app/views/register.html',                   label:'Submit',  param:'true', resolveController: true, resolveUser: true}).
             when('/register/tasks/:id',                                 {templateUrl: '/app/views/tasks/tasks-id.html',             label:'Submit',  param:'true', resolveController: true, resolveUser: true}).
             when('/register/tasks/:id/:activity',                       {templateUrl: '/app/views/tasks/tasks-id-activity.html',    label:'Submit',  param:'true', resolveController: true, resolveUser: true}).
             when('/register/dashboard',                                 {templateUrl: '/app/views/register/register.html',          label:'Dashboard',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/register/dashboard.html',}).
+            when('/dashboard',                                          {redirectTo:  '/register/dashboard'}).
+
             when('/register',                                           {templateUrl: '/app/views/register/register.html',          label:'Submit',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/register/dashboard.html',}).
             when('/register/requests',                                  {templateUrl: '/app/views/register/register.html',          label:'Requests',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',    type : 'all'}).
             when('/register/requests/:workflowId',                      {templateUrl: '/app/views/register/register.html',          label:'Requests',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',type : 'all'}).
             when('/register/requests/:type/:status',                    {templateUrl: '/app/views/register/register.html',          label:'Requests',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',}).
-            when('/register/:document_type',                            {templateUrl: '/app/views/register/register.html',          label:'Submit',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/register/type_document_list.html',}).
+            when('/register/:document_type',                            {templateUrl: '/app/views/register/register.html',          label:'document_type',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/register/type_document_list.html',}).
             when('/register/:document_type/new',                        {templateUrl: '/app/views/register/register.html',          label:'New',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/forms/edit/edit--', }).
-            when('/register/:document_type/help',                       {templateUrl: '/app/views/register/register.html',          label:'Submit',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/register/type_document_list.html',}).
+            when('/register/:document_type/help',                       {templateUrl: '/app/views/register/register.html',          label:'document_type',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/register/type_document_list.html',}).
             when('/register/:document_type/:identifier/edit',           {templateUrl: '/app/views/register/register.html',          label:'Edit',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/forms/edit/edit--', }).
             when('/register/:document_type/:identifier/edit/:tour',     {templateUrl: '/app/views/register/register.html',          label:'Edit',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/forms/edit/edit--',  }).
-            when('/dashboard',                                          {templateUrl: '/app/views/register/register.html',          label:'Submit',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/register/dashboard.html',}).
 
             when('/workshops/lac',               { templateUrl: '/app/views/workshops/lac.html',            label:'Workshops',            resolveController: true, resolveUser: true}).
             when('/workshops/caribbean',         { templateUrl: '/app/views/workshops/caribbean.html',      label:'Workshops',        resolveController: true, resolveUser: true}).

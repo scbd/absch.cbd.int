@@ -48,7 +48,7 @@
     <nav class="navbar navbar-cbd navbar-default bg-cbdgreen navbar-static-top" id="anchorTop">
       <div class="container-fluid container-cbd">
           <ul class="navbar-left navlist">
-            <li><a href="http://www.cbd.int"><img src="/app/img/cbd-logo-spine-white.png" style="height:22px;position:relative;top:-2px;padding:0 5px 0 0;margin:0;"> <span class="hidden-md hidden-lg"><strong>The Convention on Biological Diversity</strong></span></a></li>            
+            <li><a href="http://www.cbd.int"><img src="/app/img/cbd-logo-spine-white.png" style="height:22px;position:relative;top:-2px;padding:0 5px 0 0;margin:0;"> <span class="hidden-md hidden-lg"><strong>The Convention on Biological Diversity</strong></span></a></li>
             <li class="hidden-xs hidden-sm"><a href="http://www.cbd.int/convention/">The Convention</a></li>
             <li class="hidden-xs hidden-sm"><a href="http://bch.cbd.int/protocol">Cartagena Protocol</a></li>
             <li class="hidden-xs hidden-sm"><a href="http://www.cbd.int/abs/">Nagoya Protocol<a></li>
@@ -56,7 +56,7 @@
             <li class="hidden-xs hidden-sm"><a href="http://www.cbd.int/information/">Information</a></li>
             <li class="hidden-xs hidden-sm"><a href="http://www.cbd.int/secretariat/">Secretariat</a></li>
            </ul>
-           
+
            <ul class="navlist navbar-right">
             <li class="pull-right" style="margin-right:0;padding-right:0;">
                     <a class="set-languages" data-toggle="dropdown" href="#">
@@ -84,7 +84,7 @@
                             <i class="fa fa-bell-o" class="bg-grey"></i>
                         </span>
                     </a>
-                    
+
                     <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" ng-href="#" class="notification-btn hidden-xs">
                         <span ng-show="(notifications|filter:isUnread).length > 0 " >
                             <i class="fa fa-bell"></i>
@@ -120,7 +120,7 @@
                  <a ng-show="user && user.isAuthenticated"  href="#" data-toggle="dropdown">
                      <span class="hidden-sm hidden-xs"><i class="fa fa-chevron-down"></i>  {{user.name}}</span>
                      <span class="hidden-md hidden-lg"><i class="fa fa-user"></i></span>
-                     
+
                  </a>
                     <ul class="dropdown-menu" role="menu" >
                         <li>
@@ -148,15 +148,15 @@
                     </ul>
            </li> <!--  end sign in-->
           </ul>
-          
-        
+
+
       </div><!-- /.container-fluid -->
     </nav>
 
     <!-- PORTAL BRANDING -->
     <nav class="navbar navbar-portal navbar-default navbar-static-top bg-white hidden-xs hidden-sm">
          <!-- ng-class="{'training-bg': !production_env}"> -->
-        <div class="container-fluid container-portal">
+        <div class="container-fluid container-portal" ng-class="{'training-bg': !production_env}">
 
             <div class="row">
                 <div class="col-xs-9">
@@ -165,7 +165,7 @@
                             <span>ABSCH</span>
                             <span ng-show="development_env" class="color-orange"> DEVELOPMENT</span>
                             <span ng-show="training_env" class="color-orange"> TRAINING</span>
-                            <span class="color-grey hidden-xs hidden-sm hidden-md" style="text-transform:uppercase;font-size:20px;">
+                            <span class="color-grey" style="text-transform:uppercase;font-size:20px;">
                                 THE ACCESS AND BENEFIT-SHARING CLEARING-HOUSE </span>
                         </h1>
                     </a>
@@ -179,22 +179,30 @@
 
         </div>
     </nav>
-    
-    
+
+
      <!-- PORTAL LINKS-->
     <nav class="navbar navbar-links navbar-default navbar-static-top bg-darkgrey ">
         <div class="container-fluid container-links color-grey">
                <ul class="navbar-left navlist" >
-                   <li class="bold color-orange hidden-sm hidden-md hidden-lg">ABS-CH</li>
-                    <li class="bold color-orange hidden-xs hidden-md hidden-lg">ABS Clearing-House</li>
+                   <li class="bold color-orange hidden-sm hidden-md hidden-lg">
+                       <span ng-show="production_env" > ABS-CH</span>
+                       <span ng-show="development_env" > DEVELOPMENT</span>
+                       <span ng-show="training_env" > TRAINING</span>
+                   </li>
+                    <li class="bold color-orange hidden-xs hidden-md hidden-lg">
+                        <span ng-show="production_env" > ABS Clearing-House</span>
+                       <span ng-show="development_env" > DEVELOPMENT</span>
+                       <span ng-show="training_env" > TRAINING</span>
+                    </li>
                     <li><a href="/"><i class="fa fa-home" ></i> <span class="hidden-xs hidden-sm">&nbsp;Home</span></a></li>
                     <li><a href="/search" ng-class="{'link-active' : getClass('/find')}"><i class="fa fa-search"></i> <span class="hidden-xs hidden-sm">&nbsp;Search</span></a></li>
                     <li><a href="/register" ng-class="{'link-active' : getClass('/register')}"><i class="fa fa-pencil-square-o"></i> <span class="hidden-xs hidden-sm">&nbsp;Submit</span></a></li>
                     <li><a href="/countries" ng-class="{'link-active' : getClass('/countries')}"><i class="fa fa-globe"></i> <span class="hidden-xs hidden-sm">&nbsp;Country Information</span></a></li>
                 </ul>
                  <ul class="navbar-right navlist">
-                    <li class="pull-right" style="padding-right:0;"><a href="/help" ng-class="{'link-active' : getClass('/help')}"><i class="fa fa-question-circle" class="bg-grey"></i><span class="hidden-xs hidden-sm">&nbsp;Help</span></a></li>                    
-                    <li class="pull-right" ><a href="/forums/iac{{training_env||development_env ? '-trg':''}}" ng-class="{'link-active' : getClass('/forums')}"><i class="fa fa-comments"></i><span class="hidden-xs hidden-sm">&nbsp;IAC{{training_env||development_env ? '-TRAINING':''}}&nbsp;Forum</span></a></li>
+                    <li class="pull-right" style="padding-right:0;"><a href="/help" ng-class="{'link-active' : getClass('/help')}"><i class="fa fa-question-circle" class="bg-grey"></i><span class="hidden-xs hidden-sm">&nbsp;Help</span></a></li>
+                    <li class="pull-right" ng-if="training_env||development_env"><a href="/forums/iac" ng-class="{'link-active' : getClass('/forums')}"><i class="fa fa-comments"></i><span class="hidden-xs hidden-sm">&nbsp;IAC&nbsp;Forum</span></a></li>
                 </ul>
         </div>
     </nav>
@@ -204,7 +212,12 @@
     <nav class="navbar navbar-links navbar-default navbar-static-top bg-darkgrey navbar-fixed-top">
         <div class="container-fluid container-links color-grey">
                 <ul class="navbar-left navlist" >
-                    <li class="bold color-orange">ABS-CH</li>
+                    <li class="bold color-orange">
+                        <span ng-show="production_env" > ABS-CH</span>
+                       <span ng-show="development_env" > DEVELOPMENT</span>
+                       <span ng-show="training_env" > TRAINING</span>
+                        
+                    </li>
                     <li><a href="/"><i class="fa fa-home" ></i><span class="hidden-xs hidden-sm">&nbsp;Home</span></a></li>
                     <li><a href="/search" ng-class="{'link-active' : getClass('/find')}"><i class="fa fa-search"></i><span class="hidden-xs hidden-sm">&nbsp;Search</span></a></li>
                     <li><a href="/register" ng-class="{'link-active' : getClass('/register')}"><i class="fa fa-pencil-square-o"></i><span class="hidden-xs hidden-sm">&nbsp;Submit</span></a></li>
@@ -215,8 +228,8 @@
                         <a ng-hide="user && user.isAuthenticated"  class="signin" href="#" data-slug="signin" data-toggle="modal" data-target="#loginDialog"><i class="fa fa-power-off"></i><span class="hidden-xs hidden-sm">&nbsp;Sign-in</span></a>
                         <a href="#" ng-click="actionSignOut()" ng-show="user && user.isAuthenticated" ><i class="fa fa-sign-out" style="font-size:15px"></i><span class="hidden-xs hidden-sm">&nbsp;Sign-out</span></a>
                     </li>
-                     
-                     
+
+
                      <li class="pull-right" ng-cloak id="dropdownNotification" ng-show="user && user.isAuthenticated"  >
                              <a id="dLabel" ng-href="/register#notifications" class="notification-btn hidden-sm hidden-md hidden-lg">
                                 <span ng-show="(notifications|filter:isUnread).length > 0 " >
@@ -227,7 +240,7 @@
                                     <i class="fa fa-bell-o" class="bg-grey"></i>
                                 </span>
                             </a>
-                            
+
                             <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" ng-href="#" class="notification-btn hidden-xs">
                                 <span ng-show="(notifications|filter:isUnread).length > 0 " >
                                     <i class="fa fa-bell"></i>
@@ -254,11 +267,13 @@
                                 </div>
                             </div>
                     </li>
+
+
+                    <li class="pull-right" ng-show="development_env || training_env"> <a href="/forums/iac" ng-class="{'link-active' : getClass('/forums')}"><i class="fa fa-comments"></i><span class="hidden-xs hidden-sm">&nbsp;IAC Forum</span></a></li>
                     
-                     
-                    <li class="pull-right"> <a href="/forums/iac{{training_env||development_env ? '-trg':''}}" ng-class="{'link-active' : getClass('/forums')}"><i class="fa fa-comments"></i><span class="hidden-xs hidden-sm">&nbsp;IAC{{training_env||development_env ? '-TRAINING':''}}&nbsp;Forum</span></a></li>
+                    
                     <li class="pull-right"><a href="/help" ng-class="{'link-active' : getClass('/help')}"><i class="fa fa-question-circle" class="bg-grey"></i><span class="hidden-xs hidden-sm">&nbsp;Help</span></a></li>
-                    
+
                 </ul>
         </div>
     </nav>
@@ -268,7 +283,8 @@
         <div class="container-fluid container-breadcrumbs">
             <div class="color-litegrey">
                     <a href="http://www.cbd.int" class="margin-right-xs">CBD</a>
-                    <span ng-repeat="breadcrumb in breadcrumbs.get() track by breadcrumb.path" >
+
+                    <span ng-repeat="breadcrumb in breadcrumbs.get()" >
 
                         &nbsp;&nbsp;<i class="fa fa-chevron-right color-litegrey"></i>&nbsp;&nbsp;
 
@@ -276,19 +292,40 @@
                             <a ng-if="!$last" ng-href="{{ breadcrumb.path }}" ng-bind="breadcrumb.label" class="margin-right-xs"></a>
                             <span ng-if="$last" ng-bind="breadcrumb.label"></span>
                         </span>
-
-                        <span ng-if="breadcrumb.param && breadcrumb.label == 'Country Profile'">
-                            <span  ng-show="breadcrumbsParam" ng-bind="breadcrumbsParam" ></span>
-                        </span>
-
-                        <span ng-if="breadcrumb.param && breadcrumb.label == 'Submit'">
-                            <span  ng-show="breadcrumb.param" >{{breadcrumb.param|lowercase|mapSchema|schemaName}}</span>
+                        <span ng-if="breadcrumb.param">
+                            <a ng-if="!$last" ng-href="{{ breadcrumb.path }}" ng-bind="breadcrumb.label" class="margin-right-xs"></a>
+                            <span ng-if="$last" ng-bind="breadcrumb.label"></span>
                         </span>
 
                     </span>
             </div>
         </div>
     </nav>
+    
+    <!-- PORTAL BREAD CRUMBS-->
+    <nav class="navbar navbar-breadcrumbs navbar-default navbar-static-top navbar-fixed-top" style="top:30px;" >
+        <div class="container-fluid container-breadcrumbs">
+            <div class="color-litegrey">
+                    <a href="http://www.cbd.int" class="margin-right-xs">CBD</a>
+
+                    <span ng-repeat="breadcrumb in breadcrumbs.get()" >
+
+                        &nbsp;&nbsp;<i class="fa fa-chevron-right color-litegrey"></i>&nbsp;&nbsp;
+
+                        <span ng-if="!breadcrumb.param">
+                            <a ng-if="!$last" ng-href="{{ breadcrumb.path }}" ng-bind="breadcrumb.label" class="margin-right-xs"></a>
+                            <span ng-if="$last" ng-bind="breadcrumb.label"></span>
+                        </span>
+                        <span ng-if="breadcrumb.param">
+                            <a ng-if="!$last" ng-href="{{ breadcrumb.path }}" ng-bind="breadcrumb.label" class="margin-right-xs"></a>
+                            <span ng-if="$last" ng-bind="breadcrumb.label"></span>
+                        </span>
+
+                    </span>
+            </div>
+        </div>
+    </nav>
+    
 
  <!-- <nav class="navbar navbar-links navbar-default navbar-static-top bg-orange" ng-show="development_env || training_env">
         <div class="container container-links" style="padding-left:15%">

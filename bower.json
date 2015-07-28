@@ -28,7 +28,7 @@
     "jqvmap": "*",
     "jvectormap": "~2.0.0",
     "bootstrap-material-design": "~0.1.5",
-    "cbd-forums": "~1.2.6",
+    "cbd-forums": "*",
     "angular-local-storage": "~0.1.5",
     "angular-flex": "https://github.com/scbd/angular-flex.git",
     "ng-breadcrumbs": "~0.4.1",

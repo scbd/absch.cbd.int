@@ -15,8 +15,7 @@ a:hover{color: #000;}
 }
 
 .training-bg{
-    background: url('/app/img/testwatermark.png');
-    background-size: 50px;
+    background: url('/app/img/training-bg1.png');
 }
 .dropdown-menu > li > a:hover{
     color:#666!important;

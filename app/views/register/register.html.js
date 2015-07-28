@@ -11,10 +11,10 @@ define(['app','linqjs', 'angular-localizer',
 // angular.module([]);
 
   app.controller("RegisterController",
-    ["$rootScope", "$location" , "$scope", "$q", "$window", "IStorage", "underscore",
+    ["$rootScope", "$location" , "$scope", "$q", "$window", "IStorage", "underscore","breadcrumbs",
      "schemaTypes", "$timeout","$filter", "$routeParams", "$cookies","bootbox","realm","IWorkflows", '$element','$mdSidenav', '$mdUtil', '$mdMedia',
 
-	  function ($rootScope, $location, $scope, $q, $window, storage, _,
+	  function ($rootScope, $location, $scope, $q, $window, storage, _,breadcrumbs,
       schemaTypes, $timeout, $filter, $routeParams, $cookies,bootbox,realm,workflows, $element, $mdSidenav, $mdUtil, $mdMedia) {
 
 
@@ -179,9 +179,11 @@ define(['app','linqjs', 'angular-localizer',
 
     };
 
-    if($routeParams.document_type) //this is used to highlight the item on the left
+    if($routeParams.document_type){ //this is used to highlight the item on the left
       $scope.document_type = $filter("mapSchema")($routeParams.document_type);
-
+	  console.log(breadcrumbs);
+	  breadcrumbs.options = {'document_type': $filter("schemaName")($scope.document_type)};
+	}
     $scope.msg="";
     $scope.records = [];
     $scope.isLoaded = []; //What schemas are currently loaded

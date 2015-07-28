@@ -71,23 +71,27 @@ define(['app','underscore',
                  })
                  .then(function(data) {
 
-                     var linkedMeasuresQuery = _.map(data.linkedMeasures, function(linked) {
-                         return $http.get('/api/v2013/documents/' + linked.identifier);
-                     });
-                     return $q.all(linkedMeasuresQuery)
-                         .then(function(linkedMeasures) {
-                             linkedMeasures.forEach(function(linkedMeasureData) {
-                                 var amended = _.findWhere(data.linkedMeasures, {
-                                     identifier: linkedMeasureData.data.header.identifier
-                                 });
-                                 amended.measure = linkedMeasureData.data;
-                                //  relatedElement($scope.scopeElements, linkedMeasureData.data, 'amended');
-                             });
+                     measure.document = [data];
+                     measure.showDocument = true;
+                     return data;
 
-                             measure.document = [data];
-                             measure.showDocument = true;
-                             return data;
-                         });
+                    //  var linkedMeasuresQuery = _.map(data.linkedMeasures, function(linked) {
+                    //      return $http.get('/api/v2013/documents/' + linked.identifier);
+                    //  });
+                    //  return $q.all(linkedMeasuresQuery)
+                    //      .then(function(linkedMeasures) {
+                    //          linkedMeasures.forEach(function(linkedMeasureData) {
+                    //              var amended = _.findWhere(data.linkedMeasures, {
+                    //                  identifier: linkedMeasureData.data.header.identifier
+                    //              });
+                    //              amended.measure = linkedMeasureData.data;
+                    //             //  relatedElement($scope.scopeElements, linkedMeasureData.data, 'amended');
+                    //          });
+                     //
+                    //          measure.document = [data];
+                    //          measure.showDocument = true;
+                    //          return data;
+                    //      });
                  })
                  .catch(function(error) {
                      console.log('onerror');

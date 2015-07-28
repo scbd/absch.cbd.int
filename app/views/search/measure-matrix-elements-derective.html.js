@@ -796,27 +796,28 @@ define(['app', 'underscore'], function(app, _) {
 
                     // if (!$scope.terms) // Not initialized
                     //     return;
-                    $scope.init();
-                    var oNewIdentifiers = {};
-                    var oNewSections = {};
+                    return $q.when($scope.init())
+                        .then(function(){
+                            var oNewIdentifiers = {};
+                            var oNewSections = {};
 
-                    // if (!$.isArray($scope.terms))
-                    //     throw "Type must be array";
+                            // if (!$.isArray($scope.terms))
+                            //     throw "Type must be array";
 
-                    if ($scope.binding) {
+                            if ($scope.binding) {
 
-                        if (!$.isArray($scope.binding))
-                            throw "Type must be array";
+                                if (!$.isArray($scope.binding))
+                                    throw "Type must be array";
 
-                        for (var i = 0; i < $scope.binding.length; ++i) {
-                            oNewIdentifiers[$scope.binding[i].identifier] = true;
-                            oNewSections[$scope.binding[i].identifier] = $scope.binding[i].section||{};
-                        }
-                    }
+                                for (var i = 0; i < $scope.binding.length; ++i) {
+                                    oNewIdentifiers[$scope.binding[i].identifier] = true;
+                                    oNewSections[$scope.binding[i].identifier] = $scope.binding[i].section||{};
+                                }
+                            }
 
-                    if (!angular.equals(oNewIdentifiers, $scope.identifiers)) $scope.identifiers = oNewIdentifiers;
-                    if (!angular.equals(oNewSections, $scope.sections)) $scope.sections = oNewSections;
-                // })
+                            if (!angular.equals(oNewIdentifiers, $scope.identifiers)) $scope.identifiers = oNewIdentifiers;
+                            if (!angular.equals(oNewSections, $scope.sections)) $scope.sections = oNewSections;
+                        });
                 }
 
 
@@ -828,45 +829,46 @@ define(['app', 'underscore'], function(app, _) {
                     $scope.rootTerms = [];
 
                     if (refTerms) {
-                        $scope.load();
-                        if (!$.isArray($scope.document)){
-                            if ($scope.document.amendedMeasures) {
+                        $q.when($scope.load())
+                        .then(function(){
+                            if (!$.isArray($scope.document)){
+                                if ($scope.document.amendedMeasures) {
 
-                                var amendedMeasures = _.map($scope.document.amendedMeasures, function(item) {
-                                    return $http.get('/api/v2013/documents/' + item.identifier)
-                                })
-                                $q.all(amendedMeasures)
-                                    .then(function(data) {
-                                        data.forEach(function(measure) {
-                                            appendElementMeasure(measure.data, $scope.terms);
-                                            return;
-                                        });
+                                    var amendedMeasures = _.map($scope.document.amendedMeasures, function(item) {
+                                        return $http.get('/api/v2013/documents/' + item.identifier)
                                     })
-                                    .then(function(data) {
+                                    $q.all(amendedMeasures)
+                                        .then(function(data) {
+                                            data.forEach(function(measure) {
+                                                appendElementMeasure(measure.data, $scope.terms);
+                                                return;
+                                            });
+                                        })
+                                        .then(function(data) {
+                                            buildTree();
+                                            updateProperties($scope.rootTerms, 1)
+                                        });
+                                } else {
+                                    $.when($scope.init())
+                                    .then(function(){
                                         buildTree();
-                                        updateProperties($scope.rootTerms, 1)
                                     });
-                            } else {
-                                $.when($scope.init())
-                                .then(function(){
-                                    buildTree();
-                                });
+                                }
                             }
-                        }
-                        else if ($.isArray($scope.document)){
+                            else if ($.isArray($scope.document)){
 
-                            _.each($scope.document, function(measure){
-                                addMeasureToElements(measure.document ? measure.document : measure);
+                                _.each($scope.document, function(measure){
+                                    addMeasureToElements(measure.document ? measure.document : measure);
 
-                                    buildTree();
-                                    updateProperties($scope.rootTerms, 1);
+                                        buildTree();
+                                        updateProperties($scope.rootTerms, 1);
 
-                            });
-                            console.log($scope.terms, $scope.rootTerms,existing);
-                        }
-
+                                });
+                                console.log($scope.terms, $scope.rootTerms,existing);
+                            }
+                        });
                     }
-                }
+                };
 
                 function buildTree() {
 

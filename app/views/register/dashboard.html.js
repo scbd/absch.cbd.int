@@ -1,13 +1,9 @@
-define(['app', '/app/views/directives/xuser-notifications.js','scbd-angularjs-services','scbd-angularjs-filters',
+define(['app', '/app/views/directives/xuser-notifications.js',
 '/app/views/directives/switch-realm-directive.html.js'], function (app) {
 "use strict";
 app.controller("DashboardController",
-	["$rootScope", "$scope", "underscore", "lstringFilter","IWorkflows","realm","$q","$routeParams",'$location',"$filter",
-	function ($rootScope, $scope, _, lstringFilter,workflows,realm,$q,$routeParams, $location, $filter) {
-
-
-		console.log($filter("term")("ca"));
-
+	["$rootScope", "$scope", "underscore", "lstringFilter","IWorkflows","realm","$q","$routeParams",'$location',"$filter","$http",
+	function ($rootScope, $scope, _, lstringFilter,workflows,realm,$q,$routeParams, $location, $filter,$http) {
 
     //intro.js configurations
 	$scope.startTour=false;
@@ -127,6 +123,11 @@ app.controller("DashboardController",
 	    // });
 
 		$scope.$emit('loadActivities','dashboard');
+		$http.get("/api/v2013/thesaurus/terms?termCode=" + $scope.user.government, {
+                cache: true
+        }).then(function(result) {
+            $scope.userCountry = $filter("lstring")(result.data.title);
+        });
 	}
 
 	$scope.approvedRequests = 0;

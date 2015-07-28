@@ -123,8 +123,7 @@
 						</div>
 					</div>
 				</div> -->
-
-				<div class="table">
+				<div class="table" >
 					<div class="col-sm-12">
 						<table class="table table-bordered matrixTable">
 							<tr>
@@ -140,14 +139,26 @@
 									</table>
 								</th>
 							</tr>
-							<tr>
-								<td class="tableCell">
-									<div measure-matrix-elements name="absMeasures" type="multiple" ng-model="noModel" locales="measures[0].documentheader.languages" document="measures"></div>
-								</td>
-							</tr>
 						</table>
 					</div>
 				</div>
+				<div class="table" ng-repeat="jurisdiction in groupedMeasures">
+					<div class="col-sm-12">
+						<strong>{{jurisdiction.measures[0].jurisdiction_EN_t}}
+						 {{jurisdiction.measures[0].document.jurisdictionName|lstring}}</strong>
+						<table class="table table-bordered matrixTable">
+							<tr >
+								<td class="tableCell">
+									<div measure-matrix-elements name="absMeasures" type="multiple" ng-model="noModel"
+										locales="measures[0].document.header.languages" document="jurisdiction.measures"></div>
+								</td>
+							</tr>
+						</table>
+						{{jurisdiction.length}}
+					</div>
+				</div>
+				<!-- <div measure-matrix-elements name="absMeasures" type="multiple" ng-model="noModel"
+					locales="measures[0].document.header.languages" document="measures"></div> -->
 			</div>
 		</div>
 	</div>

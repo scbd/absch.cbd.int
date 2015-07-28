@@ -18,9 +18,9 @@
  ], function(app, _, linqjs) {
 
    app.controller("ProfileController", ["$scope", "$http", "$routeParams", "linqjs", "$filter", "realm",
-                "commonjs", "$q", '$element', '$timeout','commonjs','IStorage','$rootScope','$mdSidenav', '$mdUtil', '$mdMedia','schemaTypes',
+                "commonjs", "$q", '$element', '$timeout','commonjs','IStorage','$rootScope','$mdSidenav', '$mdUtil', '$mdMedia','schemaTypes','breadcrumbs',
      function($scope, $http, $routeParams, linqjs, $filter, realm, commonjs, $q,
-                $element, $timeout, countriescommonjs, IStorage,$rootScope, $mdSidenav, $mdUtil, $mdMedia, schemaTypes) {
+                $element, $timeout, countriescommonjs, IStorage,$rootScope, $mdSidenav, $mdUtil, $mdMedia, schemaTypes, breadcrumbs) {
 
 
     $scope.toggleLeft = buildToggler('left');
@@ -130,9 +130,7 @@
            }).then(function(response) {
              $scope.country = response.data;
 
-
-
-             $rootScope.breadcrumbsParam = $scope.country.name.en;
+            breadcrumbs.options = {'Country Profile':$scope.country.name.en};
              $scope.searchText = '';
              $scope.autocompleteData = [];
 
