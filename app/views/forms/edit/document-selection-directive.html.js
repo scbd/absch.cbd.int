@@ -40,7 +40,6 @@ app.directive("documentSelection", ["$http", "Thesaurus", "$filter", "underscore
             //==================================
 			$scope.showRecords = function(){
                 loadDocuments();
-                console.info('showRecords');
             };
 
             //==================================
@@ -157,6 +156,7 @@ app.directive("documentSelection", ["$http", "Thesaurus", "$filter", "underscore
             $scope.getDocumentId = function(document){
                 if(!document)
                     return;
+
                 if(!document.id)
                     return $filter("uniqueIDWithoutRevision")(document.info);
                 else
@@ -180,6 +180,9 @@ app.directive("documentSelection", ["$http", "Thesaurus", "$filter", "underscore
 		        }
 		    });
 
+			//==================================
+		    //
+		    //==================================
 			$scope.$watch('model', function(newValue, oldValue){
 				if(newValue != oldValue){
 					loadDocuments();
