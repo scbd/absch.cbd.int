@@ -66,19 +66,24 @@
 			.cover55 {
 				width: 55%;
 			}
-			.paddingleft3{
-				padding-left:3%!important;
+
+			.paddingleft3 {
+				padding-left: 3%!important;
 			}
-			.paddingleft6{
-				padding-left:6%!important;
+
+			.paddingleft6 {
+				padding-left: 6%!important;
 			}
-			.paddingleft9{
-				padding-left:9%!important;
+
+			.paddingleft9 {
+				padding-left: 9%!important;
 			}
-			.highlight{
+
+			.highlight {
 				font-weight: bold;
 				background-color: #fff!important;
 			}
+
 			.paddingleft12 {
 				padding-left: 12%!important;
 			}
@@ -100,66 +105,98 @@
 				<h1> Measure Matrix</h1>
 			</div>
 
-			<!-- {{compliance}} {{monitoringUtilization}} -->
 			<div class="well col-sm-12">
-				<!-- <div ng-repeat="measure in measures">
-					<strong>{{measure.government_EN_t}}</strong> |
-					<strong>{{measure.title_t}}</strong>
-					| {{measure.status_EN_t}} | {{measure.type_EN_t}} | {{measure.jurisdiction_EN_t}} |
-					<span ng-show="measure.adoption_dt">Adopted on </span>
-					<span ng-show="measure.entryIntoForce_dt">Entry into force on </span>
-					<span ng-show="measure.retired_dt">Retired on </span>
-					{{(measure.adoption_dt ||measure.entryIntoForce_dt || measure.retired_dt)|formatDate}}
-					<span ng-show="measure.limitedApplication_dt"> - {{measure.limitedApplication_dt|formatDate}}</span>
+				<div class="table">
 
-					<div class="row" style="padding-left:2%">
-						<div class="col-sm-12">
-							<div ng-repeat="amended in measure.document.amendedMeasures">
-								<b>Amended </b>{{amended.measure.title|lstring:locale}} | {{amended.measure.status|term}} | {{amended.measure.type|term}} | {{amended.measure.jurisdiction|term}}
+					<div class="row" style="padding:1% 2% 0 2%">
+						<div class="col-lg-12">
+							<div class="pull-right control-group">
+								Group Matrix by
+								<div class="btn-group">
+									<button style="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="btnGroupBy">
+										<span ng-show="matrixGroupBy==''" style="color:#428BCA" ng-class="">None</span>
+										<span ng-show="matrixGroupBy=='jurisdiction'" style="color:#428BCA" ng-class="">Jurisdiction</span>
+										<span ng-show="matrixGroupBy=='status'" style="color:#428BCA">Status</span>
+										<span ng-show="matrixGroupBy=='type'" style="color:#428BCA">Type</span>
+										<span class="caret"></span>
+									</button>
+									<ul class="dropdown-menu" style="max-height:400px;overflow-y:auto;text-align:left">
+										<li>
+											<a style="color:#999;" ng-href="#" ng-click="matrixGroupBy=''" value="null" ng-model="matrixGroupBy" name="matrixGroupBy">clear selection</a>
+										</li>
+										<li>
+											<a ng-href="#" ng-click="matrixGroupBy='jurisdiction'" ng-model="matrixGroupBy" name="matrixGroupBy">
+												<span ng-show="matrixGroupBy=='jurisdiction'" class="glyphicon glyphicon-ok"></span>Jurisdiction</a>
+										</li>
+										<li>
+											<a ng-href="#" ng-click="matrixGroupBy='status'" ng-model="matrixGroupBy" name="matrixGroupBy">
+												<span ng-show="matrixGroupBy=='status'" class="glyphicon glyphicon-ok"></span>Status</a>
+										</li>
+										<li>
+											<a ng-href="#" ng-click="matrixGroupBy='type'" ng-model="matrixGroupBy" name="matrixGroupBy">
+												<span ng-show="matrixGroupBy=='type'" class="glyphicon glyphicon-ok"></span>Type</a>
+										</li>
+
+									</ul>
+								</div>
 							</div>
-							<div ng-repeat="amended in measure.document.linkedMeasures">
-								<b>Related </b>{{amended.measure.title|lstring:locale}} | {{amended.measure.status|term}} | {{amended.measure.type|term}} | {{amended.measure.jurisdiction|term}}
-							</div>
+
+							<div km-select multiple ng-model="msrJurisdiction" binding-type="string" placeholder="Jurisdictions" items="options.jurisdiction()"></div>
+							<div km-select multiple ng-model="msrStatus" binding-type="string" placeholder="Status" items="options.status()"></div>
+							<div km-select multiple ng-model="msrType" binding-type="string" placeholder="Types" items="options.typeOfDocuments()"></div>
 						</div>
 					</div>
-				</div> -->
-				<div class="table" >
-					<div class="col-sm-12">
-						<table class="table table-bordered matrixTable">
-							<tr>
-								<th class="tableCell">
-									<table class="table">
-										<tr>
-											<th class="matrixheaderColumn rightBorder ">Element of the measure</th>
-											<th style="width:48.99%">
-														Covered by the following articles and sections
-												</table>
-											</th>
-										</tr>
-									</table>
-								</th>
-							</tr>
-						</table>
+					<div class="row" style="padding:1% 2% 0 2%">
+						<div class="col-sm-12" >
+							<span ng-show="!groupedMeasures">
+								<i class="fa fa-spinner fa-spin fa-5x" />
+							</span>
+							<table class="table table-bordered matrixTable" ng-show="groupedMeasures">
+								<tr>
+									<th class="tableCell">
+										<table class="table">
+											<tr>
+												<th class="matrixheaderColumn rightBorder ">Element of the measure</th>
+												<th style="width:48.99%">
+													Covered by the following articles and sections</th>
+											</tr>
+										</table>
+									</th>
+								</tr>
+							</table>
+						</div>
 					</div>
-				</div>
-				<div class="table" ng-repeat="jurisdiction in groupedMeasures">
-					<div class="col-sm-12">
-						<strong>{{jurisdiction.measures[0].jurisdiction_EN_t}}
-						 {{jurisdiction.measures[0].document.jurisdictionName|lstring}}</strong>
-						<table class="table table-bordered matrixTable">
-							<tr >
-								<td class="tableCell">
-									<div measure-matrix-elements name="absMeasures" type="multiple" ng-model="noModel"
-										locales="measures[0].document.header.languages" document="jurisdiction.measures"></div>
-								</td>
-							</tr>
-						</table>
-						{{jurisdiction.length}}
+
+					<div class="table" ng-repeat="jurisdiction in groupedMeasures">
+						<div class="col-sm-12">
+							<div class="panel panel-primary">
+								<div class="panel-heading">
+									<h3 class="panel-title" ng-if="matrixGroupBy=='jurisdiction'">
+										{{jurisdiction.measures[0].jurisdiction_EN_t}} {{jurisdiction.measures[0].document.jurisdictionName|lstring}}
+									</h3>
+									<h3 class="panel-title" ng-if="matrixGroupBy=='type'">
+										{{jurisdiction.measures[0].type_EN_t}}
+									</h3>
+									<h3 class="panel-title" ng-if="matrixGroupBy=='status'">
+										{{jurisdiction.measures[0].status_EN_t}}
+									</h3>
+								</div>
+								<div class="panel-body">
+									<!-- <table class="table table-bordered matrixTable">
+  								<tr >
+  									<td class="tableCell"> -->
+									<div measure-matrix-elements name="absMeasures" type="multiple" ng-model="noModel" locales="measures[0].document.header.languages" document="jurisdiction.measures"></div>
+									<!-- </td>
+  								</tr>
+  							</table> -->
+								</div>
+							</div>
+
+						</div>
 					</div>
-				</div>
-				<!-- <div measure-matrix-elements name="absMeasures" type="multiple" ng-model="noModel"
+					<!-- <div measure-matrix-elements name="absMeasures" type="multiple" ng-model="noModel"
 					locales="measures[0].document.header.languages" document="measures"></div> -->
+				</div>
 			</div>
 		</div>
 	</div>
-</div>

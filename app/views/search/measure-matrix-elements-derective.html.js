@@ -1,4 +1,4 @@
-define(['app', 'underscore'], function(app, _) {
+define(['app', 'underscore','/app/js/common.js'], function(app, _) {
 
     app.directive("measureMatrixElements", function() {
         return {
@@ -29,8 +29,8 @@ define(['app', 'underscore'], function(app, _) {
 
 
             },
-            controller: ["$scope", "$q", "Thesaurus", "Enumerable", "$http", "guid",
-            function($scope, $q, thesaurus, Enumerable, $http, guid) {
+            controller: ["$scope", "$q", "Thesaurus", "Enumerable", "$http", "guid","commonjs","$element",
+            function($scope, $q, thesaurus, Enumerable, $http, guid, commonjs, $element) {
 
                 $scope.termsFn = function(){  return  [
                        {
@@ -835,36 +835,33 @@ define(['app', 'underscore'], function(app, _) {
                                 if ($scope.document.amendedMeasures) {
 
                                     var amendedMeasures = _.map($scope.document.amendedMeasures, function(item) {
-                                        return $http.get('/api/v2013/documents/' + item.identifier)
+                                        return $http.get('/api/v2013/documents/' + item.identifier);
                                     })
                                     $q.all(amendedMeasures)
                                         .then(function(data) {
-                                            data.forEach(function(measure) {
+                                            return data.forEach(function(measure) {
                                                 appendElementMeasure(measure.data, $scope.terms);
                                                 return;
                                             });
                                         })
                                         .then(function(data) {
                                             buildTree();
-                                            updateProperties($scope.rootTerms, 1)
+                                            updateProperties($scope.rootTerms, 1);
                                         });
                                 } else {
-                                    $.when($scope.init())
-                                    .then(function(){
                                         buildTree();
-                                    });
+                                        updateProperties($scope.rootTerms, 1);
                                 }
                             }
                             else if ($.isArray($scope.document)){
 
                                 _.each($scope.document, function(measure){
                                     addMeasureToElements(measure.document ? measure.document : measure);
-
-                                        buildTree();
-                                        updateProperties($scope.rootTerms, 1);
+                                    buildTree();
+                                    updateProperties($scope.rootTerms, 1);
 
                                 });
-                                console.log($scope.terms, $scope.rootTerms,existing);
+                                // console.log($scope.terms, $scope.rootTerms,existing);
                             }
                         });
                     }
@@ -915,13 +912,13 @@ define(['app', 'underscore'], function(app, _) {
                 function addMeasureToElements(measure) {
                     if($scope.type=='multiple'){
                         _.forEach(measure.absMeasures, function(measureElement) {
-                            newElement(measureElement, measure);
+                            newMeasureElement(measureElement, measure);
                         });
                     }
                     _.forEach(measure.linkedMeasures, function(measureElement) {
                         if(measureElement.measure)
                             _.forEach(measureElement.measure.absMeasures, function(element) {
-                                newElement(element, measureElement.measure, 'linked', measure.header.identifier);
+                                newMeasureElement(element, measureElement.measure, 'linked', measure.header.identifier);
                             });
 
                     });
@@ -933,7 +930,7 @@ define(['app', 'underscore'], function(app, _) {
                     // });
                 }
                 var existing = [];
-                function newElement(measureElement, measure, type, parentMeasure){
+                function newMeasureElement(measureElement, measure, type, parentMeasure){
 
                     var element = _.findWhere($scope.terms, {'identifier': measureElement.identifier});
 
@@ -1005,35 +1002,7 @@ define(['app', 'underscore'], function(app, _) {
                             $scope.sections[elementMeasure.identifier] = measureElement.section||{};
                         }
                     });
-                    console.log(terms);
-                }
-
-                $scope.isMeasure = function(entity) {
-                    return entity && _.findWhere($scope.terms, {
-                        identifier: entity.identifier
-                    }).measureIdentifier;
-                }
-
-                $scope.hasMeasure = function(entity) {
-
-                    if (!entity)
-                        return false;
-
-                    if (!entity.hasMeasure === undefined)
-                        return entity.hasMeasure;
-
-                    if (!entity.narrowerTerms) {
-                        entity.hasMeasure = false;
-                        return entity.hasMeasure;
-                    }
-
-                    entity.hasMeasure = _.some($scope.terms, function(item) {
-                        return item.measureIdentifier && _.findWhere(item.broaderTerms, {
-                            identifier: entity.identifier
-                        });
-                    });
-
-                    return entity.hasMeasure;
+                    // console.log(terms);
                 }
 
                 function updateProperties(terms, level) {
@@ -1047,6 +1016,11 @@ define(['app', 'underscore'], function(app, _) {
 
                         if (element.measureIdentifier) {
                             term.isMeasure = true;
+                            term.measure = {};
+                            var doc = _.find($scope.document , function(measure){return measure.document.header.identifier==element.measureIdentifier;});
+                            term.measure = {identifier: doc.document.header.identifier,government : doc.document.government,
+                                            documentID:commonjs.hexToInteger(doc.id),type: doc.document.header.schema};
+
                             _.map(term.broaderTerms, function(brTerm) {
                                 brTerm.hasMeasure = true;
                             });
@@ -1071,9 +1045,11 @@ define(['app', 'underscore'], function(app, _) {
                     });
                 }
 
-
+                $scope.showHideNode = function(elementId){
+                    $element.find('#'+elementId).toggle();
+                };
             }]
-        }
+        };
     });
 
 

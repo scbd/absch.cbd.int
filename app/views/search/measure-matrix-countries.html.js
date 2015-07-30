@@ -1,10 +1,17 @@
-define(['app', 'underscore',
+define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters', 'scbd-angularjs-controls',
         '/app/views/search/measure-matrix-elements-derective.html.js'], function(app, _) {
 
-    app.controller('countryMatrixController', ['$scope', '$http', 'realm', '$q', '$filter', '$routeParams','$filter',
-        function($scope, $http, realm, $q, $filter, $routeParams, $filter) {
+    app.controller('countryMatrixController', ['$scope', '$http', 'realm', '$q', '$filter', '$routeParams',
+        function($scope, $http, realm, $q, $filter, $routeParams) {
 
-
+            $scope.options  = {
+               jurisdiction             : function () { return $http.get("/api/v2013/thesaurus/domains/7A56954F-7430-4B8B-B733-54B8A5E7FF40/terms",  { cache: true })
+                                                                    .then(function(o){ return $scope.updateFacets($scope.measure, 'jurisdiction_s',o.data); }); },
+               status                   : function () { return $http.get("/api/v2013/thesaurus/domains/ED7CDBD8-7762-4A84-82DD-30C01458A799/terms",  { cache: true })
+                                                                    .then(function(o){ return $scope.updateFacets($scope.measure,'status_s',o.data) }); },
+               typeOfDocuments          : function () { return $http.get("/api/v2013/thesaurus/domains/144CF550-7629-43F3-817E-CACDED34837E/terms",  { cache: true })
+                                                                    .then(function(o){ return $scope.updateFacets($scope.measure,'type_s',o.data) }); }
+            };
 
             $scope.currentPage = 0;
             $scope.itemsPerPage = 1000;
@@ -35,18 +42,7 @@ define(['app', 'underscore',
                                 //measure.isLoading=false;
                                 console.log('done');
                                 $scope.measures = measuresData;
-
-                                var grpMeasures = _.groupBy($scope.measures, function(measure){
-                                    return measure.document.jurisdiction.identifier +  (measure.document.jurisdictionName ? '#' + $filter('lstring')(measure.document.jurisdictionName) : '');
-                                });
-                                $scope.groupedMeasures = _.map(grpMeasures, function(group,key){
-                                    //console.log(key);
-                                    return {
-                                            jurisdiction:key,
-                                            measures:group
-                                            };
-                                });
-                                console.log(($scope.groupedMeasures));
+                                $scope.matrixGroupBy = 'jurisdiction';
 
                             });
 
@@ -116,7 +112,104 @@ define(['app', 'underscore',
                   return jurisdictions;
                 });
             }
+
+            function groupRecords(field){
+
+                var filteredRecords = [];
+
+                filteredRecords = _.filter($scope.measures, function(measure){
+
+
+                    return (!$scope.msrJurisdiction ||
+                             _.some($scope.msrJurisdiction,function(jurisdiction){
+                                    return jurisdiction ==  measure.document.jurisdiction.identifier;
+                            })
+                        )
+                    &&
+                        (!$scope.msrType ||
+                             _.some($scope.msrType,function(type){
+                                    return type ==  measure.document.type.identifier;
+                            })
+                        )
+                    &&
+                        (!$scope.msrStatus ||
+                             _.some($scope.msrStatus,function(status){
+                                    return status ==  measure.document.status.identifier;
+                            })
+                        );
+                });
+
+                var grpMeasures = _.groupBy(filteredRecords, function(measure){
+                    if(field=='status')
+                        return measure.document.status.identifier;
+                    if(field=='type')
+                        return measure.document.type.identifier;
+                        console.log(measure);
+                    //user jurisdiction field for else
+                    return measure.document.jurisdiction.identifier +  (measure.document.jurisdictionName ? '#' + $filter('lstring')(measure.document.jurisdictionName) : '');
+                });
+                $scope.groupedMeasures = _.map(grpMeasures, function(group,key){
+                    //console.log(key);
+                    return {
+                            jurisdiction:key,
+                            measures:group
+                            };
+                });
+            }
+
+            $scope.$watch('matrixGroupBy', function(newVal){
+                if(newVal){
+                    groupRecords(newVal);
+                }
+            });
+            $scope.$watch('msrJurisdiction',filterRecords);
+            $scope.$watch('msrType',filterRecords);
+            $scope.$watch('msrStatus',filterRecords);
+            function filterRecords(newVal, oldVal){
+                if(!newVal && !oldVal)
+                    return;
+                groupRecords($scope.matrixGroupBy);
+            }
+
+            $scope.updateFacets = function(schema,fieldName,data){
+
+                var facets = $scope.facets[fieldName];
+                if(!facets)
+                    return data;
+
+                for (var i = 0; i < facets.length; i+=2) {
+                   var item =  _.where(data,{identifier:facets[i]});
+
+                   if(item.length>0){
+                       item[0].metadata = {facet : facets[i+1]};
+                        item[0].title.en += ' (' + facets[i+1] + ')';
+                    }
+                }
+                return data;
+            };
+
+            function loadSchemaFacets(){
+
+                    var queryFacetsParameters = {
+                            'q': 'realm_ss:' + realm.value.toLowerCase() + ' AND NOT version_s:* AND schema_s:measure AND government_s:'+ $routeParams.code.toLowerCase(),
+                            'fl': '',       //fields for results.
+                            'wt': 'json',
+                            'rows': 0,      //limit
+                            'facet': true,  //get counts back
+                            'facet.field': ['jurisdiction_s', 'type_s', 'status_s'],
+                            'facet.mincount' : 1,
+                            'facet.limit': 512
+                        };
+
+                        $http.get('/api/v2013/index/select', { params: queryFacetsParameters })
+                        .success(function (data) {
+                            $scope.facets = data.facet_counts.facet_fields;
+                            console.log(($scope.facets));
+                        });
+            }
+            loadSchemaFacets();
             jurisdictions();
+
         }
     ]);
 
