@@ -181,7 +181,6 @@ define(['app','linqjs', 'angular-localizer',
 
     if($routeParams.document_type){ //this is used to highlight the item on the left
       $scope.document_type = $filter("mapSchema")($routeParams.document_type);
-	  console.log(breadcrumbs);
 	  breadcrumbs.options = {'document_type': $filter("schemaName")($scope.document_type)};
 	}
     $scope.msg="";
