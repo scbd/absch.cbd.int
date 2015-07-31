@@ -56,11 +56,11 @@
 		                        <div class="km-value">{{document.question3.challengesInfo | lstring:locale}}</div>
 		                </div>
 						<div ng-show="document.question3.documentReferenceIDs">
-                			<label>Links to related information</label>
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
 									<li ng-repeat="reference in document.question3.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 
@@ -71,7 +71,7 @@
 
 				<div>
 					<label>4. Has your country taken legislative, administrative and policy measures on ABS?</label>
-					<ul>
+					<ul>document.question4.documentReferenceIDs: {{document.question4.documentReferenceIDs}}
 						<div class="km-value km-pre">{{conditionalBooleanToText(document.question3.answer,document.question4.answer)}}</div>
 						<div ng-show="document.question4.additionalInfo">
 							<label>Further information</label>
@@ -82,11 +82,11 @@
 							<div class="km-value">{{document.question4.challengesInfo | lstring:locale}}</div>
 						</div>
 						<div ng-show="document.question4.documentReferenceIDs">
-                			<label>Links to related information</label>
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
 									<li ng-repeat="reference in document.question4.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 
@@ -108,11 +108,11 @@
 							<div class="km-value">{{document.question5.furtherInfo | lstring:locale}}</div>
 						</div>
 						<div ng-show="document.question5.documentReferenceIDs">
-                			<label>Links to related information</label>
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
 									<li ng-repeat="reference in document.question5.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 
@@ -134,11 +134,11 @@
 							<div class="km-value">{{document.question6.furtherInfo | lstring:locale}}</div>
 						</div>
 						<div ng-show="document.question6.documentReferenceIDs">
-                			<label>Links to related information</label>
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
 									<li ng-repeat="reference in document.question6.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 
@@ -161,11 +161,11 @@
 							<div class="km-value">{{document.question7.furtherInfo | lstring:locale}}</div>
 						</div>
 						<div ng-show="document.question7.documentReferenceIDs">
-                			<label>Links to related information</label>
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
 									<li ng-repeat="reference in document.question7.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 
@@ -184,11 +184,11 @@
 							<div class="km-value">{{document.question8.furtherInfo | lstring:locale}}</div>
 						</div>
 						<div ng-show="document.question8.documentReferenceIDs">
-                			<label>Links to related information</label>
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
 									<li ng-repeat="reference in document.question8.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 
@@ -210,11 +210,11 @@
 							<div class="km-value">{{document.question9.furtherInfo | lstring:locale}}</div>
 						</div>
 						<div ng-show="document.question9.documentReferenceIDs">
-                			<label>Links to related information</label>
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
 									<li ng-repeat="reference in document.question9.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 
@@ -232,11 +232,11 @@
 							<div class="km-value">{{document.question10.challengesInfo | lstring:locale}}</div>
 						</div>
 						<div ng-show="document.question10.documentReferenceIDs">
-                			<label>Links to related information</label>
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
 									<li ng-repeat="reference in document.question10.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 
@@ -277,11 +277,11 @@
 									<div class="km-value">{{document.question11.furtherInfo | lstring:locale}}</div>
 								</div>
 								<div ng-show="document.question11.documentReferenceIDs">
-		                			<label>Links to related information</label>
+		                			<label>Please select the clearing-house record number containing relevant information</label>
 									<div class="km-value">
 										<ul>
 											<li ng-repeat="reference in document.question11.documentReferenceIDs">
-												<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+												<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 											</li>
 										</ul>
 
@@ -299,11 +299,11 @@
 									<div class="km-value">{{document.question12.furtherInfo | lstring:locale}}</div>
 								</div>
 								<div ng-show="document.question12.documentReferenceIDs">
-		                			<label>Links to related information</label>
+		                			<label>Please select the clearing-house record number containing relevant information</label>
 									<div class="km-value">
 										<ul>
 											<li ng-repeat="reference in document.question12.documentReferenceIDs">
-												<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+												<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 											</li>
 										</ul>
 
@@ -321,11 +321,11 @@
 									<div class="km-value">{{document.question13.furtherInfo | lstring:locale}}</div>
 								</div>
 								<div ng-show="document.question13.documentReferenceIDs">
-		                			<label>Links to related information</label>
+		                			<label>Please select the clearing-house record number containing relevant information</label>
 									<div class="km-value">
 										<ul>
 											<li ng-repeat="reference in document.question13.documentReferenceIDs">
-												<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+												<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 											</li>
 										</ul>
 
@@ -343,11 +343,11 @@
 									<div class="km-value">{{document.question14.furtherInfo | lstring:locale}}</div>
 								</div>
 								<div ng-show="document.question14.documentReferenceIDs">
-		                			<label>Links to related information</label>
+		                			<label>Please select the clearing-house record number containing relevant information</label>
 									<div class="km-value">
 										<ul>
 											<li ng-repeat="reference in document.question14.documentReferenceIDs">
-												<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+												<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 											</li>
 										</ul>
 
@@ -365,11 +365,11 @@
 									<div class="km-value">{{document.question15.furtherInfo | lstring:locale}}</div>
 								</div>
 								<div ng-show="document.question15.documentReferenceIDs">
-		                			<label>Links to related information</label>
+		                			<label>Please select the clearing-house record number containing relevant information</label>
 									<div class="km-value">
 										<ul>
 											<li ng-repeat="reference in document.question15.documentReferenceIDs">
-												<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+												<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 											</li>
 										</ul>
 
@@ -388,11 +388,11 @@
 									<div class="km-value">{{document.question16.furtherInfo | lstring:locale}}</div>
 								</div>
 								<div ng-show="document.question16.documentReferenceIDs">
-		                			<label>Links to related information</label>
+		                			<label>Please select the clearing-house record number containing relevant information</label>
 									<div class="km-value">
 										<ul>
 											<li ng-repeat="reference in document.question16.documentReferenceIDs">
-												<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+												<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 											</li>
 										</ul>
 
@@ -410,11 +410,11 @@
 									<div class="km-value">{{document.question17.furtherInfo | lstring:locale}}</div>
 								</div>
 								<div ng-show="document.question17.documentReferenceIDs">
-		                			<label>Links to related information</label>
+		                			<label>Please select the clearing-house record number containing relevant information</label>
 									<div class="km-value">
 										<ul>
 											<li ng-repeat="reference in document.question17.documentReferenceIDs">
-												<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+												<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 											</li>
 										</ul>
 
@@ -473,11 +473,11 @@
 									<div class="km-value">{{document.question18.furtherInfo | lstring:locale}}</div>
 								</div>
 								<div ng-show="document.question18.documentReferenceIDs">
-		                			<label>Links to related information</label>
+		                			<label>Please select the clearing-house record number containing relevant information</label>
 									<div class="km-value">
 										<ul>
 											<li ng-repeat="reference in document.question18.documentReferenceIDs">
-												<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+												<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 											</li>
 										</ul>
 
@@ -495,11 +495,11 @@
 									<div class="km-value">{{document.question19.challengesInfo | lstring:locale}}</div>
 								</div>
 								<div ng-show="document.question19.documentReferenceIDs">
-		                			<label>Links to related information</label>
+		                			<label>Please select the clearing-house record number containing relevant information</label>
 									<div class="km-value">
 										<ul>
 											<li ng-repeat="reference in document.question19.documentReferenceIDs">
-												<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+												<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 											</li>
 										</ul>
 
@@ -532,11 +532,11 @@
 									<div class="km-value">{{document.question20.furtherInfo | lstring:locale}}</div>
 								</div>
 								<div ng-show="document.question20.documentReferenceIDs">
-		                			<label>Links to related information</label>
+		                			<label>Please select the clearing-house record number containing relevant information</label>
 									<div class="km-value">
 										<ul>
 											<li ng-repeat="reference in document.question20.documentReferenceIDs">
-												<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+												<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 											</li>
 										</ul>
 
@@ -554,11 +554,11 @@
 									<div class="km-value">{{document.question21.furtherInfo | lstring:locale}}</div>
 								</div>
 								<div ng-show="document.question21.documentReferenceIDs">
-		                			<label>Links to related information</label>
+		                			<label>Please select the clearing-house record number containing relevant information</label>
 									<div class="km-value">
 										<ul>
 											<li ng-repeat="reference in document.question21.documentReferenceIDs">
-												<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+												<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 											</li>
 										</ul>
 
@@ -576,11 +576,11 @@
 									<div class="km-value">{{document.question22.furtherInfo | lstring:locale}}</div>
 								</div>
 								<div ng-show="document.question22.documentReferenceIDs">
-		                			<label>Links to related information</label>
+		                			<label>Please select the clearing-house record number containing relevant information</label>
 									<div class="km-value">
 										<ul>
 											<li ng-repeat="reference in document.question22.documentReferenceIDs">
-												<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+												<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 											</li>
 										</ul>
 
@@ -598,11 +598,11 @@
 									<div class="km-value">{{document.question23.challengesInfo | lstring:locale}}</div>
 								</div>
 								<div ng-show="document.question23.documentReferenceIDs">
-		                			<label>Links to related information</label>
+		                			<label>Please select the clearing-house record number containing relevant information</label>
 									<div class="km-value">
 										<ul>
 											<li ng-repeat="reference in document.question23.documentReferenceIDs">
-												<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+												<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 											</li>
 										</ul>
 
@@ -659,11 +659,11 @@
 									<div class="km-value">{{document.question24.furtherInfo | lstring:locale}}</div>
 								</div>
 								<div ng-show="document.question24.documentReferenceIDs">
-		                			<label>Links to related information</label>
+		                			<label>Please select the clearing-house record number containing relevant information</label>
 									<div class="km-value">
 										<ul>
 											<li ng-repeat="reference in document.question24.documentReferenceIDs">
-												<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+												<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 											</li>
 										</ul>
 
@@ -696,11 +696,11 @@
 									<div class="km-value">{{document.question25.furtherInfo | lstring:locale}}</div>
 								</div>
 								<div ng-show="document.question25.documentReferenceIDs">
-		                			<label>Links to related information</label>
+		                			<label>Please select the clearing-house record number containing relevant information</label>
 									<div class="km-value">
 										<ul>
 											<li ng-repeat="reference in document.question25.documentReferenceIDs">
-												<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+												<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 											</li>
 										</ul>
 
@@ -734,11 +734,11 @@
 									<div class="km-value">{{document.question26.furtherInfo | lstring:locale}}</div>
 								</div>
 								<div ng-show="document.question26.documentReferenceIDs">
-		                			<label>Links to related information</label>
+		                			<label>Please select the clearing-house record number containing relevant information</label>
 									<div class="km-value">
 										<ul>
 											<li ng-repeat="reference in document.question26.documentReferenceIDs">
-												<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+												<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 											</li>
 										</ul>
 
@@ -788,11 +788,11 @@
 									<div class="km-value">{{document.question28.furtherInfo | lstring:locale}}</div>
 								</div>
 								<div ng-show="document.question28.documentReferenceIDs">
-		                			<label>Links to related information</label>
+		                			<label>Please select the clearing-house record number containing relevant information</label>
 									<div class="km-value">
 										<ul>
 											<li ng-repeat="reference in document.question28.documentReferenceIDs">
-												<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+												<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 											</li>
 										</ul>
 
@@ -814,11 +814,11 @@
 									<div class="km-value">{{document.question29.furtherInfo | lstring:locale}}</div>
 								</div>
 								<div ng-show="document.question29.documentReferenceIDs">
-		                			<label>Links to related information</label>
+		                			<label>Please select the clearing-house record number containing relevant information</label>
 									<div class="km-value">
 										<ul>
 											<li ng-repeat="reference in document.question29.documentReferenceIDs">
-												<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+												<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 											</li>
 										</ul>
 
@@ -836,11 +836,11 @@
 									<div class="km-value">{{document.question30.challengesInfo | lstring:locale}}</div>
 								</div>
 								<div ng-show="document.question30.documentReferenceIDs">
-		                			<label>Links to related information</label>
+		                			<label>Please select the clearing-house record number containing relevant information</label>
 									<div class="km-value">
 										<ul>
 											<li ng-repeat="reference in document.question30.documentReferenceIDs">
-												<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+												<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 											</li>
 										</ul>
 
@@ -873,11 +873,11 @@
 									<div class="km-value">{{document.question31.furtherInfo | lstring:locale}}</div>
 								</div>
 								<div ng-show="document.question31.documentReferenceIDs">
-		                			<label>Links to related information</label>
+		                			<label>Please select the clearing-house record number containing relevant information</label>
 									<div class="km-value">
 										<ul>
 											<li ng-repeat="reference in document.question31.documentReferenceIDs">
-												<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+												<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 											</li>
 										</ul>
 
@@ -895,11 +895,11 @@
 									<div class="km-value">{{document.question32.furtherInfo | lstring:locale}}</div>
 								</div>
 								<div ng-show="document.question32.documentReferenceIDs">
-		                			<label>Links to related information</label>
+		                			<label>Please select the clearing-house record number containing relevant information</label>
 									<div class="km-value">
 										<ul>
 											<li ng-repeat="reference in document.question32.documentReferenceIDs">
-												<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+												<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 											</li>
 										</ul>
 
@@ -924,11 +924,11 @@
 									<div class="km-value">{{document.question33.mechanisms.furtherInfo | lstring:locale}}</div>
 								</div>
 								<div ng-show="document.question33.documentReferenceIDs">
-		                			<label>Links to related information</label>
+		                			<label>Please select the clearing-house record number containing relevant information</label>
 									<div class="km-value">
 										<ul>
 											<li ng-repeat="reference in document.question33.documentReferenceIDs">
-												<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+												<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 											</li>
 										</ul>
 
@@ -946,11 +946,11 @@
 									<div class="km-value">{{document.question34.challengesInfo | lstring:locale}}</div>
 								</div>
 								<div ng-show="document.question34.documentReferenceIDs">
-		                			<label>Links to related information</label>
+		                			<label>Please select the clearing-house record number containing relevant information</label>
 									<div class="km-value">
 										<ul>
 											<li ng-repeat="reference in document.question34.documentReferenceIDs">
-												<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+												<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 											</li>
 										</ul>
 
@@ -985,35 +985,68 @@
 							<label>Further information</label>
 							<div class="km-value">{{document.question35.research.furtherInfo | lstring:locale}}</div>
 						</div>
+						<div ng-show="document.question35.research.documentReferenceIDs">
+                			<label>Please select the clearing-house record number containing relevant information</label>
+							<div class="km-value">
+								<ul>
+									<li ng-repeat="reference in document.question35.research.documentReferenceIDs">
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
+									</li>
+								</ul>
+
+							</div>
+						</div>	
 						<label>Paid due regard to cases of present or imminent emergencies that threaten or damage human, animal or plant health as provided in Article 8(b)?</label>
 						<div class="km-value km-pre">{{booleanToText(document.question35.emergencies.answer)}}</div>
 						<div ng-show="document.question35.emergencies.furtherInfo">
 							<label>Further information</label>
 							<div class="km-value">{{document.question35.emergencies.furtherInfo | lstring:locale}}</div>
 						</div>
+						<div ng-show="document.question35.emergencies.documentReferenceIDs">
+                			<label>Please select the clearing-house record number containing relevant information</label>
+							<div class="km-value">
+								<ul>
+									<li ng-repeat="reference in document.question35.emergencies.documentReferenceIDs">
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
+									</li>
+								</ul>
+
+							</div>
+						</div>	
 						<label>Taken into consideration the need for expeditious access to genetic resources and expeditious fair and equitable sharing of benefits arising out of the use of such genetic resources, including access to affordable treatments by those in need, especially, in developing countries as provided in Article 8(b)?</label>
 						<div class="km-value km-pre">{{booleanToText(document.question35.access.answer)}}</div>
 						<div ng-show="document.question35.access.furtherInfo">
 							<label>Further information</label>
 							<div class="km-value">{{document.question35.access.furtherInfo | lstring:locale}}</div>
 						</div>
+						<div ng-show="document.question35.emergencies.access.documentReferenceIDs">
+                			<label>Please select the clearing-house record number containing relevant information</label>
+							<div class="km-value">
+								<ul>
+									<li ng-repeat="reference in document.question35.emergencies.access.documentReferenceIDs">
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
+									</li>
+								</ul>
+
+							</div>
+						</div>	
 						<label>Considered the importance of genetic resources for food and agriculture and their special role for food security as provided in Article 8 (c)? </label>
 						<div class="km-value km-pre">{{booleanToText(document.question35.importance.answer)}}</div>
 						<div ng-show="document.question35.importance.furtherInfo">
 							<label>Further information</label>
 							<div class="km-value">{{document.question35.importance.furtherInfo | lstring:locale}}</div>
 						</div>
-						<div ng-show="document.question35.documentReferenceIDs">
-                			<label>Links to related information</label>
+						<div ng-show="document.question35.emergencies.importance.documentReferenceIDs">
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
-									<li ng-repeat="reference in document.question35.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+									<li ng-repeat="reference in document.question35.emergencies.importance.documentReferenceIDs">
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 
 							</div>
-						</div>	 
+						</div>
 					</ul>
 				</div>
 
@@ -1026,11 +1059,11 @@
 							<div class="km-value">{{document.question36.challengesInfo | lstring:locale}}</div>
 						</div>
 						<div ng-show="document.question36.documentReferenceIDs">
-                			<label>Links to related information</label>
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
 									<li ng-repeat="reference in document.question36.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1062,11 +1095,11 @@
 							<div class="km-value">{{document.question37.furtherInfo | lstring:locale}}</div>
 						</div>
 						<div ng-show="document.question37.documentReferenceIDs">
-                			<label>Links to related information</label>
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
 									<li ng-repeat="reference in document.question37.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1087,11 +1120,11 @@
 										<div class="km-value">{{document.question38.law.furtherInfo | lstring:locale}}</div>
 									</div>
 									<div ng-show="document.question38.law.documentReferenceIDs">
-			                			<label>Links to related information</label>
+			                			<label>Please select the clearing-house record number containing relevant information</label>
 										<div class="km-value">
 											<ul>
 												<li ng-repeat="reference in document.question38.law.documentReferenceIDs">
-													<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+													<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 												</li>
 											</ul>
 
@@ -1123,11 +1156,11 @@
 							<div class="km-value">{{document.question38.furtherInfo | lstring:locale}}</div>
 						</div>
 						<div ng-show="document.question38.documentReferenceIDs">
-                			<label>Links to related information</label>
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
 									<li ng-repeat="reference in document.question38.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1145,11 +1178,11 @@
 							<div class="km-value">{{document.question39.furtherInfo | lstring:locale}}</div>
 						</div>
 						<div ng-show="document.question39.documentReferenceIDs">
-                			<label>Links to related information</label>
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
 									<li ng-repeat="reference in document.question39.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1167,11 +1200,11 @@
 							<div class="km-value">{{document.question40.furtherInfo | lstring:locale}}</div>
 						</div>
 						<div ng-show="document.question40.documentReferenceIDs">
-                			<label>Links to related information</label>
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
 									<li ng-repeat="reference in document.question40.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1189,11 +1222,11 @@
 							<div class="km-value">{{document.question41.furtherInfo | lstring:locale}}</div>
 						</div>
 						<div ng-show="document.question41.documentReferenceIDs">
-                			<label>Links to related information</label>
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
 									<li ng-repeat="reference in document.question41.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1213,6 +1246,17 @@
 			                    	<label>Further information on how your country is supporting the development of community protocols</label>				
 			                    	<div class="km-value">{{document.question42.community.furtherInfo | lstring:locale}}</div>
 			                    </div>
+								<div ng-show="document.question42.community.documentReferenceIDs">
+		                			<label>Please select the clearing-house record number containing relevant information</label>
+									<div class="km-value">
+										<ul>
+											<li ng-repeat="reference in document.question42.community.documentReferenceIDs">
+												<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
+											</li>
+										</ul>
+
+									</div>
+								</div>	 
 							</ul>
 						</div>	
 
@@ -1224,6 +1268,17 @@
 			                    	<label>Further information on how your country is supporting the development of minimum requirements mutually agreed terms</label>
 			                    	<div ng-show="document.question42.mat.furtherInfo" class="km-value">{{document.question42.mat.furtherInfo | lstring:locale}}</div>
 			                    </div>
+								<div ng-show="document.question42.mat.documentReferenceIDs">
+		                			<label>Please select the clearing-house record number containing relevant information</label>
+									<div class="km-value">
+										<ul>
+											<li ng-repeat="reference in document.question42.mat.documentReferenceIDs">
+												<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
+											</li>
+										</ul>
+
+									</div>
+								</div>	 
 		                    </ul>
 						</div>
 
@@ -1235,6 +1290,17 @@
 			                    	<label>Further information on how your country is supporting the development of model contractual clauses</label>
 			                    	<div class="km-value">{{document.question42.mcc.furtherInfo | lstring:locale}}</div>
 			                    </div>
+								<div ng-show="document.question42.mcc.documentReferenceIDs">
+		                			<label>Please select the clearing-house record number containing relevant information</label>
+									<div class="km-value">
+										<ul>
+											<li ng-repeat="reference in document.question42.mcc.documentReferenceIDs">
+												<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
+											</li>
+										</ul>
+
+									</div>
+								</div>	 
 							</ul>
 						</div>	
 					</ul>
@@ -1249,11 +1315,11 @@
 							<div class="km-value">{{document.question43.furtherInfo | lstring:locale}}</div>
 						</div>
 						<div ng-show="document.question43.documentReferenceIDs">
-                			<label>Links to related information</label>
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
 									<li ng-repeat="reference in document.question43.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1271,11 +1337,11 @@
 							<div class="km-value">{{document.question44.challengesInfo | lstring:locale}}</div>
 						</div>
 						<div ng-show="document.question44.documentReferenceIDs">
-                			<label>Links to related information</label>
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
 									<li ng-repeat="reference in document.question44.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1308,11 +1374,11 @@
 							<div class="km-value">{{document.question45.furtherInfo | lstring:locale}}</div>
 						</div>
 						<div ng-show="document.question45.documentReferenceIDs">
-                			<label>Links to related information</label>
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
 									<li ng-repeat="reference in document.question45.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1329,11 +1395,11 @@
 							<div class="km-value">{{document.question46.furtherInfo | lstring:locale}}</div>
 						</div>
 						<div ng-show="document.question46.documentReferenceIDs">
-                			<label>Links to related information</label>
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
 									<li ng-repeat="reference in document.question46.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1351,11 +1417,11 @@
 							<div class="km-value">{{document.question47.challengesInfo | lstring:locale}}</div>
 						</div>
 						<div ng-show="document.question47.documentReferenceIDs">
-                			<label>Links to related information</label>
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
 									<li ng-repeat="reference in document.question47.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1391,11 +1457,11 @@
 							<div class="km-value">{{document.question48.furtherInfo | lstring:locale}}</div>
 						</div>
 						<div ng-show="document.question48.documentReferenceIDs">
-                			<label>Links to related information</label>
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
 									<li ng-repeat="reference in document.question48.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1414,11 +1480,11 @@
 							<div class="km-value">{{document.question49.furtherInfo | lstring:locale}}</div>
 						</div>
 						<div ng-show="document.question49.documentReferenceIDs">
-                			<label>Links to related information</label>
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
 									<li ng-repeat="reference in document.question49.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1436,11 +1502,11 @@
 							<div class="km-value">{{document.question50.challengesInfo | lstring:locale}}</div>
 						</div>
 						<div ng-show="document.question50.documentReferenceIDs">
-                			<label>Links to related information</label>
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
 									<li ng-repeat="reference in document.question50.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1472,11 +1538,11 @@
 							<div class="km-value">{{document.question51.furtherInfo | lstring:locale}}</div>
 						</div>
 						<div ng-show="document.question51.documentReferenceIDs">
-                			<label>Links to related information</label>
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
 									<li ng-repeat="reference in document.question51.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1493,11 +1559,11 @@
 							<div class="km-value">{{document.question52.furtherInfo | lstring:locale}}</div>
 						</div>
 						<div ng-show="document.question52.documentReferenceIDs">
-                			<label>Links to related information</label>
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
 									<li ng-repeat="reference in document.question52.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1514,11 +1580,11 @@
 							<div class="km-value">{{document.question53.challengesInfo | lstring:locale}}</div>
 						</div>
 						<div ng-show="document.question53.documentReferenceIDs">
-                			<label>Links to related information</label>
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
 									<li ng-repeat="reference in document.question53.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1553,12 +1619,34 @@
 									<label>Summary of the measures taken</label>
 									<div class="km-value">{{document.question54.measures.furtherInfo | lstring:locale}}</div>
 								</div>
+								<div ng-show="document.question54.measures.documentReferenceIDs">
+		                			<label>Please select the clearing-house record number containing relevant information</label>
+									<div class="km-value">
+										<ul>
+											<li ng-repeat="reference in document.question54.measures.documentReferenceIDs">
+												<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
+											</li>
+										</ul>
+
+									</div>
+								</div>	 
 							</div>
 						</div>
 						<div ng-show="document.question54.furtherInfo">
 							<label>Further information</label>
 							<div class="km-value">{{document.question54.furtherInfo | lstring:locale}}</div>
 						</div>
+						<div ng-show="document.question54.documentReferenceIDs">
+                			<label>Please select the clearing-house record number containing relevant information</label>
+							<div class="km-value">
+								<ul>
+									<li ng-repeat="reference in document.question54.documentReferenceIDs">
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
+									</li>
+								</ul>
+
+							</div>
+						</div>	 
 					</ul>
 				</div>
 
@@ -1574,12 +1662,34 @@
 									<label>Summary of the measures taken</label>
 									<div class="km-value">{{document.question55.measures.furtherInfo | lstring:locale}}</div>
 								</div>
+								<div ng-show="document.question55.measures.documentReferenceIDs">
+		                			<label>Please select the clearing-house record number containing relevant information</label>
+									<div class="km-value">
+										<ul>
+											<li ng-repeat="reference in document.question55.measures.documentReferenceIDs">
+												<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
+											</li>
+										</ul>
+
+									</div>
+								</div>	 
 							</div>
 						</div>
 						<div ng-show="document.question55.furtherInfo">
 							<label>Further information</label>
 							<div class="km-value">{{document.question55.furtherInfo | lstring:locale}}</div>
 						</div>
+						<div ng-show="document.question55.documentReferenceIDs">
+                			<label>Please select the clearing-house record number containing relevant information</label>
+							<div class="km-value">
+								<ul>
+									<li ng-repeat="reference in document.question55.documentReferenceIDs">
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
+									</li>
+								</ul>
+
+							</div>
+						</div>	 
 					</ul>
 				</div>
 
@@ -1592,11 +1702,11 @@
 							<div class="km-value">{{document.question56.furtherInfo | lstring:locale}}</div>
 						</div>
 						<div ng-show="document.question56.documentReferenceIDs">
-                			<label>Links to related information</label>
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
 									<li ng-repeat="reference in document.question56.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1614,11 +1724,11 @@
 							<div class="km-value">{{document.question57.furtherInfo | lstring:locale}}</div>
 						</div>
 						<div ng-show="document.question57.documentReferenceIDs">
-                			<label>Links to related information</label>
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
 									<li ng-repeat="reference in document.question57.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1636,11 +1746,11 @@
 							<div class="km-value">{{document.question58.challengesInfo | lstring:locale}}</div>
 						</div>
 						<div ng-show="document.question58.documentReferenceIDs">
-                			<label>Links to related information</label>
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
 									<li ng-repeat="reference in document.question58.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1677,11 +1787,11 @@
 							<div class="km-value">{{document.question59.furtherInfo | lstring:locale}}</div>
 						</div>
 						<div ng-show="document.question59.documentReferenceIDs">
-                			<label>Links to related information</label>
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
 									<li ng-repeat="reference in document.question59.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1705,11 +1815,11 @@
 							<div class="km-value">{{document.question60.furtherInfo | lstring:locale}}</div>
 						</div>
 						<div ng-show="document.question60.documentReferenceIDs">
-                			<label>Links to related information</label>
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
 									<li ng-repeat="reference in document.question60.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1735,11 +1845,11 @@
 							<div class="km-value">{{document.question61.furtherInfo | lstring:locale}}</div>
 						</div>
 						<div ng-show="document.question61.documentReferenceIDs">
-                			<label>Links to related information</label>
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
 									<li ng-repeat="reference in document.question61.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1802,11 +1912,11 @@
 							<div class="km-value">{{document.question62.furtherInfo | lstring:locale}}</div>
                         </div>
 						<div ng-show="document.question62.documentReferenceIDs">
-                			<label>Links to related information</label>
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
 									<li ng-repeat="reference in document.question62.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1834,11 +1944,11 @@
 							<div class="km-value">{{document.question63.furtherInfo | lstring:locale}}</div>
                         </div>
 						<div ng-show="document.question63.documentReferenceIDs">
-                			<label>Links to related information</label>
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
 									<li ng-repeat="reference in document.question63.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1852,11 +1962,11 @@
 					<ul>
 						<div class="km-value">{{text(document.question64.furtherInfo) | lstring:locale}}</div>
 						<div ng-show="document.question64.documentReferenceIDs">
-                			<label>Links to related information</label>
+                			<label>Please select the clearing-house record number containing relevant information</label>
 							<div class="km-value">
 								<ul>
 									<li ng-repeat="reference in document.question64.documentReferenceIDs">
-										<a href="/database/record?documentID={{reference | lstring:locale | uniqueID}}">{{reference  | uniqueID}}</a>
+										<a target="_new" ng-href="{{getLink(reference)}}">{{getLink(reference)}}</a>
 									</li>
 								</ul>
 

@@ -12,7 +12,7 @@ app.directive("viewAbsNationalReport", [function () {
 			target  : "@linkTarget",
 			hide	: "@"
 		},
-		controller : ["$scope", function ($scope)
+		controller : ["$scope", "underscore", "commonjs", "$filter", function ($scope, _, commonjs, $filter)
 		{
 
 			//====================
@@ -32,7 +32,7 @@ app.directive("viewAbsNationalReport", [function () {
 		    $scope.booleanToText = function(item) {
 		        if (item===undefined)
 		        	return "No selection made";
-		        
+		        console.log('in booleanToText');
 				return item ? "Yes" :  "No";
 			}
 
@@ -60,6 +60,23 @@ app.directive("viewAbsNationalReport", [function () {
 		        	return "No information provided";
 		        
 				return input;
+			}
+
+
+			//==================================
+		    //
+		    //==================================
+		    $scope.getLink = function(reference) {
+
+		    	if(!reference)
+		    		return;
+
+		        if ((reference.identifier).indexOf("52000000cbd") == 0) {
+					
+		        	return "https://www.cbd.int/kb/record/focalPoint/" + commonjs.hexToInteger(reference.identifier);
+		        }
+		        
+				return  $filter("uniqueIDWithoutRevision")(reference.identifier);;
 			}
 
 		}]

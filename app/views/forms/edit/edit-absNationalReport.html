@@ -24,7 +24,7 @@
         <div workflow-std-buttons document="getCleanDocument()" languages="document.header.languages"  hide-timer="false"/>
                 <div km-document-validation ng-model="validationReport"></div>
 
-        <div class="row">
+        <div class="row" ng-show="tab == 'edit'">
             <div class="col-lg-10 col-md-8 col-sm-7 col-xs-12">
                 <ul class="pagination" id="nrTabs" ng-click="setTab()">
                     <li class="active"><a href="#part1" data-toggle="tab">Part 1</a></li>
@@ -212,6 +212,15 @@
                                         <strong>Please provide further information.</strong>
                                         <div km-textbox-ml rows=4 name="question8FurtherInfo" ng-model="document.question8.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
+
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q8DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                        <div document-selection ng-model="document.question8.documentReferenceIDs"
+                                                                ng-disabled="!document.government || !document.question3.answer"
+                                                                question="question8"
+                                                                government="document.government"
+                                                                country-documents="absDocuments">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -246,9 +255,6 @@
                                         <strong>Please provide a summary of the main difficulties and challenges encountered and answer all the following questions.</strong>
                                         <div km-textbox-ml rows=4 name="question10" ng-model="document.question10.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
-                                    <div class="km-control-group" name="question10RelevantDocuments" caption="Any other relevant documents">
-                                        <div km-link name="question10RelevantDocuments" ng-model="document.question10.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
-                                    </div>
 
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q10DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question10.documentReferenceIDs"
@@ -257,6 +263,9 @@
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
+                                    </div>
+                                    <div class="km-control-group" name="question10RelevantDocuments" caption="Any other relevant documents">
+                                        <div km-link name="question10RelevantDocuments" ng-model="document.question10.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                     </div>
                                 </div>
                             </div>
@@ -478,9 +487,6 @@
                                         <strong>Please provide a summary of the main difficulties and challenges encountered and answer all the following questions.</strong>
                                         <div km-textbox-ml rows=4 name="question19" ng-model="document.question19.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
-                                    <div class="km-control-group" name="question19RelevantDocuments" caption="Any other relevant documents">
-                                        <div km-link name="question19RelevantDocuments" ng-model="document.question19.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
-                                    </div>
 
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q19DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question19.documentReferenceIDs"
@@ -489,6 +495,9 @@
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
+                                    </div>
+                                    <div class="km-control-group" name="question19RelevantDocuments" caption="Any other relevant documents">
+                                        <div km-link name="question19RelevantDocuments" ng-model="document.question19.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                     </div>
                                 </div>
                             </div>
@@ -565,9 +574,6 @@
                                         <strong>Please provide a summary of the main difficulties and challenges encountered and answer all the following questions.</strong>
                                         <div km-textbox-ml rows=4 name="question23" ng-model="document.question23.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
-                                    <div class="km-control-group" name="question23RelevantDocuments" caption="Any other relevant documents">
-                                        <div km-link name="question23RelevantDocuments" ng-model="document.question23.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
-                                    </div>
 
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q23DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question23.documentReferenceIDs"
@@ -576,6 +582,9 @@
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
+                                    </div>
+                                    <div class="km-control-group" name="question23RelevantDocuments" caption="Any other relevant documents">
+                                        <div km-link name="question23RelevantDocuments" ng-model="document.question23.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                     </div>
                                 </div>
                             </div>
@@ -785,9 +794,6 @@
                                         <strong>Please provide a summary of the main difficulties and challenges for putting measures in place:</strong>
                                         <div km-textbox-ml rows=4 name="question30" ng-model="document.question30.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
-                                    <div class="km-control-group" name="question30RelevantDocuments" caption="Any other relevant documents">
-                                        <div km-link name="question30RelevantDocuments" ng-model="document.question30.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
-                                    </div>
 
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q30DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question30.documentReferenceIDs"
@@ -796,6 +802,9 @@
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
+                                    </div>
+                                    <div class="km-control-group" name="question30RelevantDocuments" caption="Any other relevant documents">
+                                        <div km-link name="question30RelevantDocuments" ng-model="document.question30.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                     </div>
                                 </div>
                             </div>
@@ -991,17 +1000,17 @@
                                         <strong>Please provide a summary of the main difficulties and challenges for putting measures in place.</strong>
                                         <div km-textbox-ml rows=4 name="question36" ng-model="document.question36.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
+
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q36DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                        <div document-selection ng-model="document.question36.documentReferenceIDs"
+                                                                ng-disabled="!document.government"
+                                                                question="question36"
+                                                                government="document.government"
+                                                                country-documents="absDocuments">
+                                        </div>
+                                    </div>
                                     <div class="km-control-group" name="question36RelevantDocuments" caption="Any other relevant documents">
                                         <div km-link name="question36RelevantDocuments" ng-model="document.question36.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
-                                    </div>
-                                </div>
-
-                                <div class="km-control-group" style="margin-bottom:20px;" name="q36DocRefs" caption="Please select the clearing-house record number containing relevant information">
-                                    <div document-selection ng-model="document.question36.documentReferenceIDs"
-                                                            ng-disabled="!document.government"
-                                                            question="question36"
-                                                            government="document.government"
-                                                            country-documents="absDocuments">
                                     </div>
                                 </div>
                             </div>
@@ -1234,9 +1243,6 @@
                                         <strong>Please provide a summary of the main difficulties and challenges for putting measures in place in relation to traditional knowledge associated with genetic resources:</strong>
                                         <div ng-disabled="!document.question37.answer" km-textbox-ml rows=4 name="question44" ng-model="document.question44.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
-                                    <div ng-show="document.question37.answer" class="km-control-group" name="question44RelevantDocuments" caption="Any other relevant documents">
-                                        <div km-link name="question44RelevantDocuments" ng-model="document.question44.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
-                                    </div>
 
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q44DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question44.documentReferenceIDs"
@@ -1245,6 +1251,9 @@
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
+                                    </div>
+                                    <div ng-show="document.question37.answer" class="km-control-group" name="question44RelevantDocuments" caption="Any other relevant documents">
+                                        <div km-link name="question44RelevantDocuments" ng-model="document.question44.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                     </div>
                                 </div>
                             </div>
@@ -1298,9 +1307,6 @@
                                         <strong>Please provide a summary of the main difficulties and challenges:</strong>
                                         <div km-textbox-ml rows=4 name="question47" ng-model="document.question47.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
-                                    <div class="km-control-group" name="question47RelevantDocuments" caption="Any other relevant documents">
-                                        <div km-link name="question47RelevantDocuments" ng-model="document.question47.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
-                                    </div>
 
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q47DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question47.documentReferenceIDs"
@@ -1309,6 +1315,9 @@
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
+                                    </div>
+                                    <div class="km-control-group" name="question47RelevantDocuments" caption="Any other relevant documents">
+                                        <div km-link name="question47RelevantDocuments" ng-model="document.question47.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                     </div>
                                 </div>
                             </div>
@@ -1373,9 +1382,6 @@
                                         <strong>Please provide a summary of the main difficulties and challenges:</strong>
                                         <div km-textbox-ml rows=4 name="question50" ng-model="document.question50.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
-                                    <div class="km-control-group" name="question50RelevantDocuments" caption="Any other relevant documents">
-                                        <div km-link name="question50RelevantDocuments" ng-model="document.question50.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
-                                    </div>
 
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q50DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question50.documentReferenceIDs"
@@ -1384,6 +1390,9 @@
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
+                                    </div>
+                                    <div class="km-control-group" name="question50RelevantDocuments" caption="Any other relevant documents">
+                                        <div km-link name="question50RelevantDocuments" ng-model="document.question50.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                     </div>
                                 </div>
                             </div>
@@ -1441,9 +1450,6 @@
                                         <strong>Please provide a summary of the main difficulties and challenges:</strong>
                                         <div km-textbox-ml rows=4 name="question53" ng-model="document.question53.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
-                                    <div class="km-control-group" name="question53RelevantDocuments" caption="Any other relevant documents">
-                                        <div km-link name="question53RelevantDocuments" ng-model="document.question53.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
-                                    </div>
 
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q53DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question53.documentReferenceIDs"
@@ -1452,6 +1458,9 @@
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>
+                                    </div>
+                                    <div class="km-control-group" name="question53RelevantDocuments" caption="Any other relevant documents">
+                                        <div km-link name="question53RelevantDocuments" ng-model="document.question53.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                     </div>
                                 </div>
                             </div>
@@ -1757,7 +1766,7 @@
 
                                     <div class="km-control-group" name="question63FurtherInfo" caption="">
                                         <strong>Use the text entry to provide further information.</strong>
-                                        <div km-textbox-ml rows=4 name="question63FurtherInfo" ng-model="document.question63furtherInfo" locales="document.header.languages" placeholder=""></div>
+                                        <div km-textbox-ml rows=4 name="question63FurtherInfo" ng-model="document.question63.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q63DocRefs" caption="Please select the clearing-house record number containing relevant information">
