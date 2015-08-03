@@ -211,8 +211,8 @@
 
 		<div ng-show="document.absMeasures">
 			<label>Elements of the measure</label>
-				<div class="km-value" >
-					<ul>
+				<div class="km-value" style="border:none">
+					<ul ng-if="false">
 						<li ng-repeat="term in document.absMeasures">{{term|term:locale}}
 							<span ng-show="term.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">
 								: {{document.otherAbsMeasure| lstring:locale}}

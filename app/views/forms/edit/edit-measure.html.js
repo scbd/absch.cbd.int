@@ -15,6 +15,8 @@ define(['app','underscore', '/app/views/forms/edit/edit.js'], function (app,_) {
           $http.get("/api/v2013/thesaurus/domains/50616B56-12F3-4C46-BC43-2DFC26679177/terms", { cache: true }),
           $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })
         ]).then(function(o) {
+          if($scope.development_env)
+            return Measure();
           //TODO: this function appears generic to returning from .all, perhaps cut code by making this function and reusing it?
           var data = o[0].data;
           data.push(o[1].data);
@@ -119,7 +121,7 @@ define(['app','underscore', '/app/views/forms/edit/edit.js'], function (app,_) {
         return undefined;
 
       document = angular.fromJson(angular.toJson(document));
-	
+
 	  if(!document.isAmendment){
 		  document.amendedMeasures = undefined;
 		  document.amendmentsDescriptio = undefined;
@@ -155,7 +157,7 @@ define(['app','underscore', '/app/views/forms/edit/edit.js'], function (app,_) {
 
       if (document.limitedApplication =='')
         document.limitedApplication = undefined;
-		
+
 	  if(document.absMeasures && !_.findWhere(document.absMeasures,{identifier:'5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'}))
 		document.otherAbsMeasure = undefined;
 
@@ -195,293 +197,329 @@ define(['app','underscore', '/app/views/forms/edit/edit.js'], function (app,_) {
                      "nonPreferedTerms": []
                    },
                    {
-                     "identifier": "24E809DA-20F4-4457-9A8A-87C08DF81E8A",
-                     "name": "Scope of the measure",
-                     "title": {
-                       "en": "Scope of the measure"
-                     },
-                     "shortTitle": {},
-                     "description": "",
-                     "source": "",
-                     "broaderTerms": [],
-                     "narrowerTerms": [
-                         "357DBB22-6A6C-4C49-BA1F-037320B09247",
-                         "9C146B09-097E-4CFF-B9CC-D4785496952F",
-                         "33A6BF46-3699-4B5E-A3C0-506FAFDA2D76",
-                         "F9EF6CC8-3709-43D5-839C-1A93A23DE51B",
-                         "http://data.gbif.org/species/13140807",
-                         "2D2CAF72-A892-42CE-87F7-975EFBADAF4F",
-                         "35E029ED-D92F-41C8-9CDC-52F3F35D7E36",
-                         "29C670AB-C198-484F-A2ED-9BAB1DAC7431",
-                         "D570A745-D8C3-4698-BB77-0A90C140F3F2",
-                         "47DD3FF6-D369-4E64-B0BC-5DADF3B70C95",
-                         "9EC60226-A7E4-441E-AC7D-2580F111EC3B",
-                         "507D46E0-DC49-47F0-B273-26ECD9CC8948",
-                         "EAE641FD-6A82-4C15-84CD-0F12ABA5CBC1",
-                         "DFEECF62-EC3D-4F5C-BAC6-2FD308F81277",
-                         "2C87B4AD-684C-48DC-91B7-82938CE37B5A",
-                         "CB918E1A-E171-4C10-BA35-088C81F668A3",
-                         "B8A150E054154AD3AD97856ABD485E90"
-                     ],
-                     "relatedTerms": [],
-                     "nonPreferedTerms": []
-                   },
-                   {
-                     "identifier": "357DBB22-6A6C-4C49-BA1F-037320B09247",
-                     "name": "Plants",
-                     "title": {
-                       "en": "Plants"
-                     },
-                     "shortTitle": {},
-                     "description": "",
-                     "source": "",
-                     "broaderTerms": [
-                       "4E2974DF-216E-46C8-8797-8E3A33D6A048"
-                     ],
-                     "narrowerTerms": [],
-                     "relatedTerms": [],
-                     "nonPreferedTerms": []
-                   },
-                   {
-                     "identifier": "9C146B09-097E-4CFF-B9CC-D4785496952F",
-                     "name": "Animals",
-                     "title": {
-                       "en": "Animals"
-                     },
-                     "shortTitle": {},
-                     "description": "",
-                     "source": "",
-                     "broaderTerms": [
-                       "4E2974DF-216E-46C8-8797-8E3A33D6A048"
-                     ],
-                     "narrowerTerms": [],
-                     "relatedTerms": [],
-                     "nonPreferedTerms": []
-                   },
-                   {
-                     "identifier": "33A6BF46-3699-4B5E-A3C0-506FAFDA2D76",
-                     "name": "Microorganism",
-                     "title": {
-                       "en": "Microorganism"
-                     },
-                     "shortTitle": {},
-                     "description": "This could include, among others, archae, bacteria, fungi, chromista, protozoa and viruses.",
-                     "source": "",
-                     "broaderTerms": [
-                       "4E2974DF-216E-46C8-8797-8E3A33D6A048"
-                     ],
-                     "narrowerTerms": [],
-                     "relatedTerms": [],
-                     "nonPreferedTerms": []
-                   },
-                   {
-                     "identifier": "F9EF6CC8-3709-43D5-839C-1A93A23DE51B",
-                     "name": "Domestic species",
-                     "title": {
-                       "en": "Domestic species"
-                     },
-                     "shortTitle": {},
-                     "description": "",
-                     "source": "",
-                     "broaderTerms": [
-                       "4E2974DF-216E-46C8-8797-8E3A33D6A048"
-                     ],
-                     "narrowerTerms": [],
-                     "relatedTerms": [],
-                     "nonPreferedTerms": []
-                   },
-                   {
-                     "identifier": "http://data.gbif.org/species/13140807",
-                     "name": "Fungi",
-                     "title": {
-                       "en": "Fungi"
-                     },
-                     "shortTitle": {},
-                     "description": "",
-                     "source": "GBIF",
-                     "broaderTerms": [
-                       "4E2974DF-216E-46C8-8797-8E3A33D6A048"
-                     ],
-                     "narrowerTerms": [],
-                     "relatedTerms": [],
-                     "nonPreferedTerms": []
-                   },
-                   {
-                     "identifier": "2D2CAF72-A892-42CE-87F7-975EFBADAF4F",
-                     "name": "Wild species",
-                     "title": {
-                       "en": "Wild species"
-                     },
-                     "shortTitle": {},
-                     "description": "",
-                     "source": "",
-                     "broaderTerms": [
-                       "4E2974DF-216E-46C8-8797-8E3A33D6A048"
-                     ],
-                     "narrowerTerms": [],
-                     "relatedTerms": [],
-                     "nonPreferedTerms": []
-                   },
-                   {
-                     "identifier": "35E029ED-D92F-41C8-9CDC-52F3F35D7E36",
-                     "name": "Agricultural areas",
-                     "title": {
-                       "en": "Agricultural areas"
-                     },
-                     "shortTitle": {},
-                     "description": "",
-                     "source": "",
-                     "broaderTerms": [
-                       "A862ABFC-B97D-4E6A-9A70-812A82A7CC19"
-                     ],
-                     "narrowerTerms": [],
-                     "relatedTerms": [],
-                     "nonPreferedTerms": []
-                   },
-                   {
-                     "identifier": "29C670AB-C198-484F-A2ED-9BAB1DAC7431",
-                     "name": "Dry and sub-humid areas",
-                     "title": {
-                       "en": "Dry and sub-humid areas"
-                     },
-                     "shortTitle": {},
-                     "description": "",
-                     "source": "",
-                     "broaderTerms": [
-                       "A862ABFC-B97D-4E6A-9A70-812A82A7CC19"
-                     ],
-                     "narrowerTerms": [],
-                     "relatedTerms": [],
-                     "nonPreferedTerms": []
-                   },
-                   {
-                     "identifier": "D570A745-D8C3-4698-BB77-0A90C140F3F2",
-                     "name": "Forest",
-                     "title": {
-                       "en": "Forest"
-                     },
-                     "shortTitle": {},
-                     "description": "",
-                     "source": "",
-                     "broaderTerms": [
-                       "A862ABFC-B97D-4E6A-9A70-812A82A7CC19"
-                     ],
-                     "narrowerTerms": [],
-                     "relatedTerms": [],
-                     "nonPreferedTerms": []
-                   },
-                   {
-                     "identifier": "47DD3FF6-D369-4E64-B0BC-5DADF3B70C95",
-                     "name": "Inland waters",
-                     "title": {
-                       "en": "Inland waters"
-                     },
-                     "shortTitle": {},
-                     "description": "",
-                     "source": "",
-                     "broaderTerms": [
-                       "A862ABFC-B97D-4E6A-9A70-812A82A7CC19"
-                     ],
-                     "narrowerTerms": [],
-                     "relatedTerms": [],
-                     "nonPreferedTerms": []
-                   },
-                   {
-                     "identifier": "9EC60226-A7E4-441E-AC7D-2580F111EC3B",
-                     "name": "Islands",
-                     "title": {
-                       "en": "Islands"
-                     },
-                     "shortTitle": {},
-                     "description": "",
-                     "source": "",
-                     "broaderTerms": [
-                       "A862ABFC-B97D-4E6A-9A70-812A82A7CC19"
-                     ],
-                     "narrowerTerms": [],
-                     "relatedTerms": [],
-                     "nonPreferedTerms": []
-                   },
-                   {
-                     "identifier": "507D46E0-DC49-47F0-B273-26ECD9CC8948",
-                     "name": "Marine and coastal areas",
-                     "title": {
-                       "en": "Marine and coastal areas"
-                     },
-                     "shortTitle": {},
-                     "description": "",
-                     "source": "",
-                     "broaderTerms": [
-                       "A862ABFC-B97D-4E6A-9A70-812A82A7CC19"
-                     ],
-                     "narrowerTerms": [],
-                     "relatedTerms": [],
-                     "nonPreferedTerms": []
-                   },
-                   {
-                     "identifier": "EAE641FD-6A82-4C15-84CD-0F12ABA5CBC1",
-                     "name": "Mountains",
-                     "title": {
-                       "en": "Mountains"
-                     },
-                     "shortTitle": {},
-                     "description": "",
-                     "source": "",
-                     "broaderTerms": [
-                       "A862ABFC-B97D-4E6A-9A70-812A82A7CC19"
-                     ],
-                     "narrowerTerms": [],
-                     "relatedTerms": [],
-                     "nonPreferedTerms": []
-                   },
-                   {
-                     "identifier": "DFEECF62-EC3D-4F5C-BAC6-2FD308F81277",
-                     "name": "Protected areas",
-                     "title": {
-                       "en": "Protected areas"
-                     },
-                     "shortTitle": {},
-                     "description": "",
-                     "source": "",
-                     "broaderTerms": [
-                       "A862ABFC-B97D-4E6A-9A70-812A82A7CC19"
-                     ],
-                     "narrowerTerms": [],
-                     "relatedTerms": [],
-                     "nonPreferedTerms": []
-                   },
-                   {
-                     "identifier": "2C87B4AD-684C-48DC-91B7-82938CE37B5A",
-                     "name": "Ex-situ collections",
-                     "title": {
-                       "en": "Ex-situ collections"
-                     },
-                     "shortTitle": {},
-                     "description": "",
-                     "source": "",
-                     "broaderTerms": [
-                       "A862ABFC-B97D-4E6A-9A70-812A82A7CC19"
-                     ],
-                     "narrowerTerms": [],
-                     "relatedTerms": [],
-                     "nonPreferedTerms": []
-                   },
-                   {
-                     "identifier": "CB918E1A-E171-4C10-BA35-088C81F668A3",
-                     "name": "Soil and/or water samples",
-                     "title": {
-                       "en": "Soil and/or water samples"
-                     },
-                     "shortTitle": {},
-                     "description": "",
-                     "source": "",
-                     "broaderTerms": [
-                       "A862ABFC-B97D-4E6A-9A70-812A82A7CC19"
-                     ],
-                     "narrowerTerms": [],
-                     "relatedTerms": [],
-                     "nonPreferedTerms": []
-                   },
+                      "identifier": "24E809DA-20F4-4457-9A8A-87C08DF81E8A",
+                      "name": "Scope of the measure",
+                      "title": {
+                        "en": "Scope of the measure"
+                      },
+                      "shortTitle": {},
+                      "description": "",
+                      "source": "",
+                      "broaderTerms": [],
+                      "narrowerTerms": [
+                        "4E2974DF-216E-46C8-8797-8E3A33D6A048",
+                        "A862ABFC-B97D-4E6A-9A70-812A82A7CC19",
+                        "B8A150E054154AD3AD97856ABD485E90"
+                      ],
+                      "relatedTerms": [],
+                      "nonPreferedTerms": []
+                    },
+                    {
+                      "identifier": "4E2974DF-216E-46C8-8797-8E3A33D6A048",
+                      "name": "Types of organisms",
+                      "title": {
+                        "en": "Types of organisms"
+                      },
+                      "shortTitle": {},
+                      "description": "",
+                      "source": "",
+                      "broaderTerms": [
+                        "24E809DA-20F4-4457-9A8A-87C08DF81E8A"
+                      ],
+                      "narrowerTerms": [
+                        "357DBB22-6A6C-4C49-BA1F-037320B09247",
+                        "9C146B09-097E-4CFF-B9CC-D4785496952F",
+                        "33A6BF46-3699-4B5E-A3C0-506FAFDA2D76",
+                        "F9EF6CC8-3709-43D5-839C-1A93A23DE51B",
+                        "http://data.gbif.org/species/13140807",
+                        "2D2CAF72-A892-42CE-87F7-975EFBADAF4F"
+                      ],
+                      "relatedTerms": [],
+                      "nonPreferedTerms": []
+                    },
+                    {
+                      "identifier": "357DBB22-6A6C-4C49-BA1F-037320B09247",
+                      "name": "Plants",
+                      "title": {
+                        "en": "Plants"
+                      },
+                      "shortTitle": {},
+                      "description": "",
+                      "source": "",
+                      "broaderTerms": [
+                        "4E2974DF-216E-46C8-8797-8E3A33D6A048"
+                      ],
+                      "narrowerTerms": [],
+                      "relatedTerms": [],
+                      "nonPreferedTerms": []
+                    },
+                    {
+                      "identifier": "9C146B09-097E-4CFF-B9CC-D4785496952F",
+                      "name": "Animals",
+                      "title": {
+                        "en": "Animals"
+                      },
+                      "shortTitle": {},
+                      "description": "",
+                      "source": "",
+                      "broaderTerms": [
+                        "4E2974DF-216E-46C8-8797-8E3A33D6A048"
+                      ],
+                      "narrowerTerms": [],
+                      "relatedTerms": [],
+                      "nonPreferedTerms": []
+                    },
+                    {
+                      "identifier": "33A6BF46-3699-4B5E-A3C0-506FAFDA2D76",
+                      "name": "Microorganism",
+                      "title": {
+                        "en": "Microorganism"
+                      },
+                      "shortTitle": {},
+                      "description": "This could include, among others, archae, bacteria, fungi, chromista, protozoa and viruses.",
+                      "source": "",
+                      "broaderTerms": [
+                        "4E2974DF-216E-46C8-8797-8E3A33D6A048"
+                      ],
+                      "narrowerTerms": [],
+                      "relatedTerms": [],
+                      "nonPreferedTerms": []
+                    },
+                    {
+                      "identifier": "F9EF6CC8-3709-43D5-839C-1A93A23DE51B",
+                      "name": "Domestic species",
+                      "title": {
+                        "en": "Domestic species"
+                      },
+                      "shortTitle": {},
+                      "description": "",
+                      "source": "",
+                      "broaderTerms": [
+                        "4E2974DF-216E-46C8-8797-8E3A33D6A048"
+                      ],
+                      "narrowerTerms": [],
+                      "relatedTerms": [],
+                      "nonPreferedTerms": []
+                    },
+                    {
+                      "identifier": "http://data.gbif.org/species/13140807",
+                      "name": "Fungi",
+                      "title": {
+                        "en": "Fungi"
+                      },
+                      "shortTitle": {},
+                      "description": "",
+                      "source": "GBIF",
+                      "broaderTerms": [
+                        "4E2974DF-216E-46C8-8797-8E3A33D6A048"
+                      ],
+                      "narrowerTerms": [],
+                      "relatedTerms": [],
+                      "nonPreferedTerms": []
+                    },
+                    {
+                      "identifier": "2D2CAF72-A892-42CE-87F7-975EFBADAF4F",
+                      "name": "Wild species",
+                      "title": {
+                        "en": "Wild species"
+                      },
+                      "shortTitle": {},
+                      "description": "",
+                      "source": "",
+                      "broaderTerms": [
+                        "4E2974DF-216E-46C8-8797-8E3A33D6A048"
+                      ],
+                      "narrowerTerms": [],
+                      "relatedTerms": [],
+                      "nonPreferedTerms": []
+                    },
+                    {
+                      "identifier": "A862ABFC-B97D-4E6A-9A70-812A82A7CC19",
+                      "name": "Area of access of the genetic resource",
+                      "title": {
+                        "en": "Area of access of the genetic resource"
+                      },
+                      "shortTitle": {},
+                      "description": "",
+                      "source": "",
+                      "broaderTerms": [
+                        "24E809DA-20F4-4457-9A8A-87C08DF81E8A"
+                      ],
+                      "narrowerTerms": [
+                        "35E029ED-D92F-41C8-9CDC-52F3F35D7E36",
+                        "29C670AB-C198-484F-A2ED-9BAB1DAC7431",
+                        "D570A745-D8C3-4698-BB77-0A90C140F3F2",
+                        "47DD3FF6-D369-4E64-B0BC-5DADF3B70C95",
+                        "9EC60226-A7E4-441E-AC7D-2580F111EC3B",
+                        "507D46E0-DC49-47F0-B273-26ECD9CC8948",
+                        "EAE641FD-6A82-4C15-84CD-0F12ABA5CBC1",
+                        "DFEECF62-EC3D-4F5C-BAC6-2FD308F81277",
+                        "2C87B4AD-684C-48DC-91B7-82938CE37B5A",
+                        "CB918E1A-E171-4C10-BA35-088C81F668A3"
+                      ],
+                      "relatedTerms": [],
+                      "nonPreferedTerms": []
+                    },
+                    {
+                      "identifier": "35E029ED-D92F-41C8-9CDC-52F3F35D7E36",
+                      "name": "Agricultural areas",
+                      "title": {
+                        "en": "Agricultural areas"
+                      },
+                      "shortTitle": {},
+                      "description": "",
+                      "source": "",
+                      "broaderTerms": [
+                        "A862ABFC-B97D-4E6A-9A70-812A82A7CC19"
+                      ],
+                      "narrowerTerms": [],
+                      "relatedTerms": [],
+                      "nonPreferedTerms": []
+                    },
+                    {
+                      "identifier": "29C670AB-C198-484F-A2ED-9BAB1DAC7431",
+                      "name": "Dry and sub-humid areas",
+                      "title": {
+                        "en": "Dry and sub-humid areas"
+                      },
+                      "shortTitle": {},
+                      "description": "",
+                      "source": "",
+                      "broaderTerms": [
+                        "A862ABFC-B97D-4E6A-9A70-812A82A7CC19"
+                      ],
+                      "narrowerTerms": [],
+                      "relatedTerms": [],
+                      "nonPreferedTerms": []
+                    },
+                    {
+                      "identifier": "D570A745-D8C3-4698-BB77-0A90C140F3F2",
+                      "name": "Forest",
+                      "title": {
+                        "en": "Forest"
+                      },
+                      "shortTitle": {},
+                      "description": "",
+                      "source": "",
+                      "broaderTerms": [
+                        "A862ABFC-B97D-4E6A-9A70-812A82A7CC19"
+                      ],
+                      "narrowerTerms": [],
+                      "relatedTerms": [],
+                      "nonPreferedTerms": []
+                    },
+                    {
+                      "identifier": "47DD3FF6-D369-4E64-B0BC-5DADF3B70C95",
+                      "name": "Inland waters",
+                      "title": {
+                        "en": "Inland waters"
+                      },
+                      "shortTitle": {},
+                      "description": "",
+                      "source": "",
+                      "broaderTerms": [
+                        "A862ABFC-B97D-4E6A-9A70-812A82A7CC19"
+                      ],
+                      "narrowerTerms": [],
+                      "relatedTerms": [],
+                      "nonPreferedTerms": []
+                    },
+                    {
+                      "identifier": "9EC60226-A7E4-441E-AC7D-2580F111EC3B",
+                      "name": "Islands",
+                      "title": {
+                        "en": "Islands"
+                      },
+                      "shortTitle": {},
+                      "description": "",
+                      "source": "",
+                      "broaderTerms": [
+                        "A862ABFC-B97D-4E6A-9A70-812A82A7CC19"
+                      ],
+                      "narrowerTerms": [],
+                      "relatedTerms": [],
+                      "nonPreferedTerms": []
+                    },
+                    {
+                      "identifier": "507D46E0-DC49-47F0-B273-26ECD9CC8948",
+                      "name": "Marine and coastal areas",
+                      "title": {
+                        "en": "Marine and coastal areas"
+                      },
+                      "shortTitle": {},
+                      "description": "",
+                      "source": "",
+                      "broaderTerms": [
+                        "A862ABFC-B97D-4E6A-9A70-812A82A7CC19"
+                      ],
+                      "narrowerTerms": [],
+                      "relatedTerms": [],
+                      "nonPreferedTerms": []
+                    },
+                    {
+                      "identifier": "EAE641FD-6A82-4C15-84CD-0F12ABA5CBC1",
+                      "name": "Mountains",
+                      "title": {
+                        "en": "Mountains"
+                      },
+                      "shortTitle": {},
+                      "description": "",
+                      "source": "",
+                      "broaderTerms": [
+                        "A862ABFC-B97D-4E6A-9A70-812A82A7CC19"
+                      ],
+                      "narrowerTerms": [],
+                      "relatedTerms": [],
+                      "nonPreferedTerms": []
+                    },
+                    {
+                      "identifier": "DFEECF62-EC3D-4F5C-BAC6-2FD308F81277",
+                      "name": "Protected areas",
+                      "title": {
+                        "en": "Protected areas"
+                      },
+                      "shortTitle": {},
+                      "description": "",
+                      "source": "",
+                      "broaderTerms": [
+                        "A862ABFC-B97D-4E6A-9A70-812A82A7CC19"
+                      ],
+                      "narrowerTerms": [],
+                      "relatedTerms": [],
+                      "nonPreferedTerms": []
+                    },
+                    {
+                      "identifier": "2C87B4AD-684C-48DC-91B7-82938CE37B5A",
+                      "name": "Ex-situ collections",
+                      "title": {
+                        "en": "Ex-situ collections"
+                      },
+                      "shortTitle": {},
+                      "description": "",
+                      "source": "",
+                      "broaderTerms": [
+                        "A862ABFC-B97D-4E6A-9A70-812A82A7CC19"
+                      ],
+                      "narrowerTerms": [],
+                      "relatedTerms": [],
+                      "nonPreferedTerms": []
+                    },
+                    {
+                      "identifier": "CB918E1A-E171-4C10-BA35-088C81F668A3",
+                      "name": "Soil and/or water samples",
+                      "title": {
+                        "en": "Soil and/or water samples"
+                      },
+                      "shortTitle": {},
+                      "description": "",
+                      "source": "",
+                      "broaderTerms": [
+                        "A862ABFC-B97D-4E6A-9A70-812A82A7CC19"
+                      ],
+                      "narrowerTerms": [],
+                      "relatedTerms": [],
+                      "nonPreferedTerms": []
+                    },
                    {
                      "identifier": "B8A150E054154AD3AD97856ABD485E90",
                      "name": "Traditional knowledge associated with genetic resources",

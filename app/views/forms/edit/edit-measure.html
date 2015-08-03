@@ -259,7 +259,12 @@
                 margin: 2px 2px 2px -5px;
                 padding: 10px 5px 10px 5px;
               }
-
+              .boldText{
+                font-weight: bold;
+              }
+              .normalText{
+                font-weight: normal;
+              }
             </style>
             <script type="text/ng-template"  id="/app/views/forms/edit/edit-measure.directive/abs">
               <ul>
@@ -272,15 +277,16 @@
                 <tr>
                   <td style="text-align:left;vertical-align:middle" id="{{term.identifier}}">
                     <label for="{{term.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED' ? 'otherAbsMeasure' : term.identifier}}">
-                      <input type="checkbox" ng-model="identifiers[term.identifier]" ng-required="IsRequired()" value="{{term.identifier}}" />
-                         <span title="{{term.description|lstring:locale}}" style="font-weight:normal;">
-                          <span >{{term.title||term.name | lstring:locale}} </span>
-                          <i ng-show="term.description" class="icon-question-sign"></i>
-                          </span>
+                         <input type="checkbox" ng-model="identifiers[term.identifier]" ng-required="IsRequired()" value="{{term.identifier}}"
+                         ng:if="!term.narrowerTerms" />
+                         <span title="{{term.description|lstring:locale}}" ng:class="{true:'boldText',false:'normalText'}[term.narrowerTerms.length>0]">
+                              <span >{{term.title||term.name | lstring:locale}} </span>
+                              <i ng-show="term.description" class="icon-question-sign"></i>
+                         </span>
                     </label>
                     <span ng-if="term.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" style="width:200px;text-align:right;vertical-align:middle">
                       <div km-textbox-ml ng-show="identifiers[term.identifier]"  style="width:200px;text-align:right;vertical-align:middle"
-                       ng-model="document.otherAbsMeasure" locales="locales"></div>
+                       ng-model="document.otherAbsMeasure" locales="locales" ng:if="!term.narrowerTerms"></div>
                       </div>
                     </span>
                   </td>
@@ -358,7 +364,7 @@
         </div>
 
 
-<!-- 
+<!--
     <hr style="margin-top:20px;">
 
         <div class="row" style="padding-top:20px;">

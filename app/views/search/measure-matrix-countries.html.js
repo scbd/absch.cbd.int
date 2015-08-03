@@ -144,7 +144,9 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                         return measure.document.status.identifier;
                     if(field=='type')
                         return measure.document.type.identifier;
-                        console.log(measure);
+                    
+                    if(!measure.document)
+                        return measure.jurisdiction_EN_t;
                     //user jurisdiction field for else
                     return measure.document.jurisdiction.identifier +  (measure.document.jurisdictionName ? '#' + $filter('lstring')(measure.document.jurisdictionName) : '');
                 });
