@@ -306,6 +306,7 @@
                                             </i>
                                             <span style="font-weight:bold;padding:0;margin:0;position:relative;top:-5px;">{{key|schemaNamePlural}} ({{key|schemaShortName}})</span>
                                         </span>
+                                        <a ng-if="key=='measure'" href="/measurematrix/{{country.code.toLowerCase()}}" class="pull-left"><i class="fa fa-bar-chart"></i>&nbsp;</a> 
                                          <span class="pull-right badge bg-darkgrey">{{schema.length}}</span>
                                 </div>
                                 <div class="row">
@@ -315,7 +316,7 @@
                                                 <!-- <a nhref="/search/new/measurematrix/countries/{{country.code}}" class="">
                                                     <i class="fa fa-bar-chart"></i>
                                                 </a> -->
-                                                <!-- <a ng-if="key=='measure'" href="/search/new/measurematrix/{{doc|uniqueIDWithoutRevision}}" class="pull-left"><i class="fa fa-bar-chart"></i>&nbsp;</a> -->
+                                                 <!--<a ng-if="key=='measure'" href="/search/new/measurematrix/{{doc|uniqueIDWithoutRevision}}" class="pull-left"><i class="fa fa-bar-chart"></i>&nbsp;</a> -->
                                                 <div ng-click="doc.displayDetails = !doc.displayDetails;load(doc,doc.displayDetails)" style="cursor:pointer">
                                                      <i class="fa fa-chevron-circle-up" ng-show="doc.displayDetails"></i>
                                                     <i class="fa fa-chevron-circle-down" ng-show="!doc.displayDetails"></i>

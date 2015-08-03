@@ -341,7 +341,7 @@
 
                         <div class="row bg-grey1" style="padding:3px;">
                             <h5 style="padding:0;margin:0;font-size:15px;">
-
+                                <a href="/measurematrix/{{code}}"><i class="fa fa-bar-chart"></i></a>
                                 <a href="" ng-click="showMSR = !showMSR">
                                    <i class="fa fa-chevron-circle-up pad-left" ng-show="showMSR"></i>
                                    <i class="fa fa-chevron-circle-down pad-left" ng-show="!showMSR"></i>
@@ -375,8 +375,6 @@
 
                                             <div ng-click="displayDetails=!displayDetails;showDetails(measure)">
                                                 <div class="col-lg-3 col-md-3 col-xs-3">
-
-                                                    <!-- <a href="/search/new/measurematrix/{{measure|uniqueIDWithoutRevision}}"><i class="fa fa-bar-chart"></i></a> -->
                                                     <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
                                                         {{'msr' | schemaIcon}}
                                                     </i>
