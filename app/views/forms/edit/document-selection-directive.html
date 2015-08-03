@@ -15,10 +15,10 @@
         <div class="col-lg-12" >
             <br />
             <table class="table table-hover"  style="padding-bottom:3px;background-color:#fff">
-				<tr ng-repeat="doc in selectedDocuments | orderBy:['schema_s', 'title_t']">{{doc}}
+				<tr ng-repeat="doc in selectedDocuments | orderBy:['schema_s', 'title_t']">
 					<td>
 						<span class="latest-date"> {{doc.createdDate_dt | formatDate}} </span> |
-                        <span class="latest-country"> {{doc.government_s | term:locale}} </span> |
+                        <span class="latest-country"> {{getGovernmentName(doc.government_s)}} </span> |
                         <span>{{getUniqueId(doc.identifier_s)}}</span>
                         <div class="latest-title">{{doc.title_t}} </div>
 					</td>
@@ -47,7 +47,7 @@
 
                     <div style="max-height:400px;overflow-y:auto">
                     	<table class="table table-hover table-responsive" style="padding:0;margin:0">
-    						<tr ng-show="!isLoading" ng-repeat="doc in filteredDocuments = (rawDocuments |  filter:{schema_s:selectedSchema.identifier})">
+    						<tr ng-show="!isLoading" ng-repeat="doc in filteredDocuments = (rawDocuments |  filter:{schema_s:selectedSchema.identifier}) track by $index">
     							<td>
     								<input type="checkbox" ng-model="doc.__checked" />
     							</td>

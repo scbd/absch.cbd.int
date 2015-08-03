@@ -1,6 +1,6 @@
 define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document-selection-directive.html.js'], function (app) {
 
-  app.controller("editAbsNationalReport", ["$scope", "$http", "$filter", "$controller", "$location", "$q", "realm", function ($scope, $http, $filter, $controller,$location, $q, realm) {
+  app.controller("editAbsNationalReport", ["$scope", "$http", "$filter", "$controller", "$location", "$q", "realm", "underscore", function ($scope, $http, $filter, $controller,$location, $q, realm, _) {
 
     $controller('editController', {$scope: $scope});
 
@@ -25,18 +25,26 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
 
     $scope.getCleanDocument = function(document) {
 
-      document = document || $scope.document;
+        document = document || $scope.document;
 
-      if (!document)
-        return {};
+        if (!document)
+            return {};
+        document = angular.fromJson(angular.toJson(document));
 
-      document = angular.fromJson(angular.toJson(document));
+
+        if (/^\s*$/g.test(document.notes))
+            document.notes = undefined;
+
+        if(_.isEmpty(document.question4))  document.question4 = undefined;
+        if(_.isEmpty(document.question5))  document.question5 = undefined;
+        if(_.isEmpty(document.question6))  document.question6 = undefined;
+        if(_.isEmpty(document.question7))  document.question7 = undefined;
 
 
-      if (/^\s*$/g.test(document.notes))
-        document.notes = undefined;
 
-      return document;
+        console.info(document);
+
+        return document;
     };
 
     $scope.setDocument({libraries: [{ identifier: "cbdLibrary:abs-ch" }]});
@@ -49,7 +57,6 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
 
             if($scope.document && $scope.document.question3){
                 $scope.document.question3.challengesInfo       = undefined;
-                $scope.document.question3.documentReferenceIDs = undefined;
             }
 
             if($scope.document && $scope.document.question4 && hasValue($scope.document.question4.answer)){
@@ -242,7 +249,6 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
     $scope.Q26Clear = function (answer) {
         if(!answer && $scope.document && $scope.document.question26){
             $scope.document.question26.additionalInfo = undefined;
-            $scope.document.question26.measures       = undefined;
             $scope.document.question26.violation      = undefined;
         }
     };
@@ -250,7 +256,7 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
     //==================================
     //
     //==================================
-    $scope.Q26MeasuresClear = function (answer) {
+    $scope.Q26ViolationClear = function (answer) {
         if(!answer && $scope.document && $scope.document.question26 && $scope.document.question26.violation){
             $scope.document.question26.violation.additionalInfo = undefined;
         }
