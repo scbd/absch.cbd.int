@@ -32,8 +32,27 @@ app.directive("viewAbsNationalReport", [function () {
 		    $scope.booleanToText = function(item) {
 		        if (item===undefined)
 		        	return "No selection made";
-		        console.log('in booleanToText');
 				return item ? "Yes" :  "No";
+			}
+
+
+			//==================================
+		    //
+		    //==================================
+		    $scope.q18BooleanToText = function(item) {
+		        if (item===undefined || !item)
+		        	return "No selection made";
+				else return "Yes" ;
+			}
+
+
+			//==================================
+		    //
+		    //==================================
+		    $scope.q42BooleanToText = function(item) {
+		        if (item===undefined || !item)
+		        	return "No selection made";
+				else return "Yes" ;
 			}
 
 			//==================================
@@ -76,8 +95,35 @@ app.directive("viewAbsNationalReport", [function () {
 		        	return "https://www.cbd.int/kb/record/focalPoint/" + commonjs.hexToInteger(reference.identifier);
 		        }
 		        
-				return  $filter("uniqueIDWithoutRevision")(reference.identifier);;
+				return  "/database/" + $filter("uniqueIDWithoutRevision")(reference.identifier);
 			}
+
+
+			//==================================
+		    //
+		    //==================================
+		    $scope.getLinkText = function(reference) {
+
+		    	if(!reference)
+		    		return;
+
+		        if ((reference.identifier).indexOf("52000000cbd") == 0) {
+					
+		        	return "https://www.cbd.int/kb/record/focalPoint/" + commonjs.hexToInteger(reference.identifier);
+		        }
+		        
+				return  $filter("uniqueIDWithoutRevision")(reference.identifier);
+			}
+
+
+			//==================================
+		    //
+		    //==================================
+		    $scope.documentReferenceIDsEmpty = function(reference) {
+
+		    	return _.isEmpty(reference);
+			}
+
 
 		}]
 	};
@@ -86,3 +132,4 @@ app.directive("viewAbsNationalReport", [function () {
 });
 
 
+_.isEmpty

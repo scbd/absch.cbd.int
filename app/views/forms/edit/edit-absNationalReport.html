@@ -84,7 +84,7 @@
 
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q3DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question3.documentReferenceIDs"
-                                                                ng-disabled="!document.government || !document.question3.answer"
+                                                                ng-disabled="!document.government"
                                                                 question="question3"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
@@ -111,7 +111,7 @@
 
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q4DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question4.documentReferenceIDs"
-                                                                ng-disabled="!document.government || !document.question3.answer"
+                                                                ng-disabled="!document.government || document.question3.answer"
                                                                 question="question4"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
@@ -137,7 +137,7 @@
 
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q5DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question5.documentReferenceIDs"
-                                                                ng-disabled="!document.government || !document.question3.answer"
+                                                                ng-disabled="!document.government || document.question3.answer"
                                                                 question="question5"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
@@ -161,7 +161,7 @@
 
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q6DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question6.documentReferenceIDs"
-                                                                ng-disabled="!document.government || !document.question3.answer"
+                                                                ng-disabled="!document.government || document.question3.answer"
                                                                 question="question6"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
@@ -191,7 +191,7 @@
 
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q7DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question7.documentReferenceIDs"
-                                                                ng-disabled="!document.government || !document.question3.answer"
+                                                                ng-disabled="!document.government || document.question3.answer"
                                                                 question="question7"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
@@ -277,7 +277,7 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" required name="question11" caption="11. Is access to genetic resources subject to PIC as provided in Article 6.1?">
-                                        <div class="km-yes-no" required name="question11" ng-model="document.question11.answer"></div>
+                                        <div class="km-yes-no" required name="question11" ng-model="document.question11.answer" ng-click="Q11Clear()"></div>
                                     </div>
 
                                     <div class="km-control-group" name="question11Challenges" caption="">
@@ -310,7 +310,7 @@
                                     </div>
                                     <div class="km-control-group" name="question12FurtherInfo" caption="">
                                         <strong>Please provide further information</strong>
-                                        <div ng-disabled="!isQ11Yes(document.question11.answer)" km-textbox-ml rows=4 name="question11FurtherInfo" ng-model="document.question12.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                                        <div ng-disabled="!isQ11Yes(document.question11.answer)" km-textbox-ml rows=4 name="question12FurtherInfo" ng-model="document.question12.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q12DocRefs" caption="Please select the clearing-house record number containing relevant information">
@@ -717,9 +717,9 @@
                                     <div ng-show="document.question27.answer" class="row">
                                         <div class="col-xs-10 col-xs-offset-1">
                                             <div class="km-control-group" name="question27_cc" caption="Has your country made use of the checkpoint communique?">
-                                                <label class="radio-inline"><input type="radio" ng-model="document.question27.cpc.option" name="q27Options" id="q27Option1" value="true">Yes</label>
-                                                <label class="radio-inline"><input type="radio" ng-model="document.question27.cpc.option" name="q27Options" id="q27Option2" value="false">No</label>
-                                                <label class="radio-inline"><input type="radio" ng-model="document.question27.cpc.option" name="q27Options" id="q27Option3" value="other">Other</label>
+                                                <label class="radio-inline"><input type="radio" ng-model="document.question27.cpc.option" name="q27Options" id="q27Option1" value="Yes">Yes</label>
+                                                <label class="radio-inline"><input type="radio" ng-model="document.question27.cpc.option" name="q27Options" id="q27Option2" value="No">No</label>
+                                                <label class="radio-inline"><input type="radio" ng-model="document.question27.cpc.option" name="q27Options" id="q27Option3" value="Other">Other</label>
                                             </div>
                                             <div class="km-control-group" name="question27_ccFurtherInfo">
                                                 <strong>Please provide further information</strong>
@@ -1085,10 +1085,10 @@
                                         <div ng-disabled="!document.question37.answer" km-textbox-ml rows=4 name="question38FurtherInfo" ng-model="document.question38.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q38MeasuresDocRefs" caption="Please select the clearing-house record number containing relevant information">
-                                        <div document-selection ng-model="document.question38.measures.documentReferenceIDs"
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q38DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                        <div document-selection ng-model="document.question38.documentReferenceIDs"
                                                                 ng-disabled="!document.government || !Q37IsYes()"
-                                                                question="question38Measures"
+                                                                question="question38"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
                                         </div>

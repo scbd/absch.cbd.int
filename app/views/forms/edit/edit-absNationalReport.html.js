@@ -40,8 +40,6 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
         if(_.isEmpty(document.question6))  document.question6 = undefined;
         if(_.isEmpty(document.question7))  document.question7 = undefined;
 
-
-
         console.info(document);
 
         return document;
@@ -131,6 +129,26 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
         }
 
         return false;
+    };
+
+    //==================================
+    //
+    //==================================
+    $scope.Q11Clear = function () {
+        if($scope.document && $scope.document.question11 && !$scope.document.question11.answer){
+            if($scope.document && $scope.document.question12)
+                $scope.document.question12 = undefined;
+            if($scope.document && $scope.document.question13)
+                $scope.document.question13 = undefined;
+            if($scope.document && $scope.document.question14)
+                $scope.document.question14 = undefined;
+            if($scope.document && $scope.document.question15)
+                $scope.document.question15 = undefined;
+            if($scope.document && $scope.document.question16)
+                $scope.document.question16 = undefined;
+            if($scope.document && $scope.document.question17)
+                $scope.document.question17 = undefined;
+        }
     };
 
     //==================================
