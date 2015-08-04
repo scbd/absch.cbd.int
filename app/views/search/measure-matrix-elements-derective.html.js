@@ -31,7 +31,12 @@ define(['app', 'underscore','/app/js/common.js'], function(app, _) {
             },
             controller: ["$scope", "$q", "Thesaurus", "Enumerable", "$http", "guid","commonjs","$element",
             function($scope, $q, thesaurus, Enumerable, $http, guid, commonjs, $element) {
-
+                
+                var elementsForOthers = [
+                                          "24E809DA-20F4-4457-9A8A-87C08DF81E8A","E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63",
+                                          "NEED-NEW-GUID","08B2CDEC-786F-4977-AD0A-6A709695528D","01DA2D8E-F2BB-4E85-A17E-AB0219194A17"
+                                        ];
+                                        
                 $scope.termsFn = function(){  return  [
                        {
                          "identifier": "1D2710D3-75C8-475D-8634-F912F06DAF25",
@@ -796,15 +801,15 @@ define(['app', 'underscore','/app/js/common.js'], function(app, _) {
                          "nonPreferedTerms": []
                        },
                        {
-                         "identifier": "ECBDB95A-B389-4DB4-AD9B-DA3590BLAISE",
-                         "name": "Capacity",
+                         "identifier": "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
+                         "name": "Other",
                          "title": {
-                           "en": "Capacity"
+                           "en": "Other"
                          },
                          "shortTitle": {},
                          "description": "",
                          "source": "",
-                         "broaderTerms": ["ECBDB95A-B389-4DB4-AD9B-DA3590DF7781"],
+                         "broaderTerms": [],
                          "narrowerTerms": [],
                          "relatedTerms": [],
                          "nonPreferedTerms": []
@@ -817,21 +822,39 @@ define(['app', 'underscore','/app/js/common.js'], function(app, _) {
                 //==============================
                 //
                 //==============================
+                var other;
                 $scope.init = function() {
-
-                    return $q.when($scope.terms||$scope.termsFn(),
+                    var otherQuery = $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED", { cache: true });
+                    return $q.all([$scope.terms||$scope.termsFn(), other||otherQuery])
+                        .then(
                         function(data) { // on success
-                            $scope.terms = data;
+                            $scope.terms = data[0];
+                            other        = data[1].data||data[1];
+                            
+                            _.each(elementsForOthers, function(element){
+                                
+                                if(!_.some($scope.terms, {identifier:other.identifier + '#' + element})){
+                                
+                                    var otherElement = angular.copy(other);
+                                    
+                                    otherElement.identifier = otherElement.identifier + '#' + element;  
+                                    otherElement.broaderTerms.push(element);
+                                    $scope.terms.push(otherElement)
+                                   
+                                    var parentElement = _.find($scope.terms, {identifier:element})
+                                    if(parentElement)
+                                      parentElement.narrowerTerms.push(otherElement.identifier);
+                                }
+                                
+                              });                            
                         });
-                }
-
+                }                
+   
                 //==============================
                 //
                 //==============================
                 $scope.load = function() {
 
-                    // if (!$scope.terms) // Not initialized
-                    //     return;
                     return $q.when($scope.init())
                         .then(function(){
                             var oNewIdentifiers = {};
@@ -846,8 +869,13 @@ define(['app', 'underscore','/app/js/common.js'], function(app, _) {
                                     throw "Type must be array";
 
                                 for (var i = 0; i < $scope.binding.length; ++i) {
-                                    oNewIdentifiers[$scope.binding[i].identifier] = true;
-                                    oNewSections[$scope.binding[i].identifier] = $scope.binding[i].section||{};
+                                      var identifier = $scope.binding[i].identifier;
+                                      //handle others
+                                      if($scope.binding[i].parent)
+                                          identifier += '#' + $scope.binding[i].parent;
+                                          
+                                      oNewIdentifiers[identifier] = true;
+                                      oNewSections[identifier] = $scope.binding[i].section||{};
                                 }
                             }
 
@@ -1052,7 +1080,7 @@ define(['app', 'underscore','/app/js/common.js'], function(app, _) {
                             }
                             term.measure = {identifier: doc.document.header.identifier,government : doc.document.government,
                                             documentID:commonjs.hexToInteger(doc.id),type: doc.document.header.schema};
-
+                                            
                             _.map(term.broaderTerms, function(brTerm) {
                                 brTerm.hasMeasure = true;
                             });
@@ -1080,6 +1108,16 @@ define(['app', 'underscore','/app/js/common.js'], function(app, _) {
                 $scope.showHideNode = function(elementId){
                     $element.find('#'+elementId).toggle();
                 };
+                
+                $scope.showHideAll = function(collapse){
+                    _.each($scope.rootTerms, function(term){
+                        term.showUp = collapse;
+                        if(collapse)
+                            $element.find('#'+term.identifier).hide();
+                        else
+                            $element.find('#'+term.identifier).show();
+                    })
+                }
             }]
         };
     });

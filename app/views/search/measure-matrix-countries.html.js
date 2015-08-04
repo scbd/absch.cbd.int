@@ -1,8 +1,8 @@
 define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters', 'scbd-angularjs-controls',
         '/app/views/search/measure-matrix-elements-derective.html.js'], function(app, _) {
 
-    app.controller('countryMatrixController', ['$scope', '$http', 'realm', '$q', '$filter', '$routeParams',
-        function($scope, $http, realm, $q, $filter, $routeParams) {
+    app.controller('countryMatrixController', ['$scope', '$http', 'realm', '$q', '$filter', '$routeParams', '$element',
+        function($scope, $http, realm, $q, $filter, $routeParams, $element) {
 
             $scope.options  = {
                jurisdiction             : function () { return $http.get("/api/v2013/thesaurus/domains/7A56954F-7430-4B8B-B733-54B8A5E7FF40/terms",  { cache: true })
@@ -211,6 +211,10 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
             }
             loadSchemaFacets();
             jurisdictions();
+            
+            $scope.showHideSection = function(elementId){
+                $element.find('#'+elementId).toggle();                
+            }
 
         }
     ]);

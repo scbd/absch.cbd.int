@@ -170,32 +170,29 @@
 					<div class="table" ng-repeat="jurisdiction in groupedMeasures">
 						<div class="col-sm-12">
 							<div class="panel panel-primary">
-								<div class="panel-heading">
-									<h3 class="panel-title" ng-if="matrixGroupBy=='jurisdiction'">
-										{{jurisdiction.measures[0].jurisdiction_EN_t}} {{jurisdiction.measures[0].document.jurisdictionName|lstring}}
-									</h3>
-									<h3 class="panel-title" ng-if="matrixGroupBy=='type'">
-										{{jurisdiction.measures[0].type_EN_t}}
-									</h3>
-									<h3 class="panel-title" ng-if="matrixGroupBy=='status'">
-										{{jurisdiction.measures[0].status_EN_t}}
+								<div class="panel-heading">									
+									<h3 class="panel-title hand" ng-click="closeSection=!closeSection;showHideSection('pandelBody_' + $index)">
+										<i class="fa fa-chevron-circle-up"   ng-show="!closeSection"></i>
+	                 					<i class="fa fa-chevron-circle-down" ng-show="closeSection"></i>
+											 
+										<span ng-if="matrixGroupBy=='jurisdiction'">
+											{{jurisdiction.measures[0].jurisdiction_EN_t}} {{jurisdiction.measures[0].document.jurisdictionName|lstring}}
+										</span>
+										<span class="panel-title" ng-if="matrixGroupBy=='type'">
+											{{jurisdiction.measures[0].type_EN_t}}
+										</span>
+										<span class="panel-title" ng-if="matrixGroupBy=='status'">
+											{{jurisdiction.measures[0].status_EN_t}}
+										</span>
 									</h3>
 								</div>
-								<div class="panel-body">
-									<!-- <table class="table table-bordered matrixTable">
-  								<tr >
-  									<td class="tableCell"> -->
+								<div class="panel-body" id="pandelBody_{{$index}}">									
 									<div measure-matrix-elements name="absMeasures" type="multiple" ng-model="noModel" locales="measures[0].document.header.languages" document="jurisdiction.measures"></div>
-									<!-- </td>
-  								</tr>
-  							</table> -->
 								</div>
 							</div>
 
 						</div>
 					</div>
-					<!-- <div measure-matrix-elements name="absMeasures" type="multiple" ng-model="noModel"
-					locales="measures[0].document.header.languages" document="measures"></div> -->
 				</div>
 			</div>
 		</div>

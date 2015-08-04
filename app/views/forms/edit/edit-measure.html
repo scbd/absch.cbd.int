@@ -284,9 +284,11 @@
                               <i ng-show="term.description" class="icon-question-sign"></i>
                          </span>
                     </label>
-                    <span ng-if="term.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" style="width:200px;text-align:right;vertical-align:middle">
+                  </td>
+                  <td style="text-align:left;vertical-align:middle" >
+                    <span ng-if="term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0" style="width:200px;text-align:right;vertical-align:middle">
                       <div km-textbox-ml ng-show="identifiers[term.identifier]"  style="width:200px;text-align:right;vertical-align:middle"
-                       ng-model="document.otherAbsMeasure" locales="locales" ng:if="!term.narrowerTerms"></div>
+                       ng-model="otherCustomValues[term.identifier]" locales="locales" ng:if="!term.narrowerTerms"></div>
                       </div>
                     </span>
                   </td>
@@ -310,7 +312,7 @@
                   </tr>
                 </table>
 
-                <div edit-measure-abs name="absMeasures" required ng-model="document.absMeasures" locales="document.header.languages" terms="options.absMeasures()" document="document"></div>
+                <div edit-measure-abs name="absMeasures" api="absMeasureApi" required ng-model="document.absMeasures" locales="document.header.languages"  document="document"></div>
               </div>
             </div>
           </section>
