@@ -84,7 +84,7 @@
 
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q3DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question3.documentReferenceIDs"
-                                                                ng-disabled="!document.government"
+                                                                ng-disabled="!document.government || !document.question3.answer"
                                                                 question="question3"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
@@ -111,7 +111,7 @@
 
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q4DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question4.documentReferenceIDs"
-                                                                ng-disabled="!document.government || document.question3.answer"
+                                                                ng-disabled="!document.government || !document.question3.answer"
                                                                 question="question4"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
@@ -137,7 +137,7 @@
 
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q5DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question5.documentReferenceIDs"
-                                                                ng-disabled="!document.government || document.question3.answer"
+                                                                ng-disabled="!document.government || !document.question3.answer"
                                                                 question="question5"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
@@ -161,7 +161,7 @@
 
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q6DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question6.documentReferenceIDs"
-                                                                ng-disabled="!document.government || document.question3.answer"
+                                                                ng-disabled="!document.government || !document.question3.answer"
                                                                 question="question6"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
@@ -191,7 +191,7 @@
 
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q7DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question7.documentReferenceIDs"
-                                                                ng-disabled="!document.government || document.question3.answer"
+                                                                ng-disabled="!document.government || !document.question3.answer"
                                                                 question="question7"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
@@ -215,7 +215,7 @@
 
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q8DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question8.documentReferenceIDs"
-                                                                ng-disabled="!document.government || !document.question3.answer"
+                                                                ng-disabled="!document.government"
                                                                 question="question8"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
@@ -315,7 +315,7 @@
 
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q12DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question12.documentReferenceIDs"
-                                                                ng-disabled="!document.government"
+                                                                ng-disabled="!document.government || !document.question11.answer"
                                                                 question="question12"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
@@ -336,7 +336,7 @@
 
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q13DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question13.documentReferenceIDs"
-                                                                ng-disabled="!document.government"
+                                                                ng-disabled="!document.government || !document.question11.answer"
                                                                 question="question13"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
@@ -357,7 +357,7 @@
 
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q14DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question14.documentReferenceIDs"
-                                                                ng-disabled="!document.government"
+                                                                ng-disabled="!document.government || !document.question11.answer"
                                                                 question="question14"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
@@ -378,7 +378,7 @@
 
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q15DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question15.documentReferenceIDs"
-                                                                ng-disabled="!document.government"
+                                                                ng-disabled="!document.government || !document.question11.answer"
                                                                 question="question15"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
@@ -403,7 +403,7 @@
 
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q16DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question16.documentReferenceIDs"
-                                                                ng-disabled="!document.government"
+                                                                ng-disabled="!document.government || !document.question11.answer"
                                                                 question="question16"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
@@ -424,7 +424,7 @@
 
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q17DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question17.documentReferenceIDs"
-                                                                ng-disabled="!document.government"
+                                                                ng-disabled="!document.government || !document.question11.answer"
                                                                 question="question17"
                                                                 government="document.government"
                                                                 country-documents="absDocuments">
