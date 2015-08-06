@@ -733,7 +733,7 @@
                                         <div km-textbox-ml rows=4 name="question27Challenges" ng-model="document.question27.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
                                     <div class="km-control-group row" name="question27_ccsOnAbsCh" caption="Number of checkpoint communiques available in the ABS Clearing-House">
-                                        <input class="col-xs-2" type="number" name="ccsOnAbsCh" class="form-control text-right" ng-model="document.question27.cpcsOnAbsChCount">
+                                        <input class="col-xs-2" type="number" name="ccsOnAbsCh" class="form-control text-right" ng-model="document.question27.cpcsOnAbsChCount" min="0" ng-init="document.question27.cpcsOnAbsChCount=0">
                                     </div>
 
                                     <div class="km-control-group" name="q27relevantDocuments" caption="Any other relevant documents">
