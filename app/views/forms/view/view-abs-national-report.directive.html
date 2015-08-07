@@ -20,7 +20,7 @@
 
 		<div class="panel panel-info">
 			<div class="panel-heading">
-				<label>Country</label>		    
+				<label>Country</label>
 			</div>
 			<div class="panel-body">
 				<div ng-show="document.government">
@@ -32,19 +32,19 @@
 
 		<div class="panel panel-info">
 			<div class="panel-heading">
-				<label>General information</label>		    
+				<label>General information</label>
 			</div>
 			<div class="panel-body">
 				<div ng-show="document.contact">
 					<label>2. Contact person</label>
-					<div view-contact-reference ng-model="document.contact" locale="locale">{{document.contact}}</div>					
+					<div view-contact-reference ng-model="document.contact" locale="locale">{{document.contact}}</div>
 				</div>
 			</div>
 		</div>
 
 		<div class="panel panel-info">
 			<div class="panel-heading">
-				<label>Institutional structures for the implementation of the Protocol</label>		    
+				<label>Institutional structures for the implementation of the Protocol</label>
 			</div>
 			<div class="panel-body">
 		  		<div>
@@ -65,7 +65,7 @@
 								</ul>
 
 							</div>
-						</div>	 
+						</div>
 					</ul>
 				</div>
 
@@ -91,12 +91,12 @@
 								</ul>
 
 							</div>
-						</div>	 
+						</div>
 					</ul>
 				</div>
 
 				<div>
-					<label>5. Has your country designated a national focal point as provided in Article 13?</label>				
+					<label>5. Has your country designated a national focal point as provided in Article 13?</label>
 					<ul>
 						<div class="km-value km-pre">{{conditionalBooleanToText(document.question3.answer,document.question5.answer)}}</div>
 						<div ng-show="document.question5.challengesInfo">
@@ -117,7 +117,7 @@
 								</ul>
 
 							</div>
-						</div>	 
+						</div>
 					</ul>
 				</div>
 
@@ -143,14 +143,14 @@
 								</ul>
 
 							</div>
-						</div>	 
-					</ul>  
+						</div>
+					</ul>
 				</div>
 
 				<div>
 					<label>7. Has your country made available to the ABS Clearing-House permits or their equivalent issued at the time of access as evidence of the decision to grant prior informed consent (PIC) and of the establishment of mutually agreed terms (MAT)?</label>
 					<ul>
-						<div class="km-value" ng-show="document.question7.notApplicable">Not applicable, since no access requirement are in place</div>	
+						<div class="km-value" ng-show="document.question7.notApplicable">Not applicable, since no access requirement are in place</div>
 						<div class="km-value km-pre" ng-show="!document.question7.notApplicable">{{conditionalBooleanToText(document.question3.answer,document.question7.answer)}}</div>
 						<div ng-show="document.question7.challengesInfo">
 							<label>Summary of the main difficulties and challenges encountered for making this information available</label>
@@ -170,14 +170,14 @@
 								</ul>
 
 							</div>
-						</div>	 
-					</ul>						
+						</div>
+					</ul>
 				</div>
 
 				<div>
 					<label>8. Has your country made available to the ABS Clearing-House permits or their equivalent for the constitution of an internationally recognized certificate of compliance in accordance with Article 17.2?</label>
 					<ul>
-						<div class="km-value" ng-show="document.question8.notApplicable">Not applicable, since no access requirement are in place</div>	
+						<div class="km-value" ng-show="document.question8.notApplicable">Not applicable, since no access requirement are in place</div>
 						<div class="km-value km-pre" ng-show="!document.question8.notApplicable">{{booleanToText(document.question8.answer)}}</div>
 		                <div ng-show="document.question8.furtherInfo">
 							<label>Further information</label>
@@ -193,7 +193,7 @@
 								</ul>
 
 							</div>
-						</div>	 
+						</div>
 					</ul>
 				</div>
 
@@ -219,8 +219,8 @@
 								</ul>
 
 							</div>
-						</div>	 
-					</ul> 
+						</div>
+					</ul>
 				</div>
 
 				<div>
@@ -241,7 +241,7 @@
 								</ul>
 
 							</div>
-						</div>	 
+						</div>
 						<div ng-show="document.question10.relevantDocuments">
 		                	<label>Any other relevant documents</label>
 							<div class="km-value" ng-repeat="item in document.question10.relevantDocuments">
@@ -249,19 +249,19 @@
 								<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 							</div>
 						</div>
-					</ul>				
+					</ul>
 				</div>
 			</div>
 		</div>
 
 		<div class="panel panel-info">
 			<div class="panel-heading">
-				<label>Legislative, administrative or policy measures on access and benefit-sharing (ABS measures)</label>		    
+				<label>Legislative, administrative or policy measures on access and benefit-sharing (ABS measures)</label>
 			</div>
 			<div class="panel-body">
 				<div class="panel panel-success">
 					<div class="panel-heading">
-						<label>Access to genetic resources (Article 6)</label>		    
+						<label>Access to genetic resources (Article 6)</label>
 					</div>
 					<div class="panel-body">
 						<div>
@@ -286,9 +286,9 @@
 										</ul>
 
 									</div>
-								</div>	 
+								</div>
 							</ul>
-						</div>	
+						</div>
 
 						<div>
 							<label>12. Does your country have fair and non-arbitrary rules and procedures on accessing genetic resources as provided in Article 6.3 (b)?</label>
@@ -308,7 +308,7 @@
 										</ul>
 
 									</div>
-						</div>	 
+						</div>
 							</ul>
 						</div>
 
@@ -330,7 +330,7 @@
 										</ul>
 
 									</div>
-								</div>	 
+								</div>
 							</ul>
 						</div>
 
@@ -352,7 +352,7 @@
 										</ul>
 
 									</div>
-								</div>	 
+								</div>
 							</ul>
 						</div>
 
@@ -374,7 +374,7 @@
 										</ul>
 
 									</div>
-								</div>	 
+								</div>
 							</ul>
 						</div>
 
@@ -382,7 +382,7 @@
 							<label>16. Please provide the number of permits or their equivalents made available through the ABS-Clearing-House since the entry into force of the Protocol for your country.</label>
 							<ul>
 								<div class="km-value">{{document.question11.answer? ((document.question16.hasOwnProperty('permitsOnAbsCh')&&document.question16.permitsOnAbsCh!=null)? document.question16.permitsOnAbsCh: "No answer provided") : "Not applicable"}}</div>
-				                
+
 								<div ng-show="document.question16.furtherInfo">
 									<label>Further information</label>
 									<div class="km-value">{{document.question16.furtherInfo | lstring:locale}}</div>
@@ -397,14 +397,14 @@
 										</ul>
 
 									</div>
-								</div>	 
+								</div>
 							</ul>
 						</div>
 
 						<div>
 							<label>17. Does your country have rules and procedures for requiring and establishing MAT as provided in Article 6.3 (g)?</label>
 							<ul>
-								<div class="km-value km-pre">{{conditionalBooleanToText(!document.question11.answer,document.question17.answer)}}</div>		
+								<div class="km-value km-pre">{{conditionalBooleanToText(!document.question11.answer,document.question17.answer)}}</div>
 								<div ng-show="document.question17.furtherInfo">
 									<label>Further information</label>
 									<div class="km-value">{{document.question17.furtherInfo | lstring:locale}}</div>
@@ -419,9 +419,9 @@
 										</ul>
 
 									</div>
-								</div>	 
+								</div>
 							</ul>
-						</div>	
+						</div>
 
 						<div>
 							<label>18. Benefits received since entry into force of the Protocol for your country from the utilization of:</label>
@@ -429,45 +429,45 @@
 								<div>
 									<label>Genetic resources</label>
 									<ul>
-										<div class="km-value km-pre">{{q18BooleanToText(document.question18.geneticResources.answer)}}</div>	
+										<div class="km-value km-pre">{{q18BooleanToText(document.question18.geneticResources.answer)}}</div>
 										<label>Monetary benefits</label>
 										<ul>
-											<div class="km-value km-pre">{{q18BooleanToText(document.question18.geneticResources.monetary)}}</div>		
+											<div class="km-value km-pre">{{q18BooleanToText(document.question18.geneticResources.monetary)}}</div>
 											<div ng-show="document.question18.geneticResources.monetaryInfo">
 												<div class="km-value">{{document.question18.geneticResources.monetaryInfo | lstring:locale}}</div>
-											</div>	
+											</div>
 										</ul>
 
 										<label>Non-monetary benefits</label>
 										<ul>
-											<div class="km-value km-pre">{{q18BooleanToText(document.question18.geneticResources.nonMonetary)}}</div>		
+											<div class="km-value km-pre">{{q18BooleanToText(document.question18.geneticResources.nonMonetary)}}</div>
 											<div ng-show="document.question18.geneticResources.nonMonetaryInfo">
 												<div class="km-value">{{document.question18.geneticResources.nonMonetaryInfo | lstring:locale}}</div>
 											</div>
 										</ul>
 									</ul>
-								</div>	
+								</div>
 								<div>
 									<label>Traditional knowledge associated with genetic resources</label>
 									<ul>
-										<div class="km-value km-pre">{{q18BooleanToText(document.question18.tk.answer)}}</div>	
+										<div class="km-value km-pre">{{q18BooleanToText(document.question18.tk.answer)}}</div>
 										<label>Monetary benefits</label>
 										<ul>
-											<div class="km-value km-pre">{{q18BooleanToText(document.question18.tk.monetary)}}</div>		
+											<div class="km-value km-pre">{{q18BooleanToText(document.question18.tk.monetary)}}</div>
 											<div ng-show="document.question18.tk.monetaryInfo">
 												<div class="km-value">{{document.question18.tk.monetaryInfo | lstring:locale}}</div>
-											</div>	
+											</div>
 										</ul>
 
 										<label>Non-monetary benefits</label>
 										<ul>
-											<div class="km-value km-pre">{{q18BooleanToText(document.question18.tk.nonMonetary)}}</div>		
+											<div class="km-value km-pre">{{q18BooleanToText(document.question18.tk.nonMonetary)}}</div>
 											<div ng-show="document.question18.tk.nonMonetaryInfo">
 												<div class="km-value">{{document.question18.tk.nonMonetaryInfo | lstring:locale}}</div>
 											</div>
 										</ul>
 									</ul>
-								</div>	
+								</div>
 					            <div ng-show="document.question18.furtherInfo">
 									<label>Further information</label>
 									<div class="km-value">{{document.question18.furtherInfo | lstring:locale}}</div>
@@ -482,7 +482,7 @@
 										</ul>
 
 									</div>
-								</div>	 
+								</div>
 							</ul>
 						</div>
 
@@ -504,23 +504,23 @@
 										</ul>
 
 									</div>
-								</div>	 
+								</div>
 								<div ng-show="document.question19.relevantDocuments">
 				                	<label>Any other relevant documents</label>
 									<div class="km-value" ng-repeat="item in document.question19.relevantDocuments">
 										<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
 										<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 									</div>
-								</div>	
-							</ul>			
+								</div>
+							</ul>
 						</div>
-							
+
 					</div>
 				</div>
 
 				<div class="panel panel-success">
 					<div class="panel-heading">
-						<label>Fair and equitable benefit-sharing (Article 5)</label>		    
+						<label>Fair and equitable benefit-sharing (Article 5)</label>
 					</div>
 					<div class="panel-body">
 						<div>
@@ -541,14 +541,14 @@
 										</ul>
 
 									</div>
-								</div>	 
-							</ul>			
+								</div>
+							</ul>
 						</div>
 
 						<div>
 							<label>21. Has your country taken legislative, administrative or policy measures with the aim of ensuring that the benefits from the utilization of genetic resources held by indigenous and local communities, in accordance with domestic legislation regarding the established rights of these indigenous and local communities over these genetic resources, are shared with the indigenous and local communities concerned as provided in Article 5.2?</label>
 							<ul>
-								<div class="km-value km-pre">{{booleanToText(document.question21.answer)}}</div>	
+								<div class="km-value km-pre">{{booleanToText(document.question21.answer)}}</div>
 								<div ng-show="document.question21.furtherInfo">
 									<label>Use the text entry to provide further information.</label>
 									<div class="km-value">{{document.question21.furtherInfo | lstring:locale}}</div>
@@ -563,8 +563,8 @@
 										</ul>
 
 									</div>
-								</div>	 
-							</ul>			
+								</div>
+							</ul>
 						</div>
 
 						<div>
@@ -585,8 +585,8 @@
 										</ul>
 
 									</div>
-								</div>	 
-							</ul>			
+								</div>
+							</ul>
 						</div>
 
 						<div ng-show="document.question23">
@@ -607,22 +607,22 @@
 										</ul>
 
 									</div>
-								</div>	 
+								</div>
 								<div ng-show="document.question23.relevantDocuments">
 				                	<label>Any other relevant documents</label>
 									<div class="km-value" ng-repeat="item in document.question23.relevantDocuments">
 										<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
 										<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 									</div>
-								</div>	
-							</ul>			
+								</div>
+							</ul>
 						</div>
 					</div>
 				</div>
 
 				<div class="panel panel-success">
 					<div class="panel-heading">
-						<label>Compliance with domestic legislation or regulatory requirements on ABS (Article 15 and Article 16) and monitoring the utilization of genetic resources (Article 17)</label>		    
+						<label>Compliance with domestic legislation or regulatory requirements on ABS (Article 15 and Article 16) and monitoring the utilization of genetic resources (Article 17)</label>
 					</div>
 					<div class="panel-body">
 
@@ -644,16 +644,16 @@
 										</div>
 									</ul>
 
-									<label>Have there been specific cases in which your country cooperated with other Parties in cases of alleged violation of ABS measures as provided in Article 15.3?</label>	
+									<label>Have there been specific cases in which your country cooperated with other Parties in cases of alleged violation of ABS measures as provided in Article 15.3?</label>
 									<ul>
 										<div class="km-value km-pre">{{booleanToText(document.question24.violation.answer)}}</div>
 										<div ng-show="document.question24.violation.furtherInfo">
 				                            <label>Further information</label>
 				                            <div class="km-value">{{document.question24.violation.furtherInfo | lstring:locale}}</div>
 				                        </div>
-									</ul>						
-								</div>					
-								
+									</ul>
+								</div>
+
 								<div ng-show="document.question24.furtherInfo">
 									<label>Further information</label>
 									<div class="km-value">{{document.question24.furtherInfo | lstring:locale}}</div>
@@ -668,28 +668,28 @@
 										</ul>
 
 									</div>
-								</div>	 
-							</ul>			
+								</div>
+							</ul>
 						</div>
 
 						<div>
 							<label>25. Has your country taken appropriate, effective and proportionate legislative, administrative or policy measures to provide that traditional knowledge associated with genetic resources utilized within your jurisdiction has been accessed in accordance with PIC or approval and involvement of indigenous and local communities and that MAT have been established as required by the domestic ABS legislation or regulatory requirements of the other Party where such indigenous and local communities are located as provided in Article 16.1?</label>
 							<ul>
-								<div class="km-value km-pre">{{booleanToText(document.question25.answer)}}</div>	
+								<div class="km-value km-pre">{{booleanToText(document.question25.answer)}}</div>
 								<div ng-show="document.question25.answer">
 									<label>Please indicate whether your country has taken measures to address situations of non-compliance with those measures as provided in Article 16.2?</label>
 									<ul>
-										<div class="km-value km-pre">{{booleanToText(document.question25.hasMeasures)}}</div>	
+										<div class="km-value km-pre">{{booleanToText(document.question25.hasMeasures)}}</div>
 									</ul>
 
-									<label>Has your country cooperated in specific cases of alleged violation of ABS measures as provided in Article 16.3?</label>	
+									<label>Has your country cooperated in specific cases of alleged violation of ABS measures as provided in Article 16.3?</label>
 									<ul>
 										<div class="km-value km-pre">{{booleanToText(document.question25.violation.answer)}}</div>
 										<div ng-show="document.question24.violation.furtherInfo">
 				                            <label>Further information</label>
 				                            <div class="km-value">{{document.question25.violation.furtherInfo | lstring:locale}}</div>
 				                        </div>
-									</ul>	
+									</ul>
 								</div>
 								<div ng-show="document.question25.furtherInfo">
 									<label>Further information</label>
@@ -705,14 +705,14 @@
 										</ul>
 
 									</div>
-								</div>	 	
+								</div>
 							</ul>
 					    </div>
 
 						<div>
 							<label>26. Does your country require users of genetic resources to provide information related to PIC, to the source of the genetic resource, to the establishment of MAT and/or utilization of genetic resources at a designated checkpoint, as appropriate, as provided in Article 17.1 (a)(i) and (ii))?</label>
 							<ul>
-								<div class="km-value km-pre">{{booleanToText(document.question26.answer)}}</div>	
+								<div class="km-value km-pre">{{booleanToText(document.question26.answer)}}</div>
 								<div ng-show="document.question26.answer">
 									<div ng-show="document.question26.additionalInfo">
 										<label>Further information</label>
@@ -721,7 +721,7 @@
 									<div>
 										<ul>
 											<label>Has your country taken measures to address situations of non-compliance?</label>
-											<div class="km-value km-pre">{{booleanToText(document.question26.violation.answer)}}</div>	
+											<div class="km-value km-pre">{{booleanToText(document.question26.violation.answer)}}</div>
 											<div ng-show="document.question26.violation.additionalInfo">
 					                            <label>Further information</label>
 					                            <div class="km-value">{{document.question26.violation.additionalInfo | lstring:locale}}</div>
@@ -743,14 +743,14 @@
 										</ul>
 
 									</div>
-								</div>	 	
+								</div>
 							</ul>
 					    </div>
 
 					    <div>
 					    	<label>27. Has your country provided the information referred to in Article 17.1 (a)(i) to relevant national authorities, to the Party providing PIC and to the ABS Clearing-House as provided in Article 17.1 (a)(iii)?</label>
 					    	<ul>
-								<div class="km-value km-pre">{{booleanToText(document.question27.answer)}}</div>	
+								<div class="km-value km-pre">{{booleanToText(document.question27.answer)}}</div>
 				                <div ng-show="document.question27.answer">
 				                    <div>
 						            	<label>Has your country made use of the checkpoint communique?</label>
@@ -775,7 +775,7 @@
 										<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
 										<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 									</div>
-								</div>	 
+								</div>
 					    	</ul>
 					    </div>
 
@@ -797,8 +797,8 @@
 										</ul>
 
 									</div>
-								</div>	 
-							</ul>			
+								</div>
+							</ul>
 						</div>
 
 					    <div>
@@ -823,8 +823,8 @@
 										</ul>
 
 									</div>
-								</div>	 
-							</ul>			
+								</div>
+							</ul>
 						</div>
 
 						<div>
@@ -845,29 +845,29 @@
 										</ul>
 
 									</div>
-								</div>	 
+								</div>
 								<div ng-show="document.question30.relevantDocuments">
 				                	<label>Any other relevant documents</label>
 									<div class="km-value" ng-repeat="item in document.question30.relevantDocuments">
 										<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
 										<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 									</div>
-								</div>	
-							</ul>			
+								</div>
+							</ul>
 						</div>
 					</div>
 				</div>
 
 				<div class="panel panel-success">
 					<div class="panel-heading">
-						<label>Compliance with mutually agreed terms (Article 18)</label>		    
+						<label>Compliance with mutually agreed terms (Article 18)</label>
 					</div>
 					<div class="panel-body">
 						<div>
 							<label>31. Is your country encouraging the inclusion of provisions in MAT to cover dispute resolution as provided in Article 18.1 (a) (b) and (c)?</label>
 							<ul>
-								<div class="km-value" ng-show="document.question31.notApplicable">Not applicable, since no access requirement are in place</div>	
-								<div class="km-value km-pre" ng-show="!document.question31.notApplicable">{{booleanToText(document.question31.answer)}}</div>		
+								<div class="km-value" ng-show="document.question31.notApplicable">Not applicable, since no access requirement are in place</div>
+								<div class="km-value km-pre" ng-show="!document.question31.notApplicable">{{booleanToText(document.question31.answer)}}</div>
 								<div ng-show="document.question31.furtherInfo">
 									<label>Further information</label>
 									<div class="km-value">{{document.question31.furtherInfo | lstring:locale}}</div>
@@ -882,8 +882,8 @@
 										</ul>
 
 									</div>
-								</div>	 
-							</ul>			
+								</div>
+							</ul>
 						</div>
 
 					    <div>
@@ -904,8 +904,8 @@
 										</ul>
 
 									</div>
-								</div>	 
-							</ul>			
+								</div>
+							</ul>
 						</div>
 
 						<div>
@@ -933,7 +933,7 @@
 										</ul>
 
 									</div>
-								</div>	 
+								</div>
 							</ul>
 						</div>
 
@@ -955,15 +955,15 @@
 										</ul>
 
 									</div>
-								</div>	 
+								</div>
 								<div ng-show="document.question34.relevantDocuments">
 				                	<label>Any other relevant documents</label>
 									<div class="km-value" ng-repeat="item in document.question34.relevantDocuments">
 										<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
 										<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 									</div>
-								</div>	
-							</ul>			
+								</div>
+							</ul>
 						</div>
 					</div>
 				</div>
@@ -972,7 +972,7 @@
 
 		<div class="panel panel-info">
 			<div class="panel-heading">
-				<label>Special considerations (Article 8)</label>		    
+				<label>Special considerations (Article 8)</label>
 			</div>
 			<div class="panel-body">
 
@@ -995,7 +995,7 @@
 								</ul>
 
 							</div>
-						</div>	
+						</div>
 						<label>Paid due regard to cases of present or imminent emergencies that threaten or damage human, animal or plant health as provided in Article 8(b)?</label>
 						<div class="km-value km-pre">{{booleanToText(document.question35.emergencies.answer)}}</div>
 						<div ng-show="document.question35.emergencies.furtherInfo">
@@ -1012,7 +1012,7 @@
 								</ul>
 
 							</div>
-						</div>	
+						</div>
 						<label>Taken into consideration the need for expeditious access to genetic resources and expeditious fair and equitable sharing of benefits arising out of the use of such genetic resources, including access to affordable treatments by those in need, especially, in developing countries as provided in Article 8(b)?</label>
 						<div class="km-value km-pre">{{booleanToText(document.question35.access.answer)}}</div>
 						<div ng-show="document.question35.access.furtherInfo">
@@ -1029,7 +1029,7 @@
 								</ul>
 
 							</div>
-						</div>	
+						</div>
 						<label>Considered the importance of genetic resources for food and agriculture and their special role for food security as provided in Article 8 (c)? </label>
 						<div class="km-value km-pre">{{booleanToText(document.question35.importance.answer)}}</div>
 						<div ng-show="document.question35.importance.furtherInfo">
@@ -1068,22 +1068,22 @@
 								</ul>
 
 							</div>
-						</div>	 
+						</div>
 						<div ng-show="document.question36.relevantDocuments">
 		                	<label>Any other relevant documents</label>
 							<div class="km-value" ng-repeat="item in document.question36.relevantDocuments">
 								<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
 								<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 							</div>
-						</div>	
-					</ul>			
+						</div>
+					</ul>
 				</div>
 			</div>
 		</div>
 
 		<div class="panel panel-info">
 			<div class="panel-heading">
-				<label>Provisions related to indigenous and local communities (Articles 6, 7 and 12)</label>		    
+				<label>Provisions related to indigenous and local communities (Articles 6, 7 and 12)</label>
 			</div>
 			<div class="panel-body">
 				<div>
@@ -1104,8 +1104,8 @@
 								</ul>
 
 							</div>
-						</div>	 
-					</ul>			
+						</div>
+					</ul>
 				</div>
 
 				<div>
@@ -1129,7 +1129,7 @@
 											</ul>
 
 										</div>
-									</div>									
+									</div>
 								</div>
 
 								<div>
@@ -1138,7 +1138,7 @@
 									<div ng-show="document.question38.measures.furtherInfo">
 										<label>Further Information</label>
 										<div class="km-value">{{document.question38.measures.furtherInfo | lstring:locale}}</div>
-									</div>											
+									</div>
 								</div>
 
 								<div>
@@ -1147,7 +1147,7 @@
 									<div ng-show="document.question38.pic.furtherInfo">
 										<label>Further Information</label>
 										<div class="km-value">{{document.question38.pic.furtherInfo | lstring:locale}}</div>
-									</div>											
+									</div>
 								</div>
 							</div>
 						</div>
@@ -1165,14 +1165,14 @@
 								</ul>
 
 							</div>
-						</div>	 
+						</div>
 					</ul>
 				</div>
 
 				<div>
 					<label>39. In accordance with domestic law has your country taken measures with the aim of ensuring that traditional knowledge associated with genetic resources that is held by indigenous and local communities within your country is accessed with the PIC or approval and involvement of these indigenous and local communities and that MAT have been established as provided in Article 7?</label>
 					<ul>
-						<div class="km-value km-pre">{{conditionalBooleanToText(!document.question37.answer,document.question39.answer)}}</div>	
+						<div class="km-value km-pre">{{conditionalBooleanToText(!document.question37.answer,document.question39.answer)}}</div>
 						<div ng-show="document.question39.furtherInfo">
 							<label>Further information</label>
 							<div class="km-value">{{document.question39.furtherInfo | lstring:locale}}</div>
@@ -1187,8 +1187,8 @@
 								</ul>
 
 							</div>
-						</div>	 
-					</ul>			
+						</div>
+					</ul>
 				</div>
 
 				<div>
@@ -1209,8 +1209,8 @@
 								</ul>
 
 							</div>
-						</div>	 
-					</ul>			
+						</div>
+					</ul>
 				</div>
 
 				<div>
@@ -1231,9 +1231,9 @@
 								</ul>
 
 							</div>
-						</div>	 
-					</ul>			
-				</div>	
+						</div>
+					</ul>
+				</div>
 
 				<div>
 					<label>42. Is your country supporting the development by indigenous and local communities of the following tools as provided in Article 12.3?</label>
@@ -1245,7 +1245,7 @@
 							<ul>
 								<div class="km-value km-pre">{{q42BooleanToText(document.question42.community.answer)}}</div>
 								<div ng-show="document.question42.community.furtherInfo">
-			                    	<label>Further information on how your country is supporting the development of community protocols</label>				
+			                    	<label>Further information on how your country is supporting the development of community protocols</label>
 			                    	<div class="km-value">{{document.question42.community.furtherInfo | lstring:locale}}</div>
 			                    </div>
 								<div ng-show="document.question42.community.documentReferenceIDs && !documentReferenceIDsEmpty(document.question42.community.documentReferenceIDs)">
@@ -1258,14 +1258,14 @@
 										</ul>
 
 									</div>
-								</div>	 
+								</div>
 							</ul>
-						</div>	
+						</div>
 
 						<div ng-show="document.question37.answer">
 							<label>Minimum requirements for mutually agreed terms</label>
 							<ul>
-								<div class="km-value km-pre">{{q42BooleanToText(document.question42.mat.answer)}}</div>							
+								<div class="km-value km-pre">{{q42BooleanToText(document.question42.mat.answer)}}</div>
 			                    <div ng-show="document.question42.mat.furtherInfo">
 			                    	<label>Further information on how your country is supporting the development of minimum requirements mutually agreed terms</label>
 			                    	<div ng-show="document.question42.mat.furtherInfo" class="km-value">{{document.question42.mat.furtherInfo | lstring:locale}}</div>
@@ -1280,7 +1280,7 @@
 										</ul>
 
 									</div>
-								</div>	 
+								</div>
 		                    </ul>
 						</div>
 
@@ -1302,9 +1302,9 @@
 										</ul>
 
 									</div>
-								</div>	 
+								</div>
 							</ul>
-						</div>	
+						</div>
 					</ul>
 				</div>
 
@@ -1326,8 +1326,8 @@
 								</ul>
 
 							</div>
-						</div>	 
-					</ul>			
+						</div>
+					</ul>
 				</div>
 
 				<div>
@@ -1349,15 +1349,15 @@
 								</ul>
 
 							</div>
-						</div>	 
+						</div>
 						<div ng-show="document.question44.relevantDocuments">
 		                	<label>Any other relevant documents</label>
 							<div class="km-value" ng-repeat="item in document.question44.relevantDocuments">
 								<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
 								<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 							</div>
-						</div>	
-					</ul>			
+						</div>
+					</ul>
 				</div>
 
 			</div>
@@ -1365,7 +1365,7 @@
 
 		<div class="panel panel-info">
 			<div class="panel-heading">
-				<label>Contribution to conservation and sustainable use (Article 9)</label>		    
+				<label>Contribution to conservation and sustainable use (Article 9)</label>
 			</div>
 			<div class="panel-body">
 				<div>
@@ -1386,8 +1386,8 @@
 								</ul>
 
 							</div>
-						</div>	 
-					</ul>			
+						</div>
+					</ul>
 				</div>
 
 				<div>
@@ -1407,8 +1407,8 @@
 								</ul>
 
 							</div>
-						</div>	 
-					</ul>			
+						</div>
+					</ul>
 				</div>
 
 				<div>
@@ -1429,28 +1429,28 @@
 								</ul>
 
 							</div>
-						</div>	 
+						</div>
 						<div ng-show="document.question47.relevantDocuments">
 		                	<label>Any other relevant documents</label>
 							<div class="km-value" ng-repeat="item in document.question47.relevantDocuments">
 								<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
 								<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 							</div>
-						</div>	
-					</ul>			
+						</div>
+					</ul>
 				</div>
 			</div>
 		</div>
 
 		<div class="panel panel-info">
 			<div class="panel-heading">
-				<label>Transboundary cooperation (Article 11)</label>		    
+				<label>Transboundary cooperation (Article 11)</label>
 			</div>
 			<div class="panel-body">
 				<div>
 					<label>48. Is your country endeavouring to cooperate, with the involvement of indigenous and local communities concerned, with a view to implementing the Protocol in instances where the same genetic resources are found in situ within the territory of more than one Party as provided in Article 11.1?</label>
 					<ul>
-						<div class="km-value km-pre">{{booleanToText(document.question48.answer)}}</div>	
+						<div class="km-value km-pre">{{booleanToText(document.question48.answer)}}</div>
 						<div ng-show="document.question48.ilcInfo">
 							<label>If your country has indigenous and local communities, please provide further detail their involvement</label>
 							<div class="km-value">{{document.question48.ilcInfo | lstring:locale}}</div>
@@ -1469,14 +1469,14 @@
 								</ul>
 
 							</div>
-						</div>	 
-					</ul>			
+						</div>
+					</ul>
 				</div>
 
 				<div>
 					<label>49. Is your country endeavouring to cooperate with a view to implementing the Protocol in instances where the same traditional knowledge associated with genetic resources is shared by one or more indigenous and local communities in several Parties as provided in Article 11.2?</label>
 					<ul>
-						<div class="km-value" ng-show="document.question49.notApplicable">Not applicable, since there are no indigenous and local communities in my country</div>	
+						<div class="km-value" ng-show="document.question49.notApplicable">Not applicable, since there are no indigenous and local communities in my country</div>
 						<div class="km-value km-pre" ng-show="!document.question49.notApplicable">{{booleanToText(document.question49.answer)}}</div>
 		                <div ng-show="document.question49.furtherInfo">
 							<label>Further information</label>
@@ -1492,7 +1492,7 @@
 								</ul>
 
 							</div>
-						</div>	 
+						</div>
 					</ul>
 				</div>
 
@@ -1514,22 +1514,22 @@
 								</ul>
 
 							</div>
-						</div>	 
+						</div>
 						<div ng-show="document.question50.relevantDocuments">
 		                	<label>Any other relevant documents</label>
 							<div class="km-value" ng-repeat="item in document.question50.relevantDocuments">
 								<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
 								<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 							</div>
-						</div>	
-					</ul>			
+						</div>
+					</ul>
 				</div>
 			</div>
 		</div>
 
 		<div class="panel panel-info">
 			<div class="panel-heading">
-				<label>Model contractual clauses, codes of conduct, guidelines and best practices and/or standards (Article 19 and 20)</label>	    
+				<label>Model contractual clauses, codes of conduct, guidelines and best practices and/or standards (Article 19 and 20)</label>
 			</div>
 			<div class="panel-body">
 				<div>
@@ -1550,8 +1550,8 @@
 								</ul>
 
 							</div>
-						</div>	 
-					</ul>			
+						</div>
+					</ul>
 				</div>
 				<div>
 					<label>52. Is your country encouraging the development, update and use of codes of conduct, guidelines and best practices or standards as provided in Article 20?</label>
@@ -1571,8 +1571,8 @@
 								</ul>
 
 							</div>
-						</div>	 
-					</ul>			
+						</div>
+					</ul>
 				</div>
 				<div>
 					<label>53. Additional information:</label>
@@ -1592,22 +1592,22 @@
 								</ul>
 
 							</div>
-						</div>	 
+						</div>
 						<div ng-show="document.question53.relevantDocuments">
 		                	<label>Any other relevant documents</label>
 							<div class="km-value" ng-repeat="item in document.question53.relevantDocuments">
 								<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
 								<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 							</div>
-						</div>	
-					</ul>			
+						</div>
+					</ul>
 				</div>
 			</div>
 		</div>
 
 		<div class="panel panel-info">
 			<div class="panel-heading">
-				<label>Awareness-raising and capacity (Article 21 and 22)</label>	    
+				<label>Awareness-raising and capacity (Article 21 and 22)</label>
 			</div>
 			<div class="panel-body">
 				<div>
@@ -1632,7 +1632,7 @@
 										</ul>
 
 									</div>
-								</div>	 
+								</div>
 							</div>
 						</div>
 						<div ng-show="document.question54.furtherInfo">
@@ -1649,7 +1649,7 @@
 								</ul>
 
 							</div>
-						</div>	 
+						</div>
 					</ul>
 				</div>
 
@@ -1675,7 +1675,7 @@
 										</ul>
 
 									</div>
-								</div>	 
+								</div>
 							</div>
 						</div>
 						<div ng-show="document.question55.furtherInfo">
@@ -1692,7 +1692,7 @@
 								</ul>
 
 							</div>
-						</div>	 
+						</div>
 					</ul>
 				</div>
 
@@ -1714,7 +1714,7 @@
 								</ul>
 
 							</div>
-						</div>	 
+						</div>
 					</ul>
 				</div>
 
@@ -1736,7 +1736,7 @@
 								</ul>
 
 							</div>
-						</div>	 
+						</div>
 					</ul>
 				</div>
 
@@ -1758,15 +1758,15 @@
 								</ul>
 
 							</div>
-						</div>	 
+						</div>
 						<div ng-show="document.question58.relevantDocuments">
 		                	<label>Any other relevant documents</label>
 							<div class="km-value" ng-repeat="item in document.question58.relevantDocuments">
 								<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
 								<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 							</div>
-						</div>	
-					</ul>			
+						</div>
+					</ul>
 				</div>
 
 			</div>
@@ -1774,7 +1774,7 @@
 
 		<div class="panel panel-info">
 			<div class="panel-heading">
-				<label>Technology transfer, collaboration and cooperation (Article 23)</label>	    
+				<label>Technology transfer, collaboration and cooperation (Article 23)</label>
 			</div>
 			<div class="panel-body">
 				<div>
@@ -1799,7 +1799,7 @@
 								</ul>
 
 							</div>
-						</div>	 
+						</div>
 					</ul>
 				</div>
 			</div>
@@ -1807,7 +1807,7 @@
 
 		<div class="panel panel-info">
 			<div class="panel-heading">
-				<label>Optional additional information</label>	    
+				<label>Optional additional information</label>
 			</div>
 			<div class="panel-body">
 				<div>
@@ -1827,8 +1827,8 @@
 								</ul>
 
 							</div>
-						</div>	 
-					</ul>			
+						</div>
+					</ul>
 				</div>
 
 				<div>
@@ -1857,7 +1857,7 @@
 								</ul>
 
 							</div>
-						</div>	 
+						</div>
 					</ul>
 				</div>
 
@@ -1924,7 +1924,7 @@
 								</ul>
 
 							</div>
-						</div>	 
+						</div>
 					</ul>
 				</div>
 
@@ -1932,16 +1932,16 @@
 					<label>63. Does your country have specific staff to administer functions directly related to the implementation of the Nagoya Protocol?</label>
 					<ul>
 						<div class="km-value km-pre">{{booleanToText(document.question63.answer)}}</div>
-                        <div ng-show="document.question63.answer">                        	
+                        <div ng-show="document.question63.answer">
                         	<ul>
                         		<label>Indicate how many</label><br />
 								<div class="km-value km-pre">{{document.question63.numberOfStaff}}</div>
                         	</ul>
-                        </div>       
+                        </div>
                         <div ng-show="document.question63.challengesInfo">
                             <label>Summary of the main difficulties and challenges encountered </label>
 							<div class="km-value">{{document.question63.challengesInfo | lstring:locale}}</div>
-                        </div>      
+                        </div>
                         <div ng-show="document.question63.furtherInfo">
                             <label>Further information </label>
 							<div class="km-value">{{document.question63.furtherInfo | lstring:locale}}</div>
@@ -1956,13 +1956,13 @@
 								</ul>
 
 							</div>
-						</div>	 
+						</div>
 					</ul>
 				</div>
 
 				<div>
 					<label>64. Any other relevant information:</label>
-					<ul>{{document}}
+					<ul>
 						<div class="km-value">{{text(document.question64.furtherInfo) | lstring:locale}}</div>
 						<div ng-show="document.question64.documentReferenceIDs && !documentReferenceIDsEmpty(document.question64.documentReferenceIDs)">
                 			<label>Please select the clearing-house record number containing relevant information</label>
@@ -1974,23 +1974,23 @@
 								</ul>
 
 							</div>
-						</div>	 
-						
+						</div>
+
 						<div ng-show="document.question64.relevantDocuments">
 		                	<label>Any other relevant documents</label>
 							<div class="km-value" ng-repeat="item in document.question64.relevantDocuments">
 								<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
 								<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 							</div>
-						</div>	
-					</ul>			
+						</div>
+					</ul>
 				</div>
 
 				<div>
 					<label>65. Notes:</label>
 					<ul>
 						<div class="km-value">{{text(document.question65) | lstring:locale}}</div>
-					</ul>			
+					</ul>
 				</div>
 
 			</div>
@@ -1998,18 +1998,18 @@
 
 		<div class="panel panel-info">
 			<div class="panel-heading">
-				<label>Comments in the reporting format</label>	    
+				<label>Comments in the reporting format</label>
 			</div>
 			<div class="panel-body">
 				<div>
 					<label>66. Please provide any comment that you may have regarding the format of  this report:</label>
 					<ul>
 						<div class="km-value">{{text(document.question66) | lstring:locale}}
-					</ul>			
+					</ul>
 				</div>
 			</div>
 		</div>
-		
+
 	</div>
 	<div document-metadata  class="panel-footer"></div>
 
