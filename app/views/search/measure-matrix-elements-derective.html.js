@@ -17,6 +17,7 @@ define(['app', 'underscore','/app/js/common.js'], function(app, _) {
             link: function($scope, $element, $attr, ngModelController) {
                 $scope.identifiers = null;
                 $scope.sections = null;
+                $scope.otherValues = null;
                 $scope.terms = null;
                 $scope.rootTerms = [];
 

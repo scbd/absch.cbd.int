@@ -151,19 +151,6 @@
 							<span ng-show="!groupedMeasures">
 								<i class="fa fa-spinner fa-spin fa-5x" />
 							</span>
-							<table class="table table-bordered matrixTable" ng-show="groupedMeasures">
-								<tr>
-									<th class="tableCell">
-										<table class="table">
-											<tr>
-												<th class="matrixheaderColumn rightBorder ">Element of the measure</th>
-												<th style="width:48.99%">
-													Covered by the following articles and sections</th>
-											</tr>
-										</table>
-									</th>
-								</tr>
-							</table>
 						</div>
 					</div>
 
@@ -186,8 +173,29 @@
 										</span>
 									</h3>
 								</div>
-								<div class="panel-body" id="pandelBody_{{$index}}">									
-									<div measure-matrix-elements name="absMeasures" type="multiple" ng-model="noModel" locales="measures[0].document.header.languages" document="jurisdiction.measures"></div>
+								<div class="panel-body" id="pandelBody_{{$index}}">
+									<div class="row">
+	                                    <div style="padding:10px; margin:0 10px;">
+	                                        <div class="row table-hover table-msr" ng-repeat="measure in jurisdiction.measures">
+	                                            <div class="row border" ng-click="measure.displayDetails = !measure.displayDetails;" style="cursor:pointer">
+														<i class="fa fa-chevron-circle-up" ng-show="measure.displayDetails"></i>
+														<i class="fa fa-chevron-circle-down" ng-show="!measure.displayDetails"></i>
+														<span>&nbsp;{{measure.title_t}}</span>	  	                                                
+														| {{measure.status_EN_t}} | {{measure.type_EN_t}} | {{measure.jurisdiction_EN_t}} |
+														<span ng-show="measure.adoption_dt">Adopted on </span>
+														<span ng-show="measure.entryIntoForce_dt">Entry into force on </span>
+														<span ng-show="measure.retired_dt">Retired on </span>
+														{{(measure.adoption_dt ||measure.entryIntoForce_dt || measure.retired_dt)|formatDate}}
+														<span ng-show="measure.limitedApplication_dt"> - {{measure.limitedApplication_dt|formatDate}}</span>													        
+	                                            </div>
+												<div class="row" ng-if="measure.displayDetails">													
+                                                    <div class="col-xs-12 details document-show-hide" record-loader document="measure.document"></div>
+                                                </div>
+	                                        </div>
+	                                    </div>
+	                                </div>									
+									<div measure-matrix-elements name="absMeasures" type="multiple" ng-model="noModel" locales="measures[0].document.header.languages"
+										 document="jurisdiction.measures"></div>
 								</div>
 							</div>
 

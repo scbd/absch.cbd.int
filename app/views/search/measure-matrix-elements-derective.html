@@ -114,13 +114,13 @@
                 <td class="matrixheaderColumn rightBorder " ng:class="{'paddingleft3':term.level==2 , 'paddingleft6':term.level==3, 'paddingleft9':term.level==4}">
 
                         <strong ng-show="!term.broaderTerms">{{term.title||term.name | lstring:locale|uppercase}}</strong>
-                        <strong ng-show="term.broaderTerms && !term.isMeasure">{{term.title||term.name | lstring:locale}}</strong>
+                        <span ng-show="term.broaderTerms && !term.isMeasure">{{term.title||term.name | lstring:locale}}</span>
                         <span ng-show="term.broaderTerms && term.isMeasure">
                             <a target="_new" href="/database/measure/{{term.measure|uniqueIDWithoutRevision}}">
                                 {{term.title||term.name | lstring:locale}}
-                            </a>
-                                <span ng-show="sections[term.identifier]">({{sections[term.identifier] | lstring:locale}})</span>
+                            </a>                               
                         </span>
+                         <strong ng-show="sections[term.identifier]">({{sections[term.identifier] | lstring:locale}})</strong>
                         <i class="fa fa-chevron-circle-up pull-right hand" ng-click="term.showUp=!term.showUp;showHideNode(term.identifier)" ng-show="!term.showUp" ng:if="term.level<2"></i>
                         <i class="fa fa-chevron-circle-down pull-right hand" ng-click="term.showUp=!term.showUp;showHideNode(term.identifier)" ng-show="term.showUp" ng:if="term.level<2"></i>
 

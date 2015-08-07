@@ -22,7 +22,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js'], functi
             return Measure();
           //TODO: this function appears generic to returning from .all, perhaps cut code by making this function and reusing it?
           var data = o[0].data;
-          data.push(o[1].data);
+          data.push(o[1].data);       
           return data;
         });
       },
@@ -188,41 +188,40 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js'], functi
       if (info.schema != "measure")
         return;
       
-      console.log($scope.document);
         
-        if($scope.document && $scope.document.absMeasures){
+        // if($scope.document && $scope.document.absMeasures){
            var queries = [$scope.options.absMeasures(), $scope.options.other()]
           $q.all(queries)
             .then(function(data){
               var elementMeasures = data[0];
-              var other           = data[1].data;
-              
-              _.each(elementsForOthers, function(element){
-                var otherElement = angular.copy(other);
-                
-                otherElement.identifier = otherElement.identifier + '#' + element;  
-                otherElement.broaderTerms.push(element);
-                elementMeasures.push(otherElement)
-               
-                var parentElement = _.find(elementMeasures, {identifier:element})
-                if(parentElement)
-                  parentElement.narrowerTerms.push(otherElement.identifier);
-                  
-              })
-              
-               console.log(elementMeasures);
-               $scope.absMeasureApi.updateTerms(elementMeasures);
+              var other           = data[1].data;            
+              elementMeasures = appendOthers(elementMeasures, other);
+              $scope.absMeasureApi.updateTerms(elementMeasures);
                 
             });
-          
-        }  
-        
+        // }
     });
+    
+    function appendOthers(elementMeasures, other){
+       _.each(elementsForOthers, function(element){
+          var otherElement = angular.copy(other);
+          
+          otherElement.identifier = otherElement.identifier + '#' + element;  
+          otherElement.broaderTerms.push(element);
+          elementMeasures.push(otherElement)
+         
+          var parentElement = _.find(elementMeasures, {identifier:element})
+          if(parentElement)
+            parentElement.narrowerTerms.push(otherElement.identifier);
+            
+        });
+        return elementMeasures;              
+    }
     
     var elementsForOthers = [
       "24E809DA-20F4-4457-9A8A-87C08DF81E8A","E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63","NEED-NEW-GUID","08B2CDEC-786F-4977-AD0A-6A709695528D","01DA2D8E-F2BB-4E85-A17E-AB0219194A17"
     ]
-
+    
     function Measure() {
       return [
         {
@@ -1052,6 +1051,9 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js'], functi
       },
       controller: ["$scope", "$q", "Thesaurus", "Enumerable", function ($scope, $q, thesaurus, Enumerable) {
         
+        var readOnlyElements = [
+          "24E809DA-20F4-4457-9A8A-87C08DF81E8A","4E2974DF-216E-46C8-8797-8E3A33D6A048","A862ABFC-B97D-4E6A-9A70-812A82A7CC19","E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63","NEED-NEW-GUID","08B2CDEC-786F-4977-AD0A-6A709695528D","01DA2D8E-F2BB-4E85-A17E-AB0219194A17"
+        ];
         $scope.api = {
           updateTerms : updateTerms
         }
@@ -1189,6 +1191,12 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js'], functi
         }
 
         $scope.$emit("getDocumentInfo", {});
+        
+        $scope.isReadOnly = function(identifier){
+          return _.indexOf(readOnlyElements, identifier)>=0;
+        }
+        
+        
       }]
     }
   });

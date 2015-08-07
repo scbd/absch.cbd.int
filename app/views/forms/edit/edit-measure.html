@@ -278,8 +278,8 @@
                   <td style="text-align:left;vertical-align:middle" id="{{term.identifier}}">
                     <label for="{{term.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED' ? 'otherAbsMeasure' : term.identifier}}">
                          <input type="checkbox" ng-model="identifiers[term.identifier]" ng-required="IsRequired()" value="{{term.identifier}}"
-                         ng:if="!term.narrowerTerms" />
-                         <span title="{{term.description|lstring:locale}}" ng:class="{true:'boldText',false:'normalText'}[term.narrowerTerms.length>0]">
+                         ng:if="!isReadOnly(term.identifier)" />
+                         <span title="{{term.description|lstring:locale}}" ng:class="{true:'boldText',false:'normalText'}[isReadOnly(term.identifier)]">
                               <span >{{term.title||term.name | lstring:locale}} </span>
                               <i ng-show="term.description" class="icon-question-sign"></i>
                          </span>
@@ -312,7 +312,8 @@
                   </tr>
                 </table>
 
-                <div edit-measure-abs name="absMeasures" api="absMeasureApi" required ng-model="document.absMeasures" locales="document.header.languages"  document="document"></div>
+                <div edit-measure-abs name="absMeasures" api="absMeasureApi" required ng-model="document.absMeasures" locales="document.header.languages" 
+                   document="document"></div>
               </div>
             </div>
           </section>
@@ -334,7 +335,7 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
-                  <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                  <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier" ></div>
                 </div>
               </div>
             </div>
