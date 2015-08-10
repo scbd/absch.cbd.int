@@ -392,7 +392,7 @@
                                     <div class="km-control-group" name="question16" caption="16. Please provide the number of permits or their equivalents made available through the ABS-Clearing-House since the entry into force of the Protocol for your country.">
 
                                      <div class="input-group col-xs-4"  name="question16.permitsOnAbsCh">
-                                        <input ng-disabled="!isQ11Yes(document.question11.answer)" type="number" name="permitsOnAbsCh" class="form-control text-right" ng-model="document.question16.permitsOnAbsCh">
+                                        <input ng-disabled="!isQ11Yes(document.question11.answer)" type="number" name="permitsOnAbsCh" class="form-control text-right" ng-model="document.question16.permitsOnAbsCh" min="0" ng-init="document.question16.permitsOnAbsCh=0">
                                     </div>
 
                                     </div>
@@ -435,7 +435,7 @@
 
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div class="km-control-group" required name="question18" caption="18. Benefits received since entry into force of the Protocol for your country from the utilization of:">
+                                    <div class="km-control-group" name="question18" caption="18. Benefits received since entry into force of the Protocol for your country from the utilization of:">
 
                                         <div class="checkbox">
                                             <label><input type="checkbox" ng-model="document.question18.geneticResources.answer" ng-change="Q18Clear()">Genetic resources</label>
