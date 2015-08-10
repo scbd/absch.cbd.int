@@ -40,6 +40,11 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
         if(_.isEmpty(document.question6))  document.question6 = undefined;
         if(_.isEmpty(document.question7))  document.question7 = undefined;
 
+        if(document.question16){
+            if(!_.isNumber(document.question16.permitsOnAbsCh))
+                document.question16.cpcsOnAbsChCount = undefined;
+        }
+
         if(document.question27){
             if(!_.isNumber(document.question27.cpcsOnAbsChCount))
                 document.question27.cpcsOnAbsChCount = undefined;
