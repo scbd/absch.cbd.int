@@ -42,7 +42,9 @@
             padding-right: 0px;
             padding-left: 0;
             text-align: left;
-            cursor: pointer color: #111;
+            cursor: pointer;
+            color: #111;
+            font-weight: bold;
         }
 
         .table-msr {
@@ -341,7 +343,7 @@
 
                         <div class="row bg-grey1" style="padding:3px;">
                             <h5 style="padding:0;margin:0;font-size:15px;">
-                                <a href="/measurematrix/{{code}}"><i class="fa fa-bar-chart"></i></a>
+                                <!--<a href="/measurematrix/{{code}}"><i class="fa fa-bar-chart"></i></a>-->
                                 <a href="" ng-click="showMSR = !showMSR">
                                    <i class="fa fa-chevron-circle-up pad-left" ng-show="showMSR"></i>
                                    <i class="fa fa-chevron-circle-down pad-left" ng-show="!showMSR"></i>
@@ -356,17 +358,17 @@
 
                         <div class="row" ng-show="showMSR">
                             <div style="padding:10px; margin:0 20px;">
-                                <div class="row table-hover table-msr">
-                                    <div class="col-lg-3 col-md-3 col-xs-3 tableheader" ng-click="sortMeasure='title_t';reverseMeasure=!reverseMeasure">name
+                                <div class="row table-hover table-msr" ng-hide="absMeasure.length==0" >
+                                    <div class="col-lg-4 col-md-4 col-xs-4 tableheader" ng-click="sortMeasure='title_t';reverseMeasure=!reverseMeasure">name
                                         <i class="fa" ng-class="{'fa-caret-up':(sortMeasure=='title_t' && reverseMeasure),'fa-caret-down':(sortMeasure=='title_t' && !reverseMeasure)}"></i>
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-xs-3 tableheader" ng-click="sortMeasure='type_EN_t';reverseMeasure=!reverseMeasure">type <i class="fa" ng-class="{'fa-caret-up':sortMeasure=='type_EN_t' && reverseMeasure,'fa-caret-down':sortMeasure=='type_EN_t' && !reverseMeasure}" />
+                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortMeasure='type_EN_t';reverseMeasure=!reverseMeasure">type <i class="fa" ng-class="{'fa-caret-up':sortMeasure=='type_EN_t' && reverseMeasure,'fa-caret-down':sortMeasure=='type_EN_t' && !reverseMeasure}" />
                                     </div>
                                     <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortMeasure='status_EN_t';reverseMeasure=!reverseMeasure">status <i class="fa" ng-class="{'fa-caret-up':sortMeasure=='status_EN_t' && reverseMeasure,'fa-caret-down':sortMeasure=='status_EN_t' && !reverseMeasure}" />
                                     </div>
                                     <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortMeasure='jurisdiction_EN_t';reverseMeasure=!reverseMeasure">jurisdiction <i class="fa" ng-class="{'fa-caret-up':sortMeasure=='jurisdiction_EN_t' && reverseMeasure,'fa-caret-down':sortMeasure=='jurisdiction_EN_t' && !reverseMeasure}" />
                                     </div>
-                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortMeasure='entryIntoForce_dt';reverseMeasure=!reverseMeasure">date <i class="fa" ng-class="{'fa-caret-up':sortMeasure=='entryIntoForce_dt' && reverseMeasure,'fa-caret-down':sortMeasure=='entryIntoForce_dt' && !reverseMeasure}" />
+                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortMeasure='entryIntoForce_dt';reverseMeasure=!reverseMeasure">entry into force <i class="fa" ng-class="{'fa-caret-up':sortMeasure=='entryIntoForce_dt' && reverseMeasure,'fa-caret-down':sortMeasure=='entryIntoForce_dt' && !reverseMeasure}" />
                                     </div>
                                 </div>
                                 <div class="row table-hover table-msr" ng-repeat="measure in absMeasure = (absch_nfp|filter:isMeasure|orderBy:sortMeasure:reverseMeasure)">
@@ -374,14 +376,14 @@
                                         <div class="row table-row">
 
                                             <div ng-click="displayDetails=!displayDetails;showDetails(measure)">
-                                                <div class="col-lg-3 col-md-3 col-xs-3">
-                                                    <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
+                                                <div class="col-lg-4 col-md-4 col-xs-4">
+                                                    <i class="material-icons color-published-green" style="font-size:14pt;">
                                                         {{'msr' | schemaIcon}}
                                                     </i>
-                                                    {{measure.title_t}}
+                                                    <strong class="color-blue" style="position:relative;top:-4px;"> {{measure.title_t}}</strong>
                                                     <i class="fa fa-refresh fa-spin" ng-show="displayDetails&& !measure.data" />
                                                 </div>
-                                                <div class="col-lg-3 col-md-3 col-xs-3">{{measure.type_EN_t}}</div>
+                                                <div class="col-lg-2 col-md-2 col-xs-2">{{measure.type_EN_t}}</div>
                                                 <div class="col-lg-2 col-md-2 col-xs-2">{{measure.status_EN_t}}</div>
                                                 <div class="col-lg-2 col-md-2 col-xs-2">{{measure.jurisdiction_EN_t}}</div>
                                                 <div class="col-lg-2 col-md-2 col-xs-2">{{measure.entryIntoForce_dt|formatDate}}</div>
@@ -398,6 +400,13 @@
                                 </div>
 
                             </div>
+                             <div style="margin:0 20px;margin-top:20px;" ng-hide="absMeasure.length==0" >
+                                <div>
+                                    <p class="tableheader" style="border-bottom:1px solid #ddd;">measures matrix</p>
+                                        <div measure-matrix-countries-directive></div>
+                                </div>
+                            </div>
+
                         </div>
 
 

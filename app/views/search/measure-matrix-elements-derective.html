@@ -96,11 +96,11 @@
         width:100%!important;
     }
 </style>
-    <table class="table table-bordered matrixTable">
+    <table class="table matrixTable">
         <tr style="border-bottom:1px solid #ddd">
-            <td class="pull-right noBorder">
-                 <i class="btn btn-primary fa fa-chevron-circle-up pull-right hand" ng-click="collapseAll=!collapseAll;showHideAll(true)"   ng-show="!collapseAll"> Collapse All</i>
-                 <i class="btn btn-primary fa fa-chevron-circle-down pull-right hand" ng-click="collapseAll=!collapseAll;showHideAll(false)" ng-show="collapseAll"> Expand All</i>
+            <td class="noBorder">
+                  <a class="pull-right" ng-click="collapseAll=!collapseAll;showHideAll(true)"  ng-show="!collapseAll">Collapse All <i class="fa fa-chevron-circle-up hand"></i></a>
+                  <a class="pull-right" ng-click="collapseAll=!collapseAll;showHideAll(false)" ng-show="collapseAll">Expand All <i class="fa fa-chevron-circle-down hand"></i></a>
             </td>
         </tr>
         <tr ng:repeat="term in rootTerms">

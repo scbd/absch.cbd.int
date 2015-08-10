@@ -14,6 +14,7 @@
    '/app/views/forms/view/view-resource.directive.js',
    '/app/js/directives/angucomplete-extended.js',
    '/app/views/countries/countries-left-menu-directive.html.js',
+   '/app/views/search/measure-matrix-countries-directive.html.js',
    '/app/js/common.js'
  ], function(app, _, linqjs) {
 
