@@ -23,9 +23,10 @@
 				<label>Country</label>
 			</div>
 			<div class="panel-body">
-				<div ng-show="document.government">
+				<div>
 					<label>1. Country</label>
-					<div class="km-value">{{document.government|term}}</div>
+					<div class="km-value"  ng-show="document.government">{{document.government|term}}</div>
+					<div class="km-value"  ng-hide="document.government">No country selected</div>
 				</div>
 			</div>
 		</div>
@@ -35,9 +36,10 @@
 				<label>General information</label>
 			</div>
 			<div class="panel-body">
-				<div ng-show="document.contact">
+				<div>
 					<label>2. Contact person</label>
-					<div view-contact-reference ng-model="document.contact" locale="locale">{{document.contact}}</div>
+					<div view-contact-reference ng-model="document.contact" locale="locale"  ng-show="document.contact">{{document.contact}}</div>
+					<div  class="km-value"  ng-hide="document.contact">No Contact provided</div>			
 				</div>
 			</div>
 		</div>
