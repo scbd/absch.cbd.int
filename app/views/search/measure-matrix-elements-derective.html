@@ -8,6 +8,10 @@
     .matrixheaderColumn {
         width: 40%;
     }
+    
+    .table > tbody > tr > td{
+     padding:3px;
+    }
 
     .tableCell {
         padding: 0px!important;
@@ -65,9 +69,28 @@
     .cover55 {
         width: 55%;
     }
+    
+    .paddingleft0 {
+        background-color: #ddd;
+        margin-top:30px!important;
+        border-bottom:1px #fff solid;
+    }
+    
+    .paddingleft3 {
+        font-weight:bold;
+    }
+    
+    .paddingleft3::before { 
+     content: " - ";
+    }
 
     .paddingleft6 {
         padding-left: 6%!important;
+        
+    }
+    
+    .paddingleft6::before { 
+     content: " - ";
     }
 
     .paddingleft9 {
@@ -95,12 +118,22 @@
     .table{
         width:100%!important;
     }
+    
+     .expander{
+        font-size:14px;
+        font-weight:bold;
+        position:relative;
+        top:15px;
+    }
+    
 </style>
     <table class="table matrixTable">
-        <tr style="border-bottom:1px solid #ddd">
+        <tr>
             <td class="noBorder">
-                  <a class="pull-right" ng-click="collapseAll=!collapseAll;showHideAll(true)"  ng-show="!collapseAll">Collapse All <i class="fa fa-chevron-circle-up hand"></i></a>
-                  <a class="pull-right" ng-click="collapseAll=!collapseAll;showHideAll(false)" ng-show="collapseAll">Expand All <i class="fa fa-chevron-circle-down hand"></i></a>
+                  <h3><strong>Elements of the measure</strong>
+                  <a class="pull-right expander" ng-click="collapseAll=!collapseAll;showHideAll(true)"  ng-show="!collapseAll">Collapse All <i class="fa fa-chevron-circle-up hand"></i></a>
+                  <a class="pull-right expander" ng-click="collapseAll=!collapseAll;showHideAll(false)" ng-show="collapseAll">Expand All <i class="fa fa-chevron-circle-down hand"></i></a>
+                  </h3>
             </td>
         </tr>
         <tr ng:repeat="term in rootTerms">
@@ -111,8 +144,8 @@
     <script type="text/ng-template" id="/app/views/search/matrix/measure-matrix.directive/abs/inner">
         <table class="table" ng:if="term.isChildSelected || (!term.broaderTerms && term.narrowerTerms)">
             <tr ng:class="{'elementMeasure':term.isMeasure, 'whiteTopBorder':term.hasMeasure}" >
-                <td class="matrixheaderColumn rightBorder " ng:class="{'paddingleft3':term.level==2 , 'paddingleft6':term.level==3, 'paddingleft9':term.level==4}">
-
+                <td class="matrixheaderColumn rightBorder " ng:class="{'paddingleft0':term.level==1, 'paddingleft3':term.level==2 , 'paddingleft6':term.level==3, 'paddingleft9':term.level==4}">
+                        &nbsp;
                         <strong ng-show="!term.broaderTerms">{{term.title||term.name | lstring:locale|uppercase}}</strong>
                         <span ng-show="term.broaderTerms && !term.isMeasure">{{term.title||term.name | lstring:locale}}</span>
                         <span ng-show="term.broaderTerms && term.isMeasure">
