@@ -160,7 +160,7 @@
                             '&q=(realm_ss:' + realm.value.toLowerCase() + ' OR realm_ss:absch) AND ((' + schemQuery +
                             ' AND government_s:' + $scope.code.toLowerCase() + ') OR (originCountries_ss:'+
                             $scope.code.toLowerCase() + ' OR permitSourceCountry_ss:' + $scope.code.toLowerCase() + 
-                            ') OR (jurisdictionRegions_REL_ss:'+ $scope.code.toLowerCase() + '))' +
+                            ') OR (jurisdictionRegions_REL_ss:'+ $scope.code.toLowerCase() + ' OR jurisdictionRegions_ss:' + $scope.code.toLowerCase() + '))' +
                             '&rows=100&sort=createdDate_dt+desc,+title_t+asc&start=0&wt=json';
             var queryCPCRevURL = '/api/v2013/index/select?fl=id,identifier_s,title_t,keywords_CEN_ss'+
                              'checkpoint_CEN_ss,createdDate_dt,geneticRessourceUsers_s,government_s,permit_ss,' +
@@ -172,9 +172,11 @@
 
            $q.all([queryProfile,queryCPCRecv])
             .then(function(results) {
+             
              $scope.absch_nfp = results[0].data.response.docs;
-             $scope.cpcReceived = results[1].data.response.docs;
-              //console.log($scope.absch_nfp);
+             $scope.cpcReceived = results[1].data.response.docs;              
+             var measureMatrixDocuments = [];
+             
               $scope.absch_nfp.forEach(function(document){
                   document.identifier = document.identifier_s
                   document.government = {identifier:document.government_s};
@@ -209,20 +211,15 @@
                       if(document.geneticRessourceUsers_s){
                         document.geneticRessourceUsers = $scope.parseJSON(document.geneticRessourceUsers_s);
                       }
-                    //   if(document.permit_ss){
-                    //       document.permit = [];
-                    //       _.each(document.permit_ss, function(permit){
-                    //           $q.when(IStorage.documents.get(permit))
-                    //               .then(function(data) {
-                    //                   document.permit.push(data.data);
-                    //            });
-                      //
-                    //       });
-                    //   }
+                  }
+                  //create seprate collection for measure matrix
+                  if(document.schema_s=='measure'){
+                      measureMatrixDocuments.push(document);
                   }
 
               });
-
+              $scope.measureMatrixDocuments = measureMatrixDocuments;
+              
               $scope.cpcReceived.forEach(function(document){
                   if(document.geneticRessourceUsers_s){
                     document.geneticRessourceUsers = $scope.parseJSON(document.geneticRessourceUsers_s);
