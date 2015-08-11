@@ -107,8 +107,6 @@
          $scope.absCheckpointCommunique = 0;
          $scope.database= 0;
 
-
-
         $scope.gotoSchema = $routeParams.schema;
         
         if($scope.gotoSchema)
