@@ -233,7 +233,7 @@
                                                  {{key | schemaIcon}}
                                             </i>
                                             <span style="font-weight:bold;padding:0;margin:0;position:relative;top:-5px;">{{key|schemaNamePlural}} ({{key|schemaShortName}})</span>
-                                            <a style="padding:0;margin:0;position:relative;top:-5px;" ng-if="key=='measure'" href="/measurematrix/{{country.code.toLowerCase()}}" > ( <i class="fa fa-table"></i>  measures matrix) </a> 
+                                            <a style="padding:0;margin:0;position:relative;top:-5px;" ng-if="key=='measure'" href="/countries/{{country.code.toUpperCase()}}/MSR" > ( <i class="fa fa-table"></i>  measures matrix) </a> 
                                         </span>
                                         
                                          <span class="pull-right badge bg-darkgrey">{{schema.length}}</span>
