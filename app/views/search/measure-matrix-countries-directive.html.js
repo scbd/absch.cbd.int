@@ -64,8 +64,8 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
             // }
             
               $scope.$watch('documents', function(docs){
-                if(docs){
-                    
+                if(docs && docs.length>0){
+                    console.log(docs)
                     var measuresQueryList = _.map(docs, function(measure) {
                             return $scope.loadMatrix(measure);
                         });

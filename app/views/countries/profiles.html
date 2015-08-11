@@ -381,6 +381,9 @@
                                                         {{'msr' | schemaIcon}}
                                                     </i>
                                                     <strong class="color-blue" style="position:relative;top:-4px;"> {{measure.title_t}}</strong>
+                                                    <span ng-if="measure.jurisdiction_s=='528B1187-F1BD-4479-9FB3-ADBD9076D361'" style="position:relative;top:-4px;">
+                                                       (owned by {{measure.government|term}})
+                                                    </span>
                                                     <i class="fa fa-refresh fa-spin" ng-show="displayDetails&& !measure.data" />
                                                 </div>
                                                 <div class="col-lg-2 col-md-2 col-xs-2">{{measure.type_EN_t}}</div>
@@ -403,7 +406,7 @@
                              <div style="margin:0 20px;margin-top:20px;" ng-hide="absMeasure.length==0" >
                                 <div>
                                     <p class="tableheader" style="border-bottom:1px solid #ddd;">measures matrix</p>
-                                        <div measure-matrix-countries-directive documents="absch_nfp|filter:isMeasure"></div>
+                                        <div measure-matrix-countries-directive documents="measureMatrixDocuments"></div>
                                 </div>
                             </div>
 
