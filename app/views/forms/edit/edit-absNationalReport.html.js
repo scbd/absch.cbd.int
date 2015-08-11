@@ -50,7 +50,8 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
                 document.question27.cpcsOnAbsChCount = undefined;
         }
 
-        document.title = {en: $filter("term")(document.government) + " Interim national report on the implementation of the Nagoya Protocol"};
+        if(document.government)
+            document.title = {en: $filter("term")(document.government) + " Interim national report on the implementation of the Nagoya Protocol"};
 
         return document;
     };
@@ -238,7 +239,6 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
     //
     //==================================
     $scope.Q24Clear = function (answer) {
-        console.log(answer);
         if(!answer && $scope.document && $scope.document.question24){
             $scope.document.question24.measures  = undefined;
             $scope.document.question24.violation = undefined;
