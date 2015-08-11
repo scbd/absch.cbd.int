@@ -8,7 +8,9 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
             templateUrl: "/app/views/search/measure-matrix-countries-directive.html",
             replace: true,
             transclude: false,
-            scope: {},
+            scope: {
+                documents: "="
+            },
             link:{},
             controller: ['$scope', '$http', 'realm', '$q', '$filter', '$routeParams', '$element',
                             function($scope, $http, realm, $q, $filter, $routeParams, $element) {
@@ -24,42 +26,62 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
 
             $scope.currentPage = 0;
             $scope.itemsPerPage = 1000;
-            if ($routeParams.code) {
-                var queryParameters = {
-                    'q': 'realm_ss:' + realm.value.toLowerCase() + ' AND schema_s:measure AND government_s:' + $routeParams.code.toLowerCase(),
-                    'sort': 'government_EN_t asc',
-                    'fl': 'id,identifier_s,title_t,createdDate_dt,description_t,government_EN_t,status_EN_t,type_EN_t,jurisdiction_EN_t,adoption_dt,entryIntoForce_dt,retired_dt,limitedApplication_dt',
-                    'wt': 'json',
-                    'start': $scope.currentPage * $scope.itemsPerPage,
-                    'rows': $scope.itemsPerPage
-                };
+            // if ($routeParams.code) {
+            //     var queryParameters = {
+            //         'q': 'realm_ss:' + realm.value.toLowerCase() + ' AND schema_s:measure AND government_s:' + $routeParams.code.toLowerCase(),
+            //         'sort': 'government_EN_t asc',
+            //         'fl': 'id,identifier_s,title_t,createdDate_dt,description_t,government_EN_t,status_EN_t,type_EN_t,jurisdiction_EN_t,adoption_dt,entryIntoForce_dt,retired_dt,limitedApplication_dt',
+            //         'wt': 'json',
+            //         'start': $scope.currentPage * $scope.itemsPerPage,
+            //         'rows': $scope.itemsPerPage
+            //     };
 
-                $http.get('/api/v2013/index/select', {
-                        params: queryParameters
-                    })
-                    .success(function(data) {
+            //     $http.get('/api/v2013/index/select', {
+            //             params: queryParameters
+            //         })
+            //         .success(function(data) {
 
-                        $scope.measures = [];
-                        var measuresData = data.response.docs;
-                        $scope.documentCount = data.response.numFound;
+            //             $scope.measures = [];
+            //             var measuresData = data.response.docs;
+            //             $scope.documentCount = data.response.numFound;
 
-                        var measuresQueryList = _.map(measuresData, function(measure) {
+            //             var measuresQueryList = _.map(measuresData, function(measure) {
+            //                 return $scope.loadMatrix(measure);
+            //             });
+            //             $q.all(measuresQueryList)
+            //                 .then(function() {
+            //                     //measure.isLoading=false;
+            //                     console.log('done');
+            //                     $scope.measures = measuresData;
+            //                     $scope.matrixGroupBy = 'jurisdiction';
+
+            //                 });
+
+            //         }).error(function(error) {
+            //             console.log('onerror');
+            //             console.log(error);
+            //         });
+            // }
+            
+              $scope.$watch('documents', function(docs){
+                if(docs){
+                    
+                    var measuresQueryList = _.map(docs, function(measure) {
                             return $scope.loadMatrix(measure);
                         });
                         $q.all(measuresQueryList)
                             .then(function() {
                                 //measure.isLoading=false;
                                 console.log('done');
-                                $scope.measures = measuresData;
+                                $scope.measures = docs;
                                 $scope.matrixGroupBy = 'jurisdiction';
 
                             });
 
-                    }).error(function(error) {
-                        console.log('onerror');
-                        console.log(error);
-                    });
-            }
+                    
+                }
+            });
+            
             var measuresCache = {};
             $scope.loadMatrix = function(measure) {
 

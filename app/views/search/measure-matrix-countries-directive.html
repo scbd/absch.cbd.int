@@ -108,6 +108,8 @@
 			    padding-top: 5px;
 			    cursor: pointer;
 			}
+			md-list-item.md-2-line .md-list-item-text{padding:0;}
+			md-divider{padding:0;}
 		</style>
 		
 
@@ -182,48 +184,34 @@
 								<div class="panel-body" id="pandelBody_{{$index}}" style="margin-top:0;padding-top:0;">
 									<div class="row" >
 	                                    <div style="padding:10px; margin:0 10px;">
-	                                        <div class="row" ng-repeat="measure in jurisdiction.measures" style="padding:0 10px;">
-												<a href="/database/measure/{{measure.identifier_s}}" target="_new_">
-													 <i class="material-icons color-published-green" style="font-size:14pt;position:relative;top:4px;">
-	                                                        {{'msr' | schemaIcon}}
-	                                                    </i>
-	                                                    <strong class="color-blue" > {{measure.title_t}}</strong>
-														<br>
-													<span class="metadetails">	  	                                                
-															| {{measure.type_EN_t}} | {{measure.status_EN_t}} | {{measure.jurisdiction_EN_t}} |
-															<span ng-show="measure.adoption_dt">Adopted on </span>
-															<span ng-show="measure.entryIntoForce_dt">Entry into force on </span>
-															<span ng-show="measure.retired_dt">Retired on </span>
-															{{(measure.adoption_dt ||measure.entryIntoForce_dt || measure.retired_dt)|formatDate}}
-															<span ng-show="measure.limitedApplication_dt"> - {{measure.limitedApplication_dt|formatDate}}</span>
-													</span>
-												</a>
-												
-	                                            <!--<div class="row border" ng-click="measure.displayDetails = !measure.displayDetails;" style="cursor:pointer">
-														<i class="fa fa-chevron-circle-up" ng-show="measure.displayDetails"></i>
-														<i class="fa fa-chevron-circle-down" ng-show="!measure.displayDetails"></i>
-														<span>&nbsp;{{measure.title_t}}</span>	  	                                                
-														| {{measure.status_EN_t}} | {{measure.type_EN_t}} | {{measure.jurisdiction_EN_t}} |
-														<span ng-show="measure.adoption_dt">Adopted on </span>
-														<span ng-show="measure.entryIntoForce_dt">Entry into force on </span>
-														<span ng-show="measure.retired_dt">Retired on </span>
-														{{(measure.adoption_dt ||measure.entryIntoForce_dt || measure.retired_dt)|formatDate}}
-														<span ng-show="measure.limitedApplication_dt"> - {{measure.limitedApplication_dt|formatDate}}</span>													        
-	                                            </div>
-												<div class="row" ng-if="measure.displayDetails">													
-                                                    <div class="col-xs-12 details document-show-hide" record-loader document="measure.document"></div>
-                                                </div>-->
-	                                        </div>
+												<md-list>
+													<md-divider ></md-divider>
+											      <md-list-item class="md-2-line" ng-repeat="measure in jurisdiction.measures" >
+													   <md-divider ></md-divider>
+												       <i class="material-icons color-published-green" style="font-size:14pt;margin-right:12px;padding-top:11px;">
+		                                                	 {{'msr' | schemaIcon}}
+		                                                </i>
+												        <div class="md-list-item-text" >
+												          <a href="/database/measure/{{measure.identifier_s}}" target="_new_">
+														  <strong class="color-blue" > {{measure.title_t}}</strong><br>
+												          <span class="metadetails">	  	                                                
+															    {{measure.type_EN_t}} | {{measure.status_EN_t}} | {{measure.jurisdiction_EN_t}} |
+																<span ng-show="measure.adoption_dt" class="color-grey">Adopted on </span>
+																<span ng-show="measure.entryIntoForce_dt" class="color-grey">Entry into force on </span>
+																<span ng-show="measure.retired_dt" class="color-grey">Retired on </span>
+																{{(measure.adoption_dt ||measure.entryIntoForce_dt || measure.retired_dt)|formatDate}}
+																<span ng-show="measure.limitedApplication_dt"> - {{measure.limitedApplication_dt|formatDate}}</span>
+														  </span>
+														  </a>
+												        </div>
+											      </md-list-item>
+											    </md-list>
 	                                    </div>
 	                                </div>									
 									<div measure-matrix-elements name="absMeasures" type="multiple" ng-model="noModel" locales="measures[0].document.header.languages"
 										 document="jurisdiction.measures"></div>
 								</div>
 							</div>
-
-						
 					</div>
 				</div>
-			
-		
 	</div>
