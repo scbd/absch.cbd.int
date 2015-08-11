@@ -50,6 +50,8 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
                 document.question27.cpcsOnAbsChCount = undefined;
         }
 
+        document.title = {en: $filter("term")(document.government) + " Interim national report on the implementation of the Nagoya Protocol"};
+
         return document;
     };
 
