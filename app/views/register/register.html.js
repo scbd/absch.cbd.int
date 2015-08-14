@@ -67,6 +67,10 @@ define(['app','linqjs', 'angular-localizer',
 		}
     };
 
+    if($scope.development_env) {
+      $rootScope.subheadings["National Records"].formats.push('absNationalReport');
+    }
+
     $rootScope.document_types = {
 	  	absNationalReport: {
 			abbreviation: 'NR',
@@ -198,6 +202,7 @@ define(['app','linqjs', 'angular-localizer',
       {"schema":"database","schemaType":"nationalRecords", "header": "NDB","draftCount":0,"requestCount":0,"publishCount": 0},
       {"schema":"resource","schemaType":"referenceRecords", "header": "VLR","draftCount":0,"requestCount":0,"publishCount": 0},
       {"schema":"contact","schemaType":"others", "header": "CON","draftCount":0,"requestCount":0,"publishCount": 0},
+      {"schema":"absNationalReport","schemaType":"nationalRecords", "header": "NR","draftCount":0,"requestCount":0,"publishCount": 0},
 
 	{"schema":"completedTasks","schemaType":"others", "requestCount":0},
 	{"schema":"pendingTasks","schemaType":"others", "requestCount": 0},

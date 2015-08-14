@@ -19,9 +19,9 @@
  ], function(app, _, linqjs) {
 
    app.controller("ProfileController", ["$scope", "$http", "$routeParams", "linqjs", "$filter", "realm",
-                "commonjs", "$q", '$element', '$timeout','commonjs','IStorage','$rootScope','$mdSidenav', '$mdUtil', '$mdMedia','schemaTypes','breadcrumbs',
+                "commonjs", "$q", '$element', '$timeout','commonjs','IStorage','$rootScope','$mdSidenav', '$mdUtil', '$mdMedia','schemaTypes','breadcrumbs','smoothScroll',
      function($scope, $http, $routeParams, linqjs, $filter, realm, commonjs, $q,
-                $element, $timeout, countriescommonjs, IStorage,$rootScope, $mdSidenav, $mdUtil, $mdMedia, schemaTypes, breadcrumbs) {
+                $element, $timeout, countriescommonjs, IStorage,$rootScope, $mdSidenav, $mdUtil, $mdMedia, schemaTypes, breadcrumbs,smoothScroll) {
 
 
     $scope.toggleLeft = buildToggler('left');
@@ -45,8 +45,6 @@
           },300);
       return debounceFn;
     }
-
-
 
 
     //**********************************************************
@@ -108,6 +106,39 @@
          $scope.absCheckpoint= 0;
          $scope.absCheckpointCommunique = 0;
          $scope.database= 0;
+
+        $scope.gotoSchema = $routeParams.schema;
+        
+        if($scope.gotoSchema)
+        {
+            $scope.showCPC = false;
+            $scope.showIRCC = false;
+            $scope.showMSR = false;
+            $scope.showNFP = false;
+            $scope.showNDB = false;
+            $scope.showCNA = false;
+            $scope.showCP = false;
+            $scope.showCPCRecv = false;
+            
+            if($scope.gotoSchema == 'CPC')
+                 $scope.showCPC = true;
+            if($scope.gotoSchema == 'IRCC')
+                $scope.showIRCC = true;
+            if($scope.gotoSchema == 'MSR')
+                $scope.showMSR = true;
+            if($scope.gotoSchema == 'NFP')
+                $scope.showNFP = true;
+            if($scope.gotoSchema == 'NDB')
+                $scope.showNDB = true;
+            if($scope.gotoSchema == 'CNA')
+                $scope.showCNA = true;
+            if($scope.gotoSchema == 'CP')
+                $scope.showCP = true;
+            if($scope.gotoSchema == 'CPCRecv')
+                $scope.showCPCRecv = true;
+        }
+        
+
 
 
          //**********************************************************
