@@ -141,6 +141,7 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                         // if (!newValue && oldValue) {
                         //     $scope.transformedGroupDocuments = [];
                         // }
+                        // console.log('country group watch,' ,newValue);
                         if (newValue && newValue != oldValue) {
                             $scope.pageCount = Math.ceil($scope.documentCount / $scope.itemsPerPage);
                             $scope.transformedDocuments = [];
@@ -188,7 +189,9 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                                                             title       :   document.title_t,
                                                             schema      :   document.schema_s,
                                                             type        :   document.type_ss,
-                                                            government  :   {identifier:country.code}
+                                                            government  :   {identifier:document.government_s||country.code},
+                                                            ownerGovernment  :  document.ownerGovernment_s ? {identifier:document.ownerGovernment_s} : undefined,
+                                                            jurisdiction     :   document.jurisdiction_s
                                                         });
                                                     });
                                                 }
@@ -433,6 +436,7 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                             //TODO: output.description should be the description
                             //TODO: metadata should be the url opening to a new window
                         } else if (document.schema_s == 'measure') {
+                            document.ownerGovernment = {identifier:document.ownerGovernment_s};
                             if (document.adoption_dt)
                                 output.metadata.push('Adopted on ' + $filter('formatDate')(document.adoption_dt));
                             output.adoption = document.adoption_dt;

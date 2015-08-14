@@ -153,14 +153,13 @@
            var queryURL = '/api/v2013/index/select?fl=id,identifier_s,title_t,description_t,url_ss,schema_EN_t,date_dt,' +
                             'government_s,government_EN_t,schema_s,number_d,aichiTarget_ss,reference_s,sender_s,meeting_ss,recipient_ss,' +
                             'symbol_s,eventCity_EN_t,eventCountry_EN_t,startDate_s,endDate_s,body_s,code_s,meeting_s,group_s,function_t,' +
-                            'department_t,organization_t,summary_EN_t,reportType_EN_t,completion_EN_t,jurisdiction_s,jurisdiction_EN_t,development_EN_t' +
+                            'department_t,organization_t,summary_EN_t,reportType_EN_t,completion_EN_t,ownerGovernment_s,jurisdiction_EN_t,development_EN_t' +
                             ',type_ss,email_ss,fax_ss,telephone_s,government_CEN_s,type_EN_t,status_EN_t,entryIntoForce_dt, usage_CEN_ss,keywords_CEN_ss,'+
                             'date_s,informedConsents_s,permit_ss,originCountries_CEN_ss,checkpoint_CEN_ss,createdDate_dt,geneticRessourceUsers_s,authority_s'+
                             '' +
                             '&q=(realm_ss:' + realm.value.toLowerCase() + ' OR realm_ss:absch) AND ((' + schemQuery +
                             ' AND government_s:' + $scope.code.toLowerCase() + ') OR (originCountries_ss:'+
-                            $scope.code.toLowerCase() + ' OR permitSourceCountry_ss:' + $scope.code.toLowerCase() + 
-                            ') OR (jurisdictionRegions_REL_ss:'+ $scope.code.toLowerCase() + ' OR jurisdictionRegions_ss:' + $scope.code.toLowerCase() + '))' +
+                            $scope.code.toLowerCase() + ' OR permitSourceCountry_ss:' + $scope.code.toLowerCase() + '))' +
                             '&rows=100&sort=createdDate_dt+desc,+title_t+asc&start=0&wt=json';
             var queryCPCRevURL = '/api/v2013/index/select?fl=id,identifier_s,title_t,keywords_CEN_ss'+
                              'checkpoint_CEN_ss,createdDate_dt,geneticRessourceUsers_s,government_s,permit_ss,' +
@@ -179,7 +178,7 @@
              
               $scope.absch_nfp.forEach(function(document){
                   document.identifier = document.identifier_s
-                  document.government = {identifier:document.government_s};
+                  document.ownerGovernment = {identifier:document.ownerGovernment_s};
                   if(document.schema_s == "focalPoint" ){
                       document.description_t = document.description_t.replace(/\n/g, '<br/>');
                       document.documentId = commonjs.hexToInteger(document.identifier_s);

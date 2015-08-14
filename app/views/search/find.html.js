@@ -192,7 +192,7 @@ define(['app','underscore','/app/js/common.js',
                     'sort': orderByFields,
                     'fl': 'id,identifier_s,title_t,createdDate_dt,description_t,url_ss,schema_EN_t,date_dt,government_EN_t,schema_s,number_d,aichiTarget_ss,reference_s,sender_s,meeting_ss,recipient_ss,symbol_s,eventCity_EN_t,eventCountry_EN_t,startDate_s,endDate_s,body_s,code_s,meeting_s,group_s,function_t,department_t,organization_t,summary_EN_t,reportType_EN_t,completion_EN_t,jurisdiction_EN_t,development_EN_t,' +
                             'government_s,publicationYear_is,resourceTypes_CEN_ss,regions_CEN_ss,languages_CEN_ss,absResposibleForAll_b,absJurisdiction_EN_t,jurisdiction_CEN_s,geneticResourceTypes_CEN_ss,thematicAreas_CEN_ss,usage_CEN_ss,keywords_CEN_ss,informAllAuthorities_b,originCountries_CEN_ss,orgperson_s,status_EN_t,type_EN_t,endDate_dt,startDate_dt,amendmentIntent_i,' +
-                            'resourceLinksLanguage_ss,type_ss',
+                            'resourceLinksLanguage_ss,type_ss,ownerGovernment_s',
                     'wt': 'json',
                     'start': $scope.currentPage * $scope.itemsPerPage,
                     'rows': $scope.itemsPerPage,
@@ -203,11 +203,10 @@ define(['app','underscore','/app/js/common.js',
                 queryParameters = {
                     'q': q + ' AND government_s:*',
                     'sort': 'government_EN_t asc, createdDate_dt desc, title_t asc',
-                    'fl': 'id,identifier_s,title_t,description_t,url_ss,schema_EN_t,date_dt,government_s,government_EN_t,schema_s,summary_EN_t,jurisdiction_EN_t, type_ss, uniqueIdentifier_s',
+                    'fl': 'id,identifier_s,title_t,description_t,url_ss,schema_EN_t,date_dt,government_s,government_EN_t,schema_s,summary_EN_t,jurisdiction_EN_t, type_ss, uniqueIdentifier_s,ownerGovernment_s',
                     'wt': 'json',
                     'start': $scope.currentPage * $scope.itemsPerPage,
                     'rows': $scope.itemsPerPage,
-                    // 'cb': new Date().getTime(),
                     'group': true,
                     'group.ngroups' : true,
                     'group.field': 'government_s',
@@ -236,19 +235,16 @@ define(['app','underscore','/app/js/common.js',
                  }
                  else {
                      var lRawDocs = [];
-                     if($scope.rawDocs)
+                     if($scope.rawDocs && $scope.currentPage!=0)
                         lRawDocs = _.clone($scope.rawDocs);
-
+                        
                     _.map(lRawDocs, function(doc){doc.newRecord = false;});
-                     //$scope.rawDocs = data.grouped.government_s.groups;
-                    data.grouped.government_s.groups.forEach(function(doc){
-                        //$timeout(function(){
+                    
+                    data.grouped.government_s.groups.forEach(function(doc){                    
                                 doc.newRecord = true;
                                 lRawDocs.push(doc);
-                            //},1);
                     });
                     $scope.rawDocs = lRawDocs;
-                    //$scope.rawDocs = data.grouped.government_s.groups;
                     $scope.documentCount = data.grouped.government_s.ngroups;
                  }
 
