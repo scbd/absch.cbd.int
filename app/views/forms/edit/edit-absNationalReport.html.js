@@ -24,7 +24,7 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
     $scope.path=$location.path();
 
     $scope.getCleanDocument = function(document) {
-
+   
         document = document || $scope.document;
 
         if (!document)

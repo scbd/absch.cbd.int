@@ -20,7 +20,7 @@ define([
 
     $scope.type = $rootScope.document_types[$filter("mapSchema")($routeParams.document_type)];
 
-    $scope.status   = "";
+    $scope.status   = "loading";
     $scope.error    = null;
 
     $scope.tab      = "edit";
@@ -351,7 +351,7 @@ define([
     //
     //==================================
     $scope.loadRecords = function(identifier, schema, cache) {
-
+      
       if(cache == undefined) cache = true;
 
       if (identifier) { //lookup single record
@@ -386,6 +386,9 @@ define([
     }
 
     $scope.setDocument = function(additionalParams, excludeGovernment) {
+      
+      $scope.status = "loading";
+      
       var qDocument = {};
       $scope.document = {};
       if($routeParams.identifier)
@@ -413,7 +416,6 @@ define([
       $q.when(qDocument).then(function(doc) {
 
         $scope.tab    = "edit";
-        $scope.status = "ready";
         $scope.document = doc;
 
         $scope.origanalDocument = angular.copy(doc);
@@ -425,7 +427,9 @@ define([
         }
 
         $scope.$emit("loadDocument", {identifier:doc.header.identifier,schema:doc.header.schema});
-
+        
+        $scope.status = "ready";
+        
       }).catch(function(err) {
 
         $scope.onError(err.data, err.status)
