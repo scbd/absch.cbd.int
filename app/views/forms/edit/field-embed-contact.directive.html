@@ -52,7 +52,7 @@
         <div class="col-xs-12"><div style="border-bottom:3px solid #111;"></div></div>
     </div> -->
 
-    <div class="row" style="padding-top:20px" >
+    <div class="row" style="padding-top:20px" ng-if="getContacts().length > 0">
 
         <div class="col-sm-12" ng-class="{'col-md-6' : getContacts().length>1, 'col-md-12' : getContacts().length<=1}" ng-repeat="contact in getContacts() | filter:filterBy | filter:keywords">
             <div class="well bg-white  no-shadow thin-border">
@@ -68,8 +68,8 @@
     </div>
     <!-- ng-show="showButtons()" -->
     	<button class="btn btn-default" ng-click="editContact(-1)" >
-	  {{caption||'ADD ORGANIZATION OR CONTACT »'}}
-	</button>
+	     <i class="fa fa-plus"></i> {{caption || 'ADD ORGANIZATION OR CONTACT »'}}
+	   </button>
 
     <!-- Modal -->
     <div class="modal fade" id="editContact" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

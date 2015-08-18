@@ -590,3 +590,7 @@ form label[required]:before
 .tab-selected{
 border-bottom:5px solid pink;	
 }
+
+label{
+	font-weight:normal;	
+}

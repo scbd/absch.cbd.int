@@ -4,7 +4,7 @@
 
     <md-content layout-padding style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
 
-  <div class="registerpage-content">
+  <div class="registerpage-content" style="padding-bottom:30px;">
 
     <div ng-show="msg" class="alert alert-success alert-dismissable">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="msg=''">&times;</button>
@@ -72,12 +72,12 @@
                             <legend>Institutional structures for the implementation of the Protocol</legend>
             				<div class="row">
             					<div class="col-xs-12">
-                                    <div class="km-control-group" required name="question3" caption="3. Has your country made the information available to the ABS Clearing-House as provided in Article 14.2?">
+                                    <div class="km-control-group" bold required name="question3" caption="3. Has your country made the information available to the ABS Clearing-House as provided in Article 14.2?">
                                         <div class="km-yes-no" required name="question3" ng-model="document.question3.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question3Challenges" caption="">
                                         <div ng-show="!isQ3Yes(document.question3.answer)">
-                                            <strong>Please provide a summary of the main difficulties and challenges encountered and answer all the following questions.</strong>
+                                            Please provide a summary of the main difficulties and challenges encountered and answer all the following questions.
                                             <div km-textbox-ml rows=4 name="question3Challenges" ng-model="document.question3.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                         </div>
                                     </div>
@@ -101,7 +101,7 @@
                                     </div>
 
                                     <div ng-show="document.question4.answer" class="km-control-group" name="question4.AdditionalInfo" caption="">
-                                        <strong>Please provide additional information.</strong>
+                                        Please provide additional information.
                                         <div km-textbox-ml rows=4 name="question4.AdditionalInfo" ng-model="document.question4.additionalInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -131,7 +131,7 @@
                                     </div>
 
                                     <div ng-show="!isQ3Yes(document.question3.answer)" class="km-control-group" name="question5FurtherInfo" caption="">
-                                        <strong>Please provide further information.</strong>
+                                        Please provide further information.
                                         <div km-textbox-ml rows=4 name="question5FurtherInfo" ng-model="document.question5.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -155,7 +155,7 @@
                                         <div km-textbox-ml rows=4 name="question6.ChallengesInfo" ng-required="isQ3Yes(document.question3.answer)" ng-model="document.question6.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
                                     <div  ng-show="!isQ3Yes(document.question3.answer)" class="km-control-group" name="question6FurtherInfo" caption="">
-                                        <strong>Please provide further information.</strong>
+                                        Please provide further information.
                                         <div km-textbox-ml rows=4 name="question6FurtherInfo" ng-model="document.question6.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -185,7 +185,7 @@
                                         <div km-textbox-ml rows=4 name="question7.ChallengesInfo" ng-model="document.question7.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
                                     <div  ng-show="!isQ3Yes(document.question3.answer)" class="km-control-group" name="question7FurtherInfo" caption="">
-                                        <strong>Please provide further information.</strong>
+                                       Please provide further information.
                                         <div km-textbox-ml rows=4 name="question7FurtherInfo" ng-model="document.question7.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -209,7 +209,7 @@
                                         <div ng-disabled="document.question8.notApplicable" class="km-yes-no" name="question8" ng-model="document.question8.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question8FurtherInfo" caption="">
-                                        <strong>Please provide further information.</strong>
+                                        Please provide further information.
                                         <div km-textbox-ml rows=4 name="question8FurtherInfo" ng-model="document.question8.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -230,11 +230,11 @@
                                         <div class="km-yes-no" required name="question9" ng-model="document.question9.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question9Challenges" caption="">
-                                        <strong>Please provide a summary of the main difficulties and challenges encountered and answer all the following questions.</strong>
+                                       Please provide a summary of the main difficulties and challenges encountered and answer all the following questions.
                                         <div km-textbox-ml rows=4 name="question9Challenges" ng-model="document.question9.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
                                     <div class="km-control-group" name="question9FurtherInfo" caption="">
-                                        <strong>Please provide further information.</strong>
+                                        Please provide further information.
                                         <div km-textbox-ml rows=4 name="question9FurtherInfo" ng-model="document.question9.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -252,7 +252,7 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" name="question10" caption="10. Additional information">
-                                        <strong>Please provide a summary of the main difficulties and challenges encountered and answer all the following questions.</strong>
+                                        Please provide a summary of the main difficulties and challenges encountered and answer all the following questions.
                                         <div km-textbox-ml rows=4 name="question10" ng-model="document.question10.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -282,13 +282,13 @@
 
                                     <div class="km-control-group" name="question11Challenges" caption="">
                                         <div ng-show="!isQ11Yes(document.question11.answer)">
-                                            <strong>Please provide further information including indicating if there is any other system in place in relation to access to genetic resources.</strong>
+                                            Please provide further information including indicating if there is any other system in place in relation to access to genetic resources.
                                             <div km-textbox-ml rows=4 name="question11Challenges" ng-model="document.question11.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                         </div>
                                     </div>
 
                                     <div class="km-control-group" name="question11FurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div km-textbox-ml rows=4 name="question11FurtherInfo" ng-model="document.question11.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -309,7 +309,7 @@
                                         <div ng-disabled="!isQ11Yes(document.question11.answer)" class="km-yes-no" name="question12" ng-model="document.question12.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question12FurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div ng-disabled="!isQ11Yes(document.question11.answer)" km-textbox-ml rows=4 name="question12FurtherInfo" ng-model="document.question12.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -330,7 +330,7 @@
                                         <div ng-disabled="!isQ11Yes(document.question11.answer)" class="km-yes-no" required name="question13" ng-model="document.question13.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question13FurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div ng-disabled="!isQ11Yes(document.question11.answer)" km-textbox-ml rows=4 name="question13FurtherInfo" ng-model="document.question13.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -351,7 +351,7 @@
                                         <div ng-disabled="!isQ11Yes(document.question11.answer)" class="km-yes-no" required name="question14" ng-model="document.question14.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question14FurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div ng-disabled="!isQ11Yes(document.question11.answer)" km-textbox-ml rows=4 name="question14FurtherInfo" ng-model="document.question14.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -372,7 +372,7 @@
                                         <div ng-disabled="!isQ11Yes(document.question11.answer)" class="km-yes-no" required name="question15" ng-model="document.question15.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question15FurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div ng-disabled="!isQ11Yes(document.question11.answer)" km-textbox-ml rows=4 name="question15FurtherInfo" ng-model="document.question15.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -397,7 +397,7 @@
 
                                     </div>
                                     <div class="km-control-group" name="question16FurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div ng-disabled="!isQ11Yes(document.question11.answer)" km-textbox-ml rows=4 name="question16FurtherInfo" ng-model="document.question16.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -418,7 +418,7 @@
                                         <div ng-disabled="!isQ11Yes(document.question11.answer)" class="km-yes-no" required name="question17" ng-model="document.question17.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question17FurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div ng-disabled="!isQ11Yes(document.question11.answer)" km-textbox-ml rows=4 name="question17FurtherInfo" ng-model="document.question17.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -466,7 +466,7 @@
 
                                     </div>
                                     <div class="km-control-group" name="question18FurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div km-textbox-ml rows=4 name="question18FurtherInfo" ng-model="document.question18.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -484,7 +484,7 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" name="question19" caption="19. Additional information">
-                                        <strong>Please provide a summary of the main difficulties and challenges encountered and answer all the following questions.</strong>
+                                        Please provide a summary of the main difficulties and challenges encountered and answer all the following questions.
                                         <div km-textbox-ml rows=4 name="question19" ng-model="document.question19.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -511,7 +511,7 @@
                                         <div class="km-yes-no" required name="question20" ng-model="document.question20.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question20FurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div km-textbox-ml rows=4 name="question20FurtherInfo" ng-model="document.question20.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -532,7 +532,7 @@
                                         <div class="km-yes-no" required name="question21" ng-model="document.question21.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question21FurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div km-textbox-ml rows=4 name="question21FurtherInfo" ng-model="document.question21.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -553,7 +553,7 @@
                                         <div class="km-yes-no" required name="question22" ng-model="document.question22.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question22FurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div km-textbox-ml rows=4 name="question22FurtherInfo" ng-model="document.question22.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -571,7 +571,7 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" name="question23" caption="23. Additional information">
-                                        <strong>Please provide a summary of the main difficulties and challenges encountered and answer all the following questions.</strong>
+                                        Please provide a summary of the main difficulties and challenges encountered and answer all the following questions.
                                         <div km-textbox-ml rows=4 name="question23" ng-model="document.question23.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -603,11 +603,11 @@
                                                 <div class="km-yes-no" required="document.question24.answer" name="question24_measures" ng-model="document.question24.measures.answer" ng-click="Q24MeasuresClear(document.question24.measures.answer)"></div>
                                             </div>
                                             <div ng-show="document.question24.measures.answer" class="km-control-group" name="question24_measures_FurtherInfo" caption="">
-                                                <strong>Please provide further information on the measures taken, including when they entered into force.</strong>
+                                                Please provide further information on the measures taken, including when they entered into force.
                                                 <div km-textbox-ml rows=4 name="question24_measures_FurtherInfo" ng-model="document.question24.measures.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                             </div>
                                             <div ng-show="document.question24.measures.answer" class="km-control-group" name="question24_measures_complianceInfo" caption="">
-                                                <strong>Please provide further information on cases of non-compliance</strong>
+                                                Please provide further information on cases of non-compliance
                                                 <div km-textbox-ml rows=4 name="question24_measures_complianceInfo" ng-model="document.question24.measures.complianceInfo" locales="document.header.languages" placeholder=""></div>
                                             </div>
                                         </div>
@@ -616,7 +616,7 @@
                                                 <div class="km-yes-no" required="document.question24.answer" name="question24_violation" ng-model="document.question24.violation.answer" ng-click="Q24ViolationClear(document.question24.violation.answer)"></div>
                                             </div>
                                             <div ng-show="document.question24.violation.answer" class="km-control-group" name="question24FurtherInfo" caption="">
-                                                <strong>Please provide further information</strong>
+                                                Please provide further information.
                                                 <div km-textbox-ml rows=4 name="question24FurtherInfo" ng-model="document.question24.violation.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                             </div>
                                         </div>
@@ -624,7 +624,7 @@
                                     </div>
 
                                     <div class="km-control-group" name="question24FurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div km-textbox-ml rows=4 name="question24FurtherInfo" ng-model="document.question24.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -652,13 +652,13 @@
                                             </div>
                                             <div class="km-control-group" required="document.question25.answer" name="question25_violation" caption="Has your country cooperated in specific cases of alleged violation of ABS measures as provided in Article 16.3?">
                                                 <div class="km-yes-no" required="document.question25.answer" name="question25_violation" ng-model="document.question25.violation.answer"></div>
-                                                <strong>Please provide further information</strong>
+                                                Please provide further information.
                                                 <div km-textbox-ml rows=2 name="question25violationFurtherInfo" ng-model="document.question25.violation.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="km-control-group" name="question25FurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div km-textbox-ml rows=4 name="question25FurtherInfo" ng-model="document.question25.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -680,21 +680,21 @@
                                     </div>
                                     <div ng-show="document.question26.answer" class="row">
                                         <div class="col-xs-10 col-xs-offset-1">
-                                            <strong>Please provide further information</strong>
+                                            Please provide further information.
                                             <div km-textbox-ml rows=2 name="question26additionalInfo" ng-model="document.question26.additionalInfo" locales="document.header.languages" placeholder=""></div>
 
                                             <div class="km-control-group" required="document.question26.answer" name="question26_violation" caption="Has your country taken measures to address situations of non-compliance?">
                                                 <div class="km-yes-no" required="document.question26.answer" name="question26_violation" ng-model="document.question26.violation.answer" ng-click="Q26ViolationClear(document.question26.violation.answer)"></div>
 
                                                 <div ng-show="document.question26.violation.answer">
-                                                    <strong>Please provide further information</strong>
+                                                    Please provide further information.
                                                     <div km-textbox-ml rows=2 name="question26additionalInfo" ng-model="document.question26.violation.additionalInfo" locales="document.header.languages" placeholder=""></div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="km-control-group" name="question26FurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div km-textbox-ml rows=4 name="question26FurtherInfo" ng-model="document.question26.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -722,14 +722,14 @@
                                                 <label class="radio-inline"><input type="radio" ng-model="document.question27.cpc.option" name="q27Options" id="q27Option3" value="Other">Other</label>
                                             </div>
                                             <div class="km-control-group" name="question27_ccFurtherInfo">
-                                                <strong>Please provide further information</strong>
+                                                Please provide further information.
                                                 <div km-textbox-ml rows=2 name="question27_ccFurtherInfo" ng-model="document.question27.cpc.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                             </div>
 
                                         </div>
                                     </div>
                                     <div class="km-control-group" name="question27Challenges" caption="">
-                                        <strong>Please provide a summary of the main difficulties and challenges</strong>
+                                        Please provide a summary of the main difficulties and challenges
                                         <div km-textbox-ml rows=4 name="question27Challenges" ng-model="document.question27.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
                                     <div class="km-control-group row" name="question27_ccsOnAbsCh" caption="Number of checkpoint communiques available in the ABS Clearing-House">
@@ -747,7 +747,7 @@
                                         <div class="km-yes-no" required name="question28" ng-model="document.question28.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question28FurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div km-textbox-ml rows=4 name="question28FurtherInfo" ng-model="document.question28.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -768,12 +768,12 @@
                                         <div class="km-yes-no" required name="question29" ng-model="document.question29.answer" ng-click="Q29Clear(ocument.question29.answer)"></div>
                                     </div>
                                     <div ng-show="document.question29.answer" class="km-control-group" name="question29AdditionalInfo" caption="">
-                                        <strong>Please provide further information on how your country is encouraging the use of cost-effective communication tools and systems.</strong>
+                                        Please provide further information on how your country is encouraging the use of cost-effective communication tools and systems.
                                         <div km-textbox-ml rows=2 name="question29AdditionalInfo" ng-model="document.question29.additionalInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
                                     <div class="km-control-group" name="question29FurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div km-textbox-ml rows=4 name="question29FurtherInfo" ng-model="document.question29.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -791,7 +791,7 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" name="question30" caption="30. Additional information">
-                                        <strong>Please provide a summary of the main difficulties and challenges for putting measures in place:</strong>
+                                        Please provide a summary of the main difficulties and challenges for putting measures in place:
                                         <div km-textbox-ml rows=4 name="question30" ng-model="document.question30.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -821,7 +821,7 @@
                                         <div ng-disabled="document.question31.notApplicable" class="km-yes-no" ng-required="!document.question31.notApplicable" name="question31" ng-model="document.question31.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question31FurtherInfo" caption="">
-                                        <strong>Please provide further information.</strong>
+                                        Please provide further information.
                                         <div km-textbox-ml rows=4 name="question31FurtherInfo" ng-model="document.question31.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -842,7 +842,7 @@
                                         <div class="km-yes-no" required name="question32" ng-model="document.question32.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question32FurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div km-textbox-ml rows=4 name="question32FurtherInfo" ng-model="document.question32.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -864,14 +864,14 @@
                                         <div class="km-yes-no" required name="question33_justice" ng-model="document.question33.justice.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question33JusticeFurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div km-textbox-ml rows=4 name="question33JusticeFurtherInfo" ng-model="document.question33.justice.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
                                     <div class="km-control-group" required name="question33_mechanisms" caption="Utilization of mechanisms regarding mutual recognition and enforcement of foreign judgements and arbitral awards?">
                                         <div class="km-yes-no" required name="question33_mechanisms" ng-model="document.question33.mechanisms.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question33MechanismsFurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div km-textbox-ml rows=4 name="question33MechanismsFurtherInfo" ng-model="document.question33.mechanisms.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -889,7 +889,7 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" name="question34" caption="34. Additional information">
-                                        <strong>Please provide a summary of the main difficulties and challenges.</strong>
+                                        Please provide a summary of the main difficulties and challenges.
                                         <div km-textbox-ml rows=4 name="question34" ng-model="document.question34.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -919,7 +919,7 @@
                                         <div class="km-yes-no" name="question35_research" ng-model="document.question35.research.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question35ResearchFurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div km-textbox-ml rows=4 name="question35ResearchFurtherInfo" ng-model="document.question35.research.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -936,7 +936,7 @@
                                         <div class="km-yes-no" required name="question35_emergencies" ng-model="document.question35.emergencies.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question35EmergenciesFurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div km-textbox-ml rows=4 name="question35EmergenciesFurtherInfo" ng-model="document.question35.emergencies.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q35EmergenciesDocRefs" caption="Please select the clearing-house record number containing relevant information">
@@ -952,7 +952,7 @@
                                         <div class="km-yes-no" required name="question35_access" ng-model="document.question35.access.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question35AccessFurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div km-textbox-ml rows=4 name="question35AccessFurtherInfo" ng-model="document.question35.access.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q35AccessDocRefs" caption="Please select the clearing-house record number containing relevant information">
@@ -969,7 +969,7 @@
                                     </div>
 
                                     <div class="km-control-group" name="question35ImportanceFurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div km-textbox-ml rows=4 name="question35ImportanceFurtherInfo" ng-model="document.question35.importance.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -997,7 +997,7 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" name="question36" caption="36. Additional information">
-                                        <strong>Please provide a summary of the main difficulties and challenges for putting measures in place.</strong>
+                                        Please provide a summary of the main difficulties and challenges for putting measures in place.
                                         <div km-textbox-ml rows=4 name="question36" ng-model="document.question36.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -1024,7 +1024,7 @@
                                         <div class="km-yes-no" required name="question37" ng-model="document.question37.answer" ng-click="Q37Clear()"></div>
                                     </div>
                                     <div class="km-control-group" name="question37FurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div km-textbox-ml rows=4 name="question37FurtherInfo" ng-model="document.question37.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -1047,7 +1047,7 @@
                                     <div class="row" ng-show="document.question38.answer">
                                         <div class="col-xs-10 col-xs-offset-1">
                                             <div class="km-control-group" name="question38Law" caption="">
-                                                <strong>Please provide further information and reference to the domestic law establishing rights of indigenous and local communities to grant access to genetic resources</strong>
+                                                Please provide further information and reference to the domestic law establishing rights of indigenous and local communities to grant access to genetic resources
                                                 <div km-textbox-ml rows=2 name="question38LawFurtherInfo" ng-model="document.question38.law.furtherInfo" locales="document.header.languages" placeholder=""></div>
 
                                                 <div class="km-control-group" style="margin-bottom:20px;" name="q38LawDocRefs" caption="Please select the clearing-house record number containing relevant information">
@@ -1065,7 +1065,7 @@
                                             </div>
 
                                             <div class="km-control-group" name="question38AdditionalInfo" caption="">
-                                                <strong>Please provide further information</strong>
+                                                Please provide further information.
                                                 <div km-textbox-ml rows=2 name="question38MeasuresFurtherInfo" ng-model="document.question38.measures.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                             </div>
 
@@ -1074,14 +1074,14 @@
                                             </div>
 
                                             <div class="km-control-group" name="question38AdditionalInfo" caption="">
-                                                <strong>Please provide further information</strong>
+                                                Please provide further information.
                                                 <div km-textbox-ml rows=2 name="question38PICFurtherInfo" ng-model="document.question38.pic.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="km-control-group" name="question38FurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div ng-disabled="!document.question37.answer" km-textbox-ml rows=4 name="question38FurtherInfo" ng-model="document.question38.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -1102,7 +1102,7 @@
                                         <div ng-disabled="!document.question37.answer" ng-required="Q37IsYes()" class="km-yes-no" name="question39" ng-model="document.question39.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question39FurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div ng-disabled="!document.question37.answer" km-textbox-ml rows=4 name="question39FurtherInfo" ng-model="document.question39.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -1123,7 +1123,7 @@
                                         <div ng-disabled="!document.question37.answer" ng-required="Q37IsYes()" class="km-yes-no" name="question40" ng-model="document.question40.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question40FurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div ng-disabled="!document.question37.answer" km-textbox-ml rows=4 name="question40FurtherInfo" ng-model="document.question40.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -1144,7 +1144,7 @@
                                         <div ng-disabled="!document.question37.answer" ng-required="Q37IsYes()" class="km-yes-no" name="question41" ng-model="document.question41.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question41FurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div ng-disabled="!document.question37.answer" km-textbox-ml rows=4 name="question41FurtherInfo" ng-model="document.question41.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -1167,7 +1167,7 @@
                                         <label><input ng-disabled="!document.question37.answer" type="checkbox" ng-change="Q42Clear()" ng-model="document.question42.community.answer"><strong>Community protocols</strong></label>
                                     </div>
                                     <div ng-show="document.question42.community.answer" class="km-control-group" name="question42CommunityFurtherInfo" caption="">
-                                        <strong>Please provide further information on how your country is supporting the development of community protocols.</strong>
+                                        Please provide further information on how your country is supporting the development of community protocols.
                                         <div km-textbox-ml rows=3 name="question42CommunityFurtherInfo" ng-model="document.question42.community.furtherInfo" locales="document.header.languages" placeholder=""></div>
 
                                         <div class="km-control-group" style="margin-bottom:20px;" name="q42DocRefsCommunity" caption="Please select the clearing-house record number containing relevant information">
@@ -1184,7 +1184,7 @@
                                         <label><input ng-disabled="!document.question37.answer" ng-change="Q42Clear()" type="checkbox" ng-model="document.question42.mat.answer"><strong>Minimum requirements for mutually agreed terms</strong></label>
                                     </div>
                                     <div ng-show="document.question42.mat.answer" class="km-control-group" name="question42MATFurtherInfo" caption="">
-                                        <strong>Please provide further information on how your country is supporting the development of minimum requirements mutually agreed terms.</strong>
+                                        Please provide further information on how your country is supporting the development of minimum requirements mutually agreed terms.
                                         <div km-textbox-ml rows=3 name="question42MATFurtherInfo" ng-model="document.question42.mat.furtherInfo" locales="document.header.languages" placeholder=""></div>
 
                                         <div class="km-control-group" style="margin-bottom:20px;" name="q42DocRefsMat" caption="Please select the clearing-house record number containing relevant information">
@@ -1201,7 +1201,7 @@
                                         <label><input ng-disabled="!document.question37.answer" type="checkbox" ng-change="Q42Clear()" ng-model="document.question42.mcc.answer"><strong>Model contractual clauses</strong></label>
                                     </div>
                                     <div ng-show="document.question42.mcc.answer" class="km-control-group" name="question42MCCFurtherInfo" caption="">
-                                        <strong>Please provide further information on how your country is supporting the development of model contractual clauses</strong>
+                                        Please provide further information on how your country is supporting the development of model contractual clauses
                                         <div km-textbox-ml rows=3 name="question42MCCFurtherInfo" ng-model="document.question42.mcc.furtherInfo" locales="document.header.languages" placeholder=""></div>
 
                                         <div class="km-control-group" style="margin-bottom:20px;" name="q42DocRefsmcc" caption="Please select the clearing-house record number containing relevant information">
@@ -1222,7 +1222,7 @@
                                         <div ng-disabled="!document.question37.answer" ng-required="Q37IsYes()" class="km-yes-no" name="question43" ng-model="document.question43.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question43FurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div ng-disabled="!document.question37.answer" km-textbox-ml rows=4 name="question43FurtherInfo" ng-model="document.question43.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -1240,7 +1240,7 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" name="question44" caption="44. Additional information">
-                                        <strong>Please provide a summary of the main difficulties and challenges for putting measures in place in relation to traditional knowledge associated with genetic resources:</strong>
+                                        Please provide a summary of the main difficulties and challenges for putting measures in place in relation to traditional knowledge associated with genetic resources:
                                         <div ng-disabled="!document.question37.answer" km-textbox-ml rows=4 name="question44" ng-model="document.question44.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -1269,7 +1269,7 @@
                                         <div class="km-yes-no" required name="question45" ng-model="document.question45.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question45FurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div km-textbox-ml rows=4 name="question45FurtherInfo" ng-model="document.question45.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -1304,7 +1304,7 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" name="question47" caption="47. Additional information">
-                                        <strong>Please provide a summary of the main difficulties and challenges:</strong>
+                                        Please provide a summary of the main difficulties and challenges:
                                         <div km-textbox-ml rows=4 name="question47" ng-model="document.question47.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -1334,11 +1334,11 @@
                                         <div class="km-yes-no" required name="question48" ng-model="document.question48.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question48ILCInfo" caption="">
-                                        <strong>If your country has indigenous and local communities, please provide further detail their involvement.</strong>
+                                        If your country has indigenous and local communities, please provide further detail their involvement.
                                         <div km-textbox-ml rows=3 name="question48ILCInfo" ng-model="document.question48.ilcInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
                                     <div class="km-control-group" name="question48FurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div km-textbox-ml rows=4 name="question48FurtherInfo" ng-model="document.question48.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -1362,7 +1362,7 @@
                                         <div ng-disabled="document.question49.notApplicable" class="km-yes-no" name="question49" ng-model="document.question49.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question49FurtherInfo" caption="">
-                                        <strong>Please provide further information.</strong>
+                                        Please provide further information.
                                         <div km-textbox-ml rows=4 name="question49FurtherInfo" ng-model="document.question49.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q49DocRefs" caption="Please select the clearing-house record number containing relevant information">
@@ -1379,7 +1379,7 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" name="question50" caption="50. Additional information">
-                                        <strong>Please provide a summary of the main difficulties and challenges:</strong>
+                                        Please provide a summary of the main difficulties and challenges:
                                         <div km-textbox-ml rows=4 name="question50" ng-model="document.question50.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -1408,7 +1408,7 @@
                                         <div class="km-yes-no" required name="question51" ng-model="document.question51.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question51FurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div km-textbox-ml rows=4 name="question51FurtherInfo" ng-model="document.question51.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -1429,7 +1429,7 @@
                                         <div class="km-yes-no" required name="question52" ng-model="document.question52.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question52FurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div km-textbox-ml rows=4 name="question52FurtherInfo" ng-model="document.question52.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -1447,7 +1447,7 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" name="question53" caption="53. Additional information">
-                                        <strong>Please provide a summary of the main difficulties and challenges:</strong>
+                                        Please provide a summary of the main difficulties and challenges:
                                         <div km-textbox-ml rows=4 name="question53" ng-model="document.question53.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -1480,7 +1480,7 @@
                                                 <div class="km-yes-no" ng-required="document.question54.answer" name="question54_measures" ng-click="Q54Clear()" ng-model="document.question54.measures.answer"></div>
                                             </div>
                                             <div ng-show="document.question54.measures.answer" class="km-control-group" name="question54MeasuresFurtherInfo" caption="">
-                                                <strong>Please provide a summary of the measures taken.</strong>
+                                                Please provide a summary of the measures taken.
                                                 <div km-textbox-ml rows=2 name="question54MeasuresFurtherInfo" ng-model="document.question54.measures.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                             </div>
 
@@ -1495,7 +1495,7 @@
                                         </div>
                                     </div>
                                     <div class="km-control-group" name="question54FurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div km-textbox-ml rows=4 name="question54FurtherInfo" ng-model="document.question54.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -1521,7 +1521,7 @@
                                                 <div class="km-yes-no" name="question55_measures" ng-click="Q55Clear()" ng-model="document.question55.measures.answer"></div>
                                             </div>
                                             <div ng-show="document.question55.measures.answer" class="km-control-group" name="question55MeasuresFurtherInfo" caption="">
-                                                <strong>Please provide a summary of the measures taken.</strong>
+                                                Please provide a summary of the measures taken.
                                                 <div km-textbox-ml rows=2 name="question55MeasuresFurtherInfo" ng-model="document.question55.measures.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                             </div>
 
@@ -1537,7 +1537,7 @@
                                         </div>
                                     </div>
                                     <div class="km-control-group" name="question55FurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div km-textbox-ml rows=4 name="question55FurtherInfo" ng-model="document.question55.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -1558,7 +1558,7 @@
                                         <div class="km-yes-no" name="question56" ng-model="document.question56.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question56FurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div km-textbox-ml rows=4 name="question56FurtherInfo" ng-model="document.question56.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -1579,7 +1579,7 @@
                                         <div class="km-yes-no" name="question57" ng-model="document.question57.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question57FurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div km-textbox-ml rows=4 name="question57FurtherInfo" ng-model="document.question57.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -1597,7 +1597,7 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" name="question58" caption="58. Additional information">
-                                        <strong>Please provide a summary of the main difficulties and challenges:</strong>
+                                        Please provide a summary of the main difficulties and challenges:
                                         <div km-textbox-ml rows=4 name="question58" ng-model="document.question58.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -1624,12 +1624,12 @@
                                         <div class="km-yes-no" required name="question59" ng-model="document.question59.answer" ng-click="Q59Clear()"></div>
                                     </div>
                                     <div ng-show="document.question59.answer" class="km-control-group" name="question59AdditionalInfo" caption="">
-                                        <strong>Please provide a summary of the measures taken.</strong>
+                                        Please provide a summary of the measures taken.
                                         <div km-textbox-ml rows=2 name="question59AdditionalInfo" ng-model="document.question59.additionalInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
                                     <div class="km-control-group" name="question59FurtherInfo" caption="">
-                                        <strong>Please provide further information</strong>
+                                        Please provide further information.
                                         <div km-textbox-ml rows=4 name="question59FurtherInfo" ng-model="document.question59.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -1671,15 +1671,15 @@
                                         <div class="km-yes-no" name="question61" ng-model="document.question61.answer" ng-click="Q61Clear()"></div>
                                     </div>
                                     <div ng-show="document.question61.answer" class="km-control-group" name="question61AdditionalInfo" caption="">
-                                        <strong>Please provide further information.</strong>
+                                        Please provide further information.
                                         <div km-textbox-ml rows=2 name="question61AdditionalInfo" ng-model="document.question61.additionalInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
                                     <div class="km-control-group" name="question61Challenges" caption="">
-                                        <strong>Please provide a summary of the main difficulties and challenges encountered.</strong>
+                                        Please provide a summary of the main difficulties and challenges encountered.
                                         <div km-textbox-ml rows=4 name="question61Challenges" ng-model="document.question61.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
                                     <div class="km-control-group" name="question61FurtherInfo" caption="">
-                                        <strong>Use the text entry to provide further information, including on  experiences gained in relation to mobilization of resources to support the implementation of the Nagoya Protocol and the status of funds mobilized (level of domestic expenditures, or the amount of and trends in  funding allocated, for the  implementation of the Protocol and the funding gap)<Text entry></strong>
+                                        Use the text entry to provide further information, including on  experiences gained in relation to mobilization of resources to support the implementation of the Nagoya Protocol and the status of funds mobilized (level of domestic expenditures, or the amount of and trends in  funding allocated, for the  implementation of the Protocol and the funding gap)<Text entry>
                                         <div km-textbox-ml rows=4 name="question61FurtherInfo" ng-model="document.question61.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -1731,7 +1731,7 @@
 
 
                                     <div class="km-control-group" name="question62FurtherInfo" caption="">
-                                        <strong>Use the text entry to provide further information, including on the status of financial resources (total amount) mobilized donated or received for the purposes of implementation of the Protocol. </strong>
+                                        Use the text entry to provide further information, including on the status of financial resources (total amount) mobilized donated or received for the purposes of implementation of the Protocol. 
                                         <div km-textbox-ml rows=4 name="question62FurtherInfo" ng-model="document.question62.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
@@ -1760,12 +1760,12 @@
                                     </div>
 
                                     <div class="km-control-group" name="question63Challenges" caption="">
-                                        <strong>Please provide a summary of the main difficulties and challenges encountered.</strong>
+                                        Please provide a summary of the main difficulties and challenges encountered.
                                         <div km-textbox-ml rows=4 name="question63Challenges" ng-model="document.question63.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
                                     <div class="km-control-group" name="question63FurtherInfo" caption="">
-                                        <strong>Use the text entry to provide further information.</strong>
+                                        Use the text entry to provide further information.
                                         <div km-textbox-ml rows=4 name="question63FurtherInfo" ng-model="document.question63.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
