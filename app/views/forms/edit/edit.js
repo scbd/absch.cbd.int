@@ -14,12 +14,13 @@ define([
   ], function (app) {
 
   app.controller("editController", ["$rootScope", "$scope", "$http", "$window", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage",
-                                   "authentication", "Enumerable", "editFormUtility", "$routeParams", "$timeout","$filter",
+                                   "authentication", "Enumerable", "editFormUtility", "$routeParams", "$timeout","underscore",'$element',
                                     function ($rootScope, $scope, $http, $window, guid, $filter, thesaurus, $q, $location, storage,
-                                              authentication, Enumerable, editFormUtility, $routeParams, $timeout, $filter) {
+                                              authentication, Enumerable, editFormUtility, $routeParams, $timeout, _, $element) {
 
     $scope.type = $rootScope.document_types[$filter("mapSchema")($routeParams.document_type)];
-
+    $scope.showHelp = {'show':false,'hasHelp':false};
+ 
     $scope.status   = "loading";
     $scope.error    = null;
 
@@ -490,5 +491,65 @@ define([
 
         $scope.origanalDocument = newDocument;
     });
+    
+    
+    
+    
+    $scope.help = [
+        { 
+          "schema": "absch-nr",
+          "elementName": "part1",
+          "helptype": "section",
+          "title": {
+            "en": "GUIDELINES FOR THE INTERIM NATIONAL REPORT ON THE IMPLEMENTATION OF THE NAGOYA PROTOCOL"
+          },
+          "content": {
+            "en": "The following format for the preparation of the interim national report on implementation of the Nagoya Protocol on Access and Benefit-sharing called for under Article 29 of the Protocol is a series of questions based on those provisions of the Protocol that establish obligations for the Parties to the Protocol. These questions are identified as mandatory and are marked with an asterisk"
+          },
+        },   
+        { 
+          "schema": "all",
+          "elementName": "government",
+          "helptype": "inline",
+          "title": {},
+          "content": {
+            "en": "Country can not be changed"
+          },
+        },   
+    ];
+    
+    // $scope.$watch("showHelp.show", function(show) {
+    //   if(show)
+    //     $scope.loadHelp();
+    // });
+    
+    // //==================================
+    // //
+    // //==================================
+    // $scope.loadHelp = function() {
+      
+    //   var schemas = ["all",""];
+    //   var help = _.filter($scope.help, function(h){ 
+        
+    //     var list = [];
+        
+        
+    //   });
+  
+    //  _.each($scope.help)
+    //  {
+        
+    //  }
+        
+      
+      
+    // }
+    
+
+    
+    
+    
+    
+    
   }]);
 });

@@ -182,3 +182,7 @@
     padding:20px;
     text-align:center!important;
 }
+.disabled, .disabled > *{
+    color:#BBB!important;
+}
+

@@ -3,7 +3,9 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
   app.controller("editAbsNationalReport", ["$scope", "$http", "$filter", "$controller", "$location", "$q", "realm", "underscore", function ($scope, $http, $filter, $controller,$location, $q, realm, _) {
 
     $controller('editController', {$scope: $scope});
-
+    
+    $scope.showHelp.hasHelp = true;
+    
     $scope.setTab = function () {
         $scope.tab = 'edit';
     };

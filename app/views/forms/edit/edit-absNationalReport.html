@@ -21,9 +21,11 @@
     </div>
 
     <div ng-show="!isLoading() && status!='hidden'">
+     
         <div workflow-std-buttons document="getCleanDocument()" languages="document.header.languages"  hide-timer="false"/>
-                <div km-document-validation ng-model="validationReport"></div>
-
+   
+        <div km-document-validation ng-model="validationReport"></div>
+                
         <div class="row" ng-show="tab == 'edit'">
             <div class="col-xs-12">
                 <ul class="pagination" id="nrTabs" ng-click="setTab()">
@@ -50,10 +52,42 @@
                 <div class="col-xs-12">
                     <div class="tab-content">
                         <div class="tab-pane active" id="part1">
+                            
+                            
+                             <div class="help-section" ng-if="showHelp.show" style="margin-bottom:20px;">
+                                 <div class="help-title">
+                                 <i class="material-icons">help_outline</i> GUIDELINES FOR THE INTERIM NATIONAL REPORT ON THE IMPLEMENTATION OF THE NAGOYA PROTOCOL
+                                 </div>
+                                 <div class="help-content">
+                                 <p>The following format for the preparation of the interim national report on implementation of the Nagoya Protocol on Access and Benefit-sharing called for under Article 29 of the Protocol is a series of questions based on those provisions of the Protocol that establish obligations for the Parties to the Protocol. These questions are identified as mandatory and are marked with an asterisk</p> 
+                                 
+                                 <p>In addition, some questions are not strictly based on the provisions of the Protocol and are identified as voluntary. They are included in the reporting format to contribute to the assessment and review of the effectiveness of the Protocol in the context of Article 31 and to identify challenges and difficulties in implementing the Protocol, and of decisions adopted by the Conference of the Parties serving as the meeting of the Parties to the Nagoya Protocol (COP-MOP).</p>
+                                 
+                                 <p>The interim national report can be a useful tool for both Parties and non-Parties to assess the level of implementation of the Nagoya Protocol, as well as gaps and needs in terms of capacity, and will assist the COP-MOP in reviewing, on a regular basis, the implementation of the Nagoya Protocol and to make, within its mandate, the decisions necessary to promote its effective implementation in accordance with Article 26, paragraph 4.</p>
+                                 
+                                 <p>Information submitted through the interim national report could also serve to share experiences, challenges and solutions among countries in relation to the implementation of the Nagoya Protocol. In this regard, the interim national report can be a valuable tool for building and developing capacity to implement the Protocol and for designing capacity-building activities more effectively. The format is intended to minimize the reporting burden on countries and therefore questions are simple in nature (usually yes or no questions). Generally, these questions are followed by text entries where countries are encouraged to provide details on the measures taken as well as to report on difficulties and challenges to implement particular provisions of the Protocol and to provide further information on the issue by linking to existing Access and Benefit-sharing Clearing-House (ABS Clearing-House) records, websites or uploading documents. This is an opportunity to identify good practices and constraints in implementation of the Nagoya Protocol.</p>
+                                 
+                                 <p>In order to avoid duplication in the submission of information and to make the best use of the information already made available through the ABS Clearing-House, countries would be given the possibility of linking existing national and reference ABS Clearing-House records published by the publishing authority to the different sections of the interim national report if they wish to do so, or else the Secretariat when consolidating information for consideration of the COP-MOP, in addition to the information contained in the interim national report will also include relevant information already published in the ABS Clearing-House.</p>
+                                 
+                                 <p>Although there is no set limit on length of text, in order to assist with the review and synthesis of the information in the reports, respondents are invited to ensure that answers are as relevant and as succinct as possible.</p>
+                                 
+                                 <p>Countries are invited to submit any other information in the section provided at the end of the reporting format. The Executive Secretary welcomes any comments on the adequacy of the questions and difficulties in completing the questions, and any further recommendations on how these reporting guidelines could be improved.</p>
+                                 
+                                 <p>It is recommended that Parties involve all relevant stakeholders in the preparation of the report in order to ensure a participatory and transparent approach to its development.</p>
+                                 
+                                 <p>Countries should use the online version of the format, unless technically not feasible, and to submit the report through the ABS Clearing-House while ensuring that the national information on the ABS Clearing-House is up-to-date.</p>
+                                 
+                                 <p>Only if not technically feasible, Parties should resort to offline submissions to the ABS Clearing-House. Offline submissions should use the protected form, as provided for download on the ABS Clearing-House in MS Word format.  It is recommended that countries send the report via email to the Secretariat (secretariat@cbd.int), and include a scanned copy of the last page signed by the ABS Clearing-House publishing authority. Subsequently, the Executive Secretary will assist Parties in making their report available on the ABS Clearing-House.</p>
+                                 </div>
+                             </div>   
+                            
+                            
+                            
                             <legend>General Information</legend>
             				<div class="row">
             					<div class="col-xs-12">
             						<div class="km-control-group" name="government" required  bold="true"  caption="1. Country">
+                                        <span class="help-inline" ng-if="showHelp.show" ><i class="material-icons">help_outline</i> Country can not be changed. </span>
                                         <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
             						</div>
             					</div>
