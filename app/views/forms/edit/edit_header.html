@@ -1,8 +1,10 @@
 
 <md-toolbar  ng-class="{'bg-blue': type.abbreviation != 'VLR','bg-orange': type.abbreviation == 'VLR'}">
-<div class="md-toolbar-tools">
-  <h2 class="md-flex">
-      <span >{{type.title}} <span class="color-darkgrey">({{type.abbreviation}})</span></span>
-  </h2>
+<div class="md-toolbar-tools" style="width:100%;">
+  <h2 ><span >{{type.title}} <span class="color-darkgrey">({{type.abbreviation}})</span></span>  </h2>
+   <span flex></span>
+    <md-switch class="pull-right" ng-model="showHelp.show" ng-if="showHelp.hasHelp"  aria-label="show help">
+     <h5>Help: <strong>{{showHelp.show ? "on" : "off"}}</strong></h5>
+    </md-switch>
 </div>
 </md-toolbar>

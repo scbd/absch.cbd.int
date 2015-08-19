@@ -293,7 +293,7 @@ border-right:1px solid #888;
 
 }
 
-.bold{font-weight:bold;}
+.bold{font-weight:bold!important;}
 
 
 .fa-6 {

@@ -149,8 +149,8 @@ legend{
 
 .btn-commonformat-name{
 	color:#666;
-	margin-top:5px;
-	padding-top:3px;
+	margin-top:0px;
+	padding-top:0px;
 	/*//border-top:1px solid #fefefe;*/
 
 }
@@ -590,3 +590,13 @@ form label[required]:before
 .tab-selected{
 border-bottom:5px solid pink;	
 }
+
+label{
+	font-weight:normal;	
+}
+.help-content{padding:3px 10px; background-color: #efefef; color:#666;}
+.help-title{padding:3px 10px; background-color: #FFC0CB; color:#666;font-size:18px;}
+.help-section i {position:relative; top:4px;}
+.help-inline{padding:3px; color:#666; font-size: 12px; font-weight:bold;  background-color: #FFC0CB;}
+.help-inline i {font-size: 14px;position:relative; top:2px;}
+.help-section h4 {color:#666; background-color: #FFC0CB;padding-bottom:5px;position:relative;top:-10px;}
