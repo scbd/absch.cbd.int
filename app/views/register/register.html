@@ -9,7 +9,7 @@
 
 
        <md-sidenav class="md-sidenav-left md-whiteframe-z1" md-component-id="left" md-is-locked-open="$mdMedia('min-width: 1200px')"
-       style="max-height:1200px; margin-bottom:50px;" >
+       style="max-height:1300px; margin-bottom:50px;" >
 
 
          <md-toolbar class="bg-medgrey" >
@@ -70,7 +70,8 @@
                          <div ng-repeat="heading in subheadings" >
 
                          <div ng-show="compareRoles(user.roles, heading.roles)" >
-                             <h3 class="special-font" ng-class="{'btn-commonformat-header-national':heading.title!='Reference Records', 'btn-commonformat-header-reference': heading.title=='Reference Records'}">{{heading.title}}
+                             <h3 class="special-font" ng-class="{'btn-commonformat-header-national':heading.title!='Reference Records', 'btn-commonformat-header-reference': heading.title=='Reference Records'}">
+                                 {{heading.title}}
                                  <!-- <span style="font-size:12px;font-weight:normal;" class="label label-danger pull-right">REQUEST</span>
                                  <span style="margin-right:2px;font-size:12px;font-weight:normal;" class="label label-default pull-right">DRAFT</span>
                                  <span style="margin-right:2px;font-size:12px;font-weight:normal;" class="label label-success  pull-right">PUBLISHED</span> -->
@@ -112,12 +113,10 @@
                                              </div>
                                          </div>
                                      </div>
-                                     
-                                     
-                                     
                                  </div>
                                    </div>
-                                   <div class="btn-commonformat-name" >{{document_types[type].title}}</div>
+                                   <div class="clearfix"></div>
+                                   <div class="clearfix btn-commonformat-name" style="position:relative; top:-5px;">{{document_types[type].title}}</div>
                                  </div>
                              </div>
                              </div>

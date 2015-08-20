@@ -154,11 +154,14 @@ legend{
 	/*//border-top:1px solid #fefefe;*/
 
 }
+
 .btn-commonformat-header-national {
 	/*color:#418BCA;*/
+	border-bottom: 1px solid #418BCA;
 }
 .btn-commonformat-header-reference {
 	/*color:#ed9c28;*/
+	border-bottom: 1px solid #ed9c28;
 }
 
 .btn-commonformat-national {

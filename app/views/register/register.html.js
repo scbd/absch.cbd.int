@@ -88,6 +88,7 @@ define(['app','linqjs', 'angular-localizer',
     }
 
     $rootScope.document_types = {
+      
 	  	absNationalReport: {
 			abbreviation: 'NR',
 			title: 'Interim national report on the implementation of the Nagoya Protocol',
