@@ -9,7 +9,7 @@
 
 
        <md-sidenav class="md-sidenav-left md-whiteframe-z1" md-component-id="left" md-is-locked-open="$mdMedia('min-width: 1200px')"
-       style="max-height:1300px; margin-bottom:50px;" >
+       style="max-height:1200px; margin-bottom:50px;" >
 
 
          <md-toolbar class="bg-medgrey" >
@@ -82,11 +82,11 @@
                                    <div class="btn-commonformat-national" ng-class="{'btn-commonformat-reference':document_types[type].abbreviation=='VLR'}">
                                         <i class="material-icons" style="font-size:16pt;position:relative;top:3px;">{{type | schemaIcon }}</i>
                                          {{document_types[type].abbreviation}}
-                                     <div class="pull-right" style="padding-right:0px;position:relative;top:0px;">
+                                     <div class="pull-right" style="text-align:right; width:180px;padding-right:0px;position:relative;top:0px;">
                                            <span ng-show="facets(type,'publish') > 0" class="label label-success" style="margin: 0 0 0 1px;"> {{facets(type,'publish')}}</span>
                                            <span ng-show="facets(type,'draft') > 0" class="label label-default"  style="margin: 0 0 0 1px;"> {{facets(type,'draft')}}</span>
                                            <span ng-show="facets(type,'request') > 0" class="label label-danger" style="margin: 0 0 0 1px;"> {{facets(type,'request')}}</span>
-                                           <span  ng-click="gotoNew($event,type)"  class="label color-blue bg-litegrey" style="margin: 0 0 0 1px;">  <i class="fa fa-plus"></i></span>
+                                           <span  ng-click="gotoNew($event,type)"  class="label color-blue bg-litegrey" style="margin: 0 0 0 1px;">  <i class="fa fa-plus"></i> </span>
                                     </div>
                                    </div>
                                    <div class="clearfix"></div>
