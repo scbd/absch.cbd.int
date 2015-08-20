@@ -240,7 +240,7 @@
                                 <td>
                                     <span ng-show="country.isNPParty" style="font-weight:bold;">Party</span>
                                     <span ng-show="!country.isNPParty" >Non-Party</span>
-                                    <span ng-show="country.isNPInbetweenParty" ><br>(entry into force on: {{addDate(country.entryIntoForce)| formatDate}})</span>
+                                    <span ng-show="country.isNPInbetweenParty" ><br>(entry into force on: {{(country.entryIntoForce)| formatDate}})</span>
                                 </td>
                                 <td style="text-align:center;"><span class="badge bg-grey4">{{country.FP}}</span></td>
                                 <td style="text-align:center;"><span class="badge bg-grey4">{{country.NDB}}</span></td>
