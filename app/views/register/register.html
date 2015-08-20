@@ -76,17 +76,17 @@
                                  <span style="margin-right:2px;font-size:12px;font-weight:normal;" class="label label-success  pull-right">PUBLISHED</span> -->
                              </h3>
                              <div ng-repeat="type in heading.formats">
-                               <div ng-click="gotoList(type)" role="button" style="cursor:pointer;"  >
+                               <div ng-click="gotoList($event,type)" role="button" style="cursor:pointer;"  >
                                  <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : document_type==type ,'btn-commonformat-reference-selected' : document_type=='resource' && document_type==type}">
                                    <div class="btn-commonformat-national" ng-class="{'btn-commonformat-reference':document_types[type].abbreviation=='VLR'}">
                                         <i class="material-icons" style="font-size:16pt;position:relative;top:3px;">{{type | schemaIcon }}</i>
                                          {{document_types[type].abbreviation}}
                                      <div style="padding-right:10px;position:relative;top:-25px;">
                                     
-                                     <div class="flip pull-right" >
+                                     <div class="flip pull-right"  >
                                          <div class="card" >
                                              <div class="face front">
-                                                <a href="{{type!='contacts' ? '/register' : ''}}/{{type | mapSchema}}/new" class="label label-primary"> <i class="fa fa-plus"></i></a>
+                                                <span  ng-click="gotoNew($event,type)"  class="label label-primary"> <i class="fa fa-plus"></i></span>
                                              </div>
                                          </div>
                                      </div>

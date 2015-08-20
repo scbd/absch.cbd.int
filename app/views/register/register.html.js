@@ -46,14 +46,15 @@ define(['app','linqjs', 'angular-localizer',
       //==================================
 			//
 			//==================================
-			$scope.gotoNew = function(cftype) {
-					$location.url("/register/" + $filter("mapSchema")(cftype) + "/new");
+			$scope.gotoNew = function($event, cftype) {
+         $event.stopImmediatePropagation();
+				 $location.url("/register/" + $filter("mapSchema")(cftype) + "/new");
 			}
       
        //==================================
 			//
 			//==================================
-			$scope.gotoList = function(cftype) {
+			$scope.gotoList = function($event, cftype) {
 					$location.url("/register/" + $filter("mapSchema")(cftype) );
 			}
 
