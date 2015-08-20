@@ -75,12 +75,22 @@
                                  <span style="margin-right:2px;font-size:12px;font-weight:normal;" class="label label-default pull-right">DRAFT</span>
                                  <span style="margin-right:2px;font-size:12px;font-weight:normal;" class="label label-success  pull-right">PUBLISHED</span> -->
                              </h3>
-                               <a ng-repeat="type in heading.formats" ng-href="{{type!='contacts' ? '/register' : ''}}/{{type | mapSchema}}" role="button"  >
+                             <div ng-repeat="type in heading.formats">
+                               <div ng-click="gotoList(type)" role="button" style="cursor:pointer;"  >
                                  <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : document_type==type ,'btn-commonformat-reference-selected' : document_type=='resource' && document_type==type}">
                                    <div class="btn-commonformat-national" ng-class="{'btn-commonformat-reference':document_types[type].abbreviation=='VLR'}">
                                         <i class="material-icons" style="font-size:16pt;position:relative;top:3px;">{{type | schemaIcon }}</i>
                                          {{document_types[type].abbreviation}}
-                                     <div style="padding-right:10px;position:relative;top:-15px;">
+                                     <div style="padding-right:10px;position:relative;top:-25px;">
+                                    
+                                     <div class="flip pull-right" >
+                                         <div class="card" >
+                                             <div class="face front">
+                                                <a href="{{type!='contacts' ? '/register' : ''}}/{{type | mapSchema}}/new" class="label label-primary"> <i class="fa fa-plus"></i></a>
+                                             </div>
+                                         </div>
+                                     </div>
+                                    
                                      <div class="flip pull-right" ng-show="facets(type,'draft') > 0">
                                          <div class="card" ng-class="{cardMargin:facets(type,'publish')>9}">
                                              <div class="face front">
@@ -102,11 +112,15 @@
                                              </div>
                                          </div>
                                      </div>
+                                     
+                                     
+                                     
                                  </div>
                                    </div>
                                    <div class="btn-commonformat-name" >{{document_types[type].title}}</div>
                                  </div>
-                             </a>
+                             </div>
+                             </div>
                          </div>
 
                        </div>
@@ -123,7 +137,6 @@
 
      <md-content flex layout-margin style="margin:0 30px 30px 30px;padding:0;background-color:transparent;"  >
            <div layout="column" layout-align="top center"  >
-
                 <md-button ng-click="toggleLeft()" class="md-primary md-raised bg-medgrey" hide-gt-lg  style="margin: 0  0 10px 0;">
                     <i class="material-icons" style="position:relative;top:6px;">menu</i> Management Center
                 </md-button>
