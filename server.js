@@ -1,5 +1,4 @@
 /* jshint node:true 
-test
 */
 var fs = require('fs');
 var http = require('http');
