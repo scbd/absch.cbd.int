@@ -41,6 +41,22 @@ define(['app','linqjs', 'angular-localizer',
           },300);
       return debounceFn;
     }
+    
+    
+      //==================================
+			//
+			//==================================
+			$scope.gotoNew = function($event, cftype) {
+         $event.stopImmediatePropagation();
+				 $location.url("/register/" + $filter("mapSchema")(cftype) + "/new");
+			}
+      
+       //==================================
+			//
+			//==================================
+			$scope.gotoList = function($event, cftype) {
+					$location.url("/register/" + $filter("mapSchema")(cftype) );
+			}
 
 
 

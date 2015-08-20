@@ -16,7 +16,7 @@ define([
   app.controller("editController", ["$rootScope", "$scope", "$http", "$window", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage",
                                    "authentication", "Enumerable", "editFormUtility", "$routeParams", "$timeout","underscore",
                                     function ($rootScope, $scope, $http, $window, guid, $filter, thesaurus, $q, $location, storage,
-                                              authentication, Enumerable, editFormUtility, $routeParams, $timeout, _ ) {
+                                              authentication, Enumerable, editFormUtility, $routeParams, $timeout, _) {
 
     $scope.type = $rootScope.document_types[$filter("mapSchema")($routeParams.document_type)];
     $scope.showHelp = {'show':false,'hasHelp':false};
@@ -26,7 +26,7 @@ define([
 
     $scope.tab      = "edit";
     $scope.review   = { locale: "en" };
-console.log($scope.$element);
+
     //intro.js configurations
 	$scope.startTour=false;
 
