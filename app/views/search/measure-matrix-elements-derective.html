@@ -123,19 +123,17 @@
         font-size:14px;
         font-weight:bold;
         position:relative;
-        top:15px;
+
     }
     
 </style>
     <table class="table matrixTable">
-        <tr>
-            <td class="noBorder">
-                  <h3><strong>Elements of the measure</strong>
-                  <a class="pull-right expander" ng-click="collapseAll=!collapseAll;showHideAll(true)"  ng-show="!collapseAll">Collapse All <i class="fa fa-chevron-circle-up hand"></i></a>
-                  <a class="pull-right expander" ng-click="collapseAll=!collapseAll;showHideAll(false)" ng-show="collapseAll">Expand All <i class="fa fa-chevron-circle-down hand"></i></a>
-                  </h3>
-            </td>
-        </tr>
+         <tr>
+             <td>
+                <a class="pull-right expander" ng-click="collapseAll=!collapseAll;showHideAll(true)"  ng-show="!collapseAll">Collapse All <i class="fa fa-chevron-circle-up hand"></i></a>
+                <a class="pull-right expander" ng-click="collapseAll=!collapseAll;showHideAll(false)" ng-show="collapseAll">Expand All <i class="fa fa-chevron-circle-down hand"></i></a>
+             </td>
+          </tr>        
         <tr ng:repeat="term in rootTerms">
             <td class="tableCell" ng-include="'/app/views/search/matrix/measure-matrix.directive/abs/inner'">               
             </td>

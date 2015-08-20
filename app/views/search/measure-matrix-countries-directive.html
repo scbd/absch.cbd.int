@@ -183,7 +183,9 @@
 								</div>
 								<div class="panel-body" id="pandelBody_{{$index}}" style="margin-top:0;padding-top:0;">
 									<div class="row" >
-	                                    <div style="padding:10px; margin:0 10px;">
+										<h3 style="margin-left:20px;"><strong>Records</strong></h3>
+										
+	                                    <div style="padding:0 10px; margin:0 10px;">
 												<md-list>
 													<md-divider ></md-divider>
 											      <md-list-item class="md-2-line" ng-repeat="measure in jurisdiction.measures" >
@@ -207,7 +209,11 @@
 											      </md-list-item>
 											    </md-list>
 	                                    </div>
-	                                </div>									
+	                                </div>	
+									<tr>
+   
+                  					<h3><strong>Elements of the measure</strong></h3>
+          							
 									<div measure-matrix-elements name="absMeasures" type="multiple" ng-model="noModel" locales="measures[0].document.header.languages"
 										 document="jurisdiction.measures"></div>
 								</div>
