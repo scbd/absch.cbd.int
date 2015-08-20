@@ -14,9 +14,9 @@ define([
   ], function (app) {
 
   app.controller("editController", ["$rootScope", "$scope", "$http", "$window", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage",
-                                   "authentication", "Enumerable", "editFormUtility", "$routeParams", "$timeout","underscore",'$element',
+                                   "authentication", "Enumerable", "editFormUtility", "$routeParams", "$timeout","underscore",
                                     function ($rootScope, $scope, $http, $window, guid, $filter, thesaurus, $q, $location, storage,
-                                              authentication, Enumerable, editFormUtility, $routeParams, $timeout, _, $element) {
+                                              authentication, Enumerable, editFormUtility, $routeParams, $timeout, _) {
 
     $scope.type = $rootScope.document_types[$filter("mapSchema")($routeParams.document_type)];
     $scope.showHelp = {'show':false,'hasHelp':false};
