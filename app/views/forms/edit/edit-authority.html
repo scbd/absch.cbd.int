@@ -1,269 +1,291 @@
 ﻿<div ng-controller="editAuthority" class="md-whiteframe-z1" >
-
+<div help>
     <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
 
     <md-content layout-padding style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
 
-  <div class="registerpage-content">
+        <div class="registerpage-content">
 
 
-    <div class="alert alert-error" ng-show="hasError()">
-        <strong>Error as occured...</strong>
-        <div>{{error}}</div>
-    </div>
-    <div ng-show="isLoading()">
-        <i class="fa fa-spinner fa-spin"></i> Loading...
-    </div>
+            <div class="alert alert-error" ng-show="hasError()">
+                <strong>Error as occured...</strong>
+                <div>{{error}}</div>
+            </div>
+            <div ng-show="isLoading()">
+                <i class="fa fa-spinner fa-spin"></i> Loading...
+            </div>
 
-    <div ng-show="!isLoading() && status!='hidden'">
+            <div ng-show="!isLoading() && status!='hidden'">
 
-        <div workflow-std-buttons document="getCleanDocument()" languages="document.header.languages"  hide-timer="false"/>
+                <div workflow-std-buttons document="getCleanDocument()" languages="document.header.languages" hide-timer="false" />
 
-            <div km-document-validation ng-model="validationReport"></div>
-        <form class="editForm" name="editForm">
+                <div km-document-validation ng-model="validationReport"></div>
+                <form class="editForm" name="editForm">
 
-            <div ng-show="tab=='edit'" km-tab="edit">
-                <section>
-                    <legend>General information</legend>
+                    <div ng-show="tab=='edit'" km-tab="edit">
+                        <section>
+                            <legend>General information</legend>
 
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="km-control-group" name="government" required caption="Country">
-                                <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="km-control-group" name="name" required caption="Name of the Competent National Authority">
-                                <div km-textbox-ml name="name" required ng-model="document.name" rows="1" placeholder="" locales="document.header.languages"></div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section>
-                    <legend>Coordinates</legend>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="km-control-group" name="address" caption="Address">
-                                <div km-textbox-ml ng-model="document.address" rows="2" placeholder="example: 413 St-Jacques Ouest, Suite 800" locales="document.header.languages"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <div class="km-control-group" name="city" required caption="City">
-                                <div km-textbox-ml name="city" ng-model="document.city" required locales="document.header.languages" placeholder="example: Montreal"></div>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-6">
-                            <div class="km-control-group" name="state" caption="State or Province">
-                                <div km-textbox-ml name="state" ng-model="document.state" locales="document.header.languages" placeholder="example: Quebec"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-
-                        <div class="col-xs-6">
-                            <div class="km-control-group" name="postalCode" caption="Postal Code or Zip">
-                                <div km-textbox-ml name="postalCode" ng-model="document.postalCode" locales="document.header.languages" placeholder="example: G1X 3V3"></div>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-6">
-                            <div class="km-control-group" name="country" required caption="Country">
-                                <div afc-autocomplete name="country" ng-model="document.country" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" required></div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <section>
-                    <legend>Contact Information</legend>
-
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <div class="km-control-group" name="phones" required caption="Phone numbers">
-                                <!--   <div class="help-block">Please use the following format: +[country code] [city code] [telephone number] [extension, if necessary].</div> -->
-                                <div km-inputtext-list name="phones" ng-model="document.phones" required placeholder="example: +1 514.288.2220"></div>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-6">
-                            <div class="km-control-group" name="faxes" caption="Fax Numbers">
-                                <!--            <div class="help-block">Please use the following format: +[country code] [city code] [telephone number] [extension, if necessary].</div> -->
-                                <div km-inputtext-list name="faxes" ng-model="document.faxes" placeholder="example: +1 514.288.6588"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <div class="km-control-group" name="emails" required caption="Emails">
-                                <div km-inputtext-list name="emails" required type="email" ng-model="document.emails" pattern="email" placeholder="example: secretariat@cbd.int"></div>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-6">
-                            <div class="km-control-group" name="websites" caption="Website address">
-                                <!--                             <div class="help-block">Please provide the URL of the website (e.g http://absch.cbd.int/) and the name of the website (e.g. ‘Access and Benefit-sharing Clearing-House’).</div> -->
-                                <div km-link name="websites" ng-model="document.websites" allow-link="true" allow-file="false"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="km-control-group" name="contacts" caption="Additional contacts">
-                                <field-embed-contact multiple ng-model="document.contacts" locales="$parent.document.header.languages" name="contacts" caption="Add an additional contacts »"></field-embed-contact>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section>
-                    <legend>Responsibilities</legend>
-
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="km-control-group" ng-show="showResponsibleforAllMsg()"  name="absResponsibleForAllNot" caption=" There is already a CNA responsible for all functions under the Nagoya Protocol, please specify specific responsibility of this CNA."/>
-
-                            <div class="km-control-group" name="absResponsibleForAll" required caption="Is this CNA responsible for all functions under the Nagoya Protocol?">
-                                <div class="help-block">Article 13, paragraph 4 provides that “…Where a Party designates more than one competent national authority, it shall convey to the Secretariat, with its notification thereof, relevant information on the respective responsibilities of those authorities. Where applicable, such information, shall, at a minimum, specify which competent authority is responsible for the genetic resource sought…”</div>
-                                <div km-yes-no required ng-model="document.absResponsibleForAll" locales="document.header.languages"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div ng-class="{'disable':document.absResponsibleForAll==true || document.absResponsibleForAll==null, 'enable':!document.absResponsibleForAll==false}" style="margin:10px;" >
-                        <!-- IF NO SECTION -->
-                        <div class="row well no-shadow">
-                            <div class="col-xs-12" >
-                                <strong ng-show="document.absResponsibleForAll==null">
-                                    If no, the following information is required.</strong>
-                                    <strong ng-show="document.absResponsibleForAll==true" >
-                                        This section is not required.</strong>
-                                        <strong ng-show="document.absResponsibleForAll==false" >
-                                            The section is required. Please provide responsibility details for this CNA. Please submit a seperate record for each CNA.</strong>
-                                            <hr>
-                                            <div class="km-control-group" name="responsibilities" caption="Short description of CNA responsibilities (maximum 500 words). This information is required when a CNA is not responsible for all functions under the Nagoya Protocol" required>
-                                                <div class="help-block">
-                                                    Article 13, paragraph 2 provides that “Competent national authorities shall, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms.”</div>
-
-                                                </div>
-                                                <div km-rich-textbox name="responsibilities" ng-model="document.responsibilities" rows="6" placeholder="" locales="document.header.languages" required></div>
-                                            </div>
-
-                                            <div class="clearfix"></div>
-
-                                            <div class="col-xs-6">
-                                                <div class="km-control-group" name="absJurisdiction" caption="Area of jurisdiction for granting access to genetic resources" required></div>
-                                                <!-- <div km-select multiple name="absJurisdiction" ng-model="document.absJurisdiction" items="options.jurisdictions()"></div> -->
-                                                <div km-select multiple name="absJurisdiction" ng-model="document.absJurisdiction" items="options.jurisdictions()" required></div>
-                                                <!-- <div afc-autocomplete name="absJurisdiction" ng-model="document.absJurisdiction" source="options.jurisdictions" filter="genericFilter" mapping="genericMapping" selectbox="true" required></div> -->
-                                            </div>
-
-                                            <div class="col-xs-6">
-                                                <div ng-show="showJurisdictionName()">
-                                                    <div class="km-control-group" name="absJurisdictionName" required caption="Name of the jurisdiction"></div>
-                                                    <div km-textbox-ml ng-model="document.absJurisdictionName" rows="1" locales="document.header.languages"></div>
-                                                </div>
-                                            </div>
-
-                                            <div class="clearfix"></div>
-
-                                            <div class="col-xs-12">
-
-                                                <div class="km-control-group" name="absGeneticResourceTypes" caption="Keywords to describe  scope of CNA responsibilities"></div>
-                                                <div class="help-block">
-                                                    The collection of this information is important for facilitating harmonized searches throughout the records. Please select all relevant keywords that could assist in describing the responsibilities of the competent national authority
-                                                </div>
-                                                <div km-select multiple name="absGeneticResourceTypes" ng-model="document.absGeneticResourceTypes" items="options.keywords()"></div>
-
-                                            </div>
-
-                                        </div>
-                                        <!-- END IF NO SECTION -->
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="km-control-group" name="government" required caption="Country">
+                                        <div >
+                                            <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries"
+                                            filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
+                                        </div> 
                                     </div>
-
-                </section>
-
-
-                <section>
-                    <legend>Legal, administrative or policy basis for the competence of the CNA</legend>
-
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="km-control-group" name="absPolicyBasisForCompetencyRef" caption="Provide a reference to the legal, administrative or policy measure ABSCH record:"></div>
-                            <div km-reference multiple name="absPolicyBasisForCompetencyRef" ng-model="document.absPolicyBasisForCompetencyRef" loader="loadRecords(identifier, 'measure')">
-                                <div>
-                                    <div>
-                                        <strong>{{reference.title | lstring}}</strong>
-                                    </div>
-                                    <div ng-bind-html="reference.summary | lstring"></div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="km-control-group" name="absPolicyBasisForCompetency" caption="If needed, provide additional information on the legal, administrative or policy basis for the competence of the CNA:"></div>
-                            <div km-rich-textbox ng-model="document.absPolicyBasisForCompetency" rows="6" placeholder="" locales="document.header.languages"></div>
-                        </div>
-                    </div>
-                </section>
-
-                <section>
-                    <legend>Additional Information</legend>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="km-control-group" name="relevantInformation" caption="Additional Information">
-                                <div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
-                                <div km-rich-textbox name="relevantInformation" rows="6" ng-model="document.relevantInformation" locales="document.header.languages"></div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="km-control-group" name="name" required caption="Name of the Competent National Authority">
+                                        <div km-textbox-ml name="name" required ng-model="document.name" rows="1" placeholder="" locales="document.header.languages"></div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        </section>
 
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="km-control-group" name="relevantDocuments" caption="Other relevant website address or attached documents">
-                                <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" identifier="document.header.identifier"></div>
+                        <section>
+                            <legend>Coordinates</legend>
+                            <div class="row">
+                                <div class="col-xs-12" >
+                                    <div class="km-control-group" name="address" caption="Address" >
+                                        <div km-textbox-ml ng-model="document.address" rows="2" placeholder="example: 413 St-Jacques Ouest, Suite 800" locales="document.header.languages"></div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </section>
 
-                <section>
-                    <legend>Notes</legend>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="km-control-group" name="notes" >
-                                <div class="help-block">The “Notes” field is for your personal notes or comments and will be hidden when viewing the record. This field is not meant to be used for confidential information.</div>
-                                <textarea class="form-control" rows="4" name="notes" ng-model="document.notes"></textarea>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div class="km-control-group" name="city" required caption="City">
+                                        <div km-textbox-ml name="city" ng-model="document.city" required locales="document.header.languages" placeholder="example: Montreal"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-6">
+                                    <div class="km-control-group" name="state" caption="State or Province">
+                                        <div km-textbox-ml name="state" ng-model="document.state" locales="document.header.languages" placeholder="example: Quebec"></div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+
+                            <div class="row">
+
+                                <div class="col-xs-6">
+                                    <div class="km-control-group" name="postalCode" caption="Postal Code or Zip">
+                                        <div km-textbox-ml name="postalCode" ng-model="document.postalCode" locales="document.header.languages" placeholder="example: G1X 3V3"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-6">
+                                    <div class="km-control-group" name="country" required caption="Country">
+                                        <div afc-autocomplete name="country" ng-model="document.country" source="options.countries" filter="genericFilter" mapping="genericMapping"
+                                        selectbox="true" required></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <section>
+                            <legend>Contact Information</legend>
+
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div class="km-control-group" name="phones" required caption="Phone numbers">
+                                        <!--   <div class="help-block">Please use the following format: +[country code] [city code] [telephone number] [extension, if necessary].</div> -->
+                                        <div km-inputtext-list name="phones" ng-model="document.phones" required placeholder="example: +1 514.288.2220"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-6">
+                                    <div class="km-control-group" name="faxes" caption="Fax Numbers">
+                                        <!--            <div class="help-block">Please use the following format: +[country code] [city code] [telephone number] [extension, if necessary].</div> -->
+                                        <div km-inputtext-list name="faxes" ng-model="document.faxes" placeholder="example: +1 514.288.6588"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div class="km-control-group" name="emails" required caption="Emails">
+                                        <div km-inputtext-list name="emails" required type="email" ng-model="document.emails" pattern="email" placeholder="example: secretariat@cbd.int"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-6">
+                                    <div class="km-control-group" name="websites" caption="Website address">
+                                        <!--                             <div class="help-block">Please provide the URL of the website (e.g http://absch.cbd.int/) and the name of the website (e.g. ‘Access and Benefit-sharing Clearing-House’).</div> -->
+                                        <div km-link name="websites" ng-model="document.websites" allow-link="true" allow-file="false"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="km-control-group" name="contacts" caption="Additional contacts">
+                                        <field-embed-contact multiple ng-model="document.contacts" locales="$parent.document.header.languages" name="contacts" caption="Add an additional contacts »"></field-embed-contact>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section>
+                            <legend>Responsibilities</legend>
+
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="km-control-group" ng-show="showResponsibleforAllMsg()" name="absResponsibleForAllNot" caption=" There is already a CNA responsible for all functions under the Nagoya Protocol, please specify specific responsibility of this CNA."
+                                    />
+
+                                    <div class="km-control-group" name="absResponsibleForAll" required caption="Is this CNA responsible for all functions under the Nagoya Protocol?">
+                                        <div class="help-block">Article 13, paragraph 4 provides that “…Where a Party designates more than one competent
+                                            national authority, it shall convey to the Secretariat, with its notification
+                                            thereof, relevant information on the respective responsibilities of those authorities.
+                                            Where applicable, such information, shall, at a minimum, specify which competent
+                                            authority is responsible for the genetic resource sought…”</div>
+                                        <div km-yes-no required ng-model="document.absResponsibleForAll" locales="document.header.languages"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div ng-class="{'disable':document.absResponsibleForAll==true || document.absResponsibleForAll==null, 'enable':!document.absResponsibleForAll==false}"
+                            style="margin:10px;">
+                                <!-- IF NO SECTION -->
+                                <div class="row well no-shadow">
+                                    <div class="col-xs-12">
+                                        <strong ng-show="document.absResponsibleForAll==null">
+                                    If no, the following information is required.</strong>
+                                        <strong ng-show="document.absResponsibleForAll==true">
+                                        This section is not required.</strong>
+                                        <strong ng-show="document.absResponsibleForAll==false">
+                                            The section is required. Please provide responsibility details for this CNA. Please submit a seperate record for each CNA.</strong>
+                                        <hr>
+                                        <div class="km-control-group" name="responsibilities" caption="Short description of CNA responsibilities (maximum 500 words). This information is required when a CNA is not responsible for all functions under the Nagoya Protocol"
+                                        required>
+                                            <div class="help-block">
+                                                Article 13, paragraph 2 provides that “Competent national authorities shall, in accordance with applicable national legislative,
+                                                administrative or policy measures, be responsible for granting access or,
+                                                as applicable, issuing written evidence that access requirements have been
+                                                met and be responsible for advising on applicable procedures and requirements
+                                                for obtaining prior informed consent and entering into mutually agreed terms.”</div>
+
+                                        </div>
+                                        <div km-rich-textbox name="responsibilities" ng-model="document.responsibilities" rows="6" placeholder="" locales="document.header.languages"
+                                        required></div>
+                                    </div>
+
+                                    <div class="clearfix"></div>
+
+                                    <div class="col-xs-6">
+                                        <div class="km-control-group" name="absJurisdiction" caption="Area of jurisdiction for granting access to genetic resources"
+                                        required></div>
+                                        <!-- <div km-select multiple name="absJurisdiction" ng-model="document.absJurisdiction" items="options.jurisdictions()"></div> -->
+                                        <div km-select multiple name="absJurisdiction" ng-model="document.absJurisdiction" items="options.jurisdictions()" required></div>
+                                        <!-- <div afc-autocomplete name="absJurisdiction" ng-model="document.absJurisdiction" source="options.jurisdictions" filter="genericFilter" mapping="genericMapping" selectbox="true" required></div> -->
+                                    </div>
+
+                                    <div class="col-xs-6">
+                                        <div ng-show="showJurisdictionName()">
+                                            <div class="km-control-group" name="absJurisdictionName" required caption="Name of the jurisdiction"></div>
+                                            <div km-textbox-ml ng-model="document.absJurisdictionName" rows="1" locales="document.header.languages"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix"></div>
+
+                                    <div class="col-xs-12">
+
+                                        <div class="km-control-group" name="absGeneticResourceTypes" caption="Keywords to describe  scope of CNA responsibilities"></div>
+                                        <div class="help-block">
+                                            The collection of this information is important for facilitating harmonized searches throughout the records. Please select
+                                            all relevant keywords that could assist in describing the responsibilities of
+                                            the competent national authority
+                                        </div>
+                                        <div km-select multiple name="absGeneticResourceTypes" ng-model="document.absGeneticResourceTypes" items="options.keywords()"></div>
+
+                                    </div>
+
+                                </div>
+                                <!-- END IF NO SECTION -->
+                            </div>
+
+                        </section>
+
+
+                        <section>
+                            <legend>Legal, administrative or policy basis for the competence of the CNA</legend>
+
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="km-control-group" name="absPolicyBasisForCompetencyRef" caption="Provide a reference to the legal, administrative or policy measure ABSCH record:"></div>
+                                    <div km-reference multiple name="absPolicyBasisForCompetencyRef" ng-model="document.absPolicyBasisForCompetencyRef" loader="loadRecords(identifier, 'measure')">
+                                        <div>
+                                            <div>
+                                                <strong>{{reference.title | lstring}}</strong>
+                                            </div>
+                                            <div ng-bind-html="reference.summary | lstring"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="km-control-group" name="absPolicyBasisForCompetency" caption="If needed, provide additional information on the legal, administrative or policy basis for the competence of the CNA:"></div>
+                                    <div km-rich-textbox ng-model="document.absPolicyBasisForCompetency" rows="6" placeholder="" locales="document.header.languages"></div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section>
+                            <legend>Additional Information</legend>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="km-control-group" name="relevantInformation" caption="Additional Information">
+                                        <div class="help-block">Please use this field to provide any other relevant information that may not have
+                                            been addressed elsewhere in the record.</div>
+                                        <div km-rich-textbox name="relevantInformation" rows="6" ng-model="document.relevantInformation" locales="document.header.languages"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="km-control-group" name="relevantDocuments" caption="Other relevant website address or attached documents">
+                                        <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" identifier="document.header.identifier"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section>
+                            <legend>Notes</legend>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="km-control-group" name="notes">
+                                        <div class="help-block">The “Notes” field is for your personal notes or comments and will be hidden when
+                                            viewing the record. This field is not meant to be used for confidential information.</div>
+                                        <textarea class="form-control" rows="4" name="notes" ng-model="document.notes"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
                     </div>
-                </section>
-            </div>
-        </form>
+                </form>
 
 
-        <div ng-show="tab=='review'" km-tab="review">
+                <div ng-show="tab=='review'" km-tab="review">
 
 
-            <div class="btn-group" ng-show="reviewDocument.header.languages.length>1">
-                <input type="button" class="btn" ng-class="{'active' : review.locale==locale, 'btn-info' : review.locale==locale}" ng-repeat="locale in document.header.languages" ng-click="$parent.review.locale = locale" value="{{locale | uppercase}}" />
-            </div>
+                    <div class="btn-group" ng-show="reviewDocument.header.languages.length>1">
+                        <input type="button" class="btn" ng-class="{'active' : review.locale==locale, 'btn-info' : review.locale==locale}" ng-repeat="locale in document.header.languages"
+                        ng-click="$parent.review.locale = locale" value="{{locale | uppercase}}" />
+                    </div>
 
-            <div view-authority ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></div>
-        </div>
+                    <div view-authority ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></div>
+                </div>
 
-<!--
+                <!--
         <hr style="margin-top:20px;">
 
         <div class="row" style="padding-top:20px;">
@@ -274,15 +296,15 @@
             </div>
         </div> -->
 
-    </div>
+            </div>
 
 
+
+        </div>
 
 </div>
-
-  </div>
 </div>
 </div>
 
 </md-content>
-</div>
+</div></div>
