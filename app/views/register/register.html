@@ -82,41 +82,15 @@
                                    <div class="btn-commonformat-national" ng-class="{'btn-commonformat-reference':document_types[type].abbreviation=='VLR'}">
                                         <i class="material-icons" style="font-size:16pt;position:relative;top:3px;">{{type | schemaIcon }}</i>
                                          {{document_types[type].abbreviation}}
-                                     <div style="padding-right:10px;position:relative;top:-25px;">
-                                    
-                                     <div class="flip pull-right"  >
-                                         <div class="card" >
-                                             <div class="face front">
-                                                <span  ng-click="gotoNew($event,type)"  class="label color-blue bg-litegrey"> <i class="fa fa-plus"></i></span>
-                                             </div>
-                                         </div>
-                                     </div>
-                                    
-                                     <div class="flip pull-right" ng-show="facets(type,'draft') > 0">
-                                         <div class="card" ng-class="{cardMargin:facets(type,'publish')>9}">
-                                             <div class="face front">
-                                                 <div ng-show="facets(type,'draft') > 0" class="label label-default">{{facets(type,'draft')}}</div>
-                                           </div>
-                                         </div>
-                                     </div>
-                                     <div class="flip pull-right" ng-show="facets(type,'publish') > 0">
-                                         <div class="card" ng-class="{cardMargin:facets(type,'request')>9}">
-                                             <div class="face front">
-                                                 <div ng-show="facets(type,'publish') > 0" class="label label-success">{{facets(type,'publish')}}</div>
-                                           </div>
-                                         </div>
-                                     </div>
-                                     <div class="flip pull-right"   ng-show="facets(type,'request') > 0">
-                                         <div class="card" >
-                                             <div class="face front">
-                                                 <div ng-show="facets(type,'request') > 0" class="label label-danger">{{facets(type,'request')}}</div>
-                                             </div>
-                                         </div>
-                                     </div>
-                                 </div>
+                                     <div class="pull-right" style="padding-right:0px;position:relative;top:0px;">
+                                           <span ng-show="facets(type,'publish') > 0" class="label label-success" style="margin: 0 0 0 1px;"> {{facets(type,'publish')}}</span>
+                                           <span ng-show="facets(type,'draft') > 0" class="label label-default"  style="margin: 0 0 0 1px;"> {{facets(type,'draft')}}</span>
+                                           <span ng-show="facets(type,'request') > 0" class="label label-danger" style="margin: 0 0 0 1px;"> {{facets(type,'request')}}</span>
+                                           <span  ng-click="gotoNew($event,type)"  class="label color-blue bg-litegrey" style="margin: 0 0 0 1px;">  <i class="fa fa-plus"></i></span>
+                                    </div>
                                    </div>
                                    <div class="clearfix"></div>
-                                   <div class="clearfix btn-commonformat-name" style="position:relative; top:-5px;">{{document_types[type].title}}</div>
+                                   <div class="clearfix btn-commonformat-name" > {{document_types[type].title}} </div>
                                  </div>
                              </div>
                              </div>
