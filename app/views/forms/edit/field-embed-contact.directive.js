@@ -41,6 +41,7 @@ app.directive("fieldEmbedContact", [ function () {
 			var workingContacts = null;
 			$scope.buttonText = "Show existing";
 			$scope.edition = null;
+			$scope.loading = true;
 
 			//============================================================
 			//
@@ -240,9 +241,15 @@ app.directive("fieldEmbedContact", [ function () {
 				$scope.$broadcast('clearSelectSelection');
 			};
 
+
+			//============================================================
+			//
+			//
+			//============================================================
 			$scope.loadExisting = function(){
-
-
+				
+				$scope.loading = true;
+				
 				$scope.selectExisting = !$scope.selectExisting;
 
 				if($scope.selectExisting)
@@ -250,10 +257,13 @@ app.directive("fieldEmbedContact", [ function () {
 				else
 					$scope.buttonText = "Show existing";
 
-				if($scope.existingContacts)
+				if($scope.existingContacts){
+					$scope.loading = false;
 					return;
+				}
 
 				var contactType = 'contact';
+				
 				if($scope.organizationOnly)
 					contactType = 'organization';
 
@@ -276,7 +286,7 @@ app.directive("fieldEmbedContact", [ function () {
 
 
 				});
-
+				$scope.loading = false;
 			}
 
 			saveContactDraft = function(contact){
