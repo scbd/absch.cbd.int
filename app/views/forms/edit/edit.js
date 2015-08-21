@@ -19,7 +19,7 @@ define([
                                               authentication, Enumerable, editFormUtility, $routeParams, $timeout, _) {
 
     $scope.type = $rootScope.document_types[$filter("mapSchema")($routeParams.document_type)];
-    $scope.showHelp = {'show':false,'hasHelp':false};
+    $scope.showHelp = {'show':true,'hasHelp':true, showTour:false};
  
     $scope.status   = "loading";
     $scope.error    = null;

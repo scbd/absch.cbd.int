@@ -36,7 +36,8 @@
     "scbd-angularjs-services": "*",
     "scbd-angularjs-controls": "*",
     "angular-material": "0.9.8",
-    "ngSmoothScroll": "1.7.1"
+    "ngSmoothScroll": "1.7.1",
+    "joyRide": "https://github.com/zurb/joyride.git#v2.0.0"
   },
   "resolutions": {
     "angular": "1.3",

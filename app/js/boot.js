@@ -41,6 +41,7 @@ require.config({
         'ngAria'                : '../libs/angular-aria/angular-aria.min',
         'ngMaterial'            : '../libs/angular-material/angular-material.min',
         'ngSmoothScroll'        : '../libs/ngSmoothScroll/angular-smooth-scroll.min',
+        'joyRide'               : '../libs/joyRide/jquery.joyride-2.1'
     },
     'shim': {
         'angular'                       : { 'deps': ['jquery'], 'exports': 'angular' },

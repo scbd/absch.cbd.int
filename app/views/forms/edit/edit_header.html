@@ -3,6 +3,10 @@
 <div class="md-toolbar-tools" style="width:100%;">
   <h2 ><span >{{type.title}} <span class="color-darkgrey">({{type.abbreviation}})</span></span>  </h2>
    <span flex></span>
+    <a ng-href='#' ng-click="showHelp.showTour=!showHelp.showTour" ng-if="!showHelp.showTour">
+      <i class="material-icons" >live_help</i>
+      Tour
+    </a>
     <md-switch class="pull-right" ng-model="showHelp.show" ng-if="showHelp.hasHelp"  aria-label="show help">
      <h5>Help: <strong>{{showHelp.show ? "on" : "off"}}</strong></h5>
     </md-switch>
