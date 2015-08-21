@@ -54,7 +54,7 @@
 
     <div class="row" style="padding-top:20px" ng-if="getContacts().length > 0">
 
-        <div class="col-sm-12" ng-class="{'col-md-6' : getContacts().length>1, 'col-md-12' : getContacts().length<=1}" ng-repeat="contact in getContacts() | filter:filterBy | filter:keywords">
+        <div class="col-sm-12"  ng-repeat="contact in getContacts() | filter:filterBy | filter:keywords">
             <div class="well bg-white  no-shadow thin-border">
                 <div class="pull-right" ><!-- ng-show="showButtons(contact)" -->
                     <button type="button" class="btn btn-default" ng-click="deleteContact($index)"><i class="fa fa-trash-o"></i>
@@ -65,6 +65,7 @@
                 <view-contact-reference ng-model='contact' locale="en"></view-contact-reference>
             </div>
         </div>
+        
     </div>
     <!-- ng-show="showButtons()" -->
     	<button class="btn btn-default" ng-click="editContact(-1)" >
@@ -75,36 +76,49 @@
     <div class="modal fade" id="editContact" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" aria-hidden="true" ng-click="closeContact()">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">
-                        <span ng-hide="edition.contact.type">Edit an organization or a contact person</span>
-                        <span ng-show="edition.contact.type=='organization'">Edit an organization</span>
-                        <span ng-show="edition.contact.type=='person'" ng-hide="organizationOnly">Edit a contact person</span>
-                    </h4>
-
-
+                <div class="modal-header bg-blue" >
+                    <button type="button" class="close" aria-hidden="true" ng-click="closeContact()"><i class="material-icons">close</i></button>
+                    <h2 class="modal-title" id="myModalLabel">
+                        <span ng-hide="exisiting">Add a new Contact or Organization</span>
+                        <span ng-show="exisiting" >Select exisiting contact or organization</span>
+                    </h2>
+                    <br>
                     <label ng-hide="selectExisting || organizationOnly" class="radio-inline">
                         <input type="radio" ng-model="edition.contact.type" value="organization" name="editionContactType" />Organization</label>
                     <label ng-hide="selectExisting || organizationOnly" class="radio-inline">
                         <input type="radio" ng-model="edition.contact.type" value="person" name="editionContactType" />Person</label>
-                    <a type="button" class="btn btn-primary" ng-click="loadExisting()" ng-show="!showFilter">{{buttonText}}</a>
-
+                     <a class="pull-right color-white" href="#" ng-click="loadExisting();exisiting=!exisiting"><strong>{{buttonText}}</strong></a>
+                     <br>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" style="padding-top:0;">
                     <div ng-hide="selectExisting">
-                        <form name="editContactForm">
+                        
+                         <div style="margin-bottom:30px;">
+                            <span class="color-red pull-left" ng-hide="editContactForm.$valid">* Mandatory fields must be filled in before record can be saved.</span>
+                            <a type="button" class="pull-right btn" ng-class="{'btn-primary':editContactForm.$valid, 'btn-default bg-red': !editContactForm.$valid}" ng-disabled="!editContactForm.$valid" ng-click="saveContact()">Save changes</a>
+                            <a type="button" class="pull-right btn btn-default" ng-click="closeContact()">Close</a>
+                         </div>
+                          <div class="clearfix"></div>
+                        <form name="editContactForm" >
                             <div edit-contact-base ng-model="edition.contact" locales="locales" form="editContactForm"></div>
                         </form>
-                        <div class="modal-footer">
-                            <span ng-hide="editContactForm.$valid">You need to fill all mandatory fields before you can save.</span>
-                            <a type="button" class="btn btn-default" ng-click="closeContact()">Close</a>
-                            <a type="button" class="btn btn-primary" ng-disabled="!editContactForm.$valid" ng-click="saveContact()">Save changes</a>
-                        </div>
+                         <div class="clearfix"></div>
+                        <div style="margin-top: 30px;">
+                            <span class="color-red pull-left" ng-hide="editContactForm.$valid">* Mandatory fields must be filled in before record can be saved.</span>
+                            <a type="button" class="pull-right btn" ng-class="{'btn-primary':editContactForm.$valid, 'btn-default bg-red': !editContactForm.$valid}" ng-disabled="!editContactForm.$valid" ng-click="saveContact()">Save changes</a>
+                            <a type="button" class="pull-right btn btn-default" ng-click="closeContact()">Close</a>
+                         </div>
+                        <div class="clearfix"></div>
                     </div>
+                    
+                      <div ng-show="loading && selectExisting">
+                           <h1><i class="fa fa-spinner fa-spin"></i></h1>
+                      </div>
+    
                     <div ng-show="selectExisting && !showFilter">
                         <div class="row">
-                            <div class="col-sm-12" ng-class="{'col-md-6' : existingContacts.length>1, 'col-md-12' : existingContacts.length<=1}" ng-repeat="contact in existingContacts | filter:isSelected">
+                            <br>
+                            <div class="col-xs-12" ng-repeat="contact in existingContacts | filter:isSelected">
                                 <div class="well">
                                     <div class="pull-right">
                                         <!-- <button type="button" class="btn btn-default" ng-click="deleteContact($index)"><i class="fa fa-trash-o"></i></button> -->
