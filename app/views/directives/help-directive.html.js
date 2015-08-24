@@ -28,9 +28,13 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
               {
                 "schema": "absch-cna",
                 "fields" :{
-                          "generalInfo": {
+                          "formInfo": {
                             "type" : "section",
                             "en": "Article 13 of the Nagoya Protocol requires the designation of one or more competent national authorities (CNAs) on access and benefit-sharing. This information shall be made available to the ABS Clearing-House in accordance with paragraph 2 (b) of Article 14 of  the Protocol. Where a Party designates more than one competent national authority, it must provide relevant information on the respective responsibilities of those authorities to the Secretariat along with its notification designating the authority. Where applicable, such information shall, at a minimum, specify which competent authority is responsible for the genetic resources sought (Article 13, paragraph 4)."
+                          },
+                          "generalInfo": {
+                            "type" : "section",
+                            "en": "Article 13 of the Nagoya Protocol."
                           },
                           "government": {
                             "type" : "control",
@@ -68,6 +72,7 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
         $timeout(function(){
           
           _.each(help.fields, function(field, key){
+            
             
             var templateToUse = controlTemplate;
             
@@ -108,6 +113,8 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
             var joyRideTemplate = '<div id="joyrideSection" style="display:none"><ol id="helpElement" class="jouride-list" data-joyride>';
             var index = 1;
             _.each(help.fields, function(field, key, list){
+              if(field.type != 'control')
+              return;
               var buttons ='';
               if(index==1)
                 buttons = ' data-options="prev_button: false"'
