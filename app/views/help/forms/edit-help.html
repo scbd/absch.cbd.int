@@ -1,0 +1,100 @@
+<section layout="row" style="position:relative; top:20px; padding-bottom:30px;" flex ng-controller="editHelpController" style="max-width:90%">
+    <style>
+        .md-whiteframe-z1{
+            background-color: white;
+        }
+    </style>
+    <md-sidenav class="md-sidenav-left md-whiteframe-z1" md-component-id="left" md-is-locked-open="$mdMedia('min-width: 1200px')"
+    style="height:818px;">
+
+
+        <md-toolbar class="bg-medgrey">
+            <h1 class="md-toolbar-tools">Existing Schemas</h1>
+        </md-toolbar>
+
+        <md-content layout-padding layout-margin>
+
+            <div ng-repeat="schema in schemas">
+                <div>
+                    <!--<a href="countries/{{country.code}}" ng-class="{'color-blue bold': country.isNPParty, 'color-grey':!country.isNPParty}">
+                        {{country.name.en}}
+                        <span class="badge pull-right">{{country.facetCount}}</span>-->
+                    </a>
+                </div>
+            </div>
+        </md-content>
+
+    </md-sidenav>
+
+
+    <md-content flex layout-margin style="margin:0 30px 30px 30px;padding:0;background-color:transparent;">
+        <div layout="column" layout-align="top center">
+
+
+            <div>
+                <form name="editForm" style="margin-top:10px" class="editForm">
+                    <div>
+                        <div km-form-languages ng-model="document.languages" style="padding-top:20px;" class="pull-left btn-xs"></div>
+                        <section>
+                            <legend name="generalInfo">Schema</legend>
+
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="control-group">
+                                        <div class="km-control-group" name="name" required caption="Name of the schema">
+                                            <input type="text" ng-model="document.name" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section>
+                            <legend name="generalInfo">Schema Fields</legend>
+
+
+                            <div class="row" ng-repeat="field in document.fields">
+                                <div class="col-xs-12" >
+                                    <md-whiteframe class="md-whiteframe-z1" layout>
+                                        <div class="control-group" style="padding:20px">
+                                
+                                            <div class="km-control-group" name="name" required caption="field name">
+                                                <input type="text" ng-model="field.name" class="form-control" />
+                                            </div>
+                                            <div class="km-control-group" name="type" required caption="Field Type">
+                                                <div afc-autocomplete name="fieldTypes" ng-model="field.type" source="options.fieldTypes" filter="genericFilter" style="max-width:150px"
+                                                mapping="genericMapping" selectbox="true" required></div>
+                                            </div>
+                                            <div class="km-control-group" name="helptext" required caption="help text of the schema">
+                                                <div km-textbox-ml ng-model="field.helpText" rows="3" placeholder="" locales="document.languages"></div>
+                                            </div>
+                                        </div>
+                                    </md-whiteframe>
+                                    </br>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-success" ng-click="addField()"> <i class="fa fa-plus"></i> Add </button>
+                        </section>
+                           <div class="row">
+                            <div class="col-xs-12">
+                                <div class="control-group">
+                                   {{document}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="control-group">
+                                    <input type="button" class="btn btn-warning" ng-click="new_cancel($event)" value="Close" />
+                                    <button type="button" class="btn btn-success" ng-click="new_publish($event)"> Publish <i ng-show="status=='publishing'" class="fa fa-spinner fa-spin"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </md-content>
+</section>

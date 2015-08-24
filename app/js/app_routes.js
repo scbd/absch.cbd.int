@@ -98,6 +98,9 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
             when('/searchforum.shtml',      { redirectTo:'/about/portal10' }).
             when('/commonformat',           { redirectTo:'/about/common-formats' }).
 
+            when('/help/manage', {templateUrl: '/app/views/help/forms/edit-help.html',resolveController: true,resolveUser: true}).
+           
+
             otherwise({templateUrl: '/app/404.html', label:'404 Error'});
 
     }]);
