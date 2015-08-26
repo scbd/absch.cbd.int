@@ -157,13 +157,13 @@ define(['app', 'underscore'], function(app, underscore) {
             this.integerToHex = function(d, schema) {
                 var schemaCode = '';
                 if (schema.toLowerCase() == "pressrelease" || schema.toLowerCase() == "statement" || schema.toLowerCase() == "news")
-                    schemaCode = "52000000CBD0180000000000";
+                    schemaCode = "52000000cbd0180000000000";
                 else if (schema.toLowerCase() == "notification")
-                    schemaCode = "52000000CBD0120000000000";
+                    schemaCode = "52000000cbd0120000000000";
                 else if (schema.toLowerCase() == "meeting")
-                    schemaCode = "52000000CBD0050000000000";
+                    schemaCode = "52000000cbd0050000000000";
                 else if (schema.toLowerCase() == "focalpoint")
-                    schemaCode = "52000000CBD0220000000000";
+                    schemaCode = "52000000cbd0220000000000";
 
                 if (schemaCode == '')
                     return d;
