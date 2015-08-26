@@ -94,9 +94,13 @@ define(["app",'/app/js/common.js'], function (app) {
 
 				if(document.documentID)
 					documentId = document.documentID;
-				else if(document.id)
-					documentId = commonjs.hexToInteger(document.id);
-
+				else if(document.id){
+					
+						if(document.id.indexOf('_')>0)
+							documentId = commonjs.hexToInteger(document.id.substr(0,document.id.indexOf('_')));
+						else
+							documentId = commonjs.hexToInteger(document.id);
+				}
 				if(document.government_s)
                     government = document.government_s;
                 else if(document.government)
