@@ -1,6 +1,7 @@
-<section layout="row" style="position:relative; top:20px; padding-bottom:30px;" flex ng-controller="editHelpController" style="max-width:90%">
+<section layout="row" style="position:relative; top:20px; padding-bottom:30px;" flex ng-controller="editHelpController"
+style="max-width:90%">
     <style>
-        .md-whiteframe-z1{
+        .md-whiteframe-z1 {
             background-color: white;
         }
     </style>
@@ -9,92 +10,119 @@
 
 
         <md-toolbar class="bg-medgrey">
-            <h1 class="md-toolbar-tools">Existing Schemas</h1>
+            <h1 class="md-toolbar-tools">Existing Terms</h1>
+            <a ng-href="/help/manage/new">New</a>
         </md-toolbar>
 
         <md-content layout-padding layout-margin>
-
-            <div ng-repeat="schema in schemas">
-                <div>
-                    <!--<a href="countries/{{country.code}}" ng-class="{'color-blue bold': country.isNPParty, 'color-grey':!country.isNPParty}">
-                        {{country.name.en}}
-                        <span class="badge pull-right">{{country.facetCount}}</span>-->
-                    </a>
-                </div>
-            </div>
+            <md-list>
+                <md-list-item ng-repeat="term in schemas" ng-click="viewHelp(term)">
+                    <!--<a ng-href="/help/glossary/{{term._id}}">-->
+                        {{term.schemaName}} ({{term.fields.length}})
+                    <!--</a>-->
+                    <md-divider ng-if="!$last"></md-divider>
+                </md-list-item>
+            </md-list>
         </md-content>
-
     </md-sidenav>
 
 
     <md-content flex layout-margin style="margin:0 30px 30px 30px;padding:0;background-color:transparent;">
-        <div layout="column" layout-align="top center">
 
 
-            <div>
-                <form name="editForm" style="margin-top:10px" class="editForm">
-                    <div>
-                        <div km-form-languages ng-model="document.languages" style="padding-top:20px;" class="pull-left btn-xs"></div>
-                        <section>
-                            <legend name="generalInfo">Schema</legend>
-
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="control-group">
-                                        <div class="km-control-group" name="name" required caption="Name of the schema">
-                                            <input type="text" ng-model="document.name" class="form-control" />
-                                        </div>
+        <div layout="column" layout-fill>
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <span>Schema Help</span>
+                    <span flex></span>
+                    <!--<md-button>
+                        Right Bar Button
+                    </md-button>-->
+                </div>
+            </md-toolbar>
+            <md-content class="md-padding">
+                <div layout="column" layout-align="top center">
+                    <div ng-if="mode=='edit' && document">
+                        <form name="editForm" style="margin-top:10px" class="editForm">
+                            <md-input-container>
+                                <label>Schema Name</label>
+                                <input name="schemaName" ng-model="document.schemaName" required md-maxlength="100" minlength="4">
+                                <!--<div ng-messages="editForm.schemaName.$error" ng-show="editForm.schemaName.$dirty">
+                                    <div ng-message="required">Please enter schema name!</div>
+                                    <div ng-message="md-maxlength">That's too long!</div>
+                                    <div ng-message="minlength">That's too short!</div>
+                                </div>-->
+                            </md-input-container>
+                            <md-card>
+                                <md-card-content>
+                                <label>Schema Fields</label>
+                                <div class="row" ng-repeat="field in document.fields">
+                                    <div class="col-xs-12" >
+                                        <md-whiteframe class="md-whiteframe-z1" layout>
+                                            <div style="padding:20px;width:100%">
+                                    
+                                                <md-input-container>
+                                                    <label>Field Name</label>
+                                                    <input name="fieldName" ng-model="field.name" required md-maxlength="100" minlength="4">
+                                                    <!--<div ng-messages="editForm.fieldName.$error" ng-show="editForm.fieldName.$dirty">
+                                                        <div ng-message="required">Please enter field name!</div>
+                                                        <div ng-message="md-maxlength">That's too long!</div>
+                                                        <div ng-message="minlength">That's too short!</div>
+                                                    </div>-->
+                                                </md-input-container></br>
+                                                <div class="km-control-group" name="type" required caption="Field Type">
+                                                    <div afc-autocomplete name="fieldTypes" ng-model="field.type" source="options.fieldTypes" filter="genericFilter" style="max-width:150px"
+                                                    mapping="genericMapping" selectbox="true" required></div>
+                                                </div></br>
+                                               <md-input-container>
+                                                    <label>Help text</label>
+                                                    <input name="fieldHelpText" ng-model="field.helpText" required md-maxlength="1000" minlength="4">
+                                                    <!--<div ng-messages="editForm.fieldHelpText.$error" ng-show="editForm.fieldHelpText.$dirty">
+                                                        <div ng-message="required">Please enter field nhelp textame!</div>
+                                                        <div ng-message="md-maxlength">That's too long!</div>
+                                                        <div ng-message="minlength">That's too short!</div>
+                                                    </div>-->
+                                                </md-input-container>
+                                            </div>
+                                        </md-whiteframe>
+                                        </br>
                                     </div>
                                 </div>
-                            </div>
-                        </section>
-
+                                 <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+                                    <md-button class="md-raised md-primary" ng-click="addField()"> <i class="fa fa-plus"></i> Add </md-button>
+                                </section>
+                                </md-card-content>
+                            </md-card>
+                           
+                            <br>
+                            <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+                                <md-button class="md-raised" ng-click="cancel()">Cancel</md-button>
+                                <md-button class="md-raised md-primary" ng-click="saveHelp()" ng-disabled="editForm.$invalid">Save</md-button>
+                            </section>
+                        </form>
+                    </div>
+                    <div ng-if="mode=='read'">
+                        <button type="button" class="btn btn-success pull-right" ng-click="editHelp()">
+                            Edit
+                        </button>
                         <section>
-                            <legend name="generalInfo">Schema Fields</legend>
-
-
-                            <div class="row" ng-repeat="field in document.fields">
-                                <div class="col-xs-12" >
-                                    <md-whiteframe class="md-whiteframe-z1" layout>
-                                        <div class="control-group" style="padding:20px">
-                                
-                                            <div class="km-control-group" name="name" required caption="field name">
-                                                <input type="text" ng-model="field.name" class="form-control" />
-                                            </div>
-                                            <div class="km-control-group" name="type" required caption="Field Type">
-                                                <div afc-autocomplete name="fieldTypes" ng-model="field.type" source="options.fieldTypes" filter="genericFilter" style="max-width:150px"
-                                                mapping="genericMapping" selectbox="true" required></div>
-                                            </div>
-                                            <div class="km-control-group" name="helptext" required caption="help text of the schema">
-                                                <div km-textbox-ml ng-model="field.helpText" rows="3" placeholder="" locales="document.languages"></div>
-                                            </div>
-                                        </div>
-                                    </md-whiteframe>
-                                    </br>
-                                </div>
-                            </div>
-                            <button type="button" class="btn btn-success" ng-click="addField()"> <i class="fa fa-plus"></i> Add </button>
+                            <legend name="termCation">{{document.schemaName}}</legend>
+                            
+                            <md-list>
+                                <md-list-item class="md-3-line" ng-repeat="item in document.fields">
+                                    <div class="md-list-item-text">
+                                    <h3>{{item.name}}</h3>
+                                    <p>{{item.helpText}}</p>
+                                    </div>
+                                    <md-divider ng-if="!$last"></md-divider>
+                                </md-list-item>
+                            </md-list>
                         </section>
-                           <div class="row">
-                            <div class="col-xs-12">
-                                <div class="control-group">
-                                   {{document}}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="control-group">
-                                    <input type="button" class="btn btn-warning" ng-click="new_cancel($event)" value="Close" />
-                                    <button type="button" class="btn btn-success" ng-click="new_publish($event)"> Publish <i ng-show="status=='publishing'" class="fa fa-spinner fa-spin"></i></button>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
 
-                </form>
-
-            </div>
+                </div>
+            </md-content>
         </div>
     </md-content>
 </section>

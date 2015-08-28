@@ -1,0 +1,128 @@
+<section layout="row" style="position:relative; top:20px; padding-bottom:30px;" flex ng-controller="glossaryTermController"
+style="max-width:90%">
+    <style>
+        .md-whiteframe-z1 {
+            background-color: white;
+        }
+    </style>
+    <md-sidenav class="md-sidenav-left md-whiteframe-z1" md-component-id="left" md-is-locked-open="$mdMedia('min-width: 1200px')"
+    style="height:818px;">
+
+
+        <md-toolbar class="bg-medgrey">
+            <h1 class="md-toolbar-tools">Existing Terms</h1>
+        </md-toolbar>
+
+        <md-content layout-padding layout-margin>
+            <md-list >
+                <md-list-item ng-repeat="term in glossarys" ng-click="viewGlossary(term)">
+                    <!--<a href="/help/glossary/{{term._id}}">-->
+                        {{term.title}}
+                    <!--</a>-->
+                    <md-divider ng-if="!$last"></md-divider>
+                </md-list-item>
+            </md-list>
+        </md-content>
+
+    </md-sidenav>
+
+
+    <md-content flex layout-margin style="margin:0 30px 30px 30px;padding:0;background-color:transparent;">
+
+
+        <div layout="column" layout-fill>
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <span>Glossary Term</span>
+                    <span flex></span>
+                    <!--<md-button>
+                        Right Bar Button
+                    </md-button>-->
+                </div>
+            </md-toolbar>
+            <md-content class="md-padding">
+                <div layout="column" layout-align="top center">
+                    <div ng-if="mode=='edit'">
+                        <form name="editForm" style="margin-top:10px" class="editForm">
+                            <md-input-container>
+                                <label>Glossary term</label>
+                                <input name="title" ng-model="document.title" required md-maxlength="200" minlength="4">
+                                <div ng-messages="editForm.title.$error" ng-show="editForm.title.$dirty">
+                                    <div ng-message="required">Please enter gloassry term!</div>
+                                    <div ng-message="md-maxlength">That's too long!</div>
+                                    <div ng-message="minlength">That's too short!</div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container>
+                                <label>Term Description</label>
+                                <textarea name="description" ng-model="document.description" required md-maxlength="25000" minlength="4" />
+                                <div ng-messages="editForm.titdescriptionle.$error" ng-show="editForm.description.$dirty">
+                                    <div ng-message="required">Please enter term description!</div>
+                                    <div ng-message="md-maxlength">That's too long!</div>
+                                    <div ng-message="minlength">That's too short!</div>
+                                </div>
+                            </md-input-container>
+                            <div layout="column">
+                                <md-select placeholder="Related FAQs" ng-model="document.related" 
+                                    md-on-open="loadFAQs()" style="min-width: 200px;" multiple="true">
+                                    <md-option ng-value="faq._id" ng-repeat="faq in faqs">{{faq.title}}</md-option>
+                                </md-select>
+                            </div>
+                            <div layout="column">
+                                <!--<label>Tags</label>-->
+                                <md-chips ng-model="document.tags" readonly="false" placeholder="Enter a tag" delete-button-label="Remove Tag" delete-hint="Press delete to remove tag"
+                                secondary-placeholder="+Tag"></md-chips>
+                            </div>
+                            <br>
+                            <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+                                <md-button class="md-raised" ng-click="cancel()">Cancle</md-button>
+                                <md-button class="md-raised md-primary" ng-click="saveGlossary()" ng-disabled="editForm.$invalid">Save</md-button>
+                            </section>
+                        </form>
+                    </div>
+                    <div ng-if="mode=='read'">
+                        <button type="button" class="btn btn-success pull-right" ng-click="editGlossary()">
+                            Edit
+                        </button>
+                        <section>
+                            <legend name="termCation">{{document.title}}</legend>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="control-group" name="name" required caption="Term Caption">
+                                        {{document.description}}
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <br>
+                        <section ng-if="document.related">
+                            <legend>Related</legend>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <md-list >
+                                        <md-list-item ng-repeat="term in relatedFAQ">
+                                            <a href="/help/faq/{{term._id}}">
+                                                {{term.title}}
+                                            </a>
+                                            <md-divider ng-if="!$last"></md-divider>
+                                        </md-list-item>
+                                    </md-list>
+                                </div>
+                            </div>
+                        </section>
+                        <br>
+                        <section>
+                            <legend>Tags</legend>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <md-chips ng-model="document.tags" readonly="true"></md-chips>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                </div>
+            </md-content>
+        </div>
+    </md-content>
+</section>

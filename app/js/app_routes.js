@@ -98,8 +98,13 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
             when('/searchforum.shtml',      { redirectTo:'/about/portal10' }).
             when('/commonformat',           { redirectTo:'/about/common-formats' }).
 
-            when('/help/manage', {templateUrl: '/app/views/help/forms/edit-help.html',resolveController: true,resolveUser: true}).
-           
+            when('/help/manage/:term?', {templateUrl: '/app/views/help/forms/edit-help.html',resolveController: true,resolveUser: true}).
+            
+            when('/help/glossary', {templateUrl: '/app/views/help/forms/glossary.html',resolveController: true,resolveUser: true}).           
+            when('/help/glossary/:term', {templateUrl: '/app/views/help/forms/glossary-term.html',resolveController: true,resolveUser: true, schema:'help-glossarys'}).
+            
+            when('/help/faq', {templateUrl: '/app/views/help/forms/faq.html',resolveController: true,resolveUser: true}).           
+            when('/help/faq/:term', {templateUrl: '/app/views/help/forms/glossary-term.html',resolveController: true,resolveUser: true, schema:'help-faqs'}).
 
             otherwise({templateUrl: '/app/404.html', label:'404 Error'});
 

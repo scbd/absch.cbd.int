@@ -1,0 +1,28 @@
+<section layout="row" style="position:relative; top:20px; padding-bottom:30px;" flex ng-controller="faqController" style="max-width:90%">
+    <style>
+        .md-whiteframe-z1 {
+            background-color: white;
+        }
+        td:target, .highlighted {
+            background-color: #fbe54e;
+        }
+    </style>
+    
+    <md-content flex layout-margin style="margin:0 30px 30px 30px;padding:0;background-color:transparent;padding:0 20% 0 20%">
+        <div layout="column" layout-align="top center">
+                <md-list >
+                    <md-list-item ng-repeat="term in faqs" >
+                        <a href="/help/faq/{{term._id}}">
+                            {{term.title}}
+                        </a>
+                        <md-divider ng-if="!$last"></md-divider>
+                    </md-list-item>
+                </md-list>
+                <!--<table class="table table-hover">
+                    <tr ng-repeat="term in faqs" id="{{replaceSpace(term.title)}}">
+                        <td >{{term.title}}</td>
+                    </tr>
+                </table>-->
+        </div>
+    </md-content>
+</section>

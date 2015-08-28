@@ -22,7 +22,40 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
 			}]
       ,controller:['$scope', '$q', '$element', '$timeout','$compile', 
                   function($scope, $q, $element, $timeout, $compile){
-        
+        // var helpFaq = 
+        //  {
+        //         "id"  : "1",
+        //         "schema": "absch-faq",
+        //         "title" : "what is CNA",
+        //         "description"    : "bla bla",                
+        //         "related" : ["2","3"],
+        //         "tags"    : [
+        //                       {"value":"government","identifier":"12345"},
+        //                       {"value":"author",    "identifier":"12398"}
+        //                     ]
+        //  }
+        //  var helpGlossary = 
+        //  {
+        //         "id"  : "1",
+        //         "schema": "absch-glossary",
+        //         "title" : "what is CNA",
+        //         "description"    : "bla bla",                
+        //         "related" : ["2","3"],
+        //         "tags"    : [
+        //                       {"value":"government","identifier":"12345"},
+        //                       {"value":"author",    "identifier":"12398"}
+        //                     ]
+        //  }        
+        //  var helpSchema = 
+        //  {
+        //         "id"  : "1",
+        //         "schema": "absch-form-help",
+        //         "form"  : "authority",
+        //         "title" : "optional",
+        //         "description"    : "bla bla",
+        //         "fieldName" : "formInfo",
+        //         "type" : "section",//expected values {section, control, form }
+        //  }        
         var joyride = false;
         var help = 
               {

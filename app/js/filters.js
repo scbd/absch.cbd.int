@@ -365,5 +365,13 @@ define(["app",'/app/js/common.js'], function (app) {
 		};
 	}]);
 
-
+	app.filter('highlight', function($sce) {
+		return function(text) {
+			var phrase = 'to'
+			if (phrase) text = text.replace(new RegExp('('+phrase+')', 'gi'),
+			'<a ng-href="#" class="highlighted" data-toggle="tooltip" title="2334343 543543 34543543 " data-container="body">' + phrase + ' </a>')
+		console.log(text);
+			return $sce.trustAsHtml(text)
+		}
+	})
 });
