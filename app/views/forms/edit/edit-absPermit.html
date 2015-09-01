@@ -83,7 +83,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="km-control-group" name="authority" required caption="Competent national authority responsible for issuing the permit or its equivalent">
-                                <field-embed-contact ng-model="document.authority" locales="$parent.document.header.languages" caption="Add Issuing Authority »"></field-embed-contact>
+                                <field-embed-contact ng-model="document.authority" locales="document.header.languages" caption="Add Issuing Authority »"></field-embed-contact>
                             </div>
                         </div>
                     </div>
@@ -141,7 +141,7 @@
                                     <span class="help-block">Please provide the name and contact details of the person or entity that holds the right to grant access to the genetic resources in accordance with domestic legislation.</span>
 
                                     <div ng-show="!document.providerConfidential">
-                                        <field-embed-contact multiple ng-model="document.providers" locales="$parent.document.header.languages" caption="Add an organisation or a contact »"></field-embed-contact>
+                                        <field-embed-contact multiple ng-model="document.providers" locales="document.header.languages" caption="Add an organisation or a contact »"></field-embed-contact>
                                     </div>
                                 </div>
                                 <span class="confidential-text">
@@ -186,7 +186,7 @@
                                 <div class="km-control-group" name="informedConsents" required caption="Person or entity to whom prior informed consent (PIC) was granted">
 
                                     <div ng-show="!document.informedConsentConfidential">
-                                        <field-embed-contact multiple ng-model="document.informedConsents" locales="$parent.document.header.languages" caption="Add an organisation or a contact »"></field-embed-contact>
+                                        <field-embed-contact multiple ng-model="document.informedConsents" locales="document.header.languages" caption="Add an organisation or a contact »"></field-embed-contact>
                                     </div>
                                     <span class="help-block" ng-show="document.informedConsentConfidential">Please note that the ABS-CH wont be able to send a courtersy copy of the IRCC</span>
                                     <span class="confidential-text">
