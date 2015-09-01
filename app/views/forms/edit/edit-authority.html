@@ -1,7 +1,6 @@
 ﻿<div ng-controller="editAuthority" class="md-whiteframe-z1" >
-<div help >
+<div help schema="55e073c2e81495f09996b4d8" show-help="showHelp">
     <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
-
     <md-content layout-padding style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
 
         <div class="registerpage-content">
@@ -50,7 +49,7 @@
                         </section>
 
                         <section>
-                            <legend>Coordinates</legend>
+                            <legend name="coordinates">Coordinates</legend>
                             <div class="row">
                                 <div class="col-xs-12" >
                                     <div class="km-control-group" name="address" caption="Address" >
@@ -90,7 +89,7 @@
                             </div>
                         </section>
                         <section>
-                            <legend>Contact Information</legend>
+                    <legend name="contactInfo">Contact Information</legend>
 
                             <div class="row">
                                 <div class="col-xs-6">
@@ -126,14 +125,14 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" name="contacts" caption="Additional contacts">
-                                        <field-embed-contact multiple ng-model="document.contacts" locales="$parent.document.header.languages" name="contacts" caption="Add an additional contacts »"></field-embed-contact>
+                                        <field-embed-contact multiple ng-model="document.contacts" locales="document.header.languages" name="contacts" caption="Add an additional contacts »"></field-embed-contact>
                                     </div>
                                 </div>
                             </div>
                         </section>
 
                         <section>
-                            <legend>Responsibilities</legend>
+                            <legend name="responsibilities">Responsibilities</legend>
 
                             <div class="row">
                                 <div class="col-xs-12">

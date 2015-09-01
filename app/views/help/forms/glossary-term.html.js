@@ -61,6 +61,7 @@ app.controller("glossaryTermController",
             doc.title = $scope.document.title;
             doc.description = $scope.document.description;
             doc.tags = $scope.document.tags;
+            doc.referenceTerm = $scope.document.referenceTerm;
             doc.related = $scope.document.related;
           }
           $mdToast.show(
@@ -94,6 +95,10 @@ app.controller("glossaryTermController",
        
         $scope.mode = 'edit';
        
+        if(!$scope.document.tags)
+          $scope.document.tags = [];
+        if(!$scope.document.referenceTerm)
+          $scope.document.referenceTerm = [];
      }
      
      $scope.cancel = function(){
@@ -109,6 +114,7 @@ app.controller("glossaryTermController",
           orignal = angular.copy(term);
           $scope.relatedFAQ = [];
           _.map(term.related, loadFAQ)
+          
       }
      
      if($routeParams.term){
@@ -117,6 +123,7 @@ app.controller("glossaryTermController",
               $scope.mode = 'edit';
               $scope.document = {};
               $scope.document.tags = [];
+              $scope.document.referenceTerm = [];
           }
           else{
               $scope.mode = 'read';

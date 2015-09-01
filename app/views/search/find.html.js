@@ -7,13 +7,14 @@ define(['app','underscore','/app/js/common.js',
     '/app/views/search/find_facets.partial.html.js',
     '/app/views/search/find_themes.partial.html.js',
     '/app/views/directives/search-filter-dates.partial.html.js',
-    '/app/views/directives/document-list.partial.html.js', 'bootstrap-datepicker','moment'],
+    '/app/views/directives/document-list.partial.html.js', 'bootstrap-datepicker','moment',
+    '/app/views/directives/help-directive.html.js'],
      function (app,_) {
 
     app.controller('FindController', ['$scope', '$rootScope', '$http', '$timeout', '$q','realm', '$routeParams','$location','$element','commonjs','$mdSidenav', '$mdUtil', '$mdMedia',
         function ($scope, $rootScope, $http, $timeout, $q, realm, $routeParams,$location, $element, commonjs, $mdSidenav, $mdUtil, $mdMedia) {
 
-
+            $scope.showHelp = {'show':true,'hasHelp':true, showTour:false};
             $scope.toggleLeft = buildToggler('left');
             $scope.toggleRight = buildToggler('right');
             //**********************************************************

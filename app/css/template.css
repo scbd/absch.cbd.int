@@ -774,3 +774,10 @@ footer .logo {
     background-image: url('/app/img/EUFlag.png');
     width: : 165px;
 }
+
+.help-content{padding:3px 10px; background-color: #efefef; color:#666;}
+.help-title{padding:3px 10px; background-color: #FFC0CB; color:#666;font-size:18px;}
+.help-section i {position:relative; top:4px;}
+.help-inline{padding:3px; color:#666; font-size: 12px; font-weight:bold;  background-color: #FFC0CB;}
+.help-inline i {font-size: 14px;position:relative; top:2px;}
+.help-section h4 {color:#666; background-color: #FFC0CB;padding-bottom:5px;position:relative;top:-10px;}

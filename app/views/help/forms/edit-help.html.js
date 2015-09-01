@@ -6,7 +6,7 @@ app.controller("editHelpController",
 		var url = 'http://localhost:8000/api/v2015/help-forms';
    
 		$scope.document = {};
-		$scope.document.languages = ["en"]
+		$scope.languages = ["en"]
 		$scope.mode = 'read'
 		var origanalDocument = _.clone($scope.document);
 		
@@ -66,7 +66,7 @@ app.controller("editHelpController",
 		$scope.viewHelp = function(document){
 			$scope.mode = 'read';
 			$scope.document = document;
-			
+			origanalDocument = _.clone($scope.document);
 			$scope.term = document._id
 		}
 			
@@ -84,6 +84,7 @@ app.controller("editHelpController",
 					
 					if(!$routeParams.term && $scope.schemas.length > 0){
 						$scope.document = $scope.schemas[0];
+						origanalDocument = _.clone($scope.document);
 					}
 				});
 		}
@@ -92,6 +93,7 @@ app.controller("editHelpController",
 			$q.when( $http.get(url + '/' + id))
 				.then(function(response){
 					$scope.document = response.data;
+					origanalDocument = _.clone($scope.document);
 				});
 		}
 		
@@ -110,6 +112,7 @@ app.controller("editHelpController",
 				if(response.data.id){
 					$scope.document._id = response.data.id;
 					$scope.schemas.push($scope.document)
+					origanalDocument = _.clone($scope.document);
 				}
 				$mdToast.show(
 					$mdToast.simple()
@@ -120,7 +123,9 @@ app.controller("editHelpController",
 			});
 		
 		}
-		
+		$scope.deleteField = function(field){
+			$scope.document.fields.splice(_.indexOf($scope.document.fields,field),1);
+		}
 		if($routeParams.term){
       
 			if($routeParams.term=='new'){

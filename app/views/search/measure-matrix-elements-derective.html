@@ -144,14 +144,15 @@
             <tr ng:class="{'elementMeasure':term.isMeasure, 'whiteTopBorder':term.hasMeasure}" >
                 <td class="matrixheaderColumn rightBorder " ng:class="{'paddingleft0':term.level==1, 'paddingleft3':term.level==2 , 'paddingleft6':term.level==3, 'paddingleft9':term.level==4}">
                         &nbsp;
-                        <strong ng-show="!term.broaderTerms">{{term.title||term.name | lstring:locale|uppercase}}</strong>
-                        <span ng-show="term.broaderTerms && !term.isMeasure">{{term.title||term.name | lstring:locale}}</span>
+                        <!--exception for TK-->
+                        <strong ng-show="!term.broaderTerms || term.identifier=='B8A150E054154AD3AD97856ABD485E90'">{{term.title||term.name | lstring:locale|uppercase}}</strong>
+                        <span ng-show="term.broaderTerms && !term.isMeasure && term.identifier=='B8A150E054154AD3AD97856ABD485E90'">{{term.title||term.name | lstring:locale}}</span>
                         <span ng-show="term.broaderTerms && term.isMeasure">
                             <a target="_new" href="/database/measure/{{term.measure|uniqueIDWithoutRevision}}">
                                 {{term.title||term.name | lstring:locale}}
                             </a>                               
                         </span>
-                         <strong ng-show="sections[term.identifier]">({{sections[term.identifier] | lstring:locale}})</strong>
+                         <span ng-show="sections[term.identifier]">({{sections[term.identifier] | lstring:locale}})</span>
                         <i class="fa fa-chevron-circle-up pull-right hand" ng-click="term.showUp=!term.showUp;showHideNode(term.identifier)" ng-show="!term.showUp" ng:if="term.level<2"></i>
                         <i class="fa fa-chevron-circle-down pull-right hand" ng-click="term.showUp=!term.showUp;showHideNode(term.identifier)" ng-show="term.showUp" ng:if="term.level<2"></i>
 

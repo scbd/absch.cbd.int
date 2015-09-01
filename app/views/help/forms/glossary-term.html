@@ -69,9 +69,12 @@ style="max-width:90%">
                                 </md-select>
                             </div>
                             <div layout="column">
-                                <!--<label>Tags</label>-->
                                 <md-chips ng-model="document.tags" readonly="false" placeholder="Enter a tag" delete-button-label="Remove Tag" delete-hint="Press delete to remove tag"
                                 secondary-placeholder="+Tag"></md-chips>
+                            </div><br>
+                            <div layout="column">
+                                <md-chips ng-model="document.referenceTerm" readonly="false" placeholder="Enter a reference term" delete-button-label="Remove reference term" delete-hint="Press delete to remove reference term"
+                                secondary-placeholder="+Reference term"></md-chips>
                             </div>
                             <br>
                             <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
@@ -119,6 +122,15 @@ style="max-width:90%">
                                 </div>
                             </div>
                         </section>
+                        <!--<br>
+                        <section>
+                            <legend>Reference Term</legend>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <md-chips ng-model="document.refernceterm" readonly="true"></md-chips>
+                                </div>
+                            </div>
+                        </section>-->
                     </div>
 
                 </div>

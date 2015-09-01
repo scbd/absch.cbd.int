@@ -76,9 +76,12 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
         delete documentCopy.organizationsRef;
       return documentCopy;
     };
-
-    $scope.setDocument({libraries: [{ identifier: "cbdLibrary:abs-ch" }]}, true);
-
+    
+    if($scope.type == 'resource')
+      $scope.setDocument({libraries: [{ identifier: "cbdLibrary:abs-ch" }]}, true);
+    else
+      $scope.setDocument({}, true);
+      
     $scope.$on("loadDocument", function(evt, info) {
         var loadRecords = [];
         _.each($scope.document.organizations, function(org){

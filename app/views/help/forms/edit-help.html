@@ -4,6 +4,9 @@ style="max-width:90%">
         .md-whiteframe-z1 {
             background-color: white;
         }
+        .helpText{
+            text-align: justify;
+        }
     </style>
     <md-sidenav class="md-sidenav-left md-whiteframe-z1" md-component-id="left" md-is-locked-open="$mdMedia('min-width: 1200px')"
     style="height:818px;">
@@ -53,6 +56,10 @@ style="max-width:90%">
                                     <div ng-message="minlength">That's too short!</div>
                                 </div>-->
                             </md-input-container>
+                            <md-input-container>
+                                <label>Title</label>
+                                <input name="schemaTitle" ng-model="document.title" required md-maxlength="200" minlength="4">
+                            </md-input-container>
                             <md-card>
                                 <md-card-content>
                                 <label>Schema Fields</label>
@@ -60,29 +67,35 @@ style="max-width:90%">
                                     <div class="col-xs-12" >
                                         <md-whiteframe class="md-whiteframe-z1" layout>
                                             <div style="padding:20px;width:100%">
-                                    
+                                            <i class="fa fa-remove pull-right" style="cursor:pointer" ng-click="deleteField(field)"/>                                    
                                                 <md-input-container>
                                                     <label>Field Name</label>
                                                     <input name="fieldName" ng-model="field.name" required md-maxlength="100" minlength="4">
-                                                    <!--<div ng-messages="editForm.fieldName.$error" ng-show="editForm.fieldName.$dirty">
-                                                        <div ng-message="required">Please enter field name!</div>
-                                                        <div ng-message="md-maxlength">That's too long!</div>
-                                                        <div ng-message="minlength">That's too short!</div>
-                                                    </div>-->
-                                                </md-input-container></br>
+                                                </md-input-container>
+                                                <md-input-container>
+                                                    <label>Field Title</label>
+                                                    <input name="fieldTitle" ng-model="field.title" required md-maxlength="100" minlength="4">
+                                                </md-input-container>
+                                                <md-checkbox ng-model="field.embed" aria-label="Embed?">
+                                                    static
+                                                </md-checkbox>
+                                                <md-checkbox ng-model="field.popup" aria-label="Embed?">
+                                                    popup
+                                                </md-checkbox>
+                                                </br>
+                                                
                                                 <div class="km-control-group" name="type" required caption="Field Type">
                                                     <div afc-autocomplete name="fieldTypes" ng-model="field.type" source="options.fieldTypes" filter="genericFilter" style="max-width:150px"
-                                                    mapping="genericMapping" selectbox="true" required></div>
+                                                    mapping="genericMapping" selectbox="true" required></div>                                                    
+                                                
                                                 </div></br>
                                                <md-input-container>
                                                     <label>Help text</label>
-                                                    <input name="fieldHelpText" ng-model="field.helpText" required md-maxlength="1000" minlength="4">
-                                                    <!--<div ng-messages="editForm.fieldHelpText.$error" ng-show="editForm.fieldHelpText.$dirty">
-                                                        <div ng-message="required">Please enter field nhelp textame!</div>
-                                                        <div ng-message="md-maxlength">That's too long!</div>
-                                                        <div ng-message="minlength">That's too short!</div>
-                                                    </div>-->
+                                                    <!--<input name="fieldHelpText" ng-model="field.helpText" required md-maxlength="10000" minlength="4">-->                                                    
+                                                    <div km-rich-textbox name="helpText" ng-model="field.helpText" rows="6" 
+                                                        placeholder="" locales="languages" required></div>
                                                 </md-input-container>
+                                               
                                             </div>
                                         </md-whiteframe>
                                         </br>
@@ -106,13 +119,13 @@ style="max-width:90%">
                             Edit
                         </button>
                         <section>
-                            <legend name="termCation">{{document.schemaName}}</legend>
-                            
+                            <legend name="termCation">{{document.title}}</legend>
+                               <!--<h3>{{document.schemaName}}<h3>-->
                             <md-list>
                                 <md-list-item class="md-3-line" ng-repeat="item in document.fields">
                                     <div class="md-list-item-text">
-                                    <h3>{{item.name}}</h3>
-                                    <p>{{item.helpText}}</p>
+                                    <h3>{{item.title}}</h3>
+                                    <p class="helpText" ng-bind-html="item.helpText|lstring"> </p>
                                     </div>
                                     <md-divider ng-if="!$last"></md-divider>
                                 </md-list-item>
