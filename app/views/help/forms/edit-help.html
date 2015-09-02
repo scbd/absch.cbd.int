@@ -48,13 +48,12 @@ style="max-width:90%">
                     <div ng-if="mode=='edit' && document">
                         <form name="editForm" style="margin-top:10px" class="editForm">
                             <md-input-container>
-                                <label>Schema Name</label>
+                                <label>Form Name</label>
                                 <input name="schemaName" ng-model="document.schemaName" required md-maxlength="100" minlength="4">
-                                <!--<div ng-messages="editForm.schemaName.$error" ng-show="editForm.schemaName.$dirty">
-                                    <div ng-message="required">Please enter schema name!</div>
-                                    <div ng-message="md-maxlength">That's too long!</div>
-                                    <div ng-message="minlength">That's too short!</div>
-                                </div>-->
+                            </md-input-container>
+                            <md-input-container>
+                                <label>Form path</label>
+                                <input name="formPath" ng-model="document.formPath" required md-maxlength="100" minlength="4">
                             </md-input-container>
                             <md-input-container>
                                 <label>Title</label>
@@ -93,7 +92,7 @@ style="max-width:90%">
                                                     <label>Help text</label>
                                                     <!--<input name="fieldHelpText" ng-model="field.helpText" required md-maxlength="10000" minlength="4">-->                                                    
                                                     <div km-rich-textbox name="helpText" ng-model="field.helpText" rows="6" 
-                                                        placeholder="" locales="languages" required></div>
+                                                        placeholder="" locales="languages" required toolbar="[['bold', 'italics', 'ul', 'ol', 'redo', 'undo', 'clear'], ['insertLink']]"></div>
                                                 </md-input-container>
                                                
                                             </div>
@@ -115,7 +114,7 @@ style="max-width:90%">
                         </form>
                     </div>
                     <div ng-if="mode=='read'">
-                        <button type="button" class="btn btn-success pull-right" ng-click="editHelp()">
+                        <button type="button" class="btn btn-success pull-right" ng-click="editHelp()" ng-if="canEdit()">
                             Edit
                         </button>
                         <section>

@@ -121,8 +121,8 @@
 
 
         <md-content flex layout-margin style="margin:0 30px 30px 30px;padding:0;background-color:transparent;">
-            <div layout="column" layout-align="top center" >
-
+            <div layout="column" layout-align="top center" help schema="countryProfile" show-help="showHelp" repalce-glossary-terms="true">
+                <legend name="formInfo" style="display:none"></legend>
                 <md-button ng-click="toggleLeft()" class="md-primary md-raised bg-medgrey" hide-gt-lg style="margin: 0  0 10px 0;">
                     <i class="material-icons" style="position:relative;top:6px;">menu</i> Select a country
                 </md-button>
@@ -191,7 +191,7 @@
                         </div>
 
                         <div class="row" ng-show="showNFP" style="padding:0;margin:0;">
-                            <div style="padding:0;margin:10px 0px;">
+                            <div style="padding:0;margin:10px 0px;"><legend name="lblNFP" style="display:none"></legend>
                                 <div ng-repeat="contact in absch_nfp | filter:{'schema_s':'focalPoint'}">
                                     <div ng-class="{'row': ($index)%3==0}"> </div>
                                     <div class="col-md-4" style="margin:0;">
@@ -245,7 +245,7 @@
                         </div>
 
                         <div class="row" ng-show="showNDB">
-                            <div style="padding:10px;">
+                            <div style="padding:10px;"><legend name="lblNDB" style="display:none"></legend>
                                 <div ng-repeat="contact in absch_nfp | filter:{'schema_s':'database'}">
                                     <div ng-class="{'row': ($index)%3==0}"> </div>
                                     <div class="col-md-4" style="margin:0;">
@@ -300,7 +300,7 @@
                         </div>
 
                         <div class="row" ng-show="showCNA">
-                            <div style="padding:10px;">
+                            <div style="padding:10px;"><legend name="lblCNA" style="display:none"></legend>
                                 <div ng-repeat="contact in absch_nfp  | filter:{'schema_s':'authority'}">
                                     <div ng-class="{'row': ($index)%3==0}"> </div>
                                     <div class="col-md-4" style="margin:0;">
@@ -357,7 +357,7 @@
                         </div>
 
                         <div class="row" ng-show="showMSR">
-                            <div style="padding:10px; margin:0 20px;">
+                            <div style="padding:10px; margin:0 20px;"><legend name="lblMSR" style="display:none"></legend>
                                 <div class="row table-hover table-msr" ng-hide="absMeasure.length==0" >
                                     <div class="col-lg-4 col-md-4 col-xs-4 tableheader" ng-click="sortMeasure='title_t';reverseMeasure=!reverseMeasure">name
                                         <i class="fa" ng-class="{'fa-caret-up':(sortMeasure=='title_t' && reverseMeasure),'fa-caret-down':(sortMeasure=='title_t' && !reverseMeasure)}"></i>
@@ -432,7 +432,7 @@
                         </div>
 
                         <div class="row" ng-show="showIRCC">
-                            <div style="padding:10px; margin:0 20px;">
+                            <div style="padding:10px; margin:0 20px;"><legend name="lblIRCC" style="display:none"></legend>
                                 <div class="row table-msr">
                                     <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortPermit='title_t';reversePermit=!reversePermit">name
                                         <i class="fa" ng-class="{'fa-caret-up':(sortPermit=='title_t' && reversePermit),'fa-caret-down':(sortPermit=='title_t' && !reversePermit)}"></i>
@@ -510,7 +510,7 @@
                         </div>
 
                         <div class="row" ng-show="showCP">
-                            <div style="padding:10px;">
+                            <div style="padding:10px;"><legend name="lblCP" style="display:none"></legend>
                                 <div ng-repeat="contact in absch_nfp | filter:isCheckpoint">
                                     <div ng-class="{'row': ($index)%3==0}"> </div>
                                     <div class="col-md-4" style="margin:0;">
@@ -568,7 +568,7 @@
                         </div>
 
                         <div class="row" ng-show="showCPC">
-                            <div style="padding:10px; margin:0 20px;">
+                            <div style="padding:10px; margin:0 20px;"><legend name="lblCPCSent" style="display:none"></legend>
                                 <div class="row table-msr">
                                     <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPC='checkpoint_CEN_ss';reverseCPC=!reverseCPC">checkpoint
                                         <i class="fa" ng-class="{'fa-caret-up':(sortCPC=='checkpoint_CEN_ss' && reverseCPC),'fa-caret-down':(sortCPC=='checkpoint_CEN_ss' && !reverseCPC)}"></i>
@@ -662,7 +662,7 @@
                         </div>
 
                         <div class="row" ng-show="showCPCRecv">
-                            <div style="padding:10px;margin:0 20px;">
+                            <div style="padding:10px;margin:0 20px;"><legend name="lblCPCReceived" style="display:none"></legend>
                                 <div class="row table-msr">
                                     <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPCReceived='government_s';reverseCPCReceived=!reverseCPCReceived">issuing country
                                         <i class="fa" ng-class="{'fa-caret-up':(sortCPCReceived=='government_s' && reverseCPCReceived),'fa-caret-down':(sortCPCReceived=='government_s' && !reverseCPCReceived)}"></i>

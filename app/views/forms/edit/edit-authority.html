@@ -1,5 +1,6 @@
 ﻿<div ng-controller="editAuthority" class="md-whiteframe-z1" >
-<div help schema="55e073c2e81495f09996b4d8" show-help="showHelp">
+<div>
+     <!--help schema="55e073c2e81495f09996b4d8" show-help="showHelp" repalce-glossary-terms="true">-->
     <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
     <md-content layout-padding style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
 
@@ -22,9 +23,8 @@
                 <form class="editForm" name="editForm">
 
                     <div ng-show="tab=='edit'" km-tab="edit">
-                        <section>
-                            <legend name="formInfo"></legend>
-                        </section>
+                        <legend name="formInfo" style="display:none"></legend>
+                        
                         <section>
                             <legend name="generalInfo">General information</legend>
 

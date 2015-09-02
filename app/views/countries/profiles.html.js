@@ -15,7 +15,7 @@
    '/app/js/directives/angucomplete-extended.js',
    '/app/views/countries/countries-left-menu-directive.html.js',
    '/app/views/search/measure-matrix-countries-directive.html.js',
-   '/app/js/common.js'
+   '/app/js/common.js', '/app/views/directives/help-directive.html.js',
  ], function(app, _, linqjs) {
 
    app.controller("ProfileController", ["$scope", "$http", "$routeParams", "linqjs", "$filter", "realm",

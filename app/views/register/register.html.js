@@ -3,7 +3,7 @@ define(['app','linqjs', 'angular-localizer',
 	'/app/views/register/register-record-list.directive.js',
 	'/app/views/directives/task-id-directive.html.js',
 	'/app/views/directives/user-details.directive.html.js',
-  '/app/views/directives/ngxLazy.directive.js',
+  '/app/views/directives/ngxLazy.directive.js', '/app/views/directives/help-directive.html.js',
   'bootstrap-datepicker','moment',  'text-angular', 'bootbox','angular-introjs',
    'introjs','scbd-angularjs-services','scbd-angularjs-filters','scbd-angularjs-controls'], function (app) {
 
@@ -19,9 +19,9 @@ define(['app','linqjs', 'angular-localizer',
 
 
 	$rootScope.breadcrumbsParam = "asdasd";
-
-	$scope.toggleLeft = buildToggler('left');
-    $scope.toggleRight = buildToggler('right');
+	
+  $scope.toggleLeft = buildToggler('left');
+  $scope.toggleRight = buildToggler('right');
     //**********************************************************
     $scope.close = function () {
           $mdSidenav('left').close()
@@ -557,13 +557,7 @@ define(['app','linqjs', 'angular-localizer',
     $scope.$on("documentDraftSaved", function(evt, draftInfo) {
       evt.stopPropagation();
       $scope.editing = false;
-	//   $scope.showingFeedback = true;
-	//   bootbox.alert('Your record has been saved as a draft.', function(){
-	// 	    $scope.showingFeedback = false;
-	// 	//	$timeout(function(){$location.path('/register/'+$scope.document_type);},1);
-	//   });
-	  $rootScope.updatedRecord = draftInfo;
-    //   $scope.msg = "Your record has been saved as a draft.";
+	    $rootScope.updatedRecord = draftInfo;    
     });
 
     //============================================================
@@ -582,9 +576,8 @@ define(['app','linqjs', 'angular-localizer',
 		    $scope.showingFeedback = false;
 			$timeout(function(){$location.path('/register/'+$filter("mapSchema")($scope.document_type));},100);
 	  });
-	  $rootScope.updatedRecord = workflowInfo;
-      //$timeout(function() { $location.path('/register/'+$scope.document_type); }, 500);
-
+	  $rootScope.updatedRecord = workflowInfo;      
+    
     });
 
     //============================================================
@@ -753,7 +746,14 @@ define(['app','linqjs', 'angular-localizer',
 			$('#main').addClass('col-xs-9');
 		}
 	});
-
-
+    var url = $location.$$url;
+    console.log(url.split('/'));
+    if(url.split('/')>3){
+      var splitURL = url.split('/');
+      url = '/' + splitURL[1] + '/' + splitURL[2] + '/new';
+    }
+    $scope.helpSchema = url;
+    
+    console.log($location);
   }]);
 });

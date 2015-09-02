@@ -100,7 +100,11 @@ define(['app', 'underscore'], function(app, underscore) {
             this.isIAC = function() {
                 return this.isUserInRole($rootScope.getRoleName('abschiac'));
             }
-
+            
+            this.isAbsAdministrator = function() {
+                return this.isUserInRole($rootScope.getRoleName('AbsAdministrator'));
+            }
+            
             this.isAnyOtherRoleThenIAC = function() {
 
                 return this.isUserInRole($rootScope.getRoleName('AbsPublishingAuthorities')) ||

@@ -84,7 +84,7 @@ style="max-width:90%">
                         </form>
                     </div>
                     <div ng-if="mode=='read'">
-                        <button type="button" class="btn btn-success pull-right" ng-click="editGlossary()">
+                        <button type="button" class="btn btn-success pull-right" ng-click="editGlossary()"  ng-if="canEdit()">
                             Edit
                         </button>
                         <section>

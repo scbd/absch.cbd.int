@@ -6,7 +6,7 @@ app.controller("glossaryController",
             $scope.alphabet = ['All', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
                                 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
             
-            var url = 'http://localhost:8000/api/v2015/help-glossarys';  
+            var url = '/api/v2015/help-glossarys';  
             
             function loadGlossarys(){
                 $q.when( $http.get(url))

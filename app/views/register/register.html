@@ -110,9 +110,9 @@
                 <md-button ng-click="toggleLeft()" class="md-primary md-raised bg-medgrey" hide-gt-lg  style="margin: 0  0 10px 0;">
                     <i class="material-icons" style="position:relative;top:6px;">menu</i> Management Center
                 </md-button>
-
-                <ng-include src="subTemplateUrl" style="min-height:980px;"  ng-show="user.isAuthenticated"></ng-include>
-
+                <div help schema="{{helpSchema}}" show-help="showHelp" repalce-glossary-terms="true">
+                    <ng-include src="subTemplateUrl" style="min-height:980px;"  ng-show="user.isAuthenticated"></ng-include>
+                </div>
 
         </div>
     </md-content>
