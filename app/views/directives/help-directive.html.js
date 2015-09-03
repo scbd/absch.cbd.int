@@ -20,7 +20,7 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                         var help = {};
                                         $scope.showHelp = {'show':true, showTour:false, hasTour:false};
 
-                                        var buttonTemplate = '<div class="md-toolbar-tools"> <i class="material-icons">help_outline</i>   <a  ng-href="#" ng-click="showHelp.showTour=!showHelp.showTour" ng-if="!showHelp.showTour && showHelo.hasTour">' +
+                                        var buttonTemplate = '<div class="md-toolbar-tools"> <i class="material-icons">help_outline</i>   <a  ng-href="#" ng-click="showHelp.showTour=!showHelp.showTour" ng-if="!showHelp.showTour && showHelp.hasTour">' +
                                                              '   <i class="material-icons" >live_help</i>Tour</a><md-switch class="pull-right"' +
                                                              '   ng-model="showHelp.show"  aria-label="show help">' +
                                                              '   <h5>Help: <strong>{{showHelp.show ? "on" : "off"}}</strong></h5></md-switch></div>';
@@ -47,6 +47,7 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                               if (newVal){
                                                   $timeout(function(){
                                                       loadSchemaHelp();
+                                                      updateGlossaryTerms();
                                                   }, 3000);
                                             }
                                         });
@@ -182,7 +183,6 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                         $(element).replaceWith(contents);
                                                 });
                                         };
-                                        updateGlossaryTerms();
 
 
                                         $scope.$on('$destroy', function () {
