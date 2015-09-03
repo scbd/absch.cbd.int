@@ -19,9 +19,9 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                         var joyride = false;
                                         var help = {};
                                         $scope.showHelp = {'show':true, showTour:false, hasTour:false};
-                                        
+
                                         var buttonTemplate = '<div class="md-toolbar-tools"> <i class="material-icons">help_outline</i>   <a  ng-href="#" ng-click="showHelp.showTour=!showHelp.showTour" ng-if="!showHelp.showTour && showHelo.hasTour">' +
-                                                             '   <i class="material-icons" >live_help</i>Tour</a><md-switch class="pull-right"' + 
+                                                             '   <i class="material-icons" >live_help</i>Tour</a><md-switch class="pull-right"' +
                                                              '   ng-model="showHelp.show"  aria-label="show help">' +
                                                              '   <h5>Help: <strong>{{showHelp.show ? "on" : "off"}}</strong></h5></md-switch></div>';
                                         var formTemplate = '<div class="help-section" style="margin-bottom:20px;">' +
@@ -29,21 +29,21 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                 '    {{control}}' +
                                                 '   </div>' +
                                                 ' <div class="help-content help-contentwhite" ng-if="showHelp.show" >{{content}}<div>'
-                                                                     			            
+
                                         var sectionTemplate = '<div class="help-section" ng-if="showHelp.show" style="margin-bottom:20px;">' +
                                                 '   <div class="help-title">' +
                                                 '    <i class="material-icons">help_outline</i>' +
                                                 '   </div>' +
                                                 ' <div class="help-content" >{{content}}<div>'
                                         var controlTemplate = sectionTemplate;//'<span class="help-inline" ng-if="showHelp.show"><i class="material-icons">help_outline</i> {{content}}</span>'
-        
+
                                         if (!$scope.schema) {
                                                 console.error('help schema name not provided')
                                                 return
                                         }
 
                                          $scope.$watch('schema', function (newVal) {
-                                                
+
                                               if (newVal)
                                                  loadSchemaHelp();
                                         });
@@ -55,7 +55,7 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                 if (newVal)
                                                         addJoyRideSteps();
                                         });
-                                        
+
                                         function loadSchemaHelp(){
                                                 //
                                                 var query = '';
@@ -65,16 +65,16 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                 else{
                                                        query = '?q={"schemaName":"' + $scope.schema + '"}';
                                                 }
-                                                                                                        
+
                                                 $q.when($http.get('/api/v2015/help-forms/' + query))
                                                 .then(function (response) {
-            
+
                                                         // $timeout(function(){
                                                         help = _.first(response.data);
                                                         _.each(help.fields, function (field, key) {
 
                                                                 var templateToUse = controlTemplate//;
-                                                                
+
                                                                 var children = $element.find('div.km-control-group[name="' + field.name + '"] label')
                                                                 if (field.type.identifier == 'section' || field.type.identifier == 'form') {
                                                                         children = $element.find('legend[name="' + field.name + '"]')
@@ -89,9 +89,9 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                                 }
                                                         });
                                                         addJoyRideSteps();
-            
+
                                                         // },1000)
-          
+
                                                 })
                                                 .catch(function (error) {
                                                         if (error.code == 404)
@@ -99,7 +99,7 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                 });
 
                                         }
-                                        
+
                                         function addJoyRideSteps() {
 
                                                 if (!joyride && help) {
@@ -113,7 +113,7 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                                 if (field.type.identifier == 'form' || !field.popup)
                                                                         return;
 
-                                                                $scope.showHelo.hasTour = true;
+                                                                $scope.showHelp.hasTour = true;
                                                                 var buttons = '';
                                                                 if (index == 1)
                                                                         buttons = ' data-options="prev_button: false"'
@@ -128,7 +128,7 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                         });
 
                                                         joyRideTemplate += '</ol></div>'
-                                                        if($scope.showHelo.hasTour)
+                                                        if($scope.showHelp.hasTour)
                                                             $element.append(joyRideTemplate);
                                                         joyride = true;
                                                 }
@@ -170,7 +170,7 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                                 return this.nodeType === 3 &&
                                                                         !$(this).parent("a").length;
                                                         });
-         
+
                                                 // Iterate through the text nodes, replacing the content
                                                 // with the link:
                                                 $textNodes.each(function (index, element) {
