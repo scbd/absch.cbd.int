@@ -44,8 +44,11 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
 
                                          $scope.$watch('schema', function (newVal) {
 
-                                              if (newVal)
-                                                 loadSchemaHelp();
+                                              if (newVal){
+                                                  $timeout(function(){
+                                                      loadSchemaHelp();
+                                                  }, 3000);
+                                            }
                                         });
 
                                         $scope.$watch('showHelp.showTour', function (newVal, oldValue) {
