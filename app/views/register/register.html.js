@@ -748,7 +748,7 @@ define(['app','linqjs', 'angular-localizer',
 	});
     var url = $location.$$url;
     console.log(url.split('/'));
-    if(url.split('/')>3){
+    if(url.split('/').length>3){
       var splitURL = url.split('/');
       url = '/' + splitURL[1] + '/' + splitURL[2] + '/new';
     }

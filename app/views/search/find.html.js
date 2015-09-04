@@ -53,49 +53,7 @@ define(['app','underscore','/app/js/common.js',
         var queryCanceler = null;
         var refreshTimeout = null;
 
-        //intro.js configurations
-        $scope.introOptions = {
-          steps: [
-
-            {
-              intro: "Welcome to the introduction to the search page. When the page is fully loaded click 'Next ->' to start the tour.",
-            },
-            {
-              element: '#search_controls',
-              intro: 'Use these controls to search for documents on the clearing house',
-              position: 'right',
-            },
-            {
-              element: '.keyword',
-              intro: 'Type in any words corresponding to titles, summaries, countries or anything!',
-            },
-            {
-              element: '#filterCheckboxes',
-              intro: 'To browse documents of a certain category, check and uncheck the boxes here; the number in the brackets corresponds to the number of matching documents.',
-              position: 'right',
-            },
-            {
-              element: '#help-record-type',
-              intro: 'Blue records indicate national information. Orange records indicate supplementary reference information.',
-              position: 'bottom',
-            },
-            {
-              element: '#help-record-title',
-              intro: 'Open and close the record details by clicking on the title of the record.',
-              position: 'right',
-            },
-            {
-              element: '#help-record-country',
-              intro: 'The color of the country name indicates their Nagoya Protocol status (grey = not ratified, light-blue = Signatory, darker-blue = Ratified).',
-              position: 'left',
-            },
-            {
-              element: '#help-record-newwindow',
-              intro: 'Click here to open the full record in a new window',
-              position: 'left',
-            }
-          ],
-        };
+        
 
         // $scope.loaded          = false;
         $scope.itemsPerPage    = 25;
@@ -113,11 +71,11 @@ define(['app','underscore','/app/js/common.js',
         $scope.countryResultFilter = [];
         $scope.queryPartyStatus = '';
 
-		    $scope.sortBy = '';
-		    $scope.sortOptions = [
-          { label: 'Date Published', value: 'createdDate_dt', },
-          { label: 'Title', value: 'title_t', },
-          { label: 'Country', value: 'government_EN_T', },
+        $scope.sortBy = '';
+        $scope.sortOptions = [
+        { label: 'Date Published', value: 'createdDate_dt', },
+        { label: 'Title', value: 'title_t', },
+        { label: 'Country', value: 'government_EN_T', },
         ];
         $scope.sortResults = function() {
           console.log('sort by: ', $scope.sortBy);
@@ -352,7 +310,8 @@ define(['app','underscore','/app/js/common.js',
         });
         $scope.previewType = 'group';
 
-        function resetPreview(){
+        $scope.updatePreviewType = function(type){
+            $scope.previewType=type;
             $scope.rawDocs = undefined;
         }
 

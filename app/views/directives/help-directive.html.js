@@ -3,8 +3,8 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                 return {
                         restrict: 'EAC',
                         replace: true,
-                        transclude: true,
-                        templateUrl: '/app/views/directives/help-directive.html',
+                        // transclude: true,
+                        // templateUrl: '/app/views/directives/help-directive.html',
                         scope: {
                                 schema: '@',
                                 //showHelp: '=',
@@ -75,25 +75,26 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
 
                                                         // $timeout(function(){
                                                         help = _.first(response.data);
-                                                        _.each(help.fields, function (field, key) {
-
-                                                                var templateToUse = controlTemplate//;
-
-                                                                var children = $element.find('div.km-control-group[name="' + field.name + '"] label')
-                                                                if (field.type.identifier == 'section' || field.type.identifier == 'form') {
-                                                                        children = $element.find('legend[name="' + field.name + '"]')
-                                                                        templateToUse = field.type.identifier == 'section' ? sectionTemplate : formTemplate
-                                                                        templateToUse = templateToUse.replace('{{control}}', buttonTemplate);
-                                                                }
-                                                                if (field.embed){
-                                                                        children.after($compile(templateToUse.replace('{{content}}', $filter('lstring')(field.helpText)))($scope));
-                                                                }
-                                                                if (!children.attr('id')) {
-                                                                        children.attr('id', field.name);
-                                                                }
-                                                        });
-                                                        addJoyRideSteps();
-
+                                                        if(help){
+                                                                _.each(help.fields, function (field, key) {
+        
+                                                                        var templateToUse = controlTemplate//;
+        
+                                                                        var children = $element.find('div.km-control-group[name="' + field.name + '"] label')
+                                                                        if (field.type.identifier == 'section' || field.type.identifier == 'form') {
+                                                                                children = $element.find('legend[name="' + field.name + '"]')
+                                                                                templateToUse = field.type.identifier == 'section' ? sectionTemplate : formTemplate
+                                                                                templateToUse = templateToUse.replace('{{control}}', buttonTemplate);
+                                                                        }
+                                                                        if (field.embed){
+                                                                                children.after($compile(templateToUse.replace('{{content}}', $filter('lstring')(field.helpText)))($scope));
+                                                                        }
+                                                                        if (!children.attr('id')) {
+                                                                                children.attr('id', field.name);
+                                                                        }
+                                                                });
+                                                                addJoyRideSteps();
+                                                        }
                                                         // },1000)
 
                                                 })
