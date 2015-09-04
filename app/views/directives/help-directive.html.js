@@ -136,10 +136,17 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                             $element.append(joyRideTemplate);
                                                         joyride = true;
                                                 }
-
+                                                else
                                                 $element.find('#helpElement')
                                                         .joyride({
+                                                                autoStart:true,
                                                                 tip_container: '#joyrideSection',
+                                                                postStepCallback : function (index, tip) {
+                                                                        if ($element.find('#helpElement').joyride('paused')) {
+                                                                        console.log('Hey there, you\'ve paused the tour.');
+                                                                        // fire your code here
+                                                                        }
+                                                                },
                                                                 postRideCallback: function () {
                                                                         $scope.showHelp.showTour = false;
                                                                 }
@@ -188,6 +195,8 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                         $scope.$on('$destroy', function () {
                                                 $element.find('#helpElement')
                                                         .joyride('destroy');
+                                               joyride = false;
+                                               $scope.showHelp = {'show':true, showTour:false, hasTour:false};         
                                         });
 
                                 }]
