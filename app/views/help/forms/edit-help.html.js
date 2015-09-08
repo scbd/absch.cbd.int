@@ -87,8 +87,8 @@ define(['app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate', 'scbd-an
 						var operation;
 						var titleChanged = false;
 
-						if ($scope.document.urlTitle != $scope.document.title.replace(' ', /-g/)) {
-							$scope.document.urlTitle = $scope.document.title.replace(' ', /-g/);
+						if ($scope.document.urlTitle != $scope.document.title.replace(/ /g, '-')) {
+							$scope.document.urlTitle = $scope.document.title.replace(/ /g, '-');
 							titleChanged = true;
 						}
 						if (!$scope.document._id) {
