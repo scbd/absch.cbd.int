@@ -135,7 +135,7 @@ style="max-width:90%">
                             <legend name="termCation">{{document.title}}</legend>
                                <!--<h3>{{document.schemaName}}<h3>-->
                             <md-list>
-                                <md-list-item class="md-3-line" ng-repeat="item in document.fields">
+                                <md-list-item class="md-3-line" ng-repeat="item in document.fields | orderBy:'sequence'">
                                     <div class="md-list-item-text">
                                     <h3>{{item.fieldTitle}}</h3>
                                     <p class="helpText" ng-bind-html="item.helpText|lstring"> </p>

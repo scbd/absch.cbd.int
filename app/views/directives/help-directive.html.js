@@ -114,7 +114,7 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
 
                                                         var joyRideTemplate = '<div id="joyrideSection" style="display:none"><ol id="helpElement" class="jouride-list" data-joyride>';
                                                         var index = 1;
-                                                        _.each(_.sortBy(help.fields,'fieldSequence'), function (field, key, list) {
+                                                        _.each(_.sortBy(help.fields,'sequence'), function (field, key, list) {
                                                                 if (field.fieldType == 'form' || !field.popup)
                                                                         return;
 
