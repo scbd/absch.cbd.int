@@ -78,9 +78,9 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                                         var templateToUse = controlTemplate//;
         
                                                                         var children = $element.find('div.km-control-group[name="' + field.name + '"] label')
-                                                                        if (field.type == 'section' || field.type == 'form') {
+                                                                        if (field.fieldType == 'section' || field.fieldType == 'form') {
                                                                                 children = $element.find('legend[name="' + field.name + '"]')
-                                                                                templateToUse = field.type == 'section' ? sectionTemplate : formTemplate
+                                                                                templateToUse = field.fieldType == 'section' ? sectionTemplate : formTemplate
                                                                                 templateToUse = templateToUse.replace('{{control}}', buttonTemplate);
                                                                         }
                                                                         if (field.embed){
@@ -115,7 +115,7 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                         var joyRideTemplate = '<div id="joyrideSection" style="display:none"><ol id="helpElement" class="jouride-list" data-joyride>';
                                                         var index = 1;
                                                         _.each(_.sortBy(help.fields,'fieldSequence'), function (field, key, list) {
-                                                                if (field.type == 'form' || !field.popup)
+                                                                if (field.fieldType == 'form' || !field.popup)
                                                                         return;
 
                                                                 $scope.showHelp.hasTour = true;
