@@ -6,9 +6,7 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                         // transclude: true,
                         // templateUrl: '/app/views/directives/help-directive.html',
                         scope: {
-                                schema: '@',
-                                //showHelp: '=',
-                                repalceGlossaryTerms: '@'
+                                schema: '@'
                         },
                         link: ['$scope', '$q', '$element', function ($scope, $q, $element) {
 
@@ -47,7 +45,6 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                               if (newVal){
                                                   $timeout(function(){
                                                       loadSchemaHelp();
-                                                      updateGlossaryTerms();
                                                   }, 3000);
                                             }
                                         });
@@ -81,9 +78,9 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                                         var templateToUse = controlTemplate//;
         
                                                                         var children = $element.find('div.km-control-group[name="' + field.name + '"] label')
-                                                                        if (field.type.identifier == 'section' || field.type.identifier == 'form') {
+                                                                        if (field.type == 'section' || field.type == 'form') {
                                                                                 children = $element.find('legend[name="' + field.name + '"]')
-                                                                                templateToUse = field.type.identifier == 'section' ? sectionTemplate : formTemplate
+                                                                                templateToUse = field.type == 'section' ? sectionTemplate : formTemplate
                                                                                 templateToUse = templateToUse.replace('{{control}}', buttonTemplate);
                                                                         }
                                                                         if (field.embed){
@@ -94,6 +91,9 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                                         }
                                                                 });
                                                                 addJoyRideSteps();
+                                                                
+                                                                if(help.repalceGlossaryTerms)
+                                                                        repalceGlossaryTerms();
                                                         }
                                                         // },1000)
 
@@ -114,8 +114,8 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
 
                                                         var joyRideTemplate = '<div id="joyrideSection" style="display:none"><ol id="helpElement" class="jouride-list" data-joyride>';
                                                         var index = 1;
-                                                        _.each(help.fields, function (field, key, list) {
-                                                                if (field.type.identifier == 'form' || !field.popup)
+                                                        _.each(_.sortBy(help.fields,'fieldSequence'), function (field, key, list) {
+                                                                if (field.type == 'form' || !field.popup)
                                                                         return;
 
                                                                 $scope.showHelp.hasTour = true;
@@ -155,8 +155,7 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
 
                                         }
 
-                                        function updateGlossaryTerms() {
-                                                if ($scope.repalceGlossaryTerms)
+                                        function repalceGlossaryTerms() {
                                                         $q.when($http.get('/api/v2015/help-glossarys/'))
                                                                 .then(function (response) {
                                                                         _.each(response.data, function (field, key) {

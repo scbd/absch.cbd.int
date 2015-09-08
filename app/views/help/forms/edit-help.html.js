@@ -1,8 +1,8 @@
 define(['app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate', 'scbd-angularjs-services', 'scbd-angularjs-filters', 'scbd-angularjs-controls',
 	'/app/js/common.js'], function (app, _) {
 		app.controller("editHelpController",
-			["$routeParams", "$scope", "$q", "underscore", '$http', '$mdToast', '$location', 'commonjs',
-				function ($routeParams, $scope, $q, _, $http, $mdToast, $location, commonjs) {
+			["$routeParams", "$scope", "$q", "underscore", '$http', '$mdToast', '$location', 'commonjs', '$mdDialog',
+				function ($routeParams, $scope, $q, _, $http, $mdToast, $location, commonjs, $mdDialog) {
 
 					var url = '/api/v2015/help-forms';
 
@@ -29,29 +29,11 @@ define(['app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate', 'scbd-an
 
 					function fieldTypes() {
 						var types = [];
-						types.push({ identifier: 'form', value: 'form', __value: 'form' });
-						types.push({ identifier: 'section', value: 'section', __value: 'section' });
-						types.push({ identifier: 'control', value: 'control', __value: 'control' });
-						return $q.when(types)
-
-						var defer = $q.defer();
-						defer.resolve(types);
-						return defer;
-
+						types.push({ value: 'form', title: 'form' });
+						types.push({ value: 'section', title: 'section' });
+						types.push({ value: 'control', title: 'control' });					
+						$scope.fieldTypes = types;
 					}
-
-					$scope.genericFilter = function ($query, items) {
-						var matchedOptions = [];
-						for (var i = 0; i != items.length; ++i)
-							if (items[i].__value.toLowerCase().indexOf($query.toLowerCase()) !== -1)
-								matchedOptions.push(items[i]);
-
-						return matchedOptions;
-					};
-
-					$scope.genericMapping = function (item) {
-						return { identifier: item.identifier };
-					};
 
 					$scope.$on('$locationChangeStart', function (evt) {
 
@@ -137,6 +119,33 @@ define(['app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate', 'scbd-an
 							});
 
 					}
+					
+					$scope.deleteHelp = function (helpDocument) {
+						
+						// Appending dialog to document.body to cover sidenav in docs app
+						var confirm = $mdDialog.confirm()
+							.title('Would you like to delete this help?')	
+							.ok('yes').cancel('cancel');
+							
+						$mdDialog.show(confirm)
+								.then(function() {
+									$q.when($http.delete(url + '/' + $scope.document._id))
+									.then(function(){
+										$scope.schemas.splice(_.indexOf($scope.schemas, helpDocument), 1);
+										$scope.document = $scope.schemas[0];
+										$mdToast.show(
+												$mdToast.simple()
+													.content('Schema help deleted!')
+													.position("top right")
+													.hideDelay(3000)
+												);	
+									});
+							});
+						
+						
+						
+					}
+					
 					$scope.deleteField = function (field) {
 						$scope.document.fields.splice(_.indexOf($scope.document.fields, field), 1);
 					}
@@ -153,5 +162,6 @@ define(['app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate', 'scbd-an
 						}
 					}
 					$scope.loadSchemas();
+					fieldTypes();
 				}]);
 	});

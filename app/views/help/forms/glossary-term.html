@@ -10,7 +10,7 @@ style="max-width:90%">
 
 
         <md-toolbar class="bg-medgrey">
-            <h1 class="md-toolbar-tools">Existing Terms</h1>
+            <h1 class="md-toolbar-tools">Existing {{helptype}}</h1>
         </md-toolbar>
 
         <md-content layout-padding layout-margin>
@@ -33,7 +33,7 @@ style="max-width:90%">
         <div layout="column" layout-fill>
             <md-toolbar>
                 <div class="md-toolbar-tools">
-                    <span>Glossary Term</span>
+                    <span>{{helptype}}</span>
                     <span flex></span>
                     <!--<md-button>
                         Right Bar Button
@@ -45,16 +45,16 @@ style="max-width:90%">
                     <div ng-if="mode=='edit'">
                         <form name="editForm" style="margin-top:10px" class="editForm">
                             <md-input-container>
-                                <label>Glossary term</label>
+                                <label>{{helptype}}</label>
                                 <input name="title" ng-model="document.title" required md-maxlength="200" minlength="4">
                                 <div ng-messages="editForm.title.$error" ng-show="editForm.title.$dirty">
-                                    <div ng-message="required">Please enter gloassry term!</div>
+                                    <div ng-message="required">Please enter {{helptype}}!</div>
                                     <div ng-message="md-maxlength">That's too long!</div>
                                     <div ng-message="minlength">That's too short!</div>
                                 </div>
                             </md-input-container>
                             <md-input-container>
-                                <label>Term Description</label>
+                                <label>{{helptype}} Description</label>
                                 <textarea name="description" ng-model="document.description" required md-maxlength="25000" minlength="4" />
                                 <div ng-messages="editForm.titdescriptionle.$error" ng-show="editForm.description.$dirty">
                                     <div ng-message="required">Please enter term description!</div>
@@ -84,9 +84,14 @@ style="max-width:90%">
                         </form>
                     </div>
                     <div ng-if="mode=='read'">
-                        <button type="button" class="btn btn-success pull-right" ng-click="editGlossary()"  ng-if="canEdit()">
-                            Edit
-                        </button>
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-success pull-right" ng-click="editGlossary()"  ng-if="canEdit()">
+                                Edit
+                            </button>
+                            <button type="button" class="btn btn-warning" ng-click="deleteGlossary(document)" ng-if="canEdit()">
+                                Delete
+                            </button>
+                        </div>
                         <section>
                             <legend name="termCation">{{document.title}}</legend>
                             <div class="row">
