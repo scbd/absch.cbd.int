@@ -97,9 +97,10 @@ define(['app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate', 'scbd-an
 						else {
 							operation = $http.put(url + '/' + $scope.document._id, $scope.document)
 						}
-
+						$scope.showLoading = true;
 						$q.when(operation)
 							.then(function (response) {
+								$scope.showLoading = false;
 								if (response.data.id) {
 									$scope.document._id = response.data.id;
 									$scope.schemas.push($scope.document)

@@ -208,8 +208,11 @@
              var measureMatrixDocuments = [];
              
               $scope.absch_nfp.forEach(function(document){
-                  document.identifier = document.identifier_s
-                  document.ownerGovernment = {identifier:document.ownerGovernment_s};
+                  document.identifier = document.identifier_s;
+                  
+                  if(document.ownerGovernment_s)
+                    document.ownerGovernment = {identifier:document.ownerGovernment_s};
+                  
                   if(document.schema_s == "focalPoint" ){
                       document.description_t = document.description_t.replace(/\n/g, '<br/>');
                       document.documentId = commonjs.hexToInteger(document.identifier_s);

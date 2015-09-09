@@ -1,13 +1,6 @@
 <section layout="row" style="position:relative; top:20px; padding-bottom:30px;" flex ng-controller="editHelpController"
 style="max-width:90%">
-    <style>
-        .md-whiteframe-z1 {
-            background-color: white;
-        }
-        .helpText{
-            text-align: justify;
-        }
-    </style>
+   
     <md-sidenav class="md-sidenav-left md-whiteframe-z1" md-component-id="left" md-is-locked-open="$mdMedia('min-width: 1200px')"
     style="height:818px;">
 
@@ -46,6 +39,14 @@ style="max-width:90%">
             <md-content class="md-padding">
                 <div layout="column" layout-align="top center">
                     <div ng-if="mode=='edit' && document">
+                        <div  ng-show="showLoading" class="ng-scope ng-hide">
+                            <div class="flyover ng-scope">
+                                <div class="mask"></div>
+                                <div class="alert alert-info">
+                                    <strong class="ng-binding">Loading Foo...</strong>
+                                </div>
+                            </div>
+                        </div>
                         <form name="editForm" style="margin-top:10px" class="editForm">
                             <md-input-container>
                                 <label>Form Name</label>

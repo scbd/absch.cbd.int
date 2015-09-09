@@ -129,12 +129,21 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
 
                                                                 joyRideTemplate += '  <li data-id="' + field.name + '" ' + buttons + '><p>'
                                                                 + $filter('lstring')(field.helpText) + '</p></li>';
-                                                                index++;
+                                                                
+                                                               var element = $element.find('#' + field.name);
+                                                               element.attr('data-toggle',"tooltip");
+                                                               element.attr('data-html',"true");
+                                                               element.attr('data-container',"body");
+                                                               //element.attr('data-placement', "left");
+                                                               element.attr('title', $filter('lstring')(field.helpText));
+                                                               index++;
                                                         });
 
                                                         joyRideTemplate += '</ol></div>'
-                                                        if($scope.showHelp.hasTour)
+                                                        if($scope.showHelp.hasTour){
                                                             $element.append(joyRideTemplate);
+                                                            $('[data-toggle="tooltip"]').tooltip();
+                                                        }
                                                         joyride = true;
                                                 }
                                                 else

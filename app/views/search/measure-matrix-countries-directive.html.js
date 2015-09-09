@@ -89,27 +89,21 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                     .then(function(document) {
                         measure.document = document.data;
 
-                        console.log('measure');
+                        // var amendedMeasuresQuery = _.map(measure.document.amendedMeasures, function(amended) {
+                        //     return $http.get('/api/v2013/documents/' + amended.identifier,{cache:true});
+                        // });
 
-                        var amendedMeasuresQuery = _.map(measure.document.amendedMeasures, function(amended) {
-                            return $http.get('/api/v2013/documents/' + amended.identifier,{cache:true});
-                        });
-
-                        return $q.all(amendedMeasuresQuery)
-                            .then(function(amendedMeasures) {
-                                amendedMeasures.forEach(function(amendedMeasureData) {
-                                    var amended = _.findWhere(measure.document.amendedMeasures, {
-                                        identifier: amendedMeasureData.data.header.identifier
-                                    });
-                                    amended.measure = amendedMeasureData.data;
-                                });
-                                return measure.document;
-                            });
+                        // return $q.all(amendedMeasuresQuery)
+                        //     .then(function(amendedMeasures) {
+                        //         amendedMeasures.forEach(function(amendedMeasureData) {
+                        //             var amended = _.findWhere(measure.document.amendedMeasures, {
+                        //                 identifier: amendedMeasureData.data.header.identifier
+                        //             });
+                        //             amended.measure = amendedMeasureData.data;
+                        //         });
+                        //         return measure.document;
+                        //     });
                     })
-                    // .then(function(data) {
-                    //
-                    //
-                    // })
                     .catch(function(error) {
                         console.log('onerror');
                         console.log(error);
