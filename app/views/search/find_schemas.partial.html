@@ -9,7 +9,7 @@ label{width:100%;}
 
     <div class="main_filter" ng-show="showNationalFilters || measure.selected" ng-class="{'check_active': measure.selected}">
 
-        <label>
+        <label name="lblMeasures">
             <span class="badge badge-white pull-right">{{measure.count}}</span>
             <input type="checkbox" ng-model="measure.selected" bind-indeterminate="measure.indeterminate" ng-change="refresh(measure.selected,'measure')">
             <span class="filter-text">Legislative, administrative or policy measures </span>
@@ -34,7 +34,7 @@ label{width:100%;}
 
 
     <div class="main_filter" ng-show="showNationalFilters || focalPoint.selected" ng-class="{'check_active': focalPoint.selected}">
-        <label>
+        <label name="lblFocalpoints">
             <span class="badge badge-white pull-right">{{focalPoint.count}}</span>
             <input type="checkbox" ng-model="focalPoint.selected" bind-indeterminate="focalPoint.indeterminate" ng-change="refresh(focalPoint.selected,'focalPoint')">
             <span class="filter-text">National Focal Points </span>
@@ -46,7 +46,7 @@ label{width:100%;}
     </div>
 
     <div class="main_filter" ng-show="showNationalFilters || authority.selected" ng-class="{'check_active': authority.selected}">
-        <label>
+        <label name="lblAuthorities">
             <span class="badge badge-white pull-right">{{authority.count}}</span>
             <input type="checkbox" ng-model="authority.selected" bind-indeterminate="authority.indeterminate" ng-change="refresh(authority.selected,'authority')">
             <span class="filter-text">Competent National Authorities  </span>
@@ -88,7 +88,7 @@ label{width:100%;}
     </div>
 
     <div class="main_filter" ng-show="showNationalFilters || database.selected" ng-class="{'check_active': database.selected}">
-        <label>
+        <label name="lblDatabases">
               <span class="badge badge-white pull-right">{{database.count}}</span>
             <input type="checkbox" ng-model="database.selected" bind-indeterminate="database.indeterminate" ng-change="refresh(database.selected,'database')">
             <span class="filter-text">National Websites and Databases</span>
@@ -98,7 +98,7 @@ label{width:100%;}
 
 
     <div class="main_filter" ng-show="showNationalFilters || absPermit.selected" ng-class="{'check_active': absPermit.selected}">
-        <label>
+        <label name="lblPermits">
              <span class="badge badge-white pull-right">{{absPermit.count}}</span>
             <input type="checkbox" ng-model="absPermit.selected" bind-indeterminate="absPermit.indeterminate" ng-change="refresh(absPermit.selected,'absPermit')">
             <span class="filter-text">Internationally Recognized Certificate of Compliance </span>
@@ -144,7 +144,7 @@ label{width:100%;}
     </div>
 
     <div class="main_filter" ng-show="showNationalFilters || absCheckpoint.selected" ng-class="{'check_active': absCheckpoint.selected}">
-        <label>
+        <label name="lblCheckpoints">
             <span class="badge badge-white pull-right">{{absCheckpoint.count}}</span>
             <input type="checkbox" ng-model="absCheckpoint.selected" bind-indeterminate="absCheckpoint.indeterminate" ng-change="refresh(absCheckpoint.selected,'absCheckpoint')">
             <span class="filter-text">Checkpoints  </span>
@@ -157,7 +157,7 @@ label{width:100%;}
     </div>
 
     <div class="main_filter" ng-show="showNationalFilters || absCheckpointCommunique.selected" ng-class="{'check_active': absCheckpointCommunique.selected}">
-        <label>
+        <label name="lblCheckpointCommuniques">
             <span class="badge badge-white pull-right">{{absCheckpointCommunique.count}}</span>
             <input type="checkbox" ng-model="absCheckpointCommunique.selected" bind-indeterminate="absCheckpointCommunique.indeterminate" ng-change="refresh(absCheckpointCommunique.selected,'absCheckpointCommunique')">
             <span class="filter-text">Checkpoint Communiqués   </span>
@@ -178,7 +178,7 @@ label{width:100%;}
     </h4>
     <div ng-show="previewType=='list'">
         <div class="main_filter" ng-show="(showReferenceFilters || resource.selected)" ng-class="{'check_active': resource.selected}">
-            <label>
+            <label name="lblVirtualRecords">
                 <span class="badge badge-white pull-right">{{resource.count}}</span>
                 <input type="checkbox" ng-model="resource.selected" bind-indeterminate="resource.indeterminate" ng-change="refresh(resource.selected,'resource')">
                 <span class="filter-text">Virtual Library Records   </span>
@@ -191,7 +191,7 @@ label{width:100%;}
         </div>
 
         <div class="main_filter" ng-show="showReferenceFilters || meeting.selected" ng-class="{'check_active': meeting.selected}">
-            <label>
+            <label name="lblMeetings">
                 <span class="badge badge-white pull-right">{{meeting.count}}</span>
                 <input type="checkbox" ng-model="meeting.selected" bind-indeterminate="meeting.indeterminate" ng-change="refresh(meeting.selected,'meeting')">
                 <span class="filter-text">Meetings &amp; Meeting Outcomes </span>
@@ -202,7 +202,7 @@ label{width:100%;}
         </div>
 
         <div class="main_filter" ng-show="showReferenceFilters || notification.selected" ng-class="{'check_active': notification.selected}">
-            <label>
+            <label name="lblNotifications">
                  <span class="badge badge-white pull-right">{{notification.count}}</span>
                 <input type="checkbox" ng-model="notification.selected" bind-indeterminate="notification.indeterminate" ng-change="refresh(notification.selected,'notification')">
                 <span class="filter-text">Notifications</span>
@@ -210,7 +210,7 @@ label{width:100%;}
         </div>
 
         <div class="main_filter" ng-show="showReferenceFilters || pressRelease.selected" ng-class="{'check_active': pressRelease.selected}">
-            <label>
+            <label name="lblPressReleases">
                 <span class="badge badge-white pull-right">{{pressRelease.count}}</span>
                 <input type="checkbox" ng-model="pressRelease.selected" bind-indeterminate="pressRelease.indeterminate" ng-change="refresh(pressRelease.selected,'pressRelease')">
                 <span class="filter-text">Press Releases </span>
@@ -218,7 +218,7 @@ label{width:100%;}
         </div>
 
         <div class="main_filter" ng-show="showReferenceFilters || statement.selected" ng-class="{'check_active': statement.selected}">
-            <label>
+            <label name="lblStatements">
                 <span class="badge badge-white pull-right">{{statement.count}}</span>
                 <input type="checkbox" ng-model="statement.selected" bind-indeterminate="statement.indeterminate" ng-change="refresh(statement.selected,'statement')">
                 <span class="filter-text">Statements </span>
@@ -226,7 +226,7 @@ label{width:100%;}
         </div>
 
         <div class="main_filter" ng-show="showReferenceFilters || news.selected" ng-class="{'check_active': news.selected}">
-            <label>
+            <label name="lblNews">
                 <span class="badge badge-white pull-right">{{news.count}}</span>
                 <input type="checkbox" ng-model="news.selected" bind-indeterminate="news.indeterminate" ng-change="refresh(news.selected,'news')">
                 <span class="filter-text">News</span>

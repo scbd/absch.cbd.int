@@ -179,7 +179,7 @@
 			</div>
 
 			<div ng-show="amendedMeasures">
-				<label>Amended regulations</label>
+				<label>This measure has been amended by</label>
 
 				<div  class="km-value">
 				<ul>
@@ -212,14 +212,14 @@
 		<div ng-show="document.absMeasures">
 			<label>Elements of the measure</label>
 				<div class="km-value" style="border:none">
-					<ul ng-if="false">
+					<ul ng-if="true">
 						<li ng-repeat="term in document.absMeasures">{{term|term:locale}}
 							<span ng-show="term.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">
 								: {{document.otherAbsMeasure| lstring:locale}}
 							</span>
 							<i ng-show="term.section">({{term.section | lstring:locale}})</i>
 					</ul>
-					<div measure-matrix-elements name="absMeasures"
+					<div measure-matrix-elements name="absMeasures" type="single"
 						ng-model="document.absMeasures"
 						locales="document.header.languages"
 						document="document">

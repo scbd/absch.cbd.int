@@ -570,15 +570,16 @@
                         <div class="row" ng-show="showCPC">
                             <div style="padding:10px; margin:0 20px;"><legend name="lblCPCSent" style="display:none"></legend>
                                 <div class="row table-msr">
+                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPC='originCountries_CEN_ss';reverseCPC=!reverseCPC">country of GR
+                                        <i class="fa" ng-class="{'fa-caret-up':(sortCPC=='originCountries_CEN_ss' && reverseCPC),'fa-caret-down':(sortCPC=='originCountries_CEN_ss' && !reverseCPC)}"></i>
+                                    </div>
                                     <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPC='checkpoint_CEN_ss';reverseCPC=!reverseCPC">checkpoint
                                         <i class="fa" ng-class="{'fa-caret-up':(sortCPC=='checkpoint_CEN_ss' && reverseCPC),'fa-caret-down':(sortCPC=='checkpoint_CEN_ss' && !reverseCPC)}"></i>
                                     </div>
                                     <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPC='title_t';reverseCPC=!reverseCPC">title
                                         <i class="fa" ng-class="{'fa-caret-up':(sortCPC=='title_t' && reverseCPC),'fa-caret-down':(sortCPC=='title_t' && !reverseCPC)}"></i>
                                     </div>
-                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPC='originCountries_CEN_ss';reverseCPC=!reverseCPC">source country
-                                        <i class="fa" ng-class="{'fa-caret-up':(sortCPC=='originCountries_CEN_ss' && reverseCPC),'fa-caret-down':(sortCPC=='originCountries_CEN_ss' && !reverseCPC)}"></i>
-                                    </div>
+                                    
                                     <div class="col-lg-1 col-md-1 col-xs-1 tableheader" ng-click="sortCPC='geneticRessourceUsers';reverseCPC=!reverseCPC">user
                                         <i class="fa" ng-class="{'fa-caret-up':(sortCPC=='geneticRessourceUsers' && reverseCPC),'fa-caret-down':(sortCPC=='geneticRessourceUsers' && !reverseCPC)}"></i>
                                     </div>
@@ -595,6 +596,12 @@
                                 <div class="row table-hover table-msr" ng-repeat="communique in absCommunique = (absch_nfp|filter:isCheckpointCommunique|orderBy:sortCPC:reverseCPC)">
                                     <div class="row border" style="padding-top: 10px;padding-bottom: 10px;">
                                         <div ng-click="displayDetails=!displayDetails;showDetails(communique)" class="row table-row">
+                                            
+                                            <div class="col-lg-2 col-md-2 col-xs-2">
+                                                <span ng-repeat="country in communique.originCountries_CEN_ss">{{parseJSON(country)|lstring}}
+                                                    <br/>
+                                                </span>
+                                            </div>
                                             <div class="col-lg-2 col-md-2 col-xs-2">
                                                 <span ng-repeat="checkpoint in communique.checkpoint_CEN_ss">
                                                     <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
@@ -606,11 +613,6 @@
                                             <div class="col-lg-2 col-md-2 col-xs-2">
                                                 {{communique.title_t}}
                                                 <i class="fa fa-refresh fa-spin" ng-show="displayDetails && !communique.data" />
-                                            </div>
-                                            <div class="col-lg-2 col-md-2 col-xs-2">
-                                                <span ng-repeat="country in communique.originCountries_CEN_ss">{{parseJSON(country)|lstring}}
-                                                    <br/>
-                                                </span>
                                             </div>
                                             <div class="col-lg-1 col-md-1 col-xs-1">
                                                 <span ng-repeat="user in communique.geneticRessourceUsers">{{user.organization|lstring}}
@@ -664,7 +666,7 @@
                         <div class="row" ng-show="showCPCRecv">
                             <div style="padding:10px;margin:0 20px;"><legend name="lblCPCReceived" style="display:none"></legend>
                                 <div class="row table-msr">
-                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPCReceived='government_s';reverseCPCReceived=!reverseCPCReceived">issuing country
+                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPCReceived='government_s';reverseCPCReceived=!reverseCPCReceived">country of Checkpoint
                                         <i class="fa" ng-class="{'fa-caret-up':(sortCPCReceived=='government_s' && reverseCPCReceived),'fa-caret-down':(sortCPCReceived=='government_s' && !reverseCPCReceived)}"></i>
                                     </div>
                                     <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPCReceived='checkpoint_CEN_ss';reverseCPCReceived=!reverseCPCReceived">checkpoint
