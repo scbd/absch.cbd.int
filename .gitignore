@@ -19,3 +19,4 @@ node_modules
 app/libs
 app_build
 app/views/mockups
+.vscode
