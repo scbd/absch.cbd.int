@@ -1,6 +1,7 @@
-define(['app', 'underscore', '/app/views/forms/edit/edit.js'], function (app, _) {
+define(['app', 'underscore', '/app/views/forms/edit/edit.js','/app/views/forms/edit/edit-resource-schema-base-directive.html.js'
+       ], function (app, _) {
 
-  app.controller("editResource", ["$scope", "$http", "$filter", "Thesaurus", "$q", "Enumerable", "$controller", "IStorage", "$location",
+  app.controller("editModelContractualClause", ["$scope", "$http", "$filter", "Thesaurus", "$q", "Enumerable", "$controller", "IStorage", "$location",
                 function ($scope, $http, $filter, Thesaurus, $q, Enumerable, $controller, storage, $location) {
 
 
@@ -51,9 +52,9 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js'], function (app, _)
     //==================================
     //
     //==================================
-    $scope.getCleanDocument = function(document) {
+    $scope.getCleanDocument = function() {
 
-      document = document || $scope.document;
+      var document = $scope.document;
 
       if (!document)
         return undefined;

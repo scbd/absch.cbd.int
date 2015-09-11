@@ -196,25 +196,27 @@ define(["app",'/app/js/common.js'], function (app) {
 	app.filter("schemaName", [function() {
 
 		return function( schema ) {
-			if(!schema)
-				return schema;
-			if(schema.toLowerCase()=="focalpoint"				) return "Focal Point";
-			if(schema.toLowerCase()=="authority"				) return "Competent National Authority";
-			if(schema.toLowerCase()=="contact"					) return "Contact";
-			if(schema.toLowerCase()=="database"					) return "National Website or Database";
-			if(schema.toLowerCase()=="resource"					) return "Virtual Library Resource";
-			if(schema.toLowerCase()=="organization"				) return "Organization";
-			if(schema.toLowerCase()=="measure" 					) return "Legislative, Administrative or Policy Measures";
-			if(schema.toLowerCase()=="abscheckpoint"			) return "Checkpoint";
-			if(schema.toLowerCase()=="abscheckpointcommunique"	) return "Checkpoint Communiqué";
-			if(schema.toLowerCase()=="abspermit"				) return "Internationally Recognized Certificate of Compliance";
-            if(schema.toLowerCase()=="meetingdocument"			) return "Meeting Document";
-            if(schema.toLowerCase()=="pressrelease"				) return "Press Release";
-			if(schema.toLowerCase()=="news"						) return "News";
-			if(schema.toLowerCase()=="absnationalreport"		) return "National Report";
+			return mapSchema(schema);
+			
+			// if(!schema)
+			// 	return schema;
+			// if(schema.toLowerCase()=="focalpoint"				) return "Focal Point";
+			// if(schema.toLowerCase()=="authority"				) return "Competent National Authority";
+			// if(schema.toLowerCase()=="contact"					) return "Contact";
+			// if(schema.toLowerCase()=="database"					) return "National Website or Database";
+			// if(schema.toLowerCase()=="resource"					) return "Virtual Library Resource";
+			// if(schema.toLowerCase()=="organization"				) return "Organization";
+			// if(schema.toLowerCase()=="measure" 					) return "Legislative, Administrative or Policy Measures";
+			// if(schema.toLowerCase()=="abscheckpoint"			) return "Checkpoint";
+			// if(schema.toLowerCase()=="abscheckpointcommunique"	) return "Checkpoint Communiqué";
+			// if(schema.toLowerCase()=="abspermit"				) return "Internationally Recognized Certificate of Compliance";
+            // if(schema.toLowerCase()=="meetingdocument"			) return "Meeting Document";
+            // if(schema.toLowerCase()=="pressrelease"				) return "Press Release";
+			// if(schema.toLowerCase()=="news"						) return "News";
+			// if(schema.toLowerCase()=="absnationalreport"		) return "National Report";
 
 
-			return schema;
+			// return schema;
 		};
 	}]);
 
@@ -242,7 +244,7 @@ define(["app",'/app/js/common.js'], function (app) {
             if(schema.toLowerCase()=="pressrelease"				) return "Press Releases";
 			if(schema.toLowerCase()=="news"						) return "News";
 			if(schema.toLowerCase()=="absnationalreport"		) return "National Reports";
-			if(schema.toLowerCase()=="modelContractualClause"	) return "Model Contractual Clauses";
+			if(schema.toLowerCase()=="modelcontractualclause"	) return "Model Contractual Clauses";
 
 
 
@@ -276,6 +278,7 @@ define(["app",'/app/js/common.js'], function (app) {
 			//if(schema.toLowerCase()=="meetingdocument" 		||	schema.toLowerCase()=="nfp"	) return "Meeting Document";
 			//if(schema.toLowerCase()=="pressrelease"	 		||	schema.toLowerCase()=="nfp"	) return "Press Release";
 			//if(schema.toLowerCase()=="news"		 			||	schema.toLowerCase()=="nfp"	) return "News";
+			if(schema.toLowerCase()=="modelcontractualclause" 	||	schema.toLowerCase()=="mcc"	) return "folder";
 
 			return schema;
 		};
@@ -330,7 +333,7 @@ define(["app",'/app/js/common.js'], function (app) {
             if(schema.toLowerCase()=="meetingdocument"    		) return "MTD";
 			if(schema.toLowerCase()=="news"						) return "NWS";
 			if(schema.toLowerCase()=="absnationalreport"		) return "NR";
-			if(schema.toUpperCase()=="modelContractualClause"	) return "MCC";
+			if(schema.toLowerCase()=="modelcontractualclause"	) return "MCC";
 
 			if(schema.toUpperCase()=="NWS"				        ) return "news";
             if(schema.toUpperCase()=="FP"				        ) return "focalPoint";

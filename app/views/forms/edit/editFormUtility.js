@@ -12,7 +12,8 @@ app.factory("editFormUtility", ["IStorage", "IWorkflows", "$q", "realm","commonj
 		"database"					: { name : "publishNationalRecord", version : "0.4" },
 		"absNationalReport" 		: { name : "publishNationalRecord", version : "0.4" },
 
-		"resource"					: { name : "publishReferenceRecord", version : undefined }
+		"resource"					: { name : "publishReferenceRecord", version : undefined },
+		"modelContractualClause"	: { name : "publishReferenceRecord", version : undefined }
 	};
 
 	var _self = {

@@ -76,7 +76,7 @@ define(['app','linqjs', 'angular-localizer',
 		},
 	  	'Reference Records': {
 		'title': 'Reference Records',
-		'formats': ['resource'],
+		'formats': ['resource', 'modelContractualClause'],
 		'roles':[$scope.$root.getRoleName('AbsPublishingAuthorities'), $scope.$root.getRoleName('abschiac'),$scope.$root.getRoleName('AbsNationalAuthorizedUser'),
 				 $scope.$root.getRoleName('AbsNationalFocalPoint'),$scope.$root.getRoleName('AbsAdministrator'),$scope.$root.getRoleName('Administrator'),
 				 $scope.$root.getRoleName('User')]
@@ -161,8 +161,7 @@ define(['app','linqjs', 'angular-localizer',
         abbreviation: 'CP',
         title: 'Checkpoint',
         help: 'This common format is to be used for registering contact details of checkpoints designated under paragraph 1 (a) of Article 17, who would collect or receive, as appropriate, relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources.',
-        tips: [
-        ],
+        tips: [],
       },
       absCheckpointCommunique: {
         abbreviation: 'CPC',
@@ -181,15 +180,13 @@ define(['app','linqjs', 'angular-localizer',
         title: 'Virtual Library Record',
         help: 'The forms under the “reference records” category will allow the submission of non-mandatory information relevant to the Protocol from any registered user (e.g. governments, representatives of indigenous and local communities, academia, NGOs, research institutions, business representatives, etc.) to the ABS Clearing-House .The Secretariat would be responsible for validating all reference records.<br />'
          + '<br>Through its virtual library, the ABS Clearing-House provides access to different categories of information and publications categorised in a list of thematic areas. The information provided through this common format will facilitate online searches of information on the ABS relevant resources made available through the ABS Clearing-House, such as books, articles, papers, videos, and others.',
-        tips: [
-        ],
+        tips: [],
       },
       database: {
         abbreviation: 'NDB',
         title: 'ABS National Website or Database',
         help: 'This common format is to be used for registering information on national website or databases relevant to access and benefit-sharing.',
-        tips: [
-        ],
+        tips: [],
       },
       contacts: {
         abbreviation: 'CON',
@@ -197,6 +194,12 @@ define(['app','linqjs', 'angular-localizer',
         help: '',
         tips: [],
       },
+      modelContractualClause: {
+        abbreviation: 'MCC',
+        title: 'Model Contractual Clause',
+        help: '',
+        tips: [],
+      }
 
     };
 
@@ -220,7 +223,8 @@ define(['app','linqjs', 'angular-localizer',
       {"schema":"resource","schemaType":"referenceRecords", "header": "VLR","draftCount":0,"requestCount":0,"publishCount": 0},
       {"schema":"contact","schemaType":"others", "header": "CON","draftCount":0,"requestCount":0,"publishCount": 0},
       {"schema":"absNationalReport","schemaType":"nationalRecords", "header": "NR","draftCount":0,"requestCount":0,"publishCount": 0},
-
+      {"schema":"modelContractualClause","schemaType":"referenceRecords", "header": "MCC","draftCount":0,"requestCount":0,"publishCount": 0},
+      
 	{"schema":"completedTasks","schemaType":"others", "requestCount":0},
 	{"schema":"pendingTasks","schemaType":"others", "requestCount": 0},
 	{"schema":"urgentTasks","schemaType":"others", "requestCount": 0}
@@ -319,77 +323,7 @@ define(['app','linqjs', 'angular-localizer',
 
         $scope.isLoaded.push(schema);
 
-
-        _.values(map).forEach(function(row){
-
-          if(schema!="dashboard" && schema!="contact"){
-            //var schemaCount = _.where($scope.schemaTypesFacets,{"schema":row.type});
-
-            // if(schemaCount !== null && schemaCount.length > 0)
-            // {
-            //   schemaCount[0].draftCount 	+= $scope.isDraft(row) ? 1:0;
-            //   schemaCount[0].requestCount += $scope.isRequest(row) ? 1:0;
-            //   schemaCount[0].publishCount += $scope.isPublished(row) ? 1:0;
-            // }
-            // else
-            // {
-            //   $scope.schemaTypesFacets.push({"schema":row.type, "draftCount":$scope.isDraft(row) ? 1:0
-            //     ,"requestCount":$scope.isPublished(row) ? 1:0
-            //     ,"publishCount":$scope.isRequest(row) ? 1:0});
-            // }
-            if($scope.isRequest(row)){
-
-              $scope.userActivities.push({
-                            "title" : '<span class=\'activityfeed-time\'>' + $filter('formatDateWithTime')(row.workingDocumentLock.lockedOn)
-							+ '</span><strong> ' + row.createdBy.firstName + ' ' + row.createdBy.lastName + '</strong> has requested for publishing '+
-                              _.where($scope.schemaTypesFacets,{"schema":row.type})[0].header
-                              + ' draft ' + ' <em>' + ($filter("lstring")(row.workingDocumentTitle||row.title,$scope.localeRegister)) + '</em>'
-                             ,
-                            "identifier" : row.identifier,
-                            "schema"	 : row.type,
-							"date"		 : $filter('formatDateWithTime')(row.workingDocumentLock.lockedOn)
-                             });
-            }
-            else if($scope.isDraft(row)){
-
-              $scope.userActivities.push({
-                            "title" : '<span class=\'activityfeed-time\'>' + $filter('formatDateWithTime')(row.updatedOn)
-							+ '</span> <strong> ' + row.createdBy.firstName + ' ' + row.createdBy.lastName + '</strong> was working on ' +
-                              _.where($scope.schemaTypesFacets,{"schema":row.type})[0].header + ' draft '
-                              +' <em>' + ($filter("lstring")(row.workingDocumentTitle||row.title,$scope.localeRegister)) + '</em>'
-
-                              ,
-                            "identifier" : row.identifier,
-                            "schema"	 : row.type,
-							"date"		 : $filter('formatDateWithTime')(row.updatedOn)
-                             });
-            }
-			else if($scope.isPublished(row)){
-
-		      $scope.userActivities.push({
-                            "title" : '<span class=\'activityfeed-time\'>' + $filter('formatDateWithTime')(row.updatedOn)
-							+ '</span> <strong> ' + row.updatedBy.firstName + ' ' + row.updatedBy.lastName + '</strong> approved ' +
-                              _.where($scope.schemaTypesFacets,{"schema":row.type})[0].header + ' draft '
-                              +' <em>' + ($filter("lstring")(row.workingDocumentTitle||row.title,$scope.localeRegister)) + '</em>'
-
-                              ,
-                            "identifier" : row.identifier,
-                            "schema"	 : row.type,
-							"date"		 : $filter('formatDateWithTime')(row.updatedOn)
-                             });
-		    }
-          }
-          $scope.records.push(row);
-          if(schema =="contact"){
-
-            if(!$scope.contacts)
-              $scope.contacts = [];
-            //console.log(row);
-            if(!row.body.source && row.body.header)
-              row.body.source = row.body.header.identifier;
-            $scope.contacts.push(row.body)
-          }
-        })
+        _.values(map).forEach(function(row){ $scope.records.push(row); })
         // var recrords _.groupBy($scope.records,'')
         $("a[role*='button']").toggleClass('ui-disabled');
 		flipFacets();
