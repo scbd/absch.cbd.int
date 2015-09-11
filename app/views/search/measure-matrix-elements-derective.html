@@ -144,11 +144,17 @@
             <tr ng:class="{'elementMeasure':term.isMeasure, 'whiteTopBorder':term.hasMeasure}" >
                 <td class="matrixheaderColumn rightBorder " ng:class="{'paddingleft0':term.level==1, 'paddingleft3':term.level==2 , 'paddingleft6':term.level==3, 'paddingleft9':term.level==4}">
                         &nbsp;
-                        <!--exception for TK-->
-                        <strong ng-show="!term.broaderTerms || term.identifier=='B8A150E054154AD3AD97856ABD485E90'">{{term.title||term.name | lstring:locale|uppercase}}</strong>
-                        <span ng-show="term.broaderTerms && !term.isMeasure && term.identifier=='B8A150E054154AD3AD97856ABD485E90'">{{term.title||term.name | lstring:locale}}</span>
+                        <!--exception for TK <span>{{term.identifier}}</span> (term.identifier == '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED' ? otherCustomValues[term.identifier]  :-->                        
+                        <strong ng-show="!term.broaderTerms || term.identifier=='B8A150E054154AD3AD97856ABD485E90'">
+                           {{  term.title||term.name | lstring:locale|uppercase}}
+                        </strong>
+                        <span ng-show="term.broaderTerms && !term.isMeasure && term.identifier!='B8A150E054154AD3AD97856ABD485E90'">
+                            {{ (term.identifier.indexOf('#')>0 ? otherCustomValues[term.identifier]  : term.title||term.name)  | lstring:locale}}
+                        </span>
                         <span ng-show="term.broaderTerms && term.isMeasure">
-                            <a target="_new" href="/database/measure/{{term.measure|uniqueIDWithoutRevision}}">
+                            <span ng-if="term.measureType=='linked'">Related to</span>
+                            <span ng-if="term.measureType=='amended'">Amended by</span>
+                            <a target="_new" href="/database/measure/{{term.measure|uniqueIDWithoutRevision}}">                                
                                 {{term.title||term.name | lstring:locale}}
                             </a>                               
                         </span>

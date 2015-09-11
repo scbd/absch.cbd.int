@@ -1,4 +1,4 @@
-define(['app', 'underscore','/app/js/common.js'], function(app, _) {
+define(['app', 'underscore','angular', '/app/js/common.js'], function(app, _, angular) {
 
     app.directive("measureMatrixElements", function() {
         return {
@@ -392,38 +392,6 @@ define(['app', 'underscore','/app/js/common.js'], function(app, _) {
                          "nonPreferedTerms": []
                        },
                        {
-                         "identifier": "01DA2D8E-F2BB-4E85-A17E-AB0219194A17",
-                         "name": "Relationship with other international instruments",
-                         "title": {
-                           "en": "Relationship with other international instruments"
-                         },
-                         "shortTitle": {},
-                         "description": "",
-                         "source": "",
-                         "broaderTerms": [],
-                         "narrowerTerms": [
-                           "A71B36E8-D2CE-4254-A628-6DBFB902394C"
-                         ],
-                         "relatedTerms": [],
-                         "nonPreferedTerms": []
-                       },
-                       {
-                         "identifier": "A71B36E8-D2CE-4254-A628-6DBFB902394C",
-                         "name": "Plant genetic resources for food and agriculture exchanged using the standard material transfer agreement of the International Treaty on Plant Genetic Resources for Food and Agriculture",
-                         "title": {
-                           "en": "Plant genetic resources for food and agriculture exchanged using the standard material transfer agreement of the International Treaty on Plant Genetic Resources for Food and Agriculture"
-                         },
-                         "shortTitle": {},
-                         "description": "",
-                         "source": "",
-                         "broaderTerms": [
-                           "01DA2D8E-F2BB-4E85-A17E-AB0219194A17"
-                         ],
-                         "narrowerTerms": [],
-                         "relatedTerms": [],
-                         "nonPreferedTerms": []
-                       },
-                       {
                          "identifier": "08B2CDEC-786F-4977-AD0A-6A709695528D",
                          "name": "Access",
                          "title": {
@@ -712,6 +680,38 @@ define(['app', 'underscore','/app/js/common.js'], function(app, _) {
                          "nonPreferedTerms": []
                        },
                        {
+                         "identifier": "01DA2D8E-F2BB-4E85-A17E-AB0219194A17",
+                         "name": "Relationship with other international instruments",
+                         "title": {
+                           "en": "Relationship with other international instruments"
+                         },
+                         "shortTitle": {},
+                         "description": "",
+                         "source": "",
+                         "broaderTerms": [],
+                         "narrowerTerms": [
+                           "A71B36E8-D2CE-4254-A628-6DBFB902394C"
+                         ],
+                         "relatedTerms": [],
+                         "nonPreferedTerms": []
+                       },
+                       {
+                         "identifier": "A71B36E8-D2CE-4254-A628-6DBFB902394C",
+                         "name": "Plant genetic resources for food and agriculture exchanged using the standard material transfer agreement of the International Treaty on Plant Genetic Resources for Food and Agriculture",
+                         "title": {
+                           "en": "Plant genetic resources for food and agriculture exchanged using the standard material transfer agreement of the International Treaty on Plant Genetic Resources for Food and Agriculture"
+                         },
+                         "shortTitle": {},
+                         "description": "",
+                         "source": "",
+                         "broaderTerms": [
+                           "01DA2D8E-F2BB-4E85-A17E-AB0219194A17"
+                         ],
+                         "narrowerTerms": [],
+                         "relatedTerms": [],
+                         "nonPreferedTerms": []
+                       },
+                       {
                          "identifier": "7CB2A03A-F0CF-4458-BB3B-A60DEC1F942E",
                          "name": "Transboundary cooperation ",
                          "title": {
@@ -860,10 +860,8 @@ define(['app', 'underscore','/app/js/common.js'], function(app, _) {
                         .then(function(){
                             var oNewIdentifiers = {};
                             var oNewSections = {};
-
-                            // if (!$.isArray($scope.terms))
-                            //     throw "Type must be array";
-
+                            var oNewCustomValues = {};
+                            
                             if ($scope.binding) {
 
                                 if (!$.isArray($scope.binding))
@@ -872,9 +870,10 @@ define(['app', 'underscore','/app/js/common.js'], function(app, _) {
                                 for (var i = 0; i < $scope.binding.length; ++i) {
                                       var identifier = $scope.binding[i].identifier;
                                       //handle others
-                                      if($scope.binding[i].parent)
-                                          identifier += '#' + $scope.binding[i].parent;
-                                          
+                                      if($scope.binding[i].parent || identifier == '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'){
+                                          identifier += ('#' + $scope.binding[i].parent) || '';                                          
+                                          oNewCustomValues[identifier] = $scope.binding[i].customValue
+                                      }
                                       oNewIdentifiers[identifier] = true;
                                       oNewSections[identifier] = $scope.binding[i].section||{};
                                 }
@@ -882,6 +881,7 @@ define(['app', 'underscore','/app/js/common.js'], function(app, _) {
 
                             if (!angular.equals(oNewIdentifiers, $scope.identifiers)) $scope.identifiers = oNewIdentifiers;
                             if (!angular.equals(oNewSections, $scope.sections)) $scope.sections = oNewSections;
+                            if (!angular.equals(oNewCustomValues, $scope.otherCustomValues)) $scope.otherCustomValues = oNewCustomValues;
                         });
                 }
 
@@ -897,22 +897,42 @@ define(['app', 'underscore','/app/js/common.js'], function(app, _) {
                         $q.when($scope.load())
                         .then(function(){
                             if (!$.isArray($scope.document)){
-                                if ($scope.document.amendedMeasures) {
+                                if ($scope.document.amendedMeasures || $scope.document.linkedMeasures) {
 
                                     var amendedMeasures = _.map($scope.document.amendedMeasures, function(item) {
-                                        return $http.get('/api/v2013/documents/' + item.identifier);
+                                        return $http.get('/api/v2013/documents/' + item.identifier).then(function(data){
+                                            console.log('amended',data);return data;});
+                                    })
+                                    var linkedMeasures = _.map($scope.document.linkedMeasures, function(item) {
+                                        return $http.get('/api/v2013/documents/' + item.identifier).then(function(data){
+                                             console.log('related',data);return data;});
                                     })
                                     $q.all(amendedMeasures)
-                                        .then(function(data) {
-                                            return data.forEach(function(measure) {
-                                                appendElementMeasure(measure.data, $scope.terms);
-                                                return;
-                                            });
-                                        })
-                                        .then(function(data) {
-                                            buildTree();
-                                            updateProperties($scope.rootTerms, 1);
-                                        });
+                                      .then(function(data) {
+                                          _.each(data, function(measure){
+                                            var measureId;
+                                            measureId = _.findWhere($scope.document.amendedMeasures, {'identifier': measure.data.header.identifier});                                                    
+                                            if(measureId){
+                                                measureId.measure = measure.data;
+                                            }
+                                         });
+                                         return;
+                                      })
+                                      .then(function() {
+                                             $q.all(linkedMeasures)
+                                               .then(function(data) {
+                                                    _.each(data, function(measure){
+                                                        var measureId;
+                                                        measureId = _.findWhere($scope.document.linkedMeasures, {'identifier': measure.data.header.identifier});                                                    
+                                                        if(measureId){
+                                                            measureId.measure = measure.data;
+                                                        }
+                                                    });
+                                                    addMeasureToElements($scope.document);
+                                                    buildTree();
+                                                    updateProperties($scope.rootTerms, 1);
+                                                });
+                                      });
                                 } else {
                                         buildTree();
                                         updateProperties($scope.rootTerms, 1);
@@ -922,10 +942,9 @@ define(['app', 'underscore','/app/js/common.js'], function(app, _) {
 
                                 _.each($scope.document, function(measure){
                                     addMeasureToElements(measure.document ? measure.document : measure);
-                                    buildTree();
-                                    updateProperties($scope.rootTerms, 1);
-
                                 });
+                                buildTree();
+                                updateProperties($scope.rootTerms, 1);
                                 // console.log($scope.terms, $scope.rootTerms,existing);
                             }
                         });
@@ -953,41 +972,37 @@ define(['app', 'underscore','/app/js/common.js'], function(app, _) {
                     else $scope.error = error.data || "unkown error";
                 }
 
-                function getRleatedMeasures() {
-
-                    _.each(document.amendedMeasures, function(amended) {
-                        $http.get('/api/v2013/documents/' + amended.identifier)
-                            .success(function(data) {
-                                appendElementMeasure(amended);
-
-                            });
+                function addMeasureToElements(measure) {                    
+                    if(!measure)
+                        return;
+                        
+                    _.each(measure.absMeasures, function(measureElement) {
+                        newMeasureElement(measureElement, measure);
                     });
-                }
-
-                function addMeasureToElements(measure) {
-                    if($scope.type=='multiple'){
-                        _.forEach(measure.absMeasures, function(measureElement) {
-                            newMeasureElement(measureElement, measure);
+                    if($scope.type=='single'){
+                        _.each(measure.linkedMeasures, function(measureElement) {
+                            if(measureElement.measure)
+                                _.each(measureElement.measure.absMeasures, function(element) {
+                                    newMeasureElement(element, measureElement.measure, 'linked', measure.header.identifier);
+                                });
+    
+                        });
+                        _.each(measure.amendedMeasures, function(measureElement) {
+                            if(measureElement.measure)
+                                _.each(measureElement.measure.absMeasures, function(element) {
+                                    newMeasureElement(element, measureElement.measure, 'amended', measure.header.identifier);
+                                });
                         });
                     }
-                    _.forEach(measure.linkedMeasures, function(measureElement) {
-                        if(measureElement.measure)
-                            _.forEach(measureElement.measure.absMeasures, function(element) {
-                                newMeasureElement(element, measureElement.measure, 'linked', measure.header.identifier);
-                            });
-
-                    });
-                    // _.forEach(measure.relatedMeasures, function(measureElement) {
-                    //     if(measureElement.measure)
-                    //         _.forEach(measureElement.measure.absMeasures, function(element) {
-                    //             newElement(element, measureElement.measure, 'amended', measure.header.identifier);
-                    //         });
-                    // });
                 }
                 var existing = [];
                 function newMeasureElement(measureElement, measure, type, parentMeasure){
-
-                    var element = _.findWhere($scope.terms, {'identifier': measureElement.identifier});
+                    var identifier = measureElement.identifier;
+                    
+                    if(measureElement.parent)
+                        identifier = measureElement.parent + '#' + identifier;
+                        
+                    var element = _.findWhere($scope.terms, {'identifier': identifier});
 
                     if(!element)
                         return;
@@ -999,15 +1014,13 @@ define(['app', 'underscore','/app/js/common.js'], function(app, _) {
                     // //measure is already added for the element ignore.
                     if(measureElementExists)
                         return;
-                    if($scope.type=='multiple' && (type=='linked' || type=='amended')){
+                    if($scope.type=='single' && (type=='linked' || type=='amended')){
                         var parentMeasureElementExists = _.find($scope.terms, function(term){
-                                                       return term.measureIdentifier == parentMeasure && term.name == measureElement.identifier;
+                                                       return term.measureIdentifier == parentMeasure && term.name == identifier;
                                                    });
                         if(parentMeasureElementExists)
                             element = parentMeasureElementExists;
                     }
-                    // console.log(measureElementExists);
-
 
                     if (element) {
                         var elementMeasure = {};
@@ -1015,6 +1028,7 @@ define(['app', 'underscore','/app/js/common.js'], function(app, _) {
                         elementMeasure.measureIdentifier = measure.header.identifier;
                         elementMeasure.name = element.identifier;
                         elementMeasure.title = measure.title;
+                        elementMeasure.measureType = type;
 
                         elementMeasure.broaderTerms = [];
                         elementMeasure.broaderTerms.push(element.identifier);
@@ -1030,34 +1044,6 @@ define(['app', 'underscore','/app/js/common.js'], function(app, _) {
 
                         existing.push({measureId:measure.header.identifier, elementId:element.identifier, type:type});
                     }
-                }
-
-
-                function appendElementMeasure(measure, terms) {
-
-                    _.forEach(measure.absMeasures, function(measureElement) {
-                        var element = _.findWhere(terms, {
-                            'identifier': measureElement.identifier
-                        });
-                        if (element) {
-                            var elementMeasure = {};
-                            elementMeasure.identifier = guid();
-                            elementMeasure.measureIdentifier = measure.header.identifier;
-                            elementMeasure.name = elementMeasure.identifier;
-                            elementMeasure.title = measure.title;
-                            elementMeasure.broaderTerms = [];
-
-                            elementMeasure.broaderTerms.push(element.identifier);
-
-                            element.narrowerTerms.push(elementMeasure.identifier);
-
-                            terms.push(elementMeasure);
-
-                            $scope.identifiers[elementMeasure.identifier] = true;
-                            $scope.sections[elementMeasure.identifier] = measureElement.section||{};
-                        }
-                    });
-                    // console.log(terms);
                 }
 
                 function updateProperties(terms, level) {
@@ -1081,7 +1067,8 @@ define(['app', 'underscore','/app/js/common.js'], function(app, _) {
                             }
                             term.measure = {identifier: doc.document.header.identifier,government : doc.document.government,
                                             documentID:commonjs.hexToInteger(doc.id),type: doc.document.header.schema};
-                                            
+                           term.measureType = element.measureType;
+                                           
                             _.map(term.broaderTerms, function(brTerm) {
                                 brTerm.hasMeasure = true;
                             });

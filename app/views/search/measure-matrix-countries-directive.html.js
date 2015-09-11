@@ -88,7 +88,7 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                 return $q.when($http.get('/api/v2013/documents/' + measure.identifier_s,{cache:true}))
                     .then(function(document) {
                         measure.document = document.data;
-
+                        return;
                         // var amendedMeasuresQuery = _.map(measure.document.amendedMeasures, function(amended) {
                         //     return $http.get('/api/v2013/documents/' + amended.identifier,{cache:true});
                         // });
