@@ -28,7 +28,7 @@ app.directive("fieldEmbedContact", [ function () {
 
 				if( show && !modalEdit.is(":visible")) {  modalEdit.modal("show"); }
 				if(!show &&  modalEdit.is(":visible")) {  modalEdit.modal("hide"); }
-
+				$scope.errorMessage = undefined;
 			});
 
 			$scope.organizationOnly = $attrs.organizationOnly!==undefined;
@@ -96,7 +96,7 @@ app.directive("fieldEmbedContact", [ function () {
 													schema   : "organization",
 													languages: ["en"]
 												},
-										type: "organization"
+										type: "organization",libraries: [{ identifier: "cbdLibrary:abs-ch" }]
 									  },
 							index   : -1
 						};
@@ -128,40 +128,50 @@ app.directive("fieldEmbedContact", [ function () {
 				if(contact.firstName !==undefined && (!contact.firstName  || empty.test(contact.firstName ))) delete contact.firstName;
 				if(contact.middleName!==undefined && (!contact.middleName || empty.test(contact.middleName))) delete contact.middleName;
 				if(contact.lastName  !==undefined && (!contact.lastName   || empty.test(contact.lastName  ))) delete contact.lastName;
-
+				
+				var saveOperation;
 				//save the contact to db for furture use.
 				if(saveContact!=false){
 					var cont = _.clone(contact)
-					saveContactDraft(cont);
+					saveOperation = saveContactDraft(cont);
 				}
-
-				if(!$scope.showFilter && !$scope.organizationOnly){
-					delete contact.government;
-					delete contact.header;
-				}
-					// console.log(contact);
-				if($scope.multiple) {
-
-					var contacts =  _.clone($scope.getContacts());
-
-					if($scope.edition.index>=0)
-						contacts[$scope.edition.index] = contact;
-					else
-						contacts.push(contact);
-
-					$scope.model = contacts;
-
-
-				}
-				else {
-
-					$scope.model = contact;
-				}
-				$scope.existingContacts = null;
-				$scope.edition = null;
-
-				//clear the dropdown list display text which remains after the dialog is closed.
-				$scope.$broadcast('clearSelectSelection');
+				$q.when(saveOperation)
+				.then(function(){
+					
+					if(!$scope.showFilter && !$scope.organizationOnly){
+						delete contact.government;
+						delete contact.header;
+					}
+						// console.log(contact);
+					if($scope.multiple) {
+	
+						var contacts =  _.clone($scope.getContacts());
+	
+						if($scope.edition.index>=0)
+							contacts[$scope.edition.index] = contact;
+						else
+							contacts.push(contact);
+	
+						$scope.model = contacts;
+	
+	
+					}
+					else {
+	
+						$scope.model = contact;
+					}
+					$scope.existingContacts = null;
+					$scope.edition = null;
+	
+					//clear the dropdown list display text which remains after the dialog is closed.
+					$scope.$broadcast('clearSelectSelection');
+				
+				})
+				.catch(function(error){
+					if(error.data && error.data.message){
+						$scope.errorMessage =  error.data.message;
+					}
+				});
 			};
 
 			//============================================================
@@ -289,7 +299,7 @@ app.directive("fieldEmbedContact", [ function () {
 				$scope.loading = false;
 			}
 
-			saveContactDraft = function(contact){
+			function saveContactDraft(contact){
 					if(!contact)
 						throw "Invalid document";
 					if(!$scope.organizationOnly){
@@ -302,18 +312,18 @@ app.directive("fieldEmbedContact", [ function () {
 						contact.header.identifier = contact.source;
 						contact.government = government ? { identifier: government } : undefined;
 
-						$q.when(editFormUtility.saveDraft(contact), function(contact){});
+						return editFormUtility.saveDraft(contact);
 					}
 					else{
 
-						$q.when(updateSecurity(contact)).then(function(){
+						return $q.when(updateSecurity(contact)).then(function(){
 							if(!$scope.security)
 								return;
 							delete contact.type
 							if($scope.security.canSave)
-								$q.when(editFormUtility.publish(contact), function(contact){});
+								return editFormUtility.publish(contact);
 							else
-								$q.when(editFormUtility.saveDraft(contact), function(contact){});
+								return editFormUtility.saveDraft(contact);
 						});
 					}
 

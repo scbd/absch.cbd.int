@@ -93,8 +93,9 @@
                 <div class="modal-body" style="padding-top:0;">
                     <div ng-hide="selectExisting">
                         
-                         <div style="margin-bottom:30px;">
+                         <div style="margin-bottom:30px;"></br>
                             <span class="color-red pull-left" ng-hide="editContactForm.$valid">* Mandatory fields must be filled in before record can be saved.</span>
+                            <span class="alert alert-danger" ng-if="errorMessage">{{errorMessage}}</span>
                             <a type="button" class="pull-right btn" ng-class="{'btn-primary':editContactForm.$valid, 'btn-default bg-red': !editContactForm.$valid}" ng-disabled="!editContactForm.$valid" ng-click="saveContact()">Save changes</a>
                             <a type="button" class="pull-right btn btn-default" ng-click="closeContact()">Close</a>
                          </div>
