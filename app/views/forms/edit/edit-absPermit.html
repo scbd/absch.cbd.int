@@ -67,7 +67,7 @@
                         <div class="col-xs-12">
                             <div class="control-group">
                                 <div class="km-control-group" name="permit"
-                                    caption="Reference number(s) of the internationally recognized certificate(s) of compliance that relate(s) to this permit">
+                                    caption="Reference number(s) to other internationally recognized certificate(s) of compliance that relate(s) to this permit">
 
                                     <div km-select multiple name="permit"
                                     ng-model="document.referencePermits"items="options.permits()" placeholder="Please select ..."></div>
@@ -323,7 +323,7 @@
 
 
                     <section>
-                    <legend>Information on the utilization of the genetic resource(s)</legend>
+                    <legend name="utilization">Information on the utilization of the genetic resource(s)</legend>
                     <div class="row">
                         <div class="col-xs-12">
                             <div ng-class="{'alert alert-danger':document.usageConfidential}" class="confidential-box">

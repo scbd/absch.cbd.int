@@ -12,10 +12,11 @@ style="max-width:90%">
 
         <md-content layout-padding layout-margin>
             <md-list>
-                <md-list-item ng-repeat="term in schemas" ng-click="viewHelp(term)">
-                    <!--<a ng-href="/help/glossary/{{term._id}}">-->
-                        {{term.schemaName}} ({{term.fields.length}})
-                    <!--</a>-->
+                <md-list-item ng-repeat="term in schemas | orderBy:'schemaName'" ng-click="viewHelp(term)">
+                   <div class="md-list-item-text">
+                         <h3>{{term.title}} ({{term.fields.length}})</h3>
+                         <p class="helpText">{{term.formPath}}</p>
+                    </div>
                     <md-divider ng-if="!$last"></md-divider>
                 </md-list-item>
             </md-list>

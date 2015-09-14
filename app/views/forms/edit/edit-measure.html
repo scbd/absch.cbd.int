@@ -177,7 +177,7 @@
 
 
             <section>
-            <legend>Document details</legend>
+            <legend name="documentsDetails">Document details</legend>
             <div class="row">
               <div class="col-sm-12">
                 <div class="km-control-group" required name="documents" caption="Document text (in its original language)">
@@ -247,7 +247,7 @@
             </section>
 
             <section>
-            <legend >Elements of the measure</legend>
+            <legend name="elementsOfMeasure">Elements of the measure</legend>
             <div class="help-block">
               <label  for="absMeasures" >Please select which elements are included in the measure being registered and identify which are the relevant articles of sections of the measure for each of the selected elements.This information will assist to in displaying information on the national legal framework.
               </label>
@@ -277,7 +277,7 @@
                 <table style="width:100%" cellspacing="0" cellpadding="0">
                 <tr>
                   <td style="text-align:left;vertical-align:middle" id="{{term.identifier}}">
-                    <label for="{{term.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED' ? 'otherAbsMeasure' : term.identifier}}">
+                    <label for="{{term.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED' ? 'otherAbsMeasure' : term.identifier}}" name="{{term.identifier}}">
                          <input type="checkbox" ng-model="identifiers[term.identifier]" ng-required="IsRequired()" value="{{term.identifier}}"
                          ng:if="!isReadOnly(term.identifier)" />
                          <span title="{{term.description|lstring:locale}}" ng:class="{true:'boldText',false:'normalText'}[isReadOnly(term.identifier)]">
