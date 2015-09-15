@@ -189,6 +189,17 @@ label{width:100%;}
                 <div km-select multiple api="vlrLanguagesApi" name= "vlrLanguages" binding-type="string" ng-model="vlrLanguages" items="options.languages()" placeholder="Available Languages"></div>
             </div>
         </div>
+        <div class="main_filter" ng-show="(showReferenceFilters || modelContractualClause.selected)" ng-class="{'check_active': modelContractualClause.selected}">
+            <label name="lblModelContractualClause">
+                <span class="badge badge-white pull-right">{{modelContractualClause.count}}</span>
+                <input type="checkbox" ng-model="modelContractualClause.selected" bind-indeterminate="modelContractualClause.indeterminate" ng-change="refresh(modelContractualClause.selected,'modelContractualClause')">
+                <span class="filter-text">Model Contractual Clause  </span>
+            </label>
+            <div ng-show="modelContractualClause.selected" class="subfilters-section">
+                <div km-select multiple api="mccresourceTypesApi" name="mccresourceTypes" binding-type="string" ng-model="mccresourceTypes" items="options.mccResourceTypes()" placeholder="Type of resource"></div></br>
+                <div km-select multiple api="mccLanguagesApi" name= "mccLanguages" binding-type="string" ng-model="mccLanguages" items="options.languages()" placeholder="Available Languages"></div>
+            </div>
+        </div>
 
         <div class="main_filter" ng-show="showReferenceFilters || meeting.selected" ng-class="{'check_active': meeting.selected}">
             <label name="lblMeetings">

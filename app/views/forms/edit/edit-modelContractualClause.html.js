@@ -74,7 +74,6 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js','/app/views/forms/e
         var documentCopy = _.clone(document)
 
         delete documentCopy.organizationsRef;
-      
       return documentCopy;
     };
     

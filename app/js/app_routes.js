@@ -3,7 +3,7 @@
 define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 'filters', 'realm-configuration'], function (app) {
 
     app.value("realm", {value:"ABS"});
-    app.value("schemaTypes", [ "absNationalReport", "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "resource" ]);
+    app.value("schemaTypes", [ "absNationalReport", "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "resource", "modelContractualClause" ]);
 
     app.config(['extendedRouteProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 

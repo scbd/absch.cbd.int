@@ -84,6 +84,8 @@ app.directive('searchFilterSchemas', function ($http) {
 
                                                         return year;
                                                       },
+               mccResourceTypes            : function () { return $http.get("/api/v2013/thesaurus/domains/840427E5-E5AC-4578-B238-C81EAEEDBDD8/terms", { cache: true })
+                                                                    .then(function(o){ return $scope.updateFacets($scope.modelContractualClause,'mccresourceTypes',Thesaurus.buildTree(o.data)); }); },
             };
 
             $scope.isSelected = function(item) {
@@ -393,9 +395,16 @@ app.directive('searchFilterSchemas', function ($http) {
             $scope.pressRelease            = { identifier: 'pressRelease',             title: 'Press Releases', type:'reference' };
             $scope.statement               = { identifier: 'statement',                title: 'Statements' , type:'reference'};
             $scope.news                    = { identifier: 'news',                     title: 'News', type:'reference' };
-
+            $scope.modelContractualClause  = { identifier: 'modelContractualClause', title : "ModelContractualClause", type:'reference',
+                                               subFilters : [
+                                                            { name: 'mccresourceTypes',   type: 'multiselect' , field: 'resourceTypes_ss'},
+                                                            { name: 'mccLanguages',       type: 'multiselect', field: 'resourceLinksLanguage_ss' }
+                                                        ]
+                                             }
+            
             $scope.terms  = [ $scope.focalPoint, $scope.authority, $scope.database, $scope.measure, $scope.absPermit, $scope.absCheckpoint,
-                              $scope.absCheckpointCommunique, $scope.resource, $scope.organization, $scope.meeting, $scope.notification, $scope.pressRelease, $scope.statement, $scope.news ];
+                              $scope.absCheckpointCommunique, $scope.resource, $scope.organization, $scope.meeting, $scope.notification,
+                              $scope.pressRelease, $scope.statement, $scope.news, $scope.modelContractualClause ];
             $scope.termsx = dictionarize($scope.terms);
 
             // Set intitial selection from QueryString parameters
