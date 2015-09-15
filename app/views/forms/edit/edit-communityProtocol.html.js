@@ -1,7 +1,7 @@
 define(['app', 'underscore', '/app/views/forms/edit/edit.js','/app/views/forms/edit/edit-resource-schema-base-directive.html.js'
        ], function (app, _) {
 
-  app.controller("editModelContractualClause", ["$scope", "$http", "$filter", "Thesaurus", "$q", "Enumerable", "$controller", "IStorage", "$location",
+  app.controller("editCommunityProtocol", ["$scope", "$http", "$filter", "Thesaurus", "$q", "Enumerable", "$controller", "IStorage", "$location",
                 function ($scope, $http, $filter, Thesaurus, $q, Enumerable, $controller, storage, $location) {
 
 
@@ -12,7 +12,7 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js','/app/views/forms/e
 
     _.extend($scope.options, {
       resourceTypes : function() {
-        return $q.when($http.get("/api/v2013/thesaurus/domains/840427E5-E5AC-4578-B238-C81EAEEDBDD8/terms", { cache: true })).then(function(o) {
+        return $q.when($http.get("/api/v2013/thesaurus/domains/ED9BE33E-B754-4E31-A513-002316D0D602/terms", { cache: true })).then(function(o) {
           return  Thesaurus.buildTree(o.data);
         })
       },

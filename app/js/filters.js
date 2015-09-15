@@ -245,6 +245,7 @@ define(["app",'/app/js/common.js'], function (app) {
 			if(schema.toLowerCase()=="news"						) return "News";
 			if(schema.toLowerCase()=="absnationalreport"		) return "National Reports";
 			if(schema.toLowerCase()=="modelcontractualclause"	) return "Model Contractual Clauses";
+			if(schema.toLowerCase()=="communityProtocol"		) return "Community protocols and procedures and customary laws";
 
 
 
@@ -279,6 +280,7 @@ define(["app",'/app/js/common.js'], function (app) {
 			//if(schema.toLowerCase()=="pressrelease"	 		||	schema.toLowerCase()=="nfp"	) return "Press Release";
 			//if(schema.toLowerCase()=="news"		 			||	schema.toLowerCase()=="nfp"	) return "News";
 			if(schema.toLowerCase()=="modelcontractualclause" 	||	schema.toLowerCase()=="mcc"	) return "folder";
+			if(schema.toLowerCase()=="communityProtocol" 		||	schema.toLowerCase()=="mpp"	) return "folder";
 
 			return schema;
 		};
@@ -334,6 +336,7 @@ define(["app",'/app/js/common.js'], function (app) {
 			if(schema.toLowerCase()=="news"						) return "NWS";
 			if(schema.toLowerCase()=="absnationalreport"		) return "NR";
 			if(schema.toLowerCase()=="modelcontractualclause"	) return "MCC";
+			if(schema.toUpperCase()=="communityProtocol"		) return "CPP";
 
 			if(schema.toUpperCase()=="NWS"				        ) return "news";
             if(schema.toUpperCase()=="FP"				        ) return "focalPoint";
@@ -353,6 +356,7 @@ define(["app",'/app/js/common.js'], function (app) {
 			if(schema.toUpperCase()=="NR"						) return "absNationalReport";
 
 			if(schema.toUpperCase()=="MCC"				    	) return "modelContractualClause";
+			if(schema.toUpperCase()=="CPP"				    	) return "communityProtocol";
 			
 			return schema;		
 	}
