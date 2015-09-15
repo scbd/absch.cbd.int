@@ -64,9 +64,8 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js','/app/views/forms/e
       if (/^\s*$/g.test(document.notes))
         document.notes = undefined;
 
-      //if(!$scope.isOtherSelected(document.languages))
+      if(!$scope.isOtherSelected(document.languages))
           document.languageName = undefined;
-          document.languages = undefined;
 
       if(!$scope.isOtherSelected(document.resourceTypes))
           document.resourceTypeName = undefined;
@@ -75,6 +74,7 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js','/app/views/forms/e
         var documentCopy = _.clone(document)
 
         delete documentCopy.organizationsRef;
+      
       return documentCopy;
     };
     

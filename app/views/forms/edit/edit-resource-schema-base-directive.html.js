@@ -14,6 +14,17 @@ define(['app'], function (app) {
 			controller: ["$scope", "IStorage", "editFormUtility", function ($scope, storage, editFormUtility)
 			{
 				
+				
+				if($scope.document_type=="modelContractualClause"){
+					$scope.heading = "Model Contractual Clause";
+					$scope.shortHeading = "MCC";
+				}
+				else if($scope.document_type=="resource"){
+					$scope.heading = "Virtual Library Record";
+					$scope.shortHeading = "VLR";
+				}
+				
+				
 			}]
 		};
 	}])
