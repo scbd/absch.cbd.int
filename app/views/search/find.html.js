@@ -47,7 +47,6 @@ define(['app','underscore','/app/js/common.js',
         }
 
 
-
         var self = this;
         var queryCanceler = null;
         var refreshTimeout = null;
@@ -432,6 +431,10 @@ define(['app','underscore','/app/js/common.js',
         }
         $scope.removeThematicAreaFilter = function(filter){
             $scope.thematicAreaApi.unSelectItem(filter.identifier);
+        }
+        
+        if($routeParams.documentSchema && $routeParams.documentSchema.toLowerCase()=='rat'){
+            $scope.queryStatus('party');
         }
     }]);
 
