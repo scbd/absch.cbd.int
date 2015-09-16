@@ -78,7 +78,10 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                                         var templateToUse = controlTemplate//;
         
                                                                         var children = $element.find('div.km-control-group[name="' + field.name + '"] label')
-                                                                        if (field.fieldType == 'section' || field.fieldType == 'form') {
+                                                                        if(children.length==0 && field.fieldType == 'control'){
+                                                                            children = $element.find('label[name="' + field.name + '"]')
+                                                                        }
+                                                                        else if (field.fieldType == 'section' || field.fieldType == 'form') {
                                                                                 children = $element.find('legend[name="' + field.name + '"]')
                                                                                 templateToUse = field.fieldType == 'section' ? sectionTemplate : formTemplate
                                                                                 templateToUse = templateToUse.replace('{{control}}', buttonTemplate);
