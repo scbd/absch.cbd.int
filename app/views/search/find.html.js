@@ -433,8 +433,11 @@ define(['app','underscore','/app/js/common.js',
             $scope.thematicAreaApi.unSelectItem(filter.identifier);
         }
         
-        if($routeParams.documentSchema && $routeParams.documentSchema.toLowerCase()=='rat'){
-            $scope.queryStatus('party');
+        if($routeParams.documentSchema){
+            if($routeParams.documentSchema.toLowerCase()=='rat')
+                $scope.queryStatus('party');
+            else ($routeParams.documentSchema.toLowerCase()=='vlr')
+                $scope.previewType='list'
         }
     }]);
 
