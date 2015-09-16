@@ -26,7 +26,18 @@
 					<legend name="formInfo" style="display:none"></legend>
 					<section>
 						<legend>General information</legend>
-
+						<div class="row">
+							<div class="col-xs-6">
+								<div class="km-control-group" required name="resourceTypes" caption="Type of resource">
+									<div km-select multiple name="resourceTypes" required ng-model="document.resourceTypes" items="options.resourceTypes()"></div>
+								</div>
+							</div>
+							<div class="col-xs-6" ng-show="isOtherSelected(document.resourceTypes)">
+								<div class="km-control-group" required name="resourceTypeName" caption="Name of other type of resource">
+									<div km-textbox-ml required name="resourceTypeName" rows="1" ng-model="document.resourceTypeName" locales="document.header.languages"></div>
+								</div>
+							</div>
+						</div>
 						<div class="row">
 							<div class="col-xs-12">
 								<div class="km-control-group" required name="title" caption="Title">
@@ -52,28 +63,6 @@
 							</div>
 						</div>
 
-						 <div class="row">
-							<div class="col-xs-6">
-								<div class="km-control-group" required name="languages" caption="Language(s)">
-									<div km-select name="languages" required ng-model="document.languages" items="options.languages()" multiple></div>
-								</div>
-							</div>
-							<div class="col-xs-6" ng-show="isOtherSelected(document.languages)">
-								<div class="km-control-group" required name="languageName" caption="Name of other language">
-									<div km-textbox-ml required name="languageName" rows="1" ng-model="document.languageName" locales="document.header.languages"></div>
-								</div>
-							</div>
-						</div> 
-
-
-						<div class="row">
-							<div class="col-xs-12">
-								<div class="km-control-group" required name="publicationYear" caption="Publication year">
-									<input type="number" required name="publicationYear" ng-model="document.publicationYear" />
-								</div>
-							</div>
-						</div>
-
 						<div class="row">
 							<div class="col-xs-12">
 								<div class="km-control-group" name="organizations" caption="Organization(s) involved in the publication of this resource">
@@ -84,51 +73,15 @@
 								</div>
 							</div>
 						</div>
-
+						
 						<div class="row">
 							<div class="col-xs-12">
-								<div class="km-control-group" name="cover" caption="Cover image(s)">
-									<div class="help-block">Only JPEG and PNG formats are supported.</div>
-									<div km-link name="cover" ng-model="document.covers" allow-link="false" allow-file="true" mimeTypes="image/jpeg;image/png"
-									identifier="document.header.identifier"></div>
+								<div class="km-control-group" required name="publicationYear" caption="Publication year">
+									<input type="number" required name="publicationYear" ng-model="document.publicationYear" />
 								</div>
 							</div>
 						</div>
-					</section>
-
-					<section>
-
-						<legend>Resource information</legend>
-
-						<div class="row">
-							<div class="col-xs-12">
-								<div class="km-control-group" required name="summary" caption="Summary, abstract or table of contents">
-									<div km-textbox-ml ng-model="document.summary" required rows="4" locales="document.header.languages"></div>
-								</div>
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="col-xs-6">
-								<div class="km-control-group" required name="resourceTypes" caption="Type of resource">
-									<div km-select multiple name="resourceTypes" required ng-model="document.resourceTypes" items="options.resourceTypes()"></div>
-								</div>
-							</div>
-							<div class="col-xs-6" ng-show="isOtherSelected(document.resourceTypes)">
-								<div class="km-control-group" required name="resourceTypeName" caption="Name of other type of resource">
-									<div km-textbox-ml required name="resourceTypeName" rows="1" ng-model="document.resourceTypeName" locales="document.header.languages"></div>
-								</div>
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="col-xs-12">
-								<div class="km-control-group" name="publisher" caption="Publisher and its location">
-									<div km-textbox-ml name="publisher" ng-model="document.publisher" rows="4" locales="document.header.languages"></div>
-								</div>
-							</div>
-						</div>
-
+						
 						<div class="row">
 							<div class="col-xs-12">
 								<div class="km-control-group" name="rights" caption="Rights">
@@ -138,7 +91,7 @@
 								</div>
 							</div>
 						</div>
-
+						
 						<div class="row">
 							<div class="col-xs-12">
 								<div class="km-control-group" name="format" caption="Format">
@@ -148,8 +101,7 @@
 								</div>
 							</div>
 						</div>
-
-						<div class="row">
+						<div class="row" ng-if="document_type=='resource''">
 							<div class="col-xs-12">
 								<div class="km-control-group" name="source" caption="Source">
 									<div class="help-block">A reference to a resource from which the present resource is derived (e.g. an article from a journal). For original
@@ -158,7 +110,39 @@
 								</div>
 							</div>
 						</div>
+						
 					</section>
+
+					<!--<section>
+
+						<legend>Access to the resource</legend>
+						
+						
+						
+
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="km-control-group" name="publisher" caption="Publisher and its location">
+									<div km-textbox-ml name="publisher" ng-model="document.publisher" rows="4" locales="document.header.languages"></div>
+								</div>
+							</div>
+						</div>
+
+
+					</section>
+
+						<div>
+							<div class="row">
+								<div class="col-xs-12">
+									<div class="km-control-group" name="resourceAccess" caption="How to obtain the resource">
+										<div class="help-block">Please provide details on how hard copies of the resource(s) can be ordered or otherwise obtained.</div>
+										<div km-textbox-ml name="resourceAccess" ng-model="document.resourceAccess" rows="4" locales="document.header.languages"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					
+					-->
 
 					<section>
 						<legend>Access to the resource</legend>
@@ -173,23 +157,39 @@
 								</div>
 							</div>
 						</div>
-
-						<div>
-							<div class="row">
-								<div class="col-xs-12">
-									<div class="km-control-group" name="resourceAccess" caption="How to obtain the resource">
-										<div class="help-block">Please provide details on how hard copies of the resource(s) can be ordered or otherwise obtained.</div>
-										<div km-textbox-ml name="resourceAccess" ng-model="document.resourceAccess" rows="4" locales="document.header.languages"></div>
-									</div>
+						<div class="row">
+							<div class="col-xs-6">
+								<div class="km-control-group" required name="languages" caption="Language(s)">
+									<div km-select name="languages" required ng-model="document.languages" items="options.languages()" multiple></div>
+								</div>
+							</div>
+							<div class="col-xs-6" ng-show="isOtherSelected(document.languages)">
+								<div class="km-control-group" required name="languageName" caption="Name of other language">
+									<div km-textbox-ml required name="languageName" rows="1" ng-model="document.languageName" locales="document.header.languages"></div>
+								</div>
+							</div>
+						</div> 
+						
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="km-control-group" name="cover" caption="Cover image(s)">
+									<div class="help-block">Only JPEG and PNG formats are supported.</div>
+									<div km-link name="cover" ng-model="document.covers" allow-link="false" allow-file="true" mimeTypes="image/jpeg;image/png"
+									identifier="document.header.identifier"></div>
 								</div>
 							</div>
 						</div>
-
 					</section>
-
 					<section>
-
-						<legend>Keywords for facilitating online searches</legend>
+						<legend>Information on the content of resource</legend>
+						
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="km-control-group" required name="summary" caption="Summary, abstract or table of contents">
+									<div km-textbox-ml ng-model="document.summary" required rows="4" locales="document.header.languages"></div>
+								</div>
+							</div>
+						</div>
 						<div class="row">
 							<div class="col-xs-12">
 								<div class="km-control-group" name="regions" caption="Country(ies), Regional or Economic group(s) related to the resource">
@@ -198,6 +198,12 @@
 								</div>
 							</div>
 						</div>
+						
+					</section>
+					<section>
+
+						<legend>Keywords for facilitating online searches</legend>
+						
 						<div class="row">
 							<div class="col-xs-12">
 								<div class="km-control-group" required name="absSubjects" caption="Thematic areas(s)">
@@ -205,7 +211,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="row">
+						<!--<div class="row">
 							<div class="col-xs-12">
 								<div class="km-control-group" name="keywords" caption="Keywords and any other relevant information">
 									<div class="help-block">Please use this field to provide additional keywords or any other relevant information not contained elsewhere in
@@ -213,7 +219,7 @@
 									<div km-textbox-ml name="keywords" ng-model="document.keywords" rows="4" locales="document.header.languages"></div>
 								</div>
 							</div>
-						</div>
+						</div>-->
 					</section>
 
 
