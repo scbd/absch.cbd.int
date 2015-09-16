@@ -119,6 +119,8 @@
 
 
 
+
+
 <div class="container" style="padding-top:20px;">
 
     <div class="row">
@@ -183,15 +185,85 @@
     </div>
 </div>
 
-<div class="container" style="padding-top:20px;">
+
+<div class="container" >
     <div class="row">
+        <hr class="bg-medgrey">
         <div class="col-xs-12">
+             <h3>ABSCH Record Overview</h3>
             <span home-country-dashboard></span>
         </div>
     </div>
-    <div class="row" >
+ </div>
 
-        <div class="col-xs-6">
+<div class="container" style="padding-top:20px;">
+    <div class="row" >
+       
+         <div class="col-md-4">
+              <h3 style="padding-bottom:0;margin-bottom:0;">Latest Notifications</h3>
+              <div style="border-top:1px solid #BBB;">
+                    <div ng-repeat="doc in rawRefDocs_Notification" ng-show="doc.title_t && $index < 5">
+                        <a   href="https://www.cbd.int/{{doc.url_ss[0]}}" target="_n_e_w_"  style="padding-bottom:5px;">
+                         <span style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.createdDate_dt | formatDate}}</span>
+                         <!--<span style="text-transform:uppercase;font-weight:bold;font-size:10px;" class="color-orange"> {{doc.schema_s}}</span>-->
+                         <span  class="color-grey" style="display:block;font-size:12px;">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." :  doc.title_t }}</span>
+                        </a>
+                </div>
+               </div>
+        </div>
+      
+         <div class="col-md-4">
+             <h3 style="padding-bottom:0;margin-bottom:0;">Latest Meetings</h3>
+              <div style="border-top:1px solid #BBB;" >
+                   <div ng-repeat="doc in rawRefDocs_Meeting" ng-show="doc.title_t &&  $index < 5">
+                         <a   href="https://www.cbd.int/doc/?meeting={{doc.symbol_s}}" target="_n_e_w_" style="padding-bottom:5px;">
+                         <span style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.startDate_dt | formatDate}} - {{doc.endDate_s | formatDate}}</span>
+                         <!--<span style="text-transform:uppercase;font-weight:bold;font-size:10px;" class="color-orange"> {{doc.schema_s}}</span>-->
+                         <span  class="color-grey" style="display:block;font-size:12px;">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." :  doc.title_t }}</span>
+                        </a>
+                    </div>
+               </div>
+         </div>
+          <div class="col-md-4">
+              <h3 style="padding-bottom:0;margin-bottom:0;">Latest News</h3>
+              <div style="border-top:1px solid #BBB;" >
+                   <div ng-repeat="doc in rawRefDocs_News" ng-show="doc.title_t && $index < 6" >
+                        <a  href="{{doc.url_ss[0]}}" target="_n_e_w_" style="padding-bottom:5px;">
+                         <span style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.createdDate_dt | formatDate}}</span>
+                         <!--<span style="text-transform:uppercase;font-weight:bold;font-size:10px;" class="color-orange"> {{doc.schema_s}}</span>-->
+                         <span  class="color-grey" style="display:block;font-size:12px;">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." :  doc.title_t }}</span>
+                        </a>
+                </div>
+               </div>
+        </div>
+     
+    </div>
+</div> 
+
+
+
+
+
+       
+        <!--<div class="col-xs-12">
+                <h1>Latest Virtual Library Records</h1>
+                <div ng-repeat="doc in rawRefDocs">
+                    <div class="latest" ng-class="{'latest-even-row':$even}">
+                        <a  href="/database/{{doc.schema_s == 'resource' ? '' : doc.schema_EN_t + '/'}}{{getDocumentId(doc)}}" class="latest-link">
+                            <span class="latest-date"> {{doc.createdDate_dt | formatDate}}</span>
+                            <span class="latest-schema">  | {{doc.schema_s | schemaName}}</span>
+                            <span class="latest-schema" ng-show="doc.resourceTypes_CEN_ss">  | {{getResourceType(doc.resourceTypes_CEN_ss)}}</span>
+                            <div class="latest-title color-orange">{{doc.title_t.length > 75 ? (doc.title_t | limitTo : 75) + "..." :  doc.title_t }} </div>
+                     </a>
+                 </div>
+                </div>
+
+               
+        </div>-->
+        
+        <!--<div class="clearfix"></div>-->
+
+        <!--<div class="col-xs-12">
 
 
                 <h1>Latest National Records</h1>
@@ -203,26 +275,14 @@
                         <span class="latest-country"> {{doc.government_EN_t}} </span> |
                         <span class="latest-schema"> {{doc.schema_EN_t | schemaName}} </span>
                         <div class="latest-title">{{doc.title_t}} </div>
-                        <!-- <div class="latest-title"ng-show="doc.schema_s == 'absCheckpointCommunique'">Checkpoint Communiqué - {{record.createdOn | formatDateWithTime }}</div> -->
                      </a>
                  </div>
                 </div>
 
                 <hr>
+        </div>-->
 
-                <!-- {{rawNationalDocs}} -->
-
-
-                <!-- <div class="panel-body">
-                    <div  style="max-height:300px;overflow:scroll;padding-right:15px">
-                        <div class="text-center"ng-hide="rawNationalDocs"><h1 style="color:#fa6938"><i class="fa fa-spinner fa-spin"></i></h1></div>
-                        <div document-list documents='rawNationalDocs' filter='*' show-pagination='false' current-page='currentPage' document-Count='documentCount'></div>
-                    </div>
-                </div> -->
-        </div>
-
-        <div class="col-xs-6">
-
+        <!--<div class="col-xs-12">
 
 
                 <h1>Latest Virtual Library Records</h1>
@@ -238,25 +298,11 @@
                  </div>
                 </div>
 
-                <!-- {{rawRefDocs}} -->
+       
+        </div>-->
 
-
-            <!-- <div class="panel panel-success">
-                <div class="panel-heading active">
-                    Latest Virtual Library Records
-                </div>
-                <div class="panel-body">
-                    <div  style="max-height:300px;overflow:scroll;padding-right:15px">
-                        <div class="text-center" ng-hide="rawRefDocs"><h1 style="color:#fa6938"><i class="fa fa-spinner fa-spin"></i></h1></div>
-                        <div document-list documents='rawRefDocs' filter='*' show-pagination='false' current-page='currentPage' document-Count='documentCount'>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-        </div>
-
-    </div>
-</div>
+    <!--</div>
+</div>-->
 
 
 
@@ -303,7 +349,7 @@
 
 
 
-<div class="container" >
+<div class="container" style="padding-top:20px;" >
     <!-- <div class="row" style="min-height: 300px;">
         <div class="col-md-4" >
             <div class="home-col">
