@@ -11,7 +11,7 @@ define(['app'], function (app) {
 				
 				
 				if($scope.document_type=="modelContractualClause"){
-					$scope.heading = "Model Contractual Clause";
+					$scope.heading = "Article 19 & 20 tool";
 					$scope.shortHeading = "MCC";
 				}
 				else if($scope.document_type=="resource"){
@@ -19,7 +19,7 @@ define(['app'], function (app) {
 					$scope.shortHeading = "VLR";
 				}
 				else if($scope.document_type=="communityProtocol"){
-					$scope.heading = "Community protocols and procedures and customary laws";
+					$scope.heading = "Community protocols and procedures and customary law";
 					$scope.shortHeading = "CPP";
 				}
 				
