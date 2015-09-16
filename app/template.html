@@ -279,9 +279,10 @@
     </nav>
 
     <!-- PORTAL BREAD CRUMBS-->
-    <nav class="navbar navbar-breadcrumbs navbar-default navbar-static-top"  >
+    <nav class="navbar navbar-breadcrumbs navbar-default navbar-static-top"  ng-hide="breadcrumbs.get().length == 1" >
         <div class="container-fluid container-breadcrumbs">
             <div class="color-litegrey">
+
                     <a href="http://www.cbd.int" class="margin-right-xs">CBD</a>
 
                     <span ng-repeat="breadcrumb in breadcrumbs.get()" >
@@ -303,7 +304,7 @@
     </nav>
     
     <!-- PORTAL BREAD CRUMBS-->
-    <nav class="navbar navbar-breadcrumbs navbar-default navbar-static-top navbar-fixed-top" style="top:30px;" >
+    <nav class="navbar navbar-breadcrumbs navbar-default navbar-static-top navbar-fixed-top" style="top:30px;"  ng-hide="breadcrumbs.get().length == 1" >
         <div class="container-fluid container-breadcrumbs">
             <div class="color-litegrey">
                     <a href="http://www.cbd.int" class="margin-right-xs">CBD</a>
