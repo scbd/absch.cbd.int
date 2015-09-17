@@ -102,7 +102,7 @@
     }
 
     .elementMeasure {
-        padding-bottom: : 0px!important;
+        padding-bottom:  0px!important;
     }
 
     .whiteTopBorder {
@@ -117,15 +117,15 @@
     }
     .table{
         width:100%!important;
-    }
-    
+    }    
      .expander{
         font-size:14px;
         font-weight:bold;
         position:relative;
-
     }
-    
+    .boldLabel{
+        font-weight:bold;
+    }
 </style>
     <table class="table matrixTable">
          <tr>
@@ -142,23 +142,24 @@
     <script type="text/ng-template" id="/app/views/search/matrix/measure-matrix.directive/abs/inner">
         <table class="table" ng:if="term.isChildSelected || (!term.broaderTerms && term.narrowerTerms)">
             <tr ng:class="{'elementMeasure':term.isMeasure, 'whiteTopBorder':term.hasMeasure}" >
-                <td class="matrixheaderColumn rightBorder " ng:class="{'paddingleft0':term.level==1, 'paddingleft3':term.level==2 , 'paddingleft6':term.level==3, 'paddingleft9':term.level==4}">
-                        &nbsp;
-                        <!--exception for TK <span>{{term.identifier}}</span> (term.identifier == '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED' ? otherCustomValues[term.identifier]  :-->                        
-                        <strong ng-show="!term.broaderTerms || term.identifier=='B8A150E054154AD3AD97856ABD485E90'">
-                           {{  term.title||term.name | lstring:locale|uppercase}}
+                <td class="matrixheaderColumn rightBorder " 
+                ng:class="{'paddingleft0':term.level==1, 'paddingleft3':term.level==2 && !term.isMeasure && term.identifier.indexOf('#')<0 , 'paddingleft6':term.level==3, 'paddingleft9':term.level==4}">
+                        &nbsp;                       
+                        <strong ng-if="!term.broaderTerms">
+                           {{  term.title||term.name | lstring:locale|uppercase}} {{term.isMeasure}}
                         </strong>
-                        <span ng-show="term.broaderTerms && !term.isMeasure && term.identifier!='B8A150E054154AD3AD97856ABD485E90'">
-                            {{ (term.identifier.indexOf('#')>0 ? otherCustomValues[term.identifier]  : term.title||term.name)  | lstring:locale}}
+                        <!--exception for TK--> 
+                        <span ng-if="term.broaderTerms && !term.isMeasure" ng-style="{'boldLabel':term.identifier=='B8A150E054154AD3AD97856ABD485E90'}">
+                            {{ (term.identifier.indexOf('#')>0 ? otherCustomValues[term.identifier]  : term.title||term.name)  | lstring:locale}} 
                         </span>
-                        <span ng-show="term.broaderTerms && term.isMeasure">
+                        <span ng-if="term.broaderTerms && term.isMeasure">
                             <span ng-if="term.measureType=='linked'">Related to</span>
                             <span ng-if="term.measureType=='amended'">Amended by</span>
-                            <a target="_new" href="/database/measure/{{term.measure|uniqueIDWithoutRevision}}">                                
+                            <!--<a target="_new" href="/database/measure/{{term.measure|uniqueIDWithoutRevision}}">-->                                
                                 {{term.title||term.name | lstring:locale}}
-                            </a>                               
+                            <!--</a>-->                               
                         </span>
-                         <span ng-show="sections[term.identifier]">({{sections[term.identifier] | lstring:locale}})</span>
+                         <span ng-if="sections[term.identifier]">({{sections[term.identifier] | lstring:locale}})</span>
                         <i class="fa fa-chevron-circle-up pull-right hand" ng-click="term.showUp=!term.showUp;showHideNode(term.identifier)" ng-show="!term.showUp" ng:if="term.level<2"></i>
                         <i class="fa fa-chevron-circle-down pull-right hand" ng-click="term.showUp=!term.showUp;showHideNode(term.identifier)" ng-show="term.showUp" ng:if="term.level<2"></i>
 

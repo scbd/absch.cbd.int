@@ -1049,7 +1049,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js'], functi
           $element.addClass("list-unstyled");
 
       },
-      controller: ["$scope", "$q", "Thesaurus", "Enumerable", function ($scope, $q, thesaurus, Enumerable) {
+      controller: ["$scope", "$q", "Thesaurus", "Enumerable",'$element', function ($scope, $q, thesaurus, Enumerable, $element) {
         
         var readOnlyElements = [
           "24E809DA-20F4-4457-9A8A-87C08DF81E8A","4E2974DF-216E-46C8-8797-8E3A33D6A048","A862ABFC-B97D-4E6A-9A70-812A82A7CC19","E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63","NEED-NEW-GUID","08B2CDEC-786F-4977-AD0A-6A709695528D","01DA2D8E-F2BB-4E85-A17E-AB0219194A17"
@@ -1195,7 +1195,9 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js'], functi
         $scope.isReadOnly = function(identifier){
           return _.indexOf(readOnlyElements, identifier)>=0;
         }
-        
+        $scope.showHideNode = function(elementId){
+            $element.find('#'+elementId).toggle();
+        };
         
       }]
     }
