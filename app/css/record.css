@@ -3,6 +3,11 @@
  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 
 }
+#Record .reflink:link{color:#428bca!important;}
+#Record .reflink:visited{color:#428bca!important;}
+#Record .reflink:hover{color:#428bca!important;}
+#Record .reflink:active{color:#428bca!important;}
+
 
 #Record .record{
 	/*padding-bottom:20px;*/
@@ -21,6 +26,7 @@
 	 padding:10px 10px 0 0;
 	 font-size: 11px;
 	 text-transform: uppercase;
+	 color:#666;
 
 }
 #Record .list{

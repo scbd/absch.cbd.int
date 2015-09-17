@@ -2,6 +2,7 @@
 .color-red{
     color:#C7532C!important;
 }
+.color-pink{color:#FF4081!important;}
 .color-orange{
     color:#fa6938!important;
 }
@@ -169,3 +170,11 @@
     background:#EEE url('../img/feature-bkg.png')!important;
     background-image: linear-gradient(to right, rgba(0, 0, 0, .5) 0%, rgba(0, 0, 0, .0001) 100%);
 }
+
+.bg-lblue{
+    background-color:#DDD!important;
+}
+.bg-lorange{
+    background-color:#FFF5EE!important;
+}
+

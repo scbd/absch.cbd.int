@@ -91,7 +91,7 @@
 				<div  class="km-value">
 					<ul>
 						<li ng-repeat="item in absPolicyBasisForCompetencyRef" ng-show="item.document.title" >
-							<a target="_new_win" href="/database/{{item.document.header.schema}}/{{item.document.header.identifier}}"><strong>{{item.document.title | lstring}}</strong>
+							<a target="_new_win" class="reflink" href="/database/{{item.document.header.schema}}/{{item.document.header.identifier}}"><strong>{{item.document.title | lstring}}</strong>
 							</a>
 						</li>
 					</ul>
