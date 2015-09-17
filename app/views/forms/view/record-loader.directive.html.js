@@ -20,7 +20,8 @@ define(['app',
     '/app/js/common.js',
     '/app/views/directives/document-metadata-directive.html.js',
 	'/app/views/forms/view/view-news.directive.html.js',
-	'/app/views/forms/view/view-abs-national-report.directive.js'
+	'/app/views/forms/view/view-abs-national-report.directive.js',
+	'/app/views/directives/help-directive.html.js',
     ], function (app) {
 app.directive('recordLoader', [function () {
 	return {
