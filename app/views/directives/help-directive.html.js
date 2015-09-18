@@ -127,8 +127,8 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                                 });
                                                                 addJoyRideSteps();
                                                                 
-                                                                if(help.repalceGlossaryTerms)
-                                                                        repalceGlossaryTerms();
+                                                                // if(help.repalceGlossaryTerms)
+                                                                //         repalceGlossaryTerms();
                                                         }
                                                         // },1000)
 
