@@ -3,9 +3,9 @@
 		<h4>Competent National Authority
 		<span class="color-black"> (CNA) </span></h4>
 	</div>
-	<div class="record-body panel-body"  help schema="viewCNA">
+	<div class="record-body panel-body" help schema="viewCNA" show-help="showHelp">
 
-
+	<div name="article-13-2"></div>
 
 		 	<div ng-show="document.title">
 			 	<label>Title</label>
@@ -24,7 +24,7 @@
 
 		<div ng-show="document.address || document.city || document.state || document.postalCode || document.country">
 
-			<legend>Coordinates and Contact Information</legend>
+			<legend>Coordinates and contact information</legend>
 
 			<label>Location</label>
 			<address class="km-value">
@@ -74,7 +74,7 @@
 			</div>
 		</div>
 		<div ng-show="contacts">
-				<label>Contact people in the organization</label>
+				<label>Contacts</label>
 				<div class="km-value" ng-repeat="contact in contacts" >
 					<div view-contact-reference ng-model="contact" locale="locale"></div>
 				</div>
@@ -85,7 +85,11 @@
 		
 		<div ng-show="document.absPolicyBasisForCompetency || absPolicyBasisForCompetencyRef ">
 			<legend>Legislative, administrative or policy basis for the competence of the CNA</legend>
-			
+			<div ng-show="document.absPolicyBasisForCompetency">
+				<!--<label>Information on the legal, administrative or policy basis for the competence of the CNA</label>-->
+				<div class="km-value" ng-bind-html="document.absPolicyBasisForCompetency | lstring:locale">
+				</div>
+			</div>
 			<div ng-show="absPolicyBasisForCompetencyRef">
 				<label>Links to relevant the Legislative, administrative or policy measure(s) </label>
 				<div  class="km-value">
@@ -98,19 +102,20 @@
 				</div>
 			</div>
 
-			<div ng-show="document.absPolicyBasisForCompetency">
-				<label>Information on the legal, administrative or policy basis for the competence of the CNA</label>
-				<div class="km-value" ng-bind-html="document.absPolicyBasisForCompetency | lstring:locale">
-				</div>
-			</div>
+			
 		</div>
 
 		<div>
 			<legend name="ABSResponsibilities">Summary of ABS Responsibilities </legend>
+			
+			<div ng-show="document.responsibilities">
+				<div class="km-value" ng-bind-html="document.responsibilities | lstring:locale"></div>
+			</div>
+			
 			<div ng-if="document.absResponsibleForAll">
 				<div class="km-value">This CNA is responsible for all functions under the Nagoya Protocol. </div>
 			</div>
-
+			
 			<div ng-show="document.absFunctions">
 				<label>Functions</label>
 				<div class="km-value km-pre">{{document.absFunctions | lstring:locale}}</div>
@@ -141,13 +146,10 @@
 					<li ng-repeat="term in document.absGeneticResourceAreas">{{term|term}} </li>
 				</ul>
 			</div> -->
-			<div ng-show="document.responsibilities">
-				<label>Other functions and responsibilities</label>
-				<div class="km-value" ng-bind-html="document.responsibilities | lstring:locale"></div>
-			</div>
+			
 
 			<div ng-show="document.absGeneticResourceTypes ">
-				<label>Keywords to describe scope of CNA responsibilities</label>
+				<label>Keywords to help describe the responsibilities of the competent national authority</label>
 				<div class="km-value" >
 					<ul class="list">
 						<li ng-repeat="term in document.absGeneticResourceTypes">{{term|term}} </li>
@@ -165,7 +167,7 @@
 			</div>
 
 			<div ng-show="document.relevantDocuments">
-				<label>Other relevant website address or attached documents</label>
+				<label>Links and documents</label>
 				<div class="km-value" ng-repeat="item in document.relevantDocuments">
 					<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
 					<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>

@@ -5,6 +5,13 @@
 		</h4></div>
 	<div class="record-body panel-body">
 
+			<div ng-show="document.government">
+			<label>Country</label>
+			<div class="km-value">
+				{{document.government|term}}
+			</div>
+		</div>
+			
 			<div ng-show="document.title">
 			 	<label>Title</label>
 			 	<div class="km-value">
@@ -17,12 +24,7 @@
 			<div class="km-value km-pre"ng-bind-html="document.description | lstring:local"></div>
 		</div>
 
-		<div ng-show="document.government">
-			<label>Country</label>
-			<div class="km-value">
-				{{document.government|term}}
-			</div>
-		</div>
+		
 
 		<div ng-show="document.jurisdiction">
 			<label>Jurisdiction</label>
