@@ -6,6 +6,10 @@ define(['app', '/app/views/forms/edit/edit.js', '/app/views/directives/help-dire
         });
 
         $scope.path = $location.path();
+        //$scope.documentUID = "NEW";
+        
+        
+       
 
         _.extend($scope.options, {
             organizationTypes: function() {

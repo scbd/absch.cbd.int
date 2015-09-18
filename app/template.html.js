@@ -144,10 +144,10 @@ define(['app','ng-breadcrumbs','angular-localizer','scbd-angularjs-services','sc
         
         $scope.feedbackHelp = function() {
                 if($scope.showHelp.show)
-                     showSimpleToast("Help is turned on.");
+                     showSimpleToast("Help information is turned on.");
                      
                 if(!$scope.showHelp.show)
-                     showSimpleToast("Help is turned off.");
+                     showSimpleToast("Help information is turned off.");
         };
         
         $scope.feedbackGlossary= function() {
