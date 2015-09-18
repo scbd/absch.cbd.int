@@ -2,15 +2,12 @@
 
 <div ng-cloak ng-controller="RegisterController" >
 
-    <div smooth-scroll duration="100" offset="200" ></div>
+<section layout="row" flex style="position:relative;top:20px;" ng-hide="!user.isAuthenticated" >
+<div smooth-scroll duration="100" offset="200" ></div>
 
-
-<section layout="row" style="position:relative; top:20px;" flex  ng-hide="!user.isAuthenticated" >
-
-
-       <md-sidenav class="md-sidenav-left md-whiteframe-z1" md-component-id="left" md-is-locked-open="$mdMedia('min-width: 1200px')"
-       style="max-height:1350px; margin-bottom:50px;" >
-
+       <md-sidenav class="md-sidenav-left " md-component-id="left" md-is-locked-open="$mdMedia('min-width: 1200px')"style="background-color:transparent;" >
+       
+       <div class="bg-white md-whiteframe-z1">
 
          <md-toolbar class="bg-medgrey" >
            <h3 class="md-toolbar-tools color-white"><a href="/dashboard">Management Center</a></h3>
@@ -96,11 +93,8 @@
                </div>
 
          </md-content>
-
+        </div>
      </md-sidenav>
-
-
-
 
      <md-content flex layout-margin style="margin:0 30px 30px 30px;padding:0;background-color:transparent;"  >
            <div layout="column" layout-align="top center"  >
@@ -110,7 +104,6 @@
                 <div help schema="{{helpSchema}}" show-help="showHelp" repalce-glossary-terms="true">                    
                     <ng-include src="subTemplateUrl" style="min-height:980px;"  ng-show="user.isAuthenticated"></ng-include>
                 </div>
-
         </div>
     </md-content>
 

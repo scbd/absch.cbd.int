@@ -17,9 +17,6 @@ define(['app','linqjs', 'angular-localizer',
 	  function ($rootScope, $location, $scope, $q, $window, storage, _,breadcrumbs,
       schemaTypes, $timeout, $filter, $routeParams, $cookies,bootbox,realm,workflows, $element, $mdSidenav, $mdUtil, $mdMedia) {
 
-
-	$rootScope.breadcrumbsParam = "asdasd";
-	
   $scope.toggleLeft = buildToggler('left');
   $scope.toggleRight = buildToggler('right');
     //**********************************************************
