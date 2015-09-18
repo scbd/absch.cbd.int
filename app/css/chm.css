@@ -186,3 +186,16 @@
     color:#BBB!important;
 }
 
+.alert-help{background-color:#FFD1DB!important;color:#333; border-radius:0;border:0;}
+/*.help-inline-content{color:#FF4081!important;font-size:12px;font-weight:bold; background-color:#eee;border:1px solid #ddd; padding:0 3px;margin:3px 0;}*/
+.help-inline-content { padding:3px;background-color:#FFD1DB!important; margin:0 0 5px 0;font-size:12px; }
+.help-inline-content span {}
+.help-inline-content p, .help-inline-content div {display:inline;}
+md-toast{
+    position:fixed!important;
+    z-index: 9999999;
+}
+
+md-toast.md-default-theme .md-button.md-highlight {
+  color:inherit;
+}

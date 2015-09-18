@@ -13,6 +13,7 @@ define(['app',
   './view-organization-reference.directive.js',
   './view-resource.directive.js',
   './record-loader.directive.html.js',
+  '/app/views/directives/help-directive.html.js',
 ], function (app) {
 
 

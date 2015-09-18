@@ -5,7 +5,10 @@
   outline: none!important;
 }
 
+a:link{color: #428bca;}
+a:visited{color: #428bca;}
 a:hover{color: #000;}
+a:active{color: #428bca;}
 
 
 [ng\:cloak],
@@ -362,7 +365,7 @@ body{
   font-family:  "Helvetica Neue", Helvetica, sans-serif, Trebuchet MS;
   text-rendering: optimizeLegibility;
   font-size:14px;
-background-color:#eee;
+background-color:#eee!important;
 color:#555;
 position:relative;
 }

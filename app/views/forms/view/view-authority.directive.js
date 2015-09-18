@@ -1,4 +1,4 @@
-define(['app', '/app/views/directives/help-directive.html.js'], function (app) {
+define(['app', '/app/views/directives/help-directive.html.js', '/app/views/forms/view/view-contact-reference.directive.js'], function (app) {
 
 app.directive("viewAuthority", [function () {
 	return {

@@ -3,6 +3,18 @@
  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 
 }
+#Record .reflink:link{color:#428bca!important;}
+#Record .reflink:visited{color:#428bca!important;}
+#Record .reflink:hover{color:#428bca!important;}
+#Record .reflink:active{color:#428bca!important;}
+
+
+#Record .help-block {
+    font-size: 11px;
+    color: #666;
+    padding: 0;
+    margin: 0 0 5px 0;
+}
 
 #Record .record{
 	/*padding-bottom:20px;*/
@@ -21,6 +33,7 @@
 	 padding:10px 10px 0 0;
 	 font-size: 11px;
 	 text-transform: uppercase;
+	 color:#666;
 
 }
 #Record .list{
@@ -99,7 +112,7 @@
 	margin-top: 10px;
 	/*color:#666;*/
 	margin-bottom: 5px;
-	border-bottom: 1px solid #ccc;
+	border-bottom: 1px solid #999;
 }
 	#Record .confidential{
 		color:#a94442!important;

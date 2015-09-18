@@ -1,16 +1,21 @@
 define(['app','ng-breadcrumbs','angular-localizer','scbd-angularjs-services','scbd-angularjs-filters',
     '/app/views/directives/login.directive.html.js',
     '/app/views/directives/xuser-notifications.js',
+    'ngMaterial','ngAria', 'angular-animate',
 ], function(app) {
     'use strict';
 
-    app.controller('TemplateController', ['$scope', '$rootScope', '$window', '$location', 'authentication', '$browser', 'realmConfiguration', 'underscore', 'IUserNotifications', '$timeout','$filter',
-     '$anchorScroll','breadcrumbs',//'localStorageService',localStorageService,
-        function($scope, $rootScope, $window, $location, authentication, $browser, realmConfiguration, _, userNotifications, $timeout, $filter,$anchorScroll,breadcrumbs) {
+    app.controller('TemplateController', ['$scope', '$rootScope','showHelp' , '$window', '$location', 'authentication', '$browser', 'realmConfiguration', 'underscore', 'IUserNotifications', '$timeout','$filter',
+     '$anchorScroll','breadcrumbs','$mdToast',//'localStorageService',localStorageService,
+        function($scope, $rootScope, showHelp, $window, $location, authentication, $browser, realmConfiguration, _, userNotifications, $timeout, $filter,$anchorScroll,breadcrumbs, $mdToast) {
 
             $scope.controller = "TemplateController";
             $scope.breadcrumbs     = breadcrumbs;
-        $scope.$root.pageTitle = { text: "" };
+            $scope.$root.pageTitle = { text: "" };
+            
+            $scope.showHelp = showHelp.value;
+            
+            
         // $scope.goHome               = function() { $location.path('/'); };
         // $scope.currentPath          = function() { return $location.path(); };.
 
@@ -132,6 +137,97 @@ define(['app','ng-breadcrumbs','angular-localizer','scbd-angularjs-services','sc
             // $rootScope.$on("$locationChangeSuccess", function() {
             //     $anchorScroll();
             // });
+        
+        
+        
+        
+        
+        $scope.feedbackHelp = function() {
+                if($scope.showHelp.show)
+                     showSimpleToast("Help is turned on.");
+                     
+                if(!$scope.showHelp.show)
+                     showSimpleToast("Help is turned off.");
+        };
+        
+        $scope.feedbackGlossary= function() {
+                if($scope.showHelp.glossary)
+                     showSimpleToast("Glossary is turned on.");
+                     
+                if(!$scope.showHelp.glossary)
+                     showSimpleToast("Glossary is turned off.");
+        };
+        
+            
+        //======================================================
+        //
+        //
+        //======================================================
+
+        $rootScope.$on("showCustomToast", function(evt, template) {
+           $mdToast.show({
+               controller: 'ToastCtrl',
+                templateUrl: '/app/views/toasts/' + template + '.html',
+                hideDelay: 3000,
+                position:'top right'
+            });
+
+        });
+        
+        $rootScope.$on("showSimpleToast", function(evt, msg) {
+           showSimpleToast(msg);
+  
+        });
+        
+        $rootScope.$on("showSimpleToastConfirm", function(evt, msg) {
+           showSimpleToastConfirm(msg);
+  
+        });
+
+        $rootScope.$on("showConfirmToast", function(evt, msg, broadcaster) {
+            $scope.showToastConfirmBroadcast(msg,broadcaster );
+        });
+        
+        function showSimpleToast(msg)
+        {
+            $mdToast.show(
+              $mdToast.simple()
+                .content(msg)
+                .position('top right')
+                .hideDelay(3000)
+            );
         }
-    ]);
+
+        function showSimpleToastConfirm(msg)
+        {
+            $mdToast.show(
+              $mdToast.simple()
+                .content(msg)
+                .action("ok")
+                .position('top right')
+                .hideDelay(3000)
+            );
+        }
+
+        $scope.showToastConfirm = function(msg, broadcaster)
+        {
+            var toast = $mdToast.simple()
+                  .content(msg)
+                  .action('ok')
+                  .highlightAction(false)
+                  .position('top right')
+                  .hideDelay(20000);
+
+            $mdToast.show(toast).then(function() {
+                $scope.$broadcast(broadcaster);
+            });
+
+        }
+        }
+    ])
+    .controller('ToastCtrl', function($scope, $mdToast) {
+        $scope.closeToast = function() {
+            $mdToast.hide();
+        };
+    });
 });

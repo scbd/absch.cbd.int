@@ -1,63 +1,255 @@
-<div id="submit" ng-controller="newSearchController">
 
-    <div class="container" style="margin-top:20px;margin-bottom:30px;">
-        <div class="row">
-            <div class="col-sm-12 box">
-                <h1><i class="fa fa-search"></i> Search the ABSCH</h1>
-                <h3 style="margin-bottom:30px;" class="color-litegrey">The ABSCH offers you multiple ways to find the information you are looking for.
-                For best results please select the search that best cooresponds to your specific needs.
-                    <br><br>
-                    <span class="color-medgrey">Please select a search below:</span></h3>
-            </div>
+<div ng-controller="FindController">
+    
+       <div class="container-fluid md-whiteframe-z1"style="margin-bottom:20px;">
+           <h1>
+         <div layout="row ">
+            <div style="padding-right:10px;"><i class="fa fa-search"></i></div>
+            <div style="width:100%;"><input ng-model="keyword" placeholder="What are you looking for?" style="width:100%;border:0;background-color:transparent;"></div>
+          </div></h1>
         </div>
+        
+        
+         <div preview-type="previewType" document-list documents='rawDocs' filter='*' show-pagination='true' current-page='currentPage' document-Count='documentCount' order-by="orderBy">
+         </div>
+
+    
+    <h3 class="container bg-blue " style="border-bottom:1px solid #888;padding-top:3px;padding-bottom:3px;margin:0 auto;">
+      National Records </h3>
+    <div class="container bg-white" style="padding-top:10px;border-bottom:1px solid #DDD;">
+        
+        <div class="row row-bottom-border"">
+                <div class="col-xs-3">
+                    <h5 style="padding-top:0;margin-top:0;"> Country Profiles</h5>
+                </div>
+                <div class="col-xs-6">
+                    <p style="font-size:12px;">
+                    Entities  designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)
+                    </p>
+                </div>
+                <div class="col-xs-3">
+                    <div class="status-badge">
+                        <span class="badge bg-published">{{getFacet('powpaDossier').public}}</span>
+                    </div>
+                </div>
+            </div>
+        
+         <div class="row row-bottom-border"">
+                <div class="col-xs-3">
+                    <h5 style="padding-top:0;margin-top:0;"> National ABS Focal Points  (FP)</h5>
+                </div>
+                <div class="col-xs-6">
+                    <p style="font-size:12px;">
+                    Entities  designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)
+                    </p>
+                </div>
+                <div class="col-xs-3">
+                    <div class="status-badge">
+                        <span class="badge bg-published">{{getFacet('powpaDossier').public}}</span>
+                    </div>
+                </div>
+            </div>
+        
+         <div class="row row-bottom-border"">
+                <div class="col-xs-3">
+                    <h5 style="padding-top:0;margin-top:0;"> Competent National Authorities (CNA)</h5>
+                </div>
+                <div class="col-xs-6">
+                    <p style="font-size:12px;">
+                    Entities  designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)
+                    </p>
+                </div>
+                <div class="col-xs-3">
+                    <div class="status-badge">
+                        <span class="badge bg-published">{{getFacet('powpaDossier').public}}</span>
+                    </div>
+                </div>
+            </div>
+     
+         <div class="row row-bottom-border"">
+                <div class="col-xs-3">
+                    <h5 style="padding-top:0;margin-top:0;"> Legislative, administrative or policy measures (MSR)</h5>
+                </div>
+                <div class="col-xs-6">
+                    <p style="font-size:12px;">
+                    Entities  designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)
+                    </p>
+                </div>
+                <div class="col-xs-3">
+                    <div class="status-badge">
+                        <span class="badge bg-published">{{getFacet('powpaDossier').public}}</span>
+                    </div>
+                </div>
+            </div>
+      
+         <div class="row row-bottom-border"">
+                <div class="col-xs-3">
+                    <h5 style="padding-top:0;margin-top:0;">  National Websites and Databases (NDB)</h5>
+                </div>
+                <div class="col-xs-6">
+                    <p style="font-size:12px;">
+                    Entities  designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)
+                    </p>
+                </div>
+                <div class="col-xs-3">
+                    <div class="status-badge">
+                        <span class="badge bg-published">{{getFacet('powpaDossier').public}}</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row row-bottom-border"">
+                <div class="col-xs-3">
+                    <h5 style="padding-top:0;margin-top:0;">   Internationally Recognized Certificate of Compliance (IRCC)</h5>
+                </div>
+                <div class="col-xs-6">
+                    <p style="font-size:12px;">
+                    Entities  designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)
+                    </p>
+                </div>
+                <div class="col-xs-3">
+                    <div class="status-badge">
+                        <span class="badge bg-published">{{getFacet('powpaDossier').public}}</span>
+                    </div>
+                </div>
+            </div>
+            
+             <div class="row row-bottom-border"">
+                <div class="col-xs-3">
+                    <h5 style="padding-top:0;margin-top:0;">    Checkpoints (CP)</h5>
+                </div>
+                <div class="col-xs-6">
+                    <p style="font-size:12px;">
+                    Entities  designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)
+                    </p>
+                </div>
+                <div class="col-xs-3">
+                    <div class="status-badge">
+                        <span class="badge bg-published">{{getFacet('powpaDossier').public}}</span>
+                    </div>
+                </div>
+            </div>
+            
+             <div class="row row-bottom-border"">
+                <div class="col-xs-3">
+                    <h5 style="padding-top:0;margin-top:0;">   Checkpoint Communiqués  (CPC)</h5>
+                </div>
+                <div class="col-xs-6">
+                    <p style="font-size:12px;">
+                    Entities  designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)
+                    </p>
+                </div>
+                <div class="col-xs-3">
+                    <div class="status-badge">
+                        <span class="badge bg-published">{{getFacet('powpaDossier').public}}</span>
+                    </div>
+                </div>
+            </div>
+        
     </div>
-
-    <h3 class="container-fluid color-medgrey" style="border-top:1px solid #DDD;padding-top:0;margin-top:3px;"><i class="fa fa-chevron-circle-down"></i> Searches  </h3>
-
-
-    <div class="container" >
-        <div class="row">
-
-
-            <div class="col-md-4">
-                <div class="box  md-whiteframe-z1 bg-white">
-                    <h4 style="padding-top:0;margin-top:0;" ><i class="fa fa-search"></i> General Search</h3>
-                    <p>This search will provide you the most general way to search through all information contained in the ABSCH.</p>
-                    <a class="btn btn-primary" href="/search" role="button bg-white"> Select »</a>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="box  md-whiteframe-z1 bg-white">
-                    <h4 style="padding-top:0;margin-top:0;" ><i class="fa fa-search"></i> Measures Matrix</h3>
-                    <p>
-                        The following provides an overview of instruments, guidelines, codes of conducts, policies and other tools developed for different types of users of genetic resources to assist with the implementation of the access and benefit-sharing provisions of the Convention by responding to the particular needs of their constituents.
+    
+    
+    
+    <h3 class="container bg-orange " style="border-bottom:1px solid #888;padding-top:3px;padding-bottom:3px;margin:20px auto 0 auto;">
+      Reference Records </h3>
+    <div class="container bg-white" style="padding-top:10px;border-bottom:1px solid #DDD;">
+            <div class="row row-bottom-border"">
+                <div class="col-xs-3">
+                    <h5 style="padding-top:0;margin-top:0;"> Virtual Library Records</h5>
+                </div>
+                <div class="col-xs-6">
+                    <p style="font-size:12px;">
+                    Entities  designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)
                     </p>
-                    <p>
-                        <div class="km-control-group" name="government" caption="Country">
-                          <div afc-autocomplete name="government" ng-model="matrix.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder=""></div>
-                        </div>
-                    </p>
-                    <a class="btn btn-primary " ng-disabled="!matrix.government" href="/search/new/measurematrix/countries/{{matrix.government|lstring}}" role="button bg-white"> Consolidated »</a>
-                    <a class="btn btn-primary " href="/search/new/measurematrix/{{matrix.government|lstring}}" role="button bg-white"> By Measures »</a>
-              </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="status-badge">
+                        <span class="badge bg-published">{{getFacet('powpaDossier').public}}</span>
+                    </div>
+                </div>
             </div>
-
-            <div class="col-md-4">
-                <div class="box disabled md-whiteframe-z1 bg-white">
-                    <h4 style="padding-top:0;margin-top:0;"><i class="fa fa-search"></i> Search by Country</h4>
-                    <p>
-                         A list of all National ABS Records by country
+        
+         <div class="row row-bottom-border"">
+                <div class="col-xs-3">
+                    <h5 style="padding-top:0;margin-top:0;"> Notifications</h5>
+                </div>
+                <div class="col-xs-6">
+                    <p style="font-size:12px;">
+                    Entities  designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)
                     </p>
-                    <a class="btn btn-primary " href="/search/new/byCountry" role="button bg-white"> Select »</a>
-              </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="status-badge">
+                        <span class="badge bg-published">{{getFacet('powpaDossier').public}}</span>
+                    </div>
+                </div>
             </div>
-
-
-            <div class="clearfix"></div>
-
-        </div>
+     
+         <div class="row row-bottom-border"">
+                <div class="col-xs-3">
+                    <h5 style="padding-top:0;margin-top:0;">Meetings</h5>
+                </div>
+                <div class="col-xs-6">
+                    <p style="font-size:12px;">
+                    Entities  designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)
+                    </p>
+                </div>
+                <div class="col-xs-3">
+                    <div class="status-badge">
+                        <span class="badge bg-published">{{getFacet('powpaDossier').public}}</span>
+                    </div>
+                </div>
+            </div>
+      
+         <div class="row row-bottom-border"">
+                <div class="col-xs-3">
+                    <h5 style="padding-top:0;margin-top:0;">  News</h5>
+                </div>
+                <div class="col-xs-6">
+                    <p style="font-size:12px;">
+                    Entities  designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)
+                    </p>
+                </div>
+                <div class="col-xs-3">
+                    <div class="status-badge">
+                        <span class="badge bg-published">{{getFacet('powpaDossier').public}}</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row row-bottom-border"">
+                <div class="col-xs-3">
+                    <h5 style="padding-top:0;margin-top:0;">   Statements</h5>
+                </div>
+                <div class="col-xs-6">
+                    <p style="font-size:12px;">
+                    Entities  designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)
+                    </p>
+                </div>
+                <div class="col-xs-3">
+                    <div class="status-badge">
+                        <span class="badge bg-published">{{getFacet('powpaDossier').public}}</span>
+                    </div>
+                </div>
+            </div>
+            
+             <div class="row row-bottom-border"">
+                <div class="col-xs-3">
+                    <h5 style="padding-top:0;margin-top:0;">    Press Releases</h5>
+                </div>
+                <div class="col-xs-6">
+                    <p style="font-size:12px;">
+                    Entities  designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)
+                    </p>
+                </div>
+                <div class="col-xs-3">
+                    <div class="status-badge">
+                        <span class="badge bg-published">{{getFacet('powpaDossier').public}}</span>
+                    </div>
+                </div>
+            </div>
+           
+        
     </div>
-
 
 </div>
