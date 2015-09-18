@@ -5,10 +5,10 @@
   outline: none!important;
 }
 
-a:link{color: #000;}
-a:visited{color: #000;}
+a:link{color: #428bca;}
+a:visited{color: #428bca;}
 a:hover{color: #000;}
-a:active{color: #000;}
+a:active{color: #428bca;}
 
 
 [ng\:cloak],

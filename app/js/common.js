@@ -234,6 +234,17 @@ define(['app', 'underscore'], function(app, underscore) {
                     entity.treaties.XXVII8b.instrument == "accession" ||
                     entity.treaties.XXVII8b.instrument == "acceptance" || entity.treaties.XXVII8b.instrument == "approval");
             }
+            
+            
+             function showHelp(entity) {
+
+				if(entity && entity.isCBDParty!= undefined)
+					return entity.isCBDParty;
+
+                return entity && entity.treaties.XXVII8.party != null;
+            }
+
+
         }
     }]);
 });

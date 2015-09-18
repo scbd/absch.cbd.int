@@ -333,12 +333,12 @@ define(["app",'/app/js/common.js'], function (app) {
         	if(schema.toLowerCase()=="meeting"					) return "MT";
         	if(schema.toLowerCase()=="pressrelease"				) return "PR";
             if(schema.toLowerCase()=="meetingdocument"    		) return "MTD";
-			if(schema.toLowerCase()=="news"						) return "NWS";
+			if(schema.toLowerCase()=="news"						) return "NEWS";
 			if(schema.toLowerCase()=="absnationalreport"		) return "NR";
 			if(schema.toLowerCase()=="modelcontractualclause"	) return "A19-20";
 			if(schema.toLowerCase()=="communityprotocol"		) return "CPP";
 
-			if(schema.toUpperCase()=="NWS"				        ) return "news";
+			if(schema.toUpperCase()=="NEWS"				        ) return "news";
             if(schema.toUpperCase()=="FP"				        ) return "focalPoint";
 			if(schema.toUpperCase()=="CNA"				    	) return "authority";
 			if(schema.toUpperCase()=="CON"				    	) return "contact";
