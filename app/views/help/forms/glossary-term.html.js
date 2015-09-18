@@ -1,4 +1,5 @@
-define(['angular', 'app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate', 'angular-message', '/app/js/common.js'],
+define(['angular', 'app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate', 'angular-message',
+        '/app/js/common.js', 'scbd-angularjs-services', 'scbd-angularjs-filters', 'scbd-angularjs-controls',],
   function (angular, app, _) {
 
     app.controller("glossaryTermController",
@@ -28,12 +29,18 @@ define(['angular', 'app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate
             return commonjs.isAbsAdministrator();
           }
           $scope.loadGlossarys = function () {
-
-            $q.when($http.get(url))
+            var params = {};
+            
+            if($routeParams.tag){
+              //alteredUrl += '?q' 
+              params = {q : {tags: $routeParams.tag}}
+            }
+            
+            $q.when($http.get(url, {params:params}))
               .then(function (response) {
                 $scope.glossarys = response.data;
-                if (!$routeParams.term && $scope.schemas.length > 0) {
-                  $scope.document = $scope.schemas[0];
+                if (!$routeParams.term && $scope.glossarys.length > 0) {
+                  $scope.document = $scope.glossarys[0];
                   updateBreadcrumbs();
                 }
               });
@@ -57,7 +64,10 @@ define(['angular', 'app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate
             else {
               operation = $http.put(url + '/' + $scope.document._id, $scope.document)
             }
-
+            
+            // if(!$scope.document.description.en)
+            //   $scope.document.description = {en: $scope.document.description}  
+            
             $q.when(operation)
               .then(function (response) {
                 orignal = angular.copy($scope.document);
@@ -111,6 +121,7 @@ define(['angular', 'app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate
               $scope.document.tags = [];
             if (!$scope.document.referenceTerm)
               $scope.document.referenceTerm = [];
+           
           }
 
           $scope.cancel = function () {
@@ -169,9 +180,8 @@ define(['angular', 'app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate
               $scope.mode = 'read';
               $scope.loadGlossary($routeParams.term);
             }
-
-            $scope.loadGlossarys();
           }
+          $scope.loadGlossarys();
 
 
 

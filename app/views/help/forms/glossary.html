@@ -1,5 +1,5 @@
 <section layout="row" style="position:relative; top:20px; padding-bottom:30px;" flex ng-controller="glossaryController" style="max-width:90%">
-    
+
     <md-sidenav class="md-sidenav-left md-whiteframe-z1" md-component-id="left" md-is-locked-open="$mdMedia('min-width: 1200px')"
     style="height:818px;">
 
@@ -9,9 +9,11 @@
         </md-toolbar>
 
         <md-content layout-padding layout-margin>
-
             <md-list>
-                <md-list-item ng-repeat="term in glossarys">
+                <md-list-item>                        
+                    <input type="text" ng-model="search" placeholder="search" class="form-control">
+                </md-list-item>
+                <md-list-item ng-repeat="term in glossarys|filter:search">
                     <a href="/help/glossary/{{term._id}}">
                         {{term.title}}
                     </a>
@@ -42,21 +44,21 @@
 
 
                     <div>
-                        <div style="padding-top:5px;font-size:20px;">
+                        <!--<div style="padding-top:5px;font-size:20px;">
                             <span ng-repeat="letter in alphabet">
-                        <a ng-href="#" ng-click="setCountryFilter(letter)" class="letter" ng-class="{'letter-active':countryFilter == letter}">{{letter}}</a>
-                    </span>
-                        </div>
+                                <a ng-href="#" ng-click="setCountryFilter(letter)" class="letter" ng-class="{'letter-active':countryFilter == letter}">{{letter}}</a>
+                            </span>
+                        </div>-->
 
                         <table class="table table-hover">
                             <tr ng-repeat="term in glossarys" id="{{replaceSpace(term.title)}}">
-                                <td>
+                                <td width="25%">
                                     <a href="/help/glossary/{{term._id}}">
-                                {{term.title}}
-                            </a>
+                                        {{term.title}}
+                                    </a>
                                 </td>
                                 <td>
-                                    <span ng-bind-html="term.description|highlight"></span>
+                                    <span ng-bind-html="term.description"></span>
                                 </td>
                             </tr>
                         </table>
