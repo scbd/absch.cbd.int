@@ -390,6 +390,14 @@ define(['app','underscore','/app/js/common.js',
         $scope.removeThematicAreaFilter = function(filter){
             $scope.thematicAreaApi.unSelectItem(filter.identifier);
         }
+        
+        if($routeParams.documentSchema){
+            if($routeParams.documentSchema.toLowerCase()=='rat')
+                $scope.queryStatus('party');
+            else if (_.contains(['vlr', 'cpp', 'a19-20'],$routeParams.documentSchema.toLowerCase()))
+                $scope.previewType='list'
+         }
+
     }]);
 
 });

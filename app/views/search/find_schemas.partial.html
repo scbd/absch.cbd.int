@@ -203,7 +203,7 @@ label{width:100%;}
             <label name="lblCommunityProtocol">
                 <span class="badge badge-white pull-right">{{communityProtocol.count}}</span>
                 <input type="checkbox" ng-model="communityProtocol.selected" bind-indeterminate="communityProtocol.indeterminate" ng-change="refresh(communityProtocol.selected,'communityProtocol')">
-                <span class="filter-text">Community protocols procedures and customary laws </span>
+                <span class="filter-text">Community protocols procedures and customary laws</span>
             </label>
             <div ng-show="communityProtocol.selected" class="subfilters-section">
                 <div km-select multiple api="cppresourceTypesApi" name="cppresourceTypes" binding-type="string" ng-model="cppresourceTypes" items="options.cppResourceTypes()" placeholder="Type of resource"></div>
