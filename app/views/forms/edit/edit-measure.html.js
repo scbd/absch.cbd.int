@@ -222,6 +222,8 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js'], functi
       "24E809DA-20F4-4457-9A8A-87C08DF81E8A","E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63","NEED-NEW-GUID","08B2CDEC-786F-4977-AD0A-6A709695528D","01DA2D8E-F2BB-4E85-A17E-AB0219194A17"
     ]
     
+   
+    
     function Measure() {
       return [
         {
@@ -1052,8 +1054,16 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js'], functi
       controller: ["$scope", "$q", "Thesaurus", "Enumerable",'$element', function ($scope, $q, thesaurus, Enumerable, $element) {
         
         var readOnlyElements = [
-          "24E809DA-20F4-4457-9A8A-87C08DF81E8A","4E2974DF-216E-46C8-8797-8E3A33D6A048","A862ABFC-B97D-4E6A-9A70-812A82A7CC19","E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63","NEED-NEW-GUID","08B2CDEC-786F-4977-AD0A-6A709695528D","01DA2D8E-F2BB-4E85-A17E-AB0219194A17"
+          "24E809DA-20F4-4457-9A8A-87C08DF81E8A","A862ABFC-B97D-4E6A-9A70-812A82A7CC19","4E2974DF-216E-46C8-8797-8E3A33D6A048","E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63","NEED-NEW-GUID","08B2CDEC-786F-4977-AD0A-6A709695528D","01DA2D8E-F2BB-4E85-A17E-AB0219194A17"
         ];
+        
+        var mainElements = [
+          "24E809DA-20F4-4457-9A8A-87C08DF81E8A","E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63","NEED-NEW-GUID","08B2CDEC-786F-4977-AD0A-6A709695528D","01DA2D8E-F2BB-4E85-A17E-AB0219194A17","1D2710D3-75C8-475D-8634-F912F06DAF25", "7CB2A03A-F0CF-4458-BB3B-A60DEC1F942E", "ECE508D3-26C6-42E6-A8B8-162606E5BA04", "ECBDB95A-B389-4DB4-AD9B-DA3590DF7781","5B6177DD-5E5E-434E-8CB7-D63D67D5EBED" 
+        ];
+        var secondaryElements = [
+          "4E2974DF-216E-46C8-8797-8E3A33D6A048","A862ABFC-B97D-4E6A-9A70-812A82A7CC19","1E824A31-BDFB-4C47-9593-8006B5FC7D60","B8A150E054154AD3AD97856ABD485E90","A896179F-833E-4F76-B3F4-81CC95C66592","NEED-NEW-GUID-COMPLIANCE-2","4C57FDB4-3B92-46DD-B4C2-BB93D3B2167C","1FCC6CA9-022F-42FD-BD02-43AE674FEB56","A71B36E8-D2CE-4254-A628-6DBFB902394C","5427EB8F-5532-4AE2-88EE-5B9619917480","5B6177DD-5E5E-434E-8CB7-D63D67D5EBED"
+        ];
+        
         $scope.api = {
           updateTerms : updateTerms
         }
@@ -1195,6 +1205,14 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js'], functi
         $scope.isReadOnly = function(identifier){
           return _.indexOf(readOnlyElements, identifier)>=0;
         }
+        
+         $scope.isMainElement = function(identifier){
+          return _.indexOf(mainElements, identifier)>=0;
+        }
+          $scope.isSecondaryElement = function(identifier){
+          return _.indexOf(secondaryElements, identifier)>=0;
+        }
+        
         $scope.showHideNode = function(elementId){
             $element.find('#'+elementId).toggle();
         };
