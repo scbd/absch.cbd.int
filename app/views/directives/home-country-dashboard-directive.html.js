@@ -8,7 +8,8 @@ define(['app'], function (app) {
 				//$element.find("[data-toggle='tooltip']").tooltip({trigger:'hover'});
 			},
 			controller: ['$scope', '$filter','schemaTypes', 'realm', '$q', 'underscore', function($scope, $filter, schemaTypes, realm, $q, _){
-
+                var referenceRecordSchemas = ['resource','modelContractualClause', 'communityProtocol'];
+                
 				$scope.wellChanged = function(facet){
 					$scope.currentFacet = facet;
 				}
@@ -57,12 +58,12 @@ define(['app'], function (app) {
                     }
 
 					var queryFacetsVLRParameters = {
-                        'q': '(realm_ss:' + realm.value.toLowerCase() + ' or realm_ss:absch) AND NOT version_s:* AND (schema_s:resource)',
+                        'q': '(realm_ss:' + realm.value.toLowerCase() + ') AND NOT version_s:* AND schema_s:(resource modelContractualClause communityProtocol)',
                         'fl': '', 		//fields for results.
                         'wt': 'json',
                         'rows': 0,		//limit
                         'facet': true,	//get counts back
-						'facet.query': '(realm_ss:' + realm.value.toLowerCase() + ' or realm_ss:absch) AND NOT version_s:* AND (schema_s:resource)',
+						'facet.query': '(realm_ss:' + realm.value.toLowerCase() + ') AND NOT version_s:* AND (schema_s:(resource modelContractualClause communityProtocol))',
                         'facet.field': ['schema_s'],
                         'facet.limit': 512
                     };
@@ -99,9 +100,9 @@ define(['app'], function (app) {
 						var resourceFacets = results[1].data.facet_counts.facet_fields.schema_s;
 						for (var i = 0; i < resourceFacets.length; i += 2) {
 		                    var facet = resourceFacets[i];
-							if(facet == 'resource')
-		                    	tempFacets['resource'] = {"facetCount" : resourceFacets[i + 1],
-								"id" : getSequence('resource')};
+							if(_.contains(referenceRecordSchemas,facet))
+		                    	tempFacets[facet] = {"facetCount" : resourceFacets[i + 1],
+								"id" : getSequence(facet)};
 		                }
 
 						var ratificationCount=0;
@@ -132,7 +133,10 @@ define(['app'], function (app) {
 
 
     			}
-
+                $scope.isReferenceRecord = function(schema){
+                    return _.contains(referenceRecordSchemas,schema)                    
+                }
+                
 				function getSequence(format){
 					switch(format.toLowerCase()){
 
@@ -154,6 +158,10 @@ define(['app'], function (app) {
 							return 8;
 						case  'resource':
 							return 9;
+						case  'modelContractualClause':
+							return 10;
+						case  'communityProtocol':
+							return 11;
 					}
 				}
                 //$scope.loadFacets();

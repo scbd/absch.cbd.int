@@ -127,8 +127,8 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                                 });
                                                                 addJoyRideSteps();
                                                                 
-                                                                if(help.repalceGlossaryTerms)
-                                                                        repalceGlossaryTerms();
+                                                                // if(help.repalceGlossaryTerms)
+                                                                //         repalceGlossaryTerms();
                                                         }
                                                         // },1000)
 
@@ -225,15 +225,18 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                         .contents()
                                                         .filter(function () {
                                                                 return this.nodeType === 3 &&
-                                                                        !$(this).parent("a").length;
+                                                                        !$(this).parent("a").length
+                                                                        && this.textContent.trim() != '↵';
                                                         });
 
                                                 // Iterate through the text nodes, replacing the content
                                                 // with the link:
                                                 $textNodes.each(function (index, element) {
                                                         var contents = $(element).text();
-                                                        contents = contents.replace(new RegExp(target, "gi"), replacement);
-                                                        $(element).replaceWith(contents);
+                                                        if(contents.indexOf(target)>=0){
+                                                                contents = contents.replace(new RegExp(target, "gi"), replacement);
+                                                                $(element).replaceWith(contents);
+                                                        }
                                                 });
                                         };
 
