@@ -7,12 +7,11 @@
             <div class="col-xs-8ths" id="myWell"  >
                 <div class="box-0 text-center" style="padding-bottom:14px;">
 
-                    <div ng-show="facet[0]== 'RAT'">
+                    <div ng-if="facet[0]== 'RAT'">
                         <div class="stats-count">{{facet[1].facetCount}} </div>
                         <div class="stats-country">Parties to the Nagoya Protocol</div>
-                    </div>
-
-                    <div ng-show="facet[0] != 'RAT' && facet[0] != 'resource'">
+                    </div>               {{isRefenceRecord(facet[0])}}     
+                    <div ng-if="facet[0] != 'RAT' && !isReferenceRecord(facet[0])">
 
                         <div class="stats-top">
                             <div class="stats-count" >
@@ -39,7 +38,7 @@
                     </div>
 
 
-                    <div ng-show="facet[0]== 'resource'">
+                    <div ng-if="isReferenceRecord(facet[0])">
                         <div class="stats-count">{{facet[1].facetCount}} </div>
                         <div class="stats-country">{{facet[0]|lowercase|schemaNamePlural}}</div>
                     </div>

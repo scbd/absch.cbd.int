@@ -7,10 +7,7 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                         // templateUrl: '/app/views/directives/help-directive.html',
                         scope: {
                                 schema: '@'
-                        },
-                        link: ['$scope', '$q', '$element', function ($scope, $q, $element) {
-
-                        }]
+                        }
                         , controller: ['$scope', '$q', '$element', '$timeout', '$compile', '$http', '$filter',
                                 function ($scope, $q, $element, $timeout, $compile, $http, $filter) {
 
@@ -191,15 +188,18 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                         .contents()
                                                         .filter(function () {
                                                                 return this.nodeType === 3 &&
-                                                                        !$(this).parent("a").length;
+                                                                        !$(this).parent("a").length
+                                                                        && this.textContent.trim() != '↵';
                                                         });
 
                                                 // Iterate through the text nodes, replacing the content
                                                 // with the link:
                                                 $textNodes.each(function (index, element) {
                                                         var contents = $(element).text();
-                                                        contents = contents.replace(new RegExp(target, "gi"), replacement);
-                                                        $(element).replaceWith(contents);
+                                                        if(contents.indexOf(target)>=0){
+                                                                contents = contents.replace(new RegExp(target, "gi"), replacement);
+                                                                $(element).replaceWith(contents);
+                                                        }
                                                 });
                                         };
 
