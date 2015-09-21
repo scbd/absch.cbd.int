@@ -46,8 +46,8 @@
                                     &nbsp;&nbsp;&nbsp;
 
                                     <div class="btn-group" role="group">
-                                      <button id="btnList" type="button" class="btn btn-default"  ng-class="{'bg-liteblue':showList }"   ng-click="showList = true;">List</button>
-                                      <button id="btnMap" type="button" class="btn btn-default"  ng-class="{'bg-liteblue': !showList }" ng-click="showList = false;">Map</button>
+                                      <button id="btnList" type="button" class="btn btn-default"  ng-class="{'bg-liteblue':!showList }"   ng-click="showList = false;">List</button>
+                                      <button id="btnMap" type="button" class="btn btn-default"  ng-class="{'bg-liteblue': showList }" ng-click="showList = true;">Map</button>
                                     </div>
 
                                     <button id="clearFilter" type="button"  ng-click="clear();updateMap('all');sortTable('name.en', 'ASC')" class="btn btn-default pull-right">
@@ -137,11 +137,11 @@
                                              </md-button>
                                 </th>
                             </tr> -->
-                            <tr ng-show="!showList" >
+                            <tr ng-show="showList" >
                                 <td colspan="10" style="background-color:#EEE;padding-top:80px;"><div id="vmap" style="width: 100%; min-height: 500px;background-color:#EEE!important;"></div></td>
                             </tr>
 
-                            <tr ng-show="showList">
+                            <tr ng-show="!showList">
                                 <th></th>
                                 <th>
                                     <span class="color-litegrey" >Country
@@ -154,7 +154,7 @@
                                 <th colspan="7"><span class="color-litegrey">National Records</span></th>
                             </tr>
 
-                            <tr ng-show="showList">
+                            <tr ng-show="!showList">
                                <th  style="white-space:nowrap;font-size:14px;"><span style="font-size:14px;font-weight:bold;text-transform:uppercase;" class="color-black">SORT</span></th>
                                 <th style="white-space:nowrap;font-size:16px;">
                                     <a href="" class="label label-default  bg-darkgrey1" ng-click="sortTable('name.en', 'ASC')">
@@ -231,7 +231,7 @@
                             </tr>
 
 
-                            <tr ng-show="showList" ng-repeat="country in (countries | filter:countryFilter | filter: searchFilter | orderBy:sortTermFilter:orderList) " ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
+                            <tr ng-show="!showList" ng-repeat="country in (countries | filter:countryFilter | filter: searchFilter | orderBy:sortTermFilter:orderList) " ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
 
                                <td class="text-right">{{$index + 1}}</td>
                                 <td><a ng-href="#" ng-click="navigateCountry('',country.code,'')" class="country-list-name"
