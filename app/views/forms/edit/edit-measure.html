@@ -286,9 +286,9 @@
                 <table style="width:100%" cellspacing="0" cellpadding="0">
                 <tr ng:class="{paddingleft0 : isMainElement(term.identifier), 'measureChecked' : identifiers[term.identifier]}" >
                   <td style="text-align:left;vertical-align:middle" id="{{term.identifier}}_help" style="" >
-                  &nbsp;
+                  
                     <label for="{{term.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED' ? 'otherAbsMeasure' : term.identifier}}" name="{{term.identifier}}" >
-                         
+                         &nbsp;
                          <input type="checkbox" ng-model="identifiers[term.identifier]" ng-required="IsRequired()" value="{{term.identifier}}"
                          ng:if="!isReadOnly(term.identifier)" />
                          

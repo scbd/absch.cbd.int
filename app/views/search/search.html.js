@@ -1,5 +1,5 @@
 define(['app', 'underscore',
-    'scbd-angularjs-services', 'scbd-angularjs-filters', 'scbd-angularjs-controls'
+    'scbd-angularjs-services', 'scbd-angularjs-filters', 'scbd-angularjs-controls', 
 ], function(app, _) {
 
     app.controller('newSearchController', ['$scope', '$http', '$filter',
@@ -20,7 +20,9 @@ define(['app', 'underscore',
                 },
             };
 
-
+            $scope.navigateTo = function(to, event) {
+                
+            };
             $scope.genericFilter = function($query, items) {
                 var matchedOptions = [];
                 for (var i = 0; i != items.length; ++i)

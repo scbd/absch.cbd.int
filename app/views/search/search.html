@@ -1,7 +1,7 @@
 
 <div ng-controller="FindController">
     
-       <div class="container-fluid md-whiteframe-z1"style="margin-bottom:20px;">
+       <!--<div class="container-fluid md-whiteframe-z1"style="margin-bottom:20px;">
            <h1>
          <div layout="row ">
             <div style="padding-right:10px;"><i class="fa fa-search"></i></div>
@@ -11,245 +11,203 @@
         
         
          <div preview-type="previewType" document-list documents='rawDocs' filter='*' show-pagination='true' current-page='currentPage' document-Count='documentCount' order-by="orderBy">
-         </div>
+         </div>-->
+         
+    <style>
+        .listdemoListControls md-divider {
+        margin-top: 10px;
+        margin-bottom: 10px; }
+        .listdemoListControls md-list-item > p, .listdemoListControls md-list-item > .md-list-item-inner > p, .listdemoListControls md-list-item .md-list-item-inner > p, .listdemoListControls md-list-item .md-list-item-inner > .md-list-item-inner > p {
+        -webkit-user-select: none;
+        /* Chrome all / Safari all */
+        -moz-user-select: none;
+        /* Firefox all */
+        -ms-user-select: none;
+        /* IE 10+ */
+        user-select: none;
+        /* Likely future */ }
+  </style>
 
-    
-    <h3 class="container bg-blue " style="border-bottom:1px solid #888;padding-top:3px;padding-bottom:3px;margin:0 auto;">
-      National Records </h3>
-    <div class="container bg-white" style="padding-top:10px;border-bottom:1px solid #DDD;">
-        
-        <div class="row row-bottom-border"">
-                <div class="col-xs-3">
-                    <h5 style="padding-top:0;margin-top:0;"> Country Profiles</h5>
-                </div>
-                <div class="col-xs-6">
-                    <p style="font-size:12px;">
-                    Entities  designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)
-                    </p>
-                </div>
-                <div class="col-xs-3">
-                    <div class="status-badge">
-                        <span class="badge bg-published">{{getFacet('powpaDossier').public}}</span>
-                    </div>
-                </div>
-            </div>
-        
-         <div class="row row-bottom-border"">
-                <div class="col-xs-3">
-                    <h5 style="padding-top:0;margin-top:0;"> National ABS Focal Points  (FP)</h5>
-                </div>
-                <div class="col-xs-6">
-                    <p style="font-size:12px;">
-                    Entities  designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)
-                    </p>
-                </div>
-                <div class="col-xs-3">
-                    <div class="status-badge">
-                        <span class="badge bg-published">{{getFacet('powpaDossier').public}}</span>
-                    </div>
-                </div>
-            </div>
-        
-         <div class="row row-bottom-border"">
-                <div class="col-xs-3">
-                    <h5 style="padding-top:0;margin-top:0;"> Competent National Authorities (CNA)</h5>
-                </div>
-                <div class="col-xs-6">
-                    <p style="font-size:12px;">
-                    Entities  designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)
-                    </p>
-                </div>
-                <div class="col-xs-3">
-                    <div class="status-badge">
-                        <span class="badge bg-published">{{getFacet('powpaDossier').public}}</span>
-                    </div>
-                </div>
-            </div>
-     
-         <div class="row row-bottom-border"">
-                <div class="col-xs-3">
-                    <h5 style="padding-top:0;margin-top:0;"> Legislative, administrative or policy measures (MSR)</h5>
-                </div>
-                <div class="col-xs-6">
-                    <p style="font-size:12px;">
-                    Entities  designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)
-                    </p>
-                </div>
-                <div class="col-xs-3">
-                    <div class="status-badge">
-                        <span class="badge bg-published">{{getFacet('powpaDossier').public}}</span>
-                    </div>
-                </div>
-            </div>
-      
-         <div class="row row-bottom-border"">
-                <div class="col-xs-3">
-                    <h5 style="padding-top:0;margin-top:0;">  National Websites and Databases (NDB)</h5>
-                </div>
-                <div class="col-xs-6">
-                    <p style="font-size:12px;">
-                    Entities  designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)
-                    </p>
-                </div>
-                <div class="col-xs-3">
-                    <div class="status-badge">
-                        <span class="badge bg-published">{{getFacet('powpaDossier').public}}</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row row-bottom-border"">
-                <div class="col-xs-3">
-                    <h5 style="padding-top:0;margin-top:0;">   Internationally Recognized Certificate of Compliance (IRCC)</h5>
-                </div>
-                <div class="col-xs-6">
-                    <p style="font-size:12px;">
-                    Entities  designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)
-                    </p>
-                </div>
-                <div class="col-xs-3">
-                    <div class="status-badge">
-                        <span class="badge bg-published">{{getFacet('powpaDossier').public}}</span>
-                    </div>
-                </div>
-            </div>
-            
-             <div class="row row-bottom-border"">
-                <div class="col-xs-3">
-                    <h5 style="padding-top:0;margin-top:0;">    Checkpoints (CP)</h5>
-                </div>
-                <div class="col-xs-6">
-                    <p style="font-size:12px;">
-                    Entities  designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)
-                    </p>
-                </div>
-                <div class="col-xs-3">
-                    <div class="status-badge">
-                        <span class="badge bg-published">{{getFacet('powpaDossier').public}}</span>
-                    </div>
-                </div>
-            </div>
-            
-             <div class="row row-bottom-border"">
-                <div class="col-xs-3">
-                    <h5 style="padding-top:0;margin-top:0;">   Checkpoint Communiqués  (CPC)</h5>
-                </div>
-                <div class="col-xs-6">
-                    <p style="font-size:12px;">
-                    Entities  designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)
-                    </p>
-                </div>
-                <div class="col-xs-3">
-                    <div class="status-badge">
-                        <span class="badge bg-published">{{getFacet('powpaDossier').public}}</span>
-                    </div>
-                </div>
-            </div>
-        
-    </div>
-    
-    
-    
-    <h3 class="container bg-orange " style="border-bottom:1px solid #888;padding-top:3px;padding-bottom:3px;margin:20px auto 0 auto;">
-      Reference Records </h3>
-    <div class="container bg-white" style="padding-top:10px;border-bottom:1px solid #DDD;">
-            <div class="row row-bottom-border"">
-                <div class="col-xs-3">
-                    <h5 style="padding-top:0;margin-top:0;"> Virtual Library Records</h5>
-                </div>
-                <div class="col-xs-6">
-                    <p style="font-size:12px;">
-                    Entities  designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)
-                    </p>
-                </div>
-                <div class="col-xs-3">
-                    <div class="status-badge">
-                        <span class="badge bg-published">{{getFacet('powpaDossier').public}}</span>
-                    </div>
-                </div>
-            </div>
-        
-         <div class="row row-bottom-border"">
-                <div class="col-xs-3">
-                    <h5 style="padding-top:0;margin-top:0;"> Notifications</h5>
-                </div>
-                <div class="col-xs-6">
-                    <p style="font-size:12px;">
-                    Entities  designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)
-                    </p>
-                </div>
-                <div class="col-xs-3">
-                    <div class="status-badge">
-                        <span class="badge bg-published">{{getFacet('powpaDossier').public}}</span>
-                    </div>
-                </div>
-            </div>
-     
-         <div class="row row-bottom-border"">
-                <div class="col-xs-3">
-                    <h5 style="padding-top:0;margin-top:0;">Meetings</h5>
-                </div>
-                <div class="col-xs-6">
-                    <p style="font-size:12px;">
-                    Entities  designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)
-                    </p>
-                </div>
-                <div class="col-xs-3">
-                    <div class="status-badge">
-                        <span class="badge bg-published">{{getFacet('powpaDossier').public}}</span>
-                    </div>
-                </div>
-            </div>
-      
-         <div class="row row-bottom-border"">
-                <div class="col-xs-3">
-                    <h5 style="padding-top:0;margin-top:0;">  News</h5>
-                </div>
-                <div class="col-xs-6">
-                    <p style="font-size:12px;">
-                    Entities  designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)
-                    </p>
-                </div>
-                <div class="col-xs-3">
-                    <div class="status-badge">
-                        <span class="badge bg-published">{{getFacet('powpaDossier').public}}</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row row-bottom-border"">
-                <div class="col-xs-3">
-                    <h5 style="padding-top:0;margin-top:0;">   Statements</h5>
-                </div>
-                <div class="col-xs-6">
-                    <p style="font-size:12px;">
-                    Entities  designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)
-                    </p>
-                </div>
-                <div class="col-xs-3">
-                    <div class="status-badge">
-                        <span class="badge bg-published">{{getFacet('powpaDossier').public}}</span>
-                    </div>
-                </div>
-            </div>
-            
-             <div class="row row-bottom-border"">
-                <div class="col-xs-3">
-                    <h5 style="padding-top:0;margin-top:0;">    Press Releases</h5>
-                </div>
-                <div class="col-xs-6">
-                    <p style="font-size:12px;">
-                    Entities  designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)
-                    </p>
-                </div>
-                <div class="col-xs-3">
-                    <div class="status-badge">
-                        <span class="badge bg-published">{{getFacet('powpaDossier').public}}</span>
-                    </div>
-                </div>
-            </div>
-           
-        
+         
+    <div class="container-fluid" style="margin-bottom:30px;">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>Finding Information</h1>
+            The search function allows searches among all information (records) published in the ABS-CH. Select the category of information of your interest from the left hand side menu. Use one or more filters to refine the searches. Depending on the view option at the top right of the page, records can be displayed grouped by country or listed by date of publication.
+            <br><br>
+            <strong>Select a type of information from a category below:</strong>
+        </div>
+       </div>     
     </div>
 
+
+   <div class="container-fluid" style="margin-bottom:240px;margin-top:24px"> 
+        <div class="row">
+              <div class="col-lg-4">
+                  <div class="md-whiteframe-z1">
+                    <md-toolbar class="bg-grey3">
+                        <h2 class="md-toolbar-tools">
+                        <span>Country Information</span>
+                        </h2>
+                    </md-toolbar>
+                    <md-content>
+                        <md-list>
+                        <md-list-item class="md-3-line" >
+                            <div class="md-list-item-text">
+                            <a href="#"><h3>Country profiles</h3></a>
+                            <p>National record grouped by country</p>
+                            </div>
+                        <md-list-item>
+                        </md-list>
+                    </md-content>
+               </div>
+                 <br>
+            </div>
+  
+            <div class="col-lg-4">
+                <div class="md-whiteframe-z1">
+                    <md-toolbar class="bg-blue">
+                        <h2 class="md-toolbar-tools">
+                        <span>National Records</span>
+                        </h2>
+                    </md-toolbar>
+                    <md-content>
+                        <md-list>
+                        <md-list-item class="md-2-line" >
+                            <div class="md-list-item-text" ng-click="navigateTo('/search/FP', $event)" style="cursor:pointer;">
+                                <h3>National ABS focal points  (FP)</h3>
+                                <p>National record grouped by country</p>
+                            </div>
+                            <md-divider></md-divider>
+                        </md-list-item>
+                        <md-list-item class="md-2-line" >
+                            <div class="md-list-item-text"  ng-click="navigateTo('/search/FP', $event)" style="cursor:pointer;">
+                            <h3>Competent national authorities (CNA)</h3>
+                            <p>Entities designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)</p>
+                            </div>
+                            <md-divider></md-divider>
+                        </md-list-item>
+                        <md-list-item class="md-2-line" >
+                            <div class="md-list-item-text"  ng-click="navigateTo('/search/FP', $event)" style="cursor:pointer;">
+                            <h3>Legislative, administrative or policy measures (MSR)</h3>
+                            <p>Measures adopted at domestic level to implement the access and benefit-sharing obligations of the Convention or/and the Nagoya Protocol.</p>
+                            </div>
+                            <md-divider></md-divider>
+                        </md-list-item>
+                        <md-list-item class="md-2-line" >
+                            <div class="md-list-item-text"  ng-click="navigateTo('/search/FP', $event)" style="cursor:pointer;">
+                            <h3>National Websites and Databases (NDB)</h3>
+                            <p>Measures adopted at domestic level to implement the access and benefit-sharing obligations of the Convention or/and the Nagoya Protocol.</p>
+                            </div>
+                            <md-divider></md-divider>
+                        </md-list-item>
+                        <md-list-item class="md-2-line" >
+                            <div class="md-list-item-text"  ng-click="navigateTo('/search/FP', $event)" style="cursor:pointer;">
+                            <h3>Internationally Recognized Certificate of Compliance (IRCC)</h3>
+                            <p>Measures adopted at domestic level to implement the access and benefit-sharing obligations of the Convention or/and the Nagoya Protocol.</p>
+                            </div>
+                            <md-divider></md-divider>
+                        </md-list-item>
+                        <md-list-item class="md-2-line" >
+                            <div class="md-list-item-text"  ng-click="navigateTo('/search/FP', $event)" style="cursor:pointer;">
+                            <h3>Checkpoints (CP)</h3>
+                            <p>Measures adopted at domestic level to implement the access and benefit-sharing obligations of the Convention or/and the Nagoya Protocol.</p>
+                            </div>
+                            <md-divider></md-divider>
+                        </md-list-item>
+                        <md-list-item class="md-2-line" >
+                            <div class="md-list-item-text"  ng-click="navigateTo('/search/FP', $event)" style="cursor:pointer;">
+                            <h3>Checkpoint Communiqués (CPC)</h3>
+                            <p>Measures adopted at domestic level to implement the access and benefit-sharing obligations of the Convention or/and the Nagoya Protocol.</p>
+                            </div>
+                        </md-list-item>
+                        </md-list>
+                    </md-content>
+                 </DIV>
+            <br>
+        </div>
+    
+        <div class="col-lg-4">
+            <div class="md-whiteframe-z1">
+                <md-toolbar class="bg-orange">
+                    <h2 class="md-toolbar-tools">
+                    <span>Reference Records</span>
+                    </h2>
+                </md-toolbar>
+                <md-content>
+                    <md-list>
+                   <md-list-item class="md-2-line" >
+                        <div class="md-list-item-text"  ng-click="navigateTo('/search/FP', $event)" style="cursor:pointer;">
+                        <h3>Virtual Library Records (VLR)</h3>
+                        <p>Measures adopted at domestic level to implement the access and benefit-sharing obligations of the Convention or/and the Nagoya Protocol.</p>
+                        </div>
+                        <md-divider></md-divider>
+                    </md-list-item>
+                    <md-list-item class="md-2-line" >
+                        <div class="md-list-item-text"  ng-click="navigateTo('/search/FP', $event)" style="cursor:pointer;">
+                        <h3>Article 19 & 20 tools (A19-20)</h3>
+                        <p>Measures adopted at domestic level to implement the access and benefit-sharing obligations of the Convention or/and the Nagoya Protocol.</p>
+                        </div>
+                        <md-divider></md-divider>
+                    </md-list-item>
+                    <md-list-item class="md-2-line" >
+                        <div class="md-list-item-text"  ng-click="navigateTo('/search/FP', $event)" style="cursor:pointer;">
+                        <h3>Community protocols procedures and customary laws (CPP)</h3>
+                        <p>Measures adopted at domestic level to implement the access and benefit-sharing obligations of the Convention or/and the Nagoya Protocol.</p>
+                        </div>
+                        <md-divider></md-divider>
+                    </md-list-item>
+                     <div style="padding:5px 5px 0 5px;color:#bbb;font-weight:bold;font-size:12px;">Related SCBD records</div>
+                     <md-list-item class="md-2-line" >
+                        <div class="md-list-item-text"  ng-click="navigateTo('/search/FP', $event)" style="cursor:pointer;">
+                        <h3>News</h3>
+                        <p>ABS related meetings</p>
+                        </div>
+                        <md-divider></md-divider>
+                    </md-list-item>
+                     <md-list-item class="md-2-line" >
+                        <div class="md-list-item-text"  ng-click="navigateTo('/search/FP', $event)" style="cursor:pointer;">
+                        <h3>Meetings</h3>
+                        <p>ABS related meetings</p>
+                        </div>
+                        <md-divider></md-divider>
+                    </md-list-item>
+                    <md-list-item class="md-2-line" >
+                        <div class="md-list-item-text"  ng-click="navigateTo('/search/FP', $event)" style="cursor:pointer;">
+                        <h3>Notifications</h3>
+                        <p>ABS related meetings</p>
+                        </div>
+                        <md-divider></md-divider>
+                    </md-list-item>
+                    <md-list-item class="md-2-line" >
+                        <div class="md-list-item-text"  ng-click="navigateTo('/search/FP', $event)" style="cursor:pointer;">
+                        <h3>Press releases</h3>
+                        <p>ABS related meetings</p>
+                        </div>
+                        <md-divider></md-divider>
+                    </md-list-item>
+                    <md-list-item class="md-2-line" >
+                        <div class="md-list-item-text"  ng-click="navigateTo('/search/FP', $event)" style="cursor:pointer;">
+                        <h3>Statements</h3>
+                        <p>ABS related meetings</p>
+                        </div>
+                        <md-divider></md-divider>
+                    </md-list-item>
+                    </md-list>
+                </md-content>
+            </div>
+            <br>
+        </div>
+    
+ </div>
+
+
+    
+   
+    
+    
 </div>
+    
+    
+    
+    
