@@ -17,11 +17,11 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
 
             $scope.options  = {
                jurisdiction             : function () { return $http.get("/api/v2013/thesaurus/domains/7A56954F-7430-4B8B-B733-54B8A5E7FF40/terms",  { cache: true })
-                                                                    .then(function(o){ return $scope.updateFacets($scope.measure, 'jurisdiction_s',o.data); }); },
+                                                                    .then(function(o){ $scope.jurisdictions = o.data; return $scope.updateFacets($scope.measure, 'jurisdiction_s',o.data); }); },
                status                   : function () { return $http.get("/api/v2013/thesaurus/domains/ED7CDBD8-7762-4A84-82DD-30C01458A799/terms",  { cache: true })
-                                                                    .then(function(o){ return $scope.updateFacets($scope.measure,'status_s',o.data) }); },
+                                                                    .then(function(o){ $scope.status = o.data; return $scope.updateFacets($scope.measure,'status_s',o.data) }); },
                typeOfDocuments          : function () { return $http.get("/api/v2013/thesaurus/domains/144CF550-7629-43F3-817E-CACDED34837E/terms",  { cache: true })
-                                                                    .then(function(o){ return $scope.updateFacets($scope.measure,'type_s',o.data) }); }
+                                                                    .then(function(o){ $scope.types = o.data; return $scope.updateFacets($scope.measure,'type_s',o.data) }); }
             };
 
             $scope.currentPage = 0;
@@ -65,14 +65,11 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
             
               $scope.$watch('documents', function(docs){
                 if(docs && docs.length>0){
-                    console.log(docs)
                     var measuresQueryList = _.map(docs, function(measure) {
                             return $scope.loadMatrix(measure);
                         });
                         $q.all(measuresQueryList)
                             .then(function() {
-                                //measure.isLoading=false;
-                                console.log('done');
                                 $scope.measures = docs;
                                 $scope.matrixGroupBy = 'jurisdiction';
 
@@ -113,31 +110,20 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                     });
             };
 
-            function getMeasure(identifier){
+            // function getMeasure(identifier){
 
-                var promise = $q.defer();
+            //     var promise = $q.defer();
 
-                var measure = _.find(measuresCache, function(measure){
-                                    return measure.header.identifier == identifier;
-                              });
-                if(measure){
-                    return measure;
-                }
-                return promise;$http.get('/api/v2013/documents/' + linked.identifier);
+            //     var measure = _.find(measuresCache, function(measure){
+            //                         return measure.header.identifier == identifier;
+            //                   });
+            //     if(measure){
+            //         return measure;
+            //     }
+            //     return promise;$http.get('/api/v2013/documents/' + linked.identifier);
 
-            }
-
-            function  jurisdictions() {
-                return $q.all([
-                  $http.get("/api/v2013/thesaurus/domains/7A56954F-7430-4B8B-B733-54B8A5E7FF40/terms", { cache: true }),
-                  $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })
-                ]).then(function(o) {
-                  $scope.jurisdictions = o[0].data;
-                  $scope.jurisdictions.push(o[1].data);
-                  return jurisdictions;
-                });
-            }
-
+            // }
+            
             function groupRecords(field){
 
                 var filteredRecords = [];
@@ -173,17 +159,30 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                     if(!measure.document)
                         return measure.jurisdiction_EN_t;
                     //user jurisdiction field for else
-                    return measure.document.jurisdiction.identifier +  (measure.document.jurisdictionName ? '#' + $filter('lstring')(measure.document.jurisdictionName) : '');
+                    return measure.document.jurisdiction.identifier;// +  (measure.document.jurisdictionName ? '#' + $filter('lstring')(measure.document.jurisdictionName) : '');
                 });
                 $scope.groupedMeasures = _.map(grpMeasures, function(group,key){
-                    //console.log(key);
+                    console.log(key);
                     return {
                             jurisdiction:key,
                             measures:group
                             };
                 });
+                var sortData;
+                if(field=='status')
+                    sortData =  $scope.status || $scope.options.status();
+                else if(field=='type')
+                    sortData =  $scope.types || $scope.options.typeOfDocuments();
+                else if(field=='jurisdiction')
+                    sortData =  $scope.jurisdictions || $scope.options.jurisdiction();
+                
+                $q.when(sortData)
+                  .then(function(data){ 
+                      sortRecords(data); 
+                   });
+                
             }
-
+            
             $scope.$watch('matrixGroupBy', function(newVal){
                 if(newVal){
                     groupRecords(newVal);
@@ -234,8 +233,15 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                             console.log(($scope.facets));
                         });
             }
+            function sortRecords(sortBase){
+                _.each(sortBase, function(item, index){                          
+                    var groupedItem = _.find($scope.groupedMeasures, {jurisdiction : item.identifier});
+                    if(groupedItem)
+                    groupedItem.index = index;
+                });
+                $scope.groupedMeasures = _.sortBy($scope.groupedMeasures,'index')
+            }
             loadSchemaFacets();
-            jurisdictions();
             
             $scope.showHideSection = function(elementId){
                 $element.find('#'+elementId).toggle();                

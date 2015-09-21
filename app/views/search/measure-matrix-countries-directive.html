@@ -170,8 +170,9 @@
 	                 					<i class="fa fa-chevron-circle-down" ng-show="closeSection"></i>
 											 
 										<span ng-if="matrixGroupBy=='jurisdiction'">
-											{{jurisdiction.measures[0].jurisdiction_EN_t}}<span ng-if="jurisdiction.measures[0].document.jurisdictionName">:</span>
-											<strong>{{jurisdiction.measures[0].document.jurisdictionName|lstring}}</strong>
+											{{jurisdiction.measures[0].jurisdiction_EN_t}}
+											<!--<span ng-if="jurisdiction.measures[0].document.jurisdictionName">:</span>-->
+											<!--<strong>{{jurisdiction.measures[0].document.jurisdictionName|lstring}}</strong>-->
 										</span>
 										<span class="panel-title" ng-if="matrixGroupBy=='type'">
 											{{jurisdiction.measures[0].type_EN_t}}
