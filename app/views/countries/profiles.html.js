@@ -247,6 +247,7 @@
                   }
                   //create seprate collection for measure matrix
                   if(document.schema_s=='measure'){
+                      document.measureMatrix = true;
                       measureMatrixDocuments.push(document);
                   }
 
@@ -453,6 +454,12 @@
                    console.log('onerror');
                    console.log(error);
                });
+       }
+       
+       $scope.isForMeasureMatrix = function(measure){
+           
+           return measure.measureMatrix;
+           
        }
      }
    ]);

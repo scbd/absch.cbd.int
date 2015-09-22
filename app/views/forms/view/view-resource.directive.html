@@ -36,7 +36,7 @@
 		</div>
 
 
-		<div ng-show="display('libraries')" ng-show="document.libraries">
+		<div ng-show="display('libraries') && document.libraries">
 			<label>Relevant CBD libraries</label>
 			<div class="km-value" >
 				<ul>
@@ -69,8 +69,8 @@
 			<div class="km-value">{{document.publicationYear}}</div>
 		</div>
 
-		<div ng-show="organizations">
-			<label>Organization(s) involved in the publication of this resource</label>
+		<div ng-show="organizations && organizations.length>0">
+			<label>Reference to the authoring organisation(s)</label>
 			<div class="km-valu1">
 				<div class="row">
 		            <div class="col-sm-12" ng-class="{'col-md-6' : organizations.length>1, 'col-md-12' : organizations.length<=1}" ng-repeat="organization in organizations">
@@ -146,7 +146,7 @@
 
 
 
-		<div ng-show="isInLibrary('chm')">
+		<!--<div ng-show="isInLibrary('chm')">
 
 			<legend>Clearing-House Mechanism (CHM)</legend>
 
@@ -165,7 +165,7 @@
 					</ul>
 				</div>
 			</div>
-		</div>
+		</div>-->
 
 		<div ng-show="isInLibrary('absch')">
 
@@ -179,7 +179,7 @@
 			</div>
 		</div>
 
-		<div ng-show="isInLibrary('bch')">
+		<!--<div ng-show="isInLibrary('bch')">
 
 			<legend>Biosafety Clearing-House (BCH)</legend>
 
@@ -224,7 +224,7 @@
 				</div>
 
 			</div>
-		</div>
+		</div>-->
 
 		<div ng-show="document.relevantInformation||document.relevantDocuments">
 			<legend>Additional Information</legend>
