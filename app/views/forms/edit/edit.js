@@ -407,6 +407,8 @@ define([
           qDocument[key] = additionalParams[key];
         if(excludeGovernment)
           delete qDocument['government'];
+         
+         canCreate(qDocument);
       }
       /*
       console.log('doc, ', qDocument);
@@ -461,6 +463,19 @@ define([
         });
       }, 2000);
     });
+    
+    function canCreate(document){
+        $q.when(storage.drafts.security.canCreate(document.header.identifier, document.header.schema)).then(function(doc) {
+            if(!doc.isAllowed){
+              $scope.status = "hidden";
+              $scope.error  = "You are not authorized to modify this record";
+            }
+        }).catch(function(err) {
+          $scope.onError(err.data, err.status)
+          throw err;
+      });
+    }
+    
     $rootScope.$on('$includeContentLoaded', function(event) {
 
       if($('#dialogCancel').length != 0){
