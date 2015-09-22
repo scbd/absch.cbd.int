@@ -11,16 +11,12 @@ define(['app','underscore','/app/js/common.js',
     '/app/views/directives/help-directive.html.js'],
      function (app,_) {
 
-    app.controller('FindController', ['$scope', '$rootScope','showHelp' ,'$http', '$timeout', '$q','realm', '$routeParams','$location','$element','commonjs','$mdSidenav', '$mdUtil', '$mdMedia',
-        function ($scope, $rootScope,showHelp, $http, $timeout, $q, realm, $routeParams,$location, $element, commonjs, $mdSidenav, $mdUtil, $mdMedia) {
+    app.controller('FindController', ['$scope', '$rootScope', '$http', '$timeout', '$q','realm', '$routeParams','$location','$element','commonjs','$mdSidenav', '$mdUtil', '$mdMedia',
+        function ($scope, $rootScope, $http, $timeout, $q, realm, $routeParams,$location, $element, commonjs, $mdSidenav, $mdUtil, $mdMedia) {
 
             $scope.showHelp = {'show':true,'hasHelp':true, showTour:false};
             $scope.toggleLeft = buildToggler('left');
             $scope.toggleRight = buildToggler('right');
-            $scope.showHelp = showHelp.value;
-            var url = $location.url();
-            $scope.url = url;
-            
             //**********************************************************
             $scope.close = function () {
                   $mdSidenav('left').close()
@@ -40,39 +36,9 @@ define(['app','underscore','/app/js/common.js',
                   },300);
               return debounceFn;
             }
-            
-            //**********************************************************
-            $scope.isInProfiles = function(tab) {
-              
-              if(url.indexOf('/profiles')  >= 0|| url.indexOf('/profile')  >= 0|| url.indexOf('/country') >= 0 || url.indexOf('/countries') >= 0)
-                    return true;
-              else
-                return false;
-            }
-            
-            //**********************************************************
-            $scope.isInNationalRecords = function(tab) {
-              if(url.indexOf('/national-records') >= 0)
-                    return true;
-              else
-                return false;
-            }
-            
-            //**********************************************************
-            $scope.isInReferenceRecords = function(tab) {
-              if(url.indexOf('/reference-records') >= 0)
-                    return true;
-              else
-                return false;
-            }
 
 
- $scope.displayStyles = [
-          "small (12-inch)",
-          "medium (14-inch)",
-          "large (16-inch)",
-          "insane (42-inch)"
-      ];
+
         $scope.startTour=false;
 
         if($routeParams.tour)
@@ -147,7 +113,7 @@ define(['app','underscore','/app/js/common.js',
     	function query () {
 
             var schema = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "resource",
-                           "meeting", "notification","pressRelease","statement" ,"focalPoint", "news", "modelContractualClause"]
+                           "meeting", "notification","pressRelease","statement" ,"focalPoint", "news", "modelContractualClause", 'communityProtocol']
 
             var q = '(realm_ss:' + realm.value.toLowerCase() + ' or realm_ss:absch) AND NOT version_s:*';
             //' AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryTheme + ' AND ' + $scope.queryTargets +' AND ' + $scope.queryDate + ' AND ' + $scope.queryKeywords;
@@ -424,6 +390,14 @@ define(['app','underscore','/app/js/common.js',
         $scope.removeThematicAreaFilter = function(filter){
             $scope.thematicAreaApi.unSelectItem(filter.identifier);
         }
+        
+        if($routeParams.documentSchema){
+            if($routeParams.documentSchema.toLowerCase()=='rat')
+                $scope.queryStatus('party');
+            else if (_.contains(['vlr', 'cpp', 'a19-20'],$routeParams.documentSchema.toLowerCase()))
+                $scope.previewType='list'
+         }
+
     }]);
 
 });

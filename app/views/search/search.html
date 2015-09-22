@@ -13,33 +13,34 @@
 </style>
 
 <div ng-controller="FindController"  >
+        <div smooth-scroll duration="100" offset="200" ></div>
 
 <div help schema="searchForm" show-help="showHelp">
-    <section layout="row" style="position:relative; top:20px; padding-bottom:30px;" flex>
+    <section layout="row" style="position:relative;top:20px; padding-bottom:30px;" flex>
 
            <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('min-width: 1200px')" style="background-color:#eee;">
-              <div style="background-color:#FFF;border-bottom: 2px solid #DDD;">
+              <div border-bottom: 2px solid #DDD;">
              <!--<md-toolbar class="bg-medgrey" >
                <h1 class="md-toolbar-tools">
                    Search 
                    
                </h1>
-             </md-toolbar>-->
-            
+             </md-toolbar>
+            -->
 
              
-             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="margin-top:5px;margin-bottom:0px;" >
+             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="margin-bottom:0px;" >
               <div class="panel panel-default" style="border-radius:0!important;border:0;">
-                <div class="panel-heading bg-grey3" role="tab" id="headingOne"  style="border-radius:0!important;border:0;">
-                  <h4 class="panel-title" ng-click="updatePreviewType('group')">
-                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                      <i class="fa fa-chevron-circle-up pad-left" ></i> 
-                        Country Profiles
-                        <div class="help color-grey" style="font-size:12px;">search national records grouped by country</div>
+                <div class="panel-heading bg-grey3" role="tab" id="headingOne"  style="border-radius:0!important;border:0; padding:18px;">
+                  <span class="panel-title" ng-click="updatePreviewType('group')">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="font-size:20px;">
+                     
+                        <span class="color-white"> <i class="fa fa-chevron-circle-up pad-left" ></i> Country Profiles</span>
+                        <!--<div class="help color-grey" style="font-size:12px;">search national records grouped by country</div>-->
                     </a>
-                  </h4>
+                  </span>
                 </div>
-                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                <div id="collapseOne" class="panel-collapse collapse" ng-class="{'in':isInProfiles()}" role="tabpanel" aria-labelledby="headingOne">
                   <div class="panel-body bg-white">
                       
                       <div class="btn-group" style="width:100%;">
@@ -376,16 +377,16 @@
               
               
               <div class="panel panel-default" style="border-radius:0!important;border:0;">
-                <div class="panel-heading bg-blue" role="tab" id="headingTwo"  style="border-radius:0!important;border:0;">
-                  <h4 class="panel-title" ng-click="updatePreviewType('group')">
-                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="#collapseTwo">
+                <div class="panel-heading bg-blue" role="tab" id="headingTwo"  style="border-radius:0!important;border:0;padding:18px;">
+                  <span class="panel-title" ng-click="updatePreviewType('group')">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="#collapseTwo" style="font-size:20px;">
                       <i class="fa fa-chevron-circle-up pad-left" ></i> 
                         National Records
-                        <div class="help color-grey" style="font-size:12px;">search individual records </div>
+                        <!--<div class="help color-grey" style="font-size:12px;">search individual records </div>-->
                     </a>
-                  </h4>
+                  </span>
                 </div>
-                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <div id="collapseTwo" class="panel-collapse collapse" ng-class="{'in':isInNationalRecords()}" role="tabpanel" aria-labelledby="headingTwo">
                   <div class="panel-body bg-white">
                       
                       <div class="btn-group" style="width:100%;">
@@ -719,16 +720,16 @@
               
               
               <div class="panel panel-default" style="border-radius:0!important;border:0;">
-                <div class="panel-heading  bg-orange" role="tab" id="headingThree"style="border-radius:0!important;border:0;" >
-                  <h4 class="panel-title"  ng-click="updatePreviewType('list')">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                <div class="panel-heading  bg-orange" role="tab" id="headingThree"style="border-radius:0!important;border:0;padding:18px;" >
+                  <span class="panel-title"  ng-click="updatePreviewType('list')">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="font-size:20px;">
                        <i class="fa fa-chevron-circle-up pad-left" ></i>
-                     Search Reference Records
-                      <div class="help color-grey" style="font-size:12px;">search individual records</div>
+                      Reference Records
+                      <!--<div class="help color-grey" style="font-size:12px;">search individual records</div>-->
                     </a>
-                  </h4>
+                  </span>
                 </div>
-                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                <div id="collapseThree" class="panel-collapse collapse" ng-class="{'in':isInReferenceRecords()}" role="tabpanel" aria-labelledby="headingThree">
                   <div class="panel-body " style="min-height:500px;">
                  
                  <div class="btn-group" style="width:100%;">

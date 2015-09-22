@@ -1,4 +1,7 @@
 <div ng-controller="newSearchController">
+    
+    <div smooth-scroll duration="100" offset="200" ></div>
+    
     <style>
         md-list-item:hover{ background-color: #eee;}
     
@@ -20,26 +23,25 @@
         <div class="row">
         <div class="col-xs-12">
             <h1>Find Information</h1>
-            The search function allows searches among all information (records) published in the ABS-CH. Select the category of information of your interest from the left hand side menu. Use one or more filters to refine the searches. Depending on the view option at the top right of the page, records can be displayed grouped by country or listed by date of publication.
-
+            <span style="font-size:14px">The search function allows searches among all information (records) published in the ABS-CH. Select the category of information of your interest from the left hand side menu. Use one or more filters to refine the searches. Depending on the view option at the top right of the page, records can be displayed grouped by country or listed by date of publication.</span>
             <h3>Select a type of information from a category below:</h3>
         </div>
        </div>     
     </div>
 
-   <div class="container-fluid" style="margin-bottom:240px;margin-top:24px"> 
+   <div class="container-fluid" style="margin-bottom:24px;margin-top:24px"> 
         <div class="row">
               <div class="col-lg-4">
                   <div class="md-whiteframe-z1">
                     <md-toolbar class="bg-grey3">
-                        <h2 class="md-toolbar-tools">
+                        <h2 class="md-toolbar-tools" ng-click="navigateTo('/search/profiles', $event)" style="cursor:pointer;">
                         <span>Country Profiles</span>
                         </h2>
                     </md-toolbar>
                     <md-content>
                         <md-list>
                             <md-list-item class="md-2-line" >
-                            <div class="md-list-item-text" ng-click="navigateTo('/search/FP', $event)" style="cursor:pointer;">
+                            <div class="md-list-item-text" ng-click="navigateTo('/search/profiles', $event)" style="cursor:pointer;">
                                 <p style="color:#111;">
                                     Country Profiles present all national ABS information made available by a country, including information on the ABS measures country matrix, when available.
                                 </p>
@@ -60,7 +62,7 @@
                         </md-list>
                     </md-content>
                     <md-divider></md-divider>
-                    <md-content style="max-height:940px;" class="hidden-sm hidden-md">
+                    <md-content style="max-height:985px;" class="hidden-sm hidden-md">
                         <md-list class="bg-grey2">
                             <md-list-item class="md-1-line" ng-repeat="country in countries | filter:name | orderBy:'name.en'" ng-class="{'bg-blue': country.isNPParty, 'bg-medgrey':!country.isNPParty}">
                                 <a href="countries/{{country.code}}" class="color-white bold">

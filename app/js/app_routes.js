@@ -84,6 +84,7 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
             when('/register/:document_type/:identifier/edit',           {templateUrl: '/app/views/register/register.html',          label:'Edit',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/forms/edit/edit--', }).
             when('/register/:document_type/:identifier/edit/:tour',     {templateUrl: '/app/views/register/register.html',          label:'Edit',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/forms/edit/edit--',  }).
 
+
             when('/workshops/lac',               { templateUrl: '/app/views/workshops/lac.html',            label:'Workshops',            resolveController: true, resolveUser: true}).
             when('/workshops/caribbean',         { templateUrl: '/app/views/workshops/caribbean.html',      label:'Workshops',        resolveController: true, resolveUser: true}).
 
