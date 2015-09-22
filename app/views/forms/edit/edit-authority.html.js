@@ -179,17 +179,13 @@ define(['app', '/app/views/forms/edit/edit.js', '/app/views/directives/help-dire
 
         $scope.showJurisdictionName = function() {
 
-
             if (!$scope.document || !$scope.document.absJurisdiction)
                 return false;
 
-            var jurisdictions = Enumerable.from($scope.document.absJurisdiction);
-
-            return jurisdictions
-                .any(function(jurisdiction) {
-                    return jurisdiction.identifier == 'DEBB019D-8647-40EC-8AE5-10CA88572F6E' || jurisdiction.identifier == 'DEEEDB35-A34B-4755-BF77-D713017195E3' || jurisdiction.identifier == '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED';
-                });
-
+            //var jurisdictions = $scope.document.absJurisdiction
+            
+            if($scope.document.absJurisdiction.identifier == 'DEBB019D-8647-40EC-8AE5-10CA88572F6E' || $scope.document.absJurisdiction.identifier == 'DEEEDB35-A34B-4755-BF77-D713017195E3' || $scope.document.absJurisdiction.identifier == '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')
+                return true;
         }
 
     }]);

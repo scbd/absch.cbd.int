@@ -7,12 +7,7 @@
 
 	<div name="article-13-2"></div>
 
-		 	<div ng-show="document.title">
-			 	<label>Title</label>
-			 	<div class="km-value">
-			 	<strong>{{document.name | lstring:locale}}</strong>
-			 	</div>
-		 	</div>
+		 
 
 
 		<div ng-show="document.government">
@@ -24,27 +19,37 @@
 
 		<div ng-show="document.address || document.city || document.state || document.postalCode || document.country">
 
-			<legend>Coordinates and contact information</legend>
+			<legend>Contact information</legend>
 
-			<label>Location</label>
-			<address class="km-value">
-				<div class="km-pre">{{document.address | lstring:locale}}</div>
-				{{document.city | lstring:locale}}<span ng-show="document.city">, </span>
-				{{document.state | lstring:locale}}<br ng-show="document.city || document.state" />
-				{{document.postalCode | lstring:locale}}<span ng-show="document.postalCode">, </span>
-				<b>{{document.country|term}}</b>
-			</address>
-		</div>
+			<div class="km-value">
+				<div><strong>{{document.name | lstring:locale}}</strong></div>
+				<div ng-show="document.address">{{document.address | lstring:locale}}</div>
+				<div ng-show="document.city">{{document.city | lstring:locale}}<span ng-show="document.city">, </span></div>
+				<div ng-show="document.state">{{document.state | lstring:locale}}<br ng-show="document.city || document.state" /></div>
+				<div ng-show="document.postalCode">{{document.postalCode | lstring:locale}}<span ng-show="document.postalCode">, </span></div>
+				<div ng-show="document.country">{{document.country|term}}</div>
+				<ul ng-show="document.phones" class="list"  style="list-style-type: none;padding: 0px;margin: 3px 0 0 0;">
+					<li ng-repeat="item in document.phones track by $index"><i class="fa fa-phone"></i> {{item}}</li>
+				</ul>
+				<ul ng-show="document.faxes" class="list"  style="list-style-type: none;padding: 0px;margin: 3px 0 0 0;" >
+					<li ng-repeat="item in document.faxes"><i class="fa fa-fax"></i> {{item}}</li>
+				</ul>
+				<ul  ng-show="document.emails" class="list" style="list-style-type: none;padding: 0px;margin: 3px 0 0 0;">
+					<li ng-repeat="item in document.emails">
+                        <a ng-href="mailto:{{item}}"><i class="fa fa-envelope-o"></i> {{item}}</a></li>
+				</ul>
+			</div>
+		
 
-		<div ng-show="document.phones">
+		<!--<div ng-show="document.phones">
 			<label>Phone number(s)</label>
 			<div class="km-value" >
 				<ul class="list"  style="list-style-type: none;padding: 0px;margin: 0px;">
 					<li ng-repeat="item in document.phones track by $index"><i class="fa fa-phone"></i> {{item}}</li>
 				</ul>
 			</div>
-		</div>
-
+		</div>-->
+<!--
 		<div ng-show="document.faxes">
 			<label>Fax Number(s)</label>
 			<div class="km-value" >
@@ -52,9 +57,9 @@
 					<li ng-repeat="item in document.faxes"><i class="fa fa-fax"></i> {{item}}</li>
 				</ul>
 			</div>
-		</div>
+		</div>-->
 
-		<div ng-show="document.emails">
+		<!--<div ng-show="document.emails">
 			<label>Email(s)</label>
 			<div class="km-value"  >
 				<ul class="list" style="list-style-type: none;padding: 0px;margin: 0px;">
@@ -62,7 +67,7 @@
                         <a ng-href="mailto:{{item}}"><i class="fa fa-envelope-o"></i> {{item}}</a></li>
 				</ul>
 			</div>
-		</div>
+		</div>-->
 
 		<div ng-show="document.websites">
 			<label>Web Sites</label>
@@ -74,7 +79,7 @@
 			</div>
 		</div>
 		<div ng-show="contacts">
-				<label>Contacts</label>
+				<label>Additional contacts</label>
 				<div class="km-value" ng-repeat="contact in contacts" >
 					<div view-contact-reference ng-model="contact" locale="locale"></div>
 				</div>
@@ -121,7 +126,7 @@
 				<div class="km-value km-pre">{{document.absFunctions | lstring:locale}}</div>
 			</div>
 
-			<div ng-show="document.absJurisdiction">
+			<!--<div ng-show="document.absJurisdiction">
 				<label>Jurisdiction(s) covered by this CNA</label>
 				<div class="km-value">
 					<li ng-repeat="term in document.absJurisdiction">{{term|term}} </li>
@@ -131,7 +136,19 @@
 			<div ng-show="document.absJurisdictionName">
 				<label>Sub-national or community jurisdiction(s) covered by this CNA</label>
 				<div class="km-value">{{document.absJurisdictionName | lstring:locale}}</div>
+			</div>-->
+			
+			<div ng-show="document.absJurisdiction">
+				<label>Jurisdiction(s) covered by this CNA</label>
+				<div class="km-value">
+					<ul>
+						<li>{{document.absJurisdiction[0]|term}} 
+							<span ng-if="document.absJurisdictionName ">({{document.absJurisdictionName | lstring:locale}})</span>
+						</li>
+					</ul>
+				</div>
 			</div>
+			
 
 			<!-- <div ng-show="document.absGeneticResourceTypes">
 				<label>According to the type of organism</label>
