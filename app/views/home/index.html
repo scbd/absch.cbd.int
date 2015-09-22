@@ -86,7 +86,7 @@
                             </div>
                         </div>
 
-                         <div class="row bg-green"  style="padding:30px;margin-top:20px;" ng-show="user.isAuthenticated" >
+                         <!--<div class="row bg-green"  style="padding:30px;margin-top:20px;" ng-show="user.isAuthenticated" >
                                 <div class="text-center col-xs-10"  >
                                     <h1 class="dropshadow" style="font-size:360%;margin-bottom:0;padding:0;position:relative;top:-10px;"> WELCOME {{user.name}}</h1>
                                     <h2 class="color-grey" style="text-transform:uppercase;padding:0;margin:0;">{{user.government | term}}
@@ -106,7 +106,7 @@
                                     <div style="padding-top:10px;"><a href="#" ng-click="actionProfile()" class="color-white" style="font-size:14px;font-weight:normal;" >update your profile</a></div>
                                     <div style="padding-top:10px;padding-bottom:10px;"><a href="#"  class="color-white" ng-click="actionPassword()" style="font-size:14px;font-weight:normal;" > change your password</a></div>
                                 </div>
-                          </div>
+                          </div>-->
 
 <!--                        <div class="row" ng-show="!user.isAuthenticated">
                                 <div class="dropshadow col-xs-12" >
@@ -121,67 +121,6 @@
 
 
 
-<div class="container" style="padding-top:20px;">
-
-    <div class="row">
-
-        <div class="col-xs-12">
-             <h1 style="border-bottom:1px solid #BBB;">About the Nagoya Protocol</h1>
-        </div>
-        <div class="clearfix"></div>
-        
-        <div class="col-md-8">
-        <div class="home-col">
-               
-                The Nagoya Protocol on Access to Genetic Resources and the Fair and Equitable Sharing of Benefits Arising from their Utilization to the Convention on Biological Diversity is an international agreement which aims at sharing the benefits arising from the utilization of genetic resources in a fair and equitable way, including by appropriate access to genetic resources and by appropriate transfer of relevant technologies, taking into account all rights over those resources and to technologies, and by appropriate funding, thereby contributing to the conservation of biological diversity and the sustainable use of its components.
-                <a href="http://www.cbd.int/abs"> <i class="fa fa-forward"></i> read more at: www.cbd.int/abs</a>
-            </div>
-            <br>
-
-
-
-
-
-            <!-- <div class="home-col">
-                <h3>News from the development blog</h3>
-                    <div class="feeds">
-                    <ul>
-
-                        <li ng-repeat="feed in feeds | filter:filterText" style="padding-top:10px;">
-                            <h4><a href="{{feed.link}}" target="_new" style="color:#287fcb;font-size:14px;font-weight:bold;">{{feed.title}}</a></h4>
-                            <p class="text-left">{{feed.contentSnippet}}</p>
-                            <span class="small" >{{feed.publishedDate | date:'dd MMM yyyy'}}</span>
-                        </li>
-                    </ul>
-                    </div>
-            </div> -->
-        </div>
-
-        <div class="col-md-4">
-            <div class="home-col">
-                    <div class="box bg-none text-center" ng-show="entryintoforce">
-                        <span style="color:#000;font-weight:bold; font-size:32px;text-shadow: 0 1px 2px rgba(0, 0, 0, .6);">
-                      {{daysUntilEntry}}</span><br><span style="color: #999; text-transform: uppercase;font-weight:bold;font-size:14px;">
-                       Since the entry into force of the Nagoya Protocol</span>
-                     </div>
-                <!--    <h3>Meetings</h3>
-             <div class="feeds">
-                    <ul>
-                        <li ng-repeat="meeting in meetings.response.docs" style="padding-top:10px;">
-                             <span class="small" >{{meeting.startDate_s | date:'dd MMM'}} - {{meeting.endDate_s | date:'dd MMM yyyy'}}
-                            </span>
-                            <h4><a href="{{meeting.url_ss[0]}}" target="_new" style="color:#287fcb;font-size:14px;font-weight:bold;">
-                            {{meeting.title_t}}</a></h4>
-                            <span>
-                            <strong>{{meeting.eventCountry_EN_t}}</strong></span>
-                        </li>
-                    </ul>
-                    </div> -->
-            </div>
-        </div>
-
-    </div>
-</div>
 
 
 <div class="container" >
@@ -193,6 +132,21 @@
         </div>
     </div>
  </div>
+ 
+ <!--<div class="container"  style="padding-top:50px;">
+    <div class="row">
+        <hr class="bg-medgrey">
+        <div class="col-xs-12">
+             <h3 style="border-bottom:1px solid #BBB;">Find Information</h3>
+              <div class="row">
+                <div class="col-md-4">Country Profiles</div>
+                <div class="col-md-4">National Records</div>
+                <div class="col-md-4">Reference Records</div>
+              </div>
+        </div>
+    </div>
+ </div>-->
+ 
 
 <div class="container" style="padding-top:50px;">
     <div class="row" >
@@ -396,7 +350,69 @@
 
     </div> -->
 
+
+
     <div class="row">
+
+        <div class="col-xs-12">
+             <h3 style="border-bottom:1px solid #BBB;">About the Nagoya Protocol</h3>
+        </div>
+        <div class="clearfix"></div>
+        
+        <div class="col-md-8">
+        <div class="home-col">
+               
+                The Nagoya Protocol on Access to Genetic Resources and the Fair and Equitable Sharing of Benefits Arising from their Utilization to the Convention on Biological Diversity is an international agreement which aims at sharing the benefits arising from the utilization of genetic resources in a fair and equitable way, including by appropriate access to genetic resources and by appropriate transfer of relevant technologies, taking into account all rights over those resources and to technologies, and by appropriate funding, thereby contributing to the conservation of biological diversity and the sustainable use of its components.
+                <a href="http://www.cbd.int/abs"> <i class="fa fa-forward"></i> read more at: www.cbd.int/abs</a>
+            </div>
+            <br>
+
+
+
+
+
+            <!-- <div class="home-col">
+                <h3>News from the development blog</h3>
+                    <div class="feeds">
+                    <ul>
+
+                        <li ng-repeat="feed in feeds | filter:filterText" style="padding-top:10px;">
+                            <h4><a href="{{feed.link}}" target="_new" style="color:#287fcb;font-size:14px;font-weight:bold;">{{feed.title}}</a></h4>
+                            <p class="text-left">{{feed.contentSnippet}}</p>
+                            <span class="small" >{{feed.publishedDate | date:'dd MMM yyyy'}}</span>
+                        </li>
+                    </ul>
+                    </div>
+            </div> -->
+        </div>
+
+        <div class="col-md-4">
+            <div class="home-col">
+                    <div class="box bg-none text-center bg-green" ng-show="entryintoforce">
+                        <span class="color-white" style="font-weight:bold; font-size:32px;text-shadow: 0 1px 2px rgba(0, 0, 0, .6);">
+                      {{daysUntilEntry}}</span><br><span style="color:#EEE;text-transform: uppercase;font-weight:bold;font-size:14px;">
+                       Since the entry into force of the Nagoya Protocol</span>
+                     </div>
+                <!--    <h3>Meetings</h3>
+             <div class="feeds">
+                    <ul>
+                        <li ng-repeat="meeting in meetings.response.docs" style="padding-top:10px;">
+                             <span class="small" >{{meeting.startDate_s | date:'dd MMM'}} - {{meeting.endDate_s | date:'dd MMM yyyy'}}
+                            </span>
+                            <h4><a href="{{meeting.url_ss[0]}}" target="_new" style="color:#287fcb;font-size:14px;font-weight:bold;">
+                            {{meeting.title_t}}</a></h4>
+                            <span>
+                            <strong>{{meeting.eventCountry_EN_t}}</strong></span>
+                        </li>
+                    </ul>
+                    </div> -->
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row" style="margin-top:50px;">
         <div class="col-xs-12">
             <h3  style="border-bottom:1px solid #BBB;"> Help with the ABSCH</h3>
         </div>
