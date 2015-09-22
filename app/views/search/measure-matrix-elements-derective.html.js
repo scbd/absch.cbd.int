@@ -12,7 +12,8 @@ define(['app', 'underscore','angular', '/app/js/common.js'], function(app, _, an
                 locales: "=",
                 type: "@",
                 layout: "@",
-                document: "=document"
+                document: "=document",
+                api:      "=?"
             },
             link: function($scope, $element, $attr, ngModelController) {
                 $scope.identifiers = null;
@@ -37,6 +38,20 @@ define(['app', 'underscore','angular', '/app/js/common.js'], function(app, _, an
                                           "24E809DA-20F4-4457-9A8A-87C08DF81E8A","E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63",
                                           "NEED-NEW-GUID","08B2CDEC-786F-4977-AD0A-6A709695528D","01DA2D8E-F2BB-4E85-A17E-AB0219194A17"
                                         ];
+                $scope.api = {
+                    reloadMatrix : reloadMatrix
+                }
+                
+                function reloadMatrix(){
+                    $scope.identifiers = null;
+                    $scope.sections = null;
+                    $scope.otherValues = null;
+                    $scope.terms = null;
+                    $scope.rootTerms = [];
+                    
+                    // $scope.load();
+                    // $scope.onTerms();
+                }
                                         
                 $scope.termsFn = function(){  return  [
                        {
@@ -900,12 +915,10 @@ define(['app', 'underscore','angular', '/app/js/common.js'], function(app, _, an
                                 if ($scope.document.amendedMeasures || $scope.document.linkedMeasures) {
 
                                     var amendedMeasures = _.map($scope.document.amendedMeasures, function(item) {
-                                        return $http.get('/api/v2013/documents/' + item.identifier).then(function(data){
-                                            console.log('amended',data);return data;});
+                                        return $http.get('/api/v2013/documents/' + item.identifier);
                                     })
                                     var linkedMeasures = _.map($scope.document.linkedMeasures, function(item) {
-                                        return $http.get('/api/v2013/documents/' + item.identifier).then(function(data){
-                                             console.log('related',data);return data;});
+                                        return $http.get('/api/v2013/documents/' + item.identifier)
                                     })
                                     $q.all(amendedMeasures)
                                       .then(function(data) {
@@ -957,7 +970,7 @@ define(['app', 'underscore','angular', '/app/js/common.js'], function(app, _, an
                         $scope.rootTerms = thesaurus.buildTree($scope.terms);
                     else
                         $scope.rootTerms = Enumerable.from($scope.terms).Select("o=>{identifier : o.identifier, name : o.name, title : o.title, description : o.description}").ToArray();
-                   console.log($scope.rootTerms)
+                  // console.log($scope.rootTerms)
                 }
                 //==============================
                 //
