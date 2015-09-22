@@ -205,7 +205,7 @@
                                     <div class="clearfix"></div>
 
                                     <div class="col-xs-6">
-                                        <div class="km-control-group" name="absJurisdiction" caption="Area of jurisdiction(s) for granting access to genetic resources"
+                                        <div class="km-control-group" name="absJurisdiction" caption="Area of jurisdiction for granting access to genetic resources"
                                         required></div>
                                         <!-- <div km-select multiple name="absJurisdiction" ng-model="document.absJurisdiction" items="options.jurisdictions()"></div> -->
                                         <div km-select  name="absJurisdiction" ng-model="document.absJurisdiction" items="options.jurisdictions()" required></div>
@@ -214,10 +214,12 @@
 
                                     <div class="col-xs-6">
                                         <div ng-show="showJurisdictionName()">
-                                            <div class="km-control-group" name="absJurisdictionName" required caption="Name(s) of the jurisdiction(s)"></div>
+                                            <div class="km-control-group" name="absJurisdictionName" required caption="Name of the jurisdiction(s)"></div>
                                             <div km-textbox-ml ng-model="document.absJurisdictionName" rows="1" locales="document.header.languages" placeholder="jurisdition names"></div>
                                         </div>
                                     </div>
+                                 
+                                </div>
 
                                     <div class="clearfix"></div>
 
