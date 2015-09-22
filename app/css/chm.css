@@ -20,6 +20,7 @@
 
 
 .navbar-nav a {margin:0!important;padding:0!important;color:white!important;}
+.navbar-nav a:hover {color:#000!important;}
 .navbar-brand{margin:0!important;padding:0!important;color:white!important;}
 .navbar-nav li
 {padding:0 10px;}

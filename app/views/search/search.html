@@ -1,213 +1,1017 @@
+<link href="/app/css/find.css" rel="stylesheet">
+<link href="/app/css/record.css" rel="stylesheet">
+<style>
 
-<div ng-controller="FindController">
-    
-       <!--<div class="container-fluid md-whiteframe-z1"style="margin-bottom:20px;">
-           <h1>
-         <div layout="row ">
-            <div style="padding-right:10px;"><i class="fa fa-search"></i></div>
-            <div style="width:100%;"><input ng-model="keyword" placeholder="What are you looking for?" style="width:100%;border:0;background-color:transparent;"></div>
-          </div></h1>
-        </div>
-        
-        
-         <div preview-type="previewType" document-list documents='rawDocs' filter='*' show-pagination='true' current-page='currentPage' document-Count='documentCount' order-by="orderBy">
-         </div>-->
-         
-    <style>
-        .listdemoListControls md-divider {
-        margin-top: 10px;
-        margin-bottom: 10px; }
-        .listdemoListControls md-list-item > p, .listdemoListControls md-list-item > .md-list-item-inner > p, .listdemoListControls md-list-item .md-list-item-inner > p, .listdemoListControls md-list-item .md-list-item-inner > .md-list-item-inner > p {
-        -webkit-user-select: none;
-        /* Chrome all / Safari all */
-        -moz-user-select: none;
-        /* Firefox all */
-        -ms-user-select: none;
-        /* IE 10+ */
-        user-select: none;
-        /* Likely future */ }
-  </style>
+.not-active{
+    color:rgb(119, 119, 119)!important;
+}
+.active{
+    color:#2a6496!important;
+}
+.typebtn:hover{background-color:#eee; }
 
+</style>
+
+<div ng-controller="FindController"  >
+
+<div help schema="searchForm" show-help="showHelp">
+    <section layout="row" style="position:relative; top:20px; padding-bottom:30px;" flex>
+
+           <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('min-width: 1200px')" style="background-color:#eee;">
+              <div style="background-color:#FFF;border-bottom: 2px solid #DDD;">
+             <!--<md-toolbar class="bg-medgrey" >
+               <h1 class="md-toolbar-tools">
+                   Search 
+                   
+               </h1>
+             </md-toolbar>-->
+            
+
+             
+             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="margin-top:5px;margin-bottom:0px;" >
+              <div class="panel panel-default" style="border-radius:0!important;border:0;">
+                <div class="panel-heading bg-grey3" role="tab" id="headingOne"  style="border-radius:0!important;border:0;">
+                  <h4 class="panel-title" ng-click="updatePreviewType('group')">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                      <i class="fa fa-chevron-circle-up pad-left" ></i> 
+                        Country Profiles
+                        <div class="help color-grey" style="font-size:12px;">search national records grouped by country</div>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                  <div class="panel-body bg-white">
+                      
+                      <div class="btn-group" style="width:100%;">
+                           <div ng-show="nationalSearch.keyword">
+                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;padding-left:12px;">Keyword</div>
+                        </div>
+                      <input ng-model="nationalSearch.keyword" style="font-weight:bold;color:#333;width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;padding-left:12px;padding-bottom:5px;" placeholder="Keyword"></input>
+                    </div>
+                      
+                    <div class="btn-group" style="width:100%;">
+                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;">
+                        <div ng-show="!nationalSearch.recordsStyle" style="color:#AAA;font-weight:bold;" >List layout  <span class="pull-right"><i class="caret"></i></span></div>
+                        <div ng-show="nationalSearch.recordsStyle">
+                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;">List layout</div>
+                            <div style="font-weight:bold;">{{nationalSearch.recordsStyle}} <span class="pull-right"><i class="caret"></i></span></div>
+                        </div>
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><a href="#" ng-click="nationalSearch.recordsStyle='List Records'"> Individual records</a></li>
+                        <li><a href="#" ng-click="nationalSearch.recordsStyle='Group by country'" >Group by country</a></li>
+                      </ul>
+                    </div>
+                    
+                    <br>
+                    
+                     <div class="btn-group" style="width:100%;">
+                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;">
+                        <div ng-show="!nationalSearch.partyStatus" style="color:#AAA;font-weight:bold;" >Party status <span class="pull-right"><i class="caret"></i></span></div>
+                        <div ng-show="nationalSearch.partyStatus">
+                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;">Party status </div>
+                            <div style="font-weight:bold;">
+                                <i class="fa fa-square color-blue" ></i>
+                                {{nationalSearch.partyStatus}} <span class="pull-right"><i class="caret"></i></span></div>
+                        </div>
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><a href="#" ng-click="nationalSearch.partyStatus='Parties'" > <i class="fa fa-square color-blue" ></i> Parties to the Nagoya Protocol </a></li>
+                        <li><a href="#" ng-click="nationalSearch.partyStatus='Non-Parties'"> <i class="fa fa-square color-grey" ></i> Non-Parties to the Nagoya Protocol</a></li>
+                        <li><a href="#" ng-click="nationalSearch.partyStatus='Both Parties and Non-Parties'">Both Parties and Non-Parties</a></li>
+                      </ul>
+                    </div>
+                    
+                     <br>
+                    
+                     <div class="btn-group" style="width:100%;">
+                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;">
+                        <div ng-show="!nationalSearch.country" style="color:#AAA;font-weight:bold;" >Country <span class="pull-right"><i class="caret"></i></span></div>
+                        <div ng-show="nationalSearch.country">
+                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;">Country </div>
+                            <div style="font-weight:bold;">
+                                <i class="fa fa-square color-blue" ></i>
+                                {{nationalSearch.country}} <span class="pull-right"><i class="caret"></i></span></div>
+                        </div>
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><a href="#" ng-click="nationalSearch.country='Canada'" > <i class="fa fa-square color-blue" ></i> Canada</a></li>
+                        <li><a href="#" ng-click="nationalSearch.country='France'"> <i class="fa fa-square color-grey" ></i> France</a></li>
+                        <li><a href="#" ng-click="nationalSearch.country='Canada'" > <i class="fa fa-square color-blue" ></i> Canada</a></li>
+                        <li><a href="#" ng-click="nationalSearch.country='France'"> <i class="fa fa-square color-grey" ></i> France</a></li>
+                        <li><a href="#" ng-click="nationalSearch.country='Canada'" > <i class="fa fa-square color-blue" ></i> Canada</a></li>
+                        <li><a href="#" ng-click="nationalSearch.country='France'"> <i class="fa fa-square color-grey" ></i> France</a></li>
+                        <li><a href="#" ng-click="nationalSearch.country='Canada'" > <i class="fa fa-square color-blue" ></i> Canada</a></li>
+                        <li><a href="#" ng-click="nationalSearch.country='France'"> <i class="fa fa-square color-grey" ></i> France</a></li>
+                      </ul>
+                    </div>
+                    
+                    <br>
+                    
+                      <div class="btn-group" style="width:100%;">
+                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;">
+                        <div ng-show="!nationalSearch.region" style="color:#AAA;font-weight:bold;" >Region <span class="pull-right"><i class="caret"></i></span></div>
+                        <div ng-show="nationalSearch.region">
+                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;">Region </div>
+                            <div style="font-weight:bold;">
+                                {{nationalSearch.region}} <span class="pull-right"><i class="caret"></i></span></div>
+                        </div>
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><a href="#" ng-click="nationalSearch.region='Canada'" >  Canada</a></li>
+                       <li><a href="#" ng-click="nationalSearch.region='Canada'" >  Canada</a></li>
+                       <li><a href="#" ng-click="nationalSearch.region='Canada'" >  Canada</a></li>
+                       <li><a href="#" ng-click="nationalSearch.region='Canada'" >  Canada</a></li>
+                      </ul>
+                    </div>
+                    
+                    <br>
+                    <div style="padding-top:10px;">
+                        <div style="padding-left:10px;font-size:12px;color:#AAA;font-weight:bold;margin-bottom:3px;">Record type</div>
+                        
+                        <div class="typebtn" layout="row" style="" >
+                                <div> <md-checkbox ng-model="nationalSearch.NFP" class="md-primary" style="position:relative;top:0;padding-top:0;margin-top:0;"></md-checkbox></div>
+                                <div flex ng-class="{'bold': nationalSearch.NFP}" ng-click="nationalSearch.NFP=!nationalSearch.NFP"  style="padding-top:7px;font-size:12px;line-height:12px;"> ABS Focal Point (FP) </div>
+                                <div style="padding-left:3px;"> <span class="badge">1</span> </div>
+                            </div>
+                            <div layout="row" ng-show="nationalSearch.NFP" class="typebtn_sub" layout="row"  >
+                                <div flex class="bold"  style="font-size:12px;line-height:12px;"> 
+                                    <div class="btn-group" style="width:100%;">
+                                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:12px;width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;padding-left:35px;">
+                                        <div ng-show="!nationalSearch.NFP.type" style="color:#AAA;font-weight:bold;" >Focal Point Type <span class="pull-right"><i class="caret"></i></span></div>
+                                        <div ng-show="nationalSearch.NFP.type">
+                                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;">Focal Point Type </div>
+                                            <div style="font-weight:bold;">
+                                                {{nationalSearch.NFP.type}} <span class="pull-right"><i class="caret"></i></span></div>
+                                        </div>
+                                      </button>
+                                      <ul class="dropdown-menu">
+                                        <li><a href="#" ng-click="nationalSearch.NFP.type='ABS'" > <i class="fa fa-square color-blue" ></i> ABS Focal Points</a></li>
+                                        <li><a href="#" ng-click="nationalSearch.NFP.type='CBD'">  <i class="fa fa-square color-grey" ></i> CBD National Focal Points</a></li>
+                                        <li><a href="#" ng-click="nationalSearch.NFP.type='both'"> <i class="fa fa-square color-grey" ></i> All types</a></li>
+                                      </ul>
+                                    </div>
+                                </div>
+                            </div>
+                       
+                        
+                  
+                       <div  class="typebtn"  layout="row" style="" >
+                            <div> <md-checkbox ng-model="nationalSearch.CNA" class="md-primary" style="position:relative;top:0;padding-top:0;margin-top:0;"></md-checkbox></div>
+                            <div flex ng-class="{'bold': nationalSearch.CNA}" ng-click="nationalSearch.CNA=!nationalSearch.CNA"   style="padding-top:7px;font-size:12px;line-height:12px;"> Competent National Authority (CNA) </div>
+                            <div style="padding-left:3px;"> <span class="badge">1</span> </div>
+                        </div>
+                        <div layout="row" ng-show="nationalSearch.CNA" class="typebtn_sub" layout="row" >
+                                <div flex class="bold"  style="font-size:12px;line-height:12px;"> 
+                                    <div class="btn-group" style="width:100%;">
+                                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:12px;width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;padding-left:35px;">
+                                        <div ng-show="!nationalSearch.CNA.scope" style="color:#AAA;font-weight:bold;" > Scope of responsibilities <span class="pull-right"><i class="caret"></i></span></div>
+                                        <div ng-show="nationalSearch.CNA.scope">
+                                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;"> Scope of responibilities </div>
+                                            <div style="font-weight:bold;">
+                                                {{nationalSearch.CNA.scope}} <span class="pull-right"><i class="caret"></i></span></div>
+                                        </div>
+                                      </button>
+                                      <ul class="dropdown-menu">
+                                        <li><a href="#" ng-click="nationalSearch.CNA.scope='everything'" >everything</a></li>
+                                        <li><a href="#" ng-click="nationalSearch.CNA.scope='nothing'">nothing</a></li>
+                                      </ul>
+                                    </div>
+                                </div>
+                           </div>
+                           <div layout="row" ng-show="nationalSearch.CNA" class="typebtn_sub" layout="row"  >
+                                <div flex class="bold"  style="font-size:12px;line-height:12px;"> 
+                                    <div class="btn-group" style="width:100%;">
+                                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:12px;width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;padding-left:35px;">
+                                        <div ng-show="!nationalSearch.CNA.jurisdiction" style="color:#AAA;font-weight:bold;" > Jurisdiction <span class="pull-right"><i class="caret"></i></span></div>
+                                        <div ng-show="nationalSearch.CNA.jurisdiction">
+                                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;"> Jurisdiction </div>
+                                            <div style="font-weight:bold;">
+                                                 {{nationalSearch.CNA.jurisdiction}} <span class="pull-right"><i class="caret"></i></span></div>
+                                        </div>
+                                      </button>
+                                      <ul class="dropdown-menu">
+                                        <li><a href="#" ng-click="nationalSearch.CNA.jurisdiction='everything'" >everything</a></li>
+                                        <li><a href="#" ng-click="nationalSearch.CNA.jurisdiction='nothing'">nothing</a></li>
+                                      </ul>
+                                    </div>
+                                </div>
+                           </div>
+                        
+                         <div class="typebtn"  layout="row" style="" >
+                            <div> <md-checkbox ng-model="nationalSearch.NDB" class="md-primary" style="position:relative;top:0;padding-top:0;margin-top:0;"></md-checkbox></div>
+                            <div flex ng-class="{'bold': nationalSearch.NDB}" ng-click="nationalSearch.NDB=!nationalSearch.NDB"   style="padding-top:7px;font-size:12px;line-height:12px;">  National Website or Database (NDB) </div>
+                            <div style="padding-left:3px;"> <span class="badge">1</span> </div>
+                        </div>
+                        
+                        <div class="typebtn" layout="row" style="">
+                            <div> <md-checkbox ng-model="nationalSearch.MSR" class="md-primary" style="position:relative;top:0;padding-top:0;margin-top:0;"></md-checkbox></div>
+                            <div flex ng-class="{'bold': nationalSearch.MSR}" ng-click="nationalSearch.MSR=!nationalSearch.MSR"   style="position:relative;top:2px;font-size:12px;line-height:12px;"> Legislative, administrative or policy measures (MSR)</div>
+                            <div style="padding-left:3px;"> <span class="badge">1</span> </div>
+                        </div>
+                        <div layout="row" ng-show="nationalSearch.MSR" class="typebtn_sub" layout="row" >
+                                <div flex class="bold"  style="font-size:12px;line-height:12px;"> 
+                                    <div class="btn-group" style="width:100%;">
+                                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:12px;width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;padding-left:35px;">
+                                        <div ng-show="!nationalSearch.MSR.jurisdiction" style="color:#AAA;font-weight:bold;" > Jurisdiction <span class="pull-right"><i class="caret"></i></span></div>
+                                        <div ng-show="nationalSearch.MSR.jurisdiction">
+                                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;"> Jurisdiction </div>
+                                            <div style="font-weight:bold;">
+                                                {{nationalSearch.MSR.jurisdiction}} <span class="pull-right"><i class="caret"></i></span></div>
+                                        </div>
+                                      </button>
+                                      <ul class="dropdown-menu">
+                                        <li><a href="#" ng-click="nationalSearch.MSR.jurisdiction='everything'" >everything</a></li>
+                                        <li><a href="#" ng-click="nationalSearch.MSR.jurisdiction='nothing'">nothing</a></li>
+                                      </ul>
+                                    </div>
+                                </div>
+                           </div>
+                           <div layout="row" ng-show="nationalSearch.MSR" class="typebtn_sub" layout="row"  >
+                                <div flex class="bold"  style="font-size:12px;line-height:12px;"> 
+                                    <div class="btn-group" style="width:100%;">
+                                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:12px;width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;padding-left:35px;">
+                                        <div ng-show="!nationalSearch.MSR.status" style="color:#AAA;font-weight:bold;" > Status <span class="pull-right"><i class="caret"></i></span></div>
+                                        <div ng-show="nationalSearch.MSR.status">
+                                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;"> Status </div>
+                                            <div style="font-weight:bold;">
+                                                 {{nationalSearch.MSR.status}} <span class="pull-right"><i class="caret"></i></span></div>
+                                        </div>
+                                      </button>
+                                      <ul class="dropdown-menu">
+                                        <li><a href="#" ng-click="nationalSearch.MSR.status='everything'" >everything</a></li>
+                                        <li><a href="#" ng-click="nationalSearch.MSR.status='nothing'">nothing</a></li>
+                                      </ul>
+                                    </div>
+                                </div>
+                           </div>
+                           <div layout="row" ng-show="nationalSearch.MSR" class="typebtn_sub" layout="row"  >
+                                <div flex class="bold"  style="font-size:12px;line-height:12px;"> 
+                                    <div class="btn-group" style="width:100%;">
+                                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:12px;width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;padding-left:35px;">
+                                        <div ng-show="!nationalSearch.MSR.type" style="color:#AAA;font-weight:bold;" > Type <span class="pull-right"><i class="caret"></i></span></div>
+                                        <div ng-show="nationalSearch.MSR.type">
+                                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;"> Type </div>
+                                            <div style="font-weight:bold;">
+                                               {{nationalSearch.MSR.type}} <span class="pull-right"><i class="caret"></i></span></div>
+                                        </div>
+                                      </button>
+                                      <ul class="dropdown-menu">
+                                        <li><a href="#" ng-click="nationalSearch.MSR.type='everything'" >everything</a></li>
+                                        <li><a href="#" ng-click="nationalSearch.MSR.type='nothing'">nothing</a></li>
+                                      </ul>
+                                    </div>
+                                </div>
+                           </div>
+                        
+                        <div class="typebtn" layout="row" style="" >
+                            <div> <md-checkbox ng-model="nationalSearch.IRCC" class="md-primary" style="position:relative;top:0;padding-top:0;margin-top:0;"></md-checkbox></div>
+                            <div flex ng-class="{'bold': nationalSearch.IRCC}" ng-click="nationalSearch.IRCC=!nationalSearch.IRCC"  style="position:relative;top:2px;font-size:12px;line-height:12px;"> Internationally Recognized Certificate of Compliance (IRCC)</div>
+                            <div style="padding-left:3px;"> <span class="badge">1</span> </div>
+                        </div>
+                        <div layout="row" ng-show="nationalSearch.IRCC" class="typebtn_sub" layout="row" >
+                                <div flex class="bold" style="font-size:12px;line-height:12px;"> 
+                                    <div class="btn-group" style="width:100%;">
+                                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:12px;width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;padding-left:35px;">
+                                        <div ng-show="!nationalSearch.IRCC.intent" style="color:#AAA;font-weight:bold;" > Intent <span class="pull-right"><i class="caret"></i></span></div>
+                                        <div ng-show="nationalSearch.IRCC.intent">
+                                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;"> Intent </div>
+                                            <div style="font-weight:bold;">
+                                                 {{nationalSearch.IRCC.intent}} <span class="pull-right"><i class="caret"></i></span></div>
+                                        </div>
+                                      </button>
+                                      <ul class="dropdown-menu">
+                                        <li><a href="#" ng-click="nationalSearch.IRCC.intent='everything'" >everything</a></li>
+                                        <li><a href="#" ng-click="nationalSearch.IRCC.intent='nothing'">nothing</a></li>
+                                      </ul>
+                                    </div>
+                                </div>
+                           </div>
+                   
+                           <div layout="row" ng-show="nationalSearch.IRCC" class="typebtn_sub" layout="row" >
+                                <div flex class="bold" style="font-size:12px;line-height:12px;"> 
+                                    <div class="btn-group" style="width:100%;">
+                                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:12px;width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;padding-left:35px;">
+                                        <div ng-show="!nationalSearch.IRCC.keywords" style="color:#AAA;font-weight:bold;" > Keywords <span class="pull-right"><i class="caret"></i></span></div>
+                                        <div ng-show="nationalSearch.IRCC.keywords">
+                                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;"> Keywords </div>
+                                            <div style="font-weight:bold;">
+                                                 {{nationalSearch.IRCC.keywords}} <span class="pull-right"><i class="caret"></i></span></div>
+                                        </div>
+                                      </button>
+                                      <ul class="dropdown-menu">
+                                        <li><a href="#" ng-click="nationalSearch.IRCC.keywords='everything'" >everything</a></li>
+                                        <li><a href="#" ng-click="nationalSearch.IRCC.keywords='nothing'">nothing</a></li>
+                                      </ul>
+                                    </div>
+                                </div>
+                           </div>
+                           <div layout="row" ng-show="nationalSearch.IRCC" class="typebtn_sub" layout="row" >
+                                <div flex class="bold" style="font-size:12px;line-height:12px;"> 
+                                    <div class="btn-group" style="width:100%;">
+                                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:12px;width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;padding-left:35px;">
+                                        <div ng-show="!nationalSearch.IRCC.ammendments" style="color:#AAA;font-weight:bold;" > Ammendments <span class="pull-right"><i class="caret"></i></span></div>
+                                        <div ng-show="nationalSearch.IRCC.ammendments">
+                                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;"> Ammendments </div>
+                                            <div style="font-weight:bold;">
+                                                 {{nationalSearch.IRCC.ammendments}} <span class="pull-right"><i class="caret"></i></span></div>
+                                        </div>
+                                      </button>
+                                      <ul class="dropdown-menu">
+                                        <li><a href="#" ng-click="nationalSearch.IRCC.ammendments='everything'" >everything</a></li>
+                                        <li><a href="#" ng-click="nationalSearch.IRCC.ammendments='nothing'">nothing</a></li>
+                                      </ul>
+                                    </div>
+                                </div>
+                           </div>
+                        
+                        
+                         <div class="typebtn" layout="row" style="" >
+                            <div> <md-checkbox ng-model="nationalSearch.CP" class="md-primary" style="position:relative;top:0;padding-top:0;margin-top:0;"></md-checkbox></div>
+                            <div flex ng-class="{'bold': nationalSearch.CP}" ng-click="nationalSearch.CP=!nationalSearch.CP"  style="position:relative;top:7px;font-size:12px;line-height:12px;"> Checkpoint (CP)</div>
+                            <div style="padding-left:3px;"> <span class="badge">1</span> </div>
+                        </div>
+                        <div layout="row" ng-show="nationalSearch.CP" class="typebtn_sub" layout="row" >
+                                <div flex class="bold" style="font-size:12px;line-height:12px;"> 
+                                    <div class="btn-group" style="width:100%;">
+                                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:12px;width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;padding-left:35px;">
+                                        <div ng-show="!nationalSearch.CP.jurisdiction" style="color:#AAA;font-weight:bold;" > Jurisdiction <span class="pull-right"><i class="caret"></i></span></div>
+                                        <div ng-show="nationalSearch.CP.jurisdiction">
+                                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;"> Jurisdiction </div>
+                                            <div style="font-weight:bold;">
+                                                 {{nationalSearch.CP.jurisdiction}} <span class="pull-right"><i class="caret"></i></span></div>
+                                        </div>
+                                      </button>
+                                      <ul class="dropdown-menu">
+                                        <li><a href="#" ng-click="nationalSearch.CP.jurisdiction='everything'" >everything</a></li>
+                                        <li><a href="#" ng-click="nationalSearch.CP.jurisdiction='nothing'">nothing</a></li>
+                                      </ul>
+                                    </div>
+                                </div>
+                           </div>
+                        
+                         <div class="typebtn" layout="row" style="" >
+                            <div> <md-checkbox ng-model="nationalSearch.CPC" class="md-primary" style="position:relative;top:0;padding-top:0;margin-top:0;"></md-checkbox></div>
+                            <div flex ng-class="{'bold': nationalSearch.CPC}" ng-click="nationalSearch.CPC=!nationalSearch.CPC"  style="position:relative;top:7px;font-size:12px;line-height:12px;"> Checkpoint  Communiqué (CPC)</div>
+                            <div style="padding-left:3px;"> <span class="badge">1</span> </div>
+                        </div>
+                    
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              <div class="panel panel-default" style="border-radius:0!important;border:0;">
+                <div class="panel-heading bg-blue" role="tab" id="headingTwo"  style="border-radius:0!important;border:0;">
+                  <h4 class="panel-title" ng-click="updatePreviewType('group')">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="#collapseTwo">
+                      <i class="fa fa-chevron-circle-up pad-left" ></i> 
+                        National Records
+                        <div class="help color-grey" style="font-size:12px;">search individual records </div>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                  <div class="panel-body bg-white">
+                      
+                      <div class="btn-group" style="width:100%;">
+                           <div ng-show="nationalSearch.keyword">
+                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;padding-left:12px;">Keyword</div>
+                        </div>
+                      <input ng-model="nationalSearch.keyword" style="font-weight:bold;color:#333;width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;padding-left:12px;padding-bottom:5px;" placeholder="Keyword"></input>
+                    </div>
+                      
+                    <div class="btn-group" style="width:100%;">
+                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;">
+                        <div ng-show="!nationalSearch.recordsStyle" style="color:#AAA;font-weight:bold;" >List layout  <span class="pull-right"><i class="caret"></i></span></div>
+                        <div ng-show="nationalSearch.recordsStyle">
+                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;">List layout</div>
+                            <div style="font-weight:bold;">{{nationalSearch.recordsStyle}} <span class="pull-right"><i class="caret"></i></span></div>
+                        </div>
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><a href="#" ng-click="nationalSearch.recordsStyle='List Records'"> Individual records</a></li>
+                        <li><a href="#" ng-click="nationalSearch.recordsStyle='Group by country'" >Group by country</a></li>
+                      </ul>
+                    </div>
+                    
+                    <br>
+                    
+                     <div class="btn-group" style="width:100%;">
+                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;">
+                        <div ng-show="!nationalSearch.partyStatus" style="color:#AAA;font-weight:bold;" >Party status <span class="pull-right"><i class="caret"></i></span></div>
+                        <div ng-show="nationalSearch.partyStatus">
+                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;">Party status </div>
+                            <div style="font-weight:bold;">
+                                <i class="fa fa-square color-blue" ></i>
+                                {{nationalSearch.partyStatus}} <span class="pull-right"><i class="caret"></i></span></div>
+                        </div>
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><a href="#" ng-click="nationalSearch.partyStatus='Parties'" > <i class="fa fa-square color-blue" ></i> Parties to the Nagoya Protocol </a></li>
+                        <li><a href="#" ng-click="nationalSearch.partyStatus='Non-Parties'"> <i class="fa fa-square color-grey" ></i> Non-Parties to the Nagoya Protocol</a></li>
+                        <li><a href="#" ng-click="nationalSearch.partyStatus='Both Parties and Non-Parties'">Both Parties and Non-Parties</a></li>
+                      </ul>
+                    </div>
+                    
+                     <br>
+                    
+                     <div class="btn-group" style="width:100%;">
+                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;">
+                        <div ng-show="!nationalSearch.country" style="color:#AAA;font-weight:bold;" >Country <span class="pull-right"><i class="caret"></i></span></div>
+                        <div ng-show="nationalSearch.country">
+                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;">Country </div>
+                            <div style="font-weight:bold;">
+                                <i class="fa fa-square color-blue" ></i>
+                                {{nationalSearch.country}} <span class="pull-right"><i class="caret"></i></span></div>
+                        </div>
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><a href="#" ng-click="nationalSearch.country='Canada'" > <i class="fa fa-square color-blue" ></i> Canada</a></li>
+                        <li><a href="#" ng-click="nationalSearch.country='France'"> <i class="fa fa-square color-grey" ></i> France</a></li>
+                        <li><a href="#" ng-click="nationalSearch.country='Canada'" > <i class="fa fa-square color-blue" ></i> Canada</a></li>
+                        <li><a href="#" ng-click="nationalSearch.country='France'"> <i class="fa fa-square color-grey" ></i> France</a></li>
+                        <li><a href="#" ng-click="nationalSearch.country='Canada'" > <i class="fa fa-square color-blue" ></i> Canada</a></li>
+                        <li><a href="#" ng-click="nationalSearch.country='France'"> <i class="fa fa-square color-grey" ></i> France</a></li>
+                        <li><a href="#" ng-click="nationalSearch.country='Canada'" > <i class="fa fa-square color-blue" ></i> Canada</a></li>
+                        <li><a href="#" ng-click="nationalSearch.country='France'"> <i class="fa fa-square color-grey" ></i> France</a></li>
+                      </ul>
+                    </div>
+                    
+                    <br>
+                    
+                      <div class="btn-group" style="width:100%;">
+                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;">
+                        <div ng-show="!nationalSearch.region" style="color:#AAA;font-weight:bold;" >Region <span class="pull-right"><i class="caret"></i></span></div>
+                        <div ng-show="nationalSearch.region">
+                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;">Region </div>
+                            <div style="font-weight:bold;">
+                                {{nationalSearch.region}} <span class="pull-right"><i class="caret"></i></span></div>
+                        </div>
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><a href="#" ng-click="nationalSearch.region='Canada'" >  Canada</a></li>
+                       <li><a href="#" ng-click="nationalSearch.region='Canada'" >  Canada</a></li>
+                       <li><a href="#" ng-click="nationalSearch.region='Canada'" >  Canada</a></li>
+                       <li><a href="#" ng-click="nationalSearch.region='Canada'" >  Canada</a></li>
+                      </ul>
+                    </div>
+                    
+                    <br>
+                    <div style="padding-top:10px;">
+                        <div style="padding-left:10px;font-size:12px;color:#AAA;font-weight:bold;margin-bottom:3px;">Record type</div>
+                        
+                        <div class="typebtn" layout="row" style="" >
+                                <div> <md-checkbox ng-model="nationalSearch.NFP" class="md-primary" style="position:relative;top:0;padding-top:0;margin-top:0;"></md-checkbox></div>
+                                <div flex ng-class="{'bold': nationalSearch.NFP}" ng-click="nationalSearch.NFP=!nationalSearch.NFP"  style="padding-top:7px;font-size:12px;line-height:12px;"> ABS Focal Point (FP) </div>
+                                <div style="padding-left:3px;"> <span class="badge">1</span> </div>
+                            </div>
+                            <div layout="row" ng-show="nationalSearch.NFP" class="typebtn_sub" layout="row"  >
+                                <div flex class="bold"  style="font-size:12px;line-height:12px;"> 
+                                    <div class="btn-group" style="width:100%;">
+                                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:12px;width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;padding-left:35px;">
+                                        <div ng-show="!nationalSearch.NFP.type" style="color:#AAA;font-weight:bold;" >Focal Point Type <span class="pull-right"><i class="caret"></i></span></div>
+                                        <div ng-show="nationalSearch.NFP.type">
+                                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;">Focal Point Type </div>
+                                            <div style="font-weight:bold;">
+                                                {{nationalSearch.NFP.type}} <span class="pull-right"><i class="caret"></i></span></div>
+                                        </div>
+                                      </button>
+                                      <ul class="dropdown-menu">
+                                        <li><a href="#" ng-click="nationalSearch.NFP.type='ABS'" > <i class="fa fa-square color-blue" ></i> ABS Focal Points</a></li>
+                                        <li><a href="#" ng-click="nationalSearch.NFP.type='CBD'">  <i class="fa fa-square color-grey" ></i> CBD National Focal Points</a></li>
+                                        <li><a href="#" ng-click="nationalSearch.NFP.type='both'"> <i class="fa fa-square color-grey" ></i> All types</a></li>
+                                      </ul>
+                                    </div>
+                                </div>
+                            </div>
+                       
+                        
+                  
+                       <div  class="typebtn"  layout="row" style="" >
+                            <div> <md-checkbox ng-model="nationalSearch.CNA" class="md-primary" style="position:relative;top:0;padding-top:0;margin-top:0;"></md-checkbox></div>
+                            <div flex ng-class="{'bold': nationalSearch.CNA}" ng-click="nationalSearch.CNA=!nationalSearch.CNA"   style="padding-top:7px;font-size:12px;line-height:12px;"> Competent National Authority (CNA) </div>
+                            <div style="padding-left:3px;"> <span class="badge">1</span> </div>
+                        </div>
+                        <div layout="row" ng-show="nationalSearch.CNA" class="typebtn_sub" layout="row" >
+                                <div flex class="bold"  style="font-size:12px;line-height:12px;"> 
+                                    <div class="btn-group" style="width:100%;">
+                                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:12px;width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;padding-left:35px;">
+                                        <div ng-show="!nationalSearch.CNA.scope" style="color:#AAA;font-weight:bold;" > Scope of responsibilities <span class="pull-right"><i class="caret"></i></span></div>
+                                        <div ng-show="nationalSearch.CNA.scope">
+                                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;"> Scope of responibilities </div>
+                                            <div style="font-weight:bold;">
+                                                {{nationalSearch.CNA.scope}} <span class="pull-right"><i class="caret"></i></span></div>
+                                        </div>
+                                      </button>
+                                      <ul class="dropdown-menu">
+                                        <li><a href="#" ng-click="nationalSearch.CNA.scope='everything'" >everything</a></li>
+                                        <li><a href="#" ng-click="nationalSearch.CNA.scope='nothing'">nothing</a></li>
+                                      </ul>
+                                    </div>
+                                </div>
+                           </div>
+                           <div layout="row" ng-show="nationalSearch.CNA" class="typebtn_sub" layout="row"  >
+                                <div flex class="bold"  style="font-size:12px;line-height:12px;"> 
+                                    <div class="btn-group" style="width:100%;">
+                                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:12px;width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;padding-left:35px;">
+                                        <div ng-show="!nationalSearch.CNA.jurisdiction" style="color:#AAA;font-weight:bold;" > Jurisdiction <span class="pull-right"><i class="caret"></i></span></div>
+                                        <div ng-show="nationalSearch.CNA.jurisdiction">
+                                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;"> Jurisdiction </div>
+                                            <div style="font-weight:bold;">
+                                                 {{nationalSearch.CNA.jurisdiction}} <span class="pull-right"><i class="caret"></i></span></div>
+                                        </div>
+                                      </button>
+                                      <ul class="dropdown-menu">
+                                        <li><a href="#" ng-click="nationalSearch.CNA.jurisdiction='everything'" >everything</a></li>
+                                        <li><a href="#" ng-click="nationalSearch.CNA.jurisdiction='nothing'">nothing</a></li>
+                                      </ul>
+                                    </div>
+                                </div>
+                           </div>
+                        
+                         <div class="typebtn"  layout="row" style="" >
+                            <div> <md-checkbox ng-model="nationalSearch.NDB" class="md-primary" style="position:relative;top:0;padding-top:0;margin-top:0;"></md-checkbox></div>
+                            <div flex ng-class="{'bold': nationalSearch.NDB}" ng-click="nationalSearch.NDB=!nationalSearch.NDB"   style="padding-top:7px;font-size:12px;line-height:12px;">  National Website or Database (NDB) </div>
+                            <div style="padding-left:3px;"> <span class="badge">1</span> </div>
+                        </div>
+                        
+                        <div class="typebtn" layout="row" style="">
+                            <div> <md-checkbox ng-model="nationalSearch.MSR" class="md-primary" style="position:relative;top:0;padding-top:0;margin-top:0;"></md-checkbox></div>
+                            <div flex ng-class="{'bold': nationalSearch.MSR}" ng-click="nationalSearch.MSR=!nationalSearch.MSR"   style="position:relative;top:2px;font-size:12px;line-height:12px;"> Legislative, administrative or policy measures (MSR)</div>
+                            <div style="padding-left:3px;"> <span class="badge">1</span> </div>
+                        </div>
+                        <div layout="row" ng-show="nationalSearch.MSR" class="typebtn_sub" layout="row" >
+                                <div flex class="bold"  style="font-size:12px;line-height:12px;"> 
+                                    <div class="btn-group" style="width:100%;">
+                                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:12px;width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;padding-left:35px;">
+                                        <div ng-show="!nationalSearch.MSR.jurisdiction" style="color:#AAA;font-weight:bold;" > Jurisdiction <span class="pull-right"><i class="caret"></i></span></div>
+                                        <div ng-show="nationalSearch.MSR.jurisdiction">
+                                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;"> Jurisdiction </div>
+                                            <div style="font-weight:bold;">
+                                                {{nationalSearch.MSR.jurisdiction}} <span class="pull-right"><i class="caret"></i></span></div>
+                                        </div>
+                                      </button>
+                                      <ul class="dropdown-menu">
+                                        <li><a href="#" ng-click="nationalSearch.MSR.jurisdiction='everything'" >everything</a></li>
+                                        <li><a href="#" ng-click="nationalSearch.MSR.jurisdiction='nothing'">nothing</a></li>
+                                      </ul>
+                                    </div>
+                                </div>
+                           </div>
+                           <div layout="row" ng-show="nationalSearch.MSR" class="typebtn_sub" layout="row"  >
+                                <div flex class="bold"  style="font-size:12px;line-height:12px;"> 
+                                    <div class="btn-group" style="width:100%;">
+                                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:12px;width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;padding-left:35px;">
+                                        <div ng-show="!nationalSearch.MSR.status" style="color:#AAA;font-weight:bold;" > Status <span class="pull-right"><i class="caret"></i></span></div>
+                                        <div ng-show="nationalSearch.MSR.status">
+                                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;"> Status </div>
+                                            <div style="font-weight:bold;">
+                                                 {{nationalSearch.MSR.status}} <span class="pull-right"><i class="caret"></i></span></div>
+                                        </div>
+                                      </button>
+                                      <ul class="dropdown-menu">
+                                        <li><a href="#" ng-click="nationalSearch.MSR.status='everything'" >everything</a></li>
+                                        <li><a href="#" ng-click="nationalSearch.MSR.status='nothing'">nothing</a></li>
+                                      </ul>
+                                    </div>
+                                </div>
+                           </div>
+                           <div layout="row" ng-show="nationalSearch.MSR" class="typebtn_sub" layout="row"  >
+                                <div flex class="bold"  style="font-size:12px;line-height:12px;"> 
+                                    <div class="btn-group" style="width:100%;">
+                                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:12px;width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;padding-left:35px;">
+                                        <div ng-show="!nationalSearch.MSR.type" style="color:#AAA;font-weight:bold;" > Type <span class="pull-right"><i class="caret"></i></span></div>
+                                        <div ng-show="nationalSearch.MSR.type">
+                                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;"> Type </div>
+                                            <div style="font-weight:bold;">
+                                               {{nationalSearch.MSR.type}} <span class="pull-right"><i class="caret"></i></span></div>
+                                        </div>
+                                      </button>
+                                      <ul class="dropdown-menu">
+                                        <li><a href="#" ng-click="nationalSearch.MSR.type='everything'" >everything</a></li>
+                                        <li><a href="#" ng-click="nationalSearch.MSR.type='nothing'">nothing</a></li>
+                                      </ul>
+                                    </div>
+                                </div>
+                           </div>
+                        
+                        <div class="typebtn" layout="row" style="" >
+                            <div> <md-checkbox ng-model="nationalSearch.IRCC" class="md-primary" style="position:relative;top:0;padding-top:0;margin-top:0;"></md-checkbox></div>
+                            <div flex ng-class="{'bold': nationalSearch.IRCC}" ng-click="nationalSearch.IRCC=!nationalSearch.IRCC"  style="position:relative;top:2px;font-size:12px;line-height:12px;"> Internationally Recognized Certificate of Compliance (IRCC)</div>
+                            <div style="padding-left:3px;"> <span class="badge">1</span> </div>
+                        </div>
+                        <div layout="row" ng-show="nationalSearch.IRCC" class="typebtn_sub" layout="row" >
+                                <div flex class="bold" style="font-size:12px;line-height:12px;"> 
+                                    <div class="btn-group" style="width:100%;">
+                                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:12px;width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;padding-left:35px;">
+                                        <div ng-show="!nationalSearch.IRCC.intent" style="color:#AAA;font-weight:bold;" > Intent <span class="pull-right"><i class="caret"></i></span></div>
+                                        <div ng-show="nationalSearch.IRCC.intent">
+                                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;"> Intent </div>
+                                            <div style="font-weight:bold;">
+                                                 {{nationalSearch.IRCC.intent}} <span class="pull-right"><i class="caret"></i></span></div>
+                                        </div>
+                                      </button>
+                                      <ul class="dropdown-menu">
+                                        <li><a href="#" ng-click="nationalSearch.IRCC.intent='everything'" >everything</a></li>
+                                        <li><a href="#" ng-click="nationalSearch.IRCC.intent='nothing'">nothing</a></li>
+                                      </ul>
+                                    </div>
+                                </div>
+                           </div>
+                   
+                           <div layout="row" ng-show="nationalSearch.IRCC" class="typebtn_sub" layout="row" >
+                                <div flex class="bold" style="font-size:12px;line-height:12px;"> 
+                                    <div class="btn-group" style="width:100%;">
+                                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:12px;width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;padding-left:35px;">
+                                        <div ng-show="!nationalSearch.IRCC.keywords" style="color:#AAA;font-weight:bold;" > Keywords <span class="pull-right"><i class="caret"></i></span></div>
+                                        <div ng-show="nationalSearch.IRCC.keywords">
+                                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;"> Keywords </div>
+                                            <div style="font-weight:bold;">
+                                                 {{nationalSearch.IRCC.keywords}} <span class="pull-right"><i class="caret"></i></span></div>
+                                        </div>
+                                      </button>
+                                      <ul class="dropdown-menu">
+                                        <li><a href="#" ng-click="nationalSearch.IRCC.keywords='everything'" >everything</a></li>
+                                        <li><a href="#" ng-click="nationalSearch.IRCC.keywords='nothing'">nothing</a></li>
+                                      </ul>
+                                    </div>
+                                </div>
+                           </div>
+                           <div layout="row" ng-show="nationalSearch.IRCC" class="typebtn_sub" layout="row" >
+                                <div flex class="bold" style="font-size:12px;line-height:12px;"> 
+                                    <div class="btn-group" style="width:100%;">
+                                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:12px;width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;padding-left:35px;">
+                                        <div ng-show="!nationalSearch.IRCC.ammendments" style="color:#AAA;font-weight:bold;" > Ammendments <span class="pull-right"><i class="caret"></i></span></div>
+                                        <div ng-show="nationalSearch.IRCC.ammendments">
+                                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;"> Ammendments </div>
+                                            <div style="font-weight:bold;">
+                                                 {{nationalSearch.IRCC.ammendments}} <span class="pull-right"><i class="caret"></i></span></div>
+                                        </div>
+                                      </button>
+                                      <ul class="dropdown-menu">
+                                        <li><a href="#" ng-click="nationalSearch.IRCC.ammendments='everything'" >everything</a></li>
+                                        <li><a href="#" ng-click="nationalSearch.IRCC.ammendments='nothing'">nothing</a></li>
+                                      </ul>
+                                    </div>
+                                </div>
+                           </div>
+                        
+                        
+                         <div class="typebtn" layout="row" style="" >
+                            <div> <md-checkbox ng-model="nationalSearch.CP" class="md-primary" style="position:relative;top:0;padding-top:0;margin-top:0;"></md-checkbox></div>
+                            <div flex ng-class="{'bold': nationalSearch.CP}" ng-click="nationalSearch.CP=!nationalSearch.CP"  style="position:relative;top:7px;font-size:12px;line-height:12px;"> Checkpoint (CP)</div>
+                            <div style="padding-left:3px;"> <span class="badge">1</span> </div>
+                        </div>
+                        <div layout="row" ng-show="nationalSearch.CP" class="typebtn_sub" layout="row" >
+                                <div flex class="bold" style="font-size:12px;line-height:12px;"> 
+                                    <div class="btn-group" style="width:100%;">
+                                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:12px;width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;padding-left:35px;">
+                                        <div ng-show="!nationalSearch.CP.jurisdiction" style="color:#AAA;font-weight:bold;" > Jurisdiction <span class="pull-right"><i class="caret"></i></span></div>
+                                        <div ng-show="nationalSearch.CP.jurisdiction">
+                                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;"> Jurisdiction </div>
+                                            <div style="font-weight:bold;">
+                                                 {{nationalSearch.CP.jurisdiction}} <span class="pull-right"><i class="caret"></i></span></div>
+                                        </div>
+                                      </button>
+                                      <ul class="dropdown-menu">
+                                        <li><a href="#" ng-click="nationalSearch.CP.jurisdiction='everything'" >everything</a></li>
+                                        <li><a href="#" ng-click="nationalSearch.CP.jurisdiction='nothing'">nothing</a></li>
+                                      </ul>
+                                    </div>
+                                </div>
+                           </div>
+                        
+                         <div class="typebtn" layout="row" style="" >
+                            <div> <md-checkbox ng-model="nationalSearch.CPC" class="md-primary" style="position:relative;top:0;padding-top:0;margin-top:0;"></md-checkbox></div>
+                            <div flex ng-class="{'bold': nationalSearch.CPC}" ng-click="nationalSearch.CPC=!nationalSearch.CPC"  style="position:relative;top:7px;font-size:12px;line-height:12px;"> Checkpoint  Communiqué (CPC)</div>
+                            <div style="padding-left:3px;"> <span class="badge">1</span> </div>
+                        </div>
+                    
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              <div class="panel panel-default" style="border-radius:0!important;border:0;">
+                <div class="panel-heading  bg-orange" role="tab" id="headingThree"style="border-radius:0!important;border:0;" >
+                  <h4 class="panel-title"  ng-click="updatePreviewType('list')">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                       <i class="fa fa-chevron-circle-up pad-left" ></i>
+                     Search Reference Records
+                      <div class="help color-grey" style="font-size:12px;">search individual records</div>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                  <div class="panel-body " style="min-height:500px;">
+                 
+                 <div class="btn-group" style="width:100%;">
+                           <div ng-show="referenceSearch.keyword">
+                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;padding-left:12px;">Keyword</div>
+                        </div>
+                      <input ng-model="referenceSearch.keyword" style="font-weight:bold;color:#333;width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;padding-left:12px;padding-bottom:5px;" placeholder="Keyword"></input>
+                    </div>
+                      
+                    <div class="btn-group" style="width:100%;">
+                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;">
+                        <div ng-show="!referenceSearch.recordsStyle" style="color:#AAA;font-weight:bold;" >List layout  <span class="pull-right"><i class="caret"></i></span></div>
+                        <div ng-show="referenceSearch.recordsStyle">
+                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;">List layout</div>
+                            <div style="font-weight:bold;">{{referenceSearch.recordsStyle}} <span class="pull-right"><i class="caret"></i></span></div>
+                        </div>
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><a href="#" ng-click="referenceSearch.recordsStyle='List Records'"> Individual records</a></li>
+                        <li><a href="#" ng-click="referenceSearch.recordsStyle='Group by country'" >Group by Organization</a></li>
+                      </ul>
+                    </div>
+                    
+                    <br>
+                    
+                     <div class="btn-group" style="width:100%;">
+                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;">
+                        <div ng-show="!referenceSearch.country" style="color:#AAA;font-weight:bold;" >Country <span class="pull-right"><i class="caret"></i></span></div>
+                        <div ng-show="referenceSearch.country">
+                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;">Country </div>
+                            <div style="font-weight:bold;">
+                                <i class="fa fa-square color-blue" ></i>
+                                {{referenceSearch.country}} <span class="pull-right"><i class="caret"></i></span></div>
+                        </div>
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><a href="#" ng-click="referenceSearch.country='Canada'" > <i class="fa fa-square color-blue" ></i> Canada</a></li>
+                        <li><a href="#" ng-click="referenceSearch.country='France'"> <i class="fa fa-square color-grey" ></i> France</a></li>
+                        </ul>
+                    </div>
+                    
+                    <br>
+                    
+                      <div class="btn-group" style="width:100%;">
+                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;">
+                        <div ng-show="!referenceSearch.region" style="color:#AAA;font-weight:bold;" >Region <span class="pull-right"><i class="caret"></i></span></div>
+                        <div ng-show="referenceSearch.region">
+                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;">Region </div>
+                            <div style="font-weight:bold;">
+                                {{referenceSearch.region}} <span class="pull-right"><i class="caret"></i></span></div>
+                        </div>
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><a href="#" ng-click="referenceSearch.region='Canada'" >  Canada</a></li>
+                       <li><a href="#" ng-click="referenceSearch.region='Canada'" >  Canada</a></li>
+                       <li><a href="#" ng-click="referenceSearch.region='Canada'" >  Canada</a></li>
+                       <li><a href="#" ng-click="referenceSearch.region='Canada'" >  Canada</a></li>
+                      </ul>
+                    </div>
+                    
+                    <br>
+                      <div class="btn-group" style="width:100%;">
+                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;">
+                        <div ng-show="!referenceSearch.organization" style="color:#AAA;font-weight:bold;" >Organization <span class="pull-right"><i class="caret"></i></span></div>
+                        <div ng-show="referenceSearch.organization">
+                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;">Organization </div>
+                            <div style="font-weight:bold;">
+                                {{referenceSearch.organization}} <span class="pull-right"><i class="caret"></i></span></div>
+                        </div>
+                      </button>
+                      <ul class="dropdown-menu">
+                       <li><a href="#" ng-click="referenceSearch.organization='Canada'">   Canada</a></li>
+                       <li><a href="#" ng-click="referenceSearch.organization='Canada'" >  Canada</a></li>
+                       <li><a href="#" ng-click="referenceSearch.organization='Canada'" >  Canada</a></li>
+                       <li><a href="#" ng-click="referenceSearch.organization='Canada'" >  Canada</a></li>
+                      </ul>
+                    </div>
+                    
+                    <br>
+                      <div class="btn-group" style="width:100%;">
+                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;">
+                        <div ng-show="!referenceSearch.thematic" style="color:#AAA;font-weight:bold;" >Thematic Area <span class="pull-right"><i class="caret"></i></span></div>
+                        <div ng-show="referenceSearch.thematic">
+                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;">Thematic Area </div>
+                            <div style="font-weight:bold;">
+                                {{referenceSearch.thematic}} <span class="pull-right"><i class="caret"></i></span></div>
+                        </div>
+                      </button>
+                      <ul class="dropdown-menu">
+                       <li><a href="#" ng-click="referenceSearch.thematic='Canada'">   Canada</a></li>
+                       <li><a href="#" ng-click="referenceSearch.thematic='Canada'" >  Canada</a></li>
+                       <li><a href="#" ng-click="referenceSearch.thematic='Canada'" >  Canada</a></li>
+                       <li><a href="#" ng-click="referenceSearch.thematic='Canada'" >  Canada</a></li>
+                      </ul>
+                    </div>
+                    <br>
+                    <div style="padding-top:10px;">
+                        <div style="padding-left:10px;font-size:12px;color:#AAA;font-weight:bold;margin-bottom:3px;">Record type</div>
+                        
+                        <div class="typebtn" layout="row" style="" >
+                                <div> <md-checkbox ng-model="referenceSearch.VLR" class="md-primary" style="position:relative;top:0;padding-top:0;margin-top:0;"></md-checkbox></div>
+                                <div flex ng-class="{'bold': referenceSearch.VLR}" ng-click="referenceSearch.VLR=!referenceSearch.VLR"  style="padding-top:7px;font-size:12px;line-height:12px;"> Virtual Library Resources (VLR) </div>
+                                <div style="padding-left:3px;"> <span class="badge">1</span> </div>
+                            </div>
+                            <div layout="row" ng-show="referenceSearch.VLR" class="typebtn_sub" layout="row"  >
+                                <div flex class="bold"  style="font-size:12px;line-height:12px;"> 
+                                    <div class="btn-group" style="width:100%;">
+                                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:12px;width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;padding-left:35px;">
+                                        <div ng-show="!referenceSearch.VLR.type" style="color:#AAA;font-weight:bold;" >Focal Point Type <span class="pull-right"><i class="caret"></i></span></div>
+                                        <div ng-show="referenceSearch.VLR.type">
+                                            <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;">Focal Point Type </div>
+                                            <div style="font-weight:bold;">
+                                                {{referenceSearch.VLR.type}} <span class="pull-right"><i class="caret"></i></span></div>
+                                        </div>
+                                      </button>
+                                      <ul class="dropdown-menu">
+                                        <li><a href="#" ng-click="referenceSearch.VLR.type='ABS'" > <i class="fa fa-square color-blue" ></i> ABS Focal Points</a></li>
+                                        <li><a href="#" ng-click="referenceSearch.VLR.type='CBD'">  <i class="fa fa-square color-grey" ></i> CBD National Focal Points</a></li>
+                                        <li><a href="#" ng-click="referenceSearch.VLR.type='both'"> <i class="fa fa-square color-grey" ></i> All types</a></li>
+                                      </ul>
+                                    </div>
+                                </div>
+                            </div>
+                              <div class="typebtn" layout="row" style="" >
+                                <div> <md-checkbox ng-model="referenceSearch.MCC" class="md-primary" style="position:relative;top:0;padding-top:0;margin-top:0;"></md-checkbox></div>
+                                <div flex ng-class="{'bold': referenceSearch.MCC}" ng-click="referenceSearch.MCC=!referenceSearch.MCC"  style="padding-top:7px;font-size:12px;line-height:12px;"> Model Contractual Clauses (MCC) </div>
+                                <div style="padding-left:3px;"> <span class="badge">1</span> </div>
+                            </div>
+                            
+                              <div class="typebtn" layout="row" style="" >
+                                <div> <md-checkbox ng-model="referenceSearch.COC" class="md-primary" style="position:relative;top:0;padding-top:0;margin-top:0;"></md-checkbox></div>
+                                <div flex ng-class="{'bold': referenceSearch.COC}" ng-click="referenceSearch.COC=!referenceSearch.COC"  style="padding-top:2px;font-size:12px;line-height:12px;"> Codes of Conduct, Guidelines, Best Practices and Standards (COC) </div>
+                                <div style="padding-left:3px;"> <span class="badge">1</span> </div>
+                            </div>
+                            
+                              <div class="typebtn" layout="row" style="" >
+                                <div> <md-checkbox ng-model="referenceSearch.CBT" class="md-primary" style="position:relative;top:0;padding-top:0;margin-top:0;"></md-checkbox></div>
+                                <div flex ng-class="{'bold': referenceSearch.CBT}" ng-click="referenceSearch.CBT=!referenceSearch.CBT"  style="padding-top:7px;font-size:12px;line-height:12px;"> Capacity Building Tools (CBT) </div>
+                                <div style="padding-left:3px;"> <span class="badge">1</span> </div>
+                            </div>
+                            
+                              <div class="typebtn" layout="row" style="" >
+                                <div> <md-checkbox ng-model="referenceSearch.MT" class="md-primary" style="position:relative;top:0;padding-top:0;margin-top:0;"></md-checkbox></div>
+                                <div flex ng-class="{'bold': referenceSearch.MT}" ng-click="referenceSearch.MT=!referenceSearch.MT"  style="padding-top:7px;font-size:12px;line-height:12px;"> Meetings</div>
+                                <div style="padding-left:3px;"> <span class="badge">1</span> </div>
+                            </div>
+                            
+                              <div class="typebtn" layout="row" style="" >
+                                <div> <md-checkbox ng-model="referenceSearch.NT" class="md-primary" style="position:relative;top:0;padding-top:0;margin-top:0;"></md-checkbox></div>
+                                <div flex ng-class="{'bold': referenceSearch.NT}" ng-click="referenceSearch.NT=!referenceSearch.NT"  style="padding-top:7px;font-size:12px;line-height:12px;"> Notifications </div>
+                                <div style="padding-left:3px;"> <span class="badge">1</span> </div>
+                            </div>
+                            
+                              <div class="typebtn" layout="row" style="" >
+                                <div> <md-checkbox ng-model="referenceSearch.NW" class="md-primary" style="position:relative;top:0;padding-top:0;margin-top:0;"></md-checkbox></div>
+                                <div flex ng-class="{'bold': referenceSearch.NW}" ng-click="referenceSearch.NW=!referenceSearch.NW"  style="padding-top:7px;font-size:12px;line-height:12px;"> News </div>
+                                <div style="padding-left:3px;"> <span class="badge">1</span> </div>
+                            </div>
+                            
+                              <div class="typebtn" layout="row" style="" >
+                                <div> <md-checkbox ng-model="referenceSearch.PR" class="md-primary" style="position:relative;top:0;padding-top:0;margin-top:0;"></md-checkbox></div>
+                                <div flex ng-class="{'bold': referenceSearch.PR}" ng-click="referenceSearch.PR=!referenceSearch.PR"  style="padding-top:7px;font-size:12px;line-height:12px;"> Press Releases </div>
+                                <div style="padding-left:3px;"> <span class="badge">1</span> </div>
+                            </div>
+                            
+                            <div class="typebtn" layout="row" style="" >
+                                <div> <md-checkbox ng-model="referenceSearch.ST" class="md-primary" style="position:relative;top:0;padding-top:0;margin-top:0;"></md-checkbox></div>
+                                <div flex ng-class="{'bold': referenceSearch.ST}" ng-click="referenceSearch.ST=!referenceSearch.ST"  style="padding-top:7px;font-size:12px;line-height:12px;"> Statements </div>
+                                <div style="padding-left:3px;"> <span class="badge">1</span> </div>
+                            </div>
+                     </div>
+                       
+                        
+                 
+                  </div>
+                </div>
+              </div>
+            
+            </div>
+             </div>
+                         
+             
+
+             <md-content layout-padding layout-margin ng-show="0">
+                         <input type="text" ng-model="keyword" placeholder=" Keyword " class="form-control keyword" style="margin-bottom:10px;" id="txtKeyword">
+                         
+                         <div style="padding: 10px 0;">
+                              <h4 ng-click="showNPStatus=!showNPStatus" id="lblProtocolStatus"><i class="fa" ng-class="{'fa-caret-right':showNPStatus, 'fa-caret-down':!showNPStatus}"></i> &nbsp; Nagoya Protocol Party Status</h4>
+                              <div ng-show="!showNPStatus">
+                              <a ng-click="queryStatus('party')" class="color-grey" ng-href="#" id="lblParty" >
+                                  <span class="label label-primary" >&nbsp;</span> Party
+                              </a>
+                              <br>
+                              <a ng-click="queryStatus('nonParty')" class="color-grey" ng-href="#" id="lblNonParty">
+                                  <span class="label label-default">&nbsp;</span> Non-Party
+                              </a>
+                          </div>
+                          </div>
+                         <div id="filterCheckboxes">
+                             <search-filter-schemas  ng-model='schemas' field='schema_s' query='querySchema' preview-type="previewType" selected-filters="selectedSchemaFilters"></search-filter-schemas>
+                             <a href="" ng-click="loadThemes=true;" data-toggle="modal" data-target="#themeModal" class="color-black"><h4 id="lblTheamaticArea">Thematic Areas</h4></a>
+                             <a href="" data-toggle="modal" data-target="#countryModal" class="color-black"><h4 id="lblCountries">Countries</h4></a>
+                             <a href="" ng-click="loadRegions=true;"data-toggle="modal" data-target="#regionModal" class="color-black"><h4 id="lblRegions">Regions</h4></a>
+                         </div>
+             </md-content>
+         </md-sidenav>
          
-    <div class="container-fluid" style="margin-bottom:30px;">
-    <div class="row">
-        <div class="col-xs-12">
-            <h1>Finding Information</h1>
-            The search function allows searches among all information (records) published in the ABS-CH. Select the category of information of your interest from the left hand side menu. Use one or more filters to refine the searches. Depending on the view option at the top right of the page, records can be displayed grouped by country or listed by date of publication.
-            <br><br>
-            <strong>Select a type of information from a category below:</strong>
+         
+         
+         
+         
+
+         <md-content flex layout-margin style="margin:0 30px 30px 30px;padding:0;background-color:transparent;"  >
+             <div layout="column" layout-align="top center" >
+
+                <legend name="formInfo" style="display:none"></legend>
+                 <md-button  ng-click="toggleLeft()" class="md-primary md-raised bg-medgrey" hide-gt-lg  style="width:100%;margin: 0  0 10px 0;">
+                     <i class="material-icons" style="position:relative;top:6px;">menu</i> Search Filters
+                 </md-button>
+
+                  <div layout="row" layout-align="top center"  >
+                      
+                    <div flex="66">
+                        <button class="btn btn-primary" type="button" ng-show="partyStatusString"
+                         ng-click="queryStatus()"
+                                style="margin-right:2px;margin-bottom:2px">
+                                {{partyStatusString}}
+                             <!-- <span class="badge" >{{partyStatusString=="Non parties" ? nonPartiesCount : partiesCount}}</span> -->
+                             &nbsp; <span aria-hidden="true">&times;</span>
+                        </button>
+
+                        <button class="btn btn-primary" type="button" ng-repeat="filter in selectedSchemaFilters" ng-click="removeFilter(filter)"
+                                style="margin-right:2px;margin-bottom:2px">
+                            {{filter.isTerm ? (filter.value|term) : filter.value}}
+                             <!-- <span class="badge" >{{filter.count}}</span> -->
+                             &nbsp; <span aria-hidden="true">&times;</span>
+                        </button>
+                       <button class="btn btn-primary" type="button"
+                        ng-repeat="filter in countryApi.getSelected()"
+                        ng-click="removeCountryFilter(filter)"
+                               style="margin-right:2px;margin-bottom:2px">
+                           {{filter.name|lstring}}
+                            <!-- <span class="badge" >{{filter.count}}</span> -->
+                           &nbsp; <span aria-hidden="true">&times;</span>
+                       </button>
+                       <button class="btn btn-primary" type="button"
+                        ng-repeat="filter in thematicAreaApi.getSelected()"
+                        ng-click="removeThematicAreaFilter(filter)"
+                               style="margin-right:2px;margin-bottom:2px">
+                           {{filter.title|lstring}}
+                            <!-- <span class="badge" >{{filter.count}}</span> -->
+                            &nbsp; <span aria-hidden="true">&times;</span>
+                       </button>
+                       <button class="btn btn-primary" type="button"
+                        ng-repeat="filter in regionsApi.getSelected()"
+                        ng-click="removeRegionFilter(filter)"
+                               style="margin-right:2px;margin-bottom:2px">
+                           {{filter.title|lstring}}
+                            <!-- <span class="badge" >{{filter.count}}</span> -->
+                            &nbsp; <span aria-hidden="true">&times;</span>
+                       </button>
+                    </div>
+                    
+                    <div flex="33" class="text-right">
+                        <div class="btn-group" role="group">
+                          <button id="btnList" type="button" class="btn btn-default"  ng-class="{'bg-blue':previewType=='list' }"   ng-click="updatePreviewType('list')"><i class="fa fa-list"/> <span class="hidden-xs hidden-sm">List records</span> </button>
+                          <button id="btnGroup" type="button" class="btn btn-default"  ng-class="{'bg-blue': previewType=='group' }" ng-click="updatePreviewType('group')" ><i class="fa fa-th-large"/> <span class="hidden-xs hidden-sm">Group by country</span> </button>
+                            
+                        </div>
+                    </div>
+
+                  </div>
+
+                 <search-filter-themes api="thematicAreaApi" title='Thematic Areas' ng-model='thematicAreas' field='thematicAreas_ss' query='queryTheme'></search-filter-themes>
+                 <search-filter-countries api="countryApi" title='Countries' ng-model='governments' field='government_s' query='queryGovernment' external-filter="countryResultFilter"></search-filter-countries>
+                 <search-filter-regions api="regionsApi" title="Regions" ng-model="regions" field="government_REL_ss" query="queryRegion" facets="regionFacets"></search-filter-regions>
+                 
+                <div preview-type="previewType" document-list documents='rawDocs' filter='*' show-pagination='true' current-page='currentPage' document-Count='documentCount' order-by="orderBy">
+                </div>
+            </div>
         </div>
-       </div>     
     </div>
 
-
-   <div class="container-fluid" style="margin-bottom:240px;margin-top:24px"> 
-        <div class="row">
-              <div class="col-lg-4">
-                  <div class="md-whiteframe-z1">
-                    <md-toolbar class="bg-grey3">
-                        <h2 class="md-toolbar-tools">
-                        <span>Country Information</span>
-                        </h2>
-                    </md-toolbar>
-                    <md-content>
-                        <md-list>
-                        <md-list-item class="md-3-line" >
-                            <div class="md-list-item-text">
-                            <a href="#"><h3>Country profiles</h3></a>
-                            <p>National record grouped by country</p>
-                            </div>
-                        <md-list-item>
-                        </md-list>
-                    </md-content>
-               </div>
-                 <br>
-            </div>
-  
-            <div class="col-lg-4">
-                <div class="md-whiteframe-z1">
-                    <md-toolbar class="bg-blue">
-                        <h2 class="md-toolbar-tools">
-                        <span>National Records</span>
-                        </h2>
-                    </md-toolbar>
-                    <md-content>
-                        <md-list>
-                        <md-list-item class="md-2-line" >
-                            <div class="md-list-item-text" ng-click="navigateTo('/search/FP', $event)" style="cursor:pointer;">
-                                <h3>National ABS focal points  (FP)</h3>
-                                <p>National record grouped by country</p>
-                            </div>
-                            <md-divider></md-divider>
-                        </md-list-item>
-                        <md-list-item class="md-2-line" >
-                            <div class="md-list-item-text"  ng-click="navigateTo('/search/FP', $event)" style="cursor:pointer;">
-                            <h3>Competent national authorities (CNA)</h3>
-                            <p>Entities designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)</p>
-                            </div>
-                            <md-divider></md-divider>
-                        </md-list-item>
-                        <md-list-item class="md-2-line" >
-                            <div class="md-list-item-text"  ng-click="navigateTo('/search/FP', $event)" style="cursor:pointer;">
-                            <h3>Legislative, administrative or policy measures (MSR)</h3>
-                            <p>Measures adopted at domestic level to implement the access and benefit-sharing obligations of the Convention or/and the Nagoya Protocol.</p>
-                            </div>
-                            <md-divider></md-divider>
-                        </md-list-item>
-                        <md-list-item class="md-2-line" >
-                            <div class="md-list-item-text"  ng-click="navigateTo('/search/FP', $event)" style="cursor:pointer;">
-                            <h3>National Websites and Databases (NDB)</h3>
-                            <p>Measures adopted at domestic level to implement the access and benefit-sharing obligations of the Convention or/and the Nagoya Protocol.</p>
-                            </div>
-                            <md-divider></md-divider>
-                        </md-list-item>
-                        <md-list-item class="md-2-line" >
-                            <div class="md-list-item-text"  ng-click="navigateTo('/search/FP', $event)" style="cursor:pointer;">
-                            <h3>Internationally Recognized Certificate of Compliance (IRCC)</h3>
-                            <p>Measures adopted at domestic level to implement the access and benefit-sharing obligations of the Convention or/and the Nagoya Protocol.</p>
-                            </div>
-                            <md-divider></md-divider>
-                        </md-list-item>
-                        <md-list-item class="md-2-line" >
-                            <div class="md-list-item-text"  ng-click="navigateTo('/search/FP', $event)" style="cursor:pointer;">
-                            <h3>Checkpoints (CP)</h3>
-                            <p>Measures adopted at domestic level to implement the access and benefit-sharing obligations of the Convention or/and the Nagoya Protocol.</p>
-                            </div>
-                            <md-divider></md-divider>
-                        </md-list-item>
-                        <md-list-item class="md-2-line" >
-                            <div class="md-list-item-text"  ng-click="navigateTo('/search/FP', $event)" style="cursor:pointer;">
-                            <h3>Checkpoint Communiqués (CPC)</h3>
-                            <p>Measures adopted at domestic level to implement the access and benefit-sharing obligations of the Convention or/and the Nagoya Protocol.</p>
-                            </div>
-                        </md-list-item>
-                        </md-list>
-                    </md-content>
-                 </DIV>
-            <br>
-        </div>
-    
-        <div class="col-lg-4">
-            <div class="md-whiteframe-z1">
-                <md-toolbar class="bg-orange">
-                    <h2 class="md-toolbar-tools">
-                    <span>Reference Records</span>
-                    </h2>
-                </md-toolbar>
-                <md-content>
-                    <md-list>
-                   <md-list-item class="md-2-line" >
-                        <div class="md-list-item-text"  ng-click="navigateTo('/search/FP', $event)" style="cursor:pointer;">
-                        <h3>Virtual Library Records (VLR)</h3>
-                        <p>Measures adopted at domestic level to implement the access and benefit-sharing obligations of the Convention or/and the Nagoya Protocol.</p>
-                        </div>
-                        <md-divider></md-divider>
-                    </md-list-item>
-                    <md-list-item class="md-2-line" >
-                        <div class="md-list-item-text"  ng-click="navigateTo('/search/FP', $event)" style="cursor:pointer;">
-                        <h3>Article 19 & 20 tools (A19-20)</h3>
-                        <p>Measures adopted at domestic level to implement the access and benefit-sharing obligations of the Convention or/and the Nagoya Protocol.</p>
-                        </div>
-                        <md-divider></md-divider>
-                    </md-list-item>
-                    <md-list-item class="md-2-line" >
-                        <div class="md-list-item-text"  ng-click="navigateTo('/search/FP', $event)" style="cursor:pointer;">
-                        <h3>Community protocols procedures and customary laws (CPP)</h3>
-                        <p>Measures adopted at domestic level to implement the access and benefit-sharing obligations of the Convention or/and the Nagoya Protocol.</p>
-                        </div>
-                        <md-divider></md-divider>
-                    </md-list-item>
-                     <div style="padding:5px 5px 0 5px;color:#bbb;font-weight:bold;font-size:12px;">Related SCBD records</div>
-                     <md-list-item class="md-2-line" >
-                        <div class="md-list-item-text"  ng-click="navigateTo('/search/FP', $event)" style="cursor:pointer;">
-                        <h3>News</h3>
-                        <p>ABS related meetings</p>
-                        </div>
-                        <md-divider></md-divider>
-                    </md-list-item>
-                     <md-list-item class="md-2-line" >
-                        <div class="md-list-item-text"  ng-click="navigateTo('/search/FP', $event)" style="cursor:pointer;">
-                        <h3>Meetings</h3>
-                        <p>ABS related meetings</p>
-                        </div>
-                        <md-divider></md-divider>
-                    </md-list-item>
-                    <md-list-item class="md-2-line" >
-                        <div class="md-list-item-text"  ng-click="navigateTo('/search/FP', $event)" style="cursor:pointer;">
-                        <h3>Notifications</h3>
-                        <p>ABS related meetings</p>
-                        </div>
-                        <md-divider></md-divider>
-                    </md-list-item>
-                    <md-list-item class="md-2-line" >
-                        <div class="md-list-item-text"  ng-click="navigateTo('/search/FP', $event)" style="cursor:pointer;">
-                        <h3>Press releases</h3>
-                        <p>ABS related meetings</p>
-                        </div>
-                        <md-divider></md-divider>
-                    </md-list-item>
-                    <md-list-item class="md-2-line" >
-                        <div class="md-list-item-text"  ng-click="navigateTo('/search/FP', $event)" style="cursor:pointer;">
-                        <h3>Statements</h3>
-                        <p>ABS related meetings</p>
-                        </div>
-                        <md-divider></md-divider>
-                    </md-list-item>
-                    </md-list>
-                </md-content>
-            </div>
-            <br>
-        </div>
-    
- </div>
-
-
-    
-   
-    
-    
 </div>
-    
-    
-    
-    
+
+</div>
