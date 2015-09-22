@@ -172,7 +172,7 @@
 					<div class="km-value km-pre" ng-bind-html="document.description | lstring:locale"></div>
 				</div>
 				<div ng-show="document.geneticRessourceUsers">
-					<label>Person or entity utilizing the genetic resource at the checkpoint</label>
+					<label>Person or entity making information available to the checkpoint on the utilization of the genetic resource</label>
 					<div class="km-value" ng-repeat="user in document.geneticRessourceUsers">
 						<div view-contact-reference ng-model="user" locale="locale"></div>
 					</div>
