@@ -50,10 +50,10 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
             when('/measurematrix/:code',            { templateUrl: '/app/views/search/measure-matrix-countries.html',   label:'Measures Matrix',         resolveController: true, resolveUser: true}).
 
             when('/find',                                 { templateUrl: '/app/views/search/find.html',   label:'Find Information',         resolveController: true, resolveUser: true}).
-            when('/search',                                 { templateUrl: '/app/views/search/search.html',   label:'Search',         resolveController: true, resolveUser: true}).
+            when('/search',                                 { templateUrl: '/app/views/search/find.html',   label:'Find Information',         resolveController: true, resolveUser: true}).
             when('/search/:documentSchema',                 { templateUrl: '/app/views/search/search.html',   label:'Search',         resolveController: true, resolveUser: true}).
             when('/search/:documentSchema/:countryCode',    { templateUrl: '/app/views/search/search.html',   label:'Search',         resolveController: true, resolveUser: true}).
-            when('/find/simple',                            { templateUrl: '/app/views/find/simple.html',   label:'Simple Search',  resolveController: true, resolveUser: true}).
+            // when('/find/simple',                            { templateUrl: '/app/views/find/simple.html',   label:'Simple Search',  resolveController: true, resolveUser: true}).
             when('/search/national-records/',              { templateUrl: '/app/views/search/search.html',   label:'Search',         resolveController: true, resolveUser: true}).
             // when('/find',                                   { redirectTo:'/search'}).
 
