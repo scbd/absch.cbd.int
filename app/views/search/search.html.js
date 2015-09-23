@@ -20,6 +20,22 @@ define(['app','underscore','/app/js/common.js',
             $scope.showHelp = showHelp.value;
             var url = $location.url();
             $scope.url = url;
+
+            $scope.nationalRecords = [];
+            $scope.referenceRecords=[];
+            $scope.countryProfiles=[];
+
+            $scope.nationalRecords.keyword = "";
+            $scope.nationalRecords.layout = "group";
+            $scope.nationalRecords.partyStatus = "parties";
+            $scope.nationalRecords.country = [];
+            $scope.nationalRecords.region = [];
+            $scope.nationalRecords.FP = [];
+            $scope.nationalRecords.CNA = [];
+            $scope.nationalRecords.MSR = [];
+            $scope.nationalRecords.IRCC = [];
+            $scope.nationalRecords.CP = [];
+            $scope.nationalRecords.CPC = [];
             
             //**********************************************************
             $scope.close = function () {
