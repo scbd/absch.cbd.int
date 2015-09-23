@@ -95,8 +95,11 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
             when('/commonformat', {templateUrl: '/app/views/about/about.html',resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/about/common-formats.html',ignoreSubController: true,}).
             when('/commonformat',           { redirectTo:'/about/common-formats' }).
 
-            when('/help/presentations/:folder/:document_type', {templateUrl: '/app/views/help/presentations/presentation.html',resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/help/presentations/:folder/-',ignoreSubController: true,}).
-            when('/help/presentations/:folder', { redirectTo: '/help/presentations/:folder/start' }).
+            // when('/help/presentations/:folder/:document_type', {templateUrl: '/app/views/help/presentations/presentation.html',resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/help/presentations/:folder/-',ignoreSubController: true,}).
+            // when('/help/presentations/:folder', { redirectTo: '/help/presentations/:folder/start' }).
+            
+             when('/help/presentations', {templateUrl: '/app/views/help/presentations.html',   label:'Presentations and Workshops',   resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/register/contacts.html',}).
+
 
             when('/contacts', {templateUrl: '/app/views/register/register.html',resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/register/contacts.html',}).
 
@@ -110,7 +113,8 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
             when('/help/glossary/:term?', {templateUrl: '/app/views/help/forms/glossary-term.html',resolveController: true,resolveUser: true, schema:'help-glossarys', label:'lableText'}).
             
             //when('/help/faq', {templateUrl: '/app/views/help/forms/faq.html',resolveController: true,resolveUser: true, label:'FAQ'}).           
-            when('/help/faq/:term?', {templateUrl: '/app/views/help/forms/glossary-term.html',resolveController: true,resolveUser: true, schema:'help-faqs', label:'lableText'}).
+            when('/help/faq/:term?', {templateUrl: '/app/views/help/faq.html',resolveController: true,resolveUser: true, schema:'help-faqs', label:'FAQs'}).
+            when('/help/edit/faq/:term?', {templateUrl: '/app/views/help/forms/glossary-term.html',resolveController: true,resolveUser: true, schema:'help-faqs', label:'FAQs'}).
             when('/help/faq/tags/:tag', {templateUrl: '/app/views/help/forms/glossary-term.html',resolveController: true,resolveUser: true, schema:'help-faqs', label:'Tags'}).
 
             otherwise({templateUrl: '/app/404.html', label:'404 Error'});

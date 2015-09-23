@@ -1,0 +1,65 @@
+<div class="container" style="position:relative; top:20px; padding-bottom:30px;"  ng-controller="faqController">
+     <div class="row">
+            <div class="col-xs-12">
+                <h1><i class="fa fa-question-circle color-blue"></i> Frequently Asked Questions (FAQs) </h1>
+                
+                  <md-input-container>
+                    <label style="font-size:16px;">what do you need help with?</label>
+                    <input ng-model="keyword">
+                 </md-input-container>
+                 <md-content >
+                    <div layout="column" layout-align="top center">
+                        <md-list>
+                            <md-list-item class="md-1-line" ng-repeat="term in faqs | filter:keyword" name="{{term._id}}">
+                              <div class="md-list-item-text" ng-click="show=!show"> 
+                                  <h3>
+                                      {{term.title}}
+                                     <a ng-if="isAdmin()" href="/help/edit/faq/{{term._id}}" target="edit"><i class="fa fa-pencil-square"></i></a>
+                                  </h3>
+                                  <div class="color-grey" ng-if="show" >
+                                      <p  style="padding:20px 0;"  ng-bind-html="term.description|lstring"></p>
+                                   
+                                       <div style="padding-bottom:20px;" class="color-grey" ng-show="term.related">
+                                       <strong>Related:</strong><br>
+                                            <div ng-repeat="rel in term.related">
+                                                <div ng-repeat="t in faqs | filter:'related':rel">
+                                                    <a href="/help/faq#{{t._id}}">{{t.title}}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                  </div>
+                                   <md-divider ng-if="!$last"></md-divider>
+                                </div>
+                            </md-list-item>
+                        </md-list>
+                    </div>
+                </md-content>
+            </div>
+       </div>
+   
+   
+    <!--<md-content flex layout-margin style="margin:0 30px 30px 30px;padding:0;background-color:transparent;">
+<span>Frequently Asked Questions</span>
+
+        <div layout="column" layout-fill>
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <span>Frequently Asked Questions</span>
+                    <span flex></span>
+                </div>
+            </md-toolbar>
+            <md-content class="md-padding">
+                <div layout="column" layout-align="top center">
+                    <md-list>
+                        <md-list-item ng-repeat="term in faqs">
+                            <a href="/help/faq/{{term._id}}">
+                            {{term.title}}
+                        </a>
+                            <md-divider ng-if="!$last"></md-divider>
+                        </md-list-item>
+                    </md-list>
+                </div>
+            </md-content>
+        </div>
+    </md-content>-->
+</div>

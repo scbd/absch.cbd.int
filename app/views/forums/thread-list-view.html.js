@@ -3,8 +3,8 @@ define(['app', 'cbd-forums',
 	'/app/js/common.js'], function(app) {
 
 
-    return ["$scope", "$http", "$q", "$filter", "$timeout", "$location", "$route","commonjs","$rootScope",'$route',
-        function($scope, $http, $q, $filter, $timeout, $location, $route, commonjs, $rootScope, $route) {
+    return ["$scope", "$http", "$q", "$filter", "$timeout", "$location", "$route","commonjs","$rootScope",
+        function($scope, $http, $q, $filter, $timeout, $location, $route, commonjs, $rootScope) {
 
             //$scope.forumId = 17384;
 
