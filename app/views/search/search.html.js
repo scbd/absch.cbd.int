@@ -356,7 +356,7 @@ define(['app','underscore','/app/js/common.js',
         $scope.$watch('keyword',         function() { $scope.currentPage=0; refresh(); });
         $scope.$watch('orderBy',         function() { $scope.currentPage=0; refresh(); });
         $scope.$watch('previewType',     function(newValue, oldValue) {
-            if(newValue && oldValue){
+            if(newValue && oldValue && $scope.rawDocs){
                 $scope.rawDocs = undefined;
                 $scope.documentCount = 0;
 

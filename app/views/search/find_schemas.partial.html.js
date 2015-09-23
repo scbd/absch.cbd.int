@@ -73,10 +73,13 @@ app.directive('searchFilterSchemas', function ($http) {
             if(!$scope.selectedFilters)
                 $scope.selectedFilters = [];
                 
-            // $scope.$watch('showNationalFilters', function(newVal){
-            //     if(newVal)
-            //         $scope.recordType = 'national'
-            // })
+            $scope.$watch('recordType', function(newVal){
+                if(newVal){
+                    clearFilters();
+                    $scope.buildQuery()
+                }
+                    
+            })
             // $scope.$watch('showReferenceFilters', function(newVal){
             //     if(newVal)
             //         $scope.recordType = 'reference'
@@ -247,7 +250,7 @@ app.directive('searchFilterSchemas', function ($http) {
                 $scope.selectedFilters=[];
                 items.forEach(function (item) {
 
-                    if(item.selected && (($scope.showNationalFilters  && item.type=='national') || ($scope.showReferenceFilters  && item.type=='reference'))){
+                    if(item.selected && (($scope.showNationalFilters  && item.type=='nationalRecord') || ($scope.showReferenceFilters  && item.type=='reference'))){
 
                         $scope.selectedFilters.push({type:'schema', identifier:item.identifier, value:item.title, count:item.count});
 
@@ -596,6 +599,10 @@ app.directive('searchFilterSchemas', function ($http) {
 
             $scope.$on("clearFilter", function(evt, info){
 
+                clearFilters();
+
+            });
+            function clearFilters(){
                 $scope.$broadcast('clearSelectSelection');
                 $scope.terms.forEach(function(data){
                     if(data.selected){
@@ -612,9 +619,7 @@ app.directive('searchFilterSchemas', function ($http) {
                     }
                 })
                 $scope.buildQuery();
-
-            });
-
+            }
             $scope.$on("removeFilter", function(evt, info){
 
                 //if schema clear all subFilters
