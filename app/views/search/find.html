@@ -52,8 +52,9 @@
                     <md-divider></md-divider>
                     <md-content style="max-height:985px;" class="hidden-sm hidden-md">
                         <md-list class="bg-grey2">
-                            <md-list-item class="md-1-line" ng-repeat="country in countries | filter:name | orderBy:'name.en'" ng-class="{'bg-blue': country.isNPParty, 'bg-medgrey':!country.isNPParty}">
-                                <a href="countries/{{country.code}}" class="color-white bold">
+                        
+                            <md-list-item class="md-1-line" ng-repeat="country in countries | filter:name | orderBy:'name.en'" ng-class="{'bg-blue': country.isNPParty, 'bg-medgrey':!country.isNPParty}" ng-click="navigateTo('/search/countries/'+ country.code, $event)" style="cursor:pointer;">
+                                <a href="/search/countries/{{country.code}}" class="color-white bold">
                                     {{country.name.en}}
                                     <span class="badge pull-right">{{country.facetCount}}</span>
                                 </a>
