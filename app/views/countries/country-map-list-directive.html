@@ -4,253 +4,123 @@
 
 
                 <div class="row" id="divList" style="padding-top:30px;">
-                    <div class="col-lg-12 col-md-12 col-xs-12">
-                        <table class="table table-countries table-striped">
-                            <!-- <tr>
-                                <th></th>
-                                <th>
-                                    <span class="color-litegrey" style="padding-left:10px;">Country
-
-                                        <span class="color-litegrey hidden-xs hidden-sm" style="font-size:12px;">Click country name to navigate to a profile</span>
-                                    </span>
-                                </th>
-                                <th>
-                                    <span class="color-litegrey">Status</span>
-                                </th>
-                                <th colspan="7"><span class="color-litegrey">National Records</span></th>
-                            </tr> -->
-
-                            <tr>
-                                <th style="width:60px;">
-                                    <span style="font-size:14px;font-weight:bold;text-transform:uppercase;" class="color-black">FILTERS</span>
-                                </th>
-                                <td colspan="9">
-
-                                    <button id="allCountries" type="button" ng-class="{'bg-liteblue':selected_facet=='all' }" ng-click="filterSchema=0;selected_facet='all';updateMap('all');sortTable('name.en', 'ASC')" class="btn btn-default">
-                                        <!-- <i ng-show="statusFilter==isRequest" class="glyphicon glyphicon-ok"></i>  -->
-                                        All Countries <span class="badge badge-primary bg-grey">{{countries.length}}<span>
-                                    </button>
-
-                                    <button id="parties" type="button" ng-class="{'bg-liteblue':selected_facet=='party' }" ng-click="filterSchema=0;selected_facet='party';updateMap('party');sortTable('name.en', 'ASC')" class="btn btn-default">
-                                        <!-- <i ng-show="statusFilter==isRequest" class="glyphicon glyphicon-ok"></i>  -->
-                                        Parties <span class="badge badge-primary bg-blue">{{totalParties}}<span>
-                                    </button>
-
-                                    <button id="nonParties" type="button" ng-class="{'bg-liteblue':selected_facet=='nonParties' }" ng-click="filterSchema=0;selected_facet='nonParties';updateMap('nonParties');sortTable('name.en', 'ASC')" class="btn btn-default">
-                                        <!-- <i ng-show="statusFilter==isRequest" class="glyphicon glyphicon-ok"></i>  -->
-                                        Non-Parties <span class="badge badge-primary bg-medgrey">{{totalNonParties}}<span>
-                                    </button>
-                                    &nbsp;&nbsp;&nbsp;
-                                    <div id="nationalRecordType" km-select ng-model="filterSchema" api="filterSchemaApi" binding-type="string" placeholder="National Record Type" items="nationalRecords"></div>
-
-                                    &nbsp;&nbsp;&nbsp;
-
-                                    <div class="btn-group" role="group">
-                                      <button id="btnList" type="button" class="btn btn-default"  ng-class="{'bg-liteblue':!showList }"   ng-click="showList = false;">List</button>
-                                      <button id="btnMap" type="button" class="btn btn-default"  ng-class="{'bg-liteblue': showList }" ng-click="showList = true;">Map</button>
+                    <div class="col-lg-12 col-md-12 col-xs-12">                       
+                        
+                         <div class="row table-hover table-msr" ng-hide="absMeasure.length==0" >
+                             
+                                    <div class="col-lg-1 col-md-1 col-xs-1 tableheader" >
+                                    <span style="font-size:14px;font-weight:bold;text-transform:uppercase;" class="color-black">SORT</span>
                                     </div>
-
-                                    <button id="clearFilter" type="button"  ng-click="clear();updateMap('all');sortTable('name.en', 'ASC')" class="btn btn-default pull-right">
-
-                                        Clear filters
-                                    </button>
-
-                                </td>
-                            </tr>
-
-
-                            <!-- <tr>
-                                <th>
-                                    <span style="font-size:14px;font-weight:bold;text-transform:uppercase;" class="color-litegrey">FILTER</span>
-                                </th>
-                                <th>
-                                    <md-button class="md-raised md-mini bg-medgrey" aria-label="all" ng-click="selected_facet='all';updateMap('all');sortTable('name.en', 'ASC')">
-                                            <span class="color-white">All countries ({{countries.length}})</span>
-                                    </md-button>
-                                </th>
-                                <th>
-
-                                    <md-button class="md-fab md-mini bg-blue" aria-label="Parties" ng-click="selected_facet='party';updateMap('party');sortTable('name.en', 'ASC')">
-                                            {{totalParties}}
-                                            <md-tooltip>
-                                                Nagoya Protocol Parties
-                                            </md-tooltip>
-                                    </md-button>
-
-
-                                    <md-button class="md-fab md-mini bg-medgrey" aria-label="Non Parties" ng-click="selected_facet='nonParties';updateMap('nonParties');sortTable('name.en', 'ASC')">
-                                            {{totalNonParties}}
-                                            <md-tooltip>
-                                                Nagoya Protocol Non Parties
-                                            </md-tooltip>
-                                    </md-button>
-                                </th>
-                                <th><md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake"
-                                                ng-click="selected_facet='focalPoint';updateMap('focalPoint');sortTable('FP');">
-                                                <md-tooltip>
-                                                    National Focal Points
-                                                </md-tooltip>
-                                                {{commonFormatFacets[6][1].facetCount}}
-                                            </md-button></th>
-                                <th><md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake"
-                                                ng-click="selected_facet='database';updateMap('database');sortTable('NDB');" >
-                                                <md-tooltip>
-                                                    National Websites and Databases
-                                                </md-tooltip>{{commonFormatFacets[5][1].facetCount}}
-                                            </md-button></th>
-                                <th><md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake"
-                                                ng-click="selected_facet='authority';updateMap('authority');sortTable('CNA');">
-                                                <md-tooltip>
-                                                    Competent National Authorities
-                                                </md-tooltip>
-                                                {{commonFormatFacets[0][1].facetCount}}
-                                            </md-button>
-                                </th>
-                                <th><md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake"
-                                                ng-click="selected_facet='measure';updateMap('measure');sortTable('MSR');">
-                                                <md-tooltip>
-                                                    Legislative, administrative or policy measures
-                                                </md-tooltip>
-                                               {{commonFormatFacets[4][1].facetCount}}
-                                            </md-button></th>
-                                <th><md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake"
-                                                ng-click="selected_facet='absPermit';updateMap('absPermit');sortTable('IRCC');">
-                                                 <md-tooltip>
-                                                     Internationally Recognized Certificate of Compliance
-                                                 </md-tooltip>
-                                                 {{commonFormatFacets[3][1].facetCount}}
-                                            </md-button></th>
-                                <th>  <md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake"
-                                                ng-click="selected_facet='absCheckpoint';updateMap('absCheckpoint');sortTable('CP');">
-                                                <md-tooltip>
-                                                    Checkpoints
-                                                </md-tooltip>
-                                                {{commonFormatFacets[1][1].facetCount}}
-                                            </md-button>
-                                </th>
-                                <th>  <md-button class="md-fab md-mini bg-medgrey1" aria-label="Eat cake"
-                                                ng-click="selected_facet='absCheckpointCommunique';updateMap('absCheckpointCommunique');sortTable('CPC');">
-                                                 <md-tooltip>
-                                                     Checkpoint Communiqués
-                                                 </md-tooltip>
-                                                 {{commonFormatFacets[2][1].facetCount}}
-                                             </md-button>
-                                </th>
-                            </tr> -->
-                            <tr ng-show="showList" >
-                                <td colspan="10" style="background-color:#EEE;padding-top:80px;"><div id="vmap" style="width: 100%; min-height: 500px;background-color:#EEE!important;"></div></td>
-                            </tr>
-
-                            <tr ng-show="!showList">
-                                <th></th>
-                                <th>
-                                    <span class="color-litegrey" >Country
-                                        <span class="color-litegrey hidden-xs hidden-sm" style="font-size:12px;">Click country name to navigate to a profile</span>
-                                    </span>
-                                </th>
-                                <th>
-                                    <span class="color-litegrey">Status</span>
-                                </th>
-                                <th colspan="7"><span class="color-litegrey">National Records</span></th>
-                            </tr>
-
-                            <tr ng-show="!showList">
-                               <th  style="white-space:nowrap;font-size:14px;"><span style="font-size:14px;font-weight:bold;text-transform:uppercase;" class="color-black">SORT</span></th>
-                                <th style="white-space:nowrap;font-size:16px;">
-                                    <a href="" class="label label-default  bg-darkgrey1" ng-click="sortTable('name.en', 'ASC')">
-                                        <i class=" fa fa-sort-alpha-asc" ></i>
-                                    </a>
-                                    &nbsp; &nbsp;
-                                    <a href="" class="label label-default bg-darkgrey1" ng-click="sortTable('name.en', 'DESC')">
-                                        <i class=" fa fa-sort-alpha-desc" ></i>
-                                    </a>
-                                </th>
-                                  <th style="white-space:nowrap;font-size:14px;">
+                                       <div class="col-lg-2 col-md-2 col-xs-2 tableheader" >
+                                        <a href="" class="label label-default  bg-darkgrey1" ng-click="sortTable('name.en', 'ASC')">
+                                            <i class=" fa fa-sort-alpha-asc" ></i>
+                                        </a>
+                                        &nbsp; &nbsp;
+                                        <a href="" class="label label-default bg-darkgrey1" ng-click="sortTable('name.en', 'DESC')">
+                                            <i class=" fa fa-sort-alpha-desc" ></i>
+                                        </a>            
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader">
                                     <span style="cursor:pointer;" ng-click="sortTable('treaties.XXVII8b.deposit')"><span ng-click="sortTable('treaties.XXVII8b.deposit', 'ASC')">Parties</span> / <span ng-click="sortTable('treaties.XXVII8b.deposit', 'DESC')">Non-Parties</span>
                                         <!-- <i ng-show="sortTerm=='treaties.XXVII8b.deposit'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i> -->
                                         </span>
-                                </th>
-
-                                <th style="white-space:nowrap;font-size:14px;text-align:center;">
+                                        
+                                    </div>
+                                    <div class="col-lg-1 col-md-1 col-xs-1 tableheader" >
                                     <span style="cursor:pointer;" ng-click="sortTable('FP')" data-toggle="tooltip" title="National Focal Points"data-container="body">
                                         <i class="material-icons color-blue" style="font-size:16pt;position:relative;top:3px;">
                                            {{'nfp' | schemaIcon}}
                                        </i><br>
                                         NFP
                                     </span>
-                                </th>
-                                <th style="white-space:nowrap;font-size:14px;text-align:center;">
+                                    </div>
+                                    <div class="col-lg-1 col-md-1 col-xs-1 tableheader" >
                                     <span style="cursor:pointer;" ng-click="sortTable('NDB')" data-toggle="tooltip" title="National Websites and Databases"data-container="body">
                                         <i class="material-icons color-blue" style="font-size:16pt;position:relative;top:3px;">
                                            {{'ndb' | schemaIcon}}
                                        </i><br> 
                                        NDB
                                     </span>
-                                </th>
-                                <th style="white-space:nowrap;font-size:14px;text-align:center;">
+                                    </div>
+                                    <div class="col-lg-1 col-md-1 col-xs-1 tableheader" >
                                     <span style="cursor:pointer;" ng-click="sortTable('CNA')"  data-toggle="tooltip" title="Competent National Authorities"data-container="body">
                                         <i class="material-icons color-blue" style="font-size:16pt;position:relative;top:3px;">
                                            {{'cna' | schemaIcon}}
                                        </i><br>
                                         CNA
                                     </span>
-                                </th>
-                                 <th style="white-space:nowrap;font-size:14px;text-align:center;">
+                                    </div>
+                                    <div class="col-lg-1 col-md-1 col-xs-1 tableheader" >
                                     <span style="cursor:pointer;" ng-click="sortTable('MSR')" data-toggle="tooltip" title="Legislative, administrative or policy measures"data-container="body">
                                         <i class="material-icons color-blue" style="font-size:16pt;position:relative;top:3px;">
                                            {{'msr' | schemaIcon}}
                                        </i><br>
                                         MSR
                                     </span>
-                                </th>
-                                 <th style="white-space:nowrap;font-size:14px;text-align:center;">
+                                    </div>
+                                    <div class="col-lg-1 col-md-1 col-xs-1 tableheader" >
                                     <span style="cursor:pointer;" ng-click="sortTable('IRCC')" data-toggle="tooltip" title="Internationally Recognized Certificate of Compliance"data-container="body">
                                         <i class="material-icons color-blue" style="font-size:16pt;position:relative;top:3px;">
                                            {{'ircc' | schemaIcon}}
                                        </i><br>
                                         IRCC
                                     </span>
-                                </th>
-                                <th style="white-space:nowrap;font-size:14px;text-align:center;">
+                                    </div>
+                                    <div class="col-lg-1 col-md-1 col-xs-1 tableheader" >
                                     <span style="cursor:pointer;" ng-click="sortTable('CP')" data-toggle="tooltip" title="Checkpoints"data-container="body">
                                         <i class="material-icons color-blue" style="font-size:16pt;position:relative;top:3px;">
                                            {{'cp' | schemaIcon}}
                                        </i><br>
                                         CP
                                         </span>
-                                </th>
-                                <th style="white-space:nowrap;font-size:14px;text-align:center;">
-                                    <span style="cursor:pointer;" ng-click="sortTable('CPC')" data-toggle="tooltip" title="Checkpoint Communiqués"data-container="body">
+                                    </div>
+                                    <div class="col-lg-1 col-md-1 col-xs-1 tableheader" >
+                                        <span style="cursor:pointer;" ng-click="sortTable('CPC')" data-toggle="tooltip" title="Checkpoint Communiqués"data-container="body">
 
                                         <i class="material-icons color-blue" style="font-size:16pt;position:relative;top:3px;">
                                            {{'cpc' | schemaIcon}}
                                        </i><br>
                                        CPC
                                         </span>
-                                </th>
-                            </tr>
-
-
-                            <tr ng-show="!showList" ng-repeat="country in (countries | filter:countryFilter | filter: searchFilter | orderBy:sortTermFilter:orderList) " ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
-
-                               <td class="text-right">{{$index + 1}}</td>
-                                <td><a ng-href="#" ng-click="navigateCountry('',country.code,'')" class="country-list-name"
-                                    ng-class="{'list-group-item-primary':country.isNPParty,'list-group-item-default':!country.isNPParty }"> {{country.name.en}}</a> &nbsp;
-                                </td>
-                                <td>
-                                    <span ng-show="country.isNPParty" style="font-weight:bold;">Party</span>
-                                    <span ng-show="!country.isNPParty" >Non-Party</span>
-                                    <span ng-show="country.isNPInbetweenParty" ><br>(entry into force on: {{(country.entryIntoForce)| formatDate}})</span>
-                                </td>
-                                <td style="text-align:center;"><span class="badge bg-grey4">{{country.FP}}</span></td>
-                                <td style="text-align:center;"><span class="badge bg-grey4">{{country.NDB}}</span></td>
-                                <td style="text-align:center;"><span class="badge bg-grey4">{{country.CNA}}</span></td>
-                                <td style="text-align:center;"><span class="badge bg-grey4">{{country.MSR}}</span></td>
-                                <td style="text-align:center;"><span class="badge bg-grey4">{{country.IRCC}}</span></td>
-                                <td style="text-align:center;"><span class="badge bg-grey4">{{country.CP}}</span></td>
-                                <td style="text-align:center;"><span class="badge bg-grey4">{{country.CPC}}</span></td>
-                            </tr>
-                        </table>
+                                    </div>
+                                </div>
+                                <div class="row table-hover table-msr" ng-repeat="country in (countries | filter:countryFilter | filter: searchFilter | orderBy:sortTermFilter:orderList) ">
+                                    <div class="row border">
+                                        <div class="row table-row" ng-click="displayDetails=!displayDetails;showCountryProfile(country)">
+                                            <div class="col-lg-1 col-md-1 col-xs-1 tableheader" >
+                                                {{$index + 1}}
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-xs-2 tableheader">
+                                                {{country.name.en}}
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-xs-2 tableheader">
+                                                 <span ng-show="country.isNPParty" style="font-weight:bold;">Party</span>
+                                                <span ng-show="!country.isNPParty" >Non-Party</span>
+                                                <span ng-show="country.isNPInbetweenParty" ><br>(entry into force on: {{(country.entryIntoForce)| formatDate}})</span>
+                                            </div>
+                                            <div class="col-lg-1 col-md-1 col-xs-1 tableheader" >{{country.FP}}
+                                            </div>
+                                            <div class="col-lg-1 col-md-1 col-xs-1 tableheader" >{{country.NDB}}
+                                            </div>
+                                            <div class="col-lg-1 col-md-1 col-xs-1 tableheader" >{{country.CNA}}
+                                            </div>
+                                            <div class="col-lg-1 col-md-1 col-xs-1 tableheader" >{{country.MSR}}
+                                            </div>
+                                            <div class="col-lg-1 col-md-1 col-xs-1 tableheader" >{{country.IRCC}}
+                                            </div>
+                                            <div class="col-lg-1 col-md-1 col-xs-1 tableheader" >{{country.CP}}
+                                            </div>
+                                            <div class="col-lg-1 col-md-1 col-xs-1 tableheader" >{{country.CPC}}
+                                            </div>
+                                        </div>
+                                        <div class="row" ng-show="displayDetails">
+                                            <i class="glyphicon glyphicon-remove-circle circle pull-right" style="position:relative;top:40px;z-index:100;font-size:20px;color:white;" ng-click="displayDetails=!displayDetails;"></i>
+                                            <span country-profile api="country.api" code="country.profileCode"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                        
+                        
                         <div class="alert alert-info col-xs-12">
 
                             <div>
