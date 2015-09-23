@@ -29,10 +29,11 @@ define(['app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate', 'scbd-an
 
 					function fieldTypes() {
 						var types = [];
-						types.push({ value: 'form', title: 'form' });
+						//types.push({ value: 'form', title: 'form' });
 						types.push({ value: 'section', title: 'section' });
-						types.push({ value: 'control', title: 'control' });	
-						types.push({ value: 'inline', title: 'inline' });					
+						//types.push({ value: 'control', title: 'control' });	
+						types.push({ value: 'inline', title: 'inline' });
+						types.push({ value: 'content', title: 'content' });						
 						$scope.fieldTypes = types;
 					}
 

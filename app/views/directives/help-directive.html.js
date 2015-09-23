@@ -6,7 +6,8 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                         // transclude: true,
                         // templateUrl: '/app/views/directives/help-directive.html',
                         scope: {
-                                schema: '@'
+                                schema: '@',
+                                delay: '@'
                         },
                         link: ['$scope', '$q', '$element', function ($scope, $q, $element) {
 
@@ -43,11 +44,18 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                 
                                         var inlineTemplate= '<div class="md-whiteframe-z1 help-inline-content" ng-if="showHelp.show"> <span><i class="fa fa-info-circle"></i> {{content}}</span> <div>';
                                     
+                                        var contentTemplate= '<div>{{content}}<div>';
+                                    
+                                    
                                         var controlTemplate = sectionTemplate;//'<span class="help-inline" ng-if="showHelp.show"><i class="material-icons">help_outline</i> {{content}}</span>'
 
                                         if (!$scope.schema) {
                                                 console.error('help schema name not provided')
                                                 return
+                                        }
+                                        
+                                        if (!$scope.delay) {
+                                                $scope.delay = 1000;
                                         }
 
                                         $scope.Feedback_helpOff = function() {
@@ -62,7 +70,7 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                               if (newVal){
                                                   $timeout(function(){
                                                       loadSchemaHelp();
-                                                  }, 1000);
+                                                  }, $scope.delay);
                                             }
                                         });
 
@@ -95,10 +103,10 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                                         var templateToUse = controlTemplate//;
                                                                         var children = $element.find('div.km-control-group[name="' + field.name + '"] label');
                                                                         
-                                                                        if(field.fieldType == 'control' && children.length==0){
-                                                                            children = $element.find('label[name="' + field.name + '"]');
-                                                                        }
-                                                                        else if (field.fieldType == 'section' || field.fieldType == 'form') {
+                                                                        // if(field.fieldType == 'control' && children.length==0){
+                                                                        //     children = $element.find('label[name="' + field.name + '"]');
+                                                                        // }
+                                                                        if (field.fieldType == 'section' || field.fieldType == 'form') {
                                                                                 children = $element.find('legend[name="' + field.name + '"]');
                                                                                 templateToUse = field.fieldType == 'section' ? sectionTemplate : formTemplate;
                                                                                 //templateToUse = templateToUse.replace('{{control}}', buttonTemplate);
@@ -111,9 +119,17 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                                                   children = $element.find('div[name="' + field.name + '"]');
                                                                                 templateToUse = inlineTemplate;
                                                                         }
-                                                                        if (children.length==0) {
-                                                                            children = $element.find('#' + field.name);
+                                                                        
+                                                                        else if (field.fieldType == 'content' ) {
+                                                                                children = $element.find('div[name="' + field.name + '"]');
+                                                                                templateToUse = contentTemplate;
                                                                         }
+                                                                        
+                                                      
+                                                                         if (children.length==0) {
+                                                                            children = $element.find('#' + field.name);
+                                                                        }    
+                                                                         
                                                                     
                                                                         if (field.embed){
                                                                                 var output = templateToUse.replace('{{content}}', $filter('lstring')(field.helpText));
