@@ -176,7 +176,7 @@ define(['app', 'underscore', '/app/js/common.js'], function(app, _) {
               if (_.has($scope.termsx, item.symbol))
                 $scope.termsx[item.symbol].count = item.count;
             });
-            updateExternalFilter();
+            // updateExternalFilter();
           }
 
           $scope.$watch('items', onWatch_items);
@@ -193,7 +193,7 @@ define(['app', 'underscore', '/app/js/common.js'], function(app, _) {
             }
             buildQuery();
             loadContryDetails(true);
-            updateExternalFilter();
+            // updateExternalFilter();
 
           }, true);
 

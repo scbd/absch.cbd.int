@@ -8,7 +8,8 @@ define(['app','underscore','/app/js/common.js',
     '/app/views/search/find_themes.partial.html.js',
     '/app/views/directives/search-filter-dates.partial.html.js',
     '/app/views/directives/document-list.partial.html.js', 'bootstrap-datepicker','moment',
-    '/app/views/directives/help-directive.html.js'],
+    '/app/views/directives/help-directive.html.js',
+    '/app/views/search/search-directives/search-national-records-filter-directive.html.js'],
      function (app,_) {
 
     app.controller('FindController', ['$scope', '$rootScope','showHelp' ,'$http', '$timeout', '$q','realm', '$routeParams','$location','$element','commonjs','$mdSidenav', '$mdUtil', '$mdMedia',
@@ -161,27 +162,33 @@ define(['app','underscore','/app/js/common.js',
         //
         //============================================================
     	function query () {
+            if(!$scope.recordType)
+                $scope.recordType = 'national';
+                
+            var nationalSchema = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database","focalPoint"];
+            var referenceSchema= [ "resource", "meeting", "notification","pressRelease","statement" , "news", "modelContractualClause"];
 
-            var schema = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "resource",
-                           "meeting", "notification","pressRelease","statement" ,"focalPoint", "news", "modelContractualClause"]
-
-            var q = '(realm_ss:' + realm.value.toLowerCase() + ' or realm_ss:absch) AND NOT version_s:*';
+            var q = '(realm_ss:' + realm.value.toLowerCase() + ') AND NOT version_s:*';
             //' AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryTheme + ' AND ' + $scope.queryTargets +' AND ' + $scope.queryDate + ' AND ' + $scope.queryKeywords;
+            var schema = nationalSchema;
+            if($scope.recordType == 'reference')
+                schema = referenceSchema;
+            
+            
+            // var keywordQuery = '';
 
-            var keywordQuery = '';
+            // if($scope.keyword){
+            //     q += keywordQuery = ' AND (title_t:*' + $scope.keyword + '* OR description_t:*' + $scope.keyword + '* OR text_EN_txt:*' + $scope.keyword + '* OR uniqueIdentifier_s:*' + $scope.keyword.toLowerCase() + '*)';
+            // }
 
-            if($scope.keyword){
-                q += keywordQuery = ' AND (title_t:*' + $scope.keyword + '* OR description_t:*' + $scope.keyword + '* OR text_EN_txt:*' + $scope.keyword + '* OR uniqueIdentifier_s:*' + $scope.keyword.toLowerCase() + '*)';
-            }
-
-            if($scope.querySchema != "*:*" ){
-                q += ' AND (' + $scope.querySchema + ')';
-            }
-            else
-            {
-                 q += ' AND (schema_s:(' + schema.join(' ') + '))';
-                 //console.log(q);
-            }
+            // if($scope.querySchema != "*:*" ){
+                 q += '(' + $scope.querySchema + ')';
+            // }
+            // else
+            // {
+            //      q += ' AND (schema_s:(' + schema.join(' ') + '))';
+            //      //console.log(q);
+            // }
             if($scope.queryGovernment) q += ' AND (' + $scope.queryGovernment + ')';
             if($scope.queryTheme)      q += ' AND (' + $scope.queryTheme + ')';
               //console.log('region: ', q);
@@ -260,7 +267,7 @@ define(['app','underscore','/app/js/common.js',
 
                 if(!$scope.schemas) {
                     var queryFacetsParameters = {
-                        'q': '(realm_ss:' + realm.value.toLowerCase() + ' or realm_ss:absch) AND NOT version_s:* AND (schema_s:(' + schema.join(' ') + '))',
+                        'q': '(realm_ss:' + realm.value.toLowerCase() + ') AND NOT version_s:* AND (schema_s:(' + _.union(nationalSchema,referenceSchema).join(' ') + '))',
                         'fl': '', 		//fields for results.
                         'wt': 'json',
                         'rows': 0,		//limit

@@ -10,7 +10,8 @@ app.directive('searchFilterSchemas', function ($http) {
               field: '@field',
               query: '=query',
               previewType: '=previewType',
-              selectedFilters : '=selectedFilters'
+              selectedFilters : '=selectedFilters',
+              recordType        : '=recordType'
         },
         link: function ($scope, element, attrs, ngModelController)
         {
@@ -18,8 +19,43 @@ app.directive('searchFilterSchemas', function ($http) {
         controller : ['$scope', '$element', '$location', 'Thesaurus', "IStorage", "guid", "$q", "Enumerable", "$filter","underscore","realm","$routeParams",
          function ($scope, $element, $location, Thesaurus, storage, guid, $q, Enumerable, $filter,_,realm, $routeParams)
         {
+            var url = $location.url();
+            $scope.url = url;
+            //**********************************************************
+            $scope.isInProfiles = function(tab) {
+              
+              if(url.indexOf('/profiles')  >= 0|| url.indexOf('/profile')  >= 0|| url.indexOf('/country') >= 0 || url.indexOf('/countries') >= 0)
+                    return true;
+              else
+                return false;
+            }
+            
+            //**********************************************************
+            $scope.isInNationalRecords = function(tab) {
+              if(url.indexOf('/national-records') >= 0 || $scope.showNationalFilters)
+                    return true;
+              else
+                return false;
+            }
+            
+            //**********************************************************
+            $scope.isInReferenceRecords = function(tab) {
+              if(url.indexOf('/reference-records') >= 0 || $scope.showReferenceFilters)
+                    return true;
+              else
+                return false;
+            }
+
+
+        $scope.displayStyles = [
+            "small (12-inch)",
+            "medium (14-inch)",
+            "large (16-inch)",
+            "insane (42-inch)"
+        ];
+             $scope.recordType = 'national'
             $scope.showNationalFilters = true;
-            $scope.showReferenceFilters = true;
+            $scope.showReferenceFilters = false;
             $scope.expanded = false;
             $scope.selectedItems = [];
             $scope.facet = $scope.field.replace('_s', ''); // TODO: replace @field by @facet
@@ -36,6 +72,15 @@ app.directive('searchFilterSchemas', function ($http) {
 
             if(!$scope.selectedFilters)
                 $scope.selectedFilters = [];
+                
+            // $scope.$watch('showNationalFilters', function(newVal){
+            //     if(newVal)
+            //         $scope.recordType = 'national'
+            // })
+            // $scope.$watch('showReferenceFilters', function(newVal){
+            //     if(newVal)
+            //         $scope.recordType = 'reference'
+            // })
 
             $scope.options  = {
                jurisdiction             : function () { return $http.get("/api/v2013/thesaurus/domains/7A56954F-7430-4B8B-B733-54B8A5E7FF40/terms",  { cache: true })
@@ -168,7 +213,27 @@ app.directive('searchFilterSchemas', function ($http) {
                 if($scope.focalPointQuery!='')
                     conditions.push($scope.focalPointQuery);
 
-                if(conditions.length==0) $scope.query = '*:*';
+                if(conditions.length==0) {
+                    //$scope.query = '*:*';
+                    
+                    var nationalSchema = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database","focalPoint"];
+                    var referenceSchema= [ "resource", "meeting", "notification","pressRelease","statement" , "news", "modelContractualClause"];
+        
+                    var q = '(realm_ss:' + realm.value.toLowerCase() + ') AND NOT version_s:*';
+                    var schema = nationalSchema;
+                    if($scope.recordType == 'reference'){
+                        schema = referenceSchema;
+                        $scope.previewType = 'list';
+                    }
+                    
+                    var keywordQuery = '';
+        
+                    if($scope.keyword){
+                        q += keywordQuery = ' AND (title_t:*' + $scope.keyword + '* OR description_t:*' + $scope.keyword + '* OR text_EN_txt:*' + $scope.keyword + '* OR uniqueIdentifier_s:*' + $scope.keyword.toLowerCase() + '*)';
+                    }
+                    q += ' AND (schema_s:(' + schema.join(' ') + '))';
+                    $scope.query = q;
+                }
                 else {
                     var query = '';
                     conditions.forEach(function (condition) { query = query + (query=='' ? '( ' : ' OR ') + condition; });
@@ -182,7 +247,7 @@ app.directive('searchFilterSchemas', function ($http) {
                 $scope.selectedFilters=[];
                 items.forEach(function (item) {
 
-                    if(item.selected && !($scope.previewType == 'group' && item.type=='reference')){
+                    if(item.selected && (($scope.showNationalFilters  && item.type=='national') || ($scope.showReferenceFilters  && item.type=='reference'))){
 
                         $scope.selectedFilters.push({type:'schema', identifier:item.identifier, value:item.title, count:item.count});
 
@@ -332,21 +397,21 @@ app.directive('searchFilterSchemas', function ($http) {
                 return dictionary;
             }
 
-            $scope.focalPoint              = { identifier: 'focalPoint',               title: 'National Focal Points',
+            $scope.focalPoint              = { identifier: 'focalPoint',               title: 'National Focal Points', type:'nationalRecord',
                                                 subFilters : [
                                                                 { name: 'focalPointNP',         type: 'checkbox',  field: 'type_ss', value : 'NP-FP OR schema_s:ABS-FP' },
                                                                 { name: 'focalPointCBD'  ,      type: 'checkbox' , field: 'type_ss', value : ['CBD-FP1', 'CBD-FP1']}
                                                 ]
                                              };
-            $scope.authority               = { identifier: 'authority',                title: 'Competent National Authorities' ,
+            $scope.authority               = { identifier: 'authority',                title: 'Competent National Authorities' ,type:'nationalRecord',
                                                subFilters : [
                                                                 { name: 'cnaResponsibleForAll',     type: 'radio' , field: 'absResposibleForAll_b'},
                                                                 { name: 'cnaJurisdiction',          type: 'multiselect', field: 'absJurisdiction_s' },
                                                                 { name: 'cnaGeneticResourceTypes',  type: 'multiselect' , field: 'absGeneticResourceTypes_ss'}
                                                             ]
                                              };
-            $scope.database                = { identifier: 'database',                 title: 'National Websites and Databases', count: 0 };
-            $scope.measure                 = { identifier: 'measure',                  title: 'Legislative, administrative and policy measures', count: 0,
+            $scope.database                = { identifier: 'database',                 title: 'National Websites and Databases',type:'nationalRecord', count: 0 };
+            $scope.measure                 = { identifier: 'measure',                  title: 'Legislative, administrative and policy measures', count: 0,type:'nationalRecord',
                                                subFilters : [
                                                                 { name: 'msrJurisdiction', type: 'multiselect', field: 'jurisdiction_s' },
                                                                 { name: 'msrStatus', type: 'multiselect', field: 'status_s' },
@@ -358,7 +423,7 @@ app.directive('searchFilterSchemas', function ($http) {
                                                                 { name: 'mssApplicationDate', type: 'calendar' , field: 'limitedApplication_s'}
                                                             ]
                                             };
-            $scope.absPermit               = { identifier: 'absPermit',                title: 'Permits and their equivalent' ,
+            $scope.absPermit               = { identifier: 'absPermit',                title: 'Permits and their equivalent' ,type:'nationalRecord',
                                                subFilters : [
                                                                 //{ name: 'permitAuthority',  type: 'reference' , field: 'jurisdiction_s'},
                                                                 { name: 'permitusage',          type: 'multiselect' , field: 'usage_REL_ss'},
@@ -368,13 +433,13 @@ app.directive('searchFilterSchemas', function ($http) {
                                                                 { name: 'amendmentIntent',      type: 'radio' , field: 'amendmentIntent_i'}
                                                             ]
                                              };
-            $scope.absCheckpoint           = { identifier: 'absCheckpoint',            title: 'Checkpoints' ,
+            $scope.absCheckpoint           = { identifier: 'absCheckpoint',            title: 'Checkpoints' ,type:'nationalRecord',
                                                subFilters : [
                                                                 { name: 'cpInformAllAuthorities', type: 'yesno' , field: 'informAllAuthorities_b'},
                                                                 { name: 'cpJurisdiction',      type: 'multiselect', field: 'jurisdiction_s' }
                                                             ]
                                               };
-            $scope.absCheckpointCommunique = { identifier: 'absCheckpointCommunique',  title: 'Checkpoint Communiqués' ,
+            $scope.absCheckpointCommunique = { identifier: 'absCheckpointCommunique',  title: 'Checkpoint Communiqués' ,type:'nationalRecord',
                                                subFilters : [
                                                                 { name: 'cpcoriginCountries',      type: 'multiselect', field: 'originCountries_ss' }
                                                             ]
