@@ -196,25 +196,26 @@ define(["app",'/app/js/common.js'], function (app) {
 	app.filter("schemaName", [function() {
 
 		return function( schema ) {
-			return mapSchema(schema);
+			//return mapSchema(schema);
 			
-			// if(!schema)
-			// 	return schema;
-			// if(schema.toLowerCase()=="focalpoint"				) return "Focal Point";
-			// if(schema.toLowerCase()=="authority"				) return "Competent National Authority";
-			// if(schema.toLowerCase()=="contact"					) return "Contact";
-			// if(schema.toLowerCase()=="database"					) return "National Website or Database";
-			// if(schema.toLowerCase()=="resource"					) return "Virtual Library Resource";
-			// if(schema.toLowerCase()=="organization"				) return "Organization";
-			// if(schema.toLowerCase()=="measure" 					) return "Legislative, Administrative or Policy Measures";
-			// if(schema.toLowerCase()=="abscheckpoint"			) return "Checkpoint";
-			// if(schema.toLowerCase()=="abscheckpointcommunique"	) return "Checkpoint Communiqué";
-			// if(schema.toLowerCase()=="abspermit"				) return "Internationally Recognized Certificate of Compliance";
-            // if(schema.toLowerCase()=="meetingdocument"			) return "Meeting Document";
-            // if(schema.toLowerCase()=="pressrelease"				) return "Press Release";
-			// if(schema.toLowerCase()=="news"						) return "News";
-			// if(schema.toLowerCase()=="absnationalreport"		) return "National Report";
-
+			if(!schema)
+				return schema;
+			if(schema.toLowerCase()=="focalpoint"				) return "Focal Point";
+			if(schema.toLowerCase()=="authority"				) return "Competent National Authority";
+			if(schema.toLowerCase()=="contact"					) return "Contact";
+			if(schema.toLowerCase()=="database"					) return "National Website or Database";
+			if(schema.toLowerCase()=="resource"					) return "Virtual Library Resource";
+			if(schema.toLowerCase()=="organization"				) return "Organization";
+			if(schema.toLowerCase()=="measure" 					) return "Legislative, Administrative or Policy Measures";
+			if(schema.toLowerCase()=="abscheckpoint"			) return "Checkpoint";
+			if(schema.toLowerCase()=="abscheckpointcommunique"	) return "Checkpoint Communiqué";
+			if(schema.toLowerCase()=="abspermit"				) return "Internationally Recognized Certificate of Compliance";
+            if(schema.toLowerCase()=="meetingdocument"			) return "Meeting Document";
+            if(schema.toLowerCase()=="pressrelease"				) return "Press Release";
+			if(schema.toLowerCase()=="news"						) return "News";
+			if(schema.toLowerCase()=="absnationalreport"		) return "National Report";
+			if(schema.toLowerCase()=="modelcontractualclause"	) return "Article 19 & 20 tool";
+			if(schema.toLowerCase()=="communityprotocol"		) return "Community protocols procedures and customary law";
 
 			// return schema;
 		};
@@ -246,7 +247,6 @@ define(["app",'/app/js/common.js'], function (app) {
 			if(schema.toLowerCase()=="absnationalreport"		) return "National Reports";
 			if(schema.toLowerCase()=="modelcontractualclause"	) return "Article 19 & 20 tools";
 			if(schema.toLowerCase()=="communityprotocol"		) return "Community protocols procedures and customary laws";
-
 
 
 			return schema;
