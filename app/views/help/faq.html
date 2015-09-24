@@ -1,4 +1,6 @@
-<div class="container" style="position:relative; top:20px; padding-bottom:30px;"  ng-controller="faqController">
+<div class="container" style="position:relative; top:20px; padding-bottom:500px;"  ng-controller="faqController">
+      <div smooth-scroll duration="100" offset="200" ></div>
+    
      <div class="row">
             <div class="col-xs-12">
                 <h1><i class="fa fa-question-circle color-blue"></i> Frequently Asked Questions (FAQs) </h1>
@@ -10,21 +12,19 @@
                  <md-content >
                     <div layout="column" layout-align="top center">
                         <md-list>
-                            <md-list-item class="md-1-line" ng-repeat="term in faqs | filter:keyword" name="{{term._id}}">
-                              <div class="md-list-item-text" ng-click="show=!show"> 
-                                  <h3>
+                            <md-list-item class="md-1-line" ng-repeat="term in faqs | filter:keyword" id="{{term._id}}" >
+
+                              <div class="md-list-item-text"> 
+                                  <h3  ng-click="show=!show">
                                       {{term.title}}
                                      <a ng-if="isAdmin()" href="/help/edit/faq/{{term._id}}" target="edit"><i class="fa fa-pencil-square"></i></a>
                                   </h3>
                                   <div class="color-grey" ng-if="show" >
                                       <p  style="padding:20px 0;"  ng-bind-html="term.description|lstring"></p>
-                                   
                                        <div style="padding-bottom:20px;" class="color-grey" ng-show="term.related">
-                                       <strong>Related:</strong><br>
+                                       <strong>Related:</strong>
                                             <div ng-repeat="rel in term.related">
-                                                <div ng-repeat="t in faqs | filter:'related':rel">
-                                                    <a href="/help/faq#{{t._id}}">{{t.title}}</a>
-                                                </div>
+                                                    <a href="#" ng-click="scrollTo(rel);" class="bold color-blue">{{getTitle(rel)}}</a>
                                             </div>
                                         </div>
                                   </div>
