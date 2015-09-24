@@ -8,6 +8,8 @@ define(['app',  'scbd-angularjs-controls',
             replace: true,
             scope: {
                 //countries: '=countries',
+                api: '=',
+                recordType : '='
             },
             controller: ['$scope', '$http', 'realm', '$q', '$filter', '$routeParams', '$timeout', '$element', 'commonjs', '$route','$location',
                 function($scope, $http, realm, $q, $filter, $routeParams, $timeout, $element, commonjs, $route, $location) {
@@ -19,10 +21,22 @@ define(['app',  'scbd-angularjs-controls',
 
                     $scope.orderList = false;
                     $scope.sortTerm = 'name.en';
-
+                    
+                    
+                    $scope.api = {
+                        loadCountryMapDetails :  loadCountryMapDetails
+                    }
+                    
+                    $scope.$watch('recordType', function(newVal){
+                       if(newVal == 'countryProfile'){
+                           loadCountries();
+                       } 
+                    });
+                    
                     //====================================================
                     function loadCountryMapDetails() {
                         if (!$scope.countries) {
+                            $scope.loading = true;
                             var schema = ["absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database"];
                             var queryFacetsParameters = {
 
@@ -44,7 +58,8 @@ define(['app',  'scbd-angularjs-controls',
 
                                 CalculateFacets();
                                 calculateListViewFacets();
-                            });
+                            })
+                            .finally(function(){$scope.loading = false;});
                             //   if ($routeParams.code && $routeParams.code.toUpperCase()=='RAT') {
                             //     $scope.searchFilter = commonjs.isNPParty;
                             //     $scope.updateMap('ratified');
@@ -150,7 +165,7 @@ define(['app',  'scbd-angularjs-controls',
 
                     //====================================================
                     function loadCountries() {
-
+                        $scope.loading = true;
                         commonjs.getCountries()
                             .then(function(countries) {
 
@@ -160,43 +175,45 @@ define(['app',  'scbd-angularjs-controls',
                                 $scope.countriesforAutocomplete = [];
                                 $scope.inbetweenParties = 0;
                                 $scope.nonCBDParties = 0
-                                var countryColors = {};
+                                //var countryColors = {};
+                                
                                 $scope.countries = countries;
                                 $scope.totalParties=0;
                                 $scope.totalNonParties=0;
 
-                                _.each($scope.countries, function(country) {
+                                // _.each($scope.countries, function(country) {
 
-                                    if (country.isNPParty) {
-                                        if (country.code == 'EU')
-                                            country.code = 'EUR';
-                                        $scope.totalParties++;
-                                        countryColors[country.code.toUpperCase()] = "#428bca";
-                                    // } else if (country.isNPSignatory) {
-                                    //     countryColors[country.code.toUpperCase()] = "#5bc0de";
-                                    } else if (country.isCBDParty) {
-                                        countryColors[country.code.toUpperCase()] = "#666";
-                                        $scope.totalNonParties++;
-                                    } else {
-                                        countryColors[country.code.toUpperCase()] = "#666";
-                                        console.log('nonparty country', country);
-                                        //$scope.totalNonParties++;
-                                    }
+                                //     if (country.isNPParty) {
+                                //         if (country.code == 'EU')
+                                //             country.code = 'EUR';
+                                //         $scope.totalParties++;
+                                //         countryColors[country.code.toUpperCase()] = "#428bca";
+                                //     // } else if (country.isNPSignatory) {
+                                //     //     countryColors[country.code.toUpperCase()] = "#5bc0de";
+                                //     } else if (country.isCBDParty) {
+                                //         countryColors[country.code.toUpperCase()] = "#666";
+                                //         $scope.totalNonParties++;
+                                //     } else {
+                                //         countryColors[country.code.toUpperCase()] = "#666";
+                                //         console.log('nonparty country', country);
+                                //         //$scope.totalNonParties++;
+                                //     }
 
-                                    $scope.countriesforAutocomplete.push({
-                                        name: country.name.en
-                                    });
+                                //     $scope.countriesforAutocomplete.push({
+                                //         name: country.name.en
+                                //     });
 
-                                });
+                                // });
 
-                                countryColors[greenland.toUpperCase()] = "#666";
-                                countryColors[taiwan] = "#666";
+                                // countryColors[greenland.toUpperCase()] = "#666";
+                                // countryColors[taiwan] = "#666";
 
                                 //loadMap(countryColors);
                                 // addEUMapEvents();
                                 // $element.find('[data-toggle="tooltip"]').tooltip();
-
-                            });
+                                
+                            })
+                           .finally(function(){$scope.loading = false;});
                         //$scope.countries = $filter("orderBy")(response[1].data, "name.en");
                     }
 
@@ -578,8 +595,8 @@ define(['app',  'scbd-angularjs-controls',
 
                     }
 
-                    loadCountries();
-                    loadCountryMapDetails();
+                    //loadCountries();
+                    //loadCountryMapDetails();
                     
                     
                     $scope.showCountryProfile = function(country){

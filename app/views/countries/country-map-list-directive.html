@@ -1,7 +1,9 @@
 <div>
     <!-- Country Map and Other -->
     <div class="container-fluid ng-scope" style="min-height:800px;" id="worldMap">
-
+                <div ng-show="!countries || loading" style="padding-left:50%">
+                    <i class="fa fa-spin fa-spinner fa-5x" style="margin:auto" />
+                </div>
 
                 <div class="row" id="divList" style="padding-top:30px;">
                     <div class="col-lg-12 col-md-12 col-xs-12">                       

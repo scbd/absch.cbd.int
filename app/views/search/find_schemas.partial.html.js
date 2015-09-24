@@ -16,44 +16,34 @@ app.directive('searchFilterSchemas', function ($http) {
         link: function ($scope, element, attrs, ngModelController)
         {
         },
-        controller : ['$scope', '$element', '$location', 'Thesaurus', "IStorage", "guid", "$q", "Enumerable", "$filter","underscore","realm","$routeParams",
-         function ($scope, $element, $location, Thesaurus, storage, guid, $q, Enumerable, $filter,_,realm, $routeParams)
+        controller : ['$scope', '$element', '$location', 'Thesaurus', "IStorage", "guid", "$q", "Enumerable", "$filter","underscore","realm","$routeParams",'$route',
+         function ($scope, $element, $location, Thesaurus, storage, guid, $q, Enumerable, $filter,_,realm, $routeParams, $route)
         {
-            var url = $location.url();
-            $scope.url = url;
+            
+            $scope.recordType = $route.current.$$route.type;
+            
             //**********************************************************
-            $scope.isInProfiles = function(tab) {
-              
-              if(url.indexOf('/profiles')  >= 0|| url.indexOf('/profile')  >= 0|| url.indexOf('/country') >= 0 || url.indexOf('/countries') >= 0)
-                    return true;
-              else
-                return false;
+            $scope.isInProfiles = function(tab) {              
+                return $scope.recordType == 'countryProfile' || ($route.current.$$route.type =='countryProfile' && $scope.recordType == 'countryProfile');
             }
             
             //**********************************************************
             $scope.isInNationalRecords = function(tab) {
-              if(url.indexOf('/national-records') >= 0 || $scope.showNationalFilters)
-                    return true;
-              else
-                return false;
+              return  $scope.recordType == 'national' || ($route.current.$$route.type =='national' && $scope.recordType == 'national');
             }
             
             //**********************************************************
             $scope.isInReferenceRecords = function(tab) {
-              if(url.indexOf('/reference-records') >= 0 || $scope.showReferenceFilters)
-                    return true;
-              else
-                return false;
+              return  $scope.recordType == 'reference' || ($route.current.$$route.type =='reference' && $scope.recordType == 'reference');
             }
 
-
+        
         $scope.displayStyles = [
             "small (12-inch)",
             "medium (14-inch)",
             "large (16-inch)",
             "insane (42-inch)"
         ];
-             $scope.recordType = 'national'
             $scope.showNationalFilters = true;
             $scope.showReferenceFilters = false;
             $scope.expanded = false;

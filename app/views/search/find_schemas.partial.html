@@ -9,7 +9,7 @@ label{width:100%;}
     <div class="panel-group " id="accordion " role="tablist " aria-multiselectable="true " style="margin-bottom:0px; ">
        <div class="panel panel-default " style="border-radius:0!important;border:0; ">
             <div class="panel-heading bg-grey3 " role="tab " id="headingOne " style="border-radius:0!important;border:0; padding:18px; ">
-                <span class="panel-title " ng-click="showNationalFilters=false;showReferenceFilters=false;recordType = 'country'; ">
+                <span class="panel-title " ng-click="showNationalFilters=false;showReferenceFilters=false;recordType = 'countryProfile'; ">
                     <a role="button " data-toggle="collapse " data-parent="#accordion " href="#collapseOne" aria-expanded="false " aria-controls="collapseOne " style="font-size:20px; ">
                     <span class="color-white "> <i class="fa fa-chevron-circle-up pad-left " ></i> Country Profiles</span>
                     </a>
@@ -17,22 +17,25 @@ label{width:100%;}
             </div>
             <div id="collapseOne " class="panel-collapse collapse " ng-class="{ 'in':isInProfiles()} " role="tabpanel" aria-labelledby="headingOne ">
                 <div class="panel-body bg-white ">
+                   Blaise fonseca 
+                   
+                   thomas
                    
                 </div>
             </div>
       </div>
       <div class="panel panel-default " style="border-radius:0!important;border:0; ">
             <div class="panel-heading bg-blue " role="tab " id="headingTwo " style="border-radius:0!important;border:0;padding:18px; ">
-                <span class="panel-title ">
+                <span class="panel-title "ng-click="showNationalFilters=!showNationalFilters;recordType = 'national';">
                     <a role="button " data-toggle="collapse " data-parent="#accordion " href="#collapseTwo" aria-expanded="false " aria-controls="#collapseTwo " style="font-size:20px; "
-                    id="lblNationalRecords" ng-click="showNationalFilters=!showNationalFilters;recordType = 'national';">
+                    id="lblNationalRecords" >
                         <i class="fa fa-chevron-circle-up pad-left " ></i> National Records                        
                     </a>
                 </span>
             </div>
             <div id="collapseTwo " class="panel-collapse collapse " ng-class="{ 'in':isInNationalRecords()} " role="tabpanel" aria-labelledby="headingTwo ">
                 <div class="panel-body bg-white ">                
-                    <div class="main_filter" ng-show="showNationalFilters">
+                    <div class="main_filter" ng-show="recordType == 'national'">
                         <div class="btn-group" style="width:100%;">
                             <div ng-show="nationalSearch.keyword">
                                 <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;padding-left:12px;">Keyword</div>
@@ -91,7 +94,7 @@ label{width:100%;}
                     
                     
                     <!--<search-national-records-filter>-->
-                    <div class="main_filter" ng-show="showNationalFilters || measure.selected" ng-class="{'check_active': measure.selected}">
+                    <div class="main_filter"  ng-class="{'check_active': measure.selected}">
 
                         <label name="lblMeasures">
                             <span class="badge badge-white pull-right">{{measure.count}}</span>
@@ -117,7 +120,7 @@ label{width:100%;}
                     </div>
                 
                 
-                    <div class="main_filter" ng-show="showNationalFilters || focalPoint.selected" ng-class="{'check_active': focalPoint.selected}">
+                    <div class="main_filter"  ng-class="{'check_active': focalPoint.selected}">
                         <label name="lblFocalpoints">
                             <span class="badge badge-white pull-right">{{focalPoint.count}}</span>
                             <input type="checkbox" ng-model="focalPoint.selected" bind-indeterminate="focalPoint.indeterminate" ng-change="refresh(focalPoint.selected,'focalPoint')">
@@ -129,13 +132,13 @@ label{width:100%;}
                         </div>
                     </div>
                 
-                    <div class="main_filter" ng-show="showNationalFilters || authority.selected" ng-class="{'check_active': authority.selected}">
+                    <div class="main_filter"  ng-class="{'check_active': authority.selected}">
                         <label name="lblAuthorities">
                             <span class="badge badge-white pull-right">{{authority.count}}</span>
                             <input type="checkbox" ng-model="authority.selected" bind-indeterminate="authority.indeterminate" ng-change="refresh(authority.selected,'authority')">
                             <span class="filter-text">Competent National Authorities  </span>
                         </label>
-                        <div ng-show="authority.selected" class="subfilters-section">
+                        <div  class="subfilters-section" ng-show="authority.selected" >
                             <!-- <div km-toggle placeholder="Responsible for all functions" ng-model="cnaResponsibleForAll"></div> -->
                             <div class="btn-group" >
                                 <button style="button" class="btn btn-default dropdown-toggle"  data-toggle="dropdown" id="btncnaResponsibleForAll">
@@ -171,7 +174,7 @@ label{width:100%;}
                         </div>
                     </div>
                 
-                    <div class="main_filter" ng-show="showNationalFilters || database.selected" ng-class="{'check_active': database.selected}">
+                    <div class="main_filter"  ng-class="{'check_active': database.selected}">
                         <label name="lblDatabases">
                             <span class="badge badge-white pull-right">{{database.count}}</span>
                             <input type="checkbox" ng-model="database.selected" bind-indeterminate="database.indeterminate" ng-change="refresh(database.selected,'database')">
@@ -181,7 +184,7 @@ label{width:100%;}
                 
                 
                 
-                    <div class="main_filter" ng-show="showNationalFilters || absPermit.selected" ng-class="{'check_active': absPermit.selected}">
+                    <div class="main_filter" ng-class="{'check_active': absPermit.selected}">
                         <label name="lblPermits">
                             <span class="badge badge-white pull-right">{{absPermit.count}}</span>
                             <input type="checkbox" ng-model="absPermit.selected" bind-indeterminate="absPermit.indeterminate" ng-change="refresh(absPermit.selected,'absPermit')">
@@ -227,7 +230,7 @@ label{width:100%;}
                         </div>
                     </div>
                 
-                    <div class="main_filter" ng-show="showNationalFilters || absCheckpoint.selected" ng-class="{'check_active': absCheckpoint.selected}">
+                    <div class="main_filter"  ng-class="{'check_active': absCheckpoint.selected}">
                         <label name="lblCheckpoints">
                             <span class="badge badge-white pull-right">{{absCheckpoint.count}}</span>
                             <input type="checkbox" ng-model="absCheckpoint.selected" bind-indeterminate="absCheckpoint.indeterminate" ng-change="refresh(absCheckpoint.selected,'absCheckpoint')">
@@ -240,7 +243,7 @@ label{width:100%;}
                         </div>
                     </div>
                 
-                    <div class="main_filter" ng-show="showNationalFilters || absCheckpointCommunique.selected" ng-class="{'check_active': absCheckpointCommunique.selected}">
+                    <div class="main_filter" ng-class="{'check_active': absCheckpointCommunique.selected}">
                         <label name="lblCheckpointCommuniques">
                             <span class="badge badge-white pull-right">{{absCheckpointCommunique.count}}</span>
                             <input type="checkbox" ng-model="absCheckpointCommunique.selected" bind-indeterminate="absCheckpointCommunique.indeterminate" ng-change="refresh(absCheckpointCommunique.selected,'absCheckpointCommunique')">
@@ -258,10 +261,10 @@ label{width:100%;}
         
         <div class="panel panel-default " style="border-radius:0!important;border:0; ">
             <div class="panel-heading bg-orange " role="tab " id="headingThree " style="border-radius:0!important;border:0;padding:18px; ">
-                <span class="panel-title ">
+                <span class="panel-title " ng-click="showReferenceFilters=!showReferenceFilters;recordType = 'reference';">
                     <a class="collapsed " role="button" data-toggle="collapse" data-parent="#accordion " href="#collapseThree " aria-expanded="false "
                      aria-controls="collapseThree " style="font-size:20px; " id="lblReferenceRecords"
-                      ng-click="showReferenceFilters=!showReferenceFilters;recordType = 'reference';">
+                      >
                         <i class="fa fa-chevron-circle-up pad-left " ></i>Reference Records
                     </a>
                 </span>
@@ -269,7 +272,7 @@ label{width:100%;}
             <div id="collapseThree " class="panel-collapse collapse " ng-class="{ 'in':isInReferenceRecords()} " role="tabpanel" aria-labelledby="headingThree ">
                 <div class="panel-body " style="min-height:500px; ">                            
                         <div >
-                            <div class="main_filter" ng-show="(showReferenceFilters || resource.selected)" ng-class="{'check_active': resource.selected}">
+                            <div class="main_filter" ng-class="{'check_active': resource.selected}">
                                 <label name="lblVirtualRecords">
                                     <span class="badge badge-white pull-right">{{resource.count}}</span>
                                     <input type="checkbox" ng-model="resource.selected" bind-indeterminate="resource.indeterminate" ng-change="refresh(resource.selected,'resource')">
@@ -281,7 +284,7 @@ label{width:100%;}
                                     <div km-select multiple api="vlrLanguagesApi" name= "vlrLanguages" binding-type="string" ng-model="vlrLanguages" items="options.languages()" placeholder="Available Languages"></div>
                                 </div>
                             </div>
-                            <div class="main_filter" ng-show="(showReferenceFilters || modelContractualClause.selected)" ng-class="{'check_active': modelContractualClause.selected}">
+                            <div class="main_filter"  ng-class="{'check_active': modelContractualClause.selected}">
                                 <label name="lblModelContractualClause">
                                     <span class="badge badge-white pull-right">{{modelContractualClause.count}}</span>
                                     <input type="checkbox" ng-model="modelContractualClause.selected" bind-indeterminate="modelContractualClause.indeterminate" ng-change="refresh(modelContractualClause.selected,'modelContractualClause')">
@@ -291,7 +294,7 @@ label{width:100%;}
                                     <div km-select multiple api="mccresourceTypesApi" name="mccresourceTypes" binding-type="string" ng-model="mccresourceTypes" items="options.mccResourceTypes()" placeholder="Type of resource"></div>
                                 </div>
                             </div>
-                            <div class="main_filter" ng-show="(showReferenceFilters || communityProtocol.selected)" ng-class="{'check_active': communityProtocol.selected}">
+                            <div class="main_filter" ng-class="{'check_active': communityProtocol.selected}">
                                 <label name="lblCommunityProtocol">
                                     <span class="badge badge-white pull-right">{{communityProtocol.count}}</span>
                                     <input type="checkbox" ng-model="communityProtocol.selected" bind-indeterminate="communityProtocol.indeterminate" ng-change="refresh(communityProtocol.selected,'communityProtocol')">
@@ -302,7 +305,7 @@ label{width:100%;}
                                 </div>
                             </div>
                     
-                            <div class="main_filter" ng-show="showReferenceFilters || meeting.selected" ng-class="{'check_active': meeting.selected}">
+                            <div class="main_filter"  ng-class="{'check_active': meeting.selected}">
                                 <label name="lblMeetings">
                                     <span class="badge badge-white pull-right">{{meeting.count}}</span>
                                     <input type="checkbox" ng-model="meeting.selected" bind-indeterminate="meeting.indeterminate" ng-change="refresh(meeting.selected,'meeting')">
@@ -313,7 +316,7 @@ label{width:100%;}
                                 </div>
                             </div>
                     
-                            <div class="main_filter" ng-show="showReferenceFilters || notification.selected" ng-class="{'check_active': notification.selected}">
+                            <div class="main_filter"  ng-class="{'check_active': notification.selected}">
                                 <label name="lblNotifications">
                                     <span class="badge badge-white pull-right">{{notification.count}}</span>
                                     <input type="checkbox" ng-model="notification.selected" bind-indeterminate="notification.indeterminate" ng-change="refresh(notification.selected,'notification')">
@@ -321,7 +324,7 @@ label{width:100%;}
                                 </label>
                             </div>
                     
-                            <div class="main_filter" ng-show="showReferenceFilters || pressRelease.selected" ng-class="{'check_active': pressRelease.selected}">
+                            <div class="main_filter" ng-class="{'check_active': pressRelease.selected}">
                                 <label name="lblPressReleases">
                                     <span class="badge badge-white pull-right">{{pressRelease.count}}</span>
                                     <input type="checkbox" ng-model="pressRelease.selected" bind-indeterminate="pressRelease.indeterminate" ng-change="refresh(pressRelease.selected,'pressRelease')">
@@ -329,7 +332,7 @@ label{width:100%;}
                                 </label>
                             </div>
                     
-                            <div class="main_filter" ng-show="showReferenceFilters || statement.selected" ng-class="{'check_active': statement.selected}">
+                            <div class="main_filter"  ng-class="{'check_active': statement.selected}">
                                 <label name="lblStatements">
                                     <span class="badge badge-white pull-right">{{statement.count}}</span>
                                     <input type="checkbox" ng-model="statement.selected" bind-indeterminate="statement.indeterminate" ng-change="refresh(statement.selected,'statement')">
@@ -337,7 +340,7 @@ label{width:100%;}
                                 </label>
                             </div>
                     
-                            <div class="main_filter" ng-show="showReferenceFilters || news.selected" ng-class="{'check_active': news.selected}">
+                            <div class="main_filter" ng-class="{'check_active': news.selected}">
                                 <label name="lblNews">
                                     <span class="badge badge-white pull-right">{{news.count}}</span>
                                     <input type="checkbox" ng-model="news.selected" bind-indeterminate="news.indeterminate" ng-change="refresh(news.selected,'news')">

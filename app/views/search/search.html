@@ -117,13 +117,13 @@
 
                   </div>
 
-                 <search-filter-themes api="thematicAreaApi" title='Thematic Areas' ng-model='thematicAreas' field='thematicAreas_ss' query='queryTheme'></search-filter-themes>
-                 <search-filter-countries api="countryApi" title='Countries' ng-model='governments' field='government_s' query='queryGovernment' external-filter="countryResultFilter"></search-filter-countries>
-                 <search-filter-regions api="regionsApi" title="Regions" ng-model="regions" field="government_REL_ss" query="queryRegion" facets="regionFacets"></search-filter-regions>
+                 <search-filter-themes ng-show="false" api="thematicAreaApi" title='Thematic Areas' ng-model='thematicAreas' field='thematicAreas_ss' query='queryTheme'></search-filter-themes>
+                 <search-filter-countries ng-show="false" api="countryApi" title='Countries' ng-model='governments' field='government_s' query='queryGovernment' external-filter="countryResultFilter"></search-filter-countries>
+                 <search-filter-regions ng-show="false" api="regionsApi" title="Regions" ng-model="regions" field="government_REL_ss" query="queryRegion" facets="regionFacets"></search-filter-regions>
                  
                 <div ng-if="recordType=='reference' || recordType== 'national'" preview-type="previewType" document-list documents='rawDocs' filter='*' show-pagination='true' current-page='currentPage' document-Count='documentCount' order-by="orderBy">
                 </div>
-               <div country-map-list ng-if="recordType=='country'"></div>
+               <div country-map-list ng-if="recordType=='countryProfile'" api="countryProfileApi" record-type="recordType"></div>
             </div>
         </div>
     </div>
