@@ -6,7 +6,7 @@
                 <div class="row" id="divList" style="padding-top:30px;">
                     <div class="col-lg-12 col-md-12 col-xs-12">                       
                         
-                         <div class="row table-hover table-msr" ng-hide="absMeasure.length==0" >
+                         <div class="row table-hover table-msr">
                              
                                     <div class="col-lg-1 col-md-1 col-xs-1 tableheader" >
                                     <span style="font-size:14px;font-weight:bold;text-transform:uppercase;" class="color-black">SORT</span>
@@ -86,9 +86,9 @@
                                 </div>
                                 <div class="row table-hover table-msr" ng-repeat="country in (countries | filter:countryFilter | filter: searchFilter | orderBy:sortTermFilter:orderList) ">
                                     <div class="row border">
-                                        <div class="row table-row" ng-click="displayDetails=!displayDetails;showCountryProfile(country)">
+                                        <div class="row table-row" ng-click="country.displayDetails=!country.displayDetails;showCountryProfile(country)">
                                             <div class="col-lg-1 col-md-1 col-xs-1 tableheader" >
-                                                {{$index + 1}}
+                                                <span style="padding:0px 50% 0px 50%">{{$index + 1}}</span>
                                             </div>
                                             <div class="col-lg-2 col-md-2 col-xs-2 tableheader">
                                                 {{country.name.en}}
@@ -113,7 +113,7 @@
                                             <div class="col-lg-1 col-md-1 col-xs-1 tableheader" >{{country.CPC}}
                                             </div>
                                         </div>
-                                        <div class="row" ng-show="displayDetails">
+                                        <div class="row" ng-if="country.displayDetails">
                                             <i class="glyphicon glyphicon-remove-circle circle pull-right" style="position:relative;top:40px;z-index:100;font-size:20px;color:white;" ng-click="displayDetails=!displayDetails;"></i>
                                             <span country-profile api="country.api" code="country.profileCode"></span>
                                         </div>
