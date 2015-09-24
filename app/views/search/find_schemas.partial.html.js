@@ -38,12 +38,7 @@ app.directive('searchFilterSchemas', function ($http) {
             }
 
         
-        $scope.displayStyles = [
-            "small (12-inch)",
-            "medium (14-inch)",
-            "large (16-inch)",
-            "insane (42-inch)"
-        ];
+     
             $scope.showNationalFilters = true;
             $scope.showReferenceFilters = false;
             $scope.expanded = false;
