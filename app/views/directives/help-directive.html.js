@@ -44,7 +44,7 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                 
                                         var inlineTemplate= '<div class="md-whiteframe-z1 help-inline-content" ng-if="showHelp.show"> <span><i class="fa fa-info-circle"></i> {{content}}</span> <div>';
                                     
-                                        var contentTemplate= '<div>{{content}}<div>';
+                                        var contentTemplate= '<div class="simple-content">{{content}}<div>';
                                     
                                     
                                         var controlTemplate = sectionTemplate;//'<span class="help-inline" ng-if="showHelp.show"><i class="material-icons">help_outline</i> {{content}}</span>'

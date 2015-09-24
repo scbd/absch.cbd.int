@@ -370,6 +370,11 @@ define(['app','underscore','/app/js/common.js',
                     refresh();
             }
         });
+        //  $scope.$watch('recordType',     function(newVal, oldVal) { if(newVal=='countryProfile' && oldVal){
+        //         $scope.countryProfileApi.loadCountryDetails();
+        //     } 
+        //  });
+        
         $scope.previewType = 'group';
 
         $scope.updatePreviewType = function(type){
