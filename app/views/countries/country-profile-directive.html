@@ -108,19 +108,22 @@
                     <i class="material-icons" style="position:relative;top:6px;">menu</i> Select a country
                 </md-button>
 
+                -->
+
+
                 <div ng-show="!country" style="padding-left:50%">
                     <i class="fa fa-spin fa-spinner fa-5x" style="margin:auto"/>
-                </div>-->
+                </div>
 
                 <div ng-show="country" class="col-xs-12"  help schema="countryProfile" show-help="showHelp">
-                    <md-toolbar ng-class="{'bg-blue': country.isNPParty,'bg-medgrey': !country.isNPParty }">
-                        <div class="md-toolbar-tools">
-
+                    
+                    <md-content layout-padding style="padding: 0 24px 24px 24px;">
+                        <div class="row" style="padding:3px;" ng-class="{'bg-blue': country.isNPParty,'bg-medgrey': !country.isNPParty }">
                             <div layout="row">
                                 <div flex="10"><div style="height:60px;" class="flag-icon-background  flag-icon-{{code.toLowerCase()}}"></div></div>
                                 
                                 <div flex="60"><h3 style="margin:0;padding:0;display:inline;">
-                                                    <span class="country-name color-white" style="font-size:3vw;">{{country.name.en}}</span>
+                                                    <span class="country-name color-white" style="font-size:32px;">{{country.name.en}}</span>
                                                 </h3>
                                                 <h3 style="margin:0;padding:0;display:inline;position:relative;top:-5px;">
                                                     <label class="label label-default" ng-show="!country.isNPParty">Non-Party</label>
@@ -152,30 +155,7 @@
                                 </div>
                                 <div flex="10"></div>
                             </div>
-                            <!--<table style="width:100%">
-                                <tr>
-                                    <td style="width:80px;padding-right:20px;">
-                                        <div style="height:60px;" class="flag-icon-background  flag-icon-{{code.toLowerCase()}}"></div>
-                                    </td>
-                                    <td style="padding-top:10px;">
-                                        <h3 style="margin:0;padding:0;display:inline;">
-                                            <span class="country-name color-white" style="font-size:3vw;">{{country.name.en}}</span>
-                                        </h3>
-                                        <h3 style="margin:0;padding:0;display:inline;position:relative;top:-5px;">
-                                            <label class="label label-default" ng-show="!country.isNPParty">Non-Party</label>
-                                            <label class="label label-info" ng-show="country.isNPParty">Party</label>
-                                        </h3>
-                                    </td>
-                                    <td class="pull-right" style="padding-top:5px;">
-                                       
-                                    </td>
-                                </tr>
-                            </table>-->
-
                         </div>
-                    </md-toolbar>
-                    <md-content layout-padding style="padding: 24px;">
-
 
                         <div class="row bg-grey1" style="padding:3px;">
                             <h5 style="padding:0;margin:0;font-size:15px;">

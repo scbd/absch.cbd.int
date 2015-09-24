@@ -338,7 +338,7 @@ label{width:100%;}
                                 <label name="lblModelContractualClause">
                                     <span class="badge badge-white pull-right">{{modelContractualClause.count}}</span>
                                     <input type="checkbox" ng-model="modelContractualClause.selected" bind-indeterminate="modelContractualClause.indeterminate" ng-change="refresh(modelContractualClause.selected,'modelContractualClause')">
-                                    <span class="filter-text">Model Contractual Clause  </span>
+                                    <span class="filter-text">Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and Standards</span>
                                 </label>
                                 <div ng-show="modelContractualClause.selected" class="subfilters-section">
                                     <div km-select multiple api="mccresourceTypesApi" name="mccresourceTypes" binding-type="string" ng-model="mccresourceTypes" items="options.mccResourceTypes()" placeholder="Type of resource"></div>
