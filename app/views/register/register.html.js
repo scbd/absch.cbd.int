@@ -193,13 +193,13 @@ define(['app','linqjs', 'angular-localizer',
       },
       modelContractualClause: {
         abbreviation: 'A19-20',schemaType:"referenceRecords",
-        title: 'Article 19 & 20 tools',
+        title: 'Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and Standards ',
         help: '',
         tips: [],
       },
       communityProtocol: {
         abbreviation: 'CPP',schemaType:"referenceRecords",
-        title: 'Community protocols procedures and customary laws',
+        title: 'Community protocols and procedures and customary laws',
         help: '',
         tips: [],
       }
