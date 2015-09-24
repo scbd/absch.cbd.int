@@ -121,8 +121,9 @@
                  <search-filter-countries api="countryApi" title='Countries' ng-model='governments' field='government_s' query='queryGovernment' external-filter="countryResultFilter"></search-filter-countries>
                  <search-filter-regions api="regionsApi" title="Regions" ng-model="regions" field="government_REL_ss" query="queryRegion" facets="regionFacets"></search-filter-regions>
                  
-                <div preview-type="previewType" document-list documents='rawDocs' filter='*' show-pagination='true' current-page='currentPage' document-Count='documentCount' order-by="orderBy">
+                <div ng-if="recordType=='reference' || recordType== 'national'" preview-type="previewType" document-list documents='rawDocs' filter='*' show-pagination='true' current-page='currentPage' document-Count='documentCount' order-by="orderBy">
                 </div>
+               <div country-map-list ng-if="recordType=='country'"></div>
             </div>
         </div>
     </div>

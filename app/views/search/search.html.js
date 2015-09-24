@@ -9,7 +9,8 @@ define(['app','underscore','/app/js/common.js',
     '/app/views/directives/search-filter-dates.partial.html.js',
     '/app/views/directives/document-list.partial.html.js', 'bootstrap-datepicker','moment',
     '/app/views/directives/help-directive.html.js',
-    '/app/views/search/search-directives/search-national-records-filter-directive.html.js'],
+    '/app/views/search/search-directives/search-national-records-filter-directive.html.js',
+    '/app/views/countries/country-map-list-directive.html.js'],
      function (app,_) {
 
     app.controller('FindController', ['$scope', '$rootScope','showHelp' ,'$http', '$timeout', '$q','realm', '$routeParams','$location','$element','commonjs','$mdSidenav', '$mdUtil', '$mdMedia',
@@ -162,6 +163,9 @@ define(['app','underscore','/app/js/common.js',
         //
         //============================================================
     	function query () {
+            if($scope.recordType =='country')
+                return;
+            
             if(!$scope.recordType)
                 $scope.recordType = 'national';
                 

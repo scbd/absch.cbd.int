@@ -1,4 +1,5 @@
-define(['app',  'scbd-angularjs-controls'], function(app) {
+define(['app',  'scbd-angularjs-controls',
+'/app/views/countries/country-profile-directive.html.js'], function(app) {
 
     app.directive('countryMapList', function() {
         return {
@@ -191,9 +192,9 @@ define(['app',  'scbd-angularjs-controls'], function(app) {
                                 countryColors[greenland.toUpperCase()] = "#666";
                                 countryColors[taiwan] = "#666";
 
-                                loadMap(countryColors);
-                                addEUMapEvents();
-                                $element.find('[data-toggle="tooltip"]').tooltip();
+                                //loadMap(countryColors);
+                                // addEUMapEvents();
+                                // $element.find('[data-toggle="tooltip"]').tooltip();
 
                             });
                         //$scope.countries = $filter("orderBy")(response[1].data, "name.en");
@@ -579,6 +580,13 @@ define(['app',  'scbd-angularjs-controls'], function(app) {
 
                     loadCountries();
                     loadCountryMapDetails();
+                    
+                    
+                    $scope.showCountryProfile = function(country){
+                        
+                       // country.api.loadCountryDetails(country.code);
+                        country.profileCode = country.code;
+                    }
 
                 }
             ]
