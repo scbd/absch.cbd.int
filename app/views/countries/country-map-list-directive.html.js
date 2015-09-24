@@ -9,10 +9,14 @@ define(['app',  'scbd-angularjs-controls',
             scope: {
                 //countries: '=countries',
                 api: '=',
-                recordType : '='
+                recordType : '=',
+                query: '='
             },
             controller: ['$scope', '$http', 'realm', '$q', '$filter', '$routeParams', '$timeout', '$element', 'commonjs', '$route','$location',
-                function($scope, $http, realm, $q, $filter, $routeParams, $timeout, $element, commonjs, $route, $location) {
+            function($scope, $http, realm, $q, $filter, $routeParams, $timeout, $element, commonjs, $route, $location) {
+                    
+                    //$scope.countryProfile_keyword = 'can';
+                    
                     var taiwan = "TW";
                     var china = "CN";
                     var denmark = "DK";

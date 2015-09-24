@@ -653,7 +653,14 @@ app.directive('searchFilterSchemas', function ($http) {
 
             });
 
-
+            
+            
+            ////country profile search
+            
+            $scope.$watch('countryProfileSearch', function(newVal){
+                
+                $scope.query = newVal;
+            },true);
 
         }]
     }

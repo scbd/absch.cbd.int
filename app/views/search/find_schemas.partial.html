@@ -18,55 +18,57 @@ label{width:100%;}
             <div id="collapseOne " class="panel-collapse collapse " ng-class="{ 'in':isInProfiles()} " role="tabpanel" aria-labelledby="headingOne ">
                 <div class="panel-body bg-white ">
                 
-                
-          
+                        
+                        <input ng-model="countryProfileSearch.countryProfile_keyword" >
+                        
+                        
                         <div class="btn-group" style="width:100%;">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                             style="width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;">
-                                <div ng-show="!nationalSearch.partyStatus" style="color:#AAA;font-weight:bold;">Party status <span class="pull-right"><i class="caret"></i></span></div>
-                                <div ng-show="nationalSearch.partyStatus">
+                                <div ng-show="!countryProfileSearch.partyStatus" style="color:#AAA;font-weight:bold;">Party status <span class="pull-right"><i class="caret"></i></span></div>
+                                <div ng-show="countryProfileSearch.partyStatus">
                                 <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;">Party status </div>
                                 <div style="font-weight:bold;">
-                                    <span ng-show="nationalSearch.partyStatus=='parties'"> <i class="fa fa-square color-blue" ></i> Parties </span>
-                                    <span ng-show="nationalSearch.partyStatus=='nonParties'"> <i class="fa fa-square color-grey" ></i> Non-Parties</span>
-                                    <span ng-show="nationalSearch.partyStatus=='both'">Both Parties and Non-Parties</span>
+                                    <span ng-show="countryProfileSearch.partyStatus=='parties'"> <i class="fa fa-square color-blue" ></i> Parties </span>
+                                    <span ng-show="countryProfileSearch.partyStatus=='nonParties'"> <i class="fa fa-square color-grey" ></i> Non-Parties</span>
+                                    <span ng-show="countryProfileSearch.partyStatus=='both'">Both Parties and Non-Parties</span>
                                     <span class="pull-right"><i class="caret"></i></span>
                                 </div>
                                 </div>
                             </button>
                             <ul class="dropdown-menu">
                                 <li>
-                                <a href="#" ng-click="nationalSearch.partyStatus='parties'"> <i class="fa fa-square color-blue"></i> Parties to the Nagoya Protocol </a>
+                                <a href="#" ng-click="countryProfileSearch.partyStatus='parties'"> <i class="fa fa-square color-blue"></i> Parties to the Nagoya Protocol </a>
                                 </li>
                                 <li>
-                                <a href="#" ng-click="nationalSearch.partyStatus='nonParties'"> <i class="fa fa-square color-grey"></i> Non-Parties to the Nagoya Protocol</a>
+                                <a href="#" ng-click="countryProfileSearch.partyStatus='nonParties'"> <i class="fa fa-square color-grey"></i> Non-Parties to the Nagoya Protocol</a>
                                 </li>
-                                <li><a href="#" ng-click="nationalSearch.partyStatus='both'">Both Parties and Non-Parties</a></li>
+                                <li><a href="#" ng-click="countryProfileSearch.partyStatus='both'">Both Parties and Non-Parties</a></li>
                             </ul>
                         </div>
                         
                         <div class="btn-group" style="width:100%;">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                             style="width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;">
-                                <div ng-show="!nationalSearch.partyStatus" style="color:#AAA;font-weight:bold;">Party status <span class="pull-right"><i class="caret"></i></span></div>
-                                <div ng-show="nationalSearch.partyStatus">
+                                <div ng-show="!countryProfileSearch.partyStatus" style="color:#AAA;font-weight:bold;">Party status <span class="pull-right"><i class="caret"></i></span></div>
+                                <div ng-show="countryProfileSearch.partyStatus">
                                 <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;">Party status </div>
                                 <div style="font-weight:bold;">
-                                    <span ng-show="nationalSearch.partyStatus=='parties'"> <i class="fa fa-square color-blue" ></i> Parties </span>
-                                    <span ng-show="nationalSearch.partyStatus=='nonParties'"> <i class="fa fa-square color-grey" ></i> Non-Parties</span>
-                                    <span ng-show="nationalSearch.partyStatus=='both'">Both Parties and Non-Parties</span>
+                                    <span ng-show="countryProfileSearch.partyStatus=='parties'"> <i class="fa fa-square color-blue" ></i> Parties </span>
+                                    <span ng-show="countryProfileSearch.partyStatus=='nonParties'"> <i class="fa fa-square color-grey" ></i> Non-Parties</span>
+                                    <span ng-show="countryProfileSearch.partyStatus=='both'">Both Parties and Non-Parties</span>
                                     <span class="pull-right"><i class="caret"></i></span>
                                 </div>
                                 </div>
                             </button>
                             <ul class="dropdown-menu">
                                 <li>
-                                <a href="#" ng-click="nationalSearch.partyStatus='parties'"> <i class="fa fa-square color-blue"></i> Parties to the Nagoya Protocol </a>
+                                <a href="#" ng-click="countryProfileSearch.partyStatus='parties'"> <i class="fa fa-square color-blue"></i> Parties to the Nagoya Protocol </a>
                                 </li>
                                 <li>
-                                <a href="#" ng-click="nationalSearch.partyStatus='nonParties'"> <i class="fa fa-square color-grey"></i> Non-Parties to the Nagoya Protocol</a>
+                                <a href="#" ng-click="countryProfileSearch.partyStatus='nonParties'"> <i class="fa fa-square color-grey"></i> Non-Parties to the Nagoya Protocol</a>
                                 </li>
-                                <li><a href="#" ng-click="nationalSearch.partyStatus='both'">Both Parties and Non-Parties</a></li>
+                                <li><a href="#" ng-click="countryProfileSearch.partyStatus='both'">Both Parties and Non-Parties</a></li>
                             </ul>
                         </div>
                         
