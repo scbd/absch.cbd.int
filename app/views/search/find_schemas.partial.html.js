@@ -231,6 +231,7 @@ app.directive('searchFilterSchemas', function ($http) {
                     $scope.query = query;
                     //console.log (query);
                 }
+                console.log ($scope.query);
             }
 
             function buildConditions (conditions, items) {
@@ -660,8 +661,8 @@ app.directive('searchFilterSchemas', function ($http) {
             ////country profile search
             
             $scope.$watch('countryProfileSearch', function(newVal){
-                
-                $scope.query = newVal;
+                 if($scope.recordType == 'countryProfile')
+                    $scope.query = newVal;
             },true);
 
         }]
