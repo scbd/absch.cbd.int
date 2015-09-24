@@ -45,7 +45,7 @@
                         $scope.showCPC = false;
                         $scope.showIRCC = false;
                         $scope.showMSR = false;
-                        $scope.showNFP = true;
+                        $scope.showNFP = false;
                         $scope.showNDB = false;
                         $scope.showCNA = false;
                         $scope.showCP = false;

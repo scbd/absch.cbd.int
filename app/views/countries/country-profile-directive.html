@@ -97,11 +97,12 @@
 
 
 
-    <section layout="row" style="position:relative; top:20px; padding-bottom:30px;" flex>
+    <!--<section layout="row" style="position:relative; top:20px; padding-bottom:30px;" flex>
 
         <md-content flex layout-margin style="margin:0 30px 30px 30px;padding:0;background-color:transparent;">
+
             <div layout="column" layout-align="top center" help schema="countryProfile" show-help="showHelp" repalce-glossary-terms="true" >
-                <!---->
+
                 <legend name="formInfo" style="display:none"></legend>
                 <md-button ng-click="toggleLeft()" class="md-primary md-raised bg-medgrey" hide-gt-lg style="margin: 0  0 10px 0;">
                     <i class="material-icons" style="position:relative;top:6px;">menu</i> Select a country
@@ -109,28 +110,26 @@
 
                 <div ng-show="!country" style="padding-left:50%">
                     <i class="fa fa-spin fa-spinner fa-5x" style="margin:auto"/>
-                </div>
+                </div>-->
 
-                <div class="md-whiteframe-z1" ng-show="country">
+                <div ng-show="country" class="col-xs-12"  help schema="countryProfile" show-help="showHelp">
                     <md-toolbar ng-class="{'bg-blue': country.isNPParty,'bg-medgrey': !country.isNPParty }">
                         <div class="md-toolbar-tools">
 
-                            <table style="width:100%">
-                                <tr>
-                                    <td style="width:80px;padding-right:20px;">
-                                        <div style="height:60px;" class="flag-icon-background  flag-icon-{{code.toLowerCase()}}"></div>
-                                    </td>
-                                    <td style="padding-top:10px;">
-                                        <h3 style="margin:0;padding:0;display:inline;">
-                                            <span class="country-name color-white" style="font-size:3vw;">{{country.name.en}}</span>
-                                        </h3>
-                                        <h3 style="margin:0;padding:0;display:inline;position:relative;top:-5px;">
-                                            <label class="label label-default" ng-show="!country.isNPParty">Non-Party</label>
-                                            <label class="label label-info" ng-show="country.isNPParty">Party</label>
-                                        </h3>
-                                    </td>
-                                    <td class="pull-right" style="padding-top:5px;">
-                                        <div>
+                            <div layout="row">
+                                <div flex="10"><div style="height:60px;" class="flag-icon-background  flag-icon-{{code.toLowerCase()}}"></div></div>
+                                
+                                <div flex="60"><h3 style="margin:0;padding:0;display:inline;">
+                                                    <span class="country-name color-white" style="font-size:3vw;">{{country.name.en}}</span>
+                                                </h3>
+                                                <h3 style="margin:0;padding:0;display:inline;position:relative;top:-5px;">
+                                                    <label class="label label-default" ng-show="!country.isNPParty">Non-Party</label>
+                                                    <label class="label label-info" ng-show="country.isNPParty">Party</label>
+                                                </h3></div>
+                        
+                                <div flex="30">
+                                    
+                                     <div>
                                             <div ng-show="country.isNPSignatory && !country.isNPParty">
                                                 <label class="pull-right">
                                                     <span style="color: #5bc0de;">Signatory</span>
@@ -149,9 +148,29 @@
                                                 </label>
                                             </div>
                                         </div>
+                                    
+                                </div>
+                                <div flex="10"></div>
+                            </div>
+                            <!--<table style="width:100%">
+                                <tr>
+                                    <td style="width:80px;padding-right:20px;">
+                                        <div style="height:60px;" class="flag-icon-background  flag-icon-{{code.toLowerCase()}}"></div>
+                                    </td>
+                                    <td style="padding-top:10px;">
+                                        <h3 style="margin:0;padding:0;display:inline;">
+                                            <span class="country-name color-white" style="font-size:3vw;">{{country.name.en}}</span>
+                                        </h3>
+                                        <h3 style="margin:0;padding:0;display:inline;position:relative;top:-5px;">
+                                            <label class="label label-default" ng-show="!country.isNPParty">Non-Party</label>
+                                            <label class="label label-info" ng-show="country.isNPParty">Party</label>
+                                        </h3>
+                                    </td>
+                                    <td class="pull-right" style="padding-top:5px;">
+                                       
                                     </td>
                                 </tr>
-                            </table>
+                            </table>-->
 
                         </div>
                     </md-toolbar>
@@ -725,13 +744,13 @@
                         </div>
 
                 </div>
-                </md-content>
+                <!--</md-content>
             </div>
 
 
 
         </md-content>
-    </section>
+    </section>-->
 
 </div>
 

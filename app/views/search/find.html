@@ -5,7 +5,8 @@
     <style>
         md-list-item:hover{ background-color: #eee;}
         md-list-item.md-2-line .md-list-item-text h3 {line-height: 1.1;}
-         md-list-item.md-2-line .md-list-item-text p {font-size:14px;}
+        md-list-item.md-2-line .md-list-item-text p {font-size:14px;}
+        /*md-list-itemn:hover{color:#000!important;}*/
     </style>
 
     <div class="container-fluid" style="margin-bottom:30px;">
@@ -52,10 +53,10 @@
                     </md-content>
                     <md-divider></md-divider>
                     <md-content style="max-height:985px;" class="hidden-sm hidden-md">
-                        <md-list class="bg-grey2">
+                        <md-list class="bg-grey">
                         
-                            <md-list-item class="md-1-line" ng-repeat="country in countries | filter:name | orderBy:'name.en'" ng-class="{'bg-blue': country.isNPParty, 'bg-medgrey':!country.isNPParty}" ng-click="navigateTo('/search/countries/'+ country.code, $event)" style="cursor:pointer;">
-                                <a href="/search/countries/{{country.code}}" class="color-white bold">
+                            <md-list-item class="md-1-line" ng-repeat="country in countries | filter:name | orderBy:'name.en'"  ng-click="navigateTo('/search/countries/'+ country.code, $event)" style="cursor:pointer;">
+                                <a href="/search/countries/{{country.code}}" ng-class="{'color-blue': country.isNPParty, 'color-grey':!country.isNPParty}" class="bold">
                                     {{country.name.en}}
                                     <span class="badge pull-right">{{country.facetCount}}</span>
                                 </a>
