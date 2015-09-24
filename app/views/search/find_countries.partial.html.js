@@ -197,9 +197,9 @@ define(['app', 'underscore', '/app/js/common.js'], function(app, _) {
 
           }, true);
 
-          if($routeParams.countryCode){
-              $scope.externalFilter = [$routeParams.countryCode];
-          }
+          // if($routeParams.countryCode){
+          //     $scope.externalFilter = [$routeParams.countryCode];
+          // }
 
           $scope.$watch('showSelect', function(value) {
               loadContryDetails(value);

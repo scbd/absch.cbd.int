@@ -206,7 +206,7 @@ define(['app','underscore','/app/js/common.js',
                 orderByFields = $scope.orderBy;
 
             var queryParameters
-            if($scope.previewType == 'list'){
+            if($scope.previewType == 'list' || $scope.recordType == 'reference'){
                 $scope.rawDocs = undefined;
                 queryParameters = {
                     'q': q,
@@ -221,6 +221,8 @@ define(['app','underscore','/app/js/common.js',
                 };
             }
             else if($scope.previewType == 'group'){
+                if($scope.currentPage==0)
+                    $scope.rawDocs = undefined;
                 queryParameters = {
                     'q': q + ' AND government_s:*',
                     'sort': 'government_EN_t asc, createdDate_dt desc, title_t asc',
@@ -250,7 +252,7 @@ define(['app','underscore','/app/js/common.js',
                 queryCanceler = null;
 
 
-                 if($scope.previewType=='list'){
+                 if($scope.previewType=='list'|| $scope.recordType == 'reference'){
                     $scope.rawDocs = data.response.docs;
                     $scope.documentCount   = data.response.numFound;
                  }
@@ -350,7 +352,9 @@ define(['app','underscore','/app/js/common.js',
             refreshTimeout = $timeout(function () { query(); }, 200);
         }
 
-        $scope.$watch('currentPage',     function() { refresh() });
+        $scope.$watch('currentPage',     function() { 
+            refresh() 
+            });
         $scope.$watch('querySchema',     function() { $scope.currentPage=0; refresh(); });
         $scope.$watch('queryGovernment', function() { $scope.currentPage=0; refresh(); });
         $scope.$watch('queryTargets',    function() { $scope.currentPage=0; refresh(); });

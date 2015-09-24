@@ -21,7 +21,9 @@ app.directive('searchFilterSchemas', function ($http) {
         {
             
             $scope.recordType = $route.current.$$route.type;
-            
+            if($scope.recordType == 'reference'){
+                $scope.previewType = 'list';
+            }
             //**********************************************************
             $scope.isInProfiles = function(tab) {              
                 return $scope.recordType == 'countryProfile' || ($route.current.$$route.type =='countryProfile' && $scope.recordType == 'countryProfile');
@@ -39,8 +41,8 @@ app.directive('searchFilterSchemas', function ($http) {
 
         
      
-            $scope.showNationalFilters = true;
-            $scope.showReferenceFilters = false;
+            $scope.showNationalFilters = $scope.isInNationalRecords();
+            $scope.showReferenceFilters = $scope.isInReferenceRecords();
             $scope.expanded = false;
             $scope.selectedItems = [];
             $scope.facet = $scope.field.replace('_s', ''); // TODO: replace @field by @facet
@@ -58,8 +60,8 @@ app.directive('searchFilterSchemas', function ($http) {
             if(!$scope.selectedFilters)
                 $scope.selectedFilters = [];
                 
-            $scope.$watch('recordType', function(newVal){
-                if(newVal){
+            $scope.$watch('recordType', function(newVal, oldVal){
+                if(newVal !=oldVal){
                     clearFilters();
                     $scope.buildQuery()
                 }
