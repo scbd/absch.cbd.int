@@ -9,8 +9,9 @@ label{width:100%;}
     <div class="panel-group " id="accordion " role="tablist " aria-multiselectable="true " style="margin-bottom:0px; ">
        <div class="panel panel-default " style="border-radius:0!important;border:0; ">
             <div class="panel-heading bg-grey3 " role="tab " id="headingOne " style="border-radius:0!important;border:0; padding:18px; ">
-                <span class="panel-title " ng-click="showNationalFilters=false;showReferenceFilters=false;recordType = 'countryProfile'; ">
-                    <a role="button " data-toggle="collapse " data-parent="#accordion " href="#collapseOne" aria-expanded="false " aria-controls="collapseOne " style="font-size:20px; ">
+                <span class="panel-title " >
+                    <!--ng-click="showNationalFilters=false;showReferenceFilters=false;recordType = 'countryProfile'; "-->
+                    <a role="button " data-toggle="collapse " data-parent="#accordion " href="/search/countries" aria-expanded="false " aria-controls="collapseOne " style="font-size:20px; ">
                     <span class="color-white "> <i class="fa fa-chevron-circle-up pad-left " ></i> Country Profiles</span>
                     </a>
                 </span>
@@ -78,8 +79,9 @@ label{width:100%;}
       </div>
       <div class="panel panel-default " style="border-radius:0!important;border:0; ">
             <div class="panel-heading bg-blue " role="tab " id="headingTwo " style="border-radius:0!important;border:0;padding:18px; ">
-                <span class="panel-title "ng-click="showNationalFilters=!showNationalFilters;recordType = 'national';">
-                    <a role="button " data-toggle="collapse " data-parent="#accordion " href="#collapseTwo" aria-expanded="false " aria-controls="#collapseTwo " style="font-size:20px; "
+                <span class="panel-title ">
+                    <!--ng-click="showNationalFilters=!showNationalFilters;recordType = 'national';"-->
+                    <a role="button " data-toggle="collapse " data-parent="#accordion " href="/search/national-records" aria-expanded="false " aria-controls="#collapseTwo " style="font-size:20px; "
                     id="lblNationalRecords" >
                         <i class="fa fa-chevron-circle-up pad-left " ></i> National Records                        
                     </a>
@@ -313,16 +315,17 @@ label{width:100%;}
         
         <div class="panel panel-default " style="border-radius:0!important;border:0; ">
             <div class="panel-heading bg-orange " role="tab " id="headingThree " style="border-radius:0!important;border:0;padding:18px; ">
-                <span class="panel-title " ng-click="showReferenceFilters=!showReferenceFilters;recordType = 'reference';">
-                    <a class="collapsed " role="button" data-toggle="collapse" data-parent="#accordion " href="#collapseThree " aria-expanded="false "
-                     aria-controls="collapseThree " style="font-size:20px; " id="lblReferenceRecords"
-                      >
+                <span class="panel-title " >
+                    <!--ng-click="showReferenceFilters=!showReferenceFilters;recordType = 'reference';"-->
+                    <!--aria-expanded="false "role="button" data-toggle="collapse" data-parent="#accordion " aria-controls="collapseThree " -->
+                    <a class="collapsed "  href="/search/reference-records "                     
+                    style="font-size:20px; " id="lblReferenceRecords">
                         <i class="fa fa-chevron-circle-up pad-left " ></i>Reference Records
                     </a>
                 </span>
             </div>
             <div id="collapseThree " class="panel-collapse collapse " ng-class="{ 'in':isInReferenceRecords()} " role="tabpanel" aria-labelledby="headingThree ">
-                <div class="panel-body " style="min-height:500px; ">                            
+                <div class="panel-body " style="min-height:300px; ">                            
                         <div >
                             <div class="main_filter" ng-class="{'check_active': resource.selected}">
                                 <label name="lblVirtualRecords">

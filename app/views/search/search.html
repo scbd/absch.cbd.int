@@ -23,9 +23,14 @@
                     
                     <search-filter-schemas  ng-model='schemas' field='schema_s' query='querySchema' preview-type="previewType"
                          selected-filters="selectedSchemaFilters" record-type="recordType"></search-filter-schemas>
-                    <a href="" ng-click="loadThemes=true;" data-toggle="modal" data-target="#themeModal" class="color-black"><h4 id="lblTheamaticArea">Thematic Areas</h4></a>
-                    <a href="" data-toggle="modal" data-target="#countryModal" class="color-black"><h4 id="lblCountries">Countries</h4></a>
-                    <a href="" ng-click="loadRegions=true;"data-toggle="modal" data-target="#regionModal" class="color-black"><h4 id="lblRegions">Regions</h4></a>    
+                    
+                     <div class="btn-group" style="width:100%;">                        
+                        <a href="" class="btn btn-default dropdown-toggle" style="width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;"ng-click="loadThemes=true;" data-toggle="modal" data-target="#themeModal" class="color-black"><h4 id="lblTheamaticArea">Thematic Areas</h4></a>
+                        <a href=""class="btn btn-default dropdown-toggle" style="width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;"data-toggle="modal" data-target="#countryModal" class="color-black"><h4 id="lblCountries">Countries</h4></a>
+                        <a href=""class="btn btn-default dropdown-toggle" style="width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;"ng-click="loadRegions=true;"data-toggle="modal" data-target="#regionModal" class="color-black"><h4 id="lblRegions">Regions</h4></a>    
+                    </div>
+                    
+                    
                 </div>
              <!--<md-content layout-padding layout-margin ng-show="0">
                          <input type="text" ng-model="keyword" placeholder=" Keyword " class="form-control keyword" style="margin-bottom:10px;" id="txtKeyword">
@@ -117,9 +122,9 @@
 
                   </div>
 
-                 <search-filter-themes ng-show="false" api="thematicAreaApi" title='Thematic Areas' ng-model='thematicAreas' field='thematicAreas_ss' query='queryTheme'></search-filter-themes>
-                 <search-filter-countries ng-show="false" api="countryApi" title='Countries' ng-model='governments' field='government_s' query='queryGovernment' external-filter="countryResultFilter"></search-filter-countries>
-                 <search-filter-regions ng-show="false" api="regionsApi" title="Regions" ng-model="regions" field="government_REL_ss" query="queryRegion" facets="regionFacets"></search-filter-regions>
+                 <search-filter-themes  api="thematicAreaApi" title='Thematic Areas' ng-model='thematicAreas' field='thematicAreas_ss' query='queryTheme'></search-filter-themes>
+                 <search-filter-countries  api="countryApi" title='Countries' ng-model='governments' field='government_s' query='queryGovernment' external-filter="countryResultFilter"></search-filter-countries>
+                 <search-filter-regions  api="regionsApi" title="Regions" ng-model="regions" field="government_REL_ss" query="queryRegion" facets="regionFacets"></search-filter-regions>
                  
                 <div ng-if="recordType=='reference' || recordType== 'national'" preview-type="previewType" document-list documents='rawDocs' filter='*' show-pagination='true' current-page='currentPage' document-Count='documentCount' order-by="orderBy">
                 </div>
