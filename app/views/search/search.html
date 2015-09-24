@@ -128,7 +128,8 @@
                 
                 <div record-type="recordType" preview-type="previewType" document-list documents='rawDocs' filter='*' show-pagination='true' current-page='currentPage' document-Count='documentCount' order-by="orderBy">
                 </div>
-               <div country-map-list ng-if="recordType=='countryProfile'" api="countryProfileApi" record-type="recordType"></div>
+               
+               <div country-map-list ng-if="recordType=='countryProfile'" api="countryProfileApi" record-type="recordType" query="querySchema"></div>
             </div>
         </div>
     </div>

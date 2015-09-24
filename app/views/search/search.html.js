@@ -85,12 +85,6 @@ define(['app','underscore','/app/js/common.js',
             }
 
 
- $scope.displayStyles = [
-          "small (12-inch)",
-          "medium (14-inch)",
-          "large (16-inch)",
-          "insane (42-inch)"
-      ];
         $scope.startTour=false;
 
         if($routeParams.tour)
