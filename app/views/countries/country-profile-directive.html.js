@@ -185,7 +185,7 @@
             
                         });
                         $scope.measureMatrixDocuments = measureMatrixDocuments;
-                        
+                        $scope.measureMatrixDocuments.selectAll = true;
                         $scope.cpcReceived.forEach(function(document){
                             if(document.geneticRessourceUsers_s){
                                 document.geneticRessourceUsers = $scope.parseJSON(document.geneticRessourceUsers_s);
@@ -391,8 +391,13 @@
                     return measure.measureMatrix;
                     
                 }
+                $scope.selectAllForMatrix = function(){
+                    
+                    _.map($scope.measureMatrixDocuments,function(item){
+                        item.measureMatrix = !$scope.measureMatrixDocuments.selectAll;
+                    })
                 }
-            ]
+            }]
 
         };
     });

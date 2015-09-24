@@ -30,6 +30,7 @@ define(['app',  'scbd-angularjs-controls',
                     $scope.$watch('recordType', function(newVal){
                        if(newVal == 'countryProfile'){
                            loadCountries();
+                           loadCountryMapDetails();
                        } 
                     });
                     

@@ -85,7 +85,7 @@
 
         .flag-icon-eur {
             background-image: url('/app/img/EUFlag.png');
-            width: : 165px;
+            width:  165px;
         }
         .pad-left{
             margin: 0 5px;
@@ -100,8 +100,9 @@
     <!--<section layout="row" style="position:relative; top:20px; padding-bottom:30px;" flex>
 
         <md-content flex layout-margin style="margin:0 30px 30px 30px;padding:0;background-color:transparent;">
-            <div layout="column" layout-align="top center" >-->
-                <!--help schema="countryProfile" show-help="showHelp" repalce-glossary-terms="true"
+
+            <div layout="column" layout-align="top center" help schema="countryProfile" show-help="showHelp" repalce-glossary-terms="true" >
+
                 <legend name="formInfo" style="display:none"></legend>
                 <md-button ng-click="toggleLeft()" class="md-primary md-raised bg-medgrey" hide-gt-lg style="margin: 0  0 10px 0;">
                     <i class="material-icons" style="position:relative;top:6px;">menu</i> Select a country
@@ -111,7 +112,7 @@
                     <i class="fa fa-spin fa-spinner fa-5x" style="margin:auto"/>
                 </div>-->
 
-                <div ng-show="country" class="col-xs-12">
+                <div ng-show="country" class="col-xs-12"  help schema="countryProfile" show-help="showHelp">
                     <md-toolbar ng-class="{'bg-blue': country.isNPParty,'bg-medgrey': !country.isNPParty }">
                         <div class="md-toolbar-tools">
 
@@ -357,7 +358,11 @@
                         <div class="row" ng-show="showMSR">
                             <div style="padding:10px; margin:0 20px;"><legend name="lblMSR" style="display:none"></legend>
                                 <div class="row table-hover table-msr" ng-hide="absMeasure.length==0" >
-                                    <div class="col-lg-4 col-md-4 col-xs-4 tableheader" ng-click="sortMeasure='title_t';reverseMeasure=!reverseMeasure">name
+                                    <div class="col-lg-1 col-md-1 col-xs-1 tableheader">
+                                        <md-checkbox md-no-ink aria-label="Select All" ng-model="measureMatrixDocuments.selectAll" ng-click="selectAllForMatrix()" class="md-primary">Matrix
+                                        </md-checkbox>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-xs-3 tableheader" ng-click="sortMeasure='title_t';reverseMeasure=!reverseMeasure">name
                                         <i class="fa" ng-class="{'fa-caret-up':(sortMeasure=='title_t' && reverseMeasure),'fa-caret-down':(sortMeasure=='title_t' && !reverseMeasure)}"></i>
                                     </div>
                                     <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortMeasure='type_EN_t';reverseMeasure=!reverseMeasure">type <i class="fa" ng-class="{'fa-caret-up':sortMeasure=='type_EN_t' && reverseMeasure,'fa-caret-down':sortMeasure=='type_EN_t' && !reverseMeasure}" />
@@ -374,7 +379,7 @@
                                         <div class="row table-row">
                                             <div class="col-lg-1 col-md-1 col-xs-1">
                                                     <md-checkbox md-no-ink aria-label="Include in Measure Matrix" ng-model="measure.measureMatrix" class="md-primary">
-                                                </md-checkbox>
+                                                    </md-checkbox>
                                             </div>
                                             <div ng-click="displayDetails=!displayDetails;showDetails(measure)">                                                
                                                 <div class="col-lg-3 col-md-3 col-xs-3">                                                    
