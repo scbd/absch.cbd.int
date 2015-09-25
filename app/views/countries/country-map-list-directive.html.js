@@ -104,20 +104,20 @@ define(['app',  'scbd-angularjs-controls',
                     $scope.$watch("query.partyStatus", function(val) {
                       
                       if(!val){
-                            $scope.selected_facet='all';
-                            $scope.updateMap('all');
+                            $scope.selected_status = 'all';
+                            $scope.partyStatusFilter = $scope.hasStatus;
                             $scope.sortTable('name.en', 'ASC')
                         }
 
                         if(val == 'parties'){
                              $scope.selected_facet='party';
-                            $scope.updateMap('party');
+                            $scope.selected_status = 'party';
                             $scope.sortTable('name.en', 'ASC')
                         }
 
                         if(val == 'nonParties'){
                             $scope.selected_facet='nonParties';
-                            $scope.updateMap('nonParties');
+                            $scope.selected_status = 'nonParties';
                             $scope.sortTable('name.en', 'ASC')
                         }
                     })
@@ -126,133 +126,23 @@ define(['app',  'scbd-angularjs-controls',
                     $scope.$watch("query.recordType", function(val) {
                         
                         if(!val){
-                            $scope.selected_facet='all';
-                            $scope.updateMap('all');
+                            $scope.selected_recordType='all';
+                            $scope.recordTypeFilter = $scope.hasRecordType;
                             $scope.sortTable('name.en', 'ASC')
                             
                             return;
                         }
-
-
-                        if(val == 'cna'){
-                            $scope.selected_facet='authority';
-                            $scope.updateMap('authority');
-                            $scope.sortTable('CNA');
+                        else{
+                            $scope.selected_recordType= val;//$filter('mapSchema')(val);
+                            $scope.recordTypeFilter = $scope.hasRecordType;
+                            $scope.sortTable(val.toUpperCase());
                             return;
                         }
 
-                        if(val == 'msr'){
-                            $scope.selected_facet='measure';
-                            $scope.updateMap('measure');
-                            $scope.sortTable('MSR');
-                            return;
-                        }
-
-
-                        if(val == 'cp'){
-                            $scope.selected_facet='absCheckpoint';
-                            $scope.updateMap('absCheckpoint');
-                            $scope.sortTable('CP');
-                            return;
-                        }
-
-
-                        if(val == 'ndb'){
-                            $scope.selected_facet='database';
-                            $scope.updateMap('database');
-                            $scope.sortTable('NDB');
-                            return;
-                        }
-
-
-                        if(val == 'nfp'){
-                            $scope.selected_facet='focalPoint';
-                            $scope.updateMap('focalPoint');
-                            $scope.sortTable('NFP');
-                            return;
-                        }
-
-                        if(val == 'ircc'){
-                            $scope.selected_facet='absPermit';
-                            $scope.updateMap('absPermit');
-                            $scope.sortTable('IRCC');
-                            return;
-                        }
-
-                        if(val == 'cpc'){
-                            $scope.selected_facet='absCheckpointCommunique';
-                            $scope.updateMap('absCheckpointCommunique');
-                            $scope.sortTable('CPC');
-                            return;
-                        }
-                        
+                       
                     })
                     
-                    //====================================================
-                    // $scope.$watch("filterSchema", function(val) {
-
-                    //     if(!val){
-                    //         $scope.selected_facet='all';
-                    //         $scope.updateMap('all');
-                    //         $scope.sortTable('name.en', 'ASC')
-                    //         return;
-                    //     }
-
-
-                    //     if(val == 'authority'){
-                    //         $scope.selected_facet='authority';
-                    //         $scope.updateMap('authority');
-                    //         $scope.sortTable('CNA');
-                    //         return;
-                    //     }
-
-                    //     if(val == 'measure'){
-                    //         $scope.selected_facet='measure';
-                    //         $scope.updateMap('measure');
-                    //         $scope.sortTable('MSR');
-                    //         return;
-                    //     }
-
-
-                    //     if(val == 'absCheckpoint'){
-                    //         $scope.selected_facet='absCheckpoint';
-                    //         $scope.updateMap('absCheckpoint');
-                    //         $scope.sortTable('CP');
-                    //         return;
-                    //     }
-
-
-                    //     if(val == 'database'){
-                    //         $scope.selected_facet='database';
-                    //         $scope.updateMap('database');
-                    //         $scope.sortTable('NDB');
-                    //         return;
-                    //     }
-
-
-                    //     if(val == 'focalPoint'){
-                    //         $scope.selected_facet='focalPoint';
-                    //         $scope.updateMap('focalPoint');
-                    //         $scope.sortTable('NFP');
-                    //         return;
-                    //     }
-
-                    //     if(val == 'absPermit'){
-                    //         $scope.selected_facet='absPermit';
-                    //         $scope.updateMap('absPermit');
-                    //         $scope.sortTable('IRCC');
-                    //         return;
-                    //     }
-
-                    //     if(val == 'absCheckpointCommunique'){
-                    //         $scope.selected_facet='absCheckpointCommunique';
-                    //         $scope.updateMap('absCheckpointCommunique');
-                    //         $scope.sortTable('CPC');
-                    //         return;
-                    //     }
-
-                    // });
-
+                   
 
 
 
@@ -379,7 +269,15 @@ define(['app',  'scbd-angularjs-controls',
 
                         return false;
                     }
-
+                    
+                    $scope.hasRecordType = function(entity){
+                        
+                          if(!$scope.selected_recordType || $scope.selected_recordType == 'all')
+                            return true;
+                           
+                        return entity[$scope.selected_recordType.toUpperCase()]!=undefined;
+                        
+                    }
                     //====================================================
                     function loadMap(colors) {
 
@@ -544,9 +442,9 @@ define(['app',  'scbd-angularjs-controls',
 
                     //====================================================
                     $scope.hasStatus = function(entity) {
-                        return entity && ($scope.selected_facet == 'all' ||
-                                            (entity.isNPParty && 'party' == $scope.selected_facet)||
-                                            !entity.isNPParty && 'nonParties' == $scope.selected_facet);
+                        return entity && ($scope.selected_status == 'all' ||
+                                            (entity.isNPParty && 'party' == $scope.selected_status)||
+                                            !entity.isNPParty && 'nonParties' == $scope.selected_status);
                     }
                     //====================================================
                     $scope.listAll = function(status) {
