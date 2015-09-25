@@ -194,6 +194,12 @@
                         });
                         $scope.getFacets($scope.absch_nfp);
                         $('[data-toggle="tooltip"]').tooltip()
+                        
+                        if($routeParams.countryCode && $routeParams.documentType){
+                            if($routeParams.documentType.toLowerCase()=='measure-matrix'){
+                                $scope.showMSR = true;
+                            }
+                        }
                     });
                     }
                 }

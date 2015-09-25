@@ -44,6 +44,9 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js','/app/views/forms/e
           document.resourceTypeName = undefined;
 
 
+      if(document.organizations && document.organizations.length <=0)
+          document.organizations = undefined;    
+          
         var documentCopy = _.clone(document)
 
         delete documentCopy.organizationsRef;

@@ -527,6 +527,8 @@ app.directive('searchFilterSchemas', function ($http) {
             {
                 var documentSchema = $routeParams.documentSchema.toUpperCase();
                 var schema = $filter("mapSchema")(documentSchema);
+                if(schema == 'NEWS')
+                    schema = 'news';
                 if($scope[schema])
                     $scope[schema].selected = true;
                 else{

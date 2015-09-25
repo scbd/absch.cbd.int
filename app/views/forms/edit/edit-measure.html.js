@@ -698,7 +698,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js'], functi
                          "nonPreferedTerms": []
                        },
                        {
-                         "identifier": "NEED-NEW-GUID",
+                         "identifier": "9847FA8A-16C3-4466-A378-F20AF9FF883B",
                          "name": "Benefit-sharing",
                          "title": {
                            "en": "Benefit-sharing"
@@ -722,7 +722,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js'], functi
                          "shortTitle": {},
                          "description": "",
                          "source": "",
-                         "broaderTerms": ["NEED-NEW-GUID"],
+                         "broaderTerms": ["9847FA8A-16C3-4466-A378-F20AF9FF883B"],
                          "narrowerTerms": [
                            "628FA533-5B81-481A-8374-A0CF8DF0CF22",
                            "0AE1295D-0797-44B6-B0AC-974EA356096D"
