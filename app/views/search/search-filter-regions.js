@@ -188,6 +188,8 @@ define(['app'], function(app) {
                 buildQuery();
 
             });
+            
+            buildQuery();
 
         }]
     }
