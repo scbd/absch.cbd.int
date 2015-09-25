@@ -147,7 +147,7 @@ app.directive('searchNationalRecordsFilter', function ($http) {
                                                             ]
                                                };
             $scope.organization            = { identifier: 'organization',             title: 'ABS Related Organizations', type:'reference' };
-            $scope.meeting                 = { identifier: 'meeting',                  title: 'Meetings &amp; Meeting Outcomes ({{meeting.count}})', type:'reference',
+            $scope.meeting                 = { identifier: 'meeting',                  title: 'Meetings', type:'reference',
                                                subFilters : [
                                                                 { name: 'mtgRange', type: 'select', field: 'startDate_dt'},
                                                             ]

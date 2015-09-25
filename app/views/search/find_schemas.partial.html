@@ -162,7 +162,7 @@ label{width:100%;}
                                 </div>
                                 </div>
                             </button>
-                            <ul class="dropdown-menu" >
+                            <ul class="dropdown-menu ddm" >
                                  <li><a href="#" ng-click="partyStatus=''">Both Parties and Non-Parties</a></li>
                                 <li> <a href="#" ng-click="partyStatus='parties'"> <i class="fa fa-square color-blue"></i> Parties to the Nagoya Protocol </a></li>
                                 <li><a href="#" ng-click="partyStatus='nonParties'"> <i class="fa fa-square color-grey"></i> Non-Parties to the Nagoya Protocol</a></li>
@@ -310,11 +310,7 @@ label{width:100%;}
                             <div> <span class="badge badge-white pull-right">{{absCheckpointCommunique.count}}</span></div>
                         </div>
                     </div>
-                    
-                   
-                   
-                   
-                          
+     
                 </div>                
             </div>
         </div>
@@ -397,12 +393,12 @@ label{width:100%;}
                             <div  ng-class="{'check_active': meeting.selected}" style="padding:5px 0;border-bottom:1px solid #ddd;">
                                 <div layout="row">
                                     <div> <input type="checkbox" ng-model="meeting.selected" bind-indeterminate="meeting.indeterminate" ng-change="refresh(meeting.selected,'meeting')"></div>
-                                    <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': meeting.selected==false}">Meeting</span></div>
+                                    <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': meeting.selected==false}">Meetings</span></div>
                                     <div> <span class="badge badge-white pull-right">{{meeting.count}}</span></div>
                                 </div>
-                                <div ng-show="meeting.selected" class="subfilters-section" style="padding-top:10px;padding-bottom:5px;margin-left:0px;">
-                                    <div km-select class="filter-btn"  api="mtgRangeApi" ng-model="mtgRange" binding-type="string" placeholder="Meeting year" items="options.meetingYear()"></div>
-                                </div>
+                                <!--TODO: NOT WORKING in the filter chips <div ng-show="meeting.selected" class="subfilters-section" style="padding-top:10px;padding-bottom:5px;margin-left:0px;">
+                                    <div km-select class="filter-btn"  api="mtgRangeApi" ng-model="mtgRange" binding-type="string" placeholder="Year" items="options.meetingYear()"></div>
+                                </div>-->
                             </div>
                             
                                
