@@ -214,8 +214,8 @@ define(["app",'/app/js/common.js'], function (app) {
             if(schema.toLowerCase()=="pressrelease"				) return "Press Release";
 			if(schema.toLowerCase()=="news"						) return "News";
 			if(schema.toLowerCase()=="absnationalreport"		) return "National Report";
-			if(schema.toLowerCase()=="modelcontractualclause"	) return "Model Contractual Clause, Code of Conduct, Guideline, Best Practice and Standard";
-			if(schema.toLowerCase()=="communityprotocol"		) return "Community protocols and  procedures and customary law";
+			if(schema.toLowerCase()=="modelcontractualclause"	) return "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and Standards";
+			if(schema.toLowerCase()=="communityprotocol"		) return "Community protocols and procedures and customary law";
 			if(schema.toLowerCase()=="meeting"					) return "Meeting";
 			if(schema.toLowerCase()=="notification"				) return "Notification";
 			// return schema;
