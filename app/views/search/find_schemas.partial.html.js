@@ -669,7 +669,7 @@ app.directive('searchFilterSchemas', function ($http) {
             
             
              $scope.$watch('keyword', function(newVal){
-                 if($scope.recordType == 'national')
+                 if($scope.recordType == 'national' || $scope.recordType == 'reference' )
                     $scope.buildQuery();
             });
             
