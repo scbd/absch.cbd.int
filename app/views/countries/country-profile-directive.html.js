@@ -198,6 +198,8 @@
                         if($routeParams.countryCode && $routeParams.documentType){
                             if($routeParams.documentType.toLowerCase()=='measure-matrix'){
                                 $scope.showMSR = true;
+                            }else{
+                                $scope['show' + $routeParams.documentType.toUpperCase()] = true;
                             }
                         }
                     });

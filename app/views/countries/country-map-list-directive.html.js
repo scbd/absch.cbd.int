@@ -167,10 +167,10 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
 
                               if ($routeParams.countryCode && $routeParams.countryCode.toUpperCase()!='RAT') {
                                   
-                                  var country = _.findWhere($scope.countries, {code : $routeParams.countryCode})
+                                  var country = _.findWhere($scope.countries, {code : $routeParams.countryCode.toUpperCase()})
                                   if(country){
                                     country.displayDetails=true;
-                                    country.profileCode = $routeParams.countryCode;                                    
+                                    country.profileCode = $routeParams.countryCode.toUpperCase();                                    
                                     // var countryElement = $element.find('#countryCode' + $routeParams.countryCode)
                                     // var options = {
                                     //     duration: 700,

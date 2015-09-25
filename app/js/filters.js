@@ -210,14 +210,14 @@ define(["app",'/app/js/common.js'], function (app) {
 			if(schema.toLowerCase()=="abscheckpoint"			) return "Checkpoint";
 			if(schema.toLowerCase()=="abscheckpointcommunique"	) return "Checkpoint Communiqué";
 			if(schema.toLowerCase()=="abspermit"				) return "Internationally Recognized Certificate of Compliance";
-            if(schema.toLowerCase()=="meetingdocument"			) return "Meeting Document";
-            if(schema.toLowerCase()=="pressrelease"				) return "Press Release";
+            if(schema.toLowerCase()=="meetingdocument"			) return "Meeting Documents";
+            if(schema.toLowerCase()=="pressrelease"				) return "Press Releases";
 			if(schema.toLowerCase()=="news"						) return "News";
 			if(schema.toLowerCase()=="absnationalreport"		) return "National Report";
 			if(schema.toLowerCase()=="modelcontractualclause"	) return "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and Standards";
 			if(schema.toLowerCase()=="communityprotocol"		) return "Community protocols and procedures and customary laws";
-			if(schema.toLowerCase()=="meeting"					) return "Meeting";
-			if(schema.toLowerCase()=="notification"				) return "Notification";
+			if(schema.toLowerCase()=="meeting"					) return "Meetings";
+			if(schema.toLowerCase()=="notification"				) return "Notifications";
 			// return schema;
 		};
 	}]);
