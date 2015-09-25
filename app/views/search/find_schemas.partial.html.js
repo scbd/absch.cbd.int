@@ -1,4 +1,4 @@
-define(['app'], function (app) {
+define(['app', '/app/js/common.js'], function (app) {
 app.directive('searchFilterSchemas', function ($http) {
     return {
         restrict: 'EAC',
@@ -16,8 +16,9 @@ app.directive('searchFilterSchemas', function ($http) {
         link: function ($scope, element, attrs, ngModelController)
         {
         },
-        controller : ['$scope', '$element', '$location', 'Thesaurus', "IStorage", "guid", "$q", "Enumerable", "$filter","underscore","realm","$routeParams",'$route',
-         function ($scope, $element, $location, Thesaurus, storage, guid, $q, Enumerable, $filter,_,realm, $routeParams, $route)
+        controller : ['$scope', '$element', '$location', 'Thesaurus', "IStorage", "guid", "$q", "Enumerable",
+                      "$filter","underscore","realm","$routeParams",'$route', 'commonjs',
+         function ($scope, $element, $location, Thesaurus, storage, guid, $q, Enumerable, $filter,_,realm, $routeParams, $route, commonjs)
         {
             
             $scope.groupby=true;
@@ -58,7 +59,8 @@ app.directive('searchFilterSchemas', function ($http) {
             $scope.permitIssuanceDate= '*:*'
             $scope.permitExpiryDate= '*:*'
             $scope.focalPointQuery = '';
-
+            $scope.queryPartyStatus = ''
+            
             if(!$scope.selectedFilters)
                 $scope.selectedFilters = [];
                 
@@ -206,9 +208,10 @@ app.directive('searchFilterSchemas', function ($http) {
                     conditions.push($scope.focalPointQuery);
                 var keywordQuery = '';
         
-                    if($scope.keyword){
-                        keywordQuery = ' AND (title_t:*' + $scope.keyword + '* OR description_t:*' + $scope.keyword + '* OR text_EN_txt:*' + $scope.keyword + '* OR uniqueIdentifier_s:*' + $scope.keyword.toLowerCase() + '*)';
-                    }
+                if($scope.keyword){
+                    keywordQuery = ' AND (title_t:*' + $scope.keyword + '* OR description_t:*' + $scope.keyword + '* OR text_EN_txt:*' + $scope.keyword + '* OR uniqueIdentifier_s:*' + $scope.keyword.toLowerCase() + '*)';
+                }
+                
                 if(conditions.length==0) {
                     //$scope.query = '*:*';
                     
@@ -223,16 +226,17 @@ app.directive('searchFilterSchemas', function ($http) {
                     }
                     q += keywordQuery
                     q += ' AND (schema_s:(' + schema.join(' ') + '))';
+                    q += $scope.queryPartyStatus!='' ? ('AND (' + $scope.queryPartyStatus + ')') : ''; 
                     $scope.query = q;
                 }
                 else {
                     var query = '';
                     conditions.forEach(function (condition) { query = query + (query=='' ? '( ' : ' OR ') + condition; });
                     query += ' )';
-                    $scope.query = query + keywordQuery;
+                    $scope.query = query + keywordQuery  + ($scope.queryPartyStatus!='' ? ('AND (' + $scope.queryPartyStatus + ')') : '');
                     //console.log (query);
                 }
-                console.log ($scope.query);
+               // console.log ($scope.query);
             }
 
             function buildConditions (conditions, items) {
@@ -689,6 +693,34 @@ app.directive('searchFilterSchemas', function ($http) {
             
             if ($routeParams.countryCode && $routeParams.countryCode.toUpperCase() == 'RAT'){
                 $scope.countryProfileSearch ={partyStatus: 'parties', countryProfile_keyword:''}
+            }
+            
+            
+            $scope.queryStatus = function(type){
+
+                commonjs.getCountries()
+                .then(function(data){
+                    $scope.queryPartyStatus = '';
+                    var npParties
+    
+                    if(type=='parties' || type == 'nonParties'){
+    
+                        if(type=='parties'){
+                            npParties = _.where(data, {isNPParty:true});
+                            //$scope.partiesCount = npParties.length;
+                            // $scope.partyStatusString = 'Party to the Nagoya Protocol';
+                        }
+                        else {
+                            npParties = _.where(data, {isNPParty:false});
+                            //$scope.nonPartiesCount = npParties.length;
+                            //$scope.partyStatusString = 'Non-Party';
+                        }
+                        $scope.queryPartyStatus =
+                                            ('government_s:(' +
+                                            _.pluck(npParties, 'code') +
+                                            ')').toLowerCase().replace(/,/g, ' ');
+                    }
+                });
             }
         }]
     }

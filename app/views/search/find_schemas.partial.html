@@ -163,9 +163,9 @@ label{width:100%;}
                                 </div>
                             </button>
                             <ul class="dropdown-menu" >
-                                 <li><a href="#" ng-click="partyStatus=''">Both Parties and Non-Parties</a></li>
-                                <li> <a href="#" ng-click="partyStatus='parties'"> <i class="fa fa-square color-blue"></i> Parties to the Nagoya Protocol </a></li>
-                                <li><a href="#" ng-click="partyStatus='nonParties'"> <i class="fa fa-square color-grey"></i> Non-Parties to the Nagoya Protocol</a></li>
+                                 <li><a href="#" ng-click="partyStatus='';queryStatus()">Both Parties and Non-Parties</a></li>
+                                <li> <a href="#" ng-click="partyStatus='parties';queryStatus('parties')"> <i class="fa fa-square color-blue"></i> Parties to the Nagoya Protocol </a></li>
+                                <li><a href="#" ng-click="partyStatus='nonParties';queryStatus('nonParties')"> <i class="fa fa-square color-grey"></i> Non-Parties to the Nagoya Protocol</a></li>
                             </ul>
                         </div>
                     
