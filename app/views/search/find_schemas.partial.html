@@ -86,11 +86,12 @@ label{width:100%;}
                         </div>
                         
                         <a href="#" ng-click="$parent.loadRegions=true;" data-toggle="modal" data-target="#regionModal" style="font-weight:bold;color:#AAA;margin-top:15px;padding-left:3px;"><span id="lblRegions">Regions</span></a>
-                        <div style="border-bottom:1px solid #DDD;margin-top:7px;padding:15px 0 15 3px;"  ng-repeat="filter in $parent.regionsApi.getSelected()">
+                        
+                        <div style="border-bottom:1px solid #DDD;margin-top:7px;padding:15px 0 15px 3px;"  ng-repeat="filter in $parent.regionsApi.getSelected()">
                             <a href="#" ng-click="$parent.removeRegionFilter(filter)"  style="color:#666">
                                 {{filter.title|lstring}} &nbsp; <span class="pull-right" aria-hidden="true">&times;</span>
                             </a>
-                        <div>
+                        </div>
                         
                         
                        
