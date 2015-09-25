@@ -21,7 +21,36 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js','/app/views/forms/e
         })
       }
     });
+    //==================================
+    //
+    //==================================
+    $scope.getCleanDocument = function() {
 
+      var document = $scope.document;
+
+      if (!document)
+        return undefined;
+
+      document = angular.fromJson(angular.toJson(document));
+
+      if (/^\s*$/g.test(document.notes))
+        document.notes = undefined;
+
+      if(!$scope.isOtherSelected(document.languages))
+          document.languageName = undefined;
+
+      if(!$scope.isOtherSelected(document.resourceTypes))
+          document.resourceTypeName = undefined;
+      
+      if(document.organizations && document.organizations.length <=0)
+          document.organizations = undefined;    
+          
+        var documentCopy = _.clone(document)
+
+        delete documentCopy.organizationsRef;
+      return documentCopy;
+    };
+    
 
   }]);
 });
