@@ -20,6 +20,8 @@ app.directive('searchFilterSchemas', function ($http) {
          function ($scope, $element, $location, Thesaurus, storage, guid, $q, Enumerable, $filter,_,realm, $routeParams, $route)
         {
             
+            $scope.groupby=true;
+            
             $scope.recordType = $route.current.$$route.type;
             if($scope.recordType == 'reference'){
                 $scope.previewType = 'list';
@@ -202,7 +204,11 @@ app.directive('searchFilterSchemas', function ($http) {
 
                 if($scope.focalPointQuery!='')
                     conditions.push($scope.focalPointQuery);
-
+                var keywordQuery = '';
+        
+                    if($scope.keyword){
+                        keywordQuery = ' AND (title_t:*' + $scope.keyword + '* OR description_t:*' + $scope.keyword + '* OR text_EN_txt:*' + $scope.keyword + '* OR uniqueIdentifier_s:*' + $scope.keyword.toLowerCase() + '*)';
+                    }
                 if(conditions.length==0) {
                     //$scope.query = '*:*';
                     
@@ -215,12 +221,7 @@ app.directive('searchFilterSchemas', function ($http) {
                         schema = referenceSchema;
                         $scope.previewType = 'list';
                     }
-                    
-                    var keywordQuery = '';
-        
-                    if($scope.keyword){
-                        q += keywordQuery = ' AND (title_t:*' + $scope.keyword + '* OR description_t:*' + $scope.keyword + '* OR text_EN_txt:*' + $scope.keyword + '* OR uniqueIdentifier_s:*' + $scope.keyword.toLowerCase() + '*)';
-                    }
+                    q += keywordQuery
                     q += ' AND (schema_s:(' + schema.join(' ') + '))';
                     $scope.query = q;
                 }
@@ -228,7 +229,7 @@ app.directive('searchFilterSchemas', function ($http) {
                     var query = '';
                     conditions.forEach(function (condition) { query = query + (query=='' ? '( ' : ' OR ') + condition; });
                     query += ' )';
-                    $scope.query = query;
+                    $scope.query = query + keywordQuery;
                     //console.log (query);
                 }
                 console.log ($scope.query);
@@ -665,6 +666,25 @@ app.directive('searchFilterSchemas', function ($http) {
                  if($scope.recordType == 'countryProfile')
                     $scope.query = newVal;
             },true);
+            
+            
+             $scope.$watch('keyword', function(newVal){
+                 if($scope.recordType == 'national')
+                    $scope.buildQuery();
+            });
+            
+             $scope.$watch('partyStatus', function(newVal){
+                 if($scope.recordType == 'national')
+                    $scope.buildQuery();
+            });
+              $scope.$watch('groupby', function(newVal){
+                 if($scope.recordType == 'national')
+                    if(newVal)
+                        $scope.previewType = "group"; 
+                    else 
+                        $scope.previewType = "list";
+            });
+            
             if ($routeParams.countryCode && $routeParams.countryCode.toUpperCase() == 'RAT'){
                 $scope.countryProfileSearch ={partyStatus: 'parties', countryProfile_keyword:''}
             }

@@ -4,6 +4,7 @@ label{width:100%;}
 .dropdown-menu{
     z-index: 10000;
     position: inherit;
+    width:260px;
 }
  .ddm > li > a{
         white-space:normal!important;
@@ -12,6 +13,19 @@ label{width:100%;}
      .ddm > li {
         border-bottom: 1px solid #eee;
     }
+    .notSelected{
+        color:#AAA;font-weight:bold;
+    }
+    .filter-btn button {text-align:left;width:260px;border:0;}
+    
+    .filter-btn .dropdown-menu > li > a{
+        white-space:normal!important;
+        padding-top:5px!important;
+        }
+     .filter-btn .btn{
+         white-space:normal!important;
+     }
+       
 </style>
     <div class="panel-group " id="accordion " role="tablist " aria-multiselectable="true " style="margin-bottom:0px; ">
        <div class="panel panel-default " style="border-radius:0!important;border:0; ">
@@ -111,78 +125,62 @@ label{width:100%;}
             <div id="collapseTwo " class="panel-collapse collapse " ng-class="{ 'in':isInNationalRecords()} " role="tabpanel" aria-labelledby="headingTwo ">
                 <div class="panel-body bg-white ">                
                     <div class="main_filter" ng-show="recordType == 'national'">
-                        <div class="btn-group" style="width:100%;">
-                            <div ng-show="nationalSearch.keyword">
-                                <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;padding-left:12px;">Keyword</div>
-                            </div>
-                            <input ng-model="nationalSearch.keyword" style="font-weight:bold;color:#333;width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;padding-left:12px;padding-bottom:5px;"
-                            placeholder="Keyword"></input>
+                       
+                       
+                       <div name="lblGroup" style="border-bottom:1px solid #ddd;padding:10px;">
+                            <input type="checkbox" ng-model="groupby" checked >
+                            <span class="filter-text" ng-class="{'notSelected': groupby==false}">Group results by country </span>
                         </div>
-                    
-                        <div class="btn-group" style="width:100%;padding:0 10px;">
+                       
+                        
+                        <md-input-container style="margin:0;padding-bottom:15px;padding-top:0px;">
+                        <label>Keyword</label>
+                        <input ng-model="keyword" >
+                        </md-input-container>
+                        
+                        
+                        <div class="btn-group" style="width:100%;padding-top:8px;">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                            style="width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;">
-                                <div ng-show="!previewType" style="color:#AAA;font-weight:bold;">List layout <span class="pull-right"><i class="caret"></i></span></div>
-                                <div ng-show="previewType">
-                                <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;">List layout</div>
-                                <div style="font-weight:bold;">
-                                    <span ng-show="previewType=='group'">Group by country</span>
-                                    <span ng-show="previewType=='list'">List records</span>
-                                    <span class="pull-right"><i class="caret"></i></span></div>
-                                </div>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#" ng-click="previewType='list'"> List records </a></li>
-                                <li><a href="#" ng-click="previewType='group'"> Group by country </a></li>
-                            </ul>
-                        </div>
-                    
-                        <br>
-                    
-                        <div class="btn-group" style="width:100%;padding:0 10px;">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                            style="width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;">
-                                <div ng-show="!nationalSearch.partyStatus" style="color:#AAA;font-weight:bold;">Party status <span class="pull-right"><i class="caret"></i></span></div>
-                                <div ng-show="nationalSearch.partyStatus">
-                                <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;">Party status </div>
-                                <div style="font-weight:bold;">
-                                    <span ng-show="nationalSearch.partyStatus=='parties'"> <i class="fa fa-square color-blue" ></i> Parties </span>
-                                    <span ng-show="nationalSearch.partyStatus=='nonParties'"> <i class="fa fa-square color-grey" ></i> Non-Parties</span>
-                                    <span ng-show="nationalSearch.partyStatus=='both'">Both Parties and Non-Parties</span>
+                            style="width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;padding:8px 0;">
+                                <div ng-show="!partyStatus" style="color:#AAA;font-weight:bold;padding-left:3px;margin-right:0;">Filter by party status <span class="pull-right"><i class="caret"></i></span></div>
+                                <div ng-show="partyStatus">
+                                <div style="position:relative;top:-14px;font-size:11px;color:#666;font-weight:bold;">Filter by party status </div>
+                                <div style="padding-left:3px;margin-right:0;">
+                                    <span ng-show="partyStatus=='parties'"> <i class="fa fa-square color-blue" ></i> Parties </span>
+                                    <span ng-show="partyStatus=='nonParties'"> <i class="fa fa-square color-grey" ></i> Non-Parties</span>
                                     <span class="pull-right"><i class="caret"></i></span>
                                 </div>
                                 </div>
                             </button>
-                            <ul class="dropdown-menu">
-                                <li>
-                                <a href="#" ng-click="nationalSearch.partyStatus='parties'"> <i class="fa fa-square color-blue"></i> Parties to the Nagoya Protocol </a>
-                                </li>
-                                <li>
-                                <a href="#" ng-click="nationalSearch.partyStatus='nonParties'"> <i class="fa fa-square color-grey"></i> Non-Parties to the Nagoya Protocol</a>
-                                </li>
-                                <li><a href="#" ng-click="nationalSearch.partyStatus='both'">Both Parties and Non-Parties</a></li>
+                            <ul class="dropdown-menu" >
+                                 <li><a href="#" ng-click="partyStatus=''">Both Parties and Non-Parties</a></li>
+                                <li> <a href="#" ng-click="partyStatus='parties'"> <i class="fa fa-square color-blue"></i> Parties to the Nagoya Protocol </a></li>
+                                <li><a href="#" ng-click="partyStatus='nonParties'"> <i class="fa fa-square color-grey"></i> Non-Parties to the Nagoya Protocol</a></li>
                             </ul>
                         </div>
                     
-                        <br>
+              
                     </div>
                     
-                    
+                    <div style="color:#AAA;font-weight:bold;padding-left:7px;margin-right:0;padding-bottom:10px;padding-top:12px;">Record Type</div>
+                               
                     <!--<search-national-records-filter>-->
-                    <div class="main_filter"  ng-class="{'check_active': measure.selected}">
-
-                        <label name="lblMeasures">
-                            <span class="badge badge-white pull-right">{{measure.count}}</span>
-                            <input type="checkbox" ng-model="measure.selected" bind-indeterminate="measure.indeterminate" ng-change="refresh(measure.selected,'measure')">
-                            <span class="filter-text">Legislative, administrative or policy measures </span>
-                        </label>
+                    <div class="main_filter"  ng-class="{'check_active': measure.selected}" style="border-bottom:1px solid #ddd;">
+                        
+                        <div layout="row">
+                            <div> <input type="checkbox" ng-model="measure.selected" bind-indeterminate="measure.indeterminate" ng-change="refresh(measure.selected,'measure')"></div>
+                            <div style="padding:0 3px 0 3px;"> <span class="filter-text" ng-class="{'notSelected': measure.selected==false}">Legislative, administrative or policy measures </span></div>
+                            <div> <span class="badge badge-white pull-right">{{measure.count}}</span></div>
+                        </div>
+                            
+                   
                 
-                        <div ng-show="measure.selected" class="subfilters-section">
-                            <div km-select multiple api="msrJurisdictionApi" ng-model="msrJurisdiction" binding-type="string" placeholder="Jurisdictions" items="options.jurisdiction()"></div>
+                        <div ng-show="measure.selected" class="subfilters-section" style="padding-top:10px;padding-bottom:5px;">
+                            <div km-select  class="filter-btn" multiple api="msrJurisdictionApi" ng-model="msrJurisdiction" binding-type="string" placeholder="Jurisdictions" items="options.jurisdiction()"></div>
                             <br>
-                            <div km-select multiple api="msrStatusApi" ng-model="msrStatus" binding-type="string" placeholder="Status" items="options.status()"></div>
+                            <div km-select  class="filter-btn" multiple api="msrStatusApi" ng-model="msrStatus" binding-type="string" placeholder="Status" items="options.status()"></div>
                             <br>
-                            <div km-select multiple api="msrTypeApi" ng-model="msrType" binding-type="string" placeholder="Types" items="options.typeOfDocuments()"></div>
+                            <div km-select  class="filter-btn" multiple api="msrTypeApi" ng-model="msrType" binding-type="string" placeholder="Types" items="options.typeOfDocuments()"></div>
                             <!-- <br>
                             <div search-filter-dates title='Date of Adoption' query='msrAdoptionDate' field="adoption_s"></div>
                             <br>
