@@ -54,7 +54,7 @@
 			<div class="help-block">All national authorities and contacts indicated below will receive email copies of checkpoint communiqués containing the information collected or received and published from this checkpoint. Please note that the national authorities providing prior informed consent (PIC) will also automatically receive email copies of all published checkpoint communiqués (CPC). The ABSCH can not guarantee that emails have been received or read.</div>
 			<div class="km-value" ng-show="document.informAllAuthorities">
 				 
-				<a href="/search/countries/{{document.government.identifier || uppercase}}/cna/" target="_new"> All national competent authorities ({{document.government|term}}) </a> have been selected to automatically receive checkpoint communiqués by email published from this checkpoint. 
+				<a href="/search/countries/{{document.government.identifier}}" target="_new"> All national competent authorities ({{document.government|term}}) </a> have been selected to automatically receive checkpoint communiqués by email published from this checkpoint. 
 			</div>		
 			<div ng-show="document.authoritiesToInform">
 				<div class="km-value" ng-repeat="authority in authoritiesToInform">
