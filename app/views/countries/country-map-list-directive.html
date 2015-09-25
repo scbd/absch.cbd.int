@@ -83,7 +83,7 @@
                                 </div>
                                 <div class="row table-hover table-msr" ng-repeat="country in (countries | filter:query.countryProfile_keyword  | filter: partyStatusFilter | filter: recordTypeFilter | orderBy:sortTermFilter:orderList) ">
                                     <div class="row">
-                                        <div class="row table-row" style="border-top:1px solid #ddd;padding:10px;font-weight:500;margin:0;"  ng-click="country.displayDetails=!country.displayDetails;showCountryProfile(country)" ng-class="{'bg-white':country.displayDetails}">
+                                        <div class="row table-row" id="countryCode{{country.code}}" style="border-top:1px solid #ddd;padding:10px;font-weight:500;margin:0;"  ng-click="country.displayDetails=!country.displayDetails;showCountryProfile(country)" ng-class="{'bg-white':country.displayDetails}">
                                             <!--<div class="col-lg-1 col-md-1 col-xs-1 tableheader" >
                                                 
                                             </div>-->
@@ -114,7 +114,7 @@
                                         </div>
                                         <div class="row bg-white" ng-if="country.displayDetails" style="padding:0;margin:0px;">
                                           
-                                            <i class="glyphicon glyphicon-remove-circle circle pull-right" style="position:relative;top:40px;z-index:100;font-size:20px;color:white;" ng-click="displayDetails=!displayDetails;"></i>
+                                            <i class="glyphicon glyphicon-remove-circle circle pull-right" style="position:relative;top:40px;z-index:100;font-size:20px;color:white;" ng-click="country.displayDetails=!country.displayDetails;"></i>
                                             <div country-profile api="country.api" code="country.profileCode"></div>
                                            
                                         </div>

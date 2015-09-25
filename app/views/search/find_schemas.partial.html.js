@@ -415,7 +415,7 @@ app.directive('searchFilterSchemas', function ($http) {
                                                                 { name: 'mssApplicationDate', type: 'calendar' , field: 'limitedApplication_s'}
                                                             ]
                                             };
-            $scope.absPermit               = { identifier: 'absPermit',                title: 'Permits and their equivalent' ,type:'nationalRecord',
+            $scope.absPermit               = { identifier: 'absPermit',                title: 'Internationally Recognized Certificates of Compliance' ,type:'nationalRecord',
                                                subFilters : [
                                                                 //{ name: 'permitAuthority',  type: 'reference' , field: 'jurisdiction_s'},
                                                                 { name: 'permitusage',          type: 'multiselect' , field: 'usage_REL_ss'},

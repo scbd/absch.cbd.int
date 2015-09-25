@@ -1,5 +1,5 @@
-define(['app',  'scbd-angularjs-controls',
-'/app/views/countries/country-profile-directive.html.js'], function(app) {
+define(['app', 'underscore',  'scbd-angularjs-controls',
+'/app/views/countries/country-profile-directive.html.js', 'ngSmoothScroll'], function(app, _) {
 
     app.directive('countryMapList', function() {
         return {
@@ -12,8 +12,8 @@ define(['app',  'scbd-angularjs-controls',
                 recordType : '=',
                 query: '='
             },
-            controller: ['$scope', '$http', 'realm', '$q', '$filter', '$routeParams', '$timeout', '$element', 'commonjs', '$route','$location',
-            function($scope, $http, realm, $q, $filter, $routeParams, $timeout, $element, commonjs, $route, $location) {
+            controller: ['$scope', '$http', 'realm', '$q', '$filter', '$routeParams', '$timeout', '$element', 'commonjs', '$route','$location', 'smoothScroll',
+            function($scope, $http, realm, $q, $filter, $routeParams, $timeout, $element, commonjs, $route, $location, smoothScroll) {
                     
                     //$scope.countryProfile_keyword = 'can';
                     
@@ -165,36 +165,22 @@ define(['app',  'scbd-angularjs-controls',
                                 $scope.totalParties=0;
                                 $scope.totalNonParties=0;
 
-                                // _.each($scope.countries, function(country) {
-
-                                //     if (country.isNPParty) {
-                                //         if (country.code == 'EU')
-                                //             country.code = 'EUR';
-                                //         $scope.totalParties++;
-                                //         countryColors[country.code.toUpperCase()] = "#428bca";
-                                //     // } else if (country.isNPSignatory) {
-                                //     //     countryColors[country.code.toUpperCase()] = "#5bc0de";
-                                //     } else if (country.isCBDParty) {
-                                //         countryColors[country.code.toUpperCase()] = "#666";
-                                //         $scope.totalNonParties++;
-                                //     } else {
-                                //         countryColors[country.code.toUpperCase()] = "#666";
-                                //         console.log('nonparty country', country);
-                                //         //$scope.totalNonParties++;
-                                //     }
-
-                                //     $scope.countriesforAutocomplete.push({
-                                //         name: country.name.en
-                                //     });
-
-                                // });
-
-                                // countryColors[greenland.toUpperCase()] = "#666";
-                                // countryColors[taiwan] = "#666";
-
-                                //loadMap(countryColors);
-                                // addEUMapEvents();
-                                // $element.find('[data-toggle="tooltip"]').tooltip();
+                              if ($routeParams.countryCode && $routeParams.countryCode.toUpperCase()!='RAT') {
+                                  
+                                  var country = _.findWhere($scope.countries, {code : $routeParams.countryCode})
+                                  if(country){
+                                    country.displayDetails=true;
+                                    country.profileCode = $routeParams.countryCode;                                    
+                                    // var countryElement = $element.find('#countryCode' + $routeParams.countryCode)
+                                    // var options = {
+                                    //     duration: 700,
+                                    //     easing: 'easeInQuad',
+                                    //     offset: 60,
+                                    // }
+                                    
+                                    // smoothScroll(countryElement, options);
+                                  }
+                              }
                                 
                             })
                            .finally(function(){$scope.loading = false;});
