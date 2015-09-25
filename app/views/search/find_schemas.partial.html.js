@@ -540,6 +540,7 @@ app.directive('searchFilterSchemas', function ($http) {
                     $scope.focalPointNP = true;
                 }
             }
+            
             $scope.buildQuery();
 
             $scope.terms.forEach(function (item) {
@@ -664,7 +665,9 @@ app.directive('searchFilterSchemas', function ($http) {
                  if($scope.recordType == 'countryProfile')
                     $scope.query = newVal;
             },true);
-
+            if ($routeParams.countryCode && $routeParams.countryCode.toUpperCase() == 'RAT'){
+                $scope.countryProfileSearch ={partyStatus: 'parties', countryProfile_keyword:''}
+            }
         }]
     }
 });

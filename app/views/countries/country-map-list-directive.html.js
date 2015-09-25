@@ -697,8 +697,7 @@ define(['app',  'scbd-angularjs-controls',
                         
                        // country.api.loadCountryDetails(country.code);
                         country.profileCode = country.code;
-                    }
-
+                    }                    
                 }
             ]
 

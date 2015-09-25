@@ -92,7 +92,7 @@ define(['app'], function (app) {
                             _.each(data.pivot, function(facets){
                                 tempFacets[facets.value] = {"facetCount" : (tempFacets[facets.value] ? tempFacets[facets.value].facetCount : 0) + facets.count,
                                                 "countryCount" : (tempFacets[facets.value] ? tempFacets[facets.value].countryCount : 0) + 1,
-												"id": getSequence(facets.value)};
+												"id": getSequence(facets.value), searchUrl:'search/national-records'};
                             });
 
                         });
@@ -102,7 +102,8 @@ define(['app'], function (app) {
 		                    var facet = resourceFacets[i];
 							if(_.contains(referenceRecordSchemas,facet))
 		                    	tempFacets[facet] = {"facetCount" : resourceFacets[i + 1],
-								"id" : getSequence(facet)};
+								"id" : getSequence(facet), searchUrl:'search/reference-records'};
+                            
 		                }
 
 						var ratificationCount=0;
@@ -117,11 +118,11 @@ define(['app'], function (app) {
 			                }
 						});
 						tempFacets['RAT'] = {"facetCount" : ratificationCount,
-								"id" : getSequence('ratification')};
+								"id" : getSequence('ratification'), searchUrl:'search/countries'};
 
 						tempFacets['focalPoint'] = {"facetCount" : tempFacets['focalPoint'].facetCount,
 								"countryCount" : tempFacets['focalPoint'].countryCount,
-								"id" : 2 };
+								"id" : 2 , searchUrl:'search/national-records'};
 
                         $scope.commonFormatFacets = _.sortBy(_.pairs(tempFacets), function(format){ return format[1].id});
                         $scope.loadingFacets = false;
