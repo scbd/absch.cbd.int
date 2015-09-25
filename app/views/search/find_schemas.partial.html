@@ -75,7 +75,7 @@ label{width:100%;}
                                     <div style="position:relative;top:-14px;font-size:11px;color:#666;font-weight:bold;">Filter by record type </div>
                                     <div style="padding-left:3px;margin-right:0;">
                                         <span ng-show="countryProfileSearch.recordType==''">All</span>
-                                        <span ng-show="countryProfileSearch.recordType=='nfp'">ABS National Focal Point</span>
+                                        <span ng-show="countryProfileSearch.recordType=='fp'">ABS National Focal Point</span>
                                         <span ng-show="countryProfileSearch.recordType=='cna'">Compentent National Authority</span>
                                         <span ng-show="countryProfileSearch.recordType=='msr'">Legislative, Administrative or Policy Me...</span>
                                         <span ng-show="countryProfileSearch.recordType=='ndb'">National Database or Website</span>
@@ -89,7 +89,7 @@ label{width:100%;}
                             </button>
                             <ul class="dropdown-menu ddm" >
                                <li><a href="#" ng-click="countryProfileSearch.recordType=''">All</a></li>
-                                <li><a href="#" ng-click="countryProfileSearch.recordType='nfp'">ABS National Focal Point</a></li>
+                                <li><a href="#" ng-click="countryProfileSearch.recordType='fp'">ABS National Focal Point</a></li>
                                  <li><a href="#" ng-click="countryProfileSearch.recordType='cna'">Compentent National Authority</a></li>
                                   <li><a href="#" ng-click="countryProfileSearch.recordType='msr'">Legislative, Administrative or Policy Measures </a></li>
                                    <li><a href="#" ng-click="countryProfileSearch.recordType='ndb'">National Database or Website</a></li>
@@ -99,13 +99,13 @@ label{width:100%;}
                             </ul>
                         </div>
                         
-                        <a href="#" ng-click="$parent.loadRegions=true;" data-toggle="modal" data-target="#regionModal" style="font-weight:bold;color:#AAA;margin-top:15px;padding-left:3px;"><span id="lblRegions">Regions</span></a>
+                        <!--<a href="#" ng-click="$parent.loadRegions=true;" data-toggle="modal" data-target="#regionModal" style="font-weight:bold;color:#AAA;margin-top:15px;padding-left:3px;"><span id="lblRegions">Regions</span></a>
                         
                         <div style="border-bottom:1px solid #DDD;margin-top:7px;padding:15px 0 15px 3px;"  ng-repeat="filter in $parent.regionsApi.getSelected()">
                             <a href="#" ng-click="$parent.removeRegionFilter(filter)"  style="color:#666">
                                 {{filter.title|lstring}} &nbsp; <span class="pull-right" aria-hidden="true">&times;</span>
                             </a>
-                        </div>
+                        </div>-->
                         
                         
                        
