@@ -1,6 +1,6 @@
 define(['app','ng-breadcrumbs','angular-localizer','scbd-angularjs-services','scbd-angularjs-filters',
     '/app/views/directives/login.directive.html.js',
-    '/app/views/directives/xuser-notifications.js',
+    // '/app/views/directives/xuser-notifications.js',
     'ngMaterial','ngAria', 'angular-animate',
 ], function(app) {
     'use strict';

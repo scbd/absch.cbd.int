@@ -1,5 +1,6 @@
 define(['app', '/app/views/directives/xuser-notifications.js',
-'/app/views/directives/switch-realm-directive.html.js'], function (app) {
+// '/app/views/directives/switch-realm-directive.html.js'
+], function (app) {
 "use strict";
 app.controller("DashboardController",
 	["$rootScope", "$scope", "underscore", "lstringFilter","IWorkflows","realm","$q","$routeParams",'$location',"$filter","$http",
