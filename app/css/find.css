@@ -56,14 +56,14 @@ h3 a{ color:#111;}
 	color:#999;
 }
 
-#Filters .btn{
+/*#Filters .btn{
     border: 0;
     font-size: 11px;
     text-transform: uppercase;
     background-color: transparent;
     margin: 0;
     padding: 0;
-}
+}*/
 #Filters .btn-info{
     color:#428BCA;
     background-color: transparent;

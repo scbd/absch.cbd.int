@@ -5,6 +5,13 @@ label{width:100%;}
     z-index: 10000;
     position: inherit;
 }
+ .ddm > li > a{
+        white-space:normal!important;
+        padding-top:5px!important;
+    }
+     .ddm > li {
+        border-bottom: 1px solid #eee;
+    }
 </style>
     <div class="panel-group " id="accordion " role="tablist " aria-multiselectable="true " style="margin-bottom:0px; ">
        <div class="panel panel-default " style="border-radius:0!important;border:0; ">
@@ -18,65 +25,75 @@ label{width:100%;}
             </div>
             <div id="collapseOne " class="panel-collapse collapse " ng-class="{ 'in':isInProfiles()} " role="tabpanel" aria-labelledby="headingOne ">
                 <div class="panel-body bg-white ">
-                
                         
+                        <md-input-container style="margin:0;padding-bottom:15px;padding-top:0px;">
+                        <label>Country Filter</label>
                         <input ng-model="countryProfileSearch.countryProfile_keyword" >
-                        
+                        </md-input-container>
                         
                         <div class="btn-group" style="width:100%;">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                            style="width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;">
-                                <div ng-show="!countryProfileSearch.partyStatus" style="color:#AAA;font-weight:bold;">Party status <span class="pull-right"><i class="caret"></i></span></div>
+                            style="width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;padding:8px 0;">
+                                <div ng-show="!countryProfileSearch.partyStatus" style="color:#AAA;font-weight:bold;padding-left:3px;margin-right:0;">Filter by party status <span class="pull-right"><i class="caret"></i></span></div>
                                 <div ng-show="countryProfileSearch.partyStatus">
-                                <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;">Party status </div>
-                                <div style="font-weight:bold;">
+                                <div style="position:relative;top:-14px;font-size:11px;color:#666;font-weight:bold;">Filter by party status </div>
+                                <div style="padding-left:3px;margin-right:0;">
                                     <span ng-show="countryProfileSearch.partyStatus=='parties'"> <i class="fa fa-square color-blue" ></i> Parties </span>
                                     <span ng-show="countryProfileSearch.partyStatus=='nonParties'"> <i class="fa fa-square color-grey" ></i> Non-Parties</span>
-                                    <span ng-show="countryProfileSearch.partyStatus=='both'">Both Parties and Non-Parties</span>
                                     <span class="pull-right"><i class="caret"></i></span>
                                 </div>
                                 </div>
                             </button>
-                            <ul class="dropdown-menu">
-                                <li>
-                                <a href="#" ng-click="countryProfileSearch.partyStatus='parties'"> <i class="fa fa-square color-blue"></i> Parties to the Nagoya Protocol </a>
-                                </li>
-                                <li>
-                                <a href="#" ng-click="countryProfileSearch.partyStatus='nonParties'"> <i class="fa fa-square color-grey"></i> Non-Parties to the Nagoya Protocol</a>
-                                </li>
-                                <li><a href="#" ng-click="countryProfileSearch.partyStatus='both'">Both Parties and Non-Parties</a></li>
+                            <ul class="dropdown-menu" >
+                                 <li><a href="#" ng-click="countryProfileSearch.partyStatus=''">Both Parties and Non-Parties</a></li>
+                                <li> <a href="#" ng-click="countryProfileSearch.partyStatus='parties'"> <i class="fa fa-square color-blue"></i> Parties to the Nagoya Protocol </a></li>
+                                <li><a href="#" ng-click="countryProfileSearch.partyStatus='nonParties'"> <i class="fa fa-square color-grey"></i> Non-Parties to the Nagoya Protocol</a></li>
                             </ul>
                         </div>
                         
-                        <div class="btn-group" style="width:100%;">
+                        <div class="btn-group" style="width:100%;padding-top:15px;padding-bottom:20px;">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                            style="width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;">
-                                <div ng-show="!countryProfileSearch.partyStatus" style="color:#AAA;font-weight:bold;">Party status <span class="pull-right"><i class="caret"></i></span></div>
-                                <div ng-show="countryProfileSearch.partyStatus">
-                                <div style="display:relative;top:-7px;font-size:12px;color:#AAA;font-weight:bold;">Party status </div>
-                                <div style="font-weight:bold;">
-                                    <span ng-show="countryProfileSearch.partyStatus=='parties'"> <i class="fa fa-square color-blue" ></i> Parties </span>
-                                    <span ng-show="countryProfileSearch.partyStatus=='nonParties'"> <i class="fa fa-square color-grey" ></i> Non-Parties</span>
-                                    <span ng-show="countryProfileSearch.partyStatus=='both'">Both Parties and Non-Parties</span>
-                                    <span class="pull-right"><i class="caret"></i></span>
-                                </div>
+                            style="width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;padding:8px 0;">
+                                
+                                <div ng-show="!countryProfileSearch.recordType" style="color:#AAA;font-weight:bold;padding-left:3px;margin-right:0;">Filter by record type  <span class="pull-right"><i class="caret"></i></span></div>
+                                
+                                <div ng-show="countryProfileSearch.recordType">
+                                    <div style="position:relative;top:-14px;font-size:11px;color:#666;font-weight:bold;">Filter by record type </div>
+                                    <div style="padding-left:3px;margin-right:0;">
+                                        <span ng-show="countryProfileSearch.recordType==''">All</span>
+                                        <span ng-show="countryProfileSearch.recordType=='nfp'">ABS National Focal Point</span>
+                                        <span ng-show="countryProfileSearch.recordType=='cna'">Compentent National Authority</span>
+                                        <span ng-show="countryProfileSearch.recordType=='msr'">Legislative, Administrative or Policy Me...</span>
+                                        <span ng-show="countryProfileSearch.recordType=='ndb'">National Database or Website</span>
+                                        <span ng-show="countryProfileSearch.recordType=='ircc'">Internationally Recognized Certificate o...</span>
+                                        <span ng-show="countryProfileSearch.recordType=='cp'">Checkpoint</span>
+                                        <span ng-show="countryProfileSearch.recordType=='cpc'">Checkpoint Communiqués</span>
+                                    
+                                        <span class="pull-right"><i class="caret"></i></span>
+                                    </div>
                                 </div>
                             </button>
-                            <ul class="dropdown-menu">
-                                <li>
-                                <a href="#" ng-click="countryProfileSearch.partyStatus='parties'"> <i class="fa fa-square color-blue"></i> Parties to the Nagoya Protocol </a>
-                                </li>
-                                <li>
-                                <a href="#" ng-click="countryProfileSearch.partyStatus='nonParties'"> <i class="fa fa-square color-grey"></i> Non-Parties to the Nagoya Protocol</a>
-                                </li>
-                                <li><a href="#" ng-click="countryProfileSearch.partyStatus='both'">Both Parties and Non-Parties</a></li>
+                            <ul class="dropdown-menu ddm" >
+                               <li><a href="#" ng-click="countryProfileSearch.recordType=''">All</a></li>
+                                <li><a href="#" ng-click="countryProfileSearch.recordType='nfp'">ABS National Focal Point</a></li>
+                                 <li><a href="#" ng-click="countryProfileSearch.recordType='cna'">Compentent National Authority</a></li>
+                                  <li><a href="#" ng-click="countryProfileSearch.recordType='msr'">Legislative, Administrative or Policy Measures </a></li>
+                                   <li><a href="#" ng-click="countryProfileSearch.recordType='ndb'">National Database or Website</a></li>
+                                    <li><a href="#" ng-click="countryProfileSearch.recordType='ircc'">Internationally Recognized Certificate of Compliance</a></li>
+                                     <li><a href="#" ng-click="countryProfileSearch.recordType='cp'">Checkpoint</a></li>
+                                      <li><a href="#" ng-click="countryProfileSearch.recordType='cpc'">Checkpoint Communiqués</a></li>
                             </ul>
                         </div>
                         
-                        <a href="" ng-click="$parent.loadRegions=true;"data-toggle="modal" data-target="#regionModal" class="color-black"><h4 id="lblRegions">Regions</h4></a>
+                        <a href="#" ng-click="$parent.loadRegions=true;" data-toggle="modal" data-target="#regionModal" style="font-weight:bold;color:#AAA;margin-top:15px;padding-left:3px;"><span id="lblRegions">Regions</span></a>
+                        <div style="border-bottom:1px solid #DDD;margin-top:7px;padding:15px 0 15 3px;"  ng-repeat="filter in $parent.regionsApi.getSelected()">
+                            <a href="#" ng-click="$parent.removeRegionFilter(filter)"  style="color:#666">
+                                {{filter.title|lstring}} &nbsp; <span class="pull-right" aria-hidden="true">&times;</span>
+                            </a>
+                        <div>
                         
                         
-                   
+                       
                 </div>
             </div>
       </div>
@@ -101,7 +118,7 @@ label{width:100%;}
                             placeholder="Keyword"></input>
                         </div>
                     
-                        <div class="btn-group" style="width:100%;">
+                        <div class="btn-group" style="width:100%;padding:0 10px;">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                             style="width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;">
                                 <div ng-show="!previewType" style="color:#AAA;font-weight:bold;">List layout <span class="pull-right"><i class="caret"></i></span></div>
@@ -121,7 +138,7 @@ label{width:100%;}
                     
                         <br>
                     
-                        <div class="btn-group" style="width:100%;">
+                        <div class="btn-group" style="width:100%;padding:0 10px;">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                             style="width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;">
                                 <div ng-show="!nationalSearch.partyStatus" style="color:#AAA;font-weight:bold;">Party status <span class="pull-right"><i class="caret"></i></span></div>
@@ -313,9 +330,9 @@ label{width:100%;}
                     
                     <a href="" data-toggle="modal" data-target="#countryModal" class="color-black"><h4 id="lblCountries">Countries</h4></a>
                     <a href="" ng-click="$parent.loadRegions=true;"data-toggle="modal" data-target="#regionModal" class="color-black"><h4 id="lblRegions">Regions</h4></a>
-                    
+               
                    
-                    
+                   
                           
                 </div>                
             </div>
@@ -328,7 +345,7 @@ label{width:100%;}
                     <!--aria-expanded="false "role="button" data-toggle="collapse" data-parent="#accordion " aria-controls="collapseThree " -->
                     <a class="collapsed "  href="/search/reference-records "                     
                     style="font-size:20px; " id="lblReferenceRecords">
-                        <i class="fa fa-chevron-circle-up pad-left " ></i>Reference Records
+                        <i class="fa fa-chevron-circle-up pad-left " ></i> Reference Records
                     </a>
                 </span>
             </div>
@@ -361,7 +378,7 @@ label{width:100%;}
                                 <label name="lblCommunityProtocol">
                                     <span class="badge badge-white pull-right">{{communityProtocol.count}}</span>
                                     <input type="checkbox" ng-model="communityProtocol.selected" bind-indeterminate="communityProtocol.indeterminate" ng-change="refresh(communityProtocol.selected,'communityProtocol')">
-                                    <span class="filter-text">Community protocols procedures and customary laws</span>
+                                    <span class="filter-text">Community protocols and procedures and customary laws</span>
                                 </label>
                                 <div ng-show="communityProtocol.selected" class="subfilters-section">
                                     <div km-select multiple api="cppresourceTypesApi" name="cppresourceTypes" binding-type="string" ng-model="cppresourceTypes" items="options.cppResourceTypes()" placeholder="Type of resource"></div>

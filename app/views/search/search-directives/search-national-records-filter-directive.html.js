@@ -161,7 +161,7 @@ app.directive('searchNationalRecordsFilter', function ($http) {
                                                             { name: 'mccresourceTypes',   type: 'multiselect' , field: 'resourceTypes_ss'}
                                                         ]
                                              }
-            $scope.communityProtocol  = { identifier: 'communityProtocol', title : "Community protocols procedures and customary laws ", type:'reference',
+            $scope.communityProtocol  = { identifier: 'communityProtocol', title : "Community protocols and procedures and customary laws ", type:'reference',
                                                subFilters : [
                                                             { name: 'cppresourceTypes',   type: 'multiselect' , field: 'resourceTypes_ss'}
                                                         ]
