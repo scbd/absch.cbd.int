@@ -6,7 +6,7 @@ define(['app'], function (app) {
 			restrict: 'EAC',
 			templateUrl: '/app/views/forms/edit/edit-resource-schema-base-directive.html',
 			replace: true,
-			controller: ["$scope", "$http", "$filter", function ($scope, $http, $filter)
+			controller: ["$scope", "$http", "$filter","IStorage", function ($scope, $http, $filter, storage)
 			{
 				
 				
