@@ -99,25 +99,49 @@ define(['app',  'scbd-angularjs-controls',
                         title: 'Checkpoint Communiqués '
                     }, ];
 
-                    //====================================================
-                    $scope.$watch("filterSchema", function(val) {
+                    
+                   // ====================================================
+                    $scope.$watch("query.partyStatus", function(val) {
+                      
+                      if(!val){
+                            $scope.selected_facet='all';
+                            $scope.updateMap('all');
+                            $scope.sortTable('name.en', 'ASC')
+                        }
 
+                        if(val == 'parties'){
+                             $scope.selected_facet='party';
+                            $scope.updateMap('party');
+                            $scope.sortTable('name.en', 'ASC')
+                        }
+
+                        if(val == 'nonParties'){
+                            $scope.selected_facet='nonParties';
+                            $scope.updateMap('nonParties');
+                            $scope.sortTable('name.en', 'ASC')
+                        }
+                    })
+                    
+                    //====================================================
+                    $scope.$watch("query.recordType", function(val) {
+                        
                         if(!val){
                             $scope.selected_facet='all';
                             $scope.updateMap('all');
                             $scope.sortTable('name.en', 'ASC')
+                            
                             return;
                         }
 
 
-                        if(val == 'authority'){
+                        if(val == 'cna'){
                             $scope.selected_facet='authority';
                             $scope.updateMap('authority');
                             $scope.sortTable('CNA');
                             return;
                         }
 
-                        if(val == 'measure'){
+                        if(val == 'msr'){
                             $scope.selected_facet='measure';
                             $scope.updateMap('measure');
                             $scope.sortTable('MSR');
@@ -125,7 +149,7 @@ define(['app',  'scbd-angularjs-controls',
                         }
 
 
-                        if(val == 'absCheckpoint'){
+                        if(val == 'cp'){
                             $scope.selected_facet='absCheckpoint';
                             $scope.updateMap('absCheckpoint');
                             $scope.sortTable('CP');
@@ -133,7 +157,7 @@ define(['app',  'scbd-angularjs-controls',
                         }
 
 
-                        if(val == 'database'){
+                        if(val == 'ndb'){
                             $scope.selected_facet='database';
                             $scope.updateMap('database');
                             $scope.sortTable('NDB');
@@ -141,28 +165,93 @@ define(['app',  'scbd-angularjs-controls',
                         }
 
 
-                        if(val == 'focalPoint'){
+                        if(val == 'nfp'){
                             $scope.selected_facet='focalPoint';
                             $scope.updateMap('focalPoint');
                             $scope.sortTable('NFP');
                             return;
                         }
 
-                        if(val == 'absPermit'){
+                        if(val == 'ircc'){
                             $scope.selected_facet='absPermit';
                             $scope.updateMap('absPermit');
                             $scope.sortTable('IRCC');
                             return;
                         }
 
-                        if(val == 'absCheckpointCommunique'){
+                        if(val == 'cpc'){
                             $scope.selected_facet='absCheckpointCommunique';
                             $scope.updateMap('absCheckpointCommunique');
                             $scope.sortTable('CPC');
                             return;
                         }
+                        
+                    })
+                    
+                    //====================================================
+                    // $scope.$watch("filterSchema", function(val) {
 
-                    });
+                    //     if(!val){
+                    //         $scope.selected_facet='all';
+                    //         $scope.updateMap('all');
+                    //         $scope.sortTable('name.en', 'ASC')
+                    //         return;
+                    //     }
+
+
+                    //     if(val == 'authority'){
+                    //         $scope.selected_facet='authority';
+                    //         $scope.updateMap('authority');
+                    //         $scope.sortTable('CNA');
+                    //         return;
+                    //     }
+
+                    //     if(val == 'measure'){
+                    //         $scope.selected_facet='measure';
+                    //         $scope.updateMap('measure');
+                    //         $scope.sortTable('MSR');
+                    //         return;
+                    //     }
+
+
+                    //     if(val == 'absCheckpoint'){
+                    //         $scope.selected_facet='absCheckpoint';
+                    //         $scope.updateMap('absCheckpoint');
+                    //         $scope.sortTable('CP');
+                    //         return;
+                    //     }
+
+
+                    //     if(val == 'database'){
+                    //         $scope.selected_facet='database';
+                    //         $scope.updateMap('database');
+                    //         $scope.sortTable('NDB');
+                    //         return;
+                    //     }
+
+
+                    //     if(val == 'focalPoint'){
+                    //         $scope.selected_facet='focalPoint';
+                    //         $scope.updateMap('focalPoint');
+                    //         $scope.sortTable('NFP');
+                    //         return;
+                    //     }
+
+                    //     if(val == 'absPermit'){
+                    //         $scope.selected_facet='absPermit';
+                    //         $scope.updateMap('absPermit');
+                    //         $scope.sortTable('IRCC');
+                    //         return;
+                    //     }
+
+                    //     if(val == 'absCheckpointCommunique'){
+                    //         $scope.selected_facet='absCheckpointCommunique';
+                    //         $scope.updateMap('absCheckpointCommunique');
+                    //         $scope.sortTable('CPC');
+                    //         return;
+                    //     }
+
+                    // });
 
 
 

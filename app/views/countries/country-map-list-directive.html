@@ -4,7 +4,6 @@
     <div class="container-fluid " >
         
                 
-                
                 <div class="row" id="divList" >
                     <div class="col-lg-12 col-md-12 col-xs-12">                       
                          <div class="row table-hover table-msr bg-grey1" style="border-radius:0!important;padding:9px 0;" >
@@ -82,7 +81,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="row table-hover table-msr" ng-repeat="country in (countries | filter:query.countryProfile_keyword | filter:countryFilter | filter: searchFilter | orderBy:sortTermFilter:orderList) ">
+                                <div class="row table-hover table-msr" ng-repeat="country in (countries | filter:query.countryProfile_keyword  | filter: searchFilter | orderBy:sortTermFilter:orderList) ">
                                     <div class="row">
                                         <div class="row table-row" style="border-top:1px solid #ddd;padding:10px;font-weight:500;margin:0;"  ng-click="country.displayDetails=!country.displayDetails;showCountryProfile(country)" ng-class="{'bg-white':country.displayDetails}">
                                             <!--<div class="col-lg-1 col-md-1 col-xs-1 tableheader" >
