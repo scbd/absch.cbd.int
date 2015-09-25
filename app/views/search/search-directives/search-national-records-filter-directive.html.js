@@ -156,7 +156,7 @@ app.directive('searchNationalRecordsFilter', function ($http) {
             $scope.pressRelease            = { identifier: 'pressRelease',             title: 'Press Releases', type:'reference' };
             $scope.statement               = { identifier: 'statement',                title: 'Statements' , type:'reference'};
             $scope.news                    = { identifier: 'news',                     title: 'News', type:'reference' };
-            $scope.modelContractualClause  = { identifier: 'modelContractualClause', title : "Article 19 & 20 Tools", type:'reference',
+            $scope.modelContractualClause  = { identifier: 'modelContractualClause', title : "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and Standards", type:'reference',
                                                subFilters : [
                                                             { name: 'mccresourceTypes',   type: 'multiselect' , field: 'resourceTypes_ss'}
                                                         ]
