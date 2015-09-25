@@ -59,9 +59,9 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
             when('/search/reference-records/:documentSchema?',             { templateUrl: '/app/views/search/search.html',   label:'Search',         resolveController: true, resolveUser: true, type:'reference'}).
             // when('/find',                                   { redirectTo:'/search'}).
 
-            when('/countries',                   { templateUrl: '/app/views/countries/index.html',       label:'Country Information',      resolveController: true, resolveUser: true}).
-            when('/countries/:code',             { templateUrl: '/app/views/countries/profiles.html',       label:'Country Profile', param:'true',      resolveController: true, resolveUser: true}).
-            when('/countries/:code/:schema',     { templateUrl: '/app/views/countries/profiles.html',       label:'Country Profile', param:'true',      resolveController: true, resolveUser: true}).
+            // when('/countries',                   { templateUrl: '/app/views/countries/index.html',       label:'Country Information',      resolveController: true, resolveUser: true}).
+            // when('/countries/:code',             { templateUrl: '/app/views/countries/profiles.html',       label:'Country Profile', param:'true',      resolveController: true, resolveUser: true}).
+            // when('/countries/:code',     { templateUrl: '/app/views/countries/profiles.html',       label:'Country Profile', param:'true',      resolveController: true, resolveUser: true}).
 
 
             when('/database/record',             { templateUrl: '/app/views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
