@@ -196,7 +196,7 @@
                         $('[data-toggle="tooltip"]').tooltip()
                         
                         if($routeParams.countryCode && $routeParams.documentType){
-                            if($routeParams.documentType.toLowerCase()=='matrix'){
+                            if($routeParams.documentType.toLowerCase()=='measure-matrix'){
                                 $scope.showMSR = true;
                             }
                         }
