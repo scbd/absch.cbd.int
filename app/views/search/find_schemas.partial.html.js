@@ -446,7 +446,7 @@ app.directive('searchFilterSchemas', function ($http) {
                                                             ]
                                                };
             $scope.organization            = { identifier: 'organization',             title: 'ABS Related Organizations', type:'reference' };
-            $scope.meeting                 = { identifier: 'meeting',                  title: 'Meetings &amp; Meeting Outcomes ({{meeting.count}})', type:'reference',
+            $scope.meeting                 = { identifier: 'meeting',                  title: 'Meetings & Meeting Outcomes', type:'reference',
                                                subFilters : [
                                                                 { name: 'mtgRange', type: 'select', field: 'startDate_dt'},
                                                             ]
@@ -527,6 +527,8 @@ app.directive('searchFilterSchemas', function ($http) {
             {
                 var documentSchema = $routeParams.documentSchema.toUpperCase();
                 var schema = $filter("mapSchema")(documentSchema);
+                if(schema == 'NEWS')
+                    schema = 'news';
                 if($scope[schema])
                     $scope[schema].selected = true;
                 else{
