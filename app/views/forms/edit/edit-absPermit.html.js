@@ -17,7 +17,7 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
                                     }); },
      permits    : function () {
                                 var permit = storage.documents.query("(type eq 'absPermit')",undefined,{cache:false});
-                                return $q.all(permit).then(function(o){
+                                return $q.when(permit).then(function(o){
                                       var permits =  [];
                                       o.data.Items.forEach(function(permit){
                                         if(permit.identifier != $scope.document.header.identifier){
