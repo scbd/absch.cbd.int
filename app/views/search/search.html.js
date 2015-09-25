@@ -164,7 +164,7 @@ define(['app','underscore','/app/js/common.js',
                 $scope.recordType = 'national';
                 
             var nationalSchema = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database","focalPoint"];
-            var referenceSchema= [ "resource", "meeting", "notification","pressRelease","statement" , "news", "modelContractualClause"];
+            var referenceSchema= [ "resource", "meeting", "notification","pressRelease","statement" , "news", "modelContractualClause", "communityProtocol"];
 
             var q = '(realm_ss:' + realm.value.toLowerCase() + ') AND NOT version_s:*';
             //' AND ' + $scope.querySchema + ' AND ' + $scope.queryGovernment + ' AND ' + $scope.queryTheme + ' AND ' + $scope.queryTargets +' AND ' + $scope.queryDate + ' AND ' + $scope.queryKeywords;
