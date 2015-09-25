@@ -255,7 +255,7 @@ define(['app', '/app/js/common.js'], function(app) {
                             commonjs.isUserInRole($rootScope.getRoleName('abschiac')) ||
                             commonjs.isUserInRole($rootScope.getRoleName('AbsAdministrator')) ||
                             commonjs.isUserInRole($rootScope.getRoleName('Administrator')) ||
-                            $scope.schema == 'resource';
+                            _.contains('resource', 'modelContractualClause','communityProtocols',$scope.schema);
 
                     }
 
