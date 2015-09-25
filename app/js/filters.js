@@ -200,7 +200,7 @@ define(["app",'/app/js/common.js'], function (app) {
 			
 			if(!schema)
 				return schema;
-			if(schema.toLowerCase()=="focalpoint"				) return "Focal Point";
+			if(schema.toLowerCase()=="focalpoint"				) return "National Focal Point";
 			if(schema.toLowerCase()=="authority"				) return "Competent National Authority";
 			if(schema.toLowerCase()=="contact"					) return "Contact";
 			if(schema.toLowerCase()=="database"					) return "National Website or Database";
@@ -215,7 +215,7 @@ define(["app",'/app/js/common.js'], function (app) {
 			if(schema.toLowerCase()=="news"						) return "News";
 			if(schema.toLowerCase()=="absnationalreport"		) return "National Report";
 			if(schema.toLowerCase()=="modelcontractualclause"	) return "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and Standards";
-			if(schema.toLowerCase()=="communityprotocol"		) return "Community protocols and procedures and customary law";
+			if(schema.toLowerCase()=="communityprotocol"		) return "Community protocols and procedures and customary laws";
 			if(schema.toLowerCase()=="meeting"					) return "Meeting";
 			if(schema.toLowerCase()=="notification"				) return "Notification";
 			// return schema;
@@ -232,7 +232,7 @@ define(["app",'/app/js/common.js'], function (app) {
 		return function( schema ) {
 			if(!schema)
 				return schema;
-			if(schema.toLowerCase()=="focalpoint"				) return "Focal Points";
+			if(schema.toLowerCase()=="focalpoint"				) return "National Focal Points";
 			if(schema.toLowerCase()=="authority"				) return "Competent National Authorities";
 			if(schema.toLowerCase()=="contact"					) return "Contact";
 			if(schema.toLowerCase()=="database"					) return "National Websites or Databases";
@@ -241,7 +241,7 @@ define(["app",'/app/js/common.js'], function (app) {
 			if(schema.toLowerCase()=="measure" 					) return "Legislative, Administrative or Policy Measures";
 			if(schema.toLowerCase()=="abscheckpoint"			) return "Checkpoints";
 			if(schema.toLowerCase()=="abscheckpointcommunique"	) return "Checkpoint Communiqués";
-			if(schema.toLowerCase()=="abspermit"				) return "Internationally Recognized Certificates of Compliance";
+			if(schema.toLowerCase()=="abspermit"				) return "Internationally Recognized Certificate of Compliance";
             if(schema.toLowerCase()=="meetingdocument"			) return "Meeting Documents";
             if(schema.toLowerCase()=="pressrelease"				) return "Press Releases";
 			if(schema.toLowerCase()=="news"						) return "News";
