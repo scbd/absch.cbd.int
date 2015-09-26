@@ -40,7 +40,8 @@
 
 
 <div class="md-whiteframe-z1">
-    <md-toolbar ng-class="{'bg-blue': type.abbreviation != 'VLR','bg-orange': type.abbreviation == 'VLR'}">
+
+    <md-toolbar ng-class="{'bg-blue': type.schemaType != 'referenceRecords','bg-orange': type.schemaType == 'referenceRecords' }">
     <div class="md-toolbar-tools">
       <h2 class="md-flex">
           <span>{{type.title}} <span class="color-darkgrey">({{type.abbreviation}})</span></span>
