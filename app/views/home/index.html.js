@@ -25,9 +25,19 @@ define(['app','/app/js/common.js','moment',
         //$scope.daysUntilEntry = $scope.Math.floor(entry.diff(today, 'milliseconds', true)/86400000);
 
         $scope.entryintoforce = today.diff(entry, 'hours', true) >= 0 ? true:false;
+        
+   
 
-        $scope.daysUntilEntry = entry.startOf('hours').fromNow(true);
-
+        $scope.yearsSinceEntry = today.diff(entry, 'years', true);
+        var years = Math.floor($scope.yearsSinceEntry);
+        $scope.monthsSinceEntry = today.diff(( entry.add(years, 'years')), 'months', true); 
+        var months = Math.floor($scope.monthsSinceEntry);
+        $scope.daysSinceEntry = today.diff(( entry.add(months, 'months')), 'days', true);
+        var days = Math.floor($scope.daysSinceEntry);
+        
+        $scope.yearsSinceEntry = years;
+        $scope.monthsSinceEntry = months;
+        $scope.daysSinceEntry = days;
 
     	//============================================================
     	//

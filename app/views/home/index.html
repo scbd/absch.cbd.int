@@ -72,7 +72,7 @@
 <!-- /.carousel -->
 
 <div class="bg-texture-green" style="border-top:1px solid #555;border-bottom:2px solid #ddd;">
-    <div class="container" style="color:white;padding:20px;" >
+    <div class="container-fluid" style="color:white;padding:20px;" >
 
 
                         <div class="row  bg-green" style="padding:20px;">
@@ -80,11 +80,13 @@
                                 <div class="home-col dropshadow">
                                     <!-- <h3 class="headline1"><a href="/about#about">What is the ABS-CH?</a></h3> -->
                                     <h3 style="text-align:justify;">The Access and Benefit-sharing Clearing-house (ABSCH) is a platform for exchanging information on ABS and a key tool for facilitating the implementation of the Nagoya Protocol.
-                                    &nbsp;<a href="/help/about?question=absch" style="font-size:80%;padding:2px 6px;line-height:16px;" class="btn btn-small btn-primary">read more</a></h3>
+                                  </h3>
+                                                    
                                 </div>
 
                             </div>
                         </div>
+
 
                          <!--<div class="row bg-green"  style="padding:30px;margin-top:20px;" ng-show="user.isAuthenticated" >
                                 <div class="text-center col-xs-10"  >
@@ -118,12 +120,7 @@
 </div>
 
 
-
-
-
-
-
-<div class="container" >
+<div class="container-fluid" >
     <div class="row">
         <div class="col-xs-12">
              <h3 style="border-bottom:1px solid #BBB;">ABSCH Record Overview</h3>
@@ -387,10 +384,16 @@
 
         <div class="col-md-4">
             <div class="home-col">
-                    <div class="box bg-none text-center bg-green" ng-show="entryintoforce">
-                        <span class="color-white" style="font-weight:bold; font-size:32px;text-shadow: 0 1px 2px rgba(0, 0, 0, .6);">
-                      {{daysUntilEntry}}</span><br><span style="color:#EEE;text-transform: uppercase;font-weight:bold;font-size:14px;">
-                       Since the entry into force of the Nagoya Protocol</span>
+                    <div class="text-center"   ng-show="entryintoforce">
+                       
+                      <div layout="row" layout-padding layout-margin style="padding-top:0;margin-top:0;">
+                        <div flex class="bg-green">  <span class="color-white" style="font-weight:bold; font-size:32px;text-shadow: 0 1px 2px rgba(0, 0, 0, .6);">{{yearsSinceEntry}}</span> <br> <span style="color:#EEE;text-transform: uppercase;font-weight:bold;font-size:14px;">years</span></div>
+                        <div flex class="bg-green">  <span class="color-white" style="font-weight:bold; font-size:32px;text-shadow: 0 1px 2px rgba(0, 0, 0, .6);">{{monthsSinceEntry}}</span> <br> <span style="color:#EEE;text-transform: uppercase;font-weight:bold;font-size:14px;">months</span></div>
+                        <div flex class="bg-green">  <span class="color-white" style="font-weight:bold; font-size:32px;text-shadow: 0 1px 2px rgba(0, 0, 0, .6);">{{daysSinceEntry}}</span> <br> <span style="color:#EEE;text-transform: uppercase;font-weight:bold;font-size:14px;">days</span></div>
+                      </div>
+                      
+                      <div style="color:#666;text-transform:uppercase;font-weight:bold;font-size:14px;">
+                       Since the entry into force of the Nagoya Protocol</div>
                      </div>
                 <!--    <h3>Meetings</h3>
              <div class="feeds">
