@@ -526,6 +526,33 @@ app.directive('searchFilterSchemas', function ($http) {
                     }
                 }
             }
+            
+            $scope.queryStatus = function(type){
+                commonjs.getCountries()
+                .then(function(data){
+                    $scope.queryPartyStatus = '';
+                    var npParties
+    
+                    if(type=='parties' || type == 'nonParties'){
+    
+                        if(type=='parties'){
+                            npParties = _.where(data, {isNPParty:true});
+                            //$scope.partiesCount = npParties.length;
+                            // $scope.partyStatusString = 'Party to the Nagoya Protocol';
+                        }
+                        else {
+                            npParties = _.where(data, {isNPParty:false});
+                            //$scope.nonPartiesCount = npParties.length;
+                            //$scope.partyStatusString = 'Non-Party';
+                        }
+                        $scope.queryPartyStatus =
+                                            ('government_s:(' +
+                                            _.pluck(npParties, 'code') +
+                                            ')').toLowerCase().replace(/,/g, ' ');
+                    }
+
+                });
+            }
 
             if($routeParams.documentSchema)
             {
@@ -545,6 +572,11 @@ app.directive('searchFilterSchemas', function ($http) {
                 }
                 if(documentSchema.toLowerCase() == 'focalpoint' || documentSchema.toLowerCase() == 'fp' ){
                     $scope.focalPointNP = true;
+                }
+                
+                if(documentSchema=='PARTIES'){
+                    $scope.queryPartyStatus ="government_s:(ae al bt by cd cg ch ci bw do dk hu es eg fj fm ga et gm gn gw hn id gt ke jo in km kz la kh mg mh mm mn mu mw mx mz na ne no pa pe sc rw sy tj ug uy za ws bj bi bf gy vn vu sd eu ls kg)";
+                   // $scope.queryPartyStatus = $scope.queryStatus('parties');
                 }
             }
             
@@ -691,37 +723,12 @@ app.directive('searchFilterSchemas', function ($http) {
                         $scope.previewType = "list";
             });
             
-            if ($routeParams.countryCode && $routeParams.countryCode.toUpperCase() == 'RAT'){
-                $scope.countryProfileSearch ={partyStatus: 'parties', countryProfile_keyword:''}
-            }
+            // if ($routeParams.countryCode && $routeParams.countryCode.toUpperCase() == 'RAT'){
+            //     $scope.countryProfileSearch ={partyStatus: 'parties', countryProfile_keyword:''}
+            // }
             
             
-            $scope.queryStatus = function(type){
-
-                commonjs.getCountries()
-                .then(function(data){
-                    $scope.queryPartyStatus = '';
-                    var npParties
-    
-                    if(type=='parties' || type == 'nonParties'){
-    
-                        if(type=='parties'){
-                            npParties = _.where(data, {isNPParty:true});
-                            //$scope.partiesCount = npParties.length;
-                            // $scope.partyStatusString = 'Party to the Nagoya Protocol';
-                        }
-                        else {
-                            npParties = _.where(data, {isNPParty:false});
-                            //$scope.nonPartiesCount = npParties.length;
-                            //$scope.partyStatusString = 'Non-Party';
-                        }
-                        $scope.queryPartyStatus =
-                                            ('government_s:(' +
-                                            _.pluck(npParties, 'code') +
-                                            ')').toLowerCase().replace(/,/g, ' ');
-                    }
-                });
-            }
+ 
         }]
     }
 });

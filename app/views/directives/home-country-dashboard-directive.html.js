@@ -118,7 +118,7 @@ define(['app'], function (app) {
 			                }
 						});
 						tempFacets['RAT'] = {"facetCount" : ratificationCount,
-								"id" : getSequence('ratification'), searchUrl:'search/countries'};
+								"id" : getSequence('ratification'), searchUrl:'search/national-records'};
 
 						tempFacets['focalPoint'] = {"facetCount" : tempFacets['focalPoint'].facetCount,
 								"countryCount" : tempFacets['focalPoint'].countryCount,

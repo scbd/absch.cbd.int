@@ -360,6 +360,7 @@ define(["app",'/app/js/common.js'], function (app) {
 
 			if(schema.toUpperCase()=="A19-20"				    ) return "modelContractualClause";
 			if(schema.toUpperCase()=="CPP"				    	) return "communityProtocol";
+			if(schema.toUpperCase()=="RAT"				    	) return "parties";
 			
 			return schema;		
 	}
