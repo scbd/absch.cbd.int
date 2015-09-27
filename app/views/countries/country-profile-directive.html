@@ -274,7 +274,7 @@
                         <div class="row" ng-if="showMSR &&  nationalMeasure > 0">
                             <div style="padding:10px; margin:0 20px;"><legend name="lblMSR" style="display:none"></legend>
                                 <div class="row table-hover table-msr" ng-hide="absMeasure.length==0" style="padding-left:5px;">
-                                    <div class="col-lg-1 col-md-1 col-xs-1 tableheader">
+                                    <div class="col-lg-1 col-md-1 col-xs-1 tableheader" ng-show="false" >
                                         <md-checkbox md-no-ink aria-label="Select All" 
                                         ng-model="measureMatrixDocuments.selectAll" ng-click="selectAllForMatrix()" 
                                         class="md-primary">
@@ -295,7 +295,7 @@
                                 <div class="row table-hover table-msr" ng-repeat="measure in absMeasure = (measureMatrixDocuments|orderBy:sortMeasure:reverseMeasure)">
                                     <div class="row border">
                                         <div class="row table-row">
-                                            <div class="col-lg-1 col-md-1 col-xs-1">
+                                            <div class="col-lg-1 col-md-1 col-xs-1" ng-show="false" >
                                                     <md-checkbox md-no-ink aria-label="Include in Measure Matrix" ng-model="measure.measureMatrix" class="md-primary">
                                                     </md-checkbox>
                                             </div>
@@ -305,7 +305,7 @@
                                                         {{'msr' | schemaIcon}}
                                                     </i>-->
                                                     <strong class="color-blue" style="position:relative;top:-4px;"> {{measure.title_t}}</strong>
-                                                   {{ measure.jurisdiction_sort}}
+                                                   
                                                     
                                                     <span ng-if="measure.ownerGovernment" style="position:relative;top:-4px;">
                                                        (Regional/Multilateral measure registered by {{measure.ownerGovernment|term}})
@@ -329,14 +329,14 @@
                                 </div>
 
                             </div>
-                             <div style="margin:0 20px;margin-top:20px;" ng-hide="measureMatrixDocuments.length==0" >
+                             <!--<div style="margin:0 20px;margin-top:20px;" ng-hide="measureMatrixDocuments.length==0" >
                                 <div>
                                     <p class="tableheader" style="border-bottom:1px solid #ddd;">
                                        {{(measureMatrixDocuments|filter:{measureMatrix:true}).length}} selected for measures matrix
                                     </p>
                                         <div ng-hide="(measureMatrixDocuments|filter:{measureMatrix:true}).length==0" measure-matrix-countries-directive documents="measureMatrixDocuments"></div>
                                 </div>
-                            </div>
+                            </div>-->
 
                         </div>
 
