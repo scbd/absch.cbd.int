@@ -196,12 +196,14 @@ define(['app','underscore','/app/js/common.js',
               //console.log('region: ', q);
             if($scope.queryRegion)      q += ' AND (' + $scope.queryRegion + ')';
             if($scope.queryPartyStatus) q += ' AND (' + $scope.queryPartyStatus + ')';
-            var orderByFields;
+           
+            var orderByFields='createdDate_dt desc';
 
-            if(!$scope.orderBy)
+            if($scope.recordType != 'national')
                 orderByFields = 'createdDate_dt desc';
-            else
-                orderByFields = $scope.orderBy;
+                
+            if($scope.recordType == 'reference')
+                orderByFields = 'title_t asc';
 
             var queryParameters
             if($scope.previewType == 'list' || $scope.recordType == 'reference'){
