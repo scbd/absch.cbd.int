@@ -701,7 +701,7 @@ footer .logo {
 }
 .flag-icon-eur, .flag-icon-eu {
     background-image: url('/app/img/EUFlag.png');
-    width: 165px;
+        /*width: 165px;*/
 }
 
 .page-content {
@@ -773,10 +773,7 @@ footer .logo {
     border-color: #d6e9c6;
 }
 
-.flag-icon-eur {
-    background-image: url('/app/img/EUFlag.png');
-    width: : 165px;
-}
+
 
 .help-content{padding:3px 10px; background-color: #efefef; color:#666;}
 .help-title{padding:3px 10px; background-color: #FFC0CB; color:#666;font-size:18px;}

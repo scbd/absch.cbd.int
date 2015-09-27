@@ -67,10 +67,7 @@
 
     	font: 32px "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeueW01-45Ligh", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	}
-	.flag-icon-eur{
-		background-image :url('/app/img/EUFlag.png');
-		width: :165px;
-	}
+
 	.dl-horizontal dd {
 		text-align: left;
 	}
@@ -161,10 +158,7 @@
 		background-position: 100%;
 		background-repeat: no-repeat;
 	}
-	.flag-icon-eur {
-		background-image: url('/app/img/EUFlag.png');
-		width: : 165px;
-	}
+	
 	.country-select td, th{
 		padding:3px;
 	}
