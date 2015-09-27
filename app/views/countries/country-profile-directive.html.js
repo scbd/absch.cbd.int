@@ -51,7 +51,7 @@
                         $scope.showCP = false;
                         $scope.showCPCRecv = false;
             
-                        $scope.sortMeasure='title_t';
+                        $scope.sortMeasure="[jurisdiction_EN_t, type_EN_t, title_t]";
                         $scope.reverseMeasure=false;
                         $scope.sortPermit='title_t';
                         $scope.reversePermit=false;
