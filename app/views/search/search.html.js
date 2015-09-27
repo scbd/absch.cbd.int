@@ -187,7 +187,11 @@ define(['app','underscore','/app/js/common.js',
             //      q += ' AND (schema_s:(' + schema.join(' ') + '))';
             //      //console.log(q);
             // }
-            if($scope.queryGovernment) q += ' AND (' + $scope.queryGovernment + ')';
+            if($scope.queryGovernment){ 
+                if($scope.queryGovernment.indexOf("government_s:eur") < 0)
+                    $scope.queryGovernment = $scope.queryGovernment.replace("government_s:eu", "government_s:eur");
+                    
+                q += ' AND (' + $scope.queryGovernment + ')';}
             if($scope.queryTheme)      q += ' AND (' + $scope.queryTheme + ')';
               //console.log('region: ', q);
             if($scope.queryRegion)      q += ' AND (' + $scope.queryRegion + ')';
