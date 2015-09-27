@@ -83,7 +83,7 @@
                              &nbsp; <span aria-hidden="true">&times;</span>
                         </button>
 
-                        <button class="btn btn-primary" type="button" ng-repeat="filter in selectedSchemaFilters" ng-click="removeFilter(filter)"
+                        <button class="btn btn-default" type="button" ng-repeat="filter in selectedSchemaFilters" ng-click="removeFilter(filter)"
                                 style="margin-right:2px;margin-bottom:2px">
                             {{filter.isTerm ? (filter.value|term) : filter.value}}
                              <!-- <span class="badge" >{{filter.count}}</span> -->

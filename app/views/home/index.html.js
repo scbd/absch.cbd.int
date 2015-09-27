@@ -19,26 +19,33 @@ define(['app','/app/js/common.js','moment',
                 $scope.meetings = result.data;
         });
         $scope.locale = 'en';
+        //var today= moment();
         var today= moment();
-        var entry= moment("2014-10-11T24:00:00-04:00");
+        var entry= moment("2014-10-12");
         //$scope.Math = window.Math;
         //$scope.daysUntilEntry = $scope.Math.floor(entry.diff(today, 'milliseconds', true)/86400000);
-
         $scope.entryintoforce = today.diff(entry, 'hours', true) >= 0 ? true:false;
-        
+        //scope.daysSinceEntry = 
    
-
         $scope.yearsSinceEntry = today.diff(entry, 'years', true);
         var years = Math.floor($scope.yearsSinceEntry);
-        $scope.monthsSinceEntry = today.diff(( entry.add(years, 'years')), 'months', true); 
-        var months = Math.floor($scope.monthsSinceEntry);
-        $scope.daysSinceEntry = today.diff(( entry.add(months, 'months')), 'days', true);
-        var days = Math.floor($scope.daysSinceEntry);
         
+        var monthsYears = entry;
+        if(years > 1){
+            monthsYears = entry.add( years-1, 'year');
+            $scope.monthsSinceEntry = today.diff(monthsYears, 'month', true) - entry.diff(monthsYears, 'month', true); 
+        }
+        else{
+            $scope.monthsSinceEntry = today.diff(monthsYears, 'month', true) ; 
+        }
+        var months = Math.floor($scope.monthsSinceEntry);
+        monthsYears = monthsYears.add(months, 'month');
+        $scope.daysSinceEntry = today.diff(monthsYears, 'days', true);
+        var days = Math.round($scope.daysSinceEntry) ;
+
         $scope.yearsSinceEntry = years;
         $scope.monthsSinceEntry = months;
         $scope.daysSinceEntry = days;
-
     	//============================================================
     	//
     	//

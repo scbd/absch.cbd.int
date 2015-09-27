@@ -55,13 +55,12 @@
 							</div>
 						</div>
 						
-						<div class="row">
+						<div class="row" ng-if="document.organizationsRef">
 							<div class="col-xs-12">
-								<div class="km-control-group" name="organizations" caption="Reference to the authoring organisation(s) ">
+								<div class="km-control-group" name="organizations" caption="Authoring organisation(s) ">
 									<field-embed-contact multiple ng-model="document.organizationsRef" organization-only locales="document.header.languages"
 									caption="Add organizations »">
 									</field-embed-contact>
-
 								</div>
 							</div>
 						</div>
