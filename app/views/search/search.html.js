@@ -203,7 +203,7 @@ define(['app','underscore','/app/js/common.js',
                 orderByFields = 'createdDate_dt desc';
                 
             if($scope.recordType == 'reference')
-                orderByFields = 'title_t asc';
+                orderByFields = 'title_s asc';
 
             var queryParameters
             if($scope.previewType == 'list' || $scope.recordType == 'reference'){
