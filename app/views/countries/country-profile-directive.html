@@ -337,10 +337,12 @@
 
                         <div class="row" ng-show="showMSR">
                             <div style="padding:10px; margin:0 20px;"><legend name="lblMSR" style="display:none"></legend>
-                                <div class="row table-hover table-msr" ng-hide="absMeasure.length==0" >
+                                <div class="row table-hover table-msr" ng-hide="absMeasure.length==0" style="padding-left:5px;">
                                     <div class="col-lg-1 col-md-1 col-xs-1 tableheader">
-                                        <md-checkbox md-no-ink aria-label="Select All" ng-model="measureMatrixDocuments.selectAll" ng-click="selectAllForMatrix()" class="md-primary">Matrix
-                                        </md-checkbox>
+                                        <md-checkbox md-no-ink aria-label="Select All" 
+                                        ng-model="measureMatrixDocuments.selectAll" ng-click="selectAllForMatrix()" 
+                                        class="md-primary">
+                                        </md-checkbox>Matrix
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-xs-3 tableheader" ng-click="sortMeasure='title_t';reverseMeasure=!reverseMeasure">name
                                         <i class="fa" ng-class="{'fa-caret-up':(sortMeasure=='title_t' && reverseMeasure),'fa-caret-down':(sortMeasure=='title_t' && !reverseMeasure)}"></i>
@@ -389,10 +391,12 @@
                                 </div>
 
                             </div>
-                             <div style="margin:0 20px;margin-top:20px;" ng-hide="absMeasure.length==0" >
+                             <div style="margin:0 20px;margin-top:20px;" ng-hide="measureMatrixDocuments.length==0" >
                                 <div>
-                                    <p class="tableheader" style="border-bottom:1px solid #ddd;">measures matrix</p>
-                                        <div measure-matrix-countries-directive documents="measureMatrixDocuments"></div>
+                                    <p class="tableheader" style="border-bottom:1px solid #ddd;">
+                                       {{(measureMatrixDocuments|filter:{measureMatrix:true}).length}} selected for measures matrix
+                                    </p>
+                                        <div ng-hide="(measureMatrixDocuments|filter:{measureMatrix:true}).length==0" measure-matrix-countries-directive documents="measureMatrixDocuments"></div>
                                 </div>
                             </div>
 
