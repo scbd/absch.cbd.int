@@ -161,10 +161,10 @@
                             <span ng-if="term.measureType=='linked'">Related to</span>
                             <span ng-if="term.measureType=='amended'">Amended by</span>
                             <!--<a target="_new" href="/database/measure/{{term.measure|uniqueIDWithoutRevision}}">-->                                
-                               <i class="fa fa-star color-green" style="font-size:10px;" ></i> {{term.title||term.name | lstring:locale}}
+                               <span class="color-blue"> {{term.title||term.name | lstring:locale}} </span>
                             <!--</a>-->                               
                         </span>
-                         <span ng-if="sections[term.identifier]" class="color-blue bold">: {{sections[term.identifier] | lstring:locale}}</span>
+                         <span ng-if="sections[term.identifier]" class="color-blue bold"> ( {{sections[term.identifier] | lstring:locale}} ) </span>
                         <i class="fa fa-chevron-circle-up pull-right hand" ng-click="term.showUp=!term.showUp;showHideNode(term.identifier)" ng-show="!term.showUp" ng:if="term.level<2"></i>
                         <i class="fa fa-chevron-circle-down pull-right hand" ng-click="term.showUp=!term.showUp;showHideNode(term.identifier)" ng-show="term.showUp" ng:if="term.level<2"></i>
 
