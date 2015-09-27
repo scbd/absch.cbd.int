@@ -81,7 +81,7 @@
                 <h1>No records found.</h1>
             </div>
 
-            <div ng-repeat="document in transformedDocuments | filter:advanceFilter | filter:filterCategory "
+            <div ng-repeat="document in transformedDocuments | filter:advanceFilter | filter:filterCategory | orderBy:sortOrder "
              style="border-top:1px solid #ddd;border-bottom:1px solid #ddd;border-right:1px solid #ddd;">
 
                 <div id="Result">
@@ -229,14 +229,14 @@
 
                                             <span style="font-weight:bold;padding:0;margin:0;position:relative;top:-5px;">{{key|schemaNamePlural}} </span>
 
-                                            <a style="padding:0;margin:0;position:relative;top:-5px;" ng-if="key=='measure'" href="/search/countries/{{country.code.toUpperCase()}}/measure-matrix" > ( <i class="fa fa-table"></i>  measures matrix) </a> 
+                                            <!--<a style="padding:0;margin:0;position:relative;top:-5px;" ng-if="key=='measure'" href="/search/countries/{{country.code.toUpperCase()}}/measure-matrix" > ( <i class="fa fa-table"></i>  measures matrix) </a> -->
                                         </span>
                                         
                                          <span class="pull-right badge bg-darkgrey">{{schema.length}}</span>
                                 </div>
                                 <div class="row">
                                     <div style="padding:10px; margin:0 10px;">
-                                        <div class="row table-hover table-msr" ng-repeat="doc in schema">
+                                        <div class="row table-hover table-msr" ng-repeat="doc in schema | orderBy:['sort1', 'sort2', 'sort3']">
                                             <div class="row border">
                                                 <!-- <a nhref="/search/new/measurematrix/countries/{{country.code}}" class="">
                                                     <i class="fa fa-bar-chart"></i>
@@ -249,9 +249,12 @@
                                                     <span class="bold color-litegrey" ng-if="doc.type.indexOf('ABS-FP') >= 0 ">ABS NFP</span>
                                                     <span class="bold color-litegrey" ng-if="doc.type.indexOf('ABS-FP') < 0 "> CBD NFP</span>
                                                     <!-- <span class="bold color-litegrey" ng-if="key!= 'focalPoint' ">{{key|schemaShortName}}</span> -->
-                                                    <span>{{doc.title}}</span>
-                                                     <strong ng-if="doc.ownerGovernment">
-                                                       (Regional/Multilateral measure registered by {{doc.ownerGovernment|term}})
+                                                    <span>{{doc.title}} </span>
+                                                    <strong> 
+                                                        <span class="color-litegrey" style="font-size:12px;text-transform:uppercase;" ng-if="doc.meta1">| {{doc.meta1}} <span ng-if="doc.ownerGovernment">registered by {{doc.ownerGovernment|term}}</span> </span>
+                                                        <span class="color-litegrey" style="font-size:12px;text-transform:uppercase;" ng-if="doc.meta2">| {{doc.meta2}} </span>
+                                                        <span class="color-litegrey" style="font-size:12px;text-transform:uppercase;" ng-if="doc.meta3">| {{doc.meta3}} </span>
+                                                        
                                                     </strong>
                                                 </div>
                                                 <div class="row" ng-if="doc.displayDetails">

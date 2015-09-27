@@ -226,7 +226,7 @@ define(['app','underscore','/app/js/common.js',
                 queryParameters = {
                     'q': q + ' AND government_s:*',
                     'sort': 'government_EN_t asc, createdDate_dt desc, title_t asc',
-                    'fl': 'id,identifier_s,title_t,description_t,url_ss,schema_EN_t,date_dt,government_s,government_EN_t,schema_s,summary_EN_t,jurisdiction_EN_t, type_ss, uniqueIdentifier_s,ownerGovernment_s',
+                    'fl': 'id,identifier_s,title_t,description_t,url_ss,schema_EN_t,date_dt,government_s,government_EN_t,schema_s,summary_EN_t,jurisdiction_EN_t,type_ss,uniqueIdentifier_s,ownerGovernment_s,type_EN_t,status_EN_t',
                     'wt': 'json',
                     'start': $scope.currentPage * $scope.itemsPerPage,
                     'rows': $scope.itemsPerPage,

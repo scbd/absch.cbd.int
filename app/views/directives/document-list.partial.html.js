@@ -26,6 +26,12 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                     $scope.schemaTypes = schemaTypes;
                     $scope.schemaTypes.push('focalPoint');
                     $scope.loading = true;
+                    
+                   
+                    $scope.sortOrder = 'createdDateOn';
+                    
+                    if (document.recordtype == "referenceRecord")
+                        $scope.sortOrder = 'title';
 
                     $scope.getDocumentId = function(document) {
 
@@ -185,15 +191,75 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                                                             // country.schemaList[document.schema_s].orderKey = getSortOrderKey(document.schema_s);
                                                             country.schemaList[document.schema_s]  = [];
                                                         }
+                                                        
+                                                        var sort1=0;
+                                                        var sort2=0;
+                                                        var sort3=0;
+                                                        var meta1 ="";
+                                                        var meta2 ="";
+                                                        var meta3 ="";
+                                                        
+                                                        if(document.schema_s == "measure"){
+                                                            
+                                                            meta1=document.jurisdiction_EN_t;
+                                                            if(document.jurisdiction_EN_t =="Regional / Multilateral")
+                                                                sort1 = 1;
+                                                            if(document.jurisdiction_EN_t =="National / Federal")
+                                                                sort1 = 2;
+                                                            if(document.jurisdiction_EN_t =="Sub-national")
+                                                                sort1 = 3;
+                                                            if(document.jurisdiction_EN_t =="Community")
+                                                                sort1 = 4;
+                                                            if(document.jurisdiction_EN_t =="Other")
+                                                                sort1 = 5;
+                                                         
+                                                         
+                                                            meta2 =document.type_EN_t;
+                                                            if(document.type_EN_t =="Policy Document")
+                                                                sort2 = 1;
+                                                            if(document.type_EN_t =="Law")
+                                                                sort2 = 2;
+                                                            if(document.type_EN_t =="Regulatory or Administrative Measures")
+                                                                sort2 = 3;
+                                                            if(document.type_EN_t =="Guidelines")
+                                                                sort2 = 4;
+                                                            if(document.type_EN_t =="Strategy / Action Plan")
+                                                                sort2 = 5;
+                                                            if(document.type_EN_t =="Explanatory Information")
+                                                                sort2 = 6;
+                                                            if(document.type_EN_t =="Other")
+                                                                sort2 = 7;
+                                                                
+                                                            meta3 =document.status_EN_t;
+                                                            
+                                                            if(document.status_EN_t =="Legally binding ")
+                                                                sort3 = 1;
+                                                            if(document.status_EN_t =="Not legally binding")
+                                                                sort3 = 2;
+                                                            if(document.status_EN_t =="Draft")
+                                                                sort3 = 3;
+                                                            if(document.status_EN_t =="Retired")
+                                                               sort3 = 4;
+                                                        
+                                                            
+                                                        }
+                                                        
+                                                        
                                                         country.schemaList[document.schema_s].push({
-                                                            id          :   document.id,
-                                                            identifier_s:   document.identifier_s,
-                                                            title       :   document.title_t,
-                                                            schema      :   document.schema_s,
-                                                            type        :   document.type_ss,
-                                                            government  :   {identifier:document.government_s||country.code},
-                                                            ownerGovernment  :  document.ownerGovernment_s ? {identifier:document.ownerGovernment_s} : undefined,
-                                                            jurisdiction     :   document.jurisdiction_s
+                                                            'id '         :   document.id,
+                                                            'identifier_s':   document.identifier_s,
+                                                            'title'      :   document.title_t,
+                                                            'schema'    :   document.schema_s,
+                                                            'type'        :   document.type_ss,
+                                                            'government'  :   {identifier:document.government_s||country.code},
+                                                            'ownerGovernment'  :  document.ownerGovernment_s ? {identifier:document.ownerGovernment_s} : undefined,
+                                                            'jurisdiction'     :   document.jurisdiction_s,
+                                                            'meta1'        :   meta1,
+                                                            'meta2'        :   meta2,
+                                                            'meta3'        :   meta3,
+                                                            'sort1' : sort1,
+                                                            'sort2' : sort2,
+                                                            'sort3' : sort3
                                                         });
                                                     });
                                                 }
@@ -458,6 +524,49 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                                 output.status = document.status_EN_t;
                                 if (output.status) output.metadata.push(output.status);
                             }
+                            
+                            if(document.type_EN_t =="Policy Document")
+                                output.type_sort = 1;
+                            if(document.type_EN_t =="Law")
+                                output.type_sort = 2;
+                            if(document.type_EN_t =="Regulatory or Administrative Measures")
+                                output.type_sort = 3;
+                            if(document.type_EN_t =="Guidelines")
+                                output.type_sort = 4;
+                            if(document.type_EN_t =="Strategy / Action Plan")
+                                output.type_sort = 5;
+                            if(document.type_EN_t =="Explanatory Information")
+                                output.type_sort = 6;
+                            if(document.type_EN_t =="Other")
+                                output.type_sort = 7;
+                                
+                            output.metadata.push(output.type_sort);
+                            
+                            if(document.status_EN_t =="Legally binding ")
+                             output.status_sort = 1;
+                            if(document.status_EN_t =="Not legally binding")
+                                output.status_sort = 2;
+                            if(document.status_EN_t =="Draft")
+                                output.status_sort = 3;
+                            if(document.status_EN_t =="Retired")
+                                output.status_sort = 4;
+                                
+                            output.metadata.push(output.status_sort);
+        
+                            if(document.jurisdiction_EN_t =="Regional / Multilateral")
+                                output.jurisdiction_sort = 1;
+                            if(document.jurisdiction_EN_t =="National / Federal")
+                                output.jurisdiction_sort = 2;
+                            if(document.jurisdiction_EN_t =="Sub-national")
+                                output.jurisdiction_sort = 3;
+                            if(document.jurisdiction_EN_t =="Community")
+                                output.jurisdiction_sort = 4;
+                            if(document.jurisdiction_EN_t =="Other")
+                                output.jurisdiction_sort = 5;
+                                
+                            output.metadata.push(output.jurisdiction_sort);
+
+                            
                         } else if (document.schema_s == 'focalPoint' || document.schema_s == 'database') {
                             output.recordtype = "nationalRecord";
                             output.typeList = document.type_ss;
