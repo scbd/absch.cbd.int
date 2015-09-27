@@ -575,7 +575,7 @@ app.directive('searchFilterSchemas', function ($http) {
                 }
                 
                 if(documentSchema=='PARTIES'){
-                    $scope.queryPartyStatus ="government_s:(ae al bt by cd cg ch ci bw do dk hu es eg fj fm ga et gm gn gw hn id gt ke jo in km kz la kh mg mh mm mn mu mw mx mz na ne no pa pe sc rw sy tj ug uy za ws bj bi bf gy vn vu sd eu ls kg)";
+                   $scope.queryPartyStatus ="government_s:(ae al bt by cd cg ch ci bw do dk hu es eg fj fm ga et gm gn gw hn id gt ke jo in km kz la kh mg mh mm mn mu mw mx mz na ne no pa pe sc rw sy tj ug uy za ws bj bi bf gy vn vu sd eur ls kg)";
                    // $scope.queryPartyStatus = $scope.queryStatus('parties');
                 }
             }
