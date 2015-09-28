@@ -21,13 +21,22 @@ a:active{color: #000;}
                     <label style="font-size:16px;">What do you need help with?</label>
                     <input ng-model="keyword">
                  </md-input-container>
+                 
+                  <md-content ng-if="keyword" class="bg-litegrey" style="padding-bottom:30px;">
+                      <div ng-repeat="term in faqs | filter:keyword">
+                           <a href="#" ng-click="scrollTo(term._id);" class="bold color-blue"> <i class="fa fa-question-circle color-blue"></i>  {{term.title}}</a>
+                      </div>
+                  </md-content>
+                 
+                 
+                 
                  <md-content >
                     <div layout="column" layout-align="top center">
                         <md-list>
-                            <md-list-item class="md-1-line" ng-repeat="term in faqs | filter:keyword" id="{{term._id}}" >
+                            <md-list-item class="md-1-line" ng-repeat="term in faqs " id="{{term._id}}" >
 
                               <div class="md-list-item-text"> 
-                                  <h3  ng-click="show=!show">
+                                  <h3  ng-click="show=!show" style="cursor:pointer;">
                                       {{term.title}}
                                      <a ng-if="isAdmin()" href="/help/edit/faq/{{term._id}}" target="edit"><i class="fa fa-pencil-square"></i></a>
                                   </h3>
@@ -39,6 +48,7 @@ a:active{color: #000;}
                                                     <a href="#" ng-click="scrollTo(rel);" class="bold color-blue">{{getTitle(rel)}}</a>
                                             </div>
                                         </div>
+                                        <div class="pull-right"><a href="#"  scroll-to="anchorTop" class="color-litegrey"><i class="fa fa-arrow-circle-up"></i> back to top</a></div>
                                   </div>
                                    <md-divider ng-if="!$last"></md-divider>
                                 </div>
