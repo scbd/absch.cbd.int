@@ -332,6 +332,30 @@ label{width:100%;}
                         <div>
                             
                             
+                            
+                               
+                     <div class="btn-group" style="width:100%;padding:0;margin:0;">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                            style="width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;padding:0;margin:0;">
+                                <div style="font-size:11px;color:#333;font-weight:bold;padding:0 0 10px 0;margin:0;">Order results by</div>
+                                <div ng-show="!orderReferenceBy" style="color:#AAA;font-weight:bold;padding:0;margin:0;">Order results by <span class="pull-right"><i class="caret"></i></span></div>
+                                <div ng-show="orderReferenceBy">
+                                    <div style="padding-left:3px;margin-right:0;">
+                                        <span ng-show="orderReferenceBy=='title_s asc'"> alphabetical </span>
+                                        <span ng-show="orderReferenceBy=='createdDate_dt desc'"> most recent </span>
+                                        <span class="pull-right"><i class="caret color-darkgrey"></i></span>
+                                    </div>
+                                </div>
+                            </button>
+                            <ul class="dropdown-menu ddm" >
+                                 <li><a href="#" ng-click="orderReferenceBy='title_s asc';"> alphabetical</a></li>
+                                 <li> <a href="#" ng-click="orderReferenceBy='createdDate_dt desc';">   most recent  </a></li>
+                            </ul>
+                        </div>
+                            
+                            
+                            
+                            
                         <div style="padding-bottom:10px;">
                         <div style="color:#333;font-size:11px;font-weight:bold;margin-right:0;padding-bottom:10px;padding-top:12px;">Filter by keyword</div>
                         <input ng-model="keyword" placeholder="keyword" style="width:100%;border:0;border-bottom:1px solid #ddd;">

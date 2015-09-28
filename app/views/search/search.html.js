@@ -99,7 +99,7 @@ define(['app','underscore','/app/js/common.js',
         var queryCanceler = null;
         var refreshTimeout = null;
 
-        
+        $scope.orderReferenceBy = "title_s acs";
 
         // $scope.loaded          = false;
         $scope.itemsPerPage    = 25;
@@ -202,8 +202,9 @@ define(['app','underscore','/app/js/common.js',
             if($scope.recordType != 'national')
                 orderByFields = 'createdDate_dt desc';
                 
-            if($scope.recordType == 'reference')
-                orderByFields = 'title_s asc';
+            if($scope.recordType == 'reference'){
+                orderByFields = $scope.orderReferenceBy;
+            }
 
             var queryParameters
             if($scope.previewType == 'list' || $scope.recordType == 'reference'){
@@ -362,7 +363,7 @@ define(['app','underscore','/app/js/common.js',
         $scope.$watch('queryRegion',     function() { $scope.currentPage=0; refresh(); });
         $scope.$watch('queryDate',       function() { $scope.currentPage=0; refresh(); });
         $scope.$watch('keyword',         function() { $scope.currentPage=0; refresh(); });
-        $scope.$watch('orderBy',         function() { $scope.currentPage=0; refresh(); });
+        $scope.$watch('orderReferenceBy',function() { $scope.currentPage=0; refresh(); });
         $scope.$watch('previewType',     function(newValue, oldValue) {
             if(newValue && oldValue && $scope.rawDocs){
                 $scope.rawDocs = undefined;

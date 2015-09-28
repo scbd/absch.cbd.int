@@ -22,7 +22,7 @@ app.directive('searchFilterSchemas', function ($http) {
         {
             
             $scope.groupby=true;
-            
+            $scope.orderReferenceBy = 'title_s asc';
             $scope.recordType = $route.current.$$route.type;
             if($scope.recordType == 'reference'){
                 $scope.previewType = 'list';
@@ -710,6 +710,11 @@ app.directive('searchFilterSchemas', function ($http) {
                  if($scope.recordType == 'national' || $scope.recordType == 'reference' )
                     $scope.buildQuery();
             });
+            
+            $scope.$watch('orderReferenceBy', function(newVal){
+                 $scope.$parent.orderReferenceBy= newVal;
+            });
+            
             
              $scope.$watch('partyStatus', function(newVal){
                  if($scope.recordType == 'national')
