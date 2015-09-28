@@ -30,10 +30,10 @@ a:active{color: #000;}
                  
                  
                  
-                 <md-content >
+                 <md-content class="bg-litegrey">
                     <div layout="column" layout-align="top center">
                         <md-list>
-                            <md-list-item class="md-1-line" ng-repeat="term in faqs " id="{{term._id}}" >
+                            <md-list-item class="md-1-line" ng-repeat="term in faqs " id="{{term._id}}" ng-class="{'bg-white': show}">
 
                               <div class="md-list-item-text"> 
                                   <h3  ng-click="show=!show" style="cursor:pointer;">
