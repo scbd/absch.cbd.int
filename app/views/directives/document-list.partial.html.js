@@ -525,46 +525,46 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                                 if (output.status) output.metadata.push(output.status);
                             }
                             
-                            if(document.type_EN_t =="Policy Document")
-                                output.type_sort = 1;
-                            if(document.type_EN_t =="Law")
-                                output.type_sort = 2;
-                            if(document.type_EN_t =="Regulatory or Administrative Measures")
-                                output.type_sort = 3;
-                            if(document.type_EN_t =="Guidelines")
-                                output.type_sort = 4;
-                            if(document.type_EN_t =="Strategy / Action Plan")
-                                output.type_sort = 5;
-                            if(document.type_EN_t =="Explanatory Information")
-                                output.type_sort = 6;
-                            if(document.type_EN_t =="Other")
-                                output.type_sort = 7;
+                            // if(document.type_EN_t =="Policy Document")
+                            //     output.type_sort = 1;
+                            // if(document.type_EN_t =="Law")
+                            //     output.type_sort = 2;
+                            // if(document.type_EN_t =="Regulatory or Administrative Measures")
+                            //     output.type_sort = 3;
+                            // if(document.type_EN_t =="Guidelines")
+                            //     output.type_sort = 4;
+                            // if(document.type_EN_t =="Strategy / Action Plan")
+                            //     output.type_sort = 5;
+                            // if(document.type_EN_t =="Explanatory Information")
+                            //     output.type_sort = 6;
+                            // if(document.type_EN_t =="Other")
+                            //     output.type_sort = 7;
                                 
-                            output.metadata.push(output.type_sort);
+                            // output.metadata.push(output.type_sort);
                             
-                            if(document.status_EN_t =="Legally binding ")
-                             output.status_sort = 1;
-                            if(document.status_EN_t =="Not legally binding")
-                                output.status_sort = 2;
-                            if(document.status_EN_t =="Draft")
-                                output.status_sort = 3;
-                            if(document.status_EN_t =="Retired")
-                                output.status_sort = 4;
+                            // if(document.status_EN_t =="Legally binding ")
+                            //  output.status_sort = 1;
+                            // if(document.status_EN_t =="Not legally binding")
+                            //     output.status_sort = 2;
+                            // if(document.status_EN_t =="Draft")
+                            //     output.status_sort = 3;
+                            // if(document.status_EN_t =="Retired")
+                            //     output.status_sort = 4;
                                 
-                            output.metadata.push(output.status_sort);
+                            // output.metadata.push(output.status_sort);
         
-                            if(document.jurisdiction_EN_t =="Regional / Multilateral")
-                                output.jurisdiction_sort = 1;
-                            if(document.jurisdiction_EN_t =="National / Federal")
-                                output.jurisdiction_sort = 2;
-                            if(document.jurisdiction_EN_t =="Sub-national")
-                                output.jurisdiction_sort = 3;
-                            if(document.jurisdiction_EN_t =="Community")
-                                output.jurisdiction_sort = 4;
-                            if(document.jurisdiction_EN_t =="Other")
-                                output.jurisdiction_sort = 5;
+                            // if(document.jurisdiction_EN_t =="Regional / Multilateral")
+                            //     output.jurisdiction_sort = 1;
+                            // if(document.jurisdiction_EN_t =="National / Federal")
+                            //     output.jurisdiction_sort = 2;
+                            // if(document.jurisdiction_EN_t =="Sub-national")
+                            //     output.jurisdiction_sort = 3;
+                            // if(document.jurisdiction_EN_t =="Community")
+                            //     output.jurisdiction_sort = 4;
+                            // if(document.jurisdiction_EN_t =="Other")
+                            //     output.jurisdiction_sort = 5;
                                 
-                            output.metadata.push(output.jurisdiction_sort);
+                            // output.metadata.push(output.jurisdiction_sort);
 
                             
                         } else if (document.schema_s == 'focalPoint' || document.schema_s == 'database') {
