@@ -246,7 +246,7 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                                                         
                                                         
                                                         country.schemaList[document.schema_s].push({
-                                                            'id '         :   document.id,
+                                                            'id'         :   document.id,
                                                             'identifier_s':   document.identifier_s,
                                                             'title'      :   document.title_t,
                                                             'schema'    :   document.schema_s,
