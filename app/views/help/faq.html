@@ -28,8 +28,6 @@ a:active{color: #000;}
                       </div>
                   </md-content>
                  
-                 
-                 
                  <md-content class="bg-litegrey">
                     <div layout="column" layout-align="top center">
                         <md-list>
@@ -39,8 +37,10 @@ a:active{color: #000;}
                                   <h3  ng-click="show=!show" style="cursor:pointer;">
                                       {{term.title}}
                                      <a ng-if="isAdmin()" href="/help/edit/faq/{{term._id}}" target="edit"><i class="fa fa-pencil-square"></i></a>
+                                      <span ng-if="show" class="pull-right" ng-click="show=false"><i class="material-icons">close</i></span>
                                   </h3>
                                   <div class="color-grey" ng-if="show" >
+                                     
                                       <p  style="padding:20px 0;"  ng-bind-html="term.description|lstring"></p>
                                        <div style="padding-bottom:20px;" class="color-grey" ng-show="term.related">
                                        <strong>Related:</strong>
