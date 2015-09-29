@@ -145,6 +145,7 @@
         </tr>
     </table>
     <script type="text/ng-template" id="/app/views/search/matrix/measure-matrix.directive/abs/inner">
+
         <table class="table" ng:if="term.isChildSelected || (!term.broaderTerms && term.narrowerTerms)">
             <tr ng:class="{'elementMeasure':term.isMeasure, 'whiteTopBorder':term.hasMeasure}" >
                 <td class="matrixheaderColumn rightBorder " 
@@ -159,20 +160,14 @@
                         </span>
                         <span ng-if="term.broaderTerms && term.isMeasure">
                             <span ng-if="term.measureType=='linked'">Related to</span>
-                            <span ng-if="term.measureType=='amended'">Amended by</span>
-                            <!--<a target="_new" href="/database/measure/{{term.measure|uniqueIDWithoutRevision}}">-->                                
-                               <span class="color-blue"> {{term.title||term.name | lstring:locale}} </span>
-                            <!--</a>-->                               
+                            <span ng-if="term.measureType=='amended'">Amended by</span>                                                          
+                            <span class="color-blue"> {{term.title||term.name | lstring:locale}} </span>                                         
                         </span>
                          <span ng-if="sections[term.identifier]" class="color-blue bold"> ( {{sections[term.identifier] | lstring:locale}} ) </span>
                         <i class="fa fa-chevron-circle-up pull-right hand" ng-click="term.showUp=!term.showUp;showHideNode(term.identifier)" ng-show="!term.showUp" ng:if="term.level<2"></i>
                         <i class="fa fa-chevron-circle-down pull-right hand" ng-click="term.showUp=!term.showUp;showHideNode(term.identifier)" ng-show="term.showUp" ng:if="term.level<2"></i>
 
                 </td>
-                <!--<td style="width:48.99%" ng:class="{'paddingleft6':term.level==2 , 'paddingleft9':term.level==3, 'paddingleft12':term.level==4}">
-                    <strong ng-show="!term.broaderTerms">{{sections[term.identifier] | lstring:locale}}</strong>
-                    <span ng-show="term.broaderTerms">{{sections[term.identifier] | lstring:locale}}</span>
-                </td>-->
             </tr>
             <tr ng:if="term.narrowerTerms && term.narrowerTerms.length > 0" id="{{term.identifier}}">
                 <td class="matrixheaderColumn rightBorder subList1 cover50 noBottomBorder noTopBorder"
