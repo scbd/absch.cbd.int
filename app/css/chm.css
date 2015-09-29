@@ -183,6 +183,19 @@
     padding:20px;
     text-align:center!important;
 }
+
+.footer-links  ul{
+ display: inline;
+    
+}
+
+.footer-links  li{
+    display: inline;
+    list-style-type: none;
+    padding-left:20px;
+}
+
+
 .disabled, .disabled > *{
     color:#BBB!important;
 }

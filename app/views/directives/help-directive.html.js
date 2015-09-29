@@ -38,13 +38,13 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                         //         '   </div>' +
                                         //         ' <div class="help-content" >{{content}}<div>';
                                         
-                                        var sectionTemplate = '<div ng-if="showHelp.show" class="md-whiteframe-z1 alert alert-info alert-help" role="alert">  <div style="border-bottom:1px solid #BBB;margin-bottom:5px;"><strong><i class="fa fa-info-circle"></i> {{title}} <a class="pull-right color-grey" ng-click="showHelp.show=false;Feedback_helpOff();" href="#" style="text-transform:uppercase;font-size:10px;" ><i class="fa fa-times"></i> Turn off help <i class="fa fa-info-circle"></i> </a></strong></div> {{content}}</div>';
+                                        var sectionTemplate = '<div ng-if="showHelp.show" class="help-section">  <div style="" class="help-section-title"><i class="fa fa-info-circle"></i> {{title}} <a class="help-section-close" ng-click="showHelp.show=false;Feedback_helpOff();" href="#" style="" ><i class="fa fa-times"></i> Turn off help <i class="fa fa-info-circle"></i> </a></div> <div class="help-section-content">{{content}}</div></div>';
                                        
                                         var formTemplate = sectionTemplate;
                                                 
-                                        var inlineTemplate= '<div class="md-whiteframe-z1 help-inline-content" ng-if="showHelp.show"> <span><i class="fa fa-info-circle"></i> {{content}}</span> <div>';
+                                        var inlineTemplate= '<div class="help-inline-content" ng-if="showHelp.show"> <span><i class="fa fa-info-circle"></i> {{content}}</span> <div>';
                                     
-                                        var contentTemplate= '<div class="simple-content">{{content}}<div>';
+                                        var contentTemplate= '<div class="help-simple-content">{{content}}<div>';
                                     
                                     
                                         var controlTemplate = sectionTemplate;//'<span class="help-inline" ng-if="showHelp.show"><i class="material-icons">help_outline</i> {{content}}</span>'

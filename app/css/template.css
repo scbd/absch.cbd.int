@@ -775,9 +775,17 @@ footer .logo {
 
 
 
-.help-content{padding:3px 10px; background-color: #efefef; color:#666;}
-.help-title{padding:3px 10px; background-color: #FFC0CB; color:#666;font-size:18px;}
-.help-section i {position:relative; top:4px;}
+
+.help-color{color:#FF4081}
+.help-section{padding:10px;background-color:#FFC0CB;margin-bottom:20px;}
+.help-section i{position:relative;top:0px;}
+
+.help-section-title{border-bottom:1px solid #BBB;margin-bottom:5px;}
+.help-section-close{float:right;text-transform:uppercase;font-size:10px;font-weight: 500;color:#333;}
+.help-section-content{};
+
 .help-inline{padding:3px; color:#666; font-size: 12px; font-weight:bold;  background-color: #FFC0CB;}
-.help-inline i {font-size: 14px;position:relative; top:2px;}
-.help-section h4 {color:#666; background-color: #FFC0CB;padding-bottom:5px;position:relative;top:-10px;}
+.help-inline-content{}
+
+.help-simple-content{}
+
