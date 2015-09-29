@@ -314,7 +314,7 @@ define(['app', 'underscore','angular', '/app/js/common.js'], function(app, _, an
                         if (term.narrowerTerms) {
                             term.isChildSelected = updateProperties(term.narrowerTerms, level + 1);
                         }
-                        else {
+                        if(!term.isChildSelected) {
                             if($scope.sections[term.identifier])
                                 term.isChildSelected = true;
                         }
