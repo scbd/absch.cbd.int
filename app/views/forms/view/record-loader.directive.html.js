@@ -36,7 +36,8 @@ app.directive('recordLoader', [function () {
 			hide: "@"
 		},
 		link: function($scope) {
-
+			if(!$scope.linkTarget || $scope.linkTarget == '')
+				$scope.linkTarget = '_new';
 			//debugger;
 			$scope.internalDocument     = undefined;
 			$scope.internalDocumentInfo = undefined;
