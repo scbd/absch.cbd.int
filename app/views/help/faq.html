@@ -26,11 +26,12 @@ a:active{color: #000;}
                       <div ng-repeat="term in faqs | filter:keyword">
                            <a href="#" ng-click="scrollTo(term._id);" class="bold color-blue"> <i class="fa fa-question-circle color-blue"></i>  {{term.title}}</a>
                       </div>
+                      <div ng-show="!(faqs|filter:keyword).length" class="bold" >No matching FAQs found.</div>
                   </md-content>
                  
-                 <md-content class="bg-litegrey">
-                    <div layout="column" layout-align="top center">
-                        <md-list>
+                 <md-content class="bg-grey1" style="padding-top:0;">
+                    <div layout="column" layout-align="top center"  style="padding-top:0;">
+                        <md-list  style="padding-top:0;">
                             <md-list-item class="md-1-line" ng-repeat="term in faqs " id="{{term._id}}" ng-class="{'bg-white': show}">
 
                               <div class="md-list-item-text"> 

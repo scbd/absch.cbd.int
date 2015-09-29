@@ -174,7 +174,8 @@
     /*background: rgba(25, 25, 25, .05);*/
     min-height:30px;
     color:white;
-    padding-top:5px;
+    padding-top:10px;
+    border-bottom:1px solid #555;
 }
 .footer-cbd-container{
     /*background: rgba(25, 25, 25, .05);*/
@@ -183,6 +184,19 @@
     padding:20px;
     text-align:center!important;
 }
+
+.footer-links  ul{
+ display: inline;
+    
+}
+
+.footer-links  li{
+    display: inline;
+    list-style-type: none;
+    padding-left:20px;
+}
+
+
 .disabled, .disabled > *{
     color:#BBB!important;
 }

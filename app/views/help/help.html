@@ -3,7 +3,7 @@
 
 
 <div ng-controller="HelpController" data-spy="scroll" data-target="#affix-nav"  >
-
+    <div smooth-scroll duration="100" offset="200" ></div>
     <div class="container" style="padding-top:20px;"  help schema="helpPage" delay="10">
 
         <div class="row" style="padding-bottom:30px;">
@@ -126,10 +126,7 @@
             </div>
        </div>-->
        
-       <style>
-           /*.simple-content {}
-            .simple-content li{font-size: 14px; }*/
-       </style>
+   
               
        <div class="row" style="margin-top:50px;">
             <div class="col-xs-12">
@@ -146,7 +143,7 @@
   
         <div class="row" style="margin-top:50px;">
             <div class="col-xs-12">
-                <h1><i class="fa fa-info-circle color-pink"></i> Helpful Information 
+                <h1><i class="fa fa-info-circle help-color"></i> Helpful Information 
                  <span class="pull-right"  ng-if="isAdmin()"> <a href="/help/manage/"><i class="fa fa-pencil-square-o"></i></a></span>
                 </h1>
                 <p>
