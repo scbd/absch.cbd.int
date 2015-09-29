@@ -2,7 +2,6 @@
 
 define(['angular', 'angular-sanitize', 'angular-loading-bar', 'angular-animate','ngAria' ,'ngMaterial',
         'text-angular', 'ngSmoothScroll'
-        /*,'angular-form-controls','angular-storage', 'angular-route', 'angular-cookies', */
     ],
     function(angular) {
 

@@ -9,12 +9,11 @@ define(['app','underscore','/app/js/common.js',
     '/app/views/directives/search-filter-dates.partial.html.js',
     '/app/views/directives/document-list.partial.html.js', 'bootstrap-datepicker','moment',
     '/app/views/directives/help-directive.html.js',
-    '/app/views/search/search-directives/search-national-records-filter-directive.html.js',
-    '/app/views/countries/country-map-list-directive.html.js'],
+    '/app/views/countries/country-map-list-directive.html.js', '/app/js/search-service.js'],
      function (app,_) {
 
-    app.controller('FindController', ['$scope', '$rootScope','showHelp' ,'$http', '$timeout', '$q','realm', '$routeParams','$location','$element','commonjs','$mdSidenav', '$mdUtil', '$mdMedia',
-        function ($scope, $rootScope,showHelp, $http, $timeout, $q, realm, $routeParams,$location, $element, commonjs, $mdSidenav, $mdUtil, $mdMedia) {
+    app.controller('FindController', ['$scope', '$rootScope','showHelp' ,'$http', '$timeout', '$q','realm', '$routeParams','$location','$element','commonjs','$mdSidenav', '$mdUtil', '$mdMedia', 'searchService',
+        function ($scope, $rootScope,showHelp, $http, $timeout, $q, realm, $routeParams,$location, $element, commonjs, $mdSidenav, $mdUtil, $mdMedia, searchService) {
 
             $scope.showHelp = {'show':true,'hasHelp':true, showTour:false};
             $scope.toggleLeft = buildToggler('left');
@@ -295,6 +294,9 @@ define(['app','underscore','/app/js/common.js',
                         //console.log($scope.thematicAreas);
 
                     }).error(function (error) { console.log('onerror'); console.log(error); } );
+                    
+                    searchService.facets({q:queryFacetsParameters.q, f: ['schema_s', 'government_s', 'aichiTarget_REL_ss', 'thematicAreas_ss', 'government_REL_ss']});
+                    
                 }
             }).error(function (error) { console.log('onerror'); console.log(error); });
         };
