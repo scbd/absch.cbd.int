@@ -68,7 +68,7 @@ define(['app', 'underscore','angular', '/app/js/common.js'], function(app, _, an
                     return $q.all([$scope.terms||$scope.termsFn(), other||otherQuery])
                         .then(
                         function(data) { // on success
-                            $scope.terms = data[0];
+                            $scope.terms = data[0].data||data[0];
                             other        = data[1].data||data[1];
                             
                             _.each(elementsForOthers, function(element){
