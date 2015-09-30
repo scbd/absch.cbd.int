@@ -226,12 +226,15 @@
 				</div>
 			</div>
 
-			<div ng-show="document.usage">
+			<div ng-show="document.usage || document.usageConfidential">
 				<label>Indicate if the permit or its equivalent covers commercial and/or non-commercial use</label>
-				<div class="km-value">
+				<div class="km-value" ng-if="document.usage">
 					<ul>
 						<li ng-repeat="term in document.usage">{{term|term}}</li>
 					</ul>
+				</div>
+				<div ng-if="document.usageConfidential">
+					<div class="km-value km-pre confidential">Confidential information</div>
 				</div>
 			</div>
 			<div ng-show="document.usageDescription">
