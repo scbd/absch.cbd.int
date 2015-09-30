@@ -98,10 +98,11 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
             when('/commonformat', {templateUrl: '/app/views/about/about.html',resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/about/common-formats.html',ignoreSubController: true,}).
             when('/commonformat',           { redirectTo:'/about/common-formats' }).
 
-            // when('/help/presentations/:folder/:document_type', {templateUrl: '/app/views/help/presentations/presentation.html',resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/help/presentations/:folder/-',ignoreSubController: true,}).
-            // when('/help/presentations/:folder', { redirectTo: '/help/presentations/:folder/start' }).
+            when('/help/presentations/:folder/:document_type', {templateUrl: '/app/views/help/presentations/presentation.html',resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/help/presentations/:folder/-',ignoreSubController: true,}).
+            when('/help/presentations/:folder', { redirectTo: '/help/presentations/:folder/start' }).
             
              when('/help/presentations', {templateUrl: '/app/views/help/presentations.html',   label:'Presentations and Workshops',   resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/register/contacts.html',}).
+             
 
 
             when('/contacts', {templateUrl: '/app/views/register/register.html',resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/register/contacts.html',}).

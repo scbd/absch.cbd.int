@@ -119,7 +119,9 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
       if (document.informedConsentConfidential) {
         document.informedConsents = undefined;
       }
-
+      if(document.usageConfidential){
+          document.usage = undefined;
+      }
       if (document.expiration=="") {
         document.expiration = undefined;
       }
