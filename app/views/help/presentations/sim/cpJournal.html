@@ -93,17 +93,17 @@
         </div>
 
         <div class="continue"  ng-show="!hasParam('CP_journal')">
-            <a class="btn btn-primary btn-lg" href="notCP" ng-show="hasParam('picmat_research') || hasParam('picmat_commercial')" ng-click="addParam('journal_done')">Continue</a>
-            <a class="btn btn-primary btn-lg" href="userResearch" ng-show="!hasParam('picmat_research') && !hasParam('picmat_commercial')" ng-click="addParam('journal_done')">Continue</a>
+            <a class="btn btn-primary btn-lg" href="/help/presentations/sim/notCP" ng-show="hasParam('picmat_research') || hasParam('picmat_commercial')" ng-click="addParam('journal_done')">Continue</a>
+            <a class="btn btn-primary btn-lg" href="/help/presentations/sim/userResearch" ng-show="!hasParam('picmat_research') && !hasParam('picmat_commercial')" ng-click="addParam('journal_done')">Continue</a>
         </div>
 
         <div class="continue"  ng-show="hasParam('CP_journal') && hasParam('CP_no_exam')">
-            <a class="btn btn-primary btn-lg" href="sendCPC" ng-show="(checkLastParam('user_provides_ircc',3)|| checkLastParam('user_provides_np',3)|| checkLastParam('user_provides_pcountry',3))" ng-click="addParam('journal_done')">Continue</a>
+            <a class="btn btn-primary btn-lg" href="/help/presentations/sim/sendCPC" ng-show="(checkLastParam('user_provides_ircc',3)|| checkLastParam('user_provides_np',3)|| checkLastParam('user_provides_pcountry',3))" ng-click="addParam('journal_done')">Continue</a>
             <a class="btn btn-default btn-lg" href="" ng-show="!(checkLastParam('user_provides_ircc',3)|| checkLastParam('user_provides_np',3)|| checkLastParam('user_provides_pcountry',3))">Please make your choice</a>
         </div>
 
         <div class="continue" ng-show="hasParam('CP_journal') && hasParam('CP_exam')">
-            <a class="btn btn-primary btn-lg" href="sendCPC" ng-show="hasParam('CP_journal') && ((checkLastParam('user_provides_ircc',3)|| checkLastParam('user_provides_np',3)|| checkLastParam('user_provides_pcountry',3)) && (checkLastParam('cp_journal_accepts',3) || checkLastParam('cp_journal_rejects',3)))" ng-click="addParam('journal_done')">Continue</a>
+            <a class="btn btn-primary btn-lg" href="/help/presentations/sim/sendCPC" ng-show="hasParam('CP_journal') && ((checkLastParam('user_provides_ircc',3)|| checkLastParam('user_provides_np',3)|| checkLastParam('user_provides_pcountry',3)) && (checkLastParam('cp_journal_accepts',3) || checkLastParam('cp_journal_rejects',3)))" ng-click="addParam('journal_done')">Continue</a>
             <a class="btn btn-default btn-lg" href="" ng-show="hasParam('CP_journal') && !((checkLastParam('user_provides_ircc',3)|| checkLastParam('user_provides_np',3)|| checkLastParam('user_provides_pcountry',3)) && (checkLastParam('cp_journal_accepts',3) || checkLastParam('cp_journal_rejects',3))) ">Please make your choice</a>
         </div>
 
