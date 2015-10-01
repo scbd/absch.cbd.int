@@ -38,8 +38,8 @@ define(['app','linqjs', 'angular-localizer',
           },300);
       return debounceFn;
     }
-    
-    
+
+
       //==================================
 			//
 			//==================================
@@ -47,7 +47,7 @@ define(['app','linqjs', 'angular-localizer',
          $event.stopImmediatePropagation();
 				 $location.url("/register/" + $filter("mapSchema")(cftype) + "/new");
 			}
-      
+
        //==================================
 			//
 			//==================================
@@ -85,7 +85,7 @@ define(['app','linqjs', 'angular-localizer',
     }
 
     $rootScope.document_types = {
-      
+
 	  	absNationalReport: {
 			abbreviation: 'NR',schemaType:"nationalRecords",
 			title: 'Interim national report on the implementation of the Nagoya Protocol',
@@ -192,7 +192,7 @@ define(['app','linqjs', 'angular-localizer',
         tips: [],
       },
       modelContractualClause: {
-        abbreviation: 'A19-20',schemaType:"referenceRecords",
+        abbreviation: 'A19A20',schemaType:"referenceRecords",
         title: 'Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and Standards ',
         help: '',
         tips: [],
@@ -226,9 +226,9 @@ define(['app','linqjs', 'angular-localizer',
       {"schema":"resource","schemaType":"referenceRecords", "header": "VLR","draftCount":0,"requestCount":0,"publishCount": 0},
       {"schema":"contact","schemaType":"others", "header": "CON","draftCount":0,"requestCount":0,"publishCount": 0},
       {"schema":"absNationalReport","schemaType":"nationalRecords", "header": "NR","draftCount":0,"requestCount":0,"publishCount": 0},
-      {"schema":"modelContractualClause","schemaType":"referenceRecords", "header": "A19-20","draftCount":0,"requestCount":0,"publishCount": 0},
+      {"schema":"modelContractualClause","schemaType":"referenceRecords", "header": "A19A20","draftCount":0,"requestCount":0,"publishCount": 0},
       {"schema":"communityProtocol","schemaType":"referenceRecords", "header": "CPP","draftCount":0,"requestCount":0,"publishCount": 0},
-      
+
 	{"schema":"completedTasks","schemaType":"others", "requestCount":0},
 	{"schema":"pendingTasks","schemaType":"others", "requestCount": 0},
 	{"schema":"urgentTasks","schemaType":"others", "requestCount": 0}
@@ -495,7 +495,7 @@ define(['app','linqjs', 'angular-localizer',
     $scope.$on("documentDraftSaved", function(evt, draftInfo) {
       evt.stopPropagation();
       $scope.editing = false;
-	    $rootScope.updatedRecord = draftInfo;    
+	    $rootScope.updatedRecord = draftInfo;
     });
 
     //============================================================
@@ -514,8 +514,8 @@ define(['app','linqjs', 'angular-localizer',
 		    $scope.showingFeedback = false;
 			$timeout(function(){$location.path('/register/'+$filter("mapSchema")($scope.document_type));},100);
 	  });
-	  $rootScope.updatedRecord = workflowInfo;      
-    
+	  $rootScope.updatedRecord = workflowInfo;
+
     });
 
     //============================================================
@@ -690,6 +690,6 @@ define(['app','linqjs', 'angular-localizer',
       url = '/' + splitURL[1] + '/' + splitURL[2] + '/new';
     }
     $scope.helpSchema = url;
-    
+
   }]);
 });

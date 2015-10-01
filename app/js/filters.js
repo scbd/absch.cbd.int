@@ -26,7 +26,8 @@ define(["app",'/app/js/common.js'], function (app) {
 	}
 
 
-    app.filter("uniqueID", ["IStorage", '$filter', '$q','commonjs', function(storage, $filter, $q, commonjs) {
+    app.filter("uniqueID", ["IStorage", '$filter', '$q','commonjs', 'realm',
+	 						function(storage, $filter, $q, commonjs, realm) {
 		var cacheMap = {};
 
 		return function(term) {
@@ -92,10 +93,11 @@ define(["app",'/app/js/common.js'], function (app) {
                 var government = ''
 				var documentId;
 
+
 				if(document.documentID)
 					documentId = document.documentID;
 				else if(document.id){
-					
+
 						if(document.id.indexOf('_')>0)
 							documentId = commonjs.hexToInteger(document.id.substr(0,document.id.indexOf('_')));
 						else
@@ -110,8 +112,9 @@ define(["app",'/app/js/common.js'], function (app) {
                 else if(document.body && document.body.government)
                     government = document.body.government.identifier;
 
-                var unique = 'ABSCH-' + $filter("schemaShortName")($filter("lowercase")(document.type||document.schema_s||document.schema)) +
-                        (government != '' ? '-' + $filter("uppercase")(government) : '') +
+                var unique = 'ABSCH' + (realm.value.toUpperCase().replace('ABS','').replace('-','')) +
+						'-' + $filter("schemaShortName")($filter("lowercase")(document.type||document.schema_s||document.schema)) +
+                        '-' + (government != '' ?  $filter("uppercase")(government) : 'SCBD') +
                         '-' + documentId + '-' + document.revision;
 				cacheMap[term.identifier] = unique;
 
@@ -197,7 +200,7 @@ define(["app",'/app/js/common.js'], function (app) {
 
 		return function( schema ) {
 			//return mapSchema(schema);
-			
+
 			if(!schema)
 				return schema;
 			if(schema.toLowerCase()=="focalpoint"				) return "National Focal Point";
@@ -282,7 +285,7 @@ define(["app",'/app/js/common.js'], function (app) {
 			//if(schema.toLowerCase()=="meetingdocument" 		||	schema.toLowerCase()=="nfp"	) return "Meeting Document";
 			//if(schema.toLowerCase()=="pressrelease"	 		||	schema.toLowerCase()=="nfp"	) return "Press Release";
 			//if(schema.toLowerCase()=="news"		 			||	schema.toLowerCase()=="nfp"	) return "News";
-			if(schema.toLowerCase()=="modelcontractualclause" 	||	schema.toLowerCase()=="a19-20"	) return "folder";
+			if(schema.toLowerCase()=="modelcontractualclause" 	||	schema.toLowerCase()=="a19a20"	) return "folder";
 			if(schema.toLowerCase()=="communityprotocol" 		||	schema.toLowerCase()=="mpp"	) return "folder";
 
 			return schema;
@@ -310,17 +313,17 @@ define(["app",'/app/js/common.js'], function (app) {
 	app.filter("mapSchema", [function() {
 
 		return function( schema ) {
-			
+
 			return mapSchema(schema);
-			
+
 		};
 	}]);
-	
+
 	function mapSchema(schema){
-		
+
 			if(!schema)
 				return schema;
-		
+
 			if(schema.toLowerCase()=="focalpoint"				) return "FP";
 			if(schema.toLowerCase()=="authority"				) return "CNA";
 			if(schema.toLowerCase()=="contact"				   	) return "CON";
@@ -338,7 +341,7 @@ define(["app",'/app/js/common.js'], function (app) {
             if(schema.toLowerCase()=="meetingdocument"    		) return "MTD";
 			if(schema.toLowerCase()=="news"						) return "NEWS";
 			if(schema.toLowerCase()=="absnationalreport"		) return "NR";
-			if(schema.toLowerCase()=="modelcontractualclause"	) return "A19-20";
+			if(schema.toLowerCase()=="modelcontractualclause"	) return "A19A20";
 			if(schema.toLowerCase()=="communityprotocol"		) return "CPP";
 
 			if(schema.toUpperCase()=="NEWS"				        ) return "news";
@@ -358,14 +361,14 @@ define(["app",'/app/js/common.js'], function (app) {
         	if(schema.toUpperCase()=="PR"			            ) return "pressRelease";
 			if(schema.toUpperCase()=="NR"						) return "absNationalReport";
 
-			if(schema.toUpperCase()=="A19-20"				    ) return "modelContractualClause";
+			if(schema.toUpperCase()=="A19A20"				    ) return "modelContractualClause";
 			if(schema.toUpperCase()=="CPP"				    	) return "communityProtocol";
 			if(schema.toUpperCase()=="RAT"				    	) return "parties";
-			
-			return schema;		
+
+			return schema;
 	}
-	
-	
+
+
 	app.filter('highlight', function($sce) {
 		return function(text) {
 			var phrase = 'to'

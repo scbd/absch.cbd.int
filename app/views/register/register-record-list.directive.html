@@ -120,11 +120,12 @@
 
                     <span ng-show="isDraft(record) && !isPublished(record) && !isRequest(record)">
                         <a href="/register/{{record.type|mapSchema}}/{{record.identifier}}/edit">
-                {{(record.workingDocumentTitle||record.title)|lstring}}
-                </a>
+                        {{(record.workingDocumentTitle||record.title)|lstring}}
+                        </a>
                     </span>
-                    <div style="font-size:11px;font-weight:bold;text-transform:uppercase;color:#666;">
-                        {{record.realm =='ABS-DEV' ? 'ABSDEV' : 'ABSCH'}}-{{record.metadata.schema | mapSchema}}-{{record.metadata.government != null ? record.metadata.government : 'SCBD'}}-{{record.workingDocumentID ? record.workingDocumentID : record.documentID}}<div>
+                    <div style="font-size:11px;font-weight:bold;text-transform:uppercase;color:#666;" ng-if="isPublished(record)">
+                        {{record | uniqueID}}
+                    <div>
                 </td>
                 <td>
                     <div ng-show="record.createdBy">

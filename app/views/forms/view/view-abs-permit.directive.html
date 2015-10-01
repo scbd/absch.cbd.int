@@ -19,9 +19,9 @@
 			<div ng-show="document.government || document.updateReasons">
 				<legend>General information</legend>
 
-				<div ng-show="showPdf && documentInfo">
+				<div ng-show="showPdf && document">
 					<label>ABSCH Unique Identifier</label>
-					<div class="km-value">ABSCH-{{document.government.identifier|uppercase}}-{{documentInfo.documentID}}-{{documentInfo.revision}}</div>
+					<div class="km-value">{{document | uniqueID}}</div>
 				</div>
 
         	     <div ng-show="document.referencePermits">
@@ -237,7 +237,7 @@
 					<div class="km-value km-pre confidential">Confidential information</div>
 				</div>
 			</div>
-			
+
 			<div ng-show="document.usageDescription">
 				<label>Additional information about the specified uses covered by the permit or its equivalent or use restrictions</label>
 				<div class="km-value km-pre"ng-bind-html="document.usageDescription | lstring:locale"></div>
