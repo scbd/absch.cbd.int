@@ -53,7 +53,7 @@ define(['app','underscore','/app/js/common.js',
         var queryCanceler = null;
         var refreshTimeout = null;
 
-        
+
 
         // $scope.loaded          = false;
         $scope.itemsPerPage    = 25;
@@ -197,10 +197,10 @@ define(['app','underscore','/app/js/common.js',
                      var lRawDocs = [];
                      if($scope.rawDocs && $scope.currentPage!=0)
                         lRawDocs = _.clone($scope.rawDocs);
-                        
+
                     _.map(lRawDocs, function(doc){doc.newRecord = false;});
-                    
-                    data.grouped.government_s.groups.forEach(function(doc){                    
+
+                    data.grouped.government_s.groups.forEach(function(doc){
                                 doc.newRecord = true;
                                 lRawDocs.push(doc);
                     });
@@ -390,11 +390,11 @@ define(['app','underscore','/app/js/common.js',
         $scope.removeThematicAreaFilter = function(filter){
             $scope.thematicAreaApi.unSelectItem(filter.identifier);
         }
-        
+
         if($routeParams.documentSchema){
             if($routeParams.documentSchema.toLowerCase()=='rat')
                 $scope.queryStatus('party');
-            else if (_.contains(['vlr', 'cpp', 'a19-20'],$routeParams.documentSchema.toLowerCase()))
+            else if (_.contains(['vlr', 'cpp', 'a19a20'],$routeParams.documentSchema.toLowerCase()))
                 $scope.previewType='list'
          }
 
