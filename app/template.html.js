@@ -1,6 +1,6 @@
 define(['app','ng-breadcrumbs','angular-localizer','scbd-angularjs-services','scbd-angularjs-filters',
     '/app/views/directives/login.directive.html.js',
-    // '/app/views/directives/xuser-notifications.js',
+    '/app/views/directives/xuser-notifications.js',
     'ngMaterial','ngAria', 'angular-animate',
 ], function(app) {
     'use strict';
@@ -12,10 +12,10 @@ define(['app','ng-breadcrumbs','angular-localizer','scbd-angularjs-services','sc
             $scope.controller = "TemplateController";
             $scope.breadcrumbs     = breadcrumbs;
             $scope.$root.pageTitle = { text: "" };
-            
+
             $scope.showHelp = showHelp.value;
-            
-            
+
+
         // $scope.goHome               = function() { $location.path('/'); };
         // $scope.currentPath          = function() { return $location.path(); };.
 
@@ -137,28 +137,28 @@ define(['app','ng-breadcrumbs','angular-localizer','scbd-angularjs-services','sc
             // $rootScope.$on("$locationChangeSuccess", function() {
             //     $anchorScroll();
             // });
-        
-        
-        
-        
-        
+
+
+
+
+
         $scope.feedbackHelp = function() {
                 if($scope.showHelp.show)
                      showSimpleToast("Help information is turned on.");
-                     
+
                 if(!$scope.showHelp.show)
                      showSimpleToast("Help information is turned off.");
         };
-        
+
         $scope.feedbackGlossary= function() {
                 if($scope.showHelp.glossary)
                      showSimpleToast("Glossary is turned on.");
-                     
+
                 if(!$scope.showHelp.glossary)
                      showSimpleToast("Glossary is turned off.");
         };
-        
-            
+
+
         //======================================================
         //
         //
@@ -173,21 +173,21 @@ define(['app','ng-breadcrumbs','angular-localizer','scbd-angularjs-services','sc
             });
 
         });
-        
+
         $rootScope.$on("showSimpleToast", function(evt, msg) {
            showSimpleToast(msg);
-  
+
         });
-        
+
         $rootScope.$on("showSimpleToastConfirm", function(evt, msg) {
            showSimpleToastConfirm(msg);
-  
+
         });
 
         $rootScope.$on("showConfirmToast", function(evt, msg, broadcaster) {
             $scope.showToastConfirmBroadcast(msg,broadcaster );
         });
-        
+
         function showSimpleToast(msg)
         {
             $mdToast.show(

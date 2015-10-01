@@ -1,5 +1,5 @@
 define(['app', '/app/views/directives/xuser-notifications.js',
-// '/app/views/directives/switch-realm-directive.html.js'
+'/app/views/directives/switch-realm-directive.html.js'
 ], function (app) {
 "use strict";
 app.controller("DashboardController",

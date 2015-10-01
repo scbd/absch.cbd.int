@@ -73,7 +73,7 @@
                         <li class="disabled"><a>Русский</a></li>
                     </ul>
             </li>
-            <!--<li class="pull-right" ng-cloak id="dropdownNotification" ng-show="user && user.isAuthenticated"  >
+            <li class="pull-right" ng-cloak id="dropdownNotification" ng-show="user && user.isAuthenticated"  >
 
                    <a id="dLabel" ng-href="/register#notifications" class="notification-btn hidden-sm hidden-md hidden-lg">
                         <span ng-show="(notifications|filter:isUnread).length > 0 " >
@@ -95,7 +95,7 @@
                         </span>
                     </a>
 
-                    <div class="dropdown-menu hidden-xs" role="menu" aria-labelledby="dLabel">
+                    <div class="dropdown-menu hidden-xs handleSearchPage" role="menu" aria-labelledby="dLabel">
                         <div class="panel panel-danger" style="width:500px;padding:0;margin:0;">
                             <div class="panel-heading">
                                 <h4>User Notifications and Recent Activity</h4>
@@ -110,7 +110,7 @@
                             </div>
                         </div>
                     </div>
-            </li>-->
+            </li>
 
             <li class="pull-right">
                  <a ng-hide="user && user.isAuthenticated"  class="signin" href="#" data-slug="signin" data-toggle="modal" data-target="#loginDialog">
@@ -200,25 +200,25 @@
                     <li><a href="/register" > <i class="fa fa-pencil-square-o visible-xs visible-sm"></i> <span class="hidden-xs hidden-sm"> &nbsp;&nbsp;Submit&nbsp;Information</span></a></li>
                     <!--<li><a href="/countries" ng-class="{'link-active' : getClass('/countries')}"><i class="fa fa-globe visible-xs visible-sm"></i> <span class="hidden-xs hidden-sm">&nbsp;Country Information</span></a></li>-->
                 </ul>
-                
+
                  <ul class="navbar-right navlist">
-                     
+
                      <!--<li class="pull-right"  style="padding-right:0;">
-                            <a  ng-href="#" ng-click="showHelp.showTour=!showHelp.showTour"  ><i class="fa fa-youtube-play" ng-class="{'color-pink':showHelp.hasTour, 'color-grey': !showHelp.hasTour}"></i></a>  
+                            <a  ng-href="#" ng-click="showHelp.showTour=!showHelp.showTour"  ><i class="fa fa-youtube-play" ng-class="{'color-pink':showHelp.hasTour, 'color-grey': !showHelp.hasTour}"></i></a>
                      </li>-->
-                     
+
                       <li class="pull-right">
-                            <a  ng-href="#" ng-click="showHelp.show=!showHelp.show;feedbackHelp();"  ><i class="fa fa-info-circle" ng-class="{'help-color':showHelp.show }"></i></a>  
+                            <a  ng-href="#" ng-click="showHelp.show=!showHelp.show;feedbackHelp();"  ><i class="fa fa-info-circle" ng-class="{'help-color':showHelp.show }"></i></a>
                       </li>
-                      
+
                         <!--<li class="pull-right">
-                            <a  ng-href="#" ng-click="showHelp.glossary=!showHelp.glossary;feedbackGlossary();" ><i class="fa fa-question-circle" ng-class="{'color-pink':showHelp.glossary }"></i></a>  
+                            <a  ng-href="#" ng-click="showHelp.glossary=!showHelp.glossary;feedbackGlossary();" ><i class="fa fa-question-circle" ng-class="{'color-pink':showHelp.glossary }"></i></a>
                       </li>-->
-                     
+
                     <li class="pull-right">
                         <a href="/help" ng-class="{'link-active' : getClass('/help')}"><span class="hidden-xs hidden-sm">&nbsp;Help</span></a>
                     </li>
-                    
+
                     <li class="pull-right" ng-if="training_env||development_env"><a href="/forums/iac" ng-class="{'link-active' : getClass('/forums')}"><i class="fa fa-comments"></i><span class="hidden-xs hidden-sm">&nbsp;IAC&nbsp;Forum</span></a></li>
                 </ul>
         </div>
@@ -267,7 +267,7 @@
                                 </span>
                             </a>
 
-                            <div class="dropdown-menu hidden-xs" role="menu" aria-labelledby="dLabel">
+                            <div class="dropdown-menu hidden-xs handleSearchPage" role="menu" aria-labelledby="dLabel" style="position: absolute;right: 15%;">
                                 <div class="panel panel-danger" style="width:500px;padding:0;margin:0;">
                                     <div class="panel-heading">
                                         <h4>User Notifications and Recent Activity</h4>
@@ -284,18 +284,18 @@
                             </div>
                     </li>
                     <!--<li class="pull-right"  >
-                            <a  ng-href="#" ng-click="showHelp.showTour=!showHelp.showTour"  ><i class="fa fa-youtube-play" ng-class="{'color-pink':showHelp.hasTour, 'color-grey': !showHelp.hasTour}"></i></a>  
+                            <a  ng-href="#" ng-click="showHelp.showTour=!showHelp.showTour"  ><i class="fa fa-youtube-play" ng-class="{'color-pink':showHelp.hasTour, 'color-grey': !showHelp.hasTour}"></i></a>
                      </li>-->
                      <li class="pull-right">
-                         <a  ng-href="#" ng-click="showHelp.show=!showHelp.show;feedbackHelp();" ><i class="fa fa-info-circle" ng-class="{'help-color':showHelp.show }"></i></a>   
+                         <a  ng-href="#" ng-click="showHelp.show=!showHelp.show;feedbackHelp();" ><i class="fa fa-info-circle" ng-class="{'help-color':showHelp.show }"></i></a>
                       </li>
                        <!--<li class="pull-right">
-                            <a  ng-href="#" ng-click="showHelp.glossary=!showHelp.glossary;feedbackGlossary();" ><i class="fa fa-question-circle" ng-class="{'color-pink':showHelp.glossary }"></i></a>  
+                            <a  ng-href="#" ng-click="showHelp.glossary=!showHelp.glossary;feedbackGlossary();" ><i class="fa fa-question-circle" ng-class="{'color-pink':showHelp.glossary }"></i></a>
                       </li>-->
                         <li class="pull-right">
-                        <a href="/help" ng-class="{'link-active' : getClass('/help')}"><span class="hidden-xs hidden-sm">&nbsp;Help</span></a>  
+                        <a href="/help" ng-class="{'link-active' : getClass('/help')}"><span class="hidden-xs hidden-sm">&nbsp;Help</span></a>
                       </li>
-                     
+
                        <li class="pull-right" ng-show="development_env || training_env"> <a href="/forums/iac" ng-class="{'link-active' : getClass('/forums')}"><i class="fa fa-comments"></i><span class="hidden-xs hidden-sm">&nbsp;IAC Forum</span></a></li>
                 </ul>
         </div>
@@ -320,7 +320,7 @@
             </div>
         </div>
     </nav>
-    
+
     <!-- PORTAL BREAD CRUMBS-->
     <nav class="navbar navbar-breadcrumbs navbar-default navbar-static-top navbar-fixed-top" style="top:30px;"  ng-hide="breadcrumbs.get().length == 1" >
         <div class="container-fluid container-breadcrumbs">
@@ -344,7 +344,7 @@
             </div>
         </div>
     </nav>
-    
+
 
  <!-- <nav class="navbar navbar-links navbar-default navbar-static-top bg-orange" ng-show="development_env || training_env">
         <div class="container container-links" style="padding-left:15%">
@@ -403,7 +403,7 @@
                                  <span class="footer-links">
                                     <li><a href="/" class="color-white" style="font-weight:bold;font-size:1.8rem">ABS Clearing-House</a></li>
                                  </span>
-                                
+
                                <ul class="footer-links pull-right">
                                 <li><a href="/find" class="color-white bold">Find</a></li>
                                 <li><a href="/register" class="color-white bold">Submit</a></li>
@@ -441,14 +441,14 @@
     <script>
         /**************************
           For outdate browser check
-        **************************/       
+        **************************/
         function addLoadEvent(func) {
         var oldonload = window.onload; if (typeof window.onload != 'function') { window.onload = func; } else { window.onload = function() { if (oldonload) { oldonload(); } func(); } } }
         addLoadEvent(function() { outdatedBrowser( { bgColor: '#f25648', color: '#ffffff', lowerThan: 'transform', languagePath: 'app/libs/outdated-browser/outdatedbrowser/lang/en.html' }) });
- 
+
          /**************************
           For Googel Analytics
-        **************************/       
+        **************************/
         (function(i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
             i[r] = i[r] || function() {
@@ -466,7 +466,7 @@
     </script>
     <link rel="stylesheet" href="/app/libs/joyRide/joyride-2.1.css">
     <link rel="stylesheet" href="/app/css/help-controls.css">
-	
+
 </body>
 
 </html>
