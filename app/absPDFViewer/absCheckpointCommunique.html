@@ -33,8 +33,8 @@
 
 <body>
     <div ng-app="ngapp" class="main-nav">
-        <div ng-controller="printPermit" style="width:1000px;"   ng-class="{'watermark' : documentInfo.Realm!= 'abs'}">
-            <div class="col-xs-12 alert alert-danger" ng-show="documentInfo.Realm!= 'abs'">
+        <div ng-controller="printPermit" style="width:1000px;"   ng-class="{'watermark' : documentInfo.Realm && documentInfo.Realm.toUpperCase()!= 'ABS'}">
+            <div class="col-xs-12 alert alert-danger" ng-show="documentInfo.Realm && documentInfo.Realm.toUpperCase()!= 'ABS'">
                 <h4>Warning!</h4>
                 <p>this pdf was generated from ABS-CH test website.<p>
             </div>

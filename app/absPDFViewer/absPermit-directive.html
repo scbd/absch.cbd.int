@@ -1,7 +1,7 @@
-<div ng-class="{'watermark' : documentInfo.Realm!= 'abs'}">
+<div ng-class="{'watermark' : documentInfo.Realm && documentInfo.Realm.toUpperCase()!= 'ABS'}">
 
     <link href="../css/permitPDF.css" rel="stylesheet">
-    <div class="col-xs-12 alert alert-danger" ng-show="documentInfo.Realm!= 'ABS'">
+    <div class="col-xs-12 alert alert-danger" ng-show="documentInfo.Realm && documentInfo.Realm.toUpperCase()!= 'ABS'">
         <h4>Warning!</h4>
         <p>this pdf was generated from ABS-CH test website.<p>
     </div>
