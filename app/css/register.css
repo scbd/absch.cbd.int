@@ -84,9 +84,6 @@ section {
 .confidential-text {
 	font-weight:bold;
 	color:#d8534f;
-	text-transform: uppercase;
-	font-size: 80%;
-	padding-bottom:10px;
 }
  .disable {
     background-color:#ccc;
@@ -132,12 +129,35 @@ section {
     background-color:#F5F5F5;
 }
 
+section{}
 legend{
-
-	padding:20px 0 0 0;
-	margin: 0;
-	margin-top:10px;
+	padding:3px;
+	margin:20px 0 20px 0;
+	background-color: #efefef;
+	font-weight:500;
 }
+legend + .help-inline-content{position:relative; top:-19px;}
+.help-block{
+	font-size:11px;
+	color:#666;
+	padding: 0;
+	margin: 0;
+}
+.form-group{
+	padding:0;
+	margin: 0 0 20px 0;
+}
+.input-rich-text{
+	 border: 1px solid #CCC;border-radius: 4px;
+	 
+ }
+.ta-editor{border:0;}
+
+
+.panel-body-confidential{
+	padding-bottom:5px;
+}
+
 
 .header{
 	border-bottom: 5px #333 solid;
@@ -313,17 +333,7 @@ border-color: #888;
 .help_icon{
 	padding:5px;
 }
-.help-block{
-	font-size:11px;
-	color:#666;
-	padding: 0;
-	margin: 0;
-}
-.form-group{
-	margin:0;
-	padding: 0;
-	margin-top: 20px;
-}
+
 hr{
 	margin:10px 0 0 0;
 	padding:0;
