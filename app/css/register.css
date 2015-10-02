@@ -136,11 +136,17 @@ legend{
 	background-color: #efefef;
 	font-weight:500;
 }
+
+
 legend + .help-inline-content{position:relative; top:-19px;}
+
+.legend2{font-size:14px;padding:3px;font-weight:500;margin-bottom:20px; border-bottom: 1px solid #e5e5e5;}
+
+
 .help-block{
 	font-size:11px;
 	color:#666;
-	padding: 0;
+	padding: 0 0 5px 0;
 	margin: 0;
 }
 .form-group{

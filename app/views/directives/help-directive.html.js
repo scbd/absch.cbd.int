@@ -44,6 +44,9 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                 
                                         var inlineTemplate= '<div class="help-inline-content" ng-if="showHelp.show"> <span><i class="fa fa-info-circle"></i> {{content}}</span> <div>';
                                     
+                                        var helpBlockTemplate= '<span class="help-block"> {{content}} <span>';
+                                    
+                                    
                                         var contentTemplate= '<div class="help-simple-content">{{content}}<div>';
                                     
                                     
@@ -130,6 +133,8 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                                             children = $element.find('#' + field.name);
                                                                         }    
                                                                          
+                                                                        if(field.fieldType == 'helpBlock') 
+                                                                                templateToUse = helpBlockTemplate;
                                                                     
                                                                         if (field.embed){
                                                                                 var output = templateToUse.replace('{{content}}', $filter('lstring')(field.helpText));

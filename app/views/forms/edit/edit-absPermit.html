@@ -273,7 +273,7 @@
 
                     <div class="row">
                         <div class="col-xs-12">
-                            <div class="help-inline-content">Providing details about the subject matter or genetic resource covered by the permit or its equivalent can provide additional legal certainty.</div>
+                            <div class="legend2" >Additional Subject Matter Information: Providing details about the subject matter or genetic resource covered by the permit or its equivalent can provide additional legal certainty.</div>
                             <div class="km-control-group" name="specimen" caption="Specimen data">
                                 <span class="help-block">Link to a voucher specimen held in an appropriate facility</span>
                                 <div km-link name="specimen" ng-model="document.specimen" allow-link="true" allow-file="false" identifier="document.header.identifier"></div>
@@ -322,7 +322,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="km-control-group" name="keywords" caption="Keywords to describe the subject-matter or genetic resource(s) covered by the permit or its equivalent">
-                                <span class="help-block">The collection of this information is important for facilitating harmonized searches throughout the records. Please select all relevant keywords that could assist in describing the subject-matter or genetic resource(s) covered by the permit or its equivalent.</span>
+                                <!--<span class="help-block">The collection of this information is important for facilitating harmonized searches throughout the records. Please select all relevant keywords that could assist in describing the subject-matter or genetic resource(s) covered by the permit or its equivalent.</span>-->
                                 <div km-select multiple required name="keywords" ng-model="document.keywords" items="options.keywords()"></div>
                             </div>
                         </div>
@@ -367,7 +367,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="km-control-group" name="usageDescription" caption="Additional information about the specified uses covered by the permit or its equivalent or use restrictions">
-                                <span class="help-block">If applicable, please provide any additional information about the specific uses or any use restrictions for the genetic resources covered by the permit or its equivalent.</span>
+                                <!--<span class="help-block">If applicable, please provide any additional information about the specific uses or any use restrictions for the genetic resources covered by the permit or its equivalent.</span>-->
                                 <div km-rich-textbox name="usageDescription" rows="6" ng-model="document.usageDescription" locales="document.header.languages"></div>
                             </div>
                         </div>
@@ -377,7 +377,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="km-control-group" name="thirdPartyTransferConditions" caption="Conditions for third party transfer">
-                                <span class="help-block">Where a permit or its equivalent covers the issue of third party transfer, making this information available through the ABS Clearing-House can enhance legal certainty.</span>
+                                <!--<span class="help-block">Where a permit or its equivalent covers the issue of third party transfer, making this information available through the ABS Clearing-House can enhance legal certainty.</span>-->
                                 <div km-rich-textbox name="thirdPartyTransferConditions" rows="4" ng-model="document.thirdPartyTransferConditions" locales="document.header.languages"></div>
                             </div>
                         </div>
@@ -407,7 +407,7 @@
                  <legend>Documentation</legend>
                     <div class="row">
                         <div class="col-xs-12">
-                            <div class="km-control-group" name="permitFiles" caption="Copy of permit or its equivalent, or other relevant open-access document">
+                            <div class="km-control-group" name="permitFiles" caption="Copy of the permit or its equivalent, or other relevant open-access document">
                                 <span class="help-block">Please use this field to upload a copy of the permit or its equivalent or other relevant document if desired, or provide a link to its equivalent on a national website. Include a short description of the link or attachment. Note that this information will be made publicly available through the ABS Clearing-House and therefore should not contain confidential information, nor links to information that has restricted access.</span>
                                 <div km-link name="permitFiles" ng-model="document.permitFiles" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                             </div>
@@ -415,7 +415,7 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-12">
-                            <div class="km-control-group" name="permitDescription" caption="Description">
+                            <div class="km-control-group" name="permitDescription" caption="Short description of the attached link(s) and/or file(s)">
                                 <div km-rich-textbox name="permitDescription" rows="6" ng-model="document.permitDescription" locales="document.header.languages"></div>
                             </div>
                         </div>
