@@ -88,7 +88,7 @@
             <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': measure.selected==false}">Legislative, administrative or policy measures </span></div>
             <div> <span class="badge badge-white pull-right">{{measure.count}}</span></div>
         </div>
-        <div ng-show="measure.selected" class="subfilters-section" style="padding-top:10px;padding-bottom:5px;">
+        <div n`g-show="measure.selected" class="subfilters-section" style="padding-top:10px;padding-bottom:5px;">
             <div km-select class="filter-btn" multiple api="msrJurisdictionApi" ng-model="msrJurisdiction" binding-type="string" placeholder="Jurisdictions"
             items="options.jurisdiction()"></div>
             <br>
@@ -179,7 +179,7 @@
     <div ng-class="{'check_active': absCheckpointCommunique.selected}" style="padding:5px 0;">
         <div layout="row">
             <div>
-                <input type="checkbox" ng-model="absCheckpointCommunique.selected" 
+                <input type="checkbox" ng-model="absCheckpointCommunique.selected"
                 ng-change="refresh(absCheckpointCommunique.selected,'authority')">
             </div>
             <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': absCheckpointCommunique.selected==false}"> Checkpoint Communiqué</span></div>
