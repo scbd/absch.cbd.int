@@ -9,11 +9,14 @@ define(['app','underscore','/app/js/common.js',
     '/app/views/directives/search-filter-dates.partial.html.js',
     '/app/views/directives/document-list.partial.html.js', 'bootstrap-datepicker','moment',
     '/app/views/directives/help-directive.html.js',
-    '/app/views/countries/country-map-list-directive.html.js', '/app/js/search-service.js'],
+    '/app/views/countries/country-map-list-directive.html.js', '/app/js/search-service.js',
+    '/app/js/thesaurus-service.js'],
      function (app,_) {
 
-    app.controller('FindController', ['$scope', '$rootScope','showHelp' ,'$http', '$timeout', '$q','realm', '$routeParams','$location','$element','commonjs','$mdSidenav', '$mdUtil', '$mdMedia', 'searchService',
-        function ($scope, $rootScope,showHelp, $http, $timeout, $q, realm, $routeParams,$location, $element, commonjs, $mdSidenav, $mdUtil, $mdMedia, searchService) {
+    app.controller('FindController', ['$scope', '$rootScope','showHelp' ,'$http', '$timeout', '$q','realm', '$routeParams',
+                '$location','$element','commonjs','$mdSidenav', '$mdUtil', '$mdMedia', 'searchService', 'thesaurusService',
+        function ($scope, $rootScope,showHelp, $http, $timeout, $q, realm, $routeParams,$location, $element,
+             commonjs, $mdSidenav, $mdUtil, $mdMedia, searchService, thesaurusService) {
 
             $scope.showHelp = {'show':true,'hasHelp':true, showTour:false};
             $scope.toggleLeft = buildToggler('left');
@@ -37,7 +40,7 @@ define(['app','underscore','/app/js/common.js',
             $scope.nationalRecords.IRCC = [];
             $scope.nationalRecords.CP = [];
             $scope.nationalRecords.CPC = [];
-            
+
             //**********************************************************
             $scope.close = function () {
                   $mdSidenav('left').close()
@@ -57,16 +60,16 @@ define(['app','underscore','/app/js/common.js',
                   },300);
               return debounceFn;
             }
-            
+
             //**********************************************************
             $scope.isInProfiles = function(tab) {
-              
+
               if(url.indexOf('/profiles')  >= 0|| url.indexOf('/profile')  >= 0|| url.indexOf('/country') >= 0 || url.indexOf('/countries') >= 0)
                     return true;
               else
                 return false;
             }
-            
+
             //**********************************************************
             $scope.isInNationalRecords = function(tab) {
               if(url.indexOf('/national-records') >= 0)
@@ -74,7 +77,7 @@ define(['app','underscore','/app/js/common.js',
               else
                 return false;
             }
-            
+
             //**********************************************************
             $scope.isInReferenceRecords = function(tab) {
               if(url.indexOf('/reference-records') >= 0)
@@ -91,7 +94,12 @@ define(['app','underscore','/app/js/common.js',
             $scope.startTour=true;
             $location.search("tour", null);
         }
-
+// var other= thesaurusService.getDomainTerms('others');
+// var otherJurisdiction= thesaurusService.getDomainTerms('jurisdiction',true);
+// var jurisdiction= thesaurusService.getDomainTerms('jurisdiction');
+// $q.all([other,otherJurisdiction,jurisdiction]).then(function(data){
+//         console.log(data);
+// });
 
 
         var self = this;
@@ -158,10 +166,10 @@ define(['app','underscore','/app/js/common.js',
     	function query () {
             if($scope.recordType =='country')
                 return;
-            
+
             if(!$scope.recordType)
                 $scope.recordType = 'national';
-                
+
             var nationalSchema = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database","focalPoint"];
             var referenceSchema= [ "resource", "meeting", "notification","pressRelease","statement" , "news", "modelContractualClause", "communityProtocol"];
 
@@ -170,8 +178,8 @@ define(['app','underscore','/app/js/common.js',
             var schema = nationalSchema;
             if($scope.recordType == 'reference')
                 schema = referenceSchema;
-            
-            
+
+
             // var keywordQuery = '';
 
             // if($scope.keyword){
@@ -186,21 +194,21 @@ define(['app','underscore','/app/js/common.js',
             //      q += ' AND (schema_s:(' + schema.join(' ') + '))';
             //      //console.log(q);
             // }
-            if($scope.queryGovernment){ 
+            if($scope.queryGovernment){
                 if($scope.queryGovernment.indexOf("government_s:eur") < 0)
                     $scope.queryGovernment = $scope.queryGovernment.replace("government_s:eu", "government_s:eur");
-                    
+
                 q += ' AND (' + $scope.queryGovernment + ')';}
             if($scope.queryTheme)      q += ' AND (' + $scope.queryTheme + ')';
               //console.log('region: ', q);
             if($scope.queryRegion)      q += ' AND (' + $scope.queryRegion + ')';
             if($scope.queryPartyStatus) q += ' AND (' + $scope.queryPartyStatus + ')';
-           
+
             var orderByFields='createdDate_dt desc';
 
             if($scope.recordType != 'national')
                 orderByFields = 'createdDate_dt desc';
-                
+
             if($scope.recordType == 'reference'){
                 orderByFields = $scope.orderReferenceBy;
             }
@@ -260,10 +268,10 @@ define(['app','underscore','/app/js/common.js',
                      var lRawDocs = [];
                      if($scope.rawDocs && $scope.currentPage!=0)
                         lRawDocs = _.clone($scope.rawDocs);
-                        
+
                     _.map(lRawDocs, function(doc){doc.newRecord = false;});
-                    
-                    data.grouped.government_s.groups.forEach(function(doc){                    
+
+                    data.grouped.government_s.groups.forEach(function(doc){
                                 doc.newRecord = true;
                                 lRawDocs.push(doc);
                     });
@@ -294,9 +302,9 @@ define(['app','underscore','/app/js/common.js',
                         //console.log($scope.thematicAreas);
 
                     }).error(function (error) { console.log('onerror'); console.log(error); } );
-                    
+
                     searchService.facets({q:queryFacetsParameters.q, f: ['schema_s', 'government_s', 'aichiTarget_REL_ss', 'thematicAreas_ss', 'government_REL_ss']});
-                    
+
                 }
             }).error(function (error) { console.log('onerror'); console.log(error); });
         };
@@ -355,8 +363,8 @@ define(['app','underscore','/app/js/common.js',
             refreshTimeout = $timeout(function () { query(); }, 200);
         }
 
-        $scope.$watch('currentPage',     function() { 
-            refresh() 
+        $scope.$watch('currentPage',     function() {
+            refresh()
             });
         $scope.$watch('querySchema',     function() { $scope.currentPage=0; refresh(); });
         $scope.$watch('queryGovernment', function() { $scope.currentPage=0; refresh(); });
@@ -379,9 +387,9 @@ define(['app','underscore','/app/js/common.js',
         });
         //  $scope.$watch('recordType',     function(newVal, oldVal) { if(newVal=='countryProfile' && oldVal){
         //         $scope.countryProfileApi.loadCountryDetails();
-        //     } 
+        //     }
         //  });
-        
+
         $scope.previewType = 'group';
 
         $scope.updatePreviewType = function(type){
@@ -420,7 +428,7 @@ define(['app','underscore','/app/js/common.js',
             }
         });
 
-        
+
 
         $scope.removeFilter = function(filter){
             $scope.$broadcast('removeFilter',{data:filter});
