@@ -198,9 +198,9 @@ app.directive("fieldEmbedContact", [ function () {
 				//if($scope.showFilter){
 
 				if(isSoft){
-					if(confirm("Are you you want to remove this contact from the list?")){
+					//if(confirm("Are you you want to remove this contact from the list?")){
 						contacts.splice(index,1);
-					}
+					//}
 				}
 				else{
 					if(confirm("Are you you want to delete this record?")){
