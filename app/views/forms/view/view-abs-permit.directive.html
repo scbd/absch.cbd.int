@@ -5,7 +5,6 @@
 		</h4> </div>
 	<div class="record-body panel-body">
 
-
 			<div class="pull-right" ng-if="document.info">
 				<a class="btn btn-default" style="background-color:#f5f5f5;" target="_new" ng-href="/database/record/{{document | uniqueID}}"><i class="fa fa-file-pdf-o"></i> Download</a>
 			</div>
@@ -20,11 +19,7 @@
 					{{document.government|term}}
 				</div>
 			</div>
-				
-			<div ng-show="document.title">
-			 	<label> Reference number of the permit or its equivalent</label>
-			 	<div class="km-value">{{document.title | lstring:locale}}</div>
-		 	</div>
+					
 
 			<div ng-show="document.government || document.updateReasons">
 				<div ng-show="showPdf && document">
@@ -62,6 +57,12 @@
 				document.specimen || document.taxonomy || document.gisFiles">
 				<legend>Details of the permit or its equivalent</legend>
 
+
+			<div ng-show="document.title">
+			 	<label> Reference number of the permit or its equivalent</label>
+			 	<div class="km-value">{{document.title | lstring:locale}}</div>
+		 	</div>
+			 
 				<div ng-show="document.nationalReferences">
 					<label>Additional national references or identifiers</label>
 					<div class="km-value km-pre"ng-bind-html="document.nationalReferences | lstring:locale"></div>
@@ -69,19 +70,26 @@
 
 				<div ng-show="document.date">
 					<label>Date of issuance of the permit or its equivalent</label>
-					<div class="km-value">{{document.date}}</div>
+					<div class="km-value">{{document.date | formatDate }}</div>
 				</div>
 
     			<div ng-show="document.expiration">
     				<label>Date of expiry of the permit or its equivalent</label>
-    				<div class="km-value">{{document.expiration}}</div>
+    				<div class="km-value">{{document.expiration | formatDate }}</div>
     			</div>
 				
 				
 <legend>Prior Informed Consent (PIC) Information</legend>
+
+<div ng-show="document.consentGranted!=undefined">
+					<label>Confirmation that prior informed consent was obtained or granted</label>
+					<div class="km-value" ng-show="document.consentGranted">Yes</div>
+					<div class="km-value" ng-show="!document.consentGranted">No</div>
+				</div>
+				
 				<div ng-show="document.providers || document.providerConfidential">
 					<label>The provider
-						<span class="help-block">The person or entity that holds the right to grant access to the genetic resources in accordance with domestic legislation. If the information is marked as confidential the provider won’t be able to receive the courtesy copy of the IRCC or the CPC</span>
+						<span class="help-block">The person or entity that holds the right to grant access to the genetic resources in accordance with domestic legislation.</span>
 					</label>
 					<div class="km-value" ng-show="!document.providerConfidential" ng-repeat="provider in document.providers">
 						<div view-contact-reference ng-model="provider" locale="locale"></div>
@@ -90,12 +98,18 @@
 						<div class="km-value km-pre confidential">Confidential information</div>
 					</div>
 				</div>
-
-				<div ng-show="document.consentGranted!=undefined">
-					<label>Confirmation that prior informed consent was obtained or granted</label>
-					<div class="km-value" ng-show="document.consentGranted">Yes</div>
-					<div class="km-value" ng-show="!document.consentGranted">No</div>
+				
+				<div ng-show="document.informedConsents || document.informedConsentConfidential">
+					<label>Person or entity to whom prior informed consent was granted</label>
+						<div class="km-value" ng-repeat="consent in document.informedConsents" ng-show="!document.informedConsentConfidential">
+			                 <div view-contact-reference ng-model="consent" locale="locale"></div>
+						</div>
+						<div ng-show="document.informedConsentConfidential">
+							<div class="km-value km-pre confidential">Confidential information</div>
+						</div>
 				</div>
+
+				
 				<div ng-show="document.consentInformation">
 					<label>Additional information about the prior informed consent</label>
 					<div class="km-value km-pre" ng-bind-html="document.consentInformation | lstring:locale"></div>
@@ -116,15 +130,7 @@
 						</ul>
 					</div>
 				</div>
-				<div ng-show="document.informedConsents || document.informedConsentConfidential">
-					<label>Person or entity to whom prior informed consent was granted</label>
-						<div class="km-value" ng-repeat="consent in document.informedConsents" ng-show="!document.informedConsentConfidential">
-			                 <div view-contact-reference ng-model="consent" locale="locale"></div>
-						</div>
-						<div ng-show="document.informedConsentConfidential">
-							<div class="km-value km-pre confidential">Confidential information</div>
-						</div>
-				</div>
+				
 
 <legend>Mutually Agreed Terms (MAT) Information</legend>
                 <div ng-show="document.mutuallyAgreedTermsEstablished!=undefined">
@@ -225,7 +231,7 @@
 				</div>
 			</div>
 
-			<div ng-show="document.keywords">
+			<div ng-show="false">
 				<label>Keywords to describe the subject-matter or genetic resource(s) covered by the permit or its equivalent</label>
 				<div class="km-value">
 					<ul>
@@ -254,7 +260,6 @@
 			</div>
 			<div ng-show="document.thirdPartyTransferConditions">
 				<label>Conditions for third party transfer
-					<span class="help-block">Where a permit or its equivalent establish conditions or restrictions regarding the transfer of the permit or rights over the genetic resources to a third party, it will help to make this information available through the ABS Clearing-House in order to monitor the utilization of genetic resources and enhance legal certainty.</span>
 				</label>
 				<div class="km-value km-pre"ng-bind-html="document.thirdPartyTransferConditions | lstring:locale"></div>
 			</div>

@@ -25,8 +25,9 @@
 
     <div class="bg-green" style="padding-bottom:3px;padding-top:3px;padding-left:15px;padding-right:15px;margin-bottom:5px;">
         <h1 class="color-litegreen" style="padding:0;">
+            <div class="color-white">{{documentInfo |uniqueID}}</div>
             Internationally recognized certificate of compliance constituted from information on the permit or its equivalent made available to the Access and Benefit-sharing Clearing-House
-            <span class="color-white">{{documentInfo |uniqueID}}</span>
+           
         </h1>
     </div>
 
@@ -44,72 +45,80 @@
 
     <legend>General Information</legend>
     <div class="row top-border bg-litegreen">
-        <div class="col-xs-8">
-            <label>Title/reference number of the permit or its equivalent:</label>
-            <div class="text">{{document.title| lstring:locale}}</div>
-        </div>
-        <div class="col-xs-4">
-            <label>Verification link (latest version):</label>
-            <div class="text"><a href="http://absch.cbd.int/database/{{documentInfo | uniqueID}}">
-                       http://absch.cbd.int/database/{{documentInfo|uniqueID}}</a>
-            </div>
-        </div>
-
+        
         <div class="clearfix"></div>
         <div class="col-xs-12">
-            <label>Country:</label>
+            <label>Country <span class="help-block">The country publishing this record.</span></label>
             <div class="text">{{document.government|term |uppercase}}</div>
         </div>
 
+        
         <div class="clearfix"></div>
         <div class="col-xs-12">
-            <label>Additional national references or identifiers:</label>
-            <div class="text" ng-bind-html="renderHtml(document.nationalReferences)"></div>
+            <label>Verification link (view latest version)</label>
+            <div class="text">
+                <a href="http://absch.cbd.int/database/{{documentInfo | uniqueID}}">
+                 http://absch.cbd.int/database/{{documentInfo|uniqueID}}</a>
+            </div>
         </div>
-
-
+        
+        <div class="clearfix"></div>
+        <div class="col-xs-12">
+            <label>ABS-CH Unique Identifier (UID)</label>
+            <div class="text"> {{documentInfo|uniqueID}} </div>
+        </div>
     </div>
 
-
-
-    <legend>Information from the National Permit or Equivalent</legend>
+    <legend>Issuing Authority</legend>
     <div class="row top-border bg-litegreen">
-        <div class="col-xs-6">
-            <label>Permit or equivalent issued by: </label>
+         <div class="col-xs-12">
             <div class="text">
                 <div view-contact-reference ng-model="document.authority" locale="locale"></div>
             </div>
-        </div>
-        <div class="col-xs-6">
-            <label>Permit or equivalent valid from:</label>
-            <div class="text">{{document.date | formatDate}}
-                <span ng-show="document.expiration"> - {{document.expiration | formatDate}}</span>
-            </div>
+          </div>
+    </div>
 
+    <legend>Details of the permit or its equivalent</legend>
+    <div class="row top-border bg-litegreen">
+               
+        <div class="clearfix"></div>
+        <div class="col-xs-12">
+            <label>Reference number of the permit or its equivalent</label>
+            <div class="text">{{document.title| lstring:locale}}</div>
         </div>
 
+        <div class="col-xs-12">
+            <label>Additional national references or identifiers</label>
+            <div class="text" ng-bind-html="renderHtml(document.nationalReferences)"></div>
+        </div>
+        
         <div class="clearfix"></div>
         <div class="col-xs-6">
-            <label>Prior informed consent (PIC) obtained: </label>
+             <div ng-show="document.date">
+					<label>Date of issuance of the permit or its equivalent</label>
+					<div class="text">{{document.date | formatDate}}</div>
+				</div>
+        </div>
+        <div class="col-xs-6">
+            <div ng-show="document.expiration">
+    				<label>Date of expiry of the permit or its equivalent</label>
+    				<div class="text">{{document.expiration | formatDate}}</div>
+    			</div>
+        </div>
+      </div>          
+                
+       <legend>Prior Informed Consent (PIC) Information</legend>         
+          <div class="row top-border bg-litegreen">
+     
+        <div class="clearfix"></div>
+        <div class="col-xs-6">
+            <label>Confirmation that prior informed consent (PIC) obtained or granted </label>
             <div class="text"> YES</div>
         </div>
-        <div class="col-xs-6">
-            <label>Mutually agreed terms (MAT) have been established: </label>
-            <div class="text"> YES </div>
-        </div>
-
-        <div class="clearfix"></div>
-        <div class="col-xs-6">
-            <label>Entity to whom PIC was granted: </label>
-            <div class="text" ng-repeat="consent in document.informedConsents" ng-show="!document.informedConsentConfidential">
-                <div view-contact-reference ng-model="consent" locale="locale"></div>
-            </div>
-            <div ng-show="document.informedConsentConfidential">
-                <div class="text confidential">Confidential information</div>
-            </div>
-        </div>
-        <div class="col-xs-6">
-            <label>Provider: </label>
+        
+          <div class="clearfix"></div>
+        <div class="col-xs-12">
+            <label>Provider <span class="help-block">The person or entity that holds the right to grant access to the genetic resources in accordance with domestic legislation.</span> </label>
             <div class="text" ng-show="!document.providerConfidential" ng-repeat="provider in document.providers">
                 <div view-contact-reference ng-model="provider" locale="locale"></div>
             </div>
@@ -117,6 +126,53 @@
                 <div class="text confidential">Confidential information</div>
             </div>
         </div>
+        
+        <div class="clearfix"></div>
+         <div class="col-xs-12">
+            <label>Entity to whom PIC was granted </label>
+            <div class="text" ng-repeat="consent in document.informedConsents" ng-show="!document.informedConsentConfidential">
+                <div view-contact-reference ng-model="consent" locale="locale"></div>
+            </div>
+            <div ng-show="document.informedConsentConfidential">
+                <div class="text confidential">Confidential information</div>
+            </div>
+        </div>
+        <div ng-show="document.consentInformation">
+            <label>Additional information about the prior informed consent</label>
+            <div class="km-value km-pre" ng-bind-html="document.consentInformation | lstring:locale"></div>
+        </div>
+        <div ng-show="document.consentDocuments">
+            <label>Additional documents or links about the prior informed consent</label>
+            <!-- <div class="km-value" ng-repeat="item in document.consentDocuments">
+                <a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+                <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+            </div> -->
+
+            <div class="km-value">
+                <ul style="list-style-type: none;padding-left:3px;">
+                    <li ng-repeat="item in document.consentDocuments">
+                        <a target="{{target}}" ng-href="{{item.url}}"><i class="fa fa-file"></i> {{item.name||item.url}}</a>
+                        <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        </div>
+        
+        
+        
+        
+        
+       <legend>Mutually Agreed Terms (MAT) Information</legend>         
+          <div class="row top-border bg-litegreen">
+   
+        <div class="col-xs-12">
+            <label>Confirmation that mutually agreed terms (MAT) have been established </label>
+            <div class="text"> YES </div>
+        </div>
+
+        <div class="clearfix"></div>
+       
 
         <div class="clearfix"></div>
         <div class="col-xs-12" ng-if="document.consentInformation" >

@@ -46,6 +46,9 @@ legend{margin-top:20px;margin-bottom:0;border:0;color:#1FA65D!important;}
 .ircc-title{text-transform: uppercase;background-color:#bbb!important;padding-top:3px;padding-bottom:1px;padding-left:15px;font-weight:bold!important;}
 a {color:#333;}
 
+
+
+
 body{
     background-color: #fff!important;
 }
@@ -54,9 +57,20 @@ body{
     font-weight:bold!important;
 }
 
+.help-block {
+    font-size: 11px;
+    color: #999;
+    padding: 0 0 0 3px;
+    margin: 0 0 5px 0;
+	display:inline;
+	font-weight:500;
+	text-transform: none;
+}
+
+
 label{
     font-size:12px;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     font-weight: bold;
     color:#1FA65D!important;
 }
@@ -74,12 +88,13 @@ label{
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
     margin-top: 0;
 }
+.label-primary{margin-bottom:10px!important;}
 
 .confidential{
     color:#a94442!important;
-    background-color: #DDD!important;
+    /*background-color: #DDD!important;*/
     text-transform: uppercase;
-    border-color:#a94442!important;
+    /*border-color:#a94442!important;*/
     font-weight:bold;
 }
 .confidential-text{
