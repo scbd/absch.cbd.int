@@ -46,7 +46,7 @@
 			<div >
 	            <div class="row top-border bg-lightblue">
 	                <div ng-repeat="contact in emailList" class="">
-	                    <div ng-class="{'row': ($index+1)%4==0}"> </div>
+	                    <<div class="clearfix" ng-if="$index % 3 == 0"></div>
 	                    <div class="col-xs-4">
 	                        <div class="km-value">
 	                            <div view-contact-reference ng-model="contact" locale="locale"></div>

@@ -7,7 +7,7 @@
 
 	<div name="article-13-2"></div>
 
-		 
+
 
 
 		<div ng-show="document.government">
@@ -39,36 +39,7 @@
                         <a ng-href="mailto:{{item}}"><i class="fa fa-envelope-o"></i> {{item}}</a></li>
 				</ul>
 			</div>
-		
-
-		<!--<div ng-show="document.phones">
-			<label>Phone number(s)</label>
-			<div class="km-value" >
-				<ul class="list"  style="list-style-type: none;padding: 0px;margin: 0px;">
-					<li ng-repeat="item in document.phones track by $index"><i class="fa fa-phone"></i> {{item}}</li>
-				</ul>
-			</div>
-		</div>-->
-<!--
-		<div ng-show="document.faxes">
-			<label>Fax Number(s)</label>
-			<div class="km-value" >
-				<ul class="list"  style="list-style-type: none;padding: 0px;margin: 0px;" >
-					<li ng-repeat="item in document.faxes"><i class="fa fa-fax"></i> {{item}}</li>
-				</ul>
-			</div>
-		</div>-->
-
-		<!--<div ng-show="document.emails">
-			<label>Email(s)</label>
-			<div class="km-value"  >
-				<ul class="list" style="list-style-type: none;padding: 0px;margin: 0px;">
-					<li ng-repeat="item in document.emails">
-                        <a ng-href="mailto:{{item}}"><i class="fa fa-envelope-o"></i> {{item}}</a></li>
-				</ul>
-			</div>
-		</div>-->
-
+		<div>
 		<div ng-show="document.websites">
 			<label>Web Sites</label>
 			<div class="km-value" ng-repeat="item in document.websites">
@@ -78,16 +49,19 @@
 				</ul>
 			</div>
 		</div>
-		<div ng-show="contacts">
-				<!--<label>Additional contacts</label>-->
-				<div class="km-value" ng-repeat="contact in contacts" >
-					<div view-contact-reference ng-model="contact" locale="locale"></div>
+		<div ng-show="contacts" class="row">
+				<label>Additional contacts</label>
+				<div ng-repeat="contact in contacts" >
+					<div class="clearfix" ng-if="$index % 3 == 0"></div>
+					<div class="col-lg-4">
+						<div view-contact-reference ng-model="contact" locale="locale" class="well"></div>
+					</div>
 				</div>
 		</div>
-		
-		
-		
-		
+
+
+
+
 		<div ng-show="document.absPolicyBasisForCompetency || absPolicyBasisForCompetencyRef ">
 			<legend>Legislative, administrative or policy basis for the competence of the CNA</legend>
 			<div ng-show="document.absPolicyBasisForCompetency">
@@ -107,20 +81,20 @@
 				</div>
 			</div>
 
-			
+
 		</div>
 
 		<div>
 			<legend name="ABSResponsibilities">Summary of ABS Responsibilities </legend>
-			
+
 			<div ng-show="document.responsibilities">
 				<div class="km-value" ng-bind-html="document.responsibilities | lstring:locale"></div>
 			</div>
-			
+
 			<div ng-if="document.absResponsibleForAll">
 				<div class="km-value">This CNA is responsible for all functions under the Nagoya Protocol. </div>
 			</div>
-			
+
 			<div ng-show="document.absFunctions">
 				<label>Functions</label>
 				<div class="km-value km-pre">{{document.absFunctions | lstring:locale}}</div>
@@ -137,18 +111,18 @@
 				<label>Sub-national or community jurisdiction(s) covered by this CNA</label>
 				<div class="km-value">{{document.absJurisdictionName | lstring:locale}}</div>
 			</div>-->
-			
+
 			<div ng-show="document.absJurisdiction">
 				<label>Jurisdiction(s) covered by this CNA</label>
 				<div class="km-value">
 					<ul>
-						<li>{{document.absJurisdiction[0]|term}} 
+						<li>{{document.absJurisdiction[0]|term}}
 							<span ng-if="document.absJurisdictionName ">({{document.absJurisdictionName | lstring:locale}})</span>
 						</li>
 					</ul>
 				</div>
 			</div>
-			
+
 
 			<!-- <div ng-show="document.absGeneticResourceTypes">
 				<label>According to the type of organism</label>
@@ -163,7 +137,7 @@
 					<li ng-repeat="term in document.absGeneticResourceAreas">{{term|term}} </li>
 				</ul>
 			</div> -->
-			
+
 
 			<div ng-show="document.absGeneticResourceTypes ">
 				<label>Keywords to help describe the responsibilities of the competent national authority</label>
@@ -193,7 +167,7 @@
 		</div>
         <div class="row" style="padding-top:10px;" ng-show="document.info.revision">
             <div class="col-xs-12">
-                
+
                 <div view-history document-id="document.header.identifier" load-documents="true"
                 government="document.government.identifier"></div>
             </div>

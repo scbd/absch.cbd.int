@@ -11,7 +11,7 @@
 				{{document.government|term}}
 			</div>
 		</div>
-			
+
 			<div ng-show="document.title">
 			 	<label>Title</label>
 			 	<div class="km-value">
@@ -24,7 +24,7 @@
 			<div class="km-value km-pre"ng-bind-html="document.description | lstring:local"></div>
 		</div>
 
-		
+
 
 		<div ng-show="document.jurisdiction">
 			<label>Jurisdiction</label>
@@ -204,10 +204,13 @@
 			</div>
 		</div>
 
-		<div ng-show="document.authorities">
+		<div ng-show="document.authorities" class="row">
 			<legend>Regulatory contact information</legend>
 			<div class="km-value" ng-repeat="item in document.authorities">
-				<div view-contact-reference ng-model="item" locale="locale"></div>
+				<div class="clearfix" ng-if="$index % 3 == 0"></div>
+				<div class="col-lg-4">
+					<div view-contact-reference ng-model="item" locale="locale"></div>
+				</div>
 			</div>
 		</div>
 
