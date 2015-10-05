@@ -19,10 +19,9 @@
                 <div class="row-fluid" ng-class='{ tioBorder : showFile}'>
                 	<div class="col-xs-3" ><label style="padding-left:20px;"><a ng-href="#" ng-click="column='createdOn'">Date</a></label></div>
                 	<div class="col-xs-2"><label style="padding-left:15px;">Action</label></div>
-
                     <div class="col-xs-3"><label >Published By </label></div>
-					<div ng-class="{'col-xs-2': showFile, 'col-xs-4':!showFile}" ><label >Link</label></div>
-                    <div class="col-xs-2" ng-show="showFile"><label >File (pdf) </label></div>
+					<div class="col-xs-3" ><label >Link</label></div>
+                    <div class="col-xs-1" ng-show="showFile"><label >File (pdf) </label></div>
                 </div>
                 <div class="clearfix">
 				<style>
@@ -53,7 +52,7 @@
 								<a href="mailto:{{document.createdBy.email}}"><i class="fa fa-envelope"></i> {{document.createdBy.firstName}} {{document.createdBy.lastName}}</a>
 								</div>
 
-                             <div ng-class="{'col-xs-2':showFile, 'col-xs-4':!showFile}">
+                             <div class="col-xs-3">
 
 								 <a ng-href="/database/{{document.type | schemaShortName}}/{{document | uniqueIDWithoutRevision}}/{{document.revision}}"  target="_blank">
 
@@ -62,10 +61,10 @@
 								</a>
 
                             </div>
-							<div class="col-xs-2" ng-show="showFile" style="padding-left:5px;padding-right:5px">
+							<div class="col-xs-1 text-middle" ng-show="showFile" >
                                 <a type="button" target="_blank"  ng-href="/database/record/{{document | uniqueID}}">
                                 <i class="fa fa-file-o"></i>
-                                	 <span>{{document | uniqueID}}</span>
+                                	 <!--<span>{{document | uniqueID}}</span>-->
 									<!-- ABSCH-{{document.body.header.schema | lowercase | schemaShortName}}-{{document.documentID}}-{{document.revision}} -->
 								</a>
 

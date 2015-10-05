@@ -7,20 +7,17 @@
 
 	<div name="article-13-2"></div>
 
-		 
-
-
+		<legend>General information</legend>
+		
 		<div ng-show="document.government">
-			<label name="country">Country</label>
+			<label name="country">Country <span class="help-block">The country publishing this record.</span></label>
 			<div class="km-value">
 				{{document.government|term}}
 			</div>
 		</div>
-
-		<div ng-show="document.address || document.city || document.state || document.postalCode || document.country">
-
-			<legend>Contact information</legend>
-
+		
+		<div>
+			<label name="name">Competent National Authority</label>
 			<div class="km-value">
 				<div><strong>{{document.name | lstring:locale}}</strong></div>
 				<div ng-show="document.address">{{document.address | lstring:locale}}</div>
@@ -38,46 +35,21 @@
 					<li ng-repeat="item in document.emails">
                         <a ng-href="mailto:{{item}}"><i class="fa fa-envelope-o"></i> {{item}}</a></li>
 				</ul>
-			</div>
-		
-
-		<!--<div ng-show="document.phones">
-			<label>Phone number(s)</label>
-			<div class="km-value" >
-				<ul class="list"  style="list-style-type: none;padding: 0px;margin: 0px;">
-					<li ng-repeat="item in document.phones track by $index"><i class="fa fa-phone"></i> {{item}}</li>
-				</ul>
-			</div>
-		</div>-->
-<!--
-		<div ng-show="document.faxes">
-			<label>Fax Number(s)</label>
-			<div class="km-value" >
-				<ul class="list"  style="list-style-type: none;padding: 0px;margin: 0px;" >
-					<li ng-repeat="item in document.faxes"><i class="fa fa-fax"></i> {{item}}</li>
-				</ul>
-			</div>
-		</div>-->
-
-		<!--<div ng-show="document.emails">
-			<label>Email(s)</label>
-			<div class="km-value"  >
-				<ul class="list" style="list-style-type: none;padding: 0px;margin: 0px;">
-					<li ng-repeat="item in document.emails">
-                        <a ng-href="mailto:{{item}}"><i class="fa fa-envelope-o"></i> {{item}}</a></li>
-				</ul>
-			</div>
-		</div>-->
-
-		<div ng-show="document.websites">
-			<label>Web Sites</label>
-			<div class="km-value" ng-repeat="item in document.websites">
-				<ul class="list">
-					<a target="_new_" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-					<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+				
+				<ul  ng-show="document.websites" class="list" style="list-style-type: none;padding: 0px;margin: 3px 0 0 0;">
+					<li ng-repeat="item in document.websites">
+                        <a target="_new_" ng-href="{{item.url}}"> <i class="fa fa-external-link"></i> {{item.name||item.url}}</a>
+						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+					</li>
 				</ul>
 			</div>
 		</div>
+
+		
+
+		
+		
+		<legend>Contact People</legend>
 		<div ng-show="contacts">
 				<!--<label>Additional contacts</label>-->
 				<div class="km-value" ng-repeat="contact in contacts" >
