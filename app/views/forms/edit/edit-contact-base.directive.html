@@ -51,16 +51,16 @@
 		<div class="col-md-7 col-xs-12">
 			<div class="km-control-group" name="contact_organization" ng-required="!form.organization.$valid && document.type!='person'" caption="Organization">
 				<div class="help-block">Fullname without abbreviation</div>
-				<div ng-if="document.type!='person'" km-textbox-ml name="contact_organization" ng-model="document.name" required locales="locales"></div>
-				<div ng-if="document.type=='person'" km-textbox-ml name="contact_organization" ng-model="document.organization"  locales="locales"></div>
+				<div ng-if="document.header.schema=='organization'" km-textbox-ml name="contact_organization" ng-model="document.name" required locales="locales"></div>
+				<div ng-if="document.header.schema=='contact'" km-textbox-ml name="contact_organization" ng-model="document.organization"  locales="locales"></div>
 			</div>
 		</div>
 
 		<div class="col-md-5 col-xs-12">
 				<div class="km-control-group" name="contact_organizationAcronym" caption="Acronym" ng-required="!form.organization.$valid && document.type!='person'">
 				<div class="help-block">Abbreviation for long name</div>
-				<div  ng-if="document.type!='person'" km-textbox-ml name="contact_organizationAcronym" ng-model="document.acronym" placeholder="example: SCBD" locales="locales"></div>
-				<div  ng-if="document.type=='person'" km-textbox-ml name="contact_organizationAcronym" ng-model="document.organizationAcronym" placeholder="example: SCBD" locales="locales"></div>
+				<div  ng-if="document.header.schema=='organization'" km-textbox-ml name="contact_organizationAcronym" ng-model="document.acronym" placeholder="example: SCBD" locales="locales"></div>
+				<div  ng-if="ddocument.header.schema=='contact'" km-textbox-ml name="contact_organizationAcronym" ng-model="document.organizationAcronym" placeholder="example: SCBD" locales="locales"></div>
 			</div>
 		</div>
 	</div>
