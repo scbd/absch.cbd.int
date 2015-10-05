@@ -243,7 +243,7 @@
 			
 <legend ng-if="document.usage || document.usageDescription || document.usageConfidential || document.thirdPartyTransferConditions">Information on the utilization of the genetic resource(s) </legend>
 			<div ng-if="document.usage">
-				<label>Indicate if the permit or its equivalent covers commercial and/or non-commercial use</label>
+				<label>Type of use allowed by the permit or its equivalent</label>
 				<div class="km-value" ng-if="document.usage && !document.usageConfidential">
 					<ul>
 						<li ng-repeat="term in document.usage">{{term|term}}</li>
