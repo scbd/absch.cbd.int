@@ -127,6 +127,7 @@ define(["app",'/app/js/common.js'], function (app) {
 				return term.identifier;
 
 			});
+			return cacheMap[term.identifier];
 		};
 	}])
 
