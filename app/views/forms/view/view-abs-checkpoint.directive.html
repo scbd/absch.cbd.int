@@ -8,7 +8,7 @@
 	<div class="record-body panel-body" help schema="ViewCP" show-help="showHelp">
 		 <div name="article17-1-a"></div>
 
-		<legend>General information</legend>	
+		<legend ng-if="document.government || document.name">General information</legend>	
 
 		<div ng-show="document.government">
 			<label name="country">Country <span class="help-block">The country publishing this record.</span></label>
@@ -51,7 +51,7 @@
 			</div>-->
 		</div>
 
-		<div>
+		<div ng-if="document.informAllAuthorities || document.authoritiesToInform || document.contactsToInfor" >
 			<legend>Authority/ies to receive courtesy copies of checkpoint communiqués of the information collected or received from this checkpoint</legend>
 			<div class="help-block">All national authorities and contacts indicated below will receive email copies of checkpoint communiqués containing the information collected or received and published from this checkpoint. Please note that the national authorities providing prior informed consent (PIC) will also automatically receive email copies of all published checkpoint communiqués (CPC). The ABSCH can not guarantee that emails have been received or read.</div>
 			<div class="km-value" ng-show="document.informAllAuthorities">

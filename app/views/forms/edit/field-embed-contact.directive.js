@@ -204,7 +204,7 @@ app.directive("fieldEmbedContact", [ function () {
 							$scope.model = contacts;
 						else
 							$scope.model = undefined;
-					}
+				
 				}
 				else{
 					if(confirm("Are you you want to delete this record?")){

@@ -5,7 +5,8 @@
 		</h4></div>
 	<div class="record-body panel-body">
 
-			<legend>General information</legend>	
+			<legend ng-if="document.government || document.title || document.description || document.jurisdiction || document.jurisdictionRegions || document.status || document.adoption">
+				General information</legend>	
 
 		<div ng-show="document.government">
 			<label name="country">Country <span class="help-block">The country publishing this record.</span></label>
