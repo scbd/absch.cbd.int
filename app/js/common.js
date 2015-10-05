@@ -1,6 +1,7 @@
 define(['app', 'underscore'], function(app, underscore) {
 
-    app.factory('commonjs', ['$http', '$rootScope','realm', function($http, $rootScope, realm) {
+    app.factory('commonjs', ['$http', '$rootScope','realm', 'IStorage', '$filter', '$q',
+      function($http, $rootScope, realm, storage, $filter, $q) {
         return new function() {
 
             this.getReferenceRecordIndex = function(schema, documentId) {
@@ -100,11 +101,11 @@ define(['app', 'underscore'], function(app, underscore) {
             this.isIAC = function() {
                 return this.isUserInRole($rootScope.getRoleName('abschiac'));
             }
-            
+
             this.isAbsAdministrator = function() {
                 return this.isUserInRole($rootScope.getRoleName('AbsAdministrator'));
             }
-            
+
             this.isAnyOtherRoleThenIAC = function() {
 
                 return this.isUserInRole($rootScope.getRoleName('AbsPublishingAuthorities')) ||
@@ -177,12 +178,12 @@ define(['app', 'underscore'], function(app, underscore) {
 
                 return hex;
             }
-            
+
             this.getCountriesMultilateralMeasures = function(countryList) {
-               
+
                var q = 'realm_ss:' + realm.value.toLowerCase() + ' AND NOT version_s:* AND schema_s:measure ';
                    q += 'AND jurisdictionRegions_REL_ss:(' + countryList + ')'
-               
+
                var  queryParameters = {
                     'q': q,
                     'fl': 'id,identifier_s,title_t,createdDate_dt,description_t,url_ss,schema_EN_t,jurisdiction_EN_t,jurisdiction_s,uniqueIdentifier_s,schema_s,' +
@@ -193,14 +194,35 @@ define(['app', 'underscore'], function(app, underscore) {
                 };
                 return $http.get('/api/v2013/index',{params: queryParameters});
 
-            }            
-            
+            };
 
+            this.loadMeasuresForDropdown = function(currentDocumentIdentifier) {
+                var permit = storage.documents.query("(type eq 'measure')",undefined);
+                return $q.when(permit).then(function(o){
+                      var permits =  [];
+                     var permitData = o.data.Items.map(function(permit){
+                                        if(permit.identifier != currentDocumentIdentifier){
+                                            var uniqueID =  $filter("uniqueID")(permit);  //'ABSCH-MSR-' + $filter("uppercase")(permit.metadata.government) + '-' + permit.documentID;
+                                            return $q.when(uniqueID)
+                                                .then(function(uniqueIdentifier){
+                                                    return {"title": permit.title.en + ' (' + uniqueIdentifier + ')', "identifier": permit.identifier};
+                                                });
+                                        }
+                                      });
+                    return $q.all(permitData)
+                          .then(function(data){
+                                _.map(data, function(permit){
+                                    permits.push(permit);
+                                });
+                            return permits;
+                        });
+            });
+         }
 			function isNPParty(entity) {
 
 				if(entity && entity.isNPParty!= undefined)
 					return entity.isNPParty;
-                    
+
                 if(entity && entity.isNPInbetweenParty!= undefined)
 					return entity.isNPInbetweenParty;
 
@@ -234,8 +256,8 @@ define(['app', 'underscore'], function(app, underscore) {
                     entity.treaties.XXVII8b.instrument == "accession" ||
                     entity.treaties.XXVII8b.instrument == "acceptance" || entity.treaties.XXVII8b.instrument == "approval");
             }
-            
-            
+
+
              function showHelp(entity) {
 
 				if(entity && entity.isCBDParty!= undefined)

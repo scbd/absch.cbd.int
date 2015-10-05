@@ -46,14 +46,15 @@
                   Please select the previously registered record that is being amended.
                 </strong>
                 <hr>
-                <div class="km-control-group" name="amendedMeasures" required caption="List of amended measures">
-                  <div class="help-block">Please indicate if this measure amends a previously registered one by providing a cross-reference link to the amended measure.</div>
-                  <div km-reference multiple name="amendedMeasures" ng-model="document.amendedMeasures" loader="loadRecords(identifier, 'measure', false)">
-                    <div>
-                      <div><strong>{{reference.title | lstring}}</strong></div>
-                      <div ng-bind-html="reference.summary | lstring"></div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="control-group">
+                            <div class="km-control-group" name="amendedMeasures" caption="List of amended measures">
+                                <div class="help-block">Please indicate if this measure amends a previously registered one by providing a cross-reference link to the amended measure.</div>
+                                <div km-select multiple name="amendedMeasures" ng-model="document.amendedMeasures"items="options.measures()" placeholder="Please select ..."></div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
                 <div class="km-control-group" name="amendmentsDescription" caption="Summary of the amendment(s)">
                   <div km-rich-textbox ng-model="document.amendmentsDescription" rows="4" locales="document.header.languages"></div>
@@ -198,13 +199,14 @@
               <div class="col-sm-12">
                 <div class="km-control-group" name="linkedMeasures" caption="Relationship with other measures">
                 <div class="help-block">Please indicate if there is any relationship between this document / measure and other law, regulation, guidelines, administrative or policy measures. For example, if  the measure being submitted is implementing an existing law. This information will assist in displaying information on the national legal framework.</div>
-                  <div km-reference multiple name="linkedMeasures" ng-model="document.linkedMeasures" loader="loadRecords(identifier, 'measure')">
+                <div km-select multiple name="linkedMeasures" ng-model="document.linkedMeasures"items="options.measures()" placeholder="Please select ..."></div>
+                  <!-- <div km-reference multiple name="linkedMeasures" ng-model="document.linkedMeasures" loader="loadRecords(identifier, 'measure')">
                     <div>
                       <span>{{reference.title.en}}<span>
                       <div><strong>{{reference.title | lstring}}</strong></div>
                       	<div ng-bind-html="reference.summary | lstring"></div>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -263,7 +265,7 @@
               }
               .boldText{
                 font-weight: bold;
-                
+
               }
               .normalText{
                 font-weight: normal;
@@ -273,7 +275,7 @@
                   margin-top:30px!important;
                   border-bottom:1px #fff solid;
                   text-transform:uppercase;
-                 
+
               }
             </style>
             <script type="text/ng-template"  id="/app/views/forms/edit/edit-measure.directive/abs">
@@ -286,17 +288,17 @@
                 <table style="width:100%" cellspacing="0" cellpadding="0">
                 <tr ng:class="{paddingleft0 : isMainElement(term.identifier), 'measureChecked' : identifiers[term.identifier]}" >
                   <td style="text-align:left;vertical-align:middle" id="{{term.identifier}}_help" style="" >
-                  
+
                     <label for="{{term.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED' ? 'otherAbsMeasure' : term.identifier}}" name="{{term.identifier}}" >
                          &nbsp;
                          <input type="checkbox" ng-model="identifiers[term.identifier]" ng-required="IsRequired()" value="{{term.identifier}}"
                          ng:if="!isReadOnly(term.identifier)" />
-                         
+
                          <span title="{{term.description|lstring:locale}}" ng:class="{true:'boldText',false:'normalText'}[isMainElement(term.identifier) || isSecondaryElement(term.identifier)]" style="position:relative;top:2px;">
                               <span ng-class="{'boldText':term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0}">{{term.title||term.name | lstring:locale}} </span>
                               <i ng-show="term.description" class="icon-question-sign"></i>
                          </span>
-                         
+
                     </label>
                   </td>
                   <td style="text-align:left;vertical-align:middle" >
@@ -308,7 +310,7 @@
                   </td>
                   <td style="width:250px;text-align:right;vertical-align:middle">
                     <div ng-show="identifiers[term.identifier]"  km-textbox-ml ng-model="sections[term.identifier]" locales="locales" ng-required="identifiers[term.identifier]" ng-disabled="!identifiers[term.identifier]" placeholder="example: Article 14.2"></div>
-                    
+
                     <i class="fa fa-chevron-circle-up pull-right hand" ng-click="term.showUp=!term.showUp;showHideNode(term.identifier)" ng-show="!term.showUp" ng:if="isReadOnly(term.identifier)"></i>
                     <i class="fa fa-chevron-circle-down pull-right hand" ng-click="term.showUp=!term.showUp;showHideNode(term.identifier)" ng-show="term.showUp" ng:if="isReadOnly(term.identifier)"></i>
                   </td>
@@ -326,8 +328,8 @@
                   <div style="font-weight:bold;">Check the relevant elements of the measure</div>
                   <div flex style="text-align:right;font-weight:bold;">Add reference to relevant articles and sections</div>
                 </div>
-               
-               <div edit-measure-abs name="absMeasures" api="absMeasureApi" required ng-model="document.absMeasures" locales="document.header.languages" 
+
+               <div edit-measure-abs name="absMeasures" api="absMeasureApi" required ng-model="document.absMeasures" locales="document.header.languages"
                    document="document"></div>
               </div>
             </div>
