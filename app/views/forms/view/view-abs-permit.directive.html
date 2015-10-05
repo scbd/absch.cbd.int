@@ -5,7 +5,8 @@
 		</h4> </div>
 	<div class="record-body panel-body">
 
-			<div class="pull-right">
+
+			<div class="pull-right" ng-if="document.info">
 				<a class="btn btn-primary" target="_new" ng-href="/database/record/{{document | uniqueID}}"><i class="fa fa-file-pdf-o"></i> Download</a>
 			</div>
 			<br/>
@@ -226,7 +227,7 @@
 				</div>
 			</div>
 
-			<div>
+			<div ng-if="document.usage">
 				<label>Indicate if the permit or its equivalent covers commercial and/or non-commercial use</label>
 				<div class="km-value" ng-if="document.usage && !document.usageConfidential">
 					<ul>
@@ -322,9 +323,10 @@
 			</div>
 
       <!-- <div view-related-checkpoint-communique permit-id="document.header.identifier"></div> -->
-
-			<legend>Certificate History</legend>
-			<div view-history document-id="document.header.identifier" load-documents="true" government="document.government.identifier"></div>
+	  		<div  ng-if="document.info">
+				<legend>Certificate History</legend>
+				<div view-history document-id="document.header.identifier" load-documents="true" government="document.government.identifier"></div>
+			</div>
 	</div>
 	<div document-metadata  class="panel-footer"></div>
 </div>
