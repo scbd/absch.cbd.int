@@ -7,7 +7,7 @@
 
 	<div name="article-13-2"></div>
 
-		<legend>General information</legend>	
+		<legend ng-if="document.government || document.name || document.name || document.address || document.city || document.state|| document.postalCode || document.country || document.phones.length > 0 ||document.websites.length > 0 || document.faxes.length > 0|| document.emails.length > 0">General information</legend>	
 
 		<div ng-show="document.government">
 			<label name="country">Country <span class="help-block">The country publishing this record.</span></label>
@@ -16,7 +16,7 @@
 			</div>
 		</div>
 		
-		<div>
+		<div ng-if="document.name || document.address || document.city || document.state|| document.postalCode || document.country || document.phones.length > 0 ||document.websites.length > 0 || document.faxes.length > 0|| document.emails.length > 0 " >
 			<label name="name">Competent National Authority</label>
 			<div class="km-value">
 				<div><strong>{{document.name | lstring:locale}}</strong></div>
@@ -46,8 +46,8 @@
 		</div>
 
 		
-		<legend ng-if="contacts">Contact(s)</legend>
-		<div ng-show="contacts" class="row">
+		<legend ng-if="contacts.length > 0">Contact(s)</legend>
+		<div ng-show="contacts.length > 0" class="row">
 				<div ng-repeat="contact in contacts" >
 					<div class="col-xs-12">
 						<div view-contact-reference ng-model="contact" locale="locale" class="well" style="margin-bottom:0;"></div>
@@ -80,7 +80,7 @@
 
 		</div>
 
-		<div>
+		<div ng-if="document.responsibilities ||document.absResponsibleForAll || document.absFunctions|| document.absJurisdiction||document.absGeneticResourceTypes ">
 			<legend name="ABSResponsibilities">Summary of ABS Responsibilities </legend>
 
 			<div ng-show="document.responsibilities">
