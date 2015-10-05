@@ -207,8 +207,8 @@
 		<div ng-show="document.authorities" class="row">
 			<legend>Regulatory contact information</legend>
 			<div  ng-repeat="item in document.authorities">
-				<div class="clearfix" ng-if="$index % 3 == 0"></div>
-				<div class="col-lg-4">
+				
+				<div class="col-xs-12">
 					<div view-contact-reference ng-model="item" locale="locale" class="well"></div>
 				</div>
 			</div>

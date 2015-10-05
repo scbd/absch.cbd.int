@@ -14,7 +14,7 @@
     color: #999;
     padding: 0 0 0 3px;
     margin: 0 0 5px 0;
-	display:inline;
+	display:inline-block;
 	font-weight:500;
 	text-transform: none;
 }

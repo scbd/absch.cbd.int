@@ -46,11 +46,10 @@
 		</div>
 
 		
-		<legend ng-if="contacts">Contact People</legend>
+		<legend ng-if="contacts">Contact(s)</legend>
 		<div ng-show="contacts" class="row">
 				<div ng-repeat="contact in contacts" >
-					<div class="clearfix" ng-if="$index % 3 == 0"></div>
-					<div class="col-lg-4">
+					<div class="col-xs-12">
 						<div view-contact-reference ng-model="contact" locale="locale" class="well"></div>
 					</div>
 				</div>
