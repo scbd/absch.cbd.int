@@ -200,6 +200,10 @@ app.directive("fieldEmbedContact", [ function () {
 				if(isSoft){
 					if(confirm("Are you you want to remove this contact from the list?")){
 						contacts.splice(index,1);
+						if($scope.multiple)
+							$scope.model = contacts;
+						else
+							$scope.model = undefined;
 					}
 				}
 				else{
