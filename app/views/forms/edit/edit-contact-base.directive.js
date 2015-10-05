@@ -40,18 +40,18 @@ app.directive("editContactBase", [ function () {
 				}
 			});
 
-			$scope.$watch("_urls", function(){
-
-				var doc_websites = ($scope.document ? $scope.document.websites : []);
-				var doc_urls = _.compact(_.pick(doc_websites||[], "url"));
-				var    _urls = _.compact($scope._urls||[]);
-
-				if(!_.isEqual(doc_urls,  _urls) && $scope.document) {
-					$scope.document.websites = _.map(_urls, function(url){
-						return { url : url };
-					});
-				}
-			});
+			// $scope.$watch("_urls", function(){
+			//
+			// 	var doc_websites = ($scope.document ? $scope.document.websites : []);
+			// 	var doc_urls = _.compact(_.pick(doc_websites||[], "url"));
+			// 	var    _urls = _.compact($scope._urls||[]);
+			//
+			// 	if(!_.isEqual(doc_urls,  _urls) && $scope.document) {
+			// 		$scope.document.websites = _.map(_urls, function(url){
+			// 			return { url : url };
+			// 		});
+			// 	}
+			// });
 
 			$scope.$watch('document.organizationType', function(newValue){
 				if(newValue && newValue.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'){
