@@ -23,7 +23,7 @@
 
                     <div ng-show="tab=='edit'" km-tab="edit">
                         <legend name="formInfo" style="display:none"></legend>
-                        
+
                         <section>
                             <legend name="generalInfo">General information</legend>
 
@@ -33,7 +33,7 @@
                                         <div >
                                             <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries"
                                             filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
-                                        </div> 
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -129,19 +129,17 @@
                                 </div>
                             </div>
                         </section>
-                        
+
                              <section>
                             <legend>Legal, administrative or policy basis for the competence of the CNA</legend>
 
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div class="km-control-group" name="absPolicyBasisForCompetencyRef" caption="Provide a reference to the legal, administrative or policy measure ABSCH record:"></div>
-                                    <div km-reference multiple name="absPolicyBasisForCompetencyRef" ng-model="document.absPolicyBasisForCompetencyRef" loader="loadRecords(identifier, 'measure')">
-                                        <div>
-                                            <div>
-                                                <strong>{{reference.title | lstring}}</strong>
-                                            </div>
-                                            <div ng-bind-html="reference.summary | lstring"></div>
+                                    <div class="control-group">
+                                        <div class="km-control-group" name="absPolicyBasisForCompetencyRef"
+                                            caption="Provide a reference to the legal, administrative or policy measure ABSCH record:">
+                                                <div km-select multiple name="absPolicyBasisForCompetency"
+                                                ng-model="document.absPolicyBasisForCompetencyRef"items="options.measures()" placeholder="Please select ..."></div>
                                         </div>
                                     </div>
                                 </div>
@@ -154,7 +152,7 @@
                                 </div>
                             </div>
                         </section>
-                        
+
 
                         <section>
                             <legend name="responsibilities">Responsibilities</legend>
@@ -215,8 +213,8 @@
                                             <div km-textbox-ml ng-model="document.absJurisdictionName" rows="1" locales="document.header.languages" placeholder="jurisdition names"></div>
                                         </div>
                                     </div>
-                                 
-                              
+
+
                                     <div class="clearfix"></div>
 
                                     <div class="col-xs-12">
@@ -238,7 +236,7 @@
                         </section>
 
 
-                   
+
 
                         <section>
                             <legend>Additional Information</legend>
