@@ -8,8 +8,10 @@
 	<div class="record-body panel-body" help schema="ViewCP" show-help="showHelp">
 		 <div name="article17-1-a"></div>
 
-		<div ng-show="document.government && display('government')">
-			<label>Country</label>
+		<legend>General information</legend>	
+
+		<div ng-show="document.government">
+			<label name="country">Country <span class="help-block">The country publishing this record.</span></label>
 			<div class="km-value">
 				{{document.government|term}}
 			</div>
