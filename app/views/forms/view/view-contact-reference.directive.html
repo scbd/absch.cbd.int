@@ -1,6 +1,7 @@
 ﻿<div>
-	<span ng-if="document.type=='CNA'" class="label label-primary">Competent National Authority</span>
+
 	<div ng-if="isOrganization()">
+		<div ng-if="document.type=='CNA'" style="margin-bottom:5px;"><span class="label label-primary" >Competent National Authority<span></div>
 		<div>
 			 <b>{{document.organization | lstring:locale}}</b>
 			 <span ng-show="document.organizationAcronym && (document.organizationAcronym | lstring:locale)!= 'NA'">({{document.organizationAcronym | lstring:locale}})</span>
@@ -53,6 +54,6 @@
 		Email: <span ng-repeat="item in document.emails"><a ng-href="mailto:{{item}}">{{item}}</a><span ng-show="!$last">, </span></span>
 	</div>
 	<div ng-show="document.websites">
-		Website: <span ng-repeat="item in document.websites"><a target="_new" ng-href="{{item}}">{{item}}</a><span ng-show="!$last">, </span></span>
+		Website: <span ng-repeat="item in document.websites"><a target="_new" ng-href="{{item.url}}">{{item.url}}</a><span ng-show="!$last">, </span></span>
 	</div>
 </div>
