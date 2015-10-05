@@ -1,7 +1,7 @@
-define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/directives/help-directive.html.js'], function(app, _) {
+define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/directives/help-directive.html.js', '/app/js/common.js'], function(app, _) {
 
-    app.controller("editAuthority", ["$scope", "$http", "$filter", "Thesaurus", "$q", "$controller", "Enumerable", "$location", "IStorage",
-     function($scope, $http, $filter, Thesaurus, $q, $controller, Enumerable, $location, storage) {
+    app.controller("editAuthority", ["$scope", "$http", "$filter", "Thesaurus", "$q", "$controller", "Enumerable", "$location", "IStorage", "commonjs",
+     function($scope, $http, $filter, Thesaurus, $q, $controller, Enumerable, $location, storage, commonjs) {
         $controller('editController', {
             $scope: $scope
         });
@@ -96,26 +96,7 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/direct
                 });
             },
             measures: function() {
-                var permit = storage.documents.query("(type eq 'measure')",undefined);
-                return $q.when(permit).then(function(o){
-                      var permits =  [];
-                     var permitData = o.data.Items.map(function(permit){
-                                        if(permit.identifier != $scope.document.header.identifier){
-                                            var uniqueID =  $filter("uniqueID")(permit);  //'ABSCH-MSR-' + $filter("uppercase")(permit.metadata.government) + '-' + permit.documentID;
-                                            return $q.when(uniqueID)
-                                                .then(function(uniqueIdentifier){
-                                                    return {"title": permit.title.en + ' (' + uniqueIdentifier + ')', "identifier": permit.identifier};
-                                                });
-                                        }
-                                      });
-                    return $q.all(permitData)
-                          .then(function(data){
-                                _.map(data, function(permit){
-                                    permits.push(permit);
-                                });
-                            return permits;
-                        });
-                });
+                return commonjs.loadMeasuresForDropdown();
             },
         });
         $scope.showResponsibleforAllMsg = function() {
