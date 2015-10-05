@@ -63,10 +63,10 @@
 			</div>
 			<div ng-show="document.contactsToInform" class="row">
 				<!--<label ng-if="document.informAllAuthorities || document.authoritiesToInform">Additional National Authorities to receive checkpoint communiqués by email from this checkpoint</label>-->
-				<div class="km-value" ng-repeat="contact in document.contactsToInform">
+				<div ng-repeat="contact in document.contactsToInform">
 					<div class="clearfix" ng-if="$index % 3 == 0"></div>
 					<div class="col-lg-4">
-						<div view-contact-reference ng-model="contact" locale="locale"></div>
+						<div view-contact-reference ng-model="contact" locale="locale" class="well"></div>
 					</div>
 				</div>
 			</div>
