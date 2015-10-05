@@ -20,12 +20,12 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                         $scope.showHelp = showHelp.value;
 
                                         var buttonTemplate = '';
-                                        
+
                                         // var buttonTemplate = '<div class="md-toolbar-tools"> <i class="material-icons">help_outline</i>   <a  ng-href="#" ng-click="showHelp.showTour=!showHelp.showTour" ng-if="!showHelp.showTour && showHelp.hasTour">' +
                                         //                      '   <i class="material-icons" >live_help</i>Tour</a><md-switch class="pull-right"' +
                                         //                      '   ng-model="showHelp.show"  aria-label="show help">' +
                                         //                      '   <h5>Help: <strong>{{showHelp.show ? "on" : "off"}}</strong></h5></md-switch></div>';
-                                                             
+
                                         // var formTemplate = '<div class="help-section" style="margin-bottom:20px;">' +
                                         //         '   <div class="help-title">' +
                                         //         '    {{control}}' +
@@ -37,26 +37,26 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                         //         '    <i class="material-icons">help_outline</i>' +
                                         //         '   </div>' +
                                         //         ' <div class="help-content" >{{content}}<div>';
-                                        
+
                                         var sectionTemplate = '<div ng-if="showHelp.show" class="help-section">  <div style="" class="help-section-title"><i class="fa fa-info-circle"></i> {{title}} <a class="help-section-close" ng-click="showHelp.show=false;Feedback_helpOff();" href="#" style="" ><i class="fa fa-times"></i> Turn off help <i class="fa fa-info-circle"></i> </a></div> <div class="help-section-content">{{content}}</div></div>';
-                                       
+
                                         var formTemplate = sectionTemplate;
-                                                
+
                                         var inlineTemplate= '<div class="help-inline-content" ng-if="showHelp.show"> <span><i class="fa fa-info-circle"></i> {{content}}</span> <div>';
-                                    
+
                                         var helpBlockTemplate= '<span class="help-block"> {{content}} <span>';
-                                    
-                                    
+
+
                                         var contentTemplate= '<div class="help-simple-content">{{content}}<div>';
-                                    
-                                    
+
+
                                         var controlTemplate = sectionTemplate;//'<span class="help-inline" ng-if="showHelp.show"><i class="material-icons">help_outline</i> {{content}}</span>'
 
                                         if (!$scope.schema) {
                                                 console.error('help schema name not provided')
                                                 return
                                         }
-                                        
+
                                         if (!$scope.delay) {
                                                 $scope.delay = 1000;
                                         }
@@ -64,9 +64,9 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                         $scope.Feedback_helpOff = function() {
                                                 $rootScope.$broadcast("showCustomToast", "helpOff");
                                         };
-                                        
-                                        
-                                      
+
+
+
 
                                          $scope.$watch('schema', function (newVal) {
 
@@ -102,10 +102,10 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                         help = _.first(response.data);
                                                         if(help){
                                                                 _.each(help.fields, function (field, key) {
-        
+
                                                                         var templateToUse = controlTemplate//;
-                                                                        var children = $element.find('div.km-control-group[name="' + field.name + '"] label');
-                                                                        
+                                                                        var children = $element.find('div.km-control-group[name="' + field.name + '"] label:first');
+
                                                                         // if(field.fieldType == 'control' && children.length==0){
                                                                         //     children = $element.find('label[name="' + field.name + '"]');
                                                                         // }
@@ -122,32 +122,32 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                                                   children = $element.find('div[name="' + field.name + '"]');
                                                                                 templateToUse = inlineTemplate;
                                                                         }
-                                                                        
+
                                                                         else if (field.fieldType == 'content' ) {
                                                                                 children = $element.find('div[name="' + field.name + '"]');
                                                                                 templateToUse = contentTemplate;
                                                                         }
-                                                                        
-                                                      
+
+
                                                                          if (children.length==0) {
                                                                             children = $element.find('#' + field.name);
-                                                                        }    
-                                                                         
-                                                                        if(field.fieldType == 'helpBlock') 
+                                                                        }
+
+                                                                        if(field.fieldType == 'helpBlock')
                                                                                 templateToUse = helpBlockTemplate;
-                                                                    
+
                                                                         if (field.embed){
                                                                                 var output = templateToUse.replace('{{content}}', $filter('lstring')(field.helpText));
                                                                                 output = output.replace('{{title}}', $filter('lstring')(field.fieldTitle));
                                                                                 children.after($compile(output)($scope));
                                                                         }
-                                                                        
+
                                                                         if (!children.attr('id')) {
                                                                                 children.attr('id', field.name);
                                                                         }
                                                                 });
                                                                 addJoyRideSteps();
-                                                                
+
                                                                 // if(help.repalceGlossaryTerms)
                                                                 //         repalceGlossaryTerms();
                                                         }
@@ -185,7 +185,7 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
 
                                                                 joyRideTemplate += '  <li data-id="' + field.name + '" ' + buttons + '><p>'
                                                                 + $filter('lstring')(field.helpText) + '</p></li>';
-                                                               
+
                                                                if(field.popup){
                                                                         var element = $element.find('#' + field.name);
                                                                         element.attr('data-toggle',"tooltip");
@@ -266,7 +266,7 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                 $element.find('#helpElement')
                                                         .joyride('destroy');
                                                joyride = false;
-                                               $scope.showHelp = {'show':true, showTour:false, hasTour:false};         
+                                               $scope.showHelp = {'show':true, showTour:false, hasTour:false};
                                         });
 
                                 }]
