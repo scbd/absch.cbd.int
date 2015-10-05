@@ -199,14 +199,7 @@
               <div class="col-sm-12">
                 <div class="km-control-group" name="linkedMeasures" caption="Relationship with other measures">
                 <div class="help-block">Please indicate if there is any relationship between this document / measure and other law, regulation, guidelines, administrative or policy measures. For example, if  the measure being submitted is implementing an existing law. This information will assist in displaying information on the national legal framework.</div>
-                <div km-select multiple name="linkedMeasures" ng-model="document.linkedMeasures"items="options.measures()" placeholder="Please select ..."></div>
-                  <!-- <div km-reference multiple name="linkedMeasures" ng-model="document.linkedMeasures" loader="loadRecords(identifier, 'measure')">
-                    <div>
-                      <span>{{reference.title.en}}<span>
-                      <div><strong>{{reference.title | lstring}}</strong></div>
-                      	<div ng-bind-html="reference.summary | lstring"></div>
-                    </div>
-                  </div> -->
+                <div km-select multiple name="linkedMeasures" ng-model="document.linkedMeasures"items="options.measures()" placeholder="Please select ..."></div>                  
                 </div>
               </div>
             </div>
