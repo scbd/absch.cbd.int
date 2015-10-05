@@ -51,23 +51,30 @@
    <!--  <div class="row">
         <div class="col-xs-12"><div style="border-bottom:3px solid #111;"></div></div>
     </div> -->
+<!--    
+        display: block;
+    width: 100%;
 
-    <div class="row" ng-if="getContacts().length > 0">
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    -->
 
-        <div ng-repeat="contact in getContacts() | filter:filterBy | filter:keywords">
-            <div class="clearfix" ng-if="$index % 3 == 0"></div>
-            <div class="col-lg-4 well  no-shadow thin-border">
-                <div class="pull-right" ><!-- ng-show="showButtons(contact)" -->
-                    <button type="button" class="btn btn-default" ng-click="deleteContact($index, true)"><i class="fa fa-times"></i>
-                    </button>
-                    <button type="button" class="btn btn-default" ng-click="editContact($index)"><i class="fa fa-edit"></i>
-                    </button>
+        <div  ng-if="getContacts().length > 0" >
+                <div class="col-xs-12 form-control no-shadow thin-border" ng-repeat="contact in getContacts() | filter:filterBy | filter:keywords" style="height:auto;margin-bottom:5px;" >
+                    <div class="pull-right" ><!-- ng-show="showButtons(contact)" -->
+                         <button type="button" class="btn btn-default" ng-click="editContact($index)"><i class="fa fa-edit"></i>
+                        </button>
+                        <button type="button" class="btn btn-default" ng-click="deleteContact($index, true)"><i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                    <view-contact-reference ng-model='contact' locale="en"></view-contact-reference>
                 </div>
-                <view-contact-reference ng-model='contact' locale="en"></view-contact-reference>
-            </div>
         </div>
 
-    </div>
     <!-- ng-show="showButtons()" -->
     	<button class="btn btn-default" ng-click="editContact(-1)" >
 	     <i class="fa fa-plus"></i> {{caption || 'ADD ORGANIZATION OR CONTACT »'}}
