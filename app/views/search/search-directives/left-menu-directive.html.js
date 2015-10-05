@@ -11,7 +11,11 @@ define(['app', '/app/js/common.js', '/app/js/thesaurus-service.js'], function (a
             controller: ['$scope', '$element', 'thesaurusService',
                 function ($scope, $element, thesaurusService) {
 
-                    $scope.buildQuery = function () {
+                    $scope.actions = {
+                        buidlQuery : buidlQuery
+                    }
+
+                    function buildQuery() {
                         var conditions = [];
                         buildConditions(conditions, $scope.terms);
 
