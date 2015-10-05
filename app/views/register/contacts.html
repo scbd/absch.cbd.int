@@ -14,7 +14,7 @@
         </h2>
         <div class="help1" ng-show="help">
             <p ng-hide="editing">
-                This common format is to be used for registering organizations and contacts which can be used in other national records. 
+                This common format is to be used for registering organizations and contacts which can be used in other national records.
             </p>
         </div>
 
@@ -25,11 +25,11 @@
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="msg=''">&times;</button>
             <strong>{{msg}}</strong>
         </div>
-        <div ng-show="user.isAuthenticated && !editing"> 
+        <div ng-show="user.isAuthenticated && !editing">
               <br/>
-            <field-embed-contact multiple ng-model="contacts" show-filter locales="localeRegister" caption="Add an organisation or a contact »"></field-embed-contact>
+            <field-embed-contact multiple ng-model="records" show-filter locales="localeRegister" caption="Add an organisation or a contact »"></field-embed-contact>
         </div>
-        
+
     </div>
   </div>
 </div>

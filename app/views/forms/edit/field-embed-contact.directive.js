@@ -128,7 +128,7 @@ app.directive("fieldEmbedContact", [ function () {
 				if(contact.firstName !==undefined && (!contact.firstName  || empty.test(contact.firstName ))) delete contact.firstName;
 				if(contact.middleName!==undefined && (!contact.middleName || empty.test(contact.middleName))) delete contact.middleName;
 				if(contact.lastName  !==undefined && (!contact.lastName   || empty.test(contact.lastName  ))) delete contact.lastName;
-				
+
 				var saveOperation;
 				//save the contact to db for furture use.
 				if(saveContact!=false){
@@ -137,35 +137,35 @@ app.directive("fieldEmbedContact", [ function () {
 				}
 				$q.when(saveOperation)
 				.then(function(){
-					
+
 					if(!$scope.showFilter && !$scope.organizationOnly){
 						delete contact.government;
 						delete contact.header;
 					}
 						// console.log(contact);
 					if($scope.multiple) {
-	
+
 						var contacts =  _.clone($scope.getContacts());
-	
+
 						if($scope.edition.index>=0)
 							contacts[$scope.edition.index] = contact;
 						else
 							contacts.push(contact);
-	
+
 						$scope.model = contacts;
-	
-	
+
+
 					}
 					else {
-	
+
 						$scope.model = contact;
 					}
 					$scope.existingContacts = null;
 					$scope.edition = null;
-	
+
 					//clear the dropdown list display text which remains after the dialog is closed.
 					$scope.$broadcast('clearSelectSelection');
-				
+
 				})
 				.catch(function(error){
 					if(error.data && error.data.message){
@@ -257,9 +257,9 @@ app.directive("fieldEmbedContact", [ function () {
 			//
 			//============================================================
 			$scope.loadExisting = function(){
-				
+
 				$scope.loading = true;
-				
+
 				$scope.selectExisting = !$scope.selectExisting;
 
 				if($scope.selectExisting)
@@ -273,7 +273,7 @@ app.directive("fieldEmbedContact", [ function () {
 				}
 
 				var contactType = 'contact';
-				
+
 				if($scope.organizationOnly)
 					contactType = 'organization';
 
@@ -290,7 +290,7 @@ app.directive("fieldEmbedContact", [ function () {
 								contact.source = contact.header.identifier;
 							delete contact.government;
 							delete contact.header;
-						}	//console.log(contact);
+						}	
 						$scope.existingContacts.push(contact);
 					});
 
