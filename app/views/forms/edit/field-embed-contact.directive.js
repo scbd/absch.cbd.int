@@ -74,6 +74,12 @@ app.directive("fieldEmbedContact", [ function () {
 
 				var contacts = $scope.getContacts();
 
+				var cnaContact = contacts[index];
+				if(cnaContact && cnaContact.type == 'CNA'){
+					alert('Please use the Competent National Authority form to edit this contact.');
+					return;
+				}
+
 				if(index<0 || index>=contacts.length) {
 					var id = guid();
 					if(!$scope.organizationOnly)
@@ -183,7 +189,7 @@ app.directive("fieldEmbedContact", [ function () {
 				var contacts = $scope.existingContacts;//_.clone($scope.getContacts());
 				if(isSoft)
 					contacts = $scope.getContacts();
-					
+
 				var indexNo = index;
 				if(index<0 || index>=contacts.length)
 					return;
@@ -191,12 +197,15 @@ app.directive("fieldEmbedContact", [ function () {
 				// if showfilter then permanently delete the record from draft.
 				//if($scope.showFilter){
 
+				if(isSoft){
+					if(confirm("Are you you want to remove this contact from the list?")){
+						contacts.splice(index,1);
+					}
+				}
+				else{
 					if(confirm("Are you you want to delete this record?")){
 						var contact = contacts[index];
-						if(isSoft){
-							contacts.splice(index,1);
-						}
-						else{
+
 							contact.loading = true;
 							storage.drafts.delete(contact.source || contact.header.identifier)
 							.then(function(){
@@ -207,46 +216,7 @@ app.directive("fieldEmbedContact", [ function () {
 									contact.loading = false;
 							});
 						}
-					}
-				// 	else
-				// 		return;
-				// }
-
-				    // $("#myModal").modal({
-				    //   "backdrop"  : "static",
-				    //   "keyboard"  : true,
-				    //   "show"      : true
-				    // });
-			     //    $("#deleteOk").on("click", function(e) {
-			   //          var contact = contacts[index];
-			   //          console.log(contact);
-			   //          console.log(indexNo);
-						// storage.drafts.delete(contact.header.identifier);
-
-				// 		contacts.splice(index,1);
-				// 		if($scope.multiple)
-				// 			$scope.model = contacts;
-				// 		else
-				// 			$scope.model = _.first(contacts);
-
-			 //            $("#myModal").modal('hide');
-			 //        });
-				//     $("#myModal").on("hide", function() {
-				//         $("#myModal a.btn").off("click");
-				//     });
-
-				//     $("#myModal").on("hidden", function() {
-				//         $("#myModal").remove();
-				//     });
-
-				// }
-				// else{
-					// contacts.splice(index,1);
-					// if($scope.multiple)
-					// 	$scope.model = contacts;
-					// else
-					// 	$scope.model = _.first(contacts);
-				// }
+				}
 			};
 
 
