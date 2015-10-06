@@ -35,7 +35,7 @@ define(['app', 'underscore'], function (app, _) {
                _.defaults(searchQuery, searchDefaults);
 
                var queryGroupParameters = {
-                    'q': searchQuery.query,
+                    'q': searchQuery.query + ' AND government_s:*',
                     'sort': searchQuery.sort,
                     'fl': searchQuery.fields,
                     'wt': 'json',
@@ -68,17 +68,17 @@ define(['app', 'underscore'], function (app, _) {
                         'facet.mincount': 1
                     };
                    var queryAction =  $http.get('/api/v2013/index/select', { params: queryFacetsParameters });
-                   return $q.when(queryAction)
+                   $q.when(queryAction)
                     .then(function (data) {
                         var facets = {};
-                        _.each(facetQuery.fields, function(facet){
+                        _.each(facetQuery.fl, function(facet){
                             facets[facet] = readFacets2(data.data.facet_counts.facet_fields[facet]);
                         });
                         console.log(facets);
                         return facets;
-                    });
+                    })
                 }
-
+            
            }
 
 
@@ -98,6 +98,6 @@ define(['app', 'underscore'], function (app, _) {
                 }
                 return facets;
            };
-       }
+        }
     }]);
 });
