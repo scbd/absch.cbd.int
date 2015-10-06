@@ -2,22 +2,22 @@ define(['app', 'underscore'], function (app, _) {
 
     app.factory('searchService', ['$http', '$q', function ($http, $q) {
         return new function () {
-            
+
             var searchDefaults = {
                 currentPage     : 0,
                 rowsPerPage     : 25,
                 sort            : 'createdDate_dt desc',
                 fields          : 'title_t, description_t',
                 query           : '*:*',
-                
+
                 groupSort       :   'government_EN_t',
                 groupField      :   'government_EN_t asc'
             }
-            
+
             this.list = function(searchQuery, queryCanceler){
-               
+
                _.defaults(searchQuery, searchDefaults);
-               
+
                var queryListParameters = {
                     'q': searchQuery.query,
                     'sort': searchQuery.sort,
@@ -26,14 +26,14 @@ define(['app', 'underscore'], function (app, _) {
                     'start': searchQuery.currentPage * searchQuery.rowsPerPage,
                     'rows': searchQuery.rowsPerPage,
                 };
-                
+
                 return $http.get('/api/v2013/index/select', { params: queryListParameters, timeout: queryCanceler });
             }
-            
+
             this.group = function(searchQuery, queryCanceler){
-                
+
                _.defaults(searchQuery, searchDefaults);
-               
+
                var queryGroupParameters = {
                     'q': searchQuery.query + ' AND government_s:*',
                     'sort': searchQuery.sort,
@@ -47,19 +47,19 @@ define(['app', 'underscore'], function (app, _) {
                     'group.limit': 1000,
                     'group.sort': searchQuery.groupSort
                 };
-                
+
                 return $http.get('/api/v2013/index/select', { params: queryGroupParameters, timeout: queryCanceler });
             }
-            
+
             this.facets = function(facetQuery){
-                
+
                _.defaults(facetQuery, searchDefaults);
-               
+
                 if(facetQuery) {
-                    
+
                     var queryFacetsParameters = {
                         'q'             : facetQuery.query,
-                        'fl'            : '', 
+                        'fl'            : '',
                         'wt'            : 'json',
                         'rows'          : 0,
                         'facet'         : true,
@@ -77,10 +77,11 @@ define(['app', 'underscore'], function (app, _) {
                         console.log(facets);
                         return facets;
                     })
-                }                
+                }
+            
            }
-           
-           
+
+
            /////////////////////////////////////
            //       internal functions        //
            ////////////////////////////////////
@@ -89,9 +90,9 @@ define(['app', 'underscore'], function (app, _) {
                 var facets = [];
                 if(solrArray){
                     for (var i = 0; i < solrArray.length; i += 2) {
-    
+
                         var facet = solrArray[i];
-    
+
                         facets.push({ symbol: facet, title: facet, count: solrArray[i + 1] });
                     }
                 }
