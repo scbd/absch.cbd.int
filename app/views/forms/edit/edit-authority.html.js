@@ -1,15 +1,16 @@
-define(['app', '/app/views/forms/edit/edit.js', '/app/views/directives/help-directive.html.js'], function(app) {
+define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/directives/help-directive.html.js', '/app/js/common.js'], function(app, _) {
 
-    app.controller("editAuthority", ["$scope", "$http", "$filter", "Thesaurus", "$q", "$controller", "Enumerable", "$location", function($scope, $http, $filter, Thesaurus, $q, $controller, Enumerable, $location) {
+    app.controller("editAuthority", ["$scope", "$http", "$filter", "Thesaurus", "$q", "$controller", "Enumerable", "$location", "IStorage", "commonjs",
+     function($scope, $http, $filter, Thesaurus, $q, $controller, Enumerable, $location, storage, commonjs) {
         $controller('editController', {
             $scope: $scope
         });
 
         $scope.path = $location.path();
         //$scope.documentUID = "NEW";
-        
-        
-       
+
+
+
 
         _.extend($scope.options, {
             organizationTypes: function() {
@@ -93,6 +94,9 @@ define(['app', '/app/views/forms/edit/edit.js', '/app/views/directives/help-dire
                 }).then(function(o) {
                     return Thesaurus.buildTree(o.data);
                 });
+            },
+            measures: function() {
+                return commonjs.loadMeasuresForDropdown();
             },
         });
         $scope.showResponsibleforAllMsg = function() {
@@ -183,7 +187,7 @@ define(['app', '/app/views/forms/edit/edit.js', '/app/views/directives/help-dire
                 return false;
 
             //var jurisdictions = $scope.document.absJurisdiction
-            
+
             if($scope.document.absJurisdiction.identifier == 'DEBB019D-8647-40EC-8AE5-10CA88572F6E' || $scope.document.absJurisdiction.identifier == 'DEEEDB35-A34B-4755-BF77-D713017195E3' || $scope.document.absJurisdiction.identifier == '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')
                 return true;
         }

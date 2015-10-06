@@ -77,14 +77,14 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 			//====================
 			//
 			//====================
-			$scope.$watch("document.responsibleAuthority", function () {
-				if ($scope.document) {
-					$scope.responsibleAuthority = angular.fromJson(angular.toJson($scope.document.responsibleAuthority));
-
-					if ($scope.responsibleAuthority)
-						$scope.loadReference($scope.responsibleAuthority);
-				}
-			});
+			// $scope.$watch("document.responsibleAuthority", function () {
+			// 	if ($scope.document) {
+			// 		$scope.responsibleAuthority = angular.fromJson(angular.toJson($scope.document.responsibleAuthority));
+			//
+			// 		if ($scope.responsibleAuthority)
+			// 			$scope.loadReference($scope.responsibleAuthority);
+			// 	}
+			// });
 
 			//====================
 			//

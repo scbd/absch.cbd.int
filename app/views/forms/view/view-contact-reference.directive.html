@@ -1,8 +1,9 @@
 ﻿<div>
-
-	<div ng-show="isOrganization()">
+	<div ng-if="isOrganization()">
+		<div ng-if="document.type=='CNA'" style="margin-bottom:5px;"><span class="label label-primary" >Competent National Authority<span></div>
 		<div>
-			 <b>{{document.organization | lstring:locale}}</b> <span ng-show="document.organizationAcronym">({{document.organizationAcronym | lstring:locale}})</span>
+			 <b>{{document.organization | lstring:locale}}</b>
+			 <span ng-show="document.organizationAcronym && (document.organizationAcronym | lstring:locale)!= 'NA'">({{document.organizationAcronym | lstring:locale}})</span>
 		</div>
 
 		<div>{{document.prefix | lstring:locale}} {{document.firstName}} {{document.middleName}} {{document.lastName}}</div>
@@ -14,7 +15,7 @@
 
 	</div>
 
-	<div ng-show="isPerson()">
+	<div ng-if="isPerson()">
 		<div>
 			 <b>{{document.prefix | lstring:locale}} {{document.firstName}} {{document.middleName}} {{document.lastName}}</b>
 		</div>
@@ -25,7 +26,8 @@
 		</div>
 
 		<div>
-			{{document.organization | lstring:locale}} <i ng-show="document.organizationAcronym">({{document.organizationAcronym | lstring:locale}})</i>
+			{{document.organization | lstring:locale}} <i ng-show="document.organizationAcronym">
+				({{document.organizationAcronym | lstring:locale}})</i>
 		</div>
 
 	</div>

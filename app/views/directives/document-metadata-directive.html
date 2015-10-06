@@ -38,7 +38,7 @@
 			<div >
 					<label class="record-metadata-label">Record identifier:</label>
 					<span class="record-metadata-text">
-						{{document.info.identifier | uniqueIDWithoutRevision }}
+				
 						<a target="_new" href="/database/{{getDocumentSchema(document.header.schema)}}/{{getDocumentId(document)}}">
 				 			<span >{{document.info | uniqueIDWithoutRevision }}</span>
 							<span ng-show="document.id">{{getDocumentId(document)}}</span>
@@ -46,9 +46,6 @@
 						<span ng-show="!document.info  && !document.id">not yet assigned</span>
 					</span>
 			</div>
-
-
-
 			</div>
 		</div>
 </div>

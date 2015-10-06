@@ -777,7 +777,7 @@ footer .logo {
 
 
 .help-color{color:#FF4081}
-.help-section{padding:10px;background-color:#FFC0CB;margin-bottom:20px;}
+.help-section{padding:10px;background-color:#EFEFEF;margin-bottom:20px;}
 .help-section i{position:relative;top:0px;}
 
 .help-section-title{border-bottom:1px solid #BBB;margin-bottom:5px;}
@@ -785,7 +785,7 @@ footer .logo {
 .help-section-content{};
 
 .help-inline{padding:3px; color:#666; font-size: 12px; font-weight:bold;  background-color: #FFC0CB;}
-.help-inline-content{}
-
+.help-inline-content{display:inline-block;}
+.help-inline-content div{display:inline;}
 .help-simple-content{}
 

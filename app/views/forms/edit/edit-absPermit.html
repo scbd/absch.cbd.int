@@ -83,7 +83,8 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="km-control-group" name="authority" required caption="Competent national authority responsible for issuing the permit or its equivalent">
-                                <field-embed-contact ng-model="document.authority" locales="document.header.languages" caption="Add Issuing Authority »"></field-embed-contact>
+                                <field-embed-contact ng-model="document.authority" locales="document.header.languages"
+                                 caption="{{(document.authority ? 'Change' : 'Add') + ' Issuing Authority »'}}"></field-embed-contact>
                             </div>
                         </div>
                     </div>
@@ -103,7 +104,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="km-control-group" name="nationalReferences" caption="Additional national references or identifiers">
@@ -112,7 +113,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="row">
                         <div class="col-xs-6">
                             <div class="km-control-group" name="date" required caption="Date of issuance of the permit or its equivalent">
@@ -132,11 +133,11 @@
 
                     <div class="row">
                         <div class="col-xs-12" >
-                            
+
                                 <div class="panel panel-default" >
                                     <div class="panel-heading">
                                         <span ng-class="{'confidential-text':document.providerConfidential}">
-                                            <input type="checkbox" name="providerConfidential" ng-model="document.providerConfidential" watch-items> 
+                                            <input type="checkbox" name="providerConfidential" ng-model="document.providerConfidential" watch-items>
                                             This information is confidential</input>
                                         </span>
                                     </div>
@@ -148,11 +149,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>	
-                                
+                                </div>
+
                         </div>
                     </div>
-                
+
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="km-control-group" required name="consentGranted" caption="Confirmation that prior informed consent (PIC) was obtained or granted">
@@ -183,11 +184,11 @@
 
                     <div class="row">
                         <div class="col-xs-12">
-                            
+
                              <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <span ng-class="{'confidential-text':document.informedConsentConfidential}">
-                                            <input type="checkbox" name="informedConsentConfidential" ng-model="document.informedConsentConfidential" watch-items> 
+                                            <input type="checkbox" name="informedConsentConfidential" ng-model="document.informedConsentConfidential" watch-items>
                                             This information is confidential</input>
                                         </span>
                                     </div>
@@ -199,8 +200,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            
-                            
+
+
                         </div>
                     </div>
 
@@ -248,32 +249,34 @@
                     <legend>Subject-matter</legend>
                     <div class="row">
                         <div class="col-xs-12">
-                            
-                            
+
+
                               <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <span ng-class="{'confidential-text':document.geneticResourcesConfidential}">
-                                            <input type="checkbox" name="geneticResourcesConfidential" ng-model="document.geneticResourcesConfidential" watch-items> 
+                                            <input type="checkbox" name="geneticResourcesConfidential" ng-model="document.geneticResourcesConfidential" watch-items>
                                             This information is confidential</input>
                                         </span>
                                     </div>
                                     <div class="panel-body panel-body-confidential" ng-class="{'disable':document.geneticResourcesConfidential}">
                                         <div class="km-control-group" required name="geneticResources" caption="Subject-matter or genetic resources covered by the permit or its equivalent">
                                             <span class="help-block">Please provide information on the subject matter or genetic resources covered by the permit. This could include biota at any taxonomic rank, which may carry a taxonomic name. It may also include a locality of collection of the material. It may also be possible to identify the genetic resource through reference to a voucher specimen or field notes held in an identified archive or collection.</span>
-        
+
                                             <div ng-show="!document.geneticResourcesConfidential">
                                                 <div km-rich-textbox name="geneticResources" rows="6" ng-model="document.geneticResources" locales="document.header.languages"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            
+
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-xs-12">
-                            <div class="legend2" >Additional Subject Matter Information: Providing details about the subject matter or genetic resource covered by the permit or its equivalent can provide additional legal certainty.</div>
+                            <div class="legend2" >Additional Subject Matter Information
+                                <span class="help-block">Providing details about the subject matter or genetic resource covered by the permit or its equivalent can provide additional legal certainty.</span>
+                                </div>
                             <div class="km-control-group" name="specimen" caption="Specimen data">
                                 <span class="help-block">Link to a voucher specimen held in an appropriate facility</span>
                                 <div km-link name="specimen" ng-model="document.specimen" allow-link="true" allow-file="false" identifier="document.header.identifier"></div>
@@ -289,7 +292,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="row">
                         <div class="col-xs-12" >
                             <div class="km-control-group" ng-class="{warning:isInvalid('gisFiles')}">
@@ -311,10 +314,10 @@
                                     <input class="input-small" type="text" readonly value="{{document.gisMapCenter.zoom | number:0}}">
                                     <span class="add-on">zoom</span>
                                 </div>
-                                
+
                                 <div class="leaflet" center="document.gisMapCenter" layers="gisLayer"></div>
                             </div>
-                    
+
                      </div>
                     </div>
 
@@ -341,12 +344,12 @@
                     <legend name="utilization">Information on the utilization of the genetic resource(s)</legend>
                     <div class="row">
                         <div class="col-xs-12">
-                            
-                            
+
+
                             <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <span ng-class="{'confidential-text':document.usageConfidential}">
-                                            <input type="checkbox" name="usageConfidential" ng-model="document.usageConfidential" watch-items> 
+                                            <input type="checkbox" name="usageConfidential" ng-model="document.usageConfidential" watch-items>
                                             This information is confidential</input>
                                         </span>
                                     </div>
@@ -358,9 +361,9 @@
                                         </div>
                                     </div>
                                 </div>
-                            
-                            
-                            
+
+
+
                         </div>
                     </div>
 

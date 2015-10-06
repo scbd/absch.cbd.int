@@ -135,7 +135,7 @@ app.filter("formatDate", function(){
 app.filter("formatDateWithTime", function(){
 	return function(date,formart){
 		if(formart== undefined)
-			formart = 'MM/DD/YYYY hh:mm';
+			formart = 'DD MMM YYYY hh:mm a';
 		return moment(date).format(formart);
 	}
 });
@@ -189,7 +189,7 @@ function lstring(ltext, locale)
 	app.filter("formatDateWithTime", function(){
 		return function(date,formart){
 			if(formart== undefined)
-				formart = 'MM/DD/YYYY hh:mm';
+				formart = 'DD MMM YYYY hh:mm a';
 			return moment(date).format(formart);
 		}
 	});
@@ -197,7 +197,7 @@ function lstring(ltext, locale)
 app.filter("uniqueID", ['$filter', '$q','$http', function( $filter, $q, $http) {
 		var cacheMap = {};
 
-		return function(term) {
+		return function(term, revision) {
 
 			if(!term)
 				return "";
@@ -205,8 +205,8 @@ app.filter("uniqueID", ['$filter', '$q','$http', function( $filter, $q, $http) {
 			var document;
 
 			if(term && term.identifier){
-				if(cacheMap[term.identifier])
-					return cacheMap[term.identifier] ;
+				if(cacheMap[term.identifier + (revision ? '_revision':'')])
+					return cacheMap[term.identifier+ (revision ? '_revision':'')] ;
 
 				document = $http.get('/api/v2013/documents/' +  term.identifier +'?info=true');
 			}
@@ -215,7 +215,7 @@ app.filter("uniqueID", ['$filter', '$q','$http', function( $filter, $q, $http) {
 			if(!document)
 				return;
 
-			cacheMap[term.identifier] = $q.when(document).then(function(document) {
+			cacheMap[term.identifier+ (revision ? '_revision':'')] = $q.when(document).then(function(document) {
 
 				document = document.data;
 
@@ -229,14 +229,16 @@ app.filter("uniqueID", ['$filter', '$q','$http', function( $filter, $q, $http) {
 
 				var unique = 'ABSCH-' + $filter("schemaShortName")($filter("lowercase")(document.type)) +
 						(government != '' ? '-' + $filter("uppercase")(government) : '') +
-						'-' + document.documentID;
-				cacheMap[term.identifier] = unique;
+						'-' + document.documentID + (revision ? ('-' + document.revision) : '');
+
+
+				cacheMap[term.identifier+ (revision ? '_revision':'')] = unique;
 
 				return unique;
 
 			}).catch(function(){
 
-				cacheMap[term.identifier] = term.identifier;
+				cacheMap[term.identifier+ (revision ? '_revision':'')] = term.identifier;
 
 				return term.identifier;
 

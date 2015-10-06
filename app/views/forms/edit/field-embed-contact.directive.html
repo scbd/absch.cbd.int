@@ -51,22 +51,30 @@
    <!--  <div class="row">
         <div class="col-xs-12"><div style="border-bottom:3px solid #111;"></div></div>
     </div> -->
+<!--    
+        display: block;
+    width: 100%;
 
-    <div class="row" ng-if="getContacts().length > 0">
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    -->
 
-        <div class="col-sm-12"  ng-repeat="contact in getContacts() | filter:filterBy | filter:keywords">
-            <div class="well bg-white  no-shadow thin-border">
-                <div class="pull-right" ><!-- ng-show="showButtons(contact)" -->
-                    <button type="button" class="btn btn-default" ng-click="deleteContact($index)"><i class="fa fa-trash-o"></i>
-                    </button>
-                    <button type="button" class="btn btn-default" ng-click="editContact($index)"><i class="fa fa-edit"></i>
-                    </button>
+        <div  ng-if="getContacts().length > 0" >
+                <div class="col-xs-12 form-control no-shadow thin-border" ng-repeat="contact in getContacts() | filter:filterBy | filter:keywords" style="height:auto;margin-bottom:5px;" >
+                    <div class="pull-right" ><!-- ng-show="showButtons(contact)" -->
+                         <button type="button" class="btn btn-default" ng-click="editContact($index)"><i class="fa fa-edit"></i>
+                        </button>
+                        <button type="button" class="btn btn-default" ng-click="deleteContact($index, true)"><i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                    <view-contact-reference ng-model='contact' locale="en"></view-contact-reference>
                 </div>
-                <view-contact-reference ng-model='contact' locale="en"></view-contact-reference>
-            </div>
         </div>
-        
-    </div>
+
     <!-- ng-show="showButtons()" -->
     	<button class="btn btn-default" ng-click="editContact(-1)" >
 	     <i class="fa fa-plus"></i> {{caption || 'ADD ORGANIZATION OR CONTACT »'}}
@@ -76,11 +84,11 @@
     <div class="modal fade" id="editContact" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header bg-blue" >
+                <div class="modal-header" ng-class="{'bg-orange':organizationOnly, 'bg-blue':!organizationOnly}">
                     <button type="button" class="close" aria-hidden="true" ng-click="closeContact()"><i class="material-icons">close</i></button>
                     <h2 class="modal-title" id="myModalLabel">
-                        <span ng-hide="exisiting">Add a new Contact or Organization</span>
-                        <span ng-show="exisiting" >Select exisiting contact or organization</span>
+                        <span ng-hide="exisiting">Add a new <span ng-if="!organizationOnly">Contact or </span>Organization</span>
+                        <span ng-show="exisiting" >Select exisiting <span ng-if="!organizationOnly">Contact or </span>organization</span>
                     </h2>
                     <br>
                     <label ng-hide="selectExisting || organizationOnly" class="radio-inline">
@@ -92,7 +100,7 @@
                 </div>
                 <div class="modal-body" style="padding-top:0;">
                     <div ng-hide="selectExisting">
-                        
+
                          <div style="margin-bottom:30px;"></br>
                             <span class="color-red pull-left" ng-hide="editContactForm.$valid">* Mandatory fields must be filled in before record can be saved.</span>
                             <span class="alert alert-danger" ng-if="errorMessage">{{errorMessage}}</span>
@@ -111,18 +119,19 @@
                          </div>
                         <div class="clearfix"></div>
                     </div>
-                    
+
                       <div ng-show="loading && selectExisting">
                            <h1><i class="fa fa-spinner fa-spin"></i></h1>
                       </div>
-    
-                    <div ng-show="selectExisting && !showFilter">
-                        <div class="row">
-                            <br>
-                            <div class="col-xs-12" ng-repeat="contact in existingContacts | filter:isSelected">
+
+                    <div ng-show="selectExisting && !showFilter" class="row"></br>
+                        <div ng-repeat="contact in existingContacts | filter:isSelected">
+                           
+                            <div class="col-xs-12">
                                 <div class="well">
+                                    <i class="fa fa-spinner fa-spin" ng-if="contact.loading"></i>
                                     <div class="pull-right">
-                                        <!-- <button type="button" class="btn btn-default" ng-click="deleteContact($index)"><i class="fa fa-trash-o"></i></button> -->
+                                        <button type="button" class="btn btn-default" ng-click="deleteContact($index)"><i class="fa fa-trash-o"></i></button>
                                         <button type="button" class="btn btn-default" ng-click="selectContact(contact)"><i class="glyphicon glyphicon-thumbs-up"></i>
                                         </button>
                                     </div>

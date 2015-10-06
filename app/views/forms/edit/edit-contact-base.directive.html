@@ -52,7 +52,7 @@
 			<div class="km-control-group" name="contact_organization" ng-required="!form.organization.$valid && document.type!='person'" caption="Organization">
 				<div class="help-block">Fullname without abbreviation</div>
 				<div ng-if="document.header.schema=='organization'" km-textbox-ml name="contact_organization" ng-model="document.name" required locales="locales"></div>
-				<div ng-if="document.header.schema=='contact'" km-textbox-ml name="contact_organization" ng-model="document.organization"  locales="locales"></div>
+				<div ng-if="document.type=='organization'" km-textbox-ml name="contact_organization" ng-model="document.organization"  locales="locales"></div>
 			</div>
 		</div>
 
@@ -60,7 +60,7 @@
 				<div class="km-control-group" name="contact_organizationAcronym" caption="Acronym" ng-required="!form.organization.$valid && document.type!='person'">
 				<div class="help-block">Abbreviation for long name</div>
 				<div  ng-if="document.header.schema=='organization'" km-textbox-ml name="contact_organizationAcronym" ng-model="document.acronym" placeholder="example: SCBD" locales="locales"></div>
-				<div  ng-if="ddocument.header.schema=='contact'" km-textbox-ml name="contact_organizationAcronym" ng-model="document.organizationAcronym" placeholder="example: SCBD" locales="locales"></div>
+				<div  ng-if="document.type=='organization'" km-textbox-ml name="contact_organizationAcronym" ng-model="document.organizationAcronym" placeholder="example: SCBD" locales="locales"></div>
 			</div>
 		</div>
 	</div>
@@ -174,7 +174,7 @@
 		<div class="col-md-6 col-xs-12">
 			<div class="km-control-group" name="contact_phones" required caption="Phone numbers">
 				<div class="help-block">Please use the following format: +[country code] [city code] [telephone number] [extension, if necessary].</div>
-				<div km-inputtext-list name="contact_phones" ng-model="document.phones"  placeholder="example: +1 514.288.2220" required></div>
+				<div km-inputtext-list name="contact_phones" ng-model="document.phones"  placeholder="example: +1 514.288.2220" ></div>
 			</div>
 		</div>
 
@@ -189,13 +189,13 @@
 	<div class="row">
 		<div class="col-md-6 col-xs-12">
 			<div class="km-control-group" name="contact_emails" caption="Emails" required>
-				<div km-inputtext-list name="contact_emails" type="email" ng-model="document.emails" placeholder="example: secretariat@cbd.int" required></div>
+				<div km-inputtext-list name="contact_emails" type="email" ng-model="document.emails" placeholder="example: secretariat@cbd.int" ></div>
 			</div>
 		</div>
 
 		<div class="col-md-6 col-xs-12">
 			<div class="km-control-group" name="contact_websites" caption="Website addresses">
-				<div km-inputtext-list name="contact_websites" type="url" ng-model="$parent._urls" placeholder="example: http://www.cbd.int"></div>
+				<div km-inputtext-list name="contact_websites" type="url" ng-model="document.websites" placeholder="example: http://www.cbd.int"></div>
 			</div>
 		</div>
 	</div>

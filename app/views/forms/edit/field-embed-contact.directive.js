@@ -74,6 +74,12 @@ app.directive("fieldEmbedContact", [ function () {
 
 				var contacts = $scope.getContacts();
 
+				var cnaContact = contacts[index];
+				if(cnaContact && cnaContact.type == 'CNA'){
+					alert('Please use the Competent National Authority form to edit this contact.');
+					return;
+				}
+
 				if(index<0 || index>=contacts.length) {
 					var id = guid();
 					if(!$scope.organizationOnly)
@@ -178,61 +184,43 @@ app.directive("fieldEmbedContact", [ function () {
 			//
 			//
 			//============================================================
-			$scope.deleteContact = function(index) {
+			$scope.deleteContact = function(index, isSoft) {
 
-				var contacts = _.clone($scope.getContacts());
+				var contacts = $scope.existingContacts;//_.clone($scope.getContacts());
+				if(isSoft)
+					contacts = $scope.getContacts();
+
 				var indexNo = index;
 				if(index<0 || index>=contacts.length)
 					return;
 
 				// if showfilter then permanently delete the record from draft.
-				if($scope.showFilter){
+				//if($scope.showFilter){
 
+				if(isSoft){
+					//if(confirm("Are you you want to remove this contact from the list?")){
+						contacts.splice(index,1);
+						if($scope.multiple)
+							$scope.model = contacts;
+						else
+							$scope.model = undefined;
+				
+				}
+				else{
 					if(confirm("Are you you want to delete this record?")){
 						var contact = contacts[index];
-			            console.log(contact);
-			            console.log(indexNo);
-						storage.drafts.delete(contact.header.identifier);
-					}
-					else
-						return;
+
+							contact.loading = true;
+							storage.drafts.delete(contact.source || contact.header.identifier)
+							.then(function(){
+								contacts.splice(index,1);
+							})
+							.finally(function(){
+								if(contact)//incase if there is a error on delete
+									contact.loading = false;
+							});
+						}
 				}
-
-				    // $("#myModal").modal({
-				    //   "backdrop"  : "static",
-				    //   "keyboard"  : true,
-				    //   "show"      : true
-				    // });
-			     //    $("#deleteOk").on("click", function(e) {
-			   //          var contact = contacts[index];
-			   //          console.log(contact);
-			   //          console.log(indexNo);
-						// storage.drafts.delete(contact.header.identifier);
-
-				// 		contacts.splice(index,1);
-				// 		if($scope.multiple)
-				// 			$scope.model = contacts;
-				// 		else
-				// 			$scope.model = _.first(contacts);
-
-			 //            $("#myModal").modal('hide');
-			 //        });
-				//     $("#myModal").on("hide", function() {
-				//         $("#myModal a.btn").off("click");
-				//     });
-
-				//     $("#myModal").on("hidden", function() {
-				//         $("#myModal").remove();
-				//     });
-
-				// }
-				// else{
-					contacts.splice(index,1);
-					if($scope.multiple)
-						$scope.model = contacts;
-					else
-						$scope.model = _.first(contacts);
-				// }
 			};
 
 
@@ -290,7 +278,7 @@ app.directive("fieldEmbedContact", [ function () {
 								contact.source = contact.header.identifier;
 							delete contact.government;
 							delete contact.header;
-						}	
+						}
 						$scope.existingContacts.push(contact);
 					});
 

@@ -5,13 +5,16 @@
 		</h4></div>
 	<div class="record-body panel-body">
 
-			<div ng-show="document.government">
-			<label>Country</label>
+			<legend ng-if="document.government || document.title || document.description || document.jurisdiction || document.jurisdictionRegions || document.status || document.adoption">
+				General information</legend>	
+
+		<div ng-show="document.government">
+			<label name="country">Country <span class="help-block">The country publishing this record.</span></label>
 			<div class="km-value">
 				{{document.government|term}}
 			</div>
 		</div>
-			
+
 			<div ng-show="document.title">
 			 	<label>Title</label>
 			 	<div class="km-value">
@@ -24,21 +27,17 @@
 			<div class="km-value km-pre"ng-bind-html="document.description | lstring:local"></div>
 		</div>
 
-		
 
-		<div ng-show="document.jurisdiction">
-			<label>Jurisdiction</label>
-			<div class="km-value">
-				<ul>
-					<li>{{document.jurisdiction|term}}</li>
-				</ul>
+
+			<div ng-show="document.jurisdiction">
+				<label>Jurisdiction(s)</label>
+				<div class="km-value">
+					{{document.jurisdiction|term}}
+							<span ng-if="document.absJurisdictionName ">({{document.jurisdiction | lstring:locale}})</span>
+						
+				</div>
 			</div>
-		</div>
 
-		<div ng-show="document.jurisdictionName">
-			<label>Name of the sub-national jurisdiction / community</label>
-			<div class="km-value km-pre">{{document.jurisdictionName | lstring:review.local}}</div>
-		</div>
 
 		<div ng-show="document.jurisdictionRegions">
 			<label>Country name and/or Geographical or political/economic group(s)</label>
@@ -53,9 +52,7 @@
 		<div ng-show="document.status">
 			<label>Current status of the measure</label>
 			<div class="km-value">
-				<ul>
-					<li>{{document.status|term}}</li>
-				</ul>
+				{{document.status|term}}
 			</div>
 		</div>
 
@@ -83,9 +80,7 @@
 		<div ng-show="document.type">
 			<label>Type of document / measure</label>
 			<div class="km-value">
-				<ul>
-					<li>{{document.type|term}}</li>
-				</ul>
+				{{document.type|term}}
 			</div>
 		</div>
 
@@ -204,10 +199,13 @@
 			</div>
 		</div>
 
-		<div ng-show="document.authorities">
+		<div ng-show="document.authorities" class="row">
 			<legend>Regulatory contact information</legend>
-			<div class="km-value" ng-repeat="item in document.authorities">
-				<div view-contact-reference ng-model="item" locale="locale"></div>
+			<div  ng-repeat="item in document.authorities">
+				
+				<div class="col-xs-12">
+					<div view-contact-reference ng-model="item" locale="locale" class="well"></div>
+				</div>
 			</div>
 		</div>
 

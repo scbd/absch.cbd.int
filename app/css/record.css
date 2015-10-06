@@ -11,9 +11,12 @@
 
 #Record .help-block {
     font-size: 11px;
-    color: #666;
-    padding: 0;
+    color: #999;
+    padding: 0 0 0 3px;
     margin: 0 0 5px 0;
+	display:inline-block;
+	font-weight:500;
+	text-transform: none;
 }
 
 #Record .record{
@@ -30,10 +33,11 @@
 }
 
 #Record label{
-	 padding:10px 10px 0 0;
+	 padding:10px 0 0 0;
 	 font-size: 11px;
-	 text-transform: uppercase;
+	 /*text-transform: uppercase;*/
 	 color:#666;
+	 display:inline;
 
 }
 #Record .list{

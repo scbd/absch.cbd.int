@@ -7,6 +7,15 @@
 
 
 
+<legend>General information</legend>	
+
+		<div ng-show="document.government">
+			<label name="country">Country <span class="help-block">The country publishing this record.</span></label>
+			<div class="km-value">
+				{{document.government|term}}
+			</div>
+		</div>
+
 			<div ng-show="document.title">
 			 	<label>Title</label>
 			 	<div class="km-value">
@@ -28,12 +37,7 @@
 			</div>
 		</div>
 
-		<div ng-show="document.government">
-			<label>Country</label>
-			<div class="km-value">
-				{{document.government|term}}
-			</div>
-		</div>
+		
 
 		<div ng-show="document.relevantInformation||document.relevantDocuments">
 			<legend>Additional Information</legend>
