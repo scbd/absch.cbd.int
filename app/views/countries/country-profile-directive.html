@@ -409,51 +409,27 @@
                         <div class="row" ng-if="showIRCC && Permit > 0">
                             <div style="padding:10px; margin:0 20px;"><legend name="lblIRCC" style="display:none"></legend>
                                 <div class="row table-msr">
-                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortPermit='title_t';reversePermit=!reversePermit">name
+                                    <div class="col-xs-10 tableheader" ng-click="sortPermit='title_t';reversePermit=!reversePermit">title
                                         <i class="fa" ng-class="{'fa-caret-up':(sortPermit=='title_t' && reversePermit),'fa-caret-down':(sortPermit=='title_t' && !reversePermit)}"></i>
                                     </div>
-                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortPermit='informedConsents_CEN_ss';reversePermit=!reversePermit">issued to
-                                        <i class="fa" ng-class="{'fa-caret-up':(sortPermit=='informedConsents_CEN_ss' && reversePermit),'fa-caret-down':(sortPermit=='informedConsents_CEN_ss' && !reversePermit)}"></i>
-                                    </div>
-                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortPermit='authority_s';reversePermit=!reversePermit">CNA
-                                        <i class="fa" ng-class="{'fa-caret-up':(sortPermit=='authority_s' && reversePermit),'fa-caret-down':(sortPermit=='authority_s' && !reversePermit)}"></i>
-                                    </div>
-                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortPermit='keywords_CEN_ss';reversePermit=!reversePermit">subject matter
-                                        <i class="fa" ng-class="{'fa-caret-up':(sortPermit=='keywords_CEN_ss' && reversePermit),'fa-caret-down':(sortPermit=='keywords_CEN_ss' && !reversePermit)}"></i>
-                                    </div>
-                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortPermit='usage_CEN_ss';reversePermit=!reversePermit">use
-                                        <i class="fa" ng-class="{'fa-caret-up':(sortPermit=='usage_CEN_ss' && reversePermit),'fa-caret-down':(sortPermit=='usage_CEN_ss' && !reversePermit)}"></i>
-                                    </div>
-                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortPermit='date_dt';reversePermit=!reversePermit">date of issue
-                                        <i class="fa" ng-class="{'fa-caret-up':(sortPermit=='date_dt' && reversePermit),'fa-caret-down':(sortPermit=='date_dt' && !reversePermit)}"></i>
+                                    
+                                    
+                                    <div class="col-xs-2 tableheader" ng-click="sortPermit='publishedOnDate';reversePermit=!reversePermit">date of  issue
+                                        <i class="fa" ng-class="{'fa-caret-up':(sortPermit=='publishedOnDate' && reversePermit),'fa-caret-down':(sortPermit=='publishedOnDate' && !reversePermit)}"></i>
                                     </div>
                                 </div>
                                 <div class="row table-hover table-msr" ng-repeat="permit in absPermit = (absch_nfp|filter:isPermit|orderBy:sortPermit:reversePermit)">
                                     <div class="row border">
                                         <div ng-click="displayDetails=!displayDetails;showDetails(permit)" class="row table-row">
-                                            <div class="col-lg-2 col-md-2 col-xs-2">
+                                            <div class="col-xs-10">
                                                 <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
                                                     {{'ircc' | schemaIcon}}
                                                 </i> {{permit.title_t}}
                                                 <i class="fa fa-refresh fa-spin" ng-show="displayDetails&& !permit.data" />
                                             </div>
                                             <div class="col-lg-2 col-md-2 col-xs-2">
-                                                <div class="confidential" ng-show="!permit.informedConsents_CEN_ss">Confidential information</div>
-                                                {{permit.informedConsents_CEN_ss}}
+                                                {{permit.publishedOnDate|formatDate}}
                                             </div>
-                                            <div class="col-lg-2 col-md-2 col-xs-2">
-                                                {{parseJSON(permit.authority_s).firstName + ' ' + parseJSON(permit.authority_s).lastName}}
-                                            </div>
-                                            <div class="col-lg-2 col-md-2 col-xs-2">
-                                                <div class="confidential" ng-show="!permit.keywords_CEN_ss">Confidential information</div>
-                                                <span ng-repeat="keyword in permit.keywords_CEN_ss">{{parseJSON(keyword)|lstring}}{{$last ? '':', '}}</span>
-                                            </div>
-                                            <div class="col-lg-2 col-md-2 col-xs-2">
-                                                <span ng-repeat="usage in permit.usage_CEN_ss">{{parseJSON(usage)|lstring}}{{$last ? '':', '}}
-                                                    <br/>
-                                                </span>
-                                            </div>
-                                            <div class="col-lg-2 col-md-2 col-xs-2">{{permit.date_dt|formatDate}}</div>
                                         </div>
                                         <div class="row" ng-show="displayDetails">
                                             <i class="glyphicon glyphicon-remove-circle circle pull-right" style="position:relative;top:40px;z-index:100;font-size:20px;color:white;" ng-click="displayDetails=!displayDetails;"></i>
