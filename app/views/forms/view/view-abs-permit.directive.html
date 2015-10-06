@@ -231,17 +231,7 @@
 				</div>
 			</div>
 
-			<div ng-show="false">
-				<label>Keywords to describe the subject-matter or genetic resource(s) covered by the permit or its equivalent</label>
-				<div class="km-value">
-					<ul>
-						<li ng-repeat="term in document.keywords">{{term|term}} </li>
-					</ul>
-				</div>
-			</div>
-
-
-<legend ng-if="document.usage || document.usageDescription || document.usageConfidential || document.thirdPartyTransferConditions">Information on the utilization of the genetic resource(s) </legend>
+		<legend ng-if="document.usage || document.usageDescription || document.usageConfidential || document.thirdPartyTransferConditions">Information on the utilization of the genetic resource(s) </legend>
 			<div ng-if="document.usage">
 				<label>Type of use allowed by the permit or its equivalent</label>
 				<div class="km-value" ng-if="document.usage && !document.usageConfidential">
