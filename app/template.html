@@ -444,7 +444,7 @@
         **************************/
         function addLoadEvent(func) {
         var oldonload = window.onload; if (typeof window.onload != 'function') { window.onload = func; } else { window.onload = function() { if (oldonload) { oldonload(); } func(); } } }
-        addLoadEvent(function() { outdatedBrowser( { bgColor: '#f25648', color: '#ffffff', lowerThan: 'transform', languagePath: 'app/libs/outdated-browser/outdatedbrowser/lang/en.html' }) });
+        addLoadEvent(function() { outdatedBrowser( { bgColor: '#f25648', color: '#ffffff', lowerThan: 'boxShadow', languagePath: 'app/libs/outdated-browser/outdatedbrowser/lang/en.html' }) });
 
          /**************************
           For Googel Analytics
