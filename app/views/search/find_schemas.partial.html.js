@@ -709,7 +709,7 @@ app.directive('searchFilterSchemas', function ($http) {
                  if($scope.recordType == 'national')
                     $scope.buildQuery();
             });
-              $scope.$watch('groupby', function(newVal){
+            $scope.$watch('groupby', function(newVal){
                  if($scope.recordType == 'national')
                     if(newVal)
                         $scope.previewType = "group";

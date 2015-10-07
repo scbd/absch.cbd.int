@@ -1,62 +1,45 @@
-define(['app', '/app/js/common.js', '/app/js/thesaurus-service.js'], function (app) {
+define(['app',
+        '/app/views/search/search-directives/national-records-filter-directive.html.js',
+        '/app/js/common.js', '/app/services/thesaurus-service.js'
+        ], function (app) {
     app.directive('searchLeftMenu', function () {
         return {
             restrict: 'EAC',
             templateUrl: '/app/views/search/search-directives/left-menu-directive.html',
-            replace: true,
+            //replace: true,
+            require: '^searchDirective',
             scope: {
             },
-            link: function ($scope, element, attrs, ngModelController) {
+            link: function ($scope, element, attrs, searchDirectiveCtrl) {
+                $scope.searchDirectiveCtrl = searchDirectiveCtrl;
             },
-            controller: ['$scope', '$element', 'thesaurusService',
-                function ($scope, $element, thesaurusService) {
+            controller: ['$scope', '$element', 'thesaurusService', 'realm',
+                function ($scope, $element, thesaurusService, realm) {
 
-                    $scope.actions = {
-                        buidlQuery : buidlQuery
-                    }
+                    this.actions = {
+                        buildQuery : buildQuery
+                    };
 
-                    function buildQuery() {
+                    function buildQuery(filters, schemas) {
                         var conditions = [];
-                        buildConditions(conditions, $scope.terms);
+                        conditions = buildConditions(filters);
 
-                        if($scope.focalPointQuery!='')
-                            conditions.push($scope.focalPointQuery);
-                        var keywordQuery = '';
+                        var query = '';
+                        if(conditions.length===0) {
 
-                        if($scope.keyword){
-                            keywordQuery = ' AND (title_t:*' + $scope.keyword + '* OR description_t:*' + $scope.keyword + '* OR text_EN_txt:*' + $scope.keyword + '* OR uniqueIdentifier_s:*' + $scope.keyword.toLowerCase() + '*)';
-                        }
-
-                        if(conditions.length==0) {
-                            //$scope.query = '*:*';
-
-                            var nationalSchema = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database","focalPoint"];
-                            var referenceSchema= [ "resource", "meeting", "notification","pressRelease","statement" , "news", "modelContractualClause"];
-
-                            var q = '(realm_ss:' + realm.value.toLowerCase() + ') AND NOT version_s:*';
-                            var schema = nationalSchema;
-                            if($scope.recordType == 'reference'){
-                                schema = referenceSchema;
-                                $scope.previewType = 'list';
-                            }
-                            q += keywordQuery
-                            q += ' AND (schema_s:(' + schema.join(' ') + '))';
-                            q += $scope.queryPartyStatus!='' ? ('AND (' + $scope.queryPartyStatus + ')') : '';
-                            $scope.query = q;
+                            query = '(realm_ss:' + realm.value.toLowerCase() + ') AND NOT version_s:*';
+                            query += ' AND (schema_s:(' + schemas.join(' ') + '))';
                         }
                         else {
-                            var query = '';
-                            conditions.forEach(function (condition) { query = query + (query=='' ? '( ' : ' OR ') + condition; });
-                            query += ' )';
-                            $scope.query = query + keywordQuery  + ($scope.queryPartyStatus!='' ? ('AND (' + $scope.queryPartyStatus + ')') : '');
-                            //console.log (query);
+                            query = conditions.join(' OR ');
                         }
-                       // console.log ($scope.query);
+                       $scope.searchDirectiveCtrl.actions.query(query);
                     }
 
-                    function buildConditions (conditions, items) {
+                    function buildConditions (items) {
+                        var conditions = [];
                         $scope.selectedFilters=[];
-                        items.forEach(function (item) {
+                        _.each(items,function (item) {
 
                             if(item.selected && (($scope.showNationalFilters  && item.type=='nationalRecord') || ($scope.showReferenceFilters  && item.type=='reference'))){
 
@@ -65,11 +48,11 @@ define(['app', '/app/js/common.js', '/app/js/thesaurus-service.js'], function (a
                                 var subFilterQuery = '(' + $scope.field+':'+item.identifier;
                                 if(item.subFilters){
                                     item.subFilters.forEach(function(filter){
+                                        var selectedValues;
                                         if(filter.type=='select' || filter.type=='multiselect'){
                                             if( $scope[filter.name] && $scope[filter.name].length > 0){
 
-
-                                                var selectedValues = $scope[filter.name];
+                                                selectedValues = $scope[filter.name];
                                                 if(typeof selectedValues[0]== "object" )
                                                     selectedValues = _.pluck(selectedValues, "identifier");
 
@@ -85,11 +68,11 @@ define(['app', '/app/js/common.js', '/app/js/thesaurus-service.js'], function (a
                                                                 count: selectedItem && selectedItem.metadata ? selectedItem.metadata.facet : undefined,
                                                                 isTerm : true
                                                             });
-                                                })
+                                                });
                                             }
                                         }
                                         else if(filter.type=='calendar'){
-                                                var selectedValues = $scope[filter.name];
+                                                selectedValues = $scope[filter.name];
                                                 if(selectedValues != '*:*'){
                                                     subFilterQuery = subFilterQuery + ' AND ' + selectedValues;
                                                     var dateString = $scope[filter.name + 'Api'].getDateString();
@@ -99,7 +82,7 @@ define(['app', '/app/js/common.js', '/app/js/thesaurus-service.js'], function (a
                                                 }
                                         }
                                         else if(filter.type=='radio'){
-                                            var selectedValues = $scope[filter.name];
+                                            selectedValues = $scope[filter.name];
 
                                             if(selectedValues!=undefined && parseInt(selectedValues) != -2){//skipp All option
                                                 if(parseInt(selectedValues) == -1)
@@ -118,7 +101,7 @@ define(['app', '/app/js/common.js', '/app/js/thesaurus-service.js'], function (a
                                             }
                                         }
                                         else if(filter.type=='checkbox'){
-                                            var selectedValues = $scope[filter.name];
+                                            selectedValues = $scope[filter.name];
                                             var query = buildFocalPointQuery();
 
                                             if(selectedValues && query!='' && subFilterQuery.indexOf(query) ==-1){
@@ -126,7 +109,7 @@ define(['app', '/app/js/common.js', '/app/js/thesaurus-service.js'], function (a
                                             }
                                         }
                                         else {
-                                            if($scope[filter.name]!=null){
+                                            if($scope[filter.name]!==null){
                                                 subFilterQuery = subFilterQuery + ' AND ('  + filter.field +':'+  $scope[filter.name] + ')';
 
                                                 $scope.selectedFilters.push({
@@ -137,13 +120,12 @@ define(['app', '/app/js/common.js', '/app/js/thesaurus-service.js'], function (a
                                     });
                                 }
 
-                              subFilterQuery = subFilterQuery + ')'
+                              subFilterQuery = subFilterQuery + ')';
                         //console.log(subFilterQuery);
                                 conditions.push(subFilterQuery);
                             }
                         });
-
-
+                        return conditions;
                     }
 
 
