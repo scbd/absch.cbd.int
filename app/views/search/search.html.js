@@ -9,97 +9,16 @@ define(['app','underscore','/app/js/common.js',
     '/app/views/directives/search-filter-dates.partial.html.js',
     '/app/views/directives/document-list.partial.html.js', 'bootstrap-datepicker','moment',
     '/app/views/directives/help-directive.html.js',
-    '/app/views/countries/country-map-list-directive.html.js', '/app/js/search-service.js',
-    '/app/js/thesaurus-service.js'],
+    '/app/views/countries/country-map-list-directive.html.js', '/app/services/search-service.js',
+    '/app/services/thesaurus-service.js',
+    '/app/views/search/search-directives/search-directive.html.js'
+],
      function (app,_) {
 
     app.controller('FindController', ['$scope', '$rootScope','showHelp' ,'$http', '$timeout', '$q','realm', '$routeParams',
                 '$location','$element','commonjs','$mdSidenav', '$mdUtil', '$mdMedia', 'searchService', 'thesaurusService',
         function ($scope, $rootScope,showHelp, $http, $timeout, $q, realm, $routeParams,$location, $element,
              commonjs, $mdSidenav, $mdUtil, $mdMedia, searchService, thesaurusService) {
-
-            $scope.showHelp = {'show':true,'hasHelp':true, showTour:false};
-            $scope.toggleLeft = buildToggler('left');
-            $scope.toggleRight = buildToggler('right');
-            $scope.showHelp = showHelp.value;
-            var url = $location.url();
-            $scope.url = url;
-
-            $scope.nationalRecords = [];
-            $scope.referenceRecords=[];
-            $scope.countryProfiles=[];
-
-            $scope.nationalRecords.keyword = "";
-            $scope.nationalRecords.layout = "group";
-            $scope.nationalRecords.partyStatus = "parties";
-            $scope.nationalRecords.country = [];
-            $scope.nationalRecords.region = [];
-            $scope.nationalRecords.FP = [];
-            $scope.nationalRecords.CNA = [];
-            $scope.nationalRecords.MSR = [];
-            $scope.nationalRecords.IRCC = [];
-            $scope.nationalRecords.CP = [];
-            $scope.nationalRecords.CPC = [];
-
-            //**********************************************************
-            $scope.close = function () {
-                  $mdSidenav('left').close()
-                    .then(function () {
-                      $log.debug("close LEFT is done");
-                    });
-                };
-
-            //**********************************************************
-            function buildToggler(navID) {
-              var debounceFn =  $mdUtil.debounce(function(){
-                    $mdSidenav(navID)
-                      .toggle()
-                      .then(function () {
-                        $log.debug("toggle " + navID + " is done");
-                      });
-                  },300);
-              return debounceFn;
-            }
-
-            //**********************************************************
-            $scope.isInProfiles = function(tab) {
-
-              if(url.indexOf('/profiles')  >= 0|| url.indexOf('/profile')  >= 0|| url.indexOf('/country') >= 0 || url.indexOf('/countries') >= 0)
-                    return true;
-              else
-                return false;
-            }
-
-            //**********************************************************
-            $scope.isInNationalRecords = function(tab) {
-              if(url.indexOf('/national-records') >= 0)
-                    return true;
-              else
-                return false;
-            }
-
-            //**********************************************************
-            $scope.isInReferenceRecords = function(tab) {
-              if(url.indexOf('/reference-records') >= 0)
-                    return true;
-              else
-                return false;
-            }
-
-
-        $scope.startTour=false;
-
-        if($routeParams.tour)
-        {
-            $scope.startTour=true;
-            $location.search("tour", null);
-        }
-// var other= thesaurusService.getDomainTerms('others');
-// var otherJurisdiction= thesaurusService.getDomainTerms('jurisdiction',true);
-// var jurisdiction= thesaurusService.getDomainTerms('jurisdiction');
-// $q.all([other,otherJurisdiction,jurisdiction]).then(function(data){
-//         console.log(data);
-// });
 
 
         var self = this;
@@ -108,7 +27,6 @@ define(['app','underscore','/app/js/common.js',
 
         $scope.orderReferenceBy = "title_s acs";
 
-        // $scope.loaded          = false;
         $scope.itemsPerPage    = 25;
         $scope.documentCount   = 0;
         $scope.currentPage     = 0;

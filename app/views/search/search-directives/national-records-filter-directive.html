@@ -49,84 +49,84 @@
 
 
     <div style="color:#333;font-size:11px;font-weight:bold;margin-right:0;padding-bottom:10px;padding-top:12px;">Filter by record type</div>
-    <div ng-class="{'check_active': focalPoint.selected}" style="padding:5px 0;border-bottom:1px solid #ddd;">
+    <div ng-class="{'check_active': filters.focalPoint.selected}" style="padding:5px 0;border-bottom:1px solid #ddd;">
         <div layout="row">
             <div>
-                <input type="checkbox" ng-model="focalPoint.selected" ng-change="refresh(focalPoint.selected,'focalPoint')">
+                <input type="checkbox" ng-model="filters.focalPoint.selected" ng-change="refresh(filters.focalPoint.selected,'focalPoint')">
             </div>
-            <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': focalPoint.selected==false}"> National Focal Points </span></div>
-            <div> <span class="badge badge-white pull-right">{{focalPoint.count}}</span></div>
+            <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': filters.focalPoint.selected==false}"> National Focal Points </span></div>
+            <div> <span class="badge badge-white pull-right">{{filters.focalPoint.count}}</span></div>
         </div>
-        <div ng-show="focalPoint.selected" class="subfilters-section" style="padding-top:10px;padding-bottom:5px;margin-left:15px;">
+        <div ng-show="ffilters.ocalPoint.selected" class="subfilters-section" style="padding-top:10px;padding-bottom:5px;margin-left:15px;">
             <input type="checkbox" ng-model="focalPointNP" ng-change="refresh(focalPointNP.selected,'focalPoint')" id="ckfocalPointNP"> <span class="filter-text">ABS National Focal Points</span></br>
             <input type="checkbox" ng-model="focalPointCBD" ng-change="refresh(focalPointCBD.selected,'focalPoint')" id="ckfocalPointCBD"> <span class="filter-text">CBD Focal Points</span></br>
         </div>
     </div>
 
-    <div ng-class="{'check_active': authority.selected}" style="padding:5px 0;border-bottom:1px solid #ddd;">
+    <div ng-class="{'check_active': filters.authority.selected}" style="padding:5px 0;border-bottom:1px solid #ddd;">
         <div layout="row">
             <div>
-                <input type="checkbox" ng-model="authority.selected" ng-change="refresh(authority.selected,'authority')">
+                <input type="checkbox" ng-model="filters.authority.selected" ng-change="refresh(filters.authority.selected,'authority')">
             </div>
-            <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': authority.selected==false}"> Competent National Authorities </span></div>
-            <div> <span class="badge badge-white pull-right">{{authority.count}}</span></div>
+            <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': filters.authority.selected==false}"> Competent National Authorities </span></div>
+            <div> <span class="badge badge-white pull-right">{{filters.authority.count}}</span></div>
         </div>
-        <div ng-show="authority.selected" class="subfilters-section" style="padding-top:10px;padding-bottom:5px;margin-left:0px;">
-            <div km-select class="filter-btn" multiple api="cnaJurisdictionApi" ng-model="cnaJurisdiction" binding-type="string" placeholder="Jurisdictions"
+        <div ng-show="filters.authority.selected" class="subfilters-section" style="padding-top:10px;padding-bottom:5px;margin-left:0px;">
+            <div km-select class="filter-btn" multiple api="filters.cnaJurisdictionApi" ng-model="filters.cnaJurisdiction" binding-type="string" placeholder="Jurisdictions"
             items="options.cnaJurisdictions()"></div>
             <br>
-            <div km-select class="filter-btn" multiple api="cnaGeneticResourceTypesApi" ng-model="cnaGeneticResourceTypes" binding-type="string"
+            <div km-select class="filter-btn" multiple api="filters.cnaGeneticResourceTypesApi" ng-model="filters.cnaGeneticResourceTypes" binding-type="string"
             placeholder="Scope of Responsibilities" items="options.absGeneticResourceTypes()"></div>
         </div>
     </div>
 
-    <div ng-class="{'check_active': measure.selected}" style="padding:5px 0;border-bottom:1px solid #ddd;">
+    <div ng-class="{'check_active': filters.measure.selected}" style="padding:5px 0;border-bottom:1px solid #ddd;">
         <div layout="row">
             <div>
-                <input type="checkbox" ng-model="measure.selected"  ng-change="refresh(measure.selected,'measure')">
+                <input type="checkbox" ng-model="filters.measure.selected"  ng-change="refresh(filters.measure.selected,'measure')">
             </div>
-            <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': measure.selected==false}">Legislative, administrative or policy measures </span></div>
-            <div> <span class="badge badge-white pull-right">{{measure.count}}</span></div>
+            <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': filters.measure.selected==false}">Legislative, administrative or policy measures </span></div>
+            <div> <span class="badge badge-white pull-right">{{filters.measure.count}}</span></div>
         </div>
-        <div n`g-show="measure.selected" class="subfilters-section" style="padding-top:10px;padding-bottom:5px;">
-            <div km-select class="filter-btn" multiple api="msrJurisdictionApi" ng-model="msrJurisdiction" binding-type="string" placeholder="Jurisdictions"
+        <div n`g-show="filters.measure.selected" class="subfilters-section" style="padding-top:10px;padding-bottom:5px;">
+            <div km-select class="filter-btn" multiple api="filters.msrJurisdictionApi" ng-model="filters.msrJurisdiction" binding-type="string" placeholder="Jurisdictions"
             items="options.jurisdiction()"></div>
             <br>
-            <div km-select class="filter-btn" multiple api="msrStatusApi" ng-model="msrStatus" binding-type="string" placeholder="Status"
+            <div km-select class="filter-btn" multiple api="filters.msrStatusApi" ng-model="filters.msrStatus" binding-type="string" placeholder="Status"
             items="options.status()"></div>
             <br>
-            <div km-select class="filter-btn" multiple api="msrTypeApi" ng-model="msrType" binding-type="string" placeholder="Types"
+            <div km-select class="filter-btn" multiple api="filters.msrTypeApi" ng-model="filters.msrType" binding-type="string" placeholder="Types"
             items="options.typeOfDocuments()"></div>
         </div>
     </div>
 
 
 
-    <div ng-class="{'check_active': database.selected}" style="padding:5px 0;border-bottom:1px solid #ddd;">
+    <div ng-class="{'check_active': filters.database.selected}" style="padding:5px 0;border-bottom:1px solid #ddd;">
         <div layout="row">
             <div>
-                <input type="checkbox" ng-model="database.selected" ng-change="refresh(database.selected,'database')">
+                <input type="checkbox" ng-model="filters.database.selected" ng-change="refresh(filters.database.selected,'database')">
             </div>
-            <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': database.selected==false}"> National Websites and Databases </span></div>
+            <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': filters.database.selected==false}"> National Websites and Databases </span></div>
             <div> <span class="badge badge-white pull-right">{{database.count}}</span></div>
         </div>
     </div>
 
 
-    <div ng-class="{'check_active': absPermit.selected}" style="padding:5px 0;border-bottom:1px solid #ddd;">
+    <div ng-class="{'check_active': filters.absPermit.selected}" style="padding:5px 0;border-bottom:1px solid #ddd;">
         <div layout="row">
             <div>
-                <input type="checkbox" ng-model="absPermit.selected"  ng-change="refresh(absPermit.selected,'absPermit')">
+                <input type="checkbox" ng-model="filters.absPermit.selected"  ng-change="refresh(filters.absPermit.selected,'absPermit')">
             </div>
-            <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': absPermit.selected==false}"> Internationally Recognized Certificate of Compliance </span></div>
-            <div> <span class="badge badge-white pull-right">{{absPermit.count}}</span></div>
+            <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': filters.absPermit.selected==false}"> Internationally Recognized Certificate of Compliance </span></div>
+            <div> <span class="badge badge-white pull-right">{{filters.absPermit.count}}</span></div>
         </div>
-        <div ng-show="absPermit.selected" class="subfilters-section" style="padding-top:10px;padding-bottom:5px;margin-left:0px;">
+        <div ng-show="filters.absPermit.selected" class="subfilters-section" style="padding-top:10px;padding-bottom:5px;margin-left:0px;">
 
-            <div km-select class="filter-btn" multiple api="permitusageApi" name="permitusage" ng-model="permitusage" items="options.usage()"
+            <div km-select class="filter-btn" multiple api="filters.permitusageApi" name="filters.permitusage" ng-model="filters.permitusage" items="options.usage()"
             placeholder="Intent"></div>
             <br>
-            <div km-select class="filter-btn" multiple api="permitkeywordsApi" name="permitkeywords" ng-model="permitkeywords" items="options.keywords()"
+            <div km-select class="filter-btn" multiple api="filters.permitkeywordsApi" name="permitkeywords" ng-model="filters.permitkeywords" items="options.keywords()"
             placeholder="Keywords"></div>
             <br>
             <div class="btn-group filter-btn">
