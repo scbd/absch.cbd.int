@@ -45,7 +45,7 @@
 
     <iframe id="authenticationFrame" src="https://accounts.cbd.int/app/authorize.html" style="display:none"></iframe>
 
-    <nav class="navbar navbar-cbd navbar-default bg-cbdgreen navbar-static-top" id="anchorTop">
+    <nav class="navbar navbar-cbd navbar-default bg-cbdgreen navbar-static-top" id="anchorTop" ng-class="{'bg-orange':!production_env }">
       <div class="container-fluid container-cbd">
           <ul class="navbar-left navlist">
             <li><a href="http://www.cbd.int"><img src="/app/img/cbd-logo-spine-white.png" style="height:22px;position:relative;top:-2px;padding:0 5px 0 0;margin:0;"> <span class="hidden-md hidden-lg"><strong>The Convention on Biological Diversity</strong></span></a></li>
@@ -182,7 +182,7 @@
 
 
      <!-- PORTAL LINKS-->
-    <nav class="navbar navbar-links navbar-default navbar-static-top bg-darkgrey ">
+    <nav class="navbar navbar-links navbar-default navbar-static-top bg-darkgrey " ng-class="{'bg-orange':!production_env }">
         <div class="container-fluid container-links color-grey">
                <ul class="navbar-left navlist nav navbar-nav" >
                    <li class="bold color-orange hidden-sm hidden-md hidden-lg">
@@ -226,7 +226,7 @@
 
 
     <!-- PORTAL LINKS FIXED-->
-    <nav class="navbar navbar-links navbar-default navbar-static-top bg-darkgrey navbar-fixed-top">
+    <nav class="navbar navbar-links navbar-default navbar-static-top bg-darkgrey navbar-fixed-top" ng-class="{'bg-orange':!production_env }">
         <div class="container-fluid container-links color-grey">
                 <ul class="navbar-left navlist nav navbar-nav"  >
                     <li class="bold color-orange">

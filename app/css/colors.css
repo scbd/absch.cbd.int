@@ -69,10 +69,7 @@
     background-color:inherit!important;
 }
 
-.bg-orange{
-    background-color:#fa6938!important;
-    color:white!important;
-}
+
 .bg-white{
     background-color:#FFF!important;
     color:#555;
@@ -177,4 +174,7 @@
 .bg-lorange{
     background-color:#FFF5EE!important;
 }
-
+.bg-orange{
+    background-color:#fa6938!important;
+    color:white!important;
+}
