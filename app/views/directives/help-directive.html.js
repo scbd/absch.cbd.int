@@ -128,13 +128,18 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                                                 templateToUse = contentTemplate;
                                                                         }
 
-
-                                                                         if (children.length==0) {
+                                                                        else if(field.fieldType == 'helpBlock'){
+                                                                                 children = $element.find('label[name="' + field.name + '"]');
+                                                                                if(children.length==0)
+                                                                                  children = $element.find('legend[name="' + field.name + '"]');
+                                                                                if(children.length==0)
+                                                                                  children = $element.find('div[name="' + field.name + '"]');
+                                                                                templateToUse = helpBlockTemplate;
+                                                                        }
+                                                                        
+                                                                        if (children.length==0) {
                                                                             children = $element.find('#' + field.name);
                                                                         }
-
-                                                                        if(field.fieldType == 'helpBlock')
-                                                                                templateToUse = helpBlockTemplate;
 
                                                                         if (field.embed){
                                                                                 var output = templateToUse.replace('{{content}}', $filter('lstring')(field.helpText));
