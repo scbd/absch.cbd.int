@@ -56,7 +56,9 @@ define(['app', 'underscore'], function (app, _) {
                 cpJurisdictions          : "D7BD5BDE-A6B9-4261-B788-16839CCC4F7E",
                 resourceTypes            : "83BA4728-A843-442B-9664-705F55A8EC52",
                 absSubjects              : "CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924",
-                mccResourceTypes         : "840427E5-E5AC-4578-B238-C81EAEEDBDD8"
+                mccResourceTypes         : "840427E5-E5AC-4578-B238-C81EAEEDBDD8",
+                languages                : "ISO639-2"
+
 
             }
         }
