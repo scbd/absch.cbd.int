@@ -736,7 +736,9 @@ footer .logo {
     padding-right: 0px;
     padding-left: 0;
     text-align: left;
-    cursor: pointer color: #111;
+    cursor: pointer;
+    color: #111;
+    font-weight: 500;
 }
 
 .table-msr {
