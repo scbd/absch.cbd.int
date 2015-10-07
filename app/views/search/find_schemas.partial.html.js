@@ -20,7 +20,7 @@ app.directive('searchFilterSchemas', function ($http) {
                       "$filter","underscore","realm","$routeParams",'$route', 'commonjs',
          function ($scope, $element, $location, Thesaurus, storage, guid, $q, Enumerable, $filter,_,realm, $routeParams, $route, commonjs)
         {
-            
+
             $scope.groupby=true;
             $scope.orderReferenceBy = 'title_s asc';
             $scope.recordType = $route.current.$$route.type;
@@ -28,22 +28,22 @@ app.directive('searchFilterSchemas', function ($http) {
                 $scope.previewType = 'list';
             }
             //**********************************************************
-            $scope.isInProfiles = function(tab) {              
+            $scope.isInProfiles = function(tab) {
                 return $scope.recordType == 'countryProfile' || ($route.current.$$route.type =='countryProfile' && $scope.recordType == 'countryProfile');
             }
-            
+
             //**********************************************************
             $scope.isInNationalRecords = function(tab) {
               return  $scope.recordType == 'national' || ($route.current.$$route.type =='national' && $scope.recordType == 'national');
             }
-            
+
             //**********************************************************
             $scope.isInReferenceRecords = function(tab) {
               return  $scope.recordType == 'reference' || ($route.current.$$route.type =='reference' && $scope.recordType == 'reference');
             }
 
-        
-     
+
+
             $scope.showNationalFilters = $scope.isInNationalRecords();
             $scope.showReferenceFilters = $scope.isInReferenceRecords();
             $scope.expanded = false;
@@ -60,16 +60,23 @@ app.directive('searchFilterSchemas', function ($http) {
             $scope.permitExpiryDate= '*:*'
             $scope.focalPointQuery = '';
             $scope.queryPartyStatus = ''
-            
+
             if(!$scope.selectedFilters)
                 $scope.selectedFilters = [];
-                
+
             $scope.$watch('recordType', function(newVal, oldVal){
                 if(newVal !=oldVal){
                     clearFilters();
+                    if($scope.recordType == 'reference'){
+                        $scope.previewType = 'list';
+                    }
+                    else if($scope.recordType == 'national'){
+                        $scope.groupby = true;
+                        $scope.previewType = 'group';
+                    }
                     $scope.buildQuery()
                 }
-                    
+
             })
             // $scope.$watch('showReferenceFilters', function(newVal){
             //     if(newVal)
@@ -125,7 +132,7 @@ app.directive('searchFilterSchemas', function ($http) {
                                                       },
                mccResourceTypes            : function () { return $http.get("/api/v2013/thesaurus/domains/840427E5-E5AC-4578-B238-C81EAEEDBDD8/terms", { cache: true })
                                                                     .then(function(o){ return $scope.updateFacets($scope.modelContractualClause,'mccresourceTypes',Thesaurus.buildTree(o.data)); }); },
-               
+
                cppResourceTypes            : function () { return $http.get("/api/v2013/thesaurus/domains/ED9BE33E-B754-4E31-A513-002316D0D602/terms", { cache: true })
                                                                     .then(function(o){ return $scope.updateFacets($scope.modelContractualClause,'cppresourceTypes',Thesaurus.buildTree(o.data)); }); },
             };
@@ -207,17 +214,17 @@ app.directive('searchFilterSchemas', function ($http) {
                 if($scope.focalPointQuery!='')
                     conditions.push($scope.focalPointQuery);
                 var keywordQuery = '';
-        
+
                 if($scope.keyword){
                     keywordQuery = ' AND (title_t:*' + $scope.keyword + '* OR description_t:*' + $scope.keyword + '* OR text_EN_txt:*' + $scope.keyword + '* OR uniqueIdentifier_s:*' + $scope.keyword.toLowerCase() + '*)';
                 }
-                
+
                 if(conditions.length==0) {
                     //$scope.query = '*:*';
-                    
+
                     var nationalSchema = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database","focalPoint"];
                     var referenceSchema= [ "resource", "meeting", "notification","pressRelease","statement" , "news", "modelContractualClause"];
-        
+
                     var q = '(realm_ss:' + realm.value.toLowerCase() + ') AND NOT version_s:*';
                     var schema = nationalSchema;
                     if($scope.recordType == 'reference'){
@@ -226,7 +233,7 @@ app.directive('searchFilterSchemas', function ($http) {
                     }
                     q += keywordQuery
                     q += ' AND (schema_s:(' + schema.join(' ') + '))';
-                    q += $scope.queryPartyStatus!='' ? ('AND (' + $scope.queryPartyStatus + ')') : ''; 
+                    q += $scope.queryPartyStatus!='' ? ('AND (' + $scope.queryPartyStatus + ')') : '';
                     $scope.query = q;
                 }
                 else {
@@ -469,8 +476,8 @@ app.directive('searchFilterSchemas', function ($http) {
                                                             { name: 'cppresourceTypes',   type: 'multiselect' , field: 'resourceTypes_ss'}
                                                         ]
                                              }
-                                             
-            
+
+
             $scope.terms  = [ $scope.focalPoint, $scope.authority, $scope.database, $scope.measure, $scope.absPermit, $scope.absCheckpoint,
                               $scope.absCheckpointCommunique, $scope.resource, $scope.organization, $scope.meeting, $scope.notification,
                               $scope.pressRelease, $scope.statement, $scope.news, $scope.modelContractualClause, $scope.communityProtocol ];
@@ -484,7 +491,8 @@ app.directive('searchFilterSchemas', function ($http) {
                 $scope.termsx[initialSelection].selected = true;
             }
 
-            function onWatch_items(values) { if(!values) return;
+            function onWatch_items(values) {
+                if(!values) return;
                 values.forEach(function (item) {
                     if(_.has($scope.termsx, item.symbol))
                     {
@@ -526,15 +534,15 @@ app.directive('searchFilterSchemas', function ($http) {
                     }
                 }
             }
-            
+
             $scope.queryStatus = function(type){
                 commonjs.getCountries()
                 .then(function(data){
                     $scope.queryPartyStatus = '';
                     var npParties
-    
+
                     if(type=='parties' || type == 'nonParties'){
-    
+
                         if(type=='parties'){
                             npParties = _.where(data, {isNPParty:true});
                             //$scope.partiesCount = npParties.length;
@@ -573,13 +581,13 @@ app.directive('searchFilterSchemas', function ($http) {
                 if(documentSchema.toLowerCase() == 'focalpoint' || documentSchema.toLowerCase() == 'fp' ){
                     $scope.focalPointNP = true;
                 }
-                
+
                 if(documentSchema=='PARTIES'){
                    $scope.queryPartyStatus ="government_s:(ae al bt by cd cg ch ci bw do dk hu es eg fj fm ga et gm gn gw hn id gt ke jo in km kz la kh mg mh mm mn mu mw mx mz na ne no pa pe sc rw sy tj ug uy za ws bj bi bf gy vn vu sd eur ls kg)";
                    // $scope.queryPartyStatus = $scope.queryStatus('parties');
                 }
             }
-            
+
             $scope.buildQuery();
 
             $scope.terms.forEach(function (item) {
@@ -696,26 +704,26 @@ app.directive('searchFilterSchemas', function ($http) {
 
             });
 
-            
-            
+
+
             ////country profile search
-            
+
             $scope.$watch('countryProfileSearch', function(newVal){
                  if($scope.recordType == 'countryProfile')
                     $scope.query = newVal;
             },true);
-            
-            
+
+
              $scope.$watch('keyword', function(newVal){
                  if($scope.recordType == 'national' || $scope.recordType == 'reference' )
                     $scope.buildQuery();
             });
-            
+
             $scope.$watch('orderReferenceBy', function(newVal){
                  $scope.$parent.orderReferenceBy= newVal;
             });
-            
-            
+
+
              $scope.$watch('partyStatus', function(newVal){
                  if($scope.recordType == 'national')
                     $scope.buildQuery();
@@ -723,17 +731,17 @@ app.directive('searchFilterSchemas', function ($http) {
               $scope.$watch('groupby', function(newVal){
                  if($scope.recordType == 'national')
                     if(newVal)
-                        $scope.previewType = "group"; 
-                    else 
+                        $scope.previewType = "group";
+                    else
                         $scope.previewType = "list";
             });
-            
+
             // if ($routeParams.countryCode && $routeParams.countryCode.toUpperCase() == 'RAT'){
             //     $scope.countryProfileSearch ={partyStatus: 'parties', countryProfile_keyword:''}
             // }
-            
-            
- 
+
+
+
         }]
     }
 });
