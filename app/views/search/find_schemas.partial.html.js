@@ -50,14 +50,6 @@ app.directive('searchFilterSchemas', function ($http) {
             $scope.selectedItems = [];
             $scope.facet = $scope.field.replace('_s', ''); // TODO: replace @field by @facet
 
-            $scope.expandSearch = 0;
-            $scope.msrAdoptionDate= '*:*'
-            $scope.msrRetirementDate= '*:*'
-            $scope.msrEntryinForceDate= '*:*'
-            $scope.mssApplicationDate= '*:*'
-
-            $scope.permitIssuanceDate= '*:*'
-            $scope.permitExpiryDate= '*:*'
             $scope.focalPointQuery = '';
             $scope.queryPartyStatus = ''
 
@@ -78,10 +70,6 @@ app.directive('searchFilterSchemas', function ($http) {
                 }
 
             })
-            // $scope.$watch('showReferenceFilters', function(newVal){
-            //     if(newVal)
-            //         $scope.recordType = 'reference'
-            // })
 
             $scope.options  = {
                jurisdiction             : function () { return $http.get("/api/v2013/thesaurus/domains/7A56954F-7430-4B8B-B733-54B8A5E7FF40/terms",  { cache: true })
@@ -202,8 +190,6 @@ app.directive('searchFilterSchemas', function ($http) {
             $scope.onclick = function (scope, evt) {
 
                 $scope[scope].selected = !$scope[scope].selected;
-                $scope.expandSearch--;
-                //console.log( $scope.terms);
                 $scope.buildQuery();
             }
 
@@ -420,10 +406,10 @@ app.directive('searchFilterSchemas', function ($http) {
                                                                 { name: 'msrStatus', type: 'multiselect', field: 'status_s' },
                                                                 { name: 'msrType', type: 'multiselect', field: 'type_s' },
 
-                                                                { name: 'msrAdoptionDate', type: 'calendar' , field: 'adoption_s'},
-                                                                { name: 'msrRetirementDate', type: 'calendar' , field: 'retired_s'},
-                                                                { name: 'msrEntryinForceDate', type: 'calendar' , field: 'entryIntoForce_s'},
-                                                                { name: 'mssApplicationDate', type: 'calendar' , field: 'limitedApplication_s'}
+                                                                // { name: 'msrAdoptionDate', type: 'calendar' , field: 'adoption_s'},
+                                                                // { name: 'msrRetirementDate', type: 'calendar' , field: 'retired_s'},
+                                                                // { name: 'msrEntryinForceDate', type: 'calendar' , field: 'entryIntoForce_s'},
+                                                                // { name: 'mssApplicationDate', type: 'calendar' , field: 'limitedApplication_s'}
                                                             ]
                                             };
             $scope.absPermit               = { identifier: 'absPermit',                title: 'Internationally Recognized Certificates of Compliance' ,type:'nationalRecord',
@@ -431,8 +417,8 @@ app.directive('searchFilterSchemas', function ($http) {
                                                                 //{ name: 'permitAuthority',  type: 'reference' , field: 'jurisdiction_s'},
                                                                 { name: 'permitusage',          type: 'multiselect' , field: 'usage_REL_ss'},
                                                                 { name: 'permitkeywords',       type: 'multiselect' , field: 'keywords_ss'},
-                                                                { name: 'permitExpiryDate',     type: 'calendar' , field: 'expiration_s'},
-                                                                { name: 'permitIssuanceDate',   type: 'calendar' , field: 'date_s'},
+                                                                // { name: 'permitExpiryDate',     type: 'calendar' , field: 'expiration_s'},
+                                                                // { name: 'permitIssuanceDate',   type: 'calendar' , field: 'date_s'},
                                                                 { name: 'amendmentIntent',      type: 'radio' , field: 'amendmentIntent_i'}
                                                             ]
                                              };
@@ -508,11 +494,6 @@ app.directive('searchFilterSchemas', function ($http) {
 
             $scope.refresh = function(selected, schema){
 
-                if(selected)
-                    $scope.expandSearch++;
-                else
-                    $scope.expandSearch--;
-
                 $scope.buildQuery();
 
                 $scope.loadSchemaFacets(schema);
@@ -555,7 +536,7 @@ app.directive('searchFilterSchemas', function ($http) {
                         }
                         $scope.queryPartyStatus =
                                             ('government_s:(' +
-                                            _.pluck(npParties, 'code') +
+                                            _.map(_.pluck(npParties, 'code'), function(country){return country.toLowerCase()=='eu' ? 'eur' : country;}) +
                                             ')').toLowerCase().replace(/,/g, ' ');
                     }
 
