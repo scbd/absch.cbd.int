@@ -17,7 +17,7 @@ require.config({
         'angular-loading-bar'   : '../libs/angular-loading-bar/src/loading-bar',
         'bootbox'               : '../libs/bootbox/bootbox',
 
-        'jquery'          : '../libs/jquery/jquery.min',
+        'jquery'          : '../libs/jquery/dist/jquery.min',
         'bootstrap'       : '../libs/bootstrap/dist/js/bootstrap.min',
         'underscore'      : '../libs/underscore/underscore-min',
         'moment'          : '../libs/momentjs/min/moment-with-langs.min',
