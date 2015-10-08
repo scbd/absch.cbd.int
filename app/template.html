@@ -182,7 +182,7 @@
 
 
      <!-- PORTAL LINKS-->
-    <nav class="navbar navbar-links navbar-default navbar-static-top bg-darkgrey " ng-class="{'bg-orange':!production_env }">
+    <nav id="PortalLinks1" class="navbar navbar-links navbar-default navbar-static-top bg-darkgrey"  ng-class="{'bg-orange':!production_env }">
         <div class="container-fluid container-links color-grey">
                <ul class="navbar-left navlist nav navbar-nav" >
                    <li class="bold color-orange hidden-sm hidden-md hidden-lg">
@@ -226,13 +226,13 @@
 
 
     <!-- PORTAL LINKS FIXED-->
-    <nav class="navbar navbar-links navbar-default navbar-static-top bg-darkgrey navbar-fixed-top" ng-class="{'bg-orange':!production_env }">
+    <nav id="PortalLinks2" class="navbar navbar-links navbar-default navbar-static-top bg-darkgrey navbar-fixed-top" ng-class="{'bg-orange':!production_env }">
         <div class="container-fluid container-links color-grey">
                 <ul class="navbar-left navlist nav navbar-nav"  >
-                    <li class="bold color-orange">
-                        <span ng-show="production_env" > ABS-CH</span>
-                       <span ng-show="development_env" > DEVELOPMENT</span>
-                       <span ng-show="training_env" > TRAINING</span>
+                    <li class="bold e">
+                        <span ng-show="production_env" class="color-orange"> ABS-CH</span>
+                        <span ng-show="development_env" class="bg-black"> DEVELOPMENT</span>
+                        <span ng-show="training_env" class="bg-black"> TRAINING</span>
                     </li>
                     <li><a href="/"> <i class="fa fa-home visible-xs visible-sm" ></i> <span class="hidden-xs hidden-sm"> Home </span></a></li>
                     <li><a href="/find"> <i class="fa fa-search visible-xs visible-sm"></i> <span class="hidden-xs hidden-sm"> &nbsp;&nbsp;Find&nbsp;Information</span></a></li>
@@ -434,6 +434,9 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="/app/libs/requirejs/require.js" data-main="/app/js/boot.js"></script>
+
+    
+    
 
     <script src="/app/libs/outdated-browser/outdatedbrowser/outdatedbrowser.min.js"></script>
     <link rel="stylesheet" href="/app/libs/outdated-browser/outdatedbrowser/outdatedbrowser.min.css">
