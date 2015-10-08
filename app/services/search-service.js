@@ -35,7 +35,7 @@ define(['app', 'underscore'], function (app, _) {
                _.defaults(searchQuery, searchDefaults);
 
                var queryGroupParameters = {
-                    'q': searchQuery.query + ' AND government_s:*',
+                    'q': searchQuery.query,
                     'sort': searchQuery.sort,
                     'fl': searchQuery.fields,
                     'wt': 'json',
@@ -76,7 +76,7 @@ define(['app', 'underscore'], function (app, _) {
                         });
                         console.log(facets);
                         return facets;
-                    })
+                    });
                 }
 
            }
@@ -98,6 +98,6 @@ define(['app', 'underscore'], function (app, _) {
                 }
                 return facets;
            };
-        }
+       }
     }]);
 });

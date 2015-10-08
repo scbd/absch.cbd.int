@@ -409,12 +409,10 @@
                         <div class="row" ng-if="showIRCC && Permit > 0">
                             <div style="padding:10px; margin:0 20px;"><legend name="lblIRCC" style="display:none"></legend>
                                 <div class="row table-msr">
-                                    <div class="col-xs-10 tableheader" ng-click="sortPermit='title_t';reversePermit=!reversePermit">title
-                                        <i class="fa" ng-class="{'fa-caret-up':(sortPermit=='title_t' && reversePermit),'fa-caret-down':(sortPermit=='title_t' && !reversePermit)}"></i>
+                                    <div class="col-xs-10 tableheader" ng-click="sortPermit='uniqueIdentifier_s';reversePermit=!reversePermit">Unique identifier (title)
+                                        <i class="fa" ng-class="{'fa-caret-up':(sortPermit=='uniqueIdentifier_s' && reversePermit),'fa-caret-down':(sortPermit=='uniqueIdentifier_s' && !reversePermit)}"></i>
                                     </div>
-                                    
-                                    
-                                    <div class="col-xs-2 tableheader" ng-click="sortPermit='publishedOnDate';reversePermit=!reversePermit">date of  issue
+                                    <div class="col-xs-2 tableheader " ng-click="sortPermit='publishedOnDate';reversePermit=!reversePermit">date of  issue
                                         <i class="fa" ng-class="{'fa-caret-up':(sortPermit=='publishedOnDate' && reversePermit),'fa-caret-down':(sortPermit=='publishedOnDate' && !reversePermit)}"></i>
                                     </div>
                                 </div>
@@ -424,10 +422,12 @@
                                             <div class="col-xs-10">
                                                 <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
                                                     {{'ircc' | schemaIcon}}
-                                                </i> {{permit.title_t}}
+                                                </i> <span style="text-transform:uppercase;font-weight:500;">{{permit.uniqueIdentifier_s}}</span> ({{permit.title_t}})
+                                                <div class="color-grey">{{permit.geneticResources_t}}</div>
+                                                
                                                 <i class="fa fa-refresh fa-spin" ng-show="displayDetails&& !permit.data" />
                                             </div>
-                                            <div class="col-lg-2 col-md-2 col-xs-2">
+                                            <div class="col-xs-2 text-left">
                                                 {{permit.publishedOnDate|formatDate}}
                                             </div>
                                         </div>
