@@ -1,4 +1,5 @@
-define(['app', '/app/js/common.js'], function (app) {
+define(['app', '/app/js/common.js', '/app/services/thesaurus-service.js',
+ '/app/services/search-service.js'], function (app) {
 app.directive('searchFilterSchemas', function ($http) {
     return {
         restrict: 'EAC',
@@ -17,8 +18,9 @@ app.directive('searchFilterSchemas', function ($http) {
         {
         },
         controller : ['$scope', '$element', '$location', 'Thesaurus', "IStorage", "guid", "$q", "Enumerable",
-                      "$filter","underscore","realm","$routeParams",'$route', 'commonjs',
-         function ($scope, $element, $location, Thesaurus, storage, guid, $q, Enumerable, $filter,_,realm, $routeParams, $route, commonjs)
+                      "$filter","underscore","realm","$routeParams",'$route', 'commonjs', 'thesaurusService','searchService',
+         function ($scope, $element, $location, Thesaurus, storage, guid, $q, Enumerable, $filter,_,realm,
+              $routeParams, $route, commonjs, thesaurusService, searchService)
         {
 
             $scope.groupby=true;
@@ -72,39 +74,25 @@ app.directive('searchFilterSchemas', function ($http) {
             })
 
             $scope.options  = {
-               jurisdiction             : function () { return $http.get("/api/v2013/thesaurus/domains/7A56954F-7430-4B8B-B733-54B8A5E7FF40/terms",  { cache: true })
-                                                                    .then(function(o){ return $scope.updateFacets($scope.measure, 'msrJurisdiction',o.data); }); },
-               status                   : function () { return $http.get("/api/v2013/thesaurus/domains/ED7CDBD8-7762-4A84-82DD-30C01458A799/terms",  { cache: true })
-                                                                    .then(function(o){ return $scope.updateFacets($scope.measure,'msrStatus',o.data) }); },
-               typeOfDocuments          : function () { return $http.get("/api/v2013/thesaurus/domains/144CF550-7629-43F3-817E-CACDED34837E/terms",  { cache: true })
-                                                                    .then(function(o){ return $scope.updateFacets($scope.measure,'msrType',o.data) }); },
-               cnaJurisdictions         : function () { return $http.get("/api/v2013/thesaurus/domains/D7BD5BDE-A6B9-4261-B788-16839CCC4F7E/terms", { cache: true })
-                                                                    .then(function (o) { return $scope.updateFacets($scope.authority,'cnaJurisdiction',o.data) }); },
-               absGeneticResourceTypes  : function () { return $http.get("/api/v2013/thesaurus/domains/1A22EAAB-9BBC-4543-890E-DEF913F59E98/terms", { cache: true })
-                                                                    .then(function (o) {
+                jurisdiction             : function () { return loadDomainWithFacets('jurisdiction','measure','jurisdiction_s'); },
+                status                   : function () { return loadDomainWithFacets('status','measure','status_s'); },
+                typeOfDocuments          : function () { return loadDomainWithFacets('typeOfDocuments', 'measure','type_s'); },
+                cnaJurisdictions         : function () { return loadDomainWithFacets('cnaJurisdictions', 'authority', 'absJurisdiction_ss'); },
+                absGeneticResourceTypes  : function () { return loadDomainWithFacets('absGeneticResourceTypes', 'authority','absGeneticResourceTypes_ss') },
+                keywords                 : function () { return loadDomainWithFacets('keywords', 'permit', 'keywords_ss'); },
+                usage                    : function () { return loadDomainWithFacets('usage', 'permit', 'usage_REL_ss'); },
+                cpJurisdictions         : function () { return  loadDomainWithFacets('cpJurisdictions', 'checkpoint', 'jurisdiction_s') },
 
-                                                                       return $scope.updateFacets($scope.authority,'cnaGeneticResourceTypes',Thesaurus.buildTree(o.data)) ;
-                                                                         }); },
-               keywords                 : function () { return $http.get("/api/v2013/thesaurus/domains/1A22EAAB-9BBC-4543-890E-DEF913F59E98/terms", { cache: true })
-                                                                    .then(function (o) {return $scope.updateFacets($scope.absPermit,'permitkeywords',Thesaurus.buildTree(o.data)) ; }); },
-               usage                    : function () { return $http.get("/api/v2013/thesaurus/domains/A7B77788-8C90-4849-9327-E181E9522F3A/terms", { cache: true })
-                                                                    .then(function (o) { return $scope.updateFacets($scope.absPermit,'permitusage',o.data); }); },
-               cpJurisdictions         : function () { return $q.all([$http.get("/api/v2013/thesaurus/domains/D7BD5BDE-A6B9-4261-B788-16839CCC4F7E/terms", { cache: true }),
-                                                               $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })]).then(function(o) {
-                                                                var data = o[0].data;
-                                                                data.push(o[1].data)
-                                                                return $scope.updateFacets($scope.absCheckpoint,'cpJurisdiction',data);
-                                                              }); },
+                countries                : function () { return thesaurusService.getDomainTerms('countries').then(function (o) { return $filter("orderBy")(o, "name"); }); },
+                regions                  : function () { return $q.all([thesaurusService.getDomainTerms('countries'),
+                                                                        thesaurusService.getDomainTerms('regions')])
+                                                                  .then(function(o) {
+                                                                                return Enumerable.from($filter("orderBy")(o[0], "name")).union(
+                                                                                    Enumerable.from($filter("orderBy")(o[1], "name"))).toArray();
+                                                                  });
+                                                        },
                resourceTypes            : function () { return $http.get("/api/v2013/thesaurus/domains/83BA4728-A843-442B-9664-705F55A8EC52/terms", { cache: true })
                                                                     .then(function(o){ return $scope.updateFacets($scope.resource,'vlrresourceTypes',Thesaurus.buildTree(o.data)); }); },
-
-               countries                : function () { return $http.get("/api/v2013/thesaurus/domains/countries/terms", { cache: true }).then(function (o) { return $filter("orderBy")(o.data, "name"); }); },
-               regions                  : function () { return $q.all([$http.get("/api/v2013/thesaurus/domains/countries/terms", { cache: true }),
-                                                            $http.get("/api/v2013/thesaurus/domains/regions/terms",   { cache: true })]).then(function(o) {
-                                                                            return Enumerable.from($filter("orderBy")(o[0].data, "name")).union(
-                                                                                   Enumerable.from($filter("orderBy")(o[1].data, "name"))).toArray();
-                                                           });
-                                                      },
                 absSubjects             : function () { return $http.get("/api/v2013/thesaurus/domains/CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924/terms", { cache: true }).then(function(o){ return o.data; }); },
                 languages               : function () { return $http.get("/api/v2013/thesaurus/domains/ISO639-2/terms", { cache: true }).then(function(o){
                                                                       return $filter("orderBy")(o.data, "name");
@@ -395,7 +383,7 @@ app.directive('searchFilterSchemas', function ($http) {
             $scope.authority               = { identifier: 'authority',                title: 'Competent National Authorities' ,type:'nationalRecord',
                                                subFilters : [
                                                                 { name: 'cnaResponsibleForAll',     type: 'radio' , field: 'absResposibleForAll_b'},
-                                                                { name: 'cnaJurisdiction',          type: 'multiselect', field: 'absJurisdiction_s' },
+                                                                { name: 'cnaJurisdiction',          type: 'multiselect', field: 'absJurisdiction_ss' },
                                                                 { name: 'cnaGeneticResourceTypes',  type: 'multiselect' , field: 'absGeneticResourceTypes_ss'}
                                                             ]
                                              };
@@ -716,6 +704,19 @@ app.directive('searchFilterSchemas', function ($http) {
                     else
                         $scope.previewType = "list";
             });
+
+
+            function loadDomainWithFacets(domainTerm, schema, facetField){
+                    return thesaurusService
+                            .getDomainTerms(domainTerm)
+                            .then(function(domainTermData){
+                                var facetQuery = {query:'realm_ss:' + realm.value.toLowerCase() + ' AND NOT version_s:* AND schema_s:' + schema, fields: [facetField] };
+                                return searchService.facets(facetQuery)
+                                    .then(function(facets){
+                                            return commonjs.updateFacets(facets[facetField], domainTermData);
+                                    });
+                            });
+            }
 
             // if ($routeParams.countryCode && $routeParams.countryCode.toUpperCase() == 'RAT'){
             //     $scope.countryProfileSearch ={partyStatus: 'parties', countryProfile_keyword:''}

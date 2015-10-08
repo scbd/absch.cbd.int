@@ -9,7 +9,7 @@ define(['app','underscore','/app/js/common.js',
     '/app/views/directives/search-filter-dates.partial.html.js',
     '/app/views/directives/document-list.partial.html.js', 'bootstrap-datepicker','moment',
     '/app/views/directives/help-directive.html.js',
-    '/app/views/search/search-directives/search-national-records-filter-directive.html.js',
+    '/app/views/search/search-directives/national-records-filter-directive.html.js',
     '/app/views/countries/country-map-list-directive.html.js', '/app/services/search-service.js'],
      function (app,_) {
 
@@ -52,7 +52,9 @@ define(['app','underscore','/app/js/common.js',
             $scope.queryGovernment = undefined;
             $scope.$broadcast("clearFilter",{});
         }
-
+        $scope.$watch('currentPage',     function() {
+            refresh();
+        });
         $scope.$watch('querySchema',     function() { $scope.currentPage=0; refresh(); });
         $scope.$watch('queryGovernment', function() { $scope.currentPage=0; refresh(); });
         $scope.$watch('queryTargets',    function() { $scope.currentPage=0; refresh(); });

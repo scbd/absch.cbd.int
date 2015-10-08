@@ -62,17 +62,6 @@
                 }
             </style>
             <div class="clearfix"></div>
-            <!--<div class="row pull-right">
-                <div class="col-lg-12">Order By:
-                    <select ng-model="orderByField">
-                        <option value="createdDate_dt">Created On</option>
-                        <option value="title_s">Title</option>
-                        <option value="government_EN_t">Government</option>
-                    </select>
-                    <input type="checkbox" ng-model="reverse"> Reverse
-                </div>
-            </div>
-            <br/>-->
             <div ng-show="!documents" style="padding-left:50%">
                 <i class="fa fa-spin fa-spinner fa-5x" style="margin:auto" />
             </div>
@@ -81,12 +70,11 @@
                 <h1>No records found.</h1>
             </div>
 
-            <div ng-repeat="document in transformedDocuments | filter:advanceFilter | filter:filterCategory "
+            <div ng-repeat="document in transformedDocuments" nf-if="transformedDocuments.length>0"
              style="border-top:1px solid #ddd;border-bottom:1px solid #ddd;border-right:1px solid #ddd;">
 
                 <div id="Result">
-                    <div class="{{document.recordtype}}" id="help-record-type"
-                    style="cursor:pointer;" ng-class="{'bg-grey': displayDetails}">
+                    <div class="{{document.recordtype}}" id="help-record-type" style="cursor:pointer;" ng-class="{'bg-grey': displayDetails}">
                         <div class="" style="padding:20px 20px 10px 20px;">
 
                             <div>
@@ -107,8 +95,6 @@
                                     <span class="pubDate pull-right" ng-show="document.createdDateOn">{{document.createdDateOn | formatDate}}</span>
                                 </div>
                             </div>
-
-
 
                             <div class="row textDescription" style="padding:10px;">
                                 <div class="col-xs-12">
@@ -137,22 +123,17 @@
                                     <div class="pull-right" ng-show="displayDetails" ng-click="displayDetails = !displayDetails;load(document,displayDetails);" style="z-index:100;padding-top:30px;padding-right:20px;cursor:pointer;">
                                         <i class="glyphicon glyphicon-remove-circle" style="font-size:20px;color:white;"></i>
                                     </div>
-                                    <div class="details" ng-show="displayDetails" record-loader document="document.data"></div>
+                                    <div class="details" ng-if="displayDetails" record-loader document="document.data"></div>
 
                                 </div>
                             </div>
 
                         </div>
-                        <!--  end result col -->
                     </div>
 
                 </div>
-                <!-- end switch -->
                 <div class="clearfix"></div>
             </div>
-
-
-            <!---Bottom pager-->
             <div class="clearfix"></div>
             <ul class="pagination pull-right" ng-show='showPagination'>
                 <li ng-class="disabled">
@@ -174,16 +155,14 @@
                     <a href ng-click="actionSetPage(pageCount - 1)">Last »</a>
                 </li>
             </ul>
-
-            <!-- </div> -->
         </div>
 
         <div ng-if="previewType=='group'">
-    
+
 
 
             <style>
-                
+
             </style>
 
             <link href="/app/libs/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
@@ -231,7 +210,7 @@
 
                                             <!--<a style="padding:0;margin:0;position:relative;top:-5px;" ng-if="key=='measure'" href="/search/countries/{{country.code.toUpperCase()}}/measure-matrix" > ( <i class="fa fa-table"></i>  measures matrix) </a> -->
                                         </span>
-                                        
+
                                          <span class="pull-right badge bg-darkgrey">{{schema.length}}</span>
                                 </div>
                                 <div class="row">
@@ -245,16 +224,16 @@
                                                 <div ng-click="doc.displayDetails = !doc.displayDetails;load(doc,doc.displayDetails)" style="cursor:pointer">
                                                      <i class="fa fa-chevron-circle-up" ng-show="doc.displayDetails"></i>
                                                     <i class="fa fa-chevron-circle-down" ng-show="!doc.displayDetails"></i>
-                                                    &nbsp; 
+                                                    &nbsp;
                                                     <span class="bold color-litegrey" ng-if="doc.type.indexOf('ABS-FP') >= 0 ">ABS NFP</span>
                                                     <span class="bold color-litegrey" ng-if="doc.type.indexOf('ABS-FP') < 0 "> CBD NFP</span>
                                                     <!-- <span class="bold color-litegrey" ng-if="key!= 'focalPoint' ">{{key|schemaShortName}}</span> -->
                                                     <span>{{doc.title}} </span>
-                                                    <strong> 
+                                                    <strong>
                                                         <span class="color-litegrey" style="font-size:12px;text-transform:uppercase;" ng-if="doc.meta1">| {{doc.meta1}} <span ng-if="doc.ownerGovernment">registered by {{doc.ownerGovernment|term}}</span> </span>
                                                         <span class="color-litegrey" style="font-size:12px;text-transform:uppercase;" ng-if="doc.meta2">| {{doc.meta2}} </span>
                                                         <span class="color-litegrey" style="font-size:12px;text-transform:uppercase;" ng-if="doc.meta3">| {{doc.meta3}} </span>
-                                                        
+
                                                     </strong>
                                                 </div>
                                                 <div class="row" ng-if="doc.displayDetails">
