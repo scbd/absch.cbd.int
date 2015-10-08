@@ -6,8 +6,8 @@ define(['app','ng-breadcrumbs','angular-localizer','scbd-angularjs-services','sc
     'use strict';
 
     app.controller('TemplateController', ['$scope', '$rootScope','showHelp' , '$window', '$location', 'authentication', '$browser', 'realmConfiguration', 'underscore', 'IUserNotifications', '$timeout','$filter',
-     '$anchorScroll','breadcrumbs','$mdToast',//'localStorageService',localStorageService,
-        function($scope, $rootScope, showHelp, $window, $location, authentication, $browser, realmConfiguration, _, userNotifications, $timeout, $filter,$anchorScroll,breadcrumbs, $mdToast) {
+     '$anchorScroll','breadcrumbs','$mdToast', '$element',//'localStorageService',localStorageService,
+        function($scope, $rootScope, showHelp, $window, $location, authentication, $browser, realmConfiguration, _, userNotifications, $timeout, $filter,$anchorScroll,breadcrumbs, $mdToast, $element ) {
 
             $scope.controller = "TemplateController";
             $scope.breadcrumbs     = breadcrumbs;
@@ -18,6 +18,14 @@ define(['app','ng-breadcrumbs','angular-localizer','scbd-angularjs-services','sc
 
         // $scope.goHome               = function() { $location.path('/'); };
         // $scope.currentPath          = function() { return $location.path(); };.
+        //============================================================
+        //
+        //
+        //============================================================
+         $scope.toggleSideBar = function() {
+            $element.find("#wrapper").toggleClass("toggled");
+         }
+
 
         //============================================================
         //

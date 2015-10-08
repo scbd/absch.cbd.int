@@ -791,3 +791,8 @@ footer .logo {
 .help-inline-content div{display:inline;}
 .help-simple-content{}
 
+/*side bar styles*/
+#sidebar-wrapper {
+    position: absolute!important;
+    z-index:60!important;
+}
