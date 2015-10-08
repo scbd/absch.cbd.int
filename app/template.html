@@ -28,6 +28,7 @@
     <link href="/app/libs/angular-loading-bar/src/loading-bar.css" rel="stylesheet">
     <link href="/app/libs/intro.js/introjs.css" rel="stylesheet">
     <script src="/app/libs/momentjs/min/moment.min.js"></script>
+    <link href="/app/libs/startbootstrap-simple-sidebar/css/simple-sidebar.css" rel="stylesheet">
 
 
     <link rel="stylesheet" type="text/css" href="/app/css/km.css">
@@ -226,13 +227,13 @@
 
 
     <!-- PORTAL LINKS FIXED-->
-    <nav class="navbar navbar-links navbar-default navbar-static-top bg-darkgrey navbar-fixed-top" ng-class="{'bg-orange':!production_env }">
+    <nav class="navbar navbar-links navbar-default navbar-static-top bg-darkgrey navbar-fixed-top" ng-class="{'bg-orange':!production_env }" >
         <div class="container-fluid container-links color-grey">
                 <ul class="navbar-left navlist nav navbar-nav"  >
-                    <li class="bold color-orange">
-                        <span ng-show="production_env" > ABS-CH</span>
-                       <span ng-show="development_env" > DEVELOPMENT</span>
-                       <span ng-show="training_env" > TRAINING</span>
+                    <li class="bold">
+                        <span ng-show="production_env" class="bg-orange"> ABS-CH</span>
+                       <span ng-show="development_env"  class="bg-black"> DEVELOPMENT</span>
+                       <span ng-show="training_env"  class="bg-black"> TRAINING</span>
                     </li>
                     <li><a href="/"> <i class="fa fa-home visible-xs visible-sm" ></i> <span class="hidden-xs hidden-sm"> Home </span></a></li>
                     <li><a href="/find"> <i class="fa fa-search visible-xs visible-sm"></i> <span class="hidden-xs hidden-sm"> &nbsp;&nbsp;Find&nbsp;Information</span></a></li>
@@ -383,12 +384,12 @@
         </div>
     </div>
 
-    <div class="container-full page-content">
+    <div class="container-full page-content" style="min-height:100%">
         <ng-view></ng-view>
     </div>
 
     <!-- FOOTER -->
-        <div class="footer">
+        <div class="footer" style="position:relative;z-index:2000;bottom:0;">
 
             <div class="footer-page" >
                 <div class="container-fluid footer-page-container  text-right ">
@@ -433,6 +434,7 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+    
     <script src="/app/libs/requirejs/require.js" data-main="/app/js/boot.js"></script>
 
     <script src="/app/libs/outdated-browser/outdatedbrowser/outdatedbrowser.min.js"></script>

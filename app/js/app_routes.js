@@ -121,6 +121,9 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
             when('/help/edit/faq/:term?', {templateUrl: '/app/views/help/forms/glossary-term.html',resolveController: true,resolveUser: true, schema:'help-faqs', label:'FAQs'}).
             when('/help/faq/tags/:tag', {templateUrl: '/app/views/help/forms/glossary-term.html',resolveController: true,resolveUser: true, schema:'help-faqs', label:'Tags'}).
 
+
+            when('/search/test', {templateUrl: '/app/test.html',resolveController: true,resolveUser: true}).
+
             otherwise({templateUrl: '/app/404.html', label:'404 Error'});
 
     }]);
