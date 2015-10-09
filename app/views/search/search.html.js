@@ -53,6 +53,9 @@ define(['app','underscore','/app/js/common.js',
             $scope.$broadcast("clearFilter",{});
         }
 
+        $scope.$watch('currentPage',     function() {
+            refresh();
+        });
         $scope.$watch('querySchema',     function() { $scope.currentPage=0; refresh(); });
         $scope.$watch('queryGovernment', function() { $scope.currentPage=0; refresh(); });
         $scope.$watch('queryTargets',    function() { $scope.currentPage=0; refresh(); });
