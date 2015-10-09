@@ -1,185 +1,88 @@
 <link href="/app/css/find.css" rel="stylesheet">
 <link href="/app/css/record.css" rel="stylesheet">
 <style>
+    .not-active {
+        color: rgb(119, 119, 119)!important;
+    }
 
-.not-active{
-    color:rgb(119, 119, 119)!important;
-}
-.active{
-    color:#2a6496!important;
-}
-.typebtn:hover{background-color:#eee; }
-.handleSearchPage{
-    position: absolute!important;
-    right: 10%!important;
-}
-#sidebar-wrapper{
-    width: 280px;
-    background-color: white;
-}
-.sidebar-nav {
-    width: 275px;
-    padding-left: 5px;
-}
+    .active {
+        color: #2a6496!important;
+    }
+
+    .typebtn:hover {
+        background-color: #eee;
+    }
+
+    .handleSearchPage {
+        position: absolute!important;
+        right: 10%!important;
+    }
+
+    #sidebar-wrapper {
+        width: 280px;
+        background-color: white;
+    }
+
+    .sidebar-nav {
+        width: 275px;
+        padding-left: 5px;
+    }
 </style>
 
-<div ng-controller="FindController"  >
-    <div smooth-scroll duration="100" offset="200" ></div>
-<div>
-  <div id="wrapper">
-<!-- <div class="row">
-    <div class="col-lg-2"> -->
-         <!-- Sidebar -->
-         <div id="sidebar-wrapper">
-             <div class="sidebar-nav">
-                 <!-- <li class="sidebar-brand">
-                     <a href="#">
-                         Search
-                     </a>
-                 </li>
-                 <li> -->
+<div ng-controller="FindController">
+    <div smooth-scroll duration="100" offset="200"></div>
+    <div>
+        <div id="wrapper" ng-show="false">
+            <div id="sidebar-wrapper">
+                <div class="sidebar-nav">
+                    <search-filter-schemas ng-model='schemas' field='schema_s'
+                    query='querySchema' preview-type="previewType"
+                    selected-filters="selectedSchemaFilters"
+                    record-type="recordType"></search-filter-schemas>
+                </div>
+            </div>
+            <div id="page-content-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <a href="#" class="btn btn-default" id="menu-toggle" ng-click="toggleSideBar()">Toggle Menu</a>
 
-                     <search-filter-schemas  ng-model='schemas' field='schema_s' query='querySchema' preview-type="previewType"
-                          selected-filters="selectedSchemaFilters" record-type="recordType"></search-filter-schemas>
+                            <button class="btn btn-primary" type="button" ng-show="partyStatusString" ng-click="queryStatus()" style="margin-right:2px;margin-bottom:2px">
+                                {{partyStatusString}} &nbsp;
+                                <span aria-hidden="true">&times;</span>
+                            </button>
 
-                 <!-- </li> -->
-             </div>
-         </div>
-         <!-- /#sidebar-wrapper -->
-    <!-- </div>
-    <div class="col-lg-10"> -->
-             <!-- Page Content -->
-             <div id="page-content-wrapper">
-                 <div class="container-fluid">
-                     <div class="row">
-                         <div class="col-lg-12">
-                              <a href="#" class="btn btn-default" id="menu-toggle" ng-click="toggleSideBar()">Toggle Menu</a>
+                            <button class="btn btn-default" type="button" ng-repeat="filter in selectedSchemaFilters" ng-click="removeFilter(filter)" style="margin-right:2px;margin-bottom:2px">
+                                {{filter.isTerm ? (filter.value|term) : filter.value}} &nbsp;
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <button class="btn btn-primary" type="button" ng-repeat="filter in countryApi.getSelected()" ng-click="removeCountryFilter(filter)" style="margin-right:2px;margin-bottom:2px">
+                                {{filter.name|lstring}} &nbsp;
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <button class="btn btn-primary" type="button" ng-repeat="filter in thematicAreaApi.getSelected()" ng-click="removeThematicAreaFilter(filter)" style="margin-right:2px;margin-bottom:2px">
+                                {{filter.title|lstring}} &nbsp;
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <button class="btn btn-primary" type="button" ng-repeat="filter in regionsApi.getSelected()" ng-click="removeRegionFilter(filter)" style="margin-right:2px;margin-bottom:2px">
+                                {{filter.title|lstring}} &nbsp;
+                                <span aria-hidden="true">&times;</span>
+                            </button>
 
-                              <button class="btn btn-primary" type="button" ng-show="partyStatusString"
-                               ng-click="queryStatus()"
-                                      style="margin-right:2px;margin-bottom:2px">
-                                      {{partyStatusString}}
-                                   &nbsp; <span aria-hidden="true">&times;</span>
-                              </button>
-
-                              <button class="btn btn-default" type="button" ng-repeat="filter in selectedSchemaFilters" ng-click="removeFilter(filter)"
-                                      style="margin-right:2px;margin-bottom:2px">
-                                  {{filter.isTerm ? (filter.value|term) : filter.value}}
-                                   &nbsp; <span aria-hidden="true">&times;</span>
-                              </button>
-                             <button class="btn btn-primary" type="button"
-                              ng-repeat="filter in countryApi.getSelected()"
-                              ng-click="removeCountryFilter(filter)"
-                                     style="margin-right:2px;margin-bottom:2px">
-                                 {{filter.name|lstring}}
-                                 &nbsp; <span aria-hidden="true">&times;</span>
-                             </button>
-                             <button class="btn btn-primary" type="button"
-                              ng-repeat="filter in thematicAreaApi.getSelected()"
-                              ng-click="removeThematicAreaFilter(filter)"
-                                     style="margin-right:2px;margin-bottom:2px">
-                                 {{filter.title|lstring}}
-                                  &nbsp; <span aria-hidden="true">&times;</span>
-                             </button>
-                             <button class="btn btn-primary" type="button"
-                              ng-repeat="filter in regionsApi.getSelected()"
-                              ng-click="removeRegionFilter(filter)"
-                                     style="margin-right:2px;margin-bottom:2px">
-                                 {{filter.title|lstring}}
-
-                                  &nbsp; <span aria-hidden="true">&times;</span>
-                             </button>
-
-                             <search-filter-themes  api="thematicAreaApi" title='Thematic Areas' ng-model='thematicAreas' field='thematicAreas_ss' query='queryTheme'></search-filter-themes>
-                             <search-filter-countries  api="countryApi" title='Countries' ng-model='governments' field='government_s' query='queryGovernment' external-filter="countryResultFilter"></search-filter-countries>
-                             <search-filter-regions  api="regionsApi" title="Regions" ng-model="regions" field="government_REL_ss" query="queryRegion" facets="regionFacets"></search-filter-regions>
+                            <search-filter-themes api="thematicAreaApi" title='Thematic Areas' ng-model='thematicAreas' field='thematicAreas_ss' query='queryTheme'></search-filter-themes>
+                            <search-filter-countries api="countryApi" title='Countries' ng-model='governments' field='government_s' query='queryGovernment' external-filter="countryResultFilter"></search-filter-countries>
+                            <search-filter-regions api="regionsApi" title="Regions" ng-model="regions" field="government_REL_ss" query="queryRegion" facets="regionFacets"></search-filter-regions>
 
                             <div record-type="recordType" preview-type="previewType" document-list documents='rawDocs' filter='*' show-pagination='true' current-page='currentPage' document-Count='documentCount' order-by="orderBy">
                             </div>
 
-                           <div country-map-list ng-if="recordType=='countryProfile'" api="countryProfileApi" record-type="recordType" query="querySchema"></div>
+                            <div country-map-list ng-if="recordType=='countryProfile'" api="countryProfileApi" record-type="recordType" query="querySchema"></div>
 
-                         </div>
-                     </div>
-                 </div>
-             </div>
-             <!-- /#page-content-wrapper -->
-    <!-- </div>
-</div> -->
-     </div>
-     <!-- /#wrapper -->
-
-    <!-- <section layout="row" style="position:relative;top:20px; padding-bottom:30px;" flex>
-
-           <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('min-width: 1200px')" style="background-color:#eee;">
-                <div style="border-bottom: 2px solid #DDD;">
-
-                    <search-filter-schemas  ng-model='schemas' field='schema_s' query='querySchema' preview-type="previewType"
-                         selected-filters="selectedSchemaFilters" record-type="recordType"></search-filter-schemas>
-                </div>
-           </md-sidenav>
-         <md-content flex layout-margin style="margin:0 30px 30px 30px;padding:0;background-color:transparent;"  >
-             <div layout="column" layout-align="top center" >
-
-                <legend name="formInfo" style="display:none"></legend>
-                 <md-button  ng-click="toggleLeft()" class="md-primary md-raised bg-medgrey" hide-gt-lg  style="width:100%;margin: 0  0 10px 0;">
-                     <i class="material-icons" style="position:relative;top:6px;">menu</i> Search Filters
-                 </md-button>
-
-                  <div layout="row" layout-align="top center"  >
-
-                    <div flex="66">
-                        <button class="btn btn-primary" type="button" ng-show="partyStatusString"
-                         ng-click="queryStatus()"
-                                style="margin-right:2px;margin-bottom:2px">
-                                {{partyStatusString}}
-                             &nbsp; <span aria-hidden="true">&times;</span>
-                        </button>
-
-                        <button class="btn btn-default" type="button" ng-repeat="filter in selectedSchemaFilters" ng-click="removeFilter(filter)"
-                                style="margin-right:2px;margin-bottom:2px">
-                            {{filter.isTerm ? (filter.value|term) : filter.value}}
-                             &nbsp; <span aria-hidden="true">&times;</span>
-                        </button>
-                       <button class="btn btn-primary" type="button"
-                        ng-repeat="filter in countryApi.getSelected()"
-                        ng-click="removeCountryFilter(filter)"
-                               style="margin-right:2px;margin-bottom:2px">
-                           {{filter.name|lstring}}
-                           &nbsp; <span aria-hidden="true">&times;</span>
-                       </button>
-                       <button class="btn btn-primary" type="button"
-                        ng-repeat="filter in thematicAreaApi.getSelected()"
-                        ng-click="removeThematicAreaFilter(filter)"
-                               style="margin-right:2px;margin-bottom:2px">
-                           {{filter.title|lstring}}
-                            &nbsp; <span aria-hidden="true">&times;</span>
-                       </button>
-                       <button class="btn btn-primary" type="button"
-                        ng-repeat="filter in regionsApi.getSelected()"
-                        ng-click="removeRegionFilter(filter)"
-                               style="margin-right:2px;margin-bottom:2px">
-                           {{filter.title|lstring}}
-
-                            &nbsp; <span aria-hidden="true">&times;</span>
-                       </button>
+                        </div>
                     </div>
-                  </div>
-
-                 <search-filter-themes  api="thematicAreaApi" title='Thematic Areas' ng-model='thematicAreas' field='thematicAreas_ss' query='queryTheme'></search-filter-themes>
-                 <search-filter-countries  api="countryApi" title='Countries' ng-model='governments' field='government_s' query='queryGovernment' external-filter="countryResultFilter"></search-filter-countries>
-                 <search-filter-regions  api="regionsApi" title="Regions" ng-model="regions" field="government_REL_ss" query="queryRegion" facets="regionFacets"></search-filter-regions>
-
-                <div record-type="recordType" preview-type="previewType" document-list documents='rawDocs' filter='*' show-pagination='true' current-page='currentPage' document-Count='documentCount' order-by="orderBy">
                 </div>
-
-               <div country-map-list ng-if="recordType=='countryProfile'" api="countryProfileApi" record-type="recordType" query="querySchema"></div>
             </div>
         </div>
-    </div> -->
-
-
         <!-- <div search-directive></div> -->
-</div>
-
+    </div>
 </div>

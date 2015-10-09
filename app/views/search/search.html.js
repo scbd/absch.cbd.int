@@ -9,6 +9,7 @@ define(['app','underscore','/app/js/common.js',
     '/app/views/directives/search-filter-dates.partial.html.js',
     '/app/views/directives/document-list.partial.html.js', 'bootstrap-datepicker','moment',
     '/app/views/directives/help-directive.html.js',
+    '/app/views/search/search-directives/search-directive.html.js',
     '/app/views/search/search-directives/national-records-filter-directive.html.js',
     '/app/views/countries/country-map-list-directive.html.js', '/app/services/search-service.js'],
      function (app,_) {
@@ -50,6 +51,8 @@ define(['app','underscore','/app/js/common.js',
             $scope.queryPartyStatus = "";
             $scope.partyStatusString = undefined;
             $scope.queryGovernment = undefined;
+            $scope.queryRegion = undefined;
+            $scope.queryThem = undefined;
             $scope.$broadcast("clearFilter",{});
         }
         $scope.$watch('currentPage',     function() {
@@ -68,8 +71,10 @@ define(['app','underscore','/app/js/common.js',
                 $scope.rawDocs = undefined;
                 $scope.documentCount = 0;
 
-                if($scope.currentPage>0)
+                if($scope.currentPage>0){
+                    $scope.clearFilter();
                     $scope.currentPage=0;
+                }
                 else
                     refresh();
             }
@@ -78,6 +83,7 @@ define(['app','underscore','/app/js/common.js',
         $scope.updatePreviewType = function(type){
             $scope.previewType=type;
             $scope.rawDocs = undefined;
+            $scope.clearFilter();
         }
 
         $scope.removeFilter = function(filter){

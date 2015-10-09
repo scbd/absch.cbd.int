@@ -57,9 +57,12 @@
             <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': filters.focalPoint.selected==false}"> National Focal Points </span></div>
             <div> <span class="badge badge-white pull-right">{{filters.focalPoint.count}}</span></div>
         </div>
-        <div ng-show="ffilters.ocalPoint.selected" class="subfilters-section" style="padding-top:10px;padding-bottom:5px;margin-left:15px;">
-            <input type="checkbox" ng-model="focalPointNP" ng-change="refresh(focalPointNP.selected,'focalPoint')" id="ckfocalPointNP"> <span class="filter-text">ABS National Focal Points</span></br>
-            <input type="checkbox" ng-model="focalPointCBD" ng-change="refresh(focalPointCBD.selected,'focalPoint')" id="ckfocalPointCBD"> <span class="filter-text">CBD Focal Points</span></br>
+        <div ng-show="filters.focalPoint.selected" class="subfilters-section" style="padding-top:10px;padding-bottom:5px;margin-left:15px;">
+            <div km-select class="filter-btn" multiple api="filters.fpApi"
+            ng-model="filters.focalPoint.subFilters.fpFocalPointType.value" binding-type="string" placeholder="Focalpoint Types"
+            items="options.focalpointTypes()"></div>
+            <!-- <input type="checkbox" ng-model="focalPointNP" ng-change="refresh(focalPointNP.selected,'focalPoint')" id="ckfocalPointNP"> <span class="filter-text">ABS National Focal Points</span></br>
+            <input type="checkbox" ng-model="focalPointCBD" ng-change="refresh(focalPointCBD.selected,'focalPoint')" id="ckfocalPointCBD"> <span class="filter-text">CBD Focal Points</span></br> -->
         </div>
     </div>
 
@@ -161,16 +164,16 @@
     </div>
 
 
-    <div ng-class="{'check_active': absCheckpoint.selected}" style="padding:5px 0;border-bottom:1px solid #ddd;">
+    <div ng-class="{'check_active': filters.absCheckpoint.selected}" style="padding:5px 0;border-bottom:1px solid #ddd;">
         <div layout="row">
             <div>
-                <input type="checkbox" ng-model="absCheckpoint.selected"  ng-change="refresh(absCheckpoint.selected,'authority')">
+                <input type="checkbox" ng-model="absCheckpoint.selected"  ng-change="refresh(filters.absCheckpoint.selected,'authority')">
             </div>
-            <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': absCheckpoint.selected==false}"> Checkpoints</span></div>
-            <div> <span class="badge badge-white pull-right">{{absCheckpoint.count}}</span></div>
+            <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': filters.absCheckpoint.selected==false}"> Checkpoints</span></div>
+            <div> <span class="badge badge-white pull-right">{{filters.absCheckpoint.count}}</span></div>
         </div>
-        <div ng-show="absCheckpoint.selected" class="subfilters-section" style="padding-top:10px;padding-bottom:5px;margin-left:0px;">
-            <span km-select class="filter-btn" multiple api="cpJurisdictionApi" ng-model="cpJurisdiction" binding-type="string" placeholder="Jurisdictions"
+        <div ng-show="filters.absCheckpoint.selected" class="subfilters-section" style="padding-top:10px;padding-bottom:5px;margin-left:0px;">
+            <span km-select class="filter-btn" multiple api="filters.cpJurisdictionApi" ng-model="filters.cpJurisdiction" binding-type="string" placeholder="Jurisdictions"
             items="options.cpJurisdictions()"></span>
         </div>
     </div>

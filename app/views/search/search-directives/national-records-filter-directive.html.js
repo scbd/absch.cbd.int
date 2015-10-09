@@ -1,4 +1,6 @@
-define(['app', '/app/js/common.js', '/app/services/thesaurus-service.js'], function (app) {
+define(['app', 'underscore',
+ '/app/js/common.js', '/app/services/thesaurus-service.js'],
+  function (app, _) {
     app.directive('searchNationalRecordsFilter', function () {
         return {
             restrict: 'EAC',
@@ -18,14 +20,15 @@ define(['app', '/app/js/common.js', '/app/services/thesaurus-service.js'], funct
                     $scope.filters = {};
 
                     $scope.options  = {
+                                    focalpointTypes          : function () { return getFocalpointFacets(); },
                                     jurisdiction             : function () { return loadDomainWithFacets('jurisdiction','measure','jurisdiction_s'); },
                                     status                   : function () { return loadDomainWithFacets('status','measure','status_s'); },
                                     typeOfDocuments          : function () { return loadDomainWithFacets('typeOfDocuments', 'measure','type_s'); },
                                     cnaJurisdictions         : function () { return loadDomainWithFacets('cnaJurisdictions', 'authority', 'jurisdiction_s'); },
-                                    absGeneticResourceTypes  : function () { return loadDomainWithFacets('absGeneticResourceTypes', 'authority','absGeneticResourceTypes_s') },
+                                    absGeneticResourceTypes  : function () { return loadDomainWithFacets('absGeneticResourceTypes', 'authority','absGeneticResourceTypes_s'); },
                                     keywords                 : function () { return loadDomainWithFacets('keywords', 'permit', 'keywords_ss'); },
                                     usage                    : function () { return loadDomainWithFacets('usage', 'permit', 'usage_REL_ss'); },
-                                    cpJurisdictions         : function () { return  loadDomainWithFacets('cpJurisdictions', 'checkpoint', 'jurisdiction_s') },
+                                    cpJurisdictions          : function () { return  loadDomainWithFacets('cpJurisdictions', 'checkpoint', 'jurisdiction_s') },
 
                                     countries                : function () { return thesaurusService.getDomainTerms('countries').then(function (o) { return $filter("orderBy")(o, "name"); }); },
                                     regions                  : function () { return $q.all([thesaurusService.getDomainTerms('countries'),
@@ -38,13 +41,11 @@ define(['app', '/app/js/common.js', '/app/services/thesaurus-service.js'], funct
 
                                                 };
                     $scope.filters = {
-                        focalPoint              : { identifier: 'focalPoint',               title: 'National Focal Points', type:'nationalRecord',
-                                                            subFilters : [
-                                                                            { name: 'fpFocalPointType',     type: 'multiselect' , field: 'type_ss'},
-                                                                            // { name: 'focalPointNP',         type: 'checkbox',  field: 'type_ss', value : 'NP-FP OR schema_s:ABS-FP' },
-                                                                            // { name: 'focalPointCBD'  ,      type: 'checkbox' , field: 'type_ss', value : ['CBD-FP1', 'CBD-FP1']}
-                                                            ]
-                                                        },
+                        focalPoint              : { type:'nationalRecord',
+                                                    subFilters : {
+                                                                fpFocalPointType : { type: 'multiselect' , field: 'type_ss'}
+                                                        }
+                                                  },
                         authority               : { identifier: 'authority',                title: 'Competent National Authorities' ,type:'nationalRecord',
                                                            subFilters : [
                                                                             { name: 'cnaResponsibleForAll',     type: 'radio' , field: 'absResposibleForAll_b'},
@@ -89,15 +90,30 @@ define(['app', '/app/js/common.js', '/app/services/thesaurus-service.js'], funct
 
                     };
 
-                    var filterWatch = $scope.$watch('filters', function(newVal){
-                                            $scope.searchLeftMenuCtrl.actions.buildQuery(newVal,nationalSchema);
-                                      }, true);
+                    // var filterWatch = $scope.$watch('filters', function(newVal){
+                    //                         $scope.searchLeftMenuCtrl.actions.buildQuery(newVal,nationalSchema);
+                    //                   }, true);
+                    _.each($scope.filters,function (item) {
+                        if(item.subFilters){
+                            _.each(item.subFilters, function(filter){
+                                $scope.$watch(filter.value, function(newVal){
+                                            if(newVal)
+                                                $scope.searchLeftMenuCtrl.actions.buildQuery(newVal,nationalSchema);
+                                          }, true);
+                            })
+                        }
+                    });
 
                     var nationalSchema = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database","focalPoint"];
 
                     function loadDomainWithFacets(domainTerm, schema, facetField){
-                            return thesaurusService
-                                    .getDomainTerms(domainTerm)
+
+                        //for static value lists
+                        // var operation = getLocalTerms(domainTerm);
+                        // if(!operation)
+                        //     operation = thesaurusService.getDomainTerms(domainTerm);
+
+                            return thesaurusService.getDomainTerms(domainTerm)
                                     .then(function(domainTermData){
                                         var facetQuery = {query:'realm_ss:' + realm.value.toLowerCase() + ' AND NOT version_s:* AND schema_s:' + schema, fields: [facetField] };
                                         return searchService.facets(facetQuery)
@@ -107,6 +123,57 @@ define(['app', '/app/js/common.js', '/app/services/thesaurus-service.js'], funct
                                     });
                     }
 
+                    function getLocalTerms(term){
+
+                        var defer = $q.defer();
+
+                        var collection = [];
+                        if(term == 'focalpointTypes'){
+                            collection = [
+                                { title: "ABS National Focal Points", identifier: "(NP-FP ABS-FP)"},
+                                { title: "CBD Focal Points", identifier: "(CBD-FP1 CBD-FP2)"}
+                            ]
+
+                        }
+                        else {
+                            return;
+                        }
+                        defer.resolve(collection);
+
+                        return defer.promise;
+                    }
+
+                    function getFocalpointFacets(){
+                        var domainTermData = [
+                            { title: {"en" : "ABS National Focal Points"}, identifier: "(ABS-FP NP-FP)"},
+                            { title: {"en" : "CBD Focal Points"}, identifier: "(CBD-FP1 CBD-FP2)"}
+                        ]
+                        var facetQuery = {query:'realm_ss:' + realm.value.toLowerCase() + ' AND NOT version_s:* AND schema_s:focalPoint', fields: ['type_ss'] };
+                        return searchService.facets(facetQuery)
+                            .then(function(facets){
+                                var absFacets = [];
+
+                            absFacets.push(
+                                        {count : getSelectedFacetCount(['CBD-FP1', 'CBD-FP2'], facets.type_ss),
+                                             symbol: '(CBD-FP1 CBD-FP2)', title: '(CBD-FP1 CBD-FP2)'
+                                            });
+                            absFacets.push({count : getSelectedFacetCount(['ABS-FP', 'NP-FP'], facets.type_ss),
+                                             symbol: '(ABS-FP NP-FP)', title: '(ABS-FP NP-FP)'
+                                            });
+                                //console.log(commonjs.updateFacets(absFacets, domainTermData));
+                                    return commonjs.updateFacets(absFacets, domainTermData);
+                            });
+                    }
+                    function getSelectedFacetCount(items, facetLists){
+
+                        var facets = _.filter(facetLists, function(facet){
+                            return _.contains(items, facet.symbol);
+                        });
+                        return _.reduce(_.pluck(facets,'count'),
+                            function(meno, count){
+                                return meno + count;
+                            },0);
+                    }
                 }]
         }
     });
