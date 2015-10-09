@@ -55,6 +55,7 @@ define(['app','underscore','/app/js/common.js',
             $scope.queryThem = undefined;
             $scope.$broadcast("clearFilter",{});
         }
+
         $scope.$watch('currentPage',     function() {
             refresh();
         });

@@ -150,8 +150,8 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-xs-12" style="padding-top:15px;">
-                                    <div class="control-group" ng-class="{warning:isInvalid('gisFiles')}">
+                                <div class="col-xs-12" style="padding-top:15px;" ng-class="{'warning':isInvalid('gisFiles')}">
+                                    <div class="control-group" >
                                         <label class="control-label" for="gisFiles">Geographic coordinates</label>
                                         <span class="help-block">Limited to .geojson files (<a href="http://www.geojson.org/" target="_blank" >http://www.geojson.org/</a>)</span>
                                         <div km-link required name="gisFiles" ng-model="document.gisFiles" allow-link="false" identifier="document.header.identifier" mime-types="application/json"></div>
