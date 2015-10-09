@@ -1,11 +1,11 @@
 <div id="Filters">
 <style>
 label{width:100%;}
-/*.dropdown-menu{
+.dropdown-menu{
     z-index: 10000;
     position: inherit;
     width:260px;
-}*/
+}
  .ddm > li > a{
         white-space:normal!important;
         padding-top:5px!important;
@@ -26,22 +26,15 @@ label{width:100%;}
          white-space:normal!important;
      }
      .filter-btn input {display:none;}
-    /*.panel-group .panel {
-        overflow: inherit!important;
-    }
-    .dropdown-menu {
-        position: absolute!important;
-    }*/
+
 </style>
 
     <div class="panel-group " id="accordion " role="tablist " aria-multiselectable="true " style="margin-bottom:0px; ">
        <div class="panel panel-default " style="border-radius:0!important;border:0; ">
             <div class="panel-heading bg-grey3 " role="tab " id="headingOne " style="border-radius:0!important;border:0; padding:18px; ">
                 <span class="panel-title " >
-                    <!---->
-                    <a role="button " data-toggle="collapse " data-parent="#accordion "
-                    ng-click="showNationalFilters=false;showReferenceFilters=false;recordType = 'countryProfile'; "
-                     aria-expanded="false " aria-controls="collapseOne " style="font-size:20px; ">
+                    <a role="button " data-toggle="collapse " data-parent="#accordion " ng-click="showNationalFilters=false;showReferenceFilters=false;recordType = 'countryProfile'; "
+                    aria-expanded="false " aria-controls="collapseOne " style="font-size:20px; cursor:pointer; ">
                     <span class="color-white "> <i class="fa fa-chevron-circle-up pad-left " ></i> Country Profiles</span>
                     </a>
                 </span>
@@ -130,8 +123,9 @@ label{width:100%;}
       <div class="panel panel-default " style="border-radius:0!important;border:0; ">
             <div class="panel-heading bg-blue " role="tab " id="headingTwo " style="border-radius:0!important;border:0;padding:18px; ">
                 <span class="panel-title ">
-                    <!---->
-                    <a role="button " data-toggle="collapse " data-parent="#accordion " ng-click="showNationalFilters=!showNationalFilters;recordType = 'national';" aria-expanded="false " aria-controls="#collapseTwo " style="font-size:20px; "
+                    <a role="button " data-toggle="collapse "
+                    data-parent="#accordion " ng-click="showNationalFilters=!showNationalFilters;recordType = 'national';" aria-expanded="false " aria-controls="#collapseTwo "
+                    style="font-size:20px;  cursor:pointer;"
                     id="lblNationalRecords" >
                         <i class="fa fa-chevron-circle-up pad-left " ></i> National Records
                     </a>
@@ -282,7 +276,7 @@ label{width:100%;}
                                 </li>
                                 <li>
                                     <a ng-href="#" ng-click="amendmentIntent=-1;buildQuery()" value="-1"  ng-model="amendmentIntent" name="amendmentIntent">
-                                    <span ng-show="amendmentIntent==-1" class="glyphicon glyphicon-ok"></span>no ammendments</a>
+                                    <span ng-show="amendmentIntent==-1" class="glyphicon glyphicon-ok"></span>no amendments</a>
                                 </li>
                                 <li>
                                     <a ng-href="#" ng-click="amendmentIntent=0;buildQuery()" value="0"  ng-model="amendmentIntent" name="amendmentIntent">
@@ -326,10 +320,9 @@ label{width:100%;}
         <div class="panel panel-default " style="border-radius:0!important;border:0; ">
             <div class="panel-heading bg-orange " role="tab " id="headingThree " style="border-radius:0!important;border:0;padding:18px; ">
                 <span class="panel-title " >
-                    <!---->
                     <!--aria-expanded="false "role="button" data-toggle="collapse" data-parent="#accordion " aria-controls="collapseThree " -->
                     <a class="collapsed "  ng-click="showReferenceFilters=!showReferenceFilters;recordType = 'reference';"
-                    style="font-size:20px; " id="lblReferenceRecords">
+                    style="font-size:20px; cursor:pointer;" id="lblReferenceRecords">
                         <i class="fa fa-chevron-circle-up pad-left " ></i> Reference Records
                     </a>
                 </span>

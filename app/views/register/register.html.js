@@ -4,8 +4,8 @@ define(['app','linqjs', 'angular-localizer',
 	'/app/views/directives/task-id-directive.html.js',
 	'/app/views/directives/user-details.directive.html.js',
   '/app/views/directives/ngxLazy.directive.js', '/app/views/directives/help-directive.html.js',
-  'bootstrap-datepicker','moment',  'text-angular', 'bootbox','angular-introjs',
-   'introjs','scbd-angularjs-services','scbd-angularjs-filters','scbd-angularjs-controls'], function (app) {
+  'bootstrap-datepicker','moment',  'text-angular', 'bootbox',
+   'scbd-angularjs-services','scbd-angularjs-filters','scbd-angularjs-controls'], function (app) {
 
   "use strict";
 // angular.module([]);
