@@ -42,7 +42,8 @@ require.config({
         'ngMaterial'            : '../libs/angular-material/angular-material.min',
         'ngSmoothScroll'        : '../libs/ngSmoothScroll/angular-smooth-scroll.min',
         'joyRide'               : '../libs/joyRide/jquery.joyride-2.1',
-        'angular-message'       : '../libs/angular-messages/angular-messages.min'
+        'angular-message'       : '../libs/angular-messages/angular-messages.min',
+        'toastr'                : '../libs/angular-toastr/dist/angular-toastr.tpls.min'
     },
     'shim': {
         'angular'                       : { 'deps': ['jquery'], 'exports': 'angular' },
@@ -71,6 +72,7 @@ require.config({
         'scbd-angularjs-controls'       : { 'deps': ['angular', 'angular-sanitize', 'angular-localizer']},
         'ngAria'                        : { 'deps': ['angular'] },
         'ngMaterial'                    : { 'deps': ['angular', 'angular-animate', 'ngAria'] },
+        'toastr'                        : { 'deps': ['angular', 'angular-animate', 'ngAria'] },
         'angular-message'               : { 'deps': ['angular'] },
     }
 });
