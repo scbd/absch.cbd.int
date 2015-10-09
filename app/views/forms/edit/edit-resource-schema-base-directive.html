@@ -54,7 +54,7 @@
 								</div>
 							</div>
 						</div>
-						
+
 						<div class="row" ng-if="document.organizationsRef">
 							<div class="col-xs-12">
 								<div class="km-control-group" name="organizations" caption="Authoring organisation(s) ">
@@ -64,7 +64,7 @@
 								</div>
 							</div>
 						</div>
-						
+
 						<div class="row">
 							<div class="col-xs-12">
 								<div class="km-control-group" required name="publicationYear" caption="Publication year">
@@ -72,7 +72,7 @@
 								</div>
 							</div>
 						</div>
-						
+
 						<div class="row">
 							<div class="col-xs-12">
 								<div class="km-control-group" name="rights" caption="Rights">
@@ -82,7 +82,7 @@
 								</div>
 							</div>
 						</div>
-						
+
 						<div class="row">
 							<div class="col-xs-12">
 								<div class="km-control-group" name="format" caption="Format">
@@ -101,15 +101,15 @@
 								</div>
 							</div>
 						</div>
-						
+
 					</section>
 
 					<!--<section>
 
 						<legend>Access to the resource</legend>
-						
-						
-						
+
+
+
 
 						<div class="row">
 							<div class="col-xs-12">
@@ -132,7 +132,7 @@
 								</div>
 							</div>
 						</div>
-					
+
 					-->
 
 					<section>
@@ -149,19 +149,6 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-xs-6">
-								<div class="km-control-group" required name="languages" caption="Language(s)">
-									<div km-select name="languages" required ng-model="document.languages" items="options.languages()" multiple></div>
-								</div>
-							</div>
-							<div class="col-xs-6" ng-show="isOtherSelected(document.languages)">
-								<div class="km-control-group" required name="languageName" caption="Name of other language">
-									<div km-textbox-ml required name="languageName" rows="1" ng-model="document.languageName" locales="document.header.languages"></div>
-								</div>
-							</div>
-						</div> 
-						
-						<div class="row">
 							<div class="col-xs-12">
 								<div class="km-control-group" name="cover" caption="Cover image(s)">
 									<div class="help-block">Only JPEG and PNG formats are supported.</div>
@@ -173,11 +160,11 @@
 					</section>
 					<section>
 						<legend>Information on the content of document</legend>
-						
+
 						<div class="row">
 							<div class="col-xs-12">
-								<div class="km-control-group" required name="summary" caption="Summary, abstract or table of contents">
-									<div km-textbox-ml ng-model="document.summary" required rows="4" locales="document.header.languages"></div>
+								<div class="km-control-group"  name="summary" caption="Summary, abstract or table of contents">
+									<div km-textbox-ml ng-model="document.summary"  rows="4" locales="document.header.languages"></div>
 								</div>
 							</div>
 						</div>
@@ -189,12 +176,12 @@
 								</div>
 							</div>
 						</div>
-						
+
 					</section>
 					<section>
 
 						<legend>Keywords for facilitating online searches</legend>
-						
+
 						<div class="row">
 							<div class="col-xs-12">
 								<div class="km-control-group" required name="absSubjects" caption="Thematic areas(s)">

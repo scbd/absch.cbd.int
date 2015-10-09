@@ -8,8 +8,8 @@ define(['app'], function (app) {
 			replace: true,
 			controller: ["$scope", "$http", "$filter","IStorage", function ($scope, $http, $filter, storage)
 			{
-				
-				
+
+
 				if($scope.document_type=="modelContractualClause"){
 					$scope.heading = "Article 19 & 20 tool";
 					$scope.shortHeading = "MCC";
@@ -22,7 +22,7 @@ define(['app'], function (app) {
 					$scope.heading = "Community protocols and procedures and customary law";
 					$scope.shortHeading = "CPP";
 				}
-				
+
 				_.extend($scope.options, {
 					languages     : function() {
 						return $q.all([
@@ -51,13 +51,13 @@ define(['app'], function (app) {
 							return $scope.options.documentLinksExt[0].options;
 						})
 					}],
-				});	
-				
-				if(_.contains(['modelContractualClause', 'resource', 'communityProtocol'],$scope.type))
+				});
+
+				//if(_.contains(['modelContractualClause', 'resource', 'communityProtocol'],$scope.type))
 					$scope.setDocument({libraries: [{ identifier: "cbdLibrary:abs-ch" }]}, true);
-				else
-					$scope.setDocument({}, true);
-				
+				// else
+				// 	$scope.setDocument({}, true);
+
 				$scope.$on("loadDocument", function(evt, info) {
 					var loadRecords = [];
 					_.each($scope.document.organizations, function(org){
@@ -67,27 +67,27 @@ define(['app'], function (app) {
 						$scope.document.organizationsRef = data;
 					})
 				});
-			
+
 				$scope.$watch("document.organizationsRef", function(newValue){
-			
+
 					if(newValue){
 						$scope.document.organizations = [];
 						_.each(newValue, function(org){
 							$scope.document.organizations.push({identifier: org.header.identifier})
 						});
-			
+
 					}
 				});
-			
+
 				// //==================================
 				// //
 				// //==================================
 				$scope.loadRecords = function(identifier) {
-			
-			
+
+
 					if (identifier) { //lookup single record
 						var deferred = $q.defer();
-			
+
 						storage.documents.get(identifier)
 							.then(function(r) {
 								deferred.resolve(r.data);
@@ -103,7 +103,7 @@ define(['app'], function (app) {
 							});
 						return deferred.promise;
 					}
-			
+
 				}
 			}]
 		};
