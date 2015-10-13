@@ -60,7 +60,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
         });
       },
       measures :  function(){
-          return commonjs.loadMeasuresForDropdown($scope.document.header.identifier);
+          return commonjs.loadSchemaDocumentsForDropdown('measure', $scope.document.header.identifier);
       },
       documentLinksExt: [{
         model: "language",

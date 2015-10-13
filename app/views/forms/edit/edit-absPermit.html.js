@@ -1,7 +1,8 @@
-define(['app', '/app/views/forms/edit/edit.js'], function (app) {
+define(['app', '/app/views/forms/edit/edit.js', '/app/js/common.js'], function (app) {
 
-  app.controller("editAbsPermit", ["$scope", "$http", "Thesaurus", "guid", "$filter", "$q", "Enumerable", "editFormUtility", "$controller","IStorage","$location",
-   function ($scope, $http, Thesaurus, guid, $filter, $q, Enumerable, editFormUtility, $controller, storage, $location) {
+  app.controller("editAbsPermit", ["$scope", "$http", "Thesaurus", "guid", "$filter", "$q", "Enumerable",
+                                    "editFormUtility", "$controller","IStorage","$location", "commonjs",
+   function ($scope, $http, Thesaurus, guid, $filter, $q, Enumerable, editFormUtility, $controller, storage, $location, commonjs) {
     $controller('editController', {$scope: $scope});
 
     $scope.path= $location.path();
@@ -15,19 +16,7 @@ define(['app', '/app/views/forms/edit/edit.js'], function (app) {
                                       data.push(o[1].data)
                                       return Thesaurus.buildTree(data);
                                     }); },
-     permits    : function () {
-                                var permit = storage.documents.query("(type eq 'absPermit')",undefined,{cache:false});
-                                return $q.when(permit).then(function(o){
-                                      var permits =  [];
-                                      o.data.Items.forEach(function(permit){
-                                        if(permit.identifier != $scope.document.header.identifier){
-                                                var uniqueID = 'ABSCH-IRCC-' + $filter("uppercase")(permit.metadata.government) + '-' + permit.documentID;
-                                                permits.push({"title": permit.title.en + ' (' + uniqueID + ')', "identifier": permit.identifier});
-                                        }
-                                      });
-                                      return permits;
-                                });
-                              },
+     permits    : function () {return commonjs.loadSchemaDocumentsForDropdown('absPermit', $scope.document.header.identifier);},
     });
 
 

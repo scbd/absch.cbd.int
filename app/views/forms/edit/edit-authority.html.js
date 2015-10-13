@@ -96,7 +96,7 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/direct
                 });
             },
             measures: function() {
-                return commonjs.loadMeasuresForDropdown();
+                return commonjs.loadSchemaDocumentsForDropdown('measure');
             },
         });
         $scope.showResponsibleforAllMsg = function() {
