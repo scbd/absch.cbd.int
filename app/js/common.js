@@ -198,8 +198,8 @@ define(['app', 'underscore'], function(app, _) {
 
                 };
 
-                this.loadMeasuresForDropdown = function(currentDocumentIdentifier) {
-                    var permit = storage.documents.query("(type eq 'measure')", undefined);
+                this.loadSchemaDocumentsForDropdown = function(schema, currentDocumentIdentifier) {
+                    var permit = storage.documents.query("(type eq '" + schema + "')", undefined);
                     return $q.when(permit).then(function(o) {
                         var permits = [];
                         var permitData = o.data.Items.map(function(permit) {
