@@ -41,8 +41,8 @@ define(['app',
                         $scope.selectedFilters=[];
                         _.each(items,function (item) {
 
-                            if(item.selected && (($scope.showNationalFilters  && item.type=='nationalRecord') || ($scope.showReferenceFilters  && item.type=='reference'))){
-
+                            if(item.selected){
+                                // && (($scope.showNationalFilters  && item.type=='nationalRecord') || ($scope.showReferenceFilters  && item.type=='reference'))
                                 $scope.selectedFilters.push({type:'schema', identifier:item.identifier, value:item.title, count:item.count});
 
                                 var subFilterQuery = '(' + $scope.field+':'+item.identifier;

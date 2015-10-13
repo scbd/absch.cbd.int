@@ -609,6 +609,7 @@ app.directive('searchFilterSchemas', function ($http) {
             });
             function clearFilters(){
                 $scope.$broadcast('clearSelectSelection');
+                $scope.keyword = '';
                 $scope.terms.forEach(function(data){
                     if(data.selected){
                         data.selected = false;

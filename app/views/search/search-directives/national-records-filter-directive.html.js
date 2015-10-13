@@ -40,67 +40,140 @@ define(['app', 'underscore',
                                                                             },
 
                                                 };
-                    $scope.filters = {
-                        focalPoint              : { type:'nationalRecord',
-                                                    subFilters : {
-                                                                fpFocalPointType : { type: 'multiselect' , field: 'type_ss'}
-                                                        }
-                                                  },
-                        authority               : { identifier: 'authority',                title: 'Competent National Authorities' ,type:'nationalRecord',
-                                                           subFilters : [
-                                                                            { name: 'cnaResponsibleForAll',     type: 'radio' , field: 'absResposibleForAll_b'},
-                                                                            { name: 'cnaJurisdiction',          type: 'multiselect', field: 'absJurisdiction_s' },
-                                                                            { name: 'cnaGeneticResourceTypes',  type: 'multiselect' , field: 'absGeneticResourceTypes_ss'}
-                                                                        ]
-                                                         },
-                        database                : { identifier: 'database',                 title: 'National Websites and Databases',type:'nationalRecord', count: 0 },
-                        measure                 : { identifier: 'measure',                  title: 'Legislative, administrative and policy measures', count: 0,type:'nationalRecord',
-                                                           subFilters : [
-                                                                            { name: 'msrJurisdiction', type: 'multiselect', field: 'jurisdiction_s' },
-                                                                            { name: 'msrStatus', type: 'multiselect', field: 'status_s' },
-                                                                            { name: 'msrType', type: 'multiselect', field: 'type_s' },
+                    $scope.focalPoint              = { identifier: 'focalPoint',               title: 'National Focal Points', type:'nationalRecord',
+                                                        subFilters : [
+                                                                        { name: 'focalPointType', type: 'multiselect',  field: 'type_ss'}
+                                                        ]
+                                                     };
+                    $scope.authority               = { identifier: 'authority',                title: 'Competent National Authorities' ,type:'nationalRecord',
+                                                       subFilters : [
+                                                                        { name: 'cnaResponsibleForAll',     type: 'radio' , field: 'absResposibleForAll_b'},
+                                                                        { name: 'cnaJurisdiction',          type: 'multiselect', field: 'absJurisdiction_ss' },
+                                                                        { name: 'cnaGeneticResourceTypes',  type: 'multiselect' , field: 'absGeneticResourceTypes_ss'}
+                                                                    ]
+                                                     };
+                    $scope.database                = { identifier: 'database',                 title: 'National Websites and Databases',type:'nationalRecord', count: 0 };
+                    $scope.measure                 = { identifier: 'measure',                  title: 'Legislative, administrative and policy measures', count: 0,type:'nationalRecord',
+                                                       subFilters : [
+                                                                        { name: 'msrJurisdiction', type: 'multiselect', field: 'jurisdiction_s' },
+                                                                        { name: 'msrStatus', type: 'multiselect', field: 'status_s' },
+                                                                        { name: 'msrType', type: 'multiselect', field: 'type_s' },
 
-                                                                            { name: 'msrAdoptionDate', type: 'calendar' , field: 'adoption_s'},
-                                                                            { name: 'msrRetirementDate', type: 'calendar' , field: 'retired_s'},
-                                                                            { name: 'msrEntryinForceDate', type: 'calendar' , field: 'entryIntoForce_s'},
-                                                                            { name: 'mssApplicationDate', type: 'calendar' , field: 'limitedApplication_s'}
-                                                                        ]
-                                                        },
-                        absPermit               : { identifier: 'absPermit',                title: 'Internationally Recognized Certificates of Compliance' ,type:'nationalRecord',
-                                                           subFilters : [
-                                                                            //{ name: 'permitAuthority',  type: 'reference' , field: 'jurisdiction_s'},
-                                                                            { name: 'permitusage',          type: 'multiselect' , field: 'usage_REL_ss'},
-                                                                            { name: 'permitkeywords',       type: 'multiselect' , field: 'keywords_ss'},
-                                                                            { name: 'permitExpiryDate',     type: 'calendar' , field: 'expiration_s'},
-                                                                            { name: 'permitIssuanceDate',   type: 'calendar' , field: 'date_s'},
-                                                                            { name: 'amendmentIntent',      type: 'radio' , field: 'amendmentIntent_i'}
-                                                                        ]
-                                                         },
-                        absCheckpoint           :{ identifier: 'absCheckpoint',            title: 'Checkpoints' ,type:'nationalRecord',
-                                                           subFilters : [
-                                                                            { name: 'cpInformAllAuthorities', type: 'yesno' , field: 'informAllAuthorities_b'},
-                                                                            { name: 'cpJurisdiction',      type: 'multiselect', field: 'jurisdiction_s' }
-                                                                        ]
-                                                          },
-                        absCheckpointCommunique : { identifier: 'absCheckpointCommunique',  title: 'Checkpoint Communiqués' ,type:'nationalRecord',
-                                                           subFilters : [
-                                                                            { name: 'cpcoriginCountries',      type: 'multiselect', field: 'originCountries_ss' }
-                                                                        ]
-                                                           }
-
-                    };
+                                                                        // { name: 'msrAdoptionDate', type: 'calendar' , field: 'adoption_s'},
+                                                                        // { name: 'msrRetirementDate', type: 'calendar' , field: 'retired_s'},
+                                                                        // { name: 'msrEntryinForceDate', type: 'calendar' , field: 'entryIntoForce_s'},
+                                                                        // { name: 'mssApplicationDate', type: 'calendar' , field: 'limitedApplication_s'}
+                                                                    ]
+                                                    };
+                    $scope.absPermit               = { identifier: 'absPermit',                title: 'Internationally Recognized Certificates of Compliance' ,type:'nationalRecord',
+                                                       subFilters : [
+                                                                        //{ name: 'permitAuthority',  type: 'reference' , field: 'jurisdiction_s'},
+                                                                        { name: 'permitusage',          type: 'multiselect' , field: 'usage_REL_ss'},
+                                                                        { name: 'permitkeywords',       type: 'multiselect' , field: 'keywords_ss'},
+                                                                        // { name: 'permitExpiryDate',     type: 'calendar' , field: 'expiration_s'},
+                                                                        // { name: 'permitIssuanceDate',   type: 'calendar' , field: 'date_s'},
+                                                                        { name: 'amendmentIntent',      type: 'radio' , field: 'amendmentIntent_i'}
+                                                                    ]
+                                                     };
+                    $scope.absCheckpoint           = { identifier: 'absCheckpoint',            title: 'Checkpoints' ,type:'nationalRecord',
+                                                       subFilters : [
+                                                                        { name: 'cpInformAllAuthorities', type: 'yesno' , field: 'informAllAuthorities_b'},
+                                                                        { name: 'cpJurisdiction',      type: 'multiselect', field: 'jurisdiction_s' }
+                                                                    ]
+                                                      };
+                    $scope.absCheckpointCommunique = { identifier: 'absCheckpointCommunique',  title: 'Checkpoint Communiqués' ,type:'nationalRecord',
+                                                       subFilters : [
+                                                                        { name: 'cpcoriginCountries',      type: 'multiselect', field: 'originCountries_ss' }
+                                                                    ]
+                                                       };
+                   $scope.terms  = [ $scope.focalPoint, $scope.authority, $scope.database, $scope.measure, $scope.absPermit, $scope.absCheckpoint,
+                                     $scope.absCheckpointCommunique ];
+                   $scope.termsx = dictionarize($scope.terms);
+                   function dictionarize(items) {
+                       var dictionary = [];
+                       items.forEach(function (item) {
+                           item.selected = false;
+                           dictionary[item.identifier] = item;
+                       });
+                       return dictionary;
+                   }
+                    // $scope.filters = {
+                    //     focalPoint              : { type:'nationalRecord',
+                    //                                 subFilters : {
+                    //                                             fpFocalPointType : { type: 'multiselect' , field: 'type_ss',value:{}}
+                    //                                     }
+                    //                               },
+                    //     authority               : { identifier: 'authority',                title: 'Competent National Authorities' ,type:'nationalRecord',
+                    //                                        subFilters : [
+                    //                                                         { name: 'cnaResponsibleForAll',     type: 'radio' , field: 'absResposibleForAll_b'},
+                    //                                                         { name: 'cnaJurisdiction',          type: 'multiselect', field: 'absJurisdiction_s' },
+                    //                                                         { name: 'cnaGeneticResourceTypes',  type: 'multiselect' , field: 'absGeneticResourceTypes_ss'}
+                    //                                                     ]
+                    //                                      },
+                    //     database                : { identifier: 'database',                 title: 'National Websites and Databases',type:'nationalRecord', count: 0 },
+                    //     measure                 : { identifier: 'measure',                  title: 'Legislative, administrative and policy measures', count: 0,type:'nationalRecord',
+                    //                                        subFilters : [
+                    //                                                         { name: 'msrJurisdiction', type: 'multiselect', field: 'jurisdiction_s' },
+                    //                                                         { name: 'msrStatus', type: 'multiselect', field: 'status_s' },
+                    //                                                         { name: 'msrType', type: 'multiselect', field: 'type_s' },
+                    //
+                    //                                                         { name: 'msrAdoptionDate', type: 'calendar' , field: 'adoption_s'},
+                    //                                                         { name: 'msrRetirementDate', type: 'calendar' , field: 'retired_s'},
+                    //                                                         { name: 'msrEntryinForceDate', type: 'calendar' , field: 'entryIntoForce_s'},
+                    //                                                         { name: 'mssApplicationDate', type: 'calendar' , field: 'limitedApplication_s'}
+                    //                                                     ]
+                    //                                     },
+                    //     absPermit               : { identifier: 'absPermit',                title: 'Internationally Recognized Certificates of Compliance' ,type:'nationalRecord',
+                    //                                        subFilters : [
+                    //                                                         //{ name: 'permitAuthority',  type: 'reference' , field: 'jurisdiction_s'},
+                    //                                                         { name: 'permitusage',          type: 'multiselect' , field: 'usage_REL_ss'},
+                    //                                                         { name: 'permitkeywords',       type: 'multiselect' , field: 'keywords_ss'},
+                    //                                                         { name: 'permitExpiryDate',     type: 'calendar' , field: 'expiration_s'},
+                    //                                                         { name: 'permitIssuanceDate',   type: 'calendar' , field: 'date_s'},
+                    //                                                         { name: 'amendmentIntent',      type: 'radio' , field: 'amendmentIntent_i'}
+                    //                                                     ]
+                    //                                      },
+                    //     absCheckpoint           :{ identifier: 'absCheckpoint',            title: 'Checkpoints' ,type:'nationalRecord',
+                    //                                        subFilters : [
+                    //                                                         { name: 'cpInformAllAuthorities', type: 'yesno' , field: 'informAllAuthorities_b'},
+                    //                                                         { name: 'cpJurisdiction',      type: 'multiselect', field: 'jurisdiction_s' }
+                    //                                                     ]
+                    //                                       },
+                    //     absCheckpointCommunique : { identifier: 'absCheckpointCommunique',  title: 'Checkpoint Communiqués' ,type:'nationalRecord',
+                    //                                        subFilters : [
+                    //                                                         { name: 'cpcoriginCountries',      type: 'multiselect', field: 'originCountries_ss' }
+                    //                                                     ]
+                    //                                        }
+                    //
+                    // };
 
                     // var filterWatch = $scope.$watch('filters', function(newVal){
                     //                         $scope.searchLeftMenuCtrl.actions.buildQuery(newVal,nationalSchema);
                     //                   }, true);
-                    _.each($scope.filters,function (item) {
+                    // _.each($scope.filters,function (item) {
+                    //     if(item.subFilters){
+                    //         _.each(item.subFilters, function(filter){
+                    //             $scope.$watch(filter.value, function(newVal){
+                    //                         if(newVal)
+                    //                             $scope.searchLeftMenuCtrl.actions.buildQuery(newVal,nationalSchema);
+                    //                       }, true);
+                    //         })
+                    //     }
+                    // });
+                    $scope.terms.forEach(function (item) {
                         if(item.subFilters){
-                            _.each(item.subFilters, function(filter){
-                                $scope.$watch(filter.value, function(newVal){
-                                            if(newVal)
-                                                $scope.searchLeftMenuCtrl.actions.buildQuery(newVal,nationalSchema);
-                                          }, true);
-                            })
+                            item.subFilters.forEach(function(filter){
+                                $scope.$watch(filter.name,
+                                    function(oldValue, newValue,t){
+                                        console.log((oldValue, newValue));
+                                       if(oldValue != newValue){
+                                             $scope.searchLeftMenuCtrl
+                                                   .actions
+                                                   .buildQuery($scope.terms,nationalSchema);
+                                        }
+                                    });
+                                }
+                            );
                         }
                     });
 
