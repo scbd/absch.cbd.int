@@ -1,13 +1,14 @@
 define(['app','ng-breadcrumbs','angular-localizer','scbd-angularjs-services','scbd-angularjs-filters',
     '/app/views/directives/login.directive.html.js',
     '/app/views/directives/xuser-notifications.js',
-    'ngMaterial','ngAria', 'angular-animate',
+    'ngMaterial','ngAria', 'angular-animate','toastr',
 ], function(app) {
     'use strict';
 
     app.controller('TemplateController', ['$scope', '$rootScope','showHelp' , '$window', '$location', 'authentication', '$browser', 'realmConfiguration', 'underscore', 'IUserNotifications', '$timeout','$filter',
-     '$anchorScroll','breadcrumbs','$mdToast', '$element',//'localStorageService',localStorageService,
-        function($scope, $rootScope, showHelp, $window, $location, authentication, $browser, realmConfiguration, _, userNotifications, $timeout, $filter,$anchorScroll,breadcrumbs, $mdToast, $element ) {
+     '$anchorScroll','breadcrumbs','$mdToast','toastr',//'localStorageService',localStorageService,
+        function($scope, $rootScope, showHelp, $window, $location, authentication, $browser, realmConfiguration, _, userNotifications, $timeout, $filter,$anchorScroll,breadcrumbs, $mdToast, toastr ) {
+
 
             $scope.controller = "TemplateController";
             $scope.breadcrumbs     = breadcrumbs;
@@ -198,12 +199,15 @@ define(['app','ng-breadcrumbs','angular-localizer','scbd-angularjs-services','sc
 
         function showSimpleToast(msg)
         {
-            $mdToast.show(
-              $mdToast.simple()
-                .content(msg)
-                .position('top right')
-                .hideDelay(3000)
-            );
+
+             toastr.info(msg);
+
+            // $mdToast.show(
+            //   $mdToast.simple()
+            //     .content(msg)
+            //     .position('top right')
+            //     .hideDelay(3000)
+            // );
         }
 
         function showSimpleToastConfirm(msg)

@@ -82,20 +82,29 @@
                 <legend name="certificate">Details of the internationally recognized certificate of compliance</legend>
                 <div class="row" style="padding-bottom:20px;">
                     <div class="col-xs-12" >
-                        <div class="control-group thin-border" style="padding:0 10px;" ng-class="{'disable':document.permitNotAvailable}">
+                        
+                        
+                        
+                          <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <span ng-class="{'confidential-text':document.permitNotAvailable}">
+                                            <input type="checkbox" name="permitNotAvailable" ng-model="document.permitNotAvailable" watch-items>
+                                            The internationally recognized certificate of compliance is not available</input>
+                                        </span>
+                                    </div>
+                                    <div class="panel-body panel-body-confidential" ng-class="{'disable':document.permitNotAvailable}">
+                                        <div class="km-control-group" style="margin-bottom:20px;" name="permit" required caption="Links to internationally recognized certificates of compliance (IRCC) that relate to this communiqué">
+                                            <div existing-permit ng-model="document.permit" ng-disabled="isPermitNotAvailable()">
+                                         </div>
+                                    </div>
+                                </div>
+                               </div>
+                        
 
-
-
-                            <div class="km-control-group" style="margin-bottom:20px;" name="permit" required caption="Links to internationally recognized certificates of compliance (IRCC) that relate to this communiqué">
-                                <!-- <div ng-disabled="isPermitNotAvailable()" km-select required multiple name="permit" ng-model="document.permit"items="options.permits()" placeholder="Please select ..."></div>  -->
-                                <div existing-permit ng-model="document.permit" ng-disabled="isPermitNotAvailable()">
-                            </div>
-
-                            <span class="confidential-text label " >
-                                <input type="checkbox" name="permitNotAvailable" ng-model="document.permitNotAvailable" watch-items> This information is not available </input>
-                            </span>
-                        </div>
-                    </div>
+                        
+                        
+                        
+                       
                 </div>
                 </div>
 
@@ -162,7 +171,7 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" name="keywords" caption="Keywords to describe the subject-matter or genetic resource(s) covered by the permit or its equivalent">
-                                        <span class="help-block">The collection of this information is important for facilitating harmonized searches throughout the records. Please select all relevant keywords that could assist in describing the subject-matter or genetic resource(s) covered by the permit or its equivalent.</span>
+                                        <!--<span class="help-block">The collection of this information is important for facilitating harmonized searches throughout the records. Please select all relevant keywords that could assist in describing the subject-matter or genetic resource(s) covered by the permit or its equivalent.</span>-->
                                         <div km-select multiple required name="keywords" ng-model="document.keywords" items="options.keywords()"></div>
                                     </div>
                                 </div>
@@ -345,7 +354,8 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="km-control-group" name="notes" >
-                            <div class="help-block">The field “Notes” is for personal reference and can be seen only when the record is being edited.</div>
+                                       <div class="help-block">The “Notes” field is for your personal notes or comments and will be hidden when
+                                            viewing the record. This field is not meant to be used for confidential information.</div>
                             <textarea class="form-control" rows="4" name="notes" ng-model="document.notes"></textarea>
                         </div>
                     </div>

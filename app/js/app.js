@@ -1,11 +1,11 @@
 'use strict';
 
-define(['angular', 'angular-sanitize', 'angular-loading-bar', 'angular-animate','ngAria' ,'ngMaterial',
+define(['angular', 'angular-sanitize', 'angular-loading-bar', 'angular-animate','ngAria' ,'ngMaterial', 'toastr',
         'text-angular', 'ngSmoothScroll'
     ],
     function(angular) {
 
-        var dependencies = ['ngRoute', 'ngCookies', 'chieffancypants.loadingBar', 'ngAnimate', 'angular-animate', 'ngAria' ,'ngMaterial',
+        var dependencies = ['ngRoute', 'ngCookies', 'chieffancypants.loadingBar', 'ngAnimate', 'angular-animate', 'ngAria' ,'ngMaterial','toastr',
             'ngSanitize', 'angular-intro', 'scbdControls', 'ngLocalizer', 'textAngular', 'cbd-forums', 'LocalStorageModule',
             'ng-breadcrumbs', 'scbdServices', 'scbdFilters', 'smoothScroll', 'ngMessages'
         ];
@@ -78,6 +78,20 @@ define(['angular', 'angular-sanitize', 'angular-loading-bar', 'angular-animate',
 
             }
         ]);
+        
+        app.config(function(toastrConfig) {
+            angular.extend(toastrConfig, {
+                autoDismiss: true,
+                containerId: 'toast-container',
+                maxOpened: 1,    
+                newestOnTop: true,
+                positionClass: 'toast-top-right',
+                preventDuplicates: true,
+                preventOpenDuplicates:false,
+                target: 'body',
+                timeOut: 2000,
+                });
+            });
 
         app.run(function($rootScope, $location) {
             $rootScope.$on('$routeChangeSuccess', function(event, current, previous) {

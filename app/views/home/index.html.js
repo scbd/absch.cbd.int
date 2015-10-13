@@ -31,14 +31,15 @@ define(['app','/app/js/common.js','moment',
         var years = Math.floor($scope.yearsSinceEntry);
         
         var monthsYears = entry;
-        if(years > 1){
-            monthsYears = entry.add( years-1, 'year');
-            $scope.monthsSinceEntry = today.diff(monthsYears, 'month', true) - entry.diff(monthsYears, 'month', true); 
+        if(years >= 1){
+            monthsYears = entry.add(years, 'year');
+            $scope.monthsSinceEntry = today.diff(monthsYears, 'month', true); 
         }
         else{
             $scope.monthsSinceEntry = today.diff(monthsYears, 'month', true) ; 
         }
         var months = Math.floor($scope.monthsSinceEntry);
+        
         monthsYears = monthsYears.add(months, 'month');
         $scope.daysSinceEntry = today.diff(monthsYears, 'days', true);
         var days = Math.round($scope.daysSinceEntry) ;
