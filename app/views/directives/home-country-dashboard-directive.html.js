@@ -87,7 +87,7 @@ define(['app'], function (app) {
 						console.log(results)
                         var tempFacets = {};
 						tempFacets['absPermit'] = {"facetCount" :0,"countryCount" :0,"id": getSequence('absPermit')};
-						tempFacets['absCheckpointCommunique'] = {"facetCount" :0,"countryCount" :0,"id": getSequence('absPermit')};
+						tempFacets['absCheckpointCommunique'] = {"facetCount" :0,"countryCount" :0,"id": getSequence('abscheckpointcommunique')};
                         _.each(results[0].data.facet_counts.facet_pivot['government_s,schema_s'], function(data){
                             _.each(data.pivot, function(facets){
                                 tempFacets[facets.value] = {"facetCount" : (tempFacets[facets.value] ? tempFacets[facets.value].facetCount : 0) + facets.count,
