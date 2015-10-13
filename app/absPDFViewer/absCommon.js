@@ -227,7 +227,7 @@ app.filter("uniqueID", ['$filter', '$q','$http', function( $filter, $q, $http) {
 				else if(document.body && document.body.government)
 					government = document.body.government.identifier;
 
-				var unique = 'ABSCH-' + $filter("schemaShortName")($filter("lowercase")(document.type)) +
+				var unique = 'ABSCH' + (document.realm.toUpperCase().replace('ABS','').replace('-','')) + '-' + $filter("schemaShortName")($filter("lowercase")(document.type)) +
 						(government != '' ? '-' + $filter("uppercase")(government) : '') +
 						'-' + document.documentID + (revision ? ('-' + document.revision) : '');
 

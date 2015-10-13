@@ -63,8 +63,15 @@
         <div class="col-xs-12">
             <label>Verification link (view latest version)</label>
             <div class="text">
-                <a href="http://absch.cbd.int/database/{{documentInfo | uniqueID}}">
-                 http://absch.cbd.int/database/{{documentInfo|uniqueID:false}}</a>
+                <a href="http://absch.cbd.int/database/{{documentInfo | uniqueID}}" ng-if="documentInfo.Realm && documentInfo.Realm.toUpperCase()== 'ABS'">
+                    http://absch.cbd.int/database/{{documentInfo|uniqueID:false}}
+                </a>
+                <a href="http://training-absch.cbd.int/database/{{documentInfo | uniqueID}}" ng-if="documentInfo.Realm && documentInfo.Realm.toUpperCase()=='ABS-TRG'">
+                    http://training-absch.cbd.int/database/{{documentInfo|uniqueID:false}}
+                </a>
+                <a href="http://dev-absch.cbd.int/database/{{documentInfo | uniqueID}}" ng-if="documentInfo.Realm && documentInfo.Realm.toUpperCase()== 'ABS-DEV'">
+                    http://dev-absch.cbd.int/database/{{documentInfo|uniqueID:false}}
+                </a>
             </div>
         </div>
 

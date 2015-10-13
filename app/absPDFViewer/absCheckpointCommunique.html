@@ -147,7 +147,13 @@
                         <div ng-show="!document.permitNotAvailable || document.permit">
                             <ul>
                                 <li ng-repeat="permit in document.permit" class="ng-scope">
-                                    <a href="https://absch.cbd.int/database/{{permit.document.header | uniqueID}}">
+                                    <a href="https://absch.cbd.int/database/{{permit.document.header | uniqueID}}" ng-show="documentInfo.Realm && documentInfo.Realm.toUpperCase()= 'ABS'">
+                                        {{permit.document.header | uniqueID}}
+                                    </a>
+                                    <a href="https://training-absch.cbd.int/database/{{permit.document.header | uniqueID}}" ng-show="documentInfo.Realm && documentInfo.Realm.toUpperCase()= 'ABS-TRG'">
+                                        {{permit.document.header | uniqueID}}
+                                    </a>
+                                    <a href="https://dev-absch.cbd.int/database/{{permit.document.header | uniqueID}}" ng-show="documentInfo.Realm && documentInfo.Realm.toUpperCase()= 'ABS-DEV'">
                                         {{permit.document.header | uniqueID}}
                                     </a>
                                 </li>
