@@ -116,7 +116,7 @@
                 </div>
 
                 <div ng-show="country" class="col-xs-12"  help schema="countryProfile" show-help="showHelp">
-                    
+
                     <md-content layout-padding style="padding: 0 24px 24px 24px;">
                         <div class="row" style="padding:3px;" ng-class="{'bg-blue': country.isNPParty,'bg-medgrey': !country.isNPParty }">
                             <div layout="row">
@@ -137,7 +137,7 @@
                                     <div ng-show="country.isNPSignatory && !country.isNPParty" style="margin:0;padding-left:5px;display:block;position:relative;top:5px;">
                                         <span style="color: #5bc0de;">Signatory</span>
                                     </div>
-                                        
+
                                         <div ng-show="country.isNPParty||country.isNPInbetweenParty" style="margin:0;padding:0;display:block;position:relative;top:5px;">
                                         <span style="font-size:12px;text-transform:uppercase;color:#999;">Date of {{country.treaties.XXVII8b.instrument}}: </span> {{country.treaties.XXVII8b.deposit | formatDate}}
                                         </div>
@@ -145,15 +145,15 @@
                                             <span style="font-size:12px;text-transform:uppercase;color:#999;">Date of entry into force: </span> {{country.entryIntoForceDate| formatDate}}
                                     </div>
                             </div>
-                            
-                            
+
+
                             <div class="row  bg-grey1" style="padding:3px;">
                             <h5 style="padding:0;margin:0;font-size:15px;">
-                                <a href="" ng-click="showNFP = !showNFP"> 
-                                                   
+                                <a href="" ng-click="showNFP = !showNFP">
+
                                     <span style="position:relative;top:1px;" ng-class="{'color-grey': nfpCount==0, 'color-black': nfpCount > 0}">
                                        <i class="fa fa-chevron-circle-up  pad-left" ng-show="showNFP"></i>
-                                        <i class="fa fa-chevron-circle-down pad-left" ng-show="!showNFP"></i>     
+                                        <i class="fa fa-chevron-circle-down pad-left" ng-show="!showNFP"></i>
                                        National Focal Points (NFP)</span>
                                     <span class="badge pull-right" ng-class="{'bg-grey': nfpCount==0, 'bg-black': nfpCount > 0}">{{nfpCount}}</span>
                                  </a>
@@ -203,10 +203,10 @@
                         <div class="row bg-grey1" style="padding:3px;">
                             <h5 style="padding:0;margin:0;font-size:15px;">
                                 <a href="" ng-click="showCNA = !showCNA">
-                                 
+
                                    <span style="position:relative;top:1px;"  ng-class="{'color-litegrey': nationalAuthority==0, 'color-black': nationalAuthority > 0}">
                                         <i class="fa fa-chevron-circle-up pad-left" ng-show="showCNA"></i>
-                                        <i class="fa fa-chevron-circle-down pad-left" ng-show="!showCNA"></i> 
+                                        <i class="fa fa-chevron-circle-down pad-left" ng-show="!showCNA"></i>
                                         Competent National Authorities (CNA)
                                    </span>
                                    <span class="badge pull-right" ng-class="{'bg-grey': nationalAuthority==0, 'bg-black': nationalAuthority > 0}">{{nationalAuthority}}</span>
@@ -243,7 +243,7 @@
                                                     <li ng-repeat="item in contact.emails || contact.email_ss"><a ng-href="mailto:{{item}}"><i class="fa fa-envelope-o"></i> {{item}}</a>
                                                     </li>
                                                 </ul>
-                                                
+
                                             </div>
                                         </div>
                                     </div>
@@ -275,8 +275,8 @@
                             <div style="padding:10px; margin:0 20px;"><legend name="lblMSR" style="display:none"></legend>
                                 <div class="row table-hover table-msr" ng-hide="absMeasure.length==0" style="padding-left:5px;">
                                     <div class="col-lg-1 col-md-1 col-xs-1 tableheader" ng-show="false" >
-                                        <md-checkbox md-no-ink aria-label="Select All" 
-                                        ng-model="measureMatrixDocuments.selectAll" ng-click="selectAllForMatrix()" 
+                                        <md-checkbox md-no-ink aria-label="Select All"
+                                        ng-model="measureMatrixDocuments.selectAll" ng-click="selectAllForMatrix()"
                                         class="md-primary">
                                         </md-checkbox>Matrix
                                     </div>
@@ -299,14 +299,14 @@
                                                     <md-checkbox md-no-ink aria-label="Include in Measure Matrix" ng-model="measure.measureMatrix" class="md-primary">
                                                     </md-checkbox>
                                             </div>
-                                            <div ng-click="displayDetails=!displayDetails;showDetails(measure)">                                                
-                                                <div class="col-lg-3 col-md-3 col-xs-3">                                                    
+                                            <div ng-click="displayDetails=!displayDetails;showDetails(measure)">
+                                                <div class="col-lg-3 col-md-3 col-xs-3">
                                                     <!--<i class="material-icons color-published-green" style="font-size:14pt;">
                                                         {{'msr' | schemaIcon}}
                                                     </i>-->
                                                     <strong class="color-blue" style="position:relative;top:-4px;"> {{measure.title_t}}</strong>
-                                                   
-                                                    
+
+
                                                     <span ng-if="measure.ownerGovernment" style="position:relative;top:-4px;">
                                                        (Regional/Multilateral measure registered by {{measure.ownerGovernment|term}})
                                                     </span>
@@ -329,14 +329,14 @@
                                 </div>
 
                             </div>
-                             <!--<div style="margin:0 20px;margin-top:20px;" ng-hide="measureMatrixDocuments.length==0" >
+                             <div style="margin:0 20px;margin-top:20px;" ng-hide="measureMatrixDocuments.length==0" >
                                 <div>
                                     <p class="tableheader" style="border-bottom:1px solid #ddd;">
                                        {{(measureMatrixDocuments|filter:{measureMatrix:true}).length}} selected for measures matrix
                                     </p>
                                         <div ng-hide="(measureMatrixDocuments|filter:{measureMatrix:true}).length==0" measure-matrix-countries-directive documents="measureMatrixDocuments"></div>
                                 </div>
-                            </div>-->
+                            </div>
 
                         </div>
 
@@ -424,7 +424,7 @@
                                                     {{'ircc' | schemaIcon}}
                                                 </i> <span style="text-transform:uppercase;font-weight:500;">{{permit.uniqueIdentifier_s}}</span> ({{permit.title_t}})
                                                 <div class="color-grey">{{permit.geneticResources_t}}</div>
-                                                
+
                                                 <i class="fa fa-refresh fa-spin" ng-show="displayDetails&& !permit.data" />
                                             </div>
                                             <div class="col-xs-2 text-left">
@@ -510,7 +510,7 @@
                                 <a href="" ng-click="showCPC = !showCPC">
                                    <span style="position:relative;top:1px;"  ng-class="{'color-litegrey': absCheckpointCommunique==0, 'color-black': absCheckpointCommunique > 0}">
                                         <i class="fa fa-chevron-circle-up pad-left" ng-show="showCPC"></i>
-                                        <i class="fa fa-chevron-circle-down pad-left" ng-show="!showCPC"></i> 
+                                        <i class="fa fa-chevron-circle-down pad-left" ng-show="!showCPC"></i>
                                         Checkpoint Communiqués (CPC) SENT
                                    </span>
                                    <span class="badge pull-right" ng-class="{'bg-grey': absCheckpointCommunique==0, 'bg-black': absCheckpointCommunique > 0}">{{absCheckpointCommunique}}</span>
@@ -530,7 +530,7 @@
                                     <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPC='title_t';reverseCPC=!reverseCPC">title
                                         <i class="fa" ng-class="{'fa-caret-up':(sortCPC=='title_t' && reverseCPC),'fa-caret-down':(sortCPC=='title_t' && !reverseCPC)}"></i>
                                     </div>
-                                    
+
                                     <div class="col-lg-1 col-md-1 col-xs-1 tableheader" ng-click="sortCPC='geneticRessourceUsers';reverseCPC=!reverseCPC">user
                                         <i class="fa" ng-class="{'fa-caret-up':(sortCPC=='geneticRessourceUsers' && reverseCPC),'fa-caret-down':(sortCPC=='geneticRessourceUsers' && !reverseCPC)}"></i>
                                     </div>
@@ -547,7 +547,7 @@
                                 <div class="row table-hover table-msr" ng-repeat="communique in absCommunique = (absch_nfp|filter:isCheckpointCommunique|orderBy:sortCPC:reverseCPC)">
                                     <div class="row border" style="padding-top: 10px;padding-bottom: 10px;">
                                         <div ng-click="displayDetails=!displayDetails;showDetails(communique)" class="row table-row">
-                                            
+
                                             <div class="col-lg-2 col-md-2 col-xs-2">
                                                 <span ng-repeat="country in communique.originCountries_CEN_ss">{{parseJSON(country)|lstring}}
                                                     <br/>
@@ -699,5 +699,5 @@
 
 </div>
 
-	
+
 </div>
