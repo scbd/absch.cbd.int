@@ -51,8 +51,6 @@ app.directive('searchFilterSchemas', function ($http) {
             $scope.expanded = false;
             $scope.selectedItems = [];
             $scope.facet = $scope.field.replace('_s', ''); // TODO: replace @field by @facet
-
-            $scope.focalPointQuery = '';
             $scope.queryPartyStatus = ''
 
             if(!$scope.selectedFilters)
@@ -185,8 +183,6 @@ app.directive('searchFilterSchemas', function ($http) {
                 var conditions = [];
                 buildConditions(conditions, $scope.terms);
 
-                if($scope.focalPointQuery!='')
-                    conditions.push($scope.focalPointQuery);
                 var keywordQuery = '';
 
                 if($scope.keyword){
@@ -283,14 +279,6 @@ app.directive('searchFilterSchemas', function ($http) {
                                         }
                                     }
                                 }
-                                else if(filter.type=='checkbox'){
-                                    var selectedValues = $scope[filter.name];
-                                    var query = buildFocalPointQuery();
-
-                                    if(selectedValues && query!='' && subFilterQuery.indexOf(query) ==-1){
-                                        subFilterQuery = subFilterQuery + ' AND ' +  query;
-                                    }
-                                }
                                 else {
                                     if($scope[filter.name]!=null){
                                         subFilterQuery = subFilterQuery + ' AND ('  + filter.field +':'+  $scope[filter.name] + ')';
@@ -374,12 +362,7 @@ app.directive('searchFilterSchemas', function ($http) {
                 return dictionary;
             }
 
-            $scope.focalPoint              = { identifier: 'focalPoint',               title: 'National Focal Points', type:'nationalRecord',
-                                                subFilters : [
-                                                                { name: 'focalPointNP',         type: 'checkbox',  field: 'type_ss', value : 'NP-FP OR schema_s:ABS-FP' },
-                                                                { name: 'focalPointCBD'  ,      type: 'checkbox' , field: 'type_ss', value : ['CBD-FP1', 'CBD-FP1']}
-                                                ]
-                                             };
+            $scope.focalPoint              = { identifier: 'focalPoint',               title: 'National Focal Points', type:'nationalRecord'};
             $scope.authority               = { identifier: 'authority',                title: 'Competent National Authorities' ,type:'nationalRecord',
                                                subFilters : [
                                                                 { name: 'cnaResponsibleForAll',     type: 'radio' , field: 'absResposibleForAll_b'},
@@ -547,9 +530,6 @@ app.directive('searchFilterSchemas', function ($http) {
                             $scope[schemaN].selected = true;
                     }
                 }
-                if(documentSchema.toLowerCase() == 'focalpoint' || documentSchema.toLowerCase() == 'fp' ){
-                    $scope.focalPointNP = true;
-                }
 
                 if(documentSchema=='PARTIES'){
                    $scope.queryPartyStatus ="government_s:(ae al bt by cd cg ch ci bw do dk hu es eg fj fm ga et gm gn gw hn id gt ke jo in km kz la kh mg mh mm mn mu mw mx mz na ne no pa pe sc rw sy tj ug uy za ws bj bi bf gy vn vu sd eur ls kg)";
@@ -573,35 +553,6 @@ app.directive('searchFilterSchemas', function ($http) {
                 }
             });
 
-
-            function buildFocalPointQuery(){
-                var query = [];
-                if($scope.focalPoint.selected){
-
-                    if($scope.focalPointNP){
-                        query.push('NP-FP');
-                        query.push('ABS-FP');
-                        if(!_.find($scope.selectedFilters,{identifier:'focalPointNP'}))
-                            $scope.selectedFilters.push({
-                                        type:'subFilter', schema:'focalPoint', value:'ABS National Focal Points', identifier:'focalPointNP'
-                                    });
-                    }
-                    if($scope.focalPointCBD){
-                        query.push('CBD-FP1');
-                        query.push('CBD-FP2');
-                        if(!_.find($scope.selectedFilters,{identifier:'focalPointCBD'}))
-                            $scope.selectedFilters.push({
-                                        type:'subFilter', schema:'focalPoint', value:'CBD Focal Points', identifier:'focalPointCBD'
-                                    });
-                    }
-                }
-                if(query.length >0)
-                    return '(type_ss:' + query.join(' OR type_ss:') + ')';
-
-                return '';
-            }
-
-
             $scope.$on("clearFilter", function(evt, info){
 
                 clearFilters();
@@ -614,7 +565,7 @@ app.directive('searchFilterSchemas', function ($http) {
                     if(data.selected){
                         data.selected = false;
 
-                        if(data.identifier == 'absPermit' || data.identifier == 'focalPoint'){
+                        if(data.identifier == 'absPermit' || data.identifier == 'focalPoint' && data.subFilters){
                             data.subFilters.forEach(function(filter){
                                 if(filter.type=='radio')
                                     $scope[filter.name] = null;
