@@ -193,10 +193,6 @@ label{width:100%;}
                             <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': focalPoint.selected==false}"> National Focal Points </span></div>
                             <div> <span class="badge badge-white pull-right">{{focalPoint.count}}</span></div>
                         </div>
-                        <div ng-show="focalPoint.selected" class="subfilters-section" style="padding-top:10px;padding-bottom:5px;margin-left:15px;">
-                           <input type="checkbox" ng-model="focalPointNP" ng-change="refresh(focalPointNP.selected,'focalPoint')" id="ckfocalPointNP" > <span class="filter-text">ABS National Focal Points</span></br>
-                           <input type="checkbox" ng-model="focalPointCBD" ng-change="refresh(focalPointCBD.selected,'focalPoint')" id="ckfocalPointCBD"> <span class="filter-text">CBD Focal Points</span></br>
-                        </div>
                     </div>
 
                       <div ng-class="{'check_active': authority.selected}" style="padding:5px 0;border-bottom:1px solid #ddd;">
