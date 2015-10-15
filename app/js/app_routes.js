@@ -6,7 +6,6 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
     app.value("schemaTypes", [ "absNationalReport", "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "resource", "modelContractualClause", "communityProtocol" ]);
     app.value("showHelp", {value:{ 'show':true, 'glossary':true, 'showTour':false, 'hasTour':false}});
 
-
     app.config(['extendedRouteProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 
         $locationProvider.html5Mode(true);

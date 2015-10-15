@@ -63,7 +63,8 @@ define(['app', 'underscore'], function (app, _) {
                         'wt'            : 'json',
                         'rows'          : 0,
                         'facet'         : true,
-                        'facet.field'   :facetQuery.fields,
+                        'facet.field'   : facetQuery.fields,
+                        'facet.query'   : facetQuery.query,
                         'facet.limit'   : 512,
                         'facet.mincount': 1
                     };
