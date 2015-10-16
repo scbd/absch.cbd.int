@@ -245,11 +245,7 @@
                                                 <div ng-click="doc.displayDetails = !doc.displayDetails;load(doc,doc.displayDetails)" style="cursor:pointer">
                                                      <i class="fa fa-chevron-circle-up" ng-show="doc.displayDetails"></i>
                                                     <i class="fa fa-chevron-circle-down" ng-show="!doc.displayDetails"></i>
-                                                    &nbsp; 
-                                                    <span class="bold color-litegrey" ng-if="doc.type.indexOf('ABS-FP') >= 0 ">ABS NFP</span>
-                                                    <span class="bold color-litegrey" ng-if="doc.type.indexOf('ABS-FP') < 0 "> CBD NFP</span>
-                                                    <!-- <span class="bold color-litegrey" ng-if="key!= 'focalPoint' ">{{key|schemaShortName}}</span> -->
-                                                    <span>{{doc.title}} </span>
+                                                    <span> {{doc.title}} </span>
                                                     <strong> 
                                                         <span class="color-litegrey" style="font-size:12px;text-transform:uppercase;" ng-if="doc.meta1">| {{doc.meta1}} <span ng-if="doc.ownerGovernment">registered by {{doc.ownerGovernment|term}}</span> </span>
                                                         <span class="color-litegrey" style="font-size:12px;text-transform:uppercase;" ng-if="doc.meta2">| {{doc.meta2}} </span>
