@@ -173,12 +173,18 @@
             </style>
 
             <link href="/app/libs/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
-            <div infinite-scroll="updateScrollPage()" infinite-scroll-disabled="loading" infinite-scroll-distance="1">
+            <div infinite-scroll="updateScrollPage()" infinite-scroll-disabled="loading" infinite-scroll-distance="10">
 
                 <div>
-                    <strong class="pull-right">Country(s):
+                    <strong class="pull-right">&nbsp; Record(s):
                         <span class="color-grey badge color-white">{{documentCount}}</span>
                     </strong>
+                    <strong class="pull-right">&nbsp; Country(s):
+                        <span class="color-grey badge color-white">{{groupCount}}</span>
+                    </strong>
+                </div>
+                <div class="well" ng-show="transformedGroupDocuments.length == 0" style="margin:30px 0;">
+                    <h1>No records found.</h1>
                 </div>
                 <br>
                 <br>
@@ -237,7 +243,7 @@
                                                         <span ng-if="doc.meta2"> <span style="color:#333!important;"> | </span> <span class="color-litegrey" > {{doc.meta2}} </span></span>
                                                         <span ng-if="doc.meta3"> <span style="color:#333!important;"> | </span> <span class="color-litegrey" > {{doc.meta3}} </span></span>
                                                         <span ng-if="doc.schema != 'focalPoint'"> <span style="color:#333!important;"> | </span> <span class="color-litegrey bold" > {{doc | uniqueID}} </span></span>
-                                                    </span> 
+                                                    </span>
                                                 </div>
                                                 <div class="row" ng-if="doc.displayDetails">
                                                     <i class="glyphicon glyphicon-remove-circle circle pull-right" style="position:relative;top:40px;z-index:100;font-size:20px;color:white;padding-right:30px!important;cursor:pointer" ng-click="doc.displayDetails=!doc.displayDetails;" ng-show="doc.displayDetails"></i>

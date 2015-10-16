@@ -18,7 +18,8 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                 documentCount: '=',
                 orderBy: '=',
                 previewType: '=',
-                recordType: '='
+                recordType: '=',
+                groupCount: '=',
             },
             controller: ['$scope', '$sce', "underscore", "commonjs", "authentication", '$q', "$filter", "$compile", "$element", "$timeout",
                 function($scope, $sce, _, commonjs, authentication, $q, $filter, $compile, $element, $timeout) {
@@ -122,7 +123,7 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                     $scope.getNFPText = commonjs.getNFPText;
 
                     $scope.updateScrollPage = function() {
-                        if($scope.loading || $scope.transformedGroupDocuments.length == $scope.documentCount)
+                        if($scope.loading || $scope.transformedGroupDocuments.length == $scope.groupCount)
                             return;
                         $scope.loading = true;
                         $timeout(function(){$scope.currentPage = $scope.currentPage + 1;},10);
@@ -420,7 +421,7 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                             if (output.Types) output.meta1 = output.Types;
                             if (output.Year) output.meta2 = output.Year;
                             if (output.Regions) output.meta3 = output.Regions;
-                       
+
                         } else if (document.schema_s == 'authority') {
                             output.responsibleForAll = document.absResposibleForAll_b;
                             output.jurisdiction = document.absJurisdiction_EN_t;
@@ -494,7 +495,7 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                             //TODO: metadata should be the url opening to a new window
                         } else if (document.schema_s == 'measure') {
                             document.ownerGovernment = {identifier:document.ownerGovernment_s};
-                           
+
                             output.adoption = document.adoption_dt;
                             output.recordtype = "nationalRecord";
 

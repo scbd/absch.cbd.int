@@ -188,7 +188,9 @@ define(['app','underscore','/app/js/common.js',
                                 lRawDocs.push(doc);
                     });
                     $scope.rawDocs = lRawDocs;
-                    $scope.documentCount = data.data.grouped.government_s.ngroups;
+                    $scope.documentCount = data.data.grouped.government_s.matches;
+                    $scope.groupCount = data.data.grouped.government_s.ngroups;
+
                  }
 
                 if(!$scope.schemas) {
