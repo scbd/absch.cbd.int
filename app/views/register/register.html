@@ -3,12 +3,12 @@
 
 <div ng-cloak ng-controller="RegisterController" >
     <div smooth-scroll duration="100" offset="300" ></div>
-    
+
 <section layout="row" flex style="position:relative;top:20px;" ng-hide="!user.isAuthenticated" >
 
 
        <md-sidenav class="md-sidenav-left " md-component-id="left" md-is-locked-open="$mdMedia('min-width: 1200px')"style="background-color:transparent;" >
-       
+
        <div class="bg-white md-whiteframe-z1">
 
          <md-toolbar class="bg-medgrey" >
@@ -35,7 +35,7 @@
                        <div class="btn-commonformat-national" style="text-transform:uppercase;">
                            <span class="color-grey"><i class="mdi-action-assignment" style="font-size:16pt;position:relative;top:3px;"></i>&nbsp;Dashboard</span></div>
                        <div style="padding-top:5px;"class="color-grey">
-           
+
                        </div>
                  </div></a>-->
 
@@ -103,7 +103,7 @@
                 <md-button ng-click="toggleLeft()" class="md-primary md-raised bg-medgrey" hide-gt-lg  style="margin: 0  0 10px 0;">
                     <i class="material-icons" style="position:relative;top:6px;">menu</i> Management Center
                 </md-button>
-                <div help schema="{{helpSchema}}" show-help="showHelp" repalce-glossary-terms="true">                    
+                <div help schema="{{helpSchema}}" show-help="showHelp" repalce-glossary-terms="true">
                     <ng-include src="subTemplateUrl" style="min-height:980px;"  ng-show="user.isAuthenticated"></ng-include>
                 </div>
         </div>

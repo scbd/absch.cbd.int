@@ -251,7 +251,7 @@ app.filter("schemaShortName", [function() {
 
 	return function( schame ) {
 
-		if(schame.toLowerCase() =="focalpoint"				) return "FP";
+		if(schame.toLowerCase() =="focalpoint"				) return "NFP";
 		if(schame.toLowerCase() =="authority"				) return "CNA";
 		if(schame.toLowerCase() =="contact"					) return "CON";
 		if(schame.toLowerCase() =="database"				) return "NDB";

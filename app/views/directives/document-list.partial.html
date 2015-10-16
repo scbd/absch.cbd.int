@@ -111,13 +111,20 @@
                                     </div>
                                     <div class="metadetails" ng-hide="displayDetails">
 
-                                        <span ng-repeat="m in document.metadata">
+                                        <!--<span ng-repeat="m in document.metadata">
                                             <span ng-bind-html="m"></span> {{$last ? '' : ' &nbsp;|&nbsp; '}}
-                                            <span>
-                                                <span ng-show="document.Languages && document.metadata"> | </span>
+                                            <span>-->
+                                                <!--<span ng-show="document.Languages && document.metadata"> | </span>
                                                 <span ng-repeat="b in document.Languages">
                                                     {{b | term}} {{$last ? '' : ', '}}
-                                                </span>
+                                                </span>-->
+
+                                                    <span style="text-transform:uppercase;" ng-if="document.schema != 'focalPoint'">
+                                                        <span> {{document | uniqueID}} </span>
+                                                        <span ng-if="document.meta1"> <span> | </span> <span > {{document.meta1}} <span ng-if="doc.ownerGovernment">registered by {{document.ownerGovernment|term}}</span> </span></span>
+                                                        <span ng-if="document.meta2"> <span> | </span> <span > {{document.meta2}} </span></span>
+                                                        <span ng-if="document.meta3"> <span> | </span> <span > {{document.meta3}} </span></span>
+                                                    </span>
                                     </div>
 
                                     <div class="pull-right" ng-show="displayDetails" ng-click="displayDetails = !displayDetails;load(document,displayDetails);" style="z-index:100;padding-top:30px;padding-right:20px;cursor:pointer;">
@@ -224,17 +231,13 @@
                                                 <div ng-click="doc.displayDetails = !doc.displayDetails;load(doc,doc.displayDetails)" style="cursor:pointer">
                                                      <i class="fa fa-chevron-circle-up" ng-show="doc.displayDetails"></i>
                                                     <i class="fa fa-chevron-circle-down" ng-show="!doc.displayDetails"></i>
-                                                    &nbsp;
-                                                    <span class="bold color-litegrey" ng-if="doc.type.indexOf('ABS-FP') >= 0 ">ABS NFP</span>
-                                                    <span class="bold color-litegrey" ng-if="doc.type.indexOf('ABS-FP') < 0 "> CBD NFP</span>
-                                                    <!-- <span class="bold color-litegrey" ng-if="key!= 'focalPoint' ">{{key|schemaShortName}}</span> -->
-                                                    <span>{{doc.title}} </span>
-                                                    <strong>
-                                                        <span class="color-litegrey" style="font-size:12px;text-transform:uppercase;" ng-if="doc.meta1">| {{doc.meta1}} <span ng-if="doc.ownerGovernment">registered by {{doc.ownerGovernment|term}}</span> </span>
-                                                        <span class="color-litegrey" style="font-size:12px;text-transform:uppercase;" ng-if="doc.meta2">| {{doc.meta2}} </span>
-                                                        <span class="color-litegrey" style="font-size:12px;text-transform:uppercase;" ng-if="doc.meta3">| {{doc.meta3}} </span>
-
-                                                    </strong>
+                                                    <span class="bold"> {{doc.title}} </span>
+                                                    <span style="font-size:10px;text-transform:uppercase;">
+                                                        <span ng-if="doc.meta1"> <span style="color:#333!important;"> | </span> <span class="color-litegrey" > {{doc.meta1}} <span ng-if="doc.ownerGovernment">registered by {{doc.ownerGovernment|term}}</span> </span></span>
+                                                        <span ng-if="doc.meta2"> <span style="color:#333!important;"> | </span> <span class="color-litegrey" > {{doc.meta2}} </span></span>
+                                                        <span ng-if="doc.meta3"> <span style="color:#333!important;"> | </span> <span class="color-litegrey" > {{doc.meta3}} </span></span>
+                                                        <span ng-if="doc.schema != 'focalPoint'"> <span style="color:#333!important;"> | </span> <span class="color-litegrey bold" > {{doc | uniqueID}} </span></span>
+                                                    </span> 
                                                 </div>
                                                 <div class="row" ng-if="doc.displayDetails">
                                                     <i class="glyphicon glyphicon-remove-circle circle pull-right" style="position:relative;top:40px;z-index:100;font-size:20px;color:white;padding-right:30px!important;cursor:pointer" ng-click="doc.displayDetails=!doc.displayDetails;" ng-show="doc.displayDetails"></i>

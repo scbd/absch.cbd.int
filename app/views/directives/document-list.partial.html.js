@@ -417,12 +417,10 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                             output.recordtype = "referenceRecord";
                             // TODO: add summary as output.description and limit to 200 chars
 
-                            if (output.Types) output.metadata.push(output.Types);
-                            if (output.Year) output.metadata.push(output.Year);
-                            if (output.Regions) output.metadata.push(output.Regions);
-                            //if(output.Languages)output.metadata.push({"metadata":output.Languages,"filter":"term"});
-
-
+                            if (output.Types) output.meta1 = output.Types;
+                            if (output.Year) output.meta2 = output.Year;
+                            if (output.Regions) output.meta3 = output.Regions;
+                       
                         } else if (document.schema_s == 'authority') {
                             output.responsibleForAll = document.absResposibleForAll_b;
                             output.jurisdiction = document.absJurisdiction_EN_t;
@@ -444,9 +442,9 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                             } else {
                                 output.description = document.description_t;
                                 if (output.jurisdiction)
-                                    output.metadata.push(output.jurisdiction);
+                                    output. meta1 = output.jurisdiction;
                                 if (output.cnaScope)
-                                    output.metadata.push(output.cnaScope);
+                                    output.meta2 = output.cnaScope;
                             }
 
                         } else if (document.schema_s == 'absCheckpoint') {
@@ -454,7 +452,7 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                             output.informAllAuthorities = (document.informAllAuthorities_b);
                             output.recordtype = "nationalRecord";
 
-                            if (output.jusrisdiction) output.metadata.push(output.jusrisdiction);
+                            if (output.jusrisdiction) output.meta1 = output.jusrisdiction;
 
                             //TODO: output.description should be the summary of responsibilities
                         } else if (document.schema_s == 'absPermit') {
@@ -473,12 +471,12 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                                 output.amendmentIntent = String(document.amendmentIntent_i) + 's';
 
                             }
-                            if (output.amendmentIntent == "1s") output.metadata.push($sce.trustAsHtml("<span style='color:red'>REVOKED</span>"));
-                            if (output.amendmentIntent == "0s") output.metadata.push("AMENDED");
+                            if (output.amendmentIntent == "1s") output.meta1 = "REVOKED";
+                            if (output.amendmentIntent == "0s") output.meta1 = "AMENDED";
                             //TODO: output.description should be the subjectmatter
                             //TODO: keywords should show up in the metadata. if(output.keywords)output.metadata.push(output.keywords);
                             //TODO: the metadata should be a link to download the pdf
-                            if (output.usage) output.metadata.push(output.usage);
+                            if (output.usage) output.meta2 = output.usage;
 
                         } else if (document.schema_s == 'absCheckpointCommunique') {
                             output.recordtype = "nationalRecord";
@@ -491,29 +489,28 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                         } else if (document.schema_s == 'database') {
                             output.recordtype = "nationalRecord";
                             output.description = document.description_t;
-                            output.metadata.push(document.website);
+                            output.meta1  = document.website;
                             //TODO: output.description should be the description
                             //TODO: metadata should be the url opening to a new window
                         } else if (document.schema_s == 'measure') {
                             document.ownerGovernment = {identifier:document.ownerGovernment_s};
-                            if (document.adoption_dt)
-                                output.metadata.push('Adopted on ' + $filter('formatDate')(document.adoption_dt));
+                           
                             output.adoption = document.adoption_dt;
                             output.recordtype = "nationalRecord";
 
                             output.jusrisdiction = document.jurisdiction_EN_t;
 
                             if (output.jusrisdiction)
-                                output.metadata.push(output.jusrisdiction);
+                                output.meta1 = output.jusrisdiction;
 
                             if (document.type_EN_t) {
                                 output.type = document.type_EN_t;
-                                if (output.type) output.metadata.push(output.type);
+                                if (output.type) output.meta2 = output.type;
                             }
 
                             if (document.status_EN_t) {
                                 output.status = document.status_EN_t;
-                                if (output.status) output.metadata.push(output.status);
+                                if (output.status) output.meta3 = output.status;
                             }
 
                             // if(document.type_EN_t =="Policy Document")
@@ -563,12 +560,12 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                             output.typeList = document.type_ss;
                             if (document.type_EN_t) {
                                 output.type = document.type_EN_t;
-                                if (output.type) output.metadata.push(output.type);
+                                //if (output.type) output.metadata.push(output.type);
                             }
 
                             if (document.status_EN_t) {
                                 output.status = document.status_EN_t;
-                                if (output.status) output.metadata.push(output.status);
+                                //if (output.status) output.metadata.push(output.status);
                             }
                         } else if (document.schema_s == 'meeting') {
                             output.createdDateOn = document.startDate_s;
