@@ -86,9 +86,9 @@
                                     </div>
                                 </div>
                             </div>
-                      
-                    
-                   
+
+
+
                             <div class="row">
                                 <div class="col-xs-6">
                                     <div class="km-control-group" name="phones" required caption="Phone numbers">
@@ -200,7 +200,7 @@
                                             <div km-select  name="absJurisdiction" ng-model="document.absJurisdiction" items="options.jurisdictions()" required></div>
                                             </div>
                                         </div>
-    
+
                                         <div class="col-xs-6">
                                             <div ng-show="showJurisdictionName()">
                                                 <div class="km-control-group" name="absJurisdictionName" required caption="Name of the jurisdiction(s)">
@@ -209,11 +209,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <div class="km-control-group" name="absGeneticResourceTypes" caption="Keywords to describe  scope of CNA responsibilities">
-                                                <div km-select multiple name="absGeneticResourceTypes" ng-model="document.absGeneticResourceTypes" items="options.keywords()"></div>
+                                                <div km-select multiple name="absGeneticResourceTypes" ng-model="document.absGeneticResourceTypes" items="options.keywords()" show-description="true"></div>
                                             </div>
                                         </div>
                                     </div>
