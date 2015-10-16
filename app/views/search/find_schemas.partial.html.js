@@ -51,7 +51,7 @@ app.directive('searchFilterSchemas', function ($http) {
             $scope.expanded = false;
             $scope.selectedItems = [];
             $scope.facet = $scope.field.replace('_s', ''); // TODO: replace @field by @facet
-            $scope.queryPartyStatus = ''
+            $scope.queryPartyStatus = '';
 
             if(!$scope.selectedFilters)
                 $scope.selectedFilters = [];
@@ -564,8 +564,7 @@ app.directive('searchFilterSchemas', function ($http) {
                 $scope.terms.forEach(function(data){
                     if(data.selected){
                         data.selected = false;
-
-                        if(data.identifier == 'absPermit' || data.identifier == 'focalPoint' && data.subFilters){
+                        if((data.identifier == 'absPermit' || data.identifier == 'focalPoint') && data.subFilters){
                             data.subFilters.forEach(function(filter){
                                 if(filter.type=='radio')
                                     $scope[filter.name] = null;
