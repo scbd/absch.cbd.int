@@ -37,7 +37,7 @@ define(['app', 'underscore', 'angular-localizer', 'scbd-angularjs-services', 'sc
                 title: 'National Website or Database'
             }, {
                 identifier: 'focalPoint',
-                title: 'ABS Focal Point'
+                title: 'ABS National Focal Point'
             }, {
                 identifier: 'absPermit',
                 title: 'IRCC'

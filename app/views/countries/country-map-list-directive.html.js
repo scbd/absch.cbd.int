@@ -14,9 +14,9 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
             },
             controller: ['$scope', '$http', 'realm', '$q', '$filter', '$routeParams', '$timeout', '$element', 'commonjs', '$route','$location', 'smoothScroll',
             function($scope, $http, realm, $q, $filter, $routeParams, $timeout, $element, commonjs, $route, $location, smoothScroll) {
-                    
+
                     //$scope.countryProfile_keyword = 'can';
-                    
+
                     var taiwan = "TW";
                     var china = "CN";
                     var denmark = "DK";
@@ -25,19 +25,19 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
 
                     $scope.orderList = false;
                     $scope.sortTerm = 'name.en';
-                    
-                    
+
+
                     $scope.api = {
                         loadCountryMapDetails :  loadCountryMapDetails
                     }
-                    
+
                     $scope.$watch('recordType', function(newVal){
                        if(newVal == 'countryProfile'){
                            loadCountries();
                            loadCountryMapDetails();
-                       } 
+                       }
                     });
-                    
+
                     //====================================================
                     function loadCountryMapDetails() {
                         if (!$scope.countries) {
@@ -90,7 +90,7 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
                         title: 'National Website or Database'
                     }, {
                         identifier: 'focalPoint',
-                        title: 'ABS Focal Point'
+                        title: 'ABS National Focal Point'
                     }, {
                         identifier: 'absPermit',
                         title: 'Internationally Recognized Certificate of Compliance'
@@ -99,10 +99,10 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
                         title: 'Checkpoint Communiqués '
                     }, ];
 
-                    
+
                    // ====================================================
                     $scope.$watch("query.partyStatus", function(val) {
-                      
+
                       if(!val){
                             $scope.selected_status = 'all';
                             $scope.partyStatusFilter = $scope.hasStatus;
@@ -121,15 +121,15 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
                             $scope.sortTable('name.en', 'ASC')
                         }
                     })
-                    
+
                     //====================================================
                     $scope.$watch("query.recordType", function(val) {
-                        
+
                         if(!val){
                             $scope.selected_recordType='all';
                             $scope.recordTypeFilter = $scope.hasRecordType;
                             $scope.sortTable('name.en', 'ASC')
-                            
+
                             return;
                         }
                         else{
@@ -139,10 +139,10 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
                             return;
                         }
 
-                       
+
                     })
-                    
-                   
+
+
 
 
 
@@ -160,28 +160,28 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
                                 $scope.inbetweenParties = 0;
                                 $scope.nonCBDParties = 0
                                 //var countryColors = {};
-                                
+
                                 $scope.countries = countries;
                                 $scope.totalParties=0;
                                 $scope.totalNonParties=0;
 
                               if ($routeParams.countryCode && $routeParams.countryCode.toUpperCase()!='RAT') {
-                                  
+
                                   var country = _.findWhere($scope.countries, {code : $routeParams.countryCode.toUpperCase()})
                                   if(country){
                                     country.displayDetails=true;
-                                    country.profileCode = $routeParams.countryCode.toUpperCase();                                    
+                                    country.profileCode = $routeParams.countryCode.toUpperCase();
                                     // var countryElement = $element.find('#countryCode' + $routeParams.countryCode)
                                     // var options = {
                                     //     duration: 700,
                                     //     easing: 'easeInQuad',
                                     //     offset: 60,
                                     // }
-                                    
+
                                     // smoothScroll(countryElement, options);
                                   }
                               }
-                                
+
                             })
                            .finally(function(){$scope.loading = false;});
                         //$scope.countries = $filter("orderBy")(response[1].data, "name.en");
@@ -255,14 +255,14 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
 
                         return false;
                     }
-                    
+
                     $scope.hasRecordType = function(entity){
-                        
+
                           if(!$scope.selected_recordType || $scope.selected_recordType == 'all')
                             return true;
-                           
+
                         return entity[$scope.selected_recordType.toUpperCase()]!=undefined;
-                        
+
                     }
                     //====================================================
                     function loadMap(colors) {
@@ -536,7 +536,7 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
                             return data.MSR ? data.MSR : ($scope.orderList ? -9999999 : 999999);
                         } else if ($scope.sortTerm == "NDB") {
                             return data.NDB ? data.NDB : ($scope.orderList ? -9999999 : 999999);
-                        } else if ($scope.sortTerm == "FP") {
+                        } else if ($scope.sortTerm == "NFP") {
                             return data.FP ? data.FP : ($scope.orderList ? -9999999 : 999999);
                         }
                     }
@@ -575,13 +575,13 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
 
                     //loadCountries();
                     //loadCountryMapDetails();
-                    
-                    
+
+
                     $scope.showCountryProfile = function(country){
-                        
+
                        // country.api.loadCountryDetails(country.code);
                         country.profileCode = country.code;
-                    }                    
+                    }
                 }
             ]
 
