@@ -100,6 +100,10 @@ define(['app','underscore','/app/js/common.js',
             $scope.thematicAreaApi.unSelectItem(filter.identifier);
         }
 
+        $scope.toggleSideBar = function(e){
+            e.preventDefault();
+            $element.find("#wrapper").toggleClass("toggled");
+        }
         //============================================================
         //
         //

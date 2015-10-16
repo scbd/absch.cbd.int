@@ -19,13 +19,13 @@
     }
 
     #sidebar-wrapper {
-        width: 280px;
+        /*width: 280px;*/
         background-color: white;
     }
 
     .sidebar-nav {
-        width: 275px;
-        padding-left: 5px;
+        /*width: 275px;*/
+        /*padding-left: 5px;*/
     }
 </style>
 
@@ -42,10 +42,10 @@
                 </div>
             </div>
             <div id="page-content-wrapper">
-                <div class="container-fluid">
+                <div class="container-fluid1">
                     <div class="row">
                         <div class="col-lg-12">
-                            <a href="#" class="btn btn-default" id="menu-toggle" ng-click="toggleSideBar()">Toggle Menu</a>
+                            <i  class="fa fa-list pointer btn btn-default visible-xs visible-sm" id="menu-toggle" ng-click="toggleSideBar($event)"/>
 
                             <button class="btn btn-primary" type="button" ng-show="partyStatusString" ng-click="queryStatus()" style="margin-right:2px;margin-bottom:2px">
                                 {{partyStatusString}} &nbsp;
