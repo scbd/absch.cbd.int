@@ -90,9 +90,8 @@ define(["app",'/app/js/common.js'], function (app) {
 
                     }
 
-                var government = ''
+                var government = '';
 				var documentId;
-
 
 				if(document.documentID)
 					documentId = document.documentID;
@@ -111,11 +110,14 @@ define(["app",'/app/js/common.js'], function (app) {
                     government = document.metadata.government;
                 else if(document.body && document.body.government)
                     government = document.body.government.identifier;
-
+					
                 var unique = 'ABSCH' + (realm.value.toUpperCase().replace('ABS','').replace('-','')) +
 						'-' + $filter("schemaShortName")($filter("lowercase")(document.type||document.schema_s||document.schema)) +
                         '-' + (government != '' ?  $filter("uppercase")(government) : 'SCBD') +
-                        '-' + documentId + '-' + document.revision;
+                        '-' + documentId;
+				if( document.revision)		
+					unique = unique + '-' + document.revision;
+					
 				cacheMap[term.identifier] = unique;
 
 				return unique;
