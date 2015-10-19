@@ -56,7 +56,7 @@
                     <div class="col-xs-12">
                         <div class="control-group">
                             <div class="km-control-group" name="title" required caption="Title of this checkpoint communique">
-                                <div km-textbox-ml ng-model="document.title" rows="1" placeholder="Title this checkpoint communique" locales="document.header.languages"></div>
+                                <div km-textbox-ml ng-model="document.title" rows="1" placeholder="Title of this checkpoint communique" locales="document.header.languages"></div>
 
                             </div>
                         </div>
@@ -80,11 +80,8 @@
 
                 <section>
                 <legend name="certificate">Details of the internationally recognized certificate of compliance</legend>
-                <div class="row" style="padding-bottom:20px;">
+                <div class="row" >
                     <div class="col-xs-12" >
-                        
-                        
-                        
                           <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <span ng-class="{'confidential-text':document.permitNotAvailable}">
@@ -98,25 +95,19 @@
                                          </div>
                                     </div>
                                 </div>
-                               </div>
-                        
-
-                        
-                        
-                        
-                       
-                </div>
+                             </div>
+                    </div>
                 </div>
 
                 <div class="clearfix"></div>
-                <div ng-class="{'disable':!isPermitNotAvailable()}" class="well no-shadow thin-border"  >
+                <div ng-class="{'disable':!isPermitNotAvailable(), 'bg-white':isPermitNotAvailable() }" class="well no-shadow" style="padding-top:0;padding-bottom:0;"  >
                     <div class="row">
                         <div class="col-xs-12">
-                            <LEGEND>Information to be collected or received when the internationally recognized certificate of compliance is not available.</LEGEND>
+                            <h3>Information to be collected or received when the internationally recognized certificate of compliance is not available.</h3>
                         </div>
                     </div>
-                    <section>
-                        <LEGEND>Source of the genetic resource</LEGEND>
+                  
+                        <legend>Source of the genetic resource</legend>
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="control-group">
@@ -126,11 +117,9 @@
                                 </div>
                             </div>
                         </div>
-                    </br>
-                    </section>
-                    <hr>
-                    <section>
-                        <LEGEND>Subject-matter</LEGEND>
+                   
+                  
+                        <legend>Subject-matter</legend>
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="km-control-group" name="subjectMatter" required caption="Subject-matter or genetic resources relevant to the information collected or received">
@@ -157,21 +146,18 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row">
-                                <div class="col-xs-12" style="padding-top:15px;" ng-class="{'warning':isInvalid('gisFiles')}">
-                                    <div class="control-group" >
+                                <div class="col-xs-12"  ng-class="{'warning':isInvalid('gisFiles')}">
+                                    <div class="km-control-group" >
                                         <label class="control-label" for="gisFiles">Geographic coordinates</label>
                                         <span class="help-block">Limited to .geojson files (<a href="http://www.geojson.org/" target="_blank" >http://www.geojson.org/</a>)</span>
                                         <div km-link required name="gisFiles" ng-model="document.gisFiles" allow-link="false" identifier="document.header.identifier" mime-types="application/json"></div>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" name="keywords" caption="Keywords to describe the subject-matter or genetic resource(s) covered by the permit or its equivalent">
-                                        <!--<span class="help-block">The collection of this information is important for facilitating harmonized searches throughout the records. Please select all relevant keywords that could assist in describing the subject-matter or genetic resource(s) covered by the permit or its equivalent.</span>-->
                                         <div km-select multiple required name="keywords" ng-model="document.keywords" items="options.keywords()"></div>
                                     </div>
                                 </div>
@@ -259,7 +245,6 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="km-control-group" required name="description" caption="Short description of the information collected or received by the checkpoint relevant to the utilization of genetic resources, including  the type of use">
-                            <span class="help-block">This could include information on utilization of genetic resources at, inter alia, any stage of research, development, innovation, pre-commercialization or commercialization.</span>
                             <div km-rich-textbox name="description" rows="4" ng-model="document.description" locales="document.header.languages"></div>
                         </div>
                     </div>
@@ -273,45 +258,25 @@
                         </div>
                     </div>
                 </div>
-                <br>
-                <section>
-                    <div class="row">
-                        <div class="col-md-12 col-xs-12">
-
-                              <label >Date on which the information was collected or received at the checkpoint</label>
-                              <div style="border-radius: 4px;border: 1px solid #C2BEBE;">
-                                    <div class="row" style="padding:10px">
-                                        <div class="col-md-4 col-xs-4">
-                                            <div km-date placeholder="YYYY-MM-DD" required name="date" ng-model="document.date"></div>
-                                        </div>
-                                        <div class="col-md-2 col-xs-2">
-                                            <div  style="padding-left:50%;margin-top:15px;color:#999;font-size:16px;" name="dateOR" caption="OR">OR</div>
-                                        </div>
-                                        <div class="col-md-6 col-xs-6">
-                                            <div class="row">
-                                                <div class="col-md-1 col-xs-1">
-                                                    <div style="margin-top:8px;">from</div>
-                                                </div>
-                                                <div class="col-md-6 col-xs-6">
-                                                    <div km-date placeholder="YYYY-MM-DD" required name="dateFrom" ng-model="document.dateFrom"></div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-1 col-xs-1">
-                                                        <div style="margin-top:8px;">to</div>
-                                                </div>
-                                                <div class="col-md-6 col-xs-6">
-                                                    <div km-date placeholder="YYYY-MM-DD" required name="dateTo" ng-model="document.dateTo"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                              </div>
-
+             
+                <label >Date on which the information was collected or received at the checkpoint</label>
+                   <div class="row" style="margin-bottom:20px;" >            
+                        <div class="col-xs-4">
+                            <div km-date placeholder="YYYY-MM-DD" required name="date" ng-model="document.date"></div>
+                        </div>
+                        <div class="col-xs-1 bg-grey">
+                            <div  style="font-size:16px;font-weight:bold;padding: 6px;text-align: center;" name="dateOR" caption="OR">OR</div>
+                        </div>
+                        <div class="col-xs-3 text-right">
+                            <div km-date placeholder="FROM" required name="dateFrom" ng-model="document.dateFrom"></div>
+                        </div>
+                        <div class="col-xs-3  text-right">
+                            <div km-date placeholder="TO" required name="dateTo" ng-model="document.dateTo"></div>
                         </div>
                     </div>
-                </section>
+            
+                
+                
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="km-control-group" name="informationDocuments" caption="Upload relevant document">
