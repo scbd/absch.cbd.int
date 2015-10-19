@@ -22,8 +22,12 @@ define(['app', '/app/views/forms/edit/edit.js',
                                                   return Thesaurus.buildTree(data);
                                         }); },
       checkpoints         : function () {
-            $scope.checkpointList = commonjs.loadSchemaDocumentsForDropdown('absCheckpoint');
-            return $scope.checkpointList;
+            return $q.when(commonjs.loadSchemaDocumentsForDropdown('absCheckpoint'))
+                     .then(function(data){
+                         $scope.checkpointList = data;
+                         updateCheckpointBody();
+                         return data;
+                     });
         }
     });
 
@@ -50,6 +54,9 @@ define(['app', '/app/views/forms/edit/edit.js',
       });
     });
 
+    $scope.$watch("document.checkpointSelected", function () {
+        updateCheckpointBody();
+    });
     //==================================
     //
     //==================================
@@ -61,7 +68,6 @@ define(['app', '/app/views/forms/edit/edit.js',
         return undefined;
 
       document = angular.fromJson(angular.toJson(document));
-// console.log(document.permitNotAvailable, document.permitNotAvailable===true)
       if (document.permitNotAvailable===true) {
         document.permit = undefined;
       }
@@ -136,6 +142,18 @@ define(['app', '/app/views/forms/edit/edit.js',
 
     };
 
+    function updateCheckpointBody(){
+        _.each($scope.document.checkpointSelected, function(checkpoint){
+            var selected = _.findWhere($scope.checkpointList,{"identifier": checkpoint.identifier});
+            if(selected && !selected.body){
+                    $q.when(storage.documents.get(checkpoint.identifier))
+                      .then(function(cpBody){
+                          selected.body = cpBody.data;
+                      });
+            }
+
+        });
+    }
 
     $scope.setDocument();
   }]);
