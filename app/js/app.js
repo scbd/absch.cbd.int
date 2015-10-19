@@ -1,6 +1,6 @@
 'use strict';
 
-define(['angular', 'angular-sanitize', 'angular-loading-bar', 'angular-animate','ngAria' ,'ngMaterial', 'toastr',
+define(['angular', 'angular-sanitize', 'angular-loading-bar', 'angular-animate','ngAria' ,'ngMaterial',
         'text-angular', 'ngSmoothScroll'
     ],
     function(angular) {
@@ -78,12 +78,12 @@ define(['angular', 'angular-sanitize', 'angular-loading-bar', 'angular-animate',
 
             }
         ]);
-        
+
         app.config(function(toastrConfig) {
             angular.extend(toastrConfig, {
                 autoDismiss: true,
                 containerId: 'toast-container',
-                maxOpened: 1,    
+                maxOpened: 1,
                 newestOnTop: true,
                 positionClass: 'toast-top-right',
                 preventDuplicates: true,
