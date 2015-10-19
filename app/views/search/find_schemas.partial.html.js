@@ -66,7 +66,9 @@ app.directive('searchFilterSchemas', function ($http) {
                         $scope.groupby = true;
                         $scope.previewType = 'group';
                     }
-                    $scope.buildQuery()
+                    $scope.buildQuery();
+
+                    buildCountryProfileFacets();
                 }
 
             })
@@ -659,6 +661,21 @@ app.directive('searchFilterSchemas', function ($http) {
                             });
             }
 
+            function buildCountryProfileFacets(){
+                if(!$scope.countryProfileFacets && $scope.isInProfiles()){
+                    $scope.countryProfileFacets = {};
+                    commonjs.getCountries()
+                    .then(function(countries){
+                        $scope.countryProfileFacets.parties = _.where(countries, {isNPParty:true}).length;
+                        $scope.countryProfileFacets.nonParties = _.where(countries, {isNPParty:false}).length;
+                        $scope.countryProfileFacets.signatories = _.where(countries, {isNPSignatory:true}).length;
+                        $scope.countryProfileFacets.inbetweenParties = _.where(countries, {isNPInbetweenParty:true}).length;
+                    });
+                }
+            }
+            if($scope.isInProfiles()){
+                buildCountryProfileFacets();
+            }
             // if ($routeParams.countryCode && $routeParams.countryCode.toUpperCase() == 'RAT'){
             //     $scope.countryProfileSearch ={partyStatus: 'parties', countryProfile_keyword:''}
             // }
