@@ -385,6 +385,18 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
                        // country.api.loadCountryDetails(country.code);
                         country.profileCode = country.code;
                     }
+
+                    $scope.totalFacetCount = function(countries, type){
+
+                        var typeFacets = _.filter(countries, function(country){
+                            return country[type]!=undefined;
+                        });
+                        var count = _.reduce(typeFacets,function(memo, country){ return memo + country[type]; },0);
+                        if(count>0)
+                            return count;
+                            
+                         return;
+                    };
                 }
             ]
 
