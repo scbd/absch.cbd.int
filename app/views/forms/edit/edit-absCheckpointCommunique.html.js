@@ -1,8 +1,10 @@
 define(['app', '/app/views/forms/edit/edit.js',
-        '/app/views/forms/edit/permit-selection-directive.html.js'], function (app) {
+        '/app/views/forms/edit/permit-selection-directive.html.js',
+        '/app/js/common.js'], function (app) {
 
-  app.controller("editCheckpointCommunique", ["$scope", "$http", "$filter", "$q", "$controller", "IStorage","underscore","Thesaurus","Enumerable","$location",
-   function ($scope, $http, $filter, $q, $controller, storage, _, Thesaurus, Enumerable,$location) {
+  app.controller("editCheckpointCommunique", ["$scope", "$http", "$filter", "$q", "$controller", "IStorage",
+  "underscore","Thesaurus","Enumerable","$location", 'commonjs',
+   function ($scope, $http, $filter, $q, $controller, storage, _, Thesaurus, Enumerable,$location, commonjs) {
     $controller('editController', {$scope: $scope});
 
     $scope.path=$location.path();
@@ -10,14 +12,7 @@ define(['app', '/app/views/forms/edit/edit.js',
     $scope.checkpointList = [];
     _.extend($scope.options, {
       permits         : function () {
-            var permit = storage.documents.query("(type eq 'absPermit')",undefined,{cache:false});
-            return $q.all(permit).then(function(o){
-                  var permits =  [];
-                  o.data.Items.forEach(function(permit){
-                    permits.push({"title": permit.title.en, "identifier": permit.identifier});
-                  });
-                  return permits;
-            });
+            return commonjs.loadSchemaDocumentsForDropdown('absPermit');
         },
     keywords  : function () { return $q.all([$http.get("/api/v2013/thesaurus/domains/1A22EAAB-9BBC-4543-890E-DEF913F59E98/terms", { cache: true }),
                                             $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })])
@@ -27,19 +22,8 @@ define(['app', '/app/views/forms/edit/edit.js',
                                                   return Thesaurus.buildTree(data);
                                         }); },
       checkpoints         : function () {
-            var checkpoint = storage.documents.query("(type eq 'absCheckpoint')",undefined,{body:true,cache:false});
-            return $q.when(checkpoint)
-                    .then(function(o){
-                         var checkpoints =  [];
-                          o.data.Items.forEach(function(checkpoint){
-                            checkpoints.push({"title": checkpoint.title.en,"identifier": checkpoint.identifier, "body": checkpoint.body});
-                          });
-                          $scope.checkpointList = checkpoints;
-                          return checkpoints;
-                    })
-                    .catch(function(error){
-                        console.log(error);
-                    });
+            $scope.checkpointList = commonjs.loadSchemaDocumentsForDropdown('absCheckpoint');
+            return $scope.checkpointList;
         }
     });
 
