@@ -1,21 +1,22 @@
 define(['app','linqjs', 'angular-localizer',
-	'/app/views/directives/login.directive.html.js',
-	'/app/views/register/register-record-list.directive.js',
-	'/app/views/directives/task-id-directive.html.js',
-	'/app/views/directives/user-details.directive.html.js',
-  '/app/views/directives/ngxLazy.directive.js', '/app/views/directives/help-directive.html.js',
-  'bootstrap-datepicker','moment',  'text-angular', 'bootbox',
-   'scbd-angularjs-services','scbd-angularjs-filters','scbd-angularjs-controls'], function (app) {
+		'/app/views/directives/login.directive.html.js',
+		'/app/views/register/register-record-list.directive.js',
+		'/app/views/directives/task-id-directive.html.js',
+		'/app/views/directives/user-details.directive.html.js',
+		'/app/views/directives/help-directive.html.js',
+		'bootstrap-datepicker','moment',  'text-angular', 'bootbox',
+		'scbd-angularjs-services','scbd-angularjs-filters','scbd-angularjs-controls','toastr'
+	], function (app) {
 
   "use strict";
 // angular.module([]);
 
   app.controller("RegisterController",
     ["$rootScope", "$location" , "$scope", "$q", "$window", "IStorage", "underscore","breadcrumbs",
-     "schemaTypes", "$timeout","$filter", "$routeParams", "$cookies","bootbox","realm","IWorkflows", '$element','$mdSidenav', '$mdUtil', '$mdMedia',
-
-	  function ($rootScope, $location, $scope, $q, $window, storage, _,breadcrumbs,
-      schemaTypes, $timeout, $filter, $routeParams, $cookies,bootbox,realm,workflows, $element, $mdSidenav, $mdUtil, $mdMedia) {
+     "schemaTypes", "$timeout","$filter", "$routeParams", "$cookies","bootbox","realm","IWorkflows",
+	 '$element','$mdSidenav', '$mdUtil', '$mdMedia','toastr',
+	function ($rootScope, $location, $scope, $q, $window, storage, _,breadcrumbs,
+	schemaTypes, $timeout, $filter, $routeParams, $cookies,bootbox,realm,workflows, $element, $mdSidenav, $mdUtil, $mdMedia, toastr) {
 
   $scope.toggleLeft = buildToggler('left');
   $scope.toggleRight = buildToggler('right');
@@ -373,7 +374,7 @@ define(['app','linqjs', 'angular-localizer',
 		  //
 
         }).then(null, function(error) {
-          $scope.error = "error loading permit related checkpoint communiqué.";
+          toastr.error("error loading permit related checkpoint communiqué.");
            console.log(error );
         })
 
@@ -467,7 +468,8 @@ define(['app','linqjs', 'angular-localizer',
 
       evt.stopPropagation();
       $scope.editing = false;
-      $scope.msg = "Your record has been closed without saving.";
+      toastr.info("Your record has been closed without saving.");
+	//   $scope.msg = "Your record has been closed without saving.";
 
 
       $timeout(function() {
@@ -510,10 +512,11 @@ define(['app','linqjs', 'angular-localizer',
       $scope.editing = false;
 
 	  $scope.showingFeedback = true;
-	  bootbox.alert('Record saved. A publishing request has been sent to your Publishing Authority.', function(){
-		    $scope.showingFeedback = false;
-			$timeout(function(){$location.path('/register/'+$filter("mapSchema")($scope.document_type));},100);
-	  });
+	  toastr.info('Record saved. A publishing request has been sent to your Publishing Authority.',{onHidden:function(a){
+		  $scope.showingFeedback = false;
+	  }})
+
+	  $timeout(function(){$location.path('/register/'+$filter("mapSchema")($scope.document_type));},100);
 	  $rootScope.updatedRecord = workflowInfo;
 
     });
@@ -530,10 +533,11 @@ define(['app','linqjs', 'angular-localizer',
       $scope.editing = false;
 
 	  $scope.showingFeedback = true;
-	  bootbox.alert('Record published. The record will be now publicly accessible on ABSCH.', function(){
-		    $scope.showingFeedback = false;
-			$timeout(function(){$location.path('/register/'+$filter("mapSchema")($scope.document_type));},100);
-	  });
+	  toastr.info('Record published. The record will be now publicly accessible on ABSCH.',{onHidden:function(a){
+		  $scope.showingFeedback = false;
+	  }});
+	  $timeout(function(){$location.path('/register/'+$filter("mapSchema")($scope.document_type));},100);
+
 	  $rootScope.updatedRecord = documentInfo;
       //$timeout(function() { $location.path('/register/'+$scope.document_type); }, 500);
     });
@@ -553,7 +557,7 @@ define(['app','linqjs', 'angular-localizer',
 	  }
       evt.stopPropagation();
       $scope.editing = false;
-	  bootbox.alert('<h1>Record deleted.</h1>');
+	  toastr.info('<h1>Record deleted.</h1>',{allowHtml:true});
       $scope.msg = "Record deleted.";
 
     });
@@ -577,7 +581,7 @@ define(['app','linqjs', 'angular-localizer',
     //
     //============================================================
     $scope.$on("documentWorkflowRequestDeleted", function(evt, doc){
-      bootbox.alert('<h1>Workflow request deleted.</h1>');
+      toastr.info('<h1>Workflow request deleted.</h1>',{allowHtml:true});
       $scope.msg = "Workflow request deleted.";
 	  //update request count
     updateFacets(doc, false);
