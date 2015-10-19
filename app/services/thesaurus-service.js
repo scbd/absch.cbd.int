@@ -47,8 +47,7 @@ define(['app', 'underscore'], function (app, _) {
                 others                   : "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
                 jurisdiction             : "7A56954F-7430-4B8B-B733-54B8A5E7FF40",
                 status                   : "ED7CDBD8-7762-4A84-82DD-30C01458A799",
-                typeOfDocuments          : "144CF550-7629-43F3-817E-CACDED34837E",
-                cppResourceTypes         : "ED9BE33E-B754-4E31-A513-002316D0D602",
+                typeOfDocuments          : "144CF550-7629-43F3-817E-CACDED34837E",                
                 cnaJurisdictions         : "D7BD5BDE-A6B9-4261-B788-16839CCC4F7E",
                 absGeneticResourceTypes  : "1A22EAAB-9BBC-4543-890E-DEF913F59E98",
                 keywords                 : "1A22EAAB-9BBC-4543-890E-DEF913F59E98",//duplicate?
@@ -57,6 +56,7 @@ define(['app', 'underscore'], function (app, _) {
                 resourceTypes            : "83BA4728-A843-442B-9664-705F55A8EC52",
                 absSubjects              : "CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924",
                 mccResourceTypes         : "840427E5-E5AC-4578-B238-C81EAEEDBDD8",
+                cppResourceTypes         : "ED9BE33E-B754-4E31-A513-002316D0D602",
                 languages                : "ISO639-2"
 
 

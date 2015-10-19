@@ -77,9 +77,9 @@ app.directive('searchFilterSchemas', function ($http) {
                 typeOfDocuments          : function () { return loadDomainWithFacets('typeOfDocuments', 'measure','type_s'); },
                 cnaJurisdictions         : function () { return loadDomainWithFacets('cnaJurisdictions', 'authority', 'absJurisdiction_ss'); },
                 absGeneticResourceTypes  : function () { return loadDomainWithFacets('absGeneticResourceTypes', 'authority','absGeneticResourceTypes_ss') },
-                keywords                 : function () { return loadDomainWithFacets('keywords', 'permit', 'keywords_ss'); },
-                usage                    : function () { return loadDomainWithFacets('usage', 'permit', 'usage_REL_ss'); },
-                cpJurisdictions         : function () { return  loadDomainWithFacets('cpJurisdictions', 'checkpoint', 'jurisdiction_s') },
+                keywords                 : function () { return loadDomainWithFacets('keywords', 'absPermit', 'keywords_ss'); },
+                usage                    : function () { return loadDomainWithFacets('usage', 'absPermit', 'usage_ss'); },
+                cpJurisdictions         : function () { return  loadDomainWithFacets('cpJurisdictions', 'absCheckpoint', 'jurisdiction_s') },
 
                 countries                : function () { return thesaurusService.getDomainTerms('countries').then(function (o) { return $filter("orderBy")(o, "name"); }); },
                 regions                  : function () { return $q.all([thesaurusService.getDomainTerms('countries'),
@@ -89,26 +89,13 @@ app.directive('searchFilterSchemas', function ($http) {
                                                                                     Enumerable.from($filter("orderBy")(o[1], "name"))).toArray();
                                                                   });
                                                         },
-               resourceTypes            : function () { return $http.get("/api/v2013/thesaurus/domains/83BA4728-A843-442B-9664-705F55A8EC52/terms", { cache: true })
-                                                                    .then(function(o){ return $scope.updateFacets($scope.resource,'vlrresourceTypes',Thesaurus.buildTree(o.data)); }); },
-                absSubjects             : function () { return $http.get("/api/v2013/thesaurus/domains/CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924/terms", { cache: true }).then(function(o){ return o.data; }); },
-                languages               : function () { return $http.get("/api/v2013/thesaurus/domains/ISO639-2/terms", { cache: true }).then(function(o){
+               resourceTypes            : function () { return loadDomainWithFacets('resourceTypes', 'resource', 'resourceTypes_ss', false); },
+               languages               : function () { return $http.get("/api/v2013/thesaurus/domains/ISO639-2/terms", { cache: true }).then(function(o){
                                                                       return $filter("orderBy")(o.data, "name");
-                                                                    })},
-                meetingYear             : function () {
-                                                        var year = [];
-                                                        year.push({'identifier':'[' + moment().add('days',1).format("YYYY-MM-DD")+ 'T00:00:00Z TO *]','name' : 'Upcoming meetings'});
-                                                        year.push({'identifier':'[* TO ' + moment().format("YYYY-MM-DD") + 'T00:00:00Z ]','name' : 'Previous meetings'});
-                                                        for (var i=moment().year(); i>= 2009; i--)
-                                                            year.push({'identifier':'['+i + '-01-01T00:00:00Z TO ' + i + '-12-31T00:00:00Z]','name' : '' + i});
+                                                                  })},
+               mccResourceTypes            : function () { return loadDomainWithFacets('mccResourceTypes', 'modelContractualClause', 'resourceTypes_ss', false);},
 
-                                                        return year;
-                                                      },
-               mccResourceTypes            : function () { return $http.get("/api/v2013/thesaurus/domains/840427E5-E5AC-4578-B238-C81EAEEDBDD8/terms", { cache: true })
-                                                                    .then(function(o){ return $scope.updateFacets($scope.modelContractualClause,'mccresourceTypes',Thesaurus.buildTree(o.data)); }); },
-
-               cppResourceTypes            : function () { return $http.get("/api/v2013/thesaurus/domains/ED9BE33E-B754-4E31-A513-002316D0D602/terms", { cache: true })
-                                                                    .then(function(o){ return $scope.updateFacets($scope.modelContractualClause,'cppresourceTypes',Thesaurus.buildTree(o.data)); }); },
+               cppResourceTypes            : function () { return loadDomainWithFacets('cppResourceTypes', 'communityProtocol', 'resourceTypes_ss', false); },
             };
 
             $scope.isSelected = function(item) {
@@ -386,7 +373,7 @@ app.directive('searchFilterSchemas', function ($http) {
             $scope.absPermit               = { identifier: 'absPermit',                title: 'Internationally Recognized Certificates of Compliance' ,type:'nationalRecord',
                                                subFilters : [
                                                                 //{ name: 'permitAuthority',  type: 'reference' , field: 'jurisdiction_s'},
-                                                                { name: 'permitusage',          type: 'multiselect' , field: 'usage_REL_ss'},
+                                                                { name: 'permitusage',          type: 'multiselect' , field: 'usage_ss'},
                                                                 { name: 'permitkeywords',       type: 'multiselect' , field: 'keywords_ss'},
                                                                 // { name: 'permitExpiryDate',     type: 'calendar' , field: 'expiration_s'},
                                                                 // { name: 'permitIssuanceDate',   type: 'calendar' , field: 'date_s'},
@@ -657,13 +644,16 @@ app.directive('searchFilterSchemas', function ($http) {
             });
 
 
-            function loadDomainWithFacets(domainTerm, schema, facetField){
+            function loadDomainWithFacets(domainTerm, schema, facetField, buildTree){
                     return thesaurusService
                             .getDomainTerms(domainTerm)
                             .then(function(domainTermData){
                                 var facetQuery = {query:'realm_ss:' + realm.value.toLowerCase() + ' AND NOT version_s:* AND schema_s:' + schema, fields: [facetField] };
                                 return searchService.facets(facetQuery)
                                     .then(function(facets){
+                                            if(buildTree)
+                                                domainTermData = Thesaurus.buildTree(domainTermData);
+
                                             return commonjs.updateFacets(facets[facetField], domainTermData);
                                     });
                             });
