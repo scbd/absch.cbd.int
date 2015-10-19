@@ -45,18 +45,16 @@
                       </div>
                       <div class="row">
                           <div class="col-xs-12">
-                              <div class="control-group">
                                   <div class="km-control-group" name="name" required caption="Name of the checkpoint">
                                       <div km-textbox-ml ng-model="document.name" rows="1" placeholder="" locales="document.header.languages"></div>
                                   </div>
-                              </div>
                           </div>
                       </div>
                       </section>
 
                       <section>
 
-                      <legend name="responsibilities">Responsibilities</legend>
+                      <legend name="responsibilities–title">Responsibilities</legend>
                       <div class="row">
                           <div class="col-xs-12">
                               <div class="km-control-group" required name="responsibilities" caption="Short description of responsibilities">
@@ -66,11 +64,9 @@
                       </div>
                       <div class="row">
                           <div class="col-xs-12">
-                              <div class="control-group">
                                   <div class="km-control-group" name="jurisdiction" caption="Area of jurisdiction">
                                        <div afc-autocomplete name="jurisdiction" ng-model="document.jurisdiction" source="options.jurisdictions" filter="genericFilter" mapping="genericMapping" selectbox="true" required></div>
                                   </div>
-                              </div>
                           </div>
                       </div>
                       <div class="row" ng-show="isSubNational()">

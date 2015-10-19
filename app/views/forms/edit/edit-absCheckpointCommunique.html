@@ -42,24 +42,24 @@
 
                 <div class="row">
                     <div class="col-xs-12">
-                        <div class="control-group">
+                        
                             <div class="km-control-group" name="government" required caption="Country issuing this checkpoint communique">
                                 <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government"
                                 source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true"
                                 placeholder="Please select a country..."></div>
                             </div>
-                        </div>
+                       
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-xs-12">
-                        <div class="control-group">
+                        
                             <div class="km-control-group" name="title" required caption="Title of this checkpoint communique">
                                 <div km-textbox-ml ng-model="document.title" rows="1" placeholder="Title of this checkpoint communique" locales="document.header.languages"></div>
 
                             </div>
-                        </div>
+                        
                     </div>
                 </div>
 
@@ -68,12 +68,12 @@
                 <section>
                     <div class="row">
                         <div class="col-xs-12">
-                            <div class="control-group">
+                            
                                 <div class="km-control-group" name="checkpoint" required  caption="Checkpoint/s that collected or received the information">
                                     <div  km-select  multiple name="checkpointSelected" ng-model="document.checkpointSelected"
                                     items="options.checkpoints()" placeholder="Please select ..." required></div>
                                 </div>
-                            </div>
+                           
                         </div>
                     </div>
                 </section>
@@ -110,11 +110,11 @@
                         <legend>Source of the genetic resource</legend>
                         <div class="row">
                             <div class="col-xs-12">
-                                <div class="control-group">
+                              
                                     <div class="km-control-group" name="originCountries" required caption="Source of the genetic resource">
                                         <div km-select required name="originCountries" ng-model="document.originCountries" multiple items="options.countries()" placeholder="Please select a country..."></div>
                                     </div>
-                                </div>
+                              
                             </div>
                         </div>
                    

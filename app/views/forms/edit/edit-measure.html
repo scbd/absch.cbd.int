@@ -32,33 +32,31 @@
                 </div>
               </div>
             </div>
-
-            <div class="row" ng-class="{disable:!document.isAmendment}" style="margin:10px 0;padding-top:10px;">
-                <!-- IF NO SECTION -->
+            
+             <!-- IF NO SECTION -->
+            <div ng-class="{'disable':!document.isAmendment, 'bg-white':document.isAmendment}" class="well no-shadow" style="padding-top:0;padding-bottom:0;" >
+            <div class="row" >
               <div class="col-xs-12">
-                <strong ng-show="document.isAmendment==null" style="color:black!important;">
+                <h3 ng-show="!document.isAmendment" style="color:black!important;">
                   If no, the following information is not required.
-                </strong>
-                <strong ng-show="document.isAmendment==false" style="color:black!important;">
-                  This section is not required.
-                </strong>
-                <strong ng-show="document.isAmendment==true" style="color:black!important;">
+                </h3>
+                <h3 ng-show="document.isAmendment==true" style="color:black!important;">
                   Please select the previously registered record that is being amended.
-                </strong>
-                <br><br>
-               
-                        <div class="control-group">
-                            <div class="km-control-group" name="amendedMeasures" caption="List of amended measures">
-                                <div class="help-block">Please indicate if this measure amends a previously registered one by providing a cross-reference link to the amended measure.</div>
-                                <div km-select multiple name="amendedMeasures" ng-model="document.amendedMeasures"items="options.measures()" placeholder="Please select ..."></div>
-                            </div>
-                        </div>
+                </h3>
+                  
+                <div class="km-control-group">
+                    <div class="km-control-group" name="amendedMeasures" caption="List of amended measures">
+                        <div class="help-block">Please indicate if this measure amends a previously registered one by providing a cross-reference link to the amended measure.</div>
+                        <div km-select multiple name="amendedMeasures" ng-model="document.amendedMeasures"items="options.measures()" placeholder="Please select ..."></div>
+                    </div>
+                </div>
                 
                 <div class="km-control-group" name="amendmentsDescription" caption="Summary of the amendment(s)">
                   <div km-rich-textbox ng-model="document.amendmentsDescription" rows="4" locales="document.header.languages"></div>
                 </div>
                 
               </div>
+            </div>
             </div>
           </section>
 
