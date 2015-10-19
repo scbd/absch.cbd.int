@@ -28,7 +28,7 @@
                                         <i class="material-icons color-blue" style="font-size:16pt;position:relative;top:3px;">
                                            {{'nfp' | schemaIcon}}
                                        </i><br>
-                                        NFP
+                                        <spam class="badge">{{totalFacetCount(ct,'NFP')}}</span> NFP
                                     </span>
                                     </div>
                                     <div class="col-lg-1 col-md-1 col-xs-1 " >
@@ -36,7 +36,7 @@
                                         <i class="material-icons color-blue" style="font-size:16pt;position:relative;top:3px;">
                                            {{'ndb' | schemaIcon}}
                                        </i><br>
-                                       NDB
+                                       <spam class="badge">{{totalFacetCount(ct,'NDB')}}</span> NDB
                                     </span>
                                     </div>
                                     <div class="col-lg-1 col-md-1 col-xs-1 " >
@@ -44,7 +44,7 @@
                                         <i class="material-icons color-blue" style="font-size:16pt;position:relative;top:3px;">
                                            {{'cna' | schemaIcon}}
                                        </i><br>
-                                        CNA
+                                        <spam class="badge">{{totalFacetCount(ct,'CNA')}}</span> CNA
                                     </span>
                                     </div>
                                     <div class="col-lg-1 col-md-1 col-xs-1 " >
@@ -52,7 +52,7 @@
                                         <i class="material-icons color-blue" style="font-size:16pt;position:relative;top:3px;">
                                            {{'msr' | schemaIcon}}
                                        </i><br>
-                                        MSR
+                                        <spam class="badge">{{totalFacetCount(ct,'MSR')}}</span> MSR
                                     </span>
                                     </div>
                                     <div class="col-lg-1 col-md-1 col-xs-1 " >
@@ -60,7 +60,7 @@
                                         <i class="material-icons color-blue" style="font-size:16pt;position:relative;top:3px;">
                                            {{'ircc' | schemaIcon}}
                                        </i><br>
-                                        IRCC
+                                        <spam class="badge">{{totalFacetCount(ct,'IRCC')}}</span> IRCC
                                     </span>
                                     </div>
                                     <div class="col-lg-1 col-md-1 col-xs-1 " >
@@ -68,7 +68,7 @@
                                         <i class="material-icons color-blue" style="font-size:16pt;position:relative;top:3px;">
                                            {{'cp' | schemaIcon}}
                                        </i><br>
-                                        CP
+                                       <spam class="badge">{{totalFacetCount(ct,'CP')}}</span>    CP
                                         </span>
                                     </div>
                                     <div class="col-lg-1 col-md-1 col-xs-1 " >
@@ -77,11 +77,11 @@
                                         <i class="material-icons color-blue" style="font-size:16pt;position:relative;top:3px;">
                                            {{'cpc' | schemaIcon}}
                                        </i><br>
-                                       CPC
+                                        <spam class="badge">{{totalFacetCount(ct,'CPC')}}</span> CPC
                                         </span>
                                     </div>
                                 </div>
-                                <div class="row table-hover table-msr" ng-repeat="country in (countries | filter:query.countryProfile_keyword  | filter: hasStatus | filter: recordTypeFilter | orderBy:sortTermFilter:orderList) ">
+                                <div class="row table-hover table-msr" ng-repeat="country in ct = (countries | filter:query.countryProfile_keyword  | filter: hasStatus | filter: recordTypeFilter | orderBy:sortTermFilter:orderList) ">
                                     <div class="row">
                                         <div class="row table-row" id="countryCode{{country.code}}" style="border-top:1px solid #ddd;padding:10px;font-weight:500;margin:0;"  ng-click="country.displayDetails=!country.displayDetails;showCountryProfile(country)" ng-class="{'bg-white':country.displayDetails}">
                                             <!--<div class="col-lg-1 col-md-1 col-xs-1 tableheader" >
@@ -96,7 +96,7 @@
                                                 <span ng-show="!country.isNPParty" >Non-Party</span>
                                                 <span ng-show="country.isNPInbetweenParty" ><br>(entry into force on: {{(country.entryIntoForce)| formatDate}})</span>
                                             </div>-->
-                                            <div class="col-lg-1 col-md-1 col-xs-1 " >{{country.FP}}
+                                            <div class="col-lg-1 col-md-1 col-xs-1 " >{{country.NFP}}
                                             </div>
                                             <div class="col-lg-1 col-md-1 col-xs-1 " >{{country.NDB}}
                                             </div>
