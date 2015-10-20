@@ -172,6 +172,7 @@ define(['app', 'underscore', '/app/js/common.js'], function(app, _) {
 
           function onWatch_items(values) {
             if (!values) return;
+            _.map($scope.termsx, function(item){item.count = undefined;});
             values.forEach(function(item) {
               if (_.has($scope.termsx, item.symbol))
                 $scope.termsx[item.symbol].count = item.count;

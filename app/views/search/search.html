@@ -70,8 +70,8 @@
                             </button>
 
                             <search-filter-themes api="thematicAreaApi" title='Thematic Areas' ng-model='thematicAreas' field='thematicAreas_ss' query='queryTheme'></search-filter-themes>
-                            <search-filter-countries api="countryApi" title='Countries' ng-model='governments' field='government_s' query='queryGovernment' external-filter="countryResultFilter"></search-filter-countries>
-                            <search-filter-regions api="regionsApi" title="Regions" ng-model="regions" field="government_REL_ss" query="queryRegion" facets="regionFacets"></search-filter-regions>
+                            <search-filter-countries api="countryApi" title='Countries' ng-model='governments' field='{{governmentsQueryField}}' query='queryGovernment' external-filter="countryResultFilter"></search-filter-countries>
+                            <search-filter-regions api="regionsApi" title="Regions" ng-model="regions" field="{{regionQueryField}}" query="queryRegion" facets="regionFacets"></search-filter-regions>
 
                             <div record-type="recordType" preview-type="previewType" document-list documents='rawDocs' filter='*' show-pagination='true'
                                 current-page='currentPage' document-Count='documentCount' order-by="orderBy" group-count="groupCount">

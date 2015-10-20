@@ -104,11 +104,8 @@ define(['app','underscore','/app/js/common.js',
             e.preventDefault();
             $element.find("#wrapper").toggleClass("toggled");
         }
-        //============================================================
-        //
-        //
-        //============================================================
-    	function query () {
+
+        function query () {
             if($scope.recordType =='country')
                 return;
 
@@ -195,19 +192,23 @@ define(['app','underscore','/app/js/common.js',
 
                 if(!$scope.schemas) {
                     var schemas = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database","focalPoint",
-                                    "resource", "meeting", "notification","pressRelease","statement" , "news", "modelContractualClause"];
+                                    "resource", "meeting", "notification","pressRelease","statement" , "news", "modelContractualClause", "communityProtocol"];
 
                     var facetQuery = {
                         query  : '(realm_ss:' + realm.value.toLowerCase() + ') AND NOT version_s:* AND (schema_s:(' +
                                  schemas.join(' ') + '))',
-                        fields : ['schema_s', 'government_s', 'thematicAreas_ss', 'government_REL_ss']
+                        fields : ['schema_s', 'government_s', 'thematicAreas_ss', 'government_REL_ss', 'regions_REL_ss']
                     };
                     searchService.facets(facetQuery)
                         .then(function(data){
                                 $scope.schemas = data.schema_s;
-                                $scope.governments = data.government_s;
                                 $scope.thematicAreas = data.thematicAreas_ss;
-                                $scope.regionFacets = data.government_REL_ss;
+
+                                self.governments = data.government_s;
+                                self.regionFacets = data.government_REL_ss;
+                                self.referenceRegionFacets = data.regions_REL_ss;
+
+                                updateRegionsFilter($scope.recordType);
                         });
                 }
             }).catch(function (error) {
@@ -215,10 +216,6 @@ define(['app','underscore','/app/js/common.js',
             });
         };
 
-        //============================================================
-        //
-        //
-        //============================================================
         function refresh() {
 
             if(refreshTimeout)
@@ -227,7 +224,24 @@ define(['app','underscore','/app/js/common.js',
             refreshTimeout = $timeout(function () { query(); }, 200);
         }
 
+        function updateRegionsFilter(recordType){
+            if(recordType=='national'){
+                    $scope.governmentsQueryField    = 'government_s';
+                    $scope.governments              = self.governments;
+                    $scope.regionQueryField         = 'government_REL_ss';
+                    $scope.regionFacets             = self.regionFacets;
+            }else
+            if(recordType=='reference'){
+                    $scope.governmentsQueryField    = 'regions_REL_ss';
+                    $scope.governments              = self.referenceRegionFacets;
+                    $scope.regionQueryField         = 'regions_REL_ss';
+                    $scope.regionFacets             = self.referenceRegionFacets;
+            }
+        }
 
+        $scope.$watch('recordType', function(newVal){
+            updateRegionsFilter(newVal);
+        });
 
 
     }]);

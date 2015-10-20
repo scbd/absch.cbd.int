@@ -164,17 +164,16 @@ define(['app'], function(app) {
 
                             $scope.terms = classes;
 
-                            //update facets
-                            ($scope.facets).forEach(function (item) {
-                                if(_.has(self.termsMap, item.symbol))
-                                    self.termsMap[item.symbol].count = item.count;
-                            });
+                            updateFacets();
                         });
                     }
                 }
             );
 
-
+            $scope.$watch('facets', function(newVal){
+                if(newVal)
+                    updateFacets();
+            });
             $scope.$on("clearFilter", function(evt, info){
 
                 if(!$scope.allTerms)
@@ -188,7 +187,15 @@ define(['app'], function(app) {
                 buildQuery();
 
             });
-            
+
+            function updateFacets(){
+                //update facets
+                ($scope.facets).forEach(function (item) {
+                    if(_.has(self.termsMap, item.symbol))
+                        self.termsMap[item.symbol].count = item.count;
+                });
+            }
+
             buildQuery();
 
         }]
