@@ -52,15 +52,18 @@
     <nav class="navbar navbar-cbd navbar-default bg-cbdgreen navbar-static-top" id="anchorTop" ng-class="{'bg-orange':!production_env }">
       <div class="container-fluid container-cbd">
           <ul class="navbar-left navlist">
-            <li><a href="http://www.cbd.int"><img src="/app/img/cbd-logo-spine-white.png" style="height:22px;position:relative;top:-2px;padding:0 5px 0 0;margin:0;"> <span class="hidden-md hidden-lg"><strong>The Convention on Biological Diversity</strong></span></a></li>
-            <li class="hidden-xs hidden-sm"><a href="http://www.cbd.int/convention/">The Convention</a></li>
-            <li class="hidden-xs hidden-sm"><a href="http://bch.cbd.int/protocol">Cartagena Protocol</a></li>
-            <li class="hidden-xs hidden-sm"><a href="http://www.cbd.int/abs/">Nagoya Protocol<a></li>
-            <li class="hidden-xs hidden-sm"><a href="http://www.cbd.int/programmes/">Programmes</a></li>
-            <li class="hidden-xs hidden-sm"><a href="http://www.cbd.int/information/">Information</a></li>
-            <li class="hidden-xs hidden-sm"><a href="http://www.cbd.int/secretariat/">Secretariat</a></li>
-           </ul>
-
+                <li class="hidden-md hidden-lg"><a href="http://www.cbd.int">
+                        <strong class="hidden-xs hidden-sm"><img src="/app/img/cbd-logo-spine-white.png" style="height:22px;position:relative;top:-2px;padding:0 5px 0 0;margin:0;"/>The Convention on Biological Diversity</strong>
+                        <strong class="visible-xs visible-sm"><img src="/app/img/cbd-logo-spine-white.png" style="height:22px;position:relative;top:-2px;padding:0 5px 0 0;margin:0;"/>SCBD</strong>
+                    </a>
+                </li>
+                <li class="hidden-xs hidden-sm"><a href="http://www.cbd.int/convention/">The Convention</a></li>
+                <li class="hidden-xs hidden-sm"><a href="http://bch.cbd.int/protocol">Cartagena Protocol</a></li>
+                <li class="hidden-xs hidden-sm"><a href="http://www.cbd.int/abs/">Nagoya Protocol<a></li>
+                <li class="hidden-xs hidden-sm"><a href="http://www.cbd.int/programmes/">Programmes</a></li>
+                <li class="hidden-xs hidden-sm"><a href="http://www.cbd.int/information/">Information</a></li>
+                <li class="hidden-xs hidden-sm"><a href="http://www.cbd.int/secretariat/">Secretariat</a></li>
+          </ul>
            <ul class="navlist navbar-right">
             <li class="pull-right" style="margin-right:0;padding-right:0;">
                     <a class="set-languages" data-toggle="dropdown" href="#">
@@ -131,16 +134,6 @@
                             <a href="#" ng-click="actionProfile()">
                                 <i class="fa fa-user" style="font-size:15px"></i>&nbsp; Profile</a>
                         </li>
-                        <!-- <li>
-                            <a ng-href="/mailbox">
-                                <i class="fa fa-envelope" style="font-size:15px"></i>&nbsp; Mailbox</a>
-                        </li> -->
-                        <!-- <li class="dropdown-submenu">
-                            <a tabindex="-1" href="#"><i class="fa fa-lock" style="font-size:15px"></i>&nbsp; My Roles</a>
-                            <ul class="dropdown-menu bg-darkgrey" role="menu" style="min-width:200px">
-                              <li ng-repeat="role in user.roles|orderBy:'toString()'"><a tabindex="-1" href="#">{{role}}</a></li>
-                            </ul>
-                        </li> -->
                         <li>
                             <a href="#" ng-click="actionPassword()">
                                 <i class="fa fa-user" style="font-size:15px"></i>&nbsp; Password</a>
@@ -188,7 +181,7 @@
      <!-- PORTAL LINKS-->
     <nav id="PortalLinks1" class="navbar navbar-links navbar-default navbar-static-top bg-darkgrey"  ng-class="{'bg-orange':!production_env }">
         <div class="container-fluid container-links color-grey">
-               <ul class="navbar-left navlist nav navbar-nav" >
+               <ul class="navbar-left navlist nav navbar-nav" style="display:flex">
                    <li class="bold color-orange hidden-sm hidden-md hidden-lg">
                        <span ng-show="production_env" > ABS-CH</span>
                        <span ng-show="development_env" > DEVELOPMENT</span>
@@ -232,7 +225,7 @@
     <!-- PORTAL LINKS FIXED-->
     <nav id="PortalLinks2" class="navbar navbar-links navbar-default navbar-static-top bg-darkgrey navbar-fixed-top" ng-class="{'bg-orange':!production_env }">
         <div class="container-fluid container-links color-grey">
-                <ul class="navbar-left navlist nav navbar-nav"  >
+                <ul class="navbar-left navlist nav navbar-nav"  style="display:flex">
                     <li class="bold e">
                         <span ng-show="production_env" class="color-orange"> ABS-CH</span>
                         <span ng-show="development_env" class="bg-black"> DEVELOPMENT</span>
