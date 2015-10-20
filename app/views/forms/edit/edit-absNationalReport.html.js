@@ -52,8 +52,10 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
                 document.question27.cpcsOnAbsChCount = undefined;
         }
 
-        if(document.government)
+        if(document.government){
             document.title = {en: $filter("term")(document.government) + " Interim national report on the implementation of the Nagoya Protocol"};
+            updateRecords(document.government);
+        }
 
         return document;
     };
@@ -271,7 +273,7 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
     //==================================
     $scope.Q25Clear = function (answer) {
         if(!answer && $scope.document && $scope.document.question25){
-            $scope.document.question25.measures  = undefined;
+            $scope.document.question25.hasMeasures  = undefined;
             $scope.document.question25.violation = undefined;
         }
     };
@@ -539,8 +541,7 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
 
         if(government){
             $q.when(getAbsDocuments(government)).then(function (data) {
-                $scope.absDocuments = data;
-                //console.info(data.length);
+                $scope.absDocuments = data;                
             });
         }
     }
@@ -585,7 +586,6 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
 
         return deferred.promise;
     }
-
 
   }]);
 });
