@@ -90,9 +90,8 @@ define(["app",'/app/js/common.js'], function (app) {
 
                     }
 
-                var government = ''
+                var government = '';
 				var documentId;
-
 
 				if(document.documentID)
 					documentId = document.documentID;
@@ -111,11 +110,14 @@ define(["app",'/app/js/common.js'], function (app) {
                     government = document.metadata.government;
                 else if(document.body && document.body.government)
                     government = document.body.government.identifier;
-
+					
                 var unique = 'ABSCH' + (realm.value.toUpperCase().replace('ABS','').replace('-','')) +
 						'-' + $filter("schemaShortName")($filter("lowercase")(document.type||document.schema_s||document.schema)) +
                         '-' + (government != '' ?  $filter("uppercase")(government) : 'SCBD') +
-                        '-' + documentId + '-' + document.revision;
+                        '-' + documentId;
+				if( document.revision)		
+					unique = unique + '-' + document.revision;
+					
 				cacheMap[term.identifier] = unique;
 
 				return unique;
@@ -204,7 +206,7 @@ define(["app",'/app/js/common.js'], function (app) {
 
 			if(!schema)
 				return schema;
-			if(schema.toLowerCase()=="focalpoint"				) return "National Focal Point";
+			if(schema.toLowerCase()=="focalpoint"				) return "ABS National Focal Point";
 			if(schema.toLowerCase()=="authority"				) return "Competent National Authority";
 			if(schema.toLowerCase()=="contact"					) return "Contact";
 			if(schema.toLowerCase()=="database"					) return "National Website or Database";
@@ -236,7 +238,7 @@ define(["app",'/app/js/common.js'], function (app) {
 		return function( schema ) {
 			if(!schema)
 				return schema;
-			if(schema.toLowerCase()=="focalpoint"				) return "National Focal Points";
+			if(schema.toLowerCase()=="focalpoint"				) return "ABS National Focal Points";
 			if(schema.toLowerCase()=="authority"				) return "Competent National Authorities";
 			if(schema.toLowerCase()=="contact"					) return "Contact";
 			if(schema.toLowerCase()=="database"					) return "National Websites or Databases";
@@ -325,7 +327,7 @@ define(["app",'/app/js/common.js'], function (app) {
 			if(!schema)
 				return schema;
 
-			if(schema.toLowerCase()=="focalpoint"				) return "FP";
+			if(schema.toLowerCase()=="focalpoint"				) return "NFP";
 			if(schema.toLowerCase()=="authority"				) return "CNA";
 			if(schema.toLowerCase()=="contact"				   	) return "CON";
 			if(schema.toLowerCase()=="database"				   	) return "NDB";
@@ -346,7 +348,7 @@ define(["app",'/app/js/common.js'], function (app) {
 			if(schema.toLowerCase()=="communityprotocol"		) return "CPP";
 
 			if(schema.toUpperCase()=="NEWS"				        ) return "news";
-            if(schema.toUpperCase()=="FP"				        ) return "focalPoint";
+            if(schema.toUpperCase()=="NFP"				        ) return "focalPoint";
 			if(schema.toUpperCase()=="CNA"				    	) return "authority";
 			if(schema.toUpperCase()=="CON"				    	) return "contact";
 			if(schema.toUpperCase()=="NDB"				    	) return "database";

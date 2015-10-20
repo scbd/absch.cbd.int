@@ -12,7 +12,7 @@ app.directive('searchNationalRecordsFilter', function ($http) {
         },
         controller : ['$scope', '$element', '$location', 'Thesaurus', "IStorage", "guid", "$q", "Enumerable", "$filter","underscore","realm","$routeParams",
          function ($scope, $element, $location, Thesaurus, storage, guid, $q, Enumerable, $filter,_,realm, $routeParams)
-        {   
+        {
             $scope.nationalSearch = {
                 NFP : {
                     // type : {
@@ -79,7 +79,7 @@ app.directive('searchNationalRecordsFilter', function ($http) {
                                                                            return $scope.collections.regions = $filter("orderBy")(o[1].data, "name");
                                                                                    // Enumerable.from($filter("orderBy")(o[0].data, "name")).union(
                                                                                    // Enumerable.from($filter("orderBy")(o[1].data, "name"))).toArray();
-                                                                             
+
                                                            });
                                                       },
                 absSubjects             : function () { return $http.get("/api/v2013/thesaurus/domains/CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924/terms", { cache: true }).then(function(o){ return o.data; }); },
@@ -88,9 +88,9 @@ app.directive('searchNationalRecordsFilter', function ($http) {
                                                                     })},
             };
 
-            
 
-            $scope.focalPoint              = { identifier: 'focalPoint',               title: 'National Focal Points',
+
+            $scope.focalPoint              = { identifier: 'focalPoint',               title: 'ABS National Focal Points',
                                                 subFilters : [
                                                                 { name: 'focalPointNP',         type: 'checkbox',  field: 'type_ss', value : 'NP-FP OR schema_s:ABS-FP' },
                                                                 { name: 'focalPointCBD'  ,      type: 'checkbox' , field: 'type_ss', value : ['CBD-FP1', 'CBD-FP1']}
@@ -166,12 +166,12 @@ app.directive('searchNationalRecordsFilter', function ($http) {
                                                             { name: 'cppresourceTypes',   type: 'multiselect' , field: 'resourceTypes_ss'}
                                                         ]
                                              }
-                                             
-            
+
+
             $scope.terms  = [ $scope.focalPoint, $scope.authority, $scope.database, $scope.measure, $scope.absPermit, $scope.absCheckpoint,
                               $scope.absCheckpointCommunique, $scope.resource, $scope.organization, $scope.meeting, $scope.notification,
                               $scope.pressRelease, $scope.statement, $scope.news, $scope.modelContractualClause, $scope.communityProtocol ];
-            
+
 
 
 

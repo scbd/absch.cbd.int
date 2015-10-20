@@ -36,21 +36,21 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js','/app/views/forms/e
       if (/^\s*$/g.test(document.notes))
         document.notes = undefined;
 
-      if(!$scope.isOtherSelected(document.languages))
-          document.languageName = undefined;
+        document.languages = undefined;
+        document.languageName = undefined;
 
       if(!$scope.isOtherSelected(document.resourceTypes))
           document.resourceTypeName = undefined;
-      
+
       if(document.organizations && document.organizations.length <=0)
-          document.organizations = undefined;    
-          
+          document.organizations = undefined;
+
         var documentCopy = _.clone(document)
 
         delete documentCopy.organizationsRef;
       return documentCopy;
     };
-    
+
 
   }]);
 });
