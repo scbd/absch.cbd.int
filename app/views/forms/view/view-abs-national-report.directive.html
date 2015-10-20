@@ -3,7 +3,7 @@
 		National Report
 		<span class="color-black"> (NR) </span>
 		</label>
-		</div>
+	</div>
 	<div class="record-body panel-body">
 
 		<div class="panel panel-info">
@@ -140,7 +140,7 @@
 				<div>
 					<label>7. Has your country made available to the ABS Clearing-House permits or their equivalent issued at the time of access as evidence of the decision to grant prior informed consent (PIC) and of the establishment of mutually agreed terms (MAT)?</label>
 					<ul>
-						<div class="km-value" ng-show="document.question7.notApplicable">Not applicable, since no access requirement are in place</div>
+						<div class="km-value" ng-show="document.question7.notApplicable">Not applicable, since no access requirements are in place</div>
 						<div class="km-value km-pre" ng-show="!document.question7.notApplicable">{{conditionalBooleanToText(document.question3.answer,document.question7.answer)}}</div>
 						<div ng-show="document.question7.challengesInfo">
 							<label>Summary of the main difficulties and challenges encountered for making this information available</label>
@@ -167,7 +167,7 @@
 				<div>
 					<label>8. Has your country made available to the ABS Clearing-House permits or their equivalent for the constitution of an internationally recognized certificate of compliance in accordance with Article 17.2?</label>
 					<ul>
-						<div class="km-value" ng-show="document.question8.notApplicable">Not applicable, since no access requirement are in place</div>
+						<div class="km-value" ng-show="document.question8.notApplicable">Not applicable, since no access requirements are in place</div>
 						<div class="km-value km-pre" ng-show="!document.question8.notApplicable">{{booleanToText(document.question8.answer)}}</div>
 		                <div ng-show="document.question8.furtherInfo">
 							<label>Further information</label>
@@ -675,7 +675,7 @@
 									<label>Has your country cooperated in specific cases of alleged violation of ABS measures as provided in Article 16.3?</label>
 									<ul>
 										<div class="km-value km-pre">{{booleanToText(document.question25.violation.answer)}}</div>
-										<div ng-show="document.question24.violation.furtherInfo">
+										<div ng-show="document.question25.violation.furtherInfo">
 				                            <label>Further information</label>
 				                            <div class="km-value">{{document.question25.violation.furtherInfo | lstring:locale}}</div>
 				                        </div>
@@ -704,20 +704,22 @@
 							<ul>
 								<div class="km-value km-pre">{{booleanToText(document.question26.answer)}}</div>
 								<div ng-show="document.question26.answer">
-									<div ng-show="document.question26.additionalInfo">
-										<label>Further information</label>
-										<div class="km-value">{{document.question26.additionalInfo | lstring:locale}}</div>
-									</div>
-									<div>
-										<ul>
-											<label>Has your country taken measures to address situations of non-compliance?</label>
-											<div class="km-value km-pre">{{booleanToText(document.question26.violation.answer)}}</div>
-											<div ng-show="document.question26.violation.additionalInfo">
-					                            <label>Further information</label>
-					                            <div class="km-value">{{document.question26.violation.additionalInfo | lstring:locale}}</div>
-					                        </div>
-										</ul>
-									</div>
+									<ul>
+										<div ng-show="document.question26.additionalInfo">
+											<label>Further information</label>
+											<div class="km-value">{{document.question26.additionalInfo | lstring:locale}}</div>
+										</div>
+										<label>Has your country taken measures to address situations of non-compliance?</label>	
+										<div class="km-value km-pre">{{booleanToText(document.question26.violation.answer)}}</div>
+										<div>									
+											<ul>	
+												<div ng-show="document.question26.violation.additionalInfo">
+						                            <label>Further information</label>
+						                            <div class="km-value">{{document.question26.violation.additionalInfo | lstring:locale}}</div>
+						                        </div>
+											</ul>
+										</div>
+									</ul>									
 								</div>
 								<div ng-show="document.question26.furtherInfo">
 									<label>Further information</label>
@@ -742,14 +744,16 @@
 					    	<ul>
 								<div class="km-value km-pre">{{booleanToText(document.question27.answer)}}</div>
 				                <div ng-show="document.question27.answer">
-				                    <div>
-						            	<label>Has your country made use of the checkpoint communique?</label>
-						            	<div class="km-value">{{document.question27.cpc.hasOwnProperty('option')? document.question27.cpc.option : "Not selected"}} </div>
-					                </div>
-					                <div ng-show="document.question27.cc.furtherInfo">
-					                    <label>Further information</label>
-					                    <div class="km-value">{{document.question27.cpc.furtherInfo | lstring:locale}}</div>
-					                </div>
+				                	<ul>				                	
+					                    <div>
+							            	<label>Has your country made use of the checkpoint communique?</label>
+							            	<div class="km-value">{{document.question27.cpc.hasOwnProperty('option')? document.question27.cpc.option : "Not selected"}} </div>
+						                </div>
+						                <div ng-show="document.question27.cpc.furtherInfo">
+						                    <label>Further information</label>
+						                    <div class="km-value">{{document.question27.cpc.furtherInfo | lstring:locale}}</div>
+						                </div>
+				                	</ul>
 				                </div>
 				                <div ng-show="document.question27.challengesInfo">
 				                    <label>Summary of the main difficulties and challenges</label>
@@ -856,7 +860,7 @@
 						<div>
 							<label>31. Is your country encouraging the inclusion of provisions in MAT to cover dispute resolution as provided in Article 18.1 (a) (b) and (c)?</label>
 							<ul>
-								<div class="km-value" ng-show="document.question31.notApplicable">Not applicable, since no access requirement are in place</div>
+								<div class="km-value" ng-show="document.question31.notApplicable">Not applicable, since no access requirements are in place</div>
 								<div class="km-value km-pre" ng-show="!document.question31.notApplicable">{{booleanToText(document.question31.answer)}}</div>
 								<div ng-show="document.question31.furtherInfo">
 									<label>Further information</label>
@@ -1981,7 +1985,7 @@
 					<ul>
 						<div class="km-value">{{text(document.question65) | lstring:locale}}</div>
 					</ul>
-				</div>
+				</div>	
 
 			</div>
 		</div>
@@ -1994,9 +1998,9 @@
 				<div>
 					<label>66. Please provide any comment that you may have regarding the format of  this report:</label>
 					<ul>
-						<div class="km-value">{{text(document.question66) | lstring:locale}}
+						<div class="km-value">{{text(document.question66) | lstring:locale}}</div>
 					</ul>
-				</div>
+				</div>	
 			</div>
 		</div>
 
