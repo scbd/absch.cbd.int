@@ -9,7 +9,7 @@ define(['app'], function (app) {
 			},
 			controller: ['$scope', '$filter','schemaTypes', 'realm', '$q', 'underscore', function($scope, $filter, schemaTypes, realm, $q, _){
                 var referenceRecordSchemas = ['resource','modelContractualClause', 'communityProtocol'];
-                
+
 				$scope.wellChanged = function(facet){
 					$scope.currentFacet = facet;
 				}
@@ -103,7 +103,7 @@ define(['app'], function (app) {
 							if(_.contains(referenceRecordSchemas,facet))
 		                    	tempFacets[facet] = {"facetCount" : resourceFacets[i + 1],
 								"id" : getSequence(facet), searchUrl:'search/reference-records'};
-                            
+
 		                }
 
 						var ratificationCount=0;
@@ -135,15 +135,15 @@ define(['app'], function (app) {
 
     			}
                 $scope.isReferenceRecord = function(schema){
-                    return _.contains(referenceRecordSchemas,schema)                    
+                    return _.contains(referenceRecordSchemas,schema)
                 }
-                
+
 				function getSequence(format){
 					switch(format.toLowerCase()){
 
 						case  'ratification':
 							return 1;
-						case  'FP':
+						case  'NFP':
 							return 2;
 						case  'authority':
 							return 3;
