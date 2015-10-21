@@ -18,11 +18,11 @@ app.directive('searchFilterSchemas', function ($http) {
         {
         },
         controller : ['$scope', '$element', '$location', 'Thesaurus', "IStorage", "guid", "$q", "Enumerable",
-                      "$filter","underscore","realm","$routeParams",'$route', 'commonjs', 'thesaurusService','searchService',
+                      "$filter","underscore","realm","$routeParams",'$route', 'commonjs', 'thesaurusService','searchService', '$timeout',
          function ($scope, $element, $location, Thesaurus, storage, guid, $q, Enumerable, $filter,_,realm,
-              $routeParams, $route, commonjs, thesaurusService, searchService)
+              $routeParams, $route, commonjs, thesaurusService, searchService, $timeout)
         {
-
+            var skipInitialQuery = false;
             $scope.groupby=true;
             $scope.orderReferenceBy = 'title_s asc';
             $scope.recordType = $route.current.$$route.type;
@@ -521,12 +521,15 @@ app.directive('searchFilterSchemas', function ($http) {
                 }
 
                 if(documentSchema=='PARTIES'){
-                   $scope.queryPartyStatus ="government_s:(ae al bt by cd cg ch ci bw do dk hu es eg fj fm ga et gm gn gw hn id gt ke jo in km kz la kh mg mh mm mn mu mw mx mz na ne no pa pe sc rw sy tj ug uy za ws bj bi bf gy vn vu sd eur ls kg)";
-                   // $scope.queryPartyStatus = $scope.queryStatus('parties');
+                   $scope.queryStatus('parties');
+                   skipInitialQuery = true;
+                   $timeout(function(){
+                       $scope.partyStatus='parties';
+                   },500)
                 }
             }
-
-            $scope.buildQuery();
+            if(!skipInitialQuery)
+                $scope.buildQuery();
 
             $scope.terms.forEach(function (item) {
                 if(item.subFilters){
