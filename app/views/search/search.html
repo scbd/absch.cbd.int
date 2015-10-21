@@ -19,22 +19,23 @@
     }
 
     #sidebar-wrapper {
-        /*width: 280px;*/
+        width: 300px;
         background-color: white;
     }
 
     .sidebar-nav {
-        /*width: 275px;*/
+        width: 300px;
         /*padding-left: 5px;*/
     }
+
 </style>
 
 <div ng-controller="FindController">
     <div smooth-scroll duration="100" offset="200"></div>
     <div>
         <div id="wrapper" >
-            <div id="sidebar-wrapper">
-                <div class="sidebar-nav">
+            <div id="sidebar-wrapper" class="bg-grey">
+                <div class="sidebar-nav" style="margin-top:20px;">
                     <search-filter-schemas ng-model='schemas' field='schema_s'
                     query='querySchema' preview-type="previewType"
                     selected-filters="selectedSchemaFilters"
