@@ -180,15 +180,15 @@
                             //create seprate collection for measure matrix
                             if(document.schema_s=='measure'){
                                 
-                                if(document.type_EN_t =="Policy Document")
-                                    document.type_sort = 1;
-                                 if(document.type_EN_t =="Law")
-                                    document.type_sort = 2;
-                                 if(document.type_EN_t =="Regulatory or Administrative Measures")
-                                    document.type_sort = 3;
-                                 if(document.type_EN_t =="Guidelines")
-                                    document.type_sort = 4;
                                  if(document.type_EN_t =="Strategy / Action Plan")
+                                    document.type_sort = 1;
+                                 if(document.type_EN_t =="Policy Document")
+                                    document.type_sort = 2;
+                                 if(document.type_EN_t =="Law")
+                                    document.type_sort = 3;
+                                 if(document.type_EN_t =="Regulatory or Administrative Measures")
+                                    document.type_sort = 4;
+                                 if(document.type_EN_t =="Guidelines")
                                     document.type_sort = 5;
                                  if(document.type_EN_t =="Explanatory Information")
                                     document.type_sort = 6;

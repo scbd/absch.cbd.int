@@ -206,15 +206,15 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
 
 
                                                             meta2 =document.type_EN_t;
-                                                            if(document.type_EN_t =="Policy Document")
-                                                                sort2 = 1;
-                                                            if(document.type_EN_t =="Law")
-                                                                sort2 = 2;
-                                                            if(document.type_EN_t =="Regulatory or Administrative Measures")
-                                                                sort2 = 3;
-                                                            if(document.type_EN_t =="Guidelines")
-                                                                sort2 = 4;
                                                             if(document.type_EN_t =="Strategy / Action Plan")
+                                                                sort2 = 1;
+                                                            if(document.type_EN_t =="Policy Document")
+                                                                sort2 = 2;
+                                                            if(document.type_EN_t =="Law")
+                                                                sort2 = 3;
+                                                            if(document.type_EN_t =="Regulatory or Administrative Measures")
+                                                                sort2 = 4;
+                                                            if(document.type_EN_t =="Guidelines")
                                                                 sort2 = 5;
                                                             if(document.type_EN_t =="Explanatory Information")
                                                                 sort2 = 6;
