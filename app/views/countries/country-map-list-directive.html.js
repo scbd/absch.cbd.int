@@ -17,10 +17,10 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
 
                     //$scope.countryProfile_keyword = 'can';
 
-                    var taiwan = "TW";
-                    var china = "CN";
-                    var denmark = "DK";
-                    var greenland = "GL";
+                    // var taiwan = "TW";
+                    // var china = "CN";
+                    // var denmark = "DK";
+                    // var greenland = "GL";
                     $scope.lastAction = 'party';
 
                     $scope.orderList = false;
@@ -394,9 +394,11 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
                         var count = _.reduce(typeFacets,function(memo, country){ return memo + country[type]; },0);
                         if(count>0)
                             return count;
-                            
+
                          return;
                     };
+
+                    $element.find('[data-toggle="tooltip"]').tooltip()
                 }
             ]
 
