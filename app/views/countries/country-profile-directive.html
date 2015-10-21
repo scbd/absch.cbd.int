@@ -68,9 +68,9 @@
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
                                                 <h5 class="panel-title">
-                                                    <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
+                                                    <!--<i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
                                                        {{'focalpoint' | schemaIcon}}
-                                                   </i>
+                                                   </i>-->
                                                      {{getTitle(contact.schema_s,contact.type_ss,contact.schema_EN_t)}}
                                                 </h5>
                                             </div>
@@ -122,9 +122,9 @@
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
                                                 <h5 class="panel-title">
-                                                    <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
+                                                    <!--<i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
                                                           {{'cna' | schemaIcon}}
-                                                      </i>
+                                                      </i>-->
                                                     {{getTitle(contact.schema_s,contact.type_ss,contact.schema_EN_t)}}
                                                 </h5>
                                             </div>
@@ -261,9 +261,9 @@
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
                                                 <h5 class="panel-title">
-                                                    <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
+                                                    <!--<i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
                                                        {{'ndb' | schemaIcon}}
-                                                   </i>
+                                                   </i>-->
                                                     {{getTitle(contact.schema_s,contact.type_ss,contact.schema_EN_t)}}
                                                 </h5>
                                             </div>
@@ -320,9 +320,10 @@
                                     <div class="row border">
                                         <div ng-click="displayDetails=!displayDetails;showDetails(permit)" class="row table-row">
                                             <div class="col-xs-10">
-                                                <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
+                                                <!--<i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
                                                     {{'ircc' | schemaIcon}}
-                                                </i> <span style="text-transform:uppercase;font-weight:500;">{{permit.uniqueIdentifier_s}}</span> ({{permit.title_t}})
+                                                </i> -->
+                                                <span style="text-transform:uppercase;font-weight:500;">{{permit.uniqueIdentifier_s}}</span> ({{permit.title_t}})
                                                 <div class="color-grey">{{permit.geneticResources_t}}</div>
 
                                                 <i class="fa fa-refresh fa-spin" ng-show="displayDetails&& !permit.data" />
@@ -369,9 +370,9 @@
                                             <div class="panel-heading">
                                                 <h5 class="panel-title">
 
-                                                    <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
+                                                    <!--<i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
                                                         {{'cp' | schemaIcon}}
-                                                    </i>
+                                                    </i>-->
 
                                                     {{getTitle(contact.schema_s,contact.type_ss,contact.schema_EN_t)}}
                                                 </h5>
@@ -455,9 +456,10 @@
                                             </div>
                                             <div class="col-lg-2 col-md-2 col-xs-2">
                                                 <span ng-repeat="checkpoint in communique.checkpoint_CEN_ss">
-                                                    <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
+                                                    <!--<i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
                                                         {{'cpc' | schemaIcon}}
-                                                    </i> {{parseJSON(checkpoint)|lstring}}
+                                                    </i> -->
+                                                    {{parseJSON(checkpoint)|lstring}}
                                                     <br/>
                                                 </span>
                                             </div>
