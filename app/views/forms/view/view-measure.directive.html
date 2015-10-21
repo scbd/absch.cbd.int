@@ -199,18 +199,17 @@
 			</div>
 		</div>
 
-		<div ng-show="document.authorities" class="row">
+		<div ng-show="document.authorities" >
 			<legend>Regulatory contact information</legend>
 			<div  ng-repeat="item in document.authorities">
-				
-				<div class="col-xs-12">
-					<div view-contact-reference ng-model="item" locale="locale" class="well"></div>
+				<div>
+					<div view-contact-reference ng-model="item" locale="locale" class="km-value"></div>
 				</div>
 			</div>
 		</div>
 
 		<div ng-show="document.absMeasures">
-			<label>Elements of the measure</label>
+			<legend>Elements of the measure</legend>
 				<div class="km-value" style="border:none">
 					<!--<ul ng-if="true">
 						<li ng-repeat="term in document.absMeasures">{{term|term:locale}}
