@@ -290,19 +290,13 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
                         var tempFacets = {};
                         // console.log($scope.countryFacets['government_s,schema_s'])
                         var count = 0;
-                        var countryC = '';
                         _.each($scope.countryFacets['government_s,schema_s'], function(data) {
-                            // if(!data.pivot)
-                            //     count++
-                            if (data.value == 'ad')
-                                console.log(data);
-                            countryC += data.value + ',';
+                            if (data.value == 'eur')
+                                data.value = 'eu';                                
                             _.each(data.pivot, function(facets) {
-
                                 if (facets.value == 'focalPoint' && tempFacets[facets.value]) {
-                                    count++
-                                    // console.log(tempFacets[facets.value]);
-                                } // console.log((tempFacets[facets.value] ? tempFacets[facets.value].facetCount : 0) + facets.count);
+                                    count++;
+                                }
                                 tempFacets[facets.value] = {
                                     "facetCount": (tempFacets[facets.value] ? tempFacets[facets.value].facetCount : 0) + facets.count,
                                     "countryCount": (tempFacets[facets.value] ? tempFacets[facets.value].countryCount : 0) + 1,
