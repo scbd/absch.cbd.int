@@ -254,18 +254,27 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
 
                     //====================================================
                     $scope.hasStatus = function(entity) {
-                        return entity && (!$scope.query ||
-                                            (
-                                                ($scope.query.isParties && entity.isNPParty)||
-                                                ($scope.query.isNonParties && !entity.isNPParty)||
-                                                ($scope.query.isSignatories && entity.isNPSignatory)||
-                                                ($scope.query.isInbetweenParties && entity.isNPInbetweenParty)
-                                            )||
-                                            (
-                                                !$scope.query.isParties && !$scope.query.isNonParties &&
-                                                !$scope.query.isSignatories && !$scope.query.isInbetweenParties
-                                            )
-                                        )
+                        var query = $scope.query;
+                        if(!entity)
+                            return false;
+
+                        if(query && _.size($scope.query)>0){
+                            if(_.size($scope.query)>1){
+                                return (    (!query.isParties           || query.isParties && entity.isNPParty)&&
+                                            (!query.isNonParties        || query.isNonParties && !entity.isNPParty)&&
+                                            (!query.isSignatories       || query.isSignatories && entity.isNPSignatory)&&
+                                            (!query.isInbetweenParties  || query.isInbetweenParties && entity.isNPInbetweenParty)
+                                        );
+                            }
+                            else{
+                                return (    (query.isParties && entity.isNPParty)||
+                                            (query.isNonParties && !entity.isNPParty)||
+                                            (query.isSignatories && entity.isNPSignatory)||
+                                            (query.isInbetweenParties && entity.isNPInbetweenParty)
+                                        );
+                            }
+                        }
+                        return true;
                     }
                     //====================================================
                     $scope.listAll = function(status) {
@@ -398,7 +407,7 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
                          return;
                     };
 
-                    $element.find('[data-toggle="tooltip"]').tooltip()
+                    $element.find('[data-toggle="tooltip"]').tooltip();
                 }
             ]
 
