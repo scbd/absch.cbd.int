@@ -258,7 +258,7 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
                         if(!entity)
                             return false;
 
-                        if(query && _.size($scope.query)>0){
+                        if(query && (query.isParties || query.isNonParties || query.isSignatories || query.isInbetweenParties )){
                             if(_.size($scope.query)>1){
                                 return (    (!query.isParties           || query.isParties && entity.isNPParty)&&
                                             (!query.isNonParties        || query.isNonParties && !entity.isNPParty)&&
