@@ -33,17 +33,17 @@ define(['app', 'underscore'], function(app, _) {
             'roles': [{
                 'User': 'User'
             }, {
-                'Administrator': 'Administrator'
+                'Administrator': 'Administrator-dev'
             }, {
-                'AbsAdministrator': 'AbsAdministrator'
+                'AbsAdministrator': 'AbsAdministrator-dev'
             }, {
-                'AbsPublishingAuthorities': 'AbsPublishingAuthorities'
+                'AbsPublishingAuthorities': 'AbsPublishingAuthorities-dev'
             }, {
-                'abschiac': 'abschiac'
+                'abschiac': 'abschiac-dev'
             }, {
-                'AbsNationalAuthorizedUser': 'AbsNationalAuthorizedUser'
+                'AbsNationalAuthorizedUser': 'AbsNationalAuthorizedUser-dev'
             }, {
-                'AbsNationalFocalPoint': 'AbsNationalFocalPoint'
+                'AbsNationalFocalPoint': 'AbsNationalFocalPoint-dev'
             }],
             'nationalSchemas': nationalSchemas,
             'referenceSchemas': referenceSchemas
@@ -53,17 +53,17 @@ define(['app', 'underscore'], function(app, _) {
             'roles': [{
                 'User': 'User'
             }, {
-                'Administrator': 'Administrator'
+                'Administrator': 'Administrator-dev'
             }, {
-                'AbsAdministrator': 'AbsAdministrator'
+                'AbsAdministrator': 'AbsAdministrator-dev'
             }, {
-                'AbsPublishingAuthorities': 'AbsPublishingAuthorities'
+                'AbsPublishingAuthorities': 'AbsPublishingAuthorities-dev'
             }, {
-                'abschiac': 'abschiac'
+                'abschiac': 'abschiac-dev'
             }, {
-                'AbsNationalAuthorizedUser': 'AbsNationalAuthorizedUser'
+                'AbsNationalAuthorizedUser': 'AbsNationalAuthorizedUser-dev'
             }, {
-                'AbsNationalFocalPoint': 'AbsNationalFocalPoint'
+                'AbsNationalFocalPoint': 'AbsNationalFocalPoint-dev'
             }],
             'nationalSchemas': nationalSchemas,
             'referenceSchemas': referenceSchemas
@@ -73,17 +73,17 @@ define(['app', 'underscore'], function(app, _) {
             'roles': [{
                 'User': 'User'
             }, {
-                'Administrator': 'Administrator'
+                'Administrator': 'Administrator-dev'
             }, {
-                'AbsAdministrator': 'AbsAdministrator'
+                'AbsAdministrator': 'AbsAdministrator-dev'
             }, {
-                'AbsPublishingAuthorities': 'AbsPublishingAuthorities'
+                'AbsPublishingAuthorities': 'AbsPublishingAuthorities-dev'
             }, {
-                'abschiac': 'abschiac'
+                'abschiac': 'abschiac-dev'
             }, {
-                'AbsNationalAuthorizedUser': 'AbsNationalAuthorizedUser'
+                'AbsNationalAuthorizedUser': 'AbsNationalAuthorizedUser-dev'
             }, {
-                'AbsNationalFocalPoint': 'AbsNationalFocalPoint'
+                'AbsNationalFocalPoint': 'AbsNationalFocalPoint-dev'
             }],
             'nationalSchemas': nationalSchemas,
             'referenceSchemas': referenceSchemas
