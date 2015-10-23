@@ -616,7 +616,25 @@ app.directive('searchFilterSchemas', function ($http) {
 
             });
 
+            $scope.changeRecordType = function(recordType){
 
+                $scope.recordType = recordType;
+                if(recordType == 'countryProfile'){
+                    $scope.showNationalFilters=false;
+                    $scope.showReferenceFilters=false;
+                    $location.update_path('/search/countries',true);
+                }
+                else if(recordType == 'national'){
+                    $scope.showNationalFilters=true;
+                    $scope.showReferenceFilters=false;
+                    $location.update_path('/search/national-records',true);
+                }
+                else if(recordType == 'reference'){
+                    $scope.showNationalFilters=false;
+                    $scope.showReferenceFilters=true;
+                    $location.update_path('/search/reference-records',true);
+                }
+            }
 
             ////country profile search
 

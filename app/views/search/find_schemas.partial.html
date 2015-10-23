@@ -33,7 +33,7 @@ label{width:100%;}
        <div class="panel panel-default " style="border-radius:0!important;border:0; ">
             <div class="panel-heading bg-medgrey" role="tab " id="headingOne " style="border-radius:0!important;border:0; padding:18px; ">
                 <span class="panel-title " >
-                    <a role="button " data-toggle="collapse " data-parent="#accordion " ng-click="showNationalFilters=false;showReferenceFilters=false;recordType = 'countryProfile'; "
+                    <a role="button " data-toggle="collapse " data-parent="#accordion " ng-click="changeRecordType('countryProfile');"
                     aria-expanded="false " aria-controls="collapseOne " style="font-size:20px; cursor:pointer; ">
                     <span class="color-white "> <i class="fa fa-chevron-circle-up pad-left " ></i> Country Profiles</span>
                     </a>
@@ -46,27 +46,27 @@ label{width:100%;}
 
                         <div style="padding-bottom:10px;">
                         <div style="color:#333;font-size:11px;font-weight:bold;margin-right:0;padding-bottom:10px;padding-top:12px;">Filter country name</div>
-                        <input ng-model="countryProfileSearch.countryProfile_keyword" placeholder="country name" style="width:100%;border:0;border-bottom:1px solid #ddd;">
+                        <input id="countryName" ng-model="countryProfileSearch.countryProfile_keyword" placeholder="country name" style="width:100%;border:0;border-bottom:1px solid #ddd;">
                         </div>
 
                         <div class="btn-group" style="width:100%;padding:0;margin:0;">
-                            <span> <input type="checkbox" ng-model="countryProfileSearch.isParties" >
+                            <span> <input id="countryStatusParty"  type="checkbox" ng-model="countryProfileSearch.isParties" >
                                 <i class="fa fa-square color-blue" ></i> Party <span class="badge pull-right">{{countryProfileFacets.parties}}</span>
                             </span><br>
-                            <span> <input type="checkbox" ng-model="countryProfileSearch.isNonParties"  > <i class="fa fa-square color-grey" ></i> Non-Party
+                            <span> <input id="countryStatusNonParty" type="checkbox" ng-model="countryProfileSearch.isNonParties"  > <i class="fa fa-square color-grey" ></i> Non-Party
                                 <span class="badge pull-right">{{countryProfileFacets.nonParties}}</span>
                             </span><br>
-                            <span> <input type="checkbox" ng-model="countryProfileSearch.isSignatories" > <i class="fa fa-square btn-info" ></i> Signatory
+                            <span> <input id="countryStatusSignatory" type="checkbox" ng-model="countryProfileSearch.isSignatories" > <i class="fa fa-square btn-info" ></i> Signatory
                                 <span class="badge pull-right">{{countryProfileFacets.signatories}}</span>
                             </span><br>
-                            <span> <input type="checkbox" ng-model="countryProfileSearch.isInbetweenParties"  > <i class="fa fa-square color-green" ></i> Ratified but not yet party
+                            <span> <input id="countryStatusInBetweenParty" type="checkbox" ng-model="countryProfileSearch.isInbetweenParties"  > <i class="fa fa-square color-green" ></i> Ratified but not yet party
                                 <span class="badge pull-right">{{countryProfileFacets.inbetweenParties}}
                             </span></span><br>
 
                         </div>
 
                         <div class="btn-group" style="width:100%;padding:10px 0 10px 0;margin:0;">
-                            <button type="button" class="btn btn-default dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                            <button id="countryrecordType" type="button" class="btn btn-default dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                             style="width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;padding:0;margin:0;">
                                 <div style="font-size:11px;color:#333;font-weight:bold;padding:0 0 10px 0;margin:0;">Filter by record type</div>
                                 <div ng-show="!countryProfileSearch.recordType" style="color:#AAA;font-weight:bold;padding:0;margin:0;">Select record type <span class="pull-right"><i class="caret"></i></span></div>
@@ -103,7 +103,7 @@ label{width:100%;}
             <div class="panel-heading bg-blue " role="tab " id="headingTwo " style="border-radius:0!important;border:0;padding:18px; ">
                 <span class="panel-title ">
                     <a role="button " data-toggle="collapse "
-                    data-parent="#accordion " ng-click="showNationalFilters=!showNationalFilters;recordType = 'national';" aria-expanded="false " aria-controls="#collapseTwo "
+                    data-parent="#accordion " ng-click="changeRecordType('national');" aria-expanded="false " aria-controls="#collapseTwo "
                     style="font-size:20px;  cursor:pointer;"
                     id="lblNationalRecords" >
                         <i class="fa fa-chevron-circle-up pad-left " ></i> National Records
@@ -296,7 +296,7 @@ label{width:100%;}
             <div class="panel-heading bg-orange " role="tab " id="headingThree " style="border-radius:0!important;border:0;padding:18px; ">
                 <span class="panel-title " >
                     <!--aria-expanded="false "role="button" data-toggle="collapse" data-parent="#accordion " aria-controls="collapseThree " -->
-                    <a class="collapsed "  ng-click="showReferenceFilters=!showReferenceFilters;recordType = 'reference';"
+                    <a class="collapsed "  ng-click="changeRecordType('reference');"
                     style="font-size:20px; cursor:pointer;" id="lblReferenceRecords">
                         <i class="fa fa-chevron-circle-up pad-left " ></i> Reference Records
                     </a>
