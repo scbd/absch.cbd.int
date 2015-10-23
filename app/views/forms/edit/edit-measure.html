@@ -32,7 +32,7 @@
                 </div>
               </div>
             </div>
-            
+
              <!-- IF NO SECTION -->
             <div ng-class="{'disable':!document.isAmendment, 'bg-white':document.isAmendment}" class="well no-shadow" style="padding-top:0;padding-bottom:0;" >
             <div class="row" >
@@ -43,18 +43,18 @@
                 <h3 ng-show="document.isAmendment==true" style="color:black!important;">
                   Please select the previously registered record that is being amended.
                 </h3>
-                  
+
                 <div class="km-control-group">
                     <div class="km-control-group" name="amendedMeasures" caption="List of amended measures">
                         <div class="help-block">Please indicate if this measure amends a previously registered one by providing a cross-reference link to the amended measure.</div>
                         <div km-select multiple name="amendedMeasures" ng-model="document.amendedMeasures"items="options.measures()" placeholder="Please select ..."></div>
                     </div>
                 </div>
-                
+
                 <div class="km-control-group" name="amendmentsDescription" caption="Summary of the amendment(s)">
                   <div km-rich-textbox ng-model="document.amendmentsDescription" rows="4" locales="document.header.languages"></div>
                 </div>
-                
+
               </div>
             </div>
             </div>
@@ -79,7 +79,7 @@
                 </div>
               </div>
             </div>
-          
+
 
             <div class="row">
               <div class="col-xs-12">
@@ -130,7 +130,7 @@
                 </div>
               </div>
             </div>
-        
+
 
             <div class="row">
 
@@ -156,7 +156,7 @@
             </div>
             </div>
 
-        
+
             <div class="row">
               <div class="col-sm-12">
                 <div class="km-control-group" name="description" caption="Brief description of the document including  objective and scope (max. 300 words)">
@@ -177,7 +177,7 @@
                 </div>
               </div>
             </div>
-           
+
             <div class="row">
               <div class="col-sm-12">
                 <div class="km-control-group" name="documentTranslations" caption="Translation in one of the official UN languages">
@@ -185,12 +185,12 @@
                 </div>
               </div>
             </div>
-         
+
             <div class="row">
               <div class="col-sm-12">
                 <div class="km-control-group" name="linkedMeasures" caption="Relationship with other measures">
-  
-                <div km-select multiple name="linkedMeasures" ng-model="document.linkedMeasures"items="options.measures()" placeholder="Please select ..."></div>                  
+
+                <div km-select multiple name="linkedMeasures" ng-model="document.linkedMeasures"items="options.measures()" placeholder="Please select ..."></div>
                 </div>
               </div>
             </div>
@@ -271,7 +271,7 @@
               <div ng-class="{measureChecked : identifiers[term.identifier]}" style="">
                 <table style="width:100%" cellspacing="0" cellpadding="0">
                 <tr ng:class="{paddingleft0 : isMainElement(term.identifier), 'measureChecked' : identifiers[term.identifier]}" >
-                  <td style="text-align:left;vertical-align:middle" id="{{term.identifier}}_help" style="" >
+                  <td style="text-align:left;vertical-align:middle;" id="{{term.identifier}}_help" style="" >
 
                     <label for="{{term.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED' ? 'otherAbsMeasure' : term.identifier}}" name="{{term.identifier}}" >
                          &nbsp;

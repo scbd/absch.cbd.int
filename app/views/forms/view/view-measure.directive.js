@@ -1,5 +1,7 @@
 define(['app',
-        '/app/views/search/measure-matrix-elements-derective.html.js'], function (app) {
+        '/app/views/search/measure-matrix-elements-derective.html.js',
+        '/app/services/search-service.js', '/app/services/app-config-service.js'
+    ], function (app) {
 
 app.directive("viewMeasure", [function () {
 	return {
@@ -14,7 +16,8 @@ app.directive("viewMeasure", [function () {
 			allowDrafts : "@",
 			hide		: "@"
 		},
-		controller : ["$scope", "IStorage","$filter", function ($scope, storage, $filter)
+		controller : ["$scope", "IStorage","$filter", "searchService", "$q", "appConfigService",
+         function ($scope, storage, $filter, searchService, $q, appConfigService)
 		{
 			//====================
 			//
@@ -61,6 +64,33 @@ app.directive("viewMeasure", [function () {
 
 					if ($scope.linkedMeasures)
 						$scope.loadReferences($scope.linkedMeasures, true);
+				}
+			});
+
+            $scope.$watch("document", function (_new) {
+				if ($scope.document && $scope.document.header
+                    && $scope.document.header.identifier) {
+                        var queries = [];
+                        if(!$scope.document.measureAmendedBy){
+                            var listQuery = {
+                                query: 'realm_ss:' + appConfigService.currentRealm.toLowerCase() +
+                                 ' AND schema_s:measure AND amendedMeasures_ss:'  + $scope.document.header.identifier
+                            };
+                            queries.push(searchService.list(listQuery));
+                        }
+                        if(!$scope.document.measureRelatedTo){
+                            var listQuery = {
+                                query: 'realm_ss:' + appConfigService.currentRealm.toLowerCase() +
+                                 ' AND schema_s:measure AND linkedMeasures_ss:'  + $scope.document.header.identifier
+                            };
+                            queries.push(searchService.list(listQuery));
+                        }
+                        $q.all(queries)
+                          .then(function(data){
+                              $scope.document.measureAmendedBy = data[0].data.response.docs;
+                              $scope.document.measureRelatedTo = data[1].data.response.docs;
+                              $scope.measureMatrixApi.reloadMatrix(true);
+                          });
 				}
 			});
 

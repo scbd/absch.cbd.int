@@ -1,7 +1,7 @@
 define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters', 'scbd-angularjs-controls',
         '/app/views/search/measure-matrix-elements-derective.html.js',
         '/app/views/forms/view/record-loader.directive.html.js'], function(app, _) {
-            
+
     app.directive("measureMatrixCountriesDirective", function() {
         return {
             restrict: "EAC",
@@ -16,7 +16,7 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                             function($scope, $http, realm, $q, $filter, $routeParams, $element) {
 
             $scope.documentsLoaded = false;
-            
+
             $scope.$watch('documents', function(docs){
                 if(docs && docs.length>0){
                     if(!$scope.documentsLoaded){
@@ -35,7 +35,7 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                     }
                 }
             },true);
-            
+
             $scope.loadMatrix = function(measure) {
 
                 return $q.when($http.get('/api/v2013/documents/' + measure.identifier_s,{cache:true}))
@@ -59,9 +59,9 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                 });
                 $scope.groupedMeasures = _.sortBy($scope.groupedMeasures,'index')
             }
-            
+
             $scope.showHideSection = function(elementId){
-                $element.find('#'+elementId).toggle();                
+                $element.find('#'+elementId).toggle();
             }
 
            }]
@@ -70,4 +70,3 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
 
 
 });
-

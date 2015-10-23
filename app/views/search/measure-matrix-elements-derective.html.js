@@ -33,7 +33,7 @@ define(['app', 'underscore','angular', '/app/js/common.js'], function(app, _, an
             },
             controller: ["$scope", "$q", "Thesaurus", "Enumerable", "$http", "guid","commonjs","$element",
             function($scope, $q, thesaurus, Enumerable, $http, guid, commonjs, $element) {
-                
+
                 var elementsForOthers = [
                                           "24E809DA-20F4-4457-9A8A-87C08DF81E8A","E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63",
                                           "9847FA8A-16C3-4466-A378-F20AF9FF883B","08B2CDEC-786F-4977-AD0A-6A709695528D","01DA2D8E-F2BB-4E85-A17E-AB0219194A17"
@@ -41,19 +41,21 @@ define(['app', 'underscore','angular', '/app/js/common.js'], function(app, _, an
                 $scope.api = {
                     reloadMatrix : reloadMatrix
                 }
-                
-                function reloadMatrix(){
+
+                function reloadMatrix(callLoad){
                     $scope.identifiers = null;
                     $scope.sections = null;
                     $scope.otherValues = null;
                     $scope.terms = null;
                     $scope.rootTerms = [];
-                    
-                    // $scope.load();
-                    // $scope.onTerms();
+
+                    if(callLoad){
+                        $scope.load();
+                        $scope.onTerms($scope.document);
+                    }
                 }
-                                        
-                $scope.termsFn = function(){  
+
+                $scope.termsFn = function(){
                     return $http.get("/api/v2013/thesaurus/domains/50616B56-12F3-4C46-BC43-2DFC26679177/terms", { cache: true });
                  };
 
@@ -70,26 +72,26 @@ define(['app', 'underscore','angular', '/app/js/common.js'], function(app, _, an
                         function(data) { // on success
                             $scope.terms = data[0].data||data[0];
                             other        = data[1].data||data[1];
-                            
+
                             _.each(elementsForOthers, function(element){
-                                
+
                                 if(!_.some($scope.terms, {identifier:other.identifier + '#' + element})){
-                                
+
                                     var otherElement = angular.copy(other);
-                                    
-                                    otherElement.identifier = otherElement.identifier + '#' + element;  
+
+                                    otherElement.identifier = otherElement.identifier + '#' + element;
                                     otherElement.broaderTerms.push(element);
                                     $scope.terms.push(otherElement)
-                                   
+
                                     var parentElement = _.find($scope.terms, {identifier:element})
                                     if(parentElement)
                                       parentElement.narrowerTerms.push(otherElement.identifier);
                                 }
-                                
-                              });                            
+
+                              });
                         });
-                }                
-   
+                }
+
                 //==============================
                 //
                 //==============================
@@ -100,7 +102,7 @@ define(['app', 'underscore','angular', '/app/js/common.js'], function(app, _, an
                             var oNewIdentifiers = {};
                             var oNewSections = {};
                             var oNewCustomValues = {};
-                            
+
                             if ($scope.binding) {
 
                                 if (!$.isArray($scope.binding))
@@ -110,7 +112,7 @@ define(['app', 'underscore','angular', '/app/js/common.js'], function(app, _, an
                                       var identifier = $scope.binding[i].identifier;
                                       //handle others
                                       if($scope.binding[i].parent || identifier == '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'){
-                                          identifier += ('#' + $scope.binding[i].parent) || '';                                          
+                                          identifier += ('#' + $scope.binding[i].parent) || '';
                                           oNewCustomValues[identifier] = $scope.binding[i].customValue
                                       }
                                       oNewIdentifiers[identifier] = true;
@@ -136,19 +138,16 @@ define(['app', 'underscore','angular', '/app/js/common.js'], function(app, _, an
                         $q.when($scope.load())
                         .then(function(){
                             if (!$.isArray($scope.document)){
-                                if ($scope.document.amendedMeasures || $scope.document.linkedMeasures) {
+                                if ($scope.document.measureAmendedBy) {
 
-                                    var amendedMeasures = _.map($scope.document.amendedMeasures, function(item) {
-                                        return $http.get('/api/v2013/documents/' + item.identifier);
+                                    var measureAmendedBy = _.map($scope.document.measureAmendedBy, function(item) {
+                                        return $http.get('/api/v2013/documents/' + item.identifier_s);
                                     })
-                                    var linkedMeasures = _.map($scope.document.linkedMeasures, function(item) {
-                                        return $http.get('/api/v2013/documents/' + item.identifier)
-                                    })
-                                    $q.all(amendedMeasures)
+                                    $q.all(measureAmendedBy)
                                       .then(function(data) {
                                           _.each(data, function(measure){
                                             var measureId;
-                                            measureId = _.findWhere($scope.document.amendedMeasures, {'identifier': measure.data.header.identifier});                                                    
+                                            measureId = _.findWhere($scope.document.measureAmendedBy, {'identifier_s': measure.data.header.identifier});
                                             if(measureId){
                                                 measureId.measure = measure.data;
                                             }
@@ -156,19 +155,9 @@ define(['app', 'underscore','angular', '/app/js/common.js'], function(app, _, an
                                          return;
                                       })
                                       .then(function() {
-                                             $q.all(linkedMeasures)
-                                               .then(function(data) {
-                                                    _.each(data, function(measure){
-                                                        var measureId;
-                                                        measureId = _.findWhere($scope.document.linkedMeasures, {'identifier': measure.data.header.identifier});                                                    
-                                                        if(measureId){
-                                                            measureId.measure = measure.data;
-                                                        }
-                                                    });
-                                                    addMeasureToElements($scope.document);
-                                                    buildTree();
-                                                    updateProperties($scope.rootTerms, 1);
-                                                });
+                                            addMeasureToElements($scope.document);
+                                            buildTree();
+                                            updateProperties($scope.rootTerms, 1);
                                       });
                                 } else {
                                         buildTree();
@@ -178,6 +167,9 @@ define(['app', 'underscore','angular', '/app/js/common.js'], function(app, _, an
                             else if ($.isArray($scope.document)){
 
                                 _.each($scope.document, function(measure){
+
+                                    //var
+
                                     addMeasureToElements(measure.document ? measure.document : measure);
                                 });
                                 buildTree();
@@ -209,36 +201,44 @@ define(['app', 'underscore','angular', '/app/js/common.js'], function(app, _, an
                     else $scope.error = error.data || "unkown error";
                 }
 
-                function addMeasureToElements(measure) {                    
+                function addMeasureToElements(measure) {
                     if(!measure)
                         return;
-                        
-                    _.each(measure.absMeasures, function(measureElement) {
-                        newMeasureElement(measureElement, measure);
-                    });
-                    if($scope.type=='single'){
-                        _.each(measure.linkedMeasures, function(measureElement) {
-                            if(measureElement.measure)
-                                _.each(measureElement.measure.absMeasures, function(element) {
-                                    newMeasureElement(element, measureElement.measure, 'linked', measure.header.identifier);
-                                });
-    
+                    if($scope.type!='single'){
+                        _.each(measure.absMeasures, function(measureElement) {
+                            newMeasureElement(measureElement, measure);
                         });
-                        _.each(measure.amendedMeasures, function(measureElement) {
+                    }
+                    if($scope.type=='single'){
+                        _.each(measure.measureAmendedBy, function(measureElement) {
                             if(measureElement.measure)
                                 _.each(measureElement.measure.absMeasures, function(element) {
                                     newMeasureElement(element, measureElement.measure, 'amended', measure.header.identifier);
                                 });
+
                         });
+                        // _.each(measure.linkedMeasures, function(measureElement) {
+                        //     if(measureElement.measure)
+                        //         _.each(measureElement.measure.absMeasures, function(element) {
+                        //             newMeasureElement(element, measureElement.measure, 'linked', measure.header.identifier);
+                        //         });
+                        //
+                        // });
+                        // _.each(measure.amendedMeasures, function(measureElement) {
+                        //     if(measureElement.measure)
+                        //         _.each(measureElement.measure.absMeasures, function(element) {
+                        //             newMeasureElement(element, measureElement.measure, 'amended', measure.header.identifier);
+                        //         });
+                        // });
                     }
                 }
                 var existing = [];
                 function newMeasureElement(measureElement, measure, type, parentMeasure){
                     var identifier = measureElement.identifier;
-                    
+
                     if(measureElement.parent)
                         identifier = measureElement.parent + '#' + identifier;
-                        
+
                     var element = _.findWhere($scope.terms, {'identifier': identifier});
 
                     if(!element)
@@ -293,22 +293,35 @@ define(['app', 'underscore','angular', '/app/js/common.js'], function(app, _, an
                         term.level = level;
 
                         if (element.measureIdentifier) {
+                            term.sortOrder = 'A';
                             term.isMeasure = true;
                             term.measure = {};
                             var doc;
+                            var amendedForTitle;
                             if($scope.type=='multiple'){
                                 doc = _.find($scope.document , function(measure){return measure.document.header.identifier==element.measureIdentifier;});
+                                if(doc.document.amendedMeasures){
+                                    amendedForTitle='';
+                                    _.each(doc.document.amendedMeasures, function(msr){
+                                        var amendedFor = _.find($scope.document , function(measure){return measure.document.header.identifier== msr.identifier;});
+                                        amendedForTitle += amendedFor.title_t;
+                                    });
+                                }
                             }
                             else{
                                 doc ={document: $scope.document};
                             }
+
                             term.measure = {identifier: doc.document.header.identifier,government : doc.document.government,
-                                            documentID:commonjs.hexToInteger(doc.id),type: doc.document.header.schema};
+                                            documentID:commonjs.hexToInteger(doc.id),type: doc.document.header.schema, amendedFor:amendedForTitle};
                            term.measureType = element.measureType;
-                                           
+
                             _.map(term.broaderTerms, function(brTerm) {
                                 brTerm.hasMeasure = true;
                             });
+                        }
+                        else {
+                            term.sortOrder = 'B';
                         }
 
                         if (term.narrowerTerms) {
@@ -333,7 +346,7 @@ define(['app', 'underscore','angular', '/app/js/common.js'], function(app, _, an
                 $scope.showHideNode = function(elementId){
                     $element.find('#'+elementId).toggle();
                 };
-                
+
                 $scope.showHideAll = function(collapse){
                     _.each($scope.rootTerms, function(term){
                         term.showUp = collapse;
@@ -342,6 +355,49 @@ define(['app', 'underscore','angular', '/app/js/common.js'], function(app, _, an
                         else
                             $element.find('#'+term.identifier).show();
                     })
+                };
+
+                function getJurisdictionSortIndex(term){
+
+                    switch (term) {
+                        case '528B1187-F1BD-4479-9FB3-ADBD9076D361':
+                            return 1;
+                        case '7437F880-7B12-4F26-AA91-CED37250DD0A':
+                            return 2;
+                        case 'DEBB019D-8647-40EC-8AE5-10CA88572F6E':
+                            return 3;
+                        case '9627DF2B-FFAC-4F85-B075-AF783FF2A0B5':
+                            return 4;
+                        default:
+                            return 5
+
+                    }
+                }
+
+                function getDocumentTypeSortIndex(term){
+
+                    switch (term) {
+                        case '8165BF22-EEF0-4DF8-B3F2-8E0AEED13E2F':
+                            return 1;
+                        case '383BDFAC-7AD0-4A22-840D-086CC836EEF8':
+                            return 2;
+                        case '679A7709-05AF-4B03-8532-ABB425021D93':
+                            return 3;
+                        case '14CE4B07-ABF7-41C3-884A-5982C22690E0':
+                            return 4;
+                        case '6DD06795-ADF2-468E-A6C1-01399E5FF934':
+                            return 5;
+                        case '':
+                            return 6;
+                        case 'BF41B8A3-D653-4E1D-8C69-A5FE352D9957':
+                            return 7;
+                        case '':
+                            return 8;
+                        default:
+                            return 9
+
+                    }
+
                 }
             }]
         };
@@ -349,3 +405,35 @@ define(['app', 'underscore','angular', '/app/js/common.js'], function(app, _, an
 
 
 });
+
+
+// var amendedMeasures = _.map($scope.document.amendedMeasures, function(item) {
+//     return $http.get('/api/v2013/documents/' + item.identifier);
+// })
+// var linkedMeasures = _.map($scope.document.linkedMeasures, function(item) {
+//     return $http.get('/api/v2013/documents/' + item.identifier)
+// })
+// $q.all(amendedMeasures)
+//   .then(function(data) {
+//       _.each(data, function(measure){
+//         var measureId;
+//         measureId = _.findWhere($scope.document.amendedMeasures, {'identifier': measure.data.header.identifier});
+//         if(measureId){
+//             measureId.measure = measure.data;
+//         }
+//      });
+//      return;
+//   })
+//   .then(function() {
+//         return $q.all(linkedMeasures)
+//            .then(function(data) {
+//                 _.each(data, function(measure){
+//                     var measureId;
+//                     measureId = _.findWhere($scope.document.linkedMeasures, {'identifier': measure.data.header.identifier});
+//                     if(measureId){
+//                         measureId.measure = measure.data;
+//                     }
+//                 });
+//                 return;
+//             });
+//   })

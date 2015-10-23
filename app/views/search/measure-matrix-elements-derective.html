@@ -8,7 +8,7 @@
     .matrixheaderColumn {
         width: 40%;
     }
-    
+
     .table > tbody > tr > td{
      padding:3px;
     }
@@ -69,27 +69,27 @@
     .cover55 {
         width: 55%;
     }
-    
+
     .paddingleft0 {
         background-color: #ddd;
         margin-top:30px!important;
         border-bottom:1px #fff solid;
     }
-    
+
     .paddingleft3 {
         font-weight:bold;
     }
-    
-    .paddingleft3::before { 
+
+    .paddingleft3::before {
      /*content: " - ";*/
     }
 
     .paddingleft6 {
         padding-left: 6%!important;
-        
+
     }
-    
-    .paddingleft6::before { 
+
+    .paddingleft6::before {
      content: "-";
     }
 
@@ -117,7 +117,7 @@
     }
     .table{
         width:100%!important;
-    }    
+    }
      .expander{
         font-size:14px;
         font-weight:bold;
@@ -138,30 +138,33 @@
               <td>
                   <i class="fa fa-spin fa-spinner fa-5x" />
               </td>
-          </tr>                  
+          </tr>
         <tr ng:repeat="term in rootTerms" ng-if="rootTerms.length>0">
-            <td class="tableCell" ng-include="'/app/views/search/matrix/measure-matrix.directive/abs/inner'">               
+            <td class="tableCell" ng-include="'/app/views/search/matrix/measure-matrix.directive/abs/inner'">
             </td>
         </tr>
     </table>
     <script type="text/ng-template" id="/app/views/search/matrix/measure-matrix.directive/abs/inner">
 
-        <table class="table" ng:if="term.isChildSelected || (!term.broaderTerms && term.narrowerTerms)">
+        <table class="table" ng:if="term.isChildSelected || (!term.broaderTerms && term.narrowerTerms) || (!term.broaderTerms && !term.narrowerTerms)">
             <tr ng:class="{'elementMeasure':term.isMeasure, 'whiteTopBorder':term.hasMeasure}" >
-                <td class="matrixheaderColumn rightBorder " 
+                <td class="matrixheaderColumn rightBorder "
                 ng:class="{'paddingleft0':term.level==1, 'paddingleft3':term.level==2 && !term.isMeasure && term.identifier.indexOf('#')<0 , 'paddingleft6':term.level==3, 'paddingleft9':term.level==4}">
-                        &nbsp;                       
+                        &nbsp;
                         <strong ng-if="!term.broaderTerms">
                            {{  term.title||term.name | lstring:locale|uppercase}}
                         </strong>
-                        <!--exception for TK--> 
+                        <!--exception for TK-->
                         <span ng-if="term.broaderTerms && !term.isMeasure" ng-style="{'boldLabel':term.identifier=='B8A150E054154AD3AD97856ABD485E90'}">
-                            {{ (term.identifier.indexOf('#')>0 ? otherCustomValues[term.identifier]  : term.title||term.name)  | lstring:locale}} 
+                            {{ (term.identifier.indexOf('#')>0 ? otherCustomValues[term.identifier]  : term.title||term.name)  | lstring:locale}}
                         </span>
                         <span ng-if="term.broaderTerms && term.isMeasure">
                             <span ng-if="term.measureType=='linked'">Related to</span>
-                            <span ng-if="term.measureType=='amended'">Amended by</span>                                                          
-                            <span class="color-blue"> {{term.title||term.name | lstring:locale}} </span>                                         
+                            <span ng-if="term.measureType=='amended'">Amended by</span>
+                            <span class="color-blue">
+                                <a target="new" ng-href="/database/record/{{term.measure|uniqueID}}" >{{term.title||term.name | lstring:locale}} </a>
+                            </span>
+                            <span ng-if="term.measure.amendedFor"> amending {{term.measure.amendedFor}}</span>
                         </span>
                          <span ng-if="sections[term.identifier]" class="color-blue bold"> ( {{sections[term.identifier] | lstring:locale}} ) </span>
                         <i class="fa fa-chevron-circle-up pull-right hand" ng-click="term.showUp=!term.showUp;showHideNode(term.identifier)" ng-show="!term.showUp" ng:if="term.level<2"></i>
@@ -173,7 +176,7 @@
                 <td class="matrixheaderColumn rightBorder subList1 cover50 noBottomBorder noTopBorder"
                 colspan="1" style="padding-top:0px;padding-bottom:0px">
                     <table class="table matrixTable" ng:class="{'table-bordered':!term.level>1}">
-                        <tr ng:repeat="term in term.narrowerTerms|orderBy:term.isMeasure:desc" >
+                        <tr ng:repeat="term in term.narrowerTerms|orderBy:'sortOrder'" >
                             <td class="tableCell" ng:class="{'noBorder':term.isMeasure}" ng-include="'/app/views/search/matrix/measure-matrix.directive/abs/inner'"></td>
                         </tr>
                     </table>
