@@ -85,7 +85,7 @@ $scope.introOptions.steps.push(
         if (!document)
           return undefined;
 
-        document = angular.fromJson(angular.toJson(document));
+        //document = angular.fromJson(angular.toJson(document));
 
         if (!$scope.isSubNational(document) && !$scope.isCommunity(document) && !$scope.isOthers(document)) {
           document.jurisdictionName = undefined;
