@@ -293,7 +293,7 @@ define(['app', 'underscore','angular', '/app/js/common.js'], function(app, _, an
                         term.level = level;
 
                         if (element.measureIdentifier) {
-                            term.sortOrder = 'A';
+                            term.sortOrder = 1;
                             term.isMeasure = true;
                             term.measure = {};
                             var doc;
@@ -307,6 +307,8 @@ define(['app', 'underscore','angular', '/app/js/common.js'], function(app, _, an
                                         amendedForTitle += amendedFor.title_t;
                                     });
                                 }
+                                term.sortOrder = getJurisdictionSortIndex(doc.document.jurisdiction.identifier);
+                                term.sortOrder2 = getDocumentTypeSortIndex(doc.document.type.identifier);
                             }
                             else{
                                 doc ={document: $scope.document};
@@ -321,7 +323,7 @@ define(['app', 'underscore','angular', '/app/js/common.js'], function(app, _, an
                             });
                         }
                         else {
-                            term.sortOrder = 'B';
+                            term.sortOrder = 10;
                         }
 
                         if (term.narrowerTerms) {
@@ -387,14 +389,10 @@ define(['app', 'underscore','angular', '/app/js/common.js'], function(app, _, an
                             return 4;
                         case '6DD06795-ADF2-468E-A6C1-01399E5FF934':
                             return 5;
-                        case '':
-                            return 6;
                         case 'BF41B8A3-D653-4E1D-8C69-A5FE352D9957':
-                            return 7;
-                        case '':
-                            return 8;
+                            return 6;
                         default:
-                            return 9
+                            return 7
 
                     }
 

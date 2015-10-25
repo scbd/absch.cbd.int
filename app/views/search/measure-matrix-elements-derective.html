@@ -176,7 +176,7 @@
                 <td class="matrixheaderColumn rightBorder subList1 cover50 noBottomBorder noTopBorder"
                 colspan="1" style="padding-top:0px;padding-bottom:0px">
                     <table class="table matrixTable" ng:class="{'table-bordered':!term.level>1}">
-                        <tr ng:repeat="term in term.narrowerTerms|orderBy:'sortOrder'" >
+                        <tr ng:repeat="term in term.narrowerTerms|orderBy:['sortOrder', 'sortOrder2']" >
                             <td class="tableCell" ng:class="{'noBorder':term.isMeasure}" ng-include="'/app/views/search/matrix/measure-matrix.directive/abs/inner'"></td>
                         </tr>
                     </table>
