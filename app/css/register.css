@@ -135,7 +135,7 @@ section {
 legend{
 	padding:3px;
 	margin:20px 0 20px 0;
-	background-color: #efefef;
+	/*background-color: #efefef;*/
 	font-weight:500;
 }
 
@@ -159,7 +159,7 @@ legend + .help-block{position:relative; top:-19px;}
 }
 .input-rich-text{
 	 border: 1px solid #CCC;border-radius: 4px;
-	 
+
  }
 .ta-editor{border:0;}
 
@@ -611,9 +611,9 @@ form label[required]:before
 }
 
 .tab-selected{
-border-bottom:5px solid pink;	
+border-bottom:5px solid pink;
 }
 
 label{
-	font-weight:normal;	
+	font-weight:normal;
 }
