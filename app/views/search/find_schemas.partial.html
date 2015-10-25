@@ -29,7 +29,7 @@ label{width:100%;}
 
 </style>
 
-    <div class="panel-group " id="accordion " role="tablist " aria-multiselectable="true " style="margin-bottom:0px; ">
+    <div class="panel-group " id="accordion " role="tablist " aria-multiselectable="true " style="margin-bottom:0px;">
        <div class="panel panel-default " style="border-radius:0!important;border:0; ">
             <div class="panel-heading bg-medgrey" role="tab " id="headingOne " style="border-radius:0!important;border:0; padding:18px; ">
                 <span class="panel-title " >
@@ -48,7 +48,9 @@ label{width:100%;}
                         <div style="color:#333;font-size:11px;font-weight:bold;margin-right:0;padding-bottom:10px;padding-top:12px;">Filter country name</div>
                         <input id="countryName" ng-model="countryProfileSearch.countryProfile_keyword" placeholder="country name" style="width:100%;border:0;border-bottom:1px solid #ddd;">
                         </div>
-
+                        
+                        <div style="padding-bottom:10px;">
+                        <div style="color:#333;font-size:11px;font-weight:bold;margin-right:0;padding-bottom:10px;padding-top:12px;">Filter by Party status</div>
                         <div class="btn-group" style="width:100%;padding:0;margin:0;">
                             <span> <input id="countryStatusParty"  type="checkbox" ng-model="countryProfileSearch.isParties" >
                                 <i class="fa fa-square color-blue" ></i> Party <span class="badge pull-right">{{countryProfileFacets.parties}}</span>
@@ -63,6 +65,7 @@ label{width:100%;}
                                 <span class="badge pull-right">{{countryProfileFacets.inbetweenParties}}
                             </span></span><br>
 
+                        </div>
                         </div>
 
                         <div class="btn-group" style="width:100%;padding:10px 0 10px 0;margin:0;">

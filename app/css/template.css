@@ -848,6 +848,7 @@ footer .logo {
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
+    min-height: 1000px;
 }
 
 #wrapper.toggled #sidebar-wrapper {
