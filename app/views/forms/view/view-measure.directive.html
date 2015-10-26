@@ -147,11 +147,6 @@
 		<div ng-show="amendedMeasures || document.amendmentsDescription">
 			<legend>Amendments</legend>
 
-			<div ng-show="document.amendmentsDescription">
-				<label>Summary of the amendments</label>
-				<div class="km-value km-pre"ng-bind-html="document.amendmentsDescription | lstring:review.local"></div>
-			</div>
-
 			<div ng-show="amendedMeasures">
 				<label>This measure is amending the following:</label>
 
@@ -163,8 +158,11 @@
 					</li>
 				</ul>
 				</div>
+			</div>			
+			<div ng-show="document.amendmentsDescription">
+				<label>Summary of the amendments</label>
+				<div class="km-value km-pre"ng-bind-html="document.amendmentsDescription | lstring:review.local"></div>
 			</div>
-
 
 		</div>
 
