@@ -114,7 +114,7 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/direct
             if (!document)
                 return undefined;
 
-            document = angular.fromJson(angular.toJson(document));
+            //document = angular.fromJson(angular.toJson(document));
 
             if (!document.consentGranted) {
                 document.consentInformation = undefined;

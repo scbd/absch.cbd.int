@@ -74,7 +74,7 @@ app.filter("formatDate", function(){
 	return function(date,formart){
 		if(formart== undefined)
 			formart = 'MMMM Do YYYY';
-		return moment(date).format(formart);
+		return moment.utc(date).format(formart);
 	}
 });
 
@@ -123,7 +123,7 @@ app.filter("formatDate", function(){
 	return function(date,formart){
 		if(formart== undefined)
 			formart = 'DD MMM YYYY';
-		return moment(date).format(formart);
+		return moment.utc(date).format(formart);
 	}
 });
 
@@ -136,7 +136,7 @@ app.filter("formatDateWithTime", function(){
 	return function(date,formart){
 		if(formart== undefined)
 			formart = 'DD MMM YYYY hh:mm a';
-		return moment(date).format(formart);
+		return moment.utc(date).format(formart);
 	}
 });
 
@@ -177,7 +177,7 @@ function lstring(ltext, locale)
 		return function(date,formart){
 			if(formart== undefined)
 				formart = 'DD MMM YYYY';
-			return moment(date).format(formart);
+			return moment.utc(date).format(formart);
 		}
 	});
 
@@ -190,7 +190,7 @@ function lstring(ltext, locale)
 		return function(date,formart){
 			if(formart== undefined)
 				formart = 'DD MMM YYYY hh:mm a';
-			return moment(date).format(formart);
+			return moment.utc(date).format(formart);
 		}
 	});
 

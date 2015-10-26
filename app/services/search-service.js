@@ -7,7 +7,7 @@ define(['app', 'underscore'], function (app, _) {
                 currentPage     : 0,
                 rowsPerPage     : 25,
                 sort            : 'createdDate_dt desc',
-                fields          : 'title_t, description_t',
+                fields          : 'identifier_s, title_t, description_t',
                 query           : '*:*',
 
                 groupSort       :   'government_EN_t',

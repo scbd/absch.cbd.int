@@ -31,7 +31,7 @@
                 "commonjs", "$q", '$element', '$timeout','commonjs','IStorage','$rootScope','$mdSidenav', '$mdUtil', '$mdMedia','schemaTypes','breadcrumbs','smoothScroll',
                 function($scope, $http, $routeParams, linqjs, $filter, realm, commonjs, $q,
                             $element, $timeout, countriescommonjs, IStorage,$rootScope, $mdSidenav, $mdUtil, $mdMedia, schemaTypes, breadcrumbs,smoothScroll) {
-                
+
                 $scope.api = {
                     loadCountryDetails : $scope.loadCountryDetails
                 }
@@ -50,7 +50,7 @@
                         $scope.showCNA = false;
                         $scope.showCP = false;
                         $scope.showCPCRecv = false;
-            
+
                         $scope.sortMeasure="[jurisdiction_sort, type_sort, status_sort, title_t]";
                         $scope.reverseMeasure=false;
                         $scope.sortPermit='title_t';
@@ -61,9 +61,9 @@
                         $scope.reverseCPCReceived=false;
                         $scope.filterSchema=null;
                 }
-            
+
                     resetList();
-            
+
                     //facet counts
                     $scope.cpcReceivedCount = 0;
                     $scope.nfpCount= 0;
@@ -72,18 +72,18 @@
                     $scope.absCheckpoint= 0;
                     $scope.absCheckpointCommunique = 0;
                     $scope.database= 0;
-            
+
                     //**********************************************************
                 $scope.loadCountryDetails = function(countryCode) {
-            
+
                     $scope.code = countryCode || $routeParams.code;
-            
+
                     $scope.documentCount = 0;
                     $scope.currentPage = 0;
                     $scope.searchText = '';
                     $scope.autocompleteData = [];
                     $scope.absch_nfp = null;
-            
+
                     if ($scope.code) {
                     //fix for EU
                     if($scope.code.toLowerCase() == 'eu')
@@ -93,22 +93,22 @@
                         cache: true
                     }).then(function(response) {
                         $scope.country = response.data;
-            
+
                         breadcrumbs.options = {'Country Profile':$scope.country.name.en};
                         $scope.searchText = '';
                         $scope.autocompleteData = [];
-            
+
                         $scope.country.isCBDParty = countriescommonjs.isPartyToCBD($scope.country ) || $scope.country.code == 'EU';
                         $scope.country.isNPParty = countriescommonjs.isNPParty($scope.country ) || $scope.country.code == 'EU';
                         $scope.country.isNPSignatory = countriescommonjs.isSignatory($scope.country ) || $scope.country.code == 'EU';
                         $scope.country.isNPRatified = countriescommonjs.isRatified($scope.country ) || $scope.country.code == 'EU';
                         $scope.country.isNPInbetweenParty = moment().diff(moment($scope.country.treaties.XXVII8b.deposit), 'days') < 90;
-            
+
                         if ($scope.country.isNPInbetweenParty)
                             $scope.country.entryIntoForceDate = moment($scope.country.treaties.XXVII8b.deposit).add(90, 'day');
                         else if ($scope.country.isNPParty)
                             $scope.country.entryIntoForceDate = $scope.country.treaties.XXVII8b.party;
-            
+
                     });
                     //*******************************************************
                     var schema = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database"]
@@ -117,7 +117,7 @@
                                         'government_s,government_EN_t,schema_s,number_d,aichiTarget_ss,reference_s,sender_s,meeting_ss,recipient_ss,' +
                                         'symbol_s,eventCity_EN_t,eventCountry_EN_t,startDate_s,endDate_s,body_s,code_s,meeting_s,group_s,function_t,' +
                                         'department_t,organization_t,summary_EN_t,reportType_EN_t,completion_EN_t,ownerGovernment_s,jurisdiction_EN_t,development_EN_t' +
-                                        ',type_ss,email_ss,fax_ss,telephone_s,government_CEN_s,type_EN_t,status_EN_t,entryIntoForce_dt, usage_CEN_ss,keywords_CEN_ss,'+
+                                        ',type_ss,email_ss,fax_ss,telephone_s,government_CEN_s,type_EN_t,status_EN_t,entryIntoForce_dt,retired_dt,adoption_dt usage_CEN_ss,keywords_CEN_ss,'+
                                         'date_s,informedConsents_s,permit_ss,originCountries_CEN_ss,checkpoint_CEN_ss,createdDate_dt,geneticRessourceUsers_s,authority_s'+
                                         '' +
                                         '&q=(realm_ss:' + realm.value.toLowerCase() + ' OR realm_ss:absch) AND ((' + schemQuery +
@@ -131,20 +131,20 @@
                                         '&rows=100&sort=createdDate_dt+desc,+title_t+asc&start=0&wt=json';
                     var queryProfile = $http.get(queryURL, {cache: true})
                     var queryCPCRecv = $http.get(queryCPCRevURL, {cache: true})
-            
+
                     $q.all([queryProfile,queryCPCRecv])
                         .then(function(results) {
-                        
+
                         $scope.absch_nfp = results[0].data.response.docs;
-                        $scope.cpcReceived = results[1].data.response.docs;              
+                        $scope.cpcReceived = results[1].data.response.docs;
                         var measureMatrixDocuments = [];
-                        
+
                         $scope.absch_nfp.forEach(function(document){
                             document.identifier = document.identifier_s;
-                            
+
                             if(document.ownerGovernment_s)
                                 document.ownerGovernment = {identifier:document.ownerGovernment_s};
-                            
+
                             if(document.schema_s == "focalPoint" ){
                                 document.description_t = document.description_t.replace(/\n/g, '<br/>');
                                 document.documentId = commonjs.hexToInteger(document.identifier_s);
@@ -164,7 +164,7 @@
                                             details += $filter("lstring")(doc.postalCode)  + '<br/>';
                                         if(document.government_CEN_s)
                                             details += $filter("lstring")(JSON.parse(document.government_CEN_s));
-            
+
                                         document.description_t = details;
                                         document.telephones = doc.phones;
                                         document.emails = doc.emails;
@@ -172,14 +172,14 @@
                                     });
                             }
                             else if(document.schema_s=="absCheckpointCommunique"){
-            
+
                                 if(document.geneticRessourceUsers_s){
                                     document.geneticRessourceUsers = $scope.parseJSON(document.geneticRessourceUsers_s);
                                 }
                             }
                             //create seprate collection for measure matrix
                             if(document.schema_s=='measure'){
-                                
+
                                  if(document.type_EN_t =="Strategy / Action Plan")
                                     document.type_sort = 1;
                                  if(document.type_EN_t =="Policy Document")
@@ -194,7 +194,7 @@
                                     document.type_sort = 6;
                                  if(document.type_EN_t =="Other")
                                     document.type_sort = 7;
-                                    
+
                                  if(document.status_EN_t =="Legally binding ")
                                     document.status_sort = 1;
                                  if(document.status_EN_t =="Not legally binding")
@@ -203,7 +203,7 @@
                                     document.status_sort = 3;
                                  if(document.status_EN_t =="Retired")
                                     document.status_sort = 4;
-              
+
                                  if(document.jurisdiction_EN_t =="Regional / Multilateral")
                                     document.jurisdiction_sort = 1;
                                  if(document.jurisdiction_EN_t =="National / Federal")
@@ -214,11 +214,11 @@
                                     document.jurisdiction_sort = 4;
                                  if(document.jurisdiction_EN_t =="Other")
                                     document.jurisdiction_sort = 5;
-                                    
+
                                 document.measureMatrix = true;
                                 measureMatrixDocuments.push(document);
                             }
-            
+
                         });
                         $scope.measureMatrixDocuments = measureMatrixDocuments;
                         $scope.measureMatrixDocuments.selectAll = true;
@@ -230,7 +230,7 @@
                         });
                         $scope.getFacets($scope.absch_nfp);
                         $('[data-toggle="tooltip"]').tooltip()
-                        
+
                         if($routeParams.countryCode && $routeParams.documentType){
                             if($routeParams.documentType.toLowerCase()=='measure-matrix'){
                                 $scope.showMSR = true;
@@ -241,24 +241,24 @@
                     });
                     }
                 }
-            
+
                 //**********************************************************
                 $scope.$watch('absch_nfp', function(value) {
-            
+
                     if (!value) return;
-            
+
                     $scope.getFacets(value);
-            
-            
+
+
                 });
-            
-            
+
+
                 //**********************************************************
                 $scope.getFacets = function(data) {
-            
+
                     var linqObj = linqjs.from(data);
                     $scope.nationalAuthority = linqObj.count(function(schema) {
-            
+
                     return schema.schema_s.toLowerCase() == 'authority';
                     });
                     //console.log(response.data.response.docs);
@@ -266,23 +266,23 @@
                     // console.log(schema.schema_EN_t.toLowerCase() + ' ' + 'national focal point'.toLowerCase());
                     return schema.schema_s.toLowerCase() == 'focalpoint'.toLowerCase();
                     });
-            
+
                     $scope.nationalMeasure = linqObj.count(function(schema) {
                     return schema.schema_s.toLowerCase() == 'measure';
                     });
-            
+
                     $scope.Permit = linqObj.count(function(schema) {
                     return schema.schema_s.toLowerCase() == 'abspermit';
                     });
-            
+
                     $scope.absCheckpoint = linqObj.count(function(schema) {
                     return schema.schema_s.toLowerCase() == 'abscheckpoint';
                     });
-            
+
                     $scope.absCheckpointCommunique = linqObj.count(function(schema) {
                     return schema.schema_s.toLowerCase() == 'abscheckpointcommunique';
                     });
-            
+
                     $scope.database = linqObj.count(function(schema) {
                     return schema.schema_s.toLowerCase() == 'database';
                     });
@@ -290,7 +290,7 @@
                     return schema.schema_s.toLowerCase() == 'resource';
                     });
                 }
-            
+
                 //    $scope.$watch('searchText.$', function(value) {
                 //
                 //      if (undefined == value || value == null || $scope.absch_nfp == null) return;
@@ -298,9 +298,9 @@
                 //
                 //
                 //    });
-            
+
                 $scope.showlist = false;
-            
+
                 //    $scope.$on('mapDetailsLoad', function(evt, data){
                 //        $scope.mapDetails = data.mapDetails;
                 //        $scope.type = 'party';
@@ -309,57 +309,57 @@
                 //       else
                 //         $scope.show('map');
                 //    })
-            
+
                 //**********************************************************
                 $scope.countriescommonjs = countriescommonjs;
                 $scope.$on('loadCountryProfile', function(evt, evtData){
                     $scope.loadCountryDetails(evtData.data.countryCode);
                 })
-            
-            
+
+
                 $scope.isContactInformation = function(entity){
-            
+
                     return entity && (entity.schema_s == "focalPoint" ||
                                 entity.schema_s == "authority" || entity.schema_s == "database" ||
                                 entity.schema_s == "absCheckpoint")
                 }
-            
+
                 $scope.isMeasure = function(entity){
-            
+
                     return entity && entity.schema_s == "measure";
                 }
                 $scope.isCheckpointCommunique = function(entity){
-            
+
                     return entity && entity.schema_s == "absCheckpointCommunique";
                 }
-            
+
                 $scope.isPermit = function(entity){
-            
+
                     return entity && entity.schema_s == "absPermit";
                 }
-            
+
                 $scope.isCheckpointCommuniqueReceived = function(entity){
                     return entity && entity.schema_s == "absCheckpointCommunique"
                     && (entity.originCountries_ss==$scope.code  || entity.permitSourceCountry_ss==$scope.code);
                 }
-            
+
                 $scope.isCheckpoint = function(entity){
-            
+
                     return entity && entity.schema_s == "absCheckpoint";
                 }
                 $scope.isFocalpoint = function(entity){
-            
+
                     return entity && entity.schema_s == "focalPoint";
                 }
                 $scope.isDatabase = function(entity){
-            
+
                     return entity && entity.schema_s == "database";
                 }
                 $scope.isCNA = function(entity){
-            
+
                     return entity && entity.schema_s == "authority";
                 }
-            
+
                 $scope.showDetails = function(document){
                     //$scope.currentDocument = documentId;
                     if(!document.data){
@@ -372,11 +372,11 @@
                             });
                         }
                 };
-            
+
                 //**********************************************************
                 $scope.getTitle = function(schema,type, schemaFull){
                     if(schema == 'focalPoint'){
-            
+
                             if(_.contains(type,'NP-FP') || _.contains(type,'ABS-FP'))
                                 return 'ABS National Focal Point';
                             // else if(_.contains(type,'ABS-IC'))
@@ -388,15 +388,15 @@
                     }
                     else
                         return schemaFull;
-            
+
                 }
-            
+
                 //**********************************************************
                 $scope.parseJSON = function(value){
                     if(value)
                         return JSON.parse(value);
                 }
-            
+
                 function getCountriesFacets(){
                     var schema = _.clone(schemaTypes);
                     schema.push('focalPoint');
@@ -410,7 +410,7 @@
                             'facet.mincount':1,
                             'facet.limit': 512
                         };
-            
+
                         $http.get('/api/v2013/index/select', { params: queryFacetsParameters }).success(function (data) {
                             var solrArray = data.facet_counts.facet_fields.government_s;
                             for (var i = 0; i < solrArray.length; i += 2) {
@@ -421,22 +421,22 @@
                                 else {
                                         console.log(solrArray[i]);
                                     }
-            
+
                             }
-            
+
                         }).error(function (error) {
                             console.log('onerror');
                             console.log(error);
                         });
                 }
-                
+
                 $scope.isForMeasureMatrix = function(measure){
-                    
+
                     return measure.measureMatrix;
-                    
+
                 }
                 $scope.selectAllForMatrix = function(){
-                    
+
                     _.map($scope.measureMatrixDocuments,function(item){
                         item.measureMatrix = !$scope.measureMatrixDocuments.selectAll;
                     })

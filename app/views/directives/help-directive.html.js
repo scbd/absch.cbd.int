@@ -68,9 +68,9 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
 
 
 
-                                         $scope.$watch('schema', function (newVal) {
+                                         $scope.$watch('schema', function (newVal, oldValue) {
 
-                                              if (newVal){
+                                              if (newVal && newVal != oldValue){
                                                   $timeout(function(){
                                                       loadSchemaHelp();
                                                   }, $scope.delay);
@@ -136,7 +136,7 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                                                   children = $element.find('div[name="' + field.name + '"]');
                                                                                 templateToUse = helpBlockTemplate;
                                                                         }
-                                                                        
+
                                                                         if (children.length==0) {
                                                                             children = $element.find('#' + field.name);
                                                                         }
@@ -214,7 +214,8 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                         .joyride({
                                                                 autoStart:true,
                                                                 tip_container: '#joyrideSection',
-                                                                postStepCallback : function (index, tip) {
+                                                                postStepCallback : function (index, tip,t) {
+                                                                    console.log(index,tip,t);
                                                                         if ($element.find('#helpElement').joyride('paused')) {
                                                                         console.log('Hey there, you\'ve paused the tour.');
                                                                         // fire your code here

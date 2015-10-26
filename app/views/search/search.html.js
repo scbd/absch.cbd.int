@@ -40,7 +40,7 @@ define(['app','underscore','/app/js/common.js',
         $scope.previewType = 'group';
         $scope.sortBy = '';
         $scope.rawDocs = [];
-
+        $scope.helpSchema = 'search'
         //============================================================
         //
         //
@@ -230,12 +230,17 @@ define(['app','underscore','/app/js/common.js',
                     $scope.governments              = self.governments;
                     $scope.regionQueryField         = 'government_REL_ss';
                     $scope.regionFacets             = self.regionFacets;
+                    $scope.helpSchema = '/search/national-records';
             }else
             if(recordType=='reference'){
                     $scope.governmentsQueryField    = 'regions_REL_ss';
                     $scope.governments              = self.referenceRegionFacets;
                     $scope.regionQueryField         = 'regions_REL_ss';
                     $scope.regionFacets             = self.referenceRegionFacets;
+                    $scope.helpSchema = '/search/reference-records';
+            }
+            else if(recordType=='countryProfile'){
+                    $scope.helpSchema = '/search/countries';
             }
         }
 

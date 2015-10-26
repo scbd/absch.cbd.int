@@ -32,17 +32,16 @@ a:active{color: #000;}
                  <md-content class="bg-grey1" style="padding-top:0;">
                     <div layout="column" layout-align="top center"  style="padding-top:0;">
                         <md-list  style="padding-top:0;">
-                            <md-list-item class="md-1-line" ng-repeat="(key,faq) in faqs " ng-class="{'bg-white': show}">
+                            <md-list-item class="md-1-line" ng-repeat="(key,faq) in faqs" style="padding:0;" >
 
                                 <md-list  style="padding-top:0;width:100%">
-                                    <md-list-item class="md-1-line" ng-class="{'bg-white': show}">
+                                    <md-list-item class="md-1-line bg-grey">
                                       <div class="md-list-item-text faqkey">
                                          <md-divider ng-if="!$first"></md-divider>
-                                            <h1> {{key}}</h1>
-                                         <md-divider></md-divider>
+                                            <h1 style="padding-top:20px;"> {{key}}</h1>
                                       </div>
                                     </md-list-item>
-                                    <md-list-item class="md-1-line" ng-repeat="term in faq " id="{{term._id}}" ng-class="{'bg-white': show}" style="padding-left:100px;width:100%">
+                                    <md-list-item class="md-1-line" ng-repeat="term in faq " id="{{term._id}}" ng-class="{'bg-white': show}" >
                                       <div class="md-list-item-text">
                                           <h3  ng-click="show=!show" style="cursor:pointer;">
                                               {{term.title}}
@@ -52,12 +51,12 @@ a:active{color: #000;}
                                           <div class="color-grey" ng-if="show" >
 
                                               <p  style="padding:20px 0;"  ng-bind-html="term.description|lstring"></p>
-                                               <div style="padding-bottom:20px;" class="color-grey" ng-show="term.related">
+                                               <!--<div style="padding-bottom:20px;" class="color-grey" ng-show="term.related">
                                                <strong>Related:</strong>
                                                     <div ng-repeat="rel in term.related">
                                                             <a href="#" ng-click="scrollTo(rel);" class="bold color-blue">{{getTitle(rel)}}</a>
                                                     </div>
-                                                </div>
+                                                </div>-->
                                                 <div class="pull-right"><a href="#"  scroll-to="anchorTop" class="color-litegrey"><i class="fa fa-arrow-circle-up"></i> back to top</a></div>
                                           </div>
                                            <md-divider ng-if="!$last"></md-divider>

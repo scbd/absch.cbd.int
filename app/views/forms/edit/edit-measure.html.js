@@ -130,7 +130,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
 
       if (!document.isAmendment) {
         document.amendedMeasures = undefined;
-        document.amendmentsDescriptio = undefined;
+        document.amendmentsDescription = undefined;
       }
       if (document.expires !== undefined)
         delete document.expires;
@@ -275,7 +275,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
 
         var readOnlyElements = [
           "24E809DA-20F4-4457-9A8A-87C08DF81E8A","A862ABFC-B97D-4E6A-9A70-812A82A7CC19","4E2974DF-216E-46C8-8797-8E3A33D6A048","E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63","08B2CDEC-786F-4977-AD0A-6A709695528D","08B2CDEC-786F-4977-AD0A-6A709695528D","01DA2D8E-F2BB-4E85-A17E-AB0219194A17"
-        ];
+        ,"9847FA8A-16C3-4466-A378-F20AF9FF883B"];
 
         var mainElements = [
           "24E809DA-20F4-4457-9A8A-87C08DF81E8A","E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63","9847FA8A-16C3-4466-A378-F20AF9FF883B","08B2CDEC-786F-4977-AD0A-6A709695528D","01DA2D8E-F2BB-4E85-A17E-AB0219194A17","1D2710D3-75C8-475D-8634-F912F06DAF25", "7CB2A03A-F0CF-4458-BB3B-A60DEC1F942E", "ECE508D3-26C6-42E6-A8B8-162606E5BA04", "ECBDB95A-B389-4DB4-AD9B-DA3590DF7781","5B6177DD-5E5E-434E-8CB7-D63D67D5EBED"
