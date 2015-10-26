@@ -51,12 +51,12 @@ a:active{color: #000;}
                                           <div class="color-grey" ng-if="show" >
 
                                               <p  style="padding:20px 0;"  ng-bind-html="term.description|lstring"></p>
-                                               <div style="padding-bottom:20px;" class="color-grey" ng-show="term.related">
+                                               <!--<div style="padding-bottom:20px;" class="color-grey" ng-show="term.related">
                                                <strong>Related:</strong>
                                                     <div ng-repeat="rel in term.related">
                                                             <a href="#" ng-click="scrollTo(rel);" class="bold color-blue">{{getTitle(rel)}}</a>
                                                     </div>
-                                                </div>
+                                                </div>-->
                                                 <div class="pull-right"><a href="#"  scroll-to="anchorTop" class="color-litegrey"><i class="fa fa-arrow-circle-up"></i> back to top</a></div>
                                           </div>
                                            <md-divider ng-if="!$last"></md-divider>
