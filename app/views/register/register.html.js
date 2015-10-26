@@ -194,7 +194,7 @@ define(['app','linqjs', 'angular-localizer',
       },
       modelContractualClause: {
         abbreviation: 'A19A20',schemaType:"referenceRecords",
-        title: 'Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and Standards ',
+        title: 'Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards ',
         help: '',
         tips: [],
       },

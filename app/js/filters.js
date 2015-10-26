@@ -110,14 +110,14 @@ define(["app",'/app/js/common.js'], function (app) {
                     government = document.metadata.government;
                 else if(document.body && document.body.government)
                     government = document.body.government.identifier;
-					
+
                 var unique = 'ABSCH' + (realm.value.toUpperCase().replace('ABS','').replace('-','')) +
 						'-' + $filter("schemaShortName")($filter("lowercase")(document.type||document.schema_s||document.schema)) +
                         '-' + (government != '' ?  $filter("uppercase")(government) : 'SCBD') +
                         '-' + documentId;
-				if( document.revision)		
+				if( document.revision)
 					unique = unique + '-' + document.revision;
-					
+
 				cacheMap[term.identifier] = unique;
 
 				return unique;
@@ -220,7 +220,7 @@ define(["app",'/app/js/common.js'], function (app) {
             if(schema.toLowerCase()=="pressrelease"				) return "Press Releases";
 			if(schema.toLowerCase()=="news"						) return "News";
 			if(schema.toLowerCase()=="absnationalreport"		) return "National Report";
-			if(schema.toLowerCase()=="modelcontractualclause"	) return "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and Standards";
+			if(schema.toLowerCase()=="modelcontractualclause"	) return "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards";
 			if(schema.toLowerCase()=="communityprotocol"		) return "Community protocols and procedures and customary laws";
 			if(schema.toLowerCase()=="meeting"					) return "Meetings";
 			if(schema.toLowerCase()=="notification"				) return "Notifications";
@@ -252,7 +252,7 @@ define(["app",'/app/js/common.js'], function (app) {
             if(schema.toLowerCase()=="pressrelease"				) return "Press Releases";
 			if(schema.toLowerCase()=="news"						) return "News";
 			if(schema.toLowerCase()=="absnationalreport"		) return "National Reports";
-			if(schema.toLowerCase()=="modelcontractualclause"	) return "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and Standards";
+			if(schema.toLowerCase()=="modelcontractualclause"	) return "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards";
 			if(schema.toLowerCase()=="communityprotocol"		) return "Community protocols and procedures and customary laws";
 			if(schema.toLowerCase()=="meeting"					) return "Meetings";
 			if(schema.toLowerCase()=="notification"				) return "Notifications";
