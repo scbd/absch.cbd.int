@@ -215,8 +215,13 @@
                                  if(document.jurisdiction_EN_t =="Other")
                                     document.jurisdiction_sort = 5;
 
-                                document.measureMatrix = true;
+                                if(!document.retired_dt || moment() <= moment(document.retired_dt)){
+                                    document.measureMatrix = true;
+                                    //retired measures
+                                    document.jurisdiction_sort = 1000;
+                                }
                                 measureMatrixDocuments.push(document);
+
                             }
 
                         });
