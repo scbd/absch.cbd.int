@@ -185,13 +185,13 @@
                                     </div>
                                     <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortMeasure='type_sort';reverseMeasure=!reverseMeasure">type <i class="fa" ng-class="{'fa-caret-up':sortMeasure=='type_sort' && reverseMeasure,'fa-caret-down':sortMeasure=='type_sort' && !reverseMeasure}" />
                                     </div>
-                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortMeasure='status_EN_t';reverseMeasure=!reverseMeasure">status <i class="fa" ng-class="{'fa-caret-up':sortMeasure=='status_EN_t' && reverseMeasure,'fa-caret-down':sortMeasure=='status_EN_t' && !reverseMeasure}" />
-                                    </div>
                                     <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortMeasure='jurisdiction_EN_t';reverseMeasure=!reverseMeasure">jurisdiction <i class="fa" ng-class="{'fa-caret-up':sortMeasure=='jurisdiction_EN_t' && reverseMeasure,'fa-caret-down':sortMeasure=='jurisdiction_EN_t' && !reverseMeasure}" />
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortMeasure='status_EN_t';reverseMeasure=!reverseMeasure">status <i class="fa" ng-class="{'fa-caret-up':sortMeasure=='status_EN_t' && reverseMeasure,'fa-caret-down':sortMeasure=='status_EN_t' && !reverseMeasure}" />
                                     </div>
                                     <div class="col-lg-1 col-md-1 col-xs-1 tableheader" ng-click="sortMeasure='entryIntoForce_dt';reverseMeasure=!reverseMeasure">entry into force/ adoption <i class="fa" ng-class="{'fa-caret-up':sortMeasure=='entryIntoForce_dt' && reverseMeasure,'fa-caret-down':sortMeasure=='entryIntoForce_dt' && !reverseMeasure}" />
                                     </div>
-                                    <div class="col-lg-1 col-md-1 col-xs-1 tableheader" ng-click="sortMeasure='retired_dt';reverseMeasure=!reverseMeasure">Not applicable <i class="fa" ng-class="{'fa-caret-up':sortMeasure=='retired_dt' && reverseMeasure,'fa-caret-down':sortMeasure=='retired_dt' && !reverseMeasure}" />
+                                    <div class="col-lg-1 col-md-1 col-xs-1 tableheader" ng-click="sortMeasure='retired_dt';reverseMeasure=!reverseMeasure">No longer applicable <i class="fa" ng-class="{'fa-caret-up':sortMeasure=='retired_dt' && reverseMeasure,'fa-caret-down':sortMeasure=='retired_dt' && !reverseMeasure}" />
                                     </div>
                                 </div>
                                 <div class="row table-hover table-msr" ng-repeat="measure in absMeasure = (measureMatrixDocuments|orderBy:sortMeasure:reverseMeasure)">
@@ -217,9 +217,9 @@
                                                     </span>
                                                     <i class="fa fa-refresh fa-spin" ng-show="displayDetails&& !measure.data" />
                                                 </div>
+                                                <div class="col-lg-2 col-md-2 col-xs-2">{{measure.jurisdiction_EN_t}}</div>
                                                 <div class="col-lg-2 col-md-2 col-xs-2">{{measure.type_EN_t}}</div>
                                                 <div class="col-lg-2 col-md-2 col-xs-2">{{measure.status_EN_t}}</div>
-                                                <div class="col-lg-2 col-md-2 col-xs-2">{{measure.jurisdiction_EN_t}}</div>
                                                 <div class="col-lg-1 col-md-1 col-xs-1">
                                                     <span ng-if="measure.entryIntoForce_dt">{{measure.entryIntoForce_dt|formatDate}}</span>
                                                     <span ng-if="measure.adoption_dt">{{measure.adoption_dt|formatDate}}</span>
