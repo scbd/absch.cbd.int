@@ -53,7 +53,7 @@ define(['app','underscore','ionsound'], function(app,_) {
                                     if ($scope.notifications) {
                                         localNotifications = _.clone($scope.notifications);
                                         _.each(data, function(message) {
-                                            var exists = _.findWhere(localNotifications,{'_id':message._id});
+                                            var exists = _.findWhere(localNotifications,{'id':message.id});
                                             if(!exists)
                                                 localNotifications.push(message);
                                         });
