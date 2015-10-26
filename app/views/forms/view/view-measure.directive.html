@@ -178,25 +178,31 @@
 		</div>
 
 		<div ng-show="document.measureAmendedBy && document.measureAmendedBy.length>0">
+			<legend>Amendments</legend>
 			<label>This measure has been amended by:</label>
 
 			<div  class="km-value">
 			<ul>
 				<li ng-repeat="item in document.measureAmendedBy" >
 						<a target="_new_win" href="/database/MSR/{{item.identifier_s}}">
-							<strong>{{item.title_t | lstring}}</strong></a>
+							<strong>{{item.title_t | lstring}}</strong>
+							<br/><label>{{item.measure.amendmentsDescription | lstring}}</label>
+						</a>
 					</li>
 			</ul>
 			</div>
 		</div>
 
 		<div ng-show="document.measureRelatedTo && document.measureRelatedTo.length>0">
+			<legend>Relations</legend>
 			<label>This measure is related to:</label>
 			<div  class="km-value">
 			<ul>
 				<li ng-repeat="item in document.measureRelatedTo" >
 					<a target="_new_win" href="/database/MSR/{{item.identifier_s}}">
-						<strong>{{item.title_t | lstring}}</strong></a>
+						<strong>{{item.title_t | lstring}}</strong>
+						<br/><label>{{item.measure.amendmentsDescription | lstring}}</label>
+					</a>
 				</li>
 			</ul>
 			</div>
