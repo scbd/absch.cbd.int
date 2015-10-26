@@ -13,7 +13,6 @@ app.controller("faqController",
 				    });
 				    return memo;
 				}, { });
-				console.log($scope.faqs);
           });
 
           $scope.isAdmin = function(){
