@@ -51,7 +51,7 @@
                         $scope.showCP = false;
                         $scope.showCPCRecv = false;
 
-                        $scope.sortMeasure="[jurisdiction_sort, type_sort, status_sort, title_t]";
+                        $scope.sortMeasure="[jurisdiction_sort, type_sort, status_sort, createdDate_dt, title_t]";
                         $scope.reverseMeasure=false;
                         $scope.sortPermit='title_t';
                         $scope.reversePermit=false;
@@ -217,8 +217,10 @@
 
                                 if(!document.retired_dt || moment() <= moment(document.retired_dt)){
                                     document.measureMatrix = true;
+                                }
+                                else{
                                     //retired measures
-                                    document.jurisdiction_sort = 1000;
+                                    document.jurisdiction_sort = 9;
                                 }
                                 measureMatrixDocuments.push(document);
 
