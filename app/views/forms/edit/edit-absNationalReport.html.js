@@ -66,43 +66,44 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
     //
     //==================================
     $scope.isQ3Yes = function (answer) {
-        if(answer === true || answer === undefined){
-
-            if($scope.document && $scope.document.question3){
-                $scope.document.question3.challengesInfo       = undefined;
-            }
-
-            if($scope.document && $scope.document.question4 && hasValue($scope.document.question4.answer)){
-                $scope.document.question4.answer               = undefined;
-                $scope.document.question4.furtherInfo          = undefined;
-                $scope.document.question4.additionalInfo       = undefined;
-                $scope.document.question4.documentReferenceIDs = undefined;
-            }
-
-            if($scope.document && $scope.document.question5 && hasValue($scope.document.question5.answer)){
-                $scope.document.question5.answer               = undefined;
-                $scope.document.question5.furtherInfo          = undefined;
-                $scope.document.question5.documentReferenceIDs = undefined;
-            }
-
-            if($scope.document && $scope.document.question6 && hasValue($scope.document.question6.answer)){
-                $scope.document.question6.answer               = undefined;
-                $scope.document.question6.furtherInfo          = undefined;
-                $scope.document.question6.documentReferenceIDs = undefined;
-            }
-
-            if($scope.document && $scope.document.question7 && hasValue($scope.document.question7.answer)){
-                $scope.document.question7.answer               = undefined;
-                $scope.document.question7.furtherInfo          = undefined;
-                $scope.document.question7.documentReferenceIDs = undefined;
-            }
+        if(answer === true || answer === undefined)
             return true;
+        return false;
+    }
+
+    //==================================
+    //
+    //==================================
+    $scope.Q3Clear = function () {
+        if($scope.document && $scope.document.question3){
+            $scope.document.question3.challengesInfo       = undefined;
+            $scope.document.question3.documentReferenceIDs = undefined;
         }
 
-        if($scope.document && $scope.document.question3 && $scope.document.question3.documentReferenceIDs)
-            $scope.document.question3.documentReferenceIDs = undefined;
+        if($scope.document && $scope.document.question4){
+            $scope.document.question4.answer               = undefined;
+            $scope.document.question4.furtherInfo          = undefined;
+            $scope.document.question4.additionalInfo       = undefined;
+            $scope.document.question4.documentReferenceIDs = undefined;
+        }
 
-        return false;
+        if($scope.document && $scope.document.question5){
+            $scope.document.question5.answer               = undefined;
+            $scope.document.question5.furtherInfo          = undefined;
+            $scope.document.question5.documentReferenceIDs = undefined;
+        }
+
+        if($scope.document && $scope.document.question6){
+            $scope.document.question6.answer               = undefined;
+            $scope.document.question6.furtherInfo          = undefined;
+            $scope.document.question6.documentReferenceIDs = undefined;
+        }
+
+        if($scope.document && $scope.document.question7){
+            $scope.document.question7.answer               = undefined;
+            $scope.document.question7.furtherInfo          = undefined;
+            $scope.document.question7.documentReferenceIDs = undefined;
+        }
     };
 
     //==================================
