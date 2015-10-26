@@ -221,8 +221,8 @@
                                                 <div class="col-lg-2 col-md-2 col-xs-2">{{measure.type_EN_t}}</div>
                                                 <div class="col-lg-2 col-md-2 col-xs-2">{{measure.status_EN_t}}</div>
                                                 <div class="col-lg-1 col-md-1 col-xs-1">
-                                                    <span ng-if="measure.entryIntoForce_dt">{{measure.entryIntoForce_dt|formatDate}}</span>
-                                                    <span ng-if="measure.adoption_dt">{{measure.adoption_dt|formatDate}}</span>
+                                                    <span ng-if="measure.entryIntoForce_dt">{{measure.entryIntoForce_dt|formatDate}} (entry into force)</span>
+                                                    <span ng-if="measure.adoption_dt">{{measure.adoption_dt|formatDate}} (adoption)</span>
                                                 </div>
                                                 <div class="col-lg-1 col-md-1 col-xs-1">
                                                     <span ng-if="measure.retired_dt">{{measure.retired_dt|formatDate}}</span>
