@@ -100,6 +100,7 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
         }
 
         if($scope.document && $scope.document.question7){
+            $scope.document.question7.notApplicable        = undefined;
             $scope.document.question7.answer               = undefined;
             $scope.document.question7.furtherInfo          = undefined;
             $scope.document.question7.documentReferenceIDs = undefined;
