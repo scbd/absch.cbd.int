@@ -32,7 +32,7 @@ a:active{color: #000;}
                  <md-content class="bg-grey1" style="padding-top:0;">
                     <div layout="column" layout-align="top center"  style="padding-top:0;">
                         <md-list  style="padding-top:0;">
-                            <md-list-item class="md-1-line" ng-repeat="(key,faq) in faqs" style="padding:0;" >
+                            <md-list-item class="md-1-line" ng-repeat="(key,faq) in faqs|orderBy:['key']" style="padding:0;" >
 
                                 <md-list  style="padding-top:0;width:100%">
                                     <md-list-item class="md-1-line bg-grey">
@@ -41,7 +41,7 @@ a:active{color: #000;}
                                             <h1 style="padding-top:20px;"> {{key}}</h1>
                                       </div>
                                     </md-list-item>
-                                    <md-list-item class="md-1-line" ng-repeat="term in faq " id="{{term._id}}" ng-class="{'bg-white': show}" >
+                                    <md-list-item class="md-1-line" ng-repeat="term in faq|orderBy:['sequence'] " id="{{term._id}}" ng-class="{'bg-white': show}" >
                                       <div class="md-list-item-text">
                                           <h3  ng-click="show=!show" style="cursor:pointer;">
                                               {{term.title}}

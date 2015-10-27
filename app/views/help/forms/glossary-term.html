@@ -1,6 +1,6 @@
 <section layout="row" style="position:relative; top:20px; padding-bottom:30px;" flex ng-controller="glossaryTermController"
 style="max-width:90%">
-   
+
     <md-sidenav class="md-sidenav-left md-whiteframe-z1" md-component-id="left" md-is-locked-open="$mdMedia('min-width: 1200px')"
     style="height:818px;">
 
@@ -11,7 +11,7 @@ style="max-width:90%">
 
         <md-content layout-padding layout-margin>
             <md-list >
-                <md-list-item>                        
+                <md-list-item>
                     <input type="text" ng-model="search" placeholder="search" class="form-control">
                     <md-divider></md-divider>
                 </md-list-item>
@@ -45,6 +45,10 @@ style="max-width:90%">
                     <div ng-if="mode=='edit'">
                         <form name="editForm" style="margin-top:10px" class="editForm">
                             <md-input-container>
+                                <label>Sequence</label>
+                                <input name="sequence" ng-model="document.sequence" required type="number">
+                            </md-input-container>
+                            <md-input-container>
                                 <label>{{helptype}}</label>
                                 <input name="title" ng-model="document.title" required md-maxlength="200" minlength="4">
                                 <div ng-messages="editForm.title.$error" ng-show="editForm.title.$dirty">
@@ -55,7 +59,7 @@ style="max-width:90%">
                             </md-input-container>
                             <md-input-container>
                                 <label>{{helptype}} Description</label>
-                                <div km-rich-textbox name="description" ng-model="document.description" rows="6" 
+                                <div km-rich-textbox name="description" ng-model="document.description" rows="6"
                                                         placeholder="" locales="languages" required toolbar="[['bold', 'italics', 'ul', 'ol', 'redo', 'undo', 'clear'], ['insertLink', 'html']]"></div>
                                 <!--<textarea name="description" ng-model="document.description" required md-maxlength="25000" minlength="4" />-->
                                 <div ng-messages="editForm.titdescriptionle.$error" ng-show="editForm.description.$dirty">
@@ -65,7 +69,7 @@ style="max-width:90%">
                                 </div>
                             </md-input-container>
                             <div layout="column">
-                                <md-select placeholder="Related FAQs" ng-model="document.related" 
+                                <md-select placeholder="Related FAQs" ng-model="document.related"
                                     md-on-open="loadFAQs()" style="min-width: 200px;" multiple="true">
                                     <md-option ng-value="faq._id" ng-repeat="faq in faqs">{{faq.title}}</md-option>
                                 </md-select>
@@ -86,7 +90,7 @@ style="max-width:90%">
                         </form>
                     </div>
                     <div ng-if="mode=='read'">
-                        <div class="pull-right">                            
+                        <div class="pull-right">
                             <!--<button type="button" class="btn btn-warning pull-right" ng-click="saveGlossary()" ng-if="!document.description.en">
                                 need save
                             </button>-->
@@ -98,10 +102,10 @@ style="max-width:90%">
                             </button>
                         </div>
                         <section>
-                            <legend name="termCation">{{document.title}}</legend>
+                            <legend name="termCation">{{document.sequence}} {{document.title}}</legend>
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div class="control-group" name="name" required caption="Term Caption" ng-bind-html="document.description|lstring">                                        
+                                    <div class="control-group" name="name" required caption="Term Caption" ng-bind-html="document.description|lstring">
                                     </div>
                                 </div>
                             </div>
@@ -127,13 +131,13 @@ style="max-width:90%">
                             <legend>Tags</legend>
                             <div class="row">
                                 <div class="col-xs-12">
-                                    
+
                                         <md-chips ng-model="document.tags" readonly="true">
                                             <md-chip-template>
                                                 <a href="/help/{{helptype.toLowerCase()}}/tags/{{$chip}}">
                                                     {{$chip}}
                                                 </a>
-                                            </md-chip-template>    
+                                            </md-chip-template>
                                         </md-chips>
                                 </div>
                             </div>
