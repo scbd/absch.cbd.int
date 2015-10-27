@@ -311,6 +311,7 @@ define(['app', 'underscore','angular', '/app/js/common.js'], function(app, _, an
                                 }
                                 term.sortOrder = getJurisdictionSortIndex(doc.document.jurisdiction.identifier);
                                 term.sortOrder2 = getDocumentTypeSortIndex(doc.document.type.identifier);
+                                term.createdDate_dt = doc.createdDate_dt;
                             }
                             else{
                                 doc ={document: $scope.document};
