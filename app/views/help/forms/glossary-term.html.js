@@ -8,12 +8,12 @@ define(['angular', 'app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate
 
           $scope.languages = ['en'];
           var url = '/api/v2015/' + $route.current.$$route.schema;
-          
+
           if($route.current.$$route.schema == 'help-faqs')
               $scope.helptype = 'FAQ';
           else
               $scope.helptype = 'Glossary';
-          
+
           var orignal = {};
           $scope.mode = 'read';
           $scope.relatedFAQ = [];
@@ -30,12 +30,12 @@ define(['angular', 'app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate
           }
           $scope.loadGlossarys = function () {
             var params = {};
-            
+
             if($routeParams.tag){
-              //alteredUrl += '?q' 
+              //alteredUrl += '?q'
               params = {q : {tags: $routeParams.tag}}
             }
-            
+
             $q.when($http.get(url, {params:params}))
               .then(function (response) {
                 $scope.glossarys = response.data;
@@ -64,10 +64,10 @@ define(['angular', 'app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate
             else {
               operation = $http.put(url + '/' + $scope.document._id, $scope.document)
             }
-            
+
             // if(!$scope.document.description.en)
-            //   $scope.document.description = {en: $scope.document.description}  
-            
+            //   $scope.document.description = {en: $scope.document.description}
+
             $q.when(operation)
               .then(function (response) {
                 orignal = angular.copy($scope.document);
@@ -82,6 +82,7 @@ define(['angular', 'app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate
                   doc.tags = $scope.document.tags;
                   doc.referenceTerm = $scope.document.referenceTerm;
                   doc.related = $scope.document.related;
+                  doc.sequence = document.sequence;
                   updateBreadcrumbs();
                 }
                 $mdToast.show(
@@ -121,7 +122,7 @@ define(['angular', 'app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate
               $scope.document.tags = [];
             if (!$scope.document.referenceTerm)
               $scope.document.referenceTerm = [];
-           
+
           }
 
           $scope.cancel = function () {
@@ -140,14 +141,14 @@ define(['angular', 'app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate
             updateBreadcrumbs();
 
           }
-          
+
           $scope.deleteGlossary = function (glossaryDocument) {
-						
+
 						// Appending dialog to document.body to cover sidenav in docs app
 						var confirm = $mdDialog.confirm()
-							.title('Would you like to delete this ' + $scope.helptype + '?')	
+							.title('Would you like to delete this ' + $scope.helptype + '?')
 							.ok('yes').cancel('cancel');
-							
+
 						$mdDialog.show(confirm)
 								.then(function() {
 									$q.when($http.delete(url + '/' + $scope.document._id))
@@ -159,15 +160,15 @@ define(['angular', 'app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate
 													.content($scope.helptype + ' deleted!')
 													.position("top right")
 													.hideDelay(3000)
-												);	
+												);
 									});
 							});
-						
-						
-						
+
+
+
 					}
-          
-          
+
+
           if ($routeParams.term) {
 
             if ($routeParams.term == 'new') {
