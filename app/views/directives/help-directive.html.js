@@ -182,14 +182,14 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                                 joyRideTemplate += '  <li data-id="' + field.name + '" ' + buttons + '><p>'
                                                                 + $filter('lstring')(field.helpText) + '</p></li>';
 
-                                                               if(field.popup){
-                                                                        var element = $element.find('#' + field.name);
-                                                                        element.attr('data-toggle',"tooltip");
-                                                                        element.attr('data-html',"true");
-                                                                        element.attr('data-container',"body");
-                                                                        //element.attr('data-placement', "left");
-                                                                        element.attr('title', $filter('lstring')(field.helpText));
-                                                               }
+                                                            //    if(field.popup){
+                                                            //             var element = $element.find('#' + field.name);
+                                                            //             element.attr('data-toggle',"tooltip");
+                                                            //             element.attr('data-html',"true");
+                                                            //             element.attr('data-container',"body");
+                                                            //             //element.attr('data-placement', "left");
+                                                            //             element.attr('title', $filter('lstring')(field.helpText));
+                                                            //    }
                                                                index++;
                                                         });
 
