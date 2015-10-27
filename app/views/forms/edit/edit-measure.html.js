@@ -330,12 +330,13 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
             for (var i = 0; i < $scope.binding.length; ++i) {
               var identifier = $scope.binding[i].identifier;
               //handle others
-              if($scope.binding[i].parent){
-                  identifier += '#' + $scope.binding[i].parent;
-                  oNewOtherCustomValues[identifier] = $scope.binding[i].customValue
+              if($scope.binding[i].parent || identifier == '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'){
+                  if($scope.binding[i].parent)
+                    identifier += '#' + $scope.binding[i].parent;
+                  oNewOtherCustomValues[identifier] = $scope.binding[i].customValue;
               }
               oNewIdentifiers[identifier] = true;
-              oNewSections[identifier] = $scope.binding[i].section
+              oNewSections[identifier] = $scope.binding[i].section;
             }
           }
 
@@ -360,7 +361,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
 
               var oTerm = { identifier: term.identifier };
               //handle others
-              if(oTerm.identifier.indexOf('#')>0){
+              if(oTerm.identifier.indexOf('#')>0 || oTerm.identifier == '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'){
                 var identifiers   = oTerm.identifier.split('#');
                 oTerm.identifier  = identifiers[0];
                 oTerm.parent      = identifiers[1];

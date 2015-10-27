@@ -72,7 +72,8 @@ define(['app', 'underscore','angular', '/app/js/common.js'], function(app, _, an
                         function(data) { // on success
                             $scope.terms = data[0].data||data[0];
                             other        = data[1].data||data[1];
-
+                            //main other
+                            $scope.terms.push(angular.copy(other));
                             _.each(elementsForOthers, function(element){
 
                                 if(!_.some($scope.terms, {identifier:other.identifier + '#' + element})){
@@ -112,8 +113,9 @@ define(['app', 'underscore','angular', '/app/js/common.js'], function(app, _, an
                                       var identifier = $scope.binding[i].identifier;
                                       //handle others
                                       if($scope.binding[i].parent || identifier == '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'){
-                                          identifier += ('#' + $scope.binding[i].parent) || '';
-                                          oNewCustomValues[identifier] = $scope.binding[i].customValue
+                                          if($scope.binding[i].parent)
+                                            identifier += '#' + $scope.binding[i].parent;
+                                          oNewCustomValues[identifier] = $scope.binding[i].customValue;
                                       }
                                       oNewIdentifiers[identifier] = true;
                                       oNewSections[identifier] = $scope.binding[i].section||{};

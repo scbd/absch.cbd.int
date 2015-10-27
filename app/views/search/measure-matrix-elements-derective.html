@@ -146,17 +146,19 @@
     </table>
     <script type="text/ng-template" id="/app/views/search/matrix/measure-matrix.directive/abs/inner">
 
-        <table class="table" ng:if="term.isChildSelected || (!term.broaderTerms && term.narrowerTerms) || (!term.broaderTerms && !term.narrowerTerms)">
+        <table class="table" ng:if="term.isChildSelected || (!term.broaderTerms && term.narrowerTerms) || (!term.broaderTerms && !term.narrowerTerms) || (term.identifier == '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')">
             <tr ng:class="{'elementMeasure':term.isMeasure, 'whiteTopBorder':term.hasMeasure}" >
                 <td class="matrixheaderColumn rightBorder "
-                ng:class="{'paddingleft0':term.level==1, 'paddingleft3':term.level==2 && !term.isMeasure && term.identifier.indexOf('#')<0 , 'paddingleft6':term.level==3, 'paddingleft9':term.level==4}">
+                ng:class="{'paddingleft0':term.level==1, 'paddingleft3':term.level==2 && !term.isMeasure && term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')<0 , 'paddingleft6':term.level==3, 'paddingleft9':term.level==4}">
                         &nbsp;
                         <strong ng-if="!term.broaderTerms">
                            {{  term.title||term.name | lstring:locale|uppercase}}
+                           <span ng-if="term.identifier == '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED' && otherCustomValues[term.identifier]">:{{otherCustomValues[term.identifier]| lstring:locale}}</span>
                         </strong>
                         <!--exception for TK-->
-                        <span ng-if="term.broaderTerms && !term.isMeasure" ng-style="{'boldLabel':term.identifier=='B8A150E054154AD3AD97856ABD485E90'}">
-                            {{ (term.identifier.indexOf('#')>0 ? otherCustomValues[term.identifier]  : term.title||term.name)  | lstring:locale}}
+                        <span ng-if="term.broaderTerms && !term.isMeasure"
+                        ng-style="{'boldLabel':term.identifier=='B8A150E054154AD3AD97856ABD485E90'}">
+                            {{ ((term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0) ? otherCustomValues[term.identifier]  : term.title||term.name)  | lstring:locale}}
                         </span>
                         <span ng-if="term.broaderTerms && term.isMeasure">
                             <span ng-if="term.measureType=='linked'">Related to</span>
