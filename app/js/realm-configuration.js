@@ -1,6 +1,6 @@
 define(['app', 'underscore'], function(app, _) {
     var nationalSchemas = ["absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "focalPoint"];
-    var referenceSchemas = ["resource", "meeting", "notification", "pressRelease", "statement", "news", "modelContractualClause"];
+    var referenceSchemas = ["resource", "meeting", "notification", "pressRelease", "statement", "news", "modelContractualClause", "communityProtocol"];
 
     var realmConfigurations = [
         //Production
