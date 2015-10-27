@@ -158,6 +158,13 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
       if (!$scope.isRetired(document))
         document.retired = undefined;
 
+    if(document.adoption=='')
+        document.adoption = undefined;
+    if(document.entryIntoForce=='')
+        document.entryIntoForce = undefined;
+    if(document.retired=='')
+        document.retired = undefined;
+
       if (/^\s*$/g.test(document.notes))
         document.notes = undefined;
 
