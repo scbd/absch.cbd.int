@@ -48,7 +48,7 @@ label{width:100%;}
                         <div style="color:#333;font-size:11px;font-weight:bold;margin-right:0;padding-bottom:10px;padding-top:12px;">Filter country name</div>
                         <input id="countryName" ng-model="countryProfileSearch.countryProfile_keyword" placeholder="country name" style="width:100%;border:0;border-bottom:1px solid #ddd;">
                         </div>
-                        
+
                         <div style="padding-bottom:10px;">
                         <div style="color:#333;font-size:11px;font-weight:bold;margin-right:0;padding-bottom:10px;padding-top:12px;">Filter by Party status</div>
                         <div class="btn-group" style="width:100%;padding:0;margin:0;">
@@ -133,7 +133,7 @@ label{width:100%;}
                         </div>
 
                      <div class="btn-group" style="width:100%;padding:0;margin:0;">
-                            <button type="button" class="btn btn-default dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                            <button type="button" id="nrPartyStatus" class="btn btn-default dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                             style="width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;padding:0;margin:0;">
                                 <div style="font-size:11px;color:#333;font-weight:bold;padding:0 0 10px 0;margin:0;">Filter by Party status </div>
                                 <div ng-show="!partyStatus" style="color:#AAA;font-weight:bold;padding:0;margin:0;">Select Party status <span class="pull-right"><i class="caret"></i></span></div>
@@ -155,22 +155,22 @@ label{width:100%;}
 
                      <div style="padding-bottom:0px;border-bottom:1px solid #ddd;margin:0;">
                           <div style="color:#333;font-size:11px;font-weight:bold;margin-right:0;padding-bottom:10px;padding-top:12px;">Filter by countries</div>
-                        <a href="" data-toggle="modal" data-target="#countryModal"  style="font-weight:bold;color:#AAA;margin-top:15px;padding-left:3px;">Select countries  <span class="pull-right"><i class="caret"></i></span></a>
+                        <a id="nrCountries" href="" data-toggle="modal" data-target="#countryModal"  style="font-weight:bold;color:#AAA;margin-top:15px;padding-left:3px;">Select countries  <span class="pull-right"><i class="caret"></i></span></a>
 
                     </div>
                      <div  style="padding-bottom:0px;border-bottom:1px solid #ddd;margin:0;">
                          <div style="color:#333;font-size:11px;font-weight:bold;margin-right:0;padding-bottom:10px;padding-top:12px;">Filter by regions</div>
-                        <a href="" ng-click="$parent.loadRegions=true;"data-toggle="modal" data-target="#regionModal" style="font-weight:bold;color:#AAA;margin-top:15px;padding-left:3px;">Select regions <span class="pull-right"><i class="caret"></i></span></a>
+                        <a id="nrRegions" href="" ng-click="$parent.loadRegions=true;"data-toggle="modal" data-target="#regionModal" style="font-weight:bold;color:#AAA;margin-top:15px;padding-left:3px;">Select regions <span class="pull-right"><i class="caret"></i></span></a>
 
                     </div>
 
 
-                    <div style="color:#333;font-size:11px;font-weight:bold;margin-right:0;padding-bottom:10px;padding-top:12px;">Filter by record type</div>
+                    <div id="nrRecordTypes" style="color:#333;font-size:11px;font-weight:bold;margin-right:0;padding-bottom:10px;padding-top:12px;">Filter by record type</div>
 
 
 
                       <div  ng-class="{'check_active': focalPoint.selected}" style="padding:5px 0;border-bottom:1px solid #ddd;">
-                        <div layout="row">
+                        <div layout="row" id="nrNFP">
                             <div> <input type="checkbox" ng-model="focalPoint.selected" bind-indeterminate="focalPoint.indeterminate" ng-change="refresh(focalPoint.selected,'focalPoint')"></div>
                             <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': focalPoint.selected==false}"> ABS National Focal Points </span></div>
                             <div> <span class="badge badge-white pull-right">{{focalPoint.count}}</span></div>
@@ -178,7 +178,7 @@ label{width:100%;}
                     </div>
 
                       <div ng-class="{'check_active': authority.selected}" style="padding:5px 0;border-bottom:1px solid #ddd;">
-                        <div layout="row">
+                        <div layout="row" id="nrCNA">
                             <div> <input type="checkbox" ng-model="authority.selected" bind-indeterminate="authority.indeterminate" ng-change="refresh(authority.selected,'authority')"></div>
                             <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': authority.selected==false}"> Competent National Authorities </span></div>
                             <div> <span class="badge badge-white pull-right">{{authority.count}}</span></div>
@@ -191,7 +191,7 @@ label{width:100%;}
                     </div>
 
                     <div ng-class="{'check_active': measure.selected}" style="padding:5px 0;border-bottom:1px solid #ddd;">
-                        <div layout="row">
+                        <div layout="row" id="nrMSR">
                             <div> <input type="checkbox" ng-model="measure.selected" bind-indeterminate="measure.indeterminate" ng-change="refresh(measure.selected,'measure')"></div>
                             <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': measure.selected==false}">Legislative, administrative or policy measures </span></div>
                             <div> <span class="badge badge-white pull-right">{{measure.count}}</span></div>
@@ -216,7 +216,7 @@ label{width:100%;}
 
 
                      <div ng-class="{'check_active': database.selected}" style="padding:5px 0;border-bottom:1px solid #ddd;">
-                        <div layout="row">
+                        <div layout="row" id="nrDBN">
                             <div> <input type="checkbox" ng-model="database.selected" bind-indeterminate="database.indeterminate" ng-change="refresh(database.selected,'database')"></div>
                             <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': database.selected==false}"> National Websites and Databases </span></div>
                             <div> <span class="badge badge-white pull-right">{{database.count}}</span></div>
@@ -225,7 +225,7 @@ label{width:100%;}
 
 
                 <div ng-class="{'check_active': absPermit.selected}" style="padding:5px 0;border-bottom:1px solid #ddd;">
-                        <div layout="row">
+                        <div layout="row" id="nrIRCC">
                             <div> <input type="checkbox" ng-model="absPermit.selected" bind-indeterminate="absPermit.indeterminate" ng-change="refresh(absPermit.selected,'absPermit')"></div>
                             <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': absPermit.selected==false}"> Internationally Recognized Certificate of Compliance </span></div>
                             <div> <span class="badge badge-white pull-right">{{absPermit.count}}</span></div>
@@ -272,7 +272,7 @@ label{width:100%;}
 
 
                  <div ng-class="{'check_active': absCheckpoint.selected}" style="padding:5px 0;border-bottom:1px solid #ddd;">
-                        <div layout="row">
+                        <div layout="row" id="nrCP">
                             <div> <input type="checkbox" ng-model="absCheckpoint.selected" bind-indeterminate="absCheckpoint.indeterminate" ng-change="refresh(absCheckpoint.selected,'authority')"></div>
                             <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': absCheckpoint.selected==false}"> Checkpoints</span></div>
                             <div> <span class="badge badge-white pull-right">{{absCheckpoint.count}}</span></div>
@@ -284,7 +284,7 @@ label{width:100%;}
 
 
                    <div  ng-class="{'check_active': absCheckpointCommunique.selected}" style="padding:5px 0;" >
-                        <div layout="row">
+                        <div layout="row" id="nrCPC">
                             <div> <input type="checkbox" ng-model="absCheckpointCommunique.selected" bind-indeterminate="absCheckpointCommunique.indeterminate" ng-change="refresh(absCheckpointCommunique.selected,'authority')"></div>
                             <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': absCheckpointCommunique.selected==false}"> Checkpoint Communiqué</span></div>
                             <div> <span class="badge badge-white pull-right">{{absCheckpointCommunique.count}}</span></div>
@@ -297,7 +297,7 @@ label{width:100%;}
 
         <div class="panel panel-default " style="border-radius:0!important;border:0; ">
             <div class="panel-heading bg-orange " role="tab " id="headingThree " style="border-radius:0!important;border:0;padding:18px; ">
-                <span class="panel-title " >
+                <span class="panel-title "  id="rrReferenceRecords">
                     <!--aria-expanded="false "role="button" data-toggle="collapse" data-parent="#accordion " aria-controls="collapseThree " -->
                     <a class="collapsed "  ng-click="changeRecordType('reference');"
                     style="font-size:20px; cursor:pointer;" id="lblReferenceRecords">
@@ -313,7 +313,7 @@ label{width:100%;}
 
 
                      <div class="btn-group" style="width:100%;padding:0;margin:0;">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                            <button type="button"  id="rrOrderRecords" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                             style="width:100%;border:0;border-bottom:1px solid #DDD;border-radius:0;text-align:left;padding:0;margin:0;">
                                 <div style="font-size:11px;color:#333;font-weight:bold;padding:0 0 10px 0;margin:0;">Order results by</div>
                                 <div ng-show="!orderReferenceBy" style="color:#AAA;font-weight:bold;padding:0;margin:0;">Order results by <span class="pull-right"><i class="caret"></i></span></div>
@@ -336,29 +336,29 @@ label{width:100%;}
 
                         <div style="padding-bottom:10px;">
                         <div style="color:#333;font-size:11px;font-weight:bold;margin-right:0;padding-bottom:10px;padding-top:12px;">Filter by keyword</div>
-                        <input ng-model="keyword" placeholder="keyword" style="width:100%;border:0;border-bottom:1px solid #ddd;">
+                        <input   id="rrKeywords" ng-model="keyword" placeholder="keyword" style="width:100%;border:0;border-bottom:1px solid #ddd;">
                         </div>
 
                     <div style="padding-bottom:0px;border-bottom:1px solid #ddd;margin:0;">
                         <div style="color:#333;font-size:11px;font-weight:bold;margin-right:0;padding-bottom:10px;padding-top:3px;">Filter by countries</div>
-                        <a href="" data-toggle="modal" data-target="#countryModal"  style="font-weight:bold;color:#AAA;margin-top:15px;padding-left:3px;">Select countries <span class="pull-right"><i class="caret"></i></span></a>
+                        <a id="rrCountries"  href="" data-toggle="modal" data-target="#countryModal"  style="font-weight:bold;color:#AAA;margin-top:15px;padding-left:3px;">Select countries <span class="pull-right"><i class="caret"></i></span></a>
                     </div>
 
                      <div style="padding-bottom:0px;border-bottom:1px solid #ddd;margin:0;">
                          <div style="color:#333;font-size:11px;font-weight:bold;margin-right:0;padding-bottom:10px;padding-top:12px;">Filter by regions</div>
-                        <a href="" ng-click="$parent.loadRegions=true;"data-toggle="modal" data-target="#regionModal" style="font-weight:bold;color:#AAA;margin-top:15px;padding-left:3px;">Select regions <span class="pull-right"><i class="caret"></i></span></a>
+                        <a id="rrRegions"  href="" ng-click="$parent.loadRegions=true;"data-toggle="modal" data-target="#regionModal" style="font-weight:bold;color:#AAA;margin-top:15px;padding-left:3px;">Select regions <span class="pull-right"><i class="caret"></i></span></a>
                     </div>
 
                     <div style="padding-bottom:0px;border-bottom:1px solid #ddd;margin:0;">
                          <div style="color:#333;font-size:11px;font-weight:bold;margin-right:0;padding-bottom:10px;padding-top:12px;">Filter by thematic areas</div>
-                        <a href="" ng-click="$parent.loadThemes=true;"data-toggle="modal" data-target="#themeModal" style="font-weight:bold;color:#AAA;margin-top:15px;padding-left:3px;">Select Thematic Area <span class="pull-right"><i class="caret"></i></span></a>
+                        <a id="rrThematicArea"  href="" ng-click="$parent.loadThemes=true;"data-toggle="modal" data-target="#themeModal" style="font-weight:bold;color:#AAA;margin-top:15px;padding-left:3px;">Select Thematic Area <span class="pull-right"><i class="caret"></i></span></a>
                     </div>
 
 
-                            <div style="color:#333;font-size:11px;font-weight:bold;margin-right:0;padding-bottom:10px;padding-top:12px;">Filter by record type</div>
+                            <div id="rrRecordType"  style="color:#333;font-size:11px;font-weight:bold;margin-right:0;padding-bottom:10px;padding-top:12px;">Filter by record type</div>
 
                             <div  ng-class="{'check_active': resource.selected}" style="padding:5px 0;border-bottom:1px solid #ddd;">
-                                <div layout="row">
+                                <div layout="row" id="rrVLR" >
                                     <div> <input type="checkbox" ng-model="resource.selected" bind-indeterminate="resource.indeterminate" ng-change="refresh(resource.selected,'resource')"></div>
                                     <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': resource.selected==false}"> Virtual Library Records   </span></div>
                                     <div> <span class="badge badge-white pull-right">{{resource.count}}</span></div>
@@ -371,7 +371,7 @@ label{width:100%;}
                             </div>
 
                             <div  ng-class="{'check_active': modelContractualClause.selected}" style="padding:5px 0;border-bottom:1px solid #ddd;">
-                                <div layout="row">
+                                <div layout="row" id="rrMCC" >
                                     <div> <input type="checkbox" ng-model="modelContractualClause.selected" bind-indeterminate="modelContractualClause.indeterminate" ng-change="refresh(modelContractualClause.selected,'modelContractualClause')"></div>
                                     <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': modelContractualClause.selected==false}"> Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards</span></div>
                                     <div> <span class="badge badge-white pull-right">{{modelContractualClause.count}}</span></div>
@@ -383,7 +383,7 @@ label{width:100%;}
 
 
                             <div  ng-class="{'check_active': communityProtocol.selected}" style="padding:5px 0;border-bottom:1px solid #ddd;">
-                                <div layout="row">
+                                <div layout="row" id="rrCPP" >
                                     <div> <input type="checkbox" ng-model="communityProtocol.selected" bind-indeterminate="communityProtocol.indeterminate" ng-change="refresh(communityProtocol.selected,'communityProtocol')"></div>
                                     <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': communityProtocol.selected==false}">Community protocols and procedures and customary laws</span></div>
                                     <div> <span class="badge badge-white pull-right">{{communityProtocol.count}}</span></div>
@@ -394,7 +394,7 @@ label{width:100%;}
                             </div>
 
                             <div  ng-class="{'check_active': meeting.selected}" style="padding:5px 0;border-bottom:1px solid #ddd;">
-                                <div layout="row">
+                                <div layout="row" id="rrMeetings" >
                                     <div> <input type="checkbox" ng-model="meeting.selected" bind-indeterminate="meeting.indeterminate" ng-change="refresh(meeting.selected,'meeting')"></div>
                                     <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': meeting.selected==false}">Meetings</span></div>
                                     <div> <span class="badge badge-white pull-right">{{meeting.count}}</span></div>
@@ -406,7 +406,7 @@ label{width:100%;}
 
 
                              <div  ng-class="{'check_active': notification.selected}" style="padding:5px 0;border-bottom:1px solid #ddd;">
-                                <div layout="row">
+                                <div layout="row" id="rrNotifications" >
                                     <div> <input type="checkbox" ng-model="notification.selected" bind-indeterminate="notification.indeterminate" ng-change="refresh(notification.selected,'notification')"></div>
                                     <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': notification.selected==false}">Notifications</span></div>
                                     <div> <span class="badge badge-white pull-right">{{notification.count}}</span></div>
@@ -414,7 +414,7 @@ label{width:100%;}
                             </div>
 
                            <div  ng-class="{'check_active': pressRelease.selected}" style="padding:5px 0;border-bottom:1px solid #ddd;">
-                                <div layout="row">
+                                <div layout="row" id="rrPR" >
                                     <div> <input type="checkbox" ng-model="pressRelease.selected" bind-indeterminate="pressRelease.indeterminate" ng-change="refresh(pressRelease.selected,'pressRelease')"></div>
                                     <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': pressRelease.selected==false}">Press Releases</span></div>
                                     <div> <span class="badge badge-white pull-right">{{pressRelease.count}}</span></div>
@@ -422,7 +422,7 @@ label{width:100%;}
                             </div>
 
                              <div  ng-class="{'check_active': statement.selected}" style="padding:5px 0;border-bottom:1px solid #ddd;">
-                                <div layout="row">
+                                <div layout="row" id="rrStatement" >
                                     <div> <input type="checkbox" ng-model="statement.selected" bind-indeterminate="statement.indeterminate" ng-change="refresh(statement.selected,'statement')"></div>
                                     <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': pressRelease.selected==false}">Statements</span></div>
                                     <div> <span class="badge badge-white pull-right">{{statement.count}}</span></div>
@@ -430,7 +430,7 @@ label{width:100%;}
                             </div>
 
                             <div  ng-class="{'check_active': news.selected}" style="padding:5px 0;">
-                                <div layout="row">
+                                <div layout="row" id="rrnews" >
                                     <div> <input type="checkbox" ng-model="news.selected" bind-indeterminate="news.indeterminate" ng-change="refresh(news.selected,'news')"></div>
                                     <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': pressRelease.selected==false}">News</span></div>
                                     <div> <span class="badge badge-white pull-right">{{news.count}}</span></div>
