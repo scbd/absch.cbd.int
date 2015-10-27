@@ -72,7 +72,7 @@
                     $scope.absCheckpoint= 0;
                     $scope.absCheckpointCommunique = 0;
                     $scope.database= 0;
-                    $scope.showMatrix = false;
+                    $scope.showMatrix = true;
                     //**********************************************************
                 $scope.loadCountryDetails = function(countryCode) {
 
