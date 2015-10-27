@@ -119,7 +119,7 @@ define(['app'], function (app) {
 						});
 						tempFacets['RAT'] = {"facetCount" : ratificationCount,
 								"id" : getSequence('ratification'), searchUrl:'search/national-records'};
-
+						if(tempFacets['focalPoint'])
 						tempFacets['focalPoint'] = {"facetCount" : tempFacets['focalPoint'].facetCount,
 								"countryCount" : tempFacets['focalPoint'].countryCount,
 								"id" : 2 , searchUrl:'search/national-records'};
