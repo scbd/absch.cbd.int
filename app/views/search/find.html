@@ -1,13 +1,15 @@
 <div ng-controller="newSearchController">
-
     <div smooth-scroll duration="100" offset="200" ></div>
-
     <style>
         md-list-item:hover{ background-color: #eee;}
         md-list-item.md-2-line .md-list-item-text h3 {line-height: 1.1;}
         md-list-item.md-2-line .md-list-item-text p {font-size:14px;}
         /*md-list-itemn:hover{color:#000!important;}*/
     </style>
+
+
+
+
 
     <div class="container-fluid" style="margin-bottom:30px;">
         <div class="row">
@@ -22,209 +24,281 @@
    <div class="container-fluid" style="margin-bottom:24px;margin-top:24px">
         <div class="row">
               <div class="col-lg-4">
-                  <div class="md-whiteframe-z1">
-                    <md-toolbar class="bg-grey3">
-                        <h2 class="md-toolbar-tools" ng-click="navigateTo('/search/countries', $event)" style="cursor:pointer;">
-                        <span>Country Profiles</span>
-                        </h2>
-                    </md-toolbar>
-                    <md-content>
-                        <md-list>
-                            <md-list-item class="md-2-line" >
-                            <div class="md-list-item-text" ng-click="navigateTo('/search/countries', $event)" style="cursor:pointer;">
-                                <p style="color:#111;">
-                                    Country Profiles present all national ABS information made available by a country, including information on the ABS measures country matrix, when available.
-                                </p>
-                            </div>
-                            <md-divider  class="hidden-sm hidden-md"></md-divider>
-                        </md-list-item >
-                            <md-list-item style="color:rgba(0,0,0,0.54);padding-top:10px;font-weight:500;" class="bg-white hidden-sm hidden-md">
-                                    <p flex="75">Click on a country from the list below to navigate to the country profile. Use the filter to narrow the list of countries.</p>
-                                    <p class="text-right"> Party <i class="fa fa-square color-blue"></i><br>
-                                    Non-Party <i class="fa fa-square color-grey"></i></p>
-                            </md-list-item>
-                            <md-list-item  class="bg-white  hidden-sm hidden-md">
-                                <md-input-container style="width:100%">
-                                <label>Filter countries list </label>
-                                <input ng-model="name">
-                                </md-input-container>
-                            </md-list-item>
-                        </md-list>
-                    </md-content>
-                    <md-divider></md-divider>
-                    <md-content style="max-height:985px;" class="hidden-sm hidden-md">
-                        <md-list class="bg-grey">
-
-                            <md-list-item class="md-1-line" ng-repeat="country in countries | filter:name | orderBy:'name.en'"  ng-click="navigateTo('/search/countries/'+ country.code, $event)" style="cursor:pointer;">
-                                <a href="/search/countries/{{country.code}}" ng-class="{'color-blue': country.isNPParty, 'color-grey':!country.isNPParty}" class="bold">
+                   <div class="bg-medgrey list-group box" >
+                       <div class="toolbar-header">
+                        <a href="#" ng-click="navigateTo('/search/countries', $event)" >
+                            <span class="color-white">Country Profiles</span>
+                        </a>
+                      </div>
+                       <a href="#" class="list-group-item" ng-click="navigateTo('/search/countries', $event)" >
+                           <p style="padding-top:10px;">
+                               Country Profiles present all national ABS information made available by a country, including information on the ABS measures country matrix, when available.
+                           </p>
+                       </a>
+                         
+                       <div class="bg-white hidden-sm hidden-xs hidden-md list-group-item" style="border-bottom:1px solid #bbb;margin-bottom:0;" > 
+                           <p>Click on a country from the list below to navigate to the country profile. Use the filter to narrow the list of countries.</p>
+                            Party <i class="fa fa-square color-blue"></i> &nbsp;&nbsp;&nbsp; Non-Party <i class="fa fa-square color-grey"></i>
+                           <span class="badge">Record Count</span>
+                       </div>
+                       <div style="height:1000px;overflow: scroll;" class="hidden-sm hidden-xs hidden-md" >
+                             <a href="#" class="list-group-item bold" ng-repeat="country in countries | filter:name | orderBy:'name.en'"
+                                ng-click="navigateTo('/search/countries/'+ country.code, $event)" style="cursor:pointer;"
+                                ng-class="{'color-blue': country.isNPParty, 'color-grey':!country.isNPParty}" >
                                     {{country.name.en}}
-                                    <span class="badge pull-right">{{country.facetCount}}</span>
-                                </a>
-                                <md-divider></md-divider>
-                            </md-list-item>
-                       </md-list>
-                   </md-content>
-               </div>
-                 <br>
+                                    <span class="badge"> {{country.facetCount > 0 ? country.facetCount : "0" }}</span>
+                             </a>
+                       </div>   
+                  </div>
             </div>
 
             <div class="col-lg-4">
-                <div class="md-whiteframe-z1">
-                    <md-toolbar class="bg-blue">
-                        <h2 class="md-toolbar-tools"  ng-click="navigateTo('/search/national-records/', $event)" style="cursor:pointer;">
-                        <span>National Records</span>
-                        <span>
-                        </h2>
-                    </md-toolbar>
-                    <md-content>
-                        <md-list>
-                        <md-list-item class="md-2-line" >
-                            <div class="md-list-item-text" ng-click="navigateTo('/search/national-records/', $event)" style="cursor:pointer;">
-                                <p style="color:#111;">National records are published by Governments and include national information relevant for the implementation of the Nagoya Protocol as well as information Parties are obliged to provide in accordance with the Protocol.
+                <div class="bg-blue list-group box" >
+                    <div class="toolbar-header">
+                        <a href="#" ng-click="navigateTo('/search/national-records/', $event)">
+                           <span class="color-white">National Records</span>
+                        </a>
+                    </div>
+                    <a href="#" class="list-group-item" ng-click="navigateTo('/search/national-records/', $event)"  >
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <p  style="padding-top:10px;">National records are published by Governments and include national information relevant for the implementation of the Nagoya Protocol
+                                as well as information Parties are obliged to provide in accordance with the Protocol.</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item" class="bold" ng-click="navigateTo('/search/national-records/FP', $event)" style="cursor:pointer;">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-xs-11">
+                                        <h4 class="color-blue">
+                                            ABS National focal points  (NFP)
+                                        </h4>
+                                    </div>
+                                    <div class="col-xs-1">                                    
+                                        <span class="badge pull-right" style="position:relative;top:10px;">{{focalPoint.facetCount}}</span>
+                                    </div>
+                                </div>
+                                <p >Institution designated to liaise with the Secretariat and make available information on procedures for accessing genetic resources and establishing mutually agreed terms, including information on competent national authorities, relevant indigenous and local communities and relevant stakeholders (Article 13.1).</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item" class="bold"  ng-click="navigateTo('/search/national-records/CNA', $event)" style="cursor:pointer;">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                 <div class="row">
+                                    <div class="col-xs-11">
+                                        <h4 class="color-blue">
+                                           Competent national authorities (CNA)
+                                        </h4>
+                                    </div>
+                                    <div class="col-xs-1">                                    
+                                        <span class="badge pull-right" style="position:relative;top:10px;">{{authority.facetCount}}</span>
+                                    </div>
+                                </div>
+                                <p >
+                                    Entities designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)
                                 </p>
                             </div>
-                            <md-divider></md-divider>
-                        </md-list-item>
-                        <md-list-item class="md-2-line" >
-                            <div class="md-list-item-text" ng-click="navigateTo('/search/national-records/NFP', $event)" style="cursor:pointer;">
-                                <h3 class="color-blue"> ABS National focal points  (NFP)</h3>
-                                <p>Institution designated to liaise with the Secretariat and make available information on procedures for accessing genetic resources and establishing mutually agreed terms, including information on competent national authorities, relevant indigenous and local communities and relevant stakeholders (Article 13.1).</p>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item" class="bold"  ng-click="navigateTo('/search/national-records/MSR', $event)" style="cursor:pointer;">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-xs-11">
+                                        <h4 class="color-blue">
+                                           Legislative, administrative or policy measures (MSR)
+                                        </h4>
+                                    </div>
+                                    <div class="col-xs-1">                                    
+                                        <span class="badge pull-right" style="position:relative;top:10px;">{{measure.facetCount}}</span>
+                                    </div>
+                                </div>
+                                <p >Measures adopted at domestic level to implement the access and benefit-sharing obligations of the Convention or/and the Nagoya Protocol.</p>
                             </div>
-                            <md-divider></md-divider>
-                        </md-list-item>
-                        <md-list-item class="md-2-line" >
-                            <div class="md-list-item-text"  ng-click="navigateTo('/search/national-records/CNA', $event)" style="cursor:pointer;">
-                            <h3 class="color-blue">Competent national authorities (CNA)</h3>
-                            <p>Entities designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)</p>
+                           
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item" class="bold"  ng-click="navigateTo('/search/national-records/NBD', $event)" style="cursor:pointer;">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-xs-11">
+                                        <h4 class="color-blue">
+                                           National Websites and Databases (NDB)
+                                        </h4>
+                                    </div>
+                                    <div class="col-xs-1">                                    
+                                        <span class="badge pull-right" style="position:relative;top:10px;">{{database.facetCount}}</span>
+                                    </div>
+                                </div>
+                                <p >Information and links to national websites or databases which are relevant for ABS.</p>
                             </div>
-                            <md-divider></md-divider>
-                        </md-list-item>
-                        <md-list-item class="md-2-line" >
-                            <div class="md-list-item-text"  ng-click="navigateTo('/search/national-records/MSR', $event)" style="cursor:pointer;">
-                            <h3 class="color-blue">Legislative, administrative or policy measures (MSR)</h3>
-                            <p>Measures adopted at domestic level to implement the access and benefit-sharing obligations of the Convention or/and the Nagoya Protocol.</p>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item" class="bold"  ng-click="navigateTo('/search/national-records/IRCC', $event)" style="cursor:pointer;">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-xs-11">
+                                        <h4 class="color-blue">
+                                           Internationally Recognized Certificate of Compliance (IRCC)
+                                        </h4>
+                                    </div>
+                                    <div class="col-xs-1">                                    
+                                        <span class="badge pull-right" style="position:relative;top:10px;">{{absPermit.facetCount}}</span>
+                                    </div>
+                                </div>
+                                <p >Certificate constituted from the information on the permit or its equivalent registered in the ABS Clearing-House, serving as evidence that the genetic resource which it covers has been accessed in accordance with prior informed consent and that mutually agreed terms have been established. It contains the minimum necessary information to allow monitoring the utilization of genetic resources by users throughout the value chain (Article 17).</p>
                             </div>
-                            <md-divider></md-divider>
-                        </md-list-item>
-                        <md-list-item class="md-2-line" >
-                            <div class="md-list-item-text"  ng-click="navigateTo('/search/national-records/NBD', $event)" style="cursor:pointer;">
-                            <h3 class="color-blue">National Websites and Databases (NDB)</h3>
-                            <p>Information and links to national websites or databases which are relevant for ABS.</p>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item" class="bold"  ng-click="navigateTo('/search/national-records/CP', $event)" style="cursor:pointer;">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-xs-11">
+                                        <h4 class="color-blue">
+                                           Checkpoints (CP)
+                                        </h4>
+                                    </div>
+                                    <div class="col-xs-1">                                    
+                                        <span class="badge pull-right" style="position:relative;top:10px;">{{absCheckpoint.facetCount}}</span>
+                                    </div>
+                                </div>
+                                <p > Entities designated by Parties to effectively collect or receive relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms and/or to the utilization of genetic resources, as appropriate (Article 17, 1(a) (i)).</p>
                             </div>
-                            <md-divider></md-divider>
-                        </md-list-item>
-                        <md-list-item class="md-2-line" >
-                            <div class="md-list-item-text"  ng-click="navigateTo('/search/national-records/IRCC', $event)" style="cursor:pointer;">
-                            <h3 class="color-blue">Internationally Recognized Certificate of Compliance (IRCC)</h3>
-                            <p>Certificate constituted from the information on the permit or its equivalent registered in the ABS Clearing-House, serving as evidence that the genetic resource which it covers has been accessed in accordance with prior informed consent and that mutually agreed terms have been established. It contains the minimum necessary information to allow monitoring the utilization of genetic resources by users throughout the value chain (Article 17).</p>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item" class="bold"  ng-click="navigateTo('/search/national-records/CPC', $event)" style="cursor:pointer;">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-xs-11">
+                                        <h4 class="color-blue">
+                                           Checkpoint Communiqués (CPC)
+                                        </h4>
+                                    </div>
+                                    <div class="col-xs-1">                                    
+                                        <span class="badge pull-right" style="position:relative;top:10px;">{{absCheckpointCommunique.facetCount}}</span>
+                                    </div>
+                                </div>
+                                <p >A  summary of the information collected or received by  a checkpoint related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms and/or to the utilization of genetic resources and registered in the ABS Clearing-House (Article 17.1 (a)).</p>
                             </div>
-                            <md-divider></md-divider>
-                        </md-list-item>
-                        <md-list-item class="md-2-line" >
-                            <div class="md-list-item-text"  ng-click="navigateTo('/search/national-records/CP', $event)" style="cursor:pointer;">
-                            <h3 class="color-blue">Checkpoints (CP)</h3>
-                            <p> Entities designated by Parties to effectively collect or receive relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms and/or to the utilization of genetic resources, as appropriate (Article 17, 1(a) (i))..</p>
-                            </div>
-                            <md-divider></md-divider>
-                        </md-list-item>
-                        <md-list-item class="md-2-line" >
-                            <div class="md-list-item-text"  ng-click="navigateTo('/search/national-records/CPC', $event)" style="cursor:pointer;">
-                            <h3 class="color-blue">Checkpoint Communiqués (CPC)</h3>
-                            <p>A  summary of the information collected or received by  a checkpoint related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms and/or to the utilization of genetic resources and registered in the ABS Clearing-House (Article 17.1 (a)).</p>
-                            </div>
-                        </md-list-item>
-                        </md-list>
-                    </md-content>
-                 </DIV>
-            <br>
+                        </div>
+                    </a>
+                </div>
         </div>
 
         <div class="col-lg-4">
-            <div class="md-whiteframe-z1">
-                <md-toolbar class="bg-orange">
-                    <h2 class="md-toolbar-tools" ng-click="navigateTo('/search/reference-records', $event)" style="cursor:pointer;">
-                    <span>Reference Records</span>
-                    </h2>
-                </md-toolbar>
-                <md-content>
-                    <md-list>
-                         <md-list-item class="md-2-line" >
-                            <div class="md-list-item-text" ng-click="navigateTo('/search/reference-records', $event)" style="cursor:pointer;">
-                                <p style="color:#111;">Reference records include a number of ABS relevant resources and information. They can be submitted by any registered user of the ABS Clearing-House
-                                    (Parties, Non-Parties, governments, international organizations, indigenous and local communities, and relevant stakeholders).
-                                </p>
+            <div class="bg-orange list-group box" >
+                <div class="toolbar-header">
+                    <a ng-click="navigateTo('/search/reference-records', $event)" style="cursor:pointer;">
+                        <span class="color-white">Reference Records</span>
+                    </a>
+                </div>
+                <a href="#" class="list-group-item" class="bold" ng-click="navigateTo('/search/reference-records', $event)" style="cursor:pointer;">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p style="padding-top:10px;">Reference records include a number of ABS relevant resources and information. They can be submitted by any registered user of the ABS Clearing-House
+                                (Parties, Non-Parties, governments, international organizations, indigenous and local communities, and relevant stakeholders).</p>
+                        </div>
+                       
+                    </div>
+                </a>
+                <a href="#" class="list-group-item" class="bold"  ng-click="navigateTo('/search/reference-records/VLR', $event)" style="cursor:pointer;">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-xs-11">
+                                    <h4 class="color-orange">
+                                        Virtual Library Records (VLR)
+                                    </h4>
+                                </div>
+                                <div class="col-xs-1">                                    
+                                    <span class="badge pull-right" style="position:relative;top:10px;">{{resource.facetCount}}</span>
+                                </div>
                             </div>
-                            <md-divider></md-divider>
-                        </md-list-item>
-                   <md-list-item class="md-2-line" >
-                        <div class="md-list-item-text"  ng-click="navigateTo('/search/reference-records/VLR', $event)" style="cursor:pointer;">
-                        <h3 class="color-orange">Virtual Library Records (VLR)</h3>
-                        <p>The virtual library in the ABS Clearing-House hosts a number of ABS relevant resources submitted by any registered user of the ABS Clearing-House. This includes, among others, general literature on ABS, awareness-raising materials, case studies, videos, capacity-building resources, etc.</p>
+                            <p >The virtual library in the ABS Clearing-House hosts a number of ABS relevant resources submitted by any registered user of the ABS Clearing-House. This includes, among others, general literature on ABS, awareness-raising materials, case studies, videos, capacity-building resources, etc.</p>
                         </div>
-                        <md-divider></md-divider>
-                    </md-list-item>
-                    <md-list-item class="md-2-line" >
-                        <div class="md-list-item-text"  ng-click="navigateTo('/search/reference-records/A19A20', $event)" style="cursor:pointer;">
-                        <h3 class="color-orange">Model Contractual Clauses (A19)</h3>
-                        <p> Model contractual clauses are addressed in Article 19 of the Protocol.
-                            They can assist in the development of agreements that are consistent with ABS requirements and may reduce transaction costs while promoting legal certainty and transparency. </p>
+                    </div>
+                </a>
+                <a href="#" class="list-group-item" class="bold"  ng-click="navigateTo('/search/reference-records/A19A20', $event)" style="cursor:pointer;">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-xs-11">
+                                    <h4 class="color-orange">
+                                        Model Contractual Clauses (A19) 
+                                    </h4>
+                                </div>
+                                <div class="col-xs-1">                                    
+                                    <span class="badge pull-right" style="position:relative;top:10px;">{{modelContractualClause.facetCount}}</span>
+                                </div>
+                            </div>
+                            <p >Model contractual clauses are addressed in Article 19 of the Protocol.
+                                They can assist in the development of agreements that are consistent with ABS requirements and may reduce transaction costs while promoting legal certainty and transparency. </p>
                         </div>
-                        <md-divider></md-divider>
-                    </md-list-item>
-                     <md-list-item class="md-2-line" >
-                        <div class="md-list-item-text"  ng-click="navigateTo('/search/reference-records/A19A20', $event)" style="cursor:pointer;">
-                        <h3 class="color-orange">Codes of Conduct, Guidelines, Best Practices and Standards (A20)</h3>
-                        <p>Codes of Conduct, Guidelines, Best Practices and Standards are addressed in Article 20 of the Protocol.
-                            They may assist users to undertake their activities in a manner that is consistent with ABS requirements while
-                             also taking into account the practices of different sectors.</p>
+                    </div>
+                </a>
+                <a hxref="#" class="list-group-item" class="bold"  ng-click="navigateTo('/search/reference-records/A19A20', $event)" style="cursor:pointer;">
+                    <div class="row">
+                        <div class="col-lg-12">
+                             <div class="row">
+                                <div class="col-xs-11">
+                                    <h4 class="color-orange">
+                                        Codes of Conduct, Guidelines, Best Practices and/or Standards (A20)
+                                    </h4>
+                                </div>
+                                <div class="col-xs-1">                                    
+                                    <span class="badge pull-right" style="position:relative;top:10px;">{{modelContractualClause.facetCount}}</span>
+                                </div>
+                            </div>
+                            <p >Codes of Conduct, Guidelines, Best Practices and/or Standards are addressed in Article 20 of the Protocol.
+                                They may assist users to undertake their activities in a manner that is consistent with ABS requirements while
+                                 also taking into account the practices of different sectors.</p>
                         </div>
-                        <md-divider></md-divider>
-                    </md-list-item>
-                    <md-list-item class="md-2-line" >
-
-                        <div class="md-list-item-text"  ng-click="navigateTo('/search/reference-records/CPP', $event)" style="cursor:pointer;">
-                        <h3 class="color-orange">Community protocols and procedures and customary laws (CPP)</h3>
-                        <p>Community protocols and procedures and customary laws are addressed in Article 12 of the Protocol. They can help other actors to understand and respect the community’s procedures and values
-                            with respect to access and benefit-sharing.</p>
-
+                    </div>
+                </a>
+                <a href="#" class="list-group-item" class="bold"  ng-click="navigateTo('/search/reference-records/CPP', $event)" style="cursor:pointer;">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-xs-11">
+                                    <h4 class="color-orange">
+                                        Community protocols and procedures and customary laws (CPP)
+                                    </h4>
+                                </div>
+                                <div class="col-xs-1">                                    
+                                    <span class="badge pull-right" style="position:relative;top:10px;">{{communityProtocol.facetCount}}</span>
+                                </div>
+                            </div>
+                            <p >Community protocols and procedures and customary laws are addressed in Article 12 of the Protocol. They can help other actors to understand and respect the community’s procedures and values
+                                with respect to access and benefit-sharing.</p>
                         </div>
-                        <md-divider></md-divider>
-                    </md-list-item>
-                     <div style="padding:10px 5px 5px 5px;color:#bbb;font-weight:bold;font-size:12px;">Related SCBD records</div>
-                     <md-list-item class="md-1-line" >
-                        <div class="md-list-item-text"  ng-click="navigateTo('/search/reference-records/NEWS', $event)" style="cursor:pointer;">
-                            <h4>News</hh45>
-                        </div>
-                        <md-divider></md-divider>
-                    </md-list-item>
-                     <md-list-item class="md-1-line" >
-                        <div class="md-list-item-text"  ng-click="navigateTo('/search/reference-records/MT', $event)" style="cursor:pointer;">
-                        <h4>Meetings</h4>
-                        </div>
-                        <md-divider></md-divider>
-                    </md-list-item>
-                    <md-list-item class="md-1-line" >
-                        <div class="md-list-item-text"  ng-click="navigateTo('/search/reference-records/NT', $event)" style="cursor:pointer;">
-                        <h4>Notifications</h4>
-                        </div>
-                        <md-divider></md-divider>
-                    </md-list-item>
-                    <md-list-item class="md-1-line" >
-                        <div class="md-list-item-text"  ng-click="navigateTo('/search/reference-records/PR', $event)" style="cursor:pointer;">
-                        <h4>Press releases</h4>
-                        </div>
-                        <md-divider></md-divider>
-                    </md-list-item>
-                    <md-list-item class="md-1-line" >
-                        <div class="md-list-item-text"  ng-click="navigateTo('/search/reference-records/ST', $event)" style="cursor:pointer;">
-                        <h4>Statements</h4>
-                        </div>
-                        <md-divider></md-divider>
-                    </md-list-item>
-                    </md-list>
-                </md-content>
+                        
+                    </div>
+                </a>
+                <a style="padding:10px 5px 5px 5px;color:#bbb;font-weight:bold;font-size:12px;">Related SCBD records</a>
+                <a href="#" class="list-group-item" class="bold"  ng-click="navigateTo('/search/reference-records/NEWS', $event)" style="cursor:pointer;">
+                    <h4>News <span class="badge pull-right">{{news.facetCount}} </span></h4>
+                </a>
+                <a href="#" class="list-group-item" class="bold"  ng-click="navigateTo('/search/reference-records/MT', $event)" style="cursor:pointer;">
+                    <h4>Meetings <span class="badge pull-right">{{meeting.facetCount}}</span></i></h4>
+                </a>
+                <a href="#" class="list-group-item" class="bold"  ng-click="navigateTo('/search/reference-records/NT', $event)" style="cursor:pointer;">
+                    <h4>Notifications <span class="badge pull-right">{{notification.facetCount}}</span></h4>
+                </a>
+                <a href="#" class="list-group-item" class="bold"  ng-click="navigateTo('/search/reference-records/PR', $event)" style="cursor:pointer;">
+                    <h4>Press releases <span class="badge pull-right">{{pressRelease.facetCount}}</span></h4>
+                </a>
+                <a href="#" class="list-group-item" class="bold"  ng-click="navigateTo('/search/reference-records/ST', $event)" style="cursor:pointer;">
+                    <h4>Statements <span class="badge pull-right">{{statements.facetCount}}</span></h4>
+                </a>
             </div>
-            <br>
+
         </div>
 
  </div>

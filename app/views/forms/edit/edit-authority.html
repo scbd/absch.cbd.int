@@ -137,7 +137,7 @@
 
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div class="control-group">
+                                    <div class="km-control-group">
                                         <div class="km-control-group" name="absPolicyBasisForCompetencyRef"
                                             caption="Provide a reference to the legal, administrative or policy measure ABSCH record:">
                                                 <div km-select multiple name="absPolicyBasisForCompetency"
@@ -170,25 +170,20 @@
                                 </div>
                             </div>
 
-                            <div class="row" >
-                               <div class="col-xs-12" ng-class="{'disable':document.absResponsibleForAll==true || document.absResponsibleForAll==null}" style="padding-top:10px;">
-                                <!-- IF NO SECTION -->
+                             <!-- IF NO SECTION -->
+                            <div ng-class="{'disable':(document.absResponsibleForAll==true || document.absResponsibleForAll==null), 'bg-white':!(document.absResponsibleForAll==true || document.absResponsibleForAll==null) }" class="well no-shadow" style="padding-top:0;padding-bottom:0;" >
+                            <div class="row">
+                               <div class="col-xs-12" >
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <strong ng-show="document.absResponsibleForAll==null">
-                                        If no, the following information is required.</strong>
-                                            <strong ng-show="document.absResponsibleForAll==true">
-                                            This section is not required.</strong>
-                                            <strong ng-show="document.absResponsibleForAll==false">
-                                                The section is required. Please provide responsibility details for this CNA. Please submit a seperate record for each CNA.</strong>
-                                            <hr><br>
+                                            <h3 ng-show="document.absResponsibleForAll==null">
+                                             If no, the following information is required.</h3>
+                                            <h3 ng-show="document.absResponsibleForAll==true">
+                                            This section is not required.</h3>
+                                            <h3 ng-show="document.absResponsibleForAll==false">
+                                                The section is required.<br> Please provide responsibility details for this CNA. <br> Please submit a seperate record for each CNA.</h3>
+
                                             <div class="km-control-group" name="responsibilities" caption="Short description of CNA responsibilities (maximum 500 words). This information is required when a CNA is not responsible for all functions under the Nagoya Protocol" required>
-                                                <!--<div class="help-block">
-                                                    Article 13, paragraph 2 provides that “Competent national authorities shall, in accordance with applicable national legislative,
-                                                    administrative or policy measures, be responsible for granting access or,
-                                                    as applicable, issuing written evidence that access requirements have been
-                                                    met and be responsible for advising on applicable procedures and requirements
-                                                    for obtaining prior informed consent and entering into mutually agreed terms.”</div>-->
                                                 <div km-rich-textbox name="responsibilities" ng-model="document.responsibilities" rows="6" placeholder="" locales="document.header.languages" required></div>
                                             </div>
                                         </div>
@@ -197,7 +192,7 @@
                                     <div class="row">
                                         <div class="col-xs-6">
                                             <div class="km-control-group" name="absJurisdiction" caption="Area of jurisdiction for granting access to genetic resources"required>
-                                            <div km-select  name="absJurisdiction" ng-model="document.absJurisdiction" items="options.jurisdictions()" required></div>
+                                            <div km-select multiple name="absJurisdiction" ng-model="document.absJurisdiction" items="options.jurisdictions()" required></div>
                                             </div>
                                         </div>
 
@@ -217,10 +212,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                <!-- END IF NO SECTION -->
                                 </div>
                             </div>
-
+                            </div><!-- END IF NO SECTION -->
                         </section>
 
 

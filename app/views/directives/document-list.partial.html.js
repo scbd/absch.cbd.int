@@ -11,27 +11,28 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
             replace: true,
             scope: {
                 documents: '=',
-                filter: '@',
+                 filter: '@',
                 advanceFilter: '=',
                 showPagination: '@',
                 currentPage: '=',
                 documentCount: '=',
                 orderBy: '=',
                 previewType: '=',
-                recordType: '='
+                recordType: '=',
+                groupCount: '=',
             },
-            controller: ['$scope', '$sce', "underscore", "commonjs", "authentication", '$q', "$filter", "$compile", "$element", "$timeout", 'schemaTypes',
-                function($scope, $sce, _, commonjs, authentication, $q, $filter, $compile, $element, $timeout, schemaTypes) {
+            controller: ['$scope', '$sce', "underscore", "commonjs", "authentication", '$q', "$filter", "$compile", "$element", "$timeout",
+                function($scope, $sce, _, commonjs, authentication, $q, $filter, $compile, $element, $timeout) {
 
-                    $scope.schemaTypes = schemaTypes;
-                    $scope.schemaTypes.push('focalPoint');
                     $scope.loading = true;
-                    
-                   
-                    $scope.sortOrder = 'createdDateOn';
-                    
-                    if (document.recordtype == "referenceRecord")
-                        $scope.sortOrder = 'title';
+                    $scope.loaded = false;
+                    $scope.itemsPerPage = 25;
+                    $scope.pageCount = 0;
+                    $scope.currentPage = 0;
+                    $scope.transformedDocuments = [];
+                    $scope.descriptionLimit = 50;
+
+                    var countryList;
 
                     $scope.getDocumentId = function(document) {
 
@@ -42,22 +43,6 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                             return $filter("uniqueIDWithoutRevision")(document.doc);
                         }
                     }
-
-                    //   $scope.formatDate = function formatDate(date) {
-                    //     return moment(date).format('MMMM Do YYYY');
-                    //   };
-                    //console.log($scope.advanceFilter) ;
-                    if ($scope.advanceFilter && $scope.advanceFilter.$ == null) {
-                        $scope.advanceFilter.$ = '';
-                        // console.log($scope.advanceFilter) ;
-                    }
-
-                    $scope.loaded = false;
-                    $scope.itemsPerPage = 25;
-                    $scope.pageCount = 0;
-                    $scope.currentPage = 0;
-                    $scope.transformedDocuments = [];
-                    $scope.descriptionLimit = 50;
 
                     $scope.load = function(item, displayDetails) {
 
@@ -135,14 +120,22 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                         return ret;
                     };
 
+                    $scope.getNFPText = commonjs.getNFPText;
+
+                    $scope.updateScrollPage = function() {
+                        if($scope.loading || $scope.transformedGroupDocuments.length == $scope.groupCount)
+                            return;
+                        $scope.loading = true;
+                        $timeout(function(){$scope.currentPage = $scope.currentPage + 1;},10);
+                    }
+
                     $scope.$watch('currentPage', function(newValue, oldValue) {
                         if (newValue != oldValue) {
                             //console.log('current page changed');
-                          $timeout(function(){$scope.currentPage = newValue;},10)  
+                          $timeout(function(){$scope.currentPage = newValue;},10)
                         }
                     });
 
-                    var countryList;
                     $scope.$watch('documents', function(newValue, oldValue) {
 
                         // if (!newValue && oldValue) {
@@ -152,14 +145,12 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                         if (newValue && newValue != oldValue) {
                             $scope.pageCount = Math.ceil($scope.documentCount / $scope.itemsPerPage);
                             $scope.transformedDocuments = [];
-
                             if ($scope.previewType == 'list') {
-                                $scope.transformedGroupDocuments = [];
+                                $scope.transformedDocuments = [];
                                 $scope.documents.forEach(function(doc) {
                                     $scope.transformedDocuments.push(transformDocument(doc));
                                 });
                                 $scope.loading = false;
-
                             } else if ($scope.previewType == 'group') {
 
                                 if(!$scope.transformedGroupDocuments || $scope.currentPage == 0)
@@ -191,16 +182,16 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                                                             // country.schemaList[document.schema_s].orderKey = getSortOrderKey(document.schema_s);
                                                             country.schemaList[document.schema_s]  = [];
                                                         }
-                                                        
+
                                                         var sort1=0;
                                                         var sort2=0;
                                                         var sort3=0;
                                                         var meta1 ="";
                                                         var meta2 ="";
                                                         var meta3 ="";
-                                                        
+
                                                         if(document.schema_s == "measure"){
-                                                            
+
                                                             meta1=document.jurisdiction_EN_t;
                                                             if(document.jurisdiction_EN_t =="Regional / Multilateral")
                                                                 sort1 = 1;
@@ -212,26 +203,26 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                                                                 sort1 = 4;
                                                             if(document.jurisdiction_EN_t =="Other")
                                                                 sort1 = 5;
-                                                         
-                                                         
+
+
                                                             meta2 =document.type_EN_t;
-                                                            if(document.type_EN_t =="Policy Document")
-                                                                sort2 = 1;
-                                                            if(document.type_EN_t =="Law")
-                                                                sort2 = 2;
-                                                            if(document.type_EN_t =="Regulatory or Administrative Measures")
-                                                                sort2 = 3;
-                                                            if(document.type_EN_t =="Guidelines")
-                                                                sort2 = 4;
                                                             if(document.type_EN_t =="Strategy / Action Plan")
+                                                                sort2 = 1;
+                                                            if(document.type_EN_t =="Policy Document")
+                                                                sort2 = 2;
+                                                            if(document.type_EN_t =="Law")
+                                                                sort2 = 3;
+                                                            if(document.type_EN_t =="Regulatory or Administrative Measures")
+                                                                sort2 = 4;
+                                                            if(document.type_EN_t =="Guidelines")
                                                                 sort2 = 5;
                                                             if(document.type_EN_t =="Explanatory Information")
                                                                 sort2 = 6;
                                                             if(document.type_EN_t =="Other")
                                                                 sort2 = 7;
-                                                                
+
                                                             meta3 =document.status_EN_t;
-                                                            
+
                                                             if(document.status_EN_t =="Legally binding ")
                                                                 sort3 = 1;
                                                             if(document.status_EN_t =="Not legally binding")
@@ -240,11 +231,11 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                                                                 sort3 = 3;
                                                             if(document.status_EN_t =="Retired")
                                                                sort3 = 4;
-                                                        
-                                                            
+
+
                                                         }
-                                                        
-                                                        
+
+
                                                         country.schemaList[document.schema_s].push({
                                                             'id'         :   document.id,
                                                             'identifier_s':   document.identifier_s,
@@ -272,6 +263,7 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                             }
                         }
                     });
+
                     function removeEmptySchema(country){
                         _.each(country.schemaList, function(schema){
                             if(schema.length==0)
@@ -429,7 +421,7 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                             if (output.Types) output.meta1 = output.Types;
                             if (output.Year) output.meta2 = output.Year;
                             if (output.Regions) output.meta3 = output.Regions;
-                       
+
                         } else if (document.schema_s == 'authority') {
                             output.responsibleForAll = document.absResposibleForAll_b;
                             output.jurisdiction = document.absJurisdiction_EN_t;
@@ -503,7 +495,7 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                             //TODO: metadata should be the url opening to a new window
                         } else if (document.schema_s == 'measure') {
                             document.ownerGovernment = {identifier:document.ownerGovernment_s};
-                           
+
                             output.adoption = document.adoption_dt;
                             output.recordtype = "nationalRecord";
 
@@ -521,7 +513,7 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                                 output.status = document.status_EN_t;
                                 if (output.status) output.meta3 = output.status;
                             }
-                            
+
                             // if(document.type_EN_t =="Policy Document")
                             //     output.type_sort = 1;
                             // if(document.type_EN_t =="Law")
@@ -536,9 +528,9 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                             //     output.type_sort = 6;
                             // if(document.type_EN_t =="Other")
                             //     output.type_sort = 7;
-                                
+
                             // output.metadata.push(output.type_sort);
-                            
+
                             // if(document.status_EN_t =="Legally binding ")
                             //  output.status_sort = 1;
                             // if(document.status_EN_t =="Not legally binding")
@@ -547,9 +539,9 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                             //     output.status_sort = 3;
                             // if(document.status_EN_t =="Retired")
                             //     output.status_sort = 4;
-                                
+
                             // output.metadata.push(output.status_sort);
-        
+
                             // if(document.jurisdiction_EN_t =="Regional / Multilateral")
                             //     output.jurisdiction_sort = 1;
                             // if(document.jurisdiction_EN_t =="National / Federal")
@@ -560,10 +552,10 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                             //     output.jurisdiction_sort = 4;
                             // if(document.jurisdiction_EN_t =="Other")
                             //     output.jurisdiction_sort = 5;
-                                
+
                             // output.metadata.push(output.jurisdiction_sort);
 
-                            
+
                         } else if (document.schema_s == 'focalPoint' || document.schema_s == 'database') {
                             output.recordtype = "nationalRecord";
                             output.typeList = document.type_ss;
@@ -584,9 +576,6 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                             output.description = document.eventCity_EN_t + ' from ' + moment(document.startDate_dt).format('Do MMM YYYY') + ' to ' + moment(document.endDate_dt).format('Do MMM YYYY');
 
                         }
-                        $q.when(canUserEdit(document), function(canedit) {
-                            output.canEdit = canedit;
-                        });
 
                         return output;
                     }
@@ -601,57 +590,6 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                         }
                     }
 
-                    $scope.getNFPText = commonjs.getNFPText;
-                    //==================================
-                    //
-                    //==================================
-                    $scope.user = null;
-                    $scope.orderByField = 'createdDate_dt';
-                    $scope.reverse = true;
-                    $scope.$watch('orderByField', function(newVal, oldVal) {
-
-                        if (oldVal && newVal)
-                            $scope.orderBy = newVal + ($scope.reverse ? ' desc' : '  asc')
-                    });
-
-                    $scope.$watch('reverse', function(newVal, oldVal) {
-                        if (oldVal != undefined)
-                            $scope.orderBy = $scope.orderByField + (newVal ? ' desc' : '  asc')
-                    });
-
-                    $scope.updateScrollPage = function() {
-                        
-                        
-                        if($scope.loading || $scope.transformedGroupDocuments.length == $scope.documentCount)
-                            return
-
-                        $scope.loading = true;
-                        $timeout(function(){$scope.currentPage = $scope.currentPage + 1;},10);
-                    }
-
-                    function canUserEdit(document) {
-
-                        if (!$scope.user) {
-                            $scope.user = authentication.getUser();
-                        }
-                        return $q.when($scope.user, function(user) {
-                            $scope.user = user;
-
-                            if (!user.isAuthenticated)
-                                return false;
-
-                            if (!document)
-                                return false;
-
-                            return user.government == document.government_s && (document.schema_s == 'absPermit' ||
-                                document.schema_s == 'absCheckpoint' ||
-                                document.schema_s == 'absCheckpointCommunique' ||
-                                document.schema_s == 'authority' ||
-                                document.schema_s == 'measure' ||
-                                document.schema_s == 'database' ||
-                                document.schema_s == 'resource');
-                        });
-                    }
 
 
                 }

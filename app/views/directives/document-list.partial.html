@@ -62,17 +62,6 @@
                 }
             </style>
             <div class="clearfix"></div>
-            <!--<div class="row pull-right">
-                <div class="col-lg-12">Order By:
-                    <select ng-model="orderByField">
-                        <option value="createdDate_dt">Created On</option>
-                        <option value="title_s">Title</option>
-                        <option value="government_EN_t">Government</option>
-                    </select>
-                    <input type="checkbox" ng-model="reverse"> Reverse
-                </div>
-            </div>
-            <br/>-->
             <div ng-show="!documents" style="padding-left:50%">
                 <i class="fa fa-spin fa-spinner fa-5x" style="margin:auto" />
             </div>
@@ -81,12 +70,11 @@
                 <h1>No records found.</h1>
             </div>
 
-            <div ng-repeat="document in transformedDocuments | filter:advanceFilter | filter:filterCategory "
+            <div ng-repeat="document in transformedDocuments" nf-if="transformedDocuments.length>0"
              style="border-top:1px solid #ddd;border-bottom:1px solid #ddd;border-right:1px solid #ddd;">
 
                 <div id="Result">
-                    <div class="{{document.recordtype}}" id="help-record-type"
-                    style="cursor:pointer;" ng-class="{'bg-grey': displayDetails}">
+                    <div class="{{document.recordtype}}" id="help-record-type" style="cursor:pointer;" ng-class="{'bg-grey': displayDetails}">
                         <div class="" style="padding:20px 20px 10px 20px;">
 
                             <div>
@@ -107,8 +95,6 @@
                                     <span class="pubDate pull-right" ng-show="document.createdDateOn">{{document.createdDateOn | formatDate}}</span>
                                 </div>
                             </div>
-
-
 
                             <div class="row textDescription" style="padding:10px;">
                                 <div class="col-xs-12">
@@ -132,34 +118,29 @@
                                                 <span ng-repeat="b in document.Languages">
                                                     {{b | term}} {{$last ? '' : ', '}}
                                                 </span>-->
-                                                
+
                                                     <span style="text-transform:uppercase;" ng-if="document.schema != 'focalPoint'">
                                                         <span> {{document | uniqueID}} </span>
                                                         <span ng-if="document.meta1"> <span> | </span> <span > {{document.meta1}} <span ng-if="doc.ownerGovernment">registered by {{document.ownerGovernment|term}}</span> </span></span>
                                                         <span ng-if="document.meta2"> <span> | </span> <span > {{document.meta2}} </span></span>
                                                         <span ng-if="document.meta3"> <span> | </span> <span > {{document.meta3}} </span></span>
-                                                    </span>             
+                                                    </span>
                                     </div>
 
                                     <div class="pull-right" ng-show="displayDetails" ng-click="displayDetails = !displayDetails;load(document,displayDetails);" style="z-index:100;padding-top:30px;padding-right:20px;cursor:pointer;">
                                         <i class="glyphicon glyphicon-remove-circle" style="font-size:20px;color:white;"></i>
                                     </div>
-                                    <div class="details" ng-show="displayDetails" record-loader document="document.data"></div>
+                                    <div class="details" ng-if="displayDetails" record-loader document="document.data"></div>
 
                                 </div>
                             </div>
 
                         </div>
-                        <!--  end result col -->
                     </div>
 
                 </div>
-                <!-- end switch -->
                 <div class="clearfix"></div>
             </div>
-
-
-            <!---Bottom pager-->
             <div class="clearfix"></div>
             <ul class="pagination pull-right" ng-show='showPagination'>
                 <li ng-class="disabled">
@@ -181,25 +162,29 @@
                     <a href ng-click="actionSetPage(pageCount - 1)">Last »</a>
                 </li>
             </ul>
-
-            <!-- </div> -->
         </div>
 
         <div ng-if="previewType=='group'">
-    
+
 
 
             <style>
-                
+
             </style>
 
             <link href="/app/libs/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
-            <div infinite-scroll="updateScrollPage()" infinite-scroll-disabled="loading" infinite-scroll-distance="1">
+            <div infinite-scroll="updateScrollPage()" infinite-scroll-disabled="loading" infinite-scroll-distance="10">
 
                 <div>
-                    <strong class="pull-right">Country(s):
+                    <strong class="pull-right">&nbsp; Record(s):
                         <span class="color-grey badge color-white">{{documentCount}}</span>
                     </strong>
+                    <strong class="pull-right">&nbsp; Country(s):
+                        <span class="color-grey badge color-white">{{groupCount}}</span>
+                    </strong>
+                </div>
+                <div class="well" ng-show="transformedGroupDocuments.length == 0" style="margin:30px 0;">
+                    <h1>No records found.</h1>
                 </div>
                 <br>
                 <br>
@@ -230,15 +215,15 @@
                             <div class="col-xs-12">
                                 <div class="row bg-grey" style="padding:8px 8px 0px 8px; border-radius: 3px;">
                                         <span  ng-class="{'color-grey': Permit==0, 'color-black': Permit > 0}">
-                                            <i class="material-icons color-grey" style="font-size:15pt;padding:0;margin:0;">
+                                            <!--<i class="material-icons color-grey" style="font-size:15pt;padding:0;margin:0;">
                                                  {{key | schemaIcon}}
-                                            </i>
+                                            </i>-->
 
                                             <span style="font-weight:bold;padding:0;margin:0;position:relative;top:-5px;">{{key|schemaNamePlural}} </span>
 
                                             <!--<a style="padding:0;margin:0;position:relative;top:-5px;" ng-if="key=='measure'" href="/search/countries/{{country.code.toUpperCase()}}/measure-matrix" > ( <i class="fa fa-table"></i>  measures matrix) </a> -->
                                         </span>
-                                        
+
                                          <span class="pull-right badge bg-darkgrey">{{schema.length}}</span>
                                 </div>
                                 <div class="row">
@@ -253,12 +238,12 @@
                                                      <i class="fa fa-chevron-circle-up" ng-show="doc.displayDetails"></i>
                                                     <i class="fa fa-chevron-circle-down" ng-show="!doc.displayDetails"></i>
                                                     <span class="bold"> {{doc.title}} </span>
-                                                    <span style="font-size:10px;text-transform:uppercase;">
-                                                        <span ng-if="doc.meta1"> <span style="color:#333!important;"> | </span> <span class="color-litegrey" > {{doc.meta1}} <span ng-if="doc.ownerGovernment">registered by {{doc.ownerGovernment|term}}</span> </span></span>
-                                                        <span ng-if="doc.meta2"> <span style="color:#333!important;"> | </span> <span class="color-litegrey" > {{doc.meta2}} </span></span>
-                                                        <span ng-if="doc.meta3"> <span style="color:#333!important;"> | </span> <span class="color-litegrey" > {{doc.meta3}} </span></span>
-                                                        <span ng-if="doc.schema != 'focalPoint'"> <span style="color:#333!important;"> | </span> <span class="color-litegrey bold" > {{doc | uniqueID}} </span></span>
-                                                    </span> 
+                                                    <span class="pull-right" style="font-size:10px;text-transform:uppercase;">
+                                                        <span ng-if="doc.meta1"> <span class="color-medgrey" > {{doc.meta1}} <span ng-if="doc.ownerGovernment">registered by {{doc.ownerGovernment|term}}</span> </span></span>
+                                                        <span ng-if="doc.meta2"> <span ng-if="doc.meta1" style="color:#333!important;"> &nbsp; | &nbsp; </span> <span class="color-medgrey" > {{doc.meta2}} </span></span>
+                                                        <span ng-if="doc.meta3"> <span ng-if="doc.meta1 || doc.meta2" style="color:#333!important;"> &nbsp; | &nbsp; </span> <span class="color-medgrey" > {{doc.meta3}} </span></span>
+                                                        <span ng-if="doc.schema != 'focalPoint'"> <span <span ng-if="doc.meta1 || doc.meta2 || doc.meta3" style="color:#333!important;"> &nbsp; | &nbsp; </span> <span class="color-medgrey bold" > {{doc | uniqueID}} </span></span>
+                                                    </span>
                                                 </div>
                                                 <div class="row" ng-if="doc.displayDetails">
                                                     <i class="glyphicon glyphicon-remove-circle circle pull-right" style="position:relative;top:40px;z-index:100;font-size:20px;color:white;padding-right:30px!important;cursor:pointer" ng-click="doc.displayDetails=!doc.displayDetails;" ng-show="doc.displayDetails"></i>

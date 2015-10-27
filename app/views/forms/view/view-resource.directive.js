@@ -16,7 +16,7 @@ app.directive("viewResource", [function () {
 		},
 		controller : ["$scope", "IStorage", "$http", function ($scope, storage, $http)
 		{
-			
+
 			//====================
 			//
 			//====================

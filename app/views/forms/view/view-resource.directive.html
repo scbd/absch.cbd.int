@@ -120,7 +120,7 @@
 			<div class="km-value km-pre">{{document.rights | lstring:locale}}</div>
 		</div>
 
-		<div ng-show="document.format">
+		<div ng-show="document.format" ng-if="document.header.type=='resource'">
 			<label>Format</label>
 			<div class="km-value km-pre">{{document.format | lstring:locale}}</div>
 		</div>
@@ -167,7 +167,7 @@
 			</div>
 		</div>-->
 
-		<div ng-show="isInLibrary('absch')">
+		<div>
 
 			<legend>Access and Benefit Sharing Clearing-House (ABS-CH)</legend>
 

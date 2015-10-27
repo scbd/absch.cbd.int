@@ -6,7 +6,7 @@
 	<div class="record-body panel-body">
 
 			<legend ng-if="document.government || document.title || document.description || document.jurisdiction || document.jurisdictionRegions || document.status || document.adoption">
-				General information</legend>	
+				General information</legend>
 
 		<div ng-show="document.government">
 			<label name="country">Country <span class="help-block">The country publishing this record.</span></label>
@@ -34,7 +34,7 @@
 				<div class="km-value">
 					{{document.jurisdiction|term}}
 							<span ng-if="document.absJurisdictionName ">({{document.jurisdiction | lstring:locale}})</span>
-						
+
 				</div>
 			</div>
 
@@ -84,7 +84,7 @@
 			</div>
 		</div>
 
-		<div ng-show="registeredMeasures">
+		<!-- <div ng-show="registeredMeasures">
 			<label>Related measures</label>
 			<div class="reference-select">
 				<table class="table table-hover table-striped">
@@ -97,7 +97,7 @@
 					</tr>
 				</table>
 			</div>
-		</div>
+		</div> -->
 
 		<div ng-show="document.registeredMeasuresDescription">
 			<div class="km-value km-pre">{{document.registeredMeasuresDescription | lstring:review.local}}</div>
@@ -141,42 +141,14 @@
 				</ul>
 			</div>
 
-
-			<!-- <div class="reference-select">
-				<table class="table table-hover table-striped">
-					<tr ng-repeat="item in registeredMeasures"  ng-hide="item.errorCode">
-						<td>
-							<strong><a href="/database/record?documentID={{item.identifier}}" target="_new_">{{item.document.title | lstring}}</a></strong>
-							<div ng-bind-html="item.document.summary | lstring:locale"></div>
-							<div class="alert alert-block" ng-show="item.errorCode"><strong>Record not found</strong> {{item.identifier}}</div>
-						</td>
-					</tr>
-				</table>
-			</div> -->
-			<!-- <div class="km-value" >
-				<ul>
-					<li ng-repeat="item in linkedMeasures">
-						<span ng-hide="item.errorCode">
-							<a href="/database/record?documentID={{item.identifier}}" target="_new_">{{item.document.title|lstring:locale}}</a>
-							<span class="km-pre"ng-bind-html="item.document.summary|lstring:locale"></span>
-						</span>
-						<span ng-show="item.errorCode"><strong>Record not found: </strong> {{item.identifier}}</span>
-					</li>
-				</ul>
-			</div> -->
 		</div>
 
 
 		<div ng-show="amendedMeasures || document.amendmentsDescription">
 			<legend>Amendments</legend>
 
-			<div ng-show="document.amendmentsDescription">
-				<label>Summary of the amendments</label>
-				<div class="km-value km-pre"ng-bind-html="document.amendmentsDescription | lstring:review.local"></div>
-			</div>
-
 			<div ng-show="amendedMeasures">
-				<label>This measure has been amended by</label>
+				<label>This measure is amending the following:</label>
 
 				<div  class="km-value">
 				<ul>
@@ -186,31 +158,55 @@
 					</li>
 				</ul>
 				</div>
-				<!-- <div class="reference-select">
-					<table class="table table-hover table-striped">
-						<tr ng-repeat="item in amendedMeasures" >
-							<td>
-								<strong>{{item.document.title | lstring}}</strong>
-								<div ng-bind-html="item.document.summary | lstring"></div>
-							</td>
-						</tr>
-					</table>
-				</div> -->
+			</div>			
+			<div ng-show="document.amendmentsDescription">
+				<label>Summary of the amendments</label>
+				<div class="km-value km-pre"ng-bind-html="document.amendmentsDescription | lstring:review.local"></div>
 			</div>
+
 		</div>
 
-		<div ng-show="document.authorities" class="row">
+		<div ng-show="document.authorities" >
 			<legend>Regulatory contact information</legend>
 			<div  ng-repeat="item in document.authorities">
-				
-				<div class="col-xs-12">
-					<div view-contact-reference ng-model="item" locale="locale" class="well"></div>
+				<div>
+					<div view-contact-reference ng-model="item" locale="locale" class="km-value"></div>
 				</div>
 			</div>
 		</div>
 
+		<div ng-show="document.measureAmendedBy && document.measureAmendedBy.length>0">
+			<legend>Amendments</legend>
+			<label>This measure has been amended by:</label>
+
+			<div  class="km-value">
+			<ul>
+				<li ng-repeat="item in document.measureAmendedBy" >
+						<a target="_new_win" href="/database/MSR/{{item.identifier_s}}">
+							<strong>{{item.title_t | lstring}}</strong>
+							<br/><label>{{item.measure.amendmentsDescription | lstring}}</label>
+						</a>
+					</li>
+			</ul>
+			</div>
+		</div>
+
+		<div ng-show="document.measureRelatedTo && document.measureRelatedTo.length>0">
+			<legend>Relations</legend>
+			<label>This measure is related to:</label>
+			<div  class="km-value">
+			<ul>
+				<li ng-repeat="item in document.measureRelatedTo" >
+					<a target="_new_win" href="/database/MSR/{{item.identifier_s}}">
+						<strong>{{item.title_t | lstring}}</strong>
+						<br/><label>{{item.measure.amendmentsDescription | lstring}}</label>
+					</a>
+				</li>
+			</ul>
+			</div>
+		</div>
 		<div ng-show="document.absMeasures">
-			<label>Elements of the measure</label>
+			<legend>Elements of the measure</legend>
 				<div class="km-value" style="border:none">
 					<!--<ul ng-if="true">
 						<li ng-repeat="term in document.absMeasures">{{term|term:locale}}
@@ -222,7 +218,7 @@
 					<div measure-matrix-elements name="absMeasures" type="single"
 						ng-model="document.absMeasures"
 						locales="document.header.languages"
-						document="document">
+						document="document" api="measureMatrixApi">
 					</div>
 
 

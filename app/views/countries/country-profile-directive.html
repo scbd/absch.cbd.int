@@ -11,106 +11,6 @@
 
     <div smooth-scroll duration="100" offset="200" ></div>
 
-    <!--<style>
-        .page-content {
-            background-color: #eee;
-        }
-
-        .ng-hide-add-active,
-        .ng-hide-remove {
-            display: inline!important;
-        }
-
-        .table-hover:hover {
-            background-color: #f5f5f5;
-        }
-
-        .table-row {
-            cursor: pointer;
-        }
-
-        .border {
-            border-bottom: 1px solid #eee;
-            padding: 10px 0px 00px 00px;
-        }
-
-        .confidential {
-            color: #a94442!important;
-        }
-
-        .tableheader {
-            padding-top: 10px;
-            padding-bottom: 10px;
-            padding-right: 0px;
-            padding-left: 0;
-            text-align: left;
-            cursor: pointer;
-            color: #111;
-            font-weight: bold;
-        }
-
-        .table-msr {
-            border-bottom: 1px solid #eee;
-            padding-left: 20px;
-            padding-right: 20px;
-        }
-
-        .fullBorder {
-            border: 1px solid #eee;
-        }
-
-        .sectionHeader {
-            border: 1px solid #eee;
-            padding: 10px;
-            margin-top: 50px;
-        }
-
-        .btn-panel-warning {
-            color: #8a6d3b;
-            background-color: #fcf8e3;
-            border-color: #faebcc;
-        }
-
-        .btn-panel-info {
-            color: #31708f;
-            background-color: #d9edf7;
-            border-color: #bce8f1;
-        }
-
-        .btn-panel-success {
-            color: #3c763d;
-            background-color: #dff0d8;
-            border-color: #d6e9c6;
-        }
-
-        .flag-icon-eur {
-            background-image: url('/app/img/EUFlag.png');
-            width:  165px;
-        }
-        .pad-left{
-            margin: 0 5px;
-        }
-        *:focus {
-            outline: none;
-        }
-    </style>-->
-
-
-
-    <!--<section layout="row" style="position:relative; top:20px; padding-bottom:30px;" flex>
-
-        <md-content flex layout-margin style="margin:0 30px 30px 30px;padding:0;background-color:transparent;">
-
-            <div layout="column" layout-align="top center" help schema="countryProfile" show-help="showHelp" repalce-glossary-terms="true" >
-
-                <legend name="formInfo" style="display:none"></legend>
-                <md-button ng-click="toggleLeft()" class="md-primary md-raised bg-medgrey" hide-gt-lg style="margin: 0  0 10px 0;">
-                    <i class="material-icons" style="position:relative;top:6px;">menu</i> Select a country
-                </md-button>
-
-                -->
-
-
                 <div ng-show="!country" style="padding-left:50%">
                     <i class="fa fa-spin fa-spinner fa-5x" style="margin:auto"/>
                 </div>
@@ -168,9 +68,9 @@
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
                                                 <h5 class="panel-title">
-                                                    <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
+                                                    <!--<i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
                                                        {{'focalpoint' | schemaIcon}}
-                                                   </i>
+                                                   </i>-->
                                                      {{getTitle(contact.schema_s,contact.type_ss,contact.schema_EN_t)}}
                                                 </h5>
                                             </div>
@@ -222,9 +122,9 @@
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
                                                 <h5 class="panel-title">
-                                                    <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
+                                                    <!--<i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
                                                           {{'cna' | schemaIcon}}
-                                                      </i>
+                                                      </i>-->
                                                     {{getTitle(contact.schema_s,contact.type_ss,contact.schema_EN_t)}}
                                                 </h5>
                                             </div>
@@ -274,7 +174,7 @@
                         <div class="row" ng-if="showMSR &&  nationalMeasure > 0">
                             <div style="padding:10px; margin:0 20px;"><legend name="lblMSR" style="display:none"></legend>
                                 <div class="row table-hover table-msr" ng-hide="absMeasure.length==0" style="padding-left:5px;">
-                                    <div class="col-lg-1 col-md-1 col-xs-1 tableheader" ng-show="false" >
+                                    <div class="col-lg-1 col-md-1 col-xs-1 tableheader">
                                         <md-checkbox md-no-ink aria-label="Select All"
                                         ng-model="measureMatrixDocuments.selectAll" ng-click="selectAllForMatrix()"
                                         class="md-primary">
@@ -283,19 +183,22 @@
                                     <div class="col-lg-3 col-md-3 col-xs-3 tableheader" ng-click="sortMeasure='title_t';reverseMeasure=!reverseMeasure">name
                                         <i class="fa" ng-class="{'fa-caret-up':(sortMeasure=='title_t' && reverseMeasure),'fa-caret-down':(sortMeasure=='title_t' && !reverseMeasure)}"></i>
                                     </div>
+
+                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortMeasure='jurisdiction_EN_t';reverseMeasure=!reverseMeasure">jurisdiction <i class="fa" ng-class="{'fa-caret-up':sortMeasure=='jurisdiction_EN_t' && reverseMeasure,'fa-caret-down':sortMeasure=='jurisdiction_EN_t' && !reverseMeasure}" />
+                                    </div>
                                     <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortMeasure='type_sort';reverseMeasure=!reverseMeasure">type <i class="fa" ng-class="{'fa-caret-up':sortMeasure=='type_sort' && reverseMeasure,'fa-caret-down':sortMeasure=='type_sort' && !reverseMeasure}" />
                                     </div>
                                     <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortMeasure='status_EN_t';reverseMeasure=!reverseMeasure">status <i class="fa" ng-class="{'fa-caret-up':sortMeasure=='status_EN_t' && reverseMeasure,'fa-caret-down':sortMeasure=='status_EN_t' && !reverseMeasure}" />
                                     </div>
-                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortMeasure='jurisdiction_EN_t';reverseMeasure=!reverseMeasure">jurisdiction <i class="fa" ng-class="{'fa-caret-up':sortMeasure=='jurisdiction_EN_t' && reverseMeasure,'fa-caret-down':sortMeasure=='jurisdiction_EN_t' && !reverseMeasure}" />
+                                    <div class="col-lg-1 col-md-1 col-xs-1 tableheader" ng-click="sortMeasure='entryIntoForce_dt';reverseMeasure=!reverseMeasure">entry into force/ adoption <i class="fa" ng-class="{'fa-caret-up':sortMeasure=='entryIntoForce_dt' && reverseMeasure,'fa-caret-down':sortMeasure=='entryIntoForce_dt' && !reverseMeasure}" />
                                     </div>
-                                    <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortMeasure='entryIntoForce_dt';reverseMeasure=!reverseMeasure">entry into force <i class="fa" ng-class="{'fa-caret-up':sortMeasure=='entryIntoForce_dt' && reverseMeasure,'fa-caret-down':sortMeasure=='entryIntoForce_dt' && !reverseMeasure}" />
+                                    <div class="col-lg-1 col-md-1 col-xs-1 tableheader" ng-click="sortMeasure='retired_dt';reverseMeasure=!reverseMeasure">No longer applicable <i class="fa" ng-class="{'fa-caret-up':sortMeasure=='retired_dt' && reverseMeasure,'fa-caret-down':sortMeasure=='retired_dt' && !reverseMeasure}" />
                                     </div>
                                 </div>
                                 <div class="row table-hover table-msr" ng-repeat="measure in absMeasure = (measureMatrixDocuments|orderBy:sortMeasure:reverseMeasure)">
                                     <div class="row border">
                                         <div class="row table-row">
-                                            <div class="col-lg-1 col-md-1 col-xs-1" ng-show="false" >
+                                            <div class="col-lg-1 col-md-1 col-xs-1" >
                                                     <md-checkbox md-no-ink aria-label="Include in Measure Matrix" ng-model="measure.measureMatrix" class="md-primary">
                                                     </md-checkbox>
                                             </div>
@@ -306,16 +209,25 @@
                                                     </i>-->
                                                     <strong class="color-blue" style="position:relative;top:-4px;"> {{measure.title_t}}</strong>
 
+                                                    <div style="font-size:11px;font-weight:bold;text-transform:uppercase;color:#666;">
+                                                        {{measure | uniqueID}}
+                                                    </div>
 
                                                     <span ng-if="measure.ownerGovernment" style="position:relative;top:-4px;">
                                                        (Regional/Multilateral measure registered by {{measure.ownerGovernment|term}})
                                                     </span>
                                                     <i class="fa fa-refresh fa-spin" ng-show="displayDetails&& !measure.data" />
                                                 </div>
+                                                <div class="col-lg-2 col-md-2 col-xs-2">{{measure.jurisdiction_EN_t}}</div>
                                                 <div class="col-lg-2 col-md-2 col-xs-2">{{measure.type_EN_t}}</div>
                                                 <div class="col-lg-2 col-md-2 col-xs-2">{{measure.status_EN_t}}</div>
-                                                <div class="col-lg-2 col-md-2 col-xs-2">{{measure.jurisdiction_EN_t}}</div>
-                                                <div class="col-lg-2 col-md-2 col-xs-2">{{measure.entryIntoForce_dt|formatDate}}</div>
+                                                <div class="col-lg-1 col-md-1 col-xs-1">
+                                                    <span ng-if="measure.entryIntoForce_dt">{{measure.entryIntoForce_dt|formatDate}} (entry into force)</span>
+                                                    <span ng-if="measure.adoption_dt">{{measure.adoption_dt|formatDate}} (adoption)</span>
+                                                </div>
+                                                <div class="col-lg-1 col-md-1 col-xs-1">
+                                                    <span ng-if="measure.retired_dt">{{measure.retired_dt|formatDate}}</span>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="row" ng-show="displayDetails">
@@ -329,14 +241,14 @@
                                 </div>
 
                             </div>
-                             <!--<div style="margin:0 20px;margin-top:20px;" ng-hide="measureMatrixDocuments.length==0" >
+                             <div style="margin:0 20px;margin-top:20px;" ng-hide="measureMatrixDocuments.length==0" >
                                 <div>
                                     <p class="tableheader" style="border-bottom:1px solid #ddd;">
                                        {{(measureMatrixDocuments|filter:{measureMatrix:true}).length}} selected for measures matrix
                                     </p>
                                         <div ng-hide="(measureMatrixDocuments|filter:{measureMatrix:true}).length==0" measure-matrix-countries-directive documents="measureMatrixDocuments"></div>
                                 </div>
-                            </div>-->
+                            </div>
 
                         </div>
 
@@ -361,9 +273,9 @@
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
                                                 <h5 class="panel-title">
-                                                    <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
+                                                    <!--<i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
                                                        {{'ndb' | schemaIcon}}
-                                                   </i>
+                                                   </i>-->
                                                     {{getTitle(contact.schema_s,contact.type_ss,contact.schema_EN_t)}}
                                                 </h5>
                                             </div>
@@ -420,9 +332,10 @@
                                     <div class="row border">
                                         <div ng-click="displayDetails=!displayDetails;showDetails(permit)" class="row table-row">
                                             <div class="col-xs-10">
-                                                <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
+                                                <!--<i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
                                                     {{'ircc' | schemaIcon}}
-                                                </i> <span style="text-transform:uppercase;font-weight:500;">{{permit.uniqueIdentifier_s}}</span> ({{permit.title_t}})
+                                                </i> -->
+                                                <span style="text-transform:uppercase;font-weight:500;">{{permit.uniqueIdentifier_s}}</span> ({{permit.title_t}})
                                                 <div class="color-grey">{{permit.geneticResources_t}}</div>
 
                                                 <i class="fa fa-refresh fa-spin" ng-show="displayDetails&& !permit.data" />
@@ -469,9 +382,9 @@
                                             <div class="panel-heading">
                                                 <h5 class="panel-title">
 
-                                                    <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
+                                                    <!--<i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
                                                         {{'cp' | schemaIcon}}
-                                                    </i>
+                                                    </i>-->
 
                                                     {{getTitle(contact.schema_s,contact.type_ss,contact.schema_EN_t)}}
                                                 </h5>
@@ -555,9 +468,10 @@
                                             </div>
                                             <div class="col-lg-2 col-md-2 col-xs-2">
                                                 <span ng-repeat="checkpoint in communique.checkpoint_CEN_ss">
-                                                    <i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
+                                                    <!--<i class="material-icons color-published-green" style="font-size:16pt;position:relative;top:3px;">
                                                         {{'cpc' | schemaIcon}}
-                                                    </i> {{parseJSON(checkpoint)|lstring}}
+                                                    </i> -->
+                                                    {{parseJSON(checkpoint)|lstring}}
                                                     <br/>
                                                 </span>
                                             </div>

@@ -38,19 +38,7 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/direct
                 ]).then(function(o) {
                     var jurisdictions = o[0].data;
                     jurisdictions.push(o[1].data);
-                    //
-                    // _.each(jurisdictions, function(element) {
-                    //   element.__value = element.name;
-                    // });
-
                     return jurisdictions;
-                });
-            },
-            absJurisdictions: function() {
-                return $http.get("/api/v2013/thesaurus/domains/51A113E9-071F-440A-83DC-E3499B7C646D/terms", {
-                    cache: true
-                }).then(function(o) {
-                    return o.data;
                 });
             },
             absGeneticResourceTypes: function() {
@@ -96,7 +84,7 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/direct
                 });
             },
             measures: function() {
-                return commonjs.loadMeasuresForDropdown();
+                return commonjs.loadSchemaDocumentsForDropdown('measure');
             },
         });
         $scope.showResponsibleforAllMsg = function() {
@@ -126,7 +114,7 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/direct
             if (!document)
                 return undefined;
 
-            document = angular.fromJson(angular.toJson(document));
+            //document = angular.fromJson(angular.toJson(document));
 
             if (!document.consentGranted) {
                 document.consentInformation = undefined;
@@ -169,6 +157,10 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/direct
                 document.absJurisdictionName = undefined;
                 document.absGeneticResourceTypes = undefined;
             }
+            else{
+                if(!$scope.showJurisdictionName())
+                    document.absJurisdictionName = undefined;
+            }
 
             if (/^\s*$/g.test(document.notes))
                 document.notes = undefined;
@@ -187,9 +179,8 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/direct
                 return false;
 
             //var jurisdictions = $scope.document.absJurisdiction
-
-            if($scope.document.absJurisdiction.identifier == 'DEBB019D-8647-40EC-8AE5-10CA88572F6E' || $scope.document.absJurisdiction.identifier == 'DEEEDB35-A34B-4755-BF77-D713017195E3' || $scope.document.absJurisdiction.identifier == '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')
-                return true;
+            return _.intersection(_.pluck($scope.document.absJurisdiction, 'identifier'),
+                                ['DEBB019D-8647-40EC-8AE5-10CA88572F6E', 'DEEEDB35-A34B-4755-BF77-D713017195E3', '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED']).length > 0;
         }
 
     }]);

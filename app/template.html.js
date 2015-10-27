@@ -9,6 +9,7 @@ define(['app','ng-breadcrumbs','angular-localizer','scbd-angularjs-services','sc
      '$anchorScroll','breadcrumbs','$mdToast','toastr',//'localStorageService',localStorageService,
         function($scope, $rootScope, showHelp, $window, $location, authentication, $browser, realmConfiguration, _, userNotifications, $timeout, $filter,$anchorScroll,breadcrumbs, $mdToast, toastr ) {
 
+
             $scope.controller = "TemplateController";
             $scope.breadcrumbs     = breadcrumbs;
             $scope.$root.pageTitle = { text: "" };
@@ -18,6 +19,14 @@ define(['app','ng-breadcrumbs','angular-localizer','scbd-angularjs-services','sc
 
         // $scope.goHome               = function() { $location.path('/'); };
         // $scope.currentPath          = function() { return $location.path(); };.
+        //============================================================
+        //
+        //
+        //============================================================
+         $scope.toggleSideBar = function() {
+            $element.find("#wrapper").toggleClass("toggled");
+         }
+
 
         //============================================================
         //
@@ -190,9 +199,9 @@ define(['app','ng-breadcrumbs','angular-localizer','scbd-angularjs-services','sc
 
         function showSimpleToast(msg)
         {
-            
+
              toastr.info(msg);
-            
+
             // $mdToast.show(
             //   $mdToast.simple()
             //     .content(msg)

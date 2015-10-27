@@ -60,32 +60,6 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 				});
 			});
 
-
-			//====================
-			//
-			//====================
-			// $scope.$watch("document.checkpoint", function ()
-			// {
-			// 	if ($scope.document) {
-			// 		$scope.checkpoint = angular.fromJson(angular.toJson($scope.document.checkpoint));
-			//
-			// 		if ($scope.checkpoint)
-			// 			$scope.loadReference($scope.checkpoint);
-			// 	}
-			// });
-
-			//====================
-			//
-			//====================
-			// $scope.$watch("document.responsibleAuthority", function () {
-			// 	if ($scope.document) {
-			// 		$scope.responsibleAuthority = angular.fromJson(angular.toJson($scope.document.responsibleAuthority));
-			//
-			// 		if ($scope.responsibleAuthority)
-			// 			$scope.loadReference($scope.responsibleAuthority);
-			// 	}
-			// });
-
 			//====================
 			//
 			//====================

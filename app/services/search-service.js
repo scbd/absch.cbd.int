@@ -7,7 +7,7 @@ define(['app', 'underscore'], function (app, _) {
                 currentPage     : 0,
                 rowsPerPage     : 25,
                 sort            : 'createdDate_dt desc',
-                fields          : 'title_t, description_t',
+                fields          : 'identifier_s, title_t, description_t',
                 query           : '*:*',
 
                 groupSort       :   'government_EN_t',
@@ -35,7 +35,7 @@ define(['app', 'underscore'], function (app, _) {
                _.defaults(searchQuery, searchDefaults);
 
                var queryGroupParameters = {
-                    'q': searchQuery.query,
+                    'q': searchQuery.query + ' AND government_s:*',
                     'sort': searchQuery.sort,
                     'fl': searchQuery.fields,
                     'wt': 'json',
@@ -63,7 +63,8 @@ define(['app', 'underscore'], function (app, _) {
                         'wt'            : 'json',
                         'rows'          : 0,
                         'facet'         : true,
-                        'facet.field'   :facetQuery.fields,
+                        'facet.field'   : facetQuery.fields,
+                        'facet.query'   : facetQuery.query,
                         'facet.limit'   : 512,
                         'facet.mincount': 1
                     };
@@ -76,7 +77,7 @@ define(['app', 'underscore'], function (app, _) {
                         });
                         console.log(facets);
                         return facets;
-                    });
+                    })
                 }
 
            }
@@ -98,6 +99,6 @@ define(['app', 'underscore'], function (app, _) {
                 }
                 return facets;
            };
-       }
+        }
     }]);
 });

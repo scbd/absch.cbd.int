@@ -6,7 +6,6 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
     app.value("schemaTypes", [ "absNationalReport", "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "resource", "modelContractualClause", "communityProtocol" ]);
     app.value("showHelp", {value:{ 'show':true, 'glossary':true, 'showTour':false, 'hasTour':false}});
 
-
     app.config(['extendedRouteProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 
         $locationProvider.html5Mode(true);
@@ -18,7 +17,7 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
             when('/help',                        { templateUrl: '/app/views/help/help.html',                        label:'Help',                               resolveController: true, resolveUser: true}).
             when('/help/about',                  { templateUrl: '/app/views/help/about/about.html',                 label:'About the ABSCH',                    resolveController: true, resolveUser: true}).
             when('/about', { redirectTo: '/help/about/absch' }).
-            when('/help/presentations/',         { templateUrl: '/app/views/help/presentations/home.html',          label:'Presentations',                      resolveController: true, resolveUser: true}).
+            when('/help/ptresentations/',         { templateUrl: '/app/views/help/presentations/home.html',          label:'Presentations',                      resolveController: true, resolveUser: true}).
             when('/help/accounts',               { templateUrl: '/app/views/help/accounts/accounts.html',           label:'CBD Accounts',                       resolveController: true, resolveUser: true}).
             when('/help/search',                 { templateUrl: '/app/views/help/search/search.html',               label:'Finding Information',                resolveController: true, resolveUser: true}).
             when('/help/tours',                  { templateUrl: '/app/views/help/tours/tours.html',                 label:'Tours',                              resolveController: true, resolveUser: true}).
@@ -120,6 +119,9 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
             when('/help/faq/:term?', {templateUrl: '/app/views/help/faq.html',resolveController: true,resolveUser: true, schema:'help-faqs', label:'FAQs'}).
             when('/help/edit/faq/:term?', {templateUrl: '/app/views/help/forms/glossary-term.html',resolveController: true,resolveUser: true, schema:'help-faqs', label:'FAQs'}).
             when('/help/faq/tags/:tag', {templateUrl: '/app/views/help/forms/glossary-term.html',resolveController: true,resolveUser: true, schema:'help-faqs', label:'Tags'}).
+
+
+            when('/search/test', {templateUrl: '/app/test.html',resolveController: true,resolveUser: true}).
 
             otherwise({templateUrl: '/app/404.html', label:'404 Error'});
 

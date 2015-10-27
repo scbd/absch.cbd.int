@@ -122,8 +122,13 @@ ul.km-value
 #scrollUp:hover {
     margin-bottom: 0px;
 }
+#sidebar-wrapper {
+	background-color: white;
+}
 
-
+.pointer{
+	cursor: pointer;
+}
 /*#loading-bar-spinner {
 	top: 50% !important;
   	left: 50% !important;

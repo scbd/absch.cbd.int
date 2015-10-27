@@ -5,7 +5,7 @@
 		<span class="color-black"> (CPC) </span> </h4>
 	</div>
 	<div class="record-body panel-body">
-			<div class="pull-right">
+			<div class="pull-right" ng-if="showPdf">
 				<a class="btn btn-primary" target="_blank" ng-href="/database/record/{{document | uniqueID}}"><i class="fa fa-file-pdf-o"></i> Download</a>
 			</div>
     	   	<div ng-show="document.government || document.checkpoint">
@@ -35,26 +35,26 @@
 					</ul>
 				</div>
 			</div>
-
-			<legend>Recipients of the Checkpoint Communiqué</legend>
-			<div class="row"  ng-show="emailList"  >
-				<div class="col-xs-12 col-lg-12" >
-					<div class="alert alert-info" width >NOTE: THE ABS-CH DOES NOT GUARANTEE THAT THE EMAIL HAS BEEN RECEIVED.
+			<div ng-if="emailList && emailList.length>0">
+				<legend>Recipients of the Checkpoint Communiqué</legend>
+				<div class="row">
+					<div class="col-xs-12 col-lg-12" >
+						<div class="alert alert-info" width >NOTE: THE ABS-CH DOES NOT GUARANTEE THAT THE EMAIL HAS BEEN RECEIVED.
+						</div>
 					</div>
 				</div>
-			</div>
-			<div >
-	            <div class="row top-border bg-lightblue">
-	                <div ng-repeat="contact in emailList" class="">
-	                    <div class="col-xs-12">
-	                        <div class="well">
-	                            <div view-contact-reference ng-model="contact" locale="locale"></div>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-			</div>
-
+				<div >
+		            <div class="row top-border bg-lightblue">
+		                <div ng-repeat="contact in emailList" class="">
+		                    <div class="col-xs-12">
+		                        <div class="well">
+		                            <div view-contact-reference ng-model="contact" locale="locale"></div>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+				</div>
+			<div>
 
 			<div ng-show="document.permit || document.permitNotAvailable ||
 						document.originCountries || responsibleAuthority ||

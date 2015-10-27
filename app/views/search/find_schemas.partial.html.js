@@ -1,4 +1,5 @@
-define(['app', '/app/js/common.js'], function (app) {
+define(['app', '/app/js/common.js', '/app/services/thesaurus-service.js',
+ '/app/services/search-service.js'], function (app) {
 app.directive('searchFilterSchemas', function ($http) {
     return {
         restrict: 'EAC',
@@ -17,10 +18,11 @@ app.directive('searchFilterSchemas', function ($http) {
         {
         },
         controller : ['$scope', '$element', '$location', 'Thesaurus', "IStorage", "guid", "$q", "Enumerable",
-                      "$filter","underscore","realm","$routeParams",'$route', 'commonjs',
-         function ($scope, $element, $location, Thesaurus, storage, guid, $q, Enumerable, $filter,_,realm, $routeParams, $route, commonjs)
+                      "$filter","underscore","realm","$routeParams",'$route', 'commonjs', 'thesaurusService','searchService', '$timeout',
+         function ($scope, $element, $location, Thesaurus, storage, guid, $q, Enumerable, $filter,_,realm,
+              $routeParams, $route, commonjs, thesaurusService, searchService, $timeout)
         {
-
+            var skipInitialQuery = false;
             $scope.groupby=true;
             $scope.orderReferenceBy = 'title_s asc';
             $scope.recordType = $route.current.$$route.type;
@@ -49,8 +51,7 @@ app.directive('searchFilterSchemas', function ($http) {
             $scope.expanded = false;
             $scope.selectedItems = [];
             $scope.facet = $scope.field.replace('_s', ''); // TODO: replace @field by @facet
-
-            $scope.queryPartyStatus = ''
+            $scope.queryPartyStatus = '';
 
             if(!$scope.selectedFilters)
                 $scope.selectedFilters = [];
@@ -65,63 +66,38 @@ app.directive('searchFilterSchemas', function ($http) {
                         $scope.groupby = true;
                         $scope.previewType = 'group';
                     }
-                    $scope.buildQuery()
+                    $scope.buildQuery();
+
+                    buildCountryProfileFacets();
                 }
 
             })
 
             $scope.options  = {
-               jurisdiction             : function () { return $http.get("/api/v2013/thesaurus/domains/7A56954F-7430-4B8B-B733-54B8A5E7FF40/terms",  { cache: true })
-                                                                    .then(function(o){ return $scope.updateFacets($scope.measure, 'msrJurisdiction',o.data); }); },
-               status                   : function () { return $http.get("/api/v2013/thesaurus/domains/ED7CDBD8-7762-4A84-82DD-30C01458A799/terms",  { cache: true })
-                                                                    .then(function(o){ return $scope.updateFacets($scope.measure,'msrStatus',o.data) }); },
-               typeOfDocuments          : function () { return $http.get("/api/v2013/thesaurus/domains/144CF550-7629-43F3-817E-CACDED34837E/terms",  { cache: true })
-                                                                    .then(function(o){ return $scope.updateFacets($scope.measure,'msrType',o.data) }); },
-               cnaJurisdictions         : function () { return $http.get("/api/v2013/thesaurus/domains/D7BD5BDE-A6B9-4261-B788-16839CCC4F7E/terms", { cache: true })
-                                                                    .then(function (o) { return $scope.updateFacets($scope.authority,'cnaJurisdiction',o.data) }); },
-               absGeneticResourceTypes  : function () { return $http.get("/api/v2013/thesaurus/domains/1A22EAAB-9BBC-4543-890E-DEF913F59E98/terms", { cache: true })
-                                                                    .then(function (o) {
+                jurisdiction             : function () { return loadDomainWithFacets('jurisdiction','measure','jurisdiction_s'); },
+                status                   : function () { return loadDomainWithFacets('status','measure','status_s'); },
+                typeOfDocuments          : function () { return loadDomainWithFacets('typeOfDocuments', 'measure','type_s'); },
+                cnaJurisdictions         : function () { return loadDomainWithFacets('cnaJurisdictions', 'authority', 'absJurisdiction_ss'); },
+                absGeneticResourceTypes  : function () { return loadDomainWithFacets('absGeneticResourceTypes', 'authority','absGeneticResourceTypes_ss') },
+                keywords                 : function () { return loadDomainWithFacets('keywords', 'absPermit', 'keywords_ss'); },
+                usage                    : function () { return loadDomainWithFacets('usage', 'absPermit', 'usage_ss'); },
+                cpJurisdictions         : function () { return  loadDomainWithFacets('cpJurisdictions', 'absCheckpoint', 'jurisdiction_s') },
 
-                                                                       return $scope.updateFacets($scope.authority,'cnaGeneticResourceTypes',Thesaurus.buildTree(o.data)) ;
-                                                                         }); },
-               keywords                 : function () { return $http.get("/api/v2013/thesaurus/domains/1A22EAAB-9BBC-4543-890E-DEF913F59E98/terms", { cache: true })
-                                                                    .then(function (o) {return $scope.updateFacets($scope.absPermit,'permitkeywords',Thesaurus.buildTree(o.data)) ; }); },
-               usage                    : function () { return $http.get("/api/v2013/thesaurus/domains/A7B77788-8C90-4849-9327-E181E9522F3A/terms", { cache: true })
-                                                                    .then(function (o) { return $scope.updateFacets($scope.absPermit,'permitusage',o.data); }); },
-               cpJurisdictions         : function () { return $q.all([$http.get("/api/v2013/thesaurus/domains/D7BD5BDE-A6B9-4261-B788-16839CCC4F7E/terms", { cache: true }),
-                                                               $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })]).then(function(o) {
-                                                                var data = o[0].data;
-                                                                data.push(o[1].data)
-                                                                return $scope.updateFacets($scope.absCheckpoint,'cpJurisdiction',data);
-                                                              }); },
-               resourceTypes            : function () { return $http.get("/api/v2013/thesaurus/domains/83BA4728-A843-442B-9664-705F55A8EC52/terms", { cache: true })
-                                                                    .then(function(o){ return $scope.updateFacets($scope.resource,'vlrresourceTypes',Thesaurus.buildTree(o.data)); }); },
-
-               countries                : function () { return $http.get("/api/v2013/thesaurus/domains/countries/terms", { cache: true }).then(function (o) { return $filter("orderBy")(o.data, "name"); }); },
-               regions                  : function () { return $q.all([$http.get("/api/v2013/thesaurus/domains/countries/terms", { cache: true }),
-                                                            $http.get("/api/v2013/thesaurus/domains/regions/terms",   { cache: true })]).then(function(o) {
-                                                                            return Enumerable.from($filter("orderBy")(o[0].data, "name")).union(
-                                                                                   Enumerable.from($filter("orderBy")(o[1].data, "name"))).toArray();
-                                                           });
-                                                      },
-                absSubjects             : function () { return $http.get("/api/v2013/thesaurus/domains/CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924/terms", { cache: true }).then(function(o){ return o.data; }); },
-                languages               : function () { return $http.get("/api/v2013/thesaurus/domains/ISO639-2/terms", { cache: true }).then(function(o){
+                countries                : function () { return thesaurusService.getDomainTerms('countries').then(function (o) { return $filter("orderBy")(o, "name"); }); },
+                regions                  : function () { return $q.all([thesaurusService.getDomainTerms('countries'),
+                                                                        thesaurusService.getDomainTerms('regions')])
+                                                                  .then(function(o) {
+                                                                                return Enumerable.from($filter("orderBy")(o[0], "name")).union(
+                                                                                    Enumerable.from($filter("orderBy")(o[1], "name"))).toArray();
+                                                                  });
+                                                        },
+               resourceTypes            : function () { return loadDomainWithFacets('resourceTypes', 'resource', 'resourceTypes_ss', false); },
+               languages               : function () { return $http.get("/api/v2013/thesaurus/domains/ISO639-2/terms", { cache: true }).then(function(o){
                                                                       return $filter("orderBy")(o.data, "name");
-                                                                    })},
-                meetingYear             : function () {
-                                                        var year = [];
-                                                        year.push({'identifier':'[' + moment().add('days',1).format("YYYY-MM-DD")+ 'T00:00:00Z TO *]','name' : 'Upcoming meetings'});
-                                                        year.push({'identifier':'[* TO ' + moment().format("YYYY-MM-DD") + 'T00:00:00Z ]','name' : 'Previous meetings'});
-                                                        for (var i=moment().year(); i>= 2009; i--)
-                                                            year.push({'identifier':'['+i + '-01-01T00:00:00Z TO ' + i + '-12-31T00:00:00Z]','name' : '' + i});
+                                                                  })},
+               mccResourceTypes            : function () { return loadDomainWithFacets('mccResourceTypes', 'modelContractualClause', 'resourceTypes_ss', false);},
 
-                                                        return year;
-                                                      },
-               mccResourceTypes            : function () { return $http.get("/api/v2013/thesaurus/domains/840427E5-E5AC-4578-B238-C81EAEEDBDD8/terms", { cache: true })
-                                                                    .then(function(o){ return $scope.updateFacets($scope.modelContractualClause,'mccresourceTypes',Thesaurus.buildTree(o.data)); }); },
-
-               cppResourceTypes            : function () { return $http.get("/api/v2013/thesaurus/domains/ED9BE33E-B754-4E31-A513-002316D0D602/terms", { cache: true })
-                                                                    .then(function(o){ return $scope.updateFacets($scope.modelContractualClause,'cppresourceTypes',Thesaurus.buildTree(o.data)); }); },
+               cppResourceTypes            : function () { return loadDomainWithFacets('cppResourceTypes', 'communityProtocol', 'resourceTypes_ss', false); },
             };
 
             $scope.isSelected = function(item) {
@@ -379,7 +355,7 @@ app.directive('searchFilterSchemas', function ($http) {
             $scope.authority               = { identifier: 'authority',                title: 'Competent National Authorities' ,type:'nationalRecord',
                                                subFilters : [
                                                                 { name: 'cnaResponsibleForAll',     type: 'radio' , field: 'absResposibleForAll_b'},
-                                                                { name: 'cnaJurisdiction',          type: 'multiselect', field: 'absJurisdiction_s' },
+                                                                { name: 'cnaJurisdiction',          type: 'multiselect', field: 'absJurisdiction_ss' },
                                                                 { name: 'cnaGeneticResourceTypes',  type: 'multiselect' , field: 'absGeneticResourceTypes_ss'}
                                                             ]
                                              };
@@ -399,7 +375,7 @@ app.directive('searchFilterSchemas', function ($http) {
             $scope.absPermit               = { identifier: 'absPermit',                title: 'Internationally Recognized Certificates of Compliance' ,type:'nationalRecord',
                                                subFilters : [
                                                                 //{ name: 'permitAuthority',  type: 'reference' , field: 'jurisdiction_s'},
-                                                                { name: 'permitusage',          type: 'multiselect' , field: 'usage_REL_ss'},
+                                                                { name: 'permitusage',          type: 'multiselect' , field: 'usage_ss'},
                                                                 { name: 'permitkeywords',       type: 'multiselect' , field: 'keywords_ss'},
                                                                 // { name: 'permitExpiryDate',     type: 'calendar' , field: 'expiration_s'},
                                                                 // { name: 'permitIssuanceDate',   type: 'calendar' , field: 'date_s'},
@@ -436,7 +412,7 @@ app.directive('searchFilterSchemas', function ($http) {
             $scope.pressRelease            = { identifier: 'pressRelease',             title: 'Press Releases', type:'reference' };
             $scope.statement               = { identifier: 'statement',                title: 'Statements' , type:'reference'};
             $scope.news                    = { identifier: 'news',                     title: 'News', type:'reference' };
-            $scope.modelContractualClause  = { identifier: 'modelContractualClause',   title : "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and Standards", type:'reference',
+            $scope.modelContractualClause  = { identifier: 'modelContractualClause',   title : "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards", type:'reference',
                                                subFilters : [
                                                             { name: 'mccresourceTypes',   type: 'multiselect' , field: 'resourceTypes_ss'}
                                                         ]
@@ -545,12 +521,15 @@ app.directive('searchFilterSchemas', function ($http) {
                 }
 
                 if(documentSchema=='PARTIES'){
-                   $scope.queryPartyStatus ="government_s:(ae al bt by cd cg ch ci bw do dk hu es eg fj fm ga et gm gn gw hn id gt ke jo in km kz la kh mg mh mm mn mu mw mx mz na ne no pa pe sc rw sy tj ug uy za ws bj bi bf gy vn vu sd eur ls kg)";
-                   // $scope.queryPartyStatus = $scope.queryStatus('parties');
+                   $scope.queryStatus('parties');
+                   skipInitialQuery = true;
+                   $timeout(function(){
+                       $scope.partyStatus='parties';
+                   },500)
                 }
             }
-
-            $scope.buildQuery();
+            if(!skipInitialQuery)
+                $scope.buildQuery();
 
             $scope.terms.forEach(function (item) {
                 if(item.subFilters){
@@ -573,10 +552,10 @@ app.directive('searchFilterSchemas', function ($http) {
             });
             function clearFilters(){
                 $scope.$broadcast('clearSelectSelection');
+                $scope.keyword = '';
                 $scope.terms.forEach(function(data){
                     if(data.selected){
                         data.selected = false;
-
                         if((data.identifier == 'absPermit' || data.identifier == 'focalPoint') && data.subFilters){
                             data.subFilters.forEach(function(filter){
                                 if(filter.type=='radio')
@@ -637,7 +616,25 @@ app.directive('searchFilterSchemas', function ($http) {
 
             });
 
+            $scope.changeRecordType = function(recordType){
 
+                $scope.recordType = recordType;
+                if(recordType == 'countryProfile'){
+                    $scope.showNationalFilters=false;
+                    $scope.showReferenceFilters=false;
+                    $location.update_path('/search/countries',true);
+                }
+                else if(recordType == 'national'){
+                    $scope.showNationalFilters=true;
+                    $scope.showReferenceFilters=false;
+                    $location.update_path('/search/national-records',true);
+                }
+                else if(recordType == 'reference'){
+                    $scope.showNationalFilters=false;
+                    $scope.showReferenceFilters=true;
+                    $location.update_path('/search/reference-records',true);
+                }
+            }
 
             ////country profile search
 
@@ -669,6 +666,37 @@ app.directive('searchFilterSchemas', function ($http) {
                         $scope.previewType = "list";
             });
 
+
+            function loadDomainWithFacets(domainTerm, schema, facetField, buildTree){
+                    return thesaurusService
+                            .getDomainTerms(domainTerm)
+                            .then(function(domainTermData){
+                                var facetQuery = {query:'realm_ss:' + realm.value.toLowerCase() + ' AND NOT version_s:* AND schema_s:' + schema, fields: [facetField] };
+                                return searchService.facets(facetQuery)
+                                    .then(function(facets){
+                                            if(buildTree)
+                                                domainTermData = Thesaurus.buildTree(domainTermData);
+
+                                            return commonjs.updateFacets(facets[facetField], domainTermData);
+                                    });
+                            });
+            }
+
+            function buildCountryProfileFacets(){
+                if(!$scope.countryProfileFacets && $scope.isInProfiles()){
+                    $scope.countryProfileFacets = {};
+                    commonjs.getCountries()
+                    .then(function(countries){
+                        $scope.countryProfileFacets.parties = _.where(countries, {isNPParty:true}).length;
+                        $scope.countryProfileFacets.nonParties = _.where(countries, {isNPParty:false}).length;
+                        $scope.countryProfileFacets.signatories = _.where(countries, {isNPSignatory:true}).length;
+                        $scope.countryProfileFacets.inbetweenParties = _.where(countries, {isNPInbetweenParty:true}).length;
+                    });
+                }
+            }
+            if($scope.isInProfiles()){
+                buildCountryProfileFacets();
+            }
             // if ($routeParams.countryCode && $routeParams.countryCode.toUpperCase() == 'RAT'){
             //     $scope.countryProfileSearch ={partyStatus: 'parties', countryProfile_keyword:''}
             // }

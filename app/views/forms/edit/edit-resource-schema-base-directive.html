@@ -83,7 +83,7 @@
 							</div>
 						</div>
 
-						<div class="row">
+						<div class="row" ng-if="document_type=='resource'">
 							<div class="col-xs-12">
 								<div class="km-control-group" name="format" caption="Format">
 									<div class="help-block">Format may be used to identify the document dimensions (e.g. size, number of pages or duration) or the software,
@@ -92,7 +92,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="row" ng-if="document_type=='resource'">
+						<div class="row" >
 							<div class="col-xs-12">
 								<div class="km-control-group" name="source" caption="Source">
 									<div class="help-block">A reference to a document from which the present document is derived (e.g. an article from a journal). For original

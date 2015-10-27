@@ -17,10 +17,10 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
 
                     //$scope.countryProfile_keyword = 'can';
 
-                    var taiwan = "TW";
-                    var china = "CN";
-                    var denmark = "DK";
-                    var greenland = "GL";
+                    // var taiwan = "TW";
+                    // var china = "CN";
+                    // var denmark = "DK";
+                    // var greenland = "GL";
                     $scope.lastAction = 'party';
 
                     $scope.orderList = false;
@@ -101,26 +101,26 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
 
 
                    // ====================================================
-                    $scope.$watch("query.partyStatus", function(val) {
-
-                      if(!val){
-                            $scope.selected_status = 'all';
-                            $scope.partyStatusFilter = $scope.hasStatus;
-                            $scope.sortTable('name.en', 'ASC')
-                        }
-
-                        if(val == 'parties'){
-                             $scope.selected_facet='party';
-                            $scope.selected_status = 'party';
-                            $scope.sortTable('name.en', 'ASC')
-                        }
-
-                        if(val == 'nonParties'){
-                            $scope.selected_facet='nonParties';
-                            $scope.selected_status = 'nonParties';
-                            $scope.sortTable('name.en', 'ASC')
-                        }
-                    })
+                    // $scope.$watch("query.partyStatus", function(val) {
+                    //
+                    //   if(!val){
+                    //         $scope.selected_status = 'all';
+                    //         $scope.partyStatusFilter = $scope.hasStatus;
+                    //         $scope.sortTable('name.en', 'ASC')
+                    //     }
+                    //
+                    //     if(val == 'parties'){
+                    //          $scope.selected_facet='party';
+                    //         $scope.selected_status = 'party';
+                    //         $scope.sortTable('name.en', 'ASC')
+                    //     }
+                    //
+                    //     if(val == 'nonParties'){
+                    //         $scope.selected_facet='nonParties';
+                    //         $scope.selected_status = 'nonParties';
+                    //         $scope.sortTable('name.en', 'ASC')
+                    //     }
+                    // })
 
                     //====================================================
                     $scope.$watch("query.recordType", function(val) {
@@ -141,12 +141,6 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
 
 
                     })
-
-
-
-
-
-
                     //====================================================
                     function loadCountries() {
                         $scope.loading = true;
@@ -188,37 +182,6 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
                     }
 
 
-                    //====================================================
-                    function addEUMapEvents() {
-
-                        $("#vmap").append("<div id=\"jqvmap1_EUR1\" class=\"europeanUnion jqvmap-zoomout flag-icon-background flag-icon-eur\" style=\"max-height:50px;max-width:100px;background-color:#eee\"></div>");
-
-                        $('#jqvmap1_EUR1').on('click', function(e) {
-                            $scope.navigateCountry(this, 'EUR', null);
-                        });
-                        $('#jqvmap1_EUR1').on('mouseout', function(e) {
-                            $('.jqvmap-label').hide();
-                        });
-                        $('#jqvmap1_EUR1').on('mouseover', function(e) {
-                            var maplabel = $('.jqvmap-label').last();
-                            maplabel.hide();
-                            maplabel.html('')
-                            showCountryDetails(this, maplabel, 'EUR');
-                            maplabel.show();
-                            var left = e.pageX - 15 - maplabel.width();
-                            var top = e.pageY - 15 - maplabel.height();
-
-                            if (left < 0)
-                                left = e.pageX + 15;
-                            if (top < 0)
-                                top = e.pageY + 15;
-
-                            maplabel.css({
-                                left: left,
-                                top: top
-                            });
-                        });
-                    }
 
                     //====================================================
                     $scope.sortTable = function(term, order) {
@@ -289,148 +252,29 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
                         $('.jqvmap-zoomout').html('<i class="glyphicon glyphicon-minus"/>')
                     }
 
-
-
-
-
-                    //====================================================
-                    $scope.navigateCountry = function(event, code, region) {
-                        $('.jqvmap-label').html('');
-                        code = code.toUpperCase();
-                        //tiwan should be shown as China
-                        if (code == taiwan)
-                            code = china
-                        if (code == greenland) //greenland  as denmark
-                            code = denmark
-                            $timeout(function(){$location.path('/countries/' + code)},1);
-                        // $scope.$emit('loadCountryProfile', {
-                        //     'data': {
-                        //         countryCode: code,
-                        //         lastAction: $scope.lastAction,
-                        //         searchFilter: $scope.searchFilter
-                        //     }
-                        // });
-                    }
-
-                    //====================================================
-                    function showCountryDetails(event, label, code) {
-                        code = code.toUpperCase();
-                        //tiwan should be shown as China
-                        if (code == taiwan)
-                            code = china
-                            // if (code == greenland) //greenland  as denmark
-                            //   code = denmark
-                            // console.log(code,$scope.countries);
-                        var country = _.where($scope.countries, {
-                            code: code.toUpperCase()
-                        })
-                        var countryFacet = _.where($scope.countryFacets["government_s,schema_s"], {
-                            value: code.toLowerCase()
-                        })
-
-                        var cfHtml = '';
-                        var countryName = code;
-                        var headerClass = "panel-default"
-                        if (country.length > 0) {
-                            countryName = country[0].name.en;
-
-                            if (country[0].isNPParty) {
-                                headerClass = "panel-primary"
-                                cfHtml += '<li class="list-group-item"><span class="label label-primary">Ratified</span></li>'
-                            } else if (country[0].isNPInbetweenParty) {
-                                headerClass = "panel-default"
-                                cfHtml += '<li class="list-group-item"><span class="label label-default">Ratified</span>' +
-                                    '</br><span class="label label-success">entry into force on ' + country[0].entryIntoForce + '</span></li>'
-                            } else if (country[0].isNPSignatory) {
-                                headerClass = "panel-info"
-                                cfHtml += '<li class="list-group-item"><span class="label label-info">Signatory</span></li>'
-                            } else if (country[0].isCBDParty) {
-                                headerClass = "panel-default"
-                                cfHtml += '<li class="list-group-item"><span class="label label-default">Not Ratified/CBD party</span></li>'
-                            }
-                        }
-                        if (countryFacet.length > 0) {
-                            countryFacet[0].pivot.forEach(function(document) {
-                                cfHtml += '<li class="list-group-item" style="color:black">' +
-                                    '    <span class="badge">' + document.count + '</span>' +
-                                    $filter("schemaShortName")(document.value.toLowerCase()) + ' </li>'
-                            });
-                        } else {
-                            cfHtml += '<li class="list-group-item" style="color:black">No information available</li>'
-                        }
-                        label.html(
-                            '<div style="min-width:150px;" class="panel ' + headerClass + '"><div class="panel-heading"><h3 class="panel-title">' + countryName + '</h3>' +
-                            '</div> <div class="panel-body"><ul class="list-group">' + cfHtml + '</ul></div></div>'
-
-                        );
-                    }
-                    //====================================================
-                    $scope.updateMap = function(action) {
-
-
-                        _.each($scope.countries, function(country) {
-                            $("#jqvmap" + getMapIndex() + "_" + country.code.toUpperCase()).attr("fill", "#FFF");
-                        });
-
-                        //fix for taiwan
-                        $("#jqvmap" + getMapIndex() + "_" + taiwan).attr("fill", "#FFF");
-                        $("#jqvmap" + getMapIndex() + "_" + greenland).attr("fill", "#FFF");
-
-                        if (action == 'signatory' || action == 'party' || action == 'nonParties' || action == 'all') {
-
-                            $scope.searchFilter = $scope.hasStatus;
-                            if (action == 'all' || action == 'nonParties') {
-                                $("#jqvmap" + getMapIndex() + "_" + greenland).attr("fill", "#666");
-                            }
-
-                            _.each($scope.countries, function(country) {
-
-                                if ((action == 'party' || action == 'signatory' || action == 'all') && country.isNPParty) {
-                                    $("#jqvmap" + getMapIndex() + "_" + country.code.toUpperCase()).attr("fill", "#428bca");
-                                }
-                                else if ((action == 'nonParties' || action == 'all') && !country.isNPParty) {
-                                    $("#jqvmap" + getMapIndex() + "_" + country.code.toUpperCase()).attr("fill", "#666");
-                                    $("#jqvmap" + getMapIndex() + "_" + taiwan).attr("fill", "#666");
-                                }
-                                //for non CBD parties only
-                                if(!country.isCBDParty && action == 'all'){
-                                    $("#jqvmap" + getMapIndex() + "_" + country.code.toUpperCase()).attr("fill", "#666");
-                                }
-
-                            });
-                        } else {
-
-                            $scope.searchFilter = $scope.hasFacets;
-
-                            $('#jqvmap1_EUR1').hide('slow');
-                            _.each($scope.countryFacets['government_s,schema_s'], function(data) {
-                                //console.log(("#jqvmap" + getMapIndex() + "_"+taiwan));
-                                var colorCountry = false;
-                                var search = _.where(data.pivot, {
-                                    value: action
-                                });
-                                if (search.length > 0) {
-                                    //console.log(data);
-                                    if (data.value.toUpperCase() == 'EUR')
-                                        $('#jqvmap1_EUR1').show('slow');
-
-                                    $("#jqvmap" + getMapIndex() + "_" + data.value.toUpperCase()).attr("fill", "#333");
-                                    //fix for taiwan
-                                    if (data.value.toUpperCase() == china)
-                                        $("#jqvmap" + getMapIndex() + "_" + taiwan).attr("fill", "#333");
-
-                                    //   if (data.value.toUpperCase() == denmark)
-                                    //     $("#jqvmap" + getMapIndex() + "_" + greenland).attr("fill", "#428bca");
-                                }
-                            });
-                        }
-                    }
-
                     //====================================================
                     $scope.hasStatus = function(entity) {
-                        return entity && ($scope.selected_status == 'all' ||
-                                            (entity.isNPParty && 'party' == $scope.selected_status)||
-                                            !entity.isNPParty && 'nonParties' == $scope.selected_status);
+                        var query = $scope.query;
+                        if(!entity)
+                            return false;
+
+                        if(query && (query.isParties || query.isNonParties || query.isSignatories || query.isInbetweenParties )){
+                            if(_.size($scope.query)>1){
+                                return (    (!query.isParties           || query.isParties && entity.isNPParty)&&
+                                            (!query.isNonParties        || query.isNonParties && !entity.isNPParty)&&
+                                            (!query.isSignatories       || query.isSignatories && entity.isNPSignatory)&&
+                                            (!query.isInbetweenParties  || query.isInbetweenParties && entity.isNPInbetweenParty)
+                                        );
+                            }
+                            else{
+                                return (    (query.isParties && entity.isNPParty)||
+                                            (query.isNonParties && !entity.isNPParty)||
+                                            (query.isSignatories && entity.isNPSignatory)||
+                                            (query.isInbetweenParties && entity.isNPInbetweenParty)
+                                        );
+                            }
+                        }
+                        return true;
                     }
                     //====================================================
                     $scope.listAll = function(status) {
@@ -441,41 +285,18 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
 
                     }
 
-
-
-                    //====================================================
-                    function getMapIndex(id) {
-                        if (!id)
-                            id = 1;
-
-                            return id;
-                        //the jvqmap increase its index when map is visisted multiple times
-                        //hence get the index of any country and use it for all others
-                        //TODO: check why
-                        if ($("#jqvmap" + id + "_" + greenland).length == 0)
-                          return getMapIndex(id + 1)
-
-                        return id;
-                    }
-
                     //====================================================
                     function CalculateFacets() {
                         var tempFacets = {};
                         // console.log($scope.countryFacets['government_s,schema_s'])
                         var count = 0;
-                        var countryC = '';
                         _.each($scope.countryFacets['government_s,schema_s'], function(data) {
-                            // if(!data.pivot)
-                            //     count++
-                            if (data.value == 'ad')
-                                console.log(data);
-                            countryC += data.value + ',';
+                            if (data.value == 'eur')
+                                data.value = 'eu';                                
                             _.each(data.pivot, function(facets) {
-
                                 if (facets.value == 'focalPoint' && tempFacets[facets.value]) {
-                                    count++
-                                    // console.log(tempFacets[facets.value]);
-                                } // console.log((tempFacets[facets.value] ? tempFacets[facets.value].facetCount : 0) + facets.count);
+                                    count++;
+                                }
                                 tempFacets[facets.value] = {
                                     "facetCount": (tempFacets[facets.value] ? tempFacets[facets.value].facetCount : 0) + facets.count,
                                     "countryCount": (tempFacets[facets.value] ? tempFacets[facets.value].countryCount : 0) + 1,
@@ -489,13 +310,6 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
                         // console.log($scope.commonFormatFacets)
                     }
 
-                    //====================================================
-                    $scope.slideMap = function(divShow, divHide) {
-
-                        $(divHide).slideUp("slow");
-                        $(divShow).slideDown("slow");
-
-                    }
 
                     //====================================================
                     function calculateListViewFacets() {
@@ -558,14 +372,6 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
                         //$scope.updateMap($scope.lastAction);
                     });
 
-                    //====================================================
-                    $scope.$on('updateMap', function(evt, eventData) {
-
-                        $scope.updateMap(eventData.data.type);
-                        $scope.searchFilter = eventData.data.searchFilter;
-
-                    });
-
                     $scope.clear = function(){
 
                         $scope.filterSchemaApi.unSelectItem({identifier:$scope.filterSchema});
@@ -582,9 +388,224 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
                        // country.api.loadCountryDetails(country.code);
                         country.profileCode = country.code;
                     }
+
+                    $scope.totalFacetCount = function(countries, type){
+
+                        var typeFacets = _.filter(countries, function(country){
+                            return country[type]!=undefined;
+                        });
+                        var count = _.reduce(typeFacets,function(memo, country){ return memo + country[type]; },0);
+                        if(count>0)
+                            return count;
+
+                         return;
+                    };
+
+                    $element.find('[data-toggle="tooltip"]').tooltip();
                 }
             ]
 
         };
     });
 });
+
+
+
+
+
+/********************************************/
+
+// //====================================================
+// $scope.navigateCountry = function(event, code, region) {
+//     $('.jqvmap-label').html('');
+//     code = code.toUpperCase();
+//     //tiwan should be shown as China
+//     if (code == taiwan)
+//         code = china
+//     if (code == greenland) //greenland  as denmark
+//         code = denmark
+//         $timeout(function(){$location.path('/countries/' + code)},1);
+//     // $scope.$emit('loadCountryProfile', {
+//     //     'data': {
+//     //         countryCode: code,
+//     //         lastAction: $scope.lastAction,
+//     //         searchFilter: $scope.searchFilter
+//     //     }
+//     // });
+// }
+//
+// //====================================================
+// function showCountryDetails(event, label, code) {
+//     code = code.toUpperCase();
+//     //tiwan should be shown as China
+//     if (code == taiwan)
+//         code = china
+//         // if (code == greenland) //greenland  as denmark
+//         //   code = denmark
+//         // console.log(code,$scope.countries);
+//     var country = _.where($scope.countries, {
+//         code: code.toUpperCase()
+//     })
+//     var countryFacet = _.where($scope.countryFacets["government_s,schema_s"], {
+//         value: code.toLowerCase()
+//     })
+//
+//     var cfHtml = '';
+//     var countryName = code;
+//     var headerClass = "panel-default"
+//     if (country.length > 0) {
+//         countryName = country[0].name.en;
+//
+//         if (country[0].isNPParty) {
+//             headerClass = "panel-primary"
+//             cfHtml += '<li class="list-group-item"><span class="label label-primary">Ratified</span></li>'
+//         } else if (country[0].isNPInbetweenParty) {
+//             headerClass = "panel-default"
+//             cfHtml += '<li class="list-group-item"><span class="label label-default">Ratified</span>' +
+//                 '</br><span class="label label-success">entry into force on ' + country[0].entryIntoForce + '</span></li>'
+//         } else if (country[0].isNPSignatory) {
+//             headerClass = "panel-info"
+//             cfHtml += '<li class="list-group-item"><span class="label label-info">Signatory</span></li>'
+//         } else if (country[0].isCBDParty) {
+//             headerClass = "panel-default"
+//             cfHtml += '<li class="list-group-item"><span class="label label-default">Not Ratified/CBD party</span></li>'
+//         }
+//     }
+//     if (countryFacet.length > 0) {
+//         countryFacet[0].pivot.forEach(function(document) {
+//             cfHtml += '<li class="list-group-item" style="color:black">' +
+//                 '    <span class="badge">' + document.count + '</span>' +
+//                 $filter("schemaShortName")(document.value.toLowerCase()) + ' </li>'
+//         });
+//     } else {
+//         cfHtml += '<li class="list-group-item" style="color:black">No information available</li>'
+//     }
+//     label.html(
+//         '<div style="min-width:150px;" class="panel ' + headerClass + '"><div class="panel-heading"><h3 class="panel-title">' + countryName + '</h3>' +
+//         '</div> <div class="panel-body"><ul class="list-group">' + cfHtml + '</ul></div></div>'
+//
+//     );
+// }
+
+//
+// //====================================================
+// $scope.updateMap = function(action) {
+//
+//
+//     _.each($scope.countries, function(country) {
+//         $("#jqvmap" + getMapIndex() + "_" + country.code.toUpperCase()).attr("fill", "#FFF");
+//     });
+//
+//     //fix for taiwan
+//     $("#jqvmap" + getMapIndex() + "_" + taiwan).attr("fill", "#FFF");
+//     $("#jqvmap" + getMapIndex() + "_" + greenland).attr("fill", "#FFF");
+//
+//     if (action == 'signatory' || action == 'party' || action == 'nonParties' || action == 'all') {
+//
+//         $scope.searchFilter = $scope.hasStatus;
+//         if (action == 'all' || action == 'nonParties') {
+//             $("#jqvmap" + getMapIndex() + "_" + greenland).attr("fill", "#666");
+//         }
+//
+//         _.each($scope.countries, function(country) {
+//
+//             if ((action == 'party' || action == 'signatory' || action == 'all') && country.isNPParty) {
+//                 $("#jqvmap" + getMapIndex() + "_" + country.code.toUpperCase()).attr("fill", "#428bca");
+//             }
+//             else if ((action == 'nonParties' || action == 'all') && !country.isNPParty) {
+//                 $("#jqvmap" + getMapIndex() + "_" + country.code.toUpperCase()).attr("fill", "#666");
+//                 $("#jqvmap" + getMapIndex() + "_" + taiwan).attr("fill", "#666");
+//             }
+//             //for non CBD parties only
+//             if(!country.isCBDParty && action == 'all'){
+//                 $("#jqvmap" + getMapIndex() + "_" + country.code.toUpperCase()).attr("fill", "#666");
+//             }
+//
+//         });
+//     } else {
+//
+//         $scope.searchFilter = $scope.hasFacets;
+//
+//         $('#jqvmap1_EUR1').hide('slow');
+//         _.each($scope.countryFacets['government_s,schema_s'], function(data) {
+//             //console.log(("#jqvmap" + getMapIndex() + "_"+taiwan));
+//             var colorCountry = false;
+//             var search = _.where(data.pivot, {
+//                 value: action
+//             });
+//             if (search.length > 0) {
+//                 //console.log(data);
+//                 if (data.value.toUpperCase() == 'EUR')
+//                     $('#jqvmap1_EUR1').show('slow');
+//
+//                 $("#jqvmap" + getMapIndex() + "_" + data.value.toUpperCase()).attr("fill", "#333");
+//                 //fix for taiwan
+//                 if (data.value.toUpperCase() == china)
+//                     $("#jqvmap" + getMapIndex() + "_" + taiwan).attr("fill", "#333");
+//
+//                 //   if (data.value.toUpperCase() == denmark)
+//                 //     $("#jqvmap" + getMapIndex() + "_" + greenland).attr("fill", "#428bca");
+//             }
+//         });
+//     }
+// }
+//
+// //====================================================
+// function getMapIndex(id) {
+//     if (!id)
+//         id = 1;
+//
+//         return id;
+//     //the jvqmap increase its index when map is visisted multiple times
+//     //hence get the index of any country and use it for all others
+//     //TODO: check why
+//     if ($("#jqvmap" + id + "_" + greenland).length == 0)
+//       return getMapIndex(id + 1)
+//
+//     return id;
+// }
+// //====================================================
+// $scope.slideMap = function(divShow, divHide) {
+//
+//     $(divHide).slideUp("slow");
+//     $(divShow).slideDown("slow");
+//
+// }
+// //====================================================
+// $scope.$on('updateMap', function(evt, eventData) {
+//
+//     $scope.updateMap(eventData.data.type);
+//     $scope.searchFilter = eventData.data.searchFilter;
+//
+// });
+//====================================================
+// function addEUMapEvents() {
+//
+//     $("#vmap").append("<div id=\"jqvmap1_EUR1\" class=\"europeanUnion jqvmap-zoomout flag-icon-background flag-icon-eur\" style=\"max-height:50px;max-width:100px;background-color:#eee\"></div>");
+//
+//     $('#jqvmap1_EUR1').on('click', function(e) {
+//         $scope.navigateCountry(this, 'EUR', null);
+//     });
+//     $('#jqvmap1_EUR1').on('mouseout', function(e) {
+//         $('.jqvmap-label').hide();
+//     });
+//     $('#jqvmap1_EUR1').on('mouseover', function(e) {
+//         var maplabel = $('.jqvmap-label').last();
+//         maplabel.hide();
+//         maplabel.html('')
+//         showCountryDetails(this, maplabel, 'EUR');
+//         maplabel.show();
+//         var left = e.pageX - 15 - maplabel.width();
+//         var top = e.pageY - 15 - maplabel.height();
+//
+//         if (left < 0)
+//             left = e.pageX + 15;
+//         if (top < 0)
+//             top = e.pageY + 15;
+//
+//         maplabel.css({
+//             left: left,
+//             top: top
+//         });
+//     });
+// }

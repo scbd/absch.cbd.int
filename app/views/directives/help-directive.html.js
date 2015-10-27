@@ -21,23 +21,6 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
 
                                         var buttonTemplate = '';
 
-                                        // var buttonTemplate = '<div class="md-toolbar-tools"> <i class="material-icons">help_outline</i>   <a  ng-href="#" ng-click="showHelp.showTour=!showHelp.showTour" ng-if="!showHelp.showTour && showHelp.hasTour">' +
-                                        //                      '   <i class="material-icons" >live_help</i>Tour</a><md-switch class="pull-right"' +
-                                        //                      '   ng-model="showHelp.show"  aria-label="show help">' +
-                                        //                      '   <h5>Help: <strong>{{showHelp.show ? "on" : "off"}}</strong></h5></md-switch></div>';
-
-                                        // var formTemplate = '<div class="help-section" style="margin-bottom:20px;">' +
-                                        //         '   <div class="help-title">' +
-                                        //         '    {{control}}' +
-                                        //         '   </div>' +
-                                        //         ' <div class="help-content help-contentwhite" ng-if="showHelp.show" >{{content}}<div>';
-
-                                        // var sectionTemplate = '<div class="help-section" ng-if="showHelp.show" style="margin-bottom:20px;">' +
-                                        //         '   <div class="help-title">' +
-                                        //         '    <i class="material-icons">help_outline</i>' +
-                                        //         '   </div>' +
-                                        //         ' <div class="help-content" >{{content}}<div>';
-
                                         var sectionTemplate = '<div ng-if="showHelp.show" class="help-section">  <div style="" class="help-section-title"><i class="fa fa-info-circle"></i> {{title}} <a class="help-section-close" ng-click="showHelp.show=false;Feedback_helpOff();" href="#" style="" ><i class="fa fa-times"></i> Turn off help <i class="fa fa-info-circle"></i> </a></div> <div class="help-section-content">{{content}}</div></div>';
 
                                         var formTemplate = sectionTemplate;
@@ -68,9 +51,10 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
 
 
 
-                                         $scope.$watch('schema', function (newVal) {
+                                         $scope.$watch('schema', function (newVal, oldValue) {
 
-                                              if (newVal){
+                                              if (newVal && (newVal != oldValue || (_.isEmpty(help) && newVal.indexOf('register')>0))){
+                                                  help.loaded = true;
                                                   $timeout(function(){
                                                       loadSchemaHelp();
                                                   }, $scope.delay);
@@ -136,7 +120,7 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                                                   children = $element.find('div[name="' + field.name + '"]');
                                                                                 templateToUse = helpBlockTemplate;
                                                                         }
-                                                                        
+
                                                                         if (children.length==0) {
                                                                             children = $element.find('#' + field.name);
                                                                         }
@@ -214,7 +198,8 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                         .joyride({
                                                                 autoStart:true,
                                                                 tip_container: '#joyrideSection',
-                                                                postStepCallback : function (index, tip) {
+                                                                postStepCallback : function (index, tip,t) {
+                                                                    console.log(index,tip,t);
                                                                         if ($element.find('#helpElement').joyride('paused')) {
                                                                         console.log('Hey there, you\'ve paused the tour.');
                                                                         // fire your code here

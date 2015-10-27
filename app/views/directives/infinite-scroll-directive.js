@@ -5,7 +5,7 @@ define(['app'], function(app) {
             return {
                 restrict: 'EAC',
                 link: function($scope, elem, attrs) {
-                    
+
                     var checkWhenEnabled, handler, scrollDistance, scrollEnabled;
                     $window = angular.element($window);
                     scrollDistance = 0;

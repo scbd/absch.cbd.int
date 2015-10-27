@@ -1,66 +1,76 @@
 <div class="container" style="position:relative; top:20px; padding-bottom:500px;"  ng-controller="faqController">
       <div smooth-scroll duration="100" offset="200" ></div>
-   
+
    <style>
-    
+
 /*a:link{color: #428bca;}*/
 /*a:visited{color: #428bca;}*/
 a:hover{color: #000;}
 a:active{color: #000;}
-   
-       
+
+
    </style>
-   
-   
-    
+
+
+
      <div class="row">
             <div class="col-xs-12">
                 <h1><i class="fa fa-question-circle color-blue"></i> Frequently Asked Questions (FAQs) </h1>
-                
+
                   <md-input-container>
                     <label style="font-size:16px;">What do you need help with?</label>
                     <input ng-model="keyword">
                  </md-input-container>
-                 
+
                   <md-content ng-if="keyword" class="bg-litegrey" style="padding-bottom:30px;">
-                      <div ng-repeat="term in faqs | filter:keyword">
+                      <div ng-repeat="term in faqSearch | filter:keyword">
                            <a href="#" ng-click="scrollTo(term._id);" class="bold color-blue"> <i class="fa fa-question-circle color-blue"></i>  {{term.title}}</a>
                       </div>
-                      <div ng-show="!(faqs|filter:keyword).length" class="bold" >No matching FAQs found.</div>
+                      <div ng-show="!(faqSearch|filter:keyword).length" class="bold" >No matching FAQs found.</div>
                   </md-content>
-                 
+
                  <md-content class="bg-grey1" style="padding-top:0;">
                     <div layout="column" layout-align="top center"  style="padding-top:0;">
                         <md-list  style="padding-top:0;">
-                            <md-list-item class="md-1-line" ng-repeat="term in faqs " id="{{term._id}}" ng-class="{'bg-white': show}">
+                            <md-list-item class="md-1-line" ng-repeat="(key,faq) in faqs" style="padding:0;" >
 
-                              <div class="md-list-item-text"> 
-                                  <h3  ng-click="show=!show" style="cursor:pointer;">
-                                      {{term.title}}
-                                     <a ng-if="isAdmin()" href="/help/edit/faq/{{term._id}}" target="edit"><i class="fa fa-pencil-square"></i></a>
-                                      <span ng-if="show" class="pull-right" ng-click="show=false"><i class="material-icons">close</i></span>
-                                  </h3>
-                                  <div class="color-grey" ng-if="show" >
-                                     
-                                      <p  style="padding:20px 0;"  ng-bind-html="term.description|lstring"></p>
-                                       <div style="padding-bottom:20px;" class="color-grey" ng-show="term.related">
-                                       <strong>Related:</strong>
-                                            <div ng-repeat="rel in term.related">
-                                                    <a href="#" ng-click="scrollTo(rel);" class="bold color-blue">{{getTitle(rel)}}</a>
-                                            </div>
+                                <md-list  style="padding-top:0;width:100%">
+                                    <md-list-item class="md-1-line bg-grey">
+                                      <div class="md-list-item-text faqkey">
+                                         <md-divider ng-if="!$first"></md-divider>
+                                            <h1 style="padding-top:20px;"> {{key}}</h1>
+                                      </div>
+                                    </md-list-item>
+                                    <md-list-item class="md-1-line" ng-repeat="term in faq " id="{{term._id}}" ng-class="{'bg-white': show}" >
+                                      <div class="md-list-item-text">
+                                          <h3  ng-click="show=!show" style="cursor:pointer;">
+                                              {{term.title}}
+                                             <a ng-if="isAdmin()" href="/help/edit/faq/{{term._id}}" target="edit"><i class="fa fa-pencil-square"></i></a>
+                                              <span ng-if="show" class="pull-right" ng-click="show=false"><i class="material-icons">close</i></span>
+                                          </h3>
+                                          <div class="color-grey" ng-if="show" >
+
+                                              <p  style="padding:20px 0;"  ng-bind-html="term.description|lstring"></p>
+                                               <!--<div style="padding-bottom:20px;" class="color-grey" ng-show="term.related">
+                                               <strong>Related:</strong>
+                                                    <div ng-repeat="rel in term.related">
+                                                            <a href="#" ng-click="scrollTo(rel);" class="bold color-blue">{{getTitle(rel)}}</a>
+                                                    </div>
+                                                </div>-->
+                                                <div class="pull-right"><a href="#"  scroll-to="anchorTop" class="color-litegrey"><i class="fa fa-arrow-circle-up"></i> back to top</a></div>
+                                          </div>
+                                           <md-divider ng-if="!$last"></md-divider>
                                         </div>
-                                        <div class="pull-right"><a href="#"  scroll-to="anchorTop" class="color-litegrey"><i class="fa fa-arrow-circle-up"></i> back to top</a></div>
-                                  </div>
-                                   <md-divider ng-if="!$last"></md-divider>
-                                </div>
+                                    </md-list-item>
+                                </md-list>
                             </md-list-item>
                         </md-list>
                     </div>
                 </md-content>
             </div>
        </div>
-   
-   
+
+
     <!--<md-content flex layout-margin style="margin:0 30px 30px 30px;padding:0;background-color:transparent;">
 <span>Frequently Asked Questions</span>
 

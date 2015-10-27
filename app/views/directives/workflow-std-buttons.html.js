@@ -1,4 +1,5 @@
-define(['app','/app/views/directives/workflow-history-directive.html.js'], function (app) {
+define(['app','/app/views/directives/workflow-history-directive.html.js',
+        'toastr'], function (app) {
 
     app.directive('workflowStdButtons',["$q", "$timeout","underscore",
      function($q, $timeout, _){
@@ -106,8 +107,8 @@ define(['app','/app/views/directives/workflow-history-directive.html.js'], funct
 
                 $scope.loadSecurity();
 			},
-    		controller: ["$rootScope","$scope", "IStorage", "editFormUtility", "$route","IWorkflows",'$element',
-            function ($rootScope, $scope, storage, editFormUtility, $route, IWorkflows, $element)
+    		controller: ["$rootScope","$scope", "IStorage", "editFormUtility", "$route","IWorkflows",'$element', 'toastr',
+            function ($rootScope, $scope, storage, editFormUtility, $route, IWorkflows, $element, toastr)
 			{
 
                 $scope.loadSecurity = function(){
@@ -335,7 +336,7 @@ define(['app','/app/views/directives/workflow-history-directive.html.js'], funct
 
 					}).then(function(draftInfo) {
 
-                        $scope.showMessage = true;
+                        toastr.info($element.find('#msgDraftSaveMessage').text());
 
 						if(draftInfo.type=='authority'){
 							//in case of authority save the CNA as a contact in drafts
@@ -345,9 +346,7 @@ define(['app','/app/views/directives/workflow-history-directive.html.js'], funct
                         $('form').filter('.dirty').removeClass('dirty');
                         $scope.$emit("updateOrignalDocument", $scope.getDocumentFn());
                         $scope.$emit("documentDraftSaved", draftInfo);
-                        $('#divShowMessage').show('slow');
 
-                        $timeout(function() { $('#divShowMessage').hide('slow');}, 10000);
 						return draftInfo;
 
 
