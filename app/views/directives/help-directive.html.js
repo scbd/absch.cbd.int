@@ -55,6 +55,12 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
 
                                               if (newVal && (newVal != oldValue || (_.isEmpty(help) && newVal.indexOf('register')>0))){
                                                   help.loaded = true;
+                                                  if(joyride){
+                                                      joyride=false;
+                                                      $element.find('#helpElement').joyride('destroy');
+                                                      //don't know why but joyride destry does not remove previous element from DOM so remvoe manually
+                                                      $element.find('#joyrideSection').remove();
+                                                  }
                                                   $timeout(function(){
                                                       loadSchemaHelp();
                                                   }, $scope.delay);
@@ -151,11 +157,12 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                         }
 
                                         function addJoyRideSteps() {
+                                            if(!help)
+                                                return;
+                                                if (!joyride) {
 
-                                                if (!joyride && help) {
-
-                                                        if (!$element.attr('id'))
-                                                                $element.attr('id', 'helpElement');
+                                                        // if (!$element.attr('id'))
+                                                        //         $element.attr('id', 'helpElement');
 
                                                         var joyRideTemplate = '<div id="joyrideSection" style="display:none"><ol id="helpElement" class="jouride-list" data-joyride>';
                                                         var index = 1;
@@ -198,13 +205,13 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                                         .joyride({
                                                                 autoStart:true,
                                                                 tip_container: '#joyrideSection',
-                                                                postStepCallback : function (index, tip,t) {
-                                                                    console.log(index,tip,t);
-                                                                        if ($element.find('#helpElement').joyride('paused')) {
-                                                                        console.log('Hey there, you\'ve paused the tour.');
-                                                                        // fire your code here
-                                                                        }
-                                                                },
+                                                                // postStepCallback : function (index, tip,t) {
+                                                                //     console.log(index,tip,t);
+                                                                //         if ($element.find('#helpElement').joyride('paused')) {
+                                                                //         console.log('Hey there, you\'ve paused the tour.');
+                                                                //         // fire your code here
+                                                                //         }
+                                                                // },
                                                                 postRideCallback: function () {
                                                                         $scope.showHelp.showTour = false;
                                                                 }
