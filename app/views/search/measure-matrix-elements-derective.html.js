@@ -239,7 +239,7 @@ define(['app', 'underscore','angular', '/app/js/common.js'], function(app, _, an
                     var identifier = measureElement.identifier;
 
                     if(measureElement.parent)
-                        identifier = measureElement.parent + '#' + identifier;
+                        identifier = identifier + '#' + measureElement.parent;
 
                     var element = _.findWhere($scope.terms, {'identifier': identifier});
 
@@ -301,7 +301,7 @@ define(['app', 'underscore','angular', '/app/js/common.js'], function(app, _, an
                             var doc;
                             var amendedForTitle;
                             if($scope.type=='multiple'){
-                                doc = _.find($scope.document , function(measure){return measure.document.header.identifier==element.measureIdentifier;});
+                                doc = _.find($scope.document , function(measure){return measure.document && measure.document.header.identifier==element.measureIdentifier;});
                                 if(doc.document.amendedMeasures){
                                     amendedForTitle='';
                                     _.each(doc.document.amendedMeasures, function(msr){
