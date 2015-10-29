@@ -81,7 +81,7 @@ define(['app','linqjs', 'angular-localizer',
 		}
     };
 
-    if($scope.development_env) {
+    if($scope.development_env || $scope.training_env) {
       $rootScope.subheadings["National Records"].formats.push('absNationalReport');
     }
 
@@ -471,12 +471,16 @@ define(['app','linqjs', 'angular-localizer',
       toastr.info("Your record has been closed without saving.");
 	//   $scope.msg = "Your record has been closed without saving.";
 
-
+	  var absHosts = ['https://dev-absch.cbd.int/', 'https://training-absch.cbd.int/',
+  					 'http://localhost:2010/', 'https://absch.cbd.int/']
       $timeout(function() {
         if($rootScope.next_url){
 		   var url = $rootScope.next_url.replace($location.$$protocol + '://' +
-		             $location.$$host + ($location.$$host != 'absch.cbd.int' ? ':' + $location.$$port : '') + '/', '')
-          $timeout(function(){$location.path(url);},100)}
+		             $location.$$host + ($location.$$host != 'absch.cbd.int' ? ':' + $location.$$port : '') + '/', '');
+	      _.each(absHosts,function(host){
+			  url.replace(host,'');
+		  });
+		  $timeout(function(){$location.path(url);},100)}
         else{
           $timeout(function(){$location.path('/register/'+
 		                      $filter("mapSchema")($scope.document_type));},100);}
