@@ -204,7 +204,7 @@ app.directive("fieldEmbedContact", [ function () {
 							$scope.model = contacts;
 						else
 							$scope.model = undefined;
-				
+
 				}
 				else{
 					if(confirm("Are you you want to delete this record?")){
@@ -311,7 +311,7 @@ app.directive("fieldEmbedContact", [ function () {
 							if($scope.security.canSave)
 								return editFormUtility.publish(contact);
 							else
-								return editFormUtility.saveDraft(contact);
+								return editFormUtility.publishRequest(contact);
 						});
 					}
 

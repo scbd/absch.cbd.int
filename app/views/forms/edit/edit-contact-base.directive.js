@@ -55,7 +55,7 @@ app.directive("editContactBase", [ function () {
 
 			$scope.$watch('document.organizationType', function(newValue){
 				if(newValue && newValue.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'){
-					if(document.organizationType.customValue)
+					if(document.organizationType && document.organizationType.customValue)
 						document.organizationType.customValue = undefined;
 				}
 			});
