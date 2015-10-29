@@ -478,7 +478,7 @@ define(['app','linqjs', 'angular-localizer',
 		   var url = $rootScope.next_url.replace($location.$$protocol + '://' +
 		             $location.$$host + ($location.$$host != 'absch.cbd.int' ? ':' + $location.$$port : '') + '/', '');
 	      _.each(absHosts,function(host){
-			  url.replace(host,'');
+			  url = url.replace(host,'');
 		  });
 		  $timeout(function(){$location.path(url);},100)}
         else{
