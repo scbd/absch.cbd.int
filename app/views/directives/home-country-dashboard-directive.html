@@ -1,8 +1,9 @@
 
 <div class="row row-centered" ng-hide="loadingFacets" >
 
-    <div class="col-xs-12 row-centered" >
-    <a ng-href="/{{facet[1].searchUrl}}/{{facet[0]|mapSchema}}" ng-repeat="facet in commonFormatFacets" style="display:inline;" >
+    <div class="col-xs-12 row-centered hidden-xs hidden-sm" >
+    <a ng-href="/{{facet[1].searchUrl}}/{{facet[0]|mapSchema}}"
+     ng-repeat="facet in commonFormatFacets" style="display:inline;" >
             <!-- Big Screen  -->
             <div class="col-xs-8ths hidden-xs hidden-sm" id="myWell"  >
                 <div class="box-0 text-center" style="padding-bottom:14px;">
@@ -39,51 +40,44 @@
             </div>
 
             </div>
-            <!-- SMALL SCREEN -->
-            <div class="col-xs-4 visible-xs visible-sm" id="myWell"  >
-                <div class="box-0 text-center" style="padding-bottom:14px;">
-
-                    <div ng-if="facet[0]== 'RAT'">
-                        <div class="stats-count">{{facet[1].facetCount}} </div>
-                        <div class="stats-country">NP Parties</div>
-                    </div>
-                    <div ng-if="facet[0] != 'RAT' && !isReferenceRecord(facet[0])">
-
-                        <div class="stats-top">
-                            <div class="stats-count" >
-                                {{facet[1].countryCount}}
-                            </div>
-
-                            <div class="stats-country" >
-                                <span >Countries </span>
-                            </div>
-                        </div>
-
-                        <div class="text-center" >
-                            <hr style="padding:0;margin:5px 0;border:dashed 1px #ccc!important;" />
-                            <span  class="stats-hr" style="position:relative;top:-18px;background-color:#f6f6f6;" ng-show="facet[0]!= 'RAT'">have submitted</span>
-                        </div>
-
-                        <div class="stats-bottom" >
-                            <div class="stats-bottom" style="position:relative;top:-18px;">
-                                <div class="stats-count-rec">{{facet[1].facetCount}} </div>
-                                <div class="visible-xs visible-sm stats-schema-rec">{{facet[0]|mapSchema}}</div>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                    <div ng-if="isReferenceRecord(facet[0])">
-                        <div class="stats-count">{{facet[1].facetCount}} </div>
-                        <div class="visible-xs visible-sm stats-schema-rec">{{facet[0]|mapSchema}}</div>
-                    </div>
-                    <div class="clearfix"></div>
-
-            </div>
-
-            </div>
-
+            
         </a>
     </div>
+
+    <div class="row hidden-lg hidden-md container" style="text-align:left;    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;" >
+
+         <div class="col-md-4">
+              <div >
+                    <div ng-repeat="facet in commonFormatFacets">
+                        <div ng-if="facet[0]== 'RAT'">
+                            <span  class="color-grey" style="display:block;font-size:12px;">
+                                <strong>{{facet[1].facetCount}} NP Parties </strong>
+                           </span>
+                        </div>
+                        <a ng-if="facet[0]!= 'RAT' && !isReferenceRecord(facet[0])" ng-href="/{{facet[1].searchUrl}}/{{facet[0]|mapSchema}}"
+                            style="padding-bottom:5px;">
+                         <span style="text-transform:uppercase;font-weight:bold;font-size:10px;">
+                             {{facet[0]|lowercase|schemaNamePlural}} ({{facet[0]|mapSchema}})
+                         </span>
+                         <span  class="color-grey" style="display:block;font-size:12px;">
+                             {{facet[1].countryCount}}
+                             <span  > countries have submitted</span>
+                             {{facet[1].facetCount}} {{facet[0]|mapSchema}}
+                         </span>
+                        </a>
+                        <a ng-if="facet[0]!= 'RAT' && isReferenceRecord(facet[0])"
+                            ng-href="/{{facet[1].searchUrl}}/{{facet[0]|mapSchema}}"
+                            style="padding-bottom:5px;" class="color-orange">
+                         <span style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{facet[0]|lowercase|schemaNamePlural}}</span>
+                         <span  class="color-grey" style="display:block;font-size:12px;">
+                             {{facet[1].facetCount}} {{facet[0]|mapSchema}} have been submitted
+                         </span>
+                        </a>
+                </div>
+               </div>
+        </div>
+
 </div>
