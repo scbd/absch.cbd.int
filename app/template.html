@@ -11,7 +11,7 @@
     <link rel="shortcut icon" href="/app/img/favicon.png">
 
     <!-- Bootstrap core CSS -->
-    <link href="/app/libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="/app/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- <link href="/app/libs/bootstrap-material-design/dist/css/material.min.css" rel="stylesheet">-->
@@ -26,7 +26,6 @@
     <link rel="stylesheet" href="/app/libs/font-awesome/css/font-awesome.min.css">
     <link href="/app/libs/bootstrap-datepicker/css/datepicker.css" rel="stylesheet">
     <link href="/app/libs/angular-loading-bar/src/loading-bar.css" rel="stylesheet">
-    <link href="/app/libs/intro.js/introjs.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/app/libs/angular-toastr/dist/angular-toastr.min.css" />
 
     <link rel="stylesheet" type="text/css" href="/app/css/km.css">
@@ -50,10 +49,11 @@
 
     <nav class="navbar navbar-cbd navbar-default bg-cbdgreen navbar-static-top" id="anchorTop" ng-class="{'bg-orange':!production_env }">
       <div class="container-fluid container-cbd">
-          <ul class="navbar-left navlist">
-                <li class="hidden-md hidden-lg"><a href="http://www.cbd.int">
-                        <strong class="hidden-xs hidden-sm"><img src="/app/img/cbd-logo-spine-white.png" style="height:22px;position:relative;top:-2px;padding:0 5px 0 0;margin:0;"/>The Convention on Biological Diversity</strong>
-                        <strong class="visible-xs visible-sm"><img src="/app/img/cbd-logo-spine-white.png" style="height:22px;position:relative;top:-2px;padding:0 5px 0 0;margin:0;"/>SCBD</strong>
+          <ul class="navbar-left navlist pull-left">
+                <li class="hidden-md hidden-lg pull-left">
+                    <a href="http://www.cbd.int">
+                        <strong class="hidden-xs hidden-sm"><img src="/app/img/cbd-white-spine.png" style="height:22px;position:relative;top:-2px;padding:0 5px 0 0;margin:0;"/>The Convention on Biological Diversity</strong>
+                        <strong class="visible-xs visible-sm"><img src="/app/img/cbd-white-spine.png" style="height:22px;position:relative;top:-2px;padding:0 5px 0 0;margin:0;"/>SCBD</strong>
                     </a>
                 </li>
                 <li class="hidden-xs hidden-sm"><a href="http://www.cbd.int/convention/">The Convention</a></li>
@@ -168,7 +168,7 @@
                 </div>
                 <div class="col-xs-3 hidden-xs hidden-sm" style="vertical-align:middle;">
 
-                    <img src="/app/img/cbd-logo-en-green.png" class="pull-right" style="padding: 0; margin:10px 0 0 0;height:70px;" /><br>
+                    <img src="/app/img/cbd-logo-green-en.svg" class="pull-right" style="padding: 0; margin:10px 0 0 0;height:70px;" /><br>
 
                 </div>
             </div>
@@ -180,43 +180,49 @@
      <!-- PORTAL LINKS-->
     <nav id="PortalLinks1" class="navbar navbar-links navbar-default navbar-static-top bg-darkgrey"  ng-class="{'bg-orange':!production_env }">
         <div class="container-fluid container-links color-grey">
-               <ul class="navbar-left navlist nav navbar-nav" style="display:flex">
-                   <li class="bold color-orange hidden-sm hidden-md hidden-lg">
-                       <span ng-show="production_env" > ABS-CH</span>
-                       <span ng-show="development_env" > DEVELOPMENT</span>
-                       <span ng-show="training_env" > TRAINING</span>
-                   </li>
-                    <li class="bold color-orange hidden-xs hidden-md hidden-lg">
-                        <span ng-show="production_env" > ABS Clearing-House</span>
-                       <span ng-show="development_env" > DEVELOPMENT</span>
-                       <span ng-show="training_env" > TRAINING</span>
-                    </li>
-                    <li><a href="/"> <i class="fa fa-home visible-xs visible-sm" ></i> <span class="hidden-xs hidden-sm"> Home </span></a></li>
-                    <li><a href="/find" > <i class="fa fa-search visible-xs visible-sm"></i> <span class="hidden-xs hidden-sm"> &nbsp;&nbsp;Find&nbsp;Information</span></a></li>
-                    <li><a href="/register" > <i class="fa fa-pencil-square-o visible-xs visible-sm"></i> <span class="hidden-xs hidden-sm"> &nbsp;&nbsp;Submit&nbsp;Information</span></a></li>
-                    <!--<li><a href="/countries" ng-class="{'link-active' : getClass('/countries')}"><i class="fa fa-globe visible-xs visible-sm"></i> <span class="hidden-xs hidden-sm">&nbsp;Country Information</span></a></li>-->
-                </ul>
+                <div class="navbar-header">
+                    <!-- <a href="/help" ng-class="{'link-active' : getClass('/help')}" class="navbar-toggle collapsed" ><span class="hidden-xs hidden-sm">&nbsp;Help</span></a>
+                    <a  ng-href="#" ng-click="showHelp.showTour=!showHelp.showTour" class="navbar-toggle collapsed"  ><i class="fa fa-youtube-play" ng-class="{'color-pink':showHelp.hasTour, 'color-grey': !showHelp.hasTour}"></i></a>
+                    <a  ng-href="#" ng-click="showHelp.show=!showHelp.show;feedbackHelp();" class="navbar-toggle collapsed"  ><i class="fa fa-info-circle" ng-class="{'help-color':showHelp.show }"></i></a>
+                    <a href="/forums/iac" ng-if="training_env||development_env" ng-class="{'link-active' : getClass('/forums')}" class="navbar-toggle collapsed" ><i class="fa fa-comments"></i><span class="hidden-xs hidden-sm">&nbsp;IAC&nbsp;Forum</span></a> -->
 
-                 <ul class="navbar-right navlist">
 
-                     <li class="pull-right"  style="padding-right:0;">
-                            <a  ng-href="#" ng-click="showHelp.showTour=!showHelp.showTour"  ><i class="fa fa-youtube-play" ng-class="{'color-pink':showHelp.hasTour, 'color-grey': !showHelp.hasTour}"></i></a>
-                     </li>
+                   <!-- <a href="/" class="fa fa-home"> <i class="visible-xs visible-sm" ></i></a> -->
+                </div>
+                <div id="navbar" class="clearfix">
 
-                      <li class="pull-right">
-                            <a  ng-href="#" ng-click="showHelp.show=!showHelp.show;feedbackHelp();"  ><i class="fa fa-info-circle" ng-class="{'help-color':showHelp.show }"></i></a>
-                      </li>
+                   <ul class="nav navbar-nav pull-left" style="display:flex">
+                       <div class="bold color-orange1 hidden-md hidden-lg">
+                           <span ng-show="production_env" > ABS-CH</span>
+                           <span ng-show="development_env" > DEVELOPMENT</span>
+                           <span ng-show="training_env" > TRAINING</span>
+                       </div>
+                        <div class="bold color-orange1 hidden-xs">
+                            <span ng-show="production_env" > ABS Clearing-House</span>
+                           <span ng-show="development_env" > DEVELOPMENT</span>
+                           <span ng-show="training_env" > TRAINING</span>
+                        </div>
+                        <li><a href="/"> <i class="fa fa-home visible-xs visible-sm" ></i> <span class="hidden-xs hidden-sm"> Home </span></a></li>
+                        <li><a href="/find" > <i class="fa fa-search visible-xs visible-sm"></i> <span class="hidden-xs hidden-sm"> &nbsp;&nbsp;Find&nbsp;Information</span></a></li>
+                        <li><a href="/register" > <i class="fa fa-pencil-square-o visible-xs visible-sm"></i> <span class="hidden-xs hidden-sm"> &nbsp;&nbsp;Submit&nbsp;Information</span></a></li>
+                    </ul>
 
-                        <!--<li class="pull-right">
-                            <a  ng-href="#" ng-click="showHelp.glossary=!showHelp.glossary;feedbackGlossary();" ><i class="fa fa-question-circle" ng-class="{'color-pink':showHelp.glossary }"></i></a>
-                      </li>-->
+                     <ul class="nav navbar-nav navbar-right ">
 
-                    <li class="pull-right">
-                        <a href="/help" ng-class="{'link-active' : getClass('/help')}"><span class="hidden-xs hidden-sm">&nbsp;Help</span></a>
-                    </li>
+                         <li class="pull-right"  style="padding-right:0;">
+                                <a  ng-href="#" ng-click="showHelp.showTour=!showHelp.showTour"  ><i class="fa fa-youtube-play" ng-class="{'color-pink':showHelp.hasTour, 'color-grey': !showHelp.hasTour}"></i></a>
+                         </li>
 
-                    <li class="pull-right" ng-if="training_env||development_env"><a href="/forums/iac" ng-class="{'link-active' : getClass('/forums')}"><i class="fa fa-comments"></i><span class="hidden-xs hidden-sm">&nbsp;IAC&nbsp;Forum</span></a></li>
-                </ul>
+                          <li class="pull-right">
+                                <a  ng-href="#" ng-click="showHelp.show=!showHelp.show;feedbackHelp();"  ><i class="fa fa-info-circle" ng-class="{'help-color':showHelp.show }"></i></a>
+                          </li>
+                        <li class="pull-right">
+                            <a href="/help" ng-class="{'link-active' : getClass('/help')}"><span class="hidden-xs hidden-sm">&nbsp;Help</span></a>
+                        </li>
+                        <li class="pull-right" ng-if="training_env||development_env"><a href="/forums/iac" ng-class="{'link-active' : getClass('/forums')}"><i class="fa fa-comments"></i><span class="hidden-xs hidden-sm">&nbsp;IAC&nbsp;Forum</span></a></li>
+                    </ul>
+
+                </div>
         </div>
     </nav>
 
@@ -224,11 +230,11 @@
     <!-- PORTAL LINKS FIXED-->
     <nav id="PortalLinks2" class="navbar navbar-links navbar-default navbar-static-top bg-darkgrey navbar-fixed-top" ng-class="{'bg-orange':!production_env }">
         <div class="container-fluid container-links color-grey">
-                <ul class="navbar-left navlist nav navbar-nav"  style="display:flex">
+                <ul class="navbar-left navlist nav navbar-nav pull-left"  style="display:flex">
                     <li class="bold e">
-                        <span ng-show="production_env" class="color-orange"> ABS-CH</span>
-                        <span ng-show="development_env" class="bg-black"> DEVELOPMENT</span>
-                        <span ng-show="training_env" class="bg-black"> TRAINING</span>
+                        <span ng-if="production_env" class="color-orange"> ABS-CH</span>
+                        <span ng-if="development_env" > DEVELOPMENT</span>
+                        <span ng-if="training_env" > TRAINING</span>
                     </li>
                     <li><a href="/"> <i class="fa fa-home visible-xs visible-sm" ></i> <span class="hidden-xs hidden-sm"> Home </span></a></li>
                     <li><a href="/find"> <i class="fa fa-search visible-xs visible-sm"></i> <span class="hidden-xs hidden-sm"> &nbsp;&nbsp;Find&nbsp;Information</span></a></li>
