@@ -35,7 +35,11 @@
                 <div class="container-fluid1">
                     <div class="row">
                         <div class="col-lg-12">
-                            <i  class="fa fa-list pointer btn btn-default visible-xs visible-sm" id="menu-toggle" ng-click="toggleSideBar($event)"/>
+                            <span class="visible-xs visible-sm pointer btn btn-default" style="margin-bottom: 10px;" ng-click="toggleSideBar($event)">
+                                <i  class="fa fa-list" id="menu-toggle" >
+                                    Show Filters
+                                </i>
+                            </span>
 
                             <button class="btn btn-primary" type="button" ng-show="partyStatusString" ng-click="queryStatus()" style="margin-right:2px;margin-bottom:2px">
                                 {{partyStatusString}} &nbsp;
