@@ -24,7 +24,7 @@ app.directive('searchFilterSchemas', function ($http) {
         {
             var skipInitialQuery = false;
             $scope.groupby=true;
-            $scope.orderReferenceBy = 'title_s asc';
+            $scope.orderReferenceBy = 'createdDate_dt desc';
             $scope.recordType = $route.current.$$route.type;
             if($scope.recordType == 'reference'){
                 $scope.previewType = 'list';
@@ -688,7 +688,7 @@ app.directive('searchFilterSchemas', function ($http) {
                     commonjs.getCountries()
                     .then(function(countries){
                         $scope.countryProfileFacets.parties = _.where(countries, {isNPParty:true}).length;
-                        $scope.countryProfileFacets.nonParties = _.where(countries, {isNPParty:false}).length;                        
+                        $scope.countryProfileFacets.nonParties = _.where(countries, {isNPParty:false}).length;
                         $scope.countryProfileFacets.inbetweenParties = _.where(countries, {isNPInbetweenParty:true}).length;
                     });
                 }

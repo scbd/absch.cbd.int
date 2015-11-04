@@ -23,7 +23,7 @@ define(['app','underscore','/app/js/common.js',
         var queryCanceler = null;
         var refreshTimeout = null;
 
-        $scope.orderReferenceBy = "title_s acs";
+        $scope.orderReferenceBy = 'createdDate_dt desc';
         $scope.itemsPerPage    = 25;
         $scope.documentCount   = 0;
         $scope.currentPage     = 0;
