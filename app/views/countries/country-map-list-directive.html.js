@@ -262,14 +262,12 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
                             if(_.size($scope.query)>1){
                                 return (    (!query.isParties           || query.isParties && entity.isNPParty)&&
                                             (!query.isNonParties        || query.isNonParties && !entity.isNPParty)&&
-                                            (!query.isSignatories       || query.isSignatories && entity.isNPSignatory)&&
                                             (!query.isInbetweenParties  || query.isInbetweenParties && entity.isNPInbetweenParty)
                                         );
                             }
                             else{
                                 return (    (query.isParties && entity.isNPParty)||
                                             (query.isNonParties && !entity.isNPParty)||
-                                            (query.isSignatories && entity.isNPSignatory)||
                                             (query.isInbetweenParties && entity.isNPInbetweenParty)
                                         );
                             }
@@ -292,7 +290,7 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
                         var count = 0;
                         _.each($scope.countryFacets['government_s,schema_s'], function(data) {
                             if (data.value == 'eur')
-                                data.value = 'eu';                                
+                                data.value = 'eu';
                             _.each(data.pivot, function(facets) {
                                 if (facets.value == 'focalPoint' && tempFacets[facets.value]) {
                                     count++;
