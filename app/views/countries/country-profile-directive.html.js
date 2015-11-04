@@ -72,7 +72,12 @@
                     $scope.absCheckpoint= 0;
                     $scope.absCheckpointCommunique = 0;
                     $scope.database= 0;
-                    $scope.showMatrix = true;
+                    $scope.showMatrix = false;
+
+                    if ($location.absUrl().toLowerCase().indexOf("://dev-absch.cbd.int") > 0 || $location.absUrl().toLowerCase().indexOf("localhost:2010") > 0 ||
+                        $location.absUrl().toLowerCase().indexOf("://training-absch.cbd.int") > 0) {
+                        $scope.showMatrix = true;
+                    }
                     //**********************************************************
                 $scope.loadCountryDetails = function(countryCode) {
 
