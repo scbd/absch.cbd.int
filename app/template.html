@@ -191,14 +191,12 @@
                 </div>
                 <div id="navbar" class="clearfix">
 
-                   <ul class="nav navbar-nav pull-left" style="display:flex">
-                       <div class="bold color-orange1 hidden-md hidden-lg">
-                           <span ng-show="production_env" > ABS-CH</span>
+                   <ul class="nav navbar-nav pull-left" style="display:flex" >
+                       <div class="bold color-orange1 hidden-md hidden-lg" ng-if="!production_env">
                            <span ng-show="development_env" > DEV</span>
                            <span ng-show="training_env" > TRG</span>
                        </div>
-                        <div class="bold color-orange1 hidden-xs">
-                            <span ng-show="production_env" > ABS Clearing-House</span>
+                        <div class="bold color-orange1 hidden-xs" ng-if="!production_env">
                            <span ng-show="development_env" > DEVELOPMENT</span>
                            <span ng-show="training_env" > TRAINING</span>
                         </div>
@@ -229,8 +227,7 @@
     <nav id="PortalLinks2" class="navbar navbar-links navbar-default navbar-static-top bg-darkgrey navbar-fixed-top" ng-class="{'bg-orange':!production_env }">
         <div class="container-fluid container-links color-grey">
                 <ul class="navbar-left navlist nav navbar-nav pull-left"  style="display:flex">
-                    <li class="bold e">
-                        <span ng-if="production_env" class="color-orange"> ABS-CH</span>
+                    <li class="bold">
                         <span ng-if="development_env" > DEV</span>
                         <span ng-if="training_env" > TRG</span>
                     </li>
