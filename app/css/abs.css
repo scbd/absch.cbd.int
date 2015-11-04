@@ -63,8 +63,8 @@ h1, h2, h3 {
 	border-bottom:1px solid #DDD;
 }
 .small > .brand >  a > h1 > img{
-	height: 32px; 
-	position: relative; 
+	height: 32px;
+	position: relative;
 	top: -5px;
 	padding:0;
 	margin:0;
@@ -214,7 +214,7 @@ margin-bottom: 0px;
 	/*padding: 32px 30px 15px 30px;*/
 	margin:0;padding:0;
 	padding-top: 32px;
-	
+
 
 	}
 
@@ -397,14 +397,14 @@ form label[required]:after
 .footer-links a, h4 > a {
 	color:#efefef;
 }
-.footer-links a:hover, a:focus, h4>a:hover, h4>a:focus{
+.footer-links a:hover, .footer-links a:focus, h4>a:hover, h4>a:focus{
 	color:#FFF;
 }
 .footer-links{
 	padding:0;
 	margin:0;
 }
-.copyright a, a:hover, a:focus{
+.copyright a, .copyright a:hover, .copyright a:focus{
 	color:#FFF;
 }
 
@@ -482,7 +482,7 @@ padding: 10px 10px 10px 10px;
     line-height: 12px;
     white-space: normal;
     margin-bottom: 5px;
-    
+
     height: 48px;
     z-index: 1;
     position: relative;
@@ -670,4 +670,3 @@ margin-bottom: 10px;
 border: 1px solid transparent;
 border-radius: 4px;
 }
-

@@ -549,7 +549,7 @@ padding:3px;
 	top:-22px;
 	position: relative;
 }
-.account-signin a:hover, a:focus{
+.account-signin a:hover, .account-signin a:focus{
 	color:#fff;
 }
 /*.set-languages {
@@ -629,7 +629,7 @@ padding:3px;
 .footer-links a, h4 > a {
 	color:#efefef;
 }
-.footer-links a:hover, a:focus, h4>a:hover, h4>a:focus{
+.footer-links a:hover, .footer-links a:focus, h4>a:hover, h4>a:focus{
 	color:#FFF;
 }
 .footer-links{
