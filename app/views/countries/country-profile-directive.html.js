@@ -28,9 +28,10 @@
                 code : '='
             },
             controller: ["$scope", "$http", "$routeParams", "linqjs", "$filter", "realm",
-                "commonjs", "$q", '$element', '$timeout','commonjs','IStorage','$rootScope','$mdSidenav', '$mdUtil', '$mdMedia','schemaTypes','breadcrumbs','smoothScroll',
+                "commonjs", "$q", '$element', '$timeout','commonjs','IStorage','$rootScope','$mdSidenav',
+                '$mdUtil', '$mdMedia','schemaTypes','breadcrumbs','smoothScroll','$location',
                 function($scope, $http, $routeParams, linqjs, $filter, realm, commonjs, $q,
-                            $element, $timeout, countriescommonjs, IStorage,$rootScope, $mdSidenav, $mdUtil, $mdMedia, schemaTypes, breadcrumbs,smoothScroll) {
+                            $element, $timeout, countriescommonjs, IStorage,$rootScope, $mdSidenav, $mdUtil, $mdMedia, schemaTypes, breadcrumbs,smoothScroll,$location) {
 
                 $scope.api = {
                     loadCountryDetails : $scope.loadCountryDetails
