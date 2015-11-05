@@ -24,7 +24,7 @@ app.directive('login', function ($http) {
                 $scope.errorInvalid = false;
                     $scope.errorTimeout = false;
                     $scope.waiting      = true;
-                    
+
                     authentication.signIn($scope.email, $scope.password)
                     .then(function(user){
                         if(typeof $scope.onAuthorization =='function'){
@@ -32,10 +32,9 @@ app.directive('login', function ($http) {
                         }
                     })
                     .catch(function onerror(error) {
-                        console.log(error);
                         $scope.password     = "";
-                        $scope.errorInvalid = error.status == 403;
-                        $scope.errorTimeout = error.status != 403;
+                        $scope.errorInvalid = error.errorCode == 403;
+                        $scope.errorTimeout = error.errorCode != 403;
                     })
                     .finally(function(){
                         $scope.waiting      = false;
