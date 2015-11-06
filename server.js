@@ -1,5 +1,7 @@
 /* jshint node: true, browser: false */
 
+'use strict';
+
 // CREATE HTTP SERVER AND PROXY
 
 var app     = require('express')();
@@ -53,3 +55,5 @@ app.get('/*', function (req, res) {
 app.listen(app.get('port'), function () {
 	console.log('Server listening on %j', this.address());
 });
+// server.listen(app.get('port'));
+>>>>>>> upgrade express versions and changes to server.js accordingly
