@@ -15,7 +15,7 @@
             </td>-->
             <td ng-class="{'notification-read':notification.state=='read','notification-unread':notification.state=='unread' }" style="padding:10px 0;cursor:pointer;">
 
-                <a ng-href="{{getURL(notification)}}" ng-click="markAsRead(notification);">
+                <a ng-href="{{getURL(notification)}}" ng-click="markAsRead(notification);" class="skipNotificationPanel">
 
                     <i ng-class="{'color-blue':notification.state=='unread'}">
                         <i class="fa fa-envelope" style="font-size:15px" ng-show="notification.type=='message'"></i>

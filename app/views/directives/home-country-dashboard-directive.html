@@ -1,17 +1,23 @@
 
 <div class="row row-centered" ng-hide="loadingFacets" >
-
+    <div class="pull-right padding-right-10">
+            <span class="color-blue">
+                <i class="fa fa-square color-blue" ></i> National Records</span>
+            <span class="color-orange">
+                <i class="fa fa-square color-orange" ></i> Reference Records</span>
+    </div>
     <div class="col-xs-12 row-centered hidden-xs hidden-sm" >
+
     <a ng-href="/{{facet[1].searchUrl}}/{{facet[0]|mapSchema}}"
      ng-repeat="facet in commonFormatFacets" style="display:inline;" >
             <!-- Big Screen  -->
-            <div class="col-xs-8ths hidden-xs hidden-sm" id="myWell"  >
-                <div class="box-0 text-center" style="padding-bottom:14px;">
-                    <div ng-if="facet[0]== 'RAT'">
+            <div class="col-xs-8ths hidden-xs hidden-sm" id="myWell1"  >
+                <div class="text-center" style="padding-bottom:14px;">
+                    <div ng-if="facet[0]== 'RAT'" class="box-0 bs-callout bs-callout-primary">
                         <div class="stats-count">{{facet[1].facetCount}} </div>
                         <div class="stats-country">Parties to the Nagoya Protocol</div>
                     </div>
-                    <div ng-if="facet[0] != 'RAT' && !isReferenceRecord(facet[0])">
+                    <div ng-if="facet[0] != 'RAT' && !isReferenceRecord(facet[0])" class="box-0 bs-callout bs-callout-primary">
                         <div class="stats-top">
                             <div class="stats-count" >
                                 {{facet[1].countryCount}}
@@ -33,14 +39,14 @@
 
                     </div>
 
-                    <div ng-if="isReferenceRecord(facet[0])">
+                    <div ng-if="isReferenceRecord(facet[0])" class="box-0 bs-callout bs-callout-reference-records">
                         <div class="stats-count">{{facet[1].facetCount}} </div>
                         <div class="stats-country hidden-xs hidden-sm">{{facet[0]|lowercase|schemaNamePlural}}</div>
                     </div>
             </div>
 
             </div>
-            
+
         </a>
     </div>
 
