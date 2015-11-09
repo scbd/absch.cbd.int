@@ -157,10 +157,7 @@
                         </strong>
                         <!--exception for TK-->
                         <span ng-if="term.broaderTerms && !term.isMeasure" ng-style="{'boldLabel':term.identifier=='B8A150E054154AD3AD97856ABD485E90'}">
-                            {{(term.title||term.name)  | lstring:locale}}
-                            <span ng-if="term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0">
-                                {{otherCustomValues[term.identifier]  | lstring:locale}}
-                            </span>
+                            {{(term.title||term.name)  | lstring:locale}}<span ng-if="term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0">: {{otherCustomValues[term.identifier]  | lstring:locale}}</span>
                         </span>
                         <span ng-if="term.broaderTerms && term.isMeasure">
                             <span ng-if="term.measureType=='linked'">Related to</span>
