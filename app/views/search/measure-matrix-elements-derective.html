@@ -152,8 +152,7 @@
                 ng:class="{'paddingleft0':term.level==1, 'paddingleft3':term.level==2 && !term.isMeasure , 'paddingleft6':term.level==3, 'paddingleft9':term.level==4}">
                         &nbsp;
                         <strong ng-if="!term.broaderTerms">
-                           {{  term.title||term.name | lstring:locale|uppercase}}
-                           <span ng-if="term.identifier == '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED' && otherCustomValues[term.identifier]">:{{otherCustomValues[term.identifier]| lstring:locale}}</span>
+                           {{  term.title||term.name | lstring:locale|uppercase}}<span ng-if="term.identifier == '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED' && otherCustomValues[term.identifier]">: {{otherCustomValues[term.identifier]| lstring:locale}}</span>
                         </strong>
                         <!--exception for TK-->
                         <span ng-if="term.broaderTerms && !term.isMeasure" ng-style="{'boldLabel':term.identifier=='B8A150E054154AD3AD97856ABD485E90'}">
