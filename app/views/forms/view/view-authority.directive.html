@@ -110,12 +110,9 @@
 
 			<div ng-show="document.absJurisdiction">
 				<label>Jurisdiction(s) covered by this CNA</label>
-				<div class="km-value">
-					<ul>
-						<li>{{document.absJurisdiction[0]|term}}
-							<span ng-if="document.absJurisdictionName ">({{document.absJurisdictionName | lstring:locale}})</span>
-						</li>
-					</ul>
+				<div class="km-value" ng-if="document.absJurisdiction" >
+					<span ng-repeat="jur in document.absJurisdiction">{{jur|term}}{{$last ? '' : ', '}} </span>
+					<span ng-if="document.absJurisdictionName ">({{document.absJurisdictionName | lstring:locale}})</span>
 				</div>
 			</div>
 
