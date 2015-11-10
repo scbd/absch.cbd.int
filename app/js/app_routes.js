@@ -28,7 +28,9 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
             when('/forums/iac-trg',          { redirectTo:'/forums/iac'}).
             when('/forums/iac',              { templateUrl: '/app/views/forums/thread-list-view.html'   ,label:'IAC', resolveController: true, resolveUser: true, forumId:17433, postUrl:'/forums/iac', text:'IAC' }).
             when('/forums/iac/:threadId',    { templateUrl: '/app/views/forums/post-list-view.html'     ,label:'Thread-Subject', resolveController: true, resolveUser: true, forumId:17433, forumListUrl:'/forums/iac/', text:'IAC'}).
-
+            when('/forums/joint-iac',              { templateUrl: '/app/views/forums/thread-list-view.html'   ,label:'Joint IAC', resolveController: true, resolveUser: true, forumId:17446, postUrl:'/forums/joint-iac', text:'Joint IAC' }).
+             when('/forums/joint-iac/:threadId',    { templateUrl: '/app/views/forums/post-list-view.html'     ,label:'Thread-Subject', resolveController: true, resolveUser: true, forumId:17446, forumListUrl:'/forums/joint-iac/', text:'Joint IAC'}).
+           
             when('/forums/vlr',                    { templateUrl: '/app/views/forums/thread-list-view.html'  ,label:'VLR'  ,resolveController: true, resolveUser: true, forumId:17384, postUrl:'/forums/vlr', text:'VLR' }).
             when('/forums/vlr/:threadId',          { templateUrl: '/app/views/forums/post-list-view.html'    ,label:'Thread-Subject'  ,resolveController: true, resolveUser: true, forumId:17384, forumListUrl:'/forums/vlr/', text:'VLR'}).
             when('/forums/caribbean',              { templateUrl: '/app/views/forums/thread-list-view.html'  ,label:'Caribbean'  ,resolveController: true, resolveUser: true, forumId:17378, postUrl:'/forums/caribbean', text:'Caribbean Region Forum' }).
