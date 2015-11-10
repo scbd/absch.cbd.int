@@ -52,7 +52,7 @@
 			</div>
 			<div ng-show="document.nationalReferences || document.title ||
 				document.date || document.providers || document.informedConsents ||
-				document.geneticResources || document.consentGranted ||
+				document.geneticResources || document.geneticResourcesConfidential || document.consentGranted ||
 				document.consentInformation || document.consentDocuments ||
 				document.specimen || document.taxonomy || document.gisFiles">
 				<legend>Details of the permit or its equivalent</legend>
@@ -81,7 +81,7 @@
 
 <legend>Prior Informed Consent (PIC) Information</legend>
 
-<div ng-show="document.consentGranted!=undefined">
+				<div ng-show="document.consentGranted!=undefined">
 					<label>Confirmation that prior informed consent was obtained or granted</label>
 					<div class="km-value" ng-show="document.consentGranted">Yes</div>
 					<div class="km-value" ng-show="!document.consentGranted">No</div>
@@ -165,13 +165,14 @@
 					<label>Subject-matter or genetic resources covered by the permit or its equivalent</label>
 					<div class="km-value km-pre"ng-bind-html="document.geneticResources | lstring:locale"></div>
 				</div>
+		
 				<div ng-show="document.geneticResourcesConfidential">
 					<label>Subject-matter or genetic resources covered by the permit or its equivalent</label>
 					<div class="km-value km-pre confidential">Confidential information</div>
 				</div>
 
 				<div ng-show="document.specimen || document.taxonomy || document.gisFiles">
-					<legend>Optional additional subject matter details</legend>
+					<!--<legend>Optional additional subject matter details</legend>-->
 					<div ng-show="document.specimen">
 						<label>Specimen data</label>
 						<!-- <div class="km-value" ng-repeat="item in document.specimen">
