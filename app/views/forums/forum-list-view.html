@@ -11,22 +11,35 @@
                 <div class="col-lg-4">
                     <div class="list-group">
                         <div class="list-group-item activeHeader">
-                            <h4 class="list-group-item-heading" style="padding-left:40%">
+                            <h4 class="list-group-item-heading" >
                                 <a ng-href="/forums/iac{{training_env||development_env ? '-trg':''}}">
-                                    <i class="fa fa-rss fa-3x"></i>
+                                  <i class="fa fa-comments"></i>  ABS-CH IAC Forum
                                 </a>
                             </h4>
                         </div>
                         <div class="list-group-item list-group-item-default">
-                            <h3>
-                                <a ng-href="/forums/iac">
-                                    Informal Advisory Committee (IAC)</a>
-                            </h3>
-                            <p>You must be an IAC member to participate in this forum. </p>
-                            <strong>Total threads: {{iacThreads}}</strong>
+                            <p>You must be an ABSCH IAC member to participate in this forum. </p>
+                             <a ng-href="/forums/iac"><strong>Total threads: {{iacThreads}}</strong></a>
                         </div>
                     </div>
                 </div>
+                
+                 <div class="col-lg-4">
+                    <div class="list-group">
+                        <div class="list-group-item activeHeader">
+                            <h4 class="list-group-item-heading" >
+                                <a ng-href="/forums/joint-iac">
+                                   <i class="fa fa-comments"></i> ABS-CH/CHM Joint IAC Forum
+                                </a>
+                            </h4>
+                        </div>
+                        <div class="list-group-item list-group-item-default">
+                            <p>You must be an ABSCH or CHM  IAC member to participate in this forum. </p>
+                             <a ng-href="/forums/joint-iac"><strong>Total threads: {{jointIacThreads}}</strong></a>
+                        </div>
+                    </div>
+                </div>
+                
                 <!--<div class="col-lg-4">
                     <div class="list-group">
                         <div class="list-group-item activeHeader">
@@ -66,18 +79,15 @@
                 <div class="col-lg-4">
                     <div class="list-group">
                         <div class="list-group-item activeHeader">
-                            <h4 class="list-group-item-heading" style="padding-left:40%">
+                            <h4 class="list-group-item-heading">
                                 <a ng-href="/forums/art10_groups">
-                                    <i class="fa fa-file-o fa-3x"></i>
+                                     <i class="fa fa-comments"></i> Article 10 Group Forum
                                 </a>
                             </h4>
                         </div>
                         <div class="list-group-item list-group-item-default">
-                            <h3>
-                                <a ng-href="/forums/art10_groups">
-                                    Article 10 Group Forum</a>
-                            </h3>
-                            <strong>Total threads: {{art10Threads}}</strong>
+                             <p>This forum is closed for comments.                          </p>
+                            <a ng-href="/forums/art10_groups"><strong>Total threads: {{art10Threads}}</strong></a>
                         </div>
                     </div>
                 </div>
