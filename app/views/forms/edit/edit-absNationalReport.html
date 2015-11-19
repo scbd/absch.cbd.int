@@ -29,7 +29,8 @@
         <div class="row" ng-show="tab == 'edit'">
             <div class="col-xs-12">
                 <ul class="pagination" id="nrTabs" ng-click="setTab()">
-                    <li class="active"><a href="#part1" data-toggle="tab">Part 1</a></li>
+                     <li class="active"><a href="#part0" data-toggle="tab">Guidelines</a></li>
+                    <li><a href="#part1" data-toggle="tab">Part 1</a></li>
                     <li><a href="#part2" data-toggle="tab">Part 2</a></li>
                     <li><a href="#part3" data-toggle="tab">Part 3</a></li>
                     <li><a href="#part4" data-toggle="tab">Part 4</a></li>
@@ -51,14 +52,14 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="tab-content">
-                        <div class="tab-pane active" id="part1">
-                            
-                            
-                             <div class="help-section" ng-if="showHelp.show" style="margin-bottom:20px;">
-                                 <div class="help-title">
-                                 <i class="material-icons">help_outline</i> GUIDELINES FOR THE INTERIM NATIONAL REPORT ON THE IMPLEMENTATION OF THE NAGOYA PROTOCOL
-                                 </div>
-                                 <div class="help-content">
+                        
+                        <div  class="tab-pane active" id="part0">
+                        
+                             <div  style="margin-bottom:20px;">
+                                 <h4>
+                                GUIDELINES FOR THE INTERIM NATIONAL REPORT ON THE IMPLEMENTATION OF THE NAGOYA PROTOCOL
+                                 </h4>
+                                 <div>
                                  <p>The following format for the preparation of the interim national report on implementation of the Nagoya Protocol on Access and Benefit-sharing called for under Article 29 of the Protocol is a series of questions based on those provisions of the Protocol that establish obligations for the Parties to the Protocol. These questions are identified as mandatory and are marked with an asterisk</p> 
                                  
                                  <p>In addition, some questions are not strictly based on the provisions of the Protocol and are identified as voluntary. They are included in the reporting format to contribute to the assessment and review of the effectiveness of the Protocol in the context of Article 31 and to identify challenges and difficulties in implementing the Protocol, and of decisions adopted by the Conference of the Parties serving as the meeting of the Parties to the Nagoya Protocol (COP-MOP).</p>
@@ -79,10 +80,12 @@
                                  
                                  <p>Only if not technically feasible, Parties should resort to offline submissions to the ABS Clearing-House. Offline submissions should use the protected form, as provided for download on the ABS Clearing-House in MS Word format.  It is recommended that countries send the report via email to the Secretariat (secretariat@cbd.int), and include a scanned copy of the last page signed by the ABS Clearing-House publishing authority. Subsequently, the Executive Secretary will assist Parties in making their report available on the ABS Clearing-House.</p>
                                  </div>
-                             </div>   
-                            
-                            
-                            
+                             </div> 
+                        
+                        </div>
+                        
+                        <div class="tab-pane active" id="part1">
+
                             <legend>General Information</legend>
             				<div class="row">
             					<div class="col-xs-12">
@@ -774,7 +777,7 @@
                                         Please provide a summary of the main difficulties and challenges
                                         <div km-textbox-ml rows=4 name="question27Challenges" ng-model="document.question27.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
-                                    <div class="km-control-group row" name="question27_ccsOnAbsCh" caption="Please provide Nnumber of checkpoint communiques available in the ABS Clearing-House, if applicable">
+                                    <div class="km-control-group row" name="question27_ccsOnAbsCh" caption="Please provide the number of checkpoint communiques available in the ABS Clearing-House, if applicable">
                                         <input class="col-xs-2" type="number" name="ccsOnAbsCh" class="form-control text-right" ng-model="document.question27.cpcsOnAbsChCount" min="0" ng-init="document.question27.cpcsOnAbsChCount=0">
                                     </div>
 
