@@ -53,7 +53,7 @@ app.directive("documentSelection", ["$http", "Thesaurus", "$filter", "underscore
             //
             //==================================
             $scope.getUniqueId = function(identifier){
-				return $filter("uniqueID")(identifier);
+				return $filter("uniqueIDWithoutRevision")(identifier);
             };
 
             //==================================
