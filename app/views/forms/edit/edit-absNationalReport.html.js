@@ -19,6 +19,8 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
             $('#nrTabs a:first').tab('show');
 
     });
+    
+
 
     //==================================
     //
