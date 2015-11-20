@@ -43,7 +43,7 @@
                 <div class="modal-body">
 
                     <div style="max-height:400px;overflow-y:auto">
-                    	<table class="table table-hover table-responsive" style="padding:0;margin:0;width:100%;">
+                    	<table class="table table-hover" style="padding:0;margin:0;width:100%;">
     						<tr ng-show="!isLoading" ng-repeat="doc in filteredDocuments = (rawDocuments |  filter:{schema_s:selectedSchema.identifier}) track by $index">
     							<td>
     								<input type="checkbox" ng-model="doc.__checked" />
