@@ -508,6 +508,26 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
             $scope.document.question63.numberOfStaff = undefined;
         }
     };
+    
+    //==================================
+    //
+    //==================================
+    $scope.Q63newClear = function () {
+        if($scope.document && $scope.document.question63new ){
+            $scope.document.question63new.relevantInformation = undefined;
+             $scope.document.question63new.relevantDocuments = undefined;
+        }
+    };
+    
+    //==================================
+    //
+    //==================================
+    $scope.Q64newClear = function () {
+        if($scope.document && $scope.document.question64new ){
+            $scope.document.question64new.relevantInformation = undefined;
+             $scope.document.question64new.relevantDocuments = undefined;
+        }
+    };
 
     //==================================
     //

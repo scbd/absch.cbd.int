@@ -1730,10 +1730,10 @@
                                         Please provide a summary of the main difficulties and challenges encountered.
                                         <div km-textbox-ml rows=4 name="question61Challenges" ng-model="document.question61.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
-                                    <div class="km-control-group" name="question61FurtherInfo" caption="">
+                                    <!--<div class="km-control-group" name="question61FurtherInfo" caption="">
                                         Use the text entry to provide further information, including on  experiences gained in relation to mobilization of resources to support the implementation of the Nagoya Protocol and the status of funds mobilized (level of domestic expenditures, or the amount of and trends in  funding allocated, for the  implementation of the Protocol and the funding gap)<Text entry>
                                         <div km-textbox-ml rows=4 name="question61FurtherInfo" ng-model="document.question61.furtherInfo" locales="document.header.languages" placeholder=""></div>
-                                    </div>
+                                    </div>-->
 
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q61DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question61.documentReferenceIDs"
@@ -1791,10 +1791,10 @@
                                     </div>
 
 
-                                    <div class="km-control-group" name="question62FurtherInfo" caption="">
+                                    <!--<div class="km-control-group" name="question62FurtherInfo" caption="">
                                         Use the text entry to provide further information, including on the status of financial resources (total amount) mobilized donated or received for the purposes of implementation of the Protocol
                                         <div km-textbox-ml rows=4 name="question62FurtherInfo" ng-model="document.question62.furtherInfo" locales="document.header.languages" placeholder=""></div>
-                                    </div>
+                                    </div>-->
 
                                     <div class="km-control-group" style="margin-bottom:20px;" name="q62DocRefs" caption="Please select the clearing-house record number containing relevant information">
                                         <div document-selection ng-model="document.question62.documentReferenceIDs"
@@ -1806,10 +1806,29 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="km-control-group" name="question63new"  bold="true" caption="63. Please provide information on experiences related to the mobilization of resources in support of the implementation of the Protocol.">
+                                    <div km-textbox-ml rows=4 name="question63newRelevantInformation" ng-model="document.question63new.relevantInformation" locales="document.header.languages" placeholder=""></div>
+                                    <div km-link name="question63newRelevantDocuments" ng-model="document.question63new.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                             <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="km-control-group" name="question64new"  bold="true" caption="64. Please provide information on the status of funds mobilized in support of the implementation of the Protocol.">
+                                    <div km-textbox-ml rows=4 name="question64newRelevantInformation" ng-model="document.question64new.relevantInformation" locales="document.header.languages" placeholder=""></div>
+                                    <div km-link name="question64newRelevantDocuments" ng-model="document.question64new.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
 
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div class="km-control-group"  name="question63"  bold="true" caption="63. Does your country have specific staff to administer functions directly related to the implementation of the Nagoya Protocol? ">
+                                    <div class="km-control-group"  name="question63"  bold="true" caption="65. Does your country have specific staff to administer functions directly related to the implementation of the Nagoya Protocol? ">
                                         <div class="km-yes-no" name="question63" ng-model="document.question63.answer" ng-click="Q63Clear()"></div>
                                     </div>
 
@@ -1843,7 +1862,7 @@
 
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div class="km-control-group" name="question64"  bold="true" caption="64.  Any other relevant information:">
+                                    <div class="km-control-group" name="question64"  bold="true" caption="66.  Any other relevant information:">
                                         <div km-textbox-ml rows=4 name="question64FurtherInfo" ng-model="document.question64.furtherInfo" locales="document.header.languages" placeholder="">
                                         </div>
                                     </div>
@@ -1869,7 +1888,7 @@
                             <legend>Comments on the reporting format</legend>
                             <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" name="question65" bold="true" caption="65. Please provide any comment that you may have regarding the format of  this report:">
+                                        <div class="km-control-group" name="question65" bold="true" caption="67. Please provide any comment that you may have regarding the format of  this report:">
                                             <div km-textbox-ml rows=4 name="question65FurtherInfo" ng-model="document.question65" locales="document.header.languages" placeholder="">
                                             </div>
                                         </div>

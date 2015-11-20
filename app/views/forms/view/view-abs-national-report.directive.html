@@ -1924,9 +1924,27 @@
 						</div>
 					</ul>
 				</div>
-
+				
 				<div>
-					<label>63. Does your country have specific staff to administer functions directly related to the implementation of the Nagoya Protocol?</label>
+					<label>63. Please provide information on experiences related to the mobilization of resources in support of the implementation of the Protocol.</label>
+					<div class="km-value">{{document.question62new.relevantInformation | lstring:locale}}</div>
+					<div class="km-value" ng-repeat="item in document.question63new.relevantDocuments">
+						<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+					</div>
+				</div>
+				
+				<div>
+					<label>64. Please provide information on the status of funds mobilized in support of the implementation of the Protocol.</label>
+					<div class="km-value">{{document.question63new.relevantInformation | lstring:locale}}</div>
+					<div class="km-value" ng-repeat="item in document.question64new.relevantDocuments">
+						<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+					</div>
+				</div>
+				
+				<div>
+					<label>65. Does your country have specific staff to administer functions directly related to the implementation of the Nagoya Protocol?</label>
 					<ul>
 						<div class="km-value km-pre">{{booleanToText(document.question63.answer)}}</div>
                         <div ng-show="document.question63.answer">
@@ -1958,7 +1976,7 @@
 				</div>
 
 				<div>
-					<label>64. Any other relevant information:</label>
+					<label>66. Any other relevant information:</label>
 					<ul>
 						<div class="km-value">{{text(document.question64.furtherInfo) | lstring:locale}}</div>
 						<div ng-show="document.question64.documentReferenceIDs && !documentReferenceIDsEmpty(document.question64.documentReferenceIDs)">
@@ -1992,7 +2010,7 @@
 			</div>
 			<div class="panel-body">
 				<div>
-					<label>65. Please provide any comment that you may have regarding the format of  this report:</label>
+					<label>67. Please provide any comment that you may have regarding the format of this report:</label>
 					<ul>
 						<div class="km-value">{{text(document.question65) | lstring:locale}}</div>
 					</ul>
