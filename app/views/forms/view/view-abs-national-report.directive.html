@@ -1927,20 +1927,24 @@
 				
 				<div>
 					<label>63. Please provide information on experiences related to the mobilization of resources in support of the implementation of the Protocol.</label>
-					<div class="km-value">{{document.question62new.relevantInformation | lstring:locale}}</div>
-					<div class="km-value" ng-repeat="item in document.question63new.relevantDocuments">
-						<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-					</div>
+					<ul>
+						<div class="km-value">{{document.question63new.relevantInformation | lstring:locale}}</div>
+						<div class="km-value" ng-repeat="item in document.question63new.relevantDocuments">
+							<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+							<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+						</div>
+					</ul>
 				</div>
 				
 				<div>
 					<label>64. Please provide information on the status of funds mobilized in support of the implementation of the Protocol.</label>
-					<div class="km-value">{{document.question63new.relevantInformation | lstring:locale}}</div>
-					<div class="km-value" ng-repeat="item in document.question64new.relevantDocuments">
-						<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-					</div>
+					<ul>
+						<div class="km-value">{{document.question64new.relevantInformation | lstring:locale}}</div>
+						<div class="km-value" ng-repeat="item in document.question64new.relevantDocuments">
+							<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+							<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+						</div>
+					</ul>
 				</div>
 				
 				<div>
