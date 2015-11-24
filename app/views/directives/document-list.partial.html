@@ -70,7 +70,7 @@
                 <h1>No records found.</h1>
             </div>
 
-            <div ng-repeat="document in transformedDocuments" nf-if="transformedDocuments.length>0"
+            <div ng-repeat="document in transformedDocuments track by document.identifier_s" nf-if="transformedDocuments.length>0"
              style="border-top:1px solid #ddd;border-bottom:1px solid #ddd;border-right:1px solid #ddd;">
 
                 <div id="Result">
@@ -189,7 +189,7 @@
                 <br>
                 <br>
 
-                <div layout="column" layout-align="top center" ng-repeat="country in transformedGroupDocuments| orderBy:'name.en'">
+                <div layout="column" layout-align="top center" ng-repeat="country in transformedGroupDocuments track by country.name.en | orderBy:'name.en'">
 
                     <div class="panel md-whiteframe-z2">
                         <div class="panel-heading " ng-class="{'bg-blue': country.isNPParty, 'bg-grey2': !country.isNPParty}" style="padding:2px 15px;">
@@ -228,7 +228,7 @@
                                 </div>
                                 <div class="row">
                                     <div style="padding:10px; margin:0 10px;">
-                                        <div class="row table-hover table-msr" ng-repeat="doc in schema | orderBy:['sort1', 'sort2', 'sort3']">
+                                        <div class="row table-hover table-msr" ng-repeat="doc in schema track by doc.identifier_s | orderBy:['sort1', 'sort2', 'sort3']">
                                             <div class="row border">
                                                 <!-- <a nhref="/search/new/measurematrix/countries/{{country.code}}" class="">
                                                     <i class="fa fa-bar-chart"></i>
