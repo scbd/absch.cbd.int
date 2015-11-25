@@ -40,7 +40,7 @@ define(['app','underscore','/app/js/common.js',
         $scope.previewType = 'group';
         $scope.sortBy = '';
         $scope.rawDocs = [];
-        $scope.helpSchema = 'search'
+        $scope.helpSchema = 'search';
         //============================================================
         //
         //
@@ -54,7 +54,7 @@ define(['app','underscore','/app/js/common.js',
             $scope.queryRegion = undefined;
             $scope.queryThem = undefined;
             $scope.$broadcast("clearFilter",{});
-        }
+        };
 
         $scope.$watch('currentPage',     function() {
             refresh();
@@ -85,25 +85,28 @@ define(['app','underscore','/app/js/common.js',
             $scope.previewType=type;
             $scope.rawDocs = undefined;
             $scope.clearFilter();
-        }
+        };
 
         $scope.removeFilter = function(filter){
             $scope.$broadcast('removeFilter',{data:filter});
-        }
+        };
+
         $scope.removeCountryFilter = function(filter){
             $scope.countryApi.unSelectItem(filter.code);
-        }
+        };
+
         $scope.removeRegionFilter = function(filter){
             $scope.regionsApi.unSelectItem(filter.identifier);
-        }
+        };
+
         $scope.removeThematicAreaFilter = function(filter){
             $scope.thematicAreaApi.unSelectItem(filter.identifier);
-        }
+        };
 
         $scope.toggleSideBar = function(e){
             e.preventDefault();
             $element.find("#wrapper").toggleClass("toggled");
-        }
+        };
 
         function query () {
             if($scope.recordType =='country')
@@ -121,8 +124,8 @@ define(['app','underscore','/app/js/common.js',
             q += '(' + $scope.querySchema + ')';
 
             if($scope.queryGovernment){
-                // if($scope.queryGovernment.indexOf("government_s:eur") < 0)
-                $scope.queryGovernment = $scope.queryGovernment.replace("government_s:eu", "government_s:eur");
+                if($scope.queryGovernment.indexOf("government_s:eur") < 0)
+                    $scope.queryGovernment = $scope.queryGovernment.replace("government_s:eu", "government_s:eur");
                 q += ' AND (' + $scope.queryGovernment + ')';
             }
             if($scope.queryTheme)      q += ' AND (' + $scope.queryTheme + ')';
@@ -152,8 +155,9 @@ define(['app','underscore','/app/js/common.js',
                 searchOperation = searchService.list(listQuery, queryCanceler);
             }
             else if($scope.previewType == 'group'){
-                if($scope.currentPage==0)
+                if($scope.currentPage===0){
                     $scope.rawDocs = undefined;
+                }
                 var groupQuery = {
                     query       : q + ' AND government_s:*',
                     sort        : 'government_EN_s asc, createdDate_dt desc, title_t asc',
@@ -175,7 +179,7 @@ define(['app','underscore','/app/js/common.js',
                  }
                  else {
                      var lRawDocs = [];
-                     if($scope.rawDocs && $scope.currentPage!=0)
+                     if($scope.rawDocs && $scope.currentPage!==0)
                         lRawDocs = _.clone($scope.rawDocs);
 
                     _.map(lRawDocs, function(doc){doc.newRecord = false;});
@@ -214,7 +218,7 @@ define(['app','underscore','/app/js/common.js',
             }).catch(function (error) {
                     console.log('onerror'); console.log(error);
             });
-        };
+        }
 
         function refresh() {
 
