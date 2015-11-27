@@ -237,7 +237,7 @@
                                                 <div ng-click="doc.displayDetails = !doc.displayDetails;load(doc,doc.displayDetails)" style="cursor:pointer">
                                                      <i class="fa fa-chevron-circle-up" ng-show="doc.displayDetails"></i>
                                                     <i class="fa fa-chevron-circle-down" ng-show="!doc.displayDetails"></i>
-                                                    <span class="bold"> {{doc.title}} </span>
+                                                    <span > {{doc.title}} </span>
                                                     <span class="pull-right" style="font-size:10px;text-transform:uppercase;">
                                                         <span ng-if="doc.meta1"> <span class="color-medgrey" > {{doc.meta1}} <span ng-if="doc.ownerGovernment">registered by {{doc.ownerGovernment|term}}</span> </span></span>
                                                         <span ng-if="doc.meta2"> <span ng-if="doc.meta1" style="color:#333!important;"> &nbsp; | &nbsp; </span> <span class="color-medgrey" > {{doc.meta2}} </span></span>
