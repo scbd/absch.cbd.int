@@ -58,7 +58,7 @@ define(['app','underscore','ionsound'], function(app,_) {
                                                 localNotifications.push(message);
                                         });
 
-                                        if(ion)
+                                        if(ion && _.some(localNotifications,function(notification){return notification.state == "unread"}))
                                             ion.sound.play("bell_ring");
                                     } else {
                                         localNotifications = data;
