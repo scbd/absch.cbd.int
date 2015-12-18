@@ -23,10 +23,10 @@ function (app, _) {
             when('/help/search',                 { templateUrl: '/app/views/help/search/search.html',               label:'Finding Information',                resolveController: true, resolveUser : true}).
             when('/help/tours',                  { templateUrl: '/app/views/help/tours/tours.html',                 label:'Tours',                              resolveController: true, resolveUser : true}).
             when('/help/register',               { templateUrl: '/app/views/help/register/register.html',           label:'Submitting Information',             resolveController: true, resolveUser : true}).
-            
+
              when('/about',                        { templateUrl: '/app/views/about/about.html',                        label:'About the ABSCH',                 resolveController:true, resolveUser : true}).
-            
-            
+
+
             when('/forums',                        { templateUrl: '/app/views/forums/forum-list-view.html',         label:'Forums',       resolveController: true, resolve : { securized : securize() } }).
 
             when('/forums/iac-trg',          { redirectTo:'/forums/iac', resolve : { securized : securize() }}).
@@ -63,6 +63,7 @@ function (app, _) {
             when('/search/countries/:countryCode?',                       { templateUrl: '/app/views/search/search.html',   label:'Search',         resolveController: true, resolveUser : true, type:'countryProfile'}).
             when('/search/countries/:countryCode/:documentType',                       { templateUrl: '/app/views/search/search.html',   label:'Search',         resolveController: true, resolveUser : true, type:'countryProfile'}).
             when('/search/reference-records/:documentSchema?',             { templateUrl: '/app/views/search/search.html',   label:'Search',         resolveController: true, resolveUser : true, type:'reference'}).
+
             // when('/find',                                   { redirectTo:'/search'}).
 
             // when('/countries',                   { templateUrl: '/app/views/countries/index.html',       label:'Country Information',      resolveController: true, resolveUser : true}).
