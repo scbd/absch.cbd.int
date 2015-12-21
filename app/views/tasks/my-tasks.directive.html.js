@@ -97,6 +97,12 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
                                                     identifier: workflow.data.identifier,
                                                     isActive : $routeParams.workflowId && workflow._id==$routeParams.workflowId ? true : false});
                                 });
+
+                                if(!workflow.workflowAge){
+                                    workflow.workflowAge = {'age':12,'type':'weeks'};
+                                }
+                                workflow.workflowExpiryDate = moment(workflow.createdOn)
+                                                                    .add(workflow.workflowAge.age,workflow.workflowAge.type);
         					});
 
         					$scope.taskLists = _.union(tasks, $scope.taskLists);//$filter("orderBy")(tasks,'workflow.createdOn',true);
