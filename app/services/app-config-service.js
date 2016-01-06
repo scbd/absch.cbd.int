@@ -134,6 +134,23 @@ define(['app', 'underscore'], function (app, _) { 'use strict';
             return realmConfig.roles;
         }
 
+		function getSiteMapUrls(){
+			return {
+				register: {
+		            dashboard	: "/register/dashboard",
+		            requests	: "/register/requests"
+		        },
+
+		        errors: {
+		            notFound: "/help/404",
+		            notAuthorized: "/help/403"
+		        },
+
+		        user: {
+		            signIn: "/signin"
+		        }
+			};
+		}
 
 		return {
 			nationalSchemas     :   nationalSchemas,
@@ -141,7 +158,8 @@ define(['app', 'underscore'], function (app, _) { 'use strict';
 			currentRealm        :   currentRealm,
 
 			setCurrentRealm  	:   setCurrentRealm,
-			getRoles            :   getRoles
+			getRoles            :   getRoles,
+			getSiteMapUrls		:	getSiteMapUrls
 	   };
 
     }]);

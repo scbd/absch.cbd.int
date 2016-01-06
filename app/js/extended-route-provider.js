@@ -12,7 +12,7 @@ define(['app', 'angular'], function(app, angular) {
         //============================================================
         function new_when(path, route) {
 
-            var ext = { resolve: {} };
+            var ext = { resolve: route.resolve || {} };
 
             if(route.resolveController) {
                 ext.controller = proxy;
@@ -67,7 +67,7 @@ define(['app', 'angular'], function(app, angular) {
         //
         //============================================================
         function resolveController() {
-            
+
             return ['$q', '$route', '$filter','realm', '$location','underscore','realmConfiguration', function($q, $route, $filter, realm, $location, _,realmConfiguration) {
 
                 if($location.$$host != 'absch.cbd.int'){
