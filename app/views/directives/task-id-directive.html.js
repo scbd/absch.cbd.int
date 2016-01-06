@@ -1,5 +1,5 @@
 define(['app',
-	'../forms/view/record-loader.directive.html.js'], function (app) {
+	'../forms/view/record-loader.directive.html.js', 'toastr'], function (app) {
 
 app.directive('taskId', function () {
         return {
@@ -11,8 +11,8 @@ app.directive('taskId', function () {
                 workflowTaskId : '@',
                 onActivityUpdate : '&', //used in case if the directive parent needs to be refreshed else the workflow details will be fetched.
             },
-            controller: [ "$scope", "$timeout", "$http", "$route", "IStorage", "IWorkflows", "authentication", "underscore",'$element',
-					 function ($scope, $timeout, $http, $route, IStorage, IWorkflows, authentication, _, $element)
+            controller: [ "$scope", "$timeout", "$http", "$route", "IStorage", "IWorkflows", "authentication", "underscore",'$element', 'toastr',
+					 function ($scope, $timeout, $http, $route, IStorage, IWorkflows, authentication, _, $element, toastr)
 					{
 						//==================================================
 						//
@@ -49,7 +49,7 @@ app.directive('taskId', function () {
 							$scope.isUpdating = true;
 							IWorkflows.updateActivity($scope.workflowTaskId, $scope.workflow.activities[0].name, resultData).then(function(result){
 									// if($scope.$parentWatcher){
-									console.log(result);
+									// console.log(result);
 										var msg = "";
 										if(result.result.action == 'approve'){
 											msg = "Record approved successfully";
@@ -74,7 +74,8 @@ app.directive('taskId', function () {
 										}
 
 							}).catch(function(error) {
-								alert(error);
+								//alert(error);
+								 toastr.error('There was an error processing your request, please try again.');
 								$scope.isUpdating = false;
 								$element.find('.overlayDiv').removeClass('overlayDiv');
 								$element.find('#spiner').css('display', 'none');

@@ -83,7 +83,91 @@
                       </div>
                       <div  id="taskList" infinite-scroll="loadTasks()" infinite-scroll-busy="loadingTasks" infinite-scroll-distance="100" >
 
-                          <div ng-repeat="task  in tasks|filter:keywords|filter:filterByType|filter:filterByStatus|orderBy:sortTerm:orderList"  id="{{task.workflow._id}}">
+                          <div ng-repeat="task  in tasks|filter:keywords|
+                              filter:filterByType|filter:filterByStatus|orderBy:sortTerm:orderList"
+                              id="{{task.workflow._id}}">
+                            <div  class="row" ng-class="{'bg-grey':task.workflow.state=='completed','bg-danger':task.workflow.state!='completed'}" style="padding:10px;margin-bottom:10px;">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <!-- schema -->
+                                        <i class="material-icons"
+                                        ng-class="{'color-red':task.workflow.state!='completed', 'color-green':(task.workflow.state=='completed' && task.activity.result.action=='approve'), 'color-grey': (task.workflow.state=='completed' && task.activity.result.action=='reject') }"
+                                        style="font-size:16pt;position:relative;top:3px;">{{task.workflow.data.metadata.schema | schemaIcon}}</i>
+                                         {{task.workflow.data.metadata.schema|schemaName}}
+                                        <a ng-href="#" ng-click="showHistory = !showHistory" ng-show="task.workflowHistory.length>1">
+                                            <i class="fa fa-chevron-circle-up" ng-show="showHistory"></i>
+                                            <i class="fa fa-chevron-circle-down" ng-show="!showHistory"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-5">
+                                        <!-- TITLE -->
+
+                                        <div ng-switch="task.workflow.state">
+                                            <div ng-switch-when="completed">
+                                                <div ng-show="task.activity.completedOn">
+                                                    <span ng-show="task.activity" ng-switch="task.activity.result.action">
+                                                        <span ng-switch-when="approve"><a ng-href="/database/record/{{task.workflow.result.documentID||task.workflow.data.documentID}}" target="_new_">{{task.workflow.data.title | lstring}}</a></span>
+                                                        <span ng-switch-when="reject"><a ng-href="/register/{{task.workflow.data.metadata.schema | schemaShortName}}/{{task.workflow.result.identifier}}/edit" target="_new_">{{task.workflow.data.title | lstring}}</a></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div ng-switch-default><a href="#" class="color-grey" ng-click="task.workflow.tasksDisplay=!task.workflow.tasksDisplay; formLoading=false;">{{task.workflow.data.title | lstring}}</a></div>
+                                        </div>
+
+                                        <!-- <strong ng-show="task.workflow.result.documentID||task.workflow.data.documentID"><a ng-href="/database/record/{{task.workflow.result.documentID||task.workflow.data.documentID}}" target="_new_">{{task.workflow.data.title | lstring}}</a>
+                                        </strong>
+                                        <strong ng-hide="task.workflow.result.documentID||task.workflow.data.documentID"><a href="#" ng-click="tasksDisplay=!tasksDisplay; formLoading=false;">{{task.workflow.data.title | lstring}}</a>
+                                        </strong> -->
+                                        <span ng-show="task.workflow.data.additionalInfo">(additional info:-{{task.workflow.data.additionalInfo}})
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <!-- Requested on -->
+                                        <div>{{task.workflow.createdOn|date:'short'}}</div>
+                                        <div>
+                                            <em> by {{task.workflow.createdBy_info.firstName}} {{task.workflow.createdBy_info.lastName}}</em>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-2" style="padding-left:0px">
+                                        <!-- Status -->
+                                        <div ng-switch="task.workflow.state">
+                                            <div ng-switch-when="completed">
+                                                <div ng-show="task.activity.completedOn">
+                                                    <span ng-show="task.activity" ng-switch="task.activity.result.action">
+                                                        <span ng-switch-when="approve"><i class="glyphicon glyphicon-ok"></i> Approved</span>
+                                                        <span ng-switch-when="reject"><i class="glyphicon glyphicon-remove"></i> Rejected</span>
+                                                        <span ng-show="task.activity.result.reason"><STRONG> for {{task.activity.result.reason | limitTo:50}} </STRONG></span>
+                                                    </span>
+                                                    {{task.workflow.activities.name}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div ng-show="task.workflow.state!='completed'">
+
+                                            <div ng-show="task.activity.name=='publishRecord' && !task.activity.isUpdating">
+                                                <a class="btn btn-danger" type="button" ng-click="tasksDisplay=!tasksDisplay; formLoading=false;task.isActive=false;" style="padding:4px;">
+                                                    <strong><i ng-class="{'glyphicon glyphicon-plus-sign': !tasksDisplay, 'glyphicon glyphicon-minus-sign': tasksDisplay}"></i> Awaiting approval</strong>
+                                                </a>
+                                               <br/> <span>expires on {{task.workflow.workflowExpiryDate|formatDateWithTime}}</span>
+                                            </div>
+                                            <div ng-show="task.activity.name=='publishRecord' && task.activity.isUpdating">
+                                                <a class="btn btn-info" type="button" ng-click="return" style="padding:4px;">
+                                                    <strong><i class="fa fa-spin fa-cog"></i> Processing...</strong>
+                                                </a>
+                                            </div>
+
+                                            <div ng-hide="task.activity.name=='publishRecord'">{{task.activity.name}}*</div>
+                                            <span ng-hide="true">{{ formLoading = task.isActive ? false : (task.workflow.tasksDisplay ? true :undefined)}}<span>
+                                        </div>
+                                    </div>
+                                    <div ng-show="task.workflow.tasksDisplay || task.isActive" class="col-xs-12" style="padding:20px 20px 0 20px;">
+                                        <div task-id class="record-body" load-task-data='formLoading' workflow-task-id="{{task.workflow._id}}" on-activity-update="updateWorkflowList(document, workflowInfo)"></div>
+                                    </div>
+                                </div>
+                            </div>
+                         </div>
+
+
+                          <div ng-hide="true" ng-repeat="task  in tasks|filter:keywords|filter:filterByType|filter:filterByStatus|orderBy:sortTerm:orderList"  id="{{task.workflow._id}}">
                           <div  class="row" ng-class="{'bg-grey':task.workflow.state=='completed','bg-danger':task.workflow.state!='completed'}" style="padding:10px;margin-bottom:10px;">
                               <!-- ng-repeat="task in grpTask|orderBy:createdOn:true|limitTo:1" -->
                               <div class="row">
@@ -110,7 +194,7 @@
                                                   </span>
                                               </div>
                                           </div>
-                                          <div ng-switch-default><a href="#" class="color-grey" ng-click="tasksDisplay=!tasksDisplay; formLoading=false;">{{task.workflow.data.title | lstring}}</a></div>
+                                          <div ng-switch-default><a href="#" class="color-grey" ng-click="task.workflow.tasksDisplay=!task.workflow.tasksDisplay; formLoading=false;">{{task.workflow.data.title | lstring}}</a></div>
                                       </div>
 
                                       <!-- <strong ng-show="task.workflow.result.documentID||task.workflow.data.documentID"><a ng-href="/database/record/{{task.workflow.result.documentID||task.workflow.data.documentID}}" target="_new_">{{task.workflow.data.title | lstring}}</a>

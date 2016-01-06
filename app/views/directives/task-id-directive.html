@@ -7,6 +7,33 @@
 		background:gray;
 	}
 </style>
+			<table class="table table-striped" style="width:100%">
+
+                <thead>
+					<tr>
+						<td colspan="3"> Worflow Activity history </td>
+					</tr>
+					<tr>
+					    <td>Reminder No.</td>
+	                    <td>Reminder Date</td>
+	                    <td>Status</td>
+					</tr>
+                </thead>
+                <tr ng-repeat="activity in workflow.activities|orderBy:'createdOn'">
+                    <td>
+                        {{activity.input.iteration||'1'}}
+                    </td>
+                    <td>{{activity.createdOn|date:'short'}}
+                    </td>
+                    <td>
+						{{(activity.result.status||'Awaiting Approval')|uppercase}}
+						<span ng-if="activity.result.status=='timedOut'">
+							({{activity.timedOutOn|date:'short'}})
+						</span>
+                    </td>
+                </tr>
+            </table>
+
   <div ng-repeat="activity in workflow.activities|filter:isOpen|orderBy:'createdOn'" >
 
     <div class="row row-centered" id="buttonsDiv"  style="margin-bottom:15px;border-top:1px dashed #333;border-bottom:1px dashed #333;padding-bottom:15px;padding-top:15px;" ng-show="isAssignedToMe(activity)">
