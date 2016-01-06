@@ -18,7 +18,6 @@ define(['app',
 	'/app/views/directives/ngxLazy.directive.js'], function (app) {
 
 "use strict";
-//require("app", "dragAndDrop")
 
 app.controller("ContactsController",
 	["$rootScope", "$location" , "$scope", "$q", "$window", "IStorage", "underscore",
