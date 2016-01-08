@@ -42,12 +42,12 @@ define(['app','linqjs', 'angular-localizer',
 
 
       //==================================
-			//
-			//==================================
-			$scope.gotoNew = function($event, cftype) {
-         $event.stopImmediatePropagation();
-				 $location.url("/register/" + $filter("mapSchema")(cftype) + "/new");
-			}
+		//
+		//==================================
+		$scope.gotoNew = function($event, cftype) {
+	 		$event.stopImmediatePropagation();
+			 $location.url("/register/" + $filter("mapSchema")(cftype) + "/new");
+		}
 
        //==================================
 			//
@@ -698,6 +698,16 @@ define(['app','linqjs', 'angular-localizer',
       url = '/' + splitURL[1] + '/' + splitURL[2] + '/new';
     }
     $scope.helpSchema = url;
+
+	$scope.$on("refreshDocumentList", function(evt, data) {
+		if(data.document_type){
+			$scope.records = null;
+			$scope.isLoaded = []
+			loadRecords(data.document_type);
+			loadFacets();
+			loadActivitiesFacets();
+		}
+	});
 
   }]);
 });

@@ -67,7 +67,8 @@ define(['app', '/app/js/common.js'], function(app) {
                         });
                     });
                 },
-                controller: ["$scope", "$q", "IStorage", "$http", "guid", "editFormUtility", "$timeout", function($scope, $q, storage, $http, guid, editFormUtility, $timeout) {
+                controller: ["$scope", "$q", "IStorage", "$http", "guid", "editFormUtility", "$timeout",
+                function($scope, $q, storage, $http, guid, editFormUtility, $timeout) {
 
                     $scope.orderBy = ['-updatedOn'];
 
@@ -436,6 +437,10 @@ define(['app', '/app/js/common.js'], function(app) {
                         }
                     }
 
+                    $scope.refreshList = function(schema){
+                        $scope.loading = true;
+                        $scope.$emit("refreshDocumentList", {document_type:schema});
+                    };
                 }]
             };
         }
