@@ -1015,3 +1015,6 @@ footer .logo {
 #PortalLinks2{
     z-index:1000;
 }
+#anchorTop{
+    z-index:1001;
+}
