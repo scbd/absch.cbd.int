@@ -3,35 +3,19 @@
 		<div class="row">
 		 <div class="col-xs-12">
 
-			<div ng-show="document.info.createdBy && document.info.createdBy != document.info.updatedBy">
-				<label class="record-metadata-label">Created by:</label>
-				<span class="record-metadata-text">
-					<a href="mailto:{{document.info.createdBy.email}}"><i class="fa fa-envelope"></i>
-						{{document.info.createdBy.firstName}} {{document.info.createdBy.lastName}}
-					</a>
-					on {{document.info.createdOn | date:'d-MMM-y  h:mm:ss a'}}
-					<!-- {{document.info.createdBy.firstName}} {{document.info.createdBy.lastName}}
-					(<a href="mailto:{{document.info.createdBy.email}}">{{document.info.createdBy.email}}</a>) on {{document.info.createdOn | date:'d-MMM-y  h:mm:ss a'}} -->
-				</span>
-			</div>
+		
 
 			<div ng-show="!document.info.createdBy && document.info.createdOn">
-				<label class="record-metadata-label">Published by:</label>
+				<label class="record-metadata-label">Published on:</label>
 				<span class="record-metadata-text">
-					<a href="mailto:secretariat@cbd.int"><i class="fa fa-envelope"></i>
-						SCBD
-					</a>
-				 	 on {{document.info.createdOn| date:'d-MMM-y  h:mm:ss a'}}
+					 {{document.info.createdOn| formatDateWithTime}}
 				</span>
 			</div>
 
 			<div ng-show="document.info.updatedBy">
-				<label class="record-metadata-label">Published by:</label>
+				<label class="record-metadata-label">Published on:</label>
 				<span class="record-metadata-text">
-					<a href="mailto:{{document.info.updatedBy.email}}"><i class="fa fa-envelope"></i>
-						{{document.info.updatedBy.firstName}} {{document.info.updatedBy.lastName}}
-					</a>
-					 on {{document.info.updatedOn| date:'d-MMM-y  h:mm:ss a'}}
+					{{document.info.updatedOn| formatDateWithTime}}
 				</span>
 			</div>
 

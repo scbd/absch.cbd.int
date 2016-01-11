@@ -121,7 +121,7 @@ app.filter("term", ["$http", function($http) {
 //============================================================
 app.filter("formatDate", function(){
 	return function(date,formart){
-		if(formart== undefined)
+		//if(formart== undefined)
 			formart = 'DD MMM YYYY';
 		return moment.utc(date).format(formart);
 	}
@@ -134,7 +134,7 @@ app.filter("formatDate", function(){
 //============================================================
 app.filter("formatDateWithTime", function(){
 	return function(date,formart){
-		if(formart== undefined)
+		//if(formart== undefined)
 			formart = 'DD MMM YYYY hh:mm a';
 		return moment.utc(date).format(formart);
 	}

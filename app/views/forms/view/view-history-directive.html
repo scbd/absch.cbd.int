@@ -1,9 +1,9 @@
 
-	<div>
+	<div style="margin-top:10px;">
 
-		<a ng-href="#" ng-click="load(documentID);showHistory = !showHistory" >
-			<div ng-show="!showHistory" class="label label-default bg-green" style="width:100%;padding:3px;font-size:12px;"><i class="fa fa-chevron-circle-up"></i> VIEW RECORD HISTORY</div>
-			<div ng-show="showHistory" class="label label-default bg-green" style="width:100%;padding:3px;font-size:12px;"><i class="fa fa-chevron-circle-down"></i> HIDE RECORD HISTORY</div>
+		<a ng-href="#" ng-click="load(documentID);showHistory = !showHistory">
+			<div ng-show="!showHistory" class="historyLink" style="width:100%;"><i class="fa fa-chevron-circle-up"></i> View record history</div>
+			<div ng-show="showHistory"  class="historyLink"  style="width:100%;border-bottom: 1px solid #999;"><i class="fa fa-chevron-circle-down"></i> Hide record history</div>
 		</a>
 
 <div ng-show="showHistory ">
@@ -15,66 +15,62 @@
 						</div>
 				</div>
 			</div> -->
-
-			<div ng-show="documents">
-                <div class="row-fluid" ng-class='{ tioBorder : showFile}'>
-                	<div class="col-xs-3" ><label style="padding-left:20px;"><a ng-href="#" ng-click="column='createdOn'">Date</a></label></div>
-                	<div class="col-xs-2"><label style="padding-left:15px;">Action</label></div>
-                    <div class="col-xs-3"><label >Published By </label></div>
-					<div class="col-xs-3" ><label >Link</label></div>
-                    <div class="col-xs-1" ng-show="showFile"><label >File (pdf) </label></div>
-                </div>
-                <div class="clearfix">
-				<style>
+            
+            <style>
 				.cpc{
-					backgroundcolor:red;
+					background-color:red;
 				}
 				.tioBorder{
 					border-top:1px solid #ccc;
 				}
+                .historyLink{
+                    font-size: 14px;
+                    font-weight: bold;
+                    margin-bottom: 5px;
+                }
+                #history th {
+                    font-size: 12px;
+                    border:0!important;
+                }
+                #history td {
+                    font-size: 12px;
+                }
 				</style>
-                <!-- <div class="row"  >
-                    <div class="col-xs-12"> -->
-                        <div class="row-fluid text-row km-value"
-							ng-repeat="document in documents | orderBy:column:true" >
-<!-- data-toggle="tooltip" data-placement="top" -->
-                        	<div class="col-xs-3"> <i ng-show="$first" class="fa fa-star" style="color:#f0ad4e;"></i> <strong>{{document.createdOn |formatDateWithTime}}</strong></div>
-                            <div class="col-xs-2" >
-                               <span ng-show="document.body.amendmentIntent==1  && !isPermit && document.type!='absCheckpointCommunique'"><h5 class="label label-danger"> REVOKED</h5></span>
-								<span ng-show="isPermit && document.type=='absCheckpointCommunique'"><h5 class="label label-danger"> CPC SENT</h5></span>
-								<span ng-show="(document.body.amendmentIntent==0 || (document.revision > 1 && document.body.amendmentIntent==undefined) && !isPermit && document.type!='absCheckpointCommunique')||
-									(document.revision > 1 && undefined==isPermit && document.type=='absCheckpointCommunique')"><h5 class="label label-primary"> AMENDED</h5></span>
-								<span ng-show="(document.revision == 1 && isPermit && document.type!='absCheckpointCommunique') ||
+                
+
+			<div ng-show="documents" class="km-value">
+                <table style="width:100%" class="table-striped" id="history">
+                <tr >
+                    <th class="color-grey" style="width:250px">Date</th>
+                    <th class="color-grey" style="width:150px">Action</th>
+                    <th class="color-grey" style="width:250px">Link</th>
+                    <th class="color-grey" style="width:30px" ng-show="showFile">File (PDF)</th>
+                    <th>&nbsp;<th>
+                </tr>
+                <tr ng-repeat="document in documents | orderBy:'createdOn':true">
+                    <td> <strong>{{document.createdOn |formatDateWithTime}} <span ng-if="$first" class="color-green">(latest version)</span></strong></td>
+                    <td>
+                        <span ng-show="document.body.amendmentIntent==1  && !isPermit && document.type!='absCheckpointCommunique'"><h5 class="label label-danger"> REVOKED</h5></span>
+                        <span ng-show="isPermit && document.type=='absCheckpointCommunique'"><h5 class="label label-danger"> CPC SENT</h5></span>
+                        <span ng-show="(document.body.amendmentIntent==0 || (document.revision > 1 && document.body.amendmentIntent==undefined) && !isPermit && document.type!='absCheckpointCommunique')||
+                            (document.revision > 1 && undefined==isPermit && document.type=='absCheckpointCommunique')"><h5 class="label label-primary"> AMENDED</h5></span>
+                        <span ng-show="(document.revision == 1 && isPermit && document.type!='absCheckpointCommunique') ||
 												(document.revision == 1 && !isPermit)"><h5 class="label label-success"> PUBLISHED</h5></span>
-                            </div>
-
-                            <div class="col-xs-3">
-
-								<a href="mailto:{{document.createdBy.email}}"><i class="fa fa-envelope"></i> {{document.createdBy.firstName}} {{document.createdBy.lastName}}</a>
-								</div>
-
-                             <div class="col-xs-3">
-
-								 <a ng-href="/database/{{document.type | schemaShortName}}/{{document | uniqueIDWithoutRevision}}/{{document.revision}}"  target="_blank">
-
-									<span>{{document | uniqueID}}</span>
-
-								</a>
-
-                            </div>
-							<div class="col-xs-1 text-center" ng-show="showFile" >
-                                <a type="button" target="_blank"  ng-href="/database/record/{{document | uniqueID}}">
-                                <i class="fa fa-file-o"></i>
-                                	 <!--<span>{{document | uniqueID}}</span>-->
-									<!-- ABSCH-{{document.body.header.schema | lowercase | schemaShortName}}-{{document.documentID}}-{{document.revision}} -->
-								</a>
-
-                            </div>
-
-
-                            <div class="clearfix">
-                            <div class="col-xs-12 " style="padding-top:10px; color:#999">
-
+                    </td>
+                    <td>
+                         <a ng-href="/database/{{document.type | schemaShortName}}/{{document | uniqueIDWithoutRevision}}/{{document.revision}}"  target="_blank">
+						 <span>{{document | uniqueID}}</span>
+						 </a>
+                    </td>
+                    <td ng-show="showFile">
+                         <a type="button" target="_blank"  ng-href="/database/record/{{document | uniqueID}}">
+                            <i class="fa fa-file-o"></i>
+                                    <!--<span>{{document | uniqueID}}</span>-->
+                                <!-- ABSCH-{{document.body.header.schema | lowercase | schemaShortName}}-{{document.documentID}}-{{document.revision}} -->
+                            </a>
+                    </td>
+                    <td>
+                         <div ng-show="document.body.amendmentsDescription">
                                 <span ng-show="document.body.amendmentsDescription">
                                 <span style="font-weight:bold;text-transform:uppercase;"> Reason for amendment: </span>
 						  		<span ng-show="!more" ng-bind-html="document.body.amendmentsDescription| lstring:locale | limitTo:80">
@@ -84,27 +80,12 @@
 										<a ng-href="#" ng-click="more=!more"> <strong>less</strong></a>
 									</span>
 					  			</span>
-
                             </div>
-							<!-- <div class="col-xs-12 " style="padding-top:10px; color:#999" ng-show="(document.body.responsibleAuthorities ||
-								document.body.personeToWhomGranted || document.body.geneticRessourceUsers ||
-								document.body.providers || document.body.informedConsents ||
-								document.body.authority) && showFile">
-	                                <span style="font-weight:bold;text-transform:uppercase;"> AN EMAIL HAS BEEN AUTOMATICALLY SENT TO THE FOLLOWING ADDRESS: </span>
-							  		<span>
-										{{formatEmails(document.body.responsibleAuthorities||[])}}
-										{{formatEmails(document.body.personeToWhomGranted||[])}}
-										{{formatEmails(document.body.geneticRessourceUsers||[])}}
-										{{formatEmails(document.body.providers||[])}}
-									 	{{formatEmails(document.body.informedConsents||[])}}
-										{{formatEmails(document.body.authority||[])}}
-					  				</span>
-                            </div> -->
-                        </div>
-
-				</div>
-			</div>
-
+                    </td>
+                </tr>
+                
+                </table>
+                
 		<span ng-show="error" >{{error}}</span>
 	</div>
 </div>
