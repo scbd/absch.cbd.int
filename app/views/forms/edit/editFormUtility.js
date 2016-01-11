@@ -145,8 +145,13 @@ app.factory("editFormUtility", ["IStorage", "IWorkflows", "$q", "realm","commonj
 					throw { error : "Not allowed" };
 
 				//Save document
+				//return storage.documents.put(identifier, document);	// return documentInfo
 
-				return storage.documents.put(identifier, document);	// return documentInfo
+				//Incase of publish save draft and let the workflow publish the document.
+				return storage.drafts.put(identifier, document);
+			})
+			.then(function(draftInfo) {
+				return createWorkflow(draftInfo); // return workflow info
 			});
 		},
 
@@ -182,26 +187,29 @@ app.factory("editFormUtility", ["IStorage", "IWorkflows", "$q", "realm","commonj
 				return storage.drafts.put(identifier, document);
 
 			}).then(function(draftInfo) {
-
-				var type = schemasWorkflowTypes[draftInfo.type];
-
-				if(!type)
-					throw "No workflow type defined for this record type: " + draftInfo.type;
-
-				var workflowData = {
-					"realm"      		: realm.value,
-					"documentID" 		: draftInfo.documentID,
-					"identifier" 		: draftInfo.identifier,
-					"title"      		: draftInfo.workingDocumentTitle,
-					"abstract"   		: draftInfo.workingDocumentSummary,
-					"metadata"   		: draftInfo.workingDocumentMetadata,
-					"additionalInfo"	: additionalInfo
-				};
-
-				return workflows.create(type.name, type.version, workflowData); // return workflow info
+				return createWorkflow(draftInfo, additionalInfo); // return workflow info
 			});
 		}
 	};
+
+	function createWorkflow(draftInfo, additionalInfo){
+		var type = schemasWorkflowTypes[draftInfo.type];
+
+		if(!type)
+			throw "No workflow type defined for this record type: " + draftInfo.type;
+
+		var workflowData = {
+			"realm"      		: realm.value,
+			"documentID" 		: draftInfo.documentID,
+			"identifier" 		: draftInfo.identifier,
+			"title"      		: draftInfo.workingDocumentTitle,
+			"abstract"   		: draftInfo.workingDocumentSummary,
+			"metadata"   		: draftInfo.workingDocumentMetadata,
+			"additionalInfo"	: additionalInfo
+		};
+
+		return workflows.create(type.name, type.version, workflowData); // return workflow info
+	}
 
 	return _self;
 
