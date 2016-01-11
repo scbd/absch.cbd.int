@@ -35,13 +35,13 @@
 
 
             <div class="btn-group" ng-show="documentVersionCount>1">
-              <button type="button" class="btn btn-danger">Revision {{revisionNo}}</button>
+              <button type="button" class="btn btn-danger">Version {{revisionNo}}</button>
               <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu" role="menu">
                 <li ng-repeat="n in [] | range:documentVersionCount" >
-                    <a ng-href="#" ng-click="loadRevision($index+1)">{{$index+1}}</a>
+                    <a ng-href="#" ng-click="loadRevision($index+1)">version {{$index+1}} <span ng-if="$last">(latest version)</span></a>
                 </li>
             </div>
         </div>
@@ -49,7 +49,7 @@
 <!--  {{document}} -->
 <!-- {{internalDocument}} -->
 		<div ng-switch on="internalDocument.header.schema" >
-            <div class="alert alert-danger" role="alert" ng-show="documentVersionCount != revisionNo">The latest revision is {{documentVersionCount}}, you are viewing revison {{revisionNo}}</div>
+            <div class="alert alert-danger" role="alert" ng-show="documentVersionCount != revisionNo"><h1>The latest version is {{documentVersionCount}}, you are viewing version {{revisionNo}}</h1></div>
 			<div view-authority	ng-switch-when="authority" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}  ></div>
 
 			<div view-contact ng-switch-when="contact"	ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}  ></div>
