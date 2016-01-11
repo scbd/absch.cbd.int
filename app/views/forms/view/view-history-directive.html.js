@@ -17,10 +17,13 @@ define(['app'], function(app) {
             controller: ['$scope', 'IStorage', "$q", "$route", "$filter", "$timeout",
                 function($scope, storage, $q, $route, $filter, $timeout) {
 
+                    if($scope.documentID)
+                        load($scope.documentID);
+                    
                     //==================================
                     //
                     //==================================
-                    $scope.load = function(identifier) {
+                    function load(identifier) {
 
                         $scope.error = undefined;
 

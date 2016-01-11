@@ -105,8 +105,10 @@
 
 }
 #Record .record-metadata-text{
-	color:#666;
-	display: inline;
+    font-weight:bold;
+}
+#Record a .record-metadata-text{
+    font-weight:bold;
 }
 
 #Record .record-body legend{
@@ -127,4 +129,28 @@
 		padding: 0 15px 0 15px;
 		margin: 0;
 	}
-	}
+	
+    .cpc{
+        background-color:red;
+    }
+    .tioBorder{
+        border-top:1px solid #ccc;
+    }
+    .historyLink{
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    #history th {
+        font-size: 11px;
+        border:0!important;
+        color:#959595;
+        border-bottom:0!important;
+        padding:0!important;
+    }
+    #history td {
+        font-size: 12px;
+        vertical-align: top;
+        border-bottom:0!important;
+        padding:0!important;
+    }

@@ -1,78 +1,35 @@
-
-	<div style="margin-top:10px;">
-
-		<a ng-href="#" ng-click="load(documentID);showHistory = !showHistory">
-			<div ng-show="!showHistory" class="historyLink" style="width:100%;"><i class="fa fa-chevron-circle-up"></i> View record history</div>
-			<div ng-show="showHistory"  class="historyLink"  style="width:100%;border-bottom: 1px solid #999;"><i class="fa fa-chevron-circle-down"></i> Hide record history</div>
-		</a>
-
-<div ng-show="showHistory ">
-			<span ng-show="loading">loading... <i class="fa fa-spin" /></span>
-			<!-- <div class="row"  ng-show="showFile && documents"  >
-				<div class="col-xs-12 col-lg-12" >
-						<div class="alert alert-info" width >
-														Note: The ABS Clearing-House can not guarantee the receipt of automatically generated emails.  
-						</div>
-				</div>
-			</div> -->
-            
-            <style>
-				.cpc{
-					background-color:red;
-				}
-				.tioBorder{
-					border-top:1px solid #ccc;
-				}
-                .historyLink{
-                    font-size: 14px;
-                    font-weight: bold;
-                    margin-bottom: 5px;
-                }
-                #history th {
-                    font-size: 12px;
-                    border:0!important;
-                }
-                #history td {
-                    font-size: 12px;
-                }
-				</style>
-                
-
-			<div ng-show="documents" class="km-value">
+	<div>    
+			<div ng-show="documents" style="padding-left:10px;">
                 <table style="width:100%" class="table-striped" id="history">
-                <tr >
-                    <th class="color-grey" style="width:250px">Date</th>
-                    <th class="color-grey" style="width:150px">Action</th>
-                    <th class="color-grey" style="width:250px">Link</th>
-                    <th class="color-grey" style="width:30px" ng-show="showFile">File (PDF)</th>
-                    <th>&nbsp;<th>
+                <tr>
+                    <th class="color-grey" style="width:250px">Published on</th>
+                    <th class="color-grey" style="width:250px">Record Identifier</th>
+                    <th class="color-grey" >Action</th>
+                    <th class="color-grey" style="width:30px" ng-show="showFile">File</th>
                 </tr>
-                <tr ng-repeat="document in documents | orderBy:'createdOn':true">
-                    <td> <strong>{{document.createdOn |formatDateWithTime}} <span ng-if="$first" class="color-green">(latest version)</span></strong></td>
-                    <td>
-                        <span ng-show="document.body.amendmentIntent==1  && !isPermit && document.type!='absCheckpointCommunique'"><h5 class="label label-danger"> REVOKED</h5></span>
-                        <span ng-show="isPermit && document.type=='absCheckpointCommunique'"><h5 class="label label-danger"> CPC SENT</h5></span>
-                        <span ng-show="(document.body.amendmentIntent==0 || (document.revision > 1 && document.body.amendmentIntent==undefined) && !isPermit && document.type!='absCheckpointCommunique')||
-                            (document.revision > 1 && undefined==isPermit && document.type=='absCheckpointCommunique')"><h5 class="label label-primary"> AMENDED</h5></span>
-                        <span ng-show="(document.revision == 1 && isPermit && document.type!='absCheckpointCommunique') ||
-												(document.revision == 1 && !isPermit)"><h5 class="label label-success"> PUBLISHED</h5></span>
+                <tr ng-repeat="document in documents | orderBy:'createdOn':true" ng-if="$index == 0 || showHistory">
+                    <td style="width:250px" ng-class="{'bold': $index == 0}"> 
+                        {{document.updatedOn | formatDateWithTime}}
                     </td>
-                    <td>
+
+                     <td style="width:250px">
                          <a ng-href="/database/{{document.type | schemaShortName}}/{{document | uniqueIDWithoutRevision}}/{{document.revision}}"  target="_blank">
 						 <span>{{document | uniqueID}}</span>
 						 </a>
                     </td>
-                    <td ng-show="showFile">
-                         <a type="button" target="_blank"  ng-href="/database/record/{{document | uniqueID}}">
-                            <i class="fa fa-file-o"></i>
-                                    <!--<span>{{document | uniqueID}}</span>-->
-                                <!-- ABSCH-{{document.body.header.schema | lowercase | schemaShortName}}-{{document.documentID}}-{{document.revision}} -->
-                            </a>
-                    </td>
                     <td>
+                        <span ng-show="document.body.amendmentIntent==1  && !isPermit && document.type!='absCheckpointCommunique'">
+                            <span class="label label-danger"> REVOKED</span></span>
+                        <span ng-show="isPermit && document.type=='absCheckpointCommunique'">
+                            <span class="label label-warning"> CPC SENT</span></span>
+                        <span ng-show="(document.body.amendmentIntent==0 || (document.revision > 1 && document.body.amendmentIntent==undefined) && !isPermit && document.type!='absCheckpointCommunique')||
+                            (document.revision > 1 && undefined==isPermit && document.type=='absCheckpointCommunique')">
+                            <span class="label label-success"> UPDATED</span></span>
+                        <span ng-show="(document.revision == 1 && isPermit && document.type!='absCheckpointCommunique') || (document.revision == 1 && !isPermit)">
+                            <span class="label label-success"> PUBLISHED</span></span>
+                        
                          <div ng-show="document.body.amendmentsDescription">
                                 <span ng-show="document.body.amendmentsDescription">
-                                <span style="font-weight:bold;text-transform:uppercase;"> Reason for amendment: </span>
 						  		<span ng-show="!more" ng-bind-html="document.body.amendmentsDescription| lstring:locale | limitTo:80">
 						  		<a ng-href="#" ng-click="more=!more" ng-show="(document.body.amendmentsDescription| lstring:locale).length > 200">
 									<strong>...more</strong> </a></span>
@@ -82,11 +39,24 @@
 					  			</span>
                             </div>
                     </td>
+                   
+                    <td style="width:30px" ng-show="showFile">
+                         <a type="button" target="_blank"  ng-href="/database/record/{{document | uniqueID}}">
+                            <i class="fa fa-file-o"></i>
+                                    <!--<span>{{document | uniqueID}}</span>-->
+                                <!-- ABSCH-{{document.body.header.schema | lowercase | schemaShortName}}-{{document.documentID}}-{{document.revision}} -->
+                            </a>
+                    </td>
                 </tr>
-                
                 </table>
                 
+	    <a ng-href="#" ng-click="showHistory = !showHistory" class="color-blue" >
+			<div ng-show="!showHistory && documents.length > 1" class="color-blue" style="width:100%;font-size:11px;"><i class="fa fa-chevron-circle-up"></i> View full record history</div>
+			<div ng-show="showHistory  && documents.length > 1"  class="color-blue"  style="width:100%;font-size:11px;"><i class="fa fa-chevron-circle-down"></i> Hide full record history</div>
+            <span ng-show="loading">loading... <i class="fa fa-spin" /></span>
+		</a>
+                        
 		<span ng-show="error" >{{error}}</span>
 	</div>
 </div>
-</div>
+

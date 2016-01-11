@@ -1,35 +1,34 @@
-
-		<div class="container-fluid record-metadata ">
+<div class="container-fluid record-metadata ">
 		<div class="row">
-		 <div class="col-xs-12">
-
-		
-
-			<div ng-show="!document.info.createdBy && document.info.createdOn">
-				<label class="record-metadata-label">Published on:</label>
-				<span class="record-metadata-text">
-					 {{document.info.createdOn| formatDateWithTime}}
-				</span>
-			</div>
-
-			<div ng-show="document.info.updatedBy">
-				<label class="record-metadata-label">Published on:</label>
-				<span class="record-metadata-text">
-					{{document.info.updatedOn| formatDateWithTime}}
-				</span>
-			</div>
-
-			<div >
-					<label class="record-metadata-label">Record identifier:</label>
-					<span class="record-metadata-text">
-				
-						<a target="_new" href="/database/{{getDocumentSchema(document.header.schema)}}/{{getDocumentId(document)}}">
+		 <div class="col-xs-12">  
+             
+             <div ng-show="!document.info.createdBy" style="padding-left:10px;">
+                <table style="width:100%" class="table-striped" id="history">
+                <tr>
+                    <th class="color-grey" style="width:250px">Published on</th>
+                    <th class="color-grey" style="width:250px">Record Identifier</th>
+                    <th class="color-grey" >Action</th>
+                </tr>
+                <tr>
+                    <td style="width:250px" ng-class="{'bold': $index == 0}"> 
+                        <strong>{{document.info.updatedOn | formatDateWithTime}}</strong>
+                    </td>
+                     <td style="width:250px">
+                        <a target="_new" href="/database/{{getDocumentSchema(document.header.schema)}}/{{getDocumentId(document)}}">
 				 			<span >{{document.info | uniqueIDWithoutRevision }}</span>
 							<span ng-show="document.id">{{getDocumentId(document)}}</span>
 					    </a>
 						<span ng-show="!document.info  && !document.id">not yet assigned</span>
-					</span>
-			</div>
-			</div>
+                    </td>
+                    <td>
+                      <span ng-show="document.id" class="label label-success"> PUBLISHED</span>
+                      <span ng-show="!document.info  && !document.id" class="label label-default">not yet published</span>
+                    </td>
+                </tr>
+                </table>
+             </div>
+		
+            <div ng-if="document.info.updatedBy" view-history document-id="document.header.identifier" load-documents="true" government="document.government.identifier"></div>
 		</div>
+	</div>
 </div>
