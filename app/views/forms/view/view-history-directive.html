@@ -14,7 +14,7 @@
 
                      <td style="width:250px">
                          <a ng-href="/database/{{document.type | schemaShortName}}/{{document | uniqueIDWithoutRevision}}/{{document.revision}}"  target="_blank">
-						 <span>{{document | uniqueID}}</span>
+						 <span  ng-class="{'bold': $index == 0}">{{document | uniqueID}}</span>
 						 </a>
                     </td>
                     <td>
