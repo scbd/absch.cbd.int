@@ -195,6 +195,24 @@ define([
       return false;
   };
 
+    //==================================
+    //
+    //==================================
+    $scope.canAddRegionalMeasure = function(document) {
+      document = document || $scope.document;
+      
+      if (!document)
+        return false;
+ 
+      if(document.jurisdiction.identifier == '528B1187-F1BD-4479-9FB3-ADBD9076D361' && document.government.identifier == "eur"){  
+         document.jurisdictionRegions = [{"identifier":"bd12d7fb-91f7-4b2d-996c-e70f18a51f0e"}];
+         return true;
+      }
+      
+      document.jurisdictionRegions = null;
+      return false;
+
+     };
 
     //==================================
     //

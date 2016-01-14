@@ -140,11 +140,15 @@
                 </div>
               </div>
 
-
               <div class="col-xs-12">
-                <div ng-show="isJurisdictionRegional()">
-                  <div class="km-control-group" required name="jurisdictionRegions" caption="Country name and/or Geographical or political/economic group(s)">
-                  <div  km-select required name="jurisdictionRegions" ng-model="document.jurisdictionRegions" items="options.regions()" multiple ></div>
+                <div ng-if="isJurisdictionRegional() && !canAddRegionalMeasure()">
+                  <div class="alert alert-danger"><h4>You have not been authorized to add Regional or Multilateral ABS Measures. Please contact the ABS-CH (absch@cbd.int) for authorization.</h4></div>
+                </div>
+
+                <div ng-if="isJurisdictionRegional() && canAddRegionalMeasure()">
+                  <div class="km-control-group" required name="jurisdictionRegions" caption="Country name(s) and/or Geographical or political/economic group(s)">
+                    <button type="button" class="btn btn-info">European Union Member States</button>
+                     <!--<div  km-select required name="jurisdictionRegions" ng-model="document.jurisdictionRegions" items="options.regions()" multiple ></div>-->
                   </div>
                 </div>
 
