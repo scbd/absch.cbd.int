@@ -11,7 +11,8 @@ define(['app','ng-breadcrumbs','angular-localizer','scbd-angularjs-services','sc
 
     app.controller('TemplateController', ['$scope', '$rootScope','showHelp' , '$window', '$location', 'authentication', '$browser', 'realmConfiguration', 'underscore', 'IUserNotifications', '$timeout','$filter',
      '$anchorScroll','breadcrumbs','toastr',//'localStorageService',localStorageService,
-        function($scope, $rootScope, showHelp, $window, $location, authentication, $browser, realmConfiguration, _, userNotifications, $timeout, $filter, $anchorScroll, breadcrumbs, toastr ) {
+        function($scope, $rootScope, showHelp, $window, $location, authentication, $browser, realmConfiguration, _, userNotifications, $timeout, $filter,$anchorScroll,breadcrumbs, toastr ) {
+
 
             $scope.controller = "TemplateController";
             $scope.breadcrumbs     = breadcrumbs;
@@ -187,18 +188,10 @@ define(['app','ng-breadcrumbs','angular-localizer','scbd-angularjs-services','sc
             $scope.showEmailVerificationMessage = data.message;
         });
 
-
-        $rootScope.$on('event:auth-emailVerification', function(evt, data){
-            $scope.showEmailVerificationMessage = data.message;
-        });
-
         function showSimpleToast(msg)
         {
              toastr.info(msg);
         }
-
-
-
 
   }])
 
