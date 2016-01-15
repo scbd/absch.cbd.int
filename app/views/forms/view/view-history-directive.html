@@ -6,6 +6,7 @@
                     <th class="color-grey" style="width:250px">Record Identifier</th>
                     <th class="color-grey" >Action</th>
                     <th class="color-grey" style="width:30px" ng-show="showFile">File</th>
+                   
                 </tr>
                 <tr ng-repeat="document in documents | orderBy:'createdOn':true" ng-if="$index == 0 || showHistory">
                     <td style="width:250px" ng-class="{'bold': $index == 0}"> 
@@ -47,6 +48,7 @@
                                 <!-- ABSCH-{{document.body.header.schema | lowercase | schemaShortName}}-{{document.documentID}}-{{document.revision}} -->
                             </a>
                     </td>
+                    
                 </tr>
                 </table>
                 

@@ -1,4 +1,6 @@
-define(['app'], function (app) {
+define(['app', 
+    '/app/views/directives/report-record.js'
+    ], function (app) {
 	app.directive('documentMetadata', function($http){
 		return{
 			restrict: 'EAC',

@@ -1,0 +1,49 @@
+<div class="row" style="padding-left:10px;padding-right:10px;">
+    <div class="col-xs-12">
+        <div class="pull-right">
+             <a href="#" class=" color-red" ng-click="showReport = !showReport" style="font-size:10px;text-transform:uppercase;"><i class="fa fa-exclamation-triangle"></i> report record</a>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="col-xs-12 "  ng-show="showReport">
+        <div class="alert alert-info" style="padding:15px 0 0 0;">
+            <h3 style="margin-left:20px">Report this record
+                <i ng-click="showReport = !showReport" aria-label="Close" style="margin-right:20px;cursor:pointer;" class="pull-right fa fa-close"></i>
+            </h3>
+            <p style="margin-left:20px">Please use the form to report a problem with this record and help us to keep the ABS-CH up-to-date and correct.</p>
+            <div  style="margin:20px;">
+                <form>
+                <div class="form-group">
+                  <div class="checkbox" style="margin-left:20px">
+                    <label style="font-size:14px">
+                        <input type="checkbox" value="">
+                        &nbsp; incorrect or inappropriate
+                    </label>
+                    </div>
+                    <div class="checkbox" style="margin-left:20px">
+                    <label style="font-size:14px">
+                        <input type="checkbox" value="">
+                        &nbsp; broken link or outdated information
+                    </label>
+                    </div>
+                    <div class="checkbox" style="margin-left:20px">
+                    <label style="font-size:14px">
+                        <input type="checkbox" value="">
+                        &nbsp; copyright infringement
+                    </label>
+                    </div>
+                    <br>
+                    <div>
+                        <textarea class="form-control" rows="3" placeholder="additional information"></textarea>
+                    </div>
+                    <br>
+                    <div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button ng-click="showReport = !showReport" class="btn btn-warning">Cancel</button>
+                    </div>
+                </div>
+                </form>
+             </div>
+        </div>
+    </div>
+</div>
