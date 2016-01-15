@@ -47,7 +47,14 @@
 
     <iframe id="authenticationFrame" src="https://accounts.cbd.int/app/authorize.html" style="display:none"></iframe>
 
-    <nav class="navbar navbar-cbd navbar-default bg-cbdgreen navbar-static-top" id="anchorTop" ng-class="{'bg-orange':!production_env }">
+    <nav class="navbar navbar-cbd navbar-default bg-cbdgreen navbar-static-top"
+         id="anchorTop" ng-class="{'bg-orange':!production_env }">
+        <div class="alert alert-info" style="margin-bottom: 0px; text-align: center" ng-show="showEmailVerificationMessage">
+            <button type="button" ng-click="showEmailVerificationMessage = undefined" class="close" style="opacity: 1;">&times;</button>
+            <strong>{{showEmailVerificationMessage}}</strong>
+            <br/>
+            Please click on the verification link in the email sent on {{user.email}}. Click <a href="https://accounts.cbd.int/activate/resend">here</a> to resend the activation email.
+        </div>
       <div class="container-fluid container-cbd">
           <ul class="navbar-left navlist pull-left">
                 <li class="hidden-md hidden-lg pull-left">
@@ -225,6 +232,7 @@
     </nav>
     <!-- PORTAL LINKS FIXED-->
     <nav id="PortalLinks2" class="navbar navbar-links navbar-default navbar-static-top bg-darkgrey navbar-fixed-top" ng-class="{'bg-orange':!production_env }">
+
         <div class="container-fluid container-links color-grey">
                 <ul class="navbar-left navlist nav navbar-nav pull-left"  style="display:flex">
                     <li class="bold">
