@@ -276,7 +276,7 @@ define(["app",'/app/js/common.js'], function (app) {
 
 			if(schema.toLowerCase()=="focalpoint" 				||	schema.toLowerCase()=="nfp"	) return "account_box";
 			if(schema.toLowerCase()=="authority"  				||	schema.toLowerCase()=="cna"	) return "account_box";
-			//if(schema.toLowerCase()=="contact"  				||	schema.toLowerCase()=="con"	) return "Contact";
+			if(schema.toLowerCase()=="contact"  				||	schema.toLowerCase()=="con"	) return "contacts";
 			if(schema.toLowerCase()=="database"	 				||	schema.toLowerCase()=="ndb"	) return "folder";
 			if(schema.toLowerCase()=="resource"	  				||	schema.toLowerCase()=="vlr"	) return "insert_drive_file";
 			//if(schema.toLowerCase()=="organization"  			||	schema.toLowerCase()=="org"	) return "Organization";

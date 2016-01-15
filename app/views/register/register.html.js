@@ -68,7 +68,7 @@ define(['app','linqjs', 'angular-localizer',
 		// },
       	'National Records': {
 		'title': 'National Records',
-		'formats': ['authority', 'absCheckpoint', 'measure', 'absPermit', 'absCheckpointCommunique', 'database'],
+		'formats': ['authority', 'absCheckpoint', 'measure', 'absPermit', 'absCheckpointCommunique', 'database', 'contact'],
 		'roles':[$scope.$root.getRoleName('AbsPublishingAuthorities'), $scope.$root.getRoleName('abschiac'),$scope.$root.getRoleName('AbsNationalAuthorizedUser'),
 				 $scope.$root.getRoleName('AbsNationalFocalPoint'),$scope.$root.getRoleName('AbsAdministrator'),$scope.$root.getRoleName('Administrator')]
 		},
@@ -90,119 +90,55 @@ define(['app','linqjs', 'angular-localizer',
 	  	absNationalReport: {
 			abbreviation: 'NR',schemaType:"nationalRecords",
 			title: 'Interim national report on the implementation of the Nagoya Protocol',
-			help: 'This common format is to be used for the Interim national report on the implementation of the Nagoya Protocol.'
-					+ '<br><div class="alert alert-warning" ng-show="help">'
-					+ '  Guidelines for the Interim National Report on the Implementation of the Nagoya Protocol '
-					+ '</div>',
-			tips: [
-				'Remember to upload the document text in its <strong>original language</strong>.',
-				'Please upload <strong>courtesy or official translations</strong> of the measure if available.',
-				],
 		},
       measure: {
         abbreviation: 'MSR',schemaType:"nationalRecords",
         title: 'Legislative, administrative or policy measures on access and benefit-sharing',
-        help: 'This common format is to be used for legislative, administrative and policy measures on access and benefit-sharing. This information shall be made available to the Access and Benefit-Sharing Clearing-House (ABS-CH) in accordance with Article 14, paragraph 2(a), of the Nagoya Protocol on Access and Benefit-sharing. <br /><br /> Access and benefit-sharing measures may include strategies, policies, legislation or regulations. They may also include measures undertaken at the regional, national, sub-national or community level. For each ABS measure a new common format has to be filled. The format includes a list of ABS elements and the possibility of pointing out to the specific articles and sections where the specific element is addressed in the measure. Having this information for all existing ABS measures of a country displayed in the ABS Clearing-House would help users to find the specific information they are looking for in order to access to genetic resources and traditional knowledge associated to genetic resources.'
-               + '<br><div class="alert alert-warning" ng-show="help">'
-               + '  Please submit a new form for each legislative, administrative or policy measure. You will need to submit as many forms as number of ABS measures are available within your jurisdiction. Amendments to existing measures will also need to be included through an independent form and provide a link to the measure that is being amended, so the two records can be displayed together.'
-               + '  <br><br>You can also use this form to make explanatory information on how to apply for prior informed consent or other processes and procedures available, including information flowcharts or summary information.'
-               + '</div>',
-        tips: [
-          'Remember to upload the document text in its <strong>original language</strong>.',
-          'Please upload <strong>courtesy or official translations</strong> of the measure if available.',
-        ],
+
       },
       authority: {
         abbreviation: 'CNA',schemaType:"nationalRecords",
         title: 'Competent National Authority',
-        help: 'Article 13 of the Nagoya Protocol requires the designation of one or more competent national authorities on access and benefit-sharing. This information shall be made available to the Access and Benefit-Sharing Clearing-House (ABS-CH) in accordance with Article 14, paragraph 2(b), of the Nagoya Protocol on Access and Benefit-sharing. <br /><br /> CNAs are bodies established by governments and are responsible for granting access to users of their genetic resources. Parties can decide to establish one or more CNAs, however if more than one CNAs are established, their responsibilities need to be clearly identified. National implementation measures establish how CNAs work in a given country. Therefore, this common format has been prepared for facilitating the submission of information on competent national authorities by Parties.'
-         + '<div class="alert alert-warning" ng-show="help">'
-         + '  <strong>Timeframe for confirmation or updating of information</strong>'
-         + '  <br>Please note that this category of information requires confirmation or updating after two years from the date of submission. After the deadline you will be asked to confirm or update the record within 3 months. After this period, if no confirmation has been received, the record will be marked as “Not confirmed”.'
-         + '</div>',
-        tips: [
-          '<strong>Register the related ABSCH-MSR</strong>: To include the legal, administrative or policy basis for the competence of the CNA, please complete the ABSCH-MSR common format registering this information before starting the CNA form.',
-          '<strong>CNA Responsibilities</strong>: Please note that when adding a CNA that is not responsible for all functions or when adding multiple CNAs you will be required to describe the responsibilities for each CNA. When adding or updating a CNA, it can be helpful to review all responsibilities of all CNAs are correct.',
-        ],
+
       },
       absPermit: {
         abbreviation: 'IRCC',schemaType:"nationalRecords",
         title: 'Permit or its equivalent constituting an internationally recognized certificate of compliance',
-        //TODO: use partials instead. For the entire help portion... because this is ridiculous.
-        help: 'This common format is to be used for registering permits or their equivalent issued at the time of access as evidence of the decision to grant prior informed consent (PIC) and of the establishment of mutually agreed terms (MAT) in accordance with Article 6, paragraph 3 (e) of the Nagoya Protocol on Access and Benefit-sharing. This information is to be made available to the ABS Clearing-House in accordance with Article 14, paragraph 2 (c).<br />'
-         + '<br />In accordance with Article 17, paragraph 2, a permit or its equivalent issued in accordance with Article 6, paragraph 3 (e) and made available to the ABS Clearing-House, shall constitute an internationally recognized certificate of compliance.<br />'
-         + '<br />Article 17, paragraph 3, further establishes that the internationally recognized certificate of compliance shall serve as evidence that the genetic resource which it covers has been accessed in accordance with PIC and that MAT have been established, as required by the domestic ABS legislation or regulatory requirements of the Party providing PIC.<br />'
-         + '<br />Article 17, paragraph 4, sets out the minimum information required for the internationally recognized certificate of compliance when it is not confidential, which in turn provides the minimum information to be reported to the ABS Clearing-House in this regard. This information includes:'
-         + '<ol type="a" ng-show="help">'
-         + '  <li>Issuing authority;</li>'
-         + '         <li>Date of issuance;</li>'
-         + '         <li>The provider;</li>'
-         + '         <li>Unique identifier of the certificate;</li>'
-         + '         <li>The person or entity to whom prior informed consent was granted;</li>'
-         + '         <li>Subject-matter or genetic resources covered by the certificate;</li>'
-         + '         <li>Confirmation that mutually agreed terms were established;</li>'
-         + '         <li>Confirmation that prior informed consent was obtained; and</li>'
-         + '         <li>Commercial and/or non-commercial use.</li>'
-         + '</ol>'
-         + 'On the basis of the information provided through this common format on the permit or its equivalent, the ABS Clearing-House will send a courtesy copy of the internationally recognized certificate of compliance constituted from information on the permit or its equivalent made available to the ABS Clearing-House by electronic means to:'
-         + '<ol type="a">'
-         + '  <li>The national focal point and the competent national authority or authorities of the country responsible for issuing the permits or its equivalent; and</li>'
-         + '  <li>The person or entity to whom prior informed consent was granted.</li>'
-         + '</ol>'
-         + '<div class="alert alert-warning">Please note that all information submitted to the ABS Clearing-House will be made public and therefore, confidential information should not be submitted. Publishing authorities are reminded that it is their responsibility to ensure that any confidentiality clauses in mutually agreed terms are respected.</div>',
-        tips: [
-          '<strong>Please Note:</strong>All information submitted to the ABS Clearing-House will be made public and therefore, confidential information should not be submitted. Publishing authorities are reminded that it is their responsibility to ensure that any confidentiality clauses in mutually agreed terms are respected.',
-          '<strong>Register the ABSCH-CNA:</strong>the appropriate CNA will need to have been previously registered in the system.',
-        ],
+
       },
       absCheckpoint: {
         abbreviation: 'CP',
         title: 'Checkpoint',schemaType:"nationalRecords",
-        help: 'This common format is to be used for registering contact details of checkpoints designated under paragraph 1 (a) of Article 17, who would collect or receive, as appropriate, relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources.',
-        tips: [],
+
       },
       absCheckpointCommunique: {
         abbreviation: 'CPC',schemaType:"nationalRecords",
         title: 'Information for the Checkpoint Communiqué',
-        help: 'This common format is to be used to provide relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources (Article 17, paragraph 1 (a) (i)), including from the internationally recognized certificate of compliance, when such a certificate is available. In accordance with paragraph 1 (a) (iii) of Article 17 of the Nagoya Protocol, such information collected by the checkpoint needs to be provided to relevant national authorities, to the Party providing prior informed consent and to the ABS Clearing-House, as appropriate'
-         + '<br><div class="alert alert-warning" ng-show="help">'
-               + '  On the basis of the information collected or received by the checkpoint and provided by the national publishing authority to the ABS Clearing-House, a courtesy copy of the record will be automatically sent by electronic means to the following entities, as appropriate:'
-               + '  <br><br><ul> <li>The designated national authority/ies as determined in the common format on checkpoints; and</li>'
-               +                 '<li>The national focal point of the country and the competent national authority/ies of the country which is the provider of the genetic resource</li></ul>'
-               + '</div>',
-        tips: [
-        ],
+
       },
       resource: {
         abbreviation: 'VLR',schemaType:"referenceRecords",
         title: 'Virtual Library Record',
-        help: 'The forms under the “reference records” category will allow the submission of non-mandatory information relevant to the Protocol from any registered user (e.g. governments, representatives of indigenous and local communities, academia, NGOs, research institutions, business representatives, etc.) to the ABS Clearing-House .The Secretariat would be responsible for validating all reference records.<br />'
-         + '<br>Through its virtual library, the ABS Clearing-House provides access to different categories of information and publications categorised in a list of thematic areas. The information provided through this common format will facilitate online searches of information on the ABS relevant resources made available through the ABS Clearing-House, such as books, articles, papers, videos, and others.',
-        tips: [],
+
       },
       database: {
         abbreviation: 'NDB',schemaType:"nationalRecords",
         title: 'ABS National Website or Database',
-        help: 'This common format is to be used for registering information on national website or databases relevant to access and benefit-sharing.',
-        tips: [],
+
       },
-      contacts: {
+      contact: {
         abbreviation: 'CON',schemaType:"nationalRecords",
-        title: 'Contacts',
-        help: '',
-        tips: [],
+        title: 'Contact'
       },
       modelContractualClause: {
         abbreviation: 'A19A20',schemaType:"referenceRecords",
         title: 'Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards ',
-        help: '',
-        tips: [],
+
       },
       communityProtocol: {
         abbreviation: 'CPP',schemaType:"referenceRecords",
         title: 'Community protocols and procedures and customary laws',
-        help: '',
-        tips: [],
+
       }
 
     };
@@ -702,7 +638,7 @@ define(['app','linqjs', 'angular-localizer',
 	$scope.$on("refreshDocumentList", function(evt, data) {
 		if(data.document_type){
 			$scope.records = null;
-			$scope.isLoaded = []
+			$scope.isLoaded = [];
 			loadRecords(data.document_type);
 			loadFacets();
 			loadActivitiesFacets();

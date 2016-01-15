@@ -1,0 +1,73 @@
+<div ng-controller="editContact" class="md-whiteframe-z1">
+
+	<div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
+
+	<md-content layout-padding style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
+
+		<div class="registerpage-content">
+
+			<div ng-show="msg" class="alert alert-success alert-dismissable">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="msg=''">&times;</button>
+				<strong>{{msg}}</strong>
+			</div>
+
+			<div class="alert alert-error" ng-show="hasError()">
+				<strong>Error as occured...</strong>
+				<div>{{error}}</div>
+			</div>
+
+			<div ng-show="isLoading()">
+				<i class="fa fa-spinner fa-spin"></i> Loading...
+			</div>
+
+			<div ng-show="!isLoading() && status!='hidden'">
+				<div workflow-std-buttons document="getCleanDocument()" languages="document.header.languages" hide-timer="false" />
+
+				<div km-document-validation ng-model="validationReport"></div>
+				<form name="editForm" class="editForm" style="margin-top:10px">
+					<div ng-show="tab=='edit'" km-tab="edit">
+						<legend name="formInfo" style="display:none"></legend>
+						<section>
+
+							<div class="row">
+								<div class="col-xs-12">
+									<legend name="contactType">Contact Type</legend>
+									<div class="km-control-group" name="notes">
+										<label class="radio-inline">
+											<input type="radio" ng-model="document.type" value="organization" name="editionContactType" />Organization</label>
+										<label class="radio-inline">
+											<input type="radio" ng-model="document.type" value="person" name="editionContactType" />Person</label>
+									</div>
+								</div>
+							</div>
+						</section>
+						<div edit-contact-base ng-model="document" locales="document.header.languages" form="editContactForm"></div>
+						<section>
+
+							<legend>Notes</legend>
+							<div class="row">
+								<div class="col-xs-12">
+									<div class="km-control-group" name="notes">
+										<div class="help-block">The “Notes” field is for your personal notes or comments and will be hidden when viewing the record. This field is not meant to be used for confidential information.</div>
+										<textarea class="form-control" name="notes" ng-model="document.notes" rows="4"></textarea>
+									</div>
+								</div>
+							</div>
+						</section>
+
+					</div>
+				</form>
+
+				<div ng-show="tab=='review'" km-tab="review">
+
+					<div class="btn-group" ng-show="reviewDocument.header.languages.length>1">
+						<input type="button" class="btn" ng-class="{'active' : review.locale==locale, 'btn-info' : review.locale==locale}" ng-repeat="locale in document.header.languages" ng-click="$parent.review.locale = locale" value="{{locale | uppercase}}" />
+					</div>
+					<view-contact ng-model='reviewDocument' locale="review.locale"></view-contact-reference>
+
+				</div>
+			</div>
+		</div>
+
+	</md-content>
+</div>
