@@ -45,7 +45,7 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                                         }
 
                                         $scope.Feedback_helpOff = function() {
-                                                $rootScope.$broadcast("showCustomToast", "helpOff");
+                                                $rootScope.$broadcast("showSimpleToast", "Help is turned off. You can turn it back on by clicking the information icon located at the top right in the main navigation bar.");
                                         };
 
 

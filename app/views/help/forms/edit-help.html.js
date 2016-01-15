@@ -1,8 +1,8 @@
 define(['app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate', 'scbd-angularjs-services', 'scbd-angularjs-filters', 'scbd-angularjs-controls',
 	'/app/js/common.js'], function (app, _) {
 		app.controller("editHelpController",
-			["$routeParams", "$scope", "$q", "underscore", '$http', '$mdToast', '$location', 'commonjs', '$mdDialog',
-				function ($routeParams, $scope, $q, _, $http, $mdToast, $location, commonjs, $mdDialog) {
+			["$routeParams", "$scope", "$rootScope", "$q", "underscore", '$http',  '$location', 'commonjs', '$mdDialog',
+				function ($routeParams, $scope, $rootScope, $q, _, $http, $location, commonjs, $mdDialog) {
 
 					var url = '/api/v2015/help-forms';
 
@@ -109,17 +109,9 @@ define(['app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate', 'scbd-an
 									$scope.schemas.push($scope.document)
 									origanalDocument = _.clone($scope.document);
 								}
-								$mdToast.show(
-									$mdToast.simple()
-										.content('Schema help updated!')
-										.position("top right")
-										.hideDelay(3000)
-									);
-								// .then(function(){
-								// 	if(titleChanged){
-								// 		$location.path('/help/manage/' + $scope.document.urlTitle);
-								// 	}
-								// });   
+								
+                                $rootScope.$broadcast("showSimpleToast", "Schema help updated!");
+                                        
 							});
 
 					}
@@ -137,12 +129,8 @@ define(['app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate', 'scbd-an
 									.then(function(){
 										$scope.schemas.splice(_.indexOf($scope.schemas, helpDocument), 1);
 										$scope.document = $scope.schemas[0];
-										$mdToast.show(
-												$mdToast.simple()
-													.content('Schema help deleted!')
-													.position("top right")
-													.hideDelay(3000)
-												);	
+                                        $rootScope.$broadcast("showSimpleToast", "Schema help deleted!");
+									
 									});
 							});
 						
