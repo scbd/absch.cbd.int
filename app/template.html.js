@@ -187,6 +187,11 @@ define(['app','ng-breadcrumbs','angular-localizer','scbd-angularjs-services','sc
             $scope.showEmailVerificationMessage = data.message;
         });
 
+
+        $rootScope.$on('event:auth-emailVerification', function(evt, data){
+            $scope.showEmailVerificationMessage = data.message;
+        });
+
         function showSimpleToast(msg)
         {
              toastr.info(msg);
