@@ -1,6 +1,10 @@
 define(['app','ng-breadcrumbs','angular-localizer','scbd-angularjs-services','scbd-angularjs-filters',
     '/app/views/directives/login.directive.html.js',
     '/app/views/directives/xuser-notifications.js',
+    '/app/views/directives/nav/footer-nav.js',
+    '/app/views/directives/nav/portal-branding.js',
+    '/app/views/directives/nav/cbd-header.js',
+    '/app/views/directives/nav/portal-nav.js',
     'ngAria', 'angular-animate','toastr',
 ], function(app) {
     'use strict';
@@ -189,9 +193,9 @@ define(['app','ng-breadcrumbs','angular-localizer','scbd-angularjs-services','sc
              toastr.info(msg);
         }
 
-       
 
-        
+
+
   }])
- 
+
 });

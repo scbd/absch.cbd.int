@@ -3,480 +3,145 @@
 <!-- <script src="/app/views/index.html.js"></script> -->
 <!-- <script src="/app/views/directives/login.directive.html.js"></script> -->
 <div ng-controller="IndexController">
-    <div smooth-scroll duration="100" offset="200" ></div>
+    <div smooth-scroll duration="100" offset="200"></div>
 
-<!-- Carousel
-================================================== -->
-<!--
-<div id="myCarousel" class="carousel slide" data-ride="carousel" >
+    <div class="bg-texture-green" style="border-top:1px solid #555;border-bottom:2px solid #ddd;height:600px;">
+        <div style="background-image:url('/app/img/placeholder-map.png');height:596px;position:absolute;width:100%;background-size:2000px;background-repeat: no-repeat;background-position: center ;">
+        </div>
+        <div style="background-image:url('/app/img/placeholder.png');"></div>
+        <div class="container" style="color:white;padding:20px;">
 
-    <ol class="carousel-indicators" >
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
-    <div class="carousel-inner" >
-        <div class="item active" >
-            <div class="container" >
-                <div class="carousel-caption" style="text-align:left;">
+            <div class="row  bg-green" style="padding:20px;">
+                <div class="col-md-12">
+                    <div class="home-col dropshadow">
+                        <!-- <h3 class="headline1"><a href="/about#about">What is the ABS-CH?</a></h3> -->
+                        <h3 style="text-align:justify;">The Access and Benefit-sharing Clearing-house (ABSCH) is a platform for exchanging information on ABS and a key tool for facilitating the implementation of the Nagoya Protocol.
+                        </h3>
+                    </div>
+                </div>
+            </div>
 
-                    <h1>Participate in the testing of the <span style="color:#fa6938;">pilot phase</span> of the ABS-CH</h1>
-                    <p class="visible-lg" style="font-size:14px;">Login and start publishing records and providing feedback on how we can improve it.</p>
-                         <div class="row" ng-show="user.isAuthenticated">
+            <div style="position:relative;top:368px;" class="row bg-green">
+                <div class="col-xs-4 text-center special-font" style="padding-top:8px;padding-bottom:10px;" ng-mouseleave="viewParties = false;">
+                    <span class="label label-primary" style="font-size:24px;" ng-show="!viewParties">70</span> &nbsp;
+                    <a style="font-size:24px;" href="#" class="color-white" ng-click="viewParties = true;" ng-show="!viewParties">Parties</a>
+                    <a style="font-size:24px;" href="#" class="color-white" ng-show="viewParties">View country profiles</a>
+                </div>
+                <div class="col-xs-4 text-center special-font" style="padding-top:8px;padding-bottom:10px;" ng-mouseleave="viewNParties = false;">
+                  <span class="label label-default" style="font-size:24px;" ng-show="!viewNParties">70</span> &nbsp;
+                    <a style="font-size:24px;" href="#" class="color-white" ng-click="viewNParties = true;" ng-show="!viewNParties">Non-Parties</a>
+                    <a style="font-size:24px;" href="#" class="color-white" ng-show="viewNParties">View country profiles</a>
+                </div>
+                <div class="col-xs-4 text-center special-font" style="padding-top:8px;padding-bottom:10px;"  ng-mouseleave="viewRatified = false;">
+                    <span class="label label-default" style="font-size:24px;" ng-show="!viewRatified">70</span> &nbsp;
+                    <a style="font-size:24px;" href="#" class="color-white" ng-click="viewRatified = true;" ng-show="!viewRatified">Ratified&nbsp;not&nbsp;yet&nbsp;Party</a>
+                    <a style="font-size:24px;" href="#" class="color-white" ng-show="viewRatified">View country profiles</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                                <div style="background-color:#1a9351; padding:50px; margin:0;" class="text-center">
-                                   <h1 style="font-size:360%;"> WELCOME {{user.name}} </h1>
-                                </div>
+    <div style="padding:20px">
+        
+        
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12">
+                    <span home-country-dashboard></span>
+                </div>
+            </div>
+        </div>
 
-                         </div>
-                        <div class="row" ng-show="!user.isAuthenticated">
-                            <div class="col-xs-12" >
-                               <div login></div>
+        <div class="container-fluid" style="padding-top:50px;">
+            <div class="row">
+
+                <div class="col-md-4">
+                    <h3 style="padding-bottom:0;margin-bottom:0;">Latest Notifications</h3>
+                    <div style="border-top:1px solid #BBB;">
+                        <div ng-repeat="doc in rawRefDocs_Notification" ng-show="doc.title_t && $index < 5">
+                            <a href="https://www.cbd.int/{{doc.url_ss[0]}}" target="_n_e_w_" style="padding-bottom:5px;">
+                                <span style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.createdDate_dt | formatDate}}</span>
+                                <!--<span style="text-transform:uppercase;font-weight:bold;font-size:10px;" class="color-orange"> {{doc.schema_s}}</span>-->
+                                <span class="color-grey" style="display:block;font-size:12px;">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." : doc.title_t }}</span>
+                            </a>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="item" >
-            <img  class="image-responsive" style="border:5px solid #000;" src="https://dl.dropboxusercontent.com/u/281146418/Regional%20Workshops/Guyana/pics/slider1.jpg">
-            <div class="container">
-
-                <div class="carousel-caption">
-                    <h1 style="background-color: #000;opacity: 0.8;">SUBREGIONAL CAPACITY-BUILDING WORKSHOP ON THE NAGOYA PROTOCOL ON ACCESS AND BENEFIT SHARING FOR THE CARIBBEAN
-                    <span style="color:#999">19-22 MAY 2014 - GEORGETOWN, GUYANA</span>
-                    </h1>
-                    <p><a class="btn btn-lg btn-primary" href="/workshops/caribbean" role="button">Learn more</a></p>
+                <div class="col-md-4">
+                    <h3 style="padding-bottom:0;margin-bottom:0;">Upcoming Meetings</h3>
+                    <div style="border-top:1px solid #BBB;">
+                        <div ng-repeat="doc in rawRefDocs_Meeting" ng-show="doc.title_t &&  $index < 5">
+                            <a href="https://www.cbd.int/doc/?meeting={{doc.symbol_s}}" target="_n_e_w_" style="padding-bottom:5px;">
+                                <span style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.startDate_dt | formatDate}} - {{doc.endDate_s | formatDate}}</span>
+                                <!--<span style="text-transform:uppercase;font-weight:bold;font-size:10px;" class="color-orange"> {{doc.schema_s}}</span>-->
+                                <span class="color-grey" style="display:block;font-size:12px;">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." : doc.title_t }}</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="item" >
-            <img  class="image-responsive" style="border:5px solid #000;" src="https://dl.dropboxusercontent.com/u/281146418/Regional%20Workshops/LAC%20Region/slider1.jpg">
-            <div class="container">
-
-                <div class="carousel-caption">
-                    <h1 style="background-color: #000;opacity: 0.8;">Regional Capacity-building Workshop for Latin America on Nagoya Protocol on Access and Benefit-sharing
-                    <span style="color:#999">24 - 28 March 2014 - Montevideo, Uruguay</span>
-                    </h1>
-
-                    <p><a class="btn btn-lg btn-primary" href="/workshops/lac" role="button">Learn more</a></p>
+                
+                <div class="col-md-4">
+                    <h3 style="padding-bottom:0;margin-bottom:0;">Latest News</h3>
+                    <div style="border-top:1px solid #BBB;">
+                        <div ng-repeat="doc in rawRefDocs_News" ng-show="doc.title_t && $index < 6">
+                            <a href="{{doc.url_ss[0]}}" target="_n_e_w_" style="padding-bottom:5px;">
+                                <span style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.createdDate_dt | formatDate}}</span>
+                                <!--<span style="text-transform:uppercase;font-weight:bold;font-size:10px;" class="color-orange"> {{doc.schema_s}}</span>-->
+                                <span class="color-grey" style="display:block;font-size:12px;">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." : doc.title_t }}</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </div>
 
-    </div>
-    <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-    <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-</div> -->
-<!-- /.carousel -->
+        <div class="container-fluid" style="padding-top:50px;">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3 style="border-bottom:1px solid #BBB;">About the Nagoya Protocol</h3>
+                </div>
+                <div class="clearfix"></div>
 
-<div class="bg-texture-green" style="border-top:1px solid #555;border-bottom:2px solid #ddd;">
-    <div class="container" style="color:white;padding:20px;" >
+                <div class="col-md-8">
+                    <div class="home-col">
+                        The Nagoya Protocol on Access to Genetic Resources and the Fair and Equitable Sharing of Benefits Arising from their Utilization to the Convention on Biological Diversity is an international agreement which aims at sharing the benefits arising from the
+                        utilization of genetic resources in a fair and equitable way, including by appropriate access to genetic resources and by appropriate transfer of relevant technologies, taking into account all rights over those resources and to
+                        technologies, and by appropriate funding, thereby contributing to the conservation of biological diversity and the sustainable use of its components.
+                        <a href="http://www.cbd.int/abs"> <i class="fa fa-forward"></i> read more at: www.cbd.int/abs</a>
+                    </div>
+                    <br>
+                </div>
 
-
-                        <div class="row  bg-green" style="padding:20px;">
-                            <div class="col-md-12">
-                                <div class="home-col dropshadow">
-                                    <!-- <h3 class="headline1"><a href="/about#about">What is the ABS-CH?</a></h3> -->
-                                    <h3 style="text-align:justify;">The Access and Benefit-sharing Clearing-house (ABSCH) is a platform for exchanging information on ABS and a key tool for facilitating the implementation of the Nagoya Protocol.
-                                  </h3>
-
+                <div class="col-md-4">
+                    <div class="home-col">
+                        <div class="text-center" ng-show="entryintoforce">
+                            <div layout="row" layout-padding layout-margin style="padding-top:0;margin-top:0;">
+                                <div flex class="bg-green">
+                                    <span class="color-white" style="font-weight:bold; font-size:32px;text-shadow: 0 1px 2px rgba(0, 0, 0, .6);">{{yearsSinceEntry}}</span>
+                                    <br>
+                                    <span style="color:#EEE;text-transform: uppercase;font-weight:bold;font-size:14px;">years</span>
                                 </div>
-
+                                <div flex class="bg-green">
+                                    <span class="color-white" style="font-weight:bold; font-size:32px;text-shadow: 0 1px 2px rgba(0, 0, 0, .6);">{{monthsSinceEntry}}</span>
+                                    <br>
+                                    <span style="color:#EEE;text-transform: uppercase;font-weight:bold;font-size:14px;">months</span>
+                                </div>
+                                <div flex class="bg-green">
+                                    <span class="color-white" style="font-weight:bold; font-size:32px;text-shadow: 0 1px 2px rgba(0, 0, 0, .6);">{{daysSinceEntry}}</span>
+                                    <br>
+                                    <span style="color:#EEE;text-transform: uppercase;font-weight:bold;font-size:14px;">days</span>
+                                </div>
                             </div>
+                            <div style="color:#666;text-transform:uppercase;font-weight:bold;font-size:14px;">
+                                Since the entry into force of the Nagoya Protocol</div>
                         </div>
 
-
-                         <!--<div class="row bg-green"  style="padding:30px;margin-top:20px;" ng-show="user.isAuthenticated" >
-                                <div class="text-center col-xs-10"  >
-                                    <h1 class="dropshadow" style="font-size:360%;margin-bottom:0;padding:0;position:relative;top:-10px;"> WELCOME {{user.name}}</h1>
-                                    <h2 class="color-grey" style="text-transform:uppercase;padding:0;margin:0;">{{user.government | term}}
-
-                                      <span ng-show="user.roles.indexOf(getRoleName('AbsPublishingAuthorities')) != -1"> (PA) </span>
-                                      <span ng-show="user.roles.indexOf(getRoleName('abschiac')) != -1">(IAC)</span>
-                                      <span ng-show="user.roles.indexOf(getRoleName('AbsNationalAuthorizedUser')) != -1"> (NAU) </span>
-                                      <span ng-show="user.roles.indexOf(getRoleName('AbsNationalFocalPoint')) != -1"> (FP) </span>
-                                      <span ng-show="user.roles.indexOf(getRoleName('AbsAdministrator')) != -1"> (ABS-ADMIN) </span>
-                                      <span ng-show="user.roles.indexOf(getRoleName('Administrator')) != -1"> (CBD-ADMIN) </span>
-
-                                    </h2>
-                                </div>
-
-                                <div class="col-xs-2 pull-right text-align:right;" style="padding-left:15px;border-left:3px solid #999;">
-                                    <div><button class="btn btn-default " ng-click="actionSignOut()">Sign out</button></div>
-                                    <div style="padding-top:10px;"><a href="#" ng-click="actionProfile()" class="color-white" style="font-size:14px;font-weight:normal;" >update your profile</a></div>
-                                    <div style="padding-top:10px;padding-bottom:10px;"><a href="#"  class="color-white" ng-click="actionPassword()" style="font-size:14px;font-weight:normal;" > change your password</a></div>
-                                </div>
-                          </div>-->
-
-<!--                        <div class="row" ng-show="!user.isAuthenticated">
-                                <div class="dropshadow col-xs-12" >
-                                   <div login></div>
-                            </div>
-                        </div>-->
-
-    </div>
-</div>
-
-<div class="container-fluid" >
-    <div class="row">
-        <div class="col-xs-12">
-             <h3 style="border-bottom:1px solid #BBB;">ABSCH Record Overview</h3>
-            <span home-country-dashboard></span>
-        </div>
-    </div>
- </div>
-
- <!--<div class="container"  style="padding-top:50px;">
-    <div class="row">
-        <hr class="bg-medgrey">
-        <div class="col-xs-12">
-             <h3 style="border-bottom:1px solid #BBB;">Find Information</h3>
-              <div class="row">
-                <div class="col-md-4">Country Profiles</div>
-                <div class="col-md-4">National Records</div>
-                <div class="col-md-4">Reference Records</div>
-              </div>
-        </div>
-    </div>
- </div>-->
-
-
-<div class="container" style="padding-top:50px;">
-    <div class="row" >
-
-         <div class="col-md-4">
-              <h3 style="padding-bottom:0;margin-bottom:0;">Latest Notifications</h3>
-              <div style="border-top:1px solid #BBB;">
-                    <div ng-repeat="doc in rawRefDocs_Notification" ng-show="doc.title_t && $index < 5">
-                        <a   href="https://www.cbd.int/{{doc.url_ss[0]}}" target="_n_e_w_"  style="padding-bottom:5px;">
-                         <span style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.createdDate_dt | formatDate}}</span>
-                         <!--<span style="text-transform:uppercase;font-weight:bold;font-size:10px;" class="color-orange"> {{doc.schema_s}}</span>-->
-                         <span  class="color-grey" style="display:block;font-size:12px;">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." :  doc.title_t }}</span>
-                        </a>
-                </div>
-               </div>
-        </div>
-
-         <div class="col-md-4">
-             <h3 style="padding-bottom:0;margin-bottom:0;">Upcoming Meetings</h3>
-              <div style="border-top:1px solid #BBB;" >
-                   <div ng-repeat="doc in rawRefDocs_Meeting" ng-show="doc.title_t &&  $index < 5">
-                         <a   href="https://www.cbd.int/doc/?meeting={{doc.symbol_s}}" target="_n_e_w_" style="padding-bottom:5px;">
-                         <span style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.startDate_dt | formatDate}} - {{doc.endDate_s | formatDate}}</span>
-                         <!--<span style="text-transform:uppercase;font-weight:bold;font-size:10px;" class="color-orange"> {{doc.schema_s}}</span>-->
-                         <span  class="color-grey" style="display:block;font-size:12px;">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." :  doc.title_t }}</span>
-                        </a>
                     </div>
-               </div>
-         </div>
-          <div class="col-md-4">
-              <h3 style="padding-bottom:0;margin-bottom:0;">Latest News</h3>
-              <div style="border-top:1px solid #BBB;" >
-                   <div ng-repeat="doc in rawRefDocs_News" ng-show="doc.title_t && $index < 6" >
-                        <a  href="{{doc.url_ss[0]}}" target="_n_e_w_" style="padding-bottom:5px;">
-                         <span style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.createdDate_dt | formatDate}}</span>
-                         <!--<span style="text-transform:uppercase;font-weight:bold;font-size:10px;" class="color-orange"> {{doc.schema_s}}</span>-->
-                         <span  class="color-grey" style="display:block;font-size:12px;">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." :  doc.title_t }}</span>
-                        </a>
                 </div>
-               </div>
-        </div>
 
+            </div>
+        </div>
     </div>
 </div>
-
-
-
-
-
-
-        <!--<div class="col-xs-12">
-                <h1>Latest Virtual Library Records</h1>
-                <div ng-repeat="doc in rawRefDocs">
-                    <div class="latest" ng-class="{'latest-even-row':$even}">
-                        <a  href="/database/{{doc.schema_s == 'resource' ? '' : doc.schema_EN_t + '/'}}{{getDocumentId(doc)}}" class="latest-link">
-                            <span class="latest-date"> {{doc.createdDate_dt | formatDate}}</span>
-                            <span class="latest-schema">  | {{doc.schema_s | schemaName}}</span>
-                            <span class="latest-schema" ng-show="doc.resourceTypes_CEN_ss">  | {{getResourceType(doc.resourceTypes_CEN_ss)}}</span>
-                            <div class="latest-title color-orange">{{doc.title_t.length > 75 ? (doc.title_t | limitTo : 75) + "..." :  doc.title_t }} </div>
-                     </a>
-                 </div>
-                </div>
-
-
-        </div>-->
-
-        <!--<div class="clearfix"></div>-->
-
-        <!--<div class="col-xs-12">
-
-
-                <h1>Latest National Records</h1>
-
-                <div ng-repeat="doc in rawNationalDocs" >
-                    <div class="latest" ng-class="{'latest-even-row':$even}">
-                        <a  href="/database/{{getDocumentId(doc)}}" class="latest-link">
-                        <span class="latest-date"> {{doc.createdDate_dt | formatDate}} </span> |
-                        <span class="latest-country"> {{doc.government_EN_t}} </span> |
-                        <span class="latest-schema"> {{doc.schema_EN_t | schemaName}} </span>
-                        <div class="latest-title">{{doc.title_t}} </div>
-                     </a>
-                 </div>
-                </div>
-
-                <hr>
-        </div>-->
-
-        <!--<div class="col-xs-12">
-
-
-                <h1>Latest Virtual Library Records</h1>
-
-                <div ng-repeat="doc in rawRefDocs">
-                    <div class="latest" ng-class="{'latest-even-row':$even}">
-                        <a  href="/database/{{doc.schema_s == 'resource' ? '' : doc.schema_EN_t + '/'}}{{getDocumentId(doc)}}" class="latest-link">
-                            <span class="latest-date"> {{doc.createdDate_dt | formatDate}}</span>
-                            <span class="latest-schema">  | {{doc.schema_s | schemaName}}</span>
-                            <span class="latest-schema" ng-show="doc.resourceTypes_CEN_ss">  | {{getResourceType(doc.resourceTypes_CEN_ss)}}</span>
-                            <div class="latest-title color-orange">{{doc.title_t.length > 75 ? (doc.title_t | limitTo : 75) + "..." :  doc.title_t }} </div>
-                     </a>
-                 </div>
-                </div>
-
-
-        </div>-->
-
-    <!--</div>
-</div>-->
-
-
-
-
-<!--
-<div class="container">
-    <div class="row" >
-
-
-        <div class="col-md-12">
-            <div class="home-col">
-
-                <h3 style="text-align:justify;">The Access and Benefit-sharing Clearing-house (ABSCH) is a platform for exchanging information on ABS and a key tool for facilitating the implementation of the Nagoya Protocol by enhancing transparency on procedures for access and on the utilization of genetic resources, and in this way increasing the opportunities for benefit-sharing.
-                    <a href="/about#about" style="font-size:80%;padding:3px;line-height:16px;" class="btn btn-small btn-primary">read more</a></h3>
-            </div>
-
-        </div> -->
-
-         <!--  <div class="col-md-4">
-            <div class="home-col">
-                <h3 class="headline1"><a href="">Participate.</a></h3>
-                <p>The value of the ABS-CH lays in the information published by Parties and others. For the ABS-CH to become an important tool for implementing the Protocol and enhancing transparency, certainty and clarity on access and benefit-sharing, information published by Parties and others needs to be comprehensive and reliable.</p>
-            </div>
-        </div> -->
-
-  <!--       <div class="col-md-4">
-            <div class="home-col">
-                <h3 class="headline1"><a href="">Development of the pilot phase</a></h3>
-                <p>The ABS-CH is currently in its pilot phase and needs your participation and feedback so that it can be fully operational by the time of entry into force of the Nagoya Protocol.
-                 </p>
-                <p>
-                    <a href="http://absch.tumblr.com/"><i class="fa fa-forward"></i> Follow our development <strong>blog</strong> here</a>
-                </p>
-            </div>
-        </div> -->
-
-
-
-    <!-- </div>
-</div>
-
-
-<hr> -->
-
-
-
-<div class="container" style="padding-top:50px;" >
-    <!-- <div class="row" style="min-height: 300px;">
-        <div class="col-md-4" >
-            <div class="home-col">
-                <h3>Regional Workshops</h3>
-                <ul style="list-style:none;padding:0;margin:0;">
-                    <li><a href="/workshops/lac"> <strong>LAC Region:</strong> 24 - 28 March - Montevideo, Uruguay</a></li>
-                </ul>
-                <br/>
-                <ul style="list-style:none;padding:0;margin:0;">
-                    <li><a href="/workshops/caribbean"> <strong>Caribbean:</strong> 19 - 22 May - Georgetown, Guyana</a></li>
-                </ul>
-            </div>
-
-        </div>
-
-        <div class="col-md-4">
-            <div class="home-col">
-                <h3>Help and Resources</h3>
-                <ul style="list-style:none;padding:0;margin:0;">
-                    <li><a href="/database/record?documentID=96771B7C-F7F0-8999-D71A-DD374ED0CA7E&documentSchema=RESOURCE">
-                        <strong>ABSCH Presentation</strong> Overview and Introduction to the ABSCH </a></li>
-                        <br/>
-                        <li><a href="/database/record?documentID=19A19C95-AE9A-0A02-8971-6D9BAB0D897C&documentSchema=RESOURCE">
-                        <strong>ABS Clearing-House Theatre</strong> How ABSCH and the Nagoya Protocol work together to facilitate access and benefit-sharing of genetic resources</a></li>
-                        <br/>
-                        <li><a href="http://127.0.0.1:2010/database/record?documentID=2390847B-5985-F355-DF2A-78C2CDBBF286&documentSchema=RESOURCE">
-                        <strong>ABS Clearing-House Brochure</strong></a></li>
-
-                </ul>
-
-
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="home-col">
-                <h3>Online Dicussion Forums</h3>
-                <ul style="list-style:none;padding:0;margin:0;">
-                        <li><a href="/about#iac"> <i class="fa fa-comment-o"></i> <strong>IAC</strong> Discussion Forum</a></li>
-                        <br>
-                        <li><a href="/about#portal10"> <i class="fa fa-comment-o"></i> <strong>Art. 10</strong> Discussion Forum</a></li>
-                </ul>
-
-            </div>
-        </div>
-
-    </div> -->
-
-
-
-    <div class="row">
-
-        <div class="col-xs-12">
-             <h3 style="border-bottom:1px solid #BBB;">About the Nagoya Protocol</h3>
-        </div>
-        <div class="clearfix"></div>
-
-        <div class="col-md-8">
-        <div class="home-col">
-
-                The Nagoya Protocol on Access to Genetic Resources and the Fair and Equitable Sharing of Benefits Arising from their Utilization to the Convention on Biological Diversity is an international agreement which aims at sharing the benefits arising from the utilization of genetic resources in a fair and equitable way, including by appropriate access to genetic resources and by appropriate transfer of relevant technologies, taking into account all rights over those resources and to technologies, and by appropriate funding, thereby contributing to the conservation of biological diversity and the sustainable use of its components.
-                <a href="http://www.cbd.int/abs"> <i class="fa fa-forward"></i> read more at: www.cbd.int/abs</a>
-            </div>
-            <br>
-
-
-
-
-
-            <!-- <div class="home-col">
-                <h3>News from the development blog</h3>
-                    <div class="feeds">
-                    <ul>
-
-                        <li ng-repeat="feed in feeds | filter:filterText" style="padding-top:10px;">
-                            <h4><a href="{{feed.link}}" target="_new" style="color:#287fcb;font-size:14px;font-weight:bold;">{{feed.title}}</a></h4>
-                            <p class="text-left">{{feed.contentSnippet}}</p>
-                            <span class="small" >{{feed.publishedDate | date:'dd MMM yyyy'}}</span>
-                        </li>
-                    </ul>
-                    </div>
-            </div> -->
-        </div>
-
-        <div class="col-md-4">
-            <div class="home-col">
-                    <div class="text-center"   ng-show="entryintoforce">
-
-                      <div layout="row" layout-padding layout-margin style="padding-top:0;margin-top:0;">
-                        <div flex class="bg-green">  <span class="color-white" style="font-weight:bold; font-size:32px;text-shadow: 0 1px 2px rgba(0, 0, 0, .6);">{{yearsSinceEntry}}</span> <br> <span style="color:#EEE;text-transform: uppercase;font-weight:bold;font-size:14px;">years</span></div>
-                        <div flex class="bg-green">  <span class="color-white" style="font-weight:bold; font-size:32px;text-shadow: 0 1px 2px rgba(0, 0, 0, .6);">{{monthsSinceEntry}}</span> <br> <span style="color:#EEE;text-transform: uppercase;font-weight:bold;font-size:14px;">months</span></div>
-                        <div flex class="bg-green">  <span class="color-white" style="font-weight:bold; font-size:32px;text-shadow: 0 1px 2px rgba(0, 0, 0, .6);">{{daysSinceEntry}}</span> <br> <span style="color:#EEE;text-transform: uppercase;font-weight:bold;font-size:14px;">days</span></div>
-                      </div>
-
-                      <div style="color:#666;text-transform:uppercase;font-weight:bold;font-size:14px;">
-                       Since the entry into force of the Nagoya Protocol</div>
-                     </div>
-                <!--    <h3>Meetings</h3>
-             <div class="feeds">
-                    <ul>
-                        <li ng-repeat="meeting in meetings.response.docs" style="padding-top:10px;">
-                             <span class="small" >{{meeting.startDate_s | date:'dd MMM'}} - {{meeting.endDate_s | date:'dd MMM yyyy'}}
-                            </span>
-                            <h4><a href="{{meeting.url_ss[0]}}" target="_new" style="color:#287fcb;font-size:14px;font-weight:bold;">
-                            {{meeting.title_t}}</a></h4>
-                            <span>
-                            <strong>{{meeting.eventCountry_EN_t}}</strong></span>
-                        </li>
-                    </ul>
-                    </div> -->
-            </div>
-        </div>
-
-    </div>
-
-<!--
-    <div class="row" style="margin-top:50px;">
-        <div class="col-xs-12">
-            <h3  style="border-bottom:1px solid #BBB;"> Help with the ABSCH</h3>
-        </div>
-    </div>
-     <div class="row" style="padding-bottom:20px;padding-top:10px;">
-
-        <div class="col-md-2 col-xs-4">
-
-                <a href="/help/about?question=absch" class="color-litegrey"><div class="help-feature-box1">
-                    <i class="fa fa-star fa-4x color-yellow" ></i><br>
-                    About the ABSCH</div>
-                </a>
-
-            </div>
-
-                <div class="col-md-2 col-xs-4">
-
-                <a href="/help/presentations/" class="color-grey"><div class="help-feature-box1">
-                        <i class="fa fa-desktop fa-4x"></i><br>
-                    Presentations and workshops</div>
-                </a>
-
-            </div>
-
-
-            <div class="col-md-2 col-xs-4">
-
-                <a href="/help/tours/" class="color-red"><div class="help-feature-box1">
-                    <i class="fa fa-youtube-play fa-4x"></i><br>
-                     Guided tours</div>
-                </a>
-
-            </div>
-
-
-            <div class="col-md-2 col-xs-4">
-
-                <a href="/help/accounts?question=register" class="color-green"><div class="help-feature-box1">
-                    <i class="fa fa-user fa-4x"></i><br>
-                    Help signing in to your account</div>
-                </a>
-
-            </div>
-            <div class="col-md-2 col-xs-4">
-
-                <a href="/help/accounts?question=register" class="color-blue"><div class="help-feature-box1">
-                        <i class="fa fa-search fa-4x"></i><br>
-                        Help finding information</div>
-                    </a>
-
-            </div>
-            <div class="col-md-2 col-xs-4">
-
-                <a href="/help/register?question=register" class="color-orange"><div class="help-feature-box1">
-                        <i class="fa fa-pencil-square-o fa-4x"></i><br>
-                    Help registering information</div>
-                </a>
-
-            </div>
-
-        </div>-->
-
-</div>
-
-
-<br /><br />

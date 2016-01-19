@@ -17,8 +17,6 @@
     padding: 0 20px 0 0;
     margin:0;
 }
-
-
 .navbar-nav a {margin:0!important;padding:0!important;color:white!important;}
 .navbar-nav a:hover {color:#000!important;}
 .navbar-brand{margin:0!important;padding:0!important;color:white!important;}
@@ -35,12 +33,6 @@
   margin: 0;
 }
 
-/*.dropdown-menu ul{
-
-    padding:10px!important;
-
-}*/
-
 .navbar-toggle{
     border:0;
     color:white;
@@ -53,13 +45,17 @@
     margin-bottom:0;
     border:0;
     z-index:100;
+    border-bottom: 1px solid rgb(231, 231, 231);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.15),0 1px 5px rgba(0,0,0,.075);
 }
 
 .navbar-portal{
     min-height:100px;
+    padding-top:15px;
     margin-bottom:0;
     border:0;
     z-index:90;
+    background-color: #F9F9F9!important;
 }
 .navbar-links{
     min-height:30px;
@@ -76,8 +72,6 @@
     margin-bottom:0;
 }
 
-
-
 .container-cbd{
     /*background: rgba(25, 25, 25, .05);*/
     min-height:26px;
@@ -87,33 +81,46 @@
 
 .container-cbd a{
     color:white;
+    text-shadow: 0 1px 0 rgba(255,255,255,.25);
+    color: #bdbdbd;
 }
 
 .container-portal{
-    /*background: rgba(25, 25, 25, .05);*/
-    min-height:100px;
+
+    /*min-height:30px;*/
     color:white;
     padding-top:5px;
     font-family:alternategotno3dotregular!important;
 
 }
+
 .container-portal a{text-decoration:none;}
 
 .container-links{
     /*background: rgba(25, 25, 25, .05);*/
-    min-height:26px;
+    min-height:40px;
     /*color:white;*/
-    padding-top:5px;
+    padding-top:10px;
 }
 .container-links a:not(.skipNotificationPanel){
     color:#ddd;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     font-weight: bold;
-    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.6);
+    /*text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.6);*/
+    font-size: 16px;
 }
+.container-links li{
+    padding-right:25px;
+    padding-left:25px;
+    border-right:1px solid #999;
+}
+.container-links .last{
+    border-right:0!important;
+}
+
 .container-links a:hover{
     color:#000;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     font-weight: bold;
     text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.6);
 }
@@ -143,12 +150,6 @@
 .dropdown-menu > li > a:hover{
     color:#428bca!important;
 }
-
-
-
-
-
-.footer{}
 
 .footer-page{
     min-height:30px;

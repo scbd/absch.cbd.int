@@ -1,0 +1,54 @@
+<div>
+    <nav id="PortalLinks1" class="navbar navbar-links navbar-default navbar-static-top bg-darkgrey" >
+        <div class="container-fluid container-links color-grey">
+            <div class="navbar-header">
+            </div>
+            <div id="navbar" class="clearfix">
+                <ul class="nav navbar-nav pull-left" >
+                    <div class="bold color-orange1 hidden-md hidden-lg" ng-if="!production_env">
+                        <span ng-show="development_env"> DEV</span>
+                        <span ng-show="training_env"> TRG</span>
+                    </div>
+                    <div class="bold color-orange1 hidden-xs" ng-if="!production_env">
+                        <span ng-show="development_env"> DEVELOPMENT</span>
+                        <span ng-show="training_env"> TRAINING</span>
+                    </div>
+                    <!-- <li>
+                        <a href="/"> <i class="fa fa-home visible-xs visible-sm"></i>
+                            <span class="hidden-xs hidden-sm"> Home </span>
+                        </a>
+                    </li> -->
+                    <li>
+                        <a href="/"> <i class="fa fa-home visible-xs visible-sm"></i>
+                            <span class="hidden-xs hidden-sm"> About the ABSCH</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/find"> <i class="fa fa-search visible-xs visible-sm"></i>
+                            <span class="hidden-xs hidden-sm"> Search</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/register"> <i class="fa fa-pencil-square-o visible-xs visible-sm"></i>
+                            <span class="hidden-xs hidden-sm"> Submit</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/"> <i class="fa fa-home visible-xs visible-sm"></i>
+                            <span class="hidden-xs hidden-sm"> Country Profiles </span>
+                        </a>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right ">
+                    <li class="last pull-right">
+                        <a href="/help" ng-class="{'link-active' : getClass('/help')}">
+                            <span class="hidden-xs hidden-sm">&nbsp;Help</span>
+                        </a>
+                    </li>
+                    <li class="pull-right" ng-if="training_env||development_env"><a href="/forums" ng-class="{'link-active' : getClass('/forums')}"><i class="fa fa-comments"></i><span class="hidden-xs hidden-sm">&nbsp;Forums</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>

@@ -28,6 +28,9 @@ a:active{color: #000;}
 }
 
 
+
+
+
 /*#dropdownNotification a:focus {
 background-color: white;
 }*/
@@ -168,9 +171,6 @@ background-color: white;
 
 .color-darkgrey{
     color:#333;
-}
-.color-litegrey{
-    color:#999;
 }
 .color-black{
     color:#111;
@@ -1017,4 +1017,9 @@ footer .logo {
 }
 #anchorTop{
     z-index:1001;
+}
+
+
+.label{
+    padding: .2em .6em .2em!important;
 }

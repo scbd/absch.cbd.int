@@ -1,0 +1,20 @@
+
+<nav class="navbar navbar-portal navbar-default navbar-static-top bg-white hidden-xs hidden-sm">
+     <!-- ng-class="{'training-bg': !production_env}"> -->
+    <div class="container-fluid container-portal" style="padding:0 20px;">
+        <div class="row">
+            <div class="col-xs-9">
+                <a href="/" class="color-cbdgreen">
+                    <span style="position:relative;top:10px;font-size:46px;" >
+                        <span class="color-black" ng-if="production_env"> <img src="/app/img/cbd-spine.png" style="height:42px;position:relative;top:-5px;padding:0 5px 0 0;margin:0;"/>  The Access and Benefit-Sharing Clearing-House</span>
+                         <span class="color-orange" ng-if="training_env"> <img src="/app/img/cbd-spine.png" style="height:42px;position:relative;top:-5px;padding:0 5px 0 0;margin:0;"/>  ABSCH <span class="color-black">TRAINING</span></span>
+                          <span class="color-orange" ng-if="development_env"> <img src="/app/img/cbd-spine.png" style="height:42px;position:relative;top:-5px;padding:0 5px 0 0;margin:0;"/>  ABSCH <span class="color-black">DEVELOPMENT</span></span>
+                    </span>
+                </a>
+            </div>
+            <div class="col-xs-3 hidden-xs hidden-sm" >
+                <img src="/app/img/cbd-logo-green-en.svg" class="pull-right" style="padding: 0; margin:5px 0 0 0;height:60px;" />
+            </div>
+        </div>
+    </div>
+</nav>
