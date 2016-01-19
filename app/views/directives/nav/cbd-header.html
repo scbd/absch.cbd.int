@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 <div>
     
+=======
+<div >
+>>>>>>> update to home and template
     <nav class="navbar navbar-cbd navbar-default bg-white navbar-static-top" id="anchorTop" >
         <div class="alert alert-info" style="margin-bottom: 0px; text-align: center" ng-show="showEmailVerificationMessage">
             <button type="button" ng-click="showEmailVerificationMessage = undefined" class="close" style="opacity: 1;">&times;</button>
@@ -24,7 +28,11 @@
            <ul class="navlist navbar-right">
             <li class="pull-right" style="margin-right:0;padding-right:0;">
                     <a class="set-languages" data-toggle="dropdown" href="#">
+<<<<<<< HEAD
                         <span class="badge badge-default color-white" ">en</span>
+=======
+                        <span class="badge badge-default color-white" style="position:relative;top:-2px;">en</span>
+>>>>>>> update to home and template
                     </a>
                     <ul class="dropdown-menu" role="menu">
                         <li class="disabled" style="font-weight:bold;color:#BBB;padding-left:3px;">LANGUAGES</li>
@@ -41,7 +49,11 @@
                    <a id="dLabel" ng-href="/register#notifications" class="notification-btn hidden-sm hidden-md hidden-lg">
                         <span ng-show="(notifications|filter:isUnread).length > 0 " >
                             <i class="fa fa-bell"></i>
+<<<<<<< HEAD
                             <span class="label label-danger">{{(notifications|filter:isUnread).length}}</span>
+=======
+                            <span class="label label-default">{{(notifications|filter:isUnread).length}}</span>
+>>>>>>> update to home and template
                         </span>
                         <span ng-show="(notifications|filter:isUnread).length <= 0">
                             <i class="fa fa-bell-o" class="bg-grey"></i>
@@ -51,7 +63,11 @@
                     <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" ng-href="#" class="notification-btn hidden-xs">
                         <span ng-show="(notifications|filter:isUnread).length > 0 " >
                             <i class="fa fa-bell"></i>
+<<<<<<< HEAD
                             <span class="label label-danger">{{(notifications|filter:isUnread).length}}</span>
+=======
+                            <span class="label label-default">{{(notifications|filter:isUnread).length}}</span>
+>>>>>>> update to home and template
                         </span>
                         <span ng-show="(notifications|filter:isUnread).length <= 0">
                             <i class="fa fa-bell-o" class="bg-grey"></i>
@@ -107,6 +123,7 @@
     </nav>
 
     <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="loginDialog">
+<<<<<<< HEAD
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header center">
@@ -114,6 +131,15 @@
                     <h1 class="modal-title" id="myModalLabel">Sign in to the ABSCH</h1>
                 </div>
                 <div class="modal-body" style="color:white;background-color:#1FA65D;border-bottom-left-radius:6px;border-bottom-right-radius:6px;">
+=======
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Welcome to ABSCH</h4>
+                </div>
+                <div class="modal-body dropshadow" style="color:white;background-color:#1FA65D; height:350px;">
+>>>>>>> update to home and template
                     <div login on-authorization="closePopup()"></div>
                 </div>
             </div>

@@ -1,12 +1,16 @@
 <div class="row" ng-show="!user.isAuthenticated" >
-    <div class="col-xs-12">
-        <div>    
+
+    <div class="col-xs-7" style="height:250px" >
+        <div style="padding:1px 10px 10px 10px; margin:0;">
+            <h1 style="text-align:left;">
+                Sign in to the <span class="color-white">ABS-CH</span>
+            </h1>
             <div class="alert alert-danger" ng-show="errorInvalid">
                 <strong>Login failed.</strong> The email address and password combination you entered is incorrect.
             </div>
             <div class="alert alert-danger" ng-show="errorTimeout">
                 <strong>Operation failed.</strong> The service is not available. Please try again later.
-            </div>    
+            </div>
             <form name="form" ng-submit="doSignIn()" class="ng-pristine ng-invalid ng-invalid-required" >
                 <div class="form-group">
                     <div class="input-group" >
@@ -27,7 +31,7 @@
                              <span class="color-litegrey" style="text-shadow:none"> | </span>
                              <a href="https://accounts.cbd.int/password/reset" style="text-decoration:none;" class="color-white" target="_new">Forgot password?</a>
                         </label>
-                    
+
                         <button type="submit" class="btn btn-primary bold" ng-disabled="waiting" >Sign in</button>
 
                         <div class="spinner ng-hide" ng-show="waiting">

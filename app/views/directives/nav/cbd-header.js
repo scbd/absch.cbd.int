@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 define(['app', 'underscore', , 'angular-localizer', 'scbd-angularjs-services', 'scbd-angularjs-filters',
     '/app/views/directives/login.directive.html.js',
     '/app/views/directives/xuser-notifications.js',
@@ -67,4 +68,28 @@ define(['app', 'underscore', , 'angular-localizer', 'scbd-angularjs-services', '
         };
 
     });
+=======
+define(['app', 'underscore', ], function (app, _) {
+        app.directive('cbdHeader', function () {
+                return {
+                        restrict: 'EAC',
+                        replace: true,
+                        // transclude: true,
+                        templateUrl: '/app/views/directives/nav/cbd-header.html',
+                        scope: {
+                                uid: '@',
+                        },
+                        link: ['$scope', '$q', '$element', function ($scope, $q, $element) {
+
+                        }]
+                        , controller: ['$scope','$rootScope', '$q','$element','$http', '$filter',
+                                function ($scope, $rootScope, $q, $element, $http, $filter) {
+
+
+
+                        }]
+                };
+
+        });
+>>>>>>> update to home and template
 });
