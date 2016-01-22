@@ -54,13 +54,11 @@
     <div class="modal fade" id="editContact" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header" ng-class="{'bg-orange':organizationOnly, 'bg-blue':!organizationOnly}">
                     <button type="button" class="close" aria-hidden="true" ng-click="closeContact()"><i class="material-icons">close</i></button>
-                    <!-- <h2 class="modal-title" id="myModalLabel">
-                        <span ng-hide="exisiting">Add a new <span ng-if="!organizationOnly">Contact or </span>Organization</span>
-                        <span ng-show="exisiting" >Select exisiting <span ng-if="!organizationOnly">Contact or </span>organization</span>
+                    <h2 class="modal-title" id="myModalLabel">
+                        <span>Select exisiting <span ng-if="!organizationOnly">Contact or </span>organization</span>
                     </h2>
-                    <br>
+                    <!-- <br>
                     <label ng-hide="selectExisting || organizationOnly" class="radio-inline">
                         <input type="radio" ng-model="edition.contact.type" value="organization" name="editionContactType" />Organization</label>
                     <label ng-hide="selectExisting || organizationOnly" class="radio-inline">
@@ -96,8 +94,8 @@
 
                     <div ng-show="!showFilter" class="row"></br>
                         <div ng-repeat="contact in existingContacts | filter:isSelected">
-
-                            <div class="col-xs-12">
+                            <div class="clearfix" ng-if="$index % 3 == 0"></div>
+                            <div class="col-xs-4">
                                 <div class="well">
                                     <i class="fa fa-spinner fa-spin" ng-if="contact.loading"></i>
                                     <div class="pull-right">
@@ -109,10 +107,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="modal-footer">
-                                <a type="button" class="btn btn-default" ng-click="closeContact()">Close</a>
-                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="modal-footer">
+                            <a type="button" class="btn btn-default" ng-click="closeContact()">Close</a>
                         </div>
                     </div>
                 </div>

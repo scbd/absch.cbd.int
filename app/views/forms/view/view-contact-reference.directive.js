@@ -7,11 +7,21 @@ app.directive("viewContactReference", [function () {
 		replace: true,
 		transclude: false,
 		scope: {
-			document: "=ngModel",
+			model: "=ngModel",
 			locale: "=",
 			target: "@linkTarget"
 		},
-		controller: ["$scope", function ($scope) {
+		controller: ["$scope", 'IStorgage', function ($scope, storage) {
+
+			$scope.$watch("model", function(newVal, oldVal) {
+				if(newVal && newVal!=oldVal){
+					storage.documents.get(identifier)
+						.then(function(data){
+							$scope.document = data.data;
+						});
+				}
+			});
+
 
 			$scope.isPerson = function() {
 

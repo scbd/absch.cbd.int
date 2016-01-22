@@ -66,119 +66,6 @@ app.directive("fieldEmbedContact", [ function () {
 				return workingContacts;
 			};
 
-			//============================================================
-			//
-			//
-			//============================================================
-			// $scope.editContact = function(index) {
-			//
-			// 	var contacts = $scope.getContacts();
-			//
-			// 	var cnaContact = contacts[index];
-			// 	if(cnaContact && cnaContact.type == 'CNA'){
-			// 		alert('Please use the Competent National Authority form to edit this contact.');
-			// 		return;
-			// 	}
-			//
-			// 	if(index<0 || index>=contacts.length) {
-			// 		var id = guid();
-			// 		if(!$scope.organizationOnly)
-			// 			$scope.edition = {
-			// 				contact : {
-			// 							header: {
-			// 										schema   : "contact",
-			// 										languages: ["en"]
-			// 									},
-			// 							type: "organization" ,
-			// 							source: id
-			// 						  },
-			// 				index   : -1
-			// 			};
-			// 		else
-			// 			$scope.edition = {
-			// 				contact : {
-			// 							header: {
-			// 										identifier : id,
-			// 										schema   : "organization",
-			// 										languages: ["en"]
-			// 									},
-			// 							type: "organization",libraries: [{ identifier: "cbdLibrary:abs-ch" }]
-			// 						  },
-			// 				index   : -1
-			// 			};
-			// 	}
-			// 	else {
-			//
-			// 		$scope.edition = {
-			// 			contact : angular.fromJson(angular.toJson(contacts[index])),
-			// 			index   : index
-			// 		};
-			// 		if($scope.organizationOnly){
-			// 			$scope.edition.contact.type = "organization";
-			// 		}
-			// 	}
-			// };
-
-			//============================================================
-			//
-			//
-			//============================================================
-			// $scope.saveContact = function(saveContact) {
-			//
-			// 	if(!$scope.edition)
-			// 		return;
-			//
-			// 	var contact = $scope.edition.contact;
-			// 	var empty = /^\s*$/;
-			//
-			// 	if(contact.firstName !==undefined && (!contact.firstName  || empty.test(contact.firstName ))) delete contact.firstName;
-			// 	if(contact.middleName!==undefined && (!contact.middleName || empty.test(contact.middleName))) delete contact.middleName;
-			// 	if(contact.lastName  !==undefined && (!contact.lastName   || empty.test(contact.lastName  ))) delete contact.lastName;
-			//
-			// 	var saveOperation;
-			// 	//save the contact to db for furture use.
-			// 	if(saveContact!=false){
-			// 		var cont = _.clone(contact)
-			// 		saveOperation = saveContactDraft(cont);
-			// 	}
-			// 	$q.when(saveOperation)
-			// 	.then(function(){
-			//
-			// 		if(!$scope.showFilter && !$scope.organizationOnly){
-			// 			delete contact.government;
-			// 			delete contact.header;
-			// 		}
-			// 			// console.log(contact);
-			// 		if($scope.multiple) {
-			//
-			// 			var contacts =  _.clone($scope.getContacts());
-			//
-			// 			if($scope.edition.index>=0)
-			// 				contacts[$scope.edition.index] = contact;
-			// 			else
-			// 				contacts.push(contact);
-			//
-			// 			$scope.model = contacts;
-			//
-			//
-			// 		}
-			// 		else {
-			//
-			// 			$scope.model = contact;
-			// 		}
-			// 		$scope.existingContacts = null;
-			// 		$scope.edition = null;
-			//
-			// 		//clear the dropdown list display text which remains after the dialog is closed.
-			// 		$scope.$broadcast('clearSelectSelection');
-			//
-			// 	})
-			// 	.catch(function(error){
-			// 		if(error.data && error.data.message){
-			// 			$scope.errorMessage =  error.data.message;
-			// 		}
-			// 	});
-			// };
 
 			//============================================================
 			//
@@ -282,6 +169,200 @@ app.directive("fieldEmbedContact", [ function () {
 				});
 			}
 
+			$scope.selectContact = function(contact){
+				// $scope.buttonText = "Show existing";
+				// $scope.selectExisting = !$scope.selectExisting;
+				// $scope.edition.contact = contact;
+				// $scope.saveContact(false);
+				if(!$scope.showFilter && !$scope.organizationOnly){
+					delete contact.government;
+					delete contact.header;
+				}
+					// console.log(contact);
+				if($scope.multiple) {
+
+					var contacts =  _.clone($scope.getContacts());
+
+					// if($scope.edition.index>=0)
+					// 	contacts[$scope.edition.index] = contact;
+					// else
+						contacts.push(contact.identifier);
+
+					$scope.model = contacts;
+
+
+				}
+				else {
+
+					$scope.model = contact.identifier;
+				}
+
+				$scope.showContacts();
+				//clear the dropdown list display text which remains after the dialog is closed.
+				$scope.$broadcast('clearSelectSelection');
+
+			}
+
+			$scope.isSelected = function(contact){
+				var selected = false;
+
+				$scope.getContacts().forEach(function(cont){
+					if(cont.source && cont.source == contact.source)
+							selected = true;
+					else if($scope.organizationOnly && contact.header && contact.header.identifier == cont.header.identifier)
+							selected = true;
+				});
+				return !selected;
+			}
+
+		 	$scope.isOrganization=function(entity){
+		 	//console.log(entity)		;
+				return entity && entity.type == "organization";
+			}
+			$scope.isPerson=function(entity){
+				// console.log(entity);
+				return entity && entity.type == "person";
+			}
+			$scope.isCNA=function(entity){
+				return entity && entity.type == "CNA";
+			}
+
+			$scope.showButtons=function(entity){
+
+				if($scope.isCNA(entity))
+					return false;
+
+				return	commonjs.isUserInRole($scope.$root.getRoleName('AbsPublishingAuthorities'))||
+						commonjs.isUserInRole($scope.$root.getRoleName('AbsNationalAuthorizedUser'))||
+						commonjs.isUserInRole($scope.$root.getRoleName('AbsNationalFocalPoint'))||
+						//commonjs.isUserInRole($scope.$root.getRoleName('abschiac')) ||
+						commonjs.isUserInRole($scope.$root.getRoleName('AbsAdministrator')) ||
+						commonjs.isUserInRole($scope.$root.getRoleName('Administrator'));
+
+			}
+
+			//////////////////////////////
+
+		}]
+	};
+}]);
+
+});
+
+//============================================================
+//
+//
+//============================================================
+// $scope.editContact = function(index) {
+//
+// 	var contacts = $scope.getContacts();
+//
+// 	var cnaContact = contacts[index];
+// 	if(cnaContact && cnaContact.type == 'CNA'){
+// 		alert('Please use the Competent National Authority form to edit this contact.');
+// 		return;
+// 	}
+//
+// 	if(index<0 || index>=contacts.length) {
+// 		var id = guid();
+// 		if(!$scope.organizationOnly)
+// 			$scope.edition = {
+// 				contact : {
+// 							header: {
+// 										schema   : "contact",
+// 										languages: ["en"]
+// 									},
+// 							type: "organization" ,
+// 							source: id
+// 						  },
+// 				index   : -1
+// 			};
+// 		else
+// 			$scope.edition = {
+// 				contact : {
+// 							header: {
+// 										identifier : id,
+// 										schema   : "organization",
+// 										languages: ["en"]
+// 									},
+// 							type: "organization",libraries: [{ identifier: "cbdLibrary:abs-ch" }]
+// 						  },
+// 				index   : -1
+// 			};
+// 	}
+// 	else {
+//
+// 		$scope.edition = {
+// 			contact : angular.fromJson(angular.toJson(contacts[index])),
+// 			index   : index
+// 		};
+// 		if($scope.organizationOnly){
+// 			$scope.edition.contact.type = "organization";
+// 		}
+// 	}
+// };
+
+//============================================================
+//
+//
+//============================================================
+// $scope.saveContact = function(saveContact) {
+//
+// 	if(!$scope.edition)
+// 		return;
+//
+// 	var contact = $scope.edition.contact;
+// 	var empty = /^\s*$/;
+//
+// 	if(contact.firstName !==undefined && (!contact.firstName  || empty.test(contact.firstName ))) delete contact.firstName;
+// 	if(contact.middleName!==undefined && (!contact.middleName || empty.test(contact.middleName))) delete contact.middleName;
+// 	if(contact.lastName  !==undefined && (!contact.lastName   || empty.test(contact.lastName  ))) delete contact.lastName;
+//
+// 	var saveOperation;
+// 	//save the contact to db for furture use.
+// 	if(saveContact!=false){
+// 		var cont = _.clone(contact)
+// 		saveOperation = saveContactDraft(cont);
+// 	}
+// 	$q.when(saveOperation)
+// 	.then(function(){
+//
+// 		if(!$scope.showFilter && !$scope.organizationOnly){
+// 			delete contact.government;
+// 			delete contact.header;
+// 		}
+// 			// console.log(contact);
+// 		if($scope.multiple) {
+//
+// 			var contacts =  _.clone($scope.getContacts());
+//
+// 			if($scope.edition.index>=0)
+// 				contacts[$scope.edition.index] = contact;
+// 			else
+// 				contacts.push(contact);
+//
+// 			$scope.model = contacts;
+//
+//
+// 		}
+// 		else {
+//
+// 			$scope.model = contact;
+// 		}
+// 		$scope.existingContacts = null;
+// 		$scope.edition = null;
+//
+// 		//clear the dropdown list display text which remains after the dialog is closed.
+// 		$scope.$broadcast('clearSelectSelection');
+//
+// 	})
+// 	.catch(function(error){
+// 		if(error.data && error.data.message){
+// 			$scope.errorMessage =  error.data.message;
+// 		}
+// 	});
+// };
+
 			// function saveContactDraft(contact){
 			// 		if(!contact)
 			// 			throw "Invalid document";
@@ -347,84 +428,3 @@ app.directive("fieldEmbedContact", [ function () {
 			//
 			// 	return $q.all([a,b]);
 			// }
-
-
-			$scope.selectContact = function(contact){
-				// $scope.buttonText = "Show existing";
-				// $scope.selectExisting = !$scope.selectExisting;
-				// $scope.edition.contact = contact;
-				// $scope.saveContact(false);
-				if(!$scope.showFilter && !$scope.organizationOnly){
-					delete contact.government;
-					delete contact.header;
-				}
-					// console.log(contact);
-				if($scope.multiple) {
-
-					var contacts =  _.clone($scope.getContacts());
-
-					// if($scope.edition.index>=0)
-					// 	contacts[$scope.edition.index] = contact;
-					// else
-						contacts.push(contact);
-
-					$scope.model = contacts;
-
-
-				}
-				else {
-
-					$scope.model = contact;
-				}
-
-				$scope.showContacts();
-				//clear the dropdown list display text which remains after the dialog is closed.
-				$scope.$broadcast('clearSelectSelection');
-
-			}
-
-			$scope.isSelected = function(contact){
-				var selected = false;
-
-				$scope.getContacts().forEach(function(cont){
-					if(cont.source && cont.source == contact.source)
-							selected = true;
-					else if($scope.organizationOnly && contact.header && contact.header.identifier == cont.header.identifier)
-							selected = true;
-				});
-				return !selected;
-			}
-
-		 	$scope.isOrganization=function(entity){
-		 	//console.log(entity)		;
-				return entity && entity.type == "organization";
-			}
-			$scope.isPerson=function(entity){
-				// console.log(entity);
-				return entity && entity.type == "person";
-			}
-			$scope.isCNA=function(entity){
-				return entity && entity.type == "CNA";
-			}
-
-			$scope.showButtons=function(entity){
-
-				if($scope.isCNA(entity))
-					return false;
-
-				return	commonjs.isUserInRole($scope.$root.getRoleName('AbsPublishingAuthorities'))||
-						commonjs.isUserInRole($scope.$root.getRoleName('AbsNationalAuthorizedUser'))||
-						commonjs.isUserInRole($scope.$root.getRoleName('AbsNationalFocalPoint'))||
-						//commonjs.isUserInRole($scope.$root.getRoleName('abschiac')) ||
-						commonjs.isUserInRole($scope.$root.getRoleName('AbsAdministrator')) ||
-						commonjs.isUserInRole($scope.$root.getRoleName('Administrator'));
-
-			}
-
-			//////////////////////////////
-
-		}]
-	};
-}]);
-
-});
