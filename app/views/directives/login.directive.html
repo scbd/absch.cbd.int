@@ -1,21 +1,17 @@
 <div class="row" ng-show="!user.isAuthenticated" >
-    <div class="col-xs-7" style="height:250px" >
-        <div style="padding:1px 10px 10px 10px; margin:0;">
-            <h1 style="text-align:left;">
-                Sign in to the <span class="color-white">ABS-CH</span>
-            </h1>
+    <div class="col-xs-12">
+        <div>    
             <div class="alert alert-danger" ng-show="errorInvalid">
                 <strong>Login failed.</strong> The email address and password combination you entered is incorrect.
             </div>
-
             <div class="alert alert-danger" ng-show="errorTimeout">
                 <strong>Operation failed.</strong> The service is not available. Please try again later.
-            </div>
+            </div>    
             <form name="form" ng-submit="doSignIn()" class="ng-pristine ng-invalid ng-invalid-required" >
                 <div class="form-group">
                     <div class="input-group" >
                         <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                        <input type="text" class="form-control ng-pristine ng-invalid ng-invalid-required" id="inputEmail" name="email" ng-model="email" placeholder="registered email address" required>
+                        <input type="text" class="form-control ng-pristine ng-invalid ng-invalid-required" id="inputEmail" name="email" ng-model="email" placeholder="email address" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -25,14 +21,14 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="checkbox pull-right">
-                        <label class="pull-right">
-                            <input type="checkbox" ng-model="rememberMe" class="ng-pristine ng-valid"> <a style="text-decoration:none;" class="color-white">Remember me</a> <span class="color-white">|</span>
-                            <a href="https://accounts.cbd.int/password/reset" style="text-decoration:none;" class="color-white" target="_new">Forgot password?</a>
-                        </label>
-                    </div>
                     <div>
-                        <button type="submit" class="btn btn-primary" ng-disabled="waiting" >Sign in</button>
+                        <label class="pull-right">
+                             <a href="#" style="text-decoration:none;" class="color-white" ng-click="actionSignup()"  ng-disabled="waiting" >No account?</a>
+                             <span class="color-litegrey" style="text-shadow:none"> | </span>
+                             <a href="https://accounts.cbd.int/password/reset" style="text-decoration:none;" class="color-white" target="_new">Forgot password?</a>
+                        </label>
+                    
+                        <button type="submit" class="btn btn-primary bold" ng-disabled="waiting" >Sign in</button>
 
                         <div class="spinner ng-hide" ng-show="waiting">
                             <div class="bounce1"></div>
@@ -43,11 +39,5 @@
                 </div>
             </form>
         </div>
-    </div>
-    <div class="col-xs-5" style="border-left:5px solid #ccc;height:250px;margin-top:5px;">
-        <div style="padding:1px 10px 15px 10px; margin:0;">
-        <h1>No account? <h2>Get started. Create your CBD account by signing up with <span class="color-white">accounts.cbd.int</span>.</h2>
-        <a href="#" style="width:100px;" ng-click="actionSignup()" class="btn btn-primary" ng-disabled="waiting" >Sign up</a></h1>
-
     </div>
 </div>

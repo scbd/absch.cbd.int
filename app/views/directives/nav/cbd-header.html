@@ -1,4 +1,6 @@
-<div >
+<div>
+    <iframe id="authenticationFrame" src="https://accounts.cbd.int/app/authorize.html" style="display:none"></iframe>
+
     <nav class="navbar navbar-cbd navbar-default bg-white navbar-static-top" id="anchorTop" >
         <div class="alert alert-info" style="margin-bottom: 0px; text-align: center" ng-show="showEmailVerificationMessage">
             <button type="button" ng-click="showEmailVerificationMessage = undefined" class="close" style="opacity: 1;">&times;</button>
@@ -106,13 +108,13 @@
     </nav>
 
     <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="loginDialog">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Welcome to ABSCH</h4>
+                <div class="modal-header center">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="font-size:42px;">&times;</button>
+                    <h1 class="modal-title" id="myModalLabel">Sign in to the ABSCH</h1>
                 </div>
-                <div class="modal-body dropshadow" style="color:white;background-color:#1FA65D; height:350px;">
+                <div class="modal-body" style="color:white;background-color:#1FA65D;border-bottom-left-radius:6px;border-bottom-right-radius:6px;">
                     <div login on-authorization="closePopup()"></div>
                 </div>
             </div>

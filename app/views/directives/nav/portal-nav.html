@@ -1,5 +1,12 @@
 <div>
-    <nav id="PortalLinks1" class="navbar navbar-links navbar-default navbar-static-top bg-darkgrey" >
+    <style>
+        @media (max-width: 768px){
+            .navbar-nav>li {
+                float: left;
+            }
+        }
+    </style>
+    <nav id="PortalLinks1" class="navbar navbar-links navbar-default navbar-static-top" >
         <div class="container-fluid container-links color-grey">
             <div class="navbar-header">
             </div>
@@ -13,13 +20,13 @@
                         <span ng-show="development_env"> DEVELOPMENT</span>
                         <span ng-show="training_env"> TRAINING</span>
                     </div>
-                    <!-- <li>
-                        <a href="/"> <i class="fa fa-home visible-xs visible-sm"></i>
-                            <span class="hidden-xs hidden-sm"> Home </span>
+                    <li class="visible-xs visible-sm">
+                         <a href="/">
+                            <strong class="color-white">ABSCH</strong>
                         </a>
-                    </li> -->
+                    </li>
                     <li>
-                        <a href="/"> <i class="fa fa-home visible-xs visible-sm"></i>
+                         <a href="/about"> <i class="fa fa-question-circle  visible-xs visible-sm"></i>
                             <span class="hidden-xs hidden-sm"> About the ABSCH</span>
                         </a>
                     </li>
@@ -34,7 +41,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/"> <i class="fa fa-home visible-xs visible-sm"></i>
+                        <a href="/countries"> <i class="fa fa-globe visible-xs visible-sm"></i>
                             <span class="hidden-xs hidden-sm"> Country Profiles </span>
                         </a>
                     </li>
@@ -43,11 +50,29 @@
                 <ul class="nav navbar-nav navbar-right ">
                     <li class="last pull-right">
                         <a href="/help" ng-class="{'link-active' : getClass('/help')}">
-                            <span class="hidden-xs hidden-sm">&nbsp;Help</span>
+                            <span class="hidden-xs">&nbsp;Help</span>
                         </a>
                     </li>
                     <li class="pull-right" ng-if="training_env||development_env"><a href="/forums" ng-class="{'link-active' : getClass('/forums')}"><i class="fa fa-comments"></i><span class="hidden-xs hidden-sm">&nbsp;Forums</span></a></li>
                 </ul>
+            </div>
+        </div>
+    </nav>
+        <nav class="navbar navbar-breadcrumbs navbar-default navbar-static-top"  ng-hide="breadcrumbs.get().length == 1" >
+        <div class="container-fluid container-breadcrumbs">
+            <div class="color-litegrey" style="padding-left:10px;">
+                    <a href="http://www.cbd.int" class="margin-right-xs">CBD</a>
+                    <span ng-repeat="breadcrumb in breadcrumbs.get()" >
+                        &nbsp;&nbsp;<i class="fa fa-chevron-right color-litegrey"></i>&nbsp;&nbsp;
+                        <span ng-if="!breadcrumb.param">
+                            <a ng-if="!$last" ng-href="{{ breadcrumb.path }}" ng-bind="breadcrumb.label" class="margin-right-xs"></a>
+                            <span ng-if="$last" ng-bind="breadcrumb.label"></span>
+                        </span>
+                        <span ng-if="breadcrumb.param">
+                            <a ng-if="!$last" ng-href="{{ breadcrumb.path }}" ng-bind="breadcrumb.label" class="margin-right-xs"></a>
+                            <span ng-if="$last" ng-bind="breadcrumb.label"></span>
+                        </span>
+                    </span>
             </div>
         </div>
     </nav>

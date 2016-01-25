@@ -4,55 +4,60 @@
 <!-- <script src="/app/views/directives/login.directive.html.js"></script> -->
 <div ng-controller="IndexController">
     <div smooth-scroll duration="100" offset="200"></div>
+    
+    <style>
+        @media (max-width: 768px) {
+                #Jumbotron {height:auto!important;}
+                #Parties {top:0!important;}
+                #Parties .col-xs-12{text-align: left;}
+            }
+          @media (min-width: 768px) {
+                #Parties {top:352px!important;}
+            }
+          @media (min-width: 992px) {
+                #Parties {top:382px!important;}
+            }
+    </style>
 
-    <div class="bg-texture-green" style="border-top:1px solid #555;border-bottom:2px solid #ddd;height:600px;">
-        <div style="background-image:url('/app/img/placeholder-map.png');height:596px;position:absolute;width:100%;background-size:2000px;background-repeat: no-repeat;background-position: center ;">
-        </div>
-        <div style="background-image:url('/app/img/placeholder.png');"></div>
+    <div id="Jumbotron" class="bg-texture-green" style="border-top:1px solid #555;border-bottom:2px solid #ddd;height:600px;">
+        <div id="Map" class="hidden-xs" style="background-image:url('/app/img/placeholder-map.png');height:596px;position:absolute;width:100%;background-size:2000px;background-repeat: no-repeat;background-position: center ;"></div>
         <div class="container" style="color:white;padding:20px;">
 
-            <div class="row  bg-green" style="padding:20px;">
+            <div id="Tagline" class="row  bg-green" style="padding:20px;">
                 <div class="col-md-12">
                     <div class="home-col dropshadow">
-                        <!-- <h3 class="headline1"><a href="/about#about">What is the ABS-CH?</a></h3> -->
                         <h3 style="text-align:justify;">The Access and Benefit-sharing Clearing-house (ABSCH) is a platform for exchanging information on ABS and a key tool for facilitating the implementation of the Nagoya Protocol.
                         </h3>
                     </div>
                 </div>
             </div>
 
-            <div style="position:relative;top:368px;" class="row bg-green">
-                <div class="col-xs-4 text-center special-font" style="padding-top:8px;padding-bottom:10px;" ng-mouseleave="viewParties = false;">
-                    <span class="label label-primary" style="font-size:24px;" ng-show="!viewParties">70</span> &nbsp;
-                    <a style="font-size:24px;" href="#" class="color-white" ng-click="viewParties = true;" ng-show="!viewParties">Parties</a>
-                    <a style="font-size:24px;" href="#" class="color-white" ng-show="viewParties">View country profiles</a>
+            <div id="Parties" style="position:relative;top:0;" class="row bg-green">
+                <div class="col-xs-12 col-sm-4 text-center special-font" style="padding-top:8px;padding-bottom:10px;" >
+                    <span class="label label-primary" style="font-size:24px;">70</span> &nbsp;<br class="visible-sm">
+                    <a style="font-size:24px;" href="#" class="color-white">Parties</a>
                 </div>
-                <div class="col-xs-4 text-center special-font" style="padding-top:8px;padding-bottom:10px;" ng-mouseleave="viewNParties = false;">
-                  <span class="label label-default" style="font-size:24px;" ng-show="!viewNParties">70</span> &nbsp;
-                    <a style="font-size:24px;" href="#" class="color-white" ng-click="viewNParties = true;" ng-show="!viewNParties">Non-Parties</a>
-                    <a style="font-size:24px;" href="#" class="color-white" ng-show="viewNParties">View country profiles</a>
+                <div class="col-xs-12 col-sm-4 text-center special-font" style="padding-top:8px;padding-bottom:10px;" >
+                  <span class="label label-default" style="font-size:24px;">70</span> &nbsp; <br class="visible-sm">
+                    <a style="font-size:24px;" href="#" class="color-white">Non-Parties</a>
                 </div>
-                <div class="col-xs-4 text-center special-font" style="padding-top:8px;padding-bottom:10px;"  ng-mouseleave="viewRatified = false;">
-                    <span class="label label-default" style="font-size:24px;" ng-show="!viewRatified">70</span> &nbsp;
-                    <a style="font-size:24px;" href="#" class="color-white" ng-click="viewRatified = true;" ng-show="!viewRatified">Ratified&nbsp;not&nbsp;yet&nbsp;Party</a>
-                    <a style="font-size:24px;" href="#" class="color-white" ng-show="viewRatified">View country profiles</a>
+                <div class="col-xs-12 col-sm-4 text-center special-font" style="padding-top:8px;padding-bottom:10px;">
+                    <span class="label label-default" style="font-size:24px;">70</span> &nbsp; <br class="visible-sm">
+                    <a style="font-size:24px;" href="#" class="color-white">Ratified&nbsp;not&nbsp;yet&nbsp;Party</a>
                 </div>
             </div>
         </div>
     </div>
 
     <div style="padding:20px">
-        
-        
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-12">
-                    <span home-country-dashboard></span>
-                </div>
-            </div>
+      
+        <div class="container-fluid" style="padding:0;">
+            <h3 style="padding-left:15px;padding-bottom:0;margin-bottom:0;">ABSCH Record Overview</h3>
+            <div style="margin-left:15px;padding-left:15px;border-top:1px solid #BBB;"></div>
+            <home-country-dashboard></home-country-dashboard>
         </div>
 
-        <div class="container-fluid" style="padding-top:50px;">
+        <div class="container-fluid" style="margin-top:50px;">
             <div class="row">
 
                 <div class="col-md-4">
@@ -97,7 +102,7 @@
             </div>
         </div>
 
-        <div class="container-fluid" style="padding-top:50px;">
+        <div class="container-fluid" style="margin-top:50px;">
             <div class="row">
                 <div class="col-xs-12">
                     <h3 style="border-bottom:1px solid #BBB;">About the Nagoya Protocol</h3>

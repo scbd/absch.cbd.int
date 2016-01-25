@@ -613,14 +613,6 @@ padding:3px;
     font-size:18px;
 
 }
-
-@media (max-width: 992px) {
-
-	.footer{
-		height: 680px;
-	}
-}
-
 .footer-links li{
 	font-size:12px;
 	list-style: none;
@@ -1023,3 +1015,6 @@ footer .logo {
 .label{
     padding: .2em .6em .2em!important;
 }
+.info {cursor:pointer;}
+
+.modal{}

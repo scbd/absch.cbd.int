@@ -1,0 +1,386 @@
+[{
+    "_id": "55fc619ac543eb1b6c31480b",
+    "tags": ["1. About the ABS-CH"],
+    "referenceTerm": [],
+    "title": "What is the ABS-CH?",
+    "description": {
+        "en": " <div>&#10;                       <p>&#10;                           The Access and Benefit-sharing Clearing-House (ABS-CH) is a platform for exchanging information on access and benefit-sharing established by <a href=\"https://www.cbd.int/abs/text/articles/default.shtml?sec=abs-14\" target=\"_blank\">Article 14 </a>of the Protocol, as part of clearing-house mechanism under <a href=\"https://www.cbd.int/abs/text/articles/default.shtml?sec=abs-18\" target=\"_blank\">Article 18, paragraph 3</a> of the Convention. The ABS Clearing-House is a key tool for facilitating the implementation of the Nagoya Protocol, by enhancing legal certainty and transparency on procedures for access, and for monitoring the utilization of genetic resources along the value chain, including through the internationally recognized certificate of compliance. By hosting relevant information regarding ABS, the Clearing-House offers opportunities for connecting users and providers of genetic resources and associated traditional knowledge.&#10;                       </p>&#10;                       <p>&#10;                           Parties are to provide and update the information required under the Protocol through this information-exchange system.&#10;                       </p>&#10;                     </div>"
+    },
+    "related": ["55fc68bb4189390f00a219e3", "560991ef0197380e0070ae8c", "56098c800197380e0070ae8b", "55fc69f235a3a80d00e20da3", "55fc6cfa4189390f00a219ef"],
+    "sequence": 1
+}, {
+    "_id": "55fc691a4189390f00a219e5",
+    "tags": ["1. About the ABS-CH"],
+    "referenceTerm": [],
+    "description": {
+        "en": "&#10;                       <div>&#10;                         <p>&#10;                             Although free text searches are easy to implement and carry out, problems sometimes arise when retrieving the full&#10;                             range of results from the incorporation of information in various languages, the use of synonyms and inconsistent&#10;                             terminology and spelling. Therefore, where appropriate, the ABS Clearing-House makes use of a controlled vocabulary,&#10;                             in order to facilitate the future ability to conduct searches in a number of different languages and return consistent&#10;                             search results. This is essentially a thesaurus of standardized words used to search and register information with the&#10;                             database in the ABS Clearing-House. Controlled vocabularies have been developed in harmony across the wider CBD clearinghouse&#10;                             mechanisms, with a view to enabling searches of information.&#10;                         </p>&#10;                       </div>"
+    },
+    "title": "What does controlled vocabulary mean?",
+    "related": ["55fc693335a3a80d00e20da1", "55fc697d4189390f00a219e8", "55fc6a3a4189390f00a219eb"],
+    "sequence": 10
+}, {
+    "_id": "55fc6c9035a3a80d00e20da4",
+    "tags": ["2. Account"],
+    "referenceTerm": [],
+    "title": "I am not sure if my account is still active?",
+    "description": {
+        "en": "<p>&#10;                        The easiest way to check if you are registered accounts.cbd.int is to go to the&#10;                        <a href=\"https://accounts.cbd.int/password/reset\">forgot password page</a> and enter the email&#10;                        associated with that account. If you have an account you will be emailed by the system a link to re-activate your password.&#10;                     </p>"
+    },
+    "related": ["55fc6d1b4189390f00a219f0", "55fc6d7c4189390f00a219f1"],
+    "sequence": 4
+}, {
+    "_id": "55fc6cd54189390f00a219ee",
+    "tags": ["2. Account"],
+    "referenceTerm": [],
+    "title": "Do I need a CBD account for searching information in the ABS-CH?",
+    "description": {
+        "en": " <p>&#10;                         No. You can search information and consult the country profiles without requiring a CBD account.&#10;                      </p>"
+    },
+    "sequence": 1
+}, {
+    "_id": "56097ed8c18aee0f00b05bfc",
+    "tags": ["7. Monitoring the utilization of genetic resources"],
+    "referenceTerm": [],
+    "title": "I want to know more about document authenticity and security for the internationally recognized certificate of compliance ( IRCC)",
+    "description": {
+        "en": "<p>In order to ensure the authenticity of an IRCC, all downloadable certificates include a link to the relevant online record which is maintained in the ABS Clearing-House. The use of the ABS Clearing-House as a third party server that keeps an original copy of the document allows anyone utilizing the document to instantly confirm the authenticity of its contents.</p>"
+    },
+    "related": ["56097e9bc18aee0f00b05bfb"],
+    "sequence": 2
+}, {
+    "_id": "55fc68bb4189390f00a219e3",
+    "tags": ["1. About the ABS-CH"],
+    "referenceTerm": [],
+    "description": {
+        "en": "<div>&#10;                         <p>&#10;                             Each Party to the Nagoya Protocol is required to make available the following types of information to the ABS Clearing-House in accordance with <a href=\"http://www.cbd.int/abs/text/articles/default.shtml?sec=abs-14\" target=\"_new\">Article 14, paragraph 2</a>: &#10;                             </p><ul>&#10;                                 <li>(a) Legislative, administrative and policy measures on access and benefit-sharing;</li>&#10;                                 <li>&#8232;(b) Information on the national focal point and competent national authority or authorities; and&#8232;</li>&#10;                                 <li>(c) Permits or their equivalent issued at the time of access as evidence of the decision to grant prior informed consent and of the establishment of mutually agreed terms.</li>&#10;                             </ul>&#10;                         <p></p>&#10;&#10;                         <p>&#10;                           In accordance with <a href=\"http://www.cbd.int/abs/text/articles/default.shtml?sec=abs-13\" target=\"_new\">Article 13, paragraph 4</a>, the contact information of a Party’s national focal point and its competent national authority or authorities shall be provided to the Secretariat no later than the date of entry into force of the Protocol, and Parties shall subsequently notify the Secretariat of any changes. The Secretariat will make this information available through the ABS Clearing-House.&#8232;&#10;                         </p>&#10;&#10;                         <p>&#10;                           Where a Party designates more than one competent national authority, it must provide to the Secretariat relevant information on the respective responsibilities of those authorities along with its notification designating the authority. Where applicable, such information shall, at a minimum, specify which competent authority is responsible for the genetic resources sought. &#8232;&#10;                         </p>&#10;&#10;                         <p>&#10;                            <a href=\"http://www.cbd.int/abs/text/articles/default.shtml?sec=abs-14\" target=\"_new\">Article 14, paragraph 2</a>, also requires Parties to make available through the ABS Clearing-House any information required by this Protocol. This would include:&#8232;&#10;                               </p><ul>&#10;                                 <li>(a) Measures to inform potential users of traditional knowledge associated with genetic resources about their obligations for access to and fair and equitable sharing of benefits arising from the utilization of such knowledge (<a href=\"http://www.cbd.int/abs/text/articles/default.shtml?sec=abs-12\" target=\"_new\">Article 12, paragraph 2</a>);</li>&#10;                                 <li>&#8232;(b) Information provided to designated checkpoints that collect or receive, as appropriate, relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources, including from internationally recognized certificates of compliance, where they are available (<a href=\"http://www.cbd.int/abs/text/articles/default.shtml?sec=abs-17\" target=\"_new\">Article 17, paragraph 1 (a) (iii)</a>); and&#8232;</li>&#10;                                 <li>(c) Information on capacity-building and development initiatives at national, regional and international levels that should be shared through the ABS Clearing-House with a view to promoting synergy and coordination on capacity-building and development for access and benefit-sharing (<a href=\"http://www.cbd.int/abs/text/articles/default.shtml?sec=abs-22\" target=\"_new\">Article 22, paragraph 6</a>). &#8232;</li>&#10;                             </ul>&#10;                         <p></p>&#10;&#10;                         <p>&#10;                             The ABS Clearing-House will also need to provide access to other types of information that Parties may provide relevant to the implementation of the Protocol. Additional information specified in the Protocol (<a href=\"http://www.cbd.int/abs/text/articles/default.shtml?sec=abs-14\" target=\"_new\">Article 14, paragraph 3</a>) includes&#10;                             </p><ul>&#10;                                 <li>(a) Relevant competent authorities of indigenous and local communities, and information as so decided; </li>&#10;                                 <li>(b) Model contractual clauses; </li>&#10;                                 <li>(c) Methods and tools developed to monitor genetic resources; and </li>&#10;                                 <li>(d) Codes of conduct and best practices.&#8232;</li>&#10;                             </ul>&#10;                         <p></p>&#10;&#10;                         <p>&#10;                             Finally, <a href=\"http://www.cbd.int/abs/text/articles/default.shtml?sec=abs-14\" target=\"_new\">Article 14, paragraph 2</a>, provides that Parties shall make information to the ABS Clearing-House any information required pursuant to the decisions taken by the Conference of the Parties to the Protocol.&#10;                         </p>&#10;&#10;                       </div>"
+    },
+    "title": "Information-sharing obligations under the Protocol",
+    "related": ["55fc619ac543eb1b6c31480b", "55fc69f235a3a80d00e20da3", "55fc6a3a4189390f00a219eb", "55fc6cfa4189390f00a219ef"],
+    "sequence": 2
+}, {
+    "_id": "55fc68fa4189390f00a219e4",
+    "tags": ["1. About the ABS-CH"],
+    "referenceTerm": [],
+    "title": "What is the relationship between the ABS-CH and the clearing-house mechanism of the CBD?",
+    "description": {
+        "en": "<div>&#10;                         <p>&#10;                             The ABS-CH is established as part of the clearing-house mechanism (CHM) of the Convention.&#10;                             The CHM (<a href=\"http://chm.cbd.int\" target=\"_new\">http://chm.cbd.int</a>) has been developed&#10;                             as a single and unified platform which also supports the dedicated clearing-houses of the Cartagena&#10;                             Protocol on Biosafety (BCH) and the Nagoya Protocol (ABS-CH).&#10;                             You can access all clearing-houses with the same CBD account that you can get from (<a href=\"http://accounts.cbd.int\" target=\"_new\">http://accounts.cbd.int</a>).&#10;                         </p>&#10;&#10;                         <p>&#10;                             However, each of the clearing-houses has a dedicated portal for searching and registering information in order to&#10;                             respond to the specific needs of the Parties with regards to implementation of the different treaties.&#10;                         </p>&#10;&#10;                           <p>&#10;                            The CHM of the Convention was established in accordance with <a href=\"http://www.cbd.int/abs/text/articles/default.shtml?sec=abs-18\" target=\"_new\">Article 18(3)</a> of the Convention to promote and&#10;                            facilitate technical and scientific cooperation on all biodiversity issues. The ABS-CH, on the other hand, was&#10;                            established under <a href=\"http://www.cbd.int/abs/text/articles/default.shtml?sec=abs-14\" target=\"_new\">Article 14 </a> of the Nagoya Protocol with a special focus on the information that must be exchanged&#10;                            under the Protocol. The ABS-CH plays a key role in supporting implementation of the Protocol by contributing to&#10;                            transparency and certainty on procedures for access and monitoring of the utilization of genetic resources.&#10;                            Because of this role, the ABS-CH has some characteristics, features and functions which are specific to this portal.&#10;                         </p>&#10;&#10;                         <p>&#10;                             Another major difference between the CHM and the ABS-CH is that, with regards to the latter,&#10;                             <a href=\"http://www.cbd.int/abs/text/articles/default.shtml?sec=abs-14\" target=\"_new\">Article 14</a> of the Protocol&#10;                             enumerates a variety of categories of information which Parties to the Protocol are legally obliged to provide through&#10;                             the ABS-CH. There are no such legal requirements for Parties to the Convention to make information available through the CHM.&#10;                         </p>&#10;&#10;                         <p>&#10;                             Common formats and rules of operation need to be compatible and, where possible, harmonized across the clearing-houses. The common&#10;                              formats developed for the ABS Clearing-House make use, as much as possible,&#10;                             of predefined text or controlled vocabularies that are compatible with the controlled vocabularies of the CHM and the BCH.&#10;                         </p>&#10;&#10;                       </div>"
+    },
+    "related": ["55fc691a4189390f00a219e5", "55fc6a3a4189390f00a219eb", "55fc68bb4189390f00a219e3"],
+    "sequence": 6
+}, {
+    "_id": "55fc693335a3a80d00e20da1",
+    "tags": [],
+    "referenceTerm": [],
+    "title": "What does metadata mean?",
+    "description": {
+        "en": "<div>&#10;                         <p>&#10;                             The ABS-CH makes use of metadata. This are descriptive information used to identify the ABS-CH record.&#10;                             Some metadata are created automatically when information is submitted to the ABS-CH, such as the owner of the record,&#10;                             the status of the record, the date of submission as well as the category of the common format used.&#10;                         </p>&#10;                         <p>&#10;                             In addition to the automatically generated metadata, the person registering the records will also be expected to supply&#10;                             additional metadata to describe the information in the records by selecting descriptive terms from a list of predefined&#10;                             keywords (e.g. the elements describing the content of a legislative measure chosen from a controlled vocabulary).  The&#10;                             collection of this information is meant to facilitate the registration and retrieval of information in the ABS-CH.&#10;                         </p>&#10;&#10;                       </div>"
+    },
+    "related": ["55fc691a4189390f00a219e5", "55fc6a3a4189390f00a219eb"],
+    "sequence": 11
+}, {
+    "_id": "55fc694e4189390f00a219e6",
+    "tags": ["1. About the ABS-CH"],
+    "referenceTerm": [],
+    "title": "I have limited internet access, how can I participate in the ABS-CH?",
+    "description": {
+        "en": "<div>&#10;&#10;                         <p>&#10;                             It is preferable that the information is registered online through the submit information page.&#10;                             However, users with limited Internet access may complete offline common formats and submit them,&#10;                             duly signed by the publishing authority, to the Secretariat by email or fax (however, common formats&#10;                             should only be faxed if sending them by email is impossible).  The Secretariat would then register offline&#10;                             submissions of information in the ABS Clearing-House on behalf of Parties.&#10;                         </p>&#10;&#10;                         <p>&#10;                             Parties with limited Internet access can request the Secretariat to provide an offline version of the ABS-CH in a portable data storage device (this service is not currently available yet).&#10;                         </p>&#10;&#10;                         <p>&#10;                             Please note that these options are available only to users with no Internet access or poor Internet connectivity&#10;                         </p>&#10;&#10;                       </div>"
+    },
+    "related": ["55fc6a3a4189390f00a219eb", "55fc6cfa4189390f00a219ef"],
+    "sequence": 6
+}, {
+    "_id": "55fc69664189390f00a219e7",
+    "tags": ["1. About the ABS-CH"],
+    "referenceTerm": [],
+    "title": "What are the minimum requirements to use the ABS-CH?",
+    "description": {
+        "en": "<div>&#10;&#10;                         <p>&#10;                             The ABS-CH works best with the most recent internet browsers (Firefox, Chrome or Internet Explorer).&#10;                             Please make sure you have the most recent version of your favourite browser installed on your computer:&#10;                           </p><ul>&#10;                               <li>For Firefox:<a href=\" http://www.mozilla.org/en-US/firefox/new/\" target=\"_blank\"> http://www.mozilla.org/en-US/firefox/new/</a></li>&#10;                               <li>For Chrome: <a href=\"https://www.google.com/intl/en/chrome/browser/ei\" target=\"_blank\">https://www.google.com/intl/en/chrome/browser/ei</a></li>&#10;                               <li>For Internet explorer:  <a href=\"http://windows.microsoft.com/en-ca/internet-explorer/download-ie\" target=\"_blank\">http://windows.microsoft.com/en-ca/internet-explorer/download-ie</a></li>&#10;                           </ul>&#10;&#10;                             If you experience problems installing a new browser version on your computer, one option could be to try downloading &#34;Chrome Portable&#34; which does not require installation.&#10;                         <p></p>&#10;&#10;                       </div>"
+    },
+    "related": ["55fc6d7c4189390f00a219f1"],
+    "sequence": 8
+}, {
+    "_id": "55fc69964189390f00a219e9",
+    "tags": ["1. About the ABS-CH"],
+    "referenceTerm": [],
+    "title": "I am not a Party, can I still publish information on the ABS-CH?",
+    "description": {
+        "en": "&#10;&#10;                         <p>&#10;                             <a href=\"http://www.cbd.int/abs/text/articles/default.shtml?sec=abs-24\" target=\"_new\">Article 24</a> of the Protocol provides that Parties shall&#10;                             encourage non-Parties to adhere to the Protocol and to contribute appropriate information to the ABS-CH. Non-Parties to&#10;                             the Protocol can publish records in the ABS-CH but that country’s status as a Party or non-Party is clearly indicated in the record.</p>&#10;&#10;                        <p><br/></p>&#10;&#10;                       "
+    },
+    "related": ["56097972c18aee0f00b05bf6", "560979f6c18aee0f00b05bf7", "56097c6bc18aee0f00b05bf8", "56097ccbc18aee0f00b05bf9"],
+    "sequence": 5
+}, {
+    "_id": "55fc69ad35a3a80d00e20da2",
+    "tags": ["8. Forums"],
+    "referenceTerm": [],
+    "title": "Article 10 Discussion Forum",
+    "description": {
+        "en": "<div>&#10;                         <p>&#10;                           Article 10 of the Nagoya Protocol requires the Parties to consider the need for and modalities of a global multilateral benefit-sharing mechanism to address the fair and equitable sharing of benefits derived from the utilization of genetic resources and traditional knowledge associated with genetic resources that occur in transboundary situations or for which it is not possible to grant or obtain prior informed consent. <br/><br/>The article also states that benefits shared by users of genetic resources and traditional knowledge associated with genetic resources through this mechanism shall be used to support the conservation of biological diversity and the sustainable use of its components globally.<br/> <br/>In decision XI/1, the Parties to the Convention on Biological Diversity mandated a number of activities concerning Article 10 of the Nagoya Protocol to take place during the current inter-sessional period. This portal on Article 10 is intended to provide up-to-date information on these activities.<br/> <br/>&#10;                           The online discussion groups on Article 10 are now complete. All the messages posted during the discussions will remain available through the <a href=\"/forums/art10_groups\">'Discussion groups'</a> page. <br/><br/>The next step in the process mandated by decision XI/1 is the expert group meeting. Participants in the expert group on Article 10 will be selected from among those who took part in the online discussion groups and will be notified in due course. <br/><br/>The expert group meeting will be held from 17 to 19 September 2013 in Montreal.&#10;&#10;                           </p><h2><span>Link to the </span><a href=\"/forums/art10_groups\"><span>Article 10 Discussion Forum <i class=\"fa fa-comment-o\"></i></span> </a></h2>&#10;                         <p></p>&#10;                       </div>"
+    },
+    "sequence": 1
+}, {
+    "_id": "55fc69c54189390f00a219ea",
+    "tags": ["8. Forums"],
+    "referenceTerm": [],
+    "title": "ABS-CH IAC Discussion Forum",
+    "description": {
+        "en": "&#10;                         <p>Following the entry into force of the Nagoya Protocol on 12 October 2014, the first meeting of the COP-MOP was held from 13 to 17 October 2014 in Pyeongchang, Republic of Korea. The COP-MOP decided to establish an informal advisory committee (IAC) as an advisory body to assist the Executive Secretary with the implementation of the ABS Clearing-House and to provide technical guidance with respect to the resolution of technical and practical issues arising from its ongoing development. </p><p>It was decided that the IAC would hold at least one meeting in the coming intersessional period, as well as informal online discussions, as needed, and address technical issues related to feedback received, including issues related to the internationally recognized certificate of compliance and the checkpoint communiqué, and report on the outcomes of its work to the second meeting of the COP-MOP (decision NP-1/2, paragraph 3).</p><p>The IAC is composed of 15 experts, primarily from Parties of the Nagoya Protocol, selected on the basis of nominations provided by Parties and taking into account regional balance, relevant experience and engagement in the ABS Clearing-House in accordance with decision NP-1/2, paragraph 2. The first meeting of the IAC will be held in Montreal from 28 to 30 October 2015.</p>&#10;                         <h2>Link to the <a href=\"/forums/iac\"> <strong>IAC</strong> Discussion Forum <i class=\"fa fa-comment-o\"></i> </a></h2>&#10;                       "
+    },
+    "sequence": 2
+}, {
+    "_id": "55fc69f235a3a80d00e20da3",
+    "tags": ["1. About the ABS-CH"],
+    "referenceTerm": [],
+    "title": "What type of information is available in the ABS-CH?",
+    "description": {
+        "en": "&#10;                        <p>&#10;                            The information found in the <a href=\"/search\">search</a> can be divided into three major clusters:</p><p><span><b>1. Country Profiles</b> present all national ABS information made available by a country, including information on the ABS measures country matrix, when available.</span></p><p><span><b>2. National records</b> are published by Governments and include national information relevant for the implementation of the Nagoya Protocol as well as information Parties are obliged to provide in accordance with the Protocol.</span></p><p><b>3. Reference records</b> include a number of ABS relevant resources and information. They can be submitted by any registered user of the ABS Clearing-House.</p>&#10;&#10;                      "
+    },
+    "related": ["55fc619ac543eb1b6c31480b", "55fc68bb4189390f00a219e3", "55fc6a3a4189390f00a219eb", "55fc6cfa4189390f00a219ef"],
+    "sequence": 3
+}, {
+    "_id": "55fc6a3a4189390f00a219eb",
+    "tags": ["1. About the ABS-CH"],
+    "referenceTerm": [],
+    "title": "What are common formats?",
+    "description": {
+        "en": "<p> In the CHM common formats are standardized forms to facilitate submission of information in a harmonized manner. The&#10;                        ABS-CH common formats make use of controlled vocabulary and metadata in order to facilitate the consistent registering&#10;                        and retrieval of information in the ABS-CH. Common formats are available online in the register information page&#10;                        and offline in MS word format </p> &#10;                    <h4 class=\"color-blue\">National Records</h4>&#10;                        <ul class=\"list-group\">&#10;                        <li class=\"list-group-item\"> <i class=\"fa fa-file-word-o\"></i><a href=\"http://www.cbd.int/abs/doc/commonformats/ABSCH-MSR.doc\"> Legislative, administrative or policy measures<i class=\"fa fa-download pull-right\"></i></a></li>&#10;                        <li class=\"list-group-item\"> <i class=\"fa fa-file-word-o\"></i><a href=\"http://www.cbd.int/abs/doc/commonformats/ABSCH-CPC.doc\"> Checkpoint Communiqué<i class=\"fa fa-download pull-right\"></i></a></li>&#10;                        <li class=\"list-group-item\"> <i class=\"fa fa-file-word-o\"></i><a href=\"http://www.cbd.int/abs/doc/commonformats/ABSCH-CNA.doc\"> Competent National Authority<i class=\"fa fa-download pull-right\"></i></a></li>&#10;                        <li class=\"list-group-item\"> <i class=\"fa fa-file-word-o\"></i><a href=\"http://www.cbd.int/abs/doc/commonformats/ABSCH-IRCC.doc\"> Internationally Recognized Certificate of Compliance<i class=\"fa fa-download pull-right\"></i></a></li>&#10;                        <li class=\"list-group-item\"> <i class=\"fa fa-file-word-o\"></i><a href=\"http://www.cbd.int/abs/doc/commonformats/ABSCH-CP.doc\"> Checkpoint<i class=\"fa fa-download pull-right\"></i></a></li>&#10;                        <li class=\"list-group-item\"> <i class=\"fa fa-file-word-o\"></i><a href=\"http://www.cbd.int/abs/doc/commonformats/ABSCH-NDB.doc\"> National Websites and Database<i class=\"fa fa-download pull-right\"></i></a></li>&#10;                        <li class=\"list-group-item\"> <i class=\"fa fa-file-word-o\"></i><a href=\"http://www.cbd.int/abs/doc/commonformats/ABSCH-NFP.doc\"> National Focal Point<i class=\"fa fa-download pull-right\"></i></a></li>&#10;                        <li class=\"list-group-item\"> <i class=\"fa fa-file-word-o\"></i><a href=\"http://www.cbd.int/abs/doc/commonformats/ABSCH-PA-NAU.doc\"> Publishing Authority/National Authorised User<i class=\"fa fa-download pull-right\"></i></a></li>&#10;                        </ul>&#10;                    <h4 class=\"color-orange\">Reference Records</h4>&#10;                        <ul class=\"list-group\">&#10;                        <li class=\"list-group-item\"> <i class=\"fa fa-file-word-o\"></i><a href=\"http://www.cbd.int/abs/doc/commonformats/ABSCH-VLR.doc\"> Virtual Library Record<i class=\"fa fa-download pull-right\"></i></a></li>&#10;                        <li class=\"list-group-item\"> <i class=\"fa fa-file-word-o\"></i><a href=\"http://www.cbd.int/abs/doc/commonformats/ABSCH-A19-20.docx\"> Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and Standards <i class=\"fa fa-download pull-right\"></i></a></li>&#10;                        <li class=\"list-group-item\"> <i class=\"fa fa-file-word-o\"></i><a href=\"http://www.cbd.int/abs/doc/commonformats/ABSCH-CPP.doc\">  Community protocols and procedures and customary laws<i class=\"fa fa-download pull-right\"></i></a></li>&#10;                        </ul>"
+    },
+    "related": ["55fc691a4189390f00a219e5", "55fc68bb4189390f00a219e3", "55fc693335a3a80d00e20da1", "55fc69964189390f00a219e9", "55fc694e4189390f00a219e6"],
+    "sequence": 9
+}, {
+    "_id": "55fc6b1e4189390f00a219ec",
+    "tags": [],
+    "referenceTerm": [],
+    "title": "Presentations and workshops",
+    "description": {
+        "en": "<p>Presentation: <a href=\"https://www.cbd.int/abs/doc/absch-introduction.pdf\">General Introduction to the ABSCH</a></p><p>Capacity Building Workshop: <a href=\"/workshops/caribbean\">19 - 22 MAY 2014 - Georgetown, Guyana </a></p><p>Capacity Building Workshop: <a href=\"/workshops/lac\">24 - 28 MAR 2014 - Montevideo, Uruguay - Capacity Building Workshop</a></p>"
+    }
+}, {
+    "_id": "55fc6cfa4189390f00a219ef",
+    "tags": ["2. Account"],
+    "referenceTerm": [],
+    "title": "What kind of information can I register in the ABS-CH having a CBD account?",
+    "description": {
+        "en": "<p>The type of information you can register will depend on your role in the ABS-CH.&#10;                          National records can only be registered by&#10;                          national authorized users (NAUs) or&#10;                          publishing authority (PA) duly designated by a country.</p>&#10;&#10;                       <p>However, any registered user will be able to register&#10;                           Reference Records in the Virtual Library.</p>"
+    },
+    "related": ["55fc68bb4189390f00a219e3", "55fc69964189390f00a219e9", "55fc69f235a3a80d00e20da3"],
+    "sequence": 3
+}, {
+    "_id": "55fc6d1b4189390f00a219f0",
+    "tags": ["2. Account"],
+    "referenceTerm": [],
+    "title": "Forgot your password?",
+    "description": {
+        "en": " <p>&#10;                          You can click here <a href=\"https://accounts.cbd.int/password/reset\">accounts.cbd.int/password/reset</a>.&#10;                          You will be asked for your email address and, if you are a registered user, an email will be sent immediately&#10;                          to your registered email account with instructions to reset your password.&#10;                      </p>"
+    },
+    "related": ["55fc6d7c4189390f00a219f1", "55fc69664189390f00a219e7"],
+    "sequence": 5
+}, {
+    "_id": "55fc6d7c4189390f00a219f1",
+    "tags": ["2. Account"],
+    "referenceTerm": [],
+    "description": {
+        "en": "<p>&#10;                          At the moment, the ABS-CH works best with the most recent versions of internet&#10;                          browsers (Firefox, Chrome or Internet Explorer), and sometimes problems arise from having&#10;                          older versions of the browsers. Please ensure your internet browser meets the minimum requirement recommended to use the ABS-CH.</p><p></p>"
+    },
+    "title": "Problems signing in? Check your internet browser.",
+    "related": ["55fc69664189390f00a219e7"],
+    "sequence": 6
+}, {
+    "_id": "55fc6db935a3a80d00e20da5",
+    "tags": ["2. Account"],
+    "referenceTerm": [],
+    "title": "How do I update my profile?",
+    "description": {
+        "en": "<p>&#10;                         You can update your profile here: <a href=\"https://accounts.cbd.int/profile\">accounts.cbd.int/profile</a>. You will be asked&#10;                         to sign-in before you can update your profile information.&#10;                     </p>&#10;                     <p> Please note, to set up your account as a Publishing Authority (PA) or National Authorized User (NAU) will need to be&#10;                         officially designated by the ABS National Focal Point.</p>"
+    },
+    "related": ["55fc69664189390f00a219e7", "55fc6d1b4189390f00a219f0", "55fc6d7c4189390f00a219f1"],
+    "sequence": 7
+}, {
+    "_id": "55fc697d4189390f00a219e8",
+    "tags": ["5. Languages"],
+    "referenceTerm": [],
+    "title": "In which languages does the ABS-CH operate?",
+    "description": {
+        "en": "&#10;&#10;                         <p>The ABS Clearing-House will soon be operative in the six UN official languages (Arabic, Chinese, English, French, Russian and Spanish). The website and the submission forms (common formats) are translated by the Secretariat. Users of the ABS Clearing-House can include information in the text entries of the common formats in one or more of the six official UN languages. </p><p>In order to introduce information in different languages, you need to select the language button included at the top (or bottom) of the submission page. You can select as many languages as you wish and text boxes for each selected language will appear.</p><p>In addition, users of the ABS Clearing-House can include documents as links or attachments in their original language, including those of indigenous and local communities.</p><p><br/></p>&#10;&#10;                       "
+    },
+    "related": ["56097918c18aee0f00b05bf5", "55fc693335a3a80d00e20da1"],
+    "sequence": 1
+}, {
+    "_id": "56097918c18aee0f00b05bf5",
+    "tags": ["5. Languages"],
+    "referenceTerm": [],
+    "description": {
+        "en": "<div>The purpose of including information in the ABS Clearing-House is mainly (a) providing information to users of genetic resources and associated traditional knowledge on the procedures for access, and (b) facilitating the monitoring of the utilization of genetic resources worldwide.</div><div>It is in the interest of the country to provide the information in several languages in order to reach out to the biggest number of users of genetic resources and associated traditional knowledge and to ensure that they can understand the rules for accessing such resources.</div><div>As IRCC and checkpoints communiqués are meant to facilitate the monitoring of the utilization of genetic resources in an international environment, it is important that checkpoints and national authorities dealing with these records are able to understand their content.</div><div><br/></div>"
+    },
+    "title": "Why is important to provide courtesy translations of the information submitted?",
+    "related": ["55fc697d4189390f00a219e8"],
+    "sequence": 2
+}, {
+    "_id": "56097972c18aee0f00b05bf6",
+    "tags": ["4. Approval process"],
+    "referenceTerm": [],
+    "title": "What are publishing authorities (PA) and national authorized users (NAU)?",
+    "description": {
+        "en": "In order to ensure that the national records published in the ABS Clearing-House are reliable, Parties are required to designate a single person responsible for publishing all national records in the ABS Clearing-House. This function is referred to as publishing authority (PA). The duties of the national focal point (NFP) could also be expanded to incorporate the role of the publishing authority.<div><br/><div>The publishing authority can prepare draft records and publish them directly, or can designate one or more national authorized users (NAUs) to assist them in preparing draft records for their publication in the ABS Clearing-House. Click [here] for more information on the approval process for publishing national or reference records. </div><div><br/></div><div>Publishing authorities and national authorized users can register national and reference records.</div><div><br/></div></div>"
+    },
+    "related": ["560979f6c18aee0f00b05bf7", "56097c6bc18aee0f00b05bf8", "56097ccbc18aee0f00b05bf9"],
+    "sequence": 2
+}, {
+    "_id": "560979f6c18aee0f00b05bf7",
+    "tags": ["4. Approval process"],
+    "referenceTerm": [],
+    "title": "How do I designate a publishing authority (PA) or a national authorized user (NAU) for my country and what are their functions?",
+    "description": {
+        "en": "<b>Designation of the PA</b>&#10;&#9;&#9;   <div><br/></div><div>The national focal point (NFP) on access and benefit-sharing is to communicate the designation of the publishing authority for the ABS Clearing-House through an official written communication addressed to the Executive Secretary of the Convention on Biological Diversity (CBD). </div><div><br/></div><div>A common format has been prepared for designating both the ABS Clearing-House publishing authority (PA) and national authorized users (NAUs). </div><div><br/></div><div>Once the common format is completed it should be sent preferably by e-mail to secretariat@cbd.int, by fax at +1 514-288-6855 or alternatively by postal mail to:</div><div><br/></div><div>Secretariat of the Convention on Biological Diversity</div><div>413 Saint-Jacques Street, Suite 800</div><div>Montreal, Quebec, H2Y 1N9</div><div>Canada</div><div><br/></div><div><b>Functions of the PA</b></div><div><br/></div><div>The PA is responsible for:</div><div><br/></div><div>•&#9;Authorizing the publication of all national records registered in the ABS Clearing-House;</div><div>•&#9;Deleting records already published in the ABS Clearing-House, if necessary;</div><div>•&#9;Ensuring that the information made available on the ABS Clearing-House is complete, relevant and up-to-date; and</div><div>•&#9;Ensuring that no confidential data is published in the ABS Clearing-House. The ABS Clearing-House does not host any confidential information and all information published in the ABS Clearing-House is publicly available and can be accessed by the general public.</div><div><br/></div><div><br/></div><div><b>Designation of NAUs</b></div><div><br/></div><div>The designation of national authorized users can be done at any time by the national focal point or the publishing authority. These designations may be sent to the Secretariat by postal mail, fax or as an attachment to an e-mail and must contain the complete contact details and the appropriate endorsements. Each Party can designate as many national authorized users as they wish. For each national authorized user an individual email-address needs to be provided for identification purposes in the database.</div><div><br/></div><div><b>Functions of NAUs</b></div><div><br/></div><div>The function of national authorized users is to assist the publishing authorities in the preparation of draft national records.</div><div><br/></div><div>National authorized users are only allowed to create and manage draft records which are then forwarded to the publishing authority for publication.</div><div><br/></div><div>The designation of the publishing authority can only be done by the Secretariat upon receipt of an official written communication addressed to the Executive Secretary of the CBD and endorsed by the national focal point (NFP). </div><div><br/></div>"
+    },
+    "related": ["56097972c18aee0f00b05bf6"],
+    "sequence": 3
+}, {
+    "_id": "56097ccbc18aee0f00b05bf9",
+    "tags": ["4. Approval process"],
+    "referenceTerm": [],
+    "description": {
+        "en": "National authorized users (NAUs) can enter information in the forms for national and reference records, review the information and save it as a draft. When a record is ready for publishing, the NAU is to send a request for publication to the publishing authority (PA).<div><br/><div>The PA will then receive a request for approval on the management center (dashboard) of the ABS Clearing-House as well as by email. The PA can then choose to reject the submission (reasons will need to be provided), edit the draft or approve the publication in which case the record will then be published on the ABS Clearing-House.</div><p><span><br/></span></p><p><span>Once the record is published, the NAU will receive an email informing of its publication. The status of the record in the management center will change and be reflected as “published”.</span><br/></p><div><br/></div></div>"
+    },
+    "title": "What is the approval process for publishing national records?",
+    "related": ["56097972c18aee0f00b05bf6", "560979f6c18aee0f00b05bf7", "56097c6bc18aee0f00b05bf8"],
+    "sequence": 1
+}, {
+    "_id": "56097d3dc18aee0f00b05bfa",
+    "tags": ["6. ABS measures"],
+    "referenceTerm": [],
+    "title": "How are regional or multilateral ABS measures registered?",
+    "description": {
+        "en": "Only countries or regional economic integration organizations that are Parties to the Convention (i.e. the EU) have access to register regional or multilateral ABS measures in the ABS Clearing-House. Therefore, it is recommended that one country agrees to register the measure on behalf of the group of countries or a regional organization that share the measure.<div><br/>&#10;&#9;&#9;   <div>When identifying the area of jurisdiction as regional/multilateral measures, all countries of the relevant geographical or political/economic group which are covered by the measure need to be selected from the drop down menu. The list is relatively extensive; therefore it is likely that that the specific group to which the measure applies is already listed. However, if the measure applies to a group of countries that is not covered by any of the existing groups in the list, each of the countries concerned by the measure is to be selected separately.</div><p><br/></p><div>Each of the countries included under the group or individually identified as being covered by the measure will have the measure displayed as part of their legal framework in their country profile.</div><div><br/></div></div>"
+    },
+    "related": ["55fc68bb4189390f00a219e3", "560991ef0197380e0070ae8c"],
+    "sequence": 1
+}, {
+    "_id": "56097e9bc18aee0f00b05bfb",
+    "tags": ["7. Monitoring the utilization of genetic resources"],
+    "referenceTerm": [],
+    "title": "I want to know more about updating, amending or revoking an internationally recognized certificate of compliance (IRCC)",
+    "description": {
+        "en": "<div>The IRCC plays an important role in providing legal certainty regarding the utilization of genetic resources along the value chain. Therefore, special conditions apply for updating, amending or revoking the IRCC in the ABS Clearing-House.</div><div>It may be in the interest of the issuer or holder of a permit to change an IRCC for various reason (e.g. to include additional information, to extend the validity of a permit).</div><p><br/></p><div>In such cases, the ABS Clearing-House provides the following options:</div><div><br/></div><div><span>-For issuing a new permit:</span></div><ul><li>Create a new permit directly or, if minimum changes are required, duplicate an existing record with a view to avoid the need to reintroduce existing information.  </li><li><span>Link the previous permit and the related new one, so they can be displayed together. </span></li></ul><p>For updating or amending the information on a permit:<span> </span></p><ul><li><span>Edit the record on the permit. </span></li><li><span>To do so, select the option “Information is being submitted to replace a previously issued internationally recognized certificate of compliance (a new certificate will be constituted and the old one will no longer be valid).” </span></li></ul><div>In order to provide for legal certainty and traceability, please provide a summary of the reason(s) for the update of the record. </div><div>If, for any reason, a permit or its equivalent has been revoked at the national level, this can also be reflected in the IRCC by editing the record and selecting “revoke” from the given options. The existing permit or its equivalent will then be revoked and the constituted internationally recognized certificate of compliance will no longer be valid. Please provide a summary of the reason for the update of the record. </div><p><br/></p><div>If a record on the permit or its equivalent is modified or updated, a revised IRCC will be constituted based on the information provided, which will be linked to the original certificate through reference to its unique identifier. Each certificate will include a link referring to the online record in the ABS Clearing-House. In order to access the latest valid version of an IRCC, one can follow the verification link provided in downloadable versions of the certificate or search the certificate in the ABS Clearing-House by the unique identifier and compare the information. With a view to ensure transparency and traceability, the ABS Clearing-House will display previous records on the permit or its equivalent in archived form (see record history) and its status as well as information outlining the reason for the update of the record on the permit or its equivalent will be reflected in the same record.</div><div><br/></div><div><br/></div>"
+    },
+    "related": ["56097ed8c18aee0f00b05bfc", "56098691c18aee0f00b05c01"],
+    "sequence": 1
+}, {
+    "_id": "56097f5ec18aee0f00b05bfd",
+    "tags": ["7. Monitoring the utilization of genetic resources"],
+    "referenceTerm": [],
+    "title": "I want to know more about national authorities receiving the checkpoints communiqués issued by my country’s checkpoints ",
+    "description": {
+        "en": "In accordance with Article 17, paragraph 1, (a)(iii) information collected or received by the checkpoint needs to be provided to relevant national authorities, to the Party providing prior informed consent and to the ABS Clearing-House, as appropriate.&#10;&#9;&#9;   <div>Countries need to identify who are the national authority/ies that will receive the information collected or received by the country’s checkpoints and communicated to the ABS Clearing-House through the checkpoint communiqué (CPC). </div><p><br/></p><div>For example, a patent office can be designated as a checkpoint in terms of implementation of Article 17 of the Protocol (monitoring the utilization of genetic resources), but you may decide that the NFP, the CNA or any other authority receives all the checkpoint communiqués issued with the information coming from the patent office.  </div><p><br/></p><div>The authority/ies receiving the checkpoint communiqués will have information necessary to enable them to follow-upon the use of genetic resources within their jurisdiction and therefore the could potentially play a role in implementing Article 15 of the Protocol (compliance with domestic legislation or regulatory requirements on ABS), including in:</div><p><br/></p><ul><li>Taking measures to ensure that genetic resources utilized within its jurisdiction have been accessed in accordance with the ABS measures of the Party providing the genetic resources;</li><li>Taking appropriate, effective and proportionate measures to address situations of non-compliance with measures adopted, and</li><li><span>Cooperating in cases of alleged violation of domestic ABS measures.</span></li></ul><div><p><br/></p></div><div>The identification of the national authorities can be done in the form (common format) for registering checkpoints.</div><div><br/></div>"
+    },
+    "related": ["56098601c18aee0f00b05bfe", "56098626c18aee0f00b05bff", "56098691c18aee0f00b05c01"],
+    "sequence": 4
+}, {
+    "_id": "56098626c18aee0f00b05bff",
+    "tags": ["7. Monitoring the utilization of genetic resources"],
+    "referenceTerm": [],
+    "title": "How do I fill the checkpoints communiqués when there is no information on PIC or MAT?",
+    "description": {
+        "en": "If the user of a genetic resource has no information on PIC and MAT, the checkpoint can still collect information on the source of the genetic resource and the utilization of the genetic resource (Article 17.1(a)(i)).&#10;&#9;&#9;   <div><br/></div><div>The country/ies identified as the source of the genetic resource will receive the checkpoint communiqué.</div><div><br/></div>"
+    },
+    "related": ["56098601c18aee0f00b05bfe"],
+    "sequence": 5
+}, {
+    "_id": "5609864fc18aee0f00b05c00",
+    "tags": [],
+    "referenceTerm": [],
+    "title": "How does the ABS Clearing-House deal with issues of confidentiality?",
+    "description": {
+        "en": "<p>According to Article 14, paragraph 2, of the Nagoya Protocol, information should be made available to the ABS Clearing-House without prejudice to the protection of confidential information. All information published in the ABS Clearing-House is publicly available.</p><p>In the case of national records, the publishing authority has the responsibility to ensure that the information it makes available is not confidential.  For reference records, it is understood that all information submitted is public information. </p><p>Publishing authorities are reminded that it is their responsibility to ensure that any confidentiality clauses in mutually agreed terms are respected.</p><p><br/></p>"
+    },
+    "related": ["56098691c18aee0f00b05c01"],
+    "sequence": 13
+}, {
+    "_id": "55fc6b614189390f00a219ed",
+    "tags": ["2. Account"],
+    "referenceTerm": [],
+    "title": "How do I register for a CBD account?",
+    "description": {
+        "en": "<p>&#10;                            Any person can have a CBD account which will give you access to register information in all CBD&#10;                            clearing-houses including the Biosafety Clearing-House (BCH), the ABS Clearing-House (ABS-CH)&#10;                            and the clearing-house mechanism (CHM) under the Convention. You can  register for a&#10;                            CBD account at <a href=\"http://accounts.cbd.int/signin\">accounts.cbd.int/signin</a>&#10;                      </p>&#10;                      <p>&#10;                            Make sure you enter all the information required as instructed on the form. You’ll automatically&#10;                            receive an e-mail with a link you have to click to confirm your account.&#10;                     </p>"
+    },
+    "related": ["55fc6b614189390f00a219ed", "55fc6c9035a3a80d00e20da4", "55fc6cd54189390f00a219ee"],
+    "sequence": 2
+}, {
+    "_id": "56098601c18aee0f00b05bfe",
+    "tags": ["7. Monitoring the utilization of genetic resources"],
+    "referenceTerm": [],
+    "title": "What role the checkpoint communiqués can play in facilitating the monitoring of genetic resources?",
+    "description": {
+        "en": "The information collected or received by the checkpoints and distributed through the checkpoint communiqués will assist Parties in monitoring how the genetic resources are used within and outside of their jurisdiction. <div><br/>&#10;&#9;&#9;   <div>The country that provided a given genetic resource will be receiving <b>information</b> regarding how the genetic resource is being used thanks to the information <b>collected by the checkpoints designated around the world </b>by each of the Parties to the Protocol. This information allows countries to determine whether the use happens according to PIC and MAT and whether the benefits are being shared as foreseen in MAT.</div><p><br/></p><div>Countries will also be receiving the <b>information collected by their own designated checkpoints</b>. This means that they will receive information on how genetic resources provided by other countries are being used within their own jurisdiction. </div><div><br/></div><div>Receiving the latter information can assist Parties to fulfill the obligations of Article 15 that provides that each Party shall take measures to provide that genetic resources utilized within its jurisdiction have been accessed in accordance with PIC and that MAT have been established. Each Party is also obliged to address situations of non-compliance with such measures. </div><div><br/></div><div>Parties can identify the relevant national authorities that will receive the information obtained or collected by the checkpoints within its jurisdiction and therefore that could potentially play a role for the implementation of Article 15 (compliance with domestic legislation or regulatory requirements on ABS).The identification of these national authorities is done through the form for registering a checkpoint.</div><div><br/></div></div>"
+    },
+    "related": ["56097f5ec18aee0f00b05bfd", "56098626c18aee0f00b05bff", "56098691c18aee0f00b05c01"],
+    "sequence": 3
+}, {
+    "_id": "56098c800197380e0070ae8b",
+    "tags": ["1. About the ABS-CH"],
+    "referenceTerm": [],
+    "title": "Why is the ABS Clearing House important?",
+    "description": {
+        "en": "<b>The ABS Clearing House facilitates the connection between users and providers of genetic resources and associated traditional knowledge. </b>&#10;&#9;&#9;   <div><br/></div><div>The ABS Clearing-House allows providers to share information on contacts and requirements for accessing genetic resources and traditional knowledge through this platform. Users can then easily find information on the ABS Clearing-House on how to access these resources in an organized manner, and all in one convenient location. </div><div><br/></div><div>By providing reliable information, the ABS Clearing-House facilitates the connection between users and providers of genetic resources and associated traditional knowledge, and therefore creating opportunities for the development of ABS agreements, and it also enhances legal certainty for users</div><div> </div><div>The ABS Clearing-House increases the opportunities for the fair and equitable sharing of benefits coming from the use of genetic resources and associated traditional knowledge.</div><div><br/></div><div><b>The ABS Clearing House helps users to comply with national ABS measures and requirements.</b></div><div><br/></div><div>By sharing reliable and complete information regarding national measures and requirements on ABS through the ABS Clearing-House, countries can help users of genetic resources and associated traditional knowledge to understand and follow ABS rules and enhance compliance with national legislation.</div><div> </div><div><br/></div><div><b>The ABS Clearing-House provides tools to help countries monitor the utilization of genetic resources.</b></div><div><br/></div><div>Through a centralized and standardized system, the ABS Clearing-House helps providers monitor how their genetic resources are being used throughout the value chain (research, development, innovation, pre-commercialization or commercialization). When a provider country grants access to a genetic resource and publishes information on the permit or equivalent, the ABS Clearing-House automatically generates an internationally recognized certificate of compliance (IRCC). The IRCC helps national checkpoints to collect and communicate the information on the use of genetic resources through the ABS Clearing-House to all those involved in the process. This tool is called checkpoint communiqué. </div><div><br/></div><div><b>The ABS Clearing-House offers reliable and up-to-date information. </b></div><div><br/></div><div>The information available on the ABS Clearing-House follows secure publishing procedures. These procedures ensure that the ABS community has access to accurate information on ABS, making the process of access and utilization of genetic resources more equitable, transparent and reliable.</div><div><br/></div><div><b>The ABS Clearing-House promotes awareness raising and capacity-building. </b></div><div><br/></div><div>The ABS community can use the ABS Clearing-House to share experiences in implementing the Nagoya Protocol, as well as to disseminate communication materials and publications on ABS to a wider audience. The ABS Clearing-House can also play an important role in building capacity to implement the Protocol and providing easy access to best practices and lessons learned.</div><div><br/></div>"
+    },
+    "related": ["55fc619ac543eb1b6c31480b", "55fc68bb4189390f00a219e3", "55fc69964189390f00a219e9", "55fc69f235a3a80d00e20da3", "55fc6cfa4189390f00a219ef"],
+    "sequence": 4
+}, {
+    "_id": "560991ef0197380e0070ae8c",
+    "tags": ["3. Participation"],
+    "referenceTerm": [],
+    "title": "Why is important for Governments to publish national information in the ABS Clearing-House?",
+    "description": {
+        "en": "By publishing national information on the ABS Clearing-House, Parties to the Nagoya Protocol and other governments help both users and providers of genetic resources and associated traditional knowledge. Users can find the information they need to access genetic resources and associated traditional knowledge. The ABS Clearing-House is thus creating opportunities for the development of ABS agreements and the fair and equitable sharing of benefits coming from the use of genetic resources and associated traditional knowledge.<div><br/>&#10;&#9;&#9;   <div>Providers of genetic resources and associated traditional knowledge will find the necessary tools to monitor the utilization of these resources. Through a centralized and standardized system, the ABS Clearing-House helps providers monitor how their genetic resources are being used throughout the value chain. When a provider country grants access to a genetic resource and publishes information on the permit or its equivalent, the ABS Clearing-House automatically generates an internationally recognized certificate of compliance (IRCC). The IRCC helps national checkpoints to collect and communicate the information on the use of genetic resources through the ABS Clearing-House to all those involved in the process. The form for communicating the information collected or received by checkpoints is called checkpoint communiqué.</div><p><br/></p><div>Also by sharing reliable and complete information on national ABS measures and requirements through the ABS Clearing-House, countries can help users of genetic resources and associated traditional knowledge to understand and follow ABS rules and thus enhance compliance with national legislation.</div><p><br/></p><div>Non-Parties to the Protocol are encouraged to share all relevant ABS information through the ABS Clearing-House in the same conditions as Parties do.</div><div><br/></div></div>"
+    },
+    "related": ["55fc619ac543eb1b6c31480b", "55fc68bb4189390f00a219e3", "55fc69964189390f00a219e9", "56097918c18aee0f00b05bf5", "56097972c18aee0f00b05bf6", "560979f6c18aee0f00b05bf7", "56097c6bc18aee0f00b05bf8", "56098c800197380e0070ae8b"],
+    "sequence": 1
+}, {
+    "_id": "5609925a0197380e0070ae8d",
+    "tags": ["3. Participation"],
+    "referenceTerm": [],
+    "title": "How does the ABS Clearing-House benefit the indigenous and local communities and how can they contribute?",
+    "description": {
+        "en": "Indigenous and local communities (ILCs) may use the ABS Clearing-House to share information on how to access traditional knowledge associated with genetic resources. In order to do so, it is just necessary to open a CH account.<div> &#10;&#9;&#9;   <div>Community protocols and procedures, customary laws, model contractual clauses and competent authorities on ABS are some examples of the information ILCs can publish on the ABS Clearing-House. </div><p><br/></p><div>Indigenous and local communities also contribute to the ABS Clearing-House with awareness-raising and capacity building materials on the Nagoya Protocol. It is possible to share materials in indigenous languages.</div><div><br/></div></div>"
+    },
+    "related": ["55fc697d4189390f00a219e8", "56098c800197380e0070ae8b", "55fc6b614189390f00a219ed", "55fc6cd54189390f00a219ee"],
+    "sequence": 2
+}, {
+    "_id": "560992cf0197380e0070ae8e",
+    "tags": ["3. Participation"],
+    "referenceTerm": [],
+    "description": {
+        "en": "Private sector and research institutions using or seeking access to genetic resources will find reliable and up-to-date information on how to access genetic resources and traditional knowledge in the ABS Clearing-House in a standardized and organized manner and all in one convenient location, including national contacts and requirements. <div><br/></div><div>By providing reliable information, the ABS Clearing-House facilitates the connection between users and providers of genetic resources and associated traditional knowledge, and therefore creates opportunities for the development of ABS agreements.&#10;&#9;&#9;   <div><br/></div><div>Private sector and research institutions can contribute to the ABS Clearing-House by sharing model contractual clauses, codes of conduct, guidelines and best practices. In order to do so, it is just necessary to open a CH account. </div><div><br/></div></div>"
+    },
+    "title": "How the ABS Clearing-House can be useful for the private sector and research institutions?",
+    "related": ["55fc619ac543eb1b6c31480b", "55fc69f235a3a80d00e20da3", "55fc6b614189390f00a219ed", "56098c800197380e0070ae8b"],
+    "sequence": 3
+}, {
+    "_id": "560993380197380e0070ae8f",
+    "tags": ["3. Participation"],
+    "referenceTerm": [],
+    "title": "How can international and non-governmental organizations and others contribute to the ABS Clearing-House and how is it useful for them?",
+    "description": {
+        "en": "International and non-governmental organizations and others can raise awareness and promote capacity building on ABS through the ABS Clearing-House. The ABS Clearing-House offers a tool to post a variety of resources, brochures, toolkits, booklets and learning modules related to ABS and the Nagoya Protocol. These resources can contribute to promote ratification and the implementation of the Nagoya Protocol.<div><br/>&#10;&#9;&#9;   <div>By posting relevant ABS information, organizations and others can contribute to create a community where knowledge, lessons learned and best practices are shared to support the implementation of the Nagoya Protocol.</div><div><br/></div></div>"
+    },
+    "related": ["55fc619ac543eb1b6c31480b", "55fc6cd54189390f00a219ee", "55fc69f235a3a80d00e20da3", "55fc6cfa4189390f00a219ef", "55fc6b614189390f00a219ed", "56098c800197380e0070ae8b"],
+    "sequence": 4
+}, {
+    "_id": "56098691c18aee0f00b05c01",
+    "tags": ["7. Monitoring the utilization of genetic resources"],
+    "referenceTerm": [],
+    "description": {
+        "en": "<p>If a CPC or an IRCC contain confidential information, it will be important to ensure that sufficient information is provided to help providers of genetic resource to locate the national permit or equivalent related to the IRCC. </p><p>The CPC needs to include, as a minimum, reference to the national permit or its equivalent and information on the utilization of the genetic resource. This information will enable a provider country to assess   whether the user of the genetic resource is using the genetic resource in accordance with PIC and MAT and whether benefits are being duly shared.</p><p><br/></p>"
+    },
+    "title": "What happens when the checkpoints communiqués (CPC) and the internationally recognized certificate of compliance (IRCC) contain confidential information?",
+    "related": ["5609864fc18aee0f00b05c00", "56097f5ec18aee0f00b05bfd", "56098601c18aee0f00b05bfe"],
+    "sequence": 6
+}, {
+    "_id": "56097c6bc18aee0f00b05bf8",
+    "tags": [],
+    "referenceTerm": [],
+    "description": {
+        "en": "<div><br/></div><div><div>Records such as information on the competent national authority (CNA) or ABS measures are normally published once in the ABS Clearing-House and require updating only when changes have been done to the measures or the contact details. However, registering information on the permits or their equivalent for constituting the IRCC and the information generated through the checkpoints (checkpoint communiqués) could generate a significant work load, depending on the national circumstances.</div></div><p><br/></p><div>When you designate the NAUs you may wish try answering the following questions:</div><ul><li>Who is going to send the information on the permit or its equivalent issued at the time of access to the ABS Clearing-House? </li><li>Who is going to send the information for the checkpoint communiqué to the ABS Clearing-House?</li></ul><div>CNAs and checkpoints could be given national authorized user (NAU) roles and register the information directly in the ABS Clearing-House as draft records, subject to final publication by the publishing authority (PA). <span>Otherwise an internal national process of communicating the information from CNAs and checkpoints to other NAUs could be established, that would then introduce the information on permits or their equivalent and on the checkpoint communiqué in the ABS Clearing-House.</span></div><div><br/></div><div>When designating the PA it is important to take into account that the person designated is able to respond to the work load of reviewing the records to ensure that information provided is reliable, up-to-date and do not confidential.</div><div><br/></div><div>Changes can be done to the designated PA and NAUs in order to adapt to work load.</div><div><br/></div>"
+    },
+    "title": "How do I know whom to designate as PA and NAUs for my country?",
+    "related": ["56097972c18aee0f00b05bf6", "560979f6c18aee0f00b05bf7"],
+    "sequence": 4
+}]
