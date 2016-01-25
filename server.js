@@ -1,4 +1,4 @@
-/* jshint node:true 
+/* jshint node:true
 */
 var fs = require('fs');
 var http = require('http');
@@ -15,7 +15,7 @@ app.configure(function() {
     app.set('port', process.env.PORT || 2010, '127.0.0.1');
 
     app.use(express.logger('dev'));
-    app.use(express.compress());
+    // app.use(express.compress());
     app.use('/app', express.static(__dirname + '/app'));
     app.use('/scbd-templates', express.static(__dirname + '/app/libs/scbd-angularjs-controls/scbd-templates'));
     app.use('/cbd-forums',   express.static(__dirname + '/app/libs/cbd-forums'));
