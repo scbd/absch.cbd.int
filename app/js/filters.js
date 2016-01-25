@@ -289,7 +289,7 @@ define(["app",'/app/js/common.js'], function (app) {
 			//if(schema.toLowerCase()=="pressrelease"	 		||	schema.toLowerCase()=="nfp"	) return "Press Release";
 			//if(schema.toLowerCase()=="news"		 			||	schema.toLowerCase()=="nfp"	) return "News";
 			if(schema.toLowerCase()=="modelcontractualclause" 	||	schema.toLowerCase()=="a19a20"	) return "folder";
-			if(schema.toLowerCase()=="communityprotocol" 		||	schema.toLowerCase()=="mpp"	) return "folder";
+			if(schema.toLowerCase()=="communityprotocol" 		||	schema.toLowerCase()=="cpp"	) return "folder";
 
 			return schema;
 		};
