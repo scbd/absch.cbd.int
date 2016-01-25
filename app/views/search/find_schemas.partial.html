@@ -57,7 +57,7 @@ label{width:100%;}
                             </span><br>
                             <span> <input id="countryStatusNonParty" type="checkbox" ng-model="countryProfileSearch.isNonParties"  > <i class="fa fa-square color-grey" ></i> Non-Party
                                 <span class="badge pull-right">{{countryProfileFacets.nonParties}}</span>
-                            </span><br>                            
+                            </span><br>
                             <span> <input id="countryStatusInBetweenParty" type="checkbox" ng-model="countryProfileSearch.isInbetweenParties"  >  Ratified but not yet party
                                 <span class="badge pull-right">{{countryProfileFacets.inbetweenParties}}
                             </span></span><br>
@@ -95,7 +95,9 @@ label{width:100%;}
                                       <li><a href="#" ng-click="countryProfileSearch.recordType='cpc'">Checkpoint Communiqués</a></li>
                             </ul>
                         </div>
-
+                        <div ng-show="isAbsAdministrator" class="btn-group" style="width:100%;padding:10px 0 10px 0;margin:0;">
+                            <div search-filter-dates title='From' query='countryProfileSearch.cpCreationFromDate' field="createdDate_dt"></div>
+                        </div>
                 </div>
             </div>
       </div>

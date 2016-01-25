@@ -14,7 +14,7 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
             },
             controller: ['$scope', '$http', 'realm', '$q', '$filter', '$routeParams', '$timeout', '$element', 'commonjs', '$route','$location', 'smoothScroll',
             function($scope, $http, realm, $q, $filter, $routeParams, $timeout, $element, commonjs, $route, $location, smoothScroll) {
-
+                    var reloadDetails = false;
                     //$scope.countryProfile_keyword = 'can';
 
                     // var taiwan = "TW";
@@ -38,14 +38,31 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
                        }
                     });
 
+                    $scope.$watch('query', function(newVal, oldVal){
+                        if(newVal && oldVal){
+                            if(newVal.cpCreationFromDate && newVal.cpCreationFromDate != oldVal.cpCreationFromDate){
+                                reloadDetails = true;
+                                loadCountryMapDetails();
+                            }
+                        }
+                    })
+
                     //====================================================
                     function loadCountryMapDetails() {
-                        if (!$scope.countries) {
+                        if (!$scope.countries || reloadDetails) {
                             $scope.loading = true;
-                            var schema = ["absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database"];
+                            var schema = ["absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "focalPoint"];
+                            var dateFilter = '';
+
+                            if($scope.query && $scope.query.cpCreationFromDate && $scope.query.cpCreationFromDate!='*:*'){
+                                dateFilter = ' AND ' + $scope.query.cpCreationFromDate;
+                            }
+
                             var queryFacetsParameters = {
 
-                                'q': '(realm_ss:' + realm.value.toLowerCase() + ' or realm_ss:absch) AND NOT version_s:* AND ((schema_s:' + schema.join(' OR schema_s:') + ') OR (schema_s:focalPoint AND (type_ss:ABS-IC OR type_ss:NP-FP OR type_ss:ABS-FP)))',
+                                'q': '(realm_ss:' + realm.value.toLowerCase() +') AND NOT version_s:* AND (schema_s:' +
+                                schema.join(' OR schema_s:') + ')'
+                                + dateFilter ,
                                 'fl': '', //fields for results.
                                 'wt': 'json',
                                 'rows': 0, //limit
@@ -64,7 +81,10 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
                                 CalculateFacets();
                                 calculateListViewFacets();
                             })
-                            .finally(function(){$scope.loading = false;});
+                            .finally(function(){
+                                $scope.loading = false;
+                                reloadDetails = false;
+                            });
                             //   if ($routeParams.code && $routeParams.code.toUpperCase()=='RAT') {
                             //     $scope.searchFilter = commonjs.isNPParty;
                             //     $scope.updateMap('ratified');
@@ -313,6 +333,13 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
                     function calculateListViewFacets() {
 
                         _.each($scope.countries, function(country) {
+                            country['NFP'] = undefined;
+                            country['NDB'] = undefined;
+                            country['CNA'] = undefined;
+                            country['MSR'] = undefined;
+                            country['IRCC'] = undefined;
+                            country['CP'] = undefined;
+                            country['CPC'] = undefined;                            
                             var countryFacet = _.where($scope.countryFacets["government_s,schema_s"], {
                                 value: country.code.toLowerCase()
                             });

@@ -29,6 +29,7 @@ app.directive('searchFilterSchemas', function ($http) {
             if($scope.recordType == 'reference'){
                 $scope.previewType = 'list';
             }
+
             //**********************************************************
             $scope.isInProfiles = function(tab) {
                 return $scope.recordType == 'countryProfile' || ($route.current.$$route.type =='countryProfile' && $scope.recordType == 'countryProfile');
@@ -639,10 +640,14 @@ app.directive('searchFilterSchemas', function ($http) {
             ////country profile search
 
             $scope.$watch('countryProfileSearch', function(newVal){
-                 if($scope.recordType == 'countryProfile')
+                 if($scope.recordType == 'countryProfile'){
+                $scope.query = {};
+                $timeout(function(){
                     $scope.query = newVal;
+                },100);
+                    console.log(newVal);
+                }
             },true);
-
 
              $scope.$watch('keyword', function(newVal){
                  if($scope.recordType == 'national' || $scope.recordType == 'reference' )
@@ -700,7 +705,11 @@ app.directive('searchFilterSchemas', function ($http) {
             //     $scope.countryProfileSearch ={partyStatus: 'parties', countryProfile_keyword:''}
             // }
 
-
+            $timeout(function(){
+                if(commonjs.isAbsAdministrator()){
+                    $scope.isAbsAdministrator = true;
+                };
+            },2000);
 
         }]
     }
