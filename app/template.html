@@ -24,7 +24,7 @@
     <link href="/app/libs/angular-loading-bar/src/loading-bar.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/app/libs/angular-toastr/dist/angular-toastr.min.css" />
     <link rel="stylesheet" type="text/css" href="/app/css/km.css">
-  
+
 
     <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -35,8 +35,8 @@
 </head>
 
 <body ng-controller="TemplateController" ng-cloak>
+    <iframe id="authenticationFrame" src="https://accounts.cbd.int/app/authorize.html" style="display:none"></iframe>
 
- 
     <cbd-header></cbd-header>
     <portal-branding></portal-branding>
     <portal-nav></portal-nav>
