@@ -232,10 +232,10 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
                                 //     IWorkflows.updateActivity($route.current.params.workflow, 'publishRecord', { action : 'approve' })
                                 // }
 
-    							if(documentInfo.type=='authority'){
-    								//in case of authority save the CNA as a contact in drafts
-    								saveAuthorityInContacts(documentInfo);
-    							}
+    							// if(documentInfo.type=='authority'){
+    							// 	//in case of authority save the CNA as a contact in drafts
+    							// 	saveAuthorityInContacts(documentInfo);
+    							// }
                                 $('form').filter('.dirty').removeClass('dirty');
     							$scope.$emit("documentPublished", documentInfo, document);
                                 $scope.$emit("updateOrignalDocument", document);
@@ -285,10 +285,10 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
                                 $scope.loading = true;
                                 $q.when(editFormUtility.publishRequest(document,$scope.InfoDoc ? $scope.InfoDoc.additionalInfo:'')).then(function(workflowInfo) {
 
-                                    if(workflowInfo.type=='authority'){
-                                        //in case of authority save the CNA as a contact in drafts
-                                        saveAuthorityInContacts(workflowInfo);
-                                    }
+                                    // if(workflowInfo.type=='authority'){
+                                    //     //in case of authority save the CNA as a contact in drafts
+                                    //     saveAuthorityInContacts(workflowInfo);
+                                    // }
                                     $('form').filter('.dirty').removeClass('dirty');
                                     $scope.$emit("documentPublishRequested", workflowInfo, document);
                                     $scope.$emit("updateOrignalDocument", document);
@@ -338,10 +338,10 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
 
                         toastr.info($element.find('#msgDraftSaveMessage').text());
 
-						if(draftInfo.type=='authority'){
-							//in case of authority save the CNA as a contact in drafts
-							saveAuthorityInContacts(draftInfo);
-						}
+						// if(draftInfo.type=='authority'){
+						// 	//in case of authority save the CNA as a contact in drafts
+						// 	saveAuthorityInContacts(draftInfo);
+						// }
 						//$scope.$emit("documentDraftSaved", draftInfo)
                         $('form').filter('.dirty').removeClass('dirty');
                         $scope.$emit("updateOrignalDocument", $scope.getDocumentFn());

@@ -1,5 +1,4 @@
-define(['app', '/app/js/common.js'
-	], function (app,commonjs) {
+define(['app', '/app/js/common.js','scbd-angularjs-services'],function (app) {
 
 app.directive("fieldEmbedContact", [ function () {
 
@@ -129,14 +128,6 @@ app.directive("fieldEmbedContact", [ function () {
 			$scope.loadExisting = function(){
 
 				$scope.loading = true;
-
-				$scope.selectExisting = !$scope.selectExisting;
-
-				if($scope.selectExisting)
-					$scope.buttonText = "Create New";
-				else
-					$scope.buttonText = "Show existing";
-
 				if($scope.existingContacts){
 					$scope.loading = false;
 					return;
@@ -155,12 +146,12 @@ app.directive("fieldEmbedContact", [ function () {
 					results[0].data.Items.forEach(function(contact){
 						contact = contact.body;
 						//console.log(contact);
-						if(!$scope.organizationOnly){
-							if(!contact.source && contact.header)
-								contact.source = contact.header.identifier;
-							delete contact.government;
-							delete contact.header;
-						}
+						// if(!$scope.organizationOnly){
+						// 	if(!contact.source && contact.header)
+						// 		contact.source = contact.header.identifier;
+						// 	delete contact.government;
+						// 	delete contact.header;
+						// }
 						$scope.existingContacts.push(contact);
 					});
 				})
@@ -174,10 +165,11 @@ app.directive("fieldEmbedContact", [ function () {
 				// $scope.selectExisting = !$scope.selectExisting;
 				// $scope.edition.contact = contact;
 				// $scope.saveContact(false);
-				if(!$scope.showFilter && !$scope.organizationOnly){
-					delete contact.government;
-					delete contact.header;
-				}
+
+				// if(!$scope.showFilter && !$scope.organizationOnly){
+				// 	delete contact.government;
+				// 	delete contact.header;
+				// }
 					// console.log(contact);
 				if($scope.multiple) {
 
@@ -186,7 +178,7 @@ app.directive("fieldEmbedContact", [ function () {
 					// if($scope.edition.index>=0)
 					// 	contacts[$scope.edition.index] = contact;
 					// else
-						contacts.push(contact.identifier);
+						contacts.push({identifier : contact.header.identifier});
 
 					$scope.model = contacts;
 
@@ -204,15 +196,13 @@ app.directive("fieldEmbedContact", [ function () {
 			}
 
 			$scope.isSelected = function(contact){
-				var selected = false;
 
-				$scope.getContacts().forEach(function(cont){
-					if(cont.source && cont.source == contact.source)
-							selected = true;
-					else if($scope.organizationOnly && contact.header && contact.header.identifier == cont.header.identifier)
-							selected = true;
-				});
-				return !selected;
+				if(!workingContacts || workingContacts.length == 0)
+					return true;
+
+				return !_.some(workingContacts, function(cont){
+							return contact.header.identifier == cont.identifier;
+						});
 			}
 
 		 	$scope.isOrganization=function(entity){
@@ -225,20 +215,6 @@ app.directive("fieldEmbedContact", [ function () {
 			}
 			$scope.isCNA=function(entity){
 				return entity && entity.type == "CNA";
-			}
-
-			$scope.showButtons=function(entity){
-
-				if($scope.isCNA(entity))
-					return false;
-
-				return	commonjs.isUserInRole($scope.$root.getRoleName('AbsPublishingAuthorities'))||
-						commonjs.isUserInRole($scope.$root.getRoleName('AbsNationalAuthorizedUser'))||
-						commonjs.isUserInRole($scope.$root.getRoleName('AbsNationalFocalPoint'))||
-						//commonjs.isUserInRole($scope.$root.getRoleName('abschiac')) ||
-						commonjs.isUserInRole($scope.$root.getRoleName('AbsAdministrator')) ||
-						commonjs.isUserInRole($scope.$root.getRoleName('Administrator'));
-
 			}
 
 			//////////////////////////////

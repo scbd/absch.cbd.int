@@ -1,4 +1,4 @@
-define(['app'], function (app) {
+define(['app','scbd-angularjs-services'], function (app) {
 
 app.directive("viewContactReference", [function () {
 	return {
@@ -11,14 +11,18 @@ app.directive("viewContactReference", [function () {
 			locale: "=",
 			target: "@linkTarget"
 		},
-		controller: ["$scope", 'IStorgage', function ($scope, storage) {
+		controller: ["$scope", "IStorage", function ($scope, storage) {
 
 			$scope.$watch("model", function(newVal, oldVal) {
-				if(newVal && newVal!=oldVal){
-					storage.documents.get(identifier)
+				console.log(newVal);
+				if(newVal && !$scope.document && !newVal.header && newVal.identifier){
+					storage.documents.get(newVal.identifier)
 						.then(function(data){
 							$scope.document = data.data;
 						});
+				}
+				else if(newVal.header) {
+					$scope.document = newVal;
 				}
 			});
 
