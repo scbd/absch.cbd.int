@@ -9,6 +9,7 @@ require.config({
         'angular-cookies' : '../libs/angular-cookies/angular-cookies.min',
         'angular-sanitize': '../libs/angular-sanitize/angular-sanitize.min',
 
+        'text'                : '../libs/requirejs-text/text',
         'linqjs'          : '../libs/linqjs/linq',
         'angular-localizer':'../libs/ngLocalizer/localizer',
         'async'           : '../libs/requirejs-plugins/src/async',
@@ -43,7 +44,8 @@ require.config({
         'ngSmoothScroll'        : '../libs/ngSmoothScroll/angular-smooth-scroll.min',
         'joyRide'               : '../libs/joyRide/jquery.joyride-2.1',
         'angular-message'       : '../libs/angular-messages/angular-messages.min',
-        'toastr'                : '../libs/angular-toastr/dist/angular-toastr.tpls.min'
+        'toastr'                : '../libs/angular-toastr/dist/angular-toastr.tpls.min',
+        'angular-block-ui'      :  '../libs/angular-block-ui/dist/angular-block-ui.min'
     },
     'shim': {
         'angular'                       : { 'deps': ['jquery'], 'exports': 'angular' },
@@ -74,10 +76,14 @@ require.config({
         'ngMaterial'                    : { 'deps': ['angular', 'angular-animate', 'ngAria'] },
         'toastr'                        : { 'deps': ['angular', 'angular-animate', 'ngAria'] },
         'angular-message'               : { 'deps': ['angular'] },
-    }
+        'angular-block-ui'              : { 'deps': ['angular'] },
+    },
+    packages: [
+        { name: 'scbd-angularjs-services', location : '../libs/scbd-angularjs-services' }
+    ]
 });
 
-require(['angular-flex', 'angular-route', 'angular-cookies',  'bootstrap', 'domReady',
+require(['angular-flex', 'angular-route', 'angular-cookies',  'bootstrap', 'domReady'
     /*, 'main'*/], function (ng) {
     // NOTE: place operations that need to initialize prior to app start here using the `run` function on the top-level module
 
