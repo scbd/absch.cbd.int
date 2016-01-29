@@ -5,7 +5,7 @@ define(['app','ng-breadcrumbs','angular-localizer','scbd-angularjs-services','sc
     '/app/views/directives/nav/portal-branding.js',
     '/app/views/directives/nav/cbd-header.js',
     '/app/views/directives/nav/portal-nav.js',
-    'ngAria', 'angular-animate','toastr',
+    'ngAria', 'angular-animate','toastr','angular-block-ui',
 ], function(app) {
     'use strict';
 
