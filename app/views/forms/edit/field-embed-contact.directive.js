@@ -1,227 +1,171 @@
-define(['app', '/app/js/common.js','scbd-angularjs-services'],function (app) {
+define(['app', '/app/js/common.js', 'scbd-angularjs-services'], function(app) {
 
-app.directive("fieldEmbedContact", [ function () {
+    app.directive("fieldEmbedContact", [function() {
 
-	return {
-		restrict   : "EA",
-		templateUrl: "/app/views/forms/edit/field-embed-contact.directive.html",
-		replace    : true,
-		transclude : false,
-		scope      : {
-			model : "=ngModel",
-			locales : "=locales",
-			caption : "@caption",
-			documents : "@"
-		},
-		link : function($scope, $element, $attrs) {
+        return {
+            restrict: "EA",
+            templateUrl: "/app/views/forms/edit/field-embed-contact.directive.html",
+            replace: true,
+            transclude: false,
+            scope: {
+                model: "=ngModel",
+                locales: "=locales",
+                caption: "@caption",
+                documents: "@"
+            },
+            link: function($scope, $element, $attrs) {
 
-			var modalEdit = $element.find("#editContact");
+                var modalEdit = $element.find("#editContact");
 
-			$scope.multiple = $attrs.multiple!==undefined;
-			$scope.showFilter = $attrs.showFilter!==undefined;
-			$scope.organizationOnly = $attrs.organizationOnly!==undefined;
+                $scope.multiple = $attrs.multiple !== undefined;
 
-			$scope.showContacts = function(){
+                $scope.showContacts = function() {
+                    if (!modalEdit.is(":visible")) {
+                        modalEdit.modal("show");
+                        $scope.loadExisting();
+                    }
+                    if (modalEdit.is(":visible")) {
+                        modalEdit.modal("hide");
+                    }
+                    $scope.errorMessage = undefined;
+                }
+            },
+            controller: ["$scope", "$http", "$window", "$filter", "underscore", "guid", "editFormUtility", "$q", "IStorage", "commonjs",
+                function($scope, $http, $window, $filter, _, guid, editFormUtility, $q, storage, commonjs) {
+                    //============================================================
+                    //
+                    //
+                    //============================================================
+                    $scope.$watch("model", function() {
+                        workingContacts = null;
+                    });
 
-				if(!modalEdit.is(":visible")) {
-					modalEdit.modal("show");
-					$scope.loadExisting();
-					$scope.exisiting=true;
-				}
-				if(modalEdit.is(":visible")) {  modalEdit.modal("hide"); }
-				$scope.errorMessage = undefined;
-			}
+                    //============================================================
+                    //
+                    //
+                    //============================================================
+                    $scope.getContacts = function() {
 
+                        if (workingContacts === null) {
+                            if (_.isArray($scope.model)) workingContacts = _.clone($scope.model);
+                            else if (_.isObject($scope.model)) workingContacts = [$scope.model];
+                            else workingContacts = [];
+                        }
 
-        },
-		controller : ["$scope", "$http", "$window", "$filter", "underscore", "guid", "editFormUtility", "$q","IStorage","commonjs",
-		 function ($scope, $http, $window, $filter, _, guid, editFormUtility, $q, storage,commonjs)
-		{
-			var workingContacts = null;
-			$scope.buttonText = "Show existing";
-			$scope.edition = null;
-			$scope.loading = true;
-
-			//============================================================
-			//
-			//
-			//============================================================
-			$scope.$watch("model", function() {
-				workingContacts = null;
-			});
-
-			//============================================================
-			//
-			//
-			//============================================================
-			$scope.getContacts = function() {
-
-				if(workingContacts===null) {
-					     if(_.isArray ($scope.model)) workingContacts = _.clone($scope.model);
-					else if(_.isObject($scope.model)) workingContacts = [$scope.model];
-					else							  workingContacts = [];
-				}
-
-				return workingContacts;
-			};
+                        return workingContacts;
+                    };
 
 
-			//============================================================
-			//
-			//
-			//============================================================
-			$scope.deleteContact = function(index) {
+                    //============================================================
+                    //
+                    //
+                    //============================================================
+                    $scope.deleteContact = function(index) {
 
-				var contacts = $scope.getContacts();
+                        var contacts = $scope.getContacts();
 
-				var indexNo = index;
-				if(index<0 || index>=contacts.length)
-					return;
+                        var indexNo = index;
+                        if (index < 0 || index >= contacts.length)
+                            return;
 
-				// if showfilter then permanently delete the record from draft.
-				//if($scope.showFilter){
+                        if (confirm("Are you you want to remove this contact from the list?")) {
+                            contacts.splice(index, 1);
+                            if ($scope.multiple)
+                                $scope.model = contacts;
+                            else
+                                $scope.model = undefined;
 
-				if(confirm("Are you you want to remove this contact from the list?")){
-						contacts.splice(index,1);
-						if($scope.multiple)
-							$scope.model = contacts;
-						else
-							$scope.model = undefined;
+                        }
+                    };
 
-				}
-				// else{
-				// 	if(confirm("Are you you want to delete this record?")){
-				// 		var contact = contacts[index];
-				//
-				// 			contact.loading = true;
-				// 			storage.drafts.delete(contact.source || contact.header.identifier)
-				// 			.then(function(){
-				// 				contacts.splice(index,1);
-				// 			})
-				// 			.finally(function(){
-				// 				if(contact)//incase if there is a error on delete
-				// 					contact.loading = false;
-				// 			});
-				// 		}
-				// }
-			};
+                    //============================================================
+                    //
+                    //
+                    //============================================================
+                    $scope.closeContact = function() {
+
+                        $scope.showContacts();
+                        //clear the dropdown list display text which remains after the dialog is closed.
+                        $scope.$broadcast('clearSelectSelection');
+                    };
 
 
+                    //============================================================
+                    //
+                    //
+                    //============================================================
+                    $scope.loadExisting = function() {
 
+                        if (!$scope.existingContacts) {
 
-			//============================================================
-			//
-			//
-			//============================================================
-			$scope.closeContact = function() {
+                            $scope.loading = true;
+                            var contactType = 'contact';
 
-				$scope.showContacts();
-				//clear the dropdown list display text which remains after the dialog is closed.
-				$scope.$broadcast('clearSelectSelection');
-			};
+                            if ($scope.organizationOnly)
+                                contactType = 'organization';
 
+                            var qDrafts = storage.documents.query("(type eq 'authority' or type eq 'contact')", "my", {
+                                body: true
+                            });
+                            $scope.existingContacts = [];
 
-			//============================================================
-			//
-			//
-			//============================================================
-			$scope.loadExisting = function(){
+                            $q.all([qDrafts]).then(function(results) {
+                                    results[0].data.Items.forEach(function(contact) {
+                                        var lContact = contact.body;
+                                        lContact.revision = contact.revision;
+                                        $scope.existingContacts.push(lContact);
+                                    });
+                                })
+                                .finally(function() {
+                                    $scope.loading = false;
+                                });
+                        }
+                    }
 
-				$scope.loading = true;
-				if($scope.existingContacts){
-					$scope.loading = false;
-					return;
-				}
+                    $scope.selectContact = function(contact) {
+                        if ($scope.multiple) {
+                            var contacts = _.clone($scope.getContacts());
+                            contacts.push({
+                                identifier: contact.header.identifier + '@' + contact.revision
+                            });
+                            $scope.model = contacts;
+                        } else {
+                            $scope.model = contact.identifier;
+                        }
+                        $scope.showContacts();
+                        //clear the dropdown list display text which remains after the dialog is closed.
+                        $scope.$broadcast('clearSelectSelection');
 
-				var contactType = 'contact';
+                    }
 
-				if($scope.organizationOnly)
-					contactType = 'organization';
+                    $scope.isSelected = function(contact) {
 
-				var qDrafts = storage.documents.query("(type eq 'authority' or type eq 'contact')","my", {body:true});
-				$scope.existingContacts= [];
+                        if (!workingContacts || workingContacts.length == 0)
+                            return true;
 
-				$q.all([qDrafts]).then(function(results) {
-					//debugger;
-					results[0].data.Items.forEach(function(contact){
-						contact = contact.body;
-						//console.log(contact);
-						// if(!$scope.organizationOnly){
-						// 	if(!contact.source && contact.header)
-						// 		contact.source = contact.header.identifier;
-						// 	delete contact.government;
-						// 	delete contact.header;
-						// }
-						$scope.existingContacts.push(contact);
-					});
-				})
-				.finally(function(){
-					$scope.loading = false;
-				});
-			}
+                        return !_.some(workingContacts, function(cont) {
+                            return contact.header.identifier == cont.identifier;
+                        });
+                    }
 
-			$scope.selectContact = function(contact){
-				// $scope.buttonText = "Show existing";
-				// $scope.selectExisting = !$scope.selectExisting;
-				// $scope.edition.contact = contact;
-				// $scope.saveContact(false);
+                    $scope.isOrganization = function(entity) {
+                        //console.log(entity)		;
+                        return entity && entity.type == "organization";
+                    }
+                    $scope.isPerson = function(entity) {
+                        // console.log(entity);
+                        return entity && entity.type == "person";
+                    }
+                    $scope.isCNA = function(entity) {
+                        return entity && entity.type == "CNA";
+                    }
 
-				// if(!$scope.showFilter && !$scope.organizationOnly){
-				// 	delete contact.government;
-				// 	delete contact.header;
-				// }
-					// console.log(contact);
-				if($scope.multiple) {
+                    //////////////////////////////
 
-					var contacts =  _.clone($scope.getContacts());
-
-					// if($scope.edition.index>=0)
-					// 	contacts[$scope.edition.index] = contact;
-					// else
-						contacts.push({identifier : contact.header.identifier});
-
-					$scope.model = contacts;
-
-
-				}
-				else {
-
-					$scope.model = contact.identifier;
-				}
-
-				$scope.showContacts();
-				//clear the dropdown list display text which remains after the dialog is closed.
-				$scope.$broadcast('clearSelectSelection');
-
-			}
-
-			$scope.isSelected = function(contact){
-
-				if(!workingContacts || workingContacts.length == 0)
-					return true;
-
-				return !_.some(workingContacts, function(cont){
-							return contact.header.identifier == cont.identifier;
-						});
-			}
-
-		 	$scope.isOrganization=function(entity){
-		 	//console.log(entity)		;
-				return entity && entity.type == "organization";
-			}
-			$scope.isPerson=function(entity){
-				// console.log(entity);
-				return entity && entity.type == "person";
-			}
-			$scope.isCNA=function(entity){
-				return entity && entity.type == "CNA";
-			}
-
-			//////////////////////////////
-
-		}]
-	};
-}]);
+                }
+            ]
+        };
+    }]);
 
 });
 
@@ -339,68 +283,68 @@ app.directive("fieldEmbedContact", [ function () {
 // 	});
 // };
 
-			// function saveContactDraft(contact){
-			// 		if(!contact)
-			// 			throw "Invalid document";
-			// 		if(!$scope.organizationOnly){
-			//
-			// 			var government = $scope.$root.user.government;
-			// 			if(!contact.header)
-			// 			{
-			// 				contact.header = {schema   : "contact",languages: ["en"]};
-			// 			}
-			// 			contact.header.identifier = contact.source;
-			// 			contact.government = government ? { identifier: government } : undefined;
-			//
-			// 			return editFormUtility.saveDraft(contact);
-			// 		}
-			// 		else{
-			//
-			// 			return $q.when(updateSecurity(contact)).then(function(){
-			// 				if(!$scope.security)
-			// 					return;
-			// 				delete contact.type
-			// 				if($scope.security.canSave)
-			// 					return editFormUtility.publish(contact);
-			// 				else
-			// 					return editFormUtility.publishRequest(contact);
-			// 			});
-			// 		}
-			//
-			// }
+// function saveContactDraft(contact){
+// 		if(!contact)
+// 			throw "Invalid document";
+// 		if(!$scope.organizationOnly){
+//
+// 			var government = $scope.$root.user.government;
+// 			if(!contact.header)
+// 			{
+// 				contact.header = {schema   : "contact",languages: ["en"]};
+// 			}
+// 			contact.header.identifier = contact.source;
+// 			contact.government = government ? { identifier: government } : undefined;
+//
+// 			return editFormUtility.saveDraft(contact);
+// 		}
+// 		else{
+//
+// 			return $q.when(updateSecurity(contact)).then(function(){
+// 				if(!$scope.security)
+// 					return;
+// 				delete contact.type
+// 				if($scope.security.canSave)
+// 					return editFormUtility.publish(contact);
+// 				else
+// 					return editFormUtility.publishRequest(contact);
+// 			});
+// 		}
+//
+// }
 
-			// function updateSecurity(document)
-			// {
-			// 	$scope.security = {};
-			// 	$scope.loading = true;
-			//
-			// 	if(!document || !document.header)
-			// 		return;
-			//
-			// 	var identifier = document.header.identifier;
-			// 	var schema     = document.header.schema;
-			//
-			// 	var a = storage.documents.exists(identifier).then(function(exist){
-			//
-			// 		var q = exist
-			// 			  ? storage.documents.security.canUpdate(document.header.identifier, schema)
-			// 			  : storage.documents.security.canCreate(document.header.identifier, schema);
-			//
-			// 		return q.then(function(allowed) {
-			// 			$scope.security.canSave = allowed
-			// 		});
-			// 	})
-			//
-			// 	var b = storage.drafts.exists(identifier).then(function(exist){
-			//
-			// 		var q = exist
-			// 			  ? storage.drafts.security.canUpdate(document.header.identifier, schema)
-			// 			  : storage.drafts.security.canCreate(document.header.identifier, schema);
-			//
-			// 		return q.then(function(allowed) {
-			// 			$scope.security.canSaveDraft = allowed
-			// 		});
-			// 	})
-			//
-			// 	return $q.all([a,b]);
-			// }
+// function updateSecurity(document)
+// {
+// 	$scope.security = {};
+// 	$scope.loading = true;
+//
+// 	if(!document || !document.header)
+// 		return;
+//
+// 	var identifier = document.header.identifier;
+// 	var schema     = document.header.schema;
+//
+// 	var a = storage.documents.exists(identifier).then(function(exist){
+//
+// 		var q = exist
+// 			  ? storage.documents.security.canUpdate(document.header.identifier, schema)
+// 			  : storage.documents.security.canCreate(document.header.identifier, schema);
+//
+// 		return q.then(function(allowed) {
+// 			$scope.security.canSave = allowed
+// 		});
+// 	})
+//
+// 	var b = storage.drafts.exists(identifier).then(function(exist){
+//
+// 		var q = exist
+// 			  ? storage.drafts.security.canUpdate(document.header.identifier, schema)
+// 			  : storage.drafts.security.canCreate(document.header.identifier, schema);
+//
+// 		return q.then(function(allowed) {
+// 			$scope.security.canSaveDraft = allowed
+// 		});
+// 	})
+//
+// 	return $q.all([a,b]);
+// }
