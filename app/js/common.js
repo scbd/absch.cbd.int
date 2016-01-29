@@ -115,6 +115,9 @@ define(['app', 'underscore'], function(app, _) {
                         this.isUserInRole($rootScope.getRoleName('Administrator'))
 
                 }
+                this.hasAbsRoles = function() {
+                    return this.isAbsAdministrator() || this.isAnyOtherRoleThenIAC();
+                }
 
                 this.isNPParty = function(entity) {
                     return isNPParty(entity);
