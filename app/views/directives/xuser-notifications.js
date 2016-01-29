@@ -1,4 +1,4 @@
-define(['app','underscore','ionsound'], function(app,_) {
+define(['app','underscore','moment','ionsound'], function(app, _, moment) {
     app.directive('xuserNotifications', function() {
         return {
             restrict: 'EAC',
