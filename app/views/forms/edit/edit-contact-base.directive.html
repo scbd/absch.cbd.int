@@ -5,7 +5,7 @@
 		}
 	</style>
 
-	<div ng-hide="document.type=='organization' || document.type=='CNA'">
+	<div ng-hide="document.type=='organization'">
 
 		<legend>Personal Information</legend>
 
@@ -45,7 +45,7 @@
 			</div>
 		</div>
 	</div>
-	<div>
+	<div ng-hide="document.type=='person'">
 		<legend>Organization Information</legend>
 		<div class="row">
 			<div class="col-md-7 col-xs-12">
@@ -64,22 +64,22 @@
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<div class="row">
-		<div class="col-md-8">
-			<div class="km-control-group" name="contact_organizationType" caption="Type of organization">
-				<div km-select name="contact_organizationType" ng-model="document.organizationType" items="options.organizationTypes()"></div>
+		<div class="row">
+			<div class="col-md-8">
+				<div class="km-control-group" name="contact_organizationType" caption="Type of organization">
+					<div km-select name="contact_organizationType" ng-model="document.organizationType" items="options.organizationTypes()"></div>
+				</div>
+			</div>
+			<div class="col-md-4" ng-show="document.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">
+				<div class="km-control-group" name="contact_organizationTypeName" caption="Other organization type">
+					<div km-textbox-ml name="contact_organizationTypeName" ng-model="document.organizationType.customValue" placeholder="example: SCBD" locales="locales"></div>
+				</div>
 			</div>
 		</div>
-		<div class="col-md-4" ng-show="document.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">
-			<div class="km-control-group" name="contact_organizationTypeName" caption="Other organization type">
-				<div km-textbox-ml name="contact_organizationTypeName" ng-model="document.organizationType.customValue" placeholder="example: SCBD" locales="locales"></div>
-			</div>
-		</div>
 	</div>
 
-	<div ng-show="document.type=='organization' || document.type=='CNA'">
+	<div ng-show="document.type=='organization'">
 
 		<legend>Contact Person </legend>
 
@@ -121,11 +121,12 @@
 			</div>
 		</div>
 	</div>
-
-	<div class="row">
-		<div class="col-md-12">
-			<div class="km-control-group" name="contact_department" caption="Department / Division / Unit">
-				<div km-textbox-ml name="contact_department" ng-model="document.department" locales="locales"></div>
+	<div ng-hide="document.type=='person'">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="km-control-group" name="contact_department" caption="Department / Division / Unit">
+					<div km-textbox-ml name="contact_department" ng-model="document.department" locales="locales"></div>
+				</div>
 			</div>
 		</div>
 	</div>

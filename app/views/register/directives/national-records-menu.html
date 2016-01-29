@@ -25,14 +25,14 @@
             National Records
         </h3>
         <div ng-click="gotoList($event,'authority')" role="button" style="cursor:pointer;">
-            <div class="btn-commonformat" class="{ 'btn-commonformat-selected' : document_type=='authority' }">
+            <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : document_type=='authority' }">
                 <div class="btn-commonformat-national">
                     <i class="material-icons" style="font-size:16pt;position:relative;top:3px;">{{'authority' | schemaIcon }}</i>
                     CNA
                     <div class="pull-right" style="text-align:right; width:180px;padding-right:0px;position:relative;top:0px;">
-                        <span ng-show="facets(authority,'publish') > 0" class="label label-success" style="margin: 0 0 0 1px;"> {{facets('authority','publish')}}</span>
-                        <span ng-show="facets(authority,'draft') > 0" class="label label-default" style="margin: 0 0 0 1px;"> {{facets('authority','draft')}}</span>
-                        <span ng-show="facets(authority,'request') > 0" class="label label-danger" style="margin: 0 0 0 1px;"> {{facets('authority','request')}}</span>
+                        <span ng-show="facets('authority','publish') > 0" class="label label-success" style="margin: 0 0 0 1px;"> {{facets('authority','publish')}}</span>
+                        <span ng-show="facets('authority','draft') > 0" class="label label-default" style="margin: 0 0 0 1px;"> {{facets('authority','draft')}}</span>
+                        <span ng-show="facets('authority','request') > 0" class="label label-danger" style="margin: 0 0 0 1px;"> {{facets('authority','request')}}</span>
                         <span ng-click="gotoNew($event,'authority')" class="label color-blue bg-litegrey" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i> </span>
                     </div>
                 </div>
@@ -40,16 +40,16 @@
                 <div class="clearfix btn-commonformat-name"> Competent National Authority </div>
             </div>
         </div>
-        <div ng-click="gotoList($event,'abscheckpoint')" role="button" style="cursor:pointer;">
-            <div class="btn-commonformat" class="{ 'btn-commonformat-selected' : document_type=='abscheckpoint' }">
+        <div ng-click="gotoList($event,'absCheckpoint')" role="button" style="cursor:pointer;">
+            <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : document_type=='absCheckpoint' }">
                 <div class="btn-commonformat-national">
-                    <i class="material-icons" style="font-size:16pt;position:relative;top:3px;">{{'abscheckpoint' | schemaIcon }}</i>
+                    <i class="material-icons" style="font-size:16pt;position:relative;top:3px;">{{'absCheckpoint' | schemaIcon }}</i>
                     CP
                     <div class="pull-right" style="text-align:right; width:180px;padding-right:0px;position:relative;top:0px;">
-                        <span ng-show="facets('abscheckpoint','publish') > 0" class="label label-success" style="margin: 0 0 0 1px;"> {{facets('abscheckpoint','publish')}}</span>
-                        <span ng-show="facets('abscheckpoint','draft') > 0" class="label label-default" style="margin: 0 0 0 1px;"> {{facets('abscheckpoint','draft')}}</span>
-                        <span ng-show="facets('abscheckpoint','request') > 0" class="label label-danger" style="margin: 0 0 0 1px;"> {{facets('abscheckpoint','request')}}</span>
-                        <span ng-click="gotoNew($event,'abscheckpoint')" class="label color-blue bg-litegrey" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i> </span>
+                        <span ng-show="facets('absCheckpoint','publish') > 0" class="label label-success" style="margin: 0 0 0 1px;"> {{facets('absCheckpoint','publish')}}</span>
+                        <span ng-show="facets('absCheckpoint','draft') > 0" class="label label-default" style="margin: 0 0 0 1px;"> {{facets('absCheckpoint','draft')}}</span>
+                        <span ng-show="facets('absCheckpoint','request') > 0" class="label label-danger" style="margin: 0 0 0 1px;"> {{facets('absCheckpoint','request')}}</span>
+                        <span ng-click="gotoNew($event,'absCheckpoint')" class="label color-blue bg-litegrey" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i> </span>
                     </div>
                 </div>
                 <div class="clearfix"></div>
@@ -57,7 +57,7 @@
             </div>
         </div>
         <div ng-click="gotoList($event,'measure')" role="button" style="cursor:pointer;">
-            <div class="btn-commonformat" class="{ 'btn-commonformat-selected' : document_type=='measure' }">
+            <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : document_type=='measure' }">
                 <div class="btn-commonformat-national">
                     <i class="material-icons" style="font-size:16pt;position:relative;top:3px;">{{'measure' | schemaIcon }}</i>
                     MSR
@@ -73,7 +73,7 @@
             </div>
         </div>
         <div ng-click="gotoList($event,'absPermit')" role="button" style="cursor:pointer;">
-            <div class="btn-commonformat" class="{ 'btn-commonformat-selected' : document_type=='absPermit' }">
+            <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : document_type=='absPermit' }">
                 <div class="btn-commonformat-national">
                     <i class="material-icons" style="font-size:16pt;position:relative;top:3px;">{{'absPermit' | schemaIcon }}</i>
                     IRCC
@@ -89,7 +89,7 @@
             </div>
         </div>
         <div ng-click="gotoList($event,'absCheckpointCommunique')" role="button" style="cursor:pointer;">
-            <div class="btn-commonformat" class="{ 'btn-commonformat-selected' :document_type=='absCheckpointCommunique' }">
+            <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' :document_type=='absCheckpointCommunique' }">
                 <div class="btn-commonformat-national">
                     <i class="material-icons" style="font-size:16pt;position:relative;top:3px;">{{'absCheckpointCommunique' | schemaIcon }}</i>
                     CPC
@@ -105,7 +105,7 @@
             </div>
         </div>
         <div ng-click="gotoList($event,'database')" role="button" style="cursor:pointer;">
-            <div class="btn-commonformat" class="{ 'btn-commonformat-selected' : document_type=='database' }">
+            <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : document_type=='database' }">
                 <div class="btn-commonformat-national">
                     <i class="material-icons" style="font-size:16pt;position:relative;top:3px;">{{'database' | schemaIcon }}</i>
                     NDB
@@ -121,7 +121,7 @@
             </div>
         </div>
         <div ng-click="gotoList($event,'absNationalReport')" role="button" style="cursor:pointer;">
-            <div class="btn-commonformat" class="{ 'btn-commonformat-selected' : document_type=='absNationalReport' }">
+            <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : document_type=='absNationalReport' }">
                 <div class="btn-commonformat-national">
                     <i class="material-icons" style="font-size:16pt;position:relative;top:3px;">{{'absNationalReport' | schemaIcon }}</i>
                     NR
