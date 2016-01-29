@@ -58,12 +58,7 @@ define(['app', 'angular-block-ui','linqjs', 'angular-localizer',
 
 
     //TODO: stop using so many globals =P I should inherit the controller scope or something.
-	//  	'Others':{ sort: 3,
-	   // 'title': 'My Contact Book',
-	   // 'formats': ['contact'],
-	   // 'roles':[$scope.$root.getRoleName('AbsPublishingAuthorities'), $scope.$root.getRoleName('abschiac'),$scope.$root.getRoleName('AbsNationalAuthorizedUser'),
-	   // 		 $scope.$root.getRoleName('AbsNationalFocalPoint'),$scope.$root.getRoleName('AbsAdministrator'),$scope.$root.getRoleName('Administrator')]
-	   // },
+
     $rootScope.subheadings = {
 
 	  	'Reference Records': { sort: 1,
@@ -74,16 +69,6 @@ define(['app', 'angular-block-ui','linqjs', 'angular-localizer',
 				 $scope.$root.getRoleName('User')]
 		}
     };
-
-	//  	'National Records': { sort: 2,
-	// 'title': 'National Records',
-	// 'formats': ['authority', 'absCheckpoint', 'measure', 'absPermit', 'absCheckpointCommunique', 'database'],
-	// 'roles':[$scope.$root.getRoleName('AbsPublishingAuthorities'), $scope.$root.getRoleName('abschiac'),$scope.$root.getRoleName('AbsNationalAuthorizedUser'),
-	// 		 $scope.$root.getRoleName('AbsNationalFocalPoint'),$scope.$root.getRoleName('AbsAdministrator'),$scope.$root.getRoleName('Administrator')]
-	// }
-    // if($scope.development_env || $scope.training_env) {
-    //   $rootScope.subheadings["National Records"].formats.push('absNationalReport');
-    // }
 
     $rootScope.document_types = {
 
