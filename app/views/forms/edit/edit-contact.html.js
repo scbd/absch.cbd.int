@@ -1,6 +1,6 @@
 define(['app', '/app/views/forms/edit/edit.js',
 		"/app/views/forms/edit/edit-contact-base.directive.js",
-		"/app/views/forms/view/view-contact.directive.html"
+		"/app/views/forms/view/view-contact.directive.js"
 ], function(app) {
 
     app.controller("editContact", ["$scope", "$http", "$filter", "$controller", "$location", function($scope, $http, $filter, $controller, $location) {
