@@ -25,7 +25,7 @@
 
 	list-style: none;
 }
-@font-face {
+/*@font-face {
     font-family: 'alternategotno3dotregular';
     src: url('/app/fonts/alternategotno3dot-webfont.eot');
     src: url('/app/fonts/alternategotno3dot-webfont.eot?#iefix') format('embedded-opentype'),
@@ -34,19 +34,19 @@
          url('/app/fonts/alternategotno3dot-webfont.svg#alternategotno3dotregular') format('svg');
     font-weight: normal;
     font-style: normal;
-}
+}*/
 h1 {
-     font-family: 'alternategotno3dotregular';
+     /*font-family: 'alternategotno3dotregular';*/
      text-rendering: optimizeLegibility;
      font-size: 36px;
 }
 h2 {
-     font-family: 'alternategotno3dotregular';
+     /*font-family: 'alternategotno3dotregular';*/
      text-rendering: optimizeLegibility;
      font-size: 30px;
 }
 h3 {
-     font-family: 'alternategotno3dotregular';
+     /*font-family: 'alternategotno3dotregular';*/
      text-rendering: optimizeLegibility;
      font-size: 24px;
 }
@@ -172,7 +172,7 @@ h3 {
 		}
 
 		.stats-hr{
-			font-family: 'alternategotno3dotregular';
+			/*font-family: 'alternategotno3dotregular';*/
 			text-rendering: optimizeLegibility;
 			color: #bbb;
 			text-transform: uppercase;

@@ -1,4 +1,4 @@
-@font-face {
+/*@font-face {
     font-family: 'alternategotno3dotregular';
     src: url('/app/fonts/alternategotno3dot-webfont.eot');
     src: url('/app/fonts/alternategotno3dot-webfont.eot?#iefix') format('embedded-opentype'),
@@ -7,7 +7,7 @@
     url('/app/fonts/alternategotno3dot-webfont.svg#alternategotno3dotregular') format('svg');
     font-weight: normal;
     font-style: normal;
-}
+}*/
 
 .navlist {margin:0;padding:0; display: inline;}
 .navlist li
@@ -90,7 +90,7 @@
     /*min-height:30px;*/
     color:white;
     padding-top:5px;
-    font-family:alternategotno3dotregular!important;
+    /*font-family:alternategotno3dotregular!important;*/
 
 }
 

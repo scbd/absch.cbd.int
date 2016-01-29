@@ -7,7 +7,7 @@
   Special styles for presenting Bootstrap's documentation and examples
 */
 
-@font-face {
+/*@font-face {
     font-family: 'alternategotno3dotregular';
     src: url('../fonts/alternategotno3dot-webfont.eot');
     src: url('../fonts/alternategotno3dot-webfont.eot?#iefix') format('embedded-opentype'),
@@ -16,7 +16,7 @@
          url('../fonts/alternategotno3dot-webfont.svg#alternategotno3dotregular') format('svg');
     font-weight: normal;
     font-style: normal;
-}
+}*/
 
 
 body{
@@ -31,7 +31,7 @@ h4, h5, h6 {
   text-rendering: optimizeLegibility;
 }
 h1, h2, h3 {
-     font-family: 'alternategotno3dotregular';
+     /*font-family: 'alternategotno3dotregular';*/
      text-rendering: optimizeLegibility;
 }
 .disclaimer{
@@ -97,15 +97,15 @@ border-radius: 3px;
 	font-weight: normal;
 	color: #1FA65D;
 	font-size: 66px;
-	font-family: 'alternategotno3dotregular';
+	/*font-family: 'alternategotno3dotregular';*/
 	line-height: 62px;
 	margin:10px 0 0 0;
 	padding:0;
 	white-space: nowrap;
 }
 .brand > a > h1 >img{
-	height: 54px; 
-	position: relative; 
+	height: 54px;
+	position: relative;
 	top: -10px;
 	padding:0;
 	margin:0;
@@ -114,15 +114,15 @@ border-radius: 3px;
 	border-bottom:1px solid #DDD;
 }
 .small > .brand >  a > h1 > img{
-	height: 32px; 
-	position: relative; 
+	height: 32px;
+	position: relative;
 	top: -5px;
 	padding:0;
 	margin:0;
 }
 .small > .brand >  a > h1{
 	font-size: 38px;
-	font-family: 'alternategotno3dotregular';
+	/*font-family: 'alternategotno3dotregular';*/
 	line-height: 36px;
 	margin:10px 0 0 0;
 	padding:0;
@@ -133,14 +133,14 @@ border-radius: 3px;
 	text-transform: uppercase;
 	color: #333;
 	font-size: 26px;
-	font-family: 'alternategotno3dotregular';
+	/*font-family: 'alternategotno3dotregular';*/
 	font-weight: normal;
 }
 
 .small-xs > .main-link > a {
 	font-weight: normal;
 	color: #1FA65D;
-	font-family: 'alternategotno3dotregular';
+	/*font-family: 'alternategotno3dotregular';*/
 	white-space: nowrap;
 	font-size:26px;
 	padding-top: 0;
@@ -156,7 +156,7 @@ border-radius: 3px;
 	text-transform: uppercase;
 	color: #333;
 	font-size: 22px;
-	font-family: 'alternategotno3dotregular';
+	/*font-family: 'alternategotno3dotregular';*/
 	font-weight: normal;
 	line-height: 20px;
 	margin:0 0 10px 0;
@@ -172,7 +172,7 @@ border-radius: 3px;
 }
 .main-link > a{
 	font-size: 26px;
-	font-family: 'alternategotno3dotregular';
+	/*font-family: 'alternategotno3dotregular';*/
 	color: #666;
 	line-height: 24px;
 	text-decoration: none;
@@ -180,7 +180,7 @@ border-radius: 3px;
 }
 .small > .main-link > a {
 	font-size: 24px;
-	font-family: 'alternategotno3dotregular';
+	/*font-family: 'alternategotno3dotregular';*/
 	color: #666;
 	line-height: 18px;
 	text-decoration: none;
@@ -230,7 +230,7 @@ border-radius: 3px;
 	letter-spacing: 1px;
 	text-rendering: optimizeLegibility;
 	list-style: none;
-	font-family: 'alternategotno3dotregular';
+	/*font-family: 'alternategotno3dotregular';*/
 	font-size: 16px;
 	line-height: 18px;
 }
@@ -253,14 +253,14 @@ margin-bottom: 0px;
 }
 .abs-navbar-nav li a{
 	font-size: 26px;
-	font-family: 'alternategotno3dotregular';
+	/*font-family: 'alternategotno3dotregular';*/
 	color: #666;
 	line-height: 24px;
 	height:130px;
 	/*padding: 32px 30px 15px 30px;*/
 	margin:0;padding:0;
 	padding-top: 32px;
-	
+
 
 	}
 
@@ -295,7 +295,7 @@ padding-bottom: 3px;
 	letter-spacing: 1px;
 	text-rendering: optimizeLegibility;
 	list-style: none;
-	font-family: 'alternategotno3dotregular';
+	/*font-family: 'alternategotno3dotregular';*/
 	font-size: 16px;
 	margin-left: 10px;
 	padding-bottom: 0px;
@@ -311,13 +311,13 @@ padding-bottom: 3px;
 	padding:0;margin: 0;
 	padding-top:10px;
 		border-bottom:1px solid #666;
-	
+
 
 }
 
 .category{
 	font-size: 26px;
-	font-family: 'alternategotno3dotregular';
+	/*font-family: 'alternategotno3dotregular';*/
 	color: white;
 	text-shadow: rgba(0,0,0,0.9) 0 1px 0;
 	text-rendering: optimizeLegibility;
