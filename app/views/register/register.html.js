@@ -1,22 +1,21 @@
-define(['app','linqjs', 'angular-localizer',
-		'/app/views/directives/login.directive.html.js',
+define(['app', 'angular-block-ui','linqjs', 'angular-localizer',
 		'/app/views/register/register-record-list.directive.js',
 		'/app/views/directives/task-id-directive.html.js',
 		'/app/views/directives/user-details.directive.html.js',
 		'/app/views/directives/help-directive.html.js',
 		'bootstrap-datepicker','moment',  'text-angular', 'bootbox',
-		'scbd-angularjs-services','scbd-angularjs-filters','scbd-angularjs-controls','toastr'
+		'scbd-angularjs-services','scbd-angularjs-filters','scbd-angularjs-controls','toastr', '/app/js/common.js'
 	], function (app) {
 
   "use strict";
-// angular.module([]);
 
   app.controller("RegisterController",
     ["$rootScope", "$location" , "$scope", "$q", "$window", "IStorage", "underscore","breadcrumbs",
      "schemaTypes", "$timeout","$filter", "$routeParams", "$cookies","bootbox","realm","IWorkflows",
-	 '$element','$mdSidenav', '$mdUtil', '$mdMedia','toastr',
+	 '$element','$mdSidenav', '$mdUtil', '$mdMedia','toastr', '$compile', 'commonjs',
 	function ($rootScope, $location, $scope, $q, $window, storage, _,breadcrumbs,
-	schemaTypes, $timeout, $filter, $routeParams, $cookies,bootbox,realm,workflows, $element, $mdSidenav, $mdUtil, $mdMedia, toastr) {
+	schemaTypes, $timeout, $filter, $routeParams, $cookies,bootbox,realm,workflows,
+	 $element, $mdSidenav, $mdUtil, $mdMedia, toastr, $compile, commonjs) {
 
   $scope.toggleLeft = buildToggler('left');
   $scope.toggleRight = buildToggler('right');
@@ -59,20 +58,15 @@ define(['app','linqjs', 'angular-localizer',
 
 
     //TODO: stop using so many globals =P I should inherit the controller scope or something.
+	//  	'Others':{ sort: 3,
+	   // 'title': 'My Contact Book',
+	   // 'formats': ['contact'],
+	   // 'roles':[$scope.$root.getRoleName('AbsPublishingAuthorities'), $scope.$root.getRoleName('abschiac'),$scope.$root.getRoleName('AbsNationalAuthorizedUser'),
+	   // 		 $scope.$root.getRoleName('AbsNationalFocalPoint'),$scope.$root.getRoleName('AbsAdministrator'),$scope.$root.getRoleName('Administrator')]
+	   // },
     $rootScope.subheadings = {
-     //  	'National Entities':{
-		// 'title': 'National Entities',
-		// 'formats': ['authority', 'absCheckpoint'],
-		// 'roles':[$scope.$root.getRoleName('AbsPublishingAuthorities'), $scope.$root.getRoleName('abschiac'),$scope.$root.getRoleName('AbsNationalAuthorizedUser'),
-		// 		 $scope.$root.getRoleName('AbsNationalFocalPoint'),$scope.$root.getRoleName('AbsAdministrator'),$scope.$root.getRoleName('Administrator')]
-		// },
-      	'National Records': {
-		'title': 'National Records',
-		'formats': ['authority', 'absCheckpoint', 'measure', 'absPermit', 'absCheckpointCommunique', 'database', 'contact'],
-		'roles':[$scope.$root.getRoleName('AbsPublishingAuthorities'), $scope.$root.getRoleName('abschiac'),$scope.$root.getRoleName('AbsNationalAuthorizedUser'),
-				 $scope.$root.getRoleName('AbsNationalFocalPoint'),$scope.$root.getRoleName('AbsAdministrator'),$scope.$root.getRoleName('Administrator')]
-		},
-	  	'Reference Records': {
+
+	  	'Reference Records': { sort: 1,
 		'title': 'Reference Records',
 		'formats': ['resource', 'modelContractualClause', 'communityProtocol'],
 		'roles':[$scope.$root.getRoleName('AbsPublishingAuthorities'), $scope.$root.getRoleName('abschiac'),$scope.$root.getRoleName('AbsNationalAuthorizedUser'),
@@ -81,9 +75,15 @@ define(['app','linqjs', 'angular-localizer',
 		}
     };
 
-    if($scope.development_env || $scope.training_env) {
-      $rootScope.subheadings["National Records"].formats.push('absNationalReport');
-    }
+	//  	'National Records': { sort: 2,
+	// 'title': 'National Records',
+	// 'formats': ['authority', 'absCheckpoint', 'measure', 'absPermit', 'absCheckpointCommunique', 'database'],
+	// 'roles':[$scope.$root.getRoleName('AbsPublishingAuthorities'), $scope.$root.getRoleName('abschiac'),$scope.$root.getRoleName('AbsNationalAuthorizedUser'),
+	// 		 $scope.$root.getRoleName('AbsNationalFocalPoint'),$scope.$root.getRoleName('AbsAdministrator'),$scope.$root.getRoleName('Administrator')]
+	// }
+    // if($scope.development_env || $scope.training_env) {
+    //   $rootScope.subheadings["National Records"].formats.push('absNationalReport');
+    // }
 
     $rootScope.document_types = {
 
@@ -644,6 +644,17 @@ define(['app','linqjs', 'angular-localizer',
 			loadActivitiesFacets();
 		}
 	});
+
+	if($scope.user && $scope.user.isAuthenticated && commonjs.hasAbsRoles()){
+
+			require(['/app/views/register/directives/national-records-menu.html.js'], function(menu){
+					$scope.$apply(function(){
+						console.log(menu);
+						$element.find('#menuPlaceholder')
+								.append($compile('<div register-national-menu ></div>')($scope));
+					});
+			});
+	}
 
   }]);
 });

@@ -1,34 +1,36 @@
 <link href="/app/css/register.css" rel="stylesheet">
 <link href="/app/css/record.css" rel="stylesheet">
 
-<div ng-cloak ng-controller="RegisterController" >
-    <div smooth-scroll duration="100" offset="300" ></div>
+<div ng-cloak ng-controller="RegisterController">
+    <div smooth-scroll duration="100" offset="300"></div>
 
-<section layout="row" flex style="position:relative;top:20px;" ng-hide="!user.isAuthenticated" >
+    <section layout="row" flex style="position:relative;top:20px;" ng-hide="!user.isAuthenticated">
 
 
-       <md-sidenav class="md-sidenav-left " md-component-id="left" md-is-locked-open="$mdMedia('min-width: 1200px')"style="background-color:transparent;" >
+        <md-sidenav class="md-sidenav-left " md-component-id="left" md-is-locked-open="$mdMedia('min-width: 1200px')" style="background-color:transparent;">
 
-       <div class="bg-white md-whiteframe-z1">
+            <div class="bg-white md-whiteframe-z1">
 
-         <md-toolbar class="bg-medgrey" >
-           <h3 class="md-toolbar-tools color-white"><a href="/dashboard">Management Center</a></h3>
-         </md-toolbar>
+                <md-toolbar class="bg-medgrey">
+                    <h3 class="md-toolbar-tools color-white"><a href="/dashboard">Management Center</a></h3>
+                </md-toolbar>
 
-         <md-content layout-padding layout-margin>
+                <md-content layout-padding layout-margin>
 
-             <div id="document_type_links" ng-show="user.isAuthenticated">
+                    <div id="document_'modelContractualClause'_links" ng-show="user.isAuthenticated">
 
-             <div class="bg-none" style="margin-bottom:20px;">
-                             <!-- <div style="font-size:16;font-weight:bold;">Legend</div> -->
-                             <span class="label label-success">&nbsp;</span> Published records <br>
-                                 <span class="label label-default">&nbsp;</span> Draft records<br>
-                                     <span class="label label-danger">&nbsp;</span> Records waiting approval
+                        <div class="bg-none" style="margin-bottom:20px;">
+                            <!-- <div style="font-size:16;font-weight:bold;">Legend</div> -->
+                            <span class="label label-success">&nbsp;</span> Published records
+                            <br>
+                            <span class="label label-default">&nbsp;</span> Draft records
+                            <br>
+                            <span class="label label-danger">&nbsp;</span> Records waiting approval
 
-                         </div>
+                        </div>
 
-                 <div>
-                     <!--<a href="/dashboard" role="button" >
+                        <div>
+                            <!--<a href="/dashboard" role="button" >
                      <div  class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/register/dashboard.html'}" style="cursor:pointer;">
 
 
@@ -39,113 +41,143 @@
                        </div>
                  </div></a>-->
 
-                 <a href="/register/requests" role="button" >
-                     <div  class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-tasks.directive.html'}" style="cursor:pointer;">
+                            <a href="/register/requests" role="button">
+                                <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-tasks.directive.html'}" style="cursor:pointer;">
 
 
-                         <div class="btn-commonformat-national" style="text-transform:uppercase;">
-                             <span class="color-grey">
-                             <i class="fa fa-retweet" style="font-size:16pt;position:relative;top:3px;"></i>&nbsp;Requests</span></div>
-                             <div style="padding-top:5px;"class="color-grey">Records submitted for publishing</div>
+                                    <div class="btn-commonformat-national" style="text-transform:uppercase;">
+                                        <span class="color-grey">
+                                            <i class="fa fa-retweet" style="font-size:16pt;position:relative;top:3px;"></i>&nbsp;Requests</span>
+                                    </div>
+                                    <div style="padding-top:5px;" class="color-grey">Records submitted for publishing</div>
 
 
-                             <hr style="padding-top:5px;"  ng-show="facets('urgentTasks','request')">
-                             <div class="bg-red" style="color:white;padding:3px;"  ng-show="facets('urgentTasks','request')">
-                                 <a href="/register/requests/"  href="#" role="button" style="color:white;">
-                                     <span  class="badge" style="position:relative;top:-1px;">{{facets('urgentTasks','request')}}</span>
-                                     Request(s) awaiting your approval
-                                 </a>
-                             </div>
+                                    <hr style="padding-top:5px;" ng-show="facets('urgentTasks','request')">
+                                    <div class="bg-red" style="color:white;padding:3px;" ng-show="facets('urgentTasks','request')">
+                                        <a href="/register/requests/" href="#" role="button" style="color:white;">
+                                            <span class="badge" style="position:relative;top:-1px;">{{facets('urgentTasks','request')}}</span>
+                                            Request(s) awaiting your approval
+                                        </a>
+                                    </div>
 
 
-                         </div></a>
+                                </div>
+                            </a>
 
 
 
-
-                         <div ng-repeat="heading in subheadings" >
-
-                         <div ng-show="compareRoles(user.roles, heading.roles)" >
-                             <h3 class="special-font" ng-class="{'btn-commonformat-header-national':heading.title!='Reference Records', 'btn-commonformat-header-reference': heading.title=='Reference Records'}">
-                                 {{heading.title}}
-                             </h3>
-                             <div ng-repeat="type in heading.formats">
-                               <div ng-click="gotoList($event,type)" role="button" style="cursor:pointer;"  >
-                                 <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : document_type==type ,'btn-commonformat-reference-selected' : document_types[type].schemaType=='referenceRecords' && document_type==type}">
-                                   <div class="btn-commonformat-national" ng-class="{'btn-commonformat-reference':document_types[type].schemaType=='referenceRecords'}">
-                                        <i class="material-icons" style="font-size:16pt;position:relative;top:3px;">{{type | schemaIcon }}</i>
-                                         {{document_types[type].abbreviation}}
-                                        <div class="pull-right" style="text-align:right; width:180px;padding-right:0px;position:relative;top:0px;">
-                                            <span ng-show="facets(type,'publish') > 0" class="label label-success" style="margin: 0 0 0 1px;"> {{facets(type,'publish')}}</span>
-                                            <span ng-show="facets(type,'draft') > 0" class="label label-default"  style="margin: 0 0 0 1px;"> {{facets(type,'draft')}}</span>
-                                            <span ng-show="facets(type,'request') > 0" class="label label-danger" style="margin: 0 0 0 1px;"> {{facets(type,'request')}}</span>
-                                            <span  ng-click="gotoNew($event,type)"  class="label color-blue bg-litegrey" style="margin: 0 0 0 1px;">  <i class="fa fa-plus"></i> </span>
+                            <div id="menuPlaceholder"></div>
+                            <div id="referenceRecords">
+                                <h3 class="special-font btn-commonformat-header-reference">
+                                    Reference Records
+                                </h3>
+                                <div ng-click="gotoList($event,'resource')" role="button" style="cursor:pointer;">
+                                    <div class="btn-commonformat" ng-class="{'btn-commonformat-reference-selected' : document_type == 'resource'}">
+                                        <div class="btn-commonformat-reference">
+                                            <i class="material-icons" style="font-size:16pt;position:relative;top:3px;">
+                                                {{'resource' | schemaIcon }}</i> VLR
+                                            <div class="pull-right" style="text-align:right; width:180px;padding-right:0px;position:relative;top:0px;">
+                                                <span ng-show="facets('resource','publish') > 0" class="label label-success" style="margin: 0 0 0 1px;"> {{facets('resource','publish')}}</span>
+                                                <span ng-show="facets('resource','draft') > 0" class="label label-default" style="margin: 0 0 0 1px;"> {{facets('resource','draft')}}</span>
+                                                <span ng-show="facets('resource','request') > 0" class="label label-danger" style="margin: 0 0 0 1px;"> {{facets('resource','request')}}</span>
+                                                <span ng-click="gotoNew($event,'resource')" class="label color-blue bg-litegrey" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i> </span>
+                                            </div>
                                         </div>
-                                   </div>
-                                   <div class="clearfix"></div>
-                                   <div class="clearfix btn-commonformat-name" > {{document_types[type].title}} </div>
-                                 </div>
-                             </div>
-                             </div>
-                         </div>
+                                        <div class="clearfix"></div>
+                                        <div class="clearfix btn-commonformat-name"> Virtual Library Record </div>
+                                    </div>
+                                </div>
+                                <div ng-click="gotoList($event,'modelContractualClause')" role="button" style="cursor:pointer;">
+                                    <div class="btn-commonformat" ng-class="{'btn-commonformat-reference-selected' : document_type=='modelContractualClause'}">
+                                        <div class="btn-commonformat-reference">
+                                            <i class="material-icons" style="font-size:16pt;position:relative;top:3px;">
+                                                {{'modelContractualClause' | schemaIcon }}</i> A19A20
+                                            <div class="pull-right" style="text-align:right; width:180px;padding-right:0px;position:relative;top:0px;">
+                                                <span ng-show="facets('modelContractualClause','publish') > 0" class="label label-success" style="margin: 0 0 0 1px;"> {{facets('modelContractualClause','publish')}}</span>
+                                                <span ng-show="facets('modelContractualClause','draft') > 0" class="label label-default" style="margin: 0 0 0 1px;"> {{facets('modelContractualClause','draft')}}</span>
+                                                <span ng-show="facets('modelContractualClause','request') > 0" class="label label-danger" style="margin: 0 0 0 1px;"> {{facets('modelContractualClause','request')}}</span>
+                                                <span ng-click="gotoNew($event,'modelContractualClause')" class="label color-blue bg-litegrey" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i> </span>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="clearfix btn-commonformat-name"> Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards </div>
+                                    </div>
+                                </div>
+                                <div ng-click="gotoList($event,'communityProtocol')" role="button" style="cursor:pointer;">
+                                    <div class="btn-commonformat" ng-class="{'btn-commonformat-reference-selected' : document_type =='communityProtocol'}">
+                                        <div class="btn-commonformat-reference">
+                                            <i class="material-icons" style="font-size:16pt;position:relative;top:3px;">
+                                                {{'communityProtocol' | schemaIcon }}</i> CPP
+                                            <div class="pull-right" style="text-align:right; width:180px;padding-right:0px;position:relative;top:0px;">
+                                                <span ng-show="facets('communityProtocol','publish') > 0" class="label label-success" style="margin: 0 0 0 1px;"> {{facets('communityProtocol','publish')}}</span>
+                                                <span ng-show="facets('communityProtocol','draft') > 0" class="label label-default" style="margin: 0 0 0 1px;"> {{facets('communityProtocol','draft')}}</span>
+                                                <span ng-show="facets('communityProtocol','request') > 0" class="label label-danger" style="margin: 0 0 0 1px;"> {{facets('communityProtocol','request')}}</span>
+                                                <span ng-click="gotoNew($event,'communityProtocol')" class="label color-blue bg-litegrey" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i> </span>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="clearfix btn-commonformat-name"> Community protocols and procedures and customary laws </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                       </div>
+                        </div>
+                    </div>
 
-                 </div>
-               </div>
+                </md-content>
+            </div>
+        </md-sidenav>
 
-         </md-content>
-        </div>
-     </md-sidenav>
-
-     <md-content flex layout-margin style="margin:0 30px 30px 30px;padding:0;background-color:transparent;"  >
-           <div layout="column" layout-align="top center"  >
-                <md-button ng-click="toggleLeft()" class="md-primary md-raised bg-medgrey" hide-gt-lg  style="margin: 0  0 10px 0;">
+        <md-content flex layout-margin style="margin:0 30px 30px 30px;padding:0;background-color:transparent;">
+            <div layout="column" layout-align="top center" block-ui block-ui-pattern="/^\/api/v2013/documents/">
+                <md-button ng-click="toggleLeft()" class="md-primary md-raised bg-medgrey" hide-gt-lg style="margin: 0  0 10px 0;">
                     <i class="material-icons" style="position:relative;top:6px;">menu</i> Management Center
                 </md-button>
                 <div help schema="{{helpSchema}}" show-help="showHelp" repalce-glossary-terms="true">
-                    <ng-include src="subTemplateUrl" style="min-height:980px;"  ng-show="user.isAuthenticated"></ng-include>
+                    <ng-include src="subTemplateUrl" style="min-height:980px;" ng-show="user.isAuthenticated"></ng-include>
                 </div>
+            </div>
+        </md-content>
+
+    </section>
+
+
+
+
+
+
+    <div ng-hide="user.isAuthenticated" class="bg-texture-litegrey">
+        <div class="container">
+
+            <div class="col-xs-12" ng-hide="user.isAuthenticated" style="padding-top:20px;">
+
+                <div class="row bg-green well" ng-show="!user.isAuthenticated">
+
+                    <h1 class="dropshadow1">Please sign-in to register information in the ABS Clearing-House</h1>
+                    <hr>
+                    <div class="col-xs-12 color-white dropshadow">
+                        <div login></div>
+                    </div>
+
+                    <div class="col-xs-12" style="padding-top:30px;">
+                        <hr>
+                        <h3 class="dropshadow1">Designation of the ABS Clearing-House publishing authority(PA) and national authorised users(NAU)</h3>
+                        <p>In order to operationalize the ABS Clearing-House, Parties need to nominate a single publishing authority to clear national records prior to publishing them in the ABS Clearing-House.</p>
+                        <p>The registration of who has the authority to publish national records in the ABS Clearing-House can only be done by the Secretariat upon receipt of an official written communications addressed to the Executive Secretary and endorsed
+                            as follows by the focal point for the Intergovernmental Committee for the Nagoya Protocol (ICNP Focal Point). The duties of the ICNP Focal Point could also be expanded to incorporate the role of the publishing authority.</p>
+
+                        <p>The designation of national autorised users can be done at any time by the ICNP Focal Point or the publishing authority. These designations may be sent to the Secretariat by postal mail, fax or as an attachment to an e mail and
+                            must contain the complete contact details and the appropriate endorsements.</p>
+
+                        <a href="http://www.cbd.int/doc/abs/commonformats/ABSCH-PA.doc" class="color-white">
+                            <i class="glyphicon glyphicon-circle-arrow-down"></i> Download Publishing Authority(PA) and National Authorized User(NAU) nomination form
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
-    </md-content>
-
-</section>
-
-
-
-
-
-
-<div  ng-hide="user.isAuthenticated" class="bg-texture-litegrey">
-    <div class="container">
-
-      <div class="col-xs-12" ng-hide="user.isAuthenticated" style="padding-top:20px;">
-
-          <div class="row bg-green well" ng-show="!user.isAuthenticated" >
-
-              <h1 class="dropshadow1" >Please sign-in to register information in the ABS Clearing-House</h1>
-              <hr>
-            <div class="col-xs-12 color-white dropshadow">
-              <div login></div>
-            </div>
-
-            <div class="col-xs-12" style="padding-top:30px;">
-              <hr>
-              <h3 class="dropshadow1">Designation of the ABS Clearing-House publishing authority(PA) and national authorised users(NAU)</h3>
-              <p>In order to operationalize the ABS Clearing-House, Parties need to nominate a single publishing authority to clear national records prior to publishing them in the ABS Clearing-House.</p>
-              <p>The registration of who has the authority to publish national records in the ABS Clearing-House can only be done by the Secretariat upon receipt of an official written communications addressed to the Executive Secretary and endorsed as follows by the focal point for the Intergovernmental Committee for the Nagoya Protocol (ICNP Focal Point). The duties of the ICNP Focal Point could also be expanded to incorporate the role of the publishing authority.</p>
-
-              <p>The designation of national autorised users can be done at any time by the ICNP Focal Point or the publishing authority. These designations may be sent to the Secretariat by postal mail, fax or as an attachment to an e mail and must contain the complete contact details and the appropriate endorsements.</p>
-
-              <a href="http://www.cbd.int/doc/abs/commonformats/ABSCH-PA.doc" class="color-white">
-                  <i class="glyphicon glyphicon-circle-arrow-down"></i> Download Publishing Authority(PA) and National Authorized User(NAU) nomination form
-              </a>
-            </div>
-          </div>
-
-      </div>
-
-  </div>
-</div>
+    </div>
 
 </div>

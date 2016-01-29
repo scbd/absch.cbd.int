@@ -1,0 +1,143 @@
+<div>
+    <div>
+        <h3 class="special-font btn-commonformat-header-national">
+            My Contact Book
+        </h3>
+        <div ng-click="gotoList($event,'contact')" role="button" style="cursor:pointer;">
+            <div class="btn-commonformat" class="{ 'btn-commonformat-selected' : document_type=='contact' }">
+                <div class="btn-commonformat-national">
+                    <i class="material-icons" style="font-size:16pt;position:relative;top:3px;">{{'measure' | schemaIcon }}</i> CON
+                    <div class="pull-right" style="text-align:right; width:180px;padding-right:0px;position:relative;top:0px;">
+                        <span ng-show="facets('contact','publish') > 0" class="label label-success" style="margin: 0 0 0 1px;"> {{facets('measure','publish')}}</span>
+                        <span ng-show="facets('contact','draft') > 0" class="label label-default" style="margin: 0 0 0 1px;"> {{facets('measure','draft')}}</span>
+                        <span ng-show="facets('contact','request') > 0" class="label label-danger" style="margin: 0 0 0 1px;"> {{facets('measure','request')}}</span>
+                        <span ng-click="gotoNew($event,'contact')" class="label color-blue bg-litegrey" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i> </span>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="clearfix btn-commonformat-name"> Nationaal Contacts </div>
+            </div>
+        </div>
+    </div>
+    <!-- national Records -->
+    <div id="National Records">
+        <h3 class="special-font btn-commonformat-header-national">
+            National Records
+        </h3>
+        <div ng-click="gotoList($event,'authority')" role="button" style="cursor:pointer;">
+            <div class="btn-commonformat" class="{ 'btn-commonformat-selected' : document_type=='authority' }">
+                <div class="btn-commonformat-national">
+                    <i class="material-icons" style="font-size:16pt;position:relative;top:3px;">{{'authority' | schemaIcon }}</i>
+                    CNA
+                    <div class="pull-right" style="text-align:right; width:180px;padding-right:0px;position:relative;top:0px;">
+                        <span ng-show="facets(authority,'publish') > 0" class="label label-success" style="margin: 0 0 0 1px;"> {{facets('authority','publish')}}</span>
+                        <span ng-show="facets(authority,'draft') > 0" class="label label-default" style="margin: 0 0 0 1px;"> {{facets('authority','draft')}}</span>
+                        <span ng-show="facets(authority,'request') > 0" class="label label-danger" style="margin: 0 0 0 1px;"> {{facets('authority','request')}}</span>
+                        <span ng-click="gotoNew($event,'authority')" class="label color-blue bg-litegrey" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i> </span>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="clearfix btn-commonformat-name"> Competent National Authority </div>
+            </div>
+        </div>
+        <div ng-click="gotoList($event,'abscheckpoint')" role="button" style="cursor:pointer;">
+            <div class="btn-commonformat" class="{ 'btn-commonformat-selected' : document_type=='abscheckpoint' }">
+                <div class="btn-commonformat-national">
+                    <i class="material-icons" style="font-size:16pt;position:relative;top:3px;">{{'abscheckpoint' | schemaIcon }}</i>
+                    CP
+                    <div class="pull-right" style="text-align:right; width:180px;padding-right:0px;position:relative;top:0px;">
+                        <span ng-show="facets('abscheckpoint','publish') > 0" class="label label-success" style="margin: 0 0 0 1px;"> {{facets('abscheckpoint','publish')}}</span>
+                        <span ng-show="facets('abscheckpoint','draft') > 0" class="label label-default" style="margin: 0 0 0 1px;"> {{facets('abscheckpoint','draft')}}</span>
+                        <span ng-show="facets('abscheckpoint','request') > 0" class="label label-danger" style="margin: 0 0 0 1px;"> {{facets('abscheckpoint','request')}}</span>
+                        <span ng-click="gotoNew($event,'abscheckpoint')" class="label color-blue bg-litegrey" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i> </span>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="clearfix btn-commonformat-name"> Checkpoint </div>
+            </div>
+        </div>
+        <div ng-click="gotoList($event,'measure')" role="button" style="cursor:pointer;">
+            <div class="btn-commonformat" class="{ 'btn-commonformat-selected' : document_type=='measure' }">
+                <div class="btn-commonformat-national">
+                    <i class="material-icons" style="font-size:16pt;position:relative;top:3px;">{{'measure' | schemaIcon }}</i>
+                    MSR
+                    <div class="pull-right" style="text-align:right; width:180px;padding-right:0px;position:relative;top:0px;">
+                        <span ng-show="facets('measure','publish') > 0" class="label label-success" style="margin: 0 0 0 1px;"> {{facets('measure','publish')}}</span>
+                        <span ng-show="facets('measure','draft') > 0" class="label label-default" style="margin: 0 0 0 1px;"> {{facets('measure','draft')}}</span>
+                        <span ng-show="facets('measure','request') > 0" class="label label-danger" style="margin: 0 0 0 1px;"> {{facets('measure','request')}}</span>
+                        <span ng-click="gotoNew($event,'measure')" class="label color-blue bg-litegrey" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i> </span>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="clearfix btn-commonformat-name"> Legislative, administrative or policy measures on access and benefit-sharing </div>
+            </div>
+        </div>
+        <div ng-click="gotoList($event,'absPermit')" role="button" style="cursor:pointer;">
+            <div class="btn-commonformat" class="{ 'btn-commonformat-selected' : document_type=='absPermit' }">
+                <div class="btn-commonformat-national">
+                    <i class="material-icons" style="font-size:16pt;position:relative;top:3px;">{{'absPermit' | schemaIcon }}</i>
+                    IRCC
+                    <div class="pull-right" style="text-align:right; width:180px;padding-right:0px;position:relative;top:0px;">
+                        <span ng-show="facets('absPermit','publish') > 0" class="label label-success" style="margin: 0 0 0 1px;"> {{facets('absPermit','publish')}}</span>
+                        <span ng-show="facets('absPermit','draft') > 0" class="label label-default" style="margin: 0 0 0 1px;"> {{facets('absPermit','draft')}}</span>
+                        <span ng-show="facets('absPermit','request') > 0" class="label label-danger" style="margin: 0 0 0 1px;"> {{facets('absPermit','request')}}</span>
+                        <span ng-click="gotoNew($event,'absPermit')" class="label color-blue bg-litegrey" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i> </span>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="clearfix btn-commonformat-name"> Permit or its equivalent constituting an internationally recognized certificate of compliance </div>
+            </div>
+        </div>
+        <div ng-click="gotoList($event,'absCheckpointCommunique')" role="button" style="cursor:pointer;">
+            <div class="btn-commonformat" class="{ 'btn-commonformat-selected' :document_type=='absCheckpointCommunique' }">
+                <div class="btn-commonformat-national">
+                    <i class="material-icons" style="font-size:16pt;position:relative;top:3px;">{{'absCheckpointCommunique' | schemaIcon }}</i>
+                    CPC
+                    <div class="pull-right" style="text-align:right; width:180px;padding-right:0px;position:relative;top:0px;">
+                        <span ng-show="facets('absCheckpointCommunique','publish') > 0" class="label label-success" style="margin: 0 0 0 1px;"> {{facets('absCheckpointCommunique','publish')}}</span>
+                        <span ng-show="facets('absCheckpointCommunique','draft') > 0" class="label label-default" style="margin: 0 0 0 1px;"> {{facets('absCheckpointCommunique','draft')}}</span>
+                        <span ng-show="facets('absCheckpointCommunique','request') > 0" class="label label-danger" style="margin: 0 0 0 1px;"> {{facets('absCheckpointCommunique','request')}}</span>
+                        <span ng-click="gotoNew($event,'absCheckpointCommunique')" class="label color-blue bg-litegrey" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i> </span>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="clearfix btn-commonformat-name"> Information for the Checkpoint Communiqué </div>
+            </div>
+        </div>
+        <div ng-click="gotoList($event,'database')" role="button" style="cursor:pointer;">
+            <div class="btn-commonformat" class="{ 'btn-commonformat-selected' : document_type=='database' }">
+                <div class="btn-commonformat-national">
+                    <i class="material-icons" style="font-size:16pt;position:relative;top:3px;">{{'database' | schemaIcon }}</i>
+                    NDB
+                    <div class="pull-right" style="text-align:right; width:180px;padding-right:0px;position:relative;top:0px;">
+                        <span ng-show="facets('database','publish') > 0" class="label label-success" style="margin: 0 0 0 1px;"> {{facets('database','publish')}}</span>
+                        <span ng-show="facets('database','draft') > 0" class="label label-default" style="margin: 0 0 0 1px;"> {{facets('database','draft')}}</span>
+                        <span ng-show="facets('database','request') > 0" class="label label-danger" style="margin: 0 0 0 1px;"> {{facets('database','request')}}</span>
+                        <span ng-click="gotoNew($event,'database')" class="label color-blue bg-litegrey" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i> </span>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="clearfix btn-commonformat-name"> ABS National Website or Database </div>
+            </div>
+        </div>
+        <div ng-click="gotoList($event,'absNationalReport')" role="button" style="cursor:pointer;">
+            <div class="btn-commonformat" class="{ 'btn-commonformat-selected' : document_type=='absNationalReport' }">
+                <div class="btn-commonformat-national">
+                    <i class="material-icons" style="font-size:16pt;position:relative;top:3px;">{{'absNationalReport' | schemaIcon }}</i>
+                    NR
+                    <div class="pull-right" style="text-align:right; width:180px;padding-right:0px;position:relative;top:0px;">
+                        <span ng-show="facets('absNationalReport','publish') > 0" class="label label-success" style="margin: 0 0 0 1px;"> {{facets('absNationalReport','publish')}}</span>
+                        <span ng-show="facets('absNationalReport','draft') > 0" class="label label-default" style="margin: 0 0 0 1px;"> {{facets('absNationalReport','draft')}}</span>
+                        <span ng-show="facets('absNationalReport','request') > 0" class="label label-danger" style="margin: 0 0 0 1px;"> {{facets('absNationalReport','request')}}</span>
+                        <span ng-click="gotoNew($event,'absNationalReport')" class="label color-blue bg-litegrey" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i> </span>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="clearfix btn-commonformat-name"> Interim national report on the implementation of the Nagoya Protocol </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
