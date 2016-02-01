@@ -1,98 +1,48 @@
-<div class="container" style="position:relative; top:20px; padding-bottom:500px;"  ng-controller="faqController">
-      <div smooth-scroll duration="100" offset="200" ></div>
+<div ng-controller="faqController">
+<div smooth-scroll duration="100" offset="200" ></div>
+<link rel="stylesheet" href="/app/css/about.css">
+  
+  <style>
+    .nav > li > a {padding-top: 10px;font-weight: bold;}
+    .nav>li>a:hover, .nav>li>a:focus {background-color:transparent!important;}
+    .nav-stacked>li{padding-top:10px; margin-top:0!important;}
+    .nav-stacked>li>a:hover, .nav-stacked>li.active>a, .nav-stacked>li.active>a:hover, .nav-stacked>li.active>a:focus{color:#1FA65D;background-color:transparent!important;}
+    .nav-stacked>li>a {color:#1FA65D;padding:0 3px; font-weight: bold; font-size:24px;}
+    .sublist{padding:10px!important;border-top:1px solid #bbb; background-color:#ddd; }
+    .sublist>div>a{color:#666!important;font-weight: bold!important; font-size:18px;}
+    .sublist>li>a:hover, .sublist>li>a:focus, {color:#111!important;background-color: transparent!important;}
+</style>
 
-   <style>
+  <div class="container">
+  <div class="row-fluid">
+    <nav class="col-xs-12" >
+       <h1> Frequently Asked Questions</h1>
+       <ul class="nav nav-stacked">
+        <li>
+            <input type="text" class="form-control" aria-label="search" placeholder="Search FAQs" ng-model="searchFAQs" style="width:400px;">
+           <!--&nbsp; &nbsp; &nbsp;
+            <i class="fa" ng-class="{'fa-toggle-on':showAll, 'fa-toggle-off:!showAll}"></i> <a href="#" ng-click="showAll=!showAll"> show all </a>        -->
+        </li>
+        
+        <li><hr style="border-top:1px solid #999;"></li>
+        
+        <li ng-repeat="(key,faq) in faqs| filter:searchFAQs | orderBy:['sequence']"><a href="#{{key}}">{{key.substring(3)}}</a>
+             <ul class="nav nav-stacked">
+                <li  ng-class="{'bg-white':show || showAll}" class="sublist" ng-repeat="term in faq | filter:searchFAQs | orderBy:['sequence']">
+                 <div><a href="#{{term.id}}" ng-click="show=!show">{{term.title}}</a></div>
+                 <div><a href="#" style="position:relative;top:-25px;" ng-show="show || showAll" class="pull-right" ng-click="show=false"><i class="fa fa-times"></i></a></div>
+                 <div ng-show="show || showAll" style="padding:5px;margin-top:20px;">
+                    <!--<h3><a name="{{term.id}}">{{term.title}}</a></h3>-->
+                     <p ng-bind-html="term.description|lstring"></p>
+                     <!--<div class="pull-right"><a href="#"  scroll-to="anchorTop" class="color-litegrey"><i class="fa fa-arrow-circle-up"></i> back to top</a></div>-->
+                 <div>
+                </li>
+            </ul>
+        </li>
+      </ul>
+    </nav>
 
-/*a:link{color: #428bca;}*/
-/*a:visited{color: #428bca;}*/
-a:hover{color: #000;}
-a:active{color: #000;}
+  </div>
+</div>
 
-
-   </style>
-
-
-
-     <div class="row">
-            <div class="col-xs-12">
-                <h1><i class="fa fa-question-circle color-blue"></i> Frequently Asked Questions (FAQs) </h1>
-
-                  <md-input-container>
-                    <label style="font-size:16px;">What do you need help with?</label>
-                    <input ng-model="keyword">
-                 </md-input-container>
-
-                  <md-content ng-if="keyword" class="bg-litegrey" style="padding-bottom:30px;">
-                      <div ng-repeat="term in faqSearch | filter:keyword">
-                           <a href="#" ng-click="scrollTo(term._id);" class="bold color-blue"> <i class="fa fa-question-circle color-blue"></i>  {{term.title}}</a>
-                      </div>
-                      <div ng-show="!(faqSearch|filter:keyword).length" class="bold" >No matching FAQs found.</div>
-                  </md-content>
-
-                 <md-content class="bg-grey1" style="padding-top:0;">
-                    <div layout="column" layout-align="top center"  style="padding-top:0;">
-                        <md-list  style="padding-top:0;">
-                            <md-list-item class="md-1-line" ng-repeat="(key,faq) in faqs|orderBy:['key']" style="padding:0;" >
-
-                                <md-list  style="padding-top:0;width:100%">
-                                    <md-list-item class="md-1-line bg-grey">
-                                      <div class="md-list-item-text faqkey">
-                                         <md-divider ng-if="!$first"></md-divider>
-                                            <h1 style="padding-top:20px;"> {{key}}</h1>
-                                      </div>
-                                    </md-list-item>
-                                    <md-list-item class="md-1-line" ng-repeat="term in faq|orderBy:['sequence'] " id="{{term._id}}" ng-class="{'bg-white': show}" >
-                                      <div class="md-list-item-text">
-                                          <h3  ng-click="show=!show" style="cursor:pointer;">
-                                              {{term.title}}
-                                             <a ng-if="isAdmin()" href="/help/edit/faq/{{term._id}}" target="edit"><i class="fa fa-pencil-square"></i></a>
-                                              <span ng-if="show" class="pull-right" ng-click="show=false"><i class="material-icons">close</i></span>
-                                          </h3>
-                                          <div class="color-grey" ng-if="show" >
-
-                                              <p  style="padding:20px 0;"  ng-bind-html="term.description|lstring"></p>
-                                               <!--<div style="padding-bottom:20px;" class="color-grey" ng-show="term.related">
-                                               <strong>Related:</strong>
-                                                    <div ng-repeat="rel in term.related">
-                                                            <a href="#" ng-click="scrollTo(rel);" class="bold color-blue">{{getTitle(rel)}}</a>
-                                                    </div>
-                                                </div>-->
-                                                <div class="pull-right"><a href="#"  scroll-to="anchorTop" class="color-litegrey"><i class="fa fa-arrow-circle-up"></i> back to top</a></div>
-                                          </div>
-                                           <md-divider ng-if="!$last"></md-divider>
-                                        </div>
-                                    </md-list-item>
-                                </md-list>
-                            </md-list-item>
-                        </md-list>
-                    </div>
-                </md-content>
-            </div>
-       </div>
-
-
-    <!--<md-content flex layout-margin style="margin:0 30px 30px 30px;padding:0;background-color:transparent;">
-<span>Frequently Asked Questions</span>
-
-        <div layout="column" layout-fill>
-            <md-toolbar>
-                <div class="md-toolbar-tools">
-                    <span>Frequently Asked Questions</span>
-                    <span flex></span>
-                </div>
-            </md-toolbar>
-            <md-content class="md-padding">
-                <div layout="column" layout-align="top center">
-                    <md-list>
-                        <md-list-item ng-repeat="term in faqs">
-                            <a href="/help/faq/{{term._id}}">
-                            {{term.title}}
-                        </a>
-                            <md-divider ng-if="!$last"></md-divider>
-                        </md-list-item>
-                    </md-list>
-                </div>
-            </md-content>
-        </div>
-    </md-content>-->
 </div>

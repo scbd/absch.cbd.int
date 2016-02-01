@@ -1,4 +1,4 @@
-define(['app','underscore','ngSmoothScroll','ngMaterial','ngAria','angular-animate','scbd-angularjs-services','scbd-angularjs-filters','scbd-angularjs-controls'], function (app, _) {
+define(['app','underscore','ngSmoothScroll','ngAria','angular-animate','scbd-angularjs-services','scbd-angularjs-filters','scbd-angularjs-controls'], function (app, _) {
 app.controller("faqController",
 	["$rootScope", "$scope", "$q", "underscore",'$http','commonjs','smoothScroll', '$element', function ($rootScope, $scope, $q, _, $http, commonjs, smoothScroll, $element) {
 
@@ -29,20 +29,6 @@ app.controller("faqController",
 			}
 			return "";
 		}
-
-
-		$scope.scrollTo = function(rel){
-			var element = document.getElementById(rel);
-			var options = {
-				duration: 700,
-				easing: 'easeInQuad',
-				offset: 60,
-			}
-
-			smoothScroll(element, options);
-		}
-
-
 
 
    }]);
