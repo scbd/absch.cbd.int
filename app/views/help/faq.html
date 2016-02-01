@@ -9,17 +9,17 @@
     .nav-stacked>li>a:hover, .nav-stacked>li.active>a, .nav-stacked>li.active>a:hover, .nav-stacked>li.active>a:focus{color:#1FA65D;background-color:transparent!important;}
     .nav-stacked>li>a {color:#1FA65D;padding:0 3px; font-weight: bold; font-size:24px;}
     .sublist{padding:10px!important;border-top:1px solid #bbb; background-color:#ddd; }
-    .sublist>div>a{color:#666!important;font-weight: bold!important; font-size:18px;}
+    .sublist>div.term>a{color:#666!important;font-weight: bold!important; font-size:18px;}
     .sublist>li>a:hover, .sublist>li>a:focus, {color:#111!important;background-color: transparent!important;}
 </style>
 
-  <div class="container">
+  <div class="container-fluid">
   <div class="row-fluid">
     <nav class="col-xs-12" >
        <h1> Frequently Asked Questions</h1>
        <ul class="nav nav-stacked">
         <li>
-            <input type="text" class="form-control" aria-label="search" placeholder="Search FAQs" ng-model="searchFAQs" style="width:400px;">
+            <input type="text" class="form-control" aria-label="search" placeholder="Search FAQs" ng-model="searchFAQs" style="width:340px;">
            <!--&nbsp; &nbsp; &nbsp;
             <i class="fa" ng-class="{'fa-toggle-on':showAll, 'fa-toggle-off:!showAll}"></i> <a href="#" ng-click="showAll=!showAll"> show all </a>        -->
         </li>
@@ -29,8 +29,9 @@
         <li ng-repeat="(key,faq) in faqs| filter:searchFAQs | orderBy:['sequence']"><a href="#{{key}}">{{key.substring(3)}}</a>
              <ul class="nav nav-stacked">
                 <li  ng-class="{'bg-white':show || showAll}" class="sublist" ng-repeat="term in faq | filter:searchFAQs | orderBy:['sequence']">
-                 <div><a href="#{{term.id}}" ng-click="show=!show">{{term.title}}</a></div>
-                 <div><a href="#" style="position:relative;top:-25px;" ng-show="show || showAll" class="pull-right" ng-click="show=false"><i class="fa fa-times"></i></a></div>
+                 <div><a href="#" ng-show="show || showAll" class="pull-right" ng-click="show=false" style="color:#428bca"><i class="fa fa-times"></i></a></div>
+                 <div class="term"><a href="#{{term.id}}" ng-click="show=!show">{{term.title}}</a></div>
+                
                  <div ng-show="show || showAll" style="padding:5px;margin-top:20px;">
                     <!--<h3><a name="{{term.id}}">{{term.title}}</a></h3>-->
                      <p ng-bind-html="term.description|lstring"></p>
