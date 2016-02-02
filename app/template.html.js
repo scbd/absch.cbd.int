@@ -10,9 +10,8 @@ define(['app','ng-breadcrumbs','angular-localizer','scbd-angularjs-services','sc
     'use strict';
 
     app.controller('TemplateController', ['$scope', '$rootScope','showHelp' , '$window', '$location', 'authentication', '$browser', 'realmConfiguration', 'underscore', 'IUserNotifications', '$timeout','$filter',
-     '$anchorScroll','breadcrumbs','toastr',//'localStorageService',localStorageService,
-        function($scope, $rootScope, showHelp, $window, $location, authentication, $browser, realmConfiguration, _, userNotifications, $timeout, $filter, $anchorScroll, breadcrumbs, toastr ) {
-
+     '$anchorScroll','breadcrumbs','toastr', '$route',//'localStorageService',localStorageService,
+        function($scope, $rootScope, showHelp, $window, $location, authentication, $browser, realmConfiguration, _, userNotifications, $timeout, $filter, $anchorScroll, breadcrumbs, toastr, $route ) {
             $scope.controller = "TemplateController";
             $scope.breadcrumbs     = breadcrumbs;
             $scope.$root.pageTitle = { text: "" };
@@ -112,6 +111,8 @@ define(['app','ng-breadcrumbs','angular-localizer','scbd-angularjs-services','sc
             //============================================================
             $scope.actionSignOut = function() {
                 authentication.signOut();
+                if($route.current.locals.securized)
+                    $location.path('/');
             };
 
             //============================================================

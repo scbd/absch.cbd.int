@@ -16,8 +16,10 @@ define(['app', 'underscore','angular-localizer','scbd-angularjs-services','scbd-
             link: ['$scope', '$q', '$element', function ($scope, $q, $element) {
 
             }]
-            , controller: ['$scope', '$rootScope', '$window', '$location', 'authentication', '$browser', 'realmConfiguration', 'underscore', 'IUserNotifications', '$timeout','$filter','$anchorScroll',
-            function($scope, $rootScope, $window, $location, authentication, $browser, realmConfiguration, _, userNotifications, $timeout, $filter) {
+            , controller: ['$scope', '$rootScope', '$window', '$location', 'authentication', '$browser', 'realmConfiguration',
+                        'underscore', 'IUserNotifications', '$timeout','$filter','$route','$anchorScroll',
+            function($scope, $rootScope, $window, $location, authentication, $browser, realmConfiguration,
+                    _, userNotifications, $timeout, $filter, $route, $anchorScroll) {
 
 
             //============================================================
@@ -26,6 +28,8 @@ define(['app', 'underscore','angular-localizer','scbd-angularjs-services','scbd-
             //============================================================
             $scope.actionSignOut = function() {
                 authentication.signOut();
+                if($route.current.locals.securized)
+                    $location.path('/');
             };
 
             //============================================================
