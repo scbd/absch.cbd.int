@@ -1,11 +1,11 @@
 <div>
     <div>
-        <h3 class="special-font btn-commonformat-header-national">
-            My Contact Book
+        <h3 class="special-font btn-commonformat-header-national"  style="color:#555;">
+            My Contacts
         </h3>
         <div ng-click="gotoList($event,'contact')" role="button" style="cursor:pointer;">
             <div class="btn-commonformat" class="{ 'btn-commonformat-selected' : document_type=='contact' }">
-                <div class="btn-commonformat-national">
+                <div class="btn-commonformat-national color-black" style="color:#555;">
                     <i class="material-icons" style="font-size:16pt;position:relative;top:3px;">{{'measure' | schemaIcon }}</i> CON
                     <div class="pull-right" style="text-align:right; width:180px;padding-right:0px;position:relative;top:0px;">
                         <span ng-show="facets('contact','publish') > 0" class="label label-success" style="margin: 0 0 0 1px;"> {{facets('contact','publish')}}</span>
@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div class="clearfix"></div>
-                <div class="clearfix btn-commonformat-name"> Nationaal Contacts </div>
+                <div class="clearfix btn-commonformat-name"> Contacts </div>
             </div>
         </div>
     </div>

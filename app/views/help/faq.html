@@ -29,7 +29,7 @@
         <li ng-repeat="(key,faq) in faqs| filter:searchFAQs | orderBy:['sequence']"><a href="#{{key}}">{{key.substring(3)}}</a>
              <ul class="nav nav-stacked">
                 <li  ng-class="{'bg-white':show || showAll}" class="sublist" ng-repeat="term in faq | filter:searchFAQs | orderBy:['sequence']">
-                 <div><a href="#" ng-show="show || showAll" class="pull-right" ng-click="show=false" style="color:#428bca"><i class="fa fa-times"></i></a></div>
+                 <div><a href="#" ng-show="show || showAll" class="pull-right" ng-click="show=false" style="color:#428bca;"><strong>X</strong></a></div>
                  <div class="term"><a href="#{{term.id}}" ng-click="show=!show">{{term.title}}</a></div>
                 
                  <div ng-show="show || showAll" style="padding:5px;margin-top:20px;">

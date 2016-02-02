@@ -1,12 +1,8 @@
-@import url("ngmaterial.css");
-/*notifications*/
 
 *:focus {
   outline: none!important;
 }
-/*
-.page-content a:link{color: #428bca;}
-.page-content a:visited{color: #428bca;}*/
+
 a:hover{color: #000;}
 a:active{color: #000;}
 
@@ -160,7 +156,6 @@ background-color: white;
 }
 .color-green{
     color:#1FA65D!important;
-    #5cb85c
 }
 .color-published-green{
     color:#5cb85c!important;
@@ -337,7 +332,7 @@ font-size: 38px;
 }
 
 
-@font-face {
+/*@font-face {
     font-family: 'alternategotno3dotregular';
     src: url('/app/fonts/alternategotno3dot-webfont.eot');
     src: url('/app/fonts/alternategotno3dot-webfont.eot?#iefix') format('embedded-opentype'),
@@ -346,7 +341,7 @@ font-size: 38px;
          url('/app/fonts/alternategotno3dot-webfont.svg#alternategotno3dotregular') format('svg');
     font-weight: normal;
     font-style: normal;
-}
+}*/
 .home-col > p > a:hover, a:focus{
 	/*color:black;*/
 	text-decoration: none;
@@ -358,7 +353,7 @@ font-size: 38px;
 }
 
 .special-font{
-    font-family: 'alternategotno3dotregular';
+    /*font-family: 'alternategotno3dotregular';*/
     text-transform:uppercase;
     text-rendering: optimizeLegibility;
 }
@@ -368,9 +363,9 @@ body{
   font-family:  "Helvetica Neue", Helvetica, sans-serif, Trebuchet MS;
   text-rendering: optimizeLegibility;
   font-size:14px;
-background-color:#eee!important;
-color:#555;
-position:relative;
+  background-color:#eee!important;
+  color:#555;
+  position:relative;
 }
 
 h4, h5, h6 {

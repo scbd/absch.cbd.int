@@ -4,7 +4,7 @@
 <!-- <script src="/app/views/directives/login.directive.html.js"></script> -->
 <div ng-controller="IndexController">
     <div smooth-scroll duration="100" offset="200"></div>
-
+    
     <style>
         @media (max-width: 768px) {
                 #Jumbotron {height:auto!important;}
@@ -19,7 +19,6 @@
             }
     </style>
 
-
     <div id="Jumbotron" class="bg-texture-green" style="border-top:1px solid #555;border-bottom:2px solid #ddd;height:600px;">
         <div id="Map" class="hidden-xs" style="background-image:url('/app/img/placeholder-map.png');height:596px;position:absolute;width:100%;background-size:2000px;background-repeat: no-repeat;background-position: center ;"></div>
         <div class="container" style="color:white;padding:20px;">
@@ -27,7 +26,7 @@
             <div id="Tagline" class="row  bg-green" style="padding:20px;">
                 <div class="col-md-12">
                     <div class="home-col dropshadow">
-                        <h3 style="text-align:justify;">The Access and Benefit-sharing Clearing-house (ABSCH) is a platform for exchanging information on ABS and a key tool for facilitating the implementation of the Nagoya Protocol.
+                        <h3>The Access and Benefit-sharing Clearing-house (ABSCH) is a platform for exchanging information on ABS and a key tool for facilitating the implementation of the Nagoya Protocol.
                         </h3>
                     </div>
                 </div>
@@ -51,18 +50,31 @@
     </div>
 
     <div style="padding:20px">
+      
         <div class="container-fluid" style="padding:0;">
-            <h3 style="padding-left:15px;padding-bottom:0;margin-bottom:0;">ABSCH Record Overview</h3>
-            <div style="margin-left:15px;padding-left:15px;border-top:1px solid #BBB;"></div>
             <home-country-dashboard></home-country-dashboard>
         </div>
 
         <div class="container-fluid" style="margin-top:50px;">
+            <h3 style="padding-bottom:0;margin-bottom:0;">SCBD records&nbsp;<i class="info fa fa-question-circle"></i></h3>
+            <div style="padding-left:15px;border-top:1px solid #BBB;"></div>
             <div class="row">
+               <div class="col-md-3">
+                    <div class="bg-darkgrey"><h5 style="padding:3px;" class="color-white">What's New</h5></div>
+                    <div>
+                        <div ng-repeat="doc in rawRefDocs_whatsnew" ng-show="doc.title_t && $index < 5">
+                            <a href="https://www.cbd.int/{{doc.url_ss[0]}}" target="_n_e_w_" style="padding-bottom:5px;">
+                                <span style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.createdDate_dt | formatDate}}</span>
+                                <!--<span style="text-transform:uppercase;font-weight:bold;font-size:10px;" class="color-orange"> {{doc.schema_s}}</span>-->
+                                <span class="color-grey" style="display:block;font-size:12px;">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." : doc.title_t }}</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-                <div class="col-md-4">
-                    <h3 style="padding-bottom:0;margin-bottom:0;">Latest Notifications</h3>
-                    <div style="border-top:1px solid #BBB;">
+                <div class="col-md-3">
+                    <div class="bg-darkgrey"><h5 style="padding:3px;" class="color-white">Latest Notifications</h5></div>
+                    <div>
                         <div ng-repeat="doc in rawRefDocs_Notification" ng-show="doc.title_t && $index < 5">
                             <a href="https://www.cbd.int/{{doc.url_ss[0]}}" target="_n_e_w_" style="padding-bottom:5px;">
                                 <span style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.createdDate_dt | formatDate}}</span>
@@ -73,9 +85,9 @@
                     </div>
                 </div>
 
-                <div class="col-md-4">
-                    <h3 style="padding-bottom:0;margin-bottom:0;">Upcoming Meetings</h3>
-                    <div style="border-top:1px solid #BBB;">
+                <div class="col-md-3">
+                     <div class="bg-darkgrey"><h5 style="padding:3px;" class="color-white">Upcoming Meetings</h5></div>
+                    <div>
                         <div ng-repeat="doc in rawRefDocs_Meeting" ng-show="doc.title_t &&  $index < 5">
                             <a href="https://www.cbd.int/doc/?meeting={{doc.symbol_s}}" target="_n_e_w_" style="padding-bottom:5px;">
                                 <span style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.startDate_dt | formatDate}} - {{doc.endDate_s | formatDate}}</span>
@@ -85,10 +97,10 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="col-md-4">
-                    <h3 style="padding-bottom:0;margin-bottom:0;">Latest News</h3>
-                    <div style="border-top:1px solid #BBB;">
+                
+                <div class="col-md-3">
+                    <div class="bg-darkgrey"><h5 style="padding:3px;" class="color-white">Latest News</h5></div>
+                    <div>
                         <div ng-repeat="doc in rawRefDocs_News" ng-show="doc.title_t && $index < 6">
                             <a href="{{doc.url_ss[0]}}" target="_n_e_w_" style="padding-bottom:5px;">
                                 <span style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.createdDate_dt | formatDate}}</span>
@@ -101,13 +113,11 @@
 
             </div>
         </div>
-        <div class="container-fluid" style="margin-top:50px;">
-            <div class="row">
-                <div class="col-xs-12">
-                    <h3 style="border-bottom:1px solid #BBB;">About the Nagoya Protocol</h3>
-                </div>
-                <div class="clearfix"></div>
 
+        <div class="container-fluid" style="margin-top:50px;">
+             <h3 style="padding-bottom:0;margin-bottom:0;">About the Nagoya Protocol</h3>
+            <div style="padding-left:15px;border-top:1px solid #BBB;"></div>
+            <div class="row"  style="padding-top:20px;">            
                 <div class="col-md-8">
                     <div class="home-col">
                         The Nagoya Protocol on Access to Genetic Resources and the Fair and Equitable Sharing of Benefits Arising from their Utilization to the Convention on Biological Diversity is an international agreement which aims at sharing the benefits arising from the
@@ -125,17 +135,17 @@
                                 <div flex class="bg-green">
                                     <span class="color-white" style="font-weight:bold; font-size:32px;text-shadow: 0 1px 2px rgba(0, 0, 0, .6);">{{yearsSinceEntry}}</span>
                                     <br>
-                                    <span style="color:#EEE;text-transform: uppercase;font-weight:bold;font-size:14px;">years</span>
+                                    <span style="color:#EEE;text-transform: uppercase;font-weight:bold;font-size:14px;">year<span ng-if="yearsSinceEntry > 1">s</span></span>
                                 </div>
                                 <div flex class="bg-green">
                                     <span class="color-white" style="font-weight:bold; font-size:32px;text-shadow: 0 1px 2px rgba(0, 0, 0, .6);">{{monthsSinceEntry}}</span>
                                     <br>
-                                    <span style="color:#EEE;text-transform: uppercase;font-weight:bold;font-size:14px;">months</span>
+                                    <span style="color:#EEE;text-transform: uppercase;font-weight:bold;font-size:14px;">month<span ng-if="monthsSinceEntry > 1">s</span></span>
                                 </div>
                                 <div flex class="bg-green">
                                     <span class="color-white" style="font-weight:bold; font-size:32px;text-shadow: 0 1px 2px rgba(0, 0, 0, .6);">{{daysSinceEntry}}</span>
                                     <br>
-                                    <span style="color:#EEE;text-transform: uppercase;font-weight:bold;font-size:14px;">days</span>
+                                    <span style="color:#EEE;text-transform: uppercase;font-weight:bold;font-size:14px;">day<span ng-if="daysSinceEntry > 1">s</span></span>
                                 </div>
                             </div>
                             <div style="color:#666;text-transform:uppercase;font-weight:bold;font-size:14px;">
