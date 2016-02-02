@@ -1,5 +1,4 @@
 'use strict';
-
 define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 'filters', 'realm-configuration'], function (app) {
 
     app.value("realm", {value:"ABS"});
@@ -14,9 +13,9 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
         $routeProvider.
 
             when('/partners/idlo/events',              { templateUrl: '/app/views/partners/idlo.html',           label:'IDLO',             resolveController: false, resolveUser: false}).
-    
 
-       
+
+
             when('/',                            { templateUrl: '/app/views/home/index.html',                       label:'ABSCH',                              resolveController: true, resolveUser : true}).
             when('/commonformat',                { templateUrl: '/app/views/common-formats.html',                   label:'Common Formats',                     resolveController: true, resolveUser : true}).
             when('/help',                        { templateUrl: '/app/views/help/help.html',                        label:'Help',                               resolveController: true, resolveUser : true}).
@@ -26,10 +25,10 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
             when('/help/search',                 { templateUrl: '/app/views/help/search/search.html',               label:'Finding Information',                resolveController: true, resolveUser : true}).
             when('/help/tours',                  { templateUrl: '/app/views/help/tours/tours.html',                 label:'Tours',                              resolveController: true, resolveUser : true}).
             when('/help/register',               { templateUrl: '/app/views/help/register/register.html',           label:'Submitting Information',             resolveController: true, resolveUser : true}).
-            
+
              when('/about',                        { templateUrl: '/app/views/about/about.html',                        label:'About the ABSCH',                 resolveController:true, resolveUser : true}).
-            
-            
+
+
             when('/forums',                        { templateUrl: '/app/views/forums/forum-list-view.html',         label:'Forums',       resolveController: true, resolve : { securized : securize() } }).
 
             when('/forums/iac-trg',          { redirectTo:'/forums/iac', resolve : { securized : securize() }}).
@@ -95,11 +94,11 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
             when('/register/:document_type/help',                       {templateUrl: '/app/views/register/register.html',          label:'document_type',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/register/type_document_list.html',}).
             when('/register/:document_type/:identifier/edit',           {templateUrl: '/app/views/register/register.html',          label:'Edit',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/forms/edit/edit--', }).
             when('/register/:document_type/:identifier/edit/:tour',     {templateUrl: '/app/views/register/register.html',          label:'Edit',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/forms/edit/edit--',  }).
-            
+
             when('/submit/tasks/:id',                                 {templateUrl: '/app/views/tasks/tasks-id.html',             label:'Management Center',  param:'true', resolveController: true, resolveUser: true}).
             when('/submit/tasks/:id/:activity',                       {templateUrl: '/app/views/tasks/tasks-id-activity.html',    label:'Management Center',  param:'true', resolveController: true, resolveUser: true}).
-            when('/submit/dashboard',                                 {templateUrl: '/app/views/register/register.html',          label:'Management Center',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/register/dashboard.html',}).  
-            
+            when('/submit/dashboard',                                 {templateUrl: '/app/views/register/register.html',          label:'Management Center',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/register/dashboard.html',}).
+
             when('/submit',                                           {templateUrl: '/app/views/register/register.html',          label:'Management Center',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/register/dashboard.html',}).
             when('/submit/requests',                                  {templateUrl: '/app/views/register/register.html',          label:'Requests',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',    type : 'all'}).
             when('/submit/requests/:workflowId',                      {templateUrl: '/app/views/register/register.html',          label:'Requests',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',type : 'all'}).
@@ -147,4 +146,33 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
             otherwise({templateUrl: '/app/404.html', label:'404 Error'});
 
     }]);
+
+
+    function securize(roles)
+    {
+        return ["$location", "authentication", "appConfigService", function ($location, authentication, appConfigService) {
+
+            return authentication.getUser().then(function (user) {
+
+                if (!user.isAuthenticated) {
+
+                    console.log("securize: force sign in");
+
+                    if (!$location.search().returnUrl)
+                        $location.search({ returnUrl: $location.url() });
+
+                    $location.path(appConfigService.getSiteMapUrls().user.signIn);
+
+                }
+                else if (roles && !_.isEmpty(roles) && _.isEmpty(_.intersection(roles, user.roles))) {
+                    console.log("securize: not authorized");
+
+                    $location.search({ path: $location.url() });
+                    $location.path(appConfigService.getSiteMapUrls().errors.notAuthorized);
+                }
+
+                return user;
+            });
+        }];
+    }
 });

@@ -11,6 +11,7 @@ define(['app', 'underscore','angular-localizer','scbd-angularjs-services','scbd-
             templateUrl: '/app/views/directives/nav/cbd-header.html',
             scope: {
                     uid: '@',
+                    user : '='
             },
             link: ['$scope', '$q', '$element', function ($scope, $q, $element) {
 
