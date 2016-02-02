@@ -39,7 +39,7 @@
     "requirejs-plugins": "1.0.3",
     "requirejs-text": "2.0.14",
     "scbd-angularjs-controls": "*",
-    "scbd-angularjs-services": "https://github.com/scbd/scbd-angularjs-services.git#4d21b9637b6985b90e6a96a68b69c411e2691ce7",
+    "scbd-angularjs-services": "*",
     "underscore": "1.7.0"
   },
   "resolutions": {
