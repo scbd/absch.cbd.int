@@ -58,4 +58,4 @@ app.listen(app.get('port'), function () {
 	console.log('Server listening on %j', this.address());
 });
 // server.listen(app.get('port'));
->>>>>>> upgrade express versions and changes to server.js accordingly
+
