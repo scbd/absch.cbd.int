@@ -5,7 +5,7 @@
 		}
 	</style>
 
-	<div ng-hide="document.type=='organization'">
+	<div ng-show="document.type=='person'">
 
 		<legend>Personal Information</legend>
 
@@ -36,7 +36,25 @@
 			</div>
 
 		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="km-control-group" name="contact_organization"  caption="Organization">
+					<!-- <div km-select name="contact_organization" ng-model="document.organization"
+						items="options.organization()" required></div> -->
+					<field-embed-contact ng-model="document.contactOrganization" locales="document.header.languages"
+					name="organization" caption="Link Organization »"
+					sub-filter="[{'type':'organization'}]"></field-embed-contact>
 
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="km-control-group" name="contact_department" caption="Department / Division / Unit">
+					<div km-textbox-ml name="contact_department" ng-model="document.department" locales="locales"></div>
+				</div>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="km-control-group" name="contact_designation" caption="Job Title">
@@ -45,7 +63,7 @@
 			</div>
 		</div>
 	</div>
-	<div ng-hide="document.type=='person'">
+	<div ng-show="document.type=='organization'">
 		<legend>Organization Information</legend>
 		<div class="row">
 			<div class="col-md-7 col-xs-12">
@@ -77,95 +95,42 @@
 				</div>
 			</div>
 		</div>
-	</div>
-
-	<div ng-show="document.type=='organization'">
-
-		<legend>Contact Person </legend>
-
-		<div class="help-block">Please provide name of the person in the organization (if any)</div>
-
-		<div  class="row">
-
-			<div class="col-md-4 col-sm-4 col-xs-12">
-				<div class="km-control-group" name="contact_prefix" caption="Title">
-					<div km-textbox-ml name="contact_prefix" ng-model="document.prefix" locales="locales"></div>
-				</div>
-			</div>
-
-			<div class="col-md-8 col-sm-8 col-xs-12">
-				<div class="km-control-group" name="contact_firstName" caption="First name">
-					<input type="text" class="form-control" name="contact_firstName" ng-model="document.firstName"/>
-				</div>
-			</div>
-
-			<div class="col-md-4 col-sm-4 col-xs-12">
-				<div class="km-control-group" name="contact_middleName" caption="Middle Name">
-					<input type="text" class="form-control" name="contact_middleName" ng-model="document.middleName"/>
-				</div>
-			</div>
-
-			<div class="col-md-8 col-sm-8 col-xs-12">
-				<div class="km-control-group" name="contact_lastName" caption="Last name">
-					<input type="text" class="form-control" name="contact_lastName" ng-model="document.lastName"/>
-				</div>
-			</div>
-
-		</div>
+		<legend>Address</legend>
 
 		<div class="row">
 			<div class="col-md-12">
-				<div class="km-control-group" name="contact_designation" caption="Job Title">
-					<div km-textbox-ml name="contact_designation" ng-model="document.designation" locales="locales"></div>
+				<div class="km-control-group" name="contact_address" caption="Street address">
+					<div km-textbox-ml name="contact_address" ng-model="document.address" rows="2" placeholder="example: 413 St-Jacques Ouest, Suite 800" locales="locales"></div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<div ng-hide="document.type=='person'">
+
 		<div class="row">
-			<div class="col-md-12">
-				<div class="km-control-group" name="contact_department" caption="Department / Division / Unit">
-					<div km-textbox-ml name="contact_department" ng-model="document.department" locales="locales"></div>
+			<div class="col-md-6">
+				<div class="km-control-group" name="contact_city" caption="City" required>
+					<div km-textbox-ml name="contact_city" ng-model="document.city" locales="locales" placeholder="example: Montreal" required></div>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="km-control-group" name="contact_state" caption="State or Province">
+					<div km-textbox-ml name="contact_state" ng-model="document.state" locales="locales" placeholder="example: Quebec"></div>
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<legend>Address</legend>
+		<div class="row">
 
-	<div class="row">
-		<div class="col-md-12">
-			<div class="km-control-group" name="contact_address" caption="Street address">
-				<div km-textbox-ml name="contact_address" ng-model="document.address" rows="2" placeholder="example: 413 St-Jacques Ouest, Suite 800" locales="locales"></div>
+			<div class="col-md-6">
+				<div class="km-control-group" name="contact_postalCode" caption="Postal Code or Zip">
+					<div km-textbox-ml name="contact_postalCode" ng-model="document.postalCode" locales="locales" placeholder="example: H2Y 1N9"></div>
+				</div>
 			</div>
-		</div>
-	</div>
 
-	<div class="row">
-		<div class="col-md-6">
-			<div class="km-control-group" name="contact_city" caption="City" required>
-				<div km-textbox-ml name="contact_city" ng-model="document.city" locales="locales" placeholder="example: Montreal" required></div>
-			</div>
-		</div>
-
-		<div class="col-md-6">
-			<div class="km-control-group" name="contact_state" caption="State or Province">
-				<div km-textbox-ml name="contact_state" ng-model="document.state" locales="locales" placeholder="example: Quebec"></div>
-			</div>
-		</div>
-	</div>
-
-	<div class="row">
-
-		<div class="col-md-6">
-			<div class="km-control-group" name="contact_postalCode" caption="Postal Code or Zip">
-				<div km-textbox-ml name="contact_postalCode" ng-model="document.postalCode" locales="locales" placeholder="example: H2Y 1N9"></div>
-			</div>
-		</div>
-
-		<div class="col-md-6">
-			<div class="km-control-group" name="contact_country" ng-required="!form.contact_country.$valid" caption="Country address">
-				<div km-select name="contact_country" ng-model="document.country" items="options.countries()" required></div>
+			<div class="col-md-6">
+				<div class="km-control-group" name="contact_country" ng-required="!form.contact_country.$valid" caption="Country address">
+					<div km-select name="contact_country" ng-model="document.country" items="options.countries()" required></div>
+				</div>
 			</div>
 		</div>
 	</div>

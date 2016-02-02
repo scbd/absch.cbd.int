@@ -80,6 +80,7 @@
             <tr>
                 <!-- <th style="width:50px;">&nbsp;</th> -->
                 <th colspan="2" ng-click="toggleOrderBy('title|lstring')" id="titleHeader">Title</th>
+                <th ng-if="schema=='contact'" ng-click="toggleOrderBy('body.type')" id="body.typeHeader">Type</th>
                 <th style="width:200px;" ng-click="toggleOrderBy('createdOn')" id="createdOnHeader">Created by</th>
                 <th style="width:200px;" ng-click="toggleOrderBy('updatedOn')" id="updatedOnHeader">Last updated</th>
                 <th style="width:150px;" ng-click="toggleOrderBy('status')" id="statusHeader">Status</th>
@@ -106,29 +107,30 @@
                     <i class="material-icons" ng-if="(isDraft(record) || isRequest(record))"
                     ng-class="{'color-litegrey':isDraft(record) && !isRequest(record),'color-red':isRequest(record)}"
                     style="font-size:16pt;position:relative;">{{record.metadata.schema | schemaIcon}}</i>
-
                 </td>
                 <td style="width:40%">
                     <span ng-show="isPublished(record)">
                         <a href="" ng-click="loadDocument(record); displayDetails=!displayDetails" ng-show="record.documentID">
-                    {{(record.workingDocumentTitle||record.title)|lstring}}
-                </a>
+                            {{(record.workingDocumentTitle||record.title)|lstring}}
+                        </a>
                     </span>
-
                     <span ng-show="isRequest(record)">
                         <a href="" ng-click="displayDetails=false; displayRequest = !displayRequest; formLoading=false">
-                    {{(record.workingDocumentTitle||record.title)|lstring}}
-                </a>
+                            {{(record.workingDocumentTitle||record.title)|lstring}}
+                        </a>
                     </span>
 
                     <span ng-show="isDraft(record) && !isPublished(record) && !isRequest(record)">
                         <a href="/register/{{record.type|mapSchema}}/{{record.identifier}}/edit">
-                        {{(record.workingDocumentTitle||record.title)|lstring}}
+                            {{(record.workingDocumentTitle||record.title)|lstring}}
                         </a>
                     </span>
                     <div style="font-size:11px;font-weight:bold;text-transform:uppercase;color:#666;" ng-if="isPublished(record)">
                         {{record | uniqueID}}
                     </div>
+                </td>
+                <td ng-if="schema=='contact'">
+                    {{record.body.type}}
                 </td>
                 <td>
                     <div ng-show="record.createdBy">

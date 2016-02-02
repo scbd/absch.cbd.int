@@ -1,4 +1,7 @@
-define(['app', '/app/js/common.js', 'scbd-angularjs-services'], function(app) {
+define(['app', '/app/js/common.js', 'scbd-angularjs-services',
+'/app/views/forms/view/view-contact-reference.directive.js',
+'/app/views/forms/view/view-organization-reference.directive.js'],
+function(app) {
 
     app.directive("fieldEmbedContact", [function() {
 
@@ -11,7 +14,8 @@ define(['app', '/app/js/common.js', 'scbd-angularjs-services'], function(app) {
                 model: "=ngModel",
                 locales: "=locales",
                 caption: "@caption",
-                documents: "@"
+                documents: "@",
+                subFilter : "=?"
             },
             link: function($scope, $element, $attrs) {
 
@@ -104,13 +108,13 @@ define(['app', '/app/js/common.js', 'scbd-angularjs-services'], function(app) {
                             if ($scope.organizationOnly)
                                 contactType = 'organization';
 
-                            var qDrafts = storage.documents.query("(type eq 'authority' or type eq 'contact')", "my", {
-                                body: true
-                            });
+                            var qDrafts = storage.documentQuery
+                            .body("(type eq 'authority' or type eq 'contact')", [$scope.subFilter],
+                                  {collection:"my",body: true});
                             $scope.existingContacts = [];
 
                             $q.all([qDrafts]).then(function(results) {
-                                    results[0].data.Items.forEach(function(contact) {
+                                    results[0].data.forEach(function(contact) {
                                         var lContact = contact.body;
                                         lContact.revision = contact.revision;
                                         $scope.existingContacts.push(lContact);
@@ -130,7 +134,7 @@ define(['app', '/app/js/common.js', 'scbd-angularjs-services'], function(app) {
                             });
                             $scope.model = contacts;
                         } else {
-                            $scope.model = contact.identifier;
+                            $scope.model = {identifier:contact.header.identifier + '@' + contact.revision};
                         }
                         $scope.showContacts();
                         //clear the dropdown list display text which remains after the dialog is closed.

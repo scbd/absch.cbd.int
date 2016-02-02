@@ -1,4 +1,5 @@
-define(['app'], function (app) {
+define(['app',"/app/views/forms/edit/field-embed-contact.directive.js"],
+function (app) {
 
 app.directive("editContactBase", [ function () {
 
@@ -12,7 +13,8 @@ app.directive("editContactBase", [ function () {
 			locales : "=locales",
 			form : "=form"
 		},
-		controller : ["$scope", "$http", "$filter", "underscore", "$q", function ($scope, $http, $filter, _, $q)
+		controller : ["$scope", "$http", "$filter", "underscore", "$q", 'IStorage',
+		 function ($scope, $http, $filter, _, $q, storage)
 		{
 			$scope._urls = [];
 
