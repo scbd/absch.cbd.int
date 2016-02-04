@@ -148,12 +148,13 @@ app.factory("editFormUtility", ["IStorage", "IWorkflows", "$q", "realm","commonj
 				//Save document
 				if(schema == 'contact')
 					return storage.documents.put(identifier, document);	// return documentInfo
-				
+
 				//Incase of publish save draft and let the workflow publish the document.
-				return storage.drafts.put(identifier, document);
-			})
-			.then(function(draftInfo) {
-				return createWorkflow(draftInfo); // return workflow info
+				return storage.drafts
+					.put(identifier, document)
+					.then(function(draftInfo) {
+						return createWorkflow(draftInfo); // return workflow info
+					});
 			});
 		},
 
