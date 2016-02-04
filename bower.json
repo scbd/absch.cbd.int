@@ -38,7 +38,7 @@
     "requirejs-domready": "2.0.1",
     "requirejs-plugins": "1.0.3",
     "requirejs-text": "2.0.14",
-    "scbd-angularjs-controls": "*",
+    "scbd-angularjs-controls": "1.0.0",
     "scbd-angularjs-services": "1.0",
     "underscore": "1.7.0"
   },
