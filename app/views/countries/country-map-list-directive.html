@@ -89,7 +89,9 @@
                                             </div>-->
                                             <div class="col-lg-5 col-md-5 col-xs-5">
                                                 <span>{{$index + 1}}</span> &nbsp;&nbsp;
-                                                <span style="font-size:16px;" ng-class="{'color-blue': country.isNPParty, 'color-grey':!country.isNPParty}">{{country.name.en}}</span>
+                                                <span style="font-size:16px;" ng-class="{'color-blue': country.isNPParty, 'color-grey':!country.isNPParty}">
+                                                    {{country.name.en}} ({{country.total}})
+                                                </span>
                                             </div>
                                             <!--<div class="col-lg-2 col-md-2 col-xs-2 tableheader">
                                                  <span ng-show="country.isNPParty" style="font-weight:bold;">Party</span>

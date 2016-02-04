@@ -7,62 +7,25 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
             templateUrl: '/app/views/countries/country-map-list-directive.html',
             replace: true,
             scope: {
-                //countries: '=countries',
-                api: '=',
-                recordType : '=',
-                query: '='
             },
             controller: ['$scope', '$http', 'realm', '$q', '$filter', '$routeParams', '$timeout', '$element', 'commonjs', '$route','$location', 'smoothScroll',
             function($scope, $http, realm, $q, $filter, $routeParams, $timeout, $element, commonjs, $route, $location, smoothScroll) {
                     var reloadDetails = false;
-                    //$scope.countryProfile_keyword = 'can';
-
-                    // var taiwan = "TW";
-                    // var china = "CN";
-                    // var denmark = "DK";
-                    // var greenland = "GL";
+                    var countryProfile = {};
                     $scope.lastAction = 'party';
-
                     $scope.orderList = false;
                     $scope.sortTerm = 'name.en';
-
-
-                    $scope.api = {
-                        loadCountryMapDetails :  loadCountryMapDetails
-                    }
-
-                    $scope.$watch('recordType', function(newVal){
-                       if(newVal == 'countryProfile'){
-                           loadCountries();
-                           loadCountryMapDetails();
-                       }
-                    });
-
-                    $scope.$watch('query', function(newVal, oldVal){
-                        if(newVal && oldVal){
-                            if(newVal.cpCreationFromDate && newVal.cpCreationFromDate != oldVal.cpCreationFromDate){
-                                reloadDetails = true;
-                                loadCountryMapDetails();
-                            }
-                        }
-                    })
+                    $scope.countryProfile = countryProfile;
 
                     //====================================================
                     function loadCountryMapDetails() {
                         if (!$scope.countries || reloadDetails) {
                             $scope.loading = true;
                             var schema = ["absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "focalPoint"];
-                            var dateFilter = '';
-
-                            if($scope.query && $scope.query.cpCreationFromDate && $scope.query.cpCreationFromDate!='*:*'){
-                                dateFilter = ' AND ' + $scope.query.cpCreationFromDate;
-                            }
 
                             var queryFacetsParameters = {
 
-                                'q': '(realm_ss:' + realm.value.toLowerCase() +') AND NOT version_s:* AND (schema_s:' +
-                                schema.join(' OR schema_s:') + ')'
-                                + dateFilter ,
+                                'q': '(realm_ss:' + realm.value.toLowerCase() +') AND NOT version_s:* AND (schema_s:' + schema.join(' OR schema_s:') + ')',
                                 'fl': '', //fields for results.
                                 'wt': 'json',
                                 'rows': 0, //limit
@@ -77,107 +40,35 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
                             $q.when(countryFacets).then(function(response) {
 
                                 $scope.countryFacets = response.data.facet_counts.facet_pivot;
-
-                                CalculateFacets();
+                                //CalculateFacets();
                                 calculateListViewFacets();
                             })
                             .finally(function(){
                                 $scope.loading = false;
                                 reloadDetails = false;
                             });
-                            //   if ($routeParams.code && $routeParams.code.toUpperCase()=='RAT') {
-                            //     $scope.searchFilter = commonjs.isNPParty;
-                            //     $scope.updateMap('ratified');
-                            //   }
 
                         }
                     }
 
 
-
-                    //====================================================
-                    $scope.nationalRecords = [{
-                        identifier: 'authority',
-                        title: 'Competent National Authority'
-                    }, {
-                        identifier: 'measure',
-                        title: 'Legislative, administrative or policy measures'
-                    }, {
-                        identifier: 'absCheckpoint',
-                        title: 'ABS Checkpoint'
-                    }, {
-                        identifier: 'database',
-                        title: 'National Website or Database'
-                    }, {
-                        identifier: 'focalPoint',
-                        title: 'ABS National Focal Point'
-                    }, {
-                        identifier: 'absPermit',
-                        title: 'Internationally Recognized Certificate of Compliance'
-                    }, {
-                        identifier: 'absCheckpointCommunique',
-                        title: 'Checkpoint Communiqués '
-                    }, ];
-
-
-                   // ====================================================
-                    // $scope.$watch("query.partyStatus", function(val) {
-                    //
-                    //   if(!val){
-                    //         $scope.selected_status = 'all';
-                    //         $scope.partyStatusFilter = $scope.hasStatus;
-                    //         $scope.sortTable('name.en', 'ASC')
-                    //     }
-                    //
-                    //     if(val == 'parties'){
-                    //          $scope.selected_facet='party';
-                    //         $scope.selected_status = 'party';
-                    //         $scope.sortTable('name.en', 'ASC')
-                    //     }
-                    //
-                    //     if(val == 'nonParties'){
-                    //         $scope.selected_facet='nonParties';
-                    //         $scope.selected_status = 'nonParties';
-                    //         $scope.sortTable('name.en', 'ASC')
-                    //     }
-                    // })
-
-                    //====================================================
-                    $scope.$watch("query.recordType", function(val) {
-
-                        if(!val){
-                            $scope.selected_recordType='all';
-                            $scope.recordTypeFilter = $scope.hasRecordType;
-                            $scope.sortTable('name.en', 'ASC')
-
-                            return;
-                        }
-                        else{
-                            $scope.selected_recordType= val;//$filter('mapSchema')(val);
-                            $scope.recordTypeFilter = $scope.hasRecordType;
-                            $scope.sortTable(val.toUpperCase());
-                            return;
-                        }
-
-
-                    })
                     //====================================================
                     function loadCountries() {
                         $scope.loading = true;
                         commonjs.getCountries()
                             .then(function(countries) {
 
-                                $scope.ratifications = 0;
-                                $scope.signatures = 0;
-                                $scope.parties = 0;
-                                $scope.countriesforAutocomplete = [];
-                                $scope.inbetweenParties = 0;
-                                $scope.nonCBDParties = 0
-                                //var countryColors = {};
+                                countryProfile.ratifications = 0;
+                                countryProfile.signatures = 0;
+                                countryProfile.parties = 0;
+                                countryProfile.countriesforAutocomplete = [];
+                                countryProfile.inbetweenParties = 0;
+                                countryProfile.nonCBDParties = 0
+                                countryProfile.totalParties=0;
+                                countryProfile.totalNonParties=0;
 
                                 $scope.countries = countries;
-                                $scope.totalParties=0;
-                                $scope.totalNonParties=0;
+
 
                               if ($routeParams.countryCode && $routeParams.countryCode.toUpperCase()!='RAT') {
 
@@ -185,14 +76,6 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
                                   if(country){
                                     country.displayDetails=true;
                                     country.profileCode = $routeParams.countryCode.toUpperCase();
-                                    // var countryElement = $element.find('#countryCode' + $routeParams.countryCode)
-                                    // var options = {
-                                    //     duration: 700,
-                                    //     easing: 'easeInQuad',
-                                    //     offset: 60,
-                                    // }
-
-                                    // smoothScroll(countryElement, options);
                                   }
                               }
 
@@ -225,19 +108,19 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
                     };
 
 
-                    //====================================================
-                    $scope.hasFacets = function(entity) {
-
-                        for (var i = 0; i < $scope.commonFormatFacets.length; i++) {
-                            var data = $scope.commonFormatFacets[i];
-
-                            if (data[0] == $scope.selected_facet) {
-                                return data[1].countries.indexOf(entity.code.toLowerCase()) >= 0
-                            }
-                        }
-
-                        return false;
-                    }
+                    // //====================================================
+                    // $scope.hasFacets = function(entity) {
+                    //
+                    //     for (var i = 0; i < $scope.commonFormatFacets.length; i++) {
+                    //         var data = $scope.commonFormatFacets[i];
+                    //
+                    //         if (data[0] == $scope.selected_facet) {
+                    //             return data[1].countries.indexOf(entity.code.toLowerCase()) >= 0
+                    //         }
+                    //     }
+                    //
+                    //     return false;
+                    // }
 
                     $scope.hasRecordType = function(entity){
 
@@ -246,30 +129,6 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
 
                         return entity[$scope.selected_recordType.toUpperCase()]!=undefined;
 
-                    }
-                    //====================================================
-                    function loadMap(colors) {
-
-                        if (!colors)
-                            colors = this.countryColors;
-                        jQuery('#vmap').vectorMap({
-                            map: 'world_en',
-                            backgroundColor: '#f5f5f5',
-                            selectedColor: '#fff',
-                            enableZoom: true,
-                            showTooltip: true,
-                            colors: colors,
-                            hoverColor: false,
-                            onRegionClick: function(event, code, region) {
-                                $scope.navigateCountry(event, code, region);
-                            },
-                            onLabelShow: function(event, label, code) {
-                                showCountryDetails(event, label, code)
-                            }
-
-                        });
-                        $('.jqvmap-zoomin').html('<i class="glyphicon glyphicon-plus"/>')
-                        $('.jqvmap-zoomout').html('<i class="glyphicon glyphicon-minus"/>')
                     }
 
                     //====================================================
@@ -304,48 +163,21 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
                     }
 
                     //====================================================
-                    function CalculateFacets() {
-                        var tempFacets = {};
-                        // console.log($scope.countryFacets['government_s,schema_s'])
-                        var count = 0;
-                        _.each($scope.countryFacets['government_s,schema_s'], function(data) {
-                            if (data.value == 'eur')
-                                data.value = 'eu';
-                            _.each(data.pivot, function(facets) {
-                                if (facets.value == 'focalPoint' && tempFacets[facets.value]) {
-                                    count++;
-                                }
-                                tempFacets[facets.value] = {
-                                    "facetCount": (tempFacets[facets.value] ? tempFacets[facets.value].facetCount : 0) + facets.count,
-                                    "countryCount": (tempFacets[facets.value] ? tempFacets[facets.value].countryCount : 0) + 1,
-                                    "countries": (tempFacets[facets.value] ? tempFacets[facets.value].countries : '') + data.value + ','
-                                };
-                            });
 
-                        });
-                        // console.log(count, countryC)
-                        $scope.commonFormatFacets = _.pairs(tempFacets);
-                        // console.log($scope.commonFormatFacets)
-                    }
 
 
                     //====================================================
                     function calculateListViewFacets() {
 
                         _.each($scope.countries, function(country) {
-                            country['NFP'] = undefined;
-                            country['NDB'] = undefined;
-                            country['CNA'] = undefined;
-                            country['MSR'] = undefined;
-                            country['IRCC'] = undefined;
-                            country['CP'] = undefined;
-                            country['CPC'] = undefined;                            
+                            // country.NFP     = undefined;// country.NDB     = undefined;// country.CNA     = undefined;// country.MSR     = undefined;// country.IRCC    = undefined;// country.CP      = undefined;// country.CPC     = undefined;// country.Total     = undefined;
                             var countryFacet = _.where($scope.countryFacets["government_s,schema_s"], {
                                 value: country.code.toLowerCase()
                             });
                             if (countryFacet.length > 0) {
                                 countryFacet[0].pivot.forEach(function(document) {
                                     country[$filter("schemaShortName")(document.value.toLowerCase())] = document.count;
+                                    country.total     = (country.total ? country.total : 0) + document.count;
                                 });
                             }
 
@@ -427,6 +259,8 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
                     };
 
                     $element.find('[data-toggle="tooltip"]').tooltip();
+                    loadCountries();
+                    loadCountryMapDetails();
                 }
             ]
 
@@ -439,6 +273,98 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
 
 
 /********************************************/
+//function CalculateFacets() {
+//     var tempFacets = {};
+//     // console.log($scope.countryFacets['government_s,schema_s'])
+//     var count = 0;
+//     _.each($scope.countryFacets['government_s,schema_s'], function(data) {
+//         if (data.value == 'eur')
+//             data.value = 'eu';
+//         _.each(data.pivot, function(facets) {
+//             if (facets.value == 'focalPoint' && tempFacets[facets.value]) {
+//                 count++;
+//             }
+//             tempFacets[facets.value] = {
+//                 "facetCount": (tempFacets[facets.value] ? tempFacets[facets.value].facetCount : 0) + facets.count,
+//                 "countryCount": (tempFacets[facets.value] ? tempFacets[facets.value].countryCount : 0) + 1,
+//                 "countries": (tempFacets[facets.value] ? tempFacets[facets.value].countries : '') + data.value + ','
+//             };
+//         });
+//
+//     });
+//     // console.log(count, countryC)
+//     $scope.commonFormatFacets = _.pairs(tempFacets);
+//     // console.log($scope.commonFormatFacets)
+// }
+//
+// //====================================================
+// $scope.$watch("query.recordType", function(val) {
+//
+//     if(!val){
+//         $scope.selected_recordType='all';
+//         $scope.recordTypeFilter = $scope.hasRecordType;
+//         $scope.sortTable('name.en', 'ASC')
+//
+//         return;
+//     }
+//     else{
+//         $scope.selected_recordType= val;//$filter('mapSchema')(val);
+//         $scope.recordTypeFilter = $scope.hasRecordType;
+//         $scope.sortTable(val.toUpperCase());
+//         return;
+//     }
+//
+//
+// })
+
+//
+//
+//     //====================================================
+//     $scope.nationalRecords = [{
+//         identifier: 'authority',
+//         title: 'Competent National Authority'
+//     }, {
+//         identifier: 'measure',
+//         title: 'Legislative, administrative or policy measures'
+//     }, {
+//         identifier: 'absCheckpoint',
+//         title: 'ABS Checkpoint'
+//     }, {
+//         identifier: 'database',
+//         title: 'National Website or Database'
+//     }, {
+//         identifier: 'focalPoint',
+//         title: 'ABS National Focal Point'
+//     }, {
+//         identifier: 'absPermit',
+//         title: 'Internationally Recognized Certificate of Compliance'
+//     }, {
+//         identifier: 'absCheckpointCommunique',
+//         title: 'Checkpoint Communiqués '
+//     }, ];
+//
+//
+//    // ====================================================
+//     // $scope.$watch("query.partyStatus", function(val) {
+//     //
+//     //   if(!val){
+//     //         $scope.selected_status = 'all';
+//     //         $scope.partyStatusFilter = $scope.hasStatus;
+//     //         $scope.sortTable('name.en', 'ASC')
+//     //     }
+//     //
+//     //     if(val == 'parties'){
+//     //          $scope.selected_facet='party';
+//     //         $scope.selected_status = 'party';
+//     //         $scope.sortTable('name.en', 'ASC')
+//     //     }
+//     //
+//     //     if(val == 'nonParties'){
+//     //         $scope.selected_facet='nonParties';
+//     //         $scope.selected_status = 'nonParties';
+//     //         $scope.sortTable('name.en', 'ASC')
+//     //     }
+//     // })
 
 // //====================================================
 // $scope.navigateCountry = function(event, code, region) {

@@ -1,15 +1,14 @@
 <link href="/app/css/country.css" rel="stylesheet">
 <link href="/app/css/record.css" rel="stylesheet">
-<link href="/app/libs/angucomplete/angucomplete.css" rel="stylesheet">
-<link href="/app/libs/jqvmap/jqvmap/jqvmap.css" rel="stylesheet">
 <link href="/app/css/profiles.css" rel="stylesheet">
-<link href="/app/css/profile-map.css" rel="stylesheet">
 
 <div ng-controller="CountriesMapController">
-    <div class="container-fluid" id="wrapper">
+    <div >
         <div class="row" help schema="countryInformation">
-
-            <div class="col-xs-12" style="padding-top:5px;">
+            <div class="col-xs-2" >
+                <div countries-left-menu></div>
+            </div>
+            <div class="col-xs-10" style="padding-top:5px;">
                 <legend name="formInfo" style="display:none"></legend>
                 <div country-map-list ></div>
             </div>
