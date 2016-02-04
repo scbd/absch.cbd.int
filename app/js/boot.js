@@ -37,7 +37,7 @@ require.config({
         'ng-breadcrumbs'        : '../libs/ng-breadcrumbs/dist/ng-breadcrumbs.min',
         'ionsound'              : '../libs/ionsound/js/ion.sound.min',
         'scbd-angularjs-services'         : '../libs/scbd-angularjs-services/scbd-services',
-        'scbd-angularjs-filters'          : '../libs/scbd-angularjs-services/scbd-filters',
+        'scbd-angularjs-filters'          : '../libs/scbd-angularjs-services/filters/scbd-filters',
         'scbd-angularjs-controls'         : '../libs/scbd-angularjs-controls/scbd-controls',
         'ngAria'                : '../libs/angular-aria/angular-aria.min',
         'ngMaterial'            : '../libs/angular-material/angular-material.min',
@@ -79,7 +79,8 @@ require.config({
         'angular-block-ui'              : { 'deps': ['angular'] },
     },
     packages: [
-        { name: 'scbd-angularjs-services', location : '../libs/scbd-angularjs-services' }
+        { name: 'scbd-angularjs-services', location : '../libs/scbd-angularjs-services' },
+        { name: 'scbd-angularjs-filters',  location : '../libs/scbd-angularjs-services/filters' }
     ]
 });
 
