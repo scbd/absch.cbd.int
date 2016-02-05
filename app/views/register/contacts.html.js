@@ -1,5 +1,4 @@
 define(['app',
-	'/app/views/directives/login.directive.html.js',
 	'/app/views/register/register-record-list.directive.js',
 	'/app/views/tasks/my-completed-tasks.directive.html.js',
 	'/app/views/tasks/my-pending-tasks.directive.html.js',

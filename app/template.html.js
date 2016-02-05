@@ -1,51 +1,54 @@
-define(['app','ng-breadcrumbs','angular-localizer','scbd-angularjs-services','scbd-angularjs-filters',
-    '/app/views/directives/login.directive.html.js',
-    '/app/views/directives/xuser-notifications.js',
-    '/app/views/directives/nav/footer-nav.js',
+define(['app', 'underscore', 'ng-breadcrumbs',
+    'angular-localizer', 'scbd-angularjs-services', 'scbd-angularjs-filters',
+    'scbd-branding/directives/footer',
     '/app/views/directives/nav/portal-branding.js',
-    '/app/views/directives/nav/cbd-header.js',
+    'scbd-branding/directives/header/header',
     '/app/views/directives/nav/portal-nav.js',
-    'ngAria', 'angular-animate','toastr','angular-block-ui',
-], function(app) {
+    'ngAria', 'angular-animate', 'toastr', 'ionsound'
+], function(app, _) {
     'use strict';
 
-    app.controller('TemplateController', ['$scope', '$rootScope','showHelp' , '$window', '$location', 'authentication', '$browser', 'realmConfiguration', 'underscore', 'IUserNotifications', '$timeout','$filter',
-     '$anchorScroll','breadcrumbs','toastr', '$route',//'localStorageService',localStorageService,
-        function($scope, $rootScope, showHelp, $window, $location, authentication, $browser, realmConfiguration, _, userNotifications, $timeout, $filter, $anchorScroll, breadcrumbs, toastr, $route ) {
+    app.controller('TemplateController', ['$scope', '$rootScope', 'showHelp',
+        '$location','realmConfiguration','$anchorScroll', 'breadcrumbs', 'toastr', '$route',
+        'cfgUserNotification', //'localStorageService',localStorageService,
+        function($scope, $rootScope, showHelp, $location, realmConfiguration,
+            $anchorScroll, breadcrumbs, toastr, $route, cfgUserNotification) {
             $scope.controller = "TemplateController";
-            $scope.breadcrumbs     = breadcrumbs;
-            $scope.$root.pageTitle = { text: "" };
+            $scope.breadcrumbs = breadcrumbs;
+            $scope.$root.pageTitle = {
+                text: ""
+            };
 
             $scope.showHelp = showHelp.value;
 
 
-        // $scope.goHome               = function() { $location.path('/'); };
-        // $scope.currentPath          = function() { return $location.path(); };.
-        //============================================================
-        //
-        //
-        //============================================================
-         $scope.toggleSideBar = function() {
-            $element.find("#wrapper").toggleClass("toggled");
-         }
+            // $scope.goHome               = function() { $location.path('/'); };
+            // $scope.currentPath          = function() { return $location.path(); };.
+            //============================================================
+            //
+            //
+            //============================================================
+            $scope.toggleSideBar = function() {
+                $element.find("#wrapper").toggleClass("toggled");
+            }
 
 
-        //============================================================
-        //
-        //
-        //============================================================
-        $scope.gotoAnchor = function(x) {
-          var newHash = 'anchor' + x;
-          if ($location.hash() !== newHash) {
-            // set the $location.hash to `newHash` and
-            // $anchorScroll will automatically scroll to it
-            $location.hash('anchor' + x);
-          } else {
-            // call $anchorScroll() explicitly,
-            // since $location.hash hasn't changed
-            $anchorScroll();
-          }
-        };
+            //============================================================
+            //
+            //
+            //============================================================
+            $scope.gotoAnchor = function(x) {
+                var newHash = 'anchor' + x;
+                if ($location.hash() !== newHash) {
+                    // set the $location.hash to `newHash` and
+                    // $anchorScroll will automatically scroll to it
+                    $location.hash('anchor' + x);
+                } else {
+                    // call $anchorScroll() explicitly,
+                    // since $location.hash hasn't changed
+                    $anchorScroll();
+                }
+            };
 
             $scope.$root.getRoleName = function(roleName) {
                 if (roleName) {
@@ -66,11 +69,11 @@ define(['app','ng-breadcrumbs','angular-localizer','scbd-angularjs-services','sc
                 }
             };
 
-//            $scope.updateStorage = function(){
-//                localStorageService.set('hideDisclaimer', true);
-//                $scope.hideDisclaimer=true;
-//            };
-//    	    $scope.hideDisclaimer = localStorageService.get('hideDisclaimer');
+            //            $scope.updateStorage = function(){
+            //                localStorageService.set('hideDisclaimer', true);
+            //                $scope.hideDisclaimer=true;
+            //            };
+            //    	    $scope.hideDisclaimer = localStorageService.get('hideDisclaimer');
             //============================================================
             //
             //
@@ -105,97 +108,52 @@ define(['app','ng-breadcrumbs','angular-localizer','scbd-angularjs-services','sc
                 $scope.env_name = "TRAINING";
             }
 
-            //============================================================
+            $scope.feedbackHelp = function() {
+                if ($scope.showHelp.show)
+                    showSimpleToast("Help information is turned on.");
+
+                if (!$scope.showHelp.show)
+                    showSimpleToast("Help information is turned off.");
+            };
+
+            $scope.feedbackGlossary = function() {
+                if ($scope.showHelp.glossary)
+                    showSimpleToast("Glossary is turned on.");
+
+                if (!$scope.showHelp.glossary)
+                    showSimpleToast("Glossary is turned off.");
+            };
+
+
+            //======================================================
             //
             //
-            //============================================================
-            $scope.actionSignOut = function() {
-                authentication.signOut();
-                if($route.current.locals.securized)
+            //======================================================
+
+
+            $rootScope.$on("showSimpleToast", function(evt, msg) {
+                showSimpleToast(msg);
+
+            });
+
+            $scope.$on('signOut', function(evt, data) {
+                if ($route.current.locals.securized)
                     $location.path('/');
-            };
+            });
 
-            //============================================================
-            //
-            //
-            //============================================================
-            $scope.actionSignup = function() {
-                var redirect_uri = encodeURIComponent($location.protocol() + '://' + $location.host() + ':' + $location.port() + '/');
-                $window.location.href = 'https://accounts.cbd.int/signup?redirect_uri=' + redirect_uri;
-            };
+            if(cfgUserNotification){
+                cfgUserNotification
+                .notificationUrls = {
+                                    documentNotificationUrl     : '/register/requests/',
+                                    viewAllNotificationUrl      : '/register/requests',
+                                    documentMessageUrl          : '/mailbox/'
+                                };
+            }
 
-            //============================================================
-            //
-            //
-            //============================================================
-            $scope.actionPassword = function() {
-                var redirect_uri = encodeURIComponent($location.protocol() + '://' + $location.host() + ':' + $location.port() + '/');
-                $window.location.href = 'https://accounts.cbd.int/password?redirect_uri=' + redirect_uri;
-            };
-
-            //============================================================
-            //
-            //
-            //============================================================
-            $scope.actionProfile = function() {
-                var redirect_uri = encodeURIComponent($location.protocol() + '://' + $location.host() + ':' + $location.port() + '/');
-                $window.location.href = 'https://accounts.cbd.int/profile?redirect_uri=' + redirect_uri;
-
-            };
-
-            $scope.closePopup = function() {
-                $('#loginDialog').modal('hide')
-            };
-
-            // $rootScope.$on("$locationChangeSuccess", function() {
-            //     $anchorScroll();
-            // });
-
-
-
-
-
-        $scope.feedbackHelp = function() {
-                if($scope.showHelp.show)
-                     showSimpleToast("Help information is turned on.");
-
-                if(!$scope.showHelp.show)
-                     showSimpleToast("Help information is turned off.");
-        };
-
-        $scope.feedbackGlossary= function() {
-                if($scope.showHelp.glossary)
-                     showSimpleToast("Glossary is turned on.");
-
-                if(!$scope.showHelp.glossary)
-                     showSimpleToast("Glossary is turned off.");
-        };
-
-
-        //======================================================
-        //
-        //
-        //======================================================
-
-
-        $rootScope.$on("showSimpleToast", function(evt, msg) {
-           showSimpleToast(msg);
-
-        });
-
-        $rootScope.$on('event:auth-emailVerification', function(evt, data){
-            $scope.showEmailVerificationMessage = data.message;
-        });
-
-
-        $rootScope.$on('event:auth-emailVerification', function(evt, data){
-            $scope.showEmailVerificationMessage = data.message;
-        });
-
-        function showSimpleToast(msg)
-        {
-             toastr.info(msg);
+            function showSimpleToast(msg) {
+                toastr.info(msg);
+            }
         }
-  }])
+    ])
 
 });

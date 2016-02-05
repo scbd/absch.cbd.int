@@ -134,7 +134,8 @@
                     <i class="material-icons" style="position:relative;top:6px;">menu</i> Management Center
                 </md-button>
                 <div help schema="{{helpSchema}}" show-help="showHelp" repalce-glossary-terms="true">
-                    <div block-ui block-ui-pattern="/^\/api\/v2013\/documents($|\/).*/">
+                    <div >
+                        <!-- block-ui block-ui-pattern="/^\/api\/v2013\/documents($|\/).*/" -->
                         <ng-include src="subTemplateUrl" style="min-height:980px;" ng-show="user.isAuthenticated"></ng-include>
                     </div>
                 </div>

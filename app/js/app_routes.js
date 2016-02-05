@@ -151,7 +151,7 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
 
             when('/search/test', {templateUrl: '/app/test.html',resolveController: true,resolveUser: true}).
 
-            otherwise({templateUrl: '/app/404.html', label:'404 Error'});
+            otherwise({templateUrl: '/app/views/shared/404.html', label:'404 Error'});
 
     }]);
 

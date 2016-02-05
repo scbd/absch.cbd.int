@@ -2,18 +2,18 @@
   "name": "absch-cbd-int",
   "dependencies": {
     "angucomplete": "*",
-    "angular": "1.3",
-    "angular-animate": "1.3",
+    "angular": "1.4",
+    "angular-animate": "1.4",
     "angular-block-ui": "0.2.2",
-    "angular-cookies": "1.3",
+    "angular-cookies": "1.4",
     "angular-flex": "https://github.com/scbd/angular-flex.git",
     "angular-intro.js": "1.2.4",
     "angular-loading-bar": "https://github.com/chieffancypants/angular-loading-bar.git",
     "angular-local-storage": "0.1.5",
     "angular-material": "0.9.8",
     "angular-messages": "~1.3",
-    "angular-route": "1.3",
-    "angular-sanitize": "1.3",
+    "angular-route": "1.4",
+    "angular-sanitize": "1.4",
     "angular-toastr": "~1.5.0",
     "bootbox": "4.3.0",
     "bootstrap": "3.1.1",
@@ -38,11 +38,18 @@
     "requirejs-domready": "2.0.1",
     "requirejs-plugins": "1.0.3",
     "requirejs-text": "2.0.14",
+    "scbd-angularjs-branding": "~1.0.3",
     "scbd-angularjs-controls": "1.0.0",
     "scbd-angularjs-services": "*",
     "underscore": "1.7.0"
   },
   "resolutions": {
-    "angular": "1.3"
+    "angular": "1.4.8",
+    "angular-animate": "1.4.8",
+    "angular-messages": "^1.4.8",
+    "bootstrap": "3.3.6",
+    "font-awesome": "4.5.0",
+    "jquery": "2.2.0",
+    "angular-material": "0.9.8"
   }
 }

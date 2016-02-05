@@ -1,5 +1,4 @@
 define(['app', 'cbd-forums',
-	'/app/views/directives/login.directive.html.js',
 	'/app/js/common.js'], function(app) {
 
 
@@ -15,7 +14,7 @@ define(['app', 'cbd-forums',
 
             $scope.forumId = $route.current.$$route.forumId;
 			$scope.forum = $route.current.$$route.text;
-    	   
+
             if ($location.search().forumid && $location.search().threadid) {
 //                   $scope.forumId = $location.search().forumid;
 //                   $scope.threadId = $location.search().threadid;
@@ -23,15 +22,15 @@ define(['app', 'cbd-forums',
                     return;
             }
 
-           
+
 			$scope.isAdmin = function(){
 				return commonjs.isUserInRole($rootScope.getRoleName('AbsAdministrator')) ||
 				commonjs.isUserInRole($rootScope.getRoleName('Administrator'))
 
 			};
-        
+
             $scope.$on('signIn', function(evt, user){
-               $route.reload(); 
+               $route.reload();
             });
 
         }

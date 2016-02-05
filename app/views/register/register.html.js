@@ -1,10 +1,11 @@
-define(['app', 'angular-block-ui', 'linqjs', 'angular-localizer',
+define(['app', 'linqjs', 'angular-localizer',
     '/app/views/register/register-record-list.directive.js',
     '/app/views/directives/task-id-directive.html.js',
     '/app/views/directives/user-details.directive.html.js',
     '/app/views/directives/help-directive.html.js',
     'bootstrap-datepicker', 'moment', 'text-angular', 'bootbox',
-    'scbd-angularjs-services', 'scbd-angularjs-filters', 'scbd-angularjs-controls', 'toastr', '/app/js/common.js'
+    'scbd-angularjs-services', 'scbd-angularjs-filters', 'scbd-angularjs-controls',
+    'toastr', '/app/js/common.js'//'angular-block-ui',
 ], function(app) {
 
     "use strict";

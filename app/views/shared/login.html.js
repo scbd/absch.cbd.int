@@ -1,18 +1,20 @@
 define(['app',
-		'/app/views/directives/login.directive.html.js',
-		//'/app/views/directives/user-details.directive.html.js'
+		'scbd-branding/directives/header/login'
         ], function (app, moment) {
 
     return ["$scope", "$location", function ($scope, $location){
 
-                $scope.onAuthorization = function(){
+				$scope.$on('signIn', function(evt, data){
 
-                    if ($location.search().returnUrl)
+					console.log('usersignin', data);
+
+					if ($location.search().returnUrl)
                             $location.url($location.search().returnUrl);
                         else
                             $location.url('/submit');
 
+				});
 
-                };
+				$('#loginDialog').modal("show");
 		}];
 });

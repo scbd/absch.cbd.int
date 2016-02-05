@@ -9,16 +9,17 @@ require.config({
         'angular-cookies' : '../libs/angular-cookies/angular-cookies.min',
         'angular-sanitize': '../libs/angular-sanitize/angular-sanitize.min',
 
-        'text'                : '../libs/requirejs-text/text',
-        'linqjs'          : '../libs/linqjs/linq',
-        'angular-localizer':'../libs/ngLocalizer/localizer',
-        'async'           : '../libs/requirejs-plugins/src/async',
-        'domReady'        : '../libs/requirejs-domready/domReady',
+        'css'                   : '../libs/require-css/css.min',
+        'text'                  : '../libs/requirejs-text/text',
+        'linqjs'                : '../libs/linqjs/linq',
+        'angular-localizer'     :'../libs/ngLocalizer/localizer',
+        'async'                 : '../libs/requirejs-plugins/src/async',
+        'domReady'              : '../libs/requirejs-domready/domReady',
         'bootstrap-datepicker'  : '../libs/bootstrap-datepicker/js/bootstrap-datepicker',
         'angular-loading-bar'   : '../libs/angular-loading-bar/src/loading-bar',
         'bootbox'               : '../libs/bootbox/bootbox',
 
-        'jquery'          : '../libs/jquery/jquery.min',
+        'jquery'          : '../libs/jquery/dist/jquery.min',
         'bootstrap'       : '../libs/bootstrap/dist/js/bootstrap.min',
         'underscore'      : '../libs/underscore/underscore-min',
         'moment'          : '../libs/momentjs/min/moment-with-langs.min',
@@ -79,7 +80,8 @@ require.config({
         'angular-block-ui'              : { 'deps': ['angular'] },
     },
     packages: [
-        { name: 'scbd-angularjs-services', location : '../libs/scbd-angularjs-services' },
+        { name: 'scbd-branding'          , location : '../libs/scbd-angularjs-branding' },
+        { name: 'scbd-angularjs-services', location : '../libs/scbd-angularjs-services/services' },
         { name: 'scbd-angularjs-filters',  location : '../libs/scbd-angularjs-services/filters' }
     ]
 });
