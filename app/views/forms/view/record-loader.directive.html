@@ -48,7 +48,16 @@
 	<!-- <h1>{{internalDocument}}</h1> -->
 <!--  {{document}} -->
 <!-- {{internalDocument}} -->
-		<div ng-switch on="internalDocument.header.schema" >
+		<div class="alert alert-danger" role="alert"
+		ng-show="documentVersionCount != revisionNo">
+			<h1>The latest version is {{documentVersionCount}}, you are viewing version
+				{{revisionNo}}
+			</h1>
+		</div>
+		<div id="schemaView" ng-show="internalDocument && document">
+
+		</div>
+		<!-- <div ng-switch on="internalDocument.header.schema" >
             <div class="alert alert-danger" role="alert" ng-show="documentVersionCount != revisionNo"><h1>The latest version is {{documentVersionCount}}, you are viewing version {{revisionNo}}</h1></div>
 			<div view-authority	ng-switch-when="authority" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}  ></div>
 
@@ -88,7 +97,7 @@
 			<div ng-switch-default>
 				<div class="text-center"><h1 style="color:#fa6938"><i class="fa fa-spinner fa-spin"></i></h1></div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 	<!-- <div view-other	ng-model="internalDocument"  locale="getLocale()" link-target={{linkTarget}} ></div> -->
 </div>
