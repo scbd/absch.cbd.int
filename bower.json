@@ -27,6 +27,7 @@
     "joyRide": "https://github.com/zurb/joyride.git#v2.0.0",
     "jquery": "2.0.3",
     "linqjs": "3.0.5",
+    "lodash": "3.9.3",
     "mapsicon": "https://github.com/djaiss/mapsicon.git",
     "momentjs": "2.7.0",
     "ng-breadcrumbs": "es-breadcrumbs#~0.4.1",
@@ -38,19 +39,18 @@
     "requirejs-domready": "2.0.1",
     "requirejs-plugins": "1.0.3",
     "requirejs-text": "2.0.14",
-    "scbd-angularjs-branding": "~1.*",
+    "scbd-branding": "~1.*",
     "scbd-angularjs-controls": "1.0.0",
-    "scbd-angularjs-services": "1.1.4",
+    "scbd-angularjs-services": "1.1.5",
     "underscore": "1.7.0"
   },
   "resolutions": {
-    "angular": "1.4.8",
-    "angular-animate": "1.4.8",
+    "angular": "1.4",
     "angular-messages": "^1.4.8",
     "bootstrap": "3.3.6",
     "font-awesome": "4.5.0",
     "jquery": "2.2.0",
-    "angular-material": "0.9.8",
-    "scbd-angularjs-services": "1.1.4"
+    "angular-material": "1.0.4",
+    "scbd-angularjs-services": "1.1.5"
   }
 }

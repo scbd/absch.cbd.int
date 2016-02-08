@@ -21,20 +21,16 @@ define(['app', 'linqjs', 'angular-localizer',
             $scope.toggleRight = buildToggler('right');
             //**********************************************************
             $scope.close = function() {
-                $mdSidenav('left').close()
-                    .then(function() {
-                        $log.debug("close LEFT is done");
-                    });
+                $mdSidenav('left').close();
+
             };
 
             //**********************************************************
             function buildToggler(navID) {
                 var debounceFn = $mdUtil.debounce(function() {
                     $mdSidenav(navID)
-                        .toggle()
-                        .then(function() {
-                            $log.debug("toggle " + navID + " is done");
-                        });
+                        .toggle();
+
                 }, 300);
                 return debounceFn;
             }
@@ -707,7 +703,7 @@ define(['app', 'linqjs', 'angular-localizer',
 
                 require(['/app/views/register/directives/national-records-menu.html.js'], function(menu) {
                     $scope.$apply(function() {
-                        console.log(menu);
+                        // console.log(menu);
                         $element.find('#menuPlaceholder')
                             .append($compile('<div register-national-menu ></div>')($scope));
                     });

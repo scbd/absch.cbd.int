@@ -22,6 +22,7 @@ require.config({
         'jquery'          : '../libs/jquery/dist/jquery.min',
         'bootstrap'       : '../libs/bootstrap/dist/js/bootstrap.min',
         'underscore'      : '../libs/underscore/underscore-min',
+        'lodash'                : '../libs/lodash/lodash',
         'moment'          : '../libs/momentjs/min/moment-with-langs.min',
         'angular-animate'       : '../libs/angular-animate/angular-animate.min',
         'view-abs-checkpoint'   :'../views/forms/view/view-abs-checkpoint.directive',
@@ -80,7 +81,7 @@ require.config({
         'angular-block-ui'              : { 'deps': ['angular'] },
     },
     packages: [
-        { name: 'scbd-branding'          , location : '../libs/scbd-angularjs-branding' },
+        { name: 'scbd-branding'          , location : '../libs/scbd-branding' },
         { name: 'scbd-angularjs-services', location : '../libs/scbd-angularjs-services/services' },
         { name: 'scbd-angularjs-filters',  location : '../libs/scbd-angularjs-services/filters' }
     ]
