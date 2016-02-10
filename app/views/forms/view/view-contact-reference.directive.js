@@ -1,4 +1,4 @@
-define(['app','scbd-angularjs-services'], function (app) {
+define(['app','underscore', 'scbd-angularjs-services'], function (app, _) {
 
 app.directive("viewContactReference", [function () {
 	return {
@@ -13,15 +13,22 @@ app.directive("viewContactReference", [function () {
 		},
 		controller: ["$scope", "IStorage", function ($scope, storage) {
 
-			$scope.$watch("model", function(newVal, oldVal) {
+			$scope.$watch("model", function(newVal) {
 				console.log(newVal);
-				if(newVal && !$scope.document && !newVal.header && newVal.identifier){
+				if(newVal && !newVal.header && newVal.identifier && !$scope.document ){
 					storage.documents.get(newVal.identifier)
 						.then(function(data){
 							$scope.document = data.data;
+							if($scope.document.$scope.document){
+								storage.documents.get(newVal.identifier)
+								.then(function(data){
+									_.extend($scope.document.contactOrganization, data.data);
+								});
+							}
+
 						});
 				}
-				else if(newVal.header) {
+				else if(newVal && newVal.header) {
 					$scope.document = newVal;
 				}
 			});

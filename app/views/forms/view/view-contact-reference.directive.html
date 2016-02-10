@@ -19,7 +19,12 @@
 		<div>
 			 <b>{{document.prefix | lstring:locale}} {{document.firstName}} {{document.middleName}} {{document.lastName}}</b>
 		</div>
-
+		<div ng-if="document.contactOrganization">
+				 <b>{{document.contactOrganization.organization | lstring:locale}}</b>
+				 <span ng-show="document.contactOrganization.organizationAcronym">
+					 ({{document.contactOrganization.organizationAcronym | lstring:locale}})
+				 </span>
+		</div>
 		<div>
 			{{document.designation | lstring:locale}}<span ng-show="document.designation && document.department">, </span>
 			{{document.department | lstring:locale}}
@@ -32,27 +37,27 @@
 
 	</div>
 
-	<address style="margin-top: 5px; margin-bottom: 5px">
+	<address style="margin-top: 5px; margin-bottom: 5px" >
 		<div >
 			<!-- class="km-pre" -->
 			<span ng-show="document.addressHTML" ng-bind-html="document.addressHTML | lstring:locale"></span>
-			{{document.address | lstring:locale}}</div>
-			{{document.city | lstring:locale}}<span ng-show="document.city && document.state">, </span>
-			{{document.state | lstring:locale}}<br ng-show="document.city || document.state" />
-			{{document.postalCode | lstring:locale}}<span ng-show="document.postalCode">, </span>
-		<b>{{document.country|term}}</b>
+			{{(document.contactOrganization || document).address | lstring:locale}}</div>
+			{{(document.contactOrganization || document).city | lstring:locale}}<span ng-show="(document.contactOrganization || document).city && document.state">, </span>
+			{{(document.contactOrganization || document).state | lstring:locale}}<br ng-show="(document.contactOrganization || document).city || document.state" />
+			{{(document.contactOrganization || document).postalCode | lstring:locale}}<span ng-show="(document.contactOrganization || document).postalCode">, </span>
+		 <b>{{(document.contactOrganization || document).country|term}}</b>
 	</address>
 
-	<div ng-show="document.phones">
-		Phone: <span ng-repeat="item in document.phones">{{item}}<span ng-show="!$last">, </span></span>
+	<div ng-show="(document.contactOrganization || document).phones">
+		Phone: <span ng-repeat="item in (document.contactOrganization || document).phones">{{item}}<span ng-show="!$last">, </span></span>
 	</div>
-	<div ng-show="document.faxes">
-		Fax: <span ng-repeat="item in document.faxes">{{item}}<span ng-show="!$last">, </span></span>
+	<div ng-show="(document.contactOrganization || document).faxes">
+		Fax: <span ng-repeat="item in (document.contactOrganization || document).faxes">{{item}}<span ng-show="!$last">, </span></span>
 	</div>
-	<div ng-show="document.emails">
-		Email: <span ng-repeat="item in document.emails"><a ng-href="mailto:{{item}}">{{item}}</a><span ng-show="!$last">, </span></span>
+	<div ng-show="(document.contactOrganization || document).emails">
+		Email: <span ng-repeat="item in (document.contactOrganization || document).emails"><a ng-href="mailto:{{item}}">{{item}}</a><span ng-show="!$last">, </span></span>
 	</div>
-	<div ng-show="document.websites">
-		Website: <span ng-repeat="item in document.websites"><a target="_new" ng-href="{{item.url}}">{{item.url}}</a><span ng-show="!$last">, </span></span>
+	<div ng-show="(document.contactOrganization || document).websites">
+		Website: <span ng-repeat="item in (document.contactOrganization || document).websites"><a target="_new" ng-href="{{item.url}}">{{item.url}}</a><span ng-show="!$last">, </span></span>
 	</div>
 </div>

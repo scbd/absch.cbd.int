@@ -62,6 +62,16 @@ app.directive("editContactBase", [ function () {
 				}
 			});
 
+			$scope.$watch('document.contactOrganization', function(newValue){
+				if(newValue ){
+					document.address	= undefined;
+					document.city		= undefined;
+					document.state		= undefined;
+					document.postalCode	= undefined;
+					document.country	= undefined;
+				}
+			});
+
 		}]
 	};
 }]);
