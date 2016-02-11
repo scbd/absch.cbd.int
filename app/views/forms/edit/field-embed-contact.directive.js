@@ -14,7 +14,6 @@ function(app) {
                 model: "=ngModel",
                 locales: "=locales",
                 caption: "@caption",
-                documents: "@",
                 subFilter : "=?"
             },
             link: function($scope, $element, $attrs) {
@@ -36,6 +35,7 @@ function(app) {
             },
             controller: ["$scope", "$http", "$window", "$filter", "underscore", "guid", "editFormUtility", "$q", "IStorage", "commonjs",
                 function($scope, $http, $window, $filter, _, guid, editFormUtility, $q, storage, commonjs) {
+                    var workingContacts = null;
                     //============================================================
                     //
                     //
@@ -109,7 +109,7 @@ function(app) {
                                 contactType = 'organization';
 
                             var qDrafts = storage.documentQuery
-                            .body("(type eq 'authority' or type eq 'contact')", [$scope.subFilter],
+                            .body("(type eq 'authority' or type eq 'contact')", $scope.subFilter ? [$scope.subFilter] : undefined,
                                   {collection:"my",body: true});
                             $scope.existingContacts = [];
 
