@@ -212,7 +212,7 @@ define(['app', 'underscore'], function(app, _) {
                                     .then(function(uniqueIdentifier) {
                                         return {
                                             "title": permit.title.en + ' (' + uniqueIdentifier + ')',
-                                            "identifier": permit.identifier
+                                            "identifier": permit.identifier + '@' + permit.revision
                                         };
                                     });
                             }
