@@ -283,7 +283,7 @@ app.directive('recordLoader', [function () {
 				require([schemaDetails], function() {
 					var name = snake_case(schema);
 					var directiveHtml =
-						"<DIRECTIVE ng-show='internalDocument && document' ng-model='internalDocument' document-info='internalDocumentInfo' locale='getLocale()' link-target={{linkTarget}}></DIRECTIVE>"
+						"<DIRECTIVE ng-show='internalDocument' ng-model='internalDocument' document-info='internalDocumentInfo' locale='getLocale()' link-target={{linkTarget}}></DIRECTIVE>"
 						.replace(/DIRECTIVE/g, 'view-' + name);
 
                     $scope.$apply(function() {
