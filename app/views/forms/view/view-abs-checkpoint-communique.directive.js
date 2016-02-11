@@ -185,26 +185,27 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 							});
 					});
 				}
-				var government =  document.government.identifier;
-				var query = "/api/v2013/index/select?fl=id,identifier_s,schema_s,title_t,department_EN_t,description_EN_t,email_ss,"+
-				"+organization_EN_t,telephone_s,type_ss,fax_ss,government_CEN_s,addressCountry_s&q=(realm_ss:" + realm.value.toLowerCase() +
-				"+AND+NOT+version_s:*+AND+schema_s:focalPoint+AND+(type_ss:NP-FP+OR+type_ss:ABS-FP)+AND+(government_s:" + government + "))&rows=50";
+				if(document.government){
+					var government =  document.government.identifier;
+					var query = "/api/v2013/index/select?fl=id,identifier_s,schema_s,title_t,department_EN_t,description_EN_t,email_ss,"+
+					"+organization_EN_t,telephone_s,type_ss,fax_ss,government_CEN_s,addressCountry_s&q=(realm_ss:" + realm.value.toLowerCase() +
+					"+AND+NOT+version_s:*+AND+schema_s:focalPoint+AND+(type_ss:NP-FP+OR+type_ss:ABS-FP)+AND+(government_s:" + government + "))&rows=50";
 
-				$http.get(query).success(function(res) {
-					angular.forEach(res.response.docs, function(nfp){
-							$scope.emailList.push(
-									{
-										type:'person',
-										firstName:nfp.title_t,
-										addressHTML:{en:nfp.description_EN_t.replace(/\n/g, '<br/>')},
-										country: nfp.addressCountry_s,
-										phones:[nfp.telephone_s],
-										faxes:nfp.fax_ss,
-										emails:nfp.email_ss
-									});
+					$http.get(query).success(function(res) {
+						angular.forEach(res.response.docs, function(nfp){
+								$scope.emailList.push(
+										{
+											type:'person',
+											firstName:nfp.title_t,
+											addressHTML:{en:nfp.description_EN_t.replace(/\n/g, '<br/>')},
+											country: nfp.addressCountry_s,
+											phones:[nfp.telephone_s],
+											faxes:nfp.fax_ss,
+											emails:nfp.email_ss
+										});
+						});
 					});
-					console.log(	$scope.emailList);
-				});
+				}
 			}
 
 

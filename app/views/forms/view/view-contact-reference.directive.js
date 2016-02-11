@@ -14,22 +14,34 @@ app.directive("viewContactReference", [function () {
 		controller: ["$scope", "IStorage", function ($scope, storage) {
 
 			$scope.$watch("model", function(newVal) {
-				console.log(newVal);
-				if(newVal && !newVal.header && newVal.identifier && !$scope.document ){
-					storage.documents.get(newVal.identifier)
-						.then(function(data){
-							$scope.document = data.data;
-							if($scope.document.$scope.document){
-								storage.documents.get(newVal.identifier)
-								.then(function(data){
-									_.extend($scope.document.contactOrganization, data.data);
-								});
-							}
+				if(!newVal)
+					return;
 
-						});
+				if(!newVal.header && newVal.identifier && !$scope.document ){
+					//tweak for old versions after migration as of Feb 16
+					if(newVal.document){
+						$scope.document = newVal.document;
+					}
+					else{
+						storage.documents.get(newVal.identifier)
+							.then(function(data){
+								$scope.document = data.data;
+								if($scope.document && $scope.document.contactOrganization){
+									storage.documents.get($scope.document.contactOrganization)
+									.then(function(data){
+										_.extend($scope.document.contactOrganization, data.data);
+									});
+								}
+
+							});
+					}
 				}
-				else if(newVal && newVal.header) {
+				else if(newVal.header) {
 					$scope.document = newVal;
+				}
+				//tweak for document's old versions after migration as of Feb 16
+				else if(newVal.source){
+						$scope.document = newVal;
 				}
 			});
 
