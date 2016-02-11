@@ -1,4 +1,5 @@
-define(['app', 'underscore', '/app/views/forms/edit/edit.js','/app/views/forms/edit/edit-resource-schema-base-directive.html.js'
+define(['app', 'underscore', '/app/views/forms/edit/edit.js','/app/views/forms/edit/edit-resource-schema-base-directive.html.js',
+        '../view/view-resource.directive.js'
        ], function (app, _) {
 
   app.controller("editModelContractualClause", ["$scope", "$http", "$filter", "Thesaurus", "$q", "Enumerable", "$controller", "IStorage", "$location",
@@ -20,7 +21,7 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js','/app/views/forms/e
           return  Thesaurus.buildTree(o.data);
         })
       }
-      
+
     });
     //==================================
     //

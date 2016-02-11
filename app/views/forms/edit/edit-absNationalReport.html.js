@@ -1,11 +1,12 @@
-define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document-selection-directive.html.js'], function (app) {
+define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document-selection-directive.html.js',
+        '../view/view-abs-national-report.directive.js'], function (app) {
 
   app.controller("editAbsNationalReport", ["$scope", "$http", "$filter", "$controller", "$location", "$q", "realm", "underscore", function ($scope, $http, $filter, $controller,$location, $q, realm, _) {
 
     $controller('editController', {$scope: $scope});
-    
+
     $scope.showHelp.hasHelp = true;
-    
+
     $scope.setTab = function () {
         $scope.tab = 'edit';
     };
@@ -19,7 +20,7 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
             $('#nrTabs a:first').tab('show');
 
     });
-    
+
 
 
     //==================================
@@ -28,7 +29,7 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
     $scope.path=$location.path();
 
     $scope.getCleanDocument = function(document) {
-   
+
         document = document || $scope.document;
 
         if (!document)
@@ -508,7 +509,7 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
             $scope.document.question63.numberOfStaff = undefined;
         }
     };
-    
+
     //==================================
     //
     //==================================
@@ -518,7 +519,7 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
              $scope.document.question63new.relevantDocuments = undefined;
         }
     };
-    
+
     //==================================
     //
     //==================================
@@ -565,7 +566,7 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
 
         if(government){
             $q.when(getAbsDocuments(government)).then(function (data) {
-                $scope.absDocuments = data;                
+                $scope.absDocuments = data;
             });
         }
     }

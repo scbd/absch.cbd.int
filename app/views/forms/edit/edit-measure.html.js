@@ -1,4 +1,5 @@
-define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/js/common.js'], function (app, _, angular) {
+define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/js/common.js',
+        '../view/view-measure.directive.js'], function (app, _, angular) {
 
   app.controller("editMeasure", ["$scope", "$http", "$filter", "$q", "Enumerable", "$controller", "$location", 'commonjs',
    function ($scope, $http, $filter, $q, Enumerable, $controller, $location, commonjs) {

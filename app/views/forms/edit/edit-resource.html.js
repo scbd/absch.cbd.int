@@ -1,4 +1,5 @@
-define(['app', 'underscore', '/app/views/forms/edit/edit.js','/app/views/forms/edit/edit-resource-schema-base-directive.html.js'], function (app, _) {
+define(['app', 'underscore', '/app/views/forms/edit/edit.js','/app/views/forms/edit/edit-resource-schema-base-directive.html.js',
+        '../view/view-resource.directive.js'], function (app, _) {
 
   app.controller("editResource", ["$scope", "$http", "$filter", "Thesaurus", "$q", "Enumerable", "$controller", "IStorage", "$location",
                 function ($scope, $http, $filter, Thesaurus, $q, Enumerable, $controller, storage, $location) {

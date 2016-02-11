@@ -1,4 +1,5 @@
-define(['app', '/app/views/forms/edit/edit.js', '/app/js/common.js'], function (app) {
+define(['app', '/app/views/forms/edit/edit.js', '/app/js/common.js',
+        '../view/view-abs-permit.directive.js'], function (app) {
 
   app.controller("editAbsPermit", ["$scope", "$http", "Thesaurus", "guid", "$filter", "$q", "Enumerable",
                                     "editFormUtility", "$controller","IStorage","$location", "commonjs",

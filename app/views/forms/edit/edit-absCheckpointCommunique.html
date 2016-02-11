@@ -154,60 +154,56 @@
                                     </div>
 
                                 </div>
+                                <div ng-show="document.gisFiles">
+                                    <div class="input-prepend input-append">
+                                        <input class="input-small" type="text" readonly value="{{document.gisMapCenter.lat | number:6}}">
+                                        <span class="add-on">lat</span>
+                                    </div>
+                                    <div class="input-prepend input-append">
+                                        <input class="input-small" type="text" readonly value="{{document.gisMapCenter.lng | number:6}}">
+                                        <span class="add-on">long</span>
+                                    </div>
+                                    <div class="input-prepend input-append">
+                                        <input class="input-small" type="text" readonly value="{{document.gisMapCenter.zoom | number:0}}">
+                                        <span class="add-on">zoom</span>
+                                    </div>
+                                </div>
+                                <div ng-show="document.gisFiles" class="leaflet" center="document.gisMapCenter" layers="gisLayer"></div>
+                                
+                                <legend>Evidence of PIC and MAT</legend>
+
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="km-control-group" name="referenceOfInformedConsent" caption="Reference or evidence of prior informed consent (PIC)">
+                                            <div km-rich-textbox name="referenceOfInformedConsent" rows="4" ng-model="document.referenceOfInformedConsent" locales="document.header.languages"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">{{document.responsibleAuthorities}}
+                                        <div class="km-control-group" name="responsibleAuthorities" caption="Person or entity who granted prior informed consent (PIC)">
+                                            <field-embed-contact ng-model="document.responsibleAuthorities" locales="document.header.languages" caption="{{document.responsibleAuthorities ? 'Replace organisation or a contact »' : 'Add an organisation or a contact »'}}"></field-embed-contact>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="km-control-group" name="personeToWhomGranted" caption="Person or entity to whom prior informed consent (PIC) was granted">
+                                            <span class="help-block">Please provide the contact details of the person or entity to whom prior informed consent was granted.</span>
+
+                                            <field-embed-contact ng-model="document.personeToWhomGranted" locales="document.header.languages" caption="{{document.personeToWhomGranted ? 'Replace organisation or a contact »' : 'Add an organisation or a contact »'}}"></field-embed-contact>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="km-control-group" name="referenceOfAgreedTerms" caption="Reference or evidence of establishment of mutually agreed terms (MAT)">
+                                            <div km-rich-textbox name="referenceOfAgreedTerms" rows="4" ng-model="document.referenceOfAgreedTerms" locales="document.header.languages"></div>
+                                        </div>
+                                    </div>
+                                </div>
                         </section>
-
-
-                        <div ng-show="document.gisFiles">
-                            <div class="input-prepend input-append">
-                                <input class="input-small" type="text" readonly value="{{document.gisMapCenter.lat | number:6}}">
-                                <span class="add-on">lat</span>
-                            </div>
-                            <div class="input-prepend input-append">
-                                <input class="input-small" type="text" readonly value="{{document.gisMapCenter.lng | number:6}}">
-                                <span class="add-on">long</span>
-                            </div>
-                            <div class="input-prepend input-append">
-                                <input class="input-small" type="text" readonly value="{{document.gisMapCenter.zoom | number:0}}">
-                                <span class="add-on">zoom</span>
-                            </div>
-                        </div>
-                        <div ng-show="document.gisFiles" class="leaflet" center="document.gisMapCenter" layers="gisLayer"></div>
-                        <hr>
-
-                        <legend>Evidence of PIC and MAT</legend>
-
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="km-control-group" name="referenceOfInformedConsent" caption="Reference or evidence of prior informed consent (PIC)">
-                                    <div km-rich-textbox name="referenceOfInformedConsent" rows="4" ng-model="document.referenceOfInformedConsent" locales="document.header.languages"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="km-control-group" name="responsibleAuthorities" caption="Person or entity who granted prior informed consent (PIC)">
-                                    <field-embed-contact ng-model="document.responsibleAuthorities" locales="document.header.languages" caption="{{document.responsibleAuthorities ? 'Replace organisation or a contact »' : 'Add an organisation or a contact »'}}"></field-embed-contact>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="km-control-group" name="personeToWhomGranted" caption="Person or entity to whom prior informed consent (PIC) was granted">
-                                    <span class="help-block">Please provide the contact details of the person or entity to whom prior informed consent was granted.</span>
-
-                                    <field-embed-contact ng-model="document.personeToWhomGranted" locales="document.header.languages" caption="{{document.personeToWhomGranted ? 'Replace organisation or a contact »' : 'Add an organisation or a contact »'}}"></field-embed-contact>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="km-control-group" name="referenceOfAgreedTerms" caption="Reference or evidence of establishment of mutually agreed terms (MAT)">
-                                    <div km-rich-textbox name="referenceOfAgreedTerms" rows="4" ng-model="document.referenceOfAgreedTerms" locales="document.header.languages"></div>
-                                </div>
-                            </div>
-                        </div>
-
                         <section>
 
                             <legend>Information on the utilization of the genetic resource(s)</legend>
