@@ -4,33 +4,26 @@
     <div smooth-scroll duration="100" offset="200"></div>
 
     <style>
-        @media (max-width: 768px) {
-                #Jumbotron {height:auto!important;}
-                #Parties {top:0!important;}
-                #Parties .col-xs-12{text-align: left;}
-            }
-          @media (min-width: 768px) {
-                #Parties {top:352px!important;}
-            }
-          @media (min-width: 992px) {
-                #Parties {top:382px!important;}
-            }
+
     </style>
 
-    <div id="Jumbotron" class="bg-texture-green" style="border-top:1px solid #555;border-bottom:2px solid #ddd;height:600px;">
-        <div id="Map" class="hidden-xs" style="background-image:url('/app/img/placeholder-map.png');height:596px;position:absolute;width:100%;background-size:2000px;background-repeat: no-repeat;background-position: center ;"></div>
-        <div class="container" style="color:white;padding:20px;">
+    <div id="Jumbotron"  style="border-top:1px solid #555;border-bottom:2px solid #ddd;">
+        <div  class="bg-texture-green ammap-dir" >
+<!-- class="bg-texture-green" -->
+          <home-map ></home-map>
+        </div>
+        <!-- <div class="container" style="color:white;padding:20px;"> -->
 
-            <div id="Tagline" class="row  bg-green" style="padding:20px;">
+            <!-- <div id="Tagline" class="row  bg-green" style="padding:20px;">
                 <div class="col-md-12">
                     <div class="home-col dropshadow">
                         <h3>The Access and Benefit-sharing Clearing-house (ABSCH) is a platform for exchanging information on ABS and a key tool for facilitating the implementation of the Nagoya Protocol.
                         </h3>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
-            <div id="Parties" style="position:relative;top:0;" class="row bg-green">
+            <!-- <div id="Parties" style="position:relative;top:0;" class="row bg-green">
                 <div class="col-xs-12 col-sm-4 text-center special-font" style="padding-top:8px;padding-bottom:10px;" >
                     <span class="label label-primary" style="font-size:24px;">70</span> &nbsp;<br class="visible-sm">
                     <a style="font-size:24px;" href="#" class="color-white">Parties</a>
@@ -43,8 +36,8 @@
                     <span class="label label-default" style="font-size:24px;">70</span> &nbsp; <br class="visible-sm">
                     <a style="font-size:24px;" href="#" class="color-white">Ratified&nbsp;not&nbsp;yet&nbsp;Party</a>
                 </div>
-            </div>
-        </div>
+            </div> -->
+        <!-- </div> -->
     </div>
 
     <div style="padding:20px">

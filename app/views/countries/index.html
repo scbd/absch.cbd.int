@@ -5,13 +5,14 @@
 <div ng-controller="CountriesMapController">
     <div >
         <div class="row" help schema="countryInformation">
-            <div class="col-xs-2" >
-                <div countries-left-menu></div>
-            </div>
-            <div class="col-xs-10" style="padding-top:5px;">
-                <legend name="formInfo" style="display:none"></legend>
-                <div country-map-list ></div>
-            </div>
+          <div class=" col-md-2 hidden-xs hidden-sm" >
+              <div countries-left-menu></div>
+          </div>
+          <div class="col-xs-12 col-md-10" style="padding-top:5px;">
+            <search-map height="600px" selected-color="#999999" zoom-in-on-load="true"></search-map>
+              <legend name="formInfo" style="display:none"></legend>
+              <div country-map-list ></div>
+          </div>
 
         </div>
     </div>

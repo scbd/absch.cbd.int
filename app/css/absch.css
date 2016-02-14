@@ -576,3 +576,7 @@ body.block-ui { position: static; }
 .block-ui-message { display: inline-block; text-align: left; color: rgb(245, 245, 245); padding: 20px; border-radius: 4px; font-size: 20px; font-weight: 700; background-color: rgb(51, 51, 51); }
 .block-ui-anim-fade > .block-ui-container { transition: height 0s linear 200ms, opacity 200ms ease 0s; }
 .block-ui-anim-fade.block-ui-active > .block-ui-container { transition-delay: 0s; }
+#map-texture{
+    background:#1FA65D url('../img/feature-bkg.png')!important;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, .5) 0%, rgba(0, 0, 0, .0001) 100%);
+}

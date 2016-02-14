@@ -11,6 +11,7 @@ require.config({
 
         'css'                   : '../libs/require-css/css.min',
         'text'                  : '../libs/requirejs-text/text',
+        'shim'                  : '../libs/require-shim/src/shim',
         'linqjs'                : '../libs/linqjs/linq',
         'angular-localizer'     :'../libs/ngLocalizer/localizer',
         'async'                 : '../libs/requirejs-plugins/src/async',
@@ -64,7 +65,6 @@ require.config({
         'angular-localizer'             : { 'deps':['angular']},
         'bootbox'                       : { 'deps':['bootstrap', 'jquery']},
         'jqvmap'                        : { 'deps': ['jquery'] },
-        'jqvmapworld'                   : { 'deps': ['jqvmap'] },
         'text-angular'                  : { 'deps': ['text-angular-sanitize', 'angular'] },
         'text-angular-sanitize'         : { 'deps': ['angular', 'angular-sanitize']},
         'cbd-forums'                    : { 'deps': ['angular', 'bootstrap']},
@@ -83,7 +83,9 @@ require.config({
     packages: [
         { name: 'scbd-branding'          , location : '../libs/scbd-branding' },
         { name: 'scbd-angularjs-services', location : '../libs/scbd-angularjs-services/services' },
-        { name: 'scbd-angularjs-filters',  location : '../libs/scbd-angularjs-services/filters' }
+        { name: 'scbd-angularjs-filters',  location : '../libs/scbd-angularjs-services/filters' },
+        { name: 'scbd-map',                location : '../libs/scbd-map' },
+        { name: 'ammap', main: 'ammap',    location : '../libs/ammap3/ammap' }
     ]
 });
 

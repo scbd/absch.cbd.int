@@ -75,7 +75,7 @@ define(['app', 'underscore'], function (app, _) {
                         _.each(facetQuery.fields, function(facet){
                             facets[facet] = readFacets2(data.data.facet_counts.facet_fields[facet]);
                         });
-                        console.log(facets);
+//console.log(facets);
                         return facets;
                     })
                 }

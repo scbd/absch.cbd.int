@@ -39,9 +39,12 @@
     "requirejs-domready": "2.0.1",
     "requirejs-plugins": "1.0.3",
     "requirejs-text": "2.0.14",
-    "scbd-branding": "~1.*",
+    "require-shim":  "https://github.com/zetlen/require-shim.git",
+
     "scbd-angularjs-controls": "1.0.0",
     "scbd-angularjs-services": "1.1.5",
+    "scbd-branding": "~1.*",
+    "scbd-map": "*",  
     "underscore": "1.7.0"
   },
   "resolutions": {

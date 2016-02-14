@@ -645,7 +645,7 @@ app.directive('searchFilterSchemas', function ($http) {
                 $timeout(function(){
                     $scope.query = newVal;
                 },100);
-                    console.log(newVal);
+//console.log(newVal);
                 }
             },true);
 

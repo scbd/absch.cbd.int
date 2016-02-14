@@ -1,5 +1,5 @@
 define(['app', 'underscore',  'scbd-angularjs-controls',
-'/app/views/countries/country-profile-directive.html.js', 'ngSmoothScroll'], function(app, _) {
+'/app/views/countries/country-profile-directive.html.js', 'ngSmoothScroll','scbd-map/ammap3-service'], function(app, _) {
 
     app.directive('countryMapList', function() {
         return {
@@ -8,8 +8,8 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
             replace: true,
             scope: {
             },
-            controller: ['$scope', '$http', 'realm', '$q', '$filter', '$routeParams', '$timeout', '$element', 'commonjs', '$route','$location', 'smoothScroll',
-            function($scope, $http, realm, $q, $filter, $routeParams, $timeout, $element, commonjs, $route, $location, smoothScroll) {
+            controller: ['$scope', '$http', 'realm', '$q', '$filter', '$routeParams', '$timeout', '$element', 'commonjs', '$route','$location', 'smoothScroll','ammap3Service',
+            function($scope, $http, realm, $q, $filter, $routeParams, $timeout, $element, commonjs, $route, $location, smoothScroll,ammap3Service) {
                     var reloadDetails = false;
                     var countryProfile = {};
                     $scope.lastAction = 'party';
@@ -42,6 +42,7 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
                                 $scope.countryFacets = response.data.facet_counts.facet_pivot;
                                 //CalculateFacets();
                                 calculateListViewFacets();
+                                ammap3Service.loadCountries('search-map',$scope.countries);
                             })
                             .finally(function(){
                                 $scope.loading = false;
@@ -80,7 +81,7 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
                               }
 
                             })
-                           .finally(function(){$scope.loading = false;});
+                           .finally(function(){$scope.loading = false;  });
                         //$scope.countries = $filter("orderBy")(response[1].data, "name.en");
                     }
 
@@ -153,14 +154,14 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
                         }
                         return true;
                     }
-                    //====================================================
-                    $scope.listAll = function(status) {
-                        $scope.searchFilter = '';
-                        $scope.countryFilter = '';
-
-                        partyFilter = true
-
-                    }
+                    // //====================================================
+                    // $scope.listAll = function(status) {
+                    //     $scope.searchFilter = '';
+                    //     $scope.countryFilter = '';
+                    //
+                    //     partyFilter = true
+                    //
+                    // }
 
                     //====================================================
 
@@ -180,6 +181,7 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
                                     country.total     = (country.total ? country.total : 0) + document.count;
                                 });
                             }
+                            country=normalizeCountryData(country);
 
                         });
 
@@ -187,7 +189,38 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
 
 
                     }
+                    //=======================================================================
+                    //// should be done in client
+                    //=======================================================================
+                    function normalizeCountryData(country) {
+                      if (!country.CNA)
+                        country.CNA = 0;
 
+                      if (!country.CP)
+                        country.CP = 0;
+
+                      if (!country.CPC)
+                        country.CPC = 0;
+
+                      if (!country.IRCC)
+                        country.IRCC = 0;
+
+                      if (!country.MSR)
+                        country.MSR = 0;
+
+                      if (!country.NDB)
+                        country.NDB = 0;
+
+                      if (!country.NFP)
+                        country.NFP = 0;
+                        if (country.isNPParty)
+                          country.status = '<span style="text-align:right;background-color: #428bca;" class="party-status" ng-if="isNPParty">Party</span>';
+                        else if (country.isNPSignatory)
+                          country.status = '<span style="text-align:right;background-color: #5bc0de;" class="party-status" ng-if="isNPRatified">Signatory</span>';
+                        else
+                          country.status = '<span style="text-align:right;background-color: #888888;" class="party-status" ng-if="isNPSignatory">Non Party</span>';
+                      return country;
+                    }
                     //====================================================
                     $scope.sortTermFilter = function(data) {
                          //console.log(data);
