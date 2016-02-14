@@ -1,0 +1,12 @@
+<div ng-controller="countryProfileController" class="country-profile" >
+  <h1>
+    <i class="flag-icon" ng-class="country.cssClass"></i>
+
+
+    {{country.name}} </h1>
+
+    <div >
+<zoom-map width="275px" height="350px" selected-color="#1fa65d" ng-attr-zoom-to="{{code}}" map-id="zoom-map-country" home-button="false" zoom-control-alpha=".1" zoom-control-right="220px"></zoom-map>
+
+    </div>
+</div>
