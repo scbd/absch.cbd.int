@@ -42,9 +42,9 @@
     "require-shim":  "https://github.com/zetlen/require-shim.git",
 
     "scbd-angularjs-controls": "1.0.0",
-    "scbd-angularjs-services": "1.1.5",
+    "scbd-angularjs-services": "1.1.6",
     "scbd-branding": "~1.*",
-    "scbd-map": "*",  
+    "scbd-map": "1.0.1",  
     "underscore": "1.7.0"
   },
   "resolutions": {
@@ -54,6 +54,6 @@
     "font-awesome": "4.5.0",
     "jquery": "2.2.0",
     "angular-material": "0.9.8",
-    "scbd-angularjs-services": "1.1.5"
+    "scbd-angularjs-services": "1.1.6"
   }
 }

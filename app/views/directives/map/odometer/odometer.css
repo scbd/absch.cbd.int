@@ -91,6 +91,7 @@
   line-height: 1.2em;
   font-size: 1.2em;
   background-size: 16px 16px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 .odometer.odometer-auto-theme .odometer-digit, .odometer.odometer-theme-plaza .odometer-digit {
   -moz-border-radius: 0.1em;
