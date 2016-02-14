@@ -19,6 +19,7 @@ define(['text!./home-map.html',
       link: function($scope, $element, $attr, homeMapCrl) { // jshint ignore:line
 
         $scope.showTagLine = 1;
+        $scope.showPartyTagLine = 1;
         homeMapCrl.loadCountries();
 
         ammap3Service.setGlobalClickListener('index-map',
