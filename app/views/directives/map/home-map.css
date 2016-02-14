@@ -1,0 +1,48 @@
+.tag-line-container {
+  width: 80%;
+  color: white;
+  padding: 20px;
+  position: absolute;
+  left: 10%;
+  z-index: 10;
+}
+.party-container {
+  width: 80%;
+  color: white;
+  padding: 20px;
+  position: absolute;
+  left: 10%;
+  z-index: 10;
+  top:80%;
+}
+.tag-line-container  h3{
+
+
+    font-size: 18px;
+
+}
+.tag-line-close-btn {
+  color: rgba(255,255,255,.3);
+  position: absolute;
+  right: 3px;
+  top: 3px;
+}
+
+@media (max-width: 600px){
+
+
+}
+@media (max-width: 768px) {
+        #Jumbotron {height:auto!important;}
+      /*//  #Parties {top:0!important;}*/
+        .party-container {top:77%!important;}
+        #Parties .col-xs-12{text-align: left;}
+        .tag-line-container {
+          left: 3%;
+          width: 94%;
+        }
+        .tag-line-container  h3{
+            font-size: 15px;
+        }
+    }
+
