@@ -1,0 +1,10 @@
+#od1 {font-size: 35px;background-color: #428bca;color:white;}
+#od2 {font-size: 35px;background-color: #5bc0de;color:white;}
+#od3 {font-size: 35px;background-color: #888888;color:white;}
+
+@media (max-width: 600px){
+  #od1 {font-size: 16px;background-color: #428bca;color:white;}
+  #od2 {font-size: 16px;background-color: #5bc0de;color:white;}
+  #od3 {font-size: 16px;background-color: #888888;color:white;}
+}
+

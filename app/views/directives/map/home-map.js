@@ -5,6 +5,7 @@ define(['text!./home-map.html',
   'css!./home-map',
   'scbd-map/ammap3',
   'scbd-map/ammap3-service',
+  './party-status.js',
 ], function(template, app, _, popoverTemplate) {
   'use strict';
 
@@ -44,7 +45,7 @@ define(['text!./home-map.html',
       //=======================================================================
       //
       //=======================================================================
-      controller: ['$scope', '$http', 'realm', '$q', '$filter', 'commonjs', function($scope, $http, realm, $q, $filter, commonjs) {
+      controller: ['$scope', '$http', 'realm', '$q', '$filter', 'commonjs','$timeout', function($scope, $http, realm, $q, $filter, commonjs,$timeout) {
           var reloadDetails = false;
           //====================================================
           function loadCountryMapDetails() {
@@ -69,8 +70,10 @@ define(['text!./home-map.html',
 
                   calculateListViewFacets();
 
+
+
                   ammap3Service.loadCountries('index-map', $scope.countries).then(function() {
-                    playMovie();
+                    setTimeout(function(){playMovie();},4000);
                   });
                 })
                 .then(function() {
@@ -97,6 +100,29 @@ define(['text!./home-map.html',
               }
 
             });
+            $timeout(function(){
+              $scope.numParty=0;
+              $scope.numNonParty=0;
+              $scope.numRatified=0;
+              $scope.numSignatory=0;
+              _.each($scope.countries,function(country){
+// console.log(country);
+                if(country.isNPParty)
+                  $scope.numParty++;
+                else if(country.isNPRatified)
+                  $scope.numRatified++;
+                else if(country.isNPSignatory)
+                  $scope.numSignatory++;
+                else
+                  $scope.numNonParty++;
+
+              });
+// console.log('$scope.numParty',$scope.numParty);
+// console.log('$scope.numRatified',$scope.numRatified);
+// console.log('$scope.numSignatory',$scope.numSignatory);
+// console.log('$scope.numNonParty',$scope.numNonParty);
+            });
+
           } //calculateListViewFacets
 
           //====================================================
@@ -105,6 +131,8 @@ define(['text!./home-map.html',
 
             return commonjs.getCountries().then(function(countries) {
                 $scope.countries = countries;
+
+
               })
               .then(function() {
                 loadCountryMapDetails();
@@ -158,7 +186,7 @@ define(['text!./home-map.html',
               country = ammap3Service.randomCountry('index-map');
               ammap3Service.clickMapObject('index-map', country);
               count++;
-            }, 5500);
+            }, 5000);
             ammap3Service.setGlobalClickListener('index-map', function() {
               if (intervalId)
                 clearInterval(intervalId); // close pop overs when clicking water or anywhere
