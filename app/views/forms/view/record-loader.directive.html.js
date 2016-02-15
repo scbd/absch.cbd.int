@@ -279,9 +279,19 @@ app.directive('recordLoader', [function () {
 			});
 
 			function loadViewDirective(schema){
-				var schemaDetails = schemaMapping[schema];
+
+				if(!schema)
+					return;
+					
+				var lschema = _.clone(schema);
+
+				if(schema.toLowerCase() == 'modelcontractualclause' || schema.toLowerCase() == 'communityprotocol')
+					lschema = 'resource';
+
+				var schemaDetails = schemaMapping[lschema];
+
 				require([schemaDetails], function() {
-					var name = snake_case(schema);
+					var name = snake_case(lschema);
 					var directiveHtml =
 						"<DIRECTIVE ng-show='internalDocument' ng-model='internalDocument' document-info='internalDocumentInfo' locale='getLocale()' link-target={{linkTarget}}></DIRECTIVE>"
 						.replace(/DIRECTIVE/g, 'view-' + name);
@@ -295,6 +305,7 @@ app.directive('recordLoader', [function () {
 
 			}
 			function snake_case(name, separator) {
+
 			  separator = separator || '-';
 			  return name.replace(/[A-Z]/g, function(letter, pos) {
 			    return (pos ? separator : '') + letter.toLowerCase();

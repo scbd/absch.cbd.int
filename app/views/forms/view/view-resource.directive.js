@@ -10,13 +10,10 @@ app.directive("viewResource", [function () {
 			document: "=ngModel",
 			locale  : "=",
 			target  : "@linkTarget",
-			hide : "@",
-			heading	:	"@",
-			shortHeading : "@"
+			hide : "@"
 		},
 		controller : ["$scope", "IStorage", "$http", function ($scope, storage, $http)
 		{
-
 			//====================
 			//
 			//====================
