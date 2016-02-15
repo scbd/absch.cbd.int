@@ -5,7 +5,7 @@ define(['app', 'linqjs', 'angular-localizer',
     '/app/views/directives/help-directive.html.js',
     'bootstrap-datepicker', 'moment', 'text-angular', 'bootbox',
     'scbd-angularjs-services', 'scbd-angularjs-filters', 'scbd-angularjs-controls',
-    'toastr', '/app/js/common.js'//'angular-block-ui',
+    'toastr', '/app/js/common.js', '../directives/loading-directive.js'
 ], function(app) {
 
     "use strict";

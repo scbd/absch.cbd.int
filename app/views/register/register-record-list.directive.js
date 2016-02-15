@@ -1,4 +1,4 @@
-define(['app', '/app/js/common.js'], function(app) {
+define(['app', 'underscore', '/app/js/common.js'], function(app, _) {
     "use strict";
 
     app.directive("registerRecordList", ["$timeout", "commonjs", "bootbox", "$http", "IWorkflows", "IStorage",'$rootScope',
@@ -69,6 +69,15 @@ define(['app', '/app/js/common.js'], function(app) {
                 },
                 controller: ["$scope", "$q", "IStorage", "$http", "guid", "editFormUtility", "$timeout",
                 function($scope, $q, storage, $http, guid, editFormUtility, $timeout) {
+                    //use for documents reference lookup
+                    var schemaFieldsMapping = {
+                        contact     : [],
+                        authority : ['contacts', 'absPolicyBasisForCompetencyRef']
+                    };
+                    var schemaReferenceMapping = {
+                        contact     : [],
+                        authority : ['contacts', 'absPolicyBasisForCompetencyRef']
+                    };
 
                     $scope.orderBy = ['-updatedOn'];
 
@@ -441,6 +450,83 @@ define(['app', '/app/js/common.js'], function(app) {
                         $scope.loading = true;
                         $scope.$emit("refreshDocumentList", {document_type:schema});
                     };
+
+                    $scope.showReference = function(schema){
+                        //TODO: clear all fitlers
+
+                        $scope.loading = true;
+
+
+                            var qDocuments = storage.documents
+                                        .query("(type eq '" + schema + "')",undefined, {body: true});
+
+                            $q.when(qDocuments)
+                              .then(function(results) {
+                                  _.each(results.data.Items, function(document){
+
+                                     var listRecord =  _.findWhere($scope.records, {identifier:document.identifier});
+                                     if(listRecord){
+                                          listRecord.body = document.body;
+                                          var queries = [];
+                                          var documentBody = listRecord.body;
+                                            var fields = schemaFieldsMapping[schema];
+                                            _.map(fields, function(field){
+                                                if(documentBody[field]){
+                                                    if(angular.isArray(documentBody[field])){
+                                                        _.each(documentBody[field], function(fieldDocument){
+                                                            console.log('Arrays ' + fieldDocument.identifier);
+                                                            getDocument(fieldDocument, documentBody, field);
+                                                        })
+                                                    }
+                                                    else{
+                                                        console.log('object ' + documentBody[field].identifier);
+                                                        getDocument(documentBody[field], documentBody, field);
+                                                    }
+
+                                                }
+                                            });
+                                    }
+                                  });
+                              })
+                              .finally(function() {
+                                  $scope.loading = false;
+                                  $scope.displayReference = true;
+                              });
+
+                            // var filter = [];
+                            // var qDocumentReference = storage.documentQuery
+                            //             .body("(type eq '" + schema + "')", filter, {collection:"my"});
+                            //
+                            // $q.when(qDocumentReference)
+                            //   .then(function(results) {
+                            //         results.data.forEach(function(document) {
+                            //             var lContact = contact.body;
+                            //         });
+                            //     })
+                            //     .finally(function() {
+                            //         $scope.loading = false;
+                            //     });
+
+                    };
+
+                    function getDocument(fieldDocument, documentBody, field){
+
+                        var revisionRegex =  /@([0-9]{1,3})/;
+                        $q.when(storage.documents.get(fieldDocument.identifier.replace(revisionRegex,''), {info:true}))
+                          .then(function(document){
+                              var fieldRevision = fieldDocument.identifier.substr(fieldDocument.identifier.indexOf('@')+1,
+                                                fieldDocument.identifier.length-(fieldDocument.identifier.indexOf('@')+1))
+                              fieldDocument.document = document.data;
+                              if(fieldDocument.document.revision > Number(fieldRevision)){
+                                  if(!documentBody.badRevisions)
+                                    documentBody.badRevisions = [];
+                                  documentBody.badRevisions
+                                  .push({'field' : field, 'currentRevision' : fieldDocument.document.revision,
+                                         'fieldRevision' : Number(fieldRevision)
+                                    });
+                              }
+                          });
+                    }
                 }]
             };
         }
