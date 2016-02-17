@@ -35,7 +35,7 @@ require.config({
         'text-angular-sanitize' : '../libs/textAngular/dist/textAngular-sanitize.min',
         'text-angular'          : '../libs/textAngular/dist/textAngular.min',
         'cbd-forums'            : '../libs/cbd-forums/cbd-forums',
-        'angular-storage'       : '../libs/angular-local-storage/dist/angular-local-storage.min',
+        // 'angular-storage'       : '../libs/angular-local-storage/dist/angular-local-storage.min',
         'angular-flex'          : '../libs/angular-flex/angular-flex',
         'ng-breadcrumbs'        : '../libs/ng-breadcrumbs/dist/ng-breadcrumbs.min',
         'ionsound'              : '../libs/ionsound/js/ion.sound.min',
@@ -48,6 +48,7 @@ require.config({
         'joyRide'               : '../libs/joyRide/jquery.joyride-2.1',
         'angular-message'       : '../libs/angular-messages/angular-messages.min',
         'toastr'                : '../libs/angular-toastr/dist/angular-toastr.tpls.min',
+        'ngStorage'             : '../libs/ngstorage/ngStorage.min',
         'angular-block-ui'      :  '../libs/angular-block-ui/dist/angular-block-ui.min'
     },
     'shim': {
@@ -68,7 +69,7 @@ require.config({
         'text-angular'                  : { 'deps': ['text-angular-sanitize', 'angular'] },
         'text-angular-sanitize'         : { 'deps': ['angular', 'angular-sanitize']},
         'cbd-forums'                    : { 'deps': ['angular', 'bootstrap']},
-        'angular-storage'               : { 'deps': ['angular'] },
+        'ngStorage'                     : { 'deps': ['angular'] },
         'angular-flex'                  : { 'deps': ['angular'] },
         'ng-breadcrumbs'                : { 'deps': ['angular'] },
         'scbd-angularjs-services'       : { 'deps': ['angular']},

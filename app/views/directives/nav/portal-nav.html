@@ -1,17 +1,15 @@
 <div>
     <style>
-        @media (max-width: 768px){
             .navbar-nav>li {
                 float: left;
             }
-        }
     </style>
     <nav id="PortalLinks1" class="navbar navbar-links navbar-default navbar-static-top" >
         <div class="container-fluid container-links color-grey">
             <div class="navbar-header">
             </div>
-            <div id="navbar" class="clearfix">
-                <ul class="nav navbar-nav pull-left" >
+            <div id="navbar">
+                <ul class="nav navbar-nav pull-left" style="width:100%" >
                     <div class="bold color-orange1 hidden-md hidden-lg" ng-if="!production_env">
                         <span ng-show="development_env"> DEV</span>
                         <span ng-show="training_env"> TRG</span>
@@ -26,31 +24,28 @@
                         </a>
                     </li>
                     <li>
-                         <a href="/about"> <i class="fa fa-question-circle  visible-xs visible-sm"></i>
-                            <span class="hidden-xs hidden-sm"> About the ABSCH</span>
+                         <a href="/about"> <i class="fa fa-question-circle  visible-xs "></i>
+                            <span class="hidden-xs "> About the ABSCH</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/find"> <i class="fa fa-search visible-xs visible-sm"></i>
-                            <span class="hidden-xs hidden-sm"> Search</span>
+                        <a href="/search-new"> <i class="fa fa-search visible-xs "></i>
+                            <span class="hidden-xs "> Search</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/register"> <i class="fa fa-pencil-square-o visible-xs visible-sm"></i>
-                            <span class="hidden-xs hidden-sm"> Submit</span>
+                        <a href="/register"> <i class="fa fa-pencil-square-o visible-xs"></i>
+                            <span class="hidden-xs "> Submit</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/countries"> <i class="fa fa-globe visible-xs visible-sm"></i>
-                            <span class="hidden-xs hidden-sm"> Country Profiles </span>
+                        <a href="/countries"> <i class="fa fa-globe visible-xs v"></i>
+                            <span class="hidden-xs"> Country Profiles </span>
                         </a>
                     </li>
-                </ul>
-
-                <ul class="nav navbar-nav navbar-right ">
                     <li class="last pull-right">
                         <a href="/help" ng-class="{'link-active' : getClass('/help')}">
-                            <span class="hidden-xs">&nbsp;Help</span>
+                            <span>&nbsp;Help</span>
                         </a>
                     </li>
                     <li class="pull-right" ng-if="training_env||development_env"><a href="/forums" ng-class="{'link-active' : getClass('/forums')}"><i class="fa fa-comments"></i><span class="hidden-xs hidden-sm">&nbsp;Forums</span></a></li>

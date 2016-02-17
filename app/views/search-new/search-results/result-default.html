@@ -1,0 +1,24 @@
+<div>   
+    <div  class="recordDefault bg-grey2" ng-show="!showDoc" ng-click="showDoc=!showDoc" style="margin-bottom:10px;padding:0 5px;" >
+        <div class="schema color-blue"><span class="hidden-xs">{{doc.schema_s | schemaName}}</span>
+            <span style="display:inline!important;"> ({{doc.schema_s | schemaShortName}})</span>
+        </div>
+        
+        <div class="title">{{doc.rec_title}}</div>  
+        <a class="pull-right newWindow color-grey" style="position:relative;left:8px;"><i class="fa fa-external-link"></i></a>  
+        
+        <div class="description hidden-xs">{{doc.rec_summary}}</div>
+        <ul class="metadata">
+            <li ng-if="doc.rec_countryName" class="hidden-xs"><span>{{doc.rec_countryName}}</span></li>
+            <li ng-if="doc.uniqueIdentifier_s"><span>{{doc.uniqueIdentifier_s}}</span></li>
+            <li class="hidden-xs" ng-if="doc.rec_meta1"><span>{{doc.rec_meta1}}</span></li>
+            <li class="hidden-xs"ng-if="doc.rec_meta2"><span>{{doc.rec_meta2}}</span></li>
+            <li class="hidden-xs" ng-if="doc.rec_meta3"><span>{{doc.rec_meta3}}</span></li>
+            <li><span class="last-span">{{doc.rec_date | formatDate}}</span></li>
+        </ul>
+    </div>
+    
+    <a ng-show="showDoc" style="z-index:99999;width:100%;" ng-click="showDoc=false"><i class="fa fa-close pull-right" style="color:#f5f5f5;font-size:16px;padding-right:5px;position:relative;top:3px;cursor:pointer;"></i></a>
+    <record-viewer ng-if="showDoc" doc-id='doc.identifier_s' doc-schema='doc.schema_s'></record-viewer>
+    
+</div>

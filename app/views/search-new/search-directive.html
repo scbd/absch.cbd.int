@@ -1,0 +1,90 @@
+ <div>
+{{searchFilters.nationalRecords}}
+ <style>
+        .search > ul {margin:0;padding:0;list-style-type: none;}
+        .search > ul li{ display: inline;font-weight:bold;line-height:40px; }
+        .search > ul li > a {padding:8px 10px 8px 10px;border-radius:3px;top:-3px;position:relative; font-weight:bold;}
+        .search > ul li > a:hover {background-color: #F5F5F5;}
+        .search > ul li > a:focus {background-color: #F5F5F5;}
+        .helpinfo{font-size:14px;font-weight:normal;color:#999;line-height: 16px;}
+        label{font-weight:bold!important;}
+        .fa-info-circle{color:#FF4081}
+        .active .badge {background-color: #333;color:white;}
+        .section-title{color:#999;font-weight: bold;}
+        .active{background-color: #EEE}
+        .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus{background-color: #EEE;position:relative;top:3px;border:pink 3px solid; border-bottom:0;}
+        .nav-tabs { border-bottom:pink 3px solid;}
+        .nav-tabs>li {margin-bottom:0; font-weight:bold; font-size:14px;}
+        .no-rl-padding{padding-left:0!important;margin-left:0!important;padding-right:0!important;margin-right:0!important;}
+    </style>
+    
+    <div class="container-fluid">
+        <div class="row" style="margin:10px 0 0 0;">
+
+            <div class="col-md-3 no-rl-padding" >
+                 <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search the ABSCH" aria-describedby="basic-addon2" style="font-weight:bold;">
+                    <span class="input-group-addon" id="basic-addon2"><i class="fa fa-search"></i></span>
+                </div>
+            </div>
+            <div class="col-md-9 search no-rl-padding hidden-xs" >
+                <ul>
+                    <li> <a href="" ng-click="showFilters=(showFilters=='recordTypes' ? false : 'recordTypes')" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Record types</a> </li>
+                    <li> <a href="" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Keywords</a> </li>
+                    <li> <a href="" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Country</a> </li>
+                    <li> <a href="" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Region</a ></li>
+                    <li> <a href="" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Date</a> </li>
+                </ul>
+            </div>
+        </div>
+     </div>
+        
+        <div class="container-fluid"  ng-show="showFilters"  >
+            <div class="row" style="margin:0;" >
+            <div class="col-xs-12 well " style="min-height:100px;margin:0;">
+               <div ng-show="showFilters == 'all' || showFilters=='recordTypes'">    
+                   
+                  <schema-filters></schema-filters>
+
+                </div>
+            </div>
+         </div>
+        </div>
+    
+        <div class="container-fluid" style="padding-top:10px;">
+            <div class="row" >
+                <div class="col-xs-12" >
+                    <div style="border-top:1px solid #ddd;" >
+                        <div ng-repeat="filter in searchFilters">
+                            <span ng-if="searchFilters[filter].value" ng-click="removeFilter(searchFilters[filter].id)" >{{searchFilters[filter].name}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+          <div class="row" style="padding:10px 0 0 0;margin:0px;">
+            <div class="col-xs-12" style="padding:0;margin:0;">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#nationalRecords" aria-controls="nationalRecords" role="tab" data-toggle="tab">National <span class="hidden-xs">records <span class="pull-right badge" style="margin-left:20px;position:relative;top:2px;">100</span></span></a></li>
+                    <li role="presentation"><a href="#referenceRecords" aria-controls="referenceRecords" role="tab" data-toggle="tab">Reference <span class="hidden-xs">records <span class="pull-right badge" style="margin-left:20px;position:relative;top:2px;">100</span></span> </a></li>
+                    <li role="presentation"><a href="#scbdRecords" aria-controls="scbdRecords" role="tab" data-toggle="tab">SCBD <span class="hidden-xs">records <span class="pull-right badge" style="margin-left:20px;position:relative;top:2px;">100</span></span></a></li>
+                </ul>
+            </div>
+              <!-- Tab panes -->
+             <div class="col-xs-12 tab-content" style="padding:0;margin:0;">
+                    <div role="tabpanel" class="tab-pane active" id="nationalRecords">
+                        <div>
+                         <div ng-repeat="group in rawDocs.data">
+                            <div ng-repeat="country in group.government_s.groups">
+                                <national-records-country group='country'></national-records-country>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="referenceRecords">...</div>
+                    <div role="tabpanel" class="tab-pane" id="scbdRecords">...</div>
+             </div>
+        </div>
+    </div>
+</div>

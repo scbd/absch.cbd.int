@@ -220,5 +220,8 @@
            
 
 	</div>
-	<div document-metadata  class="panel-footer" ></div>
+	<div class="panel-footer" >
+        <span class="pull-left">{{document | uniqueID }}</span>
+        <span class="pull-right">{{document.updatedOn }}</span>
+    </div>
 </div>

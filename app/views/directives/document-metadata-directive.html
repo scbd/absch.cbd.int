@@ -1,16 +1,16 @@
-<div class="container-fluid record-metadata ">
+<div id="doc-metadata" class="container-fluid record-metadata">
 		<div class="row">
 		 <div class="col-xs-12">  
              
              <div ng-show="!document.info.createdBy" style="padding-left:10px;">
-                <table style="width:100%" class="table-striped" id="history">
+                <table style="width:100%" class="table table-condensed" >
                 <tr>
-                    <th class="color-grey" style="width:250px">Published on</th>
+                    <th class="color-grey hidden-xs" style="width:250px">Updated on</th>
                     <th class="color-grey" style="width:250px">Record Identifier</th>
-                    <th class="color-grey" >Action</th>
+                    <th class="color-grey hidden-xs" >Action</th>
                 </tr>
                 <tr>
-                    <td style="width:250px" ng-class="{'bold': $index == 0}"> 
+                    <td class="hidden-xs" style="width:250px" ng-class="{'bold': $index == 0}"> 
                         <strong>{{document.info.updatedOn | formatDateWithTime}}</strong>
                     </td>
                      <td style="width:250px">
@@ -20,18 +20,16 @@
 					    </a>
 						<span ng-show="!document.info  && !document.id">not yet assigned</span>
                     </td>
-                    <td>
-                      <span ng-show="document.id" class="label label-success"> PUBLISHED</span>
-                      <span ng-show="!document.info  && !document.id" class="label label-default">not yet published</span>
+                    <td class="hidden-xs">
+                      <span ng-show="document.id" class="bold color-green"> PUBLISHED</span>
+                      <span ng-show="!document.info  && !document.id" class="bold">not yet published</span>
                     </td>
                 </tr>
                 </table>
              </div>
-		
-            <div ng-if="document.info.updatedBy" view-history document-id="document.header.identifier" load-documents="true" government="document.government.identifier"></div>
+            <div view-history ng-if="document.info.updatedBy"  document-id="document.header.identifier" load-documents="true" government="document.government.identifier"></div>
 		</div>
-        <div class="clearfix"></div>
-        <report-record></report-record>
-        
+        <!--<div class="clearfix"></div>-->
+        <!--<report-record></report-record>-->
 	</div>
 </div>

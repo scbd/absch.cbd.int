@@ -223,7 +223,7 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
 
                                                             meta3 =document.status_EN_t;
 
-                                                            if(document.status_EN_t =="Legally binding ")
+                                                            if(document.status_EN_t =="Legally binding")
                                                                 sort3 = 1;
                                                             if(document.status_EN_t =="Not legally binding")
                                                                 sort3 = 2;

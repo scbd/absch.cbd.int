@@ -61,7 +61,11 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
             // when('/search/new/measurematrix',                   { templateUrl: '/app/views/search/measure-matrix.html',   label:'Matrix',         resolveController: true, resolveUser : true}).
             // when('/search/new/measurematrix/:uniqueId',         { templateUrl: '/app/views/search/measure-matrix.html',   label:'Matrix',         resolveController: true, resolveUser : true}).
             when('/measurematrix/:code',            { templateUrl: '/app/views/search/measure-matrix-countries.html',   label:'Measures Matrix',         resolveController: true, resolveUser : true}).
-
+            
+            
+            
+            when('/search-new',                      { templateUrl: '/app/views/search-new/search-page.html',   label:'NEW SEARCH',         resolveController: true}).
+           
             when('/find',                                 { templateUrl: '/app/views/search/find.html',   label:'Search',         resolveController: true, resolveUser : true}).
             when('/search',                                 { templateUrl: '/app/views/search/find.html',   label:'Search',         resolveController: true, resolveUser : true}).
             // when('/search/:documentSchema',                 { templateUrl: '/app/views/search/search.html',   label:'Search',         resolveController: true, resolveUser : true}).

@@ -25,7 +25,7 @@ define(["app",'/app/js/common.js'], function (app) {
 
 	}
 
-
+//============================================================
     app.filter("uniqueID", ["IStorage", '$filter', '$q','commonjs', 'realm',
 	 						function(storage, $filter, $q, commonjs, realm) {
 		var cacheMap = {};
@@ -132,7 +132,7 @@ define(["app",'/app/js/common.js'], function (app) {
 			return cacheMap[term.identifier];
 		};
 	}])
-
+//============================================================
     app.filter("uniqueIDWithoutRevision", ['$filter', function($filter) {
 
 		return function( document ) {
@@ -149,7 +149,7 @@ define(["app",'/app/js/common.js'], function (app) {
 		};
 	}]);
 
-
+//============================================================
 	app.filter("checkpointTitle", ["$http", '$filter', function($http, $filter) {
 		var cacheMap = {};
 
@@ -247,7 +247,7 @@ define(["app",'/app/js/common.js'], function (app) {
 			if(schema.toLowerCase()=="measure" 					) return "Legislative, Administrative or Policy Measures";
 			if(schema.toLowerCase()=="abscheckpoint"			) return "Checkpoints";
 			if(schema.toLowerCase()=="abscheckpointcommunique"	) return "Checkpoint Communiqués";
-			if(schema.toLowerCase()=="abspermit"				) return "Internationally Recognized Certificate of Compliance";
+			if(schema.toLowerCase()=="abspermit"				) return "Internationally Recognized Certificates of Compliance";
             if(schema.toLowerCase()=="meetingdocument"			) return "Meeting Documents";
             if(schema.toLowerCase()=="pressrelease"				) return "Press Releases";
 			if(schema.toLowerCase()=="news"						) return "News";

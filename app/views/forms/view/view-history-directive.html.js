@@ -17,6 +17,8 @@ define(['app'], function(app) {
             controller: ['$scope', 'IStorage', "$q", "$route", "$filter", "$timeout",
                 function($scope, storage, $q, $route, $filter, $timeout) {
 
+                    $scope.showHistory = false;
+                    
                     if($scope.documentID)
                         load($scope.documentID);
                     

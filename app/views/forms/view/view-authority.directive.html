@@ -10,7 +10,7 @@
 		<legend ng-if="document.government || document.name || document.name || document.address || document.city || document.state|| document.postalCode || document.country || document.phones.length > 0 ||document.websites.length > 0 || document.faxes.length > 0|| document.emails.length > 0">General information</legend>	
 
 		<div ng-show="document.government">
-			<label name="country">Country <span class="help-block">The country publishing this record.</span></label>
+			<label name="country">Country</label>
 			<div class="km-value">
 				{{document.government|term}}
 			</div>
@@ -160,5 +160,13 @@
 		</div>
       
 	</div>
-	<div document-metadata  class="panel-footer"></div>
+	<div class="panel-footer">
+        <div class="row">
+            <div class="col-xs-12"><a href="/database/CNA/{{document | uniqueIDWithoutRevision}}" target="_new_" class="uid"> <i class="fa fa-external-link-square"></i> {{document | uniqueID }} </a> 
+            <span class="date">| {{document.updatedOn | formatDate}}</span>
+            <span class="pull-right"><a href="/database/CNA/{{document | uniqueIDWithoutRevision}}?report=true" class="color-red" style="font-size:10px;text-transform:uppercase;"><i class="fa fa-exclamation-triangle"></i> <span class="hidden-xs">report record</span></a></span>
+            </div>
+            <!--<div class="col-xs-6 date text-right"></div>-->
+        </div>
+    </div>
 </div>
