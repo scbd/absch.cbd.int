@@ -22,7 +22,8 @@ app.use(require('morgan')('dev'));
 app.set('port', process.env.PORT || 2010);
 
 // Configure routes
-
+// app.use('/app/libs',      express.static(__dirname + '/app/libs',               { maxAge: 24*60*60*1000 })); // one day
+// app.use('/app',           express.static(__dirname + '/app',                    { maxAge:     5*60*1000 })); // five minutes
 app.use('/app',             require('serve-static')(__dirname + '/app'));
 app.use('/scbd-templates',  require('serve-static')(__dirname + '/app/libs/scbd-angularjs-controls/scbd-templates'));
 app.use('/cbd-forums',      require('serve-static')(__dirname + '/app/libs/cbd-forums'));
