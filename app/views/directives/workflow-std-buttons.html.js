@@ -7,16 +7,24 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
     	return{
     		restrict: 'EAC',
     		replace:false,
+            require : '^^absRegister',
     		templateUrl: '/app/views/directives/workflow-std-buttons.html',
     		scope: {
     			getDocumentFn : '&document',
                 languages     : '=languages',
                 hideTimer     : '@hideTimer'
     		},
-            link: function ($scope, $element)
+            link: function ($scope, $element, attr, controller)
 			{
-                //console.log($scope.hideTime)
-				$scope.errors              = null;
+                console.log(controller);
+
+			},
+    		controller: ["$rootScope","$scope", "IStorage", "editFormUtility", "$route","IWorkflows",'$element', 'toastr', '$location', '$filter', '$routeParams',
+            function ($rootScope, $scope, storage, editFormUtility, $route, IWorkflows, $element, toastr, $location, $filter, $routeParams)
+			{
+                var document_type =  $filter("mapSchema")($routeParams.document_type);
+                //////////////////////////////
+                $scope.errors              = null;
                 var next_fs
                 $(".progressbar li button").click(function(){
                 	next_fs = $(this).parent();
@@ -39,7 +47,7 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
 
 				$scope.showCancelDialog = function(visible) {
         			  if($('form').filter('.dirty').length == 0) {
-        				 $scope.$emit("documentClosed");
+        				closeDocument();
         				 return;
         			  }
 
@@ -105,11 +113,7 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
                 });
 
 
-                $scope.loadSecurity();
-			},
-    		controller: ["$rootScope","$scope", "IStorage", "editFormUtility", "$route","IWorkflows",'$element', 'toastr',
-            function ($rootScope, $scope, storage, editFormUtility, $route, IWorkflows, $element, toastr)
-			{
+                //////////////////////////////
 
                 $scope.loadSecurity = function(){
                     $timeout(function(){$scope.updateSecurity();}, 1000);
@@ -228,16 +232,8 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
 
                             return $q.when(processRequest).then(function(documentInfo) {
 
-                                // if($route.current.params.workflow){
-                                //     IWorkflows.updateActivity($route.current.params.workflow, 'publishRecord', { action : 'approve' })
-                                // }
-
-    							// if(documentInfo.type=='authority'){
-    							// 	//in case of authority save the CNA as a contact in drafts
-    							// 	saveAuthorityInContacts(documentInfo);
-    							// }
                                 $('form').filter('.dirty').removeClass('dirty');
-    							$scope.$emit("documentPublished", documentInfo, document);
+    							documentPublished(documentInfo);
                                 $scope.$emit("updateOrignalDocument", document);
     							return documentInfo;
 
@@ -249,9 +245,6 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
 
 					}).finally(function(){
 						    $scope.loading = false;
-                            $scope.$emit("documentClosed");
-						//return $scope.closeDialog();
-
 					});
 				};
 
@@ -285,12 +278,8 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
                                 $scope.loading = true;
                                 $q.when(editFormUtility.publishRequest(document,$scope.InfoDoc ? $scope.InfoDoc.additionalInfo:'')).then(function(workflowInfo) {
 
-                                    // if(workflowInfo.type=='authority'){
-                                    //     //in case of authority save the CNA as a contact in drafts
-                                    //     saveAuthorityInContacts(workflowInfo);
-                                    // }
                                     $('form').filter('.dirty').removeClass('dirty');
-                                    $scope.$emit("documentPublishRequested", workflowInfo, document);
+                                    documentPublishRequested(document);
                                     $scope.$emit("updateOrignalDocument", document);
                                     return workflowInfo;
 
@@ -299,7 +288,7 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
 
                                 }).finally(function(){
                                         $scope.loading = false;
-                                        $scope.$emit("documentClosed");
+                                   //closeDocument()
                                 });
 
                             });
@@ -345,7 +334,7 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
 						//$scope.$emit("documentDraftSaved", draftInfo)
                         $('form').filter('.dirty').removeClass('dirty');
                         $scope.$emit("updateOrignalDocument", $scope.getDocumentFn());
-                        $scope.$emit("documentDraftSaved", draftInfo);
+                        documentDraftSaved(draftInfo);
 
 						return draftInfo;
 
@@ -361,56 +350,6 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
 
 					});
 				};
-
-				saveAuthorityInContacts = function(draftInfo){
-
-					var document = $scope.getDocumentFn();
-					if(!document)
-						document = draftInfo;
-
-					$q.when(document).then(function(document)
-					{
-						//replace the last char of authority doc GUID with C to create a new GUID for contact
-						//this will help for easy update
-						var id =''
-						if(draftInfo.identifier)
-							id = draftInfo.identifier;
-						else if(draftInfo.data.identifier)
-							id = draftInfo.data.identifier;
-
-						if(id=='') {
-							console.log('identifier not found in document info passed');
-							return;
-						}
-
-						id = id.substr(0, id.length-3) + 'CNA'
-
-						var qDocument = {
-											header: {
-														identifier : id,
-														schema   : "contact",
-														languages: ["en"]
-													},
-											type: "CNA" ,
-											government : document.government,
-											source: id,
-											organization : document.name,
-											organizationAcronym:{en:'NA'},
-											city : document.city,
-											country : document.country,
-											phones : document.phones,
-											emails : document.emails
-										}
-
-						if(document.address)qDocument.address = document.address;
-						if(document.state)qDocument.state = document.state;
-						if(document.postalCode)qDocument.postalCode = document.postalCode;
-						if(document.websites)qDocument.websites = document.websites;
-						if(document.faxes)qDocument.faxes = document.faxes;
-
-						editFormUtility.saveDraft(qDocument);
-					});
-				}
 
 				//====================
 				//
@@ -447,9 +386,7 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
 				$scope.close = function()
 				{
 					return $scope.closeDialog().then(function() {
-
-						$scope.$emit("documentClosed")
-
+						closeDocument();
 					}).catch(function(error){
 
 						$scope.$emit("documentError", { action: "close", error: error })
@@ -531,7 +468,77 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
                     }
                 });
 
-			}]
+
+                $scope.loadSecurity();
+
+                function closeDocument(){
+                    toastr.info("Your record has been closed without saving.");
+
+                    var absHosts = ['https://dev-absch.cbd.int/', 'https://training-absch.cbd.int/',
+                        'http://localhost:2010/', 'https://absch.cbd.int/'
+                    ]
+                    $timeout(function() {
+                        if ($rootScope.next_url) {
+                            var url = $rootScope.next_url.replace($location.$$protocol + '://' +
+                                $location.$$host + ($location.$$host != 'absch.cbd.int' ? ':' + $location.$$port : '') + '/', '');
+                            _.each(absHosts, function(host) {
+                                url = url.replace(host, '');
+                            });
+                            $timeout(function() {
+                                $location.path(url);
+                            }, 100)
+                        } else {
+                            $timeout(function() {
+                                $location.path('/register/' + $filter("mapSchema")(document_type));
+                            }, 100);
+                        }
+                    }, 500);
+                }
+
+                //============================================================
+                //
+                // Occurs when edit-form is closed and document is saved as draft
+                //
+                //============================================================
+                function documentDraftSaved(){
+                    // evt.stopPropagation();
+                    // $scope.editing = false;
+                    // $rootScope.updatedRecord = draftInfo;
+                };
+
+                //============================================================
+                //
+                // Occurs when edit-form is closed and document is saved as draft
+                // and a request for publication is sent to a FocalPoint/Admin
+                //
+                //============================================================
+                function documentPublishRequested() {
+
+                    toastr.info('Record saved. A publishing request has been sent to your Publishing Authority.');
+
+                    $timeout(function() {
+                        $location.path('/register/' + $filter("mapSchema")(document_type));
+                    }, 1000);
+
+                };
+
+                //============================================================
+                //
+                // Occurs when edit-form is closed and document is saved
+                // and published directly to the repository
+                //
+                //============================================================
+                function documentPublished(documentInfo) {
+
+                    toastr.info('Record published. The record will be now publicly accessible on ABSCH.');
+                    $timeout(function() {
+                        $location.path('/register/' + $filter("mapSchema")(document_type));
+                    }, 1000);
+
+                };
+
+
+            }]
     	};
 
     }]);

@@ -1,19 +1,21 @@
-define(['app', 'underscore', '/app/js/common.js'], function(app, _) {
+define(['app', 'underscore', '/app/js/common.js',
+       '/app/services/search-service.js'],
+function(app, _) {
     "use strict";
 
-    app.directive("registerRecordList", ["$timeout", "commonjs", "bootbox", "$http", "IWorkflows", "IStorage",'$rootScope',
-        function($timeout, commonjs, bootbox, $http, IWorkflows, IStorage, $rootScope) {
+    app.directive("registerRecordList", ["$timeout", "commonjs", "bootbox", "$http", "IWorkflows", "IStorage",'$rootScope', 'searchService', 'toastr',
+        function($timeout, commonjs, bootbox, $http, IWorkflows, IStorage, $rootScope, searchService, toastr) {
 
             return {
                 restrict: "EA",
                 templateUrl: "/app/views/register/register-record-list.directive.html",
                 replace: true,
                 transclude: false,
+                require :   '^^absRegister',
                 scope: {
-                    records: "=records",
                     schema: "@schema",
                 },
-                link: function($scope, $element) {
+                link: function($scope, $element, attrs, absRegisterCtrl) {
 
                     var deleteRecordModel = $element.find("#deleteRecordModel");
                     var duplicateRecordModel = $element.find("#duplicateRecordModel");
@@ -66,9 +68,13 @@ define(['app', 'underscore', '/app/js/common.js'], function(app, _) {
                             $scope.recordForDeleteWorkflowRequest = null; //clear on backdrop click
                         });
                     });
+
+                    $scope.refreshFacets = function(){
+                        absRegisterCtrl.refreshFacets();
+                    };
                 },
-                controller: ["$scope", "$q", "IStorage", "$http", "guid", "editFormUtility", "$timeout",
-                function($scope, $q, storage, $http, guid, editFormUtility, $timeout) {
+                controller: ["$scope", "$q", "IStorage", "$http", "guid", "editFormUtility", "$filter", "$routeParams",
+                function($scope, $q, storage, $http, guid, editFormUtility, $filter, $routeParams) {
                     //use for documents reference lookup
                     var schemaFieldsMapping = {
                         contact     : [],
@@ -145,7 +151,7 @@ define(['app', 'underscore', '/app/js/common.js'], function(app, _) {
 
                         return $q.when(storage.drafts.delete(record.identifier)).then(function() {
 
-                            $scope.$emit("documentDeleted", record);
+                            recordDeleted(record);
                             $scope.recordToDelete = null;
 
                         }).finally(function() {
@@ -305,7 +311,7 @@ define(['app', 'underscore', '/app/js/common.js'], function(app, _) {
                             return editFormUtility.saveDraft(document);
 
                         }).then(function(draftInfo) {
-                            $scope.$emit("documentDuplicated", draftInfo)
+                            recordDuplicated(draftInfo)
                                 //$scope.records.push(draftInfo);
                             $timeout(function() {
                                 highlight("#record" + draftInfo.identifier); //.effect( "shake" );
@@ -335,44 +341,6 @@ define(['app', 'underscore', '/app/js/common.js'], function(app, _) {
                         highlight("#record" + document.identifier);
                         //$("#record" + document.identifier).toggle('explode',{},500);
                     });
-
-                    function shake(div) {
-                        var interval = 100,
-                            distance = 20,
-                            times = 10
-                        $(div).css('position', 'relative');
-                        for (var iter = 0; iter < (times + 1); iter++) {
-                            $(div).animate({
-                                left: ((iter % 2 == 0 ? distance : distance * -1))
-                            }, interval);
-                        } //for
-                        $(div).animate({
-                            left: 0
-                        }, interval, function() {
-                            $(div).css('position', 'inherit');
-                        });
-
-                    }
-
-                    function highlight(obj) {
-                        $('html, body').animate({
-                            scrollTop: 0
-                        }, 1000);
-                        $(obj).toggleClass('highlight');
-                        setTimeout(function() {
-                            $(obj).toggle('fade');
-                            $(obj).toggleClass('highlight');
-                            $(obj).toggle('fade');
-                        }, 2000);
-
-
-                    }
-
-                    $scope.loading = true;
-                    $scope.$on('finishedLoadingRecords', function() {
-                        $scope.loading = false;
-                    });
-
 
                     $scope.updateWorkflowList = function(document, workflowInfo) {
 
@@ -447,8 +415,8 @@ define(['app', 'underscore', '/app/js/common.js'], function(app, _) {
                     }
 
                     $scope.refreshList = function(schema){
-                        $scope.loading = true;
-                        $scope.$emit("refreshDocumentList", {document_type:schema});
+                        loadRecords();
+                        // $scope.$emit("refreshDocumentList", {document_type:schema});
                     };
 
                     $scope.showReference = function(schema){
@@ -509,6 +477,38 @@ define(['app', 'underscore', '/app/js/common.js'], function(app, _) {
 
                     };
 
+                    function shake(div) {
+                        var interval = 100,
+                            distance = 20,
+                            times = 10
+                        $(div).css('position', 'relative');
+                        for (var iter = 0; iter < (times + 1); iter++) {
+                            $(div).animate({
+                                left: ((iter % 2 == 0 ? distance : distance * -1))
+                            }, interval);
+                        } //for
+                        $(div).animate({
+                            left: 0
+                        }, interval, function() {
+                            $(div).css('position', 'inherit');
+                        });
+
+                    }
+
+                    function highlight(obj) {
+                        $('html, body').animate({
+                            scrollTop: 0
+                        }, 1000);
+                        $(obj).toggleClass('highlight');
+                        setTimeout(function() {
+                            $(obj).toggle('fade');
+                            $(obj).toggleClass('highlight');
+                            $(obj).toggle('fade');
+                        }, 2000);
+
+
+                    }
+
                     function getDocument(fieldDocument, documentBody, field){
 
                         var revisionRegex =  /@([0-9]{1,3})/;
@@ -527,6 +527,92 @@ define(['app', 'underscore', '/app/js/common.js'], function(app, _) {
                               }
                           });
                     }
+
+                    function loadDocumentReference(){
+
+                        var documentIds = _.pluck($scope.records,'identifier');
+                        //'identifier_s, _revision_i'
+                        if(documentIds.length > 0){
+                            var searchQuery = {
+                                fields: 'recordEReference_ss, identifier_s',
+                                query : 'identifier_s :(' + documentIds.join(' ') + ')'
+                            };
+
+                            searchService.list(searchQuery)
+                                .then(function(data){
+                                    console.log(data);
+                                });
+                        }
+                    }
+
+                    function loadRecords() {
+                        $scope.loading = true;
+                        var schema = $filter("mapSchema")($routeParams.document_type);
+
+                        if (schema === null || schema == undefined)
+                            return;
+
+                        $("a[role*='button']").toggleClass('ui-disabled');
+                        if (!$rootScope.user.isAuthenticated)
+                            return $scope.records = null;
+
+                        var qAnd = [];
+                        qAnd.push("(type eq '" + schema + "')");
+
+                        var qDocuments = storage.documents.query(qAnd.join(" and ") || undefined, undefined, {
+                            cache: false
+                        });
+
+                        var draftParams = {
+                            cache: false
+                        };
+                        if (schema == "contact")
+                            draftParams.body = true;
+
+                        var qDrafts = storage.drafts.query(qAnd.join(" and ") || undefined, draftParams);
+
+                        $q.all([qDocuments, qDrafts]).then(function(results) {
+                                $scope.records = [];
+                                var documents = results[0].data.Items;
+                                var drafts = results[1].data.Items;
+
+                                var map = {};
+
+                                _.map(documents, function(o) {
+                                    map[o.identifier] = o;
+                                });
+                                _.map(drafts, function(o) {
+                                    map[o.identifier] = o;
+                                });
+
+                                _.values(map).forEach(function(row) {
+                                        $scope.records.push(row);
+                                    })
+                                $("a[role*='button']").toggleClass('ui-disabled');
+                                return $scope.records;
+                            })
+                            .finally(function(){
+                                $scope.loading = false;
+                            });
+                    }
+                    function recordDeleted(doc){
+                            for (var i = 0; i <= $scope.records.length; ++i) {
+                                 if ($scope.records[i] == doc) {
+                                     $scope.records.splice(i, 1);
+                                    $scope.refreshFacets();
+                                 }
+                            }
+                            toastr.info('<h1>Record deleted.</h1>', {
+                                allowHtml: true
+                            });
+                    }
+
+                    function recordDuplicated(doc){
+                        $scope.records.push(doc);
+                        $scope.refreshFacets();
+                    }
+
+                    loadRecords();
                 }]
             };
         }

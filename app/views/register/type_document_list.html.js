@@ -4,7 +4,7 @@ define(['app',
 	//'./tasks/my-completed-tasks.directive.js',
 	//'./tasks/my-pending-tasks.directive.js',
 	//'./tasks/my-tasks.directive.js',
-	'/app/views/forms/edit/km-form-buttons.js',
+	// '/app/views/forms/edit/km-form-buttons.js',
 	'/app/views/forms/edit/editFormUtility.js',
 	'/app/views/forms/edit/field-embed-contact.directive.js',
 	'/app/views/forms/edit/edit-contact-base.directive.js',
@@ -15,7 +15,8 @@ define(['app',
 	'/app/views/forms/view/view-organization-reference.directive.js',
 	'/app/views/directives/task-id-directive.html.js',
 	'/app/views/directives/user-details.directive.html.js',
-	'/app/views/directives/ngxLazy.directive.js'], function (app) {
+	// '/app/views/directives/ngxLazy.directive.js'
+], function (app) {
 
   "use strict";
 

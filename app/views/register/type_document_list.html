@@ -1,96 +1,74 @@
 <div ng-controller="TypeDocumentListController">
 
     <!-- ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart="startTour" -->
-<style>
-.nav-underline
-{
-    position:relative;
-}
+    <style>
+        .nav-underline {
+            position: relative;
+        }
 
-.nav-underline a{
-    color:#ddd;
-    font-size:14px;
-    /*font-family: 'alternategotno3dotregular';*/
-    text-transform:uppercase;
-    text-rendering: optimizeLegibility;
-    /*letter-spacing: 1px;*/
-    text-shadow: 0 1px 2px rgba(0, 0, 0, .6)!important;
-    margin-right:30px;
+        .nav-underline a {
+            color: #ddd;
+            font-size: 14px;
+            /*font-family: 'alternategotno3dotregular';*/
+            text-transform: uppercase;
+            text-rendering: optimizeLegibility;
+            /*letter-spacing: 1px;*/
+            text-shadow: 0 1px 2px rgba(0, 0, 0, .6)!important;
+            margin-right: 30px;
+        }
 
-}
-.nav-underline > li > a:hover
-{
-    background-color:transparent!important;
-    border-bottom:5px solid #FFEB3B;
-    margin-bottom:0;
-    padding-bottom:0;
-    color:white;
-}
+        .nav-underline > li > a:hover {
+            background-color: transparent!important;
+            border-bottom: 5px solid #FFEB3B;
+            margin-bottom: 0;
+            padding-bottom: 0;
+            color: white;
+        }
 
-.nav-underline > li > a.active
-{
-    background-color:transparent!important;
-    border-bottom:5px solid #FFEB3B;
-    margin-bottom:0;
-    padding-bottom:0;
-    color:white;
-}
-
-</style>
+        .nav-underline > li > a.active {
+            background-color: transparent!important;
+            border-bottom: 5px solid #FFEB3B;
+            margin-bottom: 0;
+            padding-bottom: 0;
+            color: white;
+        }
+    </style>
 
 
-<div class="md-whiteframe-z1">
+    <div class="md-whiteframe-z1">
 
-    <md-toolbar ng-class="{'bg-blue': type.schemaType != 'referenceRecords','bg-orange': type.schemaType == 'referenceRecords' }">
-    <div class="md-toolbar-tools">
-      <h2 class="md-flex">
-          <span>{{type.title}} <span class="color-darkgrey">({{type.abbreviation}})</span></span>
-      </h2>
+        <md-toolbar ng-class="{'bg-blue': type.schemaType != 'referenceRecords','bg-orange': type.schemaType == 'referenceRecords' }">
+            <div class="md-toolbar-tools">
+                <h2 class="md-flex">
+                    <span>{{type.title}}
+                        <span class="color-darkgrey">({{type.abbreviation}})</span>
+                    </span>
+                </h2>
+            </div>
+        </md-toolbar>
+        <md-content layout-padding style="padding: 24px;">
+
+            <div class="registerpage-content">
+                <legend name="formInfo" style="display:none"></legend>
+
+
+
+                <div ng-show="msg" class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="msg=''">&times;</button>
+                    <strong>{{msg}}</strong>
+                </div>
+
+                <div ng-show="path=='/register/'+type.abbreviation">
+                    <div ng-hide="editing">
+                        <div ng-show="user.isAuthenticated">
+                            <register-record-list records="records" schema="{{document_type}}"></register-record-list>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </md-content>
     </div>
-  </md-toolbar>
-  <md-content layout-padding style="padding: 24px;">
-
-      <div class="registerpage-content" >
-        <legend name="formInfo" style="display:none"></legend>
-
-      <!-- <ul class="nav navbar-nav nav-underline">
-          <li><a href="/register/{{type.abbreviation}}"      ng-class="{'active':path==('/register/'+type.abbreviation)}"><i class="glyphicon glyphicon-align-justify"></i> Exisiting records</a></li>
-          <li><a href="/register/{{type.abbreviation}}/new"  ng-class="{'active':path==('/register/'+type.abbreviation+'/new')|| path.indexOf('edit') > 0}"><i class="glyphicon glyphicon-plus-sign"></i> Add/edit a record</a></li>
-          <li><a href="/register/{{type.abbreviation}}/help" ng-class="{'active':path==('/register/'+type.abbreviation+'/help')}"><i class="glyphicon glyphicon-question-sign"></i> Help and information</a></li>
-      </ul> -->
-
-
-        <div ng-show="msg" class="alert alert-success alert-dismissable">
-          <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="msg=''">&times;</button>
-          <strong>{{msg}}</strong>
-        </div>
-
-        <!--
-        <div ng-show="path=='/register/'+type.abbreviation+'/help'">
-          This is the help
-        </div>-->
-        <!-- <div ng-show="path=='/register/'+type.abbreviation+'/new'">
-              <div ng-include="'/app/views/forms/edit/edit-authority.html'"></div>
-        </div>
-
-          <div ng-show="path.indexOf('/register/'+type.abbreviation+'/edit') > 0">
-              <div ng-include="'/app/views/forms/edit/edit-authority.html'"></div>
-        </div> -->
-
-        <div ng-show="path=='/register/'+type.abbreviation">
-          <div ng-hide="editing">
-              <div ng-show="user.isAuthenticated">
-                  <register-record-list records="records" schema="{{document_type}}"></register-record-list>
-              </div>
-          </div>
-        </div>
-
-      </div>
-
-  </md-content>
-</div>
-
-
-
 
 </div>
