@@ -2,16 +2,6 @@ define(['app', 'underscore'], function (app, _) { 'use strict';
 
 	app.factory('appConfigService',  ["$location", function($location) {
 
-        // var appConfigSrv =
-		// 				{
-		//                     nationalSchemas     :   nationalSchemas,
-		//                     referenceSchemas    :   referenceSchemas,
-		//                     currentRealm        :   currentRealm,
-		//
-		//                     setCurrentRealm  	:   setCurrentRealm,
-		//                     getRoles            :   getRoles
-		//                };
-
         var nationalSchemas = ["absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "focalPoint"];
         var referenceSchemas = ["resource", "meeting", "notification", "pressRelease", "statement", "news", "modelContractualClause", "communityProtocol"];
         var realmConfigurations = [
@@ -43,17 +33,17 @@ define(['app', 'underscore'], function (app, _) { 'use strict';
                 'roles': [{
                     'User': 'User'
                 }, {
-                    'Administrator': 'Administrator'
+                    'Administrator': 'Administrator-dev'
                 }, {
-                    'AbsAdministrator': 'AbsAdministrator'
+                    'AbsAdministrator': 'AbsAdministrator-dev'
                 }, {
-                    'AbsPublishingAuthorities': 'AbsPublishingAuthorities'
+                    'AbsPublishingAuthorities': 'AbsPublishingAuthorities-dev'
                 }, {
-                    'abschiac': 'abschiac'
+                    'abschiac': 'abschiac-dev'
                 }, {
-                    'AbsNationalAuthorizedUser': 'AbsNationalAuthorizedUser'
+                    'AbsNationalAuthorizedUser': 'AbsNationalAuthorizedUser-dev'
                 }, {
-                    'AbsNationalFocalPoint': 'AbsNationalFocalPoint'
+                    'AbsNationalFocalPoint': 'AbsNationalFocalPoint-dev'
                 }]
             }, {
                 'host': '127.0.0.1',
@@ -61,17 +51,17 @@ define(['app', 'underscore'], function (app, _) { 'use strict';
                 'roles': [{
                     'User': 'User'
                 }, {
-                    'Administrator': 'Administrator'
+                    'Administrator': 'Administrator-dev'
                 }, {
-                    'AbsAdministrator': 'AbsAdministrator'
+                    'AbsAdministrator': 'AbsAdministrator-dev'
                 }, {
-                    'AbsPublishingAuthorities': 'AbsPublishingAuthorities'
+                    'AbsPublishingAuthorities': 'AbsPublishingAuthorities-dev'
                 }, {
-                    'abschiac': 'abschiac'
+                    'abschiac': 'abschiac-dev'
                 }, {
-                    'AbsNationalAuthorizedUser': 'AbsNationalAuthorizedUser'
+                    'AbsNationalAuthorizedUser': 'AbsNationalAuthorizedUser-dev'
                 }, {
-                    'AbsNationalFocalPoint': 'AbsNationalFocalPoint'
+                    'AbsNationalFocalPoint': 'AbsNationalFocalPoint-dev'
                 }]
             }, {
                 'host': 'dev-absch.cbd.int',
@@ -79,17 +69,17 @@ define(['app', 'underscore'], function (app, _) { 'use strict';
                 'roles': [{
                     'User': 'User'
                 }, {
-                    'Administrator': 'Administrator'
+                    'Administrator': 'Administrator-dev'
                 }, {
-                    'AbsAdministrator': 'AbsAdministrator'
+                    'AbsAdministrator': 'AbsAdministrator-dev'
                 }, {
-                    'AbsPublishingAuthorities': 'AbsPublishingAuthorities'
+                    'AbsPublishingAuthorities': 'AbsPublishingAuthorities-dev'
                 }, {
-                    'abschiac': 'abschiac'
+                    'abschiac': 'abschiac-dev'
                 }, {
-                    'AbsNationalAuthorizedUser': 'AbsNationalAuthorizedUser'
+                    'AbsNationalAuthorizedUser': 'AbsNationalAuthorizedUser-dev'
                 }, {
-                    'AbsNationalFocalPoint': 'AbsNationalFocalPoint'
+                    'AbsNationalFocalPoint': 'AbsNationalFocalPoint-dev'
                 }]
             },
 
@@ -134,6 +124,23 @@ define(['app', 'underscore'], function (app, _) { 'use strict';
             return realmConfig.roles;
         }
 
+		function getRoleName(roleName) {
+            if (roleName) {
+
+                if (realmConfig) {
+                    var role = _.find(realmConfig.roles, function(key) {
+                        return _.keys(key)[0] == roleName;
+                    });
+                    // console.log(realmConfig, role)
+                    if (role)
+                        return _.values(role)[0];
+                    else
+                        throw roleName + ' role is not configured for realm ' + realmConfig[0].realm + ', please update realm-configuration.js';
+                } else
+                    throw 'Realm not configured, please update realm-configuration.js';
+            }
+        }
+
 		function getSiteMapUrls(){
 			return {
 				register: {
@@ -155,10 +162,13 @@ define(['app', 'underscore'], function (app, _) { 'use strict';
 		return {
 			nationalSchemas     :   nationalSchemas,
 			referenceSchemas    :   referenceSchemas,
-			currentRealm        :   currentRealm,
 
+			currentRealm        :   currentRealm,
 			setCurrentRealm  	:   setCurrentRealm,
+
 			getRoles            :   getRoles,
+			getRoleName			:	getRoleName,
+
 			getSiteMapUrls		:	getSiteMapUrls
 	   };
 
