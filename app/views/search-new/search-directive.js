@@ -15,6 +15,9 @@ define(['app', 'underscore', '/app/js/common.js',
     
                     var queryCanceler = null;
                     $scope.rawDocs = [];
+                    $scope.refDocs = [];
+                    $scope.scbdDocs = [];
+                    
                     $scope.refresh = false;
                     
                     $scope.searchFilters = [];
@@ -98,10 +101,100 @@ define(['app', 'underscore', '/app/js/common.js',
 
                     };
                     
+                    //*************************************************************************************************************************************
+                    function referenceQuery() {
+
+                        var searchOperation;
+
+                        if (queryCanceler) {
+                            console.log('trying to abort pending request...');
+                            queryCanceler.resolve(true);
+                        }
+                        
+                        var base_fields = 'id, rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, schema_s,'; // rec_category, groupSort, sort1, sort2, sort3
+                        var en_fields =  'rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t,' // meta1_EN_t, meta2_EN_t, meta3_EN_t
+                        
+                        var q = '(realm_ss:' + realm.value.toLowerCase() + ') AND NOT version_s:*';
+                        q += '(' + 'schema_s:resource' + ')';
+
+                        queryCanceler = $q.defer();
+
+                        if($scope.currentPage===0){
+                            $scope.refDocs = undefined;
+                        }
+                        
+                        var listQuery = {
+                            query       : q,
+                            sort        : 'updatedDate_dt desc',
+                            fields      : base_fields + en_fields,
+                            currentPage : $scope.currentPage,
+                            itemsPerPage: $scope.itemsPerPage
+                        };
+                        
+                        searchOperation = searchService.list(listQuery, queryCanceler);
+
+                        $q.when(searchOperation)
+                            .then(function(data) {
+                                queryCanceler = null;
+                                $scope.refDocs = data;
+
+                            }).catch(function(error) {
+                                console.log('ERROR: ' + error);
+                            });
+
+                    };
+                    //*************************************************************************************************************************************
+                    function scbdQuery() {
+
+                        var searchOperation;
+
+                        if (queryCanceler) {
+                            console.log('trying to abort pending request...');
+                            queryCanceler.resolve(true);
+                        }
+                        
+                        var base_fields = 'id, rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, schema_s,'; // rec_category, groupSort, sort1, sort2, sort3
+                        var en_fields =  'rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t,' // meta1_EN_t, meta2_EN_t, meta3_EN_t
+                        
+                        var q = '(realm_ss:' + realm.value.toLowerCase() + ') AND NOT version_s:*';
+                        q += '(' + 'schema_s:news' + ')';
+                        
+
+                        queryCanceler = $q.defer();
+
+                        if($scope.currentPage===0){
+                            $scope.scbdDocs = undefined;
+                        }
+                        
+                        var listQuery = {
+                            query       : q,
+                            sort        : 'updatedDate_dt desc',
+                            fields      : base_fields + en_fields,
+                            currentPage : $scope.currentPage,
+                            itemsPerPage: $scope.itemsPerPage
+                        };
+                        
+                        searchOperation = searchService.list(listQuery, queryCanceler);
+
+                        $q.when(searchOperation)
+                            .then(function(data) {
+                                queryCanceler = null;
+                                $scope.scbdDocs = data;
+
+                            }).catch(function(error) {
+                                console.log('ERROR: ' + error);
+                            });
+
+                    };
+                    
+                    
+                    
                     this.load = load;
                     this.addFilter = addFilter;
                     this.saveFilter = saveFilter;
                     this.nationalQuery = nationalQuery;
+                    this.referenceQuery = referenceQuery;
+                    this.scbdQuery = scbdQuery;
                     this.isFilterOn = isFilterOn;
                     
                   
@@ -109,6 +202,8 @@ define(['app', 'underscore', '/app/js/common.js',
                     //*************************************************************************************************************************************
                     $scope.$watch('refresh', function(){
                        nationalQuery();
+                       referenceQuery();
+                       scbdQuery();
                        $scope.refresh = false;
 				    });
 
