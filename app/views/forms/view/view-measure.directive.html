@@ -57,22 +57,22 @@
 
 		<div ng-show="document.adoption">
 			<label>Date of adoption</label>
-			<div class="km-value">{{document.adoption}}</div>
+			<div class="km-value">{{document.adoption | formatDate}}</div>
 		</div>
 
 		<div ng-show="document.entryIntoForce">
 			<label>Date of entry into force</label>
-			<div class="km-value">{{document.entryIntoForce}}</div>
+			<div class="km-value">{{document.entryIntoForce | formatDate}}</div>
 		</div>
 
 		<div ng-show="document.retired">
 			<label>Date of retirement</label>
-			<div class="km-value">{{document.retired}}</div>
+			<div class="km-value">{{document.retired | formatDate}}</div>
 		</div>
 
 		<div ng-show="document.limitedApplication">
 			<label>Date of measure no longer in force</label>
-			<div class="km-value">{{document.limitedApplication}}</div>
+			<div class="km-value">{{document.limitedApplication | formatDate}}</div>
 		</div>
 
 
@@ -165,26 +165,23 @@
 
 		</div>
 
-		<div ng-show="document.authorities" >
+		<div ng-show="document.authorities " >
 			<legend>Regulatory contact information</legend>
 			<div  ng-repeat="item in document.authorities">
-				<div>
-					<div view-contact-reference ng-model="item" locale="locale" class="km-value"></div>
-				</div>
+			     <div view-contact-reference ng-model="item" locale="locale" class="km-value"></div>
 			</div>
 		</div>
 
 		<div ng-show="document.measureAmendedBy && document.measureAmendedBy.length>0">
 			<legend>Amendments</legend>
 			<label>This measure has been amended by:</label>
-
 			<div  class="km-value">
 			<ul>
 				<li ng-repeat="item in document.measureAmendedBy" >
 						<a target="_new_win" href="/database/MSR/{{item.identifier_s}}">
 							<strong>{{item.title_t | lstring}}</strong>
-							<br/><label>{{item.measure.amendmentsDescription | lstring}}</label>
 						</a>
+                        <label>{{item.measure.amendmentsDescription | lstring}}</label>
 					</li>
 			</ul>
 			</div>
@@ -197,16 +194,16 @@
 			<ul>
 				<li ng-repeat="item in document.measureRelatedTo" >
 					<a target="_new_win" href="/database/MSR/{{item.identifier_s}}">
-						<strong>{{item.title_t | lstring}}</strong>
-						<br/><label>{{item.measure.amendmentsDescription | lstring}}</label>
+						{{item.title_t | lstring}}
 					</a>
+                    <span>{{item.measure.amendmentsDescription | lstring}}</span>
 				</li>
 			</ul>
 			</div>
 		</div>
 		<div ng-show="document.absMeasures">
-			<legend>Elements of the measure</legend>
-				<div class="km-value" style="border:none">
+			
+				<div class="km-value bg-white" style="border:none">
 					<!--<ul ng-if="true">
 						<li ng-repeat="term in document.absMeasures">{{term|term:locale}}
 							<span ng-show="term.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">
@@ -246,5 +243,12 @@
        
 
 	</div>
-	<div document-metadata class="panel-footer"></div>
+	<div class="panel-footer">
+        <div class="row">
+            <div class="col-xs-12"><a href="/database/MSR/{{document | uniqueIDWithoutRevision}}" target="_new_" class="uid"> <i class="fa fa-external-link-square"></i> {{document | uniqueID }} </a> 
+            <span class="date">| {{document.info.updatedOn | formatDate}}</span>
+            <span class="pull-right"><a href="/database/MSR/{{document | uniqueIDWithoutRevision}}?report=true" class="color-red"><i class="fa fa-exclamation-triangle"></i> <span class="hidden-xs">Report record</span></a></span>
+            </div>
+        </div>
+    </div>
 </div>

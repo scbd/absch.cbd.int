@@ -1,4 +1,4 @@
-<div>
+<div class="bg-white">
 <style>
     .matrixTable tr .headerColumn {
         width: 30%;
@@ -127,13 +127,14 @@
         font-weight:bold;
     }
 </style>
-    <table class="table matrixTable">
-         <tr>
-             <td>
-                <a class="pull-right expander" ng-click="collapseAll=!collapseAll;showHideAll(true)"  ng-show="!collapseAll">Collapse All <i class="fa fa-chevron-circle-up hand"></i></a>
+<legend>Elements of the measure
+    
+    <a class="pull-right expander" ng-click="collapseAll=!collapseAll;showHideAll(true)"  ng-show="!collapseAll">Collapse All <i class="fa fa-chevron-circle-up hand"></i></a>
                 <a class="pull-right expander" ng-click="collapseAll=!collapseAll;showHideAll(false)" ng-show="collapseAll">Expand All <i class="fa fa-chevron-circle-down hand"></i></a>
-             </td>
-          </tr>
+    
+</legend>
+                
+    <table class="table matrixTable bg-white" style="margin-bottom:0;">
           <tr ng-if="rootTerms.length==0">
               <td>
                   <i class="fa fa-spin fa-spinner fa-5x" />
@@ -144,8 +145,8 @@
             </td>
         </tr>
     </table>
+    
     <script type="text/ng-template" id="/app/views/search/matrix/measure-matrix.directive/abs/inner">
-
         <table class="table" ng:if="term.isChildSelected || (!term.broaderTerms && term.narrowerTerms) || (!term.broaderTerms && !term.narrowerTerms) || (term.identifier == '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')">
             <tr ng:class="{'elementMeasure':term.isMeasure, 'whiteTopBorder':term.hasMeasure}" >
                 <td class="matrixheaderColumn rightBorder "

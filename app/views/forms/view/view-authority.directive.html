@@ -163,10 +163,9 @@
 	<div class="panel-footer">
         <div class="row">
             <div class="col-xs-12"><a href="/database/CNA/{{document | uniqueIDWithoutRevision}}" target="_new_" class="uid"> <i class="fa fa-external-link-square"></i> {{document | uniqueID }} </a> 
-            <span class="date">| {{document.updatedOn | formatDate}}</span>
-            <span class="pull-right"><a href="/database/CNA/{{document | uniqueIDWithoutRevision}}?report=true" class="color-red" style="font-size:10px;text-transform:uppercase;"><i class="fa fa-exclamation-triangle"></i> <span class="hidden-xs">report record</span></a></span>
+            <span class="date">| {{document.info.updatedOn | formatDate}}</span>
+            <span class="pull-right"><a href="/database/CNA/{{document | uniqueIDWithoutRevision}}?report=true" class="color-red"><i class="fa fa-exclamation-triangle"></i> <span class="hidden-xs">Report record</span></a></span>
             </div>
-            <!--<div class="col-xs-6 date text-right"></div>-->
         </div>
     </div>
 </div>

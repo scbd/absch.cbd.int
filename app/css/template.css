@@ -1065,11 +1065,13 @@ footer .logo {
     text-align: center;
 }
 /*for the new search*/
-
+    
+    
     .recordDefault{margin-bottom: 10px;padding:0 10px;
         border-left:3px #428bca solid;
         cursor:pointer;
     }
+
     div.recordDefault:hover{background-color: white!important;}
      #national-records-country h4{
          padding:20px 0 5px 0;
