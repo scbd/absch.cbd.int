@@ -3,6 +3,7 @@ define(['app', 'underscore', '/app/js/common.js',
 	'scbd-angularjs-filters',
 	'/app/views/forms/view/view-history-directive.html.js',
     '/app/views/directives/document-metadata-directive.html.js',
+	'/app/views/directives/report-record.js'
 ], function(app, _) {
 
     app.directive('recordViewer', function() {
@@ -15,12 +16,12 @@ define(['app', 'underscore', '/app/js/common.js',
                 docId:'=',
                 docSchema:'='
             },
-   
+
            controller: ['$scope', "$route", 'IStorage', "authentication", "$q", "$location", "commonjs","$timeout",
 		"$filter","$http","$http","realm", "$element", '$compile',
 			function ($scope, $route, storage, authentication, $q, $location,
 				commonjs, $timeout, $filter, $http, $httpAWS, realm, $element, $compile) {
-                
+
               var schemaMapping = {
 					news 				: '/app/views/forms/view/view-news.directive.html.js',
 					absNationalReport 	: '/app/views/forms/view/view-abs-national-report.directive.js',
@@ -42,8 +43,8 @@ define(['app', 'underscore', '/app/js/common.js',
 				    pressRelease		:'/app/views/forms/view/view-pressrelease.directive.html.js',
 				    notification		:'/app/views/forms/view/view-notification.directive.html.js'
 				}
-               
-                
+
+
                 //*************************************************************************************************************************************
                 $scope.loadDocument = function(documentSchema, documentID){
                         if(documentSchema && (documentSchema.toUpperCase()=="FOCALPOINT" || documentSchema.toUpperCase()=="MEETING" || documentSchema.toUpperCase()=="NOTIFICATION"
@@ -58,15 +59,15 @@ define(['app', 'underscore', '/app/js/common.js',
                             $scope.load(documentID);
                         }
                  };
-                
-                //************************************************************************************************************************************* 
+
+                //*************************************************************************************************************************************
                 $scope.load = function (identifier, version) {
 
                     $scope.error = undefined;
-                    
+
                     var qDocument;
                     var qDocumentInfo;
-                    
+
                     qDocument = storage.documents.get(identifier).then(function(result) { return result.data || result });
                     qDocumentInfo = storage.documents.get(identifier,{ info: true}).then(function(result) { return result.data || result });
 
@@ -83,13 +84,13 @@ define(['app', 'underscore', '/app/js/common.js',
                         console.log( $scope.error );
                     })
                 };
-                
+
                 //*************************************************************************************************************************************
                 function loadViewDirective(schema){
                     var schemaDetails = schemaMapping[schema];
                     require([schemaDetails], function() {
                         var name = snake_case(schema);
-                        var directiveHtml =
+						var directiveHtml =
                             "<DIRECTIVE ng-show='internalDocument' ng-model='internalDocument' document-info='internalDocumentInfo' locale='getLocale()' link-target={{linkTarget}}></DIRECTIVE>"
                             .replace(/DIRECTIVE/g, 'view-' + name);
 
@@ -100,7 +101,7 @@ define(['app', 'underscore', '/app/js/common.js',
                         });
                     });
                 };
-                
+
                 //*************************************************************************************************************************************
                 function snake_case(name, separator) {
                     separator = separator || '-';
@@ -108,11 +109,11 @@ define(['app', 'underscore', '/app/js/common.js',
                         return (pos ? separator : '') + letter.toLowerCase();
                     });
                 };
-                
-                
+
+
                 if($scope.docId && $scope.docSchema)
                     $scope.loadDocument($scope.docSchema, $scope.docId)
-                
+
             }],//controller
         };
     });

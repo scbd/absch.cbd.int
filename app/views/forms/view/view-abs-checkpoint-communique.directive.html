@@ -5,7 +5,7 @@
 		<span class="color-black"> (CPC) </span> </h4>
 	</div>
 	<div class="record-body panel-body">
-	
+
     	   	<div ng-show="document.government || document.checkpoint">
 				<legend>
                     <a ng-if="showPdf" class="pull-right btn btn-default" target="_blank" ng-href="/database/record/{{document | uniqueID}}"><i class="fa fa-file-pdf-o"></i> Download</a>
@@ -217,15 +217,10 @@
 				</div>
 			</div>
 
-           
+
 
 	</div>
 	<div class="panel-footer">
-        <div class="row">
-            <div class="col-xs-12"><a href="/database/CPC/{{document | uniqueIDWithoutRevision}}" target="_new_" class="uid"> <i class="fa fa-external-link-square"></i> {{document | uniqueID }} </a> 
-            <span class="date">| {{document.info.updatedOn | formatDate}}</span>
-            <span class="pull-right"><a href="/database/CPC/{{document | uniqueIDWithoutRevision}}?report=true" class="color-red" ><i class="fa fa-exclamation-triangle"></i> <span class="hidden-xs">Report record</span></a></span>
-            </div>
-        </div>
+        <div document-metadata  class="panel-footer"></div>
     </div>
 </div>

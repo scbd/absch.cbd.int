@@ -102,7 +102,11 @@
           </table>
       </div>
 
-
+      <div style="padding-top:24px;" ng-if="roles.isAbsAdministrator">
+          <h1  class="bg-litegrey" style="padding:3px;">Manage</h1>
+          <a ng-href="/admin/pending-requests">Manage Pending Requests</a> |
+          <a ng-href="/admin/reported-records">Manage Reported Records</a>
+      </div>
       <div style="padding-top:24px;" id="notifications">
           <h1  class="bg-litegrey" style="padding:3px;">User Notifications and Recent Activity</h1>
                 <div xuser-notifications></div>

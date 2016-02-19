@@ -246,6 +246,14 @@ define(['app', 'underscore'], function(app, _) {
                     return data;
                 }
 
+                //*************************************************************************************************************************************
+                this.snake_case = function(name, separator) {
+                    separator = separator || '-';
+                    return name.replace(/[A-Z]/g, function(letter, pos) {
+                        return (pos ? separator : '') + letter.toLowerCase();
+                    });
+                };
+
 
                 function isNPParty(entity) {
 

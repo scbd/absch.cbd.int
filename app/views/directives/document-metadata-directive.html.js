@@ -1,12 +1,11 @@
-define(['app', 
-    '/app/views/directives/report-record.js'
+define(['app', '/app/js/common.js'
     ], function (app) {
 	app.directive('documentMetadata', function($http){
 		return{
 			restrict: 'EAC',
 			replace:true,
 			templateUrl: '/app/views/directives/document-metadata-directive.html',
-			controller: ['$scope', '$filter','commonjs', function($scope, $filter, commonjs){
+			controller: ['$scope', '$filter','commonjs','$element', '$compile', function($scope, $filter, commonjs, $element, $compile){
 
 				$scope.getDocumentId = function(document){
 					if(!document)
@@ -17,17 +16,18 @@ define(['app',
 						return commonjs.hexToInteger(document.id);
 				}
 
-				$scope.getDocumentSchema = function(schema){
+				$scope.loadReportRecord = function(schema, identifier){
 
-					if(!schema)
-						return;
-						
-					if(schema.toLowerCase() == "pressrelease" || schema.toLowerCase() == "statement"
-						|| schema.toLowerCase() == "news" || schema.toLowerCase() == "notification" ||
-						schema.toLowerCase() == "meeting" || schema.toLowerCase() == "focalpoint")
-						return schema;
-					else
-						return $filter("schemaShortName")(schema.toLowerCase())
+                    require(['/app/views/directives/report-record.js'], function() {
+
+                        var directiveHtml = "<div report-record uid='"+ identifier + "' schema='" +  schema + "'></div>";
+
+                        $scope.$apply(function() {
+                            $element.find('#divReportRecord')
+                                .empty()
+                                .append($compile(directiveHtml)($scope));
+                        });
+                    });
 				}
 			}]
 		};

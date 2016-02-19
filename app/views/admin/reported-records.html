@@ -1,0 +1,43 @@
+<div ng-controller="adminReportedRecordsCtrl">
+
+    <div class="bg-white md-whiteframe-z1">
+
+        <div class="bg-medgrey">
+            <h3 class="md-toolbar-tools color-white"><a href="/dashboard">Reported Records</a></h3>
+        </div>
+        <table class="table table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <td>Schema</td>
+                    <td>Reported By</td>
+                    <td>Reported On</td>
+                    <td>Information</td>
+                </tr>
+            </thead>
+            <tbody ng-repeat="record in reportRecords">
+                <tr ng-click="record.showDoc=!record.showDoc">
+                    <td>
+                        {{record.schema|schemaName}}
+                    </td>
+                    <td>
+                        {{record.reportedBy}}
+                    </td>
+                    <td>
+                        {{record.reportedOn|formatDate}}
+                    </td>
+                    <td>
+                        <span ng-if="record.incorrect">incorrect or inappropriate |</span>
+                        <span ng-if="record.broken">broken link or outdated information |</span>
+                        <span ng-if="record.copyright">copyright infringement</span><br>
+                        {{record.additionalInformation}}
+                    </td>
+                </tr>
+                <tr  ng-if="record.showDoc">
+                    <td colspan="4">
+                        <record-viewer  doc-id='record.identifier' doc-schema='record.schema' class="card card-3"></record-viewer>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

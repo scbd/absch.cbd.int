@@ -1,7 +1,18 @@
 <div id="doc-metadata" class="container-fluid record-metadata">
 		<div class="row">
-		 <div class="col-xs-12">  
-             
+			<div class="col-xs-12"><a href="/database/{{(document.schema_s||document.header.schema)|schemaShortName}}/{{getDocumentId(document)}}" target="_new_" class="uid">
+				<i class="fa fa-external-link-square"></i> {{document | uniqueID }} </a>
+				<span class="date">| {{document.info.updatedOn | formatDate}}</span>
+				<span class="pull-right">
+					<a href="#" class=" color-red" ng-click="loadReportRecord(document.schema_s||document.header.schema,document.identifier_s||document.header.identifier)" ><i class="fa fa-exclamation-triangle"></i> Report record</a>
+				</span>
+				<div id="divReportRecord"></div>
+			</div>
+		</div>
+
+		<!-- <div class="row">
+		 <div class="col-xs-12">
+
              <div ng-show="!document.info.createdBy" style="padding-left:10px;">
                 <table style="width:100%" class="table table-condensed" >
                 <tr>
@@ -10,7 +21,7 @@
                     <th class="color-grey hidden-xs" >Action</th>
                 </tr>
                 <tr>
-                    <td class="hidden-xs" style="width:250px" ng-class="{'bold': $index == 0}"> 
+                    <td class="hidden-xs" style="width:250px" ng-class="{'bold': $index == 0}">
                         <strong>{{document.info.updatedOn | formatDateWithTime}}</strong>
                     </td>
                      <td style="width:250px">
@@ -29,7 +40,5 @@
              </div>
             <div view-history ng-if="document.info.updatedBy"  document-id="document.header.identifier" load-documents="true" government="document.government.identifier"></div>
 		</div>
-        <!--<div class="clearfix"></div>-->
-        <!--<report-record></report-record>-->
-	</div>
+	</div>-->
 </div>

@@ -202,7 +202,7 @@
 			</div>
 		</div>
 		<div ng-show="document.absMeasures">
-			
+
 				<div class="km-value bg-white" style="border:none">
 					<!--<ul ng-if="true">
 						<li ng-repeat="term in document.absMeasures">{{term|term:locale}}
@@ -240,15 +240,10 @@
 				</div>
 			</div>
 		</div>
-       
+
 
 	</div>
 	<div class="panel-footer">
-        <div class="row">
-            <div class="col-xs-12"><a href="/database/MSR/{{document | uniqueIDWithoutRevision}}" target="_new_" class="uid"> <i class="fa fa-external-link-square"></i> {{document | uniqueID }} </a> 
-            <span class="date">| {{document.info.updatedOn | formatDate}}</span>
-            <span class="pull-right"><a href="/database/MSR/{{document | uniqueIDWithoutRevision}}?report=true" class="color-red"><i class="fa fa-exclamation-triangle"></i> <span class="hidden-xs">Report record</span></a></span>
-            </div>
-        </div>
+        <div document-metadata  class="panel-footer"></div>
     </div>
 </div>
