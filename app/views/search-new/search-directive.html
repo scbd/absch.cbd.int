@@ -11,9 +11,9 @@
         #search-new .active .badge {background-color: #333;color:white;}
         #search-new .section-title{color:#999;font-weight: bold;}
         #search-new .active{background-color: #EEE}
-        #search-new .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus{background-color: #EEE;position:relative;top:3px;border:pink 3px solid; border-bottom:0;}
-        #search-new  .nav-tabs { border-bottom:pink 3px solid;}
-        #search-new  .nav-tabs>li {margin-bottom:0; font-weight:bold; font-size:14px;}
+        #search-new .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus{background-color: #FFF;position:relative;top:3px;border:1px solid #e3e3e3;  border-bottom:0;}
+        #search-new  .tab-content { border-bottom:1px solid #e3e3e3; border-left:1px solid #e3e3e3; border-right:1px solid #e3e3e3; }
+        #search-new  .nav-tabs>li {margin-bottom:0; font-weight:bold; font-size:16px;}
         #search-new .no-rl-padding{padding-left:0!important;margin-left:0!important;padding-right:0!important;margin-right:0!important;}
     </style>
     
@@ -21,7 +21,7 @@
         <div class="row" >
             <div class="col-md-12" >
                 <div ng-repeat="filter in searchFilters" style="margin-bottom:10px;">
-                    <button class="btn btn-xs btn-info bold" ng-if="searchFilters[filter].value" ng-click="removeFilter(searchFilters[filter].id)" >
+                    <button class="btn btn-info bold" ng-if="searchFilters[filter].value" ng-click="removeFilter(searchFilters[filter].id)" >
                         {{searchFilters[filter].name}}
                         <span aria-hidden="true">×</span>
                     </button>
@@ -36,6 +36,7 @@
             </div>
             <div class="col-md-12 search hidden-xs" style="padding-top:5px;" >
                 <ul>
+                    <li style="text-transform:uppercase;padding-left:3px;padding-right:5px;color:#bbb;">search filters</li>
                     <li> <a href="" ng-class="{'active':showFilters=='recordTypes'}" ng-click="showFilters=(showFilters=='recordTypes' ? false : 'recordTypes')" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;National records</a> </li>
                     <li> <a href="" ng-click="showFilters=(showFilters=='recordTypes' ? false : 'recordTypes')" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Reference records</a> </li>
                     <li> <a href="" ng-click="showFilters=(showFilters=='recordTypes' ? false : 'recordTypes')" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;SCBD records</a> </li>
@@ -73,8 +74,8 @@
                 </ul>
             </div>
               <!-- Tab panes -->
-             <div class="col-xs-12 tab-content" style="padding:0;margin:0;">
-                    <div role="tabpanel" class="tab-pane active" id="nationalRecords">
+             <div class="col-xs-12 tab-content   bg-white" style="padding:20px;margin:0;">
+                    <div role="tabpanel" class="tab-pane active  bg-white" id="nationalRecords">
                         <div>
                          <div ng-repeat="group in rawDocs.data">
                             <div ng-repeat="country in group.government_s.groups">
