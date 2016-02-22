@@ -89,6 +89,16 @@ define(['app', 'linqjs', 'angular-localizer',
                                         schemaType: "referenceRecords",
                                         title: 'Community protocols and procedures and customary laws',
 
+                                    },
+                                    capacityBuildingInitiative: {
+                                        abbreviation: 'CBI',
+                                        schemaType: "referenceRecords",
+                                        title: 'Capacity-building Initiative',
+                                    },
+                                    capacityBuildingResource: {
+                                        abbreviation: 'CBR',
+                                        schemaType: "referenceRecords",
+                                        title: 'Capacity-building Resource',
                                     }
 
                                 };
@@ -101,6 +111,8 @@ define(['app', 'linqjs', 'angular-localizer',
                                       {"schema":"absCheckpointCommunique","schemaType":"nationalRecords", "header": "CPC","draftCount":0,"requestCount":0,"publishCount": 0},
                                       {"schema":"database","schemaType":"nationalRecords", "header": "NDB","draftCount":0,"requestCount":0,"publishCount": 0},
                                       {"schema":"resource","schemaType":"referenceRecords", "header": "VLR","draftCount":0,"requestCount":0,"publishCount": 0},
+                                      {"schema":"capacityBuildingInitiative","schemaType":"referenceRecords", "header": "CBI","draftCount":0,"requestCount":0,"publishCount": 0},
+                                      {"schema":"capacityBuildingResource","schemaType":"referenceRecords", "header": "CBR","draftCount":0,"requestCount":0,"publishCount": 0},
                                       {"schema":"contact","schemaType":"others", "header": "CON","draftCount":0,"requestCount":0,"publishCount": 0},
                                       {"schema":"absNationalReport","schemaType":"nationalRecords", "header": "NR","draftCount":0,"requestCount":0,"publishCount": 0},
                                       {"schema":"modelContractualClause","schemaType":"referenceRecords", "header": "A19A20","draftCount":0,"requestCount":0,"publishCount": 0},

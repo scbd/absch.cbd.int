@@ -206,24 +206,27 @@ define(["app",'/app/js/common.js'], function (app) {
 
 			if(!schema)
 				return schema;
-			if(schema.toLowerCase()=="focalpoint"				) return "ABS National Focal Point";
-			if(schema.toLowerCase()=="authority"				) return "Competent National Authority";
-			if(schema.toLowerCase()=="contact"					) return "Contact";
-			if(schema.toLowerCase()=="database"					) return "National Website or Database";
-			if(schema.toLowerCase()=="resource"					) return "Virtual Library Resource";
-			if(schema.toLowerCase()=="organization"				) return "Organization";
-			if(schema.toLowerCase()=="measure" 					) return "Legislative, Administrative or Policy Measures";
-			if(schema.toLowerCase()=="abscheckpoint"			) return "Checkpoint";
-			if(schema.toLowerCase()=="abscheckpointcommunique"	) return "Checkpoint Communiqué";
-			if(schema.toLowerCase()=="abspermit"				) return "Internationally Recognized Certificate of Compliance";
-            if(schema.toLowerCase()=="meetingdocument"			) return "Meeting Documents";
-            if(schema.toLowerCase()=="pressrelease"				) return "Press Releases";
-			if(schema.toLowerCase()=="news"						) return "News";
-			if(schema.toLowerCase()=="absnationalreport"		) return "National Report";
-			if(schema.toLowerCase()=="modelcontractualclause"	) return "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards";
-			if(schema.toLowerCase()=="communityprotocol"		) return "Community protocols and procedures and customary laws";
-			if(schema.toLowerCase()=="meeting"					) return "Meetings";
-			if(schema.toLowerCase()=="notification"				) return "Notifications";
+			if(schema.toLowerCase()=="focalpoint"				 ) return "ABS National Focal Point";
+			if(schema.toLowerCase()=="authority"				 ) return "Competent National Authority";
+			if(schema.toLowerCase()=="contact"					 ) return "Contact";
+			if(schema.toLowerCase()=="database"					 ) return "National Website or Database";
+			if(schema.toLowerCase()=="resource"					 ) return "Virtual Library Resource";
+			if(schema.toLowerCase()=="organization"				 ) return "Organization";
+			if(schema.toLowerCase()=="measure" 					 ) return "Legislative, Administrative or Policy Measures";
+			if(schema.toLowerCase()=="abscheckpoint"			 ) return "Checkpoint";
+			if(schema.toLowerCase()=="abscheckpointcommunique"	 ) return "Checkpoint Communiqué";
+			if(schema.toLowerCase()=="abspermit"				 ) return "Internationally Recognized Certificate of Compliance";
+            if(schema.toLowerCase()=="meetingdocument"			 ) return "Meeting Documents";
+            if(schema.toLowerCase()=="pressrelease"				 ) return "Press Releases";
+			if(schema.toLowerCase()=="news"						 ) return "News";
+			if(schema.toLowerCase()=="absnationalreport"		 ) return "National Report";
+			if(schema.toLowerCase()=="modelcontractualclause"	 ) return "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards";
+			if(schema.toLowerCase()=="communityprotocol"		 ) return "Community protocols and procedures and customary laws";
+			if(schema.toLowerCase()=="meeting"					 ) return "Meetings";
+			if(schema.toLowerCase()=="notification"				 ) return "Notifications";
+			if(schema.toLowerCase()=="capacitybuildinginitiative") return "Capacity-building Initiatives";
+			if(schema.toLowerCase()=="capacitybuildingresource"  ) return "Capacity-building Resources";
+
 			// return schema;
 		};
 	}]);
@@ -238,24 +241,26 @@ define(["app",'/app/js/common.js'], function (app) {
 		return function( schema ) {
 			if(!schema)
 				return schema;
-			if(schema.toLowerCase()=="focalpoint"				) return "ABS National Focal Points";
-			if(schema.toLowerCase()=="authority"				) return "Competent National Authorities";
-			if(schema.toLowerCase()=="contact"					) return "Contact";
-			if(schema.toLowerCase()=="database"					) return "National Websites or Databases";
-			if(schema.toLowerCase()=="resource"					) return "Virtual Library Resources";
-			if(schema.toLowerCase()=="organization"				) return "Organizations";
-			if(schema.toLowerCase()=="measure" 					) return "Legislative, Administrative or Policy Measures";
-			if(schema.toLowerCase()=="abscheckpoint"			) return "Checkpoints";
-			if(schema.toLowerCase()=="abscheckpointcommunique"	) return "Checkpoint Communiqués";
-			if(schema.toLowerCase()=="abspermit"				) return "Internationally Recognized Certificates of Compliance";
-            if(schema.toLowerCase()=="meetingdocument"			) return "Meeting Documents";
-            if(schema.toLowerCase()=="pressrelease"				) return "Press Releases";
-			if(schema.toLowerCase()=="news"						) return "News";
-			if(schema.toLowerCase()=="absnationalreport"		) return "National Reports";
-			if(schema.toLowerCase()=="modelcontractualclause"	) return "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards";
-			if(schema.toLowerCase()=="communityprotocol"		) return "Community protocols and procedures and customary laws";
-			if(schema.toLowerCase()=="meeting"					) return "Meetings";
-			if(schema.toLowerCase()=="notification"				) return "Notifications";
+			if(schema.toLowerCase()=="focalpoint"				 ) return "ABS National Focal Points";
+			if(schema.toLowerCase()=="authority"				 ) return "Competent National Authorities";
+			if(schema.toLowerCase()=="contact"					 ) return "Contact";
+			if(schema.toLowerCase()=="database"					 ) return "National Websites or Databases";
+			if(schema.toLowerCase()=="resource"					 ) return "Virtual Library Resources";
+			if(schema.toLowerCase()=="organization"				 ) return "Organizations";
+			if(schema.toLowerCase()=="measure" 					 ) return "Legislative, Administrative or Policy Measures";
+			if(schema.toLowerCase()=="abscheckpoint"			 ) return "Checkpoints";
+			if(schema.toLowerCase()=="abscheckpointcommunique"   ) return "Checkpoint Communiqués";
+			if(schema.toLowerCase()=="abspermit"				 ) return "Internationally Recognized Certificates of Compliance";
+            if(schema.toLowerCase()=="meetingdocument"			 ) return "Meeting Documents";
+            if(schema.toLowerCase()=="pressrelease"				 ) return "Press Releases";
+			if(schema.toLowerCase()=="news"						 ) return "News";
+			if(schema.toLowerCase()=="absnationalreport"		 ) return "National Reports";
+			if(schema.toLowerCase()=="modelcontractualclause"	 ) return "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards";
+			if(schema.toLowerCase()=="communityprotocol"		 ) return "Community protocols and procedures and customary laws";
+			if(schema.toLowerCase()=="meeting"					 ) return "Meetings";
+			if(schema.toLowerCase()=="notification"				 ) return "Notifications";
+			if(schema.toLowerCase()=="capacitybuildinginitiative") return "Capacity-building Initiatives";
+			if(schema.toLowerCase()=="capacitybuildingresource"  ) return "Capacity-building Resources";
 
 
 			return schema;
@@ -274,22 +279,24 @@ define(["app",'/app/js/common.js'], function (app) {
 			if(!schema)
 				return schema;
 
-			if(schema.toLowerCase()=="focalpoint" 				||	schema.toLowerCase()=="nfp"	) return "account_box";
-			if(schema.toLowerCase()=="authority"  				||	schema.toLowerCase()=="cna"	) return "account_box";
-			if(schema.toLowerCase()=="contact"  				||	schema.toLowerCase()=="con"	) return "contacts";
-			if(schema.toLowerCase()=="database"	 				||	schema.toLowerCase()=="ndb"	) return "folder";
-			if(schema.toLowerCase()=="resource"	  				||	schema.toLowerCase()=="vlr"	) return "insert_drive_file";
-			//if(schema.toLowerCase()=="organization"  			||	schema.toLowerCase()=="org"	) return "Organization";
-			if(schema.toLowerCase()=="measure" 	  				||	schema.toLowerCase()=="msr"	) return "stars";
-			if(schema.toLowerCase()=="abscheckpoint" 			||	schema.toLowerCase()=="cp"	) return "verified_user";
-			if(schema.toLowerCase()=="abscheckpointcommunique"  ||	schema.toLowerCase()=="cpc"	) return "message";
-			if(schema.toLowerCase()=="abspermit"  				||	schema.toLowerCase()=="ircc") return "bookmark";
-			if(schema.toLowerCase()=="absnationalreport" 		||	schema.toLowerCase()=="nr"	) return "folder";
-			//if(schema.toLowerCase()=="meetingdocument" 		||	schema.toLowerCase()=="nfp"	) return "Meeting Document";
-			//if(schema.toLowerCase()=="pressrelease"	 		||	schema.toLowerCase()=="nfp"	) return "Press Release";
-			//if(schema.toLowerCase()=="news"		 			||	schema.toLowerCase()=="nfp"	) return "News";
-			if(schema.toLowerCase()=="modelcontractualclause" 	||	schema.toLowerCase()=="a19a20"	) return "folder";
-			if(schema.toLowerCase()=="communityprotocol" 		||	schema.toLowerCase()=="cpp"	) return "folder";
+			if(schema.toLowerCase()=="focalpoint" 				  ||	schema.toLowerCase()=="nfp"	) return "account_box";
+			if(schema.toLowerCase()=="authority"  				  ||	schema.toLowerCase()=="cna"	) return "account_box";
+			if(schema.toLowerCase()=="contact"  				  ||	schema.toLowerCase()=="con"	) return "contacts";
+			if(schema.toLowerCase()=="database"	 				  ||	schema.toLowerCase()=="ndb"	) return "folder";
+			if(schema.toLowerCase()=="resource"	  				  ||	schema.toLowerCase()=="vlr"	) return "insert_drive_file";
+			//if(schema.toLowerCase()=="organization"  			  ||	schema.toLowerCase()=="org"	) return "Organization";
+			if(schema.toLowerCase()=="measure" 	  				  ||	schema.toLowerCase()=="msr"	) return "stars";
+			if(schema.toLowerCase()=="abscheckpoint" 			  ||	schema.toLowerCase()=="cp"	) return "verified_user";
+			if(schema.toLowerCase()=="abscheckpointcommunique"    ||	schema.toLowerCase()=="cpc"	) return "message";
+			if(schema.toLowerCase()=="abspermit"  				  ||	schema.toLowerCase()=="ircc") return "bookmark";
+			if(schema.toLowerCase()=="absnationalreport" 		  ||	schema.toLowerCase()=="nr"	) return "folder";
+			//if(schema.toLowerCase()=="meetingdocument" 		  ||	schema.toLowerCase()=="nfp"	) return "Meeting Document";
+			//if(schema.toLowerCase()=="pressrelease"	 		  ||	schema.toLowerCase()=="nfp"	) return "Press Release";
+			//if(schema.toLowerCase()=="news"		 			  ||	schema.toLowerCase()=="nfp"	) return "News";
+			if(schema.toLowerCase()=="modelcontractualclause" 	  ||	schema.toLowerCase()=="a19a20"	) return "folder";
+			if(schema.toLowerCase()=="communityprotocol" 		  ||	schema.toLowerCase()=="cpp"	) return "folder";
+			if(schema.toLowerCase()=="capacitybuildinginitiative" ||	schema.toLowerCase()=="cbi"	) return "insert_drive_file";
+			if(schema.toLowerCase()=="capacitybuildingresource"   ||	schema.toLowerCase()=="cbr"	) return "insert_drive_file";
 
 			return schema;
 		};
@@ -327,25 +334,27 @@ define(["app",'/app/js/common.js'], function (app) {
 			if(!schema)
 				return schema;
 
-			if(schema.toLowerCase()=="focalpoint"				) return "NFP";
-			if(schema.toLowerCase()=="authority"				) return "CNA";
-			if(schema.toLowerCase()=="contact"				   	) return "CON";
-			if(schema.toLowerCase()=="database"				   	) return "NDB";
-			if(schema.toLowerCase()=="resource"				   	) return "VLR";
-			if(schema.toLowerCase()=="organization"			   	) return "ORG";
-			if(schema.toLowerCase()=="measure" 				   	) return "MSR";
-			if(schema.toLowerCase()=="abscheckpoint"			) return "CP";
-			if(schema.toLowerCase()=="abscheckpointcommunique" 	) return "CPC";
-			if(schema.toLowerCase()=="abspermit"				) return "IRCC";
-            if(schema.toLowerCase()=="statement"				) return "ST";
-        	if(schema.toLowerCase()=="notification"			   	) return "NT";
-        	if(schema.toLowerCase()=="meeting"					) return "MT";
-        	if(schema.toLowerCase()=="pressrelease"				) return "PR";
-            if(schema.toLowerCase()=="meetingdocument"    		) return "MTD";
-			if(schema.toLowerCase()=="news"						) return "NEWS";
-			if(schema.toLowerCase()=="absnationalreport"		) return "NR";
-			if(schema.toLowerCase()=="modelcontractualclause"	) return "A19A20";
-			if(schema.toLowerCase()=="communityprotocol"		) return "CPP";
+			if(schema.toLowerCase()=="focalpoint"				 ) return "NFP";
+			if(schema.toLowerCase()=="authority"				 ) return "CNA";
+			if(schema.toLowerCase()=="contact"				   	 ) return "CON";
+			if(schema.toLowerCase()=="database"				   	 ) return "NDB";
+			if(schema.toLowerCase()=="resource"				   	 ) return "VLR";
+			if(schema.toLowerCase()=="organization"			   	 ) return "ORG";
+			if(schema.toLowerCase()=="measure" 				   	 ) return "MSR";
+			if(schema.toLowerCase()=="abscheckpoint"			 ) return "CP";
+			if(schema.toLowerCase()=="abscheckpointcommunique" 	 ) return "CPC";
+			if(schema.toLowerCase()=="abspermit"				 ) return "IRCC";
+            if(schema.toLowerCase()=="statement"				 ) return "ST";
+        	if(schema.toLowerCase()=="notification"			   	 ) return "NT";
+        	if(schema.toLowerCase()=="meeting"					 ) return "MT";
+        	if(schema.toLowerCase()=="pressrelease"				 ) return "PR";
+            if(schema.toLowerCase()=="meetingdocument"    		 ) return "MTD";
+			if(schema.toLowerCase()=="news"						 ) return "NEWS";
+			if(schema.toLowerCase()=="absnationalreport"		 ) return "NR";
+			if(schema.toLowerCase()=="modelcontractualclause"	 ) return "A19A20";
+			if(schema.toLowerCase()=="communityprotocol"		 ) return "CPP";
+			if(schema.toLowerCase()=="capacitybuildinginitiative") return "CBI";
+			if(schema.toLowerCase()=="capacitybuildingresource"  ) return "CBR";
 
 			if(schema.toUpperCase()=="NEWS"				        ) return "news";
             if(schema.toUpperCase()=="NFP"				        ) return "focalPoint";
@@ -367,6 +376,9 @@ define(["app",'/app/js/common.js'], function (app) {
 			if(schema.toUpperCase()=="A19A20"				    ) return "modelContractualClause";
 			if(schema.toUpperCase()=="CPP"				    	) return "communityProtocol";
 			if(schema.toUpperCase()=="RAT"				    	) return "parties";
+			if(schema.toUpperCase()=="CBI"				    	) return "capacityBuildingInitiative";
+			if(schema.toUpperCase()=="CBR"				    	) return "capacityBuildingResource";
+
 
 			return schema;
 	}

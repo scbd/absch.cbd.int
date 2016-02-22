@@ -271,7 +271,7 @@ function(app, _) {
                             commonjs.isUserInRole($rootScope.getRoleName('abschiac')) ||
                             commonjs.isUserInRole($rootScope.getRoleName('AbsAdministrator')) ||
                             commonjs.isUserInRole($rootScope.getRoleName('Administrator')) ||
-                            _.contains(['resource', 'modelContractualClause','communityProtocol'],$scope.schema);
+                            _.contains(['resource', 'modelContractualClause','communityProtocol','capacityBuildingResource','capacityBuildingInitiative'],$scope.schema);
 
                     }
 

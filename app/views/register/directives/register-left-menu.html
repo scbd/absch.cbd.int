@@ -100,6 +100,40 @@
                                 <div class="clearfix btn-commonformat-name"> Community protocols and procedures and customary laws </div>
                             </div>
                         </div>
+
+                        <div ng-click="gotoList($event,'capacityBuildingInitiative')" role="button" style="cursor:pointer;">
+                            <div class="btn-commonformat" ng-class="{'btn-commonformat-reference-selected' : document_type =='capacityBuildingInitiative'}">
+                                <div class="btn-commonformat-reference">
+                                    <i class="material-icons" style="font-size:16pt;position:relative;top:3px;">
+                                        {{'capacityBuildingInitiative' | schemaIcon }}</i> CBI
+                                    <div class="pull-right" style="text-align:right; width:180px;padding-right:0px;position:relative;top:0px;">
+                                        <span ng-show="facets('capacityBuildingInitiative','publish') > 0" class="label label-success" style="margin: 0 0 0 1px;"> {{facets('capacityBuildingInitiative','publish')}}</span>
+                                        <span ng-show="facets('capacityBuildingInitiative','draft') > 0" class="label label-default" style="margin: 0 0 0 1px;"> {{facets('capacityBuildingInitiative','draft')}}</span>
+                                        <span ng-show="facets('capacityBuildingInitiative','request') > 0" class="label label-danger" style="margin: 0 0 0 1px;"> {{facets('capacityBuildingInitiative','request')}}</span>
+                                        <span ng-click="gotoNew($event,'capacityBuildingInitiative')" class="label color-blue bg-litegrey" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i> </span>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="clearfix btn-commonformat-name"> Capacity-building Initiatives </div>
+                            </div>
+                        </div>
+
+                        <div ng-click="gotoList($event,'capacityBuildingResource')" role="button" style="cursor:pointer;">
+                            <div class="btn-commonformat" ng-class="{'btn-commonformat-reference-selected' : document_type =='capacityBuildingResource'}">
+                                <div class="btn-commonformat-reference">
+                                    <i class="material-icons" style="font-size:16pt;position:relative;top:3px;">
+                                        {{'capacityBuildingResource' | schemaIcon }}</i> CBR
+                                    <div class="pull-right" style="text-align:right; width:180px;padding-right:0px;position:relative;top:0px;">
+                                        <span ng-show="facets('capacityBuildingResource','publish') > 0" class="label label-success" style="margin: 0 0 0 1px;"> {{facets('capacityBuildingResource','publish')}}</span>
+                                        <span ng-show="facets('capacityBuildingResource','draft') > 0" class="label label-default" style="margin: 0 0 0 1px;"> {{facets('capacityBuildingResource','draft')}}</span>
+                                        <span ng-show="facets('capacityBuildingResource','request') > 0" class="label label-danger" style="margin: 0 0 0 1px;"> {{facets('capacityBuildingResource','request')}}</span>
+                                        <span ng-click="gotoNew($event,'capacityBuildingResource')" class="label color-blue bg-litegrey" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i> </span>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="clearfix btn-commonformat-name"> Capacity-building Resources </div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>

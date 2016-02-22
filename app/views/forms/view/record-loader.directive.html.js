@@ -32,25 +32,27 @@ app.directive('recordLoader', [function () {
 			function ($scope, $route, storage, authentication, $q, $location,
 				commonjs,$timeout, $filter, $http, $httpAWS, realm, $element, $compile) {
 				var schemaMapping = {
-					news 				: '/app/views/forms/view/view-news.directive.html.js',
-					absNationalReport 	: '/app/views/forms/view/view-abs-national-report.directive.js',
-					absCheckpoint		: '/app/views/forms/view/view-abs-checkpoint.directive.js',
-				    absCheckpointCommunique: '/app/views/forms/view/view-abs-checkpoint-communique.directive.js',
-				    absPermit			:	'/app/views/forms/view/view-abs-permit.directive.js',
-				    authority			: '/app/views/forms/view/view-authority.directive.js',
-				    authorityReference	:'/app/views/forms/view/view-authority-reference.directive.js',
-				    contact				:'/app/views/forms/view/view-contact.directive.js',
-				    contactReference	:'/app/views/forms/view/view-contact-reference.directive.js',
-				    database			:'/app/views/forms/view/view-database.directive.js',
-				    measure				:'/app/views/forms/view/view-measure.directive.js',
-				    organization		:'/app/views/forms/view/view-organization.directive.js',
-				    organizationReference:'/app/views/forms/view/view-organization-reference.directive.js',
-				    resource			:'/app/views/forms/view/view-resource.directive.js',
-				    focalPoint			:'/app/views/forms/view/view-focalpoint.directive.html.js',
-				    meeting				:'/app/views/forms/view/view-meeting.directive.html.js',
-				    statement			:'/app/views/forms/view/view-statement.directive.html.js',
-				    pressRelease		:'/app/views/forms/view/view-pressrelease.directive.html.js',
-				    notification		:'/app/views/forms/view/view-notification.directive.html.js'
+					news 				       : '/app/views/forms/view/view-news.directive.html.js',
+					absNationalReport 	       : '/app/views/forms/view/view-abs-national-report.directive.js',
+					absCheckpoint		       : '/app/views/forms/view/view-abs-checkpoint.directive.js',
+				    absCheckpointCommunique    : '/app/views/forms/view/view-abs-checkpoint-communique.directive.js',
+				    absPermit			       : '/app/views/forms/view/view-abs-permit.directive.js',
+				    authority			       : '/app/views/forms/view/view-authority.directive.js',
+				    authorityReference	       : '/app/views/forms/view/view-authority-reference.directive.js',
+				    contact				       : '/app/views/forms/view/view-contact.directive.js',
+				    contactReference	       : '/app/views/forms/view/view-contact-reference.directive.js',
+				    database			       : '/app/views/forms/view/view-database.directive.js',
+				    measure				       : '/app/views/forms/view/view-measure.directive.js',
+				    organization		       : '/app/views/forms/view/view-organization.directive.js',
+				    organizationReference      : '/app/views/forms/view/view-organization-reference.directive.js',
+				    resource			       : '/app/views/forms/view/view-resource.directive.js',
+				    focalPoint			       : '/app/views/forms/view/view-focalpoint.directive.html.js',
+				    meeting				       : '/app/views/forms/view/view-meeting.directive.html.js',
+				    statement			       : '/app/views/forms/view/view-statement.directive.html.js',
+				    pressRelease		       : '/app/views/forms/view/view-pressrelease.directive.html.js',
+				    notification		       : '/app/views/forms/view/view-notification.directive.html.js',
+					capacityBuildingInitiative : '/app/views/forms/view/view-capacity-building-initiative.directive.html.js',
+					capacityBuildingResource   : '/app/views/forms/view/view-capacity-building-resource.directive.html.js'
 				}
 
 			$scope.$watch("document", function(_new) {
@@ -282,7 +284,7 @@ app.directive('recordLoader', [function () {
 
 				if(!schema)
 					return;
-					
+
 				var lschema = _.clone(schema);
 
 				if(schema.toLowerCase() == 'modelcontractualclause' || schema.toLowerCase() == 'communityprotocol')

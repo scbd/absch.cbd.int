@@ -16,7 +16,9 @@ app.factory("editFormUtility", ["IStorage", "IWorkflows", "$q", "realm","commonj
 		"resource"					: { name : "publishReferenceRecord", version : undefined },
 		"modelContractualClause"	: { name : "publishReferenceRecord", version : undefined },
 		"communityProtocol"			: { name : "publishReferenceRecord", version : undefined },
-		"organization"				: { name : "publishReferenceRecord", version : undefined }
+		"organization"				: { name : "publishReferenceRecord", version : undefined },
+		"capacityBuildingInitiative": { name : "publishReferenceRecord", version : undefined },
+		"capacityBuildingResource"	: { name : "publishReferenceRecord", version : undefined }
 	};
 
 	var _self = {

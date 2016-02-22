@@ -8,7 +8,7 @@ define(['app'], function (app) {
 				//$element.find("[data-toggle='tooltip']").tooltip({trigger:'hover'});
 			},
 			controller: ['$scope', '$filter','schemaTypes', 'realm', '$q', 'underscore', function($scope, $filter, schemaTypes, realm, $q, _){
-                var referenceRecordSchemas = ['resource','modelContractualClause', 'communityProtocol'];
+                var referenceRecordSchemas = ['resource','modelContractualClause', 'communityProtocol', 'capacityBuildingInitiative', 'capacityBuildingResource'];
 
 				$scope.wellChanged = function(facet){
 					$scope.currentFacet = facet;
@@ -58,12 +58,12 @@ define(['app'], function (app) {
                     }
 
 					var queryFacetsVLRParameters = {
-                        'q': '(realm_ss:' + realm.value.toLowerCase() + ') AND NOT version_s:* AND schema_s:(resource modelContractualClause communityProtocol)',
+                        'q': '(realm_ss:' + realm.value.toLowerCase() + ') AND NOT version_s:* AND schema_s:(resource modelContractualClause communityProtocol capacityBuildingInitiative capacityBuildingResource)',
                         'fl': '', 		//fields for results.
                         'wt': 'json',
                         'rows': 0,		//limit
                         'facet': true,	//get counts back
-						'facet.query': '(realm_ss:' + realm.value.toLowerCase() + ') AND NOT version_s:* AND (schema_s:(resource modelContractualClause communityProtocol))',
+						'facet.query': '(realm_ss:' + realm.value.toLowerCase() + ') AND NOT version_s:* AND (schema_s:(resource modelContractualClause communityProtocol capacityBuildingInitiative capacityBuildingResource))',
                         'facet.field': ['schema_s'],
                         'facet.limit': 512
                     };
@@ -163,6 +163,10 @@ define(['app'], function (app) {
 							return 10;
 						case  'communityProtocol':
 							return 11;
+						case  'capacityBuildingInitiative':
+							return 12;
+						case  'capacityBuildingResource':
+							return 13;
 					}
 				}
                 //$scope.loadFacets();
