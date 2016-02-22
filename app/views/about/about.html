@@ -12,32 +12,44 @@
     #aboutPage h1 {border-bottom:1px solid #ddd;padding-bottom:5px;padding-top:10px;margin-top:0;margin-bottom:20px;}
      #aboutPage h3 {background-color:#e5e5e5;padding:3px;}
      #aboutPage .well h5 {color:#1FA65D;font-weight: bold;font-size:105%;}
+     .backtothetop {font-size:12px}
+     #myAffix {position:fixed;}
+     .affix{position:fixed;top: 10px!important;}
+     @media (max-width: 768px) {
+        #myAffix, .affix{
+            position:relative!important;
+        }
+    }
+
 </style>
   <div class="container-fluid">
   <div class="row">
-    <nav class="col-xs-12 col-sm-3" >
+    <nav class="col-xs-12 col-sm-3" id="myAffix" data-spy="affix" >
       <ul class="nav nav-pills nav-stacked" style="padding-bottom:30px">
-        <li><a href="#">About the ABS Clearing-House</a></li>
+        <li><a href="#" scroll-to="top">About the ABS Clearing-House (ABSCH)</a></li>
             <ul>
-                <li><a href="#">Introduction</a></li>
-                <li><a href="#">Background</a></li>
-                <li><a href="#">What is it</a></li>
+                <li><a scroll-to="about-intro" class="color-green" href="#">Introduction</a></li>
+                <li><a scroll-to="about-bg" class="color-green" href="#">Background</a></li>
+                <li><a scroll-to="about-what" class="color-green" href="#">What is the ABSCH</a></li>
              </ul>
-        <li><a href="#">Why is the ABS Clearing-House important</a></li>
-        <li><a href="#">Who is it for</a></li>
-        <li><a href="#">Finding Information</a></li>
-        <li><a href="#">Submitting Information</a></li>
-        <li><a href="#">About the Nagoya Protocol</a></li>
-        <li><a href="#">Getting help</a></li>
+        <li><a href="#" scroll-to="about-why">Why is the ABS Clearing-House important</a></li>
+        <li><a href="#" scroll-to="about-who">Who is it for</a></li>
+        <li><a href="#" scroll-to="about-roles">User roles and responsibilities</a></li>
+        <li><a href="#" scroll-to="about-search">Finding Information</a></li>
+        <li><a href="#" scroll-to="about-submit">Submitting Information</a></li>
+        <li><a href="#" scroll-to="about-np">About the Nagoya Protocol</a></li>
+        <li><a href="#" scroll-to="about-help">Getting help</a></li>
+        
+        <li> <a scroll-to="top" class="hidden-xs color-blue">back to the top <i class="fa fa-arrow-circle-up"></i> </a></li>
       </ul>
     </nav>
-    <div class="col-xs-12 col-sm-9">
+    <div class="col-xs-12 col-sm-9   col-sm-offset-3">
            <div style="padding-bottom:30px;">   
                 <h1>About the ABS Clearing-House</h1>
-                <h3>Introduction</h3>
-                <p> The Access and Benefit-sharing Clearing-House (ABS-CH) is a platform for exchanging information on access and benefit-sharing established by Article 14 of the Protocol, as part of clearing-house mechanism under Article 18, paragraph 3 of the Convention. The ABS Clearing-House is a key tool for facilitating the implementation of the Nagoya Protocol, by enhancing legal certainty and transparency on procedures for access, and for monitoring the utilization of genetic resources along the value chain, including through the internationally recognized certificate of compliance. By hosting relevant information regarding ABS, the Clearing-House offers opportunities for connecting users and providers of genetic resources and associated traditional knowledge.</p>
+                <h3 id="about-intro">Introduction</h3>
+                <p> The Access and Benefit-sharing Clearing-House (ABSCH) is a platform for exchanging information on access and benefit-sharing established by Article 14 of the Protocol, as part of clearing-house mechanism under Article 18, paragraph 3 of the Convention. The ABS Clearing-House is a key tool for facilitating the implementation of the Nagoya Protocol, by enhancing legal certainty and transparency on procedures for access, and for monitoring the utilization of genetic resources along the value chain, including through the internationally recognized certificate of compliance. By hosting relevant information regarding ABS, the Clearing-House offers opportunities for connecting users and providers of genetic resources and associated traditional knowledge.</p>
                 
-                <h3>Background</h3>
+                <h3  id="about-bg">Background</h3>
                 <p> The Nagoya Protocol on Access and Benefit-sharing (ABS) was negotiated in order to provide greater legal certainty and transparency for both providers and users of genetic resources and   associated traditional knowledge by: </p>
                 <ul>
                 <li>Establishing more predictable conditions for access to those resources; and</li>
@@ -82,7 +94,7 @@
                     
                     <p>A fully functional ABS Clearing-House also represents a major step in achieving Aichi Biodiversity Target 16, which provides that by 2015, the Nagoya Protocol is in force and operational, consistent with national legislations.</p>
                     
-                    <h3>What is the ABS Clearing-House</h3>
+                    <h3 id="about-what">What is the ABS Clearing-House</h3>
                     <p>The Nagoya Protocol , in its Article 14, establishes the ABS Clearing-House, as part of the clearing-house mechanism of the Convention, as a means for sharing information related to access and benefit-sharing, and in particular its goal is to provide access to information made available by each Party relevant to the implementation of the Protocol.</p>
                     <p>n practical terms, the sharing of information is done through an online platform designed to enable, primarily Parties, but also non-Parties  indigenous and local communities (ILCs), international and non-governmental organizations, research institutions and businesses to make information available  and access information related to access and benefit-sharing.</p>
                     <p>To ensure that the ABS-CH fulfills its role in adding clarity and transparency in access and benefit-sharing, Parties to the CBD agreed in Article 14 of the Protocol, to make mandatory for Parties to share certain types of information through the ABS Clearing-House, namely:
@@ -121,7 +133,7 @@
             
             
             
-            <div style="padding-bottom:30px;">   
+            <div style="padding-bottom:30px;" id="about-why">   
                     <h1>Why is the ABS Clearing-House important</h1>
 
                     <p><strong>1. The ABS Clearing-House facilitates the connection between users and providers of genetic resources and associated traditional knowledge. </strong></p>
@@ -150,8 +162,8 @@
             
             
             
-             <div style="padding-bottom:30px;">   
-                    <h1>Who it is for</h1>
+             <div style="padding-bottom:30px;" id="about-who">   
+                    <h1>Who it is for </h1>
                     
                     <p><strong>Parties and non-Parties. </strong> By publishing national information on the ABS Clearing-House, Parties to the Nagoya Protocol and other governments help both users and providers of genetic resources and associated traditional knowledge. Users can find the information they need to access genetic resources and associated traditional knowledge, while providers will find the necessary tools to monitor the utilization of these resources. Non-Parties to the Protocol are encouraged to share all their relevant ABS information through the ABS Clearing-House in the same conditions as Parties do.</p>
                     
@@ -168,12 +180,43 @@
                     <p><strong> International and non-governmental organizations and others   </strong>  can raise awareness and promote capacity building on ABS through the ABS Clearing-House. The ABS Clearing-House offers a space to share materials, literature, and learning modules related to ABS and the Nagoya Protocol. These resources can contribute to promote ratifications and implementation of the Nagoya Protocol, as well as increase opportunities for collaboration among the ABS community. </p>
               </div>
                 
-                
+              
+               <div style="padding-bottom:30px;" id="about-roles">   
+                    <h1>User roles and responsibilites  </h1>
+               </div>
             
+            
+                 <div style="padding-bottom:30px;" id="about-search">   
+                    <h1>Finding Information </h1>
+               </div>
+               
+               
+                 <div style="padding-bottom:30px;" id="about-submit">   
+                    <h1>Submitting Information </h1>
+               </div>
+               
+               
+                 <div style="padding-bottom:30px;" id="about-np">   
+                    <h1>About the the Nagoya Protocol </h1>
+               </div> 
+               
+               <div style="padding-bottom:30px;" id="about-help">   
+                    <h1>Getting Help </h1>
+               </div>              
             
     </div>
     
     
   </div>
 </div>
+<script>
+    $('#myAffix').affix({
+  offset: {
+    top: 220,
+    bottom: function () {
+      return (this.bottom = $('.footer').outerHeight(true))
+    }
+  }
+})
+</script>
 </div><!--  end controller -->
