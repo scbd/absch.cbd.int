@@ -51,8 +51,8 @@ app.directive('recordLoader', [function () {
 				    statement			       : '/app/views/forms/view/view-statement.directive.html.js',
 				    pressRelease		       : '/app/views/forms/view/view-pressrelease.directive.html.js',
 				    notification		       : '/app/views/forms/view/view-notification.directive.html.js',
-					capacityBuildingInitiative : '/app/views/forms/view/view-capacity-building-initiative.directive.html.js',
-					capacityBuildingResource   : '/app/views/forms/view/view-capacity-building-resource.directive.html.js'
+					capacityBuildingInitiative : '/app/views/forms/view/view-capacity-building-initiative.directive.js',
+					capacityBuildingResource   : '/app/views/forms/view/view-capacity-building-resource.directive.js'
 				}
 
 			$scope.$watch("document", function(_new) {
