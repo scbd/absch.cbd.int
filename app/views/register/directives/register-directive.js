@@ -99,6 +99,7 @@ define(['app', 'linqjs', 'angular-localizer',
                                         abbreviation: 'CBR',
                                         schemaType: "referenceRecords",
                                         title: 'Capacity-building Resource',
+                                    },
                                     endorsement: {
                                         abbreviation: 'EDR',
                                         schemaType: "nationalRecords",
