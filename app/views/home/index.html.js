@@ -93,7 +93,7 @@ define(['app','/app/js/common.js','moment',
 
             var schema = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database"]
 
-            var q = '(realm_ss:' + realm.value.toLowerCase() + ' or realm_ss:absch) AND NOT version_s:*';
+            var q = '(realm_ss:' + realm.value.toLowerCase() + ') AND NOT version_s:*';
             var schemaQuery = ' AND (schema_s:' + schema.join(' OR schema_s:') + ')';
             var queryParameters = {
                 'q': q + schemaQuery,
@@ -148,6 +148,8 @@ define(['app','/app/js/common.js','moment',
                  .success(function (data) {
                     $scope.rawRefDocs_Notification = data.response.docs;
                 }).error(function(error){$scope.rawRefDocs_Notification=[]});
+
+
 
         };
         query()

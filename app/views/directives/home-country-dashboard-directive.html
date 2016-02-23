@@ -179,17 +179,52 @@
         <div style="margin-left:15px;padding-left:15px;border-top:1px solid #BBB;"></div>
         <div class="row-fluid">
             <div class="col-md-3">
-                <div class="bg-orange" style="height:36px;"><h5 style="padding:3px;" class="color-white"> <span class="pull-right badge bg-white">100</span> Literature and Capacity Building Resources  </h5></div>
+                <div class="bg-orange" style="height:36px;"><h5 style="padding:3px;" class="color-white">
+                    <span class="pull-right badge bg-white">100</span> Literature and Capacity Building Resources  </h5>
+                </div>
+                <div ng-repeat="doc in capacityBuildingResources" ng-show="doc.title_t && $index < 5">
+                    <!-- <div id="capacityBuildingResources" ng-include="home-list.html"> -->
+                    <a href="{{doc.schema_s|mapSchema}}/{{doc.identifier_s}}" target="_new" style="padding-bottom:5px;">
+                        <span style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.createdDate_dt | formatDate}}</span>
+                        <span class="color-grey" style="display:block;font-size:12px;">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." : doc.title_t }}</span>
+                    </a>
+                </div>
             </div>
              <div class="col-md-3">
-                <div class="bg-orange" style="height:36px;"><h5 style="padding:3px;" class="color-white"> <span class="pull-right badge bg-white">100</span>Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards  </h5></div>
+                <div class="bg-orange" style="height:36px;"><h5 style="padding:3px;" class="color-white">
+                    <span class="pull-right badge bg-white">100</span>Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards  </h5>
+                </div>
+                <div ng-repeat="doc in modelContractualClauses" ng-show="doc.title_t && $index < 5">
+                    <!-- <div id="modelContractualClause" ng-include="home-list.html"> -->
+                    <a href="{{doc.schema_s|mapSchema}}/{{doc.identifier_s}}" target="_new" style="padding-bottom:5px;">
+                        <span style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.createdDate_dt | formatDate}}</span>
+                        <span class="color-grey" style="display:block;font-size:12px;">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." : doc.title_t }}</span>
+                    </a>
+                </div>
             </div>
              <div class="col-md-3">
-                <div class="bg-orange" style="height:36px;"><h5 style="padding:3px;" class="color-white"> <span class="pull-right badge bg-white">100</span> Community protocols and procedures and customary laws  </h5></div>
+                <div class="bg-orange" style="height:36px;"><h5 style="padding:3px;" class="color-white">
+                    <span class="pull-right badge bg-white">100</span> Community protocols and procedures and customary laws  </h5>
+                </div>
+                <div ng-repeat="doc in communityProtocols" ng-show="doc.title_t && $index < 5">
+                    <!-- <div id="communityProtocol" ng-include="home-list.html"> -->
+                    <a href="{{doc.schema_s|mapSchema}}/{{doc.identifier_s}}" target="_new" style="padding-bottom:5px;">
+                        <span style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.createdDate_dt | formatDate}}</span>
+                        <span class="color-grey" style="display:block;font-size:12px;">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." : doc.title_t }}</span>
+                    </a>
+                </div>
             </div>
              <div class="col-md-3">
-                <div class="bg-orange" style="height:36px;"><h5 style="padding:3px;" class="color-white"> <span class="pull-right badge bg-white">100</span>  Capacity Building Initiatives</h5></div>
+                <div class="bg-orange" style="height:36px;"><h5 style="padding:3px;" class="color-white">
+                    <span class="pull-right badge bg-white">100</span>  Capacity Building Initiatives</h5>
+                </div>
+                <div ng-repeat="doc in capacityBuildingInitiatives" ng-show="doc.title_t && $index < 5">
+                    <!-- <div id="capacityBuildingInitiative" ng-include="home-list.html"> -->
+                    <a href="{{doc.schema_s|mapSchema}}/{{doc.identifier_s}}" target="_new" style="padding-bottom:5px;">
+                        <span style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.createdDate_dt | formatDate}}</span>
+                        <span class="color-grey" style="display:block;font-size:12px;">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." : doc.title_t }}</span>
+                    </a>
+                </div>
             </div>
-
     </div>
 </div>

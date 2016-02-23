@@ -1,4 +1,4 @@
-define(['app'], function (app) {
+define(['app', 'underscore', '/app/services/search-service.js'], function (app, _) {
 	app.directive('homeCountryDashboard', function($http){
 		return{
 			restrict: 'EAC',
@@ -7,43 +7,15 @@ define(['app'], function (app) {
 			link : function($scope, $element){
 				//$element.find("[data-toggle='tooltip']").tooltip({trigger:'hover'});
 			},
-			controller: ['$scope', '$filter','schemaTypes', 'realm', '$q', 'underscore', function($scope, $filter, schemaTypes, realm, $q, _){
-                var referenceRecordSchemas = ['resource','modelContractualClause', 'communityProtocol', 'capacityBuildingInitiative', 'capacityBuildingResource'];
+			controller: ['$scope', '$filter','schemaTypes', 'realm', '$q', 'searchService',
+			function($scope, $filter, schemaTypes, realm, $q, searchService){
+
+				var referenceRecordSchemas = ['resource','modelContractualClause', 'communityProtocol', 'capacityBuildingInitiative', 'capacityBuildingResource'];
+
 
 				$scope.wellChanged = function(facet){
 					$scope.currentFacet = facet;
 				}
-                $scope.options  = {
-                      countries		: function() {
-                        return $http.get("/api/v2013/thesaurus/domains/countries/terms", { cache: true }).then(function(o){
-                          var countries = $filter("orderBy")(o.data, "name");
-                          _.each(countries, function(element) {
-                            element.__value = element.name;
-                          });
-                          return countries;
-                        });
-                      }
-                }
-                $scope.genericFilter = function($query, items) {
-                  var matchedOptions = [];
-                  for(var i=0; i!=items.length; ++i)
-                    if(items[i].__value.toLowerCase().indexOf($query.toLowerCase()) !== -1)
-                      matchedOptions.push(items[i]);
-
-                  return matchedOptions;
-                };
-
-                $scope.genericMapping = function(item) {
-                  return {identifier: item.identifier};
-                };
-                $scope.$watch('document.countryStats', function(newValue){
-                    //console.log(newValue)
-                    if(newValue && newValue.identifier){
-                        $scope.loadFacets(newValue.identifier);
-                    }
-                    else if(newValue ==null)
-                        $scope.loadFacets();
-                })
 
 				schemas = _.clone(schemaTypes);
 				//schemas.push('focalPoint');
@@ -171,6 +143,31 @@ define(['app'], function (app) {
 				}
                 //$scope.loadFacets();
 
+				function loadReferenceRecords(schema){
+
+					var searchQuery = {
+                        fields: 'title_t, createdDate_dt, schema_s, identifier_s',
+                        query : 'realm_ss:' + realm.value.toLowerCase() + ' AND schema_s:' + schema
+                    };
+
+                    return searchService.list(searchQuery)
+                    .then(function(data){
+                        return data.data.response.docs;
+                    });
+				}
+
+				$q.when(loadReferenceRecords('capacityBuildingResources')).then(function(documents){
+					$scope.capacityBuildingResources = documents;
+				});
+				$q.when(loadReferenceRecords('capacityBuildingInitiative')).then(function(documents){
+					$scope.capacityBuildingInitiatives = documents;
+				});
+				$q.when(loadReferenceRecords('communityProtocol')).then(function(documents){
+					$scope.communityProtocols = documents;
+				});
+				$q.when(loadReferenceRecords('modelcontractualclause')).then(function(documents){
+					$scope.modelcontractualclauses = documents;
+				});
 
 			}]
 		};

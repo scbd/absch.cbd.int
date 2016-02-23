@@ -12,6 +12,7 @@ app.factory("editFormUtility", ["IStorage", "IWorkflows", "$q", "realm","commonj
 		"database"					: { name : "publishNationalRecord", version : "0.4" },
 		"absNationalReport" 		: { name : "publishNationalRecord", version : "0.4" },
 		"contact"					: { name : "publishNationalRecord", version : "0.4" },
+		"endorsement"				: { name : "publishNationalRecord", version : "0.4" },
 
 		"resource"					: { name : "publishReferenceRecord", version : undefined },
 		"modelContractualClause"	: { name : "publishReferenceRecord", version : undefined },

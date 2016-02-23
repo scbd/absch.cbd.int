@@ -70,12 +70,8 @@ define(['text!./home-map.html',
                   $scope.countryFacets = response.data.facet_counts.facet_pivot;
 
                   calculateListViewFacets();
+                  ammap3Service.loadCountries('index-map', $scope.countries);
 
-
-
-                  ammap3Service.loadCountries('index-map', $scope.countries).then(function() {
-                    setTimeout(function(){playMovie();},4000);
-                  });
                 })
                 .then(function() {
                   $scope.loading = false;
