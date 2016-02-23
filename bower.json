@@ -41,7 +41,7 @@
     "requirejs-text": "2.0.14",
     "require-shim": "https://github.com/zetlen/require-shim.git",
     "scbd-angularjs-controls": "*",
-    "scbd-angularjs-services": "1.0",
+    "scbd-angularjs-services": "1.1.6",
     "scbd-branding": "~1.*",
     "scbd-map": "1.0.2",
     "underscore": "1.7.0",
