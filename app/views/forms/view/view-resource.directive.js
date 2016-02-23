@@ -1,4 +1,4 @@
-define(['app'], function (app) {
+define(['app', '/app/views/directives/endorsement-directive.js',], function (app) {
 	// ,'/app/views/directives/discussion-directive.html.js'
 app.directive("viewResource", [function () {
 	return {

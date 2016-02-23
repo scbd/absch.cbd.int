@@ -99,6 +99,11 @@ define(['app', 'linqjs', 'angular-localizer',
                                         abbreviation: 'CBR',
                                         schemaType: "referenceRecords",
                                         title: 'Capacity-building Resource',
+                                    endorsement: {
+                                        abbreviation: 'EDR',
+                                        schemaType: "nationalRecords",
+                                        title: 'endorsement',
+
                                     }
 
                                 };
@@ -119,7 +124,10 @@ define(['app', 'linqjs', 'angular-localizer',
                                       {"schema":"communityProtocol","schemaType":"referenceRecords", "header": "CPP","draftCount":0,"requestCount":0,"publishCount": 0},
                                       {"schema":"completedTasks","schemaType":"others", "requestCount":0},
                                       {"schema":"pendingTasks","schemaType":"others", "requestCount": 0},
-                                      {"schema":"urgentTasks","schemaType":"others", "requestCount": 0}
+                                      {"schema":"urgentTasks","schemaType":"others", "requestCount": 0},
+
+                                      {"schema":"endorsement","schemaType":"nationalRecords", "header": "EDR","draftCount":0,"requestCount":0,"publishCount": 0},
+
 
                                 ];
                                 var schemaFacets = this.schemaFacets;

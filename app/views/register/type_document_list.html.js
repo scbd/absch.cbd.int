@@ -27,6 +27,7 @@ define(['app',
       schemaTypes,$compile,$timeout,lstringFilter, $routeParams, $filter, $location) {
 
     $scope.type = $rootScope.document_types[$filter("mapSchema")($routeParams.document_type)];
+	//$scope.document_type = $routeParams.document_type;
 
 	$scope.path = $location.path();
 

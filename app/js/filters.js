@@ -226,7 +226,7 @@ define(["app",'/app/js/common.js'], function (app) {
 			if(schema.toLowerCase()=="notification"				 ) return "Notifications";
 			if(schema.toLowerCase()=="capacitybuildinginitiative") return "Capacity-building Initiatives";
 			if(schema.toLowerCase()=="capacitybuildingresource"  ) return "Capacity-building Resources";
-
+			if(schema.toLowerCase()=="endorsement"				) return "Endorsements";
 			// return schema;
 		};
 	}]);
@@ -241,6 +241,7 @@ define(["app",'/app/js/common.js'], function (app) {
 		return function( schema ) {
 			if(!schema)
 				return schema;
+
 			if(schema.toLowerCase()=="focalpoint"				 ) return "ABS National Focal Points";
 			if(schema.toLowerCase()=="authority"				 ) return "Competent National Authorities";
 			if(schema.toLowerCase()=="contact"					 ) return "Contact";
@@ -261,6 +262,7 @@ define(["app",'/app/js/common.js'], function (app) {
 			if(schema.toLowerCase()=="notification"				 ) return "Notifications";
 			if(schema.toLowerCase()=="capacitybuildinginitiative") return "Capacity-building Initiatives";
 			if(schema.toLowerCase()=="capacitybuildingresource"  ) return "Capacity-building Resources";
+			if(schema.toLowerCase()=="endorsement"				) return "Endorsements";
 
 
 			return schema;
@@ -297,6 +299,7 @@ define(["app",'/app/js/common.js'], function (app) {
 			if(schema.toLowerCase()=="communityprotocol" 		  ||	schema.toLowerCase()=="cpp"	) return "folder";
 			if(schema.toLowerCase()=="capacitybuildinginitiative" ||	schema.toLowerCase()=="cbi"	) return "insert_drive_file";
 			if(schema.toLowerCase()=="capacitybuildingresource"   ||	schema.toLowerCase()=="cbr"	) return "insert_drive_file";
+			if(schema.toLowerCase()=="endorsement" 				||	schema.toLowerCase()=="edr"	) return "folder";
 
 			return schema;
 		};
@@ -355,6 +358,7 @@ define(["app",'/app/js/common.js'], function (app) {
 			if(schema.toLowerCase()=="communityprotocol"		 ) return "CPP";
 			if(schema.toLowerCase()=="capacitybuildinginitiative") return "CBI";
 			if(schema.toLowerCase()=="capacitybuildingresource"  ) return "CBR";
+			if(schema.toLowerCase()=="endorsement"				) return "EDR";
 
 			if(schema.toUpperCase()=="NEWS"				        ) return "news";
             if(schema.toUpperCase()=="NFP"				        ) return "focalPoint";
@@ -379,6 +383,8 @@ define(["app",'/app/js/common.js'], function (app) {
 			if(schema.toUpperCase()=="CBI"				    	) return "capacityBuildingInitiative";
 			if(schema.toUpperCase()=="CBR"				    	) return "capacityBuildingResource";
 
+
+			if(schema.toUpperCase()=="EDR"						) return "endorsement";
 
 			return schema;
 	}

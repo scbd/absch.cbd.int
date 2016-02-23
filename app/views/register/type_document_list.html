@@ -61,7 +61,7 @@
                 <div ng-show="path=='/register/'+type.abbreviation">
                     <div ng-hide="editing">
                         <div ng-show="user.isAuthenticated">
-                            <register-record-list records="records" schema="{{document_type}}"></register-record-list>
+                            <register-record-list records="records" schema="{{type.abbreviation|mapSchema}}"></register-record-list>
                         </div>
                     </div>
                 </div>
