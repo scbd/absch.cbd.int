@@ -79,10 +79,10 @@ app.directive('searchFilterSchemas', function ($http) {
                 status                   : function () { return loadDomainWithFacets('status','measure','status_s'); },
                 typeOfDocuments          : function () { return loadDomainWithFacets('typeOfDocuments', 'measure','type_s'); },
                 cnaJurisdictions         : function () { return loadDomainWithFacets('cnaJurisdictions', 'authority', 'absJurisdiction_ss'); },
-                absGeneticResourceTypes  : function () { return loadDomainWithFacets('absGeneticResourceTypes', 'authority','absGeneticResourceTypes_ss') },
+                absGeneticResourceTypes  : function () { return loadDomainWithFacets('absGeneticResourceTypes', 'authority','absGeneticResourceTypes_ss'); },
                 keywords                 : function () { return loadDomainWithFacets('keywords', 'absPermit', 'keywords_ss'); },
                 usage                    : function () { return loadDomainWithFacets('usage', 'absPermit', 'usage_ss'); },
-                cpJurisdictions         : function () { return  loadDomainWithFacets('cpJurisdictions', 'absCheckpoint', 'jurisdiction_s') },
+                cpJurisdictions         : function () { return  loadDomainWithFacets('cpJurisdictions', 'absCheckpoint', 'jurisdiction_s'); },
 
                 countries                : function () { return thesaurusService.getDomainTerms('countries').then(function (o) { return $filter("orderBy")(o, "name"); }); },
                 regions                  : function () { return $q.all([thesaurusService.getDomainTerms('countries'),

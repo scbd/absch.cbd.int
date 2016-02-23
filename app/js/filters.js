@@ -262,7 +262,7 @@ define(["app",'/app/js/common.js'], function (app) {
 			if(schema.toLowerCase()=="notification"				 ) return "Notifications";
 			if(schema.toLowerCase()=="capacitybuildinginitiative") return "Capacity-building Initiatives";
 			if(schema.toLowerCase()=="capacitybuildingresource"  ) return "Capacity-building Resources";
-			if(schema.toLowerCase()=="endorsement"				) return "Endorsements";
+			if(schema.toLowerCase()=="endorsement"				 ) return "Endorsements";
 
 
 			return schema;

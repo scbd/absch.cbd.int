@@ -58,8 +58,8 @@ app.directive('recordLoader', [function () {
 			$scope.$watch("document", function(_new) {
 				$scope.error = null;
 				$scope.internalDocument = _new;
-				if($scope.internalDocument){
-					loadViewDirective($scope.internalDocument.schema || $scope.internalDocument.header.schema)
+				if($scope.internalDocument && ($scope.internalDocument.schema || $scope.internalDocument.header)){
+					loadViewDirective($scope.internalDocument.schema || $scope.internalDocument.header.schema);
 				}
 			});
 

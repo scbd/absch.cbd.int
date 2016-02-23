@@ -1,0 +1,29 @@
+<div id="Record" class="record panel panel-default">
+    <div class="panel-heading bg-blue">
+        <h4>
+            Endorsement
+            <span class="color-black"> (EDR) </span>
+        </h4>
+    </div>
+    <div class="record-body panel-body">
+
+        <legend>General information</legend>
+
+        <div ng-show="document.endorsedSchema">
+            <label name="country">Record Type</label>
+            <div class="km-value">
+                {{document.endorsedSchema | schemaNamePlural}}
+            </div>
+        </div>
+
+        <div ng-show="document.endorsedSchema">
+            <label name="country">Endorsed Record</label>
+            <div class="km-value" ng-if="referenceDocument">
+                <div record-loader document="referenceDocument"  class="record-body"></div>
+            </div>
+        </div>
+
+
+    </div>
+    <div document-metadata class="panel-footer"></div>
+</div>

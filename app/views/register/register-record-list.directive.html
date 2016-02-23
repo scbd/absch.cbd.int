@@ -41,7 +41,7 @@
                     <span class="glyphicon glyphicon-random"></span> Show Reference</a>
                 <a ng-href="#" class="btn btn-sm btn-primary" ng-click="refreshList(schema);">
                     <span class="glyphicon glyphicon-refresh"></span> Refresh</a>
-                <a href="/register/{{schema|mapSchema}}/new" class="btn btn-sm btn-primary" id="new_button" ng-hide="schema=='endorsement'">
+                <a href="/register/{{schema|mapSchema}}/new" class="btn btn-sm btn-primary" id="new_button" >
                     <span class="glyphicon glyphicon-plus-sign"></span> Add New</a>
             </div>
         </div>
@@ -174,10 +174,10 @@
                 </td>
                 <td>
                     <div class="btn-group document_buttons btn-group-sm" style="width:100px;">
-                        <button ng-show="showAddButton()" title="Duplicate" type="button" class="btn btn-default" ng-click="askDuplicate(record)" ng-hide="schema=='endorsement'"><i class="fa fa-files-o"></i></button>
+                        <button ng-show="showAddButton()" title="Duplicate" type="button" class="btn btn-default" ng-click="askDuplicate(record)" ><i class="fa fa-files-o"></i></button>
                         <button title="Locked for edit" ng-show="isRequest(record) && showAddButton()" type="button" class="btn btn-default"><i class="glyphicon glyphicon-lock"></i></button>
                         <button title="Cancel request" ng-show="isRequest(record) && showAddButton()" type="button" class="btn btn-default" ng-click="askDeleteWorkflowRequest(record)"><i class="fa fa-undo"></i></button>
-                        <a title="Edit" ng-show="!isRequest(record) && showAddButton()" type="button" class="btn btn-default" href="/register/{{record.type|mapSchema}}/{{record.identifier}}/edit" ng-hide="schema=='endorsement'"><i class="fa fa-edit"></i></a>
+                        <a title="Edit" ng-show="!isRequest(record) && showAddButton()" type="button" class="btn btn-default" href="/register/{{record.type|mapSchema}}/{{record.identifier}}/edit" ><i class="fa fa-edit"></i></a>
                         <button title="Delete" ng-show="!isRequest(record) && showAddButton()" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
                     </div>
                 </td>
