@@ -1,13 +1,6 @@
 <div class="container-fluid record-metadata">
     <div class="row">
         <div class="col-xs-12">
-            <div ng-show="canEndorse()">
-                <button type="submit" class="btn btn-primary" ng-click="confirmEndorsement()" >Endorse this record</button>
-                <a class="btn btn-success" ng-click="loadEndorsments(identifier)" ng-href="#" >
-                    <i class="fa fa-refresh"  />
-                </a>
-            </div>
-
             <div id="divEndorsements" ng-show="endorsements && endorsements.length > 0">
                 <label>Government(s) that have endorsed this record</label>
 				<div class="km-value">
@@ -21,26 +14,4 @@
         </div>
     </div>
 
-    <div id="endorseRecordModal" class="modal fade" data-backdrop="static" >
-        <div class="modal-dialog" style="margin:auto">
-            <div class="modal-content" style="margin:auto">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4>Endorse record<i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
-                </div>
-                <div class="modal-body">
-
-                    <p>Are you sure you want to endorse this record?</p>
-                    <p>
-                         <div km-document-validation ng-model="validationReport"></div>
-                    </p>
-                </div>
-                <div class="modal-footer" style="margin-top:0">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-disable="loading">Cancel</button>
-                    <button ng-disabled="loading" type="button" ng-click="endorse()" class="btn btn-primary" ng-disable="loading">Yes</button>
-
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
