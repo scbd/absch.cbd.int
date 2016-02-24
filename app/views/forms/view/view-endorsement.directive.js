@@ -1,4 +1,4 @@
-define(['app', './record-loader.directive.html.js'], function (app) {
+define(['app', './record-loader.directive.html.js', '/app/js/common.js'], function (app) {
 
 app.directive("viewEndorsement", [function () {
 	return {
@@ -12,22 +12,17 @@ app.directive("viewEndorsement", [function () {
 			target  : "@linkTarget",
 			hide	: "@"
 		},
-		controller : ["$scope", 'IStorage', '$q', function ($scope, storage,$q)
+		controller : ["$scope", 'IStorage', '$q', 'commonjs', function ($scope, storage,$q, commonjs)
 		{
 
 			$scope.$watch('document', function(newVal){
-                if(newVal){
+                if(newVal && newVal.reference){
                     $scope.referenceDocument = {};
-                    var documentInfo = storage.documents.get(newVal.reference.identifier, {info:true});
-                    var document = storage.documents.get(newVal.reference.identifier);
-                    $q.all([document,documentInfo])
-                    .then(function(results){
-
-                        var document = results[0].data;
-                        document.info = results[1].data;
-
+                    $q.when(commonjs.loadReferenceDocument(newVal.reference.identifier))
+                    .then(function(document){
                         $scope.referenceDocument = document;
-                    });
+                    })
+
                 }
             });
 		}]

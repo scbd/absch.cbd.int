@@ -254,6 +254,20 @@ define(['app', 'underscore'], function(app, _) {
                     });
                 };
 
+                this.loadReferenceDocument = function(identifier){
+
+                    var documentInfo = storage.documents.get(identifier, {info:true});
+                    var document = storage.documents.get(identifier);
+
+                    return $q.all([document,documentInfo])
+                            .then(function(results){
+                                var document = results[0].data;
+                                document.info = results[1].data;
+
+                                return document;
+                            });
+                };
+
 
                 function isNPParty(entity) {
 
