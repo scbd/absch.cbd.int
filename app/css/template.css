@@ -1076,9 +1076,12 @@ footer .logo {
 /*for the new search*/
     
     
-    .recordDefault{margin-bottom: 10px;padding:0 10px;
+    .recordDefault{
+        margin-bottom: 10px;
+        padding:5px;
         border-left:3px #428bca solid;
         cursor:pointer;
+ 
     }
 
     div.recordDefault:hover{background-color: white!important;}
@@ -1088,16 +1091,25 @@ footer .logo {
      }
     .recordDefault .schema, #national-records-country .schema,  #result-grouped-national-record .type{
         text-transform: uppercase;
-        font-size:10px;
+        font-size:12px;
         font-weight:bold;
         display:inline!important;
-     
         padding-right:6px;
     }
      #national-records-country .schema{
          padding-bottom:5px!important;
-         font-size:12px;
+         font-size:14px;
+         padding-top:20px;
      }
+     
+      #national-records-country .schemaTitle{
+         padding-bottom:5px!important;
+         font-size:14px;
+         padding-top:10px;
+         font-weight: 500;
+          text-transform: uppercase;
+     }
+     
     .recordDefault .date{
         color:#333;
         text-transform: uppercase;
@@ -1105,7 +1117,7 @@ footer .logo {
     }
     .recordDefault .title{
         color:#111;
-        font-size:12px;
+        font-size:14px;
         padding:0 10px 0 10px;
         display:inline!important;
     }
@@ -1113,19 +1125,19 @@ footer .logo {
     
     #result-grouped-national-record .title{
         color:#111;
-        font-size:12px;
+        font-size:14px;
         padding:0 6px 0 0;
         display:inline!important;
     }
     .recordDefault .description{
         color:#444;
-        font-size:12px;
+        font-size:14px;
         margin:0;
         padding:0;
     }
     #result-grouped-national-record .description{
         color:#444;
-        font-size:12px;
+        font-size:14px;
         margin:0;
         padding:0;
     }
@@ -1161,20 +1173,18 @@ footer .logo {
    {padding:0!important;margin:0!important;border:0!important;}
 
 .card {
-  background: #fff;
+  background-color: #eee;
   border-radius: 0;
-  
 }
 
 .card-1 {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   transition: all 0.1s ease-in-out;
-
 }
 
 .card-1:hover {
+  background-color: #EEE!important;
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-
 }
 
 .card-2 {
@@ -1192,3 +1202,62 @@ footer .logo {
 .card-5 {
   box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 }
+
+/************************************************************************/
+
+ #Search-Filter .check {
+            color: #333;
+        }
+
+ #Search-Filter .filter {
+            color: #555;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+ #Search-Filter .check:hover,
+ #Search-Filter .filter:hover {
+            color: #000;
+        }
+
+ #Search-Filter hr.heading {
+            border-color: #bbb!important;
+            margin: 5px 0 10px 0;
+            padding: 0;
+        }
+  #Search-Filter div.heading {
+            padding: 25px 0 0 0;
+        }
+               
+ #Search-Filter .heading > .filter {
+            font-weight: bold;
+            font-size: 16px;
+            border-color: #bbb!important;
+
+        }
+
+ #Search-Filter .badge {
+            font-size: 10px;
+            background-color: #b1b1b1!important;
+            display: none;
+        }
+
+ #Search-Filter hr {
+            margin: 0;
+            padding: 0;
+            border-color: #DDD;
+        }
+
+ #Search-Filter .helpinfo {
+            padding: 0;
+            margin: 0;
+            color: #818181;
+            margin-bottom:5px;
+        }
+#Search-Filter .fa-info-circle{
+    color:#9f9f9f;
+    }
+    
+ #Search-Filter .noTopPadding{
+    padding:0!important;
+    }

@@ -1,7 +1,7 @@
 <div id="national-records-country">
     <h4>{{name}} <span class="badge">{{numFound}}</span></h4>
     <div ng-repeat="doc in docs">
-        <span class="schema color-darkgrey"  ng-if="doc.schema_s != docs[$index-1].schema_s ">{{doc.schema_s | schemaNamePlural}} <span class="schema color-blue">({{doc.schema_s | schemaShortName}})</span></span>
+        <div class="schemaTitle color-darkgrey" ng-if="doc.schema_s != docs[$index-1].schema_s ">{{doc.schema_s | schemaNamePlural}} <span class="schema color-blue">({{doc.schema_s | schemaShortName}})</span></div>
         <result-grouped-national-record doc='doc'></result-grouped-national-record>
     </div>
 </div>

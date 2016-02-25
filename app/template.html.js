@@ -19,7 +19,7 @@ define(['app', 'underscore', 'ng-breadcrumbs',
                 text: ""
             };
 
-            $scope.showHelp = showHelp.value;
+         
 
 
             // $scope.goHome               = function() { $location.path('/'); };

@@ -1,6 +1,7 @@
 define(['app', 'underscore', '/app/js/common.js',
 '/app/services/search-service.js',
-'/app/views/search-new/search-filters/schema-filters.js',
+'/app/views/search-new/search-filters/national-filters.js',
+'/app/views/search-new/search-filters/reference-filters.js',
 '/app/views/search-new/search-results/result-default.js',
 '/app/views/search-new/search-results/national-records-country.js',
 ], function(app, _) {
@@ -11,7 +12,7 @@ define(['app', 'underscore', '/app/js/common.js',
             replace: true,
             // transclude: true,
             templateUrl: '/app/views/search-new/search-directive.html',
-            controller: ['$scope','$q', 'realm', 'searchService',function($scope, $q, realm, searchService) {
+            controller: ['$scope','$q', 'realm', 'searchService' ,function($scope, $q, realm, searchService) {
     
                     var queryCanceler = null;
                     $scope.rawDocs = [];
@@ -19,18 +20,21 @@ define(['app', 'underscore', '/app/js/common.js',
                     $scope.scbdDocs = [];
                     
                     $scope.refresh = false;
+                
+                    $scope.searchFilters = {};
                     
-                    $scope.searchFilters = [];
+             
                    
                     //*************************************************************************************************************************************
                     function addFilter(filterID, filterInfo ) {
-                           $scope.searchFilters.push(filterID);
+                        //    $scope.searchFilters.push(filterID);
                            $scope.searchFilters[filterID] = filterInfo; 
                     };
                     
                     //*************************************************************************************************************************************         
                     function load(){
-                         nationalQuery();
+                        nationalQuery();
+                        loadFilters()
                     }
                                         
                     //*************************************************************************************************************************************
@@ -41,6 +45,10 @@ define(['app', 'underscore', '/app/js/common.js',
                     
                      //*************************************************************************************************************************************
                     function isFilterOn(filter) {
+                           
+                          if(filter == undefined) 
+                            return false;
+                           
                            return $scope.searchFilters[filter].value;
                     };
                     
@@ -187,9 +195,37 @@ define(['app', 'underscore', '/app/js/common.js',
 
                     };
                     
+                    //*************************************************************************************************************************************
+                    function loadFilters() {
+                       //national
+                        addFilter('nationalRecords', {'filterSort':1, 'sort': 0, 'type':'national', 'value':false,  'name':'National Records', 'id':'nationalRecords', 'description':'National records are published by Governments and include national information relevant for the implementation of the Nagoya Protocol as well as information Parties are obliged to provide in accordance with the Protocol.'});
+                        addFilter('nfp',  {'filterSort':1,'sort': 1,'type':'national', 'value':false, 'name':'ABS National Focal Point', 'id':'nfp', 'description':'Institution designated to liaise with the Secretariat and make available information on procedures for accessing genetic resources and establishing mutually agreed terms, including information on competent national authorities, relevant indigenous and local communities and relevant stakeholders (Article 13.1).'});
+                        addFilter('cna',  {'filterSort':1,'sort': 2,'type':'national', 'value':false, 'name':'Competent National Authorities', 'id':'cna', 'description':'Entities designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)'});
+                        addFilter('msr',  {'filterSort':1,'sort': 3,'type':'national', 'value':false, 'name':'Legislative, administrative or policy measures', 'id':'msr', 'description':'Measures adopted at domestic level to implement the access and benefit-sharing obligations of the Convention or/and the Nagoya Protocol.'});
+                        addFilter('ndb',  {'filterSort':1,'sort': 4,'type':'national', 'value':false, 'name':'National Websites and Databases', 'id':'ndb', 'description':'Information and links to national websites or databases which are relevant for ABS.'});
+                        addFilter('ircc', {'filterSort':1,'sort': 5,'type':'national', 'value':false, 'name':'Internationally Recognized Certificate of Compliance', 'id':'ircc', 'description':'Certificate constituted from the information on the permit or its equivalent registered in the ABS Clearing-House, serving as evidence that the genetic resource which it covers has been accessed in accordance with prior informed consent and that mutually agreed terms have been established. It contains the minimum necessary information to allow monitoring the utilization of genetic resources by users throughout the value chain (Article 17).'});
+                        addFilter('cp',   {'filterSort':1,'sort': 6,'type':'national', 'value':false, 'name':'Checkpoints', 'id':'cp', 'description':'Entities designated by Parties to effectively collect or receive relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms and/or to the utilization of genetic resources, as appropriate (Article 17, 1(a) (i)).'});
+                        addFilter('cpc',  {'filterSort':1,'sort': 7,'type':'national', 'value':false, 'name':'Checkpoint Communiqués ', 'id':'cpc', 'description':'A summary of the information collected or received by a checkpoint related to prior informed consent, to the source of the genetic resource, to the establishment  utilization of genetic resources and registered in the ABS Clearing-House (Article 17.1 (a)).'});
+                        
+                        
+                        //reference
+                        addFilter('referenceRecords', {'filterSort':2, 'sort': 0,'value':false, type:'reference', 'name':'Reference Records', 'id':'referenceRecords', 'description':'Reference records include a number of ABS relevant resources and information. They can be submitted by any registered user of the ABS Clearing-House (Parties, Non-Parties, governments, international organizations, indigenous and local communities, and relevant stakeholders.' });
+                        addFilter('vlr', {'filterSort':2,'sort': 1,'value':false, type:'reference', 'name':'Virtual Library Records ', 'id':'vlr', 'description':'The virtual library in the ABS Clearing-House general literature submitted by any registered user of the ABS Clearing-House.'});
+                        addFilter('mcc', {'filterSort':2,'sort': 2,'value':false, type:'reference', 'name':'Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standard', 'id':'mcc', 'description':'Model contractual clauses are addressed in Article 19 of the Protocol. They can assist in the development of agreements that are consistent with ABS requirements and may reduce transaction costs while promoting legal certainty and transparency.'});
+                        addFilter('coc', {'filterSort':2,'sort': 3,'value':false, type:'reference', 'name':'Community Protocols and Procedures and Customary Laws', 'id':'coc', 'description':'Codes of Conduct, Guidelines, Best Practices and/or Standards are addressed in Article 20 of the Protocol.They may assist users to undertake their activities in a manner that is consistent with ABS requirements while also taking into account the practices of different sectors.'});
+                        addFilter('cpp', {'filterSort':2,'sort': 4,'value':false, type:'reference', 'name':'Community Protocols and Procedures and Customary Laws', 'id':'cpp', 'description':'Community protocols and procedures and customary laws are addressed in Article 12 of the Protocol. They can help other actors to understand and respect the community’s procedures and values with respect to access and benefit-sharing.'});
+                        addFilter('cbi', {'filterSort':2,'sort': 5,'value':false, type:'reference', 'name':'Capacity Building Initiatives', 'id':'cbi', 'description':''});
+                        addFilter('cbr', {'filterSort':2,'sort': 6,'value':false, type:'reference', 'name':'Capacity Building Resources', 'id':'cbr', 'description':''});
+                        
+                        
+                        //SCBD
+                        addFilter('scbdRecords', {'filterSort':3,'sort': 0,'type':'scbd', 'value':false, 'name':'SCBD Managed Records', 'id':'scbdRecords', 'description':''});
+                        addFilter('nw',  {'filterSort':3,'sort': 1,'type':'scbd', 'value':false, 'name':'ABS National Focal Point', 'id':'nfp', 'description':'Institution designated to liaise with the Secretariat and make available information on procedures for accessing genetic resources and establishing mutually agreed terms, including information on competent national authorities, relevant indigenous and local communities and relevant stakeholders (Article 13.1).'});
+                        addFilter('mt',  {'filterSort':3,'sort': 2,'type':'scbd', 'value':false, 'name':'Competent National Authorities', 'id':'cna', 'description':'Entities designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)'});
+                        addFilter('pr',  {'filterSort':3,'sort': 3,'type':'scbd', 'value':false, 'name':'Legislative, administrative or policy measures', 'id':'msr', 'description':'Measures adopted at domestic level to implement the access and benefit-sharing obligations of the Convention or/and the Nagoya Protocol.'});
+                    };
                     
-                    
-                    this.load = load;
+                    //this.load = load;
                     this.addFilter = addFilter;
                     this.saveFilter = saveFilter;
                     this.nationalQuery = nationalQuery;
@@ -197,7 +233,7 @@ define(['app', 'underscore', '/app/js/common.js',
                     this.scbdQuery = scbdQuery;
                     this.isFilterOn = isFilterOn;
                     
-                  
+                    load();
                     
                     //*************************************************************************************************************************************
                     $scope.$watch('refresh', function(){

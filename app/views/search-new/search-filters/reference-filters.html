@@ -1,0 +1,116 @@
+<div id="Search-ReferenceFilters">
+    <style>
+        #Search-ReferenceFilters .check {
+            color: #fa6938;
+        }
+
+        #Search-ReferenceFilters .filter {
+            color: #555;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        #Search-ReferenceFilters .check:hover,
+        #Search-ReferenceFilters .filter:hover {
+            color: #000;
+        }
+
+        #Search-ReferenceFilters h3 {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        #Search-ReferenceFilters .badge {
+            font-size: 10px;
+            background-color: #b1b1b1!important;
+            display: none;
+        }
+
+        #Search-ReferenceFilters hr {
+            margin: 5px 0 3px 0;
+            padding: 0;
+        }
+
+        #Search-ReferenceFilters .helpinfo {
+            padding: 0;
+            margin: 0;
+            color: #818181;
+        }
+    </style>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h3 style="padding:0; margin:0;">
+                <a class="filter" ng-click="saveFilter('nationalRecords')">
+                    <i class="fa check" ng-class="{'fa-check-square':isFilterOn('nationalRecords'),'fa-square':!isFilterOn('nationalRecords')}"></i> Reference records </a>
+            </h3>
+            <p class="helpinfo"><i class="fa fa-info-circle"></i> Reference records include a number of ABS relevant resources and information. They can be submitted by any registered user of the ABS Clearing-House (Parties, Non-Parties, governments, international organizations, indigenous and local communities, and relevant stakeholders.</p>
+            <hr>
+        </div>
+        <div class="col-md-12">
+            <div>
+                <a class="filter" ng-click="saveFilter('nfp')">
+                    <i class="fa check" ng-class="{'fa-check-square':isFilterOn('nfp'),'fa-square':!isFilterOn('nfp')}"></i> ABS National Focal Points (NFP)
+                    <span class="badge">100</span>
+                </a>
+                <p class="helpinfo"><i class="fa fa-info-circle"></i> Institution designated to liaise with the Secretariat and make available information on procedures for accessing genetic resources and establishing mutually agreed terms, including information on competent
+                    national authorities, relevant indigenous and local communities and relevant stakeholders (Article 13.1).
+                </p>
+            </div>
+            <hr>
+            <div>
+                <a class="filter" ng-click="saveFilter('cna')">
+                    <i class="fa check" ng-class="{'fa-check-square':isFilterOn('cna'),'fa-square':!isFilterOn('cna')}"></i> Compentent National Authorities (CNA)
+                    <span class="badge">100</span>
+                </a>
+                <p class="helpinfo"><i class="fa fa-info-circle"></i> Entities designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access
+                    requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)</p>
+            </div>
+            <hr>
+            <div>
+                <a class="filter" ng-click="saveFilter('msr')">
+                    <i class="fa check" ng-class="{'fa-check-square':isFilterOn('msr'),'fa-square':!isFilterOn('msr')}"></i> Legislative, administrative or policy measures (MSR)
+                    <span class="badge">100</span>
+                </a>
+                <p class="helpinfo"><i class="fa fa-info-circle"></i> Measures adopted at domestic level to implement the access and benefit-sharing obligations of the Convention or/and the Nagoya Protocol.</p>
+            </div>
+            <hr>
+            <div>
+                <a class="filter" ng-click="saveFilter('ndb')">
+                    <i class="fa check" ng-class="{'fa-check-square':isFilterOn('ndb'),'fa-square':!isFilterOn('ndb')}"></i> National Websites and Databases (NDB)
+                    <span class="badge">100</span>
+                </a>
+                <p class="helpinfo"><i class="fa fa-info-circle"></i> Information and links to national websites or databases which are relevant for ABS.</p>
+            </div>
+            <hr>
+            <div>
+                <a class="filter" ng-click="saveFilter('ircc')">
+                    <i class="fa check" ng-class="{'fa-check-square':isFilterOn('ircc'),'fa-square':!isFilterOn('ircc')}"></i> Internationally Recognized Certificate of Compliance (IRCC)
+                    <span class="badge">100</span>
+                </a>
+                <p class="helpinfo"><i class="fa fa-info-circle"></i> Certificate constituted from the information on the permit or its equivalent registered in the ABS Clearing-House, serving as evidence that the genetic resource which it covers has been accessed in accordance
+                    with prior informed consent and that mutually agreed terms have been established. It contains the minimum necessary information to allow monitoring the utilization of genetic resources by users throughout the value chain (Article 17).</p>
+            </div>
+            <hr>
+            <div>
+                <a class="filter" ng-click="saveFilter('cp')">
+                    <i class="fa check" ng-class="{'fa-check-square':isFilterOn('cp'),'fa-square':!isFilterOn('cp')}"></i> Checkpoints (CP)
+                    <span class="badge">100</span>
+                </a>
+                <p class="helpinfo"><i class="fa fa-info-circle"></i> Entities designated by Parties to effectively collect or receive relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms
+                    and/or to the utilization of genetic resources, as appropriate (Article 17, 1(a) (i)).</p>
+            </div>
+            <hr>
+            <div>
+                <a class="filter" ng-click="saveFilter('cpc')">
+                    <i class="fa check" ng-class="{'fa-check-square':isFilterOn('cpc'),'fa-square':!isFilterOn('cpc')}"></i> Checkpoint Communiqués (CPC)
+                    <span class="badge">100</span>
+                </a>
+                <p class="helpinfo"><i class="fa fa-info-circle"></i> A summary of the information collected or received by a checkpoint related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms and/or to the
+                    utilization of genetic resources and registered in the ABS Clearing-House (Article 17.1 (a)).</p>
+            </div>
+
+
+        </div>
+    </div>
+</div>

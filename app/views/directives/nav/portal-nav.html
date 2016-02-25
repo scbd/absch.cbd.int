@@ -3,6 +3,9 @@
             .navbar-nav>li {
                 float: left;
             }
+            .helpOn{color:#FFF}
+            .helpOff{color:#333;}
+            /*.helpinfo{display:{{showHelp ? block : none}};}*/
     </style>
     <nav id="PortalLinks1" class="navbar navbar-links navbar-default navbar-static-top" >
         <div class="container-fluid container-links color-grey">
@@ -44,8 +47,7 @@
                         </a>
                     </li>
                     <li class="last pull-right">
-                        <a href="/help" ng-class="{'link-active' : getClass('/help')}">
-                            <span>&nbsp;Help</span>
+                        <a ng-click="toggleHelp();"> <i class="fa fa-info-circle" ng-class="{'helpOn':showHelp ,'helpOff':!showHelp }"></i> </i> 
                         </a>
                     </li>
                     <li class="pull-right" ng-if="training_env||development_env"><a href="/forums" ng-class="{'link-active' : getClass('/forums')}"><i class="fa fa-comments"></i><span class="hidden-xs hidden-sm">&nbsp;Forums</span></a></li>
