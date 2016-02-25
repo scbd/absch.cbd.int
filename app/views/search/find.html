@@ -281,6 +281,42 @@
 
                     </div>
                 </a>
+                <a href="#" class="list-group-item" class="bold"  ng-click="navigateTo('/search/reference-records/CBI', $event)" style="cursor:pointer;">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-xs-10">
+                                    <h4 class="color-orange">
+                                        Capacity-building Initiatives (CBI)
+                                    </h4>
+                                </div>
+                                <div class="col-xs-2">
+                                    <span class="badge pull-right" style="position:relative;top:10px;">{{capacityBuildingInitiative.facetCount}}</span>
+                                </div>
+                            </div>
+                            <p ></p>
+                        </div>
+
+                    </div>
+                </a>
+                <a href="#" class="list-group-item" class="bold"  ng-click="navigateTo('/search/reference-records/CBR', $event)" style="cursor:pointer;">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-xs-10">
+                                    <h4 class="color-orange">
+                                        Capacity-building Resources (CBR)
+                                    </h4>
+                                </div>
+                                <div class="col-xs-2">
+                                    <span class="badge pull-right" style="position:relative;top:10px;">{{capacityBuildingResource.facetCount}}</span>
+                                </div>
+                            </div>
+                            <p ></p>
+                        </div>
+
+                    </div>
+                </a>
                 <a style="padding:10px 5px 5px 5px;color:#bbb;font-weight:bold;font-size:12px;">Related SCBD records</a>
                 <a href="#" class="list-group-item" class="bold"  ng-click="navigateTo('/search/reference-records/NEWS', $event)" style="cursor:pointer;">
                     <h4>News <span class="badge pull-right">{{news.facetCount}} </span></h4>

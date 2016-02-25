@@ -11,10 +11,12 @@
 	'../forms/view/view-organization.directive.js',
 	'../forms/view/view-organization-reference.directive.js',
 	'../forms/view/view-resource.directive.js',
-	'../forms/view/record-loader.directive.html.js'
+	'../forms/view/record-loader.directive.html.js',
+	'../forms/view/view-capacity-building-initiative.directive.js',
+	'../forms/view/view-capacity-building-resource.directive.js'
 ], function (app) {
 
-app.controller("TaskIdActivityController", [ "$scope", "$timeout", "$http", "$route", "$location", "IStorage", "IWorkflows", "authentication", "underscore", function ($scope, $timeout, $http, $route, $location, IStorage, IWorkflows, authentication, _) 
+app.controller("TaskIdActivityController", [ "$scope", "$timeout", "$http", "$route", "$location", "IStorage", "IWorkflows", "authentication", "underscore", function ($scope, $timeout, $http, $route, $location, IStorage, IWorkflows, authentication, _)
 {
 	//==================================================
 	//
@@ -44,7 +46,7 @@ app.controller("TaskIdActivityController", [ "$scope", "$timeout", "$http", "$ro
 			console.log($scope.activity);
 		});
 	}
-	
+
 	load();
 
 	//==================================================
@@ -56,7 +58,7 @@ app.controller("TaskIdActivityController", [ "$scope", "$timeout", "$http", "$ro
 		IWorkflows.updateActivity($scope.workflow._id, $scope.activity.name, resultData).then(function(){
 
 			$location.path("/register/tasks/"+$scope.workflow._id)
-			
+
 		}).catch(function(error) {
 			alert(error);
 		});

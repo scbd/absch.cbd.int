@@ -12,9 +12,11 @@
 	'../forms/view/view-organization-reference.directive.js',
 	'../forms/view/view-resource.directive.js',
 	'../forms/view/record-loader.directive.html.js',
+	'../forms/view/view-capacity-building-initiative.directive.js',
+	'../forms/view/view-capacity-building-resource.directive.js'
 ], function (app) {
 
-app.controller("TaskIdController", [ "$scope", "$timeout", "$http", "$route", "IStorage", "IWorkflows", "authentication", "underscore", function ($scope, $timeout, $http, $route, IStorage, IWorkflows, authentication, _) 
+app.controller("TaskIdController", [ "$scope", "$timeout", "$http", "$route", "IStorage", "IWorkflows", "authentication", "underscore", function ($scope, $timeout, $http, $route, IStorage, IWorkflows, authentication, _)
 {
 	//==================================================
 	//
@@ -33,7 +35,7 @@ app.controller("TaskIdController", [ "$scope", "$timeout", "$http", "$route", "I
 			}
 		});
 	}
-	
+
 	load();
 
 	//==================================================

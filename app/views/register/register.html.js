@@ -74,7 +74,7 @@ define(['app','linqjs', 'angular-localizer',
 		},
 	  	'Reference Records': {
 		'title': 'Reference Records',
-		'formats': ['resource', 'modelContractualClause', 'communityProtocol'],
+		'formats': ['resource', 'modelContractualClause', 'communityProtocol', 'capacityBuildingInitiative', 'capacityBuildingResource'],
 		'roles':[$scope.$root.getRoleName('AbsPublishingAuthorities'), $scope.$root.getRoleName('abschiac'),$scope.$root.getRoleName('AbsNationalAuthorizedUser'),
 				 $scope.$root.getRoleName('AbsNationalFocalPoint'),$scope.$root.getRoleName('AbsAdministrator'),$scope.$root.getRoleName('Administrator'),
 				 $scope.$root.getRoleName('User')]
@@ -203,7 +203,19 @@ define(['app','linqjs', 'angular-localizer',
         title: 'Community protocols and procedures and customary laws',
         help: '',
         tips: [],
-      }
+	},
+	capacityBuildingResource : {
+		abbreviation: 'CBR',schemaType:"referenceRecords",
+		title: 'capacityBuildingResource',
+		help: '',
+		tips: [],
+	},
+	capacityBuildingInitiative:{
+		abbreviation: 'CBI',schemaType:"referenceRecords",
+		title: 'capacityBuildingInitiative',
+		help: '',
+		tips: [],
+	}
 
     };
 
@@ -229,10 +241,12 @@ define(['app','linqjs', 'angular-localizer',
       {"schema":"absNationalReport","schemaType":"nationalRecords", "header": "NR","draftCount":0,"requestCount":0,"publishCount": 0},
       {"schema":"modelContractualClause","schemaType":"referenceRecords", "header": "A19A20","draftCount":0,"requestCount":0,"publishCount": 0},
       {"schema":"communityProtocol","schemaType":"referenceRecords", "header": "CPP","draftCount":0,"requestCount":0,"publishCount": 0},
+	  {"schema":"capacitybuildingresource","schemaType":"referenceRecords", "header": "CBR","draftCount":0,"requestCount":0,"publishCount": 0},
+	  {"schema":"capacityBuildingInitiative","schemaType":"referenceRecords", "header": "CBI","draftCount":0,"requestCount":0,"publishCount": 0},
 
-	{"schema":"completedTasks","schemaType":"others", "requestCount":0},
-	{"schema":"pendingTasks","schemaType":"others", "requestCount": 0},
-	{"schema":"urgentTasks","schemaType":"others", "requestCount": 0}
+	  {"schema":"completedTasks","schemaType":"others", "requestCount":0},
+	  {"schema":"pendingTasks","schemaType":"others", "requestCount": 0},
+	  {"schema":"urgentTasks","schemaType":"others", "requestCount": 0}
 
     ];
 
