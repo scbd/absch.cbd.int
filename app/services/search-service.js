@@ -1,6 +1,6 @@
 define(['app', 'underscore'], function (app, _) {
 
-    app.factory('searchService', ['$http', '$q', function ($http, $q) {
+    app.factory('searchService', ['$http', '$q', 'realm',  function ($http, $q, realm) {
         return new function () {
 
             var searchDefaults = {
@@ -9,17 +9,18 @@ define(['app', 'underscore'], function (app, _) {
                 sort            : 'createdDate_dt desc',
                 fields          : 'identifier_s, title_t, description_t',
                 query           : '*:*',
-
-                groupSort       :   'government_EN_t',
-                groupField      :   'government_EN_t asc'
+                groupSort       : 'government_EN_t',
+                groupField      : 'government_EN_t asc'
             }
-
+           var q = '(realm_ss:' + realm.value.toLowerCase() + ') AND NOT version_s:*';
+            
+           //*****************************************************************************************************************
             this.list = function(searchQuery, queryCanceler){
 
                _.defaults(searchQuery, searchDefaults);
 
                var queryListParameters = {
-                    'q': searchQuery.query,
+                    'q': q + searchQuery.query,
                     'sort': searchQuery.sort,
                     'fl': searchQuery.fields,
                     'wt': 'json',
@@ -30,12 +31,13 @@ define(['app', 'underscore'], function (app, _) {
                 return $http.get('/api/v2013/index/select', { params: queryListParameters, timeout: queryCanceler });
             }
 
+            //*****************************************************************************************************************
             this.group = function(searchQuery, queryCanceler){
 
                _.defaults(searchQuery, searchDefaults);
-
+               
                var queryGroupParameters = {
-                    'q': searchQuery.query + ' AND government_s:*',
+                    'q': q + searchQuery.query + ' AND government_s:* ',
                     'sort': searchQuery.sort,
                     'fl': searchQuery.fields,
                     'wt': 'json',
@@ -51,6 +53,7 @@ define(['app', 'underscore'], function (app, _) {
                 return $http.get('/api/v2013/index/select', { params: queryGroupParameters, timeout: queryCanceler });
             }
 
+            //*****************************************************************************************************************
             this.facets = function(facetQuery){
 
                _.defaults(facetQuery, searchDefaults);
@@ -75,7 +78,6 @@ define(['app', 'underscore'], function (app, _) {
                         _.each(facetQuery.fields, function(facet){
                             facets[facet] = readFacets2(data.data.facet_counts.facet_fields[facet]);
                         });
-//console.log(facets);
                         return facets;
                     })
                 }

@@ -50,8 +50,8 @@
 }
 
 .navbar-portal{
-    min-height:100px;
-    padding-top:15px;
+    min-height:40px;
+    padding-top:10px;
     margin-bottom:0;
     border:0;
     z-index:90;
