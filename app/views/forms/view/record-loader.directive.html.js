@@ -1,26 +1,8 @@
 define(['app',
-	'./view-abs-checkpoint.directive.js',
-    './view-abs-checkpoint-communique.directive.js',
-    './view-abs-permit.directive.js',
-    './view-authority.directive.js',
-    './view-authority-reference.directive.js',
-    './view-contact.directive.js',
-    './view-contact-reference.directive.js',
-    './view-database.directive.js',
-    './view-measure.directive.js',
-    './view-organization.directive.js',
-    './view-organization-reference.directive.js',
-    './view-resource.directive.js',
-    './view-focalpoint.directive.html.js',
-    './view-meeting.directive.html.js',
-    './view-statement.directive.html.js',
-    './view-pressrelease.directive.html.js',
-    './view-notification.directive.html.js',
+	'scbd-angularjs-filters',
 	'./view-history-directive.html.js',
     '/app/js/common.js',
     '/app/views/directives/document-metadata-directive.html.js',
-	'/app/views/forms/view/view-news.directive.html.js',
-	'/app/views/forms/view/view-abs-national-report.directive.js',
 	'/app/views/directives/help-directive.html.js',
     ], function (app) {
 app.directive('recordLoader', [function () {
@@ -42,17 +24,44 @@ app.directive('recordLoader', [function () {
 			$scope.internalDocument     = undefined;
 			$scope.internalDocumentInfo = undefined;
 
-			$scope.$watch("document", function(_new) {
-				$scope.error = null;
-				$scope.internalDocument = _new;
-
-			});
-
 			if(!$scope.document)
 				$scope.init();
 		},
-		controller: ['$scope', "$route", 'IStorage', "authentication", "$q", "$location", "commonjs","$timeout","$filter","$http","$http","realm",
-			function ($scope, $route, storage, authentication, $q, $location,commonjs,$timeout, $filter, $http, $httpAWS, realm) {
+		controller: ['$scope', "$route", 'IStorage', "authentication", "$q", "$location", "commonjs","$timeout",
+		"$filter","$http","$http","realm", "$element", '$compile',
+			function ($scope, $route, storage, authentication, $q, $location,
+				commonjs,$timeout, $filter, $http, $httpAWS, realm, $element, $compile) {
+				var schemaMapping = {
+					news 				       : '/app/views/forms/view/view-news.directive.html.js',
+					absNationalReport 	       : '/app/views/forms/view/view-abs-national-report.directive.js',
+					absCheckpoint		       : '/app/views/forms/view/view-abs-checkpoint.directive.js',
+				    absCheckpointCommunique    : '/app/views/forms/view/view-abs-checkpoint-communique.directive.js',
+				    absPermit			       : '/app/views/forms/view/view-abs-permit.directive.js',
+				    authority			       : '/app/views/forms/view/view-authority.directive.js',
+				    authorityReference	       : '/app/views/forms/view/view-authority-reference.directive.js',
+				    contact				       : '/app/views/forms/view/view-contact.directive.js',
+				    contactReference	       : '/app/views/forms/view/view-contact-reference.directive.js',
+				    database			       : '/app/views/forms/view/view-database.directive.js',
+				    measure				       : '/app/views/forms/view/view-measure.directive.js',
+				    organization		       : '/app/views/forms/view/view-organization.directive.js',
+				    organizationReference      : '/app/views/forms/view/view-organization-reference.directive.js',
+				    resource			       : '/app/views/forms/view/view-resource.directive.js',
+				    focalPoint			       : '/app/views/forms/view/view-focalpoint.directive.html.js',
+				    meeting				       : '/app/views/forms/view/view-meeting.directive.html.js',
+				    statement			       : '/app/views/forms/view/view-statement.directive.html.js',
+				    pressRelease		       : '/app/views/forms/view/view-pressrelease.directive.html.js',
+				    notification		       : '/app/views/forms/view/view-notification.directive.html.js',
+					capacityBuildingInitiative : '/app/views/forms/view/view-capacity-building-initiative.directive.html.js',
+					capacityBuildingResource   : '/app/views/forms/view/view-capacity-building-resource.directive.html.js'
+				}
+
+			$scope.$watch("document", function(_new) {
+				$scope.error = null;
+				$scope.internalDocument = _new;
+				if($scope.internalDocument){
+					loadViewDirective($scope.internalDocument.schema || $scope.internalDocument.header.schema)
+				}
+			});
 
 			//==================================
 			//
@@ -114,14 +123,13 @@ app.directive('recordLoader', [function () {
 				{
 					commonjs.getReferenceRecordIndex(documentSchema,documentID).then(function(data){
 						$scope.internalDocument = data.data;
-					//console.log($scope.internalDocument );
 					});
+					loadViewDirective(documentSchema);
 				}
 				else if (documentID){
-					console.log(documentID);
 					$scope.load(documentID,documentRevision);
 				}
-			}
+			};
 
 			$scope.timeLaspe = 20;
 			function closeWindow(){
@@ -176,6 +184,7 @@ app.directive('recordLoader', [function () {
 					else
 						$scope.revisionNo  = $scope.documentVersionCount
 
+					loadViewDirective($scope.internalDocument.header.schema);
 
 				}).then(null, function(error) {
 					//debugger;
@@ -265,8 +274,45 @@ app.directive('recordLoader', [function () {
 
 					$scope.loadDocument(evtData.schema,evtData.documentId);
 				}
+				if($scope.document){
+					loadViewDirective(evtData.schema)
+				}
 
 			});
+
+			function loadViewDirective(schema){
+
+				if(!schema)
+					return;
+
+				var lschema = _.clone(schema);
+
+				if(schema.toLowerCase() == 'modelcontractualclause' || schema.toLowerCase() == 'communityprotocol')
+					lschema = 'resource';
+
+				var schemaDetails = schemaMapping[lschema];
+
+				require([schemaDetails], function() {
+					var name = snake_case(lschema);
+					var directiveHtml =
+						"<DIRECTIVE ng-show='internalDocument' ng-model='internalDocument' document-info='internalDocumentInfo' locale='getLocale()' link-target={{linkTarget}}></DIRECTIVE>"
+						.replace(/DIRECTIVE/g, 'view-' + name);
+
+                    $scope.$apply(function() {
+						$element.find('#schemaView')
+							.empty()
+                            .append($compile(directiveHtml)($scope));
+                    });
+                });
+
+			}
+			function snake_case(name, separator) {
+
+			  separator = separator || '-';
+			  return name.replace(/[A-Z]/g, function(letter, pos) {
+			    return (pos ? separator : '') + letter.toLowerCase();
+			  });
+			}
 
 		}]
 	}

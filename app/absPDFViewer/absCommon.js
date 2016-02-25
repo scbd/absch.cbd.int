@@ -251,21 +251,23 @@ app.filter("schemaShortName", [function() {
 
 	return function( schame ) {
 
-		if(schame.toLowerCase() =="focalpoint"				) return "NFP";
-		if(schame.toLowerCase() =="authority"				) return "CNA";
-		if(schame.toLowerCase() =="contact"					) return "CON";
-		if(schame.toLowerCase() =="database"				) return "NDB";
-		if(schame.toLowerCase() =="resource"				) return "VLR";
-		if(schame.toLowerCase() =="organization"			) return "ORG";
-		if(schame.toLowerCase() =="measure" 				) return "MSR";
-		if(schame.toLowerCase() =="abscheckpoint"			) return "CP";
-		if(schame.toLowerCase() =="abscheckpointcommunique"	) return "CPC";
-		if(schame.toLowerCase() =="abspermit"				) return "IRCC";
-		if(schame.toLowerCase() =="statement"				) return "ST";
-		if(schame.toLowerCase() =="notification"			) return "NT";
-		if(schame.toLowerCase() =="meeting"					) return "MT";
-		if(schame.toLowerCase() =="pressrelease"			) return "PR";
-		if(schame.toLowerCase() =="meetingdocument"    		) return "MTD";
+		if(schame.toLowerCase() =="focalpoint"				  ) return "NFP";
+		if(schame.toLowerCase() =="authority"				  ) return "CNA";
+		if(schame.toLowerCase() =="contact"					  ) return "CON";
+		if(schame.toLowerCase() =="database"				  ) return "NDB";
+		if(schame.toLowerCase() =="resource"				  ) return "VLR";
+		if(schame.toLowerCase() =="organization"			  ) return "ORG";
+		if(schame.toLowerCase() =="measure" 				  ) return "MSR";
+		if(schame.toLowerCase() =="abscheckpoint"			  ) return "CP";
+		if(schame.toLowerCase() =="abscheckpointcommunique"	  ) return "CPC";
+		if(schame.toLowerCase() =="abspermit"				  ) return "IRCC";
+		if(schame.toLowerCase() =="statement"				  ) return "ST";
+		if(schame.toLowerCase() =="notification"			  ) return "NT";
+		if(schame.toLowerCase() =="meeting"					  ) return "MT";
+		if(schame.toLowerCase() =="pressrelease"			  ) return "PR";
+		if(schame.toLowerCase() =="meetingdocument"    		  ) return "MTD";
+		if(schame.toLowerCase() =="capacitybuildinginitiative") return "CBI";
+		if(schame.toLowerCase() =="capacitybuildingresource"  ) return "CBR";
 
 
 		return schame;

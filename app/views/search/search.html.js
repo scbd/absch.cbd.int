@@ -196,7 +196,7 @@ define(['app','underscore','/app/js/common.js',
 
                 if(!$scope.schemas) {
                     var schemas = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database","focalPoint",
-                                    "resource", "meeting", "notification","pressRelease","statement" , "news", "modelContractualClause", "communityProtocol"];
+                                    "resource", "meeting", "notification","pressRelease","statement" , "news", "modelContractualClause", "communityProtocol", "capacitybuildinginitiative", "capacityBuildingResource"];
 
                     var facetQuery = {
                         query  : '(realm_ss:' + realm.value.toLowerCase() + ') AND NOT version_s:* AND (schema_s:(' +

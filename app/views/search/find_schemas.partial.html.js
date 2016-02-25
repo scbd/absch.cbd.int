@@ -182,7 +182,7 @@ app.directive('searchFilterSchemas', function ($http) {
                     //$scope.query = '*:*';
 
                     var nationalSchema = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database","focalPoint"];
-                    var referenceSchema= [ "resource", "meeting", "notification","pressRelease","statement" , "news", "modelContractualClause"];
+                    var referenceSchema= [ "resource", "meeting", "notification","pressRelease","statement" , "news", "modelContractualClause", "capacityBuildingInitiative", "capacityBuildingResource"];
 
                     var q = '(realm_ss:' + realm.value.toLowerCase() + ') AND NOT version_s:*';
                     var schema = nationalSchema;
@@ -422,11 +422,14 @@ app.directive('searchFilterSchemas', function ($http) {
                                                             { name: 'cppresourceTypes',   type: 'multiselect' , field: 'resourceTypes_ss'}
                                                         ]
                                              }
+            $scope.capacityBuildingInitiative = { identifier: 'capacityBuildingInitiative', title: 'Capacity-building Initiatives', type:'reference'};
+            $scope.capacityBuildingResource   = { identifier: 'capacityBuildingResource', title: 'Capacity-building Resources', type:'reference'};
 
 
             $scope.terms  = [ $scope.focalPoint, $scope.authority, $scope.database, $scope.measure, $scope.absPermit, $scope.absCheckpoint,
                               $scope.absCheckpointCommunique, $scope.resource, $scope.organization, $scope.meeting, $scope.notification,
-                              $scope.pressRelease, $scope.statement, $scope.news, $scope.modelContractualClause, $scope.communityProtocol ];
+                              $scope.pressRelease, $scope.statement, $scope.news, $scope.modelContractualClause, $scope.communityProtocol,
+                              $scope.capacityBuildingInitiative, $scope.capacityBuildingResource];
             $scope.termsx = dictionarize($scope.terms);
 
             // Set intitial selection from QueryString parameters

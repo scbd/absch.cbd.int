@@ -390,6 +390,21 @@ label{width:100%;}
                                 </div>
                             </div>
 
+                            <div  ng-class="{'check_active': capacityBuildingInitiative.selected}" style="padding:5px 0;border-bottom:1px solid #ddd;">
+                                <div layout="row" id="rrCBI" >
+                                    <div> <input type="checkbox" ng-model="capacityBuildingInitiative.selected" bind-indeterminate="communityProtocol.indeterminate" ng-change="refresh(capacityBuildingInitiative.selected,'capacityBuildingInitiative')"></div>
+                                    <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': capacityBuildingInitiative.selected==false}">Capacity-building Initiatives</span></div>
+                                    <div> <span class="badge badge-white pull-right">{{capacityBuildingInitiative.count}}</span></div>
+                                </div>
+                            </div>
+
+                            <div  ng-class="{'check_active': capacityBuildingResource.selected}" style="padding:5px 0;border-bottom:1px solid #ddd;">
+                                <div layout="row" id="rrCBR" >
+                                    <div> <input type="checkbox" ng-model="capacityBuildingResource.selected" bind-indeterminate="capacityBuildingResource.indeterminate" ng-change="refresh(capacityBuildingResource.selected,'capacityBuildingResource')"></div>
+                                    <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': capacityBuildingResource.selected==false}">Capacity-building Resources</span></div>
+                                    <div> <span class="badge badge-white pull-right">{{capacityBuildingResource.count}}</span></div>
+                                </div>
+                            </div>
                             <div  ng-class="{'check_active': meeting.selected}" style="padding:5px 0;border-bottom:1px solid #ddd;">
                                 <div layout="row" id="rrMeetings" >
                                     <div> <input type="checkbox" ng-model="meeting.selected" bind-indeterminate="meeting.indeterminate" ng-change="refresh(meeting.selected,'meeting')"></div>

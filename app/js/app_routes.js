@@ -3,7 +3,9 @@
 define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 'filters', 'realm-configuration'], function (app) {
 
     app.value("realm", {value:"ABS"});
-    app.value("schemaTypes", [ "absNationalReport", "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "resource", "modelContractualClause", "communityProtocol" ]);
+    app.value("schemaTypes", [ "absNationalReport", "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority",
+     "measure", "database", "resource", "modelContractualClause", "communityProtocol", "capacityBuildingInitiative", "capacityBuildingResource"]);
+
     app.value("showHelp", {value:{ 'show':true, 'glossary':true, 'showTour':false, 'hasTour':false}});
 
     app.config(['extendedRouteProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
@@ -24,7 +26,7 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
             when('/help/register',               { templateUrl: '/app/views/help/register/register.html',           label:'Submitting Information',             resolveController: true, resolveUser: true}).
 
             when('/partners/idlo/events',              { templateUrl: '/app/views/partners/idlo.html',           label:'IDLO',             resolveController: false, resolveUser: false}).
-    
+
 
             when('/forums',                        { templateUrl: '/app/views/forums/forum-list-view.html',         label:'Forums',       resolveController: true, resolveUser: true }).
 
@@ -95,11 +97,11 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
             when('/register/:document_type/help',                       {templateUrl: '/app/views/register/register.html',          label:'document_type',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/register/type_document_list.html',}).
             when('/register/:document_type/:identifier/edit',           {templateUrl: '/app/views/register/register.html',          label:'Edit',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/forms/edit/edit--', }).
             when('/register/:document_type/:identifier/edit/:tour',     {templateUrl: '/app/views/register/register.html',          label:'Edit',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/forms/edit/edit--',  }).
-            
+
             when('/submit/tasks/:id',                                 {templateUrl: '/app/views/tasks/tasks-id.html',             label:'Management Center',  param:'true', resolveController: true, resolveUser: true}).
             when('/submit/tasks/:id/:activity',                       {templateUrl: '/app/views/tasks/tasks-id-activity.html',    label:'Management Center',  param:'true', resolveController: true, resolveUser: true}).
-            when('/submit/dashboard',                                 {templateUrl: '/app/views/register/register.html',          label:'Management Center',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/register/dashboard.html',}).  
-            
+            when('/submit/dashboard',                                 {templateUrl: '/app/views/register/register.html',          label:'Management Center',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/register/dashboard.html',}).
+
             when('/submit',                                           {templateUrl: '/app/views/register/register.html',          label:'Management Center',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/register/dashboard.html',}).
             when('/submit/requests',                                  {templateUrl: '/app/views/register/register.html',          label:'Requests',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',    type : 'all'}).
             when('/submit/requests/:workflowId',                      {templateUrl: '/app/views/register/register.html',          label:'Requests',  param:'true', resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',type : 'all'}).

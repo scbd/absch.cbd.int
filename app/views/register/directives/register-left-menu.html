@@ -1,0 +1,145 @@
+<div>
+
+    <div class="bg-white md-whiteframe-z1">
+
+        <div class="bg-medgrey">
+            <h3 class="md-toolbar-tools color-white"><a href="/dashboard">Management Center</a></h3>
+        </div>
+
+        <div>
+
+            <div id="document__links">
+
+                <div class="bg-none" style="margin-bottom:20px;">
+                    <!-- <div style="font-size:16;font-weight:bold;">Legend</div> -->
+                    <span class="label label-success">&nbsp;</span> Published records
+                    <br>
+                    <span class="label label-default">&nbsp;</span> Draft records
+                    <br>
+                    <span class="label label-danger">&nbsp;</span> Records waiting approval
+
+                </div>
+
+                <div>
+
+                    <a href="/register/requests" role="button">
+                        <div class="btn-commonformat" ng-class="{ 'btn-commonformat-selected' : subTemplateUrl=='/app/views/tasks/my-tasks.directive.html'}" style="cursor:pointer;">
+
+
+                            <div class="btn-commonformat-national" style="text-transform:uppercase;">
+                                <span class="color-grey">
+                                    <i class="fa fa-retweet" style="font-size:16pt;position:relative;top:3px;"></i>&nbsp;Requests</span>
+                            </div>
+                            <div style="padding-top:5px;" class="color-grey">Records submitted for publishing</div>
+
+
+                            <hr style="padding-top:5px;" ng-show="facets('urgentTasks','request')">
+                            <div class="bg-red" style="color:white;padding:3px;" ng-show="facets('urgentTasks','request')">
+                                <a href="/register/requests/" href="#" role="button" style="color:white;">
+                                    <span class="badge" style="position:relative;top:-1px;">{{facets('urgentTasks','request')}}</span>
+                                    Request(s) awaiting your approval
+                                </a>
+                            </div>
+
+
+                        </div>
+                    </a>
+
+
+
+                    <div id="menuPlaceholder"></div>
+                    <div id="referenceRecords">
+                        <h3 class="special-font btn-commonformat-header-reference">
+                            Reference Records
+                        </h3>
+                        <div ng-click="gotoList($event,'resource')" role="button" style="cursor:pointer;">
+                            <div class="btn-commonformat" ng-class="{'btn-commonformat-reference-selected' : document_type == 'resource'}">
+                                <div class="btn-commonformat-reference">
+                                    <i class="material-icons" style="font-size:16pt;position:relative;top:3px;">
+                                        {{'resource' | schemaIcon }}</i> VLR
+                                    <div class="pull-right" style="text-align:right; width:180px;padding-right:0px;position:relative;top:0px;">
+                                        <span ng-show="facets('resource','publish') > 0" class="label label-success" style="margin: 0 0 0 1px;"> {{facets('resource','publish')}}</span>
+                                        <span ng-show="facets('resource','draft') > 0" class="label label-default" style="margin: 0 0 0 1px;"> {{facets('resource','draft')}}</span>
+                                        <span ng-show="facets('resource','request') > 0" class="label label-danger" style="margin: 0 0 0 1px;"> {{facets('resource','request')}}</span>
+                                        <span ng-click="gotoNew($event,'resource')" class="label color-blue bg-litegrey" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i> </span>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="clearfix btn-commonformat-name"> Virtual Library Record </div>
+                            </div>
+                        </div>
+                        <div ng-click="gotoList($event,'modelContractualClause')" role="button" style="cursor:pointer;">
+                            <div class="btn-commonformat" ng-class="{'btn-commonformat-reference-selected' : document_type=='modelContractualClause'}">
+                                <div class="btn-commonformat-reference">
+                                    <i class="material-icons" style="font-size:16pt;position:relative;top:3px;">
+                                        {{'modelContractualClause' | schemaIcon }}</i> A19A20
+                                    <div class="pull-right" style="text-align:right; width:180px;padding-right:0px;position:relative;top:0px;">
+                                        <span ng-show="facets('modelContractualClause','publish') > 0" class="label label-success" style="margin: 0 0 0 1px;"> {{facets('modelContractualClause','publish')}}</span>
+                                        <span ng-show="facets('modelContractualClause','draft') > 0" class="label label-default" style="margin: 0 0 0 1px;"> {{facets('modelContractualClause','draft')}}</span>
+                                        <span ng-show="facets('modelContractualClause','request') > 0" class="label label-danger" style="margin: 0 0 0 1px;"> {{facets('modelContractualClause','request')}}</span>
+                                        <span ng-click="gotoNew($event,'modelContractualClause')" class="label color-blue bg-litegrey" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i> </span>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="clearfix btn-commonformat-name"> Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards </div>
+                            </div>
+                        </div>
+                        <div ng-click="gotoList($event,'communityProtocol')" role="button" style="cursor:pointer;">
+                            <div class="btn-commonformat" ng-class="{'btn-commonformat-reference-selected' : document_type =='communityProtocol'}">
+                                <div class="btn-commonformat-reference">
+                                    <i class="material-icons" style="font-size:16pt;position:relative;top:3px;">
+                                        {{'communityProtocol' | schemaIcon }}</i> CPP
+                                    <div class="pull-right" style="text-align:right; width:180px;padding-right:0px;position:relative;top:0px;">
+                                        <span ng-show="facets('communityProtocol','publish') > 0" class="label label-success" style="margin: 0 0 0 1px;"> {{facets('communityProtocol','publish')}}</span>
+                                        <span ng-show="facets('communityProtocol','draft') > 0" class="label label-default" style="margin: 0 0 0 1px;"> {{facets('communityProtocol','draft')}}</span>
+                                        <span ng-show="facets('communityProtocol','request') > 0" class="label label-danger" style="margin: 0 0 0 1px;"> {{facets('communityProtocol','request')}}</span>
+                                        <span ng-click="gotoNew($event,'communityProtocol')" class="label color-blue bg-litegrey" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i> </span>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="clearfix btn-commonformat-name"> Community protocols and procedures and customary laws </div>
+                            </div>
+                        </div>
+
+                        <div ng-click="gotoList($event,'capacityBuildingInitiative')" role="button" style="cursor:pointer;">
+                            <div class="btn-commonformat" ng-class="{'btn-commonformat-reference-selected' : document_type =='capacityBuildingInitiative'}">
+                                <div class="btn-commonformat-reference">
+                                    <i class="material-icons" style="font-size:16pt;position:relative;top:3px;">
+                                        {{'capacityBuildingInitiative' | schemaIcon }}</i> CBI
+                                    <div class="pull-right" style="text-align:right; width:180px;padding-right:0px;position:relative;top:0px;">
+                                        <span ng-show="facets('capacityBuildingInitiative','publish') > 0" class="label label-success" style="margin: 0 0 0 1px;"> {{facets('capacityBuildingInitiative','publish')}}</span>
+                                        <span ng-show="facets('capacityBuildingInitiative','draft') > 0" class="label label-default" style="margin: 0 0 0 1px;"> {{facets('capacityBuildingInitiative','draft')}}</span>
+                                        <span ng-show="facets('capacityBuildingInitiative','request') > 0" class="label label-danger" style="margin: 0 0 0 1px;"> {{facets('capacityBuildingInitiative','request')}}</span>
+                                        <span ng-click="gotoNew($event,'capacityBuildingInitiative')" class="label color-blue bg-litegrey" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i> </span>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="clearfix btn-commonformat-name"> Capacity-building Initiatives </div>
+                            </div>
+                        </div>
+
+                        <div ng-click="gotoList($event,'capacityBuildingResource')" role="button" style="cursor:pointer;">
+                            <div class="btn-commonformat" ng-class="{'btn-commonformat-reference-selected' : document_type =='capacityBuildingResource'}">
+                                <div class="btn-commonformat-reference">
+                                    <i class="material-icons" style="font-size:16pt;position:relative;top:3px;">
+                                        {{'capacityBuildingResource' | schemaIcon }}</i> CBR
+                                    <div class="pull-right" style="text-align:right; width:180px;padding-right:0px;position:relative;top:0px;">
+                                        <span ng-show="facets('capacityBuildingResource','publish') > 0" class="label label-success" style="margin: 0 0 0 1px;"> {{facets('capacityBuildingResource','publish')}}</span>
+                                        <span ng-show="facets('capacityBuildingResource','draft') > 0" class="label label-default" style="margin: 0 0 0 1px;"> {{facets('capacityBuildingResource','draft')}}</span>
+                                        <span ng-show="facets('capacityBuildingResource','request') > 0" class="label label-danger" style="margin: 0 0 0 1px;"> {{facets('capacityBuildingResource','request')}}</span>
+                                        <span ng-click="gotoNew($event,'capacityBuildingResource')" class="label color-blue bg-litegrey" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i> </span>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="clearfix btn-commonformat-name"> Capacity-building Resources </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
