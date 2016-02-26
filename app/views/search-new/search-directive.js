@@ -36,6 +36,7 @@ define(['app', 'underscore', '/app/js/common.js',
                     //*************************************************************************************************************************************
                     $scope.updateCurrentTab = function(tabname) {
                            $scope.currentTab = tabname;
+                            $scope.showFilters= false;
                     };
                    
                     //*************************************************************************************************************************************
@@ -193,7 +194,7 @@ define(['app', 'underscore', '/app/js/common.js',
                         
                         var listQuery = {
                             query       : q,
-                            sort        : _.isEmpty($scope.setFilters) ? 'updatedDate_dt desc' : '',
+                            sort        : 'updatedDate_dt desc',
                             fields      : base_fields + en_fields,
                             currentPage : $scope.currentPage,
                             itemsPerPage: $scope.itemsPerPage
@@ -215,34 +216,42 @@ define(['app', 'underscore', '/app/js/common.js',
                      
                     //*****************************************************************************************************************
                     function queryFilterBuilder(queryType){
-                        var q ="";
+                        var qAnd=[];
+                        var qOr =[];
+                        var q   ='';
                         
                         if(queryType === 'national'){
                               //schema
-                              q = q + buildFieldQuery('schema_s', 'national', natSchemas, "AND");
-                              q = q + buildFieldQuery('government_s', 'country', "*", "AND");
+                              qAnd.push(buildFieldQuery('schema_s', 'national', natSchemas));
+                              qAnd.push(buildFieldQuery('government_s', 'country', "*"));
                         }
                         
                         if(queryType === 'reference'){
                                //schema
-                               q = q + buildFieldQuery('schema_s','reference', refSchemas, "AND");
+                               qAnd.push(buildFieldQuery('schema_s','reference', refSchemas));
                                
-                               q = q + buildTextQuery('text_EN_txt','country', "10", "AND (", null);
-                               q = q + buildTextQuery('text_EN_txt','national', "10", "AND (", null);
-                               q = q + buildFieldQuery('regions_REL_ss','country', null, "OR", ")");
+                               qOr.push(buildTextQuery('text_EN_txt'   ,'national', "10"));
+                               qOr.push(buildTextQuery('text_EN_txt'    ,'country', "10"));
+                               qOr.push(buildFieldQuery('regions_REL_ss','country', null));
                         }
                         
                         if(queryType === 'scbd'){
                                //schema
-                               q = q + buildFieldQuery('schema_s','scbd', scbdSchemas,  "AND");
-                               q = q + buildTextQuery('title_t','country', "10", "AND (", null);
-                               q = q + buildTextQuery('description_t','country',"5", "OR", ")") ;
+                               qAnd.push(buildFieldQuery('schema_s','scbd', scbdSchemas));
+                               
+                               qOr.push(buildTextQuery('title_t'      ,'national'  , null));
+                               qOr.push(buildTextQuery('description_t','national'  , null));
+                               qOr.push(buildTextQuery('title_t'      ,'reference' , null));
+                               qOr.push(buildTextQuery('description_t','reference' , null));
+                               qOr.push(buildTextQuery('title_t'      ,'country'   , null));
+                               qOr.push(buildTextQuery('description_t','country'   , null));
                         }
 
-                        console.log(q);
+                        q = combineQuery(qAnd, "AND", "AND");
+                        q = q + " AND " +  combineQuery(qOr, "OR", "OR");
                         $scope.test = q;
                         
-                        return q;
+                        return " AND " + q;
                      };
                      
                      //*****************************************************************************************************************
@@ -251,7 +260,7 @@ define(['app', 'underscore', '/app/js/common.js',
                     }
                     
                     //*****************************************************************************************************************
-                    function buildTextQuery(field, type, boost, before, after){
+                    function buildTextQuery(field, type, boost){
                         
                         var q = '';
                         var values = [];
@@ -259,21 +268,17 @@ define(['app', 'underscore', '/app/js/common.js',
                         if($scope.setFilters){
                             _.each($scope.setFilters, function(item){
                                 if(item.type == type){
-                                    values.push("'" + $scope.searchFilters[item.id].name + "'");
+                                    values.push($scope.searchFilters[item.id].name);
                                 } 
                             });
                             if(values.length)
                                 q = addORCondition(field, values, boost)
                         }    
-                       if(q)
-                            return (before ? " " + before + " " : " ") + q + (after ? " " + after + " " : " ");
-                       else 
-                            return '';
-                        
+                       return  q ? q : null; 
                     }
 
                     //*****************************************************************************************************************
-                    function buildFieldQuery(field, type, allFilters, before, after){
+                    function buildFieldQuery(field, type, allFilters){
                         var q = ''; 
                         
                         if($scope.setFilters[type])
@@ -286,14 +291,15 @@ define(['app', 'underscore', '/app/js/common.js',
                             });
                         } 
                         if(q)    
-                             return (before ? " " + before + " " : " ") + (field + ":(" + q + ")") + (after ? " " + after + " " : " ");
+                             return field + ":(" + q + ")";
                         else if(allFilters)
-                             return (before ? " " + before + " " : " ") + field + ":(" + allFilters + ")" + (after ? " " + after + " " : " ");
+                             return field + ":(" + allFilters + ")";
                         else 
-                             return '';
+                             return null;
                       
                     }
-                            
+                          
+   
                     //*****************************************************************************************************************
                     function addORCondition(field, values, boost){
                         var q ="";
@@ -301,8 +307,14 @@ define(['app', 'underscore', '/app/js/common.js',
                         _.each(values, function (val){conditions.push("("+field+":"+val + ")" + (boost ? "^" + boost : ""))});
                         _.each(conditions, function (condition) { q = q + (q=='' ? '( ' : ' OR ') + condition; });
                         q = q +")";
-                        console.log(q);
                         return q;
+                    }
+                    
+                    //*****************************************************************************************************************
+                    function combineQuery(qCondition, op1, op2 ){
+                        var q ='';
+                        _.each(qCondition, function (val){ if(val) q = q + (q ? " "+op1+" " : " ") + "(" + val + ")" } );
+                        return q ? q : '';
                     }
                     
                     //*************************************************************************************************************************************
