@@ -1,12 +1,13 @@
 define(['app','underscore',
-  'scbd-map/zoom-map',
+  'scbd-map/zoom-map', '/app/js/common.js',
   'scbd-angularjs-services/locale',
   'css!/app/libs/flag-icon-css/css/flag-icon.min.css',
-  'css!./country-profile',
+  'css!./country-profile','./country-profile-directive.html.js'
 ], function(app, _) {
 
-  app.controller("countryProfileController", ["$scope","$route", "$http", "$timeout", "$location","locale",
-    function($scope,$route, $http, $timeout, $location,locale) {
+  app.controller("countryProfileController",
+  ["$scope","$route", "$http", "$timeout", "$location","locale", 'ammap3Service', 'commonjs',
+    function($scope,$route, $http, $timeout, $location,locale, ammap3Service,commonjs) {
       $scope.code      = $route.current.params.code;
 
 
@@ -21,14 +22,24 @@ define(['app','underscore',
 
 
       });
-      // ammap3Service.zoomToMapArea('zoom-map-country', $scope.code);
-      // ammap3Service.setCountryClickListener('zoom-map-country',
-      //   function(event) {
-      //     if(event.mapObject.id != $scope.zoomTo)
-      //     $timeout(function(){
-      //         $location.url('/countries/'+event.mapObject.id.toLowerCase());
-      //     });
-      //   });
+      commonjs.getCountries().then(function(countries){
+          ammap3Service.eachCountry('zoom-map-country', function(mapCountry){
+            var countryDetails = _.findWhere(countries, {code : mapCountry.id});
+            if(countryDetails){
+                if(countryDetails.isNPInbetweenParty)
+                    mapCountry.colorReal= "#5cb85c";
+                else if(countryDetails.isNPParty)
+                    mapCountry.colorReal= "#337ab7";
+                else if(countryDetails.isCBDParty)
+                    mapCountry.colorReal= "#999";
+                else
+                    mapCountry.colorReal= "#FFF";
+            }
+            else
+                mapCountry.colorReal= "#FFF";
+          });
+      });
+
     }
   ]);
 

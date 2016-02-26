@@ -41,6 +41,8 @@ define(['text!./home-map.html',
 
 
 
+
+
       }, //link
 
       //=======================================================================
@@ -71,7 +73,7 @@ define(['text!./home-map.html',
 
                   calculateListViewFacets();
                   ammap3Service.loadCountries('index-map', $scope.countries);
-
+                  applyCountryColors();
                 })
                 .then(function() {
                   $scope.loading = false;
@@ -82,7 +84,10 @@ define(['text!./home-map.html',
           } //loadCountryMapDetails
           //====================================================
           function calculateListViewFacets() {
-
+              var numParty=0;
+              var numNonParty=0;
+              var numRatified=0;
+              var numSignatory=0;
             _.each($scope.countries, function(country) {
               // country.NFP     = undefined;// country.NDB     = undefined;// country.CNA     = undefined;// country.MSR     = undefined;// country.IRCC    = undefined;// country.CP      = undefined;// country.CPC     = undefined;// country.Total     = undefined;
               var countryFacet = _.where($scope.countryFacets["government_s,schema_s"], {
@@ -95,33 +100,42 @@ define(['text!./home-map.html',
                 });
                 country = normalizeCountryData(country);
               }
-
+              if(country.isNPParty)
+                numParty++;
+              else if(country.isNPRatified)
+                numRatified++;
+              else if(country.isNPSignatory)
+                numSignatory++;
+              else
+                numNonParty++;
             });
             $timeout(function(){
-              $scope.numParty=0;
-              $scope.numNonParty=0;
-              $scope.numRatified=0;
-              $scope.numSignatory=0;
-              _.each($scope.countries,function(country){
-// console.log(country);
-                if(country.isNPParty)
-                  $scope.numParty++;
-                else if(country.isNPRatified)
-                  $scope.numRatified++;
-                else if(country.isNPSignatory)
-                  $scope.numSignatory++;
-                else
-                  $scope.numNonParty++;
+              $scope.numParty=numParty;
+              $scope.numNonParty=numNonParty;
+              $scope.numRatified=numRatified;
+              $scope.numSignatory=numSignatory;
 
-              });
-// console.log('$scope.numParty',$scope.numParty);
-// console.log('$scope.numRatified',$scope.numRatified);
-// console.log('$scope.numSignatory',$scope.numSignatory);
-// console.log('$scope.numNonParty',$scope.numNonParty);
             });
 
           } //calculateListViewFacets
 
+          function applyCountryColors(){
+              ammap3Service.eachCountry('index-map', function(mapCountry){
+                var countryDetails = _.findWhere($scope.countries, {code : mapCountry.id});
+                if(countryDetails){
+                    if(countryDetails.isNPInbetweenParty)
+                        mapCountry.colorReal= "#5cb85c";
+                    else if(countryDetails.isNPParty)
+                        mapCountry.colorReal= "#337ab7";
+                    else if(countryDetails.isCBDParty)
+                        mapCountry.colorReal= "#999";
+                    else
+                        mapCountry.colorReal= "#FFF";
+                }
+                else
+                    mapCountry.colorReal= "#FFF";
+              });
+          }
           //====================================================
           function loadCountries() {
             $scope.loading = true;

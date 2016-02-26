@@ -5,7 +5,7 @@ define(['text!./search-map.html',
   'text!./pin-popup-abs.html',
   'css!./search-map',
   'scbd-map/ammap3',
-  'scbd-map/ammap3-service',
+  'scbd-map/ammap3-service', '/app/js/common.js'
 ], function(template, app, $, _, popoverTemplate) {
   'use strict';
 
@@ -19,7 +19,7 @@ define(['text!./search-map.html',
       //=======================================================================
       //
       //=======================================================================
-      controller: ["$scope", function($scope) {
+      controller: ["$scope", '$q', 'commonjs', function($scope, $q, commonjs) {
 
           // close all popovers on click anywhere
           ammap3Service.setGlobalClickListener('search-map',
@@ -35,6 +35,27 @@ define(['text!./search-map.html',
             function(event) {
               ammap3Service.openCountryPopup('search-map', event.mapObject.id); //pin, popup,
           });
+
+
+          commonjs.getCountries().then(function(countries){
+              ammap3Service.eachCountry('search-map', function(mapCountry){
+                var countryDetails = _.findWhere(countries, {code : mapCountry.id});
+                if(countryDetails){
+                    if(countryDetails.isNPInbetweenParty)
+                        mapCountry.colorReal= "#5cb85c";
+                    else if(countryDetails.isNPParty)
+                        mapCountry.colorReal= "#337ab7";
+                    else if(countryDetails.isCBDParty)
+                        mapCountry.colorReal= "#999";
+                    else
+                        mapCountry.colorReal= "#FFF";
+                }
+                else
+                    mapCountry.colorReal= "#FFF";
+              });
+          });
+
+
         }] //controlerr
     }; //return
   }]); //directive
