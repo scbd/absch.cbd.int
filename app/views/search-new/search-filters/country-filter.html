@@ -1,5 +1,30 @@
-<div>
-    country filter
+<div id="Search-Filter"  >
+   
+     <span class="country-heading">Countries</span>
+     
+     <a ng-href="#" ng-click="setCountryFilter('All')" style="padding-right:10px;" class="letter" ng-class="{'letter-active':!countryFilter && !partyFilter}" >All</a>
+     <span ng-repeat="letter in alphabet">
+          <a ng-href="#" ng-click="setCountryFilter(letter)" class="letter" ng-class="{'letter-active':countryFilter == letter}">{{letter}}</a>
+     </span>
+    <a ng-href="#" ng-click="setPartyFilter('party')" style="padding-left:10px;" class="letter" ng-class="{'letter-active':partyFilter == 'party'}">Parties</a>
+    <a ng-href="#" ng-click="setPartyFilter('nonparty')" style="padding-left:10px;" class="letter" ng-class="{'letter-active':partyFilter == 'nonparty'}" >non-Parties</a> 
     
-    {{searchFilters}}
+    <hr class="heading" />
+    <div style="max-height:400px;overflow: scroll;">
+        <div ng-repeat="doc in countries | filter:searchDirectiveCtrl.searchKeyword | orderBy:'name'"> 
+
+            <div ng-if="showCountry(doc)">
+            <a class="filter"  ng-click="saveFilter(doc.id)" >
+                <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i> 
+                <span ng-class="{'color-blue': doc.isNPParty}">{{doc.name}}</span>
+            </a>
+            <p class="helpinfo" ><i class="fa fa-info-circle helpicon"></i> 
+                <span ng-class="{'color-blue': doc.isNPParty}">
+                   {{doc.isNPParty ? "Party to the Nagoya Protocol since " : "Non-Party"}} 
+                    <span class="date" ng-if="doc.entryIntoForce">{{doc.entryIntoForce | formatDate}}</span>
+                </span>
+            </p>
+            </div>
+        </div>
+   </div>
 </div>

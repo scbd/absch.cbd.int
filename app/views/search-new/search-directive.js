@@ -18,17 +18,20 @@ define(['app', 'underscore', '/app/js/common.js',
                     $scope.rawDocs = [];
                     $scope.refDocs = [];
                     $scope.scbdDocs = [];
-                    var natSchemas = ["absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "focalPoint"];
-                    var refSchemas = ["modelContractualClause", "communityProtocol", "capacityBuildingInitiative", "capacityBuildingResource"];
-                    var scbdSchemas = ["meeting", "notification", "pressRelease", "statement", "news"]; 
+                    var natSchemas = ["absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint"];
+                    var refSchemas = ["modelContractualClause communityProtocol capacityBuildingInitiative capacityBuildingResource"];
+                    var scbdSchemas = ["meeting notification pressRelease statement news"]; 
                     $scope.currentTab = "nationalRecords";
                     $scope.refresh = false;
                     var refresh_nat = true;
                     var refresh_ref = true;
                     var refresh_scbd = true;
-                    $scope.countries= [];
-                
+                    $scope.countries = [];
+                    $scope.searchKeyword = '';
                     $scope.searchFilters = {};
+                    $scope.setFilters = {};
+                    $scope.test = '';
+                    
                     
                     //*************************************************************************************************************************************
                     $scope.updateCurrentTab = function(tabname) {
@@ -38,7 +41,7 @@ define(['app', 'underscore', '/app/js/common.js',
                     //*************************************************************************************************************************************
                     function addFilter(filterID, filterInfo ) {
                           $scope.searchFilters[filterID] = filterInfo; 
-                          console.log(filterID);
+                          //console.log(filterID);
                     };
                     
                     //*************************************************************************************************************************************
@@ -49,10 +52,16 @@ define(['app', 'underscore', '/app/js/common.js',
                            return _.filter($scope.searchFilters, function(item){if(item.type === type) return item;});
                     };
                     
+                     //*************************************************************************************************************************************
+                   // function getSearchKeyWord() {
+                   //       return $scope.searchKeyword;
+                   // };
                                         
                     //*************************************************************************************************************************************
                     $scope.removeFilter = function(filter) {
-                            $scope.searchFilters[filter].value = false; 
+                            $scope.searchFilters[filter].value = false;
+                            delete $scope.setFilters[$scope.searchFilters[filter].id];
+
                             $scope.refresh=true;
                     };
                     
@@ -66,6 +75,13 @@ define(['app', 'underscore', '/app/js/common.js',
                     //*************************************************************************************************************************************
                     function saveFilter(filter) {
                         $scope.searchFilters[filter].value = !$scope.searchFilters[filter].value;
+                        
+                        if($scope.setFilters[$scope.searchFilters[filter].id] )
+                           delete $scope.setFilters[$scope.searchFilters[filter].id];
+                        else{
+                           $scope.setFilters[$scope.searchFilters[filter].id] = {type: $scope.searchFilters[filter].type, id:$scope.searchFilters[filter].id};
+                        }
+                        
                         $scope.refresh = true;
                     };
 
@@ -201,54 +217,92 @@ define(['app', 'underscore', '/app/js/common.js',
                     function queryFilterBuilder(queryType){
                         var q ="";
                         
+                        if(queryType === 'national'){
+                              //schema
+                              q = q + buildFieldQuery('schema_s', 'national', natSchemas, "AND");
+                              q = q + buildFieldQuery('government_s', 'country', "*", "AND");
+                        }
+                        
+                        if(queryType === 'reference'){
+                               //schema
+                               q = q + buildFieldQuery('schema_s','reference', refSchemas, "AND");
+                               
+                               q = q + buildTextQuery('text_EN_txt','country', "10", "AND (", null);
+                               q = q + buildTextQuery('text_EN_txt','national', "10", "AND (", null);
+                               q = q + buildFieldQuery('regions_REL_ss','country', null, "OR", ")");
+                        }
+                        
                         if(queryType === 'scbd'){
-                               q = q + buildSchemaQuery('scbd', scbdSchemas);
+                               //schema
+                               q = q + buildFieldQuery('schema_s','scbd', scbdSchemas,  "AND");
+                               q = q + buildTextQuery('title_t','country', "10", "AND (", null);
+                               q = q + buildTextQuery('description_t','country',"5", "OR", ")") ;
                         }
-                         if(queryType === 'national'){
-                               q = q + buildSchemaQuery('national', natSchemas);
-                        }
-                         if(queryType === 'reference'){
-                               q = q + buildSchemaQuery('reference', refSchemas);
-                        }
+
+                        console.log(q);
+                        $scope.test = q;
                         
                         return q;
                      };
-                    
+                     
+                     //*****************************************************************************************************************
+                    function checkSetFilters(type){
+                       return  _.find($scope.setFilters, function(item){if(item.type === type) return true;});
+                    }
                     
                     //*****************************************************************************************************************
-                    function buildSchemaQuery(type, schemas){
+                    function buildTextQuery(field, type, boost, before, after){
                         
-                        var q ="";
-                        var values =[];
+                        var q = '';
+                        var values = [];
                         
-                        if($scope.searchFilters[type].value)
-                            q = addORCondition("schema_s",schemas);
-                        else{
-                            _.each($scope.searchFilters, function(item){
-                                if(item.value && item.type ===type && item.sort !== 0){
-                                        values.push(item.id);
+                        if($scope.setFilters){
+                            _.each($scope.setFilters, function(item){
+                                if(item.type == type){
+                                    values.push("'" + $scope.searchFilters[item.id].name + "'");
                                 } 
                             });
-                            q =   addORCondition("schema_s",values);   
+                            if(values.length)
+                                q = addORCondition(field, values, boost)
                         }    
-                        
-                        if(values.length === 0 ) //none checked
-                            q =   addORCondition("schema_s",schemas);   
-                            
-                        return q;
+                       if(q)
+                            return (before ? " " + before + " " : " ") + q + (after ? " " + after + " " : " ");
+                       else 
+                            return '';
                         
                     }
-                               
-                    
+
                     //*****************************************************************************************************************
-                    function addORCondition(field, values){
-                        var query ="";
+                    function buildFieldQuery(field, type, allFilters, before, after){
+                        var q = ''; 
+                        
+                        if($scope.setFilters[type])
+                            q = field + ":(" + allFilters + ")"
+                        else{
+                            _.each($scope.setFilters, function(item){
+                                if(item.type == type){
+                                    q =  q + item.id + ' ';
+                                } 
+                            });
+                        } 
+                        if(q)    
+                             return (before ? " " + before + " " : " ") + (field + ":(" + q + ")") + (after ? " " + after + " " : " ");
+                        else if(allFilters)
+                             return (before ? " " + before + " " : " ") + field + ":(" + allFilters + ")" + (after ? " " + after + " " : " ");
+                        else 
+                             return '';
+                      
+                    }
+                            
+                    //*****************************************************************************************************************
+                    function addORCondition(field, values, boost){
+                        var q ="";
                         var conditions = [];
-                        _.each(values, function (val){conditions.push("("+field+":"+val+")")});
-                        _.each(conditions, function (condition) { query = query + (query=='' ? '( ' : ' OR ') + condition; });
-                        query = query +")";
-                        console.log(query);
-                        return query;
+                        _.each(values, function (val){conditions.push("("+field+":"+val + ")" + (boost ? "^" + boost : ""))});
+                        _.each(conditions, function (condition) { q = q + (q=='' ? '( ' : ' OR ') + condition; });
+                        q = q +")";
+                        console.log(q);
+                        return q;
                     }
                     
                     //*************************************************************************************************************************************
@@ -259,19 +313,17 @@ define(['app', 'underscore', '/app/js/common.js',
                     
                     //*************************************************************************************************************************************
                     function loadCountryFilters() {
-                        var countries={};
                         var i=1;
-                        $q.when(commonjs.getCountries(), function(data) {
-                            countries = data;
-                            
-                        });
-                        
-                         _.forEach(countries, function(country){
-                             
-                                addFilter('country', {'filterSort':4, 'sort': i, 'type':'country', 'value':false,  'name':country.name.en, 'id':country.code, 'description':'{"isCBDParty":'+ country.isCBDParty +',"isNPParty":'+country.isNPParty +',"isNPSignatory":'+ country.isNPSignatory +',"isNPRatified":'+ country.isNPRatified +',"isNPInbetweenParty":'+ country.isNPInbetweenParty +',"entryIntoForce":"'+ country.entryIntoForce +'"}'});
-                                
-                                i++;
-                         });
+                        if($scope.countries.length === 0){
+                            $q.when(commonjs.getCountries(), function(data) {
+                                $scope.countries = data;
+                                 
+                                 _.each($scope.countries, function(country, index){
+                                    addFilter(country.code.toLowerCase(), {'filterSort':4, 'sort': index, 'type':'country', 'value':false,  'name':country.name.en, 'id':country.code.toLowerCase(), 'description':'', "isCBDParty": country.isCBDParty,"isNPParty":country.isNPParty,"isNPSignatory": country.isNPSignatory,"isNPRatified": country.isNPRatified ,"isNPInbetweenParty":country.isNPInbetweenParty,"entryIntoForce": country.entryIntoForce});
+                                 }); 
+                           
+                            });
+                        }
                             
                     };
                     //*************************************************************************************************************************************
@@ -348,6 +400,7 @@ define(['app', 'underscore', '/app/js/common.js',
                     this.scbdQuery = scbdQuery;
                     this.isFilterOn = isFilterOn;
                     this.getSearchFilters = getSearchFilters;
+                   
                     
                     loadFilters();
                     
@@ -355,6 +408,12 @@ define(['app', 'underscore', '/app/js/common.js',
                     $scope.$watch('currentTab', function(){
                        load();
 				    });
+                    
+                    //*************************************************************************************************************************************
+                    $scope.$watch('searchKeyword', function(){
+                        this.searchKeyword = $scope.searchKeyword;
+				    });
+                    
                     
                     //*************************************************************************************************************************************
                     $scope.$watch('refresh', function(){

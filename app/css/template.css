@@ -1225,17 +1225,16 @@ footer .logo {
             margin: 5px 0 10px 0;
             padding: 0;
         }
-  #Search-Filter div.heading {
-            /*padding: 25px 0 0 0;*/
-        }
-               
- #Search-Filter .heading > .filter {
+    
+ #Search-Filter .heading > .filter , #Search-Filter  .country-heading{
             font-weight: bold;
             font-size: 16px;
             border-color: #bbb!important;
 
         }
-
+#Search-Filter  .country-heading{
+ padding-right:10px;   
+}
  #Search-Filter .badge {
             font-size: 10px;
             background-color: #b1b1b1!important;
@@ -1249,7 +1248,7 @@ footer .logo {
         }
 
  #Search-Filter .helpinfo {
-            padding: 0;
+            padding:0;
             margin: 0;
             color: #777;
             margin-bottom:5px;
@@ -1257,6 +1256,8 @@ footer .logo {
             font-weight:normal;
             line-height: 16px;
         }
+
+        
 #Search-Filter .fa-info-circle{
     color:#9f9f9f;
     }
@@ -1264,3 +1265,11 @@ footer .logo {
  #Search-Filter .noTopPadding{
     padding:0!important;
     }
+    
+#Search-Filter .letter-active{
+    font-weight: bold;
+    color:#111;
+}
+#Search-Filter .date{
+    text-transform: uppercase;
+}
