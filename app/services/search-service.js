@@ -6,7 +6,7 @@ define(['app', 'underscore'], function (app, _) {
             var searchDefaults = {
                 currentPage     : 0,
                 rowsPerPage     : 25,
-                sort            : 'createdDate_dt desc',
+                sort            : 'udpatedDate_dt desc',
                 fields          : 'identifier_s, title_t, description_t',
                 query           : '*:*',
                 groupSort       : 'government_EN_t',

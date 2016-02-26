@@ -152,7 +152,7 @@ define(['app', 'underscore', '/app/js/common.js',
                         
                         var listQuery = {
                             query       : q,
-                            sort        : 'updatedDate_dt desc',
+                            sort        : _.isEmpty($scope.setFilters) ? 'updatedDate_dt desc' : '',
                             fields      : base_fields + en_fields,
                             currentPage : $scope.currentPage,
                             itemsPerPage: $scope.itemsPerPage
@@ -193,7 +193,7 @@ define(['app', 'underscore', '/app/js/common.js',
                         
                         var listQuery = {
                             query       : q,
-                            sort        : 'updatedDate_dt desc',
+                            sort        : _.isEmpty($scope.setFilters) ? 'updatedDate_dt desc' : '',
                             fields      : base_fields + en_fields,
                             currentPage : $scope.currentPage,
                             itemsPerPage: $scope.itemsPerPage
