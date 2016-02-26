@@ -20,7 +20,7 @@ define(['app', 'underscore'], function (app, _) {
                _.defaults(searchQuery, searchDefaults);
 
                var queryListParameters = {
-                    'q': q + searchQuery.query,
+                    'q': q + ' AND ' +  searchQuery.query,
                     'sort': searchQuery.sort,
                     'fl': searchQuery.fields,
                     'wt': 'json',
@@ -37,7 +37,7 @@ define(['app', 'underscore'], function (app, _) {
                _.defaults(searchQuery, searchDefaults);
                
                var queryGroupParameters = {
-                    'q': q + searchQuery.query + ' AND government_s:* ',
+                    'q': q + ' AND ' + searchQuery.query + ' AND government_s:* ',
                     'sort': searchQuery.sort,
                     'fl': searchQuery.fields,
                     'wt': 'json',

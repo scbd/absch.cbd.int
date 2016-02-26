@@ -1,22 +1,19 @@
-define(['app', 'underscore', '/app/js/common.js',
-], function(app, _, $http) {
+define(['app'], function(app) {
 
-    app.directive('searchFilter', function($http) {
+    app.directive('schemaFilter', function() {
         return {
             restrict: 'EAC',
             replace: true,
             // transclude: true,
             require:'^searchDirective',
-            templateUrl: '/app/views/search-new/search-filters/search-filter.html',
+            templateUrl: '/app/views/search-new/search-filters/schema-filter.html',
             scope: {
-                doc:"=",
-                index:"="
+                type:"@"
             },
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
-                
+               $scope.searchFilters = searchDirectiveCtrl.getSearchFilters($scope.type);
                $scope.saveFilter = searchDirectiveCtrl.saveFilter;
                $scope.isFilterOn = searchDirectiveCtrl.isFilterOn;
-
             }//link
         };
     });
