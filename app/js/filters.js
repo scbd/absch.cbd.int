@@ -219,6 +219,7 @@ define(["app",'/app/js/common.js'], function (app) {
             if(schema.toLowerCase()=="meetingdocument"			 ) return "Meeting Documents";
             if(schema.toLowerCase()=="pressrelease"				 ) return "Press Releases";
 			if(schema.toLowerCase()=="news"						 ) return "News";
+            if(schema.toLowerCase()=="statmente"				 ) return "Statements";
 			if(schema.toLowerCase()=="absnationalreport"		 ) return "National Report";
 			if(schema.toLowerCase()=="modelcontractualclause"	 ) return "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards";
 			if(schema.toLowerCase()=="communityprotocol"		 ) return "Community protocols and procedures and customary laws";
@@ -255,6 +256,7 @@ define(["app",'/app/js/common.js'], function (app) {
             if(schema.toLowerCase()=="meetingdocument"			 ) return "Meeting Documents";
             if(schema.toLowerCase()=="pressrelease"				 ) return "Press Releases";
 			if(schema.toLowerCase()=="news"						 ) return "News";
+            if(schema.toLowerCase()=="statement"			     ) return "Statement";
 			if(schema.toLowerCase()=="absnationalreport"		 ) return "National Reports";
 			if(schema.toLowerCase()=="modelcontractualclause"	 ) return "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards";
 			if(schema.toLowerCase()=="communityprotocol"		 ) return "Community protocols and procedures and customary laws";
