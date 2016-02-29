@@ -136,6 +136,11 @@
 				<li ng-repeat="term in document.fundingSourceTypes">{{term | term:locale}}</li>
 			</ul>
 		</div>
+		<div ng-show="document.selfFundingInfo">
+			<label>Further information on funding</label>
+			<div class="km-value km-pre">{{document.selfFundingInfo | lstring:locale}}</div>
+		</div>
+
 
 		<div ng-show="document.coreFundingSources">
 			<label>Core funding-source(s)</label>
@@ -181,7 +186,7 @@
 
 
 		<div ng-show="document.absKeyAreas">
-			<legend>Access and Benefit Sharing Clearing-House (ABS-CH)</legend>
+			<legend>Subjects</legend>
 
 			<label>Key areas and strategic measures for capacity-building and development</label>
 			<ul class="km-value">

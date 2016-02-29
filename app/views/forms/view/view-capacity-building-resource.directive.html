@@ -5,8 +5,13 @@
 		</h4>
     </div>
 	<div class="record-body panel-body">
-
-		<h2>{{document.title | lstring:locale}}</h2>
+		<legend>General Information</legend>
+		<div ng-show="document.title">
+			<label>Title</label>
+			<span class="km-value">
+				{{document.title | lstring:locale}}
+			</span>
+		</div>
 
 		<div ng-show="document.resourceTypes">
 			<label>Type of resource</label>
