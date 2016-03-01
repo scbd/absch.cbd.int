@@ -1,4 +1,4 @@
-define(['app'], function (app) {
+define(['app', 'underscore'], function (app, _) {
 
 app.directive("viewCapacityBuildingInitiative", [function () {
 	return {
@@ -14,10 +14,10 @@ app.directive("viewCapacityBuildingInitiative", [function () {
 			heading	:	"@",
 			shortHeading : "@"
 		},
-		controller : ["$scope", "IStorage", "$http", function ($scope, storage, $http)
+		controller : ["$scope", "IStorage", "$http", '$q', function ($scope, storage, $http, $q)
 		{
 
-
+			$scope.documentContacts = {};
 
             $scope.options  = {
 
@@ -32,12 +32,60 @@ app.directive("viewCapacityBuildingInitiative", [function () {
     		//====================
     		//
     		//====================
-    		$scope.$watch("document.organizations", function(_new)
+			$scope.$watch("document.implementingAgencies", function(_new)
     		{
-    			$scope.organizations = angular.fromJson(angular.toJson(_new || []));
-
-    			if($scope.organizations)
-    				$scope.loadReferences($scope.organizations);
+				if(!_new)
+					return;
+				if($scope.document.implementingAgencies)
+		            $q.all(_.map($scope.document.implementingAgencies, loadReferences)).then(function(data){
+		                $scope.documentContacts.implementingAgenciesRef = _.pluck(data, 'data');;
+		            });
+				else
+					$scope.documentContacts.implementingAgenciesRef = undefined;
+			});
+			$scope.$watch("document.executingAgencies", function(_new)
+    		{
+				if(!_new)
+					return;
+		        if($scope.document.executingAgencies)
+		            $q.all(_.map($scope.document.executingAgencies, loadReferences)).then(function(data){
+		                $scope.documentContacts.executingAgenciesRef = _.pluck(data, 'data');
+		            });
+				else
+					$scope.documentContacts.executingAgenciesRef = undefined;
+			});
+			$scope.$watch("document.collaboratingPartners", function(_new)
+    		{
+				if(!_new)
+					return;
+		        if($scope.document.collaboratingPartners)
+		            $q.all(_.map($scope.document.collaboratingPartners, loadReferences)).then(function(data){
+		                $scope.documentContacts.collaboratingPartnersRef = _.pluck(data, 'data');
+		            });
+				else
+					$scope.documentContacts.collaboratingPartnersRef = undefined;
+			});
+			$scope.$watch("document.coreFundingSources", function(_new)
+    		{
+				if(!_new)
+					return;
+				if($scope.document.coreFundingSources)
+		            $q.all(_.map($scope.document.coreFundingSources, loadReferences)).then(function(data){
+		                $scope.documentContacts.coreFundingSourcesRef = _.pluck(data, 'data');
+		            });
+				else
+					$scope.documentContacts.coreFundingSourcesRef = undefined;
+			});
+    		$scope.$watch("document.coFinancingSources", function(_new)
+    		{
+				if(!_new)
+					return;
+		        if($scope.document.coFinancingSources)
+		            $q.all(_.map($scope.document.coFinancingSources, loadReferences)).then(function(data){
+		                $scope.documentContacts.coFinancingSourcesRef = _.pluck(data, 'data');
+		            });
+				else
+					$scope.documentContacts.coFinancingSourcesRef = undefined;
     		});
 
 
@@ -51,51 +99,32 @@ app.directive("viewCapacityBuildingInitiative", [function () {
 				return( $scope.hide.indexOf(field) >= 0 ? false : true);
 			};
 
-			//====================
-			//
-			//====================
-			$scope.$watch("document.organizations", function(_new)
-			{
-				$scope.organizations = angular.fromJson(angular.toJson(_new||[]));
-
-				if($scope.organizations)
-					$scope.loadReferences($scope.organizations);
-			});
-
 
 			//====================
 			//
 			//====================
-			$scope.loadReferences = function(targets) {
+			function loadReferences(organization) {
 
-				angular.forEach(targets, function(ref){
+				if(organization && organization.identifier)
+					return storage.documents.get(organization.identifier)
+						.catch(function(e) {
+							if (e.status == 404) {
+								return storage.drafts.get(organization.identifier);
+							}
+							return {error : error, errorCode : code };
+						});
 
-					storage.documents.get(ref.identifier, { cache : true})
-						.success(function(data){
-							ref.document = data;
-						})
+					return storage.documents.get(organization.identifier, { cache : true})
 						.error(function(error, code){
 							if (code == 404) {
-
-								storage.drafts.get(ref.identifier, { cache : true})
-									.success(function(data){
-										ref.document = data;
-									})
-									.error(function(){
-										ref.document  = undefined;
-										ref.error     = error;
-										ref.errorCode = code;
-									});
+								return storage.drafts.get(organization.identifier, { cache : true})
+										.error(function(){
+											return {error : error, errorCode : code };
+										});
 							}
-
-							ref.document  = undefined;
-							ref.error     = error;
-							ref.errorCode = code;
+							return {error : error, errorCode : code };
 
 						});
-				});
-
-
 			};
 		}]
 	};

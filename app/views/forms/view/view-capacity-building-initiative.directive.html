@@ -66,33 +66,33 @@
 
 			<div ng-show="document.isImplementedByAgencies && document.implementingAgencies">
 			  	<label>Agency(ies) or organisation(s) implementing and/or executing the initiative</label>
-				<div class="km-value" ng-repeat="contact in document.implementingAgencies">
+				<div class="km-value" ng-repeat="contact in documentContacts.implementingAgenciesRef">
 					<div view-contact-reference ng-model="contact" locale="locale"></div>
 				</div>
 			</div>
 
 			<div ng-show="document.isImplementedByAgencies && document.executingAgencies">
 			  	<label>Agency(ies) or organisation(s) implementing and/or executing the initiative</label>
-				<div class="km-value" ng-repeat="contact in document.executingAgencies">
+				<div class="km-value" ng-repeat="contact in documentContacts.executingAgenciesRef">
 					<div view-contact-reference ng-model="contact" locale="locale"></div>
 				</div>
 			</div>
 
 			<div ng-show="document.collaboratingPartners && document.collaboratingPartners">
 				<label>Agency(ies) or organisation(s) implementing and/or executing the initiative</label>
-				<div class="km-value" ng-repeat="contact in document.collaboratingPartners">
+				<div class="km-value" ng-repeat="contact in documentContacts.collaboratingPartnersRef">
 					<div view-contact-reference ng-model="contact" locale="locale"></div>
 				</div>
 			</div>
 
 		</div>
 
-		<div ng-show="document.contacts">
+		<!-- <div ng-show="document.contacts">
 			<label>Contact person(s)</label>
-			<div class="km-value" ng-repeat="contact in document.contacts">
+			<div class="km-value" ng-repeat="contact in documentContacts.contacts">
 				<div view-contact-reference ng-model="contact" locale="locale"></div>
 			</div>
-		</div>
+		</div> -->
 
 		<div ng-show="document.type">
 			<label>Type of capacity-building initiative</label>
@@ -144,14 +144,14 @@
 
 		<div ng-show="document.coreFundingSources">
 			<label>Core funding-source(s)</label>
-			<div class="km-value" ng-repeat="contact in document.coreFundingSources">
+			<div class="km-value" ng-repeat="contact in documentContacts.coreFundingSourcesRef">
 				<div view-contact-reference ng-model="contact" locale="locale"></div>
 			</div>
 		</div>
 
 		<div ng-show="document.coFinancingSources">
 			<label>Co-financing source(s)</label>
-			<div class="km-value" ng-repeat="contact in document.coFinancingSources">
+			<div class="km-value" ng-repeat="contact in documentContacts.coFinancingSourcesRef">
 				<div view-contact-reference ng-model="contact" locale="locale"></div>
 			</div>
 		</div>
