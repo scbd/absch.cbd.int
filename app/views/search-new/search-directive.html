@@ -10,8 +10,8 @@
         #search-new .section-title{color:#999;font-weight: bold;}
         #search-new .active{background-color: #EEE}
         #search-new .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus{background-color: #FFF;position:relative;top:3px;border:1px solid #e3e3e3;  border-bottom:0;}
-        #search-new  .tab-content { border-bottom:1px solid #e3e3e3; border-left:1px solid #e3e3e3; border-right:1px solid #e3e3e3; }
-        #search-new  .nav-tabs>li {margin-bottom:0; font-weight:bold; font-size:16px;}
+        #search-new .tab-content { border-bottom:1px solid #e3e3e3; border-left:1px solid #e3e3e3; border-right:1px solid #e3e3e3; }
+        #search-new .nav-tabs>li {margin-bottom:0; font-weight:bold; font-size:16px;}
         #search-new .no-rl-padding{padding-left:0!important;margin-left:0!important;padding-right:0!important;margin-right:0!important;}
     </style>
 {{test}} 
@@ -39,7 +39,7 @@
                     <li> <a href="" ng-class="{'active':showFilters=='national'}" ng-click="showFilters=(showFilters=='national' ? false : 'national')" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;National records</a> </li>
                     <li> <a href="" ng-class="{'active':showFilters=='reference'}" ng-click="showFilters=(showFilters=='reference' ? false : 'reference')" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Reference records</a> </li>
                     <li> <a href="" ng-class="{'active':showFilters=='scbd'}" ng-click="showFilters=(showFilters=='scbd' ? false : 'scbd')" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;SCBD records</a> </li>
-                    <li> <a href="" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Keywords</a> </li>
+                    <li> <a href="" ng-class="{'active':showFilters=='thematic'}" ng-click="showFilters=(showFilters=='thematic' ? false : 'thematic')" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Keywords</a> </li>
                     <li> <a href="" ng-class="{'active':showFilters=='country'}" ng-click="showFilters=(showFilters=='country' ? false : 'country')" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Country</a> </li>
                     <li> <a href="" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Region</a ></li>
                     <li> <a href="" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Date</a> </li>
@@ -55,15 +55,14 @@
                    <schema-filter ng-if="showFilters==='reference'" type='reference'></schema-filter>
                    <schema-filter ng-if="showFilters==='scbd'" type='scbd'></schema-filter>
                    <country-filter ng-if="showFilters==='country'"></country-filter>
-                   
+                   <thematic-filter ng-if="showFilters==='thematic'"></thematic-filter>
                    
             </div>
          </div>
         </div>
     
         <div class="container-fluid" style="padding-top:10px;">
-            
-        
+
           <div class="row" style="padding:10px 0 0 0;margin:0px;">
             <div class="col-xs-12" style="padding:0;margin:0;">
                 <!-- Nav tabs -->
@@ -82,17 +81,20 @@
                                 <national-records-country group='country'></national-records-country>
                             </div>
                         </div>
+                         <h4 class="bg-white" ng-if="rawDocs.data.length === 0">no records found</h4>
                         </div>
                     </div>
-                    <div class="tab-pane"  ng-class="{'active':currentTab==='referenceRecords'}"  ng-if="currentTab=='referenceRecords'">
+                    <div class="tab-pane bg-white" style="padding-top:20px;"  ng-class="{'active':currentTab==='referenceRecords'}"  ng-if="currentTab=='referenceRecords'">
                          <div ng-repeat="rec in refDocs.data.response.docs">
-                            <result-default doc=rec></result-default>
+                            <result-default doc=rec type="referenceRecords"></result-default>
                          </div>
+                           <h4 class="bg-white" ng-if="refDocs.data.response.numFound === 0">no records found</h4>
                     </div>
-                    <div class="tab-pane"  ng-class="{'active':currentTab==='scbdRecords'}" ng-if="currentTab=='scbdRecords'" >
+                    <div class="tab-pane bg-white"  style="padding-top:20px;" ng-class="{'active':currentTab==='scbdRecords'}" ng-if="currentTab=='scbdRecords'" >
                          <div ng-repeat="rec in scbdDocs.data.response.docs">
-                            <result-default doc=rec></result-default>
+                            <result-default doc=rec  type="scbdRecords"></result-default>
                          </div>
+                          <h4 class="bg-white" ng-if="scbdDocs.data.response.numFound === 0">no records found</h4>
                     </div>
              </div>
         </div>

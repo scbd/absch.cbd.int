@@ -1,5 +1,6 @@
 define(['app', 'underscore', '/app/js/common.js',
 '/app/services/search-service.js',
+'/app/views/search-new/search-filters/thematic-filter.js',
 '/app/views/search-new/search-filters/schema-filter.js',
 '/app/views/search-new/search-filters/country-filter.js',
 '/app/views/search-new/search-results/result-default.js',
@@ -12,7 +13,7 @@ define(['app', 'underscore', '/app/js/common.js',
             replace: true,
             // transclude: true,
             templateUrl: '/app/views/search-new/search-directive.html',
-            controller: ['$scope','$q', 'realm', 'searchService', 'commonjs' ,function($scope, $q, realm, searchService, commonjs) {
+            controller: ['$scope','$q', 'realm', 'searchService', 'commonjs', '$localStorage' ,function($scope, $q, realm, searchService, commonjs, $localStorage) {
     
                     var queryCanceler = null;
                     $scope.rawDocs = [];
@@ -26,19 +27,28 @@ define(['app', 'underscore', '/app/js/common.js',
                     var refresh_nat = true;
                     var refresh_ref = true;
                     var refresh_scbd = true;
-                    $scope.countries = [];
+                    $scope.countries = $localStorage.countries;
                     $scope.searchKeyword = '';
                     $scope.searchFilters = {};
                     $scope.setFilters = {};
                     $scope.test = '';
+                    $scope.itemsPerPage = 25;
                     
+                    
+                    //*************************************************************************************************************************************
+                    function getFilter(id) {
+                         //console.log($scope.searchFilters[id]);
+                         return $scope.searchFilters[id];
+                         
+                    };
                     
                     //*************************************************************************************************************************************
                     $scope.updateCurrentTab = function(tabname) {
                            $scope.currentTab = tabname;
                             $scope.showFilters= false;
                     };
-                   
+                    
+    
                     //*************************************************************************************************************************************
                     function addFilter(filterID, filterInfo ) {
                           $scope.searchFilters[filterID] = filterInfo; 
@@ -108,7 +118,7 @@ define(['app', 'underscore', '/app/js/common.js',
                         }
                         
                         var groupQuery = {
-                            query       : q + ' AND government_s:*',
+                            query       : q,
                             sort        : 'government_EN_s asc, updatedDate_dt desc',
                             fields      : base_fields + en_fields,
                             groupField  : 'government_s',
@@ -219,6 +229,7 @@ define(['app', 'underscore', '/app/js/common.js',
                         var qAnd=[];
                         var qOr =[];
                         var q   ='';
+                        var q1   ='';
                         
                         if(queryType === 'national'){
                               //schema
@@ -247,11 +258,11 @@ define(['app', 'underscore', '/app/js/common.js',
                                qOr.push(buildTextQuery('description_t','country'   , null));
                         }
 
-                        q = combineQuery(qAnd, "AND", "AND");
-                        q = q + " AND " +  combineQuery(qOr, "OR", "OR");
-                        $scope.test = q;
+                        q = combineQuery(qAnd, "AND");
+                        q1 = combineQuery(qOr, "OR");
+                        $scope.test = q1 ? q + " AND (" + q1 + ")" : q;
                         
-                        return " AND " + q;
+                        return q1 ? q + " AND (" + q1 + ")" : q;
                      };
                      
                      //*****************************************************************************************************************
@@ -304,40 +315,56 @@ define(['app', 'underscore', '/app/js/common.js',
                     function addORCondition(field, values, boost){
                         var q ="";
                         var conditions = [];
-                        _.each(values, function (val){conditions.push("("+field+":"+val + ")" + (boost ? "^" + boost : ""))});
-                        _.each(conditions, function (condition) { q = q + (q=='' ? '( ' : ' OR ') + condition; });
+                        _.each(values, function (val){conditions.push(""+field+":*"+val + "*" + (boost ? "^" + boost : ""))});
+                        _.each(conditions, function (condition) { q = q + (q=='' ? '(' : ' OR ') + condition; });
                         q = q +")";
                         return q;
                     }
                     
                     //*****************************************************************************************************************
-                    function combineQuery(qCondition, op1, op2 ){
+                    function combineQuery(qCondition, op1 ){
                         var q ='';
-                        _.each(qCondition, function (val){ if(val) q = q + (q ? " "+op1+" " : " ") + "(" + val + ")" } );
+                        _.each(qCondition, function (val){ if(val) q = q + (q ? op1 : "") + "(" + val + ")" } );
                         return q ? q : '';
                     }
                     
                     //*************************************************************************************************************************************
                     function loadFilters() {
+                        console.log('load filters first');
                         loadSchemaFilters();
                         loadCountryFilters();
+                        loadThematicFilters();
                     };
                     
                     //*************************************************************************************************************************************
                     function loadCountryFilters() {
-                        var i=1;
-                        if($scope.countries.length === 0){
+                        if(!$scope.countries){
                             $q.when(commonjs.getCountries(), function(data) {
                                 $scope.countries = data;
-                                 
+                                $localStorage.countries = $scope.countries;
+                                
                                  _.each($scope.countries, function(country, index){
                                     addFilter(country.code.toLowerCase(), {'filterSort':4, 'sort': index, 'type':'country', 'value':false,  'name':country.name.en, 'id':country.code.toLowerCase(), 'description':'', "isCBDParty": country.isCBDParty,"isNPParty":country.isNPParty,"isNPSignatory": country.isNPSignatory,"isNPRatified": country.isNPRatified ,"isNPInbetweenParty":country.isNPInbetweenParty,"entryIntoForce": country.entryIntoForce});
                                  }); 
-                           
                             });
                         }
+                        else{
                             
+                            _.each($scope.countries, function(country, index){
+                                    addFilter(country.code.toLowerCase(), {'filterSort':4, 'sort': index, 'type':'country', 'value':false,  'name':country.name.en, 'id':country.code.toLowerCase(), 'description':'', "isCBDParty": country.isCBDParty,"isNPParty":country.isNPParty,"isNPSignatory": country.isNPSignatory,"isNPRatified": country.isNPRatified ,"isNPInbetweenParty":country.isNPInbetweenParty,"entryIntoForce": country.entryIntoForce});
+                                 }); 
+                            
+                        }
                     };
+                    
+                    //*************************************************************************************************************************************
+                    function loadThematicFilters() {
+                        
+                        //national record applicable keywords
+                         
+                        
+                    };
+                    
                     //*************************************************************************************************************************************
                     function loadSchemaFilters() {
                        //national
@@ -376,6 +403,7 @@ define(['app', 'underscore', '/app/js/common.js',
                     
                   //*************************************************************************************************************************************         
                     function load(){
+                        console.log("loading");
                         switch ($scope.currentTab) {
                             case "nationalRecords":
                                 if(refresh_nat)
@@ -412,6 +440,7 @@ define(['app', 'underscore', '/app/js/common.js',
                     this.scbdQuery = scbdQuery;
                     this.isFilterOn = isFilterOn;
                     this.getSearchFilters = getSearchFilters;
+                    this.getFilter = getFilter;
                    
                     
                     loadFilters();

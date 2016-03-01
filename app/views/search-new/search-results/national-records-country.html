@@ -1,7 +1,11 @@
 <div id="national-records-country">
-    <h4>{{name}} <span class="badge">{{numFound}}</span></h4>
-    <div ng-repeat="doc in docs">
-        <div class="schemaTitle color-darkgrey" ng-if="doc.schema_s != docs[$index-1].schema_s ">{{doc.schema_s | schemaNamePlural}} <span class="schema color-blue">({{doc.schema_s | schemaShortName}})</span></div>
-        <result-grouped-national-record doc='doc'></result-grouped-national-record>
+    <div>
+        <h4 style="border-bottom:#ddd solid 1px;"><a href="/countries/{{name}}" class="color-grey link">{{getFilter(name).name}}</a> <span class="badge">{{numFound}}</span>   
+            <span class="label label-primary nplabel" style="font-size:12px;padding-left:10px;" ng-if="getFilter(name).isNPParty">NP Party</span>
+        </h4>
+        <div ng-repeat="doc in docs">
+            <div class="schemaTitle color-darkgrey" ng-if="doc.schema_s != docs[$index-1].schema_s ">{{doc.schema_s | schemaNamePlural}} <span class="schema color-blue">({{doc.schema_s | schemaShortName}})</span></div>
+            <result-grouped-national-record doc='doc'></result-grouped-national-record>
+        </div>
     </div>
 </div>

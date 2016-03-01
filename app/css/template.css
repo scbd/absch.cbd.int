@@ -1074,14 +1074,39 @@ footer .logo {
     text-align: center;
 }
 /*for the new search*/
+  #search-new .link:hover{
+      background-color: #DDD; 
+   }  
     
-    
-    .recordDefault{
+    #search-new .nationalRecords{
         margin-bottom: 10px;
         padding:5px;
         border-left:3px #428bca solid;
         cursor:pointer;
- 
+    }
+    
+    #search-new .nationalRecords .schema{
+        color:#428bca;
+    }
+    #search-new .referenceRecords .schema{
+        color:#fa6938;
+    }
+    #search-new .scbdRecords .schema{
+        color:#333;
+    }
+    
+     #search-new .referenceRecords{
+        margin-bottom: 15px;
+        padding:5px;
+        border-left:3px #fa6938 solid;
+        cursor:pointer;
+    }
+    
+    #search-new .scbdRecords{
+        margin-bottom: 15px;
+        padding:5px;
+        border-left:3px #333 solid;
+        cursor:pointer;
     }
 
     div.recordDefault:hover{background-color: white!important;}

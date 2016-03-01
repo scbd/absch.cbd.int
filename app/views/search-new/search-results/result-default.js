@@ -10,7 +10,8 @@ define(['app', 'underscore', '/app/js/common.js',
             require:'^searchDirective',
             templateUrl: '/app/views/search-new/search-results/result-default.html',
             scope: {
-                doc:'='
+                doc:'=',
+                type:'@'
             },
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
                 

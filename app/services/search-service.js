@@ -12,7 +12,7 @@ define(['app', 'underscore'], function (app, _) {
                 groupSort       : 'government_EN_t',
                 groupField      : 'government_EN_t asc'
             }
-           var q = '(realm_ss:' + realm.value.toLowerCase() + ') AND NOT version_s:*';
+           var q = '(realm_ss:' + realm.value.toLowerCase() + ') AND NOT version_s:* AND';
             
            //*****************************************************************************************************************
             this.list = function(searchQuery, queryCanceler){
