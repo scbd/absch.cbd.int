@@ -32,7 +32,6 @@ require.config({
         'text-angular-sanitize'     : '../libs/textAngular/dist/textAngular-sanitize.min',
         'text-angular'              : '../libs/textAngular/dist/textAngular.min',
         'cbd-forums'                : '../libs/cbd-forums/cbd-forums',
-        // 'angular-storage'        : '../libs/angular-local-storage/dist/angular-local-storage.min',
         'angular-flex'              : '../libs/angular-flex/angular-flex',
         'ng-breadcrumbs'            : '../libs/ng-breadcrumbs/dist/ng-breadcrumbs.min',
         'ionsound'                  : '../libs/ionsound/js/ion.sound.min',
@@ -47,7 +46,8 @@ require.config({
         'toastr'                    : '../libs/angular-toastr/dist/angular-toastr.tpls.min',
         'ngStorage'                 : '../libs/ngstorage/ngStorage.min',
         'angular-block-ui'          :  '../libs/angular-block-ui/dist/angular-block-ui.min',
-        'ngDialog'                  :  '../libs/ng-dialog/js/ngDialog.min'
+        'ngDialog'                  :  '../libs/ng-dialog/js/ngDialog.min',
+        'socket.io'             : '../libs/socket.io-1.4.5/index'
     },
     'shim': {
         'angular'                       : { 'deps': ['jquery'], 'exports': 'angular' },

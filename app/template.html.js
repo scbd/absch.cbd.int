@@ -10,16 +10,16 @@ define(['app', 'underscore', 'ng-breadcrumbs',
 
     app.controller('TemplateController', ['$scope', '$rootScope', 'showHelp',
         '$location','realmConfiguration','$anchorScroll', 'breadcrumbs', 'toastr', '$route',
-        'cfgUserNotification', //'localStorageService',localStorageService,
+        'cfgUserNotification','$window',//'localStorageService',localStorageService,
         function($scope, $rootScope, showHelp, $location, realmConfiguration,
-            $anchorScroll, breadcrumbs, toastr, $route, cfgUserNotification) {
+            $anchorScroll, breadcrumbs, toastr, $route, cfgUserNotification, $window) {
             $scope.controller = "TemplateController";
             $scope.breadcrumbs = breadcrumbs;
             $scope.$root.pageTitle = {
                 text: ""
             };
 
-         
+
 
 
             // $scope.goHome               = function() { $location.path('/'); };
@@ -137,8 +137,7 @@ define(['app', 'underscore', 'ng-breadcrumbs',
             });
 
             $scope.$on('signOut', function(evt, data) {
-                if ($route.current.locals.securized)
-                    $location.path('/');
+                $window.location.reload();
             });
 
             if(cfgUserNotification){
@@ -153,6 +152,15 @@ define(['app', 'underscore', 'ng-breadcrumbs',
             function showSimpleToast(msg) {
                 toastr.info(msg);
             }
+
+
+
+            $rootScope.$on('event:server-pushNotification', function(evt,data){
+                if(data.type == 'documentNotification'){
+                    toastr.info(data.message);
+                }
+            });
+
         }
     ])
 

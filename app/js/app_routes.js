@@ -7,6 +7,18 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
      "measure", "database", "resource", "modelContractualClause", "communityProtocol", "capacityBuildingInitiative", "capacityBuildingResource"]);
     app.value("showHelp", { value : false });
 
+    app.provider("realm", {
+
+        $get : ["$location", 'appConfigService', function($location, appConfigService) {
+
+            if(appConfigService.currentRealm){
+                return { value : appConfigService.currentRealm };
+            }
+            return 'ABS';
+        }]
+    });
+
+
     app.config(['extendedRouteProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 
         $locationProvider.html5Mode(true);
