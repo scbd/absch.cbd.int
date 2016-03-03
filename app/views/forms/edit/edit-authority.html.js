@@ -1,4 +1,5 @@
-define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/directives/help-directive.html.js', '/app/js/common.js'], function(app, _) {
+define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/directives/help-directive.html.js', '/app/js/common.js',
+        '../view/view-authority.directive.js'], function(app, _) {
 
     app.controller("editAuthority", ["$scope", "$http", "$filter", "Thesaurus", "$q", "$controller", "Enumerable", "$location", "IStorage", "commonjs",
      function($scope, $http, $filter, Thesaurus, $q, $controller, Enumerable, $location, storage, commonjs) {

@@ -1,4 +1,5 @@
-define(['app', 'underscore'], function (app, _) {
+define(['app', 'underscore',
+        '../view/view-resource.directive.js'], function (app, _) {
 
 	app.directive('editSchemaResourceBase', ["$q", "$timeout", function ($q, $timeout)
 	{
