@@ -140,7 +140,7 @@ define(['text!./home-map.html',
           function loadCountries() {
             $scope.loading = true;
 
-            return commonjs.getCountries().then(function(countries) {
+            return $q.when(commonjs.getCountries()).then(function(countries) {
                 $scope.countries = countries;
 
 

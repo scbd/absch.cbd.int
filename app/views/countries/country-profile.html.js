@@ -6,23 +6,19 @@ define(['app','underscore',
 ], function(app, _) {
 
   app.controller("countryProfileController",
-  ["$scope","$route", "$http", "$timeout", "$location","locale", 'ammap3Service', 'commonjs',
-    function($scope,$route, $http, $timeout, $location,locale, ammap3Service,commonjs) {
+  ["$scope","$route", "$http", "$timeout", "$location","locale", 'ammap3Service', 'commonjs', '$q',
+    function($scope,$route, $http, $timeout, $location,locale, ammap3Service,commonjs, $q) {
       $scope.code      = $route.current.params.code;
 
 
-
-      $http.get('https://api.cbd.int/api/v2013/countries/'+$scope.code.toUpperCase(), {
-        cache: true,
-      }).then(function(res) {
-          $scope.country = res.data;
+      $q.when(commonjs.getCountry($scope.code.toUpperCase()))
+      .then(function(country){
+          $scope.country = country;
           $scope.country.code = $scope.country.code.toLowerCase();
           $scope.country.name = $scope.country.name[locale];
           $scope.country.cssClass='flag-icon-'+$scope.country.code;
-
-
       });
-      commonjs.getCountries().then(function(countries){
+      $q.when(commonjs.getCountries()).then(function(countries){
           ammap3Service.eachCountry('zoom-map-country', function(mapCountry){
             var countryDetails = _.findWhere(countries, {code : mapCountry.id});
             if(countryDetails){

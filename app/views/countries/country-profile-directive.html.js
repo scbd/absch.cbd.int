@@ -91,30 +91,10 @@
                     $scope.absch_nfp = null;
 
                     if ($scope.code) {
-                    //fix for EU
-                    if($scope.code.toLowerCase() == 'eu')
-                        $scope.code = 'eur';
-                    // $scope.show('profile');
-                    $http.get('/api/v2013/countries/' + $scope.code.toUpperCase(), {
-                        cache: true
-                    }).then(function(response) {
-                        $scope.country = response.data;
 
-                        breadcrumbs.options = {'Country Profile':$scope.country.name.en};
-                        $scope.searchText = '';
-                        $scope.autocompleteData = [];
-
-                        $scope.country.isCBDParty = countriescommonjs.isPartyToCBD($scope.country ) || $scope.country.code == 'EU';
-                        $scope.country.isNPParty = countriescommonjs.isNPParty($scope.country ) || $scope.country.code == 'EU';
-                        $scope.country.isNPSignatory = countriescommonjs.isSignatory($scope.country ) || $scope.country.code == 'EU';
-                        $scope.country.isNPRatified = countriescommonjs.isRatified($scope.country ) || $scope.country.code == 'EU';
-                        $scope.country.isNPInbetweenParty = moment().diff(moment($scope.country.treaties.XXVII8b.deposit), 'days') < 90;
-
-                        if ($scope.country.isNPInbetweenParty)
-                            $scope.country.entryIntoForceDate = moment($scope.country.treaties.XXVII8b.deposit).add(90, 'day');
-                        else if ($scope.country.isNPParty)
-                            $scope.country.entryIntoForceDate = $scope.country.treaties.XXVII8b.party;
-
+                    $q.when(commonjs.getCountry($scope.code.toUpperCase()))
+                    .then(function(country) {
+                        $scope.country = country;
                     });
                     //*******************************************************
                     var schema = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database"]

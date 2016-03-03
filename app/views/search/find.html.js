@@ -3,14 +3,14 @@ define(['app', 'underscore',
     '/app/js/common.js', '/app/services/app-config-service.js', '/app/services/search-service.js',
 ], function(app, _) {
 
-    app.controller('newSearchController', ['$scope', '$http', '$filter', 'commonjs', '$location', 'appConfigService', 'searchService',
-        function($scope, $http, $filter, commonjs, $location, appConfigService, searchService) {
+    app.controller('newSearchController', ['$scope', '$http', '$filter', 'commonjs', '$location', 'appConfigService', 'searchService', '$q',
+        function($scope, $http, $filter, commonjs, $location, appConfigService, searchService, $q) {
 
             $scope.schemafacets = {};
 
             //**********************************************************
             function loadCountries() {
-                  commonjs.getCountries()
+                  $q.when(commonjs.getCountries())
                     .then(function(countries){
 
                         $scope.countries = countries;

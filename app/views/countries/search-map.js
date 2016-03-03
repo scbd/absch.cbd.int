@@ -37,7 +37,8 @@ define(['text!./search-map.html',
           });
 
 
-          commonjs.getCountries().then(function(countries){
+          $q.when(commonjs.getCountries())
+          .then(function(countries){
               ammap3Service.eachCountry('search-map', function(mapCountry){
                 var countryDetails = _.findWhere(countries, {code : mapCountry.id});
                 if(countryDetails){

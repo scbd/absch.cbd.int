@@ -1,7 +1,7 @@
-define(['app', 'underscore'], function(app, _) {
+define(['app', 'underscore', '/app/services/local-storage-service.js'], function(app, _) {
 
-    app.factory('commonjs', ['$http', '$rootScope', 'realm', 'IStorage', '$filter', '$q',
-        function($http, $rootScope, realm, storage, $filter, $q) {
+    app.factory('commonjs', ['$http', '$rootScope', 'realm', 'IStorage', '$filter', '$q', 'localStorageService',
+        function($http, $rootScope, realm, storage, $filter, $q, localStorageService) {
             return new function() {
 
                 this.getReferenceRecordIndex = function(schema, documentId) {
@@ -63,39 +63,32 @@ define(['app', 'underscore'], function(app, _) {
 
                 this.getCountries = function() {
 
-                    // if($rootScope.countries)
-                    // 	return $rootScope.countries;
+                    var fromStorage = localStorageService.get('countries');
+                    if(fromStorage && fromStorage.data )//&& fromStorage.expiry < new date())
+                        return fromStorage.data;
 
                     return $http.get('/api/v2013/countries', {
                             cache: true
                         })
                         .then(function(response) {
-                            var countries = response.data;
-                            var countriesDetails = []
 
-                            for (var i = 0; i != countries.length; ++i) {
-                                var country = {};
-                                var treaties = countries[i].treaties;
-                                country.name = countries[i].name;
-                                country.code = countries[i].code;
-
-                                country.isCBDParty = isPartyToCBD(countries[i]) || country.code == 'EU';
-                                country.isNPParty = isNPParty(countries[i]) || country.code == 'EU';
-                                country.isNPSignatory = isSignatory(countries[i]) || country.code == 'EU';
-                                country.isNPRatified = isRatified(countries[i]) || country.code == 'EU';
-                                country.isNPInbetweenParty = moment().diff(moment(treaties.XXVII8b.deposit), 'days') < 90;
-
-                                if (country.isNPInbetweenParty)
-                                    country.entryIntoForce = moment(treaties.XXVII8b.deposit).add(90, 'day');
-                                else
-                                    country.entryIntoForce = treaties.XXVII8b.deposit;
-                                // console.log($rootScope.countries);
-                                countriesDetails.push(country);
-                            }
-                            return countriesDetails;
+                            var countries = _.map(response.data,formatCountry);
+                            localStorageService.set('countries', countries);
+                            return countries;
                         });
+                };
+                this.getCountry = function(code) {
 
-
+                    var fromStorage = localStorageService.get('countries');
+                    if(fromStorage && fromStorage.data ){//&& fromStorage.expiry < new date())
+                        var country = _.findWhere(fromStorage.data, {code : code});
+                        if(country)
+                            return country;
+                    }
+                    return $http.get('/api/v2013/countries/' + code, {cache: true })
+                        .then(function(response) {
+                            return formatCountry(response.data);
+                        });
                 }
 
                 this.isIAC = function() {
@@ -268,7 +261,25 @@ define(['app', 'underscore'], function(app, _) {
                             });
                 };
 
+                function formatCountry(countryDetails){
+                    var country = {};
+                    var treaties = countryDetails.treaties;
+                    country.name = { en : countryDetails.name.en };
+                    country.code = countryDetails.code;
 
+                    country.isCBDParty = isPartyToCBD(countryDetails) || country.code == 'EU';
+                    country.isNPParty = isNPParty(countryDetails) || country.code == 'EU';
+                    country.isNPSignatory = isSignatory(countryDetails) || country.code == 'EU';
+                    country.isNPRatified = isRatified(countryDetails) || country.code == 'EU';
+                    country.isNPInbetweenParty = moment().diff(moment(treaties.XXVII8b.deposit), 'days') < 90;
+
+                    if (country.isNPInbetweenParty)
+                        country.entryIntoForce = moment(treaties.XXVII8b.deposit).add(90, 'day');
+                    else
+                        country.entryIntoForce = treaties.XXVII8b.deposit;
+
+                    return country;
+                }
                 function isNPParty(entity) {
 
                     if (entity && entity.isNPParty != undefined)

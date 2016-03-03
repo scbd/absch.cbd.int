@@ -56,7 +56,7 @@ define(['app', 'underscore',  'scbd-angularjs-controls',
                     //====================================================
                     function loadCountries() {
                         $scope.loading = true;
-                        commonjs.getCountries()
+                        $q.when(commonjs.getCountries())
                             .then(function(countries) {
 
                                 countryProfile.ratifications = 0;

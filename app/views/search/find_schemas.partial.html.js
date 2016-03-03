@@ -481,7 +481,7 @@ app.directive('searchFilterSchemas', function ($http) {
             }
 
             $scope.queryStatus = function(type){
-                commonjs.getCountries()
+                $q.when(commonjs.getCountries())
                 .then(function(data){
                     $scope.queryPartyStatus = '';
                     var npParties
@@ -693,7 +693,7 @@ app.directive('searchFilterSchemas', function ($http) {
             function buildCountryProfileFacets(){
                 if(!$scope.countryProfileFacets && $scope.isInProfiles()){
                     $scope.countryProfileFacets = {};
-                    commonjs.getCountries()
+                    $q.when(commonjs.getCountries())
                     .then(function(countries){
                         $scope.countryProfileFacets.parties = _.where(countries, {isNPParty:true}).length;
                         $scope.countryProfileFacets.nonParties = _.where(countries, {isNPParty:false}).length;

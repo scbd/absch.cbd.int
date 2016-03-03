@@ -32,8 +32,6 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                     $scope.transformedDocuments = [];
                     $scope.descriptionLimit = 50;
 
-                    var countryList;
-
                     $scope.getDocumentId = function(document) {
 
                         if ((document.recordtype == "referenceRecord" && document.schema != "resource") || document.schema.toLowerCase() == "focalpoint") {
@@ -156,7 +154,7 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                                 if(!$scope.transformedGroupDocuments || $scope.currentPage == 0)
                                     $scope.transformedGroupDocuments = [];
 
-                                getCountries()
+                                $q.when(commonjs.getCountries())
                                     .then(function(countries) {
 
                                         $scope.documents.forEach(function(doc) {
@@ -299,16 +297,6 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                             }
                     }
 
-                    function getCountries() {
-
-                        if (!countryList)
-                            return commonjs.getCountries();
-
-                        var promise = $q.defer();
-                        promise.resolve(countriesList);
-
-                        return promise;
-                    }
 
                     function transformDocument(document) {
 
@@ -336,7 +324,7 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
                         }
 
                         if (document.government_s) {
-                            getCountries()
+                            $q.when(commonjs.getCountries())
                             .then(function(countries) {
                                 var cd = _.where(countries, {
                                     code: document.government_s.substring(0, 2).toUpperCase()

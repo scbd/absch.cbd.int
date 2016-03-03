@@ -1,6 +1,7 @@
-define(['app', 'underscore'], function (app, _) {
+define(['app', 'underscore', './local-storage-service.js'], function (app, _) {
 
-    app.factory('searchService', ['$http', '$q', 'realm',  function ($http, $q, realm) {
+    app.factory('searchService', ['$http', '$q', 'realm', 'localStorageService',
+      function ($http, $q, realm, localStorageService) {
         return new function () {
 
             var searchDefaults = {
@@ -12,8 +13,13 @@ define(['app', 'underscore'], function (app, _) {
                 groupSort       : 'government_EN_t',
                 groupField      : 'government_EN_t asc'
             }
+<<<<<<< HEAD
            var q = '(realm_ss:' + realm.value.toLowerCase() + ') AND NOT version_s:* AND';
             
+=======
+           var q = '(realm_ss:' + realm.value.toLowerCase() + ') AND NOT version_s:*';
+
+>>>>>>> localstorage implementation for getcountries
            //*****************************************************************************************************************
             this.list = function(searchQuery, queryCanceler){
 
@@ -35,7 +41,7 @@ define(['app', 'underscore'], function (app, _) {
             this.group = function(searchQuery, queryCanceler){
 
                _.defaults(searchQuery, searchDefaults);
-               
+
                var queryGroupParameters = {
                     'q': q  + searchQuery.query,
                     'sort': searchQuery.sort,
@@ -54,8 +60,13 @@ define(['app', 'underscore'], function (app, _) {
             }
 
             //*****************************************************************************************************************
-            this.facets = function(facetQuery){
+            this.facets = function(facetQuery, localStorageKey){
 
+                if(localStorageKey){
+                    var fromStorage = localStorageService.get(localStorageKey);
+                    if(fromStorage && fromStorage.data )//&& fromStorage.expiry < new date())
+                        return fromStorage.data;
+                }
                _.defaults(facetQuery, searchDefaults);
 
                 if(facetQuery) {
@@ -78,6 +89,10 @@ define(['app', 'underscore'], function (app, _) {
                         _.each(facetQuery.fields, function(facet){
                             facets[facet] = readFacets2(data.data.facet_counts.facet_fields[facet]);
                         });
+
+                        if(localStorageKey)
+                            localStorageService.set(localStorageKey, facets);
+
                         return facets;
                     })
                 }
@@ -101,6 +116,8 @@ define(['app', 'underscore'], function (app, _) {
                 }
                 return facets;
            };
+
+
         }
     }]);
 });
