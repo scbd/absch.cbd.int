@@ -20,8 +20,8 @@ define(['app', '/app/views/directives/switch-realm-directive.html.js', '/app/ser
                     isAbsNationalAuthorizedUser : roleService.isAbsNationalAuthorizedUser(),
                     isUser                      : roleService.isUser()
                 };
-
-                $scope.userCountry = {identifier:$scope.user.government };
+                if($scope.user.government)
+                    $scope.userCountry = {identifier:$scope.user.government };
             }
         }
     ]);
