@@ -2,8 +2,10 @@ define(['app', 'underscore'], function (app, _) { 'use strict';
 
 	app.factory('appConfigService',  ["$location", function($location) {
 
-        var nationalSchemas = ["absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "focalPoint"];
-        var referenceSchemas = ["resource", "meeting", "notification", "pressRelease", "statement", "news", "modelContractualClause", "communityProtocol", "capacityBuildingInitiative", "capacityBuildingResource"];
+        var nationalSchemas 	= [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "focalPoint"];
+        var referenceSchemas 	= [ "modelContractualClause", "communityProtocol", "capacityBuildingInitiative", "capacityBuildingResource"];
+		var scbdSchemas			= [ "resource", "meeting", "notification", "pressRelease", "statement", "news" ];
+
         var realmConfigurations = [
             //Production
             {
@@ -162,6 +164,7 @@ define(['app', 'underscore'], function (app, _) { 'use strict';
 		return {
 			nationalSchemas     :   nationalSchemas,
 			referenceSchemas    :   referenceSchemas,
+			scbdSchemas			:	scbdSchemas,
 
 			currentRealm        :   currentRealm,
 			setCurrentRealm  	:   setCurrentRealm,
