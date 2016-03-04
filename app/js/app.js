@@ -1,13 +1,13 @@
 'use strict';
 
 define(['angular', 'angular-sanitize', 'angular-loading-bar', 'angular-animate','ngAria' ,'ngMaterial',
-        'text-angular', 'ngSmoothScroll', 'ngStorage'
+        'text-angular', 'ngSmoothScroll',
     ],
     function(angular) {
 
         var dependencies = ['ngRoute', 'ngCookies', 'chieffancypants.loadingBar', 'ngAnimate', 'angular-animate', 'ngAria' ,'ngMaterial','toastr',
-            'ngSanitize', 'angular-intro', 'scbdControls', 'ngLocalizer', 'textAngular', 'cbd-forums', 'LocalStorageModule',
-            'ng-breadcrumbs', 'scbdServices', 'scbdFilters', 'smoothScroll', 'ngMessages', 'blockUI', 'ngStorage', 'ngDialog'
+            'ngSanitize', 'angular-intro', 'scbdControls', 'ngLocalizer', 'textAngular', 'cbd-forums',
+            'ng-breadcrumbs', 'scbdServices', 'scbdFilters', 'smoothScroll', 'ngMessages', 'ngStorage', 'ngDialog'
         ];
         angular.defineModules(dependencies);
         var app = angular.module('app', dependencies);
