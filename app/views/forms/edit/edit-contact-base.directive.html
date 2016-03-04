@@ -78,7 +78,7 @@
 		</div>
 	</div>
 
-	<div ng-show="document.type=='organization' || document.type=='CNA'">
+	<div ng-show="document.header.schema!='organization' && (document.type=='organization' || document.type=='CNA')">
 
 		<legend>Contact Person </legend>
 
@@ -121,7 +121,7 @@
 		</div>
 	</div>
 
-	<div class="row">
+	<div class="row" ng-show="document.header.schema!='organization'">
 		<div class="col-md-12">
 			<div class="km-control-group" name="contact_department" caption="Department / Division / Unit">
 				<div km-textbox-ml name="contact_department" ng-model="document.department" locales="locales"></div>
