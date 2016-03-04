@@ -73,7 +73,6 @@ define(['text!./home-map.html',
 
                   calculateListViewFacets();
                   ammap3Service.loadCountries('index-map', $scope.countries);
-                  applyCountryColors();
                 })
                 .then(function() {
                   $scope.loading = false;
@@ -119,23 +118,6 @@ define(['text!./home-map.html',
 
           } //calculateListViewFacets
 
-          function applyCountryColors(){
-              ammap3Service.eachCountry('index-map', function(mapCountry){
-                var countryDetails = _.findWhere($scope.countries, {code : mapCountry.id});
-                if(countryDetails){
-                    if(countryDetails.isNPInbetweenParty)
-                        mapCountry.colorReal= "#5cb85c";
-                    else if(countryDetails.isNPParty)
-                        mapCountry.colorReal= "#337ab7";
-                    else if(countryDetails.isCBDParty)
-                        mapCountry.colorReal= "#999";
-                    else
-                        mapCountry.colorReal= "#FFF";
-                }
-                else
-                    mapCountry.colorReal= "#FFF";
-              });
-          }
           //====================================================
           function loadCountries() {
             $scope.loading = true;
