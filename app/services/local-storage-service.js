@@ -23,12 +23,13 @@ define(['app', 'jquery', 'underscore', 'toastr', 'ngStorage'],
             };
 
             this.set = function(key, data){
-                var ldata = {data : data };
+                var ldata = {};
 
                 var expiryDate = new Date();
                 expiryDate.setDate(expiryDate.getDate() + 2);
 
                 ldata.expiry = expiryDate;
+                ldata.data   = data;
 
                 $localStorage[key] = ldata;
             };

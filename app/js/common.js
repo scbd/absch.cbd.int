@@ -64,8 +64,8 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                 this.getCountries = function() {
 
                     var fromStorage = localStorageService.get('countries');
-                    if(fromStorage && fromStorage.data )//&& fromStorage.expiry < new date())
-                        return fromStorage.data;
+                    if(fromStorage)//&& fromStorage.expiry < new date())
+                        return fromStorage;
 
                     return $http.get('/api/v2013/countries', {
                             cache: true
@@ -80,8 +80,8 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                 this.getCountry = function(code) {
 
                     var fromStorage = localStorageService.get('countries');
-                    if(fromStorage && fromStorage.data ){//&& fromStorage.expiry < new date())
-                        var country = _.findWhere(fromStorage.data, {code : code});
+                    if(fromStorage){
+                        var country = _.findWhere(fromStorage, {code : code});
                         if(country)
                             return country;
                     }
