@@ -210,17 +210,18 @@
     						</div>
     					</div>
 
-    					<div class="row">
-    						<div class="col-md-12">
-    							<div class="km-control-group" name="notes">
-    								<legend>Notes</legend>
-    								<span class="help-block">
-    									The field “Notes” is for personal reference and can be seen only when the record is being edited.
-    								</span>
-    								<div km-notes name="notes" ng-model="document.notes"></div>
-    							</div>
-    						</div>
-    					</div>
+                        <section>
+                            <legend>Notes</legend>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="km-control-group" name="notes">
+                                        <div class="help-block">The “Notes” field is for your personal notes or comments and will be hidden when
+                                            viewing the record. This field is not meant to be used for confidential information.</div>
+                                        <textarea class="form-control" rows="4" name="notes" ng-model="document.notes"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
     				</div>
 
 				</form>

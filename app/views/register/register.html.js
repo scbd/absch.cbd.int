@@ -529,8 +529,12 @@ define(['app','linqjs', 'angular-localizer',
       evt.stopPropagation();
       $scope.editing = false;
 
+	  var message = 'Record saved. A publishing request has been sent to your Publishing Authority.';
+	  if(workflowInfo.type.name == "publishReferenceRecord")
+	  	message = 'Record saved. A publishing request has been sent to The Secretariat of the Convention on Biological Diversity.';
+
 	  $scope.showingFeedback = true;
-	  toastr.info('Record saved. A publishing request has been sent to your Publishing Authority.',{onHidden:function(a){
+	  toastr.info(message, {onHidden:function(a){
 		  $scope.showingFeedback = false;
 	  }})
 
