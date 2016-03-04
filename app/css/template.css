@@ -1160,12 +1160,20 @@ footer .logo {
         font-size:14px;
         margin:0;
         padding:0;
+        text-overflow:ellipsis;
+        white-space: nowrap; 
+        width: 80vw; 
+        overflow: hidden;
     }
     #result-grouped-national-record .description{
         color:#444;
         font-size:14px;
         margin:0;
         padding:0;
+        text-overflow:ellipsis;
+        white-space: nowrap; 
+        width: 80vw; 
+        overflow: hidden;
     }
      .recordDefault .metadata{
         margin:0;
