@@ -13,13 +13,10 @@ define(['app', 'underscore', './local-storage-service.js'], function (app, _) {
                 groupSort       : 'government_EN_t',
                 groupField      : 'government_EN_t asc'
             }
-<<<<<<< HEAD
+
            var q = '(realm_ss:' + realm.value.toLowerCase() + ') AND NOT version_s:* AND';
             
-=======
-           var q = '(realm_ss:' + realm.value.toLowerCase() + ') AND NOT version_s:*';
 
->>>>>>> localstorage implementation for getcountries
            //*****************************************************************************************************************
             this.list = function(searchQuery, queryCanceler){
 

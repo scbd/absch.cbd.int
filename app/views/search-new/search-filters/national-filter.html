@@ -1,0 +1,18 @@
+<div id="Search-Filter">
+    
+    <div class="heading" ng-if="nf_fitlers.length">National Records </div>
+    <p class="helpinfo" ><i class="fa fa-info-circle helpicon" ></i> National records are published by Governments and include national information relevant for the implementation of the Nagoya Protocol as well as information Parties are obliged to provide in accordance with the Protocol.</p>
+    <hr  class="heading" ng-if="nf_fitlers.length">
+    
+    <div ng-repeat="doc in nf_fitlers = (nf_searchFilters | filter:searchKeyword | orderBy:['filterSort', 'sort'])">
+            
+            <a class="filter"  ng-click="saveFilter(doc.id)">
+                <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i> 
+                {{doc.name}}
+                <!--<span class="badge">100</span>-->
+            </a>
+            <p class="helpinfo" ><i class="fa fa-info-circle helpicon" ng-if="doc.description"></i> {{doc.description}} </p>
+        </div>
+        
+         <div ng-if="(searchKeyword && !showFilters) && nf_fitlers.length" style="margin-bottom:10px;"></div>  
+</div>

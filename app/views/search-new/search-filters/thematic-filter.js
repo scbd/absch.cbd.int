@@ -8,9 +8,7 @@ define(['app', 'underscore', '/app/js/common.js',
             // transclude: true,
             require:'^searchDirective',
             templateUrl: '/app/views/search-new/search-filters/thematic-filter.html',
-            scope: {
-
-            },
+            scope: false,
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
                //$scope.searchFilters = searchDirectiveCtrl.getSearchFilters("");
                $scope.saveFilter = searchDirectiveCtrl.saveFilter;

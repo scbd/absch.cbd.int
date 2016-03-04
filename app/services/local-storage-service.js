@@ -13,7 +13,7 @@ define(['app', 'jquery', 'underscore', 'toastr', 'ngStorage'],
                     return;
 
                 if(new Date() < new Date(existing.expiry))
-                    return existing;
+                    return existing.data;
 
                 //remove expired data from storage;
                 console.log(key);

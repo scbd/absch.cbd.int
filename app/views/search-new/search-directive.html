@@ -14,24 +14,24 @@
         #search-new .nav-tabs>li {margin-bottom:0; font-weight:bold; font-size:16px;}
         #search-new .no-rl-padding{padding-left:0!important;margin-left:0!important;padding-right:0!important;margin-right:0!important;}
     </style>
-{{test}} 
+
+
     <div class="container-fluid" >
         <div class="row" >
             <div class="col-md-12" style="padding-bottom:10px;" >
-                <span ng-repeat="filter in searchFilters" style="margin-bottom:10px;">
-                   
-                    <button ng-show="filter.value" class="btn btn-sm btn-info bold" style="margin-top:5px;" ng-click="removeFilter(filter.id)" >
-                        {{filter.name}}
+                <span ng-repeat="filter in setFilters" style="margin-bottom:10px;">
+                    <button class="btn btn-sm btn-info bold" style="margin-top:5px;" ng-click="removeFilter(filter.id)" >
+                        <span ng-if="filter.type === 'freeText'">&#34;</span>{{filter.name}}<span ng-if="filter.type === 'freeText'">&#34;</span>
                         <span aria-hidden="true">×</span>
                     </button>
                 </span>
             </div>
     
             <div class="col-md-12" >
-                 <div class="input-group">
-                    <input type="text" ng-model="searchKeyword" class="form-control" placeholder="Search the ABSCH" aria-describedby="basic-addon2" style="font-weight:bold;">
-                    <span class="input-group-addon" id="basic-addon2"><i class="fa fa-search"></i></span>
-                </div>
+                <form ng-submit="saveFreeTextFilter(searchKeyword)" class="input-group" >
+                    <input type="text" ng-model="searchKeyword" class="form-control" placeholder="Search the ABSCH"  style="font-weight:bold;">
+                    <span type="submit" class="input-group-addon" id="basic-addon2"><i class="fa fa-search"></i></span>
+                </form>
             </div>
             <div class="col-md-12 search hidden-xs" style="padding-top:5px;" >
                 <ul>
@@ -47,16 +47,26 @@
             </div>
         </div>
      </div>
-        <div class="container-fluid"  ng-show="showFilters" style="z-index:10!important;top:-2px;position:relative;"  >
+        <div class="container-fluid"  ng-show="showFilters || searchKeyword" style="z-index:10!important;top:-2px;position:relative;"  >
             <div class="row" style="margin:0;" >
             <div class="col-xs-12 well  bg-grey1 " style="min-height:100px;margin:0;" >
                    <a href="#" ng-click="showFilters=false;" class="pull-right color-grey" ><i class="fa fa-times"></i></a>
-                   <schema-filter ng-if="showFilters==='national'" type='national'></schema-filter>
-                   <schema-filter ng-if="showFilters==='reference'" type='reference'></schema-filter>
-                   <schema-filter ng-if="showFilters==='scbd'" type='scbd'></schema-filter>
-                   <country-filter ng-if="showFilters==='country'"></country-filter>
-                   <thematic-filter ng-if="showFilters==='thematic'"></thematic-filter>
-                   
+                   <div ng-if="searchKeyword" id="Search-Filter" style="margin-bottom:20px;">
+                        <a class="filter country-heading"  ng-click="saveFreeTextFilter(searchKeyword);">
+                            <i class="fa check" ng-class="{'fa-check-square':isFilterOn('freeText_'+searchKeyword),'fa-square':!isFilterOn('freeText_'+searchKeyword)}"></i> 
+                            Free text search: <span class="color-blue">"{{searchKeyword}}"</span>
+                        </a>
+                   </div>
+
+                   <national-filter ng-if="showFilters==='national' || (searchKeyword && !showFilters)" ></national-filter>
+                
+                   <reference-filter ng-if="showFilters==='reference' || (searchKeyword && !showFilters)" ></reference-filter>
+
+                   <scbd-filter ng-if="showFilters==='scbd' || (searchKeyword && !showFilters)" ></scbd-filter>
+
+                   <country-filter ng-if="showFilters==='country' || (searchKeyword && !showFilters)"></country-filter>
+
+                   <thematic-filter ng-if="showFilters==='thematic' || (searchKeyword && !showFilters)"></thematic-filter>
             </div>
          </div>
         </div>

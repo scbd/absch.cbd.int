@@ -1,19 +1,20 @@
 <div id="Search-Filter"  >
-   
-     <span class="country-heading">Countries</span>
-     
-     <a ng-href="#" ng-click="setCountryFilter('All')" style="padding-right:10px;" class="letter" ng-class="{'letter-active':!countryFilter && !partyFilter}" >All</a>
-     <span ng-repeat="letter in alphabet">
-          <a ng-href="#" ng-click="setCountryFilter(letter)" class="letter" ng-class="{'letter-active':countryFilter == letter}">{{letter}}</a>
-     </span>
-    <a ng-href="#" ng-click="setPartyFilter('party')" style="padding-left:10px;" class="letter" ng-class="{'letter-active':partyFilter == 'party'}">Parties</a>
-    <a ng-href="#" ng-click="setPartyFilter('nonparty')" style="padding-left:10px;" class="letter" ng-class="{'letter-active':partyFilter == 'nonparty'}" >non-Parties</a> 
-    
-    <hr class="heading" />
-    <div style="max-height:400px;overflow: scroll;">
-        <div ng-repeat="doc in countries | filter:searchDirectiveCtrl.searchKeyword | orderBy:'name'"> 
+     <div ng-if="cf_fitlers.length">
+        <span class="country-heading">Countries</span>
+        
+        <a ng-href="#" ng-click="cf_setCountryFilter('All')" style="padding-right:10px;" class="letter" ng-class="{'letter-active':!cf_countryFilter && !cf_partyFilter}" >All</a>
+        <span ng-repeat="letter in alphabet">
+            <a ng-href="#" ng-click="cf_setCountryFilter(letter)" class="letter" ng-class="{'letter-active':cf_countryFilter == letter}">{{letter}}</a>
+        </span>
+        <a ng-href="#" ng-click="cf_setPartyFilter('party')" style="padding-left:10px;" class="letter" ng-class="{'letter-active':cf_partyFilter == 'party'}">Parties</a>
+        <a ng-href="#" ng-click="cf_setPartyFilter('nonparty')" style="padding-left:10px;" class="letter" ng-class="{'letter-active':cf_partyFilter == 'nonparty'}" >non-Parties</a> 
+        
+        <hr class="heading" />
+    </div>
+    <div style="max-height:400px;overflow: scroll;" >
+        <div ng-repeat="doc in cf_fitlers = (cf_countries | filter:searchKeyword | orderBy:'name')"> 
 
-            <div ng-if="showCountry(doc)">
+            <div ng-if="cf_showCountry(doc)">
             <a class="filter"  ng-click="saveFilter(doc.id)" >
                 <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i> 
                 <span ng-class="{'color-blue': doc.isNPParty}">{{doc.name}}</span>
@@ -27,4 +28,5 @@
             </div>
         </div>
    </div>
+   <div ng-if="(searchKeyword && !showFilters) && cf_fitlers.length" style="margin-bottom:10px;"></div>  
 </div>

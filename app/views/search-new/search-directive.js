@@ -1,7 +1,9 @@
 define(['app', 'underscore', '/app/js/common.js',
 '/app/services/search-service.js',
 '/app/views/search-new/search-filters/thematic-filter.js',
-'/app/views/search-new/search-filters/schema-filter.js',
+'/app/views/search-new/search-filters/national-filter.js',
+'/app/views/search-new/search-filters/reference-filter.js',
+'/app/views/search-new/search-filters/scbd-filter.js',
 '/app/views/search-new/search-filters/country-filter.js',
 '/app/views/search-new/search-results/result-default.js',
 '/app/views/search-new/search-results/national-records-country.js',
@@ -13,7 +15,7 @@ define(['app', 'underscore', '/app/js/common.js',
             replace: true,
             // transclude: true,
             templateUrl: '/app/views/search-new/search-directive.html',
-            controller: ['$scope','$q', 'realm', 'searchService', 'commonjs', '$localStorage' ,function($scope, $q, realm, searchService, commonjs, $localStorage) {
+            controller: ['$scope','$q', 'realm', 'searchService', 'commonjs', 'localStorageService', '$http', 'Thesaurus' ,function($scope, $q, realm, searchService, commonjs, localStorageService, $http, thesaurus) {
     
                     var queryCanceler = null;
                     $scope.rawDocs = [];
@@ -27,35 +29,59 @@ define(['app', 'underscore', '/app/js/common.js',
                     var refresh_nat = true;
                     var refresh_ref = true;
                     var refresh_scbd = true;
-                    $scope.countries = $localStorage.countries;
-                    $scope.searchKeyword = '';
+                    
                     $scope.searchFilters = {};
+                    $scope.countriesFilters = {};
+                    $scope.regionsFilter = {};
+                    $scope.searchKeyword = '';
+                    
                     $scope.setFilters = {};
                     $scope.test = '';
                     $scope.itemsPerPage = 25;
                     
+              
+                    //===============================================================================================================================        
+                    $scope.isFreeTextFilterOn = function(filterID) {
+                          return false;
+                    };
                     
-                    //*************************************************************************************************************************************
+                    //===============================================================================================================================        
+                    $scope.saveFreeTextFilter = function(text) {
+                        if(!text && text.length <= 0) 
+                            return;
+                             
+                        var id = 'freeText_' + text;
+                        
+                         if($scope.setFilters[id] )
+                           delete $scope.setFilters[id];
+                        else{
+                           $scope.setFilters[id] = {'type':'freeText', 'name': ""+text+"", 'id':id};
+                        }
+                    
+                        $scope.refresh = true;
+                    };
+                    
+                  //===============================================================================================================================        
                     function getFilter(id) {
                          //console.log($scope.searchFilters[id]);
                          return $scope.searchFilters[id];
                          
                     };
                     
-                    //*************************************************************************************************************************************
+                  //===============================================================================================================================        
                     $scope.updateCurrentTab = function(tabname) {
                            $scope.currentTab = tabname;
                             $scope.showFilters= false;
                     };
                     
     
-                    //*************************************************************************************************************************************
+                  //===============================================================================================================================        
                     function addFilter(filterID, filterInfo ) {
                           $scope.searchFilters[filterID] = filterInfo; 
                           //console.log(filterID);
                     };
                     
-                    //*************************************************************************************************************************************
+                  //===============================================================================================================================        
                     function getSearchFilters(type) {
                           if(!type)
                               return $scope.searchFilters;
@@ -63,40 +89,38 @@ define(['app', 'underscore', '/app/js/common.js',
                            return _.filter($scope.searchFilters, function(item){if(item.type === type) return item;});
                     };
                     
-                     //*************************************************************************************************************************************
+                  //===============================================================================================================================        
                    // function getSearchKeyWord() {
                    //       return $scope.searchKeyword;
                    // };
                                         
-                    //*************************************************************************************************************************************
-                    $scope.removeFilter = function(filter) {
-                            $scope.searchFilters[filter].value = false;
-                            delete $scope.setFilters[$scope.searchFilters[filter].id];
-
+                  //===============================================================================================================================        
+                    $scope.removeFilter = function(filterID) {
+                            delete $scope.setFilters[filterID];
                             $scope.refresh=true;
                     };
                     
-                     //*************************************************************************************************************************************
-                    function isFilterOn(filter) {
-                          if(filter == undefined) 
-                            return false;
-                           return $scope.searchFilters[filter].value;
+                  //===============================================================================================================================        
+                    $scope.isFilterOn  = function(filterID) {
+                          if(!filterID) 
+                                return false;
+                          
+                          return $scope.setFilters[filterID] ? true : false;
                     };
-                    
-                    //*************************************************************************************************************************************
-                    function saveFilter(filter) {
-                        $scope.searchFilters[filter].value = !$scope.searchFilters[filter].value;
+                     
+                  //===============================================================================================================================        
+                    $scope.saveFilter = function(filterID) {
                         
-                        if($scope.setFilters[$scope.searchFilters[filter].id] )
-                           delete $scope.setFilters[$scope.searchFilters[filter].id];
+                        if($scope.setFilters[filterID])
+                           delete $scope.setFilters[filterID];
                         else{
-                           $scope.setFilters[$scope.searchFilters[filter].id] = {type: $scope.searchFilters[filter].type, id:$scope.searchFilters[filter].id};
+                           $scope.setFilters[filterID] = {type:$scope.searchFilters[filterID].type, name:$scope.searchFilters[filterID].name, id:$scope.searchFilters[filterID].id};
                         }
                         
                         $scope.refresh = true;
                     };
 
-                    //*************************************************************************************************************************************
+                  //===============================================================================================================================        
                     function nationalQuery() {
                   
                         var searchOperation;
@@ -140,7 +164,7 @@ define(['app', 'underscore', '/app/js/common.js',
 
                     };
                     
-                    //*************************************************************************************************************************************
+                  //===============================================================================================================================        
                     function referenceQuery() {
 
                         var searchOperation;
@@ -181,9 +205,9 @@ define(['app', 'underscore', '/app/js/common.js',
                             });
 
                     };
-                    //*************************************************************************************************************************************
+                  //===============================================================================================================================        
                     function scbdQuery() {
-
+                        
                         var searchOperation;
 
                         if (queryCanceler) {
@@ -220,11 +244,9 @@ define(['app', 'underscore', '/app/js/common.js',
                             }).catch(function(error) {
                                 console.log('ERROR: ' + error);
                             });
-
                     };
                     
-                     
-                    //*****************************************************************************************************************
+                  //===============================================================================================================================        
                     function queryFilterBuilder(queryType){
                         var qAnd=[];
                         var qOr =[];
@@ -235,14 +257,19 @@ define(['app', 'underscore', '/app/js/common.js',
                               //schema
                               qAnd.push(buildFieldQuery('schema_s', 'national', natSchemas));
                               qAnd.push(buildFieldQuery('government_s', 'country', "*"));
+                              
+                              qOr.push(buildTextQuery('title_t'      ,'freeText'  , null));
+                              qOr.push(buildTextQuery('description_t','freeText'  , null));
+                              
                         }
                         
                         if(queryType === 'reference'){
                                //schema
                                qAnd.push(buildFieldQuery('schema_s','reference', refSchemas));
                                
-                               qOr.push(buildTextQuery('text_EN_txt'   ,'national', "10"));
-                               qOr.push(buildTextQuery('text_EN_txt'    ,'country', "10"));
+                               qOr.push(buildTextQuery('text_EN_txt'    ,'national', null));
+                               qOr.push(buildTextQuery('text_EN_txt'    ,'country', null));
+                               qOr.push(buildTextQuery('text_EN_txt'    ,'freeText', null));
                                qOr.push(buildFieldQuery('regions_REL_ss','country', null));
                         }
                         
@@ -256,30 +283,30 @@ define(['app', 'underscore', '/app/js/common.js',
                                qOr.push(buildTextQuery('description_t','reference' , null));
                                qOr.push(buildTextQuery('title_t'      ,'country'   , null));
                                qOr.push(buildTextQuery('description_t','country'   , null));
+                               qOr.push(buildTextQuery('title_t'      ,'freeText'   , null));
+                               qOr.push(buildTextQuery('description_t','freeText'   , null));
                         }
 
                         q = combineQuery(qAnd, "AND");
                         q1 = combineQuery(qOr, "OR");
                         $scope.test = q1 ? q + " AND (" + q1 + ")" : q;
-                        
                         return q1 ? q + " AND (" + q1 + ")" : q;
                      };
                      
-                     //*****************************************************************************************************************
+                  //===============================================================================================================================        
                     function checkSetFilters(type){
                        return  _.find($scope.setFilters, function(item){if(item.type === type) return true;});
                     }
                     
-                    //*****************************************************************************************************************
+                  //===============================================================================================================================        
                     function buildTextQuery(field, type, boost){
-                        
                         var q = '';
                         var values = [];
                         
                         if($scope.setFilters){
                             _.each($scope.setFilters, function(item){
                                 if(item.type == type){
-                                    values.push($scope.searchFilters[item.id].name);
+                                    values.push($scope.setFilters[item.id].name);
                                 } 
                             });
                             if(values.length)
@@ -288,7 +315,7 @@ define(['app', 'underscore', '/app/js/common.js',
                        return  q ? q : null; 
                     }
 
-                    //*****************************************************************************************************************
+                  //===============================================================================================================================        
                     function buildFieldQuery(field, type, allFilters){
                         var q = ''; 
                         
@@ -307,11 +334,9 @@ define(['app', 'underscore', '/app/js/common.js',
                              return field + ":(" + allFilters + ")";
                         else 
                              return null;
-                      
                     }
-                          
    
-                    //*****************************************************************************************************************
+                  //===============================================================================================================================        
                     function addORCondition(field, values, boost){
                         var q ="";
                         var conditions = [];
@@ -321,43 +346,49 @@ define(['app', 'underscore', '/app/js/common.js',
                         return q;
                     }
                     
-                    //*****************************************************************************************************************
+                  //===============================================================================================================================        
                     function combineQuery(qCondition, op1 ){
                         var q ='';
                         _.each(qCondition, function (val){ if(val) q = q + (q ? op1 : "") + "(" + val + ")" } );
                         return q ? q : '';
                     }
                     
-                    //*************************************************************************************************************************************
+                  //===============================================================================================================================        
                     function loadFilters() {
-                        console.log('load filters first');
-                        loadSchemaFilters();
-                        loadCountryFilters();
-                        loadThematicFilters();
+                        
+                         console.log('load filters');
+                        
+                        if( _.isEmpty($scope.searchFilters) ){
+                            $scope.searchFilters = {};
+                            $scope.searchFilters = localStorageService.get("searchFilters");
+                            console.log('getting filters from local storage');
+                        }
+                        if( _.isEmpty($scope.searchFilters) ){
+                            $scope.searchFilters = {};
+                            loadSchemaFilters();
+                            loadCountryFilters();
+                            loadThematicFilters();
+                            loadRegionsFilters();
+                            localStorageService.set("searchFilters", $scope.searchFilters);
+                            console.log('getting new filters');
+                        }
+                        
+                        $scope.test = $scope.searchFilters.length;
                     };
                     
-                    //*************************************************************************************************************************************
+                  //===============================================================================================================================        
                     function loadCountryFilters() {
-                        if(!$scope.countries){
-                            $q.when(commonjs.getCountries(), function(data) {
-                                $scope.countries = data;
-                                $localStorage.countries = $scope.countries;
-                                
-                                 _.each($scope.countries, function(country, index){
-                                    addFilter(country.code.toLowerCase(), {'filterSort':4, 'sort': index, 'type':'country', 'value':false,  'name':country.name.en, 'id':country.code.toLowerCase(), 'description':'', "isCBDParty": country.isCBDParty,"isNPParty":country.isNPParty,"isNPSignatory": country.isNPSignatory,"isNPRatified": country.isNPRatified ,"isNPInbetweenParty":country.isNPInbetweenParty,"entryIntoForce": country.entryIntoForce});
-                                 }); 
-                            });
-                        }
-                        else{
+                        
+                        $q.when(commonjs.getCountries(), function(data) {
+                                var countries = data;
                             
-                            _.each($scope.countries, function(country, index){
-                                    addFilter(country.code.toLowerCase(), {'filterSort':4, 'sort': index, 'type':'country', 'value':false,  'name':country.name.en, 'id':country.code.toLowerCase(), 'description':'', "isCBDParty": country.isCBDParty,"isNPParty":country.isNPParty,"isNPSignatory": country.isNPSignatory,"isNPRatified": country.isNPRatified ,"isNPInbetweenParty":country.isNPInbetweenParty,"entryIntoForce": country.entryIntoForce});
-                                 }); 
-                            
-                        }
+                                _.each(countries, function(country, index){
+                                addFilter(country.code.toLowerCase(), {'sort': index, 'type':'country', 'name':country.name.en, 'id':country.code.toLowerCase(), 'description':'', "isCBDParty": country.isCBDParty,"isNPParty":country.isNPParty,"isNPSignatory": country.isNPSignatory,"isNPRatified": country.isNPRatified ,"isNPInbetweenParty":country.isNPInbetweenParty,"entryIntoForce": country.entryIntoForce});
+                                }); 
+                        });
                     };
                     
-                    //*************************************************************************************************************************************
+                  //===============================================================================================================================        
                     function loadThematicFilters() {
                         
                         //national record applicable keywords
@@ -365,45 +396,96 @@ define(['app', 'underscore', '/app/js/common.js',
                         
                     };
                     
-                    //*************************************************************************************************************************************
+                  //===============================================================================================================================        
+                    function loadRegionsFilters(){
+                     
+                        // if(!$scope.regions)  
+                        // {
+                        //     $http.get('/api/v2013/thesaurus/domains/regions/terms', { cache:true }).then(function (response) {
+
+                        //         var termsTree = thesaurus.buildTree(response.data);
+                        //         //var termsMap = flatten(termsTree, {});
+                        //         //var classes   = _.filter(termsTree, function where (o) { return !!o.narrowerTerms && o.identifier!='1796f3f3-13ae-4c71-a5d2-0df261e4f218'; });
+                        //         var termsMap ={};
+                        //         _.values(termsTree).forEach(function (term) {
+                                    
+                        //             console.log();
+                                    
+                        //             term.name = term.name.replace('CBD Regional Groups - ', '');
+                        //             term.name = term.name.replace('Inland water ecosystems - ', '');
+                        //             term.name = term.name.replace('Large marine ecosystems - ', '');
+
+                        //             term.name = term.name.replace('Mountains - All countries', 'Mountains');
+                        //             term.name = term.name.replace('Global - All countries', 'Global');
+                        //             term.name = term.name.replace('Americas - All countries', 'Americas');
+                        //             term.name = term.name.replace('Africa - All countries', 'Africa');
+                        //             term.name = term.name.replace('Asia - All countries', 'Asia');
+                        //             term.name = term.name.replace('Europe - All countries', 'Europe');
+                        //             term.name = term.name.replace('Oceania - All countries', 'Oceania');
+
+                        //             term.name = term.name.replace('Mountains - ', '');
+                        //             term.name = term.name.replace('Global - ', '');
+                        //             term.name = term.name.replace('Americas - ', '');
+                        //             term.name = term.name.replace('Africa - ', '');
+                        //             term.name = term.name.replace('Asia - ', '');
+                        //             term.name = term.name.replace('Europe - ', '');
+                        //             term.name = term.name.replace('Oceania - ', '');
+                        //         });
+
+                              
+                        //     });//http
+                        // } 
+       
+                        
+                    };
+                   
+                   //===============================================================================================================================        
+                    function flatten(items, collection) {
+                        items.forEach(function (item) {
+                            item.selected = false;
+                            collection[item.identifier] = item;
+                            if(item.narrowerTerms)
+                                flatten(item.narrowerTerms, collection);
+                        });
+                        return collection;
+                    } 
+                    
+                  //===============================================================================================================================        
                     function loadSchemaFilters() {
                        //national
-                        addFilter('national', {'filterSort':1, 'sort': 0, 'type':'national', 'value':false,  'name':'National Records', 'id':'national', 'description':'National records are published by Governments and include national information relevant for the implementation of the Nagoya Protocol as well as information Parties are obliged to provide in accordance with the Protocol.'});
                         
-                        addFilter('focalPoint',  {'filterSort':1,'sort': 1,'type':'national', 'value':false, 'name':'ABS National Focal Point', 'id':'focalPoint', 'description':'Institution designated to liaise with the Secretariat and make available information on procedures for accessing genetic resources and establishing mutually agreed terms, including information on competent national authorities, relevant indigenous and local communities and relevant stakeholders (Article 13.1).'});
+                        addFilter('focalPoint',  {'sort': 1,'type':'national',  'name':'ABS National Focal Point', 'id':'focalPoint', 'description':'Institution designated to liaise with the Secretariat and make available information on procedures for accessing genetic resources and establishing mutually agreed terms, including information on competent national authorities, relevant indigenous and local communities and relevant stakeholders (Article 13.1).'});
                         
-                        addFilter('authority',  {'filterSort':1,'sort': 2,'type':'national', 'value':false, 'name':'Competent National Authorities', 'id':'authority', 'description':'Entities designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)'});
+                        addFilter('authority',  {'sort': 2,'type':'national',  'name':'Competent National Authorities', 'id':'authority', 'description':'Entities designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)'});
                         
-                        addFilter('measure',  {'filterSort':1,'sort': 3,'type':'national', 'value':false, 'name':'Legislative, administrative or policy measures', 'id':'measure', 'description':'Measures adopted at domestic level to implement the access and benefit-sharing obligations of the Convention or/and the Nagoya Protocol.'});
+                        addFilter('measure',  {'sort': 3,'type':'national', 'name':'Legislative, administrative or policy measures', 'id':'measure', 'description':'Measures adopted at domestic level to implement the access and benefit-sharing obligations of the Convention or/and the Nagoya Protocol.'});
                         
-                        addFilter('database',  {'filterSort':1,'sort': 4,'type':'national', 'value':false, 'name':'National Websites and Databases', 'id':'database', 'description':'Information and links to national websites or databases which are relevant for ABS.'});
+                        addFilter('database',  {'sort': 4,'type':'national','name':'National Websites and Databases', 'id':'database', 'description':'Information and links to national websites or databases which are relevant for ABS.'});
                         
-                        addFilter('absPermit', {'filterSort':1,'sort': 5,'type':'national', 'value':false, 'name':'Internationally Recognized Certificate of Compliance', 'id':'absPermit', 'description':'Certificate constituted from the information on the permit or its equivalent registered in the ABS Clearing-House, serving as evidence that the genetic resource which it covers has been accessed in accordance with prior informed consent and that mutually agreed terms have been established. It contains the minimum necessary information to allow monitoring the utilization of genetic resources by users throughout the value chain (Article 17).'});
+                        addFilter('absPermit', {'sort': 5,'type':'national',  'name':'Internationally Recognized Certificate of Compliance', 'id':'absPermit', 'description':'Certificate constituted from the information on the permit or its equivalent registered in the ABS Clearing-House, serving as evidence that the genetic resource which it covers has been accessed in accordance with prior informed consent and that mutually agreed terms have been established. It contains the minimum necessary information to allow monitoring the utilization of genetic resources by users throughout the value chain (Article 17).'});
                         
-                        addFilter('absCheckpoint',   {'filterSort':1,'sort': 6,'type':'national', 'value':false, 'name':'Checkpoints', 'id':'absCheckpoint', 'description':'Entities designated by Parties to effectively collect or receive relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms and/or to the utilization of genetic resources, as appropriate (Article 17, 1(a) (i)).'});
+                        addFilter('absCheckpoint',   {'sort': 6,'type':'national',  'name':'Checkpoints', 'id':'absCheckpoint', 'description':'Entities designated by Parties to effectively collect or receive relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms and/or to the utilization of genetic resources, as appropriate (Article 17, 1(a) (i)).'});
                         
-                        addFilter('absCheckpointCommunique',  {'filterSort':1,'sort': 7,'type':'national', 'value':false, 'name':'Checkpoint Communiqués ', 'id':'absCheckpointCommunique', 'description':'A summary of the information collected or received by a checkpoint related to prior informed consent, to the source of the genetic resource, to the establishment  utilization of genetic resources and registered in the ABS Clearing-House (Article 17.1 (a)).'});
+                        addFilter('absCheckpointCommunique',  {'sort': 7,'type':'national','name':'Checkpoint Communiqués ', 'id':'absCheckpointCommunique', 'description':'A summary of the information collected or received by a checkpoint related to prior informed consent, to the source of the genetic resource, to the establishment  utilization of genetic resources and registered in the ABS Clearing-House (Article 17.1 (a)).'});
                         
                         
                         //reference
-                        addFilter('reference', {'filterSort':2, 'sort': 0,'value':false, type:'reference', 'name':'Reference Records', 'id':'reference', 'description':'Reference records include a number of ABS relevant resources and information. They can be submitted by any registered user of the ABS Clearing-House (Parties, Non-Parties, governments, international organizations, indigenous and local communities, and relevant stakeholders.' });
-                        addFilter('resource', {'filterSort':2,'sort': 1,'value':false, type:'reference', 'name':'Virtual Library Records ', 'id':'resource', 'description':'The virtual library in the ABS Clearing-House general literature submitted by any registered user of the ABS Clearing-House.'});
+                        addFilter('resource', {'sort': 1,'value':false, type:'reference', 'name':'Virtual Library Records ', 'id':'resource', 'description':'The virtual library in the ABS Clearing-House general literature submitted by any registered user of the ABS Clearing-House.'});
                         
-                        addFilter('modelContractualClause', {'filterSort':2,'sort': 2,'value':false, type:'reference', 'name':'Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standard', 'id':'modelContractualClause', 'description':'Model contractual clauses are addressed in Article 19 of the Protocol. They can assist in the development of agreements that are consistent with ABS requirements and may reduce transaction costs while promoting legal certainty and transparency. Codes of Conduct, Guidelines, Best Practices and/or Standards are addressed in Article 20 of the Protocol.They may assist users to undertake their activities in a manner that is consistent with ABS requirements while also taking into account the practices of different sectors.'});
+                        addFilter('modelContractualClause', {'sort': 2, type:'reference', 'name':'Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standard', 'id':'modelContractualClause', 'description':'Model contractual clauses are addressed in Article 19 of the Protocol. They can assist in the development of agreements that are consistent with ABS requirements and may reduce transaction costs while promoting legal certainty and transparency. Codes of Conduct, Guidelines, Best Practices and/or Standards are addressed in Article 20 of the Protocol.They may assist users to undertake their activities in a manner that is consistent with ABS requirements while also taking into account the practices of different sectors.'});
                         
-                        addFilter('communityProtocol', {'filterSort':2,'sort': 3,'value':false, type:'reference', 'name':'Community Protocols and Procedures and Customary Laws', 'id':'communityProtocol', 'description':'Community protocols and procedures and customary laws are addressed in Article 12 of the Protocol. They can help other actors to understand and respect the community’s procedures and values with respect to access and benefit-sharing.'});
-                        addFilter('capacityBuildingInitiative', {'filterSort':2,'sort': 4,'value':false, type:'reference', 'name':'Capacity Building Initiatives', 'id':'capacityBuildingInitiative', 'description':''});
-                        addFilter('capacityBuildingResource', {'filterSort':2,'sort': 5,'value':false, type:'reference', 'name':'Capacity Building Resources', 'id':'capacityBuildingResource', 'description':''});
+                        addFilter('communityProtocol', {'sort': 3, type:'reference', 'name':'Community Protocols and Procedures and Customary Laws', 'id':'communityProtocol', 'description':'Community protocols and procedures and customary laws are addressed in Article 12 of the Protocol. They can help other actors to understand and respect the community’s procedures and values with respect to access and benefit-sharing.'});
+                        addFilter('capacityBuildingInitiative', {'sort': 4, type:'reference', 'name':'Capacity Building Initiatives', 'id':'capacityBuildingInitiative', 'description':''});
+                        addFilter('capacityBuildingResource', {'sort': 5, type:'reference', 'name':'Capacity Building Resources', 'id':'capacityBuildingResource', 'description':''});
                         
                         //SCBD
-                        addFilter('scbd', {'filterSort':3,'sort': 0,'type':'scbd', 'value':false, 'name':'SCBD Managed Records', 'id':'scbd', 'description':''});
-                        addFilter('news',  {'filterSort':3,'sort': 1,'type':'scbd', 'value':false, 'name':'News', 'id':'news', 'description':'ABS related news'});
-                        addFilter('notifications',  {'filterSort':3,'sort': 2,'type':'scbd', 'value':false, 'name':'Notifications', 'id':'notifications', 'description':'ABS related notifcations'});
+                        addFilter('news',  {'sort': 1,'type':'scbd', 'name':'News', 'id':'news', 'description':'ABS related news'});
+                        addFilter('notifications',  {'sort': 2,'type':'scbd',  'name':'Notifications', 'id':'notifications', 'description':'ABS related notifcations'});
                     };
                     
-                  //*************************************************************************************************************************************         
+                  //===============================================================================================================================        
                     function load(){
-                        console.log("loading");
+                        console.log("loading queries");
                         switch ($scope.currentTab) {
                             case "nationalRecords":
                                 if(refresh_nat)
@@ -432,37 +514,38 @@ define(['app', 'underscore', '/app/js/common.js',
                         }
                     };
                     
-                    //this.load = load;
                     this.addFilter = addFilter;
-                    this.saveFilter = saveFilter;
                     this.nationalQuery = nationalQuery;
                     this.referenceQuery = referenceQuery;
                     this.scbdQuery = scbdQuery;
-                    this.isFilterOn = isFilterOn;
                     this.getSearchFilters = getSearchFilters;
                     this.getFilter = getFilter;
                    
                     
                     loadFilters();
+                    load();
                     
-                     //*************************************************************************************************************************************
-                    $scope.$watch('currentTab', function(){
-                       load();
+                  //===============================================================================================================================        
+                    $scope.$watch('currentTab', function(newVal, oldVal){
+                       if(newVal != oldVal)
+                            load();
 				    });
                     
-                    //*************************************************************************************************************************************
+                    //===============================================================================================================================        
                     $scope.$watch('searchKeyword', function(){
                         this.searchKeyword = $scope.searchKeyword;
 				    });
                     
                     
-                    //*************************************************************************************************************************************
-                    $scope.$watch('refresh', function(){
-                       $scope.refresh = false;
-                       refresh_nat = true;
-                       refresh_ref = true;
-                       refresh_scbd = true;
-                       load();
+                  //===============================================================================================================================        
+                    $scope.$watch('refresh', function(newVal){
+                        if(newVal === true){
+                            refresh_nat = true;
+                            refresh_ref = true;
+                            refresh_scbd = true;
+                            load(); 
+                            $scope.refresh = false;   
+                        }                    
 				    });
 
             }]//controller

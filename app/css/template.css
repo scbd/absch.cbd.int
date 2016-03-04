@@ -295,6 +295,7 @@ border-right:1px solid #888;
 }
 
 .bold{font-weight:bold!important;}
+.unbold{font-weight:normal!important;}
 
 
 .fa-6 {
@@ -1251,7 +1252,7 @@ footer .logo {
             padding: 0;
         }
     
- #Search-Filter .heading > .filter , #Search-Filter  .country-heading{
+ #Search-Filter .heading, .heading > .filter , #Search-Filter  .country-heading{
             font-weight: bold;
             font-size: 16px;
             border-color: #bbb!important;
