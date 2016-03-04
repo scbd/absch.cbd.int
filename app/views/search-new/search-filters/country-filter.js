@@ -48,7 +48,7 @@ define(['app', 'underscore', '/app/js/common.js',
                     if(!$scope.cf_countryFilter) 
                         return cf_filterParty(item);
                     else{
-                        if(item.name[0] === $scope.countryFilter)
+                        if(item.name[0] === $scope.cf_countryFilter)
                             return cf_filterParty(item);
                     }
                };
