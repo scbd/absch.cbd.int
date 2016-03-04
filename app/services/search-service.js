@@ -7,13 +7,14 @@ define(['app', 'underscore', './local-storage-service.js'], function (app, _) {
             var searchDefaults = {
                 currentPage     : 0,
                 rowsPerPage     : 25,
-                sort            : 'udpatedDate_dt desc',
+                sort            : 'updatedDate_dt desc',
                 fields          : 'identifier_s, title_t, description_t',
                 query           : '*:*',
                 groupSort       : 'government_EN_t',
-                groupField      : 'government_EN_t asc'
+                groupField      : 'government_EN_t asc',
+                groupLimit      : 1000
             }
-           var q = '(realm_ss:' + realm.value.toLowerCase() + ') AND NOT version_s:* AND';
+           var q = '(realm_ss:' + realm.value.toLowerCase() + ') AND NOT version_s:* AND ';
 
            //*****************************************************************************************************************
             this.list = function(searchQuery, queryCanceler){
@@ -47,7 +48,7 @@ define(['app', 'underscore', './local-storage-service.js'], function (app, _) {
                     'group': true,
                     'group.ngroups' : true,
                     'group.field': searchQuery.groupField,
-                    'group.limit': 1000,
+                    'group.limit': searchQuery.groupLimit,
                     'group.sort': searchQuery.groupSort
                 };
 
@@ -93,6 +94,51 @@ define(['app', 'underscore', './local-storage-service.js'], function (app, _) {
                 }
 
            }
+
+           this.facetsPivot = function(facetQuery, localStorageKey){
+
+               if(localStorageKey){
+                   var fromStorage = localStorageService.get(localStorageKey);
+                   if(fromStorage && fromStorage.data )//&& fromStorage.expiry < new date())
+                       return fromStorage.data;
+               }
+              _.defaults(facetQuery, searchDefaults);
+
+               if(facetQuery) {
+
+                   var queryFacetsParameters = {
+                       'q'             : facetQuery.query,
+                       'fl'            : '',
+                       'wt'            : 'json',
+                       'rows'          : 0,
+                       'facet'         : true,
+                       'facet.pivot'   : facetQuery.fields,
+                       'facet.limit'   : 512,
+                       'facet.mincount': 1
+                   };
+                  var queryAction =  $http.get('/api/v2013/index/select', { params: queryFacetsParameters });
+                  return $q.when(queryAction)
+                       .then(function (data) {
+
+                        var facets = _.map(data.data.facet_counts.facet_pivot[facetQuery.fields], function(data){
+                                            var facet = {};
+                                            facet.government  = data.value;
+                                            facet.recordCount = data.count;
+                                            facet.schemas     = {};
+                                              _.each(data.pivot, function(pivotFacets){
+                                                  facet.schemas[pivotFacets.value] = pivotFacets.count;
+                                              });
+                                            return facet;
+                                        });
+
+                           if(localStorageKey)
+                               localStorageService.set(localStorageKey, facets);
+
+                           return facets;
+                       });
+               }
+
+          }
 
 
            /////////////////////////////////////
