@@ -13,9 +13,7 @@ define(['app', 'underscore', './local-storage-service.js'], function (app, _) {
                 groupSort       : 'government_EN_t',
                 groupField      : 'government_EN_t asc'
             }
-
            var q = '(realm_ss:' + realm.value.toLowerCase() + ') AND NOT version_s:* AND';
-            
 
            //*****************************************************************************************************************
             this.list = function(searchQuery, queryCanceler){
@@ -61,8 +59,8 @@ define(['app', 'underscore', './local-storage-service.js'], function (app, _) {
 
                 if(localStorageKey){
                     var fromStorage = localStorageService.get(localStorageKey);
-                    if(fromStorage && fromStorage.data )//&& fromStorage.expiry < new date())
-                        return fromStorage.data;
+                    if(fromStorage)
+                        return fromStorage;
                 }
                _.defaults(facetQuery, searchDefaults);
 
