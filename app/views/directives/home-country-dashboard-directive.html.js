@@ -1,5 +1,5 @@
 define(['app', 'underscore', '/app/services/search-service.js', '/app/services/app-config-service.js',
-'/app/js/common.js'],
+'/app/js/common.js', './loading-directive.js'],
     function(app, _) {
         app.directive('homeCountryDashboard', function($http) {
             return {
@@ -13,13 +13,8 @@ define(['app', 'underscore', '/app/services/search-service.js', '/app/services/a
                             $scope.currentFacet = facet;
                         }
 
-
-                        var nationalRecordsQuery = {
-                            fields: 'government_s,schema_s',
-                            query: 'schema_s:(' + appConfigService.nationalSchemas.join(' ') + ')'
-                        };
-
-                        $q.when(searchService.facetsPivot(nationalRecordsQuery, 'governmentFacets'))
+                        $scope.loadingNationalFacets = true;
+                        $q.when(searchService.governmentSchemaFacets())
                             .then(function(results) {
 
 								var nationalRecords = {	absCheckpoint		   : { countryCount :0, recordCount : 0 },
@@ -31,7 +26,6 @@ define(['app', 'underscore', '/app/services/search-service.js', '/app/services/a
 														measure:                 { countryCount :0, recordCount : 0 }
 													};
 								_.each(results, function(country){
-
 									nationalRecords.absCheckpoint.recordCount           += country.schemas.absCheckpoint||0;
 									nationalRecords.absCheckpointCommunique.recordCount += country.schemas.absCheckpointCommunique||0;
 									nationalRecords.absPermit.recordCount               += country.schemas.absPermit||0;
@@ -54,7 +48,7 @@ define(['app', 'underscore', '/app/services/search-service.js', '/app/services/a
                                 console.log(error);
                             })
                             .finally(function() {
-                                $scope.loadingFacets = false;
+                                $scope.loadingNationalFacets = false;
                             });
 
 
@@ -68,6 +62,7 @@ define(['app', 'underscore', '/app/services/search-service.js', '/app/services/a
                             groupLimit : 5,
                             groupSort  : 'startDate_dt desc, updatedDate_dt desc'
                         };
+                        $scope.loadingRefFacets = true;
                         return searchService.group(referenceRecordsQuery)
                             .then(function(data) {
                                 console.log(data);
@@ -79,6 +74,12 @@ define(['app', 'underscore', '/app/services/search-service.js', '/app/services/a
                                     };
                                 });
                                 $scope.referenceRecords = referenceRecords;
+                            })
+                            .catch(function(error) {
+                                console.log(error);
+                            })
+                            .finally(function() {
+                                $scope.loadingRefFacets = false;
                             });
 
                         //verify if needs to be removed
