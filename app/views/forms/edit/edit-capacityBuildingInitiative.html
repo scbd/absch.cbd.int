@@ -50,7 +50,15 @@
 								</div>
 							</div>
 						</div>
-
+                        
+                        <div class="row">
+							<div class="col-md-12">
+								<div class="km-control-group" required name="regionsOrCountries" caption="Geographical or political/economic group(s) and/or country(ies)">
+									<div km-select multiple required name="regionsOrCountries" ng-model="document.geographicScope.regionsOrCountries" placeholder="Please select one option" items="options.regions()"></div>
+								</div>
+							</div>
+						</div>
+                        
 						<div class="row">
 							<div class="col-md-12">
 								<div class="km-control-group" required name="geographicScope" caption="Geographic Scope">
@@ -58,13 +66,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="row" ng-show="document.geographicScope.scope">
-							<div class="col-md-12">
-								<div class="km-control-group" required name="regionsOrCountries" caption="Geographical or political/economic group(s) and/or country(ies)">
-									<div km-select multiple required name="regionsOrCountries" ng-model="document.geographicScope.regionsOrCountries" placeholder="Please select one option" items="options.regions()"></div>
-								</div>
-							</div>
-						</div>
+						
 
 						<div class="row" ng-show="isSubnational()">
 							<div class="col-md-12">
@@ -118,35 +120,36 @@
 
 						<div class="row">
 							<div class="col-md-12">
-								<div class="km-control-group" required name="organizations" caption="Agency(ies) or organisation(s) implementing and/or executing the initiative"></div>
+								<div class="km-control-group" required name="organizations" caption="Agency(ies) or organisation(s) implementing and/or executing the initiative">
 
 								<div class="checkbox"><label><input type="checkbox" ng-model="document.isImplementedByAgencies">Implementing agency(ies) or organization(s)</label></div>
-                                <div class="row">
+                                <div class="row"  ng-show="document.isImplementedByAgencies">
                                     <div class="col-md-12">
-                                        <div class="km-control-group" ng-show="document.isImplementedByAgencies" name="implementingAgencies" caption="Please select the implementing agency(ies) or organization(s)">
+                                        <div  name="implementingAgencies" caption="Please select the implementing agency(ies) or organization(s)">
                                             <field-embed-contact organization-only multiple ng-model="documentContacts.implementingAgenciesRef" locales="document.header.languages" caption="{{'Add an organization »'}}"></field-embed-contact>
                                         </div>
                                     </div>
                                 </div>
 
 								<div class="checkbox"><label><input type="checkbox" ng-model="document.isExecutededByAgencies">Executing agency(ies) or organization(s)</label></div>
-                                <div class="row">
+                                <div class="row" ng-show="document.isExecutededByAgencies">
                                     <div class="col-md-12">
-                                        <div class="km-control-group" ng-show="document.isExecutededByAgencies" name="executingAgencies" caption="Please select the executing agency(ies) or organization(s)">
+                                        <div  name="executingAgencies" caption="Please select the executing agency(ies) or organization(s)">
                                             <field-embed-contact organization-only multiple ng-model="documentContacts.executingAgenciesRef" locales="document.header.languages" caption="{{'Add an organization »'}}"></field-embed-contact>
                                         </div>
                                     </div>
                                 </div>
 
 								<div class="checkbox"><label><input type="checkbox" ng-model="document.isCollaboratededByPartners">Collaborating partner(s)</label></div>
-                                <div class="row">
+                                <div class="row" ng-show="document.isCollaboratededByPartners">
                                     <div class="col-md-12">
-                                        <div class="km-control-group" ng-show="document.isCollaboratededByPartners" name="collaboratingPartners" caption="Please select the collaborating partner(s)">
+                                        <div   name="collaboratingPartners" caption="Please select the collaborating partner(s)">
                                             <field-embed-contact organization-only multiple ng-model="documentContacts.collaboratingPartnersRef" locales="document.header.languages" caption="{{'Add an organization »'}}"></field-embed-contact>
                                         </div>
                                     </div>
                                 </div>
-
+                               
+                               </div>
 							</div>
 						</div>
 

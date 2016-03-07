@@ -13,10 +13,7 @@
 			<div class="km-value km-pre">{{document.projectNumber | lstring:locale}}</div>
 		</div>
 
-		<div ng-show="document.geographicScope">
-			<label>Geographic Scope</label>
-			<span class="km-value">{{document.geographicScope.scope | term:locale}} </span>
-		</div>
+		
 
 		<div ng-show="document.geographicScope && document.geographicScope.regionsOrCountries">
 			<label>Geographical or political/economic group(s) and/or country(ies)</label>
@@ -25,6 +22,14 @@
 				    <li ng-repeat="term in document.geographicScope.regionsOrCountries">{{term | term:locale}} </li>
 			     </ul>
             </div>
+		</div>
+        
+        <div ng-show="document.geographicScope">
+			<label>Geographic Scope</label>
+			<span class="km-value">{{document.geographicScope.scope | term:locale}}  
+                {{document.geographicScope.jurisdiction && document.geographicScope.scope ==  ?  "(" + (document.geographicScope.jurisdiction | lstring:locale ) + ")" : ""}} 
+                {{document.geographicScope.community && document.geographicScope.scope ==  ?  "(" + (document.geographicScope.community | lstring:locale ) + ")" : ""}}
+              </span>
 		</div>
 
 		<div ng-show="document.geographicScope && document.geographicScope.jurisdiction">
