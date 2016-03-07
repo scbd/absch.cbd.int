@@ -5,8 +5,8 @@
 		</h4>
     </div>
 	<div class="record-body panel-body">
-
-		<h2>{{document.title | lstring:locale}}</h2>
+        <label>Title</label>
+		<h2 style="padding-top:0;margin-top:0;">{{document.title | lstring:locale}}</h2>
 
 		<div ng-show="document.projectNumber">
 			<label>Project number or identifier</label>
@@ -20,9 +20,11 @@
 
 		<div ng-show="document.geographicScope && document.geographicScope.regionsOrCountries">
 			<label>Geographical or political/economic group(s) and/or country(ies)</label>
-			<ul class="km-value" ng-show="document.geographicScope.regionsOrCountries">
-				<li ng-repeat="term in document.geographicScope.regionsOrCountries">{{term | term:locale}} </li>
-			</ul>
+			<div class="km-value">
+                <ul>
+				    <li ng-repeat="term in document.geographicScope.regionsOrCountries">{{term | term:locale}} </li>
+			     </ul>
+            </div>
 		</div>
 
 		<div ng-show="document.geographicScope && document.geographicScope.jurisdiction">
@@ -41,17 +43,15 @@
 		</div>
 
 		<div ng-show="(document.startDate && document.endDate) || document.duration">
-			<div class="col-sm-12 well well-sm">
 	  			<label>Time frame</label>
 
 	  			<div class="row" ng-show="document.startDate && document.endDate">
-	  				<div class="col-md-3">
-	  					<label>Start date</label>
-	  					<div class="km-value km-pre">{{document.startDate | date : 'longDate'}}</div>
+	  				<div class="col-md-6">
+	  					<div class="km-value km-pre"><label>Start date:</label> {{document.startDate | date : 'longDate'}}</div>
 	  				</div>
-	  				<div class="col-md-3">
-	  					<label>End date</label>
-	  					<div class="km-value km-pre">{{document.endDate | date : 'longDate'}}</div>
+	  				<div class="col-md-6">
+	  					
+	  					<div class="km-value km-pre"><label>End date:</label> {{document.endDate | date : 'longDate'}}</div>
 	  				</div>
 	  			</div>
 
@@ -59,7 +59,6 @@
 	  				<label>Duration</label>
 	  				<div class="km-value km-pre">{{document.duration | lstring:locale}}</div>
 	  			</div>
-	  		</div>
 		</div>
 
 		<div ng-show="document.isImplementedByAgencies || document.isExecutededByAgencies || document.isCollaboratededByPartners">
@@ -101,10 +100,12 @@
 
 		<div ng-show="document.projectDocument">
 			<label>Project document or document describing the initiative</label>
-			<div class="km-value" ng-repeat="item in document.projectDocument">
-				<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-				<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-			</div>
+            <div class="km-value">
+                <div  ng-repeat="item in document.projectDocument">
+                    <a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+                    <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+                </div>
+            </div>
 		</div>
 
 	  	<legend>Detailed information</legend>
@@ -116,26 +117,33 @@
 
 		<div ng-show="document.targetGroups">
 			<label>Target group(s)/beneficiaries</label>
-			<ul class="km-value">
-				<li ng-repeat="term in document.targetGroups">{{term | term:locale}}</li>
-			</ul>
+			<div class="km-value">
+                <ul>
+                    <li ng-repeat="term in document.targetGroups">{{term | term:locale}}</li>
+                </ul>
+            </div>
 		</div>
 
 		<div ng-show="document.categories">
 			<label>Category(ies) of capacity-building activities</label>
-			<ul class="km-value">
-				<li ng-repeat="term in document.categories">{{term | term:locale}}</li>
-			</ul>
+			<div class="km-value">
+                <ul>
+				    <li ng-repeat="term in document.categories">{{term | term:locale}}</li>
+			    </ul>
+            </div>
 		</div>
 
 		<legend>Information on funding</legend>
 
 		<div ng-show="document.fundingSourceTypes">
 			<label>Type(s) of funding source</label>
-			<ul class="km-value">
-				<li ng-repeat="term in document.fundingSourceTypes">{{term | term:locale}}</li>
-			</ul>
+			<div class="km-value">
+                <ul>
+                    <li ng-repeat="term in document.fundingSourceTypes">{{term | term:locale}}</li>
+                </ul>
+            </div>
 		</div>
+        
 		<div ng-show="document.selfFundingInfo">
 			<label>Further information on funding</label>
 			<div class="km-value km-pre">{{document.selfFundingInfo | lstring:locale}}</div>
@@ -172,10 +180,12 @@
 
 			<div ng-show="document.resultsOutputs">
 				<label>Main outputs</label>
-				<div class="km-value" ng-repeat="item in document.resultsOutputs">
+                <div class="km-value">
+				<div ng-repeat="item in document.resultsOutputs">
 					<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
 					<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 				</div>
+                </div>
 			</div>
 
 			<div ng-show="document.bestPractices">
@@ -189,9 +199,11 @@
 			<legend>Subjects</legend>
 
 			<label>Key areas and strategic measures for capacity-building and development</label>
-			<ul class="km-value">
+			<div class="km-value">
+            <ul>
 				<li ng-repeat="term in document.absKeyAreas">{{term | term:locale}}</li>
 			</ul>
+            </div>
 
 		</div>
 
