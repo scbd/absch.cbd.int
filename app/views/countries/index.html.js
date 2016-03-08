@@ -1,12 +1,144 @@
 define(['app','underscore',
   '/app/js/common.js',
-  '/app/views/countries/countries-left-menu-directive.html.js',
-  '/app/views/countries/country-map-list-directive.html.js', '/app/views/directives/help-directive.html.js',
-  './search-map.js','scbd-map/ammap3-service',
+  './search-map.js','scbd-map/ammap3-service', '/app/services/search-service.js',
+  '../directives/loading-directive.js'
 ], function(app, _) {
 
-  app.controller("CountriesMapController", ["$scope", "$http", "$filter", "commonjs", "$q",
-    function($scope, $http, $filter, commonjs, $q) {
+  app.controller("CountriesMapController", ["$scope", "$element", "$location", "commonjs", "$q", 'searchService',
+    function($scope, $element, $location, commonjs, $q, searchService) {
+        $scope.sortTerm = "name.en";
+        var headerCount = {	absCheckpoint		       : 0,
+                                absCheckpointCommunique: 0,
+                                absPermit:               0,
+                                authority:               0,
+                                database:                0,
+                                focalPoint:              0,
+                                measure:                 0
+                            };
+        $scope.loading = true;
+        $q.all([commonjs.getCountries(), searchService.governmentSchemaFacets()])
+            .then(function(results){
+                var countries = results[0];
+                var countryFacets = results[1];
+                $scope.countries = _.map(countries, function(country){
+                                        var facets = _.findWhere(countryFacets, {government:country.code.toLowerCase()});
+                                        if(!facets)
+                                            facets = {};
+                                        if(facets.schemas){
+                                            headerCount.absCheckpoint           += facets.schemas.absCheckpoint||0;
+        									headerCount.absCheckpointCommunique += facets.schemas.absCheckpointCommunique||0;
+        									headerCount.absPermit               += facets.schemas.absPermit||0;
+        									headerCount.authority               += facets.schemas.authority||0;
+        									headerCount.database                += facets.schemas.database||0;
+        									headerCount.focalPoint              += facets.schemas.focalPoint||0;
+        									headerCount.measure                 += facets.schemas.measure||0;
+                                        }
+                                        return {
+                                            code : country.code,
+                                            name : country.name,
+                                            isNPParty: country.isNPParty,
+                                            entryIntoForce  : country.entryIntoForce,
+                                            schemas : facets.schemas||{},
+                                            totalCount : facets.recordCount
+                                        };
+                                    });
+                $scope.headerCount = headerCount;
+                $element.find('[data-toggle="tooltip"]').tooltip();
+                $scope.loading = false;
+                fixMe();
+            });
+            $scope.sortTable = function(term, order) {
+
+
+                    if ($scope.sortTerm == term) {
+                        $scope.orderList = !$scope.orderList;
+                    } else {
+                        $scope.sortTerm = term;
+                        $scope.orderList = true;
+                    }
+
+
+                    if(order == "ASC")
+                        $scope.orderList = false;
+
+                    if(order == "DESC")
+                        $scope.orderList = true;
+
+
+            };
+            $scope.sortTermFilter = function(data) {
+
+                if ($scope.sortTerm == "isNPParty")
+                    return data.isNPParty + ' ' + data.entryIntoForce;
+                else if ($scope.sortTerm == "!isNPParty")
+                    return !!data.isNPParty + ' ' + data.name.en;
+                else if ($scope.sortTerm == "name.en")
+                    return data.name.en;
+                else if(!data.schemas)
+                    return ($scope.orderList ? -9999999 : 999999);
+                else if ($scope.sortTerm == "CNA") {
+                    return data.schemas.authority ? data.schemas.authority : ($scope.orderList ? -9999999 : 999999);
+                } else if ($scope.sortTerm == "CP") {
+                    return data.schemas.absCheckpoint ? data.schemas.absCheckpoint : ($scope.orderList ? -9999999 : 999999);
+                } else if ($scope.sortTerm == "CPC") {
+                    return data.schemas.absCheckpointCommunique ? data.schemas.absCheckpointCommunique : ($scope.orderList ? -9999999 : 999999);
+                } else if ($scope.sortTerm == "IRCC") {
+                    return data.schemas.absPermit ? data.schemas.absPermit : ($scope.orderList ? -9999999 : 999999);
+                } else if ($scope.sortTerm == "MSR") {
+                    return data.schemas.measure ? data.schemas.measure : ($scope.orderList ? -9999999 : 999999);
+                } else if ($scope.sortTerm == "NDB") {
+                    return data.schemas.database ? data.schemas.database : ($scope.orderList ? -9999999 : 999999);
+                } else if ($scope.sortTerm == "NFP") {
+                    return data.schemas.focalPoint ? data.schemas.focalPoint : ($scope.orderList ? -9999999 : 999999);
+                }
+            };
+
+            $scope.showCountry = function(code){
+                $location.path('/countries/' + code);
+            };
+////////////////////
+
+            function fixMe() {
+                $(".countriesTable").each(function() {
+                   var $this = $(this),
+                      $t_fixed;
+                   function init() {
+                      $this.wrap('<div class="tableContainer"/>');
+                      $t_fixed = $this.clone();
+                      $t_fixed.find("tbody").remove().end().addClass("fixed").insertBefore($this);
+                      resizeFixed();
+                   }
+                   function resizeFixed() {
+                    //   $t_fixed.find("th").each(function(index) {
+                    //     // $(this).css("width",$this.find("th").eq(index).outerWidth()+"px");
+                    //   });
+                   }
+                   function scrollFixed() {
+                      var offset = $(this).scrollTop(),
+                      tableOffsetTop = $this.offset().top,
+                      tableOffsetBottom = tableOffsetTop + $this.height() - $this.find("thead").height();
+                      if(offset < tableOffsetTop || offset > tableOffsetBottom)
+                         $t_fixed.hide();
+                      else if(offset >= tableOffsetTop && offset <= tableOffsetBottom && $t_fixed.is(":hidden"))
+                         $t_fixed.show();
+                   }
+                   $(window).resize(resizeFixed);
+                   $(window).scroll(scrollFixed);
+                   init();
+                });
+            };
+
+//
+// $(document).ready(function(){
+//    $("table").fixMe();
+//    $(".up").click(function() {
+//       $('html, body').animate({
+//       scrollTop: 0
+//    }, 2000);
+//  });
+// });
+
+///////////////////
 
     }
   ]);
