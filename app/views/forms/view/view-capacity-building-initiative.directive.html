@@ -27,8 +27,8 @@
         <div ng-show="document.geographicScope">
 			<label>Geographic Scope</label>
 			<span class="km-value">{{document.geographicScope.scope | term:locale}}  
-                {{document.geographicScope.jurisdiction && document.geographicScope.scope ==  ?  "(" + (document.geographicScope.jurisdiction | lstring:locale ) + ")" : ""}} 
-                {{document.geographicScope.community && document.geographicScope.scope ==  ?  "(" + (document.geographicScope.community | lstring:locale ) + ")" : ""}}
+                {{document.geographicScope.jurisdiction && document.geographicScope.scope == 'DEBB019D-8647-40EC-8AE5-10CA88572F6E' ?  "(" + (document.geographicScope.jurisdiction | lstring:locale ) + ")" : ""}} 
+                {{document.geographicScope.community && document.geographicScope.scope ==  '9627DF2B-FFAC-4F85-B075-AF783FF2A0B5' ?  "(" + (document.geographicScope.community | lstring:locale ) + ")" : ""}}
               </span>
 		</div>
 
