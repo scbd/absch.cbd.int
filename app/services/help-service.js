@@ -52,6 +52,21 @@ define(['app', 'jquery', 'toastr', 'ngStorage'], function (app, $) { 'use strict
                     helpStyle.text(".helpinfo,.helpinfoInline{display:none!important;}");
                     
 			};
+            
+            
+            
+            //********************************************************************************************************
+            this.getInfo = function(id){
+                
+                switch(id){
+                    case "nationalRecords": 
+                        return "National records are published by Governments and include national information relevant for the implementation of the Nagoya Protocol as well as information Parties are obliged to provide in accordance with the Protocol.";
+                    default: 
+                        return "this is the dfefault";   
+                }
+                    
+            };
+
              
 		}
 

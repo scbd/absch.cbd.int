@@ -1,19 +1,37 @@
-define(['app', 'underscore', '/app/services/search-service.js', '/app/services/app-config-service.js',
-'/app/js/common.js', './loading-directive.js', './help-popover.js',],
+define(['app', 'underscore', '/app/services/search-service.js', '/app/services/app-config-service.js', '/app/services/help-service.js',
+'/app/js/common.js', './loading-directive.js'],
     function(app, _) {
         app.directive('homeCountryDashboard', function($http) {
             return {
                 restrict: 'EAC',
                 replace: true,
                 templateUrl: '/app/views/directives/home-country-dashboard-directive.html',
-                controller: ['$scope', '$filter', 'schemaTypes', 'realm', '$q', 'searchService', 'appConfigService', 'commonjs',
-                    function($scope, $filter, schemaTypes, realm, $q, searchService, appConfigService, commonjs) {
+                controller: ['$scope', '$filter', 'schemaTypes', 'realm', '$q', 'searchService', 'appConfigService', 'commonjs','$element', 'helpService',"$timeout",
+                    function($scope, $filter, schemaTypes, realm, $q, searchService, appConfigService, commonjs, $element, helpService, $timeout) {
 
+                     
+                       
+                       $scope.help = {};
+
+                        //=========================================================================================
+                        function getInfo() {
+                            $scope.help = {
+                                 nationalRecords : helpService.getInfo('nationalRecords')                                
+                            };
+                            $timeout(function(){
+                                $element.find('[data-toggle="tooltip"]').tooltip();
+                                
+                            },50);    
+                        }
+                        
+                        getInfo();
+                        //=========================================================================================
                         $scope.wellChanged = function(facet) {
                             $scope.currentFacet = facet;
                         }
 
                         $scope.loadingNationalFacets = true;
+                        
                         $q.when(searchService.governmentSchemaFacets())
                             .then(function(results) {
 
@@ -62,7 +80,12 @@ define(['app', 'underscore', '/app/services/search-service.js', '/app/services/a
                             groupLimit : 5,
                             groupSort  : 'startDate_dt desc, updatedDate_dt desc'
                         };
+                        
+                        
                         $scope.loadingRefFacets = true;
+                        
+                        
+                        
                         return searchService.group(referenceRecordsQuery)
                             .then(function(data) {
                                 console.log(data);
@@ -80,17 +103,8 @@ define(['app', 'underscore', '/app/services/search-service.js', '/app/services/a
                             })
                             .finally(function() {
                                 $scope.loadingRefFacets = false;
-                            });
-
-                        //verify if needs to be removed
-                        $scope.getDocumentId = function(document) {
-                            if (_.contains( appConfigService.scbdSchemas ,document.schema_s)){
-                              return commonjs.hexToInteger(document.id || document.identifier_s);
-                            }
-                            else {
-                                return $filter("uniqueIDWithoutRevision")(document);
-                            }
-                        }
+                            });                        
+                    
                     }
                 ]
             };

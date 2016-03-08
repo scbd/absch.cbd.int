@@ -91,7 +91,7 @@
                 *width: 14.285714285714285714285714285714%;
             }
             #National .statsBox {
-                min-height: {{nationalRecords.absCheckpoint.recordCountpx!important;
+                min-height: nationalRecords.absCheckpoint.recordCountpx!important;
             }
         }
 
@@ -111,6 +111,10 @@
             display: flex;
             justify-content: space-between;
         }
+        .tooltip-inner {
+            font-size:14px;
+            text-align: left;
+        }
 
     </style>
     
@@ -118,7 +122,7 @@
 
     <h3 style="padding-left:15px;padding-bottom:0;margin-bottom:0;" class="color-blue">
         National records &nbsp;
-        <help-popover title="title" content="content" placement="top"></help-popover>
+        <a href="#" class="helpinfoInline fa fa-info-circle" data-toggle="tooltip" data-title="{{help.nationalRecords}}" data-container="body"></a>
     </h3>
     <div style="margin-left:15px;padding-left:15px;border-top:1px solid #BBB;"></div>
 
@@ -132,7 +136,7 @@
                 </div>
                 <div class="havePublished"> - have published
                     <span class="color-white">{{nationalRecords.focalPoint.recordCount}}</span> - </div>
-                <div class="recordText">ABS Focal Points&nbsp;<i class="info fa fa-question-circle"></i> </div>
+                <div class="recordText">ABS Focal Points&nbsp; </div>
             </div>
         </div>
         <div class="col-xs-6 col-sm-3  col-lg-1 flex">
@@ -143,7 +147,7 @@
                 </div>
                 <div class="havePublished"> - have published
                     <span class="color-white">{{nationalRecords.authority.recordCount}}</span> - </div>
-                <div class="recordText">Competent National Authorities&nbsp;<i class="info fa fa-question-circle"></i> </div>
+                <div class="recordText">Competent National Authorities&nbsp; </div>
             </div>
         </div>
 
@@ -155,7 +159,7 @@
                 </div>
                 <div class="havePublished"> - have published
                     <span class="color-white">{{nationalRecords.measure.recordCount}}</span> - </div>
-                <div class="recordText">Legislative, Administrative or Policy Measures&nbsp;<i class="info fa fa-question-circle"></i> </div>
+                <div class="recordText">Legislative, Administrative or Policy Measures&nbsp; </div>
             </div>
         </div>
 
@@ -167,7 +171,7 @@
                 </div>
                 <div class="havePublished"> - have published
                     <span class="color-white">{{nationalRecords.database.recordCount}}</span> - </div>
-                <div class="recordText">National Websites and Databases&nbsp;<i class="info fa fa-question-circle"></i> </div>
+                <div class="recordText">National Websites and Databases&nbsp; </div>
             </div>
         </div>
 
@@ -180,7 +184,7 @@
                 </div>
                 <div class="havePublished"> - have published
                     <span class="color-white">{{nationalRecords.absPermit.recordCount}}</span> - </div>
-                <div class="recordText">Internationally Recognized Certificates of Compliance&nbsp;<i class="info fa fa-question-circle"></i> </div>
+                <div class="recordText">Internationally Recognized Certificates of Compliance&nbsp; </div>
             </div>
         </div>
 
@@ -192,7 +196,7 @@
                 </div>
                 <div class="havePublished"> - have published
                     <span class="color-white">{{nationalRecords.absCheckpoint.recordCount}}</span> - </div>
-                <div class="recordText">Checkpoints&nbsp;<i class="info fa fa-question-circle"></i> </div>
+                <div class="recordText">Checkpoints&nbsp; </div>
             </div>
         </div>
 
@@ -204,14 +208,14 @@
                 </div>
                 <div class="havePublished"> - have published
                     <span class="color-white">{{nationalRecords.absCheckpointCommunique.recordCount}}</span> - </div>
-                <div class="recordText">Checkpoint Communiqués&nbsp;<i class="info fa fa-question-circle"></i> </div>
+                <div class="recordText">Checkpoint Communiqués&nbsp; </div>
             </div>
         </div>
     </div>
 
     <div class="clearfix"></div>
     <h3 style="padding-left:15px;padding-bottom:0;margin-bottom:0;margin-top:50px;" class="color-orange">
-        Reference records&nbsp;<i class="info fa fa-question-circle"></i></h3>
+        Reference records&nbsp;</h3>
     <div style="margin-left:15px;padding-left:15px;border-top:1px solid #BBB;"></div>
     <div class="row-fluid">
         <div class="col-md-3">
@@ -270,7 +274,7 @@
 
     <div class="clearfix"></div>
     <h3 style="padding-left:15px;padding-bottom:0;margin-bottom:0;margin-top:50px;">
-        SCBD records&nbsp;<i class="info fa fa-question-circle"></i></h3>
+        SCBD records&nbsp;</h3>
     <div style="margin-left:15px;padding-left:15px;border-top:1px solid #BBB;"></div>
     <div class="row-fluid">
         <div class="col-md-3">
