@@ -1025,18 +1025,17 @@ footer .logo {
 
 .blockRegion {
     position: relative;
-    background: #fff;
-    box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
-    margin: 1rem 0;
-    padding: 1em;
-    border-radius: .28571429rem;
-    border: 1px solid rgba(34,36,38,.15);
+    /*box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);*/
+    /*margin: 1rem 0;*/
+    /*padding: 1em;*/
+    /*border-radius: .28571429rem;
+    border: 1px solid rgba(34,36,38,.15);*/
 }
 .dimmer {
     border-radius: inherit!important;
 }
 .inverted.dimmer {
-    background-color: rgba(255,255,255,.85);
+    background-color: rgba(255,255,255,.65);
 }
 .dimmed.dimmable>.animating.dimmer, .dimmed.dimmable>.visible.dimmer, .active.dimmer {
     display: block;
@@ -1073,6 +1072,7 @@ footer .logo {
     left: 50%;
     margin: 0;
     text-align: center;
+    font-weight: bold;
 }
 /*for the new search*/
   #search-new .link:hover{
@@ -1312,3 +1312,34 @@ footer .logo {
 /*================================*/
 /* Home page */
 #Jumbotron {margin:-10px -20px 0px -20px;}
+#search-map{ background: transparent!important;}
+
+#Parties {padding:5px 5px 10px 5px!important;}
+
+.tag-line-container {
+  background: transparent;
+}
+
+.tag-line-container  h3{
+    font-size: 18px;
+}
+
+@media (max-width: 992px){
+    #Parties .col-md-4{text-align: left;}
+    #Parties {padding:5px!important;}
+}
+
+.od-label{font-size:18px;color:black;font-weight:500;padding-left:15px;}
+
+@media (max-width: 768px) {
+        .od-label{color:black;font-weight:300;padding-left:5px;}
+
+        #Jumbotron {height:auto!important;margin:-10px auto auto auto;}
+     
+        #Parties .col-xs-12{text-align: left;}
+      
+        .tag-line-container  h3{
+            font-size: 15px;
+        }
+    }
+

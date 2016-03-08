@@ -3,7 +3,6 @@ define(['text!./search-map.html',
   'jquery',
   'lodash',
   'text!./pin-popup-abs.html',
-  'css!./search-map',
   'scbd-map/ammap3',
   'scbd-map/ammap3-service', '/app/js/common.js', '/app/services/search-service.js',
   '../directives/loading-directive.js'
@@ -59,16 +58,16 @@ define(['text!./search-map.html',
                               var countryDetails = _.findWhere(countries, {code : mapCountry.id});
                               if(countryDetails){
                                   if(countryDetails.isNPInbetweenParty)
-                                      mapCountry.colorReal= "#5cb85c";
+                                      mapCountry.colorReal= "#EC971F";
                                   else if(countryDetails.isNPParty)
-                                      mapCountry.colorReal= "#337ab7";
-                                  else if(countryDetails.isCBDParty)
-                                      mapCountry.colorReal= "#999";
+                                      mapCountry.colorReal= "#5F4586";
+                                //   else if(countryDetails.isCBDParty)
+                                //       mapCountry.colorReal= "#999";
                                   else
-                                      mapCountry.colorReal= "#FFF";
+                                      mapCountry.colorReal= "#333";
                               }
                               else
-                                  mapCountry.colorReal= "#FFF";
+                                  mapCountry.colorReal= "#333";
                             });
                             return;
                         });
@@ -105,8 +104,8 @@ define(['text!./search-map.html',
 
             if (country.isNPParty)
               country.status = '<span style="text-align:right;background-color: #428bca;" class="party-status" ng-if="isNPParty">Party</span>';
-            else if (country.isNPSignatory)
-              country.status = '<span style="text-align:right;background-color: #5bc0de;" class="party-status" ng-if="isNPRatified">Signatory</span>';
+            else if (country.isNPInbetweenParty)
+              country.status = '<span style="text-align:right;background-color: #5bc0de;" class="party-status" ng-if="isNPInbetweenParty">Ratified not yet Party</span>';
             else
               country.status = '<span style="text-align:right;background-color: #888888;" class="party-status" ng-if="isNPSignatory">Non Party</span>';
             return country;

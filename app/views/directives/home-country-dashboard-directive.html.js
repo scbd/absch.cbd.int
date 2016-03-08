@@ -8,15 +8,14 @@ define(['app', 'underscore', '/app/services/search-service.js', '/app/services/a
                 templateUrl: '/app/views/directives/home-country-dashboard-directive.html',
                 controller: ['$scope', '$filter', 'schemaTypes', 'realm', '$q', 'searchService', 'appConfigService', 'commonjs','$element', 'helpService',"$timeout",
                     function($scope, $filter, schemaTypes, realm, $q, searchService, appConfigService, commonjs, $element, helpService, $timeout) {
-
-                     
                        
                        $scope.help = {};
 
                         //=========================================================================================
                         function getInfo() {
                             $scope.help = {
-                                 nationalRecords : helpService.getInfo('nationalRecords')                                
+                                 nationalRecords : helpService.getInfo('nationalRecords'),
+                                 referenceRecords : helpService.getInfo('referenceRecords')                               
                             };
                             $timeout(function(){
                                 $element.find('[data-toggle="tooltip"]').tooltip();
@@ -25,6 +24,8 @@ define(['app', 'underscore', '/app/services/search-service.js', '/app/services/a
                         }
                         
                         getInfo();
+                        
+                        
                         //=========================================================================================
                         $scope.wellChanged = function(facet) {
                             $scope.currentFacet = facet;

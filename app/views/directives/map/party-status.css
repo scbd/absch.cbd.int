@@ -1,10 +1,10 @@
-#od1 {font-size: 24px;background-color: #428bca;color:white;}
-#od2 {font-size: 24px;background-color: #555;color:white;}
-#od3 {font-size: 24px;background-color: #888888;color:white;}
+#od1 {font-size: 24px;background-color: #5F4586;color:white;}
+#od2 {font-size: 24px;background-color: #333;color:white;}
+#od3 {font-size: 24px;background-color: #EC971F;color:white;}
 
 @media (max-width: 600px){
-  #od1 {font-size: 16px;background-color: #428bca;color:white;}
-  #od2 {font-size: 16px;background-color: #555;color:white;}
-  #od3 {font-size: 16px;background-color: #888888;color:white;}
+  #od1 {font-size: 16px;}
+  #od2 {font-size: 16px;}
+  #od3 {font-size: 16px;}
 }
 

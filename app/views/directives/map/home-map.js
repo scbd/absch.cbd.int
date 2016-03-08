@@ -1,7 +1,6 @@
 define(['text!./home-map.html',
   'app',
   'lodash',
-  'css!./home-map',
   'scbd-map/ammap3',
   'scbd-map/ammap3-service',
   './party-status.js', '/app/services/search-service.js',
@@ -20,10 +19,10 @@ define(['text!./home-map.html',
 
         $scope.showTagLine = 1;
         $scope.showPartyTagLine = 1;
-
+        $element.find('[data-toggle="tooltip"]').tooltip();
 
       }, //link
-
+      
       //=======================================================================
       //
       //=======================================================================
