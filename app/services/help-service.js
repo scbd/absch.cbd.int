@@ -40,7 +40,7 @@ define(['app', 'jquery', 'toastr', 'ngStorage'], function (app, $) { 'use strict
                 $localStorage.showHelp = showHelp;
                   
                if(helpStyle)
-                    helpStyle.text(".helpinfo{display:block!important;}");
+                    helpStyle.text(".helpinfo{display:block;} .helpinfoInline{display:inline;}");
 			};
             
             //********************************************************************************************************
@@ -49,7 +49,7 @@ define(['app', 'jquery', 'toastr', 'ngStorage'], function (app, $) { 'use strict
                 $localStorage.showHelp = showHelp;
                 
                 if(helpStyle)
-                    helpStyle.text(".helpinfo{display:none!important;}");
+                    helpStyle.text(".helpinfo,.helpinfoInline{display:none!important;}");
                     
 			};
              

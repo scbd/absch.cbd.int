@@ -111,9 +111,16 @@
             display: flex;
             justify-content: space-between;
         }
-    </style>
 
-    <h3 style="padding-left:15px;padding-bottom:0;margin-bottom:0;" class="color-blue">National records&nbsp;<i class="info fa fa-question-circle"></i></h3>
+    </style>
+    
+
+
+    <h3 style="padding-left:15px;padding-bottom:0;margin-bottom:0;" class="color-blue">
+        National records &nbsp;
+        <help-popover></help-popover>
+        <i class="helpinfoInline info fa fa-question-circle" ng-click="popover('show')" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></i>
+    </h3>
     <div style="margin-left:15px;padding-left:15px;border-top:1px solid #BBB;"></div>
 
     <div class="row-fluid seven-cols center" id="National">
