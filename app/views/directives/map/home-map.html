@@ -1,9 +1,19 @@
 <div style="position:relative;">
 
+<style>
+      #Parties {padding:5px 5px 10px 5px!important;}
+@media (max-width: 992px){
+    #Parties .col-md-4{text-align: left;}
+    #Parties {padding:5px!important;}
+}
+
+</style>
+    
+
 	<div class="container tag-line-container" ng-show="showTagLine">
 		<div id="Tagline" class="row  bg-green">
 			<div class="col-md-12">
-				<md-icon class="tag-line-close-btn" ng-click="showTagLine=!showTagLine;">close</md-icon>
+				<a href="#" class="color-white pull-right" ng-click="showTagLine=!showTagLine;"><i class="fa fa-times"></i></a>
 				<div class="home-col dropshadow">
 					<h3>The Access and Benefit-sharing Clearing-house (ABSCH) is a platform for exchanging information on ABS and a key tool for facilitating the implementation of the Nagoya Protocol.
 					</h3>
@@ -11,26 +21,21 @@
 			</div>
 		</div>
 	</div>
+    
 	<ammap3 map-id="index-map" height="600px" selected-color="#999999"></ammap3>
 
-
 	<div id="Parties" class="row party-container bg-green text-center">
-		<md-icon class="tag-line-close-btn" ng-click="showPartyTagLine=!showPartyTagLine;">close</md-icon>
-
-		<div class="col-md-3 col-sm-6 col-xs-6">
+		<div class="col-md-4">
 			<party-status id="od1" class="od1" delay="0" num="numParty"></party-status>
-			<br class="visible-xs visible-sm">
-			<span class="od-label">Parties</span>
+			<span class="od-label">Parties to the Nagoya Protocol</span>
 		</div>
-		<div class="col-md-3 col-sm-6 col-xs-6">
-			<party-status id="od2" class="od2" delay="1000" num="numNonParty"></party-status>
-			<br class="visible-xs visible-sm">
+		<div class="col-md-4">
+			<party-status id="od2" class="od2" delay="0" num="numNonParty"></party-status>
 			<span class="od-label">Non-Parties</span>
 		</div>
-		<div class="col-md-3 col-sm-6 col-xs-6">
-			<party-status id="od3" class="od3" delay="3000" num="numRatified"></party-status>
-			<br class="visible-xs visible-sm">
-			<span class="od-label">Ratified</span>
+		<div class="col-md-4">
+			<party-status id="od3" class="od3" delay="0" num="numRatified"></party-status>
+			<span class="od-label">Ratified not yet Party</span>
 		</div>
 	</div>
 </div>

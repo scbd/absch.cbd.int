@@ -182,6 +182,10 @@ define(['app', 'linqjs', 'angular-localizer',
                                 }
 
                                 function loadFacets() {
+                                    //  var fromStorage = localStorageService.get('documentRegisterFacets');
+                                    // if(fromStorage)
+                                    //     return fromStorage;
+                                    
                                     var published = storage.documentQuery.facets("", {
                                         collection: "my"
                                     });

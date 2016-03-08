@@ -1307,3 +1307,8 @@ footer .logo {
 #Search-Filter .date{
     text-transform: uppercase;
 }
+
+
+/*================================*/
+/* Home page */
+#Jumbotron {margin:-10px -20px 0px -20px;}
