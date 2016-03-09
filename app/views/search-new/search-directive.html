@@ -27,7 +27,7 @@
                     </button>
                 </span>
             </div>
-    
+
             <div class="col-md-12" >
                 <form ng-submit="saveFreeTextFilter(searchKeyword)" class="input-group" >
                     <input type="text" ng-model="searchKeyword" class="form-control" placeholder="Search the ABSCH"  style="font-weight:bold;">
@@ -54,13 +54,13 @@
                    <a href="#" ng-click="showFilters=false;searchKeyword='';" class="pull-right color-grey" ><i class="fa fa-times"></i></a>
                    <div ng-if="searchKeyword" id="Search-Filter" style="margin-bottom:20px;">
                         <a class="filter country-heading"  ng-click="saveFreeTextFilter(searchKeyword);">
-                            <i class="fa check" ng-class="{'fa-check-square':isFilterOn('freeText_'+searchKeyword),'fa-square':!isFilterOn('freeText_'+searchKeyword)}"></i> 
+                            <i class="fa check" ng-class="{'fa-check-square':isFilterOn('freeText_'+searchKeyword),'fa-square':!isFilterOn('freeText_'+searchKeyword)}"></i>
                             Free text search: <span class="color-blue">"{{searchKeyword}}"</span>
                         </a>
                    </div>
 
                    <national-filter ng-if="showFilters==='national' || (searchKeyword && !showFilters)" ></national-filter>
-                
+
                    <reference-filter ng-if="showFilters==='reference' || (searchKeyword && !showFilters)" ></reference-filter>
 
                    <scbd-filter ng-if="showFilters==='scbd' || (searchKeyword && !showFilters)" ></scbd-filter>
@@ -71,14 +71,14 @@
             </div>
          </div>
         </div>
-    
+
         <div class="container-fluid" style="padding-top:10px;">
 
           <div class="row" style="padding:10px 0 0 0;margin:0px;">
             <div class="col-xs-12" style="padding:0;margin:0;">
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs">
-                    <li ng-class="{'active':currentTab==='nationalRecords'}"><a href="#" class="color-blue" ng-click="updateCurrentTab('nationalRecords')" >National <span class="hidden-xs">records <span class="pull-right badge" style="margin-left:20px;position:relative;top:2px;">100</span></span></a></li>
+                    <li ng-class="{'active':currentTab==='nationalRecords'}"><a href="#" class="color-blue" ng-click="updateCurrentTab('nationalRecords')" >National <span class="hidden-xs">records <span class="pull-right badge" style="margin-left:20px;position:relative;top:2px;">{{rawDocs.matches}}</span></span></a></li>
                     <li ng-class="{'active':currentTab==='referenceRecords'}"><a href="#"  class="color-orange" ng-click="updateCurrentTab('referenceRecords')">Reference <span class="hidden-xs">records <span class="pull-right badge" style="margin-left:20px;position:relative;top:2px;">100</span></span> </a></li>
                     <li ng-class="{'active':currentTab==='scbdRecords'}"><a href="#"  class="color-darkgrey" ng-click="updateCurrentTab('scbdRecords')" >SCBD <span class="hidden-xs">records <span class="pull-right badge" style="margin-left:20px;position:relative;top:2px;">100</span></span></a></li>
                 </ul>
@@ -86,13 +86,13 @@
               <!-- Tab panes -->
              <div class="col-xs-12 tab-content bg-white" style="padding:20px;margin:0;">
                     <div  class="tab-pane bg-white" ng-class="{'active':currentTab==='nationalRecords'}" ng-if="currentTab==='nationalRecords'" >
-                        <div>
-                         <div ng-repeat="group in rawDocs.data">
-                            <div ng-repeat="country in group.government_s.groups" >
-                                <national-records-country group='country'></national-records-country>
-                            </div>
-                        </div>
-                         <h4 class="bg-white" ng-if="rawDocs.data.length === 0">no records found</h4>
+                        <div infinite-scroll="updateScrollPage()" infinite-scroll-disabled="loading" infinite-scroll-distance="10">
+                             <!-- <div ng-repeat="group in rawDocs"> -->
+                                <div ng-repeat="country in rawDocs.groups" >
+                                    <national-records-country group='country'></national-records-country>
+                                </div>
+                            <!-- </div> -->
+                            <h4 class="bg-white" ng-if="rawDocs.data.length === 0">no records found</h4>
                         </div>
                     </div>
                     <div class="tab-pane bg-white" style="padding-top:20px;"  ng-class="{'active':currentTab==='referenceRecords'}"  ng-if="currentTab=='referenceRecords'">

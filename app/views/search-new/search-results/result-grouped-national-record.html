@@ -1,19 +1,35 @@
-<div id="result-grouped-national-record">   
-    <div class="recordDefault nationalRecords card card-1" ng-show="!showDoc" ng-click="showDoc=!showDoc"  >
+<div id="result-grouped-national-record">
+    <div class="recordDefault nationalRecords card card-1" ng-show="!showDoc" ng-click="showDoc=!showDoc">
 
-        <div class="type color-blue" >{{doc.rec_type ? doc.rec_type : (doc.schema_s | schemaShortName) }}</div> <div class="title">{{doc.rec_title}}</div> <span class="description hidden-xs">{{doc.rec_summary}}</span>
-       
+        <div class="type color-blue">{{doc.rec_type ? doc.rec_type : (doc.schema_s | schemaShortName) }}</div>
+        <div class="title">{{doc.rec_title}}</div>
+        <span class="description hidden-xs">{{doc.rec_summary}}</span>
+
         <ul class="metadata bold">
-            <li ng-if="doc.rec_countryName" class="hidden-xs"><span>{{doc.rec_countryName}}</span></li>
-            <li ng-if="doc.uniqueIdentifier_s"><span>{{doc.uniqueIdentifier_s}}</span></li>
-            <li class="hidden-xs" ng-if="doc.rec_meta1"><span>{{doc.rec_meta1}}</span></li>
-            <li class="hidden-xs"ng-if="doc.rec_meta2"><span>{{doc.rec_meta2}}</span></li>
-            <li class="hidden-xs" ng-if="doc.rec_meta3"><span>{{doc.rec_meta3}}</span></li>
-            <li><span class="last-span">{{doc.rec_date | formatDate}}</span></li>
+            <li ng-if="doc.rec_countryName" class="hidden-xs">
+                <span>{{doc.rec_countryName}}</span>
+            </li>
+            <li ng-if="doc.uniqueIdentifier_s">
+                <span>{{doc.uniqueIdentifier_s}}</span>
+            </li>
+            <li class="hidden-xs" ng-if="doc.rec_meta1">
+                <span>{{doc.rec_meta1}}</span>
+            </li>
+            <li class="hidden-xs" ng-if="doc.rec_meta2">
+                <span>{{doc.rec_meta2}}</span>
+            </li>
+            <li class="hidden-xs" ng-if="doc.rec_meta3">
+                <span>{{doc.rec_meta3}}</span>
+            </li>
+            <li>
+                <span class="last-span">{{doc.rec_date | formatDate}}</span>
+            </li>
         </ul>
     </div>
-    
-    <a ng-show="showDoc" style="z-index:99999;width:100%;" ng-click="showDoc=false"><span class="pull-right bold" aria-hidden="true" style="color:#EEE;font-size:18px;padding-right:10px;position:relative;top:3px;cursor:pointer;">x</span></a>
+
+    <a ng-show="showDoc" style="z-index:99999;width:100%;" ng-click="showDoc=false">
+        <span class="pull-right bold" aria-hidden="true" style="color:#EEE;font-size:18px;padding-right:10px;position:relative;top:3px;cursor:pointer;">x</span>
+    </a>
     <record-viewer ng-if="showDoc" doc-id='doc.identifier_s' doc-schema='doc.schema_s' class="card card-3"></record-viewer>
-    
+
 </div>
