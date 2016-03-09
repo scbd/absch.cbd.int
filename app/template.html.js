@@ -10,9 +10,9 @@ define(['app', 'underscore', 'ng-breadcrumbs',
 
     app.controller('TemplateController', ['$scope', '$rootScope', 'showHelp',
         '$location','realmConfiguration','$anchorScroll', 'breadcrumbs', 'toastr', '$route',
-        'cfgUserNotification','$window',//'localStorageService',localStorageService,
+        'cfgUserNotification','$window', '$element',//'localStorageService',localStorageService, ,
         function($scope, $rootScope, showHelp, $location, realmConfiguration,
-            $anchorScroll, breadcrumbs, toastr, $route, cfgUserNotification, $window) {
+            $anchorScroll, breadcrumbs, toastr, $route, cfgUserNotification, $window, $element) {
             $scope.controller = "TemplateController";
             $scope.breadcrumbs = breadcrumbs;
             $scope.$root.pageTitle = {
@@ -31,7 +31,8 @@ define(['app', 'underscore', 'ng-breadcrumbs',
             $scope.toggleSideBar = function() {
                 $element.find("#wrapper").toggleClass("toggled");
             }
-
+            
+      
 
             //============================================================
             //

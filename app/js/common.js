@@ -71,12 +71,15 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                             cache: true
                         })
                         .then(function(response) {
-
                             var countries = _.map(response.data,formatCountry);
                             localStorageService.set('countries', countries);
                             return countries;
                         });
                 };
+                
+                
+                
+                
                 this.getCountry = function(code) {
 
                     var fromStorage = localStorageService.get('countries');

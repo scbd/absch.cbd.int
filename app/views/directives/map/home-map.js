@@ -20,6 +20,11 @@ define(['text!./home-map.html',
         $scope.showTagLine = 1;
         $scope.showPartyTagLine = 1;
         $element.find('[data-toggle="tooltip"]').tooltip();
+        
+        //=======================================================================
+        $scope.toggleTooltip = function(){
+             $element.find('[data-toggle="tooltip"]').tooltip('hide');
+        }
 
       }, //link
       
@@ -32,9 +37,9 @@ define(['text!./home-map.html',
             $q.when(commonjs.getCountries(), function(countries) {
 
                 $scope.numParty     = _.where(countries, {isNPParty:     true}).length;
-                $scope.numNonParty  = _.where(countries, {isNPParty:     false}).length;
+                $scope.numNonParty  = countries.length -  $scope.numParty;
                 $scope.numRatified  = _.where(countries, {isNPInbetweenParty:  true}).length;
-                $scope.numSignatory = _.where(countries, {isNPSignatory: true}).length;
+                
 
             });
 

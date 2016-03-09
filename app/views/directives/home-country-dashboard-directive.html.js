@@ -6,20 +6,41 @@ define(['app', 'underscore', '/app/services/search-service.js', '/app/services/a
                 restrict: 'EAC',
                 replace: true,
                 templateUrl: '/app/views/directives/home-country-dashboard-directive.html',
-                controller: ['$scope', '$filter', 'schemaTypes', 'realm', '$q', 'searchService', 'appConfigService', 'commonjs','$element', 'helpService',"$timeout",
-                    function($scope, $filter, schemaTypes, realm, $q, searchService, appConfigService, commonjs, $element, helpService, $timeout) {
+                controller: ['$scope', '$filter', 'schemaTypes', 'realm', '$q', 'searchService', 'appConfigService', 'commonjs','$element', 'helpService',"$timeout", "$location",
+                    function($scope, $filter, schemaTypes, realm, $q, searchService, appConfigService, commonjs, $element, helpService, $timeout, $location) {
                        
                        $scope.help = {};
+                       
+                       
+                        //=========================================================================================
+                        $scope.goto = function(url) {
+                            $location.path(url);
+                        }
+
 
                         //=========================================================================================
                         function getInfo() {
                             $scope.help = {
                                  nationalRecords : helpService.getInfo('nationalRecords'),
-                                 referenceRecords : helpService.getInfo('referenceRecords')                               
+                                 
+                                 scbdRecords : helpService.getInfo('scbdRecords'),
+                                 nfp : helpService.getInfo('nfp'), 
+                                 cna : helpService.getInfo('cna'), 
+                                 msr : helpService.getInfo('msr'), 
+                                 ndb : helpService.getInfo('ndb'),
+                                 ircc : helpService.getInfo('ircc'),
+                                 cp : helpService.getInfo('cp'),
+                                 cpc : helpService.getInfo('cpc'),
+                                 nr : helpService.getInfo('nr'),
+                                 referenceRecords : helpService.getInfo('referenceRecords'),
+                                 a19a20 : helpService.getInfo('a19a20'),
+                                 cpp : helpService.getInfo('cpp'),        
+                                 cbr : helpService.getInfo('cbr'),        
+                                 cbi : helpService.getInfo('cbi'), 
+                                 vlr : helpService.getInfo('vlr'),                                         
                             };
                             $timeout(function(){
                                 $element.find('[data-toggle="tooltip"]').tooltip();
-                                
                             },50);    
                         }
                         
