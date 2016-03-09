@@ -5,6 +5,8 @@ define(['app', 'underscore',
     app.controller("SearchPageController", ["$scope", function($scope) {
 
             
+            $('[role="tooltip"]').hide();
+            
         
         }
     ]);

@@ -3,8 +3,7 @@ define(['app','/app/js/common.js','moment',
     '/app/views/directives/home-country-dashboard-directive.html.js'], function (app) {
     app.controller('IndexController', ['$scope', '$http', '$window', '$cookies','realm', '$filter','$rootScope','commonjs','$element',
     function ($scope, $http, $window, $cookies, realm, $filter, $rootScope, commonjs,$element) {
-
-
+            
         $scope.locale = 'en';
         //var today= moment();
         var today= moment();

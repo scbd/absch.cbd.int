@@ -209,12 +209,12 @@
     <div style="margin-left:15px;padding-left:15px;border-top:1px solid #BBB;"></div>
     <div class="row-fluid">
         <div class="col-md-3">
-             <a href="/search/?t=referenceRecords&f=referenceRecords:VLR" class="color-white">
-                <h5 style="padding:5px;border-radius:3px;margin-bottom:0;" class="bg-orange linkDark">
+
+                <h5 style="padding:5px;border-radius:3px;margin-bottom:0;" class="bg-orange linkDark" ng-click="goto('/search/?t=referenceRecords&f=referenceRecords:VLR')>
                     <span class="badge bg-white">{{referenceRecords.capacityBuildingResource.recordCount}}</span> Literature and Capacity Building Resources 
-                    <a href="#" class="helpinfoInline fa fa-info-circle color-white" data-toggle="tooltip" data-html="true" data-title="{{help.vlr}}" data-container="body"></a>
+                    <span class="helpinfoInline fa fa-info-circle color-white" data-toggle="tooltip" data-html="true" data-title="{{help.vlr}}" data-container="body"></span>
                     </h5>
-            </a>
+        
             <div ng-repeat="doc in referenceRecords.capacityBuildingResource.docs" ng-show="doc.title_t && $index < 5"  class="link1">
                 <!-- <div id="capacityBuildingResources" ng-include="home-list.html"> -->
                 <a href="{{doc.schema_s|mapSchema}}/{{doc.identifier_s}}" target="_new" style="padding-bottom:5px;">
@@ -224,12 +224,12 @@
             </div>
         </div>
          <div class="col-md-3">
-            <a href="/search/?t=referenceRecords&f=referenceRecords:CBI" class="color-white">
-                    <h5 style="padding:5px;border-radius:3px;margin-bottom:0;" class="bg-orange linkDark"  ng-click="goto('')">
+         
+                    <h5 style="padding:5px;border-radius:3px;margin-bottom:0;" class="bg-orange linkDark"  ng-click="goto('/search/?t=referenceRecords&f=referenceRecords:CBI')">
                         <span class="badge bg-white">{{referenceRecords.capacityBuildingInitiative.recordCount}}</span> Capacity Building Initiatives
-                         <a href="#" class="helpinfoInline fa fa-info-circle color-white" data-toggle="tooltip" data-html="true" data-title="{{help.cbr}}" data-container="body"></a>
+                         <span href="#" class="helpinfoInline fa fa-info-circle color-white" data-toggle="tooltip" data-html="true" data-title="{{help.cbr}}" data-container="body"></span>
                         </h5>
-            </a>
+          
             <div ng-repeat="doc in referenceRecords.capacityBuildingInitiative.docs" ng-show="doc.title_t && $index < 5" class="link1">
                 <!-- <div id="capacityBuildingInitiative" ng-include="home-list.html"> -->
                 <a href="{{doc.schema_s|mapSchema}}/{{doc.identifier_s}}" target="_new" style="padding-bottom:5px;" >
@@ -252,13 +252,13 @@
             </div>
         </div>
         <div class="col-md-3">
-                     <a href="/search/?t=referenceRecords&f=referenceRecords:CPP" class="color-white">
-                        <h5 style="padding:5px;border-radius:3px;margin-bottom:0;" class="bg-orange linkDark" >
+    
+                        <h5 style="padding:5px;border-radius:3px;margin-bottom:0;" class="bg-orange linkDark" ng-click="goto('/search/?t=referenceRecords&f=referenceRecords:CPP') >
                         <span class="badge bg-white">{{referenceRecords.communityProtocol.recordCount}}</span> 
                         Community protocols and procedures and customary laws 
-                        <a href="#" class="helpinfoInline fa fa-info-circle color-white" data-toggle="tooltip" data-html="true" data-title="{{help.cpp}}" data-container="body"></a>
+                        <span href="#" class="helpinfoInline fa fa-info-circle color-white" data-toggle="tooltip" data-html="true" data-title="{{help.cpp}}" data-container="body"></span>
                         </h5>
-                    </a>
+              
             <div ng-repeat="doc in referenceRecords.communityProtocol.docs" ng-show="doc.title_t && $index < 5" class="link1">
                 <!-- <div id="communityProtocol" ng-include="home-list.html"> -->
                 <a href="{{doc.schema_s|mapSchema}}/{{doc.identifier_s}}" target="_new" style="padding-bottom:5px;" >

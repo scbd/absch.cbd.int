@@ -6,6 +6,8 @@ app.controller("AboutController",
     //  $scope.toggleAbout = function(){
     //      $scope.showAbout = !$scope.showAbout;
     //  }
+    
+    $('[role="tooltip"]').hide();
 
    }]);
 });
