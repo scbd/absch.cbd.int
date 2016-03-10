@@ -26,7 +26,7 @@
 	list-style: none;
 }
 @font-face {
-    font-family: 'alternategotno3dotregular';
+    /*font-family: 'alternategotno3dotregular';*/
     src: url('/app/fonts/alternategotno3dot-webfont.eot');
     src: url('/app/fonts/alternategotno3dot-webfont.eot?#iefix') format('embedded-opentype'),
          url('/app/fonts/alternategotno3dot-webfont.woff') format('woff'),
@@ -36,17 +36,17 @@
     font-style: normal;
 }
 h1 {
-     font-family: 'alternategotno3dotregular';
+     /*font-family: 'alternategotno3dotregular';*/
      text-rendering: optimizeLegibility;
      font-size: 36px;
 }
 h2 {
-     font-family: 'alternategotno3dotregular';
+     /*font-family: 'alternategotno3dotregular';*/
      text-rendering: optimizeLegibility;
      font-size: 30px;
 }
 h3 {
-     font-family: 'alternategotno3dotregular';
+     /*font-family: 'alternategotno3dotregular';*/
      text-rendering: optimizeLegibility;
      font-size: 24px;
 }
@@ -94,7 +94,7 @@ h3 {
 		font-weight:bold;
 		text-transform:uppercase;
 		font-size:12px;
-		 /*font-family: 'alternategotno3dotregular';*/
+		 /*/*font-family: 'alternategotno3dotregular';*/*/
      text-rendering: optimizeLegibility;
 }
 .latest-title{
@@ -107,7 +107,7 @@ h3 {
 		font-weight:bold;
 		text-transform:uppercase;
 		font-size:12px;
-		/*font-family: 'alternategotno3dotregular';*/
+		/*/*font-family: 'alternategotno3dotregular';*/*/
      	text-rendering: optimizeLegibility;
 }
 
@@ -116,7 +116,7 @@ h3 {
 		font-weight:bold;
 		text-transform:uppercase;
 		font-size:12px;
-		/*font-family: 'alternategotno3dotregular';*/
+		/*/*font-family: 'alternategotno3dotregular';*/*/
      	text-rendering: optimizeLegibility;
 }
 
@@ -160,7 +160,7 @@ h3 {
         }
 
 		.stats-schema{
-			/*font-family: 'alternategotno3dotregular';*/
+			/*/*font-family: 'alternategotno3dotregular';*/*/
 			text-rendering: optimizeLegibility;
 			height:22px;
 			line-height:12px!important;
@@ -172,7 +172,7 @@ h3 {
 		}
 
 		.stats-hr{
-			font-family: 'alternategotno3dotregular';
+			/*font-family: 'alternategotno3dotregular';*/
 			text-rendering: optimizeLegibility;
 			color: #bbb;
 			text-transform: uppercase;
@@ -188,7 +188,7 @@ h3 {
 			text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
 		}
 		.stats-country{
-			/*font-family: 'alternategotno3dotregular';*/
+			/*/*font-family: 'alternategotno3dotregular';*/*/
 			text-rendering: optimizeLegibility;
 			color: #666;
 			text-transform: uppercase;

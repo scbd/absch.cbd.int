@@ -106,7 +106,7 @@
         }
 
 		.stats-schema{
-			/*font-family: 'alternategotno3dotregular';*/
+			/*/*font-family: 'alternategotno3dotregular';*/*/
 			text-rendering: optimizeLegibility;
 			height:22px;
 			line-height:12px!important;
@@ -118,7 +118,7 @@
 		}
 
 		.stats-hr{
-			font-family: 'alternategotno3dotregular';
+			/*font-family: 'alternategotno3dotregular';*/
 			text-rendering: optimizeLegibility;
 			color: #bbb;
 			text-transform: uppercase;
@@ -134,7 +134,7 @@
 			text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
 		}
 		.stats-country{
-			/*font-family: 'alternategotno3dotregular';*/
+			/*/*font-family: 'alternategotno3dotregular';*/*/
 			text-rendering: optimizeLegibility;
 			color: #333;
 			text-transform: uppercase;

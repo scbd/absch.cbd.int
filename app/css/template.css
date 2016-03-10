@@ -338,7 +338,7 @@ font-size: 38px;
 
 
 @font-face {
-    font-family: 'alternategotno3dotregular';
+    /*font-family: 'alternategotno3dotregular';*/
     src: url('/app/fonts/alternategotno3dot-webfont.eot');
     src: url('/app/fonts/alternategotno3dot-webfont.eot?#iefix') format('embedded-opentype'),
          url('/app/fonts/alternategotno3dot-webfont.woff') format('woff'),
@@ -358,7 +358,7 @@ font-size: 38px;
 }
 
 .special-font{
-    font-family: 'alternategotno3dotregular';
+    /*font-family: 'alternategotno3dotregular';*/
     text-transform:uppercase;
     text-rendering: optimizeLegibility;
 }
@@ -378,14 +378,14 @@ h4, h5, h6 {
   text-rendering: optimizeLegibility;
 }
 h1 {
-     /*font-family: 'alternategotno3dotregular';*/
+     /*/*font-family: 'alternategotno3dotregular';*/*/
      /*font-family:Tahoma, Trebuchet MS, "Helvetica Neue", Helvetica, Arial, sans-serif;*/
      text-rendering: optimizeLegibility;
      font-size: 26px;
 
 }
 h2{
-     /*font-family: 'alternategotno3dotregular';*/
+     /*/*font-family: 'alternategotno3dotregular';*/*/
      /*font-family:Tahoma, Trebuchet MS, "Helvetica Neue", Helvetica, Arial, sans-serif;*/
      text-rendering: optimizeLegibility;
      font-size: 24px;
@@ -393,7 +393,7 @@ h2{
 
 }
 h3 {
-     /*font-family: 'alternategotno3dotregular';*/
+     /*/*font-family: 'alternategotno3dotregular';*/*/
      /*font-family:Tahoma, Trebuchet MS, "Helvetica Neue", Helvetica, Arial, sans-serif;*/
      text-rendering: optimizeLegibility;
      font-size: 20px;
@@ -514,7 +514,7 @@ padding:3px;
 	font-weight: normal;
 	color: #1FA65D;
 	font-size: 52px;
-	font-family: 'alternategotno3dotregular';
+	/*font-family: 'alternategotno3dotregular';*/
 	padding-bottom:0;
 	margin-bottom: 0;
 	white-space: nowrap;
@@ -531,7 +531,7 @@ padding:3px;
 	/*color: #333;*/
 	color:#333;
 	font-size: 16px;
-	font-family: 'alternategotno3dotregular';
+	/*font-family: 'alternategotno3dotregular';*/
 	line-height: 14px;
 	top:-3px;
 	position: relative;
@@ -544,7 +544,7 @@ padding:3px;
 	text-transform: uppercase;
 	list-style: none;
 	list-style: none;
-	font-family: 'alternategotno3dotregular';
+	/*font-family: 'alternategotno3dotregular';*/
 	padding-left:20px;
 	top:-22px;
 	position: relative;
@@ -560,7 +560,7 @@ padding:3px;
 	list-style: none;
     padding-top: 3px;
 	list-style: none;
-	font-family: 'alternategotno3dotregular';
+	/*font-family: 'alternategotno3dotregular';*/
 }*/
 .account-name{
 	position: relative;
@@ -574,7 +574,7 @@ padding:3px;
 }
 .main-link > a{
 	font-size:24px;
-	font-family: 'alternategotno3dotregular';
+	/*font-family: 'alternategotno3dotregular';*/
 	color: #666;
 	line-height: 20px;
 	text-decoration: none;

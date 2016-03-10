@@ -8,7 +8,7 @@ border-color: #428bca;
 .p-start{
 font-weight: bold;
 font-size: 20px;
-font-family: 'alternategotno3dotregular';
+/*font-family: 'alternategotno3dotregular';*/
 text-rendering: optimizeLegibility;
 text-transform:uppercase;
 
@@ -17,7 +17,7 @@ text-transform:uppercase;
 .p-h1{
 font-weight: normal;
 font-size: 40px;
-font-family: 'alternategotno3dotregular';
+/*font-family: 'alternategotno3dotregular';*/
 text-rendering: optimizeLegibility;
 text-transform:uppercase;
 
@@ -25,14 +25,14 @@ text-transform:uppercase;
 .p-points{
 font-weight: bold;
 font-size: 20px;
-font-family: 'alternategotno3dotregular';
+/*font-family: 'alternategotno3dotregular';*/
 text-rendering: optimizeLegibility;
 text-transform:uppercase;
 }
 .p-help-on{
 font-weight: bold;
 font-size: 20px;
-font-family: 'alternategotno3dotregular';
+/*font-family: 'alternategotno3dotregular';*/
 text-rendering: optimizeLegibility;
 text-transform:uppercase;
 
@@ -40,7 +40,7 @@ text-transform:uppercase;
 .p-help-off{
 font-weight: bold;
 font-size: 20px;
-font-family: 'alternategotno3dotregular';
+/*font-family: 'alternategotno3dotregular';*/
 text-rendering: optimizeLegibility;
 text-transform:uppercase;
 color:#ddd;
@@ -125,7 +125,7 @@ color:#ddd;
 #Presentation .info{
     font-size:20px;
     font-weight:bold;
-    font-family: 'alternategotno3dotregular';
+    /*font-family: 'alternategotno3dotregular';*/
 text-rendering: optimizeLegibility;
 text-transform:uppercase;
 

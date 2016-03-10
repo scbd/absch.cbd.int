@@ -8,7 +8,7 @@
 */
 
 @font-face {
-    font-family: 'alternategotno3dotregular';
+    /*font-family: 'alternategotno3dotregular';*/
     src: url('/app/fonts/alternategotno3dot-webfont.eot');
     src: url('/app/fonts/alternategotno3dot-webfont.eot?#iefix') format('embedded-opentype'),
          url('/app/fonts/alternategotno3dot-webfont.woff') format('woff'),
@@ -37,7 +37,7 @@ h4, h5, h6 {
   text-rendering: optimizeLegibility;
 }
 h1, h2, h3 {
-     /*font-family: 'alternategotno3dotregular';*/
+     /*/*font-family: 'alternategotno3dotregular';*/*/
      font-family:Tahoma, Trebuchet MS, "Helvetica Neue", Helvetica, Arial, sans-serif;
      text-rendering: optimizeLegibility;
 }
@@ -71,7 +71,7 @@ h1, h2, h3 {
 }
 .small > .brand >  a > h1{
 	font-size: 38px;
-	font-family: 'alternategotno3dotregular';
+	/*font-family: 'alternategotno3dotregular';*/
 	line-height: 36px;
 	margin:10px 0 0 0;
 	padding:0;
@@ -82,14 +82,14 @@ h1, h2, h3 {
 	text-transform: uppercase;
 	color: #333;
 	font-size: 26px;
-	font-family: 'alternategotno3dotregular';
+	/*font-family: 'alternategotno3dotregular';*/
 	font-weight: normal;
 }
 
 .small-xs > .main-link > a {
 	font-weight: normal;
 	color: #1FA65D;
-	font-family: 'alternategotno3dotregular';
+	/*font-family: 'alternategotno3dotregular';*/
 	white-space: nowrap;
 	font-size:26px;
 	padding-top: 0;
@@ -105,7 +105,7 @@ h1, h2, h3 {
 	text-transform: uppercase;
 	color: #333;
 	font-size: 16px;
-	font-family: 'alternategotno3dotregular';
+	/*font-family: 'alternategotno3dotregular';*/
 	font-weight: normal;
 	line-height: 20px;
 	margin:0 0 10px 0;
@@ -121,7 +121,7 @@ h1, h2, h3 {
 }
 .main-link > a{
 	font-size: 26px;
-	font-family: 'alternategotno3dotregular';
+	/*font-family: 'alternategotno3dotregular';*/
 	color: #666;
 	line-height: 24px;
 	text-decoration: none;
@@ -129,7 +129,7 @@ h1, h2, h3 {
 }
 .main-link {
 	font-size: 26px;
-	font-family: 'alternategotno3dotregular';
+	/*font-family: 'alternategotno3dotregular';*/
 	color: #666;
 	line-height: 24px;
 	text-decoration: none;
@@ -137,7 +137,7 @@ h1, h2, h3 {
 }
 .small > .main-link > a {
 	font-size: 24px;
-	font-family: 'alternategotno3dotregular';
+	/*font-family: 'alternategotno3dotregular';*/
 	color: #666;
 	line-height: 18px;
 	text-decoration: none;
@@ -207,7 +207,7 @@ margin-bottom: 0px;
 }
 .abs-navbar-nav li a{
 	font-size: 26px;
-	font-family: 'alternategotno3dotregular';
+	/*font-family: 'alternategotno3dotregular';*/
 	color: #666;
 	line-height: 24px;
 	height:130px;
@@ -249,7 +249,7 @@ padding-bottom: 3px;
 	letter-spacing: 1px;
 	text-rendering: optimizeLegibility;
 	list-style: none;
-	font-family: 'alternategotno3dotregular';
+	/*font-family: 'alternategotno3dotregular';*/
 	font-size: 16px;
 	margin-left: 10px;
 	padding-bottom: 0px;
@@ -270,7 +270,7 @@ padding-bottom: 3px;
 
 .category{
 	font-size: 26px;
-	font-family: 'alternategotno3dotregular';
+	/*font-family: 'alternategotno3dotregular';*/
 	color: white;
 	text-shadow: rgba(0,0,0,0.9) 0 1px 0;
 	text-rendering: optimizeLegibility;
