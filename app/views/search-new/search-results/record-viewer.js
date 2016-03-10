@@ -41,7 +41,9 @@ define(['app', 'underscore', '/app/js/common.js',
 				    meeting				:'/app/views/forms/view/view-meeting.directive.html.js',
 				    statement			:'/app/views/forms/view/view-statement.directive.html.js',
 				    pressRelease		:'/app/views/forms/view/view-pressrelease.directive.html.js',
-				    notification		:'/app/views/forms/view/view-notification.directive.html.js'
+				    notification		:'/app/views/forms/view/view-notification.directive.html.js',
+					capacityBuildingInitiative : '/app/views/forms/view/view-capacity-building-initiative.directive.js',
+					capacityBuildingResource   : '/app/views/forms/view/view-capacity-building-resource.directive.js'
 				}
 
 
@@ -64,6 +66,7 @@ define(['app', 'underscore', '/app/js/common.js',
                 $scope.load = function (identifier, version) {
 
                     $scope.error = undefined;
+					$scope.loading = true;
 
                     var qDocument;
                     var qDocumentInfo;
@@ -83,10 +86,16 @@ define(['app', 'underscore', '/app/js/common.js',
                         // $scope.error = error.Message || error || "Http Error: " + errorCode;
                         console.log( $scope.error );
                     })
+					.finally(function(){
+						$scope.loading = false;
+					})
                 };
 
                 //*************************************************************************************************************************************
                 function loadViewDirective(schema){
+					if(schema.toLowerCase() == 'modelcontractualclause' || schema.toLowerCase() == 'communityprotocol')
+						schema = 'resource';
+
                     var schemaDetails = schemaMapping[schema];
                     require([schemaDetails], function() {
                         var name = snake_case(schema);
