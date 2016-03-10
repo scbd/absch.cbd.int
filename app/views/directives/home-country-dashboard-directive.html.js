@@ -1,5 +1,5 @@
 define(['app', 'underscore', '/app/services/search-service.js', '/app/services/app-config-service.js', '/app/services/help-service.js',
-'/app/js/common.js', './loading-directive.js'],
+'/app/js/common.js', './block-region-directive.js'],
     function(app, _) {
         app.directive('homeCountryDashboard', function($http) {
             return {
