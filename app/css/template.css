@@ -1089,6 +1089,10 @@ footer .logo {
       background-color: #333!important; 
       cursor:pointer;
    }  
+   .linkWhite:hover{
+      background-color: #FFF!important; 
+      cursor:pointer;
+   }
 
     #search-new .nationalRecords{
         margin-bottom: 10px;

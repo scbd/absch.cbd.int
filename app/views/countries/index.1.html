@@ -1,0 +1,207 @@
+<div ng-controller="CountriesMapController">
+    <style>
+        table{
+          border-collapse:collapse;
+        }
+        .tableContainer{
+              margin:auto;
+        }
+        .fixed{
+          top:0;
+          position:fixed;
+    
+        }
+        .scrollMore{
+          margin-top:600px;
+        }
+
+        .up{
+          cursor:pointer;
+        }
+        .table-hover > tbody > tr:hover > td{
+          background-color: #FFF;
+        }
+        .letter{color:#999;}
+         .letter-active{
+            font-weight: bold;
+            color:#111!important;
+        }
+        .evenly-spaced {
+  display: flex;
+  justify-content: space-between;
+}
+    </style>
+
+        
+    <div id="Jumbotron" class="bg-texture-green color-black" style="border-top:1px solid #555;border-bottom:2px solid #ddd;">
+        <search-map></search-map>
+    </div>
+        
+        <div class="row" help schema="countryInformation">
+            <div class="col-xs-12 col-md-12" style="padding-top:5px;">
+           
+                <div>
+                    <div block-region activate="loading" block-text=" Loading country details">
+                    
+                    <table class="table table-hover countriesTable" style="border-radius:0!important;width:100%;">
+                        <thead class="bg-grey1">
+                            
+                            <th colspan="2" style="min-width:100%;white-space:nowrap;"> 
+                                
+                                <div class="dropdown" style="display:inline;">
+                                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                         <i class="fa" ng-class="{'fa-sort-alpha-asc': !orderList, 'fa-sort-alpha-desc': orderList}" style="width:20px;"></i>
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                        <li><a href="#" ng-click="sortTable('name.en', 'ASC')"><i class=" fa fa-sort-alpha-asc" style="width:20px;"></i> Sort alphabetical A-Z </a></li>
+                                        <li><a href="#" ng-click="sortTable('name.en', 'DESC')"><i class=" fa fa-sort-alpha-desc" style="width:20px;"></i> Sort alphabetical Z-A</a></li>
+                                        <!--<li role="separator" class="divider"></li>
+                                        <li><a href="#" ng-click="sortTable('isNPParty', 'DESC')">Parties</a></li>
+                                        <li><a href="#" ng-click="sortTable('!isNPParty', 'ASC')">Non-Parties</a></li>-->
+                                    </ul>
+                                    </div>
+                            
+                                <input type="text" class="form-control" ng-model="keyword" placeholder="search for a country" style="width:180px;display:inline;margin-left:3px;"></input>
+                                <!--<span ng-repeat="letter in alphabet" class="hidden-xs hidden-sm hidden-md">
+                                    <a ng-href="#" ng-click="setLetterFilter(letter)" class="letter" ng-class="{'letter-active':letterFilter == letter}">{{letter}}</a>
+                                </span>-->
+                                <div style="padding-top:5px;" class="visible-xs"></div>
+                                <a ng-href="#" ng-click="setLetterFilter('All')" style="margin-left:10px;" class="letter" ng-class="{'letter-active':!letterFilter && !partyFilter}" >All</a>
+                                <a ng-href="#" ng-click="setPartyFilter('party')" style="margin-left:10px;" class="letter  " ng-class="{'letter-active':partyFilter == 'party'}">
+                                    <i class="color-party fa fa-square"></i> Parties</a>
+                                 <a ng-href="#" ng-click="setPartyFilter('inbetween')" style="margin-left:10px;" class="letter  " ng-class="{'letter-active':partyFilter == 'inbetween'}">
+                                    <i class="color-inbetween fa fa-square"></i> Ratified not yet Party</a>
+                                <a ng-href="#" ng-click="setPartyFilter('nonparty')" style="margin-left:10px;" class="letter " ng-class="{'letter-active':partyFilter == 'nonparty'}" >
+                                    <i class="color-nonparty fa fa-square"></i>  Non-Parties</a> 
+                            </th>
+
+                            <th class="hidden-xs hidden-sm ">
+                                <span style="cursor:pointer;" ng-click="sortTable('NFP')" data-toggle="tooltip" title="National ABS Focal Points" data-container="body">
+
+                                    <span id="nfpCount" class="bold color-black">NFP&nbsp;<i class="fa fa-info-circle color-litegrey" ></i></span>
+                                    <br>
+                                    <span class="badge">{{headerCount.focalPoint}}</span>
+                                </span>
+                            </th>
+                           
+                            <th class="hidden-xs hidden-sm ">
+                                <span style="cursor:pointer;" ng-click="sortTable('CNA')" data-toggle="tooltip" title="Competent National Authorities" data-container="body">
+
+                                    <span id="cnaCount" class="bold color-black">CNA&nbsp;<i class="fa fa-info-circle color-litegrey" ></i></span>
+                                    <br>
+                                    <span class="badge">{{headerCount.authority}}</span>
+                                </span>
+                            </th>
+                            <th class="hidden-xs hidden-sm ">
+                                <span style="cursor:pointer;" ng-click="sortTable('MSR')" data-toggle="tooltip" title="Legislative, administrative or policy measures" data-container="body">
+
+                                    <span id="msrCount" class="bold color-black">MSR&nbsp;<i class="fa fa-info-circle color-litegrey" ></i></span>
+                                    <br>
+                                    <span class="badge">{{headerCount.measure}}</span>
+                                </span>
+                            </th>
+                             <th class="hidden-xs hidden-sm ">
+                                <span style="cursor:pointer;" ng-click="sortTable('NDB')" data-toggle="tooltip" title="National Websites and Databases" data-container="body">
+
+                                    <span id="ndbCount" class="bold color-black">NDB&nbsp;<i class="fa fa-info-circle color-litegrey" ></i></span>
+                                    <br>
+                                    <span class="badge">{{headerCount.database}}</span>
+                                </span>
+                            </th>
+                            
+                            <th class="hidden-xs hidden-sm ">
+                                <span style="cursor:pointer;" ng-click="sortTable('IRCC')" data-toggle="tooltip" title="Internationally Recognized Certificate of Compliance" data-container="body">
+
+                                    <span id="irccCount" class="bold color-black">IRCC&nbsp;<i class="fa fa-info-circle color-litegrey" ></i></span>
+                                    <br>
+                                    <span class="badge">{{headerCount.absPermit}}</span>
+                                </span>
+                            </th>
+                            <th class="hidden-xs hidden-sm ">
+                                <span style="cursor:pointer;" ng-click="sortTable('CP')" data-toggle="tooltip" title="Checkpoints" data-container="body">
+
+                                    <span id="cpCount" class="bold color-black">CP&nbsp;<i class="fa fa-info-circle color-litegrey" ></i> </span>
+                                    <br>
+                                    <span class="badge">{{headerCount.absCheckpoint}}</span>
+                                </span>
+                            </th>
+                            <th class="hidden-xs hidden-sm ">
+                                <span style="cursor:pointer;" ng-click="sortTable('CPC')" data-toggle="tooltip" title="Checkpoint Communiqués" data-container="body">
+                                    <span id="cpcCount" class="bold color-black">CPC&nbsp;<i class="fa fa-info-circle color-litegrey" ></i> </span>
+                                    <br>
+                                    <span class="badge">{{headerCount.absCheckpointCommunique}}</span>
+                                </span>
+                            </th>
+                             <th class="hidden-xs hidden-sm ">
+                                <span style="cursor:pointer;" ng-click="sortTable('NR')" data-toggle="tooltip" title="Interim national reports" data-container="body">
+                                    <span id="cpcCount" class="bold color-black">NR&nbsp;<i class="fa fa-info-circle color-litegrey" ></i> </span>
+                                    <br>
+                                    <span class="badge">{{headerCount.nationalReports}}</span>
+                                </span>
+                            </th>
+                        </thead>
+                        <tbody style="cursor:pointer" ng-click="gotoCountryProfile(country.code)"
+                        ng-repeat="country in ct = (countries | filter:keyword | filter: hasStatus | orderBy:sortTermFilter:orderList) track by country.name.en" ng-if="showCountry(country)">
+                            <tr>
+                                 <td style="font-size:12px;width:30px;">{{$index+1}}</td>
+                                 <td style="min-width:100%">
+                                    <span style="font-size:18px;font-weight:500;" ng-class="{'color-party': country.isNPParty, 'color-grey':!country.isNPParty, 'color-inbetween': country.isNPInbetweenParty}">
+                                        {{country.name.en}}
+                                    </span>
+                                    <div style="display:block;text-transform:uppercase;font-weight:500;line-height:12px;">
+                                        <span ng-if="!country.isNPParty && !country.isNPInbetweenParty" class="color-grey bold"  style="font-size:10px;margin-right:10px;">Non-Party</span>
+                                        <span ng-if="country.isNPParty" class="color-party bold"  style="font-size:10px;margin-right:10px;">Party to the Nagoya Protocol</span>
+                                        <span ng-if="country.isNPInbetweenParty" class="color-inbetween bold"  style="font-size:10px;margin-right:10px;">Ratified not yet Party</span>
+                                        <span ng-if="country.isNPSignatory" class="color-pink"  style="font-size:10px;margin-right:10px;">Signatory</span>
+                                        <br ng-if="country.entryIntoForce" class="visible-xs">
+                                        <span ng-if="country.entryIntoForce" class="color-grey"  style="font-size:10px;margin-right:20px;">Entry into force: {{country.entryIntoForce|formatDate}}</span>
+                                       
+                                        <div class="center-text evenly-spaced visible-xs visible-sm" style="width:100%;font-size:10px;margin-top:5px;" >
+                                            <span class="color-litegrey" style="margin-right:5px;"> NFP <span class="label label-default bg-grey3" style="font-size:8px;">{{country.schemas.focalPoint ? country.schemas.focalPoint  : "0"}}</span></span>
+                                            <span class="color-litegrey" style="margin-right:5px;"> CNA <span class="label label-default bg-grey3" style="font-size:8px;">{{country.schemas.authority ? country.schemas.authority  : "0"}}</span></span>
+                                            <span class="color-litegrey" style="margin-right:5px;"> MSR <span class="label label-default bg-grey3" style="font-size:8px;">{{country.schemas.measure ? country.schemas.measure  : "0"}}</span></span>
+                                            <span class="color-litegrey" style="margin-right:5px;"> NDB <span class="label label-default bg-grey3" style="font-size:8px;">{{country.schemas.database ? country.schemas.database  : "0"}}</span></span>
+                                            <span class="color-litegrey" style="margin-right:5px;"> IRCC <span class="label label-default bg-grey3" style="font-size:8px;">{{country.schemas.absPermit ? country.schemas.absPermit  : "0"}}</span></span>
+                                            <span class="color-litegrey" style="margin-right:5px;"> CP <span class="label label-default bg-grey3" style="font-size:8px;">{{country.schemas.checkpoint ? country.schemas.checkpoint  : "0"}}</span></span>
+                                            <span class="color-litegrey" style="margin-right:5px;"> CPC <span class="label label-default bg-grey3" style="font-size:8px;">{{country.schemas.absCheckpointCommunique ? country.schemas.absCheckpointCommunique  : "0"}}</span></span>
+                                            <span class="color-litegrey" style="margin-right:0px;"> NR <span class="label label-default bg-grey3" style="font-size:8px;">{{country.schemas.nationalreport ? country.schemas.nationalreport  : "0"}}</span></span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="hidden-xs hidden-sm ">
+                                    {{country.schemas.focalPoint}}
+                                </td>
+                               
+                                <td class="hidden-xs hidden-sm ">
+                                    {{country.schemas.authority}}
+                                </td>
+                                <td class="hidden-xs hidden-sm ">
+                                    {{country.schemas.measure}}
+                                </td>
+                                 <td class="hidden-xs hidden-sm ">
+                                    {{country.schemas.database}}
+                                </td>
+                                <td class="hidden-xs hidden-sm ">
+                                    {{country.schemas.absPermit}}
+                                </td>
+                                <td class="hidden-xs hidden-sm ">
+                                    {{country.schemas.checkpoint}}
+                                </td>
+                                <td class="hidden-xs hidden-sm ">
+                                    {{country.schemas.absCheckpointCommunique}}
+                                </td>
+                                <td class="hidden-xs hidden-sm ">
+                                    {{country.schemas.nationalReport}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
