@@ -5,7 +5,7 @@ define(['text!./search-map.html',
   'text!./pin-popup-abs.html',
   'scbd-map/ammap3',
   'scbd-map/ammap3-service', '/app/js/common.js', '/app/services/search-service.js',
-  '../directives/loading-directive.js'
+  '../directives/block-region-directive.js'
 ], function(template, app, $, _, popoverTemplate) {
   'use strict';
 

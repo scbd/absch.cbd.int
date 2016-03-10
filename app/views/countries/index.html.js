@@ -1,7 +1,7 @@
 define(['app','underscore',
   '/app/js/common.js',
   './search-map.js','scbd-map/ammap3-service', '/app/services/search-service.js',
-  '../directives/loading-directive.js'
+  '../directives/block-region-directive.js'
 ], function(app, _) {
 
   app.controller("CountriesMapController", ["$scope", "$element", "$location", "commonjs", "$q", 'searchService',
