@@ -1,4 +1,4 @@
-define(['app', 'underscore', './loading-directive.js' ], function (app, _) {
+define(['app', 'underscore', './block-region-directive.js' ], function (app, _) {
         app.directive('reportRecord', function () {
                 return {
                         restrict: 'EAC',
@@ -26,7 +26,7 @@ define(['app', 'underscore', './loading-directive.js' ], function (app, _) {
                                     report.schema = $scope.schema;
                                     report.identifier = $scope.uid;
                                     $scope.loading = true;
-                                    $http.post('http://localhost:8000/api/v2015/report-records', report)
+                                    $http.post('/api/v2015/report-records', report)
                                     .then(function(data){
                                         $timeout(function(){//dont' know why
                                             var toast = toastr.success();
