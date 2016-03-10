@@ -20,7 +20,7 @@ define(['text!./party-status.html',
           $element.find("#od").attr('id', $attr.id);
           var od = new Odometer({
             el: $element.find("#" + $attr.id)[0],
-            value: 100, // default value
+            value: 200, // default value
             format: 'd', // default value
             duration: 2000,
           });
@@ -33,7 +33,7 @@ define(['text!./party-status.html',
             if ($scope.num) {
 
               clearWatch();
-              if ($scope.num < 100 && $scope.num > 9)
+              if ($scope.num < 200 && $scope.num > 9)
                 $scope.num = Number('1' + $scope.num);
               else if ($scope.num < 10)
                 $scope.num = Number('10' + $scope.num);
