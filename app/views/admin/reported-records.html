@@ -14,7 +14,7 @@
                     <td>Information</td>
                 </tr>
             </thead>
-            <tbody ng-repeat="record in reportRecords">
+            <tbody ng-repeat="record in reportRecords | orderBy:'reportedOn':'desc'">
                 <tr ng-click="record.showDoc=!record.showDoc">
                     <td>
                         {{record.schema|schemaName}}
