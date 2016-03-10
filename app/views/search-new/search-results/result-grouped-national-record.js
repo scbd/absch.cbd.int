@@ -13,9 +13,9 @@ define(['app', 'underscore', '/app/js/common.js',
                 doc:'='
             },
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
-                
-                
-                
+
+
+
             },
         };
     });

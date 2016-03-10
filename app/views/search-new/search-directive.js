@@ -16,7 +16,8 @@ define(['app', 'underscore', '/app/js/common.js',
             replace: true,
             // transclude: true,
             templateUrl: '/app/views/search-new/search-directive.html',
-            controller: ['$scope','$q', 'realm', 'searchService', 'commonjs', 'localStorageService', '$http', 'Thesaurus' ,function($scope, $q, realm, searchService, commonjs, localStorageService, $http, thesaurus) {
+            controller: ['$scope','$q', 'realm', 'searchService', 'commonjs', 'localStorageService', '$http', 'Thesaurus' ,
+            function($scope, $q, realm, searchService, commonjs, localStorageService, $http, thesaurus) {
 
                     var queryCanceler = null;
                     $scope.rawDocs = [];
@@ -39,7 +40,13 @@ define(['app', 'underscore', '/app/js/common.js',
                     $scope.setFilters = {};
                     $scope.test = '';
                     $scope.itemsPerPage = 25;
-                    $scope.currentPage = 0;
+                    $scope.nationalLoading = false;
+                    $scope.referenceLoading = false;
+                    $scope.scbdLoading = false;
+                    // $scope.currentPage = 0;
+                    var nationalCurrentPage = 0;
+                    var referenceCurrentPage = 0;
+                    var scbdCurrentPage = 0;
 
                     //===============================================================================================================================
                     $scope.isFreeTextFilterOn = function(filterID) {
@@ -138,14 +145,9 @@ define(['app', 'underscore', '/app/js/common.js',
 
                         queryCanceler = $q.defer();
 
-                        if($scope.currentPage===0){
+                        if(nationalCurrentPage===0){
                             $scope.rawDocs = undefined;
                         }
-                        if(currentPage)
-                            $scope.currentPage = currentPage;
-                        if(itemsPerPage)
-                            $scope.itemsPerPage = itemsPerPage;
-
 
                         var groupQuery = {
                             query       : q,
@@ -153,10 +155,10 @@ define(['app', 'underscore', '/app/js/common.js',
                             fields      : base_fields + en_fields,
                             groupField  : 'government_s',
                             groupSort   : 'schema_s desc', // groupSort, sort1, sort2, sort3
-                            currentPage : $scope.currentPage,
+                            currentPage : nationalCurrentPage,
                             itemsPerPage: $scope.itemsPerPage
                         };
-                        $scope.loading = true;
+                        $scope.nationalLoading = true;
                         searchOperation = searchService.group(groupQuery, queryCanceler);
 
                         $q.when(searchOperation)
@@ -176,7 +178,7 @@ define(['app', 'underscore', '/app/js/common.js',
                                 console.log('ERROR: ' + error);
                             })
                             .finally(function(){
-                                $scope.loading = false;
+                                $scope.nationalLoading = false;
                             });
 
 
@@ -199,7 +201,7 @@ define(['app', 'underscore', '/app/js/common.js',
 
                         queryCanceler = $q.defer();
 
-                        if($scope.currentPage===0){
+                        if(referenceCurrentPage===0){
                             $scope.refDocs = undefined;
                         }
 
@@ -207,7 +209,7 @@ define(['app', 'underscore', '/app/js/common.js',
                             query       : q,
                             sort        : _.isEmpty($scope.setFilters) ? 'updatedDate_dt desc' : '',
                             fields      : base_fields + en_fields,
-                            currentPage : $scope.currentPage,
+                            currentPage : referenceCurrentPage,
                             itemsPerPage: $scope.itemsPerPage
                         };
 
@@ -216,11 +218,20 @@ define(['app', 'underscore', '/app/js/common.js',
                         $q.when(searchOperation)
                             .then(function(data) {
                                 queryCanceler = null;
-                                $scope.refDocs = data;
 
+                                if(!$scope.refDocs || $scope.refDocs.length == 0)
+                                    $scope.refDocs = data.data.response.docs;
+                                else {
+                                    _.each(data.data.response.docs, function(record){
+                                        $scope.refDocs.push(record);
+                                    });
+                                }
                             }).catch(function(error) {
                                 console.log('ERROR: ' + error);
-                            });
+                            })
+                            .finally(function(){
+                                $scope.referenceLoading = false;
+                            });;
 
                     };
                   //===============================================================================================================================
@@ -240,7 +251,7 @@ define(['app', 'underscore', '/app/js/common.js',
 
                         queryCanceler = $q.defer();
 
-                        if($scope.currentPage===0){
+                        if(scbdCurrentPage===0){
                             $scope.scbdDocs = undefined;
                         }
 
@@ -248,8 +259,8 @@ define(['app', 'underscore', '/app/js/common.js',
                             query       : q,
                             sort        : 'updatedDate_dt desc',
                             fields      : base_fields + en_fields,
-                            currentPage : $scope.currentPage,
-                            itemsPerPage: $scope.itemsPerPage
+                            currentPage : scbdCurrentPage,
+                            rowsPerPage : $scope.itemsPerPage
                         };
 
                         searchOperation = searchService.list(listQuery, queryCanceler);
@@ -257,11 +268,20 @@ define(['app', 'underscore', '/app/js/common.js',
                         $q.when(searchOperation)
                             .then(function(data) {
                                 queryCanceler = null;
-                                $scope.scbdDocs = data;
 
+                                if(!$scope.scbdDocs || $scope.scbdDocs.length == 0)
+                                    $scope.scbdDocs = data.data.response.docs;
+                                else {
+                                    _.each(data.data.response.docs, function(record){
+                                        $scope.scbdDocs.push(record);
+                                    });
+                                }
                             }).catch(function(error) {
                                 console.log('ERROR: ' + error);
-                            });
+                            })
+                            .finally(function(){
+                                $scope.scbdLoading = false;
+                            });;
                     };
 
                   //===============================================================================================================================
@@ -532,6 +552,32 @@ define(['app', 'underscore', '/app/js/common.js',
                         }
                     };
 
+                    function loadTabFacets(){
+                            var qNational  = queryFilterBuilder("national");
+                            var qReference = queryFilterBuilder("reference");
+                            var qSCBD      = queryFilterBuilder("scbd");
+
+                            var query = {
+                                fields      : '_latest_s',
+                                currentPage : 0,
+                                rowsPerPage : 0
+                            };
+
+                            $q.all([searchService.list(_.extend({query : qNational  }, query), queryCanceler),
+                                    searchService.list(_.extend({query : qReference }, query), queryCanceler),
+                                    searchService.list(_.extend({query : qSCBD      }, query), queryCanceler)
+                            ])
+                            .then(function(results){
+                                console.log(results);
+                                $scope.recordCount = _.map(results, function(data, index){
+                                                        return {
+                                                            //type : index == 1 ? 'national' : (index == 2 ? 'reference' : 'scbd'),
+                                                            count : data.data.response.numFound
+                                                        };
+                                                    });
+                            });
+                    }
+
                     this.addFilter = addFilter;
                     this.nationalQuery = nationalQuery;
                     this.referenceQuery = referenceQuery;
@@ -542,7 +588,7 @@ define(['app', 'underscore', '/app/js/common.js',
 
                     loadFilters();
                     load();
-
+                    loadTabFacets();
                   //===============================================================================================================================
                     $scope.$watch('currentTab', function(newVal, oldVal){
                        if(newVal != oldVal)
@@ -561,19 +607,40 @@ define(['app', 'underscore', '/app/js/common.js',
                             refresh_nat = true;
                             refresh_ref = true;
                             refresh_scbd = true;
+                            nationalCurrentPage = 0;
+                            referenceCurrentPage = 0;
+                            scbdCurrentPage = 0;
                             load();
+                            loadTabFacets();
                             $scope.refresh = false;
                         }
 				    });
 
 
                     $scope.updateScrollPage = function() {
-                        if($scope.loading)//|| $scope.docs.length == $scope.numFound
-                            return;
-                        $scope.loading = true;
-                        $scope.currentPage = $scope.currentPage + 1;
-                        console.log($scope.currentPage);
-                        nationalQuery();
+
+                        if($scope.currentTab == 'nationalRecords'){
+                            if($scope.nationalLoading || ($scope.rawDocs && $scope.recordCount && $scope.rawDocs.length == $scope.recordCount[0].count))
+                                return;
+                            $scope.nationalLoading = true;
+                            nationalCurrentPage += 1;
+                            nationalQuery();
+                        }
+                        else if($scope.currentTab == 'referenceRecords'){
+                            if($scope.referenceLoading || ($scope.refDocs && $scope.recordCount && $scope.refDocs.length == $scope.recordCount[1].count))
+                                return;
+                            $scope.referenceLoading = true;
+                            referenceCurrentPage += 1;
+                            referenceQuery();
+                        }
+                        else if($scope.currentTab == 'scbdRecords'){
+                            if($scope.scbdLoading || ($scope.scbdDocs && $scope.recordCount && $scope.scbdDocs.length == $scope.recordCount[2].count))
+                                return;
+                            $scope.scbdLoading = true;
+                            scbdCurrentPage += 1;
+                            scbdQuery();
+                        }
+
                     };
 
             }]//controller

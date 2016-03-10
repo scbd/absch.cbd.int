@@ -1,40 +1,114 @@
- <div id="search-new">
- <style>
-        #search-new .search > ul {margin:0;padding:0;list-style-type: none;}
-        #search-new .search > ul li{ display: inline;font-weight:bold;line-height:40px; z-index:20; position:relative;}
-        #search-new .search > ul li > a {padding:8px 10px 8px 10px;border-top-left-radius:3px;border-top-right-radius:3px; font-weight:bold;}
-        #search-new .search > ul li > a:hover, #search-new .search > ul li > a:focus {background-color: #DDD; border: 1px solid #e3e3e3;}
-        #search-new .search > ul li > a.active {border-bottom-left-radius:0; border-bottom-right-radius:0;  border: 1px solid #e3e3e3; border-bottom:0; padding-bottom:10px;background-color: #DDD; box-shadow:none!important;  }
-        #search-new label{font-weight:bold!important;}
-        #search-new .active .badge {background-color: #333;color:white;}
-        #search-new .section-title{color:#999;font-weight: bold;}
-        #search-new .active{background-color: #EEE}
-        #search-new .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus{background-color: #FFF!important;position:relative;top:3px;border:1px solid #e3e3e3;  border-bottom:0;}
-        #search-new .tab-content { border-bottom:1px solid #e3e3e3; border-left:1px solid #e3e3e3; border-right:1px solid #e3e3e3; }
-        #search-new .nav-tabs>li {margin-bottom:0; font-weight:bold; font-size:16px;}
-        #search-new  .nav-tabs > li > a:hover{background-color: #DDD; }
-        #search-new .no-rl-padding{padding-left:0!important;margin-left:0!important;padding-right:0!important;margin-right:0!important;}
+<div id="search-new">
+    <style>
+        #search-new .search > ul {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        #search-new .search > ul li {
+            display: inline;
+            font-weight: bold;
+            line-height: 40px;
+            z-index: 20;
+            position: relative;
+        }
+
+        #search-new .search > ul li > a {
+            padding: 8px 10px 8px 10px;
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+            font-weight: bold;
+        }
+
+        #search-new .search > ul li > a:hover,
+        #search-new .search > ul li > a:focus {
+            background-color: #DDD;
+            border: 1px solid #e3e3e3;
+        }
+
+        #search-new .search > ul li > a.active {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            border: 1px solid #e3e3e3;
+            border-bottom: 0;
+            padding-bottom: 10px;
+            background-color: #DDD;
+            box-shadow: none!important;
+        }
+
+        #search-new label {
+            font-weight: bold!important;
+        }
+
+        #search-new .active .badge {
+            background-color: #333;
+            color: white;
+        }
+
+        #search-new .section-title {
+            color: #999;
+            font-weight: bold;
+        }
+
+        #search-new .active {
+            background-color: #EEE
+        }
+
+        #search-new .nav-tabs>li.active>a,
+        .nav-tabs>li.active>a:hover,
+        .nav-tabs>li.active>a:focus {
+            background-color: #FFF!important;
+            position: relative;
+            top: 3px;
+            border: 1px solid #e3e3e3;
+            border-bottom: 0;
+        }
+
+        #search-new .tab-content {
+            border-bottom: 1px solid #e3e3e3;
+            border-left: 1px solid #e3e3e3;
+            border-right: 1px solid #e3e3e3;
+        }
+
+        #search-new .nav-tabs>li {
+            margin-bottom: 0;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        #search-new .nav-tabs > li > a:hover {
+            background-color: #DDD;
+        }
+
+        #search-new .no-rl-padding {
+            padding-left: 0!important;
+            margin-left: 0!important;
+            padding-right: 0!important;
+            margin-right: 0!important;
+        }
     </style>
 
 
-    <div class="container-fluid" >
-        <div class="row" >
-            <div class="col-md-12" style="padding-bottom:10px;" >
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12" style="padding-bottom:10px;">
                 <span ng-repeat="filter in setFilters" style="margin-bottom:10px;">
-                    <button class="btn btn-sm btn-info bold" style="margin-top:5px;" ng-click="removeFilter(filter.id)" >
-                        <span ng-if="filter.type === 'freeText'">&#34;</span>{{filter.name}}<span ng-if="filter.type === 'freeText'">&#34;</span>
+                    <button class="btn btn-sm btn-info bold" style="margin-top:5px;" ng-click="removeFilter(filter.id)">
+                        <span ng-if="filter.type === 'freeText'">&#34;</span>{{filter.name}}
+                        <span ng-if="filter.type === 'freeText'">&#34;</span>
                         <span aria-hidden="true">×</span>
                     </button>
                 </span>
             </div>
 
-            <div class="col-md-12" >
-                <form ng-submit="saveFreeTextFilter(searchKeyword)" class="input-group" >
-                    <input type="text" ng-model="searchKeyword" class="form-control" placeholder="Search the ABSCH"  style="font-weight:bold;">
+            <div class="col-md-12">
+                <form ng-submit="saveFreeTextFilter(searchKeyword)" class="input-group">
+                    <input type="text" ng-model="searchKeyword" class="form-control" placeholder="Search the ABSCH" style="font-weight:bold;">
                     <span type="submit" class="input-group-addon" id="basic-addon2"><i class="fa fa-search"></i></span>
                 </form>
             </div>
-            <div class="col-md-12 search hidden-xs" style="padding-top:5px;" >
+            <div class="col-md-12 search hidden-xs" style="padding-top:5px;">
                 <ul>
                     <li style="text-transform:uppercase;padding-left:3px;padding-right:5px;color:#bbb;" ng-click="showFilters=null">search filters</li>
                     <li> <a href="" ng-class="{'active':showFilters=='national'}" ng-click="showFilters=(showFilters=='national' ? false : 'national')" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;National records</a> </li>
@@ -47,67 +121,72 @@
                 </ul>
             </div>
         </div>
-     </div>
-        <div class="container-fluid"  ng-show="showFilters || searchKeyword" style="z-index:10!important;top:-2px;position:relative;"  >
-            <div class="row" style="margin:0;" >
-            <div class="col-xs-12 well  bg-grey1 " style="min-height:100px;margin:0;" >
-                   <a href="#" ng-click="showFilters=false;searchKeyword='';" class="pull-right color-grey" ><i class="fa fa-times"></i></a>
-                   <div ng-if="searchKeyword" id="Search-Filter" style="margin-bottom:20px;">
-                        <a class="filter country-heading"  ng-click="saveFreeTextFilter(searchKeyword);">
-                            <i class="fa check" ng-class="{'fa-check-square':isFilterOn('freeText_'+searchKeyword),'fa-square':!isFilterOn('freeText_'+searchKeyword)}"></i>
-                            Free text search: <span class="color-blue">"{{searchKeyword}}"</span>
-                        </a>
-                   </div>
+    </div>
+    <div class="container-fluid" ng-show="showFilters || searchKeyword" style="z-index:10!important;top:-2px;position:relative;">
+        <div class="row" style="margin:0;">
+            <div class="col-xs-12 well  bg-grey1 " style="min-height:100px;margin:0;">
+                <a href="#" ng-click="showFilters=false;searchKeyword='';" class="pull-right color-grey"><i class="fa fa-times"></i></a>
+                <div ng-if="searchKeyword" id="Search-Filter" style="margin-bottom:20px;">
+                    <a class="filter country-heading" ng-click="saveFreeTextFilter(searchKeyword);">
+                        <i class="fa check" ng-class="{'fa-check-square':isFilterOn('freeText_'+searchKeyword),'fa-square':!isFilterOn('freeText_'+searchKeyword)}"></i> Free text search:
+                        <span class="color-blue">"{{searchKeyword}}"</span>
+                    </a>
+                </div>
 
-                   <national-filter ng-if="showFilters==='national' || (searchKeyword && !showFilters)" ></national-filter>
+                <national-filter ng-if="showFilters==='national' || (searchKeyword && !showFilters)"></national-filter>
 
-                   <reference-filter ng-if="showFilters==='reference' || (searchKeyword && !showFilters)" ></reference-filter>
+                <reference-filter ng-if="showFilters==='reference' || (searchKeyword && !showFilters)"></reference-filter>
 
-                   <scbd-filter ng-if="showFilters==='scbd' || (searchKeyword && !showFilters)" ></scbd-filter>
+                <scbd-filter ng-if="showFilters==='scbd' || (searchKeyword && !showFilters)"></scbd-filter>
 
-                   <country-filter ng-if="showFilters==='country' || (searchKeyword && !showFilters)"></country-filter>
+                <country-filter ng-if="showFilters==='country' || (searchKeyword && !showFilters)"></country-filter>
 
-                   <thematic-filter ng-if="showFilters==='thematic' || (searchKeyword && !showFilters)"></thematic-filter>
+                <thematic-filter ng-if="showFilters==='thematic' || (searchKeyword && !showFilters)"></thematic-filter>
             </div>
-         </div>
         </div>
+    </div>
 
-        <div class="container-fluid" style="padding-top:10px;">
+    <div class="container-fluid" style="padding-top:10px;">
 
-          <div class="row" style="padding:10px 0 0 0;margin:0px;">
+        <div class="row" style="padding:10px 0 0 0;margin:0px;">
             <div class="col-xs-12" style="padding:0;margin:0;">
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs">
-                    <li ng-class="{'active':currentTab==='nationalRecords'}"><a href="#" class="color-blue" ng-click="updateCurrentTab('nationalRecords')" >National <span class="hidden-xs">records <span class="pull-right badge" style="margin-left:20px;position:relative;top:2px;">{{rawDocs.matches}}</span></span></a></li>
-                    <li ng-class="{'active':currentTab==='referenceRecords'}"><a href="#"  class="color-orange" ng-click="updateCurrentTab('referenceRecords')">Reference <span class="hidden-xs">records <span class="pull-right badge" style="margin-left:20px;position:relative;top:2px;">100</span></span> </a></li>
-                    <li ng-class="{'active':currentTab==='scbdRecords'}"><a href="#"  class="color-darkgrey" ng-click="updateCurrentTab('scbdRecords')" >SCBD <span class="hidden-xs">records <span class="pull-right badge" style="margin-left:20px;position:relative;top:2px;">100</span></span></a></li>
+                    <li ng-class="{'active':currentTab==='nationalRecords'}"><a href="#" class="color-blue" ng-click="updateCurrentTab('nationalRecords')">National <span class="hidden-xs">records <span class="pull-right badge" style="margin-left:20px;position:relative;top:2px;">{{recordCount[0].count}}</span></span></a></li>
+                    <li ng-class="{'active':currentTab==='referenceRecords'}"><a href="#" class="color-orange" ng-click="updateCurrentTab('referenceRecords')">Reference <span class="hidden-xs">records <span class="pull-right badge" style="margin-left:20px;position:relative;top:2px;">{{recordCount[1].count}}</span></span> </a></li>
+                    <li ng-class="{'active':currentTab==='scbdRecords'}"><a href="#" class="color-darkgrey" ng-click="updateCurrentTab('scbdRecords')">SCBD <span class="hidden-xs">records <span class="pull-right badge" style="margin-left:20px;position:relative;top:2px;">{{recordCount[2].count}}</span></span></a></li>
                 </ul>
             </div>
-              <!-- Tab panes -->
-             <div class="col-xs-12 tab-content bg-white" style="padding:20px;margin:0;">
-                    <div  class="tab-pane bg-white" ng-class="{'active':currentTab==='nationalRecords'}" ng-if="currentTab==='nationalRecords'" >
-                        <div infinite-scroll="updateScrollPage()" infinite-scroll-disabled="loading" infinite-scroll-distance="10">
-                             <!-- <div ng-repeat="group in rawDocs"> -->
-                                <div ng-repeat="country in rawDocs.groups" >
-                                    <national-records-country group='country'></national-records-country>
-                                </div>
-                            <!-- </div> -->
-                            <h4 class="bg-white" ng-if="rawDocs.data.length === 0">no records found</h4>
+            <!-- Tab panes -->
+            <div class="col-xs-12 tab-content bg-white" style="padding:20px;margin:0;">
+                <div class="tab-pane bg-white" ng-class="{'active':currentTab==='nationalRecords'}" ng-if="currentTab==='nationalRecords'">
+                    <div infinite-scroll="updateScrollPage()" infinite-scroll-disabled="nationalLoading" infinite-scroll-distance="10">
+                        <i class="fa fa-refresh fa-spin fa-5x" ng-show="nationalLoading" style="margin-left:50%"></i>
+                        <div ng-repeat="country in rawDocs.groups">
+                            <national-records-country group='country'></national-records-country>
                         </div>
+                        <h4 class="bg-white" ng-if="rawDocs.data.length === 0">no records found</h4>
                     </div>
-                    <div class="tab-pane bg-white" style="padding-top:20px;"  ng-class="{'active':currentTab==='referenceRecords'}"  ng-if="currentTab=='referenceRecords'">
-                         <div ng-repeat="rec in refDocs.data.response.docs">
+                </div>
+                <div class="tab-pane bg-white" style="padding-top:20px;" ng-class="{'active':currentTab==='referenceRecords'}" ng-if="currentTab=='referenceRecords'">
+                    <div infinite-scroll="updateScrollPage()" infinite-scroll-disabled="referenceLoading" infinite-scroll-distance="10">
+                        <i class="fa fa-spin fa-refresh fa-5x" ng-show="referenceLoading" style="margin-left:50%"></i>
+                        <div ng-repeat="rec in refDocs">
                             <result-default doc=rec type="referenceRecords"></result-default>
-                         </div>
-                           <h4 class="bg-white" ng-if="refDocs.data.response.numFound === 0">no records found</h4>
+                        </div>
+                        <h4 class="bg-white" ng-if="refDocs.data.response.numFound === 0">no records found</h4>
                     </div>
-                    <div class="tab-pane bg-white"  style="padding-top:20px;" ng-class="{'active':currentTab==='scbdRecords'}" ng-if="currentTab=='scbdRecords'" >
-                         <div ng-repeat="rec in scbdDocs.data.response.docs">
-                            <result-default doc=rec  type="scbdRecords"></result-default>
-                         </div>
-                          <h4 class="bg-white" ng-if="scbdDocs.data.response.numFound === 0">no records found</h4>
+                </div>
+                <div class="tab-pane bg-white" style="padding-top:20px;" ng-class="{'active':currentTab==='scbdRecords'}" ng-if="currentTab=='scbdRecords'">
+                    <i class="fa fa-refresh fa-spin fa-5x" ng-show="scbdLoading" style="margin-left:50%"></i>
+                    <div infinite-scroll="updateScrollPage()" infinite-scroll-disabled="scbdLoading" infinite-scroll-distance="10">
+                        <div ng-repeat="rec in scbdDocs">
+                            <result-default doc=rec type="scbdRecords"></result-default>
+                        </div>
+                        <h4 class="bg-white" ng-if="scbdDocs.data.response.numFound === 0">no records found</h4>
                     </div>
-             </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
