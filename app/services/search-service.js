@@ -107,8 +107,8 @@ define(['app', 'underscore', './local-storage-service.js', './app-config-service
 
                     if (localStorageKey) {
                         var fromStorage = localStorageService.get(localStorageKey);
-                        if (fromStorage && fromStorage.data) //&& fromStorage.expiry < new date())
-                            return fromStorage.data;
+                        if (fromStorage) //&& fromStorage.expiry < new date())
+                            return fromStorage;
                     }
                     _.defaults(facetQuery, searchDefaults);
 

@@ -4,8 +4,8 @@ define(['app','underscore',
   '../directives/block-region-directive.js'
 ], function(app, _) {
 
-  app.controller("CountriesMapController", ["$scope", "$element", "$location", "commonjs", "$q", 'searchService',
-    function($scope, $element, $location, commonjs, $q, searchService) {
+  app.controller("CountriesMapController", ["$scope", "$element", "$location", "commonjs", "$q", 'searchService', '$timeout', '$compile',
+    function($scope, $element, $location, commonjs, $q, searchService, $timeout, $compile) {
         $scope.sortTerm = "name.en";
         var headerCount = {	absCheckpoint		       : 0,
                                 absCheckpointCommunique: 0,
@@ -47,16 +47,16 @@ define(['app','underscore',
                 $scope.headerCount = headerCount;
                 $element.find('[data-toggle="tooltip"]').tooltip();
                 $scope.loading = false;
-                fixMe();
+                $timeout(function(){fixMe();},100); //fix table header
             });
-            
+
                $scope.count = 1;
                $scope.letterFilter = null;
                $scope.partyFilter = null;
                $scope.alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' ];
-               
-      
-               
+
+
+
               //*************************************************************************************************************************************
                $scope.setLetterFilter = function(letter) {
                     $scope.letterFilter = letter;
@@ -65,41 +65,41 @@ define(['app','underscore',
                         $scope.partyFilter = null;
                     }
                };
-               
+
                //*************************************************************************************************************************************
                $scope.setPartyFilter = function(pfilter) {
                     $scope.partyFilter = pfilter;
                };
-               
+
                //*************************************************************************************************************************************
-               function filterParty(item) { 
-                    if(!$scope.partyFilter) 
+               function filterParty(item) {
+                    if(!$scope.partyFilter)
                         return true;
                     if($scope.partyFilter ==='party'){
                         return item.isNPParty;
-                    }  
+                    }
                     if($scope.partyFilter ==='nonparty'){
                         return !item.isNPParty;
-                    }   
+                    }
                     if($scope.partyFilter ==='inbetween'){
                         return item.isNPInbetweenParty;
-                    }   
+                    }
                };
-               
+
                //*************************************************************************************************************************************
                $scope.showCountry = function(item) {
-                    
-                    if(!$scope.letterFilter) 
+
+                    if(!$scope.letterFilter)
                         return filterParty(item);
                     else{
                         if(item.name.en[0] === $scope.letterFilter)
                             return filterParty(item);
                     }
                };
-            
-            
-            
-            
+
+
+
+
             //==================================================================================
             $scope.sortTable = function(term, order) {
 
@@ -147,14 +147,14 @@ define(['app','underscore',
                     return data.schemas.focalPoint ? data.schemas.focalPoint : ($scope.orderList ? -9999999 : 999999);
                 }
             };
-            
+
              //==================================================================================
             $scope.gotoCountryProfile = function(code){
                 $location.path('/countries/' + code);
             };
-            
-            
-            
+
+
+
 ////////////////////
 
             function fixMe() {
@@ -164,7 +164,8 @@ define(['app','underscore',
                    function init() {
                       $this.wrap('<div class="tableContainer"/>');
                       $t_fixed = $this.clone();
-                      $t_fixed.find("tbody").remove().end().addClass("fixed").insertBefore($this);
+                      var fixedheader = $compile($t_fixed.find("tbody").remove().end().addClass("fixed"))($scope);
+                      fixedheader.insertBefore($this);
                       resizeFixed();
                    }
                    function resizeFixed() {
