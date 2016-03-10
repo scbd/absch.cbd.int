@@ -365,7 +365,7 @@ font-size: 38px;
 
 body{
   min-height:800px;
-  font-family:  "Helvetica Neue", Helvetica, sans-serif, Trebuchet MS;
+  font-family:  "Helvetica Neue", Helvetica, sans-serif, Trebuchet MS, Tahoma, sans-serif!important;
   text-rendering: optimizeLegibility;
   font-size:14px;
 background-color:#eee!important;
