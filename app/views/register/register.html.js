@@ -1,4 +1,4 @@
-define(['app','./directives/register-directive.js', '../directives/loading-directive.js'
+define(['app','./directives/register-directive.js', '../directives/block-region-directive.js'
 ], function(app) {
 
     "use strict";
