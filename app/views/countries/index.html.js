@@ -1,11 +1,12 @@
 define(['app','underscore',
   '/app/js/common.js',
+  'scbd-angularjs-filters',
   './search-map.js','scbd-map/ammap3-service', '/app/services/search-service.js',
   '../directives/loading-directive.js'
 ], function(app, _) {
 
-  app.controller("CountriesMapController", ["$scope", "$element", "$location", "commonjs", "$q", 'searchService',
-    function($scope, $element, $location, commonjs, $q, searchService) {
+  app.controller("CountriesMapController", ["$scope", "$element", "$location", "commonjs", "$q", 'searchService','$filter',
+    function($scope, $element, $location, commonjs, $q, searchService, $filter) {
         $scope.sortTerm = "name.en";
         var headerCount = {	absCheckpoint		       : 0,
                                 absCheckpointCommunique: 0,

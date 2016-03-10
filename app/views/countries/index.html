@@ -53,19 +53,30 @@
         <div class="row bg-grey1" style="margin:10px 0 5px 0;padding:10px 0 5px 0;border:1px solid #d5d5d5;">
             <div class="col-sm-12 col-md-6">
                 
-                    <div class="dropdown" style="display:inline;">
+                 <div class="dropdown" style="display:inline;">
                     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            <i class="fa" ng-class="{'fa-sort-alpha-asc': !orderList, 'fa-sort-alpha-desc': orderList}" style="width:20px;"></i>
+                            <i ng-if="sortTerm==='name.en'" class="fa" ng-class="{'fa-sort-alpha-asc':!orderList, 'fa-sort-alpha-desc':orderList}" style="width:20px;"></i>
+                            <span ng-if="sortTerm!=='name.en'">Ordered by: <strong> {{sortTerm}}</strong></span>
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                         <li><a href="#" ng-click="sortTable('name.en', 'ASC')"><i class=" fa fa-sort-alpha-asc" style="width:20px;"></i> Sort alphabetical A-Z </a></li>
                         <li><a href="#" ng-click="sortTable('name.en', 'DESC')"><i class=" fa fa-sort-alpha-desc" style="width:20px;"></i> Sort alphabetical Z-A</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#" ng-click="sortTable('NFP')"> {{ "NFP" | mapSchema |schemaNamePlural}} <span class="badge">{{headerCount.focalPoint}}</span></a></li>
+                        <li><a href="#" ng-click="sortTable('CNA')"> {{ "CNA" | mapSchema |schemaNamePlural}} <span class="badge">{{headerCount.authority}}</span></a></li>
+                        <li><a href="#" ng-click="sortTable('MSR')"> {{ "MSR" | mapSchema |schemaNamePlural}} <span class="badge">{{headerCount.measure}}</span></a></li>
+                        <li><a href="#" ng-click="sortTable('NDB')"> {{ "NDB" | mapSchema |schemaNamePlural}} <span class="badge">{{headerCount.database}}</span></a></li>
+                        <li><a href="#" ng-click="sortTable('IRCC')"> {{ "IRCC" | mapSchema |schemaNamePlural}} <span class="badge">{{headerCount.absPermit}}</span></a></li>
+                        <li><a href="#" ng-click="sortTable('CPC')"> {{ "CPC" | mapSchema |schemaNamePlural}} <span class="badge">{{headerCount.absCheckpoint}}</span></a></li>
+                        <li><a href="#" ng-click="sortTable('CP')"> {{ "CP" | mapSchema |schemaNamePlural}} <span class="badge">{{headerCount.absCheckpointCommunique}}</span></a></li>
+                        <li><a href="#" ng-click="sortTable('NR')"> {{ "NR" | mapSchema |schemaNamePlural}} <span class="badge">{{headerCount.nationalReport}}</span></a></li>
                     </ul>
                     </div>
-            
+                
+                
                     <input type="text" class="form-control" ng-model="keyword" placeholder="search for a country" style="width:180px;display:inline;margin-left:3px;"></input>
-        
+                    <div class="visible-md" style="padding-top:5px;"></div>
                     <div style="padding-top:5px;" class="visible-xs"></div>
                     <a ng-href="#" ng-click="setLetterFilter('All')" style="margin-left:10px;" class="letter" ng-class="{'letter-active':!letterFilter && !partyFilter}" >All</a>
                     <a ng-href="#" ng-click="setPartyFilter('party')" style="margin-left:10px;" class="letter  " ng-class="{'letter-active':partyFilter == 'party'}">
@@ -74,6 +85,11 @@
                         <i class="color-inbetween fa fa-square"></i> Ratified not yet Party</a>
                     <a ng-href="#" ng-click="setPartyFilter('nonparty')" style="margin-left:10px;" class="letter " ng-class="{'letter-active':partyFilter == 'nonparty'}" >
                         <i class="color-nonparty fa fa-square"></i>  Non-Parties</a> 
+                        
+                        
+                       
+                        
+                        
               </div>     
               <div class="col-xs-6 evenly-spaced center-text hidden-xs hidden-sm" >
                             <div>
@@ -123,7 +139,7 @@
                              <div>
                                 <span style="cursor:pointer;" ng-click="sortTable('NR')" data-toggle="tooltip" title="Interim national reports" data-container="body">
                                     <span id="cpcCount" class="bold color-black">NR&nbsp;<i class="fa fa-info-circle color-litegrey" ></i> </span><br>
-                                    <span class="badge">{{headerCount.nationalReports}}</span>
+                                    <span class="badge">{{headerCount.nationalReport}}</span>
                                 </span>
                             </div>
                         </div>
