@@ -4,6 +4,9 @@ define(['app'], function(app) {
         function($rootScope, $window, $timeout) {
             return {
                 restrict: 'EAC',
+                scope : {
+                    infiniteScroll : '&'
+                },
                 link: function($scope, elem, attrs) {
 
                     var checkWhenEnabled, handler, scrollDistance, scrollEnabled;
@@ -33,9 +36,9 @@ define(['app'], function(app) {
                         shouldScroll = remaining <= $window.height() * scrollDistance;
                         if (shouldScroll && scrollEnabled) {
                             if ($rootScope.$$phase) {
-                                return $scope.$eval(attrs.infiniteScroll);
+                                return $scope.$eval($scope.infiniteScroll());
                             } else {
-                                return $scope.$apply(attrs.infiniteScroll);
+                                return $scope.$apply($scope.infiniteScroll());
                             }
                         } else if (shouldScroll) {
                             return checkWhenEnabled = true;
