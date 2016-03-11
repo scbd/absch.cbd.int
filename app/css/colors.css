@@ -4,6 +4,12 @@
 }
 .color-party{
     color:#5F4586!important;}
+    
+ .bg-party{
+    background-color:#5F4586!important;
+    color:#fff;
+    }
+       
  .color-inbetween{
     color:#EC971F!important;} 
   .color-nonparty{

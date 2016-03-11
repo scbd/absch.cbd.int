@@ -1,11 +1,12 @@
 define(['app','underscore',
   '/app/js/common.js',
+  'scbd-angularjs-filters',
   './search-map.js','scbd-map/ammap3-service', '/app/services/search-service.js',
   '../directives/block-region-directive.js'
 ], function(app, _) {
 
-  app.controller("CountriesMapController", ["$scope", "$element", "$location", "commonjs", "$q", 'searchService', '$timeout', '$compile',
-    function($scope, $element, $location, commonjs, $q, searchService, $timeout, $compile) {
+  app.controller("CountriesMapController", ["$scope", "$element", "$location", "commonjs", "$q", 'searchService','$filter',
+    function($scope, $element, $location, commonjs, $q, searchService, $filter) {
         $scope.sortTerm = "name.en";
         var headerCount = {	absCheckpoint		       : 0,
                                 absCheckpointCommunique: 0,
@@ -16,7 +17,6 @@ define(['app','underscore',
                                 measure:                 0
                             };
         $scope.loading = true;
-        $scope.partyFilter = null;
 
         $q.all([commonjs.getCountries(), searchService.governmentSchemaFacets()])
             .then(function(results){
@@ -128,38 +128,6 @@ define(['app','underscore',
             $scope.gotoCountryProfile = function(code){
                 $location.path('/countries/' + code);
             };
-
-            function fixMe() {
-                $(".countriesTable").each(function() {
-                   var $this = $(this),
-                      $t_fixed;
-                   function init() {
-                      $this.wrap('<div class="tableContainer"/>');
-                      $t_fixed = $this.clone();
-                      var fixedheader = $compile($t_fixed.find("tbody").remove().end().addClass("fixed"))($scope);
-                      fixedheader.insertBefore($this);
-                      resizeFixed();
-                   }
-                   function resizeFixed() {
-                    //   $t_fixed.find("th").each(function(index) {
-                    //     // $(this).css("width",$this.find("th").eq(index).outerWidth()+"px");
-                    //   });
-                   }
-                   function scrollFixed() {
-                      var offset = $(this).scrollTop(),
-                      tableOffsetTop = $this.offset().top,
-                      tableOffsetBottom = tableOffsetTop + $this.height() - $this.find("thead").height();
-                      if(offset < tableOffsetTop || offset > tableOffsetBottom)
-                         $t_fixed.hide();
-                      else if(offset >= tableOffsetTop && offset <= tableOffsetBottom && $t_fixed.is(":hidden"))
-                         $t_fixed.show();
-                   }
-                   $(window).resize(resizeFixed);
-                   $(window).scroll(scrollFixed);
-                   init();
-                });
-            };
-
 
     }
   ]);

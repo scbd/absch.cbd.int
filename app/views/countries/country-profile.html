@@ -1,15 +1,56 @@
 <div ng-controller="countryProfileController">
-    <h1>
-        <i class="flag-icon" ng-class="country.cssClass"></i> {{country.name}}
-    </h1>
-    <div class="row">
-        <div class="col-lg-3">
-            <zoom-map width="275px" height="350px" selected-color="#1fa65d" ng-attr-zoom-to="{{code}}" map-id="zoom-map-country"
-             home-button="false" zoom-control-alpha=".1" zoom-control-right="220px">
-            </zoom-map>
+<style>
+        label{margin-right:10px; width:180px;}
+    /*.topwell{height:240px;}
+        @media (max-width: 992px) {
+            .topwell {
+                height:340px;
+            }
+        }*/
+</style>    
+<div smooth-scroll duration="100" offset="200"></div>
+
+   <!--<div id="Jumbotron" class="bg-texture-green color-black" style="border-top:1px solid #555;border-bottom:2px solid #ddd;">
+        <zoom-map ng-attr-zoom-to="{{code}}" map-id="zoom-map-country" ></zoom-map>
+    </div>-->
+    
+    <div class="row" style="margin:0;">
+        <div class="col-xs-12">
+            <h1 style="font-size:280%;"><i class="flag-icon" ng-class="country.cssClass"></i> <strong> {{country.name}} </strong>
+            </h1>
+            <div class="well bg-white">
+                    <div>
+                        <label>Party Status:</label> 
+                        <span ng-if="!country.isNPParty && !country.isNPInbetweenParty" class="color-grey bold">Not a Party to the Nagoya Protocol</span>
+                        <span ng-if="country.isNPParty" class="color-party bold">Party to the Nagoya Protocol</span>
+                         <span ng-if="country.isNPInbetweenParty" class="color-inbetween bold">Ratified not yet Party to the Nagoya Protocol</span>
+                    </div>
+                    <div>
+                        <label>Signatory:</label> 
+                        <span ng-if="country.isNPSignatory" class="color-pink bold">Signatory</span>
+                        <span ng-if="!country.isNPSignatory" class="color-grey bold">No</span>
+                    </div>
+                    <div ng-if="country.isNPParty || country.isNPInbetweenParty">
+                        <label>Enter<span ng-if="country.isNPInbetweenParty">s</span><span ng-if="country.isNPParty">ed</span> into force on:</label> 
+                        <span class="color-grey bold">{{country.entryIntoForce|formatDate}}</span>
+                    </div>
+                    <div>
+                        <label>CBD Country Profile:</label> 
+                        <a href="https://www.cbd.int/countries/?country={{country.code}}" target="_new"> www.cbd.int/countries/?country={{country.code}} </a>
+                    </div>
+                 <!--<div class="col-md-5">
+                        <zoom-map width="100%" height="200px" selected-color="#fff" ng-attr-zoom-to="{{code}}" map-id="zoom-map-country"
+                            home-button="false" zoom-control-alpha=".1" zoom-control-right="220px">
+                        </zoom-map>
+                  </div>-->
+            </div>
         </div>
-        <div class="col-lg-9">
+    </div>
+    
+    <div class="row" style="margin:0;">
+        <div class="col-xs-12" >
             <div country-profile code="code"></div>
         </div>
     </div>
+
 </div>
