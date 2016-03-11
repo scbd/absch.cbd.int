@@ -63,14 +63,14 @@
                         <li><a href="#" ng-click="sortTable('name.en', 'ASC')"><i class=" fa fa-sort-alpha-asc" style="width:20px;"></i> Sort alphabetical A-Z </a></li>
                         <li><a href="#" ng-click="sortTable('name.en', 'DESC')"><i class=" fa fa-sort-alpha-desc" style="width:20px;"></i> Sort alphabetical Z-A</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#" ng-click="sortTable('NFP')"> {{ "NFP" | mapSchema |schemaNamePlural}} <span class="badge">{{headerCount.focalPoint}}</span></a></li>
-                        <li><a href="#" ng-click="sortTable('CNA')"> {{ "CNA" | mapSchema |schemaNamePlural}} <span class="badge">{{headerCount.authority}}</span></a></li>
-                        <li><a href="#" ng-click="sortTable('MSR')"> {{ "MSR" | mapSchema |schemaNamePlural}} <span class="badge">{{headerCount.measure}}</span></a></li>
-                        <li><a href="#" ng-click="sortTable('NDB')"> {{ "NDB" | mapSchema |schemaNamePlural}} <span class="badge">{{headerCount.database}}</span></a></li>
-                        <li><a href="#" ng-click="sortTable('IRCC')"> {{ "IRCC" | mapSchema |schemaNamePlural}} <span class="badge">{{headerCount.absPermit}}</span></a></li>
-                        <li><a href="#" ng-click="sortTable('CPC')"> {{ "CPC" | mapSchema |schemaNamePlural}} <span class="badge">{{headerCount.absCheckpoint}}</span></a></li>
-                        <li><a href="#" ng-click="sortTable('CP')"> {{ "CP" | mapSchema |schemaNamePlural}} <span class="badge">{{headerCount.absCheckpointCommunique}}</span></a></li>
-                        <li><a href="#" ng-click="sortTable('NR')"> {{ "NR" | mapSchema |schemaNamePlural}} <span class="badge">{{headerCount.nationalReport}}</span></a></li>
+                        <li><a href="#" ng-click="sortTable('NFP')"> {{ "NFP" | mapSchema |schemaNamePlural}}   <!--<span class="badge">{{headerCount.focalPoint}}</span>--></a></li>
+                        <li><a href="#" ng-click="sortTable('CNA')"> {{ "CNA" | mapSchema |schemaNamePlural}}   <!--<span class="badge">{{headerCount.authority}}</span>--></a></li>
+                        <li><a href="#" ng-click="sortTable('MSR')"> {{ "MSR" | mapSchema |schemaNamePlural}}   <!--<span class="badge">{{headerCount.measure}}</span>--></a></li>
+                        <li><a href="#" ng-click="sortTable('NDB')"> {{ "NDB" | mapSchema |schemaNamePlural}}   <!--<span class="badge">{{headerCount.database}}</span>--></a></li>
+                        <li><a href="#" ng-click="sortTable('IRCC')"> {{ "IRCC" | mapSchema |schemaNamePlural}} <!--<span class="badge">{{headerCount.absPermit}}</span>--></a></li>
+                        <li><a href="#" ng-click="sortTable('CPC')"> { "CPC"  mapSchema schemaNamePlural}       <!--<span class="badge">{{headerCount.absCheckpoint}}</span>--></a></li>
+                        <li><a href="#" ng-click="sortTable('CP')"> {{ "CP" | mapSchema |schemaNamePlural}}     <!--<span class="badge">{{headerCount.absCheckpointCommunique}}</span>--></a></li>
+                        <li><a href="#" ng-click="sortTable('NR')"> {{ "NR" | mapSchema |schemaNamePlural}}     <!--<span class="badge">{{headerCount.nationalReport}}</span>--></a></li>
                     </ul>
                     </div>
                 
@@ -95,51 +95,51 @@
                             <div>
                                 <span style="cursor:pointer;" ng-click="sortTable('NFP')" data-toggle="tooltip" title="National ABS Focal Points" data-container="body">
                                     <span id="nfpCount" class="bold color-black">NFP&nbsp;<i class="fa fa-info-circle color-litegrey" ></i></span><br>
-                                    <span class="badge">{{headerCount.focalPoint}}</span>
+                                    <!--<span class="badge">{{headerCount.focalPoint}}</span>-->
                                 </span>
                             </div>
                            
                             <div>
                                 <span style="cursor:pointer;" ng-click="sortTable('CNA')" data-toggle="tooltip" title="Competent National Authorities" data-container="body">
                                     <span id="cnaCount" class="bold color-black">CNA&nbsp;<i class="fa fa-info-circle color-litegrey" ></i></span><br>
-                                    <span class="badge">{{headerCount.authority}}</span>
+                                    <!--<span class="badge">{{headerCount.authority}}</span>-->
                                 </span>
                             </div>
                             <div>
                                 <span style="cursor:pointer;" ng-click="sortTable('MSR')" data-toggle="tooltip" title="Legislative, administrative or policy measures" data-container="body">
                                     <span id="msrCount" class="bold color-black">MSR&nbsp;<i class="fa fa-info-circle color-litegrey" ></i></span><br>
-                                    <span class="badge">{{headerCount.measure}}</span>
+                                    <!--<span class="badge">{{headerCount.measure}}</span>-->
                                 </span>
                             </div>
                              <div>
                                 <span style="cursor:pointer;" ng-click="sortTable('NDB')" data-toggle="tooltip" title="National Websites and Databases" data-container="body">
                                     <span id="ndbCount" class="bold color-black">NDB&nbsp;<i class="fa fa-info-circle color-litegrey" ></i></span><br>
-                                    <span class="badge">{{headerCount.database}}</span>
+                                    <!--<span class="badge">{{headerCount.database}}</span>-->
                                 </span>
                             </div>
                             
                             <div>
                                 <span style="cursor:pointer;" ng-click="sortTable('IRCC')" data-toggle="tooltip" title="Internationally Recognized Certificate of Compliance" data-container="body">
                                     <span id="irccCount" class="bold color-black">IRCC&nbsp;<i class="fa fa-info-circle color-litegrey" ></i></span><br>
-                                    <span class="badge">{{headerCount.absPermit}}</span>
+                                    <!--<span class="badge">{{headerCount.absPermit}}</span>-->
                                 </span>
                             </div>
                             <div>
                                 <span style="cursor:pointer;" ng-click="sortTable('CP')" data-toggle="tooltip" title="Checkpoints" data-container="body">
                                     <span id="cpCount" class="bold color-black">CP&nbsp;<i class="fa fa-info-circle color-litegrey" ></i> </span><br>
-                                    <span class="badge">{{headerCount.absCheckpoint}}</span>
+                                    <!--<span class="badge">{{headerCount.absCheckpoint}}</span>-->
                                 </span>
                             </div>
                             <div>
                                 <span style="cursor:pointer;" ng-click="sortTable('CPC')" data-toggle="tooltip" title="Checkpoint Communiqués" data-container="body">
                                     <span id="cpcCount" class="bold color-black">CPC&nbsp;<i class="fa fa-info-circle color-litegrey" ></i> </span><br>
-                                    <span class="badge">{{headerCount.absCheckpointCommunique}}</span>
+                                    <!--<span class="badge">{{headerCount.absCheckpointCommunique}}</span>-->
                                 </span>
                             </div>
                              <div>
                                 <span style="cursor:pointer;" ng-click="sortTable('NR')" data-toggle="tooltip" title="Interim national reports" data-container="body">
                                     <span id="cpcCount" class="bold color-black">NR&nbsp;<i class="fa fa-info-circle color-litegrey" ></i> </span><br>
-                                    <span class="badge">{{headerCount.nationalReport}}</span>
+                                    <!--<span class="badge">{{headerCount.nationalReport}}</span>-->
                                 </span>
                             </div>
                         </div>

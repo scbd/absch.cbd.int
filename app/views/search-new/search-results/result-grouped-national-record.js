@@ -7,7 +7,7 @@ define(['app', 'underscore', '/app/js/common.js',
             restrict: 'EAC',
             replace: true,
             // transclude: true,
-            require:'^searchDirective',
+            //require:'^searchDirective',
             templateUrl: '/app/views/search-new/search-results/result-grouped-national-record.html',
             scope: {
                 doc:'='

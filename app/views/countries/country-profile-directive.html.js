@@ -1,21 +1,7 @@
  define(['app','underscore','linqjs', 'ngMaterial','ngAria','angular-animate',
-   '/app/views/forms/view/record-loader.directive.html.js',
-   '/app/views/forms/view/view-abs-checkpoint.directive.js',
-   '/app/views/forms/view/view-abs-checkpoint-communique.directive.js',
-   '/app/views/forms/view/view-abs-permit.directive.js',
-   '/app/views/forms/view/view-authority.directive.js',
-   '/app/views/forms/view/view-authority-reference.directive.js',
-   '/app/views/forms/view/view-contact.directive.js',
-   '/app/views/forms/view/view-contact-reference.directive.js',
-   '/app/views/forms/view/view-database.directive.js',
-   '/app/views/forms/view/view-measure.directive.js',
-   '/app/views/forms/view/view-organization.directive.js',
-   '/app/views/forms/view/view-organization-reference.directive.js',
-   '/app/views/forms/view/view-resource.directive.js',
-   '/app/js/directives/angucomplete-extended.js',
-   '/app/views/countries/countries-left-menu-directive.html.js',
    '/app/views/search/measure-matrix-countries-directive.html.js',
-   '/app/js/common.js', '/app/views/directives/help-directive.html.js',
+   '/app/js/common.js', 
+   '/app/views/search-new/search-results/result-grouped-national-record.js',
  ], function(app, _, linqjs) {
 
     app.directive('countryProfile', function() {
@@ -79,8 +65,9 @@
                         $location.absUrl().toLowerCase().indexOf("://training-absch.cbd.int") > 0) {
                         $scope.showMatrix = true;
                     }
+                    
                     //**********************************************************
-                $scope.loadCountryDetails = function(countryCode) {
+                    $scope.loadCountryDetails = function(countryCode) {
 
                     $scope.code = countryCode || $routeParams.code;
 
@@ -96,16 +83,13 @@
                     .then(function(country) {
                         $scope.country = country;
                     });
+                    
                     //*******************************************************
                     var schema = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database"]
                     var schemQuery = ' (schema_s:' + schema.join(' OR schema_s:') + ' OR (schema_s:focalPoint AND (type_ss:NP-FP OR type_ss:ABS-IC OR type_ss:ABS-FP)))';
-                    var queryURL = '/api/v2013/index/select?fl=id,identifier_s,uniqueIdentifier_s,title_t,description_t, geneticResources_t, url_ss,schema_EN_t,date_dt,' +
-                                        'government_s,government_EN_t,schema_s,number_d,aichiTarget_ss,reference_s,sender_s,meeting_ss,recipient_ss,' +
-                                        'symbol_s,eventCity_EN_t,eventCountry_EN_t,startDate_s,endDate_s,body_s,code_s,meeting_s,group_s,function_t,' +
-                                        'department_t,organization_t,summary_EN_t,reportType_EN_t,completion_EN_t,ownerGovernment_s,jurisdiction_EN_t,development_EN_t' +
-                                        ',type_ss,email_ss,fax_ss,telephone_s,government_CEN_s,type_EN_t,status_EN_t,entryIntoForce_dt,retired_dt,adoption_dt usage_CEN_ss,keywords_CEN_ss,'+
-                                        'date_s,informedConsents_s,permit_ss,originCountries_CEN_ss,checkpoint_CEN_ss,createdDate_dt,geneticRessourceUsers_s,authority_s'+
-                                        '' +
+                    var queryURL = '/api/v2013/index/select?fl= id, rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s,'
+                                    + 'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t,' +
+                                         '' +
                                         '&q=(realm_ss:' + realm.value.toLowerCase() + ' OR realm_ss:absch) AND ((' + schemQuery +
                                         ' AND government_s:' + $scope.code.toLowerCase() + ') OR (originCountries_ss:'+
                                         $scope.code.toLowerCase() + ' OR permitSourceCountry_ss:' + $scope.code.toLowerCase() + '))' +

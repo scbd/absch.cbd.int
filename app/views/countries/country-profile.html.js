@@ -10,7 +10,6 @@ define(['app','underscore',
     function($scope,$route, $http, $timeout, $location,locale, ammap3Service,commonjs, $q) {
       $scope.code      = $route.current.params.code;
 
-
       $q.when(commonjs.getCountry($scope.code.toUpperCase()))
       .then(function(country){
           $scope.country = country;
