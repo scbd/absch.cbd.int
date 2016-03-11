@@ -48,7 +48,7 @@
           
           <h4 class="link1" style="border-bottom:#ddd solid 1px;margin:0;padding: 10px 5px 10px 3px;" ng-click="showMSR = !showMSR"> 
             <i class="fa" ng-class="{'fa-plus':!showMSR, 'fa-minus':showMSR}" style="font-size:14px;font-weight:normal;"></i> Legislative, administrative or policy measures on access and benefit-sharing (MSR)
-            <span class="badge pull-right" ng-class="{'bg-grey3': nationalAuthority==0, 'bg-black': nationalAuthority > 0}">{{nationalAuthority}}</span>
+            <span class="badge pull-right" ng-class="{'bg-grey3': nationalAuthority==0, 'bg-black': nationalAuthority > 0}">{{nationalMeasure}}</span>
             </h4>
           <div ng-if="showMSR &&  nationalMeasure > 0" class="well bg-white" >
              <div ng-repeat="doc in absch_nfp | filter:{'schema_s':'measure'}" style="margin-bottom:20px;">

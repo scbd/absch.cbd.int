@@ -70,7 +70,7 @@
             <div class="col-xs-12 tab-content bg-white" style="padding:20px;margin:0;">
                 <div class="tab-pane bg-white" ng-class="{'active':currentTab==='nationalRecords'}" ng-if="currentTab==='nationalRecords'">
                     <div infinite-scroll="updateScrollPage()" infinite-scroll-disabled="nationalLoading" infinite-scroll-distance="10">
-                        <i class="fa fa-refresh fa-spin fa-5x" ng-show="nationalLoading" style="margin-left:50%"></i>
+                        <div block-region activate="nationalLoading"></div>
                         <div ng-repeat="country in rawDocs.groups">
                             <national-records-country group='country'></national-records-country>
                         </div>
@@ -79,7 +79,7 @@
                 </div>
                 <div class="tab-pane bg-white" style="padding-top:20px;" ng-class="{'active':currentTab==='referenceRecords'}" ng-if="currentTab=='referenceRecords'">
                     <div infinite-scroll="updateScrollPage()" infinite-scroll-disabled="referenceLoading" infinite-scroll-distance="10">
-                        <i class="fa fa-spin fa-refresh fa-5x" ng-show="referenceLoading" style="margin-left:50%"></i>
+                         <div block-region activate="referenceLoading"></div>
                         <div ng-repeat="rec in refDocs">
                             <result-default doc=rec type="referenceRecords"></result-default>
                         </div>
@@ -87,7 +87,7 @@
                     </div>
                 </div>
                 <div class="tab-pane bg-white" style="padding-top:20px;" ng-class="{'active':currentTab==='scbdRecords'}" ng-if="currentTab=='scbdRecords'">
-                    <i class="fa fa-refresh fa-spin fa-5x" ng-show="scbdLoading" style="margin-left:50%"></i>
+                    <div block-region activate="scbdLoading"></div>
                     <div infinite-scroll="updateScrollPage()" infinite-scroll-disabled="scbdLoading" infinite-scroll-distance="10">
                         <div ng-repeat="rec in scbdDocs">
                             <result-default doc=rec type="scbdRecords"></result-default>

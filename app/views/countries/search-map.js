@@ -15,13 +15,17 @@ define(['text!./search-map.html',
       template: template,
       replace: true,
       require: 'searchMap',
-      scope   : {},
+      scope   : {
+          height:"@",
+      },
       //=======================================================================
       //
       //=======================================================================
       controller: ["$scope", '$q', 'commonjs', 'searchService', '$timeout', function($scope, $q, commonjs, searchService, $timeout) {
 
-
+          if(!$scope.height)
+            $scope.height="500px"; 
+            
           function calculateListViewFacets(countryFacets, countries) {
 
             _.each(countries, function(country) {
