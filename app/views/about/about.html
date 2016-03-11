@@ -26,6 +26,10 @@
   <div class="container-fluid">
   <div class="row">
     <nav class="col-xs-12 col-sm-3" id="myAffix" data-spy="affix" >
+     
+   
+   
+     
       <ul class="nav nav-pills nav-stacked" style="padding-bottom:30px">
         <li><a ng-click="showAbout = !showAbout" class="btn-sm btn-default plusbtn">{{showAbout ? "-" : "+"}}</a> <a href="#" scroll-to="top" ng-click="showAbout = true;">About the ABSCH</a></li>
             <ul ng-show="showAbout">
@@ -92,8 +96,13 @@
                 <li><a scroll-to="about-help3" class="color-green" href="#">Contact us</a></li>
             </ul>
 
-        
-        <li> <a scroll-to="top" class="hidden-xs color-blue" href="#"> <i class="fa fa-arrow-circle-up"></i> back to the top  </a></li>
+         <li><i class="fa fa-external-link-square color-green"></i>  <a href="/about/faq">Frequently Asked Questions</a></li>
+         
+         <li>
+               <i class="fa fa-question-circle color-black"></i> <a href="mailto:absch@cbd.int" ><span class="color-black">Contact us:</span> <span class="color-grey">absch@cbd.int</span></a>
+         </li>
+         
+        <li> <i class="fa fa-arrow-circle-up color-blue"></i> <a scroll-to="top" class="hidden-xs color-blue" href="#">  back to the top  </a></li>
       </ul>
     </nav>
     <div class="col-xs-12 col-sm-9   col-sm-offset-3">

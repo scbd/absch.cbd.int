@@ -36,13 +36,13 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
             when('/help/403',   {templateUrl: '/app/views/shared/403.html', label:'403 Error'}).
 
             when('/commonformat',                { templateUrl: '/app/views/common-formats.html',                   label:'Common Formats',                     resolveController: true, resolveUser : true}).
-            when('/help',                        { templateUrl: '/app/views/help/help.html',                        label:'Help',                               resolveController: true, resolveUser : true}).
-            when('/help/about',                  { templateUrl: '/app/views/help/about/about.html',                 label:'About the ABSCH',                    resolveController: true, resolveUser : true}).
-            when('/help/ptresentations/',         { templateUrl: '/app/views/help/presentations/home.html',          label:'Presentations',                      resolveController: true, resolveUser : true}).
-            when('/help/accounts',               { templateUrl: '/app/views/help/accounts/accounts.html',           label:'CBD Accounts',                       resolveController: true, resolveUser : true}).
-            when('/help/search',                 { templateUrl: '/app/views/help/search/search.html',               label:'Finding Information',                resolveController: true, resolveUser : true}).
-            when('/help/tours',                  { templateUrl: '/app/views/help/tours/tours.html',                 label:'Tours',                              resolveController: true, resolveUser : true}).
-            when('/help/register',               { templateUrl: '/app/views/help/register/register.html',           label:'Submitting Information',             resolveController: true, resolveUser : true}).
+            //when('/help',                        { templateUrl: '/app/views/help/help.html',                        label:'Help',                               resolveController: true, resolveUser : true}).
+            //when('/help/about',                  { templateUrl: '/app/views/help/about/about.html',                 label:'About the ABSCH',                    resolveController: true, resolveUser : true}).
+            //when('/help/ptresentations/',         { templateUrl: '/app/views/help/presentations/home.html',          label:'Presentations',                      resolveController: true, resolveUser : true}).
+            //when('/help/accounts',               { templateUrl: '/app/views/help/accounts/accounts.html',           label:'CBD Accounts',                       resolveController: true, resolveUser : true}).
+            //when('/help/search',                 { templateUrl: '/app/views/help/search/search.html',               label:'Finding Information',                resolveController: true, resolveUser : true}).
+            //when('/help/tours',                  { templateUrl: '/app/views/help/tours/tours.html',                 label:'Tours',                              resolveController: true, resolveUser : true}).
+            //when('/help/register',               { templateUrl: '/app/views/help/register/register.html',           label:'Submitting Information',             resolveController: true, resolveUser : true}).
 
              when('/about',                        { templateUrl: '/app/views/about/about.html',                        label:'About the ABSCH',                 resolveController:true, resolveUser : true}).
 
@@ -145,10 +145,10 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
             when('/commonformat', {templateUrl: '/app/views/about/about.html',resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/about/common-formats.html',ignoreSubController: true,}).
             when('/commonformat',           { redirectTo:'/about/common-formats' }).
 
-            when('/help/presentations/:folder/:document_type', {templateUrl: '/app/views/help/presentations/presentation.html',resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/help/presentations/:folder/-',ignoreSubController: true,}).
-            when('/help/presentations/:folder', { redirectTo: '/help/presentations/:folder/start' }).
+            //when('/help/presentations/:folder/:document_type', {templateUrl: '/app/views/help/presentations/presentation.html',resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/help/presentations/:folder/-',ignoreSubController: true,}).
+            //when('/help/presentations/:folder', { redirectTo: '/help/presentations/:folder/start' }).
 
-             when('/help/presentations', {templateUrl: '/app/views/help/presentations.html',   label:'Presentations and Workshops',   resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/register/contacts.html',}).
+            // when('/help/presentations', {templateUrl: '/app/views/help/presentations.html',   label:'Presentations and Workshops',   resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/register/contacts.html',}).
 
             when('/contact', {templateUrl: '/app/views/register/register.html',resolveController: true,resolveUser: true,subTemplateUrl: '/app/views/register/contacts.html',}).
 
@@ -158,13 +158,13 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
             when('/help/manage/:term?', {templateUrl: '/app/views/help/forms/edit-help.html',resolveController: true,resolveUser: true, label:'Forms Help'}).
 
             //when('/help/glossary', {templateUrl: '/app/views/help/forms/glossary.html',resolveController: true,resolveUser: true, label:'Glossary'}).
-            when('/help/glossary/tags/:tag', {templateUrl: '/app/views/help/forms/glossary-term.html',resolveController: true,resolveUser: true, schema:'help-glossarys', label:'Tags'}).
-            when('/help/glossary/:term?', {templateUrl: '/app/views/help/forms/glossary-term.html',resolveController: true,resolveUser: true, schema:'help-glossarys', label:'lableText'}).
+            //when('/help/glossary/tags/:tag', {templateUrl: '/app/views/help/forms/glossary-term.html',resolveController: true,resolveUser: true, schema:'help-glossarys', label:'Tags'}).
+           // when('/help/glossary/:term?', {templateUrl: '/app/views/help/forms/glossary-term.html',resolveController: true,resolveUser: true, schema:'help-glossarys', label:'lableText'}).
 
-            //when('/help/faq', {templateUrl: '/app/views/help/forms/faq.html',resolveController: true,resolveUser: true, label:'FAQ'}).
-            when('/help/faq/:term?', {templateUrl: '/app/views/help/faq.html',resolveController: true,resolveUser: true, schema:'help-faqs', label:'FAQs'}).
-            when('/help/edit/faq/:term?', {templateUrl: '/app/views/help/forms/glossary-term.html',resolveController: true,resolveUser: true, schema:'help-faqs', label:'FAQs'}).
-            when('/help/faq/tags/:tag', {templateUrl: '/app/views/help/forms/glossary-term.html',resolveController: true,resolveUser: true, schema:'help-faqs', label:'Tags'}).
+            when('/about/faq', {templateUrl: '/app/views/about/faq.html', resolveController: true, resolveUser: true, label:'FAQs'}).
+            //when('/help/faq/:term?', {templateUrl: '/app/views/help/faq.html',resolveController: true,resolveUser: true, schema:'help-faqs', label:'FAQs'}).
+            // when('/help/edit/faq/:term?', {templateUrl: '/app/views/help/forms/glossary-term.html',resolveController: true,resolveUser: true, schema:'help-faqs', label:'FAQs'}).
+            //when('/help/faq/tags/:tag', {templateUrl: '/app/views/help/forms/glossary-term.html',resolveController: true,resolveUser: true, schema:'help-faqs', label:'Tags'}).
 
 
             when('/search/test', {templateUrl: '/app/test.html',resolveController: true,resolveUser: true}).

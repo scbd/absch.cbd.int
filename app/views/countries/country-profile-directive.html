@@ -51,12 +51,17 @@
             <span class="badge pull-right" ng-class="{'bg-grey3': nationalAuthority==0, 'bg-black': nationalMeasure > 0}">{{nationalMeasure}}</span>
             </h4>
           <div ng-if="showMSR &&  nationalMeasure > 0" class="well bg-white" >
+             <div style="margin-bottom:20px;">
+                <div ng-hide="(measureMatrixDocuments|filter:{measureMatrix:true}).length==0" measure-matrix-countries-directive documents="measureMatrixDocuments"></div>
+             </div>
              <div ng-repeat="doc in absch_nfp | filter:{'schema_s':'measure'}" style="margin-bottom:20px;">
                   <result-grouped-national-record doc='doc'></result-grouped-national-record>
              </div>
-                    <div style="padding:10px; margin:0 20px;">
-                        <legend name="lblMSR" style="display:none"></legend>
-                        <div class="row table-hover table-msr" ng-hide="absMeasure.length==0" style="padding-left:5px;">
+                     
+                    
+                    <!--<div style="padding:10px; margin:0 20px;">-->
+                        <!--<legend name="lblMSR" style="display:none"></legend>-->
+                        <!--<div class="row table-hover table-msr" ng-hide="absMeasure.length==0" style="padding-left:5px;">
                             <div class="col-lg-1 col-md-1 col-xs-1 tableheader" ng-if="showMatrix">
                                 <md-checkbox md-no-ink aria-label="Select All" ng-model="measureMatrixDocuments.selectAll" ng-click="selectAllForMatrix()" class="md-primary">
                                 </md-checkbox>Matrix
@@ -75,8 +80,8 @@
                             </div>
                             <div class="col-lg-1 col-md-1 col-xs-1 tableheader" ng-click="sortMeasure='retired_dt';reverseMeasure=!reverseMeasure">No longer applicable <i class="fa" ng-class="{'fa-caret-up':sortMeasure=='retired_dt' && reverseMeasure,'fa-caret-down':sortMeasure=='retired_dt' && !reverseMeasure}" />
                             </div>
-                        </div>
-                        <div class="row table-hover table-msr" ng-repeat="measure in absMeasure = (measureMatrixDocuments|orderBy:sortMeasure:reverseMeasure)">
+                        </div>-->
+                        <!--<div class="row table-hover table-msr" ng-repeat="measure in absMeasure = (measureMatrixDocuments|orderBy:sortMeasure:reverseMeasure)">
                             <div class="row border">
                                 <div class="row table-row">
                                     <div class="col-lg-1 col-md-1 col-xs-1" ng-if="showMatrix">
@@ -85,9 +90,6 @@
                                     </div>
                                     <div ng-click="displayDetails=!displayDetails;showDetails(measure)">
                                         <div class="col-lg-3 col-md-3 col-xs-3">
-                                            <!--<i class="material-icons color-published-green" style="font-size:14pt;">
-                                                        {{'msr' | schemaIcon}}
-                                                    </i>-->
                                             <strong class="color-blue" style="position:relative;top:-4px;"> {{measure.title_t}}</strong>
 
                                             <div style="font-size:11px;font-weight:bold;text-transform:uppercase;color:#666;">
@@ -116,20 +118,20 @@
                                     <div class="col-xs-12 details document-show-hide" ng-show="displayDetails" record-loader document="measure.data"></div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row" ng-show="absMeasure.length==0">
+                        </div>-->
+                        <!--<div class="row" ng-show="absMeasure.length==0">
                             <div class="col-lg-10 col-md-12 col-xs-12 tableheader color-orange">No Legislative, administrative or policy measures on access and benefit-sharing (MSR) available</div>
-                        </div>
+                        </div>-->
 
-                    </div>
-                    <div style="margin:0 20px;margin-top:20px;" ng-hide="measureMatrixDocuments.length==0" ng-if="showMatrix">
+                    <!--</div>-->
+                    <!--<div style="margin:0 20px;margin-top:20px;" ng-hide="measureMatrixDocuments.length==0" ng-if="showMatrix">
                         <div>
                             <p class="tableheader" style="border-bottom:1px solid #ddd;">
                                 {{(measureMatrixDocuments|filter:{measureMatrix:true}).length}} selected for measures matrix
                             </p>
-                            <div ng-hide="(measureMatrixDocuments|filter:{measureMatrix:true}).length==0" measure-matrix-countries-directive documents="measureMatrixDocuments"></div>
+                          
                         </div>
-                    </div>
+                    </div>-->
           </div>
           
           

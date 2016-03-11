@@ -127,17 +127,19 @@
         font-weight:bold;
     }
 </style>
-<legend>Elements of the measure
+<legend>{{title}}
     
     <a class="pull-right expander" ng-click="collapseAll=!collapseAll;showHideAll(true)"  ng-show="!collapseAll">Collapse All <i class="fa fa-chevron-circle-up hand"></i></a>
-                <a class="pull-right expander" ng-click="collapseAll=!collapseAll;showHideAll(false)" ng-show="collapseAll">Expand All <i class="fa fa-chevron-circle-down hand"></i></a>
+    <a class="pull-right expander" ng-click="collapseAll=!collapseAll;showHideAll(false)" ng-show="collapseAll">Expand All <i class="fa fa-chevron-circle-down hand"></i></a>
     
 </legend>
                 
     <table class="table matrixTable bg-white" style="margin-bottom:0;">
           <tr ng-if="rootTerms.length==0">
               <td>
-                  <i class="fa fa-spin fa-spinner fa-5x" />
+                 
+                   <div block-region activate="true" style="margin-bottom:20px;"></div>
+
               </td>
           </tr>
         <tr ng:repeat="term in rootTerms" ng-if="rootTerms.length>0">
