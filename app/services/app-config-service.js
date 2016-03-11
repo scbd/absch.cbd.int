@@ -3,8 +3,8 @@ define(['app', 'underscore'], function (app, _) { 'use strict';
 	app.factory('appConfigService',  ["$location", function($location) {
 
         var nationalSchemas 	= [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "focalPoint"];
-        var referenceSchemas 	= [ "modelContractualClause", "communityProtocol", "capacityBuildingInitiative", "capacityBuildingResource"];
-		var scbdSchemas			= [ "resource", "meeting", "notification", "pressRelease", "statement", "news", "new" ];
+        var referenceSchemas 	= [ "resource", "modelContractualClause", "communityProtocol", "capacityBuildingInitiative", "capacityBuildingResource"];
+		var scbdSchemas			= [ "meeting", "notification", "pressRelease", "statement", "news", "new" ];
 
         var realmConfigurations = [
             //Production

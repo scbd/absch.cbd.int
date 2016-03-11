@@ -8,6 +8,7 @@ define(['app', 'underscore', '/app/js/common.js',
 '/app/views/search-new/search-filters/country-filter.js',
 '/app/views/search-new/search-results/result-default.js',
 '/app/views/search-new/search-results/national-records-country.js',
+'/app/services/app-config-service.js'
 ], function(app, _) {
 
     app.directive('searchDirective', function() {
@@ -16,16 +17,18 @@ define(['app', 'underscore', '/app/js/common.js',
             replace: true,
             // transclude: true,
             templateUrl: '/app/views/search-new/search-directive.html',
-            controller: ['$scope','$q', 'realm', 'searchService', 'commonjs', 'localStorageService', '$http', 'Thesaurus' ,
-            function($scope, $q, realm, searchService, commonjs, localStorageService, $http, thesaurus) {
+            controller: ['$scope','$q', 'realm', 'searchService', 'commonjs', 'localStorageService', '$http', 'Thesaurus' , 'appConfigService',
+            function($scope, $q, realm, searchService, commonjs, localStorageService, $http, thesaurus, appConfigService) {
 
                     var queryCanceler = null;
                     $scope.rawDocs = [];
                     $scope.refDocs = [];
                     $scope.scbdDocs = [];
-                    var natSchemas = ["absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint"];
-                    var refSchemas = ["modelContractualClause communityProtocol capacityBuildingInitiative capacityBuildingResource"];
-                    var scbdSchemas = ["meeting notification pressRelease statement news"];
+                    var natSchemas = appConfigService.nationalSchemas;
+                    var refSchemas = appConfigService.referenceSchemas;
+                    var scbdSchemas = appConfigService.scbdSchemas;
+                    // var refSchemas = ["modelContractualClause communityProtocol capacityBuildingInitiative capacityBuildingResource"];
+                    // var scbdSchemas = ["meeting notification pressRelease statement news"];
                     $scope.currentTab = "nationalRecords";
                     $scope.refresh = false;
                     var refresh_nat = true;
@@ -293,7 +296,7 @@ define(['app', 'underscore', '/app/js/common.js',
 
                         if(queryType === 'national'){
                               //schema
-                              qAnd.push(buildFieldQuery('schema_s', 'national', natSchemas));
+                              qAnd.push(buildFieldQuery('schema_s', 'national', natSchemas.join(' ')));
                               qAnd.push(buildFieldQuery('government_s', 'country', "*"));
 
                               qOr.push(buildTextQuery('title_t'      ,'freeText'  , null));
@@ -303,7 +306,7 @@ define(['app', 'underscore', '/app/js/common.js',
 
                         if(queryType === 'reference'){
                                //schema
-                               qAnd.push(buildFieldQuery('schema_s','reference', refSchemas));
+                               qAnd.push(buildFieldQuery('schema_s','reference', refSchemas.join(' ')));
 
                                qOr.push(buildTextQuery('text_EN_txt'    ,'national', null));
                                qOr.push(buildTextQuery('text_EN_txt'    ,'country', null));
@@ -313,7 +316,7 @@ define(['app', 'underscore', '/app/js/common.js',
 
                         if(queryType === 'scbd'){
                                //schema
-                               qAnd.push(buildFieldQuery('schema_s','scbd', scbdSchemas));
+                               qAnd.push(buildFieldQuery('schema_s','scbd', scbdSchemas.join(' ')));
 
                                qOr.push(buildTextQuery('title_t'      ,'national'  , null));
                                qOr.push(buildTextQuery('description_t','national'  , null));
@@ -518,7 +521,13 @@ define(['app', 'underscore', '/app/js/common.js',
 
                         //SCBD
                         addFilter('news',  {'sort': 1,'type':'scbd', 'name':'News', 'id':'news', 'description':'ABS related news'});
-                        addFilter('notifications',  {'sort': 2,'type':'scbd',  'name':'Notifications', 'id':'notifications', 'description':'ABS related notifcations'});
+                        addFilter('notification',  {'sort': 2,'type':'scbd',  'name':'Notifications', 'id':'notification', 'description':'ABS related notifcations'});
+
+                        addFilter('new',  {'sort': 3,'type':'scbd', 'name':'Whs\'s New', 'id':'new', 'description':'What\n new'});
+                        addFilter('meeting',  {'sort': 4,'type':'scbd',  'name':'Meetings', 'id':'meeting', 'description':'ABS related meetings'});
+
+                        addFilter('statement',  {'sort': 3,'type':'scbd', 'name':'Statements', 'id':'statement', 'description':'ABS related statements'});
+                        addFilter('pressRelease',  {'sort': 4,'type':'scbd',  'name':'Press Releases', 'id':'pressRelease', 'description':'ABS related press release'});
                     };
 
                   //===============================================================================================================================
