@@ -16,6 +16,8 @@ define(['app','underscore',
                                 measure:                 0
                             };
         $scope.loading = true;
+        $scope.partyFilter = null;
+
         $q.all([commonjs.getCountries(), searchService.governmentSchemaFacets()])
             .then(function(results){
                 var countries = results[0];
@@ -50,51 +52,25 @@ define(['app','underscore',
                 $timeout(function(){fixMe();},100); //fix table header
             });
 
-               $scope.count = 1;
-               $scope.letterFilter = null;
-               $scope.partyFilter = null;
-               $scope.alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' ];
-
-
-
-              //*************************************************************************************************************************************
-               $scope.setLetterFilter = function(letter) {
-                    $scope.letterFilter = letter;
-                    if(letter==='All'){
-                        $scope.letterFilter=null;
-                        $scope.partyFilter = null;
-                    }
-               };
-
                //*************************************************************************************************************************************
                $scope.setPartyFilter = function(pfilter) {
                     $scope.partyFilter = pfilter;
                };
 
                //*************************************************************************************************************************************
-               function filterParty(item) {
-                    if(!$scope.partyFilter)
-                        return true;
-                    if($scope.partyFilter ==='party'){
-                        return item.isNPParty;
-                    }
-                    if($scope.partyFilter ==='nonparty'){
-                        return !item.isNPParty;
-                    }
-                    if($scope.partyFilter ==='inbetween'){
-                        return item.isNPInbetweenParty;
-                    }
-               };
+               $scope.hasStatus = function(item) {
 
-               //*************************************************************************************************************************************
-               $scope.showCountry = function(item) {
-
-                    if(!$scope.letterFilter)
-                        return filterParty(item);
-                    else{
-                        if(item.name.en[0] === $scope.letterFilter)
-                            return filterParty(item);
-                    }
+                   if(!$scope.partyFilter || $scope.partyFilter ==='All')
+                       return true;
+                   if($scope.partyFilter ==='party'){
+                       return item.isNPParty;
+                   }
+                   if($scope.partyFilter ==='nonparty'){
+                       return !item.isNPParty;
+                   }
+                   if($scope.partyFilter ==='inbetween'){
+                       return item.isNPInbetweenParty;
+                   }
                };
 
 
@@ -153,10 +129,6 @@ define(['app','underscore',
                 $location.path('/countries/' + code);
             };
 
-
-
-////////////////////
-
             function fixMe() {
                 $(".countriesTable").each(function() {
                    var $this = $(this),
@@ -188,17 +160,6 @@ define(['app','underscore',
                 });
             };
 
-//
-// $(document).ready(function(){
-//    $("table").fixMe();
-//    $(".up").click(function() {
-//       $('html, body').animate({
-//       scrollTop: 0
-//    }, 2000);
-//  });
-// });
-
-///////////////////
 
     }
   ]);
