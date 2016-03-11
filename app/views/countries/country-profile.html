@@ -1,18 +1,12 @@
 <div ng-controller="countryProfileController">
 <style>
         label{margin-right:10px; width:180px;}
-    /*.topwell{height:240px;}
-        @media (max-width: 992px) {
-            .topwell {
-                height:340px;
-            }
-        }*/
 </style>    
 <div smooth-scroll duration="100" offset="200"></div>
 
-   <!--<div id="Jumbotron" class="bg-texture-green color-black" style="border-top:1px solid #555;border-bottom:2px solid #ddd;">
-        <zoom-map ng-attr-zoom-to="{{code}}" map-id="zoom-map-country" ></zoom-map>
-    </div>-->
+   <div id="Jumbotron" class="bg-texture-green color-black" selected-color="#FFFFFF" style="border-top:1px solid #555;border-bottom:2px solid #ddd;">
+        <zoom-map ng-attr-zoom-to="{{code}}" map-id="zoom-map-country" height="350px"></zoom-map>
+    </div>
     
     <div class="row" style="margin:0;">
         <div class="col-xs-12">
@@ -38,11 +32,7 @@
                         <label>CBD Country Profile:</label> 
                         <a href="https://www.cbd.int/countries/?country={{country.code}}" target="_new"> www.cbd.int/countries/?country={{country.code}} </a>
                     </div>
-                 <!--<div class="col-md-5">
-                        <zoom-map width="100%" height="200px" selected-color="#fff" ng-attr-zoom-to="{{code}}" map-id="zoom-map-country"
-                            home-button="false" zoom-control-alpha=".1" zoom-control-right="220px">
-                        </zoom-map>
-                  </div>-->
+
             </div>
         </div>
     </div>

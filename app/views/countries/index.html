@@ -46,9 +46,7 @@
     <div id="Jumbotron" class="bg-texture-green color-black" style="border-top:1px solid #555;border-bottom:2px solid #ddd;">
         <search-map></search-map>
     </div>
-
         <div block-region activate="loading" block-text=" Loading country details">
-
 
         <div class="row bg-grey1" style="margin:10px 0 5px 0;padding:10px 0 5px 0;border:1px solid #d5d5d5;">
             <div class="col-sm-12 col-md-6">
@@ -68,13 +66,12 @@
                         <li><a href="#" ng-click="sortTable('MSR')"> {{ "MSR" | mapSchema |schemaNamePlural}}   <!--<span class="badge">{{headerCount.measure}}</span>--></a></li>
                         <li><a href="#" ng-click="sortTable('NDB')"> {{ "NDB" | mapSchema |schemaNamePlural}}   <!--<span class="badge">{{headerCount.database}}</span>--></a></li>
                         <li><a href="#" ng-click="sortTable('IRCC')"> {{ "IRCC" | mapSchema |schemaNamePlural}} <!--<span class="badge">{{headerCount.absPermit}}</span>--></a></li>
-                        <li><a href="#" ng-click="sortTable('CPC')"> { "CPC"  mapSchema schemaNamePlural}       <!--<span class="badge">{{headerCount.absCheckpoint}}</span>--></a></li>
+                        <li><a href="#" ng-click="sortTable('CPC')"> {{ "CPC" | mapSchema | schemaNamePlural}}      <!--<span class="badge">{{headerCount.absCheckpoint}}</span>--></a></li>
                         <li><a href="#" ng-click="sortTable('CP')"> {{ "CP" | mapSchema |schemaNamePlural}}     <!--<span class="badge">{{headerCount.absCheckpointCommunique}}</span>--></a></li>
                         <li><a href="#" ng-click="sortTable('NR')"> {{ "NR" | mapSchema |schemaNamePlural}}     <!--<span class="badge">{{headerCount.nationalReport}}</span>--></a></li>
                     </ul>
                     </div>
-
-
+                    
                     <input type="text" class="form-control" ng-model="keyword" placeholder="search for a country" style="width:180px;display:inline;margin-left:3px;"></input>
                     <div class="visible-md" style="padding-top:5px;"></div>
                     <div style="padding-top:5px;" class="visible-xs"></div>
@@ -85,10 +82,6 @@
                         <i class="color-inbetween fa fa-square"></i> Ratified not yet Party</a>
                     <a ng-href="#" ng-click="setPartyFilter('nonparty')" style="margin-left:10px;" class="letter " ng-class="{'letter-active':partyFilter == 'nonparty'}" >
                         <i class="color-nonparty fa fa-square"></i>  Non-Parties</a>
-
-
-
-
 
               </div>
               <div class="col-xs-6 evenly-spaced center-text hidden-xs hidden-sm" >
@@ -145,14 +138,16 @@
                         </div>
                      </div> <!--end row-->
 
-                     <div class="row linkWhite" style="margin:0;border-bottom:2px solid #DDD;padding:5px 0 10px 0;" ng-click="gotoCountryProfile(country.code)"   ng-repeat="country in ct = (countries | filter:keyword | filter: hasStatus | orderBy:sortTermFilter:orderList) track by country.name.en" ng-if="showCountry(country)">
+                     <div class="row linkWhite" style="margin:0;border-bottom:2px solid #DDD;padding:5px 0 10px 0;" ng-click="gotoCountryProfile(country.code)"   ng-repeat="country in ct = (countries | filter:keyword | filter: hasStatus | orderBy:sortTermFilter:orderList) track by country.name.en" >
                             <div class="col-md-6">
-                                <div>
-                                    <!--<span style="pull-left width:30px;overflow:hidden;">  {{$index+1}} </span>-->
+                                
+                                 <div style="text-align:left;width:30px;display:inline-block;">  {{$index+1}} </div>
+                                 
+                                <div style="display:inline;">
                                     <span style="font-size:18px;font-weight:500;" ng-class="{'color-party': country.isNPParty, 'color-grey':!country.isNPParty, 'color-inbetween': country.isNPInbetweenParty}">
                                     {{country.name.en}}</span>
                                 </div>
-                                <div>
+                                <div style="margin-left:35px;">
                                     <span ng-if="!country.isNPParty && !country.isNPInbetweenParty" class="color-grey bold"  style="font-size:10px;margin-right:10px;">Non-Party</span>
                                     <span ng-if="country.isNPParty" class="color-party bold"  style="font-size:10px;margin-right:10px;">Party to the Nagoya Protocol</span>
                                     <span ng-if="country.isNPInbetweenParty" class="color-inbetween bold"  style="font-size:10px;margin-right:10px;">Ratified not yet Party</span>
@@ -161,7 +156,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6 evenly-spaced center-text xs-small sm-small" style="white-space:nowrap;margin-top:5px;">
+                            <div class="col-md-6 evenly-spaced center-text xs-small sm-small" style="white-space:nowrap;margin-top:5px;margin-left:35px;">
                                 <span class="color-litegrey" style="margin-right:5px;"> NFP <span class="label label-default bg-darkgrey"  ng-class="{'zero':!country.schemas.focalPoint}" >{{country.schemas.focalPoint ? country.schemas.focalPoint  : "0"}}</span></span>
                                 <span class="color-litegrey" style="margin-right:5px;"> CNA <span class="label label-default bg-darkgrey"  ng-class="{'zero':!country.schemas.authority}">{{country.schemas.authority ? country.schemas.authority  : "0"}}</span></span>
                                 <span class="color-litegrey" style="margin-right:5px;"> MSR <span class="label label-default bg-darkgrey"  ng-class="{'zero':!country.schemas.measure}">{{country.schemas.measure ? country.schemas.measure  : "0"}}</span></span>

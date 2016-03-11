@@ -1,4 +1,12 @@
 <div id="search-new">
+    
+    <!--<div id="Jumbotron" class="bg-texture-green color-black" style="border-top:1px solid #555;border-bottom:2px solid #ddd;">
+         <zoom-map width="100%" height="500px"  ng-attr-zoom-to="{{code}}" map-id="zoom-map-country"
+ -             home-button="false" zoom-control-alpha=".1" zoom-control-right="220px">
+ -            </zoom-map>
+    </div>-->
+   
+    
 
         <div ng-show="!country" style="padding-left:50%">
             <i class="fa fa-spin fa-spinner fa-5x" style="margin:auto" />
@@ -25,8 +33,7 @@
              </div>
           </div>
           
-          
-          
+   
             <h4 class="link1" style="border-bottom:#ddd solid 1px;margin:0;padding: 10px 5px 10px 3px;" ng-click="showNDB = !showNDB"> 
             <i class="fa" ng-class="{'fa-plus':!showNDB, 'fa-minus':showNDB}" style="font-size:14px;font-weight:normal;"></i> National Databases and Websites (NDB)
             <span class="badge pull-right" ng-class="{'bg-grey3': nationalAuthority==0, 'bg-black': nationalAuthority > 0}">{{database}}</span>
@@ -37,8 +44,7 @@
              </div>
           </div>
           
-          
-          
+
           
           <h4 class="link1" style="border-bottom:#ddd solid 1px;margin:0;padding: 10px 5px 10px 3px;" ng-click="showMSR = !showMSR"> 
             <i class="fa" ng-class="{'fa-plus':!showMSR, 'fa-minus':showMSR}" style="font-size:14px;font-weight:normal;"></i> Legislative, administrative or policy measures on access and benefit-sharing (MSR)

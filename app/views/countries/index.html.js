@@ -8,6 +8,7 @@ define(['app','underscore',
   app.controller("CountriesMapController", ["$scope", "$element", "$location", "commonjs", "$q", 'searchService','$filter',
     function($scope, $element, $location, commonjs, $q, searchService, $filter) {
         $scope.sortTerm = "name.en";
+        
         var headerCount = {	absCheckpoint		       : 0,
                                 absCheckpointCommunique: 0,
                                 absPermit:               0,
@@ -16,6 +17,7 @@ define(['app','underscore',
                                 focalPoint:              0,
                                 measure:                 0
                             };
+                            
         $scope.loading = true;
 
         $q.all([commonjs.getCountries(), searchService.governmentSchemaFacets()])
@@ -49,7 +51,7 @@ define(['app','underscore',
                 $scope.headerCount = headerCount;
                 $element.find('[data-toggle="tooltip"]').tooltip();
                 $scope.loading = false;
-                $timeout(function(){fixMe();},100); //fix table header
+              
             });
 
                //*************************************************************************************************************************************
@@ -79,7 +81,6 @@ define(['app','underscore',
             //==================================================================================
             $scope.sortTable = function(term, order) {
 
-
                     if ($scope.sortTerm == term) {
                         $scope.orderList = !$scope.orderList;
                     } else {
@@ -87,16 +88,15 @@ define(['app','underscore',
                         $scope.orderList = true;
                     }
 
-
                     if(order == "ASC")
                         $scope.orderList = false;
 
                     if(order == "DESC")
                         $scope.orderList = true;
 
-
             };
-             //==================================================================================
+            
+            //==================================================================================
             $scope.sortTermFilter = function(data) {
 
                 if ($scope.sortTerm == "isNPParty")
