@@ -219,6 +219,7 @@ define(["app",'/app/js/common.js'], function (app) {
             if(schema.toLowerCase()=="meetingdocument"			 ) return "Meeting Documents";
             if(schema.toLowerCase()=="pressrelease"				 ) return "Press Releases";
 			if(schema.toLowerCase()=="news"						 ) return "News";
+			if(schema.toLowerCase()=="new"						 ) return "What's New";
             if(schema.toLowerCase()=="statmente"				 ) return "Statements";
 			if(schema.toLowerCase()=="absnationalreport"		 ) return "National Report";
 			if(schema.toLowerCase()=="modelcontractualclause"	 ) return "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards";
@@ -256,6 +257,7 @@ define(["app",'/app/js/common.js'], function (app) {
             if(schema.toLowerCase()=="meetingdocument"			 ) return "Meeting Documents";
             if(schema.toLowerCase()=="pressrelease"				 ) return "Press Releases";
 			if(schema.toLowerCase()=="news"						 ) return "News";
+			if(schema.toLowerCase()=="new"						 ) return "What's New";
             if(schema.toLowerCase()=="statement"			     ) return "Statement";
 			if(schema.toLowerCase()=="absnationalreport"		 ) return "National Reports";
 			if(schema.toLowerCase()=="modelcontractualclause"	 ) return "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards";
@@ -355,6 +357,7 @@ define(["app",'/app/js/common.js'], function (app) {
         	if(schema.toLowerCase()=="pressrelease"				 ) return "PR";
             if(schema.toLowerCase()=="meetingdocument"    		 ) return "MTD";
 			if(schema.toLowerCase()=="news"						 ) return "NEWS";
+			if(schema.toLowerCase()=="new"						 ) return "NEW";
 			if(schema.toLowerCase()=="absnationalreport"		 ) return "NR";
 			if(schema.toLowerCase()=="modelcontractualclause"	 ) return "A19A20";
 			if(schema.toLowerCase()=="communityprotocol"		 ) return "CPP";
@@ -362,6 +365,7 @@ define(["app",'/app/js/common.js'], function (app) {
 			if(schema.toLowerCase()=="capacitybuildingresource"  ) return "CBR";
 			if(schema.toLowerCase()=="endorsement"				) return "EDR";
 
+			if(schema.toUpperCase()=="NEW"				        ) return "new";
 			if(schema.toUpperCase()=="NEWS"				        ) return "news";
             if(schema.toUpperCase()=="NFP"				        ) return "focalPoint";
 			if(schema.toUpperCase()=="CNA"				    	) return "authority";

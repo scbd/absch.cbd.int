@@ -29,7 +29,7 @@
             margin: auto;
             width: 100%;
         }
-        
+
         #National .statsBox:hover{
             background-color: #333;
             cursor:pointer;
@@ -41,7 +41,7 @@
 
         .countryText {
             font-size: 14px;
-            
+
             color: #CCC!important;
             position:relative;
             top:1px;
@@ -71,7 +71,7 @@
         }
 
 
-        
+
 
         .flex {
             display: flex;
@@ -83,7 +83,7 @@
         }
 
     </style>
-    
+
 
 
     <h3 style="padding-left:15px;padding-bottom:0;margin-bottom:0;" class="color-blue">
@@ -114,7 +114,7 @@
                 </div>
                 <div class="havePublished label"> - have published
                     <span class="color-white">{{nationalRecords.authority.recordCount}}</span> - </div>
-                <div class="recordText">Competent National Authorities 
+                <div class="recordText">Competent National Authorities
                     <a href="#" class="helpinfoInline fa fa-info-circle" data-toggle="tooltip" data-html="true" data-title="{{help.cna}}" data-container="body"></a></div>
             </div>
         </div>
@@ -146,7 +146,7 @@
         </div>
 
         <div class="clearfix"></div>
-        
+
         <div class="col-sm-6 col-md-3 flex">
             <div class="statsBox color-white" ng-click="goto('/search/?t=nationalRecords&f=nationalRecords:IRCC')">
                 <div>
@@ -168,7 +168,7 @@
                 </div>
                 <div class="havePublished label"> - have published
                     <span class="color-white">{{nationalRecords.absCheckpoint.recordCount}}</span> - </div>
-                <div class="recordText">Checkpoints 
+                <div class="recordText">Checkpoints
                     <a href="#" class="helpinfoInline fa fa-info-circle" data-toggle="tooltip" data-html="true" data-title="{{help.cp}}" data-container="body"></a></div>
             </div>
         </div>
@@ -185,7 +185,7 @@
                     <a href="#" class="helpinfoInline fa fa-info-circle" data-toggle="tooltip" data-html="true"  data-title="{{help.cpc}}" data-container="body"></a></div>
             </div>
         </div>
-        
+
          <div class="col-sm-6 col-md-3 flex">
             <div class="statsBox color-white" ng-click="goto('/search/?t=nationalRecords&f=nationalRecords:NR')">
                 <div>
@@ -198,7 +198,7 @@
                     <a href="#" class="helpinfoInline fa fa-info-circle" data-toggle="tooltip" data-html="true"  data-title="{{help.nr}}" data-container="body"></a></div>
             </div>
         </div>
-        
+
     </div>
 
     <div class="clearfix"></div>
@@ -211,10 +211,10 @@
         <div class="col-md-3">
 
                 <h5 style="padding:5px;border-radius:3px;margin-bottom:0;" class="bg-orange linkDark" ng-click="goto('/search/?t=referenceRecords&f=referenceRecords:VLR')">
-                    <span class="badge bg-white">{{referenceRecords.capacityBuildingResource.recordCount}}</span> Literature and Capacity Building Resources 
+                    <span class="badge bg-white">{{referenceRecords.capacityBuildingResource.recordCount}}</span> Literature and Capacity Building Resources
                     <span class="helpinfoInline fa fa-info-circle color-white" data-toggle="tooltip" data-html="true" data-title="{{help.vlr}}" data-container="body"></span>
                     </h5>
-        
+
             <div ng-repeat="doc in referenceRecords.capacityBuildingResource.docs" ng-show="doc.title_t && $index < 5"  class="link1">
                 <!-- <div id="capacityBuildingResources" ng-include="home-list.html"> -->
                 <a href="{{doc.schema_s|mapSchema}}/{{doc.identifier_s}}" target="_new" style="padding-bottom:5px;">
@@ -224,12 +224,12 @@
             </div>
         </div>
          <div class="col-md-3">
-         
+
                     <h5 style="padding:5px;border-radius:3px;margin-bottom:0;" class="bg-orange linkDark"  ng-click="goto('/search/?t=referenceRecords&f=referenceRecords:CBI')">
                         <span class="badge bg-white">{{referenceRecords.capacityBuildingInitiative.recordCount}}</span> Capacity Building Initiatives
                          <span href="#" class="helpinfoInline fa fa-info-circle color-white" data-toggle="tooltip" data-html="true" data-title="{{help.cbr}}" data-container="body"></span>
                         </h5>
-          
+
             <div ng-repeat="doc in referenceRecords.capacityBuildingInitiative.docs" ng-show="doc.title_t && $index < 5" class="link1">
                 <!-- <div id="capacityBuildingInitiative" ng-include="home-list.html"> -->
                 <a href="{{doc.schema_s|mapSchema}}/{{doc.identifier_s}}" target="_new" style="padding-bottom:5px;" >
@@ -240,7 +240,7 @@
         </div>
         <div class="col-md-3">
                 <h5 style="padding:5px;border-radius:3px;margin-bottom:0;" class="bg-orange linkDark" ng-click="goto('/search/?t=referenceRecords&f=referenceRecords:A19A20')">
-                <span class="badge bg-white">{{referenceRecords.modelContractualClause.recordCount}}</span> Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards 
+                <span class="badge bg-white">{{referenceRecords.modelContractualClause.recordCount}}</span> Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards
                 <span class="helpinfoInline fa fa-info-circle color-white" data-toggle="tooltip" data-html="true" data-title="{{help.a19a20}}" data-container="body"></span>
                 </h5>
             <div ng-repeat="doc in referenceRecords.modelContractualClause.docs" ng-show="doc.title_t && $index < 5" class="link1">
@@ -252,13 +252,13 @@
             </div>
         </div>
         <div class="col-md-3">
-    
+
                         <h5 style="padding:5px;border-radius:3px;margin-bottom:0;" class="bg-orange linkDark" ng-click="goto('/search/?t=referenceRecords&f=referenceRecords:CPP')" >
-                        <span class="badge bg-white">{{referenceRecords.communityProtocol.recordCount}}</span> 
-                        Community protocols and procedures and customary laws 
+                        <span class="badge bg-white">{{referenceRecords.communityProtocol.recordCount}}</span>
+                        Community protocols and procedures and customary laws
                         <span href="#" class="helpinfoInline fa fa-info-circle color-white" data-toggle="tooltip" data-html="true" data-title="{{help.cpp}}" data-container="body"></span>
                         </h5>
-              
+
             <div ng-repeat="doc in referenceRecords.communityProtocol.docs" ng-show="doc.title_t && $index < 5" class="link1">
                 <!-- <div id="communityProtocol" ng-include="home-list.html"> -->
                 <a href="{{doc.schema_s|mapSchema}}/{{doc.identifier_s}}" target="_new" style="padding-bottom:5px;" >
@@ -267,7 +267,7 @@
                 </a>
             </div>
         </div>
-       
+
     </div>
 
     <div class="clearfix"></div>
@@ -279,9 +279,9 @@
         <div class="col-md-3">
             <a href="/search/?t=scbdRecords&f=referenceRecords:WN" class="color-white">
                 <h5 style="padding:5px;border-radius:3px;margin-bottom:0;" class="bg-darkgrey color-white linkDark" >
-                <span class="badge bg-white">{{referenceRecords.whatsnew.recordCount}}</span> What's New</h5>
+                <span class="badge bg-white">{{referenceRecords.new.recordCount}}</span> What's New</h5>
             </a>
-            <div ng-repeat="doc in referenceRecords.whatsnew.docs" ng-show="doc.title_t && $index < 5" class="link1">
+            <div ng-repeat="doc in referenceRecords.new.docs" ng-show="doc.title_t && $index < 5" class="link1">
                 <!-- <div id="communityProtocol" ng-include="home-list.html"> -->
                 <a href="{{doc.schema_s|mapSchema}}/{{doc.identifier_s}}" target="_new" style="padding-bottom:5px;" >
                     <span class="color-darkgrey" style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.createdDate_dt | formatDate}}</span>
@@ -289,7 +289,7 @@
                 </a>
             </div>
         </div>
-        
+
         <div class="col-md-3">
              <a href="/search/?t=scbdRecords&f=referenceRecords:NT" class="color-white">
                 <h5 style="padding:5px;border-radius:3px;margin-bottom:0;" class="bg-darkgrey color-white linkDark" >
@@ -303,7 +303,7 @@
                 </a>
             </div>
         </div>
-        
+
         <div class="col-md-3">
               <a href="/search/?t=scbdRecords&f=referenceRecords:MT" class="color-white">
                 <h5 style="padding:5px;border-radius:3px;margin-bottom:0;" class="bg-darkgrey color-white linkDark" >
@@ -317,7 +317,7 @@
                 </a>
             </div>
         </div>
-        
+
          <div class="col-md-3">
             <a   <a href="/search/?t=scbdRecords&f=referenceRecords:NW" class="color-white">
                 <h5 style="padding:5px;border-radius:3px;margin-bottom:0;" class="bg-darkgrey color-white linkDark" >
@@ -331,7 +331,7 @@
                 </a>
             </div>
         </div>
-        
+
     </div>
 
 </div>

@@ -4,7 +4,7 @@ define(['app', 'underscore'], function (app, _) { 'use strict';
 
         var nationalSchemas 	= [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "focalPoint"];
         var referenceSchemas 	= [ "modelContractualClause", "communityProtocol", "capacityBuildingInitiative", "capacityBuildingResource"];
-		var scbdSchemas			= [ "resource", "meeting", "notification", "pressRelease", "statement", "news" ];
+		var scbdSchemas			= [ "resource", "meeting", "notification", "pressRelease", "statement", "news", "new" ];
 
         var realmConfigurations = [
             //Production
