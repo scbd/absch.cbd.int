@@ -1,6 +1,6 @@
  define(['app','underscore','linqjs', 'ngMaterial','ngAria','angular-animate',
    '/app/views/search/measure-matrix-countries-directive.html.js',
-   '/app/js/common.js', 
+   '/app/js/common.js',
    '/app/views/search-new/search-results/result-grouped-national-record.js',
  ], function(app, _, linqjs) {
 
@@ -65,7 +65,7 @@
                         $location.absUrl().toLowerCase().indexOf("://training-absch.cbd.int") > 0) {
                         $scope.showMatrix = true;
                     }
-                    
+
                     //**********************************************************
                     $scope.loadCountryDetails = function(countryCode) {
 
@@ -83,7 +83,7 @@
                     .then(function(country) {
                         $scope.country = country;
                     });
-                    
+
                     //*******************************************************
                     var schema = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database"]
                     var schemQuery = ' (schema_s:' + schema.join(' OR schema_s:') + ' OR (schema_s:focalPoint AND (type_ss:NP-FP OR type_ss:ABS-IC OR type_ss:ABS-FP)))';
@@ -116,7 +116,8 @@
                                 document.ownerGovernment = {identifier:document.ownerGovernment_s};
 
                             if(document.schema_s == "focalPoint" ){
-                                document.description_t = document.description_t.replace(/\n/g, '<br/>');
+                                if(document.description_t)
+                                    document.description_t = document.description_t.replace(/\n/g, '<br/>');
                                 document.documentId = commonjs.hexToInteger(document.identifier_s);
                             }
                             else if(document.schema_s == "authority" || document.schema_s == "database" ||

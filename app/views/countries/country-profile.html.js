@@ -18,21 +18,25 @@ define(['app','underscore',
           $scope.country.cssClass='flag-icon-'+$scope.country.code;
       });
       $q.when(commonjs.getCountries()).then(function(countries){
-          ammap3Service.eachCountry('zoom-map-country', function(mapCountry){
-            var countryDetails = _.findWhere(countries, {code : mapCountry.id});
-            if(countryDetails){
-                if(countryDetails.isNPInbetweenParty)
-                    mapCountry.colorReal= "#5cb85c";
-                else if(countryDetails.isNPParty)
-                    mapCountry.colorReal= "#337ab7";
-                else if(countryDetails.isCBDParty)
-                    mapCountry.colorReal= "#999";
+
+          ammap3Service.loadCountries('zoom-map-country', countries);
+          $timeout(function(){
+              ammap3Service.eachCountry('zoom-map-country', function(mapCountry){
+                var countryDetails = _.findWhere(countries, {code : mapCountry.id});
+                if(countryDetails){
+                    if(countryDetails.isNPInbetweenParty)
+                        mapCountry.colorReal= "#EC971F";
+                    else if(countryDetails.isNPParty)
+                        mapCountry.colorReal= "#5F4586";
+                  //   else if(countryDetails.isCBDParty)
+                  //       mapCountry.colorReal= "#999";
+                    else
+                        mapCountry.colorReal= "#333";
+                }
                 else
-                    mapCountry.colorReal= "#FFF";
-            }
-            else
-                mapCountry.colorReal= "#FFF";
-          });
+                    mapCountry.colorReal= "#333";
+              });
+          },1000);
       });
 
     }
