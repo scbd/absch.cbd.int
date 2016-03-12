@@ -1076,21 +1076,21 @@ footer .logo {
 }
 /*for the new search*/
   .link:hover{
-      background-color: rgba(255,255,255,.15)!important; 
+      background-color: rgba(255,255,255,.15)!important;
       cursor:pointer;
-   }  
-   
+   }
+
    .link1:hover{
-      background-color: rgba(0,0,0,.10)!important; 
+      background-color: rgba(0,0,0,.10)!important;
       cursor:pointer;
-   }  
-   
+   }
+
    .linkDark:hover{
-      background-color: #333!important; 
+      background-color: #333!important;
       cursor:pointer;
-   }  
+   }
    .linkWhite:hover{
-      background-color: #FFF!important; 
+      background-color: #FFF!important;
       cursor:pointer;
    }
 
@@ -1100,7 +1100,7 @@ footer .logo {
         border-left:3px #428bca solid;
         cursor:pointer;
     }
-    
+
     #search-new .nationalRecords .schema{
         color:#428bca;
     }
@@ -1110,14 +1110,14 @@ footer .logo {
     #search-new .scbdRecords .schema{
         color:#333;
     }
-    
+
      #search-new .referenceRecords{
         margin-bottom: 15px;
         padding:5px;
         border-left:3px #fa6938 solid;
         cursor:pointer;
     }
-    
+
     #search-new .scbdRecords{
         margin-bottom: 15px;
         padding:5px;
@@ -1142,7 +1142,7 @@ footer .logo {
          font-size:14px;
          padding-top:20px;
      }
-     
+
       #national-records-country .schemaTitle{
          padding-bottom:5px!important;
          font-size:12px;
@@ -1150,7 +1150,7 @@ footer .logo {
          font-weight: 500;
           text-transform: uppercase;
      }
-     
+
     .recordDefault .date{
         color:#333;
         text-transform: uppercase;
@@ -1162,8 +1162,8 @@ footer .logo {
         padding:0 10px 0 10px;
         display:inline!important;
     }
-    
-    
+
+
     #result-grouped-national-record .title{
         color:#111;
         font-size:14px;
@@ -1176,8 +1176,8 @@ footer .logo {
         margin:0;
         padding:0;
         text-overflow:ellipsis;
-        white-space: nowrap; 
-        width: 80vw; 
+        white-space: nowrap;
+        width: 80vw;
         overflow: hidden;
     }
     #result-grouped-national-record .description{
@@ -1186,9 +1186,14 @@ footer .logo {
         margin:0;
         padding:0;
         text-overflow:ellipsis;
-        white-space: nowrap; 
-        width: 80vw; 
+        white-space: nowrap;
+        width: 80vw;
         overflow: hidden;
+    }
+    .descriptionSpan{
+        display: inline-block;
+        white-space: initial!important;
+        width: 100%!important;
     }
      .recordDefault .metadata{
         margin:0;
@@ -1213,9 +1218,9 @@ footer .logo {
         border-right:solid 1px #999;
     }
     .recordDefault .metadata > li > .last-span {border-right:0!important;}
-   
-   #doc-metadata {padding-top:10px!important;}  
-   #doc-metadata * {font-size:10px;}  
+
+   #doc-metadata {padding-top:10px!important;}
+   #doc-metadata * {font-size:10px;}
    #doc-metadata .table-condensed>tbody>tr>td,  #doc-metadata .table-condensed>tbody>tr>th,  #doc-metadata .table-condensed>tfoot>tr>td,  #doc-metadata .table-condensed>tfoot>tr>th,  #doc-metadata .table-condensed>thead>tr>td,  #doc-metadata .table-condensed>thead>tr>th
    {padding:0!important;margin:0!important;border:0!important;}
    #view-history .table-condensed>tbody>tr>td,  #view-history .table-condensed>tbody>tr>th,  #view-history .table-condensed>tfoot>tr>td,  #view-history .table-condensed>tfoot>tr>th, #view-history .table-condensed>thead>tr>td,  #view-history .table-condensed>thead>tr>th
@@ -1274,7 +1279,7 @@ footer .logo {
             margin: 5px 0 10px 0;
             padding: 0;
         }
-    
+
  #Search-Filter .heading, .heading > .filter , #Search-Filter  .country-heading{
             font-weight: bold;
             font-size: 16px;
@@ -1282,7 +1287,7 @@ footer .logo {
 
         }
 #Search-Filter  .country-heading{
- padding-right:10px;   
+ padding-right:10px;
 }
  #Search-Filter .badge {
             font-size: 10px;
@@ -1306,15 +1311,15 @@ footer .logo {
             line-height: 16px;
         }
 
-        
+
 #Search-Filter .fa-info-circle{
     color:#9f9f9f;
     }
-    
+
  #Search-Filter .noTopPadding{
     padding:0!important;
     }
-    
+
 #Search-Filter .letter-active{
     font-weight: bold;
     color:#111;
@@ -1350,9 +1355,9 @@ footer .logo {
         .od-label{color:black;font-weight:300;margin-left:5px;}
 
         #Jumbotron {height:auto!important;margin:-10px auto auto auto;}
-     
+
         #Parties .col-xs-12{text-align: left;}
-      
+
         .tag-line-container  h3{
             font-size: 15px;
         }
@@ -1372,4 +1377,3 @@ footer .logo {
         #search-new .nav-tabs>li {margin-bottom:0; font-weight:bold; font-size:16px;}
         #search-new  .nav-tabs > li > a:hover{background-color: #DDD; }
         #search-new .no-rl-padding{padding-left:0!important;margin-left:0!important;padding-right:0!important;margin-right:0!important;}
-   
