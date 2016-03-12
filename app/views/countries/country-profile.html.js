@@ -19,7 +19,7 @@ define(['app','underscore',
       });
       $q.when(commonjs.getCountries()).then(function(countries){
 
-          ammap3Service.loadCountries('zoom-map-country', countries);
+        //   ammap3Service.loadCountries('zoom-map-country', countries);
           $timeout(function(){
               ammap3Service.eachCountry('zoom-map-country', function(mapCountry){
                 var countryDetails = _.findWhere(countries, {code : mapCountry.id});
