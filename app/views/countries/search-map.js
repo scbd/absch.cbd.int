@@ -21,11 +21,12 @@ define(['text!./search-map.html',
       //=======================================================================
       //
       //=======================================================================
-      controller: ["$scope", '$q', 'commonjs', 'searchService', '$timeout', function($scope, $q, commonjs, searchService, $timeout) {
+      controller: ["$scope", '$q', 'commonjs', 'searchService', '$timeout', '$filter',
+       function($scope, $q, commonjs, searchService, $timeout, $filter) {
 
           if(!$scope.height)
-            $scope.height="500px"; 
-            
+            $scope.height="500px";
+
           function calculateListViewFacets(countryFacets, countries) {
 
             _.each(countries, function(country) {
@@ -39,8 +40,8 @@ define(['text!./search-map.html',
                   country[$filter("schemaShortName")(key)] = document.count;
                 });
                 country.total = countryFacet.recordCount;
-                country = normalizeCountryData(country);
               }
+              country = normalizeCountryData(country);
             });
 
           } //calculateListViewFacets
