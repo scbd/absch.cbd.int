@@ -1,11 +1,14 @@
-define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document-selection-directive.html.js',
-        '../view/view-abs-national-report.directive.js'], function (app) {
+define(['app', 'underscore', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document-selection-directive.html.js',
+        '../view/view-abs-national-report.directive.js',
+        '/app/services/search-service.js'
+], function (app, _) {
 
-  app.controller("editAbsNationalReport", ["$scope", "$http", "$filter", "$controller", "$location", "$q", "realm", "underscore", function ($scope, $http, $filter, $controller,$location, $q, realm, _) {
+  app.controller("editAbsNationalReport",
+  ["$scope", "$http", "$filter", "$controller", "$location", "$q", "realm", "searchService",
+  function ($scope, $http, $filter, $controller,$location, $q, realm, searchService) {
 
     $controller('editController', {$scope: $scope});
-
-    $scope.showHelp.hasHelp = true;
+    $scope.showHelp = { hasHelp : true };
 
     $scope.setTab = function () {
         $scope.tab = 'edit';
@@ -567,6 +570,20 @@ define(['app', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document
         if(government){
             $q.when(getAbsDocuments(government)).then(function (data) {
                 $scope.absDocuments = data;
+            });
+
+            $q.when(searchService.governmentSchemaFacets())
+            .then(function(govFacets){
+                $scope.recordsCount = {
+                    cpc : 0, ircc : 0
+                };
+                var facet = _.findWhere(govFacets, {government : government.identifier});
+
+                if(facet)
+                    $scope.recordsCount = {
+                        cpc : facet.schemas.absCheckpointCommunique,
+                        ircc : facet.schemas.absPermit
+                    };
             });
         }
     }

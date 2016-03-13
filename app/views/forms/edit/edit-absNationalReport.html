@@ -438,6 +438,10 @@
 
                                      <div class="input-group col-xs-4"  name="question16.permitsOnAbsCh">
                                         <input ng-disabled="!isQ11Yes(document.question11.answer)" type="number" name="permitsOnAbsCh" class="form-control text-right" ng-model="document.question16.permitsOnAbsCh" min="0" ng-init="document.question16.permitsOnAbsCh=0">
+                                        &nbsp;<span class="label label-info" ng-if="recordsCount.ircc">
+                                            <i class="fa fa-info-circle color-white"/> No. of permits or their equivalents published
+                                            <span class="badge" style="padding-top: 1px;padding-bottom: 1px;">{{recordsCount.ircc}}</span>
+                                        </span>
                                     </div>
 
                                     </div>
@@ -779,6 +783,10 @@
                                     </div>
                                     <div class="km-control-group row" name="question27_ccsOnAbsCh" caption="Please provide the number of checkpoint communiques available in the ABS Clearing-House, if applicable">
                                         <input class="col-xs-2" type="number" name="ccsOnAbsCh" class="form-control text-right" ng-model="document.question27.cpcsOnAbsChCount" min="0" ng-init="document.question27.cpcsOnAbsChCount=0">
+                                        &nbsp;<span class="label label-info" ng-if="recordsCount.cpc">
+                                            <i class="fa fa-info-circle color-white"/> No. of Checkpoint Communique published
+                                            <span class="badge" style="padding-top: 1px;padding-bottom: 1px;">{{recordsCount.cpc}}</span>
+                                        </span>
                                     </div>
 
                                     <div class="km-control-group" name="q27relevantDocuments" caption="Any other relevant documents">
