@@ -1,0 +1,28 @@
+<div id="Date-Filter">
+
+    <div class="heading" ng-if="df_fitlers.length">Date Filter</div>
+    <p class="helpinfo"><i class="fa fa-info-circle helpicon"></i> </p>
+    <hr class="heading" ng-if="df_fitlers.length" />
+
+    <div style="max-height:400px;">
+        <div ng-repeat="doc in df_fitlers | filter:searchKeyword">
+            <div class="filter col-lg-3">
+                {{doc.name}}
+                <div class="row" style="margin-top:6px">
+                    <div class="col-md-6">
+                        <div style="font-size:10px;font-weight:bold">From</div>
+                        <div class="km-date" ng-model="since"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div style="font-size:10px;font-weight:bold">To</div>
+                        <div class="km-date" ng-model="until"></div>
+                    </div>
+                </div>
+                <p class="helpinfo"><i class="fa fa-info-circle helpicon"></i> {{doc.description}}
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+</div>
