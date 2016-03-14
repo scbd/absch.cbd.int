@@ -19,8 +19,7 @@ define(['app','underscore',
       });
       $q.when(commonjs.getCountries()).then(function(countries){
 
-        //   ammap3Service.loadCountries('zoom-map-country', countries);
-          $timeout(function(){
+        //   $timeout(function(){
               ammap3Service.eachCountry('zoom-map-country', function(mapCountry){
                 var countryDetails = _.findWhere(countries, {code : mapCountry.id});
                 if(countryDetails){
@@ -36,7 +35,7 @@ define(['app','underscore',
                 else
                     mapCountry.colorReal= "#333";
               });
-          },1000);
+        //   },1000);
       });
 
     }

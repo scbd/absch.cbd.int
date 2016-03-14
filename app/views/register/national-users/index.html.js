@@ -1,11 +1,7 @@
 define(['angular', 'lodash', 'require','app', 'ngDialog', '/app/services/app-config-service.js'], function(ng, _, require, app) { 'use strict';
 
-app.controller("nationalUsersController", ['$scope', '$http', '$q', 'ngDialog', '$rootScope', 'realm', 'appConfigService', 'user',
-    function($scope, $http, $q, ngDialog, $rootScope, realm, appConfigService, user) {
-
-
-        console.log(user);
-        
+app.controller("nationalUsersController", ['$scope', '$http', '$q', 'ngDialog', '$rootScope', 'realm', 'appConfigService',
+    function($scope, $http, $q, ngDialog, $rootScope, realm, appConfigService) {
         var users;
         var roles = {};
         var contextRoles = {};
