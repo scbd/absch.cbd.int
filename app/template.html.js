@@ -10,9 +10,9 @@ define(['app', 'underscore', 'ng-breadcrumbs',
 
     app.controller('TemplateController', ['$scope', '$rootScope', 'showHelp',
         '$location','realmConfiguration','$anchorScroll', 'breadcrumbs', 'toastr', '$route',
-        'cfgUserNotification','$window', '$element',//'localStorageService',localStorageService, ,
+        'cfgUserNotification','$window', '$element','localStorageService',
         function($scope, $rootScope, showHelp, $location, realmConfiguration,
-            $anchorScroll, breadcrumbs, toastr, $route, cfgUserNotification, $window, $element) {
+            $anchorScroll, breadcrumbs, toastr, $route, cfgUserNotification, $window, $element, localStorageService) {
             $scope.controller = "TemplateController";
             $scope.breadcrumbs = breadcrumbs;
             $scope.$root.pageTitle = {
@@ -31,8 +31,8 @@ define(['app', 'underscore', 'ng-breadcrumbs',
             $scope.toggleSideBar = function() {
                 $element.find("#wrapper").toggleClass("toggled");
             }
-            
-      
+
+
 
             //============================================================
             //
@@ -159,10 +159,12 @@ define(['app', 'underscore', 'ng-breadcrumbs',
             $rootScope.$on('event:server-pushNotification', function(evt,data){
                 if(data.type == 'documentNotification'){
                     toastr.info(data.message);
+                    localStorageService.remove('governmentFacets');
+                    localStorageService.remove('searchFilters');
                 }
             });
 
         }
-    ])
+    ]);
 
 });
