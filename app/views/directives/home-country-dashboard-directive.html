@@ -217,7 +217,7 @@
 
             <div ng-repeat="doc in referenceRecords.capacityBuildingResource.docs" ng-show="doc.title_t && $index < 5"  class="link1">
                 <!-- <div id="capacityBuildingResources" ng-include="home-list.html"> -->
-                <a href="{{doc.schema_s|mapSchema}}/{{doc.identifier_s}}" target="_new" style="padding-bottom:5px;">
+                <a href="/database/{{doc.schema_s}}/{{hexToInteger(doc.identifier_s)}}"  style="padding-bottom:5px;">
                     <span class="color-darkgrey" style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.createdDate_dt | formatDate}}</span>
                     <span class="color-grey" style="display:block;font-size:12px;">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." : doc.title_t }}</span>
                 </a>
@@ -232,7 +232,7 @@
 
             <div ng-repeat="doc in referenceRecords.capacityBuildingInitiative.docs" ng-show="doc.title_t && $index < 5" class="link1">
                 <!-- <div id="capacityBuildingInitiative" ng-include="home-list.html"> -->
-                <a href="{{doc.schema_s|mapSchema}}/{{doc.identifier_s}}" target="_new" style="padding-bottom:5px;" >
+                <a href="/database/{{doc.schema_s}}/{{hexToInteger(doc.identifier_s)}}"  style="padding-bottom:5px;" >
                     <span class="color-darkgrey" style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.createdDate_dt | formatDate}}</span>
                     <span class="color-grey" style="display:block;font-size:12px;">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." : doc.title_t }}</span>
                 </a>
@@ -245,7 +245,7 @@
                 </h5>
             <div ng-repeat="doc in referenceRecords.modelContractualClause.docs" ng-show="doc.title_t && $index < 5" class="link1">
                 <!-- <div id="modelContractualClause" ng-include="home-list.html"> -->
-                <a href="{{doc.schema_s|mapSchema}}/{{doc.identifier_s}}" target="_new" style="padding-bottom:5px;"  >
+                <a href="/database/{{doc.schema_s}}/{{hexToInteger(doc.identifier_s)}}"  style="padding-bottom:5px;"  >
                     <span class="color-darkgrey" style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.createdDate_dt | formatDate}}</span>
                     <span class="color-grey" style="display:block;font-size:12px;">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." : doc.title_t }}</span>
                 </a>
@@ -261,7 +261,7 @@
 
             <div ng-repeat="doc in referenceRecords.communityProtocol.docs" ng-show="doc.title_t && $index < 5" class="link1">
                 <!-- <div id="communityProtocol" ng-include="home-list.html"> -->
-                <a href="{{doc.schema_s|mapSchema}}/{{doc.identifier_s}}" target="_new" style="padding-bottom:5px;" >
+                <a href="/database/{{doc.schema_s}}/{{hexToInteger(doc.identifier_s)}}"  style="padding-bottom:5px;" >
                     <span class="color-darkgrey" style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.createdDate_dt | formatDate}}</span>
                     <span class="color-grey" style="display:block;font-size:12px;">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." : doc.title_t }}</span>
                 </a>
@@ -283,7 +283,7 @@
             </a>
             <div ng-repeat="doc in referenceRecords.new.docs" ng-show="doc.title_t && $index < 5" class="link1">
                 <!-- <div id="communityProtocol" ng-include="home-list.html"> -->
-                <a href="{{doc.schema_s|mapSchema}}/{{doc.identifier_s}}" target="_new" style="padding-bottom:5px;" >
+                <a href="/database/{{doc.schema_s}}/{{hexToInteger(doc.identifier_s)}}"  style="padding-bottom:5px;" >
                     <span class="color-darkgrey" style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.createdDate_dt | formatDate}}</span>
                     <span class="color-grey" style="display:block;font-size:12px;">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." : doc.title_t }}</span>
                 </a>
@@ -297,7 +297,7 @@
             </a>
             <div ng-repeat="doc in referenceRecords.notification.docs" ng-show="doc.title_t && $index < 5" class="link1">
                 <!-- <div id="communityProtocol" ng-include="home-list.html"> -->
-                <a href="{{doc.schema_s|mapSchema}}/{{doc.identifier_s}}" target="_new" style="padding-bottom:5px;" >
+                <a href="/database/{{doc.schema_s}}/{{hexToInteger(doc.identifier_s)}}"  style="padding-bottom:5px;" >
                     <span class="color-darkgrey" style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.createdDate_dt | formatDate}}</span>
                     <span class="color-grey" style="display:block;font-size:12px;">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." : doc.title_t }}</span>
                 </a>
@@ -311,7 +311,7 @@
             </a>
             <div ng-repeat="doc in referenceRecords.meeting.docs" ng-show="doc.title_t && $index < 5" class="link1">
                 <!-- <div id="communityProtocol" ng-include="home-list.html"> -->
-                <a href="{{doc.schema_s|mapSchema}}/{{doc.identifier_s}}" target="_new" style="padding-bottom:5px;" >
+                <a href="/database/{{doc.schema_s}}/{{hexToInteger(doc.identifier_s)}}"  style="padding-bottom:5px;" >
                     <span class="color-darkgrey" style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.createdDate_dt | formatDate}}</span>
                     <span class="color-grey" style="display:block;font-size:12px;">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." : doc.title_t }}</span>
                 </a>
@@ -325,7 +325,7 @@
             </a>
             <div ng-repeat="doc in referenceRecords.news.docs" ng-show="doc.title_t && $index < 5" class="link1">
                 <!-- <div id="communityProtocol" ng-include="home-list.html"> -->
-                <a href="{{doc.schema_s|mapSchema}}/{{doc.identifier_s}}" target="_new" style="padding-bottom:5px;" >
+                <a href="/database/{{doc.schema_s}}/{{hexToInteger(doc.identifier_s)}}"  style="padding-bottom:5px;" >
                     <span class="color-darkgrey" style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.createdDate_dt | formatDate}}</span>
                     <span class="color-grey" style="display:block;font-size:12px;">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." : doc.title_t }}</span>
                 </a>

@@ -8,11 +8,14 @@ define(['app', 'underscore', '/app/services/search-service.js', '/app/services/a
                 templateUrl: '/app/views/directives/home-country-dashboard-directive.html',
                 controller: ['$scope', '$filter', 'schemaTypes', 'realm', '$q', 'searchService', 'appConfigService', 'commonjs','$element', 'helpService',"$timeout", "$location",
                     function($scope, $filter, schemaTypes, realm, $q, searchService, appConfigService, commonjs, $element, helpService, $timeout, $location) {
-                       
+
                        $scope.help = {};
-                       
-                       
-                        //=========================================================================================
+
+
+                        $scope.hexToInteger = function(identifier){
+                            return commonjs.hexToInteger(identifier);
+                        }
+
                         $scope.goto = function(url) {
                             $location.path(url);
                         }
@@ -22,11 +25,11 @@ define(['app', 'underscore', '/app/services/search-service.js', '/app/services/a
                         function getInfo() {
                             $scope.help = {
                                  nationalRecords : helpService.getInfo('nationalRecords'),
-                                 
+
                                  scbdRecords : helpService.getInfo('scbdRecords'),
-                                 nfp : helpService.getInfo('nfp'), 
-                                 cna : helpService.getInfo('cna'), 
-                                 msr : helpService.getInfo('msr'), 
+                                 nfp : helpService.getInfo('nfp'),
+                                 cna : helpService.getInfo('cna'),
+                                 msr : helpService.getInfo('msr'),
                                  ndb : helpService.getInfo('ndb'),
                                  ircc : helpService.getInfo('ircc'),
                                  cp : helpService.getInfo('cp'),
@@ -34,26 +37,26 @@ define(['app', 'underscore', '/app/services/search-service.js', '/app/services/a
                                  nr : helpService.getInfo('nr'),
                                  referenceRecords : helpService.getInfo('referenceRecords'),
                                  a19a20 : helpService.getInfo('a19a20'),
-                                 cpp : helpService.getInfo('cpp'),        
-                                 cbr : helpService.getInfo('cbr'),        
-                                 cbi : helpService.getInfo('cbi'), 
-                                 vlr : helpService.getInfo('vlr'),                                         
+                                 cpp : helpService.getInfo('cpp'),
+                                 cbr : helpService.getInfo('cbr'),
+                                 cbi : helpService.getInfo('cbi'),
+                                 vlr : helpService.getInfo('vlr'),
                             };
                             $timeout(function(){
                                 $element.find('[data-toggle="tooltip"]').tooltip();
-                            },50);    
+                            },50);
                         }
-                        
+
                         getInfo();
-                        
-                        
+
+
                         //=========================================================================================
                         $scope.wellChanged = function(facet) {
                             $scope.currentFacet = facet;
                         }
 
                         $scope.loadingNationalFacets = true;
-                        
+
                         $q.when(searchService.governmentSchemaFacets())
                             .then(function(results) {
 
@@ -102,13 +105,13 @@ define(['app', 'underscore', '/app/services/search-service.js', '/app/services/a
                             groupLimit : 5,
                             groupSort  : 'startDate_dt desc, updatedDate_dt desc'
                         };
-                        
-                        
+
+
                         $scope.loadingRefFacets = true;
-                        
-                        
-                        
-                        return searchService.group(referenceRecordsQuery)
+
+
+
+                        searchService.group(referenceRecordsQuery)
                             .then(function(data) {
                                 console.log(data);
                                 var referenceRecords = {};
@@ -125,8 +128,8 @@ define(['app', 'underscore', '/app/services/search-service.js', '/app/services/a
                             })
                             .finally(function() {
                                 $scope.loadingRefFacets = false;
-                            });                        
-                    
+                            });
+
                     }
                 ]
             };
