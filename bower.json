@@ -50,11 +50,11 @@
   },
   "resolutions": {
     "angular": "1.5.0",
-    "angular-messages": "^1.4.8",
     "bootstrap": "3.3.6",
     "font-awesome": "4.5.0",
     "jquery": "2.2.0",
     "angular-material": "0.9.8",
-    "scbd-angularjs-services": "1.1.8"
+    "scbd-angularjs-services": "1.1.8",
+    "angular-messages": "~1.3"
   }
 }
