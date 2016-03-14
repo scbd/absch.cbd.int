@@ -6,6 +6,7 @@ define(['app', 'underscore', '/app/js/common.js',
 '/app/views/search-new/search-filters/reference-filter.js',
 '/app/views/search-new/search-filters/scbd-filter.js',
 '/app/views/search-new/search-filters/country-filter.js',
+'/app/views/search-new/search-filters/date-filter.js',
 '/app/views/search-new/search-results/result-default.js',
 '/app/views/search-new/search-results/national-records-country.js',
 '/app/services/app-config-service.js'
@@ -131,6 +132,14 @@ define(['app', 'underscore', '/app/js/common.js',
                         $scope.refresh = true;
                     };
 
+                    $scope.saveDateFilter = function(filterID, query) {
+
+                        $scope.setFilters[filterID] = {type:$scope.searchFilters[filterID].type, query:query, name:$scope.searchFilters[filterID].name, id:$scope.searchFilters[filterID].id};
+
+                        $scope.refresh = true;
+                    };
+
+
                   //===============================================================================================================================
                     function nationalQuery(currentPage, itemsPerPage) {
 
@@ -141,8 +150,8 @@ define(['app', 'underscore', '/app/js/common.js',
                             queryCanceler.resolve(true);
                         }
 
-                        var base_fields = 'id, rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s,'; // rec_category, groupSort, sort1, sort2, sort3
-                        var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t,' // meta1_EN_t, meta2_EN_t, meta3_EN_t
+                        var base_fields = 'id, rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, rec_category, schemaSort_i,';//' groupSort, sort1, sort2, sort3'; //
+                        var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt'; //
 
                         var q = queryFilterBuilder("national");
 
@@ -154,10 +163,10 @@ define(['app', 'underscore', '/app/js/common.js',
 
                         var groupQuery = {
                             query       : q,
-                            sort        : 'government_EN_s asc, updatedDate_dt desc',
+                            sort        : 'government_EN_s asc, schemaSort_i asc',
                             fields      : base_fields + en_fields,
                             groupField  : 'government_s',
-                            groupSort   : 'schema_s desc', // groupSort, sort1, sort2, sort3
+                            groupSort   : 'schemaSort_i asc', // groupSort, sort1, sort2, sort3
                             currentPage : nationalCurrentPage,
                             itemsPerPage: $scope.itemsPerPage
                         };
@@ -327,7 +336,9 @@ define(['app', 'underscore', '/app/js/common.js',
                                qOr.push(buildTextQuery('title_t'      ,'freeText'   , null));
                                qOr.push(buildTextQuery('description_t','freeText'   , null));
                         }
-
+                        if(queryType == 'date'){
+                            qAnd.push(buildFieldQuery('updatedDate_dt','date'));
+                        }
                         q = combineQuery(qAnd, "AND");
                         q1 = combineQuery(qOr, "OR");
                         $scope.test = q1 ? q + " AND (" + q1 + ")" : q;
@@ -410,6 +421,7 @@ define(['app', 'underscore', '/app/js/common.js',
                             loadCountryFilters();
                             loadThematicFilters();
                             loadRegionsFilters();
+                            loadDateFilters();
                             localStorageService.set("searchFilters", $scope.searchFilters);
                             console.log('getting new filters');
                         }
@@ -490,7 +502,9 @@ define(['app', 'underscore', '/app/js/common.js',
                         });
                         return collection;
                     }
-
+                    function loadDateFilters(){
+                        addFilter('publishedOn',  {'sort': 1,'type':'date',  'name':'Published On', 'id':'publishedOn', 'description':'Date range when the record was published'});
+                    };
                   //===============================================================================================================================
                     function loadSchemaFilters() {
                        //national

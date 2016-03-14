@@ -26,7 +26,7 @@
                     <li> <a href="" ng-class="{'active':showFilters=='thematic'}" ng-click="showFilters=(showFilters=='thematic' ? false : 'thematic')" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Keywords</a> </li>
                     <li> <a href="" ng-class="{'active':showFilters=='country'}" ng-click="showFilters=(showFilters=='country' ? false : 'country')" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Country</a> </li>
                     <li> <a href="" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Region</a ></li>
-                    <li> <a href="" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Date</a> </li>
+                    <li> <a href="" ng-class="{'active':showFilters=='dateFilter'}" ng-click="showFilters=(showFilters=='dateFilter' ? false : 'dateFilter')"class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Date</a> </li>
                 </ul>
             </div>
         </div>
@@ -51,6 +51,8 @@
                 <country-filter ng-if="showFilters==='country' || (searchKeyword && !showFilters)"></country-filter>
 
                 <thematic-filter ng-if="showFilters==='thematic' || (searchKeyword && !showFilters)"></thematic-filter>
+
+                <date-filter ng-if="showFilters==='dateFilter' || (searchKeyword && !showFilters)"></date-filter>
             </div>
         </div>
     </div>
