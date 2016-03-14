@@ -8,21 +8,23 @@ define(['app', 'underscore', '/app/js/common.js', 'scbd-angularjs-controls','boo
             // transclude: true,
             require:'^searchDirective',
             templateUrl: '/app/views/search-new/search-filters/date-filter.html',
-            scope: {},
+            scope: false,
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
                 // $scope.since = {};
-                // $scope.until = {};
 
                 $scope.df_fitlers = searchDirectiveCtrl.getSearchFilters("date");
 
             },//link
             controller  : ['$scope', function($scope){
-                $scope.$watch('since', function(newVal){
+
+            $scope.dateFilter = {since : null,
+                                 until : null};
+                $scope.$watch('dateFilter.since', function(newVal){
                     if(newVal)
                         saveQuery();
                 });
 
-                $scope.$watch('until', function(newVal){
+                $scope.$watch('dateFilter.until', function(newVal){
                     if(newVal)
                         saveQuery();
                 });
@@ -30,9 +32,9 @@ define(['app', 'underscore', '/app/js/common.js', 'scbd-angularjs-controls','boo
                 function saveQuery(){
                     var query;
 
-                    if($scope.since || $scope.until) {
-                        var since = $scope.since ? $scope.since + 'T00:00:00.000Z' : '*';
-                        var until = $scope.until ? $scope.until + 'T23:59:59.999Z' : '*';
+                    if($scope.dateFilter.since || $scope.dateFilter.until) {
+                        var since = $scope.dateFilter.since ? $scope.dateFilter.since + 'T00:00:00.000Z' : '*';
+                        var until = $scope.dateFilter.until ? $scope.dateFilter.until + 'T23:59:59.999Z' : '*';
 
                         query = '[ ' + since + ' TO ' + until + ' ]';
                     } else {
@@ -40,6 +42,11 @@ define(['app', 'underscore', '/app/js/common.js', 'scbd-angularjs-controls','boo
                     }
                     $scope.saveDateFilter($scope.df_fitlers[0].id, query);
                 }
+
+                // if($scope.df_fitlers.length > 0){
+                // //    if($scope.df_fitlers[0])
+                // console.log($scope.df_fitlers);
+                // }
             }]
         };
     });

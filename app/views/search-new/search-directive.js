@@ -336,9 +336,9 @@ define(['app', 'underscore', '/app/js/common.js',
                                qOr.push(buildTextQuery('title_t'      ,'freeText'   , null));
                                qOr.push(buildTextQuery('description_t','freeText'   , null));
                         }
-                        if(queryType == 'date'){
-                            qAnd.push(buildFieldQuery('updatedDate_dt','date'));
-                        }
+
+                        qAnd.push(buildDateFieldQuery('updatedDate_dt','publishedOn'));
+
                         q = combineQuery(qAnd, "AND");
                         q1 = combineQuery(qOr, "OR");
                         $scope.test = q1 ? q + " AND (" + q1 + ")" : q;
@@ -386,6 +386,13 @@ define(['app', 'underscore', '/app/js/common.js',
                              return field + ":(" + allFilters + ")";
                         else
                              return null;
+                    }
+                    function buildDateFieldQuery(field, type){
+
+                        if($scope.setFilters[type] && $scope.setFilters[type].query != '*:*'){
+                            return field + ":" + $scope.setFilters[type].query;
+                        }
+                        return null;
                     }
 
                   //===============================================================================================================================
