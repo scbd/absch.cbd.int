@@ -17,7 +17,7 @@
                         <label >Party Status:</label> 
                         <span ng-if="!country.isNPParty && !country.isNPInbetweenParty" class="color-grey bold">Not a Party to the Nagoya Protocol</span>
                         <span ng-if="country.isNPParty" class="color-party bold">Party to the Nagoya Protocol</span>
-                         <span ng-if="country.isNPInbetweenParty" class="color-inbetween bold">Ratified not yet Party to the Nagoya Protocol</span>
+                        <span ng-if="country.isNPInbetweenParty" class="color-inbetween bold">Ratified not yet Party to the Nagoya Protocol</span>
                     </div>
                     <div>
                         <label>Signatory:</label> 
@@ -28,9 +28,9 @@
                         <label>Enter<span ng-if="country.isNPInbetweenParty">s</span><span ng-if="country.isNPParty">ed</span> into force on:</label> 
                         <span class="color-grey bold">{{country.entryIntoForce|formatDate}}</span>
                     </div>
-                    <div>
+                    <div style="white-space:nowrap;overflow-x:hidden;">
                         <label>CBD Country Profile:</label> 
-                        <a href="https://www.cbd.int/countries/?country={{country.code}}" target="_new"> www.cbd.int/countries/?country={{country.code}} </a>
+                        <a  href="https://www.cbd.int/countries/?country={{country.code}}" target="_new"> www.cbd.int/countries/?country={{country.code}} </a>
                     </div>
 
             </div>

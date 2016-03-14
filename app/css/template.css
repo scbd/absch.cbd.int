@@ -1235,6 +1235,10 @@ footer .logo {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   transition: all 0.1s ease-in-out;
 }
+.card-1-notrans{
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
 
 .card-1:hover {
   background-color: #EEE!important;
@@ -1363,17 +1367,36 @@ footer .logo {
         }
     }
 
- #search-new .search > ul {margin:0;padding:0;list-style-type: none;}
-        #search-new .search > ul li{ display: inline;font-weight:bold;line-height:40px; z-index:20; position:relative;}
-        #search-new .search > ul li > a {padding:8px 10px 8px 10px;border-top-left-radius:3px;border-top-right-radius:3px; font-weight:bold;}
-        #search-new .search > ul li > a:hover, #search-new .search > ul li > a:focus {background-color: #DDD; border: 1px solid #e3e3e3;}
-        #search-new .search > ul li > a.active {border-bottom-left-radius:0; border-bottom-right-radius:0;  border: 1px solid #e3e3e3; border-bottom:0; padding-bottom:10px;background-color: #DDD; box-shadow:none!important;  }
-        #search-new label{font-weight:bold!important;}
-        #search-new .active .badge {background-color: #333;color:white;}
-        #search-new .section-title{color:#999;font-weight: bold;}
-        #search-new .active{background-color: #EEE}
-        #search-new .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus{background-color: #FFF!important;position:relative;top:3px;border:1px solid #e3e3e3;  border-bottom:0;}
-        #search-new .tab-content { border-bottom:1px solid #e3e3e3; border-left:1px solid #e3e3e3; border-right:1px solid #e3e3e3; }
-        #search-new .nav-tabs>li {margin-bottom:0; font-weight:bold; font-size:16px;}
-        #search-new  .nav-tabs > li > a:hover{background-color: #DDD; }
-        #search-new .no-rl-padding{padding-left:0!important;margin-left:0!important;padding-right:0!important;margin-right:0!important;}
+#search-new .search > ul {margin:0;padding:0;list-style-type: none;}
+#search-new .search > ul li{ display: inline;font-weight:bold;line-height:40px; z-index:20; position:relative;}
+#search-new .search > ul li > a {padding:8px 10px 8px 10px;border-top-left-radius:3px;border-top-right-radius:3px; font-weight:bold;}
+#search-new .search > ul li > a:hover, #search-new .search > ul li > a:focus {background-color: #DDD; border: 1px solid #e3e3e3;}
+#search-new .search > ul li > a.active {border-bottom-left-radius:0; border-bottom-right-radius:0;  border: 1px solid #e3e3e3; border-bottom:0; padding-bottom:10px;background-color: #DDD; box-shadow:none!important;  }
+#search-new label{font-weight:bold!important;}
+#search-new .active .badge {background-color: #333;color:white;}
+#search-new .section-title{color:#999;font-weight: bold;}
+#search-new .active{background-color: #EEE}
+#search-new .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus{background-color: #FFF!important;position:relative;top:3px;border:1px solid #e3e3e3;  border-bottom:0;}
+#search-new .tab-content { border-bottom:1px solid #e3e3e3; border-left:1px solid #e3e3e3; border-right:1px solid #e3e3e3; }
+#search-new .nav-tabs>li {margin-bottom:0; font-weight:bold; font-size:16px;white-space:nowrap;}
+#search-new .nav-tabs>li {margin-bottom:0; font-weight:bold; font-size:16px; white-space:nowrap!important;display:inline-block;}
+#search-new  .nav-tabs > li > a{white-space:nowrap; }
+#search-new .no-rl-padding{padding-left:0!important;margin-left:0!important;padding-right:0!important;margin-right:0!important;}
+
+.tooltip{font-size:14px;}
+.helpinfoInline{cursor:pointer;}
+.comma:not(:last-of-type):after {
+  content: ",";
+}
+.comma:nth-last-of-type(2):before {
+  content: none;
+}
+.comma:nth-last-of-type(2):after {
+  content: " and ";
+}
+    #RegisterPage dt{color:#888;margin-top:3px;}
+        #RegisterPage dd{color:#333;margin-top:3px;font-weight:bold;}
+        #RegisterPage .register-content {background-color: #FFF;margin:20px 0; }
+        #RegisterPage .register-content-header  h3 {padding:0;margin:0 0 5px 0;}
+        #RegisterPage .register-content-content {padding:20px;}
+        #RegisterPage  .cp-header label{margin-right:10px; width:140px; color:#999; font-weight: bold;}

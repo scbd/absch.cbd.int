@@ -1,24 +1,28 @@
 define(['app', 'underscore', '/app/services/role-service.js'], function(app, _) {
-
-    app.directive("registerLeftMenu", [
+    app.directive("recordOverview", [
         function() {
 
             return {
                 restrict: "EA",
-                templateUrl: "/app/views/register/directives/register-left-menu.html",
+                templateUrl: "/app/views/register/directives/record-overview.html",
                 replace: true,
                 transclude: false,
                 require     : '^^absRegister',
                 scope : {},
                 link    : function($scope, element, attrs, absRegisterCtrl){
                     // console.log(absRegisterCtrl);
+                    
+                    //===================================================================
                     $scope.gotoList = function($event, type){
                         absRegisterCtrl.gotoList($event, type);
                     }
+                    
+                    //===================================================================
                     $scope.gotoNew = function($event, type){
                         absRegisterCtrl.gotoNew($event, type);
                     }
 
+                    //===================================================================
                     $scope.facets = function(schema, type){
                         var facetList = absRegisterCtrl.getFacets();
 
@@ -28,16 +32,19 @@ define(['app', 'underscore', '/app/services/role-service.js'], function(app, _) 
                         }
 
                     };
+                    
+                    //===================================================================
+                    $scope.isActiveTab = function(){
+                        return false;
+                    }
+                    
+                    
+                    
                 },
                 controller : ['$scope', '$element', 'roleService', '$rootScope', '$compile', '$filter', '$routeParams',
                     function($scope, $element, roleService, $rootScope, $compile, $filter, $routeParams){
 
-                    //this is used to highlight the item on the left
-                    $scope.document_type = $filter("mapSchema")($routeParams.document_type);
-
-
                     if ($rootScope.user && $rootScope.user.isAuthenticated && roleService.hasAbsRoles()) {
-
                         require(['/app/views/register/directives/national-records-menu.html.js'], function(menu) {
                             $scope.$apply(function() {
                                 // console.log(menu);

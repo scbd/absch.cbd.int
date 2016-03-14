@@ -1,13 +1,3 @@
 <div>
-        <div layout="column" layout-align="top center">
-            <md-button ng-click="toggleLeft()" class="md-primary md-raised bg-medgrey" hide-gt-lg style="margin: 0  0 10px 0;">
-                <i class="material-icons" style="position:relative;top:6px;">menu</i> Management Center
-            </md-button>
-            <div help schema="{{helpSchema}}" repalce-glossary-terms="true">
-                <div>
-                    <!-- block-ui block-ui-pattern="/^\/api\/v2013\/documents($|\/).*/" -->
-                    <ng-include src="subTemplateUrl" style="min-height:980px;" ng-show="user.isAuthenticated"></ng-include>
-                </div>
-            </div>
-        </div>        
+    <ng-include src="subTemplateUrl" style="min-height:980px;" ng-show="user.isAuthenticated"></ng-include>
 </div>

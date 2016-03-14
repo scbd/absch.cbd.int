@@ -1,74 +1,23 @@
-<div ng-controller="TypeDocumentListController">
-
-    <!-- ng-intro-options="introOptions" ng-intro-method="startIntro" ng-intro-autostart="startTour" -->
-    <style>
-        .nav-underline {
-            position: relative;
-        }
-
-        .nav-underline a {
-            color: #ddd;
-            font-size: 14px;
-            /*font-family: 'alternategotno3dotregular';*/
-            text-transform: uppercase;
-            text-rendering: optimizeLegibility;
-            /*letter-spacing: 1px;*/
-            text-shadow: 0 1px 2px rgba(0, 0, 0, .6)!important;
-            margin-right: 30px;
-        }
-
-        .nav-underline > li > a:hover {
-            background-color: transparent!important;
-            border-bottom: 5px solid #FFEB3B;
-            margin-bottom: 0;
-            padding-bottom: 0;
-            color: white;
-        }
-
-        .nav-underline > li > a.active {
-            background-color: transparent!important;
-            border-bottom: 5px solid #FFEB3B;
-            margin-bottom: 0;
-            padding-bottom: 0;
-            color: white;
-        }
-    </style>
-
-
-    <div class="md-whiteframe-z1">
-
-        <md-toolbar ng-class="{'bg-blue': type.schemaType != 'referenceRecords','bg-orange': type.schemaType == 'referenceRecords' }">
-            <div class="md-toolbar-tools">
-                <h2 class="md-flex">
-                    <span>{{type.title}}
-                        <span class="color-darkgrey">({{type.abbreviation}})</span>
-                    </span>
-                </h2>
-            </div>
-        </md-toolbar>
-        <md-content layout-padding style="padding: 24px;">
-
-            <div class="registerpage-content">
-                <legend name="formInfo" style="display:none"></legend>
-
-
-
-                <div ng-show="msg" class="alert alert-success alert-dismissable">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="msg=''">&times;</button>
-                    <strong>{{msg}}</strong>
+<div ng-controller="TypeDocumentListController"  class="register-content card card-1-notrans">
+    <div class="register-content-header color-white" ng-class="{'bg-blue': type.schemaType != 'referenceRecords','bg-orange': type.schemaType == 'referenceRecords' }">
+      <div style="padding:10px 10px;">
+        <h4>{{type.title}} <span class="color-darkgrey"> ({{type.abbreviation}})</span></h4>
+      </div>
+  </div>
+  <div class="register-content-content" >
+        <div ng-show="msg" class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="msg=''">&times;</button>
+            <strong>{{msg}}</strong>
+        </div>
+        <div ng-show="path=='/register/'+type.abbreviation">
+            <div ng-hide="editing">
+                <div ng-show="user.isAuthenticated">
+                    <register-record-list records="records" schema="{{type.abbreviation|mapSchema}}"></register-record-list>
                 </div>
-
-                <div ng-show="path=='/register/'+type.abbreviation">
-                    <div ng-hide="editing">
-                        <div ng-show="user.isAuthenticated">
-                            <register-record-list records="records" schema="{{type.abbreviation|mapSchema}}"></register-record-list>
-                        </div>
-                    </div>
-                </div>
-
             </div>
-
-        </md-content>
-    </div>
-
+        </div>
+  </div>
+  
+  
+  
 </div>

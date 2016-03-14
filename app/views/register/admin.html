@@ -1,0 +1,18 @@
+<div ng-controller="AdminController" class="register-content card card-1-notrans" style="min-height:970px;" >
+ <div class="register-content-header bg-pink color-white">
+      <div style="padding:10px 10px;">
+        <h3>ABSCH Admin </h3>
+      </div>
+  </div>
+  <div class="register-content-content" ng-if="roles.isAbsAdministrator || roles.isAdministrator">
+         <div class="row" style="padding:0;margin:0 0 30px 0;" >
+             <div class="col-md-12 cp-header">
+                  <table style="width:100%;">
+                    <tr>
+                        <td><label>Current Realm: </label></td>
+                        <td><span switch-realm></span></td>
+                    </tr>
+                  </table>
+          </div>
+  </div>
+</div> <!-- controller -->

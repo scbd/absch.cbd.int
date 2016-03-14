@@ -68,6 +68,7 @@ define(['app', 'underscore', '/app/js/common.js',
                            delete $scope.setFilters[id];
                         else{
                            $scope.setFilters[id] = {'type':'freeText', 'name': ""+text+"", 'id':id};
+                           $scope.searchKeyword = "";
                         }
 
                         $scope.refresh = true;
@@ -544,7 +545,7 @@ define(['app', 'underscore', '/app/js/common.js',
                         addFilter('news',  {'sort': 1,'type':'scbd', 'name':'News', 'id':'news', 'description':'ABS related news'});
                         addFilter('notification',  {'sort': 2,'type':'scbd',  'name':'Notifications', 'id':'notification', 'description':'ABS related notifcations'});
 
-                        addFilter('new',  {'sort': 3,'type':'scbd', 'name':'Whs\'s New', 'id':'new', 'description':'What\n new'});
+                        addFilter('new',  {'sort': 3,'type':'scbd', 'name':'What\'s New', 'id':'new', 'description':'What\'s new'});
                         addFilter('meeting',  {'sort': 4,'type':'scbd',  'name':'Meetings', 'id':'meeting', 'description':'ABS related meetings'});
 
                         addFilter('statement',  {'sort': 3,'type':'scbd', 'name':'Statements', 'id':'statement', 'description':'ABS related statements'});

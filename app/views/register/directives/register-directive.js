@@ -1,5 +1,5 @@
 define(['app', 'linqjs', 'angular-localizer',
-    './register-content.js','./register-left-menu.js',
+    './register-content.js','./register-menu.js',
     'scbd-angularjs-services', 'scbd-angularjs-filters', 'scbd-angularjs-controls',
     'toastr', '/app/js/common.js'], function(app) {
 
@@ -13,10 +13,10 @@ define(['app', 'linqjs', 'angular-localizer',
                 scope   :{},
                 controller : ["$rootScope", "$location", "$scope", "$q", "$window", "IStorage", "underscore", "breadcrumbs",
                                 "schemaTypes", "$timeout", "$filter", "$routeParams", "$cookies", "bootbox", "realm", "IWorkflows",
-                                '$element', '$mdSidenav', '$mdUtil', '$mdMedia', 'toastr', '$compile', 'commonjs',
+                                '$element', 'toastr', '$compile', 'commonjs',
                     function($rootScope, $location, $scope, $q, $window, storage, _, breadcrumbs,
                                 schemaTypes, $timeout, $filter, $routeParams, $cookies, bootbox, realm, workflows,
-                                $element, $mdSidenav, $mdUtil, $mdMedia, toastr, $compile, commonjs) {
+                                $element, toastr, $compile, commonjs) {
 
                                 var document_type;
                                 $scope.user = $rootScope.user;

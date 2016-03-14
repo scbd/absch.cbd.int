@@ -1,12 +1,17 @@
-define(['app', '/app/views/directives/switch-realm-directive.html.js', '/app/services/role-service.js'], function(app) {
+define(['app',
+ '/app/services/role-service.js', 
+ '/app/views/register/directives/record-overview.js'], function(app) {
     "use strict";
     app.controller("DashboardController", ["$rootScope", "$scope", "underscore", "roleService", "IWorkflows", "realm", "$q",
-                    "$routeParams", '$location', "$filter", "$http",
-        function($rootScope, $scope, _, roleService, workflows, realm, $q, $routeParams, $location, $filter, $http) {
+                    "$routeParams", '$location', "$filter", "$http", "$element","$timeout",
+        function($rootScope, $scope, _, roleService, workflows, realm, $q, $routeParams, $location, $filter, $http, $element, $timeout) {
 
-
-
-
+            $timeout(function(){
+                $element.find('[data-toggle="tooltip"]').tooltip();
+            },50);    
+                        
+             
+            //====================================================================================
             $scope.isFilter = function(filter) {
                 return $scope.dashboardFilter == filter || $scope.dashboardFilter == "All";
             }
@@ -20,8 +25,10 @@ define(['app', '/app/views/directives/switch-realm-directive.html.js', '/app/ser
                     isAbsNationalAuthorizedUser : roleService.isAbsNationalAuthorizedUser(),
                     isUser                      : roleService.isUser()
                 };
+                
                 if($scope.user.government)
                     $scope.userCountry = {identifier:$scope.user.government };
+
             }
         }
     ]);

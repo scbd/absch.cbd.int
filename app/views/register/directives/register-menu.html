@@ -1,0 +1,25 @@
+<div>
+    <style>
+        #RegisterPage .menu-tabs {margin:0;padding:0;}
+        #RegisterPage .menu-tabs > ul {padding:0;margin:0;}
+        #RegisterPage .menu-tabs > ul li  {display: inline;z-index:20;margin-right:10px;border-radius: 3px; white-space:nowrap;}
+        #RegisterPage .menu-tabs > ul li > a {background-color: #f5f5f5; color:#666; font-weight:bold;font-weight:bold;line-height: 35px; padding:8px 10px 8px 10px; border-radius: 3px;}
+        #RegisterPage .menu-tabs > ul li > a:hover {background-color: #fff;}
+    </style>
+    
+   <h1 style="padding:0 0 5px 0;margin:0;border-bottom:1px solid #ddd;">ABSCH Record Management Center</h1>
+    
+      <div class="menu-tabs" style="margin-top:10px;">
+        <ul>
+            <!--<li style="text-transform:uppercase;padding-left:3px;padding-right:5px;color:#bbb;" ng-click="showFilters=null">search filters</li>-->
+            <li> <a href="/submit/dashboard" ng-class="{'active':isActiveTab('dashboard')}"  class=""> Dashboard</a> </li>
+            <li> <a href="/submit/requests"  ng-class="{'active':isActiveTab('dashboard')}" class=""> <span class="hidden-xs hidden-sm">Publishing</span> Requests</a> </li>
+            <!--<li class="hidden-xs"> <a href="" ng-class="{'active':isActiveTab('dashboard')}" ng-click="showTab='dashboard' ? false : 'dashboard'" class=""> <i class="fa fa-caret-down"></i> National Records</a> </li>
+            <li class="hidden-xs"> <a href="" ng-class="{'active':isActiveTab('dashboard')}" ng-click="showTab='dashboard' ? false : 'dashboard'" class=""> <i class="fa fa-caret-down"></i> Reference Records</a> </li>
+            <li class="hidden-xs"> <a href="" ng-class="{'active':isActiveTab('dashboard')}" ng-click="showTab='dashboard' ? false : 'dashboard'" class=""> Contacts</a> </li>-->
+            <li> <a href="/submit/national-users"  ng-class="{'active':isActiveTab('dashboard')}"  class=""> <span class="hidden-xs hidden-sm">National</span> User Management</a> </li>
+            <li> <a href="/submit/admin"  class="bg-pink linkDark" ><span class="color-white "><span class="hidden-xs hidden-sm">ABSCH</span> ADMIN</a></span></li>
+        </ul>
+    </div>
+    
+</div>
