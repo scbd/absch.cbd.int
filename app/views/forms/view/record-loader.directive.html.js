@@ -50,6 +50,7 @@ app.directive('recordLoader', [function () {
 				    meeting				       : '/app/views/forms/view/view-meeting.directive.html.js',
 				    statement			       : '/app/views/forms/view/view-statement.directive.html.js',
 				    pressRelease		       : '/app/views/forms/view/view-pressrelease.directive.html.js',
+				    new					       : '/app/views/forms/view/view-new.directive.html.js',
 				    notification		       : '/app/views/forms/view/view-notification.directive.html.js',
 					capacityBuildingInitiative : '/app/views/forms/view/view-capacity-building-initiative.directive.js',
 					capacityBuildingResource   : '/app/views/forms/view/view-capacity-building-resource.directive.js'
@@ -119,7 +120,8 @@ app.directive('recordLoader', [function () {
 			$scope.loadDocument = function(documentSchema,documentID,documentRevision){
 
 				if(documentSchema && (documentSchema.toUpperCase()=="FOCALPOINT" || documentSchema.toUpperCase()=="MEETING" || documentSchema.toUpperCase()=="NOTIFICATION"
-				|| documentSchema.toUpperCase()=="PRESSRELEASE" || documentSchema.toUpperCase()=="STATEMENT" || documentSchema.toUpperCase()=="NEWS"))
+				|| documentSchema.toUpperCase()=="PRESSRELEASE" || documentSchema.toUpperCase()=="STATEMENT" || documentSchema.toUpperCase()=="NEWS"
+				|| documentSchema.toUpperCase()=="NEW"))
 				{
 					commonjs.getReferenceRecordIndex(documentSchema,documentID).then(function(data){
 						$scope.internalDocument = data.data;

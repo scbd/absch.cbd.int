@@ -15,7 +15,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                         queryFields += 'symbol_s,startDate_dt,endDate_dt,eventCountry_CEN_s,title_s,eventCity_s,text_EN_txt,themes_CEN_ss,thematicAreas_CEN_ss,thematicAreas_ss';
                     } else if (schema.toUpperCase() == "NOTIFICATION") {
                         queryFields += 'date_s,deadline_s,symbol_s,reference_s,sender_s,schema_CEN_s,title_EN_t,description_EN_t,recipient_ss,url_ss,text_EN_txt';
-                    } else if (schema.toUpperCase() == "PRESSRELEASE" || schema.toUpperCase() == "STATEMENT" || schema.toUpperCase() == "NEWS") {
+                    } else if (schema.toUpperCase() == "PRESSRELEASE" || schema.toUpperCase() == "STATEMENT" || schema.toUpperCase() == "NEWS"|| schema.toUpperCase() == "NEW") {
                         queryFields += 'date_s,symbol_s,schema_CEN_s,title_EN_t,description_EN_t,themes_CEN_ss,url_ss,thematicAreas_CEN_ss,text_EN_txt';
                     }
 
@@ -76,10 +76,10 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                             return countries;
                         });
                 };
-                
-                
-                
-                
+
+
+
+
                 this.getCountry = function(code) {
 
                     var fromStorage = localStorageService.get('countries');
@@ -160,7 +160,8 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
 
                 this.integerToHex = function(d, schema) {
                     var schemaCode = '';
-                    if (schema.toLowerCase() == "pressrelease" || schema.toLowerCase() == "statement" || schema.toLowerCase() == "news")
+                    if (schema.toLowerCase() == "pressrelease" || schema.toLowerCase() == "statement"
+                    || schema.toLowerCase() == "news"|| schema.toLowerCase() == "new")
                         schemaCode = "52000000cbd0180000000000";
                     else if (schema.toLowerCase() == "notification")
                         schemaCode = "52000000cbd0120000000000";

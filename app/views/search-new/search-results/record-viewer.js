@@ -24,7 +24,7 @@ define(['app', 'underscore', '/app/js/common.js',
 
               var schemaMapping = {
 					news 				: '/app/views/forms/view/view-news.directive.html.js',
-	  				new 				: '/app/views/forms/view/view-whats-new.directive.html.js',
+	  				new 				: '/app/views/forms/view/view-new.directive.html.js',
 					absNationalReport 	: '/app/views/forms/view/view-abs-national-report.directive.js',
 					absCheckpoint		: '/app/views/forms/view/view-abs-checkpoint.directive.js',
 				    absCheckpointCommunique: '/app/views/forms/view/view-abs-checkpoint-communique.directive.js',

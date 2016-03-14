@@ -1,9 +1,9 @@
 define(['app'], function (app) {
 
-app.directive('viewWhatsNew', [function() {
+app.directive('viewNew', [function() {
 	return {
 		restrict: 'EAC',
-		templateUrl: '/app/views/forms/view/view-whats-new.directive.html',
+		templateUrl: '/app/views/forms/view/view-new.directive.html',
 		replace: true,
 		transclude: false,
 		scope: {
