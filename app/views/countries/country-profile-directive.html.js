@@ -2,6 +2,7 @@
    '/app/views/search/measure-matrix-countries-directive.html.js',
    '/app/js/common.js',
    '/app/views/search-new/search-results/result-grouped-national-record.js',
+   '/app/services/search-service.js', '/app/services/app-config-service.js'
  ], function(app, _, linqjs) {
 
     app.directive('countryProfile', function() {
@@ -14,10 +15,11 @@
                 code : '='
             },
             controller: ["$scope", "$http", "$routeParams", "linqjs", "$filter", "realm",
-                "commonjs", "$q", '$element', '$timeout','commonjs','IStorage','$rootScope','$mdSidenav',
-                '$mdUtil', '$mdMedia','schemaTypes','breadcrumbs','smoothScroll','$location',
+                "commonjs", "$q", '$element', '$timeout','commonjs','IStorage','$rootScope',
+                'schemaTypes','breadcrumbs','smoothScroll','$location', 'searchService', 'appConfigService',
                 function($scope, $http, $routeParams, linqjs, $filter, realm, commonjs, $q,
-                            $element, $timeout, countriescommonjs, IStorage,$rootScope, $mdSidenav, $mdUtil, $mdMedia, schemaTypes, breadcrumbs,smoothScroll,$location) {
+                            $element, $timeout, countriescommonjs, IStorage,$rootScope,
+                            schemaTypes, breadcrumbs,smoothScroll,$location, searchService, appConfigService) {
 
                 $scope.api = {
                     loadCountryDetails : $scope.loadCountryDetails
@@ -37,6 +39,7 @@
                         $scope.showCNA = false;
                         $scope.showCP = false;
                         $scope.showCPCRecv = false;
+                        $scope.showNR = false;
 
                         $scope.sortMeasure="[jurisdiction_sort, type_sort, status_sort, createdDate_dt, title_t]";
                         $scope.reverseMeasure=false;
@@ -60,6 +63,7 @@
                     $scope.absCheckpointCommunique = 0;
                     $scope.database= 0;
                     $scope.showMatrix = false;
+                    $scope.absNationalReport = 0;
 
                     if ($location.absUrl().toLowerCase().indexOf("://dev-absch.cbd.int") > 0 || $location.absUrl().toLowerCase().indexOf("localhost:2010") > 0 ||
                         $location.absUrl().toLowerCase().indexOf("://training-absch.cbd.int") > 0) {
@@ -85,28 +89,25 @@
                     });
 
                     //*******************************************************
-                    var schema = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database"]
-                    var schemQuery = ' (schema_s:' + schema.join(' OR schema_s:') + ' OR (schema_s:focalPoint AND (type_ss:NP-FP OR type_ss:ABS-IC OR type_ss:ABS-FP)))';
-                    var queryURL = '/api/v2013/index/select?fl= id, rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s,'
-                                    + 'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t,' +
-                                         '' +
-                                        '&q=(realm_ss:' + realm.value.toLowerCase() + ' OR realm_ss:absch) AND ((' + schemQuery +
-                                        ' AND government_s:' + $scope.code.toLowerCase() + ') OR (originCountries_ss:'+
-                                        $scope.code.toLowerCase() + ' OR permitSourceCountry_ss:' + $scope.code.toLowerCase() + '))' +
-                                        '&rows=100&sort=createdDate_dt+desc,+title_t+asc&start=0&wt=json';
-                        var queryCPCRevURL = '/api/v2013/index/select?fl=id,identifier_s,title_t,keywords_CEN_ss'+
-                                        'checkpoint_CEN_ss,createdDate_dt,geneticRessourceUsers_s,government_s,permit_ss,' +
-                                        '&q=(realm_ss:' + realm.value.toLowerCase() + ' OR realm_ss:absch) AND schema_s:absCheckpointCommunique AND (originCountries_ss:'+
-                                        $scope.code.toLowerCase() + ' OR permitSourceCountry_ss:' + $scope.code.toLowerCase() + ')' +
-                                        '&rows=100&sort=createdDate_dt+desc,+title_t+asc&start=0&wt=json';
-                    var queryProfile = $http.get(queryURL, {cache: true})
-                    var queryCPCRecv = $http.get(queryCPCRevURL, {cache: true})
+                        // var queryCPCRevURL = '/api/v2013/index/select?fl=id,identifier_s,title_t,keywords_CEN_ss'+
+                        //                 'checkpoint_CEN_ss,createdDate_dt,geneticRessourceUsers_s,government_s,permit_ss,' +
+                        //                 '&q=(realm_ss:' + realm.value.toLowerCase() + ' OR realm_ss:absch) AND schema_s:absCheckpointCommunique AND (originCountries_ss:'+
+                        //                 $scope.code.toLowerCase() + ' OR permitSourceCountry_ss:' + $scope.code.toLowerCase() + ')' +
+                        //                 '&rows=100&sort=createdDate_dt+desc,+title_t+asc&start=0&wt=json';
 
-                    $q.all([queryProfile,queryCPCRecv])
+                    var searchQuery = {
+                        fields  : 'id,rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s,rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t',
+                        query   : 'schema_s:(' + appConfigService.nationalSchemas.join(' ') +') AND (government_s:' + $scope.code.toLowerCase() + ' OR (originCountries_ss:' +
+                                   $scope.code.toLowerCase() + ' OR permitSourceCountry_ss:' + $scope.code.toLowerCase() + '))'
+                    };
+                    //
+                    // var queryCPCRecv = $http.get(queryCPCRevURL, {cache: true})
+
+                    $q.all([searchService.list(searchQuery)])//,queryCPCRecv
                         .then(function(results) {
 
                         $scope.absch_nfp = results[0].data.response.docs;
-                        $scope.cpcReceived = results[1].data.response.docs;
+                        // $scope.cpcReceived = results[1].data.response.docs;
                         var measureMatrixDocuments = [];
 
                         $scope.absch_nfp.forEach(function(document){
@@ -200,12 +201,12 @@
                         });
                         $scope.measureMatrixDocuments = measureMatrixDocuments;
                         $scope.measureMatrixDocuments.selectAll = true;
-                        $scope.cpcReceived.forEach(function(document){
-                            if(document.geneticRessourceUsers_s){
-                                document.geneticRessourceUsers = $scope.parseJSON(document.geneticRessourceUsers_s);
-                            }
-                            $scope.cpcReceivedCount++;
-                        });
+                        // $scope.cpcReceived.forEach(function(document){
+                        //     if(document.geneticRessourceUsers_s){
+                        //         document.geneticRessourceUsers = $scope.parseJSON(document.geneticRessourceUsers_s);
+                        //     }
+                        //     $scope.cpcReceivedCount++;
+                        // });
                         $scope.getFacets($scope.absch_nfp);
                         $('[data-toggle="tooltip"]').tooltip()
 
@@ -267,26 +268,13 @@
                     $scope.resource = linqObj.count(function(schema) {
                     return schema.schema_s.toLowerCase() == 'resource';
                     });
+
+                    $scope.absNationalReport = linqObj.count(function(schema) {
+                    return schema.schema_s.toLowerCase() == 'absnationalreport';
+                    });
                 }
 
-                //    $scope.$watch('searchText.$', function(value) {
-                //
-                //      if (undefined == value || value == null || $scope.absch_nfp == null) return;
-                //      $scope.getFacets($filter('filter')($scope.absch_nfp.response.docs, value));
-                //
-                //
-                //    });
-
                 $scope.showlist = false;
-
-                //    $scope.$on('mapDetailsLoad', function(evt, data){
-                //        $scope.mapDetails = data.mapDetails;
-                //        $scope.type = 'party';
-                //       if ($routeParams.code && $routeParams.code.toUpperCase() != 'RAT')
-                //         $scope.show('profile');
-                //       else
-                //         $scope.show('map');
-                //    })
 
                 //**********************************************************
                 $scope.countriescommonjs = countriescommonjs;
@@ -338,6 +326,12 @@
                     return entity && entity.schema_s == "authority";
                 }
 
+                $scope.isNationalReport = function(entity){
+
+                    return entity && entity.schema_s == "absNationalReport";
+                }
+
+
                 $scope.showDetails = function(document){
                     //$scope.currentDocument = documentId;
                     if(!document.data){
@@ -373,39 +367,6 @@
                 $scope.parseJSON = function(value){
                     if(value)
                         return JSON.parse(value);
-                }
-
-                function getCountriesFacets(){
-                    var schema = _.clone(schemaTypes);
-                    schema.push('focalPoint');
-                        var queryFacetsParameters = {
-                            'q': 'realm_ss:' + realm.value.toLowerCase() + ' AND NOT version_s:* AND schema_s:(' + schema.toString().replace(/,/g, ' ') + ')',
-                            'fl': '', 		//fields for results.
-                            'wt': 'json',
-                            'rows': 0,		//limit
-                            'facet': true,	//get counts back
-                            'facet.field': ['government_s'],
-                            'facet.mincount':1,
-                            'facet.limit': 512
-                        };
-
-                        $http.get('/api/v2013/index/select', { params: queryFacetsParameters }).success(function (data) {
-                            var solrArray = data.facet_counts.facet_fields.government_s;
-                            for (var i = 0; i < solrArray.length; i += 2) {
-                                var country = _.findWhere($scope.countries, {code:solrArray[i].toUpperCase()});
-                                if(country){
-                                    country.facetCount =  solrArray[i + 1];
-                                }
-                                else {
-                                        console.log(solrArray[i]);
-                                    }
-
-                            }
-
-                        }).error(function (error) {
-                            console.log('onerror');
-                            console.log(error);
-                        });
                 }
 
                 $scope.isForMeasureMatrix = function(measure){
