@@ -142,6 +142,9 @@ define(['app', 'underscore'], function (app, _) { 'use strict';
                     throw 'Realm not configured, please update realm-configuration.js';
             }
         }
+		function nationalRoles(){
+			return _.flatten(_.map(getRoles(),function(role){return _.values(role);}));
+		}
 
 		function getSiteMapUrls(){
 			return {
@@ -170,6 +173,7 @@ define(['app', 'underscore'], function (app, _) { 'use strict';
 			setCurrentRealm  	:   setCurrentRealm,
 
 			getRoles            :   getRoles,
+			nationalRoles		:	nationalRoles,
 			getRoleName			:	getRoleName,
 
 			getSiteMapUrls		:	getSiteMapUrls

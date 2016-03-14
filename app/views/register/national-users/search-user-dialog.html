@@ -79,7 +79,21 @@
 
         </form>
 
-        <div ng-if="searchUserDialogCtrl.user">
+        <div ng-if="searchUserDialogCtrl.error">
+
+            <div ng-switch="searchUserDialogCtrl.error.code">
+                <div class="alert alert-warning" ng-switch-when="forbidden">
+                    <b>Oups...</b> We're sorry, but you are not authorized to nominate a new user.
+                </div>
+                <div class="alert alert-danger" ng-switch-default>
+                    <b>Oops...</b> We're sorry, but something went wrong.
+                    <br> {{searchUserDialogCtrl.error|json}}
+                </div>
+            </div>
+
+        </div>
+
+        <div ng-if="!searchUserDialogCtrl.error && searchUserDialogCtrl.user">
 
 
             <div class="panel panel-default panel-identity panel-identity-new" ng-show="searchUserDialogCtrl.user.new" style=";position:relative">

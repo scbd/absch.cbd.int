@@ -13,6 +13,8 @@ define([], function() {
                 pendingRequest = null;
             }
 
+            delete _ctrl.error;
+
             if($scope.form.$invalid || !_ctrl.email)
                 return;
 
@@ -36,6 +38,7 @@ define([], function() {
                     return; // request canceled
 
                 _ctrl.error = err.data || err;
+                _ctrl.error.url = ((err||{}).config||{}).url;
 
             }).finally(function(){
 

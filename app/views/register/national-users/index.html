@@ -1,126 +1,128 @@
-<div>
+<div ng-controller="nationalUsersController">
+    <style>
+        .ngdialog-content {
+            background: transparent !important;
+        }
 
-    <div class="bg-white md-whiteframe-z1">
+        .ngdialog.ngdialog-theme-default.wide .ngdialog-content {
+            width: 750px !important;
+        }
+    </style>
 
-        <div class="bg-medgrey">
-            <h3 class="md-toolbar-tools color-white">National Users</h3>
-        </div>
+    <div class="bg-medgrey">
+        <h3 class="md-toolbar-tools color-white">National Users</h3>
+    </div>
+    <div style="padding: 10px;" class="bg-white md-whiteframe-z1">
 
-        <div style="padding: 10px;" ng-controller="nationalUsersController">
-            <style>
-                .ngdialog-content {
-                    background: transparent !important;
-                }
+        <div class="row">
+            <div class="col-xs-12">
 
-                .ngdialog.ngdialog-theme-default.wide .ngdialog-content {
-                    width: 750px !important;
-                }
-            </style>
+                <p>
+                    This page allows you to manage national users and their roles.
+                </p>
 
+                <p>
+                    The following roles can be granted to national users:
+                </p>
 
-            <div class="row">
-                <div class="col-xs-12">
+                <ul>
+                    <li><b>Drafting Role</b> – A user with this role is called a
+                        <em>National Authorized User (NAU)</em>. S/he can draft national content but cannot publish it.</li>
+                    <li><b>Publishing Role</b> – A user with this role is called a
+                        <em>National Publishing Authority (NPA)</em>. S/he can publish national content, including content drafted by national authorized users.</li>
+                </ul>
 
-                    <div class="alert alert-danger">TODO COMPOSE/REVIEW TEXT</div>
+                <p></p>
 
-                    <p>
-                        As National Focal Point (NFP) or Publishing Authority (PA) you are authorized to use the Management Center to create, delete, or modify national records pertaining to your country. Only NFPs/PAs have the right to validate information for their own country
-                        (i.e. make the changes publicly available).
-                    </p>
+            </div>
 
-                    <p>
-                        In some instances, NFPs may wish to delegate to PAs or National Authorized Users (NAUs) some or all of the responsibilities of registering information in the CHM. PAs and NAUs can create and manage draft records in all or certain CHM's categories of information.
-                        However, all new records created by NAUs, as well as any modifications that they make to existing records, are subject to validation either by the NFP or the PA, in the case of National records, or by the Secretariat in the case of Reference
-                        records prior to publication in the CHM.
-                    </p>
+            <div class="col-xs-12" ng-show="error">
 
-                    <p>
-                        The module below allows NFPs to add, edit or delete roles of PAs and NAUs for all records or for specific types of records. It also allows NFPs to add, edit or delete roles of NAUs. When adding a new PA or NAU, the NFP (or the PA) will be asked to enter
-                        the email address of the person to be nominated. The system will automatically search for any match in the list of the CBD registered users. If the new PA/NAU is not yet registered, it will ask for further details. Whether the user is
-                        new or already registered, the system will present to the NFP (or the PA) a list of roles that can be added and will notify the NAU (or the PA) of the appointment or any changes in the appointment.
-                    </p>
-                </div>
-
-                <div class="col-xs-12" ng-show="error">
-                    <div class="alert alert-danger">
-                        <b>TODO CLEAN ERROR:<b/><br>
-                        {{error}}
+                <div ng-switch="error.code + '-' + error.field">
+                    <div class="alert alert-warning" ng-switch-when="mandatory-government">
+                        <b>Oops...</b> We're sorry, but you are not member of any government.
+                    </div>
+                    <div class="alert alert-warning" ng-switch-when="forbidden-">
+                        <b>Oups...</b> We're sorry, but you are not authorized access this page.
+                    </div>
+                    <div class="alert alert-danger" ng-switch-default>
+                        <b>Oops...</b> We're sorry, but something went wrong. {{error|json}}
                     </div>
                 </div>
 
-                <div class="col-sm-offset-8 col-sm-4 col-xs-12" ng-hide="error">
+            </div>
 
-                    <div class="input-group" style="margin-bottom:2px; padding-left: 0px">
-                        <input type="text" class="form-control" ng-model="searchText.$" ng-disabled="loading" placeholder="Search within national the user list..." />
-                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                    </div>
-                </div>
+            <div class="col-sm-offset-8 col-sm-4 col-xs-12" ng-hide="error">
 
-                <div class="col-xs-12" ng-hide="error">
-
-                    <table class="table table-striped" style="width:100%">
-                        <tr>
-                            <th>User</th>
-                            <th>Organization/Division</th>
-                            <th style="max-width:200px">Roles</th>
-                            <th class="text-right">
-                                <button class="btn btn-default" ng-click="search()" ng-disabled="loading">Add Authorized User <i class="fa fa-plus-circle"></i></button>
-                            </th>
-                        </tr>
-                        <tr ng-repeat="u in users | filter:defaultFilter | filter:searchText | orderBy:sortKey ">
-                            <td>
-                                <b>{{u.firstName}} {{u.lastName}}</b>
-                                <br>
-                                <a href="mailto:{{u.email}}">{{u.email}}</a>
-                            </td>
-                            <td>
-                                {{u.organization}}
-                            </td>
-                            <td>
-                                <span ng-repeat="rid in u.roles|filter:isRoleManageable">
-                                    <span class="label label-default" style="font-size:10px;margin-right:4px">{{roles[rid].name}}</span>
-                                    <br>
-                                </span>
-
-                                <a href="#" style="font-size:75%" ng-click="u.showExtraRoles=!u.showExtraRoles" ng-show="(u.roles|filter:isRoleNotManageable).length">
-                                    <span ng-show="!u.showExtraRoles">Show additional roles <i class="fa fa-caret-down"></i></span>
-                                    <span ng-show=" u.showExtraRoles">Hide additional roles <i class="fa fa-caret-up"></i></span>
-                                </a>
-
-                                <div ng-if="u.showExtraRoles">
-                                    <span ng-repeat="rid in u.roles|filter:isRoleNotManageable">
-                                        <span class="label label-info" style="font-size:10px;margin-right:4px">{{roles[rid].name}}</span>
-                                        <br>
-                                    </span>
-                                </div>
-                            </td>
-                            <td class="text-right">
-                                <div class="btn-group" role="group" aria-label="...">
-                                    <button class="btn btn-default" ng-click="edit(u)"><i class="fa fa-list  fa-fw"></i></button>
-                                    <button class="btn btn-default" ng-click="dropUser(u)" ng-disabled="!u.canBeDropped"><i class="fa fa-trash fa-fw"></i></button>
-                                </div>
-                            </td>
-
-                        </tr>
-                        <tr ng-if="!users">
-                            <td colspan="4">
-                                <i class="fa fa-cog fa-spin fa-fw"></i> Loading...
-                            </td>
-                        </tr>
-                        <tr ng-if="!!users">
-                            <td colspan="3">
-                                {{(users | filter:defaultFilter | filter:searchText).length}} of {{users.length}}
-                                |
-                                <a href="#" ng-show="!$parent.showAll" ng-click="$parent.showAll=true;$parent.searchText={}">Show more <i class="fa fa-caret-down"></i></a>
-                                <a href="#" ng-show=" $parent.showAll" ng-click="$parent.showAll=false;$parent.searchText={}">Show less <i class="fa fa-caret-up"></i></a>
-                            </td>
-                            <td class="text-right">
-                                <button class="btn btn-default" ng-click="search()" ng-disabled="loading">Add Authorized User <i class="fa fa-plus-circle"></i></button>
-                            </td>
-                        </tr>
-                    </table>
+                <div class="input-group" style="margin-bottom:2px; padding-left: 0px">
+                    <input type="text" class="form-control" ng-model="searchText.$" ng-disabled="loading" placeholder="Search within the national users list..." />
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
                 </div>
             </div>
+
+            <div class="col-xs-12" ng-hide="error">
+
+                <table class="table table-striped" style="width:100%">
+                    <tr>
+                        <th>User</th>
+                        <th>Organization/Division</th>
+                        <th style="max-width:200px">Roles</th>
+                        <th class="text-right">
+                            <button class="btn btn-default" ng-click="search()" ng-disabled="loading || !canAdd()">Add Authorized User <i class="fa fa-plus-circle"></i></button>
+                        </th>
+                    </tr>
+                    <tr ng-repeat="u in users | filter:defaultFilter | filter:searchText | orderBy:sortKey ">
+                        <td>
+                            <b>{{u.firstName}} {{u.lastName}}</b>
+                            <br>
+                            <a href="mailto:{{u.email}}">{{u.email}}</a>
+                        </td>
+                        <td>
+                            {{u.organization}}
+                        </td>
+                        <td>
+                            <span ng-repeat="rid in u.roles|filter:isContextRole">
+                                <span class="label label-default" style="font-size:10px;margin-right:4px">{{roles[rid].name}}</span>
+                                <br>
+                            </span>
+
+                            <a href="#" style="font-size:75%" ng-click="u.showExtraRoles=!u.showExtraRoles" ng-show="(u.roles|filter:isNotContextRole).length">
+                                <span ng-show="!u.showExtraRoles">Show additional roles <i class="fa fa-caret-down"></i></span>
+                                <span ng-show=" u.showExtraRoles">Hide additional roles <i class="fa fa-caret-up"></i></span>
+                            </a>
+
+                            <div ng-if="u.showExtraRoles">
+                                <span ng-repeat="rid in u.roles|filter:isNotContextRole">
+                                    <span class="label label-info" style="font-size:10px;margin-right:4px">{{roles[rid].name}}</span>
+                                    <br>
+                                </span>
+                            </div>
+                        </td>
+                        <td class="text-right">
+                            <div class="btn-group" role="group" aria-label="...">
+                                <button class="btn btn-default" ng-click="edit(u)" ng-disabled="!canEdit(u)"><i class="fa fa-list  fa-fw"></i></button>
+                                <button class="btn btn-default" ng-click="dropUser(u)" ng-disabled="!canDrop(u)"><i class="fa fa-trash fa-fw"></i></button>
+                            </div>
+                        </td>
+
+                    </tr>
+                    <tr ng-if="!users">
+                        <td colspan="4">
+                            <i class="fa fa-cog fa-spin fa-fw"></i> Loading...
+                        </td>
+                    </tr>
+                    <tr ng-if="!!users">
+                        <td colspan="3">
+                            {{(users | filter:defaultFilter | filter:searchText).length}} of {{users.length}} |
+                            <a href="#" ng-show="!$parent.showAll" ng-click="$parent.showAll=true;$parent.searchText={}">Show more <i class="fa fa-caret-down"></i></a>
+                            <a href="#" ng-show=" $parent.showAll" ng-click="$parent.showAll=false;$parent.searchText={}">Show less <i class="fa fa-caret-up"></i></a>
+                        </td>
+                        <td class="text-right">
+                            <button class="btn btn-default" ng-click="search()" ng-disabled="loading || !canAdd()">Add Authorized User <i class="fa fa-plus-circle"></i></button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
-    <div>
-<div>
+    </div>
+</div>

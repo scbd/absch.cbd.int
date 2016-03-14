@@ -10,6 +10,9 @@ define(['lodash'], function(_) {
 
         init().then(function(transactions){
             _ctrl.transactions = transactions;
+        }).catch(function(err){
+            _ctrl.error = err.data || err;
+            _ctrl.error.url = ((err||{}).config||{}).url;
         });
 
         //========================
@@ -100,7 +103,7 @@ define(['lodash'], function(_) {
                         delete tran.loading;
                         tran.error = err;
 
-                        throw err;
+                        throw "$BREAK";
                     });
 
                 }).then(function(user){
@@ -121,6 +124,9 @@ define(['lodash'], function(_) {
                 return $scope.closeThisDialog();
 
             }).catch(function(err){
+
+                if(err=="$BREAK")
+                    return;
 
                 _ctrl.error = err;
 
