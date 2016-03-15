@@ -155,7 +155,12 @@
 
                     <div ng-show="isPublished(record) && !isRequest(record)" class="color-published-green"> Published </div>
                     <div ng-show="isDraft(record) && !isRequest(record)" class="color-litegrey"> Draft </div>
-                    <div ng-show="isRequest(record) && !record.isUpdating" class="color-red"> Pending approval </div>
+                    <div ng-show="isRequest(record) && !record.isUpdating && !isPublishingAuthority()" class="color-red"> Pending approval </div>
+
+                    <a class="btn btn-danger" ng-show="isRequest(record) && !record.isUpdating && isPublishingAuthority()"
+                        type="button" ng-click="displayDetails=false; displayRequest = !displayRequest; formLoading=false" style="padding:4px;">
+                        <strong><i ng-class="{'glyphicon glyphicon-plus-sign': !displayRequest, 'glyphicon glyphicon-minus-sign': displayRequest}"></i> Awaiting approval</strong>
+                    </a>
                     <div ng-show="isRequest(record) && record.isUpdating">
                         <a class="btn btn-info" type="button" ng-click="return" style="padding:4px;">
                             <strong><i class="fa fa-spin fa-cog"></i> Processing...</strong>
@@ -166,7 +171,7 @@
                     <div class="btn-group document_buttons btn-group-sm" style="width:100px;">
                         <button ng-show="showAddButton()" title="Duplicate" type="button" class="btn btn-default" ng-click="askDuplicate(record)"><i class="fa fa-files-o"></i></button>
                         <button title="Locked for edit" ng-show="isRequest(record) && showAddButton()" type="button" class="btn btn-default"><i class="glyphicon glyphicon-lock"></i></button>
-                        <button title="Cancel request" ng-show="isRequest(record) && showAddButton() && isAssignedToMe(record)" type="button" class="btn btn-default" ng-click="askDeleteWorkflowRequest(record)"><i class="fa fa-undo"></i></button>
+                        <button title="Cancel request" ng-show="isRequest(record) && showAddButton() && isMyRecord(record)" type="button" class="btn btn-default" ng-click="askDeleteWorkflowRequest(record)"><i class="fa fa-undo"></i></button>
                         <a title="Edit" ng-show="!isRequest(record) && showAddButton()" type="button" class="btn btn-default" href="/register/{{record.type|mapSchema}}/{{record.identifier}}/edit"><i class="fa fa-edit"></i></a>
                         <button title="Delete" ng-show="!isRequest(record) && showAddButton() && canDelete()" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
                     </div>

@@ -165,10 +165,10 @@ function(app, _) {
                         });
                     };
                     $scope.canDelete = function(){
-                     return commonjs.isUserInRole($rootScope.getRoleName('AbsPublishingAuthorities')) ||
-                            commonjs.isUserInRole($rootScope.getRoleName('AbsNationalFocalPoint')) ||
-                            commonjs.isUserInRole($rootScope.getRoleName('AbsAdministrator')) ||
-                            commonjs.isUserInRole($rootScope.getRoleName('Administrator'));
+                         return commonjs.isUserInRole($rootScope.getRoleName('AbsPublishingAuthorities')) ||
+                                commonjs.isUserInRole($rootScope.getRoleName('AbsNationalFocalPoint')) ||
+                                commonjs.isUserInRole($rootScope.getRoleName('AbsAdministrator')) ||
+                                commonjs.isUserInRole($rootScope.getRoleName('Administrator'));
                     }
 
                     //============================================================
@@ -223,9 +223,15 @@ function(app, _) {
                         return entity && entity.workingDocumentLock;
                     };
 
-                    $scope.isAssignedToMe = function(entity) {
+                    $scope.isMyRecord = function(entity) {
                         return entity && entity.workingDocumentLock &&
                                 entity.workingDocumentLock.lockedBy.userId == $rootScope.user.userID;
+                    };
+
+                    $scope.isPublishingAuthority = function(entity) {
+                        return entity && entity.workingDocumentLock &&
+                            commonjs.isUserInRole($rootScope.getRoleName('AbsPublishingAuthorities')) ||
+                            commonjs.isUserInRole($rootScope.getRoleName('AbsNationalFocalPoint'));
                     };
                     //============================================================
                     //
