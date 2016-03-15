@@ -5,10 +5,10 @@ define(['app','underscore',
   '../directives/block-region-directive.js'
 ], function(app, _) {
 
-  app.controller("CountriesMapController", ["$scope", "$element", "$location", "commonjs", "$q", 'searchService','$filter',
-    function($scope, $element, $location, commonjs, $q, searchService, $filter) {
+  app.controller("CountriesMapController", ["$scope", "$element", "$location", "commonjs", "$q", 'searchService','$filter', '$routeParams',
+    function($scope, $element, $location, commonjs, $q, searchService, $filter, $routeParams) {
         $scope.sortTerm = "name.en";
-        
+
         var headerCount = {	absCheckpoint		       : 0,
                                 absCheckpointCommunique: 0,
                                 absPermit:               0,
@@ -17,10 +17,10 @@ define(['app','underscore',
                                 focalPoint:              0,
                                 measure:                 0
                             };
-                            
+
         $scope.loading = true;
-        
-       
+
+
         $q.all([commonjs.getCountries(), searchService.governmentSchemaFacets()])
             .then(function(results){
                 var countries = results[0];
@@ -52,23 +52,20 @@ define(['app','underscore',
                 $scope.headerCount = headerCount;
                 $element.find('[data-toggle="tooltip"]').tooltip();
                 $scope.loading = false;
-              
+
             });
-            
-            
-            
+
+
+
                //*************************************************************************************************************************************
                $scope.setPartyFilter = function(pfilter) {
                     $scope.partyFilter = pfilter;
-               };
-               
-                var qs = $location.search();
-                
-                if(qs.f){
-                    if(qs.f === 'party' || qs.f === 'inbetween' || qs.f === 'nonparty')
-                        $scope.setPartyFilter(qs.f); 
-                      
-                    $location.search('f', null);
+               };                
+
+                if($routeParams.status){
+                    var status = $routeParams.status;
+                    if(status === 'party' || status === 'inbetween' || status === 'nonparty')
+                        $scope.setPartyFilter(status);
                 }
                 else
                      $scope.setPartyFilter('All');
@@ -77,7 +74,7 @@ define(['app','underscore',
 
                //*************************************************************************************************************************************
                $scope.hasStatus = function(item) {
-                   
+
                    if(!$scope.partyFilter || $scope.partyFilter === 'All'){
                        return true;
                    }
@@ -112,7 +109,7 @@ define(['app','underscore',
                         $scope.orderList = true;
 
             };
-            
+
             //==================================================================================
             $scope.sortTermFilter = function(data) {
 

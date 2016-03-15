@@ -90,7 +90,8 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
 
             // when('/find',                                   { redirectTo:'/search'}).
 
-            when('/countries',                   { templateUrl: '/app/views/countries/index.html',       label:'Country Profiles',      resolveController: true, resolveUser: true, reloadOnSearch: false}).
+            when('/countries',                   { templateUrl: '/app/views/countries/index.html',       label:'Country Profiles',      resolveController: true, resolveUser: true}).
+            when('/countries/status/:status',    { templateUrl: '/app/views/countries/index.html',       label:'Country Profiles',      resolveController: true, resolveUser: true}).
             when('/countries/:code',             { templateUrl: '/app/views/countries/country-profile.html',       label:'Country Profile', param:'true',      resolveController: true, resolveUser: true}).
             // when('/countries/:code',     { templateUrl: '/app/views/countries/profiles.html',       label:'Country Profile', param:'true',      resolveController: true, resolveUser: true}).
 
@@ -118,8 +119,8 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
            when('/register/:document_type/help',                       {templateUrl: '/app/views/register/register.html',          label:'document_type',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/register/type_document_list.html',}).
            when('/register/:document_type/:identifier/edit',           {templateUrl: '/app/views/register/register.html',          label:'Edit',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/forms/edit/edit--', }).
            when('/register/:document_type/:identifier/edit/:tour',     {templateUrl: '/app/views/register/register.html',          label:'Edit',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/forms/edit/edit--',  }).
-           
-         
+
+
            when('/admin/pending-requests',                             {templateUrl: '/app/views/register/register.html',          label:'Pending Requests',  param:'true', resolveController: true,resolve : { securized : securize(["AbsAdministrator", "AbsAdministrator-dev", "AbsAdministrator-trg"]) },subTemplateUrl: '/app/views/admin/pending-tasks.html'}).
            when('/admin/reported-records',                             {templateUrl: '/app/views/register/register.html',          label:'Reported Records',  param:'true', resolveController: true,resolve : { securized : securize(["AbsAdministrator", "AbsAdministrator-dev", "AbsAdministrator-trg"]) },subTemplateUrl: '/app/views/admin/reported-records.html'}).
 
@@ -133,8 +134,8 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
             when('/submit/requests/:workflowId',                      {templateUrl: '/app/views/register/register.html',          label:'Requests',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',type : 'all'}).
             when('/submit/requests/:type/:status',                    {templateUrl: '/app/views/register/register.html',          label:'Requests',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',}).
             when('/submit/national-users',                            {templateUrl: '/app/views/register/register.html',          label:'Manage user roles',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/register/national-users/index.html'}).
-            
-       
+
+
             when('/submit/:document_type',                            {templateUrl: '/app/views/register/register.html',          label:'document_type',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/register/type_document_list.html',}).
             when('/submit/:document_type/new',                        {templateUrl: '/app/views/register/register.html',          label:'New',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/forms/edit/edit--', }).
             when('/submit/:document_type/help',                       {templateUrl: '/app/views/register/register.html',          label:'document_type',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/register/type_document_list.html',}).
