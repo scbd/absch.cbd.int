@@ -164,6 +164,12 @@ function(app, _) {
                             delete $scope.loading
                         });
                     };
+                    $scope.canDelete = function(){
+                     return commonjs.isUserInRole($rootScope.getRoleName('AbsPublishingAuthorities')) ||
+                            commonjs.isUserInRole($rootScope.getRoleName('AbsNationalFocalPoint')) ||
+                            commonjs.isUserInRole($rootScope.getRoleName('AbsAdministrator')) ||
+                            commonjs.isUserInRole($rootScope.getRoleName('Administrator'));
+                    }
 
                     //============================================================
                     //
