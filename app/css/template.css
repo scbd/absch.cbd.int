@@ -1125,7 +1125,7 @@ footer .logo {
         cursor:pointer;
     }
 
-    div.recordDefault:hover{background-color: white!important;}
+    div.recordDefault:hover{background-color: #e1e1e1!important;}
      #national-records-country h4{
          padding:20px 0 5px 0;
          margin:0;
