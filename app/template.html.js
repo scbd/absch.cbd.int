@@ -1,18 +1,19 @@
-define(['app', 'underscore', 'ng-breadcrumbs',
+define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
     'angular-localizer', 'scbd-angularjs-services', 'scbd-angularjs-filters',
     'scbd-branding/directives/footer',
     '/app/views/directives/nav/portal-branding.js',
     'scbd-branding/directives/header/header',
     '/app/views/directives/nav/portal-nav.js',
-    'ngAria', 'angular-animate', 'toastr', 'ionsound'
+    'ngAria', 'angular-animate', 'toastr', 'ionsound', '/app/services/app-config-service.js'
 ], function(app, _) {
     'use strict';
 
     app.controller('TemplateController', ['$scope', '$rootScope', 'showHelp',
         '$location','realmConfiguration','$anchorScroll', 'breadcrumbs', 'toastr', '$route',
-        'cfgUserNotification','$window', '$element','localStorageService',
+        'cfgUserNotification','$window', '$element','localStorageService', 'appConfigService',
         function($scope, $rootScope, showHelp, $location, realmConfiguration,
-            $anchorScroll, breadcrumbs, toastr, $route, cfgUserNotification, $window, $element, localStorageService) {
+            $anchorScroll, breadcrumbs, toastr, $route, cfgUserNotification, $window, $element, localStorageService,
+            appConfigService) {
             $scope.controller = "TemplateController";
             $scope.breadcrumbs = breadcrumbs;
             $scope.$root.pageTitle = {
@@ -156,11 +157,13 @@ define(['app', 'underscore', 'ng-breadcrumbs',
 
 
 
-            $rootScope.$on('event:server-pushNotification', function(evt,data){
-                if(data.type == 'documentNotification'){
-                    toastr.info(data.message);
-                    localStorageService.remove('governmentFacets');
-                    localStorageService.remove('searchFilters');
+            $rootScope.$on('event:server-pushNotification', function(evt,pushNotification){
+                if(pushNotification.type == 'documentNotification'){
+                    // toastr.info(data.message);
+                    if(pushNotification.data && pushNotification.data.realm == appConfigService.currentRealm){
+                        localStorageService.remove('governmentFacets');
+                        localStorageService.remove('searchFilters');
+                    }
                 }
             });
 
