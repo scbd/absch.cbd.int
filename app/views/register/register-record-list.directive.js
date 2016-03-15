@@ -28,7 +28,7 @@ function(app, _) {
 
                     $scope.$watch("recordToDelete", function(val) {
                         if (val && !deleteRecordModel.is(":visible")) {
-                            deleteRecordModel.modal("show");
+                            deleteRecordModel.appendTo('body').modal("show");
                         }
                         if (!val && deleteRecordModel.is(":visible")) {
                             deleteRecordModel.modal("hide");
@@ -37,7 +37,7 @@ function(app, _) {
 
                     $scope.$watch("recordToDuplicate", function(val) {
                         if (val && !duplicateRecordModel.is(":visible")) {
-                            duplicateRecordModel.modal("show");
+                            duplicateRecordModel.appendTo('body').modal("show");
                         }
                         if (!val && duplicateRecordModel.is(":visible")) {
                             duplicateRecordModel.modal("hide");
@@ -45,7 +45,7 @@ function(app, _) {
                     });
                     $scope.$watch("recordForDeleteWorkflowRequest", function(val) {
                         if (val && !deleteWorkflowRequestMadal.is(":visible")) {
-                            deleteWorkflowRequestMadal.modal("show");
+                            deleteWorkflowRequestMadal.appendTo('body').modal("show");
                         }
                         if (!val && deleteWorkflowRequestMadal.is(":visible")) {
                             deleteWorkflowRequestMadal.modal("hide");
@@ -72,6 +72,12 @@ function(app, _) {
                     $scope.refreshFacets = function(){
                         absRegisterCtrl.refreshFacets();
                     };
+
+                    $scope.$on('$destroy', function(){
+                        $('#deleteRecordModel').remove();
+                        $('#duplicateRecordModel').remove();
+                        $('#deleteWorkflowRequestModal').remove();
+                    });
                 },
                 controller: ["$scope", "$q", "IStorage", "$http", "guid", "editFormUtility", "$filter", "$routeParams",
                 function($scope, $q, storage, $http, guid, editFormUtility, $filter, $routeParams) {
@@ -211,6 +217,10 @@ function(app, _) {
                         return entity && entity.workingDocumentLock;
                     };
 
+                    $scope.isAssignedToMe = function(entity) {
+                        return entity && entity.workingDocumentLock &&
+                                entity.workingDocumentLock.lockedBy.userId == $rootScope.user.userID;
+                    };
                     //============================================================
                     //
                     //
