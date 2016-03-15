@@ -230,8 +230,8 @@ function(app, _) {
 
                     $scope.isPublishingAuthority = function(entity) {
                         return entity && entity.workingDocumentLock &&
-                            commonjs.isUserInRole($rootScope.getRoleName('AbsPublishingAuthorities')) ||
-                            commonjs.isUserInRole($rootScope.getRoleName('AbsNationalFocalPoint'));
+                            (commonjs.isUserInRole($rootScope.getRoleName('AbsPublishingAuthorities')) ||
+                            commonjs.isUserInRole($rootScope.getRoleName('AbsNationalFocalPoint')));
                     };
                     //============================================================
                     //

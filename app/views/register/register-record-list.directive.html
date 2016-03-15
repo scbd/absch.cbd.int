@@ -155,9 +155,9 @@
 
                     <div ng-show="isPublished(record) && !isRequest(record)" class="color-published-green"> Published </div>
                     <div ng-show="isDraft(record) && !isRequest(record)" class="color-litegrey"> Draft </div>
-                    <div ng-show="isRequest(record) && !record.isUpdating && !isPublishingAuthority()" class="color-red"> Pending approval </div>
+                    <div ng-show="isRequest(record) && !record.isUpdating && !isPublishingAuthority(record)" class="color-red"> Pending approval </div>
 
-                    <a class="btn btn-danger" ng-show="isRequest(record) && !record.isUpdating && isPublishingAuthority()"
+                    <a class="btn btn-danger" ng-show="isRequest(record) && !record.isUpdating && isPublishingAuthority(record)"
                         type="button" ng-click="displayDetails=false; displayRequest = !displayRequest; formLoading=false" style="padding:4px;">
                         <strong><i ng-class="{'glyphicon glyphicon-plus-sign': !displayRequest, 'glyphicon glyphicon-minus-sign': displayRequest}"></i> Awaiting approval</strong>
                     </a>
