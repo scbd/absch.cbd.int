@@ -1129,6 +1129,9 @@ footer .logo {
      #national-records-country h4{
          padding:20px 0 5px 0;
          margin:0;
+         color:#111;
+         font-size:22px;
+         font-weight: 500;
      }
     .recordDefault .schema, #national-records-country .schema,  #result-grouped-national-record .type{
         text-transform: uppercase;

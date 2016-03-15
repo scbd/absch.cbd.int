@@ -1,8 +1,8 @@
 <div id="national-records-country">
     <div >
-        <h4 style="border-bottom:#ddd solid 1px;"><a href="/countries/{{name}}" class="color-grey link">{{getFilter(name).name}}</a>
-            <span class="badge">{{numFound}}</span>
-            <span class="label label-primary nplabel" style="font-size:12px;padding-left:10px;" ng-if="getFilter(name).isNPParty">NP Party</span>
+        <h4 style="border-bottom:#ddd solid 1px;"><a ng-href="/countries/{{name}}" class="color-black link">{{getFilter(name).name}}</a>
+            <span class="badge pull-right">{{numFound}}</span>
+            <span class="label bg-party nplabel" style="font-size:12px;padding-left:10px;" ng-if="getFilter(name).isNPParty">Nagoya Protocol Party</span>
         </h4>
         <div ng-repeat="doc in docs">
             <div class="schemaTitle color-darkgrey" ng-if="doc.schema_s != docs[$index-1].schema_s ">{{doc.schema_s | schemaNamePlural}}
