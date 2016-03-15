@@ -54,23 +54,30 @@ define(['app','underscore',
                 $scope.loading = false;
               
             });
-
+            
+            
+            
                //*************************************************************************************************************************************
                $scope.setPartyFilter = function(pfilter) {
                     $scope.partyFilter = pfilter;
                };
                
                 var qs = $location.search();
+                
                 if(qs.f){
                     if(qs.f === 'party' || qs.f === 'inbetween' || qs.f === 'nonparty')
                         $scope.setPartyFilter(qs.f); 
+                      
+                    $location.search('f', null);
                 }
+                else
+                     $scope.setPartyFilter('All');
 
 
 
                //*************************************************************************************************************************************
                $scope.hasStatus = function(item) {
-
+                   
                    if(!$scope.partyFilter || $scope.partyFilter === 'All'){
                        return true;
                    }
