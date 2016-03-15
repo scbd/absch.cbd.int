@@ -169,9 +169,6 @@ legend + .help-block{position:relative; top:-15px;}
 }
 
 
-.header{
-	border-bottom: 5px #333 solid;
-}
 
 .table-striped{
 	background-color:#efefef;

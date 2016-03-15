@@ -1,5 +1,4 @@
-<div ng-controller="myTasksCotroller">
-    <style type="text/css">
+  <style type="text/css">
         .header1 {
             padding: 8px;
             margin-bottom: 20px;
@@ -13,16 +12,16 @@
         }
     </style>
 
-    <div class="md-whiteframe-z1">
-        <md-toolbar class="bg-red">
-        <div class="md-toolbar-tools">
-          <h2 class="md-flex">Requests</h2>
-        </div>
-      </md-toolbar>
-      <md-content layout-padding style="padding: 24px;">
-          <legend name="formInfo" style="display:none"></legend>
-          <div style="font-weight:bold;">Find out the status of records submitted for approval by the Publishing Authority.</div>
-          <div class="registerpage-content">
+
+<div ng-controller="myTasksCotroller" class="register-content card card-1-notrans">
+
+ <div class="register-content-header bg-red color-white">
+      <div style="padding:10px 10px;">
+        <h3>Requests <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip" data-html="true" data-title="Dashboard help info....goes here" data-container="body"></span></h3>
+      </div>
+  </div>
+  <div class="register-content-content" >
+  
 
               <div class="alert alert-danger" ng-show="__error">
                   <strong>Error: </strong>{{__error}}
@@ -61,7 +60,7 @@
                           <i ng-show="sortTerm=='workflow._id'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></div> -->
 
                           <div class="col-xs-3">
-                              <span style="cursor:pointer;" ng-click="sortTable('workflow.data.metadata.schema')">Record Type</i>
+                              <span style="cursor:pointer;" ng-click="sortTable('workflow.data.metadata.schema')">Type</i>
                                   <i ng-show="sortTerm=='workflow.data.metadata.schema'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i>
                           </div>
 
@@ -298,15 +297,5 @@
                   </div>
               </div>
           </div>
-
-
-
-      </md-content>
-    </div>
-
-
-
-
-
 
 </div>

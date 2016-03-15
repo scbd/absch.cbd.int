@@ -1,26 +1,15 @@
-<div ng-controller="ContactsController">
-  <div class="col-xs-9">
-    <div>
-        <a class="pull-right" ng-show="!help" ng-click="help=!help;" style="cursor:pointer;padding:5px;"><i class="glyphicon glyphicon-question-sign" >
-        </i> show help</a>
-        <a class="pull-right" ng-show="help" ng-click="help=!help;" style="cursor:pointer;color:#666;padding:5px;"><i class="glyphicon glyphicon-question-sign" >
-        </i> hide help</a>
-    </div>
+<div ng-controller="ContactsController" class="register-content card card-1-notrans">
 
-    <div class="registerpage-header">
-        <h2>
-            <span class="abbreviation">National Contacts</span>
-            <span class="title">Manage Contacts</span>
-        </h2>
-        <div class="help1" ng-show="help">
-            <p ng-hide="editing">
-                This common format is to be used for registering organizations and contacts which can be used in other national records.
-            </p>
-        </div>
+ <div class="register-content-header bg-blue color-white">
+      <div style="padding:10px 10px;">
+        <h3><span >National Contacts</span>
+            <span >Manage Contacts</span>
+            <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip" data-html="true" data-title=" This common format is to be used for registering organizations and contacts which can be used in other national records." data-container="body"></span></h3>
+      </div>
+  </div>
+  
+    <div class="register-content-content" >
 
-    </div>
-
-    <div class="registerpage-content">
         <div ng-show="msg" class="alert alert-success alert-dismissable">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="msg=''">&times;</button>
             <strong>{{msg}}</strong>
@@ -31,5 +20,5 @@
         </div>
 
     </div>
-  </div>
+
 </div>
