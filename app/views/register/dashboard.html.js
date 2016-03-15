@@ -16,7 +16,9 @@ define(['app',
                 return $scope.dashboardFilter == filter || $scope.dashboardFilter == "All";
             }
 
-            if ($rootScope.user.isAuthenticated) {
+            $scope.user = $rootScope.user;
+            
+            if ($scope.user.isAuthenticated) {
                 $scope.roles = {
                     isAbsPublishingAuthority : roleService.isAbsPublishingAuthority(),
                     isAbsNationalFocalPoint  : roleService.isAbsNationalFocalPoint(),
