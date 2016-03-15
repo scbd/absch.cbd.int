@@ -66,7 +66,8 @@ define(['app', 'underscore', '/app/services/search-service.js', '/app/services/a
 														authority:               { countryCount :0, recordCount : 0 },
 														database:                { countryCount :0, recordCount : 0 },
 														focalPoint:              { countryCount :0, recordCount : 0 },
-														measure:                 { countryCount :0, recordCount : 0 }
+														measure:                 { countryCount :0, recordCount : 0 },
+                                                        absNationalReport:       { countryCount :0, recordCount : 0 }
 													};
 								_.each(results, function(country){
 									nationalRecords.absCheckpoint.recordCount           += country.schemas.absCheckpoint||0;
@@ -76,6 +77,7 @@ define(['app', 'underscore', '/app/services/search-service.js', '/app/services/a
 									nationalRecords.database.recordCount                += country.schemas.database||0;
 									nationalRecords.focalPoint.recordCount              += country.schemas.focalPoint||0;
 									nationalRecords.measure.recordCount                 += country.schemas.measure||0;
+                                    nationalRecords.absNationalReport.recordCount       += country.schemas.absNationalReport||0;
 
 									nationalRecords.absCheckpoint.countryCount           += (country.schemas.absCheckpoint ? 1 : 0);
 									nationalRecords.absCheckpointCommunique.countryCount += (country.schemas.absCheckpointCommunique ? 1 : 0);
@@ -84,6 +86,7 @@ define(['app', 'underscore', '/app/services/search-service.js', '/app/services/a
 									nationalRecords.database.countryCount                += (country.schemas.database ? 1 : 0);
 									nationalRecords.focalPoint.countryCount              += (country.schemas.focalPoint ? 1 : 0);
 									nationalRecords.measure.countryCount                 += (country.schemas.measure ? 1 : 0);
+                                    nationalRecords.absNationalReport.countryCount       += (country.schemas.absNationalReport ? 1 : 0);
 								});
 								$scope.nationalRecords = nationalRecords;
                             })
