@@ -75,7 +75,7 @@
                     <input type="text" class="form-control" ng-model="keyword" placeholder="search for a country" style="width:180px;display:inline;margin-left:3px;"></input>
                     <div class="visible-md" style="padding-top:5px;"></div>
                     <div style="padding-top:5px;" class="visible-xs"></div>
-                    <a ng-href="#" ng-click="setLetterFilter('All')" style="margin-left:10px;" class="letter" ng-class="{'letter-active':!letterFilter && !partyFilter}" >All</a>
+                    <a ng-href="#" ng-click="setPartyFilter('All'); " style="margin-left:10px;" class="letter" ng-class="{'letter-active':partyFilter==='All' || !partyFilter}" >All</a>
                     <a ng-href="#" ng-click="setPartyFilter('party')" style="margin-left:10px;" class="letter  " ng-class="{'letter-active':partyFilter == 'party'}">
                         <i class="color-party fa fa-square"></i> Parties</a>
                         <a ng-href="#" ng-click="setPartyFilter('inbetween')" style="margin-left:10px;" class="letter  " ng-class="{'letter-active':partyFilter == 'inbetween'}">

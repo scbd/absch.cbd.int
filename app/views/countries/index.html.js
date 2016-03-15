@@ -19,7 +19,8 @@ define(['app','underscore',
                             };
                             
         $scope.loading = true;
-
+        
+       
         $q.all([commonjs.getCountries(), searchService.governmentSchemaFacets()])
             .then(function(results){
                 var countries = results[0];
@@ -58,12 +59,21 @@ define(['app','underscore',
                $scope.setPartyFilter = function(pfilter) {
                     $scope.partyFilter = pfilter;
                };
+               
+                var qs = $location.search();
+                if(qs.f){
+                    if(qs.f === 'party' || qs.f === 'inbetween' || qs.f === 'nonparty')
+                        $scope.setPartyFilter(qs.f); 
+                }
+
+
 
                //*************************************************************************************************************************************
                $scope.hasStatus = function(item) {
 
-                   if(!$scope.partyFilter || $scope.partyFilter ==='All')
+                   if(!$scope.partyFilter || $scope.partyFilter === 'All'){
                        return true;
+                   }
                    if($scope.partyFilter ==='party'){
                        return item.isNPParty;
                    }
