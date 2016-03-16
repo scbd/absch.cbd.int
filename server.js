@@ -40,11 +40,13 @@ var targetURL = 'https://api.cbd.int';
 
  //app.all('/api/v2013/documents/*', function(req, res) { proxy.web(req, res, { target: 'http://192.168.78.193', secure: false } ); } );
 
+app.patch ('/api/*', function(req, res) { proxy.web(req, res, { target: targetURL, secure: false } );  } );
 app.get   ('/api/*', function(req, res) { proxy.web(req, res, { target: targetURL, secure: false } );  } );
 app.put   ('/api/*', function(req, res) { proxy.web(req, res, { target: targetURL, secure: false } ); } );
 app.post  ('/api/*', function(req, res) { proxy.web(req, res, { target: targetURL, secure: false } ); } );
 app.delete('/api/*', function(req, res) { proxy.web(req, res, { target: targetURL, secure: false } ); } );
 
+app.all ('/api/*', function(req, res) { proxy.web(req, res, { target: targetURL, secure: false } );  } );
 
 // Configure index.html
 
