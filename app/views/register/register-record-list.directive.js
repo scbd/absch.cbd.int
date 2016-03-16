@@ -135,9 +135,13 @@ function(app, _) {
                             $scope.recordToDelete = "0";
 
                         }
-                        if(!canDelete()){
+                        if(!(commonjs.isUserInRole($rootScope.getRoleName('AbsPublishingAuthorities')) ||
+                                commonjs.isUserInRole($rootScope.getRoleName('AbsNationalFocalPoint')) ||
+                                commonjs.isUserInRole($rootScope.getRoleName('AbsAdministrator')) ||
+                                commonjs.isUserInRole($rootScope.getRoleName('Administrator')))){
                            $scope.cantDelete = false;  
                            $scope.iacCantDelete = true;   
+                            $scope.recordToDelete = "0";
                         }
                         else{
                             if (record.type == 'absPermit' && $scope.isPublished(record)) {
@@ -172,12 +176,6 @@ function(app, _) {
                             delete $scope.loading
                         });
                     };
-                    $scope.canDelete = function(){
-                         return commonjs.isUserInRole($rootScope.getRoleName('AbsPublishingAuthorities')) ||
-                                commonjs.isUserInRole($rootScope.getRoleName('AbsNationalFocalPoint')) ||
-                                commonjs.isUserInRole($rootScope.getRoleName('AbsAdministrator')) ||
-                                commonjs.isUserInRole($rootScope.getRoleName('Administrator'));
-                    }
 
                     //============================================================
                     //
