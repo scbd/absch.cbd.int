@@ -1442,3 +1442,6 @@ footer .logo {
             border-bottom: 1px solid #DDD!important;
             padding: 10px 0;
         }
+        
+        #SubmitPage .label{ font-size:11px!important;color:white;}
+        #SubmitPage .label:hover { background-color: #333!important;color:white!important;}
