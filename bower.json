@@ -54,6 +54,7 @@
     "font-awesome": "4.5.0",
     "jquery": "2.2.0",
     "angular-material": "0.9.8",
-    "scbd-angularjs-services": "1.1.9"
+    "scbd-angularjs-services": "1.1.9",
+    "angular-messages": "^1.4.8"
   }
 }

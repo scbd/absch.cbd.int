@@ -63,16 +63,16 @@ define(['text!./search-map.html',
                               var countryDetails = _.findWhere(countries, {code : mapCountry.id});
                               if(countryDetails){
                                   if(countryDetails.isNPInbetweenParty)
-                                      mapCountry.colorReal= "#EC971F";
+                                      mapCountry.colorReal= mapCountry.baseSettings.color="#EC971F";
                                   else if(countryDetails.isNPParty)
-                                      mapCountry.colorReal= "#5F4586";
+                                      mapCountry.colorReal= mapCountry.baseSettings.color="#5F4586";
                                 //   else if(countryDetails.isCBDParty)
                                 //       mapCountry.colorReal= "#999";
                                   else
-                                      mapCountry.colorReal= "#333";
+                                      mapCountry.colorReal= mapCountry.baseSettings.color="#333";
                               }
                               else
-                                  mapCountry.colorReal= "#333";
+                                  mapCountry.colorReal= mapCountry.baseSettings.color="#333";
                             });
                             return;
                         });
@@ -122,6 +122,7 @@ define(['text!./search-map.html',
               ammap3Service.setGlobalClickListener('search-map',
                 function() {
                   ammap3Service.closePopovers('search-map');
+              //    ammap3Service.selectObject('search-map');
                 });
               //set pin
               ammap3Service.setPinImage('search-map', 'invisi-pixel');
@@ -130,7 +131,38 @@ define(['text!./search-map.html',
               //set on country click event to open country popup
               ammap3Service.setCountryClickListener('search-map',
                 function(event) {
-                  ammap3Service.openCountryPopup('search-map', event.mapObject.id); //pin, popup,
+
+                  var id = event.mapObject.id;
+                  ammap3Service.closePopovers('search-map');
+                  // if(event.mapObject.id === 'GL')
+                  // {    var mObj =ammap3Service.getMapObject('search-map','DK');
+                  //
+                  //     ammap3Service.clickMapObject('search-map', mObj);
+                  //     id = 'DK';
+                  // }
+                  // if(event.mapObject.id === 'FO')
+                  // {
+                  //     ammap3Service.selectObject('search-map',ammap3Service.getMapObject('search-map','DK'));
+                  //     id = 'DK';
+                  // }
+                  if(event.mapObject.id === 'SJ')
+                  {
+                    ammap3Service.clickMapObject('search-map',ammap3Service.getMapObject('search-map','NO'));
+                      id = 'NO';
+                  }
+                  if(event.mapObject.id === 'EH')
+                  {
+                    ammap3Service.clickMapObject('search-map',ammap3Service.getMapObject('search-map','MA'));
+                      id = 'MA';
+                  }
+                  if(event.mapObject.id === 'TW')
+                  {
+                    ammap3Service.clickMapObject('search-map',ammap3Service.getMapObject('search-map','CN'));
+                      id = 'CN';
+                  }
+
+
+                  ammap3Service.openCountryPopup('search-map', id); //pin, popup,
               });
 
               loadCountries();
