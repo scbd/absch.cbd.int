@@ -100,7 +100,7 @@ app.directive('taskId', function () {
 						//
 						//==================================================
 						$scope.isOpen = function(element) {
-							return element && !element.closedOn;
+							return element && !element.closedOn && !element.timedOut;
 						}
 
 						//==================================================
