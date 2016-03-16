@@ -30,13 +30,21 @@ define(['app',
 	//$scope.document_type = $routeParams.document_type;
 
 	$scope.path = $location.path();
-
-
+    
     $scope.dashboardFilter = "All";
 
     $scope.setDashFilter = function(filter){
         $scope.dashboardFilter = filter;
     }
+    
+    if($routeParams.status){
+        var status = $routeParams.status;
+        if(status === 'published' || status === 'draft' || status === 'request')
+            $scope.setDashFilter(status);
+    }
+    else
+         $scope.setDashFilter('All');
+    
     $scope.isFilter = function(filter){
         return	$scope.dashboardFilter == filter || $scope.dashboardFilter == "All";
     }
