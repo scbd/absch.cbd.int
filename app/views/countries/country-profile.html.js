@@ -9,6 +9,9 @@ define(['app','underscore',
   ["$scope","$route", "$http", "$timeout", "$location","locale", 'ammap3Service', 'commonjs', '$q',
     function($scope,$route, $http, $timeout, $location,locale, ammap3Service,commonjs, $q) {
       $scope.code      = $route.current.params.code;
+      $scope.$on('$destroy', function(){
+          ammap3Service.clear('zoom-map-country');
+      });
 
       $q.when(commonjs.getCountry($scope.code.toUpperCase()))
       .then(function(country){
@@ -24,17 +27,18 @@ define(['app','underscore',
                 var countryDetails = _.findWhere(countries, {code : mapCountry.id});
                 if(countryDetails){
                     if(countryDetails.isNPInbetweenParty)
-                        mapCountry.colorReal= "#EC971F";
+                        mapCountry.colorReal=mapCountry.baseSettings.color= "#EC971F";
                     else if(countryDetails.isNPParty)
-                        mapCountry.colorReal= "#5F4586";
+                        mapCountry.colorReal=mapCountry.baseSettings.color= "#5F4586";
                   //   else if(countryDetails.isCBDParty)
                   //       mapCountry.colorReal= "#999";
                     else
-                        mapCountry.colorReal= "#333";
+                        mapCountry.colorReal=mapCountry.baseSettings.color= "#333";
                 }
                 else
-                    mapCountry.colorReal= "#333";
+                    mapCountry.colorReal=mapCountry.baseSettings.color= "#333";
               });
+              ammap3Service.validateData('zoom-map-country');
         //   },1000);
       });
 
