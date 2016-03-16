@@ -266,17 +266,12 @@ legend + .help-block{position:relative; top:-15px;}
 
 .btn-draft{
 	/*background-color:#999;*/
-	color: #fff;
-background-color: #999;
-border-color: #888;
+	color: #fff!important;
+    background-color: #666;
+    border-color: #888;
 }
 
-.btn-draft{
-	/*background-color:#999;*/
-	color: #fff;
-background-color: #999;
-border-color: #888;
-}
+
 
 .registerpage-header{
 	/*background-color:#333;*/

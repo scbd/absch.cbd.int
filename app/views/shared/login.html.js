@@ -11,7 +11,7 @@ define(['app',
 					if ($location.search().returnUrl)
                             $location.url($location.search().returnUrl);
                         else
-                            $location.url('/submit');
+                            $location.url('/register');
 
 				});
 

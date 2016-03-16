@@ -110,7 +110,13 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
            when('/register/admin',                                     {templateUrl: '/app/views/register/register.html',          label:'Management Center',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/register/admin.html',}).
 
            when('/register',                                           {templateUrl: '/app/views/register/register.html',          label:'Management Center',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/register/dashboard.html',}).
+           when('/register/notifications',                             {templateUrl: '/app/views/register/register.html',          label:'Notifications',  param:'true', resolveController: true,resolve : { securized : securize() }, subTemplateUrl: '/app/views/register/notifications.html',}).
+          
            when('/register/requests',                                  {templateUrl: '/app/views/register/register.html',          label:'Requests',  param:'true', resolveController: true,resolve : { securized : securize() }, subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',    type : 'all'}).
+           
+           when('/register/:document_type/status/:status',             {templateUrl: '/app/views/register/register.html',          label:'document_type',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/register/type_document_list.html',}).
+         
+           
            when('/register/requests/:workflowId',                      {templateUrl: '/app/views/register/register.html',          label:'Requests',  param:'true', resolveController: true,resolve : { securized : securize() }, subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',type : 'all'}).
            when('/register/requests/:type/:status',                    {templateUrl: '/app/views/register/register.html',          label:'Requests',  param:'true', resolveController: true,resolve : { securized : securize() }, subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',}).
            when('/register/national-users',                            {templateUrl: '/app/views/register/register.html',          label:'Manage user roles',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/register/national-users/index.html'}).
@@ -119,32 +125,11 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
            when('/register/:document_type/help',                       {templateUrl: '/app/views/register/register.html',          label:'document_type',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/register/type_document_list.html',}).
            when('/register/:document_type/:identifier/edit',           {templateUrl: '/app/views/register/register.html',          label:'Edit',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/forms/edit/edit--', }).
            when('/register/:document_type/:identifier/edit/:tour',     {templateUrl: '/app/views/register/register.html',          label:'Edit',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/forms/edit/edit--',  }).
+             
+           when('/register/admin/pending-requests',                             {templateUrl: '/app/views/register/register.html',          label:'Pending Requests',  param:'true', resolveController: true,resolve : { securized : securize(["AbsAdministrator", "AbsAdministrator-dev", "AbsAdministrator-trg"]) },subTemplateUrl: '/app/views/admin/pending-tasks.html'}).
+           
+           when('/register/admin/reported-records',                             {templateUrl: '/app/views/register/register.html',          label:'Reported Records',  param:'true', resolveController: true,resolve : { securized : securize(["AbsAdministrator", "AbsAdministrator-dev", "AbsAdministrator-trg"]) },subTemplateUrl: '/app/views/admin/reported-records.html'}).
 
-
-           when('/admin/pending-requests',                             {templateUrl: '/app/views/register/register.html',          label:'Pending Requests',  param:'true', resolveController: true,resolve : { securized : securize(["AbsAdministrator", "AbsAdministrator-dev", "AbsAdministrator-trg"]) },subTemplateUrl: '/app/views/admin/pending-tasks.html'}).
-           when('/admin/reported-records',                             {templateUrl: '/app/views/register/register.html',          label:'Reported Records',  param:'true', resolveController: true,resolve : { securized : securize(["AbsAdministrator", "AbsAdministrator-dev", "AbsAdministrator-trg"]) },subTemplateUrl: '/app/views/admin/reported-records.html'}).
-
-            when('/submit/tasks/:id',                                 {templateUrl: '/app/views/tasks/tasks-id.html',             label:'Management Center',  param:'true', resolveController: true, resolve : { securized : securize() }}).
-            when('/submit/tasks/:id/:activity',                       {templateUrl: '/app/views/tasks/tasks-id-activity.html',    label:'Management Center',  param:'true', resolveController: true, resolve : { securized : securize() }}).
-            when('/submit/dashboard',                                 {templateUrl: '/app/views/register/register.html',          label:'Management Center',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/register/dashboard.html',}).
-            when('/submit/admin',                                     {templateUrl: '/app/views/register/register.html',          label:'Management Center',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/register/admin.html',}).
-
-            when('/submit',                                           {templateUrl: '/app/views/register/register.html',          label:'Management Center',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/register/dashboard.html',}).
-            when('/submit/requests',                                  {templateUrl: '/app/views/register/register.html',          label:'Requests',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',    type : 'all'}).
-            when('/submit/requests/:workflowId',                      {templateUrl: '/app/views/register/register.html',          label:'Requests',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',type : 'all'}).
-            when('/submit/requests/:type/:status',                    {templateUrl: '/app/views/register/register.html',          label:'Requests',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',}).
-            when('/submit/national-users',                            {templateUrl: '/app/views/register/register.html',          label:'Manage user roles',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/register/national-users/index.html'}).
-
-            when('/submit/notifications',                             {templateUrl: '/app/views/register/register.html',          label:'Notifications',  param:'true', resolveController: true,resolve : { securized : securize() }, subTemplateUrl: '/app/views/register/notifications.html',    type : 'all'}).
-  
-            //when('/submit/:document_type/status/:status',            {templateUrl: '/app/views/register/register.html',          label:'document_type',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/register/type_document_list.html',}).
-
-            when('/submit/:document_type',                            {templateUrl: '/app/views/register/register.html',          label:'document_type',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/register/type_document_list.html',}).
-            when('/submit/:document_type/new',                        {templateUrl: '/app/views/register/register.html',          label:'New',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/forms/edit/edit--', }).
-            when('/submit/:document_type/help',                       {templateUrl: '/app/views/register/register.html',          label:'document_type',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/register/type_document_list.html',}).
-            
-            when('/submit/:document_type/:identifier/edit',           {templateUrl: '/app/views/register/register.html',          label:'Edit',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/forms/edit/edit--', }).
-            when('/submit/:document_type/:identifier/edit/:tour',     {templateUrl: '/app/views/register/register.html',          label:'Edit',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/forms/edit/edit--',  }).
            
             when('/workshops/lac',               { templateUrl: '/app/views/workshops/lac.html',            label:'Workshops',            resolveController: true, resolveUser: true}).
             when('/workshops/caribbean',         { templateUrl: '/app/views/workshops/caribbean.html',      label:'Workshops',        resolveController: true, resolveUser: true}).

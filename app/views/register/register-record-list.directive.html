@@ -1,30 +1,24 @@
-<div>
-
-
-
-
-
-
-
-    <div class="row">
-        <div class="col-xs-8" id="filter_buttons">
+<div id="SubmitPage">
+    
+   <div class="row">
+        <div class="col-xs-8">
             <div class="btn-group-sm">
-                <button type="button" ng-click="statusFilter=''" class="btn btn-info">
-                    <i ng-hide="statusFilter" class="glyphicon glyphicon-ok"></i> All
-                    <span class="badge badge-default">
-                        {{(records||[]).length}}</span>
+                <button type="button" ng-click="statusFilter=''" class="filterbtn btn btn-primary" >
+                     <i  class="fa fa-2 fa-square" ng-class="{'fa-check-square':!statusFilter}"></i>
+                    <strong>All</strong> <span class="badge badge-default">{{(records||[]).length}}</span>
                 </button>
-                <button type="button" ng-click="statusFilter=isRequest" class="btn btn-danger">
-                    <i ng-show="statusFilter==isRequest" class="glyphicon glyphicon-ok"></i> Requests
+                <button type="button" ng-click="statusFilter=isRequest" class="filterbtn btn btn-danger" >
+                    <i class="fa fa-2 fa-square" ng-class="{'fa-check-square':statusFilter==isRequest}"></i> 
+                    Requests
                     <span class="badge badge-default">{{(records | filter:schemaFilter | filter:isRequest).length}}</span>
                 </button>
-                <button type="button" ng-click="statusFilter=isPublished" class="btn btn-success">
-                    <i ng-show="statusFilter==isPublished" class="glyphicon glyphicon-ok"></i> Published
+                <button type="button" ng-click="statusFilter=isPublished" class="filterbtn btn btn-success">
+                    <i  class="fa fa-2 fa-square"  ng-class="{'fa-check-square':statusFilter==isPublished}"></i> Published
                     <span class="badge badge-default">{{(records | filter:schemaFilter | filter:isPublished).length}}</span>
                 </button>
-                <button type="button" ng-click="statusFilter=isDraft" class="btn btn-default btn-draft" style="color:#fff">
-                    <i ng-show="statusFilter==isDraft" class="glyphicon glyphicon-ok"></i> Draft
-                    <span class="badge badge-default" style="color:#999;background-color:white;">{{(records | filter:schemaFilter | filter:isDraft).length}}</span>
+                <button type="button" ng-click="statusFilter=isDraft" class="filterbtn btn btn-draft" >
+                    <i class="fa fa-2 fa-square" ng-class="{'fa-check-square':statusFilter==isDraft}"></i> Drafts
+                    <span class="badge badge-default">{{(records | filter:schemaFilter | filter:isDraft).length}}</span>
                 </button>
                 <input type="text" ng-model="keywords" placeholder=" Keyword " class="form-control keyword input-group" style="width:160px;display:inline;font-size:12px;height:31px;">
             </div>
@@ -41,39 +35,7 @@
             </div>
         </div>
     </div>
-
-    <style type="text/css">
-        .odd {
-            background-color: #efefef;
-        }
-
-        .even {
-            background-color: #fff;
-        }
-
-        .odd:hover,
-        .even:hover {
-            background-color: #eeefff;
-        }
-
-        .toggleUpdated {
-            background-color: #eeefff;
-        }
-
-        .km-value {
-            background-color: #eee!important;
-        }
-
-        th {
-            /*border-bottom: 1px solid #333!important;*/
-        }
-
-        td {
-            border-bottom: 1px solid #DDD!important;
-            padding: 10px 0;
-        }
-    </style>
-
+    
     <table class="table table-hover table-striped" style="width:100%;margin-top:20px;">
         <thead>
             <tr>
@@ -87,10 +49,10 @@
             </tr>
         </thead>
         <tr ng-cloak ng-show="loading">
-            <td colspan="6" style="text-align:center;padding:60px;"><i class="fa fa-spin fa-cog" /> loading...</td>
+            <td colspan="6" style="text-align:center;padding:30px;"><i class="fa fa-spin fa-cog" /> loading...</td>
         </tr>
         <tr ng-cloak ng-show="!loading && filteredRecords.length <= 0">
-            <td colspan="6" style="text-align:center;padding:60px;"> No records found. You have not yet created any records of this type. Click on "add new" to create a new record.</td>
+            <td colspan="6" style="text-align:center;padding:30px;"> <strong>No records found.</strong></td>
         </tr>
 
         <tbody ng-repeat="record in (filteredRecords = (records | filter:schemaFilter | filter:statusFilter | filter:keywords | orderBy:orderBy))">
@@ -153,9 +115,9 @@
                 </td>
                 <td>
 
-                    <div ng-show="isPublished(record) && !isRequest(record)" class="color-published-green"> Published </div>
-                    <div ng-show="isDraft(record) && !isRequest(record)" class="color-litegrey"> Draft </div>
-                    <div ng-show="isRequest(record) && !record.isUpdating && !isPublishingAuthority(record)" class="color-red"> Pending approval </div>
+                    <div ng-show="isPublished(record) && !isRequest(record)" class="color-published-green bold"> Published </div>
+                    <div ng-show="isDraft(record) && !isRequest(record)" class="color-litegrey bold"> Draft </div>
+                    <div ng-show="isRequest(record) && !record.isUpdating && !isPublishingAuthority(record)" class="color-red bold"> Pending approval </div>
 
                     <a class="btn btn-danger" ng-show="isRequest(record) && !record.isUpdating && isPublishingAuthority(record)"
                         type="button" ng-click="displayDetails=false; displayRequest = !displayRequest; formLoading=false" style="padding:4px;">
@@ -288,13 +250,11 @@
                     <h4>Duplicate record<i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
                 </div>
                 <div class="modal-body">
-
                     <p>Are you sure you want to duplicate this record, this will create a new draft record with same details?</p>
                 </div>
                 <div class="modal-footer" style="margin-top:0">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                     <button ng-disabled="loading" type="button" ng-click="duplicate(recordToDuplicate)" class="btn btn-primary">Yes</button>
-
                 </div>
             </div>
         </div>
@@ -308,7 +268,6 @@
                     <h4>Cancel publishing request<i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
                 </div>
                 <div class="modal-body">
-
                     <p>Are you sure you want to cancel this publishing request?</p>
                 </div>
                 <div class="modal-footer" style="margin-top:0">

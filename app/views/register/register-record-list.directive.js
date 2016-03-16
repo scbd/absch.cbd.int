@@ -3,8 +3,8 @@ define(['app', 'underscore', '/app/js/common.js',
 function(app, _) {
     "use strict";
 
-    app.directive("registerRecordList", ["$timeout", "commonjs", "bootbox", "$http", "IWorkflows", "IStorage",'$rootScope', 'searchService', 'toastr',
-        function($timeout, commonjs, bootbox, $http, IWorkflows, IStorage, $rootScope, searchService, toastr) {
+    app.directive("registerRecordList", ["$timeout", "commonjs", "bootbox", "$http", "IWorkflows", "IStorage",'$rootScope', 'searchService', 'toastr',"$routeParams",
+        function($timeout, commonjs, bootbox, $http, IWorkflows, IStorage, $rootScope, searchService, toastr, $routeParams) {
 
             return {
                 restrict: "EA",
@@ -25,7 +25,8 @@ function(app, _) {
                         trigger: 'hover'
                     });
 
-
+                    
+                     
                     $scope.$watch("recordToDelete", function(val) {
                         if (val && !deleteRecordModel.is(":visible")) {
                             deleteRecordModel.appendTo('body').modal("show");
@@ -240,6 +241,16 @@ function(app, _) {
                     $scope.isPublished = function(entity) {
                         return entity && entity.documentID;
                     };
+                    
+                     if($routeParams.status){
+                        var status = $routeParams.status;
+                        if(status === 'published' )
+                            $scope.statusFilter = $scope.isPublished;
+                        if(status === 'drafts' ||  status === 'draft' )
+                            $scope.statusFilter = $scope.isDraft;
+                        if(status === 'requests' ||  status === 'request' )
+                            $scope.statusFilter = $scope.isRequest;
+                        }
 
                     //============================================================
                     //
@@ -569,6 +580,11 @@ function(app, _) {
 
                     function loadRecords() {
                         $scope.loading = true;
+                        
+                        
+                       
+                        
+                        
                         var schema = $filter("mapSchema")($routeParams.document_type);
 
                         if (schema === null || schema == undefined)
