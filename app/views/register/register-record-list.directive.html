@@ -135,7 +135,7 @@
                         <button title="Locked for edit" ng-show="isRequest(record) && showAddButton()" type="button" class="btn btn-default"><i class="glyphicon glyphicon-lock"></i></button>
                         <button title="Cancel request" ng-show="isRequest(record) && showAddButton() && isMyRecord(record)" type="button" class="btn btn-default" ng-click="askDeleteWorkflowRequest(record)"><i class="fa fa-undo"></i></button>
                         <a title="Edit" ng-show="!isRequest(record) && showAddButton()" type="button" class="btn btn-default" href="/register/{{record.type|mapSchema}}/{{record.identifier}}/edit"><i class="fa fa-edit"></i></a>
-                        <button title="Delete" ng-show="!isRequest(record) && showAddButton() && canDelete()" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
+                        <button title="Delete" ng-show="!isRequest(record) && showAddButton()" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
                     </div>
                 </td>
             </tr>

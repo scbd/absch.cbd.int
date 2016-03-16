@@ -135,14 +135,21 @@ function(app, _) {
                             $scope.recordToDelete = "0";
 
                         }
-                        if (record.type == 'absPermit' && $scope.isPublished(record)) {
-                            //cant delete only modify
-                            $scope.pilotDelete = true;
-                            $scope.cantDelete = true;
-                            $scope.recordToDelete = "0"; //TODO:only for pilot phase
-                        } else {
-                            $scope.recordToDelete = record;
-                            $scope.cantDelete = false;
+                        if(!canDelete()){
+                           $scope.cantDelete = false;  
+                           $scope.iacCantDelete = true;   
+                        }
+                        else{
+                            if (record.type == 'absPermit' && $scope.isPublished(record)) {
+                                //cant delete only modify
+                                $scope.pilotDelete = true;
+                                $scope.cantDelete = true;
+                                $scope.recordToDelete = "0"; //TODO:only for pilot phase
+                            } else {
+                                $scope.recordToDelete = record;
+                                $scope.cantDelete = false;
+                                                        
+                            }
                         }
 
                     };
