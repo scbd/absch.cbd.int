@@ -42,9 +42,9 @@
     "requirejs-plugins": "1.0.3",
     "requirejs-text": "2.0.14",
     "scbd-angularjs-controls": "*",
-    "scbd-angularjs-services": "1.1.9",
-    "scbd-branding": "1.1.10",
-    "scbd-map": "1.0.3",
+    "scbd-angularjs-services": "1.1.10",
+    "scbd-branding": "1.1.9",
+    "scbd-map": "1.0.4",
     "socket.io-1.4.5": "https://cdn.socket.io/socket.io-1.4.5.js",
     "underscore": "1.7.0"
   },
@@ -54,7 +54,6 @@
     "font-awesome": "4.5.0",
     "jquery": "2.2.0",
     "angular-material": "0.9.8",
-    "scbd-angularjs-services": "1.1.9",
-    "angular-messages": "^1.4.8"
+    "scbd-angularjs-services": "1.1.10"
   }
 }
