@@ -134,17 +134,17 @@ define(['text!./search-map.html',
 
                   var id = event.mapObject.id;
                   ammap3Service.closePopovers('search-map');
-                  // if(event.mapObject.id === 'GL')
-                  // {    var mObj =ammap3Service.getMapObject('search-map','DK');
-                  //
-                  //     ammap3Service.clickMapObject('search-map', mObj);
-                  //     id = 'DK';
-                  // }
-                  // if(event.mapObject.id === 'FO')
-                  // {
-                  //     ammap3Service.selectObject('search-map',ammap3Service.getMapObject('search-map','DK'));
-                  //     id = 'DK';
-                  // }
+                  if(event.mapObject.id === 'GL')
+                  {    var mObj =ammap3Service.getMapObject('search-map','DK');
+                  
+                      ammap3Service.clickMapObject('search-map', mObj);
+                      id = 'DK';
+                  }
+                  if(event.mapObject.id === 'FO')
+                  {
+                      ammap3Service.selectObject('search-map',ammap3Service.getMapObject('search-map','DK'));
+                      id = 'DK';
+                  }
                   if(event.mapObject.id === 'SJ')
                   {
                     ammap3Service.clickMapObject('search-map',ammap3Service.getMapObject('search-map','NO'));
@@ -161,8 +161,9 @@ define(['text!./search-map.html',
                       id = 'CN';
                   }
 
-
-                  ammap3Service.openCountryPopup('search-map', id); //pin, popup,
+                  if(id != 'FK'){ // Falkland Islands no popover
+                    ammap3Service.openCountryPopup('search-map', id); //pin, popup,
+                  }
               });
 
               loadCountries();
