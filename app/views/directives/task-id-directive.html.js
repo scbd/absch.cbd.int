@@ -32,6 +32,12 @@ app.directive('taskId', function () {
 												$scope.document = result.data || result;
 											});
 										}
+                                        if(!workflow.workflowAge){
+                                            workflow.workflowAge = {'age':12,'type':'weeks'};
+                                        }
+                                        var expiryDate = moment(workflow.createdOn)
+                                                                            .add(workflow.workflowAge.age,workflow.workflowAge.type);
+                                        workflow.daysToApproval = expiryDate.diff(moment(), 'days');
 
 									});
 								}
