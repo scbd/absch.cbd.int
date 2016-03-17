@@ -1,7 +1,7 @@
 define(['app', 'underscore', '/app/services/local-storage-service.js'], function(app, _) {
 
-    app.factory('commonjs', ['$http', '$rootScope', 'realm', 'IStorage', '$filter', '$q', 'localStorageService',
-        function($http, $rootScope, realm, storage, $filter, $q, localStorageService) {
+    app.factory('commonjs', ['$http', '$rootScope', 'realm', 'IStorage', '$filter', '$q', 'localStorageService', 'Thesaurus',
+        function($http, $rootScope, realm, storage, $filter, $q, localStorageService, thesaurus) {
             return new function() {
 
                 this.getReferenceRecordIndex = function(schema, documentId) {
@@ -76,9 +76,6 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                             return countries;
                         });
                 };
-
-
-
 
                 this.getCountry = function(code) {
 
@@ -264,6 +261,28 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                                 return document;
                             });
                 };
+
+                this.getRegions = function(){
+
+                    return $http.get('/api/v2013/thesaurus/domains/regions/terms').then(function (response) {
+                        
+                        var termsTree = thesaurus.buildTree(response.data);
+                        var classes   = _.filter(termsTree, function where (o) { return !!o.narrowerTerms && o.identifier!='1796f3f3-13ae-4c71-a5d2-0df261e4f218';});
+
+                        return classes;
+                    });
+
+                }
+
+                function flatten(items, collection) {
+                    items.forEach(function (item) {
+                        item.selected = false;
+                        collection[item.identifier] = item;
+                        if(item.narrowerTerms)
+                            flatten(item.narrowerTerms, collection);
+                    });
+                    return collection;
+                }
 
                 function formatCountry(countryDetails){
                     var country = {};

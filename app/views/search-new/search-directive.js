@@ -6,6 +6,7 @@ define(['app', 'underscore', '/app/js/common.js',
 '/app/views/search-new/search-filters/reference-filter.js',
 '/app/views/search-new/search-filters/scbd-filter.js',
 '/app/views/search-new/search-filters/country-filter.js',
+'/app/views/search-new/search-filters/region-filter.js',
 '/app/views/search-new/search-filters/date-filter.js',
 '/app/views/search-new/search-results/result-default.js',
 '/app/views/search-new/search-results/national-records-country.js',
@@ -311,6 +312,7 @@ define(['app', 'underscore', '/app/js/common.js',
 
                               qOr.push(buildTextQuery('title_t'      ,'freeText'  , null));
                               qOr.push(buildTextQuery('description_t','freeText'  , null));
+                              qOr.push(buildFieldQuery('government_REL_ss','region'  , null));
 
                         }
 
@@ -322,6 +324,7 @@ define(['app', 'underscore', '/app/js/common.js',
                                qOr.push(buildTextQuery('text_EN_txt'    ,'country', null));
                                qOr.push(buildTextQuery('text_EN_txt'    ,'freeText', null));
                                qOr.push(buildFieldQuery('regions_REL_ss','country', null));
+                               qOr.push(buildFieldQuery('regions_REL_ss','region', null));
                         }
 
                         if(queryType === 'scbd'){
@@ -460,56 +463,27 @@ define(['app', 'underscore', '/app/js/common.js',
                   //===============================================================================================================================
                     function loadRegionsFilters(){
 
-                        // if(!$scope.regions)
-                        // {
-                        //     $http.get('/api/v2013/thesaurus/domains/regions/terms', { cache:true }).then(function (response) {
-
-                        //         var termsTree = thesaurus.buildTree(response.data);
-                        //         //var termsMap = flatten(termsTree, {});
-                        //         //var classes   = _.filter(termsTree, function where (o) { return !!o.narrowerTerms && o.identifier!='1796f3f3-13ae-4c71-a5d2-0df261e4f218'; });
-                        //         var termsMap ={};
-                        //         _.values(termsTree).forEach(function (term) {
-
-                        //             console.log();
-
-                        //             term.name = term.name.replace('CBD Regional Groups - ', '');
-                        //             term.name = term.name.replace('Inland water ecosystems - ', '');
-                        //             term.name = term.name.replace('Large marine ecosystems - ', '');
-
-                        //             term.name = term.name.replace('Mountains - All countries', 'Mountains');
-                        //             term.name = term.name.replace('Global - All countries', 'Global');
-                        //             term.name = term.name.replace('Americas - All countries', 'Americas');
-                        //             term.name = term.name.replace('Africa - All countries', 'Africa');
-                        //             term.name = term.name.replace('Asia - All countries', 'Asia');
-                        //             term.name = term.name.replace('Europe - All countries', 'Europe');
-                        //             term.name = term.name.replace('Oceania - All countries', 'Oceania');
-
-                        //             term.name = term.name.replace('Mountains - ', '');
-                        //             term.name = term.name.replace('Global - ', '');
-                        //             term.name = term.name.replace('Americas - ', '');
-                        //             term.name = term.name.replace('Africa - ', '');
-                        //             term.name = term.name.replace('Asia - ', '');
-                        //             term.name = term.name.replace('Europe - ', '');
-                        //             term.name = term.name.replace('Oceania - ', '');
-                        //         });
-
-
-                        //     });//http
-                        // }
+                        $q.when(commonjs.getRegions(), function(regions) {
+                                console.log(regions);
+                                _.each(regions, function(region, index){
+                                    console.log(region);
+                                    addRegionFilter(region);
+                                });
+                        });
 
 
                     };
 
-                   //===============================================================================================================================
-                    function flatten(items, collection) {
-                        items.forEach(function (item) {
-                            item.selected = false;
-                            collection[item.identifier] = item;
-                            if(item.narrowerTerms)
-                                flatten(item.narrowerTerms, collection);
+                    function addRegionFilter(region, parent){
+
+                        addFilter(region.identifier, {'type':'region', 'name':region.title.en, 'id':region.identifier,
+                            'description':'', parent : parent});
+
+                        _.each(region.narrowerTerms,function(narrower){
+                            addRegionFilter(narrower, region.identifier);
                         });
-                        return collection;
                     }
+
                     function loadDateFilters(){
                         addFilter('publishedOn',  {'sort': 1,'type':'date',  'name':'Published On', 'id':'publishedOn', 'description':'Date range when the record was published'});
                     };
