@@ -59,20 +59,23 @@ define(['text!./search-map.html',
 
                             ammap3Service.loadCountries('search-map', countries);
 
+                            var exceptionCountryCodes = ['GL', 'FO', 'SJ'];
                             ammap3Service.eachCountry('search-map', function(mapCountry){
                               var countryDetails = _.findWhere(countries, {code : mapCountry.id});
                               if(countryDetails){
                                   if(countryDetails.isNPInbetweenParty)
                                       mapCountry.colorReal= mapCountry.baseSettings.color="#EC971F";
-                                  else if(countryDetails.isNPParty)
+                                   if(countryDetails.isNPParty)
                                       mapCountry.colorReal= mapCountry.baseSettings.color="#5F4586";
-                                //   else if(countryDetails.isCBDParty)
-                                //       mapCountry.colorReal= "#999";
                                   else
                                       mapCountry.colorReal= mapCountry.baseSettings.color="#333";
                               }
-                              else
-                                  mapCountry.colorReal= mapCountry.baseSettings.color="#333";
+                              else{
+                                  if(_.contains(exceptionCountryCodes, mapCountry.id))
+                                    mapCountry.colorReal= mapCountry.baseSettings.color="#5F4586";
+                                  else
+                                    mapCountry.colorReal= mapCountry.baseSettings.color="#333";
+                              }
                             });
                             return;
                         });
@@ -136,7 +139,7 @@ define(['text!./search-map.html',
                   ammap3Service.closePopovers('search-map');
                   if(event.mapObject.id === 'GL')
                   {    var mObj =ammap3Service.getMapObject('search-map','DK');
-                  
+
                       ammap3Service.clickMapObject('search-map', mObj);
                       id = 'DK';
                   }
