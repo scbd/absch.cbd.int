@@ -6,8 +6,8 @@
         <span ng-repeat="letter in alphabet">
             <a ng-href="#" ng-click="cf_setCountryFilter(letter)" class="letter" ng-class="{'letter-active':cf_countryFilter == letter}">{{letter}}</a>
         </span>
-        <a ng-href="#" ng-click="cf_setPartyFilter('party')" style="padding-left:10px;" class="letter" ng-class="{'letter-active':cf_partyFilter == 'party'}">Parties</a>
-        <a ng-href="#" ng-click="cf_setPartyFilter('nonparty')" style="padding-left:10px;" class="letter" ng-class="{'letter-active':cf_partyFilter == 'nonparty'}" >non-Parties</a> 
+        <a ng-href="#" ng-click="cf_setPartyFilter('party')" style="padding-left:10px;" class="letter" ng-class="{'letter-active':cf_partyFilter == 'party'}"> <i class="fa fa-square color-party"></i> Parties</a>
+        <a ng-href="#" ng-click="cf_setPartyFilter('nonparty')" style="padding-left:10px;" class="letter" ng-class="{'letter-active':cf_partyFilter == 'nonparty'}" ><i class="fa fa-square color-nonparty"></i>  Non-Parties</a> 
         
         <hr class="heading" />
     </div>
@@ -17,10 +17,10 @@
             <div ng-if="cf_showCountry(doc)">
             <a class="filter"  ng-click="saveFilter(doc.id)" >
                 <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i> 
-                <span ng-class="{'color-blue': doc.isNPParty}">{{doc.name}}</span>
+                <span ng-class="{'color-party': doc.isNPParty}">{{doc.name}}</span>
             </a>
             <p class="helpinfo" ><i class="fa fa-info-circle helpicon"></i> 
-                <span ng-class="{'color-blue': doc.isNPParty}">
+                <span ng-class="{'color-party': doc.isNPParty}">
                    {{doc.isNPParty ? "Party to the Nagoya Protocol since " : "Non-Party"}} 
                     <span class="date" ng-if="doc.entryIntoForce">{{doc.entryIntoForce | formatDate}}</span>
                 </span>
