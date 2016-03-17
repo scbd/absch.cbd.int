@@ -1,5 +1,7 @@
 define(['app',
- '/app/services/role-service.js', ], function(app) {
+ '/app/services/role-service.js',
+  'scbd-branding/directives/xuser-notifications-panel',
+  ], function(app) {
     "use strict";
     app.controller("NotificationsController", ["$rootScope", "$scope", "underscore", "roleService", "IWorkflows", "realm", "$q",
                     "$routeParams", '$location', "$filter", "$http", "$element","$timeout",
@@ -25,6 +27,8 @@ define(['app',
                     $scope.userCountry = {identifier:$scope.user.government };
 
             }
+            
+            $scope.realm = realm.value;
         }
     ]);
 });

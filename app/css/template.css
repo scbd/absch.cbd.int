@@ -59,25 +59,11 @@ background-color: white;
 .panel{
     color:#333;
 }
-.notification-item {
-    padding: 0 5px;
-    padding-bottom:10px;
-    margin: 5px 5px;
-    /*background: #ccc;*/
-    border-bottom:1px solid #ddd;
-}
-.notification-read  i, .notification-read  span, .notification-read div, .notification-read td, .notification-read strong, .notification-read a {
+
+.notification-read * {
     color:#bbb !important;
 }
 
-
-.notification-unread  i, .notification-unread strong{
-    color:#428bca !important;
-}
-
-.notification-unread  span , .notification-unread  div, .notification-unread  td  {
-    color:#333 !important;
-}
 
 
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus, .nav .dropdown > a:hover {
