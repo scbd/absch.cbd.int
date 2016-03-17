@@ -43,7 +43,7 @@
     "requirejs-text": "2.0.14",
     "scbd-angularjs-controls": "*",
     "scbd-angularjs-services": "1.1.10",
-    "scbd-branding": "1.1.9",
+    "scbd-branding": "1.2.0",
     "scbd-map": "1.0.4",
     "socket.io-1.4.5": "https://cdn.socket.io/socket.io-1.4.5.js",
     "underscore": "1.7.0"
