@@ -167,6 +167,37 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
                 }
             });
 
+
+            //============================================================
+        //
+        //
+        //============================================================
+        $rootScope.$watch('user', _.debounce(function(user) {
+
+            if (!user)
+                return;
+
+            require(["_slaask"], function(_slaask) {
+
+                if (user.isAuthenticated) {
+                    _slaask.identify(user.name, {
+                        'user-id' : user.userID,
+                        'name' : user.name,
+                        'email' : user.email,
+                    });
+
+                    if(_slaask.initialized) {
+                        _slaask.slaaskSendUserInfos();
+                    }
+                }
+
+                if(!_slaask.initialized) {
+                    _slaask.init('4251dbad1118dbaf3ad67acbaa82e4b9');
+                    _slaask.initialized = true;
+                }
+            });
+        }, 1000));
+
         }
     ]);
 
