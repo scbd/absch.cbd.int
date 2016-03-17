@@ -63,11 +63,11 @@ define(['text!./search-map.html',
                             ammap3Service.eachCountry('search-map', function(mapCountry){
                               var countryDetails = _.findWhere(countries, {code : mapCountry.id});
                               if(countryDetails){
-                                  if(countryDetails.isNPInbetweenParty)
+                                   if(countryDetails.isNPInbetweenParty)
                                       mapCountry.colorReal= mapCountry.baseSettings.color="#EC971F";
-                                   if(countryDetails.isNPParty)
+                                   else if(countryDetails.isNPParty)
                                       mapCountry.colorReal= mapCountry.baseSettings.color="#5F4586";
-                                  else
+                                   else
                                       mapCountry.colorReal= mapCountry.baseSettings.color="#333";
                               }
                               else{
