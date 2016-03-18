@@ -1,0 +1,29 @@
+<div ng-controller="recordHistoryController" class="register-content card card-1-notrans">
+
+ <div class="register-content-header bg-darkgrey color-white">
+      <div style="padding:10px 10px;">
+        <h3>Record History
+            <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip" data-html="true"
+            data-title="Record History help info....goes here" data-container="body">
+            </span>
+        </h3>
+      </div>
+  </div>
+  <div class="register-content-content" >
+
+    <div ng-if="showRequestHistory">
+        <div task-id class="record-body" load-task-data='showRequestHistory' workflow-task-id="{{document.workflwoId}}"
+        on-activity-update="refreshworkflowRecord(document, workflowInfo)"></div>
+    </div>
+    <div ng-if="!showRequestHistory">
+        <record-viewer doc-id='document.identifier' doc-schema='document.schema' class="card card-3"></record-viewer>
+    </div>
+
+    <div id="documentNotifications">
+        {{documentNotifications}}
+    </div>
+
+
+
+  </div>
+</div> <!-- controller -->
