@@ -19,8 +19,10 @@ define(['app', 'underscore', '/app/js/common.js',
             replace: true,
             // transclude: true,
             templateUrl: '/app/views/search-new/search-directive.html',
-            controller: ['$scope','$q', 'realm', 'searchService', 'commonjs', 'localStorageService', '$http', 'Thesaurus' , 'appConfigService',
-            function($scope, $q, realm, searchService, commonjs, localStorageService, $http, thesaurus, appConfigService) {
+            controller: ['$scope','$q', 'realm', 'searchService', 'commonjs', 'localStorageService', '$http', 'Thesaurus' ,
+             'appConfigService', '$routeParams', '$location',
+            function($scope, $q, realm, searchService, commonjs, localStorageService,
+                $http, thesaurus, appConfigService, $routeParams, $location) {
 
                     var queryCanceler = null;
                     $scope.rawDocs = [];
@@ -159,10 +161,6 @@ define(['app', 'underscore', '/app/js/common.js',
 
                         queryCanceler = $q.defer();
 
-                        if(nationalCurrentPage===0){
-                            $scope.rawDocs = undefined;
-                        }
-
                         var groupQuery = {
                             query       : q,
                             sort        : 'government_EN_s asc, schemaSort_i asc',
@@ -179,6 +177,9 @@ define(['app', 'underscore', '/app/js/common.js',
                             .then(function(data) {
                                 queryCanceler = null;
 
+                                if(nationalCurrentPage===0){
+                                    $scope.rawDocs = undefined;
+                                }
                                 if(!$scope.rawDocs || $scope.rawDocs.length == 0)
                                     $scope.rawDocs = data.data.grouped.government_s;
                                     //$scope.rawDocs = _.union($scope.rawDocs||{}, data.data.grouped.government_s);
@@ -215,10 +216,6 @@ define(['app', 'underscore', '/app/js/common.js',
 
                         queryCanceler = $q.defer();
 
-                        if(referenceCurrentPage===0){
-                            $scope.refDocs = undefined;
-                        }
-
                         var listQuery = {
                             query       : q,
                             sort        : _.isEmpty($scope.setFilters) ? 'updatedDate_dt desc' : '',
@@ -232,6 +229,9 @@ define(['app', 'underscore', '/app/js/common.js',
                         $q.when(searchOperation)
                             .then(function(data) {
                                 queryCanceler = null;
+                                if(referenceCurrentPage===0){
+                                    $scope.refDocs = undefined;
+                                }
 
                                 if(!$scope.refDocs || $scope.refDocs.length == 0)
                                     $scope.refDocs = data.data.response.docs;
@@ -265,10 +265,6 @@ define(['app', 'underscore', '/app/js/common.js',
 
                         queryCanceler = $q.defer();
 
-                        if(scbdCurrentPage===0){
-                            $scope.scbdDocs = undefined;
-                        }
-
                         var listQuery = {
                             query       : q,
                             sort        : 'updatedDate_dt desc',
@@ -282,6 +278,9 @@ define(['app', 'underscore', '/app/js/common.js',
                         $q.when(searchOperation)
                             .then(function(data) {
                                 queryCanceler = null;
+                                if(scbdCurrentPage===0){
+                                    $scope.scbdDocs = undefined;
+                                }
 
                                 if(!$scope.scbdDocs || $scope.scbdDocs.length == 0)
                                     $scope.scbdDocs = data.data.response.docs;
@@ -505,6 +504,8 @@ define(['app', 'underscore', '/app/js/common.js',
 
                         addFilter('absCheckpointCommunique',  {'sort': 7,'type':'national','name':'Checkpoint Communiqués ', 'id':'absCheckpointCommunique', 'description':'A summary of the information collected or received by a checkpoint related to prior informed consent, to the source of the genetic resource, to the establishment  utilization of genetic resources and registered in the ABS Clearing-House (Article 17.1 (a)).'});
 
+                        addFilter('absNationalReport',  {'sort': 8,'type':'national','name':'National Report ', 'id':'absNationalReport', 'description':'National Report'});
+
 
                         //reference
                         addFilter('resource', {'sort': 1,'value':false, type:'reference', 'name':'Virtual Library Records ', 'id':'resource', 'description':'The virtual library in the ABS Clearing-House general literature submitted by any registered user of the ABS Clearing-House.'});
@@ -591,9 +592,6 @@ define(['app', 'underscore', '/app/js/common.js',
                     this.getFilter = getFilter;
 
 
-                    loadFilters();
-                    load();
-                    loadTabFacets();
                   //===============================================================================================================================
                     $scope.$watch('currentTab', function(newVal, oldVal){
                        if(newVal != oldVal)
@@ -625,21 +623,31 @@ define(['app', 'underscore', '/app/js/common.js',
                     $scope.updateScrollPage = function() {
 
                         if($scope.currentTab == 'nationalRecords'){
-                            if($scope.nationalLoading || ($scope.rawDocs && $scope.recordCount && $scope.rawDocs.length == $scope.recordCount[0].count))
+                            var documents = _.pluck($scope.rawDocs.groups, 'doclist');
+                            var docCount = getRecordCount(documents);
+
+                            if($scope.nationalLoading || docCount == $scope.recordCount[0].count)
                                 return;
+
                             $scope.nationalLoading = true;
                             nationalCurrentPage += 1;
                             nationalQuery();
                         }
                         else if($scope.currentTab == 'referenceRecords'){
-                            if($scope.referenceLoading || ($scope.refDocs && $scope.recordCount && $scope.refDocs.length == $scope.recordCount[1].count))
+                            var documents = _.pluck($scope.refDocs.groups, 'doclist');
+                            var docCount = getRecordCount(documents);
+
+                            if($scope.referenceLoading || docCount == $scope.recordCount[0].count)
                                 return;
                             $scope.referenceLoading = true;
                             referenceCurrentPage += 1;
                             referenceQuery();
                         }
                         else if($scope.currentTab == 'scbdRecords'){
-                            if($scope.scbdLoading || ($scope.scbdDocs && $scope.recordCount && $scope.scbdDocs.length == $scope.recordCount[2].count))
+                            var documents = _.pluck($scope.scbdDocs.groups, 'doclist');
+                            var docCount = getRecordCount(documents);
+
+                            if($scope.scbdLoading || docCount == $scope.recordCount[0].count)
                                 return;
                             $scope.scbdLoading = true;
                             scbdCurrentPage += 1;
@@ -647,6 +655,31 @@ define(['app', 'underscore', '/app/js/common.js',
                         }
 
                     };
+                    function getRecordCount(documents){
+                        return _.reduce(_.pluck(documents, 'numFound'), function(mem,d){ return mem + d;},0);
+                    }
+
+                    loadFilters();
+                    if($routeParams.recordType){
+                        $scope.currentTab = $routeParams.recordType;
+
+                        var query =  $location.search();
+
+                        if(query){
+
+                            if(query.text){
+                                $scope.saveFreeTextFilter(query.text);
+                            }
+                            if(query.country){
+                                $scope.saveFilter(query.country);
+                            }
+                            if(query.schema){
+                                $scope.saveFilter(query.schema);
+                            }
+                        }
+                    }
+                    load();
+                    loadTabFacets();
 
             }]//controller
         };
