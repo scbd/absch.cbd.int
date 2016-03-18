@@ -44,7 +44,7 @@
 
 
     <div id="Jumbotron" class="bg-texture-green color-black" style="border-top:1px solid #555;border-bottom:2px solid #ddd;">
-        <search-map height="350px"></search-map>
+        <search-map height="400px"></search-map>
     </div>
         <div block-region activate="loading" block-text=" Loading country details">
 
@@ -71,7 +71,7 @@
                         <li><a href="#" ng-click="sortTable('NR')"> {{ "NR" | mapSchema |schemaNamePlural}}     <!--<span class="badge">{{headerCount.nationalReport}}</span>--></a></li>
                     </ul>
                     </div>
-                    
+
                     <input type="text" class="form-control" ng-model="keyword" placeholder="search for a country" style="width:180px;display:inline;margin-left:3px;"></input>
                     <div class="visible-md" style="padding-top:5px;"></div>
                     <div style="padding-top:5px;" class="visible-xs"></div>
@@ -140,9 +140,9 @@
 
                      <div class="row linkWhite" style="margin:0;border-bottom:2px solid #DDD;padding:5px 0 10px 0;" ng-click="gotoCountryProfile(country.code)"   ng-repeat="country in ct = (countries | filter:keyword | filter: hasStatus | orderBy:sortTermFilter:orderList) track by country.name.en" >
                             <div class="col-md-6">
-                                
+
                                  <div style="text-align:left;width:30px;display:inline-block;">  {{$index+1}} </div>
-                                 
+
                                 <div style="display:inline;">
                                     <span style="font-size:18px;font-weight:500;" ng-class="{'color-party': country.isNPParty, 'color-grey':!country.isNPParty, 'color-inbetween': country.isNPInbetweenParty}">
                                     {{country.name.en}}</span>
@@ -155,7 +155,7 @@
                                     <span ng-if="country.entryIntoForce" class="color-grey"  style="font-size:10px;margin-right:20px;">Entry into force: {{country.entryIntoForce|formatDate}}</span>
                                 </div>
                             </div>
-                               
+
                             <div class="col-md-6 evenly-spaced center-text xs-small sm-small" style="white-space:nowrap;margin-top:5px;">
                                 <span class="color-litegrey" style="margin-right:5px;"> NFP <span class="label label-default bg-green"  ng-class="{'zero':!country.schemas.focalPoint}" >{{country.schemas.focalPoint ? country.schemas.focalPoint  : "0"}}</span></span>
                                 <span class="color-litegrey" style="margin-right:5px;"> CNA <span class="label label-default bg-green"  ng-class="{'zero':!country.schemas.authority}">{{country.schemas.authority ? country.schemas.authority  : "0"}}</span></span>
