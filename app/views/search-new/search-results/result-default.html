@@ -8,7 +8,9 @@
 
             <div class="title">{{doc.rec_title}}</div>
 
-            <div class="description hidden-xs descriptionSpan">{{doc.rec_summary}}</div>
+            <div class="description hidden-xs descriptionSpan">{{doc.rec_summary|limitTo:250}}
+                <span ng-if="doc.rec_summary.length > 250">...</span>
+            </div>
             <ul class="metadata bold">
                 <li ng-if="doc.rec_countryName" class="hidden-xs">
                     <span>{{doc.rec_countryName}}</span>
