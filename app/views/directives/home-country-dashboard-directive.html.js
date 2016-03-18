@@ -17,7 +17,7 @@ define(['app', 'underscore', '/app/services/search-service.js', '/app/services/a
                         }
 
                         $scope.goto = function(url) {
-                            $location.path(url);
+                            $location.url(url);
                         }
 
 

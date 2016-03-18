@@ -95,7 +95,7 @@
     <div class="row-fluid center" id="National">
 
         <div class="col-sm-6 col-md-3 flex" style="vertical-align:middle!important;">
-            <div class="statsBox color-white" ng-click="goto('/search/?t=nationalRecords&f=nationalRecords:NFP')">
+            <div class="statsBox color-white" ng-click="goto('/search-new/nationalRecords/?schema=focalPoint')">
                 <div style="vertical-align:middle!important;">
                     <span class="countryCount badge bg-white">{{nationalRecords.focalPoint.countryCount}}</span> &nbsp;
                     <span class="countryText">Countries</span>
@@ -107,7 +107,7 @@
             </div>
         </div>
         <div class="col-sm-6 col-md-3 flex">
-            <div class="statsBox color-white" ng-click="goto('/search/?t=nationalRecords&f=nationalRecords:CNA')">
+            <div class="statsBox color-white" ng-click="goto('/search-new/nationalRecords/?schema=authority')">
                 <div>
                     <span class="countryCount badge bg-white">{{nationalRecords.authority.countryCount}}</span> &nbsp;
                     <span class="countryText">Countries</span>
@@ -120,7 +120,7 @@
         </div>
 
         <div class="col-sm-6 col-md-3 flex">
-            <div class="statsBox color-white" ng-click="goto('/search/?t=nationalRecords&f=nationalRecords:MSR')">
+            <div class="statsBox color-white" ng-click="goto('/search-new/nationalRecords/?schema=measure')">
                 <div>
                     <span class="countryCount badge bg-white">{{nationalRecords.measure.countryCount}}</span> &nbsp;
                     <span class="countryText">Countries</span>
@@ -133,7 +133,7 @@
         </div>
 
         <div class="col-sm-6 col-md-3 flex">
-            <div class="statsBox color-white" ng-click="goto('/search/?t=nationalRecords&f=nationalRecords:NDB')">
+            <div class="statsBox color-white" ng-click="goto('/search-new/nationalRecords/?schema=database')">
                 <div>
                     <span class="countryCount badge bg-white">{{nationalRecords.database.countryCount}}</span> &nbsp;
                     <span class="countryText">Countries</span>
@@ -148,7 +148,7 @@
         <div class="clearfix"></div>
 
         <div class="col-sm-6 col-md-3 flex">
-            <div class="statsBox color-white" ng-click="goto('/search/?t=nationalRecords&f=nationalRecords:IRCC')">
+            <div class="statsBox color-white" ng-click="goto('/search-new/nationalRecords/?schema=absPermit')">
                 <div>
                     <span class="countryCount badge bg-white">{{nationalRecords.absPermit.countryCount}}</span> &nbsp;
                     <span class="countryText">Countries</span>
@@ -161,7 +161,7 @@
         </div>
 
         <div class="col-sm-6 col-md-3 flex">
-            <div class="statsBox color-white" ng-click="goto('/search/?t=nationalRecords&f=nationalRecords:CP')">
+            <div class="statsBox color-white" ng-click="goto('/search-new/nationalRecords/?schema=absCheckpoint')">
                 <div>
                     <span class="countryCount badge bg-white">{{nationalRecords.absCheckpoint.countryCount}}</span> &nbsp;
                     <span class="countryText">Countries</span>
@@ -174,7 +174,7 @@
         </div>
 
         <div class="col-sm-6 col-md-3 flex">
-            <div class="statsBox color-white" ng-click="goto('/search/?t=nationalRecords&f=nationalRecords:CPC')">
+            <div class="statsBox color-white" ng-click="goto('/search-new/nationalRecords/?schema=absCheckpointCommunique')">
                 <div>
                     <span class="countryCount badge bg-white">{{nationalRecords.absCheckpointCommunique.countryCount}}</span> &nbsp;
                     <span class="countryText">Countries</span>
@@ -187,7 +187,7 @@
         </div>
 
          <div class="col-sm-6 col-md-3 flex">
-            <div class="statsBox color-white" ng-click="goto('/search/?t=nationalRecords&f=nationalRecords:NR')">
+            <div class="statsBox color-white" ng-click="goto('/search-new/nationalRecords/?schema=absNationalReport')">
                 <div>
                     <span class="countryCount badge bg-white">{{nationalRecords.absNationalReport.countryCount}}</span> &nbsp;
                     <span class="countryText">Countries</span>
@@ -210,7 +210,7 @@
     <div class="row-fluid">
         <div class="col-md-3">
 
-                <h5 style="padding:5px;border-radius:3px;margin-bottom:0;" class="bg-orange linkDark" ng-click="goto('/search/?t=referenceRecords&f=referenceRecords:VLR')">
+                <h5 style="padding:5px;border-radius:3px;margin-bottom:0;" class="bg-orange linkDark" ng-click="goto('/search-new/referenceRecords/?schema=resource')">
                     <span class="badge bg-white">{{referenceRecords.capacityBuildingResource.recordCount}}</span> Literature and Capacity Building Resources
                     <span class="helpinfoInline fa fa-info-circle color-white" data-toggle="tooltip" data-html="true" data-title="{{help.vlr}}" data-container="body"></span>
                     </h5>
@@ -225,7 +225,7 @@
         </div>
          <div class="col-md-3">
 
-                    <h5 style="padding:5px;border-radius:3px;margin-bottom:0;" class="bg-orange linkDark"  ng-click="goto('/search/?t=referenceRecords&f=referenceRecords:CBI')">
+                    <h5 style="padding:5px;border-radius:3px;margin-bottom:0;" class="bg-orange linkDark"  ng-click="goto('/search-new/referenceRecords/?schema=capacityBuildingInitiative')">
                         <span class="badge bg-white">{{referenceRecords.capacityBuildingInitiative.recordCount}}</span> Capacity Building Initiatives
                          <span href="#" class="helpinfoInline fa fa-info-circle color-white" data-toggle="tooltip" data-html="true" data-title="{{help.cbr}}" data-container="body"></span>
                         </h5>
@@ -239,7 +239,7 @@
             </div>
         </div>
         <div class="col-md-3">
-                <h5 style="padding:5px;border-radius:3px;margin-bottom:0;" class="bg-orange linkDark" ng-click="goto('/search/?t=referenceRecords&f=referenceRecords:A19A20')">
+                <h5 style="padding:5px;border-radius:3px;margin-bottom:0;" class="bg-orange linkDark" ng-click="goto('/search-new/referenceRecords/?schema=modelContractualClause')">
                 <span class="badge bg-white">{{referenceRecords.modelContractualClause.recordCount}}</span> Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards
                 <span class="helpinfoInline fa fa-info-circle color-white" data-toggle="tooltip" data-html="true" data-title="{{help.a19a20}}" data-container="body"></span>
                 </h5>
@@ -253,7 +253,7 @@
         </div>
         <div class="col-md-3">
 
-                        <h5 style="padding:5px;border-radius:3px;margin-bottom:0;" class="bg-orange linkDark" ng-click="goto('/search/?t=referenceRecords&f=referenceRecords:CPP')" >
+                        <h5 style="padding:5px;border-radius:3px;margin-bottom:0;" class="bg-orange linkDark" ng-click="goto('/search-new/referenceRecords/?schema=communityProtocol')" >
                         <span class="badge bg-white">{{referenceRecords.communityProtocol.recordCount}}</span>
                         Community protocols and procedures and customary laws
                         <span href="#" class="helpinfoInline fa fa-info-circle color-white" data-toggle="tooltip" data-html="true" data-title="{{help.cpp}}" data-container="body"></span>
@@ -277,7 +277,7 @@
     <div style="margin-left:15px;padding-left:15px;border-top:1px solid #BBB;"></div>
     <div class="row-fluid">
         <div class="col-md-3">
-            <a href="/search/?t=scbdRecords&f=referenceRecords:WN" class="color-white">
+            <a href="/search-new/scbdRecords/?schema=new" class="color-white">
                 <h5 style="padding:5px;border-radius:3px;margin-bottom:0;" class="bg-darkgrey color-white linkDark" >
                 <span class="badge bg-white">{{referenceRecords.new.recordCount}}</span> What's New</h5>
             </a>
@@ -291,7 +291,7 @@
         </div>
 
         <div class="col-md-3">
-             <a href="/search/?t=scbdRecords&f=referenceRecords:NT" class="color-white">
+             <a href="/search-new/scbdRecords/?schema=notification" class="color-white">
                 <h5 style="padding:5px;border-radius:3px;margin-bottom:0;" class="bg-darkgrey color-white linkDark" >
                 <span class="badge bg-white">{{referenceRecords.notification.recordCount}}</span> Notifications</h5>
             </a>
@@ -305,7 +305,7 @@
         </div>
 
         <div class="col-md-3">
-              <a href="/search/?t=scbdRecords&f=referenceRecords:MT" class="color-white">
+              <a href="/search-new/scbdRecords/?schema=meeting" class="color-white">
                 <h5 style="padding:5px;border-radius:3px;margin-bottom:0;" class="bg-darkgrey color-white linkDark" >
                 <span class="badge bg-white">{{referenceRecords.meeting.recordCount}}</span> Meetings</h5>
             </a>
@@ -319,7 +319,7 @@
         </div>
 
          <div class="col-md-3">
-            <a   <a href="/search/?t=scbdRecords&f=referenceRecords:NW" class="color-white">
+            <a   <a href="/search-new/scbdRecords/?schema=news" class="color-white">
                 <h5 style="padding:5px;border-radius:3px;margin-bottom:0;" class="bg-darkgrey color-white linkDark" >
                 <span class="badge bg-white">{{referenceRecords.news.recordCount}}</span> News</h5>
             </a>
