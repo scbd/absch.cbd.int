@@ -223,7 +223,7 @@ define(["app",'/app/js/common.js'], function (app) {
             if(schema.toLowerCase()=="statmente"				 ) return "Statement";
 			if(schema.toLowerCase()=="absnationalreport"		 ) return "National Report";
 			if(schema.toLowerCase()=="modelcontractualclause"	 ) return "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards";
-			if(schema.toLowerCase()=="communityprotocol"		 ) return "Community protocols and procedures and customary laws";
+			if(schema.toLowerCase()=="communityprotocol"		 ) return "Community Protocol and Procedures and Customary Law";
 			if(schema.toLowerCase()=="meeting"					 ) return "Meeting";
 			if(schema.toLowerCase()=="notification"				 ) return "Notification";
 			if(schema.toLowerCase()=="capacitybuildinginitiative") return "Capacity Building Initiative";
@@ -261,7 +261,7 @@ define(["app",'/app/js/common.js'], function (app) {
             if(schema.toLowerCase()=="statement"			     ) return "Statement";
 			if(schema.toLowerCase()=="absnationalreport"		 ) return "National Reports";
 			if(schema.toLowerCase()=="modelcontractualclause"	 ) return "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards";
-			if(schema.toLowerCase()=="communityprotocol"		 ) return "Community protocols and procedures and customary laws";
+			if(schema.toLowerCase()=="communityprotocol"		 ) return "Community Protocols and Procedures and Customary Laws";
 			if(schema.toLowerCase()=="meeting"					 ) return "Meetings";
 			if(schema.toLowerCase()=="notification"				 ) return "Notifications";
 			if(schema.toLowerCase()=="capacitybuildinginitiative") return "Capacity-building Initiatives";
