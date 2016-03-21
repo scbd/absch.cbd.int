@@ -1,8 +1,7 @@
 
-<md-toolbar  ng-class="{'bg-blue': type.schemaType != 'referenceRecords','bg-orange': type.schemaType == 'referenceRecords' }">
-<div class="md-toolbar-tools" style="width:100%;">
-  <h2 ><span >{{type.title}} <span class="color-darkgrey">({{type.abbreviation}})</span></span>  
-  </h2>
-   <!--<span flex style="text-align:right;">{{documentUID}}</span>
-</div>-->
-</md-toolbar>
+<div class="register-content-header color-white" style="margin-top:20px;" ng-class="{'bg-blue': type.schemaType != 'referenceRecords','bg-orange': type.schemaType == 'referenceRecords' }">
+      <div style="padding:10px 10px;">
+        <h3>{{type.title}} <span class="color-darkgrey">({{type.abbreviation}})</span></h3>
+      </div>
+  </div>
+
