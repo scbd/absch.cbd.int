@@ -60,10 +60,6 @@ background-color: white;
     color:#333;
 }
 
-.notification-read * {
-    color:#bbb !important;
-}
-
 
 
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus, .nav .dropdown > a:hover {

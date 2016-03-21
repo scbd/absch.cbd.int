@@ -1,5 +1,6 @@
 define(['app', 'underscore', '/app/views/search-new/search-results/record-viewer.js',
-        '/app/js/common.js', '/app/services/role-service.js', 'toastr'
+        '/app/js/common.js', '/app/services/role-service.js', 'toastr',
+          'scbd-branding/directives/xuser-notifications-panel',
 ], function(app, _) {
  "use strict";
     app.controller("recordHistoryController", ["$rootScope", "$scope", "$filter", "$routeParams", "IStorage", "$q",
@@ -26,15 +27,15 @@ define(['app', 'underscore', '/app/views/search-new/search-results/record-viewer
                         }
                 });
 
-                var documentNotificationsQuery = {
-                    $and : [{"data.documentInfo.identifier": $scope.document.identifier}]
-                };
-                IUserNotifications.query(documentNotificationsQuery, 0, 100)
-                    .then(function(data) {
-                        if (!data || data.length === 0)
-                            return;
-                        $scope.documentNotifications = data;
-                    });
+                // var documentNotificationsQuery = {
+                //     $and : [{"data.documentInfo.identifier": $scope.document.identifier}]
+                // };
+                // IUserNotifications.query(documentNotificationsQuery, 0, 100)
+                //     .then(function(data) {
+                //         if (!data || data.length === 0)
+                //             return;
+                //         $scope.documentNotifications = data;
+                //     });
             }
 
             $scope.showButton = function() {
