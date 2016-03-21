@@ -1,29 +1,102 @@
 <div ng-controller="recordHistoryController" class="register-content card card-1-notrans">
 
- <div class="register-content-header bg-darkgrey color-white">
-      <div style="padding:10px 10px;">
-        <h3>Record History
-            <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip" data-html="true"
-            data-title="Record History help info....goes here" data-container="body">
-            </span>
-        </h3>
-      </div>
-  </div>
-  <div class="register-content-content" >
-
-    <div ng-if="showRequestHistory">
-        <div task-id class="record-body" load-task-data='showRequestHistory' workflow-task-id="{{document.workflwoId}}"
-        on-activity-update="refreshworkflowRecord(document, workflowInfo)"></div>
+    <div class="register-content-header bg-darkgrey color-white">
+        <div style="padding:10px 10px;">
+            <h3>Record History
+                <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip" data-html="true" data-title="Record History help info....goes here" data-container="body">
+                </span>
+            </h3>
+        </div>
     </div>
-    <div ng-if="!showRequestHistory">
-        <record-viewer doc-id='document.identifier' doc-schema='document.schema' class="card card-3"></record-viewer>
+    <div class="register-content-content">
+
+        <div class="btn-group document_buttons btn-group-sm">
+            <!-- <button ng-show="showAddButton()" title="Duplicate" type="button" class="btn btn-default" ng-click="askDuplicate(record)"><i class="fa fa-files-o"></i></button> -->
+            <button title="Cancel request" ng-show="canRecall && showAddButton()"
+            type="button" class="btn btn-default" ng-click="askDeleteWorkflowRequest()"><i class="fa fa-undo"></i> Recall</button>
+
+            <a title="Edit" ng-show="!canRecall && !showRequestHistory && showButton()" type="button" class="btn btn-default"
+            href="/register/{{document.schema}}/{{document.identifier}}/edit"><i class="fa fa-edit"></i> Edit</a>
+
+            <button title="Delete" ng-show="!canRecall && !showRequestHistory && showButton()"
+            ng-class="{'red':(documemt.schema == 'MSR' &&  !showRequestHistory)}"
+            type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i> Delete</button>
+        </div>
+
+        <div ng-if="showRequestHistory">
+            <div task-id class="record-body" load-task-data='showRequestHistory' workflow-task-id="{{document.workflwoId}}" on-activity-update="refreshworkflowRecord(document, workflowInfo)"></div>
+        </div>
+        <div ng-if="!showRequestHistory">
+            <record-viewer doc-id='document.identifier' doc-schema='document.schema' class="card card-3"></record-viewer>
+        </div>
+
+        <div id="documentNotifications">
+            {{documentNotifications}}
+        </div>
+
+        <div id="deleteRecordModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">What do you want to delete? <i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
+                    </div>
+                    <div class="modal-body" ng-hide="cantDelete || iacCantDelete">
+
+                        <div ng-show="isDraft(recordToDelete)" class="well">
+                            <button type="button" class="btn btn-warning pull-right" ng-disabled="loading" ng-click="deleteDraft(recordToDelete)">Delete the draft</button>
+                            <em>Draft {{recordToDelete.documentID||'[new]'}}</em>
+                            <p><b>{{recordToDelete.workingDocumentTitle|lstring}}</b></p>
+                            <p ng-bind-html="recordToDelete.workingDocumentSummary|lstring"></p>
+                        </div>
+
+                        <div ng-show="isPublished(recordToDelete)" class="well">
+                            <button type="button" class="btn btn-danger pull-right" ng-disabled="loading" ng-click="deleteRecord(recordToDelete)" data-toggle="tooltip" data-placement="top" title="Note: Any pending draft will also be deleted">
+                                Unpublish and delete the record</button>
+                            <em>Published record {{recordToDelete.documentID}}</em>
+                            <p><b>{{recordToDelete.title|lstring}}</b></p>
+                            <p ng-bind-html="recordToDelete.summary|lstring"></p>
+                        </div>
+
+                    </div>
+                    <div class="modal-body" ng-show="cantDelete || pilotDelete">
+
+                        Not allowed to delete published ABSCH-IRCC records. IRCC records can be ammended and set as <i>revoked</i>. <i>Revoked</i> IRCC records are no longer valid.
+                        <!-- <span class="label label-danger">The delete button is only enabled for pilot phase.</span> -->
+                    </div>
+                    <div class="modal-body" ng-show="iacCantDelete">
+
+                        You don not have sufficient privileges to delete document
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
+        <div id="deleteWorkflowRequestModal" class="modal fade" data-backdrop="static">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4>Cancel publishing request<i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to cancel this publishing request?</p>
+                    </div>
+                    <div class="modal-footer" style="margin-top:0">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+                        <button ng-disabled="loading" type="button" ng-click="deleteWorkflowRequest(recordForDeleteWorkflowRequest)" class="btn btn-primary">Yes</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-
-    <div id="documentNotifications">
-        {{documentNotifications}}
-    </div>
-
-
-
-  </div>
-</div> <!-- controller -->
+</div>
+<!-- controller -->

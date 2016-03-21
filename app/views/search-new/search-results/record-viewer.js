@@ -50,8 +50,9 @@ define(['app', 'underscore', '/app/js/common.js',
 
                 //*************************************************************************************************************************************
                 $scope.loadDocument = function(documentSchema, documentID){
-                        if(documentSchema && (documentSchema.toUpperCase()=="FOCALPOINT" || documentSchema.toUpperCase()=="MEETING" || documentSchema.toUpperCase()=="NOTIFICATION"
-                        || documentSchema.toUpperCase()=="PRESSRELEASE" || documentSchema.toUpperCase()=="STATEMENT" || documentSchema.toUpperCase()=="NEWS"))
+                        if(documentSchema && (documentSchema.toUpperCase()=="FOCALPOINT" || documentSchema.toUpperCase()=="MEETING" ||
+						documentSchema.toUpperCase()=="NOTIFICATION"|| documentSchema.toUpperCase()=="PRESSRELEASE" ||
+						documentSchema.toUpperCase()=="STATEMENT" || documentSchema.toUpperCase()=="NEWS" || documentSchema.toUpperCase()=="NEW"))
                         {
                             commonjs.getReferenceRecordIndex(documentSchema,documentID).then(function(data){
                                 $scope.internalDocument = data.data;
@@ -71,22 +72,25 @@ define(['app', 'underscore', '/app/js/common.js',
 
                     var qDocument;
                     var qDocumentInfo;
-
-                    qDocument = storage.documents.get(identifier).then(function(result) { return result.data || result });
-                    qDocumentInfo = storage.documents.get(identifier,{ info: true}).then(function(result) { return result.data || result });
+					if(version!='draft'){
+	                    qDocument = storage.documents.get(identifier).then(function(result) { return result.data || result });
+	                    qDocumentInfo = storage.documents.get(identifier,{ info: true}).then(function(result) { return result.data || result });
+					}
+					else{
+						qDocument = storage.drafts.get(identifier).then(function(result) { return result.data || result });
+					}
 
                     $q.all([qDocument, qDocumentInfo]).then(function(results) {
                         $scope.internalDocument     = results[0];
                         $scope.internalDocumentInfo = results[1];
                         $scope.internalDocument.info = results[1];
-                        $scope.documentVersionCount = $scope.internalDocumentInfo.revision
-                        $scope.revisionNo  = $scope.documentVersionCount
                         loadViewDirective($scope.internalDocument.header.schema);
-                    }).then(null, function(error) {
-                        //debugger;
-                        // $scope.error = error.Message || error || "Http Error: " + errorCode;
-                        console.log( $scope.error );
                     })
+					.catch(function(error){
+						if(error.status == 404 && version!= 'draft'){
+							$scope.load(identifier, 'draft');
+						}
+					})
 					.finally(function(){
 						$scope.loading = false;
 					})
