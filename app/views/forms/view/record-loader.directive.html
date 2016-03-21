@@ -1,103 +1,58 @@
-﻿<div ng-cloak>
+
+<div ng-cloak>
 
 	<style>
-	/*legend {width: 98%;}*/
-        .localeBtn{
-            padding: 6px 12px;
-            font-size: 14px;
-            border: 1px solid transparent;
-            background-color: rgb(192, 192, 192);
-        }
-    </style>
+		/*legend {width: 98%;}*/
 
-	<div class="alert alert-error text-center" ng-show="error" >
+		.localeBtn {
+			padding: 6px 12px;
+			font-size: 14px;
+			border: 1px solid transparent;
+			background-color: rgb(192, 192, 192);
+		}
+	</style>
+
+	<div class="alert alert-error text-center" ng-show="error">
 		<strong>Error as occured...</strong>
 		<div>{{error}}</div>
 	</div>
-    <div class="jumbotron" style="background-color:white;" role="alert" ng-show="documentSuccess">
-      <h2>Thank you for downloading document {{documentUID}}.</h2>
-      <p>If the document did not download try clicking
-      <a href="{{documentUrl}}" class="alert-link">here...</a></p>
-      </br></br></br></br>
-      This window will close automatically in {{timeLaspe}} seconds.
-    </div>
+	<div class="jumbotron" style="background-color:white;" role="alert" ng-show="documentSuccess">
+		<h2>Thank you for downloading document {{documentUID}}.</h2>
+		<p>If the document did not download try clicking
+			<a href="{{documentUrl}}" class="alert-link">here...</a></p>
+		</br>
+		</br>
+		</br>
+		</br>
+		This window will close automatically in {{timeLaspe}} seconds.
+	</div>
 
 	<div class="jumbotron" style="background-color:white;" role="alert" ng-show="documentError">
-      <h2>Thank you for requesting document {{documentUID}}.</h2>
-      <p>The document does not exists, if you think this file should be available, please report to
-		<a href="mailto:absch@cbd.int" class="alert-link">absch@cbd.int</a></p>
-    </div>
+		<h2>Thank you for requesting document {{documentUID}}.</h2>
+		<p>The document does not exists, if you think this file should be available, please report to
+			<a href="mailto:absch@cbd.int" class="alert-link">absch@cbd.int</a></p>
+	</div>
 	<div ng-show="!error && internalDocument">
 		<div style="float:right">
-
-
-			<!-- <button  type="button" class="btn localeBtn" ng-click="edit()" ng-show="canEdit()" >Edit</button> -->
-
-
-            <div class="btn-group" ng-show="documentVersionCount>1">
-              <button type="button" class="btn btn-danger">Version {{revisionNo}}</button>
-              <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" role="menu">
-                <li ng-repeat="n in [] | range:documentVersionCount" >
-                    <a ng-href="#" ng-click="loadRevision($index+1)">version {{$index+1}} <span ng-if="$last">(latest version)</span></a>
-                </li>
-            </div>
-        </div>
-	<!-- <h1>{{internalDocument}}</h1> -->
-<!--  {{document}} -->
-<!-- {{internalDocument}} -->
-		<div class="alert alert-danger" role="alert"
-		ng-show="documentVersionCount != revisionNo">
-			<h1>The latest version is {{documentVersionCount}}, you are viewing version
-				{{revisionNo}}
+			<div class="btn-group" ng-show="documentVersionCount>1">
+				<button type="button" class="btn btn-danger">Version {{revisionNo}}</button>
+				<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" role="menu">
+					<li ng-repeat="n in [] | range:documentVersionCount">
+						<a ng-href="#" ng-click="loadRevision($index+1)">version {{$index+1}} <span ng-if="$last">(latest version)</span></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="alert alert-danger" role="alert" ng-show="documentVersionCount != revisionNo">
+			<h1>The latest version is {{documentVersionCount}}, you are viewing version {{revisionNo}}
 			</h1>
 		</div>
 		<div id="schemaView" ng-show="internalDocument">
 
 		</div>
-		<!-- <div ng-switch on="internalDocument.header.schema" >
-            <div class="alert alert-danger" role="alert" ng-show="documentVersionCount != revisionNo"><h1>The latest version is {{documentVersionCount}}, you are viewing version {{revisionNo}}</h1></div>
-			<div view-authority	ng-switch-when="authority" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}  ></div>
 
-			<div view-contact ng-switch-when="contact"	ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}  ></div>
-
-			<div view-database ng-switch-when="database" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}} ></div>
-
-			<div view-resource ng-switch-when="resource" heading="Virtual Library Record" short-heading="VLR" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}} ></div>
-
-			<div view-resource ng-switch-when="modelContractualClause" heading="Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards" short-heading="A19A20" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}} ></div>
-			<div view-resource ng-switch-when="communityProtocol" heading="Community protocols and procedures and customary laws" short-heading="CPP" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}} ></div>
-
-			<div view-organization	ng-switch-when="organization" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
-
-			<div view-measure ng-switch-when="measure" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
-
-			<div view-abs-checkpoint ng-switch-when="absCheckpoint" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
-
-			<div view-abs-checkpoint-communique ng-switch-when="absCheckpointCommunique" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
-
-			<div view-abs-permit ng-switch-when="absPermit"	 ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
-
-			<div view-focal-point ng-switch-when="focalPoint" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
-
-			<div view-meeting ng-switch-when="meeting" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
-
-			<div view-notification ng-switch-when="notification" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
-
-			<div view-press-release ng-switch-when="pressRelease" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
-
-			<div view-statement ng-switch-when="statement" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
-
-			<div view-news ng-switch-when="news" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
-
-			<div view-abs-national-report ng-switch-when="absNationalReport" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}} ></div>
-
-			<div ng-switch-default>
-				<div class="text-center"><h1 style="color:#fa6938"><i class="fa fa-spinner fa-spin"></i></h1></div>
-			</div>
-		</div> -->
 	</div>
-	<!-- <div view-other	ng-model="internalDocument"  locale="getLocale()" link-target={{linkTarget}} ></div> -->
 </div>
