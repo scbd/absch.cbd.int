@@ -128,7 +128,7 @@
 
                                           <div ng-show="task.activity.name=='publishRecord' && !task.activity.isUpdating">
                                               <a class="btn btn-danger" type="button" ng-click="tasksDisplay=!tasksDisplay; formLoading=false;task.isActive=false;" style="padding:4px;">
-                                                  <strong><i ng-class="{'glyphicon glyphicon-plus-sign': !tasksDisplay, 'glyphicon glyphicon-minus-sign': tasksDisplay}"></i> Awaiting approval</strong>
+                                                  <strong><i ng-class="{'glyphicon glyphicon-plus-sign': !tasksDisplay, 'glyphicon glyphicon-minus-sign': tasksDisplay}"></i> Pending approval</strong>
                                               </a>
                                              <br/> <span>expires on {{task.workflow.workflowExpiryDate|formatDateWithTime}}</span>
                                           </div>

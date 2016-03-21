@@ -121,7 +121,7 @@
 
                     <a class="btn btn-danger" ng-show="isRequest(record) && !record.isUpdating && isPublishingAuthority(record)"
                         type="button" ng-click="displayDetails=false; displayRequest = !displayRequest; formLoading=false" style="padding:4px;">
-                        <strong><i ng-class="{'glyphicon glyphicon-plus-sign': !displayRequest, 'glyphicon glyphicon-minus-sign': displayRequest}"></i> Awaiting approval</strong>
+                        <strong><i ng-class="{'glyphicon glyphicon-plus-sign': !displayRequest, 'glyphicon glyphicon-minus-sign': displayRequest}"></i> Pending approval</strong>
                     </a>
                     <div ng-show="isRequest(record) && record.isUpdating">
                         <a class="btn btn-info" type="button" ng-click="return" style="padding:4px;">
