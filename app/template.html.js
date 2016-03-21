@@ -192,7 +192,7 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
                 }
 
                 if(!_slaask.initialized) {
-                    _slaask.init('4251dbad1118dbaf3ad67acbaa82e4b9');
+                    _slaask.init('ae83e21f01860758210a799872e12ac4');
                     _slaask.initialized = true;
                 }
             });
