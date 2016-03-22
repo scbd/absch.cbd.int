@@ -143,7 +143,11 @@ define(['app', 'underscore'], function (app, _) { 'use strict';
             }
         }
 		function nationalRoles(){
-			return _.flatten(_.map(getRoles(),function(role){return _.values(role);}));
+			 _.flatten(_.map(getRoles(),function(role){
+				 if(_.keys(role)=='User')
+				 	return null;
+				 return _.values(role);
+			 }));
 		}
 
 		function getSiteMapUrls(){

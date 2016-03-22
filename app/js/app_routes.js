@@ -1,6 +1,6 @@
 'use strict';
-define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 'filters',
- 'realm-configuration', '/app/services/app-config-service.js'], function (app) {
+define(['app', 'underscore', 'extended-route-provider','scbd-angularjs-services', 'services', 'filters',
+ 'realm-configuration', '/app/services/app-config-service.js'], function (app, _) {
 
     app.value("realm", {value:"ABS"});
     app.value("schemaTypes", [ "absNationalReport", "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority",
@@ -115,21 +115,20 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
 
            when('/register/requests',                                  {templateUrl: '/app/views/register/register.html',          label:'Requests',  param:'true', resolveController: true,resolve : { securized : securize() }, subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',    type : 'all'}).
 
-           when('/register/:document_type/status/:status',             {templateUrl: '/app/views/register/register.html',          label:'document_type',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/register/type_document_list.html',}).
+           when('/register/:document_type/status/:status',             {templateUrl: '/app/views/register/register.html',          label:'document_type',  param:'true', resolveController: true,resolve : { securized : securize(null,true) },subTemplateUrl: '/app/views/register/type_document_list.html',}).
 
 
-           when('/register/requests/:workflowId',                      {templateUrl: '/app/views/register/register.html',          label:'Requests',  param:'true', resolveController: true,resolve : { securized : securize() }, subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',type : 'all'}).
-           when('/register/requests/:type/:status',                    {templateUrl: '/app/views/register/register.html',          label:'Requests',  param:'true', resolveController: true,resolve : { securized : securize() }, subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',}).
-           when('/register/national-users',                            {templateUrl: '/app/views/register/register.html',          label:'Manage user roles',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/register/national-users/index.html'}).
-           when('/register/:document_type',                            {templateUrl: '/app/views/register/register.html',          label:'document_type',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/register/type_document_list.html',}).
-           when('/register/:document_type/new',                        {templateUrl: '/app/views/register/register.html',          label:'New',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/forms/edit/edit--', }).
-           when('/register/:document_type/help',                       {templateUrl: '/app/views/register/register.html',          label:'document_type',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/register/type_document_list.html',}).
-           when('/register/:document_type/:identifier/edit',           {templateUrl: '/app/views/register/register.html',          label:'Edit',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/forms/edit/edit--', }).
-           when('/register/:document_type/:identifier/edit/:tour',     {templateUrl: '/app/views/register/register.html',          label:'Edit',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/forms/edit/edit--',  }).
-           when('/register/:document_type/:identifier/view',           {templateUrl: '/app/views/register/register.html',          label:'View',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/register/record-history.html', }).
+           when('/register/requests/:workflowId',                      {templateUrl: '/app/views/register/register.html',          label:'Requests',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }, subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',type : 'all'}).
+           when('/register/requests/:type/:status',                    {templateUrl: '/app/views/register/register.html',          label:'Requests',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }, subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',}).
+           when('/register/national-users',                            {templateUrl: '/app/views/register/register.html',          label:'Manage user roles',  param:'true', resolveController: true,resolve : { securized : securize(null,true) },subTemplateUrl: '/app/views/register/national-users/index.html'}).
+           when('/register/:document_type',                            {templateUrl: '/app/views/register/register.html',          label:'document_type',  param:'true', resolveController: true,resolve : { securized : securize(null,true) },subTemplateUrl: '/app/views/register/type_document_list.html',}).
+           when('/register/:document_type/new',                        {templateUrl: '/app/views/register/register.html',          label:'New',  param:'true', resolveController: true,resolve : { securized : securize(null,true) },subTemplateUrl: '/app/views/forms/edit/edit--', }).
+           when('/register/:document_type/help',                       {templateUrl: '/app/views/register/register.html',          label:'document_type',  param:'true', resolveController: true,resolve : { securized : securize(null,true) },subTemplateUrl: '/app/views/register/type_document_list.html',}).
+           when('/register/:document_type/:identifier/edit',           {templateUrl: '/app/views/register/register.html',          label:'Edit',  param:'true', resolveController: true,resolve : { securized : securize(null,true) },subTemplateUrl: '/app/views/forms/edit/edit--', }).
+           when('/register/:document_type/:identifier/edit/:tour',     {templateUrl: '/app/views/register/register.html',          label:'Edit',  param:'true', resolveController: true,resolve : { securized : securize(null,true) },subTemplateUrl: '/app/views/forms/edit/edit--',  }).
+           when('/register/:document_type/:identifier/view',           {templateUrl: '/app/views/register/register.html',          label:'View',  param:'true', resolveController: true,resolve : { securized : securize(null,true) },subTemplateUrl: '/app/views/register/record-history.html', }).
 
            when('/register/admin/pending-requests',                             {templateUrl: '/app/views/register/register.html',          label:'Pending Requests',  param:'true', resolveController: true,resolve : { securized : securize(["AbsAdministrator", "AbsAdministrator-dev", "AbsAdministrator-trg"]) },subTemplateUrl: '/app/views/admin/pending-tasks.html'}).
-
            when('/register/admin/reported-records',                             {templateUrl: '/app/views/register/register.html',          label:'Reported Records',  param:'true', resolveController: true,resolve : { securized : securize(["AbsAdministrator", "AbsAdministrator-dev", "AbsAdministrator-trg"]) },subTemplateUrl: '/app/views/admin/reported-records.html'}).
 
 
@@ -172,12 +171,19 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
     }]);
 
 
-    function securize(roles)
+    function securize(roles, useNationalRoles)
     {
-        return ["$location", "authentication", "appConfigService", function ($location, authentication, appConfigService) {
+        return ["$location", "authentication", "appConfigService", "$filter", "$route",
+         function ($location, authentication, appConfigService, $filter, $route) {
 
             return authentication.getUser().then(function (user) {
-
+                if(useNationalRoles){
+                    var path = $location.$$url.replace('/register/','');
+                    var schema = path.substr(0, path.indexOf('/'));
+                    var schemaName = $filter('schemaShortName')(schema);
+                    if(!_.contains(appConfigService.referenceSchemas, schemaName))
+                        roles = (roles || []).concat(appConfigService.nationalRoles());
+                }
                 if (!user.isAuthenticated) {
 
                     console.log("securize: force sign in");
@@ -199,4 +205,5 @@ define(['app', 'extended-route-provider','scbd-angularjs-services', 'services', 
             });
         }];
     }
+
 });
