@@ -11,8 +11,8 @@ app.directive('taskId', function () {
                 workflowTaskId : '@',
                 onActivityUpdate : '&', //used in case if the directive parent needs to be refreshed else the workflow details will be fetched.
             },
-            controller: [ "$scope", "$timeout", "$http", "$route", "IStorage", "IWorkflows", "authentication", "underscore",'$element', 'toastr',
-					 function ($scope, $timeout, $http, $route, IStorage, IWorkflows, authentication, _, $element, toastr)
+            controller: [ "$scope", "$timeout", "$http", "$route", "IStorage", "IWorkflows", "authentication", "underscore",'$element', 'toastr','$window',
+					 function ($scope, $timeout, $http, $route, IStorage, IWorkflows, authentication, _, $element, toastr, $window)
 					{
 						//==================================================
 						//
@@ -58,10 +58,10 @@ app.directive('taskId', function () {
 									// console.log(result);
 										var msg = "";
 										if(result.result.action == 'approve'){
-											msg = "Record approved successfully";
+											msg = "Record published";
 										}
 										else{
-											msg = "Record rejected successfully";
+											msg = "Record rejected";
 										}
 
 										var workflowInfo = {workflowId:$scope.workflowTaskId, activity:result}
@@ -78,6 +78,9 @@ app.directive('taskId', function () {
 											load();
 											$scope.isUpdating = false;
 										}
+									toastr.success(msg);
+
+
 
 							}).catch(function(error) {
 								//alert(error);
@@ -87,6 +90,8 @@ app.directive('taskId', function () {
 								$element.find('#spiner').css('display', 'none');
 								$scope.isUpdating = false;
 							}).finally(function(){
+								
+								$timeout(function(){ $window.location.reload();}, 1000);
 
 							});
 						};

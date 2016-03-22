@@ -119,9 +119,9 @@
                     <div ng-show="isDraft(record) && !isRequest(record)" class="color-litegrey bold"> Draft </div>
                     <div ng-show="isRequest(record) && !record.isUpdating && !isPublishingAuthority(record)" class="color-red bold"> Pending approval </div>
 
-                    <a class="btn btn-danger" ng-show="isRequest(record) && !record.isUpdating && isPublishingAuthority(record)"
-                        type="button" ng-click="displayDetails=false; displayRequest = !displayRequest; formLoading=false" style="padding:4px;">
-                        <strong><i ng-class="{'glyphicon glyphicon-plus-sign': !displayRequest, 'glyphicon glyphicon-minus-sign': displayRequest}"></i> Pending approval</strong>
+                    <a class="btn btn-danger color-white" ng-show="isRequest(record) && !record.isUpdating && isPublishingAuthority(record)"
+                        ng-href="/register/{{record.metadata.schema | schemaShortName}}/{{record.identifier}}/view">
+                        Pending approval
                     </a>
                     <div ng-show="isRequest(record) && record.isUpdating">
                         <a class="btn btn-info" type="button" ng-click="return" style="padding:4px;">
@@ -229,7 +229,7 @@
                 </div>
                 <div class="modal-body" ng-show="iacCantDelete">
 
-                    You don not have sufficient privileges to delete document
+                    You do not have sufficient privileges to delete document.
 
                 </div>
                 <div class="modal-footer">
