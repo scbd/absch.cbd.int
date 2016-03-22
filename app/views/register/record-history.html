@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="register-content-content">
-        
+
         <div class="row" style="margin:0;padding:0;">
             <div class="col-xs-12">
                 <div class="well">
@@ -28,16 +28,16 @@
                             <tr>
                                 <td><label> Owner: </label></td>
                                 <td ng-if="user.government"><a href="/countries/{{user.government | uppercase}}"><strong> {{userCountry|term}} </strong></a></td>
-                            </tr> 
+                            </tr>
                             <tr>
                                 <td><label> Created by: </label></td>
                                 <td  ng-if="user.government"><a href="/countries/{{user.government | uppercase}}"><strong> {{userCountry|term}} </strong></a></td>
-                            </tr> 
+                            </tr>
                             <tr>
                                 <td><label> Published by: </label></td>
                                 <td  ng-if="user.government"><a href="/countries/{{user.government | uppercase}}"><strong> {{userCountry|term}} </strong></a></td>
-                            </tr> 
-                    </table> 
+                            </tr>
+                    </table>
                 </div>
             </div>
         </div>
@@ -48,10 +48,8 @@
                     <!-- <button ng-show="showAddButton()" title="Duplicate" type="button" class="btn btn-default" ng-click="askDuplicate(record)"><i class="fa fa-files-o"></i></button> -->
                     <button title="Cancel request" ng-show="canRecall && showAddButton()"
                     type="button" class="btn btn-warning color-white" ng-click="askDeleteWorkflowRequest()"><i class="fa fa-undo"></i> Recall</button>
-
-                    <a title="Edit" ng-show="!canRecall && !showRequestHistory && showButton()" type="button" class="btn btn-info"
-                    href="/register/{{document.schema}}/{{document.identifier}}/edit"><i class="fa fa-edit color-white"></i> Edit</a>
-
+                    <a title="Edit" ng-show="!canRecall && !showRequestHistory && showButton()" type="button" class="btn btn-default"
+                    href="/register/{{document.schema|mapSchema}}/{{document.identifier}}/edit"><i class="fa fa-edit"></i> Edit</a>
                     <button title="Delete" ng-show="!canRecall && !showRequestHistory && showButton()"
                     ng-class="{'red':(documemt.schema == 'MSR' &&  !showRequestHistory)}"
                     type="button" class="btn btn-danger" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i> Delete</button>
@@ -69,7 +67,7 @@
                 </div>
             </div>
         </div>
-        
+
      <!--    <div class="row" style="margin:0;padding:0;">
             <div class="col-xs-12">
                 <div style="margin-top:40px;">
