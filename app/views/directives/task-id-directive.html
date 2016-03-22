@@ -26,7 +26,7 @@
             </div>
             <div>
                 <label>Days to expiry :</label>
-                <span class="color-pink bold">{{workflow.daysToApproval}}</span>                    
+                <span class="color-pink bold">{{workflow.daysToApproval}}</span>
             </div>
         </div>
 
@@ -53,41 +53,42 @@
                     </div>
 
                     <div class="col-xs-4">
-                        <button type="button" class="btn btn-warning" style="width:140px;" data-toggle="modal" data-target="#rejectModal{{workflowTaskId}}"
+                        <button type="button" class="btn btn-warning" style="width:140px;" ng-click="showRejectDialog()"
                         ng-disabled="isUpdating">
                             <i class="fa fa-times-circle"></i>
                             REJECT
                         </button>
                     </div>
                 </div>
-
-                <form name="rejectForm" role="form">
-                    <div class="modal fade" id="rejectModal{{workflowTaskId}}">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <h4 class="modal-title">Request Changes or Reject a record version</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p ng-class="{ 'has-warning':rejectForm.reason.$error.required, 'has-success':!rejectForm.reason.$invalid }">
-                                        <textarea class="form-control" rows="5" name="reason" ng-model="rejectReason" required></textarea>
-                                        <span class="help-block" ng-show="rejectForm.reason.$error.required">Please provide instructions on how you want the record to be modified or the reason why you rejected this record.</span>
-                                    </p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                    <button type="button" class="btn btn-warning" data-dismiss="modal" ng-disabled="rejectForm.reason.$error.required" ng-click="updateActivity({ action : 'reject', reason: rejectReason })"><i class="glyphicon glyphicon-remove"></i> Request Changes / Reject</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-
             </div>
             <div ng-show="document" class="t-document">
                 <record-loader document="document" class="shadow-z-2" hide-buttons="true" link-target="_self"></record-loader>
             </div>
-
     </div>
+
+
+
+    <form name="rejectForm" role="form">
+        <div class="modal fade" id="rejectModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Request Changes or Reject a record version</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p ng-class="{ 'has-warning':rejectForm.reason.$error.required, 'has-success':!rejectForm.reason.$invalid }">
+                            <textarea class="form-control" rows="5" name="reason" ng-model="rejectReason" required></textarea>
+                            <span class="help-block" ng-show="rejectForm.reason.$error.required">Please provide instructions on how you want the record to be modified or the reason why you rejected this record.</span>
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-warning" data-dismiss="modal" ng-disabled="rejectForm.reason.$error.required" ng-click="updateActivity({ action : 'reject', reason: rejectReason })"><i class="glyphicon glyphicon-remove"></i> Request Changes / Reject</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
 </div>

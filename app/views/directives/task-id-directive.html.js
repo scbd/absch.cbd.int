@@ -14,6 +14,7 @@ app.directive('taskId', function () {
             controller: [ "$scope", "$timeout", "$http", "$route", "IStorage", "IWorkflows", "authentication", "underscore",'$element', 'toastr','$window',
 					 function ($scope, $timeout, $http, $route, IStorage, IWorkflows, authentication, _, $element, toastr, $window)
 					{
+						var rejectRecordModal = $element.find("#rejectModal");
 						//==================================================
 						//
 						//
@@ -89,10 +90,6 @@ app.directive('taskId', function () {
 								$element.find('.overlayDiv').removeClass('overlayDiv');
 								$element.find('#spiner').css('display', 'none');
 								$scope.isUpdating = false;
-							}).finally(function(){
-								
-								$timeout(function(){ $window.location.reload();}, 1000);
-
 							});
 						};
 						$scope.user = function() {
@@ -136,6 +133,15 @@ app.directive('taskId', function () {
 								load();
 							}
 		                });
+
+						$scope.showRejectDialog = function(){
+
+							rejectRecordModal.appendTo('body').modal("show");
+						}
+
+			            $scope.$on('$destroy', function(){
+			                $('#rejectModal').remove();
+			            });
 
 					}
 				]
