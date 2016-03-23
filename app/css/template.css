@@ -1205,7 +1205,7 @@ footer .logo {
     .recordDefault .metadata > li > .last-span {border-right:0!important;}
 
    #doc-metadata {padding-top:10px!important;}
-   #doc-metadata * {font-size:10px;}
+   /*#doc-metadata * {font-size:10px;}*/
    #doc-metadata .table-condensed>tbody>tr>td,  #doc-metadata .table-condensed>tbody>tr>th,  #doc-metadata .table-condensed>tfoot>tr>td,  #doc-metadata .table-condensed>tfoot>tr>th,  #doc-metadata .table-condensed>thead>tr>td,  #doc-metadata .table-condensed>thead>tr>th
    {padding:0!important;margin:0!important;border:0!important;}
    #view-history .table-condensed>tbody>tr>td,  #view-history .table-condensed>tbody>tr>th,  #view-history .table-condensed>tfoot>tr>td,  #view-history .table-condensed>tfoot>tr>th, #view-history .table-condensed>thead>tr>td,  #view-history .table-condensed>thead>tr>th
