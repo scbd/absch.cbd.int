@@ -37,6 +37,23 @@ define(['app', 'underscore', '/app/views/search-new/search-results/record-viewer
                 //         $scope.documentNotifications = data;
                 //     });
             }
+            $scope.refreshworkflowRecord = function(document, workflowInfo) {
+
+               if (workflowInfo.workflowId) {
+                   IWorkflows.get(workflowInfo.workflowId).then(function(data) {
+                       if (data.state == 'completed') {
+                           // var currentDocument = _.first(_.filter($scope.records, function(doc) {
+                           //     return doc.identifier == document.header.identifier;
+                           // }));
+                           $scope.showRequestHistory = false;
+                       } else {
+                           $timeout(function() {
+                               $scope.refreshworkflowRecord(document, workflowInfo);
+                           }, 2000);
+                       }
+                   });
+               }
+            }
 
             $scope.showButton = function() {
 
