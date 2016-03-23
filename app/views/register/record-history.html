@@ -8,65 +8,18 @@
         </div>
     </div>
     <div class="register-content-content">
+        
+         <div block-region activate="loading"></div>
 
-        <div class="row" style="margin:0;padding:0;">
-            <div class="col-xs-12">
-                <div class="well">
-                    <table>
-                            <tr>
-                                <td><label> Unique Identifier: </label></td>
-                                <td><strong> {{user.name}}</strong></td>
-                            </tr>
-                            <tr>
-                                <td><label> Record Status: </label></td>
-                                <td><strong> {{user.email}} </strong></td>
-                            </tr>
-                             <tr>
-                                <td><label> Record Type: </label></td>
-                                <td><strong> {{user.email}} </strong></td>
-                            </tr>
-                            <tr>
-                                <td><label> Owner: </label></td>
-                                <td ng-if="user.government"><a href="/countries/{{user.government | uppercase}}"><strong> {{userCountry|term}} </strong></a></td>
-                            </tr>
-                            <tr>
-                                <td><label> Created by: </label></td>
-                                <td  ng-if="user.government"><a href="/countries/{{user.government | uppercase}}"><strong> {{userCountry|term}} </strong></a></td>
-                            </tr>
-                            <tr>
-                                <td><label> Published by: </label></td>
-                                <td  ng-if="user.government"><a href="/countries/{{user.government | uppercase}}"><strong> {{userCountry|term}} </strong></a></td>
-                            </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <div class="row" style="margin:0;padding:0 0 20px 0;">
-            <div class="col-xs-12">
-                <div class="pull-right" >
-                    <!-- <button ng-show="showAddButton()" title="Duplicate" type="button" class="btn btn-default" ng-click="askDuplicate(record)"><i class="fa fa-files-o"></i></button> -->
-                    <button title="Cancel request" ng-show="canRecall && showAddButton()"
-                    type="button" class="btn btn-warning color-white" ng-click="askDeleteWorkflowRequest()"><i class="fa fa-undo"></i> Recall</button>
-                    <a title="Edit" ng-show="!canRecall && !showRequestHistory && showButton()" type="button" class="btn btn-default"
-                    href="/register/{{document.schema|mapSchema}}/{{document.identifier}}/edit"><i class="fa fa-edit"></i> Edit</a>
-                    <button title="Delete" ng-show="!canRecall && !showRequestHistory && showButton()"
-                    ng-class="{'red':(documemt.schema == 'MSR' &&  !showRequestHistory)}"
-                    type="button" class="btn btn-danger" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i> Delete</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="row" style="margin:0;padding:0;">
-            <div class="col-xs-12">
                 <div ng-if="showRequestHistory">
-                    <div task-id class="record-body" load-task-data='showRequestHistory' workflow-task-id="{{document.workflwoId}}" on-activity-update="refreshworkflowRecord(document, workflowInfo)"></div>
+                    <div task-id show-details="true" class="record-body" load-task-data='showRequestHistory' workflow-task-id="{{document.workflowId}}" on-activity-update="refreshworkflowRecord(document, workflowInfo)"></div>
                 </div>
                 <div ng-if="!showRequestHistory">
-                    <record-viewer doc-id='document.identifier' doc-schema='document.schema' ></record-viewer>
+                    <record-loader show-details="true"  class="shadow-z-2" hide-buttons="true" link-target="_self"></record-loader>
+
+                    <!--<record-viewer show-details="true" doc-id='document.identifier' doc-schema='document.schema' ></record-viewer>-->
                 </div>
-            </div>
-        </div>
+          
 
      <!--    <div class="row" style="margin:0;padding:0;">
             <div class="col-xs-12">

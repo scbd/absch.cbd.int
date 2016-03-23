@@ -1,6 +1,7 @@
-define(['app', 'underscore', '/app/views/search-new/search-results/record-viewer.js',
+define(['app', 'underscore', '/app/views/forms/view/record-loader.directive.html.js',
+'/app/views/search-new/search-results/record-viewer.js',
         '/app/js/common.js', '/app/services/role-service.js', 'toastr',
-          'scbd-branding/directives/xuser-notifications-panel',
+          'scbd-branding/directives/xuser-notifications-panel', '/app/views/directives/block-region-directive.js',
 ], function(app, _) {
  "use strict";
     app.controller("recordHistoryController", ["$rootScope", "$scope", "$filter", "$routeParams", "IStorage", "$q",
@@ -8,48 +9,44 @@ define(['app', 'underscore', '/app/views/search-new/search-results/record-viewer
         function($rootScope, $scope, $filter, $routeParams, IStorage, $q, IWorkflows,
             IUserNotifications, commonjs, $element, $timeout, roleService, toastr, $location) {
 
-
+            
             if ($routeParams.document_type) {
                 $scope.document = {
                     schema : $filter("mapSchema")($routeParams.document_type),
-                    identifier : $routeParams.identifier
+                    identifier : $routeParams.documentID
                 };
 
-                $q.when(IStorage.drafts.locks.get($routeParams.identifier,{lockID:''}))
+                $q.when(IStorage.drafts.locks.get($routeParams.documentID,{lockID:''}))
                 .then(function(data){
                         var doc = data.data[0];
                         if(doc && doc.lockID){
-                            doc.workflwoId = doc.lockID.replace('workflow-','');
+                            doc.workflowId = doc.lockID.replace('workflow-','');
                             $scope.showRequestHistory = true;
-                            _.extend($scope.document, doc);
+                           _.extend($scope.document, doc);
                             if(doc.lockedBy.userID == $rootScope.user.userID)
                                 $scope.canRecall = true;
                         }
+                      
                 });
-
-                // var documentNotificationsQuery = {
-                //     $and : [{"data.documentInfo.identifier": $scope.document.identifier}]
-                // };
-                // IUserNotifications.query(documentNotificationsQuery, 0, 100)
-                //     .then(function(data) {
-                //         if (!data || data.length === 0)
-                //             return;
-                //         $scope.documentNotifications = data;
-                //     });
             }
+            
+            
             $scope.refreshworkflowRecord = function(document, workflowInfo) {
-
+               
+               $scope.loading = true;
+               
                if (workflowInfo.workflowId) {
                    IWorkflows.get(workflowInfo.workflowId).then(function(data) {
                        if (data.state == 'completed') {
                            // var currentDocument = _.first(_.filter($scope.records, function(doc) {
-                           //     return doc.identifier == document.header.identifier;
+                           //     return doc.documentId == document.header.documentId;
                            // }));
                            $scope.showRequestHistory = false;
                        } else {
                            $timeout(function() {
                                $scope.refreshworkflowRecord(document, workflowInfo);
-                           }, 2000);
+                                $scope.loading = false;
+                           }, 500);
                        }
                    });
                }
@@ -127,7 +124,7 @@ define(['app', 'underscore', '/app/views/search-new/search-results/record-viewer
             $scope.deleteWorkflowRequest = function(record){
 
                 $scope.loading = true;
-                IWorkflows.cancel(record.workflwoId, {'action':'cancel'})
+                IWorkflows.cancel(record.workflowId, {'action':'cancel'})
                 .then(function(data){
                     $scope.recordForDeleteWorkflowRequest = null;
                     $scope.canRecall = false;

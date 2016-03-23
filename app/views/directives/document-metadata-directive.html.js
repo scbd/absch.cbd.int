@@ -15,6 +15,19 @@ define(['app', '/app/js/common.js'
 					else
 						return commonjs.hexToInteger(document.id);
 				}
+                
+               $scope.getUniqueID = function(doc){
+                
+                   var uid =$filter('uniqueID')(doc);
+                   
+                   if(!uid)
+                    return "unique identifier not yet assigned ";   
+                   
+                   return uid;
+                   
+               }
+                
+                
 
 				$scope.loadReportRecord = function(schema, identifier){
 

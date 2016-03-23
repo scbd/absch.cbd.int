@@ -4,6 +4,7 @@ define(['app',
     '/app/js/common.js',
     '/app/views/directives/document-metadata-directive.html.js',
 	'/app/views/directives/help-directive.html.js',
+    '/app/views/directives/internal-record-details.js',
     ], function (app) {
 app.directive('recordLoader', [function () {
 	return {
@@ -15,10 +16,12 @@ app.directive('recordLoader', [function () {
 			linkTarget: "@",
 			document: "=",
 			locale  : "=",
-			hide: "@"
+			hide: "@",
+            showDetails: "="
 		},
 		link: function($scope) {
-			if(!$scope.linkTarget || $scope.linkTarget == '')
+            
+            if(!$scope.linkTarget || $scope.linkTarget == '')
 				$scope.linkTarget = '_new';
 			//debugger;
 			$scope.internalDocument     = undefined;
@@ -63,7 +66,9 @@ app.directive('recordLoader', [function () {
 					loadViewDirective($scope.internalDocument.schema || $scope.internalDocument.header.schema);
 				}
 			});
-
+            
+            
+            
 			//==================================
 			//
 			//==================================
@@ -117,6 +122,10 @@ app.directive('recordLoader', [function () {
 
 			}
 
+
+            //==================================
+			//
+			//==================================
 			$scope.loadDocument = function(documentSchema,documentID,documentRevision){
 
 				if(documentSchema && (documentSchema.toUpperCase()=="FOCALPOINT" || documentSchema.toUpperCase()=="MEETING" || documentSchema.toUpperCase()=="NOTIFICATION"
@@ -129,7 +138,7 @@ app.directive('recordLoader', [function () {
 					loadViewDirective(documentSchema);
 				}
 				else if (documentID){
-					$scope.load(documentID,documentRevision);
+					$scope.load(documentID, documentRevision);
 				}
 			};
 
@@ -155,21 +164,18 @@ app.directive('recordLoader', [function () {
 				$scope.error = undefined;
 				var qDocument;
 				var qDocumentInfo;
-				if(version==undefined){
-
-					qDocument = storage.documents.get(identifier)
-									   .then(function(result) { return result.data || result });
+				if(version=='draft'){
+                    qDocument = storage.drafts.get(identifier).then(function(result) { return result.data || result });
+                    qDocumentInfo = storage.drafts.get(identifier,{ info: true}).then(function(result) { return result.data || result });
+                }
+                else if(version==undefined){
+					qDocument = storage.documents.get(identifier).then(function(result) { return result.data || result });
+                    qDocumentInfo = storage.documents.get(identifier,{ info: true}).then(function(result) { return result.data || result });
 				}
 				else{
-					qDocument = storage.documentVersions.get(identifier,{'version':version})
-									   .then(function(result) { return result.data || result });
-
-				//	qDocumentInfo = storage.documentVersions.get(identifier,{ info: true,'version':version }).then(function(result) { return result.data || result });
-
+					qDocument = storage.documentVersions.get(identifier,{'version':version}).then(function(result) { return result.data || result });
+                    qDocumentInfo = storage.documentVersions.get(identifier,{ info: true}).then(function(result) { return result.data || result });
 				}
-				qDocumentInfo = storage.documents.get(identifier,{ info: true}).then(function(result) { return result.data || result });
-
-
 				$q.all([qDocument, qDocumentInfo]).then(function(results) {
 
 					$scope.internalDocument     = results[0];
@@ -188,11 +194,14 @@ app.directive('recordLoader', [function () {
 
 					loadViewDirective($scope.internalDocument.header.schema);
 
-				}).then(null, function(error) {
-					//debugger;
-					 // $scope.error = error.Message || error || "Http Error: " + errorCode;
-					 console.log( $scope.error );
-				})
+				}).catch(function(error){
+						if(error.status == 404 && version!= 'draft'){
+							$scope.load(identifier, 'draft');
+						}
+					})
+				.finally(function(){
+						$scope.loading = false;
+		        })
 
 			};
 

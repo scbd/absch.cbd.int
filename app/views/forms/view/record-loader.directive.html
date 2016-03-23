@@ -11,6 +11,8 @@
 			background-color: rgb(192, 192, 192);
 		}
 	</style>
+    
+     <div block-region activate="loading"></div>
 
 	<div class="alert alert-error text-center" ng-show="error">
 		<strong>Error as occured...</strong>
@@ -32,6 +34,10 @@
 		<p>The document does not exists, if you think this file should be available, please report to
 			<a href="mailto:absch@cbd.int" class="alert-link">absch@cbd.int</a></p>
 	</div>
+    
+    
+         <internal-record-details ng-if="showDetails" doc-info="internalDocumentInfo" doc="internalDocument"></internal-record-details>
+    
 	<div ng-show="!error && internalDocument">
 		<div style="float:right">
 			<div class="btn-group" ng-show="documentVersionCount>1">
@@ -46,10 +52,12 @@
 				</ul>
 			</div>
 		</div>
-		<div class="alert alert-danger" role="alert" ng-show="documentVersionCount != revisionNo">
-			<h1>The latest version is {{documentVersionCount}}, you are viewing version {{revisionNo}}
-			</h1>
+		<div class="alert alert-danger" role="alert" ng-show="documentVersionCount != revisionNo && revisionNo != 'draft'">
+			<h3>The latest version is {{documentVersionCount}}, you are viewing version {{revisionNo}}
+			</h3>
 		</div>
+        
+   
 		<div id="schemaView" ng-show="internalDocument">
 
 		</div>

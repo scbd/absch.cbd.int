@@ -3,7 +3,8 @@ define(['app', 'underscore', '/app/js/common.js',
 	'scbd-angularjs-filters',
 	'/app/views/forms/view/view-history-directive.html.js',
     '/app/views/directives/document-metadata-directive.html.js',
-	'/app/views/directives/report-record.js'
+	'/app/views/directives/report-record.js',
+    '/app/views/directives/internal-record-details.js',
 ], function(app, _) {
 
     app.directive('recordViewer', function() {
@@ -14,7 +15,8 @@ define(['app', 'underscore', '/app/js/common.js',
             templateUrl: '/app/views/search-new/search-results/record-viewer.html',
             scope: {
                 docId:'=',
-                docSchema:'='
+                docSchema:'=',  
+                showDetails:'='
             },
 
            controller: ['$scope', "$route", 'IStorage', "authentication", "$q", "$location", "commonjs","$timeout",
@@ -78,6 +80,7 @@ define(['app', 'underscore', '/app/js/common.js',
 					}
 					else{
 						qDocument = storage.drafts.get(identifier).then(function(result) { return result.data || result });
+                        qDocumentInfo = storage.drafts.get(identifier,{ info: true}).then(function(result) { return result.data || result });
 					}
 
                     $q.all([qDocument, qDocumentInfo]).then(function(results) {

@@ -10,6 +10,7 @@ app.directive('taskId', function () {
                 loadTaskData : '=',
                 workflowTaskId : '@',
                 onActivityUpdate : '&', //used in case if the directive parent needs to be refreshed else the workflow details will be fetched.
+                showDetails: "="
             },
             controller: [ "$scope", "$timeout", "$http", "$route", "IStorage", "IWorkflows", "authentication", "underscore",'$element', 'toastr','$window',
 					 function ($scope, $timeout, $http, $route, IStorage, IWorkflows, authentication, _, $element, toastr, $window)
@@ -43,6 +44,7 @@ app.directive('taskId', function () {
 									});
 								}
 						}
+                        
 
 
 						//==================================================
@@ -101,6 +103,14 @@ app.directive('taskId', function () {
 						//==================================================
 						$scope.isAssignedToMe = function(activity) {
 							return activity && _.contains(activity.assignedTo||[], $scope.$root.user.userID||-1);
+						};
+                        
+                        //==================================================
+						//
+						//
+						//==================================================
+						$scope.workFlowIsCreatedByMe = function() {
+							return $scope.workflow && ($scope.workflow.createdBy == $scope.$root.user.userID);
 						};
 
 						//==================================================
