@@ -135,7 +135,7 @@ app.filter("formatDate", function(){
 app.filter("formatDateWithTime", function(){
 	return function(date,formart){
 		//if(formart== undefined)
-			formart = 'DD MMM YYYY hh:mm a';
+			formart = 'DD MMM YYYY hh:mm';
 		return moment.utc(date).format(formart);
 	}
 });
@@ -189,7 +189,7 @@ function lstring(ltext, locale)
 	app.filter("formatDateWithTime", function(){
 		return function(date,formart){
 			if(formart== undefined)
-				formart = 'DD MMM YYYY hh:mm a';
+				formart = 'DD MMM YYYY hh:mm';
 			return moment.utc(date).format(formart);
 		}
 	});
