@@ -4,17 +4,17 @@ define(['app', 'underscore', './local-storage-service.js', './app-config-service
         function($http, $q, realm, localStorageService, appConfigService) {
             return new function() {
                 
-                var base_fields = 'id, rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, rec_category, schemaSort_i, sort1, sort2, sort3,'; 
+                var base_fields = 'id, rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, schemaSort_i, sort1_s, sort2_s, sort3_s,'; 
                 var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt'; 
 
                 var searchDefaults = {
                     currentPage: 0,
                     rowsPerPage: 25,
-                    sort: 'updatedDate_dt desc',
+                    sort: 'government_EN_t asc, schemaSort_i asc, sort1_s asc, sort2_s asc, sort3_s asc, updatedDate_dt desc',
                     fields: base_fields + en_fields,
                     query: '*:*',
-                    groupSort: 'government_EN_t',
-                    groupField: 'government_EN_t asc',
+                    groupSort: 'government_EN_t asc, schemaSort_i asc, sort1_s asc, sort2_s asc, sort3_s asc, updatedDate_dt desc',
+                    groupField: 'government_s',
                     groupLimit: 1000
                 }
                 var q = '(realm_ss:' + realm.value.toLowerCase() + ') AND NOT version_s:* AND ';

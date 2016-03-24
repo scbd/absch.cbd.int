@@ -161,9 +161,6 @@ define(['app', 'underscore', '/app/js/common.js',
 
                         var groupQuery = {
                             query       : q,
-                            sort        : 'government_EN_s asc, schemaSort_i asc',
-                            groupField  : 'government_s',
-                            groupSort   : 'schemaSort_i asc',
                             currentPage : nationalCurrentPage,
                             itemsPerPage: $scope.itemsPerPage
                         };
