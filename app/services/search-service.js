@@ -3,12 +3,15 @@ define(['app', 'underscore', './local-storage-service.js', './app-config-service
     app.factory('searchService', ['$http', '$q', 'realm', 'localStorageService', 'appConfigService',
         function($http, $q, realm, localStorageService, appConfigService) {
             return new function() {
+                
+                var base_fields = 'id, rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, rec_category, schemaSort_i, sort1, sort2, sort3,'; 
+                var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt'; 
 
                 var searchDefaults = {
                     currentPage: 0,
                     rowsPerPage: 25,
                     sort: 'updatedDate_dt desc',
-                    fields: 'identifier_s, title_t, description_t',
+                    fields: base_fields + en_fields,
                     query: '*:*',
                     groupSort: 'government_EN_t',
                     groupField: 'government_EN_t asc',
