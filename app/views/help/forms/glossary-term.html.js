@@ -1,4 +1,4 @@
-define(['angular', 'app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate', 'angular-message',
+define(['angular', 'app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate', 
         '/app/js/common.js', 'scbd-angularjs-services', 'scbd-angularjs-filters', 'scbd-angularjs-controls',],
   function (angular, app, _) {
 
@@ -86,7 +86,7 @@ define(['angular', 'app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate
                   updateBreadcrumbs();
                 }
                 $rootScope.$broadcast("showSimpleToast", "Glossary updated!");
-                
+
               });
 
           }
@@ -152,7 +152,7 @@ define(['angular', 'app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate
 										$scope.glossarys.splice(_.indexOf($scope.glossarys, glossaryDocument), 1);
 										$scope.document = $scope.glossarys[0];
 										 $rootScope.$broadcast("showSimpleToast", $scope.helptype + ' deleted!');
-                                        
+
 									});
 							});
 
