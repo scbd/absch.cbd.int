@@ -123,11 +123,9 @@
             </div>
             <div class="row" ng-show="isTypeOther()">
               <div class="col-sm-12">
-                <div >
                   <div class="km-control-group" required name="otherTypeName" caption="Name of the other type of document/measure">
                   <div km-textbox-ml required ng-model="document.otherTypeName" locales="document.header.languages"></div>
                   </div>
-                </div>
               </div>
             </div>
 
@@ -165,6 +163,19 @@
               <div class="col-sm-12">
                 <div class="km-control-group" name="description" caption="Brief description of the document including  objective and scope (max. 300 words)">
                   <div km-rich-textbox ng-model="document.description" rows="4" locales="document.header.languages"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="km-control-group" name="isModelContractualClause" caption="Does the measure contain model contractual clause?">
+                  <div km-yes-no required ng-model="document.isModelContractualClause" locales="document.header.languages"></div>
+                  <div ng-show="document.isModelContractualClause">
+                    <div class="km-control-group" name="isModelContractualClauseDesc" caption="Please provide further information">
+                        <div km-textbox-ml  ng-model="document.isModelContractualClauseDescription" locales="document.header.languages"></div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -239,10 +250,15 @@
             <section>
             <legend name="elementsOfMeasure">Elements of the measure</legend>
             <div class="help-block">
+                <span ng-repeat="elm in document.absMeasures">
+                    {{elm.identifier}}|
+                </span>
               <label  for="absMeasures" >Please select which elements are included in the measure being registered and identify which are the relevant articles of sections of the measure for each of the selected elements.This information will assist to in displaying information on the national legal framework.
               </label>
             </div>
-
+            <!-- // <input type="radio" name="rd_{{term.identifier}}" ng-model="identifiers[term.identifier]" autocomplete="off" value="{{term.identifier}}">
+            // <input type="radio" name="rd_{{term.identifier}}" ng-model="identifiers[term.identifier]" autocomplete="off" value="{{term.identifier}}">
+           -->
             <style>
               .measureChecked
               {
@@ -265,14 +281,20 @@
                   text-transform:uppercase;
 
               }
+              .btn-sm{
+                  font-size: 10px;
+              }
             </style>
             <script type="text/ng-template"  id="/app/views/forms/edit/edit-measure.directive/abs">
               <ul>
                 <li ng:repeat="term in rootTerms" ng-include="'/app/views/forms/edit/edit-measure.directive/abs/inner'"></li>
               </ul>
             </script>
+            <!--//  {{term.identifier}}
+              // ng:if="!term.broaderTerms || (isYesNo(term.identifier) && term.level <=2) || isParentSelected(term.identifier, term.level)"> -->
             <script type="text/ng-template"  id="/app/views/forms/edit/edit-measure.directive/abs/inner">
-              <div ng-class="{measureChecked : identifiers[term.identifier]}" style="">
+              <div ng-class="{measureChecked : identifiers[term.identifier]}" style=""
+              ng:if="!term.broaderTerms || (term.level <=2) || isParentSelected(term.identifier, term.level)">
                 <table style="width:100%" cellspacing="0" cellpadding="0">
                 <tr ng:class="{paddingleft0 : isMainElement(term.identifier), 'measureChecked' : identifiers[term.identifier]}" >
                   <td style="text-align:left;vertical-align:middle;" id="{{term.identifier}}_help" style="" >
@@ -280,14 +302,24 @@
                     <label for="{{term.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED' ? 'otherAbsMeasure' : term.identifier}}" name="{{term.identifier}}" >
                          &nbsp;
                          <input type="checkbox" ng-model="identifiers[term.identifier]" ng-required="IsRequired()" value="{{term.identifier}}"
-                         ng:if="!isReadOnly(term.identifier)" />
+                         ng:if="!isReadOnly(term.identifier) && !isYesNo(term.identifier)" />
 
-                         <span title="{{term.description|lstring:locale}}" ng:class="{true:'boldText',false:'normalText'}[isMainElement(term.identifier) || isSecondaryElement(term.identifier)]" style="position:relative;top:2px;">
+                         <span title="{{term.description|lstring:locale}}" ng:class="{true:'boldText',false:'normalText'}[isMainElement(term.identifier) || isYesNo(term.identifier) || isSecondaryElement(term.identifier)]" style="position:relative;top:2px;">
                               <span ng-class="{'boldText':term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0}">{{term.title||term.name | lstring:locale}} </span>
                               <i ng-show="term.description" class="icon-question-sign"></i>
                          </span>
 
                     </label>
+                    <div class="btn-group btn-sm" ng:if="isYesNo(term.identifier)">
+                      <label class="btn btn-primary btn-sm">
+                        <input type="radio" ng-change="updateSelected(term, identifiers[term.identifier],'yes')" ng-model="identifiers[term.identifier]" name="rd_{{term.identifier}}"
+                        ng-value="{{(term.identifier == scopeOfMeasure || (term.narrowerTerms.length||0) ==0) ? true : false}}">Yes
+                      </label>
+                      <label class="btn btn-primary btn-sm">
+                          <input type="radio" ng-change="updateSelected(term, identifiers[term.identifier], 'no')" ng-model="identifiers[term.identifier]" name="rd_{{term.identifier}}"
+                          ng-value="{{(term.identifier == scopeOfMeasure || (term.narrowerTerms.length||0) == 0) ? false : true}}"> No
+                      </label>
+                    </div>
                   </td>
                   <td style="text-align:left;vertical-align:middle" >
                     <span ng-if="term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0" style="width:200px;text-align:right;vertical-align:middle">
@@ -297,9 +329,9 @@
                     </span>
                   </td>
                   <td style="width:250px;text-align:right;vertical-align:middle">
-                    <div ng-show="identifiers[term.identifier]"  km-textbox-ml
-                    ng-model="sections[term.identifier]"
-                    locales="locales" ng-required="identifiers[term.identifier]" ng-disabled="!identifiers[term.identifier]" placeholder="example: Article 14.2"></div>
+                    <div ng-show="(identifiers[term.identifier] && (term.narrowerTerms.length||0) == 0) || (scopeOfMeasureTerm == term.identifier && identifiers[term.identifier]==false)"
+                     km-textbox-ml ng-model="sections[term.identifier]"
+                    locales="locales" ng-required="identifiers[term.identifier]" placeholder="example: Article 14.2"></div>
 
                     <i class="fa fa-chevron-circle-up pull-right hand" ng-click="term.showUp=!term.showUp;showHideNode(term.identifier)" ng-show="!term.showUp" ng:if="isReadOnly(term.identifier)"></i>
                     <i class="fa fa-chevron-circle-down pull-right hand" ng-click="term.showUp=!term.showUp;showHideNode(term.identifier)" ng-show="term.showUp" ng:if="isReadOnly(term.identifier)"></i>
@@ -307,8 +339,8 @@
                 </tr>
                 </table>
               </div>
-              <ul style="list-style:none" id="{{term.identifier}}">
-                <li ng:repeat="term in term.narrowerTerms" ng-include="'/app/views/forms/edit/edit-measure.directive/abs/inner'">
+              <ul style="list-style:none" id="{{term.identifier}}" >
+                <li ng:repeat="term in term.narrowerTerms" ng-include="'/app/views/forms/edit/edit-measure.directive/abs/inner'" >
               </ul>
             </script>
 
