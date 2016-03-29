@@ -16,19 +16,19 @@
                 <span>{{doc.uniqueIdentifier_s}}</span>
             </li>
             <li class="hidden-xs" ng-if="doc.rec_meta1">
-                <span ng-repeat="meta in doc.rec_meta1">&nbsp;{{doc.rec_meta1}}</span>
+                <span ng-repeat="meta in doc.rec_meta1">&nbsp;{{meta}}</span>
             </li>
             <li class="hidden-xs" ng-if="doc.rec_meta2">
-                <span ng-repeat="meta in doc.rec_meta2">&nbsp;{{doc.rec_meta2}}</span>
+                <span ng-repeat="meta in doc.rec_meta2">&nbsp;{{meta}}</span>
             </li>
             <li class="hidden-xs" ng-if="doc.rec_meta3">
-                <span ng-repeat="meta in doc.rec_meta3">&nbsp;{{doc.rec_meta3}}</span>
+                <span ng-repeat="meta in doc.rec_meta3">&nbsp;{{meta}}</span>
             </li>
             <li>
-                <span class="last-span">{{doc.rec_date | formatDate}}</span>
+                <span class="last-span color-blue">{{doc.rec_date | formatDate}}</span>
             </li>
         </ul>
-        {{doc.schemaSort_i}} | {{doc.sort1_s}} | {{doc.sort2_s}} | {{doc.sort3_s}}
+        <!--{{doc.schemaSort_i}} | {{doc.sort1_s}} | {{doc.sort2_s}} | {{doc.sort3_s}}-->
     </div>
 
     <a ng-show="showDoc" style="z-index:99999;width:100%;" ng-click="showDoc=false">

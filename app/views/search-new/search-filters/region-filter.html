@@ -1,21 +1,50 @@
 <div id="Search-Filter"  >
-     <div >
-        <span class="country-heading">Regions</span>
-
-        <!-- <a ng-href="#" ng-click="cf_setRegionFilter('All')" style="padding-right:10px;" class="letter" ng-class="{'letter-active':!cf_regionFilter}" >All</a>
-        <span ng-repeat="letter in alphabet">
-            <a ng-href="#" ng-click="cf_setRegionFilter(letter)" class="letter" ng-class="{'letter-active':cf_regionFilter == letter}">{{letter}}</a>
-        </span> -->
-        <hr class="heading" />
+    
+     <div style="margin-bottom:30px;">
+        <a class="filter color-party"  ng-click="saveFilter(doc.id)" >
+            <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
+            Party to the Nagoya Protocol
+        </a><br>
+        <a class="filter color-inbetween"  ng-click="saveFilter(doc.id)" >
+            <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
+            Ratified not yet Party to the Nagoya Protocol
+        </a><br>
+         <a class="filter color-grey"  ng-click="saveFilter(doc.id)" >
+            <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
+            Non-Party to the Nagoya Protocol
+        </a><br>
+        <a class="filter color-pink"  ng-click="saveFilter(doc.id)">
+            <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
+            Signatory to the Nagoya Protocol
+        </a>
     </div>
-    <div style="max-height:400px;overflow: scroll;" >
-        <div ng-repeat="doc in cf_fitlers =(cf_regions | filter:searchKeyword | filter:alphabetFilter | orderBy:'name')">
-
+    
+     <div style="margin-bottom:30px;">
+        <div>
+            <span class="country-heading">CBD Regions</span>
+            <hr class="heading" />
+        </div>
+        <div ng-repeat="doc in  cf_fitlers = (cf_regions | filter:IsCBDRegion | filter:searchKeyword)">
                 <a class="filter"  ng-click="saveFilter(doc.id)" >
                     <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
-                    {{doc.name}}
+                    {{doc.name.substring(22)}}
                 </a>
         </div>
+    </div>
+        
+    <div style="margin-bottom:30px;">   
+        <div >
+            <span class="country-heading">All Regions</span>
+            <hr class="heading" />
+        </div>
+        <div style="max-height:200px;overflow: scroll;" >
+            <div ng-repeat="doc in cf_fitlers = (cf_regions | filter:searchKeyword | filter:alphabetFilter | orderBy:'name')">
+                    <a class="filter"  ng-click="saveFilter(doc.id)" >
+                        <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
+                        {{doc.name}}
+                    </a>
+            </div>
+    </div>
    </div>
    <div ng-if="(searchKeyword && !showFilters) && cf_fitlers.length" style="margin-bottom:10px;"></div>
 </div>

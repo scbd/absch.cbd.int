@@ -43,18 +43,12 @@
                 </div>
 
                 <national-filter ng-if="showFilters==='national' || (searchKeyword && !showFilters)"></national-filter>
-
                 <reference-filter ng-if="showFilters==='reference' || (searchKeyword && !showFilters)"></reference-filter>
-
                 <scbd-filter ng-if="showFilters==='scbd' || (searchKeyword && !showFilters)"></scbd-filter>
-
-                <country-filter ng-if="showFilters==='country' || (searchKeyword && !showFilters)"></country-filter>
-
                 <thematic-filter ng-if="showFilters==='thematic' || (searchKeyword && !showFilters)"></thematic-filter>
-
-                <date-filter ng-if="showFilters==='dateFilter' || (searchKeyword && !showFilters)"></date-filter>
-
+                <country-filter ng-if="showFilters==='country' || (searchKeyword && !showFilters)"></country-filter>
                 <region-filter ng-if="showFilters==='regionFilter' || (searchKeyword && !showFilters)"></region-filter>
+                <date-filter ng-if="showFilters==='dateFilter')"></date-filter>
             </div>
         </div>
     </div>

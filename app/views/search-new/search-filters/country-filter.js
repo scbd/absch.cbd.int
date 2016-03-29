@@ -31,6 +31,11 @@ define(['app', 'underscore', '/app/js/common.js',
                };
                
                //*************************************************************************************************************************************
+               $scope.cf_setPartyFilter = function(pfilter) {
+                    $scope.cf_partyFilter = pfilter;
+               };
+               
+               //*************************************************************************************************************************************
                function cf_filterParty(item) { 
                     if(!$scope.cf_partyFilter) 
                         return true;
@@ -39,7 +44,10 @@ define(['app', 'underscore', '/app/js/common.js',
                     }  
                     if($scope.cf_partyFilter ==='nonparty'){
                         return !item.isNPParty;
-                    }   
+                    } 
+                    if($scope.cf_partyFilter ==='inbetween'){
+                        return item.isNPInbetweenParty;
+                    }     
                };
                
                //*************************************************************************************************************************************

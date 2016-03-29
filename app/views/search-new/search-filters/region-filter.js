@@ -15,14 +15,25 @@ define(['app', 'underscore', '/app/js/common.js',
                $scope.regionAlphabetFilter = null;
                $scope.alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' ];
 
-              //*************************************************************************************************************************************
+              //===================================================================
                $scope.cf_setRegionFilter = function(letter) {
                     $scope.regionAlphabetFilter = letter;
                     if(letter==='All'){
                         $scope.regionAlphabetFilter=null;
                     }
                };
-
+               
+               
+                //===================================================================
+               $scope.IsCBDRegion = function(item) {
+                  if(item.name.indexOf("CBD Regional Groups") >= 0 ){
+                      
+                      return true;
+                  }
+                  return false;
+               };
+               
+                //===================================================================
                $scope.alphabetFilter = function(item){
                    if(!$scope.regionAlphabetFilter)
                     return true;
