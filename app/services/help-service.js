@@ -25,11 +25,11 @@ define(['app', 'jquery', 'toastr', 'ngStorage'], function (app, $) { 'use strict
                 if(showHelp)
                 {
                    helpOff(); 
-                   toastr.info("Additional explanitory information is turned off.");
+                   toastr.info("Additional explanatory information is turned off.");
                 }
                 else{
                     helpOn(); 
-                    toastr.info("Additional explanitory information will be added next to key words on the page when available.");
+                    toastr.info("Additional explanatory information will be added next to key words on the page when available.");
                 }
             };
             
