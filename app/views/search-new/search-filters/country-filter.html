@@ -1,5 +1,5 @@
-<div id="Search-Filter" style="margin-bottom:30px;" >
-     <div >
+<div id="Search-Filter" style="margin-bottom:30px;">
+     <div ng-if="cf_fitlers.length">
         <span class="country-heading">Countries</span>
 
         <a ng-href="#" ng-click="cf_setCountryFilter('All')" style="padding-right:10px;white-space:nowrap;" class="letter" ng-class="{'letter-active':!cf_countryFilter && !cf_partyFilter}" >
@@ -32,5 +32,4 @@
             </div>
         </div>
    </div>
-   <div ng-if="(searchKeyword && !showFilters) && cf_fitlers.length" style="margin-bottom:10px;"></div>
 </div>
