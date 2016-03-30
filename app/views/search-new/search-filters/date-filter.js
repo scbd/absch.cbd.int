@@ -17,8 +17,9 @@ define(['app', 'underscore', '/app/js/common.js', 'scbd-angularjs-controls','boo
             },//link
             controller  : ['$scope', function($scope){
 
-            $scope.dateFilter = {since : null,
+                $scope.dateFilter = {since : null,
                                  until : null};
+                                 
                 $scope.$watch('dateFilter.since', function(newVal){
                     if(newVal)
                         saveQuery();

@@ -295,9 +295,14 @@ define(['app', 'underscore', '/app/js/common.js',
                               qAnd.push(buildFieldQuery('schema_s', 'national', natSchemas.join(' ')));
                               qAnd.push(buildFieldQuery('government_s', 'country', "*"));
 
-                              qOr.push(buildTextQuery('title_t'      ,'freeText'  , null));
-                              qOr.push(buildTextQuery('description_t','freeText'  , null));
+                              qOr.push(buildTextQuery('text_EN_txt'      ,'freeText'  , null));
                               qOr.push(buildFieldQuery('government_REL_ss','region'  , null));
+                              
+                              qOr.push(buildTextQuery('text_EN_txt'    ,'reference', null));
+                              qOr.push(buildFieldQuery('all_terms_ss'    ,'reference', null));
+                              
+                              qOr.push(buildTextQuery('text_EN_txt'    ,'scbd', null));
+                              qOr.push(buildFieldQuery('all_terms_ss'    ,'scbd', null));
 
                         }
 
@@ -305,25 +310,36 @@ define(['app', 'underscore', '/app/js/common.js',
                                //schema
                                qAnd.push(buildFieldQuery('schema_s','reference', refSchemas.join(' ')));
 
-                               qOr.push(buildTextQuery('text_EN_txt'    ,'national', null));
+                               qOr.push(buildTextQuery('text_EN_txt'    ,'scbd', null));
+                               qOr.push(buildFieldQuery('all_terms_ss'  ,'scbd', null));
+                               
+                               qOr.push(buildTextQuery('text_EN_txt'     ,'national', null));
+                               qOr.push(buildFieldQuery('all_terms_ss'   ,'national', null));
+                               
                                qOr.push(buildTextQuery('text_EN_txt'    ,'country', null));
+                               qOr.push(buildFieldQuery('all_terms_ss'  ,'country', null));
+                               
                                qOr.push(buildTextQuery('text_EN_txt'    ,'freeText', null));
+                               qOr.push(buildFieldQuery('all_terms_ss'  ,'freeText', null));
+                               
+                               qOr.push(buildTextQuery('text_EN_txt'    ,'region', null));
+                               qOr.push(buildFieldQuery('all_terms_ss'  ,'region', null));
                                qOr.push(buildFieldQuery('regions_REL_ss','country', null));
                                qOr.push(buildFieldQuery('regions_REL_ss','region', null));
+                               
+                               
+                               
                         }
 
                         if(queryType === 'scbd'){
                                //schema
                                qAnd.push(buildFieldQuery('schema_s','scbd', scbdSchemas.join(' ')));
 
-                               qOr.push(buildTextQuery('title_t'      ,'national'  , null));
-                               qOr.push(buildTextQuery('description_t','national'  , null));
-                               qOr.push(buildTextQuery('title_t'      ,'reference' , null));
-                               qOr.push(buildTextQuery('description_t','reference' , null));
-                               qOr.push(buildTextQuery('title_t'      ,'country'   , null));
-                               qOr.push(buildTextQuery('description_t','country'   , null));
-                               qOr.push(buildTextQuery('title_t'      ,'freeText'   , null));
-                               qOr.push(buildTextQuery('description_t','freeText'   , null));
+                               qOr.push(buildTextQuery('text_EN_txt'      ,'national'  , null));
+                               qOr.push(buildTextQuery('text_EN_txt'      ,'reference' , null));
+                               qOr.push(buildTextQuery('text_EN_txt'      ,'country'   , null));
+                               qOr.push(buildTextQuery('text_EN_txt'      ,'region', null));
+                               qOr.push(buildTextQuery('text_EN_txt'      ,'freeText'   , null));
                         }
 
                         qAnd.push(buildDateFieldQuery('updatedDate_dt','publishedOn'));
@@ -490,7 +506,7 @@ define(['app', 'underscore', '/app/js/common.js',
 
                         addFilter('absCheckpointCommunique',  {'sort': 7,'type':'national','name':'Checkpoint Communiqués ', 'id':'absCheckpointCommunique', 'description':'A summary of the information collected or received by a checkpoint related to prior informed consent, to the source of the genetic resource, to the establishment  utilization of genetic resources and registered in the ABS Clearing-House (Article 17.1 (a)).'});
 
-                        addFilter('absNationalReport',  {'sort': 8,'type':'national','name':'National Report ', 'id':'absNationalReport', 'description':'National Report'});
+                        addFilter('absNationalReport',  {'sort': 8,'type':'national','name':'Interim National Report on the Implementation of the Nagoya Protocol', 'id':'absNationalReport', 'description':'Interim National Report on the Implementation of the Nagoya Protocol'});
 
 
                         //reference

@@ -22,7 +22,8 @@
                 <span ng-repeat="meta in doc.rec_meta2">&nbsp;{{meta}}</span>
             </li>
             <li class="hidden-xs" ng-if="doc.rec_meta3">
-                <span ng-repeat="meta in doc.rec_meta3">&nbsp;{{meta}}</span>
+                <span ng-repeat="meta in doc.rec_meta3" ng-class="{'color-red':meta==='Revoked'}">&nbsp;{{meta}}</span>
+                
             </li>
             <li>
                 <span class="last-span color-blue">{{doc.rec_date | formatDate}}</span>
