@@ -1,7 +1,7 @@
 define(['app', 'underscore', '/app/js/common.js',
 '/app/services/search-service.js',
 '/app/views/directives/infinite-scroll-directive.js',
-'/app/views/search-new/search-filters/thematic-filter.js',
+'/app/views/search-new/search-filters/keyword-filter.js',
 '/app/views/search-new/search-filters/national-filter.js',
 '/app/views/search-new/search-filters/reference-filter.js',
 '/app/views/search-new/search-filters/scbd-filter.js',
@@ -93,7 +93,8 @@ define(['app', 'underscore', '/app/js/common.js',
 
                   //===============================================================================================================================
                     function addFilter(filterID, filterInfo ) {
-                          $scope.searchFilters[filterID] = filterInfo;
+                         if(!$scope.searchFilters[filterID])
+                            $scope.searchFilters[filterID] = filterInfo;
                           //console.log(filterID);
                     };
 
@@ -291,55 +292,44 @@ define(['app', 'underscore', '/app/js/common.js',
                         var q1   ='';
 
                         if(queryType === 'national'){
-                              //schema
                               qAnd.push(buildFieldQuery('schema_s', 'national', natSchemas.join(' ')));
                               qAnd.push(buildFieldQuery('government_s', 'country', "*"));
-
                               qOr.push(buildTextQuery('text_EN_txt'      ,'freeText'  , null));
                               qOr.push(buildFieldQuery('government_REL_ss','region'  , null));
-                              
                               qOr.push(buildTextQuery('text_EN_txt'    ,'reference', null));
                               qOr.push(buildFieldQuery('all_terms_ss'    ,'reference', null));
-                              
                               qOr.push(buildTextQuery('text_EN_txt'    ,'scbd', null));
                               qOr.push(buildFieldQuery('all_terms_ss'    ,'scbd', null));
-
+                              //qOr.push(buildTextQuery('text_EN_txt'    ,'keyword', null));
+                              qOr.push(buildFieldQuery('all_terms_ss'    ,'keyword', null));
                         }
 
                         if(queryType === 'reference'){
-                               //schema
                                qAnd.push(buildFieldQuery('schema_s','reference', refSchemas.join(' ')));
-
                                qOr.push(buildTextQuery('text_EN_txt'    ,'scbd', null));
                                qOr.push(buildFieldQuery('all_terms_ss'  ,'scbd', null));
-                               
                                qOr.push(buildTextQuery('text_EN_txt'     ,'national', null));
                                qOr.push(buildFieldQuery('all_terms_ss'   ,'national', null));
-                               
                                qOr.push(buildTextQuery('text_EN_txt'    ,'country', null));
                                qOr.push(buildFieldQuery('all_terms_ss'  ,'country', null));
-                               
                                qOr.push(buildTextQuery('text_EN_txt'    ,'freeText', null));
                                qOr.push(buildFieldQuery('all_terms_ss'  ,'freeText', null));
-                               
                                qOr.push(buildTextQuery('text_EN_txt'    ,'region', null));
                                qOr.push(buildFieldQuery('all_terms_ss'  ,'region', null));
                                qOr.push(buildFieldQuery('regions_REL_ss','country', null));
                                qOr.push(buildFieldQuery('regions_REL_ss','region', null));
-                               
-                               
-                               
+                               //qOr.push(buildTextQuery('text_EN_txt'    ,'keyword', null));
+                               qOr.push(buildFieldQuery('all_terms_ss'    ,'keyword', null));
                         }
 
                         if(queryType === 'scbd'){
-                               //schema
                                qAnd.push(buildFieldQuery('schema_s','scbd', scbdSchemas.join(' ')));
-
                                qOr.push(buildTextQuery('text_EN_txt'      ,'national'  , null));
                                qOr.push(buildTextQuery('text_EN_txt'      ,'reference' , null));
                                qOr.push(buildTextQuery('text_EN_txt'      ,'country'   , null));
                                qOr.push(buildTextQuery('text_EN_txt'      ,'region', null));
                                qOr.push(buildTextQuery('text_EN_txt'      ,'freeText'   , null));
+                               qOr.push(buildTextQuery('text_EN_txt'    ,'keyword', null));
                         }
 
                         qAnd.push(buildDateFieldQuery('updatedDate_dt','publishedOn'));
@@ -431,7 +421,7 @@ define(['app', 'underscore', '/app/js/common.js',
                             $scope.searchFilters = {};
                             loadSchemaFilters();
                             loadCountryFilters();
-                            loadThematicFilters();
+                            loadKeywordFilters();
                             loadRegionsFilters();
                             loadDateFilters();
                             localStorageService.set("searchFilters", $scope.searchFilters);
@@ -454,12 +444,204 @@ define(['app', 'underscore', '/app/js/common.js',
                     };
 
                   //===============================================================================================================================
-                    function loadThematicFilters() {
-
-                        //national record applicable keywords
-
+                    function loadKeywordFilters() {
+               
+                      $q.when(commonjs.getThematicAreas(), function(keywords) {
+                                console.log(keywords);
+                                _.each(keywords, function(keyword, index){
+                                    console.log(keyword);
+                                    addThematicAreaFilter(keyword);
+                                });
+                        });
+                        
+                        
+                        $q.when(commonjs.getKeyAreas(), function(keywords) {
+                                console.log(keywords);
+                                _.each(keywords, function(keyword, index){
+                                    console.log(keyword);
+                                    addThematicAreaFilter(keyword);
+                                });
+                        });
+                        
+                         $q.when(commonjs.getMSR_types(), function(keywords) {
+                                console.log(keywords);
+                                _.each(keywords, function(keyword, index){
+                                    console.log(keyword);
+                                    addKeywordFilter(keyword, '', 'MSR');
+                                });
+                        });
+                        
+                        $q.when(commonjs.getJurisdictions(), function(keywords) {
+                                console.log(keywords);
+                                _.each(keywords, function(keyword, index){
+                                    console.log(keyword);
+                                    addKeywordFilter(keyword, '', 'Jurisdiction');
+                                });
+                        });
+                        
+                        $q.when(commonjs.getMCC_keywords(), function(keywords) {
+                                console.log(keywords);
+                                _.each(keywords, function(keyword, index){
+                                    console.log(keyword);
+                                    addKeywordFilter(keyword, '', 'A19A20');
+                                });
+                        });
+                        
+                        $q.when(commonjs.getMCC_types(), function(keywords) {
+                                console.log(keywords);
+                                _.each(keywords, function(keyword, index){
+                                    console.log(keyword);
+                                    addKeywordFilter(keyword, '', 'A19A20');
+                                });
+                        });
+         
+                        
+                         $q.when(commonjs.getCBI_cats(), function(keywords) {
+                                console.log(keywords);
+                                _.each(keywords, function(keyword, index){
+                                    console.log(keyword);
+                                    addKeywordFilter(keyword, '', 'CBI');
+                                });
+                        });
+                        
+                        $q.when(commonjs.getCBI_types(), function(keywords) {
+                                console.log(keywords);
+                                _.each(keywords, function(keyword, index){
+                                    console.log(keyword);
+                                    addKeywordFilter(keyword, '', 'CBI');
+                                });
+                        });
+                        
+                        $q.when(commonjs.getCBI_status(), function(keywords) {
+                                console.log(keywords);
+                                _.each(keywords, function(keyword, index){
+                                    console.log(keyword);
+                                    addKeywordFilter(keyword, '', 'CBI');
+                                });
+                        });
+                        
+                         $q.when(commonjs.getCBI_types1(), function(keywords) {
+                                console.log(keywords);
+                                _.each(keywords, function(keyword, index){
+                                    console.log(keyword);
+                                    addKeywordFilter(keyword, '', 'CBI');
+                                });
+                        });
+                        
+                        //  $q.when(commonjs.getCBI_cats1(), function(keywords) {
+                        //         console.log(keywords);
+                        //         _.each(keywords, function(keyword, index){
+                        //             console.log(keyword);
+                        //             addKeywordFilter(keyword, '', 'CBI');
+                        //         });
+                        // });
+                        
+                         $q.when(commonjs.getCBI_trainingTypes(), function(keywords) {
+                                console.log(keywords);
+                                _.each(keywords, function(keyword, index){
+                                    console.log(keyword);
+                                    addKeywordFilter(keyword, '', 'CBI');
+                                });
+                        });
+                        
+                         $q.when(commonjs.getCBI_audience(), function(keywords) {
+                                console.log(keywords);
+                                _.each(keywords, function(keyword, index){
+                                    console.log(keyword);
+                                    addKeywordFilter(keyword, '', 'CBI');
+                                });
+                        });
+                        
+                        
+                          $q.when(commonjs.getCBI_status(), function(keywords) {
+                                console.log(keywords);
+                                _.each(keywords, function(keyword, index){
+                                    console.log(keyword);
+                                    addKeywordFilter(keyword, '', 'CBI');
+                                });
+                        });
+                        
+                        
+                        $q.when(commonjs.getCBR_level(), function(keywords) {
+                                console.log(keywords);
+                                _.each(keywords, function(keyword, index){
+                                    console.log(keyword);
+                                    addKeywordFilter(keyword, '', 'CBR');
+                                });
+                        });
+                        
+                        // $q.when(commonjs.getCBR_target(), function(keywords) {
+                        //         console.log(keywords);
+                        //         _.each(keywords, function(keyword, index){
+                        //             console.log(keyword);
+                        //             addKeywordFilter(keyword, '', 'CBR');
+                        //         });
+                        // });
+                        
+                        $q.when(commonjs.getCBR_purpose(), function(keywords) {
+                                console.log(keywords);
+                                _.each(keywords, function(keyword, index){
+                                    console.log(keyword);
+                                    addKeywordFilter(keyword, '', 'CBR');
+                                });
+                        });
+                        
+                         $q.when(commonjs.getCBR_formats(), function(keywords) {
+                                console.log(keywords);
+                                _.each(keywords, function(keyword, index){
+                                    console.log(keyword);
+                                    addKeywordFilter(keyword, '', 'CBR');
+                                });
+                        });
+                        
+                        
+                        $q.when(commonjs.getCPP_types(), function(keywords) {
+                                console.log(keywords);
+                                _.each(keywords, function(keyword, index){
+                                    console.log(keyword);
+                                    addKeywordFilter(keyword, '', 'CPP');
+                                });
+                        });
+                        
+                        
+                         $q.when(commonjs.getAichiTargets(), function(keywords) {
+                                console.log(keywords);
+                                _.each(keywords, function(keyword, index){
+                                    console.log(keyword);
+                                    addKeywordFilter(keyword, '', 'AichiTargets');
+                                });
+                        });
+                        
+                        
+                        
+                        
+                        
+                                             
 
                     };
+                    
+                    //===============================================================================================================================
+                     function addKeywordFilter(keyword, namePrefix, tags){
+
+                        addFilter(keyword.identifier, {'type':'keyword', 'name':namePrefix + keyword.title.en, 'id':keyword.identifier,
+                            'description':'', 'tags' : tags});
+
+                         _.each(keyword.narrowerTerms,function(narrower){
+                            addKeywordFilter(narrower, keyword.identifier);
+                        });
+                    }
+                    
+                    //===============================================================================================================================
+                     function addThematicAreaFilter(keyword, parent){
+
+                        addFilter(keyword.identifier, {'type':'keyword', 'name':keyword.title.en, 'id':keyword.identifier,
+                            'description':'', 'parent' : parent});
+
+                        _.each(keyword.narrowerTerms,function(narrower){
+                            addThematicAreaFilter(narrower, keyword.identifier);
+                        });
+                    }
+
 
                   //===============================================================================================================================
                     function loadRegionsFilters(){
@@ -467,32 +649,31 @@ define(['app', 'underscore', '/app/js/common.js',
                         $q.when(commonjs.getRegions(), function(regions) {
                                 console.log(regions);
                                 _.each(regions, function(region, index){
-                                    console.log(region);
+                                    //console.log(region);
                                     addRegionFilter(region);
                                 });
                         });
-
-
                     };
-
+                    //===============================================================================================================================
                     function addRegionFilter(region, parent){
 
                         addFilter(region.identifier, {'type':'region', 'name':region.title.en, 'id':region.identifier,
-                            'description':'', parent : parent});
+                            'description':'', 'parent' : parent});
 
                         _.each(region.narrowerTerms,function(narrower){
                             addRegionFilter(narrower, region.identifier);
                         });
                     }
-
+                    //===============================================================================================================================
                     function loadDateFilters(){
                         addFilter('publishedOn',  {'sort': 1,'type':'date',  'name':'Published On', 'id':'publishedOn', 'description':'Date range when the record was published'});
                     };
+                    
                   //===============================================================================================================================
                     function loadSchemaFilters() {
                        //national
 
-                        addFilter('focalPoint',  {'sort': 1,'type':'national',  'name':'ABS National Focal Point', 'id':'focalPoint', 'description':'Institution designated to liaise with the Secretariat and make available information on procedures for accessing genetic resources and establishing mutually agreed terms, including information on competent national authorities, relevant indigenous and local communities and relevant stakeholders (Article 13.1).'});
+                        addFilter('focalPoint',  {'sort': 1,'type':'national',  'name':'National ABS Focal Point', 'id':'focalPoint', 'description':'Institution designated to liaise with the Secretariat and make available information on procedures for accessing genetic resources and establishing mutually agreed terms, including information on competent national authorities, relevant indigenous and local communities and relevant stakeholders (Article 13.1).'});
 
                         addFilter('authority',  {'sort': 2,'type':'national',  'name':'Competent National Authorities', 'id':'authority', 'description':'Entities designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)'});
 

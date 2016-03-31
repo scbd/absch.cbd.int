@@ -1,0 +1,18 @@
+<div id="Search-Filter"  >
+   <div style="margin-bottom:30px;" >   
+        <div >
+            <span class="country-heading">Keywords</span>
+            <hr class="heading" />
+        </div>
+        <div >
+            <div ng-repeat="doc in fitlers = (searchFilters  | filter:searchKeyword | orderBy:'name')">
+                    <a class="filter"  ng-click="saveFilter(doc.id)" >
+                        <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
+                        {{doc.name}}
+                    </a>
+            </div>
+    </div>
+   </div>
+     
+     
+</div>

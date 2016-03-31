@@ -352,7 +352,7 @@ app.directive('searchFilterSchemas', function ($http) {
                 return dictionary;
             }
 
-            $scope.focalPoint              = { identifier: 'focalPoint',               title: 'ABS National Focal Points', type:'nationalRecord'};
+            $scope.focalPoint              = { identifier: 'focalPoint',               title: 'National ABS Focal Points', type:'nationalRecord'};
             $scope.authority               = { identifier: 'authority',                title: 'Competent National Authorities' ,type:'nationalRecord',
                                                subFilters : [
                                                                 { name: 'cnaResponsibleForAll',     type: 'radio' , field: 'absResposibleForAll_b'},

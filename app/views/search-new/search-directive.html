@@ -25,7 +25,7 @@
                     <li> <a href="" ng-class="{'active':showFilters=='scbd'}" ng-click="showFilters=(showFilters=='scbd' ? false : 'scbd')" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;SCBD records</a> </li>
                     <li> <a href="" ng-class="{'active':showFilters=='thematic'}" ng-click="showFilters=(showFilters=='thematic' ? false : 'thematic')" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Keywords</a> </li>
                     <li> <a href="" ng-class="{'active':showFilters=='country'}" ng-click="showFilters=(showFilters=='country' ? false : 'country')" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Country</a> </li>
-                    <li> <a href="" ng-class="{'active':showFilters=='regionFilter'}" ng-click="showFilters=(showFilters=='regionFilter' ? false : 'regionFilter')"class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Region</a ></li>
+                    <li> <a href="" ng-class="{'active':showFilters=='regionFilter'}" ng-click="showFilters=(showFilters=='regionFilter' ? false : 'regionFilter')"class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Regions and Groups</a ></li>
                     <li> <a href="" ng-class="{'active':showFilters=='dateFilter'}" ng-click="showFilters=(showFilters=='dateFilter' ? false : 'dateFilter')"class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Date</a> </li>
                 </ul>
             </div>
@@ -45,7 +45,7 @@
                 <national-filter ng-if="showFilters==='national' || (searchKeyword && !showFilters)"></national-filter>
                 <reference-filter ng-if="showFilters==='reference' || (searchKeyword && !showFilters)"></reference-filter>
                 <scbd-filter ng-if="showFilters==='scbd' || (searchKeyword && !showFilters)"></scbd-filter>
-                <thematic-filter ng-if="showFilters==='thematic' || (searchKeyword && !showFilters)"></thematic-filter>
+                <keyword-filter ng-if="showFilters==='thematic' || (searchKeyword && !showFilters)"></keyword-filter>
                 <country-filter ng-if="showFilters==='country' || (searchKeyword && !showFilters)"></country-filter>
                 <region-filter ng-if="showFilters==='regionFilter' || (searchKeyword && !showFilters)"></region-filter>
                 <date-filter ng-if="showFilters==='dateFilter'"></date-filter>

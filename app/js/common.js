@@ -3,7 +3,9 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
     app.factory('commonjs', ['$http', '$rootScope', 'realm', 'IStorage', '$filter', '$q', 'localStorageService', 'Thesaurus',
         function($http, $rootScope, realm, storage, $filter, $q, localStorageService, thesaurus) {
             return new function() {
-
+                
+                
+                //==================================================================================
                 this.getReferenceRecordIndex = function(schema, documentId) {
 
                     var item = [];
@@ -43,7 +45,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                             return item;
                         });
                 }
-
+                //==================================================================================
                 this.isUserInRole = function(role) {
 
                     if (!$rootScope.user)
@@ -60,7 +62,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
 
                     return false;
                 }
-
+                //==================================================================================
                 this.getCountries = function() {
 
                     var fromStorage = localStorageService.get('countries');
@@ -76,7 +78,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                             return countries;
                         });
                 };
-
+                //==================================================================================
                 this.getCountry = function(code) {
 
                     var fromStorage = localStorageService.get('countries');
@@ -90,15 +92,15 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                             return formatCountry(response.data);
                         });
                 }
-
+                //==================================================================================
                 this.isIAC = function() {
                     return this.isUserInRole($rootScope.getRoleName('abschiac'));
                 }
-
+                //==================================================================================
                 this.isAbsAdministrator = function() {
                     return this.isUserInRole($rootScope.getRoleName('AbsAdministrator'));
                 }
-
+                //==================================================================================
                 this.isAnyOtherRoleThenIAC = function() {
 
                     return this.isUserInRole($rootScope.getRoleName('AbsPublishingAuthorities')) ||
@@ -108,25 +110,27 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                         this.isUserInRole($rootScope.getRoleName('Administrator'))
 
                 }
+                //==================================================================================
                 this.hasAbsRoles = function() {
                     return this.isAbsAdministrator() || this.isAnyOtherRoleThenIAC();
                 }
-
+                //==================================================================================
                 this.isNPParty = function(entity) {
                     return isNPParty(entity);
                 }
+                //==================================================================================
                 this.isPartyToCBD = function(entity) {
                     return isPartyToCBD(entity);
                 }
-
+                //==================================================================================
                 this.isSignatory = function(entity) {
                     return isSignatory(entity);
                 }
-
+                //==================================================================================
                 this.isRatified = function(entity) {
                     return isRatified(entity);
                 }
-
+                //==================================================================================
                 this.getNFPText = function(cdgList) {
 
                     if (!cdgList)
@@ -136,7 +140,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                     // else if(_.indexOf(cdgList, 'ABS-IC')>= 0 && (_.indexOf(cdgList, 'CBD-FP1')>= 0 || _.indexOf(cdgList, 'CBD-FP2')>= 0))
                     //     return "ICNP/CBD Focal Point";
                     if (_.indexOf(cdgList, 'NP-FP') >= 0 || _.indexOf(cdgList, 'ABS-FP') >= 0)
-                        return "ABS National Focal Point";
+                        return "National ABS Focal Point";
                     // else if(_.indexOf(cdgList, 'ABS-IC')>= 0)
                     //     return "ABS ICNP Focal Point";
                     else if (_.indexOf(cdgList, 'CBD-FP1') >= 0)
@@ -147,14 +151,14 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                     return "";
 
                 }
-
+                //==================================================================================
                 this.hexToInteger = function(hex) {
                     if (hex && hex.length == 24)
                         return parseInt(hex.substr(15, 9), 16);
 
                     return hex;
                 }
-
+                //==================================================================================
                 this.integerToHex = function(d, schema) {
                     var schemaCode = '';
                     if (schema.toLowerCase() == "pressrelease" || schema.toLowerCase() == "statement"
@@ -175,7 +179,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
 
                     return hex;
                 }
-
+                //==================================================================================
                 this.getCountriesMultilateralMeasures = function(countryList) {
 
                     var q = 'realm_ss:' + realm.value.toLowerCase() + ' AND NOT version_s:* AND schema_s:measure ';
@@ -194,7 +198,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                     });
 
                 };
-
+                //==================================================================================
                 this.loadSchemaDocumentsForDropdown = function(schema, currentDocumentIdentifier) {
                     var permit = storage.documents.query("(type eq '" + schema + "')", undefined);
                     return $q.when(permit).then(function(o) {
@@ -220,7 +224,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                             });
                     });
                 };
-
+                //==================================================================================
                 this.updateFacets = function(facets, data) {
 
                     if (!facets)
@@ -240,14 +244,14 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                     return data;
                 }
 
-                //*************************************************************************************************************************************
+                //==================================================================================
                 this.snake_case = function(name, separator) {
                     separator = separator || '-';
                     return name.replace(/[A-Z]/g, function(letter, pos) {
                         return (pos ? separator : '') + letter.toLowerCase();
                     });
                 };
-
+                //==================================================================================
                 this.loadReferenceDocument = function(identifier){
 
                     var documentInfo = storage.documents.get(identifier, {info:true});
@@ -261,7 +265,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                                 return document;
                             });
                 };
-
+                //==================================================================================
                 this.getRegions = function(){
 
                     return $http.get('/api/v2013/thesaurus/domains/regions/terms').then(function (response) {
@@ -273,7 +277,212 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                     });
 
                 }
+                
+                //==================================================================================
+                this.getThematicAreas= function(){
+                     return $http.get('/api/v2013/thesaurus/domains/CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924/terms').then(function (response) {
+                        var termsTree = thesaurus.buildTree(response.data);
+                        return  _.filter(termsTree, function where (o) { return !!o.narrowerTerms;});
+                    });
+                }
+                //==================================================================================
+                this.getKeyAreas= function(){
+                     return $http.get('/api/v2013/thesaurus/domains/2B2A5166-F949-4B1E-888F-A7976E76320B/terms').then(function (response) {
+                        var termsTree = thesaurus.buildTree(response.data);
+                        return  _.filter(termsTree, function where (o) { return !!o.narrowerTerms;});
+                    });
+                }
+                //==================================================================================
+                this.getMSR_types= function(){
+                     return $http.get('/api/v2013/thesaurus/domains/144CF550-7629-43F3-817E-CACDED34837E/terms').then(function (response) {
+                        //var termsTree = thesaurus.buildTree(response.data);
+                        return response.data;
+                    });
+                }
+                
+                //==================================================================================
+                this.getJurisdictions= function(){
+                     return $http.get('/api/v2013/thesaurus/domains/7A56954F-7430-4B8B-B733-54B8A5E7FF40/terms').then(function (response) {
+                        //var termsTree = thesaurus.buildTree(response.data);
+                        return response.data;
+                    });
+                }
+                
+                 //==================================================================================
+                // this.getIRCC_use= function(){
+                //      return $http.get('/api/v2013/thesaurus/domains/A7B77788-8C90-4849-9327-E181E9522F3A/terms').then(function (response) {
+                //         //var termsTree = thesaurus.buildTree(response.data);
+                //         return response.data;
+                //     });
+                // }
+                
+                 //==================================================================================
+                this.getMCC_keywords= function(){
+                     return $http.get('/api/v2013/thesaurus/domains/ABS-A1920-Keywords/terms').then(function (response) {
+                        //var termsTree = thesaurus.buildTree(response.data);
+                        return response.data;
+                    });
+                }
+                  //==================================================================================
+                this.getCBI_cats= function(){
+                     return $http.get('/api/v2013/thesaurus/domains/579F448B-ECA8-4258-B130-3EAA68056D1F/terms').then(function (response) {
+                        //var termsTree = thesaurus.buildTree(response.data);
+                        return response.data;
+                    });
+                }
+                 //==================================================================================
+                this.getCBI_types= function(){
+                     return $http.get('/api/v2013/thesaurus/domains/D935D0C8-F5A5-43B8-9E06-45A57BF3C731/terms').then(function (response) {
+                        //var termsTree = thesaurus.buildTree(response.data);
+                        return response.data;
+                    });
+                }
+                  //==================================================================================
+                this.getCBI_types1= function(){
+                     return $http.get('/api/v2013/thesaurus/domains/5CA7AACE-CB79-4146-BF12-B3B1955AFF17/terms').then(function (response) {
+                        //var termsTree = thesaurus.buildTree(response.data);
+                        return response.data;
+                    });
+                }
+                
+                  //==================================================================================
+                // this.getCBI_cats1= function(){
+                //      return $http.get('/api/v2013/thesaurus/domains/7178400C-B8A6-4794-B363-0366FD324DA7/terms').then(function (response) {
+                //         //var termsTree = thesaurus.buildTree(response.data);
+                //         return response.data;
+                //     });
+                // }
+                
+                  //==================================================================================
+                this.getCBI_trainingTypes= function(){
+                     return $http.get('/api/v2013/thesaurus/domains/D6E6A4AA-8B88-4AE9-AF5C-9CB852FFE4DC/terms').then(function (response) {
+                        //var termsTree = thesaurus.buildTree(response.data);
+                        return response.data;
+                    });
+                }
+                 //==================================================================================
+                this.getCBI_audience= function(){
+                     return $http.get('/api/v2013/thesaurus/domains/2560F889-AB81-40BF-B7C4-97B34A5B8D75/terms').then(function (response) {
+                        //var termsTree = thesaurus.buildTree(response.data);
+                        return response.data;
+                    });
+                }
+                
+                 //==================================================================================
+                this.getCBI_status= function(){
+                     return $http.get('/api/v2013/thesaurus/domains/4E7731C7-791E-46E9-A579-7272AF261FED/terms').then(function (response) {
+                        //var termsTree = thesaurus.buildTree(response.data);
+                        return response.data;
+                    });
+                }
+                 //==================================================================================
+                this.getCBR_level= function(){
+                     return $http.get('/api/v2013/thesaurus/domains/1B57D9C3-F5F8-4875-94DC-93E427F3BFD8/terms').then(function (response) {
+                        //var termsTree = thesaurus.buildTree(response.data);
+                        return response.data;
+                    });
+                }
+                
+                //  //==================================================================================
+                // this.getCBR_target= function(){
+                //      return $http.get('/api/v2013/thesaurus/domains/AFB155C4-93A6-402C-B812-CFC7488ED651/terms').then(function (response) {
+                //         //var termsTree = thesaurus.buildTree(response.data);
+                //         return response.data;
+                //     });
+                // }
+                 //==================================================================================
+                this.getCBR_purpose= function(){
+                     return $http.get('/api/v2013/thesaurus/domains/E712C9CD-437E-454F-BA72-E7D20E4C28ED/terms').then(function (response) {
+                        //var termsTree = thesaurus.buildTree(response.data);
+                        return response.data;
+                    });
+                }
+                
+                 //==================================================================================
+                this.getCBR_formats= function(){
+                     return $http.get('/api/v2013/thesaurus/domains/D2D97AB3-4D20-41D4-8CBE-B21C33924823/terms').then(function (response) {
+                        //var termsTree = thesaurus.buildTree(response.data);
+                        return response.data;
+                    });
+                }
+                
+                 //==================================================================================
+                this.getCPP_types= function(){
+                     return $http.get('/api/v2013/thesaurus/domains/ED9BE33E-B754-4E31-A513-002316D0D602/terms').then(function (response) {
+                        //var termsTree = thesaurus.buildTree(response.data);
+                        return response.data;
+                    });
+                }
+                 //==================================================================================
+                this.getMCC_types= function(){
+                     return $http.get('/api/v2013/thesaurus/domains/840427E5-E5AC-4578-B238-C81EAEEDBDD8/terms').then(function (response) {
+                        //var termsTree = thesaurus.buildTree(response.data);
+                        return response.data;
+                    });
+                }
+                
+               
+                
+                 //==================================================================================
+                this.getAichiTargets= function(){
+                     return $http.get('/api/v2013/thesaurus/domains/AICHI-TARGETS/terms').then(function (response) {
+                        //var termsTree = thesaurus.buildTree(response.data);
+                        return response.data;
+                    });
+                }
+                
+               
+                
+                
+                // //==================================================================================
+                // this.getAllKeywords = function(){
 
+                   
+                //     var termsTree;
+                //      retrun $http.get('/api/v2013/thesaurus/domains/CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924/terms').then(function (response) {
+                //         var termsTree = thesaurus.buildTree(response.data);
+                //         return  _.filter(termsTree, function where (o) { return !!o.narrowerTerms && o.identifier!='1796f3f3-13ae-4c71-a5d2-0df261e4f218';});
+                //     });
+                    
+                //     //ABS key areas
+                //      keywords['keyAreas'] =  $http.get('/api/v2013/thesaurus/domains/2B2A5166-F949-4B1E-888F-A7976E76320B/terms').then(function (response) {
+                //         termsTree = thesaurus.buildTree(response.data);
+                //         return _.filter(termsTree, function where (o) { return !!o.narrowerTerms && o.identifier!='1796f3f3-13ae-4c71-a5d2-0df261e4f218';});
+                //     });
+                    
+                //     return  keywords;
+
+                // }
+                
+                //==================================================================================
+                this.getAllKeywords = function(){
+
+                    var keywords = [];
+                    var thematicAreas;
+                    var keyAreas;
+                    var termsTree;
+                    
+                    //ABS thematic areas
+                   keywords['thematicAreas'] =  $http.get('/api/v2013/thesaurus/domains/CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924/terms').then(function (response) {
+                        termsTree = thesaurus.buildTree(response.data);
+                        return  _.filter(termsTree, function where (o) { return !!o.narrowerTerms && o.identifier!='1796f3f3-13ae-4c71-a5d2-0df261e4f218';});
+                    });
+                    
+                    //ABS key areas
+                     keywords['keyAreas'] =  $http.get('/api/v2013/thesaurus/domains/2B2A5166-F949-4B1E-888F-A7976E76320B/terms').then(function (response) {
+                        termsTree = thesaurus.buildTree(response.data);
+                        return _.filter(termsTree, function where (o) { return !!o.narrowerTerms && o.identifier!='1796f3f3-13ae-4c71-a5d2-0df261e4f218';});
+                    });
+                    
+                    return  keywords;
+
+                }
+                
+               
+                
+                
+                
+                //==================================================================================
                 function flatten(items, collection) {
                     items.forEach(function (item) {
                         item.selected = false;
@@ -283,7 +492,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                     });
                     return collection;
                 }
-
+                //==================================================================================
                 function formatCountry(countryDetails){
                     var country = {};
                     var treaties = countryDetails.treaties;
@@ -303,6 +512,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
 
                     return country;
                 }
+                //==================================================================================
                 function isNPParty(entity) {
 
                     if (entity && entity.isNPParty != undefined)
@@ -315,7 +525,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                         entity.treaties.XXVII8b.instrument == "accession" ||
                         entity.treaties.XXVII8b.instrument == "acceptance" || entity.treaties.XXVII8b.instrument == "approval");
                 }
-
+                //==================================================================================
                 function isPartyToCBD(entity) {
 
                     if (entity && entity.isCBDParty != undefined)
@@ -323,7 +533,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
 
                     return entity && entity.treaties.XXVII8.party != null;
                 }
-
+                //==================================================================================
                 function isSignatory(entity) {
 
                     if (entity && entity.isNPSignatory != undefined)
@@ -331,7 +541,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
 
                     return entity && entity.treaties.XXVII8b.signature != null;
                 }
-
+                //==================================================================================
                 function isRatified(entity) {
 
                     if (entity && entity.isNPRatified != undefined)
@@ -342,7 +552,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                         entity.treaties.XXVII8b.instrument == "acceptance" || entity.treaties.XXVII8b.instrument == "approval");
                 }
 
-
+                //==================================================================================
                 function showHelp(entity) {
 
                     if (entity && entity.isCBDParty != undefined)

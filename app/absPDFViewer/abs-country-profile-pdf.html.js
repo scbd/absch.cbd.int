@@ -108,7 +108,7 @@ app.controller('printCountryProfile', ['$scope', '$http', '$location', '$sce', '
                 if (schema == 'authority')
                     return 'Competent National Authority';
                 if (schema == 'focalPoint')
-                    return 'ABS National Focal Points';
+                    return 'National ABS Focal Points';
                 if (schema == 'absCheckpoint')
                     return 'ABS Checkpoints';
             }
@@ -159,11 +159,11 @@ app.controller('printCountryProfile', ['$scope', '$http', '$location', '$sce', '
                 if (schema == 'focalPoint') {
 
                     if (_.contains(type, 'NP-FP') || _.contains(type, 'ABS-FP'))
-                        return 'ABS National Focal Point';
+                        return 'National ABS Focal Point';
                     // else if(_.contains(type,'ABS-IC'))
                     //     return 'ABS ICNP Focal Point';
                     else if (_.contains(type, 'CBD-FP1') || _.contains(type, 'CBD-FP2'))
-                        return 'CBD National Focal Point';
+                        return 'CBD Primary Focal Point';
                     else
                         return 'National Focal Point';
                 } else

@@ -27,6 +27,10 @@
 	margin:0;
 }
 
+#Record h4{
+	color:#FFF!important;
+}
+
 #Record .modal-dialog {
 	width:650px;
 	margin:30px auto;

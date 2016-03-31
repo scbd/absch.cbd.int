@@ -153,17 +153,15 @@ define(["app",'/app/js/common.js'], function (app) {
     app.filter("partyStatus", ['$q', 'commonjs', function($q, commonjs) {
 
 		return function(countryCode) {
-           
-            return $q.when(commonjs.getCountry(countryCode))
+          
+            return $q.when(commonjs.getCountry(countryCode.toUpperCase()))
                     .then(function(country){
-                        
-                        return country;
-                        // if(country.isNPParty())
-                        //     return  'party';
-                        // else if(country.isNPInbetweenParty())
-                        //     return  'inbetween';
-                        // else
-                        //     return 'non-party';
+                        if(country.isNPParty())
+                            return  'party';
+                        else if(country.isNPInbetweenParty())
+                            return  'inbetween';
+                        else
+                            return 'non-party';
                     });
 		};
 	}]);
