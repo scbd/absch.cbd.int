@@ -133,7 +133,7 @@ define(["app",'/app/js/common.js'], function (app) {
 		};
 	}])
 //============================================================
-    app.filter("uniqueIDWithoutRevision", ['$filter', function($filter) {
+    app.filter("uniqueIDWithoutRevision", ['$filter', 'commonjs', function($filter, commonjs) {
 
 		return function( document ) {
             var unique = $filter("uniqueID")(document);
@@ -146,6 +146,25 @@ define(["app",'/app/js/common.js'], function (app) {
 
             return '';
 
+		};
+	}]);
+    
+    //============================================================
+    app.filter("partyStatus", ['$q', 'commonjs', function($q, commonjs) {
+
+		return function(countryCode) {
+           
+            return $q.when(commonjs.getCountry(countryCode))
+                    .then(function(country){
+                        
+                        return country;
+                        // if(country.isNPParty())
+                        //     return  'party';
+                        // else if(country.isNPInbetweenParty())
+                        //     return  'inbetween';
+                        // else
+                        //     return 'non-party';
+                    });
 		};
 	}]);
 
