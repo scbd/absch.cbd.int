@@ -10,10 +10,13 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
 
     app.controller('TemplateController', ['$scope', '$rootScope', 'showHelp',
         '$location','realmConfiguration','$anchorScroll', 'breadcrumbs', 'toastr', '$route',
-        'cfgUserNotification','$window', '$element','localStorageService', 'appConfigService',
+        'cfgUserNotification','$window', '$element','localStorageService', 'appConfigService', 'apiUrl',
         function($scope, $rootScope, showHelp, $location, realmConfiguration,
             $anchorScroll, breadcrumbs, toastr, $route, cfgUserNotification, $window, $element, localStorageService,
-            appConfigService) {
+            appConfigService, apiUrl) {
+
+            $scope.ACCOUNTS_URL = apiUrl.devAccountsUrl();
+
             $scope.controller = "TemplateController";
             $scope.breadcrumbs = breadcrumbs;
             $scope.$root.pageTitle = {

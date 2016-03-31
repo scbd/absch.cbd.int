@@ -31,12 +31,25 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+
 </head>
 
 <body ng-controller="TemplateController" ng-cloak id="top">
 
+    <!-- <iframe ng-if="!ACCOUNTS_URL" id="authenticationFrame" src="https://accounts.cbd.int/app/authorize.html" style="display:none"></iframe> -->
+    <iframe   id="authenticationFrame" style="display:none"></iframe>
+    <script>
 
-    <iframe id="authenticationFrame" src="https://accounts.cbd.int/app/authorize.html" style="display:none"></iframe>
+        var url = window.location.origin;
+        var dev = /^https:\/\/absch.cbddev.xyz\//i.test(url)
+             // ||/^http:\/\/localhost[:\/]/i.test(url)
+
+        if(dev)
+            document.getElementById('authenticationFrame').src="https://accounts.cbddev.xyz/app/authorize.html";
+        else
+            document.getElementById('authenticationFrame').src="https://accounts.cbd.int/app/authorize.html";
+
+    </script>
 
     <scbd-header></scbd-header>
     <portal-branding></portal-branding>
