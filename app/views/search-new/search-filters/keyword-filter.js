@@ -1,5 +1,4 @@
-define(['app', 'underscore', '/app/js/common.js',
-], function(app, _) {
+define(['app'],  function(app, _) {
 
     app.directive('keywordFilter', function() {
         return {
@@ -11,12 +10,15 @@ define(['app', 'underscore', '/app/js/common.js',
             scope: false,
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
               
-               $scope.searchFilters = searchDirectiveCtrl.getSearchFilters("keyword");
-              
-         
-             
+               $scope.keywordSearchFilters = searchDirectiveCtrl.getSearchFilters("keyword");
+               $scope.relatedFilters = {};
 
-            }//link
+            },// link
+            controller: function($scope){
+                 
+               
+                
+            },// controller
         };
     });
 });

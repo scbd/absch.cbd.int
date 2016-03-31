@@ -54,6 +54,8 @@ define(['app', 'underscore', '/app/js/common.js',
                     var nationalCurrentPage = 0;
                     var referenceCurrentPage = 0;
                     var scbdCurrentPage = 0;
+                    
+                    $scope.relatedKeywords = {};
 
                     //===============================================================================================================================
                     $scope.isFreeTextFilterOn = function(filterID) {
@@ -104,6 +106,11 @@ define(['app', 'underscore', '/app/js/common.js',
                               return $scope.searchFilters;
 
                            return _.filter($scope.searchFilters, function(item){if(item.type === type) return item;});
+                    };
+                    
+                     //===============================================================================================================================
+                    function getSetFilters() {
+                         return $scope.setFilters;
                     };
 
                   //===============================================================================================================================
@@ -467,7 +474,7 @@ define(['app', 'underscore', '/app/js/common.js',
                                 console.log(keywords);
                                 _.each(keywords, function(keyword, index){
                                     console.log(keyword);
-                                    addKeywordFilter(keyword, '', 'MSR');
+                                    addKeywordFilter(keyword, '', 'measure');
                                 });
                         });
                         
@@ -621,10 +628,10 @@ define(['app', 'underscore', '/app/js/common.js',
                     };
                     
                     //===============================================================================================================================
-                     function addKeywordFilter(keyword, namePrefix, tags){
+                     function addKeywordFilter(keyword, namePrefix, related){
 
                         addFilter(keyword.identifier, {'type':'keyword', 'name':namePrefix + keyword.title.en, 'id':keyword.identifier,
-                            'description':'', 'tags' : tags});
+                            'description':'',  'parent' : parent, 'related' : related});
 
                          _.each(keyword.narrowerTerms,function(narrower){
                             addKeywordFilter(narrower, keyword.identifier);
@@ -635,7 +642,7 @@ define(['app', 'underscore', '/app/js/common.js',
                      function addThematicAreaFilter(keyword, parent){
 
                         addFilter(keyword.identifier, {'type':'keyword', 'name':keyword.title.en, 'id':keyword.identifier,
-                            'description':'', 'parent' : parent});
+                            'description':'', 'parent' : parent, 'related' : ''});
 
                         _.each(keyword.narrowerTerms,function(narrower){
                             addThematicAreaFilter(narrower, keyword.identifier);
@@ -741,6 +748,7 @@ define(['app', 'underscore', '/app/js/common.js',
                         }
                     };
 
+                    //===============================================================================================================================
                     function loadTabFacets(){
                             var qNational  = queryFilterBuilder("national");
                             var qReference = queryFilterBuilder("reference");
@@ -799,10 +807,39 @@ define(['app', 'underscore', '/app/js/common.js',
                             load();
                             loadTabFacets();
                             $scope.refresh = false;
+                            $scope.getRelatedKeywords();
                         }
 				    });
-
-
+                    
+                    
+                    //===============================================================================================================================
+                    $scope.getRelatedKeywords = function() {
+                       $scope.relatedKeywords ={};
+                       var relatedKeywords = {};
+                       var setIds = {};
+                       var keywords = getSearchFilters("keyword");
+                       
+                       if($scope.setFilters){
+                    
+                         _.each($scope.setFilters, function(set){ 
+                            
+                            relatedKeywords  =  _.filter(keywords, function(item){
+                                
+                                if(item.related.indexOf(set.id) >= 0)
+                                    return item;
+                                else 
+                                    return null;
+                             });
+                             if(!_.isEmpty(relatedKeywords))
+                                $scope.relatedKeywords[set.id] = relatedKeywords;
+                         });
+                       }
+                        
+                      
+                         
+                    }
+                    
+                    //===============================================================================================================================
                     $scope.updateScrollPage = function() {
 
                         if($scope.currentTab == 'nationalRecords'){
@@ -838,10 +875,13 @@ define(['app', 'underscore', '/app/js/common.js',
                         }
 
                     };
+                    
+                    //===============================================================================================================================
                     function getRecordCount(documents){
                         return _.reduce(_.pluck(documents, 'numFound'), function(mem,d){ return mem + d;},0);
                     }
-
+                   
+                    //===============================================================================================================================
                     loadFilters();
                     if($routeParams.recordType){
                         $scope.currentTab = $routeParams.recordType;
@@ -861,7 +901,9 @@ define(['app', 'underscore', '/app/js/common.js',
                             }
                         }
                     }
+                    
                     load();
+                    
                     loadTabFacets();
 
             }]//controller
