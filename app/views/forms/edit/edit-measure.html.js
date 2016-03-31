@@ -303,8 +303,8 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
             }
 
             var elementsForOthers = [
-                "24E809DA-20F4-4457-9A8A-87C08DF81E8A", "1E824A31-BDFB-4C47-9593-8006B5BLAISE1","A896179F-833E-4F76-B3F4-81CC95C66592",
-                "F2E6038A-6E99-4BCE-9582-155B72CC7730", "01DA2D8E-F2BB-4E85-A17E-AB02BLAISE10", "5B6177DD-5E5E-434E-8CB7-D63D6BLAISE8"
+                "24E809DA-20F4-4457-9A8A-87C08DF81E8A", "08B2CDEC-786F-4977-AD0A-6A709695528D","9847FA8A-16C3-4466-A378-F20AF9FF883B",
+                "E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63", "01DA2D8E-F2BB-4E85-A17E-AB0219194A17", "5B6177DD-5E5E-434E-8CB7-D63D6BLAISE8"
             ];
 
             $scope.gettext = function(identifier){
@@ -635,33 +635,20 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "nonPreferedTerms": []
                 }, {
                     "identifier": "08B2CDEC-786F-4977-AD0A-6A709695528D",
-                    "name": "Access",
-                    "title": {
-                        "en": "Access"
-                    },
-                    "shortTitle": {},
-                    "description": "",
-                    "source": "",
-                    "broaderTerms": [],
-                    "narrowerTerms": ["1E824A31-BDFB-4C47-9593-8006B5BLAISE1"],
-                    "relatedTerms": [],
-                    "nonPreferedTerms": []
-                }, {
-                    "identifier": "1E824A31-BDFB-4C47-9593-8006B5BLAISE1",
                     "name": "Does the measure cover access?",
                     "title": {
                         "en": "Does the measure cover access?"
                     },
                     "shortTitle": {},
-                    "description": "Access / Access to genetic resources",
+                    "description": "",
                     "source": "",
-                    "broaderTerms": ["08B2CDEC-786F-4977-AD0A-6A709695528D"],
+                    "broaderTerms": [],
                     "narrowerTerms": ["1E824A31-BDFB-4C47-9593-8006B5FC7D60", "5427EB8F-5532-4AE2-88EE-5B9619917480",
                         "5427EB8F-5532-4AE2-88EE-5B961BLAISE4", "5427EB8F-5532-4AE2-88EE-5B961BLAISE5"
                     ],
                     "relatedTerms": [],
                     "nonPreferedTerms": []
-                }, {
+                },  {
                     "identifier": "1E824A31-BDFB-4C47-9593-8006B5FC7D60",
                     "name": "Does it cover access to genetic resources",
                     "title": {
@@ -670,7 +657,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "shortTitle": {},
                     "description": "Does it cover access to genetic resources",
                     "source": "",
-                    "broaderTerms": ["1E824A31-BDFB-4C47-9593-8006B5BLAISE1"],
+                    "broaderTerms": ["08B2CDEC-786F-4977-AD0A-6A709695528D"],
                     "narrowerTerms": ["7CAC5B93-7E27-441F-BFEB-9E416D48B1BE", "A7769659-17DB-4ED4-B1CA-A3ADD9CBD3A4"],
                     "relatedTerms": [],
                     "nonPreferedTerms": []
@@ -767,19 +754,6 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "nonPreferedTerms": []
                 }, {
                     "identifier": "9847FA8A-16C3-4466-A378-F20AF9FF883B",
-                    "name": "Benefit-Sharing",
-                    "title": {
-                        "en": "Benefit-Sharing"
-                    },
-                    "shortTitle": {},
-                    "description": "",
-                    "source": "",
-                    "broaderTerms": [],
-                    "narrowerTerms": ["A896179F-833E-4F76-B3F4-81CC95C66592"],
-                    "relatedTerms": [],
-                    "nonPreferedTerms": []
-                }, {
-                    "identifier": "A896179F-833E-4F76-B3F4-81CC95C66592",
                     "name": "Does the measure cover benefit-sharing?",
                     "title": {
                         "en": "Does the measure cover benefit-sharing?"
@@ -787,10 +761,9 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "shortTitle": {},
                     "description": "",
                     "source": "",
-                    "broaderTerms": ["9847FA8A-16C3-4466-A378-F20AF9FF883B"],
+                    "broaderTerms": [],
                     "narrowerTerms": ["628FA533-5B81-481A-8374-A0CF8DF0CF22", "0AE1295D-0797-44B6-B0AC-974EA356096D",
-                        "628FA533-5B81-481A-8374-A0CF8BLAISE6", "0AE1295D-0797-44B6-B0AC-974EABLAISE7"
-                    ],
+                        "628FA533-5B81-481A-8374-A0CF8BLAISE6", "0AE1295D-0797-44B6-B0AC-974EABLAISE7"],
                     "relatedTerms": [],
                     "nonPreferedTerms": []
                 }, {
@@ -802,7 +775,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "shortTitle": {},
                     "description": "",
                     "source": "",
-                    "broaderTerms": ["A896179F-833E-4F76-B3F4-81CC95C66592"],
+                    "broaderTerms": ["9847FA8A-16C3-4466-A378-F20AF9FF883B"],
                     "narrowerTerms": [],
                     "relatedTerms": [],
                     "nonPreferedTerms": []
@@ -815,7 +788,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "shortTitle": {},
                     "description": "",
                     "source": "",
-                    "broaderTerms": ["A896179F-833E-4F76-B3F4-81CC95C66592"],
+                    "broaderTerms": ["9847FA8A-16C3-4466-A378-F20AF9FF883B"],
                     "narrowerTerms": [],
                     "relatedTerms": [],
                     "nonPreferedTerms": []
@@ -828,7 +801,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "shortTitle": {},
                     "description": "",
                     "source": "",
-                    "broaderTerms": ["A896179F-833E-4F76-B3F4-81CC95C66592"],
+                    "broaderTerms": ["9847FA8A-16C3-4466-A378-F20AF9FF883B"],
                     "narrowerTerms": [],
                     "relatedTerms": [],
                     "nonPreferedTerms": []
@@ -841,25 +814,12 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "shortTitle": {},
                     "description": "",
                     "source": "",
-                    "broaderTerms": ["A896179F-833E-4F76-B3F4-81CC95C66592"],
+                    "broaderTerms": ["9847FA8A-16C3-4466-A378-F20AF9FF883B"],
                     "narrowerTerms": [],
                     "relatedTerms": [],
                     "nonPreferedTerms": []
                 }, {
                     "identifier": "E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63",
-                    "name": "Compliance",
-                    "title": {
-                        "en": "Compliance"
-                    },
-                    "shortTitle": {},
-                    "description": "",
-                    "source": "",
-                    "broaderTerms": [],
-                    "narrowerTerms": ["F2E6038A-6E99-4BCE-9582-155B72CC7730"],
-                    "relatedTerms": [],
-                    "nonPreferedTerms": []
-                }, {
-                    "identifier": "F2E6038A-6E99-4BCE-9582-155B72CC7730",
                     "name": "Does the measure cover compliance?",
                     "title": {
                         "en": "Does the measure cover compliance?"
@@ -867,11 +827,11 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "shortTitle": {},
                     "description": "",
                     "source": "",
-                    "broaderTerms": ["E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63"],
+                    "broaderTerms": [],
                     "narrowerTerms": ["4C57FDB4-3B92-46DD-B4C2-BB93D3B2167C", "1FCC6CA9-022F-42FD-BD02-43AE674FEB56", "4C57FDB4-3B92-46DD-B4C2-BB93DBLAISE8"],
                     "relatedTerms": [],
                     "nonPreferedTerms": []
-                }, {
+                },  {
                     "identifier": "4C57FDB4-3B92-46DD-B4C2-BB93DBLAISE8",
                     "name": "Does it cover compliance with domestic legislation or regulatory requirements of the other Party (Article 15 and 16)?",
                     "title": {
@@ -880,7 +840,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "shortTitle": {},
                     "description": "",
                     "source": "",
-                    "broaderTerms": ["F2E6038A-6E99-4BCE-9582-155B72CC7730"],
+                    "broaderTerms": ["E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63"],
                     "narrowerTerms": [],
                     "relatedTerms": [],
                     "nonPreferedTerms": []
@@ -893,7 +853,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "shortTitle": {},
                     "description": "",
                     "source": "",
-                    "broaderTerms": ["F2E6038A-6E99-4BCE-9582-155B72CC7730"],
+                    "broaderTerms": ["E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63"],
                     "narrowerTerms": [],
                     "relatedTerms": [],
                     "nonPreferedTerms": []
@@ -906,25 +866,12 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "shortTitle": {},
                     "description": "",
                     "source": "",
-                    "broaderTerms": ["F2E6038A-6E99-4BCE-9582-155B72CC7730"],
+                    "broaderTerms": ["E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63"],
                     "narrowerTerms": [],
                     "relatedTerms": [],
                     "nonPreferedTerms": []
                 }, {
                     "identifier": "01DA2D8E-F2BB-4E85-A17E-AB0219194A17",
-                    "name": "Relationship with other international instruments",
-                    "title": {
-                        "en": "Relationship with other international instruments"
-                    },
-                    "shortTitle": {},
-                    "description": "",
-                    "source": "",
-                    "broaderTerms": [],
-                    "narrowerTerms": ["01DA2D8E-F2BB-4E85-A17E-AB02BLAISE10"],
-                    "relatedTerms": [],
-                    "nonPreferedTerms": []
-                }, {
-                    "identifier": "01DA2D8E-F2BB-4E85-A17E-AB02BLAISE10",
                     "name": "Does this measure include provisions on how its application relates to other international instruments?",
                     "title": {
                         "en": "Does this measure include provisions on how its application relates to other international instruments?"
@@ -932,11 +879,11 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "shortTitle": {},
                     "description": "",
                     "source": "",
-                    "broaderTerms": ["01DA2D8E-F2BB-4E85-A17E-AB0219194A17"],
+                    "broaderTerms": [],
                     "narrowerTerms": ["A71B36E8-D2CE-4254-A628-6DBFB902394C"],
                     "relatedTerms": [],
                     "nonPreferedTerms": []
-                }, {
+                },  {
                     "identifier": "A71B36E8-D2CE-4254-A628-6DBFB902394C",
                     "name": "Plant genetic resources for food and agriculture exchanged using the standard material transfer agreement of the International Treaty on Plant Genetic Resources for Food and Agriculture",
                     "title": {
@@ -945,7 +892,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "shortTitle": {},
                     "description": "",
                     "source": "",
-                    "broaderTerms": ["01DA2D8E-F2BB-4E85-A17E-AB02BLAISE10"],
+                    "broaderTerms": ["01DA2D8E-F2BB-4E85-A17E-AB0219194A17"],
                     "narrowerTerms": [],
                     "relatedTerms": [],
                     "nonPreferedTerms": []
@@ -1004,7 +951,64 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                 }]
             }
 
-
+            // {
+            //     "identifier": "1E824A31-BDFB-4C47-9593-8006B5BLAISE1*****",
+            //     "name": "Does the measure cover access?",
+            //     "title": {
+            //         "en": "Does the measure cover access?"
+            //     },
+            //     "shortTitle": {},
+            //     "description": "Access / Access to genetic resources",
+            //     "source": "",
+            //     "broaderTerms": ["08B2CDEC-786F-4977-AD0A-6A709695528D"],
+            //     "narrowerTerms": ["1E824A31-BDFB-4C47-9593-8006B5FC7D60", "5427EB8F-5532-4AE2-88EE-5B9619917480",
+            //         "5427EB8F-5532-4AE2-88EE-5B961BLAISE4", "5427EB8F-5532-4AE2-88EE-5B961BLAISE5"
+            //     ],
+            //     "relatedTerms": [],
+            //     "nonPreferedTerms": []
+            // },
+            //     {
+            //        "identifier": "A896179F-833E-4F76-B3F4-81CC95C66592",
+            //        "name": "Does the measure cover benefit-sharing?",
+            //        "title": {
+            //            "en": "Does the measure cover benefit-sharing?"
+            //        },
+            //        "shortTitle": {},
+            //        "description": "",
+            //        "source": "",
+            //        "broaderTerms": ["9847FA8A-16C3-4466-A378-F20AF9FF883B"],
+            //        "narrowerTerms": ["628FA533-5B81-481A-8374-A0CF8DF0CF22", "0AE1295D-0797-44B6-B0AC-974EA356096D",
+            //            "628FA533-5B81-481A-8374-A0CF8BLAISE6", "0AE1295D-0797-44B6-B0AC-974EABLAISE7"
+            //        ],
+            //        "relatedTerms": [],
+            //        "nonPreferedTerms": []
+            //    },{
+            //     "identifier": "F2E6038A-6E99-4BCE-9582-155B72CC7730",
+            //     "name": "Does the measure cover compliance?",
+            //     "title": {
+            //         "en": "Does the measure cover compliance?"
+            //     },
+            //     "shortTitle": {},
+            //     "description": "",
+            //     "source": "",
+            //     "broaderTerms": ["E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63"],
+            //     "narrowerTerms": ["4C57FDB4-3B92-46DD-B4C2-BB93D3B2167C", "1FCC6CA9-022F-42FD-BD02-43AE674FEB56", "4C57FDB4-3B92-46DD-B4C2-BB93DBLAISE8"],
+            //     "relatedTerms": [],
+            //     "nonPreferedTerms": []
+            // },{
+            //     "identifier": "01DA2D8E-F2BB-4E85-A17E-AB02BLAISE10",
+            //     "name": "Does this measure include provisions on how its application relates to other international instruments?",
+            //     "title": {
+            //         "en": "Does this measure include provisions on how its application relates to other international instruments?"
+            //     },
+            //     "shortTitle": {},
+            //     "description": "",
+            //     "source": "",
+            //     "broaderTerms": ["01DA2D8E-F2BB-4E85-A17E-AB0219194A17"],
+            //     "narrowerTerms": ["A71B36E8-D2CE-4254-A628-6DBFB902394C"],
+            //     "relatedTerms": [],
+            //     "nonPreferedTerms": []
+            // },
         }
     ]);
 
@@ -1062,7 +1066,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
 
                 var readOnlyElements = [
                     "24E809DA-20F4-4457-9A8A-87C08DF81E8A", "A862ABFC-B97D-4E6A-9A70-812ABLAISE11", "4E2974DF-216E-46C8-8797-8E3A33D6A048",
-                    "E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63", "08B2CDEC-786F-4977-AD0A-6A709695528D", "08B2CDEC-786F-4977-AD0A-6A709695528D",
+                    "E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63", "08B2CDEC-786F-4977-AD0A-6A709695528D",
                     "01DA2D8E-F2BB-4E85-A17E-AB0219194A17", "9847FA8A-16C3-4466-A378-F20AF9FF883B", "5B6177DD-5E5E-434E-8CB7-D63D6BLAISE8"
                 ];
 
@@ -1074,11 +1078,11 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
 
                 var yesnoElements = [
                     "4E2974DF-216E-46C8-8797-8E3A3BLAISE1", "B8A150E054154AD3AD97856ABD485E90", "2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD",
-                    "1E824A31-BDFB-4C47-9593-8006B5FC7D60", "1E824A31-BDFB-4C47-9593-8006B5BLAISE1",
+                    "1E824A31-BDFB-4C47-9593-8006B5FC7D60", "08B2CDEC-786F-4977-AD0A-6A709695528D",
                     "5427EB8F-5532-4AE2-88EE-5B9619917480", "5427EB8F-5532-4AE2-88EE-5B961BLAISE4",
-                    "5427EB8F-5532-4AE2-88EE-5B961BLAISE5", "A896179F-833E-4F76-B3F4-81CC95C66592",
-                    "F2E6038A-6E99-4BCE-9582-155B72CC7730", "4C57FDB4-3B92-46DD-B4C2-BB93DBLAISE8",
-                    "1FCC6CA9-022F-42FD-BD02-43AE674FEB56", "01DA2D8E-F2BB-4E85-A17E-AB02BLAISE10",
+                    "5427EB8F-5532-4AE2-88EE-5B961BLAISE5", "9847FA8A-16C3-4466-A378-F20AF9FF883B",
+                    "E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63", "4C57FDB4-3B92-46DD-B4C2-BB93DBLAISE8",
+                    "1FCC6CA9-022F-42FD-BD02-43AE674FEB56", "01DA2D8E-F2BB-4E85-A17E-AB0219194A17",
                     "4C57FDB4-3B92-46DD-B4C2-BB93D3B2167C"
                 ];
 

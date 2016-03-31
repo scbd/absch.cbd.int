@@ -294,7 +294,7 @@
               // ng:if="!term.broaderTerms || (isYesNo(term.identifier) && term.level <=2) || isParentSelected(term.identifier, term.level)"> -->
             <script type="text/ng-template"  id="/app/views/forms/edit/edit-measure.directive/abs/inner">
               <div ng-class="{measureChecked : identifiers[term.identifier]}" style=""
-              ng:if="!term.broaderTerms || (term.level <=2) || isParentSelected(term.identifier, term.level)">
+              ng:if="!term.broaderTerms || (term.identifier == '5B6177DD-5E5E-434E-8CB7-D63D6BLAISE8') || isParentSelected(term.identifier, term.level)">
                 <table style="width:100%" cellspacing="0" cellpadding="0">
                 <tr ng:class="{paddingleft0 : isMainElement(term.identifier), 'measureChecked' : identifiers[term.identifier]}" >
                   <td style="text-align:left;vertical-align:middle;" id="{{term.identifier}}_help" style="" >
