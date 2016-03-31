@@ -4,16 +4,15 @@
 		<span class="color-black"> (CNA) </span></h4>
 	</div>
 	<div class="record-body panel-body" help schema="viewCNA" >
-
+		<!-- {{document.government|term}} -->
 	<div name="article-13-2"></div>
-
 		<legend ng-if="document.government || document.name || document.name || document.address || document.city || document.state|| document.postalCode || document.country || document.phones.length > 0 ||document.websites.length > 0 || document.faxes.length > 0|| document.emails.length > 0">General information</legend>
 
 		<div ng-show="document.government">
 			<label name="country">Country</label>
 			<div class="km-value">
-				{{document.government|term}}
-                {{document.government.identifier|partyStatus}}
+				<span>{{document.government|term}}</span>
+				<span ng-party-status government="document.government"></span>
 			</div>
 		</div>
 
@@ -115,6 +114,7 @@
 					<span ng-repeat="jur in document.absJurisdiction">{{jur|term}}{{$last ? '' : ', '}} </span>
 					<span ng-if="document.absJurisdictionName ">({{document.absJurisdictionName | lstring:locale}})</span>
 				</div>
+
 			</div>
 
 
@@ -143,7 +143,6 @@
 			</div>
 
 		</div>
-
 		<div ng-show="document.relevantInformation||document.relevantDocuments">
 			<legend>Additional Information</legend>
 
@@ -163,5 +162,5 @@
 	</div>
 
     <div document-metadata class="panel-footer" ></div>
- 
+
 </div>

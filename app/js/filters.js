@@ -148,23 +148,45 @@ define(["app",'/app/js/common.js'], function (app) {
 
 		};
 	}]);
-    
-    //============================================================
-    app.filter("partyStatus", ['$q', 'commonjs', function($q, commonjs) {
 
-		return function(countryCode) {
-          
-            return $q.when(commonjs.getCountry(countryCode.toUpperCase()))
-                    .then(function(country){
-                        if(country.isNPParty())
-                            return  'party';
-                        else if(country.isNPInbetweenParty())
-                            return  'inbetween';
-                        else
-                            return 'non-party';
-                    });
+
+
+	app.filter("partyStatus", ['$q', 'commonjs',	function($q, commonjs) {
+		var partyStatusMap = {};
+
+		return function(term) {
+
+			if(!term)
+				return "";
+
+			if (term && angular.isString(term))
+                term = {
+                    identifier: term
+                };
+
+			term.identifier = term.identifier.toUpperCase();
+
+			if(partyStatusMap[term.identifier])
+				return partyStatusMap[term.identifier] ;
+
+			partyStatusMap[term.identifier] = $q.when(commonjs.getCountry(term.identifier))
+			.then(function(country) {
+
+				partyStatusMap[term.identifier] = country;
+				console.log(country);
+				return country;
+
+			}).catch(function(){
+
+				partyStatusMap[term.identifier] = term.identifier;
+
+				return term.identifier;
+
+			});
+			return partyStatusMap[term];
 		};
 	}]);
+
 
 //============================================================
 	app.filter("checkpointTitle", ["$http", '$filter', function($http, $filter) {
@@ -181,7 +203,7 @@ define(["app",'/app/js/common.js'], function (app) {
 			locale = locale||"en";
 
 			if(cacheMap[term.identifier])
-				return cacheMap[term.identifier].title;
+				return $filter("lstring")(cacheMap[term.identifier].title, locale);
 
 			cacheMap[term.identifier] = $http.get("/api/v2013/documents/" + encodeURIComponent(term.identifier),  {cache:true}).then(function(result) {
 
