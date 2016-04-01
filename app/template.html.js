@@ -4,7 +4,8 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
     '/app/views/directives/nav/portal-branding.js',
     'scbd-branding/directives/header/header',
     '/app/views/directives/nav/portal-nav.js',
-    'ngAria', 'angular-animate', 'toastr', 'ionsound', '/app/services/app-config-service.js'
+    'ngAria', 'angular-animate', 'toastr', 'ionsound'
+    //, '/app/services/app-config-service.js'
 ], function(app, _) {
     'use strict';
 
@@ -13,9 +14,11 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
         'cfgUserNotification','$window', '$element','localStorageService', 'appConfigService', 'apiUrl',
         function($scope, $rootScope, showHelp, $location, realmConfiguration,
             $anchorScroll, breadcrumbs, toastr, $route, cfgUserNotification, $window, $element, localStorageService,
-            appConfigService, apiUrl) {
+            appConfigService
+            //, apiUrl
+        ) {
 
-            $scope.ACCOUNTS_URL = apiUrl.devAccountsUrl();
+            //$scope.ACCOUNTS_URL = apiUrl.devAccountsUrl();
 
             $scope.controller = "TemplateController";
             $scope.breadcrumbs = breadcrumbs;
