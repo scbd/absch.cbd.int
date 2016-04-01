@@ -1,11 +1,12 @@
-define(['app','underscore','ionsound'], function(app,_) {
+define(['app','underscore', '/app/services/app-config-service.js', 'ionsound'],
+function(app,_) {
     app.directive('switchRealm', function() {
         return {
             restrict: 'EAC',
             replace: true,
             templateUrl: '/app/views/directives/switch-realm-directive.html',
-            controller: ['$scope', '$location','realmConfiguration','realm',
-                function($scope, $location, realmConfiguration, realm) {
+            controller: ['$scope', '$location','appConfigService','realm',
+                function($scope, $location, appConfigService, realm) {
 
                     console.log(realm);
 
@@ -14,18 +15,17 @@ define(['app','underscore','ionsound'], function(app,_) {
                                         {identifier:'ABS-TRG', value:'ABS-TRG', message:'TRAINING'}]
 
                     $scope.currentRealm = function(){
-                        var realmConfig = _.find(realmConfiguration,{host:$location.$$host});
-                        return realmConfig.realm;
+                        return appConfigService.currentRealm;
                     }
 
                     $scope.currentRealmMessage = function(){
-                        var realmConfig = _.find(realmConfiguration,{host:$location.$$host});
-                        return _.find($scope.realmList,{identifier:realmConfig.realm}).message;
+
+                        return _.find($scope.realmList,{identifier:appConfigService.currentRealm}).message;
                     }
                     $scope.switchRealm = function(){
-                        var realmConfig = _.find(realmConfiguration,{host:$location.$$host});
-                        realmConfig.realm = $scope.selectedRealm;
-                        realm.value = realmConfig.realm;
+                        appConfigService.setCurrentRealm($scope.selectedRealm);
+                        appConfigService.currentRealm   = $scope.selectedRealm;
+                        realm.value = appConfigService.currentRealm;
                     }
                 }]
 
