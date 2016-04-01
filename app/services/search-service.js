@@ -3,9 +3,9 @@ define(['app', 'underscore', './local-storage-service.js', './app-config-service
     app.factory('searchService', ['$http', '$q', 'realm', 'localStorageService', 'appConfigService',
         function($http, $q, realm, localStorageService, appConfigService) {
             return new function() {
-                
-                var base_fields = 'id, rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, schemaSort_i, sort1_s, sort2_s, sort3_s,'; 
-                var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt'; 
+
+                var base_fields = 'id, rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, schemaSort_i, sort1_s, sort2_s, sort3_s,';
+                var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt';
 
                 var searchDefaults = {
                     currentPage: 0,
@@ -17,12 +17,13 @@ define(['app', 'underscore', './local-storage-service.js', './app-config-service
                     groupField: 'government_s',
                     groupLimit: 1000
                 }
-                var q = '(realm_ss:' + realm.value.toLowerCase() + ') AND NOT version_s:* AND ';
+                var q = '(realm_ss:' + appConfigService.currentRealm.toLowerCase() + ') AND NOT version_s:* AND ';
 
                 //*****************************************************************************************************************
                 this.list = function(searchQuery, queryCanceler) {
 
                     _.defaults(searchQuery, searchDefaults);
+                    q = '(realm_ss:' + appConfigService.currentRealm.toLowerCase() + ') AND NOT version_s:* AND ';
 
                     var queryListParameters = {
                         'q': q + searchQuery.query,
@@ -43,6 +44,7 @@ define(['app', 'underscore', './local-storage-service.js', './app-config-service
                 this.group = function(searchQuery, queryCanceler) {
 
                     _.defaults(searchQuery, searchDefaults);
+                    q = '(realm_ss:' + appConfigService.currentRealm.toLowerCase() + ') AND NOT version_s:* AND ';
 
                     var queryGroupParameters = {
                         'q': q + searchQuery.query,
@@ -75,7 +77,7 @@ define(['app', 'underscore', './local-storage-service.js', './app-config-service
                     _.defaults(facetQuery, searchDefaults);
 
                     if (facetQuery) {
-
+                        q = '(realm_ss:' + appConfigService.currentRealm.toLowerCase() + ') AND NOT version_s:* AND ';
                         var queryFacetsParameters = {
                             'q': q + facetQuery.query,
                             'fl': '',
@@ -116,7 +118,7 @@ define(['app', 'underscore', './local-storage-service.js', './app-config-service
                     _.defaults(facetQuery, searchDefaults);
 
                     if (facetQuery) {
-
+                        q = '(realm_ss:' + appConfigService.currentRealm.toLowerCase() + ') AND NOT version_s:* AND ';
                         var queryFacetsParameters = {
                             'q': q + facetQuery.query,
                             'fl': '',
