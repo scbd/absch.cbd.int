@@ -121,6 +121,15 @@ define(['app', 'underscore', '/app/js/common.js',
                   //===============================================================================================================================
                     $scope.removeFilter = function(filterID) {
                             delete $scope.setFilters[filterID];
+                            
+                            //remove children
+                            var dels={};
+                            var toDelete =  _.each($scope.setFilters, function(filter){
+                                 if(filter.broader === filterID){
+                                     $scope.removeFilter(filter.id);
+                                 }
+                             });
+
                             $scope.refresh=true;
                     };
 
@@ -137,16 +146,18 @@ define(['app', 'underscore', '/app/js/common.js',
                         //console.log(doc);
                         var filterID = doc.id;
                         var termID = doc.id;
+                        var broader = null;
                         
                         if(doc.filterID){ 
                             filterID = doc.filterID;
-                            termID = $scope.searchFilters[filterID].id
+                            termID = $scope.searchFilters[filterID].id;
+                            var broader =  $scope.searchFilters[filterID].broader ;
                          }
                          
                         if($scope.setFilters[termID])
                            delete $scope.setFilters[termID];
                         else{
-                           $scope.setFilters[termID] = {type:$scope.searchFilters[filterID].type, name:$scope.searchFilters[filterID].name, id:termID};
+                           $scope.setFilters[termID] = {type:$scope.searchFilters[filterID].type, name:$scope.searchFilters[filterID].name, id:termID, broader: broader};
                         }
 
                         $scope.refresh = true;
