@@ -438,12 +438,12 @@ define(['app', 'underscore', '/app/js/common.js',
 
                          //console.log('load filters');
 
-                        // if( _.isEmpty($scope.searchFilters) ){
-                        //     $scope.searchFilters = {};
-                        //     $scope.searchFilters = localStorageService.get("searchFilters");
-                        //     //console.log('getting filters from local storage');
-                        // }
-                        // if( _.isEmpty($scope.searchFilters) ){
+                        if( _.isEmpty($scope.searchFilters) ){
+                            $scope.searchFilters = {};
+                            $scope.searchFilters = localStorageService.get("searchFilters");
+                            //console.log('getting filters from local storage');
+                        }
+                        if( _.isEmpty($scope.searchFilters) ){
                             $scope.searchFilters = {};
                             loadSchemaFilters();
                             loadCountryFilters();
@@ -452,7 +452,7 @@ define(['app', 'underscore', '/app/js/common.js',
                             loadDateFilters();
                             localStorageService.set("searchFilters", $scope.searchFilters);
                             //console.log('getting new filters');
-                       // }
+                       }
 
                         $scope.test = $scope.searchFilters.length;
                     };
