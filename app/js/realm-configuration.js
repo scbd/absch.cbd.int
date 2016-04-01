@@ -68,6 +68,24 @@ define(['app', 'underscore'], function(app, _) {
             'nationalSchemas': nationalSchemas,
             'referenceSchemas': referenceSchemas
         }, {
+                'host': 'absch.cbddev.xyz',
+                'realm': 'ABS-DEV',
+                'roles': [{
+                    'User': 'User'
+                }, {
+                    'Administrator': 'Administrator-dev'
+                }, {
+                    'AbsAdministrator': 'AbsAdministrator-dev'
+                }, {
+                    'AbsPublishingAuthorities': 'AbsPublishingAuthorities-dev'
+                }, {
+                    'abschiac': 'abschiac-dev'
+                }, {
+                    'AbsNationalAuthorizedUser': 'AbsNationalAuthorizedUser-dev'
+                }, {
+                    'AbsNationalFocalPoint': 'AbsNationalFocalPoint-dev'
+                }]
+            }, {
             'host': 'dev-absch.cbd.int',
             'realm': 'ABS-DEV',
             'roles': [{

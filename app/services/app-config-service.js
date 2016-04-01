@@ -66,6 +66,24 @@ define(['app', 'underscore'], function (app, _) { 'use strict';
                     'AbsNationalFocalPoint': 'AbsNationalFocalPoint-dev'
                 }]
             }, {
+                'host': 'absch.cbddev.xyz',
+                'realm': 'ABS-DEV',
+                'roles': [{
+                    'User': 'User'
+                }, {
+                    'Administrator': 'Administrator-dev'
+                }, {
+                    'AbsAdministrator': 'AbsAdministrator-dev'
+                }, {
+                    'AbsPublishingAuthorities': 'AbsPublishingAuthorities-dev'
+                }, {
+                    'abschiac': 'abschiac-dev'
+                }, {
+                    'AbsNationalAuthorizedUser': 'AbsNationalAuthorizedUser-dev'
+                }, {
+                    'AbsNationalFocalPoint': 'AbsNationalFocalPoint-dev'
+                }]
+            }, {
                 'host': 'dev-absch.cbd.int',
                 'realm': 'ABS-DEV',
                 'roles': [{
@@ -149,7 +167,7 @@ define(['app', 'underscore'], function (app, _) { 'use strict';
 					       _.map(getRoles(), function(role) {
 					           return _.values(role);
 				       	   })
-			   			), 
+			   			),
 				 'User');
 		}
 
