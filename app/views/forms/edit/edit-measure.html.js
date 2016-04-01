@@ -36,7 +36,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                         var data = getABSMeasure();
                         //TODO: this function appears generic to returning from .all, perhaps cut code by making this function and reusing it?
                         //   var data = o[0].data;
-                        data.push(o[1].data);
+                        //data.push(o[1].data);
 
                         //   console.log(JSON.stringify(data));
 
@@ -905,7 +905,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "shortTitle": {},
                     "description": "",
                     "source": "",
-                    "broaderTerms": [],
+                    "broaderTerms": ["5B6177DD-5E5E-434E-8CB7-D63D6BLAISE8"],
                     "narrowerTerms": [],
                     "relatedTerms": [],
                     "nonPreferedTerms": []
@@ -918,7 +918,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "shortTitle": {},
                     "description": "",
                     "source": "",
-                    "broaderTerms": [],
+                    "broaderTerms": ["5B6177DD-5E5E-434E-8CB7-D63D6BLAISE8"],
                     "narrowerTerms": [],
                     "relatedTerms": [],
                     "nonPreferedTerms": []
@@ -931,7 +931,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "shortTitle": {},
                     "description": "",
                     "source": "",
-                    "broaderTerms": [],
+                    "broaderTerms": ["5B6177DD-5E5E-434E-8CB7-D63D6BLAISE8"],
                     "narrowerTerms": [],
                     "relatedTerms": [],
                     "nonPreferedTerms": []
@@ -1339,6 +1339,11 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
 
                     return term && term.showElement;
                 };
+
+                $scope.isOther = function(term){
+                    // console.log(term.broaderTerms);
+                    return term.broaderTerms && _.contains(_.pluck(term.broaderTerms, 'identifier'), '5B6177DD-5E5E-434E-8CB7-D63D6BLAISE8');
+                }
 
             }]
         }
