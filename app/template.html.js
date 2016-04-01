@@ -11,7 +11,7 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
 
     app.controller('TemplateController', ['$scope', '$rootScope', 'showHelp',
         '$location','realmConfiguration','$anchorScroll', 'breadcrumbs', 'toastr', '$route',
-        'cfgUserNotification','$window', '$element','localStorageService', 'appConfigService', 'apiUrl',
+        'cfgUserNotification','$window', '$element','localStorageService', 'appConfigService', //'apiUrl',
         function($scope, $rootScope, showHelp, $location, realmConfiguration,
             $anchorScroll, breadcrumbs, toastr, $route, cfgUserNotification, $window, $element, localStorageService,
             appConfigService
