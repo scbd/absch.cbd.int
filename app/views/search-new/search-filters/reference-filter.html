@@ -6,7 +6,7 @@
         Reference records include a number of ABS relevant resources and information. They can be submitted by any registered user of the ABS Clearing-House (Parties, Non-Parties, governments, international organizations, indigenous and local communities, and relevant stakeholders.</p>
          <hr class="heading" ng-if="rf_filters.length">
     <div ng-repeat="doc in rf_filters = (rf_searchFilters | filter:searchKeyword | orderBy:['filterSort', 'sort'])">
-            <a class="filter"  ng-click="saveFilter(doc.id)">
+            <a class="filter"  ng-click="saveFilter(doc)">
                 <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i> 
                 {{doc.name}}
                 <!--<span class="badge">100</span>-->

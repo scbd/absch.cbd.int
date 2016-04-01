@@ -95,7 +95,7 @@ define(['app', 'underscore', '/app/js/common.js',
 
                   //===============================================================================================================================
                     function addFilter(filterID, filterInfo ) {
-                         if(!$scope.searchFilters[filterID])
+                         //if(!$scope.searchFilters[filterID])
                             $scope.searchFilters[filterID] = filterInfo;
                           //console.log(filterID);
                     };
@@ -133,12 +133,20 @@ define(['app', 'underscore', '/app/js/common.js',
                     };
 
                   //===============================================================================================================================
-                    $scope.saveFilter = function(filterID) {
-
-                        if($scope.setFilters[filterID])
-                           delete $scope.setFilters[filterID];
+                    $scope.saveFilter = function(doc) {
+                        //console.log(doc);
+                        var filterID = doc.id;
+                        var termID = doc.id;
+                        
+                        if(doc.filterID){ 
+                            filterID = doc.filterID;
+                            termID = $scope.searchFilters[filterID].id
+                         }
+                         
+                        if($scope.setFilters[termID])
+                           delete $scope.setFilters[termID];
                         else{
-                           $scope.setFilters[filterID] = {type:$scope.searchFilters[filterID].type, name:$scope.searchFilters[filterID].name, id:$scope.searchFilters[filterID].id};
+                           $scope.setFilters[termID] = {type:$scope.searchFilters[filterID].type, name:$scope.searchFilters[filterID].name, id:termID};
                         }
 
                         $scope.refresh = true;
@@ -303,11 +311,11 @@ define(['app', 'underscore', '/app/js/common.js',
                               qAnd.push(buildFieldQuery('government_s', 'country', "*"));
                               qOr.push(buildTextQuery('text_EN_txt'      ,'freeText'  , null));
                               qOr.push(buildFieldQuery('government_REL_ss','region'  , null));
-                              qOr.push(buildTextQuery('text_EN_txt'    ,'reference', null));
-                              qOr.push(buildFieldQuery('all_terms_ss'    ,'reference', null));
+                              //qOr.push(buildTextQuery('text_EN_txt'    ,'reference', null));
+                             // qOr.push(buildFieldQuery('all_terms_ss'    ,'reference', null));
                               qOr.push(buildTextQuery('text_EN_txt'    ,'scbd', null));
                               qOr.push(buildFieldQuery('all_terms_ss'    ,'scbd', null));
-                              //qOr.push(buildTextQuery('text_EN_txt'    ,'keyword', null));
+                              qOr.push(buildTextQuery('text_EN_txt'    ,'keyword', null));
                               qOr.push(buildFieldQuery('all_terms_ss'    ,'keyword', null));
                         }
 
@@ -315,8 +323,8 @@ define(['app', 'underscore', '/app/js/common.js',
                                qAnd.push(buildFieldQuery('schema_s','reference', refSchemas.join(' ')));
                                qOr.push(buildTextQuery('text_EN_txt'    ,'scbd', null));
                                qOr.push(buildFieldQuery('all_terms_ss'  ,'scbd', null));
-                               qOr.push(buildTextQuery('text_EN_txt'     ,'national', null));
-                               qOr.push(buildFieldQuery('all_terms_ss'   ,'national', null));
+                               //qOr.push(buildTextQuery('text_EN_txt'     ,'national', null));
+                               //qOr.push(buildFieldQuery('all_terms_ss'   ,'national', null));
                                qOr.push(buildTextQuery('text_EN_txt'    ,'country', null));
                                qOr.push(buildFieldQuery('all_terms_ss'  ,'country', null));
                                qOr.push(buildTextQuery('text_EN_txt'    ,'freeText', null));
@@ -325,14 +333,14 @@ define(['app', 'underscore', '/app/js/common.js',
                                qOr.push(buildFieldQuery('all_terms_ss'  ,'region', null));
                                qOr.push(buildFieldQuery('regions_REL_ss','country', null));
                                qOr.push(buildFieldQuery('regions_REL_ss','region', null));
-                               //qOr.push(buildTextQuery('text_EN_txt'    ,'keyword', null));
+                               qOr.push(buildTextQuery('text_EN_txt'    ,'keyword', null));
                                qOr.push(buildFieldQuery('all_terms_ss'    ,'keyword', null));
                         }
 
                         if(queryType === 'scbd'){
                                qAnd.push(buildFieldQuery('schema_s','scbd', scbdSchemas.join(' ')));
-                               qOr.push(buildTextQuery('text_EN_txt'      ,'national'  , null));
-                               qOr.push(buildTextQuery('text_EN_txt'      ,'reference' , null));
+                               //qOr.push(buildTextQuery('text_EN_txt'      ,'national'  , null));
+                               //qOr.push(buildTextQuery('text_EN_txt'      ,'reference' , null));
                                qOr.push(buildTextQuery('text_EN_txt'      ,'country'   , null));
                                qOr.push(buildTextQuery('text_EN_txt'      ,'region', null));
                                qOr.push(buildTextQuery('text_EN_txt'      ,'freeText'   , null));
@@ -417,12 +425,12 @@ define(['app', 'underscore', '/app/js/common.js',
                   //===============================================================================================================================
                     function loadFilters() {
 
-                         console.log('load filters');
+                         //console.log('load filters');
 
                         if( _.isEmpty($scope.searchFilters) ){
                             $scope.searchFilters = {};
                             $scope.searchFilters = localStorageService.get("searchFilters");
-                            console.log('getting filters from local storage');
+                            //console.log('getting filters from local storage');
                         }
                         if( _.isEmpty($scope.searchFilters) ){
                             $scope.searchFilters = {};
@@ -432,7 +440,7 @@ define(['app', 'underscore', '/app/js/common.js',
                             loadRegionsFilters();
                             loadDateFilters();
                             localStorageService.set("searchFilters", $scope.searchFilters);
-                            console.log('getting new filters');
+                            //console.log('getting new filters');
                         }
 
                         $scope.test = $scope.searchFilters.length;
@@ -454,200 +462,135 @@ define(['app', 'underscore', '/app/js/common.js',
                     function loadKeywordFilters() {
                
                       $q.when(commonjs.getThematicAreas(), function(keywords) {
-                                console.log(keywords);
                                 _.each(keywords, function(keyword, index){
-                                    console.log(keyword);
-                                    addThematicAreaFilter(keyword);
+                                    addKeywordFilter(keyword, '', '');
                                 });
                         });
-                        
                         
                         $q.when(commonjs.getKeyAreas(), function(keywords) {
-                                console.log(keywords);
                                 _.each(keywords, function(keyword, index){
-                                    console.log(keyword);
-                                    addThematicAreaFilter(keyword);
+                                    addKeywordFilter(keyword, '', '');
                                 });
                         });
                         
-                         $q.when(commonjs.getMSR_types(), function(keywords) {
-                                console.log(keywords);
+                        $q.when(commonjs.getCBI_audience(), function(keywords) {
                                 _.each(keywords, function(keyword, index){
-                                    console.log(keyword);
-                                    addKeywordFilter(keyword, '', 'measure');
+                                    addKeywordFilter(keyword, 'capacitybuildinginitiative resource capacitybuildingresource', 'Target Audience');
+                                });
+                        });
+                        
+                        $q.when(commonjs.getMSR_types(), function(keywords) {
+                                _.each(keywords, function(keyword, index){
+                                    addKeywordFilter(keyword, 'measure', 'Type');
                                 });
                         });
                         
                         $q.when(commonjs.getJurisdictions(), function(keywords) {
-                                console.log(keywords);
                                 _.each(keywords, function(keyword, index){
-                                    console.log(keyword);
-                                    addKeywordFilter(keyword, '', 'Jurisdiction');
+                                    addKeywordFilter(keyword,  'capacitybuildinginitiative', 'Jurisdiction');
+                                });
+                        });
+                        
+                         $q.when(commonjs.getMsrJurisdictions(), function(keywords) {
+                                _.each(keywords, function(keyword, index){
+                                    addKeywordFilter(keyword,  'measure authority', 'Jurisdiction');
                                 });
                         });
                         
                         $q.when(commonjs.getMCC_keywords(), function(keywords) {
-                                console.log(keywords);
                                 _.each(keywords, function(keyword, index){
-                                    console.log(keyword);
-                                    addKeywordFilter(keyword, '', 'A19A20');
+                                    addKeywordFilter(keyword,  'modelcontractualclause', 'Keyword');
                                 });
                         });
                         
                         $q.when(commonjs.getMCC_types(), function(keywords) {
-                                console.log(keywords);
                                 _.each(keywords, function(keyword, index){
-                                    console.log(keyword);
-                                    addKeywordFilter(keyword, '', 'A19A20');
+                                    addKeywordFilter(keyword,  'modelcontractualclause', 'Type');
                                 });
                         });
          
-                        
-                         $q.when(commonjs.getCBI_cats(), function(keywords) {
-                                console.log(keywords);
+                        $q.when(commonjs.getCBI_cats(), function(keywords) {
                                 _.each(keywords, function(keyword, index){
-                                    console.log(keyword);
-                                    addKeywordFilter(keyword, '', 'CBI');
+                                    addKeywordFilter(keyword,  'capacitybuildinginitiative', 'Category');
                                 });
                         });
                         
                         $q.when(commonjs.getCBI_types(), function(keywords) {
-                                console.log(keywords);
                                 _.each(keywords, function(keyword, index){
-                                    console.log(keyword);
-                                    addKeywordFilter(keyword, '', 'CBI');
+                                    addKeywordFilter(keyword,  'capacitybuildinginitiative', 'Type');
+                                });
+                        });
+                        $q.when(commonjs.getCBI_fundingsrc(), function(keywords) {
+                                _.each(keywords, function(keyword, index){
+                                    addKeywordFilter(keyword,  'capacitybuildinginitiative', 'Funding Source');
                                 });
                         });
                         
                         $q.when(commonjs.getCBI_status(), function(keywords) {
-                                console.log(keywords);
                                 _.each(keywords, function(keyword, index){
-                                    console.log(keyword);
-                                    addKeywordFilter(keyword, '', 'CBI');
+                                    addKeywordFilter(keyword,  'capacitybuildinginitiative', 'Status');
                                 });
                         });
                         
-                         $q.when(commonjs.getCBI_types1(), function(keywords) {
-                                console.log(keywords);
+                        $q.when(commonjs.getCBI_status(), function(keywords) {
                                 _.each(keywords, function(keyword, index){
-                                    console.log(keyword);
-                                    addKeywordFilter(keyword, '', 'CBI');
+                                    addKeywordFilter(keyword, 'capacitybuildinginitiative', 'Status');
                                 });
                         });
-                        
-                        //  $q.when(commonjs.getCBI_cats1(), function(keywords) {
-                        //         console.log(keywords);
-                        //         _.each(keywords, function(keyword, index){
-                        //             console.log(keyword);
-                        //             addKeywordFilter(keyword, '', 'CBI');
-                        //         });
-                        // });
-                        
-                         $q.when(commonjs.getCBI_trainingTypes(), function(keywords) {
-                                console.log(keywords);
-                                _.each(keywords, function(keyword, index){
-                                    console.log(keyword);
-                                    addKeywordFilter(keyword, '', 'CBI');
-                                });
-                        });
-                        
-                         $q.when(commonjs.getCBI_audience(), function(keywords) {
-                                console.log(keywords);
-                                _.each(keywords, function(keyword, index){
-                                    console.log(keyword);
-                                    addKeywordFilter(keyword, '', 'CBI');
-                                });
-                        });
-                        
-                        
-                          $q.when(commonjs.getCBI_status(), function(keywords) {
-                                console.log(keywords);
-                                _.each(keywords, function(keyword, index){
-                                    console.log(keyword);
-                                    addKeywordFilter(keyword, '', 'CBI');
-                                });
-                        });
-                        
                         
                         $q.when(commonjs.getCBR_level(), function(keywords) {
-                                console.log(keywords);
                                 _.each(keywords, function(keyword, index){
-                                    console.log(keyword);
-                                    addKeywordFilter(keyword, '', 'CBR');
+                                    addKeywordFilter(keyword,  'resource capacitybuildingresource', 'Level');
                                 });
                         });
-                        
-                        // $q.when(commonjs.getCBR_target(), function(keywords) {
-                        //         console.log(keywords);
-                        //         _.each(keywords, function(keyword, index){
-                        //             console.log(keyword);
-                        //             addKeywordFilter(keyword, '', 'CBR');
-                        //         });
-                        // });
-                        
+                       
                         $q.when(commonjs.getCBR_purpose(), function(keywords) {
-                                console.log(keywords);
                                 _.each(keywords, function(keyword, index){
-                                    console.log(keyword);
-                                    addKeywordFilter(keyword, '', 'CBR');
+                                    addKeywordFilter(keyword,  'resource capacitybuildingresource', 'Purpose');
                                 });
                         });
                         
                          $q.when(commonjs.getCBR_formats(), function(keywords) {
-                                console.log(keywords);
                                 _.each(keywords, function(keyword, index){
-                                    console.log(keyword);
-                                    addKeywordFilter(keyword, '', 'CBR');
+                                    addKeywordFilter(keyword, 'resource capacitybuildingresource', 'Format');
                                 });
                         });
-                        
                         
                         $q.when(commonjs.getCPP_types(), function(keywords) {
-                                console.log(keywords);
                                 _.each(keywords, function(keyword, index){
-                                    console.log(keyword);
-                                    addKeywordFilter(keyword, '', 'CPP');
+                                    addKeywordFilter(keyword,  'communityprotocol', 'Type');
                                 });
                         });
-                        
                         
                          $q.when(commonjs.getAichiTargets(), function(keywords) {
-                                console.log(keywords);
                                 _.each(keywords, function(keyword, index){
-                                    console.log(keyword);
-                                    addKeywordFilter(keyword, '', 'AichiTargets');
+                                    addKeywordFilter(keyword, '', 'Aichi Targets');
                                 });
                         });
-                        
-                        
-                        
-                        
-                        
-                                             
 
                     };
                     
                     //===============================================================================================================================
-                     function addKeywordFilter(keyword, namePrefix, related){
+                     function addKeywordFilter(keyword, related, parent){
+             
+                        addFilter(keyword.identifier + "@" +  related, {'type':'keyword', 'name':keyword.title.en, 'id':keyword.identifier,
+                            'description':'',  'parent' : parent, 'related' : related, filterID: keyword.identifier + "@" +  related});
 
-                        addFilter(keyword.identifier, {'type':'keyword', 'name':namePrefix + keyword.title.en, 'id':keyword.identifier,
-                            'description':'',  'parent' : parent, 'related' : related});
-
-                         _.each(keyword.narrowerTerms,function(narrower){
-                            addKeywordFilter(narrower, keyword.identifier);
-                        });
+                         //_.each(keyword.narrowerTerms,function(narrower){
+                        //    addKeywordFilter(narrower, keyword.identifier);
+                        //});
                     }
                     
-                    //===============================================================================================================================
-                     function addThematicAreaFilter(keyword, parent){
+                    // //===============================================================================================================================
+                    //  function addThematicAreaFilter(keyword,related, parent){
 
-                        addFilter(keyword.identifier, {'type':'keyword', 'name':keyword.title.en, 'id':keyword.identifier,
-                            'description':'', 'parent' : parent, 'related' : ''});
+                    //     addFilter(keyword.identifier, {'type':'keyword', 'name':keyword.title.en, 'id':keyword.identifier,
+                    //         'description':'', 'parent' : parent, 'related' : related});
 
-                        _.each(keyword.narrowerTerms,function(narrower){
-                            addThematicAreaFilter(narrower, keyword.identifier);
-                        });
-                    }
+                    //     //_.each(keyword.narrowerTerms,function(narrower){
+                    //     //    addThematicAreaFilter(narrower, related, parent);
+                    //     //});
+                    // }
 
 
                   //===============================================================================================================================
@@ -825,7 +768,7 @@ define(['app', 'underscore', '/app/js/common.js',
                             
                             relatedKeywords  =  _.filter(keywords, function(item){
                                 
-                                if(item.related.indexOf(set.id) >= 0)
+                                if(item.related.toLowerCase().indexOf(set.id.toLowerCase()) >= 0)
                                     return item;
                                 else 
                                     return null;

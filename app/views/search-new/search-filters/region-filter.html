@@ -6,19 +6,19 @@
             <hr class="heading" />
         </div>  
          
-        <a class="filter color-party"  ng-click="saveFilter(doc.id)" >
+        <a class="filter color-party"  ng-click="saveFilter(doc)" >
             <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
             Party to the Nagoya Protocol
         </a><br>
-        <a class="filter color-inbetween"  ng-click="saveFilter(doc.id)" >
+        <a class="filter color-inbetween"  ng-click="saveFilter(doc)" >
             <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
             Ratified not yet Party to the Nagoya Protocol
         </a><br>
-         <a class="filter color-grey"  ng-click="saveFilter(doc.id)" >
+         <a class="filter color-grey"  ng-click="saveFilter(doc)" >
             <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
             Non-Party to the Nagoya Protocol
         </a><br>
-        <a class="filter color-pink"  ng-click="saveFilter(doc.id)">
+        <a class="filter color-pink"  ng-click="saveFilter(doc)">
             <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
             Signatory to the Nagoya Protocol
         </a>
@@ -30,7 +30,7 @@
             <hr class="heading" />
         </div>
         <div ng-repeat="doc in  cf_fitlers = (cf_regions | filter:IsCBDRegion | filter:searchKeyword)">
-                <a class="filter"  ng-click="saveFilter(doc.id)" >
+                <a class="filter"  ng-click="saveFilter(doc)" >
                     <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
                     {{doc.name.substring(22)}}
                 </a>
@@ -44,7 +44,7 @@
         </div>
         <div  >
             <div ng-repeat="doc in cf_fitlers = (cf_regions | filter:searchKeyword | filter:alphabetFilter | orderBy:'name')">
-                    <a class="filter"  ng-click="saveFilter(doc.id)" >
+                    <a class="filter"  ng-click="saveFilter(doc)" >
                         <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
                         {{doc.name}}
                     </a>

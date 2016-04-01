@@ -3,29 +3,32 @@
     <div ng-repeat="(key,related) in relatedKeywords">   
         <div style="margin-bottom:30px;" >
         <div>
-            <span class="country-heading"> Related to: {{searchFilters[key].name}} </span>
+            <span class="country-heading"> Keywords related to: <span class="color-darkgrey">{{searchFilters[key].name}}</span> </span>
             <hr class="heading" />
         </div>
-        <div >
-            <div ng-repeat="doc in (related  | filter:searchKeyword | orderBy:'name')">
-                    <a class="filter"  ng-click="saveFilter(doc.id)" >
+
+            <div ng-repeat="doc in relatedkeywords = (related | filter:searchKeyword | orderBy:'parent' )" >
+                <div ng-if="doc.parent != relatedkeywords[$index-1].parent && $index > 0" style="margin-top:10px;"></div>
+                <div class="bold color-darkgrey" ng-if="doc.parent != relatedkeywords[$index-1].parent" >{{doc.parent}}</div>
+               
+                    <a class="filter"  ng-click="saveFilter(doc)" >
                         <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
-                        {{doc.name}}
+                        {{doc.name}} 
                     </a>
             </div>
-        </div>
+
         </div>
    </div>
 
     
    <div style="margin-bottom:30px;" >   
         <div>
-            <span class="country-heading">Keywords</span>
+            <span class="country-heading">All Keywords</span>
             <hr class="heading" />
         </div>
-        <div >
+        <div  style="max-height:300px;overflow: scroll;">
             <div ng-repeat="doc in fitlers = (keywordSearchFilters  | filter:searchKeyword | orderBy:'name')">
-                    <a class="filter"  ng-click="saveFilter(doc.id)" >
+                    <a class="filter"  ng-click="saveFilter(doc)" >
                         <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
                         {{doc.name}} <i>{{doc.related}}</i>
                     </a>

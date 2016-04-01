@@ -23,7 +23,7 @@
         <div ng-repeat="doc in cf_fitlers = (cf_countries | filter:searchKeyword | orderBy:'name')">
 
             <div ng-if="cf_showCountry(doc)">
-            <a class="filter"  ng-click="saveFilter(doc.id)" >
+            <a class="filter"  ng-click="saveFilter(doc)" >
                 <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
                 <span ng-class="{'color-party': doc.isNPParty, 'color-inbetween':doc.isNPInbetweenParty }">{{doc.name}}</span>
             </a>

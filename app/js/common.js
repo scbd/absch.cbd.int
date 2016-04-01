@@ -302,6 +302,14 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                 
                 //==================================================================================
                 this.getJurisdictions= function(){
+                     return $http.get('/api/v2013/thesaurus/domains/4D4413D8-36F9-4CD2-8CC1-4F3C866DDE5A/terms').then(function (response) {
+                        //var termsTree = thesaurus.buildTree(response.data);
+                        return response.data;
+                    });
+                }
+                
+                 //==================================================================================
+                this.getMsrJurisdictions= function(){
                      return $http.get('/api/v2013/thesaurus/domains/7A56954F-7430-4B8B-B733-54B8A5E7FF40/terms').then(function (response) {
                         //var termsTree = thesaurus.buildTree(response.data);
                         return response.data;
@@ -360,13 +368,21 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                         return response.data;
                     });
                 }
+                
                  //==================================================================================
                 this.getCBI_audience= function(){
-                     return $http.get('/api/v2013/thesaurus/domains/2560F889-AB81-40BF-B7C4-97B34A5B8D75/terms').then(function (response) {
-                        //var termsTree = thesaurus.buildTree(response.data);
+                     return $http.get('/api/v2013/thesaurus/domains/AFB155C4-93A6-402C-B812-CFC7488ED651/terms').then(function (response) {
                         return response.data;
                     });
                 }
+                
+                 //==================================================================================
+                this.getCBI_fundingsrc= function(){
+                     return $http.get('/api/v2013/thesaurus/domains/Capacity Building Project Funding Types/terms').then(function (response) {
+                        return response.data;
+                    });
+                }
+                
                 
                  //==================================================================================
                 this.getCBI_status= function(){
