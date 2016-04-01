@@ -427,12 +427,12 @@ define(['app', 'underscore', '/app/js/common.js',
 
                          //console.log('load filters');
 
-                        if( _.isEmpty($scope.searchFilters) ){
-                            $scope.searchFilters = {};
-                            $scope.searchFilters = localStorageService.get("searchFilters");
-                            //console.log('getting filters from local storage');
-                        }
-                        if( _.isEmpty($scope.searchFilters) ){
+                        // if( _.isEmpty($scope.searchFilters) ){
+                        //     $scope.searchFilters = {};
+                        //     $scope.searchFilters = localStorageService.get("searchFilters");
+                        //     //console.log('getting filters from local storage');
+                        // }
+                        // if( _.isEmpty($scope.searchFilters) ){
                             $scope.searchFilters = {};
                             loadSchemaFilters();
                             loadCountryFilters();
@@ -441,7 +441,7 @@ define(['app', 'underscore', '/app/js/common.js',
                             loadDateFilters();
                             localStorageService.set("searchFilters", $scope.searchFilters);
                             //console.log('getting new filters');
-                        }
+                       // }
 
                         $scope.test = $scope.searchFilters.length;
                     };
@@ -485,15 +485,66 @@ define(['app', 'underscore', '/app/js/common.js',
                                 });
                         });
                         
+                        $q.when(commonjs.getMSR_status(), function(keywords) {
+                                _.each(keywords, function(keyword, index){
+                                    addKeywordFilter(keyword, 'measure', 'Legal Status');
+                                });
+                        });
+                        
+                         $q.when(commonjs.getMSR_elements(), function(keywords) {
+                                 var levels = [];
+                                 var parents = [];
+                                 var level=0;
+                                 
+                                 _.each(keywords, function(keyword, index){
+                                   
+                                   levels[keyword.identifier] = 1;
+                                   parents[keyword.identifier] = '';
+                                   
+                                   if(keyword.broaderTerms.length === 0)
+                                        levels[keyword.identifier] = 0;
+                                        
+                                    if(keyword.broaderTerms.length > 0){
+                                       levels[keyword.identifier] =  levels[keyword.broaderTerms] + 1;
+                                        parents[keyword.identifier] = keyword.broaderTerms.join();
+                                    }
+                                        
+                                });
+                                
+                                _.each(keywords, function(keyword, index){
+                                    addKeywordFilter(keyword, 'measure', 'Key elements', levels[keyword.identifier], parents[keyword.identifier] );
+                                });
+                            
+                        });
+                        
+                        //use term filter instead.
+                        $q.when(commonjs.getMSR_modelcontract(), function(keyword) {
+                              //  _.each(keywords, function(keyword, index){
+                                    addKeywordFilter(keyword, 'measure', 'Contains model contractual clause');
+                               // });
+                        });
+                          
+                        $q.when(commonjs.getCNA_scope(), function(keywords) {
+                                _.each(keywords, function(keyword, index){
+                                    addKeywordFilter(keyword, 'authority', 'Scope of responsibilities');
+                                });
+                        });
+                        
                         $q.when(commonjs.getJurisdictions(), function(keywords) {
                                 _.each(keywords, function(keyword, index){
                                     addKeywordFilter(keyword,  'capacitybuildinginitiative', 'Jurisdiction');
                                 });
                         });
                         
-                         $q.when(commonjs.getMsrJurisdictions(), function(keywords) {
+                         $q.when(commonjs.getMSR_jurisdictions(), function(keywords) {
                                 _.each(keywords, function(keyword, index){
-                                    addKeywordFilter(keyword,  'measure authority', 'Jurisdiction');
+                                    addKeywordFilter(keyword,  'measure', 'Jurisdiction');
+                                });
+                        });
+                        
+                         $q.when(commonjs.getCNA_jurisdictions(), function(keywords) {
+                                _.each(keywords, function(keyword, index){
+                                    addKeywordFilter(keyword,  'authority', 'Jurisdiction');
                                 });
                         });
                         
@@ -571,15 +622,18 @@ define(['app', 'underscore', '/app/js/common.js',
                     };
                     
                     //===============================================================================================================================
-                     function addKeywordFilter(keyword, related, parent){
-             
+                     function addKeywordFilter(keyword, related, parent, level, broader){
+                        if(!level)
+                            level=0;
+                        
                         addFilter(keyword.identifier + "@" +  related, {'type':'keyword', 'name':keyword.title.en, 'id':keyword.identifier,
-                            'description':'',  'parent' : parent, 'related' : related, filterID: keyword.identifier + "@" +  related});
+                            'description':'',  'parent' : parent, 'related' : related, filterID: keyword.identifier + "@" +  related, 'level':level, 'broader': broader});
 
                          //_.each(keyword.narrowerTerms,function(narrower){
                         //    addKeywordFilter(narrower, keyword.identifier);
                         //});
                     }
+                 
                     
                     // //===============================================================================================================================
                     //  function addThematicAreaFilter(keyword,related, parent){

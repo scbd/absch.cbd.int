@@ -15,7 +15,8 @@ define(['app'],  function(app, _) {
                
                $scope.keywordSearchFiltersNoDups =   searchDirectiveCtrl.getSearchFilters("keyword");//filter this for unique object.id so the all keywords only shows the unique fitlers
             
-                            
+               
+                      
               
                
                $scope.relatedFilters = {};

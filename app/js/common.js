@@ -309,8 +309,46 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                 }
                 
                  //==================================================================================
-                this.getMsrJurisdictions= function(){
+                this.getMSR_jurisdictions= function(){
                      return $http.get('/api/v2013/thesaurus/domains/7A56954F-7430-4B8B-B733-54B8A5E7FF40/terms').then(function (response) {
+                        //var termsTree = thesaurus.buildTree(response.data);
+                        return response.data;
+                    });
+                }
+                 //==================================================================================
+                this.getMSR_modelcontract= function(){
+                     return $http.get('/api/v2013/thesaurus/terms/48D40B9E207B43948D95A0BA8F0D710F').then(function (response) {
+                        //var termsTree = thesaurus.buildTree(response.data);
+                        return response.data;
+                    });
+                }
+                
+                 //==================================================================================
+                this.getMSR_elements= function(){
+                      return $http.get('/api/v2013/thesaurus/domains/50616B56-12F3-4C46-BC43-2DFC26679177/terms').then(function (response) {
+                        //var termsTree = thesaurus.buildTree(response.data);
+                        return response.data;
+                    });
+                }
+                
+                  //==================================================================================
+                this.getMSR_status= function(){
+                     return $http.get('/api/v2013/thesaurus/domains/ED7CDBD8-7762-4A84-82DD-30C01458A799/terms').then(function (response) {
+                        //var termsTree = thesaurus.buildTree(response.data);
+                        return response.data;
+                    });
+                }
+                  //==================================================================================
+                this.getCNA_jurisdictions= function(){
+                     return $http.get('/api/v2013/thesaurus/domains/D7BD5BDE-A6B9-4261-B788-16839CCC4F7E/terms').then(function (response) {
+                        //var termsTree = thesaurus.buildTree(response.data);
+                        return response.data;
+                    });
+                }
+                
+                 //==================================================================================
+                this.getCNA_scope= function(){
+                     return $http.get('/api/v2013/thesaurus/domains/1A22EAAB-9BBC-4543-890E-DEF913F59E98/terms').then(function (response) {
                         //var termsTree = thesaurus.buildTree(response.data);
                         return response.data;
                     });
