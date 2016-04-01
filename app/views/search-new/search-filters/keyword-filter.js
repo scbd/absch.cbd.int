@@ -11,6 +11,13 @@ define(['app'],  function(app, _) {
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
               
                $scope.keywordSearchFilters = searchDirectiveCtrl.getSearchFilters("keyword");
+               
+               
+               $scope.keywordSearchFiltersNoDups =   keywordSearchFilters;//filter this
+            
+                            
+              
+               
                $scope.relatedFilters = {};
 
             },// link
