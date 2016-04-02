@@ -54,7 +54,7 @@ define(['app', 'underscore', '/app/js/common.js',
                     var nationalCurrentPage = 0;
                     var referenceCurrentPage = 0;
                     var scbdCurrentPage = 0;
-                    
+
                     $scope.relatedKeywords = {};
 
                     //===============================================================================================================================
@@ -89,7 +89,14 @@ define(['app', 'underscore', '/app/js/common.js',
                   //===============================================================================================================================
                     $scope.updateCurrentTab = function(tabname) {
                            $scope.currentTab = tabname;
-                            $scope.showFilters= false;
+                           $scope.showFilters= false;
+
+                        //  if(tabname=='nationalRecords')
+                        //     nationalCurrentPage = 0;
+                        //  if(tabname=='referenceRecords')
+                        //     referenceCurrentPage = 0;
+                        //  if(tabname=='scbdRecords')
+                        //     scbdCurrentPage = 0;
                     };
 
 
@@ -107,7 +114,7 @@ define(['app', 'underscore', '/app/js/common.js',
 
                            return _.filter($scope.searchFilters, function(item){if(item.type === type) return item;});
                     };
-                    
+
                      //===============================================================================================================================
                     function getSetFilters() {
                          return $scope.setFilters;
@@ -121,7 +128,7 @@ define(['app', 'underscore', '/app/js/common.js',
                   //===============================================================================================================================
                     $scope.removeFilter = function(filterID) {
                             delete $scope.setFilters[filterID];
-                            
+
                             //remove children
                             var dels={};
                             var toDelete =  _.each($scope.setFilters, function(filter){
@@ -147,13 +154,13 @@ define(['app', 'underscore', '/app/js/common.js',
                         var filterID = doc.id;
                         var termID = doc.id;
                         var broader = null;
-                        
-                        if(doc.filterID){ 
+
+                        if(doc.filterID){
                             filterID = doc.filterID;
                             termID = $scope.searchFilters[filterID].id;
                             var broader =  $scope.searchFilters[filterID].broader ;
                          }
-                         
+
                         if($scope.setFilters[termID])
                            delete $scope.setFilters[termID];
                         else{
@@ -250,11 +257,11 @@ define(['app', 'underscore', '/app/js/common.js',
                                     $scope.refDocs = undefined;
                                 }
 
-                                if(!$scope.refDocs || $scope.refDocs.length == 0)
-                                    $scope.refDocs = data.data.response.docs;
+                                if(!$scope.refDocs || ($scope.refDocs.docs||[]).length == 0)
+                                    $scope.refDocs = data.data.response;
                                 else {
                                     _.each(data.data.response.docs, function(record){
-                                        $scope.refDocs.push(record);
+                                        $scope.refDocs.docs.push(record);
                                     });
                                 }
                             }).catch(function(error) {
@@ -295,11 +302,11 @@ define(['app', 'underscore', '/app/js/common.js',
                                     $scope.scbdDocs = undefined;
                                 }
 
-                                if(!$scope.scbdDocs || $scope.scbdDocs.length == 0)
-                                    $scope.scbdDocs = data.data.response.docs;
+                                if(!$scope.scbdDocs || ($scope.scbdDocs.docs||[]).length == 0)
+                                    $scope.scbdDocs = data.data.response;
                                 else {
                                     _.each(data.data.response.docs, function(record){
-                                        $scope.scbdDocs.push(record);
+                                        $scope.scbdDocs.docs.push(record);
                                     });
                                 }
                             }).catch(function(error) {
@@ -471,112 +478,106 @@ define(['app', 'underscore', '/app/js/common.js',
 
                   //===============================================================================================================================
                     function loadKeywordFilters() {
-               
+
                       $q.when(commonjs.getThematicAreas(), function(keywords) {
                                 _.each(keywords, function(keyword, index){
                                     addKeywordFilter(keyword, '', '');
                                 });
                         });
-                        
+
                         $q.when(commonjs.getKeyAreas(), function(keywords) {
                                 _.each(keywords, function(keyword, index){
                                     addKeywordFilter(keyword, '', '');
                                 });
                         });
-                        
+
                         $q.when(commonjs.getCBI_audience(), function(keywords) {
                                 _.each(keywords, function(keyword, index){
                                     addKeywordFilter(keyword, 'capacitybuildinginitiative resource capacitybuildingresource', 'Target Audience');
                                 });
                         });
-                        
+
                         $q.when(commonjs.getMSR_types(), function(keywords) {
                                 _.each(keywords, function(keyword, index){
                                     addKeywordFilter(keyword, 'measure', 'Type');
                                 });
                         });
-                        
+
                         $q.when(commonjs.getMSR_status(), function(keywords) {
                                 _.each(keywords, function(keyword, index){
                                     addKeywordFilter(keyword, 'measure', 'Legal Status');
                                 });
                         });
-                        
+
                          $q.when(commonjs.getMSR_elements(), function(keywords) {
                                  var levels = [];
                                  var parents = [];
                                  var level=0;
-                                 
+
                                  _.each(keywords, function(keyword, index){
-                                   
+
                                    levels[keyword.identifier] = 1;
                                    parents[keyword.identifier] = '';
-                                   
+
                                    if(keyword.broaderTerms.length === 0)
                                         levels[keyword.identifier] = 0;
-                                        
+
                                     if(keyword.broaderTerms.length > 0){
                                        levels[keyword.identifier] =  levels[keyword.broaderTerms] + 1;
                                         parents[keyword.identifier] = keyword.broaderTerms.join();
                                     }
-                                        
+
                                 });
-                                
+
                                 _.each(keywords, function(keyword, index){
                                     addKeywordFilter(keyword, 'measure', 'Key elements', levels[keyword.identifier], parents[keyword.identifier] );
                                 });
-                            
+
                         });
-                        
+
                         //use term filter instead.
                         $q.when(commonjs.getMSR_modelcontract(), function(keyword) {
                               //  _.each(keywords, function(keyword, index){
                                     addKeywordFilter(keyword, 'measure', 'Contains model contractual clause');
                                // });
                         });
-                          
+
                         $q.when(commonjs.getCNA_scope(), function(keywords) {
                                 _.each(keywords, function(keyword, index){
                                     addKeywordFilter(keyword, 'authority', 'Scope of responsibilities');
                                 });
                         });
-                        
-                        $q.when(commonjs.getJurisdictions(), function(keywords) {
-                                _.each(keywords, function(keyword, index){
-                                    addKeywordFilter(keyword,  'capacitybuildinginitiative', 'Jurisdiction');
-                                });
-                        });
-                        
+
                          $q.when(commonjs.getMSR_jurisdictions(), function(keywords) {
                                 _.each(keywords, function(keyword, index){
                                     addKeywordFilter(keyword,  'measure', 'Jurisdiction');
                                 });
                         });
-                        
+
                          $q.when(commonjs.getCNA_jurisdictions(), function(keywords) {
                                 _.each(keywords, function(keyword, index){
                                     addKeywordFilter(keyword,  'authority', 'Jurisdiction');
                                 });
                         });
-                        
+
                         $q.when(commonjs.getMCC_keywords(), function(keywords) {
                                 _.each(keywords, function(keyword, index){
                                     addKeywordFilter(keyword,  'modelcontractualclause', 'Keyword');
                                 });
                         });
-                        
+
                         $q.when(commonjs.getMCC_types(), function(keywords) {
                                 _.each(keywords, function(keyword, index){
                                     addKeywordFilter(keyword,  'modelcontractualclause', 'Type');
                                 });
                         });
-         
+
                         $q.when(commonjs.getCBI_cats(), function(keywords) {
                                 _.each(keywords, function(keyword, index){
                                     addKeywordFilter(keyword,  'capacitybuildinginitiative', 'Category');
                                 });
                         });
-                        
+
                         $q.when(commonjs.getCBI_types(), function(keywords) {
                                 _.each(keywords, function(keyword, index){
                                     addKeywordFilter(keyword,  'capacitybuildinginitiative', 'Type');
@@ -587,43 +588,43 @@ define(['app', 'underscore', '/app/js/common.js',
                                     addKeywordFilter(keyword,  'capacitybuildinginitiative', 'Funding Source');
                                 });
                         });
-                        
+
                         $q.when(commonjs.getCBI_status(), function(keywords) {
                                 _.each(keywords, function(keyword, index){
                                     addKeywordFilter(keyword,  'capacitybuildinginitiative', 'Status');
                                 });
                         });
-                        
+
                         $q.when(commonjs.getCBI_status(), function(keywords) {
                                 _.each(keywords, function(keyword, index){
                                     addKeywordFilter(keyword, 'capacitybuildinginitiative', 'Status');
                                 });
                         });
-                        
+
                         $q.when(commonjs.getCBR_level(), function(keywords) {
                                 _.each(keywords, function(keyword, index){
                                     addKeywordFilter(keyword,  'resource capacitybuildingresource', 'Level');
                                 });
                         });
-                       
+
                         $q.when(commonjs.getCBR_purpose(), function(keywords) {
                                 _.each(keywords, function(keyword, index){
                                     addKeywordFilter(keyword,  'resource capacitybuildingresource', 'Purpose');
                                 });
                         });
-                        
+
                          $q.when(commonjs.getCBR_formats(), function(keywords) {
                                 _.each(keywords, function(keyword, index){
                                     addKeywordFilter(keyword, 'resource capacitybuildingresource', 'Format');
                                 });
                         });
-                        
+
                         $q.when(commonjs.getCPP_types(), function(keywords) {
                                 _.each(keywords, function(keyword, index){
                                     addKeywordFilter(keyword,  'communityprotocol', 'Type');
                                 });
                         });
-                        
+
                          $q.when(commonjs.getAichiTargets(), function(keywords) {
                                 _.each(keywords, function(keyword, index){
                                     addKeywordFilter(keyword, '', 'Aichi Targets');
@@ -631,12 +632,12 @@ define(['app', 'underscore', '/app/js/common.js',
                         });
 
                     };
-                    
+
                     //===============================================================================================================================
                      function addKeywordFilter(keyword, related, parent, level, broader){
                         if(!level)
                             level=0;
-                        
+
                         addFilter(keyword.identifier + "@" +  related, {'type':'keyword', 'name':keyword.title.en, 'id':keyword.identifier,
                             'description':'',  'parent' : parent, 'related' : related, filterID: keyword.identifier + "@" +  related, 'level':level, 'broader': broader});
 
@@ -644,8 +645,6 @@ define(['app', 'underscore', '/app/js/common.js',
                         //    addKeywordFilter(narrower, keyword.identifier);
                         //});
                     }
-                 
-                    
                     // //===============================================================================================================================
                     //  function addThematicAreaFilter(keyword,related, parent){
 
@@ -683,7 +682,7 @@ define(['app', 'underscore', '/app/js/common.js',
                     function loadDateFilters(){
                         addFilter('publishedOn',  {'sort': 1,'type':'date',  'name':'Published On', 'id':'publishedOn', 'description':'Date range when the record was published'});
                     };
-                    
+
                   //===============================================================================================================================
                     function loadSchemaFilters() {
                        //national
@@ -818,35 +817,35 @@ define(['app', 'underscore', '/app/js/common.js',
                             $scope.getRelatedKeywords();
                         }
 				    });
-                    
-                    
+
+
                     //===============================================================================================================================
                     $scope.getRelatedKeywords = function() {
                        $scope.relatedKeywords ={};
                        var relatedKeywords = {};
                        var setIds = {};
                        var keywords = getSearchFilters("keyword");
-                       
+
                        if($scope.setFilters){
-                    
-                         _.each($scope.setFilters, function(set){ 
-                            
+
+                         _.each($scope.setFilters, function(set){
+
                             relatedKeywords  =  _.filter(keywords, function(item){
-                                
+
                                 if(item.related.toLowerCase().indexOf(set.id.toLowerCase()) >= 0)
                                     return item;
-                                else 
+                                else
                                     return null;
                              });
                              if(!_.isEmpty(relatedKeywords))
                                 $scope.relatedKeywords[set.id] = relatedKeywords;
                          });
                        }
-                        
-                      
-                         
+
+
+
                     }
-                    
+
                     //===============================================================================================================================
                     $scope.updateScrollPage = function() {
 
@@ -862,20 +861,14 @@ define(['app', 'underscore', '/app/js/common.js',
                             nationalQuery();
                         }
                         else if($scope.currentTab == 'referenceRecords'){
-                            var documents = _.pluck($scope.refDocs.groups, 'doclist');
-                            var docCount = getRecordCount(documents);
-
-                            if($scope.referenceLoading || docCount == $scope.recordCount[0].count)
+                            if($scope.referenceLoading || ($scope.refDocs.docs||[]).length == $scope.recordCount[1].count)
                                 return;
                             $scope.referenceLoading = true;
                             referenceCurrentPage += 1;
                             referenceQuery();
                         }
                         else if($scope.currentTab == 'scbdRecords'){
-                            var documents = _.pluck($scope.scbdDocs.groups, 'doclist');
-                            var docCount = getRecordCount(documents);
-
-                            if($scope.scbdLoading || docCount == $scope.recordCount[0].count)
+                            if($scope.scbdLoading || ($scope.scbdDocs.docs||[]).length == $scope.recordCount[2].count)
                                 return;
                             $scope.scbdLoading = true;
                             scbdCurrentPage += 1;
@@ -883,12 +876,12 @@ define(['app', 'underscore', '/app/js/common.js',
                         }
 
                     };
-                    
+
                     //===============================================================================================================================
                     function getRecordCount(documents){
                         return _.reduce(_.pluck(documents, 'numFound'), function(mem,d){ return mem + d;},0);
                     }
-                   
+
                     //===============================================================================================================================
                     loadFilters();
                     if($routeParams.recordType){
@@ -909,9 +902,9 @@ define(['app', 'underscore', '/app/js/common.js',
                             }
                         }
                     }
-                    
+
                     load();
-                    
+
                     loadTabFacets();
 
             }]//controller

@@ -78,7 +78,7 @@
                 <div class="tab-pane bg-white" style="padding-top:20px;" ng-class="{'active':currentTab==='referenceRecords'}" ng-if="currentTab=='referenceRecords'">
                     <div infinite-scroll="updateScrollPage()" infinite-scroll-disabled="referenceLoading" infinite-scroll-distance="10">
                          <div block-region activate="referenceLoading"></div>
-                        <div ng-repeat="rec in refDocs">
+                        <div ng-repeat="rec in refDocs.docs">
                             <result-default doc=rec type="referenceRecords"></result-default>
                         </div>
                         <h4 class="bg-white" ng-if="refDocs.data.response.numFound === 0">no records found</h4>
@@ -87,7 +87,7 @@
                 <div class="tab-pane bg-white" style="padding-top:20px;" ng-class="{'active':currentTab==='scbdRecords'}" ng-if="currentTab=='scbdRecords'">
                     <div block-region activate="scbdLoading"></div>
                     <div infinite-scroll="updateScrollPage()" infinite-scroll-disabled="scbdLoading" infinite-scroll-distance="10">
-                        <div ng-repeat="rec in scbdDocs">
+                        <div ng-repeat="rec in scbdDocs.docs">
                             <result-default doc=rec type="scbdRecords"></result-default>
                         </div>
                         <h4 class="bg-white" ng-if="scbdDocs.data.response.numFound === 0">no records found</h4>
