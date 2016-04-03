@@ -1088,6 +1088,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
 
                 var scopeofMeasureElements = ["4E2974DF-216E-46C8-8797-8E3A3BLAISE1"];
                 $scope.scopeOfMeasureTerm = "4E2974DF-216E-46C8-8797-8E3A3BLAISE1";
+                $scope.scopeElement = {};
                 var initialized = false;
 
                 $scope.api = {
@@ -1345,6 +1346,42 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     return term.broaderTerms && _.contains(_.pluck(term.broaderTerms, 'identifier'), '5B6177DD-5E5E-434E-8CB7-D63D6BLAISE8');
                 }
 
+                $scope.options = {
+                    grTypes : function(){
+
+                        var scopeElement = _.findWhere($scope.rootTerms, {identifier:'24E809DA-20F4-4457-9A8A-87C08DF81E8A'});
+
+                        var elements = _.findWhere(scopeElement.narrowerTerms, {identifier:'4E2974DF-216E-46C8-8797-8E3A3BLAISE1'});
+                        return elements.narrowerTerms[0].narrowerTerms;
+                    },
+                    grAreas : function(){
+                        var scopeElement = _.findWhere($scope.rootTerms, {identifier:'24E809DA-20F4-4457-9A8A-87C08DF81E8A'});
+                        var elements = _.findWhere(scopeElement.narrowerTerms, {identifier:'4E2974DF-216E-46C8-8797-8E3A3BLAISE1'});
+                        return elements.narrowerTerms[1].narrowerTerms;
+                    }
+                };
+                // $scope.grTypeApi ={};
+                // $scope.grAreasApi ={}
+                $scope.addGRRecord = function(geneticResource, grTypeApi, grAreasApi){
+                    if(!geneticResource || (!geneticResource.grType && !geneticResource.grAreas)){
+                        alert('please select a GR Type or GR Area');
+                        return;
+                    }
+                    if(!$scope.scopeElement.scopeAllGRElements)
+                        $scope.scopeElement.scopeAllGRElements = [];
+                    $scope.scopeElement.scopeAllGRElements.push({
+                        grType : geneticResource.grType,
+                        grAreas : geneticResource.grAreas
+                    });
+                    geneticResource.grType = undefined;
+                    geneticResource.grAreas = undefined;
+                    grTypeApi.unSelectAll();
+                    grAreasApi.unSelectAll();
+                };
+
+                $scope.deleteElement = function(element){
+                    $scope.scopeAllGRElements.splice($scope.scopeAllGRElements.indexOf(element), 0);
+                }
             }]
         }
     });

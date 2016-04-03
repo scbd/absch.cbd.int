@@ -285,8 +285,237 @@
                   font-size: 10px;
               }
             </style>
+
+
+
+
             <script type="text/ng-template"  id="/app/views/forms/edit/edit-measure.directive/abs">
               <ul>
+              <li >{{!!scopeElement.scopeCoversAll}}
+                  <div>
+                      <table style="width:100%" cellspacing="0" cellpadding="0">
+                          <tbody>
+                              <tr class="paddingleft0">
+                                  <td style="text-align:left;vertical-align:middle;" id="24E809DA-20F4-4457-9A8A-87C08DF81E8A_help">
+
+                                      <label for="24E809DA-20F4-4457-9A8A-87C08DF81E8A" name="24E809DA-20F4-4457-9A8A-87C08DF81E8A">
+                                          &nbsp;
+                                          <span title="" style="position:relative;top:2px;" class="boldText">
+                                              <span class="ng-binding">Does it cover Scope?</span>
+                                          </span>
+                                      </label>
+                                      <div class="btn-group btn-sm ng-scope" >
+                                          <label class="btn btn-primary btn-sm">
+                                              <input type="radio"  ng-model="scopeElement.scopeCoversAll" name="rd_24E809DA-20F4-4457-9A8A-87C08DF81E8A"
+                                               ng-value="true">Yes
+                                          </label>
+                                          <label class="btn btn-primary btn-sm">
+                                              <input type="radio" ng-model="scopeElement.scopeCoversAll" name="rd_24E809DA-20F4-4457-9A8A-87C08DF81E8A"
+                                                ng-value="false"> No
+                                          </label>
+                                      </div>
+                                  </td>
+                                  <td style="text-align:left;vertical-align:middle">
+
+                                  </td>
+                                  <td style="width:250px;text-align:right;vertical-align:middle">
+                                  </td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+                  <ul style="list-style:none" id="24E809DA-20F4-4457-9A8A-87C08DF81E8A" class="ng-scope"
+                  ng-if="scopeElement.scopeCoversAll==false">
+                      <li>
+                          <table style="width:100%" cellspacing="0" cellpadding="0">
+                              <tbody>
+                                  <tr class="paddingleft0">
+                                      <td style="text-align:left;vertical-align:middle;" id="4E2974DF-216E-46C8-8797-8E3A3BLAISE1_help">
+
+                                          <label for="4E2974DF-216E-46C8-8797-8E3A3BLAISE1" name="4E2974DF-216E-46C8-8797-8E3A3BLAISE1">
+                                              &nbsp;
+                                              <span title="" style="position:relative;top:2px;" class="boldText">
+                                                  <span class="ng-binding">Does it cover all types of genetic resources?</span>
+                                              </span>
+                                          </label>
+                                          <div class="btn-group btn-sm ng-scope" >
+                                              <label class="btn btn-primary btn-sm">
+                                                  <input type="radio"  ng-model="scopeElement.scopeAllGR" name="rd_4E2974DF-216E-46C8-8797-8E3A3BLAISE1" ng-value="true"
+                                                      aria-invalid="false" style="">Yes
+                                              </label>
+                                              <label class="btn btn-primary btn-sm">
+                                                  <input type="radio"  ng-model="scopeElement.scopeAllGR"
+                                                  name="rd_4E2974DF-216E-46C8-8797-8E3A3BLAISE1" ng-value="false"> No
+                                              </label>
+                                          </div>
+                                      </td>
+                                      <td style="text-align:left;vertical-align:middle">
+
+                                      </td>
+                                      <td style="width:250px;text-align:right;vertical-align:middle">
+                                          <div ng-show="scopeElement.scopeAllGR" km-textbox-ml="" ng-model="scopeElement.sections['scopeAllGR']" locales="locales"
+                                              ng-required="scopeElement.scopeAllGR" placeholder="example: Article 14.2">
+                                          </div>
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                          <div ng-if="scopeElement.scopeAllGR==false" style="padding:25px;">
+                              <table class="table table-hover" style="padding:0;margin:0;width:100%;">
+                                <tr>
+                                      <td>
+                                      </td>
+                                      <td>
+                                        Type of genetic resources
+                                      </td>
+                                      <td>
+                                        Areas of areas of access of the genetic resource
+                                      </td>
+                                      <td>
+                                            Referece
+                                      </td>
+                                </tr>
+                                <tr ng-repeat="element in scopeElement.scopeAllGRElements">
+                                      <td>
+                                        <i class="fa fa-remove" style="cursor:pointer" ng-click="deleteElement(element)"/>
+                                      </td>
+                                      <td>
+                                        {{element.grType|term}}
+                                      </td>
+                                      <td>
+                                        <span ng-repeat="area in element.grAreas">
+                                            {{area|term}}|
+                                        </span>
+                                      </td>
+                                      <td>
+                                          <div style="max-width:200px" km-textbox-ml="" ng-model="element.section" locales="locales"
+                                              ng-required="true" placeholder="example: Article 14.2">
+                                          </div>
+                                      </td>
+                                </tr>
+                                <tr>
+                                      <td>
+                                      </td>
+                                      <td>
+                                          <div km-select  name="grType" ng-model="geneticResource.grType"items="options.grTypes()"
+                                            placeholder="Please select ..." api="grTypeApi"></div>
+                                          </div>
+                                      </td>
+                                      <td>
+                                          <div km-select multiple name="grArea" ng-model="geneticResource.grAreas"items="options.grAreas()"
+                                            placeholder="Please select ..." api="grAreasApi"></div>
+                                          </div>
+                                      </td>
+                                      <td>
+                                        <button type="button" class="btn btn-primary" ng-click="addGRRecord(geneticResource, grTypeApi, grAreasApi)">Add</button>
+                                      </td>
+                                  </tr>
+                              </table>
+                          </div>
+                      </li>
+                      <li >
+                          <table style="width:100%" cellspacing="0" cellpadding="0">
+                              <tbody>
+                                  <tr class="paddingleft0">
+                                      <td style="text-align:left;vertical-align:middle;" id="B8A150E054154AD3AD97856ABD485E90_help">
+
+                                          <label for="B8A150E054154AD3AD97856ABD485E90" name="B8A150E054154AD3AD97856ABD485E90">
+                                              &nbsp;
+                                              <span title="" style="position:relative;top:2px;" class="boldText">
+                                                  <span class="ng-binding">Traditional knowledge associated with genetic resources</span>
+                                              </span>
+                                          </label>
+                                          <div class="btn-group btn-sm ng-scope" >
+                                              <label class="btn btn-primary btn-sm">
+                                                  <input type="radio"  ng-model="scopeElement.scopeTK" name="rd_B8A150E054154AD3AD97856ABD485E90" ng-value="true" class="ng-valid ng-dirty ng-touched ng-valid-parse" value="false"
+                                                      aria-invalid="false" style="">Yes
+                                              </label>
+                                              <label class="btn btn-primary btn-sm">
+                                                  <input type="radio"  ng-model="scopeElement.scopeTK" name="rd_B8A150E054154AD3AD97856ABD485E90" ng-value="false" class="ng-valid ng-dirty ng-touched" value="true" aria-invalid="false"
+                                                      style=""> No
+                                              </label>
+                                          </div>
+                                      </td>
+                                      <td style="text-align:left;vertical-align:middle">
+
+                                      </td>
+                                      <td style="width:250px;text-align:right;vertical-align:middle">
+                                          <div ng-show="scopeElement.scopeTK" km-textbox-ml="" ng-model="scopeElement.sections['scopeTK']" locales="locales"
+                                              ng-required="scopeElement.scopeTK" placeholder="example: Article 14.2">
+                                          </div>
+                                      </td>
+                                  </tr>
+
+                                  <tr class="paddingleft0">
+                                      <td style="text-align:left;vertical-align:middle;" id="2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD_help">
+
+                                          <label for="2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD" name="2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD">
+                                              &nbsp;
+                                              <span title="" style="position:relative;top:2px;" class="boldText">
+                                                  <span class="ng-binding">Provisions on temporal scope</span>
+                                              </span>
+                                          </label>
+                                          <div class="btn-group btn-sm ng-scope" >
+                                              <label class="btn btn-primary btn-sm">
+                                                  <input type="radio"  ng-model="scopeElement.scopeProvisions" name="rd_2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD" ng-value="true" class="ng-valid ng-dirty ng-touched ng-valid-parse" value="false"
+                                                      aria-invalid="false" style="">Yes
+                                              </label>
+                                              <label class="btn btn-primary btn-sm">
+                                                  <input type="radio"  ng-model="scopeElement.scopeProvisions" name="rd_2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD" ng-value="false" class="ng-valid ng-dirty ng-touched" value="true" aria-invalid="false"
+                                                      style=""> No
+                                              </label>
+                                          </div>
+                                      </td>
+                                      <td style="text-align:left;vertical-align:middle">
+
+                                      </td>
+                                      <td style="width:250px;text-align:right;vertical-align:middle">
+                                          <div ng-show="scopeElement.scopeProvisions" km-textbox-ml="" ng-model="scopeElement.sections['scopeProvisions']" locales="locales"
+                                              ng-required="scopeElement.scopeProvisions" placeholder="example: Article 14.2">
+                                          </div>
+                                      </td>
+                                  </tr>
+                                  <tr class="paddingleft0">
+                                      <td style="text-align:left;vertical-align:middle;" id="5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A_help">
+
+                                          <label for="5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A" name="5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A">
+                                              &nbsp;
+                                              <span title="" style="position:relative;top:2px;" class="boldText">
+                                                  <span class="ng-binding">Other</span>
+                                              </span>
+                                          </label>
+                                          <div class="btn-group btn-sm ng-scope" >
+                                              <label class="btn btn-primary btn-sm">
+                                                  <input type="radio"  ng-model="scopeElement.scopeOther" name="rd_5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A" ng-value="true" class="ng-valid ng-dirty ng-touched ng-valid-parse" value="false"
+                                                      aria-invalid="false" style="">Yes
+                                              </label>
+                                              <label class="btn btn-primary btn-sm">
+                                                  <input type="radio"  ng-model="scopeElement.scopeOther" name="rd_5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A" ng-value="false" class="ng-valid ng-dirty ng-touched" value="true" aria-invalid="false"
+                                                      style=""> No
+                                              </label>
+                                          </div>
+                                      </td>
+                                      <td style="text-align:left;vertical-align:middle">
+                                          <div ng-show="scopeOther" km-textbox-ml="" ng-model="scopeElement.sections['scopeOtherName']" locales="locales"
+                                              ng-required="scopeElement.scopeOther"
+                                              style="width:200px;text-align:right;vertical-align:middle" placeholder="example: Article 14.2"
+                                               class="ng-isolate-scope ng-hide ng-valid ng-valid-required" aria-hidden="true" aria-required="false" aria-invalid="false">
+                                          </div>
+                                      </td>
+                                      <td style="width:250px;text-align:right;vertical-align:middle">
+                                          <div ng-show="scopeOther" km-textbox-ml="" ng-model="scopeElement.sections['scopeOther']" locales="locales"
+                                              ng-required="scopeElement.scopeOther" placeholder="example: Article 14.2">
+                                          </div>
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+
+                      </li>
+
+                  </ul>
+                </li>
+
                 <li ng:repeat="term in rootTerms" ng-include="'/app/views/forms/edit/edit-measure.directive/abs/inner'"></li>
               </ul>
             </script>
@@ -294,7 +523,7 @@
               // ng:if="!term.broaderTerms || (isYesNo(term.identifier) && term.level <=2) || isParentSelected(term.identifier, term.level)"> -->
             <script type="text/ng-template"  id="/app/views/forms/edit/edit-measure.directive/abs/inner">
               <div ng-class="{measureChecked : identifiers[term.identifier]}" style=""
-              ng:if="term.identifier != '24E809DA-20F4-4457-9A8A-87C08DF81E8A' && (!term.broaderTerms || (term.identifier == '5B6177DD-5E5E-434E-8CB7-D63D6BLAISE8') || isParentSelected(term.identifier, term.level))">
+              ng:if="term.identifier != '24E809DA-20F4-4457-9A8A-87C08DF81E8A' && (!term.broaderTerms || isOther(term) || isParentSelected(term.identifier, term.level))">
                 <table style="width:100%" cellspacing="0" cellpadding="0">
                 <tr ng:class="{paddingleft0 : isMainElement(term.identifier), 'measureChecked' : identifiers[term.identifier]}" >
                   <td style="text-align:left;vertical-align:middle;" id="{{term.identifier}}_help" style="" >
