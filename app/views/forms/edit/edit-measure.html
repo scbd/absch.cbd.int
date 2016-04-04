@@ -276,14 +276,7 @@
                 font-weight: normal;
               }
               .paddingleft0 {
-<<<<<<< HEAD
-                  background-color: #ddd;
-                  margin-top:30px!important;
-                  border-bottom:1px #fff solid;
-
-=======
                   background-color: #eee;
->>>>>>> msr style changes
               }
               .bg-main{ background-color: #eee!important;}
               .btn-sm{
@@ -298,18 +291,13 @@
               .spacing30{
                    margin-left:30px!important;
               }
-
+              .padding-left-120{
+                  padding-left:120px!important;
+              }
               #scopeTableRow #filterText {
                   display:none;
               }
-<<<<<<< HEAD
-
-=======
-
               #scopeAddRow td, #scopeAddRow tr  { border:0!important;}
-
-
->>>>>>> msr style changes
               .matrix-btn{float:left;font-size:12px!important; background-color:white; border:0!important;}
 
             </style>
@@ -499,12 +487,12 @@
                                           </label>
                                           <div class="btn-group matrix-btn ng-scope" >
                                               <label class="btn">
-                                                  <input type="radio"  ng-model="scopeElement.scopeOther" name="rd_5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A" ng-value="true" class="ng-valid ng-dirty ng-touched ng-valid-parse" value="false"
-                                                      aria-invalid="false" style=""> Yes
+                                                  <input type="radio"  ng-model="scopeElement.scopeOther" ng-change="initializeOther(scopeElement)"
+                                                  name="rd_5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A" ng-value="true" value="false"> Yes
                                               </label>
                                               <label class="btn">
-                                                  <input type="radio"  ng-model="scopeElement.scopeOther" name="rd_5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A" ng-value="false" class="ng-valid ng-dirty ng-touched" value="true" aria-invalid="false"
-                                                      style=""> No
+                                                  <input type="radio"  ng-model="scopeElement.scopeOther" ng-change="deleteOther(scopeElement)"
+                                                  name="rd_5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A" ng-value="false"  value="true" > No
                                               </label>
                                           </div>
                                       </td>
@@ -513,9 +501,9 @@
                                       <td style="width:250px;text-align:right;vertical-align:middle">
                                       </td>
                                   </tr>
-                                  <tr ng-show="scopeElement.scopeOther">
+                                  <tr ng-if="scopeElement.scopeOther">
                                     <td colspan="3">
-                                        <span onload="otherElements = scopeElement.scopeOtherElements||[]" ng-include="'/app/views/forms/edit/edit-measure.directive/abs/inner/other'"></span>
+                                        <span onload="otherElements = scopeElement.scopeOtherElements" ng-include="'/app/views/forms/edit/edit-measure.directive/abs/inner/other'"></span>
                                     </td>
                                   </tr>
                               </tbody>
@@ -579,46 +567,35 @@
 
                 <tr ng-if="term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0 && identifiers[term.identifier]">
                   <td colspan="3">
-                      <span onload="otherElements = scopeElement.scopeOtherElements||[]" ng-include="'/app/views/forms/edit/edit-measure.directive/abs/inner/other'"></span>
+                      <span onload="otherElements = term.scopeOtherElements" ng-include="'/app/views/forms/edit/edit-measure.directive/abs/inner/other'"></span>
                   </td>
                 </tr>
                 </table>
               </div>
               <ul style="list-style:none;padding:0;margin:0;" id="{{term.identifier}}" >
-                <li ng:repeat="term in term.narrowerTerms" ng-include="'/app/views/forms/edit/edit-measure.directive/abs/inner'" >
+                <li ng:repeat="term in term.narrowerTerms" ng-include="'/app/views/forms/edit/edit-measure.directive/abs/inner'"
+                ng-class="{'padding-left-120':!term.narrowerTerms && (term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0 || !isYesNo(term.identifier))}" >
               </ul>
             </script>
 
             <script  type="text/ng-template"  id="/app/views/forms/edit/edit-measure.directive/abs/inner/other">
-            <h3><span class="label label-info"><i class="fa fa-info"/> The is test infor about this section</span></h3>
                 <table class="table table-hover" style="padding:0;margin:0;width:100%;">
-                  <tr>
-                        <td>
-                        </td>
-                        <td>
-                            Other Name
-                        </td>
-                        <td>
-                            Referece
-                        </td>
-                  </tr>
                   <tr ng-repeat="element in otherElements">
                         <td>
-                          <i class="fa fa-remove" style="cursor:pointer" ng-click="deleteOtherElement(element, otherElements)"/>
+                          <i class="btn btn-primary fa fa-remove" style="cursor:pointer" ng-if="$index>0" ng-click="deleteOtherElement(element, otherElements)"/>
                         </td>
                         <td>
                             <div style="max-width:200px" km-textbox-ml="" ng-model="element.name" locales="locales"
-                                ng-required="true" placeholder="bacteria">
+                                ng-required="true" placeholder="bacteria" ng-change="appendEmptyOther(otherElements)">
                             </div>
                         </td>
-                        <td>
+                        <td class="pull-right">
                             <div style="max-width:200px" km-textbox-ml="" ng-model="element.section" locales="locales"
-                                ng-required="true" placeholder="example: Article 14.2">
+                                ng-required="true" placeholder="example: Article 14.2" ng-change="appendEmptyOther(otherElements)">
                             </div>
                         </td>
                   </tr>
                 </table>
-                <button type="button" class="btn btn-primary" ng-click="addOther(otherElements)">Add</button>
             </script>
 
             <div class="row">

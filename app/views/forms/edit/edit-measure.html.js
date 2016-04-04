@@ -290,7 +290,10 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
 
                     otherElement.identifier = otherElement.identifier + '#' + element;
                     otherElement.broaderTerms.push(element);
-                    elementMeasures.push(otherElement)
+                    var el = _.findWhere(elementMeasures, {identifier:element});
+                    otherElement.title.en = el.title.en.replace('Does the measure cover ', 'Does the measure cover any other ');
+                    elementMeasures.push(otherElement);
+
 
                     var parentElement = _.find(elementMeasures, {
                         identifier: element
@@ -1087,6 +1090,11 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "4C57FDB4-3B92-46DD-B4C2-BB93D3B2167C", "5B6177DD-5E5E-434E-8CB7-D63D6BLAISE8"
                 ];
 
+                var elementsForOthers = [
+                    "24E809DA-20F4-4457-9A8A-87C08DF81E8A", "08B2CDEC-786F-4977-AD0A-6A709695528D","9847FA8A-16C3-4466-A378-F20AF9FF883B",
+                    "E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63", "01DA2D8E-F2BB-4E85-A17E-AB0219194A17", "5B6177DD-5E5E-434E-8CB7-D63D6BLAISE8"
+                ];
+
                 var scopeofMeasureElements = ["4E2974DF-216E-46C8-8797-8E3A3BLAISE1"];
                 $scope.scopeOfMeasureTerm = "4E2974DF-216E-46C8-8797-8E3A3BLAISE1";
                 $scope.scopeElement = {};
@@ -1244,6 +1252,12 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                             }
                         }
                     }
+                    else if(term.identifier.indexOf('#') > 0){
+                        if(answerText=="yes")
+                            $scope.initializeOther(term);
+                        else if(answerText=="no")
+                            $scope.deleteOther(term);
+                    }
                     // console.log(term, answer);
                 }
 
@@ -1328,8 +1342,9 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     return _.indexOf(secondaryElements, identifier) >= 0;
                 }
                 $scope.isYesNo = function(identifier) {
-                    return _.indexOf(yesnoElements, identifier) >= 0;
-                }
+                    return _.indexOf(yesnoElements, identifier) >= 0 ||
+                          identifier.indexOf('#') > 0;
+                };
 
                 $scope.showHideNode = function(elementId) {
                     $element.find('#' + elementId).toggle();
@@ -1399,6 +1414,22 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                 $scope.deleteOtherElement = function(element, otherElements){
                     otherElements.splice(otherElements.indexOf(element), 1);
                 };
+
+                $scope.appendEmptyOther = function(otherElements){
+                    var lastItem = otherElements[otherElements.length-1];
+                    if(lastItem.name != "" && lastItem.section != "")
+                        otherElements.push({name:'', section:''});
+                }
+
+                $scope.initializeOther = function(otherElement){
+                    otherElement.scopeOtherElements = [];
+                    otherElement.scopeOtherElements.push({name:'', section:''});
+                }
+
+                $scope.deleteOther = function(otherElement){
+                    otherElement.scopeOtherElements = [];
+                }
+
             }]
         }
     });
