@@ -1,5 +1,7 @@
 <div>
-
-    {{partyStatus}}
-
+     <span ng-if="!partyStatus.isNPParty && !partyStatus.isNPInbetweenParty" class="color-grey bold"  style="font-size:11px;margin-right:10px;">Non-Party</span>
+     <span ng-if="partyStatus.isNPParty" class="color-party bold"  style="font-size:11px;margin-right:10px;white-space:nowrap;"">Party to the Nagoya Protocol</span>
+     <span ng-if="partyStatus.isNPInbetweenParty" class="color-inbetween bold"  style="font-size:11px;margin-right:10px;white-space:nowrap;"">Ratified not yet Party</span>
+     <span ng-if="partyStatus.isNPSignatory" class="bold color-pink"  style="font-size:11px;margin-right:10px;">Signatory</span>
+     <span ng-if="partyStatus.entryIntoForce" class="bold color-grey"  style="font-size:11px;margin-right:20px;white-space:nowrap;">Entry into force: {{partyStatus.entryIntoForce|formatDate}}</span>
 </div>
