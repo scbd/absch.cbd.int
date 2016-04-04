@@ -9,12 +9,13 @@ define(['app', '/app/js/common.js'], function(app) {
                     government : '='
                 },
                 link: function($scope, elem, attrs) {
-                    console.log($scope.government);
-                    $q.when(commonjs.getCountry($scope.government.identifier.toUpperCase()))
-                    .then(function(country){
-                        console.log(country);
-                        $scope.partyStatus = country;
-                    });
+                    if($scope.government){
+                        $q.when(commonjs.getCountry($scope.government.identifier.toUpperCase()))
+                        .then(function(country){
+                            console.log(country);
+                            $scope.partyStatus = country;
+                        });
+                    }
                 }
             };
         }
