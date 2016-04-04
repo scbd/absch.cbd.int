@@ -347,9 +347,9 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "nonPreferedTerms": []
                 }, {
                     "identifier": "4E2974DF-216E-46C8-8797-8E3A33D6A048",
-                    "name": "Type of genetic resources",
+                    "name": "All type of genetic resources",
                     "title": {
-                        "en": "Type of genetic resources"
+                        "en": "All type of genetic resources"
                     },
                     "shortTitle": {},
                     "description": "",
@@ -1354,7 +1354,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
 
                         var elements = _.findWhere(scopeElement.narrowerTerms, {identifier:'4E2974DF-216E-46C8-8797-8E3A3BLAISE1'});
                         var grTypes = [];
-                        var all = _.findWhere($scope.terms,  {identifier:'4E2974DF-216E-46C8-8797-8E3A3BLAISE1'});
+                        var all = _.findWhere($scope.terms,  {identifier:'4E2974DF-216E-46C8-8797-8E3A33D6A048'});
                         grTypes.push(all);
                         grTypes = _.union(grTypes, angular.copy(elements.narrowerTerms[0].narrowerTerms));
                         return grTypes;
