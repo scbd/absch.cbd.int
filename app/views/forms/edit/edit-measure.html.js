@@ -446,7 +446,8 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "description": "",
                     "source": "",
                     "broaderTerms": ["24E809DA-20F4-4457-9A8A-87C08DF81E8A"],
-                    "narrowerTerms": ["A862ABFC-B97D-4E6A-9A70-812A82A7CC19", "48BCA72F-1458-4393-9448-09B4F501CB25", "2C87B4AD-684C-48DC-91B7-82938CE37B5A"],
+                    "narrowerTerms": ["A862ABFC-B97D-4E6A-9A70-812A82A7CC19", "48BCA72F-1458-4393-9448-09B4F501CB25",
+                                    "2C87B4AD-684C-48DC-91B7-82938CE37B5A", "CB918E1A-E171-4C10-BA35-088C81F668A3"],
                     "relatedTerms": [],
                     "nonPreferedTerms": []
                 }, {
@@ -591,7 +592,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "description": "",
                     "source": "",
                     "broaderTerms": ["A862ABFC-B97D-4E6A-9A70-812A82A7CC19"],
-                    "narrowerTerms": ["CB918E1A-E171-4C10-BA35-088C81F668A3"],
+                    "narrowerTerms": [],
                     "relatedTerms": [],
                     "nonPreferedTerms": []
                 }, {
@@ -603,7 +604,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "shortTitle": {},
                     "description": "",
                     "source": "",
-                    "broaderTerms": ["2C87B4AD-684C-48DC-91B7-82938CE37B5A"],
+                    "broaderTerms": ["A862ABFC-B97D-4E6A-9A70-812A82A7CC19"],
                     "narrowerTerms": [],
                     "relatedTerms": [],
                     "nonPreferedTerms": []
@@ -663,12 +664,12 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "nonPreferedTerms": []
                 }, {
                     "identifier": "7CAC5B93-7E27-441F-BFEB-9E416D48B1BE",
-                    "name": "Access procedures For commercial purposes",
+                    "name": "For commercial use",
                     "title": {
-                        "en": "Access procedures For commercial purposes"
+                        "en": "For commercial use"
                     },
                     "shortTitle": {},
-                    "description": "Access and/or prior informed consent / To genetic resources / For commercial purposes",
+                    "description": "Access and/or prior informed consent / To genetic resources / For commercial use",
                     "source": "",
                     "broaderTerms": ["1E824A31-BDFB-4C47-9593-8006B5FC7D60"],
                     "narrowerTerms": [],
@@ -676,9 +677,9 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "nonPreferedTerms": []
                 }, {
                     "identifier": "A7769659-17DB-4ED4-B1CA-A3ADD9CBD3A4",
-                    "name": "Access procedures For non-commercial purposes",
+                    "name": "For non-commercial use",
                     "title": {
-                        "en": "Access procedures For non-commercial purposes"
+                        "en": "For non-commercial use"
                     },
                     "shortTitle": {},
                     "description": "Access and/or prior informed consent / To genetic resources / For non-commercial purposes",
@@ -702,9 +703,9 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "nonPreferedTerms": []
                 }, {
                     "identifier": "3AC68883-4DD9-4F07-A941-30F7B910D24C",
-                    "name": "Access procedure For commercial purposes",
+                    "name": "For commercial use",
                     "title": {
-                        "en": "Access procedure For commercial purposes"
+                        "en": "For commercial use"
                     },
                     "shortTitle": {},
                     "description": "Access and/or prior informed consent / To traditional knowledge associated with genetic resources / For commercial purposes",
@@ -715,9 +716,9 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "nonPreferedTerms": []
                 }, {
                     "identifier": "7E3ECD30-1972-487B-A920-DDB439DC2DF6",
-                    "name": "Access procedure For non-commercial purposes",
+                    "name": "For non-commercial use",
                     "title": {
-                        "en": "Access procedure For non-commercial purposes"
+                        "en": "For non-commercial use"
                     },
                     "shortTitle": {},
                     "description": "Access and/or prior informed consent / To traditional knowledge associated with genetic resources / For non-commercial purposes",
@@ -1352,7 +1353,11 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                         var scopeElement = _.findWhere($scope.rootTerms, {identifier:'24E809DA-20F4-4457-9A8A-87C08DF81E8A'});
 
                         var elements = _.findWhere(scopeElement.narrowerTerms, {identifier:'4E2974DF-216E-46C8-8797-8E3A3BLAISE1'});
-                        return elements.narrowerTerms[0].narrowerTerms;
+                        var grTypes = [];
+                        var all = _.findWhere($scope.terms,  {identifier:'4E2974DF-216E-46C8-8797-8E3A3BLAISE1'});
+                        grTypes.push(all);
+                        grTypes = _.union(grTypes, angular.copy(elements.narrowerTerms[0].narrowerTerms));
+                        return grTypes;
                     },
                     grAreas : function(){
                         var scopeElement = _.findWhere($scope.rootTerms, {identifier:'24E809DA-20F4-4457-9A8A-87C08DF81E8A'});
@@ -1360,28 +1365,40 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                         return elements.narrowerTerms[1].narrowerTerms;
                     }
                 };
-                // $scope.grTypeApi ={};
-                // $scope.grAreasApi ={}
-                $scope.addGRRecord = function(geneticResource, grTypeApi, grAreasApi){
-                    if(!geneticResource || (!geneticResource.grType && !geneticResource.grAreas)){
+
+                $scope.addGRRecord = function(geneticResource, grTypesApi, grAreasApi){
+                    if(!geneticResource || (!geneticResource.grTypes && !geneticResource.grAreas)){
                         alert('please select a GR Type or GR Area');
                         return;
                     }
                     if(!$scope.scopeElement.scopeAllGRElements)
                         $scope.scopeElement.scopeAllGRElements = [];
                     $scope.scopeElement.scopeAllGRElements.push({
-                        grType : geneticResource.grType,
+                        grTypes : geneticResource.grTypes,
                         grAreas : geneticResource.grAreas
                     });
-                    geneticResource.grType = undefined;
+                    geneticResource.grTypes = undefined;
                     geneticResource.grAreas = undefined;
-                    grTypeApi.unSelectAll();
+                    grTypesApi.unSelectAll();
                     grAreasApi.unSelectAll();
                 };
 
                 $scope.deleteElement = function(element){
-                    $scope.scopeAllGRElements.splice($scope.scopeAllGRElements.indexOf(element), 0);
+                    $scope.scopeElement.scopeAllGRElements.splice($scope.scopeElement.scopeAllGRElements.indexOf(element), 1);
                 }
+
+                $scope.addOther = function(term){
+                    if(!term)
+                        term =[];
+
+                    term.push({
+                        name:'', section:''
+                    });
+                }
+
+                $scope.deleteOtherElement = function(element, otherElements){
+                    otherElements.splice(otherElements.indexOf(element), 1);
+                };
             }]
         }
     });

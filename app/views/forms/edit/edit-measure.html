@@ -284,6 +284,13 @@
               .btn-sm{
                   font-size: 10px;
               }
+              .whiteBG{
+                  background-color:white!important;
+              }
+              #scopeTableRow #filterText {
+                  display:none;
+              }
+
             </style>
 
 
@@ -291,7 +298,7 @@
 
             <script type="text/ng-template"  id="/app/views/forms/edit/edit-measure.directive/abs">
               <ul>
-              <li >{{!!scopeElement.scopeCoversAll}}
+              <li >
                   <div>
                       <table style="width:100%" cellspacing="0" cellpadding="0">
                           <tbody>
@@ -301,19 +308,9 @@
                                       <label for="24E809DA-20F4-4457-9A8A-87C08DF81E8A" name="24E809DA-20F4-4457-9A8A-87C08DF81E8A">
                                           &nbsp;
                                           <span title="" style="position:relative;top:2px;" class="boldText">
-                                              <span class="ng-binding">Does it cover Scope?</span>
+                                              <span class="ng-binding">Scope of application of the measure</span>
                                           </span>
                                       </label>
-                                      <div class="btn-group btn-sm ng-scope" >
-                                          <label class="btn btn-primary btn-sm">
-                                              <input type="radio"  ng-model="scopeElement.scopeCoversAll" name="rd_24E809DA-20F4-4457-9A8A-87C08DF81E8A"
-                                               ng-value="true">Yes
-                                          </label>
-                                          <label class="btn btn-primary btn-sm">
-                                              <input type="radio" ng-model="scopeElement.scopeCoversAll" name="rd_24E809DA-20F4-4457-9A8A-87C08DF81E8A"
-                                                ng-value="false"> No
-                                          </label>
-                                      </div>
                                   </td>
                                   <td style="text-align:left;vertical-align:middle">
 
@@ -324,12 +321,11 @@
                           </tbody>
                       </table>
                   </div>
-                  <ul style="list-style:none" id="24E809DA-20F4-4457-9A8A-87C08DF81E8A" class="ng-scope"
-                  ng-if="scopeElement.scopeCoversAll==false">
+                  <ul style="list-style:none" id="24E809DA-20F4-4457-9A8A-87C08DF81E8A">
                       <li>
                           <table style="width:100%" cellspacing="0" cellpadding="0">
                               <tbody>
-                                  <tr class="paddingleft0">
+                                  <tr class="paddingleft0 whiteBG">
                                       <td style="text-align:left;vertical-align:middle;" id="4E2974DF-216E-46C8-8797-8E3A3BLAISE1_help">
 
                                           <label for="4E2974DF-216E-46C8-8797-8E3A3BLAISE1" name="4E2974DF-216E-46C8-8797-8E3A3BLAISE1">
@@ -361,7 +357,8 @@
                               </tbody>
                           </table>
                           <div ng-if="scopeElement.scopeAllGR==false" style="padding:25px;">
-                              <table class="table table-hover" style="padding:0;margin:0;width:100%;">
+                              <h3><span class="label label-info"><i class="fa fa-info"/> The is test infor about this section</span></h3>
+                              <table class="table table-hover table-border" style="padding:0;margin:0;width:100%;">
                                 <tr>
                                       <td>
                                       </td>
@@ -380,7 +377,9 @@
                                         <i class="fa fa-remove" style="cursor:pointer" ng-click="deleteElement(element)"/>
                                       </td>
                                       <td>
-                                        {{element.grType|term}}
+                                      <span ng-repeat="area in element.grTypes">
+                                          {{area|term}}|
+                                      </span>
                                       </td>
                                       <td>
                                         <span ng-repeat="area in element.grAreas">
@@ -393,12 +392,12 @@
                                           </div>
                                       </td>
                                 </tr>
-                                <tr>
+                                <tr id="scopeTableRow">
                                       <td>
                                       </td>
                                       <td>
-                                          <div km-select  name="grType" ng-model="geneticResource.grType"items="options.grTypes()"
-                                            placeholder="Please select ..." api="grTypeApi"></div>
+                                          <div km-select multiple name="grTypes" ng-model="geneticResource.grTypes"items="options.grTypes()"
+                                            placeholder="Please select ..." api="grTypesApi"></div>
                                           </div>
                                       </td>
                                       <td>
@@ -407,7 +406,7 @@
                                           </div>
                                       </td>
                                       <td>
-                                        <button type="button" class="btn btn-primary" ng-click="addGRRecord(geneticResource, grTypeApi, grAreasApi)">Add</button>
+                                        <button type="button" class="btn btn-primary" ng-click="addGRRecord(geneticResource, grTypesApi, grAreasApi)">Add</button>
                                       </td>
                                   </tr>
                               </table>
@@ -416,7 +415,7 @@
                       <li >
                           <table style="width:100%" cellspacing="0" cellpadding="0">
                               <tbody>
-                                  <tr class="paddingleft0">
+                                  <tr class="paddingleft0 whiteBG">
                                       <td style="text-align:left;vertical-align:middle;" id="B8A150E054154AD3AD97856ABD485E90_help">
 
                                           <label for="B8A150E054154AD3AD97856ABD485E90" name="B8A150E054154AD3AD97856ABD485E90">
@@ -446,7 +445,7 @@
                                       </td>
                                   </tr>
 
-                                  <tr class="paddingleft0">
+                                  <tr class="paddingleft0 whiteBG">
                                       <td style="text-align:left;vertical-align:middle;" id="2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD_help">
 
                                           <label for="2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD" name="2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD">
@@ -475,7 +474,7 @@
                                           </div>
                                       </td>
                                   </tr>
-                                  <tr class="paddingleft0">
+                                  <tr class="paddingleft0 whiteBG">
                                       <td style="text-align:left;vertical-align:middle;" id="5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A_help">
 
                                           <label for="5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A" name="5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A">
@@ -496,17 +495,14 @@
                                           </div>
                                       </td>
                                       <td style="text-align:left;vertical-align:middle">
-                                          <div ng-show="scopeOther" km-textbox-ml="" ng-model="scopeElement.sections['scopeOtherName']" locales="locales"
-                                              ng-required="scopeElement.scopeOther"
-                                              style="width:200px;text-align:right;vertical-align:middle" placeholder="example: Article 14.2"
-                                               class="ng-isolate-scope ng-hide ng-valid ng-valid-required" aria-hidden="true" aria-required="false" aria-invalid="false">
-                                          </div>
                                       </td>
                                       <td style="width:250px;text-align:right;vertical-align:middle">
-                                          <div ng-show="scopeOther" km-textbox-ml="" ng-model="scopeElement.sections['scopeOther']" locales="locales"
-                                              ng-required="scopeElement.scopeOther" placeholder="example: Article 14.2">
-                                          </div>
                                       </td>
+                                  </tr>
+                                  <tr ng-show="scopeElement.scopeOther">
+                                    <td colspan="3">
+                                        <span onload="otherElements = scopeElement.scopeOtherElements||[]" ng-include="'/app/views/forms/edit/edit-measure.directive/abs/inner/other'"></span>
+                                    </td>
                                   </tr>
                               </tbody>
                           </table>
@@ -571,6 +567,38 @@
               <ul style="list-style:none" id="{{term.identifier}}" >
                 <li ng:repeat="term in term.narrowerTerms" ng-include="'/app/views/forms/edit/edit-measure.directive/abs/inner'" >
               </ul>
+            </script>
+
+            <script  type="text/ng-template"  id="/app/views/forms/edit/edit-measure.directive/abs/inner/other">
+            <h3><span class="label label-info"><i class="fa fa-info"/> The is test infor about this section</span></h3>
+                <table class="table table-hover" style="padding:0;margin:0;width:100%;">
+                  <tr>
+                        <td>
+                        </td>
+                        <td>
+                            Other Name
+                        </td>
+                        <td>
+                            Referece
+                        </td>
+                  </tr>
+                  <tr ng-repeat="element in otherElements">
+                        <td>
+                          <i class="fa fa-remove" style="cursor:pointer" ng-click="deleteOtherElement(element, otherElements)"/>
+                        </td>
+                        <td>
+                            <div style="max-width:200px" km-textbox-ml="" ng-model="element.name" locales="locales"
+                                ng-required="true" placeholder="bacteria">
+                            </div>
+                        </td>
+                        <td>
+                            <div style="max-width:200px" km-textbox-ml="" ng-model="element.section" locales="locales"
+                                ng-required="true" placeholder="example: Article 14.2">
+                            </div>
+                        </td>
+                  </tr>
+                </table>
+                <button type="button" class="btn btn-primary" ng-click="addOther(otherElements)">Add</button>
             </script>
 
             <div class="row">
