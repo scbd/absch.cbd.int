@@ -1084,7 +1084,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "5427EB8F-5532-4AE2-88EE-5B961BLAISE5", "9847FA8A-16C3-4466-A378-F20AF9FF883B",
                     "E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63", "4C57FDB4-3B92-46DD-B4C2-BB93DBLAISE8",
                     "1FCC6CA9-022F-42FD-BD02-43AE674FEB56", "01DA2D8E-F2BB-4E85-A17E-AB0219194A17",
-                    "4C57FDB4-3B92-46DD-B4C2-BB93D3B2167C"
+                    "4C57FDB4-3B92-46DD-B4C2-BB93D3B2167C", "5B6177DD-5E5E-434E-8CB7-D63D6BLAISE8"
                 ];
 
                 var scopeofMeasureElements = ["4E2974DF-216E-46C8-8797-8E3A3BLAISE1"];

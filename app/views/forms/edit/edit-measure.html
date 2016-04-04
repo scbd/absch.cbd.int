@@ -516,10 +516,17 @@
               </ul>
             </script>
             <!--//  {{term.identifier}}
-              // ng:if="!term.broaderTerms || (isYesNo(term.identifier) && term.level <=2) || isParentSelected(term.identifier, term.level)"> -->
+              // ng:if="!term.broaderTerms || (isYesNo(term.identifier) && term.level <=2) || isParentSelected(term.identifier, term.level)">
+
+                // <span ng-if="term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0" style="width:200px;text-align:right;vertical-align:middle">
+                //   <div km-textbox-ml ng-show="identifiers[term.identifier]"  style="width:200px;text-align:right;vertical-align:middle" placeholder="new element"
+                //    ng-model="otherCustomValues[term.identifier]" locales="locales" ng:if="!term.narrowerTerms"></div>
+                //   </div>
+                // </span>
+          -->
             <script type="text/ng-template"  id="/app/views/forms/edit/edit-measure.directive/abs/inner">
               <div ng-class="{measureChecked : identifiers[term.identifier]}" style=""
-              ng:if="term.identifier != '24E809DA-20F4-4457-9A8A-87C08DF81E8A' && (!term.broaderTerms || isOther(term) || isParentSelected(term.identifier, term.level))">
+              ng:if="term.identifier != '24E809DA-20F4-4457-9A8A-87C08DF81E8A' && (!term.broaderTerms || isParentSelected(term.identifier, term.level))">
                 <table style="width:100%" cellspacing="0" cellpadding="0">
                 <tr ng:class="{paddingleft0 : isMainElement(term.identifier), 'measureChecked' : identifiers[term.identifier]}" >
                   <td style="text-align:left;vertical-align:middle;" id="{{term.identifier}}_help" style="" >
@@ -547,19 +554,20 @@
                     </div>
                   </td>
                   <td style="text-align:left;vertical-align:middle" >
-                    <span ng-if="term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0" style="width:200px;text-align:right;vertical-align:middle">
-                      <div km-textbox-ml ng-show="identifiers[term.identifier]"  style="width:200px;text-align:right;vertical-align:middle" placeholder="new element"
-                       ng-model="otherCustomValues[term.identifier]" locales="locales" ng:if="!term.narrowerTerms"></div>
-                      </div>
-                    </span>
                   </td>
                   <td style="width:250px;text-align:right;vertical-align:middle">
-                    <div ng-show="(identifiers[term.identifier] && (term.narrowerTerms.length||0) == 0) || (scopeOfMeasureTerm == term.identifier && identifiers[term.identifier]==false)"
+                    <div ng-show="term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')<0 && ((identifiers[term.identifier] && (term.narrowerTerms.length||0) == 0) || (scopeOfMeasureTerm == term.identifier && identifiers[term.identifier]==false))"
                      km-textbox-ml ng-model="sections[term.identifier]"
                     locales="locales" ng-required="identifiers[term.identifier]" placeholder="example: Article 14.2"></div>
 
                     <i class="fa fa-chevron-circle-up pull-right hand" ng-click="term.showUp=!term.showUp;showHideNode(term.identifier)" ng-show="!term.showUp" ng:if="isReadOnly(term.identifier)"></i>
                     <i class="fa fa-chevron-circle-down pull-right hand" ng-click="term.showUp=!term.showUp;showHideNode(term.identifier)" ng-show="term.showUp" ng:if="isReadOnly(term.identifier)"></i>
+                  </td>
+                </tr>
+
+                <tr ng-if="term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0 && identifiers[term.identifier]">
+                  <td colspan="3">
+                      <span onload="otherElements = scopeElement.scopeOtherElements||[]" ng-include="'/app/views/forms/edit/edit-measure.directive/abs/inner/other'"></span>
                   </td>
                 </tr>
                 </table>
