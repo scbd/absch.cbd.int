@@ -262,7 +262,7 @@
             <style>
               .measureChecked
               {
-                background-color:#428BCA!important;
+                /*background-color:#428BCA!important;*/
                 /*//margin: 2px 2px 2px -5px;*/
                 /*padding: 10px 5px 10px 5px;*/
                 font-weight:bold;
@@ -278,9 +278,9 @@
                   background-color: #ddd;
                   margin-top:30px!important;
                   border-bottom:1px #fff solid;
-                  text-transform:uppercase;
-
+                 
               }
+              .bg-main{ background-color: #ddd!important;}
               .btn-sm{
                   font-size: 10px;
               }
@@ -290,6 +290,8 @@
               #scopeTableRow #filterText {
                   display:none;
               }
+              
+              .matrix-btn{float:left;font-size:12px!important; background-color:white; border:0!important;}
 
             </style>
 
@@ -325,21 +327,21 @@
                       <li>
                           <table style="width:100%" cellspacing="0" cellpadding="0">
                               <tbody>
-                                  <tr class="paddingleft0 whiteBG">
+                                  <tr class="whiteBG">
                                       <td style="text-align:left;vertical-align:middle;" id="4E2974DF-216E-46C8-8797-8E3A3BLAISE1_help">
 
                                           <label for="4E2974DF-216E-46C8-8797-8E3A3BLAISE1" name="4E2974DF-216E-46C8-8797-8E3A3BLAISE1">
                                               &nbsp;
-                                              <span title="" style="position:relative;top:2px;" class="boldText">
+                                              <span title="" style="position:relative;top:7px;" class="bold">
                                                   <span class="ng-binding">Does it cover all types of genetic resources?</span>
                                               </span>
                                           </label>
-                                          <div class="btn-group btn-sm ng-scope" >
-                                              <label class="btn btn-primary btn-sm">
+                                          <div class="btn-group ng-scope matrix-btn" >
+                                              <label class="btn ">
                                                   <input type="radio"  ng-model="scopeElement.scopeAllGR" name="rd_4E2974DF-216E-46C8-8797-8E3A3BLAISE1" ng-value="true"
-                                                      aria-invalid="false" style="">Yes
+                                                      aria-invalid="false" style=""> Yes
                                               </label>
-                                              <label class="btn btn-primary btn-sm">
+                                              <label class="btn ">
                                                   <input type="radio"  ng-model="scopeElement.scopeAllGR"
                                                   name="rd_4E2974DF-216E-46C8-8797-8E3A3BLAISE1" ng-value="false"> No
                                               </label>
@@ -415,21 +417,21 @@
                       <li >
                           <table style="width:100%" cellspacing="0" cellpadding="0">
                               <tbody>
-                                  <tr class="paddingleft0 whiteBG">
+                                  <tr class="whiteBG">
                                       <td style="text-align:left;vertical-align:middle;" id="B8A150E054154AD3AD97856ABD485E90_help">
 
                                           <label for="B8A150E054154AD3AD97856ABD485E90" name="B8A150E054154AD3AD97856ABD485E90">
                                               &nbsp;
-                                              <span title="" style="position:relative;top:2px;" class="boldText">
+                                              <span title="" style="position:relative;top:7px;" class="bold">
                                                   <span class="ng-binding">Traditional knowledge associated with genetic resources</span>
                                               </span>
                                           </label>
-                                          <div class="btn-group btn-sm ng-scope" >
-                                              <label class="btn btn-primary btn-sm">
+                                          <div class="btn-group matrix-btn ng-scope" >
+                                              <label class="btn">
                                                   <input type="radio"  ng-model="scopeElement.scopeTK" name="rd_B8A150E054154AD3AD97856ABD485E90" ng-value="true" class="ng-valid ng-dirty ng-touched ng-valid-parse" value="false"
-                                                      aria-invalid="false" style="">Yes
+                                                      aria-invalid="false" style=""> Yes
                                               </label>
-                                              <label class="btn btn-primary btn-sm">
+                                              <label class="btn">
                                                   <input type="radio"  ng-model="scopeElement.scopeTK" name="rd_B8A150E054154AD3AD97856ABD485E90" ng-value="false" class="ng-valid ng-dirty ng-touched" value="true" aria-invalid="false"
                                                       style=""> No
                                               </label>
@@ -445,21 +447,21 @@
                                       </td>
                                   </tr>
 
-                                  <tr class="paddingleft0 whiteBG">
+                                  <tr class="whiteBG">
                                       <td style="text-align:left;vertical-align:middle;" id="2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD_help">
 
                                           <label for="2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD" name="2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD">
                                               &nbsp;
-                                              <span title="" style="position:relative;top:2px;" class="boldText">
+                                              <span title="" style="position:relative;top:7px;" class="bold">
                                                   <span class="ng-binding">Provisions on temporal scope</span>
                                               </span>
                                           </label>
-                                          <div class="btn-group btn-sm ng-scope" >
-                                              <label class="btn btn-primary btn-sm">
+                                          <div class="btn-group matrix-btn ng-scope" >
+                                              <label class="btn">
                                                   <input type="radio"  ng-model="scopeElement.scopeProvisions" name="rd_2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD" ng-value="true" class="ng-valid ng-dirty ng-touched ng-valid-parse" value="false"
-                                                      aria-invalid="false" style="">Yes
+                                                      aria-invalid="false" style=""> Yes
                                               </label>
-                                              <label class="btn btn-primary btn-sm">
+                                              <label class="btn">
                                                   <input type="radio"  ng-model="scopeElement.scopeProvisions" name="rd_2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD" ng-value="false" class="ng-valid ng-dirty ng-touched" value="true" aria-invalid="false"
                                                       style=""> No
                                               </label>
@@ -474,21 +476,21 @@
                                           </div>
                                       </td>
                                   </tr>
-                                  <tr class="paddingleft0 whiteBG">
+                                  <tr class="whiteBG">
                                       <td style="text-align:left;vertical-align:middle;" id="5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A_help">
 
                                           <label for="5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A" name="5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A">
                                               &nbsp;
-                                              <span title="" style="position:relative;top:2px;" class="boldText">
+                                              <span title="" style="position:relative;top:7px;" class="bold">
                                                   <span class="ng-binding">Other</span>
                                               </span>
                                           </label>
-                                          <div class="btn-group btn-sm ng-scope" >
-                                              <label class="btn btn-primary btn-sm">
+                                          <div class="btn-group matrix-btn ng-scope" >
+                                              <label class="btn">
                                                   <input type="radio"  ng-model="scopeElement.scopeOther" name="rd_5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A" ng-value="true" class="ng-valid ng-dirty ng-touched ng-valid-parse" value="false"
-                                                      aria-invalid="false" style="">Yes
+                                                      aria-invalid="false" style=""> Yes
                                               </label>
-                                              <label class="btn btn-primary btn-sm">
+                                              <label class="btn">
                                                   <input type="radio"  ng-model="scopeElement.scopeOther" name="rd_5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A" ng-value="false" class="ng-valid ng-dirty ng-touched" value="true" aria-invalid="false"
                                                       style=""> No
                                               </label>
@@ -536,18 +538,18 @@
                          <input type="checkbox" ng-model="identifiers[term.identifier]" ng-required="IsRequired()" value="{{term.identifier}}"
                          ng:if="!isReadOnly(term.identifier) && !isYesNo(term.identifier)" />
 
-                         <span title="{{term.description|lstring:locale}}" ng:class="{true:'boldText',false:'normalText'}[isMainElement(term.identifier) || isYesNo(term.identifier) || isSecondaryElement(term.identifier)]" style="position:relative;top:2px;">
-                              <span ng-class="{'boldText':term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0}">{{term.title||term.name | lstring:locale}} </span>
+                         <span title="{{term.description|lstring:locale}}" ng:class="{true:'bold',false:'normalText'}[isMainElement(term.identifier) || isYesNo(term.identifier) || isSecondaryElement(term.identifier)]" style="position:relative;top:7px;">
+                              <span ng-class="{'bold':term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0}">{{term.title||term.name | lstring:locale}} </span>
                               <i ng-show="term.description" class="icon-question-sign"></i>
                          </span>
 
                     </label>
-                    <div class="btn-group btn-sm" ng:if="isYesNo(term.identifier)">
-                      <label class="btn btn-primary btn-sm">
+                    <div class="btn-group matrix-btn " ng:if="isYesNo(term.identifier)" ng:class="{'bg-main' : isMainElement(term.identifier)}">
+                      <label class="btn">
                         <input type="radio" ng-change="updateSelected(term, identifiers[term.identifier],'yes')" ng-model="identifiers[term.identifier]" name="rd_{{term.identifier}}"
-                        ng-value="{{(term.identifier == scopeOfMeasure || (term.narrowerTerms.length||0) ==0) ? true : false}}">Yes
+                        ng-value="{{(term.identifier == scopeOfMeasure || (term.narrowerTerms.length||0) ==0) ? true : false}}"> Yes
                       </label>
-                      <label class="btn btn-primary btn-sm">
+                      <label class="btn">
                           <input type="radio" ng-change="updateSelected(term, identifiers[term.identifier], 'no')" ng-model="identifiers[term.identifier]" name="rd_{{term.identifier}}"
                           ng-value="{{(term.identifier == scopeOfMeasure || (term.narrowerTerms.length||0) == 0) ? false : true}}"> No
                       </label>
@@ -560,8 +562,6 @@
                      km-textbox-ml ng-model="sections[term.identifier]"
                     locales="locales" ng-required="identifiers[term.identifier]" placeholder="example: Article 14.2"></div>
 
-                    <i class="fa fa-chevron-circle-up pull-right hand" ng-click="term.showUp=!term.showUp;showHideNode(term.identifier)" ng-show="!term.showUp" ng:if="isReadOnly(term.identifier)"></i>
-                    <i class="fa fa-chevron-circle-down pull-right hand" ng-click="term.showUp=!term.showUp;showHideNode(term.identifier)" ng-show="term.showUp" ng:if="isReadOnly(term.identifier)"></i>
                   </td>
                 </tr>
 
