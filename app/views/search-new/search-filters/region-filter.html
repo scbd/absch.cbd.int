@@ -1,6 +1,6 @@
 <div id="Search-Filter"  >
     
-     <div style="margin-bottom:30px;">
+     <!--<div style="margin-bottom:30px;" >
        <div>
             <span class="country-heading">Party Status</span>
             <hr class="heading" />
@@ -22,10 +22,10 @@
             <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
             Signatory to the Nagoya Protocol
         </a>
-    </div>
+    </div>-->
     
      <div style="margin-bottom:30px;" >
-        <div>
+        <div ng-if="cf_fitlers.length">
             <span class="country-heading">CBD Regions</span>
             <hr class="heading" />
         </div>
@@ -37,18 +37,18 @@
         </div>
     </div>
         
-    <div style="margin-bottom:30px;" >   
-        <div >
+    <div style="margin-bottom:30px;">   
+        <div ng-if="cf_fitlers_all.length">
             <span class="country-heading">All Country Groupings</span>
             <hr class="heading" />
         </div>
-        <div  >
-            <div ng-repeat="doc in cf_fitlers = (cf_regions | filter:searchKeyword | filter:alphabetFilter | orderBy:'name')">
+        <div style="max-height:300px;overflow: scroll;">
+         <div ng-repeat="doc in cf_fitlers_all = (cf_regions | filter:searchKeyword | filter:alphabetFilter | orderBy:'name')">
                     <a class="filter"  ng-click="saveFilter(doc)" >
                         <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
                         {{doc.name}}
                     </a>
-            </div>
-    </div>
+          </div>
+        </div>
    </div>
 </div>

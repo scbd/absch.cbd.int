@@ -11,14 +11,9 @@ define(['app'],  function(app, _) {
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
               
                $scope.keywordSearchFilters = searchDirectiveCtrl.getSearchFilters("keyword");
-               
-               
+                              
                $scope.keywordSearchFiltersNoDups =   searchDirectiveCtrl.getSearchFilters("keyword");//filter this for unique object.id so the all keywords only shows the unique fitlers
-            
-               
-                      
-              
-               
+
                $scope.relatedFilters = {};
 
             },// link
