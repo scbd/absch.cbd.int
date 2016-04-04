@@ -42,7 +42,7 @@
 
         var url = window.location.origin;
         var dev = /^https:\/\/absch.cbddev.xyz\//i.test(url)
-              ||/^http:\/\/localhost[:\/]/i.test(url)
+              //||/^http:\/\/localhost[:\/]/i.test(url)
 
         if(dev)
             document.getElementById('authenticationFrame').src="https://accounts.cbddev.xyz/app/authorize.html";

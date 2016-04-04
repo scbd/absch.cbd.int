@@ -4,6 +4,7 @@
 
     <md-content layout-padding style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
 
+                <span block-region activate="isLoading()" ng-if="isLoading()"></span>
   <div class="registerpage-content">
     <div>
       <div class="alert alert-error" ng-show="hasError()">
@@ -278,7 +279,7 @@
                   background-color: #ddd;
                   margin-top:30px!important;
                   border-bottom:1px #fff solid;
-                 
+
               }
               .bg-main{ background-color: #ddd!important;}
               .btn-sm{
@@ -290,7 +291,7 @@
               #scopeTableRow #filterText {
                   display:none;
               }
-              
+
               .matrix-btn{float:left;font-size:12px!important; background-color:white; border:0!important;}
 
             </style>

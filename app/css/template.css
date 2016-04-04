@@ -1006,18 +1006,18 @@ footer .logo {
 
 
 .blockRegion {
-    position: relative;
-    /*box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);*/
-    /*margin: 1rem 0;*/
-    /*padding: 1em;*/
-    /*border-radius: .28571429rem;
-    border: 1px solid rgba(34,36,38,.15);*/
+    position: initial;
+    box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+    margin: 1rem 0;
+    padding: 1em;
+    border-radius: .28571429rem;
+    border: 1px solid rgba(34,36,38,.15);
 }
 .dimmer {
     border-radius: inherit!important;
 }
 .inverted.dimmer {
-    background-color: rgba(255,255,255,.65);
+    background-color: rgba(255,255,255,.85);
 }
 .dimmed.dimmable>.animating.dimmer, .dimmed.dimmable>.visible.dimmer, .active.dimmer {
     display: block;
@@ -1050,7 +1050,7 @@ footer .logo {
 }
 .loader {
     position: absolute;
-    top: 50%;
+    top: 10%;
     left: 50%;
     margin: 0;
     text-align: center;
@@ -1424,6 +1424,6 @@ footer .logo {
             border-bottom: 1px solid #DDD!important;
             padding: 10px 0;
         }
-        
+
         #SubmitPage .label{ font-size:11px!important;color:white;}
         #SubmitPage .label:hover { background-color: #333!important;color:white!important;}
