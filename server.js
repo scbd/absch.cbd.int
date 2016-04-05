@@ -1,5 +1,7 @@
 /* jshint node:true
 */
+'use strict';
+
 var fs = require('fs');
 var http = require('http');
 var express = require('express');
@@ -60,3 +62,5 @@ proxy.on('error',function (err,req) {
 
 console.log('Server listening on port ' + app.get('port'));
 server.listen(app.get('port'));
+
+process.on('SIGTERM', ()=>process.exit());
