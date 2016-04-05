@@ -1417,7 +1417,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
 
                 $scope.appendEmptyOther = function(otherElements){
                     var lastItem = otherElements[otherElements.length-1];
-                    if(lastItem.name != "" && lastItem.section != "")
+                    if(lastItem.name != "" )//&& lastItem.section != "")
                         otherElements.push({name:'', section:''});
                 }
 
@@ -1429,6 +1429,15 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                 $scope.deleteOther = function(otherElement){
                     otherElement.scopeOtherElements = [];
                 }
+
+                $scope.applyPadding = function(term){
+
+                    return term.identifier != '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#08B2CDEC-786F-4977-AD0A-6A709695528D' &&
+                           term.identifier != '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63' &&
+                           !term.narrowerTerms && (term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0 ||
+                                                   !$scope.isYesNo(term.identifier))
+
+                };
 
             }]
         }

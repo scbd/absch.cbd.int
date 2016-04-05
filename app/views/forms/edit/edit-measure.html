@@ -572,9 +572,9 @@
                 </tr>
                 </table>
               </div>
-              <ul style="list-style:none;padding:0;margin:0;" id="{{term.identifier}}" >
+              <ul style="list-style:none;padding:0;margin:0;" id="{{term.identifier}}" >              
                 <li ng:repeat="term in term.narrowerTerms" ng-include="'/app/views/forms/edit/edit-measure.directive/abs/inner'"
-                ng-class="{'padding-left-120':!term.narrowerTerms && (term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0 || !isYesNo(term.identifier))}" >
+                ng-class="{'padding-left-120':applyPadding(term)}" >
               </ul>
             </script>
 
