@@ -9,12 +9,13 @@ define(['app', 'underscore', '/app/views/forms/view/record-loader.directive.html
         function($rootScope, $scope, $filter, $routeParams, IStorage, $q, IWorkflows,
             IUserNotifications, commonjs, $element, $timeout, roleService, toastr, $location) {
 
-            
+
             if ($routeParams.document_type) {
                 $scope.document = {
                     schema : $filter("mapSchema")($routeParams.document_type),
                     identifier : $routeParams.documentID
                 };
+                $scope.loading = true;
 
                 $q.when(IStorage.drafts.locks.get($routeParams.documentID,{lockID:''}))
                 .then(function(data){
@@ -26,15 +27,17 @@ define(['app', 'underscore', '/app/views/forms/view/record-loader.directive.html
                             if(doc.lockedBy.userID == $rootScope.user.userID)
                                 $scope.canRecall = true;
                         }
-                      
-                });
+
+                }).finally(function() {
+                    delete $scope.loading;
+                });;
             }
-            
-            
+
+
             $scope.refreshworkflowRecord = function(document, workflowInfo) {
-               
+
                $scope.loading = true;
-               
+
                if (workflowInfo.workflowId) {
                    IWorkflows.get(workflowInfo.workflowId).then(function(data) {
                        if (data.state == 'completed') {
@@ -48,6 +51,8 @@ define(['app', 'underscore', '/app/views/forms/view/record-loader.directive.html
                                 $scope.loading = false;
                            }, 500);
                        }
+                   }).finally(function() {
+                       delete $scope.loading;
                    });
                }
             }
@@ -131,9 +136,8 @@ define(['app', 'underscore', '/app/views/forms/view/record-loader.directive.html
                     $scope.showRequestHistory = false;
 
                     toastr.info('The request was successfully recalled');
-                })
-                .finally(function(){
-                  $scope.loading = false;
+                }).finally(function() {
+                    delete $scope.loading;
                 });
             };
 
