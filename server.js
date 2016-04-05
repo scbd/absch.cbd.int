@@ -61,3 +61,5 @@ app.listen(app.get('port'), function () {
 	console.log('Server listening on %j', this.address());
 });
 // server.listen(app.get('port'));
+
+process.on('SIGTERM', ()=>process.exit());
