@@ -251,8 +251,9 @@
             <section>
             <legend name="elementsOfMeasure">Elements of the measure</legend>
             <div class="help-block">
-                <span ng-repeat="elm in document.absMeasures">
-                    {{elm.identifier}}|
+                <!-- {{document.absMeasures}} -->
+                <span ng-repeat="elm in document.absMeasures.relevantElements">
+                    {{$index}}. {{elm.identifier|term}}<span ng-if="elm.customValue">({{elm.customValue}})</span><br/>
                 </span>
               <label  for="absMeasures" >Please select which elements are included in the measure being registered and identify which are the relevant articles of sections of the measure for each of the selected elements.This information will assist to in displaying information on the national legal framework.
               </label>
@@ -306,8 +307,10 @@
 
 
             <script type="text/ng-template"  id="/app/views/forms/edit/edit-measure.directive/abs">
+
               <ul>
               <li >
+              {{binding}}
                   <div>
                       <table style="width:100%" cellspacing="0" cellpadding="0">
                           <tbody>
@@ -345,12 +348,12 @@
                                           </label>
                                           <div class="btn-group ng-scope matrix-btn" >
                                               <label class="btn ">
-                                                  <input type="radio"  ng-model="scopeElement.scopeAllGR" name="rd_4E2974DF-216E-46C8-8797-8E3A3BLAISE1" ng-value="true"
-                                                      aria-invalid="false" style=""> Yes
+                                                  <input type="radio"  ng-model="binding.geneticResource.answer" name="rd_4E2974DF-216E-46C8-8797-8E3A3BLAISE1" ng-value="true"
+                                                      aria-invalid="false" style="" ngChange="binding.geneticResource.section=undefined"> Yes
                                               </label>
                                               <label class="btn ">
-                                                  <input type="radio"  ng-model="scopeElement.scopeAllGR"
-                                                  name="rd_4E2974DF-216E-46C8-8797-8E3A3BLAISE1" ng-value="false"> No
+                                                  <input type="radio"  ng-model="binding.geneticResource.answer"
+                                                  name="rd_4E2974DF-216E-46C8-8797-8E3A3BLAISE1" ng-value="false" ngChange="binding.geneticResource.section=undefined"> No
                                               </label>
                                           </div>
                                       </td>
@@ -358,23 +361,23 @@
 
                                       </td>
                                       <td style="width:250px;text-align:right;vertical-align:middle">
-                                          <div ng-show="scopeElement.scopeAllGR" km-textbox-ml="" ng-model="scopeElement.sections['scopeAllGR']" locales="locales"
-                                              ng-required="scopeElement.scopeAllGR" placeholder="example: Article 14.2">
+                                          <div ng-show="binding.geneticResource.answer" km-textbox-ml="" ng-model="binding.geneticResource.section" locales="locales"
+                                              ng-required="binding.geneticResource.answer" placeholder="example: Article 14.2"  ngChange="updateScopeGR()">
                                           </div>
                                       </td>
                                   </tr>
                               </tbody>
                           </table>
-                          <div ng-if="scopeElement.scopeAllGR==false" style="margin: 0  0 10px 20px;">
+                          <div ng-if="binding.geneticResource.answer==false" style="margin: 0  0 10px 20px;">
                               <div>Please select elements from the list below and click add. Please add as many elements as necessary.</div>
                               <table class="table" style="padding:0;margin:0 0 15px 0;width:auto!important;">
                                 <tr>
                                     <td>
-                                          <div km-select multiple name="grTypes" ng-model="geneticResource.grTypes"items="options.grTypes()"
+                                          <div km-select multiple name="grTypes" ng-model="geneticResource.types"items="options.grTypes()"
                                             placeholder="Please select genetic resource types" api="grTypesApi"></div>
                                           </div>
                                            <span class="bold" style="margin: 0 10px;"> found in </span>
-                                          <div km-select multiple name="grArea" ng-model="geneticResource.grAreas"items="options.grAreas()"
+                                          <div km-select multiple name="grArea" ng-model="geneticResource.areas"items="options.grAreas()"
                                             placeholder="Please select areas of access" api="grAreasApi"></div>
                                           </div>
                                       </td>
@@ -384,14 +387,14 @@
                                   </tr>
                               </table>
 
-                              <table class="table  table-striped table-hover" style="padding:0;margin:0;" ng-if="scopeElement.scopeAllGRElements">
+                              <table class="table  table-striped table-hover" style="padding:0;margin:0;" ng-if="binding.geneticResources">
                                 <tbody>
-                                <tr ng-repeat="element in scopeElement.scopeAllGRElements">
+                                <tr ng-repeat="element in binding.geneticResources">
                                       <td class="text-center" style="vertical-align:middle;width:30px;">
                                         <i class="fa fa-remove color-red" style="cursor:pointer" ng-click="deleteElement(element)"/>
                                       </td>
                                       <td style="vertical-align:middle">
-                                        <span ng-repeat="area in element.grTypes">
+                                        <span ng-repeat="area in element.types">
                                           {{area|term}}<span ng-if="!$last">,</span>
                                         </span>
                                       </td>
@@ -399,7 +402,7 @@
                                         <class="bold" style="margin: 0 10px;"> found in </span>
                                      </td>
                                      <td style="vertical-align:middle">
-                                        <span ng-repeat="area in element.grAreas">
+                                        <span ng-repeat="area in element.areas">
                                             {{area|term}} <span ng-if="!$last">,</span>
                                         </span>
                                       </td>
@@ -428,12 +431,10 @@
                                           </label>
                                           <div class="btn-group matrix-btn ng-scope" >
                                               <label class="btn">
-                                                  <input type="radio"  ng-model="scopeElement.scopeTK" name="rd_B8A150E054154AD3AD97856ABD485E90" ng-value="true" class="ng-valid ng-dirty ng-touched ng-valid-parse" value="false"
-                                                      aria-invalid="false" style=""> Yes
+                                                  <input type="radio"  ng-model="identifiers['B8A150E054154AD3AD97856ABD485E90']" name="rd_B8A150E054154AD3AD97856ABD485E90" ng-value="true" > Yes
                                               </label>
                                               <label class="btn">
-                                                  <input type="radio"  ng-model="scopeElement.scopeTK" name="rd_B8A150E054154AD3AD97856ABD485E90" ng-value="false" class="ng-valid ng-dirty ng-touched" value="true" aria-invalid="false"
-                                                      style=""> No
+                                                  <input type="radio"  ng-model="identifiers['B8A150E054154AD3AD97856ABD485E90']" name="rd_B8A150E054154AD3AD97856ABD485E90" ng-value="false" > No
                                               </label>
                                           </div>
                                       </td>
@@ -441,8 +442,8 @@
 
                                       </td>
                                       <td style="width:250px;text-align:right;vertical-align:middle">
-                                          <div ng-show="scopeElement.scopeTK" km-textbox-ml="" ng-model="scopeElement.sections['scopeTK']" locales="locales"
-                                              ng-required="scopeElement.scopeTK" placeholder="example: Article 14.2">
+                                          <div ng-show="identifiers['B8A150E054154AD3AD97856ABD485E90']" km-textbox-ml="" ng-model="sections['B8A150E054154AD3AD97856ABD485E90']" locales="locales"
+                                              ng-required="identifiers['B8A150E054154AD3AD97856ABD485E90']" placeholder="example: Article 14.2">
                                           </div>
                                       </td>
                                   </tr>
@@ -458,12 +459,10 @@
                                           </label>
                                           <div class="btn-group matrix-btn ng-scope" >
                                               <label class="btn">
-                                                  <input type="radio"  ng-model="scopeElement.scopeProvisions" name="rd_2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD" ng-value="true" class="ng-valid ng-dirty ng-touched ng-valid-parse" value="false"
-                                                      aria-invalid="false" style=""> Yes
+                                                  <input type="radio"  ng-model="identifiers['2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD']" name="rd_2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD" ng-value="true" value="false"> Yes
                                               </label>
                                               <label class="btn">
-                                                  <input type="radio"  ng-model="scopeElement.scopeProvisions" name="rd_2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD" ng-value="false" class="ng-valid ng-dirty ng-touched" value="true" aria-invalid="false"
-                                                      style=""> No
+                                                  <input type="radio"  ng-model="identifiers['2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD']" name="rd_2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD" ng-value="false" value="true"> No
                                               </label>
                                           </div>
                                       </td>
@@ -471,8 +470,8 @@
 
                                       </td>
                                       <td style="width:250px;text-align:right;vertical-align:middle">
-                                          <div ng-show="scopeElement.scopeProvisions" km-textbox-ml="" ng-model="scopeElement.sections['scopeProvisions']" locales="locales"
-                                              ng-required="scopeElement.scopeProvisions" placeholder="example: Article 14.2">
+                                          <div ng-show="identifiers['2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD']" km-textbox-ml="" ng-model="sections['2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD']" locales="locales"
+                                              ng-required="identifiers['2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD']" placeholder="example: Article 14.2">
                                           </div>
                                       </td>
                                   </tr>
@@ -487,12 +486,14 @@
                                           </label>
                                           <div class="btn-group matrix-btn ng-scope" >
                                               <label class="btn">
-                                                  <input type="radio"  ng-model="scopeElement.scopeOther" ng-change="initializeOther(scopeElement)"
-                                                  name="rd_5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A" ng-value="true" value="false"> Yes
+                                                  <input type="radio"  ng-model="identifiers['5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A']"
+                                                  ng-change="initializeOther({identifier:'5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A'})"
+                                                  name="rd_5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A" ng-value="true" > Yes
                                               </label>
                                               <label class="btn">
-                                                  <input type="radio"  ng-model="scopeElement.scopeOther" ng-change="deleteOther(scopeElement)"
-                                                  name="rd_5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A" ng-value="false"  value="true" > No
+                                                  <input type="radio"  ng-model="identifiers['5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A']"
+                                                  ng-change="deleteOther({identifier:'5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A'})"
+                                                  name="rd_5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A" ng-value="false"> No
                                               </label>
                                           </div>
                                       </td>
@@ -501,9 +502,9 @@
                                       <td style="width:250px;text-align:right;vertical-align:middle">
                                       </td>
                                   </tr>
-                                  <tr ng-if="scopeElement.scopeOther">
+                                  <tr ng-if="identifiers['5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A']">
                                     <td colspan="3">
-                                        <span onload="otherElements = scopeElement.scopeOtherElements" ng-include="'/app/views/forms/edit/edit-measure.directive/abs/inner/other'"></span>
+                                        <span onload="otherElements = otherTerms['5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A']" ng-include="'/app/views/forms/edit/edit-measure.directive/abs/inner/other'"></span>
                                     </td>
                                   </tr>
                               </tbody>
@@ -567,12 +568,12 @@
 
                 <tr ng-if="term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0 && identifiers[term.identifier]">
                   <td colspan="3">
-                      <span onload="otherElements = term.scopeOtherElements" ng-include="'/app/views/forms/edit/edit-measure.directive/abs/inner/other'"></span>
+                      <span onload="otherElements = otherTerms[term.identifier]" ng-include="'/app/views/forms/edit/edit-measure.directive/abs/inner/other'"></span>
                   </td>
                 </tr>
                 </table>
               </div>
-              <ul style="list-style:none;padding:0;margin:0;" id="{{term.identifier}}" >              
+              <ul style="list-style:none;padding:0;margin:0;" id="{{term.identifier}}" >
                 <li ng:repeat="term in term.narrowerTerms" ng-include="'/app/views/forms/edit/edit-measure.directive/abs/inner'"
                 ng-class="{'padding-left-120':applyPadding(term)}" >
               </ul>
@@ -580,9 +581,10 @@
 
             <script  type="text/ng-template"  id="/app/views/forms/edit/edit-measure.directive/abs/inner/other">
                 <table class="table table-hover" style="padding:0;margin:0;width:100%;">
+                {{otherElements}}
                   <tr ng-repeat="element in otherElements">
                         <td>
-                          <i class="btn btn-primary fa fa-remove" style="cursor:pointer" ng-if="$index>0" ng-click="deleteOtherElement(element, otherElements)"/>
+                          <i class="btn btn-primary fa fa-remove" style="cursor:pointer" ng-if="otherElements.length > 1" ng-click="deleteOtherElement(element, otherElements)"/>
                         </td>
                         <td>
                             <div style="max-width:200px" km-textbox-ml="" ng-model="element.name" locales="locales"

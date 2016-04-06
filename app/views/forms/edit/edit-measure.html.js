@@ -1043,6 +1043,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                 $scope.otherCustomValues = null;
                 $scope.terms = null;
                 $scope.rootTerms = [];
+                $scope.otherTerms = [];
 
                 $scope.$watch("terms", $scope.onTerms);
                 $scope.$watch("binding", $scope.load);
@@ -1203,19 +1204,38 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                                 oTerm.customValue = $scope.otherCustomValues[term.identifier];
                             }
 
-
                             if ($scope.sections[term.identifier])
                                 oTerm.section = $scope.sections[term.identifier];
 
                             oNewBinding.push(oTerm);
+
+                            if($scope.otherTerms && $scope.otherTerms[term.identifier]){
+                                console.log($scope.otherTerms[term.identifier]);
+                                _.each($scope.otherTerms[term.identifier], function(otherTerm){
+                                    if(otherTerm.name!=''){
+                                        var lOtherTerm = {
+                                            identifier  : '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED',
+                                            customValue : otherTerm.name,
+                                            section     : otherTerm.section,
+                                            parent      : term.identifier
+                                        };
+
+                                        oNewBinding.push(lOtherTerm);
+                                    }
+                                });
+
+                            }
                         }
                     });
 
                     if ($.isEmptyObject(oNewBinding))
                         oNewBinding = undefined;
 
-                    if (!angular.equals(oNewBinding, $scope.binding))
-                        $scope.binding = oNewBinding;
+                    if(!$scope.binding)
+                        $scope.binding = {};
+
+                    if (!angular.equals(oNewBinding, $scope.binding.relevantElements))
+                        $scope.binding.relevantElements = oNewBinding;
                 }
 
                 function updateProperties(terms, level) {
@@ -1382,24 +1402,24 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                 };
 
                 $scope.addGRRecord = function(geneticResource, grTypesApi, grAreasApi){
-                    if(!geneticResource || (!geneticResource.grTypes && !geneticResource.grAreas)){
+                    if(!geneticResource || (!geneticResource.types && !geneticResource.areas)){
                         alert('please select a GR Type or GR Area');
                         return;
                     }
-                    if(!$scope.scopeElement.scopeAllGRElements)
-                        $scope.scopeElement.scopeAllGRElements = [];
-                    $scope.scopeElement.scopeAllGRElements.push({
-                        grTypes : geneticResource.grTypes,
-                        grAreas : geneticResource.grAreas
+                    if(!$scope.binding.geneticResources)
+                        $scope.binding.geneticResources = [];
+                    $scope.binding.geneticResources.push({
+                        types : geneticResource.types,
+                        areas : geneticResource.areas
                     });
-                    geneticResource.grTypes = undefined;
-                    geneticResource.grAreas = undefined;
+                    geneticResource.types = undefined;
+                    geneticResource.areas = undefined;
                     grTypesApi.unSelectAll();
                     grAreasApi.unSelectAll();
                 };
 
                 $scope.deleteElement = function(element){
-                    $scope.scopeElement.scopeAllGRElements.splice($scope.scopeElement.scopeAllGRElements.indexOf(element), 1);
+                    $scope.binding.geneticResources.splice($scope.binding.geneticResources.indexOf(element), 1);
                 }
 
                 $scope.addOther = function(term){
@@ -1413,21 +1433,28 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
 
                 $scope.deleteOtherElement = function(element, otherElements){
                     otherElements.splice(otherElements.indexOf(element), 1);
+                                        $scope.save();
                 };
 
                 $scope.appendEmptyOther = function(otherElements){
                     var lastItem = otherElements[otherElements.length-1];
                     if(lastItem.name != "" )//&& lastItem.section != "")
                         otherElements.push({name:'', section:''});
+
+                    $scope.save();
                 }
 
                 $scope.initializeOther = function(otherElement){
-                    otherElement.scopeOtherElements = [];
-                    otherElement.scopeOtherElements.push({name:'', section:''});
+                    $scope.otherTerms[otherElement.identifier] = [];
+                    //.scopeOtherElements = [];
+                    $scope.otherTerms[otherElement.identifier].push({name:'', section:''});
+                    // otherElement.scopeOtherElements.push({name:'', section:''});
+                                        $scope.save();
                 }
 
                 $scope.deleteOther = function(otherElement){
-                    otherElement.scopeOtherElements = [];
+                    $scope.otherTerms[otherElement.identifier] = [];
+                                        $scope.save();
                 }
 
                 $scope.applyPadding = function(term){
