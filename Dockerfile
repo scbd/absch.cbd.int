@@ -4,7 +4,7 @@ WORKDIR /usr/src/app
 
 COPY package.json bower.json .bowerrc .npmrc ./
 
-RUN npm install
+RUN npm install -q
 
 COPY . ./
 
