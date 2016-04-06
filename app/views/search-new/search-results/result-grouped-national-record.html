@@ -1,5 +1,5 @@
 <div id="result-grouped-national-record">
-    <div class="recordDefault nationalRecords card card-1" ng-show="!showDoc" ng-click="showDoc=!showDoc">
+    <div class="recordDefault nationalRecords card card-1" style="margin-bottom:10px;" ng-show="!showDoc" ng-click="showDoc=!showDoc">
 
         <div class="type color-blue">{{doc.rec_type ? doc.rec_type : (doc.schema_s | schemaShortName) }}</div>
         <div class="title">{{doc.rec_title}}</div>
@@ -32,7 +32,7 @@
         <!--{{doc.schemaSort_i}} | {{doc.sort1_s}} | {{doc.sort2_s}} | {{doc.sort3_s}}-->
     </div>
 
-    <a ng-show="showDoc" style="z-index:99999;width:100%;" ng-click="showDoc=false">
+    <a ng-show="showDoc" style="z-index:99999999;width:100%;" ng-click="showDoc=false">
         <span class="pull-right bold" aria-hidden="true" style="color:#EEE;font-size:18px;padding-right:10px;position:relative;top:3px;cursor:pointer;">&times;</span>
     </a>
     <record-viewer ng-if="showDoc" doc-id='doc.identifier_s' doc-schema='doc.schema_s' class="card card-3"></record-viewer>

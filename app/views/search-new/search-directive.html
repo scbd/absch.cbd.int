@@ -73,7 +73,7 @@
                             <national-records-country group='country'></national-records-country>
                         </div>
                         <div ng-if="nationalLoading">
-                            <i class="fa fa-spin fa-spinner fa-5x"  style="margin-left:50%" /> loading..
+                            <i class="fa fa-spin fa-spinner"  style="margin-left:50%" /> loading..
                         </div>
                         <h4 class="bg-white" ng-if="rawDocs.data.length === 0">no records found</h4>
                     </div>
@@ -85,7 +85,7 @@
                             <result-default doc=rec type="referenceRecords"></result-default>
                         </div>
                         <div ng-if="referenceLoading">
-                            <i class="fa fa-spin fa-spinner fa-5x"  style="margin-left:50%" /> loading..
+                            <i class="fa fa-spin fa-spinner"  style="margin-left:50%" /> loading..
                         </div>
                         <h4 class="bg-white" ng-if="refDocs.data.response.numFound === 0">no records found</h4>
                     </div>
@@ -97,7 +97,7 @@
                             <result-default doc=rec type="scbdRecords"></result-default>
                         </div>
                         <div ng-if="scbdLoading">
-                            <i class="fa fa-spin fa-spinner fa-5x"  style="margin-left:50%" /> loading..
+                            <i class="fa fa-spin fa-spinner "  style="margin-left:50%" /> loading..
                         </div>
                         <h4 class="bg-white" ng-if="scbdDocs.data.response.numFound === 0">no records found</h4>
                     </div>
