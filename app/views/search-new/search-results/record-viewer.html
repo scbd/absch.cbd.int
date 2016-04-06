@@ -36,6 +36,12 @@
         height:auto;
         border-radius: 0;
     }
+    
+    .panel{
+        margin:0!important;
+        padding:0!important
+    }
+  
 
     #Record .panel-footer, #Record .panel, #Record .panel-header{
         border-radius: 0!important;
@@ -66,5 +72,5 @@
 </style>
     <div block-region activate="loading"></div>
     <internal-record-details ng-if="showDetails" doc-info="internalDocumentInfo"></internal-record-details>
-    <div id="schemaView" ></div>
+    <div id="schemaView" style="padding:0;margin:0;"></div>
 </div>

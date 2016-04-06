@@ -1,11 +1,11 @@
 define(['app', 'underscore', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document-selection-directive.html.js',
         '../view/view-abs-national-report.directive.js',
-        '/app/services/search-service.js'
+        '/app/services/search-service.js','/app/services/app-config-service.js'
 ], function (app, _) {
 
   app.controller("editAbsNationalReport",
-  ["$scope", "$http", "$filter", "$controller", "$location", "$q", "realm", "searchService",
-  function ($scope, $http, $filter, $controller,$location, $q, realm, searchService) {
+  ["$scope", "$http", "$filter", "$controller", "$location", "$q", "realm", "searchService","appConfigService",
+  function ($scope, $http, $filter, $controller,$location, $q, realm, searchService, appConfigService) {
 
     $controller('editController', {$scope: $scope});
     $scope.showHelp = { hasHelp : true };
@@ -605,22 +605,18 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js' , '/app/views/forms
     //
     //==================================
     function getAbsDocuments (government) {
-
-        var q  = '(realm_ss:' + realm.value.toLowerCase() + ' ) AND NOT version_s:* AND government_s:'+ government.identifier;
-
+        var natSchemas = appConfigService.nationalSchemas;
+        var q  = '(realm_ss:' + realm.value.toLowerCase() + ' ) AND NOT version_s:* AND government_s:'+ government.identifier + " AND schema_s:(" + natSchemas.join(' ') + ")";
+        console.log(q);
         var queryParameters = {
-            'q'    : q,
-            'sort' : 'createdDate_dt desc, title_t asc',
-            'fl'   : 'id,identifier_s,title_t,createdDate_dt,government_s,amendmentIntent_i,resourceLinksLanguage_ss, schema_s',
-            'wt'   : 'json',
-            'start': 0,
-            'rows' : 100,
-            // 'cb'   : new Date().getTime()
+            'query'    : q,
+             currentPage : 0,
+            itemsPerPage: 1000
         };
 
         var deferred = $q.defer();
-
-        $http.get('/api/v2013/index/select', { params: queryParameters }).success(function (data) {
+        
+        searchService.list(queryParameters, null).success(function (data) {
              deferred.resolve(data.response.docs);
         }).error(function (error) {
             console.log('onerror'); console.log(error);
