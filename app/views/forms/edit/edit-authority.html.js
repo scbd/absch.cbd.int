@@ -97,17 +97,11 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/direct
             return Enumerable.from($scope.validationReport.errors).any(function(error) {
                 return error.property == 'absResponsibleForAllNot';
             });
-            //
-
+            
             return true;
         };
         
-      
-        
-      
 
-       
-    
         //   $scope.ac_jurisdictions = function() {
         //   };
 
