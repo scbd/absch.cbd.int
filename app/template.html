@@ -40,14 +40,9 @@
     <iframe   id="authenticationFrame" style="display:none"></iframe>
     <script>
 
-        var url = window.location.origin;
-        var dev = /^https:\/\/absch.cbddev.xyz/i.test(url)
-              ||/^http:\/\/localhost[:\/]/i.test(url)
+        var parentDomain = /(?:\:\/\/[^\.]+\.)([^\/]*)/i.exec(window.location.origin)[1];
 
-        if(dev)
-            document.getElementById('authenticationFrame').src="https://accounts.cbddev.xyz/app/authorize.html";
-        else
-            document.getElementById('authenticationFrame').src="https://accounts.cbd.int/app/authorize.html";
+        document.getElementById('authenticationFrame').src = 'https://accounts.'+parentDomain+'/app/authorize.html';
 
     </script>
 
