@@ -1,4 +1,4 @@
-define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/js/common.js',
+define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/js/common.js', '/app/views/forms/edit/document-selector.html.js',
     '../view/view-measure.directive.js'
 ], function(app, _, angular) {
 

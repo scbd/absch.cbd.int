@@ -1436,3 +1436,10 @@ footer .logo {
 
         #SubmitPage .label{ font-size:11px!important;color:white;}
         #SubmitPage .label:hover { background-color: #333!important;color:white!important;}
+.help-block{
+	font-size:0.9em;
+	color:#999;
+	padding: 0 0 5px 0;
+	margin: 0;
+    font-weight:500;
+}

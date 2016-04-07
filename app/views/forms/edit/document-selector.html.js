@@ -21,11 +21,14 @@ function ($http, Thesaurus, $filter, _, guid, $timeout, $q, storage, commonjs, s
             government: "=government",
             question  : "@question",
             schema    : "@schema",
+            type     : "@type",
 		},
 		link : function($scope) {
             
             $scope.rawDocuments = [];
 			$scope.areVisible = false;
+            
+            if(!$scope.type) $scope.type = "checkbox";
 
             //==================================
             //
@@ -38,6 +41,7 @@ function ($http, Thesaurus, $filter, _, guid, $timeout, $q, storage, commonjs, s
             //
             //==================================
 			$scope.saveDocuments = function(){
+                
                 _.forEach($scope.rawDocuments.docs, function (doc) {
                     if(doc.__checked){
                       $scope.model.push({identifier: doc.identifier_s});
@@ -57,6 +61,22 @@ function ($http, Thesaurus, $filter, _, guid, $timeout, $q, storage, commonjs, s
                     return item;
                 }
 			};
+            
+            //==================================
+            //
+            //==================================
+			$scope.selectDoc = function(document){
+                $scope.model = [];
+                
+                 _.forEach($scope.rawDocuments.docs, function (doc) {
+                    doc.__checked = false;
+                    
+                    if(doc.identifier_s === document.identifier_s ){
+                        doc.__checked = true;
+                    }
+                });
+			};
+            
 
             //==================================
             //
@@ -79,7 +99,7 @@ function ($http, Thesaurus, $filter, _, guid, $timeout, $q, storage, commonjs, s
             function getDocs () {
                 var searchOperation;
                 
-                var schema = "*:*";
+                var schema = "*";
                 if ($scope.schema)
                     schema = $scope.schema;
                 

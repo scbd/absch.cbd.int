@@ -48,7 +48,12 @@
                 <div class="km-control-group">
                     <div class="km-control-group" name="amendedMeasures" caption="List of amended measures">
                         <div class="help-block">Please indicate if this measure amends a previously registered one by providing a cross-reference link to the amended measure.</div>
-                        <div km-select multiple name="amendedMeasures" ng-model="document.amendedMeasures"items="options.measures()" placeholder="Please select ..."></div>
+                         <div document-selector ng-model="document.amendedMeasures"
+                                             question="amendedMeasures"
+                                             government="document.government"
+                                             schema="measure"></div>
+                        
+                        <!--<div km-select multiple name="amendedMeasures" ng-model="document.amendedMeasures"items="options.measures()" placeholder="Please select ..."></div>-->
                     </div>
                 </div>
 
@@ -170,11 +175,11 @@
 
             <div class="row">
               <div class="col-sm-12">
-                <div class="km-control-group" name="isModelContractualClause" caption="Does the measure contain model contractual clause?">
+                <div class="km-control-group" name="isModelContractualClause" caption="Does the measure contain a model contractual clause?">
                   <div km-yes-no required ng-model="document.isModelContractualClause" locales="document.header.languages"></div>
                   <div ng-show="document.isModelContractualClause">
-                    <div class="km-control-group" name="isModelContractualClauseDesc" caption="Please provide further information">
-                        <div km-textbox-ml  ng-model="document.isModelContractualClauseDescription" locales="document.header.languages"></div>
+                    <div class="km-control-group" style="margin:10px;" name="isModelContractualClauseDesc" caption="Please provide further information">
+                        <div km-textbox-ml ng-model="document.isModelContractualClauseDescription" locales="document.header.languages"></div>
                     </div>
                   </div>
                 </div>
@@ -206,7 +211,14 @@
               <div class="col-sm-12">
                 <div class="km-control-group" name="linkedMeasures" caption="Relationship with other measures">
 
-                <div km-select multiple name="linkedMeasures" ng-model="document.linkedMeasures"items="options.measures()" placeholder="Please select ..."></div>
+                <!--<div km-select multiple name="linkedMeasures" ng-model="document.linkedMeasures"items="options.measures()" placeholder="Please select ..."></div>-->
+                
+                <div document-selector ng-model="document.linkedMeasures"
+                                             question="linkedMeasures"
+                                             government="document.government"
+                                             schema="measure"></div>
+                
+                
                 </div>
               </div>
             </div>
@@ -242,7 +254,13 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="km-control-group" required name="authorities" caption="Contact Institution">
-                     <field-embed-contact multiple ng-model="document.authorities" locales="document.header.languages" caption="Add an institution »"></field-embed-contact>
+                     
+                      <div document-selector ng-model="document.authorities"
+                                             question="authorities"
+                                             government="document.government"
+                                             schema="(authority contact)"></div>
+                     
+                     
                 </div>
               </div>
             </div>
