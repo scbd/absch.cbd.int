@@ -1,0 +1,77 @@
+<div>
+    <!-- existing documents display -->
+    <div class="row">
+        <div class="col-xs-12" >
+           
+            <span ng-show="model.length==0 || !model"> <i class="color-blue"> No records have been linked. </i> </span>
+            <span ng-show="model.length==1"><i class="color-blue">There is <b>{{model.length}}</b> linked record.</i></span>
+            <span ng-show="model.length>1"><i class="color-blue">There are <b>{{model.length}}</b> linked records.</i></span>
+            
+            <button class="btn btn-default btn-sm" ng-click="openAddDialog();" ng-disabled="disabled" ><i class="fa fa-plus"></i> {{caption||'Add record(s)'}}</button>
+            
+            <button  type="button" ng-click="areVisible = true" ng-show="!areVisible && model.length>0" name="showRecords" class="btn btn-primary btn-sm">
+                Display records
+             </button>
+            <button  type="button" name="hideRecords" ng-click="areVisible=false" ng-show="areVisible && model.length>0" class="btn btn-primary btn-sm">
+                Hide records
+                </button>
+        </div>
+    </div>
+
+    <div class="row" ng-show="areVisible">
+        <div class="col-xs-12" >
+            <br />
+            <table class="table table-hover " id="search-new"  style="padding-bottom:3px;width:100%;">
+				<tr ng-repeat="doc in rawDocuments.docs | filter:isChecked">
+                    <td style="margin-bottom:10px;width:30px;">
+                     
+                            <a ng-click="removeDocument(doc)" class="color-red">
+                                <i class="fa fa-times"></i></a>
+                       
+                    </td>
+                    <td style="width:100%;margin-bottom:10px;" >
+                        <result-default doc='doc' type="nationalRecords"></result-default>
+					</td>
+				</tr>
+			</table>
+        </div>
+    </div>
+    <!-- Modal -->
+
+    <div class="modal fade rounded" id="{{question}}" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-grey">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h3>Please select from the list of published record(s) below:</h3>
+                    
+                </div>
+                <div class="modal-body">
+                    <div style="max-height:400px;overflow-y:auto;margin:0;padding:0;" id="search-new">
+                    	<div class="row" style="margin:0 0 10px 0;padding:0;" ng-show="!isLoading" ng-repeat="doc in rawDocuments.docs">
+                       
+                                <div class="col-xs-1 text-right">
+                                    <input type="checkbox" ng-model="doc.__checked"  style="width: 30px; height: 30px;"/></div>
+                                <div class="col-xs-11">
+                                    <result-default doc='doc' type="nationalRecords"></result-default>
+                                </div>
+                           
+                        </div>
+                        <div  ng-show="isLoading"> loading...</div>
+                        <div  ng-if="rawDocuments.numFound===0"> no records found.</div>
+                    </div> 
+                        
+                </div>
+
+                <div class="modal-footer bg-grey">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <a type="button" class="btn btn-primary bold" style="color:white;" ng-click="saveDocuments()">Save</a>
+                            <a type="button" class="btn btn-default bold" data-dismiss="modal">Close</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

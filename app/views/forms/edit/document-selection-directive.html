@@ -5,7 +5,7 @@
             <span ng-show="model.length==0 || !model"> <i class="color-blue"> No records have been linked. </i> </span>
             <span ng-show="model.length==1"><i class="color-blue">There is <b>{{model.length}}</b> linked record.</i></span>
             <span ng-show="model.length>1"><i class="color-blue">There are <b>{{model.length}}</b> linked records.</i></span>
-            <button class="btn btn-default btn-sm" ng-click="openAddDialog();" ng-disabled="disabled" ><i class="fa fa-plus"></i> {{caption||'Add records(s)'}}</button>
+            <button class="btn btn-default btn-sm" ng-click="openAddDialog();" ng-disabled="disabled" ><i class="fa fa-plus"></i> {{caption||'Add record(s)'}}</button>
             <button  type="button" ng-click="showRecords(); areVisible = true" ng-show="!areVisible && model.length>0" name="showRecords" class="btn btn-primary btn-sm">Display records</button>
             <button  type="button" name="hideRecords" ng-click="areVisible=false" ng-show="areVisible && model.length>0" class="btn btn-primary btn-sm">Hide records</button>
         </div>

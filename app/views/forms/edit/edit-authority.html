@@ -126,7 +126,12 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" name="contacts" caption="Additional contacts">
-                                        <field-embed-contact multiple ng-model="document.contacts" locales="document.header.languages" name="contacts" caption="Add an additional contacts »"></field-embed-contact>
+                                        
+                                          <div document-selector ng-model="document.contacts"
+                                                               question="contacts"
+                                                               government="document.government"
+                                                               schema="contact"></div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -137,11 +142,12 @@
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group">
-                                            <div class="km-control-group" name="absPolicyBasisForCompetencyRef" caption="Provide a reference to the legal, administrative or policy measure ABSCH record:">
-                                                <div km-select multiple name="absPolicyBasisForCompetency" ng-model="document.absPolicyBasisForCompetencyRef" items="options.measures()" placeholder="Please select ..."></div>
-                                            </div>
-                                        </div>
+                                        <div class="km-control-group" name="absPolicyBasisForCompetencyRef" caption="Provide a link to any relevant legal, administrative or policy measures">
+                                        <div document-selector ng-model="document.absPolicyBasisForCompetencyRef"
+                                                               question="absPolicyBasisForCompetencyRef"
+                                                               government="document.government"
+                                                               schema="measure"></div>
+                                       </div> 
                                     </div>
                                 </div>
 

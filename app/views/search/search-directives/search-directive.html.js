@@ -37,7 +37,7 @@ define(['app', '/app/js/common.js', '/app/services/thesaurus-service.js',
                                 sort: searchQuery.orderByFields||'',
                                 fields      : searchQuery.fields,
                                 currentPage : searchQuery.currentPage,
-                                itemsPerPage: searchQuery.itemsPerPage
+                                rowsPerPage: searchQuery.itemsPerPage
                             };
                             searchOperation = searchService.list(listQuery, queryCanceler);
                         }
@@ -51,7 +51,7 @@ define(['app', '/app/js/common.js', '/app/services/thesaurus-service.js',
                                 groupField  : 'government_s',
                                 groupSort   : 'government_EN_t asc',
                                 currentPage : searchQuery.currentPage,
-                                itemsPerPage: searchQuery.itemsPerPage
+                                rowsPerPage: searchQuery.itemsPerPage
                             };
                             searchOperation = searchService.group(groupQuery, queryCanceler);
                         }

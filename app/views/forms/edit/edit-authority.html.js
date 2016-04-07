@@ -1,18 +1,17 @@
-define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/directives/help-directive.html.js', '/app/js/common.js',
+define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/directives/help-directive.html.js', '/app/js/common.js', 
+ '/app/views/forms/edit/document-selector.html.js',
         '../view/view-authority.directive.js'
         ], function(app, _) {
 
-    app.controller("editAuthority", ["$scope", "$http", "$filter", "Thesaurus", "$q", "$controller", "Enumerable", "$location", "IStorage", "commonjs",
-     function($scope, $http, $filter, Thesaurus, $q, $controller, Enumerable, $location, storage, commonjs) {
+    app.controller("editAuthority", ["$scope", "$http", "$filter", "Thesaurus", "$q", "$controller", "Enumerable", "$location", "IStorage", "commonjs",'searchService',
+     function($scope, $http, $filter, Thesaurus, $q, $controller, Enumerable, $location, storage, commonjs,searchService) {
         $controller('editController', {
             $scope: $scope
         });
-
+        
+        $scope.getMeasures=[];
         $scope.path = $location.path();
         //$scope.documentUID = "NEW";
-
-
-
 
         _.extend($scope.options, {
             organizationTypes: function() {
@@ -85,9 +84,9 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/direct
                     return Thesaurus.buildTree(o.data);
                 });
             },
-            measures: function() {
-                return commonjs.loadSchemaDocumentsForDropdown('measure');
-            },
+            // measures: function() {
+            //     return commonjs.loadSchemaDocumentsForDropdown('measure');
+            // },
         });
         $scope.showResponsibleforAllMsg = function() {
 
@@ -102,7 +101,13 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/direct
 
             return true;
         };
+        
+      
+        
+      
 
+       
+    
         //   $scope.ac_jurisdictions = function() {
         //   };
 
@@ -117,7 +122,7 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/direct
                 return undefined;
 
             //document = angular.fromJson(angular.toJson(document));
-
+           
             if (!document.consentGranted) {
                 document.consentInformation = undefined;
                 document.consentDocuments = undefined;

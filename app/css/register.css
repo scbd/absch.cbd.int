@@ -371,7 +371,6 @@ ul.km-value {
 address.km-value,
 div.km-value,
 ul.km-value > li {
-background-color: #fff;
 border: 1px solid #c0c0c0;
 border-radius: 3px;
 padding: 5px 8px 5px 8px;
