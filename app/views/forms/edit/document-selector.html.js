@@ -22,6 +22,7 @@ function ($http, Thesaurus, $filter, _, guid, $timeout, $q, storage, commonjs, s
             question  : "@question",
             schema    : "@schema",
             type     : "@type",
+            filter : "@filter"
 		},
 		link : function($scope) {
             
@@ -29,6 +30,8 @@ function ($http, Thesaurus, $filter, _, guid, $timeout, $q, storage, commonjs, s
 			$scope.areVisible = false;
             
             if(!$scope.type) $scope.type = "checkbox";
+            
+      
 
             //==================================
             //
@@ -103,8 +106,12 @@ function ($http, Thesaurus, $filter, _, guid, $timeout, $q, storage, commonjs, s
                 if ($scope.schema)
                     schema = $scope.schema;
                 
-                var q  = "government_s:" + $scope.government.identifier + " AND schema_s:"+ schema;
+                var q  = "schema_s:"+ schema;
+                
+                if($scope.government)
+                    q  = q + " AND government_s:" + $scope.government.identifier;
                
+                  
                 var queryParameters = {
                     'query'    : q,
                     'currentPage' : 0,

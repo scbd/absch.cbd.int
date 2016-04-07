@@ -54,7 +54,15 @@
                                 <div class="col-xs-12">
                                     <div class="control-group">
                                         <div class="km-control-group" name="checkpoint" required caption="Checkpoint/s that collected or received the information">
-                                            <div km-select multiple name="checkpointSelected" ng-model="document.checkpointSelected" items="options.checkpoints()" placeholder="Please select ..." required></div>
+                                            
+                                             <div document-selector ng-model="document.checkpointSelected"
+                                                               question="checkpointSelected"
+                                                               government="document.government"
+                                                               schema="contact"
+                                                              ></div>
+                                            
+                                            
+                                            <!--<div km-select multiple name="checkpointSelected" ng-model="document.checkpointSelected" items="options.checkpoints()" placeholder="Please select ..." required></div>-->
                                         </div>
                                     </div>
                                 </div>
@@ -73,7 +81,16 @@
                                         </div>
                                         <div class="panel-body panel-body-confidential" ng-class="{'disable':document.permitNotAvailable}">
                                             <div class="km-control-group" style="margin-bottom:20px;" name="permit" required caption="Links to internationally recognized certificates of compliance (IRCC) that relate to this communiqué">
-                                                <div existing-permit ng-model="document.permit" ng-disabled="isPermitNotAvailable()">
+                                                
+                                                <div document-selector ng-model="document.permit"
+                                                                        question="permit"
+                                                                        schema="absPermit"
+                                                                        disabled="isPermitNotAvailable()"
+                                                                        filter="true"
+                                                                        ></div>
+                                                              
+                                                
+                                                <!--<div existing-permit ng-model="document.permit" ng-disabled="isPermitNotAvailable()">-->
                                                 </div>
                                             </div>
                                         </div>
@@ -181,9 +198,18 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-12">{{document.responsibleAuthorities}}
+                                    <div class="col-xs-12">
                                         <div class="km-control-group" name="responsibleAuthorities" caption="Person or entity who granted prior informed consent (PIC)">
-                                            <field-embed-contact ng-model="document.responsibleAuthorities" locales="document.header.languages" caption="{{document.responsibleAuthorities ? 'Replace organisation or a contact »' : 'Add an organisation or a contact »'}}"></field-embed-contact>
+
+                                             <div document-selector ng-model="document.responsibleAuthorities"
+                                                                        question="responsibleAuthorities"
+                                                                        schema="contact"
+                                                                        government="document.government"
+                                                                        filter="true"
+                                                                        ></div>
+                                                                        
+                                                                        
+                                            <!--<field-embed-contact ng-model="document.responsibleAuthorities" locales="document.header.languages" caption="{{document.responsibleAuthorities ? 'Replace organisation or a contact »' : 'Add an organisation or a contact »'}}"></field-embed-contact>-->
                                         </div>
                                     </div>
                                 </div>
@@ -191,8 +217,13 @@
                                     <div class="col-xs-12">
                                         <div class="km-control-group" name="personeToWhomGranted" caption="Person or entity to whom prior informed consent (PIC) was granted">
                                             <span class="help-block">Please provide the contact details of the person or entity to whom prior informed consent was granted.</span>
-
-                                            <field-embed-contact ng-model="document.personeToWhomGranted" locales="document.header.languages" caption="{{document.personeToWhomGranted ? 'Replace organisation or a contact »' : 'Add an organisation or a contact »'}}"></field-embed-contact>
+                                            <div document-selector ng-model="document.personeToWhomGranted"
+                                                                        question="personeToWhomGranted"
+                                                                        schema="contact"
+                                                                        government="document.government"
+                                                                        filter="true"
+                                                                        ></div>
+                                            <!--<field-embed-contact ng-model="document.personeToWhomGranted" locales="document.header.languages" caption="{{document.personeToWhomGranted ? 'Replace organisation or a contact »' : 'Add an organisation or a contact »'}}"></field-embed-contact>-->
 
                                         </div>
                                     </div>
@@ -220,7 +251,15 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" required name="geneticRessourceUsers" caption=" Person or entity making information available to the checkpoint on the utilization of the genetic resource ">
-                                        <field-embed-contact multiple ng-model="document.geneticRessourceUsers" name="geneticRessourceUsers" locales="document.header.languages" caption="Add an organisation or a contact »"></field-embed-contact>
+                                        <div document-selector ng-model="document.geneticRessourceUsers"
+                                                                        question="geneticRessourceUsers"
+                                                                        schema="contact"
+                                                                        government="document.government"
+                                                                        filter="true"
+                                                                        ></div>
+                                                                        
+                                        
+                                        <!--<field-embed-contact multiple ng-model="document.geneticRessourceUsers" name="geneticRessourceUsers" locales="document.header.languages" caption="Add an organisation or a contact »"></field-embed-contact>-->
 
                                     </div>
                                 </div>
@@ -250,7 +289,7 @@
                                 </div>
                             </div>
                         </section>
-
+                    </div>
                         <section>
 
                             <legend>Additional Information</legend>
@@ -283,7 +322,7 @@
                                 </div>
                             </div>
                         </section>
-                    </div>
+                    
                 </form>
 
                 <div ng-show="tab=='review'" km-tab="review">

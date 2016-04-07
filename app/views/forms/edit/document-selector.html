@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    <div class="row" ng-show="areVisible">
+    <div class="row" ng-show="areVisible && !disabled">
         <div class="col-xs-12" >
             <br />
             <table class="table" id="search-new"  style="padding-bottom:3px;width:100%;">
@@ -41,10 +41,13 @@
                 <div class="modal-header bg-grey">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     <h3>Please select from the list of published record(s) below:</h3>
+                    <div ng-show="filter">
+                         <input type="textbox" ng-model="keyword" placeholder="fitler records by keywords or unique identifier"  class="form-control" >
+                    </div>
                 </div>
                 <div class="modal-body">
                     <div style="max-height:400px;overflow-y:auto;margin:0;padding:0;" id="search-new">
-                    	<div class="row" style="margin:0 0 10px 0;padding:0;" ng-show="!isLoading" ng-repeat="doc in rawDocuments.docs">
+                    	<div class="row" style="margin:0 0 10px 0;padding:0;" ng-show="!isLoading" ng-repeat="doc in rawDocuments.docs | filter:keyword">
                                 <div class="col-xs-1 text-right">
                                     <input ng-show="type==='checkbox'" type="checkbox"  ng-model="doc.__checked"  style="width: 30px; height: 30px;"/>
                                     <input ng-show="type==='radio'" type="radio"  name="{{question}}_selected" ng-click="selectDoc(doc)"  style="width: 30px; height: 30px;"/>
