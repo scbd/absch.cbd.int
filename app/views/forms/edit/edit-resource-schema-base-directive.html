@@ -58,8 +58,15 @@
 						<div class="row" ng-if="document.organizationsRef">
 							<div class="col-xs-12">
 								<div class="km-control-group" name="organizations" caption="Authoring organisation(s) ">
-									<field-embed-contact multiple ng-model="document.organizationsRef" organization-only locales="document.header.languages"
-									caption="Add organizations »">
+									
+                                    <div document-selector ng-model="document.organizationsRef"
+                                                                        question="organizationsRef"
+                                                                        schema="contact"
+                                                                        government="document.government"
+                                                                        filter="true"
+                                                                        ></div>
+                                    
+                               
 									</field-embed-contact>
 								</div>
 							</div>

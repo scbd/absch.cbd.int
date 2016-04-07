@@ -104,8 +104,8 @@
 												<div km-date name="endDate" ng-model="document.endDate" ng-change="clearDuration()"></div>
 											</div>
 										</div>
-										<div class="col-md-1">
-											<div class="km-control-group" name="enddate" caption="or"></div>
+										<div class="col-md-1 text-center">
+											<div class="km-control-group bold" name="enddate" style="margin-top:30px;" > OR </div>
 										</div>
 										<div class="col-md-5">
 											<div class="km-control-group" name="duration" caption="Duration">
@@ -119,13 +119,21 @@
 
 						<div class="row">
 							<div class="col-md-12">
-								<div class="km-control-group" required name="organizations" caption="Agency(ies) or organisation(s) implementing and/or executing the initiative"></div>
+								<div class="km-control-group" required name="organizations" caption="Agency(ies) or organisation(s) implementing and/or executing the initiative">
 
 								<div class="checkbox"><label><input type="checkbox" ng-model="document.isImplementedByAgencies">Implementing agency(ies) or organization(s)</label></div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="km-control-group" ng-show="document.isImplementedByAgencies" name="implementingAgencies" caption="Please select the implementing agency(ies) or organization(s)">
-                                            <field-embed-contact multiple ng-model="document.implementingAgencies" locales="document.header.languages" caption="{{'Add an organization »'}}"></field-embed-contact>
+                                            
+                                            <div document-selector ng-model="document.implementingAgencies"
+                                                                        question="implementingAgencies"
+                                                                        schema="contact"
+                                                                        government="document.government"
+                                                                        filter="true"
+                                                                        ></div>
+                                            
+                                            <!--<field-embed-contact multiple ng-model="document.implementingAgencies" locales="document.header.languages" caption="{{'Add an organization »'}}"></field-embed-contact>-->
                                         </div>
                                     </div>
                                 </div>
@@ -134,7 +142,15 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="km-control-group" ng-show="document.isExecutededByAgencies" name="executingAgencies" caption="Please select the executing agency(ies) or organization(s)">
-                                            <field-embed-contact multiple ng-model="document.executingAgencies" locales="document.header.languages" caption="{{'Add an organization »'}}"></field-embed-contact>
+                                            
+                                             <div document-selector ng-model="document.executingAgencies"
+                                                                        question="executingAgencies"
+                                                                        schema="contact"
+                                                                        government="document.government"
+                                                                        filter="true"
+                                                                        ></div>
+                                            
+                                            <!--<field-embed-contact multiple ng-model="document.executingAgencies" locales="document.header.languages" caption="{{'Add an organization »'}}"></field-embed-contact>-->
                                         </div>
                                     </div>
                                 </div>
@@ -143,11 +159,19 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="km-control-group" ng-show="document.isCollaboratededByPartners" name="collaboratingPartners" caption="Please select the collaborating partner(s)">
-                                            <field-embed-contact multiple ng-model="document.collaboratingPartners" locales="document.header.languages" caption="{{'Add an organization »'}}"></field-embed-contact>
+                                            
+                                             <div document-selector ng-model="document.collaboratingPartners"
+                                                                        question="collaboratingPartners"
+                                                                        schema="contact"
+                                                                        government="document.government"
+                                                                        filter="true"
+                                                                        ></div>
+                                                                        
+                                            <!--<field-embed-contact multiple ng-model="document.collaboratingPartners" locales="document.header.languages" caption="{{'Add an organization »'}}"></field-embed-contact>-->
                                         </div>
                                     </div>
                                 </div>
-
+                                </div>
 							</div>
 						</div>
 
@@ -155,7 +179,15 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="km-control-group" name="contacts" caption="Contact person(s)">
-                                    <field-embed-contact multiple ng-model="document.contacts" locales="document.header.languages" caption="{{'Add a contact »'}}"></field-embed-contact>
+                                    
+                                     <div document-selector ng-model="document.contacts"
+                                                                        question="contacts"
+                                                                        schema="contact"
+                                                                        government="document.government"
+                                                                        filter="true"
+                                                                        ></div>
+                                                                        
+                                    <!--<field-embed-contact multiple ng-model="document.contacts" locales="document.header.languages" caption="{{'Add a contact »'}}"></field-embed-contact>-->
                                 </div>
                             </div>
                         </div>
@@ -233,7 +265,13 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="km-control-group" name="corefundingsources" caption="Core funding-source(s)">
-                                    <field-embed-contact multiple ng-model="document.coreFundingSources" locales="document.header.languages" caption="{{'Add an organization »'}}"></field-embed-contact>
+                                      <div document-selector ng-model="document.coreFundingSources"
+                                                                        question="coreFundingSources"
+                                                                        schema="contact"
+                                                                        government="document.government"
+                                                                        filter="true"
+                                                                        ></div>
+                                    <!--<field-embed-contact multiple ng-model="document.coreFundingSources" locales="document.header.languages" caption="{{'Add an organization »'}}"></field-embed-contact>-->
                                 </div>
                             </div>
                         </div>
@@ -241,7 +279,15 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="km-control-group" name="cofinancingsources" caption="Co-financing source(s)">
-                                    <field-embed-contact multiple ng-model="document.coFinancingSources" locales="document.header.languages" caption="{{'Add an organization »'}}"></field-embed-contact>
+                                    
+                                      <div document-selector ng-model="document.coFinancingSources"
+                                                                        question="coFinancingSources"
+                                                                        schema="contact"
+                                                                        government="document.government"
+                                                                        filter="true"
+                                                                        ></div>
+                                                                        
+                                    <!--<field-embed-contact multiple ng-model="document.coFinancingSources" locales="document.header.languages" caption="{{'Add an organization »'}}"></field-embed-contact>-->
                                 </div>
                             </div>
                         </div>
