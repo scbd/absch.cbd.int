@@ -1,5 +1,5 @@
 define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/directives/help-directive.html.js', '/app/js/common.js', 
- '/app/views/forms/edit/document-selector.html.js',
+ '/app/views/forms/edit/document-selector.html.js', '/app/views/forms/edit/warning-message-cna.html.js',
         '../view/view-authority.directive.js'
         ], function(app, _) {
 
@@ -8,7 +8,7 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/direct
         $controller('editController', {
             $scope: $scope
         });
-        
+      
         $scope.getMeasures=[];
         $scope.path = $location.path();
         //$scope.documentUID = "NEW";
@@ -84,10 +84,10 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/direct
                     return Thesaurus.buildTree(o.data);
                 });
             },
-            // measures: function() {
-            //     return commonjs.loadSchemaDocumentsForDropdown('measure');
-            // },
+
         });
+        
+        //==================================
         $scope.showResponsibleforAllMsg = function() {
 
             //TODO: you need to gain access to the promise in order to do this correctly.a Otherwise the document won't be loaded when angular evaluated the ng-show.
@@ -97,24 +97,19 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/direct
             return Enumerable.from($scope.validationReport.errors).any(function(error) {
                 return error.property == 'absResponsibleForAllNot';
             });
-            
-            return true;
         };
         
-
-        //   $scope.ac_jurisdictions = function() {
-        //   };
-
+       
         //==================================
         //
         //==================================
         $scope.getCleanDocument = function(document) {
-
+                
             document = document || $scope.document;
 
             if (!document)
                 return undefined;
-
+                
             //document = angular.fromJson(angular.toJson(document));
            
             if (!document.consentGranted) {
@@ -168,12 +163,14 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/direct
 
             return document;
         };
+        //==================================
         $scope.setDocument({
             libraries: [{
                 identifier: "cbdLibrary:abs-ch"
             }]
         });
-
+        
+        //==================================
         $scope.showJurisdictionName = function() {
 
             if (!$scope.document || !$scope.document.absJurisdiction)

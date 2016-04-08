@@ -52,6 +52,7 @@
     "bootstrap": "3.3.6",
     "font-awesome": "4.5.0",
     "jquery": "2.2.0",
-    "angular-material": "0.9.8"
+    "angular-material": "0.9.8",
+    "scbd-angularjs-services": "^1.1.14"
   }
 }
