@@ -1092,7 +1092,7 @@ footer .logo {
         color:#fa6938;
     }
     #search-new .scbdRecords .schema{
-        color:#333;
+        color:#666;
     }
 
      #search-new .referenceRecords{
@@ -1105,7 +1105,7 @@ footer .logo {
     #search-new .scbdRecords{
         margin-bottom: 15px;
         padding:5px;
-        border-left:3px #333 solid;
+        border-left:3px #666 solid;
         cursor:pointer;
     }
 

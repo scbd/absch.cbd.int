@@ -1,5 +1,5 @@
 <div id="Record" class="record panel panel-default">
-	<div class="panel-heading bg-black"><h4>Notification</h4></div>
+	<div class="panel-heading bg-darkgrey"><h4>Notification</h4></div>
 	<div class="record-body panel-body">
 
 
@@ -10,13 +10,21 @@
 			</span>
 		</div> -->
 
-		<div ng-show="document.date_s">
+		<!--<div ng-show="document.date_s">
 			<label>Date</label>
 			<span class="km-value">
 				{{document.date_s| formatDate}}
 			</span>
-		</div>
+		</div>-->
 
+
+        <div ng-show="document.title_EN_t">
+			<label>Title</label>
+			<span class="km-value">
+				{{document.title_EN_t}}
+			</span>
+		</div>
+        
 		<div ng-show="document.deadline_s">
 			<label>Deadline</label>
 			<span class="km-value">
@@ -24,12 +32,7 @@
 			</span>
 		</div>
 
-		<div ng-show="document.title_EN_t">
-			<label>Title</label>
-			<span class="km-value">
-				{{document.title_EN_t}}
-			</span>
-		</div>
+		
 
 		<div ng-show="document.description_EN_t">
 			<label>Description</label>
