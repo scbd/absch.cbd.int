@@ -74,7 +74,7 @@ label{width:100%;}
 
                                 <div style="padding-left:3px;margin-right:0;">
                                    <span ng-show="countryProfileSearch.recordType==''">All</span>
-                                        <span ng-show="countryProfileSearch.recordType=='nfp'">National ABS Focal Point</span>
+                                        <span ng-show="countryProfileSearch.recordType=='nfp'">ABS National Focal Point</span>
                                         <span ng-show="countryProfileSearch.recordType=='cna'">Compentent National Authority</span>
                                         <span ng-show="countryProfileSearch.recordType=='msr'">Legislative, Administrative or Policy Me...</span>
                                         <span ng-show="countryProfileSearch.recordType=='ndb'">National Database or Website</span>
@@ -86,7 +86,7 @@ label{width:100%;}
                             </button>
                             <ul class="dropdown-menu ddm" >
                                 <li><a href="#" ng-click="countryProfileSearch.recordType=''">All</a></li>
-                                <li><a href="#" ng-click="countryProfileSearch.recordType='nfp'">National ABS Focal Point</a></li>
+                                <li><a href="#" ng-click="countryProfileSearch.recordType='nfp'">ABS National Focal Point</a></li>
                                  <li><a href="#" ng-click="countryProfileSearch.recordType='cna'">Compentent National Authority</a></li>
                                   <li><a href="#" ng-click="countryProfileSearch.recordType='msr'">Legislative, Administrative or Policy Measures </a></li>
                                    <li><a href="#" ng-click="countryProfileSearch.recordType='ndb'">National Database or Website</a></li>
@@ -171,7 +171,7 @@ label{width:100%;}
                       <div  ng-class="{'check_active': focalPoint.selected}" style="padding:5px 0;border-bottom:1px solid #ddd;">
                         <div layout="row" id="nrNFP">
                             <div> <input type="checkbox" ng-model="focalPoint.selected" bind-indeterminate="focalPoint.indeterminate" ng-change="refresh(focalPoint.selected,'focalPoint')"></div>
-                            <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': focalPoint.selected==false}"> National ABS Focal Points </span></div>
+                            <div flex style="padding:0 3px 0 3px;"> <span class="filter-text bold" ng-class="{'notSelected': focalPoint.selected==false}"> ABS National Focal Points </span></div>
                             <div> <span class="badge badge-white pull-right">{{focalPoint.count}}</span></div>
                         </div>
                     </div>

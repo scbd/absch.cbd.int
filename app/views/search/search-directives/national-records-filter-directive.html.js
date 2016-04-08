@@ -203,7 +203,7 @@ define(['app', 'underscore',
                         var collection = [];
                         if(term == 'focalpointTypes'){
                             collection = [
-                                { title: "National ABS Focal Points", identifier: "(NP-FP ABS-FP)"},
+                                { title: "ABS National Focal Points", identifier: "(NP-FP ABS-FP)"},
                                 { title: "CBD Primary Focal Points", identifier: "(CBD-FP1 CBD-FP2)"}
                             ]
 
@@ -218,7 +218,7 @@ define(['app', 'underscore',
 
                     function getFocalpointFacets(){
                         var domainTermData = [
-                            { title: {"en" : "National ABS Focal Points"}, identifier: "(ABS-FP NP-FP)"},
+                            { title: {"en" : "ABS National Focal Points"}, identifier: "(ABS-FP NP-FP)"},
                             { title: {"en" : "CBD Primary Focal Points"}, identifier: "(CBD-FP1 CBD-FP2)"}
                         ]
                         var facetQuery = {query:'realm_ss:' + realm.value.toLowerCase() + ' AND NOT version_s:* AND schema_s:focalPoint', fields: ['type_ss'] };

@@ -350,7 +350,7 @@
                     if(schema == 'focalPoint'){
 
                             if(_.contains(type,'NP-FP') || _.contains(type,'ABS-FP'))
-                                return 'National ABS Focal Point';
+                                return 'ABS National Focal Point';
                             // else if(_.contains(type,'ABS-IC'))
                             //     return 'ABS ICNP Focal Point';
                             else if(_.contains(type,'CBD-FP1') ||  _.contains(type,'CBD-FP2'))

@@ -76,7 +76,7 @@ app.controller('printContacts', ['$scope', '$http', '$location', '$sce', '$filte
         if(schema=='authority')
             return 'Competent National Authority';
         if(schema=='focalPoint')
-            return 'National ABS Focal Points';
+            return 'ABS National Focal Points';
         if(schema=='absCheckpoint')
             return 'ABS Checkpoints';
     }
@@ -84,7 +84,7 @@ app.controller('printContacts', ['$scope', '$http', '$location', '$sce', '$filte
         if (schema == 'focalPoint') {
 
             if (_.contains(type, 'NP-FP') || _.contains(type, 'ABS-FP'))
-                return 'National ABS Focal Point';
+                return 'ABS National Focal Point';
             // else if(_.contains(type,'ABS-IC'))
             //     return 'ABS ICNP Focal Point';
             else if (_.contains(type, 'CBD-FP1') || _.contains(type, 'CBD-FP2'))

@@ -245,7 +245,7 @@ define(["app",'/app/js/common.js'], function (app) {
 
 			if(!schema)
 				return schema;
-			if(schema.toLowerCase()=="focalpoint"				 ) return "National ABS Focal Point";
+			if(schema.toLowerCase()=="focalpoint"				 ) return "ABS National Focal Point";
 			if(schema.toLowerCase()=="authority"				 ) return "Competent National Authority";
 			if(schema.toLowerCase()=="contact"					 ) return "Contact";
 			if(schema.toLowerCase()=="database"					 ) return "National Website or Database";
@@ -283,7 +283,7 @@ define(["app",'/app/js/common.js'], function (app) {
 			if(!schema)
 				return schema;
 
-			if(schema.toLowerCase()=="focalpoint"				 ) return "National ABS Focal Points";
+			if(schema.toLowerCase()=="focalpoint"				 ) return "ABS National Focal Points";
 			if(schema.toLowerCase()=="authority"				 ) return "Competent National Authorities";
 			if(schema.toLowerCase()=="contact"					 ) return "Contact";
 			if(schema.toLowerCase()=="database"					 ) return "National Websites or Databases";

@@ -61,7 +61,7 @@
                 <div> <span class="badge badge-white pull-right">{{focalPoint.count}}</span></div>
             </div>
             <div ng-show="focalPoint.selected" class="subfilters-section" style="padding-top:10px;padding-bottom:5px;margin-left:15px;">
-               <input type="checkbox" ng-model="focalPointNP" ng-change="refresh(focalPointNP.selected,'focalPoint')" id="ckfocalPointNP" > <span class="filter-text">National ABS Focal Points</span></br>
+               <input type="checkbox" ng-model="focalPointNP" ng-change="refresh(focalPointNP.selected,'focalPoint')" id="ckfocalPointNP" > <span class="filter-text">ABS National Focal Points</span></br>
                <input type="checkbox" ng-model="focalPointCBD" ng-change="refresh(focalPointCBD.selected,'focalPoint')" id="ckfocalPointCBD"> <span class="filter-text">CBD Primary Focal Points</span></br>
                <div km-select  class="filter-btn" multiple api="fpApi" ng-model="focalPointType" binding-type="string" placeholder="Status" items="options.focalpointTypes()"></div>
 
