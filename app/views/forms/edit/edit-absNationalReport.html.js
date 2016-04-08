@@ -611,7 +611,7 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js' , '/app/views/forms
         var queryParameters = {
             'query'    : q,
              currentPage : 0,
-            itemsPerPage: 1000
+            rowsPerPage: 1000
         };
 
         var deferred = $q.defer();

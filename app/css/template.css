@@ -1007,11 +1007,11 @@ footer .logo {
 
 .blockRegion {
     position: initial;
-    box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+    /*box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);*/
     margin: 1rem 0;
     padding: 1em;
     border-radius: .28571429rem;
-    border: 1px solid rgba(34,36,38,.15);
+    /*border: 1px solid rgba(34,36,38,.15);*/
 }
 .dimmer {
     border-radius: inherit!important;
@@ -1436,3 +1436,12 @@ footer .logo {
 
         #SubmitPage .label{ font-size:11px!important;color:white;}
         #SubmitPage .label:hover { background-color: #333!important;color:white!important;}
+.help-block{
+	font-size:0.9em;
+	color:#999;
+	padding: 0 0 5px 0;
+	margin: 0;
+    font-weight:500;
+}
+
+.registerpage-content table {width:100%;}

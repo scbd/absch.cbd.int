@@ -196,7 +196,7 @@ define(['app', 'underscore', '/app/js/common.js',
                         var groupQuery = {
                             query       : q,
                             currentPage : nationalCurrentPage,
-                            itemsPerPage: $scope.itemsPerPage
+                            rowsPerPage: $scope.itemsPerPage
                         };
                         $scope.nationalLoading = true;
                         searchOperation = searchService.group(groupQuery, queryCanceler);
@@ -245,7 +245,7 @@ define(['app', 'underscore', '/app/js/common.js',
                             query       : q,
                             sort        : _.isEmpty($scope.setFilters) ? 'updatedDate_dt desc' : '',
                             currentPage : referenceCurrentPage,
-                            itemsPerPage: $scope.itemsPerPage
+                            rowsPerPage: $scope.itemsPerPage
                         };
 
                         searchOperation = searchService.list(listQuery, queryCanceler);
@@ -269,7 +269,7 @@ define(['app', 'underscore', '/app/js/common.js',
                             })
                             .finally(function(){
                                 $scope.referenceLoading = false;
-                            });;
+                            });
 
                     };
                   //===============================================================================================================================

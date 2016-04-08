@@ -55,7 +55,7 @@
                     </button>
                 </li>
                 <li style="display: inline;" ng-show="security.canSave!==undefined && (!security.canSave && security.canSaveDraft)">
-                    <button type="button" class="btn btn-danger bg-request" ng-href="#" ng-click="tab='publishRequest';publishRequest()" ng-disabled="loading">Request Publication
+                    <button id="publish_button" type="button" class="btn btn-danger bg-request" ng-href="#" ng-click="tab='publishRequest';publishRequest()" ng-disabled="loading">Request Publication
                          <i ng-show="tab=='publishRequest' && loading" class="fa fa-spinner fa-spin"></i>
                     </button>
                 </li>
