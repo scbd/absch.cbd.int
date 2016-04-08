@@ -136,7 +136,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                     if (!cdgList)
                         return;
                     if ((_.indexOf(cdgList, 'NP-FP') >= 0 || _.indexOf(cdgList, 'ABS-FP') >= 0) && (_.indexOf(cdgList, 'CBD-FP1') >= 0 || _.indexOf(cdgList, 'CBD-FP2') >= 0))
-                        return "ABS/CBD Focal Point";
+                        return "ABS/CBD National Focal Point";
                     // else if(_.indexOf(cdgList, 'ABS-IC')>= 0 && (_.indexOf(cdgList, 'CBD-FP1')>= 0 || _.indexOf(cdgList, 'CBD-FP2')>= 0))
                     //     return "ICNP/CBD Focal Point";
                     if (_.indexOf(cdgList, 'NP-FP') >= 0 || _.indexOf(cdgList, 'ABS-FP') >= 0)

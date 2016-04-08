@@ -1417,9 +1417,7 @@ footer .logo {
             background-color: #eeefff;
         }
 
-        #SubmitPage .km-value {
-            background-color: #eee!important;
-        }
+     
 
         #SubmitPage th {
             border-bottom: none!important;
@@ -1455,7 +1453,6 @@ footer .logo {
          padding:10px;
          }
     #Record .km-value{
-        padding:0 3px;
         margin-bottom:5px;
     }
 
@@ -1507,7 +1504,7 @@ footer .logo {
 
     #Record ul
     {
-        padding:0 15px;
+        padding:0;
             margin: 0;
     }
     #Record tr
