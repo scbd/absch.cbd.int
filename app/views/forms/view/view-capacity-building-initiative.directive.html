@@ -5,8 +5,11 @@
 		</h4>
     </div>
 	<div class="record-body panel-body">
-
-		<h2>{{document.title | lstring:locale}}</h2>
+        
+        <div ng-show="document.title">
+			<label>Title</label>
+			<div class="km-value km-pre">{{document.title | lstring:locale}}</div>
+		</div>
 
 		<div ng-show="document.projectNumber">
 			<label>Project number or identifier</label>
@@ -20,9 +23,11 @@
 
 		<div ng-show="document.geographicScope && document.geographicScope.regionsOrCountries">
 			<label>Geographical or political/economic group(s) and/or country(ies)</label>
-			<ul class="km-value" ng-show="document.geographicScope.regionsOrCountries">
-				<li ng-repeat="term in document.geographicScope.regionsOrCountries">{{term | term:locale}} </li>
-			</ul>
+			<div class="km-value">
+                <ul  ng-show="document.geographicScope.regionsOrCountries">
+                    <li ng-repeat="term in document.geographicScope.regionsOrCountries">{{term | term:locale}} </li>
+                </ul>
+            </div>
 		</div>
 
 		<div ng-show="document.geographicScope && document.geographicScope.jurisdiction">
@@ -41,15 +46,12 @@
 		</div>
 
 		<div ng-show="(document.startDate && document.endDate) || document.duration">
-			<div class="col-sm-12 well well-sm">
-	  			<label>Time frame</label>
-
 	  			<div class="row" ng-show="document.startDate && document.endDate">
-	  				<div class="col-md-3">
+	  				<div class="col-md-6">
 	  					<label>Start date</label>
 	  					<div class="km-value km-pre">{{document.startDate | date : 'longDate'}}</div>
 	  				</div>
-	  				<div class="col-md-3">
+	  				<div class="col-md-6">
 	  					<label>End date</label>
 	  					<div class="km-value km-pre">{{document.endDate | date : 'longDate'}}</div>
 	  				</div>
@@ -59,7 +61,6 @@
 	  				<label>Duration</label>
 	  				<div class="km-value km-pre">{{document.duration | lstring:locale}}</div>
 	  			</div>
-	  		</div>
 		</div>
 
 		<div ng-show="document.isImplementedByAgencies || document.isExecutededByAgencies || document.isCollaboratededByPartners">
@@ -116,25 +117,31 @@
 
 		<div ng-show="document.targetGroups">
 			<label>Target group(s)/beneficiaries</label>
-			<ul class="km-value">
+			<div class="km-value">
+            <ul>
 				<li ng-repeat="term in document.targetGroups">{{term | term:locale}}</li>
 			</ul>
+            </div>
 		</div>
 
 		<div ng-show="document.categories">
 			<label>Category(ies) of capacity-building activities</label>
-			<ul class="km-value">
+			<div class="km-value">
+            <ul>
 				<li ng-repeat="term in document.categories">{{term | term:locale}}</li>
 			</ul>
+            </div>
 		</div>
 
 		<legend>Information on funding</legend>
 
 		<div ng-show="document.fundingSourceTypes">
 			<label>Type(s) of funding source</label>
-			<ul class="km-value">
+			<div class="km-value">
+            <ul>
 				<li ng-repeat="term in document.fundingSourceTypes">{{term | term:locale}}</li>
 			</ul>
+            </div>
 		</div>
 
 		<div ng-show="document.coreFundingSources">
@@ -184,10 +191,11 @@
 			<legend>Access and Benefit Sharing Clearing-House (ABS-CH)</legend>
 
 			<label>Key areas and strategic measures for capacity-building and development</label>
-			<ul class="km-value">
+			<div class="km-value">
+            <ul>
 				<li ng-repeat="term in document.absKeyAreas">{{term | term:locale}}</li>
 			</ul>
-
+            </div>
 		</div>
 
 		<div ng-show="document.relevantInformation||document.relevantDocuments">
@@ -209,13 +217,7 @@
 				</div>
 			</div>
 		</div>
-        <div class="row" style="padding-top:10px;" ng-show="document.info.revision">
-            <div class="col-xs-12">
-
-                <div view-history document-id="document.header.identifier" load-documents="true"
-                government="document.government.identifier"></div>
-            </div>
-        </div>
+       
 	</div>
 
 	<div document-metadata class="panel-footer" ></div>

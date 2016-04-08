@@ -34,8 +34,8 @@
         <div class="col-xs-1 col-sm-1 col-md-1 text-right"><span ng-click="gotoNew($event,'measure')" class="label color-blue bg-litegrey linkDark" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i></span></div>
     </div>
      <div class="row link1"  style="padding:0;margin:0;">
-        <div class="col-xs-7 col-sm-5 col-md-8"> <a href="#" ng-click="gotoList($event,'measure')" class="hidden-xs">National Website or Database (NDB)</a>
-            <span class="visible-xs bold"><a href="#" ng-click="gotoList($event,'measure')">NDB</a> <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip" data-html="true" data-title="National Website or Database (NDB)" data-container="body"></span></span></div>
+        <div class="col-xs-7 col-sm-5 col-md-8"> <a href="#" ng-click="gotoList($event,'database')" class="hidden-xs">National Website or Database (NDB)</a>
+            <span class="visible-xs bold"><a href="#" ng-click="gotoList($event,'database')">NDB</a> <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip" data-html="true" data-title="National Website or Database (NDB)" data-container="body"></span></span></div>
         <div class="col-xs-1 col-sm-2 col-md-1 text-right" ><a ng-href="/register/NDB/status/published" class="label label-success" ng-class="{'bg-litegrey': facets('database','publish')===0}">{{facets('database','publish')}}</a> </div>
         <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/NDB/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('database','draft')===0}">{{facets('database','draft')}}</a></div>
         <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/NDB/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets('database','request')===0}">{{facets('database','request')}}</a></div>

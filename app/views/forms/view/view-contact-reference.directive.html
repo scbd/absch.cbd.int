@@ -1,8 +1,9 @@
 ﻿<div>
 	<div ng-if="isOrganization()">
-		<div ng-if="document.type=='CNA'" style="margin-bottom:5px;"><span class="label label-primary" >Competent National Authority<span></div>
+        <div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;" ng-if="document.type!='CNA'" style="">Organization</div>
+		<div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;" ng-if="document.type=='CNA'" >Competent National Authority</div>
 		<div>
-			 <b>{{document.organization | lstring:locale}}</b>
+			 <span style="font-weight:500;">{{document.organization | lstring:locale}}</span>
 			 <span ng-show="document.organizationAcronym && (document.organizationAcronym | lstring:locale)!= 'NA'">({{document.organizationAcronym | lstring:locale}})</span>
 		</div>
 
@@ -16,8 +17,9 @@
 	</div>
 
 	<div ng-if="isPerson()">
+        <div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;" ng-if="document.type!='CNA'" style="">Person</div>
 		<div>
-			 <b>{{document.prefix | lstring:locale}} {{document.firstName}} {{document.middleName}} {{document.lastName}}</b>
+			 <span style="font-weight:500;">{{document.prefix | lstring:locale}} {{document.firstName}} {{document.middleName}} {{document.lastName}}</span>
 		</div>
 		<div ng-if="document.contactOrganization">
 				 <b>{{document.contactOrganization.organization | lstring:locale}}</b>
@@ -37,7 +39,7 @@
 
 	</div>
 
-	<address style="margin-top: 5px; margin-bottom: 5px" >
+	<address style="margin-top: 8px; margin-bottom: 8px" >
 		<div >
 			<!-- class="km-pre" -->
 			<span ng-show="document.addressHTML" ng-bind-html="document.addressHTML | lstring:locale"></span>
@@ -45,7 +47,7 @@
 			{{(document.contactOrganization || document).city | lstring:locale}}<span ng-show="(document.contactOrganization || document).city && document.state">, </span>
 			{{(document.contactOrganization || document).state | lstring:locale}}<br ng-show="(document.contactOrganization || document).city || document.state" />
 			{{(document.contactOrganization || document).postalCode | lstring:locale}}<span ng-show="(document.contactOrganization || document).postalCode">, </span>
-		 <b>{{(document.contactOrganization || document).country|term}}</b>
+		    <span style="font-weight:500;">{{(document.contactOrganization || document).country|term}}</span>
 	</address>
 
 	<div ng-show="(document.contactOrganization || document).phones">

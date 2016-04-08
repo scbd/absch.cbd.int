@@ -30,8 +30,11 @@
 				<div class="km-value">
 					<ul>
 						<li ng-repeat="checkpoint in document.checkpoint">
-							{{checkpoint.name | lstring:locale}} <a ng-href="#" ng-click="showcp= !showcp" class="btn btn-xs btn-info">{{showcp ? "- less" : "+ more"}} details</a>
-							<div ng-show="showcp" view-abs-checkpoint  ng-model="checkpoint" document-info="checkpoint" hide="footer" locale="getLocale()" link-target={{linkTarget}}></div>
+							<a href="{{linkTarget}}" target="_new" class="bold">{{checkpoint.name | lstring:locale}} </a>
+                            
+                            
+                            <!--<a ng-href="#" ng-click="showcp= !showcp" class="btn btn-xs btn-info">{{showcp ? "- less" : "+ more"}} details</a>
+							<div ng-show="showcp" view-abs-checkpoint  ng-model="checkpoint" document-info="checkpoint" hide="footer" locale="getLocale()" link-target={{linkTarget}}></div>-->
 						</li>
 					</ul>
 				</div>
@@ -41,7 +44,7 @@
 				<div class="row">
 					<div class="col-xs-12 col-lg-12" >
 						<div class="help-block color-red"  >
-							Note: The ABS Clearing-House can not guarantee the receipt of automatically generated emails. </br>
+							Note: The ABS Clearing-House does not guarantee the receipt of automatically generated emails. </br>
 						</div>
 					</div>
 				</div>
@@ -49,7 +52,7 @@
 		            <div class="row top-border bg-lightblue">
 		                <div ng-repeat="contact in emailList" class="">
 		                    <div class="col-xs-12">
-		                        <div class="well">
+		                        <div class="km-value">
 		                            <div view-contact-reference ng-model="contact" locale="locale"></div>
 		                        </div>
 		                    </div>
