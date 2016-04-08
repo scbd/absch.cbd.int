@@ -1031,7 +1031,7 @@ footer .logo {
     padding:0;margin:0;
     width: 100%;
     height: 100%;
-    min-height:80px;
+    min-height:40px;
     text-align: center;
     vertical-align: middle;
     background-color: rgba(0,0,0,.85);
@@ -1445,3 +1445,108 @@ footer .logo {
 }
 
 .registerpage-content table {width:100%;}
+
+
+
+  #Record *{
+        font-size:14px;
+    }
+     #Record .panel-body{
+         padding:10px;
+         }
+    #Record .km-value{
+        padding:0 3px;
+        margin-bottom:5px;
+    }
+
+    #Record .panel-heading{
+        padding: 10px;
+        border-bottom: 1px solid transparent;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    #Record h3{
+        padding:0;
+        margin:0;
+    }
+
+    #Record h4{
+        font-size: 14px;
+        padding:0;
+        margin:0;
+        text-transform: uppercase;
+        color:white!important;
+    }
+    #Record label{
+        margin-bottom:0;
+        font-weight:500!important;
+        color:#666;
+        font-size:12px;
+         display:inline;
+    }
+
+    
+     #Record .panel-footer{
+        padding:10px;
+        margin:0;
+        height:auto;
+        border-radius: 0;
+    }
+    
+    .panel{
+        margin:0!important;
+        padding:0!important
+    }
+  
+
+    #Record .panel-footer, #Record .panel, #Record .panel-header{
+        border-radius: 0!important;
+    }
+    #Record .panel-footer .uid{font-weight:500;color:#428bca!important;}
+    #Record .panel-footer .date{font-weight:500;color:#666!important; text-transform: uppercase;}
+
+    #Record ul
+    {
+        padding:0 15px;
+            margin: 0;
+    }
+    #Record tr
+    {
+        background-color:transparent;
+    }
+
+    #Record legend
+    {
+        padding-top:10px;
+        margin-bottom:10px;
+        font-weight:bold;
+    }
+    #Record .help-block{
+        display:inline!important;
+    }
+    
+    #Record{
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+
+    }
+    #Record .reflink:link{color:#428bca!important;}
+    #Record .reflink:visited{color:#428bca!important;}
+    #Record .reflink:hover{color:#428bca!important;}
+    #Record .reflink:active{color:#428bca!important;}
+
+
+    #Record .help-block {
+        font-size: 11px;
+        color: #999;
+        padding: 0 0 0 3px;
+        margin: 0 0 5px 0;
+        display:inline-block;
+        font-weight:500;
+        text-transform: none;
+    }
+    #Record .modal-dialog {
+        width:650px;
+        margin:30px auto;
+    }
+    
+    

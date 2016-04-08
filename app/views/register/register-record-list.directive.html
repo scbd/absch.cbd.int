@@ -80,8 +80,8 @@
                         {{record | uniqueID}}
                     </div>
                 </td>
-                <td ng-if="schema=='contact'">
-                    {{record.body.type}}
+                <td ng-if="schema=='contact'" >
+                    <span style="font-size:11px;font-weight:500;text-transform:uppercase;padding:4px 10px 4px 4px;color:#666">{{record.body.type}}</span>
                 </td>
                 <td>
                     <div ng-show="record.createdBy">
@@ -138,12 +138,10 @@
             <tr ng-show="displayDetails || (displayRequest && !record.isUpdating)" style="border:0!important;background-color:inherit!important;" ng-class="{'bg-grey': displayDetails||displayRequest}">
                 <!-- <td style="border:0;background-color:inherit!important;">&nbsp;</td> -->
                 <td colspan="6" style="border:0!important;">
-
-                    <div class="pull-right" style="z-index:100;padding-top:18px;padding-right:20px;cursor:pointer;">
-                        <i class="glyphicon glyphicon-remove-circle" style="font-size:20px;" ng-click="displayDetails=false;displayRequest=false;"></i>
-                    </div>
-
                     <div ng-show="displayDetails">
+                         <a style="z-index:999999;width:100%;padding:0!important;margin:0!important;" ng-click="displayDetails=false;displayRequest=false;">
+                                <span class="pull-right bold" aria-hidden="true" style="z-index:999999;color:#FFF;font-size:20px;padding-right:10px;position:relative;top:3px;cursor:pointer;">&times;</span>
+                            </a>
                         <div record-loader document="record.data" class="record-body"></div>
                     </div>
 
