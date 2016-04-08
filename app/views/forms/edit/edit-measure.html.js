@@ -287,8 +287,10 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
             function appendOthers(elementMeasures, other) {
                 _.each(elementsForOthers, function(element) {
                     var otherElement = angular.copy(other);
-
-                    otherElement.identifier = otherElement.identifier + '#' + element;
+                    // if(otherElement.identifier.indexOf('#')>0)
+                    //     otherElement.identifier = otherElement.identifier;
+                    // else
+                        otherElement.identifier = otherElement.identifier + '#' + element;
                     otherElement.broaderTerms.push(element);
                     var el = _.findWhere(elementMeasures, {identifier:element});
                     otherElement.title.en = el.title.en.replace('Does the measure cover ', 'Does the measure cover any other ');
@@ -1095,6 +1097,9 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "24E809DA-20F4-4457-9A8A-87C08DF81E8A", "08B2CDEC-786F-4977-AD0A-6A709695528D","9847FA8A-16C3-4466-A378-F20AF9FF883B",
                     "E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63", "01DA2D8E-F2BB-4E85-A17E-AB0219194A17", "5B6177DD-5E5E-434E-8CB7-D63D6BLAISE8"
                 ];
+                var staticIdentifiers = ["24E809DA-20F4-4457-9A8A-87C08DF81E8A", "4E2974DF-216E-46C8-8797-8E3A3BLAISE1",
+                                        "B8A150E054154AD3AD97856ABD485E90", "2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD",
+                                        "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A"];
 
                 var scopeofMeasureElements = ["4E2974DF-216E-46C8-8797-8E3A3BLAISE1"];
                 $scope.scopeOfMeasureTerm = "4E2974DF-216E-46C8-8797-8E3A3BLAISE1";
@@ -1137,32 +1142,50 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     var oNewIdentifiers = {};
                     var oNewSections = {};
                     var oNewOtherCustomValues = {};
-
+                    var oNewOtherTerms = {};
                     if (!$.isArray($scope.terms))
                         throw "Type must be array";
 
                     if ($scope.binding) {
 
-                        if (!$.isArray($scope.binding))
+                        if (!$.isArray($scope.binding.relevantElements))
                             throw "Type must be array";
 
-                        for (var i = 0; i < $scope.binding.length; ++i) {
-                            var identifier = $scope.binding[i].identifier;
+                        for (var i = 0; i < $scope.binding.relevantElements.length; ++i) {
+                            var identifier = $scope.binding.relevantElements[i].identifier;
                             //handle others
-                            if ($scope.binding[i].parent || identifier == '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED') {
-                                if ($scope.binding[i].parent)
-                                    identifier += '#' + $scope.binding[i].parent;
-                                oNewOtherCustomValues[identifier] = $scope.binding[i].customValue;
+                            if ($scope.binding.relevantElements[i].parent || identifier == '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED') {
+                                if ($scope.binding.relevantElements[i].parent){
+                                    // identifier.indexOf('#')<0 &&  $scope.binding.relevantElements[i].parent.indexOf('#')<0)
+                                    if($scope.binding.relevantElements[i].parent.indexOf('#') > 0)
+                                        identifier = $scope.binding.relevantElements[i].parent;
+                                    else
+                                        identifier += '#' + $scope.binding.relevantElements[i].parent;
+                                }
+                                oNewOtherCustomValues[identifier] = $scope.binding.relevantElements[i].customValue;
+
+                                if($scope.binding.relevantElements[i].parent ){
+                                    if(!oNewOtherTerms[identifier])
+                                        oNewOtherTerms[identifier] = [];
+
+                                    var lOtherTerm = {
+                                        identifier  : '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED',
+                                        name        : oNewOtherCustomValues[identifier],
+                                        section     : $scope.binding.relevantElements[i].section,
+                                        parent      : $scope.binding.relevantElements[i].parent
+                                    };
+                                    oNewOtherTerms[identifier].push(lOtherTerm);
+                                }
                             }
-                            if($scope.binding[i].answer != undefined){
-                                oNewIdentifiers[identifier] = $scope.binding[i].answer;
-                                if(!initialized && ((!$scope.binding[i].answer && identifier != $scope.scopeOfMeasureTerm)
-                                || ($scope.binding[i].answer && identifier == $scope.scopeOfMeasureTerm)))
+                            if($scope.binding.relevantElements[i].answer != undefined){
+                                oNewIdentifiers[identifier] = $scope.binding.relevantElements[i].answer;
+                                if(!initialized && ((!$scope.binding.relevantElements[i].answer && identifier != $scope.scopeOfMeasureTerm)
+                                || ($scope.binding.relevantElements[i].answer && identifier == $scope.scopeOfMeasureTerm)))
                                     setChildrenSelected(identifier, identifier != $scope.scopeOfMeasureTerm);
                             }
                             else
                                 oNewIdentifiers[identifier] = true;
-                            oNewSections[identifier] = $scope.binding[i].section;
+                            oNewSections[identifier] = $scope.binding.relevantElements[i].section;
 
                         }
                         initialized = true;
@@ -1174,6 +1197,8 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                      }
                     if (!angular.equals(oNewSections, $scope.sections)) $scope.sections = oNewSections;
                     if (!angular.equals(oNewOtherCustomValues, $scope.otherCustomValues)) $scope.otherCustomValues = oNewOtherCustomValues;
+                    if (!angular.equals(oNewOtherTerms, $scope.otherTerms)) $scope.otherTerms = oNewOtherTerms;
+
                 }
 
                 //==============================
@@ -1210,7 +1235,6 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                             oNewBinding.push(oTerm);
 
                             if($scope.otherTerms && $scope.otherTerms[term.identifier]){
-                                console.log($scope.otherTerms[term.identifier]);
                                 _.each($scope.otherTerms[term.identifier], function(otherTerm){
                                     if(otherTerm.name!=''){
                                         var lOtherTerm = {
@@ -1406,9 +1430,9 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                         alert('please select a GR Type or GR Area');
                         return;
                     }
-                    if(!$scope.binding.geneticResources)
-                        $scope.binding.geneticResources = [];
-                    $scope.binding.geneticResources.push({
+                    if(!$scope.binding.geneticResource.elements)
+                        $scope.binding.geneticResource.elements = [];
+                    $scope.binding.geneticResource.elements.push({
                         types : geneticResource.types,
                         areas : geneticResource.areas
                     });
@@ -1419,7 +1443,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                 };
 
                 $scope.deleteElement = function(element){
-                    $scope.binding.geneticResources.splice($scope.binding.geneticResources.indexOf(element), 1);
+                    $scope.binding.geneticResource.elements.splice($scope.binding.geneticResource.elements.indexOf(element), 1);
                 }
 
                 $scope.addOther = function(term){
@@ -1465,6 +1489,11 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                                                    !$scope.isYesNo(term.identifier))
 
                 };
+
+                $scope.isStaticIdentifier = function(identifier) {
+                    //use indexof to catch #others
+                    return _.indexOf(staticIdentifiers, identifier)>=0
+                }
 
             }]
         }

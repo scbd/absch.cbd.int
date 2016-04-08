@@ -310,7 +310,6 @@
 
               <ul>
               <li >
-              {{binding}}
                   <div>
                       <table style="width:100%" cellspacing="0" cellpadding="0">
                           <tbody>
@@ -349,11 +348,12 @@
                                           <div class="btn-group ng-scope matrix-btn" >
                                               <label class="btn ">
                                                   <input type="radio"  ng-model="binding.geneticResource.answer" name="rd_4E2974DF-216E-46C8-8797-8E3A3BLAISE1" ng-value="true"
-                                                      aria-invalid="false" style="" ngChange="binding.geneticResource.section=undefined"> Yes
+                                                   ng-change="binding.geneticResource.section=undefined;binding.geneticResource.elements=undefined;binding.geneticResource.identifier='4E2974DF-216E-46C8-8797-8E3A3BLAISE1'"> Yes
                                               </label>
                                               <label class="btn ">
                                                   <input type="radio"  ng-model="binding.geneticResource.answer"
-                                                  name="rd_4E2974DF-216E-46C8-8797-8E3A3BLAISE1" ng-value="false" ngChange="binding.geneticResource.section=undefined"> No
+                                                  name="rd_4E2974DF-216E-46C8-8797-8E3A3BLAISE1" ng-value="false"
+                                                  ng-change="binding.geneticResource.section=undefined;binding.geneticResource.elements=undefined;binding.geneticResource.identifier='4E2974DF-216E-46C8-8797-8E3A3BLAISE1'"> No
                                               </label>
                                           </div>
                                       </td>
@@ -386,10 +386,9 @@
                                       </td>
                                   </tr>
                               </table>
-
-                              <table class="table  table-striped table-hover" style="padding:0;margin:0;" ng-if="binding.geneticResources">
+                              <table class="table  table-striped table-hover" style="padding:0;margin:0;" ng-if="binding.geneticResource.elements">
                                 <tbody>
-                                <tr ng-repeat="element in binding.geneticResources">
+                                <tr ng-repeat="element in binding.geneticResource.elements">
                                       <td class="text-center" style="vertical-align:middle;width:30px;">
                                         <i class="fa fa-remove color-red" style="cursor:pointer" ng-click="deleteElement(element)"/>
                                       </td>
@@ -431,10 +430,12 @@
                                           </label>
                                           <div class="btn-group matrix-btn ng-scope" >
                                               <label class="btn">
-                                                  <input type="radio"  ng-model="identifiers['B8A150E054154AD3AD97856ABD485E90']" name="rd_B8A150E054154AD3AD97856ABD485E90" ng-value="true" > Yes
+                                                  <input type="radio"  ng-model="identifiers['B8A150E054154AD3AD97856ABD485E90']" name="rd_B8A150E054154AD3AD97856ABD485E90"
+                                                  ng-value="true" ng-change="sections['B8A150E054154AD3AD97856ABD485E90']=undefined"> Yes
                                               </label>
                                               <label class="btn">
-                                                  <input type="radio"  ng-model="identifiers['B8A150E054154AD3AD97856ABD485E90']" name="rd_B8A150E054154AD3AD97856ABD485E90" ng-value="false" > No
+                                                  <input type="radio"  ng-model="identifiers['B8A150E054154AD3AD97856ABD485E90']" name="rd_B8A150E054154AD3AD97856ABD485E90"
+                                                  ng-value="false"  ng-change="sections['B8A150E054154AD3AD97856ABD485E90']=undefined"> No
                                               </label>
                                           </div>
                                       </td>
@@ -459,10 +460,12 @@
                                           </label>
                                           <div class="btn-group matrix-btn ng-scope" >
                                               <label class="btn">
-                                                  <input type="radio"  ng-model="identifiers['2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD']" name="rd_2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD" ng-value="true" value="false"> Yes
+                                                  <input type="radio"  ng-model="identifiers['2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD']" name="rd_2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD"
+                                                  ng-value="true" value="false"  ng-change="sections['2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD']=undefined"> Yes
                                               </label>
                                               <label class="btn">
-                                                  <input type="radio"  ng-model="identifiers['2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD']" name="rd_2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD" ng-value="false" value="true"> No
+                                                  <input type="radio"  ng-model="identifiers['2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD']" name="rd_2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD"
+                                                  ng-value="false" value="true"  ng-change="sections['2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD']=undefined"> No
                                               </label>
                                           </div>
                                       </td>
@@ -488,12 +491,12 @@
                                               <label class="btn">
                                                   <input type="radio"  ng-model="identifiers['5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A']"
                                                   ng-change="initializeOther({identifier:'5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A'})"
-                                                  name="rd_5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A" ng-value="true" > Yes
+                                                  name="rd_scopeOthers" ng-value="true" value="true"> Yes
                                               </label>
                                               <label class="btn">
                                                   <input type="radio"  ng-model="identifiers['5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A']"
                                                   ng-change="deleteOther({identifier:'5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A'})"
-                                                  name="rd_5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A" ng-value="false"> No
+                                                  name="rd_scopeOthers" ng-value="false" value="false"> No
                                               </label>
                                           </div>
                                       </td>
@@ -529,7 +532,7 @@
           -->
             <script type="text/ng-template"  id="/app/views/forms/edit/edit-measure.directive/abs/inner">
               <div ng-class="{measureChecked : identifiers[term.identifier]}" style=""
-              ng:if="term.identifier != '24E809DA-20F4-4457-9A8A-87C08DF81E8A' && (!term.broaderTerms || isParentSelected(term.identifier, term.level))">
+              ng:if="!isStaticIdentifier(term.identifier) && (!term.broaderTerms || isParentSelected(term.identifier, term.level))">
                 <table style="width:100%" cellspacing="0" cellpadding="0">
                 <tr  ng:class="{'paddingleft0 btop' : isMainElement(term.identifier), 'btop':isYesNo(term.identifier), 'spacing30':!isYesNo(term.identifier), 'measureChecked' : identifiers[term.identifier]}" >
                   <td style="text-align:left;vertical-align:middle;" id="{{term.identifier}}_help" style="" >
@@ -543,16 +546,15 @@
                               <span ng-class="{'bold':term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0}">{{term.title||term.name | lstring:locale}} </span>
                               <i ng-show="term.description" class="icon-question-sign"></i>
                          </span>
-
                     </label>
                     <div class="btn-group matrix-btn " ng:if="isYesNo(term.identifier)" ng:class="{'bg-main' : isMainElement(term.identifier)}">
                       <label class="btn">
                         <input type="radio" ng-change="updateSelected(term, identifiers[term.identifier],'yes')" ng-model="identifiers[term.identifier]" name="rd_{{term.identifier}}"
-                        ng-value="{{(term.identifier == scopeOfMeasure || (term.narrowerTerms.length||0) ==0) ? true : false}}"> Yes
+                        ng-value="{{((term.narrowerTerms.length||0) ==0) ? true : false}}"> Yes
                       </label>
                       <label class="btn">
                           <input type="radio" ng-change="updateSelected(term, identifiers[term.identifier], 'no')" ng-model="identifiers[term.identifier]" name="rd_{{term.identifier}}"
-                          ng-value="{{(term.identifier == scopeOfMeasure || (term.narrowerTerms.length||0) == 0) ? false : true}}"> No
+                          ng-value="{{((term.narrowerTerms.length||0) == 0) ? false : true}}"> No
                       </label>
                     </div>
                   </td>
@@ -581,7 +583,6 @@
 
             <script  type="text/ng-template"  id="/app/views/forms/edit/edit-measure.directive/abs/inner/other">
                 <table class="table table-hover" style="padding:0;margin:0;width:100%;">
-                {{otherElements}}
                   <tr ng-repeat="element in otherElements">
                         <td>
                           <i class="btn btn-primary fa fa-remove" style="cursor:pointer" ng-if="otherElements.length > 1" ng-click="deleteOtherElement(element, otherElements)"/>
