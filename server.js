@@ -24,7 +24,7 @@ app.get('/app/absPDFViewer/*'   , function(req, res) {
 	res.sendFile(__dirname + '/app/absPDFViewer/absPermitPrint.html');
 });
 
-app.all('/api/*', (req, res) => proxy.web(req, res, { target: 'https://api.cbd.int:443', secure: false }));
+app.all('/api/*', (req, res) => proxy.web(req, res, { target: 'https://api.cbddev.xyz:443', secure: false }));
 
 // Configure index.html
 
