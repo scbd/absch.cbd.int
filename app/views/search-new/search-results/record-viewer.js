@@ -6,6 +6,7 @@ define(['app', 'underscore', '/app/js/common.js',
 	'/app/views/directives/report-record.js',
     '/app/views/directives/internal-record-details.js',
     '/app/views/directives/party-status.js',
+    '/app/views/forms/view/view-contact-reference.directive.js'
 ], function(app, _) {
 
     app.directive('recordViewer', function() {

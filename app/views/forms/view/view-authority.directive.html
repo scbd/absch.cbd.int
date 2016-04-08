@@ -48,10 +48,12 @@
 
 		<legend ng-if="contacts.length > 0">Contact(s)</legend>
 		<div ng-show="contacts.length > 0" class="row">
-				<div ng-repeat="contact in contacts" >
+				<div  ng-repeat="contact in contacts" >
 					<div class="col-xs-12">
-						<div view-contact-reference ng-model="contact" locale="locale" class="well" style="margin-bottom:0;"></div>
-					</div>
+		                        <div class="km-value">
+		                            <div view-contact-reference ng-model="contact" locale="locale"></div>
+		                        </div>
+		                    </div>
 				</div>
 		</div>
 
