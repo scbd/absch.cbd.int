@@ -9,7 +9,7 @@
   "engine": "node >= 4.2",
   "private": true,
   "scripts": {
-    "postinstall": "./node_modules/.bin/bower install --allow-root",
+    "postinstall": "./node_modules/.bin/bower install --allow-root -q",
     "start": "node server"
   }
 }
