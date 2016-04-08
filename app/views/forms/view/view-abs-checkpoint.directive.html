@@ -12,8 +12,9 @@
 
 		<div ng-show="document.government">
 			<label name="country">Country</label>
-			<div class="km-value">
+			<div class="km-value" >
 				{{document.government|term}}
+                <span ng-party-status government="document.government" id="government"></span>
 			</div>
 		</div>
 

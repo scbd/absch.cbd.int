@@ -69,7 +69,7 @@
                 <div class="tab-pane bg-white" ng-class="{'active':currentTab==='nationalRecords'}" ng-if="currentTab==='nationalRecords'">
                     <div infinite-scroll="updateScrollPage()" infinite-scroll-disabled="nationalLoading" infinite-scroll-distance="10">
                         <!-- <div block-region activate="nationalLoading"></div> -->
-                        <div ng-repeat="country in rawDocs.groups">
+                        <div ng-repeat="country in rawDocs.groups" id="search-country-group"> 
                             <national-records-country group='country'></national-records-country>
                         </div>
                         <div ng-if="nationalLoading">

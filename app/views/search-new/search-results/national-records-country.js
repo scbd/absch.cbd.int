@@ -1,5 +1,6 @@
 define(['app', '/app/js/common.js',
 '/app/views/search-new/search-results/result-grouped-national-record.js',
+'/app/views/directives/party-status.js',
 ], function(app, _) {
 
     app.directive('nationalRecordsCountry', function() {

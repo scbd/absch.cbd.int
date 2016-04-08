@@ -6,11 +6,17 @@ define(['app', '/app/js/common.js'], function(app) {
                 restrict: 'EAC',
                 templateUrl : '/app/views/directives/party-status.html',
                 scope : {
+                    code : '=',
                     government : '='
                 },
                 link: function($scope, elem, attrs) {
-                    if($scope.government){
-                        $q.when(commonjs.getCountry($scope.government.identifier.toUpperCase()))
+                    
+                    if($scope.government || $scope.code){
+                        
+                        if($scope.government)
+                              $scope.code = $scope.government.identifier;
+                              
+                        $q.when(commonjs.getCountry($scope.code.toUpperCase()))
                         .then(function(country){
                             console.log(country);
                             $scope.partyStatus = country;

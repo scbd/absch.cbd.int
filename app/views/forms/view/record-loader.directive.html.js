@@ -5,6 +5,7 @@ define(['app',
     '/app/views/directives/document-metadata-directive.html.js',
 	'/app/views/directives/help-directive.html.js',
     '/app/views/directives/internal-record-details.js',
+    '/app/views/directives/party-status.js',
     ], function (app) {
 app.directive('recordLoader', [function () {
 	return {

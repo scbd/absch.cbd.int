@@ -1548,5 +1548,14 @@ footer .logo {
         width:650px;
         margin:30px auto;
     }
+
+    .partystatus{font-size:11px;margin-right:10px;white-space: nowrap;}
+    #search-country-group .partystatus{font-size:10px;margin-right:5px!important;white-space: nowrap; background-color: #efefef;border:1px solid #ddd;padding:3px; border-radius: 3px; position:relative;top:-3px;font-weight:500;}
+    #search-country-group .color-party{background-color:#5F4586!important;color:#fff!important;border:1px solid #333;}
+    #search-country-group .color-nonparty{background-color:#666!important;color:#fff!important;border:1px solid #333;}
+    #search-country-group .color-inbetween{ background-color:#EC971F!important;color:#fff!important;}
     
-    
+   #government .partystatus{font-size:10px;margin-left:10px!important;white-space: nowrap; background-color:transparent;border:0;padding:0; border-radius:0; position:relative; top:0px; font-weight:500; text-transform: uppercase;}
+   #government .color-party{color:#5F4586!important;}
+   #government .color-nonparty{color:#333!important;}
+   #government .color-inbetween{color:#EC971F!important;} 
