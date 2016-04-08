@@ -27,8 +27,6 @@ define(['app', '/app/js/common.js'
                    
                }
                 
-                
-
 				$scope.loadReportRecord = function(schema, identifier){
 
                     require(['/app/views/directives/report-record.js'], function() {

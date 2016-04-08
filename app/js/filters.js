@@ -82,8 +82,8 @@ define(["app",'/app/js/common.js'], function (app) {
                 else
                     document = document;
 
-                if(document.schema_s && (document.schema_s.toLowerCase() == "statement" || document.schema_s.toLowerCase() == "notification" ||
-                    document.schema_s.toLowerCase() == "meeting" ||  document.schema_s.toLowerCase() == "pressrelease" ||
+                if(document.schema_s && (document.schema_s.toLowerCase() == "statement" || document.schema_s.toLowerCase() == "notification" ||  document.schema_s.toLowerCase() == "news" ||
+                    document.schema_s.toLowerCase() == "meeting" ||  document.schema_s.toLowerCase() == "pressrelease" ||  document.schema_s.toLowerCase() == "new" ||
                     document.schema_s.toLowerCase() == "focalpoint")){
                         cacheMap[term.identifier] = document.identifier_s ? document.identifier_s : document.id;
                         return cacheMap[term.identifier];
