@@ -52,7 +52,7 @@
                                              question="amendedMeasures"
                                              government="document.government"
                                              schema="measure"></div>
-                        
+
                         <!--<div km-select multiple name="amendedMeasures" ng-model="document.amendedMeasures"items="options.measures()" placeholder="Please select ..."></div>-->
                     </div>
                 </div>
@@ -212,13 +212,13 @@
                 <div class="km-control-group" name="linkedMeasures" caption="Relationship with other measures">
 
                 <!--<div km-select multiple name="linkedMeasures" ng-model="document.linkedMeasures"items="options.measures()" placeholder="Please select ..."></div>-->
-                
+
                 <div document-selector ng-model="document.linkedMeasures"
                                              question="linkedMeasures"
                                              government="document.government"
                                              schema="measure"></div>
-                
-                
+
+
                 </div>
               </div>
             </div>
@@ -254,13 +254,13 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="km-control-group" required name="authorities" caption="Contact Institution">
-                     
+
                       <div document-selector ng-model="document.authorities"
                                              question="authorities"
                                              government="document.government"
                                              schema="(authority contact)"></div>
-                     
-                     
+
+
                 </div>
               </div>
             </div>
@@ -269,7 +269,7 @@
             <section>
             <legend name="elementsOfMeasure">Elements of the measure</legend>
             <div class="help-block">
-                <!-- {{document.absMeasures}} -->
+                {{document.absMeasures}}
                 <span ng-repeat="elm in document.absMeasures.relevantElements">
                     {{$index}}. {{elm.identifier|term}}<span ng-if="elm.customValue">({{elm.customValue}})</span><br/>
                 </span>

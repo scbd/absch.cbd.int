@@ -1144,17 +1144,17 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     var oNewOtherCustomValues = {};
                     var oNewOtherTerms = {};
                     if (!$.isArray($scope.terms))
-                        throw "Type must be array";
+                        throw "Terms must be array";
 
                     if ($scope.binding) {
 
                         if (!$.isArray($scope.binding.relevantElements))
-                            throw "Type must be array";
+                            throw "ABS Elements must be array";
 
                         for (var i = 0; i < $scope.binding.relevantElements.length; ++i) {
                             var identifier = $scope.binding.relevantElements[i].identifier;
                             //handle others
-                            if ($scope.binding.relevantElements[i].parent || identifier == '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED') {
+                            if ($scope.binding.relevantElements[i].parent) {
                                 if ($scope.binding.relevantElements[i].parent){
                                     // identifier.indexOf('#')<0 &&  $scope.binding.relevantElements[i].parent.indexOf('#')<0)
                                     if($scope.binding.relevantElements[i].parent.indexOf('#') > 0)
@@ -1164,7 +1164,10 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                                 }
                                 oNewOtherCustomValues[identifier] = $scope.binding.relevantElements[i].customValue;
 
-                                if($scope.binding.relevantElements[i].parent ){
+                                if($scope.binding.relevantElements[i].parent
+                                    && !$scope.binding.relevantElements[i].hasOwnProperty('answer')
+                                // && identifier != '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#5B6177DD-5E5E-434E-8CB7-D63D6BLAISE8'
+                                ){
                                     if(!oNewOtherTerms[identifier])
                                         oNewOtherTerms[identifier] = [];
 
@@ -1183,8 +1186,8 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                                 || ($scope.binding.relevantElements[i].answer && identifier == $scope.scopeOfMeasureTerm)))
                                     setChildrenSelected(identifier, identifier != $scope.scopeOfMeasureTerm);
                             }
-                            else
-                                oNewIdentifiers[identifier] = true;
+                            // else
+                            //     oNewIdentifiers[identifier] = true;
                             oNewSections[identifier] = $scope.binding.relevantElements[i].section;
 
                         }
@@ -1221,15 +1224,17 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                             };
                             term.answer = $scope.identifiers[term.identifier];
 
-                            //handle others
-                            if (oTerm.identifier.indexOf('#') > 0 || oTerm.identifier == '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED') {
+                            //handle others|| oTerm.identifier == '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'
+                            if (oTerm.identifier.indexOf('#') > 0
+                                && $scope.identifiers[term.identifier]==undefined) {
                                 var identifiers = oTerm.identifier.split('#');
                                 oTerm.identifier = identifiers[0];
                                 oTerm.parent = identifiers[1];
                                 oTerm.customValue = $scope.otherCustomValues[term.identifier];
                             }
 
-                            if ($scope.sections[term.identifier])
+                            if ($scope.sections[term.identifier]
+                            && $scope.identifiers[term.identifier]!=undefined)
                                 oTerm.section = $scope.sections[term.identifier];
 
                             oNewBinding.push(oTerm);
@@ -1477,7 +1482,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                 }
 
                 $scope.deleteOther = function(otherElement){
-                    $scope.otherTerms[otherElement.identifier] = [];
+                    $scope.otherTerms[otherElement.identifier] = undefined;
                                         $scope.save();
                 }
 
