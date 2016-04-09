@@ -37,8 +37,8 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
 
                 if(!$scope.title)
                     $scope.title="Elements of the measure";
-                
-                
+
+
                 var elementsForOthers = [
                                           "24E809DA-20F4-4457-9A8A-87C08DF81E8A","E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63",
                                           "9847FA8A-16C3-4466-A378-F20AF9FF883B","08B2CDEC-786F-4977-AD0A-6A709695528D","01DA2D8E-F2BB-4E85-A17E-AB0219194A17"
@@ -111,8 +111,8 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
 
                             if ($scope.binding) {
 
-                                if (!$.isArray($scope.binding))
-                                    throw "Type must be array";
+                                if (!$.isArray($scope.binding.relevantElements))
+                                    throw "ABS Elements must be array";
 
                                 for (var i = 0; i < $scope.binding.length; ++i) {
                                       var identifier = $scope.binding[i].identifier;
