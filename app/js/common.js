@@ -135,8 +135,8 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
 
                     if (!cdgList)
                         return;
-                    if ((_.indexOf(cdgList, 'NP-FP') >= 0 || _.indexOf(cdgList, 'ABS-FP') >= 0) && (_.indexOf(cdgList, 'CBD-FP1') >= 0 || _.indexOf(cdgList, 'CBD-FP2') >= 0))
-                        return "ABS/CBD National Focal Point";
+                    //if ((_.indexOf(cdgList, 'NP-FP') >= 0 || _.indexOf(cdgList, 'ABS-FP') >= 0) && (_.indexOf(cdgList, 'CBD-FP1') >= 0 || _.indexOf(cdgList, 'CBD-FP2') >= 0))
+                    //    return "ABS National Focal Point";
                     // else if(_.indexOf(cdgList, 'ABS-IC')>= 0 && (_.indexOf(cdgList, 'CBD-FP1')>= 0 || _.indexOf(cdgList, 'CBD-FP2')>= 0))
                     //     return "ICNP/CBD Focal Point";
                     if (_.indexOf(cdgList, 'NP-FP') >= 0 || _.indexOf(cdgList, 'ABS-FP') >= 0)
@@ -281,8 +281,8 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                 //==================================================================================
                 this.getThematicAreas= function(){
                      return $http.get('/api/v2013/thesaurus/domains/CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924/terms').then(function (response) {
-                        var termsTree = thesaurus.buildTree(response.data);
-                        return  _.filter(termsTree, function where (o) { return !!o.narrowerTerms;});
+                        //var termsTree = thesaurus.buildTree(response.data);
+                        return  response.data;//_.filter(termsTree, function where (o) { return !!o.narrowerTerms;});
                     });
                 }
                 //==================================================================================
