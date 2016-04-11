@@ -39,10 +39,10 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                     $scope.title="Elements of the measure";
 
 
-                    var elementsForOthers = [
-                        "24E809DA-20F4-4457-9A8A-87C08DF81E8A", "08B2CDEC-786F-4977-AD0A-6A709695528D","9847FA8A-16C3-4466-A378-F20AF9FF883B",
-                        "E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63", "01DA2D8E-F2BB-4E85-A17E-AB0219194A17", "5B6177DD-5E5E-434E-8CB7-D63D6BLAISE8"
-                    ];
+                var elementsForOthers = [
+                    "24E809DA-20F4-4457-9A8A-87C08DF81E8A", "08B2CDEC-786F-4977-AD0A-6A709695528D","9847FA8A-16C3-4466-A378-F20AF9FF883B",
+                    "E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63", "01DA2D8E-F2BB-4E85-A17E-AB0219194A17", "5B6177DD-5E5E-434E-8CB7-D63D6BLAISE8"
+                ];
                 $scope.api = {
                     reloadMatrix : reloadMatrix
                 }
@@ -84,7 +84,7 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                             $scope.terms = data[0].data||data[0];
                             other        = data[1].data||data[1];
                             //main other
-                            $scope.terms.push(angular.copy(other));
+                            //$scope.terms.push(angular.copy(other));
                             _.each(elementsForOthers, function(element){
 
                                 if(!_.some($scope.terms, {identifier:other.identifier + '#' + element})){
@@ -126,6 +126,7 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                                 for (var i = 0; i < $scope.binding.relevantElements.length; ++i) {
                                     var identifier = $scope.binding.relevantElements[i].identifier;
                                     //handle others
+
                                     if ($scope.binding.relevantElements[i].parent) {
                                         if ($scope.binding.relevantElements[i].parent){
                                             // identifier.indexOf('#')<0 &&  $scope.binding.relevantElements[i].parent.indexOf('#')<0)
@@ -162,6 +163,9 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                                     //     oNewIdentifiers[identifier] = true;
                                     oNewSections[identifier] = $scope.binding.relevantElements[i].section;
 
+                                    var elementTerm = _.findWhere($scope.terms, {identifier:identifier});
+                                    if(elementTerm)
+                                        elementTerm.answer = $scope.binding.relevantElements[i].answer;
                                 }
                                 initialized = true;
                             }
@@ -348,6 +352,8 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                             identifier: term.identifier
                         });
                         term.level = level;
+
+                        term.answer = element.answer;
 
                         if (element.measureIdentifier) {
                             term.sortOrder = 1;
@@ -1132,7 +1138,30 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                         }]
                     }
 
+                function collectChildElements(terms, level, parentTerm){
+                    _.each(terms, function(term) {
+
+                        if(!parentTerm)
+                            parentTerm = term;
+                        if(!parentTerm.childTerms)
+                            parentTerm.childTerms = {};
+
+                        parentTerm.childTerms[term] = {
+                            level : level
+                        }
+                        var element = _.findWhere(getABSMeasure(), {
+                            identifier: term.identifier
+                        });
+                        if(element && element.narrowerTerms){
+                            collectChildElements(element.narrowerTerms, level+1, parentTerm)
+                        }
+                    });
+                }
+
                 function newMeasureMatrix(){
+
+                    collectChildElements(mainElements, 1)
+                    console.log(mainElements);
                     // $scope.binding.geneticResource
                     // $scope.binding.relevantElements
                     // mainElements
@@ -1151,7 +1180,9 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                         }
                         else{
                             _.each($scope.binding.geneticResource.elements, function(element){
-                                scopeElement.narrowerTerms.push(element);
+                                if(!scopeElement.childTerms[element].elements)
+                                    scopeElement.childTerms[element].elements = [];
+                                scopeElement.childTerms[element].elements.push(element);
                             });
                         }
                     }
@@ -1159,19 +1190,25 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                         // $scope.terms
                         //yes know question or its a checkbox or other collection elment
                         if(element.answer || !element.hasOwnProperty('answer')){
-                            var lElement = getParentElement(element.identifier);
-                            if(lElement){
-                                if(!lElement.narrowerTerms)
-                                    lElement.narrowerTerms = [];
-                                lElement.narrowerTerms.push(element);
-                            }
+                            // if(!scopeElement.childTerms[element].elements)
+                            //     scopeElement.childTerms[element].elements = [];
+                            // scopeElement.childTerms[element].elements.push(element);
+                            // var lElement = getParentElement(element.identifier);
+                            // if(lElement){
+                            //     if(!lElement.narrowerTerms)
+                            //         lElement.narrowerTerms = [];
+                            //     lElement.narrowerTerms.push(element);
+                            // }
                         }
                     });
                 }
 
                 function getParentElement(identifier){
 
+                    var parentElement = _.findWhere(mainElements, {identifier:identifier});
 
+
+                    return;
                     var element = _.findWhere($scope.terms, {identifier:identifier});
                     var parentElement = _.findWhere(mainElements, {identifier:identifier});
                     if(parentElement)
