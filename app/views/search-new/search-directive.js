@@ -115,6 +115,15 @@ define(['app', 'underscore', '/app/js/common.js',
                            return _.filter($scope.searchFilters, function(item){if(item.type === type) return item;});
                     };
 
+
+                            //===============================================================================================================================   
+                    function getSearchFiltersByParent(parent) {
+                          if(!parent)
+                              return $scope.searchFilters;
+
+                           return _.filter($scope.searchFilters, function(item){if(item.parent === parent) return item;});
+                    };
+
                      //===============================================================================================================================
                     function getSetFilters() {
                          return $scope.setFilters;
@@ -333,12 +342,14 @@ define(['app', 'underscore', '/app/js/common.js',
                              // qOr.push(buildFieldQuery('all_terms_ss'    ,'reference', null));
                               qOr.push(buildTextQuery('text_EN_txt'    ,'scbd', null));
                               qOr.push(buildFieldQuery('all_terms_ss'    ,'scbd', null));
+                              
                               qOr.push(buildTextQuery('text_EN_txt'    ,'keyword', null));
                               qOr.push(buildFieldQuery('all_terms_ss'    ,'keyword', null));
                               
                                qAnd.push(buildFieldQuery('government_s', 'country', "*"));
                                qOr.push(buildCountryQuery('government_s'    ,'partyStatus', null));
-                                                           
+                               
+                               
                         }
 
                         if(queryType === 'reference'){
@@ -375,7 +386,7 @@ define(['app', 'underscore', '/app/js/common.js',
 
                         q = combineQuery(qAnd, "AND");
                         q1 = combineQuery(qOr, "OR");
-                        $scope.test = q1 ? q + " AND (" + q1 + ")" : q;
+                      
                         return q1 ? q + " AND (" + q1 + ")" : q;
                      };
 
@@ -393,7 +404,7 @@ define(['app', 'underscore', '/app/js/common.js',
                         if($scope.setFilters){
                             _.each($scope.setFilters, function(item){
                                 if(item.type == type){
-                                    values.push($scope.setFilters[item.id].name);
+                                    values.push($scope.setFilters[item.id].name.toLowerCase());
                                 }
                             });
                             if(values.length)
@@ -536,11 +547,39 @@ define(['app', 'underscore', '/app/js/common.js',
                   //===============================================================================================================================
                     function loadKeywordFilters() {
 
-                      $q.when(commonjs.getThematicAreas(), function(keywords) {
-                                _.each(keywords, function(keyword, index){
-                                    addKeywordFilter(keyword, '', '');
+                    //   $q.when(commonjs.getThematicAreas(), function(keywords) {
+                    //             _.each(keywords, function(keyword, index){
+                    //                 addKeywordFilter(keyword, '', 'ABS Thematic Areas');
+                    //             });
+                    //     });
+                        
+                        
+                         $q.when(commonjs.getThematicAreas(), function(keywords) {
+                                 var levels = [];
+                                 var parents = [];
+                                 var level=0;
+
+                                 _.each(keywords, function(keyword, index){
+
+                                   levels[keyword.identifier] = 1;
+                                   parents[keyword.identifier] = '';
+
+                                   if(keyword.broaderTerms.length === 0)
+                                        levels[keyword.identifier] = 0;
+
+                                    if(keyword.broaderTerms.length > 0){
+                                       levels[keyword.identifier] =  levels[keyword.broaderTerms] + 1;
+                                        parents[keyword.identifier] = keyword.broaderTerms.join();
+                                    }
+
                                 });
+
+                                _.each(keywords, function(keyword, index){
+                                    addKeywordFilter(keyword, '', 'ABS Thematic Areas', levels[keyword.identifier], parents[keyword.identifier] );
+                                });
+
                         });
+                        
 
                         $q.when(commonjs.getKeyAreas(), function(keywords) {
                                 _.each(keywords, function(keyword, index){
@@ -851,7 +890,7 @@ define(['app', 'underscore', '/app/js/common.js',
                     this.scbdQuery = scbdQuery;
                     this.getSearchFilters = getSearchFilters;
                     this.getFilter = getFilter;
-
+                    this.getSearchFiltersByParent = getSearchFiltersByParent;
 
                   //===============================================================================================================================
                     $scope.$watch('currentTab', function(newVal, oldVal){
