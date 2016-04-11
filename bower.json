@@ -43,7 +43,7 @@
     "scbd-angularjs-controls": "*",
     "scbd-angularjs-services": "^1.1.15",
     "scbd-branding": "1.3.x",
-    "scbd-map": "1.0.4",
+    "scbd-map": "^1.0.4",
     "socket.io-1.4.5": "https://cdn.socket.io/socket.io-1.4.5.js",
     "underscore": "1.7.0"
   },
