@@ -5,8 +5,8 @@ define(['app',
 '/app/services/search-service.js',
 '/app/services/app-config-service.js'], function (app, commonjs) { // jshint ignore:line
 
-app.directive("documentSelector", ["$http", "Thesaurus", "$filter", "underscore", "guid",  "$timeout", "$q","IStorage","commonjs", "searchService", "appConfigService",
-function ($http, Thesaurus, $filter, _, guid, $timeout, $q, storage, commonjs, searchService, appConfigService) {
+app.directive("documentSelector", ["$http",'$rootScope', "$filter", "underscore", "$q", "searchService", "appConfigService",
+function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService) {
 
 	return {
 		restrict   : "EA",
@@ -28,6 +28,7 @@ function ($http, Thesaurus, $filter, _, guid, $timeout, $q, storage, commonjs, s
             
             $scope.rawDocuments = [];
 			$scope.areVisible = false;
+            $scope.userGov = $scope.$root.user.government;
             
             if(!$scope.type) $scope.type = "checkbox";
             
@@ -44,22 +45,50 @@ function ($http, Thesaurus, $filter, _, guid, $timeout, $q, storage, commonjs, s
             //
             //==================================
 			$scope.saveDocuments = function(){
-                
-                $scope.model = undefined; 
-                
+
+                $scope.model=undefined;
+
                 _.forEach($scope.rawDocuments.docs, function (doc) {
-                    if(doc.__checked){
+                    if(doc.__checked === true)
+                    {
                         if(!$scope.model)
-                            $scope.model = [];
+                            $scope.model=[];
                             
-                      $scope.model.push({identifier: doc.identifier_s});
+                        $scope.model.push({identifier: doc.identifier_s});
                     }
                 });
+                 
 
 				$('#'+$scope.question).modal('hide');
 				$scope.areVisible = true;
 			};
             
+            
+             //==================================
+            //
+            //==================================
+			$scope.syncDocuments = function(){
+                    
+                _.forEach($scope.rawDocuments.docs, function (doc) {
+                    doc.__checked = false;
+                });
+                
+                if ($scope.model){
+                    _.forEach($scope.model, function (mod) {
+                        _.forEach($scope.rawDocuments.docs, function (doc) {
+                              if(mod.identifier === doc.identifier_s)
+                                    doc.__checked = true;
+                        });
+                    });
+                    
+                    if($scope.model.length === 0 )
+                        $scope.model = undefined;
+                }
+               
+
+				$('#'+$scope.question).modal('hide');
+				$scope.areVisible = true;
+			};
             
             //==================================
             //
@@ -75,8 +104,6 @@ function ($http, Thesaurus, $filter, _, guid, $timeout, $q, storage, commonjs, s
             //==================================
 			$scope.selectDoc = function(document){
                  
-                  $scope.model = undefined;
-                   
                  _.forEach($scope.rawDocuments.docs, function (doc) {
                     doc.__checked = false;
                     
@@ -91,19 +118,24 @@ function ($http, Thesaurus, $filter, _, guid, $timeout, $q, storage, commonjs, s
             //
             //==================================
 			$scope.removeDocument = function(document){
-                $scope.model = undefined;
-                
+               
                  _.forEach($scope.rawDocuments.docs, function (doc) {
                     if(doc.identifier_s === document.identifier_s ){
                         doc.__checked = false;
                     }
-                    if(doc.__checked){
-                        if(!$scope.model)
-                            $scope.model = [];
-                             
-                        $scope.model.push({identifier: doc.identifier_s});
+                });
+                
+               $scope.model =  _.filter($scope.model, function (doc) {
+                    if(doc.identifier !== document.identifier_s ){
+                     return doc;
                     }
                 });
+                
+                if($scope.model){
+                    if($scope.model.length===0)
+                        $scope.model = undefined;
+                }
+                
 			};
           
              //==================================
@@ -120,8 +152,9 @@ function ($http, Thesaurus, $filter, _, guid, $timeout, $q, storage, commonjs, s
                 
                 if($scope.government)
                     q  = q + " AND government_s:" + $scope.government.identifier;
-               
-                  
+                if(!$scope.government &&  $scope.userGov)
+                    q  = q + " AND government_s:" + $scope.userGov;  
+                      
                 var queryParameters = {
                     'query'    : q,
                     'currentPage' : 0,
@@ -143,7 +176,7 @@ function ($http, Thesaurus, $filter, _, guid, $timeout, $q, storage, commonjs, s
                 console.log(q);
             }
             
-            //==================================
+           //==================================
             //
             //==================================
             this.load = function () {
@@ -162,13 +195,17 @@ function ($http, Thesaurus, $filter, _, guid, $timeout, $q, storage, commonjs, s
 		    //==================================
 		    $scope.$watch('government', function(newValue, oldValue){
 		        if(newValue != oldValue){
-					$scope.rawDocuments = [];
+
+                     $scope.syncDocuments();
+                     
+                            
 		        }
 		    });
             
             
 
-		}
+		},
+
 	};
 }]);
 
