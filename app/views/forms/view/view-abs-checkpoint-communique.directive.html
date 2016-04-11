@@ -72,7 +72,7 @@
 					<div class="km-value">
 						<ul>
 							<li ng-repeat="permit in document.permit">
-								<a href="/database/record?documentSchema=ABSPERMIT&documentID={{permit | lstring:locale| uniqueIDWithoutRevision}}">{{permit | lstring:locale | uniqueIDWithoutRevision}}</a>
+								<a target="{{target}}" href="/database/record?documentSchema=ABSPERMIT&documentID={{permit | lstring:locale| uniqueIDWithoutRevision}}">{{permit | lstring:locale | uniqueIDWithoutRevision}}</a>
 							</li>
 						</ul>
 
