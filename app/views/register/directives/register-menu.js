@@ -41,10 +41,10 @@ define(['app', 'underscore', '/app/services/role-service.js'], function(app, _) 
 
                     
                 },
-                controller : ['$scope', '$element', 'roleService', '$rootScope', '$compile', '$filter', '$routeParams','authentication',
-                    function($scope, $element, roleService, $rootScope, $compile, $filter, $routeParams, authentication){
+                controller : ['$scope', '$element', 'roleService', '$rootScope', '$compile', '$filter', '$routeParams','authentication','$location',
+                    function($scope, $element, roleService, $rootScope, $compile, $filter, $routeParams, authentication, $location){
 
-
+                     $scope.path = $location.path();
                      $scope.user = $rootScope.user;
 
                       if ($scope.user.isAuthenticated) {
