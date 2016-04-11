@@ -47,6 +47,8 @@ function ($http, Thesaurus, $filter, _, guid, $timeout, $q, storage, commonjs, s
                 
                 _.forEach($scope.rawDocuments.docs, function (doc) {
                     if(doc.__checked){
+                        if(!$scope.model)
+                            $scope.model = [];
                       $scope.model.push({identifier: doc.identifier_s});
                     }
                 });
@@ -69,8 +71,7 @@ function ($http, Thesaurus, $filter, _, guid, $timeout, $q, storage, commonjs, s
             //
             //==================================
 			$scope.selectDoc = function(document){
-                $scope.model = [];
-                
+                          
                  _.forEach($scope.rawDocuments.docs, function (doc) {
                     doc.__checked = false;
                     
@@ -85,14 +86,18 @@ function ($http, Thesaurus, $filter, _, guid, $timeout, $q, storage, commonjs, s
             //
             //==================================
 			$scope.removeDocument = function(document){
-                $scope.model = [];
+                $scope.model = undefined;
                 
                  _.forEach($scope.rawDocuments.docs, function (doc) {
                     if(doc.identifier_s === document.identifier_s ){
                         doc.__checked = false;
                     }
-                    if(doc.__checked)
+                    if(doc.__checked){
+                        if(!$scope.model)
+                            $scope.model = [];
+                             
                         $scope.model.push({identifier: doc.identifier_s});
+                    }
                 });
 			};
           
@@ -137,7 +142,7 @@ function ($http, Thesaurus, $filter, _, guid, $timeout, $q, storage, commonjs, s
             //
             //==================================
             this.load = function () {
-                $scope.model = [];
+               
                 if(!$scope.rawDocuments || _.isEmpty($scope.rawDocuments))
                 {
                     getDocs();
