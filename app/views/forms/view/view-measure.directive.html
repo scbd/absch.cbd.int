@@ -41,9 +41,11 @@
 
 		<div ng-show="document.jurisdictionRegions">
 			<label>Country name and/or Geographical or political/economic group(s)</label>
-				<ul class="km-value">
+				<div class="km-value">
+                <ul>
 					<li ng-repeat="term in document.jurisdictionRegions">{{term|term}}</li>
 				</ul>
+                </div>
 		</div>
 
 
