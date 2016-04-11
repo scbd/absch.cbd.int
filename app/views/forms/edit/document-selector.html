@@ -10,10 +10,10 @@
              <a class="bold" href="#" ng-click="areVisible = true" ng-show="!areVisible && model.length>0" name="showRecords" >
                <i class="fa fa-chevron-circle-right"></i>   {{model.length}} linked records.
              </a>
-             <a  class="bold" href="#" name="hideRecords" ng-click="areVisible=false" ng-show="areVisible && model.length>0">
+             <a  class="bold" href="#" name="hideRecords" ng-click="areVisible=false" ng-show="areVisible && model.length>0 ">
               <i class="fa fa-chevron-circle-down"></i>   {{model.length}} linked records.
              </a>
-            
+          
         </div>
     </div>
 
@@ -33,6 +33,7 @@
 			</table>
         </div>
     </div>
+    
     <!-- Modal -->
 
     <div class="modal fade rounded" id="{{question}}" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

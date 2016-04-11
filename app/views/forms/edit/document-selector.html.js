@@ -45,10 +45,13 @@ function ($http, Thesaurus, $filter, _, guid, $timeout, $q, storage, commonjs, s
             //==================================
 			$scope.saveDocuments = function(){
                 
+                $scope.model = undefined; 
+                
                 _.forEach($scope.rawDocuments.docs, function (doc) {
                     if(doc.__checked){
                         if(!$scope.model)
                             $scope.model = [];
+                            
                       $scope.model.push({identifier: doc.identifier_s});
                     }
                 });
@@ -71,7 +74,9 @@ function ($http, Thesaurus, $filter, _, guid, $timeout, $q, storage, commonjs, s
             //
             //==================================
 			$scope.selectDoc = function(document){
-                          
+                 
+                  $scope.model = undefined;
+                   
                  _.forEach($scope.rawDocuments.docs, function (doc) {
                     doc.__checked = false;
                     
