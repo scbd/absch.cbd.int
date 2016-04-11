@@ -474,9 +474,26 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
                 function closeDocument(){
                     toastr.info("Your record has been closed without saving.");
 
-                     $timeout(function() {
-                        $location.path('/register/' + $filter("mapSchema")(document_type));
-                    }, 100);
+                    var absHosts = ['https://dev-absch.cbd.int/', 'https://training-absch.cbd.int/',
+                       'http://localhost:2010/', 'https://absch.cbd.int/', 'https://absch.cbddev.xyz/',
+                   ]
+                   $timeout(function() {
+                       if ($rootScope.next_url) {
+                           var url = $rootScope.next_url.replace($location.$$protocol + '://' +
+                               $location.$$host + ($location.$$host != 'absch.cbd.int' ? ':' + $location.$$port : '') + '/', '');
+                           _.each(absHosts, function(host) {
+                               url = url.replace(host, '');
+                           });
+                           $timeout(function() {
+                               $location.path(url);
+                           }, 100)
+                       } else {
+                           $timeout(function() {
+                               $location.path('/register/' + $filter("mapSchema")(document_type));
+                           }, 100);
+                       }
+                   }, 500);
+
                 }
 
                 //============================================================
@@ -502,7 +519,7 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
 
                     $timeout(function() {
                         $location.path('/register/' + $filter("mapSchema")(document_type));
-                    }, 100);
+                    }, 1000);
 
                 };
 
@@ -517,7 +534,7 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
                     toastr.info('Record published. The record will be now publicly accessible on ABSCH.');
                     $timeout(function() {
                         $location.path('/register/' + $filter("mapSchema")(document_type));
-                    }, 100);
+                    }, 1000);
 
                 };
 
