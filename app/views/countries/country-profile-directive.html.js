@@ -65,7 +65,7 @@
                     $scope.showMatrix = false;
                     $scope.absNationalReport = 0;
 
-                    if ($location.absUrl().toLowerCase().indexOf("://dev-absch.cbd.int") > 0 || $location.absUrl().toLowerCase().indexOf("localhost:2010") > 0 ||
+                    if ($location.absUrl().toLowerCase().indexOf("://absch.cbddev.xyz") > 0 || $location.absUrl().toLowerCase().indexOf("localhost:2010") > 0 ||
                         $location.absUrl().toLowerCase().indexOf("://training-absch.cbd.int") > 0) {
                         $scope.showMatrix = true;
                     }
@@ -98,7 +98,8 @@
                     var searchQuery = {
                         //fields  : 'id,rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s,rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t',
                         query   : 'schema_s:(' + appConfigService.nationalSchemas.join(' ') +') AND (government_s:' + $scope.code.toLowerCase() + ' OR (originCountries_ss:' +
-                                   $scope.code.toLowerCase() + ' OR permitSourceCountry_ss:' + $scope.code.toLowerCase() + '))'
+                                   $scope.code.toLowerCase() + ' OR permitSourceCountry_ss:' + $scope.code.toLowerCase() + '))',
+                        rowsPerPage    : 500
                     };
                     //
                     // var queryCPCRecv = $http.get(queryCPCRevURL, {cache: true})
