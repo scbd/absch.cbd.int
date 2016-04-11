@@ -18,7 +18,7 @@ define(['app', '/app/js/common.js'], function(app) {
                               
                         $q.when(commonjs.getCountry($scope.code.toUpperCase()))
                         .then(function(country){
-                            console.log(country);
+                            //console.log(country);
                             $scope.partyStatus = country;
                         });
                     }

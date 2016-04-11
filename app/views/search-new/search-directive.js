@@ -326,7 +326,7 @@ define(['app', 'underscore', '/app/js/common.js',
 
                         if(queryType === 'national'){
                               qAnd.push(buildFieldQuery('schema_s', 'national', natSchemas.join(' ')));
-                              qAnd.push(buildFieldQuery('government_s', 'country', "*"));
+                             
                               qOr.push(buildTextQuery('text_EN_txt'      ,'freeText'  , null));
                               qOr.push(buildFieldQuery('government_REL_ss','region'  , null));
                               //qOr.push(buildTextQuery('text_EN_txt'    ,'reference', null));
@@ -335,6 +335,10 @@ define(['app', 'underscore', '/app/js/common.js',
                               qOr.push(buildFieldQuery('all_terms_ss'    ,'scbd', null));
                               qOr.push(buildTextQuery('text_EN_txt'    ,'keyword', null));
                               qOr.push(buildFieldQuery('all_terms_ss'    ,'keyword', null));
+                              
+                               qAnd.push(buildFieldQuery('government_s', 'country', "*"));
+                               qOr.push(buildCountryQuery('government_s'    ,'partyStatus', null));
+                                                           
                         }
 
                         if(queryType === 'reference'){
@@ -353,6 +357,7 @@ define(['app', 'underscore', '/app/js/common.js',
                                qOr.push(buildFieldQuery('regions_REL_ss','region', null));
                                qOr.push(buildTextQuery('text_EN_txt'    ,'keyword', null));
                                qOr.push(buildFieldQuery('all_terms_ss'    ,'keyword', null));
+                              
                         }
 
                         if(queryType === 'scbd'){
@@ -363,6 +368,7 @@ define(['app', 'underscore', '/app/js/common.js',
                                qOr.push(buildTextQuery('text_EN_txt'      ,'region', null));
                                qOr.push(buildTextQuery('text_EN_txt'      ,'freeText'   , null));
                                qOr.push(buildTextQuery('text_EN_txt'    ,'keyword', null));
+                               qOr.push(buildTextQuery('text_EN_txt'    ,'partyStatus', null));
                         }
 
                         qAnd.push(buildDateFieldQuery('updatedDate_dt','publishedOn'));
@@ -378,7 +384,8 @@ define(['app', 'underscore', '/app/js/common.js',
                        return  _.find($scope.setFilters, function(item){if(item.type === type) return true;});
                     }
 
-                  //===============================================================================================================================
+
+                     //===============================================================================================================================
                     function buildTextQuery(field, type, boost){
                         var q = '';
                         var values = [];
@@ -394,7 +401,48 @@ define(['app', 'underscore', '/app/js/common.js',
                         }
                        return  q ? q : null;
                     }
-
+                    
+                  //===============================================================================================================================
+                    function buildCountryQuery(field, type, boost){
+                        var q = '';
+                        var values = '';
+                        var countries = getSearchFilters("country");
+                        
+                        if($scope.setFilters){
+                            _.each($scope.setFilters, function(item){
+                               if(item.type === type){
+                                    values = values + " " + getCountryList(item.id, countries);
+                               }
+                            });
+                            
+                             if(values.length)
+                                 q = addANDConditionText(field, values, boost)
+                        }
+                        console.log(q);
+                        
+                       return  q ? q : null;
+                    }
+                      //===============================================================================================================================
+                    function getCountryList(id, list){
+                         
+                        var templist = _.filter(list, function(item){
+                            
+                             if(id ==='npParty' && item.isNPParty===true)
+                                return item;
+                             if(id ==='npNonParty' && item.isNPParty===false)
+                                return item;
+                             if(id ==='npInbetween' && item.isNPInbetweenParty===true)
+                                return item;
+                             if(id ==='npSignatory' && item.isNPSignatory===true)
+                                return item;
+                        });
+                        
+                        var govs  =  _.pluck(templist, 'id');
+                        //console.log(govs);
+                        
+                        return govs.join(" ");
+                    }
+                        
                   //===============================================================================================================================
                     function buildFieldQuery(field, type, allFilters){
                         var q = '';
@@ -430,6 +478,15 @@ define(['app', 'underscore', '/app/js/common.js',
                         _.each(values, function (val){conditions.push(""+field+":*"+val + "*" + (boost ? "^" + boost : ""))});
                         _.each(conditions, function (condition) { q = q + (q=='' ? '(' : ' OR ') + condition; });
                         q = q +")";
+                        return q;
+                    }
+                    
+                    //===============================================================================================================================
+                    function addANDConditionText(field, values, boost){
+                        var q ="";
+                        var conditions = [];
+                       
+                        q = "(" + field +":("+ values +"))";
                         return q;
                     }
 
@@ -661,7 +718,7 @@ define(['app', 'underscore', '/app/js/common.js',
                     function loadRegionsFilters(){
 
                         $q.when(commonjs.getRegions(), function(regions) {
-                                console.log(regions);
+                                //console.log(regions);
                                 _.each(regions, function(region, index){
                                     //console.log(region);
                                     addRegionFilter(region);
@@ -704,6 +761,12 @@ define(['app', 'underscore', '/app/js/common.js',
                         addFilter('absNationalReport',  {'sort': 8,'type':'national','name':'Interim National Report on the Implementation of the Nagoya Protocol', 'id':'absNationalReport', 'description':'Interim National Report on the Implementation of the Nagoya Protocol'});
 
 
+                        addFilter('npParty',  {'sort': 1,'type':'partyStatus','name':'Party to the Nagoya Protocol', 'id':'npParty', 'description':''});
+                        addFilter('npInbetween',  {'sort': 2,'type':'partyStatus','name':'Ratified not yet Party to the Nagoya Protocol', 'id':'npInbetween', 'description':''});
+                        addFilter('npNonParty',  {'sort': 3,'type':'partyStatus','name':'Not a Party to the Nagoya Protocol ', 'id':'npNonParty', 'description':''});
+                        addFilter('npSignatory',  {'sort': 4,'type':'partyStatus','name':'Signatory to the Nagoya Protocol', 'id':'npSignatory', 'description':''});
+
+
                         //reference
                         addFilter('resource', {'sort': 1,'value':false, type:'reference', 'name':'Virtual Library Records ', 'id':'resource', 'description':'The virtual library in the ABS Clearing-House general literature submitted by any registered user of the ABS Clearing-House.'});
 
@@ -726,7 +789,7 @@ define(['app', 'underscore', '/app/js/common.js',
 
                   //===============================================================================================================================
                     function load(){
-                        console.log("loading queries");
+                        //console.log("loading queries");
                         switch ($scope.currentTab) {
                             case "nationalRecords":
                                 if(refresh_nat)
@@ -772,7 +835,7 @@ define(['app', 'underscore', '/app/js/common.js',
                                     searchService.list(_.extend({query : qSCBD      }, query), queryCanceler)
                             ])
                             .then(function(results){
-                                console.log(results);
+                                //console.log(results);
                                 $scope.recordCount = _.map(results, function(data, index){
                                                         return {
                                                             //type : index == 1 ? 'national' : (index == 2 ? 'reference' : 'scbd'),

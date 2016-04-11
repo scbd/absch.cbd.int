@@ -1,9 +1,12 @@
-<div class="recordDefault card card-1" style="padding:0!important;margin:0!important;">
+<div  style="padding:0!important;margin:0 0 20px 0!important;">
+    
+    <div class="recordDefault card card-1" style="padding:0!important;margin:0!important;">
+    
     
      <a ng-show="showDoc" style="z-index:999999;width:100%;padding:0!important;margin:0!important;" ng-click="showDoc=false">
         <span class="pull-right bold" aria-hidden="true" style="z-index:999999;color:#FFF;font-size:20px;padding-right:10px;position:relative;top:3px;cursor:pointer;">&times;</span>
     </a>
-    <record-viewer class="card card-3" ng-if="showDoc" doc-id='doc.identifier_s' doc-schema='doc.schema_s' style="padding:0!important;margin:0 0 20px 0!important;"></record-viewer>
+    <record-viewer class="card card-3" ng-if="showDoc" doc-id='doc.identifier_s' doc-schema='doc.schema_s' style="padding:0!important;margin:0 0 0 0!important;"></record-viewer>
     
     
     <div ng-show="!showDoc" ng-click="showDoc=!showDoc" style="padding:0!important;margin:0!important;">
@@ -41,6 +44,6 @@
         </div>
     </div>
 
-   
+   </div>
 
 </div>

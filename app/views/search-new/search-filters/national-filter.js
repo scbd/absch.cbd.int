@@ -11,10 +11,8 @@ define(['app'], function(app) {
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
                
                $scope.nf_searchFilters = searchDirectiveCtrl.getSearchFilters('national');
-              
-              
-              
-               
+               $scope.nf_partyStatus = searchDirectiveCtrl.getSearchFilters("partyStatus");
+
                
             }//link
         };
