@@ -1,30 +1,44 @@
-define(['app', '/app/js/common.js'], function(app) {
-    app.directive('ngPartyStatus', [
-        '$rootScope', '$filter', '$timeout', 'commonjs', '$q',
-        function($rootScope, $filter, $timeout, commonjs, $q) {
-            return {
-                restrict: 'EAC',
-                templateUrl : '/app/views/directives/party-status.html',
-                scope : {
+define(['app', '/app/js/common.js'], function (app) {
+app.directive('ngPartyStatus', function () {
+        return {
+            restrict: 'EAC',
+            templateUrl : '/app/views/directives/party-status.html',
+           
+            scope : {
                     code : '=',
                     government : '='
                 },
-                link: function($scope, elem, attrs) {
+            controller: [ "$scope", '$rootScope', '$filter', '$timeout', 'commonjs', '$q',
+					 function ($scope, $rootScope, $filter, $timeout, commonjs, $q) 
+					{
+					var iso_code;
                     
-                    if($scope.government || $scope.code){
+                    // if($scope.code)
+                    //     getStatus($scope.code);
                         
-                        if($scope.government)
-                              $scope.code = $scope.government.identifier;
-                              
-                        $q.when(commonjs.getCountry($scope.code.toUpperCase()))
-                        .then(function(country){
-                            //console.log(country);
-                            $scope.partyStatus = country;
-                        });
+                    if($scope.government)
+                        getStatus($scope.government.identifier);
+                     
+                    function getStatus(code){ 
+                        if(!code)return;
+                        code = code.toUpperCase();
+                        $q.when(commonjs.getCountry(code))
+                            .then(function(country){
+                                $scope.partyStatus = country;
+                            });
                     }
-                }
-            };
-        }
-    ]);
+                   
+                     $scope.$watch('code', function(newValue, oldValue){
+                            //if(newValue && newValue != oldValue){
+                                getStatus($scope.code); 
+                            //}
+                        });
+            
+                    
 
+					}
+				]
+        };
+    });
 });
+

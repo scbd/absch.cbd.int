@@ -24,9 +24,6 @@ a:active{color: #000;}
 }
 
 
-
-
-
 /*#dropdownNotification a:focus {
 background-color: white;
 }*/
@@ -1560,7 +1557,7 @@ footer .logo {
     
     #government {float:right;} 
     
-   #government .partystatus{font-size:10px;margin-left:10px!important;white-space: nowrap; background-color:transparent;border:0;padding:0; border-radius:0; position:relative; top:0px; font-weight:500; text-transform: uppercase;}
+   #government .partystatus{font-size:10px;margin-left:10px!important;white-space: nowrap; background-color:transparent!important;border:0;padding:0; border-radius:0; position:relative; top:0px; font-weight:500; text-transform: uppercase;}
    #government .color-party{color:#5F4586!important;}
    #government .color-nonparty{color:#333!important;}
    #government .color-inbetween{color:#EC971F!important;} 
