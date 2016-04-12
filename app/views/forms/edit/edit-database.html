@@ -40,7 +40,7 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="km-control-group" name="title" required caption="Website or database name">
-							<div class="help-block">Please enter the name of the website or database as you would like it to appear in the title of the record.</div>
+							<div class="help-info">Please enter the name of the website or database as you would like it to appear in the title of the record.</div>
 							<div km-textbox-ml required name="title" ng-model="document.title" locales="document.header.languages" placeholder="example: The title"></div>
 						</div>
 					</div>
@@ -48,7 +48,7 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="km-control-group" name="description" required caption="Description">
-							<div class="help-block">Please enter a short description of the national website or database, such as its function or information it makes available.</div>
+							<div class="help-info">Please enter a short description of the national website or database, such as its function or information it makes available.</div>
 							<div km-rich-textbox required name="description" ng-model="document.description" rows="4" locales="document.header.languages" placeholder="example: The description"></div>
 						</div>
 					</div>
@@ -56,7 +56,7 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="km-control-group" name="website" required caption="Website address">
-							<div class="help-block">Please provide the full URL of the website (e.g. http://www.cbd.int).</div>
+							<div class="help-info">Please provide the full URL of the website (e.g. http://www.cbd.int).</div>
 							<input type="url" ng-model="document.website.url" required class="form-control" placeholder="example: http://www.cbd.int" />
 						</div>
 					</div>
@@ -70,7 +70,7 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="km-control-group" name="address" caption="Any other relevant information">
-							<div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
+							<div class="help-info">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
 							<div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
 						</div>
 					</div>
@@ -91,7 +91,7 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="km-control-group" name="notes">
-							<div class="help-block">The “Notes” field is for your personal notes or comments and will be hidden when
+							<div class="help-info">The “Notes” field is for your personal notes or comments and will be hidden when
                                             viewing the record. This field is not meant to be used for confidential information.</div>
 							<textarea class="form-control" name="notes" ng-model="document.notes" rows="4"></textarea>
 						</div>

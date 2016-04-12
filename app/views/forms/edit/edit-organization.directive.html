@@ -112,14 +112,14 @@
 				<div class="row">
 					<div class="col-md-6 col-xs-12">
 						<div class="km-control-group" name="phones" required caption="Phone numbers">
-							<div class="help-block">Please use the following format: +[country code] [city code] [telephone number] [extension, if necessary].</div>
+							<div class="help-info">Please use the following format: +[country code] [city code] [telephone number] [extension, if necessary].</div>
 							<div km-inputtext-list required name="phones" ng-model="document.phones" placeholder="example: +1 514.288.2220"></div>
 						</div>
 					</div>
 
 					<div class="col-md-6 col-xs-12">
 						<div class="km-control-group" name="faxes" caption="Fax Numbers">
-							<div class="help-block">Please use the following format: +[country code] [city code] [telephone number] [extension, if necessary].</div>
+							<div class="help-info">Please use the following format: +[country code] [city code] [telephone number] [extension, if necessary].</div>
 							<div km-inputtext-list name="faxes" ng-model="document.faxes" placeholder="example: +1 514.288.6588"></div>
 						</div>
 					</div>
@@ -200,7 +200,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="km-control-group" name="address" caption="Any other relevant information">
-							<div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
+							<div class="help-info">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
 							<div km-textbox-ml ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
 						</div>
 					</div>
@@ -218,7 +218,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="km-control-group" name="notes" caption="Notes">
-							<div class="help-block">The “Notes” field is for your personal notes or comments and will be hidden when
+							<div class="help-info">The “Notes” field is for your personal notes or comments and will be hidden when
                                             viewing the record. This field is not meant to be used for confidential information.</div>
 							<textarea class="form-control" name="notes" ng-model="document.notes" rows="4"></textarea>
 						</div>

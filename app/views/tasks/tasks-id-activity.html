@@ -148,7 +148,7 @@
 	      <div class="modal-body">
 		    <p ng-class="{ 'has-warning':rejectForm.reason.$error.required, 'has-success':!rejectForm.reason.$invalid }">
 			    <textarea class="form-control" rows="5" name="reason" ng-model="rejectReason" required></textarea>
-			    <span class="help-block" ng-show="rejectForm.reason.$error.required">Please provide instructions on how you want the record to be modified or the reason why you rejected this record.</span>
+			    <span class="help-info" ng-show="rejectForm.reason.$error.required">Please provide instructions on how you want the record to be modified or the reason why you rejected this record.</span>
 	        </p>
 	      </div>
 	      <div class="modal-footer">
