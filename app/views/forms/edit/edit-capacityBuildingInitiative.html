@@ -47,6 +47,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="km-control-group" name="projectNumber" caption="Project number or identifier">
+                                    <div class="help-info">Please provide any project number, identifier or reference number, if applicable.</div>
 									<div km-textbox-ml name="projectNumber" ng-model="document.projectNumber" locales="document.header.languages"></div>
 								</div>
 							</div>
@@ -239,7 +240,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="km-control-group" required name="categories" caption="Category(ies) of capacity-building activities">
-									<div km-term-check name="categories" required ng-model="document.categories" terms="options.categories()" binding-type="term[]"></div>
+									<div km-term-check show-description="true" name="categories" required ng-model="document.categories" terms="options.categories()" binding-type="term[]"></div>
 								</div>
 							</div>
 						</div>
@@ -249,7 +250,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="km-control-group" required name="fundingSourceTypes" caption="Type(s) of funding source">
-									<div km-term-check name="fundingSourceTypes" required ng-model="document.fundingSourceTypes" terms="options.fundingSources()" binding-type="term[]"></div>
+									<div km-term-check show-description="true" name="fundingSourceTypes" required ng-model="document.fundingSourceTypes" terms="options.fundingSources()" binding-type="term[]"></div>
 								</div>
 							</div>
 						</div>
@@ -310,7 +311,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="km-control-group" name="resultsAchievements" caption="Results">
-									<span class="help-block">Please provide a short summary of the main achievements of the initiative, including those related to advancing gender equality in achieving the objectives of the Convention and its Protocols, if applicable</span>
+									<span class="help-block">Please provide a short summary of the main achievements of the initiative, including those related to advancing gender equality in achieving the objectives of the Convention and its Protocols, if applicable. (max 200 words)</span>
 									<div km-textbox-ml name="resultsAchievements" ng-model="document.resultsAchievements" rows="4" locales="document.header.languages"></div>
 								</div>
 							</div>
