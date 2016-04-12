@@ -1,6 +1,6 @@
 define(['app', 'underscore'], function (app, _) {
 
-	app.directive('editSchemaResourceBase', ["$q", "$timeout", function ($q, $timeout)
+	app.directive('editSchemaResourceBase', ["$q", "$timeout", "Thesaurus", function ($q, $timeout, Thesaurus)
 	{
 		return {
 			restrict: 'EAC',
@@ -9,7 +9,7 @@ define(['app', 'underscore'], function (app, _) {
 			controller: ["$scope", "$http", "$filter","IStorage", function ($scope, $http, $filter, storage)
 			{
 
-				var changeParentFor = ['F7D357FEC3884D388FD49CECBCFF5083', '3A02804CB9AB43F2BADF23B6BC0F5661']
+				var changeParentFor = ['F7D357FEC3884D388FD49CECBCFF5083', '3A02804CB9AB43F2BADF23B6BC0F5661'];
 				var newParent = '5427EB8F-5532-4AE2-88EE-5B9619917480';
 
 				var cppToSkip = ["EC94899F15EE40C6A0F7D0B1F774A521","1D2710D3-75C8-475D-8634-F912F06DAF25",
@@ -24,8 +24,12 @@ define(['app', 'underscore'], function (app, _) {
 								'54AF023578A64FA19301D04DB113CE13','658EC39AB6CC46D3AC6F955FD404673B',
 								'FFBEBDD92D194903ADD28F8AEF42C552','D064BAD7C87D4868959CD3AC8C77D4B0',
 								'52DFF282A99E43F999CCADE1F15E7A22','298DB8DACEF840389B7318B06EB4FD43',
-								'3BA1D57B-82E4-4558-A51D-163238034FEE','E502A55855C24FE486CEA0538D1768B7']
-				var vlrToSkip = ['3BA1D57B-82E4-4558-A51D-163238034FEE']
+								'3BA1D57B-82E4-4558-A51D-163238034FEE','E502A55855C24FE486CEA0538D1768B7'];
+				var vlrToSkip = ['3BA1D57B-82E4-4558-A51D-163238034FEE', '35E029ED-D92F-41C8-9CDC-52F3F35D7E36',
+								 'D570A745-D8C3-4698-BB77-0A90C140F3F2', '47DD3FF6-D369-4E64-B0BC-5DADF3B70C95',
+							     '29C670AB-C198-484F-A2ED-9BAB1DAC7431', '507D46E0-DC49-47F0-B273-26ECD9CC8948',
+							 	 'EAE641FD-6A82-4C15-84CD-0F12ABA5CBC1', 'DFEECF62-EC3D-4F5C-BAC6-2FD308F81277',
+							 	 '9EC60226-A7E4-441E-AC7D-2580F111EC3B'];
 				var mccToSkip = ['EC94899F15EE40C6A0F7D0B1F774A521','1D2710D3-75C8-475D-8634-F912F06DAF25',
 							'B8A150E054154AD3AD97856ABD485E90',
 							'DCD2D478CAA24DC98FCCD71135BA6B6E','3BF57EA8-F709-454E-81B2-900BF09713F0',
@@ -35,24 +39,8 @@ define(['app', 'underscore'], function (app, _) {
 							'54AF023578A64FA19301D04DB113CE13',	'D064BAD7C87D4868959CD3AC8C77D4B0',
 							'52DFF282A99E43F999CCADE1F15E7A22',
 							'3BA1D57B-82E4-4558-A51D-163238034FEE','68FEE55850674F82B938622A7B986A94',
-							'572585C7-824E-4F01-A9CE-40D999CEF393', 'A5541F43A5084AA0BEFF28D22BC53023']
+							'572585C7-824E-4F01-A9CE-40D999CEF393', 'A5541F43A5084AA0BEFF28D22BC53023'];
 				var absSubjectsToSkip = [];
-
-				if($scope.document_type=="modelContractualClause"){
-					$scope.heading = "Article 19 & 20 tool";
-					$scope.shortHeading = "MCC";
-					absSubjectsToSkip = mccToSkip;
-				}
-				else if($scope.document_type=="resource"){
-					$scope.heading = "Virtual Library Record";
-					$scope.shortHeading = "VLR";
-					absSubjectsToSkip = vlrToSkip;
-				}
-				else if($scope.document_type=="communityProtocol"){
-					$scope.heading = "Community protocols and procedures and customary law";
-					$scope.shortHeading = "CPP";
-					absSubjectsToSkip = cppToSkip;
-				}
 
 				_.extend($scope.options, {
 					languages     : function() {
@@ -61,9 +49,9 @@ define(['app', 'underscore'], function (app, _) {
 						$http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })
 						]).then(function(o) {
 						var data = $filter("orderBy")(o[0].data, "name");
-						data.push(o[1].data)
+						data.push(o[1].data);
 						return  data;
-						})
+						});
 					},
 					absSubjects   : function() {
 						return $http.get("/api/v2013/thesaurus/domains/CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924/terms", { cache: true })
@@ -104,16 +92,79 @@ define(['app', 'underscore'], function (app, _) {
 							return $scope.options.documentLinksExt[0].options;
 						})
 					}],
+					aichiTargets    : function() { return $http.get("/api/v2013/thesaurus/domains/AICHI-TARGETS/terms", 					   { cache: true }).then(function(o){ return o.data; }); },
+					absKeyAreas     : function() { return $http.get("/api/v2013/thesaurus/domains/2B2A5166-F949-4B1E-888F-A7976E76320B/terms", { cache: true }).then(function(o){return o.data;});},
+					fileFormats 	: function() { return $http.get("/api/v2013/thesaurus/domains/D2D97AB3-4D20-41D4-8CBE-B21C33924823/terms", { cache: true }).then(function(o){ return Thesaurus.buildTree(o.data); }); },
+	 			    purposes 	    : function() { return $http.get("/api/v2013/thesaurus/domains/E712C9CD-437E-454F-BA72-E7D20E4C28ED/terms", { cache: true }).then(function(o){ return Thesaurus.buildTree(o.data); }); },
+	 			    targetGroups    : function() { return $http.get("/api/v2013/thesaurus/domains/AFB155C4-93A6-402C-B812-CFC7488ED651/terms", { cache: true }).then(function(o){ return o.data; }); },
+	 			    expertiseLevels : function() { return $http.get("/api/v2013/thesaurus/domains/1B57D9C3-F5F8-4875-94DC-93E427F3BFD8/terms", { cache: true }).then(function(o){ return o.data; }); },
+
 				});
 
+				//============================================================
+				//
+				//============================================================
+				$scope.setDocument({aichiTargets: [{identifier: "AICHI-TARGET-16"}]}, true);
+
+				//============================================================
+				//
+				//============================================================
+			    $scope.IsCapacityBuilding = function(document) {
+
+			        document = document || $scope.document;
+
+			        if (!document || !document.purpose)
+			            return false;
+
+			        var purposes = _.map(document.purpose, 'identifier');
+
+			        return _.contains(purposes, 'A5C5ADE8-2061-4AB8-8E2D-1E6CFF5DD793') || // Assessing capacity-building needs
+			               _.contains(purposes, '3813BA1A-2DE7-4DD5-8415-3B2C6737E567') || // Designing capacity building initiatives
+			               _.contains(purposes, '5054AC52-E738-4694-A403-6490FE7D4CF4') || // Monitoring and evaluation of capacity-building initiatives and products
+			               _.contains(purposes, '05FA6F66-F942-4713-BB4C-DA032C111188') || // Providing technical guidance
+			               _.contains(purposes, '9F48AEA0-EE28-4B6F-AB91-E0E088A8C6B7') || // Raising awareness
+			               _.contains(purposes, '5831C357-95CA-4F09-963B-DF9E8AFD8C88');   // Training/learning
+			    };
+
+				//============================================================
+				//
+				//============================================================
+				$scope.$watch('document.header.schema',function(newValue) {
+
+					if(newValue=="modelContractualClause"){
+						$scope.heading      = "Article 19 & 20 tool";
+						$scope.shortHeading = "MCC";
+						$scope.isMcc        = true;
+						absSubjectsToSkip   = mccToSkip;
+					}
+					else if(newValue=="resource"){
+						$scope.heading      = "Virtual Library Record";
+						$scope.shortHeading = "VLR";
+						$scope.isResource   = true;
+						absSubjectsToSkip   = vlrToSkip;
+					}
+					else if(newValue=="communityProtocol"){
+						$scope.heading      = "Community protocols and procedures and customary law";
+						$scope.shortHeading = "CPP";
+						$scope.isCpp        = true;
+						absSubjectsToSkip   = cppToSkip;
+					}
+				});
+
+				//============================================================
+				//
+				//============================================================
 				function removeFromList(badSubjectList,validList){
-					return _.without(validList,badSubjectList)
+					return _.without(validList,badSubjectList);
 				}
 				//if(_.contains(['modelContractualClause', 'resource', 'communityProtocol'],$scope.type))
-					$scope.setDocument({libraries: [{ identifier: "cbdLibrary:abs-ch" }]}, true);
+					// $scope.setDocument({libraries: [{ identifier: "cbdLibrary:abs-ch" }]}, true);
 				// else
 				// 	$scope.setDocument({}, true);
 
+				//============================================================
+				//
+				//============================================================
 				$scope.$on("loadDocument", function(evt, info) {
 					var loadRecords = [];
 					_.each($scope.document.organizations, function(org){
@@ -121,23 +172,26 @@ define(['app', 'underscore'], function (app, _) {
 					});
 					$q.all(loadRecords).then(function(data){
 						$scope.document.organizationsRef = data;
-					})
+					});
 				});
 
+				//============================================================
+				//
+				//============================================================
 				$scope.$watch("document.organizationsRef", function(newValue){
 
 					if(newValue){
 						$scope.document.organizations = [];
 						_.each(newValue, function(org){
-							$scope.document.organizations.push({identifier: org.header.identifier})
+							$scope.document.organizations.push({identifier: org.header.identifier});
 						});
 
 					}
 				});
 
-				// //==================================
-				// //
-				// //==================================
+				//==================================
+				//
+				//==================================
 				$scope.loadRecords = function(identifier) {
 
 
@@ -150,19 +204,19 @@ define(['app', 'underscore'], function (app, _) {
 							}, function(e) {
 								if (e.status == 404) {
 									storage.drafts.get(identifier)
-										.then(function(r) { deferred.resolve(r.data)},
-											function(e) { deferred.reject (e)});
+										.then(function(r) { deferred.resolve(r.data);},
+											function(e) { deferred.reject (e);});
 								}
 								else {
-									deferred.reject (e)
+									deferred.reject (e);
 								}
 							});
 						return deferred.promise;
 					}
 
-				}
+				};
 			}]
 		};
-	}])
+	}]);
 
 });

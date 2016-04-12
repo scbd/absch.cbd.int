@@ -32,39 +32,10 @@
 			</div>
 		</div>
 
-		<div ng-show="document.resourceAccess">
-			<label>How to obtain the resource</label>
-			<div class="km-value km-pre">{{document.resourceAccess | lstring:locale}}</div>
-		</div>
-
-
-		<div ng-show="display('libraries') && document.libraries">
-			<label>Relevant CBD libraries</label>
-			<div class="km-value">
-				<ul>
-					<li ng-repeat="term in document.libraries">{{term|term}}</li>
-				</ul>
-			</div>
-		</div>
-
 		<div ng-show="document.authors">
 			<label>Author(s)</label>
 			<div class="km-value km-pre">{{document.authors | lstring:locale}}</div>
 		</div>
-
-		<div ng-show="document.authorsInfo">
-			<label>Author’s contact information</label>
-			<div class="km-value km-pre">{{document.authorsInfo | lstring:locale}}</div>
-		</div>
-
-		<!-- <div ng-show="document.languages">
-			<label>Language(s)</label>
-			<div class="km-value" >
-				<ul>
-					<li ng-repeat="term in document.languages">{{term|term}}</li>
-				</ul>
-			</div>
-		</div> -->
 
 		<div ng-show="document.publicationYear">
 			<label>Publication year</label>
@@ -78,19 +49,11 @@
 					<div class="col-sm-12"  ng-repeat="organization in organizations">
 						<div class="km-value">
 							<div view-contact-reference ng-model="organization.document" locale="locale"></div>
- 
-                            <!--<div class="view-authority-reference" ng-model="organization.document" locale="locale"></div>-->
 						</div>
 					</div>
 				</div>
 			</div>
-			<!-- <div class="km-value" >
-				<ul>
-				<li class="cbdViewOrganizationReference" ng-repeat="item in organizations" ng-model="item.document" locale="locale"></li>
-				</ul>
-			</div> -->
 		</div>
-
 
 		<div ng-show="document.covers">
 			<label>Cover image(s)</label>
@@ -108,15 +71,44 @@
 		<div ng-show="document.resourceTypes">
 			<label>Type of resource</label>
 			<div class="km-value">
-				<ul>
+				<ul class="list">
 					<li ng-repeat="term in document.resourceTypes">{{term | term | lstring:locale}}</li>
 				</ul>
 			</div>
 		</div>
 
-		<div ng-show="document.publisher">
-			<label>Publisher and its location</label>
-			<div class="km-value km-pre">{{document.publisher | lstring:locale}}</div>
+		<div ng-show="document.fileFormat">
+			<label>Format/File type</label>
+
+			<div class="km-value km-pre">{{document.fileFormat | term:locale}}</div>
+		</div>
+
+		<div ng-show="document.formatDetails">
+			<label>Format details</label>
+
+			<div class="km-value km-pre">{{document.formatDetails | lstring:locale}}</div>
+		</div>
+
+		<div ng-show="document.purpose">
+			<label>Main purpose of the resource</label>
+
+			<ul class="km-value">
+				<li ng-repeat="purpose in document.purpose">{{purpose | term:locale}}</li>
+			</ul>
+		</div>
+
+		<div ng-show="document.targetGroups">
+			<label>Target group(s)/beneficiary(ies)</label>
+
+			<ul class="km-value">
+				<li ng-repeat="group in document.targetGroups">{{group | term:locale}}</li>
+			</ul>
+		</div>
+
+		<div ng-show="document.expertiseLevel">
+			<label>Level of the content or   level of knowledge/expertise of the audience for which the resource is intended</label>
+
+			<div class="km-value km-pre">{{document.expertiseLevel | term:locale}}</div>
 		</div>
 
 		<div ng-show="document.rights">
@@ -143,10 +135,17 @@
 			</div>
 		</div>
 
-		<div>
+		<div ng-show="document.aichiTargets">
+			<label>Related Aichi target(s)</label>
+			<ul class="km-value">
+				<li ng-repeat="term in document.aichiTargets">{{term | term:locale}}</li>
+			</ul>
+		</div>
+
+		<div ng-show="document.absSubjects || document.mccKeywords || document.keywords">
 
 			<label> Thematic areas(s) and keywords for facilitating online searche</label>
-			<div class="km-value">
+			<div class="km-value" ng-show="document.absSubjects || document.mccKeywords">
 				<ul>
 					<li ng-repeat="term in document.absSubjects">{{term|term}}</li>
 					<li ng-repeat="term in document.mccKeywords">{{term|term}}</li>
@@ -159,6 +158,13 @@
 				<div class="km-value km-pre">{{document.keywords | lstring:locale}}</div>
 			</div>
 
+		</div>
+
+		<div ng-show="document.absKeyAreas">
+			<label>Key areas and strategic measures for capacity-building and development</label>
+			<ul class="km-value">
+				<li ng-repeat="term in document.absKeyAreas">{{term | term:locale}}</li>
+			</ul>
 		</div>
 
 		<div ng-show="document.relevantInformation||document.relevantDocuments">

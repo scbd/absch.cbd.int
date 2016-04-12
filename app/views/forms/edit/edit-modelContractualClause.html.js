@@ -38,6 +38,8 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js','/app/views/forms/e
       if (/^\s*$/g.test(document.notes))
         document.notes = undefined;
 
+      document.aichiTargets = undefined;
+
       if(!$scope.isOtherSelected(document.languages))
           document.languageName = undefined;
 

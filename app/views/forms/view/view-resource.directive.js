@@ -22,7 +22,7 @@ app.directive("viewResource", [function () {
 				if(!$scope.hide) return true; //show all fields
 
 				return( $scope.hide.indexOf(field) >= 0 ? false : true);
-			}
+			};
 
 			//====================
 			//
@@ -37,7 +37,7 @@ app.directive("viewResource", [function () {
 
 			$scope.tryme = function(){
 				console.log('tryme');
-			}
+			};
 
 			//====================
 			//
