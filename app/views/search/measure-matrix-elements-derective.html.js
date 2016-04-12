@@ -90,7 +90,7 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                                 if(!_.some($scope.terms, {identifier:other.identifier + '#' + element})){
 
                                     var otherElement = angular.copy(other);
-
+                                    otherElement.title.en = 'Reference to other relevant articles and sections';
                                     otherElement.identifier = otherElement.identifier + '#' + element;
                                     otherElement.broaderTerms.push(element);
                                     $scope.terms.push(otherElement)
@@ -268,13 +268,13 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                     if($scope.type!='single'){
                         if(measure.absMeasures.geneticResource) {
                             if(measure.absMeasures.geneticResource.answer){
-                                var id = addCustomElement('All element of measures', '4E2974DF-216E-46C8-8797-8E3A3BLAISE1', 1);
+                                var id = addCustomElement('Covers all genetic resources', '4E2974DF-216E-46C8-8797-8E3A3BLAISE1', 1);
                                 var geneticResource = measure.absMeasures.geneticResource;
                                 newMeasureElement({identifier:id, section:geneticResource.section}, measure);
                             }
                             else{
 
-                                var id = addCustomElement('Specific element of measures', '4E2974DF-216E-46C8-8797-8E3A3BLAISE1', 2);
+                                var id = addCustomElement('Covers a subset of genetic resources', '4E2974DF-216E-46C8-8797-8E3A3BLAISE1', 2);
                                 var geneticResource = measure.absMeasures.geneticResource;
                                 var identifier = newMeasureElement({identifier:id, section:{}}, measure);
                                 grElement = _.findWhere($scope.terms, {'identifier': identifier});
@@ -441,7 +441,7 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
 
                         if(element.sort)
                             term.sortOrder = element.sort;
-                            
+
                         if (term.narrowerTerms) {
                             term.isChildSelected = updateProperties(term.narrowerTerms, level + 1);
                         }
@@ -874,9 +874,9 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                             "nonPreferedTerms": []
                         }, {
                             "identifier": "08B2CDEC-786F-4977-AD0A-6A709695528D",
-                            "name": "Access?",
+                            "name": "Access",
                             "title": {
-                                "en": "Access?"
+                                "en": "Access"
                             },
                             "shortTitle": {},
                             "description": "",
@@ -967,9 +967,9 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                             "nonPreferedTerms": []
                         }, {
                             "identifier": "5427EB8F-5532-4AE2-88EE-5B961BLAISE4",
-                            "name": "Issuance of a permit of its equivalent at the time of access for constituting an internationally recognized certificate of compliance?",
+                            "name": "Issuance of a permit of its equivalent at the time of access for constituting an internationally recognized certificate of compliance",
                             "title": {
-                                "en": "Issuance of a permit of its equivalent at the time of access for constituting an internationally recognized certificate of compliance?"
+                                "en": "Issuance of a permit of its equivalent at the time of access for constituting an internationally recognized certificate of compliance"
                             },
                             "shortTitle": {},
                             "description": "",
@@ -980,9 +980,9 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                             "nonPreferedTerms": []
                         }, {
                             "identifier": "5427EB8F-5532-4AE2-88EE-5B961BLAISE5",
-                            "name": "Establish rules and procedures for mutually agreed terms?",
+                            "name": "Establish rules and procedures for mutually agreed terms",
                             "title": {
-                                "en": "Establish rules and procedures for mutually agreed terms?"
+                                "en": "Establish rules and procedures for mutually agreed terms"
                             },
                             "shortTitle": {},
                             "description": "",
@@ -993,9 +993,9 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                             "nonPreferedTerms": []
                         }, {
                             "identifier": "9847FA8A-16C3-4466-A378-F20AF9FF883B",
-                            "name": "Benefit-sharing?",
+                            "name": "Benefit-sharing",
                             "title": {
-                                "en": "Benefit-sharing?"
+                                "en": "Benefit-sharing"
                             },
                             "shortTitle": {},
                             "description": "",
@@ -1059,9 +1059,9 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                             "nonPreferedTerms": []
                         }, {
                             "identifier": "E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63",
-                            "name": "Compliance?",
+                            "name": "Compliance",
                             "title": {
-                                "en": "Compliance?"
+                                "en": "Compliance"
                             },
                             "shortTitle": {},
                             "description": "",
@@ -1072,9 +1072,9 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                             "nonPreferedTerms": []
                         },  {
                             "identifier": "4C57FDB4-3B92-46DD-B4C2-BB93DBLAISE8",
-                            "name": "Compliance with domestic legislation or regulatory requirements of the other Party (Article 15 and 16)?",
+                            "name": "Compliance with domestic legislation or regulatory requirements of the other Party (Article 15 and 16)",
                             "title": {
-                                "en": "Compliance with domestic legislation or regulatory requirements of the other Party (Article 15 and 16)?"
+                                "en": "Compliance with domestic legislation or regulatory requirements of the other Party (Article 15 and 16)"
                             },
                             "shortTitle": {},
                             "description": "",
@@ -1098,7 +1098,7 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                             "nonPreferedTerms": []
                         }, {
                             "identifier": "1FCC6CA9-022F-42FD-BD02-43AE674FEB56",
-                            "name": "Compliance with mutually agreed terms (Article 18)?",
+                            "name": "Compliance with mutually agreed terms (Article 18)",
                             "title": {
                                 "en": "Compliance with mutually agreed terms"
                             },
@@ -1111,9 +1111,9 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                             "nonPreferedTerms": []
                         }, {
                             "identifier": "01DA2D8E-F2BB-4E85-A17E-AB0219194A17",
-                            "name": "Provisions on how its application relates to other international instruments?",
+                            "name": "Provisions on how its application relates to other international instruments",
                             "title": {
-                                "en": "Provisions on how its application relates to other international instruments?"
+                                "en": "Provisions on how its application relates to other international instruments"
                             },
                             "shortTitle": {},
                             "description": "",

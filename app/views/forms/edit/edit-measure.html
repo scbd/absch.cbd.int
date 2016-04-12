@@ -301,17 +301,17 @@
             <div class="help-info">Please select which elements are included in the measure being registered and identify the relevant articles or sections of the
                 measure for each of the selected elements. This information will assist to in displaying information on the national legal
                 framework.</div>
-            
-            
+
+
             <!--<div class="help-block">
                 {{document.absMeasures}}
                 <span ng-repeat="elm in document.absMeasures.relevantElements">
                     {{$index}}. {{elm.identifier|term}}<span ng-if="elm.customValue">({{elm.customValue}})</span><br/>
                 </span>
             </div>-->
-            
-            
-            
+
+
+
             <!-- // <input type="radio" name="rd_{{term.identifier}}" ng-model="identifiers[term.identifier]" autocomplete="off" value="{{term.identifier}}">
             // <input type="radio" name="rd_{{term.identifier}}" ng-model="identifiers[term.identifier]" autocomplete="off" value="{{term.identifier}}">
            -->
@@ -589,30 +589,28 @@
               ng:if="!isStaticIdentifier(term.identifier) && (!term.broaderTerms || isParentSelected(term.identifier, term.level))">
                 <table style="width:100%" cellspacing="0" cellpadding="0">
                 <tr  ng:class="{'paddingleft0 btop' : isMainElement(term.identifier), 'btop':isYesNo(term.identifier), 'spacing30':!isYesNo(term.identifier), 'measureChecked' : identifiers[term.identifier]}" >
+                  <td style="text-align:left;vertical-align:middle;width:12%" >
+                      <div class="btn-group matrix-btn " ng:if="isYesNo(term.identifier)" ng:class="{'bg-main' : isMainElement(term.identifier)}">
+                         <label class="btn">
+                           <input type="radio" ng-change="updateSelected(term, identifiers[term.identifier],'yes')" ng-model="identifiers[term.identifier]" name="rd_{{term.identifier}}"
+                           ng-value="{{((term.narrowerTerms.length||0) ==0) ? true : false}}"> Yes
+                         </label>
+                         <label class="btn">
+                             <input type="radio" ng-change="updateSelected(term, identifiers[term.identifier], 'no')" ng-model="identifiers[term.identifier]" name="rd_{{term.identifier}}"
+                             ng-value="{{((term.narrowerTerms.length||0) == 0) ? false : true}}"> No
+                         </label>
+                     </div>
+                  </td>
                   <td style="text-align:left;vertical-align:middle;" id="{{term.identifier}}_help" style="" >
-
                     <label for="{{term.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED' ? 'otherAbsMeasure' : term.identifier}}" name="{{term.identifier}}" >
                          &nbsp;
                          <input type="checkbox" ng-model="identifiers[term.identifier]" ng-required="IsRequired()" value="{{term.identifier}}"
                          ng:if="!isReadOnly(term.identifier) && !isYesNo(term.identifier)" />
-
                          <span title="{{term.description|lstring:locale}}" ng:class="{true:'bold',false:'normalText'}[isMainElement(term.identifier) || isYesNo(term.identifier) || isSecondaryElement(term.identifier)]" style="position:relative;top:7px;">
                               <span ng-class="{'bold':term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0}">{{term.title||term.name | lstring:locale}} </span>
                               <i ng-show="term.description" class="icon-question-sign"></i>
                          </span>
                     </label>
-                    <div class="btn-group matrix-btn " ng:if="isYesNo(term.identifier)" ng:class="{'bg-main' : isMainElement(term.identifier)}">
-                      <label class="btn">
-                        <input type="radio" ng-change="updateSelected(term, identifiers[term.identifier],'yes')" ng-model="identifiers[term.identifier]" name="rd_{{term.identifier}}"
-                        ng-value="{{((term.narrowerTerms.length||0) ==0) ? true : false}}"> Yes
-                      </label>
-                      <label class="btn">
-                          <input type="radio" ng-change="updateSelected(term, identifiers[term.identifier], 'no')" ng-model="identifiers[term.identifier]" name="rd_{{term.identifier}}"
-                          ng-value="{{((term.narrowerTerms.length||0) == 0) ? false : true}}"> No
-                      </label>
-                    </div>
-                  </td>
-                  <td style="text-align:left;vertical-align:middle" >
                   </td>
                   <td style="width:250px;text-align:right;vertical-align:middle">
                     <div ng-show="term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')<0 && ((identifiers[term.identifier] && (term.narrowerTerms.length||0) == 0) || (scopeOfMeasureTerm == term.identifier && identifiers[term.identifier]==false))"
@@ -639,7 +637,7 @@
                 <table class="table table-hover" style="padding:0;margin:0;width:100%;">
                   <tr ng-repeat="element in otherElements">
                         <td>
-                          <i class="btn btn-primary fa fa-remove" style="cursor:pointer" ng-if="otherElements.length > 1" ng-click="deleteOtherElement(element, otherElements)"/>
+                          <i class="fa fa-remove color-red" style="cursor:pointer"  ng-if="otherElements.length > 1" ng-click="deleteOtherElement(element, otherElements)"/>
                         </td>
                         <td>
                             <div style="max-width:200px" km-textbox-ml="" ng-model="element.name" locales="locales"

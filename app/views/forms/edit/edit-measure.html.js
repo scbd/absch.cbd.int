@@ -296,7 +296,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                         otherElement.identifier = otherElement.identifier + '#' + element;
                     otherElement.broaderTerms.push(element);
                     var el = _.findWhere(elementMeasures, {identifier:element});
-                    otherElement.title.en = el.title.en.replace('Does the measure cover ', 'Any other element relevant to ');
+                    otherElement.title.en = 'Reference to any other relevant articles and sections';
                     elementMeasures.push(otherElement);
 
 
