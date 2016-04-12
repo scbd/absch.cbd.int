@@ -4,7 +4,7 @@ define(['app', 'underscore', '/app/views/forms/view/record-loader.directive.html
           'scbd-branding/directives/xuser-notifications-panel', '/app/views/directives/block-region-directive.js',
 ], function(app, _) {
  "use strict";
-    app.controller("recordHistoryController", ["$rootScope", "$scope", "$filter", "$routeParams", "IStorage", "$q",
+    app.controller("recordDetailsController", ["$rootScope", "$scope", "$filter", "$routeParams", "IStorage", "$q",
      "IWorkflows", "IUserNotifications", "commonjs", "$element", "$timeout", "roleService", "toastr", "$location",
         function($rootScope, $scope, $filter, $routeParams, IStorage, $q, IWorkflows,
             IUserNotifications, commonjs, $element, $timeout, roleService, toastr, $location) {

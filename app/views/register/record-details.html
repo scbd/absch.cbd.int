@@ -1,10 +1,16 @@
-<div ng-controller="recordHistoryController" class="register-content card card-1-notrans">
+<div ng-controller="recordDetailsController" class="register-content card card-1-notrans">
     <div class="register-content-header bg-darkgrey color-white">
         <div style="padding:10px 10px;">
             <h3>Record Details
-                <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip" data-html="true" data-title="Record History help info....goes here" data-container="body">
-                </span>
-            </h3>
+            <span class="helpinfoInline">
+                <i class="fa fa-info-circle helpicon pull-right" ng-click="showInfo = !showInfo"></i> 
+            </span>
+        </h3>
+        
+        <!--help info---------------------------->
+         <div ng-if="showInfo" class="well well-help" >
+            View all information about a record.
+         </div>
         </div>
     </div>
     <div class="register-content-content">
@@ -14,10 +20,9 @@
         <div ng-if="showRequestHistory">
             <div task-id show-details="true" class="record-body" load-task-data='showRequestHistory' workflow-task-id="{{document.workflowId}}" on-activity-update="refreshworkflowRecord(document, workflowInfo)"></div>
         </div>
+        
         <div ng-if="!showRequestHistory">
             <record-loader show-details="true" class="shadow-z-2" hide-buttons="true" link-target="_self"></record-loader>
-
-            <!--<record-viewer show-details="true" doc-id='document.identifier' doc-schema='document.schema' ></record-viewer>-->
         </div>
 
         <div class="row" style="margin:0;padding:0;">
