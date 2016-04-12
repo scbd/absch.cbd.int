@@ -196,9 +196,9 @@
 
                 </td>
             </tr>
-            <tr ng-if="term.identifier=='4E2974DF-216E-46C8-8797-8E3A3BLAISE1'">
-              <td colspan="3" style="padding-left:50px">
-                  <span  ng-include="'/app/views/forms/edit/viewmeasure.directive/abs/inner/scopeElement'"></span>
+            <tr ng-if="term.identifier=='4E2974DF-216E-46C8-8797-8E3A3BLAISE1' || term.geneticResourcesTerms" >
+              <td colspan="3" class="paddingleft9">
+                  <span onload="elements = term.geneticResourcesTerms|| binding.geneticResource.elements" ng-include="'/app/views/forms/edit/viewmeasure.directive/abs/inner/scopeElement'"></span>
               </td>
             </tr>
             <tr ng-if="term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0 && identifiers[term.identifier]">
@@ -233,7 +233,7 @@
     <script  type="text/ng-template"  id="/app/views/forms/edit/viewmeasure.directive/abs/inner/scopeElement">
     <table class="table table-striped table-hover" style="padding:0;margin:0;">
       <tbody>
-      <tr ng-repeat="element in binding.geneticResource.elements">
+      <tr ng-repeat="element in elements">
             <td style="vertical-align:middle">
               <span ng-repeat="area in element.types">
                 {{area|term}}<span ng-if="!$last">,</span>

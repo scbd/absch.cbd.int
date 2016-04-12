@@ -266,9 +266,26 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                     if(!measure)
                         return;
                     if($scope.type!='single'){
-                        // if(measure.absMeasures.geneticResource) {
-                        //     newMeasureElement(measure.absMeasures.geneticResource, measure);
-                        // };
+                        if(measure.absMeasures.geneticResource) {
+                            if(measure.absMeasures.geneticResource.answer){
+                                var id = addCustomElement('All element of measures', '4E2974DF-216E-46C8-8797-8E3A3BLAISE1');
+                                var geneticResource = measure.absMeasures.geneticResource;
+                                newMeasureElement({identifier:id, section:geneticResource.section}, measure);
+                            }
+                            else{
+
+                                var id = addCustomElement('Specific element of measures', '4E2974DF-216E-46C8-8797-8E3A3BLAISE1');
+                                var geneticResource = measure.absMeasures.geneticResource;
+                                var identifier = newMeasureElement({identifier:id, section:{}}, measure);
+                                grElement = _.findWhere($scope.terms, {'identifier': identifier});
+                                grElement.geneticResourcesTerms = measure.absMeasures.geneticResource.elements;
+                                // var identifier = newMeasureElement(measure.absMeasures.geneticResource, measure);
+                                // , measure.absMeasures.geneticResource.elements
+                                // _.each(measure.absMeasures.geneticResource.elements, function(element){
+                                //     newMeasureElement(_.extend(element,{identifier : identifier}), measure);
+                                // });
+                            }
+                        };
                         _.each(measure.absMeasures.relevantElements, function(measureElement) {
                             newMeasureElement(measureElement, measure);
                         });
@@ -296,6 +313,31 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                         // });
                     }
                 }
+
+                function addCustomElement(title, parent, terms){
+                    var elementMeasure = {};
+                    elementMeasure.identifier = guid();
+                    elementMeasure.name = elementMeasure.identifier;
+                    elementMeasure.title = title;
+
+                    elementMeasure.broaderTerms = [];
+                    elementMeasure.broaderTerms.push(parent);
+                    // elementMeasure.geneticResourcesTerms = terms;
+
+                    $scope.terms.push(elementMeasure);
+
+                    var parentElement = _.findWhere($scope.terms, {'identifier': parent});
+
+                    if(!parentElement.narrowerTerms)
+                        parentElement.narrowerTerms = [];
+                    parentElement.narrowerTerms.push(elementMeasure.identifier);
+
+                    $scope.identifiers[elementMeasure.identifier] = true;
+
+                    return elementMeasure.identifier;
+
+                }
+
                 var existing = [];
                 function newMeasureElement(measureElement, measure, type, parentMeasure){
                     var identifier = measureElement.identifier;
@@ -345,10 +387,12 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                         $scope.terms.push(elementMeasure);
 
                         $scope.identifiers[elementMeasure.identifier] = true;
-                        if(measureElement.section)
+                        if(measureElement.section ||measureElement.elements)
                             $scope.sections[elementMeasure.identifier] = measureElement.section||{};
 
                         existing.push({measureId:measure.header.identifier, elementId:element.identifier, type:type});
+
+                        return elementMeasure.identifier;
                     }
                 }
 
@@ -389,6 +433,9 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                             term.measure = {identifier: doc.document.header.identifier,government : doc.document.government,
                                             documentID:commonjs.hexToInteger(doc.id),type: doc.document.header.schema, amendedFor:amendedForTitle};
                            term.measureType = element.measureType;
+
+                           if(element.geneticResourcesTerms)
+                                term.geneticResourcesTerms = element.geneticResourcesTerms;
 
                             _.map(term.broaderTerms, function(brTerm) {
                                 brTerm.hasMeasure = true;
