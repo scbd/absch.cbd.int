@@ -296,7 +296,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                         otherElement.identifier = otherElement.identifier + '#' + element;
                     otherElement.broaderTerms.push(element);
                     var el = _.findWhere(elementMeasures, {identifier:element});
-                    otherElement.title.en = el.title.en.replace('Does the measure cover ', 'Does the measure cover any other ');
+                    otherElement.title.en = el.title.en.replace('Does the measure cover ', 'Any other element relevant to ');
                     elementMeasures.push(otherElement);
 
 
@@ -690,7 +690,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                         "en": "For non-commercial use"
                     },
                     "shortTitle": {},
-                    "description": "Access and/or prior informed consent / To genetic resources / For non-commercial purposes",
+                    "description": "Access and/or prior informed consent / To genetic resources / For non-commercial use",
                     "source": "",
                     "broaderTerms": ["1E824A31-BDFB-4C47-9593-8006B5FC7D60"],
                     "narrowerTerms": [],
@@ -716,7 +716,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                         "en": "For commercial use"
                     },
                     "shortTitle": {},
-                    "description": "Access and/or prior informed consent / To traditional knowledge associated with genetic resources / For commercial purposes",
+                    "description": "Access and/or prior informed consent / To traditional knowledge associated with genetic resources / For commercial use",
                     "source": "",
                     "broaderTerms": ["5427EB8F-5532-4AE2-88EE-5B9619917480"],
                     "narrowerTerms": [],
@@ -729,7 +729,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                         "en": "For non-commercial use"
                     },
                     "shortTitle": {},
-                    "description": "Access and/or prior informed consent / To traditional knowledge associated with genetic resources / For non-commercial purposes",
+                    "description": "Access and/or prior informed consent / To traditional knowledge associated with genetic resources / For non-commercial use",
                     "source": "",
                     "broaderTerms": ["5427EB8F-5532-4AE2-88EE-5B9619917480"],
                     "narrowerTerms": [],
@@ -803,9 +803,9 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "nonPreferedTerms": []
                 }, {
                     "identifier": "628FA533-5B81-481A-8374-A0CF8BLAISE6",
-                    "name": "Commercial purpose",
+                    "name": "For commercial use",
                     "title": {
-                        "en": "Commercial purpose"
+                        "en": "For commercial use"
                     },
                     "shortTitle": {},
                     "description": "",
@@ -816,9 +816,9 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "nonPreferedTerms": []
                 }, {
                     "identifier": "0AE1295D-0797-44B6-B0AC-974EABLAISE7",
-                    "name": "Non-commercial purpose",
+                    "name": "For non-commercial use",
                     "title": {
-                        "en": "Non-commercial purpose"
+                        "en": "For non-commercial use"
                     },
                     "shortTitle": {},
                     "description": "",
@@ -1202,7 +1202,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
 
                      }
                     if (!angular.equals(oNewSections, $scope.sections)) $scope.sections = oNewSections;
-                    if (!angular.equals(oNewOtherCustomValues, $scope.otherCustomValues)) $scope.otherCustomValues = oNewOtherCustomValues;
+                    if (!angular.equals(oNewOtherCustomValues, $scope.CustomValues)) $scope.otherCustomValues = oNewOtherCustomValues;
                     if (!angular.equals(oNewOtherTerms, $scope.otherTerms)) $scope.otherTerms = oNewOtherTerms;
 
                 }

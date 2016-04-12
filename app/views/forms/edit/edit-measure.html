@@ -25,6 +25,7 @@
             <legend name="formInfo" style="display:none"></legend>
           <section>
             <legend>Is this an amendment to previous legislative, administrative or policy measure? </legend>
+            <div class="help-info">This section is only relevant when the measure being submitted is amending an existing measure.  If the measure being registered in the ABS Clearing-House is an amendment to an existing measure or a part of it, make sure that the measure being amended is already registered in the ABS Clearing-House in order to be able to provide a link to the existing record. This will allow the two records to be displayed together.</div>
             <div class="row">
               <div class="col-xs-12">
                 <div class="km-control-group" name="isAmendment" required caption="Is this an amendment to previous legislative, administrative or policy measure? ">
@@ -47,7 +48,7 @@
 
                 <div class="km-control-group">
                     <div class="km-control-group" name="amendedMeasures" caption="List of amended measures">
-                        <div class="help-block">Please indicate if this measure amends a previously registered one by providing a cross-reference link to the amended measure.</div>
+                        <div class="help-info">Please indicate if this measure amends a previously registered one by providing a cross-reference link to the amended measure.</div>
                          <div document-selector ng-model="document.amendedMeasures"
                                              question="amendedMeasures"
                                              government="document.government"
@@ -58,6 +59,7 @@
                 </div>
 
                 <div class="km-control-group" name="amendmentsDescription" caption="Summary of the amendment(s)">
+                   <div class="help-info">This will help users to understand the relationship between the two measures. The summary should be as simple and as a concise as possible.</div>
                   <div km-rich-textbox ng-model="document.amendmentsDescription" rows="4" locales="document.header.languages"></div>
                 </div>
 
@@ -72,7 +74,6 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="km-control-group" name="government" required caption="Country">
-
                   <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
                 </div>
               </div>
@@ -90,6 +91,13 @@
             <div class="row">
               <div class="col-xs-12">
                 <div required class="km-control-group" name="status" caption="Legal status of the measure">
+                   <div class="help-info">
+                       Examples of non-legally binding ABS measures are national strategies, policy documents, guidelines, etc. For non-legally binding ABS measure, the date of adoption is to be provided.
+                        A measure is legally binding when it creates obligations and rights which are legally enforceable. In this case, the date of entry into force of the ABS measure is to be provided.
+                        Measures in draft form can also be included in the ABS Clearing-House with a view to sharing information on progress towards implementation. Once the draft measure is adopted or entered into force, the status of the measure can be updated without needing to register the existing information again.
+                        Sometimes measures have a limited applicability in time. If you are introducing this type of measure, you are required to include the expiry date.
+                        Including retired measures can be useful for providing legal certainty about genetic resources and associated traditional knowledge accessed under a previous legal framework. If a measure already registered in the ABS Clearing-House is retired or is no longer applicable, you only need to edit the measure and change its status to retired, indicating the date from which the measure was no longer applicable.
+                   </div>
                   <div style="width:250px;" afc-autocomplete required name="status"  ng-model="document.status" source="options.statuses" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Select legal status..."></div>
                 </div>
               </div>
@@ -140,6 +148,16 @@
 
               <div class="col-xs-12">
                 <div class="km-control-group" required name="jurisdiction" caption="Area of jurisdiction">
+                    <div class="help-info">
+                    Please specify the geographical area of application of the ABS measure. The measure could apply at regional or multilateral,
+                    national or federal, subnational or community levels. For multilateral or regional measures, please indicate which countries are
+                    covered by the measure by selecting from the drop down menu the relevant geographical or political/economic group. The list is
+                    extensive; therefore it is likely that that the specific group to which the measure applies is already listed. However, if the measure
+                    applies to a group of countries that is not covered by any of the existing groups, select each of the countries concerned by the
+                    measure separately from the drop down menu.</div>
+
+
+
                   <div style="width:250px;" afc-autocomplete required name="jurisdiction"  ng-model="document.jurisdiction" source="options.jurisdictions" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Select area of jurisdiction..."></div>
                 </div>
               </div>
@@ -150,6 +168,11 @@
                 </div>
 
                 <div ng-if="isJurisdictionRegional() && canAddRegionalMeasure()">
+                    <div class="help-info">Please note that regional or multilateral measures only need to be registered once in the ABS Clearing-House and that each of
+                    the countries selected as being covered by the regional measure will have the measure displayed as part of their legal framework
+                    in their country profile. It is recommended that one country agrees to register the measure on behalf of the regional organization
+                    or the group of countries that share the same measure.</div>
+
                   <div class="km-control-group" required name="jurisdictionRegions" caption="Country name(s) and/or Geographical or political/economic group(s)">
                     <button type="button" class="btn btn-info">European Union Member States</button>
                      <!--<div  km-select required name="jurisdictionRegions" ng-model="document.jurisdictionRegions" items="options.regions()" multiple ></div>-->
@@ -168,6 +191,7 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="km-control-group" name="description" caption="Brief description of the document including  objective and scope (max. 300 words)">
+                    <div class="help-info">The brief description of the document including objective and scope is meant to serve as a short summary of the measure. This information will be displayed in the summary of the record, so it is important that the description is clear and concise.</div>
                   <div km-rich-textbox ng-model="document.description" rows="4" locales="document.header.languages"></div>
                 </div>
               </div>
@@ -175,7 +199,7 @@
 
             <div class="row">
               <div class="col-sm-12">
-                <div class="km-control-group" name="isModelContractualClause" caption="Does the measure contain a model contractual clause?">
+                <div class="km-control-group" name="isModelContractualClause" caption="Does the measure contain model contractual clauses?">
                   <div km-yes-no required ng-model="document.isModelContractualClause" locales="document.header.languages"></div>
                   <div ng-show="document.isModelContractualClause">
                     <div class="km-control-group" style="margin:10px;" name="isModelContractualClauseDesc" caption="Please provide further information">
@@ -194,6 +218,8 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="km-control-group" required name="documents" caption="Document text (in its original language)">
+                    <div class="help-info">An attachment is preferred. Otherwise, provide the location of the document, i.e. web address including the URL of the website
+                    (e.g. http://absch.cbd.int/) and the name of the website (e.g. “Access and Benefit-sharing Clearing-House”).</div>
                   <div km-link required name="documents" ng-model="document.documents" extensions="options.documentLinksExt" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                 </div>
               </div>
@@ -210,7 +236,11 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="km-control-group" name="linkedMeasures" caption="Relationship with other measures">
-
+                  <div class="help-info">Please indicate if there is any relationship between this document/measure and other law, regulation, guidelines, administrative
+                    or policy measures. For example, if the measure being submitted is implementing an existing law. This information will assist in
+                    displaying information on the national legal framework. This section of the form will allow you to link two measures in case they
+                    are related, for example if the measure being submitted is implementing an existing law. The two measures will then be displayed
+                    together.</div>
                 <!--<div km-select multiple name="linkedMeasures" ng-model="document.linkedMeasures"items="options.measures()" placeholder="Please select ..."></div>-->
 
                 <div document-selector ng-model="document.linkedMeasures"
@@ -268,14 +298,20 @@
 
             <section>
             <legend name="elementsOfMeasure">Elements of the measure</legend>
-            <div class="help-block">
+            <div class="help-info">Please select which elements are included in the measure being registered and identify the relevant articles or sections of the
+                measure for each of the selected elements. This information will assist to in displaying information on the national legal
+                framework.</div>
+            
+            
+            <!--<div class="help-block">
                 {{document.absMeasures}}
                 <span ng-repeat="elm in document.absMeasures.relevantElements">
                     {{$index}}. {{elm.identifier|term}}<span ng-if="elm.customValue">({{elm.customValue}})</span><br/>
                 </span>
-              <label  for="absMeasures" >Please select which elements are included in the measure being registered and identify which are the relevant articles of sections of the measure for each of the selected elements.This information will assist to in displaying information on the national legal framework.
-              </label>
-            </div>
+            </div>-->
+            
+            
+            
             <!-- // <input type="radio" name="rd_{{term.identifier}}" ng-model="identifiers[term.identifier]" autocomplete="off" value="{{term.identifier}}">
             // <input type="radio" name="rd_{{term.identifier}}" ng-model="identifiers[term.identifier]" autocomplete="off" value="{{term.identifier}}">
            -->
@@ -473,7 +509,7 @@
                                           <label for="2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD" name="2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD">
                                               &nbsp;
                                               <span title="" style="position:relative;top:7px;" class="bold">
-                                                  <span class="ng-binding">Does it cover provisions on temporal scope?</span>
+                                                  <span class="ng-binding">Does it include provisions on temporal scope?</span>
                                               </span>
                                           </label>
                                           <div class="btn-group matrix-btn ng-scope" >
@@ -502,7 +538,7 @@
                                           <label for="5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A" name="5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A">
                                               &nbsp;
                                               <span title="" style="position:relative;top:7px;" class="bold">
-                                                  <span class="ng-binding">Any other elements related to scope of the measure?</span>
+                                                  <span class="ng-binding">Any other elements relevant to scope of application of the measure?</span>
                                               </span>
                                           </label>
                                           <div class="btn-group matrix-btn ng-scope" >
@@ -621,7 +657,7 @@
 
             <div class="row">
               <div class="col-sm-12">
-                <div layout="row">
+                <div layout="row" style="margin-bottom:5px;">
                   <div style="font-weight:bold;">Check the relevant elements of the measure</div>
                   <div flex style="text-align:right;font-weight:bold;">Add reference to relevant articles and sections</div>
                 </div>
