@@ -1567,9 +1567,9 @@ footer .logo {
     .km-value{overflow: hidden;}
     
     .well-help{
-                 background-color: rgba(200, 200, 200, 0.2);border:0;margin-bottom:0;
+                 background-color: rgba(25, 25, 25, 0.2);border:0;margin-bottom:0;margin-top:20px;
              }
-    .well-help-close {cursor:pointer;color:white;font-weight:bold;font-size:20px;position:relative;right:7px;}
+    .well-help-close {cursor:pointer;color:white;font-weight:bold;font-size:20px;position:relative;top:15px;right:7px;}
              
    .help-info{
        padding:0;
