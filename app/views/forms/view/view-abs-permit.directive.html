@@ -30,6 +30,7 @@
 					<div class="km-value">
 						<ul>
 							<li ng-repeat="permit in document.referencePermits">
+                                <i class="fa fa-external-link-square" aria-hidden="true"></i>
 								<a href="/database/record?documentSchema=ABSPERMIT&documentID={{permit | lstring:locale}}" target="_new">{{permit | lstring:locale | uniqueID}}</a>
 							</li>
 						</ul>

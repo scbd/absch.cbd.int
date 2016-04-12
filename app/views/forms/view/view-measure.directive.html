@@ -119,7 +119,9 @@
 			<label>Translation</label>
 				<ul class="km-value" >
 					<li ng-repeat="item in document.documentTranslations">
-						<a target="_blank" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+						<a target="_blank" ng-href="{{item.url}}">
+                            <i class="fa fa-external-link-square" aria-hidden="true"></i>
+                            {{item.name||item.url}}</a>
 						<i ng-show="item.language">({{item.language}})</i>
 						<i ng-show="item.translationType">({{item.translationType}})</i>
 						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
@@ -130,8 +132,9 @@
 			<label>Related measures</label>
 				<ul class="km-value">
 					<li ng-repeat="item in linkedMeasures" >
-						<a target="_new_win" href="/database/{{item.document.type}}/{{item.document.documentID}}"><strong>{{item.document.title | lstring}}</strong></a>
-						<span ng-bind-html="item.document.summary | lstring"></span>
+						<a target="_new_win" href="/database/{{item.document.type}}/{{item.document.documentID}}">
+                        <i class="fa fa-external-link-square" aria-hidden="true"></i>
+                        <strong>{{item.document.title | lstring}}</strong></a>
 					</li>
 				</ul>
 
@@ -145,8 +148,9 @@
 
 				<ul class="km-value">
 					<li ng-repeat="item in amendedMeasures" >
-						<a target="_new_win" href="/database/{{item.document.type}}/{{item.document.documentID}}"><strong>{{item.document.title | lstring}}</strong></a>
-						<span ng-bind-html="item.document.summary | lstring"></span>
+                        <i class="fa fa-external-link-square" aria-hidden="true"></i>
+						<a target="_new_win" href="/database/{{item.document.type}}/{{item.document.documentID}}">
+                        <strong>{{item.document.title | lstring}}</strong></a>
 					</li>
 				</ul>
 			</div>
@@ -169,10 +173,10 @@
 			<label>This measure has been amended by:</label>
 			<ul class="km-value">
 				<li ng-repeat="item in document.measureAmendedBy" >
+                    <i class="fa fa-external-link-square" aria-hidden="true"></i>
 						<a target="_new_win" href="/database/MSR/{{item.identifier_s}}">
 							<strong>{{item.title_t | lstring}}</strong>
 						</a>
-                        <label>{{item.measure.amendmentsDescription | lstring}}</label>
 					</li>
 			</ul>
 		</div>
@@ -182,10 +186,10 @@
 			<label>This measure is related to:</label>
 			<ul class="km-value">
 				<li ng-repeat="item in document.measureRelatedTo" >
+                    <i class="fa fa-external-link-square" aria-hidden="true"></i>
 					<a target="_new_win" href="/database/MSR/{{item.identifier_s}}">
 						{{item.title_t | lstring}}
 					</a>
-                    <span>{{item.measure.amendmentsDescription | lstring}}</span>
 				</li>
 			</ul>
 		</div>
@@ -220,6 +224,7 @@
 				<label>Other relevant website address or attached documents</label>
 					<ul class="km-value">
 						<li ng-repeat="item in document.relevantDocuments">
+                            <i class="fa fa-external-link-square" aria-hidden="true"></i>
 							<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
 							<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 						</li>
