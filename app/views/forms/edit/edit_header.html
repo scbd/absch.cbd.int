@@ -4,11 +4,11 @@
       <div style="padding:10px 10px;">
         <h3>{{type.title}} <span class="color-darkgrey">({{type.abbreviation}})</span>
 
-            <span class="helpinfoInline" ng-if="type.abbreviation ==='CNA'" >
+            <span class="helpinfoInline" ng-show="type.abbreviation ==='CNA'" >
                 <i class="fa fa-info-circle helpicon pull-right" ng-click="showCNAInfo = !showCNAInfo"></i> 
             </span>
             
-            <span class="helpinfoInline" ng-if="type.abbreviation ==='MSR'" >
+            <span class="helpinfoInline" ng-show="type.abbreviation ==='MSR'" >
                 <i class="fa fa-info-circle helpicon pull-right" ng-click="showMSRInfo = !showMSRInfo"></i> 
             </span>
             
