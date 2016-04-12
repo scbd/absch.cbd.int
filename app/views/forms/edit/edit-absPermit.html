@@ -32,8 +32,8 @@
                     <div class="row" >
                         <div class="col-xs-12">
                              <div class="km-control-group" name="amendmentIntent" required caption="Please indicate what the intent of the modification is">
-                                <input type="radio" name="amendmentIntent" ng-model="document.amendmentIntent" ng-value="0"> Update: Information is being submitted to replace a previously issued internationally recognized certificate of compliance (a new certificate will be constituted and the old one will no longer be valid)</br>
-                                <input type="radio" name="amendmentIntent" ng-model="document.amendmentIntent" ng-value="1"> Revoke: An existing permit or its equivalent is being revoked and the constituted internationally recognized certificate of compliance will no longer be valid.
+                                <input type="radio" name="amendmentIntent" ng-model="document.amendmentIntent" ng-value="0">  <strong> Update: </strong> Information is being submitted to replace a previously issued internationally recognized certificate of compliance (a new certificate will be constituted and the old one will no longer be valid)</br>
+                                <input type="radio" name="amendmentIntent" ng-model="document.amendmentIntent" ng-value="1">  <strong> Revoke: </strong> An existing permit or its equivalent is being revoked and the constituted internationally recognized certificate of compliance will no longer be valid.
                             </div>
                         </div>
                     </div>
@@ -69,8 +69,10 @@
                         <div class="col-xs-12">
                             <div class="km-control-group">
                                 <div class="km-control-group" name="permit"
-                                    caption="Links to other internationally recognized certificate(s) of compliance that relate(s) to this permit">
-
+                                    caption="Links to other internationally recognized certificate(s) of compliance (IRCC) that relate(s) to this permit">
+                                     <div class="help-info">Sometimes a permit can be related to other previously issued permits, for instance to a permit for accessing a soil sample. Depending on the MAT, it is possible that some countries decide to issue specific permits for subsequently identified genetic resources from the taken soil sample. For such cases, the ABS Clearing-House offers the possibility to link different IRCCs together. IRCCs linked through this mechanism will be displayed together and thus facilitate tracking of the IRCCs. </div>
+                                     
+                                 
                                      <div document-selector ng-model="document.referencePermits"
                                                                question="referencePermits"
                                                                government="document.government"

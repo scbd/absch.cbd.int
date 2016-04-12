@@ -1569,6 +1569,7 @@ footer .logo {
     .well-help{
                  background-color: rgba(200, 200, 200, 0.2);border:0;margin-bottom:0;
              }
+    .well-help-close {cursor:pointer;color:white;font-weight:bold;font-size:20px;position:relative;right:7px;}
              
    .help-info{
        padding:0;
