@@ -7,6 +7,8 @@ define(['app', 'jquery', 'underscore', 'toastr', 'ngStorage'],
 		return new function(){
 
             this.get = function(key){
+                return;
+                
                 var existing = angular.copy($localStorage[key]);
 
                 if(!existing)
