@@ -268,22 +268,17 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                     if($scope.type!='single'){
                         if(measure.absMeasures.geneticResource) {
                             if(measure.absMeasures.geneticResource.answer){
-                                var id = addCustomElement('All element of measures', '4E2974DF-216E-46C8-8797-8E3A3BLAISE1');
+                                var id = addCustomElement('All element of measures', '4E2974DF-216E-46C8-8797-8E3A3BLAISE1', 1);
                                 var geneticResource = measure.absMeasures.geneticResource;
                                 newMeasureElement({identifier:id, section:geneticResource.section}, measure);
                             }
                             else{
 
-                                var id = addCustomElement('Specific element of measures', '4E2974DF-216E-46C8-8797-8E3A3BLAISE1');
+                                var id = addCustomElement('Specific element of measures', '4E2974DF-216E-46C8-8797-8E3A3BLAISE1', 2);
                                 var geneticResource = measure.absMeasures.geneticResource;
                                 var identifier = newMeasureElement({identifier:id, section:{}}, measure);
                                 grElement = _.findWhere($scope.terms, {'identifier': identifier});
                                 grElement.geneticResourcesTerms = measure.absMeasures.geneticResource.elements;
-                                // var identifier = newMeasureElement(measure.absMeasures.geneticResource, measure);
-                                // , measure.absMeasures.geneticResource.elements
-                                // _.each(measure.absMeasures.geneticResource.elements, function(element){
-                                //     newMeasureElement(_.extend(element,{identifier : identifier}), measure);
-                                // });
                             }
                         };
                         _.each(measure.absMeasures.relevantElements, function(measureElement) {
@@ -314,15 +309,14 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                     }
                 }
 
-                function addCustomElement(title, parent, terms){
+                function addCustomElement(title, parent, sort){
                     var elementMeasure = {};
                     elementMeasure.identifier = guid();
                     elementMeasure.name = elementMeasure.identifier;
                     elementMeasure.title = title;
-
+                    elementMeasure.sort = sort;
                     elementMeasure.broaderTerms = [];
                     elementMeasure.broaderTerms.push(parent);
-                    // elementMeasure.geneticResourcesTerms = terms;
 
                     $scope.terms.push(elementMeasure);
 
@@ -445,6 +439,9 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                             term.sortOrder = 10;
                         }
 
+                        if(element.sort)
+                            term.sortOrder = element.sort;
+                            
                         if (term.narrowerTerms) {
                             term.isChildSelected = updateProperties(term.narrowerTerms, level + 1);
                         }

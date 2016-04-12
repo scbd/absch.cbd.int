@@ -189,7 +189,7 @@
                                 <a target="new" ng-href="/database/record/{{term.measure|uniqueID}}" >{{term.title||term.name | lstring:locale}} </a>
                             </span>
                         </span>
-                         <span ng-if="sections[term.identifier]" class="color-blue bold"> ( {{sections[term.identifier] | lstring:locale}} ) </span>
+                         <span ng-if="sections[term.identifier] && sections[term.identifier].en" class="color-blue bold"> ( {{sections[term.identifier] | lstring:locale}} ) </span>
                          <span ng-if="term.isMeasure && term.measure.amendedFor"> amending {{term.measure.amendedFor}}</span>
                         <i class="fa fa-chevron-circle-up pull-right hand" ng-click="term.showUp=!term.showUp;showHideNode(term.identifier)" ng-show="!term.showUp" ng:if="term.level<2"></i>
                         <i class="fa fa-chevron-circle-down pull-right hand" ng-click="term.showUp=!term.showUp;showHideNode(term.identifier)" ng-show="term.showUp" ng:if="term.level<2"></i>
@@ -216,10 +216,17 @@
                     </table>
                 </td>
             </tr>
+            <tr ng:if="!term.isChildSelected && term.level == 1" id="{{term.identifier}}">
+                <td class="matrixheaderColumn rightBorder subList1 cover50 noBottomBorder noTopBorder"
+                colspan="1" style="padding-top:0px;padding-bottom:0px">
+                    <span class="color-blue bold paddingleft3">No provisions for this element</span>
+                </td>
+            </tr>
         </table>
     </script>
 
     <script  type="text/ng-template"  id="/app/views/forms/edit/view-measure.directive/abs/inner/other">
+     <div style="padding-left:25px;">
         <table class="table table-hover" style="padding:0;margin:0;width:100%;">
             <tbody>
               <tr ng-repeat="element in otherElements">
@@ -229,31 +236,19 @@
               </tr>
             </tbody>
         </table>
+      </div>
     </script>
     <script  type="text/ng-template"  id="/app/views/forms/edit/viewmeasure.directive/abs/inner/scopeElement">
-    <table class="table table-striped table-hover" style="padding:0;margin:0;">
-      <tbody>
-      <tr ng-repeat="element in elements">
-            <td style="vertical-align:middle">
-              <span ng-repeat="area in element.types">
+        <div ng-repeat="element in elements" style="padding-left:25px;">
+            <span ng-repeat="area in element.types">
                 {{area|term}}<span ng-if="!$last">,</span>
               </span>
-            </td>
-            <td style="vertical-align:middle">
-              <class="bold" style="margin: 0 10px;"> found in </span>
-           </td>
-           <td style="vertical-align:middle">
+              <span class="bold"> found in </span>
               <span ng-repeat="area in element.areas">
                   {{area|term}} <span ng-if="!$last">,</span>
               </span>
-            </td>
-            <td class="text-right"  style="width:250px;text-align:right;vertical-align:middle">
-                {{element.section|lstring}}
-            </td>
-      </tr>
-      </tbody>
-      </table>
-
+              <span ng-if="element.section" class="color-blue bold">({{element.section|lstring}})</span>
+        </div>
     </script>
 
     <!-- ng:if="(term.narrowerTerms && term.narrowerTerms.length > 0) || sections[term.identifier]" -->
