@@ -1573,7 +1573,7 @@ footer .logo {
              
    .help-info{
        padding:0;
-           margin: 0;
+           margin: 0 0 5px 0;
             font-weight: 500!important;
     color: #666;
     font-size: 12px;
