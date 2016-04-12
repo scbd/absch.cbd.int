@@ -121,8 +121,10 @@
     .boldLabel{
         font-weight:bold;
     }
+    legend{font-size:16px;font-weight:bold;}
 </style>
-<legend>{{title}}
+<legend>
+    {{title}}
 
     <a class="pull-right expander" ng-click="collapseAll=!collapseAll;showHideAll(true)"  ng-show="!collapseAll">Collapse All <i class="fa fa-chevron-circle-up hand"></i></a>
     <a class="pull-right expander" ng-click="collapseAll=!collapseAll;showHideAll(false)" ng-show="collapseAll">Expand All <i class="fa fa-chevron-circle-down hand"></i></a>

@@ -111,8 +111,35 @@
 			md-list-item.md-2-line .md-list-item-text{padding:0;}
 			md-divider{padding:0;}
 		</style>
-		
 
+
+            <table class="table table-striped" style="width:100%;margin-bottom:30px;">
+                <tr>
+                    <th></th>
+                    <th>Title</th>
+                    <th>Jurisdiction</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Category</th>
+                    <th>Date</th>
+                </tr>
+                <tr ng-repeat="doc in measures ">
+                    <td><i class="fa fa-check-square" ng-class="{'fa-check-square':isSelected(doc.id),'fa-square':!isSelected(doc.id)}"></i></td>
+                    <td><a target="_new" ng-href="database/record/{{doc.uniqueIdentifier_s}}">{{doc.rec_title}}</a></td>
+                    <td>{{doc.rec_meta1[0]}}</td>
+                    <td>{{doc.rec_meta2[0]}}</td>
+                    <td>{{doc.rec_meta3[0]}}</td>
+                    <td>{{doc.rec_meta4[0]}}</td>
+                    <td>{{doc.rec_meta5[0]}}</td>
+                </tr>
+                 <tr>
+                    <td class="bg-grey"><i class="fa check" ng-class="{'fa-check-square':isSelected(doc.id),'fa-square':!isSelected(doc.id)}"></i></td>
+                    <td class="bg-grey bold" >Select all measures to display in matrix overview below</td>
+                </tr>
+            </table>
+            
+            
+            
 				<!--<div class="table">
 
 					<div ng-show="groupedMeasures">
