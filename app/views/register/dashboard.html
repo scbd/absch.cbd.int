@@ -2,7 +2,17 @@
 
  <div class="register-content-header bg-darkgrey color-white">
       <div style="padding:10px 10px;">
-        <h3>Dashboard <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip" data-html="true" data-title="Dashboard help info....goes here" data-container="body"></span></h3>
+        <h3>Dashboard 
+              <span class="helpinfoInline">
+                <i class="fa fa-info-circle helpicon pull-right" ng-click="showInfo = !showInfo"></i> 
+            </span>
+        </h3>
+        
+        <!--help info---------------------------->
+         <div ng-if="showInfo" class="well well-help" >
+             Dashboard help...
+         </div>
+
       </div>
   </div>
   <div class="register-content-content" >

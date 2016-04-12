@@ -1565,3 +1565,7 @@ footer .logo {
    #government .color-nonparty{color:#333!important;}
    #government .color-inbetween{color:#EC971F!important;} 
     .km-value{overflow: hidden;}
+    
+    .well-help{
+                 background-color: rgba(200, 200, 200, 0.2);border:0;margin-bottom:0;
+             }

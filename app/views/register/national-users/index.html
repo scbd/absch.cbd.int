@@ -14,14 +14,13 @@
  <div class="register-content-header bg-blue color-white">
       <div style="padding:10px 10px;">
         <h3> User Management
-            <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip" data-html="true" data-title=".......help......" data-container="body"></span></h3>
-      </div>
-  </div>
-   
-
-    <div class="register-content-content" >
-        <div class="row">
-            <div class="col-xs-12">
+          <span class="helpinfoInline">
+                <i class="fa fa-info-circle helpicon pull-right" ng-click="showInfo = !showInfo"></i> 
+            </span>
+        </h3>
+        
+        <!--help info---------------------------->
+         <div ng-if="showInfo" class="well well-help" >
 
                 <p>
                     This page allows you to manage national users and their roles.
@@ -38,9 +37,14 @@
                         <em> Publishing Authority (PA)</em>. PAs can publish national records, including content drafted by NAUs.</li>
                 </ul>
 
-                <p></p>
+            </div>       
+      </div>
+  </div>
+   
 
-            </div>
+    <div class="register-content-content" >
+        <div class="row">
+            
 
             <div class="col-xs-12" ng-show="error">
 
